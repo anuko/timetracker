@@ -1,2 +1,2 @@
 # timetracker
-Simple, easy to use, open source time tracking system.
+Simple, easy to use time tracking system.
