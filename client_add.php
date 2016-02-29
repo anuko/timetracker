@@ -1,0 +1,89 @@
+<?php
+// +----------------------------------------------------------------------+
+// | Anuko Time Tracker
+// +----------------------------------------------------------------------+
+// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
+// +----------------------------------------------------------------------+
+// | LIBERAL FREEWARE LICENSE: This source code document may be used
+// | by anyone for any purpose, and freely redistributed alone or in
+// | combination with other software, provided that the license is obeyed.
+// |
+// | There are only two ways to violate the license:
+// |
+// | 1. To redistribute this code in source form, with the copyright
+// |    notice or license removed or altered. (Distributing in compiled
+// |    forms without embedded copyright notices is permitted).
+// |
+// | 2. To redistribute modified versions of this code in *any* form
+// |    that bears insufficient indications that the modifications are
+// |    not the work of the original author(s).
+// |
+// | This license applies to this document only, not any other software
+// | that it may be combined with.
+// |
+// +----------------------------------------------------------------------+
+// | Contributors:
+// | https://www.anuko.com/time_tracker/credits.htm
+// +----------------------------------------------------------------------+
+
+require_once('initialize.php');
+import('form.Form');
+import('ttClientHelper');
+import('ttTeamHelper');
+
+// Access check.
+if (!ttAccessCheck(right_manage_team)) {
+  header('Location: access_denied.php');
+  exit();
+}
+
+$projects = ttTeamHelper::getActiveProjects($user->team_id);
+
+if ($request->getMethod() == 'POST') {
+  $cl_name = trim($request->getParameter('name'));
+  $cl_address = trim($request->getParameter('address'));
+  $cl_tax = $request->getParameter('tax');
+  $cl_projects = $request->getParameter('projects');
+} else {
+  // Do not assign all projects to a new client by default. This should help to reduce clutter.
+  // foreach ($projects as $project_item)
+  //    $cl_projects[] = $project_item['id'];
+}
+
+$form = new Form('clientForm');
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 350px;','value'=>$cl_name));
+$form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','style'=>'width: 350px;','cols'=>'55','rows'=>'5','value'=>$cl_address));
+$form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
+$form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'layout'=>'H','datakeys'=>array('id','name'),'value'=>$cl_projects));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.add')));
+	
+if ($request->getMethod() == 'POST') {
+  // Validate user input.
+  if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.client_name'));
+  if (!ttValidString($cl_address, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.client_address'));
+  if (!ttValidFloat($cl_tax, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.tax'));
+
+  if ($errors->isEmpty()) {
+    if (!ttClientHelper::getClientByName($cl_name)) {
+      if (ttClientHelper::insert(array(
+        'team_id' => $user->team_id,
+        'name' => $cl_name,
+        'address' => $cl_address,
+        'tax' => $cl_tax,
+        'projects' => $cl_projects,
+        'status' => ACTIVE))) {
+        header('Location: clients.php');
+        exit();
+      } else
+        $errors->add($i18n->getKey('error.db'));	
+     } else
+       $errors->add($i18n->getKey('error.client_exists'));
+  }
+} // post
+	
+$smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('onload', 'onLoad="document.clientForm.name.focus()"');
+$smarty->assign('title', $i18n->getKey('title.add_client'));
+$smarty->assign('content_page_name', 'client_add.tpl');
+$smarty->display('index.tpl');
+?>

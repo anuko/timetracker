@@ -1,0 +1,135 @@
+/*
+// +----------------------------------------------------------------------+
+// | Anuko Time Tracker
+// +----------------------------------------------------------------------+
+// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
+// +----------------------------------------------------------------------+
+// | LIBERAL FREEWARE LICENSE: This source code document may be used
+// | by anyone for any purpose, and freely redistributed alone or in
+// | combination with other software, provided that the license is obeyed.
+// |
+// | There are only two ways to violate the license:
+// |
+// | 1. To redistribute this code in source form, with the copyright
+// |    notice or license removed or altered. (Distributing in compiled
+// |    forms without embedded copyright notices is permitted).
+// |
+// | 2. To redistribute modified versions of this code in *any* form
+// |    that bears insufficient indications that the modifications are
+// |    not the work of the original author(s).
+// |
+// | This license applies to this document only, not any other software
+// | that it may be combined with.
+// |
+// +----------------------------------------------------------------------+
+// | Contributors:
+// | https://www.anuko.com/time_tracker/credits.htm
+// +----------------------------------------------------------------------+
+*/
+
+a { color: blue; text-decoration: none; }
+
+a:visited { text-decoration: none; }
+
+a:hover { text-decoration: underline; }
+
+body {
+  font-size: 10pt;
+  font-family: verdana;
+  background-color: white;
+}
+
+table { font-size: 10pt; font-family: verdana; }
+
+input, button { font-size: 10pt; font-family: verdana; }
+
+textarea { font-size: 10pt; font-family: verdana; }
+
+select{ font-size: 10pt; font-family: verdana; }
+
+.pageTitle {
+  font-size: 12pt;
+  font-weight: bold;
+  color: silver;
+}
+
+.systemMenu {
+  font-size: 12pt;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #000000;
+}
+
+.mainMenu {
+  font-size: 12pt;
+  color: #444444;
+}
+
+.tableHeader {
+  font-weight: bold;
+  text-align: left;
+  color: #000000;
+  background-color: #a6ccf7;
+}
+
+.tableHeaderCentered {
+  font-weight: bold;
+  text-align: center;
+  color: #000000;
+  background-color: #a6ccf7;
+}
+
+.rowReportItem {
+  background-color: #ccccce;
+}
+
+.rowReportItemAlt {
+  background-color: #f5f5f5;
+}
+
+.rowReportSubtotal {
+  background-color: #e0e0e0;
+}
+
+.cellLeftAligned {
+  text-align: left;
+  vertical-align: top;
+}
+
+.cellRightAligned {
+  text-align: right;
+  vertical-align: top;
+}
+
+.cellLeftAlignedSubtotal {
+  font-weight: bold;
+  vertical-align: top;
+}
+
+.cellRightAlignedSubtotal {
+  font-weight: bold;
+  text-align: right;
+  vertical-align: top;
+}
+
+.sectionHeader {
+  font-weight: bold;
+  border-bottom: 1px solid silver;
+}
+
+.sectionHeaderNoBorder {
+  font-weight: bold;
+}
+
+.error {
+  font-weight: bold;
+  color: red;
+}
+
+.info_message {
+  font-weight: bold;
+  color: #0000c0;
+}
+
+div#LoginAboutText { width:400px; }
+
