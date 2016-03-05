@@ -69,7 +69,7 @@ $cl_finish = trim($request->getParameter('finish'));
 $cl_duration = trim($request->getParameter('duration'));
 $cl_note = trim($request->getParameter('note'));
 // Custom field.
-$cl_cf_1 = trim($request->getParameter(('cf_1'), ($request->getMethod()=='POST'? null : @$_SESSION['cf_1'])));
+$cl_cf_1 = trim($request->getParameter('cf_1', ($request->getMethod()=='POST'? null : @$_SESSION['cf_1'])));
 $_SESSION['cf_1'] = $cl_cf_1;
 $cl_billable = 1;
 if (in_array('iv', explode(',', $user->plugins))) {
