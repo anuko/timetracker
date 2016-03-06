@@ -182,6 +182,7 @@ $i18n_key_words = array(
 'label.role_manager' => '(manager)',
 'label.role_comanager' => '(co-manager)',
 'label.role_admin' => '(administrator)',
+'label.page' => 'Page',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Custom fields',
 'label.type' => 'Type',

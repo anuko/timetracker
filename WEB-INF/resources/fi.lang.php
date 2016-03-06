@@ -192,6 +192,9 @@ $i18n_key_words = array(
 'label.cron_schedule' => 'Cron-ajoitus',
 'label.what_is_it' => 'Mikä se on?',
 
+// TODO? missing?
+'label.page' => 'Sivu',
+
 // Form titles.
 'title.login' => 'Kirjautuminen',
 'title.teams' => 'Tiimit',
