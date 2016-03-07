@@ -116,6 +116,8 @@ $i18n_key_words = array(
 // 'label.confirm_password' => 'confirm password',
 'label.email' => 'email',
 'label.total' => 'total',
+// Translate the following string.
+// 'label.page' => 'Page',
 
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'favorite report',

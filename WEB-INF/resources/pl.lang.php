@@ -182,6 +182,8 @@ $i18n_key_words = array(
 'label.role_manager' => '(Manager)',
 'label.role_comanager' => '(Co-manager)',
 'label.role_admin' => '(Administrator)',
+// Translate the following string.
+// 'label.page' => 'Page',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Niestandardowe pola',
 'label.type' => 'Rodzaj',

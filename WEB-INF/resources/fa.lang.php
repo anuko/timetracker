@@ -191,6 +191,8 @@ $i18n_key_words = array(
 'label.role_manager' => '(مدیر)',
 'label.role_comanager' => '(دستیار مدیر)',
 'label.role_admin' => '(مدیر ارشد)',
+// Translate the following string.
+// 'label.page' => 'Page',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'فیلدهای سفارشی',
 'label.type' => 'نوع',

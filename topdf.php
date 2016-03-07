@@ -354,7 +354,7 @@ class MyyPDF extends TCPDF {
     // Position at 15 mm from bottom.
     $this->SetY(-15);
     // Set font.
-    $this->SetFont('helvetica', 'I', 8);
+    $this->SetFont('freeserif', 'I', 8);
     // Print localized page number.
     $this->Cell(0, 10, $this->page_word.' '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
   }
@@ -369,8 +369,6 @@ if (file_exists('images/'.$user->team_id.'.png'))
 
 // Set page word for the footer.
 $pdf->SetPageWord($i18n->getKey('label.page'));
-// TODO: currently, we have problems rendering PDF in some languages such as Russian (headers, page word).
-// Not sure how to fix it... One option is to switch to mPDF - consider.
 
 // Set document information.
 $pdf->SetCreator(PDF_CREATOR);
@@ -393,8 +391,8 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 // Add a page.
 $pdf->AddPage();
 
-// Set font.
-$pdf->SetFont('helvetica', '', 10);
+// Set font (freeserif seems to work for all languages).
+$pdf->SetFont('freeserif', '', 10); // helvetica here does not work for Russian.
 
 // Write HTML.
 $pdf->writeHTML($html, true, false, false, false, '');

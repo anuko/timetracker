@@ -182,6 +182,8 @@ $i18n_key_words = array(
 'label.role_manager' => '(manager)',
 'label.role_comanager' => '(co-manager)',
 'label.role_admin' => '(beheerder)',
+// Translate the following string.
+// 'label.page' => 'Page',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Eigen velden',
 'label.type' => 'Type',

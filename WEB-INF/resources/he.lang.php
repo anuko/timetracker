@@ -194,6 +194,8 @@ $i18n_key_words = array(
 'label.role_manager' => '(מנהל)',
 'label.role_comanager' => '(מנהל משנה)',
 'label.role_admin' => '(מנהל המערכת)',
+// Translate the following string.
+// 'label.page' => 'Page',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'שדות אישיים',
 'label.type' => 'סוג',

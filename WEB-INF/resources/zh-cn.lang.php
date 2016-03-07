@@ -120,6 +120,8 @@ $i18n_key_words = array(
 'label.confirm_password' => '确认密码',
 'label.email' => '电子邮件',
 'label.total' => '总计',
+// Translate the following string.
+// 'label.page' => 'Page',
 
 "form.filter.project" => '项目',
 "form.filter.filter" => '收藏的报告',

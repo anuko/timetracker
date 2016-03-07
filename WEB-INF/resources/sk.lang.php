@@ -191,6 +191,8 @@ $i18n_key_words = array(
 'label.role_manager' => '(manažér)',
 'label.role_comanager' => '(spolu-manažér)',
 'label.role_admin' => '(administrátor)',
+// Translate the following string.
+// 'label.page' => 'Page',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Vlastné polia',
 'label.type' => 'Typ',

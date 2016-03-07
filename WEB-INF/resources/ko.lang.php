@@ -120,6 +120,8 @@ $i18n_key_words = array(
 'label.confirm_password' => '암호 확인',
 'label.email' => '이메일',
 'label.total' => '합계',
+// Translate the following string.
+// 'label.page' => 'Page',
 
 "form.filter.project" => '프로젝트',
 "form.filter.filter" => '좋아하는 보고서',

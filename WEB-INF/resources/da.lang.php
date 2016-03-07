@@ -123,6 +123,8 @@ $i18n_key_words = array(
 'label.password' => 'adgangskode',
 'label.confirm_password' => 'gentag adgangskode',
 'label.email' => 'email',
+// Translate the following string.
+// 'label.page' => 'Page',
 
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'favorit rapport',

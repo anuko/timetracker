@@ -122,6 +122,8 @@ $i18n_key_words = array(
 'label.confirm_password' => 'parolayı tekrala',
 'label.email' => 'e-posta',
 'label.total' => 'toplam',
+// Translate the following string.
+// 'label.page' => 'Page',
 
 "form.filter.project" => 'proje',
 "form.filter.filter" => 'sık kullanılan rapor',

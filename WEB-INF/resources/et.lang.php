@@ -122,6 +122,8 @@ $i18n_key_words = array(
 'label.confirm_password' => 'kinnita salasõna',
 // 'label.email' => 'email',
 'label.total' => 'kokku',
+// Translate the following string.
+// 'label.page' => 'Page',
 
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'lemmikraport',

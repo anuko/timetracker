@@ -119,6 +119,8 @@ $i18n_key_words = array(
 'label.confirm_password' => 'jelszó megerősítése',
 // 'label.email' => 'email',
 'label.total' => 'összesen',
+// Translate the following string.
+// 'label.page' => 'Page',
 
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'előre definiált riport formátum',

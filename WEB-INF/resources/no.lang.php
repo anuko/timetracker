@@ -120,6 +120,8 @@ $i18n_key_words = array(
 'label.confirm_password' => 'Bekreft passord',
 // 'label.email' => 'email',
 'label.total' => 'totalt',
+// Translate the following string.
+// 'label.page' => 'Page',
 
 // TODO: Please check the translation against the current English file as many things are being refactored. For example, many labels have been added after label.email.
 

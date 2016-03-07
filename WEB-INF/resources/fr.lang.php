@@ -193,6 +193,8 @@ $i18n_key_words = array(
 'label.role_manager' => '(responsable)',
 'label.role_comanager' => '(co-responsable)',
 'label.role_admin' => '(administrateur)',
+// Translate the following string.
+// 'label.page' => 'Page',
 
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Champs personalisés',

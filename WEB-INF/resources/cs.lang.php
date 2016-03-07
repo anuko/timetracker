@@ -122,6 +122,8 @@ $i18n_key_words = array(
 'label.confirm_password' => 'potvrdit heslo',
 // 'label.email' => 'email',
 'label.total' => 'celkem',
+// Translate the following string.
+// 'label.page' => 'Page',
 
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'oblíbená sestava',

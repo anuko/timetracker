@@ -122,6 +122,8 @@ $i18n_key_words = array(
 'label.confirm_password' => 'パスワードの確認',
 'label.email' => 'Eメール',
 'label.total' => '合計',
+// Translate the following string.
+// 'label.page' => 'Page',
 
 "form.filter.project" => 'プロジェクト',
 "form.filter.filter" => 'お気に入りレポート',
