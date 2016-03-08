@@ -6,18 +6,16 @@
       
       <table cellspacing="0" cellpadding="0" height="30" border="0" width="100%">
         <tr>
-          <td width="100%" align="center" bgcolor="#eeeeee">
-		    <a href="https://www.anuko.com/forum/viewtopic.php?f=4&t=1285" target="_blank">{$i18n.footer.mobile_phones}</a>&nbsp;&nbsp;
-          </td>
+          <td width="100%" align="center" bgcolor="#eeeeee"><a href="https://www.anuko.com/lp/tt_8.htm" target="_blank">{$i18n.footer.contribute_msg}</a></td>
         </tr>
       </table>
-	  <br>
+      <br>
       <table cellspacing="0" cellpadding="4" width="100%" border="0">
         <tr>
-          <td align="center">&nbsp;Anuko Time Tracker 1.9.13.3393 | Copyright &copy; <a href="https://www.anuko.com/lp/tt_3.htm" target="_blank">Anuko</a> |
+          <td align="center">&nbsp;Anuko Time Tracker 1.9.13.3394 | Copyright &copy; <a href="https://www.anuko.com/lp/tt_3.htm" target="_blank">Anuko</a> |
             <a href="https://www.anuko.com/lp/tt_4.htm" target="_blank">{$i18n.footer.credits}</a> |
             <a href="https://www.anuko.com/lp/tt_5.htm" target="_blank">{$i18n.footer.license}</a> |
-			<a href="https://www.anuko.com/lp/tt_7.htm" target="_blank">{$i18n.footer.improve}</a>
+            <a href="https://www.anuko.com/lp/tt_7.htm" target="_blank">{$i18n.footer.improve}</a>
           </td>
         </tr>
       </table>

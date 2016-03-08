@@ -60,6 +60,7 @@ $i18n_key_words = array(
 
 // Footer - strings on the bottom of most pages.
 'footer.mobile_phones' => 'Time Tracker доступен на мобильных телефонах.',
+'footer.contribute_msg' => 'Вы можете улучшить Time Tracker разными способами.',
 'footer.credits' => 'Авторы',
 'footer.license' => 'Лицензия',
 'footer.improve' => 'Улучшить',

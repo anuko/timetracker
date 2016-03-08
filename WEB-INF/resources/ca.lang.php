@@ -38,34 +38,50 @@ $i18n_holidays = array('01/01', '01/16', '02/20', '03/29', '07/04', '09/04', '10
 
 $i18n_key_words = array(
 
-// menu entries
+// Menus.
 'menu.login' => 'Iniciar sessió',
 'menu.logout' => 'Finalitzar sessió',
-'menu.feedback' => 'Retroalimentació',
+// TODO: translate the following:
+// 'menu.forum' => 'Forum',
 'menu.help' => 'Ajuda',
 // Note to translators: menu.create_team needs to be translated more accurately.
 'menu.create_team' => 'Crear un nou compte de manejador',
-'menu.edit_profile' => 'Editar perfil',
-'menu.time' => 'El meu temps',
+'menu.profile' => 'Perfil',
+// 'menu.time' => 'Time',
+'menu.time' => 'El meu temps', // TODO: menu.time is no longer "My time", just "Time".
+// TODO: translate the following:
+// 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Informes',
-// Note to translators: menu.charts needs to be translated.
-// 'menu.charts' => 'charts',
+// TODO: translate the following:
+// 'menu.charts' => 'Charts',
 'menu.projects' => 'Projectes',
-'menu.activities' => 'Activitats',
-'menu.people' => 'Persones',
+// TODO: translate the following:
+// 'menu.tasks' => 'Tasks',
+// 'menu.users' => 'Users',
 'menu.teams' => 'Equips',
-// Note to translators: menu.export needs to be translated.
-// 'menu.export' => 'export',
-'menu.clients' => 'Clients',
-// Note to translators: menu.options needs to be translated.
-// 'menu.options' => 'options',
-'menu.admin' => 'admin',
-
-// error strings
-'error.db' => 'Error de la Base de Dades',
-'error.field' => 'Dada "{0}" incorrecta',
-'error.empty' => 'L\\\'Arxiu "{0}" està buit',
-'error.not_equal' => 'L\\\'Arxiu "{0}" no és igual al arxiu "{1}"',
+// TODO: translate the following:
+// 'menu.export' => 'Export',
+// 'menu.clients' => 'Clients',
+// 'menu.options' => 'Options',
+ 
+// Footer - strings on the bottom of most pages.
+// TODO: translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+// 'footer.credits' => 'Credits',
+// 'footer.license' => 'License',
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                  // This is a link to a webpage that describes how to contribute to the project.
+								  
+// Error messages.
+// TODO: translate the following:
+// 'error.access_denied' => 'Access denied.',
+// 'error.sys' => 'System error.',
+'error.db' => 'Error de la Base de Dades.',
+'error.field' => 'Dada "{0}" incorrecta.',
+'error.empty' => 'L\\\'Arxiu "{0}" està buit.',
+'error.not_equal' => 'L\\\'Arxiu "{0}" no és igual al arxiu "{1}".',
+								  
+// Refactoring needs to be done down from here to sync with English file.								  
 'error.interval' => 'Interval incorrecte',
 'error.project' => 'Sel·leccionar Projecte',
 'error.activity' => 'Sel·leccionar Actividat',
