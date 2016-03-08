@@ -62,6 +62,7 @@ $i18n_key_words = array(
 'footer.mobile_phones' => 'Time Tracker доступен на мобильных телефонах.',
 'footer.credits' => 'Авторы',
 'footer.license' => 'Лицензия',
+'footer.improve' => 'Улучшить',
 
 // Error messages.
 'error.access_denied' => 'Доступ запрещён.',
