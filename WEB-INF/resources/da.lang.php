@@ -29,6 +29,8 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option 
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
+// Note to translators: Please use proper capitalization rules for your language. 
+
 $i18n_language = 'Dansk';
 $i18n_months = array('januar', 'februar', 'marts', 'april', 'maj', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'december');
 $i18n_weekdays = array('søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag');
@@ -38,31 +40,42 @@ $i18n_holidays = array('01/01', '04/09', '04/10', '04/12', '04/13', '05/08', '05
 
 $i18n_key_words = array(
 
-// menu entries
-'menu.login' => 'login',
-'menu.logout' => 'logout',
-'menu.feedback' => 'send din mening',
-'menu.help' => 'hjælp',
+// Menus.
+'menu.login' => 'Login',
+'menu.logout' => 'Logout',
+// TODO: translate the following:
+// 'menu.forum' => 'Forum',
+'menu.help' => 'Hjælp',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => 'lav en ny manager konto',
-'menu.edit_profile' => 'rediger profil',
-'menu.time' => 'min tid',
-'menu.reports' => 'rapporter',
-// Note to translators: menu.charts needs to be translated.
-// 'menu.charts' => 'charts',
-'menu.projects' => 'projekter',
-'menu.activities' => 'aktiviteter',
-'menu.people' => 'brugere',
-// Note to translators: is menu.teams translated?
-'menu.teams' => 'teams',
-// Note to translators: menu.export needs to be translated.
-// 'menu.export' => 'export',
-'menu.clients' => 'kunder',
-'menu.options' => 'indstillinger',
-// A note to translators: the string below needs to be translated.
-// 'menu.admin' => 'admin',
+'menu.profile' => 'Profil',
+'menu.time' => 'Tid',
+// TODO: translate the following:
+// 'menu.expenses' => 'Expenses'
+'menu.reports' => 'Rapporter',
+// TODO: translate the following:
+// 'menu.charts' => 'Charts',
+'menu.projects' => 'Projekter',
+// TODO: translate the following:
+// 'menu.tasks' => 'Tasks',
+// 'menu.users' => 'Users',
+// 'menu.teams' => 'Teams',
+// 'menu.export' => 'Export',
+'menu.clients' => 'Kunder',
+'menu.options' => 'Indstillinger',
 
-// error strings
+// Footer - strings on the bottom of most pages.
+// TODO: translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+// 'footer.credits' => 'Credits',
+// 'footer.license' => 'License',
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                  // This is a link to a webpage that describes how to contribute to the project.
+
+// Error messages.
+// TODO: Translate the following:
+// 'error.access_denied' => 'Access denied.',
+// 'error.sys' => 'System error.',
 'error.db' => 'database fejl',
 'error.field' => 'forkert "{0}" data',
 'error.empty' => 'felt "{0}" er tom',
@@ -123,8 +136,6 @@ $i18n_key_words = array(
 'label.password' => 'adgangskode',
 'label.confirm_password' => 'gentag adgangskode',
 'label.email' => 'email',
-// Translate the following string.
-// 'label.page' => 'Page',
 
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'favorit rapport',

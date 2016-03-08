@@ -29,6 +29,8 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option 
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
+// Note to translators: Please use proper capitalization rules for your language. 
+
 $i18n_language = 'Česky';
 $i18n_months = array('leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec');
 $i18n_weekdays = array('neděle', 'pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek', 'sobota');
@@ -38,29 +40,45 @@ $i18n_holidays = array('01/01', '04/13', '05/01', '05/08', '07/05', '07/06', '09
 
 $i18n_key_words = array(
 
-// menu entries
-'menu.login' => 'přihlásit',
-'menu.logout' => 'odhlásit',
-'menu.feedback' => 'váš názor',
-'menu.help' => 'pomoc',
+// Menus.
+'menu.login' => 'Přihlásit',
+'menu.logout' => 'Odhlásit',
+// TODO: Translate the following:
+// 'menu.forum' => 'Forum',
+'menu.help' => 'Pomoc',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => 'vytvořit nový účet vedoucího',
-'menu.edit_profile' => 'upravit profil',
+'menu.profile' => 'Profil',
+// TODO: Translate the following:
+// 'menu.time' => 'Time',
 'menu.time' => 'záznam práce',
-'menu.reports' => 'sestavy',
-// Note to translators: menu.charts needs to be translated.
-// 'menu.charts' => 'charts',
-'menu.projects' => 'projekty',
-'menu.activities' => 'činnosti',
-'menu.people' => 'pracovníci',
-'menu.teams' => 'týmy',
-'menu.export' => 'export',
-'menu.clients' => 'zákazníci',
-// Note to translators: menu.options needs to be translated.
-// 'menu.options' => 'options',
-'menu.admin' => 'admin',
+// TODO: Translate the following:
+// 'menu.expenses' => 'Expenses',
+'menu.reports' => 'Sestavy',
+// TODO: Translate the following:
+// 'menu.charts' => 'Charts',
+'menu.projects' => 'Projekty',
+// TODO: Translate the following:
+// 'menu.tasks' => 'Tasks',
+// 'menu.users' => 'Users',
+'menu.teams' => 'Týmy',
+'menu.export' => 'Export',
+'menu.clients' => 'Zákazníci',
+// TODO: Translate the following:
+// 'menu.options' => 'Options',
 
-// error strings
+// Footer - strings on the bottom of most pages.
+// TODO: Translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+// 'footer.credits' => 'Credits',
+// 'footer.license' => 'License',
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                  // This is a link to a webpage that describes how to contribute to the project.
+
+// Error messages.
+// TODO: Translate the following:
+// 'error.access_denied' => 'Access denied.',
+// 'error.sys' => 'System error.',
 'error.db' => 'chyba databáze',
 'error.field' => 'nesprávná "{0}" data',
 'error.empty' => 'pole "{0}" je prázdné',
