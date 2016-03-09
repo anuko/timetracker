@@ -309,6 +309,9 @@ if ($totals_only) {
   $html .= '</tr>';
   $html .= '</table>';
 }
+
+// Output footer.
+$html .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
 // By this time we have html ready.
 
 // Determine title for report.
