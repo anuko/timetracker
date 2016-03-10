@@ -391,4 +391,3 @@ class ttImportHelper {
     return true;
   }
 }
-?>

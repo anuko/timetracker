@@ -454,4 +454,3 @@ class ttUserHelper {
     return true;
   }
 }
-?>

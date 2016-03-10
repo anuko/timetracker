@@ -168,4 +168,3 @@ class ttUser {
     return $result;
   }
 }
-?>

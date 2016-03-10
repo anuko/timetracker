@@ -105,4 +105,3 @@ class ttNotificationHelper {
     return (!is_a($affected, 'PEAR_Error'));
   }
 }
-?>

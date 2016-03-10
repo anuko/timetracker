@@ -340,12 +340,3 @@ function ttAccessCheck($required_rights)
     
   return true;
 }
-
-
-
-
-
-
-
-	
-?>

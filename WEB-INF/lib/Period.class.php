@@ -145,4 +145,3 @@ class Period {
 		return $result;
 	}
 }
-?>

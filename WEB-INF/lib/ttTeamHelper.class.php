@@ -954,4 +954,3 @@ class ttTeamHelper {
   	return true;
   }
 }
-?>

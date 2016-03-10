@@ -326,4 +326,3 @@ class ttClientHelper {
     return $result;
   }
 }
-?>

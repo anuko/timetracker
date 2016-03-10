@@ -46,4 +46,4 @@
 			$this->plot->render($options['fileName']);
 		}
 	}
-?>
+

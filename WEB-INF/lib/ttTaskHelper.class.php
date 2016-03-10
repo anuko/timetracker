@@ -290,4 +290,3 @@ class ttTaskHelper {
     return $result;
   }
 }
-?>

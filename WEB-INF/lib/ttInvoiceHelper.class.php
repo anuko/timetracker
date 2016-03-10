@@ -435,4 +435,3 @@ class ttInvoiceHelper {
     return $body;
   }
 }
-?>

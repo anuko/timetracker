@@ -338,4 +338,3 @@ class ttProjectHelper {
     return $result;
   }*/
 }
-?>

@@ -313,4 +313,3 @@ class ttFavReportHelper {
   	}
   }
 }
-?>

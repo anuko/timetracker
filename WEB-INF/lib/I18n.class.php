@@ -164,4 +164,3 @@ class I18n {
     return substr($filename, 0, strpos($filename, '.'));
   }
 }
-?>

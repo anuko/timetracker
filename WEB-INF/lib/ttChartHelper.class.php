@@ -135,4 +135,3 @@ class ttChartHelper {
     return $result;
   }
 }
-?>

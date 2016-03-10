@@ -1589,4 +1589,3 @@ class ttReportHelper {
     return true;
   }
 }
-?>
