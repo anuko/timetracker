@@ -400,4 +400,3 @@ $i18n_key_words = array(
 'form.mail.report_sent' => 'Der Bericht wurde gesendet.',
 'form.mail.invoice_sent' => 'Die Rechnung wurde gesendet.',
 );
-?>

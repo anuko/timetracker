@@ -397,4 +397,3 @@ $i18n_key_words = array(
 'form.mail.report_sent' => 'Raportti lähetetty.',
 'form.mail.invoice_sent' => 'Lasku lähetetty.',
 );
-?>

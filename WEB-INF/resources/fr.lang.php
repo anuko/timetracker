@@ -436,4 +436,3 @@ $i18n_key_words = array(
 'form.mail.report_sent' => 'Le rapport a été envoyé.',
 'form.mail.invoice_sent' => 'La facture a été envoyée.',
 );
-?>

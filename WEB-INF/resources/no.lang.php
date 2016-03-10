@@ -423,4 +423,3 @@ $i18n_key_words = array(
 // login hello text
 // "login.hello.text" => "Anuko Time Tracker er et enkelt, brukervennlig tidsregistreringssystem basert på åpen kildekode.",
 );
-?>

@@ -417,4 +417,3 @@ $i18n_key_words = array(
 'form.mail.report_sent' => 'گزارش ارسال شد.',
 'form.mail.invoice_sent' => 'فاکتور ارسال شد.',
 );
-?>

@@ -415,4 +415,3 @@ $i18n_key_words = array(
 'form.mail.report_sent' => 'Zostava odoslaná.',
 'form.mail.invoice_sent' => 'Faktúra odoslaná.',
 );
-?>

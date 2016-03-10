@@ -65,4 +65,3 @@ $i18n_key_words = array(
 'error.empty' => 'svæði "{0}" er tómt',
 // Note to translators: a large portion of the master English file from this point down below is not translated.
 );
-?>

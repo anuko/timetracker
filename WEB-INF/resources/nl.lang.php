@@ -394,4 +394,3 @@ $i18n_key_words = array(
 'form.mail.report_sent' => 'Rapport is verzonden.',
 'form.mail.invoice_sent' => 'Factuur is verzonden.',
 );
-?>

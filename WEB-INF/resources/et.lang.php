@@ -414,4 +414,3 @@ $i18n_key_words = array(
 // login hello text
 // "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
 );
-?>

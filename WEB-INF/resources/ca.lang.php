@@ -80,11 +80,14 @@ $i18n_key_words = array(
 'error.field' => 'Dada "{0}" incorrecta.',
 'error.empty' => 'L\\\'Arxiu "{0}" està buit.',
 'error.not_equal' => 'L\\\'Arxiu "{0}" no és igual al arxiu "{1}".',
-								  
-// Refactoring needs to be done down from here to sync with English file.								  
-'error.interval' => 'Interval incorrecte',
-'error.project' => 'Sel·leccionar Projecte',
-'error.activity' => 'Sel·leccionar Actividat',
+'error.interval' => 'Interval incorrecte', // TODO: English string changed to 'Field "{0}" must be greater than "{1}".', re-translate.
+'error.project' => 'Selleccionar Projecte',
+// TODO: translate the following:
+// 'error.task' => 'Select task.',
+// 'error.client' => 'Select client.',
+// 'error.report' => 'Select report.'
+
+// Refactoring needs to be done down from here to sync with English file.	
 'error.auth' => 'Usuari o parula de pas incorrecta',
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'user with this login already exists',
@@ -401,4 +404,3 @@ $i18n_key_words = array(
 // login hello text
 // "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
 );
-?>

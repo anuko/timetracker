@@ -465,4 +465,3 @@ $i18n_key_words = array(
 // 'form.mail.report_sent' => 'Report sent.',
 'form.mail.invoice_sent' => 'Factura enviada.',
 );
-?>
