@@ -311,7 +311,9 @@ if ($totals_only) {
 }
 
 // Output footer.
-$html .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
+if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false)) // By default we print it unless explicitely defined as false.
+  $html .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
+
 // By this time we have html ready.
 
 // Determine title for report.
@@ -331,7 +333,7 @@ header('Content-Disposition: attachment; filename="timesheet.pdf"');
 // Beginning of TCPDF code here.
 
 // Extend TCPDF class so that we can use custom header and footer.
-class MyyPDF extends TCPDF {
+class ttPDF extends TCPDF {
 
   public $image_file = 'images/tt_logo.png'; // Image file for the logo in header.
   public $page_word = 'Page'; // Localized "Page" word in footer, ex: Page 1/2.
@@ -364,7 +366,7 @@ class MyyPDF extends TCPDF {
 }
 
 // Create new PDF document.
-$pdf = new MyyPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$pdf = new ttPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // If custom logo file exists - set it.
 if (file_exists('images/'.$user->team_id.'.png'))

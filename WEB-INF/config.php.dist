@@ -173,6 +173,11 @@ define('CURRENCY_DEFAULT', '$');
 define('EXPORT_DECIMAL_DURATION', true);
 
 
+// REPORT_FOOTER - defines whether to use a footer on reports.
+// 
+define('REPORT_FOOTER', true);
+
+
 // Authentication module (see WEB-INF/lib/auth/)
 // Possible authentication methods:
 //   db - internal database, logins and password hashes are stored in time tracker database.

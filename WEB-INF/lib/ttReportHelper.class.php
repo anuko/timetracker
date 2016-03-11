@@ -1055,13 +1055,13 @@ class ttReportHelper {
   // prepareReportBody - prepares an email body for report.
   static function prepareReportBody($bean, $comment)
   {
-  	global $user;
-  	global $i18n;
+    global $user;
+    global $i18n;
 
     $items = ttReportHelper::getItems($bean);
     $group_by = $bean->getAttribute('group_by');
     if ($group_by && 'no_grouping' != $group_by)
-        $subtotals = ttReportHelper::getSubtotals($bean);
+      $subtotals = ttReportHelper::getSubtotals($bean);
     $totals = ttReportHelper::getTotals($bean);
     
     // Use custom fields plugin if it is enabled.
@@ -1301,7 +1301,8 @@ class ttReportHelper {
     }
     
     // Output footer.
-    $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
+    if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false))
+      $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
 
     // Finish creating email body.
     $body .= '</body></html>';
@@ -1558,7 +1559,8 @@ class ttReportHelper {
     }
     
     // Output footer.
-    $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
+    if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false))
+      $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
 
     // Finish creating email body.
     $body .= '</body></html>';
