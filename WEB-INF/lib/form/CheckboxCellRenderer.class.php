@@ -44,4 +44,3 @@ class CheckboxCellRenderer extends DefaultCellRenderer {
     return $html;
   }
 }
-?>

@@ -79,4 +79,3 @@ class TableColumn {
         return $this->mWidth;
     }
 }
-?>

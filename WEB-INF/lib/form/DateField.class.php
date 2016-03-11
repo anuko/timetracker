@@ -427,4 +427,3 @@ class DateField extends TextField {
     return $html;
   }
 }
-?>

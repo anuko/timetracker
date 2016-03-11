@@ -71,4 +71,3 @@ class DefaultCellRenderer {
 		return $this->toString();
 	}
 }
-?>

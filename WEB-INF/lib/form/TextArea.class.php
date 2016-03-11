@@ -101,4 +101,3 @@ class TextArea extends FormElement {
 		return $s;
 	}
 }
-?>

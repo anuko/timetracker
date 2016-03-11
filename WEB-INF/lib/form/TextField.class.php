@@ -74,4 +74,3 @@ class TextField extends FormElement {
 		return $html;
 	}
 }
-?>

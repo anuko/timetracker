@@ -101,4 +101,3 @@ $smarty->assign('forms', array($form->getName() => $form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.delete_time_record'));
 $smarty->assign('content_page_name', 'mobile/time_delete.tpl');
 $smarty->display('mobile/index.tpl');
-?>

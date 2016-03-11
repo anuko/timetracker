@@ -60,4 +60,3 @@ class Submit extends FormElement {
 		return $html;
 	}
 }
-?>

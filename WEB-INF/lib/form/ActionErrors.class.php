@@ -63,4 +63,3 @@ class ActionErrors {
         return $this->errors;
     }
 }
-?>

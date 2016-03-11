@@ -223,4 +223,3 @@ class Table extends FormElement {
     return $html;
   }
 }
-?>

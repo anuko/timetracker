@@ -66,4 +66,3 @@ class UploadFile extends FormElement {
 		return $html;
 	}
 }
-?>

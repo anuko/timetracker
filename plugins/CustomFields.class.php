@@ -310,4 +310,3 @@ class CustomFields {
     return (!is_a($affected, 'PEAR_Error'));
   }
 }
-?>

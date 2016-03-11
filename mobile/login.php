@@ -96,4 +96,3 @@ $smarty->assign('onload', 'onLoad="document.loginForm.'.(!$cl_login?'login':'pas
 $smarty->assign('title', $i18n->getKey('title.login'));
 $smarty->assign('content_page_name', 'mobile/login.tpl');
 $smarty->display('mobile/index.tpl');
-?>

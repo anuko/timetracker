@@ -281,4 +281,3 @@ class Calendar extends FormElement {
         return false;
     }
 }
-?>

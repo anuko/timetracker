@@ -71,4 +71,3 @@ class FloatField extends TextField {
 		}
 	}
 }
-?>

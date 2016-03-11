@@ -160,4 +160,3 @@ class CheckboxGroup extends FormElement {
 		return $html.$str;
 	}
 }
-?>

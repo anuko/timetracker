@@ -51,4 +51,3 @@ class Hidden extends FormElement {
 		return $html;
 	}
 }
-?>

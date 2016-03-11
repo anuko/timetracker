@@ -75,4 +75,3 @@ class Checkbox extends FormElement {
 		return $html;
 	}
 }
-?>
