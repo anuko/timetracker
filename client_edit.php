@@ -118,4 +118,3 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.edit_client'));
 $smarty->assign('content_page_name', 'client_edit.tpl');
 $smarty->display('index.tpl');
-?>

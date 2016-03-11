@@ -101,4 +101,3 @@ $smarty->assign('onload', 'onLoad="document.teamForm.team.focus()"');
 $smarty->assign('content_page_name', 'admin_team_add.tpl');
 $smarty->assign('title', $i18n->getKey('title.create_team'));
 $smarty->display('index.tpl');
-?>

@@ -34,4 +34,3 @@ if ($auth->isAuthenticated()) $GLOBALS['SMARTY']->assign('authenticated', true);
 $smarty->assign('title', $i18n->getKey('label.error'));
 $smarty->assign('content_page_name', 'access_denied.tpl');
 $smarty->display('index.tpl');
-?>

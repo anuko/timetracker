@@ -72,4 +72,3 @@ $smarty->assign('onload', 'onLoad="document.fieldForm.name.focus()"');
 $smarty->assign('title', $i18n->getKey('title.cf_add_custom_field'));
 $smarty->assign('content_page_name', 'cf_custom_field_add.tpl');
 $smarty->display('index.tpl');
-?>

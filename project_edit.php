@@ -131,4 +131,3 @@ $smarty->assign('onload', 'onLoad="document.projectForm.name.focus()"');
 $smarty->assign('title', $i18n->getKey('title.edit_project'));
 $smarty->assign('content_page_name', 'project_edit.tpl');
 $smarty->display('index.tpl');
-?>

@@ -68,4 +68,3 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.options'));
 $smarty->assign('content_page_name', 'admin_options.tpl');
 $smarty->display('index.tpl');
-?>

@@ -407,4 +407,3 @@ $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('title', $i18n->getKey('title.edit_time_record'));
 $smarty->assign('content_page_name', 'time_edit.tpl');
 $smarty->display('index.tpl');
-?>

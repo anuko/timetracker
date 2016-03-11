@@ -107,4 +107,3 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.profileForm.team.focus()"');
 $smarty->assign('content_page_name', 'register.tpl');
 $smarty->display('index.tpl');
-?>

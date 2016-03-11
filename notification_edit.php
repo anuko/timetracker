@@ -97,4 +97,3 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.add_notification'));
 $smarty->assign('content_page_name', 'notification_edit.tpl');
 $smarty->display('index.tpl');
-?>

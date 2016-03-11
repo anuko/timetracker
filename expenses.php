@@ -203,4 +203,3 @@ $smarty->assign('timestring', $selected_date->toString($user->date_format));
 $smarty->assign('title', $i18n->getKey('title.expenses'));
 $smarty->assign('content_page_name', 'expenses.tpl');
 $smarty->display('index.tpl');
-?>

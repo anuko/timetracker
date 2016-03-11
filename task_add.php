@@ -82,4 +82,3 @@ $smarty->assign('onload', 'onLoad="document.taskForm.name.focus()"');
 $smarty->assign('title', $i18n->getKey('title.add_task'));
 $smarty->assign('content_page_name', 'task_add.tpl');
 $smarty->display('index.tpl');
-?>

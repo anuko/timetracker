@@ -58,4 +58,3 @@ $smarty->assign('custom_fields', $fields);
 $smarty->assign('title', $i18n->getKey('title.cf_custom_fields'));
 $smarty->assign('content_page_name', 'cf_custom_fields.tpl');
 $smarty->display('index.tpl');
-?>

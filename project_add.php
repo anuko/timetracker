@@ -93,4 +93,3 @@ $smarty->assign('onload', 'onLoad="document.projectForm.project_name.focus()"');
 $smarty->assign('title', $i18n->getKey('title.add_project'));
 $smarty->assign('content_page_name', 'project_add.tpl');
 $smarty->display('index.tpl');
-?>

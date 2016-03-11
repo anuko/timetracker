@@ -42,4 +42,3 @@ $smarty->assign('invoices', $invoices);
 $smarty->assign('title', $i18n->getKey('title.invoices'));
 $smarty->assign('content_page_name', 'invoices.tpl');
 $smarty->display('index.tpl');
-?>

@@ -49,4 +49,3 @@ $smarty->assign('can_delete_manager', $can_delete_manager);
 $smarty->assign('title', $i18n->getKey('title.users'));
 $smarty->assign('content_page_name', 'users.tpl');
 $smarty->display('index.tpl');
-?>

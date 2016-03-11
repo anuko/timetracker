@@ -227,4 +227,3 @@ $smarty->assign('forms', array($chart_form->getName() => $chart_form->toArray())
 $smarty->assign('title', $i18n->getKey('title.charts'));
 $smarty->assign('content_page_name', 'charts.tpl');
 $smarty->display('index.tpl');
-?>

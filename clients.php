@@ -41,4 +41,3 @@ $smarty->assign('inactive_clients', ttTeamHelper::getInactiveClients($user->team
 $smarty->assign('title', $i18n->getKey('title.clients'));
 $smarty->assign('content_page_name', 'clients.tpl');
 $smarty->display('index.tpl');
-?>

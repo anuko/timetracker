@@ -235,4 +235,3 @@ $smarty->assign('user_id', $user_id);
 $smarty->assign('title', $i18n->getKey('title.edit_user'));
 $smarty->assign('content_page_name', 'user_edit.tpl');
 $smarty->display('index.tpl');
-?>

@@ -97,4 +97,3 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.delete_user'));
 $smarty->assign('content_page_name', 'user_delete.tpl');
 $smarty->display('index.tpl');
-?>

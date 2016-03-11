@@ -371,4 +371,3 @@ $smarty->assign('timestring', $selected_date->toString($user->date_format));
 $smarty->assign('title', $i18n->getKey('title.time'));
 $smarty->assign('content_page_name', 'time.tpl');
 $smarty->display('index.tpl');
-?>

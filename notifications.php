@@ -54,4 +54,3 @@ $smarty->assign('notifications', $notifications);
 $smarty->assign('title', $i18n->getKey('title.notifications'));
 $smarty->assign('content_page_name', 'notifications.tpl');
 $smarty->display('index.tpl');
-?>

@@ -248,4 +248,3 @@ function init_js_date_locale()
     };";
   $smarty->assign('js_date_locale', $js);
 }
-?>

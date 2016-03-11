@@ -53,4 +53,3 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()) );
 $smarty->assign('title', $i18n->getKey('title.import'));
 $smarty->assign('content_page_name', 'import.tpl');
 $smarty->display('index.tpl');
-?>

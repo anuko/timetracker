@@ -67,4 +67,3 @@ $smarty->assign('onload', 'onLoad="document.notificationDeleteForm.btn_cancel.fo
 $smarty->assign('title', $i18n->getKey('title.delete_notification'));
 $smarty->assign('content_page_name', 'notification_delete.tpl');
 $smarty->display('index.tpl');
-?>

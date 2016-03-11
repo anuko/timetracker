@@ -86,5 +86,4 @@ $smarty->assign('invoice_items', $invoice_items);
 $smarty->assign('colspan', $colspan);
 $smarty->assign('title', $i18n->getKey('title.view_invoice'));
 $smarty->assign('content_page_name', 'invoice_view.tpl');
-$smarty->display('index.tpl');	
-?>
+$smarty->display('index.tpl');

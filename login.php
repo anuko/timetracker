@@ -93,4 +93,3 @@ $smarty->assign('title', $i18n->getKey('title.login'));
 $smarty->assign('content_page_name', 'login.tpl');
 $smarty->assign('about_text', $i18n->getKey('form.login.about'));
 $smarty->display('index.tpl');
-?>

@@ -40,4 +40,3 @@ $smarty->assign('teams', ttTeamHelper::getTeams());
 $smarty->assign('title', $i18n->getKey('title.teams'));
 $smarty->assign('content_page_name', 'admin_teams.tpl');
 $smarty->display('index.tpl');
-?>

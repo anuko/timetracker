@@ -120,4 +120,3 @@ $smarty->assign('bean', $bean);
 $smarty->assign('title', $i18n->getKey('title.report').": ".$totals['start_date']." - ".$totals['end_date']);
 $smarty->assign('content_page_name', 'report.tpl');
 $smarty->display('index.tpl');
-?>

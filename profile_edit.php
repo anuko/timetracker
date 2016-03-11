@@ -268,4 +268,3 @@ $smarty->assign('onload', 'onLoad="handlePluginCheckboxes()"');
 $smarty->assign('title', $i18n->getKey('title.profile'));
 $smarty->assign('content_page_name', 'profile_edit.tpl');
 $smarty->display('index.tpl');
-?>

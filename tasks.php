@@ -41,4 +41,3 @@ $smarty->assign('inactive_tasks', ttTeamHelper::getInactiveTasks($user->team_id)
 $smarty->assign('title', $i18n->getKey('title.tasks'));
 $smarty->assign('content_page_name', 'tasks.tpl');
 $smarty->display('index.tpl');
-?>

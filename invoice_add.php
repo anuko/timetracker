@@ -96,4 +96,3 @@ $smarty->assign('onload', 'onLoad="document.invoiceForm.number.focus()"');
 $smarty->assign('title', $i18n->getKey('title.add_invoice'));
 $smarty->assign('content_page_name', 'invoice_add.tpl');
 $smarty->display('index.tpl');
-?>

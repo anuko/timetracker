@@ -117,4 +117,3 @@ $smarty->assign('onload', 'onLoad="document.resetPasswordForm.login.focus()"');
 $smarty->assign('title', $i18n->getKey('title.reset_password'));
 $smarty->assign('content_page_name', 'password_reset.tpl');
 $smarty->display('index.tpl');
-?>

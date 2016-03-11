@@ -94,4 +94,3 @@ $smarty->assign('forms', array($form->getName() => $form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.change_password'));
 $smarty->assign('content_page_name', 'password_change.tpl');
 $smarty->display('index.tpl');
-?>

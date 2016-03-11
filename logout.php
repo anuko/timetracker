@@ -31,4 +31,3 @@ $auth->doLogout();
 session_unset();
 
 header('Location: login.php');
-?>

@@ -71,4 +71,3 @@ $smarty->assign('onload', 'onLoad="document.invoiceDeleteForm.btn_cancel.focus()
 $smarty->assign('title', $i18n->getKey('title.delete_invoice'));
 $smarty->assign('content_page_name', 'invoice_delete.tpl');
 $smarty->display('index.tpl');
-?>

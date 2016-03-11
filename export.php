@@ -81,4 +81,3 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.export'));
 $smarty->assign('content_page_name', 'export.tpl');
 $smarty->display('index.tpl');
-?>

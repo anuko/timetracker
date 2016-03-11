@@ -405,4 +405,3 @@ $pdf->writeHTML($html, true, false, false, false, '');
 $pdf->Output('timesheet.pdf', 'D'); // D is for downloads.
 
 // End of of TCPDF code.
-?>

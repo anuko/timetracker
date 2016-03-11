@@ -72,4 +72,3 @@ $smarty->assign('onload', 'onLoad="document.optionEditForm.name.focus()"');
 $smarty->assign('title', $i18n->getKey('title.cf_edit_dropdown_option'));
 $smarty->assign('content_page_name', 'cf_dropdown_option_edit.tpl');
 $smarty->display('index.tpl');
-?>

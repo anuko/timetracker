@@ -76,4 +76,3 @@ $smarty->assign('onload', 'onLoad="document.optionDeleteForm.btn_cancel.focus()"
 $smarty->assign('title', $i18n->getKey('title.cf_delete_dropdown_option'));
 $smarty->assign('content_page_name', 'cf_dropdown_option_delete.tpl');
 $smarty->display('index.tpl');
-?>

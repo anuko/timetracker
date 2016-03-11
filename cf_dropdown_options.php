@@ -49,4 +49,3 @@ $smarty->assign('options', $options);
 $smarty->assign('title', $i18n->getKey('title.cf_dropdown_options'));
 $smarty->assign('content_page_name', 'cf_dropdown_options.tpl');
 $smarty->display('index.tpl');
-?>

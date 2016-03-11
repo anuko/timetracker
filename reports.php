@@ -331,4 +331,3 @@ $smarty->assign('onload', 'onLoad="handleCheckboxes()"');
 $smarty->assign('title', $i18n->getKey('title.reports'));
 $smarty->assign('content_page_name', 'reports.tpl');
 $smarty->display('index.tpl');
-?>

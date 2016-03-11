@@ -80,5 +80,3 @@ while ($val = $res->fetchRow()) {
 }
 
 echo "Done!";
-
-?>

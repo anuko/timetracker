@@ -74,4 +74,3 @@ $smarty->assign('onload', 'onLoad="document.fieldDeleteForm.btn_cancel.focus()"'
 $smarty->assign('title', $i18n->getKey('title.cf_delete_custom_field'));
 $smarty->assign('content_page_name', 'cf_custom_field_delete.tpl');
 $smarty->display('index.tpl');
-?>

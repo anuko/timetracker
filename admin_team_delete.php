@@ -65,4 +65,3 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.delete_team'));
 $smarty->assign('content_page_name', 'admin_team_delete.tpl');
 $smarty->display('index.tpl');
-?>

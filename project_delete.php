@@ -67,4 +67,3 @@ $smarty->assign('onload', 'onLoad="document.projectDeleteForm.btn_cancel.focus()
 $smarty->assign('title', $i18n->getKey('title.delete_project'));
 $smarty->assign('content_page_name', 'project_delete.tpl');
 $smarty->display('index.tpl');
-?>
