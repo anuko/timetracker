@@ -86,9 +86,15 @@ define('COST_ON_REPORTS', true);
 //
 // define('READONLY_START_FINISH', false);
 
+
 // FUTURE_ENTRIES - defines whether users can create entries for future dates. Defaults to true.
 //
 // define('FUTURE_ENTRIES', false);
+
+
+// ALLOW_OVERLAP - defines whether overlapping time entries are allowed. Defaults to false.
+//
+// define('ALLOW_OVERLAP', true);
 
 
 // WEEKEND_START_DAY

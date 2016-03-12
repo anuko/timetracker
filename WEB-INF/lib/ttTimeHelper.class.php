@@ -365,7 +365,10 @@ class ttTimeHelper {
     $duration = ttTimeHelper::normalizeDuration($duration);
 
     if (!$timestamp) {
-      $timestamp = date('YmdHis');//yyyymmddhhmmss
+      $timestamp = date('YmdHis'); //yyyymmddhhmmss
+      // TODO: this timestamp could be illegal if we hit inside DST switch deadzone, such as '2016-03-13 02:30:00'
+      // Anything between 2am and 3am on DST introduction date will not work if we run on a system with DST on.
+      // We need to address this properly to avoid potential complications.
     }
         
     if (!$billable) $billable = 0;
@@ -512,6 +515,10 @@ class ttTimeHelper {
   //   $finish - new record finish time, may be null
   //   $record_id - optional record id we may be editing, excluded from overlap set
   static function overlaps($user_id, $date, $start, $finish, $record_id = null) {
+    // Do not bother checking if we allow overlaps.
+    if (defined('ALLOW_OVERLAP') && ALLOW_OVERLAP == true)
+      return false;
+      
     $mdb2 = getConnection();
     
     $start = ttTimeHelper::to24HourFormat($start);
