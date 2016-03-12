@@ -44,7 +44,7 @@ $i18n_key_words = array(
 'menu.create_team' => 'Luo tiimi',
 'menu.profile' => 'Profiili',
 'menu.time' => 'Tunnit',
-// TODO: translate the following string.
+// TODO: translate the following:
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Raportit',
 'menu.charts' => 'Kaaviot',
@@ -57,11 +57,15 @@ $i18n_key_words = array(
 'menu.options' => 'Optiot',
 
 // Footer - strings on the bottom of most pages.
-'footer.mobile_phones' => 'Time Tracker on saatavana myös mobiililaitteille.',
+// TODO: translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'Credits' is a bit difficult to translate, the exact literal term might be 'Ansiot' or 'Antaa tunnustus' but that's not widely used in this meaning.
 // The term that is used is something like 'We are thanking' ('Kiitämme') but that does not sound good, either. So I just let it be as it was for time being as everybody (?) understands the meaning anyway.
 'footer.credits' => 'Credits',
 'footer.license' => 'Lisenssi',
+// TODO: translate the following:
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                  // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
 'error.access_denied' => 'Pääsy estetty.',

@@ -26,6 +26,8 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
+// Note to translators: Please use proper capitalization rules for your language. 
+
 $i18n_language = 'Magyar';
 $i18n_months = array('január', 'február', 'március', 'április', 'május', 'június', 'július', 'augusztus', 'szeptember', 'október', 'november', 'december');
 $i18n_weekdays = array('vasárnap', 'hétfő', 'kedd', 'szerda', 'csütörtök', 'péntek', 'szombat');
@@ -35,29 +37,43 @@ $i18n_holidays = array('01/01', '01/02', '03/15', '04/12', '04/13', '05/01', '05
 
 $i18n_key_words = array(
 
-// menu entries
+// Menus.
 'menu.login' => 'bejelentkezés',
 'menu.logout' => 'kijelentkezés',
-'menu.feedback'  => 'megjegyzés',
+// TODO: Translate the following:
+// 'menu.forum' => 'Forum',
 'menu.help' => 'segítség',
-// Note to translators: menu.create_team needs a more accurate translation.
-'menu.create_team' => 'új vezetői jogosultság létrehozása',
-'menu.edit_profile' => 'profil szerkesztése',
-'menu.my_time' => 'munkaidő',
+// TODO: Translate the following:
+// 'menu.create_team' => 'Create Team',
+'menu.profile' => 'profil',
+'menu.time' => 'munkaidő',
+// TODO: Translate the following:
+// 'menu.expenses' => 'Expenses',
 'menu.reports' => 'riportok',
-// Note to translators: menu.charts needs to be translated.
-// 'menu.charts' => 'charts',
+// TODO: Translate the following:
+// 'menu.charts' => 'Charts',
 'menu.projects' => 'projektek',
-'menu.activities' => 'tevékenységek',
-'menu.people' => 'munkatársak',
+// TODO: Translate the following:
+// 'menu.tasks' => 'Tasks',
+// 'menu.users' => 'Users',
 'menu.teams' => 'csoportok',
-// Note to translators: menu.export needs to be translated.
-// 'menu.export' => 'export',
+// TODO: Translate the following:
+// 'menu.export' => 'Export'
 'menu.clients' => 'ügyfelek',
 'menu.options' => 'opciók',
-// Note to translators: the string is missing and must be added and translated // 'menu.admin' => 'admin',
 
-// error strings
+// Footer - strings on the bottom of most pages.
+// TODO: Translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+// 'footer.credits' => 'Credits',
+// 'footer.license' => 'License',
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                  // This is a link to a webpage that describes how to contribute to the project.
+
+// Error messages.
+// TODO: Translate the following:
+// 'error.access_denied' => 'Access denied.',
+// 'error.sys' => 'System error.',
 'error.db' => 'adatbázis hiba',
 'error.field' => 'hibás "{0}" mező tartalma',
 'error.empty' => 'a "{0}" mező üres',
