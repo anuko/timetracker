@@ -65,9 +65,11 @@ $i18n_key_words = array(
 
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following strings.
-// 'footer.mobile_phones' => 'Time Tracker is available on mobile phones.',
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.'
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                  // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
 // TODO: translate the following strings.

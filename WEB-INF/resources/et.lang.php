@@ -29,6 +29,8 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option 
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
+// Note to translators: Please use proper capitalization rules for your language. 
+
 $i18n_language = 'Eesti';
 $i18n_months = array('jaanuar', 'veebruar', 'märts', 'aprill', 'mai', 'juuni', 'juuli', 'august', 'september', 'oktoober', 'november', 'detsember');
 $i18n_weekdays = array('pühapäev', 'esmaspäev', 'teisipäev', 'kolmapäev', 'neljapäev', 'reede', 'laupäev');
@@ -38,29 +40,43 @@ $i18n_holidays = array('01/01', '02/24', '04/10', '04/12', '05/01', '05/31', '06
 
 $i18n_key_words = array(
 
-// menu entries
+// Menus.
 'menu.login' => 'login',
 'menu.logout' => 'logout',
-'menu.feedback' => 'tagasiside',
+// TODO: Translate the following:
+// 'menu.forum' => 'Forum',
 'menu.help' => 'abiinfo',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => 'loo uus managerikonto',
-'menu.edit_profile' => 'muuda profiili',
-'menu.my_time' => 'minu aeg',
+'menu.profile' => 'profiili',
+'menu.time' => 'aeg',
+// TODO: Translate the following:
+// 'menu.expenses' => 'Expenses',
 'menu.reports' => 'raportid',
-// Note to translators: menu.charts needs to be translated.
-// 'menu.charts' => 'charts',
+// TODO: Translate the following:
+// 'menu.charts' => 'Charts',
 'menu.projects' => 'projektid',
-'menu.activities' => 'tegevused',
-'menu.people' => 'inimesed',
+// TODO: Translate the following:
+// 'menu.tasks' => 'Tasks',
+// 'menu.users' => 'Users',
 'menu.teams' => 'meeskonnad',
-// Note to translators: menu.export needs to be translated.
-// 'menu.export' => 'export',
+// TODO: Translate the following:
+// 'menu.export' => 'Export',
 'menu.clients' => 'kliendid',
 'menu.options' => 'suvandid',
-'menu.admin' => 'admin',
 
-// error strings
+// Footer - strings on the bottom of most pages.
+// TODO: translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+// 'footer.credits' => 'Credits',
+// 'footer.license' => 'License',
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                  // This is a link to a webpage that describes how to contribute to the project.
+
+// Error messages.
+// TODO: translate the following:
+// 'error.access_denied' => 'Access denied.',
+// 'error.sys' => 'System error.',
 'error.db' => 'andmebaasi viga',
 'error.field' => 'valed "{0}" andmed',
 'error.empty' => 'väli "{0}" on tühi',
