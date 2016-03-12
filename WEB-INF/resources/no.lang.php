@@ -39,28 +39,42 @@ $i18n_holidays = array('01/01', '04/05', '04/09', '04/10', '04/12', '04/13', '05
 
 $i18n_key_words = array(
 
-// menu entries
+// Menus.
 'menu.login' => 'Innlogging',
 'menu.logout' => 'Logg ut',
-'menu.feedback' => 'Tilbakemelding',
+// TODO: translate the following:
+// 'menu.forum' => 'Forum',
 'menu.help' => 'Hjelp',
 // Note to translators: menu.create_team needs an improved translation.
 'menu.create_team' => 'Lag ny adminkonto',
-'menu.edit_profile' => 'Endre profil',
-'menu.my_time' => 'Min tid',
+'menu.profile' => 'Profil',
+'menu.time' => 'Tid',
+// TODO: translate the following:
+// 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Rapporter',
 'menu.charts' => 'Diagrammer',
 'menu.projects' => 'Prosjekter',
-'menu.activities' => 'Aktiviteter',
-'menu.people' => 'Personer',
+// TODO: translate the following:
+// 'menu.tasks' => 'Tasks',
+// 'menu.users' => 'Users',
 // Note to translators: check translation of menu.teams. This is for a list of teams in the time tracker for admin.
 // 'menu.teams' => 'team',
 'menu.export' => 'Eksport',
 'menu.clients' => 'Klienter',
 'menu.options' => 'Opsjoner',
-'menu.admin' => 'Admin',
+
+// Footer - strings on the bottom of most pages.
+// TODO: translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+// 'footer.credits' => 'Credits',
+// 'footer.license' => 'License',
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                  // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
+// TODO: translate the following:
+// 'error.access_denied' => 'Access denied.',
+// 'error.sys' => 'System error.',
 'error.db' => 'Databasefeil.',
 'error.field' => 'Feil "{0}" data.',
 'error.empty' => 'Feltet "{0}" er tomt.',

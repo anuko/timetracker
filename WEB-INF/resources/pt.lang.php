@@ -29,6 +29,8 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option 
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
+// Note to translators: Please use proper capitalization rules for your language. 
+
 $i18n_language = 'Português';
 $i18n_months = array('janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'augosto', 'setembro', 'outubro', 'novembro', 'dezembro');
 $i18n_weekdays = array('domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado');
@@ -39,30 +41,42 @@ $i18n_holidays = array('01/01', '02/24', '04/10', '04/12', '04/25', '05/01', '06
 
 $i18n_key_words = array(
 
-// menu entries
-'menu.login' => 'login',
-'menu.logout' => 'logout',
-'menu.feedback' => 'feedback',
-'menu.help' => 'ajuda',
+// Menus.
+'menu.login' => 'Login',
+'menu.logout' => 'Logout',
+// TODO: Translate the following:
+// 'menu.forum' => 'Forum',
+'menu.help' => 'Ajuda',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => 'criar nova conta de gerente',
-'menu.edit_profile' => 'editar perfil',
-'menu.my_time' => 'meu tempo',
-'menu.reports' => 'relatórios',
-// Note to translators: menu.charts needs to be translated.
-// 'menu.charts' => 'charts',
-'menu.projects' => 'projetos',
-'menu.activities' => 'atividades',
-'menu.people' => 'pessoas',
-// Note to translators: the strings below are missing and must be added and translated 
-// 'menu.teams' => 'teams',
-// 'menu.export' => 'export',
-// 'menu.clients' => 'clients',
-'menu.options' => 'opções',
-// 'menu.admin' => 'admin',
+'menu.profile' => 'Perfil',
+'menu.time' => 'Tempo',
+// TODO: Translate the following:
+// 'menu.expenses' => 'Expenses',
+'menu.reports' => 'Relatórios',
+// TODO: Translate the following:
+// 'menu.charts' => 'Charts',
+'menu.projects' => 'Projetos',
+// TODO: Translate the following:
+// 'menu.tasks' => 'Tasks',
+// 'menu.users' => 'Users',
+// 'menu.teams' => 'Tams',
+// 'menu.export' => 'Export',
+// 'menu.clients' => 'Clients',
+'menu.options' => 'Opções',
 
-// error strings
-// Note to translators: the strings below must be translated
+// Footer - strings on the bottom of most pages.
+// TODO: Translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+// 'footer.credits' => 'Credits',
+// 'footer.license' => 'License',
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                  // This is a link to a webpage that describes how to contribute to the project.
+
+// Error messages.
+// TODO: Translate the following:
+// 'error.access_denied' => 'Access denied.',
+// 'error.sys' => 'System error.',
 // 'error.db' => 'database error',
 // 'error.field' => 'incorrect "{0}" data',
 // 'error.empty' => 'field "{0}" is empty',
