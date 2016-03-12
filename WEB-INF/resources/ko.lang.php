@@ -38,29 +38,43 @@ $i18n_holidays = array('01/01', '01/25', '01/26', '01/27', '03/02', '03/05', '08
 
 $i18n_key_words = array(
 
-// menu entries
+// Menus.
 'menu.login' => '로그인',
 'menu.logout' => '로그아웃',
-'menu.feedback' => '피드백',
+// TODO: Translate the following:
+// 'menu.forum' => 'Forum',
 'menu.help' => '도움말',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => '새로운 관리자 계정을 생성',
-'menu.edit_profile' => '프로필 편집',
-'menu.time' => '나의 시간',
+'menu.profile' => '프로필',
+'menu.time' => '나의 시간', // TODO: improve this, used to be "My time", now just "Time".
+// TODO: Translate the following:
+// 'menu.expenses' => 'Expenses',
 'menu.reports' => '보고서',
-// Note to translators: menu.charts needs to be translated.
-// 'menu.charts' => 'charts',
+// TODO: Translate the following:
+// 'menu.charts' => 'Charts',
 'menu.projects' => '프로젝트',
-'menu.activities' => '활동내용',
-'menu.people' => '멤버',
+// TODO: Translate the following:
+// 'menu.tasks' => 'Tasks',
+// 'menu.users' => 'Users',
 'menu.teams' => '팀',
-// Note to translators: menu.export needs to be translated.
-// 'menu.export' => 'export',
+// TODO: Translate the following:
+// 'menu.export' => 'Export',
 'menu.clients' => '클라이언트',
 'menu.options' => '옵션',
-'menu.admin' => '관리',
 
-// error strings
+// Footer - strings on the bottom of most pages.
+// TODO: Translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+// 'footer.credits' => 'Credits',
+// 'footer.license' => 'License',
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                  // This is a link to a webpage that describes how to contribute to the project.
+
+// Error messages.
+// TODO: Translate the following:
+// 'error.access_denied' => 'Access denied.',
+// 'error.sys' => 'System error.',
 'error.db' => '데이터베이스 오류',
 'error.field' => '부정확한 "{0}" 의 데이터',
 'error.empty' => '"{0}" 의 필드가 비어있습니다',

@@ -38,29 +38,43 @@ $i18n_holidays = array('01/01', '01/12', '03/20', '05/03', '05/04', '05/05', '05
 
 $i18n_key_words = array(
 
-// menu entries
+// Menus.
 'menu.login' => 'ログイン',
 'menu.logout' => 'ログアウト',
-'menu.feedback' => 'フィードバック',
+// TODO: Translate the following:
+// 'menu.forum' => 'Forum',
 'menu.help' => 'ヘルプ',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => '新規管理者のアカウントの作成',
-'menu.edit_profile' => 'プロファイルの編集',
-'menu.time' => '私の時間',
+'menu.profile' => 'プロファイル', 
+'menu.time' => '時間',
+// TODO: Translate the following:
+// 'menu.expenses' => 'Expenses',
 'menu.reports' => 'レポート',
-// Note to translators: menu.charts needs to be translated.
-// 'menu.charts' => 'charts',
+// TODO: Translate the following:
+// 'menu.charts' => 'Charts',
 'menu.projects' => 'プロジェクト',
-'menu.activities' => '活動内容',
-'menu.people' => 'メンバー',
+// TODO: Translate the following:
+// 'menu.tasks' => 'Tasks',
+// 'menu.users' => 'Users',
 'menu.teams' => 'チーム',
-// Note to translators: menu.export needs to be translated.
-// 'menu.export' => 'export',
+// TODO: Translate the following:
+// 'menu.export' => 'Export',
 'menu.clients' => 'クライアント',
 'menu.options' => 'オプション',
-'menu.admin' => '管理',
 
-// error strings
+// Footer - strings on the bottom of most pages.
+// TODO: Translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+// 'footer.credits' => 'Credits',
+// 'footer.license' => 'License',
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                  // This is a link to a webpage that describes how to contribute to the project.
+
+// Error messages.
+// TODO: Translate the following:
+// 'error.access_denied' => 'Access denied.',
+// 'error.sys' => 'System error.',
 'error.db' => 'データベースのエラー',
 'error.field' => '不正確な"{0}"データ',
 'error.empty' => '"{0}"のフィールドが空白です',
