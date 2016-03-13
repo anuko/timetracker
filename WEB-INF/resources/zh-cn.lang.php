@@ -38,28 +38,42 @@ $i18n_holidays = array('01/01', '01/02', '01/25', '01/26', '01/27', '01/28', '01
 
 $i18n_key_words = array(
 
-// menu entries
+// Menus.
 'menu.login' => '登录',
 'menu.logout' => '注销',
-'menu.feedback' => '反馈',
+// TODO: translate the following:
+// 'menu.forum' => 'Forum',
 'menu.help' => '帮助',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => '创建新管理账号',
-'menu.edit_profile' => '编辑简介',
-'menu.time' => '我的时间记录',
+'menu.profile' => '编辑简介', // TODO: Improve this, used to be "Edit profile", now just "Profile".
+'menu.time' => '我的时间记录', // TODO: Improve this, used to be "My time", now just "Time".
+// TODO: translate the following:
+// 'menu.expenses' => 'Expenses',
 'menu.reports' => '报告',
-// Note to translators: menu.charts needs to be translated.
-// 'menu.charts' => 'charts',
+// TODO: translate the following:
+// 'menu.charts' => 'Charts',
 'menu.projects' => '项目',
-'menu.activities' => '活动',
-'menu.people' => '人员',
+// TODO: translate the following:
+// 'menu.tasks' => 'Tasks',
+// 'menu.users' => 'Users',
 'menu.teams' => '团队',
 'menu.export' => '导出数据',
 'menu.clients' => '客户',
 'menu.options' => '选项',
-'menu.admin' => '管理',
 
-// error strings
+// Footer - strings on the bottom of most pages.
+// TODO: translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+// 'footer.credits' => 'Credits',
+// 'footer.license' => 'License',
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                     // This is a link to a webpage that describes how to contribute to the project.
+
+// Error messages.
+// TODO: translate the following:
+// 'error.access_denied' => 'Access denied.',
+// 'error.sys' => 'System error.',
 'error.db' => '数据库错误',
 'error.field' => '不正确的"{0}"数据',
 'error.empty' => '栏目"{0}"为空',

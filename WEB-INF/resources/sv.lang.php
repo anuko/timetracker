@@ -38,30 +38,44 @@ $i18n_holidays = array('01/01', '01/06', '04/10', '04/12', '04/13', '05/01', '05
 
 $i18n_key_words = array(
 
-// menu entries
+// Menus.
 'menu.login' => 'Logga in',
 'menu.logout' => 'Logga ut',
-'menu.feedback' => 'Feedback',
+// TODO: translate the following:
+// 'menu.forum' => 'Forum',
 'menu.help' => 'Hjälp',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => 'Skapa huvudkonto',
-'menu.edit_profile' => 'Ändra profil',
-'menu.my_time' => 'Mina tider',
+'menu.profile' => 'Profil',
+'menu.time' => 'Mina tider', // TODO: Improve this, used to be "My time", now just "Time".
+// TODO: translate the following:
+// 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Rapporter',
-// Note to translators: menu.charts needs to be translated.
-// 'menu.charts' => 'charts',
-'menu.projects' => 'Projekt',
-'menu.activities' => 'Aktiviteter',
-'menu.people' => 'Personal',
+// TODO: translate the following:
+// 'menu.charts' => 'Charts',
+'menu.projects' => 'Projekt', // TODO: is this correct for plural "Projects" (many projects, not one).
+// TODO: translate the following:
+// 'menu.tasks' => 'Tasks',
+// 'menu.users' => 'Users',
 // Note to translators: is menu.teams translated correctly? It's a list of teams in the system.
 'menu.teams' => 'Team',
-// Note to translators: menu.export needs to be translated.
-// 'menu.export' => 'export',
+// TODO: translate the following:
+// 'menu.export' => 'Export',
 'menu.clients' => 'Kunder',
 'menu.options' => 'Inställningar',
-'menu.admin' => 'Admin',
 
-// error strings
+// Footer - strings on the bottom of most pages.
+// TODO: translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+// 'footer.credits' => 'Credits',
+// 'footer.license' => 'License',
+//'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                    // This is a link to a webpage that describes how to contribute to the project.
+
+// Error messages.
+// TODO: translate the following:
+// 'error.access_denied' => 'Access denied.',
+// 'error.sys' => 'System error.',
 'error.db' => 'Fel i databasen',
 'error.field' => 'felaktig "{0}" data',
 'error.empty' => 'fält "{0}" är tomt',
