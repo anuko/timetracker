@@ -26,7 +26,7 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-// Note to translators: Please use proper capitalization rules for your language. 
+// Note to translators: Please use proper capitalization rules for your language.
 
 $i18n_language = 'Magyar';
 $i18n_months = array('január', 'február', 'március', 'április', 'május', 'június', 'július', 'augusztus', 'szeptember', 'október', 'november', 'december');

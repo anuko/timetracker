@@ -29,6 +29,8 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option 
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
+// Note to translators: Please use proper capitalization rules for your language.
+
 $i18n_language = 'Slovenščina';
 $i18n_months = array('januar', 'februar', 'marec', 'april', 'maj', 'junij', 'julij', 'avgust', 'september', 'oktober', 'november', 'december');
 $i18n_weekdays = array('nedelja', 'ponedeljek', 'torek', 'sreda', 'četrtek', 'petek', 'sobota');
@@ -38,49 +40,69 @@ $i18n_holidays = array('01/01', '01/02', '02/08', '04/12', '04/13', '04/27', '05
 
 $i18n_key_words = array(
 
-// menu entries
-'menu.login' => 'prijava',
-'menu.logout' => 'odjava',
-'menu.feedback' => 'povratna informacija',
-'menu.help' => 'pomoč',
+// Menus.
+'menu.login' => 'Prijava',
+'menu.logout' => 'Odjava',
+// TODO: translate the following:
+// 'menu.forum' => 'Forum',
+'menu.help' => 'Pomoč',
 // Note to translators: menu.create_team needs a more accurate translation.
-'menu.create_team' => 'ustvari nov manager račun',
-'menu.edit_profile' => 'uredi profil',
-'menu.my_time' => 'moj čas',
-'menu.reports' => 'poročila',
-// Note to translators: menu.charts needs to be translated.
-// 'menu.charts' => 'charts',
-'menu.projects' => 'projekti',
-'menu.activities' => 'aktivnosti',
-'menu.people' => 'ljudje',
-'menu.teams' => 'timi',
-// Note to translators: menu.export needs to be translated.
-// 'menu.export' => 'export',
-'menu.clients' => 'stranke',
-'menu.options' => 'možnosti',
-'menu.admin' => 'admin',
+'menu.create_team' => 'Ustvari nov manager račun',
+'menu.profile' => 'Profil',
+'menu.time' => 'Moj čas', // TODO: Improve this, used to be "My time", now just "Time".
+// TODO: translate the following:
+// 'menu.expenses' => 'Expenses',
+'menu.reports' => 'Poročila',
+// TODO: translate the following:
+// 'menu.charts' => 'Charts',
+'menu.projects' => 'Projekti',
+// TODO: translate the following:
+// 'menu.tasks' => 'Tasks',
+// 'menu.users' => 'Users',
+'menu.teams' => 'Timi',
+// TODO: translate the following:
+// 'menu.export' => 'Export',
+'menu.clients' => 'Stranke',
+'menu.options' => 'Možnosti',
 
-// Note to translators: these strings need to be translated.
-// error strings
-// 'error.db' => 'database error',
-// 'error.field' => 'incorrect "{0}" data',
-// 'error.empty' => 'field "{0}" is empty',
-// 'error.not_equal' => 'field "{0}" is not equal to field "{1}"',
-// 'error.interval' => 'incorrect interval',
-// 'error.project' => 'select project',
-// 'error.activity' => 'select activity',
-// 'error.auth' => 'incorrect login or password',
-// 'error.user_exists' => 'user with this login already exists',
-// 'error.project_exists' => 'project with this name already exists',
-// 'error.activity_exists' => 'activity with this name already exists',
-// 'error.client_exists' => 'client with this name already exists',
-// 'error.no_login' => 'no user with this login',
-// 'error.upload' => 'file upload error',
-// 'error.period_locked' => 'can\\\'t complete the operation. records older than a certain number of days cannot be created or modified. team manager defines this in the "Lock interval in days" value on the "Profile" page. set it to 0 to remove locking. <br><br>uncompleted records (with 0 or empty duration) can be deleted.',
-// 'error.mail_send' => 'error sending mail',
-// 'error.no_email' => 'no email associated with this login',
-// 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
-// 'error.goto_uncompleted' => 'go to uncompleted entry.',
+// Footer - strings on the bottom of most pages.
+// TODO: translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+// 'footer.credits' => 'Credits',
+// 'footer.license' => 'License',
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                  // This is a link to a webpage that describes how to contribute to the project.
+
+// Error messages.
+// TODO: translate the following:
+// 'error.access_denied' => 'Access denied.',
+// 'error.sys' => 'System error.',
+// 'error.db' => 'Database error.',
+// 'error.field' => 'Incorrect "{0}" data.',
+// 'error.empty' => 'Field "{0}" is empty.',
+// 'error.not_equal' => 'Field "{0}" is not equal to field "{1}".',
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+// 'error.project' => 'Select project.',
+// 'error.task' => 'Select task.',
+// 'error.client' => 'Select client.',
+// 'error.report' => 'Select report.',
+// 'error.auth' => 'Incorrect login or password.',
+// 'error.user_exists' => 'User with this login already exists.',
+// 'error.project_exists' => 'Project with this name already exists.',
+// 'error.task_exists' => 'Task with this name already exists.',
+// 'error.client_exists' => 'Client with this name already exists.',
+// 'error.invoice_exists' => 'Invoice with this number already exists.',
+// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
+// 'error.no_login' => 'No user with this login.',
+// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+// 'error.upload' => 'File upload error.',
+// 'error.period_locked' => 'Can\\\'t complete the operation. Records older than a certain number of days cannot be created or modified. Team manager defines this in the "Lock interval in days" value on the "Profile" page. Set it to 0 to remove locking. <br><br>Uncompleted records (with 0 or empty duration) can be deleted.',
+// 'error.mail_send' => 'Error sending mail.',
+// 'error.no_email' => 'No email associated with this login.',
+// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
+// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
+// 'error.overlap' => 'Time interval overlaps with existing records.',
+// 'error.future_date' => 'Date is in future.',
 
 // labels for various buttons
 'button.login' => 'prijava',

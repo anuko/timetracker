@@ -29,6 +29,8 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option 
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
+// Note to translators: Please use proper capitalization rules for your language. 
+
 $i18n_language = 'Română';
 $i18n_months = array('ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie');
 $i18n_weekdays = array('duminica', 'luni', 'marti', 'miercuri', 'joi', 'vineri', 'sambata');
@@ -38,30 +40,44 @@ $i18n_holidays = array('01/01', '01/02', '04/19', '04/20', '05/01', '06/07', '06
 
 $i18n_key_words = array(
 
-// menu entries
-'menu.login' => 'autentificare',
-'menu.logout' => 'iesire',
-'menu.feedback' => 'feedback',
-'menu.help' => 'ajutor',
+// Menus.
+'menu.login' => 'Autentificare',
+'menu.logout' => 'Iesire',
+// TODO: Translate the following:
+// 'menu.forum' => 'Forum',
+'menu.help' => 'Ajutor',
 // Note to translators: menu.create_team needs a more accurate translation.
-'menu.create_team' => 'creaza cont manager',
-'menu.edit_profile' => 'editeaza profil',
-'menu.my_time' => 'timpul meu',
-'menu.reports' => 'rapoarte',
-// Note to translators: menu.charts needs to be translated.
-// 'menu.charts' => 'charts',
-'menu.projects' => 'proiecte',
-'menu.activities' => 'activitati',
-'menu.people' => 'persoane',
-'menu.teams' => 'echipe',
-// Note to translators: menu.export needs to be translated.
-// 'menu.export' => 'export',
-'menu.clients' => 'clienti',
-// Note to translators: menu.options and menu.admin need to be translated.
-// 'menu.options' => 'options',
-// 'menu.admin' => 'admin',
+'menu.create_team' => 'Creaza cont manager',
+'menu.profile' => 'Profil',
+'menu.time' => 'Timpul',
+// TODO: Translate the following:
+// 'menu.expenses' => 'Expenses',
+'menu.reports' => 'Rapoarte',
+// TODO: Translate the following:
+// 'menu.charts' => 'Charts',
+'menu.projects' => 'Proiecte',
+// TODO: Translate the following:
+// 'menu.tasks' => 'Tasks',
+// 'menu.users' => 'Users',
+'menu.teams' => 'Echipe',
+// TODO: Translate the following:
+// 'menu.export' => 'Export',
+'menu.clients' => 'Clienti',
+// TODO: Translate the following:
+// 'menu.options' => 'Options',
 
-// error strings
+// Footer - strings on the bottom of most pages.
+// TODO: Translate the following:
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+// 'footer.credits' => 'Credits',
+// 'footer.license' => 'License',
+// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+                                  // This is a link to a webpage that describes how to contribute to the project.
+
+// Error messages.
+// TODO: Translate the following:
+// 'error.access_denied' => 'Access denied.',
+// 'error.sys' => 'System error.',
 'error.db' => 'eroare baza de date',
 // Note to translators: the string below must be translated 
 // 'error.field' => 'incorrect "{0}" data',
