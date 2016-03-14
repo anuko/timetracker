@@ -68,9 +68,8 @@ if ($request->getMethod() == 'POST') {
     if ($res) {
       header('Location: cf_custom_fields.php');
       exit();
-    } else {
+    } else
       $errors->add($i18n->getKey('error.db'));
-    }
   }
 }
 

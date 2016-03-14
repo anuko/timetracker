@@ -74,11 +74,11 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getK
 
 if ($request->getMethod() == 'POST') {
   if ($request->getParameter('btn_save')) {
-  	// Validate user input.
+    // Validate user input.
     if (!ttValidString($cl_team_name, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
     if (!ttValidString($cl_manager_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_name'));
     if (!ttValidString($cl_manager_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_login'));
-  	if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
+    if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
       if (!ttValidString($cl_password1)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
       if (!ttValidString($cl_password2)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
       if ($cl_password1 !== $cl_password2)

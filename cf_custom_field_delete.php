@@ -41,20 +41,19 @@ $id = $request->getParameter('id');
 $form = new Form('fieldDeleteForm');
 
 if ($request->getMethod() == 'POST') {
-  if ($request->getParameter('btn_delete'))  {
-  	// Delete button pressed.
-  	$res = CustomFields::deleteField($id);
+  if ($request->getParameter('btn_delete')) {
+    // Delete button pressed.
+    $res = CustomFields::deleteField($id);
     if ($res) {
       header('Location: cf_custom_fields.php');
       exit();
-    } else {
+    } else
       $errors->add($i18n->getKey('error.db'));
-    }
   }
   if ($request->getParameter('btn_cancel')) {
-   	// Cancel button pressed.
-  	header('Location: cf_custom_fields.php');
-  	exit();
+    // Cancel button pressed.
+    header('Location: cf_custom_fields.php');
+    exit();
   }
 } else {
   $field = CustomFields::getField($id);	
