@@ -143,12 +143,13 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     // Build a client list out of active clients. Use only clients that are relevant to user.
     // Also trim their associated project list to only assigned projects (to user).
     foreach($active_clients as $client) {
-  	  $projects_assigned_to_client = explode(',', $client['projects']);
-  	  $intersection = array_intersect($projects_assigned_to_client, $projects_assigned_to_user);
-  	  if ($intersection) {
-  	    $client['projects'] = implode(',', $intersection);
-  	    $client_list[] = $client;
-  	  }
+      $projects_assigned_to_client = explode(',', $client['projects']);
+      if (is_array($projects_assigned_to_client) && is_array($projects_assigned_to_user))
+        $intersection = array_intersect($projects_assigned_to_client, $projects_assigned_to_user);
+      if ($intersection) {
+        $client['projects'] = implode(',', $intersection);
+        $client_list[] = $client;
+      }
     }
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
@@ -347,3 +348,4 @@ $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('title', $i18n->getKey('title.edit_time_record'));
 $smarty->assign('content_page_name', 'mobile/time_edit.tpl');
 $smarty->display('mobile/index.tpl');
+?>
