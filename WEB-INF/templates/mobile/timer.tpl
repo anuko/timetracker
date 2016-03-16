@@ -158,7 +158,7 @@ function get_time() {
 }
 </style>
 
-<span id="hour">00</span><span id="separator">:</span><span id="min">00</span><!--:<span id="sec">00</span>-->
+<p><span id="hour">00</span><span id="separator">:</span><span id="min">00</span>
 
 
 <script>

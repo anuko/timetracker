@@ -164,8 +164,10 @@ $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); //
 $form->addInput(array('type'=>'hidden','name'=>'browser_time','value'=>''));  // User current time, which gets filled in on button click.
 $enable_start = $uncompleted ? false : true;
 $enable_stop = $uncompleted ? true : false;
-$form->addInput(array('type'=>'submit','name'=>'btn_start','onclick'=>'browser_time.value=get_time()','value'=>$i18n->getKey('label.start'),'enable'=>$enable_start));
-$form->addInput(array('type'=>'submit','name'=>'btn_stop','onclick'=>'browser_time.value=get_time()','value'=>$i18n->getKey('label.finish'),'enable'=>$enable_stop));
+if (!$uncompleted)
+  $form->addInput(array('type'=>'submit','name'=>'btn_start','onclick'=>'browser_time.value=get_time()','value'=>$i18n->getKey('label.start'),'enable'=>$enable_start));
+else
+  $form->addInput(array('type'=>'submit','name'=>'btn_stop','onclick'=>'browser_time.value=get_time()','value'=>$i18n->getKey('label.finish'),'enable'=>$enable_stop));
   
 // If we have custom fields - add controls for them.
 if ($custom_fields && $custom_fields->fields[0]) {
