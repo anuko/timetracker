@@ -492,7 +492,7 @@ class ttTimeHelper {
   static function getUncompleted($user_id) {
     $mdb2 = getConnection();
 
-    $sql = "select id from tt_log  
+    $sql = "select id, start from tt_log  
       where user_id = $user_id and start is not null and time_to_sec(duration) = 0 and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {

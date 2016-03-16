@@ -87,6 +87,9 @@ class Combobox extends FormElement {
 		   
 		if ($this->mStyle!="")
 		   $html .= " style=\"$this->mStyle\"";
+                
+                if (!$this->isEnable())
+		   $html .= " disabled";
 		   
 		$html .= ">\n";   
 		if (is_array($this->mOptionsEmpty) && (count($this->mOptionsEmpty) > 0))
@@ -112,3 +115,4 @@ class Combobox extends FormElement {
 		return $html;
 	}
 }
+?>
