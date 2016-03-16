@@ -61,9 +61,8 @@ if ($request->getMethod() == 'POST') {
       $field_id = CustomFields::getFieldIdForOption($cl_id);
       header("Location: cf_dropdown_options.php?field_id=$field_id");
       exit();
-    } else {
+    } else
       $errors->add($i18n->getKey('error.db'));
-    }
   }
 }
 

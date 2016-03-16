@@ -77,7 +77,7 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidFloat($cl_tax, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.tax'));
 		
   if ($errors->isEmpty()) {
-  	if ($request->getParameter('btn_save')) {
+    if ($request->getParameter('btn_save')) {
       $client = ttClientHelper::getClientByName($cl_name);
       if (($client && ($cl_id == $client['id'])) || !$client) {
         if (ttClientHelper::update(array(
@@ -93,7 +93,7 @@ if ($request->getMethod() == 'POST') {
           $errors->add($i18n->getKey('error.db'));	
       } else
         $errors->add($i18n->getKey('error.client_exists'));
-  	}
+    }
   	
     if ($request->getParameter('btn_copy')) {
       if (!ttClientHelper::getClientByName($cl_name)) {

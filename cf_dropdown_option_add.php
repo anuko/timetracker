@@ -55,13 +55,12 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidString($cl_option_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
 	  
   if ($errors->isEmpty()) {
-  	$res = CustomFields::insertOption($cl_field_id, $cl_option_name);
+    $res = CustomFields::insertOption($cl_field_id, $cl_option_name);
     if ($res) {
       header("Location: cf_dropdown_options.php?field_id=$cl_field_id");
       exit();
-    } else {
+    } else
       $errors->add($i18n->getKey('error.db'));
-    }
   }
 }
 

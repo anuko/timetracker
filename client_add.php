@@ -47,7 +47,7 @@ if ($request->getMethod() == 'POST') {
 } else {
   // Do not assign all projects to a new client by default. This should help to reduce clutter.
   // foreach ($projects as $project_item)
-  //    $cl_projects[] = $project_item['id'];
+  //   $cl_projects[] = $project_item['id'];
 }
 
 $form = new Form('clientForm');

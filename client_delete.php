@@ -43,10 +43,8 @@ $client_to_delete = $client['name'];
 	
 $form = new Form('clientDeleteForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$id));
-$form->addInput(array('type'=>'combobox',
-    'name'=>'delete_client_entries',
-    'data'=>array('0'=>$i18n->getKey('dropdown.do_not_delete'),'1'=>$i18n->getKey('dropdown.delete')),
-));
+$form->addInput(array('type'=>'combobox','name'=>'delete_client_entries',
+  'data'=>array('0'=>$i18n->getKey('dropdown.do_not_delete'),'1'=>$i18n->getKey('dropdown.delete'))));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
 
@@ -63,8 +61,8 @@ if ($request->getMethod() == 'POST') {
       $errors->add($i18n->getKey('error.db'));
 
   if ($request->getParameter('btn_cancel')) {
-  	header('Location: clients.php');
-  	exit();
+    header('Location: clients.php');
+    exit();
   }
 } // post
 

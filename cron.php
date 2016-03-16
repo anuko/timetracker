@@ -48,10 +48,10 @@ $mdb2 = getConnection();
 $now = mktime();
 
 $sql = "select * from tt_cron where $now >= next 
-        and status = 1 and report_id is not null and email is not null";
+  and status = 1 and report_id is not null and email is not null";
 $res = $mdb2->query($sql);
 if (is_a($res, 'PEAR_Error'))
-  exit;
+  exit();
 
 while ($val = $res->fetchRow()) {
   // We have jobs to execute in user language.

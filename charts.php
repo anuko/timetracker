@@ -88,10 +88,10 @@ if ($request->getMethod( )== 'POST') {
   // If chart interval changed - save it.
   $cl_interval = $request->getParameter('interval');
   if ($cl_interval) {
-  	// Save in the session
+    // Save in the session
     $_SESSION['chart_interval'] = $cl_interval;
     // and permanently.
-  	$sc = new ttSysConfig($user->id);
+    $sc = new ttSysConfig($user->id);
     $sc->setValue(SYSC_CHART_INTERVAL, $cl_interval);
   }
   // If chart type changed - save it.  
