@@ -28,55 +28,51 @@
 
 require_once('WEB-INF/config.php');
 require_once('WEB-INF/lib/common.lib.php');
-if (!require_once('MDB2.php')) {
-	die ("Unable to require MDB2 module. Please check it<br>\n");
-}
 require_once('initialize.php');
 import('ttUserHelper');
 import('ttTaskHelper');
 
 function setChange($sql) {
-	print "<pre>".$sql."</pre>";
-	$mdb2 = getConnection();
-	$affected = $mdb2->exec($sql);
-	if (is_a($affected, 'PEAR_Error')) {
-		print "error: ".$affected->getMessage()."<br>";
-	} else {
-	    print "successful update<br>\n";
-	}
+  print "<pre>".$sql."</pre>";
+  $mdb2 = getConnection();
+  $affected = $mdb2->exec($sql);
+  if (is_a($affected, 'PEAR_Error'))
+    print "error: ".$affected->getMessage()."<br>";
+  else
+    print "successful update<br>\n";
 }
 
 
-  if ($_POST) {
-  	print "Processing...<br>\n";
-
-  	if ($_POST["crstructure"]) {
-  		  $sqlQuery = join("\n", file("mysql.sql"));
-  		  $sqlQuery = str_replace("TYPE=MyISAM","",$sqlQuery);
-		  $queries  = explode(";",$sqlQuery);
-		  if (is_array($queries)) {
-			  foreach ($queries as $query) {
-				$query = trim($query);
-				if (strlen($query)>0) {
-					setChange($query);
-				}
-			  }
-		  }
-  	}
-
-    if ($_POST["convert5to7"]) {
-      setChange("alter table `activity_log` CHANGE al_comment al_comment BLOB");
-	  setChange("CREATE TABLE `sysconfig` (`sysc_id` int(11) unsigned NOT NULL auto_increment,`sysc_name` varchar(32) NOT NULL default '',`sysc_value` varchar(70) default NULL, PRIMARY KEY  (`sysc_id`), UNIQUE KEY `sysc_id` (`sysc_id`), UNIQUE KEY `sysc_name` (`sysc_name`))");
-	  setChange("alter table `companies` add c_locktime int(4) default -1");
-	  setChange("alter table `activity_log` add al_billable tinyint(4) default 0");
-	  setChange("alter table `sysconfig` drop INDEX `sysc_name`");
-	  setChange("alter table `sysconfig` add sysc_id_u int(4)");
-	  setChange("alter table `report_filter_set` add rfs_billable VARCHAR(10)");
-      setChange("ALTER TABLE clients MODIFY clnt_id int(11) NOT NULL AUTO_INCREMENT");
-      setChange("ALTER TABLE `users` ADD `u_show_pie` smallint(2) DEFAULT '1'");
-      setChange("alter table `users` ADD `u_pie_mode` smallint(2) DEFAULT '1'");
-      setChange("alter table users drop `u_aprojects`");
-  	}
+if ($_POST) {
+  print "Processing...<br>\n";
+  
+  if ($_POST["crstructure"]) {
+    $sqlQuery = join("\n", file("mysql.sql"));
+    $sqlQuery = str_replace("TYPE=MyISAM","",$sqlQuery);
+    $queries  = explode(";",$sqlQuery);
+    if (is_array($queries)) {
+      foreach ($queries as $query) {
+        $query = trim($query);
+        if (strlen($query)>0) {
+          setChange($query);
+        }
+      }
+    }
+  }
+  
+  if ($_POST["convert5to7"]) {
+    setChange("alter table `activity_log` CHANGE al_comment al_comment BLOB");
+    setChange("CREATE TABLE `sysconfig` (`sysc_id` int(11) unsigned NOT NULL auto_increment,`sysc_name` varchar(32) NOT NULL default '',`sysc_value` varchar(70) default NULL, PRIMARY KEY  (`sysc_id`), UNIQUE KEY `sysc_id` (`sysc_id`), UNIQUE KEY `sysc_name` (`sysc_name`))");
+    setChange("alter table `companies` add c_locktime int(4) default -1");
+    setChange("alter table `activity_log` add al_billable tinyint(4) default 0");
+    setChange("alter table `sysconfig` drop INDEX `sysc_name`");
+    setChange("alter table `sysconfig` add sysc_id_u int(4)");
+    setChange("alter table `report_filter_set` add rfs_billable VARCHAR(10)");
+    setChange("ALTER TABLE clients MODIFY clnt_id int(11) NOT NULL AUTO_INCREMENT");
+    setChange("ALTER TABLE `users` ADD `u_show_pie` smallint(2) DEFAULT '1'");
+    setChange("alter table `users` ADD `u_pie_mode` smallint(2) DEFAULT '1'");
+    setChange("alter table users drop `u_aprojects`");
+  }
 
   if ($_POST["convert7to133"]) {
     setChange("ALTER TABLE users ADD COLUMN u_lang VARCHAR(20) DEFAULT NULL");
@@ -174,24 +170,24 @@ function setChange($sql) {
     setChange("ALTER TABLE `users` modify u_active smallint(6) default '1'");
     setChange("drop index u_login_idx on users");
     setChange("create unique index u_login_idx on users(u_login, u_active)");
-  	setChange("ALTER TABLE companies MODIFY `c_lang` varchar(20) NOT NULL default 'en'");
-  	setChange("ALTER TABLE companies ADD COLUMN `c_date_format` varchar(20) NOT NULL default '%Y-%m-%d'");
-  	setChange("ALTER TABLE companies ADD COLUMN `c_time_format` varchar(20) NOT NULL default '%H:%M'");
+    setChange("ALTER TABLE companies MODIFY `c_lang` varchar(20) NOT NULL default 'en'");
+    setChange("ALTER TABLE companies ADD COLUMN `c_date_format` varchar(20) NOT NULL default '%Y-%m-%d'");
+    setChange("ALTER TABLE companies ADD COLUMN `c_time_format` varchar(20) NOT NULL default '%H:%M'");
     setChange("ALTER TABLE companies ADD COLUMN `c_week_start` smallint(2) NOT NULL DEFAULT '0'");
-  	setChange("ALTER TABLE clients MODIFY `clnt_status` smallint(6) default '1'");
+    setChange("ALTER TABLE clients MODIFY `clnt_status` smallint(6) default '1'");
     setChange("create unique index clnt_name_idx on clients(clnt_id_um, clnt_name, clnt_status)");
-  	setChange("ALTER TABLE projects modify p_status smallint(6) default '1'");
-  	setChange("update projects set p_status = NULL where p_status = 1000");
-  	setChange("drop index p_manager_idx on projects");
-  	setChange("create unique index p_name_idx on projects(p_manager_id, p_name, p_status)");
-  	setChange("ALTER TABLE activities modify a_status smallint(6) default '1'");
-  	setChange("update activities set a_status = NULL where a_status = 1000");
-  	setChange("drop index a_manager_idx on activities");
-  	setChange("create unique index a_name_idx on activities(a_manager_id, a_name, a_status)");
-  	setChange("RENAME TABLE companies TO teams");
-   	setChange("RENAME TABLE teams TO att_teams");
-  	setChange("ALTER TABLE att_teams CHANGE c_id id int(11) NOT NULL auto_increment");
-  	setChange("RENAME TABLE users TO att_users");
+    setChange("ALTER TABLE projects modify p_status smallint(6) default '1'");
+    setChange("update projects set p_status = NULL where p_status = 1000");
+    setChange("drop index p_manager_idx on projects");
+    setChange("create unique index p_name_idx on projects(p_manager_id, p_name, p_status)");
+    setChange("ALTER TABLE activities modify a_status smallint(6) default '1'");
+    setChange("update activities set a_status = NULL where a_status = 1000");
+    setChange("drop index a_manager_idx on activities");
+    setChange("create unique index a_name_idx on activities(a_manager_id, a_name, a_status)");
+    setChange("RENAME TABLE companies TO teams");
+    setChange("RENAME TABLE teams TO att_teams");
+    setChange("ALTER TABLE att_teams CHANGE c_id id int(11) NOT NULL auto_increment");
+    setChange("RENAME TABLE users TO att_users");
     setChange("update att_users set u_company_id = 0 where u_company_id is NULL");    
     setChange("ALTER TABLE att_users CHANGE u_company_id team_id int(11) NOT NULL");
     setChange("RENAME TABLE att_teams TO tt_teams");
@@ -204,13 +200,13 @@ function setChange($sql) {
     setChange("ALTER TABLE invoice_header ADD COLUMN `client_name` varchar(255) default NULL");
     setChange("ALTER TABLE invoice_header ADD COLUMN `client_addr` varchar(255) default NULL");
     setChange("ALTER TABLE report_filter_set ADD COLUMN `rfs_cb_cost` tinyint(4) default '0'");
-    setChange("ALTER TABLE activity_log DROP primary key");  	
-  	setChange("ALTER TABLE activity_log ADD COLUMN `id` bigint NOT NULL auto_increment primary key"); 
+    setChange("ALTER TABLE activity_log DROP primary key");
+    setChange("ALTER TABLE activity_log ADD COLUMN `id` bigint NOT NULL auto_increment primary key"); 
     setChange("CREATE TABLE `tt_custom_fields` (`id` int(11) NOT NULL auto_increment, `team_id` int(11) NOT NULL, `type` tinyint(4) NOT NULL default '0', `label` varchar(32) NOT NULL default '', PRIMARY KEY (`id`))");
     setChange("CREATE TABLE `tt_custom_field_options` (`id` int(11) NOT NULL auto_increment, `field_id` int(11) NOT NULL, `value` varchar(32) NOT NULL default '', PRIMARY KEY (`id`))");
     setChange("CREATE TABLE `tt_custom_field_log` (`id` bigint NOT NULL auto_increment, `al_id` bigint NOT NULL, `field_id` int(11) NOT NULL, `value` varchar(255) default NULL, PRIMARY KEY (`id`))");
-   	setChange("ALTER TABLE tt_users DROP u_level"); 
-  	setChange("ALTER TABLE tt_custom_fields ADD COLUMN `status` tinyint(4) default '1'"); 
+    setChange("ALTER TABLE tt_users DROP u_level");
+    setChange("ALTER TABLE tt_custom_fields ADD COLUMN `status` tinyint(4) default '1'");
     setChange("ALTER TABLE report_filter_set ADD COLUMN `rfs_cb_cf_1` tinyint(4) default '0'");
     setChange("ALTER TABLE tt_teams ADD COLUMN `plugins` varchar(255) default NULL");
     setChange("ALTER TABLE tt_teams MODIFY c_locktime int(4) default '0'");
@@ -370,7 +366,7 @@ function setChange($sql) {
     
   if ($_POST["convert1485to1579"]) {
     setChange("ALTER TABLE tt_fav_reports MODIFY id int(11) NOT NULL auto_increment");
-  	setChange("RENAME TABLE clients TO tt_clients");
+    setChange("RENAME TABLE clients TO tt_clients");
     setChange("ALTER TABLE tt_clients CHANGE clnt_id id int(11) NOT NULL AUTO_INCREMENT");
     setChange("ALTER TABLE tt_clients CHANGE clnt_status status tinyint(4) default '1'");
     setChange("ALTER TABLE tt_clients DROP clnt_id_um");  	
@@ -405,59 +401,59 @@ function setChange($sql) {
     setChange("ALTER TABLE tt_tasks CHANGE a_status status tinyint(4) default '1'");
     setChange("drop index a_name_idx on tt_tasks");
     setChange("create unique index task_idx on tt_tasks(team_id, name, status)");
-  	setChange("RENAME TABLE invoice_header TO tt_invoice_headers");
-  	setChange("ALTER TABLE tt_invoice_headers CHANGE ih_user_id user_id int(11) NOT NULL");
-  	setChange("ALTER TABLE tt_invoice_headers CHANGE ih_number number varchar(20) default NULL");
-  	setChange("ALTER TABLE tt_invoice_headers DROP ih_addr_your");
-  	setChange("ALTER TABLE tt_invoice_headers DROP ih_addr_cust");
-  	setChange("ALTER TABLE tt_invoice_headers CHANGE ih_comment comment varchar(255) default NULL");
-   	setChange("ALTER TABLE tt_invoice_headers CHANGE ih_tax tax float(6,2) default '0.00'");
-   	setChange("ALTER TABLE tt_invoice_headers CHANGE ih_discount discount float(6,2) default '0.00'");
-   	setChange("ALTER TABLE tt_invoice_headers CHANGE ih_fsubtotals subtotals tinyint(4) NOT NULL default '0'");
-   	setChange("ALTER TABLE tt_users DROP u_comanager");
-   	setChange("ALTER TABLE tt_tasks DROP a_manager_id");
-   	setChange("ALTER TABLE tt_projects DROP p_manager_id");
-   	setChange("ALTER TABLE tt_users DROP u_manager_id");
-   	setChange("ALTER TABLE activity_bind DROP ab_id");
-   	setChange("RENAME TABLE activity_bind TO tt_project_task_binds");
-   	setChange("ALTER TABLE tt_project_task_binds CHANGE ab_id_p project_id int(11) NOT NULL");
-   	setChange("ALTER TABLE tt_project_task_binds CHANGE ab_id_a task_id int(11) NOT NULL");
-   	setChange("RENAME TABLE user_bind TO tt_user_project_binds");
-   	setChange("ALTER TABLE tt_user_project_binds CHANGE ub_rate rate float(6,2) NOT NULL default '0.00'");
-   	setChange("ALTER TABLE tt_user_project_binds CHANGE ub_id_p project_id int(11) NOT NULL");
-   	setChange("ALTER TABLE tt_user_project_binds CHANGE ub_id_u user_id int(11) NOT NULL");
-   	setChange("ALTER TABLE tt_user_project_binds CHANGE ub_id id int(11) NOT NULL auto_increment");
-   	setChange("CREATE TABLE `tt_client_project_binds` (`client_id` int(11) NOT NULL, `project_id` int(11) NOT NULL)");
-   	setChange("ALTER TABLE tt_user_project_binds MODIFY rate float(6,2) default '0.00'");
-   	setChange("ALTER TABLE tt_clients MODIFY tax float(6,2) default '0.00'");
-   	setChange("RENAME TABLE activity_log TO tt_log");
-   	setChange("ALTER TABLE tt_log CHANGE al_timestamp timestamp timestamp NOT NULL");
-   	setChange("ALTER TABLE tt_log CHANGE al_user_id user_id int(11) NOT NULL");
-   	setChange("ALTER TABLE tt_log CHANGE al_date date date NOT NULL");
-   	setChange("drop index al_date_idx on tt_log");
-   	setChange("create index date_idx on tt_log(date)");
-   	setChange("ALTER TABLE tt_log CHANGE al_from start time default NULL");
-   	setChange("ALTER TABLE tt_log CHANGE al_duration duration time default NULL");
-   	setChange("ALTER TABLE tt_log CHANGE al_project_id project_id int(11) NOT NULL");
-   	setChange("ALTER TABLE tt_log MODIFY project_id int(11) default NULL");
-   	setChange("ALTER TABLE tt_log CHANGE al_activity_id task_id int(11) default NULL");
-   	setChange("ALTER TABLE tt_log CHANGE al_comment comment blob");
-   	setChange("ALTER TABLE tt_log CHANGE al_billable billable tinyint(4) default '0'");
-   	setChange("drop index al_user_id_idx on tt_log");
-   	setChange("drop index al_project_id_idx on tt_log");
-   	setChange("drop index al_activity_id_idx on tt_log");
-   	setChange("create index user_idx on tt_log(user_id)");
-   	setChange("create index project_idx on tt_log(project_id)");
-   	setChange("create index task_idx on tt_log(task_id)");
-   	setChange("ALTER TABLE tt_custom_field_log CHANGE al_id log_id bigint NOT NULL");
-   	setChange("RENAME TABLE sysconfig TO tt_config");
-   	setChange("ALTER TABLE tt_config DROP sysc_id");
-   	setChange("ALTER TABLE tt_config CHANGE sysc_id_u user_id int(11) NOT NULL");
-   	setChange("ALTER TABLE tt_config CHANGE sysc_name param_name varchar(32) NOT NULL");
-   	setChange("ALTER TABLE tt_config CHANGE sysc_value param_value varchar(80) default NULL");
-   	setChange("create unique index param_idx on tt_config(user_id, param_name)");
-   	setChange("ALTER TABLE tt_log ADD COLUMN invoice_id int(11) default NULL");
-   	setChange("ALTER TABLE tt_projects ADD COLUMN description varchar(255) default NULL");
+    setChange("RENAME TABLE invoice_header TO tt_invoice_headers");
+    setChange("ALTER TABLE tt_invoice_headers CHANGE ih_user_id user_id int(11) NOT NULL");
+    setChange("ALTER TABLE tt_invoice_headers CHANGE ih_number number varchar(20) default NULL");
+    setChange("ALTER TABLE tt_invoice_headers DROP ih_addr_your");
+    setChange("ALTER TABLE tt_invoice_headers DROP ih_addr_cust");
+    setChange("ALTER TABLE tt_invoice_headers CHANGE ih_comment comment varchar(255) default NULL");
+    setChange("ALTER TABLE tt_invoice_headers CHANGE ih_tax tax float(6,2) default '0.00'");
+    setChange("ALTER TABLE tt_invoice_headers CHANGE ih_discount discount float(6,2) default '0.00'");
+    setChange("ALTER TABLE tt_invoice_headers CHANGE ih_fsubtotals subtotals tinyint(4) NOT NULL default '0'");
+    setChange("ALTER TABLE tt_users DROP u_comanager");
+    setChange("ALTER TABLE tt_tasks DROP a_manager_id");
+    setChange("ALTER TABLE tt_projects DROP p_manager_id");
+    setChange("ALTER TABLE tt_users DROP u_manager_id");
+    setChange("ALTER TABLE activity_bind DROP ab_id");
+    setChange("RENAME TABLE activity_bind TO tt_project_task_binds");
+    setChange("ALTER TABLE tt_project_task_binds CHANGE ab_id_p project_id int(11) NOT NULL");
+    setChange("ALTER TABLE tt_project_task_binds CHANGE ab_id_a task_id int(11) NOT NULL");
+    setChange("RENAME TABLE user_bind TO tt_user_project_binds");
+    setChange("ALTER TABLE tt_user_project_binds CHANGE ub_rate rate float(6,2) NOT NULL default '0.00'");
+    setChange("ALTER TABLE tt_user_project_binds CHANGE ub_id_p project_id int(11) NOT NULL");
+    setChange("ALTER TABLE tt_user_project_binds CHANGE ub_id_u user_id int(11) NOT NULL");
+    setChange("ALTER TABLE tt_user_project_binds CHANGE ub_id id int(11) NOT NULL auto_increment");
+    setChange("CREATE TABLE `tt_client_project_binds` (`client_id` int(11) NOT NULL, `project_id` int(11) NOT NULL)");
+    setChange("ALTER TABLE tt_user_project_binds MODIFY rate float(6,2) default '0.00'");
+    setChange("ALTER TABLE tt_clients MODIFY tax float(6,2) default '0.00'");
+    setChange("RENAME TABLE activity_log TO tt_log");
+    setChange("ALTER TABLE tt_log CHANGE al_timestamp timestamp timestamp NOT NULL");
+    setChange("ALTER TABLE tt_log CHANGE al_user_id user_id int(11) NOT NULL");
+    setChange("ALTER TABLE tt_log CHANGE al_date date date NOT NULL");
+    setChange("drop index al_date_idx on tt_log");
+    setChange("create index date_idx on tt_log(date)");
+    setChange("ALTER TABLE tt_log CHANGE al_from start time default NULL");
+    setChange("ALTER TABLE tt_log CHANGE al_duration duration time default NULL");
+    setChange("ALTER TABLE tt_log CHANGE al_project_id project_id int(11) NOT NULL");
+    setChange("ALTER TABLE tt_log MODIFY project_id int(11) default NULL");
+    setChange("ALTER TABLE tt_log CHANGE al_activity_id task_id int(11) default NULL");
+    setChange("ALTER TABLE tt_log CHANGE al_comment comment blob");
+    setChange("ALTER TABLE tt_log CHANGE al_billable billable tinyint(4) default '0'");
+    setChange("drop index al_user_id_idx on tt_log");
+    setChange("drop index al_project_id_idx on tt_log");
+    setChange("drop index al_activity_id_idx on tt_log");
+    setChange("create index user_idx on tt_log(user_id)");
+    setChange("create index project_idx on tt_log(project_id)");
+    setChange("create index task_idx on tt_log(task_id)");
+    setChange("ALTER TABLE tt_custom_field_log CHANGE al_id log_id bigint NOT NULL");
+    setChange("RENAME TABLE sysconfig TO tt_config");
+    setChange("ALTER TABLE tt_config DROP sysc_id");
+    setChange("ALTER TABLE tt_config CHANGE sysc_id_u user_id int(11) NOT NULL");
+    setChange("ALTER TABLE tt_config CHANGE sysc_name param_name varchar(32) NOT NULL");
+    setChange("ALTER TABLE tt_config CHANGE sysc_value param_value varchar(80) default NULL");
+    setChange("create unique index param_idx on tt_config(user_id, param_name)");
+    setChange("ALTER TABLE tt_log ADD COLUMN invoice_id int(11) default NULL");
+    setChange("ALTER TABLE tt_projects ADD COLUMN description varchar(255) default NULL");
     setChange("CREATE TABLE `tt_invoices` (`id` int(11) NOT NULL auto_increment, `team_id` int(11) NOT NULL, `number` varchar(20) default NULL, `client_name` varchar(255) default NULL, `client_addr` varchar(255) default NULL, `comment` varchar(255) default NULL, `tax` float(6,2) default '0.00', `discount` float(6,2) default '0.00', PRIMARY KEY (`id`))");
     setChange("ALTER TABLE tt_invoices drop number");
     setChange("ALTER TABLE tt_invoices drop client_name");
@@ -493,25 +489,25 @@ function setChange($sql) {
   }
   
   if ($_POST["convert1600to1900"]) {
-  	setChange("DROP TABLE IF EXISTS tt_invoice_headers");
-  	setChange("ALTER TABLE tt_fav_reports ADD COLUMN `client_id` int(11) default NULL");
-  	setChange("ALTER TABLE tt_fav_reports ADD COLUMN `cf_1_option_id` int(11) default NULL");
-  	setChange("ALTER TABLE tt_fav_reports ADD COLUMN `show_client` tinyint(4) NOT NULL default '0'");
-  	setChange("ALTER TABLE tt_fav_reports ADD COLUMN `show_invoice` tinyint(4) NOT NULL default '0'");
-  	setChange("ALTER TABLE tt_fav_reports ADD COLUMN `group_by` varchar(20) default NULL");
-   	setChange("CREATE TABLE `tt_expense_items` (`id` bigint NOT NULL auto_increment, `date` date NOT NULL, `user_id` int(11) NOT NULL, `client_id` int(11) default NULL, `project_id` int(11) default NULL, `name` varchar(255) NOT NULL, `cost` decimal(10,2) default '0.00', `invoice_id` int(11) default NULL, PRIMARY KEY  (`id`))");
-   	setChange("create index date_idx on tt_expense_items(date)");
-   	setChange("create index user_idx on tt_expense_items(user_id)");
-   	setChange("create index client_idx on tt_expense_items(client_id)");
-   	setChange("create index project_idx on tt_expense_items(project_id)");
-   	setChange("create index invoice_idx on tt_expense_items(invoice_id)");
-   	setChange("ALTER TABLE tt_fav_reports DROP sort_by");
-   	setChange("ALTER TABLE tt_fav_reports DROP show_empty_days");
-   	setChange("ALTER TABLE tt_invoices DROP discount");
-   	setChange("ALTER TABLE tt_users ADD COLUMN `client_id` int(11) default NULL");
-   	setChange("ALTER TABLE tt_teams ADD COLUMN `decimal_mark` char(1) NOT NULL default '.'");
-   	setChange("ALTER TABLE tt_fav_reports ADD COLUMN `invoice` tinyint(4) default NULL");
-   	setChange("CREATE TABLE `tt_cron` (`id` int(11) NOT NULL auto_increment, `cron_spec` varchar(255) NOT NULL, `last` int(11) default NULL, `next` int(11) default NULL, `report_id` int(11) default NULL, `email` varchar(100) default NULL, `status` tinyint(4) default '1', PRIMARY KEY (`id`))");
+    setChange("DROP TABLE IF EXISTS tt_invoice_headers");
+    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `client_id` int(11) default NULL");
+    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `cf_1_option_id` int(11) default NULL");
+    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `show_client` tinyint(4) NOT NULL default '0'");
+    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `show_invoice` tinyint(4) NOT NULL default '0'");
+    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `group_by` varchar(20) default NULL");
+    setChange("CREATE TABLE `tt_expense_items` (`id` bigint NOT NULL auto_increment, `date` date NOT NULL, `user_id` int(11) NOT NULL, `client_id` int(11) default NULL, `project_id` int(11) default NULL, `name` varchar(255) NOT NULL, `cost` decimal(10,2) default '0.00', `invoice_id` int(11) default NULL, PRIMARY KEY  (`id`))");
+    setChange("create index date_idx on tt_expense_items(date)");
+    setChange("create index user_idx on tt_expense_items(user_id)");
+    setChange("create index client_idx on tt_expense_items(client_id)");
+    setChange("create index project_idx on tt_expense_items(project_id)");
+    setChange("create index invoice_idx on tt_expense_items(invoice_id)");
+    setChange("ALTER TABLE tt_fav_reports DROP sort_by");
+    setChange("ALTER TABLE tt_fav_reports DROP show_empty_days");
+    setChange("ALTER TABLE tt_invoices DROP discount");
+    setChange("ALTER TABLE tt_users ADD COLUMN `client_id` int(11) default NULL");
+    setChange("ALTER TABLE tt_teams ADD COLUMN `decimal_mark` char(1) NOT NULL default '.'");
+    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `invoice` tinyint(4) default NULL");
+    setChange("CREATE TABLE `tt_cron` (`id` int(11) NOT NULL auto_increment, `cron_spec` varchar(255) NOT NULL, `last` int(11) default NULL, `next` int(11) default NULL, `report_id` int(11) default NULL, `email` varchar(100) default NULL, `status` tinyint(4) default '1', PRIMARY KEY (`id`))");
     setChange("ALTER TABLE tt_cron ADD COLUMN `team_id` int(11) NOT NULL");
     setChange("create index client_idx on tt_client_project_binds(client_id)");
     setChange("create index project_idx on tt_client_project_binds(project_id)");
@@ -587,7 +583,7 @@ function setChange($sql) {
   if ($_POST["cleanup"]) {
      
     $mdb2 = getConnection();
-  	$inactive_teams = ttTeamHelper::getInactiveTeams();
+    $inactive_teams = ttTeamHelper::getInactiveTeams();
     
     $count = count($inactive_teams);
     print "$count inactive teams found...<br>\n";
@@ -624,49 +620,49 @@ function setChange($sql) {
 <form method="POST">
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
-<tr>
-	<td width="80%"><b>Create database structure (v1.9)</b>
-	<br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
-</tr>
+  <tr>
+    <td width="80%"><b>Create database structure (v1.9)</b>
+    <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
+  </tr>
 </table>
 
 <h2>Updates</h2>
 
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
-<tr valign="top">
-	<td>Update database structure (v0.5 to v0.7)</td><td><input type="submit" name="convert5to7" value="Update"></td>
-</tr>
-<tr valign="top">
-	<td>Update database structure (v0.7 to v1.3.3)</td>
-	<td><input type="submit" name="convert7to133" value="Update"><br><input type="submit" name="update_projects" value="Update projects"></td>
-</tr>
-<tr valign="top">
-  <td>Update database structure (v1.3.3 to v1.3.40)</td>
-  <td><input type="submit" name="convert133to1340" value="Update"><br><input type="submit" name="update_companies" value="Update companies"></td>
-</tr>
-<tr valign="top">
-  <td>Update database structure (v1.3.40 to v1.4.85)</td>
-  <td><input type="submit" name="convert1340to1485" value="Update"><br><input type="submit" name="update_to_team_id" value="Update team_id"></td>
-</tr>
-<tr valign="top">
-  <td>Update database structure (v1.4.85 to v1.5.79)</td>
-  <td><input type="submit" name="convert1485to1579" value="Update"></td>
-</tr>
-<tr valign="top">
-  <td>Update database structure (v1.5.79 to v1.6)</td>
-  <td><input type="submit" name="convert1579to1600" value="Update"><br><input type="submit" name="update_clients" value="Update clients"><br><input type="submit" name="update_custom_fields" value="Update custom fields"><br><input type="submit" name="update_tracking_mode" value="Update tracking mode"></td>
-</tr>
-<tr valign="top">
-  <td>Update database structure (v1.6 to v1.9)</td>
-  <td><input type="submit" name="convert1600to1900" value="Update"><br></td>
-</tr>
+  <tr valign="top">
+    <td>Update database structure (v0.5 to v0.7)</td><td><input type="submit" name="convert5to7" value="Update"></td>
+  </tr>
+  <tr valign="top">
+    <td>Update database structure (v0.7 to v1.3.3)</td>
+    <td><input type="submit" name="convert7to133" value="Update"><br><input type="submit" name="update_projects" value="Update projects"></td>
+  </tr>
+  <tr valign="top">
+    <td>Update database structure (v1.3.3 to v1.3.40)</td>
+    <td><input type="submit" name="convert133to1340" value="Update"><br><input type="submit" name="update_companies" value="Update companies"></td>
+  </tr>
+  <tr valign="top">
+    <td>Update database structure (v1.3.40 to v1.4.85)</td>
+    <td><input type="submit" name="convert1340to1485" value="Update"><br><input type="submit" name="update_to_team_id" value="Update team_id"></td>
+  </tr>
+  <tr valign="top">
+    <td>Update database structure (v1.4.85 to v1.5.79)</td>
+    <td><input type="submit" name="convert1485to1579" value="Update"></td>
+  </tr>
+  <tr valign="top">
+    <td>Update database structure (v1.5.79 to v1.6)</td>
+    <td><input type="submit" name="convert1579to1600" value="Update"><br><input type="submit" name="update_clients" value="Update clients"><br><input type="submit" name="update_custom_fields" value="Update custom fields"><br><input type="submit" name="update_tracking_mode" value="Update tracking mode"></td>
+  </tr>
+  <tr valign="top">
+    <td>Update database structure (v1.6 to v1.9)</td>
+    <td><input type="submit" name="convert1600to1900" value="Update"><br></td>
+  </tr>
 </table>
 
 <h2>DB Maintenance</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
-<tr>
-	<td width="80%">Clean up DB from inactive teams</td><td><input type="submit" name="cleanup" value="Clean up"></td>
-</tr>
+  <tr>
+    <td width="80%">Clean up DB from inactive teams</td><td><input type="submit" name="cleanup" value="Clean up"></td>
+  </tr>
 </table>
 
 </form>
