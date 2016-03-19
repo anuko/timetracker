@@ -9,13 +9,13 @@
         </tr>
         <tr>
           <td align="right">{$i18n.label.client_address}:</td>
-	      <td>{$forms.clientForm.address.control}</td>
-	    </tr>
-	    <tr>
-	      <td align="right">{$i18n.label.tax}, %:</td>
-	      <td>{$forms.clientForm.tax.control}&nbsp;(0{$user->decimal_mark}00)</td>
-	    </tr>
-	    <tr>
+          <td>{$forms.clientForm.address.control}</td>
+        </tr>
+        <tr>
+          <td align="right">{$i18n.label.tax}, %:</td>
+          <td>{$forms.clientForm.tax.control}&nbsp;(0{$user->decimal_mark}00)</td>
+        </tr>
+        <tr>
           <td align = "right">{$i18n.label.status}:</td>
           <td>{$forms.clientForm.status.control}</td>
         </tr>

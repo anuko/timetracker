@@ -66,16 +66,17 @@ $form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','s
 $form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
-$form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'datakeys'=>array('id','name'),'layout'=>'H','value'=>$cl_projects));
+if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+  $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'datakeys'=>array('id','name'),'layout'=>'H','value'=>$cl_projects));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
-	
+
 if ($request->getMethod() == 'POST') {
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.client_name'));
   if (!ttValidString($cl_address, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.client_address'));
   if (!ttValidFloat($cl_tax, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.tax'));
-		
+
   if ($errors->isEmpty()) {
     if ($request->getParameter('btn_save')) {
       $client = ttClientHelper::getClientByName($cl_name);
@@ -94,7 +95,7 @@ if ($request->getMethod() == 'POST') {
       } else
         $errors->add($i18n->getKey('error.client_exists'));
     }
-  	
+
     if ($request->getParameter('btn_copy')) {
       if (!ttClientHelper::getClientByName($cl_name)) {
         if (ttClientHelper::insert(array(
@@ -113,7 +114,7 @@ if ($request->getMethod() == 'POST') {
     }
   }
 } // post
-	
+
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.edit_client'));
 $smarty->assign('content_page_name', 'client_edit.tpl');
