@@ -48,7 +48,7 @@ if ($request->getMethod() == 'POST') {
   
     // Determine if it's okay to delete the record.
 
-  	// Determine lock date.
+    // Determine lock date.
     $lock_interval = $user->lock_interval;
     $lockdate = 0;
     if ($lock_interval > 0) {
@@ -72,8 +72,8 @@ if ($request->getMethod() == 'POST') {
     }
   }
   if ($request->getParameter('cancel_button')) { // Cancel button pressed.
-  	header('Location: expenses.php');
-  	exit();
+    header('Location: expenses.php');
+    exit();
   }
 }
 		
@@ -87,3 +87,4 @@ $smarty->assign('forms', array($form->getName() => $form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.delete_expense'));
 $smarty->assign('content_page_name', 'expense_delete.tpl');
 $smarty->display('index.tpl');
+
