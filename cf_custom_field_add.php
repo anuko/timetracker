@@ -43,7 +43,7 @@ if ($request->getMethod() == 'POST') {
   if (!$cl_required)
     $cl_required = 0;
 }
-	
+
 $form = new Form('fieldForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>''));
 $form->addInput(array('type'=>'combobox','name'=>'type',

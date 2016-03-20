@@ -91,7 +91,7 @@ if ($request->getMethod() == 'POST') {
           header('Location: clients.php');
           exit();
         } else
-          $errors->add($i18n->getKey('error.db'));	
+          $errors->add($i18n->getKey('error.db'));
       } else
         $errors->add($i18n->getKey('error.client_exists'));
     }

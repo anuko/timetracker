@@ -66,7 +66,7 @@ if ($request->getMethod() == 'POST') {
     $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
   }
 }
-	
+
 $smarty->assign('field', $field['label']);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.fieldDeleteForm.btn_cancel.focus()"');

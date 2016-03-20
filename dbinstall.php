@@ -45,7 +45,7 @@ function setChange($sql) {
 
 if ($_POST) {
   print "Processing...<br>\n";
-  
+
   if ($_POST["crstructure"]) {
     $sqlQuery = join("\n", file("mysql.sql"));
     $sqlQuery = str_replace("TYPE=MyISAM","",$sqlQuery);
@@ -59,7 +59,7 @@ if ($_POST) {
       }
     }
   }
-  
+
   if ($_POST["convert5to7"]) {
     setChange("alter table `activity_log` CHANGE al_comment al_comment BLOB");
     setChange("CREATE TABLE `sysconfig` (`sysc_id` int(11) unsigned NOT NULL auto_increment,`sysc_name` varchar(32) NOT NULL default '',`sysc_value` varchar(70) default NULL, PRIMARY KEY  (`sysc_id`), UNIQUE KEY `sysc_id` (`sysc_id`), UNIQUE KEY `sysc_name` (`sysc_name`))");
@@ -99,40 +99,39 @@ if ($_POST) {
     }
     // Iterate through projects.
     while ($val = $res->fetchRow()) {
-    	$project_id = $val['p_id'];
-    	
-        // Get activity binds for project (old way).
-        // $sql = "select ab_id_a from activity_bind where ab_id_p = $project_id";
-        $sql = "select ab_id_a, a_id, a_name from activity_bind
-          inner join activities on (ab_id_a = a_id)
-          where ab_id_p = $project_id
-          order by a_name";
-        
-        $result = $mdb2->query($sql);
-        if (is_a($result, 'PEAR_Error')) {
-          die($result->getMessage());
-        }
-        $activity_arr = array();
-        while ($value = $result->fetchRow()) {
-          $activity_arr[] = $value['ab_id_a'];	
-        }
-        $a_comma_separated = implode(",", $activity_arr); // This is a comma-separated list of associated activity ids.
-             
-        // Re-bind the project to activities (new way).
-        $sql = "update projects set p_activities = ".$mdb2->quote($a_comma_separated)." where p_id = $project_id";
-        $affected = $mdb2->exec($sql);
-        if (is_a($affected, 'PEAR_Error')) {
-          die($affected->getMessage());
-        }
+      $project_id = $val['p_id'];
+
+      // Get activity binds for project (old way).
+      // $sql = "select ab_id_a from activity_bind where ab_id_p = $project_id";
+      $sql = "select ab_id_a, a_id, a_name from activity_bind
+        inner join activities on (ab_id_a = a_id)
+        where ab_id_p = $project_id order by a_name";
+
+      $result = $mdb2->query($sql);
+      if (is_a($result, 'PEAR_Error')) {
+        die($result->getMessage());
+      }
+      $activity_arr = array();
+      while ($value = $result->fetchRow()) {
+        $activity_arr[] = $value['ab_id_a'];
+      }
+      $a_comma_separated = implode(",", $activity_arr); // This is a comma-separated list of associated activity ids.
+
+      // Re-bind the project to activities (new way).
+      $sql = "update projects set p_activities = ".$mdb2->quote($a_comma_separated)." where p_id = $project_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) {
+        die($affected->getMessage());
+      }
     }
   }
-  
+
   if ($_POST["convert133to1340"]) {
     setChange("ALTER TABLE companies ADD COLUMN c_show_pie smallint(2) DEFAULT 1");
     setChange("ALTER TABLE companies ADD COLUMN c_pie_mode smallint(2) DEFAULT 1");
     setChange("ALTER TABLE companies ADD COLUMN c_lang varchar(20) default NULL");
   }
-  
+
   // The update_companies function sets up c_show_pie, c_pie_mode, and c_lang
   // fields in the companies table from the corresponding manager fields. 
   if ($_POST["update_companies"]) {
@@ -150,22 +149,22 @@ if ($_POST) {
       $show_pie = $val['u_show_pie'];
       $pie_mode = $val['u_pie_mode'];
       $lang = $val['u_lang'];
-      
+
       $sql = "update companies set
         c_show_pie = $show_pie, c_pie_mode = $pie_mode, c_lang = ".$mdb2->quote($lang).
         " where c_id = $company_id";
-      
+
       $result = $mdb2->query($sql);
       if (is_a($result, 'PEAR_Error')) {
         die($result->getMessage());
       }
     }
   }
-    
+
   if ($_POST["convert1340to1485"]) {
     setChange("ALTER TABLE users DROP u_show_pie");
     setChange("ALTER TABLE users DROP u_pie_mode");
-    setChange("ALTER TABLE users DROP u_lang");  
+    setChange("ALTER TABLE users DROP u_lang");
     setChange("ALTER TABLE `users` modify u_login varchar(100) NOT NULL");
     setChange("ALTER TABLE `users` modify u_active smallint(6) default '1'");
     setChange("drop index u_login_idx on users");
@@ -188,7 +187,7 @@ if ($_POST) {
     setChange("RENAME TABLE teams TO att_teams");
     setChange("ALTER TABLE att_teams CHANGE c_id id int(11) NOT NULL auto_increment");
     setChange("RENAME TABLE users TO att_users");
-    setChange("update att_users set u_company_id = 0 where u_company_id is NULL");    
+    setChange("update att_users set u_company_id = 0 where u_company_id is NULL");
     setChange("ALTER TABLE att_users CHANGE u_company_id team_id int(11) NOT NULL");
     setChange("RENAME TABLE att_teams TO tt_teams");
     setChange("RENAME TABLE att_users TO tt_users");
@@ -247,7 +246,7 @@ if ($_POST) {
     setChange("ALTER TABLE tt_users CHANGE u_id id int(11) NOT NULL auto_increment");
     setChange("ALTER TABLE tt_users CHANGE u_timestamp timestamp timestamp NOT NULL");
     setChange("ALTER TABLE tt_users CHANGE u_login login varchar(50) NOT NULL");
-    setChange("drop index u_login_idx on tt_users");  
+    setChange("drop index u_login_idx on tt_users");
     setChange("create unique index login_idx on tt_users(login, u_active)");
     setChange("ALTER TABLE tt_users CHANGE u_password password varchar(50) default NULL");
     setChange("ALTER TABLE tt_users CHANGE u_name name varchar(100) default NULL");
@@ -263,14 +262,14 @@ if ($_POST) {
     setChange("ALTER TABLE user_bind CHANGE ub_checked status tinyint(4) default '1'");
     setChange("ALTER TABLE activities ADD COLUMN team_id int(11) NOT NULL");
     setChange("ALTER TABLE clients ADD COLUMN team_id int(11) NOT NULL");
-    setChange("ALTER TABLE projects ADD COLUMN team_id int(11) NOT NULL");			
+    setChange("ALTER TABLE projects ADD COLUMN team_id int(11) NOT NULL");
   }
-  
+
   // The update_to_team_id function sets team_id field projects, activities, and clients tables.
   if ($_POST["update_to_team_id"]) {
     $mdb2 = getConnection();
-    
-    // Update projects.   
+
+    // Update projects.
     $sql = "select p_id, p_manager_id from projects where team_id = 0 limit 1000";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) {
@@ -281,7 +280,7 @@ if ($_POST) {
     while ($val = $res->fetchRow()) {
       $project_id = $val['p_id'];
       $manager_id = $val['p_manager_id'];
-      
+
       $sql = "select team_id from tt_users where id = $manager_id";
       $res2 = $mdb2->query($sql);
       if (is_a($res2, 'PEAR_Error')) {
@@ -289,7 +288,7 @@ if ($_POST) {
       }
       $val2 = $res2->fetchRow();
       $team_id = $val2['team_id'];
-      
+
       if ($team_id) {
         $sql = "update projects set team_id = $team_id where p_id = $project_id";
         $affected = $mdb2->exec($sql);
@@ -300,8 +299,8 @@ if ($_POST) {
       }
     }
     print "Updated $projects_updated projects...<br>\n";
-    
-    // Update tasks.   
+
+    // Update tasks.
     $sql = "select a_id, a_manager_id from activities where team_id = 0 limit 1000";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) {
@@ -312,7 +311,7 @@ if ($_POST) {
     while ($val = $res->fetchRow()) {
       $task_id = $val['a_id'];
       $manager_id = $val['a_manager_id'];
-      
+
       $sql = "select team_id from tt_users where id = $manager_id";
       $res2 = $mdb2->query($sql);
       if (is_a($res2, 'PEAR_Error')) {
@@ -320,19 +319,19 @@ if ($_POST) {
       }
       $val2 = $res2->fetchRow();
       $team_id = $val2['team_id'];
-      
+
       if ($team_id) {
         $sql = "update activities set team_id = $team_id where a_id = $task_id";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error')) {
           die($affected->getMessage());
         }
-        $tasks_updated += $affected;	
+        $tasks_updated += $affected;
       }
     }
     print "Updated $tasks_updated tasks...<br>\n";
-    
-    // Update clients.   
+
+    // Update clients.
     $sql = "select clnt_id, clnt_id_um from clients where team_id = 0 limit 1000";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) {
@@ -343,7 +342,7 @@ if ($_POST) {
     while ($val = $res->fetchRow()) {
       $client_id = $val['clnt_id'];
       $manager_id = $val['clnt_id_um'];
-      
+
       $sql = "select team_id from tt_users where id = $manager_id";
       $res2 = $mdb2->query($sql);
       if (is_a($res2, 'PEAR_Error')) {
@@ -351,28 +350,28 @@ if ($_POST) {
       }
       $val2 = $res2->fetchRow();
       $team_id = $val2['team_id'];
-      
+
       if ($team_id) {
         $sql = "update clients set team_id = $team_id where clnt_id = $client_id";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error')) {
           die($affected->getMessage());
         }
-        $clients_updated += $affected;	
+        $clients_updated += $affected;
       }
     }
     print "Updated $clients_updated clients...<br>\n";
   }
-    
+
   if ($_POST["convert1485to1579"]) {
     setChange("ALTER TABLE tt_fav_reports MODIFY id int(11) NOT NULL auto_increment");
     setChange("RENAME TABLE clients TO tt_clients");
     setChange("ALTER TABLE tt_clients CHANGE clnt_id id int(11) NOT NULL AUTO_INCREMENT");
     setChange("ALTER TABLE tt_clients CHANGE clnt_status status tinyint(4) default '1'");
-    setChange("ALTER TABLE tt_clients DROP clnt_id_um");  	
+    setChange("ALTER TABLE tt_clients DROP clnt_id_um");
     setChange("ALTER TABLE tt_clients CHANGE clnt_name name varchar(80) NOT NULL");
     setChange("drop index clnt_name_idx on tt_clients");
-    setChange("drop index client_name_idx on tt_clients");   
+    setChange("drop index client_name_idx on tt_clients");
     setChange("create unique index client_name_idx on tt_clients(team_id, name, status)");
     setChange("ALTER TABLE tt_teams ADD COLUMN `timestamp` timestamp NOT NULL");
     setChange("ALTER TABLE tt_clients CHANGE clnt_addr_cust address varchar(255) default NULL");
@@ -459,7 +458,7 @@ if ($_POST) {
     setChange("ALTER TABLE tt_invoices drop client_name");
     setChange("ALTER TABLE tt_invoices drop client_addr");
     setChange("ALTER TABLE tt_invoices drop comment");
-    setChange("ALTER TABLE tt_invoices drop tax");    
+    setChange("ALTER TABLE tt_invoices drop tax");
     setChange("ALTER TABLE tt_invoices ADD COLUMN name varchar(80) NOT NULL");
     setChange("ALTER TABLE tt_invoices ADD COLUMN client_id int(11) NOT NULL");
     setChange("ALTER TABLE tt_invoices ADD COLUMN start_date date NOT NULL");
@@ -470,7 +469,7 @@ if ($_POST) {
     setChange("create index client_idx on tt_log(client_id)");
     setChange("create index invoice_idx on tt_log(invoice_id)");
   }
-  
+
   if ($_POST["convert1579to1600"]) {
     setChange("ALTER TABLE tt_invoices ADD COLUMN date date NOT NULL");
     setChange("ALTER TABLE tt_teams ADD COLUMN custom_logo tinyint(4) default '0'");
@@ -487,7 +486,7 @@ if ($_POST) {
     setChange("ALTER TABLE tt_invoices DROP start_date");
     setChange("ALTER TABLE tt_invoices DROP end_date");
   }
-  
+
   if ($_POST["convert1600to1900"]) {
     setChange("DROP TABLE IF EXISTS tt_invoice_headers");
     setChange("ALTER TABLE tt_fav_reports ADD COLUMN `client_id` int(11) default NULL");
@@ -517,8 +516,8 @@ if ($_POST) {
     setChange("ALTER TABLE tt_invoices ADD COLUMN status tinyint(4) default '1'");
     setChange("DROP INDEX name_idx on tt_invoices");
     setChange("create unique index name_idx on tt_invoices(team_id, name, status)");
-  } 	
-   
+  }
+
   // The update_clients function updates projects field in tt_clients table.
   if ($_POST["update_clients"]) {
     $mdb2 = getConnection();
@@ -527,37 +526,37 @@ if ($_POST) {
     if (is_a($res, 'PEAR_Error')) {
       die($res->getMessage());
     }
-    
+
     $clients_updated = 0;
     // Iterate through clients.
     while ($val = $res->fetchRow()) {
       $client_id = $val['id'];
-      
+
       // Get projects binds for client.
       $sql = "select cpb.project_id from tt_client_project_binds cpb
         left join tt_projects p on (p.id = cpb.project_id)
         where cpb.client_id = $client_id order by p.name";
-      
+
       $result = $mdb2->query($sql);
       if (is_a($result, 'PEAR_Error'))
         die($result->getMessage());
-      
+
       $project_arr = array();
       while ($value = $result->fetchRow()) {
         $project_arr[] = $value['project_id'];	
       }
       $comma_separated = implode(',', $project_arr); // This is a comma-separated list of associated project ids.
-      
+
       // Update the projects field.
       $sql = "update tt_clients set projects = ".$mdb2->quote($comma_separated)." where id = $client_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         die($affected->getMessage());
-      $clients_updated += $affected;	
+      $clients_updated += $affected;
     }
     print "Updated $clients_updated clients...<br>\n";
   }
-  
+
   // The update_custom_fields function updates option_id field field in tt_custom_field_log table.
   if ($_POST['update_custom_fields']) {
     $mdb2 = getConnection();
@@ -565,7 +564,7 @@ if ($_POST) {
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       die($affected->getMessage());
-    
+
     print "Updated $affected custom fields...<br>\n";
   }
 
@@ -576,19 +575,19 @@ if ($_POST) {
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       die($affected->getMessage());
-    
+
     print "Updated $affected teams...<br>\n";
   }
 
   if ($_POST["cleanup"]) {
-     
+
     $mdb2 = getConnection();
     $inactive_teams = ttTeamHelper::getInactiveTeams();
-    
+
     $count = count($inactive_teams);
     print "$count inactive teams found...<br>\n";
     for ($i = 0; $i < $count; $i++) {
-      print "  deleting team ".$inactive_teams[$i]."<br>\n";    	
+      print "  deleting team ".$inactive_teams[$i]."<br>\n";
       $res = ttTeamHelper::delete($inactive_teams[$i]);
     }
 
@@ -596,21 +595,21 @@ if ($_POST) {
     setChange("OPTIMIZE TABLE tt_clients");
     setChange("OPTIMIZE TABLE tt_config");
     setChange("OPTIMIZE TABLE tt_custom_field_log");
-    setChange("OPTIMIZE TABLE tt_custom_field_options");   
+    setChange("OPTIMIZE TABLE tt_custom_field_options");
     setChange("OPTIMIZE TABLE tt_custom_fields"); 
     setChange("OPTIMIZE TABLE tt_expense_items");
     setChange("OPTIMIZE TABLE tt_fav_reports");
-    setChange("OPTIMIZE TABLE tt_invoices");    
+    setChange("OPTIMIZE TABLE tt_invoices");
     setChange("OPTIMIZE TABLE tt_log");
     setChange("OPTIMIZE TABLE tt_project_task_binds");
-    setChange("OPTIMIZE TABLE tt_projects");            
+    setChange("OPTIMIZE TABLE tt_projects");
     setChange("OPTIMIZE TABLE tt_tasks");
     setChange("OPTIMIZE TABLE tt_teams");
     setChange("OPTIMIZE TABLE tt_tmp_refs");
-    setChange("OPTIMIZE TABLE tt_user_project_binds");    
+    setChange("OPTIMIZE TABLE tt_user_project_binds");
     setChange("OPTIMIZE TABLE tt_users");
   }
-  
+
   print "done.<br>\n";
 }
 ?>

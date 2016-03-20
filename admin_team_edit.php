@@ -39,7 +39,7 @@ if (!ttAccessCheck(right_administer_site)) {
 
 $team_id = $request->getParameter('id');
 $team_details = ttTeamHelper::getTeamDetails($team_id);	
-  
+
 if ($request->getMethod() == 'POST') {
   $cl_team_name = trim($request->getParameter('team_name'));
   $cl_manager_name = trim($request->getParameter('manager_name'));
@@ -58,7 +58,7 @@ if ($request->getMethod() == 'POST') {
   }
   $cl_manager_email = $team_details['manager_email'];
 }
-  
+
 $form = new Form('teamForm');
 $form->addInput(array('type'=>'text','maxlength'=>'80','name'=>'team_name','value'=>$cl_team_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_name','value'=>$cl_manager_name));
@@ -83,13 +83,13 @@ if ($request->getMethod() == 'POST') {
       if (!ttValidString($cl_password2)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
       if ($cl_password1 !== $cl_password2)
         $errors->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
-    }	
+    }
     if (!ttValidEmail($cl_manager_email, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
-      
+
     // New login must be unique.
     if ($cl_manager_login != $team_details['manager_login'])
       if (ttUserHelper::getUserByLogin($cl_manager_login)) $errors->add($i18n->getKey('error.user_exists'));
-        
+
     if ($errors->isEmpty()) {
       $update_result = ttTeamHelper::update($team_id, array('name'=>$cl_team_name));
       if ($update_result) {

@@ -57,7 +57,7 @@ $form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'layout'=>'H','datakeys'=>array('id','name'),'value'=>$cl_projects));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.add')));
-	
+
 if ($request->getMethod() == 'POST') {
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.client_name'));
@@ -76,12 +76,12 @@ if ($request->getMethod() == 'POST') {
         header('Location: clients.php');
         exit();
       } else
-        $errors->add($i18n->getKey('error.db'));	
+        $errors->add($i18n->getKey('error.db'));
      } else
        $errors->add($i18n->getKey('error.client_exists'));
   }
 } // post
-	
+
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.clientForm.name.focus()"');
 $smarty->assign('title', $i18n->getKey('title.add_client'));

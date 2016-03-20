@@ -59,7 +59,7 @@ if ($request->getMethod() == 'POST') {
     exit();
   }
 }
-	
+
 $smarty->assign('team_to_delete', $team_name);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.delete_team'));

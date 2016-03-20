@@ -55,11 +55,11 @@ if (is_a($res, 'PEAR_Error'))
 
 while ($val = $res->fetchRow()) {
   // We have jobs to execute in user language.
-  
+
   // Get favorite report details.
   $report = ttFavReportHelper::getReport($val['report_id']);
   if (!$report) continue;
-  
+
   // Recycle global $user and $i18n objects, as user settings and language are specific for each report.
   $user = new ttUser(null, $report['user_id']);
   $i18n->load($user->lang);
@@ -69,7 +69,7 @@ while ($val = $res->fetchRow()) {
     echo "Report ".$val['report_id']. " sent to ".$val['email']."<br>";
   else
     echo "Error while emailing report...<br>";
-    
+
   // Calculate next execution time.
   $next = tdCron::getNextOccurrence($val['cron_spec'], $now); 
 

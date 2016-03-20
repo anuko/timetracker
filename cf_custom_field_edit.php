@@ -48,10 +48,9 @@ if ($errors->isEmpty()) {
   $form->addInput(array('type'=>'checkbox','name'=>'required','data'=>1,'value'=>$field['required']));
   $form->addInput(array('type'=>'combobox','name'=>'type','value'=>$field['type'],
     'data'=>array(CustomFields::TYPE_TEXT=>$i18n->getKey('label.type_text'),
-                  CustomFields::TYPE_DROPDOWN=>$i18n->getKey('label.type_dropdown'))
-  ));
-  $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));	
-}    
+                  CustomFields::TYPE_DROPDOWN=>$i18n->getKey('label.type_dropdown'))));
+  $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+}
 
 if ($request->getMethod() == 'POST') {
   $cl_name = trim($request->getParameter('name'));
@@ -59,7 +58,7 @@ if ($request->getMethod() == 'POST') {
   $cl_required = $request->getParameter('required');
   if (!$cl_required)
     $cl_required = 0;
-  
+
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
 

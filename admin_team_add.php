@@ -46,7 +46,7 @@ if ($request->getMethod() == 'POST') {
   }
   $cl_manager_email = trim($request->getParameter('manager_email'));
 }
-  
+
 $form = new Form('teamForm');
 $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_name','value'=>$cl_manager_name));
@@ -68,23 +68,23 @@ if ($request->getMethod() == 'POST') {
     if (!ttValidString($cl_password2)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
     if ($cl_password1 !== $cl_password2)
       $errors->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
-  }	
+  }
   if (!ttValidEmail($cl_manager_email, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
-    
+
   if ($errors->isEmpty()) {
     if (!ttUserHelper::getUserByLogin($cl_manager_login)) {
       // Create a new team.
       if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
       $team_id = ttTeamHelper::insert(array('name'=>$cl_team_name,'currency'=>CURRENCY_DEFAULT));
       if ($team_id) {
-      // Team created, now create a team manager.
+        // Team created, now create a team manager.
         $user_id = ttUserHelper::insert(array(
-      	  'team_id' => $team_id,
-      	  'role' => ROLE_MANAGER,
+          'team_id' => $team_id,
+          'role' => ROLE_MANAGER,
           'name' => $cl_manager_name,
           'login' => $cl_manager_login,
           'password' => $cl_password1,
-      	  'email' => $cl_manager_email));
+          'email' => $cl_manager_email));
       }
       if ($team_id && $user_id) {
         header('Location: admin_teams.php');

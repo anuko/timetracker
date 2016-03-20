@@ -84,7 +84,7 @@ $_SESSION['chart_type'] = $cl_type;
 // Who do we draw charts for?
 $on_behalf_id = $request->getParameter('onBehalfUser', (isset($_SESSION['behalf_id'])? $_SESSION['behalf_id'] : $user->id));
 
-if ($request->getMethod( )== 'POST') {    
+if ($request->getMethod( )== 'POST') {
   // If chart interval changed - save it.
   $cl_interval = $request->getParameter('interval');
   if ($cl_interval) {
@@ -94,24 +94,24 @@ if ($request->getMethod( )== 'POST') {
     $sc = new ttSysConfig($user->id);
     $sc->setValue(SYSC_CHART_INTERVAL, $cl_interval);
   }
-  // If chart type changed - save it.  
+  // If chart type changed - save it.
   $cl_type = $request->getParameter('type');
   if ($cl_type) {
     // Save in the session
     $_SESSION['chart_type'] = $cl_type;
     // and permanently.
     $sc = new ttSysConfig($user->id);
-    $sc->setValue(SYSC_CHART_TYPE, $cl_type); 	
+    $sc->setValue(SYSC_CHART_TYPE, $cl_type);
   }
   // If user has changed - set behalf_id accordingly in the session.
   if ($request->getParameter('onBehalfUser')) {
     if($user->canManageTeam()) {
       unset($_SESSION['behalf_id']);
       unset($_SESSION['behalf_name']);
-      	
+
       if($on_behalf_id != $user->id) {
         $_SESSION['behalf_id'] = $on_behalf_id;
-      	$_SESSION['behalf_name'] = ttUserHelper::getUserName($on_behalf_id);      		
+        $_SESSION['behalf_name'] = ttUserHelper::getUserName($on_behalf_id);
       }
       header('Location: charts.php');
       exit();
@@ -164,7 +164,7 @@ if ($chart_selector) {
     $types[CHART_TASKS] = $i18n->getKey('dropdown.tasks');
   if (in_array('cl', explode(',', $user->plugins)))
     $types[CHART_CLIENTS] = $i18n->getKey('dropdown.clients');
-	
+
   // Add chart type dropdown.
   $chart_form->addInput(array('type' => 'combobox',
     'onchange' => 'if(this.form) this.form.submit();',
@@ -179,7 +179,7 @@ $chart_form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)
 
 // Get data for our chart.
 $totals = ttChartHelper::getTotals($on_behalf_id, $cl_type, $cl_date, $cl_interval);
-$smarty->assign('totals', $totals);   
+$smarty->assign('totals', $totals);
 
 // Prepare chart for drawing.
 /*
@@ -188,7 +188,7 @@ $smarty->assign('totals', $totals);
  * auto-calculated percentage markers around it. We print labels (to the side of the picture) ourselves,
  * using the same colors libchart is using. For labels printout, the $totals array (which is used for picture points)
  * is also passed to charts.tpl Smarty template.
- * 
+ *
  * To make all of the above possible with only one database call to obtain $totals we have to print the chart image
  * to a file here (see code below). Once the image is available as a .png file, the charts.tpl can render it.
  *

@@ -40,7 +40,7 @@ $id = (int)$request->getParameter('id');
 $client = ttClientHelper::getClient($id);
 
 $client_to_delete = $client['name'];
-	
+
 $form = new Form('clientDeleteForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$id));
 $form->addInput(array('type'=>'combobox','name'=>'delete_client_entries',

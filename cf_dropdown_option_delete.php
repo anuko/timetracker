@@ -58,7 +58,7 @@ if ($request->getMethod() == 'POST') {
     exit();
   }
 } else {
-  $option = CustomFields::getOptionName($cl_id);	
+  $option = CustomFields::getOptionName($cl_id);
   if (false === $option)
     $errors->add($i18n->getKey('error.db'));
 
@@ -68,7 +68,7 @@ if ($request->getMethod() == 'POST') {
     $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
   }
 }
-	
+
 $smarty->assign('option', $option);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.optionDeleteForm.btn_cancel.focus()"');
