@@ -69,8 +69,7 @@ if ($user->canManageTeam()) {
       'style'=>'width: 250px;',
       'value'=>$on_behalf_id,
       'data'=>$user_list,
-      'datakeys'=>array('id','name'),
-    ));
+      'datakeys'=>array('id','name')));
     $smarty->assign('on_behalf_control', 1);
   }
 }
@@ -85,8 +84,7 @@ if (MODE_TIME == $user->tracking_mode && in_array('cl', explode(',', $user->plug
       'value'=>$cl_client,
       'data'=>$active_clients,
       'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-    ));
+      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
@@ -114,11 +112,11 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     // Also trim their associated project list to only assigned projects (to user).
     foreach($active_clients as $client) {
       $projects_assigned_to_client = explode(',', $client['projects']);
-  	  $intersection = array_intersect($projects_assigned_to_client, $projects_assigned_to_user);
-  	  if ($intersection) {
-  	    $client['projects'] = implode(',', $intersection);
-  	    $client_list[] = $client;
-  	  }
+      $intersection = array_intersect($projects_assigned_to_client, $projects_assigned_to_user);
+      if ($intersection) {
+        $client['projects'] = implode(',', $intersection);
+        $client_list[] = $client;
+      }
     }
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
@@ -127,8 +125,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-    ));
+      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
   }
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'item_name','style'=>'width: 250px;','value'=>$cl_item_name));
@@ -152,11 +149,11 @@ if ($request->getMethod() == 'POST') {
     if (in_array('cl', explode(',', $user->plugins)) && in_array('cm', explode(',', $user->plugins)) && !$cl_client)
       $errors->add($i18n->getKey('error.client'));
     if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-      if (!$cl_project) $errors->add($i18n->getKey('error.project'));    	
+      if (!$cl_project) $errors->add($i18n->getKey('error.project'));
     }
     if (!ttValidString($cl_item_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.item'));
     if (!ttValidFloat($cl_cost)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.cost'));
-      
+
     // Prohibit creating entries in future.
     if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES)) {
       $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
@@ -164,11 +161,11 @@ if ($request->getMethod() == 'POST') {
         $errors->add($i18n->getKey('error.future_date'));
     }
     // Finished validating input data.
-    
+
     // Prohibit creating time entries in locked interval.
     if($lockdate && $selected_date->before($lockdate))
       $errors->add($i18n->getKey('error.period_locked'));
-    
+
     // Insert record.
     if ($errors->isEmpty()) {
       if (ttExpenseHelper::insert(array('date'=>$cl_date,'user_id'=>$user->getActiveUser(),
@@ -183,10 +180,10 @@ if ($request->getMethod() == 'POST') {
     if($user->canManageTeam()) {
       unset($_SESSION['behalf_id']);
       unset($_SESSION['behalf_name']);
-      	
+
       if($on_behalf_id != $user->id) {
         $_SESSION['behalf_id'] = $on_behalf_id;
-      	$_SESSION['behalf_name'] = ttUserHelper::getUserName($on_behalf_id);      		
+        $_SESSION['behalf_name'] = ttUserHelper::getUserName($on_behalf_id);
       }
       header('Location: expenses.php');
       exit();
