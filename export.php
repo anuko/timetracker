@@ -75,7 +75,7 @@ if ($request->getMethod() == 'POST') {
     exit;
   } else
     $errors->add($i18n->getKey('error.sys'));
-}
+} // POST
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.export'));

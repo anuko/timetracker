@@ -75,7 +75,7 @@ if ($request->getMethod() == 'POST') {
     header('Location: expenses.php');
     exit();
   }
-}
+} // POST
 
 $form = new Form('expenseItemForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));

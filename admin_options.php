@@ -62,7 +62,7 @@ if ($request->getMethod() == 'POST') {
     } else
       $errors->add($i18n->getKey('error.db'));
   }
-} // post
+} // POST
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.options'));

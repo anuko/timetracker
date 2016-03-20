@@ -64,7 +64,7 @@ if ($request->getMethod() == 'POST') {
     header('Location: clients.php');
     exit();
   }
-} // post
+} // POST
 
 $smarty->assign('client_to_delete', $client_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

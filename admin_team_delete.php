@@ -58,7 +58,7 @@ if ($request->getMethod() == 'POST') {
     header('Location: admin_teams.php');
     exit();
   }
-}
+} // POST
 
 $smarty->assign('team_to_delete', $team_name);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

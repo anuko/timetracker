@@ -98,8 +98,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-  ));
+    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
   // Dropdown for clients if the clients plugin is enabled.
   if (in_array('cl', explode(',', $user->plugins))) {
@@ -134,7 +133,7 @@ $form->addInput(array('type'=>'calendar','name'=>'date','highlight'=>'expenses',
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.submit')));
 
-// Determine lock date. Time entries earlier than lock date cannot be created or modified. 
+// Determine lock date. Time entries earlier than lock date cannot be created or modified.
 $lock_interval = $user->lock_interval;
 $lockdate = 0;
 if ($lock_interval > 0) {
