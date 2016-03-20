@@ -36,16 +36,16 @@ if (!ttAccessCheck(right_data_entry)) {
   header('Location: access_denied.php');
   exit();
 }
-  
+
 $cl_id = $request->getParameter('id');
 $expense_item = ttExpenseHelper::getItem($cl_id, $user->getActiveUser());
 
 // Prohibit deleting invoiced records.
 if ($expense_item['invoice_id']) die($i18n->getKey('error.sys'));
-  
+
 if ($request->getMethod() == 'POST') {
-  if ($request->getParameter('delete_button'))  {  // Delete button pressed.
-  
+  if ($request->getParameter('delete_button')) { // Delete button pressed.
+
     // Determine if it's okay to delete the record.
 
     // Determine lock date.
@@ -61,7 +61,7 @@ if ($request->getMethod() == 'POST') {
       if ($item_date->before($lockdate))
         $errors->add($i18n->getKey('error.period_locked'));
     }
-           
+
     if ($errors->isEmpty()) {
       // Mark the record as deleted.
       if (ttExpenseHelper::markDeleted($cl_id, $user->getActiveUser())) {
@@ -76,7 +76,7 @@ if ($request->getMethod() == 'POST') {
     exit();
   }
 }
-		
+
 $form = new Form('expenseItemForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 $form->addInput(array('type'=>'submit','name'=>'delete_button','value'=>$i18n->getKey('label.delete')));
@@ -87,4 +87,3 @@ $smarty->assign('forms', array($form->getName() => $form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.delete_expense'));
 $smarty->assign('content_page_name', 'expense_delete.tpl');
 $smarty->display('index.tpl');
-

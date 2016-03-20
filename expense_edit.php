@@ -37,7 +37,7 @@ if (!ttAccessCheck(right_data_entry)) {
   header('Location: access_denied.php');
   exit();
 }
-  
+
 $cl_id = $request->getParameter('id');
 
 // Get the expense item we are editing.
@@ -45,7 +45,7 @@ $expense_item = ttExpenseHelper::getItem($cl_id, $user->getActiveUser());
 
 // Prohibit editing invoiced items.
 if ($expense_item['invoice_id']) die($i18n->getKey('error.sys'));
-  
+
 $item_date = new DateAndTime(DB_DATEFORMAT, $expense_item['date']);
 
 // Initialize variables.
@@ -69,16 +69,15 @@ $form = new Form('expenseItemForm');
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
 if (MODE_TIME == $user->tracking_mode && in_array('cl', explode(',', $user->plugins))) {
-    $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
-    $form->addInput(array('type'=>'combobox',
-      'onchange'=>'fillProjectDropdown(this.value);',
-      'name'=>'client',
-      'style'=>'width: 250px;',
-      'value'=>$cl_client,
-      'data'=>$active_clients,
-      'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-    ));
+  $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
+  $form->addInput(array('type'=>'combobox',
+    'onchange'=>'fillProjectDropdown(this.value);',
+    'name'=>'client',
+    'style'=>'width: 250px;',
+    'value'=>$cl_client,
+    'data'=>$active_clients,
+    'datakeys'=>array('id', 'name'),
+    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
@@ -91,8 +90,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-  ));
+    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
   // Dropdown for clients if the clients plugin is enabled.
   if (in_array('cl', explode(',', $user->plugins))) {
@@ -104,12 +102,12 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     // Build a client list out of active clients. Use only clients that are relevant to user.
     // Also trim their associated project list to only assigned projects (to user).
     foreach($active_clients as $client) {
-  	  $projects_assigned_to_client = explode(',', $client['projects']);
-  	  $intersection = array_intersect($projects_assigned_to_client, $projects_assigned_to_user);
-  	  if ($intersection) {
+      $projects_assigned_to_client = explode(',', $client['projects']);
+      $intersection = array_intersect($projects_assigned_to_client, $projects_assigned_to_user);
+      if ($intersection) {
         $client['projects'] = implode(',', $intersection);
-  	    $client_list[] = $client;
-  	  }
+        $client_list[] = $client;
+      }
     }
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
@@ -118,8 +116,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-    ));
+      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
   }
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'item_name','style'=>'width: 250px;','value'=>$cl_item_name));
@@ -142,7 +139,7 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidString($cl_item_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.item'));
   if (!ttValidFloat($cl_cost)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.cost'));
   if (!ttValidDate($cl_date)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.date'));
-  
+
   // Determine lock date.
   $lock_interval = $user->lock_interval;
   $lockdate = 0;
@@ -153,20 +150,20 @@ if ($request->getMethod() == 'POST') {
 
   // This is a new date for the expense item.
   $new_date = new DateAndTime($user->date_format, $cl_date);
-  
+
   // Prohibit creating entries in future.
   if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES)) {
     $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
     if ($new_date->after($browser_today))
       $errors->add($i18n->getKey('error.future_date'));
   }
-  
+
   // Save record.
   if ($request->getParameter('btn_save')) {
     // We need to:
     // 1) Prohibit updating locked entries (that are in locked interval).
     // 2) Prohibit saving unlocked entries into locked interval.
-      
+
     // Now, step by step.
     // 1) Prohibit updating locked entries.
     if($lockdate && $item_date->before($lockdate))
@@ -174,7 +171,7 @@ if ($request->getMethod() == 'POST') {
     // 2) Prohibit saving completed unlocked entries into locked interval.
     if($errors->isEmpty() && $lockdate && $new_date->before($lockdate))
       $errors->add($i18n->getKey('error.period_locked'));        
-    
+
     // Now, an update.
     if ($errors->isEmpty()) {
       if (ttExpenseHelper::update(array('id'=>$cl_id,'date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getActiveUser(),
@@ -184,13 +181,13 @@ if ($request->getMethod() == 'POST') {
       }
     }
   }
-      
+
   // Save as new record.
   if ($request->getParameter('btn_copy')) {
     // We need to prohibit saving into locked interval.
     if($lockdate && $new_date->before($lockdate))
       $errors->add($i18n->getKey('error.period_locked'));
-    
+
     // Now, a new insert.
     if ($errors->isEmpty()) {
       if (ttExpenseHelper::insert(array('date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getActiveUser(),
@@ -201,7 +198,7 @@ if ($request->getMethod() == 'POST') {
         $errors->add($i18n->getKey('error.db'));
     }
   }
-  
+
   if ($request->getParameter('btn_delete')) {
     header("Location: expense_delete.php?id=$cl_id");
     exit();

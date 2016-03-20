@@ -1,4 +1,4 @@
 config.php
 WEB-INF/templates_c/*.php
-WEB-INF/lib/tcpdf/*
-
+WEB-INF/lib/tcpdf/
+nbproject/
