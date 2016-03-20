@@ -54,7 +54,7 @@ if ($request->getMethod() == 'POST') {
     if (ttInvoiceHelper::getInvoice($cl_invoice_id)) {
       if (ttInvoiceHelper::delete($cl_invoice_id, $request->getParameter('delete_invoice_entries'))) {
         header('Location: invoices.php');
-      	exit();
+        exit();
       } else
         $errors->add($i18n->getKey('error.db'));
     } else

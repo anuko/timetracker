@@ -54,9 +54,9 @@ foreach($invoice_items as $item)
 if ($tax_percent) {
   $tax_expenses = in_array('et', explode(',', $user->plugins));
   foreach($invoice_items as $item) {
-  	if ($item['type'] == 2 && !$tax_expenses)
-  	  continue;
-    $tax += round($item['cost'] * $tax_percent / 100, 2);	
+    if ($item['type'] == 2 && !$tax_expenses)
+      continue;
+    $tax += round($item['cost'] * $tax_percent / 100, 2);
   }
 }
 $total = $subtotal + $tax; 
@@ -67,7 +67,7 @@ $smarty->assign('total', $user->currency.' '.str_replace('.', $user->decimal_mar
 
 if ('.' != $user->decimal_mark) {
   foreach ($invoice_items as &$item)
-  	$item['cost'] = str_replace('.', $user->decimal_mark, $item['cost']);
+    $item['cost'] = str_replace('.', $user->decimal_mark, $item['cost']);
 }
 
 // Calculate colspan for invoice summary.

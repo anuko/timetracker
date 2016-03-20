@@ -40,9 +40,9 @@ $form = new Form('notificationsForm');
 
 if ($request->getMethod() == 'POST') {
   if ($request->getParameter('btn_add')) {
-  	// The Add button clicked. Redirect to notification_add.php page.
-  	header('Location: notification_add.php');
-	exit();
+    // The Add button clicked. Redirect to notification_add.php page.
+    header('Location: notification_add.php');
+    exit();
   }
 } else {
   $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));

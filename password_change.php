@@ -72,15 +72,14 @@ if ($request->getMethod() == 'POST') {
     $errors->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
 
   if ($errors->isEmpty()) {
-  	// Use the "limit" plugin if we have one. Ignore include errors.
+    // Use the "limit" plugin if we have one. Ignore include errors.
     // The "limit" plugin is not required for normal operation of Time Tracker.
     $cl_login = $user->login; // $cl_login is used in access_check.cpp.
     @include('plugins/limit/access_check.php');
-  	
-  	ttUserHelper::setPassword($user_id, $cl_password1);
+
+    ttUserHelper::setPassword($user_id, $cl_password1);
 
     if ($auth->doLogin($user->login, $cl_password1)) {
-
       setcookie('tt_login', $user->login, time() + COOKIE_EXPIRE, '/');
       header('Location: time.php');
       exit();

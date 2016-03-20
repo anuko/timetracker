@@ -47,7 +47,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getK
 
 if ($request->getMethod() == 'POST') {
   if ($request->getParameter('btn_delete')) {
-	if(ttNotificationHelper::get($cl_notification_id)) {
+    if(ttNotificationHelper::get($cl_notification_id)) {
       if (ttNotificationHelper::delete($cl_notification_id)) {
         header('Location: notifications.php');
         exit();
@@ -56,11 +56,11 @@ if ($request->getMethod() == 'POST') {
     } else
       $errors->add($i18n->getKey('error.db'));
   } else if ($request->getParameter('btn_cancel')) {
-  	header('Location: notifications.php');
-  	exit();
+    header('Location: notifications.php');
+    exit();
   }
-} // post
-	
+} // POST
+
 $smarty->assign('notification_to_delete', $notification_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.notificationDeleteForm.btn_cancel.focus()"');

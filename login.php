@@ -46,21 +46,21 @@ if ($request->getMethod() == 'POST') {
   // Validate user input.
   if (!ttValidString($cl_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
   if (!ttValidString($cl_password)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-  
+
   if ($errors->isEmpty()) {
-  	// Use the "limit" plugin if we have one. Ignore include errors.
+    // Use the "limit" plugin if we have one. Ignore include errors.
     // The "limit" plugin is not required for normal operation of Time Tracker.
     @include('plugins/limit/access_check.php');
-  	
+
     if ($auth->doLogin($cl_login, $cl_password)) {
       // Set current user date (as determined by user browser) into session.
       $current_user_date = $request->getParameter('browser_today', null);
       if ($current_user_date)
         $_SESSION['date'] = $current_user_date;
-          
+
       // Remember user login in a cookie.
       setcookie('tt_login', $cl_login, time() + COOKIE_EXPIRE, '/');
-      
+
       $user = new ttUser(null, $auth->getUserId());
       // Redirect, depending on user role.
       if ($user->isAdmin()) {
@@ -69,7 +69,7 @@ if ($request->getMethod() == 'POST') {
       }
       else if ($user->isClient()) {
         header('Location: reports.php');
-        exit();  	
+        exit();
       }
       else {
         header('Location: time.php');

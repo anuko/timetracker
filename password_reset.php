@@ -42,15 +42,15 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getK
 
 if ($request->getMethod() == 'POST') {
   $cl_login = $request->getParameter('login');
-  
+
   // Validate user input.
   if (!ttValidString($cl_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
 
   if ($errors->IsEmpty()) {
-  	if (!ttUserHelper::getUserByLogin($cl_login)) {
-  	  // User with a specified login was not found.
-  	  // In this case, if login looks like email, try finding user by email.
-  	  if (ttValidEmail($cl_login)) {
+    if (!ttUserHelper::getUserByLogin($cl_login)) {
+      // User with a specified login was not found.
+      // In this case, if login looks like email, try finding user by email.
+      if (ttValidEmail($cl_login)) {
         $login = ttUserHelper::getUserByEmail($cl_login);
         if ($login)
           $cl_login = $login;
@@ -58,12 +58,12 @@ if ($request->getMethod() == 'POST') {
           $errors->add($i18n->getKey('error.no_login'));
       } else
         $errors->add($i18n->getKey('error.no_login'));
-  	}
+    }
   }
-  
-  if ($errors->IsEmpty()) {  
+
+  if ($errors->IsEmpty()) {
     $user = new ttUser($cl_login); // Note: reusing $user from initialize.php here.
-    
+
     // Prepare and save a temporary reference for user.
     $temp_ref = md5(uniqid());
     ttUserHelper::saveTmpRef($temp_ref, $user->id);
@@ -71,10 +71,10 @@ if ($request->getMethod() == 'POST') {
     $user_i18n = null;
     if ($user->lang != $i18n->lang) {
       $user_i18n = new I18n();
-      $user_i18n->load($user->lang);	
+      $user_i18n->load($user->lang);
     } else
       $user_i18n = &$i18n;
-      
+
     // Where do we email to?
     $receiver = null;
     if ($user->email)
@@ -85,11 +85,11 @@ if ($request->getMethod() == 'POST') {
       else
         $errors->add($i18n->getKey('error.no_email')); 
     }
-    
+
     if ($receiver) {
       import('mail.Mailer');
       $sender = new Mailer();
-  	  $sender->setCharSet(CHARSET);
+      $sender->setCharSet(CHARSET);
       $sender->setSender(SENDER);
       $sender->setReceiver("$receiver");
       if ((!empty($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] !== 'off')) || ($_SERVER['SERVER_PORT'] == 443))
@@ -101,14 +101,14 @@ if ($request->getMethod() == 'POST') {
 
       $cl_subject = $user_i18n->getKey('form.reset_password.email_subject');
       if (APP_NAME)
-      	$pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/'.APP_NAME.'/password_change.php?ref='.$temp_ref;
+        $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/'.APP_NAME.'/password_change.php?ref='.$temp_ref;
       else
-      	$pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/password_change.php?ref='.$temp_ref;
-      
+        $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/password_change.php?ref='.$temp_ref;
+
       $sender->setSendType(MAIL_MODE);
       $res = $sender->send($cl_subject, sprintf($user_i18n->getKey('form.reset_password.email_body'), $pass_edit_url));
-  	  $smarty->assign('result_message', $res ? $i18n->getKey('form.reset_password.message') : $i18n->getKey('error.mail_send'));
-	}
+      $smarty->assign('result_message', $res ? $i18n->getKey('form.reset_password.message') : $i18n->getKey('error.mail_send'));
+    }
   }
 }
 

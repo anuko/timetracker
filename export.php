@@ -58,16 +58,16 @@ if ($request->getMethod() == 'POST') {
 
   $exportHelper = new ttExportHelper();
   if ($exportHelper->createDataFile($compress)) {
-  	header('Pragma: public'); // This is needed for IE8 to download files over https.
-  	header('Content-Type: '.$mime_type);
-  	header('Expires: '.gmdate('D, d M Y H:i:s').' GMT');
-  	header('Content-Disposition: attachment; filename="'.$filename.'"');
-  	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-  	header('Cache-Control: private', false);
-  	
+    header('Pragma: public'); // This is needed for IE8 to download files over https.
+    header('Content-Type: '.$mime_type);
+    header('Expires: '.gmdate('D, d M Y H:i:s').' GMT');
+    header('Content-Disposition: attachment; filename="'.$filename.'"');
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    header('Cache-Control: private', false);
+
     if ($file_pointer = fopen($exportHelper->getFileName(), 'r')) {
       while ($data = fread($file_pointer, 4096)) {
-      	echo $data;
+        echo $data;
       }
       fclose($file_pointer);
       unlink($exportHelper->getFileName());

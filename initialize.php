@@ -67,7 +67,7 @@ check_extension('mbstring');
 // If auth params are not defined (in config.php) - initialize with an empty array.
 if (!isset($GLOBALS['AUTH_MODULE_PARAMS']) || !is_array($GLOBALS['AUTH_MODULE_PARAMS']))
   $GLOBALS['AUTH_MODULE_PARAMS'] = array();
-  
+
 // Smarty initialization.
 import('smarty.Smarty');
 $smarty = new Smarty;
@@ -93,7 +93,7 @@ if (isset($_COOKIE['tt_PHPSESSID'])) {
 }
 
 // Start or resume PHP session.
-session_name('tt_PHPSESSID'); // "tt_" prefix is to avoid sharing session with other PHP apps that do not name session.  
+session_name('tt_PHPSESSID'); // "tt_" prefix is to avoid sharing session with other PHP apps that do not name session.
 @session_start();
 
 // Authorization.
@@ -173,11 +173,11 @@ $lang = $user->lang;
 if (!$lang) {
   if (defined('LANG_DEFAULT'))
     $lang = LANG_DEFAULT;
-  
+
   // If we still do not have the language get it from the browser.
   if (!$lang) {
     $lang = $i18n->getBrowserLanguage();
-   	 
+
     // Finally - English is the default.
     if (!$lang) {
       $lang = 'en';
@@ -196,8 +196,8 @@ $smarty->assign('i18n', $i18n->keys);
 $smarty->assign('errors', $errors);
 $smarty->assign('messages', $messages);
 
-// TODO: move this code out of here to the files that use it. 
-  
+// TODO: move this code out of here to the files that use it.
+
 // We use js/strftime.js to print dates in JavaScript (in DateField controls).
 // One of our date formats (%d.%m.%Y %a) prints a localized short weekday name (%a).
 // The init_js_date_locale function iniitializes Date.ext.locales array in js/strftime.js for our language

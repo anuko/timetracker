@@ -69,9 +69,9 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidEmail($cl_email)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
 
   if ($errors->isEmpty()) {
-  	// Calculate next execution time.  	
-  	$next = tdCron::getNextOccurrence($cl_cron_spec, mktime()); 
-  
+    // Calculate next execution time.
+    $next = tdCron::getNextOccurrence($cl_cron_spec, mktime()); 
+
     if (ttNotificationHelper::insert(array(
         'team_id' => $user->team_id,
         'cron_spec' => $cl_cron_spec,
@@ -82,12 +82,11 @@ if ($request->getMethod() == 'POST') {
         header('Location: notifications.php');
         exit();
       } else
-        $errors->add($i18n->getKey('error.db'));	
+        $errors->add($i18n->getKey('error.db'));
   }
-} // post
+} // POST
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-// $smarty->assign('onload', 'onLoad="document.clientForm.name.focus()"');
 $smarty->assign('title', $i18n->getKey('title.add_notification'));
 $smarty->assign('content_page_name', 'notification_add.tpl');
 $smarty->display('index.tpl');

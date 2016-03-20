@@ -61,8 +61,7 @@ $form->addInput(array('type'=>'combobox',
   'value'=>$cl_fav_report,
   'data'=>$fav_reports,
   'datakeys'=>array('id','name'),
-  'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-));
+  'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'cron_spec','style'=>'width: 250px;','value'=>$cl_cron_spec));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','style'=>'width: 250px;','value'=>$cl_email));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.save')));
@@ -74,9 +73,9 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidEmail($cl_email)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
 
   if ($errors->isEmpty()) {
-  	// Calculate next execution time.  	
-  	$next = tdCron::getNextOccurrence($cl_cron_spec, mktime()); 
-  	  
+    // Calculate next execution time.
+    $next = tdCron::getNextOccurrence($cl_cron_spec, mktime());
+
     if (ttNotificationHelper::update(array(
         'id' => $notification_id,
         'team_id' => $user->team_id,
@@ -88,12 +87,11 @@ if ($request->getMethod() == 'POST') {
         header('Location: notifications.php');
         exit();
       } else
-        $errors->add($i18n->getKey('error.db'));	
+        $errors->add($i18n->getKey('error.db'));
   }
-} // post
+} // POST
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-// $smarty->assign('onload', 'onLoad="document.clientForm.name.focus()"');
 $smarty->assign('title', $i18n->getKey('title.add_notification'));
 $smarty->assign('content_page_name', 'notification_edit.tpl');
 $smarty->display('index.tpl');

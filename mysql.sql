@@ -68,7 +68,7 @@ CREATE TABLE `tt_projects` (
   `name` varchar(80) COLLATE utf8_bin NOT NULL, # project name
   `description` varchar(255) default NULL,      # project description
   `tasks` text default NULL,                    # comma-separated list of task ids associated with this project
-  `status` tinyint(4) default '1',				# project status
+  `status` tinyint(4) default '1',              # project status
   PRIMARY KEY (`id`)
 );
 
@@ -112,7 +112,7 @@ create unique index bind_idx on tt_user_project_binds(user_id, project_id);
 # Structure for table tt_project_task_binds. This table maps projects to assigned tasks.
 #
 CREATE TABLE `tt_project_task_binds` (
-  `project_id` int(11) NOT NULL, # project id    
+  `project_id` int(11) NOT NULL, # project id
   `task_id` int(11) NOT NULL     # task id
 );
 
@@ -191,16 +191,16 @@ CREATE TABLE `tt_fav_reports` (
   `task_id` int(11) default NULL,                        # task id (if selected)
   `billable` tinyint(4) default NULL,                    # whether to include billable, not billable, or all records
   `invoice` tinyint(4) default NULL,                     # whether to include invoiced, not invoiced, or all records
-  `users` text default NULL,                             # Comma-separated list of user ids. Nothing here means "all" users. 
+  `users` text default NULL,                             # Comma-separated list of user ids. Nothing here means "all" users.
   `period` tinyint(4) default NULL,                      # selected period type for report
   `period_start` date default NULL,                      # period start
   `period_end` date default NULL,                        # period end
   `show_client` tinyint(4) NOT NULL default '0',         # whether to show client column
-  `show_invoice` tinyint(4) NOT NULL default '0',        # whether to show invoice column  
+  `show_invoice` tinyint(4) NOT NULL default '0',        # whether to show invoice column
   `show_project` tinyint(4) NOT NULL default '0',        # whether to show project column
   `show_start` tinyint(4) NOT NULL default '0',          # whether to show start field
   `show_duration` tinyint(4) NOT NULL default '0',       # whether to show duration field
-  `show_cost` tinyint(4) NOT NULL default '0',           # whether to show cost field  
+  `show_cost` tinyint(4) NOT NULL default '0',           # whether to show cost field
   `show_task` tinyint(4) NOT NULL default '0',           # whether to show task column
   `show_end` tinyint(4) NOT NULL default '0',            # whether to show end field
   `show_note` tinyint(4) NOT NULL default '0',           # whether to show note column
@@ -293,7 +293,7 @@ CREATE TABLE `tt_custom_fields` (
 #
 CREATE TABLE `tt_custom_field_options` (
   `id` int(11) NOT NULL auto_increment,    # option id
-  `field_id` int(11) NOT NULL,             # custom field id              
+  `field_id` int(11) NOT NULL,             # custom field id
   `value` varchar(32) NOT NULL default '', # option value
   PRIMARY KEY  (`id`)
 );

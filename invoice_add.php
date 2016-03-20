@@ -76,18 +76,18 @@ if ($request->getMethod() == 'POST') {
   if ($errors->isEmpty()) {
     if (ttInvoiceHelper::getInvoiceByName($cl_number))
       $errors->add($i18n->getKey('error.invoice_exists'));
-      
+
     if (!ttInvoiceHelper::invoiceableItemsExist($fields))
-      $errors->add($i18n->getKey('error.no_invoiceable_items'));    
+      $errors->add($i18n->getKey('error.no_invoiceable_items'));
   }
 
   if ($errors->isEmpty()) {
-  	// Now we can go ahead and create our invoice.
+    // Now we can go ahead and create our invoice.
     if (ttInvoiceHelper::createInvoice($fields)) {
       header('Location: invoices.php');
       exit();
     }
-      $errors->add($i18n->getKey('error.db'));	
+      $errors->add($i18n->getKey('error.db'));
   }
 } // post
 
