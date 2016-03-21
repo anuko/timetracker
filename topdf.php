@@ -159,7 +159,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chinvoice')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.invoice').'</td>'; }
   $html .= '</tr>';
   $html .= '</thead>';
-  
+
   foreach ($items as $item) {
     // Print a subtotal for a block of grouped values.
     $cur_date = $item['date'];
@@ -234,11 +234,11 @@ if ($totals_only) {
     }
     if ($bean->getAttribute('chinvoice')) $html .= '<td>'.htmlspecialchars($item['invoice']).'</td>';
     $html .= '</tr>';
-    
+
     $prev_date = $item['date'];
     if ($print_subtotals) $prev_grouped_by = $item['grouped_by'];
   }
-  
+
   // Print a terminating subtotal.
   if ($print_subtotals) {
     $html .= '<tr style="background-color:#e0e0e0;">';
@@ -283,7 +283,7 @@ if ($totals_only) {
     if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
     $html .= '</tr>';
   }
-  
+
   // Print totals.
   $html .= '<tr><td colspan="'.$colspan.'">&nbsp;</td></tr>';
   $html .= '<tr style="background-color:#e0e0e0;">';
@@ -302,7 +302,7 @@ if ($totals_only) {
     if ($user->canManageTeam() || $user->isClient())
       $html .= $totals['cost'];
     else
-      $html .= $totals['expenses'];  
+      $html .= $totals['expenses'];
     $html .= '</td>';
   }
   if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
@@ -337,17 +337,17 @@ class ttPDF extends TCPDF {
 
   public $image_file = 'images/tt_logo.png'; // Image file for the logo in header.
   public $page_word = 'Page'; // Localized "Page" word in footer, ex: Page 1/2.
-  
+
   // SetImageFile - sets image file name.
   public function SetImageFile($imgFile) {
     $this->image_file = $imgFile;
   }
-  
+
   // SetPageWord - sets page word for footer.
   public function SetPageWord($pageWord) {
     $this->page_word = $pageWord;
   }
-  
+
   // Page header.
   public function Header() {
     // Print logo, which is the only element of our custom header.

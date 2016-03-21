@@ -74,7 +74,7 @@ if ($request->getMethod() == 'POST') {
   $cl_email = trim($request->getParameter('email'));
   $cl_role = $request->getParameter('role');
   $cl_client_id = $request->getParameter('client');
-  $cl_status = $request->getParameter('status');  
+  $cl_status = $request->getParameter('status');
   $cl_rate = $request->getParameter('rate');
   $cl_projects = $request->getParameter('projects');
   if (is_array($cl_projects)) {
@@ -167,11 +167,11 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
   if (!ttValidString($cl_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
   if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
-   	if (!ttValidString($cl_password1)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-  	if (!ttValidString($cl_password2)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+    if (!ttValidString($cl_password1)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
+    if (!ttValidString($cl_password2)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
     if ($cl_password1 !== $cl_password2)
       $errors->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
-  }	
+  }
   if (!ttValidEmail($cl_email, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
   if (!ttValidFloat($cl_rate, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.users.default_rate'));
 
@@ -188,8 +188,8 @@ if ($request->getMethod() == 'POST') {
         'rate' => $cl_rate,
         'projects' => $assigned_projects);
       if (right_assign_roles & $user->rights) {
-      	$fields['role'] = $cl_role;
-      	$fields['client_id'] = $cl_client_id;
+        $fields['role'] = $cl_role;
+        $fields['client_id'] = $cl_client_id;
       }
 
       if (ttUserHelper::update($user_id, $fields)) {
@@ -198,23 +198,23 @@ if ($request->getMethod() == 'POST') {
         if (($user_id == $user->id) && ($user->login != $cl_login)) {
           setcookie('tt_login', $cl_login, time() + COOKIE_EXPIRE, '/');
         }
-      
+
         // In case the name of the "on behalf" user has changed - set it in session.
         if (($user->behalf_id == $user_id) && ($user->behalf_name != $cl_name)) {
           $_SESSION['behalf_name'] = $cl_name;
         }
-        
+
         // If we deactivated our own account, do housekeeping and logout.
         if ($user->id == $user_id && !is_null($cl_status) && $cl_status == INACTIVE) {
-      	  // Remove tt_login cookie that stores login name.
-      	  unset($_COOKIE['tt_login']);
-      	  setcookie('tt_login', NULL, -1);
-		
+          // Remove tt_login cookie that stores login name.
+          unset($_COOKIE['tt_login']);
+          setcookie('tt_login', NULL, -1);
+
           $auth->doLogout();
           header('Location: login.php');
           exit();
         }
-        
+
         header('Location: users.php');
         exit();
 
@@ -223,7 +223,7 @@ if ($request->getMethod() == 'POST') {
     } else
       $errors->add($i18n->getKey('error.user_exists'));
   }
-} // post
+} // POST
 
 $rates = ttProjectHelper::getRates($user_id);
 $smarty->assign('rates', $rates);

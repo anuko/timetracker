@@ -54,7 +54,7 @@ if ($time_rec['invoice_id']) die($i18n->getKey('error.sys'));
 $time_rec['comment'] = htmlspecialchars($time_rec['comment']);
 
 if ($request->getMethod() == 'POST') {
-  if ($request->getParameter('delete_button'))  {  // Delete button pressed.
+  if ($request->getParameter('delete_button')) { // Delete button pressed.
 
     // Determine if it's okay to delete the record.
     $item_date = new DateAndTime(DB_DATEFORMAT, $time_rec['date']);

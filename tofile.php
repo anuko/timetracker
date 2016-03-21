@@ -46,9 +46,10 @@ if (in_array('cf', explode(',', $user->plugins))) {
 // Report settings are stored in session bean before we get here.
 $bean = new ActionForm('reportBean', new Form('reportForm'), $request);
 
-// At the moment, we distinguish 2 types of export to file:
-// 1) export to xml
-// 2) export to csv
+// This file handles 2 types of export to a file:
+// 1) xml
+// 2) csv
+// Export to pdf is handled separately in topdf.php.
 $type = $request->getParameter('type');
 
 // Also, there are 2 variations of report: totals only, or normal. Totals only means that the report
@@ -67,17 +68,17 @@ header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
 header('Cache-Control: no-store, no-cache, must-revalidate');
 header('Cache-Control: post-check=0, pre-check=0', false);
 header('Cache-Control: private', false);
-	
+
 // Handle 2 cases of possible exports individually.
 
 // 1) entries exported to xml
 if ('xml' == $type) {
   header('Content-Type: application/xml');
   header('Content-Disposition: attachment; filename="timesheet.xml"');
-  
+
   print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
   print "<rows>\n";
-  
+
   $group_by = $bean->getAttribute('group_by');
   if ($totals_only) {
     // Totals only report. Print subtotals.
@@ -91,18 +92,18 @@ if ('xml' == $type) {
         print "\t<duration><![CDATA[".$val."]]></duration>\n";
       }
       if ($bean->getAttribute('chcost')) {
-      	print "\t<cost><![CDATA[";
-      	if ($user->canManageTeam() || $user->isClient())
-      	  print $subtotal['cost'];
-      	else
-      	  print $subtotal['expenses'];
-      	print "]]></cost>\n";
+        print "\t<cost><![CDATA[";
+        if ($user->canManageTeam() || $user->isClient())
+          print $subtotal['cost'];
+        else
+          print $subtotal['expenses'];
+        print "]]></cost>\n";
       }
       print "</row>\n";
     }
   } else {
     // Normal report.
-  	foreach ($items as $item) {
+    foreach ($items as $item) {
       print "<row>\n";
 
       print "\t<date><![CDATA[".$item['date']."]]></date>\n";
@@ -114,34 +115,34 @@ if ('xml' == $type) {
       if ($bean->getAttribute('chstart')) print "\t<start><![CDATA[".$item['start']."]]></start>\n";
       if ($bean->getAttribute('chfinish')) print "\t<finish><![CDATA[".$item['finish']."]]></finish>\n";
       if ($bean->getAttribute('chduration')) {
-      	$duration = $item['duration'];
+        $duration = $item['duration'];
         if($duration && defined('EXPORT_DECIMAL_DURATION') && isTrue(EXPORT_DECIMAL_DURATION))
           $duration = time_to_decimal($duration);
           print "\t<duration><![CDATA[".$duration."]]></duration>\n";
       }
       if ($bean->getAttribute('chnote')) print "\t<note><![CDATA[".$item['note']."]]></note>\n";
       if ($bean->getAttribute('chcost')) {
-      	print "\t<cost><![CDATA[";
-      	if ($user->canManageTeam() || $user->isClient())
-      	  print $item['cost'];
-      	else
-      	  print $item['expense'];
-      	print "]]></cost>\n";
+        print "\t<cost><![CDATA[";
+        if ($user->canManageTeam() || $user->isClient())
+          print $item['cost'];
+        else
+          print $item['expense'];
+        print "]]></cost>\n";
       }
       if ($bean->getAttribute('chinvoice')) print "\t<invoice><![CDATA[".$item['invoice']."]]></invoice>\n";
 
       print "</row>\n";
-  	}
+    }
   }
-  
+
   print "</rows>";
-}    
+}
 
 // 2) entries exported to csv
 if ('csv' == $type) {
   header('Content-Type: application/csv');
   header('Content-Disposition: attachment; filename="timesheet.csv"');
-    
+
   // Print UTF8 BOM first to identify encoding.
   $bom = chr(239).chr(187).chr(191); // 0xEF 0xBB 0xBF in the beginning of the file is UTF8 BOM.
   print $bom; // Without this Excel does not display UTF8 characters properly.
@@ -149,8 +150,8 @@ if ('csv' == $type) {
   $group_by = $bean->getAttribute('group_by');
   if ($totals_only) {
     // Totals only report.
-    
-  	// Determine group_by header.
+
+    // Determine group_by header.
     if ('cf_1' == $group_by)
       $group_by_header = $custom_fields->fields[0]['label'];
     else {
@@ -163,18 +164,18 @@ if ('csv' == $type) {
     if ($bean->getAttribute('chduration')) print ',"'.$i18n->getKey('label.duration').'"';
     if ($bean->getAttribute('chcost')) print ',"'.$i18n->getKey('label.cost').'"';
     print "\n";
-  
+
     // Print subtotals.
     foreach ($subtotals as $subtotal) {
       print '"'.$subtotal['name'].'"';
       if ($bean->getAttribute('chduration')) {
         $val = $subtotal['time'];
-  	    if($val && defined('EXPORT_DECIMAL_DURATION') && isTrue(EXPORT_DECIMAL_DURATION))
+        if($val && defined('EXPORT_DECIMAL_DURATION') && isTrue(EXPORT_DECIMAL_DURATION))
           $val = time_to_decimal($val);
-  	    print ',"'.$val.'"';
+        print ',"'.$val.'"';
       }
       if ($bean->getAttribute('chcost')) {
-      	if ($user->canManageTeam() || $user->isClient())
+        if ($user->canManageTeam() || $user->isClient())
           print ',"'.$subtotal['cost'].'"';
         else
           print ',"'.$subtotal['expenses'].'"';
@@ -215,10 +216,10 @@ if ('csv' == $type) {
       }
       if ($bean->getAttribute('chnote')) print ',"'.str_replace('"','""',$item['note']).'"';
       if ($bean->getAttribute('chcost')) {
-      	if ($user->canManageTeam() || $user->isClient())
-      	  print ',"'.$item['cost'].'"';
-      	else
-      	  print ',"'.$item['expense'].'"';
+        if ($user->canManageTeam() || $user->isClient())
+          print ',"'.$item['cost'].'"';
+        else
+          print ',"'.$item['expense'].'"';
       }
       if ($bean->getAttribute('chinvoice')) print ',"'.str_replace('"','""',$item['invoice']).'"';
       print "\n";

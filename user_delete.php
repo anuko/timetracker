@@ -50,19 +50,19 @@ if ($ok_to_go) $ok_to_go = $ok_to_go && ($user->team_id == $user_details['team_i
 if ($ok_to_go && $user->isCoManager() && (ROLE_COMANAGER == $user_details['role']))
   $ok_to_go = ($user->id == $user_details['id']); // Comanager is not allowed to delete other comanagers.
 if ($ok_to_go && $user->isCoManager() && (ROLE_MANAGER == $user_details['role']))
-  $ok_to_go = false; // Comanager is not allowed to delete a manager.  
+  $ok_to_go = false; // Comanager is not allowed to delete a manager.
 
 if (!$ok_to_go)
   die ($i18n->getKey('error.sys'));
 else
-  $smarty->assign('user_to_delete', $user_details['name']." (".$user_details['login'].")");	
+  $smarty->assign('user_to_delete', $user_details['name']." (".$user_details['login'].")");
 
 // Create confirmation form.
 $form = new Form('userDeleteForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$user_id));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
-	
+
 if ($request->getMethod() == 'POST') {
   if ($request->getParameter('btn_delete')) {
     if (ttUserHelper::markDeleted($user_id)) {
@@ -73,14 +73,14 @@ if ($request->getMethod() == 'POST') {
       }
       // If we deleted our own account, do housekeeping and logout.
       if ($user->id == $user_id) {
-      	// Remove tt_login cookie that stores login name.
-      	unset($_COOKIE['tt_login']);
-      	setcookie('tt_login', NULL, -1);
-		
+        // Remove tt_login cookie that stores login name.
+        unset($_COOKIE['tt_login']);
+        setcookie('tt_login', NULL, -1);
+
         $auth->doLogout();
         header('Location: login.php');
       } else {
-      	header('Location: users.php');
+        header('Location: users.php');
       }
       exit();
     } else {
@@ -91,7 +91,7 @@ if ($request->getMethod() == 'POST') {
     header('Location: users.php');
     exit();
   }
-}
+} // POST
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.delete_user'));
