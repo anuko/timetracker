@@ -39,7 +39,7 @@ if (!ttAccessCheck(right_manage_team)) {
 
 $cl_task_id = (int)$request->getParameter('id');
 $projects = ttTeamHelper::getActiveProjects($user->team_id);
-	
+
 if ($request->getMethod() == 'POST') {
   $cl_name = trim($request->getParameter('name'));
   $cl_description = trim($request->getParameter('description'));
@@ -50,7 +50,7 @@ if ($request->getMethod() == 'POST') {
   $cl_name = $task['name'];
   $cl_description = $task['description'];
   $cl_status = $task['status'];
-  
+
   $assigned_projects = ttTaskHelper::getAssignedProjects($cl_task_id);
   foreach ($assigned_projects as $project_item)
     $cl_projects[] = $project_item['id'];
@@ -65,14 +65,14 @@ $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
 $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','layout'=>'H','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_projects));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
-	
+
 if ($request->getMethod() == 'POST') {
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
   if (!ttValidString($cl_description, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
 
   if ($errors->isEmpty()) {
-  	if ($request->getParameter('btn_save')) {
+    if ($request->getParameter('btn_save')) {
       $existing_task = ttTaskHelper::getTaskByName($cl_name);
       if (!$existing_task || ($cl_task_id == $existing_task['id'])) {
         // Update task information.
@@ -88,8 +88,8 @@ if ($request->getMethod() == 'POST') {
           $errors->add($i18n->getKey('error.db'));
       } else
         $errors->add($i18n->getKey('error.task_exists'));
-  	}
-  	
+    }
+
     if ($request->getParameter('btn_copy')) {
       if (!ttTaskHelper::getTaskByName($cl_name)) {
         if (ttTaskHelper::insert(array(
@@ -105,8 +105,8 @@ if ($request->getMethod() == 'POST') {
       } else
         $errors->add($i18n->getKey('error.task_exists'));
     }
-  }			
-} // post
+  }
+} // POST
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.edit_task'));

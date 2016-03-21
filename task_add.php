@@ -54,14 +54,14 @@ $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','layout'=>'H','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_projects));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.add')));
-	
+
 if ($request->getMethod() == 'POST') {
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
   if (!ttValidString($cl_description, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
 
   if ($errors->isEmpty()) {
-  	if (!ttTaskHelper::getTaskByName($cl_name)) {
+    if (!ttTaskHelper::getTaskByName($cl_name)) {
       if (ttTaskHelper::insert(array(
         'team_id' => $user->team_id,
         'name' => $cl_name,
@@ -74,8 +74,8 @@ if ($request->getMethod() == 'POST') {
           $errors->add($i18n->getKey('error.db'));
     } else
       $errors->add($i18n->getKey('error.task_exists'));
-  }			
-} // post
+  }
+} // POST
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.taskForm.name.focus()"');
