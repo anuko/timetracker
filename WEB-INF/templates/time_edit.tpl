@@ -49,7 +49,7 @@ function fillDropdowns() {
 
   fillTaskDropdown(document.timeRecordForm.project.value);
 }
-	
+
 // The fillProjectDropdown function populates the project combo box with
 // projects associated with a selected clientt (client id is passed here as id).
 function fillProjectDropdown(id) {
@@ -68,7 +68,7 @@ function fillProjectDropdown(id) {
   // Populate project dropdown.
   if (!id) {
     // If we are here, client is not selected.
-	var len = projects.length;
+    var len = projects.length;
     for (var i = 0; i < len; i++) {
       dropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
       if (dropdown.options[i+1].value == selected_item)  {
@@ -106,7 +106,7 @@ function fillTaskDropdown(id) {
 
   var dropdown = document.getElementById("task");
   if (dropdown == null) return; // Nothing to do.
-  
+
   // Determine previously selected item.
   var selected_item = dropdown.options[dropdown.selectedIndex].value;
 
@@ -172,12 +172,12 @@ function formDisable(formField) {
   }
 
   if ((formFieldValue == "") && (formFieldName == "duration")) {
-	var x = eval("document.timeRecordForm.start");
-	x.disabled = false;
-	x.style.background = "white";
-	var x = eval("document.timeRecordForm.finish");
-	x.disabled = false;
-	x.style.background = "white";
+    var x = eval("document.timeRecordForm.start");
+    x.disabled = false;
+    x.style.background = "white";
+    var x = eval("document.timeRecordForm.finish");
+    x.disabled = false;
+    x.style.background = "white";
   }
 }
 
@@ -203,7 +203,7 @@ function setNow(formField) {
   <td>
   <table width = "100%">
   <tr>
-  	<td valign="top">
+    <td valign="top">
     <table border="0">
 {if in_array('cl', explode(',', $user->plugins))}
     <tr>

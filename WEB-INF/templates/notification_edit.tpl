@@ -9,12 +9,12 @@
         </tr>
         <tr>
           <td align="right">{$i18n.label.cron_schedule} (*):</td>
-	      <td>{$forms.notificationForm.cron_spec.control} <a href="https://www.anuko.com/lp/tt_6.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
-	    </tr>
-	    <tr>
-	      <td align="right">{$i18n.label.email} (*):</td>
-	      <td>{$forms.notificationForm.email.control}</td>
-	    </tr>
+          <td>{$forms.notificationForm.cron_spec.control} <a href="https://www.anuko.com/lp/tt_6.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+        </tr>
+        <tr>
+          <td align="right">{$i18n.label.email} (*):</td>
+          <td>{$forms.notificationForm.email.control}</td>
+        </tr>
         <tr>
           <td height="40"></td>
           <td>{$i18n.label.required_fields}</td>

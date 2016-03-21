@@ -27,7 +27,7 @@ projects = new Array();
 empty_label_project = '{$i18n.dropdown.select|escape:'javascript'}';
 
 // The fillProjectDropdown function populates the project combo box with
-// projects associated with a selected client (client id is passed here as id).    
+// projects associated with a selected client (client id is passed here as id).
 function fillProjectDropdown(id) {
   var str_ids = project_ids[id];
   var dropdown = document.getElementById("project");

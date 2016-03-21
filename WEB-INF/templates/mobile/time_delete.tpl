@@ -8,7 +8,7 @@
     <td class="tableHeader" align="center">{$i18n.label.project}</td>
 {/if}
     <td class="tableHeader" align="center">{$i18n.label.duration}</td>
-	<td class="tableHeader" align="center">{$i18n.label.note}</td>
+    <td class="tableHeader" align="center">{$i18n.label.note}</td>
   </tr>
   <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}

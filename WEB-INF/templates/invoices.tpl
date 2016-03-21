@@ -28,7 +28,7 @@
         </tr>
         {/foreach}
       </table>
-  
+
   {if !$user->isClient()}
       <table width="100%">
         <tr><td align="center"><br><form><input type="button" onclick="chLocation('invoice_add.php');" value="{$i18n.button.add_invoice}"></form></td></tr>

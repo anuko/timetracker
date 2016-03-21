@@ -14,9 +14,9 @@ idx++;
 function getRate(project_id) {
   var length = project_rates.length;
   for(var i = 0; i < length; i++) {
-	if(project_rates[i][0] == project_id) {
-	  return project_rates[i][1];
-	}
+    if(project_rates[i][0] == project_id) {
+      return project_rates[i][1];
+    }
   }
   var default_rate = document.userForm.rate.value;
   return default_rate;
@@ -33,7 +33,7 @@ function setRate(element) {
   for (var i = 0; i < userForm.elements.length; i++) {
     if ((userForm.elements[i].type == 'text') && (userForm.elements[i].name == ('rate_'+element.value))) {
       if (element.checked) {
-    	userForm.elements[i].value = getRate(element.value);
+        userForm.elements[i].value = getRate(element.value);
       } else {
         userForm.elements[i].value = '';
       }
@@ -47,9 +47,9 @@ function setRate(element) {
 function handleClientControl() {
   var clientControl = document.getElementById("client");
   if ("16" == document.getElementById("role").value)
-	clientControl.style.visibility = "visible";
+    clientControl.style.visibility = "visible";
   else
-	clientControl.style.visibility = "hidden";
+    clientControl.style.visibility = "hidden";
 }
 </script>
 

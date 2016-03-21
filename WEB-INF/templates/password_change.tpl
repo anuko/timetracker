@@ -2,11 +2,11 @@
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
     <td>
-      {if $result_message}
+{if $result_message}
       <table cellspacing="4" cellpadding="7" border="0" width="100%">
         <tr><td align="center"><font color="red"><b>{$result_message}</b></font></td></tr>
       </table>
-	  {else}
+{else}
       <table>
         <tr>
           <td colspan="4" height="40">{$i18n.form.change_password.tip}</td>
@@ -34,7 +34,7 @@
           <td colspan="3" align="center">{$forms.newPasswordForm.btn_save.control}</td>
         </tr>
       </table>
-      {/if}
+{/if}
     </td>
   </tr>
 </table>

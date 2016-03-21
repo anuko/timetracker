@@ -68,7 +68,7 @@ function fillProjectDropdown(id) {
   // Populate project dropdown.
   if (!id) {
     // If we are here, client is not selected.
-	var len = projects.length;
+    var len = projects.length;
     for (var i = 0; i < len; i++) {
       dropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
       if (dropdown.options[i+1].value == selected_item)  {
@@ -106,7 +106,7 @@ function fillTaskDropdown(id) {
 
   var dropdown = document.getElementById("task");
   if (dropdown == null) return; // Nothing to do.
-  
+
   // Determine previously selected item.
   var selected_item = dropdown.options[dropdown.selectedIndex].value;
 
@@ -131,7 +131,7 @@ function fillTaskDropdown(id) {
     }
 
     // If a previously selected item is still in dropdown - select it.
-	if (dropdown.options.length > 0) {
+    if (dropdown.options.length > 0) {
       for (var i = 0; i < dropdown.options.length; i++) {
         if (dropdown.options[i].value == selected_item) {
           dropdown.options[i].selected = true;
@@ -172,12 +172,12 @@ function formDisable(formField) {
   }
 
   if ((formFieldValue == "") && (formFieldName == "duration")) {
-	var x = eval("document.timeRecordForm.start");
-	x.disabled = false;
-	x.style.background = "white";
-	var x = eval("document.timeRecordForm.finish");
-	x.disabled = false;
-	x.style.background = "white";
+    var x = eval("document.timeRecordForm.start");
+    x.disabled = false;
+    x.style.background = "white";
+    var x = eval("document.timeRecordForm.finish");
+    x.disabled = false;
+    x.style.background = "white";
   }
 }
 

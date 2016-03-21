@@ -55,7 +55,7 @@ With 101% height we essentially force the scrollbar to always appear. -->
         </tr>
       </table>
       <!-- End of top image -->
-      
+
 {if $authenticated}
   {if $user->isAdmin()}
       <!-- Top menu for admin -->

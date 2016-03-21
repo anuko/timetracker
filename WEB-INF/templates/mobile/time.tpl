@@ -51,7 +51,7 @@ function fillDropdowns() {
 }
 
 // The fillProjectDropdown function populates the project combo box with
-// projects associated with a selected client (client id is passed here as id).    
+// projects associated with a selected client (client id is passed here as id).
 function fillProjectDropdown(id) {
   var str_ids = project_ids[id];
 
@@ -68,7 +68,7 @@ function fillProjectDropdown(id) {
   // Populate project dropdown.
   if (!id) {
     // If we are here, client is not selected.
-	var len = projects.length;
+    var len = projects.length;
     for (var i = 0; i < len; i++) {
       dropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
       if (dropdown.options[i+1].value == selected_item)  {
@@ -100,13 +100,13 @@ function fillProjectDropdown(id) {
 }
 
 // The fillTaskDropdown function populates the task combo box with
-// tasks associated with a selected project (project id is passed here as id).    
+// tasks associated with a selected project (project id is passed here as id).
 function fillTaskDropdown(id) {
   var str_ids = task_ids[id];
 
   var dropdown = document.getElementById("task");
   if (dropdown == null) return; // Nothing to do.
-  
+
   // Determine previously selected item.
   var selected_item = dropdown.options[dropdown.selectedIndex].value;
 
@@ -131,7 +131,7 @@ function fillTaskDropdown(id) {
     }
 
     // If a previously selected item is still in dropdown - select it.
-	if (dropdown.options.length > 0) {
+    if (dropdown.options.length > 0) {
       for (var i = 0; i < dropdown.options.length; i++) {
         if (dropdown.options[i].value == selected_item) {
           dropdown.options[i].selected = true;
@@ -161,18 +161,18 @@ function formDisable(formField) {
   }
 
   if ((formFieldValue != "") && (formFieldName == "duration")) {
-	var x = eval("document.timeRecordForm.start");
-	x.value = "";
-	x.disabled = true;
-	x.style.background = "#e9e9e9";
-	var x = eval("document.timeRecordForm.finish");
-	x.value = "";
-	x.disabled = true;
-	x.style.background = "#e9e9e9";
+    var x = eval("document.timeRecordForm.start");
+    x.value = "";
+    x.disabled = true;
+    x.style.background = "#e9e9e9";
+    var x = eval("document.timeRecordForm.finish");
+    x.value = "";
+    x.disabled = true;
+    x.style.background = "#e9e9e9";
   }
 
   if ((formFieldValue == "") && (formFieldName == "duration")) {
-	var x = eval("document.timeRecordForm.start");
+    var x = eval("document.timeRecordForm.start");
     x.disabled = false;
     x.style.background = "white";
     var x = eval("document.timeRecordForm.finish");
@@ -204,7 +204,7 @@ function get_date() {
 
 <style>
 .not_billable td {
-	color: #ff6666;
+  color: #ff6666;
 }
 </style>
 
@@ -230,13 +230,13 @@ function get_date() {
         <td align='center'>{if $record.invoice_id}&nbsp;{else}<a href='time_edit.php?id={$record.id}'>{$i18n.label.edit}</a>{/if}</td>
       </tr>
       {/foreach}
-	  </table>
-	  <table border='0'>
+    </table>
+    <table border='0'>
       <tr>
         <td align='right'>{$i18n.label.day_total}:</td>
         <td>{$day_total}</td>
       </tr>
-      </table>
+    </table>
     {/if}
   </td>
 </tr>
@@ -248,7 +248,7 @@ function get_date() {
   <td>
   <table width = "100%">
   <tr>
-  	<td valign="top">
+    <td valign="top">
     <table border="0">
 {if in_array('cl', explode(',', $user->plugins))}
     <tr><td>{$i18n.label.client}:</td></tr>

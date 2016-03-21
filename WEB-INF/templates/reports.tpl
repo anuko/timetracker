@@ -27,7 +27,7 @@ var idx = 0;
   idx++;
 {/foreach}
 
-	
+
 // empty_label is the mandatory top option in the tasks dropdown.
 empty_label = '{$i18n.dropdown.all|escape:'javascript'}';
 
@@ -35,13 +35,13 @@ empty_label = '{$i18n.dropdown.all|escape:'javascript'}';
 function inArray(needle, haystack) {
   var length = haystack.length;
   for(var i = 0; i < length; i++) {
-	if(haystack[i] == needle) return true;
+    if(haystack[i] == needle) return true;
   }
   return false;
 }
-	
+
 // The fillTaskDropdown function populates the task combo box with
-// tasks associated with a selected project_id.    
+// tasks associated with a selected project_id.
 function fillTaskDropdown(project_id) {
   var str_task_ids;
   // Get a string of comma-separated task ids.
@@ -53,11 +53,11 @@ function fillTaskDropdown(project_id) {
     var task_ids = new Array(); // Array of task ids.
     task_ids = str_task_ids.split(",");
   }
-  
+
   var dropdown = document.getElementById("task");
   // Determine previously selected item.
   var selected_item = dropdown.options[dropdown.selectedIndex].value;
-  
+
   // Remove existing content.
   dropdown.length = 0;
   // Add mandatory top option.
@@ -77,7 +77,7 @@ function fillTaskDropdown(project_id) {
         dropdown.options[dropdown_idx+1] = new Option(task_names[i][1], task_names[i][0]);
         dropdown_idx++;
       }
-    } 
+    }
   }
 
   // If a previously selected item is still in dropdown - select it.
@@ -95,14 +95,14 @@ var assigned_projects = new Array();
 {if $assigned_projects}
   {foreach $assigned_projects as $user_id => $projects}
     assigned_projects[{$user_id}] = new Array();
-	{if $projects}
-	  {foreach $projects as $idx => $project_id}
-	    assigned_projects[{$user_id}][{$idx}] = {$project_id};
-	  {/foreach}
+    {if $projects}
+      {foreach $projects as $idx => $project_id}
+        assigned_projects[{$user_id}][{$idx}] = {$project_id};
+      {/foreach}
     {/if}
   {/foreach}
 {/if}
-	
+
 // selectAssignedUsers is called when a project is changed in project dropdown.
 // It selects users on the form who are assigned to this project.
 function selectAssignedUsers(project_id) {
@@ -139,11 +139,11 @@ function selectAssignedUsers(project_id) {
 function handleCheckboxes() {
   var totalsOnlyCheckbox = document.getElementById("chtotalsonly");
   if ("no_grouping" == document.getElementById("group_by").value) {
-	// Unmark and disable the "Totals only" checkbox.
+    // Unmark and disable the "Totals only" checkbox.
     totalsOnlyCheckbox.checked = false;
     totalsOnlyCheckbox.disabled = true;
   } else
-	totalsOnlyCheckbox.disabled = false;
+    totalsOnlyCheckbox.disabled = false;
 }
 </script>
 
@@ -167,7 +167,7 @@ function handleCheckboxes() {
   <tr>
     <td valign="top" colspan="2" align="center">
       <table border="0" cellpadding="3">
-{if ((in_array('cl', explode(',', $user->plugins)) && !($user->isClient() && $user->client_id)) || ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN))}          
+{if ((in_array('cl', explode(',', $user->plugins)) && !($user->isClient() && $user->client_id)) || ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN))}
         <tr>
   {if in_array('cl', explode(',', $user->plugins)) && !($user->isClient() && $user->client_id)}<td><b>{$i18n.label.client}</b></td>{else}<td>&nbsp;</td>{/if}
           <td>&nbsp;</td>
@@ -179,13 +179,13 @@ function handleCheckboxes() {
           <td>{$forms.reportForm.option.control}</td>
         </tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}      
+{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <tr>
           <td><b>{$i18n.label.project}</b></td>
           <td>&nbsp;</td>
   {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
           <td><b>{$i18n.label.task}</b></td>
-  {/if}           
+  {/if}
         </tr>
 {/if}
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
@@ -197,7 +197,7 @@ function handleCheckboxes() {
   {/if}
         </tr>
 {/if}
-{if in_array('iv', explode(',', $user->plugins))} 
+{if in_array('iv', explode(',', $user->plugins))}
         <tr>
           <td><b>{$i18n.form.time.billable}</b></td>
           <td>&nbsp;</td>
@@ -236,7 +236,7 @@ function handleCheckboxes() {
         <tr>
           <td colspan="3">
             <table border="0" width="100%">
-{if in_array('cl', explode(',', $user->plugins)) || in_array('iv', explode(',', $user->plugins))}          
+{if in_array('cl', explode(',', $user->plugins)) || in_array('iv', explode(',', $user->plugins))}
               <tr>
   {if in_array('cl', explode(',', $user->plugins))}
                 <td width="25%"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td>
@@ -245,7 +245,7 @@ function handleCheckboxes() {
                 <td width="25%"><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></td>
   {/if}
               </tr>
-{/if}            
+{/if}
               <tr>
                 <td width="25%">{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<label>{$forms.reportForm.chproject.control}&nbsp;{$i18n.label.project}</label>{/if}</td>
                 <td width="25%">{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<label>{$forms.reportForm.chstart.control}&nbsp;{$i18n.label.start}</label>{/if}</td>
@@ -257,8 +257,8 @@ function handleCheckboxes() {
 {/if}
               </tr>
               <tr>
-              	<td>{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<label>{$forms.reportForm.chtask.control}&nbsp;{$i18n.label.task}</label>{/if}</td>
-              	<td>{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<label>{$forms.reportForm.chfinish.control}&nbsp;{$i18n.label.finish}</label>{/if}</td>
+                <td>{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<label>{$forms.reportForm.chtask.control}&nbsp;{$i18n.label.task}</label>{/if}</td>
+                <td>{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<label>{$forms.reportForm.chfinish.control}&nbsp;{$i18n.label.finish}</label>{/if}</td>
                 <td><label>{$forms.reportForm.chnote.control}&nbsp;{$i18n.label.note}</label></td>
 {if ($custom_fields && $custom_fields->fields[0])}
                 <td><label>{$forms.reportForm.chcf_1.control}&nbsp;{$custom_fields->fields[0]['label']|escape:'html'}</label></td>
@@ -276,7 +276,7 @@ function handleCheckboxes() {
           <td>{$forms.reportForm.group_by.control} <label>{$forms.reportForm.chtotalsonly.control} {$i18n.form.reports.totals_only}</label></td>
         </tr>
       </table>
-      
+
 <div style="padding: 10 0 10 0;">
   <table border="0" bgcolor="#efefef" width="720">
     <tr>

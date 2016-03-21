@@ -27,7 +27,7 @@ projects = new Array();
 empty_label_project = '{$i18n.dropdown.select|escape:'javascript'}';
 
 // The fillProjectDropdown function populates the project combo box with
-// projects associated with a selected client (client id is passed here as id).    
+// projects associated with a selected client (client id is passed here as id).
 function fillProjectDropdown(id) {
   var str_ids = project_ids[id];
   var dropdown = document.getElementById("project");
@@ -42,7 +42,7 @@ function fillProjectDropdown(id) {
   // Populate project dropdown.
   if (!id) {
     // If we are here, client is not selected.
-	var len = projects.length;
+    var len = projects.length;
     for (var i = 0; i < len; i++) {
       dropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
       if (dropdown.options[i+1].value == selected_item)
@@ -118,51 +118,40 @@ function get_date() {
 <table width="720">
 <tr>
   <td valign="top">
-    {if $expense_items}
+{if $expense_items}
       <table border="0" cellpadding="3" cellspacing="1" width="100%">
       <tr>
-{if in_array('cl', explode(',', $user->plugins))}
+  {if in_array('cl', explode(',', $user->plugins))}
         <td width="20%" class="tableHeader">{$i18n.label.client}</td>
-{/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+  {/if}
+  {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td class="tableHeader">{$i18n.label.project}</td>
-{/if}
+  {/if}
         <td class="tableHeader">{$i18n.label.item}</td>
         <td width="5%" class="tableHeaderCentered">{$i18n.label.cost}</td>
         <td width="5%" class="tableHeader">{$i18n.label.edit}</td>
       </tr>
-      {foreach $expense_items as $item}
+  {foreach $expense_items as $item}
       <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
-{if in_array('cl', explode(',', $user->plugins))}
+    {if in_array('cl', explode(',', $user->plugins))}
         <td valign='top'>{$item.client|escape:'html'}</td>
-{/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {/if}
+    {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td valign='top'>{$item.project|escape:'html'}</td>
-{/if}
+    {/if}
         <td valign='top'>{$item.item|escape:'html'}</td>
         <td valign='top' align='right'>{$item.cost}</td>
-        <td valign='top' align='center'>
-        {if $item.invoice_id}
-          &nbsp;
-        {else}
-          <a href='expense_edit.php?id={$item.id}'>{$i18n.label.edit}</a>
-        {/if}
-        </td>
+        <td valign='top' align='center'>{if $item.invoice_id}&nbsp;{else}<a href='expense_edit.php?id={$item.id}'>{$i18n.label.edit}</a>{/if}</td>
       </tr>
-      {/foreach}
-	  </table>
-	  {if $expense_items}
-      <table border="0" cellpadding="3" cellspacing="1" width="100%">
-        <tr>
-          <td nowrap align="right">{$i18n.label.day_total}: {$user->currency|escape:'html'} {$day_total}</td>
-        </tr>
-      </table>
-      {/if}
-	  
-    {/if}
+  {/foreach}
+    </table>
+    <table border="0" cellpadding="3" cellspacing="1" width="100%">
+      <tr>
+        <td nowrap align="right">{$i18n.label.day_total}: {$user->currency|escape:'html'} {$day_total}</td>
+      </tr>
+    </table>
+{/if}
   </td>
 </tr>
 </table>
 {$forms.expensesForm.close}
-
-

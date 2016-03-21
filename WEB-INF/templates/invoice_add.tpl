@@ -15,12 +15,12 @@
           <td align="right">{$i18n.label.client} (*):</td>
           <td>{$forms.invoiceForm.client.control}</td>
         </tr>
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}        
+{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <tr>
           <td align="right">{$i18n.label.project}:</td>
           <td>{$forms.invoiceForm.project.control}</td>
         </tr>
-{/if}        
+{/if}
         <tr>
           <td align="right">{$i18n.label.start_date} (*):</td>
           <td>{$forms.invoiceForm.start.control}</td>
@@ -50,4 +50,4 @@ if (dateField && !dateField.value) {
   var today = new Date();
   dateField.value = today.strftime("{$user->date_format}");
 }
-</script> 
+</script>

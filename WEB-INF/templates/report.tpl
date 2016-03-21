@@ -33,7 +33,7 @@
         {if $bean->getAttribute('chcost')}<td nowrap class="cellRightAlignedSubtotal">{$user->currency|escape:'html'} {if $user->canManageTeam() || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>{/if}
       </tr>
 {else}
-<!-- normal report -->    
+<!-- normal report -->
       <tr>
         <td class="tableHeader">{$i18n.label.date}</td>
   {if $user->canManageTeam() || $user->isClient()}<td class="tableHeader">{$i18n.label.user}</td>{/if}
@@ -46,11 +46,11 @@
   {if $bean->getAttribute('chduration')}<td class="tableHeaderCentered" width="5%">{$i18n.label.duration}</td>{/if}
   {if $bean->getAttribute('chnote')}<td class="tableHeader">{$i18n.label.note}</td>{/if}
   {if $bean->getAttribute('chcost')}<td class="tableHeaderCentered" width="5%">{$i18n.label.cost}</td>{/if}
-  {if $bean->getAttribute('chinvoice')}<td class="tableHeader">{$i18n.label.invoice}</td>{/if}    
+  {if $bean->getAttribute('chinvoice')}<td class="tableHeader">{$i18n.label.invoice}</td>{/if}
       </tr>
   {foreach $report_items as $item}
     <!-- print subtotal for a block of grouped values -->
-    {$cur_date = $item.date}      
+    {$cur_date = $item.date}
     {if $print_subtotals}
       {$cur_grouped_by = $item.grouped_by}
       {if $cur_grouped_by != $prev_grouped_by && !$first_pass}
@@ -70,7 +70,7 @@
       </tr>
       <tr><td>&nbsp;</td></tr>
       {/if}
-    {$first_pass = false} 
+    {$first_pass = false}
     {/if}
       <!--  print regular row --> 
       {if $cur_date != $prev_date}
@@ -100,7 +100,7 @@
     {if $print_subtotals} {$prev_grouped_by = $item.grouped_by} {/if}
   {/foreach}
   <!-- print a terminating subtotal -->
-  {if $print_subtotals}      
+  {if $print_subtotals}
       <tr class="rowReportSubtotal">
         <td class="cellLeftAlignedSubtotal">{$i18n.label.subtotal}
     {if $user->canManageTeam() || $user->isClient()}<td class="cellLeftAlignedSubtotal">{if $group_by == 'user'}{$subtotals[$cur_grouped_by]['name']|escape:'html'}</td>{/if}{/if}

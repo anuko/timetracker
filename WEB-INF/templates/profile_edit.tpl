@@ -7,15 +7,15 @@ function handlePluginCheckboxes() {
   var requiredLabel = document.getElementById("required_label");
   if (clientsCheckbox.checked) {
     requiredCheckbox.style.visibility = "visible";
-	requiredLabel.style.visibility = "visible";
-	invoicesCheckbox.disabled = false;
+    requiredLabel.style.visibility = "visible";
+    invoicesCheckbox.disabled = false;
   } else {
-	requiredCheckbox.checked = false;
-	requiredCheckbox.style.visibility = "hidden";
-	requiredLabel.style.visibility = "hidden";
-	invoicesCheckbox.checked = false;
+    requiredCheckbox.checked = false;
+    requiredCheckbox.style.visibility = "hidden";
+    requiredLabel.style.visibility = "hidden";
+    invoicesCheckbox.checked = false;
     invoicesCheckbox.disabled = true;
-  } 
+  }
 
   var expensesCheckbox = document.getElementById("expenses");
   var taxCheckbox = document.getElementById("tax_expenses");
@@ -24,7 +24,7 @@ function handlePluginCheckboxes() {
     taxCheckbox.style.visibility = "visible";
     taxLabel.style.visibility = "visible";
   } else {
-	taxCheckbox.checked = false;
+    taxCheckbox.checked = false;
     taxCheckbox.style.visibility = "hidden";
     taxLabel.style.visibility = "hidden";
   }
@@ -65,7 +65,6 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$i18n.label.login} (*):</td>
             <td>{$forms.profileForm.login.control}</td>
           </tr>
-
 {if !$auth_external}
           <tr>
             <td align="right" nowrap>{$i18n.label.password} (*):</td>
@@ -76,7 +75,6 @@ function handlePluginCheckboxes() {
             <td>{$forms.profileForm.password2.control}</td>
           </tr>
 {/if}
-
           <tr>
             <td align="right" nowrap>{$i18n.label.email}:</td>
             <td>{$forms.profileForm.email.control}</td>
@@ -94,10 +92,6 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$i18n.label.team_name}:</td>
             <td>{$forms.profileForm.team_name.control}</td>
           </tr>
-          <!-- <tr>
-            <td align="right">{$i18n.label.address}:</td>
-            <td>{$forms.profileForm.address.control}</td>
-          </tr> -->
           <tr>
             <td align="right">{$i18n.label.currency}:</td>
             <td>{$forms.profileForm.currency.control}</td>
@@ -138,7 +132,7 @@ function handlePluginCheckboxes() {
           <script>
             MakeFormatPreview("date_format_preview", document.getElementById("format_date"));
             MakeFormatPreview("time_format_preview", document.getElementById("format_time"));
-            
+
             function adjustDecimalPreview()
             {
               var mark = document.getElementById("decimal_mark").value;

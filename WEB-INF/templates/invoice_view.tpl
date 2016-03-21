@@ -37,7 +37,7 @@
     {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
           <td valign='top'>{$invoice_item.project_name|escape:'html'}</td>
     {/if}
-    {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}        
+    {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
           <td valign='top'>{$invoice_item.task_name|escape:'html'}</td>
     {/if}
           <td valign='top'>{$invoice_item.note|escape:'html'}</td>
@@ -60,8 +60,7 @@
           <td align="right" colspan="{$colspan}"><b>{$i18n.label.total}:</b></td>
           <td align="right"><nobr>{$total|escape:'html'}</nobr></td>
         </tr>
-        
-  	  </table>
+      </table>
 {/if}
     </td>
   </tr>
@@ -69,6 +68,3 @@
     <input type="button" onclick="chLocation('invoice_send.php?id={$invoice_id}');" value="{$i18n.button.send_by_email}">
   </form></td></tr>
 </table>
-
-
-

@@ -51,7 +51,7 @@ function fillDropdowns() {
 }
 
 // The fillProjectDropdown function populates the project combo box with
-// projects associated with a selected client (client id is passed here as id).    
+// projects associated with a selected client (client id is passed here as id).
 function fillProjectDropdown(id) {
   var str_ids = project_ids[id];
   var dropdown = document.getElementById("project");
@@ -67,7 +67,7 @@ function fillProjectDropdown(id) {
   // Populate project dropdown.
   if (!id) {
     // If we are here, client is not selected.
-	var len = projects.length;
+    var len = projects.length;
     for (var i = 0; i < len; i++) {
       dropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
       if (dropdown.options[i+1].value == selected_item)  {
@@ -99,16 +99,16 @@ function fillProjectDropdown(id) {
 }
 
 // The fillTaskDropdown function populates the task combo box with
-// tasks associated with a selected project (project id is passed here as id).    
+// tasks associated with a selected project (project id is passed here as id).
 function fillTaskDropdown(id) {
   var str_ids = task_ids[id];
 
   var dropdown = document.getElementById("task");
   if (dropdown == null) return; // Nothing to do.
-  
+
   // Determine previously selected item.
   var selected_item = dropdown.options[dropdown.selectedIndex].value;
-  
+
   // Remove existing content.
   dropdown.length = 0;
   // Add mandatory top option.
@@ -130,7 +130,7 @@ function fillTaskDropdown(id) {
     }
 
     // If a previously selected item is still in dropdown - select it.
-   	if (dropdown.options.length > 0) {
+    if (dropdown.options.length > 0) {
       for (var i = 0; i < dropdown.options.length; i++) {
         if (dropdown.options[i].value == selected_item)  {
           dropdown.options[i].selected = true;
@@ -160,18 +160,18 @@ function formDisable(formField) {
   }
 
   if ((formFieldValue != "") && (formFieldName == "duration")) {
-	var x = eval("document.timeRecordForm.start");
-	x.value = "";
-	x.disabled = true;
-	x.style.background = "#e9e9e9";
-	var x = eval("document.timeRecordForm.finish");
-	x.value = "";
-	x.disabled = true;
-	x.style.background = "#e9e9e9";
+    var x = eval("document.timeRecordForm.start");
+    x.value = "";
+    x.disabled = true;
+    x.style.background = "#e9e9e9";
+    var x = eval("document.timeRecordForm.finish");
+    x.value = "";
+    x.disabled = true;
+    x.style.background = "#e9e9e9";
   }
 
   if ((formFieldValue == "") && (formFieldName == "duration")) {
-	var x = eval("document.timeRecordForm.start");
+    var x = eval("document.timeRecordForm.start");
     x.disabled = false;
     x.style.background = "white";
     var x = eval("document.timeRecordForm.finish");
@@ -291,60 +291,60 @@ function get_time() {
 <table width="720">
 <tr>
   <td valign="top">
-    {if $time_records}
+{if $time_records}
       <table border='0' cellpadding='3' cellspacing='1' width="100%">
       <tr>
-{if in_array('cl', explode(',', $user->plugins))}
+  {if in_array('cl', explode(',', $user->plugins))}
         <td width="20%" class="tableHeader">{$i18n.label.client}</td>
-{/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+  {/if}
+  {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td class="tableHeader">{$i18n.label.project}</td>
-{/if}
-{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+  {/if}
+  {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td class="tableHeader">{$i18n.label.task}</td>
-{/if}
-{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+  {/if}
+  {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
         <td width="5%" class="tableHeader" align='right'>{$i18n.label.start}</td>
         <td width="5%" class="tableHeader" align='right'>{$i18n.label.finish}</td>
-{/if}
+  {/if}
         <td width="5%" class="tableHeader">{$i18n.label.duration}</td>
         <td class="tableHeader">{$i18n.label.note}</td>
         <td width="5%" class="tableHeader">{$i18n.label.edit}</td>
       </tr>
-      {foreach $time_records as $record}
+  {foreach $time_records as $record}
       <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}" {if !$record.billable} class="not_billable" {/if}>
-{if in_array('cl', explode(',', $user->plugins))}
+    {if in_array('cl', explode(',', $user->plugins))}
         <td valign='top'>{$record.client|escape:'html'}</td>
-{/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {/if}
+    {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td valign='top'>{$record.project|escape:'html'}</td>
-{/if}
-{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {/if}
+    {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td valign='top'>{$record.task|escape:'html'}</td>
-{/if}
-{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+    {/if}
+    {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
         <td nowrap align='right' valign='top'>{if $record.start}{$record.start}{else}&nbsp;{/if}</td>
         <td nowrap align='right' valign='top'>{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
-{/if}
+    {/if}
         <td align='right' valign='top'>{if $record.duration <> '0:00'}{$record.duration}{else}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{/if}</td>
         <td valign='top'>{if $record.comment}{$record.comment|escape:'html'}{else}&nbsp;{/if}</td>
         <td valign='top' align='center'>
-        {if $record.invoice_id}
+    {if $record.invoice_id}
           &nbsp;
-        {else}
+    {else}
           <a href='time_edit.php?id={$record.id}'>{$i18n.label.edit}</a>
-          {if $record.duration == '0:00'}
+      {if $record.duration == '0:00'}
           <input type='hidden' name='record_id' value='{$record.id}'>
           <input type='hidden' name='browser_date' value=''>
           <input type='hidden' name='browser_time' value=''>
           <input type='submit' id='btn_stop' name='btn_stop' onclick='browser_date.value=get_date();browser_time.value=get_time()' value='{$i18n.button.stop}'>
-          {/if}          
-        {/if}
+      {/if}
+    {/if}
         </td>
       </tr>
-      {/foreach}
-	  </table>
-    {/if}
+  {/foreach}
+    </table>
+{/if}
   </td>
 </tr>
 </table>
@@ -357,5 +357,3 @@ function get_time() {
 </table>
 {/if}
 {$forms.timeRecordForm.close}
-
-

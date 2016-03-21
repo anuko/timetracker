@@ -51,7 +51,7 @@ function fillDropdowns() {
 }
 
 // The fillProjectDropdown function populates the project combo box with
-// projects associated with a selected client (client id is passed here as id).    
+// projects associated with a selected client (client id is passed here as id).
 function fillProjectDropdown(id) {
   var str_ids = project_ids[id];
 
@@ -68,7 +68,7 @@ function fillProjectDropdown(id) {
   // Populate project dropdown.
   if (!id) {
     // If we are here, client is not selected.
-	var len = projects.length;
+    var len = projects.length;
     for (var i = 0; i < len; i++) {
       dropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
       if (dropdown.options[i+1].value == selected_item)  {
@@ -100,13 +100,13 @@ function fillProjectDropdown(id) {
 }
 
 // The fillTaskDropdown function populates the task combo box with
-// tasks associated with a selected project (project id is passed here as id).    
+// tasks associated with a selected project (project id is passed here as id).
 function fillTaskDropdown(id) {
   var str_ids = task_ids[id];
 
   var dropdown = document.getElementById("task");
   if (dropdown == null) return; // Nothing to do.
-  
+
   // Determine previously selected item.
   var selected_item = dropdown.options[dropdown.selectedIndex].value;
 
@@ -131,7 +131,7 @@ function fillTaskDropdown(id) {
     }
 
     // If a previously selected item is still in dropdown - select it.
-	if (dropdown.options.length > 0) {
+    if (dropdown.options.length > 0) {
       for (var i = 0; i < dropdown.options.length; i++) {
         if (dropdown.options[i].value == selected_item) {
           dropdown.options[i].selected = true;
@@ -152,12 +152,6 @@ function get_time() {
 }
 </script>
 
-<style>
-.not_billable td {
-	color: #ff6666;
-}
-</style>
-
 <p><span id="hour">00</span><span id="separator">:</span><span id="min">00</span>
 
 
@@ -177,7 +171,7 @@ function updateTimer() {
   if (startDate == null) startDate = new Date();
   endDate = new Date();
   delta = new Date(endDate - startDate);
-  
+
   var hours = delta.getUTCHours();
   if (hours < 10) hours = '0'+hours;
   document.getElementById('hour').innerHTML = hours;
@@ -193,7 +187,7 @@ function updateTimer() {
 
 function startTimer() {
   if (timerID) return;
-  
+
   updateTimer();
   timerID = setInterval('updateTimer()', 1000);
 }
@@ -212,36 +206,8 @@ startDate.setMinutes({substr($uncompleted['start'], 3, 2)});
 startDate.setSeconds(0);
 updateTimer();
 startTimer();
-</script>    
+</script>
 {/if}
-
-<!--
-<table cellspacing="3" cellpadding="0" border="0" width="100%">
-<tr>
-  <td align="center">
-    {if $time_records}
-      <table border='0' cellpadding='4' cellspacing='1' width="100%">
-      {foreach $time_records as $record}
-      <tr bgcolor="{cycle values="#ccccce,#f5f5f5"}" {if !$record.billable} class="not_billable" {/if}>
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <td valign='top'>{$record.project|escape:'html'}</td>
-{/if}
-        <td align='right' valign='top'>{if $record.duration == '0:00'}<font color="#ff0000">{/if}{$record.duration}{if $record.duration == '0:00'}</font>{/if}
-        <td align='center'>{if $record.invoice_id}&nbsp;{else}<a href='time_edit.php?id={$record.id}'>{$i18n.label.edit}</a>{/if}</td>
-      </tr>
-      {/foreach}
-	  </table>
-	  <table border='0'>
-      <tr>
-        <td align='right'>{$i18n.label.day_total}:</td>
-        <td>{$day_total}</td>
-      </tr>
-      </table>
-    {/if}
-  </td>
-</tr>
-</table>
--->
 
 {$forms.timerRecordForm.open}
 <table cellspacing="4" cellpadding="7" border="0">
@@ -249,7 +215,7 @@ startTimer();
   <td>
   <table width = "100%">
   <tr>
-  	<td valign="top">
+    <td valign="top">
     <table border="0">
 {if in_array('cl', explode(',', $user->plugins))}
     <tr><td>{$i18n.label.client}:</td></tr>

@@ -44,7 +44,7 @@
     {/foreach}
   {/if}
       </table>
-      
+
       <table width="100%">
         <tr>
           <td align="center"><br>
@@ -89,7 +89,7 @@
     {/foreach}
 
       </table>
-      
+
       <table width="100%">
         <tr>
           <td align="center" height="50">
