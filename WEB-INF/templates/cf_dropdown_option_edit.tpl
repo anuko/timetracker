@@ -2,7 +2,7 @@
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
     <td>
-      {if $user->canManageTeam()}
+{if $user->canManageTeam()}
       <table cellspacing="1" cellpadding="2" border="0">
         <tr>
           <td align="right">{$i18n.label.thing_name} (*):</td>
@@ -20,7 +20,7 @@
          <td colspan="2" align="center" height="50">{$forms.optionEditForm.btn_save.control}</td>
         </tr>
       </table>
-      {/if}
+{/if}
     </td>
   </tr>
 </table>

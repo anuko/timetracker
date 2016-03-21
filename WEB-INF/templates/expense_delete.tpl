@@ -11,7 +11,7 @@
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
     <td class="tableHeader" align="center">{$i18n.label.project}</td>
 {/if}
-	<td class="tableHeader" align="center">{$i18n.label.item}</td>
+    <td class="tableHeader" align="center">{$i18n.label.item}</td>
     <td class="tableHeader" align="center">{$i18n.label.cost}</td>
   </tr>
   <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">

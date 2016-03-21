@@ -29,7 +29,7 @@
       <table width="100%">
         <tr><td align="center"><br><form><input type="button" onclick="chLocation('client_add.php');" value="{$i18n.button.add_client}"></form></td></tr>
       </table>
-      
+
   {if $inactive_clients}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.clients.inactive_clients}</td></tr>
@@ -48,11 +48,11 @@
         </tr>
     {/foreach}
       </table>
-      
+
       <table width="100%">
         <tr><td align="center"><br><form><input type="button" onclick="chLocation('client_add.php');" value="{$i18n.button.add_client}"></form></td></tr>
       </table>
-  {/if}      
+  {/if}
 {/if}
     </td>
   </tr>

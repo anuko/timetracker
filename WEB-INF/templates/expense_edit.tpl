@@ -42,7 +42,7 @@ function fillProjectDropdown(id) {
   // Populate project dropdown.
   if (!id) {
     // If we are here, client is not selected.
-	var len = projects.length;
+    var len = projects.length;
     for (var i = 0; i < len; i++) {
       dropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
       if (dropdown.options[i+1].value == selected_item)
@@ -74,7 +74,7 @@ function get_date() {
   <td>
   <table width = "100%">
   <tr>
-  	<td valign="top">
+    <td valign="top">
     <table border="0">
 {if in_array('cl', explode(',', $user->plugins))}
     <tr>

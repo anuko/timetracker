@@ -2,7 +2,7 @@
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
     <td>
-      {if $user->canManageTeam()}
+{if $user->canManageTeam()}
       <table cellspacing="0" cellpadding="0" border="0">
         <tr>
           <td colspan="2" align="center"><b>{$field|escape:'html'}</b></td>
@@ -15,7 +15,7 @@
           <td align="left">&nbsp;{$forms.fieldDeleteForm.btn_cancel.control}</td>
         </tr>
       </table>
-      {/if}
+{/if}
     </td>
   </tr>
 </table>

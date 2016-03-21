@@ -15,8 +15,8 @@
     <td class="tableHeader">{$i18n.label.edit}</td>
     <td class="tableHeader">{$i18n.label.delete}</td>
   </tr>
-  {if $teams}
-    {foreach $teams as $team}
+{if $teams}
+  {foreach $teams as $team}
   <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
     <td>{$team.id}</td>
     <td>{$team.name|escape:'html'}</td>
@@ -25,10 +25,10 @@
     <td><a href="admin_team_edit.php?id={$team.id}">{$i18n.label.edit}</a></td>
     <td><a href="admin_team_delete.php?id={$team.id}">{$i18n.label.delete}</a></td>
   </tr>
-    {/foreach}
-  {/if}
+  {/foreach}
+{/if}
 </table>
-    
+
 <table width="100%">
   <tr>
     <td align="center">

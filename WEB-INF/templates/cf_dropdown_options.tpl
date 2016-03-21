@@ -6,24 +6,24 @@
 <table cellspacing="0" cellpadding="7" border="0" width="720">
   <tr>
     <td valign="top">
-      {if $user->canManageTeam()}
+{if $user->canManageTeam()}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr>
           <td width="70%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
           <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
-        {if $options}
-          {foreach $options as $key=>$val}
+  {if $options}
+    {foreach $options as $key=>$val}
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
           <td>{$val|escape:'html'}</td>
           <td><a href="cf_dropdown_option_edit.php?id={$key}">{$i18n.label.edit}</a></td>
           <td><a href="cf_dropdown_option_delete.php?id={$key}">{$i18n.label.delete}</a></td>
         </tr>
-          {/foreach}
-        {/if}
+    {/foreach}
+  {/if}
       </table>
-      
+
       <table width="100%">
         <tr>
           <td align="center">
@@ -34,7 +34,7 @@
           </td>
         </tr>
       </table>
-      {/if}
+{/if}
     </td>
   </tr>
 </table>
