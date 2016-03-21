@@ -49,13 +49,13 @@ $time_rec = ttTimeHelper::getRecord($cl_id, $user->getActiveUser());
 
 // Prohibit deleting invoiced records.
 if ($time_rec['invoice_id']) die($i18n->getKey('error.sys'));
-  
+
 // Escape comment for presentation.
 $time_rec['comment'] = htmlspecialchars($time_rec['comment']);
-        
+
 if ($request->getMethod() == 'POST') {
   if ($request->getParameter('delete_button'))  {  // Delete button pressed.
-  
+
     // Determine if it's okay to delete the record.
     $item_date = new DateAndTime(DB_DATEFORMAT, $time_rec['date']);
 
@@ -68,13 +68,13 @@ if ($request->getMethod() == 'POST') {
     }
     // Determine if the record is uncompleted.
     $uncompleted = ($time_rec['duration'] == '0:00');
-      	
+
     if($lockdate && $item_date->before($lockdate) && !$uncompleted) {
       $errors->add($i18n->getKey('error.period_locked'));
     }
-           
+
     if ($errors->isEmpty()) {
-      	
+
       // Delete the record.
       $result = ttTimeHelper::delete($cl_id, $user->getActiveUser());
 
@@ -87,11 +87,11 @@ if ($request->getMethod() == 'POST') {
     }
   }
   if ($request->getParameter('cancel_button')) { // Cancel button pressed.
-  	header('Location: time.php');
-  	exit();
+    header('Location: time.php');
+    exit();
   }
-}
-		
+} // POST
+
 $form = new Form('timeRecordForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 $form->addInput(array('type'=>'submit','name'=>'delete_button','value'=>$i18n->getKey('label.delete')));

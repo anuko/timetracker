@@ -48,7 +48,7 @@ if($selected_date->isError())
 if(!$cl_date)
   $cl_date = $selected_date->toString(DB_DATEFORMAT);
 $_SESSION['date'] = $cl_date;
-  
+
 // Determine previous and next dates for simple navigation.
 $prev_date = date('Y-m-d', strtotime('-1 day', strtotime($cl_date)));
 $next_date = date('Y-m-d', strtotime('+1 day', strtotime($cl_date)));
@@ -97,8 +97,7 @@ if (MODE_TIME == $user->tracking_mode && in_array('cl', explode(',', $user->plug
       'value'=>$cl_client,
       'data'=>$active_clients,
       'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-    ));
+      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
@@ -112,8 +111,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-  ));
+    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
   // Dropdown for clients if the clients plugin is enabled.
   if (in_array('cl', explode(',', $user->plugins))) {
@@ -140,8 +138,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-    ));
+      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
   }
 }
 
@@ -153,8 +150,7 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
     'value'=>$cl_task,
     'data'=>$task_list,
     'datakeys'=>array('id','name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-  ));
+    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 }
 if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
   $form->addInput(array('type'=>'text','name'=>'start','value'=>$cl_start,'onchange'=>"formDisable('start');"));
@@ -163,7 +159,7 @@ if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type
 if (!$user->canManageTeam() && defined('READONLY_START_FINISH') && isTrue(READONLY_START_FINISH)) {
   // Make the start and finish fields read-only.
   $form->getElement('start')->setEnable(false);
-  $form->getElement('finish')->setEnable(false);	
+  $form->getElement('finish')->setEnable(false);
 }
 if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
   $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
@@ -172,19 +168,18 @@ if (in_array('iv', explode(',', $user->plugins)))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','data'=>1,'value'=>$cl_billable));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.submit')));
-  
+
 // If we have custom fields - add controls for them.
 if ($custom_fields && $custom_fields->fields[0]) {
   // Only one custom field is supported at this time.
   if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT) {
-  	$form->addInput(array('type'=>'text','name'=>'cf_1','value'=>$cl_cf_1));
+    $form->addInput(array('type'=>'text','name'=>'cf_1','value'=>$cl_cf_1));
   } else if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
     $form->addInput(array('type'=>'combobox','name'=>'cf_1',
       'style'=>'width: 250px;',
       'value'=>$cl_cf_1,
       'data'=>$custom_fields->options,
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-    ));
+      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
   }
 }
 
@@ -225,10 +220,10 @@ if ($request->getMethod() == 'POST') {
             $errors->add($i18n->getKey('error.interval'), $i18n->getKey('label.finish'), $i18n->getKey('label.start'));
         }
       } else {
-      	if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
+        if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
           $errors->add($i18n->getKey('error.empty'), $i18n->getKey('label.start'));
           $errors->add($i18n->getKey('error.empty'), $i18n->getKey('label.finish'));
-      	}
+        }
         if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
           $errors->add($i18n->getKey('error.empty'), $i18n->getKey('label.duration'));
       }
@@ -238,30 +233,30 @@ if ($request->getMethod() == 'POST') {
     }
     if (!ttValidString($cl_note, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.note'));
     // Finished validating user input.
-    
+
     // Prohibit creating entries in future.
     if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES)) {
       $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
       if ($selected_date->after($browser_today))
         $errors->add($i18n->getKey('error.future_date'));
     }
-    
+
     // Prohibit creating time entries in locked interval.
     if($lockdate && $selected_date->before($lockdate))
       $errors->add($i18n->getKey('error.period_locked'));
-    
+
     // Prohibit creating another uncompleted record.
     if ($errors->isEmpty()) {
       if (($not_completed_rec = ttTimeHelper::getUncompleted($user->getActiveUser())) && (($cl_finish == '') && ($cl_duration == '')))
         $errors->add($i18n->getKey('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->getKey('error.goto_uncompleted')."</a>");
     }
-    
+
     // Prohibit creating an overlapping record.
     if ($errors->isEmpty()) {
       if (ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $cl_start, $cl_finish))
         $errors->add($i18n->getKey('error.overlap'));
-    }  
-          
+    }
+
     if ($errors->isEmpty()) {
       $id = ttTimeHelper::insert(array(
         'date' => $cl_date,
@@ -274,7 +269,7 @@ if ($request->getMethod() == 'POST') {
         'duration' => $cl_duration,
         'note' => $cl_note,
         'billable' => $cl_billable));
-        	
+
       // Insert a custom field if we have it.
       $result = true;
       if ($id && $custom_fields && $cl_cf_1) {
@@ -291,7 +286,7 @@ if ($request->getMethod() == 'POST') {
       $errors->add($i18n->getKey('error.db'));
     }
   }
-}
+} // POST
 
 $smarty->assign('next_date', $next_date);
 $smarty->assign('prev_date', $prev_date);
@@ -306,4 +301,3 @@ $smarty->assign('timestring', $selected_date->toString($user->date_format));
 $smarty->assign('title', $i18n->getKey('title.time'));
 $smarty->assign('content_page_name', 'mobile/time.tpl');
 $smarty->display('mobile/index.tpl');
-?>

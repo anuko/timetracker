@@ -48,13 +48,13 @@ if ($request->getMethod() == 'POST') {
   // Validate user input.
   if (!ttValidString($cl_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
   if (!ttValidString($cl_password)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-	
+
   if ($errors->isEmpty()) {
 
     // Use the "limit" plugin if we have one. Ignore include errors.
     // The "limit" plugin is not required for normal operation of the Time Tracker.
     @include('../plugins/limit/access_check.php');
-      
+
     if ($auth->doLogin($cl_login, $cl_password)) {
 
       // Set current user date (as determined by user browser) into session.
@@ -64,7 +64,7 @@ if ($request->getMethod() == 'POST') {
 
       // Remember user login in a cookie.
       setcookie('tt_login', $cl_login, time() + COOKIE_EXPIRE, '/');
-      
+
       $user = new ttUser(null, $auth->getUserId());
       // Redirect, depending on user role.
       if ($user->isAdmin()) {
@@ -73,7 +73,7 @@ if ($request->getMethod() == 'POST') {
       }
       else if ($user->isClient()) {
         header('Location: ../reports.php');
-        exit();  	
+        exit();
       }
       else {
         header('Location: time.php');
@@ -82,7 +82,7 @@ if ($request->getMethod() == 'POST') {
     } else
       $errors->add($i18n->getKey('error.auth'));
   }
-}
+} // POST
 
 if(!isTrue(MULTITEAM_MODE) && !ttTeamHelper::getTeams())
   $errors->add($i18n->getKey('error.no_teams'));

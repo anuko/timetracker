@@ -49,7 +49,7 @@ if(!$cl_date)
   $cl_date = $selected_date->toString(DB_DATEFORMAT);
 $_SESSION['date'] = $cl_date;
 // TODO: for time page we may limit the day to today only.
-  
+
 // Use custom fields plugin if it is enabled.
 if (in_array('cf', explode(',', $user->plugins))) {
   require_once('../plugins/CustomFields.class.php');
@@ -97,8 +97,7 @@ if (MODE_TIME == $user->tracking_mode && in_array('cl', explode(',', $user->plug
       'value'=>$cl_client,
       'data'=>$active_clients,
       'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-    ));
+      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
@@ -113,8 +112,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-  ));
+    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
   // Dropdown for clients if the clients plugin is enabled.
   if (in_array('cl', explode(',', $user->plugins))) {
@@ -126,12 +124,12 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     // Build a client list out of active clients. Use only clients that are relevant to user.
     // Also trim their associated project list to only assigned projects (to user).
     foreach($active_clients as $client) {
-  	  $projects_assigned_to_client = explode(',', $client['projects']);
-  	  $intersection = array_intersect($projects_assigned_to_client, $projects_assigned_to_user);
-  	  if ($intersection) {
-  	    $client['projects'] = implode(',', $intersection);
-  	    $client_list[] = $client;
-  	  }
+      $projects_assigned_to_client = explode(',', $client['projects']);
+      $intersection = array_intersect($projects_assigned_to_client, $projects_assigned_to_user);
+      if ($intersection) {
+        $client['projects'] = implode(',', $intersection);
+        $client_list[] = $client;
+      }
     }
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
@@ -141,8 +139,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-    ));
+      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
   }
 }
 
@@ -155,20 +152,18 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
     'value'=>$cl_task,
     'data'=>$task_list,
     'datakeys'=>array('id','name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-  ));
+    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 }
 if (in_array('iv', explode(',', $user->plugins)))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','data'=>1,'value'=>$cl_billable,'enable'=>$enable_controls));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on button click.
 $form->addInput(array('type'=>'hidden','name'=>'browser_time','value'=>''));  // User current time, which gets filled in on button click.
 $enable_start = $uncompleted ? false : true;
-$enable_stop = $uncompleted ? true : false;
 if (!$uncompleted)
   $form->addInput(array('type'=>'submit','name'=>'btn_start','onclick'=>'browser_time.value=get_time()','value'=>$i18n->getKey('label.start'),'enable'=>$enable_start));
 else
-  $form->addInput(array('type'=>'submit','name'=>'btn_stop','onclick'=>'browser_time.value=get_time()','value'=>$i18n->getKey('label.finish'),'enable'=>$enable_stop));
-  
+  $form->addInput(array('type'=>'submit','name'=>'btn_stop','onclick'=>'browser_time.value=get_time()','value'=>$i18n->getKey('label.finish'),'enable'=>!$enable_start));
+
 // If we have custom fields - add controls for them.
 if ($custom_fields && $custom_fields->fields[0]) {
   // Only one custom field is supported at this time.
@@ -184,7 +179,7 @@ if ($custom_fields && $custom_fields->fields[0]) {
   }
 }
 
-// Determine lock date. Time entries earlier than lock date cannot be created or modified. 
+// Determine lock date. Time entries earlier than lock date cannot be created or modified.
 $lock_interval = $user->lock_interval;
 $lockdate = 0;
 if ($lock_interval > 0) {
@@ -211,14 +206,14 @@ if ($request->getMethod() == 'POST') {
       if (!$cl_task) $errors->add($i18n->getKey('error.task'));
     }
     // Finished validating user input.
-    
+
     // Prohibit creating entries in future.
     if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES)) {
       $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
       if ($selected_date->after($browser_today))
         $errors->add($i18n->getKey('error.future_date'));
     }
-    
+
     // Prohibit creating time entries in locked interval.
     if($lockdate && $selected_date->before($lockdate))
       $errors->add($i18n->getKey('error.period_locked'));
@@ -227,13 +222,13 @@ if ($request->getMethod() == 'POST') {
     if ($errors->isEmpty() && $uncompleted) {
       $errors->add($i18n->getKey('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->getKey('error.goto_uncompleted')."</a>");
     }
-    
+
     // Prohibit creating an overlapping record.
     if ($errors->isEmpty()) {
       if (ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $cl_start, $cl_finish))
         $errors->add($i18n->getKey('error.overlap'));
-    }  
-    
+    }
+
     if ($errors->isEmpty()) {
       $id = ttTimeHelper::insert(array(
         'date' => $cl_date,
@@ -246,7 +241,7 @@ if ($request->getMethod() == 'POST') {
         'duration' => $cl_duration,
         'note' => $cl_note,
         'billable' => $cl_billable));
-        	
+
       // Insert a custom field if we have it.
       $result = true;
       if ($id && $custom_fields && $cl_cf_1) {
@@ -271,13 +266,13 @@ if ($request->getMethod() == 'POST') {
     if (ttTimeHelper::isValidInterval($record['start'], $cl_finish) // finish time is greater than start time
       && !ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $record['start'], $cl_finish)) { // no overlap
       $res = ttTimeHelper::update(array(
-        'id'=>$record['id'],  
-        'date'=>$cl_date,  
+        'id'=>$record['id'],
+        'date'=>$cl_date,
         'user_id'=>$user->getActiveUser(),
-        'client'=>$record['client_id'],  
-        'project'=>$record['project_id'],  
-        'task'=>$record['task_id'],  
-        'start'=>$record['start'],  
+        'client'=>$record['client_id'],
+        'project'=>$record['project_id'],
+        'task'=>$record['task_id'],
+        'start'=>$record['start'],
         'finish'=>$cl_finish,
         'note'=>$record['comment'],
         'billable'=>$record['billable']));
@@ -289,10 +284,10 @@ if ($request->getMethod() == 'POST') {
     } else {
       // Cannot complete, redirect for manual edit.
       header('Location: time_edit.php?id='.$record['id']);
-      exit();		
+      exit();
     }
   }
-}
+} // POST
 
 $week_total = ttTimeHelper::getTimeForWeek($user->getActiveUser(), $cl_date);
 $smarty->assign('week_total', $week_total);
@@ -312,4 +307,3 @@ $smarty->assign('timestring', $selected_date->toString($user->date_format));
 $smarty->assign('title', $i18n->getKey('title.time'));
 $smarty->assign('content_page_name', 'mobile/timer.tpl');
 $smarty->display('mobile/index.tpl');
-?>

@@ -36,7 +36,7 @@ if ($auth->isAuthenticated()) {
   }
   else if ($user->isClient()) {
     header('Location: ../reports.php');
-    exit();  	
+    exit();
   }
 }
 // Redirect to time.php or mobile/time.php for other roles.
