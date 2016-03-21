@@ -28,28 +28,32 @@
 
 class ActionErrors {
     var $errors = array();
-    
+
     function ActionErrors() {
     }
-    
+
     function isEmpty() {
-        return (count($this->errors)>0 ? false : true );
+        return (count($this->errors)>0 ? false : true);
     }
-    
+
+    function exist() {
+        return (count($this->errors)>0 ? true : false);
+    }
+
+    function no() {
+        return (count($this->errors)>0 ? false : true);
+    }
+
+    function yes() {
+        return (count($this->errors)>0 ? true : false);
+    }
+
     function add($message, $arg0 = '', $arg1 = '') {
     	$patterns = array ("/\{0\}/","/\{1\}/");
 		$replace = array ($arg0, $arg1);
 		$message = preg_replace ($patterns, $replace, $message);
         $this->errors[]["message"] = $message;
     }    
-    
-    function addAll($arr) {
-    	if (is_array($arr)) {
-    		foreach ($arr as $k=>$v) {
-    			$this->errors[$k] = $v;
-    		}
-    	}
-    }
     
     function get($key) {
         return $this->errors["$key"]["message"];

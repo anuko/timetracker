@@ -55,7 +55,7 @@ if ($request->getMethod() == 'POST') {
       $errors->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
   }
 
-  if ($errors->isEmpty() && $cl_password1) {
+  if ($errors->no() && $cl_password1) {
     if (ttUserHelper::setPassword($user->id, $cl_password1)) {
       header('Location: admin_teams.php');
       exit();

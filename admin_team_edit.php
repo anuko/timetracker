@@ -90,7 +90,7 @@ if ($request->getMethod() == 'POST') {
     if ($cl_manager_login != $team_details['manager_login'])
       if (ttUserHelper::getUserByLogin($cl_manager_login)) $errors->add($i18n->getKey('error.user_exists'));
 
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       $update_result = ttTeamHelper::update($team_id, array('name'=>$cl_team_name));
       if ($update_result) {
         $update_result = ttUserHelper::update($team_details['manager_id'], array(
