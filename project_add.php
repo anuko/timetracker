@@ -69,9 +69,9 @@ if ($request->getMethod() == 'POST') {
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
   if (!ttValidString($cl_description, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
-	
+
   if ($errors->isEmpty()) {
-  	if (!ttProjectHelper::getProjectByName($cl_name)) {
+    if (!ttProjectHelper::getProjectByName($cl_name)) {
       if (ttProjectHelper::insert(array(
         'team_id' => $user->team_id,
         'name' => $cl_name,
@@ -86,7 +86,7 @@ if ($request->getMethod() == 'POST') {
     } else
       $errors->add($i18n->getKey('error.project_exists'));
   }
-} // post
+} // POST
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.projectForm.project_name.focus()"');

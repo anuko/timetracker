@@ -47,7 +47,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getK
 
 if ($request->getMethod() == 'POST') {
   if ($request->getParameter('btn_delete')) {
-	if(ttProjectHelper::get($cl_project_id)) {
+    if(ttProjectHelper::get($cl_project_id)) {
       if (ttProjectHelper::delete($cl_project_id)) {
         header('Location: projects.php');
         exit();
@@ -56,11 +56,11 @@ if ($request->getMethod() == 'POST') {
     } else
       $errors->add($i18n->getKey('error.db'));
   } else if ($request->getParameter('btn_cancel')) {
-  	header('Location: projects.php');
-  	exit();
+    header('Location: projects.php');
+    exit();
   }
-} // post
-	
+} // POST
+
 $smarty->assign('project_to_delete', $project_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.projectDeleteForm.btn_cancel.focus()"');

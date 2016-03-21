@@ -66,21 +66,21 @@ if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->g
 
 if ($request->getMethod() == 'POST') {
   foreach($_POST as $key => $val) {
-  	if ('log_id_' == substr($key, 0, 7))
-  	  $time_log_ids[] = substr($key, 7);
+    if ('log_id_' == substr($key, 0, 7))
+      $time_log_ids[] = substr($key, 7);
     if ('item_id_' == substr($key, 0, 8))
-  	  $expense_item_ids[] = substr($key, 8);
-  	if ('recent_invoice' == $key)
-  	  $invoice_id = $val;
+      $expense_item_ids[] = substr($key, 8);
+    if ('recent_invoice' == $key)
+       $invoice_id = $val;
   }
   if ($time_log_ids || $expense_item_ids) {
-  	// Some records are checked for invoice editing... Adjust their invoice accordingly.
-  	ttReportHelper::assignToInvoice($invoice_id, $time_log_ids, $expense_item_ids);
+    // Some records are checked for invoice editing. Adjust their invoice accordingly.
+    ttReportHelper::assignToInvoice($invoice_id, $time_log_ids, $expense_item_ids);
   }
   // Re-display this form.
   header('Location: report.php');
   exit();
-} // post
+} // POST
 
 $group_by = $bean->getAttribute('group_by');
 

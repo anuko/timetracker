@@ -64,17 +64,17 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidEmailList($cl_cc, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.cc'));
   if (!ttValidString($cl_subject)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.subject'));
   if (!ttValidString($cl_comment, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.comment'));
-  
+
   if ($errors->isEmpty()) {
     // Save last report emails for future use.
     $sc->setValue(SYSC_LAST_REPORT_EMAIL, $cl_receiver);
-	$sc->setValue(SYSC_LAST_REPORT_CC, $cl_cc);
-	
-	// Obtain session bean with report attributes.
-	$bean = new ActionForm('reportBean', new Form('reportForm'));
-	// Prepare report body.
-	$body = ttReportHelper::prepareReportBody($bean, $cl_comment);
-		
+    $sc->setValue(SYSC_LAST_REPORT_CC, $cl_cc);
+
+    // Obtain session bean with report attributes.
+    $bean = new ActionForm('reportBean', new Form('reportForm'));
+    // Prepare report body.
+    $body = ttReportHelper::prepareReportBody($bean, $cl_comment);
+
     import('mail.Mailer');
     $mailer = new Mailer();
     $mailer->setCharSet(CHARSET);

@@ -89,7 +89,7 @@ if ($request->getMethod() == 'POST') {
     }
       $errors->add($i18n->getKey('error.db'));
   }
-} // post
+} // POST
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.invoiceForm.number.focus()"');

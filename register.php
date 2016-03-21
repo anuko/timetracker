@@ -48,7 +48,7 @@ if ($request->getMethod() == 'POST') {
   $cl_password1 = $request->getParameter('password1');
   $cl_password2 = $request->getParameter('password2');
   $cl_manager_email = trim($request->getParameter('manager_email'));
-} else  
+} else
   $cl_currency = CURRENCY_DEFAULT;
 
 $form = new Form('profileForm');
@@ -78,14 +78,14 @@ if ($request->getMethod() == 'POST') {
       // Create a new team.
       $team_id = ttTeamHelper::insert(array('name'=>$cl_team_name,'currency'=>$cl_currency));
       if ($team_id) {
-      	// Team created, now create a team manager.
-      	$user_id = ttUserHelper::insert(array(
-      	  'team_id' => $team_id,
-      	  'role' => ROLE_MANAGER,
+        // Team created, now create a team manager.
+        $user_id = ttUserHelper::insert(array(
+          'team_id' => $team_id,
+          'role' => ROLE_MANAGER,
           'name' => $cl_manager_name,
           'login' => $cl_manager_login,
           'password' => $cl_password1,
-      	  'email' => $cl_manager_email));
+          'email' => $cl_manager_email));
       }
       if ($team_id && $user_id) {
         if ($auth->doLogin($cl_manager_login, $cl_password1)) {
@@ -100,7 +100,7 @@ if ($request->getMethod() == 'POST') {
     } else
       $errors->add($i18n->getKey('error.user_exists'));
   }
-}
+} // POST
 
 $smarty->assign('title', $i18n->getKey('title.create_team'));
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

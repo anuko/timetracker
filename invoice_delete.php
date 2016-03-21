@@ -63,7 +63,7 @@ if ($request->getMethod() == 'POST') {
     header('Location: invoices.php');
     exit();
   }
-} // post
+} // POST
 
 $smarty->assign('invoice_to_delete', $invoice_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

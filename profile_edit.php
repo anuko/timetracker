@@ -47,9 +47,9 @@ if ($request->getMethod() == 'POST') {
     $cl_password2 = $request->getParameter('password2');
   }
   $cl_email = trim($request->getParameter('email'));
-  
+
   if ($user->canManageTeam()) {
-  	$cl_team = trim($request->getParameter('team_name'));
+    $cl_team = trim($request->getParameter('team_name'));
     $cl_address = trim($request->getParameter('address'));
     $cl_currency = trim($request->getParameter('currency'));
     if (!$cl_currency) $cl_currency = CURRENCY_DEFAULT;
@@ -76,12 +76,12 @@ if ($request->getMethod() == 'POST') {
   $cl_email = $user->email;
   if ($user->canManageTeam()) {
     $cl_team = $user->team;
-    $cl_address = $user->address;        
+    $cl_address = $user->address;
     $cl_currency = ($user->currency == ''? CURRENCY_DEFAULT : $user->currency);
     $cl_lock_interval = $user->lock_interval;
     $cl_lang = $user->lang;
     $cl_decimal_mark = $user->decimal_mark;
-  	$cl_custom_format_date = $user->date_format;
+    $cl_custom_format_date = $user->date_format;
     $cl_custom_format_time = $user->time_format;
     $cl_start_week = $user->week_start;
     $cl_tracking_mode = $user->tracking_mode;
@@ -112,13 +112,11 @@ if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team));
   $form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','style'=>'width: 350px;','cols'=>'55','rows'=>'4','value'=>$cl_address));
   $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
-  $DECIMAL_MARK_OPTIONS = array(
-    array('id'=>'.','name'=>'.'),
-    array('id'=>',','name'=>','));
+  $DECIMAL_MARK_OPTIONS = array(array('id'=>'.','name'=>'.'),array('id'=>',','name'=>','));
   $form->addInput(array('type'=>'combobox','name'=>'decimal_mark','style'=>'width: 150px','data'=>$DECIMAL_MARK_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_decimal_mark,
     'onchange'=>'adjustDecimalPreview()'));
   $form->addInput(array('type'=>'text','maxlength'=>'10','name'=>'lock_interval','value'=>$cl_lock_interval));
-  // Prepare an array of available languages.   
+  // Prepare an array of available languages.
   $lang_files = I18n::getLangFileList();
   foreach ($lang_files as $lfile) {
     $content = file(RESOURCE_DIR."/".$lfile);
@@ -161,18 +159,18 @@ if ($user->canManageTeam()) {
   $tracking_mode_options[MODE_PROJECTS] = $i18n->getKey('form.profile.mode_projects');
   $tracking_mode_options[MODE_PROJECTS_AND_TASKS] = $i18n->getKey('form.profile.mode_projects_and_tasks');
   $form->addInput(array('type'=>'combobox','name'=>'tracking_mode','style'=>'width: 150px;','data'=>$tracking_mode_options,'value'=>$cl_tracking_mode));
-  
+
   // Prepare record type choices.
   $record_type_options = array();
   $record_type_options[TYPE_ALL] = $i18n->getKey('form.profile.type_all');
   $record_type_options[TYPE_START_FINISH] = $i18n->getKey('form.profile.type_start_finish');
   $record_type_options[TYPE_DURATION] = $i18n->getKey('form.profile.type_duration');
   $form->addInput(array('type'=>'combobox','name'=>'record_type','style'=>'width: 150px;','data'=>$record_type_options,'value'=>$cl_record_type));
-    
+
   $form->addInput(array('type'=>'checkbox','name'=>'charts','data'=>1,'value'=>$cl_charts));
   $form->addInput(array('type'=>'checkbox','name'=>'clients','data'=>1,'value'=>$cl_clients,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'client_required','data'=>1,'value'=>$cl_client_required));
-  
+
   $form->addInput(array('type'=>'checkbox','name'=>'invoices','data'=>1,'value'=>$cl_invoices));
   $form->addInput(array('type'=>'checkbox','name'=>'custom_fields','data'=>1,'value'=>$cl_custom_fields,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'expenses','data'=>1,'value'=>$cl_expenses,'onchange'=>'handlePluginCheckboxes()'));
@@ -185,8 +183,8 @@ if ($request->getMethod() == 'POST') {
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
   if ($can_change_login) {
-  	if (!ttValidString($cl_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
-    
+    if (!ttValidString($cl_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
+
     // New login must be unique.
     if ($cl_login != $user->login && ttUserHelper::getUserByLogin($cl_login))
       $errors->add($i18n->getKey('error.user_exists'));
@@ -199,13 +197,13 @@ if ($request->getMethod() == 'POST') {
   }
   if (!ttValidEmail($cl_email, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
   if ($user->canManageTeam()) {
-  	if (!ttValidString($cl_team, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
-  	if (!ttValidString($cl_address, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.address'));
-  	if (!ttValidString($cl_currency, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));
-  	if (!ttValidInteger($cl_lock_interval, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.lock_interval'));
+    if (!ttValidString($cl_team, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
+    if (!ttValidString($cl_address, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.address'));
+    if (!ttValidString($cl_currency, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));
+    if (!ttValidInteger($cl_lock_interval, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.lock_interval'));
   }
   // Finished validating user input.
-  
+
   if ($errors->isEmpty()) {
     if ($cl_lock_interval == null || trim($cl_lock_interval) == '')
       $cl_lock_interval = 0;
@@ -221,7 +219,7 @@ if ($request->getMethod() == 'POST') {
       if ($cl_client_required)
         $plugins .= ',cm';
       if ($cl_invoices)
-        $plugins .= ',iv';    	
+        $plugins .= ',iv';
       if ($cl_custom_fields)
         $plugins .= ',cf';
       if ($cl_expenses)
@@ -231,7 +229,7 @@ if ($request->getMethod() == 'POST') {
       if ($cl_notifications)
         $plugins .= ',no';
       $plugins = trim($plugins, ',');
-   	
+
       $update_result = ttTeamHelper::update($user->team_id, array(
         'name' => $cl_team,
         'address' => $cl_address,

@@ -59,8 +59,7 @@ $form->addInput(array('type'=>'combobox',
   'style'=>'width: 250px;',
   'data'=>$report_list,
   'datakeys'=>array('id','name'),
-  'empty'=>array('-1'=>$i18n->getKey('dropdown.no'))
-));
+  'empty'=>array('-1'=>$i18n->getKey('dropdown.no'))));
 $form->addInput(array('type'=>'hidden','name'=>'fav_report_changed'));
 // Generate and Delete buttons.
 $form->addInput(array('type'=>'submit','name'=>'btn_generate','value'=>$i18n->getKey('button.generate')));
@@ -77,8 +76,7 @@ if (in_array('cl', explode(',', $user->plugins)) && !($user->isClient() && $user
     'style'=>'width: 250px;',
     'data'=>$client_list,
     'datakeys'=>array('id', 'name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.all'))
-  ));
+    'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 }
 
 // If we have a TYPE_DROPDOWN custom field - add control to select an option.
@@ -87,8 +85,7 @@ if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['ty
       'style'=>'width: 250px;',
       'value'=>$cl_cf_1,
       'data'=>$custom_fields->options,
-      'empty'=>array(''=>$i18n->getKey('dropdown.all'))
-    ));
+      'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 }
 
 // Add controls for projects and tasks.
@@ -105,8 +102,7 @@ $form->addInput(array('type'=>'combobox',
   'style'=>'width: 250px;',
   'data'=>$project_list,
   'datakeys'=>array('id','name'),
-  'empty'=>array(''=>$i18n->getKey('dropdown.all'))
-));
+  'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
   $task_list = ttTeamHelper::getActiveTasks($user->team_id);
   $form->addInput(array('type'=>'combobox',
@@ -114,29 +110,26 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
     'style'=>'width: 250px;',
     'data'=>$task_list,
     'datakeys'=>array('id','name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.all'))
-  ));
+    'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 }
 
-// Add include records control.  
+// Add include records control.
 $include_options = array('1'=>$i18n->getKey('form.reports.include_billable'),
   '2'=>$i18n->getKey('form.reports.include_not_billable'));
 $form->addInput(array('type'=>'combobox',
   'name'=>'include_records',
   'style'=>'width: 250px;',
   'data'=>$include_options,
-  'empty'=>array(''=>$i18n->getKey('dropdown.all'))
-));
+  'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 
-// Add invoiced / not invoiced selector.  
+// Add invoiced / not invoiced selector.
 $invoice_options = array('1'=>$i18n->getKey('form.reports.include_invoiced'),
   '2'=>$i18n->getKey('form.reports.include_not_invoiced'));
 $form->addInput(array('type'=>'combobox',
   'name'=>'invoice',
   'style'=>'width: 250px;',
   'data'=>$invoice_options,
-  'empty'=>array(''=>$i18n->getKey('dropdown.all'))
-));
+  'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 
 $user_list = array();
 if ($user->canManageTeam() || $user->isClient()) {
@@ -161,8 +154,7 @@ if ($user->canManageTeam() || $user->isClient()) {
     'data'=>$user_list,
     'layout'=>'V',
     'groupin'=>$row_count,
-    'style'=>'width: 100%;'
-  ));
+    'style'=>'width: 100%;'));
 }
 
 // Add control for time period.
@@ -173,17 +165,16 @@ $form->addInput(array('type'=>'combobox',
     INTERVAL_LAST_MONTH=>$i18n->getKey('dropdown.last_month'),
     INTERVAL_THIS_WEEK=>$i18n->getKey('dropdown.this_week'),
     INTERVAL_LAST_WEEK=>$i18n->getKey('dropdown.last_week')),
-  'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-));
+  'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 // Add controls for start and end dates.
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start_date'));
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'end_date'));
 
 // Add checkboxes for fields.
 if (in_array('cl', explode(',', $user->plugins)))
-  $form->addInput(array('type'=>'checkbox','name'=>'chclient','data'=>1));	
+  $form->addInput(array('type'=>'checkbox','name'=>'chclient','data'=>1));
 if (($user->canManageTeam() || $user->isClient()) && in_array('iv', explode(',', $user->plugins)))
-  $form->addInput(array('type'=>'checkbox','name'=>'chinvoice','data'=>1));	
+  $form->addInput(array('type'=>'checkbox','name'=>'chinvoice','data'=>1));
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkbox','name'=>'chproject','data'=>1));
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
@@ -206,7 +197,7 @@ $group_by_options['date'] = $i18n->getKey('form.reports.group_by_date');
 if ($user->canManageTeam() || $user->isClient())
   $group_by_options['user'] = $i18n->getKey('form.reports.group_by_user');
 if (in_array('cl', explode(',', $user->plugins)) && !($user->isClient() && $user->client_id))
-  $group_by_options['client'] = $i18n->getKey('form.reports.group_by_client');	
+  $group_by_options['client'] = $i18n->getKey('form.reports.group_by_client');
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $group_by_options['project'] = $i18n->getKey('form.reports.group_by_project');
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
@@ -221,12 +212,12 @@ $form->addInput(array('type'=>'checkbox','name'=>'chtotalsonly','data'=>1));
 $form->addInput(array('type'=>'text','name'=>'new_fav_report','maxlength'=>'30','style'=>'width: 250px;'));
 // Save button.
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
-  
+
 $form->addInput(array('type'=>'submit','name'=>'btn_generate','value'=>$i18n->getKey('button.generate')));
 
 // Create a bean (which is a mechanism to remember form values in session).
 $bean = new ActionForm('reportBean', $form, $request);
-// At this point form values are obtained from session if they are there...
+// At this point form values are obtained from session if they are there.
 
 if (($request->getMethod() == 'GET') && !$bean->isSaved()) {
   // No previous form data were found in session. Use the following default values.
@@ -239,7 +230,7 @@ if (($request->getMethod() == 'GET') && !$bean->isSaved()) {
   $form->setValueByElement('chproject', 1);
   $form->setValueByElement('chstart', 1);  
   $form->setValueByElement('chduration', 1);
-  $form->setValueByElement('chcost', 0);  
+  $form->setValueByElement('chcost', 0);
   $form->setValueByElement('chtask', 1);
   $form->setValueByElement('chfinish', 1);
   $form->setValueByElement('chnote', 1);
@@ -259,20 +250,20 @@ if ($request->getMethod() == 'POST') {
     if ($bean->getAttribute('favorite_report')) {
       // This loads new favorite report options into the bean (into our form).
       ttFavReportHelper::loadReport($user->id, $bean);
-      
+
       // If user selected no favorite report - mark all user checkboxes (most probable scenario).
       if ($bean->getAttribute('favorite_report') == -1)
         $form->setValueByElement('users', array_keys($user_list));
-       
+
       // Save form data in session for future use.
       $bean->saveBean();
       header('Location: reports.php');
-	  exit();
-	}
+      exit();
+    }
   } elseif ($bean->getAttribute('btn_save')) {
-  	// User clicked the Save button. We need to save form options as new favorite report.
-  	if (!ttValidString($bean->getAttribute('new_fav_report'))) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.reports.save_as_favorite'));
-  	
+    // User clicked the Save button. We need to save form options as new favorite report.
+    if (!ttValidString($bean->getAttribute('new_fav_report'))) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.reports.save_as_favorite'));
+
     if ($errors->isEmpty()) {
       $id = ttFavReportHelper::saveReport($user->id, $bean);
       if (!$id)
@@ -295,33 +286,33 @@ if ($request->getMethod() == 'POST') {
       $form->setValueByElement('users', array_keys($user_list));
       $bean->saveBean();
       header('Location: reports.php');
-	  exit();
-	}
+      exit();
+    }
   } else {
     // Generate button pressed. Check some values.
     if (!$bean->getAttribute('period')) {
       $start_date = new DateAndTime($user->date_format, $bean->getAttribute('start_date'));
-      
+
       if ($start_date->isError() || !$bean->getAttribute('start_date'))
         $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.start_date'));
-        
+
       $end_date = new DateAndTime($user->date_format, $bean->getAttribute('end_date'));
       if ($end_date->isError() || !$bean->getAttribute('end_date'))
         $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.end_date'));
-        
+
       if ($start_date->compare($end_date) > 0)
         $errors->add($i18n->getKey('error.interval'), $i18n->getKey('label.end_date'), $i18n->getKey('label.start_date'));
     }
-    
+
     $bean->saveBean();
-    
+
     if ($errors->isEmpty()) {
       // Now we can go ahead and create a report.
       header('Location: report.php');
       exit();
     }
   }
-}
+} // POST
 
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);

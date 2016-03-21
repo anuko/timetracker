@@ -58,7 +58,7 @@ if ($request->getMethod() == 'POST') {
   $cl_name = $project['name'];
   $cl_description = $project['description'];
   $cl_status = $project['status'];
-  
+
   $mdb2 = getConnection();
   $sql = "select user_id from tt_user_project_binds where status = 1 and project_id = $cl_project_id";
   $res = $mdb2->query($sql);
@@ -66,7 +66,7 @@ if ($request->getMethod() == 'POST') {
     die($res->getMessage());
   while ($row = $res->fetchRow())
     $cl_users[] = $row['user_id'];
-    
+
   $cl_tasks = explode(',', $project['tasks']);
 }
 
@@ -81,12 +81,12 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkboxgroup','name'=>'tasks','data'=>$all_tasks,'layout'=>'H','value'=>$cl_tasks));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
-  
+
 if ($request->getMethod() == 'POST') {
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
   if (!ttValidString($cl_description, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
-  
+
   if ($errors->isEmpty()) {
     if ($request->getParameter('btn_save')) {
       $existing_project = ttProjectHelper::getProjectByName($cl_name);
@@ -124,7 +124,7 @@ if ($request->getMethod() == 'POST') {
         $errors->add($i18n->getKey('error.project_exists'));
     }
   }
-} // post
+} // POST
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.projectForm.name.focus()"');

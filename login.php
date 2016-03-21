@@ -78,7 +78,7 @@ if ($request->getMethod() == 'POST') {
     } else
       $errors->add($i18n->getKey('error.auth'));
   }
-}
+} // POST
 
 if(!isTrue(MULTITEAM_MODE) && !ttTeamHelper::getTeams())
   $errors->add($i18n->getKey('error.no_teams'));
