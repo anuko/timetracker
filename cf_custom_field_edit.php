@@ -39,10 +39,10 @@ if (!ttAccessCheck(right_manage_team)) {
 $cl_id = $request->getParameter('id');
 $field = CustomFields::getField($cl_id);
 if (false === $field)
-  $errors->add($i18n->getKey('error.db'));
+  $err->add($i18n->getKey('error.db'));
 
 $form = new Form('fieldForm');
-if ($errors->no()) {
+if ($err->no()) {
   $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$field['label']));
   $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
   $form->addInput(array('type'=>'checkbox','name'=>'required','data'=>1,'value'=>$field['required']));
@@ -60,15 +60,15 @@ if ($request->isPost()) {
     $cl_required = 0;
 
   // Validate user input.
-  if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
+  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
 
-  if ($errors->no()) {
+  if ($err->no()) {
     $res = CustomFields::updateField($cl_id, $cl_name, $cl_type, $cl_required);
     if ($res) {
       header('Location: cf_custom_fields.php');
       exit();
     } else
-      $errors->add($i18n->getKey('error.db'));
+      $err->add($i18n->getKey('error.db'));
   }
 } // POST
 

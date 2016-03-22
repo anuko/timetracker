@@ -74,7 +74,7 @@ if ($request->isPost()) {
     }
     exit;
   } else
-    $errors->add($i18n->getKey('error.sys'));
+    $err->add($i18n->getKey('error.sys'));
 } // POST
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

@@ -51,7 +51,7 @@ if ($request->isPost()) {
       header('Location: admin_teams.php');
       exit();
     } else
-      $errors->add($i18n->getKey('error.db'));
+      $err->add($i18n->getKey('error.db'));
   }
 
   if ($request->getParameter('btn_cancel')) {

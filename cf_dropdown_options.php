@@ -39,7 +39,7 @@ if (!ttAccessCheck(right_manage_team)) {
 $field_id = $request->getParameter('field_id');
 $options = CustomFields::getOptions($field_id);
 if (false === $options)
-  $errors->add($i18n->getKey('error.db'));
+  $err->add($i18n->getKey('error.db'));
 
 $form = new Form('dropdownOptionsForm');
 

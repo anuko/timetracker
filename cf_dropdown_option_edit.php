@@ -39,10 +39,10 @@ if (!ttAccessCheck(right_manage_team)) {
 $cl_id = $request->getParameter('id');
 $cl_name = CustomFields::getOptionName($cl_id);
 if (false === $cl_name)
-  $errors->add($i18n->getKey('error.db'));
+  $err->add($i18n->getKey('error.db'));
 
 $form = new Form('optionEditForm');
-if ($errors->no()) {
+if ($err->no()) {
   $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
   $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
   $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
@@ -52,9 +52,9 @@ if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
 
   // Validate user input.
-  if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
+  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
 
-  if ($errors->no()) {
+  if ($err->no()) {
     $res = CustomFields::updateOption($cl_id, $cl_name);
     if ($res) {
       // Determine field id for redirect.
@@ -62,7 +62,7 @@ if ($request->isPost()) {
       header("Location: cf_dropdown_options.php?field_id=$field_id");
       exit();
     } else
-      $errors->add($i18n->getKey('error.db'));
+      $err->add($i18n->getKey('error.db'));
   }
 } // POST
 

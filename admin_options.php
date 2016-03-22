@@ -49,18 +49,18 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getK
 if ($request->isPost()) {
   if ($cl_password1 || $cl_password2) {
     // Validate user input.
-    if (!ttValidString($cl_password1)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-    if (!ttValidString($cl_password2)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+    if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
+    if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
     if ($cl_password1 !== $cl_password2)
-      $errors->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+      $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
   }
 
-  if ($errors->no() && $cl_password1) {
+  if ($err->no() && $cl_password1) {
     if (ttUserHelper::setPassword($user->id, $cl_password1)) {
       header('Location: admin_teams.php');
       exit();
     } else
-      $errors->add($i18n->getKey('error.db'));
+      $err->add($i18n->getKey('error.db'));
   }
 } // POST
 

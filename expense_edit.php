@@ -132,13 +132,13 @@ $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getK
 if ($request->isPost()) {
   // Validate user input.
   if (in_array('cl', explode(',', $user->plugins)) && in_array('cm', explode(',', $user->plugins)) && !$cl_client)
-    $errors->add($i18n->getKey('error.client'));
+    $err->add($i18n->getKey('error.client'));
   if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-    if (!$cl_project) $errors->add($i18n->getKey('error.project'));
+    if (!$cl_project) $err->add($i18n->getKey('error.project'));
   }
-  if (!ttValidString($cl_item_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.item'));
-  if (!ttValidFloat($cl_cost)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.cost'));
-  if (!ttValidDate($cl_date)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.date'));
+  if (!ttValidString($cl_item_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.item'));
+  if (!ttValidFloat($cl_cost)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cost'));
+  if (!ttValidDate($cl_date)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.date'));
 
   // Determine lock date.
   $lock_interval = $user->lock_interval;
@@ -155,7 +155,7 @@ if ($request->isPost()) {
   if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES)) {
     $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
     if ($new_date->after($browser_today))
-      $errors->add($i18n->getKey('error.future_date'));
+      $err->add($i18n->getKey('error.future_date'));
   }
 
   // Save record.
@@ -167,13 +167,13 @@ if ($request->isPost()) {
     // Now, step by step.
     // 1) Prohibit updating locked entries.
     if($lockdate && $item_date->before($lockdate))
-      $errors->add($i18n->getKey('error.period_locked'));        
+      $err->add($i18n->getKey('error.period_locked'));
     // 2) Prohibit saving completed unlocked entries into locked interval.
-    if($errors->no() && $lockdate && $new_date->before($lockdate))
-      $errors->add($i18n->getKey('error.period_locked'));        
+    if($err->no() && $lockdate && $new_date->before($lockdate))
+      $err->add($i18n->getKey('error.period_locked'));
 
     // Now, an update.
-    if ($errors->no()) {
+    if ($err->no()) {
       if (ttExpenseHelper::update(array('id'=>$cl_id,'date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getActiveUser(),
           'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost))) {
         header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
@@ -186,16 +186,16 @@ if ($request->isPost()) {
   if ($request->getParameter('btn_copy')) {
     // We need to prohibit saving into locked interval.
     if($lockdate && $new_date->before($lockdate))
-      $errors->add($i18n->getKey('error.period_locked'));
+      $err->add($i18n->getKey('error.period_locked'));
 
     // Now, a new insert.
-    if ($errors->no()) {
+    if ($err->no()) {
       if (ttExpenseHelper::insert(array('date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getActiveUser(),
         'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1))) {
         header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
         exit();
       } else
-        $errors->add($i18n->getKey('error.db'));
+        $err->add($i18n->getKey('error.db'));
     }
   }
 

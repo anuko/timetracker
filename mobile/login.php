@@ -46,10 +46,10 @@ $form->addInput(array('type'=>'submit','name'=>'btn_login','onclick'=>'browser_t
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
-  if (!ttValidString($cl_password)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
+  if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
+  if (!ttValidString($cl_password)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
 
-  if ($errors->no()) {
+  if ($err->no()) {
 
     // Use the "limit" plugin if we have one. Ignore include errors.
     // The "limit" plugin is not required for normal operation of the Time Tracker.
@@ -80,12 +80,12 @@ if ($request->isPost()) {
         exit();
       }
     } else
-      $errors->add($i18n->getKey('error.auth'));
+      $err->add($i18n->getKey('error.auth'));
   }
 } // POST
 
 if(!isTrue(MULTITEAM_MODE) && !ttTeamHelper::getTeams())
-  $errors->add($i18n->getKey('error.no_teams'));
+  $err->add($i18n->getKey('error.no_teams'));
 
 // Determine whether to show login hint. It is currently used only for Windows LDAP authentication.
 $show_hint = ('ad' == $GLOBALS['AUTH_MODULE_PARAMS']['type']);

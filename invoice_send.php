@@ -66,12 +66,12 @@ $form->addInput(array('type'=>'submit','name'=>'btn_send','value'=>$i18n->getKey
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidEmailList($cl_receiver)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.to'));
-  if (!ttValidEmailList($cl_cc, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.cc'));
-  if (!ttValidString($cl_subject)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.subject'));
-  if (!ttValidString($cl_comment, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.comment'));
+  if (!ttValidEmailList($cl_receiver)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.to'));
+  if (!ttValidEmailList($cl_cc, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.cc'));
+  if (!ttValidString($cl_subject)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.subject'));
+  if (!ttValidString($cl_comment, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.comment'));
 
-  if ($errors->no()) {
+  if ($err->no()) {
     // Save last invoice emails for future use.
     $sc->setValue(SYSC_LAST_INVOICE_EMAIL, $cl_receiver);
     $sc->setValue(SYSC_LAST_INVOICE_CC, $cl_cc);
@@ -90,7 +90,7 @@ if ($request->isPost()) {
     if ($mailer->send($cl_subject, $body))
       $messages->add($i18n->getKey('form.mail.invoice_sent'));
     else
-      $errors->add($i18n->getKey('error.mail_send'));
+      $err->add($i18n->getKey('error.mail_send'));
   }
 } // POST
 

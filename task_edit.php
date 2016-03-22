@@ -68,10 +68,10 @@ $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
-  if (!ttValidString($cl_description, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
+  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
+  if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
 
-  if ($errors->no()) {
+  if ($err->no()) {
     if ($request->getParameter('btn_save')) {
       $existing_task = ttTaskHelper::getTaskByName($cl_name);
       if (!$existing_task || ($cl_task_id == $existing_task['id'])) {
@@ -85,9 +85,9 @@ if ($request->isPost()) {
           header('Location: tasks.php');
           exit();
         } else
-          $errors->add($i18n->getKey('error.db'));
+          $err->add($i18n->getKey('error.db'));
       } else
-        $errors->add($i18n->getKey('error.task_exists'));
+        $err->add($i18n->getKey('error.task_exists'));
     }
 
     if ($request->getParameter('btn_copy')) {
@@ -101,9 +101,9 @@ if ($request->isPost()) {
           header('Location: tasks.php');
           exit();
         } else
-          $errors->add($i18n->getKey('error.db'));
+          $err->add($i18n->getKey('error.db'));
       } else
-        $errors->add($i18n->getKey('error.task_exists'));
+        $err->add($i18n->getKey('error.task_exists'));
     }
   }
 } // POST

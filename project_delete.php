@@ -52,9 +52,9 @@ if ($request->isPost()) {
         header('Location: projects.php');
         exit();
       } else
-        $errors->add($i18n->getKey('error.db'));
+        $err->add($i18n->getKey('error.db'));
     } else
-      $errors->add($i18n->getKey('error.db'));
+      $err->add($i18n->getKey('error.db'));
   } else if ($request->getParameter('btn_cancel')) {
     header('Location: projects.php');
     exit();

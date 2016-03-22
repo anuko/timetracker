@@ -181,30 +181,30 @@ $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
+  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
   if ($can_change_login) {
-    if (!ttValidString($cl_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
+    if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
 
     // New login must be unique.
     if ($cl_login != $user->login && ttUserHelper::getUserByLogin($cl_login))
-      $errors->add($i18n->getKey('error.user_exists'));
+      $err->add($i18n->getKey('error.user_exists'));
   }
   if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
-    if (!ttValidString($cl_password1)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-    if (!ttValidString($cl_password2)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+    if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
+    if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
     if ($cl_password1 !== $cl_password2)
-      $errors->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+      $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
   }
-  if (!ttValidEmail($cl_email, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+  if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
   if ($user->canManageTeam()) {
-    if (!ttValidString($cl_team, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
-    if (!ttValidString($cl_address, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.address'));
-    if (!ttValidString($cl_currency, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));
-    if (!ttValidInteger($cl_lock_interval, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.lock_interval'));
+    if (!ttValidString($cl_team, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
+    if (!ttValidString($cl_address, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.address'));
+    if (!ttValidString($cl_currency, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));
+    if (!ttValidInteger($cl_lock_interval, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.lock_interval'));
   }
   // Finished validating user input.
 
-  if ($errors->no()) {
+  if ($err->no()) {
     if ($cl_lock_interval == null || trim($cl_lock_interval) == '')
       $cl_lock_interval = 0;
 
@@ -256,7 +256,7 @@ if ($request->isPost()) {
       header('Location: time.php');
       exit();
     } else
-      $errors->add($i18n->getKey('error.db'));
+      $err->add($i18n->getKey('error.db'));
   }
 } // POST
 

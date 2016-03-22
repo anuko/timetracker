@@ -66,28 +66,28 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getK
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_number)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.invoice.number'));
-  if (!ttValidDate($cl_date)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.date'));
-  if (!$cl_client) $errors->add($i18n->getKey('error.client'));
-  if (!ttValidDate($cl_start)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.start_date'));
-  if (!ttValidDate($cl_finish)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.end_date'));
+  if (!ttValidString($cl_number)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.invoice.number'));
+  if (!ttValidDate($cl_date)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.date'));
+  if (!$cl_client) $err->add($i18n->getKey('error.client'));
+  if (!ttValidDate($cl_start)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start_date'));
+  if (!ttValidDate($cl_finish)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.end_date'));
 
   $fields = array('date'=>$cl_date,'name'=>$cl_number,'client_id'=>$cl_client,'project_id'=>$cl_project,'start_date'=>$cl_start,'end_date'=>$cl_finish);
-  if ($errors->no()) {
+  if ($err->no()) {
     if (ttInvoiceHelper::getInvoiceByName($cl_number))
-      $errors->add($i18n->getKey('error.invoice_exists'));
+      $err->add($i18n->getKey('error.invoice_exists'));
 
     if (!ttInvoiceHelper::invoiceableItemsExist($fields))
-      $errors->add($i18n->getKey('error.no_invoiceable_items'));
+      $err->add($i18n->getKey('error.no_invoiceable_items'));
   }
 
-  if ($errors->no()) {
+  if ($err->no()) {
     // Now we can go ahead and create our invoice.
     if (ttInvoiceHelper::createInvoice($fields)) {
       header('Location: invoices.php');
       exit();
     }
-      $errors->add($i18n->getKey('error.db'));
+      $err->add($i18n->getKey('error.db'));
   }
 } // POST
 

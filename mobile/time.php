@@ -197,67 +197,67 @@ if ($request->isPost()) {
 
     // Validate user input.
     if (in_array('cl', explode(',', $user->plugins)) && in_array('cm', explode(',', $user->plugins)) && !$cl_client)
-      $errors->add($i18n->getKey('error.client'));
+      $err->add($i18n->getKey('error.client'));
     if ($custom_fields) {
-      if (!ttValidString($cl_cf_1, !$custom_fields->fields[0]['required'])) $errors->add($i18n->getKey('error.field'), $custom_fields->fields[0]['label']);
+      if (!ttValidString($cl_cf_1, !$custom_fields->fields[0]['required'])) $err->add($i18n->getKey('error.field'), $custom_fields->fields[0]['label']);
     }
     if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-      if (!$cl_project) $errors->add($i18n->getKey('error.project'));
+      if (!$cl_project) $err->add($i18n->getKey('error.project'));
     }
     if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-      if (!$cl_task) $errors->add($i18n->getKey('error.task'));
+      if (!$cl_task) $err->add($i18n->getKey('error.task'));
     }
     if (!$cl_duration) {
       if ('0' == $cl_duration)
-        $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+        $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
       else if ($cl_start || $cl_finish) {
         if (!ttTimeHelper::isValidTime($cl_start))
-          $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.start'));
+          $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start'));
         if ($cl_finish) {
           if (!ttTimeHelper::isValidTime($cl_finish))
-            $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.finish'));
+            $err->add($i18n->getKey('error.field'), $i18n->getKey('label.finish'));
           if (!ttTimeHelper::isValidInterval($cl_start, $cl_finish))
-            $errors->add($i18n->getKey('error.interval'), $i18n->getKey('label.finish'), $i18n->getKey('label.start'));
+            $err->add($i18n->getKey('error.interval'), $i18n->getKey('label.finish'), $i18n->getKey('label.start'));
         }
       } else {
         if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
-          $errors->add($i18n->getKey('error.empty'), $i18n->getKey('label.start'));
-          $errors->add($i18n->getKey('error.empty'), $i18n->getKey('label.finish'));
+          $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.start'));
+          $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.finish'));
         }
         if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
-          $errors->add($i18n->getKey('error.empty'), $i18n->getKey('label.duration'));
+          $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.duration'));
       }
     } else {
       if (!ttTimeHelper::isValidDuration($cl_duration))
-        $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+        $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
     }
-    if (!ttValidString($cl_note, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.note'));
+    if (!ttValidString($cl_note, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.note'));
     // Finished validating user input.
 
     // Prohibit creating entries in future.
     if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES)) {
       $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
       if ($selected_date->after($browser_today))
-        $errors->add($i18n->getKey('error.future_date'));
+        $err->add($i18n->getKey('error.future_date'));
     }
 
     // Prohibit creating time entries in locked interval.
     if($lockdate && $selected_date->before($lockdate))
-      $errors->add($i18n->getKey('error.period_locked'));
+      $err->add($i18n->getKey('error.period_locked'));
 
     // Prohibit creating another uncompleted record.
-    if ($errors->no()) {
+    if ($err->no()) {
       if (($not_completed_rec = ttTimeHelper::getUncompleted($user->getActiveUser())) && (($cl_finish == '') && ($cl_duration == '')))
-        $errors->add($i18n->getKey('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->getKey('error.goto_uncompleted')."</a>");
+        $err->add($i18n->getKey('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->getKey('error.goto_uncompleted')."</a>");
     }
 
     // Prohibit creating an overlapping record.
-    if ($errors->no()) {
+    if ($err->no()) {
       if (ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $cl_start, $cl_finish))
-        $errors->add($i18n->getKey('error.overlap'));
+        $err->add($i18n->getKey('error.overlap'));
     }
 
-    if ($errors->no()) {
+    if ($err->no()) {
       $id = ttTimeHelper::insert(array(
         'date' => $cl_date,
         'user_id' => $user->getActiveUser(),
@@ -283,7 +283,7 @@ if ($request->isPost()) {
         header('Location: time.php');
         exit();
       }
-      $errors->add($i18n->getKey('error.db'));
+      $err->add($i18n->getKey('error.db'));
     }
   }
 } // POST

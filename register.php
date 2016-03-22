@@ -63,17 +63,17 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getK
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_team_name, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
-  if (!ttValidString($cl_currency, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));
-  if (!ttValidString($cl_manager_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_name'));
-  if (!ttValidString($cl_manager_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_login'));
-  if (!ttValidString($cl_password1)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-  if (!ttValidString($cl_password2)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+  if (!ttValidString($cl_team_name, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
+  if (!ttValidString($cl_currency, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));
+  if (!ttValidString($cl_manager_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_name'));
+  if (!ttValidString($cl_manager_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_login'));
+  if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
+  if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
   if ($cl_password1 !== $cl_password2)
-    $errors->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
-  if (!ttValidEmail($cl_manager_email, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+    $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+  if (!ttValidEmail($cl_manager_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
 
-  if ($errors->no()) {
+  if ($err->no()) {
     if (!ttUserHelper::getUserByLogin($cl_manager_login)) {
       // Create a new team.
       $team_id = ttTeamHelper::insert(array('name'=>$cl_team_name,'currency'=>$cl_currency));
@@ -96,9 +96,9 @@ if ($request->isPost()) {
         }
         exit();
       } else
-        $errors->add($i18n->getKey('error.db'));
+        $err->add($i18n->getKey('error.db'));
     } else
-      $errors->add($i18n->getKey('error.user_exists'));
+      $err->add($i18n->getKey('error.user_exists'));
   }
 } // POST
 

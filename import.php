@@ -43,9 +43,9 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getK
 
 if ($request->isPost()) {
 
-  $import = new ttImportHelper($errors);
+  $import = new ttImportHelper($err);
   $import->importXml();
-  if ($errors->no())
+  if ($err->no())
     $messages->add($i18n->getKey('form.import.success'));
 } // POST
 

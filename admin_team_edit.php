@@ -75,22 +75,22 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getK
 if ($request->isPost()) {
   if ($request->getParameter('btn_save')) {
     // Validate user input.
-    if (!ttValidString($cl_team_name, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
-    if (!ttValidString($cl_manager_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_name'));
-    if (!ttValidString($cl_manager_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_login'));
+    if (!ttValidString($cl_team_name, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
+    if (!ttValidString($cl_manager_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_name'));
+    if (!ttValidString($cl_manager_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_login'));
     if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
-      if (!ttValidString($cl_password1)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-      if (!ttValidString($cl_password2)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+      if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
+      if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
       if ($cl_password1 !== $cl_password2)
-        $errors->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+        $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
     }
-    if (!ttValidEmail($cl_manager_email, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+    if (!ttValidEmail($cl_manager_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
 
     // New login must be unique.
     if ($cl_manager_login != $team_details['manager_login'])
-      if (ttUserHelper::getUserByLogin($cl_manager_login)) $errors->add($i18n->getKey('error.user_exists'));
+      if (ttUserHelper::getUserByLogin($cl_manager_login)) $err->add($i18n->getKey('error.user_exists'));
 
-    if ($errors->no()) {
+    if ($err->no()) {
       $update_result = ttTeamHelper::update($team_id, array('name'=>$cl_team_name));
       if ($update_result) {
         $update_result = ttUserHelper::update($team_details['manager_id'], array(
@@ -104,7 +104,7 @@ if ($request->isPost()) {
         header('Location: admin_teams.php');
         exit();
       } else
-        $errors->add($i18n->getKey('error.db'));
+        $err->add($i18n->getKey('error.db'));
     }
   }
 

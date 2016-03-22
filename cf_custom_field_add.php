@@ -55,15 +55,15 @@ $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey(
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_field_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
+  if (!ttValidString($cl_field_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
 
-  if ($errors->no()) {
+  if ($err->no()) {
     $res = CustomFields::insertField($cl_field_name, $cl_field_type, $cl_required);
     if ($res) {
       header('Location: cf_custom_fields.php');
       exit();
     } else
-      $errors->add($i18n->getKey('error.db'));
+      $err->add($i18n->getKey('error.db'));
   }
 } // POST
 

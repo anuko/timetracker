@@ -70,10 +70,10 @@ if ($request->isPost()) {
     $uncompleted = ($time_rec['duration'] == '0:00');
 
     if($lockdate && $item_date->before($lockdate) && !$uncompleted) {
-      $errors->add($i18n->getKey('error.period_locked'));
+      $err->add($i18n->getKey('error.period_locked'));
     }
 
-    if ($errors->no()) {
+    if ($err->no()) {
 
       // Delete the record.
       $result = ttTimeHelper::delete($cl_id, $user->getActiveUser());
@@ -82,7 +82,7 @@ if ($request->isPost()) {
         header('Location: time.php');
         exit();
       } else {
-        $errors->add($i18n->getKey('error.db'));
+        $err->add($i18n->getKey('error.db'));
       }
     }
   }

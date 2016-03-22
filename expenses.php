@@ -146,33 +146,33 @@ if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
     // Validate user input.
     if (in_array('cl', explode(',', $user->plugins)) && in_array('cm', explode(',', $user->plugins)) && !$cl_client)
-      $errors->add($i18n->getKey('error.client'));
+      $err->add($i18n->getKey('error.client'));
     if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-      if (!$cl_project) $errors->add($i18n->getKey('error.project'));
+      if (!$cl_project) $err->add($i18n->getKey('error.project'));
     }
-    if (!ttValidString($cl_item_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.item'));
-    if (!ttValidFloat($cl_cost)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.cost'));
+    if (!ttValidString($cl_item_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.item'));
+    if (!ttValidFloat($cl_cost)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cost'));
 
     // Prohibit creating entries in future.
     if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES)) {
       $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
       if ($selected_date->after($browser_today))
-        $errors->add($i18n->getKey('error.future_date'));
+        $err->add($i18n->getKey('error.future_date'));
     }
     // Finished validating input data.
 
     // Prohibit creating time entries in locked interval.
     if($lockdate && $selected_date->before($lockdate))
-      $errors->add($i18n->getKey('error.period_locked'));
+      $err->add($i18n->getKey('error.period_locked'));
 
     // Insert record.
-    if ($errors->no()) {
+    if ($err->no()) {
       if (ttExpenseHelper::insert(array('date'=>$cl_date,'user_id'=>$user->getActiveUser(),
         'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1))) {
         header('Location: expenses.php');
         exit();
       } else
-        $errors->add($i18n->getKey('error.db'));
+        $err->add($i18n->getKey('error.db'));
     }
   }
   else if ($request->getParameter('onBehalfUser')) {

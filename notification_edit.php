@@ -68,11 +68,11 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getK
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!$cl_fav_report) $errors->add($i18n->getKey('error.report')); 
-  if (!ttValidCronSpec($cl_cron_spec)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.cron_schedule'));
-  if (!ttValidEmail($cl_email)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+  if (!$cl_fav_report) $err->add($i18n->getKey('error.report'));
+  if (!ttValidCronSpec($cl_cron_spec)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cron_schedule'));
+  if (!ttValidEmail($cl_email)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
 
-  if ($errors->no()) {
+  if ($err->no()) {
     // Calculate next execution time.
     $next = tdCron::getNextOccurrence($cl_cron_spec, mktime());
 
@@ -87,7 +87,7 @@ if ($request->isPost()) {
         header('Location: notifications.php');
         exit();
       } else
-        $errors->add($i18n->getKey('error.db'));
+        $err->add($i18n->getKey('error.db'));
   }
 } // POST
 

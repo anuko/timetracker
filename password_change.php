@@ -66,12 +66,12 @@ $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_password1)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-  if (!ttValidString($cl_password2)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+  if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
+  if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
   if ($cl_password1 !== $cl_password2)
-    $errors->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+    $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
 
-  if ($errors->no()) {
+  if ($err->no()) {
     // Use the "limit" plugin if we have one. Ignore include errors.
     // The "limit" plugin is not required for normal operation of Time Tracker.
     $cl_login = $user->login; // $cl_login is used in access_check.cpp.
@@ -84,7 +84,7 @@ if ($request->isPost()) {
       header('Location: time.php');
       exit();
     } else {
-      $errors->add($i18n->getKey('error.auth'));
+      $err->add($i18n->getKey('error.auth'));
     }
   }
 } // POST

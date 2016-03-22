@@ -262,13 +262,13 @@ if ($request->isPost()) {
     }
   } elseif ($bean->getAttribute('btn_save')) {
     // User clicked the Save button. We need to save form options as new favorite report.
-    if (!ttValidString($bean->getAttribute('new_fav_report'))) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.reports.save_as_favorite'));
+    if (!ttValidString($bean->getAttribute('new_fav_report'))) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.reports.save_as_favorite'));
 
-    if ($errors->no()) {
+    if ($err->no()) {
       $id = ttFavReportHelper::saveReport($user->id, $bean);
       if (!$id)
-        $errors->add($i18n->getKey('error.db'));
-      if ($errors->no()) {
+        $err->add($i18n->getKey('error.db'));
+      if ($err->no()) {
         $bean->setAttribute('favorite_report', $id);
         $bean->saveBean();
         header('Location: reports.php');
@@ -294,19 +294,19 @@ if ($request->isPost()) {
       $start_date = new DateAndTime($user->date_format, $bean->getAttribute('start_date'));
 
       if ($start_date->isError() || !$bean->getAttribute('start_date'))
-        $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.start_date'));
+        $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start_date'));
 
       $end_date = new DateAndTime($user->date_format, $bean->getAttribute('end_date'));
       if ($end_date->isError() || !$bean->getAttribute('end_date'))
-        $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.end_date'));
+        $err->add($i18n->getKey('error.field'), $i18n->getKey('label.end_date'));
 
       if ($start_date->compare($end_date) > 0)
-        $errors->add($i18n->getKey('error.interval'), $i18n->getKey('label.end_date'), $i18n->getKey('label.start_date'));
+        $err->add($i18n->getKey('error.interval'), $i18n->getKey('label.end_date'), $i18n->getKey('label.start_date'));
     }
 
     $bean->saveBean();
 
-    if ($errors->no()) {
+    if ($err->no()) {
       // Now we can go ahead and create a report.
       header('Location: report.php');
       exit();

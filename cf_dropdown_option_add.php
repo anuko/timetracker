@@ -39,10 +39,10 @@ if (!ttAccessCheck(right_manage_team)) {
 $cl_field_id = $request->getParameter('field_id');
 $field = CustomFields::getField($cl_field_id);
 if (false === $field)
-  $errors->add($i18n->getKey('error.db'));
+  $err->add($i18n->getKey('error.db'));
 
 $form = new Form('optionAddForm');
-if ($errors->no()) {
+if ($err->no()) {
   $form->addInput(array('type'=>'hidden','name'=>'field_id','value'=>$cl_field_id));
   $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>''));
   $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
@@ -52,15 +52,15 @@ if ($request->isPost()) {
   $cl_option_name = trim($request->getParameter('name'));
 
   // Validate user input.
-  if (!ttValidString($cl_option_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
+  if (!ttValidString($cl_option_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
 
-  if ($errors->no()) {
+  if ($err->no()) {
     $res = CustomFields::insertOption($cl_field_id, $cl_option_name);
     if ($res) {
       header("Location: cf_dropdown_options.php?field_id=$cl_field_id");
       exit();
     } else
-      $errors->add($i18n->getKey('error.db'));
+      $err->add($i18n->getKey('error.db'));
   }
 } // POST
 

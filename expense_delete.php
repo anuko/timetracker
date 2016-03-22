@@ -59,16 +59,16 @@ if ($request->isPost()) {
       $item_date = new DateAndTime(DB_DATEFORMAT);
       $item_date->parseVal($expense_item['date'], DB_DATEFORMAT);
       if ($item_date->before($lockdate))
-        $errors->add($i18n->getKey('error.period_locked'));
+        $err->add($i18n->getKey('error.period_locked'));
     }
 
-    if ($errors->no()) {
+    if ($err->no()) {
       // Mark the record as deleted.
       if (ttExpenseHelper::markDeleted($cl_id, $user->getActiveUser())) {
         header('Location: expenses.php');
         exit();
       } else
-        $errors->add($i18n->getKey('error.db'));
+        $err->add($i18n->getKey('error.db'));
     }
   }
   if ($request->getParameter('cancel_button')) { // Cancel button pressed.

@@ -55,10 +55,10 @@ if ($request->isPost()) {
         header('Location: clients.php');
         exit();
       } else
-        $errors->add($i18n->getKey('error.db'));
+        $err->add($i18n->getKey('error.db'));
     }
   } else 
-      $errors->add($i18n->getKey('error.db'));
+      $err->add($i18n->getKey('error.db'));
 
   if ($request->getParameter('btn_cancel')) {
     header('Location: clients.php');

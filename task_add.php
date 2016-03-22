@@ -57,10 +57,10 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getK
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
-  if (!ttValidString($cl_description, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
+  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
+  if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
 
-  if ($errors->no()) {
+  if ($err->no()) {
     if (!ttTaskHelper::getTaskByName($cl_name)) {
       if (ttTaskHelper::insert(array(
         'team_id' => $user->team_id,
@@ -71,9 +71,9 @@ if ($request->isPost()) {
           header('Location: tasks.php');
           exit();
         } else
-          $errors->add($i18n->getKey('error.db'));
+          $err->add($i18n->getKey('error.db'));
     } else
-      $errors->add($i18n->getKey('error.task_exists'));
+      $err->add($i18n->getKey('error.task_exists'));
   }
 } // POST
 

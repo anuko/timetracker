@@ -73,11 +73,11 @@ $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.client_name'));
-  if (!ttValidString($cl_address, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.client_address'));
-  if (!ttValidFloat($cl_tax, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.tax'));
+  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_name'));
+  if (!ttValidString($cl_address, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_address'));
+  if (!ttValidFloat($cl_tax, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.tax'));
 
-  if ($errors->no()) {
+  if ($err->no()) {
     if ($request->getParameter('btn_save')) {
       $client = ttClientHelper::getClientByName($cl_name);
       if (($client && ($cl_id == $client['id'])) || !$client) {
@@ -91,9 +91,9 @@ if ($request->isPost()) {
           header('Location: clients.php');
           exit();
         } else
-          $errors->add($i18n->getKey('error.db'));
+          $err->add($i18n->getKey('error.db'));
       } else
-        $errors->add($i18n->getKey('error.client_exists'));
+        $err->add($i18n->getKey('error.client_exists'));
     }
 
     if ($request->getParameter('btn_copy')) {
@@ -108,9 +108,9 @@ if ($request->isPost()) {
           header('Location: clients.php');
           exit();
         } else
-          $errors->add($i18n->getKey('error.db'));
+          $err->add($i18n->getKey('error.db'));
       } else
-        $errors->add($i18n->getKey('error.client_exists'));
+        $err->add($i18n->getKey('error.client_exists'));
     }
   }
 } // POST

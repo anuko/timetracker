@@ -67,10 +67,10 @@ $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey(
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
-  if (!ttValidString($cl_description, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
+  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
+  if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
 
-  if ($errors->no()) {
+  if ($err->no()) {
     if (!ttProjectHelper::getProjectByName($cl_name)) {
       if (ttProjectHelper::insert(array(
         'team_id' => $user->team_id,
@@ -82,9 +82,9 @@ if ($request->isPost()) {
           header('Location: projects.php');
           exit();
         } else
-          $errors->add($i18n->getKey('error.db'));
+          $err->add($i18n->getKey('error.db'));
     } else
-      $errors->add($i18n->getKey('error.project_exists'));
+      $err->add($i18n->getKey('error.project_exists'));
   }
 } // POST
 
