@@ -59,13 +59,10 @@ $i18n_key_words = array(
 'menu.options' => 'Opties',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
-// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+'footer.contribute_msg' => 'Je kunt aan de ontwikkeling van Time Tracker bijdragen op verschillende manieren.',
 'footer.credits' => 'Medewerkers',
 'footer.license' => 'Licentie',
-// TODO: translate the following:
-// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                  // This is a link to a webpage that describes how to contribute to the project.
+'footer.improve' => 'Bijdragen',
 
 // Error messages.
 'error.access_denied' => 'Toegang geweigerd.',
