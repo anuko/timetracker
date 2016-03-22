@@ -98,7 +98,7 @@ if ($request->isPost()) {
   if (($cl_start == $cl_finish) && ($cl_duration == '0:00')) {
     $cl_finish = '';
     $cl_duration = '';
-    $messages->add($i18n->getKey('form.time_edit.uncompleted'));
+    $msg->add($i18n->getKey('form.time_edit.uncompleted'));
   }
 }
 

@@ -45,8 +45,7 @@ if ($request->isPost()) {
 
   $import = new ttImportHelper($err);
   $import->importXml();
-  if ($err->no())
-    $messages->add($i18n->getKey('form.import.success'));
+  if ($err->no()) $msg->add($i18n->getKey('form.import.success'));
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()) );

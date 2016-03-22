@@ -55,11 +55,11 @@
       <!-- End of top image -->
 
       <!-- Output errors -->
-{if $errors->yes()}
+{if $err->yes()}
       <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
           <td class="error">
-  {foreach $errors->getErrors() as $error}
+  {foreach $err->getErrors() as $error}
             {$error.message}<br> {* No need to escape as they are not coming from user and may contain a link. *}
   {/foreach}
           </td>
@@ -69,11 +69,11 @@
       <!-- End of output errors -->
 
       <!-- Output messages -->
-{if $messages->yes()}
+{if $msg->yes()}
       <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
           <td class="info_message">
-  {foreach $messages->getErrors() as $message}
+  {foreach $msg->getErrors() as $message}
             {$message.message}<br> {* No need to escape. *}
   {/foreach}
           </td>

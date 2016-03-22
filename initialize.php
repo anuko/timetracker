@@ -152,8 +152,8 @@ import('html.HttpRequest');
 $request = new ttHttpRequest();
 
 import('form.ActionErrors');
-$err = new ActionErrors();
-$messages = new ActionErrors();
+$err = new ActionErrors(); // Error messages for user.
+$msg = new ActionErrors(); // Notification messages (not errrors) for user.
 
 // Create an instance of ttUser class. This gets us most of user details.
 import('ttUser');
@@ -193,8 +193,8 @@ $GLOBALS['USER'] = &$user;
 
 // Assign things for smarty to use in template files.
 $smarty->assign('i18n', $i18n->keys);
-$smarty->assign('errors', $err);
-$smarty->assign('messages', $messages);
+$smarty->assign('err', $err);
+$smarty->assign('msg', $msg);
 
 // TODO: move this code out of here to the files that use it.
 
