@@ -31,7 +31,12 @@ class ttHttpRequest {
   function getMethod() {
     return isset( $_SERVER['REQUEST_METHOD'] ) ? $_SERVER['REQUEST_METHOD'] : false;
   }
-	
+
+  // The isPost function determines if a request method is POST.
+  function isPost() {
+    return ($this->getMethod() == 'POST');
+  }
+
   // The getParameter is the primary function of this class. It returns request parameter,
   // identified by $name.
   function getParameter($name = "", $default = null) { 

@@ -36,7 +36,7 @@ if (!ttAccessCheck(right_administer_site)) {
   exit();
 }
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_team_name = trim($request->getParameter('team_name'));
   $cl_manager_name = trim($request->getParameter('manager_name'));
   $cl_manager_login = trim($request->getParameter('manager_login'));
@@ -58,7 +58,7 @@ if (!$auth->isPasswordExternal()) {
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_email','value'=>$cl_manager_email));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_team_name, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
   if (!ttValidString($cl_manager_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_name'));
@@ -93,7 +93,7 @@ if ($request->getMethod() == 'POST') {
     } else
       $errors->add($i18n->getKey('error.user_exists'));
   }
-} // POST
+} // isPost
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
