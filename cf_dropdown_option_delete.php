@@ -39,7 +39,7 @@ if (!ttAccessCheck(right_manage_team)) {
 $cl_id = $request->getParameter('id');
 $form = new Form('optionDeleteForm');
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
 
   // Determine field id for redirect.
   $field_id = CustomFields::getFieldIdForOption($cl_id);

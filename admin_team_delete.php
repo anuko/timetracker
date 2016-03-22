@@ -45,7 +45,7 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$team_id));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
     if (ttTeamHelper::markDeleted($team_id)) {
       header('Location: admin_teams.php');

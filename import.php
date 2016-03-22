@@ -41,7 +41,7 @@ $form->addInput(array('type'=>'upload','name'=>'xmlfile','value'=>'browse','maxs
 // Note: for the above limit to work make sure to set upload_max_filesize and post_max_size in php.ini to at least 16M.
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.import')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
 
   $import = new ttImportHelper($errors);
   $import->importXml();

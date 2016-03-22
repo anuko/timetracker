@@ -36,7 +36,7 @@ if (!ttAccessCheck(right_administer_site)) {
   exit();
 }
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_password1 = $request->getParameter('password1');
   $cl_password2 = $request->getParameter('password2');
 }
@@ -46,7 +46,7 @@ $form->addInput(array('type'=>'text','aspassword'=>true,'maxlength'=>'30','name'
 $form->addInput(array('type'=>'text','aspassword'=>true,'maxlength'=>'30','name'=>'password2','style'=>"width: 150px;",'value'=>$cl_password2));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if ($cl_password1 || $cl_password2) {
     // Validate user input.
     if (!ttValidString($cl_password1)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));

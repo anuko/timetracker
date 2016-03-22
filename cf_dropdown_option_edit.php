@@ -48,7 +48,7 @@ if ($errors->no()) {
   $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 }
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
 
   // Validate user input.

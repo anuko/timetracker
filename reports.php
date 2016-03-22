@@ -244,7 +244,7 @@ $form->setValueByElement('fav_report_changed','');
 if (!$bean->getAttribute('favorite_report') || ($bean->getAttribute('favorite_report') == -1))
   $form->getElement('btn_delete')->setEnable(false);
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if((!$bean->getAttribute('btn_generate') && ($request->getParameter('fav_report_changed')))) {
     // User changed favorite report. We need to load new values into the form.
     if ($bean->getAttribute('favorite_report')) {

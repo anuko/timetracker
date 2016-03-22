@@ -47,7 +47,7 @@ $tasks = ttTeamHelper::getActiveTasks($user->team_id);
 foreach ($tasks as $task_item)
   $all_tasks[$task_item['id']] = $task_item['name'];
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_name = trim($request->getParameter('project_name'));
   $cl_description = trim($request->getParameter('description'));
   $cl_status = $request->getParameter('status');
@@ -82,7 +82,7 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
   if (!ttValidString($cl_description, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));

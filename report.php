@@ -64,7 +64,7 @@ if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->g
   }
 }
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   foreach($_POST as $key => $val) {
     if ('log_id_' == substr($key, 0, 7))
       $time_log_ids[] = substr($key, 7);

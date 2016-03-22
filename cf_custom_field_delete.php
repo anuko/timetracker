@@ -40,7 +40,7 @@ $id = $request->getParameter('id');
 
 $form = new Form('fieldDeleteForm');
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
     // Delete button pressed.
     $res = CustomFields::deleteField($id);

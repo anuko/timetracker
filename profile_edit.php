@@ -39,7 +39,7 @@ if (!ttAccessCheck(right_data_entry|right_view_reports)) {
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
 $can_change_login = $user->canManageTeam();
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_login = trim($request->getParameter('login'));
   if (!$auth->isPasswordExternal()) {
@@ -179,7 +179,7 @@ if ($user->canManageTeam()) {
 }
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
   if ($can_change_login) {

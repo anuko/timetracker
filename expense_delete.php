@@ -43,7 +43,7 @@ $expense_item = ttExpenseHelper::getItem($cl_id, $user->getActiveUser());
 // Prohibit deleting invoiced records.
 if ($expense_item['invoice_id']) die($i18n->getKey('error.sys'));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if ($request->getParameter('delete_button')) { // Delete button pressed.
 
     // Determine if it's okay to delete the record.

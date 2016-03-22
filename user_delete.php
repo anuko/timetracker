@@ -63,7 +63,7 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$user_id));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
     if (ttUserHelper::markDeleted($user_id)) {
       // If we deleted the "on behalf" user reset its info in session.

@@ -65,7 +65,7 @@ $cl_cf_1 = trim($request->getParameter('cf_1', ($request->getMethod()=='POST'? n
 $_SESSION['cf_1'] = $cl_cf_1;
 $cl_billable = 1;
 if (in_array('iv', explode(',', $user->plugins))) {
-  if ($request->getMethod() == 'POST') {
+  if ($request->isPost()) {
     $cl_billable = $request->getParameter('billable');
     $_SESSION['billable'] = (int) $cl_billable;
   } else 
@@ -188,7 +188,7 @@ if ($lock_interval > 0) {
 }
 
 // Submit.
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if ($request->getParameter('btn_start')) {
     // Start button clicked. We need to create a new uncompleted record with only the start time.
     $cl_finish = null;

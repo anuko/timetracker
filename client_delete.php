@@ -48,7 +48,7 @@ $form->addInput(array('type'=>'combobox','name'=>'delete_client_entries',
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if(ttClientHelper::getClient($id)) {
     if ($request->getParameter('btn_delete')) {
       if (ttClientHelper::delete($id, $request->getParameter('delete_client_entries'))) {

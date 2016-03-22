@@ -59,7 +59,7 @@ $item_date = new DateAndTime(DB_DATEFORMAT, $time_rec['date']);
 
 // Initialize variables.
 $cl_start = $cl_finish = $cl_duration = $cl_date = $cl_note = $cl_project = $cl_task = $cl_billable = null;
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_start = trim($request->getParameter('start'));
   $cl_finish = trim($request->getParameter('finish'));
   $cl_duration = trim($request->getParameter('duration'));
@@ -208,7 +208,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>'browser_to
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.copy')));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
 
   // Validate user input.
   if (in_array('cl', explode(',', $user->plugins)) && in_array('cm', explode(',', $user->plugins)) && !$cl_client)

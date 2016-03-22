@@ -37,7 +37,7 @@ if (!ttAccessCheck(right_manage_team)) {
   exit();
 }
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_date = $request->getParameter('date');
   $cl_client = $request->getParameter('client');
   $cl_project = $request->getParameter('project');
@@ -64,7 +64,7 @@ $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start','val
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'finish','value'=>$cl_finish));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.add')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_number)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.invoice.number'));
   if (!ttValidDate($cl_date)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.date'));

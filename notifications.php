@@ -38,7 +38,7 @@ if (!ttAccessCheck(right_manage_team)) {
 
 $form = new Form('notificationsForm');
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if ($request->getParameter('btn_add')) {
     // The Add button clicked. Redirect to notification_add.php page.
     header('Location: notification_add.php');

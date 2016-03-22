@@ -49,7 +49,7 @@ $form->addInput(array('type'=>'combobox',
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
     if (ttInvoiceHelper::getInvoice($cl_invoice_id)) {
       if (ttInvoiceHelper::delete($cl_invoice_id, $request->getParameter('delete_invoice_entries'))) {

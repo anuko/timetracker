@@ -40,7 +40,7 @@ if (!ttAccessCheck(right_administer_site)) {
 $team_id = $request->getParameter('id');
 $team_details = ttTeamHelper::getTeamDetails($team_id);	
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_team_name = trim($request->getParameter('team_name'));
   $cl_manager_name = trim($request->getParameter('manager_name'));
   $cl_manager_login = trim($request->getParameter('manager_login'));
@@ -72,7 +72,7 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$team_id));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if ($request->getParameter('btn_save')) {
     // Validate user input.
     if (!ttValidString($cl_team_name, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));

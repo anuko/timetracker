@@ -74,7 +74,7 @@ class ActionForm {
      */
     function initAttributes(&$request) {
         //$submit_flag = $this->isSubmit();
-        $submit_flag = (is_object($request) && ($request->getMethod() == 'POST'));
+        $submit_flag = (is_object($request) && ($request->isPost()));
         	
         if ($submit_flag) {
         	// fill ActionForm and Form from Request

@@ -142,7 +142,7 @@ if ($lock_interval > 0) {
 }
 
 // Submit.
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
     // Validate user input.
     if (in_array('cl', explode(',', $user->plugins)) && in_array('cm', explode(',', $user->plugins)) && !$cl_client)

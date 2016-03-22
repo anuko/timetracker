@@ -42,7 +42,7 @@ if (!ttAccessCheck(right_manage_team)) {
 $notification_id = (int) $request->getParameter('id');
 $fav_reports = ttFavReportHelper::getReports($user->id);
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_fav_report = trim($request->getParameter('fav_report'));
   $cl_cron_spec = trim($request->getParameter('cron_spec'));
   $cl_email = trim($request->getParameter('email'));
@@ -66,7 +66,7 @@ $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'cron_spec','sty
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','style'=>'width: 250px;','value'=>$cl_email));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.save')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   // Validate user input.
   if (!$cl_fav_report) $errors->add($i18n->getKey('error.report')); 
   if (!ttValidCronSpec($cl_cron_spec)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.cron_schedule'));

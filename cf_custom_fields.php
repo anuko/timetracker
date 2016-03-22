@@ -38,7 +38,7 @@ if (!ttAccessCheck(right_manage_team)) {
 
 $form = new Form('customFieldsForm');
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if ($request->getParameter('btn_add')) {
     // The Add button clicked. Redirect to cf_custom_field_add.php page.
     header('Location: cf_custom_field_add.php');

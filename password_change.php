@@ -64,7 +64,7 @@ $form->addInput(array('type'=>'text','maxlength'=>'120','name'=>'password2','asp
 $form->addInput(array('type'=>'hidden','name'=>'ref','value'=>$cl_ref));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_password1)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
   if (!ttValidString($cl_password2)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));

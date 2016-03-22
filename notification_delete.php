@@ -45,7 +45,7 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_notification_id
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
     if(ttNotificationHelper::get($cl_notification_id)) {
       if (ttNotificationHelper::delete($cl_notification_id)) {

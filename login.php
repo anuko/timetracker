@@ -42,7 +42,7 @@ $form->addInput(array('type'=>'text','size'=>'25','maxlength'=>'50','name'=>'pas
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_login click.
 $form->addInput(array('type'=>'submit','name'=>'btn_login','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.login')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
   if (!ttValidString($cl_password)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));

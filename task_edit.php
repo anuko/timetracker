@@ -40,7 +40,7 @@ if (!ttAccessCheck(right_manage_team)) {
 $cl_task_id = (int)$request->getParameter('id');
 $projects = ttTeamHelper::getActiveProjects($user->team_id);
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_description = trim($request->getParameter('description'));
   $cl_status = $request->getParameter('status');
@@ -66,7 +66,7 @@ $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','layout'=>'H','
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
   if (!ttValidString($cl_description, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));

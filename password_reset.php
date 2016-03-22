@@ -40,7 +40,7 @@ $form = new Form('resetPasswordForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','style'=>'width: 300px;'));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.reset_password')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_login = $request->getParameter('login');
 
   // Validate user input.

@@ -45,7 +45,7 @@ $sc = new ttSysConfig($user->id);
 if (!$cl_invoice_id || !$invoice)
   die ($i18n->getKey('error.sys'));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_receiver = trim($request->getParameter('receiver'));
   $cl_cc = trim($request->getParameter('cc'));
   $cl_subject = trim($request->getParameter('subject'));
@@ -64,7 +64,7 @@ $form->addInput(array('type'=>'text','name'=>'subject','style'=>'width: 300px;',
 $form->addInput(array('type'=>'textarea','name'=>'comment','maxlength'=>'250','style'=>'width: 300px; height: 60px;'));
 $form->addInput(array('type'=>'submit','name'=>'btn_send','value'=>$i18n->getKey('button.send')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   // Validate user input.
   if (!ttValidEmailList($cl_receiver)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.to'));
   if (!ttValidEmailList($cl_cc, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.cc'));

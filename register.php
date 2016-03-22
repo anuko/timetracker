@@ -39,7 +39,7 @@ $auth->doLogout();
 
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_team_name = trim($request->getParameter('team_name'));
   $cl_currency = trim($request->getParameter('currency'));
   if (!$cl_currency) $cl_currency = CURRENCY_DEFAULT;
@@ -61,7 +61,7 @@ $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password2','aspa
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_email','value'=>$cl_manager_email));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_team_name, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
   if (!ttValidString($cl_currency, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));

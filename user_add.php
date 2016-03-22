@@ -47,7 +47,7 @@ if (in_array('cl', explode(',', $user->plugins)))
   $clients = ttTeamHelper::getActiveClients($user->team_id);
 
 $assigned_projects = array();
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_login = trim($request->getParameter('login'));
   if (!$auth->isPasswordExternal()) {
@@ -131,7 +131,7 @@ $form->addInputElement($table);
 
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
 
-if ($request->getMethod() == 'POST') {
+if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
   if (!ttValidString($cl_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
