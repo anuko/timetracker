@@ -55,7 +55,7 @@
       <!-- End of top image -->
 
       <!-- Output errors -->
-{if !$errors->isEmpty()}
+{if $errors->yes()}
       <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
           <td class="error">

@@ -42,7 +42,7 @@ if (false === $field)
   $errors->add($i18n->getKey('error.db'));
 
 $form = new Form('fieldForm');
-if ($errors->isEmpty()) {
+if ($errors->no()) {
   $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$field['label']));
   $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
   $form->addInput(array('type'=>'checkbox','name'=>'required','data'=>1,'value'=>$field['required']));
@@ -62,7 +62,7 @@ if ($request->getMethod() == 'POST') {
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     $res = CustomFields::updateField($cl_id, $cl_name, $cl_type, $cl_required);
     if ($res) {
       header('Location: cf_custom_fields.php');

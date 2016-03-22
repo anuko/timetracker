@@ -71,7 +71,7 @@ if ($request->getMethod() == 'POST') {
   }
   if (!ttValidEmail($cl_manager_email, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     if (!ttUserHelper::getUserByLogin($cl_manager_login)) {
       // Create a new team.
       if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');

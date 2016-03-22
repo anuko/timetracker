@@ -60,7 +60,7 @@ if ($request->getMethod() == 'POST') {
   if (false === $field)
     $errors->add($i18n->getKey('error.db'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$id));
     $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
     $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));

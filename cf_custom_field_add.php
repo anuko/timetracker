@@ -57,7 +57,7 @@ if ($request->getMethod() == 'POST') {
   // Validate user input.
   if (!ttValidString($cl_field_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     $res = CustomFields::insertField($cl_field_name, $cl_field_type, $cl_required);
     if ($res) {
       header('Location: cf_custom_fields.php');
