@@ -75,7 +75,7 @@ if ($request->isPost()) {
     exit;
   } else
     $err->add($i18n->getKey('error.sys'));
-} // POST
+} // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.export'));

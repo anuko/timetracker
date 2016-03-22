@@ -203,7 +203,7 @@ if ($request->isPost()) {
     header("Location: expense_delete.php?id=$cl_id");
     exit();
   }
-} // POST
+} // isPost
 
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);

@@ -65,7 +65,7 @@ if ($request->isPost()) {
     } else
       $err->add($i18n->getKey('error.db'));
   }
-} // POST
+} // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.fieldForm.name.focus()"');

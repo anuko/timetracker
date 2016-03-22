@@ -92,7 +92,7 @@ if ($request->isPost()) {
     else
       $err->add($i18n->getKey('error.mail_send'));
   }
-} // POST
+} // isPost
 
 $smarty->assign('title', $i18n->getKey('title.send_invoice'));
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

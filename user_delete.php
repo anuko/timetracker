@@ -91,7 +91,7 @@ if ($request->isPost()) {
     header('Location: users.php');
     exit();
   }
-} // POST
+} // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.delete_user'));

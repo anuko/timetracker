@@ -117,7 +117,7 @@ if ($request->getMethod( )== 'POST') {
       exit();
     }
   }
-} // POST
+} // isPost
 
 // Elements of chartForm.
 $chart_form = new Form('chartForm');

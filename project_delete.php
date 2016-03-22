@@ -59,7 +59,7 @@ if ($request->isPost()) {
     header('Location: projects.php');
     exit();
   }
-} // POST
+} // isPost
 
 $smarty->assign('project_to_delete', $project_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

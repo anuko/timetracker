@@ -63,7 +63,7 @@ if ($request->isPost()) {
     header('Location: invoices.php');
     exit();
   }
-} // POST
+} // isPost
 
 $smarty->assign('invoice_to_delete', $invoice_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

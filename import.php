@@ -47,7 +47,7 @@ if ($request->isPost()) {
   $import->importXml();
   if ($err->no())
     $messages->add($i18n->getKey('form.import.success'));
-} // POST
+} // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()) );
 $smarty->assign('title', $i18n->getKey('title.import'));

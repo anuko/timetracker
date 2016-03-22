@@ -82,7 +82,7 @@ if ($request->isPost()) {
     } else
       $err->add($i18n->getKey('error.auth'));
   }
-} // POST
+} // isPost
 
 if(!isTrue(MULTITEAM_MODE) && !ttTeamHelper::getTeams())
   $err->add($i18n->getKey('error.no_teams'));

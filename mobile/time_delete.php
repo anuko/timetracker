@@ -90,7 +90,7 @@ if ($request->isPost()) {
     header('Location: time.php');
     exit();
   }
-} // POST
+} // isPost
 
 $form = new Form('timeRecordForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));

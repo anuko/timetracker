@@ -86,7 +86,7 @@ if ($request->isPost()) {
     } else
       $err->add($i18n->getKey('error.project_exists'));
   }
-} // POST
+} // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.projectForm.project_name.focus()"');

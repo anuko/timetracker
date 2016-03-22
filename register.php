@@ -100,7 +100,7 @@ if ($request->isPost()) {
     } else
       $err->add($i18n->getKey('error.user_exists'));
   }
-} // POST
+} // isPost
 
 $smarty->assign('title', $i18n->getKey('title.create_team'));
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

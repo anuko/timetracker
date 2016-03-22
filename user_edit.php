@@ -223,7 +223,7 @@ if ($request->isPost()) {
     } else
       $err->add($i18n->getKey('error.user_exists'));
   }
-} // POST
+} // isPost
 
 $rates = ttProjectHelper::getRates($user_id);
 $smarty->assign('rates', $rates);

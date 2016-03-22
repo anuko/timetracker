@@ -110,7 +110,7 @@ if ($request->isPost()) {
       $smarty->assign('result_message', $res ? $i18n->getKey('form.reset_password.message') : $i18n->getKey('error.mail_send'));
     }
   }
-} // POST
+} // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.resetPasswordForm.login.focus()"');

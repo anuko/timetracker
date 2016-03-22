@@ -312,7 +312,7 @@ if ($request->isPost()) {
       exit();
     }
   }
-} // POST
+} // isPost
 
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);

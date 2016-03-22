@@ -350,7 +350,7 @@ if ($request->isPost()) {
       exit();
     }
   }
-} // POST
+} // isPost
 
 $week_total = ttTimeHelper::getTimeForWeek($user->getActiveUser(), $selected_date);
 

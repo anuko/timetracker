@@ -80,7 +80,7 @@ if ($request->isPost()) {
      } else
        $err->add($i18n->getKey('error.client_exists'));
   }
-} // POST
+} // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.clientForm.name.focus()"');

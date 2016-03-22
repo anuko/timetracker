@@ -59,7 +59,7 @@ if ($request->isPost()) {
     header('Location: notifications.php');
     exit();
   }
-} // POST
+} // isPost
 
 $smarty->assign('notification_to_delete', $notification_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

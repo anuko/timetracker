@@ -59,7 +59,7 @@ if ($request->isPost()) {
     header('Location: tasks.php');
     exit();
   }
-} // POST
+} // isPost
 
 $smarty->assign('task_to_delete', $task_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

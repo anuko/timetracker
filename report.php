@@ -80,7 +80,7 @@ if ($request->isPost()) {
   // Re-display this form.
   header('Location: report.php');
   exit();
-} // POST
+} // isPost
 
 $group_by = $bean->getAttribute('group_by');
 

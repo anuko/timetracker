@@ -64,7 +64,7 @@ if ($request->isPost()) {
     header('Location: clients.php');
     exit();
   }
-} // POST
+} // isPost
 
 $smarty->assign('client_to_delete', $client_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

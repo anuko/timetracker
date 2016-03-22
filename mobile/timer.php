@@ -287,7 +287,7 @@ if ($request->isPost()) {
       exit();
     }
   }
-} // POST
+} // isPost
 
 $week_total = ttTimeHelper::getTimeForWeek($user->getActiveUser(), $cl_date);
 $smarty->assign('week_total', $week_total);

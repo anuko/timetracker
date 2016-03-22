@@ -286,7 +286,7 @@ if ($request->isPost()) {
       $err->add($i18n->getKey('error.db'));
     }
   }
-} // POST
+} // isPost
 
 $smarty->assign('next_date', $next_date);
 $smarty->assign('prev_date', $prev_date);
