@@ -42,7 +42,7 @@ if (false === $cl_name)
   $errors->add($i18n->getKey('error.db'));
 
 $form = new Form('optionEditForm');
-if ($errors->isEmpty()) {
+if ($errors->no()) {
   $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
   $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
   $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
@@ -54,7 +54,7 @@ if ($request->getMethod() == 'POST') {
   // Validate user input.
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     $res = CustomFields::updateOption($cl_id, $cl_name);
     if ($res) {
       // Determine field id for redirect.

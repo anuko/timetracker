@@ -62,7 +62,7 @@ if ($request->getMethod() == 'POST') {
         $errors->add($i18n->getKey('error.period_locked'));
     }
 
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       // Mark the record as deleted.
       if (ttExpenseHelper::markDeleted($cl_id, $user->getActiveUser())) {
         header('Location: expenses.php');

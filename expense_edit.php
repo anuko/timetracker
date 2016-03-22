@@ -169,11 +169,11 @@ if ($request->getMethod() == 'POST') {
     if($lockdate && $item_date->before($lockdate))
       $errors->add($i18n->getKey('error.period_locked'));        
     // 2) Prohibit saving completed unlocked entries into locked interval.
-    if($errors->isEmpty() && $lockdate && $new_date->before($lockdate))
+    if($errors->no() && $lockdate && $new_date->before($lockdate))
       $errors->add($i18n->getKey('error.period_locked'));        
 
     // Now, an update.
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       if (ttExpenseHelper::update(array('id'=>$cl_id,'date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getActiveUser(),
           'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost))) {
         header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
@@ -189,7 +189,7 @@ if ($request->getMethod() == 'POST') {
       $errors->add($i18n->getKey('error.period_locked'));
 
     // Now, a new insert.
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       if (ttExpenseHelper::insert(array('date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getActiveUser(),
         'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1))) {
         header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));

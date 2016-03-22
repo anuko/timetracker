@@ -73,7 +73,7 @@ if ($request->getMethod() == 'POST') {
     $errors->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
   if (!ttValidEmail($cl_manager_email, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     if (!ttUserHelper::getUserByLogin($cl_manager_login)) {
       // Create a new team.
       $team_id = ttTeamHelper::insert(array('name'=>$cl_team_name,'currency'=>$cl_currency));

@@ -264,11 +264,11 @@ if ($request->getMethod() == 'POST') {
     // User clicked the Save button. We need to save form options as new favorite report.
     if (!ttValidString($bean->getAttribute('new_fav_report'))) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.reports.save_as_favorite'));
 
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       $id = ttFavReportHelper::saveReport($user->id, $bean);
       if (!$id)
         $errors->add($i18n->getKey('error.db'));
-      if ($errors->isEmpty()) {
+      if ($errors->no()) {
         $bean->setAttribute('favorite_report', $id);
         $bean->saveBean();
         header('Location: reports.php');
@@ -306,7 +306,7 @@ if ($request->getMethod() == 'POST') {
 
     $bean->saveBean();
 
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       // Now we can go ahead and create a report.
       header('Location: report.php');
       exit();

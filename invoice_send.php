@@ -71,7 +71,7 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidString($cl_subject)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.subject'));
   if (!ttValidString($cl_comment, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.comment'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     // Save last invoice emails for future use.
     $sc->setValue(SYSC_LAST_INVOICE_EMAIL, $cl_receiver);
     $sc->setValue(SYSC_LAST_INVOICE_CC, $cl_cc);

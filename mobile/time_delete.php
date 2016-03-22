@@ -73,7 +73,7 @@ if ($request->getMethod() == 'POST') {
       $errors->add($i18n->getKey('error.period_locked'));
     }
 
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
 
       // Delete the record.
       $result = ttTimeHelper::delete($cl_id, $user->getActiveUser());

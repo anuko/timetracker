@@ -276,12 +276,12 @@ if ($request->getMethod() == 'POST') {
     // 3) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
 
     // Now, step by step.
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       // 1) Prohibit saving locked time entries in any form.
       if($lockdate && $item_date->before($lockdate))
         $errors->add($i18n->getKey('error.period_locked'));
       // 2) Prohibit saving completed unlocked entries into locked interval.
-      if($errors->isEmpty() && $lockdate && $new_date->before($lockdate))
+      if($errors->no() && $lockdate && $new_date->before($lockdate))
         $errors->add($i18n->getKey('error.period_locked'));
       // 3) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
       $uncompleted = ($cl_finish == '' && $cl_duration == '');
@@ -295,13 +295,13 @@ if ($request->getMethod() == 'POST') {
     }
 
     // Prohibit creating an overlapping record.
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       if (ttTimeHelper::overlaps($user->getActiveUser(), $new_date->toString(DB_DATEFORMAT), $cl_start, $cl_finish, $cl_id))
         $errors->add($i18n->getKey('error.overlap'));
     }
 
     // Now, an update.
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       $res = ttTimeHelper::update(array(
         'id'=>$cl_id,
         'date'=>$new_date->toString(DB_DATEFORMAT),
@@ -337,7 +337,7 @@ if ($request->getMethod() == 'POST') {
     // 2) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
 
     // Now, step by step.
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       // 1) Prohibit saving into locked interval.
       if($lockdate && $new_date->before($lockdate))
         $errors->add($i18n->getKey('error.period_locked'));
@@ -353,13 +353,13 @@ if ($request->getMethod() == 'POST') {
     }
 
     // Prohibit creating an overlapping record.
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       if (ttTimeHelper::overlaps($user->getActiveUser(), $new_date->toString(DB_DATEFORMAT), $cl_start, $cl_finish))
         $errors->add($i18n->getKey('error.overlap'));
     }
 
     // Now, a new insert.
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
 
       $id = ttTimeHelper::insert(array(
         'date'=>$new_date->toString(DB_DATEFORMAT),

@@ -72,7 +72,7 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidCronSpec($cl_cron_spec)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.cron_schedule'));
   if (!ttValidEmail($cl_email)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     // Calculate next execution time.
     $next = tdCron::getNextOccurrence($cl_cron_spec, mktime());
 

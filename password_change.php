@@ -71,7 +71,7 @@ if ($request->getMethod() == 'POST') {
   if ($cl_password1 !== $cl_password2)
     $errors->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     // Use the "limit" plugin if we have one. Ignore include errors.
     // The "limit" plugin is not required for normal operation of Time Tracker.
     $cl_login = $user->login; // $cl_login is used in access_check.cpp.

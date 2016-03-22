@@ -246,18 +246,18 @@ if ($request->getMethod() == 'POST') {
       $errors->add($i18n->getKey('error.period_locked'));
 
     // Prohibit creating another uncompleted record.
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       if (($not_completed_rec = ttTimeHelper::getUncompleted($user->getActiveUser())) && (($cl_finish == '') && ($cl_duration == '')))
         $errors->add($i18n->getKey('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->getKey('error.goto_uncompleted')."</a>");
     }
 
     // Prohibit creating an overlapping record.
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       if (ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $cl_start, $cl_finish))
         $errors->add($i18n->getKey('error.overlap'));
     }
 
-    if ($errors->isEmpty()) {
+    if ($errors->no()) {
       $id = ttTimeHelper::insert(array(
         'date' => $cl_date,
         'user_id' => $user->getActiveUser(),

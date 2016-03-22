@@ -77,7 +77,7 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidString($cl_address, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.client_address'));
   if (!ttValidFloat($cl_tax, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.tax'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     if ($request->getParameter('btn_save')) {
       $client = ttClientHelper::getClientByName($cl_name);
       if (($client && ($cl_id == $client['id'])) || !$client) {

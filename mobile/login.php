@@ -49,7 +49,7 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidString($cl_login)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
   if (!ttValidString($cl_password)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
 
     // Use the "limit" plugin if we have one. Ignore include errors.
     // The "limit" plugin is not required for normal operation of the Time Tracker.

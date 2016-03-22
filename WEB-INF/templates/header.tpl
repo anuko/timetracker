@@ -160,7 +160,7 @@ With 101% height we essentially force the scrollbar to always appear. -->
       <!-- End of page title and user details -->
 
       <!-- Output errors -->
-{if !$errors->isEmpty()}
+{if $errors->yes()}
       <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
           <td class="error">
@@ -174,7 +174,7 @@ With 101% height we essentially force the scrollbar to always appear. -->
       <!-- End of output errors -->
 
       <!-- Output messages -->
-{if !$messages->isEmpty()}
+{if $messages->yes()}
       <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
           <td class="info_message">

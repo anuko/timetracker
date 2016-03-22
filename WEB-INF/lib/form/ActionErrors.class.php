@@ -32,10 +32,6 @@ class ActionErrors {
     function ActionErrors() {
     }
 
-    function isEmpty() {
-        return (count($this->errors)>0 ? false : true);
-    }
-
     function exist() {
         return (count($this->errors)>0 ? true : false);
     }

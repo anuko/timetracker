@@ -69,7 +69,7 @@
       <!-- End of output errors -->
 
       <!-- Output messages -->
-{if !$messages->isEmpty()}
+{if $messages->yes()}
       <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
           <td class="info_message">

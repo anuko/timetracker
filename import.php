@@ -45,7 +45,7 @@ if ($request->getMethod() == 'POST') {
 
   $import = new ttImportHelper($errors);
   $import->importXml();
-  if ($errors->isEmpty())
+  if ($errors->no())
     $messages->add($i18n->getKey('form.import.success'));
 } // POST
 

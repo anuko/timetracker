@@ -64,7 +64,7 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidString($cl_address, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.client_address'));
   if (!ttValidFloat($cl_tax, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.tax'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     if (!ttClientHelper::getClientByName($cl_name)) {
       if (ttClientHelper::insert(array(
         'team_id' => $user->team_id,

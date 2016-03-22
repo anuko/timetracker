@@ -204,7 +204,7 @@ if ($request->getMethod() == 'POST') {
   }
   // Finished validating user input.
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     if ($cl_lock_interval == null || trim($cl_lock_interval) == '')
       $cl_lock_interval = 0;
 

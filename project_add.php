@@ -70,7 +70,7 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
   if (!ttValidString($cl_description, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     if (!ttProjectHelper::getProjectByName($cl_name)) {
       if (ttProjectHelper::insert(array(
         'team_id' => $user->team_id,

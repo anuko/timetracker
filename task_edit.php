@@ -71,7 +71,7 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
   if (!ttValidString($cl_description, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     if ($request->getParameter('btn_save')) {
       $existing_task = ttTaskHelper::getTaskByName($cl_name);
       if (!$existing_task || ($cl_task_id == $existing_task['id'])) {

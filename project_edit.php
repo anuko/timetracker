@@ -87,7 +87,7 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidString($cl_name)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
   if (!ttValidString($cl_description, true)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     if ($request->getParameter('btn_save')) {
       $existing_project = ttProjectHelper::getProjectByName($cl_name);
       if (!$existing_project || ($cl_project_id == $existing_project['id'])) {

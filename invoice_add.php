@@ -73,7 +73,7 @@ if ($request->getMethod() == 'POST') {
   if (!ttValidDate($cl_finish)) $errors->add($i18n->getKey('error.field'), $i18n->getKey('label.end_date'));
 
   $fields = array('date'=>$cl_date,'name'=>$cl_number,'client_id'=>$cl_client,'project_id'=>$cl_project,'start_date'=>$cl_start,'end_date'=>$cl_finish);
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     if (ttInvoiceHelper::getInvoiceByName($cl_number))
       $errors->add($i18n->getKey('error.invoice_exists'));
 
@@ -81,7 +81,7 @@ if ($request->getMethod() == 'POST') {
       $errors->add($i18n->getKey('error.no_invoiceable_items'));
   }
 
-  if ($errors->isEmpty()) {
+  if ($errors->no()) {
     // Now we can go ahead and create our invoice.
     if (ttInvoiceHelper::createInvoice($fields)) {
       header('Location: invoices.php');
