@@ -52,17 +52,17 @@ class Auth {
   {
     return false;
   }
-  
+
   // isPasswordExternal - returns true if actual password is not stored in the internal DB.
   function isPasswordExternal()
   {
     return false;
   }
-  
+
   // doLogin - perfoms a login procedure.
   function doLogin($login, $password) {
     $auth = $this->authenticate($login, $password);
-      
+
     if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
       echo '<br>'; var_dump($auth); echo '<br />';
     }
@@ -86,7 +86,7 @@ class Auth {
         echo 'login "'.$login.'" does not exist in Time Tracker database.<br />';
       return false;
     }
-    
+
     $this->setAuth($val['id'], $login);
     return true;
   }
@@ -111,7 +111,7 @@ class Auth {
   function getUserLogin() {
     return $_SESSION['login'];
   }
-    
+
   // getUserId - retrieves user ID from session.
   function getUserId() {
     if (isset($_SESSION['authenticated_user_id']))
