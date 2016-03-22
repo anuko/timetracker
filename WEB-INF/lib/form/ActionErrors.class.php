@@ -32,10 +32,6 @@ class ActionErrors {
     function ActionErrors() {
     }
 
-    function exist() {
-        return (count($this->errors)>0 ? true : false);
-    }
-
     function no() {
         return (count($this->errors)>0 ? false : true);
     }
