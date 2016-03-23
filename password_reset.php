@@ -46,7 +46,7 @@ if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
 
-  if ($err->IsEmpty()) {
+  if ($err->no()) {
     if (!ttUserHelper::getUserByLogin($cl_login)) {
       // User with a specified login was not found.
       // In this case, if login looks like email, try finding user by email.
@@ -61,7 +61,7 @@ if ($request->isPost()) {
     }
   }
 
-  if ($err->IsEmpty()) {
+  if ($err->no()) {
     $user = new ttUser($cl_login); // Note: reusing $user from initialize.php here.
 
     // Prepare and save a temporary reference for user.
