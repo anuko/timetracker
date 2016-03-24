@@ -182,10 +182,10 @@ class DateAndTime {
   var $mMinute = 0;
   var $mSecond = 0;
   var $mMonth;
-  var $mDay;		// day of week
-  var $mDate;		// day of month
+  var $mDay;   // day of week
+  var $mDate;  // day of month
   var $mYear;
-  var $mIntrFormat	= "%d.%m.%Y %H:%M:%S"; //29.02.2004 16:21:42 internal format date
+  var $mIntrFormat = "%d.%m.%Y %H:%M:%S"; //29.02.2004 16:21:42 internal format date
   var $mLocalFormat;
   var $mParseResult = 0;
   var $mAutoComplete = true;
@@ -293,11 +293,11 @@ class DateAndTime {
 
   function getClone() {
     if (version_compare(phpversion(), '5.0') < 0) {
-    		$d = new DateAndTime($this->getFormat());
-    		$d->setTimestamp($this->getTimestamp());
-    		return $d;
+      $d = new DateAndTime($this->getFormat());
+      $d->setTimestamp($this->getTimestamp());
+      return $d;
     } else {
-    		return clone($this);
+      return clone($this);
     }
   }
 
