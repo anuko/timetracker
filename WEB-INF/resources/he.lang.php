@@ -26,7 +26,7 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-// Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option 
+// Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
 $i18n_language = 'עברית';
