@@ -68,25 +68,24 @@ class I18n {
 
       $this->monthNames = $i18n_months;
       $this->weekdayNames = $i18n_weekdays;
-        
+
         $this->weekdayShortNames = $i18n_weekdays_short;
       if (defined('SHOW_HOLIDAYS') && isTrue(SHOW_HOLIDAYS)) {
         $this->holidays = $i18n_holidays;
       }
-    
+
       foreach ($i18n_key_words as $kword=>$value) {
-         $pos = strpos($kword, ".");
-         if (!($pos === false)) {
-                   $p = explode(".", $kword);
-                   $str = "";
-                   foreach ($p as $w) {
-                       $str .= "[\"".$w."\"]";
-                   }
-                   //$value = addslashes($value);
-                   eval("\$this->keys".$str."='".$value."';");
-               } else {
-                   $this->keys[$kword] = $value;
-               }
+        $pos = strpos($kword, ".");
+        if (!($pos === false)) {
+          $p = explode(".", $kword);
+          $str = "";
+          foreach ($p as $w) {
+            $str .= "[\"".$w."\"]";
+          }
+          eval("\$this->keys".$str."='".$value."';");
+        } else {
+          $this->keys[$kword] = $value;
+        }
       }
     }
 
@@ -102,21 +101,20 @@ class I18n {
         $this->holidays = $i18n_holidays;
       }
       foreach ($i18n_key_words as $kword=>$value) {
-         if (!$value) continue;
-         $pos = strpos($kword, ".");
-         if (!($pos === false)) {
-                   $p = explode(".", $kword);
-                   $str = "";
-                   foreach ($p as $w) {
-                       $str .= "[\"".$w."\"]";
-                   }
-                   //$value = addslashes($value);
-                   eval("\$this->keys".$str."='".$value."';");
-               } else {
-                   $this->keys[$kword] = $value;
-               }
+        if (!$value) continue;
+        $pos = strpos($kword, ".");
+        if (!($pos === false)) {
+          $p = explode(".", $kword);
+          $str = "";
+          foreach ($p as $w) {
+             $str .= "[\"".$w."\"]";
+          }
+          eval("\$this->keys".$str."='".$value."';");
+        } else {
+          $this->keys[$kword] = $value;
+        }
       }
-        return true;
+      return true;
     }
   }
 
@@ -150,15 +148,15 @@ class I18n {
     $d = @opendir(RESOURCE_DIR);
     while (($file = @readdir($d))) {
       if (($file != ".") && ($file != "..")) {
-		if (strpos($file, ".lang.php")) {
-		  $fileList[] = @basename($file);
-		}
+        if (strpos($file, ".lang.php")) {
+          $fileList[] = @basename($file);
+        }
       }
     }
     @closedir($d);
     return $fileList;
   }
-   
+
   static function getLangFromFilename($filename)
   {
     return substr($filename, 0, strpos($filename, '.'));
