@@ -86,6 +86,7 @@ $i18n_key_words = array(
 'error.no_login' => 'Nema korisnika pod ovom prijavom',
 'error.no_teams' => 'Vaša baza podataka je prazna. Prijavite se kao administrator i napravite novi tim.',
 'error.upload' => 'Greška pri otpremanju podatka.',
+// TODO: translate the following:
 'error.period_locked' => 'Can\\\'t complete the operation. Records older than a certain number of days cannot be created or modified. Team manager defines this in the "Lock interval in days" value on the "Profile" page. Set it to 0 to remove locking. <br><br>Uncompleted records (with 0 or empty duration) can be deleted.',
 'error.mail_send' => 'Greška u slanju mejla.',
 'error.no_email' => 'Nema imejla pod korisničkom imenom.',
@@ -96,7 +97,7 @@ $i18n_key_words = array(
 
 // Labels for buttons.
 'button.login' => 'Prijava',
-'button.now' => 'Trenutno vreme',
+'button.now' => 'Trenutno vreme', // TODO: is'not it too long for time.php page?
 'button.save' => 'Sačuvaj',
 'button.copy' => 'Kopiraj',
 'button.cancel' => 'Otkaži',
@@ -253,8 +254,8 @@ $i18n_key_words = array(
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
-'dropdown.all' => '--- Odaberi sve ---',
-'dropdown.no' => '--- nemoj odabirati ---',
+'dropdown.all' => '--- odaberi sve ---',    // TODO: is it good for reports.php page?
+'dropdown.no' => '--- nemoj odabirati ---', // TODO: is it good for reports.php page?
 // NOTE TO TRANSLATORS: dropdown.this_day does not necessarily means "today". It means a specific ("this") day selected on calendar. See Charts.
 'dropdown.this_day' => 'ovaj dan',
 'dropdown.this_week' => 'ova nedelja',
@@ -302,15 +303,15 @@ $i18n_key_words = array(
 'form.reports.save_as_favorite' => 'Sačuvaj u omiljenima',
 'form.reports.confirm_delete' => 'Da li ste sigurni da želite obrisati omiljene izveštaje?',
 'form.reports.include_records' => 'Uključi zapise',
-'form.reports.include_billable' => 'Naplativo',
+'form.reports.include_billable' => 'naplativo',
 'form.reports.include_not_billable' => 'nije naplativo',
 'form.reports.include_invoiced' => 'obračunato',
 'form.reports.include_not_invoiced' => 'nije obračunato',
-'form.reports.select_period' => 'odaberite vremenski raspon',
+'form.reports.select_period' => 'Odaberite vremenski raspon',
 'form.reports.set_period' => 'ili podesite vreme',
 'form.reports.show_fields' => 'Prikaži polja',
 'form.reports.group_by' => 'Grupiraj po',
-'form.reports.group_by_no' => '--- Nemoj grupisati ---',
+'form.reports.group_by_no' => '--- nemoj grupisati ---',
 'form.reports.group_by_date' => 'datum',
 'form.reports.group_by_user' => 'korisnik',
 'form.reports.group_by_client' => 'klijent',
