@@ -97,16 +97,16 @@ class Auth_ldap extends Auth {
     }
 
     if (!$lc) return false;
-    
+
     ldap_set_option($lc, LDAP_OPT_PROTOCOL_VERSION, 3);
     ldap_set_option($lc, LDAP_OPT_REFERRALS, 0);
     if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
       ldap_set_option($lc, LDAP_OPT_DEBUG_LEVEL, 7);
     }
-    
+
     // We need to handle Windows AD and OpenLDAP differently.
     if ($this->params['type'] != 'openldap') {
-      
+
       // check if the user specified full login
       if (strpos($login, '@') === false) {
         // append default domain
@@ -119,7 +119,7 @@ class Auth_ldap extends Auth {
       }
 
       $lb = @ldap_bind($lc, $login, $password);
-    
+
       if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
         echo '$lb='; var_dump($lb); echo '<br />';
         echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
@@ -130,7 +130,7 @@ class Auth_ldap extends Auth {
         return false;
       }
 
-	  if ($member_of) {
+      if ($member_of) {
         // get groups
 
         $filter = 'samaccountname='.Auth_ldap::ldap_escape($login);
@@ -185,21 +185,16 @@ class Auth_ldap extends Auth {
 
       ldap_unbind($lc);
 
-      // handle special case - admin account, strip domain part
-      if (strpos($login, 'admin@') !== false) {
-        $login = substr($login, 0, 5);
-      }
-
       return array('login' => $login, 'data' => $entries, 'member_of' => $groups);
     } else {
-    	
+
       // Assuming OpenLDAP server.
       $login_oldap = 'uid='.$login.','.$this->params['base_dn'];
 
       if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
         echo '$login_oldap='; var_dump($login_oldap); echo '<br />';
       }
-      
+
       // check if the user specified full login
       if (strpos($login, '@') === false) {
         // append default domain
@@ -207,7 +202,7 @@ class Auth_ldap extends Auth {
       }
 
       $lb = @ldap_bind($lc, $login_oldap, $password);
-    
+
       if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
         echo '$lb='; var_dump($lb); echo '<br />';
         echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
@@ -218,7 +213,7 @@ class Auth_ldap extends Auth {
         return false;
       }
 
-	  if ($member_of) {
+      if ($member_of) {
         // get groups
 
         $filter = 'samaccountname='.Auth_ldap::ldap_escape($login_oldap);
@@ -272,11 +267,6 @@ class Auth_ldap extends Auth {
       }
 
       ldap_unbind($lc);
-
-      // handle special case - admin account, strip domain part
-      if (strpos($login, 'admin@') !== false) {
-        $login = substr($login, 0, 5);
-      }
 
       return array('login' => $login, 'data' => $entries, 'member_of' => $groups);
     }
