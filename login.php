@@ -65,16 +65,14 @@ if ($request->isPost()) {
       // Redirect, depending on user role.
       if ($user->isAdmin()) {
         header('Location: admin_teams.php');
-        exit();
       }
       else if ($user->isClient()) {
         header('Location: reports.php');
-        exit();
       }
       else {
         header('Location: time.php');
-        exit();
       }
+      exit();
     } else
       $err->add($i18n->getKey('error.auth'));
   }

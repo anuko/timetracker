@@ -81,7 +81,16 @@ if ($request->isPost()) {
 
     if ($auth->doLogin($user->login, $cl_password1)) {
       setcookie('tt_login', $user->login, time() + COOKIE_EXPIRE, '/');
-      header('Location: time.php');
+      // Redirect, depending on user role.
+      if ($user->isAdmin()) {
+        header('Location: admin_teams.php');
+      }
+      else if ($user->isClient()) {
+        header('Location: reports.php');
+      }
+      else {
+        header('Location: time.php');
+      }
       exit();
     } else {
       $err->add($i18n->getKey('error.auth'));
