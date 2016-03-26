@@ -78,6 +78,13 @@ class Auth_ldap extends Auth {
    */
   function authenticate($login, $password)
   {
+    // Special handling for admin@localhost - authenticate against db, not ldap.
+    // It is a fallback mechanism when admin account in LDAP directory does not exist or is misconfigured.
+    if ($login == 'admin@localhost') {
+        import('auth.Auth_db');
+        return Auth_db::authenticate($login, $password);
+    }
+
     if (!function_exists('ldap_bind')) {
       die ('php_ldap extension not loaded!');
     }

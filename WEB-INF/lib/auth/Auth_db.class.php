@@ -41,10 +41,10 @@ class Auth_db extends Auth {
    */
   function authenticate($login, $password)
   {
-  	$mdb2 = getConnection();
-  	
-  	// Try md5 password match first.
-  	$sql = "SELECT id FROM tt_users 
+    $mdb2 = getConnection();
+
+    // Try md5 password match first.
+    $sql = "SELECT id FROM tt_users
       WHERE login = ".$mdb2->quote($login)." AND password = md5(".$mdb2->quote($password).") AND status = 1";
 
     $res = $mdb2->query($sql);
@@ -77,8 +77,23 @@ class Auth_db extends Auth {
       if ($val['id'] > 0) {
         return array('login'=>$login,'id'=>$val['id']);
       }
-      return false;
     }
+
+    // Special handling for admin@localhost - search for an account with admin role with a matching password.
+    if ($login == 'admin@localhost') {
+      $sql = "SELECT id, login FROM tt_users
+        WHERE role = 1024 AND password = md5(".$mdb2->quote($password).") AND status = 1";
+      $res = $mdb2->query($sql);
+      if (is_a($res, 'PEAR_Error')) {
+        die($res->getMessage());
+      }
+      $val = $res->fetchRow();
+      if ($val['id'] > 0) {
+        return array('login'=>$val['login'],'id'=>$val['id']);
+      }
+    }
+
+    return false;
   }
 
   function isPasswordExternal() {
