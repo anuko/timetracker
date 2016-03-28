@@ -385,44 +385,44 @@ class ttReportHelper {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-          if ($convertTo12Hour) {
-            if($val['start'] != '')
-              $val['start'] = ttTimeHelper::to12HourFormat($val['start']);
-            if($val['finish'] != '')
-              $val['finish'] = ttTimeHelper::to12HourFormat($val['finish']);
-          }
-  	      if (isset($val['cost'])) {
-            if ('.' != $user->decimal_mark)
-  	          $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
-  	      }
-          if (isset($val['expense'])) {
-            if ('.' != $user->decimal_mark)
-  	          $val['expense'] = str_replace('.', $user->decimal_mark, $val['expense']);
-  	      }
-  	      if ('no_grouping' != $group_by_option) {
-            $val['grouped_by'] = $val[$group_by_option];
-            if ('date' == $group_by_option) {
-              // This is needed to get the date in user date format.
-              $o_date = new DateAndTime(DB_DATEFORMAT, $val['grouped_by']);
-              $val['grouped_by'] = $o_date->toString($user->date_format);
-              unset($o_date);
-            }
-  	      }
-            
-          // This is needed to get the date in user date format.
-          $o_date = new DateAndTime(DB_DATEFORMAT, $val['date']);
-          $val['date'] = $o_date->toString($user->date_format);
-          unset($o_date);
-
-          $row = $val;
-          $report_items[] = $row;
+        if ($convertTo12Hour) {
+          if($val['start'] != '')
+            $val['start'] = ttTimeHelper::to12HourFormat($val['start']);
+          if($val['finish'] != '')
+            $val['finish'] = ttTimeHelper::to12HourFormat($val['finish']);
         }
-      } else
-  	    die($res->getMessage());
+        if (isset($val['cost'])) {
+          if ('.' != $user->decimal_mark)
+            $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
+        }
+        if (isset($val['expense'])) {
+          if ('.' != $user->decimal_mark)
+            $val['expense'] = str_replace('.', $user->decimal_mark, $val['expense']);
+        }
+        if ('no_grouping' != $group_by_option) {
+          $val['grouped_by'] = $val[$group_by_option];
+          if ('date' == $group_by_option) {
+            // This is needed to get the date in user date format.
+            $o_date = new DateAndTime(DB_DATEFORMAT, $val['grouped_by']);
+            $val['grouped_by'] = $o_date->toString($user->date_format);
+            unset($o_date);
+          }
+        }
+
+        // This is needed to get the date in user date format.
+        $o_date = new DateAndTime(DB_DATEFORMAT, $val['date']);
+        $val['date'] = $o_date->toString($user->date_format);
+        unset($o_date);
+
+        $row = $val;
+        $report_items[] = $row;
+      }
+    } else
+      die($res->getMessage());
 
     return $report_items;
   }
-  
+
   // getFavItems retrieves all items associated with a favorite report.
   // It combines tt_log and tt_expense_items in one array for presentation in one table using mysql union all.
   // Expense items use the "note" field for item name.
