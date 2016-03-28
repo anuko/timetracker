@@ -760,18 +760,18 @@ class ttReportHelper {
   // Without expenses, it's a simple select with group by.
   // With expenses, it becomes a select with group by from a combined set of records obtained with "union all".
   static function getFavSubtotals($report) {
-  	global $user;
-  	
+    global $user;
+
     $group_by_option = $report['group_by'];
     if ('no_grouping' == $group_by_option) return null;
-    
+
     $mdb2 = getConnection();
-    
+
     // Start with sql to obtain subtotals for time items. This simple sql will be used when we have no expenses.
-    
+
     // Determine group by field and a required join.
     switch ($group_by_option) {
-  	  case 'date':
+      case 'date':
         $group_field = 'l.date';
         $group_join = '';
         break;
@@ -784,32 +784,32 @@ class ttReportHelper {
         $group_join = 'left join tt_clients c on (l.client_id = c.id) ';
         break;
       case 'project':
-  	    $group_field = 'p.name';
+        $group_field = 'p.name';
         $group_join = 'left join tt_projects p on (l.project_id = p.id) ';
-  	    break;
+        break;
       case 'task':
-  	    $group_field = 't.name';
+        $group_field = 't.name';
         $group_join = 'left join tt_tasks t on (l.task_id = t.id) ';
-  	    break;
+        break;
       case 'cf_1':
-  	    $group_field = 'cfo.value';
-  	    $custom_fields = new CustomFields($user->team_id);
-  	    if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
+        $group_field = 'cfo.value';
+        $custom_fields = new CustomFields($user->team_id);
+        if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
           $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id) ';
         elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
           $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.option_id = cfo.id) ';
-    	  break;
+        break;
     }
 
     $where = ttReportHelper::getFavWhere($report);
     if ($report['show_cost']) {
       if (MODE_TIME == $user->tracking_mode) {
-      	if ($group_by_option != 'user')
-      	  $left_join = 'left join tt_users u on (l.user_id = u.id)';
+        if ($group_by_option != 'user')
+          $left_join = 'left join tt_users u on (l.user_id = u.id)';
         $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time, 
           sum(cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2))) as cost,
           null as expenses from tt_log l
-          $group_join $left_join $where group by $group_field";      	
+          $group_join $left_join $where group by $group_field";
       } else {
         // If we are including cost and tracking projects, our query (the same as above) needs to join the tt_user_project_binds table.
         $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time, 
@@ -819,19 +819,19 @@ class ttReportHelper {
           left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id) $where group by $group_field";
       }
     } else {
-  	   $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time, null as expenses from tt_log l 
+      $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time, null as expenses from tt_log l 
          $group_join $where group by $group_field";
     }
     // By now we have sql for time items.
-    
+
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
     if ($report['show_cost'] && in_array('ex', explode(',', $user->plugins))) { // if ex(penses) plugin is enabled
-    	
+
       // Determine group by field and a required join.
       $group_join = null;
       $group_field = 'null';
       switch ($group_by_option) {
-  	    case 'date':
+        case 'date':
           $group_field = 'ei.date';
           $group_join = '';
           break;
@@ -844,9 +844,9 @@ class ttReportHelper {
           $group_join = 'left join tt_clients c on (ei.client_id = c.id) ';
           break;
         case 'project':
-  	      $group_field = 'p.name';
+          $group_field = 'p.name';
           $group_join = 'left join tt_projects p on (ei.project_id = p.id) ';
-  	      break;
+          break;
       }
 
       $where = ttReportHelper::getFavExpenseWhere($report);
@@ -854,28 +854,28 @@ class ttReportHelper {
         $group_join $where";
       // Add a "group by" clause if we are grouping.
       if ('null' != $group_field) $sql_for_expenses .= " group by $group_field";
-         
+
       // Create a combined query.
       $sql = "select group_field, sum(time) as time, sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t group by group_field";
     }
-    
+
     // Execute query.
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
-  	  while ($val = $res->fetchRow()) {
-  	  	if ('date' == $group_by_option) {
+      while ($val = $res->fetchRow()) {
+        if ('date' == $group_by_option) {
           // This is needed to get the date in user date format.
           $o_date = new DateAndTime(DB_DATEFORMAT, $val['group_field']);
           $val['group_field'] = $o_date->toString($user->date_format);
           unset($o_date);
-  	  	}
-  	  	$time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
+        }
+        $time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
         if ($report['show_cost']) {
-  	      if ('.' != $user->decimal_mark) {
-  	        $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
-  	        $val['expenses'] = str_replace('.', $user->decimal_mark, $val['expenses']);
-  	      }
-      	  $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time,'cost'=>$val['cost'],'expenses'=>$val['expenses']);
+          if ('.' != $user->decimal_mark) {
+            $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
+            $val['expenses'] = str_replace('.', $user->decimal_mark, $val['expenses']);
+          }
+          $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time,'cost'=>$val['cost'],'expenses'=>$val['expenses']);
         } else
           $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time);
       }
@@ -884,7 +884,7 @@ class ttReportHelper {
 
     return $subtotals;
   }
-  
+
   // getTotals calculates total hours and cost for all report items.
   static function getTotals($bean)
   {

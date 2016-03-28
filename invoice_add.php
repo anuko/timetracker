@@ -86,8 +86,9 @@ if ($request->isPost()) {
     if (ttInvoiceHelper::createInvoice($fields)) {
       header('Location: invoices.php');
       exit();
-    }
+    } else {
       $err->add($i18n->getKey('error.db'));
+    }
   }
 } // isPost
 
