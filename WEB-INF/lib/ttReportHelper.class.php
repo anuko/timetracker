@@ -428,10 +428,10 @@ class ttReportHelper {
   static function getFavItems($report) {
     global $user;
     $mdb2 = getConnection();
-    
+
     $group_by_option = $report['group_by'];
     $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($report['show_start'] || $report['show_end']);
-    
+
     // Prepare a query for time items in tt_log table.
     $fields = array(); // An array of fields for database query.
     array_push($fields, 'l.id as id');
@@ -495,9 +495,9 @@ class ttReportHelper {
     if ($user->canManageTeam() || $user->isClient() || in_array('ex', explode(',', $user->plugins)))
        $left_joins .= " left join tt_users u on (u.id = l.user_id)";
     if ($report['show_project'] || 'project' == $group_by_option)
-      $left_joins .= " left join tt_projects p on (p.id = l.project_id)";	
+      $left_joins .= " left join tt_projects p on (p.id = l.project_id)";
     if ($report['show_task'] || 'task' == $group_by_option)
-      $left_joins .= " left join tt_tasks t on (t.id = l.task_id)";		
+      $left_joins .= " left join tt_tasks t on (t.id = l.task_id)";
     if ($include_cf_1) {
       if ($cf_1_type == CustomFields::TYPE_TEXT)
         $left_joins .= " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)";
@@ -508,17 +508,17 @@ class ttReportHelper {
     }
     if ($includeCost && MODE_TIME != $user->tracking_mode)
       $left_joins .= " left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
-    
+
     $where = ttReportHelper::getFavWhere($report);
-    
-    // Construct sql query for tt_log items.    
+
+    // Construct sql query for tt_log items.
     $sql = "select ".join(', ', $fields)." from tt_log l $left_joins $where";
     // If we don't have expense items (such as when the Expenses plugin is desabled), the above is all sql we need,
     // with an exception of sorting part, that is added in the end.
 
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
     if ($report['show_cost'] && in_array('ex', explode(',', $user->plugins))) { // if ex(penses) plugin is enabled
-    
+
       $fields = array(); // An array of fields for database query.
       array_push($fields, 'ei.id');
       array_push($fields, '2 as type'); // Type 2 is for tt_expense_items entries.
@@ -551,7 +551,7 @@ class ttReportHelper {
       // Add invoice name if it is selected.
       if (($user->canManageTeam() || $user->isClient()) && $report['show_invoice'])
         array_push($fields, 'i.name as invoice');
-        
+
       // Prepare sql query part for left joins.
       $left_joins = null;
       if ($user->canManageTeam() || $user->isClient())
@@ -559,19 +559,19 @@ class ttReportHelper {
       if ($report['show_client'] || 'client' == $group_by_option)
         $left_joins .= " left join tt_clients c on (c.id = ei.client_id)";
       if ($report['show_project'] || 'project' == $group_by_option)
-        $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";	      
+        $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";
       if (($user->canManageTeam() || $user->isClient()) && $report['show_invoice'])
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
 
       $where = ttReportHelper::getFavExpenseWhere($report);
-      
+
       // Construct sql query for expense items.
       $sql_for_expense_items = "select ".join(', ', $fields)." from tt_expense_items ei $left_joins $where";
-      
+
       // Construct a union.
       $sql = "($sql) union all ($sql_for_expense_items)";
     }
-    
+
     // Determine sort part.
     $sort_part = ' order by ';
     if ($group_by_option == null || 'no_grouping' == $group_by_option || 'date' == $group_by_option) // TODO: fix DB for NULL values in group_by field.
@@ -583,7 +583,7 @@ class ttReportHelper {
     if ($report['show_start'])
       $sort_part .= ', unformatted_start';
     $sort_part .= ', id';
-    
+
     $sql .= $sort_part;
     // By now we are ready with sql.
 
@@ -591,44 +591,44 @@ class ttReportHelper {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-          if ($convertTo12Hour) {
-            if($val['start'] != '')
-              $val['start'] = ttTimeHelper::to12HourFormat($val['start']);
-            if($val['finish'] != '')
-              $val['finish'] = ttTimeHelper::to12HourFormat($val['finish']);
-          }
-  	      if (isset($val['cost'])) {
-            if ('.' != $user->decimal_mark)
-  	          $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
-  	      }
-          if (isset($val['expense'])) {
-            if ('.' != $user->decimal_mark)
-  	          $val['expense'] = str_replace('.', $user->decimal_mark, $val['expense']);
-  	      }
-  	      if ('no_grouping' != $group_by_option) {
-            $val['grouped_by'] = $val[$group_by_option];
-            if ('date' == $group_by_option) {
-              // This is needed to get the date in user date format.
-              $o_date = new DateAndTime(DB_DATEFORMAT, $val['grouped_by']);
-              $val['grouped_by'] = $o_date->toString($user->date_format);
-              unset($o_date);
-            }
-  	      }
-            
-          // This is needed to get the date in user date format.
-          $o_date = new DateAndTime(DB_DATEFORMAT, $val['date']);
-          $val['date'] = $o_date->toString($user->date_format);
-          unset($o_date);
-
-          $row = $val;
-          $report_items[] = $row;
+        if ($convertTo12Hour) {
+          if($val['start'] != '')
+            $val['start'] = ttTimeHelper::to12HourFormat($val['start']);
+          if($val['finish'] != '')
+            $val['finish'] = ttTimeHelper::to12HourFormat($val['finish']);
         }
-      } else
-  	    die($res->getMessage());
+        if (isset($val['cost'])) {
+          if ('.' != $user->decimal_mark)
+            $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
+        }
+        if (isset($val['expense'])) {
+          if ('.' != $user->decimal_mark)
+            $val['expense'] = str_replace('.', $user->decimal_mark, $val['expense']);
+        }
+        if ('no_grouping' != $group_by_option) {
+          $val['grouped_by'] = $val[$group_by_option];
+          if ('date' == $group_by_option) {
+            // This is needed to get the date in user date format.
+            $o_date = new DateAndTime(DB_DATEFORMAT, $val['grouped_by']);
+            $val['grouped_by'] = $o_date->toString($user->date_format);
+            unset($o_date);
+          }
+        }
+
+        // This is needed to get the date in user date format.
+        $o_date = new DateAndTime(DB_DATEFORMAT, $val['date']);
+        $val['date'] = $o_date->toString($user->date_format);
+        unset($o_date);
+
+        $row = $val;
+        $report_items[] = $row;
+      }
+    } else
+      die($res->getMessage());
 
     return $report_items;
   }
-  
+
   // getSubtotals calculates report items subtotals when a report is grouped by.
   // Without expenses, it's a simple select with group by.
   // With expenses, it becomes a select with group by from a combined set of records obtained with "union all".
