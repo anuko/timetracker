@@ -38,12 +38,6 @@ if (!ttAccessCheck(right_data_entry)) {
   exit();
 }
 
-// Use Custom Fields plugin if we have one.
-// if (file_exists("plugins/CustomFields.class.php")) {
-//   require_once("plugins/CustomFields.class.php");
-//   $custom_fields = new CustomFields($user->team_id);
-// }
-
 $cl_id = $request->getParameter('id');
 $time_rec = ttTimeHelper::getRecord($cl_id, $user->getActiveUser());
 
