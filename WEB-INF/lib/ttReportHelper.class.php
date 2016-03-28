@@ -589,42 +589,41 @@ class ttReportHelper {
 
     // Obtain items for report.
     $res = $mdb2->query($sql);
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        if ($convertTo12Hour) {
-          if($val['start'] != '')
-            $val['start'] = ttTimeHelper::to12HourFormat($val['start']);
-          if($val['finish'] != '')
-            $val['finish'] = ttTimeHelper::to12HourFormat($val['finish']);
-        }
-        if (isset($val['cost'])) {
-          if ('.' != $user->decimal_mark)
-            $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
-        }
-        if (isset($val['expense'])) {
-          if ('.' != $user->decimal_mark)
-            $val['expense'] = str_replace('.', $user->decimal_mark, $val['expense']);
-        }
-        if ('no_grouping' != $group_by_option) {
-          $val['grouped_by'] = $val[$group_by_option];
-          if ('date' == $group_by_option) {
-            // This is needed to get the date in user date format.
-            $o_date = new DateAndTime(DB_DATEFORMAT, $val['grouped_by']);
-            $val['grouped_by'] = $o_date->toString($user->date_format);
-            unset($o_date);
-          }
-        }
+    if (is_a($res, 'PEAR_Error')) die($res->getMessage());
 
-        // This is needed to get the date in user date format.
-        $o_date = new DateAndTime(DB_DATEFORMAT, $val['date']);
-        $val['date'] = $o_date->toString($user->date_format);
-        unset($o_date);
-
-        $row = $val;
-        $report_items[] = $row;
+    while ($val = $res->fetchRow()) {
+      if ($convertTo12Hour) {
+        if($val['start'] != '')
+          $val['start'] = ttTimeHelper::to12HourFormat($val['start']);
+        if($val['finish'] != '')
+          $val['finish'] = ttTimeHelper::to12HourFormat($val['finish']);
       }
-    } else
-      die($res->getMessage());
+      if (isset($val['cost'])) {
+        if ('.' != $user->decimal_mark)
+          $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
+      }
+      if (isset($val['expense'])) {
+        if ('.' != $user->decimal_mark)
+          $val['expense'] = str_replace('.', $user->decimal_mark, $val['expense']);
+      }
+      if ('no_grouping' != $group_by_option) {
+        $val['grouped_by'] = $val[$group_by_option];
+        if ('date' == $group_by_option) {
+          // This is needed to get the date in user date format.
+          $o_date = new DateAndTime(DB_DATEFORMAT, $val['grouped_by']);
+          $val['grouped_by'] = $o_date->toString($user->date_format);
+          unset($o_date);
+        }
+      }
+
+      // This is needed to get the date in user date format.
+      $o_date = new DateAndTime(DB_DATEFORMAT, $val['date']);
+      $val['date'] = $o_date->toString($user->date_format);
+      unset($o_date);
+
+      $row = $val;
+      $report_items[] = $row;
+    }
 
     return $report_items;
   }
