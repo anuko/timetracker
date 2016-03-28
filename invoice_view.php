@@ -74,7 +74,7 @@ if ('.' != $user->decimal_mark) {
 $colspan = 4;
 if (MODE_PROJECTS == $user->tracking_mode)
   $colspan++;
-else if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+elseif (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $colspan += 2;
 
 $smarty->assign('invoice_id', $invoice_id);

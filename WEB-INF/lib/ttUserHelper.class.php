@@ -273,7 +273,7 @@ class ttUserHelper {
       if (is_a($affected, 'PEAR_Error'))
         return false;
 
-    } else if ($user->isCoManager()) {
+    } elseif ($user->isCoManager()) {
       // Mark user binds as deleted.
       $sql = "update tt_user_project_binds set status = NULL where user_id = $user_id";
       $affected = $mdb2->exec($sql);
@@ -286,7 +286,7 @@ class ttUserHelper {
       if (is_a($affected, 'PEAR_Error'))
         return false;
 
-    } else if ($user->isManager()) {
+    } elseif ($user->isManager()) {
       $user_count = ttTeamHelper::getUserCount($user->team_id);    	
 
       // Marking deleted a manager with active users is not allowed.

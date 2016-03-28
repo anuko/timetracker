@@ -169,7 +169,7 @@ if ($custom_fields && $custom_fields->fields[0]) {
   // Only one custom field is supported at this time.
   if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT) {
     $form->addInput(array('type'=>'text','name'=>'cf_1','value'=>$cl_cf_1));
-  } else if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
+  } elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
     $form->addInput(array('type'=>'combobox','name'=>'cf_1',
       'style'=>'width: 250px;',
       'value'=>$cl_cf_1,
@@ -247,7 +247,7 @@ if ($request->isPost()) {
       if ($id && $custom_fields && $cl_cf_1) {
         if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
           $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], null, $cl_cf_1);
-        else if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
+        elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
           $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], $cl_cf_1, null);
       }
 

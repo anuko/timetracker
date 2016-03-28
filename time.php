@@ -195,7 +195,7 @@ if ($custom_fields && $custom_fields->fields[0]) {
   // Only one custom field is supported at this time.
   if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT) {
     $form->addInput(array('type'=>'text','name'=>'cf_1','value'=>$cl_cf_1));
-  } else if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
+  } elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
     $form->addInput(array('type'=>'combobox','name'=>'cf_1',
       'style'=>'width: 250px;',
       'value'=>$cl_cf_1,
@@ -231,7 +231,7 @@ if ($request->isPost()) {
     if (!$cl_duration) {
       if ('0' == $cl_duration)
         $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
-      else if ($cl_start || $cl_finish) {
+      elseif ($cl_start || $cl_finish) {
         if (!ttTimeHelper::isValidTime($cl_start))
           $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start'));
         if ($cl_finish) {
@@ -297,7 +297,7 @@ if ($request->isPost()) {
       if ($id && $custom_fields && $cl_cf_1) {
         if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
           $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], null, $cl_cf_1);
-        else if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
+        elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
           $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], $cl_cf_1, null);
       }
       if ($id && $result) {
@@ -306,8 +306,7 @@ if ($request->isPost()) {
       }
       $err->add($i18n->getKey('error.db'));
     }
-  }
-  else if ($request->getParameter('btn_stop')) {
+  } elseif ($request->getParameter('btn_stop')) {
     // Stop button pressed to finish an uncompleted record.
     $record_id = $request->getParameter('record_id');
     $record = ttTimeHelper::getRecord($record_id, $user->getActiveUser());
@@ -337,7 +336,7 @@ if ($request->isPost()) {
       exit();
     }
   }
-  else if ($request->getParameter('onBehalfUser')) {
+  elseif ($request->getParameter('onBehalfUser')) {
     if($user->canManageTeam()) {
       unset($_SESSION['behalf_id']);
       unset($_SESSION['behalf_name']);

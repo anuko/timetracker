@@ -73,7 +73,7 @@ if (MODE_TIME == $user->tracking_mode) {
   if ($cl_type == CHART_CLIENTS) {
     if (!in_array('cl', explode(',', $user->plugins)))
       $cl_type = CHART_PROJECTS;	
-  } else if ($cl_type == CHART_TASKS) {
+  } elseif ($cl_type == CHART_TASKS) {
     if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode)
       $cl_type = CHART_PROJECTS;
   }

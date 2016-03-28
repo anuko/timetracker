@@ -167,9 +167,9 @@ class ttTimeHelper {
     $time_a = explode(':', $value);
     if ($time_a[0] > 12)
       $res = (string)((int)$time_a[0] - 12).':'.$time_a[1].' PM';
-    else if ($time_a[0] == 12)
+    elseif ($time_a[0] == 12)
       $res = $value.' PM';
-    else if ($time_a[0] == 0)
+    elseif ($time_a[0] == 0)
       $res = '12:'.$time_a[1].' AM';
     else
       $res = $value.' AM';

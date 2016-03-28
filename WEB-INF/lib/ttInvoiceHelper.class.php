@@ -417,7 +417,7 @@ class ttInvoiceHelper {
     $colspan = 4;
     if (MODE_PROJECTS == $user->tracking_mode)
       $colspan++;
-    else if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+    elseif (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
       $colspan += 2;
     $body .= '<tr><td>&nbsp;</td></tr>';
     if ($tax) {

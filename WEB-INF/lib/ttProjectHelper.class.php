@@ -255,9 +255,9 @@ class ttProjectHelper {
       if(!in_array($row['user_id'], $users_to_bind)) { 
       	// Delete tt_user_project_binds record (safely).
       	ttUserHelper::deleteBind($row['user_id'], $project_id);
-      } else if (!$row['status']) {
+      } elseif (!$row['status']) {
       	// If we are here, status of the bind is not active. Memorize such users to update their bind status.
-		$users_to_update[] = $row['user_id'];  // Users we need to update in tt_user_project_binds.
+        $users_to_update[] = $row['user_id'];  // Users we need to update in tt_user_project_binds.
       }
       $all_users[] = $row['user_id']; // All users from tt_user_project_binds for project.
     }

@@ -59,7 +59,7 @@ if ($request->isPost()) {
         $err->add($i18n->getKey('error.db'));
     } else
       $err->add($i18n->getKey('error.db'));
-  } else if ($request->getParameter('btn_cancel')) {
+  } elseif ($request->getParameter('btn_cancel')) {
     header('Location: invoices.php');
     exit();
   }

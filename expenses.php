@@ -174,8 +174,7 @@ if ($request->isPost()) {
       } else
         $err->add($i18n->getKey('error.db'));
     }
-  }
-  else if ($request->getParameter('onBehalfUser')) {
+  } elseif ($request->getParameter('onBehalfUser')) {
     if($user->canManageTeam()) {
       unset($_SESSION['behalf_id']);
       unset($_SESSION['behalf_name']);

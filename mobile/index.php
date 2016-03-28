@@ -33,8 +33,7 @@ if ($auth->isAuthenticated()) {
   if ($user->isAdmin()) {
     header('Location: ../admin_teams.php');
     exit();
-  }
-  else if ($user->isClient()) {
+  } elseif ($user->isClient()) {
     header('Location: ../reports.php');
     exit();
   }

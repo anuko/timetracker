@@ -18,7 +18,7 @@
       {if CustomFields::TYPE_TEXT == $field['type']}
           <td>{$i18n.label.type_text}</td>
           <td></td>
-      {else if CustomFields::TYPE_DROPDOWN == $field['type']}
+      {elseif CustomFields::TYPE_DROPDOWN == $field['type']}
           <td>{$i18n.label.type_dropdown}</td>
           <td><a href="cf_dropdown_options.php?field_id={$field['id']}">{$i18n.label.configure}</a></td>
       {/if}

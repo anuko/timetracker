@@ -88,7 +88,7 @@ if ($request->isPost()) {
     $fields = $custom_fields->get($time_rec['id']);
     if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
       $cl_cf_1 = $fields[0]['value'];
-    else if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
+    elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
       $cl_cf_1 = $fields[0]['option_id'];
   }
 
@@ -190,7 +190,7 @@ if ($custom_fields && $custom_fields->fields[0]) {
   // Only one custom field is supported at this time.
   if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT) {
     $form->addInput(array('type'=>'text','name'=>'cf_1','value'=>$cl_cf_1));
-  } else if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
+  } elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
     $form->addInput(array('type'=>'combobox',
       'name'=>'cf_1',
       'style'=>'width: 250px;',
@@ -224,7 +224,7 @@ if ($request->isPost()) {
   if (!$cl_duration) {
     if ('0' == $cl_duration)
       $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
-    else if ($cl_start || $cl_finish) {
+    elseif ($cl_start || $cl_finish) {
       if (!ttTimeHelper::isValidTime($cl_start))
         $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start'));
       if ($cl_finish) {
@@ -318,7 +318,7 @@ if ($request->isPost()) {
       if ($res && $custom_fields) {
         if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
           $res = $custom_fields->update($cl_id, $custom_fields->fields[0]['id'], null, $cl_cf_1);
-        else if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
+        elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
           $res = $custom_fields->update($cl_id, $custom_fields->fields[0]['id'], $cl_cf_1, null);
       }
       if ($res)

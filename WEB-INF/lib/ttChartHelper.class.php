@@ -72,12 +72,12 @@ class ttChartHelper {
       $sql = "select p.name as name, sum(time_to_sec(l.duration)) as time from tt_log l
         inner join tt_projects p on (p.id = l.project_id)
         where l.status = 1 and l.duration > 0 and l.user_id = $user_id $q_period group by l.project_id";
-    } else if (CHART_TASKS == $ch_type) {
+    } elseif (CHART_TASKS == $ch_type) {
       // Data for tasks.
       $sql = "select t.name as name, sum(time_to_sec(l.duration)) as time from tt_log l
         inner join tt_tasks t on (t.id = l.task_id)
         where l.status = 1 and l.duration > 0 and l.user_id = $user_id $q_period group by l.task_id";
-    } else if (CHART_CLIENTS == $ch_type) {
+    } elseif (CHART_CLIENTS == $ch_type) {
       // Data for clients.
       $sql = "select coalesce(c.name, 'NULL') as name, sum(time_to_sec(l.duration)) as time from tt_log l
         left join tt_clients c on (c.id = l.client_id)

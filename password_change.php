@@ -84,11 +84,9 @@ if ($request->isPost()) {
       // Redirect, depending on user role.
       if ($user->isAdmin()) {
         header('Location: admin_teams.php');
-      }
-      else if ($user->isClient()) {
+      } elseif ($user->isClient()) {
         header('Location: reports.php');
-      }
-      else {
+      } else {
         header('Location: time.php');
       }
       exit();

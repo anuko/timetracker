@@ -40,11 +40,11 @@ class ttReportHelper {
   static function getWhere($bean) {
     global $user;
 
-  	// Prepare dropdown parts.
+    // Prepare dropdown parts.
     $dropdown_parts = '';
     if ($bean->getAttribute('client'))
       $dropdown_parts .= ' and l.client_id = '.$bean->getAttribute('client');
-    else if ($user->isClient() && $user->client_id)
+    elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and l.client_id = '.$user->client_id;
     if ($bean->getAttribute('option')) $dropdown_parts .= ' and l.id in(select log_id from tt_custom_field_log where status = 1 and option_id = '.$bean->getAttribute('option').')';
     if ($bean->getAttribute('project')) $dropdown_parts .= ' and l.project_id = '.$bean->getAttribute('project');
@@ -53,7 +53,7 @@ class ttReportHelper {
     if ($bean->getAttribute('include_records')=='2') $dropdown_parts .= ' and l.billable = 0';
     if ($bean->getAttribute('invoice')=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
     if ($bean->getAttribute('invoice')=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
-        
+
     // Prepare user list part.
     $userlist = -1;
     if (($user->canManageTeam() || $user->isClient()) && is_array($bean->getAttribute('users')))
@@ -64,7 +64,7 @@ class ttReportHelper {
       $user_list_part = " and l.user_id in ($userlist)";
     else
       $user_list_part = " and l.user_id = ".$user->id;
-    
+
     // Prepare sql query part for where.
     if ($bean->getAttribute('period'))
       $period = new Period($bean->getAttribute('period'), new DateAndTime($user->date_format));
@@ -78,16 +78,16 @@ class ttReportHelper {
       " $user_list_part $dropdown_parts";
     return $where;
   }
-  
+
   // getFavWhere prepares a WHERE clause for a favorite report query.
   static function getFavWhere($report) {
     global $user;
 
-  	// Prepare dropdown parts.
+    // Prepare dropdown parts.
     $dropdown_parts = '';
     if ($report['client_id'])
       $dropdown_parts .= ' and l.client_id = '.$report['client_id'];
-    else if ($user->isClient() && $user->client_id)
+    elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and l.client_id = '.$user->client_id;
     if ($report['cf_1_option_id']) $dropdown_parts .= ' and l.id in(select log_id from tt_custom_field_log where status = 1 and option_id = '.$report['cf_1_option_id'].')';
     if ($report['project_id']) $dropdown_parts .= ' and l.project_id = '.$report['project_id'];
@@ -96,14 +96,14 @@ class ttReportHelper {
     if ($report['billable']=='2') $dropdown_parts .= ' and l.billable = 0';
     if ($report['invoice']=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
     if ($report['invoice']=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
-        
+
     // Prepare user list part.
     $userlist = -1;
     if (($user->canManageTeam() || $user->isClient())) {
       if ($report['users'])
         $userlist = $report['users'];
       else {
-      	$active_users = ttTeamHelper::getActiveUsers();
+        $active_users = ttTeamHelper::getActiveUsers();
         foreach ($active_users as $single_user)
           $users[] = $single_user['id'];
         $userlist = join(',', $users);
@@ -115,7 +115,7 @@ class ttReportHelper {
       $user_list_part = " and l.user_id in ($userlist)";
     else
       $user_list_part = " and l.user_id = ".$user->id;
-    
+
     // Prepare sql query part for where.
     if ($report['period'])
       $period = new Period($report['period'], new DateAndTime($user->date_format));
@@ -129,21 +129,21 @@ class ttReportHelper {
       " $user_list_part $dropdown_parts";
     return $where;
   }
-  
+
   // getExpenseWhere prepares WHERE clause for expenses query in a report.
   static function getExpenseWhere($bean) {
     global $user;
 
-  	// Prepare dropdown parts.
+    // Prepare dropdown parts.
     $dropdown_parts = '';
     if ($bean->getAttribute('client'))
       $dropdown_parts .= ' and ei.client_id = '.$bean->getAttribute('client');
-    else if ($user->isClient() && $user->client_id)
+    elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and ei.client_id = '.$user->client_id;
     if ($bean->getAttribute('project')) $dropdown_parts .= ' and ei.project_id = '.$bean->getAttribute('project');
     if ($bean->getAttribute('invoice')=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
     if ($bean->getAttribute('invoice')=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
-        
+
     // Prepare user list part.
     $userlist = -1;
     if (($user->canManageTeam() || $user->isClient()) && is_array($bean->getAttribute('users')))
@@ -154,7 +154,7 @@ class ttReportHelper {
       $user_list_part = " and ei.user_id in ($userlist)";
     else
       $user_list_part = " and ei.user_id = ".$user->id;
-    
+
     // Prepare sql query part for where.
     if ($bean->getAttribute('period'))
       $period = new Period($bean->getAttribute('period'), new DateAndTime($user->date_format));
@@ -173,16 +173,16 @@ class ttReportHelper {
   static function getFavExpenseWhere($report) {
     global $user;
 
-  	// Prepare dropdown parts.
+    // Prepare dropdown parts.
     $dropdown_parts = '';
     if ($report['client_id'])
       $dropdown_parts .= ' and ei.client_id = '.$report['client_id'];
-    else if ($user->isClient() && $user->client_id)
+    elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and ei.client_id = '.$user->client_id;
     if ($report['project_id']) $dropdown_parts .= ' and ei.project_id = '.$report['project_id'];
     if ($report['invoice']=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
     if ($report['invoice']=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
-        
+
     // Prepare user list part.
     $userlist = -1;
     if (($user->canManageTeam() || $user->isClient())) {
@@ -201,7 +201,7 @@ class ttReportHelper {
       $user_list_part = " and ei.user_id in ($userlist)";
     else
       $user_list_part = " and ei.user_id = ".$user->id;
-    
+
     // Prepare sql query part for where.
     if ($report['period'])
       $period = new Period($report['period'], new DateAndTime($user->date_format));
@@ -215,17 +215,17 @@ class ttReportHelper {
       " $user_list_part $dropdown_parts";
     return $where;
   }
-    
+
   // getItems retrieves all items associated with a report.
   // It combines tt_log and tt_expense_items in one array for presentation in one table using mysql union all.
   // Expense items use the "note" field for item name.
   static function getItems($bean) {
     global $user;
     $mdb2 = getConnection();
-    
+
     $group_by_option = $bean->getAttribute('group_by');
     $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($bean->getAttribute('chstart') || $bean->getAttribute('chfinish'));
-    
+
     // Prepare a query for time items in tt_log table.
     $fields = array(); // An array of fields for database query.
     array_push($fields, 'l.id as id');
@@ -248,9 +248,9 @@ class ttReportHelper {
       $custom_fields = new CustomFields($user->team_id);
       $cf_1_type = $custom_fields->fields[0]['type'];
       if ($cf_1_type == CustomFields::TYPE_TEXT) {
-        array_push($fields, 'cfl.value as cf_1');	
-      } else if ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
-  	    array_push($fields, 'cfo.value as cf_1');	
+        array_push($fields, 'cfl.value as cf_1');
+      } elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
+        array_push($fields, 'cfo.value as cf_1');
       }
     }
     // Add start time.
@@ -289,30 +289,30 @@ class ttReportHelper {
     if ($user->canManageTeam() || $user->isClient() || in_array('ex', explode(',', $user->plugins)))
        $left_joins .= " left join tt_users u on (u.id = l.user_id)";
     if ($bean->getAttribute('chproject') || 'project' == $group_by_option)
-      $left_joins .= " left join tt_projects p on (p.id = l.project_id)";	
+      $left_joins .= " left join tt_projects p on (p.id = l.project_id)";
     if ($bean->getAttribute('chtask') || 'task' == $group_by_option)
-      $left_joins .= " left join tt_tasks t on (t.id = l.task_id)";		
+      $left_joins .= " left join tt_tasks t on (t.id = l.task_id)";
     if ($include_cf_1) {
       if ($cf_1_type == CustomFields::TYPE_TEXT)
         $left_joins .= " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)";
-      else if ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
+      elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
         $left_joins .=  " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)".
           " left join tt_custom_field_options cfo on (cfl.option_id = cfo.id)";
       }
     }
     if ($includeCost && MODE_TIME != $user->tracking_mode)
       $left_joins .= " left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
-    
+
     $where = ttReportHelper::getWhere($bean);
-    
-    // Construct sql query for tt_log items.    
+
+    // Construct sql query for tt_log items.
     $sql = "select ".join(', ', $fields)." from tt_log l $left_joins $where";
     // If we don't have expense items (such as when the Expenses plugin is desabled), the above is all sql we need,
     // with an exception of sorting part, that is added in the end.
 
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
     if ($bean->getAttribute('chcost') && in_array('ex', explode(',', $user->plugins))) { // if ex(penses) plugin is enabled
-    
+
       $fields = array(); // An array of fields for database query.
       array_push($fields, 'ei.id');
       array_push($fields, '2 as type'); // Type 2 is for tt_expense_items entries.
@@ -345,7 +345,7 @@ class ttReportHelper {
       // Add invoice name if it is selected.
       if (($user->canManageTeam() || $user->isClient()) && $bean->getAttribute('chinvoice'))
         array_push($fields, 'i.name as invoice');
-        
+
       // Prepare sql query part for left joins.
       $left_joins = null;
       if ($user->canManageTeam() || $user->isClient())
@@ -353,19 +353,19 @@ class ttReportHelper {
       if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
         $left_joins .= " left join tt_clients c on (c.id = ei.client_id)";
       if ($bean->getAttribute('chproject') || 'project' == $group_by_option)
-        $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";	      
+        $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";
       if (($user->canManageTeam() || $user->isClient()) && $bean->getAttribute('chinvoice'))
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
 
       $where = ttReportHelper::getExpenseWhere($bean);
-      
+
       // Construct sql query for expense items.
       $sql_for_expense_items = "select ".join(', ', $fields)." from tt_expense_items ei $left_joins $where";
-      
+
       // Construct a union.
       $sql = "($sql) union all ($sql_for_expense_items)";
     }
-    
+
     // Determine sort part.
     $sort_part = ' order by ';
     if ('no_grouping' == $group_by_option || 'date' == $group_by_option)
@@ -377,7 +377,7 @@ class ttReportHelper {
     if ($bean->getAttribute('chstart'))
       $sort_part .= ', unformatted_start';
     $sort_part .= ', id';
-    
+
     $sql .= $sort_part;
     // By now we are ready with sql.
 
@@ -455,9 +455,9 @@ class ttReportHelper {
       $custom_fields = new CustomFields($user->team_id);
       $cf_1_type = $custom_fields->fields[0]['type'];
       if ($cf_1_type == CustomFields::TYPE_TEXT) {
-        array_push($fields, 'cfl.value as cf_1');	
-      } else if ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
-  	    array_push($fields, 'cfo.value as cf_1');	
+        array_push($fields, 'cfl.value as cf_1');
+      } elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
+        array_push($fields, 'cfo.value as cf_1');
       }
     }
     // Add start time.
@@ -502,7 +502,7 @@ class ttReportHelper {
     if ($include_cf_1) {
       if ($cf_1_type == CustomFields::TYPE_TEXT)
         $left_joins .= " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)";
-      else if ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
+      elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
         $left_joins .=  " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)".
           " left join tt_custom_field_options cfo on (cfl.option_id = cfo.id)";
       }
@@ -670,7 +670,7 @@ class ttReportHelper {
   	    $custom_fields = new CustomFields($user->team_id);
   	    if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
           $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id) ';
-        else if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
+        elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
           $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.option_id = cfo.id) ';
     	  break;
     }
@@ -799,7 +799,7 @@ class ttReportHelper {
   	    $custom_fields = new CustomFields($user->team_id);
   	    if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
           $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id) ';
-        else if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
+        elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
           $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.option_id = cfo.id) ';
     	  break;
     }

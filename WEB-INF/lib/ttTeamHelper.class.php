@@ -629,7 +629,7 @@ class ttTeamHelper {
     if ($date_format !== null) {
       $date_format_f = ', date_format';
       $date_format_v = ', ' . $mdb2->quote($date_format);    	
-    } else if (defined('DATE_FORMAT_DEFAULT')) {
+    } elseif (defined('DATE_FORMAT_DEFAULT')) {
       $date_format_f = ', date_format';
       $date_format_v = ', ' . $mdb2->quote(DATE_FORMAT_DEFAULT);
     } else {
@@ -641,7 +641,7 @@ class ttTeamHelper {
     if ($time_format !== null) {
       $time_format_f = ', time_format';
       $time_format_v = ', ' . $mdb2->quote($time_format);
-    } else if (defined('TIME_FORMAT_DEFAULT')) {
+    } elseif (defined('TIME_FORMAT_DEFAULT')) {
       $time_format_f = ', time_format';
       $time_format_v = ', ' . $mdb2->quote(TIME_FORMAT_DEFAULT);
     } else {
@@ -653,7 +653,7 @@ class ttTeamHelper {
     if ($week_start !== null) {
       $week_start_f = ', week_start';
       $week_start_v = ', ' . (int)$week_start;
-    } else if (defined('WEEK_START_DEFAULT')) {
+    } elseif (defined('WEEK_START_DEFAULT')) {
       $week_start_f = ', week_start';
       $week_start_v = ', ' . (int)WEEK_START_DEFAULT;    	
     } else {
