@@ -97,7 +97,7 @@ $i18n_key_words = array(
 
 // Labels for buttons.
 'button.login' => 'Prijava',
-'button.now' => 'Trenutno vreme', // TODO: is'not it too long for time.php page?
+'button.now' => 'Sada',
 'button.save' => 'Sačuvaj',
 'button.copy' => 'Kopiraj',
 'button.cancel' => 'Otkaži',
