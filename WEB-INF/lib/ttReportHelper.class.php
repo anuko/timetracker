@@ -888,11 +888,11 @@ class ttReportHelper {
   static function getTotals($bean)
   {
     global $user;
-    
+
     $mdb2 = getConnection();
-    
+
     $where = ttReportHelper::getWhere($bean);
-  	
+
     // Start with a query for time items.
     if ($bean->getAttribute('chcost')) {
       if (MODE_TIME == $user->tracking_mode) {
@@ -906,38 +906,37 @@ class ttReportHelper {
           sum(cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2))) as cost,
           null as expenses
           from tt_log l
-          left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id) $where";  	
+          left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id) $where";
       }
     } else
       $sql = "select sum(time_to_sec(l.duration)) as time, null as cost, null as expenses from tt_log l $where";
-      
+
     // If we have expenses, query becomes a bit more complex.
     if ($bean->getAttribute('chcost') && in_array('ex', explode(',', $user->plugins))) {
       $where = ttReportHelper::getExpenseWhere($bean);
       $sql_for_expenses = "select null as time, sum(cost) as cost, sum(cost) as expenses from tt_expense_items ei $where";
       // Create a combined query.
       $sql = "select sum(time) as time, sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t";
-  	}
+    }
 
-  	// Execute query.
+    // Execute query.
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
       $total_time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
       if ($bean->getAttribute('chcost')) {
-      	$total_cost = $val['cost'];
-      	if (!$total_cost) $total_cost = '0.00';
-      	if ('.' != $user->decimal_mark)
-  	      $total_cost = str_replace('.', $user->decimal_mark, $total_cost);
-  	      
-  	    $total_expenses = $val['expenses'];
-      	if (!$total_expenses) $total_expenses = '0.00';
-      	if ('.' != $user->decimal_mark)
-  	      $total_expenses = str_replace('.', $user->decimal_mark, $total_expenses);
+        $total_cost = $val['cost'];
+        if (!$total_cost) $total_cost = '0.00';
+        if ('.' != $user->decimal_mark)
+          $total_cost = str_replace('.', $user->decimal_mark, $total_cost);
+        $total_expenses = $val['expenses'];
+        if (!$total_expenses) $total_expenses = '0.00';
+        if ('.' != $user->decimal_mark)
+          $total_expenses = str_replace('.', $user->decimal_mark, $total_expenses);
       }
     } else
       die($res->getMessage());
-      
+
     if ($bean->getAttribute('period'))
       $period = new Period($bean->getAttribute('period'), new DateAndTime($user->date_format));
     else {
@@ -948,14 +947,14 @@ class ttReportHelper {
     }
 
     $totals['start_date'] = $period->getBeginDate();
-  	$totals['end_date'] = $period->getEndDate();
-  	$totals['time'] = $total_time;
-  	$totals['cost'] = $total_cost;
-  	$totals['expenses'] = $total_expenses;
+    $totals['end_date'] = $period->getEndDate();
+    $totals['time'] = $total_time;
+    $totals['cost'] = $total_cost;
+    $totals['expenses'] = $total_expenses;
 
     return $totals;
   }
-  
+
   // getFavTotals calculates total hours and cost for all favorite report items.
   static function getFavTotals($report)
   {
