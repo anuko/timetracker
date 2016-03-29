@@ -861,26 +861,25 @@ class ttReportHelper {
 
     // Execute query.
     $res = $mdb2->query($sql);
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        if ('date' == $group_by_option) {
-          // This is needed to get the date in user date format.
-          $o_date = new DateAndTime(DB_DATEFORMAT, $val['group_field']);
-          $val['group_field'] = $o_date->toString($user->date_format);
-          unset($o_date);
-        }
-        $time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
-        if ($report['show_cost']) {
-          if ('.' != $user->decimal_mark) {
-            $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
-            $val['expenses'] = str_replace('.', $user->decimal_mark, $val['expenses']);
-          }
-          $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time,'cost'=>$val['cost'],'expenses'=>$val['expenses']);
-        } else
-          $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time);
+    if (is_a($res, 'PEAR_Error')) die($res->getMessage());
+
+    while ($val = $res->fetchRow()) {
+      if ('date' == $group_by_option) {
+        // This is needed to get the date in user date format.
+        $o_date = new DateAndTime(DB_DATEFORMAT, $val['group_field']);
+        $val['group_field'] = $o_date->toString($user->date_format);
+        unset($o_date);
       }
-    } else
-      die($res->getMessage());
+      $time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
+      if ($report['show_cost']) {
+        if ('.' != $user->decimal_mark) {
+          $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
+          $val['expenses'] = str_replace('.', $user->decimal_mark, $val['expenses']);
+        }
+        $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time,'cost'=>$val['cost'],'expenses'=>$val['expenses']);
+      } else
+        $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time);
+    }
 
     return $subtotals;
   }
