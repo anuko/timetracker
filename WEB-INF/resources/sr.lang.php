@@ -86,8 +86,7 @@ $i18n_key_words = array(
 'error.no_login' => 'Nema korisnika pod ovom prijavom',
 'error.no_teams' => 'Vaša baza podataka je prazna. Prijavite se kao administrator i napravite novi tim.',
 'error.upload' => 'Greška pri otpremanju podatka.',
-// TODO: translate the following:
-'error.period_locked' => 'Can\\\'t complete the operation. Records older than a certain number of days cannot be created or modified. Team manager defines this in the "Lock interval in days" value on the "Profile" page. Set it to 0 to remove locking. <br><br>Uncompleted records (with 0 or empty duration) can be deleted.',
+'error.period_locked' => 'Ne može se izvršiti naredba. Uneti podaci su veći od određenog broja dana ne mogu se sačuvati niti modifikovati. Samo Menadžer tim-a može da definiše ovu vrednost u opciji "Blokiraj intervale u danima" na svom "Profilu". Postavite ga na 0 za uklanjanje restrikcija. <br> <br> Nepotpuni zapisi (sa 0 ili bez trajanja) mogu biti izbrisani.',
 'error.mail_send' => 'Greška u slanju mejla.',
 'error.no_email' => 'Nema imejla pod korisničkom imenom.',
 'error.uncompleted_exists' => 'Unos već postoji ali je nekompletan. Zatvorite postojeći ili obrišite unos.',
@@ -151,8 +150,8 @@ $i18n_key_words = array(
 'label.note' => 'Napomena',
 'label.item' => 'Stavka',
 'label.cost' => 'Cena',
-'label.week_total' => 'Zbir nedeljno',
-'label.day_total' => 'Zbir dnevno',
+'label.week_total' => 'Zbir časova nedeljno',
+'label.day_total' => 'Zbir časova dnevno',
 'label.today' => 'Danas',
 'label.total_hours' => 'Ukupno časova',
 'label.total_cost' => 'Ukupna cena',
@@ -178,7 +177,7 @@ $i18n_key_words = array(
 'label.client_address' => 'Adresa klijenta',
 'label.or' => 'ili',
 'label.error' => 'Greška',
-'label.ldap_hint' => 'Unesi tvoj <b>Windows prijavu</b> i <b>lozinku</b> u polje ispod.',
+'label.ldap_hint' => 'Unesi tvoju <b>Windows prijavu</b> i <b>lozinku</b> u polje ispod.',
 'label.required_fields' => '* - obavezna polja',
 'label.on_behalf' => 'ispred',
 'label.role_manager' => '(menadžer)',
@@ -254,9 +253,8 @@ $i18n_key_words = array(
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
-'dropdown.all' => '--- odaberi sve ---',    // TODO: is it good for reports.php page?
-'dropdown.no' => '--- nemoj odabirati ---', // TODO: is it good for reports.php page?
-// NOTE TO TRANSLATORS: dropdown.this_day does not necessarily means "today". It means a specific ("this") day selected on calendar. See Charts.
+'dropdown.all' => '--- odaberi sve ---',
+'dropdown.no' => '--- poništi sve ---', // TODO: Check fav report selection dropdown at https://timetracker.anuko.com/reports.php page. The meaning is "do not select any saved favorite report".
 'dropdown.this_day' => 'ovaj dan',
 'dropdown.this_week' => 'ova nedelja',
 'dropdown.last_week' => 'prošla nedelja',
@@ -294,7 +292,7 @@ $i18n_key_words = array(
 // Forma vremena. Pogledajte primer na https://timetracker.anuko.com/time.php.
 'form.time.duration_format' => '(hh:mm or 0.0h)',
 'form.time.billable' => 'Naplativ',
-'form.time.uncompleted' => 'Ne završen',
+'form.time.uncompleted' => 'Nezavršen',
 
 // Izmena vremenske forme. Pogledajte primer na https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Ovaj zapis je sačuvan sa početnim vremenom i nije greška.',
@@ -304,20 +302,20 @@ $i18n_key_words = array(
 'form.reports.confirm_delete' => 'Da li ste sigurni da želite obrisati omiljene izveštaje?',
 'form.reports.include_records' => 'Uključi zapise',
 'form.reports.include_billable' => 'naplativo',
-'form.reports.include_not_billable' => 'nije naplativo',
+'form.reports.include_not_billable' => 'ne naplativo',
 'form.reports.include_invoiced' => 'obračunato',
 'form.reports.include_not_invoiced' => 'nije obračunato',
-'form.reports.select_period' => 'Odaberite vremenski raspon',
-'form.reports.set_period' => 'ili podesite vreme',
-'form.reports.show_fields' => 'Prikaži polja',
-'form.reports.group_by' => 'Grupiraj po',
+'form.reports.select_period' => 'Odaberi vremenski raspon',
+'form.reports.set_period' => 'ili podesi datum',
+'form.reports.show_fields' => 'Prikaži polja u izveštaju',
+'form.reports.group_by' => 'Grupiši po',
 'form.reports.group_by_no' => '--- nemoj grupisati ---',
 'form.reports.group_by_date' => 'datum',
 'form.reports.group_by_user' => 'korisnik',
 'form.reports.group_by_client' => 'klijent',
 'form.reports.group_by_project' => 'projekat',
 'form.reports.group_by_task' => 'zadatak',
-'form.reports.totals_only' => 'Samo zbir',
+'form.reports.totals_only' => 'Samo zbirno',
 
 // Forma izveštaja. Pogledajte primer na https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -361,8 +359,8 @@ $i18n_key_words = array(
 
 // Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'Postoji mogućnost izvoza svih podataka od timova u xml fajlu. Može vam biti korisno ako imate internu bazu podataka.',
-'form.export.compression' => 'Compression',
-'form.export.compression_none' => 'none',
+'form.export.compression' => 'Kompresija',
+'form.export.compression_none' => 'ništa',
 'form.export.compression_bzip' => 'bzip',
 
 // Strings for Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
