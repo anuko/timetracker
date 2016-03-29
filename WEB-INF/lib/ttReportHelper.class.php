@@ -1027,21 +1027,19 @@ class ttReportHelper {
   // The assignToInvoice assigns a set of records to a specific invoice.
   static function assignToInvoice($invoice_id, $time_log_ids, $expense_item_ids)
   {
-  	$mdb2 = getConnection();
-  	if ($time_log_ids) {
+    $mdb2 = getConnection();
+    if ($time_log_ids) {
       $sql = "update tt_log set invoice_id = ".$mdb2->quote($invoice_id).
         " where id in(".join(', ', $time_log_ids).")";
       $affected = $mdb2->exec($sql);
-      if (is_a($affected, 'PEAR_Error'))
-  	    die($affected->getMessage());
-  	}
+      if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
+    }
     if ($expense_item_ids) {
       $sql = "update tt_expense_items set invoice_id = ".$mdb2->quote($invoice_id).
         " where id in(".join(', ', $expense_item_ids).")";
       $affected = $mdb2->exec($sql);
-      if (is_a($affected, 'PEAR_Error'))
-  	    die($affected->getMessage());
-  	}
+      if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
+    }
   }
 
   // prepareReportBody - prepares an email body for report.
@@ -1055,7 +1053,7 @@ class ttReportHelper {
     if ($group_by && 'no_grouping' != $group_by)
       $subtotals = ttReportHelper::getSubtotals($bean);
     $totals = ttReportHelper::getTotals($bean);
-    
+
     // Use custom fields plugin if it is enabled.
     if (in_array('cf', explode(',', $user->plugins)))
       $custom_fields = new CustomFields($user->team_id);
@@ -1071,21 +1069,21 @@ class ttReportHelper {
     $cellRightAligned = 'text-align: right; vertical-align: top;';
     $cellLeftAlignedSubtotal = 'font-weight: bold; text-align: left; vertical-align: top;';
     $cellRightAlignedSubtotal = 'font-weight: bold; text-align: right; vertical-align: top;';
-    
+
     // Start creating email body.
     $body = '<html>';
     $body .= '<head><meta http-equiv="content-type" content="text/html; charset='.CHARSET.'"></head>';
     $body .= '<body>';
-    
+
     // Output title.
     $body .= '<p style="'.$style_title.'">'.$i18n->getKey('form.mail.report_subject').': '.$totals['start_date'].' - '.$totals['end_date'].'</p>';
-    
+
     // Output comment.
     if ($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>';
 
     if ($bean->getAttribute('chtotalsonly')) {
       // Totals only report. Output subtotals.
-      
+
       // Determine group_by header.
       if ('cf_1' == $group_by)
         $group_by_header = htmlspecialchars($custom_fields->fields[0]['label']);
@@ -1093,7 +1091,7 @@ class ttReportHelper {
         $key = 'label.'.$group_by;
         $group_by_header = $i18n->getKey($key);
       }
-    	
+
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
       $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
@@ -1117,27 +1115,27 @@ class ttReportHelper {
         }
         $body .= '</tr>';
       }
-      
+
       // Print totals.
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
       $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.total').'</td>';
       if ($bean->getAttribute('chduration')) {
-      	$body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-      	if ($totals['time'] <> '0:00') $body .= $totals['time'];
-      	$body .= '</td>';
+        $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
+        if ($totals['time'] <> '0:00') $body .= $totals['time'];
+        $body .= '</td>';
       }
       if ($bean->getAttribute('chcost')) {
-      	$body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
+        $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
         $body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
-      	$body .= '</td>';
+        $body .= '</td>';
       }
       $body .= '</tr>';
-       
+
       $body .= '</table>';
     } else {
       // Regular report.
-      
+
       // Print table header.
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
@@ -1165,7 +1163,7 @@ class ttReportHelper {
       if ($bean->getAttribute('chinvoice'))
         $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.invoice').'</td>';
       $body .= '</tr>';
-      
+
       // Initialize variables to print subtotals.
       if ($items && 'no_grouping' != $group_by) {
         $print_subtotals = true;
@@ -1177,7 +1175,7 @@ class ttReportHelper {
       $prev_date = '';
       $cur_date = '';
       $row_style = $rowItem;
-      
+
       // Print report items.
       if (is_array($items)) {
         foreach ($items as $record) {
@@ -1199,9 +1197,9 @@ class ttReportHelper {
               if ($bean->getAttribute('chduration')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['time'].'</td>';
               if ($bean->getAttribute('chnote')) $body .= '<td></td>';
               if ($bean->getAttribute('chcost')) {
-              	$body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-              	$body .= ($user->canManageTeam() || $user->isClient()) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
-              	$body .= '</td>';
+                $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
+                $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
+                $body .= '</td>';
               }
               if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
               $body .= '</tr>';
@@ -1209,7 +1207,7 @@ class ttReportHelper {
             }
             $first_pass = false;
           }
-          
+
           // Print a regular row.
           if ($cur_date != $prev_date)
             $row_style = ($row_style == $rowItem) ? $rowItemAlt : $rowItem;
@@ -1238,13 +1236,13 @@ class ttReportHelper {
           if ($bean->getAttribute('chinvoice'))
             $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['invoice']).'</td>';
           $body .= '</tr>';
-          
+
           $prev_date = $record['date'];
           if ($print_subtotals)
             $prev_grouped_by = $record['grouped_by'];
         }
       }
-      
+
       // Print a terminating subtotal.
       if ($print_subtotals) {
         $body .= '<tr style="'.$rowSubtotal.'">';
@@ -1267,7 +1265,7 @@ class ttReportHelper {
         if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
         $body .= '</tr>';
       }
-      
+
       // Print totals.
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
@@ -1282,16 +1280,16 @@ class ttReportHelper {
       if ($bean->getAttribute('chduration')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['time'].'</td>';
       if ($bean->getAttribute('chnote')) $body .= '<td></td>';
       if ($bean->getAttribute('chcost')) {
-      	$body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
-      	$body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
-      	$body .= '</td>';
+        $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
+        $body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
+        $body .= '</td>';
       }
       if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
       $body .= '</tr>';
-      
+
       $body .= '</table>';
     }
-    
+
     // Output footer.
     if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false))
       $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
@@ -1301,19 +1299,19 @@ class ttReportHelper {
 
     return $body;
   }
-  
-// prepareFavReportBody - prepares an email body for a favorite report.
+
+  // prepareFavReportBody - prepares an email body for a favorite report.
   static function prepareFavReportBody($report)
   {
-  	global $user;
-  	global $i18n;
-  	
-  	$items = ttReportHelper::getFavItems($report);
+    global $user;
+    global $i18n;
+
+    $items = ttReportHelper::getFavItems($report);
     $group_by = $report['group_by'];
-  	if ($group_by && 'no_grouping' != $group_by)
-        $subtotals = ttReportHelper::getFavSubtotals($report);    
-    $totals = ttReportHelper::getFavTotals($report);     	
-  	
+    if ($group_by && 'no_grouping' != $group_by)
+      $subtotals = ttReportHelper::getFavSubtotals($report);
+    $totals = ttReportHelper::getFavTotals($report);
+
     // Use custom fields plugin if it is enabled.
     if (in_array('cf', explode(',', $user->plugins)))
       $custom_fields = new CustomFields($user->team_id);
@@ -1329,12 +1327,12 @@ class ttReportHelper {
     $cellRightAligned = 'text-align: right; vertical-align: top;';
     $cellLeftAlignedSubtotal = 'font-weight: bold; text-align: left; vertical-align: top;';
     $cellRightAlignedSubtotal = 'font-weight: bold; text-align: right; vertical-align: top;';
-    
+
     // Start creating email body.
     $body = '<html>';
     $body .= '<head><meta http-equiv="content-type" content="text/html; charset='.CHARSET.'"></head>';
     $body .= '<body>';
-    
+
     // Output title.
     $body .= '<p style="'.$style_title.'">'.$i18n->getKey('form.mail.report_subject').': '.$totals['start_date'].' - '.$totals['end_date'].'</p>';
 
@@ -1343,7 +1341,7 @@ class ttReportHelper {
 
     if ($report['show_totals_only']) {
       // Totals only report. Output subtotals.
-      
+
       // Determine group_by header.
       if ('cf_1' == $group_by)
         $group_by_header = htmlspecialchars($custom_fields->fields[0]['label']);
@@ -1351,7 +1349,7 @@ class ttReportHelper {
         $key = 'label.'.$group_by;
         $group_by_header = $i18n->getKey($key);
       }
-    	
+
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
       $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
@@ -1375,27 +1373,27 @@ class ttReportHelper {
         }
         $body .= '</tr>';
       }
-      
+
       // Print totals.
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
       $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.total').'</td>';
       if ($report['show_duration']) {
-      	$body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-      	if ($totals['time'] <> '0:00') $body .= $totals['time'];
-      	$body .= '</td>';
+        $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
+        if ($totals['time'] <> '0:00') $body .= $totals['time'];
+        $body .= '</td>';
       }
       if ($report['show_cost']) {
-      	$body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
+        $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
         $body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
-      	$body .= '</td>';
+        $body .= '</td>';
       }
       $body .= '</tr>';
-       
+
       $body .= '</table>';
     } else {
       // Regular report.
-      
+
       // Print table header.
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
@@ -1423,7 +1421,7 @@ class ttReportHelper {
       if ($report['show_invoice'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.invoice').'</td>';
       $body .= '</tr>';
-      
+
       // Initialize variables to print subtotals.
       if ($items && 'no_grouping' != $group_by) {
         $print_subtotals = true;
@@ -1435,7 +1433,7 @@ class ttReportHelper {
       $prev_date = '';
       $cur_date = '';
       $row_style = $rowItem;
-      
+
       // Print report items.
       if (is_array($items)) {
         foreach ($items as $record) {
@@ -1463,11 +1461,11 @@ class ttReportHelper {
               }
               if ($report['show_invoice']) $body .= '<td></td>';
               $body .= '</tr>';
-              $body .= '<tr><td>&nbsp;</td></tr>';	
+              $body .= '<tr><td>&nbsp;</td></tr>';
             }
             $first_pass = false;
-      	  }
-      	
+          }
+
           // Print a regular row.
           if ($cur_date != $prev_date)
             $row_style = ($row_style == $rowItem) ? $rowItemAlt : $rowItem;
@@ -1496,13 +1494,13 @@ class ttReportHelper {
           if ($report['show_invoice'])
             $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['invoice']).'</td>';
           $body .= '</tr>';
-            
+
           $prev_date = $record['date'];
           if ($print_subtotals)
             $prev_grouped_by = $record['grouped_by'];
         }
       }
-      
+
       // Print a terminating subtotal.
       if ($print_subtotals) {
         $body .= '<tr style="'.$rowSubtotal.'">';
@@ -1525,7 +1523,7 @@ class ttReportHelper {
         if ($report['show_invoice']) $body .= '<td></td>';
         $body .= '</tr>';
       }
-      
+
       // Print totals.
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
@@ -1540,16 +1538,16 @@ class ttReportHelper {
       if ($report['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['time'].'</td>';
       if ($report['show_note']) $body .= '<td></td>';
       if ($report['show_cost']) {
-      	$body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
-      	$body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
-      	$body .= '</td>';
+        $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
+        $body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
+        $body .= '</td>';
       }
       if ($report['show_invoice']) $body .= '<td></td>';
       $body .= '</tr>';
-      
+
       $body .= '</table>';
     }
-    
+
     // Output footer.
     if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false))
       $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
@@ -1559,17 +1557,17 @@ class ttReportHelper {
 
     return $body;
   }
-  
+
   // sendFavReport - sends a favorite report to a specified email, called from cron.php
   static function sendFavReport($report, $email) {
     // We are called from cron.php, we have no $bean in session.
     // cron.php set global $user and $i18n objects to match our favorite report user.
     global $user;
     global $i18n;
-    
+
     // Prepare report body.
     $body = ttReportHelper::prepareFavReportBody($report);
-			
+
     import('mail.Mailer');
     $mailer = new Mailer();
     $mailer->setCharSet(CHARSET);
@@ -1579,7 +1577,7 @@ class ttReportHelper {
     $mailer->setSendType(MAIL_MODE);
     if (!$mailer->send($report['name'], $body))
       return false;
-      
+
     return true;
   }
 }
