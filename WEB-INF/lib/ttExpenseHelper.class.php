@@ -41,18 +41,18 @@ class ttExpenseHelper {
     $cost = str_replace(',', '.', $fields['cost']);
     $invoice_id = $fields['invoice_id'];
     $status = $fields['status'];
-       
+
     $sql = "insert into tt_expense_items (date, user_id, client_id, project_id, name, cost, invoice_id, status) ".
       "values (".$mdb2->quote($date).", $user_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).
       ", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
-    
+
     $id = $mdb2->lastInsertID('tt_expense_items', 'id');
     return $id;
   }
-  
+
   // update - updates a record in tt_expense_items table.
   static function update($fields)
   {
@@ -66,19 +66,19 @@ class ttExpenseHelper {
     $name = $fields['name'];
     $cost = str_replace(',', '.', $fields['cost']);
     $invoice_id = $fields['invoice_id'];
-    
+
     $sql = "UPDATE tt_expense_items set date = ".$mdb2->quote($date).", user_id = $user_id, client_id = ".$mdb2->quote($client_id).
       ", project_id = ".$mdb2->quote($project_id).", name = ".$mdb2->quote($name).
       ", cost = ".$mdb2->quote($cost).", invoice_id = ".$mdb2->quote($invoice_id).
       " WHERE id = $id";
-    
+
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
-   
+
     return true;
   }
-  
+
   // markDeleted - marks an item as deleted in tt_expense_items table.
   static function markDeleted($id, $user_id) {
     $mdb2 = getConnection();
@@ -87,14 +87,14 @@ class ttExpenseHelper {
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
-      
+
     return true;
   }
-  
+
   // getTotalForDay - gets total expenses for a user for a specific date.
   static function getTotalForDay($user_id, $date) {
-  	global $user;
-  	
+    global $user;
+
     $mdb2 = getConnection();
 
     $sql = "select sum(cost) as sm from tt_expense_items where user_id = $user_id and date = ".$mdb2->quote($date)." and status = 1";
@@ -106,22 +106,22 @@ class ttExpenseHelper {
     }
     return false;
   }
-  
+
   // getItem - retrieves an entry from tt_expense_items table.
   static function getItem($id, $user_id) {
     global $user;
-  	
+
     $mdb2 = getConnection();
-    
+
     $client_field = null;
     if ($user->isPluginEnabled('cl'))
       $client_field = ", c.name as client_name";
-      
+
     $left_joins = "";
     $left_joins = " left join tt_projects p on (ei.project_id = p.id)";
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (ei.client_id = c.id)";
-      
+
     $sql = "select ei.id, ei.date, ei.client_id, ei.project_id, ei.name, ei.cost, ei.invoice_id $client_field, p.name as project_name
       from tt_expense_items ei
       $left_joins
@@ -132,42 +132,24 @@ class ttExpenseHelper {
         return false;
       }
       if ($val = $res->fetchRow()) {
-      	$val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
+        $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
         return $val;
       }
     }
     return false;
   }
-  
-  /*
-  // getAllItems - returns all expense items for a certain user.
-  static function getAllItems($user_id) {
-    $result = array();
-
-    $mdb2 = getConnection();
-
-    $sql = "select * from tt_expense_items where user_id = $user_id order by id";
-    $res = $mdb2->query($sql);
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-    } else return false;
-
-    return $result;
-  }*/
 
   // getItems - returns expense items for a user for a given date.
   static function getItems($user_id, $date) {
     global $user;
-  	  	
+
     $result = array();
     $mdb2 = getConnection();
 
     $client_field = null;
     if ($user->isPluginEnabled('cl'))
       $client_field = ", c.name as client";
-    
+
     $left_joins = "";
     $left_joins = " left join tt_projects p on (ei.project_id = p.id)";
     if ($user->isPluginEnabled('cl'))
@@ -178,7 +160,7 @@ class ttExpenseHelper {
       $left_joins
       where ei.date = ".$mdb2->quote($date)." and ei.user_id = $user_id and ei.status = 1
       order by ei.id";
-      
+
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {

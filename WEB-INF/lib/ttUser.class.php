@@ -50,29 +50,28 @@ class ttUser {
   var $address = null;      // Address for invoices.
   var $lock_interval = 0;   // Lock interval in days for time records.
   var $rights = 0;          // A mask of user rights.
-  
+
   // Constructor.
   function ttUser($login, $id = null) {
-  	if (!$login && !$id) {
+    if (!$login && !$id) {
       // nothing to initialize
-  	  return;
-  	}
-  	
+      return;
+    }
+
     $mdb2 = getConnection();
-    
+
     $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role, u.client_id, u.email, t.name as team_name, 
       t.address, t.currency, t.locktime, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start, t.tracking_mode, t.record_type, t.plugins, t.custom_logo
       FROM tt_users u LEFT JOIN tt_teams t ON (u.team_id = t.id) WHERE ";
-  	if ($id)
-  	  $sql .= "u.id = $id";
+    if ($id)
+      $sql .= "u.id = $id";
     else
-  	  $sql .= "u.login = ".$mdb2->quote($login);
-  	$sql .= " AND u.status = 1";
-  	  	    	
+      $sql .= "u.login = ".$mdb2->quote($login);
+    $sql .= " AND u.status = 1";
+
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) {
       return;
-      //die($res->getMessage());
     }
 
     $val = $res->fetchRow();
@@ -97,33 +96,33 @@ class ttUser {
       $this->plugins = $val['plugins'];
       $this->custom_logo = $val['custom_logo'];
       $this->lock_interval = $val['locktime'];
-      
+
       // Set "on behalf" id and name.
       if (isset($_SESSION['behalf_id'])) {
           $this->behalf_id = $_SESSION['behalf_id'];
           $this->behalf_name = $_SESSION['behalf_name'];
       }
-      
+
       // Set user rights.
       if ($this->role == ROLE_USER) {
-      	$this->rights = right_data_entry|right_view_charts|right_view_reports;
+        $this->rights = right_data_entry|right_view_charts|right_view_reports;
       } elseif ($this->role == ROLE_CLIENT) {
-      	$this->rights = right_view_reports|right_view_invoices; // TODO: how about right_view_charts, too?
+        $this->rights = right_view_reports|right_view_invoices; // TODO: how about right_view_charts, too?
       } elseif ($this->role == ROLE_COMANAGER) {
-      	$this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team;
+        $this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team;
       } elseif ($this->role == ROLE_MANAGER) {
-      	$this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team|right_assign_roles|right_export_team;
+        $this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team|right_assign_roles|right_export_team;
       } elseif ($this->role == ROLE_SITE_ADMIN) {
-      	$this->rights = right_administer_site;
+        $this->rights = right_administer_site;
       }
     }
   }
-  
+
   // The getActiveUser returns user id on behalf of whom current user is operating.
   function getActiveUser() {
     return ($this->behalf_id ? $this->behalf_id : $this->id);
   }
-  
+
   // isAdmin - determines whether current user is admin (has right_administer_site).
   function isAdmin() {
     return (right_administer_site & $this->role);
@@ -138,17 +137,17 @@ class ttUser {
   function isCoManager() {
     return (ROLE_COMANAGER == $this->role);
   }
-  
+
   // isClient - determines whether current user is a client.
   function isClient() {
     return (ROLE_CLIENT == $this->role);
   }
-  
+
   // canManageTeam - determines whether current user is manager or co-manager.
   function canManageTeam() {
     return (right_manage_team & $this->role);
   }
-  
+
   // isPluginEnabled checks whether a plugin is enabled for user.
   function isPluginEnabled($plugin)
   {
@@ -160,7 +159,7 @@ class ttUser {
   {
     $result = array();
     $mdb2 = getConnection();
-    
+
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name, p.description, p.tasks, upb.rate from tt_projects p
       inner join tt_user_project_binds upb on (upb.user_id = ".$this->getActiveUser()." and upb.project_id = p.id and upb.status = 1)
