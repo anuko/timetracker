@@ -129,7 +129,7 @@ class ttInvoiceHelper {
     }
 
     // If we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
-    if (in_array('ex', explode(',', $user->plugins))) { // if ex(penses) plugin is enabled
+    if (ttPluginEnabled('ex')) { // if ex(penses) plugin is enabled
       $sql_for_expense_items = "select ei.date as date, 2 as type, u.name as user_name, p.name as project_name,
         null as task_name, ei.name as note,
         null as duration, ei.cost as cost from tt_expense_items ei
@@ -336,7 +336,7 @@ class ttInvoiceHelper {
     foreach($invoice_items as $item)
       $subtotal += $item['cost'];
     if ($tax_percent) {
-      $tax_expenses = in_array('et', explode(',', $user->plugins));
+      $tax_expenses = ttPluginEnabled('et');
       foreach($invoice_items as $item) {
         if ($item['type'] == 2 && !$tax_expenses)
           continue;

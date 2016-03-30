@@ -114,12 +114,12 @@ class ttExpenseHelper {
     $mdb2 = getConnection();
     
     $client_field = null;
-    if (in_array('cl', explode(',', $user->plugins)))
+    if (ttPluginEnabled('cl'))
       $client_field = ", c.name as client_name";
       
     $left_joins = "";
     $left_joins = " left join tt_projects p on (ei.project_id = p.id)";
-    if (in_array('cl', explode(',', $user->plugins)))
+    if (ttPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (ei.client_id = c.id)";
       
     $sql = "select ei.id, ei.date, ei.client_id, ei.project_id, ei.name, ei.cost, ei.invoice_id $client_field, p.name as project_name
@@ -165,12 +165,12 @@ class ttExpenseHelper {
     $mdb2 = getConnection();
 
     $client_field = null;
-    if (in_array('cl', explode(',', $user->plugins)))
+    if (ttPluginEnabled('cl'))
       $client_field = ", c.name as client";
     
     $left_joins = "";
     $left_joins = " left join tt_projects p on (ei.project_id = p.id)";
-    if (in_array('cl', explode(',', $user->plugins)))
+    if (ttPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (ei.client_id = c.id)";
 
     $sql = "select ei.id as id $client_field, p.name as project, ei.name as item, ei.cost as cost,
