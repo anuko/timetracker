@@ -101,7 +101,7 @@ With 101% height we essentially force the scrollbar to always appear. -->
     {if !$user->isClient()}
            <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
     {/if}
-    {if in_array('ex', explode(',', $user->plugins)) && !$user->isClient()}
+    {if $user->isPluginEnabled('ex') && !$user->isClient()}
             &middot; <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
     {/if}
             {if !$user->isClient()}&middot; {/if}<a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a>

@@ -517,7 +517,7 @@ class ttReportHelper {
     // with an exception of sorting part, that is added in the end.
 
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
-    if ($report['show_cost'] && in_array('ex', explode(',', $user->plugins))) { // if ex(penses) plugin is enabled
+    if ($report['show_cost'] && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
 
       $fields = array(); // An array of fields for database query.
       array_push($fields, 'ei.id');
@@ -697,7 +697,7 @@ class ttReportHelper {
     // By now we have sql for time items.
 
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
-    if ($bean->getAttribute('chcost') && in_array('ex', explode(',', $user->plugins))) { // if ex(penses) plugin is enabled
+    if ($bean->getAttribute('chcost') && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
 
       // Determine group by field and a required join.
       $group_join = null;
@@ -825,7 +825,7 @@ class ttReportHelper {
     // By now we have sql for time items.
 
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
-    if ($report['show_cost'] && in_array('ex', explode(',', $user->plugins))) { // if ex(penses) plugin is enabled
+    if ($report['show_cost'] && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
 
       // Determine group by field and a required join.
       $group_join = null;
@@ -912,7 +912,7 @@ class ttReportHelper {
       $sql = "select sum(time_to_sec(l.duration)) as time, null as cost, null as expenses from tt_log l $where";
 
     // If we have expenses, query becomes a bit more complex.
-    if ($bean->getAttribute('chcost') && in_array('ex', explode(',', $user->plugins))) {
+    if ($bean->getAttribute('chcost') && $user->isPluginEnabled('ex')) {
       $where = ttReportHelper::getExpenseWhere($bean);
       $sql_for_expenses = "select null as time, sum(cost) as cost, sum(cost) as expenses from tt_expense_items ei $where";
       // Create a combined query.
@@ -982,7 +982,7 @@ class ttReportHelper {
       $sql = "select sum(time_to_sec(l.duration)) as time, null as cost, null as expenses from tt_log l $where";
 
     // If we have expenses, query becomes a bit more complex.
-    if ($report['show_cost'] && in_array('ex', explode(',', $user->plugins))) {
+    if ($report['show_cost'] && $user->isPluginEnabled('ex')) {
       $where = ttReportHelper::getFavExpenseWhere($report);
       $sql_for_expenses = "select null as time, sum(cost) as cost, sum(cost) as expenses from tt_expense_items ei $where";
       // Create a combined query.
