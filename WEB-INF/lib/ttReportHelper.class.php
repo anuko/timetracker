@@ -1055,7 +1055,7 @@ class ttReportHelper {
     $totals = ttReportHelper::getTotals($bean);
 
     // Use custom fields plugin if it is enabled.
-    if (in_array('cf', explode(',', $user->plugins)))
+    if ($user->isPluginEnabled('cf'))
       $custom_fields = new CustomFields($user->team_id);
 
     // Define some styles to use in email.
@@ -1313,7 +1313,7 @@ class ttReportHelper {
     $totals = ttReportHelper::getFavTotals($report);
 
     // Use custom fields plugin if it is enabled.
-    if (in_array('cf', explode(',', $user->plugins)))
+    if ($user->isPluginEnabled('cf'))
       $custom_fields = new CustomFields($user->team_id);
 
     // Define some styles to use in email.

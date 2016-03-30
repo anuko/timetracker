@@ -54,7 +54,7 @@ $prev_date = date('Y-m-d', strtotime('-1 day', strtotime($cl_date)));
 $next_date = date('Y-m-d', strtotime('+1 day', strtotime($cl_date)));
 
 // Use custom fields plugin if it is enabled.
-if (in_array('cf', explode(',', $user->plugins))) {
+if ($user->isPluginEnabled('cf')) {
   require_once('../plugins/CustomFields.class.php');
   $custom_fields = new CustomFields($user->team_id);
   $smarty->assign('custom_fields', $custom_fields);

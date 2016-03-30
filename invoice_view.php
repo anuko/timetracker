@@ -52,7 +52,7 @@ $tax = 0;
 foreach($invoice_items as $item)
   $subtotal += $item['cost'];
 if ($tax_percent) {
-  $tax_expenses = in_array('et', explode(',', $user->plugins));
+  $tax_expenses = $user->isPluginEnabled('et');
   foreach($invoice_items as $item) {
     if ($item['type'] == 2 && !$tax_expenses)
       continue;

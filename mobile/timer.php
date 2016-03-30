@@ -51,7 +51,7 @@ $_SESSION['date'] = $cl_date;
 // TODO: for time page we may limit the day to today only.
 
 // Use custom fields plugin if it is enabled.
-if (in_array('cf', explode(',', $user->plugins))) {
+if ($user->isPluginEnabled('cf')) {
   require_once('../plugins/CustomFields.class.php');
   $custom_fields = new CustomFields($user->team_id);
   $smarty->assign('custom_fields', $custom_fields);
