@@ -340,3 +340,10 @@ function ttAccessCheck($required_rights)
     
   return true;
 }
+
+// ttPluginEnabled is used to check whether a plugin is enabled for user.
+function ttPluginEnabled($plugin)
+{
+  global $user;
+  return in_array($plugin, explode(',', $user->plugins));
+}
