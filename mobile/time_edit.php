@@ -70,7 +70,7 @@ if ($request->isPost()) {
   $cl_project = $request->getParameter('project');
   $cl_task = $request->getParameter('task');
   $cl_billable = 1;
-  if (in_array('iv', explode(',', $user->plugins)))
+  if ($user->isPluginEnabled('iv'))
     $cl_billable = $request->getParameter('billable');
 } else {
   $cl_client = $time_rec['client_id'];
@@ -106,7 +106,7 @@ if ($request->isPost()) {
 $form = new Form('timeRecordForm');
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
-if (MODE_TIME == $user->tracking_mode && in_array('cl', explode(',', $user->plugins))) {
+if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
     $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
@@ -132,7 +132,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
   // Dropdown for clients if the clients plugin is enabled.
-  if (in_array('cl', explode(',', $user->plugins))) {
+  if ($user->isPluginEnabled('cl')) {
     $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
     // We need an array of assigned project ids to do some trimming.
     foreach($project_list as $project)
@@ -201,7 +201,7 @@ if ($custom_fields && $custom_fields->fields[0]) {
 }
 // Hidden control for record id.
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
-if (in_array('iv', explode(',', $user->plugins)))
+if ($user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','data'=>1,'value'=>$cl_billable));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_save click.
 $form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.save')));
@@ -210,7 +210,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getK
 if ($request->isPost()) {
 
   // Validate user input.
-  if (in_array('cl', explode(',', $user->plugins)) && in_array('cm', explode(',', $user->plugins)) && !$cl_client)
+  if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
     $err->add($i18n->getKey('error.client'));
   if ($custom_fields) {
     if (!ttValidString($cl_cf_1, !$custom_fields->fields[0]['required'])) $err->add($i18n->getKey('error.field'), $custom_fields->fields[0]['label']);

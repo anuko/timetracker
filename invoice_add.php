@@ -50,7 +50,7 @@ $form = new Form('invoiceForm');
 $form->addInput(array('type'=>'datefield','name'=>'date','size'=>'20','value'=>$cl_date));
 
 // Dropdown for clients if the clients plugin is enabled.
-if (in_array('cl', explode(',', $user->plugins))) {
+if ($user->isPluginEnabled('cl')) {
   $clients = ttTeamHelper::getActiveClients($user->team_id);
   $form->addInput(array('type'=>'combobox','name'=>'client','style'=>'width: 250px;','data'=>$clients,'datakeys'=>array('id','name'),'value'=>$cl_client,'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 }

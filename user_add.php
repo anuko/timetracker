@@ -43,7 +43,7 @@ if (!ttAccessCheck(right_manage_team)) {
 // The "limit" plugin is not required for normal operation of the Time Tracker.
 @include('plugins/limit/user_add.php');
 
-if (in_array('cl', explode(',', $user->plugins)))
+if ($user->isPluginEnabled('cl'))
   $clients = ttTeamHelper::getActiveClients($user->team_id);
 
 $assigned_projects = array();
@@ -84,10 +84,10 @@ $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=
 
 $roles[ROLE_USER] = $i18n->getKey('label.user');
 $roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');
-if (in_array('cl', explode(',', $user->plugins)))
+if ($user->isPluginEnabled('cl'))
   $roles[ROLE_CLIENT] = $i18n->getKey('label.client');
 $form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role,'data'=>$roles));
-if (in_array('cl', explode(',', $user->plugins)))
+if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','format'=>'.2','value'=>$cl_rate));

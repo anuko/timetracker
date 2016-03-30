@@ -197,7 +197,7 @@ function handleCheckboxes() {
   {/if}
         </tr>
 {/if}
-{if in_array('iv', explode(',', $user->plugins))}
+{if $user->isPluginEnabled('iv')}
         <tr>
           <td><b>{$i18n.form.time.billable}</b></td>
           <td>&nbsp;</td>
@@ -236,12 +236,12 @@ function handleCheckboxes() {
         <tr>
           <td colspan="3">
             <table border="0" width="100%">
-{if $user->isPluginEnabled('cl') || in_array('iv', explode(',', $user->plugins))}
+{if $user->isPluginEnabled('cl') || $user->isPluginEnabled('iv')}
               <tr>
   {if $user->isPluginEnabled('cl')}
                 <td width="25%"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td>
   {/if}
-  {if ($user->canManageTeam() || $user->isClient()) && in_array('iv', explode(',', $user->plugins))}
+  {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
                 <td width="25%"><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></td>
   {/if}
               </tr>

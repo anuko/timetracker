@@ -68,7 +68,7 @@ if ($request->isPost()) {
 $form = new Form('expenseItemForm');
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
-if (MODE_TIME == $user->tracking_mode && in_array('cl', explode(',', $user->plugins))) {
+if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
   $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
@@ -93,7 +93,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
   // Dropdown for clients if the clients plugin is enabled.
-  if (in_array('cl', explode(',', $user->plugins))) {
+  if ($user->isPluginEnabled('cl')) {
     $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
     // We need an array of assigned project ids to do some trimming. 
     foreach($project_list as $project)
@@ -131,7 +131,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getK
 
 if ($request->isPost()) {
   // Validate user input.
-  if (in_array('cl', explode(',', $user->plugins)) && in_array('cm', explode(',', $user->plugins)) && !$cl_client)
+  if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
     $err->add($i18n->getKey('error.client'));
   if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
     if (!$cl_project) $err->add($i18n->getKey('error.project'));

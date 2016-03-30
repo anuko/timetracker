@@ -66,7 +66,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_generate','value'=>$i18n->ge
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete'),'onclick'=>"return confirm('".$i18n->getKey('form.reports.confirm_delete')."')"));
 
 // Dropdown for clients if the clients plugin is enabled.
-if (in_array('cl', explode(',', $user->plugins)) && !($user->isClient() && $user->client_id)) {
+if ($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) {
   if ($user->canManageTeam() || ($user->isClient() && !$user->client_id))
     $client_list = ttClientHelper::getClients($user->team_id);
   else
@@ -171,9 +171,9 @@ $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start_date'
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'end_date'));
 
 // Add checkboxes for fields.
-if (in_array('cl', explode(',', $user->plugins)))
+if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'checkbox','name'=>'chclient','data'=>1));
-if (($user->canManageTeam() || $user->isClient()) && in_array('iv', explode(',', $user->plugins)))
+if (($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'chinvoice','data'=>1));
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkbox','name'=>'chproject','data'=>1));
@@ -196,7 +196,7 @@ $group_by_options['no_grouping'] = $i18n->getKey('form.reports.group_by_no');
 $group_by_options['date'] = $i18n->getKey('form.reports.group_by_date');
 if ($user->canManageTeam() || $user->isClient())
   $group_by_options['user'] = $i18n->getKey('form.reports.group_by_user');
-if (in_array('cl', explode(',', $user->plugins)) && !($user->isClient() && $user->client_id))
+if ($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id))
   $group_by_options['client'] = $i18n->getKey('form.reports.group_by_client');
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $group_by_options['project'] = $i18n->getKey('form.reports.group_by_project');

@@ -67,11 +67,11 @@ if (!$cl_type) {
   $cl_type = $sc->getValue(SYSC_CHART_TYPE);
 }
 if (MODE_TIME == $user->tracking_mode) {
-  if (in_array('cl', explode(',', $user->plugins)))
+  if ($user->isPluginEnabled('cl'))
     $cl_type = CHART_CLIENTS;
 } else {
   if ($cl_type == CHART_CLIENTS) {
-    if (!in_array('cl', explode(',', $user->plugins)))
+    if (!$user->isPluginEnabled('cl'))
       $cl_type = CHART_PROJECTS;	
   } elseif ($cl_type == CHART_TASKS) {
     if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode)
@@ -154,15 +154,14 @@ $chart_form->addInput(array('type' => 'combobox',
 ));
 
 // Chart type options.
-$chart_selector = (MODE_PROJECTS_AND_TASKS == $user->tracking_mode
-  || in_array('cl', explode(',', $user->plugins)));
+$chart_selector = (MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isPluginEnabled('cl'));
 if ($chart_selector) {
   $types = array();
   if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
     $types[CHART_PROJECTS] = $i18n->getKey('dropdown.projects');
   if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
     $types[CHART_TASKS] = $i18n->getKey('dropdown.tasks');
-  if (in_array('cl', explode(',', $user->plugins)))
+  if ($user->isPluginEnabled('cl'))
     $types[CHART_CLIENTS] = $i18n->getKey('dropdown.clients');
 
   // Add chart type dropdown.

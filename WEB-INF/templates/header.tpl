@@ -105,12 +105,11 @@ With 101% height we essentially force the scrollbar to always appear. -->
             &middot; <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
     {/if}
             {if !$user->isClient()}&middot; {/if}<a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a>
-    {if ($user->canManageTeam() || $user->isClient()) && in_array('iv', explode(',', $user->plugins))}
+    {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
             &middot; <a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a>
     {/if}
-    {if (in_array('ch', explode(',', $user->plugins)) && !$user->isClient()) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode
-      || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode
-      || in_array('cl', explode(',', $user->plugins)))}
+    {if ($user->isPluginEnabled('ch') && !$user->isClient()) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode
+      || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isPluginEnabled('cl'))}
             &middot; <a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a>
     {/if}
     {if !$user->isClient() && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
@@ -122,7 +121,7 @@ With 101% height we essentially force the scrollbar to always appear. -->
     {if !$user->isClient()}
             &middot; <a class="mainMenu" href="users.php">{$i18n.menu.users}</a>
     {/if}
-    {if $user->canManageTeam() && in_array('cl', explode(',', $user->plugins))}
+    {if $user->canManageTeam() && $user->isPluginEnabled('cl')}
             &middot; <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
     {/if}
     {if $user->isManager()}

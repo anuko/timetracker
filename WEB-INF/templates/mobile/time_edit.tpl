@@ -214,7 +214,7 @@ function get_date() {
     <tr><td>{$i18n.label.client}:</td></tr>
     <tr><td>{$forms.timeRecordForm.client.control}</td></tr>
 {/if}
-{if in_array('iv', explode(',', $user->plugins))}
+{if $user->isPluginEnabled('iv')}
     <tr><td><label>{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td></tr>
 {/if}
 {if ($custom_fields && $custom_fields->fields[0])} 

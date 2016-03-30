@@ -205,13 +205,13 @@ function setNow(formField) {
   <tr>
     <td valign="top">
     <table border="0">
-{if in_array('cl', explode(',', $user->plugins))}
+{if $user->isPluginEnabled('cl')}
     <tr>
-      <td align="right">{$i18n.label.client}{if in_array('cm', explode(',', $user->plugins))} (*){/if}:</td>
+      <td align="right">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}:</td>
       <td>{$forms.timeRecordForm.client.control}</td>
     </tr>
 {/if}
-{if in_array('iv', explode(',', $user->plugins))}
+{if $user->isPluginEnabled('iv')}
     <tr>
       <td align="right">&nbsp;</td>
       <td><label>{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td>

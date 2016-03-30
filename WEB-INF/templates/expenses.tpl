@@ -81,7 +81,7 @@ function get_date() {
 {/if}
 {if $user->isPluginEnabled('cl')}
         <tr>
-          <td align="right">{$i18n.label.client}{if in_array('cm', explode(',', $user->plugins))} (*){/if}:</td>
+          <td align="right">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}:</td>
           <td>{$forms.expensesForm.client.control}</td>
         </tr>
 {/if}

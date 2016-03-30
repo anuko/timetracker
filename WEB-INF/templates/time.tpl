@@ -223,13 +223,13 @@ function get_time() {
           <td>{$forms.timeRecordForm.onBehalfUser.control}</td>
         </tr>
 {/if}
-{if in_array('cl', explode(',', $user->plugins))}
+{if $user->isPluginEnabled('cl')}
         <tr>
-          <td align="right">{$i18n.label.client}{if in_array('cm', explode(',', $user->plugins))} (*){/if}:</td>
+          <td align="right">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}:</td>
           <td>{$forms.timeRecordForm.client.control}</td>
         </tr>
 {/if}
-{if in_array('iv', explode(',', $user->plugins))}
+{if $user->isPluginEnabled('iv')}
         <tr>
           <td align="right">&nbsp;</td>
           <td><label>{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td>
@@ -294,7 +294,7 @@ function get_time() {
 {if $time_records}
       <table border='0' cellpadding='3' cellspacing='1' width="100%">
       <tr>
-  {if in_array('cl', explode(',', $user->plugins))}
+  {if $user->isPluginEnabled('cl')}
         <td width="20%" class="tableHeader">{$i18n.label.client}</td>
   {/if}
   {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
@@ -313,7 +313,7 @@ function get_time() {
       </tr>
   {foreach $time_records as $record}
       <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}" {if !$record.billable} class="not_billable" {/if}>
-    {if in_array('cl', explode(',', $user->plugins))}
+    {if $user->isPluginEnabled('cl')}
         <td valign='top'>{$record.client|escape:'html'}</td>
     {/if}
     {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}

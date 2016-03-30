@@ -64,7 +64,7 @@ $cl_finish = trim($request->getParameter('browser_time'));
 $cl_cf_1 = trim($request->getParameter('cf_1', ($request->getMethod()=='POST'? null : @$_SESSION['cf_1'])));
 $_SESSION['cf_1'] = $cl_cf_1;
 $cl_billable = 1;
-if (in_array('iv', explode(',', $user->plugins))) {
+if ($user->isPluginEnabled('iv')) {
   if ($request->isPost()) {
     $cl_billable = $request->getParameter('billable');
     $_SESSION['billable'] = (int) $cl_billable;
@@ -87,7 +87,7 @@ $enable_controls = ($uncompleted == null);
 $form = new Form('timerRecordForm');
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
-if (MODE_TIME == $user->tracking_mode && in_array('cl', explode(',', $user->plugins))) {
+if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
     $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
@@ -115,7 +115,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
   // Dropdown for clients if the clients plugin is enabled.
-  if (in_array('cl', explode(',', $user->plugins))) {
+  if ($user->isPluginEnabled('cl')) {
     $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
     // We need an array of assigned project ids to do some trimming. 
     foreach($project_list as $project)
@@ -154,7 +154,7 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 }
-if (in_array('iv', explode(',', $user->plugins)))
+if ($user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','data'=>1,'value'=>$cl_billable,'enable'=>$enable_controls));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on button click.
 $form->addInput(array('type'=>'hidden','name'=>'browser_time','value'=>''));  // User current time, which gets filled in on button click.
@@ -194,7 +194,7 @@ if ($request->isPost()) {
     $cl_finish = null;
 
     // Validate user input.
-    if (in_array('cl', explode(',', $user->plugins)) && in_array('cm', explode(',', $user->plugins)) && !$cl_client)
+    if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
       $err->add($i18n->getKey('error.client'));
     if ($custom_fields) {
       if (!ttValidString($cl_cf_1, !$custom_fields->fields[0]['required'])) $err->add($i18n->getKey('error.field'), $custom_fields->fields[0]['label']);
