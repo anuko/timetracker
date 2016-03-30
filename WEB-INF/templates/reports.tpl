@@ -167,9 +167,9 @@ function handleCheckboxes() {
   <tr>
     <td valign="top" colspan="2" align="center">
       <table border="0" cellpadding="3">
-{if ((in_array('cl', explode(',', $user->plugins)) && !($user->isClient() && $user->client_id)) || ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN))}
+{if (($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) || ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN))}
         <tr>
-  {if in_array('cl', explode(',', $user->plugins)) && !($user->isClient() && $user->client_id)}<td><b>{$i18n.label.client}</b></td>{else}<td>&nbsp;</td>{/if}
+  {if $user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)}<td><b>{$i18n.label.client}</b></td>{else}<td>&nbsp;</td>{/if}
           <td>&nbsp;</td>
   {if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)}<td><b>{$i18n.label.option}</b></td>{else}<td>&nbsp;</td>{/if}
         </tr>
@@ -236,9 +236,9 @@ function handleCheckboxes() {
         <tr>
           <td colspan="3">
             <table border="0" width="100%">
-{if in_array('cl', explode(',', $user->plugins)) || in_array('iv', explode(',', $user->plugins))}
+{if $user->isPluginEnabled('cl') || in_array('iv', explode(',', $user->plugins))}
               <tr>
-  {if in_array('cl', explode(',', $user->plugins))}
+  {if $user->isPluginEnabled('cl')}
                 <td width="25%"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td>
   {/if}
   {if ($user->canManageTeam() || $user->isClient()) && in_array('iv', explode(',', $user->plugins))}

@@ -615,12 +615,12 @@ class ttTimeHelper {
     $mdb2 = getConnection();
 
     $client_field = null;
-    if (in_array('cl', explode(',', $user->plugins)))
+    if ($user->isPluginEnabled('cl'))
       $client_field = ", c.name as client";
     
     $left_joins = " left join tt_projects p on (l.project_id = p.id)".
       " left join tt_tasks t on (l.task_id = t.id)";
-    if (in_array('cl', explode(',', $user->plugins)))
+    if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
 
     $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,

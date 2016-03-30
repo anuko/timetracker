@@ -76,7 +76,7 @@ function get_date() {
   <tr>
     <td valign="top">
     <table border="0">
-{if in_array('cl', explode(',', $user->plugins))}
+{if $user->isPluginEnabled('cl')}
     <tr>
       <td align="right">{$i18n.label.client} {if in_array('cm', explode(',', $user->plugins))}(*){/if}:</td>
       <td>{$forms.expenseItemForm.client.control}</td>

@@ -4,7 +4,7 @@
   <td>
   <table border='0' cellpadding='3' cellspacing='1' width="100%">
   <tr>
-{if in_array('cl', explode(',', $user->plugins))}
+{if $user->isPluginEnabled('cl')}
     <td class="tableHeader" align="center">{$i18n.label.client}</td>
 {/if}
 
@@ -15,7 +15,7 @@
     <td class="tableHeader" align="center">{$i18n.label.cost}</td>
   </tr>
   <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
-{if in_array('cl', explode(',', $user->plugins))}
+{if $user->isPluginEnabled('cl')}
   <td>{$expense_item.client_name|escape:'html'}</td>
 {/if}
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}

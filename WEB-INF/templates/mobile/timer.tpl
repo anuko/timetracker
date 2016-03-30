@@ -217,7 +217,7 @@ startTimer();
   <tr>
     <td valign="top">
     <table border="0">
-{if in_array('cl', explode(',', $user->plugins))}
+{if $user->isPluginEnabled('cl')}
     <tr><td>{$i18n.label.client}:</td></tr>
     <tr><td>{$forms.timerRecordForm.client.control}</td></tr>
 {/if}

@@ -79,7 +79,7 @@ function get_date() {
           <td>{$forms.expensesForm.onBehalfUser.control}</td>
         </tr>
 {/if}
-{if in_array('cl', explode(',', $user->plugins))}
+{if $user->isPluginEnabled('cl')}
         <tr>
           <td align="right">{$i18n.label.client}{if in_array('cm', explode(',', $user->plugins))} (*){/if}:</td>
           <td>{$forms.expensesForm.client.control}</td>
@@ -121,7 +121,7 @@ function get_date() {
 {if $expense_items}
       <table border="0" cellpadding="3" cellspacing="1" width="100%">
       <tr>
-  {if in_array('cl', explode(',', $user->plugins))}
+  {if $user->isPluginEnabled('cl')}
         <td width="20%" class="tableHeader">{$i18n.label.client}</td>
   {/if}
   {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
@@ -133,7 +133,7 @@ function get_date() {
       </tr>
   {foreach $expense_items as $item}
       <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
-    {if in_array('cl', explode(',', $user->plugins))}
+    {if $user->isPluginEnabled('cl')}
         <td valign='top'>{$item.client|escape:'html'}</td>
     {/if}
     {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
