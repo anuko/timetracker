@@ -109,17 +109,17 @@ class ttExpenseHelper {
   
   // getItem - retrieves an entry from tt_expense_items table.
   static function getItem($id, $user_id) {
-  	global $user;
+    global $user;
   	
     $mdb2 = getConnection();
     
     $client_field = null;
-    if (ttPluginEnabled('cl'))
+    if ($user->isPluginEnabled('cl'))
       $client_field = ", c.name as client_name";
       
     $left_joins = "";
     $left_joins = " left join tt_projects p on (ei.project_id = p.id)";
-    if (ttPluginEnabled('cl'))
+    if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (ei.client_id = c.id)";
       
     $sql = "select ei.id, ei.date, ei.client_id, ei.project_id, ei.name, ei.cost, ei.invoice_id $client_field, p.name as project_name
@@ -159,18 +159,18 @@ class ttExpenseHelper {
 
   // getItems - returns expense items for a user for a given date.
   static function getItems($user_id, $date) {
-  	global $user;
+    global $user;
   	  	
     $result = array();
     $mdb2 = getConnection();
 
     $client_field = null;
-    if (ttPluginEnabled('cl'))
+    if ($user->isPluginEnabled('cl'))
       $client_field = ", c.name as client";
     
     $left_joins = "";
     $left_joins = " left join tt_projects p on (ei.project_id = p.id)";
-    if (ttPluginEnabled('cl'))
+    if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (ei.client_id = c.id)";
 
     $sql = "select ei.id as id $client_field, p.name as project, ei.name as item, ei.cost as cost,

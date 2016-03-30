@@ -31,8 +31,8 @@ class ttUser {
   var $name = null;         // User name.
   var $id = null;           // User id.
   var $team_id = null;      // Team id.
-  var $role = null;			// User role (user, client, comanager, manager, admin).
-  var $client_id = null;	// Client id for client user role.
+  var $role = null;         // User role (user, client, comanager, manager, admin).
+  var $client_id = null;    // Client id for client user role.
   var $behalf_id = null;    // User id, on behalf of whom we are working.
   var $behalf_name = null;  // User name, on behalf of whom we are working.
   var $email = null;        // User email.
@@ -45,10 +45,10 @@ class ttUser {
   var $record_type = 0;     // Record type (duration vs start and finish, or both).
   var $currency = null;     // Currency.
   var $plugins = null;      // Comma-separated list of enabled plugins.
-  var $team = null;	        // Team name.
+  var $team = null;         // Team name.
   var $custom_logo = 0;     // Whether to use a custom logo for team.
-  var $address = null;		// Address for invoices.
-  var $lock_interval = 0;	// Lock interval in days for time records.
+  var $address = null;      // Address for invoices.
+  var $lock_interval = 0;   // Lock interval in days for time records.
   var $rights = 0;          // A mask of user rights.
   
   // Constructor.
@@ -149,6 +149,12 @@ class ttUser {
     return (right_manage_team & $this->role);
   }
   
+  // isPluginEnabled checks whether a plugin is enabled for user.
+  function isPluginEnabled($plugin)
+  {
+    return in_array($plugin, explode(',', $this->plugins));
+  }
+
   // getAssignedProjects - returns an array of assigned projects.
   function getAssignedProjects()
   {

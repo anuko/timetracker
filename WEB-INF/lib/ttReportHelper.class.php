@@ -286,7 +286,7 @@ class ttReportHelper {
       $left_joins .= " left join tt_clients c on (c.id = l.client_id)";
     if (($user->canManageTeam() || $user->isClient()) && $bean->getAttribute('chinvoice'))
       $left_joins .= " left join tt_invoices i on (i.id = l.invoice_id and i.status = 1)";
-    if ($user->canManageTeam() || $user->isClient() || ttPluginEnabled('ex'))
+    if ($user->canManageTeam() || $user->isClient() || $user->isPluginEnabled('ex'))
        $left_joins .= " left join tt_users u on (u.id = l.user_id)";
     if ($bean->getAttribute('chproject') || 'project' == $group_by_option)
       $left_joins .= " left join tt_projects p on (p.id = l.project_id)";
@@ -311,7 +311,7 @@ class ttReportHelper {
     // with an exception of sorting part, that is added in the end.
 
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
-    if ($bean->getAttribute('chcost') && ttPluginEnabled('ex')) { // if ex(penses) plugin is enabled
+    if ($bean->getAttribute('chcost') && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
 
       $fields = array(); // An array of fields for database query.
       array_push($fields, 'ei.id');
@@ -492,7 +492,7 @@ class ttReportHelper {
       $left_joins .= " left join tt_clients c on (c.id = l.client_id)";
     if (($user->canManageTeam() || $user->isClient()) && $report['show_invoice'])
       $left_joins .= " left join tt_invoices i on (i.id = l.invoice_id and i.status = 1)";
-    if ($user->canManageTeam() || $user->isClient() || ttPluginEnabled('ex'))
+    if ($user->canManageTeam() || $user->isClient() || $user->isPluginEnabled('ex'))
        $left_joins .= " left join tt_users u on (u.id = l.user_id)";
     if ($report['show_project'] || 'project' == $group_by_option)
       $left_joins .= " left join tt_projects p on (p.id = l.project_id)";
