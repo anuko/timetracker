@@ -253,8 +253,8 @@ $i18n_key_words = array(
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
-'dropdown.all' => '--- odaberi sve ---',
-'dropdown.no' => '--- poništi sve ---', // TODO: Check fav report selection dropdown at https://timetracker.anuko.com/reports.php page. The meaning is "do not select any saved favorite report".
+'dropdown.all' => '--- svi ---',
+'dropdown.no' => '--- ništa ---',
 'dropdown.this_day' => 'ovaj dan',
 'dropdown.this_week' => 'ova nedelja',
 'dropdown.last_week' => 'prošla nedelja',
