@@ -172,4 +172,20 @@ class ttUser {
     }
     return $result;
   }
+
+  // isDateLocked checks whether a specifc date is locked for modifications.
+  function isDateLocked($date)
+  {
+    if ($this->isPluginEnabled('lk')) {
+      // Determine lock date. Entries earlier than lock date cannot be created or modified.
+      $lockdate = 0;
+      if ($this->lock_interval > 0) {
+        $lockdate = new DateAndTime();
+        $lockdate->decDay($this->lock_interval);
+      }
+      if($lockdate && $date->before($lockdate))
+        return true;
+    }
+    return false;
+  }
 }

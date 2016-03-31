@@ -251,6 +251,7 @@ $i18n_key_words = array(
 'title.cf_add_dropdown_option' => 'Добавление опции',
 'title.cf_edit_dropdown_option' => 'Редактирование опции',
 'title.cf_delete_dropdown_option' => 'Удаление опции',
+'title.locking' => 'Блокировка',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.

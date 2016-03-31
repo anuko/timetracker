@@ -52,19 +52,12 @@ if ($request->isPost()) {
 
     // Determine if it's okay to delete the record.
     $item_date = new DateAndTime(DB_DATEFORMAT, $time_rec['date']);
-    // Determine lock date.
-    $lock_interval = $user->lock_interval;
-    $lockdate = 0;
-    if ($lock_interval > 0) {
-      $lockdate = new DateAndTime();
-      $lockdate->decDay($lock_interval);
-    }
+
     // Determine if the record is uncompleted.
     $uncompleted = ($time_rec['duration'] == '0:00');
 
-    if($lockdate && $item_date->before($lockdate) && !$uncompleted) {
+    if ($user->isDateLocked($item_date) && !$uncompleted)
       $err->add($i18n->getKey('error.period_locked'));
-    }
 
     if ($err->no()) {
 

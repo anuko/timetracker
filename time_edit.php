@@ -250,14 +250,6 @@ if ($request->isPost()) {
   if (!ttValidString($cl_note, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.note'));
   // Finished validating user input.
 
-  // Determine lock date.
-  $lock_interval = $user->lock_interval;
-  $lockdate = 0;
-  if ($lock_interval > 0) {
-    $lockdate = new DateAndTime();
-    $lockdate->decDay($lock_interval);
-  }
-
   // This is a new date for the time record.
   $new_date = new DateAndTime($user->date_format, $cl_date);
 
@@ -277,12 +269,14 @@ if ($request->isPost()) {
 
     // Now, step by step.
     if ($err->no()) {
-      // 1) Prohibit saving locked time entries in any form.
-      if($lockdate && $item_date->before($lockdate))
+      // 1) Prohibit saving locked entries in any form.
+      if ($user->isDateLocked($item_date))
         $err->add($i18n->getKey('error.period_locked'));
-      // 2) Prohibit saving completed unlocked entries into locked interval.
-      if($err->no() && $lockdate && $new_date->before($lockdate))
+
+      // 2) Prohibit saving completed unlocked entries into locked range.
+      if ($err->no() && $user->isDateLocked($new_date))
         $err->add($i18n->getKey('error.period_locked'));
+
       // 3) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
       $uncompleted = ($cl_finish == '' && $cl_duration == '');
       if ($uncompleted) {
@@ -333,14 +327,15 @@ if ($request->isPost()) {
   // Save as new record.
   if ($request->getParameter('btn_copy')) {
     // We need to:
-    // 1) Prohibit saving into locked interval.
+    // 1) Prohibit saving into locked range.
     // 2) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
 
     // Now, step by step.
     if ($err->no()) {
-      // 1) Prohibit saving into locked interval.
-      if($lockdate && $new_date->before($lockdate))
+      // 1) Prohibit saving into locked range.
+      if ($user->isDateLocked($new_date))
         $err->add($i18n->getKey('error.period_locked'));
+
       // 2) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
       $uncompleted = ($cl_finish == '' && $cl_duration == '');
       if ($uncompleted) {

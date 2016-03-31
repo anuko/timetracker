@@ -140,14 +140,6 @@ if ($request->isPost()) {
   if (!ttValidFloat($cl_cost)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cost'));
   if (!ttValidDate($cl_date)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.date'));
 
-  // Determine lock date.
-  $lock_interval = $user->lock_interval;
-  $lockdate = 0;
-  if ($lock_interval > 0) {
-    $lockdate = new DateAndTime();
-    $lockdate->decDay($lock_interval);
-  }
-
   // This is a new date for the expense item.
   $new_date = new DateAndTime($user->date_format, $cl_date);
 
@@ -161,15 +153,16 @@ if ($request->isPost()) {
   // Save record.
   if ($request->getParameter('btn_save')) {
     // We need to:
-    // 1) Prohibit updating locked entries (that are in locked interval).
-    // 2) Prohibit saving unlocked entries into locked interval.
+    // 1) Prohibit updating locked entries (that are in locked range).
+    // 2) Prohibit saving unlocked entries into locked range.
 
     // Now, step by step.
-    // 1) Prohibit updating locked entries.
-    if($lockdate && $item_date->before($lockdate))
+    // 1) Prohibit saving locked entries in any form.
+    if ($user->isDateLocked($item_date))
       $err->add($i18n->getKey('error.period_locked'));
-    // 2) Prohibit saving completed unlocked entries into locked interval.
-    if($err->no() && $lockdate && $new_date->before($lockdate))
+
+    // 2) Prohibit saving unlocked entries into locked range.
+    if ($err->no() && $user->isDateLocked($new_date))
       $err->add($i18n->getKey('error.period_locked'));
 
     // Now, an update.

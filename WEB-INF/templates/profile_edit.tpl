@@ -44,6 +44,14 @@ function handlePluginCheckboxes() {
   } else {
     configureLabel.style.visibility = "hidden";
   }
+
+  var lockingCheckbox = document.getElementById("locking");
+  configureLabel = document.getElementById("locking_config");
+  if (lockingCheckbox.checked) {
+    configureLabel.style.visibility = "visible";
+  } else {
+    configureLabel.style.visibility = "hidden";
+  }
 }
 </script>
 
@@ -95,10 +103,6 @@ function handlePluginCheckboxes() {
           <tr>
             <td align="right">{$i18n.label.currency}:</td>
             <td>{$forms.profileForm.currency.control}</td>
-          </tr>
-          <tr>
-            <td align="right" nowrap>{$i18n.label.lock_interval}:</td>
-            <td>{$forms.profileForm.lock_interval.control}</td>
           </tr>
           <tr>
            <td align="right" nowrap>{$i18n.label.language}:</td>
@@ -174,6 +178,10 @@ function handlePluginCheckboxes() {
           <tr>
             <td align="right" nowrap>{$forms.profileForm.notifications.control}</td>
             <td><label for="notifications">{$i18n.title.notifications}</label> <span id="notifications_config"><a href="notifications.php">{$i18n.label.configure}</a></span></td>
+          </tr>
+          <tr>
+            <td align="right" nowrap>{$forms.profileForm.locking.control}</td>
+            <td><label for="notifications">{$i18n.title.locking}</label> <span id="locking_config"><a href="locking.php">{$i18n.label.configure}</a></span></td>
           </tr>
 {/if}
 

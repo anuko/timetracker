@@ -133,14 +133,6 @@ $form->addInput(array('type'=>'calendar','name'=>'date','highlight'=>'expenses',
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.submit')));
 
-// Determine lock date. Time entries earlier than lock date cannot be created or modified.
-$lock_interval = $user->lock_interval;
-$lockdate = 0;
-if ($lock_interval > 0) {
-  $lockdate = new DateAndTime();
-  $lockdate->decDay($lock_interval);
-}
-
 // Submit.
 if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
@@ -161,8 +153,8 @@ if ($request->isPost()) {
     }
     // Finished validating input data.
 
-    // Prohibit creating time entries in locked interval.
-    if($lockdate && $selected_date->before($lockdate))
+    // Prohibit creating entries in locked range.
+    if ($user->isDateLocked($selected_date))
       $err->add($i18n->getKey('error.period_locked'));
 
     // Insert record.

@@ -204,14 +204,6 @@ if ($custom_fields && $custom_fields->fields[0]) {
   }
 }
 
-// Determine lock date. Time entries earlier than lock date cannot be created or modified.
-$lock_interval = $user->lock_interval;
-$lockdate = 0;
-if ($lock_interval > 0) {
-  $lockdate = new DateAndTime();
-  $lockdate->decDay($lock_interval);
-}
-
 // Submit.
 if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
@@ -262,8 +254,8 @@ if ($request->isPost()) {
         $err->add($i18n->getKey('error.future_date'));
     }
 
-    // Prohibit creating time entries in locked interval.
-    if($lockdate && $selected_date->before($lockdate))
+    // Prohibit creating entries in locked range.
+    if ($user->isDateLocked($selected_date))
       $err->add($i18n->getKey('error.period_locked'));
 
     // Prohibit creating another uncompleted record.

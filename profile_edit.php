@@ -53,7 +53,6 @@ if ($request->isPost()) {
     $cl_address = trim($request->getParameter('address'));
     $cl_currency = trim($request->getParameter('currency'));
     if (!$cl_currency) $cl_currency = CURRENCY_DEFAULT;
-    $cl_lock_interval = $request->getParameter('lock_interval');
     $cl_lang = $request->getParameter('lang');
     $cl_decimal_mark = $request->getParameter('decimal_mark');
     $cl_custom_format_date = $request->getParameter('format_date');
@@ -69,6 +68,7 @@ if ($request->isPost()) {
     $cl_expenses = $request->getParameter('expenses');
     $cl_tax_expenses = $request->getParameter('tax_expenses');
     $cl_notifications = $request->getParameter('notifications');
+    $cl_locking = $request->getParameter('locking');
   }
 } else {
   $cl_name = $user->name;
@@ -78,7 +78,6 @@ if ($request->isPost()) {
     $cl_team = $user->team;
     $cl_address = $user->address;
     $cl_currency = ($user->currency == ''? CURRENCY_DEFAULT : $user->currency);
-    $cl_lock_interval = $user->lock_interval;
     $cl_lang = $user->lang;
     $cl_decimal_mark = $user->decimal_mark;
     $cl_custom_format_date = $user->date_format;
@@ -97,6 +96,7 @@ if ($request->isPost()) {
     $cl_expenses = in_array('ex', $plugins);
     $cl_tax_expenses = in_array('et', $plugins);
     $cl_notifications = in_array('no', $plugins);
+    $cl_locking = in_array('lk', $plugins);
   }
 }
 
@@ -115,7 +115,6 @@ if ($user->canManageTeam()) {
   $DECIMAL_MARK_OPTIONS = array(array('id'=>'.','name'=>'.'),array('id'=>',','name'=>','));
   $form->addInput(array('type'=>'combobox','name'=>'decimal_mark','style'=>'width: 150px','data'=>$DECIMAL_MARK_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_decimal_mark,
     'onchange'=>'adjustDecimalPreview()'));
-  $form->addInput(array('type'=>'text','maxlength'=>'10','name'=>'lock_interval','value'=>$cl_lock_interval));
   // Prepare an array of available languages.
   $lang_files = I18n::getLangFileList();
   foreach ($lang_files as $lfile) {
@@ -176,6 +175,7 @@ if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'checkbox','name'=>'expenses','data'=>1,'value'=>$cl_expenses,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'tax_expenses','data'=>1,'value'=>$cl_tax_expenses));
   $form->addInput(array('type'=>'checkbox','name'=>'notifications','data'=>1,'value'=>$cl_notifications,'onchange'=>'handlePluginCheckboxes()'));
+  $form->addInput(array('type'=>'checkbox','name'=>'locking','data'=>1,'value'=>$cl_locking,'onchange'=>'handlePluginCheckboxes()'));
 }
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
@@ -228,13 +228,14 @@ if ($request->isPost()) {
         $plugins .= ',et';
       if ($cl_notifications)
         $plugins .= ',no';
+      if ($cl_locking)
+        $plugins .= ',lk';
       $plugins = trim($plugins, ',');
 
       $update_result = ttTeamHelper::update($user->team_id, array(
         'name' => $cl_team,
         'address' => $cl_address,
         'currency' => $cl_currency,
-        'locktime' => $cl_lock_interval,
         'lang' => $cl_lang,
         'decimal_mark' => $cl_decimal_mark,
         'date_format' => $cl_custom_format_date,
