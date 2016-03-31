@@ -178,7 +178,7 @@ if ($request->isPost()) {
   // Save as new record.
   if ($request->getParameter('btn_copy')) {
     // We need to prohibit saving into locked interval.
-    if($lockdate && $new_date->before($lockdate))
+    if ($user->isDateLocked($new_date))
       $err->add($i18n->getKey('error.period_locked'));
 
     // Now, a new insert.
