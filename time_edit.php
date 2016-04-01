@@ -271,11 +271,11 @@ if ($request->isPost()) {
     if ($err->no()) {
       // 1) Prohibit saving locked entries in any form.
       if ($user->isDateLocked($item_date))
-        $err->add($i18n->getKey('error.period_locked'));
+        $err->add($i18n->getKey('error.range_locked'));
 
       // 2) Prohibit saving completed unlocked entries into locked range.
       if ($err->no() && $user->isDateLocked($new_date))
-        $err->add($i18n->getKey('error.period_locked'));
+        $err->add($i18n->getKey('error.range_locked'));
 
       // 3) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
       $uncompleted = ($cl_finish == '' && $cl_duration == '');
@@ -334,7 +334,7 @@ if ($request->isPost()) {
     if ($err->no()) {
       // 1) Prohibit saving into locked range.
       if ($user->isDateLocked($new_date))
-        $err->add($i18n->getKey('error.period_locked'));
+        $err->add($i18n->getKey('error.range_locked'));
 
       // 2) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
       $uncompleted = ($cl_finish == '' && $cl_duration == '');

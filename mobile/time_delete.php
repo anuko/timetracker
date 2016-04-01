@@ -57,7 +57,7 @@ if ($request->isPost()) {
     $uncompleted = ($time_rec['duration'] == '0:00');
 
     if ($user->isDateLocked($item_date) && !$uncompleted)
-      $err->add($i18n->getKey('error.period_locked'));
+      $err->add($i18n->getKey('error.range_locked'));
 
     if ($err->no()) {
 

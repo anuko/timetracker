@@ -155,7 +155,7 @@ if ($request->isPost()) {
 
     // Prohibit creating entries in locked range.
     if ($user->isDateLocked($selected_date))
-      $err->add($i18n->getKey('error.period_locked'));
+      $err->add($i18n->getKey('error.range_locked'));
 
     // Insert record.
     if ($err->no()) {

@@ -49,7 +49,7 @@ if ($request->isPost()) {
     // Determine if it is okay to delete the record.
     $item_date = new DateAndTime(DB_DATEFORMAT, $expense_item['date']);
     if ($user->isDateLocked($item_date))
-      $err->add($i18n->getKey('error.period_locked'));
+      $err->add($i18n->getKey('error.range_locked'));
 
     if ($err->no()) {
       // Mark the record as deleted.

@@ -159,11 +159,11 @@ if ($request->isPost()) {
     // Now, step by step.
     // 1) Prohibit saving locked entries in any form.
     if ($user->isDateLocked($item_date))
-      $err->add($i18n->getKey('error.period_locked'));
+      $err->add($i18n->getKey('error.range_locked'));
 
     // 2) Prohibit saving unlocked entries into locked range.
     if ($err->no() && $user->isDateLocked($new_date))
-      $err->add($i18n->getKey('error.period_locked'));
+      $err->add($i18n->getKey('error.range_locked'));
 
     // Now, an update.
     if ($err->no()) {
@@ -179,7 +179,7 @@ if ($request->isPost()) {
   if ($request->getParameter('btn_copy')) {
     // We need to prohibit saving into locked interval.
     if ($user->isDateLocked($new_date))
-      $err->add($i18n->getKey('error.period_locked'));
+      $err->add($i18n->getKey('error.range_locked'));
 
     // Now, a new insert.
     if ($err->no()) {
