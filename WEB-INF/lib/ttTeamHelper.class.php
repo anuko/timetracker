@@ -602,6 +602,15 @@ class ttTeamHelper {
 
     $mdb2 = getConnection();
     
+    $lock_spec = $fields['lock_spec'];
+    if ($lock_spec !== null) {
+      $lockspec_f = ', lock_spec';
+      $lockspec_v = ', ' . $mdb2->quote($lock_spec);
+    } else {
+      $lockspec_f = '';
+      $lockspec_v = '';
+    }
+
     if ($fields['lock_interval'] !== null) {
       $locktime_f = ', locktime';
       $locktime_v = ", " . (int)$fields['lock_interval'];
@@ -615,11 +624,11 @@ class ttTeamHelper {
       global $i18n;
       $lang = $i18n->lang;
     }
-    
+
     $decimal_mark = $fields['decimal_mark'];
     if ($decimal_mark !== null) {
       $decimal_mark_f = ', decimal_mark';
-      $decimal_mark_v = ', ' . $mdb2->quote($decimal_mark);    	
+      $decimal_mark_v = ', ' . $mdb2->quote($decimal_mark);
     } else {
       $decimal_mark_f = '';
       $decimal_mark_v = '';    	
@@ -688,11 +697,11 @@ class ttTeamHelper {
       $record_type_v = '';    	
     }
     
-    $sql = "insert into tt_teams (name, address, currency $locktime_f, lang $decimal_mark_f $date_format_f $time_format_f $week_start_f $plugins_f $tracking_mode_f $record_type_f)
+    $sql = "insert into tt_teams (name, address, currency $lockspec_f $locktime_f, lang $decimal_mark_f $date_format_f $time_format_f $week_start_f $plugins_f $tracking_mode_f $record_type_f)
       values(".
       $mdb2->quote(trim($fields['name'])).
       ", ".$mdb2->quote(trim($fields['address'])).
-      ", ".$mdb2->quote(trim($fields['currency']))." $locktime_v, ".$mdb2->quote($lang).
+      ", ".$mdb2->quote(trim($fields['currency']))." $lockspec_v $locktime_v, ".$mdb2->quote($lang).
       "$decimal_mark_v $date_format_v $time_format_v $week_start_v $plugins_v $tracking_mode_v $record_type_v)";
     $affected = $mdb2->exec($sql);
 
