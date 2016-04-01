@@ -70,8 +70,8 @@ $i18n_key_words = array(
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
 // 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                  // This is a link to a webpage that describes how to contribute to the project.
-								  
+                                     // This is a link to a webpage that describes how to contribute to the project.
+
 // Error messages.
 // TODO: translate the following:
 // 'error.access_denied' => 'Access denied.',
@@ -87,7 +87,7 @@ $i18n_key_words = array(
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.'
 
-// Refactoring needs to be done down from here to sync with English file.	
+// Refactoring needs to be done down from here to sync with English file.
 'error.auth' => 'Usuari o parula de pas incorrecta',
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'user with this login already exists',
@@ -98,12 +98,14 @@ $i18n_key_words = array(
 // Note to translators: error.no_login needs to be properly translated (e-mail replaced with login).
 // 'error.no_login' => 'No existeix cap usuari amb aquest e-mail',
 'error.upload' => 'Error pujant l\\\'arxiu',
-// Note to translators: the 5 strings below are missing from the translation and must be added.
-// 'error.period_locked' => 'can\\\'t complete the operation. records older than a certain number of days cannot be created or modified. team manager defines this in the "Lock interval in days" value on the "Profile" page. set it to 0 to remove locking. <br><br>uncompleted records (with 0 or empty duration) can be deleted.',
-// 'error.mail_send' => 'error sending mail',
-// 'error.no_email' => 'no email associated with this login',
-// 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
-// 'error.goto_uncompleted' => 'go to uncompleted entry.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
+// 'error.mail_send' => 'Error sending mail',
+// 'error.no_email' => 'No email associated with this login',
+// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
+// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
+// 'error.overlap' => 'Time interval overlaps with existing records.',
+// 'error.future_date' => 'Date is in future.',
 
 // labels for various buttons
 'button.login' => 'Iniciar sessió',

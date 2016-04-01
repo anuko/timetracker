@@ -96,14 +96,16 @@ $i18n_key_words = array(
 // Note to translators: error.no_login needs to be properly translated (e-mail replaced with login).
 // 'error.no_login' => 'uživatel s tímto e-mailem neexistuje',
 'error.upload' => 'chyba přenosu souboru',
-// Note to translators: these 5 strings are missing from the translation and must be added.
-// 'error.period_locked' => 'can\\\'t complete the operation. records older than a certain number of days cannot be created or modified. team manager defines this in the "Lock interval in days" value on the "Profile" page. set it to 0 to remove locking. <br><br>uncompleted records (with 0 or empty duration) can be deleted.',
-// 'error.mail_send' => 'error sending mail',
-// 'error.no_email' => 'no email associated with this login',
-// 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
-// 'error.goto_uncompleted' => 'go to uncompleted entry.',
+// TODO: translate the following:
+// 'error.range_locked' => 'Date range is locked.',
+// 'error.mail_send' => 'Error sending mail.',
+// 'error.no_email' => 'No email associated with this login.',
+// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
+// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
+// 'error.overlap' => 'Time interval overlaps with existing records.',
+// 'error.future_date' => 'Date is in future.',
 
-// labels for various buttons
+// Labels for buttons.
 'button.login' => 'přihlásit',
 'button.now' => 'teď',
 // 'button.set' => 'nastavit',

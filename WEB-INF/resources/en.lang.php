@@ -87,7 +87,6 @@ $i18n_key_words = array(
 'error.no_login' => 'No user with this login.',
 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
 'error.upload' => 'File upload error.',
-'error.period_locked' => 'Can\\\'t complete the operation. Records older than a certain number of days cannot be created or modified. Team manager defines this in the "Lock interval in days" value on the "Profile" page. Set it to 0 to remove locking. <br><br>Uncompleted records (with 0 or empty duration) can be deleted.',
 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Error sending mail.',
 'error.no_email' => 'No email associated with this login.',
