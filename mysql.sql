@@ -27,6 +27,8 @@ CREATE TABLE `tt_teams` (
   `tracking_mode` smallint(2) NOT NULL DEFAULT '1',      # tracking mode ("projects" or "projects and tasks")
   `record_type` smallint(2) NOT NULL DEFAULT '0',        # time record type ("start and finish", "duration", or both)
   `plugins` varchar(255) default NULL,                   # a list of enabled plugins for team
+  `lock_spec` varchar(255) default NULL,                 # Cron specification for record locking,
+                                                         # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
   `custom_logo` tinyint(4) default '0',                  # whether to use a custom logo or not
   `status` tinyint(4) default '1',                       # team status
   PRIMARY KEY (`id`)

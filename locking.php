@@ -36,22 +36,25 @@ if (!ttAccessCheck(right_manage_team)) {
   exit();
 }
 
-$cl_lock_interval = $request->isPost() ? $request->getParameter('lock_interval') : $user->lock_interval;
+$cl_lock_spec = $request->isPost() ? $request->getParameter('lock_spec') : $user->lock_spec;
 
 $form = new Form('lockingForm');
-$form->addInput(array('type'=>'text','maxlength'=>'10','name'=>'lock_interval','value'=>$cl_lock_interval));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'lock_spec','style'=>'width: 250px;','value'=>$cl_lock_spec));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
 if ($request->isPost()) {
-  if ($cl_lock_interval == null || trim($cl_lock_interval) == '') $cl_lock_interval = 0;
+  // Validate user input.
+  if (!ttValidCronSpec($cl_lock_spec)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cron_schedule'));
 
-  if (ttTeamHelper::update($user->team_id, array(
-    'name' => $user->team,
-    'locktime' => $cl_lock_interval))) {
-    header('Location: time.php');
-    exit();
-  } else {
-    $err->add($i18n->getKey('error.db'));
+  if ($err->no()) {
+    if (ttTeamHelper::update($user->team_id, array(
+      'name' => $user->team,
+      'lock_spec' => $cl_lock_spec))) {
+      header('Location: time.php');
+      exit();
+    } else {
+      $err->add($i18n->getKey('error.db'));
+    }
   }
 } // isPost
 
