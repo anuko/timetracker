@@ -193,6 +193,10 @@ class ttUser {
       */
 
       // New code with cron specification.
+
+      // Override for managers.
+      if ($this->canManageTeam()) return false;
+
       require_once(LIBRARY_DIR.'/tdcron/class.tdcron.php');
       require_once(LIBRARY_DIR.'/tdcron/class.tdcron.entry.php');
 
