@@ -139,6 +139,9 @@ $i18n_key_words = array(
 // Translate the following string.
 // 'label.page' => 'Page',
 
+// Form titles.
+// TODO: the entire title section is missing here. See the English file.
+
 "form.filter.project" => 'プロジェクト',
 "form.filter.filter" => 'お気に入りレポート',
 "form.filter.filter_new" => 'お気に入りに保存',

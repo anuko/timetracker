@@ -139,6 +139,9 @@ $i18n_key_words = array(
 'label.confirm_password' => 'gentag adgangskode',
 'label.email' => 'email',
 
+// Form titles.
+// TODO: the entire title section is missing here. See the English file.
+
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'favorit rapport',
 "form.filter.filter_new" => 'gem som favorit',

@@ -255,6 +255,10 @@ $i18n_key_words = array(
 'title.cf_add_dropdown_option' => 'Dodawanie opcji',
 'title.cf_edit_dropdown_option' => 'Edytowanie opcji',
 'title.cf_delete_dropdown_option' => 'Usuwanie opcji',
+// NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
+// It is also a name for the Locking plugin on the Team profile page.
+// TODO: Translate the following:
+// 'title.locking' => 'Locking',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
