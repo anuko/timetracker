@@ -165,7 +165,6 @@ $i18n_key_words = array(
 'label.id' => 'ID',
 'label.language' => 'Jezik',
 'label.decimal_mark' => 'Decimala',
-'label.lock_interval' => 'Blokiraj intervale u danima',
 'label.date_format' => 'Format datuma',
 'label.time_format' => 'Format vremena',
 'label.week_start' => 'Prvi dan u nedelji',

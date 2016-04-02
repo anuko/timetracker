@@ -165,7 +165,6 @@ $i18n_key_words = array(
 'label.id' => 'ID',
 'label.language' => 'Taal',
 'label.decimal_mark' => 'Decimaal teken',
-'label.lock_interval' => 'Uitsluit interval in dagen',
 'label.date_format' => 'Datum formaat',
 'label.time_format' => 'Tijdsaanduiding',
 'label.week_start' => 'Eerste dag van de week',

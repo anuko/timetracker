@@ -61,7 +61,7 @@ class ttExportHelper {
     fwrite($file, "<pack>\n");
 
     // Write team info.
-    fwrite($file, "<team currency=\"".$user->currency."\" lock_spec=\"".$user->lock_spec."\" lock_interval=\"".$user->lock_interval."\" lang=\"".$user->lang."\" decimal_mark=\"".$user->decimal_mark."\" date_format=\"".$user->date_format."\" time_format=\"".$user->time_format."\" week_start=\"".$user->week_start.
+    fwrite($file, "<team currency=\"".$user->currency."\" lock_spec=\"".$user->lock_spec."\" lang=\"".$user->lang."\" decimal_mark=\"".$user->decimal_mark."\" date_format=\"".$user->date_format."\" time_format=\"".$user->time_format."\" week_start=\"".$user->week_start.
       "\" plugins=\"".$user->plugins."\" tracking_mode=\"".$user->tracking_mode."\" record_type=\"".$user->record_type."\">\n");
     fwrite($file, "  <name><![CDATA[".$user->team."]]></name>\n");
     fwrite($file, "  <address><![CDATA[".$user->address."]]></address>\n");

@@ -606,14 +606,6 @@ class ttTeamHelper {
       $lockspec_v = '';
     }
 
-    if ($fields['lock_interval'] !== null) {
-      $locktime_f = ', locktime';
-      $locktime_v = ", " . (int)$fields['lock_interval'];
-    } else {
-      $locktime_f = '';
-      $locktime_v = '';
-    }
-
     $lang = $fields['lang'];
     if (!$lang) {
       global $i18n;
@@ -692,10 +684,10 @@ class ttTeamHelper {
       $record_type_v = '';
     }
 
-    $sql = "insert into tt_teams (name, address, currency $lockspec_f $locktime_f, lang $decimal_mark_f $date_format_f $time_format_f $week_start_f $plugins_f $tracking_mode_f $record_type_f)
+    $sql = "insert into tt_teams (name, address, currency $lockspec_f, lang $decimal_mark_f $date_format_f $time_format_f $week_start_f $plugins_f $tracking_mode_f $record_type_f)
       values(".$mdb2->quote(trim($fields['name'])).
       ", ".$mdb2->quote(trim($fields['address'])).
-      ", ".$mdb2->quote(trim($fields['currency']))." $lockspec_v $locktime_v, ".$mdb2->quote($lang).
+      ", ".$mdb2->quote(trim($fields['currency']))." $lockspec_v, ".$mdb2->quote($lang).
       "$decimal_mark_v $date_format_v $time_format_v $week_start_v $plugins_v $tracking_mode_v $record_type_v)";
     $affected = $mdb2->exec($sql);
 
@@ -717,7 +709,6 @@ class ttTeamHelper {
     $name_part = 'name = '.$mdb2->quote($fields['name']);
     $currency_part = '';
     $addr_part = '';
-    $locktime_part = '';
     $lang_part = '';
     $decimal_mark_part = '';
     $date_format_part = '';
@@ -730,7 +721,6 @@ class ttTeamHelper {
 
     if (isset($fields['address'])) $addr_part = ', address = '.$mdb2->quote($fields['address']);
     if (isset($fields['currency'])) $currency_part = ', currency = '.$mdb2->quote($fields['currency']);
-    if (isset($fields['locktime'])) $locktime_part = ', locktime = '.intval($fields['locktime']);
     if (isset($fields['lang'])) $lang_part = ', lang = '.$mdb2->quote($fields['lang']);
     if (isset($fields['decimal_mark'])) $decimal_mark_part = ', decimal_mark = '.$mdb2->quote($fields['decimal_mark']);
     if (isset($fields['date_format'])) $date_format_part = ', date_format = '.$mdb2->quote($fields['date_format']);
@@ -741,7 +731,7 @@ class ttTeamHelper {
     if (isset($fields['plugins'])) $plugins_part = ', plugins = '.$mdb2->quote($fields['plugins']);
     if (isset($fields['lock_spec'])) $lock_spec_part = ', lock_spec = '.$mdb2->quote($fields['lock_spec']);
 
-    $sql = "update tt_teams set $name_part $addr_part $currency_part $locktime_part $lang_part $decimal_mark_part
+    $sql = "update tt_teams set $name_part $addr_part $currency_part $lang_part $decimal_mark_part
       $date_format_part $time_format_part $week_start_part $tracking_mode_part $record_type_part
       $plugins_part $lock_spec_part where id = $team_id";
     $affected = $mdb2->exec($sql);

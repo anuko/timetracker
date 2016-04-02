@@ -175,7 +175,6 @@ $i18n_key_words = array(
 'label.language' => 'زبان',
 // TODO: translate the following string.
 // 'label.decimal_mark' => 'Decimal mark',
-'label.lock_interval' => 'قفل کردن  فرصت بازه زمانی',
 'label.date_format' => 'قالب تاریخ',
 'label.time_format' => 'قالب زمان',
 'label.week_start' => 'روز اول هفته',

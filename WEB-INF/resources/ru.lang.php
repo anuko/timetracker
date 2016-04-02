@@ -165,7 +165,6 @@ $i18n_key_words = array(
 'label.id' => 'ID',
 'label.language' => 'Язык',
 'label.decimal_mark' => 'Десятичный знак',
-'label.lock_interval' => 'Интервал блокировки в днях',
 'label.date_format' => 'Формат даты',
 'label.time_format' => 'Формат времени',
 'label.week_start' => 'День начала недели',

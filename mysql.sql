@@ -19,7 +19,6 @@ CREATE TABLE `tt_teams` (
   `address` varchar(255) default NULL,                   # team address, used in invoices
   `currency` varchar(7) default NULL,                    # team currency symbol
   `decimal_mark` char(1) NOT NULL default '.',           # separator in decimals
-  `locktime` int(4) default '0',                         # lock interval in days
   `lang` varchar(10) NOT NULL default 'en',              # language
   `date_format` varchar(20) NOT NULL default '%Y-%m-%d', # date format
   `time_format` varchar(20) NOT NULL default '%H:%M',    # time format

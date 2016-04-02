@@ -167,7 +167,6 @@ $i18n_key_words = array(
 'label.language' => 'Sprache',
 // TODO: translate the following string.
 // 'label.decimal_mark' => 'Decimal mark',
-'label.lock_interval' => 'Blockierter Zeitraum in Tagen',
 'label.date_format' => 'Datumsformat',
 'label.time_format' => 'Zeitformat',
 'label.week_start' => 'Erster Wochentag',

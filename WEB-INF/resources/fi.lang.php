@@ -168,7 +168,6 @@ $i18n_key_words = array(
 'label.id' => 'ID',
 'label.language' => 'Kieli',
 'label.decimal_mark' => 'Desimaalierotin',
-'label.lock_interval' => 'Lukitusväli päivinä',
 'label.date_format' => 'Päiväyksen muoto',
 'label.time_format' => 'Kellonajan muoto',
 'label.week_start' => 'Viikon 1. päivä',

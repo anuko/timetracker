@@ -168,7 +168,6 @@ $i18n_key_words = array(
 'label.id' => 'ID',
 'label.language' => 'Język',
 'label.decimal_mark' => 'Znak dziesiętny',
-'label.lock_interval' => 'Blokada edycji po okresie (dni)',
 'label.date_format' => 'Format daty',
 'label.time_format' => 'Format godziny',
 'label.week_start' => 'Początek tygodnia',

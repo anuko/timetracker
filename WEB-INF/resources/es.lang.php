@@ -193,8 +193,6 @@ $i18n_key_words = array(
 // TODO: translate the following strings.
 // 'label.language' => 'Language',
 // 'label.decimal_mark' => 'Decimal mark',
-'label.lock_interval' => 'Intervalo de cierre en días',
-// TODO: translate the following strings.
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',

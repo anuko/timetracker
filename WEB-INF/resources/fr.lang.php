@@ -179,7 +179,6 @@ $i18n_key_words = array(
 'label.language' => 'Langage',
 // TODO: translate the following string.
 // 'label.decimal_mark' => 'Decimal mark',
-'label.lock_interval' => 'Intervalle de verrouillage en jours',
 'label.date_format' => 'Format date',
 'label.time_format' => 'Format heure',
 'label.week_start' => '1er jour de la semaine',

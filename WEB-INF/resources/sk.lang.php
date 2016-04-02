@@ -177,7 +177,6 @@ $i18n_key_words = array(
 'label.language' => 'Jazyk',
 // TODO: translate the following string.
 // 'label.decimal_mark' => 'Decimal mark',
-'label.lock_interval' => 'Interval uzamknutia záznamov v dňoch',
 'label.date_format' => 'Formát dátumu',
 'label.time_format' => 'Formát času',
 'label.week_start' => 'Prvý deň v týždni',

@@ -48,7 +48,6 @@ class ttUser {
   var $team = null;         // Team name.
   var $custom_logo = 0;     // Whether to use a custom logo for team.
   var $address = null;      // Address for invoices.
-  var $lock_interval = 0;   // Lock interval in days for time records.
   var $lock_spec = null;    // Cron specification for record locking.
   var $rights = 0;          // A mask of user rights.
 
@@ -62,7 +61,7 @@ class ttUser {
     $mdb2 = getConnection();
 
     $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role, u.client_id, u.email, t.name as team_name, 
-      t.address, t.currency, t.locktime, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
+      t.address, t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
       t.tracking_mode, t.record_type, t.plugins, t.lock_spec, t.custom_logo
       FROM tt_users u LEFT JOIN tt_teams t ON (u.team_id = t.id) WHERE ";
     if ($id)
@@ -98,7 +97,6 @@ class ttUser {
       $this->plugins = $val['plugins'];
       $this->lock_spec = $val['lock_spec'];
       $this->custom_logo = $val['custom_logo'];
-      $this->lock_interval = $val['locktime'];
 
       // Set "on behalf" id and name.
       if (isset($_SESSION['behalf_id'])) {
@@ -180,20 +178,6 @@ class ttUser {
   function isDateLocked($date)
   {
     if ($this->isPluginEnabled('lk') && $this->lock_spec) {
-      // This is legacy code...
-      /*
-      // Determine lock date. Entries earlier than lock date cannot be created or modified.
-      $lockdate = 0;
-      if ($this->lock_interval > 0) {
-        $lockdate = new DateAndTime();
-        $lockdate->decDay($this->lock_interval);
-      }
-      if($lockdate && $date->before($lockdate))
-        return true;
-      */
-
-      // New code with cron specification.
-
       // Override for managers.
       if ($this->canManageTeam()) return false;
 

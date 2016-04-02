@@ -200,14 +200,10 @@ if ($request->isPost()) {
     if (!ttValidString($cl_team, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
     if (!ttValidString($cl_address, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.address'));
     if (!ttValidString($cl_currency, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));
-    if (!ttValidInteger($cl_lock_interval, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.lock_interval'));
   }
   // Finished validating user input.
 
   if ($err->no()) {
-    if ($cl_lock_interval == null || trim($cl_lock_interval) == '')
-      $cl_lock_interval = 0;
-
     $update_result = true;
     if ($user->canManageTeam()) {
 

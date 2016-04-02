@@ -118,7 +118,6 @@ class ttImportHelper {
           'address' => $this->teamData['ADDRESS'],
           'currency' => $this->teamData['CURRENCY'],
           'lock_spec' => $this->teamData['LOCK_SPEC'],
-          'lock_interval' => $this->teamData['LOCK_INTERVAL'],
           'lang' => $this->teamData['LANG'],
           'decimal_mark' => $this->teamData['DECIMAL_MARK'],
           'date_format' => $this->teamData['DATE_FORMAT'],

@@ -180,7 +180,6 @@ $i18n_key_words = array(
 'label.language' => 'שפה',
 // TODO: translate the following string.
 // 'label.decimal_mark' => 'Decimal mark',
-'label.lock_interval' => 'טווח זמן לנעילה',
 'label.date_format' => 'תבנית של תאריך',
 'label.time_format' => 'תבנית של שעה',
 'label.week_start' => 'היום הראשון בשבוע',
