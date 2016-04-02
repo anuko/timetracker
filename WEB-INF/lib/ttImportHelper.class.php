@@ -40,15 +40,15 @@ import('ttExpenseHelper');
 // ttImportHelper - this class is used to import team data from a file.
 class ttImportHelper {
   var $errors         = null;    // Errors go here. Set in constructor by reference.
-  
+
   var $currentElement = array(); // Current element of the XML file we are parsing.
-  var $currentTag     = '';      // XML tag of the current element.  
-  
+  var $currentTag     = '';      // XML tag of the current element.
+
   var $canImport      = true;    // False if we cannot import data due to a login collision.
   var $teamData       = array(); // Array of team data such as team name, etc.
   var $team_id        = null;    // New team id we are importing. It is created during the import operation.
   var $users          = array(); // Array of arrays of user properties.
-  
+
   // The following arrays are maps between entity ids in the file versus the database.
   // In the file they are sequential (1,2,3...) while in the database the entities have different ids.
   var $userMap       = array(); // User ids.
@@ -56,11 +56,11 @@ class ttImportHelper {
   var $taskMap       = array(); // Task ids.
   var $clientMap     = array(); // Client ids.
   var $invoiceMap    = array(); // Invoice ids.
-  
+
   var $customFieldMap       = array(); // Custom field ids.
   var $customFieldOptionMap = array(); // Custop field option ids.
   var $logMap        = array(); // Time log ids.
-  
+
   // Constructor.
   function ttImportHelper(&$errors) {
     $this->errors = &$errors;
@@ -70,28 +70,28 @@ class ttImportHelper {
   // In this function we assign passed in attributes to currentElement.
   function startElement($parser, $name, $attrs) {
     if ($name == 'TEAM'
-	  || $name == 'USER'
-	  || $name == 'TASK'
-	  || $name == 'PROJECT'
+      || $name == 'USER'
+      || $name == 'TASK'
+      || $name == 'PROJECT'
       || $name == 'CLIENT'
       || $name == 'INVOICE'
-	  || $name == 'LOG_ITEM'
-	  || $name == 'CUSTOM_FIELD'
-	  || $name == 'CUSTOM_FIELD_OPTION'
-	  || $name == 'CUSTOM_FIELD_LOG_ENTRY'
-	  || $name == 'INVOICE_HEADER'
-	  || $name == 'USER_PROJECT_BIND'
-	  || $name == 'EXPENSE_ITEM'
-	  || $name == 'FAV_REPORT') {
-	  $this->currentElement = $attrs;
-	  }
-	$this->currentTag = $name;
+      || $name == 'LOG_ITEM'
+      || $name == 'CUSTOM_FIELD'
+      || $name == 'CUSTOM_FIELD_OPTION'
+      || $name == 'CUSTOM_FIELD_LOG_ENTRY'
+      || $name == 'INVOICE_HEADER'
+      || $name == 'USER_PROJECT_BIND'
+      || $name == 'EXPENSE_ITEM'
+      || $name == 'FAV_REPORT') {
+      $this->currentElement = $attrs;
+    }
+    $this->currentTag = $name;
   }
 
   // endElement - callback handler for the closing tag of an XML element.
   // When we are here, currentElement is an array of the element attributes (as set in startElement).
   // Here we do the actual import of data into the database.
-  function endElement($parser, $name)	{
+  function endElement($parser, $name) {
     if ($name == 'TEAM') {
       $this->teamData = $this->currentElement;
       // Now teamData is an array of team properties. We'll use it later to create a team.
@@ -110,7 +110,7 @@ class ttImportHelper {
           break;
         }
       }
-      
+
       // Now we can create a team.
       if ($this->canImport) {
         $team_id = ttTeamHelper::insert(array(
@@ -133,7 +133,7 @@ class ttImportHelper {
             $user_id = ttUserHelper::insert(array(
               'team_id' => $this->team_id,
               'role' => $user_item['ROLE'],
-              'client_id' => $user_item['CLIENT_ID'], // Note: NOT mapped value, replaced in CLIENT handler. 
+              'client_id' => $user_item['CLIENT_ID'], // Note: NOT mapped value, replaced in CLIENT handler.
               'name' => $user_item['NAME'],
               'login' => $user_item['LOGIN'],
               'password' => $user_item['PASSWORD'],
@@ -145,7 +145,8 @@ class ttImportHelper {
         }
       }
     }
-	if ($name == 'TASK' && $this->canImport) {
+
+    if ($name == 'TASK' && $this->canImport) {
       $this->taskMap[$this->currentElement['ID']] =
         ttTaskHelper::insert(array(
           'team_id' => $this->team_id,
@@ -175,7 +176,7 @@ class ttImportHelper {
         $this->currentElement['RATE'],
         $this->currentElement['STATUS']);
     }
-    
+
     if ($name == 'CLIENT' && $this->canImport) {
       // Prepare a list of project ids.
       if ($this->currentElement['PROJECTS']) {
@@ -198,7 +199,8 @@ class ttImportHelper {
         if ($this->currentElement['ID'] != $this->clientMap[$this->currentElement['ID']])
           ttClientHelper::setMappedClient($this->team_id, $this->currentElement['ID'], $this->clientMap[$this->currentElement['ID']]);
     }
-  	if ($name == 'INVOICE' && $this->canImport) {
+
+    if ($name == 'INVOICE' && $this->canImport) {
       $this->invoiceMap[$this->currentElement['ID']] =
         ttInvoiceHelper::insert(array(
           'team_id' => $this->team_id,
@@ -208,6 +210,7 @@ class ttImportHelper {
           'discount' => $this->currentElement['DISCOUNT'],
           'status' => $this->currentElement['STATUS']));
     }
+
     if ($name == 'LOG_ITEM' && $this->canImport) {
       $this->logMap[$this->currentElement['ID']] =
         ttTimeHelper::insert(array(
@@ -225,6 +228,7 @@ class ttImportHelper {
           'billable' => $this->currentElement['BILLABLE'],
           'status' => $this->currentElement['STATUS']));
     }
+
     if ($name == 'CUSTOM_FIELD' && $this->canImport) {
       $this->customFieldMap[$this->currentElement['ID']] =
         ttCustomFieldHelper::insertField(array(
@@ -234,12 +238,14 @@ class ttImportHelper {
           'required' => $this->currentElement['REQUIRED'],
           'status' => $this->currentElement['STATUS']));
     }
+
     if ($name == 'CUSTOM_FIELD_OPTION' && $this->canImport) {
       $this->customFieldOptionMap[$this->currentElement['ID']] =
         ttCustomFieldHelper::insertOption(array(
           'field_id' => $this->customFieldMap[$this->currentElement['FIELD_ID']],
           'value' => $this->currentElement['VALUE']));
     }
+
     if ($name == 'CUSTOM_FIELD_LOG_ENTRY' && $this->canImport) {
       ttCustomFieldHelper::insertLogEntry(array(
         'log_id' => $this->logMap[$this->currentElement['LOG_ID']],
@@ -248,6 +254,7 @@ class ttImportHelper {
         'value' => $this->currentElement['VALUE'],
         'status' => $this->currentElement['STATUS']));
     }
+
     if ($name == 'EXPENSE_ITEM' && $this->canImport) {
       ttExpenseHelper::insert(array(
         'date' => $this->currentElement['DATE'],
@@ -258,13 +265,14 @@ class ttImportHelper {
         'cost' => $this->currentElement['COST'],
         'invoice_id' => $this->invoiceMap[$this->currentElement['INVOICE_ID']],
         'status' => $this->currentElement['STATUS']));
-    }    
+    }
+
     if ($name == 'FAV_REPORT' && $this->canImport) {
       $user_list = '';
       if (strlen($this->currentElement['USERS']) > 0) {
         $arr = explode(',', $this->currentElement['USERS']);
-		foreach ($arr as $v)
-		  $user_list .= (strlen($user_list) == 0 ? '' : ',').$this->userMap[$v];
+        foreach ($arr as $v)
+          $user_list .= (strlen($user_list) == 0 ? '' : ',').$this->userMap[$v];
       }
       ttFavReportHelper::insertReport(array(
         'name' => $this->currentElement['NAME'],
@@ -290,8 +298,6 @@ class ttImportHelper {
         'chcf_1' => $this->currentElement['SHOW_CUSTOM_FIELD_1'],
         'group_by' => $this->currentElement['GROUP_BY'],
         'chtotalsonly' => $this->currentElement['SHOW_TOTALS_ONLY']));
-        //'sortby' => $this->currentElement['SORT_BY'],
-        //'chemptydays' => $this->currentElement['SHOW_EMPTY_DAYS']));
     }
     $this->currentTag = '';
   }
@@ -313,26 +319,26 @@ class ttImportHelper {
     }
   }
 
-  // importXml - uncomresses the file, reads and parses its content. During parsing,
+  // importXml - uncompresses the file, reads and parses its content. During parsing,
   // startElement, endElement, and dataElement functions are called as many times as necessary.
   // Actual import occurs in the endElement handler.
   function importXml() {
-  	// Do we have a compressed file?
-  	$compressed = false;  	
-  	$file_ext = substr($_FILES['xmlfile']['name'], strrpos($_FILES['xmlfile']['name'], '.') + 1);
+    // Do we have a compressed file?
+    $compressed = false;
+    $file_ext = substr($_FILES['xmlfile']['name'], strrpos($_FILES['xmlfile']['name'], '.') + 1);
     if (in_array($file_ext, array('bz','tbz','bz2','tbz2'))) {
       $compressed = true;
     }
-    
+
     // Create a temporary file.
-  	$dirName = dirname(TEMPLATE_DIR . '_c/.');
+    $dirName = dirname(TEMPLATE_DIR . '_c/.');
     $filename = tempnam($dirName, 'import_');
-    
+
     // If the file is compressed - uncompress it.
     if ($compressed) {
       if (!$this->uncompress($_FILES['xmlfile']['tmp_name'], $filename)) {
-      	$this->errors->add($GLOBALS['I18N']->getKey('error.sys'));
-      	return;
+        $this->errors->add($GLOBALS['I18N']->getKey('error.sys'));
+        return;
       }
       unlink($_FILES['xmlfile']['tmp_name']);
     } else {
@@ -352,18 +358,18 @@ class ttImportHelper {
     $file = fopen($filename, 'r');
     while ($data = fread($file, 4096)) {
       if (!xml_parse($parser, $data, feof($file))) {
-      	$this->errors->add(sprintf("XML error: %s at line %d",
-      	  xml_error_string(xml_get_error_code($parser)),
-      	  xml_get_current_line_number($parser)));
-	  }
-	  if (!$this->canImport) {
-	  	$this->errors->add($GLOBALS['I18N']->getKey('error.user_exists'));
-	    break;
-	  }
-	}
-	xml_parser_free($parser);
-	if ($file) fclose($file);
-	unlink($filename);
+        $this->errors->add(sprintf("XML error: %s at line %d",
+          xml_error_string(xml_get_error_code($parser)),
+          xml_get_current_line_number($parser)));
+      }
+      if (!$this->canImport) {
+        $this->errors->add($GLOBALS['I18N']->getKey('error.user_exists'));
+        break;
+      }
+    }
+    xml_parser_free($parser);
+    if ($file) fclose($file);
+    unlink($filename);
   }
 
   // uncompress - uncompresses the content of the $in file into the $out file.
@@ -371,7 +377,7 @@ class ttImportHelper {
     // Do we have the uncompress function?
     if (!function_exists('bzopen'))
       return false;
-		
+
     // Initial checks of file names and permissions.
     if (!file_exists($in) || !is_readable ($in))
       return false;
