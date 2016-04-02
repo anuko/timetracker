@@ -89,8 +89,8 @@ $i18n_key_words = array(
 'error.client_exists' => 'En klient med dette navnet er allerede opprettet.',
 'error.no_login' => 'Det er ingen bruker med dette brukernavnet.',
 'error.upload' => 'Feil med lasting av fil.',
-// TODO: translate error.period_locked.
-// 'error.period_locked' => 'can\\\'t complete the operation. records older than a certain number of days cannot be created or modified. team manager defines this in the "Lock interval in days" value on the "Profile" page. set it to 0 to remove locking. <br><br>uncompleted records (with 0 or empty duration) can be deleted.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Feil ved sending av e-post.',
 'error.no_email' => 'Det er ingen e-post knyttet til dette brukernavnet.',
 'error.uncompleted_exists' => 'Ufullført registrering finnes allerede. Lukk eller slett den.',

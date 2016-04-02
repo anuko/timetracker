@@ -86,7 +86,8 @@ $i18n_key_words = array(
 'error.no_login' => 'Een medewerker met deze inlognaam bestaat niet.',
 'error.no_teams' => 'Uw database is leeg. Meld je aan als admin en maak een nieuw team.',
 'error.upload' => 'Fout bij het uploaden van het bestand.',
-'error.period_locked' => 'Kan het proces niet afmaken. Oude gegevens of sommige dagen kunnen niet worden aangemaakt of gewijzigd. Dit is in te stellen in de "Profiel" pagina van de team manager bij "Uitsluit interval in dagen". Stel dit in op 0 om het proces af te kunnen maken. <br><br>Opgeslagen gegevens (met 0 of lege inhoud) kunnen worden verwijderd.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Fout bij het versturen van een e-mailbericht.',
 'error.no_email' => 'Geen e-mailadres bekend voor dit account.',
 'error.uncompleted_exists' => 'Niet afgeronde invoer bestaat al. Sluit of verwijder deze.',

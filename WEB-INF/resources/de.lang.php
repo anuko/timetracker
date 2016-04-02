@@ -87,7 +87,8 @@ $i18n_key_words = array(
 'error.no_login' => 'Benutzer mit diesen Anmeldedaten nicht vorhanden.',
 'error.no_teams' => 'Die Datenbank ist leer. Als Administrator anmelden und ein neues Team erzeugen.',
 'error.upload' => 'Fehler beim hochladen einer Datei.',
-'error.period_locked' => 'Kann den Vorgang nicht beenden. Einträge die älter sind als eine bestimmte Anzahl von Tagen, können nicht erstellt oder geändert werden. Teammanager definieren dies in den "Zeitraum in Tagen sperren" Wert auf der "Profil bearbeiten" Seite. Setzen Sie Ihn auf 0 um die Sperre zu entfernen. <br><br>Unvollständige Einträge (mit 0 oder leerem Zeitraum) kann gelöscht werden.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Fehler beim versenden einer E-Mail.',
 'error.no_email' => 'Dieser Benutzer besitzt keine e-Mail Adresse.',
 'error.uncompleted_exists' => 'Unvollständiger Eintrag bereits vorhanden. Schließen oder Löschen.',

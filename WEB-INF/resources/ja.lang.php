@@ -90,8 +90,8 @@ $i18n_key_words = array(
 // 'error.client_exists' => 'client with this name already exists',
 'error.no_login' => 'このログインと関連されたユーザーはいません',
 'error.upload' => 'ファイルのアップロードのエラー',
-// Note to translators: the string below is missing and must be translated.
-// 'error.period_locked' => 'can\\\'t complete the operation. records older than a certain number of days cannot be created or modified. team manager defines this in the "Lock interval in days" value on the "Profile" page. set it to 0 to remove locking. <br><br>uncompleted records (with 0 or empty duration) can be deleted.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'メールの送信中のエラー',
 // Note to translators: check the meaning of error.no_email. The error should say that there is no email address for user with a login provided.
 'error.no_email' => 'このログインと関連されたメールがありません',

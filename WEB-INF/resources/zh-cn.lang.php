@@ -89,8 +89,8 @@ $i18n_key_words = array(
 // 'error.client_exists' => 'client with this name already exists',
 'error.no_login' => '没有该登录信息的用户',
 'error.upload' => '上传文件出错',
-// Note to translators: string below must be translated.
-// 'error.period_locked' => 'can\\\'t complete the operation. records older than a certain number of days cannot be created or modified. team manager defines this in the "Lock interval in days" value on the "Profile" page. set it to 0 to remove locking. <br><br>uncompleted records (with 0 or empty duration) can be deleted.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => '发送邮件时出错',
 'error.no_email' => '没有电子邮件与该用户名关联',
 // Note to translators: strings below must be translated.

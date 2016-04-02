@@ -65,7 +65,7 @@ $i18n_key_words = array(
 'footer.license' => 'Lisenssi',
 // TODO: translate the following:
 // 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                  // This is a link to a webpage that describes how to contribute to the project.
+                                     // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
 'error.access_denied' => 'Pääsy estetty.',
@@ -89,7 +89,8 @@ $i18n_key_words = array(
 'error.no_login' => 'Tuntematon käyttäjänimi.',
 'error.no_teams' => 'Tietokanta on tyhjä. Kirjaudu ylläpitäjänä ja luo uusi tiimi.',
 'error.upload' => 'Virhe tiedoston lataus.',
-'error.period_locked' => 'Toimintoa ei voi suorittaa. Liian vanhojen tietueiden päivitys tai luonti ei onnistu. Tiimin esimies asettaa "Lukitusväli päivinä" arvon "Profiili"-sivulla. Arvolla 0 lukitusta ei tehdä. <br><br>Keskeneräiset tietueet (kestona 0 tai määrittelemätön) voidaan poistaa.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Virhe postinlähetyksessä.',
 'error.no_email' => 'Käyttäjätunnukseen ei ole liitetty sähköpostiosoitetta.',
 'error.uncompleted_exists' => 'Kesken oleva syötetieto on jo olemassa. Sulje tai poista se.',

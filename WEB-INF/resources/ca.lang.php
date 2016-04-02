@@ -142,9 +142,12 @@ $i18n_key_words = array(
 
 'label.password' => 'Paraula de pas',
 'label.confirm_password' => 'Confirmar paraula de pas',
-'label.email' => 'e-mail',
+'label.email' => 'E-mail',
 // Translate the following string.
 // 'label.page' => 'Page',
+
+// Form titles.
+// TODO: the entire title section is missing here. See the English file.
 
 "form.filter.project" => 'Projecte',
 "form.filter.filter" => 'Report favorit',

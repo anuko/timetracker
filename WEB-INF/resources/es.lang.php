@@ -99,8 +99,8 @@ $i18n_key_words = array(
 // 'error.no_login' => 'No existe ningún usuario con este e-mail.',
 'error.no_teams' => 'Su base de datos esta vacía. Inicie sesión como administrador y cree un nuevo grupo.',
 'error.upload' => 'Error subiendo el archivo.',
-// Note to translators: the strings below are missing in the translation and must be added.
-// 'error.period_locked' => 'Can\\\'t complete the operation. Records older than a certain number of days cannot be created or modified. Team manager defines this in the "Lock interval in days" value on the "Profile" page. Set it to 0 to remove locking. <br><br>Uncompleted records (with 0 or empty duration) can be deleted.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
 // 'error.mail_send' => 'Error sending mail.',
 // 'error.no_email' => 'No email associated with this login.',
 // 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',

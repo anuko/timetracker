@@ -89,7 +89,8 @@ $i18n_key_words = array(
 'error.no_login' => 'Użytkownik o takiej nazwie nie istnieje.',
 'error.no_teams' => 'Twoja baza danych jest pusta. Zaloguj się jako administrator i stwórz nowy zespół.',
 'error.upload' => 'Błąd podczas wysyłania pliku.',
-'error.period_locked' => 'Nie można dokończyć operacji. Wpisy starsze niż określona liczba dni nie mogą być tworzone lub modyfikowane. Manager zespołu ustala tę liczbę w polu "Blokada edycji po okresie (dni)" na stronie "Profil". Ustaw na 0, aby wyłączyć blokowanie. <br><br>Niedokończone wpisy (z czasem trwania 0 lub pustym polem) mogą zostać usunięte.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Błąd podczas wysyłania wiadomości e-mail.',
 'error.no_email' => 'Żaden adres e-mail nie jest skojarzony z tym loginem.',
 'error.uncompleted_exists' => 'Istnieje niedokończony wpis. Zamknij go lub usuń.',

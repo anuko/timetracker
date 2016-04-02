@@ -90,8 +90,8 @@ $i18n_key_words = array(
 // 'error.client_exists' => 'client with this name already exists',
 'error.no_login' => '본 로그인과 연계된 사용자가 없습니다',
 'error.upload' => '파일 업로드 오류',
-// Note to translators: this string needs to be translated.
-// 'error.period_locked' => 'can\\\'t complete the operation. records older than a certain number of days cannot be created or modified. team manager defines this in the "Lock interval in days" value on the "Profile" page. set it to 0 to remove locking. <br><br>uncompleted records (with 0 or empty duration) can be deleted.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => '메일 보내기에서의 오류',
 'error.no_email' => '본 로그인과 연계된 이메일이 없습니다',
 // Note to translators: the strings below need to be translated.

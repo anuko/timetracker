@@ -65,7 +65,7 @@ $i18n_key_words = array(
 'footer.license' => 'License',
 // TODO: translate the following:
 // 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                  // This is a link to a webpage that describes how to contribute to the project.
+                                     // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
 // TODO: translate the following:
@@ -94,7 +94,8 @@ $i18n_key_words = array(
 // 'error.no_login' => 'Aucun utilisateur avec cette adresse email.',
 'error.no_teams' => 'Votre base de données est vide. Connectez-vous comme administrateur et créez une nouvelle équipe.',
 'error.upload' => 'Erreur de chargement de fichier.',
-'error.period_locked' => 'Impossible de terminer l\\\'opération. Les éléments datés de plus d\\\'un certain nombre de jours ne peuvent être créés ou modifiés. Le responsable d\\\'équipe définit cela dans la valeur "Intervalle de verrouillage en jours" dans la page "Profil". Mettre à 0 pour enlever le verrou. <br><br>Les éléments non terminés (avec une durée à 0 ou vide) peuvent être supprimés.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Erreur durant l\\\'envoi de l\\\'e-mail.',
 'error.no_email' => 'Aucun e-mail associé à ce login.',
 'error.uncompleted_exists' => 'Une entrée non terminée existe déjà. Fermer ou supprimer.',

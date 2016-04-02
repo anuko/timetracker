@@ -86,7 +86,8 @@ $i18n_key_words = array(
 'error.no_login' => 'Nema korisnika pod ovom prijavom',
 'error.no_teams' => 'Vaša baza podataka je prazna. Prijavite se kao administrator i napravite novi tim.',
 'error.upload' => 'Greška pri otpremanju podatka.',
-'error.period_locked' => 'Ne može se izvršiti naredba. Uneti podaci su veći od određenog broja dana ne mogu se sačuvati niti modifikovati. Samo Menadžer tim-a može da definiše ovu vrednost u opciji "Blokiraj intervale u danima" na svom "Profilu". Postavite ga na 0 za uklanjanje restrikcija. <br> <br> Nepotpuni zapisi (sa 0 ili bez trajanja) mogu biti izbrisani.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Greška u slanju mejla.',
 'error.no_email' => 'Nema imejla pod korisničkom imenom.',
 'error.uncompleted_exists' => 'Unos već postoji ali je nekompletan. Zatvorite postojeći ili obrišite unos.',

@@ -92,7 +92,8 @@ $i18n_key_words = array(
 'error.no_login' => 'Neexistuje používateľ s týmto prihlasovacím menom.',
 'error.no_teams' => 'Vaša databáza je prázdna. Prihláste sa ako admin a vytvorte nový tím.',
 'error.upload' => 'Prenos súboru bol neúspešný.',
-'error.period_locked' => 'Operáciu nie je možné dokončiť. Záznamy staršie ako určitý počet dní nie je možné vytvoriť alebo upraviť. Tímový manažér definuje hodnotu "Interval uzamknutia záznamov v dňoch" na stránke "Profil". Pre vypnutie zámku nastavte hodnotu na 0. <br><br>Nekompletné záznamy (s nulovou alebo prázdnou dĺžkou) je možné vymazať.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Chyba v odosielaní e-mailu.',
 'error.no_email' => 'K tomuto prihlasovaciemu menu nie je priradený žiadny e-mail.',
 'error.uncompleted_exists' => 'Nekompletný záznam už existuje. Zatvorte ho alebo ho vymažte.',

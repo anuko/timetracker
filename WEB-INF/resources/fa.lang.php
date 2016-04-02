@@ -92,7 +92,8 @@ $i18n_key_words = array(
 'error.no_login' => 'کاربری با این نام کاربری موجود نیست.',
 'error.no_teams' => 'پایگاه داده شما خالی است با کاربر admin وارد شوید و تیم ایجاد کنید.',
 'error.upload' => 'خطا در آپلود فایل.',
-'error.period_locked' => 'کامل کردن عملیات مقدور نیست. رکورد های قدیمی تر از تعداد محدودی روز را نمی توان ایجاد یا اصلاح کرد.مدیر تیم در پروفایل خود قسمت "قفل بازه زمانی" قادر به تغییر این مقدار است. برای غیر فعال کردن قفل بازه زمانی مقدار صفر را درج کنید.<br><br>رکوردهای ناتمام بدون زمان یا با زمان صفر می تواند حذف شود.',
+// TODO: Translate the following:
+// 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'خطا در ارسال ایمیل.',
 'error.no_email' => 'ایمیل مرتبط با این نام کاربری موجود نیست.',
 // TODO: check translation and punctuation of error.uncompleted_exists. Is the sentence ending dot in the right place?
