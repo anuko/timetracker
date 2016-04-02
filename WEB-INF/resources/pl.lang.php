@@ -65,7 +65,7 @@ $i18n_key_words = array(
 'footer.license' => 'Licencja',
 // TODO: Translate the following:
 // 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                  // This is a link to a webpage that describes how to contribute to the project.
+                                     // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
 'error.access_denied' => 'Odmowa dostępu.',

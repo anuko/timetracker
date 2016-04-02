@@ -29,7 +29,7 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
-// Note to translators: Please use proper capitalization rules for your language. 
+// Note to translators: Please use proper capitalization rules for your language.
 
 $i18n_language = 'Eesti';
 $i18n_months = array('jaanuar', 'veebruar', 'märts', 'aprill', 'mai', 'juuni', 'juuli', 'august', 'september', 'oktoober', 'november', 'detsember');
@@ -71,7 +71,7 @@ $i18n_key_words = array(
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
 // 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                  // This is a link to a webpage that describes how to contribute to the project.
+                                     // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
 // TODO: translate the following:
