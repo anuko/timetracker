@@ -32,7 +32,7 @@ import('ttTimeHelper');
 // ttExportHelper - this class is used to export team data to a file.
 class ttExportHelper {
   var $fileName    = null;    // Name of the file with data.
-  
+
   // The following arrays are maps between entity ids in the file versus the database.
   // We write to the file sequentially (1,2,3...) while in the database the entities have different ids.
   var $userMap     = array(); // User ids.
@@ -43,7 +43,7 @@ class ttExportHelper {
   var $customFieldMap       = array(); // Custom field ids.
   var $customFieldOptionMap = array(); // Custop field option ids.
   var $logMap      = array(); // Time log ids.
-    
+
   // createDataFile creates a file with all data for a given team.
   function createDataFile($compress = false) {
     global $user;
@@ -55,23 +55,23 @@ class ttExportHelper {
     // Open the file for writing.
     $file = fopen($tmp_file, 'wb');
     if (!$file) return false;
-    
+
     // Write XML to the file.
     fwrite($file, "<?xml version=\"1.0\"?>\n");
     fwrite($file, "<pack>\n");
-    
+
     // Write team info.
     fwrite($file, "<team currency=\"".$user->currency."\" lock_spec=\"".$user->lock_spec."\" lock_interval=\"".$user->lock_interval."\" lang=\"".$user->lang."\" decimal_mark=\"".$user->decimal_mark."\" date_format=\"".$user->date_format."\" time_format=\"".$user->time_format."\" week_start=\"".$user->week_start.
       "\" plugins=\"".$user->plugins."\" tracking_mode=\"".$user->tracking_mode."\" record_type=\"".$user->record_type."\">\n");
     fwrite($file, "  <name><![CDATA[".$user->team."]]></name>\n");
     fwrite($file, "  <address><![CDATA[".$user->address."]]></address>\n");
     fwrite($file, "</team>\n");
-    
+
     // Prepare user map.
     $users = ttTeamHelper::getAllUsers($user->team_id, true);
     foreach ($users as $key=>$user_item)
       $this->userMap[$user_item['id']] = $key + 1;
-      
+
     // Prepare project map.
     $projects = ttTeamHelper::getAllProjects($user->team_id, true);
     foreach ($projects as $key=>$project_item)
@@ -81,27 +81,27 @@ class ttExportHelper {
     $tasks = ttTeamHelper::getAllTasks($user->team_id, true);
     foreach ($tasks as $key=>$task_item)
       $this->taskMap[$task_item['id']] = $key + 1;
-      
+
     // Prepare client map.
     $clients = ttTeamHelper::getAllClients($user->team_id, true);
     foreach ($clients as $key=>$client_item)
-      $this->clientMap[$client_item['id']] = $key + 1;      
+      $this->clientMap[$client_item['id']] = $key + 1;
 
     // Prepare invoice map.
     $invoices = ttTeamHelper::getAllInvoices();
     foreach ($invoices as $key=>$invoice_item)
-      $this->invoiceMap[$invoice_item['id']] = $key + 1;   
+      $this->invoiceMap[$invoice_item['id']] = $key + 1;
 
     // Prepare custom fields map.
     $custom_fields = ttTeamHelper::getAllCustomFields($user->team_id);
     foreach ($custom_fields as $key=>$custom_field)
-      $this->customFieldMap[$custom_field['id']] = $key + 1;  
+      $this->customFieldMap[$custom_field['id']] = $key + 1;
 
     // Prepare custom field options map.
     $custom_field_options = ttTeamHelper::getAllCustomFieldOptions($user->team_id);
     foreach ($custom_field_options as $key=>$option)
-      $this->customFieldOptionMap[$option['id']] = $key + 1;  
-      
+      $this->customFieldOptionMap[$option['id']] = $key + 1;
+
     // Write users.
     fwrite($file, "<users>\n");
     foreach ($users as $user_item) {
@@ -150,7 +150,7 @@ class ttExportHelper {
     }
     fwrite($file, "</user_project_binds>\n");
     unset($user_binds);
-    
+
     // Write clients.
     fwrite($file, "<clients>\n");
     foreach ($clients as $client_item) {
@@ -198,15 +198,15 @@ class ttExportHelper {
     }
     fwrite($file, "</custom_field_options>\n");
     unset($custom_field_options);
-    
+
     // Write time log entries.
     fwrite($file, "<log>\n");
     $key = 0;
     foreach ($users as $user_item) {
       $records = ttTimeHelper::getAllRecords($user_item['id']);
       foreach ($records as $record) {
-      	$key++;
-      	$this->logMap[$record['id']] = $key;   
+        $key++;
+        $this->logMap[$record['id']] = $key;
         fwrite($file, "  <log_item id=\"$key\" timestamp=\"".$record['timestamp']."\" user_id=\"".$this->userMap[$record['user_id']]."\" date=\"".$record['date']."\" start=\"".$record['start']."\" finish=\"".$record['finish']."\" duration=\"".($record['start']?"":$record['duration'])."\" client_id=\"".$this->clientMap[$record['client_id']]."\" project_id=\"".$this->projectMap[$record['project_id']]."\" task_id=\"".$this->taskMap[$record['task_id']]."\" invoice_id=\"".$this->invoiceMap[$record['invoice_id']]."\" billable=\"".$record['billable']."\" status=\"".$record['status']."\">\n");
         fwrite($file, "    <comment><![CDATA[".$record['comment']."]]></comment>\n");
         fwrite($file, "  </log_item>\n");
@@ -214,7 +214,7 @@ class ttExportHelper {
     }
     fwrite($file, "</log>\n");
     unset($records);
-    
+
     // Write custom field log.
     $custom_field_log = ttTeamHelper::getCustomFieldLog($user->team_id);
     fwrite($file, "<custom_field_log>\n");
@@ -225,7 +225,7 @@ class ttExportHelper {
     }
     fwrite($file, "</custom_field_log>\n");
     unset($custom_field_log);
-    
+
     // Write expense items.
     $expense_items = ttTeamHelper::getExpenseItems($user->team_id);
     fwrite($file, "<expense_items>\n");
@@ -236,7 +236,7 @@ class ttExportHelper {
     }
     fwrite($file, "</expense_items>\n");
     unset($expense_items);
-        
+
     // Write fav reports.
     fwrite($file, "<fav_reports>\n");
     $fav_reports = ttTeamHelper::getFavReports($user->team_id);
@@ -271,8 +271,6 @@ class ttExportHelper {
         " show_custom_field_1=\"".$fav_report['show_custom_field_1']."\"".
         " group_by=\"".$fav_report['group_by']."\"".
         " show_totals_only=\"".$fav_report['show_totals_only']."\">\n");
-        //" sort_by=\"".$fav_report['sort_by']."\"".
-        //" show_empty_days=\"".$fav_report['show_empty_days']."\">\n");
       fwrite($file, "\t\t<name><![CDATA[".$fav_report["name"]."]]></name>\n");
       fwrite($file, "\t</fav_report>\n");
     }
@@ -284,20 +282,20 @@ class ttExportHelper {
     $this->userMap = array();
     $this->projectMap = array();
     $this->taskMap = array();
-    
+
     fwrite($file, "</pack>\n");
     fclose($file);
-    
+
     if ($compress) {
       $this->fileName = tempnam($dirName, 'tt');
       $this->compress($tmp_file, $this->fileName);
       unlink($tmp_file);
     } else
       $this->fileName = $tmp_file;
-  	
-  	return true;
+
+    return true;
   }
-  
+
   // getFileName - returns file name.
   function getFileName() {
     return $this->fileName;
@@ -305,7 +303,7 @@ class ttExportHelper {
 
   // compress - compresses the content of the $in file into $out file.
   function compress($in, $out) {
-  	// Initial checks of file names and permissions.
+    // Initial checks of file names and permissions.
     if (!file_exists($in) || !is_readable ($in))
       return false;
     if ((!file_exists($out) && !is_writable(dirname($out))) || (file_exists($out) && !is_writable($out)))
