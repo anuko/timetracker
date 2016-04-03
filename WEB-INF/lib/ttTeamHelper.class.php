@@ -768,9 +768,9 @@ class ttTeamHelper {
 
   // The isTeamActive determines if a team is using Time Tracker or abandoned it.
   static function isTeamActive($team_id) {
-  	$users = array();
-  
-  	$mdb2 = getConnection();
+    $users = array();
+
+    $mdb2 = getConnection();
     $sql = "select id from tt_users where team_id = $team_id";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
@@ -782,8 +782,8 @@ class ttTeamHelper {
       return false; // No users in team.
 
     $count = 0;
-  	$ts = date('Y-m-d', strtotime('-2 years')); 
-    $sql = "select count(*) as cnt from tt_log where user_id in ($user_list) and timestamp > '$ts'";  
+    $ts = date('Y-m-d', strtotime('-2 years'));
+    $sql = "select count(*) as cnt from tt_log where user_id in ($user_list) and timestamp > '$ts'";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if ($val = $res->fetchRow()) {
@@ -797,153 +797,141 @@ class ttTeamHelper {
     if ($count <= 5) {
       // We will consider a team inactive if it has 5 or less time entries made more than 1 year ago.
       $count_last_year = 0;
-      $ts = date('Y-m-d', strtotime('-1 year')); 
-      $sql = "select count(*) as cnt from tt_log where user_id in ($user_list) and timestamp > '$ts'";  
+      $ts = date('Y-m-d', strtotime('-1 year'));
+      $sql = "select count(*) as cnt from tt_log where user_id in ($user_list) and timestamp > '$ts'";
       $res = $mdb2->query($sql);
       if (!is_a($res, 'PEAR_Error')) {
         if ($val = $res->fetchRow()) {
           $count_last_year = $val['cnt'];
         }
         if ($count_last_year == 0)
-          return false;  // No time entries for the last year and only a few entries before that...
-      } 
+          return false;  // No time entries for the last year and only a few entries before that.
+      }
     }
     return true;
   }
-  
+
   // The delete function permanently deletes all data for a team.
   static function delete($team_id) {
-  	$mdb2 = getConnection();
-  	
-  	// Delete users.
+    $mdb2 = getConnection();
+
+    // Delete users.
     $sql = "select id from tt_users where team_id = $team_id";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) return false;
     while ($val = $res->fetchRow()) {
       $user_id = $val['id'];
-      if (!ttUserHelper::delete($user_id))
-        return false;
+      if (!ttUserHelper::delete($user_id)) return false;
     }
 
     // Delete tasks.
-    if (!ttTeamHelper::deleteTasks($team_id))
-      return false;
-      
+    if (!ttTeamHelper::deleteTasks($team_id)) return false;
+
     // Delete client to project binds.
     $sql = "delete from tt_client_project_binds where client_id in (select id from tt_clients where team_id = $team_id)";
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error'))
-      return false;
+    if (is_a($affected, 'PEAR_Error')) return false;
 
     // Delete projects.
-  	$sql = "delete from tt_projects where team_id = $team_id";
-  	$affected = $mdb2->exec($sql);
-  	if (is_a($affected, 'PEAR_Error'))
-  	  return false;
+    $sql = "delete from tt_projects where team_id = $team_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
 
-  	// Delete clients.
-  	$sql = "delete from tt_clients where team_id = $team_id";
-  	$affected = $mdb2->exec($sql);
-  	if (is_a($affected, 'PEAR_Error'))
-  	  return false;
-  	  
-   	// Delete invoices.
-  	$sql = "delete from tt_invoices where team_id = $team_id";
-  	$affected = $mdb2->exec($sql);
-  	if (is_a($affected, 'PEAR_Error'))
-  	  return false;
+    // Delete clients.
+    $sql = "delete from tt_clients where team_id = $team_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
 
-  	// Delete custom fields.
-  	if (!ttTeamHelper::deleteCustomFields($team_id))
-  	  return false;
-    
+    // Delete invoices.
+    $sql = "delete from tt_invoices where team_id = $team_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    // Delete custom fields.
+    if (!ttTeamHelper::deleteCustomFields($team_id)) return false;
+
     // Delete team.
     $sql = "delete from tt_teams where id = $team_id";
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error'))
-      return false;
+    if (is_a($affected, 'PEAR_Error')) return false;
 
     return true;
   }
 
   // The markTasksDeleted deletes task binds and marks the tasks as deleted for a team.
   static function markTasksDeleted($team_id) {
-  	$mdb2 = getConnection();
-  	$sql = "select id from tt_tasks where team_id = $team_id";
-  	$res = $mdb2->query($sql);
-  	if (is_a($res, 'PEAR_Error')) return false;
-  	while ($val = $res->fetchRow()) {
-  	  
-  	  // Delete task binds.
-  	  $task_id = $val['id'];
-  	  $sql = "delete from tt_project_task_binds where task_id = $task_id";
-  	  $affected = $mdb2->exec($sql);
-  	  if (is_a($affected, 'PEAR_Error'))
-  	    return false;
-  	  
-  	  // Mark task as deleted.
-  	  $sql = "update tt_tasks set status = NULL where id = $task_id";
-  	  $affected = $mdb2->exec($sql);
-  	  if (is_a($affected, 'PEAR_Error'))
-  	    return false;  	  
-  	}
-  	
-  	return true;
+    $mdb2 = getConnection();
+    $sql = "select id from tt_tasks where team_id = $team_id";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) return false;
+
+    while ($val = $res->fetchRow()) {
+
+      // Delete task binds.
+      $task_id = $val['id'];
+      $sql = "delete from tt_project_task_binds where task_id = $task_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) return false;
+
+      // Mark task as deleted.
+      $sql = "update tt_tasks set status = NULL where id = $task_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) return false;
+    }
+
+    return true;
   }
-  
+
   // The deleteTasks deletes all tasks and task binds for an inactive team.
   static function deleteTasks($team_id) {
-  	$mdb2 = getConnection();
-  	$sql = "select id from tt_tasks where team_id = $team_id";
-  	$res = $mdb2->query($sql);
-  	if (is_a($res, 'PEAR_Error')) return false;
-  	while ($val = $res->fetchRow()) {
-  	  
-  	  // Delete task binds.
-  	  $task_id = $val['id'];
-  	  $sql = "delete from tt_project_task_binds where task_id = $task_id";
-  	  $affected = $mdb2->exec($sql);
-  	  if (is_a($affected, 'PEAR_Error'))
-  	    return false;
-  	  
-  	  // Delete task.
-  	  $sql = "delete from tt_tasks where id = $task_id";
-  	  $affected = $mdb2->exec($sql);
-  	  if (is_a($affected, 'PEAR_Error'))
-  	    return false;   	  
-  	}
-  	
-  	return true;
+    $mdb2 = getConnection();
+    $sql = "select id from tt_tasks where team_id = $team_id";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) return false;
+
+    while ($val = $res->fetchRow()) {
+
+      // Delete task binds.
+      $task_id = $val['id'];
+      $sql = "delete from tt_project_task_binds where task_id = $task_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) return false;
+
+      // Delete task.
+      $sql = "delete from tt_tasks where id = $task_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) return false;
+    }
+
+    return true;
   }
-  
+
   // The deleteCustomFields cleans up tt_custom_field_log, tt_custom_field_options and tt_custom_fields tables for an inactive team.
   static function deleteCustomFields($team_id) {
-  	$mdb2 = getConnection();
-  	$sql = "select id from tt_custom_fields where team_id = $team_id";
-  	$res = $mdb2->query($sql);
-  	if (is_a($res, 'PEAR_Error')) return false;
-  	while ($val = $res->fetchRow()) {
-  	  $field_id = $val['id'];
-  	  
-  	  // Clean up tt_custom_field_log.
- 	  $sql = "delete from tt_custom_field_log where field_id = $field_id";
-  	  $affected = $mdb2->exec($sql);
-  	  if (is_a($affected, 'PEAR_Error'))
-  	    return false;
-  	  
-  	  // Clean up tt_custom_field_options.
-  	  $sql = "delete from tt_custom_field_options where field_id = $field_id";
-  	  $affected = $mdb2->exec($sql);
-  	  if (is_a($affected, 'PEAR_Error'))
-  	    return false;
-  	  
-  	  // Delete custom field.
-  	  $sql = "delete from tt_custom_fields where id = $field_id";
-  	  $affected = $mdb2->exec($sql);
-  	  if (is_a($affected, 'PEAR_Error'))
-  	    return false; 	  
-  	}
-  	
-  	return true;
+    $mdb2 = getConnection();
+    $sql = "select id from tt_custom_fields where team_id = $team_id";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) return false;
+
+    while ($val = $res->fetchRow()) {
+      $field_id = $val['id'];
+
+      // Clean up tt_custom_field_log.
+      $sql = "delete from tt_custom_field_log where field_id = $field_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) return false;
+
+      // Clean up tt_custom_field_options.
+      $sql = "delete from tt_custom_field_options where field_id = $field_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) return false;
+
+      // Delete custom field.
+      $sql = "delete from tt_custom_fields where id = $field_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) return false;
+    }
+
+    return true;
   }
 }
