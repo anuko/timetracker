@@ -50,7 +50,7 @@ if ($request->isPost()) {
     if (ttTeamHelper::update($user->team_id, array(
       'name' => $user->team,
       'lock_spec' => $cl_lock_spec))) {
-      header('Location: time.php');
+      header('Location: profile_edit.php');
       exit();
     } else {
       $err->add($i18n->getKey('error.db'));

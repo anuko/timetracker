@@ -517,6 +517,7 @@ if ($_POST) {
     setChange("DROP INDEX name_idx on tt_invoices");
     setChange("create unique index name_idx on tt_invoices(team_id, name, status)");
     setChange("ALTER TABLE tt_teams ADD COLUMN lock_spec varchar(255) default NULL");
+    setChange("ALTER TABLE tt_teams DROP locktime");
   }
 
   // The update_clients function updates projects field in tt_clients table.
