@@ -88,7 +88,8 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 // 'error.no_login' => 'No user with this login.',
-// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.no_teams' => 'Sua base de dados está vazia. Entre como admin e crie uma organização nova.',
+// TODO: translate the following:
 // 'error.upload' => 'File upload error.',
 'error.range_locked' => 'Período está bloqueado.',
 'error.mail_send' => 'Erro enviando o e-mail.',
@@ -137,7 +138,7 @@ $i18n_key_words = array(
 'label.manager_login' => 'Login do gerente',
 // TODO: translate the following:
 // 'label.person_name' => 'Name',
-// 'label.thing_name' => 'Name',
+'label.thing_name' => 'Nome',
 'label.login' => 'Login',
 'label.password' => 'Senha',
 'label.confirm_password' => 'Confirme a senha',
@@ -170,17 +171,20 @@ $i18n_key_words = array(
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
-// 'label.edit' => 'Edit',
-// 'label.delete' => 'Delete',
+'label.edit' => 'Editar',
+'label.delete' => 'Apagar',
+// TODO: translate the following:
 // 'label.configure' => 'Configure',
 // 'label.select_all' => 'Select all',
 // 'label.select_none' => 'Deselect all',
-// 'label.id' => 'ID',
-// 'label.language' => 'Language',
+'label.id' => 'ID',
+'label.language' => 'Idioma',
+// TODO: translate the following:
 // 'label.decimal_mark' => 'Decimal mark',
-// 'label.date_format' => 'Date format',
-// 'label.time_format' => 'Time format',
-// 'label.week_start' => 'First day of week',
+'label.date_format' => 'Formato da data',
+'label.time_format' => 'Formato da hora',
+'label.week_start' => 'Primeiro dia da semana',
+// TODO: translate the following:
 // 'label.comment' => 'Comment',
 // 'label.status' => 'Status',
 // 'label.tax' => 'Tax',
@@ -211,8 +215,8 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => 'Login',
+'title.teams' => 'Organizações',
 // TODO: translate the following:
-// 'title.teams' => 'Teams',
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
@@ -256,7 +260,8 @@ $i18n_key_words = array(
 // 'title.delete_notification' => 'Deleting Notification',
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
-// 'title.options' => 'Options',
+'title.options' => 'Opções',
+// TODO: translate the following:
 // 'title.profile' => 'Profile',
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
@@ -288,7 +293,8 @@ $i18n_key_words = array(
 // 'dropdown.clients' => 'clients',
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
-// 'dropdown.status_active' => 'active',
+'dropdown.status_active' => 'ativo',
+// TODO: translate the following:
 // 'dropdown.status_inactive' => 'inactive',
 // 'dropdown.delete'=>'delete',
 // 'dropdown.do_not_delete'=>'do not delete',
@@ -436,26 +442,8 @@ $i18n_key_words = array(
 
 
 /*
-// Some of the string below could propably be resued above... Working on it...
+// Some of the strings could propably be reused above... Working on it...
 
-"form.admin.change_pass" => 'alterar a senha do usuário administrador',
-"form.admin.profile.title" => 'organizações',
-"form.admin.profile.noprofiles" => 'sua base de dados está vazia. Entre como admin e crie uma organização nova.',
-"form.admin.profile.comment" => 'apagar organização',
-"form.admin.profile.th.id" => 'id',
-"form.admin.profile.th.name" => 'nome',
-"form.admin.profile.th.edit" => 'editar',
-"form.admin.profile.th.del" => 'apagar',
-"form.admin.profile.th.active" => 'ativo',
-"form.admin.lock.period" => 'bloquear período em dias',
-"form.admin.options" => 'opções',
-"form.admin.lang_default" => 'idioma padrão',
-"form.admin.custom_date_format" => "formato da data",
-"form.admin.custom_time_format" => "formato da hora",
-"form.admin.start_week" => "primeiro dia da semana",
-// my time form attributes
-"form.mytime.title" => 'adicionar período',
-// Note to translators: the strings below must be translated
 "form.mytime.edit_title" => 'editando entrada de hora',
 "form.mytime.del_str" => 'apagando entrada de hora',
 // "form.mytime.time_form" => ' (hh:mm)',
