@@ -143,8 +143,8 @@ $i18n_key_words = array(
 'label.password' => 'Senha',
 'label.confirm_password' => 'Confirme a senha',
 'label.email' => 'E-mail',
+'label.date' => 'Data',
 // TODO: translate the following:
-// 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',
@@ -159,9 +159,9 @@ $i18n_key_words = array(
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
-// 'label.start' => 'Start',
-// 'label.finish' => 'Finish',
-// 'label.duration' => 'Duration',
+'label.start' => 'Início',
+'label.finish' => 'Fim',
+'label.duration' => 'Duração',
 // 'label.note' => 'Note',
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
@@ -184,8 +184,8 @@ $i18n_key_words = array(
 'label.date_format' => 'Formato da data',
 'label.time_format' => 'Formato da hora',
 'label.week_start' => 'Primeiro dia da semana',
+'label.comment' => 'Anotação',
 // TODO: translate the following:
-// 'label.comment' => 'Comment',
 // 'label.status' => 'Status',
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
@@ -223,8 +223,9 @@ $i18n_key_words = array(
 // 'title.reset_password' => 'Resetting Password',
 // 'title.change_password' => 'Changing Password',
 // 'title.time' => 'Time',
-// 'title.edit_time_record' => 'Editing Time Record',
-// 'title.delete_time_record' => 'Deleting Time Record',
+'title.edit_time_record' => 'Editando entrada de hora',
+'title.delete_time_record' => 'Apagando entrada de hora',
+// TODO: translate the following:
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -243,9 +244,10 @@ $i18n_key_words = array(
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
 // 'title.users' => 'Users',
-// 'title.add_user' => 'Adding User',
-// 'title.edit_user' => 'Editing User',
-// 'title.delete_user' => 'Deleting User',
+'title.add_user' => 'Adicionando usuário',
+'title.edit_user' => 'Editando usuário',
+'title.delete_user' => 'Apagando usuário',
+// TODO: translate the following:
 // 'title.clients' => 'Clients',
 // 'title.add_client' => 'Adding Client',
 // 'title.edit_client' => 'Editing Client',
@@ -343,10 +345,12 @@ $i18n_key_words = array(
 // 'form.reports.show_fields' => 'Show fields',
 // 'form.reports.group_by' => 'Group by',
 // 'form.reports.group_by_no' => '--- no grouping ---',
-// 'form.reports.group_by_date' => 'date',
+'form.reports.group_by_date' => 'data',
+// TODO: translate the following:
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
-// 'form.reports.group_by_project' => 'project',
+'form.reports.group_by_project' => 'projeto',
+// TODO: translate the following:
 // 'form.reports.group_by_task' => 'task',
 // 'form.reports.totals_only' => 'Totals only',
 
@@ -444,29 +448,11 @@ $i18n_key_words = array(
 /*
 // Some of the strings could propably be reused above... Working on it...
 
-"form.mytime.edit_title" => 'editando entrada de hora',
-"form.mytime.del_str" => 'apagando entrada de hora',
-// "form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.date" => 'data',
-"form.mytime.project" => 'projeto',
-"form.mytime.activity" => 'atividade',
-"form.mytime.start" => 'início',
-"form.mytime.finish" => 'fim',
-"form.mytime.duration" => 'duração',
-"form.mytime.note" => 'anotação',
-// Note to translators: the string below must be translated
-"form.mytime.behalf" => 'trabalho diário de',
 "form.mytime.daily" => 'trabalho diário',
 "form.mytime.total" => 'horas totais: ',
 "form.mytime.th.project" => 'projeto',
-"form.mytime.th.activity" => 'atividade',
-"form.mytime.th.start" => 'início',
-"form.mytime.th.finish" => 'fim',
-"form.mytime.th.duration" => 'duração',
-"form.mytime.th.note" => 'anotação',
-"form.mytime.th.edit" => 'editar',
-"form.mytime.th.delete" => 'apagar',
 "form.mytime.del_yes" => 'o período registrado foi apagado com sucesso',
+
 // Note to translators: the strings below are missing and must be added and translated 
 "form.mytime.no_finished_rec" => 'esta entrada foi salva somente com hora de início. não é um erro. saia se você precisar.',
 "form.mytime.billable" => 'faturável',
@@ -481,18 +467,11 @@ $i18n_key_words = array(
 "form.profile.login" => 'login',
 // Note to translators: the strings below are missing and must be added and translated 
 "form.profile.showchart" => 'mostrar gráfico de torta',
-"form.profile.lang" => 'idioma',
-"form.profile.custom_date_format" => "formato da data",
-"form.profile.custom_time_format" => "formato da hora",
-"form.profile.default_format" => "(padrão)",
-"form.profile.start_week" => "primeiro dia da semana",
+
 // people form attributes
 "form.people.ppl_str" => 'pessoas',
-"form.people.createu_str" => 'adicionar novo usuário',
-"form.people.edit_str" => 'editando usuário',
-"form.people.del_str" => 'apagando usuário',
 "form.people.th.name" => 'nome',
-// Note to translators: "form.people.th.login" => 'e-mail', // email has been changed to login
+
 "form.people.th.role" => 'papel',
 "form.people.th.edit" => 'editar',
 "form.people.th.del" => 'apagar',
