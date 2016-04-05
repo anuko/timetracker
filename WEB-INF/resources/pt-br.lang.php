@@ -1,4 +1,3 @@
-<?php
 // +----------------------------------------------------------------------+
 // | Anuko Time Tracker
 // +----------------------------------------------------------------------+
@@ -83,7 +82,7 @@ $i18n_key_words = array(
 'error.invoice_exists' => 'Já existe fatura com este número.',
 'error.no_invoiceable_items' => 'Não há items faturáveis.',
 'error.no_login' => 'Não há usuário com este login.',
-'error.no_teams' => 'Sua base de dados está vazia. Entre como admin e crie uma organização nova.',
+'error.no_teams' => 'Sua base de dados está vazia. Entre como admin e crie uma equipe nova.',
 'error.upload' => 'Erro no envio do arquivo.',
 'error.range_locked' => 'Período está bloqueado.',
 'error.mail_send' => 'Erro enviando o e-mail.',
@@ -111,9 +110,9 @@ $i18n_key_words = array(
 'button.reset_password' => 'Resetar senha',
 'button.send' => 'Enviar',
 'button.send_by_email' => 'Enviar por e-mail',
-'button.create_team' => 'Criar organização',
-'button.export' => 'Exportar organização',
-'button.import' => 'Importar organização',
+'button.create_team' => 'Criar equipe',
+'button.export' => 'Exportar equipe',
+'button.import' => 'Importar equipe',
 'button.close' => 'Fechar',
 'button.stop' => 'Parar',
 
@@ -194,36 +193,33 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => 'Login',
-'title.teams' => 'Organizações',
-// TODO: translate the following:
-// 'title.create_team' => 'Creating Team',
-// 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
-// 'title.reset_password' => 'Resetting Password',
-// 'title.change_password' => 'Changing Password',
-// 'title.time' => 'Time',
+'title.teams' => 'Equipes',
+'title.create_team' => 'Criando equipe',
+'title.edit_team' => 'Editando equipe',
+'title.delete_team' => 'Apagando equipe',
+'title.reset_password' => 'Resetando a senha',
+'title.change_password' => 'Alterando a senha',
+'title.time' => 'Tempo',
 'title.edit_time_record' => 'Editando entrada de hora',
 'title.delete_time_record' => 'Apagando entrada de hora',
-// TODO: translate the following:
-// 'title.expenses' => 'Expenses',
-// 'title.edit_expense' => 'Editing Expense Item',
-// 'title.delete_expense' => 'Deleting Expense Item',
+'title.expenses' => 'Gastos',
+'title.edit_expense' => 'Editando item de gasto',
+'title.delete_expense' => 'Apagando item de gasto',
 'title.reports' => 'Relatórios',
-// 'title.report' => 'Report',
-// 'title.send_report' => 'Sending Report',
+'title.report' => 'Report',
+'title.send_report' => 'Enviando relatório',
 'title.invoice' => 'Fatura',
-// 'title.send_invoice' => 'Sending Invoice',
-// 'title.charts' => 'Charts',
+'title.send_invoice' => 'Enviando fatura',
+'title.charts' => 'Gráficos',
 'title.projects' => 'Projetos',
 'title.add_project' => 'Adicionando projeto',
 'title.edit_project' => 'Editando projeto',
 'title.delete_project' => 'Apagando projeto',
-// TODO: translate the following:
-// 'title.tasks' => 'Tasks',
-// 'title.add_task' => 'Adding Task',
-// 'title.edit_task' => 'Editing Task',
-// 'title.delete_task' => 'Deleting Task',
-// 'title.users' => 'Users',
+'title.tasks' => 'Tarefas',
+'title.add_task' => 'Adicionando tarefa',
+'title.edit_task' => 'Editando tarefa',
+'title.delete_task' => 'Apagando tarefa',
+'title.users' => 'Usuários',
 'title.add_user' => 'Adicionando usuário',
 'title.edit_user' => 'Editando usuário',
 'title.delete_user' => 'Apagando usuário',
@@ -231,31 +227,27 @@ $i18n_key_words = array(
 'title.add_client' => 'Adicionando cliente',
 'title.edit_client' => 'Editando cliente',
 'title.delete_client' => 'Apagando cliente',
-// TODO: translate the following:
-// 'title.invoices' => 'Invoices',
-// 'title.add_invoice' => 'Adding Invoice',
-// 'title.view_invoice' => 'Viewing Invoice',
-// 'title.delete_invoice' => 'Deleting Invoice',
-// 'title.notifications' => 'Notifications',
-// 'title.add_notification' => 'Adding Notification',
-// 'title.edit_notification' => 'Editing Notification',
-// 'title.delete_notification' => 'Deleting Notification',
-// 'title.export' => 'Exporting Team Data',
-// 'title.import' => 'Importing Team Data',
+'title.invoices' => 'Faturas',
+'title.add_invoice' => 'Adicionando fatura',
+'title.view_invoice' => 'Vendo fatura',
+'title.delete_invoice' => 'Apagando fatura',
+'title.notifications' => 'Notificações',
+'title.add_notification' => 'Adicionando notificação',
+'title.edit_notification' => 'Editando notificação',
+'title.delete_notification' => 'Apagando notificação',
+'title.export' => 'Exportando dados de equipe',
+'title.import' => 'Importando dados de equipe',
 'title.options' => 'Opções',
 'title.profile' => 'Perfil',
-// TODO: translate the following:
-// 'title.cf_custom_fields' => 'Custom Fields',
-// 'title.cf_add_custom_field' => 'Adding Custom Field',
-// 'title.cf_edit_custom_field' => 'Editing Custom Field',
-// 'title.cf_delete_custom_field' => 'Deleting Custom Field',
-// 'title.cf_dropdown_options' => 'Dropdown Options',
-// 'title.cf_add_dropdown_option' => 'Adding Option',
-// 'title.cf_edit_dropdown_option' => 'Editing Option',
-// 'title.cf_delete_dropdown_option' => 'Deleting Option',
-// NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
-// It is also a name for the Locking plugin on the Team profile page.
-// 'title.locking' => 'Locking',
+'title.cf_custom_fields' => 'Campos personalizados',
+'title.cf_add_custom_field' => 'Adicionando campo personalizado',
+'title.cf_edit_custom_field' => 'Editando campo personalizado',
+'title.cf_delete_custom_field' => 'Apagando campo personalizado',
+'title.cf_dropdown_options' => 'Opções da lista suspensa',
+'title.cf_add_dropdown_option' => 'Adicionando opção',
+'title.cf_edit_dropdown_option' => 'Editando opção',
+'title.cf_delete_dropdown_option' => 'Apagando opção',
+'title.locking' => 'Bloquear',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -267,18 +259,16 @@ $i18n_key_words = array(
 'dropdown.this_month' => 'este mês',
 'dropdown.last_month' => 'último mês',
 'dropdown.this_year' => 'este ano',
-// TODO: translate the following:
-// 'dropdown.all_time' => 'all time',
-// 'dropdown.projects' => 'projects',
-// 'dropdown.tasks' => 'tasks',
-// 'dropdown.clients' => 'clients',
+'dropdown.all_time' => 'todas as datas',
+'dropdown.projects' => 'projetos',
+'dropdown.tasks' => 'tarefas',
+'dropdown.clients' => 'clientes',
 'dropdown.select' => '--- selecione ---',
 'dropdown.select_invoice' => '--- selecione fatura ---',
 'dropdown.status_active' => 'ativo',
-// TODO: translate the following:
-// 'dropdown.status_inactive' => 'inactive',
-// 'dropdown.delete'=>'delete',
-// 'dropdown.do_not_delete'=>'do not delete',
+'dropdown.status_inactive' => 'inativo',
+'dropdown.delete'=>'apagar',
+'dropdown.do_not_delete'=>'não apagar',
 
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
@@ -291,17 +281,15 @@ $i18n_key_words = array(
 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> é um sistema, simples, de fácil uso, de código aberto, de rastreamento do tempo.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
-// TODO: translate the following:
-// 'form.reset_password.message' => 'Password reset request sent by email.',
-// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
+'form.reset_password.message' => 'Pedido para resetar a senha enviado por e-mail.',
+'form.reset_password.email_subject' => 'Pedido de alteração de senha no Anuko Time Tracker',
 'form.reset_password.email_body' => "Prezado usuário,\n\nAlguém, possivelmente você, solicitou o reset da sua senha do Anuko Time Tracker. Entre nete link para resetar a sua senha.\n\n%s\n\nAnuko Time Tracker é um sistema, simples, de fácil uso, de código abertois, de rastreamento do tempo. Visite https://www.anuko.com para mais informações.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Entre com a nova senha e clique em Salvar.',
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
-// TODO: translate the following:
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.duration_format' => '(hh:mm ou 0.0h)',
 'form.time.billable' => 'Faturável',
 'form.time.uncompleted' => 'Incompleta',
 
@@ -314,8 +302,8 @@ $i18n_key_words = array(
 'form.reports.include_records' => 'Incluir entradas',
 'form.reports.include_billable' => 'faturável',
 'form.reports.include_not_billable' => 'não faturável',
-// 'form.reports.include_invoiced' => 'invoiced',
-// 'form.reports.include_not_invoiced' => 'not invoiced',
+'form.reports.include_invoiced' => 'faturado',
+'form.reports.include_not_invoiced' => 'não faturado',
 'form.reports.select_period' => 'Selecione o período de tempo',
 'form.reports.set_period' => 'ou selecionar datas',
 'form.reports.show_fields' => 'Exibir campos',
@@ -323,10 +311,9 @@ $i18n_key_words = array(
 'form.reports.group_by_no' => '--- sem agrupar ---',
 'form.reports.group_by_date' => 'data',
 'form.reports.group_by_user' => 'usuário',
-// 'form.reports.group_by_client' => 'client',
+'form.reports.group_by_client' => 'cliente',
 'form.reports.group_by_project' => 'projeto',
-// TODO: translate the following:
-// 'form.reports.group_by_task' => 'task',
+'form.reports.group_by_task' => 'tarefa',
 'form.reports.totals_only' => 'Somente totais',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
@@ -337,79 +324,72 @@ $i18n_key_words = array(
 // (you can get to this form after generating a report).
 'form.invoice.number' => 'Número da fatura',
 'form.invoice.person' => 'Pessoa',
-// 'form.invoice.invoice_to_delete' => 'Invoice to delete',
-// 'form.invoice.invoice_entries' => 'Invoice entries',
+'form.invoice.invoice_to_delete' => 'Fatura a ser apagada',
+'form.invoice.invoice_entries' => 'Entradas de fatura',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
-// TODO: translate the following:
-// 'form.charts.interval' => 'Interval',
-// 'form.charts.chart' => 'Chart',
+'form.charts.interval' => 'Intervalo',
+'form.charts.chart' => 'Gráfico',
 
 // Projects form. See example at https://timetracker.anuko.com/projects.php
-// TODO: translate the following:
-// 'form.projects.active_projects' => 'Active Projects',
-// 'form.projects.inactive_projects' => 'Inactive Projects',
+'form.projects.active_projects' => 'Projetos ativos',
+'form.projects.inactive_projects' => 'Projetos inativos',
 
 // Tasks form. See example at https://timetracker.anuko.com/tasks.php
-// TODO: translate the following:
-// 'form.tasks.active_tasks' => 'Active Tasks',
-// 'form.tasks.inactive_tasks' => 'Inactive Tasks',
+'form.tasks.active_tasks' => 'Tarefas ativas',
+'form.tasks.inactive_tasks' => 'Tarefas inativas',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
-// TODO: translate the following:
-// 'form.users.active_users' => 'Active Users',
-// 'form.users.inactive_users' => 'Inactive Users',
+'form.users.active_users' => 'Usuários ativos',
+'form.users.inactive_users' => 'Usuários inativos',
 'form.users.role' => 'Papel',
 'form.users.manager' => 'Gerente',
 'form.users.comanager' => 'Coordenador',
 'form.users.rate' => 'Honorário',
-// 'form.users.default_rate' => 'Default hourly rate',
+'form.users.default_rate' => 'Honorário padrão por hora',
 
 // Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-// TODO: translate the following:
-// 'form.client.client_to_delete' => 'Client to delete',
-// 'form.client.client_entries' => 'Client entries',
+'form.client.client_to_delete' => 'Cliente a ser apagado',
+'form.client.client_entries' => 'Entradas de cliente',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
-// TODO: translate the following:
-// 'form.clients.active_clients' => 'Active Clients',
-// 'form.clients.inactive_clients' => 'Inactive Clients',
+'form.clients.active_clients' => 'Clientes ativos',
+'form.clients.inactive_clients' => 'Clientes inativos',
 
 // Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
-'form.export.hint' => 'Você pode exportar todos os dados da organização para um arquivo xml. Isto pode ser útil se você estiver migrando os dados para um servidor próprio.',
+'form.export.hint' => 'Você pode exportar todos os dados da equipe para um arquivo xml. Isto pode ser útil se você estiver migrando os dados para um servidor próprio.',
 'form.export.compression' => 'Compressão',
 'form.export.compression_none' => 'nenhuma',
 'form.export.compression_bzip' => 'bzip',
 
 // Strings for Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-'form.import.hint' => 'Importar dados de organização de um arquivo xml.',
+'form.import.hint' => 'Importar dados de equipe de um arquivo xml.',
 'form.import.file' => 'Selecionar arquivo',
 'form.import.success' => 'Importação realizada com sucesso.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' =>  'Crie uma nova organização fazendo uma nova conta de gerente.<br>você também pode importar os dados de um arquivo xml de outro servidor Anuko Time Tracker (não havendo colisão de usuários).',
+'form.teams.hint' =>  'Crie uma nova equipe fazendo uma nova conta de gerente.<br>você também pode importar os dados de um arquivo xml de outro servidor Anuko Time Tracker (não havendo colisão de usuários).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-// TODO: translate the following:
-// 'form.profile.12_hours' => '12 hours',
-// 'form.profile.24_hours' => '24 hours',
-// 'form.profile.tracking_mode' => 'Tracking mode',
-// 'form.profile.mode_time' => 'time',
-// 'form.profile.mode_projects' => 'projects',
-// 'form.profile.mode_projects_and_tasks' => 'projects and tasks',
-// 'form.profile.record_type' => 'Record type',
-// 'form.profile.type_all' => 'all',
-// 'form.profile.type_start_finish' => 'start and finish',
-// 'form.profile.type_duration' => 'duration',
-// 'form.profile.plugins' => 'Plugins',
+'form.profile.12_hours' => '12 horas',
+'form.profile.24_hours' => '24 horas',
+'form.profile.tracking_mode' => 'Modo de acompanhamento',
+'form.profile.mode_time' => 'tempo',
+'form.profile.mode_projects' => 'projetos',
+'form.profile.mode_projects_and_tasks' => 'projetos e tarefas',
+'form.profile.record_type' => 'Tipo de entrada',
+'form.profile.type_all' => 'todos',
+'form.profile.type_start_finish' => 'início e fim',
+'form.profile.type_duration' => 'duração',
+'form.profile.plugins' => 'Plugins',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'De',
 'form.mail.to' => 'Para',
 'form.mail.cc' => 'Cc',
 'form.mail.subject' => 'Assunto',
-// 'form.mail.report_subject' => 'Time Tracker Report',
+'form.mail.report_subject' => 'Relatório do Time Tracker',
 'form.mail.footer' => 'Anuko Time Tracker é um sistema, simples, de fácil uso, de código aberto,<br>de rastreamento do tempo. Visite <a href="https://www.anuko.com">www.anuko.com</a> para mais informações.',
-// 'form.mail.report_sent' => 'Report sent.',
+'form.mail.report_sent' => 'Relatório enviado.',
 'form.mail.invoice_sent' => 'Fatura enviada.',
 );
