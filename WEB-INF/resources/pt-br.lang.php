@@ -61,7 +61,7 @@ $i18n_key_words = array(
 'footer.contribute_msg' => 'Você pode contribuir com o Time Tracker de várias maneiras.',
 'footer.credits' => 'Créditos',
 'footer.license' => 'Licença',
-'footer.improve' => 'Contribuir',
+'footer.improve' => 'Contribua',
 
 // Error messages.
 'error.access_denied' => 'Acesso negado.',
@@ -89,7 +89,7 @@ $i18n_key_words = array(
 'error.mail_send' => 'Erro enviando o e-mail.',
 'error.no_email' => 'Não há e-mail associado a este login.',
 'error.uncompleted_exists' => 'Entrada incompleta existente. Feche ou remova-a.',
-'error.goto_uncompleted' => 'Ir até entrada incompleta.',
+'error.goto_uncompleted' => 'Ir até a entrada incompleta.',
 'error.overlap' => 'O intervalo se sobrepõe com entradas já existentes.',
 'error.future_date' => 'Data é no futuro.',
 
@@ -268,8 +268,8 @@ $i18n_key_words = array(
 'dropdown.select_invoice' => '--- selecione fatura ---',
 'dropdown.status_active' => 'ativo',
 'dropdown.status_inactive' => 'inativo',
-'dropdown.delete'=>'apagar',
-'dropdown.do_not_delete'=>'não apagar',
+'dropdown.delete' => 'apagar',
+'dropdown.do_not_delete' => 'não apagar',
 
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
