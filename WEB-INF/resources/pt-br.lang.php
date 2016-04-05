@@ -41,10 +41,9 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => 'Login',
 'menu.logout' => 'Logout',
-// TODO: Translate the following:
-// 'menu.forum' => 'Forum',
+'menu.forum' => 'Fórum',
 'menu.help' => 'Ajuda',
-'menu.create_team' => 'Criar organização', // TODO: is this good? An organization may have multiple teams in TT.
+'menu.create_team' => 'Criar equipe',
 'menu.profile' => 'Perfil',
 'menu.time' => 'Tempo',
 'menu.expenses' => 'Gastos',
@@ -53,7 +52,7 @@ $i18n_key_words = array(
 'menu.projects' => 'Projetos',
 'menu.tasks' => 'Tarefas',
 'menu.users' => 'Usuários',
-'menu.teams' => 'Organização',
+'menu.teams' => 'Equipes',
 'menu.export' => 'Exportar',
 'menu.clients' => 'Clientes',
 'menu.options' => 'Opções',
@@ -73,50 +72,40 @@ $i18n_key_words = array(
 'error.not_equal' => 'Campo "{0}" é diferente do campo "{1}".',
 'error.interval' => 'Intervalo incorreto.',
 'error.project' => 'Selecione projeto.',
-// TODO: translate the following:
-// 'error.task' => 'Select task.',
+'error.task' => 'Selecione tarefa.',
 'error.client' => 'Selecione cliente.',
-// TODO: translate the following:
-// 'error.report' => 'Select report.',
+'error.report' => 'Selecione relatório.',
 'error.auth' => 'Usuário ou senha incorretos.',
 'error.user_exists' => 'Já existe usuário com este login.',
 'error.project_exists' => 'Já existe projeto com este nome.',
-// TODO: translate the following:
-// 'error.task_exists' => 'Task with this name already exists.',
+'error.task_exists' => 'Já existe tarefa com este nome.',
 'error.client_exists' => 'Já existe cliente com este nome.',
-// TODO: translate the following:
-// 'error.invoice_exists' => 'Invoice with this number already exists.',
-// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
-// 'error.no_login' => 'No user with this login.',
+'error.invoice_exists' => 'Já existe fatura com este número.',
+'error.no_invoiceable_items' => 'Não há items faturáveis.',
+'error.no_login' => 'Não há usuário com este login.',
 'error.no_teams' => 'Sua base de dados está vazia. Entre como admin e crie uma organização nova.',
-// TODO: translate the following:
-// 'error.upload' => 'File upload error.',
+'error.upload' => 'Erro no envio do arquivo.',
 'error.range_locked' => 'Período está bloqueado.',
 'error.mail_send' => 'Erro enviando o e-mail.',
 'error.no_email' => 'Não há e-mail associado a este login.',
 'error.uncompleted_exists' => 'Entrada incompleta existente. Feche ou remova-a.',
 'error.goto_uncompleted' => 'Ir até entrada incompleta.',
-// TODO: translate the following:
-// 'error.overlap' => 'Time interval overlaps with existing records.',
-// 'error.future_date' => 'Date is in future.',
+'error.overlap' => 'O intervalo se sobrepõe com entradas já existentes.',
+'error.future_date' => 'Data é no futuro.',
 
 // Labels for buttons.
 'button.login' => 'Login',
 'button.now' => 'Agora',
 'button.save' => 'Salvar',
-// TODO: translate the following:
-// 'button.copy' => 'Copy',
+'button.copy' => 'Copiar',
 'button.cancel' => 'Cancelar',
 'button.submit' => 'Enviar',
-// TODO: translate the following:
-// 'button.add_user' => 'Add user',
+'button.add_user' => 'Adicionar usuário',
 'button.add_project' => 'Adicionar projeto',
-// TODO: translate the following:
-// 'button.add_task' => 'Add task',
+'button.add_task' => 'Adicionar tarefa',
 'button.add_client' => 'Adicionar cliente',
-// TODO: translate the following:
-// 'button.add_invoice' => 'Add invoice',
-// 'button.add_option' => 'Add option',
+'button.add_invoice' => 'Adicionar fatura',
+'button.add_option' => 'Adicionar opção',
 'button.add' => 'Adicionar',
 'button.generate' => 'Criar',
 'button.reset_password' => 'Resetar senha',
@@ -126,13 +115,11 @@ $i18n_key_words = array(
 'button.export' => 'Exportar organização',
 'button.import' => 'Importar organização',
 'button.close' => 'Fechar',
-// TODO: translate the following:
-// 'button.stop' => 'Stop',
+'button.stop' => 'Parar',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-'label.team_name' => 'Nome da organização',
-// TODO: translate the following:
-// 'label.address' => 'Address',
+'label.team_name' => 'Nome da equipe',
+'label.address' => 'Endereço',
 'label.currency' => 'Moeda',
 'label.manager_name' => 'Nome do gerente',
 'label.manager_login' => 'Login do gerente',
@@ -146,59 +133,48 @@ $i18n_key_words = array(
 'label.start_date' => 'Data inicial',
 'label.end_date' => 'Data final',
 'label.user' => 'Usuário',
-// TODO: translate the following:
-// 'label.users' => 'Users',
+'label.users' => 'Usuários',
 'label.client' => 'Cliente',
-// TODO: translate the following:
-// 'label.clients' => 'Clients',
-// 'label.option' => 'Option',
+'label.clients' => 'Clientes',
+'label.option' => 'Opção',
 'label.invoice' => 'Fatura',
 'label.project' => 'Projeto',
 'label.projects' => 'Projetos',
-// TODO: translate the following:
-// 'label.task' => 'Task',
-// 'label.tasks' => 'Tasks',
-// 'label.description' => 'Description',
+'label.task' => 'Tarefa',
+'label.tasks' => 'Tarefas',
+'label.description' => 'Descrição',
 'label.start' => 'Início',
 'label.finish' => 'Fim',
 'label.duration' => 'Duração',
 'label.note' => 'Anotação',
-// TODO: translate the following:
-// 'label.item' => 'Item',
-// 'label.cost' => 'Cost',
+'label.item' => 'Item',
+'label.cost' => 'Custo',
 'label.week_total' => 'Total semanal',
-// TODO: translate the following:
-// 'label.day_total' => 'Day total',
+'label.day_total' => 'Total diário',
 'label.today' => 'Hoje',
-// TODO: translate the following:
-// 'label.total_hours' => 'Total hours',
-// 'label.total_cost' => 'Total cost',
-// 'label.view' => 'View',
+'label.total_hours' => 'Total de horas',
+'label.total_cost' => 'Custo total',
+'label.view' => 'Ver',
 'label.edit' => 'Editar',
 'label.delete' => 'Apagar',
-// TODO: translate the following:
-// 'label.configure' => 'Configure',
+'label.configure' => 'Configurar',
 'label.select_all' => 'Selecionar todos',
 'label.select_none' => 'Desmarcar todos',
 'label.id' => 'ID',
 'label.language' => 'Idioma',
-// TODO: translate the following:
-// 'label.decimal_mark' => 'Decimal mark',
+'label.decimal_mark' => 'Ponto decimal',
 'label.date_format' => 'Formato da data',
 'label.time_format' => 'Formato da hora',
 'label.week_start' => 'Primeiro dia da semana',
 'label.comment' => 'Anotação',
 'label.status' => 'Status',
-// TODO: translate the following:
-// 'label.tax' => 'Tax', // This means "value added tax (VAT)", or "general sales tax (GST)" - something that is added on top of the total.
+'label.tax' => 'Imposto',
 'label.subtotal' => 'Subtotal',
-// TODO: translate the following:
-// 'label.total' => 'Total',
-// 'label.client_name' => 'Client name',
-// 'label.client_address' => 'Client address',
+'label.total' => 'Total',
+'label.client_name' => 'Nome do cliente',
+'label.client_address' => 'Endreço do cliente',
 'label.or' => 'ou',
-// TODO: translate the following:
-// 'label.error' => 'Error',
+'label.error' => 'Erro',
 'label.ldap_hint' => 'Entre com o seu <b>login do Windows</b> e <b>senha</b> nos campos abaixo.',
 'label.required_fields' => '* - campos obrigatórios',
 'label.on_behalf' => 'em nome de',
@@ -207,16 +183,14 @@ $i18n_key_words = array(
 'label.role_admin' => '(administrador)',
 'label.page' => 'Página',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
-// TODO: translate the following:
-// 'label.custom_fields' => 'Custom fields',
-// 'label.type' => 'Type',
-// 'label.type_dropdown' => 'dropdown',
-// 'label.type_text' => 'text',
-// 'label.required' => 'Required',
+'label.custom_fields' => 'Campos personalizados',
+'label.type' => 'Tipo',
+'label.type_dropdown' => 'lista suspensa',
+'label.type_text' => 'texto',
+'label.required' => 'Obrigatório',
 'label.fav_report' => 'Relatório favorito',
-// TODO: translate the following:
-// 'label.cron_schedule' => 'Cron schedule',
-// 'label.what_is_it' => 'What is it?',
+'label.cron_schedule' => 'Agenda cron',
+'label.what_is_it' => 'O que é?',
 
 // Form titles.
 'title.login' => 'Login',
