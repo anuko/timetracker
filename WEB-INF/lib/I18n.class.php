@@ -134,13 +134,18 @@ class I18n {
     $lang_prefs = explode(',', $acclang);
     foreach ($lang_prefs as $lang_pref) {
       $lang_pref_parts = explode(';', trim($lang_pref));
-      if ($this->hasLang($lang_pref_parts[0])) {
-        return $lang_pref_parts[0]; // Return full language designation, such as pt-BR.
+      $lang = $lang_pref_parts[0];
+      if ($this->hasLang($lang)) {
+        return $lang; // Return full language designation (if available), such as pt-BR.
       }
-      $lang_parts = explode('-', trim($lang_pref_parts[0]));
+
+      if (strlen($lang) <= 2)
+        continue; // Do not bother determining main language because we already have it.
+
+      $lang_parts = explode('-', trim($lang));
       $lang_main = $lang_parts[0];
-      if ($lang_main != $lang_pref_parts[0] && $this->hasLang($lang_main)) {
-        return $lang_main;          // Return main language designation, such as pt.
+      if ($lang_main != $lang && $this->hasLang($lang_main)) {
+        return $lang_main; // Return main language designation, such as pt.
       }
     }
     return false;
