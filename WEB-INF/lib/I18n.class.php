@@ -124,25 +124,26 @@ class I18n {
     return file_exists($filename);
   }
 
+  // getBrowserLanguage() returns a first supported language from browser settings.
   function getBrowserLanguage()
   {
     $acclang = @$_SERVER['HTTP_ACCEPT_LANGUAGE'];
     if (empty($acclang)) {
-      return "";
+      return false;
     }
     $lang_prefs = explode(',', $acclang);
     foreach ($lang_prefs as $lang_pref) {
       $lang_pref_parts = explode(';', trim($lang_pref));
       if ($this->hasLang($lang_pref_parts[0])) {
-        return $lang_pref_parts[0];
+        return $lang_pref_parts[0]; // Return full language designation, such as pt-BR.
       }
       $lang_parts = explode('-', trim($lang_pref_parts[0]));
       $lang_main = $lang_parts[0];
       if ($this->hasLang($lang_main)) {
-        return $lang_main;
+        return $lang_main;          // Return main language designation, such as pt.
       }
     }
-    return "";
+    return false;
   }
 
   // getLangFileList() returns a list of language files.

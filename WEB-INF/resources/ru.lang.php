@@ -40,7 +40,7 @@ $i18n_key_words = array(
 
 // Menus - short selection strings that are displayed on the top of application web pages.
 // Example: https://timetracker.anuko.com (black menu on top).
-'menu.login' => 'Войти в систему',
+'menu.login' => 'Войти',
 'menu.logout' => 'Выйти',
 'menu.forum' => 'Форум',
 'menu.help' => 'Справка',
