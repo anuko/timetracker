@@ -139,7 +139,7 @@ class I18n {
       }
       $lang_parts = explode('-', trim($lang_pref_parts[0]));
       $lang_main = $lang_parts[0];
-      if ($this->hasLang($lang_main)) {
+      if ($lang_main != $lang_pref_parts[0] && $this->hasLang($lang_main)) {
         return $lang_main;          // Return main language designation, such as pt.
       }
     }
