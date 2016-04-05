@@ -133,6 +133,9 @@ class I18n {
     $lang_prefs = explode(',', $acclang);
     foreach ($lang_prefs as $lang_pref) {
       $lang_pref_parts = explode(';', trim($lang_pref));
+      if ($this->hasLang($lang_pref_parts[0])) {
+        return $lang_pref_parts[0];
+      }
       $lang_parts = explode('-', trim($lang_pref_parts[0]));
       $lang_main = $lang_parts[0];
       if ($this->hasLang($lang_main)) {

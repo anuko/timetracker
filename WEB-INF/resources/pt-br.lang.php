@@ -44,7 +44,7 @@ $i18n_key_words = array(
 // TODO: Translate the following:
 // 'menu.forum' => 'Forum',
 'menu.help' => 'Ajuda',
-'menu.create_team' => 'Criar nova organização', // TODO: is this good? An organization may have multiple teams in TT.
+'menu.create_team' => 'Criar organização', // TODO: is this good? An organization may have multiple teams in TT.
 'menu.profile' => 'Perfil',
 'menu.time' => 'Tempo',
 'menu.expenses' => 'Gastos',
