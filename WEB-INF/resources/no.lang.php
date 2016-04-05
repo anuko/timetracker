@@ -322,8 +322,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'dato',
 "form.invoice.number" => 'fakturanummer',
 "form.invoice.tax" => 'MVA',
-// Note to translators: the strings below are missing and must be added and translated
-// "form.invoice.daily_subtotals" => 'daglige delbeløp',
 "form.invoice.yourcoo" => 'ditt navn<br> og adresse',
 "form.invoice.custcoo" => 'kundens navn<br> og adresse',
 "form.invoice.comment" => 'notat',
@@ -358,7 +356,6 @@ $i18n_key_words = array(
 // "form.client.th.del" => 'slett',
 // "form.client.name" => 'navn',
 // "form.client.tax" => 'avgift',
-// "form.client.daily_subtotals" => 'daglige delbeløp',
 // "form.client.yourcoo" => 'ditt navn<br> og adresse i faktura',
 // "form.client.custcoo" => 'adresse',
 // "form.client.comment" => 'kommentar ',
