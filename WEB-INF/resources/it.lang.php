@@ -315,8 +315,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'data',
 "form.invoice.number" => 'numero fattura',
 "form.invoice.tax" => 'tassa',
-"form.invoice.yourcoo" => 'tuo nome<br> e indirizzo',
-"form.invoice.custcoo" => 'nome cliente<br> e indirizzo',
 "form.invoice.comment" => 'commento ',
 "form.invoice.th.username" => 'persona',
 "form.invoice.th.time" => 'ore',
@@ -349,8 +347,6 @@ $i18n_key_words = array(
 "form.client.th.del" => 'elimina',
 "form.client.name" => 'nome',
 "form.client.tax" => 'tassa',
-"form.client.yourcoo" => 'il tuo nome<br> e indirizzo nella fattura',
-"form.client.custcoo" => 'indirizzo',
 "form.client.comment" => 'commento ',
 
 // miscellaneous strings

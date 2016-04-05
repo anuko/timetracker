@@ -319,8 +319,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'tarih',
 "form.invoice.number" => 'fatura numarası',
 "form.invoice.tax" => 'vergi',
-"form.invoice.yourcoo" => 'isminiz<br> ve adresiniz',
-"form.invoice.custcoo" => 'müşterinin ismi<br> ve adresi',
 "form.invoice.comment" => 'yorum ',
 "form.invoice.th.username" => 'kişi',
 "form.invoice.th.time" => 'saatler',
@@ -353,8 +351,6 @@ $i18n_key_words = array(
 "form.client.th.del" => 'sil',
 "form.client.name" => 'isim',
 "form.client.tax" => 'vergi',
-"form.client.yourcoo" => 'faturada isminiz<br> ve adresiniz',
-"form.client.custcoo" => 'adres',
 "form.client.comment" => 'yorum ',
 
 // miscellaneous strings

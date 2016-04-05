@@ -317,8 +317,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'datum',
 "form.invoice.number" => 'fakturanummer',
 "form.invoice.tax" => 'moms',
-"form.invoice.yourcoo" => 'ditt namn<br> och adress',
-"form.invoice.custcoo" => 'kundens namn<br> och adress',
 "form.invoice.comment" => 'kommentarer ',
 "form.invoice.th.username" => 'person',
 "form.invoice.th.time" => 'timmar',
@@ -351,8 +349,6 @@ $i18n_key_words = array(
 "form.client.th.del" => 'ta bort',
 "form.client.name" => 'namn',
 "form.client.tax" => 'moms',
-"form.client.yourcoo" => 'ditt namn<br> och adress på fakturan',
-"form.client.custcoo" => 'adress',
 "form.client.comment" => 'kommentarer ',
 
 // miscellaneous strings

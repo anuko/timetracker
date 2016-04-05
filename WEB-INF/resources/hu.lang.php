@@ -320,8 +320,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'Dátum',
 "form.invoice.number" => 'számla azonosító száma',
 "form.invoice.tax" => 'adó',
-"form.invoice.yourcoo" => 'az ön neve<br> és címe',
-"form.invoice.custcoo" => 'az ügyfél nevebr> és címe',
 "form.invoice.comment" => 'megjegyzés ',
 "form.invoice.th.username" => 'személy',
 "form.invoice.th.time" => 'óra',
@@ -354,8 +352,6 @@ $i18n_key_words = array(
 "form.client.th.del" => 'törlés',
 "form.client.name" => 'név',
 "form.client.tax" => 'adó',
-"form.client.yourcoo" => 'az Ön neve<br> és számlázási címe',
-"form.client.custcoo" => 'cím',
 "form.client.comment" => 'megjegyzés ',
 
 // miscellaneous strings

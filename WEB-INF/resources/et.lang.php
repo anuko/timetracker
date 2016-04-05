@@ -321,8 +321,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'kuupäev',
 "form.invoice.number" => 'arve number',
 "form.invoice.tax" => 'maks',
-"form.invoice.yourcoo" => 'sinu nimi<br> ja aadress',
-"form.invoice.custcoo" => 'kliendi nimi<br> ja aadress',
 "form.invoice.comment" => 'kommentaar ',
 "form.invoice.th.username" => 'isik',
 "form.invoice.th.time" => 'tunde',
@@ -355,8 +353,6 @@ $i18n_key_words = array(
 "form.client.th.del" => 'kustuta',
 "form.client.name" => 'nimi',
 "form.client.tax" => 'maks',
-"form.client.yourcoo" => 'sinu nimi<br> ja aadress arvel',
-"form.client.custcoo" => 'aadress',
 "form.client.comment" => 'märkus ',
 
 // miscellaneous strings

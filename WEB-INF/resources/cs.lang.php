@@ -322,8 +322,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'datum',
 "form.invoice.number" => 'faktura číslo',
 "form.invoice.tax" => 'DPH',
-"form.invoice.yourcoo" => 'vaše jméno<br> adresa',
-"form.invoice.custcoo" => 'zákazník<br> adresa',
 "form.invoice.comment" => 'komentář ',
 "form.invoice.th.username" => 'osoba',
 "form.invoice.th.time" => 'hodin',
@@ -356,8 +354,6 @@ $i18n_key_words = array(
 "form.client.th.del" => 'smazat',
 "form.client.name" => 'jméno',
 "form.client.tax" => 'DPH',
-"form.client.yourcoo" => 'vaše jméno<br> a adresa pro fakturaci',
-"form.client.custcoo" => 'adresa',
 "form.client.comment" => 'poznámka ',
 
 // miscellaneous strings

@@ -308,8 +308,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'Data',
 "form.invoice.number" => 'Número de factura',
 "form.invoice.tax" => 'Impost',
-"form.invoice.yourcoo" => 'El seu nom <br> i direcció',
-"form.invoice.custcoo" => 'Nom del client <br> i direcció',
 "form.invoice.comment" => 'Comentari ',
 "form.invoice.th.username" => 'Persona',
 "form.invoice.th.time" => 'Hores',
@@ -338,8 +336,6 @@ $i18n_key_words = array(
 "form.client.th.del" => 'Eliminar',
 "form.client.name" => 'Nom',
 "form.client.tax" => 'Impost',
-"form.client.yourcoo" => 'El seu nou <br> i direcció a la factura',
-"form.client.custcoo" => 'Direcció',
 "form.client.comment" => 'Comentari ',
 
 // miscellaneous strings

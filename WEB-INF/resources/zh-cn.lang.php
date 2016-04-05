@@ -313,8 +313,6 @@ $i18n_key_words = array(
 "form.invoice.date" => '日期',
 "form.invoice.number" => '发票号码',
 "form.invoice.tax" => '税',
-"form.invoice.yourcoo" => '您的姓名<br>地址',
-"form.invoice.custcoo" => '客户姓名<br>地址',
 "form.invoice.comment" => '留言',
 "form.invoice.th.username" => '收费人',
 "form.invoice.th.time" => '小时数',
@@ -346,8 +344,6 @@ $i18n_key_words = array(
 "form.client.th.del" => '删除',
 "form.client.name" => '姓名',
 "form.client.tax" => '税',
-"form.client.yourcoo" => '您在发票中的名字<br>和地址',
-"form.client.custcoo" => '地址',
 "form.client.comment" => '备注',
 
 // miscellaneous strings

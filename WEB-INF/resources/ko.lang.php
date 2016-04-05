@@ -311,8 +311,6 @@ $i18n_key_words = array(
 "form.invoice.date" => '날짜',
 "form.invoice.number" => '송장 번호',
 "form.invoice.tax" => '세금',
-"form.invoice.yourcoo" => '당신의 이름<br> 및 주소',
-"form.invoice.custcoo" => '클라이언트 이름<br> 및 주소',
 "form.invoice.comment" => '코멘트 ',
 "form.invoice.th.username" => '개인',
 "form.invoice.th.time" => '시간',
@@ -344,8 +342,6 @@ $i18n_key_words = array(
 "form.client.th.del" => '삭제',
 "form.client.name" => '이름',
 "form.client.tax" => '세금',
-"form.client.yourcoo" => '송장에 밝힌 당신의 <br>이름 및 주소',
-"form.client.custcoo" => '주소',
 "form.client.comment" => '코멘트 ',
 
 // miscellaneous strings

@@ -313,8 +313,6 @@ $i18n_key_words = array(
 "form.invoice.date" => '日付',
 "form.invoice.number" => '送り状の番号',
 "form.invoice.tax" => '税',
-"form.invoice.yourcoo" => 'あなたの名前<br>とアドレス',
-"form.invoice.custcoo" => 'クライアントの名前<br>とアドレス',
 "form.invoice.comment" => 'コメント ',
 "form.invoice.th.username" => '個人',
 "form.invoice.th.time" => '時間',
@@ -346,8 +344,6 @@ $i18n_key_words = array(
 "form.client.th.del" => '削除',
 "form.client.name" => '名前',
 "form.client.tax" => '税',
-"form.client.yourcoo" => 'あなたの名前<br>と送り状でのアドレス',
-"form.client.custcoo" => 'アドレス',
 "form.client.comment" => 'コメント ',
 
 // miscellaneous strings
