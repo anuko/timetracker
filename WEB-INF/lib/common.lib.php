@@ -143,16 +143,17 @@
 		}
 	}
 
-function time_to_decimal($a) {
+// time_to_decimal converts a time string such as 1:15 to its decimal representation such as 1.25 or 1,25.
+function time_to_decimal($val) {
   global $user;
-  $tmp = explode(":", $a);
-  if($tmp[1]{0}=="0") $tmp[1] = $tmp[1]{1};
+  $parts = explode(':', $val); // parts[0] is hours, parts[1] is minutes.
 
-  $m = round($tmp[1]*100/60);
+  $minutePercent = round($parts[1]*100/60); // Integer value (0-98) of percent of minutes portion in the hour.
+  if($minutePercent < 10) $minutePercent = '0'.$minutePercent; // Pad small values with a 0 to always have 2 digits.
 
-  if($m<10) $m = "0".$m;
-  $time = $tmp[0].$user->decimal_mark.$m;
-  return $time;
+  $decimalTime = $parts[0].$user->decimal_mark.$minutePercent; // Construct decimal representation of time value.
+
+  return $decimalTime;
 }
 
 function sec_to_time_fmt_hm($sec)
