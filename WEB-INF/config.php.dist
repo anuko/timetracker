@@ -174,7 +174,7 @@ define('LANG_DEFAULT', '');
 define('CURRENCY_DEFAULT', '$');
 
 
-// EXPORT_DECIMAL_DURATION - defines whether time duration values are decimal in CSV and XML data exports (1.25 vs 1:15).
+// EXPORT_DECIMAL_DURATION - defines whether time duration values are decimal in CSV and XML data exports (1.25 or 1,25 vs 1:15).
 // 
 define('EXPORT_DECIMAL_DURATION', true);
 

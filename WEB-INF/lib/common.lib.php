@@ -144,13 +144,14 @@
 	}
 
 function time_to_decimal($a) {
+  global $user;
   $tmp = explode(":", $a);
   if($tmp[1]{0}=="0") $tmp[1] = $tmp[1]{1};
 
   $m = round($tmp[1]*100/60);
 
   if($m<10) $m = "0".$m;
-  $time = $tmp[0].".".$m;
+  $time = $tmp[0].$user->decimal_mark.$m;
   return $time;
 }
 
