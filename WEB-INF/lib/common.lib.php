@@ -26,13 +26,8 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-	/**
-	 * @return unknown
-	 * @param file unknown
-	 * @param version = "" unknown
-	 * @desc Loads a class
-	 */
-	function import($class_name) {
+// import() function loads a class.
+function import($class_name) {
 	    $libs = array(
 			dirname($_SERVER["SCRIPT_FILENAME"]),
 			LIBRARY_DIR
@@ -61,7 +56,7 @@
 
 		print '<br><b>load_class: error loading file "'.$filename.'"</b>';
 		die();
-	}
+}
 
 	// The mu_sort function is used to sort a multi-dimensional array.
 	// It looks like the code example is taken from the PHP manual http://ca2.php.net/manual/en/function.sort.php
