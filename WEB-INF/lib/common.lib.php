@@ -32,7 +32,7 @@
 	 * @param version = "" unknown
 	 * @desc Loads a class
 	 */
-	function import( $class_name ) {
+	function import($class_name) {
 	    $libs = array(
 			dirname($_SERVER["SCRIPT_FILENAME"]),
 			LIBRARY_DIR
