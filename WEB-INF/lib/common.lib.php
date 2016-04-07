@@ -158,11 +158,9 @@ function sec_to_time_fmt_hm($sec)
 
 function magic_quotes_off()
 {
-  // if (get_magic_quotes_gpc()) { // This check is now done before calling this function.
-    $_POST = array_map('stripslashes_deep', $_POST);
-    $_GET = array_map('stripslashes_deep', $_GET);
-    $_COOKIE = array_map('stripslashes_deep', $_COOKIE);
-  // }
+  $_POST = array_map('stripslashes_deep', $_POST);
+  $_GET = array_map('stripslashes_deep', $_GET);
+  $_COOKIE = array_map('stripslashes_deep', $_COOKIE);
 }
 
 // check_extension checks whether a required PHP extension is loaded and dies if not so.
