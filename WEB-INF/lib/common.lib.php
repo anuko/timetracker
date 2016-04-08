@@ -28,10 +28,10 @@
 
 // import() function loads a class.
 function import($class_name) {
-	    $libs = array(
-			dirname($_SERVER["SCRIPT_FILENAME"]),
-			LIBRARY_DIR
-		);
+  $libs = array(
+    dirname($_SERVER["SCRIPT_FILENAME"]),
+    LIBRARY_DIR
+  );
 
 	    $pos = strpos($class_name, ".");
         if (!($pos === false)) {
