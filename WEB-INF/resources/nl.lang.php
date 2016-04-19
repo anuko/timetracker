@@ -86,8 +86,7 @@ $i18n_key_words = array(
 'error.no_login' => 'Een medewerker met deze inlognaam bestaat niet.',
 'error.no_teams' => 'Uw database is leeg. Meld je aan als admin en maak een nieuw team.',
 'error.upload' => 'Fout bij het uploaden van het bestand.',
-// TODO: Translate the following:
-// 'error.range_locked' => 'Date range is locked.',
+'error.range_locked' => 'Datums zijn geblokkeerd.',
 'error.mail_send' => 'Fout bij het versturen van een e-mailbericht.',
 'error.no_email' => 'Geen e-mailadres bekend voor dit account.',
 'error.uncompleted_exists' => 'Niet afgeronde invoer bestaat al. Sluit of verwijder deze.',
@@ -250,10 +249,7 @@ $i18n_key_words = array(
 'title.cf_add_dropdown_option' => 'Uitvouwmogelijkheid toevoegen',
 'title.cf_edit_dropdown_option' => 'Uitvouwmogelijkheid bewerken',
 'title.cf_delete_dropdown_option' => 'Uitvouwmogelijkheid verwijderen',
-// NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
-// It is also a name for the Locking plugin on the Team profile page.
-// TODO: Translate the following:
-// 'title.locking' => 'Locking',
+'title.locking' => 'Blokkeren',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
