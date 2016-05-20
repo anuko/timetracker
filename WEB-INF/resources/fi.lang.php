@@ -45,7 +45,9 @@ $i18n_key_words = array(
 'menu.profile' => 'Profiili',
 'menu.time' => 'Tunnit',
 // TODO: translate the following:
-// 'menu.expenses' => 'Expenses',
+'menu.expenses' => 'Kulut',
+// Alternative translation, meaning Cost
+// 'menu.expenses' => 'Kustannukset',
 'menu.reports' => 'Raportit',
 'menu.charts' => 'Kaaviot',
 'menu.projects' => 'Projektit',
@@ -57,14 +59,12 @@ $i18n_key_words = array(
 'menu.options' => 'Optiot',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
-// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+'footer.contribute_msg' => 'Voit osallistua Time Tracker -sovelluksen tuotekehitykseen monin tavoin.',
 // 'Credits' is a bit difficult to translate, the exact literal term might be 'Ansiot' or 'Antaa tunnustus' but that's not widely used in this meaning.
 // The term that is used is something like 'We are thanking' ('Kiitämme') but that does not sound good, either. So I just let it be as it was for time being as everybody (?) understands the meaning anyway.
 'footer.credits' => 'Credits',
 'footer.license' => 'Lisenssi',
-// TODO: translate the following:
-// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+'footer.improve' => 'Osallistu kehitystyöhön', // Translators: this could mean "Improve", if it makes better sense in your language.
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
@@ -89,8 +89,7 @@ $i18n_key_words = array(
 'error.no_login' => 'Tuntematon käyttäjänimi.',
 'error.no_teams' => 'Tietokanta on tyhjä. Kirjaudu ylläpitäjänä ja luo uusi tiimi.',
 'error.upload' => 'Virhe tiedoston lataus.',
-// TODO: Translate the following:
-// 'error.range_locked' => 'Date range is locked.',
+'error.range_locked' => 'Aikaväli on lukittu.',
 'error.mail_send' => 'Virhe postinlähetyksessä.',
 'error.no_email' => 'Käyttäjätunnukseen ei ole liitetty sähköpostiosoitetta.',
 'error.uncompleted_exists' => 'Kesken oleva syötetieto on jo olemassa. Sulje tai poista se.',
@@ -187,7 +186,7 @@ $i18n_key_words = array(
 'label.role_comanager' => '(apu-esimies)',
 'label.role_admin' => '(ylläpitäjä)',
 // Translate the following string.
-// 'label.page' => 'Page',
+'label.page' => 'Sivu',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Omat kentät',
 'label.type' => 'Tyyppi',
@@ -199,7 +198,7 @@ $i18n_key_words = array(
 'label.what_is_it' => 'Mikä se on?',
 
 // TODO? missing?
-'label.page' => 'Sivu',
+//'label.page' => 'Sivu',
 
 // Form titles.
 'title.login' => 'Kirjautuminen',
@@ -259,8 +258,9 @@ $i18n_key_words = array(
 'title.cf_delete_dropdown_option' => 'Vaihtoehdon poisto',
 // NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
 // It is also a name for the Locking plugin on the Team profile page.
-// TODO: Translate the following:
-// 'title.locking' => 'Locking',
+'title.locking' => 'Lukitus',
+// Alternative translation, meaning 'Prevent changes'
+// 'title.locking' => 'Muutosesto', 
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -289,7 +289,7 @@ $i18n_key_words = array(
 // Strings that are used on multiple unrelated forms should be placed in shared sections such as label.<stringname>, etc.
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
-'form.login.forgot_password' => 'Salasana hukassa?',
+'form.login.forgot_password' => 'Salasana unohtunut?',
 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> on yksinkertainen ja helppokäyttöinen vapaan koodin tuntiseurantaohjelmisto.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
