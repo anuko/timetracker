@@ -44,10 +44,7 @@ $i18n_key_words = array(
 'menu.create_team' => 'Luo tiimi',
 'menu.profile' => 'Profiili',
 'menu.time' => 'Tunnit',
-// TODO: translate the following:
 'menu.expenses' => 'Kulut',
-// Alternative translation, meaning Cost
-// 'menu.expenses' => 'Kustannukset',
 'menu.reports' => 'Raportit',
 'menu.charts' => 'Kaaviot',
 'menu.projects' => 'Projektit',
@@ -64,8 +61,7 @@ $i18n_key_words = array(
 // The term that is used is something like 'We are thanking' ('Kiitämme') but that does not sound good, either. So I just let it be as it was for time being as everybody (?) understands the meaning anyway.
 'footer.credits' => 'Credits',
 'footer.license' => 'Lisenssi',
-'footer.improve' => 'Osallistu kehitystyöhön', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                     // This is a link to a webpage that describes how to contribute to the project.
+'footer.improve' => 'Osallistu kehitystyöhön',
 
 // Error messages.
 'error.access_denied' => 'Pääsy estetty.',
@@ -185,7 +181,6 @@ $i18n_key_words = array(
 'label.role_manager' => '(esimies)',
 'label.role_comanager' => '(apu-esimies)',
 'label.role_admin' => '(ylläpitäjä)',
-// Translate the following string.
 'label.page' => 'Sivu',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Omat kentät',
@@ -196,9 +191,6 @@ $i18n_key_words = array(
 'label.fav_report' => 'Raporttipohja',
 'label.cron_schedule' => 'Cron-ajoitus',
 'label.what_is_it' => 'Mikä se on?',
-
-// TODO? missing?
-//'label.page' => 'Sivu',
 
 // Form titles.
 'title.login' => 'Kirjautuminen',
@@ -256,11 +248,7 @@ $i18n_key_words = array(
 'title.cf_add_dropdown_option' => 'Vaihtoehdon lisäys',
 'title.cf_edit_dropdown_option' => 'Vaihtoehdon muokkaus',
 'title.cf_delete_dropdown_option' => 'Vaihtoehdon poisto',
-// NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
-// It is also a name for the Locking plugin on the Team profile page.
 'title.locking' => 'Lukitus',
-// Alternative translation, meaning 'Prevent changes'
-// 'title.locking' => 'Muutosesto', 
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
