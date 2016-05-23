@@ -167,6 +167,9 @@ $i18n_key_words = array(
 'label.cost' => 'עלות',
 'label.week_total' => 'סיכום שבועי',
 'label.day_total' => 'סיכום יומי',
+// 'label.month_total' => 'Month total',
+// 'label.month_left' => 'Time until quota is met',
+// 'label.month_over' => 'Over monthly quota',
 'label.today' => 'היום',
 'label.total_hours' => 'סך הכל שעות',
 'label.total_cost' => 'סך הכל עלות',
@@ -210,6 +213,9 @@ $i18n_key_words = array(
 // TODO: translate the following strings.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
+// 'label.year' => 'Year',
+// 'label.month' => 'Month',
+// 'label.quota' => 'Quota',
 
 // Form titles.
 'title.login' => 'כניסה',
@@ -258,6 +264,7 @@ $i18n_key_words = array(
 // 'title.add_notification' => 'Adding Notification',
 // 'title.edit_notification' => 'Editing Notification',
 // 'title.delete_notification' => 'Deleting Notification',
+// 'title.monthly_quota' => 'Monthly quota',
 'title.export' => 'ייצוא נתוני צוות',
 'title.import' => 'ייבוא נתוני צוות',
 'title.options' => 'אפשרויות',

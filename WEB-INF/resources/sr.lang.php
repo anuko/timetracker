@@ -153,6 +153,9 @@ $i18n_key_words = array(
 'label.cost' => 'Cena',
 'label.week_total' => 'Zbir časova nedeljno',
 'label.day_total' => 'Zbir časova dnevno',
+// 'label.month_total' => 'Month total',
+// 'label.month_left' => 'Time until quota is met',
+// 'label.month_over' => 'Over monthly quota',
 'label.today' => 'Danas',
 'label.total_hours' => 'Ukupno časova',
 'label.total_cost' => 'Ukupna cena',
@@ -193,6 +196,9 @@ $i18n_key_words = array(
 'label.fav_report' => 'Omiljeni izveštaji',
 'label.cron_schedule' => 'Sredi raspored',
 'label.what_is_it' => 'Šta je ovo?',
+// 'label.year' => 'Year',
+// 'label.month' => 'Month',
+// 'label.quota' => 'Quota',
 
 // Form titles.
 'title.login' => 'Prijava',
@@ -238,6 +244,7 @@ $i18n_key_words = array(
 'title.add_notification' => 'Dodavanje napomene',
 'title.edit_notification' => 'Izmena napomene',
 'title.delete_notification' => 'Brisanje napomene',
+// 'title.monthly_quota' => 'Monthly quota',
 'title.export' => 'Izvoz podataka tim-a',
 'title.import' => 'Uvoz podataka tim-a',
 'title.options' => 'Opcije',

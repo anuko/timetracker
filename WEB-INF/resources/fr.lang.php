@@ -166,6 +166,9 @@ $i18n_key_words = array(
 'label.week_total' => 'Total hebdomadaire',
 // TODO: translate the following string.
 // 'label.day_total' => 'Day total',
+// 'label.month_total' => 'Month total',
+// 'label.month_left' => 'Time until quota is met',
+// 'label.month_over' => 'Over monthly quota',
 'label.today' => 'Aujourd\\\'hui',
 'label.total_hours' => 'Total d\\\'heures',
 'label.total_cost' => 'Coût total',
@@ -210,6 +213,9 @@ $i18n_key_words = array(
 // TODO: translate the following strings.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
+// 'label.year' => 'Year',
+// 'label.month' => 'Month',
+// 'label.quota' => 'Quota',
 
 // Form titles.
 'title.login' => 'Connexion',
@@ -260,6 +266,7 @@ $i18n_key_words = array(
 // 'title.add_notification' => 'Adding Notification',
 // 'title.edit_notification' => 'Editing Notification',
 // 'title.delete_notification' => 'Deleting Notification',
+// 'title.monthly_quota' => 'Monthly quota',
 'title.export' => 'Exporter les données', // TODO: use a noun.
 'title.import' => 'Importer les données', // TODO: use a noun.
 'title.options' => 'Options',

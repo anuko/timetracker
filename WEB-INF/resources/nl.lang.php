@@ -153,6 +153,9 @@ $i18n_key_words = array(
 'label.cost' => 'Kosten',
 'label.week_total' => 'Week totaal',
 'label.day_total' => 'Dag totaal',
+// 'label.month_total' => 'Month total',
+// 'label.month_left' => 'Time until quota is met',
+// 'label.month_over' => 'Over monthly quota',
 'label.today' => 'Vandaag',
 'label.total_hours' => 'Uren totaal',
 'label.total_cost' => 'Totale kosten',
@@ -193,6 +196,9 @@ $i18n_key_words = array(
 'label.fav_report' => 'Standaard rapport',
 'label.cron_schedule' => 'Cron schema',
 'label.what_is_it' => 'Wat betekent dit?',
+// 'label.year' => 'Year',
+// 'label.month' => 'Month',
+// 'label.quota' => 'Quota',
 
 // Form titles.
 'title.login' => 'Aanmelden',
@@ -238,6 +244,7 @@ $i18n_key_words = array(
 'title.add_notification' => 'Notificatie toevoegen',
 'title.edit_notification' => 'Notificatie bewerken',
 'title.delete_notification' => 'Notificatie verwijderen',
+// 'title.monthly_quota' => 'Monthly quota',
 'title.export' => 'Exporteer teamgegevens',
 'title.import' => 'Importeer teamgegevens',
 'title.options' => 'Opties',

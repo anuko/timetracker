@@ -354,6 +354,16 @@ function get_time() {
     <td align="left">{$i18n.label.week_total}: {$week_total}</td>
     <td align="right">{$i18n.label.day_total}: {$day_total}</td>
   </tr>
+  {if $month_total}
+  <tr>
+    <td align="left">{$i18n.label.month_total}: {$month_total}</td>
+    {if $month_left|strpos:'-' === 0}
+    <td align="right">{$i18n.label.month_over}: <span style="color: green;">{$month_left|substr:1}</span></td>
+    {else}
+    <td align="right">{$i18n.label.month_left}: <span style="color: red;">{$month_left}</span></td>
+    {/if}
+  </tr>
+  {/if}
 </table>
 {/if}
 {$forms.timeRecordForm.close}

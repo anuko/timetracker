@@ -153,6 +153,9 @@ $i18n_key_words = array(
 'label.cost' => 'Стоимость',
 'label.week_total' => 'Итог за неделю',
 'label.day_total' => 'Итог за день',
+// 'label.month_total' => 'Month total',
+// 'label.month_left' => 'Time until quota is met',
+// 'label.month_over' => 'Over monthly quota',
 'label.today' => 'Сегодня',
 'label.total_hours' => 'Итого часов',
 'label.total_cost' => 'Итоговая стоимость',
@@ -193,6 +196,9 @@ $i18n_key_words = array(
 'label.fav_report' => 'Стандартный отчёт',
 'label.cron_schedule' => 'Расписание cron',
 'label.what_is_it' => 'Что это?',
+// 'label.year' => 'Year',
+// 'label.month' => 'Month',
+// 'label.quota' => 'Quota',
 
 // Form titles.
 'title.login' => 'Вход в систему',
@@ -238,6 +244,7 @@ $i18n_key_words = array(
 'title.add_notification' => 'Добавление уведомления',
 'title.edit_notification' => 'Редактирование уведомления',
 'title.delete_notification' => 'Удаление уведомления',
+// 'title.monthly_quota' => 'Monthly quota',
 'title.export' => 'Экспортирование данных команды',
 'title.import' => 'Импортирование данных команды',
 'title.options' => 'Опции',

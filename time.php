@@ -63,6 +63,17 @@ if ($user->isPluginEnabled('cf')) {
   $smarty->assign('custom_fields', $custom_fields);
 }
 
+if ($user->isPluginEnabled('mq')){
+  require_once('plugins/MonthlyQuota.class.php');
+  $quota = new MonthlyQuota();
+  $monthlyQuota = $quota->get($selected_date->mYear, $selected_date->mMonth);
+  $month_total = ttTimeHelper::getTimeForMonth($user->getActiveUser(), $selected_date);
+  $minutesLeft = ttTimeHelper::toMinutes($monthlyQuota) - ttTimeHelper::toMinutes($month_total);
+  
+  $smarty->assign('month_total', $month_total);
+  $smarty->assign('month_left', ttTimeHelper::fromMinutes($minutesLeft));
+}
+
 // Initialize variables.
 $cl_start = trim($request->getParameter('start'));
 $cl_finish = trim($request->getParameter('finish'));

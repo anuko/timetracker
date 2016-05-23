@@ -338,3 +338,15 @@ create index user_idx on tt_expense_items(user_id);
 create index client_idx on tt_expense_items(client_id);
 create index project_idx on tt_expense_items(project_id);
 create index invoice_idx on tt_expense_items(invoice_id);
+
+#
+# Structure for table tt_monthly_quota.
+# This table lists expense items.
+#
+
+CREATE TABLE `tt_monthly_quota` ( 
+  `year` SMALLINT UNSIGNED NOT NULL ,   # year we'setting monthly quota for
+  `month` TINYINT UNSIGNED NOT NULL ,   # month we're settng monthly quota for
+  `quota` SMALLINT UNSIGNED NOT NULL ,  # the monthly quota
+  PRIMARY KEY (`year`, `month`)
+);

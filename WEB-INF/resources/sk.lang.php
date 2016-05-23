@@ -164,6 +164,9 @@ $i18n_key_words = array(
 'label.week_total' => 'Týždeň celkom',
 // TODO: translate the following string.
 // 'label.day_total' => 'Day total',
+// 'label.month_total' => 'Month total',
+// 'label.month_left' => 'Time until quota is met',
+// 'label.month_over' => 'Over monthly quota',
 'label.today' => 'Dnes',
 'label.total_hours' => 'Hodín celkom',
 'label.total_cost' => 'Náklady celkom',
@@ -207,6 +210,9 @@ $i18n_key_words = array(
 // TODO: translate the following strings.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
+// 'label.year' => 'Year',
+// 'label.month' => 'Month',
+// 'label.quota' => 'Quota',
 
 // Form titles.
 'title.login' => 'Prihlásenie',
@@ -255,6 +261,7 @@ $i18n_key_words = array(
 // 'title.add_notification' => 'Adding Notification',
 // 'title.edit_notification' => 'Editing Notification',
 // 'title.delete_notification' => 'Deleting Notification',
+// 'title.monthly_quota' => 'Monthly quota',
 'title.export' => 'Exportovanie údajov o tíme',
 'title.import' => 'Importovanie údajov o tíme',
 'title.options' => 'Nastavenia',

@@ -1,0 +1,43 @@
+{$forms.monthlyQuotaForm.open}
+<table>
+    <tr>
+        <td>{$i18n.label.year}</td>
+        <td>{$forms.monthlyQuotaForm.years.control}</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <table> 
+            <tr>
+                <td class="tableHeader">{$i18n.label.month}</td>
+                <td class="tableHeader">{$i18n.label.quota}</td>
+            </tr>
+ {foreach $months as $month}
+                <tr>
+                    <td>{$month}</td>
+                    <td>{$forms.monthlyQuotaForm.$month.control}</td>
+                </tr>
+ {/foreach}         
+                <tr>
+                    <td colspan="2" style="text-align:center;">
+                        <input type="submit" value="{$i18n.button.save}">
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+{$forms.monthlyQuotaForm.close}
+<script>
+function yearChange(value){
+    var url = window.location.href;
+    
+    if (url.indexOf('?') > 0){
+        var parameter = url.substring(url.indexOf('?') + 1, url.length);
+        url = url.replace(parameter, 'year=' + value);
+    } else {
+        url = '?year=' + value;
+    }
+    
+    window.location = url;
+}
+</script>

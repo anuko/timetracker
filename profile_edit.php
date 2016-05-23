@@ -69,6 +69,7 @@ if ($request->isPost()) {
     $cl_tax_expenses = $request->getParameter('tax_expenses');
     $cl_notifications = $request->getParameter('notifications');
     $cl_locking = $request->getParameter('locking');
+    $cl_monthly_quota = $request->getParameter('monthly_quota');
   }
 } else {
   $cl_name = $user->name;
@@ -92,11 +93,12 @@ if ($request->isPost()) {
     $cl_clients = in_array('cl', $plugins);
     $cl_client_required = in_array('cm', $plugins);
     $cl_invoices = in_array('iv', $plugins);
-    $cl_custom_fields = in_array('cf', $plugins);
+    $cl_custom_fields = in_array('cf', $plugins);    
     $cl_expenses = in_array('ex', $plugins);
     $cl_tax_expenses = in_array('et', $plugins);
     $cl_notifications = in_array('no', $plugins);
     $cl_locking = in_array('lk', $plugins);
+    $cl_monthly_quota = in_array('mq', $plugins);
   }
 }
 
@@ -176,6 +178,7 @@ if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'checkbox','name'=>'tax_expenses','data'=>1,'value'=>$cl_tax_expenses));
   $form->addInput(array('type'=>'checkbox','name'=>'notifications','data'=>1,'value'=>$cl_notifications,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'locking','data'=>1,'value'=>$cl_locking,'onchange'=>'handlePluginCheckboxes()'));
+  $form->addInput(array('type'=>'checkbox','name'=>'monthly_quota','data'=>1,'value'=>$cl_monthly_quota,'onchange'=>'handlePluginCheckboxes()'));
 }
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
@@ -226,6 +229,8 @@ if ($request->isPost()) {
         $plugins .= ',no';
       if ($cl_locking)
         $plugins .= ',lk';
+      if ($cl_monthly_quota)
+        $plugins .= ',mq';
       $plugins = trim($plugins, ',');
 
       $update_result = ttTeamHelper::update($user->team_id, array(

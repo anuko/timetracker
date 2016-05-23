@@ -156,6 +156,9 @@ $i18n_key_words = array(
 'label.cost' => 'Hinta',
 'label.week_total' => 'Viikko yhteensä',
 'label.day_total' => 'Päivä yhteensä',
+// 'label.month_total' => 'Month total',
+// 'label.month_left' => 'Time until quota is met',
+// 'label.month_over' => 'Over monthly quota',
 'label.today' => 'Tänään',
 'label.total_hours' => 'Tunnit yhteensä',
 'label.total_cost' => 'Hinta yhteensä',
@@ -197,6 +200,9 @@ $i18n_key_words = array(
 'label.fav_report' => 'Raporttipohja',
 'label.cron_schedule' => 'Cron-ajoitus',
 'label.what_is_it' => 'Mikä se on?',
+// 'label.year' => 'Year',
+// 'label.month' => 'Month',
+// 'label.quota' => 'Quota',
 
 // TODO? missing?
 'label.page' => 'Sivu',
@@ -245,6 +251,7 @@ $i18n_key_words = array(
 'title.add_notification' => 'Ilmoituksen lisäys',
 'title.edit_notification' => 'Ilmoituksen muokkaus',
 'title.delete_notification' => 'Ilmoituksen poisto',
+// 'title.monthly_quota' => 'Monthly quota',
 'title.export' => 'Tiimitietojen vienti',
 'title.import' => 'Tiimitietojen tunti',
 'title.options' => 'Optiot',

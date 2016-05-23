@@ -151,6 +151,9 @@ $i18n_key_words = array(
 'label.cost' => 'Custo',
 'label.week_total' => 'Total semanal',
 'label.day_total' => 'Total diário',
+// 'label.month_total' => 'Month total',
+// 'label.month_left' => 'Time until quota is met',
+// 'label.month_over' => 'Over monthly quota',
 'label.today' => 'Hoje',
 'label.total_hours' => 'Total de horas',
 'label.total_cost' => 'Custo total',
@@ -191,6 +194,9 @@ $i18n_key_words = array(
 'label.fav_report' => 'Relatório favorito',
 'label.cron_schedule' => 'Agenda cron',
 'label.what_is_it' => 'O que é?',
+// 'label.year' => 'Year',
+// 'label.month' => 'Month',
+// 'label.quota' => 'Quota',
 
 // Form titles.
 'title.login' => 'Login',
@@ -236,6 +242,7 @@ $i18n_key_words = array(
 'title.add_notification' => 'Adicionando notificação',
 'title.edit_notification' => 'Editando notificação',
 'title.delete_notification' => 'Apagando notificação',
+// 'title.monthly_quota' => 'Monthly quota',
 'title.export' => 'Exportando dados de equipe',
 'title.import' => 'Importando dados de equipe',
 'title.options' => 'Opções',
