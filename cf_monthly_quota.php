@@ -30,9 +30,15 @@ $quota = new MonthlyQuota();
 if ($request->isPost()){
   $postedYear = $request->getParameter("years");
   $year = intval($postedYear);
+  $res = false;
   for ($i=0; $i < count($months); $i++){
-    $quota->update($postedYear, $i+1, $request->getParameter($months[$i]));
+    $res = $quota->update($postedYear, $i+1, $request->getParameter($months[$i]));
   }
+  if ($res){
+    header('Location: profile_edit.php');
+    exit();
+  } else
+      $err->add($i18n->getKey('error.db'));
 }
 
 // returns months where January is month 1, not 0
