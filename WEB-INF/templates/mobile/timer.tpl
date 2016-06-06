@@ -41,13 +41,13 @@ task_names = new Array();
 empty_label_project = '{$i18n.dropdown.select|escape:'javascript'}';
 empty_label_task = '{$i18n.dropdown.select|escape:'javascript'}';
 
-// The populateDropdowns function populates the "project" and "task" dropdown controls
+// The fillDropdowns function populates the "project" and "task" dropdown controls
 // with relevant values.
 function fillDropdowns() {
-  if(document.body.contains(document.timeRecordForm.client))
-    fillProjectDropdown(document.timeRecordForm.client.value);
+  if(document.body.contains(document.timerRecordForm.client))
+    fillProjectDropdown(document.timerRecordForm.client.value);
 
-  fillTaskDropdown(document.timeRecordForm.project.value);
+  fillTaskDropdown(document.timerRecordForm.project.value);
 }
 
 // The fillProjectDropdown function populates the project combo box with
