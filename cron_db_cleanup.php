@@ -43,24 +43,26 @@ for ($i = 0; $i < $count; $i++) {
   $res = ttTeamHelper::delete($inactive_teams[$i]);
 }
 
-$mdb2 = getConnection();
-$mdb2->exec("OPTIMIZE TABLE tt_client_project_binds");
-$mdb2->exec("OPTIMIZE TABLE tt_client_project_binds");
-$mdb2->exec("OPTIMIZE TABLE tt_clients");
-$mdb2->exec("OPTIMIZE TABLE tt_config");
-$mdb2->exec("OPTIMIZE TABLE tt_custom_field_log");
-$mdb2->exec("OPTIMIZE TABLE tt_custom_field_options");
-$mdb2->exec("OPTIMIZE TABLE tt_custom_fields");
-$mdb2->exec("OPTIMIZE TABLE tt_expense_items");
-$mdb2->exec("OPTIMIZE TABLE tt_fav_reports");
-$mdb2->exec("OPTIMIZE TABLE tt_invoices");
-$mdb2->exec("OPTIMIZE TABLE tt_log");
-$mdb2->exec("OPTIMIZE TABLE tt_project_task_binds");
-$mdb2->exec("OPTIMIZE TABLE tt_projects");
-$mdb2->exec("OPTIMIZE TABLE tt_tasks");
-$mdb2->exec("OPTIMIZE TABLE tt_teams");
-$mdb2->exec("OPTIMIZE TABLE tt_tmp_refs");
-$mdb2->exec("OPTIMIZE TABLE tt_user_project_binds");
-$mdb2->exec("OPTIMIZE TABLE tt_users");
+if ($count > 0) {
+  $mdb2 = getConnection();
+  $mdb2->exec("OPTIMIZE TABLE tt_client_project_binds");
+  $mdb2->exec("OPTIMIZE TABLE tt_client_project_binds");
+  $mdb2->exec("OPTIMIZE TABLE tt_clients");
+  $mdb2->exec("OPTIMIZE TABLE tt_config");
+  $mdb2->exec("OPTIMIZE TABLE tt_custom_field_log");
+  $mdb2->exec("OPTIMIZE TABLE tt_custom_field_options");
+  $mdb2->exec("OPTIMIZE TABLE tt_custom_fields");
+  $mdb2->exec("OPTIMIZE TABLE tt_expense_items");
+  $mdb2->exec("OPTIMIZE TABLE tt_fav_reports");
+  $mdb2->exec("OPTIMIZE TABLE tt_invoices");
+  $mdb2->exec("OPTIMIZE TABLE tt_log");
+  $mdb2->exec("OPTIMIZE TABLE tt_project_task_binds");
+  $mdb2->exec("OPTIMIZE TABLE tt_projects");
+  $mdb2->exec("OPTIMIZE TABLE tt_tasks");
+  $mdb2->exec("OPTIMIZE TABLE tt_teams");
+  $mdb2->exec("OPTIMIZE TABLE tt_tmp_refs");
+  $mdb2->exec("OPTIMIZE TABLE tt_user_project_binds");
+  $mdb2->exec("OPTIMIZE TABLE tt_users");
+}
 
 print "Done!<br>\n";
