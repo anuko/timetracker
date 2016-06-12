@@ -758,7 +758,7 @@ class ttTeamHelper {
           $count++;
           $inactive_teams[] = $team_id;
           // Limit the array size for perfomance by allowing this operation on small chunks only.
-          if ($count >= 25) break;
+          if ($count >= 100) break;
         }
       }
       return $inactive_teams;
