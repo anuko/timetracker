@@ -215,5 +215,5 @@ define('AUTH_MODULE', 'db');
 
 // define('AUTH_DEBUG', false); // Note: enabling AUTH_DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
 
-// task window height in time.php
+// note input height in time.php
 define('NOTE_INPUT_HEIGHT', '40');
