@@ -214,3 +214,6 @@ define('AUTH_MODULE', 'db');
 //  'member_of' => array());            // List of groups, membership in which is required for user to be authenticated.
 
 // define('AUTH_DEBUG', false); // Note: enabling AUTH_DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
+
+// task window height in time.php
+define('NOTE_INPUT_HEIGHT', '40');

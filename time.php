@@ -183,7 +183,7 @@ if (!$user->canManageTeam() && defined('READONLY_START_FINISH') && isTrue(READON
 }
 if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
   $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
-$form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 600px; height: 40px;','value'=>$cl_note));
+$form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 600px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
 $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
 if ($user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','data'=>1,'value'=>$cl_billable));
