@@ -41,7 +41,7 @@ task_names = new Array();
 empty_label_project = '{$i18n.dropdown.select|escape:'javascript'}';
 empty_label_task = '{$i18n.dropdown.select|escape:'javascript'}';
 
-// The populateDropdowns function populates the "project" and "task" dropdown controls
+// The fillDropdowns function populates the "project" and "task" dropdown controls
 // with relevant values.
 function fillDropdowns() {
   if(document.body.contains(document.timeRecordForm.client))
