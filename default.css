@@ -117,6 +117,10 @@ select{ font-size: 10pt; font-family: verdana; }
   border-bottom: 1px solid silver;
 }
 
+.borderTop td {
+  border-top: 1px solid silver;
+}
+
 .sectionHeaderNoBorder {
   font-weight: bold;
 }
@@ -129,6 +133,13 @@ select{ font-size: 10pt; font-family: verdana; }
 .info_message {
   font-weight: bold;
   color: #0000c0;
+}
+
+.divider {
+  background-color: #efefef;
+}
+table.divider {
+  width: 720px;
 }
 
 div#LoginAboutText { width:400px; }

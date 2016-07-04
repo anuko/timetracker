@@ -214,3 +214,7 @@ define('AUTH_MODULE', 'db');
 //  'member_of' => array());            // List of groups, membership in which is required for user to be authenticated.
 
 // define('AUTH_DEBUG', false); // Note: enabling AUTH_DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
+
+// team manager can set monthly quota for years between these values:
+define('MONTHLY_QUOTA_YEARS_START', 2010); // if nothing is specified, it falls back to 2010
+define('MONTHLY_QUOTA_YEARS_END', 2031); // if nothing is specified it falls back to 2030

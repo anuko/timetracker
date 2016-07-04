@@ -4,33 +4,51 @@ class MonthlyQuota {
     
     var $db;
     var $holidays;
+    var $usersTeamId;
     // Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use __construct() in new code.
     function __construct() {
         $this->db = getConnection();
         $i18n = $GLOBALS['I18N'];
         $this->holidays = $i18n->holidays;
+        global $user;
+        $this->usersTeamId = $user->team_id;
     }
     
     public function update($year, $month, $quota) {
-        $deleteSql = "DELETE FROM tt_monthly_quota WHERE year = $year AND month = $month";
+        $teamId = $this->usersTeamId;
+        $deleteSql = "DELETE FROM tt_monthly_quota WHERE year = $year AND month = $month AND team_id = $teamId";
         $this->db->exec($deleteSql);
-        $insertSql = "INSERT INTO tt_monthly_quota (year, month, quota) values ($year, $month, $quota)";
-        $affected = $this->db->exec($insertSql);
-        return (!is_a($affected, 'PEAR_Error'));
+        if ($quota){
+            $insertSql = "INSERT INTO tt_monthly_quota (team_id, year, month, quota) values ($teamId, $year, $month, $quota)";
+            $affected = $this->db->exec($insertSql);
+            return (!is_a($affected, 'PEAR_Error'));
+        }
+        return true;
     }
         
     public function get($year, $month) {
-        
         if (is_null($month)){
             return $this->getMany($year);
         }
         
         return $this->getSingle($year, $month);
     }
+
+    public function getDailyWorkingHours(){
+        $teamId = $this->usersTeamId;
+        $sql = "SELECT daily_working_hours FROM tt_teams where id = $teamId";
+        $reader = $this->db->query($sql);
+        if (is_a($reader, 'PEAR_Error')) {
+            return false;
+        }
+
+        $row = $reader->fetchRow();
+        return $row["daily_working_hours"];
+    }
     
     private function getSingle($year, $month) {
-        
-        $sql = "SELECT quota FROM tt_monthly_quota WHERE year = $year AND month = $month";
+        $teamId = $this->usersTeamId;
+        $sql = "SELECT quota FROM tt_monthly_quota WHERE year = $year AND month = $month AND team_id = $teamId";
         $reader = $this->db->query($sql);
         if (is_a($reader, 'PEAR_Error')) {
             return false;
@@ -49,14 +67,15 @@ class MonthlyQuota {
             }
             
             $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-            return $this->getWorkingDays("$year-$month-01", "$year-$month-$daysInMonth", $holidaysWithYear) * 8;
+            return $this->getWorkingDays("$year-$month-01", "$year-$month-$daysInMonth", $holidaysWithYear) * $this->getDailyWorkingHours();
         }
         
         return $row["quota"];  
     }
     
     private function getMany($year){
-        $sql = "SELECT year, month, quota FROM tt_monthly_quota WHERE year = $year";
+        $teamId = $this->usersTeamId;
+        $sql = "SELECT month, quota FROM tt_monthly_quota WHERE year = $year AND team_id = $teamId";
         $result = array();
         $res = $this->db->query($sql);
         if (is_a($res, 'PEAR_Error')) {

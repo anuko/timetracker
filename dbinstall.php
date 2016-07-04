@@ -521,9 +521,12 @@ if ($_POST) {
   }
   
   if ($_POST["convert1900to1930"]){
-    setChange("CREATE TABLE `timetracker`.`tt_monthly_quota` ( `year` SMALLINT UNSIGNED NOT NULL , `month` TINYINT UNSIGNED NOT NULL , `quota` SMALLINT UNSIGNED NOT NULL , PRIMARY KEY (`year`, `month`))");
+    setChange("CREATE TABLE `tt_monthly_quota` (`team_id` int(11) NOT NULL, `year` smallint(5) UNSIGNED NOT NULL, `month` tinyint(3) UNSIGNED NOT NULL, `quota` smallint(5) UNSIGNED NOT NULL, PRIMARY KEY (`year`,`month`,`team_id`))");
+    setChange("ALTER TABLE `tt_monthly_quota` ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+    setChange("ALTER TABLE `tt_teams` ADD `daily_working_hours` SMALLINT NULL DEFAULT '8' AFTER `lock_spec`");
+    setChange("UPDATE `tt_teams` SET `daily_working_hours` = 8");
   }
-
+  
   // The update_clients function updates projects field in tt_clients table.
   if ($_POST["update_clients"]) {
     $mdb2 = getConnection();
@@ -607,6 +610,7 @@ if ($_POST) {
     setChange("OPTIMIZE TABLE tt_fav_reports");
     setChange("OPTIMIZE TABLE tt_invoices");
     setChange("OPTIMIZE TABLE tt_log");
+    setChange("OPTIMIZE TABLE tt_monthly_quota");
     setChange("OPTIMIZE TABLE tt_project_task_binds");
     setChange("OPTIMIZE TABLE tt_projects");
     setChange("OPTIMIZE TABLE tt_tasks");

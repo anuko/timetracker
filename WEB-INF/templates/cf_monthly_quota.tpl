@@ -1,7 +1,22 @@
 {$forms.monthlyQuotaForm.open}
+<div style="padding: 0 0 10 0">
+    <table border="0" class="divider">
+        <tr>
+            <td align="center">
+                <table>
+                    <tr>
+                        <td>{$i18n.label.dailyWorkingHours}</td>
+                        <td>{$forms.monthlyQuotaForm.dailyWorkingHours.control}</td>
+                        <td><input type="submit" name="dailyHours" value="{$i18n.button.save}"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>        
+    </table>
+</div>
 <table>
     <tr>
-        <td>{$i18n.label.year}</td>
+        <td>{$i18n.label.year}:</td>
         <td>{$forms.monthlyQuotaForm.years.control}</td>
     </tr>
     <tr>
@@ -16,16 +31,17 @@
                     <td>{$month}</td>
                     <td>{$forms.monthlyQuotaForm.$month.control}</td>
                 </tr>
- {/foreach}         
+ {/foreach}     
                 <tr>
                     <td colspan="2" style="text-align:center;">
-                        <input type="submit" value="{$i18n.button.save}">
+                        <input type="submit" name="quotas" value="{$i18n.button.save}*">
                     </td>
                 </tr>
             </table>
         </td>
     </tr>
 </table>
+<div>* - {$i18n.label.empty_values_explanation}</div>
 {$forms.monthlyQuotaForm.close}
 <script>
 function yearChange(value){
