@@ -45,6 +45,13 @@ function setChange($sql) {
 if (!$request->isPost()) {
   echo('<h2>Environment check</h2>');
 
+  // Check if WEB-INF/templates_c dir is writable.
+  if (is_writable(APP_DIR.'/WEB-INF/templates_c/')) {
+    echo('WEB-INF/templates_c/ directory is writable.<br>');
+  } else {
+    echo('<font color="red">Error: WEB-INF/templates_c/ directory is not writable.</font><br>');
+  }
+
   // Require the configuration file with application settings.
   if (file_exists(APP_DIR."/WEB-INF/config.php")) {
     echo('WEB-INF/config.php file exists.<br>');
