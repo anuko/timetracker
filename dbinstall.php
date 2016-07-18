@@ -611,9 +611,6 @@ if ($_POST) {
     setChange("create unique index name_idx on tt_invoices(team_id, name, status)");
     setChange("ALTER TABLE tt_teams ADD COLUMN lock_spec varchar(255) default NULL");
     setChange("ALTER TABLE tt_teams DROP locktime");
-  }
-  
-  if ($_POST["convert1900to1930"]){
     setChange("CREATE TABLE `tt_monthly_quota` (`team_id` int(11) NOT NULL, `year` smallint(5) UNSIGNED NOT NULL, `month` tinyint(3) UNSIGNED NOT NULL, `quota` smallint(5) UNSIGNED NOT NULL, PRIMARY KEY (`year`,`month`,`team_id`))");
     setChange("ALTER TABLE `tt_monthly_quota` ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
     setChange("ALTER TABLE `tt_teams` ADD `daily_working_hours` SMALLINT NULL DEFAULT '8' AFTER `lock_spec`");
@@ -757,10 +754,6 @@ if ($_POST) {
   <tr valign="top">
     <td>Update database structure (v1.6 to v1.9)</td>
     <td><input type="submit" name="convert1600to1900" value="Update"><br></td>
-  </tr>
-  <tr valign="top">
-    <td>Update database structure (v1.9 to v1.9.30)</td>
-    <td><input type="submit" name="convert1900to1930" value="Update"><br></td>
   </tr>
 </table>
 
