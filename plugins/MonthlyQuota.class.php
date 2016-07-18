@@ -36,14 +36,14 @@ class MonthlyQuota {
 
     public function getDailyWorkingHours(){
         $teamId = $this->usersTeamId;
-        $sql = "SELECT daily_working_hours FROM tt_teams where id = $teamId";
+        $sql = "SELECT workday_hours FROM tt_teams where id = $teamId";
         $reader = $this->db->query($sql);
         if (is_a($reader, 'PEAR_Error')) {
             return false;
         }
 
         $row = $reader->fetchRow();
-        return $row["daily_working_hours"];
+        return $row["workday_hours"];
     }
     
     private function getSingle($year, $month) {

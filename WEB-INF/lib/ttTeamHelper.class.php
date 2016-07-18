@@ -731,7 +731,7 @@ class ttTeamHelper {
     if (isset($fields['record_type'])) $record_type_part = ', record_type = '.intval($fields['record_type']);
     if (isset($fields['plugins'])) $plugins_part = ', plugins = '.$mdb2->quote($fields['plugins']);
     if (isset($fields['lock_spec'])) $lock_spec_part = ', lock_spec = '.$mdb2->quote($fields['lock_spec']);
-    if (isset($fields['working_hours'])) $working_hours_part = ', daily_working_hours = '.$mdb2->quote($fields['working_hours']);
+    if (isset($fields['working_hours'])) $working_hours_part = ', workday_hours = '.$mdb2->quote($fields['working_hours']);
 
     $sql = "update tt_teams set $name_part $addr_part $currency_part $lang_part $decimal_mark_part
       $date_format_part $time_format_part $week_start_part $tracking_mode_part $record_type_part
