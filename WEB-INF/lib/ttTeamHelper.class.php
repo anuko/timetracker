@@ -703,7 +703,7 @@ class ttTeamHelper {
   static function update($team_id, $fields)
   {
     // We'll require team name to be always set.
-    if (!isset($fields['name'])) return false;
+    if (!isset($fields['name']) || $fields['name'] == "") return false;
 
     $mdb2 = getConnection();
     $name_part = 'name = '.$mdb2->quote($fields['name']);
@@ -718,6 +718,7 @@ class ttTeamHelper {
     $record_type_part = '';
     $plugins_part = '';
     $lock_spec_part = '';
+    $working_hours_part = '';
 
     if (isset($fields['address'])) $addr_part = ', address = '.$mdb2->quote($fields['address']);
     if (isset($fields['currency'])) $currency_part = ', currency = '.$mdb2->quote($fields['currency']);
@@ -730,10 +731,11 @@ class ttTeamHelper {
     if (isset($fields['record_type'])) $record_type_part = ', record_type = '.intval($fields['record_type']);
     if (isset($fields['plugins'])) $plugins_part = ', plugins = '.$mdb2->quote($fields['plugins']);
     if (isset($fields['lock_spec'])) $lock_spec_part = ', lock_spec = '.$mdb2->quote($fields['lock_spec']);
+    if (isset($fields['working_hours'])) $working_hours_part = ', daily_working_hours = '.$mdb2->quote($fields['working_hours']);
 
     $sql = "update tt_teams set $name_part $addr_part $currency_part $lang_part $decimal_mark_part
       $date_format_part $time_format_part $week_start_part $tracking_mode_part $record_type_part
-      $plugins_part $lock_spec_part where id = $team_id";
+      $plugins_part $lock_spec_part $working_hours_part where id = $team_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 

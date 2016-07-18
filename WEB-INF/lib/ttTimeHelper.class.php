@@ -146,18 +146,23 @@ class ttTimeHelper {
     return (int)@$time_a[1] + ((int)@$time_a[0]) * 60;
   }
   
-  // toDuration - calculates duration between start and finish times in 00:00 format.
-  static function toDuration($start, $finish) {
-    $duration_minutes = ttTimeHelper::toMinutes($finish) - ttTimeHelper::toMinutes($start);
-    if ($duration_minutes <= 0) return false;
-    
-    $hours = (string)((int)($duration_minutes / 60));
-    $mins = (string)($duration_minutes % 60);
+  // fromMinutes - converts a number of minutes to format 00:00
+  static function fromMinutes($minutes){
+    $hours = (string)((int)($minutes / 60));
+    $mins = (string)(abs($minutes % 60));
     if (strlen($hours) == 1)
       $hours = '0'.$hours;
     if (strlen($mins) == 1)
       $mins = '0' . $mins;
     return $hours.':'.$mins;
+  }
+  
+  // toDuration - calculates duration between start and finish times in 00:00 format.
+  static function toDuration($start, $finish) {
+    $duration_minutes = ttTimeHelper::toMinutes($finish) - ttTimeHelper::toMinutes($start);
+    if ($duration_minutes <= 0) return false;
+    
+    return ttTimeHelper::fromMinutes($duration_minutes);
   }
   
   // The to12HourFormat function converts a 24-hour time value (such as 15:23) to 12 hour format (03:23 PM).
@@ -479,6 +484,21 @@ class ttTimeHelper {
     $mdb2 = getConnection();
 
     $period = new Period(INTERVAL_THIS_WEEK, $date);
+    $sql = "select sum(time_to_sec(duration)) as sm from tt_log where user_id = $user_id and date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."' and status = 1";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      return sec_to_time_fmt_hm($val['sm']);
+    }
+    return 0;
+  }
+  
+  // getTimeForMonth - gets total time for a user for a given month.
+  static function getTimeForMonth($user_id, $date){
+    import('Period');
+    $mdb2 = getConnection();
+    
+    $period = new Period(INTERVAL_THIS_MONTH, $date);
     $sql = "select sum(time_to_sec(duration)) as sm from tt_log where user_id = $user_id and date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."' and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {

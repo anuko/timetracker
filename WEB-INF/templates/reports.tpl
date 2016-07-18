@@ -149,7 +149,7 @@ function handleCheckboxes() {
 
 {$forms.reportForm.open}
 <div style="padding: 0 0 10 0;">
-  <table border="0" bgcolor="#efefef" width="720">
+  <table border="0" class="divider">
     <tr>
       <td>
         <table cellspacing="1" cellpadding="3" border="0">
@@ -278,7 +278,7 @@ function handleCheckboxes() {
       </table>
 
 <div style="padding: 10 0 10 0;">
-  <table border="0" bgcolor="#efefef" width="720">
+  <table border="0" class="divider">
     <tr>
       <td align="center">
         <table cellspacing="1" cellpadding="3" border="0">

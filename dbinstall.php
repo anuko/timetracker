@@ -612,7 +612,14 @@ if ($_POST) {
     setChange("ALTER TABLE tt_teams ADD COLUMN lock_spec varchar(255) default NULL");
     setChange("ALTER TABLE tt_teams DROP locktime");
   }
-
+  
+  if ($_POST["convert1900to1930"]){
+    setChange("CREATE TABLE `tt_monthly_quota` (`team_id` int(11) NOT NULL, `year` smallint(5) UNSIGNED NOT NULL, `month` tinyint(3) UNSIGNED NOT NULL, `quota` smallint(5) UNSIGNED NOT NULL, PRIMARY KEY (`year`,`month`,`team_id`))");
+    setChange("ALTER TABLE `tt_monthly_quota` ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+    setChange("ALTER TABLE `tt_teams` ADD `daily_working_hours` SMALLINT NULL DEFAULT '8' AFTER `lock_spec`");
+    setChange("UPDATE `tt_teams` SET `daily_working_hours` = 8");
+  }
+  
   // The update_clients function updates projects field in tt_clients table.
   if ($_POST["update_clients"]) {
     $mdb2 = getConnection();
@@ -696,6 +703,7 @@ if ($_POST) {
     setChange("OPTIMIZE TABLE tt_fav_reports");
     setChange("OPTIMIZE TABLE tt_invoices");
     setChange("OPTIMIZE TABLE tt_log");
+    setChange("OPTIMIZE TABLE tt_monthly_quota");
     setChange("OPTIMIZE TABLE tt_project_task_binds");
     setChange("OPTIMIZE TABLE tt_projects");
     setChange("OPTIMIZE TABLE tt_tasks");
@@ -715,7 +723,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.9)</b>
+    <td width="80%"><b>Create database structure (v1.9.30)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -749,6 +757,10 @@ if ($_POST) {
   <tr valign="top">
     <td>Update database structure (v1.6 to v1.9)</td>
     <td><input type="submit" name="convert1600to1900" value="Update"><br></td>
+  </tr>
+  <tr valign="top">
+    <td>Update database structure (v1.9 to v1.9.30)</td>
+    <td><input type="submit" name="convert1900to1930" value="Update"><br></td>
   </tr>
 </table>
 
