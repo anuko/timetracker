@@ -56,7 +56,7 @@ if ($request->isPost()){
     $hours = $request->getParameter("dailyWorkingHours");
     $teamDetails = ttTeamHelper::getTeamDetails($quota->usersTeamId);
     $res = ttTeamHelper::update($quota->usersTeamId, array('name'=>$teamDetails['team_name'], 
-                                                           'working_hours'=>$hours));
+                                                           'workday_hours'=>$hours));
   }
   if ($res) {
     header('Location: profile_edit.php');
