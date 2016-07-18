@@ -3,3 +3,5 @@ WEB-INF/templates_c/*.php
 WEB-INF/templates_c/*.png
 WEB-INF/lib/tcpdf/
 nbproject/
+upload/
+.vscode/
