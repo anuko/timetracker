@@ -218,3 +218,6 @@ define('AUTH_MODULE', 'db');
 // team manager can set monthly quota for years between these values:
 define('MONTHLY_QUOTA_YEARS_START', 2010); // if nothing is specified, it falls back to 2010
 define('MONTHLY_QUOTA_YEARS_END', 2031); // if nothing is specified it falls back to 2030
+
+// note input height in time.php
+define('NOTE_INPUT_HEIGHT', '40');
