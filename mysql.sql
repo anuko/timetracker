@@ -28,6 +28,7 @@ CREATE TABLE `tt_teams` (
   `plugins` varchar(255) default NULL,                   # a list of enabled plugins for team
   `lock_spec` varchar(255) default NULL,                 # Cron specification for record locking,
                                                          # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
+  `daily_working_hours` smallint(6) DEFAULT '8',         # number of working hours per days, a worker is suppose to work
   `custom_logo` tinyint(4) default '0',                  # whether to use a custom logo or not
   `status` tinyint(4) default '1',                       # team status
   PRIMARY KEY (`id`)
@@ -338,3 +339,20 @@ create index user_idx on tt_expense_items(user_id);
 create index client_idx on tt_expense_items(client_id);
 create index project_idx on tt_expense_items(project_id);
 create index invoice_idx on tt_expense_items(invoice_id);
+
+#
+# Structure for table tt_monthly_quota.
+# This table lists monthly quota per team.
+#
+
+CREATE TABLE `tt_monthly_quota` (
+  `team_id` int(11) NOT NULL,             # team's id
+  `year` smallint(5) UNSIGNED NOT NULL,   # year we'setting monthly quota for
+  `month` tinyint(3) UNSIGNED NOT NULL,   # month we're settng monthly quota for
+  `quota` smallint(5) UNSIGNED NOT NULL,  # the monthly quota
+  PRIMARY KEY (`year`,`month`,`team_id`)
+);
+
+ALTER TABLE `tt_monthly_quota`
+  ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+

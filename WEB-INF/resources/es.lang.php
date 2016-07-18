@@ -178,6 +178,9 @@ $i18n_key_words = array(
 // 'label.cost' => 'Cost',
 // 'label.week_total' => 'Week total',
 // 'label.day_total' => 'Day total',
+// 'label.month_total' => 'Month total',
+// 'label.month_left' => 'Time until quota is met',
+// 'label.month_over' => 'Over monthly quota',
 'label.today' => 'Hoy',
 'label.total_hours' => 'Horas totales',
 // TODO: translate the following strings.
@@ -228,6 +231,11 @@ $i18n_key_words = array(
 // TODO: translate the following strings.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
+// 'label.year' => 'Year',
+// 'label.month' => 'Month',
+// 'label.quota' => 'Quota',
+// 'label.dailyWorkingHours' => 'Daily working hours',
+// 'label.empty_values_explanation' => 'If values are empty, quotas are calculated automatically based on holidays in config',
 
 // Form titles.
 'title.login' => 'Sesión iniciada',
@@ -281,6 +289,7 @@ $i18n_key_words = array(
 // 'title.add_notification' => 'Adding Notification',
 // 'title.edit_notification' => 'Editing Notification',
 // 'title.delete_notification' => 'Deleting Notification',
+// 'title.monthly_quota' => 'Monthly quota',
 'title.export' => 'Exportar datos',
 'title.import' => 'Importar datos',
 'title.options' => 'Opciones',

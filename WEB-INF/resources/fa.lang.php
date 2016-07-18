@@ -162,6 +162,9 @@ $i18n_key_words = array(
 'label.cost' => 'هزینه',
 'label.week_total' => 'کل هفته',
 'label.day_total' => 'کل روز',
+// 'label.month_total' => 'Month total',
+// 'label.month_left' => 'Time until quota is met',
+// 'label.month_over' => 'Over monthly quota',
 'label.today' => 'امروز',
 'label.total_hours' => 'مجموع ساعت',
 'label.total_cost' => 'مجموع هزینه ها',
@@ -205,6 +208,11 @@ $i18n_key_words = array(
 // TODO: translate the following strings.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
+// 'label.year' => 'Year',
+// 'label.month' => 'Month',
+// 'label.quota' => 'Quota',
+// 'label.dailyWorkingHours' => 'Daily working hours',
+// 'label.empty_values_explanation' => 'If values are empty, quotas are calculated automatically based on holidays in config',
 
 // Form titles.
 'title.login' => 'ورود',
@@ -252,6 +260,7 @@ $i18n_key_words = array(
 // 'title.add_notification' => 'Adding Notification',
 // 'title.edit_notification' => 'Editing Notification',
 // 'title.delete_notification' => 'Deleting Notification',
+// 'title.monthly_quota' => 'Monthly quota',
 'title.export' => 'پشتیانی گرفتن از اطلاعات تیم',
 'title.import' => 'وارد کردن اطلاعات تیم',
 'title.options' => 'گزینه ها',
