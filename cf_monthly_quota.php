@@ -12,19 +12,19 @@ if (!ttAccessCheck(right_manage_team)) {
 }
 
 // fallback values
-$yearStart = 2010;
+$yearStart = 2015;
 $yearEnd = 2030;
 
-if (defined('MONTHLY_QUOTA_YEARS_START')){
-  $yearStart = (int)MONTHLY_QUOTA_YEARS_START;
+if (defined('MONTHLY_QUOTA_YEAR_START')){
+  $yearStart = (int)MONTHLY_QUOTA_YEAR_START;
 }
-if (defined('MONTHLY_QUOTA_YEARS_END')){
-  $yearEnd = (int)MONTHLY_QUOTA_YEARS_END;
+if (defined('MONTHLY_QUOTA_YEAR_END')){
+  $yearEnd = (int)MONTHLY_QUOTA_YEAR_END;
 }
 
 // create values for dropdown
 $years = array();
-for ($i=$yearStart; $i < $yearEnd; $i++) { 
+for ($i=$yearStart; $i <= $yearEnd; $i++) {
   array_push($years, array('id'=>$i, 'name'=>$i));
 }
 

@@ -215,9 +215,10 @@ define('AUTH_MODULE', 'db');
 
 // define('AUTH_DEBUG', false); // Note: enabling AUTH_DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
 
-// team manager can set monthly quota for years between these values:
-define('MONTHLY_QUOTA_YEARS_START', 2010); // if nothing is specified, it falls back to 2010
-define('MONTHLY_QUOTA_YEARS_END', 2031); // if nothing is specified it falls back to 2030
+
+// Team managers can set monthly work hour quota for years between the following  values.
+// define('MONTHLY_QUOTA_YEAR_START', 2010); // If nothing is specified, it falls back to 2015.
+// define('MONTHLY_QUOTA_YEAR_END', 2025); // if nothing is specified it falls back to 2030.
 
 // note input height in time.php
 define('NOTE_INPUT_HEIGHT', '40');
