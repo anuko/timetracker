@@ -130,13 +130,6 @@ function import($class_name) {
 	}
 
 
-	function closeConnection() {
-		if (isset($GLOBALS["_DB_CONNECTION"])) {
-			$GLOBALS["_DB_CONNECTION"]->close();
-			unset($GLOBALS["_DB_CONNECTION"]);
-		}
-	}
-
 // time_to_decimal converts a time string such as 1:15 to its decimal representation such as 1.25 or 1,25.
 function time_to_decimal($val) {
   global $user;
