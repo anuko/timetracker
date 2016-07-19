@@ -122,7 +122,6 @@ function import($class_name) {
     			die($mdb2->getMessage());
 			}
 
-			$mdb2->setOption('debug', true);
 			$mdb2->setFetchMode(MDB2_FETCHMODE_ASSOC);
 			
    			$GLOBALS["_MDB2_CONNECTION"] = $mdb2;
