@@ -32,7 +32,12 @@ class ttHttpRequest {
     return isset( $_SERVER['REQUEST_METHOD'] ) ? $_SERVER['REQUEST_METHOD'] : false;
   }
 
-  // The isPost function determines if a request method is POST.
+  // The isGet function determines if a request method is a GET.
+  function isGet() {
+    return ($this->getMethod() == 'GET');
+  }
+
+  // The isPost function determines if a request method is a POST.
   function isPost() {
     return ($this->getMethod() == 'POST');
   }

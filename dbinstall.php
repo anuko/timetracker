@@ -42,8 +42,8 @@ function setChange($sql) {
     print "successful update<br>\n";
 }
 
-if (!$request->isPost()) {
-  echo('<h2>Environment check</h2>');
+if ($request->isGet()) {
+  echo('<h2>Environment Checks</h2>');
 
   // Check if WEB-INF/templates_c dir is writable.
   if (is_writable(APP_DIR.'/WEB-INF/templates_c/')) {
