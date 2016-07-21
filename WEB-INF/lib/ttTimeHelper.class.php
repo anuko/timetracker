@@ -146,8 +146,9 @@ class ttTimeHelper {
     return (int)@$time_a[1] + ((int)@$time_a[0]) * 60;
   }
   
-  // fromMinutes - converts a number of minutes to format 00:00
-  static function fromMinutes($minutes){
+  // toAbsDuration - converts a number of minutes to format 00:00
+  // even if $minutes is negative.
+  static function toAbsDuration($minutes){
     $hours = (string)((int)abs($minutes / 60));
     $mins = (string)(abs($minutes % 60));
     if (strlen($hours) == 1)
@@ -162,7 +163,7 @@ class ttTimeHelper {
     $duration_minutes = ttTimeHelper::toMinutes($finish) - ttTimeHelper::toMinutes($start);
     if ($duration_minutes <= 0) return false;
     
-    return ttTimeHelper::fromMinutes($duration_minutes);
+    return ttTimeHelper::toAbsDuration($duration_minutes);
   }
   
   // The to12HourFormat function converts a 24-hour time value (such as 15:23) to 12 hour format (03:23 PM).

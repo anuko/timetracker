@@ -72,7 +72,7 @@ if ($user->isPluginEnabled('mq')){
   
   $smarty->assign('month_total', $month_total);
   $smarty->assign('over_quota', $minutesLeft < 0);
-  $smarty->assign('month_left', ttTimeHelper::fromMinutes($minutesLeft));
+  $smarty->assign('month_left', ttTimeHelper::toAbsDuration($minutesLeft));
 }
 
 // Initialize variables.
