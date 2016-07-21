@@ -32,8 +32,8 @@
 // Note to translators: Please use proper capitalization rules for your language.
 
 $i18n_language = 'Eesti';
-$i18n_months = array('jaanuar', 'veebruar', 'märts', 'aprill', 'mai', 'juuni', 'juuli', 'august', 'september', 'oktoober', 'november', 'detsember');
-$i18n_weekdays = array('pühapäev', 'esmaspäev', 'teisipäev', 'kolmapäev', 'neljapäev', 'reede', 'laupäev');
+$i18n_months = array('Jaanuar', 'Veebruar', 'Märts', 'Aprill', 'Mai', 'Juuni', 'Juuli', 'August', 'September', 'Oktoober', 'November', 'Detsember');
+$i18n_weekdays = array('Pühapäev', 'Esmaspäev', 'Teisipäev', 'Kolmapäev', 'Neljapäev', 'Reede', 'Laupäev');
 $i18n_weekdays_short = array('P', 'E', 'T', 'K', 'N', 'R', 'L');
 // format mm/dd
 $i18n_holidays = array('01/01', '02/24', '04/10', '04/12', '05/01', '05/31', '06/23', '06/24', '08/20', '12/24', '12/25', '12/26');
@@ -41,29 +41,29 @@ $i18n_holidays = array('01/01', '02/24', '04/10', '04/12', '05/01', '05/31', '06
 $i18n_key_words = array(
 
 // Menus.
-'menu.login' => 'login',
-'menu.logout' => 'logout',
+'menu.login' => 'Login',
+'menu.logout' => 'Logout',
 // TODO: Translate the following:
 // 'menu.forum' => 'Forum',
-'menu.help' => 'abiinfo',
+'menu.help' => 'Abiinfo',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => 'loo uus managerikonto',
-'menu.profile' => 'profiili',
-'menu.time' => 'aeg',
+'menu.profile' => 'Profiili',
+'menu.time' => 'Aeg',
 // TODO: Translate the following:
 // 'menu.expenses' => 'Expenses',
-'menu.reports' => 'raportid',
+'menu.reports' => 'Raportid',
 // TODO: Translate the following:
 // 'menu.charts' => 'Charts',
-'menu.projects' => 'projektid',
+'menu.projects' => 'Projektid',
 // TODO: Translate the following:
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
-'menu.teams' => 'meeskonnad',
+'menu.teams' => 'Meeskonnad',
 // TODO: Translate the following:
 // 'menu.export' => 'Export',
-'menu.clients' => 'kliendid',
-'menu.options' => 'suvandid',
+'menu.clients' => 'Kliendid',
+'menu.options' => 'Suvandid',
 
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following:
@@ -142,7 +142,8 @@ $i18n_key_words = array(
 // 'label.page' => 'Page',
 
 // Form titles.
-// TODO: the entire title section is missing here. See the English file.
+'title.options' => 'Suvandid',
+// TODO: almost the entire title section is missing here. See the English file.
 
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'lemmikraport',
@@ -177,7 +178,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => 'muuda',
 "form.admin.profile.th.del" => 'kustuta',
 "form.admin.profile.th.active" => 'aktiivne',
-"form.admin.options" => 'suvandid',
 // Note to translators: the strings below are missing in the translation and must be translated
 // "form.admin.custom_date_format" => "date format",
 // "form.admin.custom_time_format" => "time format",

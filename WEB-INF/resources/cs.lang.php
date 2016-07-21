@@ -180,7 +180,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.del" => 'smazat',
 "form.admin.profile.th.active" => 'aktovní',
 // Note to translators: the strings below are missing in the translation and must be added
-// "form.admin.options" => 'options',
 // "form.admin.custom_date_format" => "date format",
 // "form.admin.custom_time_format" => "time format",
 // "form.admin.start_week" => "first day of week",

@@ -140,7 +140,9 @@ $i18n_key_words = array(
 'label.email' => 'email',
 
 // Form titles.
-// TODO: the entire title section is missing here. See the English file.
+'title.options' => 'Indstillinger',
+// TODO: almost entire title section is missing here. See the English file.
+
 
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'favorit rapport',
@@ -174,7 +176,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => 'rediger',
 "form.admin.profile.th.del" => 'slet',
 "form.admin.profile.th.active" => 'aktive',
-"form.admin.options" => 'indstillinger',
 // "form.admin.custom_date_format" => "date format",
 // "form.admin.custom_time_format" => "time format",
 // "form.admin.start_week" => "first day of week",
