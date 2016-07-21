@@ -31,12 +31,6 @@ import('DateAndTime');
 // The ttTimeHelper is a class to help with time-related values.
 class ttTimeHelper {
 	
-  /* // isWeekend determines if $date falls on weekend.
-  static function isWeekend($date) {
-	$weekDay = date('w', strtotime($date));
-    return ($weekDay == WEEKEND_START_DAY || $weekDay == (WEEKEND_START_DAY + 1) % 7);
-  }*/
-
   // isValidTime validates a value as a time string.
   static function isValidTime($value) {
     if (strlen($value)==0 || !isset($value)) return false;
@@ -89,6 +83,7 @@ class ttTimeHelper {
         return false;
       return true;
     }
+
     return false;
   }
   
@@ -168,7 +163,7 @@ class ttTimeHelper {
   
   // The to12HourFormat function converts a 24-hour time value (such as 15:23) to 12 hour format (03:23 PM).
   static function to12HourFormat($value) {
-  	if ('24:00' == $value) return '12:00 AM';
+    if ('24:00' == $value) return '12:00 AM';
   	
     $time_a = explode(':', $value);
     if ($time_a[0] > 12)
@@ -185,51 +180,51 @@ class ttTimeHelper {
   // The to24HourFormat function attempts to convert a string value (human readable notation of time of day)
   // to a 24-hour time format HH:MM.
   static function to24HourFormat($value) {
-  	$res = null;
-  	
-  	// Algorithm: use regular expressions to find a matching pattern, starting with most popular patterns first.
-  	$tmp_val = trim($value);
+    $res = null;
 
-  	// 24 hour patterns.
-  	if (preg_match('/^([01][0-9]|2[0-3]):[0-5][0-9]$/', $tmp_val)) { // 00:00 - 23:59
-  	  // We already have a 24-hour format. Just return it. 
-  	  $res = $tmp_val; 
-  	  return $res;
-  	}
-  	if (preg_match('/^[0-9]:[0-5][0-9]$/', $tmp_val)) { // 0:00 - 9:59
-  	  // This is a 24-hour format without a leading zero. Add 0 and return.
-  	  $res = '0'.$tmp_val; 
-  	  return $res;
-  	}
+    // Algorithm: use regular expressions to find a matching pattern, starting with most popular patterns first.
+    $tmp_val = trim($value);
+
+    // 24 hour patterns.
+    if (preg_match('/^([01][0-9]|2[0-3]):[0-5][0-9]$/', $tmp_val)) { // 00:00 - 23:59
+      // We already have a 24-hour format. Just return it.
+      $res = $tmp_val;
+      return $res;
+    }
+    if (preg_match('/^[0-9]:[0-5][0-9]$/', $tmp_val)) { // 0:00 - 9:59
+      // This is a 24-hour format without a leading zero. Add 0 and return.
+      $res = '0'.$tmp_val;
+      return $res;
+    }
     if (preg_match('/^[0-9]$/', $tmp_val)) { // 0 - 9
-  	  // Single digit. Assuming hour number.
-  	  $res = '0'.$tmp_val.':00'; 
-  	  return $res;
-  	}
+      // Single digit. Assuming hour number.
+      $res = '0'.$tmp_val.':00';
+      return $res;
+    }
     if (preg_match('/^([01][0-9]|2[0-4])$/', $tmp_val)) { // 00 - 24
-  	  // Two digit hour number.
-  	  $res = $tmp_val.':00'; 
-  	  return $res;
-  	}
+      // Two digit hour number.
+      $res = $tmp_val.':00';
+      return $res;
+    }
     if (preg_match('/^[0-9][0-5][0-9]$/', $tmp_val)) { // 000 - 959
-  	  // Missing colon. We'll assume the first digit is the hour, the rest is minutes.
-  	  $tmp_arr = str_split($tmp_val);
-  	  $res = '0'.$tmp_arr[0].':'.$tmp_arr[1].$tmp_arr[2]; 
-  	  return $res;
-  	}  	
+      // Missing colon. We'll assume the first digit is the hour, the rest is minutes.
+      $tmp_arr = str_split($tmp_val);
+      $res = '0'.$tmp_arr[0].':'.$tmp_arr[1].$tmp_arr[2];
+      return $res;
+    }
     if (preg_match('/^([01][0-9]|2[0-3])[0-5][0-9]$/', $tmp_val)) { // 0000 - 2359
-  	  // Missing colon. We'll assume the first 2 digits are the hour, the rest is minutes.
-  	  $tmp_arr = str_split($tmp_val);
-  	  $res = $tmp_arr[0].$tmp_arr[1].':'.$tmp_arr[2].$tmp_arr[3]; 
-  	  return $res;
-  	}
-  	// Special handling for midnight.
+      // Missing colon. We'll assume the first 2 digits are the hour, the rest is minutes.
+      $tmp_arr = str_split($tmp_val);
+      $res = $tmp_arr[0].$tmp_arr[1].':'.$tmp_arr[2].$tmp_arr[3];
+      return $res;
+    }
+    // Special handling for midnight.
     if ($tmp_val == '24:00' || $tmp_val == '2400')
-      return '24:00';  
-  	
+      return '24:00';
+
     // 12 hour AM patterns.
     if (preg_match('/.(am|AM)$/', $tmp_val)) {
-    	
+
       // The $value ends in am or AM. Strip it.
       $tmp_val = rtrim(substr($tmp_val, 0, -2));
       
@@ -239,37 +234,37 @@ class ttTimeHelper {
         
       // We are ready to convert AM time.
       if (preg_match('/^(0[0-9]|1[0-1]):[0-5][0-9]$/', $tmp_val)) { // 00:00 - 11:59
-  	    // We already have a 24-hour format. Just return it. 
-  	    $res = $tmp_val; 
+        // We already have a 24-hour format. Just return it.
+        $res = $tmp_val;
         return $res;
-  	  }
-  	  if (preg_match('/^[1-9]:[0-5][0-9]$/', $tmp_val)) { // 1:00 - 9:59
-  	    // This is a 24-hour format without a leading zero. Add 0 and return.
-  	    $res = '0'.$tmp_val; 
-  	    return $res;
-  	  }
+      }
+      if (preg_match('/^[1-9]:[0-5][0-9]$/', $tmp_val)) { // 1:00 - 9:59
+        // This is a 24-hour format without a leading zero. Add 0 and return.
+        $res = '0'.$tmp_val;
+        return $res;
+      }
       if (preg_match('/^[1-9]$/', $tmp_val)) { // 1 - 9
     	// Single digit. Assuming hour number.
-        $res = '0'.$tmp_val.':00'; 
-  	    return $res;
-  	  }
-  	  if (preg_match('/^(0[0-9]|1[0-1])$/', $tmp_val)) { // 00 - 11
-  	    // Two digit hour number.
-  	    $res = $tmp_val.':00'; 
-  	    return $res;
-  	  }
+        $res = '0'.$tmp_val.':00';
+        return $res;
+      }
+      if (preg_match('/^(0[0-9]|1[0-1])$/', $tmp_val)) { // 00 - 11
+        // Two digit hour number.
+        $res = $tmp_val.':00';
+        return $res;
+      }
       if (preg_match('/^[1-9][0-5][0-9]$/', $tmp_val)) { // 100 - 959
         // Missing colon. Assume the first digit is the hour, the rest is minutes.
-  	    $tmp_arr = str_split($tmp_val);
-  	    $res = '0'.$tmp_arr[0].':'.$tmp_arr[1].$tmp_arr[2]; 
-  	    return $res;
-  	  }  	
+        $tmp_arr = str_split($tmp_val);
+        $res = '0'.$tmp_arr[0].':'.$tmp_arr[1].$tmp_arr[2];
+        return $res;
+      }
       if (preg_match('/^(0[0-9]|1[0-1])[0-5][0-9]$/', $tmp_val)) { // 0000 - 1159
         // Missing colon. We'll assume the first 2 digits are the hour, the rest is minutes.
-  	    $tmp_arr = str_split($tmp_val);
-  	    $res = $tmp_arr[0].$tmp_arr[1].':'.$tmp_arr[2].$tmp_arr[3]; 
-  	    return $res;
-  	  }  
+        $tmp_arr = str_split($tmp_val);
+        $res = $tmp_arr[0].$tmp_arr[1].':'.$tmp_arr[2].$tmp_arr[3];
+        return $res;
+      }
     } // AM cases handling.
 
     // 12 hour PM patterns.
@@ -290,38 +285,38 @@ class ttTimeHelper {
           $tmp_val = (string)(12 + (int)$tmp_val);
         $res = $tmp_val.':00';
         return $res;
-      }        
+      }
       if (preg_match('/^[1-9][0-5][0-9]$/', $tmp_val)) { // 100 - 959
         // Missing colon. We'll assume the first digit is the hour, the rest is minutes.
-  	    $tmp_arr = str_split($tmp_val);
-  	    $hour = (string)(12 + (int)$tmp_arr[0]);
-  	    $res = $hour.':'.$tmp_arr[1].$tmp_arr[2]; 
-  	    return $res;
-  	  }
-  	  if (preg_match('/^(0[1-9]|1[0-2])[0-5][0-9]$/', $tmp_val)) { // 0100 - 1259
+        $tmp_arr = str_split($tmp_val);
+        $hour = (string)(12 + (int)$tmp_arr[0]);
+        $res = $hour.':'.$tmp_arr[1].$tmp_arr[2];
+        return $res;
+      }
+      if (preg_match('/^(0[1-9]|1[0-2])[0-5][0-9]$/', $tmp_val)) { // 0100 - 1259
         // Missing colon. We'll assume the first 2 digits are the hour, the rest is minutes.
         $hour = substr($tmp_val, 0, -2);
         $min = substr($tmp_val, 2);
         if ('12' != $hour)
           $hour = (string)(12 + (int)$hour); 
-        $res = $hour.':'.$min; 
-  	    return $res;
-  	  }  
+        $res = $hour.':'.$min;
+        return $res;
+      }
       if (preg_match('/^[1-9]:[0-5][0-9]$/', $tmp_val)) { // 1:00 - 9:59
-  	    $hour = substr($tmp_val, 0, -3);
+        $hour = substr($tmp_val, 0, -3);
         $min = substr($tmp_val, 2);
         $hour = (string)(12 + (int)$hour);
-        $res = $hour.':'.$min; 	
-  	    return $res;
-  	  }
+        $res = $hour.':'.$min;
+        return $res;
+      }
       if (preg_match('/^(0[1-9]|1[0-2]):[0-5][0-9]$/', $tmp_val)) { // 01:00 - 12:59
-  	    $hour = substr($tmp_val, 0, -3);
+        $hour = substr($tmp_val, 0, -3);
         $min = substr($tmp_val, 3);
         if ('12' != $hour)
           $hour = (string)(12 + (int)$hour);
-  	    $res = $hour.':'.$min;
+        $res = $hour.':'.$min;
         return $res;
-  	  }    
+      }
     } // PM cases handling.
 
     return $res;
