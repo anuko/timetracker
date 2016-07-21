@@ -176,7 +176,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.del" => 'delete',
 "form.admin.profile.th.active" => 'active',
 "form.admin.options" => 'options',
-"form.admin.lang_browser_default" => '(browser default)',
 "form.admin.custom_date_format" => "date format",
 "form.admin.custom_time_format" => "time format",
 "form.admin.start_week" => "first day of week",
@@ -218,7 +217,6 @@ $i18n_key_words = array(
 
 "form.profile.showchart" => 'show pie charts',
 "form.profile.lang" => 'language',
-"form.profile.lang_browser_default" => '(browser default)',
 "form.profile.custom_date_format" => "date format",
 "form.profile.custom_time_format" => "time format",
 "form.profile.default_format" => "(default)",

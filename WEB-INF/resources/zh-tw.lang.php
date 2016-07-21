@@ -172,7 +172,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.del" => '刪除',
 "form.admin.profile.th.active" => '啟動',
 "form.admin.options" => '選項',
-"form.admin.lang_browser_default" => '(默認流覽器)',
 "form.admin.custom_date_format" => "日期格式",
 "form.admin.custom_time_format" => "時間格式",
 "form.admin.start_week" => "每週的第一天",
@@ -215,7 +214,6 @@ $i18n_key_words = array(
 
 "form.profile.showchart" => '顯示餅狀圖',
 "form.profile.lang" => '語言',
-"form.profile.lang_browser_default" => '(默認流覽器)',
 "form.profile.custom_date_format" => "日期格式",
 "form.profile.custom_time_format" => "時間格式",
 "form.profile.default_format" => "(默認)",
