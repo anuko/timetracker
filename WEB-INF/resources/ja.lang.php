@@ -174,7 +174,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.del" => '削除',
 "form.admin.profile.th.active" => '活動内容',
 "form.admin.options" => 'オプション',
-"form.admin.lang_default" => 'サイトのデフォルト言語',
 "form.admin.custom_date_format" => "日付形式",
 "form.admin.custom_time_format" => "時間形式",
 "form.admin.start_week" => "週の開始日",

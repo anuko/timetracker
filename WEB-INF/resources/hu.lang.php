@@ -174,7 +174,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.del" => 'törlés',
 "form.admin.profile.th.active" => 'aktív',
 "form.admin.options" => 'opciók',
-// "form.admin.lang_default" => 'site default language',
 // "form.admin.custom_date_format" => "date format",
 // "form.admin.custom_time_format" => "time format",
 // "form.admin.start_week" => "first day of week",

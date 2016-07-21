@@ -170,7 +170,6 @@ $i18n_key_words = array(
 // "form.admin.profile.th.del" => 'delete',
 // "form.admin.profile.th.active" => 'active',
 "form.admin.options" => 'opções',
-// "form.admin.lang_default" => 'site default language',
 // "form.admin.custom_date_format" => "date format",
 // "form.admin.custom_time_format" => "time format",
 // "form.admin.start_week" => "first day of week",

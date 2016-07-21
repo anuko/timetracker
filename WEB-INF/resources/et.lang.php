@@ -179,7 +179,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.active" => 'aktiivne',
 "form.admin.options" => 'suvandid',
 // Note to translators: the strings below are missing in the translation and must be translated
-// "form.admin.lang_default" => 'site default language',
 // "form.admin.custom_date_format" => "date format",
 // "form.admin.custom_time_format" => "time format",
 // "form.admin.start_week" => "first day of week",

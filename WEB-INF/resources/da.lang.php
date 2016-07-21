@@ -175,7 +175,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.del" => 'slet',
 "form.admin.profile.th.active" => 'aktive',
 "form.admin.options" => 'indstillinger',
-// "form.admin.lang_default" => 'site default language',
 // "form.admin.custom_date_format" => "date format",
 // "form.admin.custom_time_format" => "time format",
 // "form.admin.start_week" => "first day of week",

@@ -172,7 +172,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.del" => '삭제',
 "form.admin.profile.th.active" => '활동내용',
 "form.admin.options" => '옵션',
-"form.admin.lang_default" => '사이트의 디폴트 언어',
 "form.admin.custom_date_format" => "날짜 포맷",
 "form.admin.custom_time_format" => "시간 포맷",
 "form.admin.start_week" => "주의 시작요일",

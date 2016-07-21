@@ -172,7 +172,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.del" => '删除',
 "form.admin.profile.th.active" => '启用',
 "form.admin.options" => '选项',
-"form.admin.lang_default" => '网站默认语言',
 "form.admin.lang_browser_default" => '(默认浏览器)',
 "form.admin.custom_date_format" => "日期格式",
 "form.admin.custom_time_format" => "时间格式",
