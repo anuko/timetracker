@@ -323,7 +323,6 @@ $i18n_key_words = array(
 // Time form. See example at https://timetracker.anuko.com/time.php.
 'form.time.duration_format' => '(hh:mm alebo 0,0h)',
 'form.time.billable' => 'Faktúrovateľných',
-'form.time.no_records' => 'Neexistujú časové záznamy.',
 'form.time.uncompleted' => 'Neukončené',
 // TODO: translate the folllowing.
 // 'form.time.remaining_quota' => 'Remaining quota',
