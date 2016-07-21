@@ -154,8 +154,6 @@ $i18n_key_words = array(
 'label.week_total' => 'Week totaal',
 // TODO: translate the following.
 // 'label.month_total' => 'Month total',
-// 'label.remaining_quota' => 'Remaining quota',
-// 'label.over_quota' => 'Over quota',
 'label.today' => 'Vandaag',
 'label.total_hours' => 'Uren totaal',
 'label.total_cost' => 'Totale kosten',
@@ -302,6 +300,9 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(uu:mm of 0.0u)',
 'form.time.billable' => 'Factureerbaar',
 'form.time.uncompleted' => 'Onvolledig',
+// TODO: translate the following.
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Dit tijdrecord is opgeslagen met alleen een starttijd. Dit is geen fout.',

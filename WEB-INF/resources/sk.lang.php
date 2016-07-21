@@ -166,8 +166,6 @@ $i18n_key_words = array(
 'label.week_total' => 'Týždeň celkom',
 // TODO: translate the following.
 // 'label.month_total' => 'Month total',
-// 'label.remaining_quota' => 'Remaining quota',
-// 'label.over_quota' => 'Over quota',
 'label.today' => 'Dnes',
 'label.total_hours' => 'Hodín celkom',
 'label.total_cost' => 'Náklady celkom',
@@ -327,6 +325,9 @@ $i18n_key_words = array(
 'form.time.billable' => 'Faktúrovateľných',
 'form.time.no_records' => 'Neexistujú časové záznamy.',
 'form.time.uncompleted' => 'Neukončené',
+// TODO: translate the folllowing.
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Tento záznam bol uložený iba s časom začiatku. Nie je to chyba.',

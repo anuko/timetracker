@@ -358,9 +358,9 @@ function get_time() {
   <tr>
     <td align="left">{$i18n.label.month_total}: {$month_total}</td>
     {if $over_quota}
-    <td align="right">{$i18n.label.over_quota}: <span style="color: green;">{$month_left}</span></td>
+    <td align="right">{$i18n.form.time.over_quota}: <span style="color: green;">{$month_left}</span></td>
     {else}
-    <td align="right">{$i18n.label.remaining_quota}: <span style="color: red;">{$month_left}</span></td>
+    <td align="right">{$i18n.form.time.remaining_quota}: <span style="color: red;">{$month_left}</span></td>
     {/if}
   </tr>
   {/if}

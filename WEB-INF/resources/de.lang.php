@@ -154,10 +154,8 @@ $i18n_key_words = array(
 'label.cost' => 'Kosten',
 'label.day_total' => 'Summe (Tag)',
 'label.week_total' => 'Summe (Woche)',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
-// 'label.remaining_quota' => 'Remaining quota',
-// 'label.over_quota' => 'Over quota',
 'label.today' => 'Heute',
 'label.total_hours' => 'Gesamtstunden',
 'label.total_cost' => 'Totale Kosten',
@@ -309,6 +307,9 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(hh:mm oder 0.0h)',
 'form.time.billable' => 'In Rechnung stellen',
 'form.time.uncompleted' => 'Unvollständig',
+// TODO: translate the following.
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Dieser Eintrag wurde ohne Startzeit gespeichert. Dies ist kein Fehler.',

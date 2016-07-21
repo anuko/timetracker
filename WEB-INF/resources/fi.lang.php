@@ -151,10 +151,8 @@ $i18n_key_words = array(
 'label.cost' => 'Hinta',
 'label.day_total' => 'Päivä yhteensä',
 'label.week_total' => 'Viikko yhteensä',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
-// 'label.remaining_quota' => 'Remaining quota',
-// 'label.over_quota' => 'Over quota',
 'label.today' => 'Tänään',
 'label.total_hours' => 'Tunnit yhteensä',
 'label.total_cost' => 'Hinta yhteensä',
@@ -301,6 +299,9 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(hh:mm tai 0.0h)',
 'form.time.billable' => 'Laskutettava',
 'form.time.uncompleted' => 'Keskeneräinen',
+// TODO: translate the following.
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Vain aloitusaika tallennettiin tietueeseen. Kyseessä ei ole virhe.',

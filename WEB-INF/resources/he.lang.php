@@ -169,8 +169,6 @@ $i18n_key_words = array(
 'label.week_total' => 'סיכום שבועי',
 // TODO: translate the following.
 // 'label.month_total' => 'Month total',
-// 'label.remaining_quota' => 'Remaining quota',
-// 'label.over_quota' => 'Over quota',
 'label.today' => 'היום',
 'label.total_hours' => 'סך הכל שעות',
 'label.total_cost' => 'סך הכל עלות',
@@ -328,6 +326,9 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(hh:mm או 0.0h)',
 'form.time.billable' => 'לחיוב',
 'form.time.uncompleted' => 'רישום חסר',
+// TODO: translate the following.
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'רישום זה נשמר עם שעת התחלה בלבד. זאת איננה טעות.',

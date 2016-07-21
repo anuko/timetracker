@@ -154,8 +154,6 @@ $i18n_key_words = array(
 'label.day_total' => 'Итог за день',
 'label.week_total' => 'Итог за неделю',
 'label.month_total' => 'Итог за месяц',
-'label.remaining_quota' => 'Доступная квота',
-'label.over_quota' => 'Превышение квоты',
 'label.today' => 'Сегодня',
 'label.total_hours' => 'Итого часов',
 'label.total_cost' => 'Итоговая стоимость',
@@ -303,6 +301,8 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(чч:мм или 0.0ч)',
 'form.time.billable' => 'Включается в счёт',
 'form.time.uncompleted' => 'Не завершено',
+'form.time.remaining_quota' => 'Доступная квота',
+'form.time.over_quota' => 'Превышение квоты',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Эта запись сохранена только со временем начала. Это не ошибка.',

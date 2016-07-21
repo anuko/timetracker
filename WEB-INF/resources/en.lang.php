@@ -154,8 +154,6 @@ $i18n_key_words = array(
 'label.day_total' => 'Day total',
 'label.week_total' => 'Week total',
 'label.month_total' => 'Month total',
-'label.remaining_quota' => 'Remaining quota',
-'label.over_quota' => 'Over quota',
 'label.today' => 'Today',
 'label.total_hours' => 'Total hours',
 'label.total_cost' => 'Total cost',
@@ -301,6 +299,8 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(hh:mm or 0.0h)',
 'form.time.billable' => 'Billable',
 'form.time.uncompleted' => 'Uncompleted',
+'form.time.remaining_quota' => 'Remaining quota',
+'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',

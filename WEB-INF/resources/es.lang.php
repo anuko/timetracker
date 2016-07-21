@@ -179,8 +179,6 @@ $i18n_key_words = array(
 // 'label.day_total' => 'Day total',
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
-// 'label.remaining_quota' => 'Remaining quota',
-// 'label.over_quota' => 'Over quota',
 'label.today' => 'Hoy',
 'label.total_hours' => 'Horas totales',
 // TODO: translate the following strings.
@@ -357,8 +355,10 @@ $i18n_key_words = array(
 // Note to translators: translate form.time.duration_format.
 // 'form.time.duration_format' => '(hh:mm or 0.0h)',
 'form.time.billable' => 'Facturable',
-// TODO: translate form.time.uncompleted.
+// TODO: translate the following.
 // 'form.time.uncompleted' => 'Uncompleted',
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Este historial fue guardado solamente con la hora de Inicio. Esto no es un error.',

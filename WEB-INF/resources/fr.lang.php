@@ -168,8 +168,6 @@ $i18n_key_words = array(
 'label.week_total' => 'Total hebdomadaire',
 // TODO: translate the following.
 // 'label.month_total' => 'Month total',
-// 'label.remaining_quota' => 'Remaining quota',
-// 'label.over_quota' => 'Over quota',
 'label.today' => 'Aujourd\\\'hui',
 'label.total_hours' => 'Total d\\\'heures',
 'label.total_cost' => 'Coût total',
@@ -341,6 +339,9 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(hh:mm ou 0.0h)',
 'form.time.billable' => 'Facturable',
 'form.time.uncompleted' => 'Non terminée',
+// TODO: translate the following.
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Cet enregistrement a été enregistré avec seulement une heure de début. Il ne s\\\'agit pas d\\\'une erreur.',

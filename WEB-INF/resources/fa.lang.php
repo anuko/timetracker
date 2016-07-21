@@ -162,10 +162,8 @@ $i18n_key_words = array(
 'label.cost' => 'هزینه',
 'label.day_total' => 'کل روز',
 'label.week_total' => 'کل هفته',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
-// 'label.remaining_quota' => 'Remaining quota',
-// 'label.over_quota' => 'Over quota',
 'label.today' => 'امروز',
 'label.total_hours' => 'مجموع ساعت',
 'label.total_cost' => 'مجموع هزینه ها',
@@ -326,6 +324,9 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(hh:mm یا 0.0h)',
 'form.time.billable' => 'قابل پرداخت',
 'form.time.uncompleted' => 'ناتمام',
+// TODO: translate the following.
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 // TODO: translate form.time_edit.uncompleted. 
