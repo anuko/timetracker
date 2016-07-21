@@ -66,13 +66,13 @@ if ($user->isPluginEnabled('cf')) {
 if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
-  $monthlyQuota = $quota->get($selected_date->mYear, $selected_date->mMonth);
+  $month_quota = $quota->get($selected_date->mYear, $selected_date->mMonth);
   $month_total = ttTimeHelper::getTimeForMonth($user->getActiveUser(), $selected_date);
-  $minutesLeft = ttTimeHelper::toMinutes($monthlyQuota) - ttTimeHelper::toMinutes($month_total);
+  $minutes_left = ttTimeHelper::toMinutes($month_quota) - ttTimeHelper::toMinutes($month_total);
   
   $smarty->assign('month_total', $month_total);
-  $smarty->assign('over_quota', $minutesLeft < 0);
-  $smarty->assign('month_left', ttTimeHelper::toAbsDuration($minutesLeft));
+  $smarty->assign('over_quota', $minutes_left < 0);
+  $smarty->assign('quota_remaining', ttTimeHelper::toAbsDuration($minutes_left));
 }
 
 // Initialize variables.
