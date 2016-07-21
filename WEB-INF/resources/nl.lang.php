@@ -154,8 +154,8 @@ $i18n_key_words = array(
 'label.week_total' => 'Week totaal',
 // TODO: translate the following.
 // 'label.month_total' => 'Month total',
-// 'label.month_left' => 'Time until quota is met',
-// 'label.month_over' => 'Over monthly quota',
+// 'label.remaining_quota' => 'Remaining quota',
+// 'label.over_quota' => 'Over quota',
 'label.today' => 'Vandaag',
 'label.total_hours' => 'Uren totaal',
 'label.total_cost' => 'Totale kosten',

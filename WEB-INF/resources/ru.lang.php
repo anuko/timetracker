@@ -154,9 +154,8 @@ $i18n_key_words = array(
 'label.day_total' => 'Итог за день',
 'label.week_total' => 'Итог за неделю',
 'label.month_total' => 'Итог за месяц',
-// TODO: translate the following.
-// 'label.month_left' => 'Time until quota is met',
-// 'label.month_over' => 'Over monthly quota',
+'label.remaining_quota' => 'Доступная квота',
+'label.over_quota' => 'Превышение квоты',
 'label.today' => 'Сегодня',
 'label.total_hours' => 'Итого часов',
 'label.total_cost' => 'Итоговая стоимость',
