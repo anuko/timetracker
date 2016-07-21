@@ -161,9 +161,10 @@ $i18n_key_words = array(
 // TODO: translate label.item
 // 'label.item' => 'Item',
 'label.cost' => 'Náklady',
-'label.week_total' => 'Týždeň celkom',
 // TODO: translate the following string.
 // 'label.day_total' => 'Day total',
+'label.week_total' => 'Týždeň celkom',
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
 // 'label.month_left' => 'Time until quota is met',
 // 'label.month_over' => 'Over monthly quota',

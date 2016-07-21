@@ -149,8 +149,9 @@ $i18n_key_words = array(
 'label.note' => 'Anotação',
 'label.item' => 'Item',
 'label.cost' => 'Custo',
-'label.week_total' => 'Total semanal',
 'label.day_total' => 'Total diário',
+'label.week_total' => 'Total semanal',
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
 // 'label.month_left' => 'Time until quota is met',
 // 'label.month_over' => 'Over monthly quota',

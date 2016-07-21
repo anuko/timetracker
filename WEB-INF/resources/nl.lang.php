@@ -150,8 +150,9 @@ $i18n_key_words = array(
 'label.note' => 'Opmerking',
 'label.item' => 'Artikel',
 'label.cost' => 'Kosten',
-'label.week_total' => 'Week totaal',
 'label.day_total' => 'Dag totaal',
+'label.week_total' => 'Week totaal',
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
 // 'label.month_left' => 'Time until quota is met',
 // 'label.month_over' => 'Over monthly quota',

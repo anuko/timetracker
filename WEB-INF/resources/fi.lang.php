@@ -149,8 +149,9 @@ $i18n_key_words = array(
 'label.note' => 'Huom',
 'label.item' => 'Syöte',
 'label.cost' => 'Hinta',
-'label.week_total' => 'Viikko yhteensä',
 'label.day_total' => 'Päivä yhteensä',
+'label.week_total' => 'Viikko yhteensä',
+// TODO: translate the following strings.
 // 'label.month_total' => 'Month total',
 // 'label.month_left' => 'Time until quota is met',
 // 'label.month_over' => 'Over monthly quota',

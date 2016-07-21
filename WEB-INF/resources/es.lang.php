@@ -176,8 +176,8 @@ $i18n_key_words = array(
 // TODO: translate the following strings.
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
-// 'label.week_total' => 'Week total',
 // 'label.day_total' => 'Day total',
+// 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
 // 'label.month_left' => 'Time until quota is met',
 // 'label.month_over' => 'Over monthly quota',

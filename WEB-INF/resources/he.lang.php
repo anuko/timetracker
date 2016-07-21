@@ -165,8 +165,9 @@ $i18n_key_words = array(
 // TODO: translate label.item
 // 'label.item' => 'Item',
 'label.cost' => 'עלות',
-'label.week_total' => 'סיכום שבועי',
 'label.day_total' => 'סיכום יומי',
+'label.week_total' => 'סיכום שבועי',
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
 // 'label.month_left' => 'Time until quota is met',
 // 'label.month_over' => 'Over monthly quota',

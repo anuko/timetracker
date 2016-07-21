@@ -151,8 +151,9 @@ $i18n_key_words = array(
 'label.note' => 'Napomena',
 'label.item' => 'Stavka',
 'label.cost' => 'Cena',
-'label.week_total' => 'Zbir časova nedeljno',
 'label.day_total' => 'Zbir časova dnevno',
+'label.week_total' => 'Zbir časova nedeljno',
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
 // 'label.month_left' => 'Time until quota is met',
 // 'label.month_over' => 'Over monthly quota',
