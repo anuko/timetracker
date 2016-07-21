@@ -357,8 +357,8 @@ function get_time() {
   {if $month_total}
   <tr>
     <td align="left">{$i18n.label.month_total}: {$month_total}</td>
-    {if $month_left|strpos:'-' === 0}
-    <td align="right">{$i18n.label.month_over}: <span style="color: green;">{$month_left|substr:1}</span></td>
+    {if $over_quota}
+    <td align="right">{$i18n.label.month_over}: <span style="color: green;">{$month_left}</span></td>
     {else}
     <td align="right">{$i18n.label.month_left}: <span style="color: red;">{$month_left}</span></td>
     {/if}

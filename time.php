@@ -71,6 +71,7 @@ if ($user->isPluginEnabled('mq')){
   $minutesLeft = ttTimeHelper::toMinutes($monthlyQuota) - ttTimeHelper::toMinutes($month_total);
   
   $smarty->assign('month_total', $month_total);
+  $smarty->assign('over_quota', $minutesLeft < 0);
   $smarty->assign('month_left', ttTimeHelper::fromMinutes($minutesLeft));
 }
 

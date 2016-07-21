@@ -148,7 +148,7 @@ class ttTimeHelper {
   
   // fromMinutes - converts a number of minutes to format 00:00
   static function fromMinutes($minutes){
-    $hours = (string)((int)($minutes / 60));
+    $hours = (string)((int)abs($minutes / 60));
     $mins = (string)(abs($minutes % 60));
     if (strlen($hours) == 1)
       $hours = '0'.$hours;
