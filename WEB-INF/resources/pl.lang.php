@@ -203,8 +203,7 @@ $i18n_key_words = array(
 // 'label.year' => 'Year',
 // 'label.month' => 'Month',
 // 'label.quota' => 'Quota',
-// 'label.dailyWorkingHours' => 'Daily working hours',
-// 'label.empty_values_explanation' => 'If values are empty, quotas are calculated automatically based on holidays in config',
+// 'label.workdayHours' => 'Daily working hours',
 
 // Form titles.
 'title.login' => 'Logowanie',

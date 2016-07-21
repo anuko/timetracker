@@ -196,11 +196,11 @@ $i18n_key_words = array(
 'label.fav_report' => 'Стандартный отчёт',
 'label.cron_schedule' => 'Расписание cron',
 'label.what_is_it' => 'Что это?',
-// 'label.year' => 'Year',
-// 'label.month' => 'Month',
-// 'label.quota' => 'Quota',
-// 'label.dailyWorkingHours' => 'Daily working hours',
-// 'label.empty_values_explanation' => 'If values are empty, quotas are calculated automatically based on holidays in config',
+'label.year' => 'Год',
+'label.month' => 'Месяц',
+'label.quota' => 'Квота',
+'label.workdayHours' => 'Количество часов в рабочем дне',
+'label.quota_config_hint' => 'При пустых значениях квоты автоматически определяются из длительности рабочего дня и праздников.',
 
 // Form titles.
 'title.login' => 'Вход в систему',

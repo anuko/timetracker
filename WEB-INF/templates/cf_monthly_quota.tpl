@@ -5,7 +5,7 @@
             <td align="center">
                 <table>
                     <tr>
-                        <td>{$i18n.label.dailyWorkingHours}</td>
+                        <td>{$i18n.label.workdayHours}</td>
                         <td>{$forms.monthlyQuotaForm.dailyWorkingHours.control}</td>
                         <td><input type="submit" name="dailyHours" value="{$i18n.button.save}"></td>
                     </tr>
@@ -41,7 +41,7 @@
         </td>
     </tr>
 </table>
-<div>* - {$i18n.label.empty_values_explanation}</div>
+<div>* - {$i18n.label.quota_config_hint}</div>
 {$forms.monthlyQuotaForm.close}
 <script>
 function yearChange(value){
