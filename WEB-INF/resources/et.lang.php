@@ -177,7 +177,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => 'muuda',
 "form.admin.profile.th.del" => 'kustuta',
 "form.admin.profile.th.active" => 'aktiivne',
-"form.admin.lock.period" => 'lukusta intervall päevades',
 "form.admin.options" => 'suvandid',
 // Note to translators: the strings below are missing in the translation and must be translated
 // "form.admin.lang_default" => 'site default language',

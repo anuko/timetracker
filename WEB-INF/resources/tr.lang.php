@@ -176,7 +176,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => 'düzenle',
 "form.admin.profile.th.del" => 'sil',
 "form.admin.profile.th.active" => 'aktif',
-"form.admin.lock.period" => 'günler olarak kilit aralığı',
 // Note to translators: the strings below are missing and must be translated and added
 // "form.admin.options" => 'options',
 // "form.admin.lang_default" => 'site default language',

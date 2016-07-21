@@ -179,7 +179,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => 'upravit',
 "form.admin.profile.th.del" => 'smazat',
 "form.admin.profile.th.active" => 'aktovní',
-"form.admin.lock.period" => 'období uzamčení ve dnech',
 // Note to translators: the strings below are missing in the translation and must be added
 // "form.admin.options" => 'options',
 // "form.admin.lang_default" => 'site default language',

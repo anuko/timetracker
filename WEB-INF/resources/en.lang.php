@@ -151,8 +151,8 @@ $i18n_key_words = array(
 'label.note' => 'Note',
 'label.item' => 'Item',
 'label.cost' => 'Cost',
-'label.week_total' => 'Week total',
 'label.day_total' => 'Day total',
+'label.week_total' => 'Week total',
 'label.month_total' => 'Month total',
 'label.month_left' => 'Time until quota is met',
 'label.month_over' => 'Over monthly quota',
@@ -196,11 +196,6 @@ $i18n_key_words = array(
 'label.fav_report' => 'Favorite report',
 'label.cron_schedule' => 'Cron schedule',
 'label.what_is_it' => 'What is it?',
-'label.year' => 'Year',
-'label.month' => 'Month',
-'label.quota' => 'Quota',
-'label.workdayHours' => 'Hours in a work day',
-'label.quota_config_hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 
 // Form titles.
 'title.login' => 'Login',
@@ -406,4 +401,12 @@ $i18n_key_words = array(
 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 'form.mail.report_sent' => 'Report sent.',
 'form.mail.invoice_sent' => 'Invoice sent.',
+
+// Quota configuration form.
+'form.quota.year' => 'Year',
+'form.quota.month' => 'Month',
+'form.quota.quota' => 'Quota',
+'form.quota.workdayHours' => 'Hours in a work day',
+'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+
 );

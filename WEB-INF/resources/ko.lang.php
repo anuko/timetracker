@@ -171,7 +171,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => '편집',
 "form.admin.profile.th.del" => '삭제',
 "form.admin.profile.th.active" => '활동내용',
-"form.admin.lock.period" => '날자로 된 간격을 로크하기',
 "form.admin.options" => '옵션',
 "form.admin.lang_default" => '사이트의 디폴트 언어',
 "form.admin.custom_date_format" => "날짜 포맷",

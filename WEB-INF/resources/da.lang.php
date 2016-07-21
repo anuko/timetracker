@@ -174,8 +174,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => 'rediger',
 "form.admin.profile.th.del" => 'slet',
 "form.admin.profile.th.active" => 'aktive',
-// Note to translators: the strings below are missing in the translation and must be added
-// "form.admin.lock.period" => 'lock interval in days',
 "form.admin.options" => 'indstillinger',
 // "form.admin.lang_default" => 'site default language',
 // "form.admin.custom_date_format" => "date format",

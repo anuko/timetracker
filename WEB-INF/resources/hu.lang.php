@@ -173,8 +173,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => 'szerkesztés',
 "form.admin.profile.th.del" => 'törlés',
 "form.admin.profile.th.active" => 'aktív',
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.admin.lock.period" => 'lock interval in days',
 "form.admin.options" => 'opciók',
 // "form.admin.lang_default" => 'site default language',
 // "form.admin.custom_date_format" => "date format",

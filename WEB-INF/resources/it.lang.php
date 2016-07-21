@@ -172,7 +172,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => 'edit',
 "form.admin.profile.th.del" => 'elimina',
 "form.admin.profile.th.active" => 'attivo',
-"form.admin.lock.period" => 'blocca l\\\'intervallo di tempo',
 "form.admin.options" => 'opzioni',
 // Note to translators: the strings below are missing and must be added and translated
 // "form.admin.lang_default" => 'site default language',

@@ -143,8 +143,7 @@ $i18n_key_words = array(
 'label.password' => 'Paraula de pas',
 'label.confirm_password' => 'Confirmar paraula de pas',
 'label.email' => 'E-mail',
-// Translate the following string.
-// 'label.page' => 'Page',
+// TODO: the entire label section needs re-translating. See the English file.
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.
@@ -179,7 +178,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => 'Modificar',
 "form.admin.profile.th.del" => 'Eliminar',
 "form.admin.profile.th.active" => 'Actiu',
-"form.admin.lock.period" => 'interval de tancament en dies',
 
 // my time form attributes
 "form.mytime.title" => 'El meu temps',

@@ -173,7 +173,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => '編集',
 "form.admin.profile.th.del" => '削除',
 "form.admin.profile.th.active" => '活動内容',
-"form.admin.lock.period" => '日付の間隔をロック',
 "form.admin.options" => 'オプション',
 "form.admin.lang_default" => 'サイトのデフォルト言語',
 "form.admin.custom_date_format" => "日付形式",

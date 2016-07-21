@@ -171,7 +171,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => '編輯',
 "form.admin.profile.th.del" => '刪除',
 "form.admin.profile.th.active" => '啟動',
-"form.admin.lock.period" => '鎖定天數間隔',
 "form.admin.options" => '選項',
 "form.admin.lang_default" => '網站預設語言',
 "form.admin.lang_browser_default" => '(默認流覽器)',

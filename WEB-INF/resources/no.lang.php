@@ -174,7 +174,6 @@ $i18n_key_words = array(
 // "form.admin.profile.th.edit" => 'endre',
 // "form.admin.profile.th.del" => 'slett',
 // "form.admin.profile.th.active" => 'aktiv',
-// "form.admin.lock.period" => 'lås intervallet i antall dager',
 // "form.admin.options" => 'opsjoner',
 // "form.admin.lang_default" => 'sidens språk',
 // "form.admin.custom_date_format" => "datoformat",

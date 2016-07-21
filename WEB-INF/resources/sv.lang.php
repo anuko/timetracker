@@ -174,7 +174,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => 'redigera',
 "form.admin.profile.th.del" => 'ta bort',
 "form.admin.profile.th.active" => 'aktiverad',
-"form.admin.lock.period" => 'låsintervall i antal dagar',
 "form.admin.options" => 'inställningar',
 // Note to translators: the strings below are missing and must be added and translated
 // "form.admin.lang_default" => 'site default language',

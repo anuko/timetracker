@@ -175,7 +175,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.edit" => 'edit',
 "form.admin.profile.th.del" => 'delete',
 "form.admin.profile.th.active" => 'active',
-"form.admin.lock.period" => 'lock interval in days',
 "form.admin.options" => 'options',
 "form.admin.lang_default" => 'site default language',
 "form.admin.lang_browser_default" => '(browser default)',
