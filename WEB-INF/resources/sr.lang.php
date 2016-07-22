@@ -197,10 +197,6 @@ $i18n_key_words = array(
 'label.fav_report' => 'Omiljeni izveštaji',
 'label.cron_schedule' => 'Sredi raspored',
 'label.what_is_it' => 'Šta je ovo?',
-// 'label.year' => 'Year',
-// 'label.month' => 'Month',
-// 'label.quota' => 'Quota',
-// 'label.workdayHours' => 'Daily working hours',
 
 // Form titles.
 'title.login' => 'Prijava',
@@ -409,4 +405,12 @@ $i18n_key_words = array(
 'form.mail.footer' => 'Anuko Time Tracker je jednostavan i lak za korišćenje za praćenje <br>radnog vremena. Posetite <a href="https://www.anuko.com">www.anuko.com</a> za više informacija.',
 'form.mail.report_sent' => 'Izveštaj poslat.',
 'form.mail.invoice_sent' => 'Račun poslat.',
+
+// Quotas configuration form.
+// TODO: translate the following.
+// 'form.quota.year' => 'Year',
+// 'form.quota.month' => 'Month',
+// 'form.quota.quota' => 'Quota',
+// 'form.quota.workdayHours' => 'Hours in a work day',
+// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 );

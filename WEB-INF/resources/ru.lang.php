@@ -400,7 +400,7 @@ $i18n_key_words = array(
 'form.mail.report_sent' => 'Отчёт отправлен.',
 'form.mail.invoice_sent' => 'Счёт отправлен.',
 
-// Quota configuration form.
+// Quotas configuration form.
 'form.quota.year' => 'Год',
 'form.quota.month' => 'Месяц',
 'form.quota.quota' => 'Квота',

@@ -195,10 +195,6 @@ $i18n_key_words = array(
 'label.fav_report' => 'Raporttipohja',
 'label.cron_schedule' => 'Cron-ajoitus',
 'label.what_is_it' => 'Mikä se on?',
-// 'label.year' => 'Year',
-// 'label.month' => 'Month',
-// 'label.quota' => 'Quota',
-// 'label.workdayHours' => 'Daily working hours',
 
 // Form titles.
 'title.login' => 'Kirjautuminen',
@@ -404,4 +400,12 @@ $i18n_key_words = array(
 'form.mail.footer' => 'Anuko Time Tracker on yksinkertainen ja helppokäyttöinen vapaan koodin tuntiseurantaohjelmisto. Lisätietoja sivulla <a href="https://www.anuko.com">www.anuko.com</a>.',
 'form.mail.report_sent' => 'Raportti lähetetty.',
 'form.mail.invoice_sent' => 'Lasku lähetetty.',
+
+// Quotas configuration form.
+// TODO: translate the following.
+// 'form.quota.year' => 'Year',
+// 'form.quota.month' => 'Month',
+// 'form.quota.quota' => 'Quota',
+// 'form.quota.workdayHours' => 'Hours in a work day',
+// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 );

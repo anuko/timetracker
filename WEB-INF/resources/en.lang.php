@@ -403,7 +403,7 @@ $i18n_key_words = array(
 'form.mail.report_sent' => 'Report sent.',
 'form.mail.invoice_sent' => 'Invoice sent.',
 
-// Quota configuration form.
+// Quotas configuration form.
 'form.quota.year' => 'Year',
 'form.quota.month' => 'Month',
 'form.quota.quota' => 'Quota',

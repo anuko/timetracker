@@ -195,10 +195,6 @@ $i18n_key_words = array(
 'label.fav_report' => 'Relatório favorito',
 'label.cron_schedule' => 'Agenda cron',
 'label.what_is_it' => 'O que é?',
-// 'label.year' => 'Year',
-// 'label.month' => 'Month',
-// 'label.quota' => 'Quota',
-// 'label.workdayHours' => 'Daily working hours',
 
 // Form titles.
 'title.login' => 'Login',
@@ -405,4 +401,12 @@ $i18n_key_words = array(
 'form.mail.footer' => 'Anuko Time Tracker é um sistema, simples, de fácil uso, de código aberto,<br>de rastreamento do tempo. Visite <a href="https://www.anuko.com">www.anuko.com</a> para mais informações.',
 'form.mail.report_sent' => 'Relatório enviado.',
 'form.mail.invoice_sent' => 'Fatura enviada.',
+
+// Quotas configuration form.
+// TODO: translate the following.
+// 'form.quota.year' => 'Year',
+// 'form.quota.month' => 'Month',
+// 'form.quota.quota' => 'Quota',
+// 'form.quota.workdayHours' => 'Hours in a work day',
+// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 );

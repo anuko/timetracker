@@ -196,10 +196,6 @@ $i18n_key_words = array(
 'label.fav_report' => 'Standaard rapport',
 'label.cron_schedule' => 'Cron schema',
 'label.what_is_it' => 'Wat betekent dit?',
-// 'label.year' => 'Year',
-// 'label.month' => 'Month',
-// 'label.quota' => 'Quota',
-// 'label.workdayHours' => 'Daily working hours',
 
 // Form titles.
 'title.login' => 'Aanmelden',
@@ -405,4 +401,12 @@ $i18n_key_words = array(
 'form.mail.footer' => 'Anuko Time Tracker is een eenvoudig en gemakkelijk te gebruiken open source tijdregistratiesysteem. Bezoek <a href="https://www.anuko.com">www.anuko.com</a> voor meer informatie.',
 'form.mail.report_sent' => 'Rapport is verzonden.',
 'form.mail.invoice_sent' => 'Factuur is verzonden.',
+
+// Quotas configuration form.
+// TODO: translate the following.
+// 'form.quota.year' => 'Year',
+// 'form.quota.month' => 'Month',
+// 'form.quota.quota' => 'Quota',
+// 'form.quota.workdayHours' => 'Hours in a work day',
+// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 );
