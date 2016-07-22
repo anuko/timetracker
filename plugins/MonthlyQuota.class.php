@@ -16,10 +16,10 @@ class MonthlyQuota {
     
     public function update($year, $month, $quota) {
         $teamId = $this->usersTeamId;
-        $deleteSql = "DELETE FROM tt_monthly_quota WHERE year = $year AND month = $month AND team_id = $teamId";
+        $deleteSql = "DELETE FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $teamId";
         $this->db->exec($deleteSql);
         if ($quota){
-            $insertSql = "INSERT INTO tt_monthly_quota (team_id, year, month, quota) values ($teamId, $year, $month, $quota)";
+            $insertSql = "INSERT INTO tt_monthly_quotas (team_id, year, month, quota) values ($teamId, $year, $month, $quota)";
             $affected = $this->db->exec($insertSql);
             return (!is_a($affected, 'PEAR_Error'));
         }
@@ -48,7 +48,7 @@ class MonthlyQuota {
     
     private function getSingle($year, $month) {
         $teamId = $this->usersTeamId;
-        $sql = "SELECT quota FROM tt_monthly_quota WHERE year = $year AND month = $month AND team_id = $teamId";
+        $sql = "SELECT quota FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $teamId";
         $reader = $this->db->query($sql);
         if (is_a($reader, 'PEAR_Error')) {
             return false;
@@ -75,7 +75,7 @@ class MonthlyQuota {
     
     private function getMany($year){
         $teamId = $this->usersTeamId;
-        $sql = "SELECT month, quota FROM tt_monthly_quota WHERE year = $year AND team_id = $teamId";
+        $sql = "SELECT month, quota FROM tt_monthly_quotas WHERE year = $year AND team_id = $teamId";
         $result = array();
         $res = $this->db->query($sql);
         if (is_a($res, 'PEAR_Error')) {

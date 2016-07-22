@@ -354,7 +354,7 @@ function get_time() {
     <td align="left">{$i18n.label.week_total}: {$week_total}</td>
     <td align="right">{$i18n.label.day_total}: {$day_total}</td>
   </tr>
-  {if $month_total}
+  {if $user->isPluginEnabled('mq')}
   <tr>
     <td align="left">{$i18n.label.month_total}: {$month_total}</td>
     {if $over_quota}

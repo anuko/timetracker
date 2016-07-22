@@ -614,8 +614,7 @@ if ($_POST) {
     setChange("CREATE TABLE `tt_monthly_quota` (`team_id` int(11) NOT NULL, `year` smallint(5) UNSIGNED NOT NULL, `month` tinyint(3) UNSIGNED NOT NULL, `quota` smallint(5) UNSIGNED NOT NULL, PRIMARY KEY (`year`,`month`,`team_id`))");
     setChange("ALTER TABLE `tt_monthly_quota` ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
     setChange("ALTER TABLE `tt_teams` ADD `workday_hours` SMALLINT NULL DEFAULT '8' AFTER `lock_spec`");
-    setChange("UPDATE `tt_teams` SET `workday_hours` = 8");
-    setChange("ALTER TABLE tt_teams DROP daily_working_hours");
+    setChange("RENAME TABLE tt_monthly_quota TO tt_monthly_quotas");
   }
   
   // The update_clients function updates projects field in tt_clients table.

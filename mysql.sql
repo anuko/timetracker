@@ -340,19 +340,19 @@ create index client_idx on tt_expense_items(client_id);
 create index project_idx on tt_expense_items(project_id);
 create index invoice_idx on tt_expense_items(invoice_id);
 
-#
-# Structure for table tt_monthly_quota.
-# This table lists monthly quota per team.
-#
 
-CREATE TABLE `tt_monthly_quota` (
-  `team_id` int(11) NOT NULL,             # team's id
-  `year` smallint(5) UNSIGNED NOT NULL,   # year we'setting monthly quota for
-  `month` tinyint(3) UNSIGNED NOT NULL,   # month we're settng monthly quota for
-  `quota` smallint(5) UNSIGNED NOT NULL,  # the monthly quota
-  PRIMARY KEY (`year`,`month`,`team_id`)
+#
+# Structure for table tt_monthly_quotas.
+# This table keeps monthly work hour quotas for teams.
+#
+CREATE TABLE `tt_monthly_quotas` (
+  `team_id` int(11) NOT NULL,             # team id
+  `year` smallint(5) UNSIGNED NOT NULL,   # quota year
+  `month` tinyint(3) UNSIGNED NOT NULL,   # quota month
+  `quota` smallint(5) UNSIGNED NOT NULL,  # number of work hours in specified month and year
+  PRIMARY KEY (`team_id`,`year`,`month`)
 );
 
-ALTER TABLE `tt_monthly_quota`
+ALTER TABLE `tt_monthly_quotas`
   ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
