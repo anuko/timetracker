@@ -2,7 +2,7 @@
   <tr><td valign="top">{$i18n.form.quota.hint}</td></tr>
 </table>
 
-{$forms.monthlyQuotaForm.open}
+{$forms.monthlyQuotasForm.open}
 <div style="padding: 0 0 10 0">
   <table border="0" class="divider">
     <tr>
@@ -10,8 +10,8 @@
         <table>
           <tr>
             <td>{$i18n.form.quota.workdayHours}:</td>
-            <td>{$forms.monthlyQuotaForm.dailyWorkingHours.control}</td>
-            <td><input type="submit" name="dailyHours" value="{$i18n.button.save}"></td>
+            <td>{$forms.monthlyQuotasForm.workdayHours.control}</td>
+            <td><input type="submit" name="btn_hours" value="{$i18n.button.save}"></td>
           </tr>
         </table>
       </td>
@@ -21,7 +21,7 @@
 <table>
   <tr>
     <td>{$i18n.form.quota.year}:</td>
-    <td>{$forms.monthlyQuotaForm.years.control}</td>
+    <td>{$forms.monthlyQuotasForm.year.control}</td>
   </tr>
   <tr><td>&nbsp;</td></tr>
   <tr>
@@ -34,28 +34,28 @@
 {foreach $months as $month}
         <tr>
           <td>{$month}:</td>
-          <td>{$forms.monthlyQuotaForm.$month.control}</td>
+          <td>{$forms.monthlyQuotasForm.$month.control}</td>
         </tr>
 {/foreach}
         <tr><td colspan="2">&nbsp;</td></tr>
-        <tr><td colspan="2" style="text-align:center;"><input type="submit" name="quotas" value="{$i18n.button.save}"></td></tr>
+        <tr><td colspan="2" style="text-align:center;"><input type="submit" name="btn_submit" value="{$i18n.button.save}"></td></tr>
       </table>
     </td>
   </tr>
 </table>
-{$forms.monthlyQuotaForm.close}
+{$forms.monthlyQuotasForm.close}
 
 <script>
 function yearChange(value){
-    var url = window.location.href;
+  var url = window.location.href;
 
-    if (url.indexOf('?') > 0){
-        var parameter = url.substring(url.indexOf('?') + 1, url.length);
-        url = url.replace(parameter, 'year=' + value);
-    } else {
-        url = '?year=' + value;
-    }
+  if (url.indexOf('?') > 0){
+    var parameter = url.substring(url.indexOf('?') + 1, url.length);
+    url = url.replace(parameter, 'year=' + value);
+  } else {
+    url = '?year=' + value;
+  }
 
-    window.location = url;
+  window.location = url;
 }
 </script>

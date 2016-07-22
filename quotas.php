@@ -37,11 +37,11 @@ if (!ttAccessCheck(right_manage_team)) {
   exit();
 }
 
-// Fallback values for start and end year.
+// Start and end fallback values for the Year dropdown.
 $yearStart = 2015;
 $yearEnd = 2030;
 
-// If values are defined in config - get them.
+// If values are defined in config - use them.
 if (defined('MONTHLY_QUOTA_YEAR_START')){
   $yearStart = (int)MONTHLY_QUOTA_YEAR_START;
 }
@@ -49,7 +49,7 @@ if (defined('MONTHLY_QUOTA_YEAR_END')){
   $yearEnd = (int)MONTHLY_QUOTA_YEAR_END;
 }
 
-// Create values for year dropdown.
+// Create values for the Year dropdown.
 $years = array();
 for ($i = $yearStart; $i <= $yearEnd; $i++) {
   array_push($years, array('id'=>$i,'name'=>$i));
@@ -69,21 +69,21 @@ $months = $i18n->monthNames;
 $quota = new MonthlyQuota();
 
 if ($request->isPost()){
+  // TODO: Add parameter validation.
   $res = false;
-  if ($_POST["quotas"]){
+  if ($_POST['btn_hours']){
+
+    // User changed workday hours for team.
+    $hours = (int)$request->getParameter('workdayHours');
+    $res = ttTeamHelper::update($user->team_id, array('name'=>$user->team,'workday_hours'=>$hours));
+  }
+  if ($_POST['btn_submit']){
     // User pressed the Save button under monthly quotas table.
-    $postedYear = $request->getParameter('years');
+    $postedYear = $request->getParameter('year');
     $selectedYear = intval($postedYear);
     for ($i = 0; $i < count($months); $i++){
       $res = $quota->update($postedYear, $i+1, $request->getParameter($months[$i]));
     }
-  }
-  // if user saved required working hours for a day
-  if ($_POST["dailyHours"]){
-    $hours = $request->getParameter("dailyWorkingHours");
-    $teamDetails = ttTeamHelper::getTeamDetails($quota->usersTeamId);
-    $res = ttTeamHelper::update($quota->usersTeamId, array('name'=>$teamDetails['team_name'], 
-                                                           'workday_hours'=>$hours));
   }
   if ($res) {
     header('Location: profile_edit.php');
@@ -93,21 +93,21 @@ if ($request->isPost()){
   }
 }
 
-// returns months where January is month 1, not 0
+// Returns monthly quotas where January is month 1, not 0.
 $monthsData = $quota->get($selectedYear);
 
-$form = new Form('monthlyQuotaForm');
-
-$form->addInput(array('type'=>'combobox', 'name'=>'years', 'data'=>$years, 'datakeys'=>array('id', 'name'), 'value'=>$selectedYear, 'onchange'=>'yearChange(this.value);'));
+$form = new Form('monthlyQuotasForm');
+$form->addInput(array('type'=>'text', 'name'=>'workdayHours', 'value'=>$quota->getDailyWorkingHours(), 'style'=>'width:50px'));
+$form->addInput(array('type'=>'combobox','name'=>'year','data'=>$years,'datakeys'=>array('id','name'),'value'=>$selectedYear,'onchange'=>'yearChange(this.value);'));
 for ($i=0; $i < count($months); $i++) { 
   $value = "";
   if (array_key_exists($i+1, $monthsData)){
     $value = $monthsData[$i+1];
   }
   $name = $months[$i];
-  $form->addInput(array('type'=>'text', 'name'=>$name, 'maxlength'=>3, 'value'=> $value, 'style'=>'width:50px'));
+  $form->addInput(array('type'=>'text','name'=>$name,'maxlength'=>3,'value'=> $value,'style'=>'width:50px'));
 }
-$form->addInput(array('type'=>'text', 'name'=>'dailyWorkingHours', 'value'=>$quota->getDailyWorkingHours(), 'style'=>'width:50px'));
+
 $smarty->assign('months', $months);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.monthly_quotas'));
