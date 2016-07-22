@@ -53,14 +53,13 @@ function handlePluginCheckboxes() {
     configureLabel.style.visibility = "hidden";
   }
   
-  var monthlyQuotaCheckBox = document.getElementById("monthly_quota");
-  configureLabel = document.getElementById("monthly_quota_config");
-  if (monthlyQuotaCheckBox.checked){
+  var quotasCheckbox = document.getElementById("quotas");
+  configureLabel = document.getElementById("quotas_config");
+  if (quotasCheckbox.checked){
     configureLabel.style.visibility = "visible";
   } else {
-  configureLabel.style.visibility = "hidden";
+    configureLabel.style.visibility = "hidden";
   }
-  
 }
 </script>
 
@@ -193,8 +192,8 @@ function handlePluginCheckboxes() {
             <td><label for="locking">{$i18n.title.locking}</label> <span id="locking_config"><a href="locking.php">{$i18n.label.configure}</a></span></td>
           </tr>
           <tr>
-            <td align="right" nowrap>{$forms.profileForm.monthly_quota.control}</td>
-            <td><label for="monthly_quota">{$i18n.label.monthly_quotas}</label> <span id="monthly_quota_config"><a href="quotas.php">{$i18n.label.configure}</a></span></td>
+            <td align="right" nowrap>{$forms.profileForm.quotas.control}</td>
+            <td><label for="quotas">{$i18n.label.monthly_quotas}</label> <span id="quotas_config"><a href="quotas.php">{$i18n.label.configure}</a></span></td>
           </tr>
 {/if}
 
