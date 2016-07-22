@@ -1,21 +1,49 @@
 <?php
+// +----------------------------------------------------------------------+
+// | Anuko Time Tracker
+// +----------------------------------------------------------------------+
+// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
+// +----------------------------------------------------------------------+
+// | LIBERAL FREEWARE LICENSE: This source code document may be used
+// | by anyone for any purpose, and freely redistributed alone or in
+// | combination with other software, provided that the license is obeyed.
+// |
+// | There are only two ways to violate the license:
+// |
+// | 1. To redistribute this code in source form, with the copyright
+// |    notice or license removed or altered. (Distributing in compiled
+// |    forms without embedded copyright notices is permitted).
+// |
+// | 2. To redistribute modified versions of this code in *any* form
+// |    that bears insufficient indications that the modifications are
+// |    not the work of the original author(s).
+// |
+// | This license applies to this document only, not any other software
+// | that it may be combined with.
+// |
+// +----------------------------------------------------------------------+
+// | Contributors:
+// | https://www.anuko.com/time_tracker/credits.htm
+// +----------------------------------------------------------------------+
 
 class MonthlyQuota {
     
-    var $db;
-    var $holidays;
-    var $usersTeamId;
+    var $db;       // Database connection.
+    var $holidays; // Array of holidays from localization file.
+    var $team_id;  // Team id.
+
     // Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use __construct() in new code.
     function __construct() {
         $this->db = getConnection();
         $i18n = $GLOBALS['I18N'];
         $this->holidays = $i18n->holidays;
         global $user;
-        $this->usersTeamId = $user->team_id;
+        $this->team_id = $user->team_id;
     }
-    
+
+    // update - deletes a quota, then inserts a new one.
     public function update($year, $month, $quota) {
-        $teamId = $this->usersTeamId;
+        $teamId = $this->team_id;
         $deleteSql = "DELETE FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $teamId";
         $this->db->exec($deleteSql);
         if ($quota){
@@ -25,17 +53,18 @@ class MonthlyQuota {
         }
         return true;
     }
-        
+
+    // get - obains either a single month quota or an array of quotas for an entire year.
     public function get($year, $month) {
         if (is_null($month)){
             return $this->getMany($year);
         }
-        
         return $this->getSingle($year, $month);
     }
 
-    public function getDailyWorkingHours(){
-        $teamId = $this->usersTeamId;
+    // getWorkdayHours - obtains workday_hours value for a team from the database.
+    public function getWorkdayHours(){
+        $teamId = $this->team_id;
         $sql = "SELECT workday_hours FROM tt_teams where id = $teamId";
         $reader = $this->db->query($sql);
         if (is_a($reader, 'PEAR_Error')) {
@@ -43,11 +72,12 @@ class MonthlyQuota {
         }
 
         $row = $reader->fetchRow();
-        return $row["workday_hours"];
+        return $row['workday_hours'];
     }
-    
+
+    // getSingle - obtains a quota for a single month.
     private function getSingle($year, $month) {
-        $teamId = $this->usersTeamId;
+        $teamId = $this->team_id;
         $sql = "SELECT quota FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $teamId";
         $reader = $this->db->query($sql);
         if (is_a($reader, 'PEAR_Error')) {
@@ -55,26 +85,24 @@ class MonthlyQuota {
         }
         
         $row = $reader->fetchRow();
+        if ($row)
+          return $row['quota'];
         
-        // if we don't find a record, return calculated monthly quota
-        if (is_null($row)){
-            
-            $holidaysWithYear = array();
-            foreach ($this->holidays as $day) {
-                $parts = explode("/", $day);
-                $holiday = "$year-$parts[0]-$parts[1]";
-                array_push($holidaysWithYear, $holiday);
-            }
-            
-            $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-            return $this->getWorkingDays("$year-$month-01", "$year-$month-$daysInMonth", $holidaysWithYear) * $this->getDailyWorkingHours();
+        // If we did not find a record, return a calculated monthly quota.
+        $holidaysWithYear = array();
+        foreach ($this->holidays as $day) {
+            $parts = explode("/", $day);
+            $holiday = "$year-$parts[0]-$parts[1]";
+            array_push($holidaysWithYear, $holiday);
         }
-        
-        return $row["quota"];  
-    }
     
+        $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        return $this->getWorkingDays("$year-$month-01", "$year-$month-$daysInMonth", $holidaysWithYear) * $this->getWorkdayHours();
+    }
+
+    // getMany - returns an array of quotas for a given year for team.
     private function getMany($year){
-        $teamId = $this->usersTeamId;
+        $teamId = $this->team_id;
         $sql = "SELECT month, quota FROM tt_monthly_quotas WHERE year = $year AND team_id = $teamId";
         $result = array();
         $res = $this->db->query($sql);
@@ -83,15 +111,17 @@ class MonthlyQuota {
         }
         
         while ($val = $res->fetchRow()) {
-            $result[$val["month"]] = $val["quota"];
-            // $result[] = $val;
+            $result[$val['month']] = $val['quota'];
         }        
         
         return $result;
     }
     
-    //The function returns the no. of business days between two dates and it skips the holidays
+    // The function returns the number of business days between two dates skipping holidays.
     private function getWorkingDays($startDate, $endDate, $holidays) {
+        // TODO: this function needs a fix, as it assumes Sat + Sun weekends, 
+        // and will not work properly for other week types (ex. Arabic weeks).
+
         // do strtotime calculations just once
         $endDate = strtotime($endDate);
         $startDate = strtotime($startDate);
