@@ -1,9 +1,35 @@
 <?php
+// +----------------------------------------------------------------------+
+// | Anuko Time Tracker
+// +----------------------------------------------------------------------+
+// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
+// +----------------------------------------------------------------------+
+// | LIBERAL FREEWARE LICENSE: This source code document may be used
+// | by anyone for any purpose, and freely redistributed alone or in
+// | combination with other software, provided that the license is obeyed.
+// |
+// | There are only two ways to violate the license:
+// |
+// | 1. To redistribute this code in source form, with the copyright
+// |    notice or license removed or altered. (Distributing in compiled
+// |    forms without embedded copyright notices is permitted).
+// |
+// | 2. To redistribute modified versions of this code in *any* form
+// |    that bears insufficient indications that the modifications are
+// |    not the work of the original author(s).
+// |
+// | This license applies to this document only, not any other software
+// | that it may be combined with.
+// |
+// +----------------------------------------------------------------------+
+// | Contributors:
+// | https://www.anuko.com/time_tracker/credits.htm
+// +----------------------------------------------------------------------+
 
 require_once('initialize.php');
 require_once('plugins/MonthlyQuota.class.php');
 import('form.Form');
-import('WEB-INF/lib/ttTeamHelper');
+import('ttTeamHelper');
 
 // Access check.
 if (!ttAccessCheck(right_manage_team)) {
@@ -11,10 +37,11 @@ if (!ttAccessCheck(right_manage_team)) {
   exit();
 }
 
-// fallback values
+// Fallback values for start and end year.
 $yearStart = 2015;
 $yearEnd = 2030;
 
+// If values are defined in config - get them.
 if (defined('MONTHLY_QUOTA_YEAR_START')){
   $yearStart = (int)MONTHLY_QUOTA_YEAR_START;
 }
@@ -22,32 +49,32 @@ if (defined('MONTHLY_QUOTA_YEAR_END')){
   $yearEnd = (int)MONTHLY_QUOTA_YEAR_END;
 }
 
-// create values for dropdown
+// Create values for year dropdown.
 $years = array();
-for ($i=$yearStart; $i <= $yearEnd; $i++) {
-  array_push($years, array('id'=>$i, 'name'=>$i));
+for ($i = $yearStart; $i <= $yearEnd; $i++) {
+  array_push($years, array('id'=>$i,'name'=>$i));
 }
 
-// get selected year from url parameters
-$selectedYear = $request->getParameter("year");
+// Get selected year from url parameter.
+$selectedYear = $request->getParameter('year');
 if (!$selectedYear or !ttValidInteger($selectedYear)){
-  $selectedYear = date("Y");
+  $selectedYear = date('Y');
 } else {
   $selectedYear = intval($selectedYear);
 }
 
-// months are zero indexed
+// Months are zero indexed.
 $months = $i18n->monthNames;
 
 $quota = new MonthlyQuota();
 
 if ($request->isPost()){
   $res = false;
-  // if user pressed save fpr monthly quotas
   if ($_POST["quotas"]){
-    $postedYear = $request->getParameter("years");
+    // User pressed the Save button under monthly quotas table.
+    $postedYear = $request->getParameter('years');
     $selectedYear = intval($postedYear);
-    for ($i=0; $i < count($months); $i++){
+    for ($i = 0; $i < count($months); $i++){
       $res = $quota->update($postedYear, $i+1, $request->getParameter($months[$i]));
     }
   }
