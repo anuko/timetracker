@@ -84,5 +84,5 @@ $form->addInput(array('type'=>'text', 'name'=>'dailyWorkingHours', 'value'=>$quo
 $smarty->assign('months', $months);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.monthly_quotas'));
-$smarty->assign('content_page_name', 'cf_monthly_quota.tpl');
+$smarty->assign('content_page_name', 'quotas.tpl');
 $smarty->display('index.tpl');

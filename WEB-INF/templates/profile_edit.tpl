@@ -194,7 +194,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.profileForm.monthly_quota.control}</td>
-            <td><label for="monthly_quota">{$i18n.label.monthly_quotas}</label> <span id="monthly_quota_config"><a href="cf_monthly_quota.php">{$i18n.label.configure}</a></span></td>
+            <td><label for="monthly_quota">{$i18n.label.monthly_quotas}</label> <span id="monthly_quota_config"><a href="quotas.php">{$i18n.label.configure}</a></span></td>
           </tr>
 {/if}
 
