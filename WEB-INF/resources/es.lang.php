@@ -219,8 +219,9 @@ $i18n_key_words = array(
 // Translate the following string.
 // 'label.page' => 'Page',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'label.custom_fields' => 'Custom fields',
+// 'label.monthly_quotas' => 'Monthly quotas',
 // 'label.type' => 'Type',
 // 'label.type_dropdown' => 'dropdown',
 // 'label.type_text' => 'text',
@@ -286,7 +287,7 @@ $i18n_key_words = array(
 // 'title.add_notification' => 'Adding Notification',
 // 'title.edit_notification' => 'Editing Notification',
 // 'title.delete_notification' => 'Deleting Notification',
-// 'title.monthly_quota' => 'Monthly quota',
+// 'title.monthly_quotas' => 'Monthly Quotas',
 'title.export' => 'Exportar datos',
 'title.import' => 'Importar datos',
 'title.options' => 'Opciones',

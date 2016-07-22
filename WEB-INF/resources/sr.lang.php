@@ -188,6 +188,8 @@ $i18n_key_words = array(
 'label.page' => 'Strana',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Dodatna polja',
+// Translate the following.
+// 'label.monthly_quotas' => 'Monthly quotas',
 'label.type' => 'Tipovi',
 'label.type_dropdown' => 'odaberi',
 'label.type_text' => 'text',
@@ -244,7 +246,7 @@ $i18n_key_words = array(
 'title.add_notification' => 'Dodavanje napomene',
 'title.edit_notification' => 'Izmena napomene',
 'title.delete_notification' => 'Brisanje napomene',
-// 'title.monthly_quota' => 'Monthly quota',
+// 'title.monthly_quotas' => 'Monthly Quotas',
 'title.export' => 'Izvoz podataka tim-a',
 'title.import' => 'Uvoz podataka tim-a',
 'title.options' => 'Opcije',

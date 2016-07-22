@@ -83,6 +83,6 @@ for ($i=0; $i < count($months); $i++) {
 $form->addInput(array('type'=>'text', 'name'=>'dailyWorkingHours', 'value'=>$quota->getDailyWorkingHours(), 'style'=>'width:50px'));
 $smarty->assign('months', $months);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.monthly_quota'));
+$smarty->assign('title', $i18n->getKey('title.monthly_quotas'));
 $smarty->assign('content_page_name', 'cf_monthly_quota.tpl');
 $smarty->display('index.tpl');

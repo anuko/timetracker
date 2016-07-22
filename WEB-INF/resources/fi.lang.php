@@ -186,6 +186,8 @@ $i18n_key_words = array(
 'label.page' => 'Sivu',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Omat kentät',
+// Translate the following.
+// 'label.monthly_quotas' => 'Monthly quotas',
 'label.type' => 'Tyyppi',
 'label.type_dropdown' => 'pudotusvalikko',
 'label.type_text' => 'teksti',
@@ -242,7 +244,7 @@ $i18n_key_words = array(
 'title.add_notification' => 'Ilmoituksen lisäys',
 'title.edit_notification' => 'Ilmoituksen muokkaus',
 'title.delete_notification' => 'Ilmoituksen poisto',
-// 'title.monthly_quota' => 'Monthly quota',
+// 'title.monthly_quotas' => 'Monthly Quotas',
 'title.export' => 'Tiimitietojen vienti',
 'title.import' => 'Tiimitietojen tunti',
 'title.options' => 'Optiot',

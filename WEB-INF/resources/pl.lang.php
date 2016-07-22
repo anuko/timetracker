@@ -192,6 +192,8 @@ $i18n_key_words = array(
 // 'label.page' => 'Page',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Niestandardowe pola',
+// Translate the following.
+// 'label.monthly_quotas' => 'Monthly quotas',
 'label.type' => 'Rodzaj',
 'label.type_dropdown' => 'lista rozwijana',
 'label.type_text' => 'tekst',
@@ -248,7 +250,7 @@ $i18n_key_words = array(
 'title.add_notification' => 'Dodawanie powiadomienia',
 'title.edit_notification' => 'Edytowanie powiadomienia',
 'title.delete_notification' => 'Usuwanie powiadomienia',
-// 'title.monthly_quota' => 'Monthly quota',
+// 'title.monthly_quotas' => 'Monthly Quotas',
 'title.export' => 'Eksport danych zespołu',
 'title.import' => 'Import danych zespołu',
 'title.options' => 'Opcje',

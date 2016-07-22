@@ -187,6 +187,7 @@ $i18n_key_words = array(
 'label.page' => 'Стр',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Дополнительные поля',
+'label.monthly_quotas' => 'Месячные квоты',
 'label.type' => 'Тип',
 'label.type_dropdown' => 'комбо',
 'label.type_text' => 'текст',
@@ -194,11 +195,6 @@ $i18n_key_words = array(
 'label.fav_report' => 'Стандартный отчёт',
 'label.cron_schedule' => 'Расписание cron',
 'label.what_is_it' => 'Что это?',
-'label.year' => 'Год',
-'label.month' => 'Месяц',
-'label.quota' => 'Квота',
-'label.workdayHours' => 'Количество часов в рабочем дне',
-'label.quota_config_hint' => 'При пустых значениях квоты автоматически определяются из длительности рабочего дня и праздников.',
 
 // Form titles.
 'title.login' => 'Вход в систему',
@@ -244,7 +240,7 @@ $i18n_key_words = array(
 'title.add_notification' => 'Добавление уведомления',
 'title.edit_notification' => 'Редактирование уведомления',
 'title.delete_notification' => 'Удаление уведомления',
-// 'title.monthly_quota' => 'Monthly quota',
+'title.monthly_quotas' => 'Месячные квоты',
 'title.export' => 'Экспортирование данных команды',
 'title.import' => 'Импортирование данных команды',
 'title.options' => 'Опции',
@@ -403,4 +399,11 @@ $i18n_key_words = array(
 'form.mail.footer' => 'Anuko Time Tracker - это открытая (open source), простая и лёгкая в использовании система трекинга рабочего времени. Подробности на сайте <a href="https://www.anuko.com">www.anuko.com</a>.',
 'form.mail.report_sent' => 'Отчёт отправлен.',
 'form.mail.invoice_sent' => 'Счёт отправлен.',
+
+// Quota configuration form.
+'form.quota.year' => 'Год',
+'form.quota.month' => 'Месяц',
+'form.quota.quota' => 'Квота',
+'form.quota.workdayHours' => 'Количество часов в рабочем дне',
+'form.quota.hint' => 'При пустых значениях квоты автоматически определяются из длительности рабочего дня и праздников.',
 );

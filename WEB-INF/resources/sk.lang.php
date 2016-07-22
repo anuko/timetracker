@@ -201,6 +201,8 @@ $i18n_key_words = array(
 // 'label.page' => 'Page',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Vlastné polia',
+// Translate the following.
+// 'label.monthly_quotas' => 'Monthly quotas',
 'label.type' => 'Typ',
 'label.type_dropdown' => 'rozbaľovacie pole',
 'label.type_text' => 'text',
@@ -261,7 +263,7 @@ $i18n_key_words = array(
 // 'title.add_notification' => 'Adding Notification',
 // 'title.edit_notification' => 'Editing Notification',
 // 'title.delete_notification' => 'Deleting Notification',
-// 'title.monthly_quota' => 'Monthly quota',
+// 'title.monthly_quotas' => 'Monthly Quotas',
 'title.export' => 'Exportovanie údajov o tíme',
 'title.import' => 'Importovanie údajov o tíme',
 'title.options' => 'Nastavenia',
