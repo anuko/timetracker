@@ -166,7 +166,7 @@ class Calendar extends FormElement {
             $stl_cell = "";
             $stl_link = "";
 
-            // weeekend
+            // weekend
             if ($j==$weekend_start || $j==$weekend_end) {
               $stl_cell = ' class="CalendarDayWeekend"';
               $stl_link = ' class="CalendarLinkWeekend"';

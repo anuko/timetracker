@@ -31,6 +31,24 @@ import('DateAndTime');
 // The ttTimeHelper is a class to help with time-related values.
 class ttTimeHelper {
 
+  // isWeekend determines if $date falls on weekend.
+  static function isWeekend($date) {
+    $weekDay = date('w', strtotime($date));
+    return ($weekDay == WEEKEND_START_DAY || $weekDay == (WEEKEND_START_DAY + 1) % 7);
+  }
+
+  // isHoliday determines if $date falls on a holiday.
+  static function isHoliday($date) {
+    global $i18n;
+    // $date is expected as string in DB_DATEFORMAT.
+    $month = date('m', strtotime($date));
+    $day = date('d', strtotime($date));
+    if (in_array($month.'/'.$day, $i18n->holidays))
+      return true;
+
+    return false;
+  }
+
   // isValidTime validates a value as a time string.
   static function isValidTime($value) {
     if (strlen($value)==0 || !isset($value)) return false;
