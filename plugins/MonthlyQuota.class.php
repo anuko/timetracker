@@ -60,19 +60,6 @@ class MonthlyQuota {
     return $this->getSingle($year, $month);
   }
 
-  // getWorkdayHours - obtains workday_hours value for a team from the database.
-  public function getWorkdayHours(){
-    $teamId = $this->team_id;
-    $sql = "SELECT workday_hours FROM tt_teams where id = $teamId";
-    $reader = $this->db->query($sql);
-    if (is_a($reader, 'PEAR_Error')) {
-      return false;
-    }
-
-    $row = $reader->fetchRow();
-    return $row['workday_hours'];
-  }
-
   // getSingle - obtains a quota for a single month.
   private function getSingle($year, $month) {
     $teamId = $this->team_id;
@@ -88,7 +75,8 @@ class MonthlyQuota {
 
     // If we did not find a record, return a calculated monthly quota.
     $numWorkdays = $this->getNumWorkdays($month, $year);
-    return $numWorkdays * $this->getWorkdayHours();
+    global $user;
+    return $numWorkdays * $user->workday_hours;
   }
 
   // getMany - returns an array of quotas for a given year for team.

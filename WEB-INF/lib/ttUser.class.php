@@ -49,6 +49,7 @@ class ttUser {
   var $custom_logo = 0;     // Whether to use a custom logo for team.
   var $address = null;      // Address for invoices.
   var $lock_spec = null;    // Cron specification for record locking.
+  var $workday_hours = 8;   // Number of work hours in a regular day.
   var $rights = 0;          // A mask of user rights.
 
   // Constructor.
@@ -62,7 +63,7 @@ class ttUser {
 
     $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role, u.client_id, u.email, t.name as team_name, 
       t.address, t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
-      t.tracking_mode, t.record_type, t.plugins, t.lock_spec, t.custom_logo
+      t.tracking_mode, t.record_type, t.plugins, t.lock_spec, t.workday_hours, t.custom_logo
       FROM tt_users u LEFT JOIN tt_teams t ON (u.team_id = t.id) WHERE ";
     if ($id)
       $sql .= "u.id = $id";
@@ -96,6 +97,7 @@ class ttUser {
       $this->currency = $val['currency'];
       $this->plugins = $val['plugins'];
       $this->lock_spec = $val['lock_spec'];
+      $this->workday_hours = $val['workday_hours'];
       $this->custom_logo = $val['custom_logo'];
 
       // Set "on behalf" id and name.

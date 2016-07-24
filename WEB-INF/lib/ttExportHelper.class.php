@@ -61,7 +61,9 @@ class ttExportHelper {
     fwrite($file, "<pack>\n");
 
     // Write team info.
-    fwrite($file, "<team currency=\"".$user->currency."\" lock_spec=\"".$user->lock_spec."\" lang=\"".$user->lang."\" decimal_mark=\"".$user->decimal_mark."\" date_format=\"".$user->date_format."\" time_format=\"".$user->time_format."\" week_start=\"".$user->week_start.
+    fwrite($file, "<team currency=\"".$user->currency."\" lock_spec=\"".$user->lock_spec."\" lang=\"".$user->lang.
+      "\" decimal_mark=\"".$user->decimal_mark."\" date_format=\"".$user->date_format."\" time_format=\"".$user->time_format.
+      "\" week_start=\"".$user->week_start."\" workday_hours=\"".$user->workday_hours.
       "\" plugins=\"".$user->plugins."\" tracking_mode=\"".$user->tracking_mode."\" record_type=\"".$user->record_type."\">\n");
     fwrite($file, "  <name><![CDATA[".$user->team."]]></name>\n");
     fwrite($file, "  <address><![CDATA[".$user->address."]]></address>\n");
@@ -198,6 +200,14 @@ class ttExportHelper {
     }
     fwrite($file, "</custom_field_options>\n");
     unset($custom_field_options);
+
+    // Write monthly quotas.
+    $quotas = ttTeamHelper::getMonthlyQuotas($user->team_id);
+    fwrite($file, "<monthly_quotas>\n");
+    foreach ($quotas as $quota) {
+      fwrite($file, "  <monthly_quota year=\"".$quota['year']."\" month=\"".$quota['month']."\" quota=\"".$quota['quota']."\"/>\n");
+    }
+    fwrite($file, "</monthly_quotas>\n");
 
     // Write time log entries.
     fwrite($file, "<log>\n");

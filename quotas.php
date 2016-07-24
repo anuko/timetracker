@@ -97,7 +97,7 @@ if ($request->isPost()){
 $monthsData = $quota->get($selectedYear);
 
 $form = new Form('monthlyQuotasForm');
-$form->addInput(array('type'=>'text', 'name'=>'workdayHours', 'value'=>$quota->getWorkdayHours(), 'style'=>'width:50px'));
+$form->addInput(array('type'=>'text', 'name'=>'workdayHours', 'value'=>$user->workday_hours, 'style'=>'width:50px'));
 $form->addInput(array('type'=>'combobox','name'=>'year','data'=>$years,'datakeys'=>array('id','name'),'value'=>$selectedYear,'onchange'=>'yearChange(this.value);'));
 for ($i=0; $i < count($months); $i++) { 
   $value = "";

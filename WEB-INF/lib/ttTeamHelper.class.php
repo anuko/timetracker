@@ -517,6 +517,23 @@ class ttTeamHelper {
     return false;
   }
 
+    // getNotifications - obtains monthly quotas for team.
+  static function getMonthlyQuotas($team_id) {
+    $mdb2 = getConnection();
+
+    $result = array();
+    $sql = "select year, month, quota from tt_monthly_quotas where team_id = $team_id";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
   // The getTeams function returns an array of all active teams on the server.
   static function getTeams() {
     $result = array();
