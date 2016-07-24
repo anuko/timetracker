@@ -75,6 +75,7 @@ class ttImportHelper {
       || $name == 'PROJECT'
       || $name == 'CLIENT'
       || $name == 'INVOICE'
+      || $name == 'MONTHLY_QUOTA'
       || $name == 'LOG_ITEM'
       || $name == 'CUSTOM_FIELD'
       || $name == 'CUSTOM_FIELD_OPTION'
@@ -118,6 +119,7 @@ class ttImportHelper {
           'address' => $this->teamData['ADDRESS'],
           'currency' => $this->teamData['CURRENCY'],
           'lock_spec' => $this->teamData['LOCK_SPEC'],
+          'workday_hours' => $this->teamData['WORKDAY_HOURS'],
           'lang' => $this->teamData['LANG'],
           'decimal_mark' => $this->teamData['DECIMAL_MARK'],
           'date_format' => $this->teamData['DATE_FORMAT'],
@@ -208,6 +210,10 @@ class ttImportHelper {
           'client_id' => $this->clientMap[$this->currentElement['CLIENT_ID']],
           'discount' => $this->currentElement['DISCOUNT'],
           'status' => $this->currentElement['STATUS']));
+    }
+
+    if ($name == 'MONTHLY_QUOTA' && $this->canImport) {
+      $this->insertMonthlyQuota($this->team_id, $this->currentElement['YEAR'], $this->currentElement['MONTH'], $this->currentElement['QUOTA']);
     }
 
     if ($name == 'LOG_ITEM' && $this->canImport) {
@@ -395,5 +401,13 @@ class ttImportHelper {
     bzclose($in_file);
     fclose ($out_file);
     return true;
+  }
+
+  // insertMonthlyQuota - a helper function to insert a monthly quota.
+  private function insertMonthlyQuota($team_id, $year, $month, $quota) {
+    $mdb2 = getConnection();
+    $sql = "INSERT INTO tt_monthly_quotas (team_id, year, month, quota) values ($team_id, $year, $month, $quota)";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
   }
 }
