@@ -37,8 +37,8 @@ if (!ttAccessCheck(right_administer_site)) {
 }
 
 $form = new Form('importForm');
-$form->addInput(array('type'=>'upload','name'=>'xmlfile','value'=>'browse','maxsize'=>16777216)); // 16 MB file upload limit.
-// Note: for the above limit to work make sure to set upload_max_filesize and post_max_size in php.ini to at least 16M.
+$form->addInput(array('type'=>'upload','name'=>'xmlfile','value'=>'browse','maxsize'=>67108864)); // 64 MB file upload limit.
+// Note: for the above limit to work make sure to set upload_max_filesize and post_max_size in php.ini to at least 64M.
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.import')));
 
 if ($request->isPost()) {
