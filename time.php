@@ -30,6 +30,7 @@ require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
 import('ttTeamHelper');
+import('ttTaskHelper');
 import('ttClientHelper');
 import('ttTimeHelper');
 import('DateAndTime');
@@ -232,9 +233,16 @@ if ($request->isPost()) {
     if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
       if (!$cl_task) $err->add($i18n->getKey('error.task'));
     }
+    // check if user can enter empty value for duration
+    $task = ttTaskHelper::getTask($cl_task);
+    $allow_empty_duration = $task && $task['allow_empty_duration'];
+
     if (!$cl_duration) {
-      if ('0' == $cl_duration)
-        $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+      if ('0' == $cl_duration){
+        if (!$allow_empty_duration){
+          $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+        }
+      }
       elseif ($cl_start || $cl_finish) {
         if (!ttTimeHelper::isValidTime($cl_start))
           $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start'));
@@ -355,9 +363,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$week_total = ttTimeHelper::getTimeForWeek($user->getActiveUser(), $selected_date);
-
-$smarty->assign('week_total', $week_total);
+$smarty->assign('week_total', ttTimeHelper::getTimeForWeek($user->getActiveUser(), $selected_date));
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getActiveUser(), $cl_date));
 $smarty->assign('time_records', ttTimeHelper::getRecords($user->getActiveUser(), $cl_date));
 $smarty->assign('client_list', $client_list);

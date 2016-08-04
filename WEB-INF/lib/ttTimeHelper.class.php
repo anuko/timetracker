@@ -526,8 +526,14 @@ class ttTimeHelper {
   static function getUncompleted($user_id) {
     $mdb2 = getConnection();
 
-    $sql = "select id, start from tt_log  
-      where user_id = $user_id and start is not null and time_to_sec(duration) = 0 and status = 1";
+    $sql = "SELECT tl.id, tl.start 
+            FROM tt_log tl
+            left join tt_tasks ts on ts.id = tl.task_id
+            where tl.user_id = $user_id 
+            and tl.start is not null 
+            and tl.time_to_sec(duration) = 0 
+            and tl.status = 1 
+            and ts.allow_empty_duration <> 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if (!$res->numRows()) {
@@ -654,12 +660,14 @@ class ttTimeHelper {
 
     $left_joins = " left join tt_projects p on (l.project_id = p.id)".
       " left join tt_tasks t on (l.task_id = t.id)";
+
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
 
     $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,
       TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
-      TIME_FORMAT(l.duration, '%k:%i') as duration, p.name as project, t.name as task, l.comment, l.billable, l.invoice_id $client_field
+      TIME_FORMAT(l.duration, '%k:%i') as duration, p.name as project, t.name as task, l.comment, l.billable, l.invoice_id, t.allow_empty_duration 
+      $client_field
       from tt_log l
       $left_joins
       where l.date = '$date' and l.user_id = $user_id and l.status = 1
@@ -675,5 +683,4 @@ class ttTimeHelper {
 
     return $result;
   }
-
 }

@@ -611,10 +611,17 @@ if ($_POST) {
     setChange("create unique index name_idx on tt_invoices(team_id, name, status)");
     setChange("ALTER TABLE tt_teams ADD COLUMN lock_spec varchar(255) default NULL");
     setChange("ALTER TABLE tt_teams DROP locktime");
-    setChange("CREATE TABLE `tt_monthly_quota` (`team_id` int(11) NOT NULL, `year` smallint(5) UNSIGNED NOT NULL, `month` tinyint(3) UNSIGNED NOT NULL, `quota` smallint(5) UNSIGNED NOT NULL, PRIMARY KEY (`year`,`month`,`team_id`))");
+    // check if tt_monthly_quotas exist, if so, do not create tt_monthly_quota because we will have 1 excess table
+    $mdb2 = getConnection();
+    $sql = "SHOW TABLES LIKE 'tt_monthly_quotas'";
+    $res = $mdb2->query($sql);
+    if (!$res->fetchRow()) {
+      setChange("CREATE TABLE `tt_monthly_quota` (`team_id` int(11) NOT NULL, `year` smallint(5) UNSIGNED NOT NULL, `month` tinyint(3) UNSIGNED NOT NULL, `quota` smallint(5) UNSIGNED NOT NULL, PRIMARY KEY (`year`,`month`,`team_id`))");
+    }
     setChange("ALTER TABLE `tt_monthly_quota` ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
     setChange("ALTER TABLE `tt_teams` ADD `workday_hours` SMALLINT NULL DEFAULT '8' AFTER `lock_spec`");
     setChange("RENAME TABLE tt_monthly_quota TO tt_monthly_quotas");
+    setChange("ALTER TABLE `tt_tasks` ADD `allow_empty_duration` BOOLEAN NULL AFTER `description`;");
   }
   
   // The update_clients function updates projects field in tt_clients table.

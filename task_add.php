@@ -44,6 +44,7 @@ if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_description = trim($request->getParameter('description'));
   $cl_projects = $request->getParameter('projects');
+  $cl_allow_empty_duration = $request->getParameter('empty_duration');
 } else {
   foreach ($projects as $project_item)
     $cl_projects[] = $project_item['id'];
@@ -52,6 +53,7 @@ if ($request->isPost()) {
 $form = new Form('taskForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
+$form->addInput(array('type'=>'checkbox','name'=>'empty_duration','data'=>1,'value'=>$cl_allow_empty_duration));
 $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','layout'=>'H','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_projects));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.add')));
 
@@ -66,6 +68,7 @@ if ($request->isPost()) {
         'team_id' => $user->team_id,
         'name' => $cl_name,
         'description' => $cl_description,
+        'allow_empty_duration' => $cl_allow_empty_duration,
         'status' => ACTIVE,
         'projects' => $cl_projects))) {
           header('Location: tasks.php');

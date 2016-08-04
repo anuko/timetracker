@@ -195,6 +195,7 @@ $i18n_key_words = array(
 'label.fav_report' => 'Favorite report',
 'label.cron_schedule' => 'Cron schedule',
 'label.what_is_it' => 'What is it?',
+'label.allow_empty_duration' => 'Allow empty working hours',
 
 // Form titles.
 'title.login' => 'Login',
