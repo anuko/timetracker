@@ -31,7 +31,7 @@
     <td align="right">{if $time_rec.finish<>$time_rec.start}{$time_rec.finish}{else}&nbsp;{/if}</td>
 {/if}
 {if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
-    <td align="right">{if $time_rec.duration<>'0:00'}{$time_rec.duration}{else}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{/if}</td>
+    <td align="right">{if $time_rec.duration == '0:00' && $time_rec.allow_zero_duration neq 1}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$time_rec.duration}{/if}</td>
 {/if}
     <td>{if $time_rec.comment}{$time_rec.comment|escape:'html'}{else}&nbsp;{/if}</td>
   </tr>

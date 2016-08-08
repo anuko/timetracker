@@ -621,7 +621,7 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_monthly_quota` ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
     setChange("ALTER TABLE `tt_teams` ADD `workday_hours` SMALLINT NULL DEFAULT '8' AFTER `lock_spec`");
     setChange("RENAME TABLE tt_monthly_quota TO tt_monthly_quotas");
-    setChange("ALTER TABLE `tt_tasks` ADD `allow_empty_duration` BOOLEAN NULL AFTER `description`;");
+    setChange("ALTER TABLE `tt_tasks` ADD `allow_zero_duration` BOOLEAN NULL AFTER `description`;");
   }
   
   // The update_clients function updates projects field in tt_clients table.

@@ -214,7 +214,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, allow_empty_duration from tt_tasks where team_id = $team_id and status = 1 order by name";
+    $sql = "select id, name, description, allow_zero_duration from tt_tasks where team_id = $team_id and status = 1 order by name";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -231,7 +231,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, allow_empty_duration from tt_tasks
+    $sql = "select id, name, description, allow_zero_duration from tt_tasks
       where team_id = $team_id and status = 0 order by name";
     $res = $mdb2->query($sql);
     $result = array();

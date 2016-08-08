@@ -86,7 +86,7 @@ CREATE TABLE `tt_tasks` (
   `team_id` int(11) NOT NULL,                     # team id
   `name` varchar(80) COLLATE utf8_bin NOT NULL,   # task name
   `description` varchar(255) default NULL,        # task description
-  `allow_empty_duration` tinyint(1) DEFAULT NULL, # when entering this type of task, user can enter empty value for duration
+  `allow_zero_duration` tinyint(1) DEFAULT NULL,  # when entering this type of task, user can enter empty value for duration
   `status` tinyint(4) default '1',                # task status
   PRIMARY KEY (`id`)
 );

@@ -12,7 +12,7 @@
           <td>{$forms.taskForm.description.control}</td>
         </tr>
         <tr>
-          <td align="right">{$i18n.label.allow_empty_duration}</td>
+          <td align="right">{$i18n.label.allow_zero_duration}</td>
           <td>{$forms.taskForm.empty_duration.control}</td>
         </tr>
         <tr valign="top">

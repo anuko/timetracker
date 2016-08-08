@@ -52,7 +52,7 @@ $_SESSION['date'] = $cl_date;
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
-  require_once('../plugins/CustomFields.class.php');
+  require_once(PLUGINS_DIR.'/CustomFields.class.php');
   $custom_fields = new CustomFields($user->team_id);
   $smarty->assign('custom_fields', $custom_fields);
 }

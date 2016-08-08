@@ -483,6 +483,10 @@ class ttTimeHelper {
   static function getTimeForDay($user_id, $date) {
     $mdb2 = getConnection();
 
+    if ($date instanceof DateAndTime){
+      $date = $date->toString(DB_DATEFORMAT);
+    }
+
     $sql = "select sum(time_to_sec(duration)) as sm from tt_log where user_id = $user_id and date = '$date' and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -529,11 +533,12 @@ class ttTimeHelper {
     $sql = "SELECT tl.id, tl.start 
             FROM tt_log tl
             left join tt_tasks ts on ts.id = tl.task_id
-            where tl.user_id = $user_id 
-            and tl.start is not null 
-            and tl.time_to_sec(duration) = 0 
+            where tl.start is not null
+            AND tl.user_id = $user_id
+            and time_to_sec(tl.duration) = 0 
             and tl.status = 1 
-            and ts.allow_empty_duration <> 1";
+            and ts.allow_zero_duration <> 1";
+
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if (!$res->numRows()) {
@@ -544,6 +549,28 @@ class ttTimeHelper {
       }
     }
     return false;
+  } 
+
+  // getPotentiallyUncompleted gets recrods that would go to status uncompleted if
+  // tasks allow_zeor_duration flag would change to false
+  static function getPotentiallyUncompleted($task_id){
+      $mdb2 = getConnection();
+      $sql = "SELECT tl.id
+              FROM tt_log tl
+              LEFT JOIN tt_tasks ts on ts.id = tl.task_id
+              WHERE time_to_sec(tl.duration) = 0
+              AND tl.status = 1
+              and ts.id = $task_id";
+
+      $res = $mdb2->query($sql);
+
+      if (!is_a($res, 'PEAR_Error')) {
+        while ($val = $res->fetchRow()) {
+          $result[] = $val;
+        }
+      } else return false;
+
+      return $result;
   }
 
   // overlaps - determines if a record overlaps with an already existing record.
@@ -560,6 +587,10 @@ class ttTimeHelper {
       return false;
 
     $mdb2 = getConnection();
+
+    if ($date instanceof DateAndTime){
+      $date = $date->toString(DB_DATEFORMAT);
+    }
 
     $start = ttTimeHelper::to24HourFormat($start);
     if ($finish) {
@@ -605,7 +636,7 @@ class ttTimeHelper {
 
     $sql = "select l.id as id, l.timestamp as timestamp, TIME_FORMAT(l.start, $sql_time_format) as start,
       TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
-      TIME_FORMAT(l.duration, '%k:%i') as duration,
+      TIME_FORMAT(l.duration, '%k:%i') as duration, t.allow_zero_duration,
       p.name as project_name, t.name as task_name, l.comment, l.client_id, l.project_id, l.task_id, l.invoice_id, l.billable, l.date
       from tt_log l
       left join tt_projects p on (p.id = l.project_id)
@@ -654,6 +685,10 @@ class ttTimeHelper {
     $result = array();
     $mdb2 = getConnection();
 
+    if ($date instanceof DateAndTime){
+      $date = $date->toString(DB_DATEFORMAT);
+    }
+    
     $client_field = null;
     if ($user->isPluginEnabled('cl'))
       $client_field = ", c.name as client";
@@ -666,7 +701,7 @@ class ttTimeHelper {
 
     $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,
       TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
-      TIME_FORMAT(l.duration, '%k:%i') as duration, p.name as project, t.name as task, l.comment, l.billable, l.invoice_id, t.allow_empty_duration 
+      TIME_FORMAT(l.duration, '%k:%i') as duration, p.name as project, t.name as task, l.comment, l.billable, l.invoice_id, t.allow_zero_duration 
       $client_field
       from tt_log l
       $left_joins

@@ -94,6 +94,7 @@ $i18n_key_words = array(
 'error.goto_uncompleted' => 'Go to uncompleted entry.',
 'error.overlap' => 'Time interval overlaps with existing records.',
 'error.future_date' => 'Date is in future.',
+'error.creating_uncompleted_records' => 'If you set the flag to disallow zero duration on this task, it will create %1$s uncompleted entries!',
 
 // Labels for buttons.
 'button.login' => 'Login',
@@ -195,7 +196,7 @@ $i18n_key_words = array(
 'label.fav_report' => 'Favorite report',
 'label.cron_schedule' => 'Cron schedule',
 'label.what_is_it' => 'What is it?',
-'label.allow_empty_duration' => 'Allow empty working hours',
+'label.allow_zero_duration' => 'Allow zero working time',
 
 // Form titles.
 'title.login' => 'Login',
