@@ -152,8 +152,7 @@ $i18n_key_words = array(
 'label.cost' => 'Kosten',
 'label.day_total' => 'Dag totaal',
 'label.week_total' => 'Week totaal',
-// TODO: translate the following.
-// 'label.month_total' => 'Month total',
+'label.month_total' => 'Maand totaal',
 'label.today' => 'Vandaag',
 'label.total_hours' => 'Uren totaal',
 'label.total_cost' => 'Totale kosten',
@@ -187,8 +186,7 @@ $i18n_key_words = array(
 'label.page' => 'Pagina',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Eigen velden',
-// Translate the following.
-// 'label.monthly_quotas' => 'Monthly quotas',
+'label.monthly_quotas' => 'Doelen per maand',
 'label.type' => 'Type',
 'label.type_dropdown' => 'uitklapbaar',
 'label.type_text' => 'tekst',
@@ -241,7 +239,7 @@ $i18n_key_words = array(
 'title.add_notification' => 'Notificatie toevoegen',
 'title.edit_notification' => 'Notificatie bewerken',
 'title.delete_notification' => 'Notificatie verwijderen',
-// 'title.monthly_quotas' => 'Monthly Quotas',
+'title.monthly_quotas' => 'Doelen per maand',
 'title.export' => 'Exporteer teamgegevens',
 'title.import' => 'Importeer teamgegevens',
 'title.options' => 'Opties',
@@ -298,9 +296,8 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(uu:mm of 0.0u)',
 'form.time.billable' => 'Factureerbaar',
 'form.time.uncompleted' => 'Onvolledig',
-// TODO: translate the following.
-// 'form.time.remaining_quota' => 'Remaining quota',
-// 'form.time.over_quota' => 'Over quota',
+'form.time.remaining_quota' => 'Te werken uren voor de doelstelling',
+'form.time.over_quota' => 'Meer gewerkte uren dan de doelstelling',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Dit tijdrecord is opgeslagen met alleen een starttijd. Dit is geen fout.',
@@ -403,10 +400,9 @@ $i18n_key_words = array(
 'form.mail.invoice_sent' => 'Factuur is verzonden.',
 
 // Quotas configuration form.
-// TODO: translate the following.
-// 'form.quota.year' => 'Year',
-// 'form.quota.month' => 'Month',
-// 'form.quota.quota' => 'Quota',
-// 'form.quota.workdayHours' => 'Hours in a work day',
-// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+'form.quota.year' => 'Jaar',
+'form.quota.month' => 'Maand',
+'form.quota.quota' => 'Quota',
+'form.quota.workdayHours' => 'Werkuren per dag',
+'form.quota.hint' => 'Als de velden leeg worden gelaten, dan zullen de doelen worden berekend op bassis van het aantal werkuren per dag en vakantiedagen.',
 );
