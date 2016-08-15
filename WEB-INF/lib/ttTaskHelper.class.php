@@ -36,7 +36,7 @@ class ttTaskHelper {
  
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, status from tt_tasks
+    $sql = "select id, name, description, allow_zero_duration, status from tt_tasks
       where id = $id and team_id = $user->team_id and (status = 0 or status = 1)";
     $res = $mdb2->query($sql);
 
@@ -140,10 +140,11 @@ class ttTaskHelper {
     $name = $fields['name'];
     $description = $fields['description'];
     $projects = $fields['projects'];
+    $allow_zero_duration = (int) $fields["allow_zero_duration"];
     $status = $fields['status'];
-        
-    $sql = "insert into tt_tasks (team_id, name, description, status)
-      values ($team_id, ".$mdb2->quote($name).", ".$mdb2->quote($description).", ".$mdb2->quote($status).")";
+
+    $sql = "insert into tt_tasks (team_id, name, description, allow_zero_duration, status)
+      values ($team_id, ".$mdb2->quote($name).", ".$mdb2->quote($description).", ".$allow_zero_duration.", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     $last_id = 0;
     if (is_a($affected, 'PEAR_Error'))
@@ -195,11 +196,12 @@ class ttTaskHelper {
     $task_id = (int)$fields['task_id'];
     $name = $fields['name'];
     $description = $fields['description'];
+    $allow_zero_duration = (int)$fields["allow_zero_duration"];
     $status = $fields['status'];
     $projects = $fields['projects'];
 
     $sql = "update tt_tasks set name = ".$mdb2->quote($name).", description = ".$mdb2->quote($description).
-      ", status = $status where id = $task_id";
+      ", allow_zero_duration = ".$allow_zero_duration.", status = $status where id = $task_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       die($affected->getMessage());

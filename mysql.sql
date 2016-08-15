@@ -82,11 +82,12 @@ create unique index project_idx on tt_projects(team_id, name, status);
 # Structure for table tt_tasks.
 #
 CREATE TABLE `tt_tasks` (
-  `id` int(11) NOT NULL auto_increment,         # task id
-  `team_id` int(11) NOT NULL,                   # team id
-  `name` varchar(80) COLLATE utf8_bin NOT NULL, # task name
-  `description` varchar(255) default NULL,      # task description
-  `status` tinyint(4) default '1',              # task status
+  `id` int(11) NOT NULL auto_increment,           # task id
+  `team_id` int(11) NOT NULL,                     # team id
+  `name` varchar(80) COLLATE utf8_bin NOT NULL,   # task name
+  `description` varchar(255) default NULL,        # task description
+  `allow_zero_duration` tinyint(1) DEFAULT NULL,  # when entering this type of task, user can enter empty value for duration
+  `status` tinyint(4) default '1',                # task status
   PRIMARY KEY (`id`)
 );
 

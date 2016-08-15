@@ -31,7 +31,7 @@ import('DateAndTime');
 import('Period');
 import('ttTimeHelper');
 
-require_once(dirname(__FILE__).'/../../plugins/CustomFields.class.php');
+require_once(PLUGINS_DIR.'/CustomFields.class.php');
 
 // Class ttReportHelper is used for help with reports.
 class ttReportHelper {

@@ -40,6 +40,7 @@ ini_set('display_errors', 'Off');
 define("APP_DIR", dirname(__FILE__));
 define("LIBRARY_DIR", APP_DIR."/WEB-INF/lib");
 define("TEMPLATE_DIR", APP_DIR."/WEB-INF/templates");
+define("PLUGINS_DIR", APP_DIR."/plugins");
 // Date format for database and URI parameters.
 define('DB_DATEFORMAT', '%Y-%m-%d');
 

@@ -27,7 +27,7 @@
 // +----------------------------------------------------------------------+
 
 require_once('initialize.php');
-require_once('plugins/CustomFields.class.php');
+require_once(PLUGINS_DIR.'/CustomFields.class.php');
 import('form.Form');
 
 // Access check.

@@ -28,8 +28,9 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttTeamHelper');
 import('ttTaskHelper');
+import('ttTeamHelper');
+import('ttTimeHelper');
 
 // Access check.
 if (!ttAccessCheck(right_manage_team)) {
@@ -43,12 +44,14 @@ $projects = ttTeamHelper::getActiveProjects($user->team_id);
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_description = trim($request->getParameter('description'));
+  $cl_allow_zero_duration = $request->getParameter('empty_duration');
   $cl_status = $request->getParameter('status');
   $cl_projects = $request->getParameter('projects');
 } else {
   $task = ttTaskHelper::getTask($cl_task_id);
   $cl_name = $task['name'];
   $cl_description = $task['description'];
+  $cl_allow_zero_duration = $task['allow_zero_duration'];
   $cl_status = $task['status'];
 
   $assigned_projects = ttTaskHelper::getAssignedProjects($cl_task_id);
@@ -60,11 +63,13 @@ $form = new Form('taskForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_task_id));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
+$form->addInput(array('type'=>'checkbox','name'=>'empty_duration','data'=>1,'value'=>$cl_allow_zero_duration));
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
 $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','layout'=>'H','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_projects));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
+
 
 if ($request->isPost()) {
   // Validate user input.
@@ -73,21 +78,37 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     if ($request->getParameter('btn_save')) {
-      $existing_task = ttTaskHelper::getTaskByName($cl_name);
-      if (!$existing_task || ($cl_task_id == $existing_task['id'])) {
-        // Update task information.
-        if (ttTaskHelper::update(array(
-          'task_id' => $cl_task_id,
-          'name' => $cl_name,
-          'description' => $cl_description,
-          'status' => $cl_status,
-          'projects' => $cl_projects))) {
-          header('Location: tasks.php');
-          exit();
+      // if allow_zero_duration is set to false check if current record is true
+      if (!$cl_allow_zero_duration){
+        $current_task_data = ttTaskHelper::getTask($cl_task_id);
+        if ($current_task_data['allow_zero_duration']){
+          $uncompleted = ttTimeHelper::getPotentiallyUncompleted($cl_task_id);
+          // if there are uncompleted records, do not save the task because it will
+          // create an illegal state in DB
+          if ($uncompleted){
+            $err->add(sprintf($i18n->getKey('error.creating_uncompleted_records'), count($uncompleted)));
+          }
+        }
+      }
+      
+      if ($err->no){
+        $existing_task = ttTaskHelper::getTaskByName($cl_name);
+        if ((!$existing_task || ($cl_task_id == $existing_task['id']))) {
+          // Update task information.
+          if (ttTaskHelper::update(array(
+            'task_id' => $cl_task_id,
+            'name' => $cl_name,
+            'description' => $cl_description,
+            'allow_zero_duration' => $cl_allow_zero_duration,
+            'status' => $cl_status,
+            'projects' => $cl_projects))) {
+            header('Location: tasks.php');
+            exit();
+          } else
+            $err->add($i18n->getKey('error.db'));
         } else
-          $err->add($i18n->getKey('error.db'));
-      } else
-        $err->add($i18n->getKey('error.task_exists'));
+          $err->add($i18n->getKey('error.task_exists'));
+      }
     }
 
     if ($request->getParameter('btn_copy')) {
@@ -96,6 +117,7 @@ if ($request->isPost()) {
           'team_id' => $user->team_id,
           'name' => $cl_name,
           'description' => $cl_description,
+          'allow_zero_duration' => $cl_allow_zero_duration,
           'status' => $cl_status,
           'projects' => $cl_projects))) {
           header('Location: tasks.php');

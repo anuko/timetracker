@@ -11,6 +11,10 @@
           <td align = "right">{$i18n.label.description}:</td>
           <td>{$forms.taskForm.description.control}</td>
         </tr>
+        <tr>
+          <td align="right">{$i18n.label.allow_zero_duration}</td>
+          <td>{$forms.taskForm.empty_duration.control}</td>
+        </tr>
         <tr valign="top">
           <td align="right">{$i18n.label.projects}:</td>
           <td>{$forms.taskForm.projects.control}</td>
