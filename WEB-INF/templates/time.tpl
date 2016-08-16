@@ -326,14 +326,14 @@ function get_time() {
         <td nowrap align='right' valign='top'>{if $record.start}{$record.start}{else}&nbsp;{/if}</td>
         <td nowrap align='right' valign='top'>{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
     {/if}
-        <td align='right' valign='top'>{if $record.duration <> '0:00'}{$record.duration}{else}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{/if}</td>
+        <td align='right' valign='top'>{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
         <td valign='top'>{if $record.comment}{$record.comment|escape:'html'}{else}&nbsp;{/if}</td>
         <td valign='top' align='center'>
     {if $record.invoice_id}
           &nbsp;
     {else}
           <a href='time_edit.php?id={$record.id}'>{$i18n.label.edit}</a>
-      {if $record.duration == '0:00'}
+      {if ($record.duration == '0:00' && $record.start <> '')}
           <input type='hidden' name='record_id' value='{$record.id}'>
           <input type='hidden' name='browser_date' value=''>
           <input type='hidden' name='browser_time' value=''>

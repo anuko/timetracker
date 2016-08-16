@@ -95,7 +95,7 @@ if ($request->isPost()) {
   $cl_billable = $time_rec['billable'];
 
   // Add an info message to the form if we are editing an uncompleted record.
-  if (($cl_start == $cl_finish) && ($cl_duration == '0:00')) {
+  if (strlen($cl_start) > 0 && $cl_start == $cl_finish && $cl_duration == '0:00') {
     $cl_finish = '';
     $cl_duration = '';
     $msg->add($i18n->getKey('form.time_edit.uncompleted'));

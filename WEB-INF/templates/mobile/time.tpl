@@ -226,7 +226,7 @@ function get_date() {
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td valign='top'>{$record.project|escape:'html'}</td>
 {/if}
-        <td align='right' valign='top'>{if $record.duration == '0:00'}<font color="#ff0000">{/if}{$record.duration}{if $record.duration == '0:00'}</font>{/if}
+        <td align='right' valign='top'>{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{/if}{$record.duration}{if ($record.duration == '0:00' && $record.start <> '')}</font>{/if}</td>
         <td align='center'>{if $record.invoice_id}&nbsp;{else}<a href='time_edit.php?id={$record.id}'>{$i18n.label.edit}</a>{/if}</td>
       </tr>
       {/foreach}

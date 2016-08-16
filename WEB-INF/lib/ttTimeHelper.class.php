@@ -87,18 +87,12 @@ class ttTimeHelper {
     if ($value == '24:00' || $value == '2400') return true;
 
     if (preg_match('/^([0-1]{0,1}[0-9]|2[0-3]):?[0-5][0-9]$/', $value )) { // 0:00 - 23:59, 000 - 2359
-      if ('00:00' == ttTimeHelper::normalizeDuration($value))
-        return false;
       return true;
     }
     if (preg_match('/^([0-1]{0,1}[0-9]|2[0-4])h?$/', $value )) { // 0, 1 ... 24
-      if ('00:00' == ttTimeHelper::normalizeDuration($value))
-        return false;
       return true;
     }
     if (preg_match('/^([0-1]{0,1}[0-9]|2[0-3])?[.][0-9]{1,4}h?$/', $value )) { // decimal values like 0.5, 1.25h, ... .. 23.9999h
-      if ('00:00' == ttTimeHelper::normalizeDuration($value))
-        return false;
       return true;
     }
 
