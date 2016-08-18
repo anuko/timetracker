@@ -403,6 +403,6 @@ $i18n_key_words = array(
 'form.quota.year' => 'Jaar',
 'form.quota.month' => 'Maand',
 'form.quota.quota' => 'Quota',
-'form.quota.workdayHours' => 'Werkuren per dag',
+'form.quota.workday_hours' => 'Werkuren per dag',
 'form.quota.hint' => 'Als de velden leeg worden gelaten, dan zullen de doelen worden berekend op bassis van het aantal werkuren per dag en vakantiedagen.',
 );

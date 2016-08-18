@@ -404,6 +404,6 @@ $i18n_key_words = array(
 'form.quota.year' => 'Год',
 'form.quota.month' => 'Месяц',
 'form.quota.quota' => 'Квота',
-'form.quota.workdayHours' => 'Количество часов в рабочем дне',
+'form.quota.workday_hours' => 'Количество часов в рабочем дне',
 'form.quota.hint' => 'При пустых значениях квоты автоматически определяются из длительности рабочего дня и праздников.',
 );
