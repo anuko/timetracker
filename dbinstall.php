@@ -67,6 +67,14 @@ if ($request->isGet()) {
     echo('<font color="red">Error: DSN value is not defined. Check your config.php file.</font><br>');
   }
 
+  // Check if PHP version is good enough.
+  $required_version = '5.2.1'; // Something in TCPDF library does not work below this one.
+  if (version_compare(phpversion(), $required_version, '>=')) {
+    echo('PHP version: '.phpversion().', good enough.<br>');
+  } else {
+    echo('<font color="red">Error: PHP version is not high enough: '.phpversion().'. Required: '.$required_version.'.</font><br>');
+  }
+
   // Depending on DSN, require either mysqli or mysql extensions.
   if (strrpos(DSN, 'mysqli://', -strlen(DSN)) !== FALSE) {
     if (extension_loaded('mysqli')) {
