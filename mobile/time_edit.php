@@ -184,7 +184,7 @@ if (!$user->canManageTeam() && defined('READONLY_START_FINISH') && isTrue(READON
 if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
   $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
 $form->addInput(array('type'=>'datefield','name'=>'date','maxlength'=>'20','value'=>$cl_date));
-$form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 250px; height: 60px;','value'=>$cl_note));
+$form->addInput(array('type'=>'textarea','name'=>'note','class'=>'mobile-textarea','value'=>$cl_note));
 // If we have custom fields - add controls for them.
 if ($custom_fields && $custom_fields->fields[0]) {
   // Only one custom field is supported at this time.

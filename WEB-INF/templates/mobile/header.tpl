@@ -53,7 +53,51 @@
         </tr>
       </table>
       <!-- End of top image -->
+      
+{if $authenticated}
+  {if $user->isAdmin()}
+  
+      <!-- Sub menu for admin -->
+      <table cellspacing="0" cellpadding="3" width="100%" border="0">
+        <tr>
+          <td align="center" bgcolor="#d9d9d9" height="17" style="background-repeat: repeat-x;" background="../images/subm_bg.gif">&nbsp;
+            <a class="mainMenu" href="admin_teams.php">{$i18n.menu.teams}</a> &middot;
+            <a class="mainMenu" href="admin_options.php">{$i18n.menu.options}</a>
+          </td>
+        </tr>
+      </table>
+      <!-- End of sub menu for admin -->
+  {else}
 
+      <!-- Sub menu for authorized user -->
+      <table cellspacing="0" cellpadding="3" width="100%" border="0">
+        <tr>
+          <td align="center" bgcolor="#d9d9d9" height="17" style="background-repeat: repeat-x;" background="../images/subm_bg.gif">&nbsp;
+    {if !$user->isClient()}
+           <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
+    {/if}
+    {if $user->isPluginEnabled('ex') && !$user->isClient()}
+            &middot; <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
+    {/if}
+    {if !$user->isClient() && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+            &middot; <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
+    {/if}
+    {if $user->canManageTeam() && ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+            &middot; <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
+    {/if}
+    {if !$user->isClient()}
+            &middot; <a class="mainMenu" href="users.php">{$i18n.menu.users}</a>
+    {/if}
+    {if $user->canManageTeam() && $user->isPluginEnabled('cl')}
+            &middot; <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
+    {/if}
+          </td>
+        </tr>
+      </table>
+      <!-- End of sub menu for authorized user -->
+  {/if}
+{/if}
+      
       <!-- Output errors -->
 {if $err->yes()}
       <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
