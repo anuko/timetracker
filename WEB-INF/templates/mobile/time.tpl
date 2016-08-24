@@ -220,7 +220,7 @@ function get_date() {
 <tr>
   <td align="center">
     {if $time_records}
-      <table border='0' cellpadding='4' cellspacing='1' width="100%">
+      <table class="mobile-table-details">
       {foreach $time_records as $record}
       <tr bgcolor="{cycle values="#ccccce,#f5f5f5"}" {if !$record.billable} class="not_billable" {/if}>
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}

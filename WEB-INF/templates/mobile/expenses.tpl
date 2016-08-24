@@ -130,7 +130,7 @@ function get_date() {
 <tr>
   <td valign="top">
 {if $expense_items}
-      <table border="0" cellpadding="3" cellspacing="1" width="100%">
+      <table class="mobile-table-details">
       <tr>
   {if $user->isPluginEnabled('cl')}
         <td width="20%" class="tableHeader">{$i18n.label.client}</td>

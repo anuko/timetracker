@@ -6,7 +6,7 @@
   <tr>
     <td valign="top">
 {if $user->canManageTeam()}
-      <table cellspacing="1" cellpadding="3" border="0" width="100%">
+      <table class="mobile-table-details">
   {if $inactive_projects}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.projects.active_projects}</td></tr>
   {/if}
@@ -19,8 +19,8 @@
   {if $active_projects}
     {foreach $active_projects as $project}
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
-          <td>{$project.name|escape:'html'}</td>
-          <td>{$project.description|escape:'html'}</td>
+          <td class="break-word">{$project.name|escape:'html'}</td>
+          <td class="break-word">{$project.description|escape:'html'}</td>
           <td><a href="project_edit.php?id={$project.id}">{$i18n.label.edit}</a></td>
           <td><a href="project_delete.php?id={$project.id}">{$i18n.label.delete}</a></td>
         </tr>

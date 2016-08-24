@@ -6,7 +6,7 @@
   <tr>
     <td valign="top">
 {if $user->canManageTeam()}
-      <table cellspacing="1" cellpadding="3" border="0" width="100%">
+      <table class="mobile-table-details">
   {if $inactive_tasks}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.tasks.active_tasks}</td></tr>
   {/if}
