@@ -15,7 +15,6 @@
           <td width="35%" class="tableHeader">{$i18n.label.login}</td>
           <td width="10%" class="tableHeader">{$i18n.form.users.role}</td>
           <td width="10%" class="tableHeader">{$i18n.label.edit}</td>
-          <td width="10%" class="tableHeader">{$i18n.label.delete}</td>
         </tr>
   {if $active_users}
     {foreach $active_users as $u}
@@ -34,11 +33,9 @@
       {if $user->isManager()}
           <!-- Manager can edit everybody. -->
           <td><a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a></td>
-          <td>{if $smarty.const.ROLE_MANAGER != $u.role || $can_delete_manager}<a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a>{/if}</td>
       {else}
           <!--  Comanager can edit self and clients or users but not manager and other comanagers. -->
           <td>{if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a>{/if}</td>
-          <td>{if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a>{/if}</td>
       {/if}
         </tr>
     {/foreach}

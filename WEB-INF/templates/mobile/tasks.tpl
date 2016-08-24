@@ -14,7 +14,6 @@
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
   {if $active_tasks}
     {foreach $active_tasks as $task}
@@ -22,7 +21,6 @@
           <td>{$task.name|escape:'html'}</td>
           <td>{$task.description|escape:'html'}</td>
           <td><a href="task_edit.php?id={$task.id}">{$i18n.label.edit}</a></td>
-          <td><a href="task_delete.php?id={$task.id}">{$i18n.label.delete}</a></td>
         </tr>
     {/foreach}
   {/if}
@@ -43,14 +41,12 @@
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
     {foreach $inactive_tasks as $task}
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
           <td>{$task.name|escape:'html'}</td>
           <td>{$task.description|escape:'html'}</td>
           <td><a href="task_edit.php?id={$task.id}">{$i18n.label.edit}</a></td>
-          <td><a href="task_delete.php?id={$task.id}">{$i18n.label.delete}</a></td>
         </tr>
     {/foreach}
       </table>

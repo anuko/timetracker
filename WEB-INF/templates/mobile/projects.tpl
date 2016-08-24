@@ -14,15 +14,13 @@
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
   {if $active_projects}
     {foreach $active_projects as $project}
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
-          <td class="break-word">{$project.name|escape:'html'}</td>
-          <td class="break-word">{$project.description|escape:'html'}</td>
+          <td>{$project.name|escape:'html'}</td>
+          <td>{$project.description|escape:'html'}</td>
           <td><a href="project_edit.php?id={$project.id}">{$i18n.label.edit}</a></td>
-          <td><a href="project_delete.php?id={$project.id}">{$i18n.label.delete}</a></td>
         </tr>
     {/foreach}
   {/if}
@@ -43,14 +41,12 @@
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
     {foreach $inactive_projects as $project}
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
           <td>{$project.name|escape:'html'}</td>
           <td>{$project.description|escape:'html'}</td>
           <td><a href="project_edit.php?id={$project.id}">{$i18n.label.edit}</a></td>
-          <td><a href="project_delete.php?id={$project.id}">{$i18n.label.delete}</a></td>
         </tr>
     {/foreach}
       </table>
