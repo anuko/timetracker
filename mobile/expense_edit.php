@@ -26,7 +26,7 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-require_once('initialize.php');
+require_once('../initialize.php');
 import('form.Form');
 import('ttTeamHelper');
 import('DateAndTime');
@@ -203,5 +203,5 @@ $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.edit_expense'));
-$smarty->assign('content_page_name', 'expense_edit.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'mobile/expense_edit.tpl');
+$smarty->display('mobile/index.tpl');
