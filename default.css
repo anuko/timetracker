@@ -165,6 +165,7 @@ div#LoginAboutText { width:400px; }
   width: 100%;
   table-layout: fixed;
   overflow-wrap: break-word;
+  word-wrap: break-word;
   border-spacing: 1px;
   border: 0;
 }
