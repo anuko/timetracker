@@ -143,3 +143,34 @@ table.divider {
 }
 
 div#LoginAboutText { width:400px; }
+
+/* Mobile styles */
+.mobile-table {
+  border: 0;
+  width: 100%;
+  border-spacing: 0;
+}
+
+.mobile-textarea {
+  width: 100%; 
+  resize: vertical;
+  height: 5em;
+}
+
+.mobile-input {
+  width: 100%;
+}
+
+.mobile-table-details {
+  width: 100%;
+  table-layout: fixed;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  border-spacing: 1px;
+  border: 0;
+}
+
+.mobile-table-details td {
+  padding: 3px;
+}
+
