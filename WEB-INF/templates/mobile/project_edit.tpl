@@ -36,7 +36,7 @@
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="2" align="center" height="50">{$forms.projectForm.btn_save.control} {$forms.projectForm.btn_copy.control}</td>
+          <td colspan="2" align="center" height="50">{$forms.projectForm.btn_save.control} {$forms.projectForm.btn_copy.control} {$forms.projectForm.btn_delete.control}</td>
         </tr>
       </table>
     </td>

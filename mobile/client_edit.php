@@ -70,6 +70,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
   $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'datakeys'=>array('id','name'),'layout'=>'H','value'=>$cl_projects));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 
 if ($request->isPost()) {
   // Validate user input.
@@ -111,6 +112,11 @@ if ($request->isPost()) {
           $err->add($i18n->getKey('error.db'));
       } else
         $err->add($i18n->getKey('error.client_exists'));
+    }
+    
+    if ($request->getParameter('btn_delete')) {
+      header("Location: client_delete.php?id=$cl_id");
+      exit();
     }
   }
 } // isPost

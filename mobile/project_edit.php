@@ -81,6 +81,7 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkboxgroup','name'=>'tasks','data'=>$all_tasks,'layout'=>'H','value'=>$cl_tasks));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 
 if ($request->isPost()) {
   // Validate user input.
@@ -122,6 +123,11 @@ if ($request->isPost()) {
           $err->add($i18n->getKey('error.db'));
       } else
         $err->add($i18n->getKey('error.project_exists'));
+    }
+    
+    if ($request->getParameter('btn_delete')) {
+      header("Location: project_delete.php?id=$cl_project_id");
+      exit();
     }
   }
 } // isPost

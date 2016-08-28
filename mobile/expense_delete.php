@@ -26,7 +26,7 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-require_once('initialize.php');
+require_once('../initialize.php');
 import('form.Form');
 import('DateAndTime');
 import('ttExpenseHelper');
@@ -74,5 +74,5 @@ $form->addInput(array('type'=>'submit','name'=>'cancel_button','value'=>$i18n->g
 $smarty->assign('expense_item', $expense_item);
 $smarty->assign('forms', array($form->getName() => $form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.delete_expense'));
-$smarty->assign('content_page_name', 'expense_delete.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'mobile/expense_delete.tpl');
+$smarty->display('mobile/index.tpl');

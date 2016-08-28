@@ -28,7 +28,7 @@
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="2" align="center" height="50">{$forms.taskForm.btn_save.control} {$forms.taskForm.btn_copy.control}</td>
+          <td colspan="2" align="center" height="50">{$forms.taskForm.btn_save.control} {$forms.taskForm.btn_copy.control} {$forms.taskForm.btn_delete.control}</td>
         </tr>
       </table>
     </td>
