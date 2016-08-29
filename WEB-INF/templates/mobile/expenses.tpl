@@ -140,7 +140,6 @@ function get_date() {
   {/if}
         <td class="tableHeader">{$i18n.label.item}</td>
         <td width="5%" class="tableHeaderCentered">{$i18n.label.cost}</td>
-        <td width="5%" class="tableHeader">{$i18n.label.edit}</td>
       </tr>
   {foreach $expense_items as $item}
       <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
@@ -150,9 +149,8 @@ function get_date() {
     {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td valign='top'>{$item.project|escape:'html'}</td>
     {/if}
-        <td valign='top'>{$item.item|escape:'html'}</td>
+        <td valign='top'>{if $item.invoice_id} {$item.item|escape:'html'} {else}<a href='expense_edit.php?id={$item.id}'>{$item.item|escape:'html'}</a>{/if}</td>
         <td valign='top' align='right'>{$item.cost}</td>
-        <td valign='top' align='center'>{if $item.invoice_id}&nbsp;{else}<a href='expense_edit.php?id={$item.id}'>{$i18n.label.edit}</a>{/if}</td>
       </tr>
   {/foreach}
     </table>
