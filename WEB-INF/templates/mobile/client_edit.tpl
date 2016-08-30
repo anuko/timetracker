@@ -32,7 +32,7 @@
 {/if}
         <tr><td>&nbsp;</td></tr>
         <tr>
-          <td colspan="2" align="center" height="50">{$forms.clientForm.btn_save.control} {$forms.clientForm.btn_copy.control}</td>
+          <td colspan="2" align="center" height="50">{$forms.clientForm.btn_save.control} {$forms.clientForm.btn_copy.control} {$forms.clientForm.btn_delete.control}</td>
         </tr>
       </table>
     </td>

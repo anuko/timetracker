@@ -161,67 +161,75 @@ $form->addInputElement($table);
 
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$user_id));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.save')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 
 if ($request->isPost()) {
-  // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
-  if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
-  if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
-    if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-    if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
-    if ($cl_password1 !== $cl_password2)
-      $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
-  }
-  if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
-  if (!ttValidFloat($cl_rate, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.users.default_rate'));
-
-  if ($err->no()) {
-    $existing_user = ttUserHelper::getUserByLogin($cl_login);
-    if (!$existing_user || ($user_id == $existing_user['id'])) {
-
-      $fields = array(
-        'name' => $cl_name,
-        'login' => $cl_login,
-        'password' => $cl_password1,
-        'email' => $cl_email,
-        'status' => $cl_status,
-        'rate' => $cl_rate,
-        'projects' => $assigned_projects);
-      if (right_assign_roles & $user->rights) {
-        $fields['role'] = $cl_role;
-        $fields['client_id'] = $cl_client_id;
-      }
-
-      if (ttUserHelper::update($user_id, $fields)) {
-
-        // If our own login changed, set new one in cookie to remember it.
-        if (($user_id == $user->id) && ($user->login != $cl_login)) {
-          setcookie('tt_login', $cl_login, time() + COOKIE_EXPIRE, '/');
+  if ($request->getParameter('btn_submit')) {
+    // Validate user input.
+    if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
+    if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
+    if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
+      if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
+      if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+      if ($cl_password1 !== $cl_password2)
+        $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+    }
+    if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+    if (!ttValidFloat($cl_rate, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.users.default_rate'));
+  
+    if ($err->no()) {
+      $existing_user = ttUserHelper::getUserByLogin($cl_login);
+      if (!$existing_user || ($user_id == $existing_user['id'])) {
+  
+        $fields = array(
+          'name' => $cl_name,
+          'login' => $cl_login,
+          'password' => $cl_password1,
+          'email' => $cl_email,
+          'status' => $cl_status,
+          'rate' => $cl_rate,
+          'projects' => $assigned_projects);
+        if (right_assign_roles & $user->rights) {
+          $fields['role'] = $cl_role;
+          $fields['client_id'] = $cl_client_id;
         }
-
-        // In case the name of the "on behalf" user has changed - set it in session.
-        if (($user->behalf_id == $user_id) && ($user->behalf_name != $cl_name)) {
-          $_SESSION['behalf_name'] = $cl_name;
-        }
-
-        // If we deactivated our own account, do housekeeping and logout.
-        if ($user->id == $user_id && !is_null($cl_status) && $cl_status == INACTIVE) {
-          // Remove tt_login cookie that stores login name.
-          unset($_COOKIE['tt_login']);
-          setcookie('tt_login', NULL, -1);
-
-          $auth->doLogout();
-          header('Location: login.php');
+  
+        if (ttUserHelper::update($user_id, $fields)) {
+  
+          // If our own login changed, set new one in cookie to remember it.
+          if (($user_id == $user->id) && ($user->login != $cl_login)) {
+            setcookie('tt_login', $cl_login, time() + COOKIE_EXPIRE, '/');
+          }
+  
+          // In case the name of the "on behalf" user has changed - set it in session.
+          if (($user->behalf_id == $user_id) && ($user->behalf_name != $cl_name)) {
+            $_SESSION['behalf_name'] = $cl_name;
+          }
+  
+          // If we deactivated our own account, do housekeeping and logout.
+          if ($user->id == $user_id && !is_null($cl_status) && $cl_status == INACTIVE) {
+            // Remove tt_login cookie that stores login name.
+            unset($_COOKIE['tt_login']);
+            setcookie('tt_login', NULL, -1);
+  
+            $auth->doLogout();
+            header('Location: login.php');
+            exit();
+          }
+  
+          header('Location: users.php');
           exit();
-        }
-
-        header('Location: users.php');
-        exit();
-
+  
+        } else
+          $err->add($i18n->getKey('error.db'));
       } else
-        $err->add($i18n->getKey('error.db'));
-    } else
-      $err->add($i18n->getKey('error.user_exists'));
+        $err->add($i18n->getKey('error.user_exists'));
+    }
+  }
+  
+  if ($request->getParameter('btn_delete')) {
+    header("Location: user_delete.php?id=$user_id");
+    exit();
   }
 } // isPost
 

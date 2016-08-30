@@ -105,7 +105,7 @@ function handleClientControl() {
       <td colspan="2" align="center">{$i18n.label.required_fields}</td>
     </tr>
     <tr>
-      <td colspan="2" align="center" height="50">{$forms.userForm.btn_submit.control}</td>
+      <td colspan="2" align="center" height="50">{$forms.userForm.btn_submit.control} {$forms.userForm.btn_delete.control}</td>
     </tr>
   </table>
 </table>

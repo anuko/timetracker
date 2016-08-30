@@ -65,6 +65,8 @@ $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
 $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','layout'=>'H','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_projects));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
+
 
 if ($request->isPost()) {
   // Validate user input.
@@ -104,6 +106,11 @@ if ($request->isPost()) {
           $err->add($i18n->getKey('error.db'));
       } else
         $err->add($i18n->getKey('error.task_exists'));
+    }
+    
+    if ($request->getParameter('btn_delete')) {
+      header("Location: task_delete.php?id=$cl_task_id");
+      exit();
     }
   }
 } // isPost
