@@ -55,6 +55,16 @@ if ($request->isGet()) {
   // Require the configuration file with application settings.
   if (file_exists(APP_DIR."/WEB-INF/config.php")) {
     echo('WEB-INF/config.php file exists.<br>');
+
+    // Config file must start with the PHP opening tag. We are checking this because
+    // a Unicode editor may insert a byte order matk (BOM) before it. This is not good as it will
+    // spit white space before output in some situations such as in PDF reports.
+    $file = fopen(APP_DIR."/WEB-INF/config.php", "r");
+    $line = fgets($file);
+    if (strcmp("<?php\n", $line) !== 0) {
+      echo('<font color="red">Error: WEB-INF/config.php file does not start with PHP opening tag.</font><br>');
+    }
+    fclose($file);
   } else {
     echo('<font color="red">Error: WEB-INF/config.php file does not exist.</font><br>');
   }
