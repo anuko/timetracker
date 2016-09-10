@@ -46,6 +46,7 @@ import('ttReportHelper');
 
 $mdb2 = getConnection();
 $now = mktime();
+$now = 1473548400;
 
 $sql = "select * from tt_cron where $now >= next 
   and status = 1 and report_id is not null and email is not null";
@@ -71,7 +72,8 @@ while ($val = $res->fetchRow()) {
     echo "Error while emailing report...<br>";
 
   // Calculate next execution time.
-  $next = tdCron::getNextOccurrence($val['cron_spec'], $now); 
+  $next = tdCron::getNextOccurrence($val['cron_spec'], $now + 60); // +60 sec is here to get us correct $next when $now is close to existing "next".
+                                                                   // This is because the accuracy of tdcron class appears to be 1 minute.
 
   // Update last and next values in tt_cron.
   $sql = "update tt_cron set last = $now, next = $next where id = ".$val['id'];
