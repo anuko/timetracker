@@ -46,7 +46,6 @@ import('ttReportHelper');
 
 $mdb2 = getConnection();
 $now = mktime();
-$now = 1473548400;
 
 $sql = "select * from tt_cron where $now >= next 
   and status = 1 and report_id is not null and email is not null";
