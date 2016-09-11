@@ -9,7 +9,6 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id: 11.php 313023 2011-07-06 19:17:11Z dufuz $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 1.4.3
  */
@@ -27,7 +26,7 @@ require_once 'PEAR/REST.php';
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    Release: 1.9.4
+ * @version    Release: 1.10.1
  * @link       http://pear.php.net/package/PEAR
  * @since      Class available since Release 1.4.3
  */
@@ -38,9 +37,9 @@ class PEAR_REST_11
      */
     var $_rest;
 
-    function PEAR_REST_11($config, $options = array())
+    function __construct($config, $options = array())
     {
-        $this->_rest = &new PEAR_REST($config, $options);
+        $this->_rest = new PEAR_REST($config, $options);
     }
 
     function listAll($base, $dostable, $basic = true, $searchpackage = false, $searchsummary = false, $channel = false)

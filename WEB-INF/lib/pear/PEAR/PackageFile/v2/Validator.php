@@ -9,7 +9,6 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id: Validator.php 313023 2011-07-06 19:17:11Z dufuz $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 1.4.0a8
  */
@@ -21,7 +20,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    Release: 1.9.4
+ * @version    Release: 1.10.1
  * @link       http://pear.php.net/package/PEAR
  * @since      Class available since Release 1.4.0a8
  * @access private
@@ -112,7 +111,8 @@ class PEAR_PackageFile_v2_Validator
               isset($test['dependencies']['required']) &&
               isset($test['dependencies']['required']['pearinstaller']) &&
               isset($test['dependencies']['required']['pearinstaller']['min']) &&
-              version_compare('1.9.4',
+              '1.10.1' != '@package' . '_version@' &&
+              version_compare('1.10.1',
                 $test['dependencies']['required']['pearinstaller']['min'], '<')
         ) {
             $this->_pearVersionTooLow($test['dependencies']['required']['pearinstaller']['min']);
@@ -1350,7 +1350,7 @@ class PEAR_PackageFile_v2_Validator
         $this->_stack->push(__FUNCTION__, 'error',
             array('version' => $version),
             'This package.xml requires PEAR version %version% to parse properly, we are ' .
-            'version 1.9.4');
+            'version 1.10.1');
     }
 
     function _invalidTagOrder($oktags, $actual, $root)
@@ -1737,7 +1737,7 @@ class PEAR_PackageFile_v2_Validator
         if (!is_array($info)) {
             $info = array($info);
         }
-        $pkg = &new PEAR_PackageFile($this->_pf->_config);
+        $pkg = new PEAR_PackageFile($this->_pf->_config);
         foreach ($info as $package) {
             if (!file_exists($dir_prefix . DIRECTORY_SEPARATOR . $package)) {
                 $this->_fileNotFound($dir_prefix . DIRECTORY_SEPARATOR . $package);
@@ -1875,7 +1875,7 @@ class PEAR_PackageFile_v2_Validator
                 $pn = $this->_pf->getPackage();
                 $this->_stack->push(__FUNCTION__, 'warning',
                         array('file' => $file, 'package' => $pn),
-                        'in %file%: Could not process file for unkown reasons,' .
+                        'in %file%: Could not process file for unknown reasons,' .
                         ' possibly a PHP parse error in %file% from %package%');
             }
         }
@@ -1980,25 +1980,6 @@ class PEAR_PackageFile_v2_Validator
                     $look_for = $token;
                     continue 2;
                 case T_STRING:
-                    if (version_compare(zend_version(), '2.0', '<')) {
-                        if (in_array(strtolower($data),
-                            array('public', 'private', 'protected', 'abstract',
-                                  'interface', 'implements', 'throw')
-                                 )
-                        ) {
-                            if (isset($this->_stack)) {
-                                $this->_stack->push(__FUNCTION__, 'warning', array(
-                                    'file' => $file),
-                                    'Error, PHP5 token encountered in %file%,' .
-                                    ' analysis should be in PHP5');
-                            } else {
-                                PEAR::raiseError('Error: PHP5 token encountered in ' . $file .
-                                    'packaging should be done in PHP 5');
-                                return false;
-                            }
-                        }
-                    }
-
                     if ($look_for == T_CLASS) {
                         $current_class = $data;
                         $current_class_level = $brace_level;
@@ -2045,7 +2026,7 @@ class PEAR_PackageFile_v2_Validator
                     continue 2;
                 case T_DOUBLE_COLON:
                     $token = $tokens[$i - 1][0];
-                    if (!($token == T_WHITESPACE || $token == T_STRING || $token == T_STATIC)) {
+                    if (!($token == T_WHITESPACE || $token == T_STRING || $token == T_STATIC || $token == T_VARIABLE)) {
                         if (isset($this->_stack)) {
                             $this->_stack->push(__FUNCTION__, 'warning', array('file' => $file),
                                 'Parser error: invalid PHP found in file "%file%"');

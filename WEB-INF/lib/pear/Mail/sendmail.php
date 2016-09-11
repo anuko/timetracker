@@ -1,7 +1,7 @@
 <?php
 //
 // +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
+// | PHP Version 5                                                        |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 1997-2003 The PHP Group                                |
 // +----------------------------------------------------------------------+
@@ -20,7 +20,7 @@
  * Sendmail implementation of the PEAR Mail:: interface.
  * @access public
  * @package Mail
- * @version $Revision: 294744 $
+ * @version $Revision$
  */
 class Mail_sendmail extends Mail {
 
@@ -54,9 +54,8 @@ class Mail_sendmail extends Mail {
      *
      * @param array $params Hash containing any parameters different from the
      *              defaults.
-     * @access public
      */
-    function Mail_sendmail($params)
+    public function __construct($params)
     {
         if (isset($params['sendmail_path'])) {
             $this->sendmail_path = $params['sendmail_path'];
@@ -100,9 +99,8 @@ class Mail_sendmail extends Mail {
      * @return mixed Returns true on success, or a PEAR_Error
      *               containing a descriptive error message on
      *               failure.
-     * @access public
      */
-    function send($recipients, $headers, $body)
+    public function send($recipients, $headers, $body)
     {
         if (!is_array($headers)) {
             return PEAR::raiseError('$headers must be an array');

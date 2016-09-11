@@ -9,7 +9,6 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id: PackageFile.php 313024 2011-07-06 19:51:24Z dufuz $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 1.4.0a1
  */
@@ -35,7 +34,7 @@ define('PEAR_PACKAGEFILE_ERROR_INVALID_PACKAGEVERSION', 2);
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    Release: 1.9.4
+ * @version    Release: 1.10.1
  * @link       http://pear.php.net/package/PEAR
  * @since      Class available since Release 1.4.0a1
  */
@@ -67,7 +66,7 @@ class PEAR_PackageFile
      * @param   string @tmpdir Optional temporary directory for uncompressing
      *          files
      */
-    function PEAR_PackageFile(&$config, $debug = false)
+    function __construct(&$config, $debug = false)
     {
         $this->_config = $config;
         $this->_debug = $debug;

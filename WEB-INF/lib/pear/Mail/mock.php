@@ -2,7 +2,7 @@
 /**
  * Mock implementation
  *
- * PHP versions 4 and 5
+ * PHP version 5
  *
  * LICENSE:
  *
@@ -39,7 +39,7 @@
  * @author      Chuck Hagenbuch <chuck@horde.org> 
  * @copyright   2010 Chuck Hagenbuch
  * @license     http://opensource.org/licenses/bsd-license.php New BSD License
- * @version     CVS: $Id: mock.php 294747 2010-02-08 08:18:33Z clockwerx $
+ * @version     CVS: $Id$
  * @link        http://pear.php.net/package/Mail/
  */
 
@@ -47,7 +47,7 @@
  * Mock implementation of the PEAR Mail:: interface for testing.
  * @access public
  * @package Mail
- * @version $Revision: 294747 $
+ * @version $Revision$
  */
 class Mail_mock extends Mail {
 
@@ -55,23 +55,22 @@ class Mail_mock extends Mail {
      * Array of messages that have been sent with the mock.
      *
      * @var array
-     * @access public
      */
-    var $sentMessages = array();
+    public $sentMessages = array();
 
     /**
      * Callback before sending mail.
      *
      * @var callback
      */
-    var $_preSendCallback;
+    protected $_preSendCallback;
 
     /**
      * Callback after sending mai.
      *
      * @var callback
      */
-    var $_postSendCallback;
+    protected $_postSendCallback;
 
     /**
      * Constructor.
@@ -82,9 +81,8 @@ class Mail_mock extends Mail {
      *     postSendCallback  Called after an email would have been sent.
      *
      * @param array Hash containing any parameters.
-     * @access public
      */
-    function Mail_mock($params)
+    public function __construct($params)
     {
         if (isset($params['preSendCallback']) &&
             is_callable($params['preSendCallback'])) {
@@ -120,9 +118,8 @@ class Mail_mock extends Mail {
      * @return mixed Returns true on success, or a PEAR_Error
      *               containing a descriptive error message on
      *               failure.
-     * @access public
      */
-    function send($recipients, $headers, $body)
+    public function send($recipients, $headers, $body)
     {
         if ($this->_preSendCallback) {
             call_user_func_array($this->_preSendCallback,
