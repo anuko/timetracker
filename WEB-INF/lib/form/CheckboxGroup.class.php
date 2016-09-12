@@ -39,7 +39,7 @@ class CheckboxGroup extends FormElement {
     var $lSelAll	= "All";
     var $lSelNone	= "None";
 
-	function CheckboxGroup($name,$value="")
+	function __construct($name,$value="")
 	{
 		$this->mName			= $name;
 		$this->mValue			= $value;

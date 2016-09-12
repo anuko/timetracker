@@ -47,7 +47,7 @@ class Calendar extends FormElement {
     // var $mAllDays       = true;
     var $cClassName    = "Calendar";
 
-    function Calendar($name) {
+    function __construct($name) {
         $this->controlName = $name;
         $this->mMonthNames = array('January','February','March','April','May','June','July','August','September','October','November','December');
         $this->mWeekDayShortNames = array('Su','Mo','Tu','We','Th','Fr','Sa');

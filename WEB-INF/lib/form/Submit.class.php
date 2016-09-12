@@ -31,7 +31,7 @@ import('form.FormElement');
 class Submit extends FormElement {
 	var $cClassName	= "Submit";
 
-	function Submit($name,$value="")
+	function __construct($name,$value="")
 	{
 		$this->mName			= $name;
 		$this->mValue			= $value;

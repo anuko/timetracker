@@ -33,7 +33,7 @@ class FloatField extends TextField {
 	var $mFFormat;
 	var $cClassName	= "FloatField";
 
-	function FloatField($name) {
+	function __construct($name) {
 		$this->mName	= $name;
 	}
 	

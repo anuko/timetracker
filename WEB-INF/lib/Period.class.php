@@ -38,7 +38,7 @@ class Period {
 	var $mBeginDate;
 	var $mEndDate;
 
-	function Period($period_name=0, $date_point=null) {
+	function __construct($period_name=0, $date_point=null) {
 		global $user;
 		
 		if (!$date_point || !($date_point instanceof DateAndTime)) {

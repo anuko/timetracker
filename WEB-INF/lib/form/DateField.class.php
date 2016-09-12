@@ -39,7 +39,7 @@ class DateField extends TextField {
 
   var $lCalendarButtons = array('today'=>'Today', 'close'=>'Close');
 
-  function DateField($name) {
+  function __construct($name) {
     $this->mName  = $name;
     $this->mDateObj  = new DateAndTime();
 

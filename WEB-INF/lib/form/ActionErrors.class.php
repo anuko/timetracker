@@ -29,7 +29,7 @@
 class ActionErrors {
     var $errors = array();
 
-    function ActionErrors() {
+    function __construct() {
     }
 
     function no() {

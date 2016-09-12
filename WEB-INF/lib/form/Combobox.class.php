@@ -46,7 +46,7 @@ class Combobox extends FormElement {
     var $mDataKeys = array();
     var $cClassName	= "Combobox";
 
-	function Combobox($name,$value="")
+	function __construct($name,$value="")
 	{
 		$this->mName			= $name;
 		$this->mValue			= $value;

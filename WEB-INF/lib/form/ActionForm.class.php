@@ -36,7 +36,7 @@ class ActionForm {
     var $mForm		= null;
     var $mInitForm	= false;
 
-    function ActionForm($name, &$form, $request=null) {
+    function __construct($name, &$form, $request=null) {
     	$this->setName($name);
     	$form->setRequest($request);
 		$this->setForm($form);
