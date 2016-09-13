@@ -37,7 +37,7 @@ class TableColumn {
 	var $mBgColor		= "#ffffff";
 	var $mFgColor		= "#000000";
 	
-	function TableColumn($indexField, $title="",$renderer=null) {
+	function __construct($indexField, $title="",$renderer=null) {
 		$this->mIndexField	= $indexField;
 		$this->mTitle	    = $title;
 		if ($renderer!=null) {

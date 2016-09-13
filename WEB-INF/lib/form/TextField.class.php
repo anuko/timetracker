@@ -33,7 +33,7 @@ class TextField extends FormElement {
     var $mPassword	= false;
     var $cClassName		= "TextField";
 
-	function TextField($name,$value="")
+	function __construct($name,$value="")
 	{
 		$this->mName			= $name;
 		$this->mValue			= $value;

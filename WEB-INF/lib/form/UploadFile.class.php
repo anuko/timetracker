@@ -33,7 +33,7 @@ class UploadFile extends FormElement {
     var $cClassName		= "UploadFile";
     var $mMaxSize		= 100000;	// 100kb
 
-	function UploadFile($name,$value="")
+	function __construct($name,$value="")
 	{
 		$this->mName			= $name;
 		$this->mValue			= $value;

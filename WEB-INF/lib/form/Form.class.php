@@ -45,7 +45,7 @@ class Form {
 	var $mRequest;
 //	var $mFormBean;
     
-    function Form($formid) {
+    function __construct($formid) {
         $this->formName = $formid;
     }
     

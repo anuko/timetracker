@@ -197,7 +197,7 @@ class DateAndTime {
    * @param String $strfDateTime
    * @return DateAndTime
    */
-  function DateAndTime($format="",$strfDateTime="") {
+  function __construct($format="",$strfDateTime="") {
     $this->mLocalFormat = ($format ? $format : $this->mIntrFormat);
     $d = ($strfDateTime ? $strfDateTime : $this->do_strftime($this->mLocalFormat));
     $this->parseVal($d);

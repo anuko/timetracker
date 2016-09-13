@@ -35,7 +35,7 @@ class TextArea extends FormElement {
     var $mRows		= "";
     var $cClassName		= "TextArea";
 
-	function TextArea($name,$value="")
+	function __construct($name,$value="")
 	{
 		$this->mName			= $name;
 		$this->mValue			= $value;

@@ -47,7 +47,7 @@ class Table extends FormElement {
   var $mHeaderOptions = array();
   var $mProccessed    = false;
 	
-  function Table($name, $value='') {
+  function __construct($name, $value='') {
     $this->mName = $name;
     $this->mValue = $value;
   }

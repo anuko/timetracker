@@ -48,7 +48,7 @@ class FormElement {
 	var $cClassName		= "FormElement";
 	var $mI18n 			= null;
 
-	function FormElement() {
+	function __construct() {
 	}
 
 	function getClass()	{ return $this->cClassName; }

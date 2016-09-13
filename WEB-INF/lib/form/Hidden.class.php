@@ -32,7 +32,7 @@ class Hidden extends FormElement {
     var $mValue;
     var $cClassName	= "Hidden";
 
-	function Hidden($name,$value="")
+	function __construct($name,$value="")
 	{
 		$this->mName			= $name;
 		$this->mValue			= $value;

@@ -32,8 +32,7 @@ class DefaultCellRenderer {
 	var $mWidth			= null;
 	var $mOnChangeAdd	= null;
 	
-	function DefaultCellRenderer() {
-		
+	function __construct() {
 	}
 
 	function getValue() { return $this->mCellValue; }

@@ -9,7 +9,7 @@ class Mailer {
 	var $mReceiver;
 	var $mReceiverCC;
 
-    function Mailer($type='standard') {
+    function __construct($type='standard') {
     	$this->mSendType = $type;
     }
 
