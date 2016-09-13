@@ -22,7 +22,11 @@
             {if $user->isManager()}
               <a href="user_edit.php?id={$u.id}">{$u.name|escape:'html'}</a>
             {else}
-              {if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_edit.php?id={$u.id}">{$u.name|escape:'html'}</a>{/if}
+              {if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}
+                <a href="user_edit.php?id={$u.id}">{$u.name|escape:'html'}</a>
+              {else}
+                {$u.name|escape:'html'}
+              {/if}
             {/if}
           </td>
           <td>{$u.login|escape:'html'}</td>
@@ -63,7 +67,7 @@
             {if $user->isManager()}
               <a href="user_edit.php?id={$u.id}">{$u.name|escape:'html'}</a>
             {else}
-              {if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_edit.php?id={$u.id}">{$u.name|escape:'html'}</a>{/if}            
+              {if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_edit.php?id={$u.id}">{$u.name|escape:'html'}</a>{/if}
             {/if}
           </td>
           <td>{$u.login|escape:'html'}</td>
