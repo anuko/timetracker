@@ -67,6 +67,7 @@ class ttProjectHelper {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
+        $val['rate'] = str_replace('.', $user->decimal_mark, $val['rate']);
         $result[] = $val;
       }
     }
