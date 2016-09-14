@@ -57,11 +57,11 @@ if ($request->isGet()) {
     echo('WEB-INF/config.php file exists.<br>');
 
     // Config file must start with the PHP opening tag. We are checking this because
-    // a Unicode editor may insert a byte order matk (BOM) before it. This is not good as it will
+    // a Unicode editor may insert a byte order mark (BOM) before it. This is not good as it will
     // spit white space before output in some situations such as in PDF reports.
-    $file = fopen(APP_DIR."/WEB-INF/config.php", "r");
+    $file = fopen(APP_DIR.'/WEB-INF/config.php', 'r');
     $line = fgets($file);
-    if (strcmp("<?php".PHP_EOL, $line) !== 0) {
+    if (strcmp('<?php'.PHP_EOL, $line) !== 0) {
       echo('<font color="red">Error: WEB-INF/config.php file does not start with PHP opening tag.</font><br>');
     }
     fclose($file);
