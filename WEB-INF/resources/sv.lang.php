@@ -32,7 +32,7 @@
 $i18n_language = 'Svenska';
 $i18n_months = array('Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni', 'Juli', 'Augusti', 'September', 'Oktober', 'November', 'December');
 $i18n_weekdays = array('Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag');
-$i18n_weekdays_short = array('sö', 'må', 'ti', 'on', 'to', 'fr', 'lö');
+$i18n_weekdays_short = array('Sö', 'Må', 'Ti', 'On', 'To', 'Fr', 'Lö');
 // format mm/dd
 $i18n_holidays = array('01/01', '01/06', '05/01', '06/06', '12/25', '12/26'); // OBS! Endast fasta helgdagar, då rörliga datum måste uppdateras varje år.
 
@@ -50,9 +50,9 @@ $i18n_key_words = array(
 'menu.expenses' => 'Kostnader',
 'menu.reports' => 'Rapporter',
 'menu.charts' => 'Diagram',
-'menu.projects' => 'Projekt',
+'menu.projects' => 'Projekter',
 'menu.tasks' => 'Uppgifter',
-'menu.users' => 'Användare',
+'menu.users' => 'Användarer',
 'menu.teams' => 'Arbetsgrupper',
 'menu.export' => 'Export',
 'menu.clients' => 'Kunder',
@@ -63,7 +63,6 @@ $i18n_key_words = array(
 'footer.credits' => 'Tack till',
 'footer.license' => 'Licens',
 'footer.improve' => 'Bidra',
-
 
 // Error messages.
 'error.access_denied' => 'Åtkomst nekad.',
