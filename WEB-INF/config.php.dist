@@ -220,5 +220,5 @@ define('AUTH_MODULE', 'db');
 // define('MONTHLY_QUOTA_YEAR_START', 2010); // If nothing is specified, it falls back to 2015.
 // define('MONTHLY_QUOTA_YEAR_END', 2025);   // If nothing is specified, it falls back to 2030.
 
-// note input height in time.php
-define('NOTE_INPUT_HEIGHT', '40');
+// Height in pixels for the note input field in time.php. Defaults to 40.
+// define('NOTE_INPUT_HEIGHT', 100);
