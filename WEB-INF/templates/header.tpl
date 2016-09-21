@@ -27,7 +27,7 @@ With 101% height we essentially force the scrollbar to always appear. -->
   <tr>
     <td valign="top" align="center"> <!-- This is to centrally align all our content. -->
 
-      <!-- Top image -->
+      <!-- top image -->
       <table cellspacing="0" cellpadding="0" width="100%" border="0">
         <tr>
 {if $user->custom_logo}
@@ -54,11 +54,11 @@ With 101% height we essentially force the scrollbar to always appear. -->
           </td>
         </tr>
       </table>
-      <!-- End of top image -->
+      <!-- end of top image -->
 
 {if $authenticated}
   {if $user->isAdmin()}
-      <!-- Top menu for admin -->
+      <!-- top menu for admin -->
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
@@ -68,9 +68,9 @@ With 101% height we essentially force the scrollbar to always appear. -->
           </td>
         </tr>
       </table>
-      <!-- End of top menu for admin -->
+      <!-- end of top menu for admin -->
 
-      <!-- Sub menu for admin -->
+      <!-- sub menu for admin -->
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
@@ -79,9 +79,9 @@ With 101% height we essentially force the scrollbar to always appear. -->
           </td>
         </tr>
       </table>
-      <!-- End of sub menu for admin -->
+      <!-- end of sub menu for admin -->
   {else}
-      <!-- Top menu for authorized user -->
+      <!-- top menu for authorized user -->
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
@@ -92,9 +92,9 @@ With 101% height we essentially force the scrollbar to always appear. -->
           </td>
         </tr>
       </table>
-      <!-- End of top menu for authorized user -->
+      <!-- end of top menu for authorized user -->
 
-      <!-- Sub menu for authorized user -->
+      <!-- sub menu for authorized user -->
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
@@ -130,10 +130,10 @@ With 101% height we essentially force the scrollbar to always appear. -->
           </td>
         </tr>
       </table>
-      <!-- End of sub menu for authorized user -->
+      <!-- end of sub menu for authorized user -->
   {/if}
 {else}
-      <!-- Top menu for non authorized user -->
+      <!-- top menu for non authorized user -->
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
@@ -149,16 +149,16 @@ With 101% height we essentially force the scrollbar to always appear. -->
 {/if}
       <br>
 
-      <!-- Page title and user details -->
+      <!-- page title and user details -->
 {if $title}
       <table cellspacing="0" cellpadding="5" width="{$tab_width+20}" border="0">
         <tr><td class="sectionHeader"><div class="pageTitle">{$title}{if $timestring}: {$timestring}{/if}</div></td></tr>
         <tr><td>{$user->name|escape:'html'}{if $user->isAdmin()} {$i18n.label.role_admin}{elseif $user->isManager()} {$i18n.label.role_manager}{elseif $user->canManageTeam()} {$i18n.label.role_comanager}{/if}{if $user->behalf_id > 0} <b>{$i18n.label.on_behalf} {$user->behalf_name|escape:'html'}</b>{/if}{if $user->team}, {$user->team|escape:'html'}{/if}</td></tr>
       </table>
 {/if}
-      <!-- End of page title and user details -->
+      <!-- end of page title and user details -->
 
-      <!-- Output errors -->
+      <!-- output errors -->
 {if $err->yes()}
       <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
@@ -170,9 +170,9 @@ With 101% height we essentially force the scrollbar to always appear. -->
         </tr>
       </table>
 {/if}
-      <!-- End of output errors -->
+      <!-- end of output errors -->
 
-      <!-- Output messages -->
+      <!-- output messages -->
 {if $msg->yes()}
       <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
@@ -184,4 +184,4 @@ With 101% height we essentially force the scrollbar to always appear. -->
         </tr>
       </table>
 {/if}
-      <!-- End of output messages -->
+      <!-- end of output messages -->

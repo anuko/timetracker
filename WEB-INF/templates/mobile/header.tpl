@@ -25,7 +25,7 @@
   <tr>
     <td valign="top" align="center"> <!-- This is to centrally align all our content. -->
 
-      <!-- Top image -->
+      <!-- top image -->
       <table cellspacing="0" cellpadding="0" width="100%" border="0">
         <tr>
 {if $user->custom_logo}
@@ -52,12 +52,12 @@
           </td>
         </tr>
       </table>
-      <!-- End of top image -->
+      <!-- end of top image -->
       
 {if $authenticated}
   {if $user->isAdmin()}
   
-      <!-- Sub menu for admin -->
+      <!-- sub menu for admin -->
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" height="17" style="background-repeat: repeat-x;" background="../images/subm_bg.gif">&nbsp;
@@ -66,10 +66,10 @@
           </td>
         </tr>
       </table>
-      <!-- End of sub menu for admin -->
+      <!-- end of sub menu for admin -->
   {else}
 
-      <!-- Sub menu for authorized user -->
+      <!-- sub menu for authorized user -->
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" height="17" style="background-repeat: repeat-x;" background="../images/subm_bg.gif">&nbsp;
@@ -94,11 +94,11 @@
           </td>
         </tr>
       </table>
-      <!-- End of sub menu for authorized user -->
+      <!-- end of sub menu for authorized user -->
   {/if}
 {/if}
       
-      <!-- Output errors -->
+      <!-- output errors -->
 {if $err->yes()}
       <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
@@ -110,9 +110,9 @@
         </tr>
       </table>
 {/if}
-      <!-- End of output errors -->
+      <!-- end of output errors -->
 
-      <!-- Output messages -->
+      <!-- output messages -->
 {if $msg->yes()}
       <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
@@ -124,4 +124,4 @@
         </tr>
       </table>
 {/if}
-      <!-- End of output messages -->
+      <!-- end of output messages -->

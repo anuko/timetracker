@@ -34,7 +34,7 @@ import('DateAndTime');
 import('ttExpenseHelper');
 
 // Access check.
-if (!ttAccessCheck(right_data_entry)) {
+if (!ttAccessCheck(right_data_entry) || !$user->isPluginEnabled('ex')) {
   header('Location: access_denied.php');
   exit();
 }

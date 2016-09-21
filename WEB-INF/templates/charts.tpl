@@ -35,5 +35,3 @@
   <tr><td valign="top">{$forms.chartForm.date.control}</td></tr>
 </table>
 {$forms.chartForm.close}
-
-
