@@ -21,9 +21,9 @@
     {foreach $active_users as $u}
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
           <td>
-						<span class="uncompleted-entry{if $u.has_uncompleted_entry} active{/if}"{if $u.has_uncompleted_entry} title="{$i18n.form.users.uncompleted_entry}"{/if}></span>
-						{$u.name|escape:'html'}
-					</td>
+            <span class="uncompleted-entry{if $u.has_uncompleted_entry} active{/if}"{if $u.has_uncompleted_entry} title="{$i18n.form.users.uncompleted_entry}"{/if}></span>
+            {$u.name|escape:'html'}
+          </td>
           <td>{$u.login|escape:'html'}</td>
       {if $smarty.const.ROLE_MANAGER == $u.role}
             <td>{$i18n.form.users.manager}</td>
