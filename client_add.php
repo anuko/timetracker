@@ -32,7 +32,7 @@ import('ttClientHelper');
 import('ttTeamHelper');
 
 // Access check.
-if (!ttAccessCheck(right_manage_team)) {
+if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('cl')) {
   header('Location: access_denied.php');
   exit();
 }

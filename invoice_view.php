@@ -32,7 +32,7 @@ import('ttInvoiceHelper');
 import('ttClientHelper');
 
 // Access check.
-if (!ttAccessCheck(right_view_invoices)) {
+if (!ttAccessCheck(right_view_invoices) || !$user->isPluginEnabled('iv')) {
   header('Location: access_denied.php');
   exit();
 }
