@@ -2,6 +2,7 @@
   </tr>
   <tr>
     <td valign="bottom" width="100%" align="center">
+         <p>&nbsp;</p>
         <i>{$smarty.now|date_format:"%A, %B %d, %Y ~ %I:%M %p %Z"}</i>
        <table cellspacing="0" cellpadding="0" height="30" border="0" width="100%">
         <tr>
