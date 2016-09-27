@@ -2,7 +2,7 @@
   </tr>
   <tr>
     <td valign="bottom" width="100%" align="center">
-            <i>{$smarty.now|date_format:"%A, %B %d, %Y ~ %I:%M %p %Z"}</i>
+        <i>{$smarty.now|date_format:"%A, %B %d, %Y ~ %I:%M %p %Z"}</i>
        <table cellspacing="0" cellpadding="0" height="30" border="0" width="100%">
         <tr>
           <td width="100%" align="center" bgcolor="#eeeeee"><a href="https://www.anuko.com/lp/tt_8.htm" target="_blank">{$i18n.footer.contribute_msg}</a></td>
