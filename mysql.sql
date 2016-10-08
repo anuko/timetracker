@@ -327,7 +327,7 @@ CREATE TABLE `tt_expense_items` (
   `client_id` int(11) default NULL,    # client id
   `project_id` int(11) default NULL,   # project id
   
-# Kimberly Keown suggested revision to increase character length of expenses.php and expense_edit.php $cl_item_name textarea.
+# Kimberly Keown suggested revision to increase character length of expenses.php and expense_edit.php $cl_item_name textareas.
 # Original:  `name` varchar(255) NOT NULL, # expense item name (what is an expense for)
   `name` text NOT NULL,                # expense item name (what is an expense for)   
   
