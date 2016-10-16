@@ -144,6 +144,16 @@ table.divider {
 
 div#LoginAboutText { width:400px; }
 
+.uncompleted-entry {
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, .1);
+}
+.uncompleted-entry.active { background-color: red; }
+
 /* Mobile styles */
 .mobile-table {
   border: 0;
