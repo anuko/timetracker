@@ -605,18 +605,7 @@ if ($_POST) {
     setChange("ALTER TABLE tt_fav_reports ADD COLUMN `show_client` tinyint(4) NOT NULL default '0'");
     setChange("ALTER TABLE tt_fav_reports ADD COLUMN `show_invoice` tinyint(4) NOT NULL default '0'");
     setChange("ALTER TABLE tt_fav_reports ADD COLUMN `group_by` varchar(20) default NULL");
-    
-    setChange("CREATE TABLE `tt_expense_items` (`id` bigint NOT NULL auto_increment, `date` date NOT NULL,
-    `user_id` int(11) NOT NULL, `client_id` int(11) default NULL, `project_id` int(11) default NULL, 
-    
-   /* Kimberly Keown suggested revision to increase character length of expenses.php and expense_edit.php $cl_item_name textarea.
-   Updated mysql.sql also.
-   Original: `name` varchar(255) NOT NULL, */
-    `name` text NOT NULL, 
-    
-    `cost` decimal(10,2) default '0.00', `invoice_id` int(11) default NULL, 
-    PRIMARY KEY  (`id`))");
-    
+    setChange("CREATE TABLE `tt_expense_items` (`id` bigint NOT NULL auto_increment, `date` date NOT NULL, `user_id` int(11) NOT NULL, `client_id` int(11) default NULL, `project_id` int(11) default NULL, `name` varchar(255) NOT NULL, `cost` decimal(10,2) default '0.00', `invoice_id` int(11) default NULL, PRIMARY KEY  (`id`))");
     setChange("create index date_idx on tt_expense_items(date)");
     setChange("create index user_idx on tt_expense_items(user_id)");
     setChange("create index client_idx on tt_expense_items(client_id)");
@@ -644,6 +633,7 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_monthly_quota` ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
     setChange("ALTER TABLE `tt_teams` ADD `workday_hours` SMALLINT NULL DEFAULT '8' AFTER `lock_spec`");
     setChange("RENAME TABLE tt_monthly_quota TO tt_monthly_quotas");
+    setChange("ALTER TABLE tt_expense_items modify `name` text NOT NULL");
   }
   
   // The update_clients function updates projects field in tt_clients table.
