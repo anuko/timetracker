@@ -326,7 +326,11 @@ CREATE TABLE `tt_expense_items` (
   `user_id` int(11) NOT NULL,          # user id the expense item is reported by
   `client_id` int(11) default NULL,    # client id
   `project_id` int(11) default NULL,   # project id
-  `name` varchar(255) NOT NULL,        # expense item name (what is an expense for)
+  
+# Kimberly Keown suggested revision to increase character length of expenses.php and expense_edit.php $cl_item_name textareas.
+# Original:  `name` varchar(255) NOT NULL, # expense item name (what is an expense for)
+  `name` text NOT NULL,                # expense item name (what is an expense for)   
+  
   `cost` decimal(10,2) default '0.00', # item cost (including taxes, etc.)
   `invoice_id` int(11) default NULL,   # invoice id
   `status` tinyint(4) default '1',     # item status
