@@ -63,7 +63,7 @@ $i18n_key_words = array(
 // 'menu.export' => 'Export',
 // 'menu.clients' => 'Clients',
 // 'menu.options' => 'Options',
- 
+
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following:
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
@@ -86,50 +86,57 @@ $i18n_key_words = array(
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.'
-
-// Refactoring needs to be done down from here to sync with English file.
 'error.auth' => 'Usuari o parula de pas incorrecta',
-// Note to translators: this string needs to be translated.
-// 'error.user_exists' => 'user with this login already exists',
-'error.project_exists' => 'Ja existeix un projecte amb aquest nom',
-'error.activity_exists' => 'Ja existeix una activitat amb aquest nom',
-// TODO: translate error.client_exists.
-// 'error.client_exists' => 'client with this name already exists',
-// Note to translators: error.no_login needs to be properly translated (e-mail replaced with login).
-// 'error.no_login' => 'No existeix cap usuari amb aquest e-mail',
-'error.upload' => 'Error pujant l\\\'arxiu',
-// TODO: Translate the following:
+// TODO: translate the following:
+// 'error.user_exists' => 'User with this login already exists.',
+'error.project_exists' => 'Ja existeix un projecte amb aquest nom.',
+// TODO: translate the following:
+// 'error.task_exists' => 'Task with this name already exists.',
+// 'error.client_exists' => 'Client with this name already exists.',
+// 'error.invoice_exists' => 'Invoice with this number already exists.',
+// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
+// 'error.no_login' => 'No user with this login.',
+// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.upload' => 'Error pujant l\\\'arxiu.',
+// TODO: translate the following:
 // 'error.range_locked' => 'Date range is locked.',
-// 'error.mail_send' => 'Error sending mail',
-// 'error.no_email' => 'No email associated with this login',
+// 'error.mail_send' => 'Error sending mail.',
+// 'error.no_email' => 'No email associated with this login.',
 // 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
 // 'error.goto_uncompleted' => 'Go to uncompleted entry.',
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
 
-// labels for various buttons
+// Labels for buttons.
 'button.login' => 'Iniciar sessió',
 'button.now' => 'Ara',
-// 'button.set' => 'Establir',
 'button.save' => 'Guardar',
-'button.delete' => 'Eliminar',
+// TODO: translate the following:
+// 'button.copy' => 'Copy',
 'button.cancel' => 'Cancel·lar',
 'button.submit' => 'Enviar',
 'button.add_user' => 'Agregar usuari ',
 'button.add_project' => 'Agregar projecte',
-'button.add_activity' => 'Agregar activitat',
+// TODO: translate the following:
+// 'button.add_task' => 'Add task',
 'button.add_client' => 'Agregar client',
+// TODO: translate the folllowing:
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
 'button.add' => 'Agregar',
 'button.generate' => 'Generar',
-// Note to translators: button.reset_password needs an improved translation.
-'button.reset_password' => 'Anar',
+// TODO: translate the following:
+// 'button.reset_password' => 'Reset password',
 'button.send' => 'Enviar',
 'button.send_by_email' => 'Enviar per correu',
-'button.save_as_new' => 'Guardar com a nou',
 'button.create_team' => 'Crear grup',
 'button.export' => 'Exportar grup',
 'button.import' => 'Importar grup',
-'button.apply' => 'Aplicar',
+// TODO: translate the following:
+// 'button.close' => 'Close',
+// 'button.stop' => 'Stop',
+
+// TODO: the entrie section from here to bottom needs refactoring.
 
 // labels for controls on various forms
 // TODO: translate label.team_name.
@@ -143,6 +150,8 @@ $i18n_key_words = array(
 'label.password' => 'Paraula de pas',
 'label.confirm_password' => 'Confirmar paraula de pas',
 'label.email' => 'E-mail',
+'label.delete' => 'Eliminar',
+
 // TODO: the entire label section needs re-translating. See the English file.
 
 // Form titles.
