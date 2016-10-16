@@ -393,6 +393,7 @@ $i18n_key_words = array(
 // TODO: translate the following strings.
 // 'form.users.active_users' => 'Active Users',
 // 'form.users.inactive_users' => 'Inactive Users',
+// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 'form.users.role' => 'Rôle',
 'form.users.manager' => 'Responsable',
 'form.users.comanager' => 'Co-responsable',

@@ -348,6 +348,8 @@ $i18n_key_words = array(
 // Users form. See example at https://timetracker.anuko.com/users.php
 'form.users.active_users' => 'Actieve medewerkers',
 'form.users.inactive_users' => 'Inactieve medewerkers',
+// TODO: translate the following.
+// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 'form.users.role' => 'Rol',
 'form.users.manager' => 'Manager',
 'form.users.comanager' => 'Co-manager',

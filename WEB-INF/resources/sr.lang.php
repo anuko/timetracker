@@ -355,6 +355,8 @@ $i18n_key_words = array(
 // Korisnička forma. Pogledajte primer na https://timetracker.anuko.com/users.php
 'form.users.active_users' => 'Aktivni korisnik',
 'form.users.inactive_users' => 'Neaktivni korisnik',
+// TODO: translate the following.
+// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 'form.users.role' => 'Funkcija',
 'form.users.manager' => 'Menadžer',
 'form.users.comanager' => 'Saradnik',
