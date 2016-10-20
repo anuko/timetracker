@@ -634,6 +634,7 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_teams` ADD `workday_hours` SMALLINT NULL DEFAULT '8' AFTER `lock_spec`");
     setChange("RENAME TABLE tt_monthly_quota TO tt_monthly_quotas");
     setChange("ALTER TABLE tt_expense_items modify `name` text NOT NULL");
+    setChange("ALTER TABLE `tt_teams` ADD `uncompleted_entries` SMALLINT(2) NOT NULL DEFAULT '0' AFTER `record_type`");
   }
   
   // The update_clients function updates projects field in tt_clients table.

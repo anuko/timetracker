@@ -27,30 +27,31 @@
 // +----------------------------------------------------------------------+
 
 class ttUser {
-  var $login = null;        // User login.
-  var $name = null;         // User name.
-  var $id = null;           // User id.
-  var $team_id = null;      // Team id.
-  var $role = null;         // User role (user, client, comanager, manager, admin).
-  var $client_id = null;    // Client id for client user role.
-  var $behalf_id = null;    // User id, on behalf of whom we are working.
-  var $behalf_name = null;  // User name, on behalf of whom we are working.
-  var $email = null;        // User email.
-  var $lang = null;         // Language.
-  var $decimal_mark = null; // Decimal separator.
-  var $date_format = null;  // Date format.
-  var $time_format = null;  // Time format.
-  var $week_start = 0;      // Week start day.
-  var $tracking_mode = 0;   // Tracking mode.
-  var $record_type = 0;     // Record type (duration vs start and finish, or both).
-  var $currency = null;     // Currency.
-  var $plugins = null;      // Comma-separated list of enabled plugins.
-  var $team = null;         // Team name.
-  var $custom_logo = 0;     // Whether to use a custom logo for team.
-  var $address = null;      // Address for invoices.
-  var $lock_spec = null;    // Cron specification for record locking.
-  var $workday_hours = 8;   // Number of work hours in a regular day.
-  var $rights = 0;          // A mask of user rights.
+  var $login = null;            // User login.
+  var $name = null;             // User name.
+  var $id = null;               // User id.
+  var $team_id = null;          // Team id.
+  var $role = null;             // User role (user, client, comanager, manager, admin).
+  var $client_id = null;        // Client id for client user role.
+  var $behalf_id = null;        // User id, on behalf of whom we are working.
+  var $behalf_name = null;      // User name, on behalf of whom we are working.
+  var $email = null;            // User email.
+  var $lang = null;             // Language.
+  var $decimal_mark = null;     // Decimal separator.
+  var $date_format = null;      // Date format.
+  var $time_format = null;      // Time format.
+  var $week_start = 0;          // Week start day.
+  var $tracking_mode = 0;       // Tracking mode.
+  var $record_type = 0;         // Record type (duration vs start and finish, or both).
+  var $uncompleted_entries = 0; // Uncompleted entries (show nowhere or on users page).
+  var $currency = null;         // Currency.
+  var $plugins = null;          // Comma-separated list of enabled plugins.
+  var $team = null;             // Team name.
+  var $custom_logo = 0;         // Whether to use a custom logo for team.
+  var $address = null;          // Address for invoices.
+  var $lock_spec = null;        // Cron specification for record locking.
+  var $workday_hours = 8;       // Number of work hours in a regular day.
+  var $rights = 0;              // A mask of user rights.
 
   // Constructor.
   function ttUser($login, $id = null) {
@@ -63,7 +64,7 @@ class ttUser {
 
     $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role, u.client_id, u.email, t.name as team_name, 
       t.address, t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
-      t.tracking_mode, t.record_type, t.plugins, t.lock_spec, t.workday_hours, t.custom_logo
+      t.tracking_mode, t.record_type, t.uncompleted_entries, t.plugins, t.lock_spec, t.workday_hours, t.custom_logo
       FROM tt_users u LEFT JOIN tt_teams t ON (u.team_id = t.id) WHERE ";
     if ($id)
       $sql .= "u.id = $id";
@@ -92,6 +93,7 @@ class ttUser {
       $this->week_start = $val['week_start'];
       $this->tracking_mode = $val['tracking_mode'];
       $this->record_type = $val['record_type'];
+      $this->uncompleted_entries = $val['uncompleted_entries'];
       $this->team = $val['team_name'];
       $this->address = $val['address'];
       $this->currency = $val['currency'];

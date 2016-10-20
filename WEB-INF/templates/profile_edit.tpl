@@ -139,6 +139,10 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$i18n.form.profile.record_type}:</td>
             <td>{$forms.profileForm.record_type.control}</td>
           </tr>
+          <tr>
+            <td align="right" nowrap>{$i18n.form.profile.uncompleted_entries}:</td>
+            <td>{$forms.profileForm.uncompleted_entries.control}</td>
+          </tr>
 
           {* initialize preview text *}
           <script>
