@@ -64,7 +64,7 @@ class ttUser {
 
     $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role, u.client_id, u.email, t.name as team_name, 
       t.address, t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
-      t.tracking_mode, t.record_type, t.uncompleted_entries, t.plugins, t.lock_spec, t.workday_hours, t.custom_logo
+      t.tracking_mode, t.record_type, t.uncompleted_indicators, t.plugins, t.lock_spec, t.workday_hours, t.custom_logo
       FROM tt_users u LEFT JOIN tt_teams t ON (u.team_id = t.id) WHERE ";
     if ($id)
       $sql .= "u.id = $id";
@@ -93,7 +93,7 @@ class ttUser {
       $this->week_start = $val['week_start'];
       $this->tracking_mode = $val['tracking_mode'];
       $this->record_type = $val['record_type'];
-      $this->uncompleted_entries = $val['uncompleted_entries'];
+      $this->uncompleted_entries = $val['uncompleted_indicators'];
       $this->team = $val['team_name'];
       $this->address = $val['address'];
       $this->currency = $val['currency'];

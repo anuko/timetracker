@@ -13,26 +13,25 @@
 # This table stores settings common to all team members such as language, week start day, etc.
 #
 CREATE TABLE `tt_teams` (
-  `id` int(11) NOT NULL auto_increment,                   # team id
-  `timestamp` timestamp NOT NULL,                         # modification timestamp
-  `name` varchar(80) default NULL,                        # team name
-  `address` varchar(255) default NULL,                    # team address, used in invoices
-  `currency` varchar(7) default NULL,                     # team currency symbol
-  `decimal_mark` char(1) NOT NULL default '.',            # separator in decimals
-  `lang` varchar(10) NOT NULL default 'en',               # language
-  `date_format` varchar(20) NOT NULL default '%Y-%m-%d',  # date format
-  `time_format` varchar(20) NOT NULL default '%H:%M',     # time format
-  `week_start` smallint(2) NOT NULL DEFAULT '0',          # Week start day, 0 == Sunday.
-  `tracking_mode` smallint(2) NOT NULL DEFAULT '1',       # tracking mode ("projects" or "projects and tasks")
-  `record_type` smallint(2) NOT NULL DEFAULT '0',         # time record type ("start and finish", "duration", or both)
-  `uncompleted_entries` smallint(2) NOT NULL DEFAULT '0', # show indicator next to users with uncompleted time entries
-                                                          # ("dont show", "on users page")
-  `plugins` varchar(255) default NULL,                    # a list of enabled plugins for team
-  `lock_spec` varchar(255) default NULL,                  # Cron specification for record locking,
-                                                          # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
-  `workday_hours` smallint(6) DEFAULT '8',                # number of work hours in a regular day
-  `custom_logo` tinyint(4) default '0',                   # whether to use a custom logo or not
-  `status` tinyint(4) default '1',                        # team status
+  `id` int(11) NOT NULL auto_increment,                      # team id
+  `timestamp` timestamp NOT NULL,                            # modification timestamp
+  `name` varchar(80) default NULL,                           # team name
+  `address` varchar(255) default NULL,                       # team address, used in invoices
+  `currency` varchar(7) default NULL,                        # team currency symbol
+  `decimal_mark` char(1) NOT NULL default '.',               # separator in decimals
+  `lang` varchar(10) NOT NULL default 'en',                  # language
+  `date_format` varchar(20) NOT NULL default '%Y-%m-%d',     # date format
+  `time_format` varchar(20) NOT NULL default '%H:%M',        # time format
+  `week_start` smallint(2) NOT NULL DEFAULT '0',             # Week start day, 0 == Sunday.
+  `tracking_mode` smallint(2) NOT NULL DEFAULT '1',          # tracking mode ("projects" or "projects and tasks")
+  `record_type` smallint(2) NOT NULL DEFAULT '0',            # time record type ("start and finish", "duration", or both)
+  `uncompleted_indicators` smallint(2) NOT NULL DEFAULT '0', # show indicator for users with uncompleted time entries
+  `plugins` varchar(255) default NULL,                       # a list of enabled plugins for team
+  `lock_spec` varchar(255) default NULL,                     # Cron specification for record locking,
+                                                             # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
+  `workday_hours` smallint(6) DEFAULT '8',                   # number of work hours in a regular day
+  `custom_logo` tinyint(4) default '0',                      # whether to use a custom logo or not
+  `status` tinyint(4) default '1',                           # team status
   PRIMARY KEY (`id`)
 );
 

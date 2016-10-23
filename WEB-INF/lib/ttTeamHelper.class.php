@@ -703,7 +703,7 @@ class ttTeamHelper {
 
     $uncompleted_entries = $fields['uncompleted_entries'];
     if ($uncompleted_entries !== null) {
-      $uncompleted_entries_f = ', uncompleted_entries';
+      $uncompleted_entries_f = ', uncompleted_indicators';
       $uncompleted_entries_v = ', ' . (int)$uncompleted_entries;
     } else {
       $uncompleted_entries_f = '';
@@ -765,7 +765,7 @@ class ttTeamHelper {
     if (isset($fields['week_start'])) $week_start_part = ', week_start = '.intval($fields['week_start']);
     if (isset($fields['tracking_mode'])) $tracking_mode_part = ', tracking_mode = '.intval($fields['tracking_mode']);
     if (isset($fields['record_type'])) $record_type_part = ', record_type = '.intval($fields['record_type']);
-    if (isset($fields['uncompleted_entries'])) $uncompleted_entries_part = ', uncompleted_entries = '.intval($fields['uncompleted_entries']);
+    if (isset($fields['uncompleted_entries'])) $uncompleted_entries_part = ', uncompleted_indicators = '.intval($fields['uncompleted_entries']);
     if (isset($fields['plugins'])) $plugins_part = ', plugins = '.$mdb2->quote($fields['plugins']);
     if (isset($fields['lock_spec'])) $lock_spec_part = ', lock_spec = '.$mdb2->quote($fields['lock_spec']);
     if (isset($fields['workday_hours'])) $workday_hours_part = ', workday_hours = '.$mdb2->quote($fields['workday_hours']);
