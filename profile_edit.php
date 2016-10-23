@@ -60,7 +60,7 @@ if ($request->isPost()) {
     $cl_start_week = $request->getParameter('start_week');
     $cl_tracking_mode = $request->getParameter('tracking_mode');
     $cl_record_type = $request->getParameter('record_type');
-    $cl_uncompleted_entries = $request->getParameter('uncompleted_entries');
+    $cl_uncompleted_indicators = $request->getParameter('uncompleted_indicators');
     $cl_charts = $request->getParameter('charts');
     $cl_clients = $request->getParameter('clients');
     $cl_client_required = $request->getParameter('client_required');
@@ -87,7 +87,7 @@ if ($request->isPost()) {
     $cl_start_week = $user->week_start;
     $cl_tracking_mode = $user->tracking_mode;
     $cl_record_type = $user->record_type;
-    $cl_uncompleted_entries = $user->uncompleted_indicators;
+    $cl_uncompleted_indicators = $user->uncompleted_indicators;
 
     // Which plugins do we have enabled?
     $plugins = explode(',', $user->plugins);
@@ -174,7 +174,7 @@ if ($user->canManageTeam()) {
   $uncompleted_indicators_options = array();
   $uncompleted_indicators_options[UNCOMPLETED_INDICATORS_NONE] = $i18n->getKey('form.profile.uncompleted_indicators_none');
   $uncompleted_indicators_options[UNCOMPLETED_INDICATORS] = $i18n->getKey('form.profile.uncompleted_indicators_show');
-  $form->addInput(array('type'=>'combobox','name'=>'uncompleted_entries','style'=>'width: 150px;','data'=>$uncompleted_indicators_options,'value'=>$cl_uncompleted_entries));
+  $form->addInput(array('type'=>'combobox','name'=>'uncompleted_indicators','style'=>'width: 150px;','data'=>$uncompleted_indicators_options,'value'=>$cl_uncompleted_indicators));
 
   $form->addInput(array('type'=>'checkbox','name'=>'charts','data'=>1,'value'=>$cl_charts));
   $form->addInput(array('type'=>'checkbox','name'=>'clients','data'=>1,'value'=>$cl_clients,'onchange'=>'handlePluginCheckboxes()'));
@@ -252,7 +252,7 @@ if ($request->isPost()) {
         'week_start' => $cl_start_week,
         'tracking_mode' => $cl_tracking_mode,
         'record_type' => $cl_record_type,
-        'uncompleted_entries' => $cl_uncompleted_entries,
+        'uncompleted_indicators' => $cl_uncompleted_indicators,
         'plugins' => $plugins));
     }
     if ($update_result) {

@@ -141,7 +141,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.profile.uncompleted_indicators}:</td>
-            <td>{$forms.profileForm.uncompleted_entries.control}</td>
+            <td>{$forms.profileForm.uncompleted_indicators.control}</td>
           </tr>
 
           {* initialize preview text *}
