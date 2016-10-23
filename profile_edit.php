@@ -87,7 +87,7 @@ if ($request->isPost()) {
     $cl_start_week = $user->week_start;
     $cl_tracking_mode = $user->tracking_mode;
     $cl_record_type = $user->record_type;
-    $cl_uncompleted_entries = $user->uncompleted_entries;
+    $cl_uncompleted_entries = $user->uncompleted_indicators;
 
     // Which plugins do we have enabled?
     $plugins = explode(',', $user->plugins);
