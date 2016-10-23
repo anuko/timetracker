@@ -221,6 +221,10 @@ $i18n_key_words = array(
 "form.profile.edit_title" => 'Modificant perfil',
 "form.profile.name" => 'Nom',
 // Note to translators: a few strings in this section a missing. Please check against the English file.
+// TODO: translate the following:
+// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.profile.uncompleted_indicators_none' => 'do not show',
+// 'form.profile.uncompleted_indicators_show' => 'show',
 
 // people form attributes
 "form.people.ppl_str" => 'Persones',

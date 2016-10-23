@@ -385,6 +385,10 @@ $i18n_key_words = array(
 'form.profile.mode_projects' => 'projecten',
 'form.profile.mode_projects_and_tasks' => 'projecten en taken',
 'form.profile.record_type' => 'Registratie type',
+// TODO: translate the following:
+// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.profile.uncompleted_indicators_none' => 'do not show',
+// 'form.profile.uncompleted_indicators_show' => 'show',
 'form.profile.type_all' => 'begin, einde en duur',
 'form.profile.type_start_finish' => 'begin en einde',
 'form.profile.type_duration' => 'duur',
