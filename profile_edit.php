@@ -170,11 +170,11 @@ if ($user->canManageTeam()) {
   $record_type_options[TYPE_DURATION] = $i18n->getKey('form.profile.type_duration');
   $form->addInput(array('type'=>'combobox','name'=>'record_type','style'=>'width: 150px;','data'=>$record_type_options,'value'=>$cl_record_type));
 
-  // Prepare uncompleted entries choices.
-  $uncompleted_entries_options = array();
-  $uncompleted_entries_options[UNCOMPLETED_INDICATORS_NONE] = $i18n->getKey('form.profile.uncompleted_indicators_none');
-  $uncompleted_entries_options[UNCOMPLETED_INDICATORS] = $i18n->getKey('form.profile.uncompleted_indicators_show');
-  $form->addInput(array('type'=>'combobox','name'=>'uncompleted_entries','style'=>'width: 150px;','data'=>$uncompleted_entries_options,'value'=>$cl_uncompleted_entries));
+  // Prepare uncompleted indicators choices.
+  $uncompleted_indicators_options = array();
+  $uncompleted_indicators_options[UNCOMPLETED_INDICATORS_NONE] = $i18n->getKey('form.profile.uncompleted_indicators_none');
+  $uncompleted_indicators_options[UNCOMPLETED_INDICATORS] = $i18n->getKey('form.profile.uncompleted_indicators_show');
+  $form->addInput(array('type'=>'combobox','name'=>'uncompleted_entries','style'=>'width: 150px;','data'=>$uncompleted_indicators_options,'value'=>$cl_uncompleted_entries));
 
   $form->addInput(array('type'=>'checkbox','name'=>'charts','data'=>1,'value'=>$cl_charts));
   $form->addInput(array('type'=>'checkbox','name'=>'clients','data'=>1,'value'=>$cl_clients,'onchange'=>'handlePluginCheckboxes()'));
