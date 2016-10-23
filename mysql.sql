@@ -25,7 +25,7 @@ CREATE TABLE `tt_teams` (
   `week_start` smallint(2) NOT NULL DEFAULT '0',             # Week start day, 0 == Sunday.
   `tracking_mode` smallint(2) NOT NULL DEFAULT '1',          # tracking mode ("projects" or "projects and tasks")
   `record_type` smallint(2) NOT NULL DEFAULT '0',            # time record type ("start and finish", "duration", or both)
-  `uncompleted_indicators` smallint(2) NOT NULL DEFAULT '0', # show indicator for users with uncompleted time entries
+  `uncompleted_indicators` smallint(2) NOT NULL DEFAULT '0', # whether to show indicators for users with uncompleted time entries
   `plugins` varchar(255) default NULL,                       # a list of enabled plugins for team
   `lock_spec` varchar(255) default NULL,                     # Cron specification for record locking,
                                                              # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
