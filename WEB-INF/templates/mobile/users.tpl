@@ -19,7 +19,9 @@
     {foreach $active_users as $u}
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
           <td>
-            <span class="uncompleted-entry{if $u.has_uncompleted_entry} active{/if}"{if $u.has_uncompleted_entry} title="{$i18n.form.users.uncompleted_entry}"{/if}></span>
+            {if $smarty.const.ENTRIES_USERS_PAGE == $user->uncompleted_entries}
+              <span class="uncompleted-entry{if $u.has_uncompleted_entry} active{/if}"{if $u.has_uncompleted_entry} title="{$i18n.form.users.uncompleted_entry}"{/if}></span>
+            {/if}
             {if $user->isManager()}
               <a href="user_edit.php?id={$u.id}">{$u.name|escape:'html'}</a>
             {else}

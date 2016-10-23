@@ -60,6 +60,7 @@ if ($request->isPost()) {
     $cl_start_week = $request->getParameter('start_week');
     $cl_tracking_mode = $request->getParameter('tracking_mode');
     $cl_record_type = $request->getParameter('record_type');
+    $cl_uncompleted_entries = $request->getParameter('uncompleted_entries');
     $cl_charts = $request->getParameter('charts');
     $cl_clients = $request->getParameter('clients');
     $cl_client_required = $request->getParameter('client_required');
@@ -86,6 +87,7 @@ if ($request->isPost()) {
     $cl_start_week = $user->week_start;
     $cl_tracking_mode = $user->tracking_mode;
     $cl_record_type = $user->record_type;
+    $cl_uncompleted_entries = $user->uncompleted_entries;
 
     // Which plugins do we have enabled?
     $plugins = explode(',', $user->plugins);
@@ -168,6 +170,12 @@ if ($user->canManageTeam()) {
   $record_type_options[TYPE_DURATION] = $i18n->getKey('form.profile.type_duration');
   $form->addInput(array('type'=>'combobox','name'=>'record_type','style'=>'width: 150px;','data'=>$record_type_options,'value'=>$cl_record_type));
 
+  // Prepare uncompleted entries choices.
+  $uncompleted_entries_options = array();
+  $uncompleted_entries_options[ENTRIES_NONE] = $i18n->getKey('form.profile.entries_none');
+  $uncompleted_entries_options[ENTRIES_USERS_PAGE] = $i18n->getKey('form.profile.entries_users_page');
+  $form->addInput(array('type'=>'combobox','name'=>'uncompleted_entries','style'=>'width: 150px;','data'=>$uncompleted_entries_options,'value'=>$cl_uncompleted_entries));
+
   $form->addInput(array('type'=>'checkbox','name'=>'charts','data'=>1,'value'=>$cl_charts));
   $form->addInput(array('type'=>'checkbox','name'=>'clients','data'=>1,'value'=>$cl_clients,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'client_required','data'=>1,'value'=>$cl_client_required));
@@ -244,6 +252,7 @@ if ($request->isPost()) {
         'week_start' => $cl_start_week,
         'tracking_mode' => $cl_tracking_mode,
         'record_type' => $cl_record_type,
+        'uncompleted_entries' => $cl_uncompleted_entries,
         'plugins' => $plugins));
     }
     if ($update_result) {

@@ -21,7 +21,9 @@
     {foreach $active_users as $u}
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
           <td>
+          {if $smarty.const.ENTRIES_USERS_PAGE == $user->uncompleted_entries}
             <span class="uncompleted-entry{if $u.has_uncompleted_entry} active{/if}"{if $u.has_uncompleted_entry} title="{$i18n.form.users.uncompleted_entry}"{/if}></span>
+          {/if}
             {$u.name|escape:'html'}
           </td>
           <td>{$u.login|escape:'html'}</td>

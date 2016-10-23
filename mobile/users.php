@@ -44,9 +44,12 @@ if($user->canManageTeam()) {
   $inactive_users = ttTeamHelper::getInactiveUsers($user->team_id, true);
 }
 
-// Check each active user if they have an uncompleted time entry.
-foreach ($active_users as $key => $user) {
-  $active_users[$key]['has_uncompleted_entry'] = (bool) ttTimeHelper::getUncompleted($user['id']);
+// Check if the user wants to show uncompleted time entries.
+if (ENTRIES_USERS_PAGE == $user->uncompleted_entries) {
+  // Check each active user if they have an uncompleted time entry.
+  foreach ($active_users as $key => $user) {
+    $active_users[$key]['has_uncompleted_entry'] = (bool) ttTimeHelper::getUncompleted($user['id']);
+  }
 }
 
 $smarty->assign('active_users', $active_users);
