@@ -140,7 +140,7 @@ function handlePluginCheckboxes() {
             <td>{$forms.profileForm.record_type.control}</td>
           </tr>
           <tr>
-            <td align="right" nowrap>{$i18n.form.profile.uncompleted_entries}:</td>
+            <td align="right" nowrap>{$i18n.form.profile.uncompleted_indicators}:</td>
             <td>{$forms.profileForm.uncompleted_entries.control}</td>
           </tr>
 
