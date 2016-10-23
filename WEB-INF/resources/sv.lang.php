@@ -388,9 +388,10 @@ $i18n_key_words = array(
 'form.profile.mode_projects' => 'Projekt',
 'form.profile.mode_projects_and_tasks' => 'Projekt och arbetsuppgifter',
 'form.profile.record_type' => 'Typ av tidsregistrering',
-'form.profile.uncompleted_entries' => 'Oavslutade tidsregistreringar',
-'form.profile.entries_none' => 'Visa inte',
-'form.profile.entries_users_page' => 'Visa på sidan Användare',
+// TODO: improve translation (English strings changed).
+//'form.profile.uncompleted_entries' => 'Oavslutade tidsregistreringar',
+//'form.profile.entries_none' => 'Visa inte',
+//'form.profile.entries_users_page' => 'Visa på sidan Användare',
 'form.profile.type_all' => 'Alla',
 'form.profile.type_start_finish' => 'Starttid och sluttid',
 'form.profile.type_duration' => 'Varaktighet',
