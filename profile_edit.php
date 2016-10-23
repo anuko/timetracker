@@ -172,8 +172,8 @@ if ($user->canManageTeam()) {
 
   // Prepare uncompleted entries choices.
   $uncompleted_entries_options = array();
-  $uncompleted_entries_options[ENTRIES_NONE] = $i18n->getKey('form.profile.entries_none');
-  $uncompleted_entries_options[ENTRIES_USERS_PAGE] = $i18n->getKey('form.profile.entries_users_page');
+  $uncompleted_entries_options[UNCOMPLETED_INDICATORS_NONE] = $i18n->getKey('form.profile.entries_none');
+  $uncompleted_entries_options[UNCOMPLETED_INDICATORS] = $i18n->getKey('form.profile.entries_users_page');
   $form->addInput(array('type'=>'combobox','name'=>'uncompleted_entries','style'=>'width: 150px;','data'=>$uncompleted_entries_options,'value'=>$cl_uncompleted_entries));
 
   $form->addInput(array('type'=>'checkbox','name'=>'charts','data'=>1,'value'=>$cl_charts));
