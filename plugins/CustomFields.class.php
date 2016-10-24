@@ -37,7 +37,7 @@ class CustomFields {
   var $options = array(); // Array of options for a dropdown custom field.
   
   // Constructor.
-  function CustomFields($team_id) {
+  function __construct($team_id) {
   	$mdb2 = getConnection();
   	
   	// Get fields.

@@ -39,7 +39,7 @@ class ttSysConfig {
   var $mdb2 = null;
 
   // Constructor.
-  function ttSysConfig($u_id) {
+  function __construct($u_id) {
     $this->u_id = $u_id;
     $this->mdb2 = getConnection();
   }

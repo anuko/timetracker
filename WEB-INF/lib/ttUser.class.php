@@ -54,7 +54,7 @@ class ttUser {
   var $rights = 0;              // A mask of user rights.
 
   // Constructor.
-  function ttUser($login, $id = null) {
+  function __construct($login, $id = null) {
     if (!$login && !$id) {
       // nothing to initialize
       return;
