@@ -407,6 +407,6 @@ $pdf->writeHTML($html, true, false, false, false, '');
 
 // Close and output PDF document.
 // $pdf->Output('timesheet.pdf', 'I'); // This will display inline in browser.
-$pdf->Output($filename.'pdf', 'D'); // D is for downloads.
+$pdf->Output($filename.'.pdf', 'D'); // D is for downloads.
 
 // End of of TCPDF code.
