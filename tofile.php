@@ -62,6 +62,9 @@ if ($totals_only)
 else
   $items = ttReportHelper::getItems($bean);
 
+// Build a string to use as filename for the files being downloaded.
+$filename = strtolower($i18n->getKey('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
+
 header('Pragma: public'); // This is needed for IE8 to download files over https.
 header('Content-Type: text/html; charset=utf-8');
 header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
@@ -74,7 +77,7 @@ header('Cache-Control: private', false);
 // 1) entries exported to xml
 if ('xml' == $type) {
   header('Content-Type: application/xml');
-  header('Content-Disposition: attachment; filename="timesheet.xml"');
+  header('Content-Disposition: attachment; filename="'.$filename.'.xml"');
 
   print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
   print "<rows>\n";
@@ -141,7 +144,7 @@ if ('xml' == $type) {
 // 2) entries exported to csv
 if ('csv' == $type) {
   header('Content-Type: application/csv');
-  header('Content-Disposition: attachment; filename="timesheet.csv"');
+  header('Content-Disposition: attachment; filename="'.$filename.'.csv"');
 
   // Print UTF8 BOM first to identify encoding.
   $bom = chr(239).chr(187).chr(191); // 0xEF 0xBB 0xBF in the beginning of the file is UTF8 BOM.

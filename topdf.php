@@ -87,6 +87,9 @@ if ($items && 'no_grouping' != $group_by) {
   $cur_grouped_by = '';
 }
 
+// Build a string to use as filename for the files being downloaded.
+$filename = strtolower($i18n->getKey('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
+
 // Start preparing HTML to build PDF from.
 $styleHeader = 'style="background-color:#a6ccf7;"';
 $styleSubtotal = 'style="background-color:#e0e0e0;"';
@@ -327,7 +330,7 @@ header('Cache-Control: post-check=0, pre-check=0', false);
 header('Cache-Control: private', false);
 
 header('Content-Type: application/pdf');
-header('Content-Disposition: attachment; filename="timesheet.pdf"');
+header('Content-Disposition: attachment; filename="'.$filename.'.pdf"');
 
 
 // Beginning of TCPDF code here.
@@ -404,6 +407,6 @@ $pdf->writeHTML($html, true, false, false, false, '');
 
 // Close and output PDF document.
 // $pdf->Output('timesheet.pdf', 'I'); // This will display inline in browser.
-$pdf->Output('timesheet.pdf', 'D'); // D is for downloads.
+$pdf->Output($filename.'.pdf', 'D'); // D is for downloads.
 
 // End of of TCPDF code.
