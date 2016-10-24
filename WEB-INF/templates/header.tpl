@@ -20,10 +20,7 @@
 
 {assign var="tab_width" value="700"}
 
-<!--  101% height here is a workaround for Firefox shifting content horizontally when scrollbar appears / disappears.
-See https://bugzilla.mozilla.org/show_bug.cgi?id=279425.
-With 101% height we essentially force the scrollbar to always appear. -->
-<table height="101%" cellspacing="0" cellpadding="0" width="100%" border="0">
+<table height="100%" cellspacing="0" cellpadding="0" width="100%" border="0">
   <tr>
     <td valign="top" align="center"> <!-- This is to centrally align all our content. -->
 
