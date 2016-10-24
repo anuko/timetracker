@@ -136,46 +136,226 @@ $i18n_key_words = array(
 // 'button.close' => 'Close',
 // 'button.stop' => 'Stop',
 
-// TODO: the entrie section from here to bottom needs refactoring.
-
-// labels for controls on various forms
-// TODO: translate label.team_name.
-// 'label.team_name' => 'team name',
+// Labels for controls on forms. Labels in this section are used on multiple forms.
+// TODO: translate the following.
+// 'label.team_name' => 'Team name',
+// 'label.address' => 'Address',
 'label.currency' => 'Moneda',
-// TODO: translate these 2 strings below.
-// 'label.manager_name' => 'manager name',
-// 'label.manager_login' => 'manager login',
-'label.name' => 'Nom',
-
+// TODO: translate the following.
+// 'label.manager_name' => 'Manager name',
+// 'label.manager_login' => 'Manager login',
+// 'label.person_name' => 'Name',
+// 'label.thing_name' => 'Name',
+// 'label.login' => 'Login',
 'label.password' => 'Paraula de pas',
 'label.confirm_password' => 'Confirmar paraula de pas',
 'label.email' => 'E-mail',
+'label.date' => 'Data',
+// TODO: translate the following.
+// 'label.start_date' => 'Start date',
+// 'label.end_date' => 'End date',
+// 'label.user' => 'User',
+// 'label.users' => 'Users',
+// 'label.client' => 'Client',
+// 'label.clients' => 'Clients',
+// 'label.option' => 'Option',
+// 'label.invoice' => 'Invoice',
+// 'label.project' => 'Project',
+// 'label.projects' => 'Projects',
+// 'label.task' => 'Task',
+// 'label.tasks' => 'Tasks',
+// 'label.description' => 'Description',
+// 'label.start' => 'Start',
+// 'label.finish' => 'Finish',
+// 'label.duration' => 'Duration',
+// 'label.note' => 'Note',
+// 'label.item' => 'Item',
+// 'label.cost' => 'Cost',
+// 'label.day_total' => 'Day total',
+// 'label.week_total' => 'Week total',
+// 'label.month_total' => 'Month total',
+// 'label.today' => 'Today',
+// 'label.total_hours' => 'Total hours',
+// 'label.total_cost' => 'Total cost',
+// 'label.view' => 'View',
+// 'label.edit' => 'Edit',
 'label.delete' => 'Eliminar',
-
-// TODO: the entire label section needs re-translating. See the English file.
+// TODO: translate the following.
+// 'label.configure' => 'Configure',
+// 'label.select_all' => 'Select all',
+// 'label.select_none' => 'Deselect all',
+// 'label.id' => 'ID',
+// 'label.language' => 'Language',
+// 'label.decimal_mark' => 'Decimal mark',
+// 'label.date_format' => 'Date format',
+// 'label.time_format' => 'Time format',
+// 'label.week_start' => 'First day of week',
+// 'label.comment' => 'Comment',
+// 'label.status' => 'Status',
+// 'label.tax' => 'Tax',
+// 'label.subtotal' => 'Subtotal',
+// 'label.total' => 'Total',
+// 'label.client_name' => 'Client name',
+// 'label.client_address' => 'Client address',
+// 'label.or' => 'or',
+// 'label.error' => 'Error',
+// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
+// 'label.required_fields' => '* - required fields',
+// 'label.on_behalf' => 'on behalf of',
+// 'label.role_manager' => '(manager)',
+// 'label.role_comanager' => '(co-manager)',
+'label.role_admin' => '(administrador)',
+// TODO: translate the following.
+// 'label.page' => 'Page',
+// Labels for plugins (extensions to Time Tracker that provide additional features).
+// 'label.custom_fields' => 'Custom fields',
+// 'label.monthly_quotas' => 'Monthly quotas',
+// 'label.type' => 'Type',
+// 'label.type_dropdown' => 'dropdown',
+// 'label.type_text' => 'text',
+// 'label.required' => 'Required',
+'label.fav_report' => 'Report favorit',
+// 'label.cron_schedule' => 'Cron schedule',
+// 'label.what_is_it' => 'What is it?',
 
 // Form titles.
-// TODO: the entire title section is missing here. See the English file.
+'title.login' => 'Sessió iniciada',
+// TODO: translate the following.
+// 'title.teams' => 'Teams',
+// 'title.create_team' => 'Creating Team',
+// 'title.edit_team' => 'Editing Team',
+// 'title.delete_team' => 'Deleting Team',
+'title.reset_password' => 'Restablir paraula de pas',
+// TODO: translate the following.
+// 'title.change_password' => 'Changing Password',
+// 'title.time' => 'Time',
+// 'title.edit_time_record' => 'Editing Time Record',
+// 'title.delete_time_record' => 'Deleting Time Record',
+// 'title.expenses' => 'Expenses',
+// 'title.edit_expense' => 'Editing Expense Item',
+// 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.reports' => 'Reports',
+// 'title.report' => 'Report',
+// 'title.send_report' => 'Sending Report',
+// 'title.invoice' => 'Invoice',
+// 'title.send_invoice' => 'Sending Invoice',
+// 'title.charts' => 'Charts',
+// 'title.projects' => 'Projects',
+// 'title.add_project' => 'Adding Project',
+// 'title.edit_project' => 'Editing Project',
+// 'title.delete_project' => 'Deleting Project',
+// 'title.tasks' => 'Tasks',
+// 'title.add_task' => 'Adding Task',
+// 'title.edit_task' => 'Editing Task',
+// 'title.delete_task' => 'Deleting Task',
+// 'title.users' => 'Users',
+// 'title.add_user' => 'Adding User',
+// 'title.edit_user' => 'Editing User',
+// 'title.delete_user' => 'Deleting User',
+// 'title.clients' => 'Clients',
+// 'title.add_client' => 'Adding Client',
+// 'title.edit_client' => 'Editing Client',
+// 'title.delete_client' => 'Deleting Client',
+// 'title.invoices' => 'Invoices',
+// 'title.add_invoice' => 'Adding Invoice',
+// 'title.view_invoice' => 'Viewing Invoice',
+// 'title.delete_invoice' => 'Deleting Invoice',
+// 'title.notifications' => 'Notifications',
+// 'title.add_notification' => 'Adding Notification',
+// 'title.edit_notification' => 'Editing Notification',
+// 'title.delete_notification' => 'Deleting Notification',
+// 'title.monthly_quotas' => 'Monthly Quotas',
+// 'title.export' => 'Exporting Team Data',
+// 'title.import' => 'Importing Team Data',
+// 'title.options' => 'Options',
+// 'title.profile' => 'Profile',
+// 'title.cf_custom_fields' => 'Custom Fields',
+// 'title.cf_add_custom_field' => 'Adding Custom Field',
+// 'title.cf_edit_custom_field' => 'Editing Custom Field',
+// 'title.cf_delete_custom_field' => 'Deleting Custom Field',
+// 'title.cf_dropdown_options' => 'Dropdown Options',
+// 'title.cf_add_dropdown_option' => 'Adding Option',
+// 'title.cf_edit_dropdown_option' => 'Editing Option',
+// 'title.cf_delete_dropdown_option' => 'Deleting Option',
+// NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
+// It is also a name for the Locking plugin on the Team profile page.
+// 'title.locking' => 'Locking',
 
-"form.filter.project" => 'Projecte',
-"form.filter.filter" => 'Report favorit',
-"form.filter.filter_new" => 'Guardar com a favorit',
+// Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
+// Strings that are used in a single form must go to the specific form section.
+// TODO: translate the following.
+// 'dropdown.all' => '--- all ---',
+// 'dropdown.no' => '--- no ---',
+// NOTE TO TRANSLATORS: dropdown.this_day does not necessarily means "today". It means a specific ("this") day selected on calendar. See Charts.
+// 'dropdown.this_day' => 'this day',
+// 'dropdown.this_week' => 'this week',
+// 'dropdown.last_week' => 'last week',
+// 'dropdown.this_month' => 'this month',
+// 'dropdown.last_month' => 'last month',
+// 'dropdown.this_year' => 'this year',
+// 'dropdown.all_time' => 'all time',
+// 'dropdown.projects' => 'projects',
+// 'dropdown.tasks' => 'tasks',
+// 'dropdown.clients' => 'clients',
+// 'dropdown.select' => '--- select ---',
+// 'dropdown.select_invoice' => '--- select invoice ---',
+// 'dropdown.status_active' => 'active',
+// 'dropdown.status_inactive' => 'inactive',
+// 'dropdown.delete'=>'delete',
+// 'dropdown.do_not_delete'=>'do not delete',
 
-// login form attributes
-"form.login.title" => 'Sessió iniciada',
-"form.login.login" => 'e-mail',
+// Login form. See example at https://timetracker.anuko.com/login.php.
+// TODO: translate the following.
+// 'form.login.forgot_password' => 'Forgot password?',
+// 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
-// password reminder form attributes
-"form.fpass.title" => 'Restablir paraula de pas',
-"form.fpass.login" => 'e-mail',
-"form.fpass.send_pass_str" => 's\\\'ha enviat la petició de restablir paraula de pas',
-"form.fpass.send_pass_subj" => 'Sol·licitud de restabliment de la paraula de pas de Anuko Time Tracker',
-// Note to translators: this string needs to be translated.
-// "form.fpass.send_pass_body" => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
-"form.fpass.reset_comment" => "Per restablir la paraula de pas, si us plau escrigui-la i faci clic en guardar",
+// Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
+'form.reset_password.message' => 'S\\\'ha enviat la petició de restablir paraula de pas.',
+'form.reset_password.email_subject' => 'Sol·licitud de restabliment de la paraula de pas de Anuko Time Tracker',
+// TODO: translate the following.
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+
+// Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
+'form.change_password.tip' => 'Per restablir la paraula de pas, si us plau escrigui-la i faci clic en guardar.',
+
+// Time form. See example at https://timetracker.anuko.com/time.php.
+// TODO: translate the following.
+// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+// 'form.time.billable' => 'Billable',
+// 'form.time.uncompleted' => 'Uncompleted',
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
+
+// Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
+// TODO: translate the following.
+// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
+
+// Reports form. See example at https://timetracker.anuko.com/reports.php
+'form.reports.save_as_favorite' => 'Guardar com a favorit',
+// TODO: translate the following.
+// 'form.reports.confirm_delete' => 'Are you sure you want to delete this favorite report?',
+// 'form.reports.include_records' => 'Include records',
+// 'form.reports.include_billable' => 'billable',
+// 'form.reports.include_not_billable' => 'not billable',
+// 'form.reports.include_invoiced' => 'invoiced',
+// 'form.reports.include_not_invoiced' => 'not invoiced',
+// 'form.reports.select_period' => 'Select time period',
+// 'form.reports.set_period' => 'or set dates',
+// 'form.reports.show_fields' => 'Show fields',
+// 'form.reports.group_by' => 'Group by',
+// 'form.reports.group_by_no' => '--- no grouping ---',
+'form.reports.group_by_date' => 'data',
+// TODO: translate the following.
+// 'form.reports.group_by_user' => 'user',
+// 'form.reports.group_by_client' => 'client',
+'form.reports.group_by_project' => 'projecte',
+// TODO: translate the following.
+// 'form.reports.group_by_task' => 'task',
+// 'form.reports.totals_only' => 'Totals only',
+
+// TODO: the entire section from here to bottom needs refactoring.
 
 // administrator form
-"form.admin.title" => 'Administrador',
 "form.admin.duty_text" => 'Crear un nou grup, creant un nou compte del manejador de l\\\'equip.<br>També pot importar dades de grups, d\\\'un arxiu xml d\\\'un altre servidor Anuko Time Tracker.(No està permès col·lisions de e-mail).',
 
 "form.admin.change_pass" => 'Canviar la paraula de pas de l\\\'administrador de compte',
