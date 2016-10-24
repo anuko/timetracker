@@ -33,6 +33,10 @@ a:visited { text-decoration: none; }
 
 a:hover { text-decoration: underline; }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   font-size: 10pt;
   font-family: verdana;
