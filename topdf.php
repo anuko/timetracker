@@ -88,7 +88,7 @@ if ($items && 'no_grouping' != $group_by) {
 }
 
 // Build a string to use as filename for the files being downloaded.
-$filename = strtolower($i18n->getKey('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
+$filename = mb_strtolower($i18n->getKey('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
 
 // Start preparing HTML to build PDF from.
 $styleHeader = 'style="background-color:#a6ccf7;"';
