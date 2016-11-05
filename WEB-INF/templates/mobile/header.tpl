@@ -21,7 +21,7 @@
 
 {assign var="tab_width" value="300"}
 
-<table height="100%" cellspacing="0" cellpadding="0" border="0">
+<table height="100%" cellspacing="0" cellpadding="0" border="0" style="margin-left: auto; margin-right: auto;">
   <tr>
     <td valign="top" align="center"> <!-- This is to centrally align all our content. -->
 
