@@ -56,7 +56,7 @@ class ttTeamHelper {
       inner join tt_users u on (u.id = upb.user_id)
       where (u.status = 1 or u.status = 0)
       group by u.id
-      order by u.name";
+      order by upper(u.name)";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
@@ -73,9 +73,9 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     if (isset($options['getAllFields']))
-      $sql = "select * from tt_users where team_id = $user->team_id and status = 1 order by name";
+      $sql = "select * from tt_users where team_id = $user->team_id and status = 1 order by upper(name)";
     else
-      $sql = "select id, name from tt_users where team_id = $user->team_id and status = 1 order by name";
+      $sql = "select id, name from tt_users where team_id = $user->team_id and status = 1 order by upper(name)";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
@@ -103,7 +103,7 @@ class ttTeamHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $sql = "select id, name from tt_users where team_id = $user->team_id and (status = 1 or status = 0) order by name";
+    $sql = "select id, name from tt_users where team_id = $user->team_id and (status = 1 or status = 0) order by upper(name)";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
@@ -120,9 +120,9 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select * from tt_users where team_id = $team_id and status = 0 order by name";
+      $sql = "select * from tt_users where team_id = $team_id and status = 0 order by upper(name)";
     else
-      $sql = "select id, name from tt_users where team_id = $team_id and status = 0 order by name";
+      $sql = "select id, name from tt_users where team_id = $team_id and status = 0 order by upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -139,9 +139,9 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select * from tt_users where team_id = $team_id order by name";
+      $sql = "select * from tt_users where team_id = $team_id order by upper(name)";
     else
-      $sql = "select id, name from tt_users where team_id = $team_id order by name";
+      $sql = "select id, name from tt_users where team_id = $team_id order by upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -194,9 +194,9 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select * from tt_projects where team_id = $team_id order by status, name";
+      $sql = "select * from tt_projects where team_id = $team_id order by status, upper(name)";
     else
-      $sql = "select id, name from tt_projects where team_id = $team_id order by status, name";
+      $sql = "select id, name from tt_projects where team_id = $team_id order by status, upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -214,7 +214,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description from tt_tasks where team_id = $team_id and status = 1 order by name";
+    $sql = "select id, name, description from tt_tasks where team_id = $team_id and status = 1 order by upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -232,7 +232,7 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     $sql = "select id, name, description from tt_tasks
-      where team_id = $team_id and status = 0 order by name";
+      where team_id = $team_id and status = 0 order by upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -248,9 +248,9 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select * from tt_tasks where team_id = $team_id order by status, name";
+      $sql = "select * from tt_tasks where team_id = $team_id order by status, upper(name)";
     else
-      $sql = "select id, name from tt_tasks where team_id = $team_id order by status, name";
+      $sql = "select id, name from tt_tasks where team_id = $team_id order by status, upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -269,9 +269,9 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select * from tt_clients where team_id = $team_id and status = 1 order by name";
+      $sql = "select * from tt_clients where team_id = $team_id and status = 1 order by upper(name)";
     else
-      $sql = "select id, name from tt_clients where team_id = $team_id and status = 1 order by name";
+      $sql = "select id, name from tt_clients where team_id = $team_id and status = 1 order by upper(name)";
 
     $res = $mdb2->query($sql);
     $result = array();
@@ -290,9 +290,9 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select * from tt_clients where team_id = $team_id and status = 0 order by name";
+      $sql = "select * from tt_clients where team_id = $team_id and status = 0 order by upper(name)";
     else
-      $sql = "select id, name from tt_clients where team_id = $team_id and status = 0 order by name";
+      $sql = "select id, name from tt_clients where team_id = $team_id and status = 0 order by upper(name)";
 
     $res = $mdb2->query($sql);
     $result = array();
@@ -309,9 +309,9 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select * from tt_clients where team_id = $team_id order by status, name";
+      $sql = "select * from tt_clients where team_id = $team_id order by status, upper(name)";
     else
-      $sql = "select id, name from tt_clients where team_id = $team_id order by status, name";
+      $sql = "select id, name from tt_clients where team_id = $team_id order by status, upper(name)";
 
     $res = $mdb2->query($sql);
     $result = array();
