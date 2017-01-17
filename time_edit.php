@@ -219,9 +219,6 @@ if ($request->isPost()) {
   if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
     if (!$cl_project) $err->add($i18n->getKey('error.project'));
   }
-  if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-    if (!$cl_task) $err->add($i18n->getKey('error.task'));
-  }
   if (!$cl_duration) {
     if ('0' == $cl_duration)
       $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));

@@ -230,7 +230,7 @@ function setNow(formField) {
 {/if}
 {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
     <tr>
-      <td align="right">{$i18n.label.task} (*):</td>
+      <td align="right">{$i18n.label.task}:</td>
       <td>{$forms.timeRecordForm.task.control}</td>
     </tr>
 {/if}
