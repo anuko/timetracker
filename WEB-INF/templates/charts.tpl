@@ -22,7 +22,7 @@
       <table border="0" cellspacing="3">
       {section name=i loop=$totals}
       {if $smarty.section.i.index <= 12}
-        <tr><td style="width:7px;height:1em;background-color:{$totals[i].color_html};"></td><td>{$totals[i].name|escape:'html'}</td></tr>
+        <tr><td style="width:7px;height:1em;background-color:{$totals[i].color_html};"></td><td>{$totals[i].name|escape}</td></tr>
       {/if}
       {/section}
       </table>

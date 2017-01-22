@@ -94,7 +94,7 @@ function get_date() {
     </tr>
     <tr>
       <td align="right">{$i18n.label.cost}:</td>
-      <td>{$forms.expenseItemForm.cost.control} {$user->currency|escape:'html'}</td>
+      <td>{$forms.expenseItemForm.cost.control} {$user->currency|escape}</td>
     </tr>
     <tr>
       <td align="right">{$i18n.label.date}:</td>

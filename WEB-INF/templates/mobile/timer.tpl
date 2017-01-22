@@ -225,7 +225,7 @@ startTimer();
     <tr><td><label>{$forms.timerRecordForm.billable.control}{$i18n.form.time.billable}</label></td></tr>
 {/if}
 {if ($custom_fields && $custom_fields->fields[0])}
-      <tr><td>{$custom_fields->fields[0]['label']|escape:'html'}:</td></tr>
+      <tr><td>{$custom_fields->fields[0]['label']|escape}:</td></tr>
       <tr><td>{$forms.timerRecordForm.cf_1.control}</td></tr>
 {/if}
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}

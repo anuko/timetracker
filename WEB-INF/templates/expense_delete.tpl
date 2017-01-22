@@ -16,12 +16,12 @@
   </tr>
   <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
 {if $user->isPluginEnabled('cl')}
-  <td>{$expense_item.client_name|escape:'html'}</td>
+  <td>{$expense_item.client_name|escape}</td>
 {/if}
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-    <td>{$expense_item.project_name|escape:'html'}</td>
+    <td>{$expense_item.project_name|escape}</td>
 {/if}
-    <td>{$expense_item.name|escape:'html'}</td>
+    <td>{$expense_item.name|escape}</td>
     <td align="right">{$expense_item.cost}</td>
   </tr>
   </table>

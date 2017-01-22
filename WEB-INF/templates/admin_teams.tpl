@@ -19,7 +19,7 @@
   {foreach $teams as $team}
   <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
     <td>{$team.id}</td>
-    <td>{$team.name|escape:'html'}</td>
+    <td>{$team.name|escape}</td>
     <td nowrap>{$team.date}</td>
     <td align="center">{$team.lang}</td>
     <td><a href="admin_team_edit.php?id={$team.id}">{$i18n.label.edit}</a></td>

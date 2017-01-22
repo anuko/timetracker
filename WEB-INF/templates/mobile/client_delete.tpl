@@ -5,7 +5,7 @@
       <table cellspacing="0" cellpadding="2" border="0">
         <tr>
           <td>{$i18n.form.client.client_to_delete}:</td>
-          <th>{$client_to_delete|escape:'html'}</th>
+          <th>{$client_to_delete|escape}</th>
         </tr>
         <tr>
           <td>{$i18n.form.client.client_entries}:</td>

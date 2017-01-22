@@ -14,9 +14,9 @@
   {if $notifications}
     {foreach $notifications as $notification}
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
-          <td>{$notification['name']|escape:'html'}</td>
-          <td>{$notification['cron_spec']|escape:'html'}</td>
-          <td>{$notification['email']|escape:'html'}</td>
+          <td>{$notification['name']|escape}</td>
+          <td>{$notification['cron_spec']|escape}</td>
+          <td>{$notification['email']|escape}</td>
           <td><a href="notification_edit.php?id={$notification['id']}">{$i18n.label.edit}</a></td>
           <td><a href="notification_delete.php?id={$notification['id']}">{$i18n.label.delete}</a></td>
         </tr>

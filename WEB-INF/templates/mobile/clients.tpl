@@ -16,8 +16,8 @@
         </tr>
   {foreach $active_clients as $client}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#dedee5"}">
-          <td><a href="client_edit.php?id={$client.id}">{$client.name|escape:'html'}</a></td>
-          <td>{$client.address|escape:'html'}</td>
+          <td><a href="client_edit.php?id={$client.id}">{$client.name|escape}</a></td>
+          <td>{$client.address|escape}</td>
         </tr>
   {/foreach}
       </table>
@@ -35,8 +35,8 @@
         </tr>
     {foreach $inactive_clients as $client}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#dedee5"}">
-          <td><a href="client_edit.php?id={$client.id}">{$client.name|escape:'html'}</a></td>
-          <td>{$client.address|escape:'html'}</td>
+          <td><a href="client_edit.php?id={$client.id}">{$client.name|escape}</a></td>
+          <td>{$client.address|escape}</td>
         </tr>
     {/foreach}
       </table>

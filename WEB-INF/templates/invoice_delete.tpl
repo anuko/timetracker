@@ -5,7 +5,7 @@
       <table cellspacing="0" cellpadding="2" border="0">
         <tr>
           <td>{$i18n.form.invoice.invoice_to_delete}:</td>
-          <th>{$invoice_to_delete|escape:'html'}</th>
+          <th>{$invoice_to_delete|escape}</th>
         </tr>
         <tr>
           <td>{$i18n.form.invoice.invoice_entries}:</td>

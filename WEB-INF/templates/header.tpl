@@ -150,7 +150,7 @@
 {if $title}
       <table cellspacing="0" cellpadding="5" width="{$tab_width+20}" border="0">
         <tr><td class="sectionHeader"><div class="pageTitle">{$title}{if $timestring}: {$timestring}{/if}</div></td></tr>
-        <tr><td>{$user->name|escape:'html'}{if $user->isAdmin()} {$i18n.label.role_admin}{elseif $user->isManager()} {$i18n.label.role_manager}{elseif $user->canManageTeam()} {$i18n.label.role_comanager}{/if}{if $user->behalf_id > 0} <b>{$i18n.label.on_behalf} {$user->behalf_name|escape:'html'}</b>{/if}{if $user->team}, {$user->team|escape:'html'}{/if}</td></tr>
+        <tr><td>{$user->name|escape}{if $user->isAdmin()} {$i18n.label.role_admin}{elseif $user->isManager()} {$i18n.label.role_manager}{elseif $user->canManageTeam()} {$i18n.label.role_comanager}{/if}{if $user->behalf_id > 0} <b>{$i18n.label.on_behalf} {$user->behalf_name|escape}</b>{/if}{if $user->team}, {$user->team|escape}{/if}</td></tr>
       </table>
 {/if}
       <!-- end of page title and user details -->

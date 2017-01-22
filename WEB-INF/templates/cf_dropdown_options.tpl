@@ -16,7 +16,7 @@
   {if $options}
     {foreach $options as $key=>$val}
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
-          <td>{$val|escape:'html'}</td>
+          <td>{$val|escape}</td>
           <td><a href="cf_dropdown_option_edit.php?id={$key}">{$i18n.label.edit}</a></td>
           <td><a href="cf_dropdown_option_delete.php?id={$key}">{$i18n.label.delete}</a></td>
         </tr>

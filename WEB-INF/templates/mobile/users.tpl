@@ -23,16 +23,16 @@
               <span class="uncompleted-entry{if $u.has_uncompleted_entry} active{/if}"{if $u.has_uncompleted_entry} title="{$i18n.form.users.uncompleted_entry}"{/if}></span>
             {/if}
             {if $user->isManager()}
-              <a href="user_edit.php?id={$u.id}">{$u.name|escape:'html'}</a>
+              <a href="user_edit.php?id={$u.id}">{$u.name|escape}</a>
             {else}
               {if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}
-                <a href="user_edit.php?id={$u.id}">{$u.name|escape:'html'}</a>
+                <a href="user_edit.php?id={$u.id}">{$u.name|escape}</a>
               {else}
-                {$u.name|escape:'html'}
+                {$u.name|escape}
               {/if}
             {/if}
           </td>
-          <td>{$u.login|escape:'html'}</td>
+          <td>{$u.login|escape}</td>
       {if $smarty.const.ROLE_MANAGER == $u.role}
             <td>{$i18n.form.users.manager}</td>
       {elseif $smarty.const.ROLE_COMANAGER == $u.role}
@@ -68,12 +68,12 @@
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
           <td>
             {if $user->isManager()}
-              <a href="user_edit.php?id={$u.id}">{$u.name|escape:'html'}</a>
+              <a href="user_edit.php?id={$u.id}">{$u.name|escape}</a>
             {else}
-              {if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_edit.php?id={$u.id}">{$u.name|escape:'html'}</a>{/if}
+              {if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_edit.php?id={$u.id}">{$u.name|escape}</a>{/if}
             {/if}
           </td>
-          <td>{$u.login|escape:'html'}</td>
+          <td>{$u.login|escape}</td>
       {if $smarty.const.ROLE_MANAGER == $u.role}
             <td>{$i18n.form.users.manager}</td>
       {elseif $smarty.const.ROLE_COMANAGER == $u.role}
@@ -112,8 +112,8 @@
         </tr>
   {foreach $active_users as $u}
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
-          <td>{$u.name|escape:'html'}</td>
-          <td>{$u.login|escape:'html'}</td>
+          <td>{$u.name|escape}</td>
+          <td>{$u.login|escape}</td>
     {if $smarty.const.ROLE_MANAGER == $u.role}
             <td>{$i18n.form.users.manager}</td>
     {elseif $smarty.const.ROLE_COMANAGER == $u.role}

@@ -6,10 +6,10 @@
   <tr>
     <td>
       <table border=0 width=100%>
-        <tr><td align="center"><b style="font-size: 15pt; font-family: Arial, Helvetica, sans-serif;">{$i18n.title.invoice} {$invoice_name|escape:'html'} </b></td></tr>
+        <tr><td align="center"><b style="font-size: 15pt; font-family: Arial, Helvetica, sans-serif;">{$i18n.title.invoice} {$invoice_name|escape} </b></td></tr>
         <tr><td align='left'><b>{$i18n.label.date}:</b> {$invoice_date}</td></tr>
-        <tr><td align='left'><b>{$i18n.label.client}:</b> {$client_name|escape:'html'}</td></tr>
-        <tr><td align='left'><b>{$i18n.label.client_address}:</b> {$client_address|escape:'html'}</td></tr>
+        <tr><td align='left'><b>{$i18n.label.client}:</b> {$client_name|escape}</td></tr>
+        <tr><td align='left'><b>{$i18n.label.client_address}:</b> {$client_address|escape}</td></tr>
       </table>
     </td>
   </tr>
@@ -33,14 +33,14 @@
   {foreach $invoice_items as $invoice_item}
         <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
           <td valign='top'>{$invoice_item.date}</td>
-          <td valign='top'>{$invoice_item.user_name|escape:'html'}</td>
+          <td valign='top'>{$invoice_item.user_name|escape}</td>
     {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-          <td valign='top'>{$invoice_item.project_name|escape:'html'}</td>
+          <td valign='top'>{$invoice_item.project_name|escape}</td>
     {/if}
     {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-          <td valign='top'>{$invoice_item.task_name|escape:'html'}</td>
+          <td valign='top'>{$invoice_item.task_name|escape}</td>
     {/if}
-          <td valign='top'>{$invoice_item.note|escape:'html'}</td>
+          <td valign='top'>{$invoice_item.note|escape}</td>
           <td align='right' valign='top'>{$invoice_item.duration}</td>
           <td align='right' valign='top'>{$invoice_item.cost}</td>
         </tr>
@@ -49,16 +49,16 @@
   {if $tax}
         <tr>
           <td align="right" colspan="{$colspan}"><b>{$i18n.label.subtotal}:</b></td>
-          <td align="right"><nobr>{$subtotal|escape:'html'}</nobr></td>
+          <td align="right"><nobr>{$subtotal|escape}</nobr></td>
         </tr>
         <tr>
           <td align="right" colspan="{$colspan}"><b>{$i18n.label.tax}:</b></td>
-          <td align="right"><nobr>{$tax|escape:'html'}</nobr></td>
+          <td align="right"><nobr>{$tax|escape}</nobr></td>
         </tr>
    {/if}
         <tr>
           <td align="right" colspan="{$colspan}"><b>{$i18n.label.total}:</b></td>
-          <td align="right"><nobr>{$total|escape:'html'}</nobr></td>
+          <td align="right"><nobr>{$total|escape}</nobr></td>
         </tr>
       </table>
 {/if}

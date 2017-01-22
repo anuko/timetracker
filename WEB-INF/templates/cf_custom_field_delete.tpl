@@ -5,7 +5,7 @@
 {if $user->canManageTeam()}
       <table cellspacing="0" cellpadding="0" border="0">
         <tr>
-          <td colspan="2" align="center"><b>{$field|escape:'html'}</b></td>
+          <td colspan="2" align="center"><b>{$field|escape}</b></td>
         </tr>
         <tr>
           <td colspan="2" align="center">&nbsp;</td>

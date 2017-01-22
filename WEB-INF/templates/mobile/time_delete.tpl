@@ -12,10 +12,10 @@
   </tr>
   <tr bgcolor="#f5f5f5">
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-    <td>{$time_rec.project_name|escape:'html'}</td>
+    <td>{$time_rec.project_name|escape}</td>
 {/if}
     <td align="right">{if ($time_rec.duration == '0:00' && $time_rec.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$time_rec.duration}{/if}</td>
-    <td>{if $time_rec.comment}{$time_rec.comment|escape:'html'}{else}&nbsp;{/if}</td>
+    <td>{if $time_rec.comment}{$time_rec.comment|escape}{else}&nbsp;{/if}</td>
   </tr>
   </table>
   <table width="100%">

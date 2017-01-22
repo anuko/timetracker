@@ -18,8 +18,8 @@
         </tr>
         {foreach $invoices as $invoice}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#dedee5"}">
-          <td>{$invoice.name|escape:'html'}</td>
-          <td>{$invoice.client_name|escape:'html'}</td>
+          <td>{$invoice.name|escape}</td>
+          <td>{$invoice.client_name|escape}</td>
           <td>{$invoice.date}</td>
           <td><a href="invoice_view.php?id={$invoice.id}">{$i18n.label.view}</a></td>
   {if !$user->isClient()}

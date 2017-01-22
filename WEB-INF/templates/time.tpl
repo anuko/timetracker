@@ -237,7 +237,7 @@ function get_time() {
 {/if}
 {if ($custom_fields && $custom_fields->fields[0])}
         <tr>
-          <td align="right">{$custom_fields->fields[0]['label']|escape:'html'}{if $custom_fields->fields[0]['required']} (*){/if}:</td><td>{$forms.timeRecordForm.cf_1.control}</td>
+          <td align="right">{$custom_fields->fields[0]['label']|escape}{if $custom_fields->fields[0]['required']} (*){/if}:</td><td>{$forms.timeRecordForm.cf_1.control}</td>
         </tr>
 {/if}
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
@@ -314,20 +314,20 @@ function get_time() {
   {foreach $time_records as $record}
       <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}" {if !$record.billable} class="not_billable" {/if}>
     {if $user->isPluginEnabled('cl')}
-        <td valign='top'>{$record.client|escape:'html'}</td>
+        <td valign='top'>{$record.client|escape}</td>
     {/if}
     {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <td valign='top'>{$record.project|escape:'html'}</td>
+        <td valign='top'>{$record.project|escape}</td>
     {/if}
     {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <td valign='top'>{$record.task|escape:'html'}</td>
+        <td valign='top'>{$record.task|escape}</td>
     {/if}
     {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
         <td nowrap align='right' valign='top'>{if $record.start}{$record.start}{else}&nbsp;{/if}</td>
         <td nowrap align='right' valign='top'>{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
     {/if}
         <td align='right' valign='top'>{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
-        <td valign='top'>{if $record.comment}{$record.comment|escape:'html'}{else}&nbsp;{/if}</td>
+        <td valign='top'>{if $record.comment}{$record.comment|escape}{else}&nbsp;{/if}</td>
         <td valign='top' align='center'>
     {if $record.invoice_id}
           &nbsp;

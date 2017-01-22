@@ -261,7 +261,7 @@ function handleCheckboxes() {
                 <td>{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<label>{$forms.reportForm.chfinish.control}&nbsp;{$i18n.label.finish}</label>{/if}</td>
                 <td><label>{$forms.reportForm.chnote.control}&nbsp;{$i18n.label.note}</label></td>
 {if ($custom_fields && $custom_fields->fields[0])}
-                <td><label>{$forms.reportForm.chcf_1.control}&nbsp;{$custom_fields->fields[0]['label']|escape:'html'}</label></td>
+                <td><label>{$forms.reportForm.chcf_1.control}&nbsp;{$custom_fields->fields[0]['label']|escape}</label></td>
 {else}
                 <td></td>
 {/if}

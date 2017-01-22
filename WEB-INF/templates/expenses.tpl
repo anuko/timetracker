@@ -97,7 +97,7 @@ function get_date() {
         </tr>
         <tr>
           <td align="right">{$i18n.label.cost} (*):</td>
-          <td>{$forms.expensesForm.cost.control} {$user->currency|escape:'html'}</td>
+          <td>{$forms.expensesForm.cost.control} {$user->currency|escape}</td>
         </tr>
       </table>
     </td>
@@ -134,12 +134,12 @@ function get_date() {
   {foreach $expense_items as $item}
       <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
     {if $user->isPluginEnabled('cl')}
-        <td valign='top'>{$item.client|escape:'html'}</td>
+        <td valign='top'>{$item.client|escape}</td>
     {/if}
     {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <td valign='top'>{$item.project|escape:'html'}</td>
+        <td valign='top'>{$item.project|escape}</td>
     {/if}
-        <td valign='top'>{$item.item|escape:'html'}</td>
+        <td valign='top'>{$item.item|escape}</td>
         <td valign='top' align='right'>{$item.cost}</td>
         <td valign='top' align='center'>{if $item.invoice_id}&nbsp;{else}<a href='expense_edit.php?id={$item.id}'>{$i18n.label.edit}</a>{/if}</td>
       </tr>
@@ -147,7 +147,7 @@ function get_date() {
     </table>
     <table border="0" cellpadding="3" cellspacing="1" width="100%">
       <tr>
-        <td nowrap align="right">{$i18n.label.day_total}: {$user->currency|escape:'html'} {$day_total}</td>
+        <td nowrap align="right">{$i18n.label.day_total}: {$user->currency|escape} {$day_total}</td>
       </tr>
     </table>
 {/if}
