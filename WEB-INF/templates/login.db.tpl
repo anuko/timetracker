@@ -18,3 +18,4 @@
     <td colspan="2" align="center" height="50">{$forms.loginForm.btn_login.control}</td>
   </tr>
 </table>
+  

@@ -163,5 +163,4 @@ function get_date() {
   </td>
 </tr>
 </table>
-
 {$forms.expensesForm.close}
