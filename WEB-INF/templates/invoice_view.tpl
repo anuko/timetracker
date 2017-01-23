@@ -7,16 +7,16 @@
     <td>
       <table border=0 width=100%>
         <tr><td align="center"><b style="font-size: 15pt; font-family: Arial, Helvetica, sans-serif;">{$i18n.title.invoice} {$invoice_name|escape} </b></td></tr>
-        <tr><td align='left'><b>{$i18n.label.date}:</b> {$invoice_date}</td></tr>
-        <tr><td align='left'><b>{$i18n.label.client}:</b> {$client_name|escape}</td></tr>
-        <tr><td align='left'><b>{$i18n.label.client_address}:</b> {$client_address|escape}</td></tr>
+        <tr><td align="left"><b>{$i18n.label.date}:</b> {$invoice_date}</td></tr>
+        <tr><td align="left"><b>{$i18n.label.client}:</b> {$client_name|escape}</td></tr>
+        <tr><td align="left"><b>{$i18n.label.client_address}:</b> {$client_address|escape}</td></tr>
       </table>
     </td>
   </tr>
   <tr>
     <td valign="top">
 {if $invoice_items}
-      <table border='0' cellpadding='3' cellspacing='1' width="100%">
+      <table border="0" cellpadding="3" cellspacing="1" width="100%">
         <tr>
           <td class="tableHeader">{$i18n.label.date}</td>
           <td class="tableHeader">{$i18n.form.invoice.person}</td>
@@ -32,17 +32,17 @@
         </tr>
   {foreach $invoice_items as $invoice_item}
         <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
-          <td valign='top'>{$invoice_item.date}</td>
-          <td valign='top'>{$invoice_item.user_name|escape}</td>
+          <td valign="top">{$invoice_item.date}</td>
+          <td valign="top">{$invoice_item.user_name|escape}</td>
     {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-          <td valign='top'>{$invoice_item.project_name|escape}</td>
+          <td valign="top">{$invoice_item.project_name|escape}</td>
     {/if}
     {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-          <td valign='top'>{$invoice_item.task_name|escape}</td>
+          <td valign="top">{$invoice_item.task_name|escape}</td>
     {/if}
-          <td valign='top'>{$invoice_item.note|escape}</td>
-          <td align='right' valign='top'>{$invoice_item.duration}</td>
-          <td align='right' valign='top'>{$invoice_item.cost}</td>
+          <td valign="top">{$invoice_item.note|escape}</td>
+          <td align="right" valign="top">{$invoice_item.duration}</td>
+          <td align="right" valign="top">{$invoice_item.cost}</td>
         </tr>
   {/foreach}
         <tr><td>&nbsp;</td></tr>

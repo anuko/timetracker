@@ -2,7 +2,7 @@
 <table cellspacing="4" cellpadding="7" border="0" width="720">
 <tr>
   <td>
-  <table border='0' cellpadding='3' cellspacing='1' width="100%">
+  <table border="0" cellpadding="3" cellspacing="1" width="100%">
   <tr>
 {if $user->isPluginEnabled('cl')}
     <td class="tableHeader" align="center">{$i18n.label.client}</td>

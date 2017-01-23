@@ -2,7 +2,7 @@
 <table cellspacing="4" cellpadding="7" border="0">
 <tr>
   <td>
-  <table border='0' cellpadding='3' cellspacing='1' width="100%">
+  <table border="0" cellpadding="3" cellspacing="1" width="100%">
   <tr>
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
     <td class="tableHeader" align="center">{$i18n.label.project}</td>

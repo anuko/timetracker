@@ -24,7 +24,7 @@ projects = new Array();
 {/foreach}
 
 // Mandatory top option for project dropdown.
-empty_label_project = '{$i18n.dropdown.select|escape:'javascript'}';
+empty_label_project = "{$i18n.dropdown.select|escape:'javascript'}";
 
 // The fillProjectDropdown function populates the project combo box with
 // projects associated with a selected client (client id is passed here as id).

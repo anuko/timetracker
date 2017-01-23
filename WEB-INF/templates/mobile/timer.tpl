@@ -213,7 +213,7 @@ startTimer();
 <table cellspacing="4" cellpadding="7" border="0">
 <tr>
   <td>
-  <table width = "100%">
+  <table width="100%">
   <tr>
     <td valign="top">
     <table border="0">
@@ -252,13 +252,13 @@ startTimer();
 <tr>
   <td align="center">
     {if $time_records}
-    <table border='0'>
+    <table border="0">
       <tr>
-        <td align='right'>{$i18n.label.day_total}:</td>
+        <td align="right">{$i18n.label.day_total}:</td>
         <td>{$day_total}</td>
       </tr>
       <tr>
-        <td align='right'>{$i18n.label.week_total}:</td>
+        <td align="right">{$i18n.label.week_total}:</td>
         <td>{$week_total}</td>
       </tr>
     </table>

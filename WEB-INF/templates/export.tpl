@@ -11,7 +11,7 @@
         <tr><td colspan="2">{$i18n.form.export.hint}<br></td></tr>
         <tr><td colspan="2">&nbsp;</td></tr>
         <tr>
-          <td align='right'>{$i18n.form.export.compression}:</td>
+          <td align="right">{$i18n.form.export.compression}:</td>
           <td>{$forms.exportForm.compression.control}</td>
         </tr>
         <tr><td height="50" align="center" colspan="2">{$forms.exportForm.btn_submit.control}</td></tr>

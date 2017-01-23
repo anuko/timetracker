@@ -144,13 +144,13 @@ function get_date() {
   {foreach $expense_items as $item}
       <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
     {if $user->isPluginEnabled('cl')}
-        <td valign='top'>{$item.client|escape}</td>
+        <td valign="top">{$item.client|escape}</td>
     {/if}
     {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <td valign='top'>{$item.project|escape}</td>
+        <td valign="top">{$item.project|escape}</td>
     {/if}
-        <td valign='top'>{if $item.invoice_id} {$item.item|escape} {else}<a href='expense_edit.php?id={$item.id}'>{$item.item|escape}</a>{/if}</td>
-        <td valign='top' align='right'>{$item.cost}</td>
+        <td valign="top">{if $item.invoice_id} {$item.item|escape} {else}<a href="expense_edit.php?id={$item.id}">{$item.item|escape}</a>{/if}</td>
+        <td valign="top" align="right">{$item.cost}</td>
       </tr>
   {/foreach}
     </table>

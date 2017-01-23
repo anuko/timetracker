@@ -9,7 +9,7 @@
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td><a href ='password_reset.php'>{$i18n.form.login.forgot_password}</a></td>
+    <td><a href ="password_reset.php">{$i18n.form.login.forgot_password}</a></td>
   </tr>
   <tr>
     <td colspan="2">&nbsp;</td>

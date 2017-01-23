@@ -224,16 +224,16 @@ function get_date() {
       {foreach $time_records as $record}
       <tr bgcolor="{cycle values="#ccccce,#f5f5f5"}" {if !$record.billable} class="not_billable" {/if}>
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <td valign='top'>{$record.project|escape}</td>
+        <td valign="top">{$record.project|escape}</td>
 {/if}
-        <td align='right' valign='top'>{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{/if}{$record.duration}{if ($record.duration == '0:00' && $record.start <> '')}</font>{/if}</td>
-        <td align='center'>{if $record.invoice_id}&nbsp;{else}<a href='time_edit.php?id={$record.id}'>{$i18n.label.edit}</a>{/if}</td>
+        <td align="right" valign="top">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{/if}{$record.duration}{if ($record.duration == '0:00' && $record.start <> '')}</font>{/if}</td>
+        <td align="center">{if $record.invoice_id}&nbsp;{else}<a href="time_edit.php?id={$record.id}">{$i18n.label.edit}</a>{/if}</td>
       </tr>
       {/foreach}
     </table>
-    <table border='0'>
+    <table border="0">
       <tr>
-        <td align='right'>{$i18n.label.day_total}:</td>
+        <td align="right">{$i18n.label.day_total}:</td>
         <td>{$day_total}</td>
       </tr>
     </table>

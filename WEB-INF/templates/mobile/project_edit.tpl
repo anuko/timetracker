@@ -4,11 +4,11 @@
     <td>
       <table cellspacing="1" cellpadding="2" border="0">
         <tr>
-          <td align = "right">{$i18n.label.thing_name} (*):</td>
+          <td align="right">{$i18n.label.thing_name} (*):</td>
           <td>{$forms.projectForm.project_name.control}</td>
         </tr>
         <tr>
-          <td align = "right">{$i18n.label.description}:</td>
+          <td align="right">{$i18n.label.description}:</td>
           <td>{$forms.projectForm.description.control}</td>
         </tr>
         <tr>

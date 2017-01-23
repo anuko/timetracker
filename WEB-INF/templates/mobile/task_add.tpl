@@ -8,7 +8,7 @@
           <td>{$forms.taskForm.name.control}</td>
         </tr>
         <tr>
-          <td align = "right">{$i18n.label.description}:</td>
+          <td align="right">{$i18n.label.description}:</td>
           <td>{$forms.taskForm.description.control}</td>
         </tr>
         <tr valign="top">

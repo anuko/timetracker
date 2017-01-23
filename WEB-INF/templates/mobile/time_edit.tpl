@@ -206,9 +206,9 @@ function get_date() {
 <table cellspacing="4" cellpadding="7" border="0">
 <tr>
   <td>
-  <table width = "100%">
+  <table width="100%">
   <tr>
-  	<td valign="top">
+    <td valign="top">
     <table border="0">
 {if $user->isPluginEnabled('cl')}
     <tr><td>{$i18n.label.client}:</td></tr>
