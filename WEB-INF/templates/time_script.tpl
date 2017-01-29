@@ -1,5 +1,9 @@
 <script>
-// This script is shared by time.tpl and time_edit.tpl (both regular and mobile).
+// This script is shared by time.tpl, time_edit.tpl (both regular and mobile),
+// and also by WEB-INF/templates/mobile/timer.tpl.
+// This creates certain restrictions, such as the form name being "timeRecordForm",
+// variables such as $client_list, $project_list and others to be assigned in php files
+// for all pages. Things need to be tested together for all involved files.
 
 // We need a few arrays to populate project and task dropdowns.
 // When client selection changes, the project dropdown must be re-populated with only relevant projects.

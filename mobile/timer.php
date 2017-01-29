@@ -84,7 +84,7 @@ $uncompleted = ttTimeHelper::getUncompleted($user->getActiveUser());
 $enable_controls = ($uncompleted == null);
 
 // Elements of timeRecordForm.
-$form = new Form('timerRecordForm');
+$form = new Form('timeRecordForm');
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
 if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
