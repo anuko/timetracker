@@ -8,38 +8,38 @@
 // task_ids[325] = "100,101,302,303,304"; // Comma-separated list ot task ids for project.
 // task_names[100] = "Coding";            // Task name.
 
-//Prepare an array of projects ids for clients.
-project_ids = new Array();
+// Prepare an array of projects ids for clients.
+var project_ids = new Array();
 {foreach $client_list as $client}
   project_ids[{$client.id}] = "{$client.projects}";
 {/foreach}
 // Prepare an array of project names.
-project_names = new Array();
+var project_names = new Array();
 {foreach $project_list as $project}
   project_names[{$project.id}] = "{$project.name|escape:'javascript'}";
 {/foreach}
 // We'll use this array to populate project dropdown when client is not selected.
 var idx = 0;
-projects = new Array();
+var projects = new Array();
 {foreach $project_list as $project}
   projects[idx] = new Array("{$project.id}", "{$project.name|escape:'javascript'}");
   idx++;
 {/foreach}
 
 // Prepare an array of task ids for projects.
-task_ids = new Array();
+var task_ids = new Array();
 {foreach $project_list as $project}
   task_ids[{$project.id}] = "{$project.tasks}";
 {/foreach}
 // Prepare an array of task names.
-task_names = new Array();
+var task_names = new Array();
 {foreach $task_list as $task}
   task_names[{$task.id}] = "{$task.name|escape:'javascript'}";
 {/foreach}
 
 // Mandatory top options for project and task dropdowns.
-empty_label_project = '{$i18n.dropdown.select|escape:'javascript'}';
-empty_label_task = '{$i18n.dropdown.select|escape:'javascript'}';
+var empty_label_project = '{$i18n.dropdown.select|escape:'javascript'}';
+var empty_label_task = '{$i18n.dropdown.select|escape:'javascript'}';
 
 // The fillDropdowns function populates the "project" and "task" dropdown controls
 // with relevant values.
