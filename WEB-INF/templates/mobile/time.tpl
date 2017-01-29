@@ -143,39 +143,40 @@ function fillTaskDropdown(id) {
 
 // The formDisable function disables some fields depending on what we have in other fields.
 function formDisable(formField) {
-  formFieldValue = eval("document.timeRecordForm." + formField + ".value");
-  formFieldName = eval("document.timeRecordForm." + formField + ".name");
+  var formFieldValue = eval("document.timeRecordForm." + formField + ".value");
+  var formFieldName = eval("document.timeRecordForm." + formField + ".name");
+  var x;
 
   if (((formFieldValue != "") && (formFieldName == "start")) || ((formFieldValue != "") && (formFieldName == "finish"))) {
-    var x = eval("document.timeRecordForm.duration");
+    x = eval("document.timeRecordForm.duration");
     x.value = "";
     x.disabled = true;
     x.style.background = "#e9e9e9";
   }
 
   if (((formFieldValue == "") && (formFieldName == "start") && (document.timeRecordForm.finish.value == "")) || ((formFieldValue == "") && (formFieldName == "finish") && (document.timeRecordForm.start.value == ""))) {
-    var x = eval("document.timeRecordForm.duration");
+    x = eval("document.timeRecordForm.duration");
     x.value = "";
     x.disabled = false;
     x.style.background = "white";
   }
 
   if ((formFieldValue != "") && (formFieldName == "duration")) {
-    var x = eval("document.timeRecordForm.start");
+    x = eval("document.timeRecordForm.start");
     x.value = "";
     x.disabled = true;
     x.style.background = "#e9e9e9";
-    var x = eval("document.timeRecordForm.finish");
+    x = eval("document.timeRecordForm.finish");
     x.value = "";
     x.disabled = true;
     x.style.background = "#e9e9e9";
   }
 
   if ((formFieldValue == "") && (formFieldName == "duration")) {
-    var x = eval("document.timeRecordForm.start");
+    x = eval("document.timeRecordForm.start");
     x.disabled = false;
     x.style.background = "white";
-    var x = eval("document.timeRecordForm.finish");
+    x = eval("document.timeRecordForm.finish");
     x.disabled = false;
     x.style.background = "white";
   }
@@ -186,7 +187,7 @@ function setNow(formField) {
   var x = eval("document.timeRecordForm.start");
   x.disabled = false;
   x.style.background = "white";
-  var x = eval("document.timeRecordForm.finish");
+  x = eval("document.timeRecordForm.finish");
   x.disabled = false;
   x.style.background = "white";
   var today = new Date();
