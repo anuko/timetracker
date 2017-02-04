@@ -8,7 +8,7 @@
         <table>
         <tr>
           <td align="right">{$i18n.form.mail.from} (*):</td>
-          <td>{$smarty.const.SENDER}</td>
+          <td>{$sender}</td>
         </tr>
         <tr>
           <td align="right">{$i18n.form.mail.to} (*):</td>

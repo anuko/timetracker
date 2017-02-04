@@ -91,6 +91,16 @@ if ($request->isPost()) {
   }
 }
 
+$smarty->assign('sender', SENDER);
+if (function_exists('imap_mime_header_decode')) {
+  $elements = imap_mime_header_decode(SENDER);
+  if (count($elements) > 1) {
+      // Reassign sender.
+      $new = $elements[count($elements) - 2]->text;
+      $smarty->assign('sender', $elements[count($elements) - 2]->text);
+  }
+}
+
 $smarty->assign('title', $i18n->getKey('title.send_report'));
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.mailForm.'.($cl_receiver?'comment':'receiver').'.focus()"');
