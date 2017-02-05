@@ -28,19 +28,19 @@
 
 // Class ttClientHelper is used to help with client related tasks.
 class ttClientHelper {
-	
+
   // The getClient looks up a client by id.
   static function getClient($client_id, $all_fields = false) {
 
     $mdb2 = getConnection();
-  	global $user;
-  	
+    global $user;
+
     $sql = 'select ';
     if ($all_fields)
       $sql .= '* ';
     else
       $sql .= 'name ';
-    
+
     $sql .= "from tt_clients where team_id = $user->team_id
       and id = $client_id and (status = 1 or status = 0)";
     $res = $mdb2->query($sql);
@@ -50,17 +50,17 @@ class ttClientHelper {
     }
     return false;
   }
-  
+
   // getClients - returns an array of active and inactive clients in a team.
   static function getClients()
   {
-  	global $user;
-  	  	
-  	$result = array();
+    global $user;
+
+    $result = array();
     $mdb2 = getConnection();
-    
+
     $sql = "select id, name from tt_clients
-      where team_id = $user->team_id and (status = 0 or status = 1) order by name";  	
+      where team_id = $user->team_id and (status = 0 or status = 1) order by name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -69,31 +69,32 @@ class ttClientHelper {
     }
     return $result;
   }
-	
+
   // The getClientByName looks up a client by name.
   static function getClientByName($client_name) {
-  	
+
     $mdb2 = getConnection();
     global $user;
 
     $sql = "select id from tt_clients where team_id = $user->team_id and name = ".
       $mdb2->quote($client_name)." and (status = 1 or status = 0)";
-  	$res = $mdb2->query($sql);
-  	if (!is_a($res, 'PEAR_Error')) {
+
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-	  if ($val['id']) {
+      if ($val['id']) {
         return $val;
       }
     }
     return false;
   }
-  
+
   // The getDeletedClient looks up a deleted client by id.
   static function getDeletedClient($client_id) {
 
     $mdb2 = getConnection();
-  	global $user;
-  	
+    global $user;
+
     $sql = "select name, address from tt_clients where team_id = $user->team_id
       and id = $client_id and status is NULL";
     $res = $mdb2->query($sql);
@@ -103,62 +104,62 @@ class ttClientHelper {
     }
     return false;
   }
-  
+
   // The delete function marks client as deleded.
   static function delete($id, $delete_client_entries) {
-  	
-  	$mdb2 = getConnection();
-  	global $user;
-  	
+
+    $mdb2 = getConnection();
+    global $user;
+
     // Handle custom field log records.
     if ($delete_client_entries) {
       $sql = "update tt_custom_field_log set status = NULL where log_id in (select id from tt_log where client_id = $id and status = 1)";
       $affected = $mdb2->exec($sql);
-  	  if (is_a($affected, 'PEAR_Error'))
-  	    return false;
+        if (is_a($affected, 'PEAR_Error'))
+          return false;
     }
-    
+
     // Handle time records.
     if ($delete_client_entries) {
       $sql = "update tt_log set status = NULL where client_id = $id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
-  	    return false;
+        return false;
     }
-    
+
     // Handle expense items.
-    if ($delete_client_entries) {	  
+    if ($delete_client_entries) {
       $sql = "update tt_expense_items set status = NULL where client_id = $id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
     }
-    
+
     // Handle invoices.
-    if ($delete_client_entries) {	  
+    if ($delete_client_entries) {
       $sql = "update tt_invoices set status = NULL where client_id = $id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
     }
- 
-  	// Delete project binds to this client.
+
+    // Delete project binds to this client.
     $sql = "delete from tt_client_project_binds where client_id = $id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
-  	
-  	$sql = "update tt_clients set status = NULL where id = $id and team_id = ".$user->team_id;
+
+    $sql = "update tt_clients set status = NULL where id = $id and team_id = ".$user->team_id;
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
-  
+
   // The insert function inserts a new client record into the clients table.
   static function insert($fields)
   {
-  	global $user;
+    global $user;
     $mdb2 = getConnection();
-    
+
     $team_id = (int) $fields['team_id'];
     $name = $fields['name'];
     $address = $fields['address'];
@@ -173,17 +174,17 @@ class ttClientHelper {
 
     $sql = "insert into tt_clients (team_id, name, address, tax, projects, status) 
       values ($team_id, ".$mdb2->quote($name).", ".$mdb2->quote($address).", $tax, ".$mdb2->quote($comma_separated).", ".$mdb2->quote($status).")";
-      
+
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
-      
+
     $last_id = 0;
     $sql = "select last_insert_id() as last_insert_id";
     $res = $mdb2->query($sql);
     $val = $res->fetchRow();
     $last_id = $val['last_insert_id'];
-      
+
     if (count($projects) > 0)
       foreach ($projects as $p_id) {
         $sql = "insert into tt_client_project_binds (client_id, project_id) values($last_id, $p_id)";
@@ -194,7 +195,7 @@ class ttClientHelper {
 
     return $last_id;
   }
-  
+
   // The update function updates a client record in tt_clients table.  
   static function update($fields)
   {
@@ -207,9 +208,9 @@ class ttClientHelper {
     $tax = $fields['tax'];
     $status = $fields['status'];
     $projects = $fields['projects'];
-    
+
     $tax = str_replace(',', '.', $tax);
-  	if ($tax == '') $tax = 0;
+    if ($tax == '') $tax = 0;
 
     // Insert client to project binds into tt_client_project_binds table.
     $sql = "delete from tt_client_project_binds where client_id = $id";
@@ -231,7 +232,7 @@ class ttClientHelper {
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
-  
+
   // The setMappedClient function is used during team import to change client_id value for tt_users to a mapped value.
   static function setMappedClient($team_id, $imported_id, $mapped_id)
   {
@@ -240,26 +241,26 @@ class ttClientHelper {
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
-      
+
     return true;
   }
-  
+
   // The fillBean function fills the ActionForm object with client data.
   static function fillBean($client_id, &$bean) {
-  	$client = ttClientHelper::getClient($client_id, true);
+    $client = ttClientHelper::getClient($client_id, true);
     $bean->setAttribute('name', $client['name']);
     $bean->setAttribute('address', $client['address']);
     $bean->setAttribute('tax', $client['tax']);
   }
-  
+
   // getAssignedProjects - returns an array of projects associatied with a client.
   static function getAssignedProjects($client_id)
   {
-  	global $user;
-  	
+    global $user;
+
     $result = array();
     $mdb2 = getConnection();
-    
+
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name from tt_projects p
       inner join tt_client_project_binds cpb on (cpb.client_id = $client_id and cpb.project_id = p.id)
@@ -272,46 +273,39 @@ class ttClientHelper {
     }
     return $result;
   }
-  
+
   // getClientsForUser - returns an array of clients that are relevant to a user via assigned projects. 
-  static function getClientsForUser($withProjects = false)
+  static function getClientsForUser()
   {
-  	global $user;
-  	$user_id = $user->getActiveUser();
-  	
-  	$result = array();
-  	$mdb2 = getConnection();
-  	
+    global $user;
+    $user_id = $user->getActiveUser();
+
+    $result = array();
+    $mdb2 = getConnection();
+
     $sql = "select distinct c.id, c.name, c.projects from tt_user_project_binds upb
       inner join tt_client_project_binds cpb on (cpb.project_id = upb.project_id)
       inner join tt_clients c on (c.id = cpb.client_id and c.status = 1)
       where upb.user_id = $user_id and upb.status = 1 order by c.name";
-    
-  	$res = $mdb2->query($sql);
-  	if (!is_a($res, 'PEAR_Error')) {
+
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-        // if ($withProjects) {
-         // $projects = ttClientHelper::getAssignedProjectsForUser($val['id']);
-  	      //$project_ids = array();
-  	      //foreach ($projects as $project_item)
-  	        //$project_ids[] = $project_item[id];
-  	      //$val['projects'] = implode(',', $project_ids);
-      	//}
       	$result[] = $val;
       }
     }
     return $result;
   }
-  
+
   // getAssignedProjectsForUser - returns an array of projects assigned to a user and associatied with a client.
   static function getAssignedProjectsForUser($client_id)
   {
-  	global $user;
-  	$user_id = $user->getActiveUser();
-  	
-  	$result = array();
+    global $user;
+    $user_id = $user->getActiveUser();
+
+    $result = array();
     $mdb2 = getConnection();
-    
+
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name from tt_projects p
       inner join tt_client_project_binds cpb on (cpb.client_id = $client_id and cpb.project_id = p.id)
