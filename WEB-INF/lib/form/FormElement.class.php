@@ -35,7 +35,6 @@ class FormElement {
 	var $mMaxLength		= "";
 	var $mTabindex		= "";
 	var $mAccesskey     = "";
-	var $mOnBlur		= "";
 	var $mOnSelect		= "";
 	var $mOnChange		= "";
 	var $mOnClick		= "";
@@ -95,9 +94,7 @@ class FormElement {
 	function setOnChange($str)	{ $this->mOnChange = $str; }
 	function setOnClick($str)	{ $this->mOnClick = $str; }
 	function setOnSelect($str)	{ $this->mOnSelect = $str; }
-	function setOnBlue($str)	{ $this->mOnBlur = $str; }
-	function setOnKeyPress($str){ $this->mOnKeyPress = $str; }
-	
+
 	function setLocalization($i18n)	{
 		$this->mI18n = $i18n;
 	}

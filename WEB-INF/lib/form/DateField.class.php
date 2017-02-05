@@ -406,9 +406,6 @@ class DateField extends TextField {
       if ($this->mOnChange!="")
          $html .= " onchange=\"$this->mOnChange\"";
 
-      if ($this->mOnBlur!="")
-         $html .= " onblur=\"$this->mOnBlur\"";
-
       if ($this->mOnClick!="")
          $html .= " onclick=\"$this->mOnClick\"";
 
