@@ -105,7 +105,7 @@ if ($request->isPost()) {
       else
         $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/password_change.php?ref='.$temp_ref;
 
-      $sender->setSendType(MAIL_MODE);
+      $sender->setMailMode(MAIL_MODE);
       $res = $sender->send($cl_subject, sprintf($user_i18n->getKey('form.reset_password.email_body'), $pass_edit_url));
       $smarty->assign('result_message', $res ? $i18n->getKey('form.reset_password.message') : $i18n->getKey('error.mail_send'));
     }

@@ -86,7 +86,7 @@ if ($request->isPost()) {
     $mailer->setReceiver($cl_receiver);
     if (isset($cl_cc))
       $mailer->setReceiverCC($cl_cc);
-    $mailer->setSendType(MAIL_MODE);
+    $mailer->setMailMode(MAIL_MODE);
     if ($mailer->send($cl_subject, $body))
       $msg->add($i18n->getKey('form.mail.invoice_sent'));
     else

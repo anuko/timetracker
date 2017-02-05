@@ -38,7 +38,7 @@ class Mailer {
     $this->mMailMode = $type;
   }
 
-  function setSendType($value) {
+  function setMailMode($value) {
     $this->mMailMode = $value;
   }
 

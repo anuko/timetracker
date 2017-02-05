@@ -1574,7 +1574,7 @@ class ttReportHelper {
     $mailer->setContentType('text/html');
     $mailer->setSender(SENDER);
     $mailer->setReceiver($email);
-    $mailer->setSendType(MAIL_MODE);
+    $mailer->setMailMode(MAIL_MODE);
     if (!$mailer->send($report['name'], $body))
       return false;
 
