@@ -27,47 +27,46 @@
 // +----------------------------------------------------------------------+
 
 import('form.TextField');
-	
-class FloatField extends TextField {
-	var $mDelimiter = '.';
-	var $mFFormat;
-	var $cClassName	= "FloatField";
 
-	function __construct($name) {
-		$this->mName	= $name;
-	}
-	
-	function setLocalization($i18n)	{
-		FormElement::setLocalization($i18n);
-		global $user;
-		$this->mDelimiter = $user->decimal_mark;
-	}
-	
-	function setFormat($format)	{
-		$this->mFFormat = $format;
-	}
-	
-	function setValue($value) {
-		if (isset($this->mFFormat) && isset($value) && strlen($value)) {
-			$value = str_replace($this->mDelimiter,".",$value);
-			$value = sprintf("%".$this->mFFormat."f",$value);
-			$value = str_replace(".",$this->mDelimiter,$value);
-		}
-		$this->mValue = $value;
-	}
-	
-	function setValueSafe($value)	{
-		// '.' to ',' , apply localisation 
-		if (strlen($value)>0)
-			$this->mValue = str_replace(".",$this->mDelimiter,$value);
-	}
-	
-	function getValueSafe() {
-		// ',' to '.'
-		if (strlen($this->mValue)>0) {
-			return str_replace($this->mDelimiter,".",$this->mValue);
-		} else {
-			return null;
-		}
-	}
+class FloatField extends TextField {
+
+  var $mDelimiter = '.';
+  var $mFFormat;
+  var $cClassName = 'FloatField';
+
+  function __construct($name) {
+    $this->mName = $name;
+  }
+
+  function setLocalization($i18n) {
+    FormElement::setLocalization($i18n);
+    global $user;
+    $this->mDelimiter = $user->decimal_mark;
+  }
+
+  function setFormat($format) {
+    $this->mFFormat = $format;
+  }
+
+  function setValue($value) {
+    if (isset($this->mFFormat) && isset($value) && strlen($value)) {
+      $value = str_replace($this->mDelimiter, '.', $value);
+      $value = sprintf('%'.$this->mFFormat.'f', $value);
+      $value = str_replace('.', $this->mDelimiter, $value);
+    }
+    $this->mValue = $value;
+  }
+
+  function setValueSafe($value)	{
+    // '.' to ',' , apply delimiter
+    if (strlen($value) > 0)
+      $this->mValue = str_replace('.', $this->mDelimiter, $value);
+  }
+
+  function getValueSafe() {
+    // ',' to '.'
+    if (strlen($this->mValue) > 0)
+      return str_replace($this->mDelimiter, '.', $this->mValue);
+    return null;
+  }
 }
