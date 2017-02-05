@@ -27,35 +27,31 @@
 // +----------------------------------------------------------------------+
 
 class ActionErrors {
-    var $errors = array();
+  var $errors = array();
 
-    function __construct() {
-    }
+  function __construct() {
+  }
 
-    function no() {
-        return (count($this->errors)>0 ? false : true);
-    }
+  function no() {
+    return (count($this->errors) > 0 ? false : true);
+  }
 
-    function yes() {
-        return (count($this->errors)>0 ? true : false);
-    }
+  function yes() {
+    return (count($this->errors) > 0 ? true : false);
+  }
 
-    function add($message, $arg0 = '', $arg1 = '') {
-    	$patterns = array ("/\{0\}/","/\{1\}/");
-		$replace = array ($arg0, $arg1);
-		$message = preg_replace ($patterns, $replace, $message);
-        $this->errors[]["message"] = $message;
-    }    
-    
-    function get($key) {
-        return $this->errors["$key"]["message"];
-    }
-    
-    function dump() {
-        print_r($this->errors);
-    }
-    
-    function getErrors() {
-        return $this->errors;
-    }
+  function add($message, $arg0 = '', $arg1 = '') {
+    $patterns = array ('/\{0\}/','/\{1\}/');
+    $replace = array($arg0, $arg1);
+    $message = preg_replace ($patterns, $replace, $message);
+    $this->errors[]['message'] = $message;
+  }
+
+  function dump() {
+    print_r($this->errors);
+  }
+
+  function getErrors() {
+    return $this->errors;
+  }
 }

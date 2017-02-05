@@ -262,7 +262,7 @@ class Auth_ldap extends Auth {
 
         if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
           echo '$member_of'; var_dump($member_of); echo '<br />';
-        };
+        }
 
         // check for group membership
         foreach ($member_of as $check_grp) {
