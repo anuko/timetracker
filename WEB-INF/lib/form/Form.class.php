@@ -38,7 +38,6 @@ class Form {
   var $name = '';
   // TODO: refactoring ongoing down from here.
 
-	var $mEnctype      = "";
 	var $mId           = "";
     var $error;
 	var $debugFunction;
@@ -252,16 +251,14 @@ class Form {
             
         $html .= ' method="post"';
         
-        // for upload forms
+        // Add enctype for file upload forms.
         foreach ($this->mElements as $elname=>$el) {
-            if (strtolower(get_class($this->mElements[$elname]))=="uploadfile") {
-            	$this->mEnctype = "multipart/form-data";
+            if (strtolower(get_class($this->mElements[$elname])) == 'uploadfile') {
+                $html .= ' enctype="multipart/form-data"';
+                break;
             }
         }
-        
-        if ($this->mEnctype!="")
-        	$html .= " enctype=\"$this->mEnctype\"";
-        
+
         $html .= ">";
         return $html;
     }
