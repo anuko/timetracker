@@ -34,8 +34,10 @@
 // +----------------------------------------------------------------------+
 
 class Form {
-    var $formName      = "";
-	var $mAction       = "";
+
+  var $name = '';
+  // TODO: refactoring ongoing down from here.
+
 	var $mMethod       = "post";
 	var $mEnctype      = "";
 	var $mId           = "";
@@ -46,7 +48,7 @@ class Form {
 //	var $mFormBean;
     
     function __construct($formid) {
-        $this->formName = $formid;
+        $this->name = $formid;
     }
     
     function setRequest(&$request) {
@@ -72,20 +74,14 @@ class Form {
 	// name
 	// onsubmit
 	// onreset
-	function setName($value) { $this->formName = $value; }
-    function getName() { return $this->formName; }
+	function setName($value) { $this->name = $value; }
+    function getName() { return $this->name; }
     
     function setId($value) { $this->mId = $value; }
     function getId() { return $this->mId; }
     
-    function setAction($value) { $this->mAction = $value; }
-    function getAction() { return $this->mAction; }
-    
     function setMethod($value) { $this->mMethod = $value; }
     function getMethod() { return $this->mMethod; }
-    
-    function setEnctype($value) { $this->mEnctype = $value; }
-    function getEnctype() { return $this->mEnctype; }
     
     function isSubmit()	{
     	if (!isset($this->mRequest)) return false;
@@ -225,7 +221,7 @@ class Form {
 				return($this->OutputError("Type not found for input element","AddInput"));
 		}
 		if ($el!=null) {
-			$el->setFormName($this->formName);
+			$el->setFormName($this->name);
 			if (isset($arguments["id"])) $el->setId($arguments["id"]);
 			if (isset($GLOBALS["I18N"])) $el->setLocalization($GLOBALS["I18N"]);
 			if (isset($arguments["render"])) $el->setRenderable($arguments["render"]);
@@ -251,21 +247,18 @@ class Form {
 			    
 			if (isset($GLOBALS["I18N"])) $el->setLocalization($GLOBALS["I18N"]);
 		
-			$el->setFormName($this->formName);
+			$el->setFormName($this->name);
 			$this->mElements[$el->getName()] = &$el;
 		}
 	}
 	
 	
 	function toStringOpenTag() {
-        $html = "<form name=\"$this->formName\"";
+        $html = "<form name=\"$this->name\"";
         
         if ($this->mId!="") 
             $html .= " id=\"$this->mId\"";
             
-        if ($this->mAction!="") 
-            $html .= " action=\"$this->mAction\"";
-        
         if ($this->mMethod!="") 
             $html .= " method=\"$this->mMethod\"";
         
