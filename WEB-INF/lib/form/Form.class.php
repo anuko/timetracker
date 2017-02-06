@@ -38,14 +38,12 @@ class Form {
   var $name = '';
   // TODO: refactoring ongoing down from here.
 
-	var $mMethod       = "post";
 	var $mEnctype      = "";
 	var $mId           = "";
     var $error;
 	var $debugFunction;
 	var $mElements     = array();
 	var $mRequest;
-//	var $mFormBean;
     
     function __construct($formid) {
         $this->name = $formid;
@@ -54,11 +52,7 @@ class Form {
     function setRequest(&$request) {
         $this->mRequest = &$request;
     }
-    
-/*    function setFormBean(&$bean) {
-        $this->mFormBean = &$bean;
-    }
-*/    
+
     function &getElement($name) {
     	return $this->mElements[$name];
     }
@@ -79,9 +73,6 @@ class Form {
     
     function setId($value) { $this->mId = $value; }
     function getId() { return $this->mId; }
-    
-    function setMethod($value) { $this->mMethod = $value; }
-    function getMethod() { return $this->mMethod; }
     
     function isSubmit()	{
     	if (!isset($this->mRequest)) return false;
@@ -259,8 +250,7 @@ class Form {
         if ($this->mId!="") 
             $html .= " id=\"$this->mId\"";
             
-        if ($this->mMethod!="") 
-            $html .= " method=\"$this->mMethod\"";
+        $html .= ' method="post"';
         
         // for upload forms
         foreach ($this->mElements as $elname=>$el) {
