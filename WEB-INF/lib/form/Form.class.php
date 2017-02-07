@@ -38,14 +38,13 @@ class Form {
   var $name = '';
   // TODO: refactoring ongoing down from here.
 
-	var $mId           = "";
     var $error;
 	var $debugFunction;
 	var $mElements     = array();
 	var $mRequest;
     
-    function __construct($formid) {
-        $this->name = $formid;
+    function __construct($formName) {
+        $this->name = $formName;
     }
     
     function setRequest(&$request) {
@@ -67,11 +66,7 @@ class Form {
 	// name
 	// onsubmit
 	// onreset
-	function setName($value) { $this->name = $value; }
     function getName() { return $this->name; }
-    
-    function setId($value) { $this->mId = $value; }
-    function getId() { return $this->mId; }
     
     function isSubmit()	{
     	if (!isset($this->mRequest)) return false;
@@ -246,9 +241,6 @@ class Form {
 	function toStringOpenTag() {
         $html = "<form name=\"$this->name\"";
         
-        if ($this->mId!="") 
-            $html .= " id=\"$this->mId\"";
-            
         $html .= ' method="post"';
         
         // Add enctype for file upload forms.
