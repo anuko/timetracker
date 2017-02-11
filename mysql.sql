@@ -139,7 +139,7 @@ CREATE TABLE `tt_log` (
   `project_id` int(11) default NULL,   # project id
   `task_id` int(11) default NULL,      # task id
   `invoice_id` int(11) default NULL,   # invoice id
-  `comment` blob,                      # user provided comment for time record
+  `comment` text,                      # user provided comment for time record
   `billable` tinyint(4) default '0',   # whether the record is billable or not
   `status` tinyint(4) default '1',     # time record status
   PRIMARY KEY (`id`)

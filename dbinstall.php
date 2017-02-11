@@ -172,7 +172,7 @@ if ($_POST) {
   }
 
   if ($_POST["convert5to7"]) {
-    setChange("alter table `activity_log` CHANGE al_comment al_comment BLOB");
+    setChange("alter table `activity_log` CHANGE al_comment al_comment text");
     setChange("CREATE TABLE `sysconfig` (`sysc_id` int(11) unsigned NOT NULL auto_increment,`sysc_name` varchar(32) NOT NULL default '',`sysc_value` varchar(70) default NULL, PRIMARY KEY  (`sysc_id`), UNIQUE KEY `sysc_id` (`sysc_id`), UNIQUE KEY `sysc_name` (`sysc_name`))");
     setChange("alter table `companies` add c_locktime int(4) default -1");
     setChange("alter table `activity_log` add al_billable tinyint(4) default 0");
@@ -547,7 +547,7 @@ if ($_POST) {
     setChange("ALTER TABLE tt_log CHANGE al_project_id project_id int(11) NOT NULL");
     setChange("ALTER TABLE tt_log MODIFY project_id int(11) default NULL");
     setChange("ALTER TABLE tt_log CHANGE al_activity_id task_id int(11) default NULL");
-    setChange("ALTER TABLE tt_log CHANGE al_comment comment blob");
+    setChange("ALTER TABLE tt_log CHANGE al_comment comment text");
     setChange("ALTER TABLE tt_log CHANGE al_billable billable tinyint(4) default '0'");
     setChange("drop index al_user_id_idx on tt_log");
     setChange("drop index al_project_id_idx on tt_log");
