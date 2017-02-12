@@ -343,6 +343,19 @@ create index invoice_idx on tt_expense_items(invoice_id);
 
 
 #
+# Structure for table tt_predefined_expenses.
+# This table keeps names and costs for predefined expenses.
+#
+CREATE TABLE `tt_predefined_expenses` (
+  `id` int(11) NOT NULL auto_increment, # predefined expense id
+  `team_id` int(11) NOT NULL,           # team id
+  `name` varchar(255) NOT NULL,         # predefined expense name, such as mileage
+  `cost` decimal(10,2) default '0.00',  # cost for one unit
+  PRIMARY KEY  (`id`)
+);
+
+
+#
 # Structure for table tt_monthly_quotas.
 # This table keeps monthly work hour quotas for teams.
 #
@@ -356,4 +369,3 @@ CREATE TABLE `tt_monthly_quotas` (
 
 ALTER TABLE `tt_monthly_quotas`
   ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-

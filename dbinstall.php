@@ -635,6 +635,7 @@ if ($_POST) {
     setChange("RENAME TABLE tt_monthly_quota TO tt_monthly_quotas");
     setChange("ALTER TABLE tt_expense_items modify `name` text NOT NULL");
     setChange("ALTER TABLE `tt_teams` ADD `uncompleted_indicators` SMALLINT(2) NOT NULL DEFAULT '0' AFTER `record_type`");
+    setChange("CREATE TABLE `tt_predefined_expenses` (`id` int(11) NOT NULL auto_increment, `team_id` int(11) NOT NULL, `name` varchar(255) NOT NULL, `cost` decimal(10,2) default '0.00', PRIMARY KEY  (`id`))");
   }
   
   // The update_clients function updates projects field in tt_clients table.
