@@ -209,6 +209,11 @@ $i18n_key_words = array(
 'title.expenses' => 'Kosten',
 'title.edit_expense' => 'Bewerk kosten artikel',
 'title.delete_expense' => 'Verwijder kosten artikel',
+// TODO: translate the following strings.
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
 'title.reports' => 'Rapporten',
 'title.report' => 'Rapport',
 'title.send_report' => 'Rapport aan het versturen',
