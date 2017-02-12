@@ -194,6 +194,9 @@ $i18n_key_words = array(
 'label.fav_report' => 'Standaard rapport',
 'label.cron_schedule' => 'Cron schema',
 'label.what_is_it' => 'Wat betekent dit?',
+// TODO: translate the following.
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
 
 // Form titles.
 'title.login' => 'Aanmelden',

@@ -28,9 +28,15 @@ function handlePluginCheckboxes() {
     taxCheckbox.style.visibility = "hidden";
     taxLabel.style.visibility = "hidden";
   }
+  var configureLabel = document.getElementById("expenses_config");
+  if (expensesCheckbox.checked) {
+    configureLabel.style.visibility = "visible";
+  } else {
+    configureLabel.style.visibility = "hidden";
+  }
 
   var customFieldsCheckbox = document.getElementById("custom_fields");
-  var configureLabel = document.getElementById("cf_config");
+  configureLabel = document.getElementById("cf_config");
   if (customFieldsCheckbox.checked) {
     configureLabel.style.visibility = "visible";
   } else {
@@ -185,7 +191,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.profileForm.expenses.control}</td>
-            <td><label for="expenses">{$i18n.title.expenses}</label> {$forms.profileForm.tax_expenses.control} <span id="tax_label"><label for="tax_expenses">{$i18n.label.tax}</label></span></td>
+            <td><label for="expenses">{$i18n.title.expenses}</label> {$forms.profileForm.tax_expenses.control} <span id="tax_label"><label for="tax_expenses">{$i18n.label.tax}</label></span> <span id="expenses_config"><a href="predefined_expenses.php">{$i18n.label.configure}</a></span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.profileForm.notifications.control}</td>

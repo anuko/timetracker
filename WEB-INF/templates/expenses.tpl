@@ -6,25 +6,33 @@
 // project_names[325] = "Time Tracker";   // Project name.
 
 // Prepare an array of project ids for clients.
-project_ids = new Array();
+var project_ids = new Array();
 {foreach $client_list as $client}
   project_ids[{$client.id}] = "{$client.projects}";
 {/foreach}
 // Prepare an array of project names.
-project_names = new Array();
+var project_names = new Array();
 {foreach $project_list as $project}
   project_names[{$project.id}] = "{$project.name|escape:'javascript'}";
 {/foreach}
 // We'll use this array to populate project dropdown when client is not selected.
 var idx = 0;
-projects = new Array();
+var projects = new Array();
 {foreach $project_list as $project}
   projects[idx] = new Array("{$project.id}", "{$project.name|escape:'javascript'}");
   idx++;
 {/foreach}
 
 // Mandatory top option for project dropdown.
-empty_label_project = "{$i18n.dropdown.select|escape:'javascript'}";
+var empty_label_project = "{$i18n.dropdown.select|escape:'javascript'}";
+
+// Prepare an array of predefined expenses.
+idx = 0;
+var defined_expenses = new Array();
+{foreach $predefined_expenses as $predefined_expense}
+  defined_expenses[idx] = new Array("{$predefined_expense.id}", "{$predefined_expense.name|escape:'javascript'}", "{$predefined_expense.cost}");
+  idx++;
+{/foreach}
 
 // The fillProjectDropdown function populates the project combo box with
 // projects associated with a selected client (client id is passed here as id).
@@ -66,6 +74,34 @@ function get_date() {
   var date = new Date();
   return date.strftime("%Y-%m-%d");
 }
+
+// The recalculateCost function recalculates cost based on the current selection
+// of predefined expense and quantity and also changes the comment accordingly.
+function recalculateCost() {
+  var quantity_control = document.getElementById("quantity");
+  // Set quantity to 1 if it is not set already.
+  if (!quantity_control.value) {
+     quantity_control.value = "1";
+  }
+
+  var comment_control = document.getElementById("item_name");
+  var cost_control = document.getElementById("cost");
+
+  // Calculate cost.
+  var dropdown = document.getElementById("predefined_expense");
+  if (dropdown.selectedIndex == 0) {
+    quantity_control.value = "";
+    comment_control.value = "";
+    cost_control.value = "";
+  } else {
+    comment_control.value = defined_expenses[dropdown.selectedIndex - 1][1] + " - " + quantity_control.value;
+    var quantity = quantity_control.value;
+    if (isNaN(quantity))
+      cost_control.value = "";
+    else
+      cost_control.value = (quantity_control.value * defined_expenses[dropdown.selectedIndex - 1][2]).toFixed(2);
+  }
+}
 </script>
 
 {$forms.expensesForm.open}
@@ -91,8 +127,19 @@ function get_date() {
           <td>{$forms.expensesForm.project.control}</td>
         </tr>
 {/if}
+{if $predefined_expenses}
+
         <tr>
-          <td align="right">{$i18n.label.item} (*):</td>
+          <td align="right">{$i18n.label.expense}:</td>
+          <td>{$forms.expensesForm.predefined_expense.control}</td>
+        </tr>
+        <tr>
+          <td align="right">{$i18n.label.quantity}:</td>
+          <td>{$forms.expensesForm.quantity.control}</td>
+        </tr>
+{/if}
+        <tr>
+          <td align="right">{$i18n.label.comment} (*):</td>
           <td>{$forms.expensesForm.item_name.control}</td>
         </tr>
         <tr>

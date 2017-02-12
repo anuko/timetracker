@@ -195,6 +195,8 @@ $i18n_key_words = array(
 'label.fav_report' => 'Стандартный отчёт',
 'label.cron_schedule' => 'Расписание cron',
 'label.what_is_it' => 'Что это?',
+'label.expense' => 'Расход',
+'label.quantity' => 'Количество',
 
 // Form titles.
 'title.login' => 'Вход в систему',
