@@ -498,6 +498,23 @@ class ttTeamHelper {
     return false;
   }
 
+  // getPredefinedExpenses - obtains predefined expenses for team.
+  static function getPredefinedExpenses($team_id) {
+    $mdb2 = getConnection();
+
+    $result = array();
+    $sql = "select id, name, cost from tt_predefined_expenses where team_id = $team_id";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
   // getNotifications - obtains notification descriptions for team.
   static function getNotifications($team_id) {
     $mdb2 = getConnection();
@@ -517,7 +534,7 @@ class ttTeamHelper {
     return false;
   }
 
-    // getNotifications - obtains monthly quotas for team.
+  // getMonthlyQuotas - obtains monthly quotas for team.
   static function getMonthlyQuotas($team_id) {
     $mdb2 = getConnection();
 
