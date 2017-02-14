@@ -194,9 +194,8 @@ $i18n_key_words = array(
 'label.fav_report' => 'Standaard rapport',
 'label.cron_schedule' => 'Cron schema',
 'label.what_is_it' => 'Wat betekent dit?',
-// TODO: translate the following.
-// 'label.expense' => 'Expense',
-// 'label.quantity' => 'Quantity',
+'label.expense' => 'Kosten',
+'label.quantity' => 'Hoeveelheid',
 
 // Form titles.
 'title.login' => 'Aanmelden',
@@ -212,11 +211,10 @@ $i18n_key_words = array(
 'title.expenses' => 'Kosten',
 'title.edit_expense' => 'Bewerk kosten artikel',
 'title.delete_expense' => 'Verwijder kosten artikel',
-// TODO: translate the following strings.
-// 'title.predefined_expenses' => 'Predefined Expenses',
-// 'title.add_predefined_expense' => 'Adding Predefined Expense',
-// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
-// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+'title.predefined_expenses' => 'Vaste kosten',
+'title.add_predefined_expense' => 'Vaste kosten toevoegen',
+'title.edit_predefined_expense' => 'Vaste kosten bewerken',
+'title.delete_predefined_expense' => 'Vaste kosten verwijderen',
 'title.reports' => 'Rapporten',
 'title.report' => 'Rapport',
 'title.send_report' => 'Rapport aan het versturen',
