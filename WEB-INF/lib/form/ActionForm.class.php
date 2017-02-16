@@ -38,7 +38,6 @@ class ActionForm {
 
     function __construct($name, &$form, $request=null) {
     	$this->setName($name);
-    	$form->setRequest($request);
 		$this->setForm($form);
 		//if ($request) $this->initAttributes($request);
 		$this->initAttributes($request);
@@ -73,7 +72,6 @@ class ActionForm {
      * @param object $request
      */
     function initAttributes(&$request) {
-        //$submit_flag = $this->isSubmit();
         $submit_flag = (is_object($request) && ($request->isPost()));
         	
         if ($submit_flag) {
@@ -163,14 +161,6 @@ class ActionForm {
     
     function dump() {
         print_r($this->mValues);
-    }
-    
-    function isSubmit() {
-        $res = false;
-        if (is_object($this->mForm)) {
-            $res = $this->mForm->isSubmit();
-        }
-        return $res;
     }
     
     function saveBean() {

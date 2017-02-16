@@ -36,18 +36,13 @@
 class Form {
 
   var $name = '';
-  // TODO: refactoring ongoing down from here.
+  var $elements = array();
 
-	var $elements = array();
-	var $mRequest;
-    
-    function __construct($formName) {
-        $this->name = $formName;
-    }
-    
-    function setRequest(&$request) {
-        $this->mRequest = &$request;
-    }
+  function __construct($formName) {
+    $this->name = $formName;
+  }
+
+  // TODO: refactoring ongoing down from here.
 
     function &getElement($name) {
     	return $this->elements[$name];
@@ -65,22 +60,7 @@ class Form {
 	// onsubmit
 	// onreset
     function getName() { return $this->name; }
-    
-    function isSubmit()	{
-    	if (!isset($this->mRequest)) return false;
-        $result = false;
-	    foreach ($this->elements as $el) {
-	        if (strtolower(get_class($el))=="submit") {
-	            $name = $el->getName();
-	            $value = $this->mRequest->getAttribute($name);
-	            if($value) {
-	               $result = true; 
-	            }
-	        }
-	    }
-        return $result;
-    }
-	
+
 	//// INPUT element
 	// type = TEXT | PASSWORD | CHECKBOX | RADIO | SUBMIT | RESET | FILE | HIDDEN | IMAGE | BUTTON
 	// name
