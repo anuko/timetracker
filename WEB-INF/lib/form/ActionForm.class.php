@@ -53,7 +53,7 @@ class ActionForm {
     
     function &getFormElement($name) {
     	if ($this->mForm!=null) {
-	   		return  $this->mForm->mElements[$name];
+            return  $this->mForm->elements[$name];
     	}
     	return null;
     }
@@ -80,9 +80,9 @@ class ActionForm {
         	// fill ActionForm and Form from Request
 
 	    	foreach ($this->mVariables as $name) {
-     			if ($this->mForm->mElements[$name] && $request->getParameter($name)) {
-	     		    $this->mForm->mElements[$name]->setValue($request->getParameter($name));
-    			    $this->mValues[$name] = $this->mForm->mElements[$name]->getValue();
+     			if ($this->mForm->elements[$name] && $request->getParameter($name)) {
+	     		    $this->mForm->elements[$name]->setValue($request->getParameter($name));
+    			    $this->mValues[$name] = $this->mForm->elements[$name]->getValue();
 	    		}
 	        }
         } else {
@@ -94,8 +94,8 @@ class ActionForm {
         if ($this->mForm) {
 	        $elements = $this->mForm->getElements();
 			foreach ($elements as $name=>$el) {
-    			if ($this->mForm->mElements[$name] && isset($this->mValues[$name])) {
-				    $this->mForm->mElements[$name]->setValue($this->mValues[$name]);
+    			if ($this->mForm->elements[$name] && isset($this->mValues[$name])) {
+				    $this->mForm->elements[$name]->setValue($this->mValues[$name]);
 	    	    }
 	        }
 	        $this->mInitForm = true;
@@ -121,12 +121,12 @@ class ActionForm {
     	
         $this->mValues[$name] = $value;
         if ($this->mForm) {
-        	if (isset($this->mForm->mElements[$name])) {
-        		if ($this->mForm->mElements[$name]->cClassName=="DateField") {
+        	if (isset($this->mForm->elements[$name])) {
+        		if ($this->mForm->elements[$name]->cClassName=="DateField") {
         			$dt = new DateAndTime($user->date_format, $value);
 					$value = $dt->toString(DB_DATEFORMAT);
         		}
-        		$this->mForm->mElements[$name]->setValueSafe($value);
+        		$this->mForm->elements[$name]->setValueSafe($value);
         	}
         }
     }
@@ -150,12 +150,12 @@ class ActionForm {
         if (is_array($this->mValues))
         foreach ($this->mValues as $name=>$value) {
 	        if ($this->mForm) {
-	        	if (isset($this->mForm->mElements[$name])) {
-	        		if ($this->mForm->mElements[$name]->cClassName=="DateField") {
+	        	if (isset($this->mForm->elements[$name])) {
+	        		if ($this->mForm->elements[$name]->cClassName=="DateField") {
 	        			$dt = new DateAndTime($user->date_format, $value);
 						$value = $dt->toString(DB_DATEFORMAT);
 	        		}
-	        		$this->mForm->mElements[$name]->setValueSafe($value);
+	        		$this->mForm->elements[$name]->setValueSafe($value);
 	        	}
 	        }
         }
@@ -199,8 +199,8 @@ class ActionForm {
     			if (isset($GLOBALS["I18N"])) $el->setLocalization($GLOBALS["I18N"]);
     			$el->setValueSafe(@$_SESSION[$this->mSessionCell . "_" .$el->getName()]);
     			
-				if ($this->mForm && !isset($this->mForm->mElements[$ref_el["name"]])) {
-					$this->mForm->mElements[$ref_el["name"]] = &$el;
+				if ($this->mForm && !isset($this->mForm->elements[$ref_el["name"]])) {
+					$this->mForm->elements[$ref_el["name"]] = &$el;
 				}
     			$this->mValues[$el->getName()] = $el->getValue();
     		}
