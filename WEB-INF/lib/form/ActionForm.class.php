@@ -222,4 +222,3 @@ class ActionForm {
     	return (isset($_SESSION[$this->mSessionCell . "session_store_elements"]) ? true : false);
     }
 }
-
