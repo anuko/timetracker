@@ -36,9 +36,11 @@
 class Form {
 
   var $name = '';
-  var $elements = array();
   // TODO: refactoring ongoing down from here.
 
+    var $error;
+	var $debugFunction;
+	var $mElements     = array();
 	var $mRequest;
     
     function __construct($formName) {
@@ -50,11 +52,11 @@ class Form {
     }
 
     function &getElement($name) {
-        return $this->elements[$name];
+    	return $this->mElements[$name];
     }
     
     function &getElements() {
-        return $this->elements;
+    	return $this->mElements;
     }
     
 	//// FORM element
@@ -69,7 +71,7 @@ class Form {
     function isSubmit()	{
     	if (!isset($this->mRequest)) return false;
         $result = false;
-	    foreach ($this->elements as $el) {
+	    foreach ($this->mElements as $el) {
 	        if (strtolower(get_class($el))=="submit") {
 	            $name = $el->getName();
 	            $value = $this->mRequest->getAttribute($name);
@@ -80,6 +82,15 @@ class Form {
 	    }
         return $result;
     }
+	
+	function OutputError($error,$scope="")
+	{
+		$this->error=(strcmp($scope,"") ? $scope.": ".$error : $error);
+		if(strcmp($function=$this->debugFunction,"")
+		&& strcmp($this->error,""))
+			$function($this->error);
+		return($this->error);
+	}
 	
 	//// INPUT element
 	// type = TEXT | PASSWORD | CHECKBOX | RADIO | SUBMIT | RESET | FILE | HIDDEN | IMAGE | BUTTON
@@ -96,6 +107,18 @@ class Form {
 	// onselect -  INPUT and TEXTAREA
 	// onchange
 	function addInput($arguments) {
+		if(strcmp(gettype($arguments),"array"))
+			$this->OutputError("arguments must be array","AddInput");
+			
+		if(!isset($arguments["type"]) || !strcmp($arguments["type"],""))
+			return($this->OutputError("Type not defined","AddInput"));
+			
+		if(!isset($arguments["name"]) || !strcmp($arguments["name"],""))
+			return($this->OutputError("Name of element not defined","AddInput"));
+			
+		if (isset($this->mElements[$arguments["name"]]))
+		    return($this->OutputError("it was specified '".$arguments["name"]."' name of an already defined input","AddInput"));
+			
 		switch($arguments["type"]) {
 		    
 			case "textfield":
@@ -178,6 +201,9 @@ class Form {
 			    $el = new UploadFile($arguments["name"]);
 			    if (isset($arguments["maxsize"])) $el->setMaxSize($arguments["maxsize"]);
 			    break;
+			      
+			default:
+				return($this->OutputError("Type not found for input element","AddInput"));
 		}
 		if ($el!=null) {
 			$el->setFormName($this->name);
@@ -195,16 +221,19 @@ class Form {
 			if (isset($arguments["onchange"])) $el->setOnChange($arguments["onchange"]);
 			if (isset($arguments["onclick"])) $el->setOnClick($arguments["onclick"]);
 			
-			$this->elements[$arguments["name"]] = &$el;
+			$this->mElements[$arguments["name"]] = &$el;
 		}
 	}
 	
 	function addInputElement(&$el) {
 		if ($el && is_object($el)) {
-                        if (isset($GLOBALS["I18N"])) $el->setLocalization($GLOBALS["I18N"]);
-
+			if (!$el->getName())
+			    return($this->OutputError("no name in element","addInputElement"));
+			    
+			if (isset($GLOBALS["I18N"])) $el->setLocalization($GLOBALS["I18N"]);
+		
 			$el->setFormName($this->name);
-			$this->elements[$el->getName()] = &$el;
+			$this->mElements[$el->getName()] = &$el;
 		}
 	}
 	
@@ -215,8 +244,8 @@ class Form {
         $html .= ' method="post"';
         
         // Add enctype for file upload forms.
-        foreach ($this->elements as $elname=>$el) {
-            if (strtolower(get_class($this->elements[$elname])) == 'uploadfile') {
+        foreach ($this->mElements as $elname=>$el) {
+            if (strtolower(get_class($this->mElements[$elname])) == 'uploadfile') {
                 $html .= ' enctype="multipart/form-data"';
                 break;
             }
@@ -228,9 +257,9 @@ class Form {
     
     function toStringCloseTag() {
     	$html = "\n";
-        foreach ($this->elements as $elname=>$el) {
-            if (strtolower(get_class($this->elements[$elname]))=="hidden") {
-                $html .= $this->elements[$elname]->toStringControl()."\n";
+    	foreach ($this->mElements as $elname=>$el) {
+            if (strtolower(get_class($this->mElements[$elname]))=="hidden") {
+            	$html .= $this->mElements[$elname]->toStringControl()."\n";
             }
         }
         $html .= "</form>";
@@ -242,21 +271,21 @@ class Form {
         $vars['open'] = $this->toStringOpenTag();
         $vars['close'] = $this->toStringCloseTag();
         
-        foreach ($this->elements as $elname=>$el) {
-            if (is_object($this->elements[$elname]))
-                $vars[$elname] = $this->elements[$elname]->toArray();
+        foreach ($this->mElements as $elname=>$el) {
+            if (is_object($this->mElements[$elname])) 
+                $vars[$elname] = $this->mElements[$elname]->toArray();
         }
 //print_r($vars);
         return $vars;
     }
     
     function getValueByElement($elname) {
-        return $this->elements[$elname]->getValue();
+    	return $this->mElements[$elname]->getValue();
     }
     
     function setValueByElement($elname, $value) {
-        if (isset($this->elements[$elname])) {
-            $this->elements[$elname]->setValue($value);
+    	if (isset($this->mElements[$elname])) {
+    		$this->mElements[$elname]->setValue($value);
     	}
     }
 }
