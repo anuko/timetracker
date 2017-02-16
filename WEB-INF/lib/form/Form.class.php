@@ -51,36 +51,20 @@ class Form {
   }
 
   function getName() { return $this->name; }
-    
-  // TODO: refactoring ongoing down from here.
 
+  // addInput - adds an input object to the form.
+  function addInput($arguments) {
+    switch($arguments['type']) {
+      case 'text':
+        import('form.TextField');
+        $el = new TextField($arguments['name']);
+        $el->setMaxLength(@$arguments['maxlength']);
+        if (isset($arguments['aspassword'])) $el->setAsPassword($arguments['aspassword']);
+        break;
 
-
-	//// INPUT element
-	// type = TEXT | PASSWORD | CHECKBOX | RADIO | SUBMIT | RESET | FILE | HIDDEN | IMAGE | BUTTON
-	// name
-	// value
-	// checked - for type radio and checkbox
-	// size - width pixels or chars
-	// maxlength
-	// src - for type image
-	// tabindex - support  A, AREA, BUTTON, INPUT, OBJECT, SELECT, and TEXTAREA
-	// accesskey - support A, AREA, BUTTON, INPUT, LABEL, and LEGEND, and TEXTAREA
-	// onfocus
-	// onblur
-	// onselect -  INPUT and TEXTAREA
-	// onchange
-	function addInput($arguments) {
-		switch($arguments["type"]) {
-		    
-			case "textfield":
-			case "text":
-			    import('form.TextField');
-			    $el = new TextField($arguments["name"]);
-			    $el->setMaxLength(@$arguments["maxlength"]);
-			    if (isset($arguments["aspassword"])) $el->setAsPassword($arguments["aspassword"]);
-			    break;
-			    
+// TODO: refactoring ongoing down from here.
+// aspassword - change this name to something better? Perhaps.
+// Change $arguments to something better too (maybe). $args or $params?
 			case "datefield":
 			    import('form.DateField');
 			    $el = new DateField($arguments["name"]);
