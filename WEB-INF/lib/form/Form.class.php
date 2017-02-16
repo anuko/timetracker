@@ -36,9 +36,9 @@
 class Form {
 
   var $name = '';
+  var $elements = array();
   // TODO: refactoring ongoing down from here.
 
-	var $mElements     = array();
 	var $mRequest;
     
     function __construct($formName) {
@@ -50,11 +50,11 @@ class Form {
     }
 
     function &getElement($name) {
-    	return $this->mElements[$name];
+        return $this->elements[$name];
     }
     
     function &getElements() {
-    	return $this->mElements;
+        return $this->elements;
     }
     
 	//// FORM element
@@ -69,7 +69,7 @@ class Form {
     function isSubmit()	{
     	if (!isset($this->mRequest)) return false;
         $result = false;
-	    foreach ($this->mElements as $el) {
+	    foreach ($this->elements as $el) {
 	        if (strtolower(get_class($el))=="submit") {
 	            $name = $el->getName();
 	            $value = $this->mRequest->getAttribute($name);
@@ -195,7 +195,7 @@ class Form {
 			if (isset($arguments["onchange"])) $el->setOnChange($arguments["onchange"]);
 			if (isset($arguments["onclick"])) $el->setOnClick($arguments["onclick"]);
 			
-			$this->mElements[$arguments["name"]] = &$el;
+			$this->elements[$arguments["name"]] = &$el;
 		}
 	}
 	
@@ -204,7 +204,7 @@ class Form {
                         if (isset($GLOBALS["I18N"])) $el->setLocalization($GLOBALS["I18N"]);
 
 			$el->setFormName($this->name);
-			$this->mElements[$el->getName()] = &$el;
+			$this->elements[$el->getName()] = &$el;
 		}
 	}
 	
@@ -215,8 +215,8 @@ class Form {
         $html .= ' method="post"';
         
         // Add enctype for file upload forms.
-        foreach ($this->mElements as $elname=>$el) {
-            if (strtolower(get_class($this->mElements[$elname])) == 'uploadfile') {
+        foreach ($this->elements as $elname=>$el) {
+            if (strtolower(get_class($this->elements[$elname])) == 'uploadfile') {
                 $html .= ' enctype="multipart/form-data"';
                 break;
             }
@@ -228,9 +228,9 @@ class Form {
     
     function toStringCloseTag() {
     	$html = "\n";
-    	foreach ($this->mElements as $elname=>$el) {
-            if (strtolower(get_class($this->mElements[$elname]))=="hidden") {
-            	$html .= $this->mElements[$elname]->toStringControl()."\n";
+        foreach ($this->elements as $elname=>$el) {
+            if (strtolower(get_class($this->elements[$elname]))=="hidden") {
+                $html .= $this->elements[$elname]->toStringControl()."\n";
             }
         }
         $html .= "</form>";
@@ -242,21 +242,21 @@ class Form {
         $vars['open'] = $this->toStringOpenTag();
         $vars['close'] = $this->toStringCloseTag();
         
-        foreach ($this->mElements as $elname=>$el) {
-            if (is_object($this->mElements[$elname])) 
-                $vars[$elname] = $this->mElements[$elname]->toArray();
+        foreach ($this->elements as $elname=>$el) {
+            if (is_object($this->elements[$elname]))
+                $vars[$elname] = $this->elements[$elname]->toArray();
         }
 //print_r($vars);
         return $vars;
     }
     
     function getValueByElement($elname) {
-    	return $this->mElements[$elname]->getValue();
+        return $this->elements[$elname]->getValue();
     }
     
     function setValueByElement($elname, $value) {
-    	if (isset($this->mElements[$elname])) {
-    		$this->mElements[$elname]->setValue($value);
+        if (isset($this->elements[$elname])) {
+            $this->elements[$elname]->setValue($value);
     	}
     }
 }
