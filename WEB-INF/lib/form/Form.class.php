@@ -42,24 +42,19 @@ class Form {
     $this->name = $formName;
   }
 
+  function getElement($name) {
+    return $this->elements[$name];
+  }
+
+  function getElements() {
+    return $this->elements;
+  }
+
+  function getName() { return $this->name; }
+    
   // TODO: refactoring ongoing down from here.
 
-    function &getElement($name) {
-    	return $this->elements[$name];
-    }
-    
-    function &getElements() {
-    	return $this->elements;
-    }
-    
-	//// FORM element
-	// action
-	// method - GET, POST
-	// enctype - enctype="multipart/form-data"
-	// name
-	// onsubmit
-	// onreset
-    function getName() { return $this->name; }
+
 
 	//// INPUT element
 	// type = TEXT | PASSWORD | CHECKBOX | RADIO | SUBMIT | RESET | FILE | HIDDEN | IMAGE | BUTTON
