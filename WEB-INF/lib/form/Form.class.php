@@ -38,8 +38,6 @@ class Form {
   var $name = '';
   // TODO: refactoring ongoing down from here.
 
-    var $error;
-	var $debugFunction;
 	var $mElements     = array();
 	var $mRequest;
     
@@ -83,15 +81,6 @@ class Form {
         return $result;
     }
 	
-	function OutputError($error,$scope="")
-	{
-		$this->error=(strcmp($scope,"") ? $scope.": ".$error : $error);
-		if(strcmp($function=$this->debugFunction,"")
-		&& strcmp($this->error,""))
-			$function($this->error);
-		return($this->error);
-	}
-	
 	//// INPUT element
 	// type = TEXT | PASSWORD | CHECKBOX | RADIO | SUBMIT | RESET | FILE | HIDDEN | IMAGE | BUTTON
 	// name
@@ -107,18 +96,6 @@ class Form {
 	// onselect -  INPUT and TEXTAREA
 	// onchange
 	function addInput($arguments) {
-		if(strcmp(gettype($arguments),"array"))
-			$this->OutputError("arguments must be array","AddInput");
-			
-		if(!isset($arguments["type"]) || !strcmp($arguments["type"],""))
-			return($this->OutputError("Type not defined","AddInput"));
-			
-		if(!isset($arguments["name"]) || !strcmp($arguments["name"],""))
-			return($this->OutputError("Name of element not defined","AddInput"));
-			
-		if (isset($this->mElements[$arguments["name"]]))
-		    return($this->OutputError("it was specified '".$arguments["name"]."' name of an already defined input","AddInput"));
-			
 		switch($arguments["type"]) {
 		    
 			case "textfield":
@@ -201,9 +178,6 @@ class Form {
 			    $el = new UploadFile($arguments["name"]);
 			    if (isset($arguments["maxsize"])) $el->setMaxSize($arguments["maxsize"]);
 			    break;
-			      
-			default:
-				return($this->OutputError("Type not found for input element","AddInput"));
 		}
 		if ($el!=null) {
 			$el->setFormName($this->name);
@@ -227,11 +201,8 @@ class Form {
 	
 	function addInputElement(&$el) {
 		if ($el && is_object($el)) {
-			if (!$el->getName())
-			    return($this->OutputError("no name in element","addInputElement"));
-			    
-			if (isset($GLOBALS["I18N"])) $el->setLocalization($GLOBALS["I18N"]);
-		
+                        if (isset($GLOBALS["I18N"])) $el->setLocalization($GLOBALS["I18N"]);
+
 			$el->setFormName($this->name);
 			$this->mElements[$el->getName()] = &$el;
 		}
