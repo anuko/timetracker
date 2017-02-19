@@ -145,8 +145,8 @@ $i18n_key_words = array(
 'label.password' => 'Adgangskode',
 'label.confirm_password' => 'Gentag adgangskode',
 'label.email' => 'E-mail',
+'label.date' => 'Dato',
 // TODO: Translate the following.
-// 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 'label.user' => 'Bruger',
@@ -162,10 +162,11 @@ $i18n_key_words = array(
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
-// 'label.start' => 'Start',
-// 'label.finish' => 'Finish',
-// 'label.duration' => 'Duration',
-// 'label.note' => 'Note',
+'label.start' => 'Start',
+'label.finish' => 'Slut',
+'label.duration' => 'Varighed',
+'label.note' => 'Notat',
+// TODO: Translate the following.
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
@@ -357,7 +358,7 @@ $i18n_key_words = array(
 // 'form.reports.show_fields' => 'Show fields',
 // 'form.reports.group_by' => 'Group by',
 // 'form.reports.group_by_no' => '--- no grouping ---',
-// 'form.reports.group_by_date' => 'date',
+'form.reports.group_by_date' => 'dato',
 'form.reports.group_by_user' => 'bruger',
 // TODO: Translate the following.
 // 'form.reports.group_by_client' => 'client',
@@ -437,8 +438,9 @@ $i18n_key_words = array(
 // 'form.profile.12_hours' => '12 hours',
 // 'form.profile.24_hours' => '24 hours',
 // 'form.profile.tracking_mode' => 'Tracking mode',
-// 'form.profile.mode_time' => 'time',
-// 'form.profile.mode_projects' => 'projects',
+'form.profile.mode_time' => 'tid',
+'form.profile.mode_projects' => 'projekter',
+// TODO: Translate the following.
 // 'form.profile.mode_projects_and_tasks' => 'projects and tasks',
 // 'form.profile.record_type' => 'Record type',
 // 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
@@ -471,28 +473,7 @@ $i18n_key_words = array(
 
 // TODO: refactoring ongoing down form here. All these below are old string, but perhaps we can reuse some of them above...
 
-// my time form attributes
-"form.mytime.edit_title" => 'rediger tids post',
-"form.mytime.del_str" => 'slet tids post',
-// Note to translators: "form.mytime.time_form" => ' (hh:mm)', // the string must be translated
-"form.mytime.date" => 'Dato',
-"form.mytime.project" => 'Projekt',
-"form.mytime.activity" => 'Aktivitet',
-"form.mytime.start" => 'Start',
-"form.mytime.finish" => 'Slut',
-"form.mytime.duration" => 'Varighed',
-"form.mytime.note" => 'Notat',
-"form.mytime.behalf" => 'dagligt arbejde for',
-"form.mytime.daily" => 'dagligt arbejde',
 "form.mytime.total" => 'timer i alt: ',
-"form.mytime.th.project" => 'projekt',
-"form.mytime.th.activity" => 'aktivitet',
-"form.mytime.th.start" => 'start',
-"form.mytime.th.finish" => 'slut',
-"form.mytime.th.duration" => 'varighed',
-"form.mytime.th.note" => 'notat',
-"form.mytime.th.edit" => 'rediger',
-"form.mytime.th.delete" => 'slet',
 "form.mytime.del_yes" => 'tids post slettet',
 "form.mytime.no_finished_rec" => 'denne post er gemt med kun en start tid. Det er ikke nødvendigvis en fejl. Du kan nu logge af.',
 // Note to translators: the 3 strings below are missing in the translation and need to be added
