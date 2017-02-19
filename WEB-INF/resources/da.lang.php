@@ -150,15 +150,16 @@ $i18n_key_words = array(
 // 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
-// 'label.user' => 'User',
+'label.user' => 'Bruger',
 'label.users' => 'Brugere',
 // TODO: Translate the following.
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
-// 'label.project' => 'Project',
-// 'label.projects' => 'Projects',
+'label.project' => 'Projekt',
+'label.projects' => 'Projekter',
+// TODO: Translate the following.
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -201,7 +202,8 @@ $i18n_key_words = array(
 // 'label.on_behalf' => 'on behalf of',
 // 'label.role_manager' => '(manager)',
 // 'label.role_comanager' => '(co-manager)',
-// 'label.role_admin' => '(administrator)',
+// TODO: Translate the following.
+'label.role_admin' => '(administrator)',
 // 'label.page' => 'Page',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 // 'label.custom_fields' => 'Custom fields',
@@ -210,7 +212,8 @@ $i18n_key_words = array(
 // 'label.type_dropdown' => 'dropdown',
 // 'label.type_text' => 'text',
 // 'label.required' => 'Required',
-// 'label.fav_report' => 'Favorite report',
+'label.fav_report' => 'Favorit rapport',
+// TODO: Translate the following.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
@@ -218,24 +221,151 @@ $i18n_key_words = array(
 
 
 // Form titles.
-// TODO: refactoring ongoing down from here.
+'title.login' => 'Login',
+// TODO: Translate the following.
+// 'title.teams' => 'Teams',
+// 'title.create_team' => 'Creating Team',
+// 'title.edit_team' => 'Editing Team',
+// 'title.delete_team' => 'Deleting Team',
+// 'title.reset_password' => 'Resetting Password',
+// 'title.change_password' => 'Changing Password',
+// 'title.time' => 'Time',
+// 'title.edit_time_record' => 'Editing Time Record',
+// 'title.delete_time_record' => 'Deleting Time Record',
+// 'title.expenses' => 'Expenses',
+// 'title.edit_expense' => 'Editing Expense Item',
+// 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+// 'title.reports' => 'Reports',
+// 'title.report' => 'Report',
+// 'title.send_report' => 'Sending Report',
+// 'title.invoice' => 'Invoice',
+// 'title.send_invoice' => 'Sending Invoice',
+// 'title.charts' => 'Charts',
+'title.projects' => 'Projekter',
+// TODO: Translate the following.
+// 'title.add_project' => 'Adding Project',
+// 'title.edit_project' => 'Editing Project',
+// 'title.delete_project' => 'Deleting Project',
+// 'title.tasks' => 'Tasks',
+// 'title.add_task' => 'Adding Task',
+// 'title.edit_task' => 'Editing Task',
+// 'title.delete_task' => 'Deleting Task',
+// 'title.users' => 'Users',
+// 'title.add_user' => 'Adding User',
+// 'title.edit_user' => 'Editing User',
+// 'title.delete_user' => 'Deleting User',
+// 'title.clients' => 'Clients',
+// 'title.add_client' => 'Adding Client',
+// 'title.edit_client' => 'Editing Client',
+// 'title.delete_client' => 'Deleting Client',
+// 'title.invoices' => 'Invoices',
+// 'title.add_invoice' => 'Adding Invoice',
+// 'title.view_invoice' => 'Viewing Invoice',
+// 'title.delete_invoice' => 'Deleting Invoice',
+// 'title.notifications' => 'Notifications',
+// 'title.add_notification' => 'Adding Notification',
+// 'title.edit_notification' => 'Editing Notification',
+// 'title.delete_notification' => 'Deleting Notification',
+// 'title.monthly_quotas' => 'Monthly Quotas',
+// 'title.export' => 'Exporting Team Data',
+// 'title.import' => 'Importing Team Data',
 'title.options' => 'Indstillinger',
-// TODO: almost entire title section is missing here. See the English file.
+// TODO: Translate the following.
+// 'title.profile' => 'Profile',
+// 'title.cf_custom_fields' => 'Custom Fields',
+// 'title.cf_add_custom_field' => 'Adding Custom Field',
+// 'title.cf_edit_custom_field' => 'Editing Custom Field',
+// 'title.cf_delete_custom_field' => 'Deleting Custom Field',
+// 'title.cf_dropdown_options' => 'Dropdown Options',
+// 'title.cf_add_dropdown_option' => 'Adding Option',
+// 'title.cf_edit_dropdown_option' => 'Editing Option',
+// 'title.cf_delete_dropdown_option' => 'Deleting Option',
+// NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
+// It is also a name for the Locking plugin on the Team profile page.
+// 'title.locking' => 'Locking',
 
+// Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
+// Strings that are used in a single form must go to the specific form section.
+// TODO: Translate the following.
+// 'dropdown.all' => '--- all ---',
+// 'dropdown.no' => '--- no ---',
+// NOTE TO TRANSLATORS: dropdown.this_day does not necessarily means "today". It means a specific ("this") day selected on calendar. See Charts.
+// TODO: Translate the following.
+// 'dropdown.this_day' => 'this day',
+// 'dropdown.this_week' => 'this week',
+// 'dropdown.last_week' => 'last week',
+// 'dropdown.this_month' => 'this month',
+// 'dropdown.last_month' => 'last month',
+// 'dropdown.this_year' => 'this year',
+// 'dropdown.all_time' => 'all time',
+'dropdown.projects' => 'projekter',
+// TODO: Translate the following.
+// 'dropdown.tasks' => 'tasks',
+// 'dropdown.clients' => 'clients',
+// 'dropdown.select' => '--- select ---',
+// 'dropdown.select_invoice' => '--- select invoice ---',
+// 'dropdown.status_active' => 'active',
+// 'dropdown.status_inactive' => 'inactive',
+// 'dropdown.delete'=>'delete',
+// 'dropdown.do_not_delete'=>'do not delete',
 
-"form.filter.project" => 'projekt',
-"form.filter.filter" => 'favorit rapport',
-"form.filter.filter_new" => 'gem som favorit',
-// Note to translators: the string below is missing in the translation and must be added
-"form.filter.filter_confirm_delete" => 'Er du sikker på at du vil slette denne favorit rapport?',
+// Login form. See example at https://timetracker.anuko.com/login.php.
+// TODO: Translate the following.
+// 'form.login.forgot_password' => 'Forgot password?',
+// 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
-// login form attributes
-"form.login.title" => 'login',
-"form.login.login" => 'login',
+// Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
+// TODO: Translate the following.
+// 'form.reset_password.message' => 'Password reset request sent by email.',
+// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+
+// Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
+// TODO: Translate the following.
+// 'form.change_password.tip' => 'Type new password and click on Save.',
+
+// Time form. See example at https://timetracker.anuko.com/time.php.
+// TODO: Translate the following.
+// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+// 'form.time.billable' => 'Billable',
+// 'form.time.uncompleted' => 'Uncompleted',
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
+
+// Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
+// TODO: Translate the following.
+// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
+
+// Reports form. See example at https://timetracker.anuko.com/reports.php
+'form.reports.save_as_favorite' => 'Gem som favorit',
+'form.reports.confirm_delete' => 'Er du sikker på at du vil slette denne favorit rapport?',
+// TODO: Translate the following.
+// 'form.reports.include_records' => 'Include records',
+// 'form.reports.include_billable' => 'billable',
+// 'form.reports.include_not_billable' => 'not billable',
+// 'form.reports.include_invoiced' => 'invoiced',
+// 'form.reports.include_not_invoiced' => 'not invoiced',
+// 'form.reports.select_period' => 'Select time period',
+// 'form.reports.set_period' => 'or set dates',
+// 'form.reports.show_fields' => 'Show fields',
+// 'form.reports.group_by' => 'Group by',
+// 'form.reports.group_by_no' => '--- no grouping ---',
+// 'form.reports.group_by_date' => 'date',
+'form.reports.group_by_user' => 'bruger',
+// TODO: Translate the following.
+// 'form.reports.group_by_client' => 'client',
+'form.reports.group_by_project' => 'projekt',
+// TODO: Translate the following.
+// 'form.reports.group_by_task' => 'task',
+// 'form.reports.totals_only' => 'Totals only',
+
+// TODO: refactoring ongoing down form here.
 
 // password reminder form attributes
-"form.fpass.title" => 'nulstil adgangskode',
-"form.fpass.login" => 'login',
 "form.fpass.send_pass_str" => 'ønske om ny adgangskode sendt',
 "form.fpass.send_pass_subj" => 'Nulstil Anuko Time Tracker adgangskode',
 // Note to translators: this string needs to be translated.
@@ -243,7 +373,6 @@ $i18n_key_words = array(
 "form.fpass.reset_comment" => "for at nulstille din adgangskode, tast det og klik gem",
 
 // administrator form
-"form.admin.title" => 'administrator',
 // Note to translators: "form.admin.duty_text" => 'Lav et nyt team, ved at lave en team manager konto.<br>Du kan ogsе importerer fra en xml fil fra en anden Anuko Time Tracker server (no login collisions are allowed).', // the phrase in brackets must be translated
 
 "form.admin.change_pass" => 'Skift adgangskode på administrator konto',
