@@ -41,7 +41,7 @@ class CheckboxGroup extends FormElement {
 
 	function __construct($name,$value="")
 	{
-		$this->mName			= $name;
+		$this->name			= $name;
 		$this->mValue			= $value;
 	}
 
@@ -69,7 +69,7 @@ class CheckboxGroup extends FormElement {
 	function toStringControl()	{
 		if (!$this->isRenderable()) return "";
 	    
-	    if ($this->mId=="") $this->mId = $this->mName;
+	    if ($this->id=="") $this->id = $this->name;
 	    
 	    $renderArray = array();
 	    $renderCols = 0;
@@ -86,14 +86,14 @@ class CheckboxGroup extends FormElement {
 						$optkey = $optval[$this->mDataKeys[0]];
 						$optval = $optval[$this->mDataKeys[1]];
 					}
-			    	$html = "<input type=\"checkbox\" name=\"$this->mName[]\" id=\"$this->mId"."_".$i."\"";
+			    	$html = "<input type=\"checkbox\" name=\"$this->name[]\" id=\"$this->id"."_".$i."\"";
 			    	if (is_array($this->mValue)) {
 			    		foreach ($this->mValue as $value) {
 			    			if (($value == $optkey) && ($value != null))
 			    				$html .= " checked=\"true\"";
 			    		}
 			    	}
-				   	$html .= " value=\"".htmlspecialchars($optkey)."\">&nbsp;<label for=\"$this->mId"."_".$i."\">".htmlspecialchars($optval)."</label>";
+				   	$html .= " value=\"".htmlspecialchars($optkey)."\">&nbsp;<label for=\"$this->id"."_".$i."\">".htmlspecialchars($optval)."</label>";
 				   	$renderArray[$col][$row] = $html;
 				   	
 			    	$col++;			    	
@@ -114,14 +114,14 @@ class CheckboxGroup extends FormElement {
 						$optkey = $optval[$this->mDataKeys[0]];
 						$optval = $optval[$this->mDataKeys[1]];
 					}
-			    	$html = "<input type=\"checkbox\" name=\"$this->mName[]\" id=\"$this->mId"."_".$i."\"";
+			    	$html = "<input type=\"checkbox\" name=\"$this->name[]\" id=\"$this->id"."_".$i."\"";
 			    	if (is_array($this->mValue)) {
 			    		foreach ($this->mValue as $value) {
 			    			if (($value == $optkey) && ($value != null))
 			    				$html .= " checked=\"true\"";
 			    		}
 			    	}
-				   	$html .= " value=\"".htmlspecialchars($optkey)."\">&nbsp;<label for=\"$this->mId"."_".$i."\">".htmlspecialchars($optval)."</label>";
+				   	$html .= " value=\"".htmlspecialchars($optkey)."\">&nbsp;<label for=\"$this->id"."_".$i."\">".htmlspecialchars($optval)."</label>";
 				   	$renderArray[$col][$row] = $html;
 
 				   	$row++;

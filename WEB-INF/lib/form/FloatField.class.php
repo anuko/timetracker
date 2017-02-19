@@ -35,7 +35,7 @@ class FloatField extends TextField {
   var $cClassName = 'FloatField';
 
   function __construct($name) {
-    $this->mName = $name;
+    $this->name = $name;
   }
 
   function setLocalization($i18n) {

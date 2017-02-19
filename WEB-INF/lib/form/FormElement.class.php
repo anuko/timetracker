@@ -26,10 +26,11 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
+// FromElement is the base class for controls on forms.
 class FormElement {
-	var $mId			= "";
-	var $mName;
-	var $mFormName		= "";
+  var $id = "";
+  var $name;
+  var $form_name = "";
 	var $mValue			= "";
 	var $mSize			= "";
 	var $mMaxLength		= "";
@@ -52,11 +53,11 @@ class FormElement {
 
 	function getClass()	{ return $this->cClassName; }
 	
-	function setName($name)	{ $this->mName = $name;	}
-	function getName()	{ return $this->mName; }
+	function setName($name)	{ $this->name = $name;	}
+	function getName()	{ return $this->name; }
 	
-	function setFormName($name)	{ $this->mFormName = $name;	}
-	function getFormName()	{ return $this->mFormName; }
+	function setFormName($name) { $this->form_name = $name; }
+	function getFormName()	{ return $this->form_name; }
 	
 	function setValue($value)	{ $this->mValue = $value;}
 	function getValue() { return $this->mValue; }
@@ -64,8 +65,8 @@ class FormElement {
 	function setValueSafe($value)	{ $this->mValue = $value;}
 	function getValueSafe() { return $this->mValue; }
 
-	function setId($id)	{ $this->mId = $id;	}
-	function getId() { return $this->mId; }
+	function setId($id)	{ $this->id = $id;	}
+	function getId() { return $this->id; }
 	
 	function setSize($value)	{ $this->mSize = $value; }
 	function getSize() { return $this->mSize; }
@@ -104,7 +105,7 @@ class FormElement {
 	}
 	
 	function toStringLabel() {
-	    return "<label for=\"" . $this->mId . "\">" . $this->mLabel . "</label>";
+	    return "<label for=\"" . $this->id . "\">" . $this->mLabel . "</label>";
 	}
 	
 	function toArray() {

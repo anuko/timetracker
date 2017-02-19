@@ -37,7 +37,7 @@ class TextArea extends FormElement {
 
 	function __construct($name,$value="")
 	{
-		$this->mName			= $name;
+		$this->name			= $name;
 		$this->mValue			= $value;
 	}
 	
@@ -50,12 +50,12 @@ class TextArea extends FormElement {
 	function toStringControl()	{
 		if (!$this->isRenderable()) return "";
 	    
-	    if ($this->mId=="") $this->mId = $this->mName;
+	    if ($this->id=="") $this->id = $this->mName;
 	    
 	    $js_maxlen = "";
 	    
 		$html = "\n\t<textarea";
-		$html .= " name=\"$this->mName\" id=\"$this->mId\"";
+		$html .= " name=\"$this->name\" id=\"$this->id\"";
 		
 		if ($this->mColumns!="")
 		  $html .= " cols=\"$this->mColumns\"";
@@ -65,7 +65,7 @@ class TextArea extends FormElement {
 		   
 		if ($this->mMaxLength!="") {
 			if ($this->mOnKeyPress) $this->mOnKeyPress .= ";";
-			$this->mOnKeyPress .= "return validateMaxLenght_".$this->mName."(this, event);";
+			$this->mOnKeyPress .= "return validateMaxLenght_".$this->name."(this, event);";
 			$js_maxlen = $this->getExtraScript();
 			$html .= " maxlength=\"$this->mMaxLength\"";
 		}
@@ -86,7 +86,7 @@ class TextArea extends FormElement {
 	function getExtraScript() {
 		$s = "<script>\n";
 		$s .= "var isNS4 = (navigator.appName==\"Netscape\")?1:0;\n";
-		$s .= "function validateMaxLenght_".$this->mName."(element, event) {\n";
+		$s .= "function validateMaxLenght_".$this->name."(element, event) {\n";
 		$s .= "\tmaxlength=".$this->mMaxLength.";\n";
 		$s .= "\tvar iKey = (!isNS4?event.keyCode:event.which);\n";
 		//$s .= "alert(iKey);";

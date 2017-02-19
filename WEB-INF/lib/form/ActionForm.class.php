@@ -62,8 +62,8 @@ class ActionForm {
 	}
 
     function setName($name) {
-		$this->mName = $name;
-		$this->mSessionCell = "formbean_".$this->mName;
+		$this->name = $name;
+		$this->mSessionCell = "formbean_".$this->name;
 	}
     
     /**

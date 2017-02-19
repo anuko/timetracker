@@ -34,16 +34,16 @@ class Hidden extends FormElement {
 
 	function __construct($name,$value="")
 	{
-		$this->mName			= $name;
+		$this->name			= $name;
 		$this->mValue			= $value;
 	}
 
 	function toStringControl()	{
 	    
-	    if ($this->mId=="") $this->mId = $this->mName;
+	    if ($this->id=="") $this->id = $this->name;
 	    
 		$html = "\n\t<input";
-		$html .= " type=\"hidden\" name=\"$this->mName\" id=\"$this->mId\"";
+		$html .= " type=\"hidden\" name=\"$this->name\" id=\"$this->id\"";
 		
 		$html .= " value=\"".$this->getValue()."\"";
 		$html .= ">";

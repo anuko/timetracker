@@ -48,7 +48,7 @@ class Table extends FormElement {
   var $mProccessed    = false;
 	
   function __construct($name, $value='') {
-    $this->mName = $name;
+    $this->name = $name;
     $this->mValue = $value;
   }
   

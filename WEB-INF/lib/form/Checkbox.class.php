@@ -35,7 +35,7 @@ class Checkbox extends FormElement {
 
 	function __construct($name,$value="")
 	{
-		$this->mName			= $name;
+		$this->name			= $name;
 		$this->mValue			= $value;
 	}
 
@@ -48,10 +48,10 @@ class Checkbox extends FormElement {
 	function toStringControl()	{
 		if (!$this->isRenderable()) return "";
 	    
-	    if ($this->mId=="") $this->mId = $this->mName;
+	    if ($this->id=="") $this->id = $this->name;
 	    
 		$html = "\n\t<input type=\"checkbox\"";
-		$html .= " name=\"$this->mName\" id=\"$this->mId\"";
+		$html .= " name=\"$this->name\" id=\"$this->id\"";
 		
 		if ($this->mTabindex!="")
 		   $html .= " tabindex=\"$this->mTabindex\"";

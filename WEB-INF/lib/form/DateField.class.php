@@ -40,7 +40,7 @@ class DateField extends TextField {
   var $lCalendarButtons = array('today'=>'Today', 'close'=>'Close');
 
   function __construct($name) {
-    $this->mName  = $name;
+    $this->name  = $name;
     $this->mDateObj  = new DateAndTime();
 
     if (isset($GLOBALS["I18N"])) {
@@ -86,10 +86,10 @@ class DateField extends TextField {
 
     if (!$this->isEnable()) {
       $html = htmlspecialchars($this->getValue()).
-        "<input type=\"hidden\" name=\"$this->mName\" value=\"".htmlspecialchars($this->getValue())."\">\n";
+        "<input type=\"hidden\" name=\"$this->name\" value=\"".htmlspecialchars($this->getValue())."\">\n";
     } else {
 
-        if ($this->mId=="") $this->mId = $this->mName;
+        if ($this->id=="") $this->id = $this->name;
 
       $html = "";
 
@@ -393,7 +393,7 @@ class DateField extends TextField {
       $html .= "</script>\n";
 
       $html .= "\n\t<input type=\"text\"";
-      $html .= " name=\"$this->mName\" id=\"$this->mId\"";
+      $html .= " name=\"$this->name\" id=\"$this->id\"";
 
       if ($this->mSize!="")
         $html .= " size=\"$this->mSize\"";
@@ -418,7 +418,7 @@ class DateField extends TextField {
       if (APP_NAME)
       	$app_root = '/'.APP_NAME;
 
-      $html .= "&nbsp;<img src=\"".$app_root."/images/calendar.gif\" width=\"16\" height=\"16\" onclick=\"displayDatePicker('".$this->mName."');\">\n";
+      $html .= "&nbsp;<img src=\"".$app_root."/images/calendar.gif\" width=\"16\" height=\"16\" onclick=\"displayDatePicker('".$this->name."');\">\n";
     }
 
     return $html;

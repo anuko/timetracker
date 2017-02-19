@@ -35,7 +35,7 @@ class UploadFile extends FormElement {
 
 	function __construct($name,$value="")
 	{
-		$this->mName			= $name;
+		$this->name			= $name;
 		$this->mValue			= $value;
 	}
 	
@@ -45,24 +45,15 @@ class UploadFile extends FormElement {
 	function toStringControl()	{
 		if (!$this->isRenderable()) return "";
 	    
-	    if ($this->mId=="") $this->mId = $this->mName;
+	    if ($this->id=="") $this->id = $this->name;
 	    
 		$html = "\n\t<input type=\"hidden\" name=\"MAX_FILE_SIZE\" value=\"".$this->mMaxSize."\"/>";
 		$html .= "\n\t<input";
-		$html .= " name=\"$this->mName\" id=\"$this->mId\"";
+		$html .= " name=\"$this->name\" id=\"$this->id\"";
 		
 		$html .= " type=\"file\"";
 		$html .= ">";
-		
-		// only IE
-		/*$html = "<input type=\"file\" name=\"".$this->mName."\" id=\"".$this->mId."\" style=\"display: none;\">\n";
-		$html .= "<input type=\"text\" name=\"".$this->mName."file\">\n";
-		$html .= "<input type=\"button\" 
-			style=\"text-align:center;\" onClick=\"".$this->mName.".click();".$this->mName."file.value=".$this->mName.".value;".$this->mName.".disabled=true;\"";
-		$html .= " value=\"".$this->getValue()."\">\n";
-		$html .= "<input type=\"hidden\" name=\"MAX_FILE_SIZE\" value=\"".$this->mMaxSize."\"/>";*/
-		
-		
-		return $html;
+
+                return $html;
 	}
 }

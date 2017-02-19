@@ -35,7 +35,7 @@ class TextField extends FormElement {
 
 	function __construct($name,$value="")
 	{
-		$this->mName			= $name;
+		$this->name			= $name;
 		$this->mValue			= $value;
 	}
 	
@@ -46,14 +46,14 @@ class TextField extends FormElement {
 		if (!$this->isRenderable()) return "";
 	    
 		if (!$this->isEnable()) {
-			$html = "<input name=\"$this->mName\" value=\"".htmlspecialchars($this->getValue())."\" readonly>\n";  
+			$html = "<input name=\"$this->name\" value=\"".htmlspecialchars($this->getValue())."\" readonly>\n";
 		} else {
 			
-		    if ($this->mId=="") $this->mId = $this->mName;
+		    if ($this->id=="") $this->id = $this->name;
 		    
 			$html = "\n\t<input";
 			$html .= ( $this->mPassword ? " type=\"password\"" : " type=\"text\"");
-			$html .= " name=\"$this->mName\" id=\"$this->mId\"";
+			$html .= " name=\"$this->name\" id=\"$this->id\"";
 			
 			if ($this->mSize!="")
 			  $html .= " size=\"$this->mSize\"";

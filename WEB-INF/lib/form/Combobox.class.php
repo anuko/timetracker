@@ -48,7 +48,7 @@ class Combobox extends FormElement {
 
 	function __construct($name,$value="")
 	{
-		$this->mName			= $name;
+		$this->name			= $name;
 		$this->mValue			= $value;
 	}
 
@@ -68,10 +68,10 @@ class Combobox extends FormElement {
 	function toStringControl()	{
 		if (!$this->isRenderable()) return "";
 	    
-	    if ($this->mId=="") $this->mId = $this->mName;
+	    if ($this->id=="") $this->id = $this->name;
 	    
 		$html = "\n\t<select";
-		$html .= " name=\"$this->mName\" id=\"$this->mId\"";
+		$html .= " name=\"$this->name\" id=\"$this->id\"";
 		
 		if ($this->mSize!="")
 		  $html .= " size=\"$this->mSize\"";

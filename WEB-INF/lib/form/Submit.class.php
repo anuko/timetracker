@@ -33,17 +33,17 @@ class Submit extends FormElement {
 
 	function __construct($name,$value="")
 	{
-		$this->mName			= $name;
+		$this->name			= $name;
 		$this->mValue			= $value;
 	}
 
 	function toStringControl()	{
 		if (!$this->isRenderable()) return "";
 	    
-	    if ($this->mId=="") $this->mId = $this->mName;
+	    if ($this->id=="") $this->id = $this->name;
 	    
 		$html = "\n\t<input";
-		$html .= " type=\"submit\" name=\"$this->mName\" id=\"$this->mId\"";
+		$html .= " type=\"submit\" name=\"$this->name\" id=\"$this->id\"";
 		
 		if (!$this->isEnable()) {
 			$html .= " disabled=\"true\"";
