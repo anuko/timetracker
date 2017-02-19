@@ -73,8 +73,8 @@ class Combobox extends FormElement {
 		$html = "\n\t<select";
 		$html .= " name=\"$this->name\" id=\"$this->id\"";
 		
-		if ($this->mSize!="")
-		  $html .= " size=\"$this->mSize\"";
+		if ($this->size!="")
+		  $html .= " size=\"$this->size\"";
 		 
 		if ($this->mMultiple)
 		  $html .= " multiple";

@@ -54,14 +54,14 @@ class TextField extends FormElement {
 			$html .= ( $this->mPassword ? " type=\"password\"" : " type=\"text\"");
 			$html .= " name=\"$this->name\" id=\"$this->id\"";
 			
-			if ($this->mSize!="")
-			  $html .= " size=\"$this->mSize\"";
+			if ($this->size!="")
+			  $html .= " size=\"$this->size\"";
 			  
 			if ($this->mStyle!="")
 			   $html .= " style=\"$this->mStyle\"";
 			  
-			if ($this->mMaxLength!="")
-			   $html .= " maxlength=\"$this->mMaxLength\"";
+			if ($this->max_length!="")
+			   $html .= " maxlength=\"$this->max_length\"";
 			   
 			if ($this->mOnChange!="")
 			   $html .= " onchange=\"$this->mOnChange\"";

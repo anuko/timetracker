@@ -62,11 +62,11 @@ class TextArea extends FormElement {
 		if ($this->mRows!="")
 		   $html .= " rows=\"$this->mRows\"";
 		   
-		if ($this->mMaxLength!="") {
+		if ($this->max_length!="") {
 			if ($this->mOnKeyPress) $this->mOnKeyPress .= ";";
 			$this->mOnKeyPress .= "return validateMaxLenght_".$this->name."(this, event);";
 			$js_maxlen = $this->getExtraScript();
-			$html .= " maxlength=\"$this->mMaxLength\"";
+			$html .= " maxlength=\"$this->max_length\"";
 		}
 
 		if ($this->mStyle!="")
@@ -86,7 +86,7 @@ class TextArea extends FormElement {
 		$s = "<script>\n";
 		$s .= "var isNS4 = (navigator.appName==\"Netscape\")?1:0;\n";
 		$s .= "function validateMaxLenght_".$this->name."(element, event) {\n";
-		$s .= "\tmaxlength=".$this->mMaxLength.";\n";
+		$s .= "\tmaxlength=".$this->max_length.";\n";
 		$s .= "\tvar iKey = (!isNS4?event.keyCode:event.which);\n";
 		//$s .= "alert(iKey);";
 		$s .= "\tvar re = new RegExp(\"".'\r\n'."\",\"g\");\n";

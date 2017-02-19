@@ -395,8 +395,8 @@ class DateField extends TextField {
       $html .= "\n\t<input type=\"text\"";
       $html .= " name=\"$this->name\" id=\"$this->id\"";
 
-      if ($this->mSize!="")
-        $html .= " size=\"$this->mSize\"";
+      if ($this->size!="")
+        $html .= " size=\"$this->size\"";
 
       if ($this->mStyle!="")
          $html .= " style=\"$this->mStyle\"";

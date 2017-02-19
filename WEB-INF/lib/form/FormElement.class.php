@@ -32,9 +32,9 @@ class FormElement {
   var $name;
   var $form_name = '';
   var $value = '';
+  var $size = '';
+  var $max_length = '';
   // TODO: refactoring ongoing down from here.
-	var $mSize			= "";
-	var $mMaxLength		= "";
 	var $mTabindex		= "";
 	var $mAccesskey     = "";
 	var $mOnSelect		= "";
@@ -66,22 +66,22 @@ class FormElement {
 	function setValueSafe($value) { $this->value = $value;}
 	function getValueSafe() { return $this->value; }
 
-	function setId($id)	{ $this->id = $id;	}
+	function setId($id) { $this->id = $id;	}
 	function getId() { return $this->id; }
 	
-	function setSize($value)	{ $this->mSize = $value; }
-	function getSize() { return $this->mSize; }
+	function setSize($value) { $this->size = $value; }
+	function getSize() { return $this->size; }
 
 	function setLabel($label)	{ $this->mLabel = $label; }
 	function getLabel() { return $this->mLabel; }
 	
-	function setMaxLength($value)	{ $this->mMaxLength = $value; }
-	function getMaxLength() { return $this->mMaxLength; }
+	function setMaxLength($value) { $this->max_length = $value; }
+	function getMaxLength() { return $this->max_length; }
 	
-	function setTabindex($value)	{ $this->mTabindex = $value; }
+	function setTabindex($value) { $this->mTabindex = $value; }
 	function getTabindex() { return $this->mTabindex; }
 	
-	function setAccesskey($value)	{ $this->mAccesskey = $value; }
+	function setAccesskey($value) { $this->mAccesskey = $value; }
 	function getAccesskey() { return $this->mAccesskey; }
 
 	function setStyle($value)	{ $this->mStyle = $value; }
