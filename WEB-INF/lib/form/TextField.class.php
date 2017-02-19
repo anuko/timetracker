@@ -29,14 +29,13 @@
 import('form.FormElement');
 	
 class TextField extends FormElement {
-    var $mValue;
     var $mPassword	= false;
     var $cClassName		= "TextField";
 
 	function __construct($name,$value="")
 	{
-		$this->name			= $name;
-		$this->mValue			= $value;
+		$this->name = $name;
+		$this->value = $value;
 	}
 	
 	function setAsPassword($name)	{ $this->mPassword = $name;	}

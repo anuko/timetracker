@@ -41,8 +41,8 @@ class CheckboxGroup extends FormElement {
 
 	function __construct($name,$value="")
 	{
-		$this->name			= $name;
-		$this->mValue			= $value;
+		$this->name = $name;
+		$this->value = $value;
 	}
 
 	function setChecked($value)	{ $this->mChecked = $value; }
@@ -87,9 +87,9 @@ class CheckboxGroup extends FormElement {
 						$optval = $optval[$this->mDataKeys[1]];
 					}
 			    	$html = "<input type=\"checkbox\" name=\"$this->name[]\" id=\"$this->id"."_".$i."\"";
-			    	if (is_array($this->mValue)) {
-			    		foreach ($this->mValue as $value) {
-			    			if (($value == $optkey) && ($value != null))
+			    	if (is_array($this->value)) {
+			    		foreach ($this->value as $element) {
+			    			if (($element == $optkey) && ($element != null))
 			    				$html .= " checked=\"true\"";
 			    		}
 			    	}
@@ -115,9 +115,9 @@ class CheckboxGroup extends FormElement {
 						$optval = $optval[$this->mDataKeys[1]];
 					}
 			    	$html = "<input type=\"checkbox\" name=\"$this->name[]\" id=\"$this->id"."_".$i."\"";
-			    	if (is_array($this->mValue)) {
-			    		foreach ($this->mValue as $value) {
-			    			if (($value == $optkey) && ($value != null))
+			    	if (is_array($this->value)) {
+			    		foreach ($this->value as $element) {
+			    			if (($element == $optkey) && ($element != null))
 			    				$html .= " checked=\"true\"";
 			    		}
 			    	}

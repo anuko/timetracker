@@ -35,8 +35,8 @@ class Checkbox extends FormElement {
 
 	function __construct($name,$value="")
 	{
-		$this->name			= $name;
-		$this->mValue			= $value;
+		$this->name = $name;
+		$this->value = $value;
 	}
 
 	function setChecked($value)	{ $this->mChecked = $value; }
@@ -62,7 +62,7 @@ class Checkbox extends FormElement {
 		if ($this->mStyle!="")
 		   $html .= " style=\"$this->mStyle\"";
 
-		if ($this->mChecked || (($this->mValue == $this->mOptions) && ($this->mValue != null)))
+		if ($this->mChecked || (($this->value == $this->mOptions) && ($this->value != null)))
 		   $html .= " checked=\"true\"";
 		   
 		if (!$this->isEnable())

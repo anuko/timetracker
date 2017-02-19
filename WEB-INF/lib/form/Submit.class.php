@@ -33,8 +33,8 @@ class Submit extends FormElement {
 
 	function __construct($name,$value="")
 	{
-		$this->name			= $name;
-		$this->mValue			= $value;
+		$this->name = $name;
+		$this->value = $value;
 	}
 
 	function toStringControl()	{
@@ -49,7 +49,7 @@ class Submit extends FormElement {
 			$html .= " disabled=\"true\"";
 		}
 		
-		$html .= " value=\"$this->mValue\"";
+		$html .= " value=\"$this->value\"";
 		
 		if ($this->mOnClick) {
 			$html .= " onclick=\"".$this->mOnClick."\"";

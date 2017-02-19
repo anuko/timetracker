@@ -28,10 +28,11 @@
 
 // FromElement is the base class for controls on forms.
 class FormElement {
-  var $id = "";
+  var $id = '';
   var $name;
-  var $form_name = "";
-	var $mValue			= "";
+  var $form_name = '';
+  var $value = '';
+  // TODO: refactoring ongoing down from here.
 	var $mSize			= "";
 	var $mMaxLength		= "";
 	var $mTabindex		= "";
@@ -53,17 +54,17 @@ class FormElement {
 
 	function getClass()	{ return $this->cClassName; }
 	
-	function setName($name)	{ $this->name = $name;	}
+	function setName($name)	{ $this->name = $name; }
 	function getName()	{ return $this->name; }
 	
 	function setFormName($name) { $this->form_name = $name; }
 	function getFormName()	{ return $this->form_name; }
 	
-	function setValue($value)	{ $this->mValue = $value;}
-	function getValue() { return $this->mValue; }
+	function setValue($value) { $this->value = $value;}
+	function getValue() { return $this->value; }
 	
-	function setValueSafe($value)	{ $this->mValue = $value;}
-	function getValueSafe() { return $this->mValue; }
+	function setValueSafe($value) { $this->value = $value;}
+	function getValueSafe() { return $this->value; }
 
 	function setId($id)	{ $this->id = $id;	}
 	function getId() { return $this->id; }

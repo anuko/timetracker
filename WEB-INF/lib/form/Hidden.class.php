@@ -29,13 +29,12 @@
 import('form.FormElement');
 	
 class Hidden extends FormElement {
-    var $mValue;
     var $cClassName	= "Hidden";
 
 	function __construct($name,$value="")
 	{
-		$this->name			= $name;
-		$this->mValue			= $value;
+		$this->name = $name;
+		$this->value = $value;
 	}
 
 	function toStringControl()	{

@@ -90,7 +90,7 @@ class Calendar extends FormElement {
     function toString($date="") {
       global $i18n;
     	
-      $indate = $this->mValue;
+      $indate = $this->value;
       if (!$indate) $indate = strftime(DB_DATEFORMAT);
 
       if (!$this->isRenderable()) return "";

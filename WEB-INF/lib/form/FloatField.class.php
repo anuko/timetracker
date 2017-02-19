@@ -54,19 +54,19 @@ class FloatField extends TextField {
       $value = sprintf('%'.$this->mFFormat.'f', $value);
       $value = str_replace('.', $this->mDelimiter, $value);
     }
-    $this->mValue = $value;
+    $this->value = $value;
   }
 
   function setValueSafe($value)	{
     // '.' to ',' , apply delimiter
     if (strlen($value) > 0)
-      $this->mValue = str_replace('.', $this->mDelimiter, $value);
+      $this->value = str_replace('.', $this->mDelimiter, $value);
   }
 
   function getValueSafe() {
     // ',' to '.'
-    if (strlen($this->mValue) > 0)
-      return str_replace($this->mDelimiter, '.', $this->mValue);
+    if (strlen($this->value) > 0)
+      return str_replace($this->mDelimiter, '.', $this->value);
     return null;
   }
 }

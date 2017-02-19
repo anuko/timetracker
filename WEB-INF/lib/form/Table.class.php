@@ -49,7 +49,7 @@ class Table extends FormElement {
 	
   function __construct($name, $value='') {
     $this->name = $name;
-    $this->mValue = $value;
+    $this->value = $value;
   }
   
   function setKeyField($value) {
@@ -160,8 +160,8 @@ class Table extends FormElement {
         if (0 == $col && strtolower(get_class($this->mColumns[$col]->getRenderer())) == 'checkboxcellrenderer') {
           // Checkbox for the row. Determine if selected.
           $selected = false;
-          if (is_array($this->mValue)) {
-            foreach ($this->mValue as $p) {
+          if (is_array($this->value)) {
+            foreach ($this->value as $p) {
               if ($p == $this->mData[$row][$this->mKeyField]) {
               	$selected = true;
               	break;

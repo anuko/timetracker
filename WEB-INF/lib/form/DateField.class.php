@@ -68,13 +68,13 @@ class DateField extends TextField {
   function setValueSafe($value)  {
     if (isset($value) && (strlen($value) > 0)) {
       $this->mDateObj->parseVal($value, DB_DATEFORMAT);
-      $this->mValue = $this->mDateObj->toString($this->mDateFormat); //?
+      $this->value = $this->mDateObj->toString($this->mDateFormat); //?
     }
   }
   // get value for storing in session or database
   function getValueSafe() {
-    if (strlen($this->mValue)>0) {
-      $this->mDateObj->parseVal($this->mValue, $this->mDateFormat);  //?
+    if (strlen($this->value)>0) {
+      $this->mDateObj->parseVal($this->value, $this->mDateFormat);  //?
       return $this->mDateObj->toString(DB_DATEFORMAT);
     } else {
       return null;

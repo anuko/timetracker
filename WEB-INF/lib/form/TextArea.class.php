@@ -29,7 +29,6 @@
 import('form.FormElement');
 	
 class TextArea extends FormElement {
-    var $mValue;
     var $mPassword	= false;
     var $mColumns	= "";
     var $mRows		= "";
@@ -37,8 +36,8 @@ class TextArea extends FormElement {
 
 	function __construct($name,$value="")
 	{
-		$this->name			= $name;
-		$this->mValue			= $value;
+		$this->name = $name;
+		$this->value = $value;
 	}
 	
 	function setColumns($value)	{ $this->mColumns = $value;	}

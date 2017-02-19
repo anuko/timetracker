@@ -48,8 +48,8 @@ class Combobox extends FormElement {
 
 	function __construct($name,$value="")
 	{
-		$this->name			= $name;
-		$this->mValue			= $value;
+		$this->name = $name;
+		$this->value = $value;
 	}
 
 	function setMultiple($value)	{ $this->mMultiple = $value; }
@@ -95,7 +95,7 @@ class Combobox extends FormElement {
 		if (is_array($this->mOptionsEmpty) && (count($this->mOptionsEmpty) > 0))
 		foreach ($this->mOptionsEmpty as $key=>$value) {
 			$html .= "<option value=\"".$key."\"";
-			if (($this->mValue == $value) && ($this->mValue != '')) $html .= " selected";
+			if (($this->value == $value) && ($this->value != '')) $html .= " selected";
 			$html .= ">".$value."</option>\n";
 		}
 		if (is_array($this->mOptions) && (count($this->mOptions) > 0))
@@ -106,7 +106,7 @@ class Combobox extends FormElement {
 				$value = $value[$this->mDataKeys[1]];
 			}
 			$html .= "<option value=\"".$key."\"";
-			if (($this->mValue == $key) && ($this->mValue != '')) $html .= " selected";
+			if (($this->value == $key) && ($this->value != '')) $html .= " selected";
 			$html .= ">".htmlspecialchars($value)."</option>\n";
 		}
 		
