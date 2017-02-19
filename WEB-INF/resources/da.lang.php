@@ -32,9 +32,9 @@
 // Note to translators: Please use proper capitalization rules for your language.
 
 $i18n_language = 'Dansk';
-$i18n_months = array('januar', 'februar', 'marts', 'april', 'maj', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'december');
-$i18n_weekdays = array('søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag');
-$i18n_weekdays_short = array('sø', 'ma', 'ti', 'on', 'to', 'fr', 'lø');
+$i18n_months = array('Januar', 'Februar', 'Marts', 'April', 'Maj', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'December');
+$i18n_weekdays = array('Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag');
+$i18n_weekdays_short = array('Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø');
 // format mm/dd
 $i18n_holidays = array('01/01', '04/09', '04/10', '04/12', '04/13', '05/08', '05/21', '05/31', '06/01', '06/05', '12/24', '12/25', '12/26');
 
@@ -43,23 +43,22 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => 'Login',
 'menu.logout' => 'Logout',
-// TODO: translate the following:
 'menu.forum' => 'Forum',
 'menu.help' => 'Hjælp',
 // Note to translators: menu.create_team needs a more accurate translation.
-'menu.create_team' => 'Lav en ny manager konto',
+'menu.create_team' => 'Lav en ny manager konto', // TODO: this means "Create a new manager account" - old string.
+                                                 // What we need is: "Create team".
 'menu.profile' => 'Profil',
 'menu.time' => 'Tid',
-// TODO: translate the following:
 'menu.expenses' => 'Udgifter',
 'menu.reports' => 'Rapporter',
 // TODO: translate the following:
 // 'menu.charts' => 'Charts',
 'menu.projects' => 'Projekter',
 // TODO: translate the following:
-'menu.tasks' => 'Tasks',
+// 'menu.tasks' => 'Tasks', // TODO: Is "Tasks" a correct translation? Not Opgaver or something?
 'menu.users' => 'Brugere',
-'menu.teams' => 'Team',
+// 'menu.teams' => 'Team', // TODO: is "Team" a correct ranslation?
 'menu.export' => 'Eksport',
 'menu.clients' => 'Kunder',
 'menu.options' => 'Indstillinger',
@@ -69,31 +68,36 @@ $i18n_key_words = array(
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 'footer.license' => 'Licens',
-'footer.improve' => 'Bidrag', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                     // This is a link to a webpage that describes how to contribute to the project.
+'footer.improve' => 'Bidrag',
 
 // Error messages.
-// TODO: Translate the following:
-'error.access_denied' => 'Adgang nægtet',
+'error.access_denied' => 'Adgang nægtet.',
+// TODO: Translate the following.
 // 'error.sys' => 'System error.',
-'error.db' => 'Database fejl',
-'error.field' => 'forkert "{0}" data',
-'error.empty' => 'felt "{0}" er tom',
-'error.not_equal' => 'felt "{0}" er ikke lig med "{1}"',
-'error.interval' => 'forkert interval',
-'error.project' => 'Vælg projekt',
-'error.activity' => 'Vælg aktivitet',
-'error.auth' => 'Forkert login eller password',
-// Note to translators: 'error.user_exists' => 'der eksitrerer en bruger med denne e-mail adresse', // e-mail must be changed to login.
-'error.user_exists' => 'Der eksitrerer en bruger med denne e-mail adresse',
-'error.project_exists' => 'Der eksiterer allerede et projekt med det navn',
-'error.activity_exists' => 'Der eksisterer allerede en aktivitet med det navn eksisterer allerede',
-// TODO: translate error.client_exists.
-'error.client_exists' => 'Der eksisterer allerede en klient med dette navn',
-'error.no_login' => 'ingen bruger med denne login',
-'error.upload' => 'fil upload problem',
-// TODO: translate the following:
-'error.range_locked' => 'Dato interval er spærret',
+'error.db' => 'Database fejl.',
+'error.field' => 'Forkert "{0}" data.',
+'error.empty' => 'Felt "{0}" er tom.',
+'error.not_equal' => 'Felt "{0}" er ikke lig med "{1}".',
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+'error.project' => 'Vælg projekt.',
+// TODO: Translate the following.
+// 'error.task' => 'Select task.',
+'error.auth' => 'Forkert login eller password.',
+// TODO: Translate the following.
+// 'error.user_exists' => 'User with this login already exists.',
+'error.project_exists' => 'Der eksiterer allerede et projekt med det navn.',
+// TODO: Translate the following.
+// 'error.task_exists' => 'Task with this name already exists.',
+'error.client_exists' => 'Der eksisterer allerede en klient med dette navn.',
+// TODO: Translate the following.
+// 'error.invoice_exists' => 'Invoice with this number already exists.',
+// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
+'error.no_login' => 'Ingen bruger med denne login.',
+// TODO: Translate the following.
+// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.upload' => 'Fil upload problem.',
+'error.range_locked' => 'Dato interval er spærret.',
 // 'error.mail_send' => 'Error sending mail.',
 // 'error.no_email' => 'No email associated with this login.',
 // 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
@@ -102,10 +106,13 @@ $i18n_key_words = array(
 // 'error.future_date' => 'Date is in future.',
 
 // Labels for buttons.
-'button.login' => 'login',
-'button.now' => 'nu',
-// 'button.set' => 'sæt',
-'button.save' => 'gem',
+'button.login' => 'Login',
+'button.now' => 'Nu',
+'button.save' => 'Gem',
+// TODO: Translate the following.
+// 'button.copy' => 'Copy',
+
+// TODO: refactoring ongoing down from here. We need to get in sync with the current EN file.
 'button.delete' => 'slet',
 'button.cancel' => 'fortryd',
 'button.submit' => 'gem',
