@@ -45,9 +45,7 @@ $i18n_key_words = array(
 'menu.logout' => 'Logout',
 'menu.forum' => 'Forum',
 'menu.help' => 'Hjælp',
-// Note to translators: menu.create_team needs a more accurate translation.
-'menu.create_team' => 'Lav en ny manager konto', // TODO: this means "Create a new manager account" - old string.
-                                                 // What we need is: "Create team".
+'menu.create_team' => 'Lav et team',
 'menu.profile' => 'Profil',
 'menu.time' => 'Tid',
 'menu.expenses' => 'Udgifter',
@@ -111,43 +109,116 @@ $i18n_key_words = array(
 'button.save' => 'Gem',
 // TODO: Translate the following.
 // 'button.copy' => 'Copy',
-
-// TODO: refactoring ongoing down from here. We need to get in sync with the current EN file.
-'button.delete' => 'slet',
-'button.cancel' => 'fortryd',
-'button.submit' => 'gem',
-'button.add_user' => 'tilføj bruger',
-'button.add_project' => 'tilføj project',
-'button.add_activity' => 'tilføj aktivitet',
-'button.add_client' => 'tilføj kunde',
-'button.add' => 'tilføj',
-'button.generate' => 'dan',
-// Note to translators: button.reset_password needs an improved translation.
-'button.reset_password' => 'gе til',
-// Note to translators: the strings below must be translated
+'button.cancel' => 'Fortryd',
+'button.submit' => 'Gem',
+'button.add_user' => 'Tilføj bruger',
+'button.add_project' => 'Tilføj project',
+// TODO: Translate the following.
+// 'button.add_task' => 'Add task',
+'button.add_client' => 'Tilføj kunde',
+// TODO: Translate the following.
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
+'button.add' => 'Tilføj',
+// TODO: Translate the following.
+// 'button.generate' => 'Dan', // TODO: Is "Dan" a correct translation?
+// 'button.reset_password' => 'Reset password',
 'button.send' => 'Send',
 'button.send_by_email' => 'Send som e-mail',
-'button.save_as_new' => 'Gem som ny',
-// TODO: check translation of button.create_team
 'button.create_team' => 'Lav et team',
 'button.export' => 'Exporter team',
 'button.import' => 'Importer team',
-'button.apply' => 'Gem',
+// TODO: Translate the following.
+// 'button.close' => 'Close',
+// 'button.stop' => 'Stop',
 
-// labels for controls on various forms
-// TODO: translate label.team_name
+// Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Team navn',
-'label.currency' => 'møntfod',
-// TODO: translate label.manager_name and label.manager_login.
-// 'label.manager_name' => 'manager name',
-// 'label.manager_login' => 'manager login',
-'label.name' => 'navn',
-
-'label.password' => 'adgangskode',
-'label.confirm_password' => 'gentag adgangskode',
+// TODO: Translate the following.
+// 'label.address' => 'Address',
+'label.currency' => 'Møntfod',
+// TODO: Translate the following.
+// 'label.manager_name' => 'Manager name',
+// 'label.manager_login' => 'Manager login',
+'label.person_name' => 'Navn',
+'label.thing_name' => 'Navn',
+'label.login' => 'Login',
+'label.password' => 'Adgangskode',
+'label.confirm_password' => 'Gentag adgangskode',
 'label.email' => 'E-mail',
+// TODO: Translate the following.
+// 'label.date' => 'Date',
+// 'label.start_date' => 'Start date',
+// 'label.end_date' => 'End date',
+// 'label.user' => 'User',
+'label.users' => 'Brugere',
+// TODO: Translate the following.
+// 'label.client' => 'Client',
+// 'label.clients' => 'Clients',
+// 'label.option' => 'Option',
+// 'label.invoice' => 'Invoice',
+// 'label.project' => 'Project',
+// 'label.projects' => 'Projects',
+// 'label.task' => 'Task',
+// 'label.tasks' => 'Tasks',
+// 'label.description' => 'Description',
+// 'label.start' => 'Start',
+// 'label.finish' => 'Finish',
+// 'label.duration' => 'Duration',
+// 'label.note' => 'Note',
+// 'label.item' => 'Item',
+// 'label.cost' => 'Cost',
+// 'label.day_total' => 'Day total',
+// 'label.week_total' => 'Week total',
+// 'label.month_total' => 'Month total',
+// 'label.today' => 'Today',
+// 'label.total_hours' => 'Total hours',
+// 'label.total_cost' => 'Total cost',
+// 'label.view' => 'View',
+// 'label.edit' => 'Edit',
+'label.delete' => 'Slet',
+// TODO: Translate the following.
+// 'label.configure' => 'Configure',
+// 'label.select_all' => 'Select all',
+// 'label.select_none' => 'Deselect all',
+// 'label.id' => 'ID',
+// 'label.language' => 'Language',
+// 'label.decimal_mark' => 'Decimal mark',
+// 'label.date_format' => 'Date format',
+// 'label.time_format' => 'Time format',
+// 'label.week_start' => 'First day of week',
+// 'label.comment' => 'Comment',
+// 'label.status' => 'Status',
+// 'label.tax' => 'Tax',
+// 'label.subtotal' => 'Subtotal',
+// 'label.total' => 'Total',
+// 'label.client_name' => 'Client name',
+// 'label.client_address' => 'Client address',
+// 'label.or' => 'or',
+// 'label.error' => 'Error',
+// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
+// 'label.required_fields' => '* - required fields',
+// 'label.on_behalf' => 'on behalf of',
+// 'label.role_manager' => '(manager)',
+// 'label.role_comanager' => '(co-manager)',
+// 'label.role_admin' => '(administrator)',
+// 'label.page' => 'Page',
+// Labels for plugins (extensions to Time Tracker that provide additional features).
+// 'label.custom_fields' => 'Custom fields',
+// 'label.monthly_quotas' => 'Monthly quotas',
+// 'label.type' => 'Type',
+// 'label.type_dropdown' => 'dropdown',
+// 'label.type_text' => 'text',
+// 'label.required' => 'Required',
+// 'label.fav_report' => 'Favorite report',
+// 'label.cron_schedule' => 'Cron schedule',
+// 'label.what_is_it' => 'What is it?',
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
+
 
 // Form titles.
+// TODO: refactoring ongoing down from here.
 'title.options' => 'Indstillinger',
 // TODO: almost entire title section is missing here. See the English file.
 
