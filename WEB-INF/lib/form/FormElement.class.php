@@ -35,7 +35,6 @@ class FormElement {
   var $size = '';
   var $max_length = '';
   // TODO: refactoring ongoing down from here.
-	var $mAccesskey     = "";
 	var $mOnSelect		= "";
 	var $mOnChange		= "";
 	var $mOnClick		= "";
@@ -76,9 +75,6 @@ class FormElement {
 	
 	function setMaxLength($value) { $this->max_length = $value; }
 	function getMaxLength() { return $this->max_length; }
-	
-	function setAccesskey($value) { $this->mAccesskey = $value; }
-	function getAccesskey() { return $this->mAccesskey; }
 
 	function setStyle($value)	{ $this->mStyle = $value; }
 	function getStyle() { return $this->mStyle; }
