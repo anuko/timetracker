@@ -63,8 +63,8 @@ class TextField extends FormElement {
 			if ($this->max_length!="")
 			   $html .= " maxlength=\"$this->max_length\"";
 			   
-			if ($this->mOnChange!="")
-			   $html .= " onchange=\"$this->mOnChange\"";
+			if ($this->on_change!="")
+			   $html .= " onchange=\"$this->on_change\"";
 
 			$html .= " value=\"".htmlspecialchars($this->getValue())."\"";
 			$html .= ">";

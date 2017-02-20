@@ -28,15 +28,14 @@
 
 // FromElement is the base class for controls on forms.
 class FormElement {
-  var $id = '';
-  var $name;
-  var $form_name = '';
-  var $value = '';
-  var $size = '';
-  var $max_length = '';
+  var $id = '';         // Control id.
+  var $name;            // Control name.
+  var $form_name = '';  // Form name the control is in.
+  var $value = '';      // Value of the control.
+  var $size = '';       // Control size.
+  var $max_length = ''; // Max lenght of text in control.
+  var $on_change = '';  // What happens when value of control changes.
   // TODO: refactoring ongoing down from here.
-	var $mOnSelect		= "";
-	var $mOnChange		= "";
 	var $mOnClick		= "";
 	var $mOnKeyPress	= "";
 	var $mOnFocus		= "";
@@ -85,9 +84,8 @@ class FormElement {
 	function setEnable($flag)	{ $this->mEnabled = $flag;	}
 	function isEnable()	{ return $this->mEnabled; }
 	
-	function setOnChange($str)	{ $this->mOnChange = $str; }
+	function setOnChange($str) { $this->on_change = $str; }
 	function setOnClick($str)	{ $this->mOnClick = $str; }
-	function setOnSelect($str)	{ $this->mOnSelect = $str; }
 
 	function setLocalization($i18n)	{
 		$this->mI18n = $i18n;

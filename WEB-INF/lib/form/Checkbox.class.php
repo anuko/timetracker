@@ -53,8 +53,8 @@ class Checkbox extends FormElement {
 		$html = "\n\t<input type=\"checkbox\"";
 		$html .= " name=\"$this->name\" id=\"$this->id\"";
 
-		if ($this->mOnChange!="")
-		   $html .= " onchange=\"$this->mOnChange\"";
+		if ($this->on_change!="")
+		   $html .= " onchange=\"$this->on_change\"";
 		   
 		if ($this->mStyle!="")
 		   $html .= " style=\"$this->mStyle\"";

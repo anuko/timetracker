@@ -403,8 +403,8 @@ class DateField extends TextField {
 
         $html .= " maxlength=\"50\"";
 
-      if ($this->mOnChange!="")
-         $html .= " onchange=\"$this->mOnChange\"";
+      if ($this->on_change!="")
+         $html .= " onchange=\"$this->on_change\"";
 
       if ($this->mOnClick!="")
          $html .= " onclick=\"$this->mOnClick\"";
