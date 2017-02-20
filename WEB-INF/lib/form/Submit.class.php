@@ -51,8 +51,8 @@ class Submit extends FormElement {
 		
 		$html .= " value=\"$this->value\"";
 		
-		if ($this->mOnClick) {
-			$html .= " onclick=\"".$this->mOnClick."\"";
+		if ($this->on_click) {
+                    $html .= " onclick=\"".$this->on_click."\"";
 		}
 		
 		$html .= ">";

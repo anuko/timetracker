@@ -35,9 +35,10 @@ class FormElement {
   var $size = '';       // Control size.
   var $max_length = ''; // Max lenght of text in control.
   var $on_change = '';  // What happens when value of control changes.
+  var $on_click = '';   // What happens when the control is clicked.
+
   // TODO: refactoring ongoing down from here.
-	var $mOnClick		= "";
-	var $mOnKeyPress	= "";
+	var $mOnKeyPress	= ""; // This is only used in TextArea, consider moving out of the base class.
 	var $mOnFocus		= "";
 	var $mLabel         = "";
 	var $mStyle         = "";
@@ -85,7 +86,7 @@ class FormElement {
 	function isEnable()	{ return $this->mEnabled; }
 	
 	function setOnChange($str) { $this->on_change = $str; }
-	function setOnClick($str)	{ $this->mOnClick = $str; }
+	function setOnClick($str) { $this->on_click = $str; }
 
 	function setLocalization($i18n)	{
 		$this->mI18n = $i18n;
