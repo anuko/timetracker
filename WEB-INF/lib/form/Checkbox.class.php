@@ -52,10 +52,7 @@ class Checkbox extends FormElement {
 	    
 		$html = "\n\t<input type=\"checkbox\"";
 		$html .= " name=\"$this->name\" id=\"$this->id\"";
-		
-		if ($this->mTabindex!="")
-		   $html .= " tabindex=\"$this->mTabindex\"";
-		   
+
 		if ($this->mOnChange!="")
 		   $html .= " onchange=\"$this->mOnChange\"";
 		   

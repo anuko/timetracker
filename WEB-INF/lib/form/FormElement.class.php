@@ -35,7 +35,6 @@ class FormElement {
   var $size = '';
   var $max_length = '';
   // TODO: refactoring ongoing down from here.
-	var $mTabindex		= "";
 	var $mAccesskey     = "";
 	var $mOnSelect		= "";
 	var $mOnChange		= "";
@@ -77,9 +76,6 @@ class FormElement {
 	
 	function setMaxLength($value) { $this->max_length = $value; }
 	function getMaxLength() { return $this->max_length; }
-	
-	function setTabindex($value) { $this->mTabindex = $value; }
-	function getTabindex() { return $this->mTabindex; }
 	
 	function setAccesskey($value) { $this->mAccesskey = $value; }
 	function getAccesskey() { return $this->mAccesskey; }

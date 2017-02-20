@@ -78,10 +78,7 @@ class Combobox extends FormElement {
 		 
 		if ($this->mMultiple)
 		  $html .= " multiple";
-		  
-		if ($this->mTabindex!="")
-		   $html .= " tabindex=\"$this->mTabindex\"";
-		   
+
 		if ($this->mOnChange!="")
 		   $html .= " onchange=\"$this->mOnChange\"";
 		   
