@@ -38,7 +38,6 @@ class FormElement {
   var $on_click = '';   // What happens when the control is clicked.
 
   // TODO: refactoring ongoing down from here.
-	var $mOnFocus		= "";
 	var $mLabel         = "";
 	var $mStyle         = "";
 	var $mRenderable    = true;

@@ -409,9 +409,6 @@ class DateField extends TextField {
       if ($this->on_click!="")
          $html .= " onclick=\"$this->on_click\"";
 
-      if ($this->mOnFocus!="")
-         $html .= " onfocus=\"$this->mOnFocus\"";
-
       $html .= " value=\"".htmlspecialchars($this->getValue())."\"";
       $html .= ">";
       
