@@ -29,7 +29,7 @@
 import('form.FormElement');
 	
 class UploadFile extends FormElement {
-    var $cClassName		= "UploadFile";
+    var $class = 'UploadFile';
     var $mMaxSize		= 100000;	// 100kb
 
 	function __construct($name,$value="")

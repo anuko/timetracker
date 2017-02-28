@@ -120,7 +120,7 @@ class ActionForm {
         $this->mValues[$name] = $value;
         if ($this->mForm) {
         	if (isset($this->mForm->elements[$name])) {
-        		if ($this->mForm->elements[$name]->cClassName=="DateField") {
+        		if ($this->mForm->elements[$name]->class=="DateField") {
         			$dt = new DateAndTime($user->date_format, $value);
 					$value = $dt->toString(DB_DATEFORMAT);
         		}
@@ -149,7 +149,7 @@ class ActionForm {
         foreach ($this->mValues as $name=>$value) {
 	        if ($this->mForm) {
 	        	if (isset($this->mForm->elements[$name])) {
-	        		if ($this->mForm->elements[$name]->cClassName=="DateField") {
+	        		if ($this->mForm->elements[$name]->class=="DateField") {
 	        			$dt = new DateAndTime($user->date_format, $value);
 						$value = $dt->toString(DB_DATEFORMAT);
 	        		}

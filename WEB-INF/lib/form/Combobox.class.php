@@ -44,7 +44,7 @@ class Combobox extends FormElement {
     var $mCompareOn = "key"; // or "value"
     var $mDataDeep = 1;
     var $mDataKeys = array();
-    var $cClassName	= "Combobox";
+    var $class = 'Combobox';
 
 	function __construct($name,$value="")
 	{

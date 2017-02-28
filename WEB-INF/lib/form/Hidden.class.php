@@ -29,7 +29,7 @@
 import('form.FormElement');
 	
 class Hidden extends FormElement {
-    var $cClassName	= "Hidden";
+    var $class = 'Hidden';
 
 	function __construct($name,$value="")
 	{

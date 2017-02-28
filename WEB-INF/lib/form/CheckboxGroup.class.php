@@ -33,7 +33,7 @@ class CheckboxGroup extends FormElement {
     var $mOptions	= array();
     var $mLayout	= "V";
     var $mGroupIn	= 1;
-    var $cClassName	= "CheckboxGroup";
+    var $class = 'CheckboxGroup';
     var $mDataKeys	= array();
     var $mDataDeep	= 1;
     var $lSelAll	= "All";

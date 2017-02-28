@@ -45,7 +45,7 @@ class Calendar extends FormElement {
     var $controlName = "";
     var $highlight = "time"; // Determines what type of active days to highlight ("time" or "expenses"). 
     // var $mAllDays       = true;
-    var $cClassName    = "Calendar";
+    var $class = "Calendar";
 
     function __construct($name) {
         $this->controlName = $name;

@@ -31,7 +31,7 @@ import('form.FormElement');
 class Checkbox extends FormElement {
     var $mChecked	= false;
     var $mOptions	= null;
-    var $cClassName		= "Checkbox";
+    var $class = 'Checkbox';
 
 	function __construct($name,$value="")
 	{

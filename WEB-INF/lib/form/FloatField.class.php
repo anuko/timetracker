@@ -32,7 +32,7 @@ class FloatField extends TextField {
 
   var $mDelimiter = '.';
   var $mFFormat;
-  var $cClassName = 'FloatField';
+  var $class = 'FloatField';
 
   function __construct($name) {
     $this->name = $name;

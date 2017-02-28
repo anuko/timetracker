@@ -41,7 +41,7 @@ class Table extends FormElement {
   var $mBgColor       = '#ffffff';
   var $mBgColorOver   = '#eeeeff';
   var $mWidth         = '';
-  var $cClassName     = 'Table';
+  var $class = 'Table';
   var $mTableOptions  = array();
   var $mRowOptions    = array();
   var $mHeaderOptions = array();

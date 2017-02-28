@@ -29,7 +29,7 @@
 import('form.FormElement');
 	
 class Submit extends FormElement {
-	var $cClassName	= "Submit";
+	var $class = 'Submit';
 
 	function __construct($name,$value="")
 	{

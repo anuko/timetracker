@@ -35,7 +35,7 @@ class DateField extends TextField {
   var $lToday      = "Today";
 
   var $mDateObj;
-  var $cClassName  = "DateField";
+  var $class = 'DateField';
 
   var $lCalendarButtons = array('today'=>'Today', 'close'=>'Close');
 

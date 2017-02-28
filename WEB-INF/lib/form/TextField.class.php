@@ -30,7 +30,7 @@ import('form.FormElement');
 	
 class TextField extends FormElement {
     var $mPassword	= false;
-    var $cClassName		= "TextField";
+    var $class = 'TextField';
 
 	function __construct($name,$value="")
 	{
