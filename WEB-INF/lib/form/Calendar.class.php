@@ -93,8 +93,6 @@ class Calendar extends FormElement {
       $indate = $this->value;
       if (!$indate) $indate = strftime(DB_DATEFORMAT);
 
-      if (!$this->isRenderable()) return "";
-
       //current year and month
       if ( strlen ( $indate ) > 0 ) {
         $indateObj = new DateAndTime(DB_DATEFORMAT, $indate);

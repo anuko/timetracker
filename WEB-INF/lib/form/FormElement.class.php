@@ -40,7 +40,6 @@ class FormElement {
   var $style = '';      // Control style.
 
   // TODO: refactoring ongoing down from here.
-	var $mRenderable    = true;
 	var $mEnabled		= true;
 	var $cClassName		= "FormElement";
 	var $mI18n 			= null;
@@ -76,10 +75,7 @@ class FormElement {
 
 	function setStyle($value) { $this->style = $value; }
 	function getStyle() { return $this->style; }
-	
-	function setRenderable($flag)	{ $this->mRenderable = $flag;	}
-	function isRenderable()	{ return $this->mRenderable; }
-	
+
 	function setEnable($flag)	{ $this->mEnabled = $flag;	}
 	function isEnable()	{ return $this->mEnabled; }
 	

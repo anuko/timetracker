@@ -41,9 +41,7 @@ class TextField extends FormElement {
 	function setAsPassword($name)	{ $this->mPassword = $name;	}
 	function getAsPassword()	{ return $this->mPassword; }
 
-	function toStringControl()	{
-		if (!$this->isRenderable()) return "";
-	    
+	function toStringControl() {
 		if (!$this->isEnable()) {
 			$html = "<input name=\"$this->name\" value=\"".htmlspecialchars($this->getValue())."\" readonly>\n";
 		} else {

@@ -81,8 +81,7 @@ class DateField extends TextField {
     }
   }
 
-  function toStringControl()  {
-    if (!$this->isRenderable()) return "";
+  function toStringControl() {
 
     if (!$this->isEnable()) {
       $html = htmlspecialchars($this->getValue()).

@@ -95,9 +95,9 @@ class Table extends FormElement {
   }
 
   function _process() {
-  	$this->mProccessed = true;
+    $this->mProccessed = true;
   	
-  	if ($this->mInteractive) {
+    if ($this->mInteractive) {
       // Add a column of clickable checkboxes.
       $column = new TableColumn("","<input type=\"checkbox\" name=\"".$this->getName()."_all\" onclick=\"setAll(this.checked)\">");
       import('form.CheckboxCellRenderer');
@@ -115,7 +115,6 @@ class Table extends FormElement {
   }
   
   function toStringControl() {
-    if (!$this->isRenderable()) return "";
     if (!$this->mProccessed) $this->_process();
     
     $html = "";

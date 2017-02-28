@@ -65,9 +65,8 @@ class Combobox extends FormElement {
 	function getDataKeys() { return $this->mDataKeys; }
 	
 	
-	function toStringControl()	{
-		if (!$this->isRenderable()) return "";
-	    
+	function toStringControl() {
+
 	    if ($this->id=="") $this->id = $this->name;
 	    
 		$html = "\n\t<select";

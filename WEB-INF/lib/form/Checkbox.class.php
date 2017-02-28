@@ -45,9 +45,8 @@ class Checkbox extends FormElement {
 	function setData($value)	{ $this->mOptions = $value; }
 	function getData() { return $this->mOptions; }
 	
-	function toStringControl()	{
-		if (!$this->isRenderable()) return "";
-	    
+	function toStringControl() {
+
 	    if ($this->id=="") $this->id = $this->name;
 	    
 		$html = "\n\t<input type=\"checkbox\"";

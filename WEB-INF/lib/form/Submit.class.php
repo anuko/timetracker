@@ -37,8 +37,7 @@ class Submit extends FormElement {
 		$this->value = $value;
 	}
 
-	function toStringControl()	{
-		if (!$this->isRenderable()) return "";
+	function toStringControl() {
 	    
 	    if ($this->id=="") $this->id = $this->name;
 	    

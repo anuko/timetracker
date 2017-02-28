@@ -41,10 +41,9 @@ class UploadFile extends FormElement {
 	function setMaxSize($value)	{ $this->mMaxSize = $value;	}
 	function getMaxSize()	{ return $this->mMaxSize; }
 	
-	function toStringControl()	{
-		if (!$this->isRenderable()) return "";
-	    
-	    if ($this->id=="") $this->id = $this->name;
+	function toStringControl() {
+
+            if ($this->id=="") $this->id = $this->name;
 	    
 		$html = "\n\t<input type=\"hidden\" name=\"MAX_FILE_SIZE\" value=\"".$this->mMaxSize."\"/>";
 		$html .= "\n\t<input";
