@@ -83,7 +83,7 @@ class DateField extends TextField {
 
   function toStringControl() {
 
-    if (!$this->isEnable()) {
+    if (!$this->isEnabled()) {
       $html = htmlspecialchars($this->getValue()).
         "<input type=\"hidden\" name=\"$this->name\" value=\"".htmlspecialchars($this->getValue())."\">\n";
     } else {

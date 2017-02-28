@@ -242,7 +242,7 @@ $form->setValueByElement('fav_report_changed','');
 
 // Disable the Delete button when no favorite report is selected.
 if (!$bean->getAttribute('favorite_report') || ($bean->getAttribute('favorite_report') == -1))
-  $form->getElement('btn_delete')->setEnable(false);
+  $form->getElement('btn_delete')->setEnabled(false);
 
 if ($request->isPost()) {
   if((!$bean->getAttribute('btn_generate') && ($request->getParameter('fav_report_changed')))) {

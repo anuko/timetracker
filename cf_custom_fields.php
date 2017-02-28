@@ -50,7 +50,7 @@ if ($request->isPost()) {
   $fields = CustomFields::getFields();
   // At this time only one custom field is supported. Disable the Add button if we already have one or more custom fields.
   if (count($fields) > 0)
-    $form->getElement('btn_add')->setEnable(false);
+    $form->getElement('btn_add')->setEnabled(false);
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

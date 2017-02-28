@@ -38,9 +38,9 @@ class FormElement {
   var $on_click = '';   // What happens when the control is clicked.
   var $label = '';      // Optional label for control.
   var $style = '';      // Control style.
-
+  var $enabled = true;  // Whether the control is enabled.
+        
   // TODO: refactoring ongoing down from here.
-	var $mEnabled		= true;
 	var $cClassName		= "FormElement";
 	var $mI18n 			= null;
 
@@ -76,8 +76,8 @@ class FormElement {
 	function setStyle($value) { $this->style = $value; }
 	function getStyle() { return $this->style; }
 
-	function setEnable($flag)	{ $this->mEnabled = $flag;	}
-	function isEnable()	{ return $this->mEnabled; }
+	function setEnabled($flag) { $this->enabled = $flag; }
+	function isEnabled() { return $this->enabled; }
 	
 	function setOnChange($str) { $this->on_change = $str; }
 	function setOnClick($str) { $this->on_click = $str; }

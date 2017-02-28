@@ -142,7 +142,7 @@ class Form {
 			$el->setFormName($this->name);
 			if (isset($arguments["id"])) $el->setId($arguments["id"]);
 			if (isset($GLOBALS["I18N"])) $el->setLocalization($GLOBALS["I18N"]);
-			if (isset($arguments["enable"])) $el->setEnable($arguments["enable"]);
+			if (isset($arguments["enable"])) $el->setEnabled($arguments["enable"]);
 			
 			if (isset($arguments["style"])) $el->setStyle($arguments["style"]);
 			if (isset($arguments["size"])) $el->setSize($arguments["size"]);

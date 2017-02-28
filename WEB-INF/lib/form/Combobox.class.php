@@ -84,7 +84,7 @@ class Combobox extends FormElement {
 		if ($this->style!="")
 		   $html .= " style=\"$this->style\"";
                 
-                if (!$this->isEnable())
+                if (!$this->isEnabled())
 		   $html .= " disabled";
 		   
 		$html .= ">\n";   

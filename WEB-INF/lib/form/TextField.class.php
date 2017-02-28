@@ -42,7 +42,7 @@ class TextField extends FormElement {
 	function getAsPassword()	{ return $this->mPassword; }
 
 	function toStringControl() {
-		if (!$this->isEnable()) {
+		if (!$this->isEnabled()) {
 			$html = "<input name=\"$this->name\" value=\"".htmlspecialchars($this->getValue())."\" readonly>\n";
 		} else {
 			

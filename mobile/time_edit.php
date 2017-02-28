@@ -178,8 +178,8 @@ if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type
 }
 if (!$user->canManageTeam() && defined('READONLY_START_FINISH') && isTrue(READONLY_START_FINISH)) {
   // Make the start and finish fields read-only.
-  $form->getElement('start')->setEnable(false);
-  $form->getElement('finish')->setEnable(false);
+  $form->getElement('start')->setEnabled(false);
+  $form->getElement('finish')->setEnabled(false);
 }
 if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
   $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));

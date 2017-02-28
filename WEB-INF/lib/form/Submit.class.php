@@ -44,7 +44,7 @@ class Submit extends FormElement {
 		$html = "\n\t<input";
 		$html .= " type=\"submit\" name=\"$this->name\" id=\"$this->id\"";
 		
-		if (!$this->isEnable()) {
+		if (!$this->isEnabled()) {
 			$html .= " disabled=\"true\"";
 		}
 		

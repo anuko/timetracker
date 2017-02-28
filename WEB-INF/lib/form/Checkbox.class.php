@@ -61,7 +61,7 @@ class Checkbox extends FormElement {
 		if ($this->mChecked || (($this->value == $this->mOptions) && ($this->value != null)))
 		   $html .= " checked=\"true\"";
 		   
-		if (!$this->isEnable())
+		if (!$this->isEnabled())
 		   $html .= " disabled=\"disabled\"";
 		   
 		$html .= " value=\"".htmlspecialchars($this->mOptions)."\"";
