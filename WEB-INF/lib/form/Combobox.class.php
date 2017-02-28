@@ -82,8 +82,8 @@ class Combobox extends FormElement {
 		if ($this->on_change!="")
 		   $html .= " onchange=\"$this->on_change\"";
 		   
-		if ($this->mStyle!="")
-		   $html .= " style=\"$this->mStyle\"";
+		if ($this->style!="")
+		   $html .= " style=\"$this->style\"";
                 
                 if (!$this->isEnable())
 		   $html .= " disabled";

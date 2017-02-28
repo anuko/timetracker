@@ -73,7 +73,7 @@ class Calendar extends FormElement {
       $this->weekStartDay = $user->week_start;
     }
 
-    function setStyle($style) { $this->mStyle = $style; }
+    function setStyle($style) { $this->style = $style; }
     function setCellStyle($style) { $this->mCellStyle = $style; }
     function setACellStyle($style) { $this->mACellStyle = $style; }
     function setLinkStyle($style) { $this->mLinkStyle = $style; }

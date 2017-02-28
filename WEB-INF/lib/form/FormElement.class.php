@@ -37,9 +37,9 @@ class FormElement {
   var $on_change = '';  // What happens when value of control changes.
   var $on_click = '';   // What happens when the control is clicked.
   var $label = '';      // Optional label for control.
+  var $style = '';      // Control style.
 
   // TODO: refactoring ongoing down from here.
-	var $mStyle         = "";
 	var $mRenderable    = true;
 	var $mEnabled		= true;
 	var $cClassName		= "FormElement";
@@ -74,8 +74,8 @@ class FormElement {
 	function setMaxLength($value) { $this->max_length = $value; }
 	function getMaxLength() { return $this->max_length; }
 
-	function setStyle($value)	{ $this->mStyle = $value; }
-	function getStyle() { return $this->mStyle; }
+	function setStyle($value) { $this->style = $value; }
+	function getStyle() { return $this->style; }
 	
 	function setRenderable($flag)	{ $this->mRenderable = $flag;	}
 	function isRenderable()	{ return $this->mRenderable; }

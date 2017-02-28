@@ -70,8 +70,8 @@ class TextArea extends FormElement {
 			$html .= " maxlength=\"$this->max_length\"";
 		}
 
-		if ($this->mStyle!="")
-		   $html .= " style=\"$this->mStyle\"";
+		if ($this->style!="")
+		   $html .= " style=\"$this->style\"";
 
 		if ($this->mOnKeyPress) {
 			$html .= " onkeypress=\"$this->mOnKeyPress\"";

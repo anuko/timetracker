@@ -398,8 +398,8 @@ class DateField extends TextField {
       if ($this->size!="")
         $html .= " size=\"$this->size\"";
 
-      if ($this->mStyle!="")
-         $html .= " style=\"$this->mStyle\"";
+      if ($this->style!="")
+         $html .= " style=\"$this->style\"";
 
         $html .= " maxlength=\"50\"";
 

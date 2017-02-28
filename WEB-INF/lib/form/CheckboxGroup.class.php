@@ -132,7 +132,7 @@ class CheckboxGroup extends FormElement {
 	    }
 	    
 	    
-	    $html = "\n\t<table style=\"".$this->mStyle."\"><tr><td align=\"center\" bgcolor=\"eeeeee\">\n";
+	    $html = "\n\t<table style=\"".$this->style."\"><tr><td align=\"center\" bgcolor=\"eeeeee\">\n";
 	    $html .= '<a href="#" onclick="setAll'.$this->getName().'(true);return false;">'.$this->lSelAll.'</a>&nbsp;/&nbsp;<a href="#" onclick="setAll'.$this->getName().'(false);return false;">'.$this->lSelNone.'</a>';
 	    $html .= "</td></tr>\n";
 	    $html .= "<tr><td>";

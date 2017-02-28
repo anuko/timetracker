@@ -56,8 +56,8 @@ class Checkbox extends FormElement {
 		if ($this->on_change!="")
 		   $html .= " onchange=\"$this->on_change\"";
 		   
-		if ($this->mStyle!="")
-		   $html .= " style=\"$this->mStyle\"";
+		if ($this->style!="")
+		   $html .= " style=\"$this->style\"";
 
 		if ($this->mChecked || (($this->value == $this->mOptions) && ($this->value != null)))
 		   $html .= " checked=\"true\"";
