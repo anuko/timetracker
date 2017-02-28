@@ -41,14 +41,12 @@ class FormElement {
   var $enabled = true;  // Whether the control is enabled.
   var $class = 'FormElement'; // Class name for the element.
 
+  function __construct() {
+  }
+
+  function getClass() { return $this->class; }
+
   // TODO: refactoring ongoing down from here.
-	var $mI18n 			= null;
-
-	function __construct() {
-	}
-
-	function getClass() { return $this->class; }
-	
 	function setName($name)	{ $this->name = $name; }
 	function getName()	{ return $this->name; }
 	
@@ -83,8 +81,7 @@ class FormElement {
 	function setOnClick($str) { $this->on_click = $str; }
 
 	function setLocalization($i18n)	{
-		$this->mI18n = $i18n;
-	}
+        }
 	
 	function toStringControl()	{
 		return "";
