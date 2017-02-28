@@ -33,12 +33,12 @@ class FormElement {
   var $form_name = '';  // Form name the control is in.
   var $value = '';      // Value of the control.
   var $size = '';       // Control size.
-  var $max_length = ''; // Max lenght of text in control.
+  var $max_length = ''; // Max length of text in control.
   var $on_change = '';  // What happens when value of control changes.
   var $on_click = '';   // What happens when the control is clicked.
+  var $label = '';      // Optional label for control.
 
   // TODO: refactoring ongoing down from here.
-	var $mLabel         = "";
 	var $mStyle         = "";
 	var $mRenderable    = true;
 	var $mEnabled		= true;
@@ -68,8 +68,8 @@ class FormElement {
 	function setSize($value) { $this->size = $value; }
 	function getSize() { return $this->size; }
 
-	function setLabel($label)	{ $this->mLabel = $label; }
-	function getLabel() { return $this->mLabel; }
+	function setLabel($label) { $this->label = $label; }
+	function getLabel() { return $this->label; }
 	
 	function setMaxLength($value) { $this->max_length = $value; }
 	function getMaxLength() { return $this->max_length; }
@@ -93,9 +93,9 @@ class FormElement {
 	function toStringControl()	{
 		return "";
 	}
-	
+
 	function toStringLabel() {
-	    return "<label for=\"" . $this->id . "\">" . $this->mLabel . "</label>";
+	    return "<label for=\"" . $this->id . "\">" . $this->label . "</label>";
 	}
 	
 	function toArray() {
