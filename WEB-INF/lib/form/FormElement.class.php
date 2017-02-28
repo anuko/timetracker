@@ -38,7 +38,6 @@ class FormElement {
   var $on_click = '';   // What happens when the control is clicked.
 
   // TODO: refactoring ongoing down from here.
-	var $mOnKeyPress	= ""; // This is only used in TextArea, consider moving out of the base class.
 	var $mOnFocus		= "";
 	var $mLabel         = "";
 	var $mStyle         = "";

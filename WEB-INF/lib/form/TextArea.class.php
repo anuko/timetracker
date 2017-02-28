@@ -32,7 +32,8 @@ class TextArea extends FormElement {
     var $mPassword	= false;
     var $mColumns	= "";
     var $mRows		= "";
-    var $cClassName		= "TextArea";
+    var $cClassName	= "TextArea";
+    var $mOnKeyPress	= "";
 
 	function __construct($name,$value="")
 	{
