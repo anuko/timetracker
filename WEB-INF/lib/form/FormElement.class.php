@@ -60,30 +60,40 @@ class FormElement {
   function setValueSafe($value) { $this->value = $value;}
   function getValueSafe() { return $this->value; }
 
+  function setId($id) { $this->id = $id; }
+  function getId() { return $this->id; }
+
+  function setSize($value) { $this->size = $value; }
+  function getSize() { return $this->size; }
+
+  function setLabel($label) { $this->label = $label; }
+  function getLabel() { return $this->label; }
+
+  function setMaxLength($value) { $this->max_length = $value; }
+  function getMaxLength() { return $this->max_length; }
+
+  function setStyle($value) { $this->style = $value; }
+  function getStyle() { return $this->style; }
+
+  function setEnabled($flag) { $this->enabled = $flag; }
+  function isEnabled() { return $this->enabled; }
+
+  function setOnChange($str) { $this->on_change = $str; }
+  function setOnClick($str) { $this->on_click = $str; }
+
+  function localize($i18n) {} // Localization occurs in derived classes and is dependent on control type.
+                              // For example, in calendar control we need to localize day and month names.
+
   // TODO: refactoring ongoing down from here.
-	function setId($id) { $this->id = $id;	}
-	function getId() { return $this->id; }
+
+
+
+
+
 	
-	function setSize($value) { $this->size = $value; }
-	function getSize() { return $this->size; }
 
-	function setLabel($label) { $this->label = $label; }
-	function getLabel() { return $this->label; }
-	
-	function setMaxLength($value) { $this->max_length = $value; }
-	function getMaxLength() { return $this->max_length; }
 
-	function setStyle($value) { $this->style = $value; }
-	function getStyle() { return $this->style; }
 
-	function setEnabled($flag) { $this->enabled = $flag; }
-	function isEnabled() { return $this->enabled; }
-	
-	function setOnChange($str) { $this->on_change = $str; }
-	function setOnClick($str) { $this->on_click = $str; }
-
-	function setLocalization($i18n)	{
-        }
 	
 	function toStringControl()	{
 		return "";

@@ -38,8 +38,7 @@ class FloatField extends TextField {
     $this->name = $name;
   }
 
-  function setLocalization($i18n) {
-    FormElement::setLocalization($i18n);
+  function localize($i18n) {
     global $user;
     $this->mDelimiter = $user->decimal_mark;
   }

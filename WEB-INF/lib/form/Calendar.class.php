@@ -58,11 +58,10 @@ class Calendar extends FormElement {
     	  $this->highlight = $highlight;
     }
 
-    function setLocalization($i18n) {
+    function localize($i18n) {
       global $user;
       
-      FormElement::setLocalization($i18n);
-      $this->mMonthNames    = $i18n->monthNames;
+      $this->mMonthNames = $i18n->monthNames;
       $this->mWeekDayShortNames = $i18n->weekdayShortNames;
       if (is_array($i18n->holidays)) {
         foreach ($i18n->holidays as $fday) {

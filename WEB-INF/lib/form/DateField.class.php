@@ -44,14 +44,13 @@ class DateField extends TextField {
     $this->mDateObj  = new DateAndTime();
 
     if (isset($GLOBALS["I18N"])) {
-      $this->setLocalization($GLOBALS["I18N"]);
+      $this->localize($GLOBALS["I18N"]);
     }
   }
 
-  function setLocalization($i18n)  {
-  	global $user;
+  function localize($i18n)  {
+    global $user;
   	
-    FormElement::setLocalization($i18n);
     $this->mDateObj->setFormat($user->date_format);
 
     $this->mMonthNames = $i18n->monthNames;

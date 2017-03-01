@@ -186,7 +186,7 @@ class ActionForm {
     			import('form.'.$ref_el["class"]);
     			$class_name = $ref_el["class"];
     			$el = new $class_name($ref_el["name"]);
-    			if (isset($GLOBALS["I18N"])) $el->setLocalization($GLOBALS["I18N"]);
+    			if (isset($GLOBALS["I18N"])) $el->localize($GLOBALS["I18N"]);
     			$el->setValueSafe(@$_SESSION[$this->mSessionCell . "_" .$el->getName()]);
     			
 				if ($this->mForm && !isset($this->mForm->elements[$ref_el["name"]])) {

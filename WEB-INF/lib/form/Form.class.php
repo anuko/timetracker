@@ -141,7 +141,7 @@ class Form {
 		if ($el!=null) {
 			$el->setFormName($this->name);
 			if (isset($arguments["id"])) $el->setId($arguments["id"]);
-			if (isset($GLOBALS["I18N"])) $el->setLocalization($GLOBALS["I18N"]);
+			if (isset($GLOBALS["I18N"])) $el->localize($GLOBALS["I18N"]);
 			if (isset($arguments["enable"])) $el->setEnabled($arguments["enable"]);
 			
 			if (isset($arguments["style"])) $el->setStyle($arguments["style"]);
@@ -159,7 +159,7 @@ class Form {
 	
 	function addInputElement(&$el) {
 		if ($el && is_object($el)) {
-			if (isset($GLOBALS["I18N"])) $el->setLocalization($GLOBALS["I18N"]);
+			if (isset($GLOBALS["I18N"])) $el->localize($GLOBALS["I18N"]);
 		
 			$el->setFormName($this->name);
 			$this->elements[$el->name] = &$el;

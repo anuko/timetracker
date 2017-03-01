@@ -107,7 +107,7 @@ class RateCellRenderer extends DefaultCellRenderer {
     global $assigned_projects;
     $field = new FloatField('rate_'.$table->getValueAtName($row, 'id'));
     $field->setFormName($table->getFormName());
-    $field->setLocalization($GLOBALS['I18N']);
+    $field->localize($GLOBALS['I18N']);
     $field->setSize(5);
     $field->setFormat('.2');
     foreach ($assigned_projects as $p) {
