@@ -84,30 +84,15 @@ class FormElement {
   function localize($i18n) {} // Localization occurs in derived classes and is dependent on control type.
                               // For example, in calendar control we need to localize day and month names.
 
-  // TODO: refactoring ongoing down from here.
+  // getHtml returns HTML for the element.
+  function getHtml() { return ''; }
 
+  // getLabelHtml returns HTML code for element label.
+  function getLabelHtml() { return '<label for="'.$this->id.'">'.$this->label.'</label>'; }
 
-
-
-
-	
-
-
-
-	
-	function toStringControl()	{
-		return "";
-	}
-
-	function toStringLabel() {
-	    return "<label for=\"" . $this->id . "\">" . $this->label . "</label>";
-	}
-	
-	function toArray() {
-	    return array(
-	             "label"=>$this->toStringLabel(),
-	             "control"=>$this->toStringControl()
-	           );
-	}
-
+  function toArray() {
+    return array(
+      'label'=>$this->getLabelHtml(),
+      'control'=>$this->getHtml());
+  }
 }

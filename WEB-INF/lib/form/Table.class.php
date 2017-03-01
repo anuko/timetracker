@@ -114,7 +114,7 @@ class Table extends FormElement {
     }
   }
   
-  function toStringControl() {
+  function getHtml() {
     if (!$this->mProccessed) $this->_process();
     
     $html = "";

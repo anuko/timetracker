@@ -80,7 +80,7 @@ class DateField extends TextField {
     }
   }
 
-  function toStringControl() {
+  function getHtml() {
 
     if (!$this->isEnabled()) {
       $html = htmlspecialchars($this->getValue()).

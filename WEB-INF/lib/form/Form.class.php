@@ -188,7 +188,7 @@ class Form {
     	$html = "\n";
     	foreach ($this->elements as $elname=>$el) {
             if (strtolower(get_class($this->elements[$elname]))=="hidden") {
-            	$html .= $this->elements[$elname]->toStringControl()."\n";
+                $html .= $this->elements[$elname]->getHtml()."\n";
             }
         }
         $html .= "</form>";

@@ -113,7 +113,7 @@ class RateCellRenderer extends DefaultCellRenderer {
     foreach ($assigned_projects as $p) {
       if ($p['id'] == $table->getValueAtName($row,'id')) $field->setValue($p['rate']);
     }
-    $this->setValue($field->toStringControl());
+    $this->setValue($field->getHtml());
     return $this->toString();
   }
 }

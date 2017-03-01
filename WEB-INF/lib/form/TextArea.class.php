@@ -47,7 +47,7 @@ class TextArea extends FormElement {
 	function setRows($value)	{ $this->mRows = $value;	}
 	function getRows()	{ return $this->mRows; }
 	
-	function toStringControl() {
+	function getHtml() {
     
 	    if ($this->id=="") $this->id = $this->mName;
 	    

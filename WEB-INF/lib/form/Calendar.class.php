@@ -222,7 +222,7 @@ class Calendar extends FormElement {
       return $str;
     }
 
-    function toStringControl() {
+    function getHtml() {
         return $this->toString();
     }
 

@@ -65,7 +65,7 @@ class CheckboxGroup extends FormElement {
 		$this->lSelNone = $i18n->getKey('label.select_none');
 	}
 		
-	function toStringControl() {
+	function getHtml() {
 
 	    if ($this->id=="") $this->id = $this->name;
 	    

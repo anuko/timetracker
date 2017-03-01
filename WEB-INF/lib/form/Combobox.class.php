@@ -65,7 +65,7 @@ class Combobox extends FormElement {
 	function getDataKeys() { return $this->mDataKeys; }
 	
 	
-	function toStringControl() {
+	function getHtml() {
 
 	    if ($this->id=="") $this->id = $this->name;
 	    
