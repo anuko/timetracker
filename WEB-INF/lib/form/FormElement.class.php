@@ -44,12 +44,10 @@ class FormElement {
   function __construct() {
   }
 
+  function getName() { return $this->name; }
   function getClass() { return $this->class; }
-
+  
   // TODO: refactoring ongoing down from here.
-	function setName($name)	{ $this->name = $name; }
-	function getName()	{ return $this->name; }
-	
 	function setFormName($name) { $this->form_name = $name; }
 	function getFormName()	{ return $this->form_name; }
 	

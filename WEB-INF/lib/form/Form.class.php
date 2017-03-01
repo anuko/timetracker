@@ -162,7 +162,7 @@ class Form {
 			if (isset($GLOBALS["I18N"])) $el->setLocalization($GLOBALS["I18N"]);
 		
 			$el->setFormName($this->name);
-			$this->elements[$el->getName()] = &$el;
+			$this->elements[$el->name] = &$el;
 		}
 	}
 	

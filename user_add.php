@@ -98,7 +98,7 @@ $projects = ttTeamHelper::getActiveProjects($user->team_id);
 class NameCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     $this->setOptions(array('width'=>200,'valign'=>'top'));
-    $this->setValue('<label for = "'.$table->getName().'_'.$row.'">'.htmlspecialchars($value).'</label>');
+    $this->setValue('<label for = "'.$table->name.'_'.$row.'">'.htmlspecialchars($value).'</label>');
     return $this->toString();
   }
 }

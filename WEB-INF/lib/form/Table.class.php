@@ -99,7 +99,7 @@ class Table extends FormElement {
   	
     if ($this->mInteractive) {
       // Add a column of clickable checkboxes.
-      $column = new TableColumn("","<input type=\"checkbox\" name=\"".$this->getName()."_all\" onclick=\"setAll(this.checked)\">");
+      $column = new TableColumn("","<input type=\"checkbox\" name=\"".$this->name."_all\" onclick=\"setAll(this.checked)\">");
       import('form.CheckboxCellRenderer');
       $cb = new CheckboxCellRenderer();
       if ($this->getIAScript()) $cb->setOnChangeAdd($this->getIAScript()."(this)");
@@ -190,7 +190,7 @@ class Table extends FormElement {
     // setAll - checks / unchecks all checkboxes in the table.
     $html .= "function setAll(value) {\n";
     $html .= "\tfor (var i = 0; i < ".$this->getFormName().".elements.length; i++) {\n";
-    $html .= "\t\tif ((".$this->getFormName().".elements[i].type=='checkbox') && (".$this->getFormName().".elements[i].name=='".$this->getName()."[]')) {\n";
+    $html .= "\t\tif ((".$this->getFormName().".elements[i].type=='checkbox') && (".$this->getFormName().".elements[i].name=='".$this->name."[]')) {\n";
     $html .= "\t\t\t".$this->getFormName().".elements[i].checked=value;\n";
     if ($this->getIAScript()) {
       $html .= "\t\t\t".$this->getIAScript()."(".$this->getFormName().".elements[i]);\n";

@@ -128,7 +128,7 @@ $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','for
 class NameCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     $this->setOptions(array('width'=>200,'valign'=>'top'));
-    $this->setValue('<label for = "'.$table->getName().'_'.$row.'">'.htmlspecialchars($value).'</label>');
+    $this->setValue('<label for = "'.$table->name.'_'.$row.'">'.htmlspecialchars($value).'</label>');
     return $this->toString();
   }
 }

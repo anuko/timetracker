@@ -132,7 +132,7 @@ class CheckboxGroup extends FormElement {
 	    
 	    
 	    $html = "\n\t<table style=\"".$this->style."\"><tr><td align=\"center\" bgcolor=\"eeeeee\">\n";
-	    $html .= '<a href="#" onclick="setAll'.$this->getName().'(true);return false;">'.$this->lSelAll.'</a>&nbsp;/&nbsp;<a href="#" onclick="setAll'.$this->getName().'(false);return false;">'.$this->lSelNone.'</a>';
+	    $html .= '<a href="#" onclick="setAll'.$this->name.'(true);return false;">'.$this->lSelAll.'</a>&nbsp;/&nbsp;<a href="#" onclick="setAll'.$this->name.'(false);return false;">'.$this->lSelNone.'</a>';
 	    $html .= "</td></tr>\n";
 	    $html .= "<tr><td>";
 	    $html .= "\n\t<table width=\"100%\">\n";
@@ -147,10 +147,10 @@ class CheckboxGroup extends FormElement {
 	    $html .= "</td></tr></table>\n";
 	    
 	    $str = "<script>\n";
-		$str .= "function setAll".$this->getName()."(value) {\n";
+		$str .= "function setAll".$this->name."(value) {\n";
 		$str .= "\tvar formInputs = document.getElementsByTagName(\"input\");\n";
 		$str .= "\tfor (var i = 0; i < formInputs.length; i++) {\n";
-        $str .= "\t\tif ((formInputs.item(i).type=='checkbox') && (formInputs.item(i).name=='".$this->getName()."[]')) {\n";
+        $str .= "\t\tif ((formInputs.item(i).type=='checkbox') && (formInputs.item(i).name=='".$this->name."[]')) {\n";
         $str .= "\t\tformInputs.item(i).checked=value;\n";
         $str .= "\t}\n}\n";
 		$str .= "}\n";

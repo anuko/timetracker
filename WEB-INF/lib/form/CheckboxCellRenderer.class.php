@@ -33,7 +33,7 @@ class CheckboxCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     $html = '<td';
     $html .= ($this->mWidth!='' ? ' width="'.$this->mWidth.'"' : '');
-    $html .= "><input name=\"".$table->getName()."[]\" id=\"".$table->getName()."_".$row."\" type=\"checkbox\" value=\"".$value."\"";
+    $html .= "><input name=\"".$table->name."[]\" id=\"".$table->name."_".$row."\" type=\"checkbox\" value=\"".$value."\"";
     if($this->getOnChangeAdd()) {
       $html .= " onclick=\"".$this->getOnChangeAdd()."\"";
     }
