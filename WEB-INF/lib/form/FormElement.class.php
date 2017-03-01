@@ -46,17 +46,21 @@ class FormElement {
 
   function getName() { return $this->name; }
   function getClass() { return $this->class; }
-  
-  // TODO: refactoring ongoing down from here.
-	function setFormName($name) { $this->form_name = $name; }
-	function getFormName()	{ return $this->form_name; }
-	
-	function setValue($value) { $this->value = $value; }
-	function getValue() { return $this->value; }
-	
-	function setValueSafe($value) { $this->value = $value;}
-	function getValueSafe() { return $this->value; }
 
+  function setFormName($name) { $this->form_name = $name; }
+  function getFormName() { return $this->form_name; }
+
+  function setValue($value) { $this->value = $value; }
+  function getValue() { return $this->value; }
+
+  // Safe function variations are used to store/read values in/from user session for further reuse.
+  // They may convert data in derived classes to some standard form. For example, floats are stored
+  // with a dot delimiter (not comma), and dates are stored in DB_DATEFORMAT.
+  // This allows to reuse data in session even when user changes the deliminter or date format.
+  function setValueSafe($value) { $this->value = $value;}
+  function getValueSafe() { return $this->value; }
+
+  // TODO: refactoring ongoing down from here.
 	function setId($id) { $this->id = $id;	}
 	function getId() { return $this->id; }
 	
