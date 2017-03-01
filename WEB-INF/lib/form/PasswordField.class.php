@@ -27,48 +27,37 @@
 // +----------------------------------------------------------------------+
 
 import('form.FormElement');
-	
-class TextField extends FormElement {
-    var $mPassword	= false;
-    //var $class = 'TextField';
 
-	function __construct($name,$value="")
-	{
-            $this->class = 'TextField';
-		$this->name = $name;
-		$this->value = $value;
-	}
-	
-	function setAsPassword($name)	{ $this->mPassword = $name;	}
-	function getAsPassword()	{ return $this->mPassword; }
+class PasswordField extends FormElement {
 
-	function getHtml() {
-		if (!$this->isEnabled()) {
-			$html = "<input name=\"$this->name\" value=\"".htmlspecialchars($this->getValue())."\" readonly>\n";
-		} else {
-			
-		    if ($this->id=="") $this->id = $this->name;
-		    
-			$html = "\n\t<input";
-			$html .= ( $this->mPassword ? " type=\"password\"" : " type=\"text\"");
-			$html .= " name=\"$this->name\" id=\"$this->id\"";
-			
-			if ($this->size!="")
-			  $html .= " size=\"$this->size\"";
-			  
-			if ($this->style!="")
-			   $html .= " style=\"$this->style\"";
-			  
-			if ($this->max_length!="")
-			   $html .= " maxlength=\"$this->max_length\"";
-			   
-			if ($this->on_change!="")
-			   $html .= " onchange=\"$this->on_change\"";
+  function __construct($name, $value='')
+  {
+    $this->class = 'PasswordField';
+    $this->name = $name;
+    $this->value = $value;
+  }
 
-			$html .= " value=\"".htmlspecialchars($this->getValue())."\"";
-			$html .= ">";
-		}
-		
-		return $html;
-	}
+  function getHtml() {
+    if ($this->id == '') $this->id = $this->name;
+
+    $html = "\n\t<input type=\"password\"";
+    $html.= ' id="'.$this->id.'"';
+    $html.= ' name="'.$this->name.'"';
+
+    if ($this->size != '')
+      $html.= ' size="'.$this->size.'"';
+
+    if ($this->style != '')
+      $html.= ' style="'.$this->style.'"';
+
+    if ($this->max_length != '')
+      $html.= ' maxlength="'.$this->max_length.'"';
+
+    if ($this->on_change != '')
+      $html.= ' onchange="'.$this->on_change.'"';
+
+    $html.= ' value="'.htmlspecialchars($this->getValue()).'"';
+    $html.= '>';
+    return $html;
+  }
 }
