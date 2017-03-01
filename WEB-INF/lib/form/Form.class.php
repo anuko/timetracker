@@ -59,7 +59,6 @@ class Form {
         import('form.TextField');
         $el = new TextField($arguments['name']);
         $el->setMaxLength(@$arguments['maxlength']);
-        if (isset($arguments['aspassword'])) $el->setAsPassword($arguments['aspassword']);
         break;
 
       case 'password':
@@ -69,8 +68,7 @@ class Form {
         break;
 
 // TODO: refactoring ongoing down from here.
-// aspassword - change this name to something better? Perhaps.
-// Change $arguments to something better too (maybe). $args or $params?
+// Change $arguments to something better (maybe). $args or $params?
 			case "datefield":
 			    import('form.DateField');
 			    $el = new DateField($arguments["name"]);

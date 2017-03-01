@@ -29,7 +29,6 @@
 import('form.FormElement');
 	
 class TextArea extends FormElement {
-    var $mPassword	= false;
     var $mColumns	= "";
     var $mRows		= "";
     var $class = 'TextArea';

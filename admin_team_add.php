@@ -52,8 +52,8 @@ $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','val
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_name','value'=>$cl_manager_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_login','value'=>$cl_manager_login));
 if (!$auth->isPasswordExternal()) {
-  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password1','aspassword'=>true,'value'=>$cl_password1));
-  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password2','aspassword'=>true,'value'=>$cl_password2));
+  $form->addInput(array('type'=>'password','maxlength'=>'30','name'=>'password1','value'=>$cl_password1));
+  $form->addInput(array('type'=>'password','maxlength'=>'30','name'=>'password2','value'=>$cl_password2));
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_email','value'=>$cl_manager_email));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));

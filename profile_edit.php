@@ -108,8 +108,8 @@ $form = new Form('profileForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','value'=>$cl_login,'enable'=>$can_change_login));
 if (!$auth->isPasswordExternal()) {
-  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password1','aspassword'=>true,'value'=>$cl_password1));
-  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password2','aspassword'=>true,'value'=>$cl_password2));
+  $form->addInput(array('type'=>'password','maxlength'=>'30','name'=>'password1','value'=>$cl_password1));
+  $form->addInput(array('type'=>'password','maxlength'=>'30','name'=>'password2','value'=>$cl_password2));
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email,'enable'=>$can_change_login));
 if ($user->canManageTeam()) {
