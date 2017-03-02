@@ -35,11 +35,11 @@
 
 class Form {
 
-  var $name = '';
-  var $elements = array();
+  var $name = '';          // Form name.
+  var $elements = array(); // An array of input controls in form.
 
-  function __construct($formName) {
-    $this->name = $formName;
+  function __construct($name) {
+    $this->name = $name;
   }
 
   function getElement($name) {
@@ -53,111 +53,110 @@ class Form {
   function getName() { return $this->name; }
 
   // addInput - adds an input object to the form.
-  function addInput($arguments) {
-    switch($arguments['type']) {
+  function addInput($params) {
+    switch($params['type']) {
       case 'text':
         import('form.TextField');
-        $el = new TextField($arguments['name']);
-        $el->setMaxLength(@$arguments['maxlength']);
+        $el = new TextField($params['name']);
+        if (isset($params['maxlength'])) $el->setMaxLength($params['maxlength']);
         break;
 
       case 'password':
         import('form.PasswordField');
-        $el = new PasswordField($arguments['name']);
-        $el->setMaxLength(@$arguments['maxlength']);
+        $el = new PasswordField($params['name']);
+        if (isset($params['maxlength'])) $el->setMaxLength($params['maxlength']);
+        break;
+
+      case 'datefield':
+        import('form.DateField');
+        $el = new DateField($params['name']);
+        $el->setMaxLength('10');
+        break;
+
+      case 'floatfield':
+        import('form.FloatField');
+        $el = new FloatField($params['name']);
+        if (isset($params['format'])) $el->setFormat($params['format']);
         break;
 
 // TODO: refactoring ongoing down from here.
-// Change $arguments to something better (maybe). $args or $params?
-			case "datefield":
-			    import('form.DateField');
-			    $el = new DateField($arguments["name"]);
-				$el->setMaxLength("10");
-			    break;
-			    
-			case "floatfield":
-			    import('form.FloatField');
-			    $el = new FloatField($arguments["name"]);
-			    if (isset($arguments["format"])) $el->setFormat($arguments["format"]);
-			    break;
-			    
-			case "textarea":
+		case "textarea":
 			    import('form.TextArea');
-			    $el = new TextArea($arguments["name"]);
-			    $el->setColumns(@$arguments["cols"]);
-			    $el->setRows(@$arguments["rows"]);
-			    if (isset($arguments["maxlength"])) $el->setMaxLength($arguments["maxlength"]);
+			    $el = new TextArea($params["name"]);
+			    $el->setColumns(@$params["cols"]);
+			    $el->setRows(@$params["rows"]);
+			    if (isset($params["maxlength"])) $el->setMaxLength($params["maxlength"]);
 			    break;
 			    
 			case "checkbox":
 			    import('form.Checkbox');
-			    $el = new Checkbox($arguments["name"]);
-			    if (@$arguments["checked"]) $el->setChecked(true);
-			    $el->setData(@$arguments["data"]);
+			    $el = new Checkbox($params["name"]);
+			    if (@$params["checked"]) $el->setChecked(true);
+			    $el->setData(@$params["data"]);
 			    break;
 			    
 			case "checkboxgroup":
 			    import('form.CheckboxGroup');
-			    $el = new CheckboxGroup($arguments["name"]);
-			    if (isset($arguments["layout"])) $el->setLayout($arguments["layout"]);
-			    if (isset($arguments["groupin"])) $el->setGroupIn($arguments["groupin"]);
-			    if (isset($arguments["datakeys"])) $el->setDataKeys($arguments["datakeys"]);
-			    $el->setData(@$arguments["data"]);
+			    $el = new CheckboxGroup($params["name"]);
+			    if (isset($params["layout"])) $el->setLayout($params["layout"]);
+			    if (isset($params["groupin"])) $el->setGroupIn($params["groupin"]);
+			    if (isset($params["datakeys"])) $el->setDataKeys($params["datakeys"]);
+			    $el->setData(@$params["data"]);
 			    break;
 			    
 			case "combobox":
 			    import('form.Combobox');
-			    $el = new Combobox($arguments["name"]);
-			    $el->setData(@$arguments["data"]);
-			    $el->setDataDefault(@$arguments["empty"]);
-			    if (isset($arguments["datakeys"])) $el->setDataKeys($arguments["datakeys"]);
+			    $el = new Combobox($params["name"]);
+			    $el->setData(@$params["data"]);
+			    $el->setDataDefault(@$params["empty"]);
+			    if (isset($params["datakeys"])) $el->setDataKeys($params["datakeys"]);
 			    break;
 			    
 			case "hidden":
 			    import('form.Hidden');
-			    $el = new Hidden($arguments["name"]);
+			    $el = new Hidden($params["name"]);
 			    break;
 			 
 			case "submit":
 			    import('form.Submit');
-			    $el = new Submit($arguments["name"]);
+			    $el = new Submit($params["name"]);
 			    break;
 			    
 			case "calendar":
 			    import('form.Calendar');
-			    $el = new Calendar($arguments["name"]);
-			    $el->setHighlight(@$arguments["highlight"]);
+			    $el = new Calendar($params["name"]);
+			    $el->setHighlight(@$params["highlight"]);
 			    break;  
 			    
 			case "table":
 			    import('form.Table');
-			    $el = new Table($arguments["name"]);
-			    $el->setData(@$arguments["data"]);
-			    $el->setWidth(@$arguments["width"]);
+			    $el = new Table($params["name"]);
+			    $el->setData(@$params["data"]);
+			    $el->setWidth(@$params["width"]);
 			    break;
 			    
 			case "upload":
 			    import('form.UploadFile');
-			    $el = new UploadFile($arguments["name"]);
-			    if (isset($arguments["maxsize"])) $el->setMaxSize($arguments["maxsize"]);
+			    $el = new UploadFile($params["name"]);
+			    if (isset($params["maxsize"])) $el->setMaxSize($params["maxsize"]);
 			    break;
 		}
 		if ($el!=null) {
 			$el->setFormName($this->name);
-			if (isset($arguments["id"])) $el->setId($arguments["id"]);
+			if (isset($params["id"])) $el->setId($params["id"]);
 			if (isset($GLOBALS["I18N"])) $el->localize($GLOBALS["I18N"]);
-			if (isset($arguments["enable"])) $el->setEnabled($arguments["enable"]);
+			if (isset($params["enable"])) $el->setEnabled($params["enable"]);
 			
-			if (isset($arguments["style"])) $el->setStyle($arguments["style"]);
-			if (isset($arguments["size"])) $el->setSize($arguments["size"]);
+			if (isset($params["style"])) $el->setStyle($params["style"]);
+			if (isset($params["size"])) $el->setSize($params["size"]);
 			
-			if (isset($arguments["label"])) $el->setLabel($arguments["label"]);
-			if (isset($arguments["value"])) $el->setValue($arguments["value"]);
+			if (isset($params["label"])) $el->setLabel($params["label"]);
+			if (isset($params["value"])) $el->setValue($params["value"]);
 			
-			if (isset($arguments["onchange"])) $el->setOnChange($arguments["onchange"]);
-			if (isset($arguments["onclick"])) $el->setOnClick($arguments["onclick"]);
+			if (isset($params["onchange"])) $el->setOnChange($params["onchange"]);
+			if (isset($params["onclick"])) $el->setOnClick($params["onclick"]);
 			
-			$this->elements[$arguments["name"]] = &$el;
+			$this->elements[$params["name"]] = &$el;
 		}
 	}
 	
