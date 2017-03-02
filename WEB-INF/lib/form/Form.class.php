@@ -79,19 +79,19 @@ class Form {
         if (isset($params['format'])) $el->setFormat($params['format']);
         break;
 
+      case 'textarea':
+        import('form.TextArea');
+        $el = new TextArea($params['name']);
+        if (isset($params['cols'])) $el->setColumns($params['cols']);
+        if (isset($params['rows'])) $el->setRows($params['rows']);
+        if (isset($params['maxlength'])) $el->setMaxLength($params['maxlength']);
+        break;
+
+      case 'checkbox':
+        import('form.Checkbox');
+        $el = new Checkbox($params['name']);
 // TODO: refactoring ongoing down from here.
-		case "textarea":
-			    import('form.TextArea');
-			    $el = new TextArea($params["name"]);
-			    $el->setColumns(@$params["cols"]);
-			    $el->setRows(@$params["rows"]);
-			    if (isset($params["maxlength"])) $el->setMaxLength($params["maxlength"]);
-			    break;
-			    
-			case "checkbox":
-			    import('form.Checkbox');
-			    $el = new Checkbox($params["name"]);
-			    if (@$params["checked"]) $el->setChecked(true);
+        if (@$params["checked"]) $el->setChecked(true);
 			    $el->setData(@$params["data"]);
 			    break;
 			    

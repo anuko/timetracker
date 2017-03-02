@@ -27,16 +27,17 @@
 // +----------------------------------------------------------------------+
 
 import('form.FormElement');
-	
+
 class TextField extends FormElement {
 
-	function __construct($name,$value="")
-	{
-            $this->class = 'TextField';
-		$this->name = $name;
-		$this->value = $value;
-	}
+  function __construct($name, $value = '')
+  {
+    $this->class = 'TextField';
+    $this->name = $name;
+    $this->value = $value;
+  }
 
+  // TODO: refactoring ongoing down from here.
 	function getHtml() {
 		if (!$this->isEnabled()) {
 			$html = "<input name=\"$this->name\" value=\"".htmlspecialchars($this->getValue())."\" readonly>\n";

@@ -29,15 +29,16 @@
 import('form.FormElement');
 	
 class UploadFile extends FormElement {
-    var $class = 'UploadFile';
-    var $mMaxSize		= 100000;	// 100kb
+    var $mMaxSize		= 100000;	// 100kb // TODO: refactor this.
 
-	function __construct($name,$value="")
-	{
-		$this->name = $name;
-		$this->value = $value;
-	}
-	
+  function __construct($name, $value = '')
+  {
+    $this->class = 'UploadFile';
+    $this->name = $name;
+    $this->value = $value;
+  }
+
+// TODO: refactoring ongoing down from here.
 	function setMaxSize($value)	{ $this->mMaxSize = $value;	}
 	function getMaxSize()	{ return $this->mMaxSize; }
 	
