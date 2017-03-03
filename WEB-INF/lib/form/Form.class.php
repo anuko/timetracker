@@ -26,13 +26,9 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-// +----------------------------------------------------------------------+
-// |
-// | Class generates elements of specification HTML 4.01
-// | http://www.w3.org/TR/1999/REC-html401-19991224
-// |
-// +----------------------------------------------------------------------+
-
+// Form class is a container for HTML forms we use in the application.
+// It contains an array of $elements - which are individual input controls
+// belonging to a form.
 class Form {
   var $name = '';          // Form name.
   var $elements = array(); // An array of input controls in form.
@@ -89,8 +85,9 @@ class Form {
       case 'checkbox':
         import('form.Checkbox');
         $el = new Checkbox($params['name']);
+        if (isset($params['checked'])) $el->setChecked(true);
+
 // TODO: refactoring ongoing down from here.
-        if (@$params["checked"]) $el->setChecked(true);
 			    $el->setData(@$params["data"]);
 			    break;
 			    

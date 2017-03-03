@@ -29,7 +29,7 @@
 import('form.FormElement');
 
 class Checkbox extends FormElement {
-    var $mChecked	= false;
+  var $checked = false;
     var $mOptions	= null;
 
   function __construct($name, $value = '') {
@@ -38,18 +38,20 @@ class Checkbox extends FormElement {
     $this->value = $value;
   }
 
-	function setChecked($value)	{ $this->mChecked = $value; }
-	function isChecked() { return $this->mChecked; }
+	function setChecked($value) { $this->checked = $value; }
+	function isChecked() { return $this->checked; }
 	
 	function setData($value)	{ $this->mOptions = $value; }
 	function getData() { return $this->mOptions; }
-	
-	function getHtml() {
 
-	    if ($this->id=="") $this->id = $this->name;
-	    
-		$html = "\n\t<input type=\"checkbox\"";
-		$html .= " name=\"$this->name\" id=\"$this->id\"";
+  function getHtml() {
+    if ($this->id == '') $this->id = $this->name;
+
+    $html = "\n\t<input type=\"checkbox\"";
+    $html.= " id=\"$this->id\" name=\"$this->name\"";
+
+    if ($this->checked || (($this->value == $this->mOptions) && ($this->value != null)))
+      $html.= " checked=\"true\"";
 
 		if ($this->on_change!="")
 		   $html .= " onchange=\"$this->on_change\"";
@@ -57,8 +59,7 @@ class Checkbox extends FormElement {
 		if ($this->style!="")
 		   $html .= " style=\"$this->style\"";
 
-		if ($this->mChecked || (($this->value == $this->mOptions) && ($this->value != null)))
-		   $html .= " checked=\"true\"";
+
 		   
 		if (!$this->isEnabled())
 		   $html .= " disabled=\"disabled\"";
