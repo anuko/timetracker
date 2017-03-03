@@ -29,12 +29,11 @@
 import('form.TextField');
 
 class FloatField extends TextField {
-
   var $mDelimiter = '.';
   var $mFFormat;
-  var $class = 'FloatField';
-
+  
   function __construct($name) {
+    $this->class = 'FloatField';
     $this->name = $name;
   }
 

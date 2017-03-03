@@ -29,15 +29,15 @@
 import('form.FormElement');
 	
 class Submit extends FormElement {
-	var $class = 'Submit';
 
-	function __construct($name,$value="")
-	{
-		$this->name = $name;
-		$this->value = $value;
-	}
+  function __construct($name, $value = '')
+  {
+    $this->class = 'Submit';
+    $this->name = $name;
+    $this->value = $value;
+  }
 
-	function getHtml() {
+  function getHtml() {
 	    
 	    if ($this->id=="") $this->id = $this->name;
 	    

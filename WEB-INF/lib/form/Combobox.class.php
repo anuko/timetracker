@@ -44,13 +44,12 @@ class Combobox extends FormElement {
     var $mCompareOn = "key"; // or "value"
     var $mDataDeep = 1;
     var $mDataKeys = array();
-    var $class = 'Combobox';
 
-	function __construct($name,$value="")
-	{
-		$this->name = $name;
-		$this->value = $value;
-	}
+  function __construct($name, $value = '') {
+    $this->class = 'Combobox';
+    $this->name = $name;
+    $this->value = $value;
+  }
 
 	function setMultiple($value)	{ $this->mMultiple = $value; }
 	function isMultiple() { return $this->mMultiple; }
@@ -111,4 +110,3 @@ class Combobox extends FormElement {
 		return $html;
 	}
 }
-?>

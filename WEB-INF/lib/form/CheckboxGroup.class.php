@@ -33,17 +33,16 @@ class CheckboxGroup extends FormElement {
     var $mOptions	= array();
     var $mLayout	= "V";
     var $mGroupIn	= 1;
-    var $class = 'CheckboxGroup';
     var $mDataKeys	= array();
     var $mDataDeep	= 1;
     var $lSelAll	= "All";
     var $lSelNone	= "None";
 
-	function __construct($name,$value="")
-	{
-		$this->name = $name;
-		$this->value = $value;
-	}
+  function __construct($name, $value = '') {
+    $this->class = 'CheckboxGroup';
+    $this->name = $name;
+    $this->value = $value;
+  }
 
 	function setChecked($value)	{ $this->mChecked = $value; }
 	function isChecked() { return $this->mChecked; }

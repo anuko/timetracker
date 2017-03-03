@@ -31,13 +31,12 @@ import('form.FormElement');
 class Checkbox extends FormElement {
     var $mChecked	= false;
     var $mOptions	= null;
-    var $class = 'Checkbox';
 
-	function __construct($name,$value="")
-	{
-		$this->name = $name;
-		$this->value = $value;
-	}
+  function __construct($name, $value = '') {
+    $this->class = 'Checkbox';
+    $this->name = $name;
+    $this->value = $value;
+  }
 
 	function setChecked($value)	{ $this->mChecked = $value; }
 	function isChecked() { return $this->mChecked; }

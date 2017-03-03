@@ -34,7 +34,6 @@
 // +----------------------------------------------------------------------+
 
 class Form {
-
   var $name = '';          // Form name.
   var $elements = array(); // An array of input controls in form.
 

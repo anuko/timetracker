@@ -31,14 +31,14 @@ import('form.FormElement');
 class TextArea extends FormElement {
     var $mColumns	= "";
     var $mRows		= "";
-    var $class = 'TextArea';
     var $mOnKeyPress	= "";
 
-	function __construct($name,$value="")
-	{
-		$this->name = $name;
-		$this->value = $value;
-	}
+  function __construct($name, $value = '')
+  {
+    $this->class = 'TextArea';
+    $this->name = $name;
+    $this->value = $value;
+  }
 	
 	function setColumns($value)	{ $this->mColumns = $value;	}
 	function getColumns()	{ return $this->mColumns; }

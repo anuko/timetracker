@@ -44,15 +44,14 @@ class Calendar extends FormElement {
 
     var $controlName = "";
     var $highlight = "time"; // Determines what type of active days to highlight ("time" or "expenses"). 
-    // var $mAllDays       = true;
-    var $class = "Calendar";
 
     function __construct($name) {
-        $this->controlName = $name;
-        $this->mMonthNames = array('January','February','March','April','May','June','July','August','September','October','November','December');
-        $this->mWeekDayShortNames = array('Su','Mo','Tu','We','Th','Fr','Sa');
+      $this->class = 'Calendar';
+      $this->controlName = $name; // TODO: why controlName? Other classes have "name".
+      $this->mMonthNames = array('January','February','March','April','May','June','July','August','September','October','November','December');
+      $this->mWeekDayShortNames = array('Su','Mo','Tu','We','Th','Fr','Sa');
     }
-    
+
     function setHighlight($highlight) {
     	if ($highlight && $highlight != 'time')
     	  $this->highlight = $highlight;

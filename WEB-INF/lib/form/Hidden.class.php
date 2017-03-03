@@ -27,26 +27,20 @@
 // +----------------------------------------------------------------------+
 
 import('form.FormElement');
-	
+
 class Hidden extends FormElement {
-    var $class = 'Hidden';
 
-	function __construct($name,$value="")
-	{
-		$this->name = $name;
-		$this->value = $value;
-	}
+  function __construct($name, $value = '') {
+    $this->class = 'Hidden';
+    $this->name = $name;
+    $this->value = $value;
+  }
 
-	function getHtml()	{
-	    
-	    if ($this->id=="") $this->id = $this->name;
-	    
-		$html = "\n\t<input";
-		$html .= " type=\"hidden\" name=\"$this->name\" id=\"$this->id\"";
-		
-		$html .= " value=\"".$this->getValue()."\"";
-		$html .= ">";
-		
-		return $html;
-	}
+  function getHtml() {
+    if ($this->id == '') $this->id = $this->name;
+
+    $html = "\n\t<input type=\"hidden\" id=\"$this->id\" name=\"$this->name\"";
+    $html.= ' value="'.$this->getValue().'">';
+    return $html;
+  }
 }

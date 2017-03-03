@@ -33,15 +33,14 @@ class DateField extends TextField {
   var $mWeekStartDay = 0;
   var $mDateFormat  = "d/m/Y";
   var $lToday      = "Today";
-
   var $mDateObj;
-  var $class = 'DateField';
 
   var $lCalendarButtons = array('today'=>'Today', 'close'=>'Close');
 
   function __construct($name) {
-    $this->name  = $name;
-    $this->mDateObj  = new DateAndTime();
+    $this->class = 'DateField';
+    $this->name = $name;
+    $this->mDateObj = new DateAndTime();
 
     if (isset($GLOBALS["I18N"])) {
       $this->localize($GLOBALS["I18N"]);

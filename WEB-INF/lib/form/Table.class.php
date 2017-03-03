@@ -41,13 +41,13 @@ class Table extends FormElement {
   var $mBgColor       = '#ffffff';
   var $mBgColorOver   = '#eeeeff';
   var $mWidth         = '';
-  var $class = 'Table';
   var $mTableOptions  = array();
   var $mRowOptions    = array();
   var $mHeaderOptions = array();
   var $mProccessed    = false;
 	
   function __construct($name, $value='') {
+    $this->class = 'Table';
     $this->name = $name;
     $this->value = $value;
   }
