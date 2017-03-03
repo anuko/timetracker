@@ -50,7 +50,7 @@ $form->addInput(array('type'=>'combobox','name'=>'type',
   'data'=>array(CustomFields::TYPE_TEXT=>$i18n->getKey('label.type_text'),
                 CustomFields::TYPE_DROPDOWN=>$i18n->getKey('label.type_dropdown'))
 ));
-$form->addInput(array('type'=>'checkbox','name'=>'required','data'=>1,'value'=>'0'));
+$form->addInput(array('type'=>'checkbox','name'=>'required'));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));	
 
 if ($request->isPost()) {

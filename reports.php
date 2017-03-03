@@ -172,24 +172,24 @@ $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'end_date'))
 
 // Add checkboxes for fields.
 if ($user->isPluginEnabled('cl'))
-  $form->addInput(array('type'=>'checkbox','name'=>'chclient','data'=>1));
+  $form->addInput(array('type'=>'checkbox','name'=>'chclient'));
 if (($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv'))
-  $form->addInput(array('type'=>'checkbox','name'=>'chinvoice','data'=>1));
+  $form->addInput(array('type'=>'checkbox','name'=>'chinvoice'));
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
-  $form->addInput(array('type'=>'checkbox','name'=>'chproject','data'=>1));
+  $form->addInput(array('type'=>'checkbox','name'=>'chproject'));
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
-  $form->addInput(array('type'=>'checkbox','name'=>'chtask','data'=>1));
+  $form->addInput(array('type'=>'checkbox','name'=>'chtask'));
 if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
-  $form->addInput(array('type'=>'checkbox','name'=>'chstart','data'=>1));
-  $form->addInput(array('type'=>'checkbox','name'=>'chfinish','data'=>1));
+  $form->addInput(array('type'=>'checkbox','name'=>'chstart'));
+  $form->addInput(array('type'=>'checkbox','name'=>'chfinish'));
 }
-$form->addInput(array('type'=>'checkbox','name'=>'chduration','data'=>1));
-$form->addInput(array('type'=>'checkbox','name'=>'chnote','checked'=>true, 'data'=>1));
+$form->addInput(array('type'=>'checkbox','name'=>'chduration'));
+$form->addInput(array('type'=>'checkbox','name'=>'chnote'));
 if (defined('COST_ON_REPORTS') && isTrue(COST_ON_REPORTS))
-  $form->addInput(array('type'=>'checkbox','name'=>'chcost','data'=>1));
+  $form->addInput(array('type'=>'checkbox','name'=>'chcost'));
 // If we have a custom field - add a checkbox for it.
 if ($custom_fields && $custom_fields->fields[0])
-  $form->addInput(array('type'=>'checkbox','name'=>'chcf_1','data'=>1));
+  $form->addInput(array('type'=>'checkbox','name'=>'chcf_1'));
 
 // Add group by control.
 $group_by_options['no_grouping'] = $i18n->getKey('form.reports.group_by_no');
@@ -206,7 +206,7 @@ if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['ty
   $group_by_options['cf_1'] = $custom_fields->fields[0]['label'];
 }
 $form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by','data'=>$group_by_options));
-$form->addInput(array('type'=>'checkbox','name'=>'chtotalsonly','data'=>1));
+$form->addInput(array('type'=>'checkbox','name'=>'chtotalsonly'));
 
 // Add text field for a new favorite report name.
 $form->addInput(array('type'=>'text','name'=>'new_fav_report','maxlength'=>'30','style'=>'width: 250px;'));
@@ -225,17 +225,17 @@ if (($request->getMethod() == 'GET') && !$bean->isSaved()) {
   $period = new Period(INTERVAL_THIS_MONTH, new DateAndTime($user->date_format));
   $form->setValueByElement('start_date', $period->getBeginDate());
   $form->setValueByElement('end_date', $period->getEndDate());
-  $form->setValueByElement('chclient', 1);
-  $form->setValueByElement('chinvoice', 0);
-  $form->setValueByElement('chproject', 1);
-  $form->setValueByElement('chstart', 1);  
-  $form->setValueByElement('chduration', 1);
-  $form->setValueByElement('chcost', 0);
-  $form->setValueByElement('chtask', 1);
-  $form->setValueByElement('chfinish', 1);
-  $form->setValueByElement('chnote', 1);
-  $form->setValueByElement('chcf_1', 0);
-  $form->setValueByElement('chtotalsonly', 0);
+  $form->setValueByElement('chclient', '1');
+  $form->setValueByElement('chinvoice', '0');
+  $form->setValueByElement('chproject', '1');
+  $form->setValueByElement('chstart', '1');
+  $form->setValueByElement('chduration', '1');
+  $form->setValueByElement('chcost', '0');
+  $form->setValueByElement('chtask', '1');
+  $form->setValueByElement('chfinish', '1');
+  $form->setValueByElement('chnote', '1');
+  $form->setValueByElement('chcf_1', '0');
+  $form->setValueByElement('chtotalsonly', '0');
 }
 
 $form->setValueByElement('fav_report_changed','');

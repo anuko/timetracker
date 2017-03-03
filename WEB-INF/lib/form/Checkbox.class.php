@@ -29,19 +29,11 @@
 import('form.FormElement');
 
 class Checkbox extends FormElement {
-  var $checked = false;
-    var $mOptions	= null;
 
   function __construct($name) {
     $this->class = 'Checkbox';
     $this->name = $name;
   }
-
-	function setChecked($value) { $this->checked = $value; }
-	function isChecked() { return $this->checked; }
-	
-	function setData($value)	{ $this->mOptions = $value; }
-	function getData() { return $this->mOptions; }
 
   function getHtml() {
     if ($this->id == '') $this->id = $this->name;
@@ -49,7 +41,7 @@ class Checkbox extends FormElement {
     $html = "\n\t<input type=\"checkbox\"";
     $html.= " id=\"$this->id\" name=\"$this->name\"";
 
-    if ($this->checked || (($this->value == $this->mOptions) && ($this->value != null)))
+    if ($this->value)
       $html.= " checked=\"true\"";
 
 		if ($this->on_change!="")
@@ -62,8 +54,10 @@ class Checkbox extends FormElement {
 		   
 		if (!$this->isEnabled())
 		   $html .= " disabled=\"disabled\"";
-		   
-		$html .= " value=\"".htmlspecialchars($this->mOptions)."\"";
+
+      // Provide a value so that we pass "1" for set checkboxes on form submit.
+      // Otherwise the default is "on" string, which is not what we want.
+      $html .= " value=\"1\"";
 		
 		$html .= "/>\n";   
 		

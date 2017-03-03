@@ -200,7 +200,7 @@ if (!defined('NOTE_INPUT_HEIGHT'))
 $form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 600px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
 $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
 if ($user->isPluginEnabled('iv'))
-  $form->addInput(array('type'=>'checkbox','name'=>'billable','data'=>1,'value'=>$cl_billable));
+  $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.submit')));
 

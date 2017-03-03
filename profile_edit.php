@@ -176,17 +176,17 @@ if ($user->canManageTeam()) {
   $uncompleted_indicators_options[UNCOMPLETED_INDICATORS] = $i18n->getKey('form.profile.uncompleted_indicators_show');
   $form->addInput(array('type'=>'combobox','name'=>'uncompleted_indicators','style'=>'width: 150px;','data'=>$uncompleted_indicators_options,'value'=>$cl_uncompleted_indicators));
 
-  $form->addInput(array('type'=>'checkbox','name'=>'charts','data'=>1,'value'=>$cl_charts));
-  $form->addInput(array('type'=>'checkbox','name'=>'clients','data'=>1,'value'=>$cl_clients,'onchange'=>'handlePluginCheckboxes()'));
-  $form->addInput(array('type'=>'checkbox','name'=>'client_required','data'=>1,'value'=>$cl_client_required));
+  $form->addInput(array('type'=>'checkbox','name'=>'charts','value'=>$cl_charts));
+  $form->addInput(array('type'=>'checkbox','name'=>'clients','value'=>$cl_clients,'onchange'=>'handlePluginCheckboxes()'));
+  $form->addInput(array('type'=>'checkbox','name'=>'client_required','value'=>$cl_client_required));
 
-  $form->addInput(array('type'=>'checkbox','name'=>'invoices','data'=>1,'value'=>$cl_invoices));
-  $form->addInput(array('type'=>'checkbox','name'=>'custom_fields','data'=>1,'value'=>$cl_custom_fields,'onchange'=>'handlePluginCheckboxes()'));
-  $form->addInput(array('type'=>'checkbox','name'=>'expenses','data'=>1,'value'=>$cl_expenses,'onchange'=>'handlePluginCheckboxes()'));
-  $form->addInput(array('type'=>'checkbox','name'=>'tax_expenses','data'=>1,'value'=>$cl_tax_expenses));
-  $form->addInput(array('type'=>'checkbox','name'=>'notifications','data'=>1,'value'=>$cl_notifications,'onchange'=>'handlePluginCheckboxes()'));
-  $form->addInput(array('type'=>'checkbox','name'=>'locking','data'=>1,'value'=>$cl_locking,'onchange'=>'handlePluginCheckboxes()'));
-  $form->addInput(array('type'=>'checkbox','name'=>'quotas','data'=>1,'value'=>$cl_quotas,'onchange'=>'handlePluginCheckboxes()'));
+  $form->addInput(array('type'=>'checkbox','name'=>'invoices','value'=>$cl_invoices));
+  $form->addInput(array('type'=>'checkbox','name'=>'custom_fields','value'=>$cl_custom_fields,'onchange'=>'handlePluginCheckboxes()'));
+  $form->addInput(array('type'=>'checkbox','name'=>'expenses','value'=>$cl_expenses,'onchange'=>'handlePluginCheckboxes()'));
+  $form->addInput(array('type'=>'checkbox','name'=>'tax_expenses','value'=>$cl_tax_expenses));
+  $form->addInput(array('type'=>'checkbox','name'=>'notifications','value'=>$cl_notifications,'onchange'=>'handlePluginCheckboxes()'));
+  $form->addInput(array('type'=>'checkbox','name'=>'locking','value'=>$cl_locking,'onchange'=>'handlePluginCheckboxes()'));
+  $form->addInput(array('type'=>'checkbox','name'=>'quotas','value'=>$cl_quotas,'onchange'=>'handlePluginCheckboxes()'));
 }
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 

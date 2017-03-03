@@ -155,7 +155,7 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
     'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 }
 if ($user->isPluginEnabled('iv'))
-  $form->addInput(array('type'=>'checkbox','name'=>'billable','data'=>1,'value'=>$cl_billable,'enable'=>$enable_controls));
+  $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable,'enable'=>$enable_controls));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on button click.
 $form->addInput(array('type'=>'hidden','name'=>'browser_time','value'=>''));  // User current time, which gets filled in on button click.
 $enable_start = $uncompleted ? false : true;
