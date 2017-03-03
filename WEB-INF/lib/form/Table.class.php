@@ -46,10 +46,9 @@ class Table extends FormElement {
   var $mHeaderOptions = array();
   var $mProccessed    = false;
 	
-  function __construct($name, $value='') {
+  function __construct($name) {
     $this->class = 'Table';
     $this->name = $name;
-    $this->value = $value;
   }
   
   function setKeyField($value) {

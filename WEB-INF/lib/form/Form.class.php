@@ -85,7 +85,7 @@ class Form {
       case 'checkbox':
         import('form.Checkbox');
         $el = new Checkbox($params['name']);
-        if (isset($params['checked'])) $el->setChecked(true);
+        if (isset($params['checked'])) $el->setChecked($params['checked']);
 
 // TODO: refactoring ongoing down from here.
 			    $el->setData(@$params["data"]);

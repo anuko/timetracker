@@ -45,10 +45,9 @@ class Combobox extends FormElement {
     var $mDataDeep = 1;
     var $mDataKeys = array();
 
-  function __construct($name, $value = '') {
+  function __construct($name) {
     $this->class = 'Combobox';
     $this->name = $name;
-    $this->value = $value;
   }
 
 	function setMultiple($value)	{ $this->mMultiple = $value; }

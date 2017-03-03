@@ -32,10 +32,9 @@ class Checkbox extends FormElement {
   var $checked = false;
     var $mOptions	= null;
 
-  function __construct($name, $value = '') {
+  function __construct($name) {
     $this->class = 'Checkbox';
     $this->name = $name;
-    $this->value = $value;
   }
 
 	function setChecked($value) { $this->checked = $value; }

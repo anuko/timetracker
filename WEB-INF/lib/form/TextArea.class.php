@@ -33,13 +33,12 @@ class TextArea extends FormElement {
     var $mRows		= "";
     var $mOnKeyPress	= "";
 
-  function __construct($name, $value = '')
+  function __construct($name)
   {
     $this->class = 'TextArea';
     $this->name = $name;
-    $this->value = $value;
   }
-	
+
 	function setColumns($value)	{ $this->mColumns = $value;	}
 	function getColumns()	{ return $this->mColumns; }
 

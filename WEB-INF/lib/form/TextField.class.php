@@ -30,11 +30,10 @@ import('form.FormElement');
 
 class TextField extends FormElement {
 
-  function __construct($name, $value = '')
+  function __construct($name)
   {
     $this->class = 'TextField';
     $this->name = $name;
-    $this->value = $value;
   }
 
   // TODO: refactoring ongoing down from here.

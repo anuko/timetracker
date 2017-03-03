@@ -184,7 +184,7 @@ if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type
   $form->addInput(array('type'=>'checkbox','name'=>'chfinish','data'=>1));
 }
 $form->addInput(array('type'=>'checkbox','name'=>'chduration','data'=>1));
-$form->addInput(array('type'=>'checkbox','name'=>'chnote','data'=>1));
+$form->addInput(array('type'=>'checkbox','name'=>'chnote','checked'=>true, 'data'=>1));
 if (defined('COST_ON_REPORTS') && isTrue(COST_ON_REPORTS))
   $form->addInput(array('type'=>'checkbox','name'=>'chcost','data'=>1));
 // If we have a custom field - add a checkbox for it.

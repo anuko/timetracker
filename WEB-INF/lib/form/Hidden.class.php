@@ -30,10 +30,9 @@ import('form.FormElement');
 
 class Hidden extends FormElement {
 
-  function __construct($name, $value = '') {
+  function __construct($name) {
     $this->class = 'Hidden';
     $this->name = $name;
-    $this->value = $value;
   }
 
   function getHtml() {

@@ -30,11 +30,10 @@ import('form.FormElement');
 
 class PasswordField extends FormElement {
 
-  function __construct($name, $value='')
+  function __construct($name)
   {
     $this->class = 'PasswordField';
     $this->name = $name;
-    $this->value = $value;
   }
 
   function getHtml() {
