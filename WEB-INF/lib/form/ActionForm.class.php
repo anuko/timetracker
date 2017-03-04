@@ -99,17 +99,7 @@ class ActionForm {
 	        $this->mInitForm = true;
         }
     }
-    
-    /**
-     * Init custom variables
-     *
-     * @param unknown $request
-     * @param unknown $respons
-     */
-    function initVariables(&$request, &$respons) {
-    	
-    }
-    
+
     function setVariablesNames($namelist) {
         $this->mVariables = $namelist;
     }
