@@ -755,7 +755,7 @@ class ttTeamHelper {
   static function update($team_id, $fields)
   {
     // We'll require team name to be always set.
-    if (!isset($fields['name']) || $fields['name'] == "") return false;
+//    if (!isset($fields['name']) || $fields['name'] == "") return false;
 
     $mdb2 = getConnection();
     $name_part = 'name = '.$mdb2->quote($fields['name']);
