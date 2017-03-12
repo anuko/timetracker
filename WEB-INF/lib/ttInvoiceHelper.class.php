@@ -423,7 +423,9 @@ class ttInvoiceHelper {
     $body .= '</table>';
 
     // Output footer.
-    $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
+    if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false))
+      $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
+
     // Finish creating email body.
     $body .= '</body></html>';
 
