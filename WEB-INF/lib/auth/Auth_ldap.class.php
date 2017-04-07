@@ -137,36 +137,35 @@ class Auth_ldap extends Auth {
         return false;
       }
 
+      $filter = 'samaccountname='.Auth_ldap::ldap_escape(str_replace('@' . $this->params['default_domain'], '', $login));
+      $fields = array('samaccountname', 'mail', 'memberof', 'department', 'displayname', 'telephonenumber', 'primarygroupid');
+      $sr = @ldap_search($lc, $this->params['base_dn'], $filter, $fields);
+
+      if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
+        echo '$sr='; var_dump($sr); echo '<br />';
+        echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
+      }
+
+      // if search failed it's likely that account is disabled
+      if (!$sr) {
+        ldap_unbind($lc);
+        return false;
+      }
+
+      $entries = @ldap_get_entries($lc, $sr);
+
+      if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
+        echo '$entries='; var_dump($entries); echo '<br />';
+        echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
+      }
+
+      if ($entries === false) {
+        ldap_unbind($lc);
+        return false;
+      }
+
       if ($member_of) {
         // get groups
-
-        $filter = 'samaccountname='.Auth_ldap::ldap_escape($login);
-        $fields = array('samaccountname', 'mail', 'memberof', 'department', 'displayname', 'telephonenumber', 'primarygroupid');
-        $sr = @ldap_search($lc, $this->params['base_dn'], $filter, $fields);
-
-        if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
-          echo '$sr='; var_dump($sr); echo '<br />';
-          echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
-        }
-
-        // if search failed it's likely that account is disabled
-        if (!$sr) {
-          ldap_unbind($lc);
-          return false;
-        }
-
-        $entries = @ldap_get_entries($lc, $sr);
-
-        if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
-          echo '$entries='; var_dump($entries); echo '<br />';
-          echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
-        }
-
-        if ($entries === false) {
-          ldap_unbind($lc);
-          return false;
-        }
-
         $groups = array();
 
         // extract group names from
@@ -190,6 +189,10 @@ class Auth_ldap extends Auth {
         }
       }
 
+      if (!empty($entries[0]['mail'][0])) {
+        $login = $entries[0]['mail'][0];
+      }
+      
       ldap_unbind($lc);
 
       return array('login' => $login, 'data' => $entries, 'member_of' => $groups);
@@ -220,36 +223,35 @@ class Auth_ldap extends Auth {
         return false;
       }
 
+      $filter = 'samaccountname='.Auth_ldap::ldap_escape($login_oldap);
+      $fields = array('samaccountname', 'mail', 'memberof', 'department', 'displayname', 'telephonenumber', 'primarygroupid');
+      $sr = @ldap_search($lc, $this->params['base_dn'], $filter, $fields);
+
+      if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
+        echo '$sr='; var_dump($sr); echo '<br />';
+        echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
+      }
+
+      // if search failed it's likely that account is disabled
+      if (!$sr) {
+        ldap_unbind($lc);
+        return false;
+      }
+
+      $entries = @ldap_get_entries($lc, $sr);
+
+      if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
+        echo '$entries='; var_dump($entries); echo '<br />';
+        echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
+      }
+
+      if ($entries === false) {
+        ldap_unbind($lc);
+        return false;
+      }
+
       if ($member_of) {
         // get groups
-
-        $filter = 'samaccountname='.Auth_ldap::ldap_escape($login_oldap);
-        $fields = array('samaccountname', 'mail', 'memberof', 'department', 'displayname', 'telephonenumber', 'primarygroupid');
-        $sr = @ldap_search($lc, $this->params['base_dn'], $filter, $fields);
-
-        if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
-          echo '$sr='; var_dump($sr); echo '<br />';
-          echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
-        }
-
-        // if search failed it's likely that account is disabled
-        if (!$sr) {
-          ldap_unbind($lc);
-          return false;
-        }
-
-        $entries = @ldap_get_entries($lc, $sr);
-
-        if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
-          echo '$entries='; var_dump($entries); echo '<br />';
-          echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
-        }
-
-        if ($entries === false) {
-          ldap_unbind($lc);
-          return false;
-        }
-
         $groups = array();
 
         // extract group names from
@@ -271,6 +273,10 @@ class Auth_ldap extends Auth {
             return false;
           }
         }
+      }
+
+      if (!empty($entries[0]['mail'][0])) {
+        $login = $entries[0]['mail'][0];
       }
 
       ldap_unbind($lc);
