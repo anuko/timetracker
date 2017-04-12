@@ -140,7 +140,7 @@ class Auth_ldap extends Auth {
         // Get groups the user is a member of from AD LDAP server.
 
         $filter = 'userPrincipalName='.Auth_ldap::ldap_escape($login);
-        $fields = array('samaccountname', 'mail', 'memberof', 'department', 'displayname', 'telephonenumber', 'primarygroupid');
+        $fields = array('memberof');
         $sr = @ldap_search($lc, $this->params['base_dn'], $filter, $fields);
 
         if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
