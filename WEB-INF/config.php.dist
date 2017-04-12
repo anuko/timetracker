@@ -212,6 +212,10 @@ define('AUTH_MODULE', 'db');
 //  'base_dn' => 'DC=example,DC=com',   // Base distinguished name in LDAP catalog.
 //  'default_domain' => 'example.com',  // Default domain.
 //  'member_of' => array());            // List of groups, membership in which is required for user to be authenticated.
+                                        // Leave it empty if membership is not necessary. Otherwise list CN parts only.
+                                        // For example:
+                                        // array('Ldap Testers') means that the user must be a member Ldap Testers group.
+                                        // array('Ldap Testers', 'Ldap Users') means the user must be a member of both Ldap Testers and Ldap Users groups.
 
 // define('AUTH_DEBUG', false); // Note: enabling AUTH_DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
 

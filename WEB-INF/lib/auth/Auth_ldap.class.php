@@ -65,7 +65,7 @@ class Auth_ldap extends Auth {
     foreach ($illegal as $id => $char) {
       $legal[$id] = "\\".$char;
     }
-    $str = str_replace($illegal, $legal,$str); //replace them
+    $str = str_replace($illegal, $legal, $str); //replace them
     return $str;
   }
 
@@ -112,14 +112,13 @@ class Auth_ldap extends Auth {
     }
 
     // We need to handle Windows AD and OpenLDAP differently.
-    if ($this->params['type'] != 'openldap') {
+    if ($this->params['type'] == 'ad') {
 
-      // check if the user specified full login
+      // Check if user specified full login.
       if (strpos($login, '@') === false) {
-        // append default domain
+        // Append default domain.
         $login .= '@' . $this->params['default_domain'];
       }
-
 
       if (defined('AUTH_DEBUG') && isTrue(AUTH_DEBUG)) {
         echo '$login='; var_dump($login); echo '<br />';
@@ -138,9 +137,9 @@ class Auth_ldap extends Auth {
       }
 
       if ($member_of) {
-        // get groups
+        // Get groups the user is a member of from AD LDAP server.
 
-        $filter = 'samaccountname='.Auth_ldap::ldap_escape($login);
+        $filter = 'userPrincipalName='.Auth_ldap::ldap_escape($login);
         $fields = array('samaccountname', 'mail', 'memberof', 'department', 'displayname', 'telephonenumber', 'primarygroupid');
         $sr = @ldap_search($lc, $this->params['base_dn'], $filter, $fields);
 
@@ -149,7 +148,6 @@ class Auth_ldap extends Auth {
           echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
         }
 
-        // if search failed it's likely that account is disabled
         if (!$sr) {
           ldap_unbind($lc);
           return false;
@@ -169,8 +167,7 @@ class Auth_ldap extends Auth {
 
         $groups = array();
 
-        // extract group names from
-        // assuming the groups are in format: CN=<group_name>,...
+        // Extract group names. Assume the groups are in format: CN=<group_name>,...
         for ($i = 0; $i < @$entries[0]['memberof']['count']; $i++) {
           $grp = $entries[0]['memberof'][$i];
           $grp_fields = explode(',', $grp);
@@ -181,8 +178,8 @@ class Auth_ldap extends Auth {
           echo '$member_of'; var_dump($member_of); echo '<br />';
         };
 
-        // check for group membership
-            foreach ($member_of as $check_grp) {
+        // Check for group membership.
+        foreach ($member_of as $check_grp) {
           if (!in_array($check_grp, $groups)) {
             ldap_unbind($lc);
             return false;
@@ -191,9 +188,10 @@ class Auth_ldap extends Auth {
       }
 
       ldap_unbind($lc);
-
       return array('login' => $login, 'data' => $entries, 'member_of' => $groups);
-    } else {
+    }
+
+    if ($this->params['type'] == 'openldap') {
 
       // Assuming OpenLDAP server.
       $login_oldap = 'uid='.$login.','.$this->params['base_dn'];
@@ -221,6 +219,7 @@ class Auth_ldap extends Auth {
       }
 
       if ($member_of) {
+        // TODO: Fix this for OpenLDAP, as samaccountname has nothing to do with it.
         // get groups
 
         $filter = 'samaccountname='.Auth_ldap::ldap_escape($login_oldap);
@@ -277,6 +276,9 @@ class Auth_ldap extends Auth {
 
       return array('login' => $login, 'data' => $entries, 'member_of' => $groups);
     }
+
+    // Server type is neither 'ad' or 'openldap'.
+    return false;
   }
 
   function isPasswordExternal() {
