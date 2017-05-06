@@ -196,6 +196,9 @@ if ($request->isPost()) {
     if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
       if (!$cl_project) $err->add($i18n->getKey('error.project'));
     }
+    if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode && $user->task_required) {
+      if (!$cl_task) $err->add($i18n->getKey('error.task'));
+    }
     if (strlen($cl_duration) == 0) {
       if ($cl_start || $cl_finish) {
         if (!ttTimeHelper::isValidTime($cl_start))

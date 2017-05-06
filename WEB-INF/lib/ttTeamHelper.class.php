@@ -764,6 +764,7 @@ class ttTeamHelper {
     $time_format_part = '';
     $week_start_part = '';
     $tracking_mode_part = '';
+    $task_required_part = ' , task_required = '.$mdb2->quote($fields['task_required']);
     $record_type_part = '';
     $uncompleted_indicators_part = '';
     $plugins_part = '';
@@ -785,7 +786,7 @@ class ttTeamHelper {
     if (isset($fields['workday_hours'])) $workday_hours_part = ', workday_hours = '.$mdb2->quote($fields['workday_hours']);
 
     $sql = "update tt_teams set $name_part $addr_part $currency_part $lang_part $decimal_mark_part
-      $date_format_part $time_format_part $week_start_part $tracking_mode_part $record_type_part
+      $date_format_part $time_format_part $week_start_part $tracking_mode_part $task_required_part $record_type_part
       $uncompleted_indicators_part $plugins_part $lock_spec_part $workday_hours_part where id = $team_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;

@@ -1,4 +1,19 @@
 <script>
+// handleTaskRequiredCheckbox - controls visibility of the Task Required checkbox.
+function handleTaskRequiredCheckbox() {
+  var taskRequiredCheckbox = document.getElementById("task_required");
+  var taskRequiredLabel = document.getElementById("task_required_label");
+  var trackingModeDropdown = document.getElementById("tracking_mode");
+  if (trackingModeDropdown.value == 2) {
+    taskRequiredCheckbox.style.visibility = "visible";
+    taskRequiredLabel.style.visibility = "visible";
+  } else {
+    taskRequiredCheckbox.style.visibility = "hidden";
+    taskRequiredLabel.style.visibility = "hidden";
+  }
+}
+
+
 // handleControls - controls visibility of controls.
 function handlePluginCheckboxes() {
   var clientsCheckbox = document.getElementById("clients");
@@ -139,7 +154,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.profile.tracking_mode}:</td>
-            <td>{$forms.profileForm.tracking_mode.control}</td>
+            <td>{$forms.profileForm.tracking_mode.control} {$forms.profileForm.task_required.control} <span id="task_required_label"><label for="task_required">{$i18n.label.required}</label></span></td></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.profile.record_type}:</td>
