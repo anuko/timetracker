@@ -24,7 +24,7 @@ CREATE TABLE `tt_teams` (
   `time_format` varchar(20) NOT NULL default '%H:%M',        # time format
   `week_start` smallint(2) NOT NULL DEFAULT '0',             # Week start day, 0 == Sunday.
   `tracking_mode` smallint(2) NOT NULL DEFAULT '1',          # tracking mode ("time", "projects" or "projects and tasks")
-  `tracking_mode_options` smallint(2) default NULL,          # whether a task selection is required or optional
+  `task_required` smallint(2) default NULL,                  # whether a task selection is required or optional
   `record_type` smallint(2) NOT NULL DEFAULT '0',            # time record type ("start and finish", "duration", or both)
   `uncompleted_indicators` smallint(2) NOT NULL DEFAULT '0', # whether to show indicators for users with uncompleted time entries
   `plugins` varchar(255) default NULL,                       # a list of enabled plugins for team

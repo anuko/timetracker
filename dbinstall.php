@@ -636,7 +636,7 @@ if ($_POST) {
     setChange("ALTER TABLE tt_expense_items modify `name` text NOT NULL");
     setChange("ALTER TABLE `tt_teams` ADD `uncompleted_indicators` SMALLINT(2) NOT NULL DEFAULT '0' AFTER `record_type`");
     setChange("CREATE TABLE `tt_predefined_expenses` (`id` int(11) NOT NULL auto_increment, `team_id` int(11) NOT NULL, `name` varchar(255) NOT NULL, `cost` decimal(10,2) default '0.00', PRIMARY KEY  (`id`))");
-    setChange("ALTER TABLE `tt_teams` ADD `tracking_mode_options` smallint(2) default NULL AFTER `tracking_mode`");
+    setChange("ALTER TABLE `tt_teams` ADD `task_required` smallint(2) default NULL AFTER `tracking_mode`");
   }
   
   // The update_clients function updates projects field in tt_clients table.

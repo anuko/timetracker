@@ -59,6 +59,7 @@ if ($request->isPost()) {
     $cl_custom_format_time = $request->getParameter('format_time');
     $cl_start_week = $request->getParameter('start_week');
     $cl_tracking_mode = $request->getParameter('tracking_mode');
+    $cl_task_required = $request->getParameter('task_required');
     $cl_record_type = $request->getParameter('record_type');
     $cl_uncompleted_indicators = $request->getParameter('uncompleted_indicators');
     $cl_charts = $request->getParameter('charts');
@@ -86,6 +87,7 @@ if ($request->isPost()) {
     $cl_custom_format_time = $user->time_format;
     $cl_start_week = $user->week_start;
     $cl_tracking_mode = $user->tracking_mode;
+    $cl_ttask_required = $user->task_required;
     $cl_record_type = $user->record_type;
     $cl_uncompleted_indicators = $user->uncompleted_indicators;
 
