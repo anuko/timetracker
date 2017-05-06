@@ -143,6 +143,11 @@ function fillTaskDropdown(id) {
         }
       }
     }
+
+    // Select a task if user is required to do so and there is only one task available.
+    if ({$user->task_required} && dropdown.options.length == 2) { // 2 because of mandatory top option.
+      dropdown.options[1].selected = true;
+    }
   }
 }
 
