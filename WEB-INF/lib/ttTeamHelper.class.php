@@ -709,6 +709,15 @@ class ttTeamHelper {
       $tracking_mode_v = '';
     }
 
+    $task_required = $fields['task_required'];
+    if ($task_required !== null) {
+      $task_required_f = ', task_required';
+      $task_required_v = ', ' . (int)$task_required;
+    } else {
+      $task_required_f = '';
+      $task_required_v = '';
+    }
+
     $record_type = $fields['record_type'];
     if ($record_type !== null) {
       $record_type_f = ', record_type';
@@ -736,11 +745,11 @@ class ttTeamHelper {
       $workday_hours_v = '';
     }
 
-    $sql = "insert into tt_teams (name, address, currency $lockspec_f, lang $decimal_mark_f $date_format_f $time_format_f $week_start_f $plugins_f $tracking_mode_f $record_type_f $uncompleted_indicators_f $workday_hours_f)
+    $sql = "insert into tt_teams (name, address, currency $lockspec_f, lang $decimal_mark_f $date_format_f $time_format_f $week_start_f $plugins_f $tracking_mode_f $task_required_f $record_type_f $uncompleted_indicators_f $workday_hours_f)
       values(".$mdb2->quote(trim($fields['name'])).
       ", ".$mdb2->quote(trim($fields['address'])).
       ", ".$mdb2->quote(trim($fields['currency']))." $lockspec_v, ".$mdb2->quote($lang).
-      "$decimal_mark_v $date_format_v $time_format_v $week_start_v $plugins_v $tracking_mode_v $record_type_v $uncompleted_indicators_v $workday_hours_v)";
+      "$decimal_mark_v $date_format_v $time_format_v $week_start_v $plugins_v $tracking_mode_v $task_required_v $record_type_v $uncompleted_indicators_v $workday_hours_v)";
     $affected = $mdb2->exec($sql);
 
     if (!is_a($affected, 'PEAR_Error')) {

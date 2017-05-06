@@ -127,6 +127,7 @@ class ttImportHelper {
           'week_start' => $this->teamData['WEEK_START'],
           'plugins' => $this->teamData['PLUGINS'],
           'tracking_mode' => $this->teamData['TRACKING_MODE'],
+          'task_required' => $this->teamData['TASK_REQUIRED'],
           'record_type' => $this->teamData['RECORD_TYPE']));
         if ($team_id) {
           $this->team_id = $team_id;
