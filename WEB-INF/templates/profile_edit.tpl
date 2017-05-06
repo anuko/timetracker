@@ -19,7 +19,7 @@ function handlePluginCheckboxes() {
   var clientsCheckbox = document.getElementById("clients");
   var invoicesCheckbox = document.getElementById("invoices");
   var requiredCheckbox = document.getElementById("client_required");
-  var requiredLabel = document.getElementById("required_label");
+  var requiredLabel = document.getElementById("client_required_label");
   if (clientsCheckbox.checked) {
     requiredCheckbox.style.visibility = "visible";
     requiredLabel.style.visibility = "visible";
@@ -194,7 +194,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.profileForm.clients.control}</td>
-            <td><label for="clients">{$i18n.title.clients}</label> {$forms.profileForm.client_required.control} <span id="required_label"><label for="client_required">{$i18n.label.required}</label></span></td>
+            <td><label for="clients">{$i18n.title.clients}</label> {$forms.profileForm.client_required.control} <span id="client_required_label"><label for="client_required">{$i18n.label.required}</label></span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.profileForm.invoices.control}</td>
