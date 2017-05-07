@@ -773,7 +773,7 @@ class ttTeamHelper {
     $time_format_part = '';
     $week_start_part = '';
     $tracking_mode_part = '';
-    $task_required_part = ' , task_required = '.$mdb2->quote($fields['task_required']);
+    $task_required_part = ' , task_required = '.intval($fields['task_required']);
     $record_type_part = '';
     $uncompleted_indicators_part = '';
     $plugins_part = '';

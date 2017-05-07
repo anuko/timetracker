@@ -93,7 +93,7 @@ class ttUser {
       $this->time_format = $val['time_format'];
       $this->week_start = $val['week_start'];
       $this->tracking_mode = $val['tracking_mode'];
-      $this->task_required = intval($val['task_required']);
+      $this->task_required = $val['task_required'];
       $this->record_type = $val['record_type'];
       $this->uncompleted_indicators = $val['uncompleted_indicators'];
       $this->team = $val['team_name'];
