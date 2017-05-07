@@ -42,7 +42,7 @@ class ttUser {
   var $time_format = null;      // Time format.
   var $week_start = 0;          // Week start day.
   var $tracking_mode = 0;       // Tracking mode.
-  var $task_required = null;    // Whether task selection is required on time entires.
+  var $task_required = 0;       // Whether task selection is required on time entires.
   var $record_type = 0;         // Record type (duration vs start and finish, or both).
   var $uncompleted_indicators = 0; // Uncompleted time entry indicators (show nowhere or on users page).
   var $currency = null;         // Currency.
@@ -93,7 +93,7 @@ class ttUser {
       $this->time_format = $val['time_format'];
       $this->week_start = $val['week_start'];
       $this->tracking_mode = $val['tracking_mode'];
-      $this->task_required = $val['task_required'];
+      $this->task_required = intval($val['task_required']);
       $this->record_type = $val['record_type'];
       $this->uncompleted_indicators = $val['uncompleted_indicators'];
       $this->team = $val['team_name'];
