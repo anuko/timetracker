@@ -41,101 +41,187 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => '登录',
 'menu.logout' => '注销',
-// TODO: translate the following:
-// 'menu.forum' => 'Forum',
+'menu.forum' => '论坛',
 'menu.help' => '帮助',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => '创建新管理账号',
-'menu.profile' => '编辑简介', // TODO: Improve this, used to be "Edit profile", now just "Profile".
-'menu.time' => '我的时间记录', // TODO: Improve this, used to be "My time", now just "Time".
-// TODO: translate the following:
-// 'menu.expenses' => 'Expenses',
+'menu.profile' => '简介',
+'menu.time' => '时间记录',
+'menu.expenses' => '费用',
 'menu.reports' => '报告',
-// TODO: translate the following:
-// 'menu.charts' => 'Charts',
+'menu.charts' => '图表',
 'menu.projects' => '项目',
-// TODO: translate the following:
-// 'menu.tasks' => 'Tasks',
-// 'menu.users' => 'Users',
+'menu.tasks' => '任务',
+'menu.users' => '用户',
 'menu.teams' => '团队',
 'menu.export' => '导出数据',
 'menu.clients' => '客户',
 'menu.options' => '选项',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
-// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
-// 'footer.credits' => 'Credits',
-// 'footer.license' => 'License',
-// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                     // This is a link to a webpage that describes how to contribute to the project.
+'footer.contribute_msg' => '你可以以不同的方式为Time Tracker提建议',
+'footer.credits' => '信用',
+'footer.license' => '许可证',
+'footer.improve' => '投稿',
 
 // Error messages.
-// TODO: translate the following:
-// 'error.access_denied' => 'Access denied.',
-// 'error.sys' => 'System error.',
+'error.access_denied' => '拒绝访问',
+'error.sys' => '系统错误',
 'error.db' => '数据库错误',
 'error.field' => '不正确的"{0}"数据',
 'error.empty' => '栏目"{0}"为空',
 'error.not_equal' => '栏目"{0}"不等于栏目"{1}"',
 'error.interval' => '不正确的间隔',
 'error.project' => '选择项目',
-'error.activity' => '选择活动',
+// TODO: translate the following.
+// 'error.task' => 'Select task.',
+// 'error.client' => 'Select client.',
+// 'error.report' => 'Select report.',
 'error.auth' => '不正确的用户名或密码',
 'error.user_exists' => '该用户登录信息已经存在',
 'error.project_exists' => '该项目名称已经存在',
-'error.activity_exists' => '该活动名称已经存在',
-// TODO: translate error.client_exists.
-// 'error.client_exists' => 'client with this name already exists',
+// TODO: translate the following.
+// 'error.task_exists' => 'Task with this name already exists.',
+'error.client_exists' => '具有此名称的客户端已经存在',
+// TODO: translate the following.
+// 'error.invoice_exists' => 'Invoice with this number already exists.',
+// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 'error.no_login' => '没有该登录信息的用户',
+// TODO: translate the following.
+// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
 'error.upload' => '上传文件出错',
-// TODO: Translate the following:
-// 'error.range_locked' => 'Date range is locked.',
+'error.range_locked' => '日期范围锁定',
 'error.mail_send' => '发送邮件时出错',
-'error.no_email' => '没有电子邮件与该用户名关联',
-// Note to translators: strings below must be translated.
-// 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
-// 'error.goto_uncompleted' => 'go to uncompleted entry.',
+'error.no_email' => '没有电子邮件与该用户名关联。',
+'error.uncompleted_exists' => '未完成的条目已经存在。关闭或删除。',
+'error.goto_uncompleted' => '进入未完成的条目。',
+// TODO: translate the following.
+// 'error.overlap' => 'Time interval overlaps with existing records.',
+// 'error.future_date' => 'Date is in future.',
 
-// labels for various buttons
+// Labels for buttons.
 'button.login' => '登录',
 'button.now' => '当前时间',
-// 'button.set' => '设置',
 'button.save' => '保存',
-'button.delete' => '删除',
+// TODO: translate the following.
+// 'button.copy' => 'Copy',
 'button.cancel' => '取消',
 'button.submit' => '提交',
+
+
 // TODO: check / improve translation of all button.add... strings.
+// Concern is that it used to be "add new something", now just "add something".
 'button.add_user' => '添加新用户',
 'button.add_project' => '添加新项目',
-'button.add_activity' => '添加新活动',
+// TODO: translate the following.
+// 'button.add_task' => 'Add task',
 'button.add_client' => '添加新客户',
+// TODO: translate the following.
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
 'button.add' => '添加',
 'button.generate' => '创建',
-// Note to translators: button.reset_password needs to be translated.
-// "button.reset_password" => 'reset password',
+'button.reset_password' => '重置密码',
 'button.send' => '发送',
 'button.send_by_email' => '通过邮件发送',
-'button.save_as_new' => '另存为',
-// TODO: improve translation of button.create_team
+// TODO: improve translation of button.create_team (used to be "Create new team", now just "Create team").
 'button.create_team' => '创建新团队',
 'button.export' => '导出团队信息',
 'button.import' => '导入团队信息',
-'button.apply' => '应用',
+// TODO: translate the following.
+// 'button.close' => 'Close',
+// 'button.stop' => 'Stop',
 
-// labels for controls on various forms
-// TODO: translate label.team_name
-// 'label.team_name' => 'team name',
+// Labels for controls on forms. Labels in this section are used on multiple forms.
+'label.team_name' => '团队名称',
+// TODO: translate the following.
+// 'label.address' => 'Address',
 'label.currency' => '货币',
-// TODO: translate label.manager_name and label.manager_login.
-// 'label.manager_name' => 'manager name',
-// 'label.manager_login' => 'manager login',
+'label.manager_name' => '管理员姓名',
+'label.manager_login' => '管理员登录',
+// TODO: translate the following.
+// 'label.person_name' => 'Name',
+// 'label.thing_name' => 'Name',
+// 'label.login' => 'Login',
 'label.password' => '密码',
 'label.confirm_password' => '确认密码',
 'label.email' => '电子邮件',
+// Translate the following.
+// 'label.date' => 'Date',
+// 'label.start_date' => 'Start date',
+// 'label.end_date' => 'End date',
+// 'label.user' => 'User',
+// 'label.users' => 'Users',
+// 'label.client' => 'Client',
+// 'label.clients' => 'Clients',
+// 'label.option' => 'Option',
+// 'label.invoice' => 'Invoice',
+// 'label.project' => 'Project',
+// 'label.projects' => 'Projects',
+// 'label.task' => 'Task',
+// 'label.tasks' => 'Tasks',
+// 'label.description' => 'Description',
+// 'label.start' => 'Start',
+// 'label.finish' => 'Finish',
+// 'label.duration' => 'Duration',
+// 'label.note' => 'Note',
+// 'label.item' => 'Item',
+// 'label.cost' => 'Cost',
+// 'label.day_total' => 'Day total',
+// 'label.week_total' => 'Week total',
+// 'label.month_total' => 'Month total',
+// 'label.today' => 'Today',
+// 'label.total_hours' => 'Total hours',
+// 'label.total_cost' => 'Total cost',
+// 'label.view' => 'View',
+// 'label.edit' => 'Edit',
+'label.delete' => '删除',
+// TODO: Translate the following.
+// 'label.configure' => 'Configure',
+// 'label.select_all' => 'Select all',
+// 'label.select_none' => 'Deselect all',
+// 'label.id' => 'ID',
+// 'label.language' => 'Language',
+// 'label.decimal_mark' => 'Decimal mark',
+// 'label.date_format' => 'Date format',
+// 'label.time_format' => 'Time format',
+// 'label.week_start' => 'First day of week',
+// 'label.comment' => 'Comment',
+// 'label.status' => 'Status',
+// 'label.tax' => 'Tax',
+// 'label.subtotal' => 'Subtotal',
 'label.total' => '总计',
-// Translate the following string.
-// 'label.page' => 'Page',
+// TODO: Translate the following.
+// 'label.client_name' => 'Client name',
+// 'label.client_address' => 'Client address',
+// 'label.or' => 'or',
+// 'label.error' => 'Error',
+// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
+// 'label.required_fields' => '* - required fields',
+// 'label.on_behalf' => 'on behalf of',
+// 'label.role_manager' => '(manager)',
+// 'label.role_comanager' => '(co-manager)',
+// 'label.role_admin' => '(administrator)',
+'label.page' => '页码',
+// Labels for plugins (extensions to Time Tracker that provide additional features).
+// TODO: Translate the following.
+'label.custom_fields' => 'Custom fields',
+'label.monthly_quotas' => 'Monthly quotas',
+'label.type' => 'Type',
+'label.type_dropdown' => 'dropdown',
+'label.type_text' => 'text',
+'label.required' => 'Required',
+'label.fav_report' => 'Favorite report',
+'label.cron_schedule' => 'Cron schedule',
+'label.what_is_it' => 'What is it?',
+'label.expense' => 'Expense',
+'label.quantity' => 'Quantity',
+
+
+// TODO: everything below needs serious work and be synchronized with the master English file.
+// For example, form.filter.project property no longer exists, and so on.
+
+// If you intend to improve perhaps go in small steps and coordinate with the maintainer if anything is unclear.
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.
@@ -297,7 +383,7 @@ $i18n_key_words = array(
 "form.mail.comment" => '留言',
 "form.mail.above" => '通过电子邮件发送该报告',
 // Note to translators: this string needs to be translated.
-// "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
+ "form.mail.footer_str" => 'anuko时间跟踪器是一种简单、易用、开放源码的时间跟踪系统。 看<a href ="https://www.anuko.com"> www.anuko网</a>更多信息。',
 "form.mail.sending_str" => '<b>消息已发送</b>',
 
 // invoice attributes
@@ -405,9 +491,9 @@ $i18n_key_words = array(
 "label.errors" => '错误',
 "label.ldap_hint" => '在下面的栏目输入您的<b>Windows用户名</b>和<b>密码</b>。',
 // Note to translators: strings below must be translated.
-// "label.calendar_today" => 'today',
-// "label.calendar_close" => 'close',
+ "label.calendar_today" => '今天',
+ "label.calendar_close" => '关闭',
 
 // login hello text
-// "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
+ "login.hello.text" => "anuko时间跟踪器是一种简单、易用、开放源代码的实时跟踪系统。",
 );
