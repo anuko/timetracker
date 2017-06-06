@@ -217,15 +217,78 @@ $i18n_key_words = array(
 'label.expense' => 'Expense',
 'label.quantity' => 'Quantity',
 
+// Form titles.
+// TODO: Translate the following.
+// 'title.login' => 'Login',
+// 'title.teams' => 'Teams',
+// 'title.create_team' => 'Creating Team',
+// 'title.edit_team' => 'Editing Team',
+// 'title.delete_team' => 'Deleting Team',
+// 'title.reset_password' => 'Resetting Password',
+// 'title.change_password' => 'Changing Password',
+// 'title.time' => 'Time',
+// 'title.edit_time_record' => 'Editing Time Record',
+// 'title.delete_time_record' => 'Deleting Time Record',
+// 'title.expenses' => 'Expenses',
+// 'title.edit_expense' => 'Editing Expense Item',
+// 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+// 'title.reports' => 'Reports',
+// 'title.report' => 'Report',
+// 'title.send_report' => 'Sending Report',
+// 'title.invoice' => 'Invoice',
+// 'title.send_invoice' => 'Sending Invoice',
+// 'title.charts' => 'Charts',
+// 'title.projects' => 'Projects',
+// 'title.add_project' => 'Adding Project',
+// 'title.edit_project' => 'Editing Project',
+// 'title.delete_project' => 'Deleting Project',
+// 'title.tasks' => 'Tasks',
+// 'title.add_task' => 'Adding Task',
+// 'title.edit_task' => 'Editing Task',
+// 'title.delete_task' => 'Deleting Task',
+// 'title.users' => 'Users',
+// 'title.add_user' => 'Adding User',
+// 'title.edit_user' => 'Editing User',
+// 'title.delete_user' => 'Deleting User',
+// 'title.clients' => 'Clients',
+// 'title.add_client' => 'Adding Client',
+// 'title.edit_client' => 'Editing Client',
+// 'title.delete_client' => 'Deleting Client',
+// 'title.invoices' => 'Invoices',
+// 'title.add_invoice' => 'Adding Invoice',
+// 'title.view_invoice' => 'Viewing Invoice',
+// 'title.delete_invoice' => 'Deleting Invoice',
+// 'title.notifications' => 'Notifications',
+// 'title.add_notification' => 'Adding Notification',
+// 'title.edit_notification' => 'Editing Notification',
+// 'title.delete_notification' => 'Deleting Notification',
+//  'title.monthly_quotas' => 'Monthly Quotas',
+// 'title.export' => 'Exporting Team Data',
+// 'title.import' => 'Importing Team Data',
+// 'title.options' => 'Options',
+// 'title.profile' => 'Profile',
+// 'title.cf_custom_fields' => 'Custom Fields',
+// 'title.cf_add_custom_field' => 'Adding Custom Field',
+// 'title.cf_edit_custom_field' => 'Editing Custom Field',
+// 'title.cf_delete_custom_field' => 'Deleting Custom Field',
+// 'title.cf_dropdown_options' => 'Dropdown Options',
+// 'title.cf_add_dropdown_option' => 'Adding Option',
+// 'title.cf_edit_dropdown_option' => 'Editing Option',
+// 'title.cf_delete_dropdown_option' => 'Deleting Option',
+// // NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
+// // It is also a name for the Locking plugin on the Team profile page.
+// 'title.locking' => 'Locking',
+
+
 
 // TODO: everything below needs serious work and be synchronized with the master English file.
 // For example, form.filter.project property no longer exists, and so on.
 
 // If you intend to improve perhaps go in small steps and coordinate with the maintainer if anything is unclear.
-
-// Form titles.
-// TODO: the entire title section is missing here. See the English file.
-
 "form.filter.project" => '项目',
 "form.filter.filter" => '收藏的报告',
 "form.filter.filter_new" => '保存到我的收藏夹',
