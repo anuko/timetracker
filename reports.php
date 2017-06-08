@@ -175,6 +175,8 @@ if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'checkbox','name'=>'chclient'));
 if (($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'chinvoice'));
+if (($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv'))
+  $form->addInput(array('type'=>'checkbox','name'=>'chbillable'));
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkbox','name'=>'chproject'));
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)

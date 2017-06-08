@@ -231,8 +231,10 @@ class ttReportHelper {
     array_push($fields, 'l.id as id');
     array_push($fields, '1 as type'); // Type 1 is for tt_log entries.
     array_push($fields, 'l.date as date');
-    if($user->canManageTeam() || $user->isClient())
+	if($user->canManageTeam() || $user->isClient()){
+	  array_push($fields, 'u.id as user_id');
       array_push($fields, 'u.name as user');
+	}
     // Add client name if it is selected.
     if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
       array_push($fields, 'c.name as client');
@@ -279,7 +281,12 @@ class ttReportHelper {
     // Add invoice name if it is selected.
     if (($user->canManageTeam() || $user->isClient()) && $bean->getAttribute('chinvoice'))
       array_push($fields, 'i.name as invoice');
-
+  
+	// Add billable if it is selected.
+  	if ($bean->getAttribute('chbillable')){
+		array_push($fields, 'l.billable as billable');
+	}
+	
     // Prepare sql query part for left joins.
     $left_joins = null;
     if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
@@ -380,7 +387,6 @@ class ttReportHelper {
 
     $sql .= $sort_part;
     // By now we are ready with sql.
-
     // Obtain items for report.
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
