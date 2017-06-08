@@ -231,6 +231,7 @@ class ttReportHelper {
     array_push($fields, 'l.id as id');
     array_push($fields, '1 as type'); // Type 1 is for tt_log entries.
     array_push($fields, 'l.date as date');
+	// Add User ID and User Name
 	if($user->canManageTeam() || $user->isClient()){
 	  array_push($fields, 'u.id as user_id');
       array_push($fields, 'u.name as user');
