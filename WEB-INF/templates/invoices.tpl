@@ -1,7 +1,18 @@
 <script>
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
-
+{$forms.invoicesForm.open}
+<div>
+  <table>
+    <tr>
+      <td>Rechnungen für Monat</td>
+      <td>{$forms.invoicesForm.date.control}</td>
+    </tr>
+  </table>
+  
+  {$forms.invoicesForm.btn_submit.control}
+</div>
+          
 <table cellspacing="0" cellpadding="7" border="0" width="720">
   <tr>
     <td valign="top">

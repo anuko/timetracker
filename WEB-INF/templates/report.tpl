@@ -96,7 +96,7 @@
         {if 2 == $item.type}<td bgcolor="white"><input type="checkbox" name="item_id_{$item.id}"></td>{/if}
       {/if}
     {/if}
-	{if $bean->getAttribute('chbillable')}<td class="cellLeftAligned">{$item.billable|escape}</td>{/if}
+	{if $bean->getAttribute('chbillable')}<td class="cellLeftAligned">{$item.billable}</td>{/if}
       </tr>
     {$prev_date = $item.date}
     {if $print_subtotals} {$prev_grouped_by = $item.grouped_by} {/if}
