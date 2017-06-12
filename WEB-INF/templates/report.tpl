@@ -78,8 +78,8 @@
         {if $report_row_class == 'rowReportItem'} {$report_row_class = 'rowReportItemAlt'} {else} {$report_row_class = 'rowReportItem'} {/if}
       {/if}
       <tr class="{$report_row_class}">
-        <td class="cellLeftAligned"><a href="time_edit.php?id={$item.id}&user_id={$item.user_id}&source=report" title="Edit">{$item.date}</a></td>
-    {if $user->canManageTeam() || $user->isClient()}<td class="cellLeftAligned">{$item.user|escape}</td>{/if}
+        <td class="cellLeftAligned">{$item.date}</td>
+    {if $user->canManageTeam() || $user->isClient()}<td class="cellLeftAligned"><a href="time_edit.php?id={$item.id}&user_id={$item.user_id}&source=report" title="Edit">{$item.user|escape}</a></td>{/if}
     {if $bean->getAttribute('chclient')}<td class="cellLeftAligned">{$item.client|escape}</td>{/if}
     {if $bean->getAttribute('chproject')}<td class="cellLeftAligned">{$item.project|escape}</td>{/if}
     {if $bean->getAttribute('chtask')}<td class="cellLeftAligned">{$item.task|escape}</td>{/if}
