@@ -48,7 +48,6 @@ if ($request->isPost()) {
       if ((int)$date_array[1] <= 12 && (int)$date_array[1] >= 1 && (int)$date_array[0] <= 3000 && (int)$date_array[0] >= 2000){
 	$invoices = ttTeamHelper::getInvoicesByDate($date_array[1]."-".$date_array[0]);
       } else {
-	print_r("ERROR! Date-Format wrong?");
 	$invoices = ttTeamHelper::getActiveInvoices();
       }
       $form->setValueByElement("date", $request->getParameter('date'));
