@@ -91,14 +91,25 @@ if ($items && 'no_grouping' != $group_by) {
 $filename = strtolower($i18n->getKey('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
 
 // Start preparing HTML to build PDF from.
-$styleHeader = 'style="background-color:#a6ccf7;"';
-$styleSubtotal = 'style="background-color:#e0e0e0;"';
-$styleCentered = 'style="text-align:center;"';
-$styleRightAligned = 'style="text-align:right;"';
+$styleHeader = 'class="header"';
+$styleSubtotal = 'class="subtotal"';
+$styleCentered = 'class="centered"';
+$styleRightAligned = 'class="rightAligned"';
+$styleWider = 'class="wider"';
+$styleThinner = 'class="thinner"';
 
 $title = $i18n->getKey('title.report').": ".$totals['start_date']." - ".$totals['end_date'];
-$html = '<h1 style="text-align:center;">'.$title.'</h1>';
-$html .= '<table border="1" cellpadding="3" cellspacing="0" width="100%">';
+$html = "<style>"
+	. ".header { background-color:#a6ccf7; } "
+	. ".subtotal { background-color:#e0e0e0; }"
+	. ".centered { text-align:center; }"
+	. ".rightAligned { text-align:right; }"
+	. ".thinner { width: 40px;}"
+	. ".wider { width: 180px;}"
+	. "table { width: 780px; }"
+	. "</style>";
+$html .= '<h1 style="text-align:center;">'.$title.'</h1>';
+$html .= '<table border="1" cellpadding="3" cellspacing="0">';
 
 if ($totals_only) {
   // We are building a "totals only" report with only subtotals and total.
@@ -154,12 +165,13 @@ if ($totals_only) {
   if ($bean->getAttribute('chproject')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.project').'</td>'; }
   if ($bean->getAttribute('chtask')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.task').'</td>'; }
   if ($bean->getAttribute('chcf_1')) { $colspan++; $html .= '<td>'.htmlspecialchars($custom_fields->fields[0]['label']).'</td>'; }
-  if ($bean->getAttribute('chstart')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.start').'</td>'; }
-  if ($bean->getAttribute('chfinish')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.finish').'</td>'; }
-  if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.duration').'</td>'; }
-  if ($bean->getAttribute('chnote')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.note').'</td>'; }
+  if ($bean->getAttribute('chstart')) { $colspan++; $html .= "<td $styleCentered $styleThinner>".$i18n->getKey('label.start').'</td>'; }
+  if ($bean->getAttribute('chfinish')) { $colspan++; $html .= "<td $styleCentered $styleThinner>".$i18n->getKey('label.finish').'</td>'; }
+  if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered $styleThinner>".$i18n->getKey('label.duration').'</td>'; }
+  if ($bean->getAttribute('chnote')) { $colspan++; $html .= "<td $styleWider>".$i18n->getKey('label.note').'</td>'; }
   if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.cost').'</td>'; }
   if ($bean->getAttribute('chinvoice')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.invoice').'</td>'; }
+  if ($bean->getAttribute('chbillable')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.billable').'</td>'; }
   $html .= '</tr>';
   $html .= '</thead>';
 
@@ -209,6 +221,7 @@ if ($totals_only) {
           $html .= '</td>';
         }
         if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
+        if ($bean->getAttribute('chbillable')) $html .= '<td></td>';
         $html .= '</tr>';
         $html .= '<tr><td colspan="'.$colspan.'">&nbsp;</td></tr>';
       }
@@ -223,10 +236,10 @@ if ($totals_only) {
     if ($bean->getAttribute('chproject')) $html .= '<td>'.htmlspecialchars($item['project']).'</td>';
     if ($bean->getAttribute('chtask')) $html .= '<td>'.htmlspecialchars($item['task']).'</td>';
     if ($bean->getAttribute('chcf_1')) $html .= '<td>'.htmlspecialchars($item['cf_1']).'</td>';
-    if ($bean->getAttribute('chstart')) $html .= "<td $styleRightAligned>".$item['start'].'</td>';
-    if ($bean->getAttribute('chfinish')) $html .= "<td $styleRightAligned>".$item['finish'].'</td>';
-    if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$item['duration'].'</td>';
-    if ($bean->getAttribute('chnote')) $html .= '<td>'.htmlspecialchars($item['note']).'</td>';
+    if ($bean->getAttribute('chstart')) $html .= "<td $styleRightAligned $styleThinner>".$item['start'].'</td>';
+    if ($bean->getAttribute('chfinish')) $html .= "<td $styleRightAligned $styleThinner>".$item['finish'].'</td>';
+    if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned $styleThinner>".$item['duration'].'</td>';
+    if ($bean->getAttribute('chnote')) $html .= "<td $styleWider>".htmlspecialchars($item['note']).'</td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
       if ($user->canManageTeam() || $user->isClient())
@@ -236,6 +249,7 @@ if ($totals_only) {
       $html .= '</td>';
     }
     if ($bean->getAttribute('chinvoice')) $html .= '<td>'.htmlspecialchars($item['invoice']).'</td>';
+    if ($bean->getAttribute('chbillable')) $html .= '<td>'.htmlspecialchars($item['billable']).'</td>';
     $html .= '</tr>';
 
     $prev_date = $item['date'];
@@ -284,6 +298,7 @@ if ($totals_only) {
       $html .= '</td>';
     }
     if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
+    if ($bean->getAttribute('chbillable')) $html .= '<td></td>';
     $html .= '</tr>';
   }
 
