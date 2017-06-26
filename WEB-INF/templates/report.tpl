@@ -47,6 +47,7 @@
   {if $bean->getAttribute('chnote')}<td class="tableHeader">{$i18n.label.note}</td>{/if}
   {if $bean->getAttribute('chcost')}<td class="tableHeaderCentered" width="5%">{$i18n.label.cost}</td>{/if}
   {if $bean->getAttribute('chinvoice')}<td class="tableHeader">{$i18n.label.invoice}</td>{/if}
+  {if $bean->getAttribute('chbillable')}<td class="tableHeader">{$i18n.label.billable}</td>{/if}
       </tr>
   {foreach $report_items as $item}
     <!-- print subtotal for a block of grouped values -->
@@ -78,7 +79,7 @@
       {/if}
       <tr class="{$report_row_class}">
         <td class="cellLeftAligned">{$item.date}</td>
-    {if $user->canManageTeam() || $user->isClient()}<td class="cellLeftAligned">{$item.user|escape}</td>{/if}
+    {if $user->canManageTeam() || $user->isClient()}<td class="cellLeftAligned"><a href="time_edit.php?id={$item.id}&user_id={$item.user_id}&source=report" title="Edit">{$item.user|escape}</a></td>{/if}
     {if $bean->getAttribute('chclient')}<td class="cellLeftAligned">{$item.client|escape}</td>{/if}
     {if $bean->getAttribute('chproject')}<td class="cellLeftAligned">{$item.project|escape}</td>{/if}
     {if $bean->getAttribute('chtask')}<td class="cellLeftAligned">{$item.task|escape}</td>{/if}
@@ -95,6 +96,7 @@
         {if 2 == $item.type}<td bgcolor="white"><input type="checkbox" name="item_id_{$item.id}"></td>{/if}
       {/if}
     {/if}
+	{if $bean->getAttribute('chbillable')}<td class="cellLeftAligned">{$item.billable}</td>{/if}
       </tr>
     {$prev_date = $item.date}
     {if $print_subtotals} {$prev_grouped_by = $item.grouped_by} {/if}
@@ -131,6 +133,7 @@
     {if $bean->getAttribute('chnote')}<td></td>{/if}
     {if $bean->getAttribute('chcost')}<td nowrap class="cellRightAlignedSubtotal">{$user->currency|escape} {if $user->canManageTeam() || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>{/if}
     {if $bean->getAttribute('chinvoice')}<td></td>{/if}
+    {if $bean->getAttribute('chbillable')}<td></td>{/if}
       </tr>
 {/if}
     </table>

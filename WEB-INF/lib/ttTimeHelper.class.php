@@ -95,14 +95,20 @@ class ttTimeHelper {
     if (preg_match('/^([0-1]{0,1}[0-9]|2[0-3])?[.][0-9]{1,4}h?$/', $value )) { // decimal values like 0.5, 1.25h, ... .. 23.9999h
       return true;
     }
-
+    if (preg_match('/^([0-1]{0,1}[0-9]|2[0-3])?[,][0-9]{1,4}h?$/', $value )) { // decimal values like 0.5, 1.25h, ... .. 23.9999h
+      return true;
+    }
     return false;
   }
 
   // normalizeDuration - converts a valid time duration string to format 00:00.
   static function normalizeDuration($value) {
     $time_value = $value;
-
+    
+    // Replace , with .
+    if(strpos($time_value, ",") !== false)
+      $time_value = str_replace (",", ".", $time_value);
+    
     // If we have a decimal format - convert to time format 00:00.
     if((strpos($time_value, '.') !== false) || (strpos($time_value, 'h') !== false)) {
       $val = floatval($time_value);

@@ -60,7 +60,7 @@ class ttClientHelper {
     $mdb2 = getConnection();
 
     $sql = "select id, name from tt_clients
-      where team_id = $user->team_id and (status = 0 or status = 1) order by name";
+      where team_id = $user->team_id and (status = 0 or status = 1) order by UPPER(name)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -286,7 +286,7 @@ class ttClientHelper {
     $sql = "select distinct c.id, c.name, c.projects from tt_user_project_binds upb
       inner join tt_client_project_binds cpb on (cpb.project_id = upb.project_id)
       inner join tt_clients c on (c.id = cpb.client_id and c.status = 1)
-      where upb.user_id = $user_id and upb.status = 1 order by c.name";
+      where upb.user_id = $user_id and upb.status = 1 order by UPPER(c.name)";
 
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {

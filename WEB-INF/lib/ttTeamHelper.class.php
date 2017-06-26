@@ -395,6 +395,33 @@ class ttTeamHelper {
     }
     return $result;
   }
+  
+    static function getInvoicesByDate($date)
+  {
+    global $user;
+
+    $result = array();
+    $mdb2 = getConnection();
+
+    if (ROLE_CLIENT == $user->role && $user->client_id)
+      $client_part = " and i.client_id = $user->client_id";
+    if(isset($date)){
+        $date_part = ' and DATE_FORMAT(i.date, "%m-%Y") = "' . $date . '"';
+    }
+
+    $sql = "select i.id, i.name, i.date, i.client_id, i.status, c.name as client_name from tt_invoices i
+      left join tt_clients c on (c.id = i.client_id)
+      where i.status = 1 and i.team_id = $user->team_id $client_part $date_part order by i.date asc";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      $dt = new DateAndTime(DB_DATEFORMAT);
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
 
   // getUserToProjectBinds - obtains all user to project binds for a team.
   static function getUserToProjectBinds($team_id) {

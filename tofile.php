@@ -133,6 +133,7 @@ if ('xml' == $type) {
         print "]]></cost>\n";
       }
       if ($bean->getAttribute('chinvoice')) print "\t<invoice><![CDATA[".$item['invoice']."]]></invoice>\n";
+      if ($bean->getAttribute('chbillable')) print "\t<billable><![CDATA[".$item['billable']."]]></billable>\n";
 
       print "</row>\n";
     }
@@ -199,6 +200,7 @@ if ('csv' == $type) {
     if ($bean->getAttribute('chnote')) print ',"'.$i18n->getKey('label.note').'"';
     if ($bean->getAttribute('chcost')) print ',"'.$i18n->getKey('label.cost').'"';
     if ($bean->getAttribute('chinvoice')) print ',"'.$i18n->getKey('label.invoice').'"';
+    if ($bean->getAttribute('chbillable')) print ',"'.$i18n->getKey('label.billable').'"';
     print "\n";
 
     // Print items.
@@ -225,6 +227,7 @@ if ('csv' == $type) {
           print ',"'.$item['expense'].'"';
       }
       if ($bean->getAttribute('chinvoice')) print ',"'.str_replace('"','""',$item['invoice']).'"';
+	  if ($bean->getAttribute('chbillable')) print ',"'.$item['billable'].'"';
       print "\n";
     }
   }

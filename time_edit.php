@@ -49,6 +49,27 @@ if ($user->isPluginEnabled('cf')) {
 
 $cl_id = $request->getParameter('id');
 
+// report.php sends user_id per get
+// set active user to sent id
+// forward to page with change active user if $_GET["user_id"] is set (there has to be a better way)
+
+$on_behalf_id = $request->getParameter('user_id');
+if (is_numeric($on_behalf_id)){
+  // change user only if logged in user can manage the team
+  if(ttUserHelper::getUserName($on_behalf_id) && $user->canManageTeam()){
+    $user->behalf_id = $on_behalf_id;
+    unset($_SESSION['behalf_id']);
+    unset($_SESSION['behalf_name']);
+
+    if($on_behalf_id != $user->id) {
+	  $_SESSION['behalf_id'] = $on_behalf_id;
+	  $_SESSION['behalf_name'] = ttUserHelper::getUserName($on_behalf_id);
+    }
+    header('Location: time_edit.php?id=' .$cl_id . '&source=report');
+    exit();
+  }
+}
+
 // Get the time record we are editing.
 $time_rec = ttTimeHelper::getRecord($cl_id, $user->getActiveUser());
 
@@ -318,7 +339,13 @@ if ($request->isPost()) {
       }
       if ($res)
       {
-        header('Location: time.php?date='.$new_date->toString(DB_DATEFORMAT));
+		// $request is set to POST 
+		// for now using $_GET
+		if ($_GET["source"] == "report"){
+			header('Location: report.php');
+		} else {
+			header('Location: time.php?date='.$new_date->toString(DB_DATEFORMAT));
+		}
         exit();
       }
     }

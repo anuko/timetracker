@@ -121,6 +121,9 @@ $i18n_key_words = array(
 'button.stop' => 'Stop',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
+
+'label.billable' => 'Abrechenbar',
+
 'label.team_name' => 'Teamname',
 'label.address' => 'Adresse',
 'label.currency' => 'Währung',
@@ -156,6 +159,7 @@ $i18n_key_words = array(
 'label.week_total' => 'Summe (Woche)',
 // TODO: translate the following.
 // 'label.month_total' => 'Month total',
+'label.month_total' => 'Anzahl Monate(Month_total)',
 'label.today' => 'Heute',
 'label.total_hours' => 'Gesamtstunden',
 'label.total_cost' => 'Totale Kosten',
@@ -169,6 +173,7 @@ $i18n_key_words = array(
 'label.language' => 'Sprache',
 // TODO: translate the following string.
 // 'label.decimal_mark' => 'Decimal mark',
+'label.decimal_mark' => 'Dezimalzeichen',
 'label.date_format' => 'Datumsformat',
 'label.time_format' => 'Zeitformat',
 'label.week_start' => 'Erster Wochentag',
@@ -189,6 +194,7 @@ $i18n_key_words = array(
 'label.role_admin' => '(Administrator)',
 // Translate the following.
 // 'label.page' => 'Page',
+'label.page' => 'Seite',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Benutzerfelder',
 // Translate the following.
