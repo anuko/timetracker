@@ -95,7 +95,7 @@ class ttTimeHelper {
     if (preg_match('/^([0-1]{0,1}[0-9]|2[0-3])?[.][0-9]{1,4}h?$/', $value )) { // decimal values like 0.5, 1.25h, ... .. 23.9999h
       return true;
     }
-    if (preg_match('/^([0-1]{0,1}[0-9]|2[0-3])?[,][0-9]{1,4}h?$/', $value )) { // decimal values like 0.5, 1.25h, ... .. 23.9999h
+    if (preg_match('/^([0-1]{0,1}[0-9]|2[0-3])?[,][0-9]{1,4}h?$/', $value )) { // decimal values like 0,5, 1,25h, ... .. 23,9999h
       return true;
     }
     return false;
