@@ -162,6 +162,7 @@ if ($totals_only) {
   $html .= '<td>'.$i18n->getKey('label.date').'</td>';
   if ($user->canManageTeam() || $user->isClient()) { $colspan++; $html .= '<td>'.$i18n->getKey('label.user').'</td>'; }
   if ($bean->getAttribute('chclient')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.client').'</td>'; }
+  if ($bean->getAttribute('chclient_number')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.client_number').'</td>'; }
   if ($bean->getAttribute('chproject')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.project').'</td>'; }
   if ($bean->getAttribute('chtask')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.task').'</td>'; }
   if ($bean->getAttribute('chcf_1')) { $colspan++; $html .= '<td>'.htmlspecialchars($custom_fields->fields[0]['label']).'</td>'; }
@@ -191,6 +192,11 @@ if ($totals_only) {
         if ($bean->getAttribute('chclient')) {
             $html .= '<td>';
             if ($group_by == 'client') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+            $html .= '</td>';
+        }
+        if ($bean->getAttribute('chclient_number')) {
+            $html .= '<td>';
+            if ($group_by == 'client_number') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
             $html .= '</td>';
         }
         if ($bean->getAttribute('chproject')) {
@@ -233,6 +239,7 @@ if ($totals_only) {
     $html .= '<td>'.$item['date'].'</td>';
     if ($user->canManageTeam() || $user->isClient()) $html .= '<td>'.htmlspecialchars($item['user']).'</td>';
     if ($bean->getAttribute('chclient')) $html .= '<td>'.htmlspecialchars($item['client']).'</td>';
+    if ($bean->getAttribute('chclient_number')) $html .= '<td>'.htmlspecialchars($item['client_number']).'</td>';
     if ($bean->getAttribute('chproject')) $html .= '<td>'.htmlspecialchars($item['project']).'</td>';
     if ($bean->getAttribute('chtask')) $html .= '<td>'.htmlspecialchars($item['task']).'</td>';
     if ($bean->getAttribute('chcf_1')) $html .= '<td>'.htmlspecialchars($item['cf_1']).'</td>';
@@ -268,6 +275,11 @@ if ($totals_only) {
     if ($bean->getAttribute('chclient')) {
       $html .= '<td>';
       if ($group_by == 'client') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+      $html .= '</td>';
+    }
+    if ($bean->getAttribute('chclient_number')) {
+      $html .= '<td>';
+      if ($group_by == 'client_number') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
       $html .= '</td>';
     }
     if ($bean->getAttribute('chproject')) {
@@ -308,6 +320,7 @@ if ($totals_only) {
   $html .= '<td>'.$i18n->getKey('label.total').'</td>';
   if ($user->canManageTeam() || $user->isClient()) $html .= '<td></td>';
   if ($bean->getAttribute('chclient')) $html .= '<td></td>';
+  if ($bean->getAttribute('chclient_number')) $html .= '<td></td>';
   if ($bean->getAttribute('chproject')) $html .= '<td></td>';
   if ($bean->getAttribute('chtask')) $html .= '<td></td>';
   if ($bean->getAttribute('chcf_1')) $html .= '<td></td>';

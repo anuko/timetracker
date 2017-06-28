@@ -175,6 +175,7 @@ $i18n_key_words = array(
 'label.tax' => 'Tax',
 'label.subtotal' => 'Subtotal',
 'label.total' => 'Total',
+'label.client_number' => 'Client number',
 'label.client_name' => 'Client name',
 'label.client_address' => 'Client address',
 'label.or' => 'or',

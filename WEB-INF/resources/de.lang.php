@@ -123,7 +123,6 @@ $i18n_key_words = array(
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 
 'label.billable' => 'Abrechenbar',
-
 'label.team_name' => 'Teamname',
 'label.address' => 'Adresse',
 'label.currency' => 'Währung',
@@ -173,7 +172,7 @@ $i18n_key_words = array(
 'label.language' => 'Sprache',
 // TODO: translate the following string.
 // 'label.decimal_mark' => 'Decimal mark',
-'label.decimal_mark' => 'Dezimalzeichen',
+'label.decimal_mark' => 'Dezimaltrennzeichen',
 'label.date_format' => 'Datumsformat',
 'label.time_format' => 'Zeitformat',
 'label.week_start' => 'Erster Wochentag',
@@ -182,6 +181,7 @@ $i18n_key_words = array(
 'label.tax' => 'Umsatzsteuer',
 'label.subtotal' => 'Zwischensumme',
 'label.total' => 'Gesamtsumme',
+'label.client_number' => 'Kundennummer',
 'label.client_name' => 'Kundenname',
 'label.client_address' => 'Adresse',
 'label.or' => 'oder',

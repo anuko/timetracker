@@ -8,6 +8,10 @@
           <td>{$forms.clientForm.name.control}</td>
         </tr>
         <tr>
+          <td align="right">{$i18n.label.client_number}:</td>
+          <td>{$forms.clientForm.number.control}</td>
+        </tr>
+        <tr>
           <td align="right">{$i18n.label.client_address}:</td>
           <td>{$forms.clientForm.address.control}</td>
         </tr>

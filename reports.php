@@ -171,13 +171,15 @@ $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start_date'
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'end_date'));
 
 // Add checkboxes for fields.
-if ($user->isPluginEnabled('cl'))
+if ($user->isPluginEnabled('cl')){
   $form->addInput(array('type'=>'checkbox','name'=>'chclient'));
+  $form->addInput(array('type'=>'checkbox','name'=>'chclient_number'));
+}
  //Add Invoice and Billable Checkbox if Invoices-Plugin is anabled
-if ($user->isPluginEnabled('iv'))
+if ($user->isPluginEnabled('iv')){
   $form->addInput(array('type'=>'checkbox','name'=>'chinvoice'));
-if ($user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'chbillable'));
+}
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkbox','name'=>'chproject'));
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
