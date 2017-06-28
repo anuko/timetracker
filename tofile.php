@@ -112,7 +112,7 @@ if ('xml' == $type) {
       print "\t<date><![CDATA[".$item['date']."]]></date>\n";
       if ($user->canManageTeam() || $user->isClient()) print "\t<user><![CDATA[".$item['user']."]]></user>\n"; 
       if ($bean->getAttribute('chclient')) print "\t<client><![CDATA[".$item['client']."]]></client>\n";
-      if ($bean->getAttribute('chclient_number')) print "\t<client><![CDATA[".$item['client_number']."]]></client>\n";
+      if ($bean->getAttribute('chclient_number')) print "\t<client_number><![CDATA[".$item['client_number']."]]></client_number>\n";
       if ($bean->getAttribute('chproject')) print "\t<project><![CDATA[".$item['project']."]]></project>\n";
       if ($bean->getAttribute('chtask')) print "\t<task><![CDATA[".$item['task']."]]></task>\n";
       if ($bean->getAttribute('chcf_1')) print "\t<cf_1><![CDATA[".$item['cf_1']."]]></cf_1>\n";
