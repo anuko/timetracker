@@ -59,7 +59,7 @@ $i18n_key_words = array(
 'menu.options' => 'Opties',
 
 // Footer - strings on the bottom of most pages.
-'footer.contribute_msg' => 'Je kunt aan de ontwikkeling van Time Tracker bijdragen op verschillende manieren.',
+'footer.contribute_msg' => 'Je kunt op verschillende manieren aan de ontwikkeling van Time Tracker bijdragen.',
 'footer.credits' => 'Medewerkers',
 'footer.license' => 'Licentie',
 'footer.improve' => 'Bijdragen',
