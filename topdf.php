@@ -172,7 +172,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chnote')) { $colspan++; $html .= "<td $styleWider>".$i18n->getKey('label.note').'</td>'; }
   if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.cost').'</td>'; }
   if ($bean->getAttribute('chinvoice')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.invoice').'</td>'; }
-  if ($bean->getAttribute('chbillable')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.billable').'</td>'; }
+  if ($bean->getAttribute('chbillable')) { $colspan++; $html .= "<td $styleThinner>".$i18n->getKey('label.billable').'</td>'; }
   $html .= '</tr>';
   $html .= '</thead>';
 
@@ -195,9 +195,7 @@ if ($totals_only) {
             $html .= '</td>';
         }
         if ($bean->getAttribute('chclient_number')) {
-            $html .= '<td>';
-            if ($group_by == 'client_number') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
-            $html .= '</td>';
+            $html .= '<td></td>';
         }
         if ($bean->getAttribute('chproject')) {
             $html .= '<td>';
@@ -256,7 +254,7 @@ if ($totals_only) {
       $html .= '</td>';
     }
     if ($bean->getAttribute('chinvoice')) $html .= '<td>'.htmlspecialchars($item['invoice']).'</td>';
-    if ($bean->getAttribute('chbillable')) $html .= '<td>'.htmlspecialchars($item['billable']).'</td>';
+    if ($bean->getAttribute('chbillable')) $html .= "<td $styleThinner>".htmlspecialchars($item['billable']).'</td>';
     $html .= '</tr>';
 
     $prev_date = $item['date'];
@@ -278,9 +276,7 @@ if ($totals_only) {
       $html .= '</td>';
     }
     if ($bean->getAttribute('chclient_number')) {
-      $html .= '<td>';
-      if ($group_by == 'client_number') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
-      $html .= '</td>';
+      $html .= '<td></td>';
     }
     if ($bean->getAttribute('chproject')) {
       $html .= '<td>';
