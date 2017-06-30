@@ -7,7 +7,7 @@
   <td valign="top">
     <table border="0" cellpadding="3" cellspacing="1" width="100%">
       <tr>
-        <td valign="top" class="sectionHeaderNoBorder" align="center">{$i18n.form.report.export} {if file_exists('WEB-INF/lib/tcpdf')}<a href="topdf.php">PDF</a>,{/if} <a href="tofile.php?type=xml">XML</a> {$i18n.label.or} <a href="tofile.php?type=csv">CSV</a></td>
+        <td valign="top" class="sectionHeaderNoBorder" align="center">{$i18n.form.report.export} {if file_exists('WEB-INF/lib/tcpdf')}<a href="topdf.php">PDF</a>,{/if} <a href="tofile.php?type=xml">XML</a> {$i18n.label.or} <a href="to_custom_file.php">CSV</a></td>
       </tr>
     </table>
     <table border="0" cellpadding="3" cellspacing="1" width="100%">
