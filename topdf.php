@@ -104,8 +104,8 @@ $html = "<style>"
 	. ".subtotal { background-color:#e0e0e0; }"
 	. ".centered { text-align:center; }"
 	. ".rightAligned { text-align:right; }"
-	. ".thinner { width: 40px;}"
-	. ".wider { width: 180px;}"
+	. ".thinner { width: 37px;}"
+	. ".wider { width: 135px;}"
 	. "table { width: 780px; }"
 	. "</style>";
 $html .= '<h1 style="text-align:center;">'.$title.'</h1>';
@@ -333,6 +333,7 @@ if ($totals_only) {
     $html .= '</td>';
   }
   if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
+  if ($bean->getAttribute('chbillable')) $html .= '<td></td>';
   $html .= '</tr>';
   $html .= '</table>';
 }
