@@ -60,7 +60,7 @@ class ttClientHelper {
     $mdb2 = getConnection();
 
     $sql = "select id, name from tt_clients
-      where team_id = $user->team_id and (status = 0 or status = 1) order by name";
+      where team_id = $user->team_id and (status = 0 or status = 1) order by upper(name)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {

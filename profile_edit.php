@@ -59,6 +59,7 @@ if ($request->isPost()) {
     $cl_custom_format_time = $request->getParameter('format_time');
     $cl_start_week = $request->getParameter('start_week');
     $cl_tracking_mode = $request->getParameter('tracking_mode');
+    $cl_project_required = $request->getParameter('project_required');
     $cl_task_required = $request->getParameter('task_required');
     $cl_record_type = $request->getParameter('record_type');
     $cl_uncompleted_indicators = $request->getParameter('uncompleted_indicators');
@@ -87,6 +88,7 @@ if ($request->isPost()) {
     $cl_custom_format_time = $user->time_format;
     $cl_start_week = $user->week_start;
     $cl_tracking_mode = $user->tracking_mode;
+    $cl_project_required = $user->project_required;
     $cl_task_required = $user->task_required;
     $cl_record_type = $user->record_type;
     $cl_uncompleted_indicators = $user->uncompleted_indicators;
@@ -164,6 +166,7 @@ if ($user->canManageTeam()) {
   $tracking_mode_options[MODE_PROJECTS] = $i18n->getKey('form.profile.mode_projects');
   $tracking_mode_options[MODE_PROJECTS_AND_TASKS] = $i18n->getKey('form.profile.mode_projects_and_tasks');
   $form->addInput(array('type'=>'combobox','name'=>'tracking_mode','style'=>'width: 150px;','data'=>$tracking_mode_options,'value'=>$cl_tracking_mode,'onchange'=>'handleTaskRequiredCheckbox()'));
+  $form->addInput(array('type'=>'checkbox','name'=>'project_required','value'=>$cl_project_required));
   $form->addInput(array('type'=>'checkbox','name'=>'task_required','value'=>$cl_task_required));
 
   // Prepare record type choices.
@@ -254,6 +257,7 @@ if ($request->isPost()) {
         'time_format' => $cl_custom_format_time,
         'week_start' => $cl_start_week,
         'tracking_mode' => $cl_tracking_mode,
+        'project_required' => $cl_project_required,
         'task_required' => $cl_task_required,
         'record_type' => $cl_record_type,
         'uncompleted_indicators' => $cl_uncompleted_indicators,

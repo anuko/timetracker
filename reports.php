@@ -68,7 +68,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getK
 // Dropdown for clients if the clients plugin is enabled.
 if ($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) {
   if ($user->canManageTeam() || ($user->isClient() && !$user->client_id))
-    $client_list = ttClientHelper::getClients($user->team_id);
+    $client_list = ttClientHelper::getClients();
   else
     $client_list = ttClientHelper::getClientsForUser();
   $form->addInput(array('type'=>'combobox',
