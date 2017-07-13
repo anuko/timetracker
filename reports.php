@@ -241,6 +241,8 @@ if (($request->getMethod() == 'GET') && !$bean->isSaved()) {
   $form->setValueByElement('chnote', '1');
   $form->setValueByElement('chcf_1', '0');
   $form->setValueByElement('chtotalsonly', '0');
+  $form->setValueByElement('chbillable', '0');
+  $form->setValueByElement('chclient_number', '0');
 }
 
 $form->setValueByElement('fav_report_changed','');

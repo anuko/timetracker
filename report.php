@@ -26,6 +26,9 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
+// I set use_checkboxes in smarty to false, because we don't want to send invoices
+// line 66~: $smarty->assign('use_checkboxes', false);
+
 require_once('initialize.php');
 import('form.Form');
 import('form.ActionForm');
@@ -60,7 +63,8 @@ if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->g
       'datakeys'=>array('id','name'),
       'empty'=>array(''=>$i18n->getKey('dropdown.select_invoice'))));
     $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
-    $smarty->assign('use_checkboxes', true);
+    //$smarty->assign('use_checkboxes', true);
+    $smarty->assign('use_checkboxes', false);
   }
 }
 

@@ -81,8 +81,8 @@
         {if $report_row_class == 'rowReportItem'} {$report_row_class = 'rowReportItemAlt'} {else} {$report_row_class = 'rowReportItem'} {/if}
       {/if}
       <tr class="{$report_row_class}">
-        <td class="cellLeftAligned">{$item.date}</td>
-    {if $user->canManageTeam() || $user->isClient()}<td class="cellLeftAligned"><a href="time_edit.php?id={$item.id}&user_id={$item.user_id}&source=report" title="Edit">{$item.user|escape}</a></td>{/if}
+          <td class="cellLeftAligned"><a href="time_edit.php?id={$item.id}{if $user->canManageTeam()}&user_id={$item.user_id}{/if}&source=report" title="Edit">{$item.date}</a></td>
+    {if $user->canManageTeam() || $user->isClient()}<td class="cellLeftAligned">{$item.user|escape}</td>{/if}
     {if $bean->getAttribute('chclient')}<td class="cellLeftAligned">{$item.client|escape}</td>{/if}
     {if $bean->getAttribute('chclient_number')}<td class="cellLeftAligned">{$item.client_number|escape}</td>{/if}
     {if $bean->getAttribute('chproject')}<td class="cellLeftAligned">{$item.project|escape}</td>{/if}
@@ -95,12 +95,14 @@
     {if $bean->getAttribute('chcost')}<td class="cellRightAligned">{if $user->canManageTeam() || $user->isClient()}{$item.cost}{else}{$item.expense}{/if}</td>{/if}
     {if $bean->getAttribute('chinvoice')}
         <td class="cellRightAligned">{$item.invoice|escape}</td>
+    {/if}
+    {if $bean->getAttribute('chbillable')}<td class="cellLeftAligned">{$item.billable}</td>{/if}
+    {if $bean->getAttribute('chinvoice')}
       {if $use_checkboxes}
         {if 1 == $item.type}<td bgcolor="white"><input type="checkbox" name="log_id_{$item.id}"></td>{/if}
         {if 2 == $item.type}<td bgcolor="white"><input type="checkbox" name="item_id_{$item.id}"></td>{/if}
       {/if}
     {/if}
-	{if $bean->getAttribute('chbillable')}<td class="cellLeftAligned">{$item.billable}</td>{/if}
       </tr>
     {$prev_date = $item.date}
     {if $print_subtotals} {$prev_grouped_by = $item.grouped_by} {/if}
