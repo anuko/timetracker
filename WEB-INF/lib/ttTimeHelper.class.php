@@ -92,7 +92,10 @@ class ttTimeHelper {
     if (preg_match('/^([0-1]{0,1}[0-9]|2[0-4])h?$/', $value )) { // 0, 1 ... 24
       return true;
     }
-    if (preg_match('/^([0-1]{0,1}[0-9]|2[0-3])?[.][0-9]{1,4}h?$/', $value )) { // decimal values like 0.5, 1.25h, ... .. 23.9999h
+
+    global $user;
+    $localizedPattern = '/^([0-1]{0,1}[0-9]|2[0-3])?['.$user->decimal_mark.'][0-9]{1,4}h?$/';
+    if (preg_match($localizedPattern, $value )) { // decimal values like 0.5, 1.25h, ... .. 23.9999h (or with comma)
       return true;
     }
     if (preg_match('/^([0-1]{0,1}[0-9]|2[0-3])?[,][0-9]{1,4}h?$/', $value )) { // decimal values like 0,5, 1,25h, ... .. 23,9999h
@@ -110,6 +113,10 @@ class ttTimeHelper {
       $time_value = str_replace (",", ".", $time_value);
     
     // If we have a decimal format - convert to time format 00:00.
+    global $user;
+    if ($user->decimal_mark == ',')
+      $time_value = str_replace (',', '.', $time_value);
+
     if((strpos($time_value, '.') !== false) || (strpos($time_value, 'h') !== false)) {
       $val = floatval($time_value);
       $mins = round($val * 60);
