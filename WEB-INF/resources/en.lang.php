@@ -94,6 +94,7 @@ $i18n_key_words = array(
 'error.goto_uncompleted' => 'Go to uncompleted entry.',
 'error.overlap' => 'Time interval overlaps with existing records.',
 'error.future_date' => 'Date is in future.',
+'error.entry_invoiced' => 'Entry is already invoiced.',
 
 // Labels for buttons.
 'button.login' => 'Login',
