@@ -174,6 +174,7 @@ function handleCheckboxes() {
   {if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)}<td><b>{$i18n.label.option}</b></td>{else}<td>&nbsp;</td>{/if}
         </tr>
         <tr>
+            
           <td>{$forms.reportForm.client.control}</td>
           <td>&nbsp;</td>
           <td>{$forms.reportForm.option.control}</td>
@@ -240,6 +241,7 @@ function handleCheckboxes() {
               <tr>
   {if $user->isPluginEnabled('cl')}
                 <td width="25%"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td>
+                <td width="25%"><label>{$forms.reportForm.chclientnumber.control}&nbsp;{$i18n.label.client_number}</label></td>
   {/if}
   {if $user->isPluginEnabled('iv')}
                 <td width="25%"><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></td>	

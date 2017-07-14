@@ -74,7 +74,7 @@ if (is_numeric($on_behalf_id)){
 $time_rec = ttTimeHelper::getRecord($cl_id, $user->getActiveUser());
 
 // Prohibit editing invoiced records.
-if ($time_rec['invoice_id']) die($i18n->getKey('error.sys'));
+if ($time_rec['invoice_id']) die($i18n->getKey('error.entry_invoiced'));
 
 $item_date = new DateAndTime(DB_DATEFORMAT, $time_rec['date']);
 

@@ -232,13 +232,16 @@ class ttReportHelper {
     array_push($fields, '1 as type'); // Type 1 is for tt_log entries.
     array_push($fields, 'l.date as date');
 	// Add User ID and User Name
-	if($user->canManageTeam() || $user->isClient()){
-	  array_push($fields, 'u.id as user_id');
+    if($user->canManageTeam() || $user->isClient()){
+      array_push($fields, 'u.id as user_id');
       array_push($fields, 'u.name as user');
-	}
+    }
     // Add client name if it is selected.
     if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
       array_push($fields, 'c.name as client');
+    // Add client number if it is selected
+    if ($bean->getAttribute('chclientnumber'))    
+      array_push($fields, 'c.number as clientnumber');
     // Add project name if it is selected.
     if ($bean->getAttribute('chproject') || 'project' == $group_by_option)
       array_push($fields, 'p.name as project');
@@ -283,14 +286,14 @@ class ttReportHelper {
     if (($user->canManageTeam() || $user->isClient()) && $bean->getAttribute('chinvoice'))
       array_push($fields, 'i.name as invoice');
   
-	// Add billable if it is selected.
-  	if ($bean->getAttribute('chbillable')){
-		array_push($fields, 'l.billable as billable');
-	}
+    // Add billable if it is selected.
+    if ($bean->getAttribute('chbillable')){
+            array_push($fields, 'l.billable as billable');
+    }
 	
     // Prepare sql query part for left joins.
     $left_joins = null;
-    if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
+    if ($bean->getAttribute('chclient') || $bean->getAttribute('chclientnumber') || 'client' == $group_by_option)
       $left_joins .= " left join tt_clients c on (c.id = l.client_id)";
     if (($user->canManageTeam() || $user->isClient()) && $bean->getAttribute('chinvoice'))
       $left_joins .= " left join tt_invoices i on (i.id = l.invoice_id and i.status = 1)";
@@ -330,6 +333,9 @@ class ttReportHelper {
       // Add client name if it is selected.
       if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
         array_push($fields, 'c.name as client');
+      // Add client name if it is selected.
+      if ($bean->getAttribute('chclientnumber') || 'clientnumber' == $group_by_option)
+        array_push($fields, 'c.number as clientnumber');
       // Add project name if it is selected.
       if ($bean->getAttribute('chproject') || 'project' == $group_by_option)
         array_push($fields, 'p.name as project');
@@ -358,7 +364,7 @@ class ttReportHelper {
       $left_joins = null;
       if ($user->canManageTeam() || $user->isClient())
         $left_joins .= " left join tt_users u on (u.id = ei.user_id)";
-      if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
+      if ($bean->getAttribute('chclient') || $bean->getAttribute('chclientnumber') || 'client' == $group_by_option)
         $left_joins .= " left join tt_clients c on (c.id = ei.client_id)";
       if ($bean->getAttribute('chproject') || 'project' == $group_by_option)
         $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";

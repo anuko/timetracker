@@ -1,0 +1,1 @@
+ALTER TABLE `tt_fav_reports` ADD `show_billable` TINYINT NOT NULL DEFAULT '0' AFTER `show_note`, ADD `show_clientnumber` TINYINT NOT NULL DEFAULT '0' AFTER `show_billable`;

@@ -94,6 +94,7 @@ $i18n_key_words = array(
 'error.goto_uncompleted' => 'Go to uncompleted entry.',
 'error.overlap' => 'Time interval overlaps with existing records.',
 'error.future_date' => 'Date is in future.',
+'error.entry_invoiced' => 'Entry is already invoiced.',
 
 // Labels for buttons.
 'button.login' => 'Login',
@@ -175,6 +176,7 @@ $i18n_key_words = array(
 'label.tax' => 'Tax',
 'label.subtotal' => 'Subtotal',
 'label.total' => 'Total',
+'label.client_number' => 'Client number',
 'label.client_name' => 'Client name',
 'label.client_address' => 'Client address',
 'label.or' => 'or',

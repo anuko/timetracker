@@ -42,6 +42,7 @@ $cl_id = (int) $request->getParameter('id');
 $projects = ttTeamHelper::getActiveProjects($user->team_id);
 
 if ($request->isPost()) {
+  $cl_number = trim($request->getParameter('number'));
   $cl_name = trim($request->getParameter('name'));
   $cl_address = trim($request->getParameter('address'));
   $cl_tax = trim($request->getParameter('tax'));
@@ -49,6 +50,7 @@ if ($request->isPost()) {
   $cl_projects = $request->getParameter('projects');
 } else {
   $client = ttClientHelper::getClient($cl_id, true);
+  $cl_number = $client['number'];
   $cl_name = $client['name'];
   $cl_address = $client['address'];
   $cl_tax = $client['tax'];
@@ -61,6 +63,7 @@ if ($request->isPost()) {
 
 $form = new Form('clientForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
+$form->addInput(array('type'=>'text','name'=>'number','maxlength'=>'25','style'=>'width: 350px;','value'=>$cl_number));
 $form->addInput(array('type'=>'text','name'=>'name','maxlength'=>'100','style'=>'width: 350px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','style'=>'width: 350px;','cols'=>'55','rows'=>'5','value'=>$cl_address));
 $form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
@@ -73,6 +76,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey
 
 if ($request->isPost()) {
   // Validate user input.
+  if (!ttValidInteger($cl_number)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_number'));
   if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_name'));
   if (!ttValidString($cl_address, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_address'));
   if (!ttValidFloat($cl_tax, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.tax'));
@@ -83,6 +87,7 @@ if ($request->isPost()) {
       if (($client && ($cl_id == $client['id'])) || !$client) {
         if (ttClientHelper::update(array(
           'id' => $cl_id,
+          'number' => $cl_number,
           'name' => $cl_name,
           'address' => $cl_address,
           'tax' => $cl_tax,

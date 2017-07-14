@@ -40,6 +40,7 @@ if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('cl')) {
 $projects = ttTeamHelper::getActiveProjects($user->team_id);
 
 if ($request->isPost()) {
+  $cl_number = trim($request->getParameter('number'));
   $cl_name = trim($request->getParameter('name'));
   $cl_address = trim($request->getParameter('address'));
   $cl_tax = $request->getParameter('tax');
@@ -51,6 +52,7 @@ if ($request->isPost()) {
 }
 
 $form = new Form('clientForm');
+$form->addInput(array('type'=>'text','maxlength'=>'25','name'=>'number','style'=>'width: 350px;','value'=>$cl_number));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 350px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','style'=>'width: 350px;','cols'=>'55','rows'=>'5','value'=>$cl_address));
 $form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
@@ -60,6 +62,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getK
 
 if ($request->isPost()) {
   // Validate user input.
+  if (!ttValidInteger($cl_number)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_number'));
   if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_name'));
   if (!ttValidString($cl_address, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_address'));
   if (!ttValidFloat($cl_tax, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.tax'));
@@ -68,6 +71,7 @@ if ($request->isPost()) {
     if (!ttClientHelper::getClientByName($cl_name)) {
       if (ttClientHelper::insert(array(
         'team_id' => $user->team_id,
+        'number' => $cl_number,
         'name' => $cl_name,
         'address' => $cl_address,
         'tax' => $cl_tax,

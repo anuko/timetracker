@@ -112,6 +112,7 @@ if ('xml' == $type) {
       print "\t<date><![CDATA[".$item['date']."]]></date>\n";
       if ($user->canManageTeam() || $user->isClient()) print "\t<user><![CDATA[".$item['user']."]]></user>\n"; 
       if ($bean->getAttribute('chclient')) print "\t<client><![CDATA[".$item['client']."]]></client>\n";
+      if ($bean->getAttribute('chclient_number')) print "\t<client_number><![CDATA[".$item['client_number']."]]></client_number>\n";
       if ($bean->getAttribute('chproject')) print "\t<project><![CDATA[".$item['project']."]]></project>\n";
       if ($bean->getAttribute('chtask')) print "\t<task><![CDATA[".$item['task']."]]></task>\n";
       if ($bean->getAttribute('chcf_1')) print "\t<cf_1><![CDATA[".$item['cf_1']."]]></cf_1>\n";
@@ -191,6 +192,7 @@ if ('csv' == $type) {
     print '"'.$i18n->getKey('label.date').'"';
     if ($user->canManageTeam() || $user->isClient()) print ',"'.$i18n->getKey('label.user').'"';
     if ($bean->getAttribute('chclient')) print ',"'.$i18n->getKey('label.client').'"';
+    if ($bean->getAttribute('chclient_number')) print ',"'.$i18n->getKey('label.client_number').'"';
     if ($bean->getAttribute('chproject')) print ',"'.$i18n->getKey('label.project').'"';
     if ($bean->getAttribute('chtask')) print ',"'.$i18n->getKey('label.task').'"';
     if ($bean->getAttribute('chcf_1')) print ',"'.$custom_fields->fields[0]['label'].'"';
@@ -208,6 +210,7 @@ if ('csv' == $type) {
       print '"'.$item['date'].'"';
       if ($user->canManageTeam() || $user->isClient()) print ',"'.str_replace('"','""',$item['user']).'"';
       if ($bean->getAttribute('chclient')) print ',"'.str_replace('"','""',$item['client']).'"';
+      if ($bean->getAttribute('chclient_number')) print ',"'.str_replace('"','""',$item['client_number']).'"';
       if ($bean->getAttribute('chproject')) print ',"'.str_replace('"','""',$item['project']).'"';
       if ($bean->getAttribute('chtask')) print ',"'.str_replace('"','""',$item['task']).'"';
       if ($bean->getAttribute('chcf_1')) print ',"'.str_replace('"','""',$item['cf_1']).'"';
