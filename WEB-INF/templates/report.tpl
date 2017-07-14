@@ -38,7 +38,7 @@
         <td class="tableHeader">{$i18n.label.date}</td>
   {if $user->canManageTeam() || $user->isClient()}<td class="tableHeader">{$i18n.label.user}</td>{/if}
   {if $bean->getAttribute('chclient')}<td class="tableHeader">{$i18n.label.client}</td>{/if}
-  {if $bean->getAttribute('chclient_number')}<td class="tableHeader">{$i18n.label.client_number}</td>{/if}
+  {if $bean->getAttribute('chclientnumber')}<td class="tableHeader">{$i18n.label.client_number}</td>{/if}
   {if $bean->getAttribute('chproject')}<td class="tableHeader">{$i18n.label.project}</td>{/if}
   {if $bean->getAttribute('chtask')}<td class="tableHeader">{$i18n.label.task}</td>{/if}
   {if $bean->getAttribute('chcf_1')}<td class="tableHeader">{$custom_fields->fields[0]['label']|escape}</td>{/if}
@@ -60,7 +60,7 @@
         <td class="cellLeftAlignedSubtotal">{$i18n.label.subtotal}
         {if $user->canManageTeam() || $user->isClient()}<td class="cellLeftAlignedSubtotal">{if $group_by == 'user'}{$subtotals[$prev_grouped_by]['name']|escape}</td>{/if}{/if}
         {if $bean->getAttribute('chclient')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'client'}{$subtotals[$prev_grouped_by]['name']|escape}</td>{/if}{/if}
-        {if $bean->getAttribute('chclient_number')}<td></td>{/if}
+        {if $bean->getAttribute('chclientnumber')}<td></td>{/if}
         {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'project'}{$subtotals[$prev_grouped_by]['name']|escape}</td>{/if}{/if}
         {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'task'}{$subtotals[$prev_grouped_by]['name']|escape}</td>{/if}{/if}
         {if $bean->getAttribute('chcf_1')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'cf_1'}{$subtotals[$prev_grouped_by]['name']|escape}</td>{/if}{/if}
@@ -84,7 +84,7 @@
           <td class="cellLeftAligned"><a href="time_edit.php?id={$item.id}{if $user->canManageTeam()}&user_id={$item.user_id}{/if}&source=report" title="Edit">{$item.date}</a></td>
     {if $user->canManageTeam() || $user->isClient()}<td class="cellLeftAligned">{$item.user|escape}</td>{/if}
     {if $bean->getAttribute('chclient')}<td class="cellLeftAligned">{$item.client|escape}</td>{/if}
-    {if $bean->getAttribute('chclient_number')}<td class="cellLeftAligned">{$item.client_number|escape}</td>{/if}
+    {if $bean->getAttribute('chclientnumber')}<td class="cellLeftAligned">{$item.client_number|escape}</td>{/if}
     {if $bean->getAttribute('chproject')}<td class="cellLeftAligned">{$item.project|escape}</td>{/if}
     {if $bean->getAttribute('chtask')}<td class="cellLeftAligned">{$item.task|escape}</td>{/if}
     {if $bean->getAttribute('chcf_1')}<td class="cellLeftAligned">{$item.cf_1|escape}</td>{/if}
@@ -113,6 +113,7 @@
         <td class="cellLeftAlignedSubtotal">{$i18n.label.subtotal}
     {if $user->canManageTeam() || $user->isClient()}<td class="cellLeftAlignedSubtotal">{if $group_by == 'user'}{$subtotals[$cur_grouped_by]['name']|escape}</td>{/if}{/if}
     {if $bean->getAttribute('chclient')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'client'}{$subtotals[$cur_grouped_by]['name']|escape}</td>{/if}{/if}
+    {if $bean->getAttribute('chclientnumber')}<td></td>{/if}
     {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'project'}{$subtotals[$cur_grouped_by]['name']|escape}</td>{/if}{/if}
     {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'task'}{$subtotals[$cur_grouped_by]['name']|escape}</td>{/if}{/if}
     {if $bean->getAttribute('chcf_1')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'cf_1'}{$subtotals[$cur_grouped_by]['name']|escape}</td>{/if}{/if}
@@ -122,6 +123,8 @@
     {if $bean->getAttribute('chnote')}<td></td>{/if}
     {if $bean->getAttribute('chcost')}<td class="cellRightAlignedSubtotal">{if $user->canManageTeam() || $user->isClient()}{$subtotals[$cur_grouped_by]['cost']}{else}{$subtotals[$cur_grouped_by]['expenses']}{/if}</td>{/if}
     {if $bean->getAttribute('chinvoice')}<td></td>{/if}
+    {if $bean->getAttribute('chbillable')}<td></td>{/if}
+    {if $bean->getAttribute('chinvoice')}<td></td>{/if}
       </tr>
   {/if}
   <!-- print totals -->
@@ -130,7 +133,7 @@
         <td class="cellLeftAlignedSubtotal">{$i18n.label.total}</td>
     {if $user->canManageTeam() || $user->isClient()}<td></td>{/if}
     {if $bean->getAttribute('chclient')}<td></td>{/if}
-    {if $bean->getAttribute('chclient_number')}<td></td>{/if}
+    {if $bean->getAttribute('chclientnumber')}<td></td>{/if}
     {if $bean->getAttribute('chproject')}<td></td>{/if}
     {if $bean->getAttribute('chtask')}<td></td>{/if}
     {if $bean->getAttribute('chcf_1')}<td></td>{/if}

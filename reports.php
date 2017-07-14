@@ -173,7 +173,7 @@ $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'end_date'))
 // Add checkboxes for fields.
 if ($user->isPluginEnabled('cl')){
   $form->addInput(array('type'=>'checkbox','name'=>'chclient'));
-  $form->addInput(array('type'=>'checkbox','name'=>'chclient_number'));
+  $form->addInput(array('type'=>'checkbox','name'=>'chclientnumber'));
 }
  //Add Invoice and Billable Checkbox if Invoices-Plugin is anabled
 if ($user->isPluginEnabled('iv')){
@@ -242,7 +242,7 @@ if (($request->getMethod() == 'GET') && !$bean->isSaved()) {
   $form->setValueByElement('chcf_1', '0');
   $form->setValueByElement('chtotalsonly', '0');
   $form->setValueByElement('chbillable', '0');
-  $form->setValueByElement('chclient_number', '0');
+  $form->setValueByElement('chclientnumber', '0');
 }
 
 $form->setValueByElement('fav_report_changed','');

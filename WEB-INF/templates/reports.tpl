@@ -241,7 +241,7 @@ function handleCheckboxes() {
               <tr>
   {if $user->isPluginEnabled('cl')}
                 <td width="25%"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td>
-                <td width="25%"><label>{$forms.reportForm.chclient_number.control}&nbsp;{$i18n.label.client_number}</label></td>
+                <td width="25%"><label>{$forms.reportForm.chclientnumber.control}&nbsp;{$i18n.label.client_number}</label></td>
   {/if}
   {if $user->isPluginEnabled('iv')}
                 <td width="25%"><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></td>	
