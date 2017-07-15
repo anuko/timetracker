@@ -56,16 +56,13 @@ $i18n_key_words = array(
 'menu.options' => 'Optionen',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
-// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+'footer.contribute_msg' => 'Tragen Sie auf verschiedenen Weisen zu Time Tracker bei.',
 'footer.credits' => 'Impressum',
 'footer.license' => 'Lizenz',
-// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                     // This is a link to a webpage that describes how to contribute to the project.
+'footer.improve' => 'Mach mit',
 
 // Error messages.
-// TODO: translate the following string.
-// 'error.access_denied' => 'Access denied.',
+'error.access_denied' => 'Zugriff verweigert.',
 'error.sys' => 'Systemfehler.',
 'error.db' => 'Datenbankfehler.',
 'error.field' => 'Ungültige "{0}" Daten.',
@@ -75,8 +72,7 @@ $i18n_key_words = array(
 'error.project' => 'Projekt wählen.',
 'error.task' => 'Aufgabe auswählen.',
 'error.client' => 'Kunde auswählen.',
-// TODO: translate the following string.
-// 'error.report' => 'Select report.',
+'error.report' => 'Bericht auswählen.',
 'error.auth' => 'Benutzername oder Passwort ungültig.',
 'error.user_exists' => 'Benutzer mit diesem Konto ist bereits vorhanden.',
 'error.project_exists' => 'Es gibt bereits ein Projekt mit diesem Namen.',
@@ -87,8 +83,7 @@ $i18n_key_words = array(
 'error.no_login' => 'Benutzer mit diesen Anmeldedaten nicht vorhanden.',
 'error.no_teams' => 'Die Datenbank ist leer. Als Administrator anmelden und ein neues Team erzeugen.',
 'error.upload' => 'Fehler beim hochladen einer Datei.',
-// TODO: Translate the following:
-// 'error.range_locked' => 'Date range is locked.',
+'error.range_locked' => 'Zeitinterval ist gesperrt.',
 'error.mail_send' => 'Fehler beim versenden einer E-Mail.',
 'error.no_email' => 'Dieser Benutzer besitzt keine e-Mail Adresse.',
 'error.uncompleted_exists' => 'Unvollständiger Eintrag bereits vorhanden. Schließen oder Löschen.',
@@ -154,8 +149,7 @@ $i18n_key_words = array(
 'label.cost' => 'Kosten',
 'label.day_total' => 'Summe (Tag)',
 'label.week_total' => 'Summe (Woche)',
-// TODO: translate the following.
-// 'label.month_total' => 'Month total',
+'label.month_total' => 'Summe (Monat)',
 'label.today' => 'Heute',
 'label.total_hours' => 'Gesamtstunden',
 'label.total_cost' => 'Totale Kosten',
@@ -167,8 +161,7 @@ $i18n_key_words = array(
 'label.select_none' => 'Alle abwählen',
 'label.id' => 'ID',
 'label.language' => 'Sprache',
-// TODO: translate the following string.
-// 'label.decimal_mark' => 'Decimal mark',
+'label.decimal_mark' => 'Dezimaltrennzeichen',
 'label.date_format' => 'Datumsformat',
 'label.time_format' => 'Zeitformat',
 'label.week_start' => 'Erster Wochentag',
@@ -187,20 +180,17 @@ $i18n_key_words = array(
 'label.role_manager' => '(Manager)',
 'label.role_comanager' => '(Co-Manager)',
 'label.role_admin' => '(Administrator)',
-// Translate the following.
-// 'label.page' => 'Page',
+'label.page' => 'Seite',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Benutzerfelder',
-// Translate the following.
-// 'label.monthly_quotas' => 'Monthly quotas',
+'label.monthly_quotas' => 'Monatliche Quoten',
 'label.type' => 'Typ',
 'label.type_dropdown' => 'Ausklappen',
 'label.type_text' => 'Text',
 'label.required' => 'Benötigt',
 'label.fav_report' => 'Bevorzugter Report',
-// TODO: translate the following strings.
-// 'label.cron_schedule' => 'Cron schedule',
-// 'label.what_is_it' => 'What is it?',
+'label.cron_schedule' => 'Cronjob Zeitplan',
+'label.what_is_it' => 'Was ist es?',
 
 // Form titles.
 'title.login' => 'Anmelden',
@@ -242,12 +232,11 @@ $i18n_key_words = array(
 'title.add_invoice' => 'Rechnung hinzufügen',
 'title.view_invoice' => 'Rechnung ansehen',
 'title.delete_invoice' => 'Rechnung löschen',
-// TODO: translate the following strings.
-// 'title.notifications' => 'Notifications',
-// 'title.add_notification' => 'Adding Notification',
-// 'title.edit_notification' => 'Editing Notification',
-// 'title.delete_notification' => 'Deleting Notification',
-// 'title.monthly_quotas' => 'Monthly Quotas',
+'title.notifications' => 'Benachrichtigung',
+'title.add_notification' => 'Benachrichtigung hinzufügen',
+'title.edit_notification' => 'Benachrichtigung bearbeiten',
+'title.delete_notification' => 'Benachrichtigung löschen',
+'title.monthly_quotas' => 'Monatliche Quoten',
 'title.export' => 'Daten exportieren',
 'title.import' => 'Daten importieren',
 'title.options' => 'Optionen',
@@ -260,11 +249,7 @@ $i18n_key_words = array(
 'title.cf_add_dropdown_option' => 'Auswahlmöglichkeit hinzufügen',
 'title.cf_edit_dropdown_option' => 'Auswahlmöglichkeit bearbeiten',
 'title.cf_delete_dropdown_option' => 'Auswahlmöglichkeit löschen',
-// NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
-// It is also a name for the Locking plugin on the Team profile page.
-// TODO: Translate the following:
-// 'title.locking' => 'Locking',
-
+'title.locking' => 'Sperren',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -284,9 +269,8 @@ $i18n_key_words = array(
 'dropdown.select_invoice' => '--- Rechnung auswählen ---',
 'dropdown.status_active' => 'aktiv',
 'dropdown.status_inactive' => 'inaktiv',
-// TODO: translate the following strings.
-// 'dropdown.delete'=>'delete',
-// 'dropdown.do_not_delete'=>'do not delete',
+'dropdown.delete'=>'löschen',
+'dropdown.do_not_delete'=>'nicht löschen',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases
@@ -309,9 +293,8 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(hh:mm oder 0.0h)',
 'form.time.billable' => 'In Rechnung stellen',
 'form.time.uncompleted' => 'Unvollständig',
-// TODO: translate the following.
-// 'form.time.remaining_quota' => 'Remaining quota',
-// 'form.time.over_quota' => 'Over quota',
+'form.time.remaining_quota' => 'Verbleibende Quote',
+'form.time.over_quota' => 'Über der Quote',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Dieser Eintrag wurde ohne Startzeit gespeichert. Dies ist kein Fehler.',
@@ -322,9 +305,8 @@ $i18n_key_words = array(
 'form.reports.include_records' => 'Daten hinzufügen',
 'form.reports.include_billable' => 'in Rechnung stellen',
 'form.reports.include_not_billable' => 'nicht in Rechnung stellen',
-// TODO: translate the following strings.
-// 'form.reports.include_invoiced' => 'invoiced',
-// 'form.reports.include_not_invoiced' => 'not invoiced',
+'form.reports.include_invoiced' => 'berechnet',
+'form.reports.include_not_invoiced' => 'nicht berechnet',
 'form.reports.select_period' => 'Zeitraum auswählen',
 'form.reports.set_period' => 'oder Datum eingeben',
 'form.reports.show_fields' => 'Felder anzeigen',
@@ -345,9 +327,15 @@ $i18n_key_words = array(
 // (you can get to this form after generating a report).
 'form.invoice.number' => 'Rechnungsnummer',
 'form.invoice.person' => 'Person',
-// TODO: translate the following stings.
-// 'form.invoice.invoice_to_delete' => 'Invoice to delete',
-// 'form.invoice.invoice_entries' => 'Invoice entries',
+
+// Invoice delete form. See example at https://timetracker.anuko.com/invoice_delete.php
+'form.invoice.invoice_to_delete' => 'Zu löschende Rechnung',
+// TODO: check if form.invoice.invoice_entries is translated correctly.
+// This is a label for a dropdown at https://timetracker.anuko.com/invoice_delete.php with 2 options:
+// "delete" and "do not delete".
+// The settings tells whether we are deleting invoiced items when deleting an invoice.
+// If we select "do not delete" then the items stay, and can be included in another invoice.
+'form.invoice.invoice_entries' => 'Rechnungseintrag',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
 'form.charts.interval' => 'Zeitraum',
@@ -364,8 +352,7 @@ $i18n_key_words = array(
 // Users form. See example at https://timetracker.anuko.com/users.php
 'form.users.active_users' => 'Aktive Nutzer',
 'form.users.inactive_users' => 'Inaktive Nutzer',
- // TODO: translate the following.
- // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
+'form.users.uncompleted_entry' => 'Nutzer hat einen unvollständigen Zeiteintrag',
 'form.users.role' => 'Rolle',
 'form.users.manager' => 'Manager',
 'form.users.comanager' => 'Co-Manager',
@@ -373,9 +360,8 @@ $i18n_key_words = array(
 'form.users.default_rate' => 'Normaler Stundensatz',
 
 // Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-// TODO: translate the following strings.
-// 'form.client.client_to_delete' => 'Client to delete',
-// 'form.client.client_entries' => 'Client entries',
+'form.client.client_to_delete' => 'Zu löschender Kunde',
+'form.client.client_entries' => 'Kundeneintrag',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Aktive Kunden',
