@@ -64,11 +64,18 @@ while ($val = $res->fetchRow()) {
   $user = new ttUser(null, $report['user_id']);
   $i18n->load($user->lang);
 
-  // Email report.
-  if (ttReportHelper::sendFavReport($report, $val['email']))
-    echo "Report ".$val['report_id']. " sent to ".$val['email']."<br>";
-  else
-    echo "Error while emailing report...<br>";
+  // Check condition on a report.
+  $condition_ok = true;
+  if ($val['report_condition'])
+    $condition_ok = ttReportHelper::checkFavReportCondition($report, $val['report_condition']);
+
+  // Email report if condition is okay.
+  if ($condition_ok) {
+    if (ttReportHelper::sendFavReport($report, $val['email']))
+      echo "Report ".$val['report_id']. " sent to ".$val['email']."<br>";
+    else
+      echo "Error while emailing report...<br>";
+  }
 
   // Calculate next execution time.
   $next = tdCron::getNextOccurrence($val['cron_spec'], $now + 60); // +60 sec is here to get us correct $next when $now is close to existing "next".

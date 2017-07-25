@@ -45,6 +45,7 @@ if ($request->isPost()) {
   $cl_fav_report = trim($request->getParameter('fav_report'));
   $cl_cron_spec = trim($request->getParameter('cron_spec'));
   $cl_email = trim($request->getParameter('email'));
+  $cl_report_condition = trim($request->getParameter('report_condition'));
 } else {
   $cl_cron_spec = '0 4 * * 1'; // Default schedule - weekly on Mondays at 04:00 (server time).
 }
@@ -60,6 +61,7 @@ $form->addInput(array('type'=>'combobox',
 ));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'cron_spec','style'=>'width: 250px;','value'=>$cl_cron_spec));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','style'=>'width: 250px;','value'=>$cl_email));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'report_condition','style'=>'width: 250px;','value'=>$cl_report_condition));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
 
 if ($request->isPost()) {
@@ -67,6 +69,7 @@ if ($request->isPost()) {
   if (!$cl_fav_report) $err->add($i18n->getKey('error.report'));
   if (!ttValidCronSpec($cl_cron_spec)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cron_schedule'));
   if (!ttValidEmail($cl_email)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+  if (!ttValidCondition($cl_report_condition)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.condition'));
 
   if ($err->no()) {
     // Calculate next execution time.
@@ -78,6 +81,7 @@ if ($request->isPost()) {
         'next' => $next,
         'report_id' => $cl_fav_report,
         'email' => $cl_email,
+        'report_condition' => $cl_report_condition,
         'status' => ACTIVE))) {
         header('Location: notifications.php');
         exit();

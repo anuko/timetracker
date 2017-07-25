@@ -308,6 +308,23 @@ function ttValidCronSpec($val)
   return true;
 }
 
+// ttValidCondition is used to check user input to validate a notification condition.
+function ttValidCondition($val, $emptyValid = true)
+{
+  $val = trim($val);
+  if (strlen($val) == 0)
+    return ($emptyValid ? true : false);
+
+  // String must not be XSS evil (to insert JavaScript).
+  if (stristr($val, '<script>') || stristr($val, '<script '))
+    return false;
+
+  if (!preg_match("/^count\s?>\s?\d+$/", $val))
+    return false;
+
+  return true;
+}
+
 // ttAccessCheck is used to check whether user is allowed to proceed. This function is used
 // as an initial check on all publicly available pages.
 function ttAccessCheck($required_rights)

@@ -8,6 +8,7 @@
           <td class="tableHeader">{$i18n.label.thing_name}</td>
           <td class="tableHeader">{$i18n.label.cron_schedule}</td>
           <td class="tableHeader">{$i18n.label.email}</td>
+          <td class="tableHeader">{$i18n.label.condition}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
           <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
@@ -17,6 +18,7 @@
           <td>{$notification['name']|escape}</td>
           <td>{$notification['cron_spec']|escape}</td>
           <td>{$notification['email']|escape}</td>
+          <td>{$notification['report_condition']|escape}</td>
           <td><a href="notification_edit.php?id={$notification['id']}">{$i18n.label.edit}</a></td>
           <td><a href="notification_delete.php?id={$notification['id']}">{$i18n.label.delete}</a></td>
         </tr>

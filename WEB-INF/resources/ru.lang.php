@@ -185,6 +185,7 @@ $i18n_key_words = array(
 'label.role_comanager' => '(ассистент менеджера)',
 'label.role_admin' => '(администратор)',
 'label.page' => 'Стр',
+'label.condition' => 'Условие',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Дополнительные поля',
 'label.monthly_quotas' => 'Месячные квоты',

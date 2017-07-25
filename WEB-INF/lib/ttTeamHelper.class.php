@@ -520,7 +520,7 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     $result = array();
-    $sql = "select c.id, c.cron_spec, c.email, fr.name from tt_cron c
+    $sql = "select c.id, c.cron_spec, c.email, c.report_condition, fr.name from tt_cron c
       left join tt_fav_reports fr on (fr.id = c.report_id)
       where c.team_id = $team_id and c.status is not null";
     $res = $mdb2->query($sql);

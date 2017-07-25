@@ -1300,6 +1300,20 @@ class ttReportHelper {
     return $body;
   }
 
+  // checkFavReportCondition - checks whether it is okay to send fav report.
+  static function checkFavReportCondition($report, $condition)
+  {
+    $items = ttReportHelper::getFavItems($report);
+
+    $condition = str_replace('count', '', $condition);
+    $count_required = intval(trim(str_replace('>', '', $condition)));
+
+    if (count($items) > $count_required)
+      return true; // Condition ok.
+
+    return false;
+  }
+
   // prepareFavReportBody - prepares an email body for a favorite report.
   static function prepareFavReportBody($report)
   {

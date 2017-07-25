@@ -39,7 +39,7 @@ class ttNotificationHelper {
  
     $mdb2 = getConnection();
 
-    $sql = "select c.id, c.cron_spec, c.report_id, c.email, c.status, fr.name from tt_cron c
+    $sql = "select c.id, c.cron_spec, c.report_id, c.email, c.report_condition, c.status, fr.name from tt_cron c
       left join tt_fav_reports fr on (fr.id = c.report_id)
       where c.id = $id and c.team_id = $user->team_id";
     $res = $mdb2->query($sql);
@@ -75,10 +75,11 @@ class ttNotificationHelper {
     $next = (int) $fields['next'];
     $report_id = (int) $fields['report_id'];
     $email = $fields['email'];
+    $report_condition = $fields['report_condition'];
     $status = $fields['status'];
     
-    $sql = "insert into tt_cron (team_id, cron_spec, next, report_id, email, status)
-      values ($team_id, ".$mdb2->quote($cron_spec).", $next, $report_id, ".$mdb2->quote($email).", ".$mdb2->quote($status).")";
+    $sql = "insert into tt_cron (team_id, cron_spec, next, report_id, email, report_condition, status)
+      values ($team_id, ".$mdb2->quote($cron_spec).", $next, $report_id, ".$mdb2->quote($email).", ".$mdb2->quote($report_condition).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -97,9 +98,10 @@ class ttNotificationHelper {
     $next = (int) $fields['next'];
     $report_id = (int) $fields['report_id'];
     $email = $fields['email'];
+    $report_condition = $fields['report_condition'];
     $status = $fields['status'];
     
-    $sql = "update tt_cron set cron_spec = ".$mdb2->quote($cron_spec).", next = $next, report_id = $report_id, email = ".$mdb2->quote($email).", status = ".$mdb2->quote($status).
+    $sql = "update tt_cron set cron_spec = ".$mdb2->quote($cron_spec).", next = $next, report_id = $report_id, email = ".$mdb2->quote($email).", report_condition = ".$mdb2->quote($report_condition).", status = ".$mdb2->quote($status).
       " where id = $notification_id and team_id = $team_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
