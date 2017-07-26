@@ -50,10 +50,10 @@ $i18n_key_words = array(
 'menu.time' => 'Tid',
 'menu.expenses' => 'Udgifter',
 'menu.reports' => 'Rapporter',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => 'Projekter',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks', // TODO: Is "Tasks" a correct translation? Not Opgaver or something?
 'menu.users' => 'Brugere',
 // 'menu.teams' => 'Team', // TODO: is "Team" a correct ranslation?
@@ -62,7 +62,7 @@ $i18n_key_words = array(
 'menu.options' => 'Indstillinger',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 'footer.license' => 'Licens',

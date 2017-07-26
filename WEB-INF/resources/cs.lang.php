@@ -96,7 +96,7 @@ $i18n_key_words = array(
 // Note to translators: error.no_login needs to be properly translated (e-mail replaced with login).
 // 'error.no_login' => 'uživatel s tímto e-mailem neexistuje',
 'error.upload' => 'chyba přenosu souboru',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 // 'error.mail_send' => 'Error sending mail.',
 // 'error.no_email' => 'No email associated with this login.',
@@ -108,7 +108,6 @@ $i18n_key_words = array(
 // Labels for buttons.
 'button.login' => 'přihlásit',
 'button.now' => 'teď',
-// 'button.set' => 'nastavit',
 'button.save' => 'uložit',
 'button.delete' => 'smazat',
 'button.cancel' => 'zrušit',

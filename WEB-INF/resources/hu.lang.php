@@ -98,10 +98,9 @@ $i18n_key_words = array(
 // 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
 // 'error.goto_uncompleted' => 'go to uncompleted entry.',
 
-// labels for various buttons
+// Labels for buttons.
 'button.login' => 'bejelentkezés',
 'button.now' => 'most',
-// 'button.set' => 'beállítás',
 'button.save' => 'mentés',
 'button.delete' => 'törlés',
 'button.cancel' => 'vissza',

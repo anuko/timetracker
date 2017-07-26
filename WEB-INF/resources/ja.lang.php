@@ -95,14 +95,15 @@ $i18n_key_words = array(
 'error.mail_send' => 'メールの送信中のエラー',
 // Note to translators: check the meaning of error.no_email. The error should say that there is no email address for user with a login provided.
 'error.no_email' => 'このログインと関連されたメールがありません',
-// Note to translators: the strings below are missing and must be translated.
-// 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
-// 'error.goto_uncompleted' => 'go to uncompleted entry.',
+// TODO: translate the following.
+// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
+// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
+// 'error.overlap' => 'Time interval overlaps with existing records.',
+// 'error.future_date' => 'Date is in future.',
 
-// labels for various buttons
+// Labels for buttons.
 'button.login' => 'ログイン',
 'button.now' => '現在',
-// 'button.set' => '設定',
 'button.save' => '保存',
 'button.delete' => '削除',
 'button.cancel' => 'キャンセル',

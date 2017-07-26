@@ -103,10 +103,9 @@ $i18n_key_words = array(
 // 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
 // 'error.goto_uncompleted' => 'go to uncompleted entry.',
 
-// labels for various buttons
+// Labels for buttons.
 'button.login' => 'autentifica',
 'button.now' => 'acum',
-// 'button.set' => 'set',
 'button.save' => 'salveaza',
 'button.delete' => 'sterge',
 'button.cancel' => 'renunta',

@@ -43,31 +43,31 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => 'giriş',
 'menu.logout' => 'çıkış',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.forum' => 'Forum',
 'menu.help' => 'yardım',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => 'yeni yönetici hesabı yarat',
 'menu.profile' => 'profili',
 'menu.my_time' => 'zamanım',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'raporlar',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => 'projeler',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
 'menu.teams' => 'ekipler',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.export' => 'Export',
 'menu.clients' => 'müşteriler',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.options' => 'Options',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -75,7 +75,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'veritabanı hatası',
@@ -102,10 +102,9 @@ $i18n_key_words = array(
 // 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
 // 'error.goto_uncompleted' => 'go to uncompleted entry.',
 
-// labels for various buttons
+// Labels for buttons.
 'button.login' => 'giriş',
 'button.now' => 'şimdi',
-// 'button.set' => 'ayarla',
 'button.save' => 'kaydet',
 'button.delete' => 'sil',
 'button.cancel' => 'iptal',

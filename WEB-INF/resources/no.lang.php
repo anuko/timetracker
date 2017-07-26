@@ -42,19 +42,19 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => 'Innlogging',
 'menu.logout' => 'Logg ut',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.forum' => 'Forum',
 'menu.help' => 'Hjelp',
 // Note to translators: menu.create_team needs an improved translation.
 'menu.create_team' => 'Lag ny adminkonto',
 'menu.profile' => 'Profil',
 'menu.time' => 'Tid',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Rapporter',
 'menu.charts' => 'Diagrammer',
 'menu.projects' => 'Prosjekter',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
 // Note to translators: check translation of menu.teams. This is for a list of teams in the time tracker for admin.
@@ -64,7 +64,7 @@ $i18n_key_words = array(
 'menu.options' => 'Opsjoner',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -72,7 +72,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'Databasefeil.',
@@ -99,7 +99,6 @@ $i18n_key_words = array(
 // Labels for buttons.
 'button.login' => 'Innlogging',
 'button.now' => 'Nå',
-// 'button.set' => 'Sette',
 'button.save' => 'Lagre',
 'button.cancel' => 'Avbryt',
 // TODO: check translation of button.submit. It is used on several pages, including https://timetracker.anuko.com/time.php.

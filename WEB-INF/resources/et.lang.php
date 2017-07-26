@@ -66,7 +66,7 @@ $i18n_key_words = array(
 'menu.options' => 'Suvandid',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -74,7 +74,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'andmebaasi viga',
@@ -85,8 +85,8 @@ $i18n_key_words = array(
 'error.project' => 'vali projekt',
 'error.activity' => 'vali tegevus',
 'error.auth' => 'vale login või salasõna',
-// Note to translators: this string needs to be translated.
-// 'error.user_exists' => 'user with this login already exists',
+// TODO: translate the following.
+// 'error.user_exists' => 'User with this login already exists.',
 'error.project_exists' => 'selle nimega projekt on juba olemas',
 'error.activity_exists' => 'selle nimega tegevus on juba olemas',
 // TODO: translate error.client_exists.
@@ -96,15 +96,16 @@ $i18n_key_words = array(
 'error.upload' => 'viga faili vastuvõtmisel',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
-// 'error.mail_send' => 'error sending mail',
-// 'error.no_email' => 'no email associated with this login',
-// 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
-// 'error.goto_uncompleted' => 'go to uncompleted entry.',
+// 'error.mail_send' => 'Error sending mail.',
+// 'error.no_email' => 'No email associated with this login.',
+// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
+// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
+// 'error.overlap' => 'Time interval overlaps with existing records.',
+// 'error.future_date' => 'Date is in future.',
 
-// labels for various buttons
+// Labels for buttons.
 'button.login' => 'login',
 'button.now' => 'kohe',
-// 'button.set' => 'aseta',
 'button.save' => 'salvesta',
 'button.delete' => 'kustuta',
 'button.cancel' => 'tühista',

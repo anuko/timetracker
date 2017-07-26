@@ -41,7 +41,7 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => 'Iniciar sessió',
 'menu.logout' => 'Finalitzar sessió',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.forum' => 'Forum',
 'menu.help' => 'Ajuda',
 // Note to translators: menu.create_team needs to be translated more accurately.
@@ -49,23 +49,23 @@ $i18n_key_words = array(
 'menu.profile' => 'Perfil',
 // 'menu.time' => 'Time',
 'menu.time' => 'El meu temps', // TODO: menu.time is no longer "My time", just "Time".
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Informes',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => 'Projectes',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
 'menu.teams' => 'Equips',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.export' => 'Export',
 // 'menu.clients' => 'Clients',
 // 'menu.options' => 'Options',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -73,7 +73,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'Error de la Base de Dades.',
@@ -82,15 +82,15 @@ $i18n_key_words = array(
 'error.not_equal' => 'L\\\'Arxiu "{0}" no és igual al arxiu "{1}".',
 'error.interval' => 'Interval incorrecte', // TODO: English string changed to 'Field "{0}" must be greater than "{1}".', re-translate.
 'error.project' => 'Selleccionar Projecte',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.'
 'error.auth' => 'Usuari o parula de pas incorrecta',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.user_exists' => 'User with this login already exists.',
 'error.project_exists' => 'Ja existeix un projecte amb aquest nom.',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
@@ -98,7 +98,7 @@ $i18n_key_words = array(
 // 'error.no_login' => 'No user with this login.',
 // 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
 'error.upload' => 'Error pujant l\\\'arxiu.',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 // 'error.mail_send' => 'Error sending mail.',
 // 'error.no_email' => 'No email associated with this login.',
@@ -111,13 +111,13 @@ $i18n_key_words = array(
 'button.login' => 'Iniciar sessió',
 'button.now' => 'Ara',
 'button.save' => 'Guardar',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Cancel·lar',
 'button.submit' => 'Enviar',
 'button.add_user' => 'Agregar usuari ',
 'button.add_project' => 'Agregar projecte',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'button.add_task' => 'Add task',
 'button.add_client' => 'Agregar client',
 // TODO: translate the folllowing:
@@ -125,14 +125,14 @@ $i18n_key_words = array(
 // 'button.add_option' => 'Add option',
 'button.add' => 'Agregar',
 'button.generate' => 'Generar',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'button.reset_password' => 'Reset password',
 'button.send' => 'Enviar',
 'button.send_by_email' => 'Enviar per correu',
 'button.create_team' => 'Crear grup',
 'button.export' => 'Exportar grup',
 'button.import' => 'Importar grup',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'button.close' => 'Close',
 // 'button.stop' => 'Stop',
 
@@ -402,7 +402,7 @@ $i18n_key_words = array(
 "form.profile.edit_title" => 'Modificant perfil',
 "form.profile.name" => 'Nom',
 // Note to translators: a few strings in this section a missing. Please check against the English file.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
 // 'form.profile.uncompleted_indicators_none' => 'do not show',
 // 'form.profile.uncompleted_indicators_show' => 'show',

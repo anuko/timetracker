@@ -48,7 +48,7 @@ $i18n_key_words = array(
 'menu.create_team' => 'צור צוות',
 'menu.profile' => 'פרופיל',
 'menu.time' => 'זמן',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'דוחות',
 'menu.charts' => 'תרשימים',
@@ -61,16 +61,16 @@ $i18n_key_words = array(
 'menu.options' => 'אפשרויות',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 'footer.credits' => 'קרדיטס',
 'footer.license' => 'רשיון',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 'error.sys' => 'שגיאת מערכת',
 'error.db' => 'שגיאה של בסיס הנתונים',

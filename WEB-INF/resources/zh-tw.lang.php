@@ -41,20 +41,20 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => '登錄',
 'menu.logout' => '登出',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.forum' => 'Forum',
 'menu.help' => '幫助',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => '創建新管理帳號',
 'menu.profile' => '編輯簡介', // TODO: Improve this, used to be "Edit profile", now just "Profile".
 'menu.time' => '我的時間記錄', // TODO: Improve this, used to be "My time", now just "Time".
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => '報告',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => '項目',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
 'menu.teams' => '團隊',
@@ -63,7 +63,7 @@ $i18n_key_words = array(
 'menu.options' => '選項',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -71,7 +71,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => '資料庫錯誤',
@@ -85,22 +85,23 @@ $i18n_key_words = array(
 'error.user_exists' => '該使用者登錄資訊已經存在',
 'error.project_exists' => '該專案名稱已經存在',
 'error.activity_exists' => '該活動名稱已經存在',
-// TODO: translate error.client_exists.
-// 'error.client_exists' => 'client with this name already exists',
+// TODO: translate the following.
+// 'error.client_exists' => 'Client with this name already exists.',
 'error.no_login' => '沒有該登錄資訊的使用者',
 'error.upload' => '上傳文件出錯',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => '發送郵件時出錯',
 'error.no_email' => '沒有電子郵件與該用戶名關聯',
-// Note to translators: strings below must be translated.
-// 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
-// 'error.goto_uncompleted' => 'go to uncompleted entry.',
+// TODO: translate the following.
+// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
+// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
+// 'error.overlap' => 'Time interval overlaps with existing records.',
+// 'error.future_date' => 'Date is in future.',
 
-// labels for various buttons
+// Labels for buttons.
 'button.login' => '登錄',
 'button.now' => '當前時間',
-// 'button.set' => '設置',
 'button.save' => '保存',
 'button.delete' => '刪除',
 'button.cancel' => '取消',

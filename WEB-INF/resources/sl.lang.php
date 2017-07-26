@@ -43,30 +43,30 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => 'Prijava',
 'menu.logout' => 'Odjava',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.forum' => 'Forum',
 'menu.help' => 'Pomoč',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => 'Ustvari nov manager račun',
 'menu.profile' => 'Profil',
 'menu.time' => 'Moj čas', // TODO: Improve this, used to be "My time", now just "Time".
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Poročila',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => 'Projekti',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
 'menu.teams' => 'Timi',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.export' => 'Export',
 'menu.clients' => 'Stranke',
 'menu.options' => 'Možnosti',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -74,7 +74,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 // 'error.db' => 'Database error.',
@@ -104,10 +104,9 @@ $i18n_key_words = array(
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
 
-// labels for various buttons
+// Labels for buttons.
 'button.login' => 'prijava',
 'button.now' => 'zdaj',
-// 'button.set' => 'nastavi',
 'button.save' => 'shrani',
 'button.delete' => 'izbriši',
 'button.cancel' => 'prekliči',

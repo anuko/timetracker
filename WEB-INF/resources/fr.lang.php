@@ -46,7 +46,7 @@ $i18n_key_words = array(
 // 'menu.create_team' => 'Créer un compte pour un responsable',
 'menu.profile' => 'Profil',
 'menu.time' => 'Temps',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Rapports',
 'menu.charts' => 'Graphiques',
@@ -59,16 +59,16 @@ $i18n_key_words = array(
 'menu.options' => 'Options',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 'footer.credits' => 'Credits',
 'footer.license' => 'License',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 'error.sys' => 'Erreur système.',
 'error.db' => 'Erreur de base de données.',

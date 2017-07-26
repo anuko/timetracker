@@ -98,10 +98,9 @@ $i18n_key_words = array(
 // 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
 // 'error.goto_uncompleted' => 'go to uncompleted entry.',
 
-// labels for various buttons
+// Labels for buttons.
 'button.login' => '로그인',
 'button.now' => '지금',
-// 'button.set' => '설정',
 'button.save' => '저장',
 'button.delete' => '삭제',
 'button.cancel' => '취소',

@@ -47,7 +47,7 @@ $i18n_key_words = array(
 'menu.create_team' => 'Vytvoriť tím',
 'menu.profile' => 'Profil',
 'menu.time' => 'Časový záznam',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Zostavy',
 'menu.charts' => 'Grafy',
@@ -60,16 +60,16 @@ $i18n_key_words = array(
 'menu.options' => 'Nastavenia',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 'footer.credits' => 'Vývojový tím',
 'footer.license' => 'Licencia',
-// TODO: translate the following:
+// TODO: translate the following.
 // 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 'error.sys' => 'Systémová chyba.',
 'error.db' => 'Databázová chyba.',
