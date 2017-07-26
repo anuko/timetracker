@@ -59,11 +59,11 @@ $i18n_key_words = array(
 'menu.options' => 'Opcje',
 
 // Footer - strings on the bottom of most pages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 'footer.credits' => 'Twórcy',
 'footer.license' => 'Licencja',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
                                      // This is a link to a webpage that describes how to contribute to the project.
 
@@ -89,7 +89,7 @@ $i18n_key_words = array(
 'error.no_login' => 'Użytkownik o takiej nazwie nie istnieje.',
 'error.no_teams' => 'Twoja baza danych jest pusta. Zaloguj się jako administrator i stwórz nowy zespół.',
 'error.upload' => 'Błąd podczas wysyłania pliku.',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Błąd podczas wysyłania wiadomości e-mail.',
 'error.no_email' => 'Żaden adres e-mail nie jest skojarzony z tym loginem.',
@@ -188,8 +188,9 @@ $i18n_key_words = array(
 'label.role_manager' => '(Manager)',
 'label.role_comanager' => '(Co-manager)',
 'label.role_admin' => '(Administrator)',
-// Translate the following string.
+// TODO: translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Niestandardowe pola',
 // Translate the following.
@@ -261,7 +262,7 @@ $i18n_key_words = array(
 'title.cf_delete_dropdown_option' => 'Usuwanie opcji',
 // NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
 // It is also a name for the Locking plugin on the Team profile page.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'title.locking' => 'Locking',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.

@@ -43,32 +43,32 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => 'Přihlásit',
 'menu.logout' => 'Odhlásit',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.forum' => 'Forum',
 'menu.help' => 'Pomoc',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => 'vytvořit nový účet vedoucího',
 'menu.profile' => 'Profil',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.time' => 'Time',
 'menu.time' => 'záznam práce',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Sestavy',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => 'Projekty',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
 'menu.teams' => 'Týmy',
 'menu.export' => 'Export',
 'menu.clients' => 'Zákazníci',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.options' => 'Options',
 
 // Footer - strings on the bottom of most pages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -76,7 +76,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'chyba databáze',
@@ -142,8 +142,9 @@ $i18n_key_words = array(
 'label.confirm_password' => 'potvrdit heslo',
 // 'label.email' => 'email',
 'label.total' => 'celkem',
-// Translate the following string.
+// TODO: translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

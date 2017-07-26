@@ -89,7 +89,7 @@ $i18n_key_words = array(
 // 'error.client_exists' => 'client with this name already exists',
 'error.no_login' => '沒有該登錄資訊的使用者',
 'error.upload' => '上傳文件出錯',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => '發送郵件時出錯',
 'error.no_email' => '沒有電子郵件與該用戶名關聯',
@@ -134,8 +134,9 @@ $i18n_key_words = array(
 'label.confirm_password' => '確認密碼',
 'label.email' => '電子郵件',
 'label.total' => '總計',
-// Translate the following string.
+// TODO: translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

@@ -94,7 +94,7 @@ $i18n_key_words = array(
 // 'error.no_login' => 'Aucun utilisateur avec cette adresse email.',
 'error.no_teams' => 'Votre base de données est vide. Connectez-vous comme administrateur et créez une nouvelle équipe.',
 'error.upload' => 'Erreur de chargement de fichier.',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Erreur durant l\\\'envoi de l\\\'e-mail.',
 'error.no_email' => 'Aucun e-mail associé à ce login.',
@@ -199,9 +199,9 @@ $i18n_key_words = array(
 'label.role_manager' => '(responsable)',
 'label.role_comanager' => '(co-responsable)',
 'label.role_admin' => '(administrateur)',
-// Translate the following string.
+// TODO: translate the following.
 // 'label.page' => 'Page',
-
+// 'label.condition' => 'Condition',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Champs personalisés',
 // Translate the following.
@@ -279,7 +279,7 @@ $i18n_key_words = array(
 'title.cf_delete_dropdown_option' => 'Supprimer l\\\'option', // TODO: use a noun.
 // NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
 // It is also a name for the Locking plugin on the Team profile page.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'title.locking' => 'Locking',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.

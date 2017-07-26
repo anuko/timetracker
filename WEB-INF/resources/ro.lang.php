@@ -43,31 +43,31 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => 'Autentificare',
 'menu.logout' => 'Iesire',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.forum' => 'Forum',
 'menu.help' => 'Ajutor',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => 'Creaza cont manager',
 'menu.profile' => 'Profil',
 'menu.time' => 'Timpul',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Rapoarte',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => 'Proiecte',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
 'menu.teams' => 'Echipe',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.export' => 'Export',
 'menu.clients' => 'Clienti',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.options' => 'Options',
 
 // Footer - strings on the bottom of most pages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -75,7 +75,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'eroare baza de date',
@@ -96,7 +96,7 @@ $i18n_key_words = array(
 // Note to translators: this string needs to be properly translated (e-mail replaced with login).
 // 'error.no_login' => 'nu exista utilizator cu acest email',
 'error.upload' => 'eroare la upload-ul fisierului',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 // 'error.mail_send' => 'error sending mail',
 // 'error.no_email' => 'no email associated with this login',
@@ -138,8 +138,9 @@ $i18n_key_words = array(
 'label.confirm_password' => 'confirma parola',
 // 'label.email' => 'email',
 'label.total' => 'total',
-// Translate the following string.
+// TODO: translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

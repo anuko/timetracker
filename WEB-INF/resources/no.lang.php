@@ -89,7 +89,7 @@ $i18n_key_words = array(
 'error.client_exists' => 'En klient med dette navnet er allerede opprettet.',
 'error.no_login' => 'Det er ingen bruker med dette brukernavnet.',
 'error.upload' => 'Feil med lasting av fil.',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Feil ved sending av e-post.',
 'error.no_email' => 'Det er ingen e-post knyttet til dette brukernavnet.',
@@ -134,8 +134,9 @@ $i18n_key_words = array(
 'label.confirm_password' => 'Bekreft passord',
 // 'label.email' => 'email',
 'label.total' => 'totalt',
-// Translate the following string.
+// TODO: translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

@@ -203,6 +203,8 @@ $i18n_key_words = array(
 // 'label.role_comanager' => '(co-manager)',
 // 'label.role_admin' => '(administrator)',
 'label.page' => '页码',
+// TODO: translate the following.
+// 'label.condition' => 'Condition',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 // TODO: Translate the following.
 'label.custom_fields' => 'Custom fields',

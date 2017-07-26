@@ -86,7 +86,7 @@ $i18n_key_words = array(
 'error.no_login' => 'Nema korisnika pod ovom prijavom',
 'error.no_teams' => 'Vaša baza podataka je prazna. Prijavite se kao administrator i napravite novi tim.',
 'error.upload' => 'Greška pri otpremanju podatka.',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Greška u slanju mejla.',
 'error.no_email' => 'Nema imejla pod korisničkom imenom.',
@@ -186,6 +186,8 @@ $i18n_key_words = array(
 'label.role_comanager' => '(saradnik)',
 'label.role_admin' => '(administrator)',
 'label.page' => 'Strana',
+// TODO: translate the following.
+// 'label.condition' => 'Condition',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Dodatna polja',
 // Translate the following.
@@ -257,7 +259,7 @@ $i18n_key_words = array(
 'title.cf_delete_dropdown_option' => 'Brisanje opcija',
 // NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
 // It is also a name for the Locking plugin on the Team profile page.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'title.locking' => 'Locking',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.

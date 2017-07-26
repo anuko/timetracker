@@ -41,30 +41,30 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => '로그인',
 'menu.logout' => '로그아웃',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.forum' => 'Forum',
 'menu.help' => '도움말',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => '새로운 관리자 계정을 생성',
 'menu.profile' => '프로필',
 'menu.time' => '나의 시간', // TODO: improve this, used to be "My time", now just "Time".
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => '보고서',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => '프로젝트',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
 'menu.teams' => '팀',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.export' => 'Export',
 'menu.clients' => '클라이언트',
 'menu.options' => '옵션',
 
 // Footer - strings on the bottom of most pages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -72,7 +72,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => '데이터베이스 오류',
@@ -90,7 +90,7 @@ $i18n_key_words = array(
 // 'error.client_exists' => 'client with this name already exists',
 'error.no_login' => '본 로그인과 연계된 사용자가 없습니다',
 'error.upload' => '파일 업로드 오류',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => '메일 보내기에서의 오류',
 'error.no_email' => '본 로그인과 연계된 이메일이 없습니다',
@@ -134,8 +134,9 @@ $i18n_key_words = array(
 'label.confirm_password' => '암호 확인',
 'label.email' => '이메일',
 'label.total' => '합계',
-// Translate the following string.
+// TODO: translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

@@ -207,6 +207,7 @@ $i18n_key_words = array(
 'label.role_admin' => '(administrador)',
 // TODO: translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 // 'label.custom_fields' => 'Custom fields',
 // 'label.monthly_quotas' => 'Monthly quotas',

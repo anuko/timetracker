@@ -138,8 +138,9 @@ $i18n_key_words = array(
 // 'label.confirm_password' => 'confirm password',
 'label.email' => 'email',
 'label.total' => 'total',
-// Translate the following string.
+// TODO: translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

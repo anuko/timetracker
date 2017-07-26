@@ -44,20 +44,20 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => 'Login',
 'menu.logout' => 'Logout',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.forum' => 'Forum',
 'menu.help' => 'Ajuda',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => 'criar nova conta de gerente',
 'menu.profile' => 'Perfil',
 'menu.time' => 'Tempo',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Relatórios',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => 'Projetos',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
 // 'menu.teams' => 'Tams',
@@ -66,7 +66,7 @@ $i18n_key_words = array(
 'menu.options' => 'Opções',
 
 // Footer - strings on the bottom of most pages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -74,7 +74,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 // 'error.db' => 'database error',
@@ -131,8 +131,9 @@ $i18n_key_words = array(
 'label.password' => 'senha',
 'label.confirm_password' => 'confirme a senha',
 // 'label.email' => 'email',
-// Translate the following string.
+// TODO: translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

@@ -184,6 +184,8 @@ $i18n_key_words = array(
 'label.role_comanager' => '(apu-esimies)',
 'label.role_admin' => '(ylläpitäjä)',
 'label.page' => 'Sivu',
+// TODO: translate the following.
+// 'label.condition' => 'Condition',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Omat kentät',
 // Translate the following.

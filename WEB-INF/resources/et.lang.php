@@ -43,24 +43,24 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => 'Login',
 'menu.logout' => 'Logout',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.forum' => 'Forum',
 'menu.help' => 'Abiinfo',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => 'loo uus managerikonto',
 'menu.profile' => 'Profiili',
 'menu.time' => 'Aeg',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Raportid',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => 'Projektid',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
 'menu.teams' => 'Meeskonnad',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.export' => 'Export',
 'menu.clients' => 'Kliendid',
 'menu.options' => 'Suvandid',
@@ -94,7 +94,7 @@ $i18n_key_words = array(
 // Note to translators: this string needs to be properly translated (e-mail replaced with login).
 // 'error.no_login' => 'sellise e-mail aadressiga kasutajat ei ole', 
 'error.upload' => 'viga faili vastuvõtmisel',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 // 'error.mail_send' => 'error sending mail',
 // 'error.no_email' => 'no email associated with this login',
@@ -138,8 +138,9 @@ $i18n_key_words = array(
 'label.confirm_password' => 'kinnita salasõna',
 // 'label.email' => 'email',
 'label.total' => 'kokku',
-// Translate the following string.
+// Translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
 
 // Form titles.
 'title.options' => 'Suvandid',

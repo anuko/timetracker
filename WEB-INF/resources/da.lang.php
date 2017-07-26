@@ -204,9 +204,10 @@ $i18n_key_words = array(
 // 'label.on_behalf' => 'on behalf of',
 // 'label.role_manager' => '(manager)',
 // 'label.role_comanager' => '(co-manager)',
-// TODO: Translate the following.
 'label.role_admin' => '(administrator)',
+// TODO: Translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 // 'label.custom_fields' => 'Custom fields',
 // 'label.monthly_quotas' => 'Monthly quotas',

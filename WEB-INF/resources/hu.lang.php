@@ -40,30 +40,30 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => 'bejelentkezés',
 'menu.logout' => 'kijelentkezés',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.forum' => 'Forum',
 'menu.help' => 'segítség',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.create_team' => 'Create Team',
 'menu.profile' => 'profil',
 'menu.time' => 'munkaidő',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'riportok',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => 'projektek',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
 'menu.teams' => 'csoportok',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.export' => 'Export'
 'menu.clients' => 'ügyfelek',
 'menu.options' => 'opciók',
 
 // Footer - strings on the bottom of most pages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -71,7 +71,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'adatbázis hiba',
@@ -91,7 +91,7 @@ $i18n_key_words = array(
 // Note to translators: this string needs to be properly translated (e-mail replaced with login).
 // 'error.no_login' => 'nincs ilyen e-mail címmel definiált felhasználó',
 'error.upload' => 'file feltöltési hiba',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 // 'error.mail_send' => 'error sending mail',
 // 'error.no_email' => 'no email associated with this login',
@@ -135,8 +135,9 @@ $i18n_key_words = array(
 'label.confirm_password' => 'jelszó megerősítése',
 // 'label.email' => 'email',
 'label.total' => 'összesen',
-// Translate the following string.
+// Translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

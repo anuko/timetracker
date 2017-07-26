@@ -41,30 +41,30 @@ $i18n_key_words = array(
 // Menus.
 'menu.login' => 'ログイン',
 'menu.logout' => 'ログアウト',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.forum' => 'Forum',
 'menu.help' => 'ヘルプ',
 // Note to translators: menu.create_team needs a more accurate translation.
 'menu.create_team' => '新規管理者のアカウントの作成',
 'menu.profile' => 'プロファイル', 
 'menu.time' => '時間',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'レポート',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => 'プロジェクト',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
 'menu.teams' => 'チーム',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.export' => 'Export',
 'menu.clients' => 'クライアント',
 'menu.options' => 'オプション',
 
 // Footer - strings on the bottom of most pages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -72,7 +72,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'データベースのエラー',
@@ -90,7 +90,7 @@ $i18n_key_words = array(
 // 'error.client_exists' => 'client with this name already exists',
 'error.no_login' => 'このログインと関連されたユーザーはいません',
 'error.upload' => 'ファイルのアップロードのエラー',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'メールの送信中のエラー',
 // Note to translators: check the meaning of error.no_email. The error should say that there is no email address for user with a login provided.
@@ -136,8 +136,9 @@ $i18n_key_words = array(
 'label.confirm_password' => 'パスワードの確認',
 'label.email' => 'Eメール',
 'label.total' => '合計',
-// Translate the following string.
+// Translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

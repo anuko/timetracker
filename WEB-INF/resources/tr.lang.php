@@ -95,7 +95,7 @@ $i18n_key_words = array(
 // Note to translators: this string needs to be properly translated (e-mail replaced with login).
 // 'error.no_login' => 'bu e-posta adresini kullanan kullanıcı yoktur',
 'error.upload' => 'dosya yükleme hatası',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 // 'error.mail_send' => 'error sending mail',
 // 'error.no_email' => 'no email associated with this login',
@@ -138,9 +138,10 @@ $i18n_key_words = array(
 'label.confirm_password' => 'parolayı tekrala',
 'label.email' => 'e-posta',
 'label.total' => 'toplam',
-// Translate the following string.
+// TODO: translate the following.
 // 'label.page' => 'Page',
-
+// 'label.condition' => 'Condition',
+    
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.
 

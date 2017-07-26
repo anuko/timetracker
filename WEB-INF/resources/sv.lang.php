@@ -184,6 +184,8 @@ $i18n_key_words = array(
 'label.role_comanager' => '(Delansvarig)',
 'label.role_admin' => '(Administratör)',
 'label.page' => 'Sida',
+// TODO: translate the following.
+// 'label.condition' => 'Condition',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Egna fält',
 'label.monthly_quotas' => 'Månadskvoter',
