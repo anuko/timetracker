@@ -35,31 +35,33 @@ define('INTERVAL_LAST_WEEK', 6);
 define('INTERVAL_LAST_MONTH', 7);
 
 class Period {
-	var $mBeginDate;
-	var $mEndDate;
+  var $startDate;
+  var $endDate;
 
-	function __construct($period_name=0, $date_point=null) {
-		global $user;
-		
-		if (!$date_point || !($date_point instanceof DateAndTime)) {
-			$date_point = new DateAndTime();
-		}
-		$startWeek = $user->week_start;
+  function __construct($period_type = 0, $date_point = null) {
+
+    global $user;
+
+    if (!$date_point || !($date_point instanceof DateAndTime))
+      $date_point = new DateAndTime();
+
+    // TODO: refactoring ongoing down from here. Make code nicer, etc.
+    $weekStartDay = $user->week_start;
 
 		$date_begin = new DateAndTime();
 		$date_begin->setFormat($date_point->getFormat());
-		$date_end 	= new DateAndTime();
+		$date_end = new DateAndTime();
 		$date_end->setFormat($date_point->getFormat());
 		$t_arr = localtime($date_point->getTimestamp());
 		$t_arr[5] = $t_arr[5] + 1900;
 
-		if ($t_arr[6] < $startWeek) {
-		  $startWeekBias = $startWeek - 7;
+		if ($t_arr[6] < $weekStartDay) {
+		  $startWeekBias = $weekStartDay - 7;
 		} else {
-		  $startWeekBias = $startWeek;
+		  $startWeekBias = $weekStartDay;
 		}
 
-		switch ($period_name) {
+		switch ($period_type) {
 			case INTERVAL_THIS_DAY:
 				$date_begin->setTimestamp($date_point->getTimestamp());
 				$date_end->setTimestamp($date_point->getTimestamp());
@@ -86,8 +88,8 @@ class Period {
 				$date_end->setTimestamp(mktime(0, 0, 0, 12, 31, $t_arr[5]));
 			break;
 		}
-		$this->mBeginDate	= &$date_begin;
-		$this->mEndDate		= &$date_end;
+		$this->startDate	= &$date_begin;
+		$this->endDate		= &$date_end;
 	}
 
 	/**
@@ -97,7 +99,7 @@ class Period {
 	 */
 	function getAllDays() {
 		$ret_array = array();
-		if ($this->mBeginDate->before($this->mEndDate)) {
+		if ($this->startDate->before($this->endDate)) {
 			$d = $this->getBegin();
 			while ($d->before($this->getEnd())) {
 				array_push($ret_array, $d);
@@ -105,34 +107,34 @@ class Period {
 			}
 			array_push($ret_array, $d);
 		} else {
-			array_push($ret_array, $this->mBeginDate);
+			array_push($ret_array, $this->startDate);
 		}
   		return $ret_array;
 	}
 
 	function setPeriod($b_date, $e_date) {
-		$this->mBeginDate = $b_date;
-		$this->mEndDate = $e_date;
+		$this->startDate = $b_date;
+		$this->endDate = $e_date;
 	}
 
 	// return date object
 	function getBegin() {
-		return $this->mBeginDate;
+		return $this->startDate;
 	}
 
 	// return date object
 	function getEnd() {
-		return $this->mEndDate;
+		return $this->endDate;
 	}
 
 	// return date string
 	function getBeginDate($format="") {
-		return $this->mBeginDate->toString($format);
+		return $this->startDate->toString($format);
 	}
 
 	// return date string
 	function getEndDate($format="") {
-		return $this->mEndDate->toString($format);
+		return $this->endDate->toString($format);
 	}
 
 	function getArray($format="") {
