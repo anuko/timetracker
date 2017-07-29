@@ -522,7 +522,7 @@ class ttTeamHelper {
     $result = array();
     $sql = "select c.id, c.cron_spec, c.email, c.report_condition, fr.name from tt_cron c
       left join tt_fav_reports fr on (fr.id = c.report_id)
-      where c.team_id = $team_id and c.status is not null";
+      where c.team_id = $team_id and c.status = 1 and fr.status = 1";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {

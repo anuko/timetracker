@@ -269,6 +269,12 @@ class ttUserHelper {
       if (is_a($affected, 'PEAR_Error'))
         return false;
 
+      // Mark favorite reports as deleted.
+      $sql = "update tt_fav_reports set status = NULL where user_id = $user_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error'))
+        return false;
+
       // Mark user as deleted.
       $sql = "update tt_users set status = NULL where id = $user_id";
       $affected = $mdb2->exec($sql);
@@ -278,6 +284,12 @@ class ttUserHelper {
     } elseif ($user->isCoManager()) {
       // Mark user binds as deleted.
       $sql = "update tt_user_project_binds set status = NULL where user_id = $user_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error'))
+        return false;
+
+      // Mark favorite reports as deleted.
+      $sql = "update tt_fav_reports set status = NULL where user_id = $user_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -327,6 +339,12 @@ class ttUserHelper {
 
       // Mark user binds as deleted.
       $sql = "update tt_user_project_binds set status = NULL where user_id = $user_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error'))
+        return false;
+
+      // Mark favorite reports as deleted.
+      $sql = "update tt_fav_reports set status = NULL where user_id = $user_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;

@@ -36,7 +36,7 @@ class ttFavReportHelper {
     $mdb2 = getConnection();
 
     $result = array();
-    $sql = "select * from tt_fav_reports where user_id = $user_id";
+    $sql = "select * from tt_fav_reports where user_id = $user_id and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -51,7 +51,7 @@ class ttFavReportHelper {
   static function getReport($id) {
     $mdb2 = getConnection();
 
-    $sql = "select * from tt_fav_reports where id = $id";
+    $sql = "select * from tt_fav_reports where id = $id and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if ($val = $res->fetchRow()) {
@@ -65,7 +65,7 @@ class ttFavReportHelper {
   static function getReportByName($user_id, $report_name) {
     $mdb2 = getConnection();
 
-    $sql = "select * from tt_fav_reports where user_id = $user_id and name = ".$mdb2->quote($report_name);
+    $sql = "select * from tt_fav_reports where user_id = $user_id and status = 1 and name = ".$mdb2->quote($report_name);
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if ($val = $res->fetchRow()) {
