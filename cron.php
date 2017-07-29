@@ -58,10 +58,12 @@ while ($val = $res->fetchRow()) {
 
   // Get favorite report details.
   $report = ttFavReportHelper::getReport($val['report_id']);
-  if (!$report) continue;
+  if (!$report) continue; // Skip not found report.
 
-  // Recycle global $user and $i18n objects, as user settings and language are specific for each report.
+  // Recycle global $user object, as user settings are specific for each report.
   $user = new ttUser(null, $report['user_id']);
+  if (!$user->id) continue; // Skip not found user.
+  // Recycle $i18n object because language is user-specific.
   $i18n->load($user->lang);
 
   // Check condition on a report.
