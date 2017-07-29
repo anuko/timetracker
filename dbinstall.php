@@ -639,6 +639,7 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_teams` ADD `task_required` smallint(2) NOT NULL DEFAULT '0' AFTER `tracking_mode`");
     setChange("ALTER TABLE `tt_teams` ADD `project_required` smallint(2) NOT NULL DEFAULT '0' AFTER `tracking_mode`");
     setChange("ALTER TABLE `tt_cron` ADD `report_condition` varchar(255) default NULL AFTER `email`");
+    setChange("ALTER TABLE `tt_fav_reports` ADD `status` tinyint(4) default '1'");
   }
   
   // The update_clients function updates projects field in tt_clients table.

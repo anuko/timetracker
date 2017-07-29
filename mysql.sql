@@ -212,6 +212,7 @@ CREATE TABLE `tt_fav_reports` (
   `show_custom_field_1` tinyint(4) NOT NULL default '0', # whether to show custom field 1
   `show_totals_only` tinyint(4) NOT NULL default '0',    # whether to show totals only
   `group_by` varchar(20) default NULL,                   # group by field
+  `status` tinyint(4) default '1',                       # favorite report status
   PRIMARY KEY (`id`)
 );
 
