@@ -247,8 +247,6 @@ class ttUserHelper {
   }
 
   // markDeleted - marks user and its associated things as deleted.
-  // TODO: address the problem when a deleted user has a scheduled notification configured,
-  // in which case all other notifications may stop working because of MySQL syntax error.
   static function markDeleted($user_id) {
     $mdb2 = getConnection();
     global $user;
