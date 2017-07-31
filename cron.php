@@ -47,8 +47,8 @@ import('ttReportHelper');
 $mdb2 = getConnection();
 $now = mktime();
 
- $sql = "select * from tt_fav_reports fr
-   left join tt_cron c on (c.report_id = fr.id)
+ $sql = "select c.id, c.cron_spec, c.report_id, c.email, c.report_condition from tt_cron c
+   left join tt_fav_reports fr on (c.report_id = fr.id)
    where $now >= c.next and fr.status = 1
    and c.status = 1 and c.report_id is not null and c.email is not null";
 $res = $mdb2->query($sql);
