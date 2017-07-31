@@ -45,7 +45,7 @@ import('ttFavReportHelper');
 import('ttReportHelper');
 
 $mdb2 = getConnection();
-$now = mktime();
+$now = time();
 
  $sql = "select c.id, c.cron_spec, c.report_id, c.email, c.report_condition from tt_cron c
    left join tt_fav_reports fr on (c.report_id = fr.id)
