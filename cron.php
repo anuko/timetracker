@@ -47,10 +47,10 @@ import('ttReportHelper');
 $mdb2 = getConnection();
 $now = mktime();
 
-$sql = "select * from tt_cron c
-  left join tt_fav_reports fr on (c.report_id = fr.id)
-  where $now >= c.next and fr.status = 1
-  and c.status = 1 and c.report_id is not null and c.email is not null";
+ $sql = "select * from tt_fav_reports fr
+   left join tt_cron c on (c.report_id = fr.id)
+   where $now >= c.next and fr.status = 1
+   and c.status = 1 and c.report_id is not null and c.email is not null";
 $res = $mdb2->query($sql);
 if (is_a($res, 'PEAR_Error'))
   exit();
