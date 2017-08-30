@@ -75,26 +75,30 @@ $i18n_key_words = array(
 'error.interval' => 'Felt "{0}" skal være større end "{1}".',
 'error.project' => 'Vælg projekt.',
 'error.task' => 'Vælg opgave.',
+// TODO: Translate the following.
+// 'error.client' => 'Select client.',
+// 'error.report' => 'Select report.',
 'error.auth' => 'Forkert brugernavn eller adgangskode.',
 'error.user_exists' => 'Brugernavn eksistere allerede.',
 'error.project_exists' => 'Der eksiterer allerede et projekt med det navn.',
 // TODO: check error.project_exists above. eksitereR, not eksistere as in error.client_exists?
 'error.task_exists' => 'Opgavenavn eksistere allerede.',
 'error.client_exists' => 'Der eksistere allerede en klient med dette navn.',
-
-// TODO: Translate the following.
-// 'error.invoice_exists' => 'Invoice with this number already exists.',
-// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
+'error.invoice_exists' => 'Fakturanummer eksistere allerede.',
+'error.no_invoiceable_items' => 'Der er ingen fakturerbar emner.',
 'error.no_login' => 'Ingen bruger med denne login.',
 'error.no_teams' => 'Din database er tom, login som administrator og lav et nyt team.',
 'error.upload' => 'Fil upload problem.',
 'error.range_locked' => 'Dato interval er spærret.',
-// 'error.mail_send' => 'Error sending mail.',
-// 'error.no_email' => 'No email associated with this login.',
+'error.mail_send' => 'Fejl under sending af mail.',
+'error.no_email' => 'Der er ingen email tilknyttet dette brugernavn.',
 // 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
-// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
-// 'error.overlap' => 'Time interval overlaps with existing records.',
-// 'error.future_date' => 'Date is in future.',
+// TODO: Suggested translation is below. But there seem to be a problem with it. It uses "post" (mail) while the error message is about uncompleted time record (an entry in Time Tracker system).
+// 'error.uncompleted_exists' => 'Ikke-afsluttet post eksisterer allerede. Luk eller slet det.',
+// 'error.goto_uncompleted' => 'Gå til uafsluttet post.',
+// TODO: consider redoing due to the same issue as with error.uncompleted_exists (is "post" correct here?).
+'error.overlap' => 'Tidsinterval overlapper eksisterende poster.',
+'error.future_date' => 'Datoen er ud i fremtiden.',
 
 // Labels for buttons.
 'button.login' => 'Login',
