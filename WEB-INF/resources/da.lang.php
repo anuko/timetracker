@@ -41,8 +41,8 @@ $i18n_holidays = array('01/01', '04/09', '04/10', '04/12', '04/13', '05/08', '05
 $i18n_key_words = array(
 
 // Menus.
-'menu.login' => 'Login',
-'menu.logout' => 'Logout',
+'menu.login' => 'Log ind',
+'menu.logout' => 'Log ud',
 'menu.forum' => 'Forum',
 'menu.help' => 'Hjælp',
 'menu.create_team' => 'Lav et team',
@@ -50,44 +50,38 @@ $i18n_key_words = array(
 'menu.time' => 'Tid',
 'menu.expenses' => 'Udgifter',
 'menu.reports' => 'Rapporter',
-// TODO: translate the following.
-// 'menu.charts' => 'Charts',
+'menu.charts' => 'Diagrammer',
 'menu.projects' => 'Projekter',
-// TODO: translate the following.
-// 'menu.tasks' => 'Tasks', // TODO: Is "Tasks" a correct translation? Not Opgaver or something?
+'menu.tasks' => 'Opgaver',
 'menu.users' => 'Brugere',
-// 'menu.teams' => 'Team', // TODO: is "Team" a correct ranslation?
+'menu.teams' => 'Team', // TODO: is "Team" a correct ranslation? Meaning multiple teams.
 'menu.export' => 'Eksport',
 'menu.clients' => 'Kunder',
 'menu.options' => 'Indstillinger',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following.
-// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
-// 'footer.credits' => 'Credits',
+'footer.contribute_msg' => 'Du kan bidrage til Time Tracker på mange forskellige måder.',
+'footer.credits' => 'Medvirkende',
 'footer.license' => 'Licens',
 'footer.improve' => 'Bidrag',
 
 // Error messages.
 'error.access_denied' => 'Adgang nægtet.',
-// TODO: Translate the following.
-// 'error.sys' => 'System error.',
+'error.sys' => 'System fejl.',
 'error.db' => 'Database fejl.',
 'error.field' => 'Forkert "{0}" data.',
 'error.empty' => 'Felt "{0}" er tom.',
 'error.not_equal' => 'Felt "{0}" er ikke lig med "{1}".',
-// TODO: translate the following.
-// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+'error.interval' => 'Felt "{0}" skal være større end "{1}".',
 'error.project' => 'Vælg projekt.',
-// TODO: Translate the following.
-// 'error.task' => 'Select task.',
-'error.auth' => 'Forkert login eller password.',
-// TODO: Translate the following.
-// 'error.user_exists' => 'User with this login already exists.',
+'error.task' => 'Vælg opgave.',
+'error.auth' => 'Forkert brugernavn eller adgangskode.',
+'error.user_exists' => 'Brugernavn eksistere allerede.',
 'error.project_exists' => 'Der eksiterer allerede et projekt med det navn.',
-// TODO: Translate the following.
-// 'error.task_exists' => 'Task with this name already exists.',
-'error.client_exists' => 'Der eksisterer allerede en klient med dette navn.',
+// TODO: check error.project_exists above. eksitereR, not eksistere as in error.client_exists?
+'error.task_exists' => 'Opgavenavn eksistere allerede.',
+'error.client_exists' => 'Der eksistere allerede en klient med dette navn.',
+
 // TODO: Translate the following.
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
