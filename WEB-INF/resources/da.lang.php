@@ -54,7 +54,7 @@ $i18n_key_words = array(
 'menu.projects' => 'Projekter',
 'menu.tasks' => 'Opgaver',
 'menu.users' => 'Brugere',
-'menu.teams' => 'Team', // TODO: is "Team" a correct ranslation? Meaning multiple teams.
+'menu.teams' => 'Teams',
 'menu.export' => 'Eksport',
 'menu.clients' => 'Kunder',
 'menu.options' => 'Indstillinger',
@@ -75,13 +75,11 @@ $i18n_key_words = array(
 'error.interval' => 'Felt "{0}" skal være større end "{1}".',
 'error.project' => 'Vælg projekt.',
 'error.task' => 'Vælg opgave.',
-// TODO: Translate the following.
-// 'error.client' => 'Select client.',
-// 'error.report' => 'Select report.',
+'error.client' => 'Vælg klient.',
+'error.report' => 'Vælg rapport.',
 'error.auth' => 'Forkert brugernavn eller adgangskode.',
 'error.user_exists' => 'Brugernavn eksistere allerede.',
 'error.project_exists' => 'Der eksiterer allerede et projekt med det navn.',
-// TODO: check error.project_exists above. eksitereR, not eksistere as in error.client_exists?
 'error.task_exists' => 'Opgavenavn eksistere allerede.',
 'error.client_exists' => 'Der eksistere allerede en klient med dette navn.',
 'error.invoice_exists' => 'Fakturanummer eksistere allerede.',
@@ -92,42 +90,34 @@ $i18n_key_words = array(
 'error.range_locked' => 'Dato interval er spærret.',
 'error.mail_send' => 'Fejl under sending af mail.',
 'error.no_email' => 'Der er ingen email tilknyttet dette brugernavn.',
-// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
-// TODO: Suggested translation is below. But there seem to be a problem with it. It uses "post" (mail) while the error message is about uncompleted time record (an entry in Time Tracker system).
-// 'error.uncompleted_exists' => 'Ikke-afsluttet post eksisterer allerede. Luk eller slet det.',
-// 'error.goto_uncompleted' => 'Gå til uafsluttet post.',
-// TODO: consider redoing due to the same issue as with error.uncompleted_exists (is "post" correct here?).
+'error.uncompleted_exists' => 'Uafsluttet registrering eksistere allerede. Luk eller slet det.',
+'error.goto_uncompleted' => 'Gå til uafsluttet registrering.',
 'error.overlap' => 'Tidsinterval overlapper eksisterende poster.',
 'error.future_date' => 'Datoen er ud i fremtiden.',
 
 // Labels for buttons.
-'button.login' => 'Login',
+'button.login' => 'Log ind',
 'button.now' => 'Nu',
 'button.save' => 'Gem',
-// TODO: Translate the following.
-// 'button.copy' => 'Copy',
+'button.copy' => 'Kopiér',
 'button.cancel' => 'Fortryd',
 'button.submit' => 'Gem',
 'button.add_user' => 'Tilføj bruger',
 'button.add_project' => 'Tilføj project',
-// TODO: Translate the following.
-// 'button.add_task' => 'Add task',
+'button.add_task' => 'Tilføj opgave',
 'button.add_client' => 'Tilføj kunde',
-// TODO: Translate the following.
-// 'button.add_invoice' => 'Add invoice',
-// 'button.add_option' => 'Add option',
+'button.add_invoice' => 'Tilføj faktura',
+'button.add_option' => 'Tilføj mulighed',
 'button.add' => 'Tilføj',
-// TODO: Translate the following.
-// 'button.generate' => 'Dan', // TODO: Is "Dan" a correct translation?
-// 'button.reset_password' => 'Reset password',
+'button.generate' => 'Generer',
+'button.reset_password' => 'Nulstil adgangskode',
 'button.send' => 'Send',
 'button.send_by_email' => 'Send som e-mail',
 'button.create_team' => 'Lav et team',
 'button.export' => 'Exporter team',
 'button.import' => 'Importer team',
-// TODO: Translate the following.
-// 'button.close' => 'Close',
-// 'button.stop' => 'Stop',
+'button.close' => 'Luk',
+'button.stop' => 'Stop',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Team navn',
