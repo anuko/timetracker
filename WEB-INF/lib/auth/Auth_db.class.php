@@ -56,19 +56,19 @@ class Auth_db extends Auth {
     if ($val['id'] > 0) {
       return array('login'=>$login,'id'=>$val['id']);
     } else {
-    	
+
       // If the OLD_PASSWORDS option is defined - set it.
       if (defined('OLD_PASSWORDS') && isTrue(OLD_PASSWORDS)) {
         $sql = "SET SESSION old_passwords = 1";
         $res = $mdb2->query($sql);
         if (is_a($res, 'PEAR_Error')) {
           die($res->getMessage());
-        }	
+        }
       }
 
       // Try legacy password match. This is needed for compatibility with older versions of TT.
       $sql = "SELECT id FROM tt_users
-        WHERE login = ".$mdb2->quote($login)." AND password = password(".$mdb2->quote($password).") AND status = 1";
+        WHERE login = ".$mdb2->quote($login)." AND password = old_password(".$mdb2->quote($password).") AND status = 1";
       $res = $mdb2->query($sql);
       if (is_a($res, 'PEAR_Error')) {
         die($res->getMessage());
