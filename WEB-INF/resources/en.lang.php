@@ -420,5 +420,4 @@ $i18n_key_words = array(
 'form.quota.quota' => 'Quota',
 'form.quota.workday_hours' => 'Hours in a work day',
 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
 );

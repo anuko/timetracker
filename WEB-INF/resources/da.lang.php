@@ -286,376 +286,132 @@ $i18n_key_words = array(
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Har du glemt din adgangskode?',
-// TODO: Translate the following.
-// 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
+'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> er et nemt, let at bruge, open source tidsregistrerings system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
-// TODO: Translate the following.
 'form.reset_password.message' => 'Nulstilling af adgangskode er sendt på email.',
-// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+'form.reset_password.email_subject' => 'Anuko Time Tracker - Anmodning om nulstilling af adgangskode',
+'form.reset_password.email_body' => "Hej\n\nNogen, formodentlig dig, har bedt om at få nulstillet din adgangskode. Tryk på linket hvis du vil have nulstillet din adgangskode.\n\n%s\n\nAnuko Time Tracker er et nemt, let at bruge, open source tidsregistrerings system. Besøg https://www.anuko.com for mere information.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
-// TODO: Translate the following.
-// 'form.change_password.tip' => 'Type new password and click on Save.',
+'form.change_password.tip' => 'Skriv en ny adgangskode og tryk Gem.',
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
-// TODO: Translate the following.
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
-// 'form.time.billable' => 'Billable',
-// 'form.time.uncompleted' => 'Uncompleted',
-// 'form.time.remaining_quota' => 'Remaining quota',
-// 'form.time.over_quota' => 'Over quota',
+'form.time.duration_format' => '(tt:mm or 0.0)',
+'form.time.billable' => 'Fakturerbar',
+'form.time.uncompleted' => 'Uafsluttet',
+'form.time.remaining_quota' => 'Resterende kvota',
+'form.time.over_quota' => 'Over kvota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
-// TODO: Translate the following.
-// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
+'form.time_edit.uncompleted' => 'Denne post blev kun gemt med starttidspunkt. Det er ikke en fejl.',
 
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Gem som favorit',
 'form.reports.confirm_delete' => 'Er du sikker på at du vil slette denne favorit rapport?',
-// TODO: Translate the following.
-// 'form.reports.include_records' => 'Include records',
-// 'form.reports.include_billable' => 'billable',
-// 'form.reports.include_not_billable' => 'not billable',
-// 'form.reports.include_invoiced' => 'invoiced',
-// 'form.reports.include_not_invoiced' => 'not invoiced',
-// 'form.reports.select_period' => 'Select time period',
-// 'form.reports.set_period' => 'or set dates',
-// 'form.reports.show_fields' => 'Show fields',
-// 'form.reports.group_by' => 'Group by',
-// 'form.reports.group_by_no' => '--- no grouping ---',
-'form.reports.group_by_date' => 'dato',
-'form.reports.group_by_user' => 'bruger',
-// TODO: Translate the following.
-// 'form.reports.group_by_client' => 'client',
-'form.reports.group_by_project' => 'projekt',
-// TODO: Translate the following.
-// 'form.reports.group_by_task' => 'task',
-// 'form.reports.totals_only' => 'Totals only',
+'form.reports.include_records' => 'Inkluder poster',
+'form.reports.include_billable' => 'Fakturerbar',
+'form.reports.include_not_billable' => 'Ikke fakturerbar',
+'form.reports.include_invoiced' => 'Faktureret',
+'form.reports.include_not_invoiced' => 'Ikke faktureret',
+'form.reports.select_period' => 'Vælg en periode',
+'form.reports.set_period' => 'eller sæt datoer',
+'form.reports.show_fields' => 'Vis felter',
+'form.reports.group_by' => 'Gruppér ved',
+'form.reports.group_by_no' => '--- Ingen gruppereing ---',
+'form.reports.group_by_date' => 'Dato',
+'form.reports.group_by_user' => 'Bruger',
+'form.reports.group_by_client' => 'Klient',
+'form.reports.group_by_project' => 'Projekt',
+'form.reports.group_by_task' => 'Opgave',
+'form.reports.totals_only' => 'Kun Total',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
-// TODO: Translate the following.
-// 'form.report.export' => 'Export',
+'form.report.export' => 'Eksport',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
-// TODO: Translate the following.
-// 'form.invoice.number' => 'Invoice number',
-// 'form.invoice.person' => 'Person',
-// 'form.invoice.invoice_to_delete' => 'Invoice to delete',
-// 'form.invoice.invoice_entries' => 'Invoice entries',
+'form.invoice.number' => 'Fakturanummer',
+'form.invoice.person' => 'Person',
+'form.invoice.invoice_to_delete' => 'Faktura der skal slettes',
+'form.invoice.invoice_entries' => 'Faktura emner',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
-// TODO: Translate the following.
-// 'form.charts.interval' => 'Interval',
-// 'form.charts.chart' => 'Chart',
+'form.charts.interval' => 'Interval',
+'form.charts.chart' => 'Diagram',
 
 // Projects form. See example at https://timetracker.anuko.com/projects.php
-// TODO: Translate the following.
-// 'form.projects.active_projects' => 'Active Projects',
-// 'form.projects.inactive_projects' => 'Inactive Projects',
+'form.projects.active_projects' => 'Aktive Projecter',
+'form.projects.inactive_projects' => 'Inaktive Projekter',
 
 // Tasks form. See example at https://timetracker.anuko.com/tasks.php
-// TODO: Translate the following.
-// 'form.tasks.active_tasks' => 'Active Tasks',
-// 'form.tasks.inactive_tasks' => 'Inactive Tasks',
+'form.tasks.active_tasks' => 'Aktive Opgaver',
+'form.tasks.inactive_tasks' => 'Inaktive Opgaver',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
-// TODO: Translate the following.
-// 'form.users.active_users' => 'Active Users',
-// 'form.users.inactive_users' => 'Inactive Users',
-// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
-// 'form.users.role' => 'Role',
-// 'form.users.manager' => 'Manager',
-// 'form.users.comanager' => 'Co-manager',
-// 'form.users.rate' => 'Rate',
-// 'form.users.default_rate' => 'Default hourly rate',
+'form.users.active_users' => 'Aktive Brugere',
+'form.users.inactive_users' => 'Inaktive Brugere',
+'form.users.uncompleted_entry' => 'Bruger har en uafsluttet tidsregistrering',
+'form.users.role' => 'Rolle',
+'form.users.manager' => 'Manager',
+'form.users.comanager' => 'Co-Manager',
+'form.users.rate' => 'Sats',
+'form.users.default_rate' => 'Standard Time Sats',
 
 // Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-// TODO: Translate the following.
-// 'form.client.client_to_delete' => 'Client to delete',
-// 'form.client.client_entries' => 'Client entries',
+'form.client.client_to_delete' => 'Klient der skal slettes',
+'form.client.client_entries' => 'Klient indlæg',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
-// TODO: Translate the following.
-// 'form.clients.active_clients' => 'Active Clients',
-// 'form.clients.inactive_clients' => 'Inactive Clients',
+'form.clients.active_clients' => 'Aktive Klienter',
+'form.clients.inactive_clients' => 'Inaktive Klienter',
 
 // Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
-// TODO: Translate the following.
-// 'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
-// 'form.export.compression' => 'Compression',
-// 'form.export.compression_none' => 'none',
-// 'form.export.compression_bzip' => 'bzip',
+'form.export.hint' => 'Du kan eksportere alle Teamdata til en xml-fil. Det kan være nyttigt, hvis du migrerer data til din egen server.',
+'form.export.compression' => 'Komprimering',
+'form.export.compression_none' => 'Ingen',
+'form.export.compression_bzip' => 'bzip',
 
 // Strings for Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-// TODO: Translate the following.
-// 'form.import.hint' => 'Import team data from an xml file.',
-// 'form.import.file' => 'Select file',
-// 'form.import.success' => 'Import completed successfully.',
+'form.import.hint' => 'Importer teamdata fra en xml-fil.',
+'form.import.file' => 'Vælg fil',
+'form.import.success' => 'Import sluttede med succes.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-// TODO: Translate the following.
-// 'form.teams.hint' =>  'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+'form.teams.hint' =>  'Opret et nyt team ved at oprette en ny teamadministrator konto. <br> Du kan også importere teamdata fra en xml-fil fra en anden Anuko Time Tracker-server (eksisterende brugernavne er ikke tilladt).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-// TODO: Translate the following.
-// 'form.profile.12_hours' => '12 hours',
-// 'form.profile.24_hours' => '24 hours',
-// 'form.profile.tracking_mode' => 'Tracking mode',
-'form.profile.mode_time' => 'tid',
-'form.profile.mode_projects' => 'projekter',
-// TODO: Translate the following.
-// 'form.profile.mode_projects_and_tasks' => 'projects and tasks',
-// 'form.profile.record_type' => 'Record type',
-// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
-// 'form.profile.uncompleted_indicators_none' => 'do not show',
-// 'form.profile.uncompleted_indicators_show' => 'show',
-// 'form.profile.type_all' => 'all',
-// 'form.profile.type_start_finish' => 'start and finish',
-// 'form.profile.type_duration' => 'duration',
-// 'form.profile.plugins' => 'Plugins',
+'form.profile.12_hours' => '12 timers',
+'form.profile.24_hours' => '24 timers',
+'form.profile.tracking_mode' => 'Registrerings tilstand',
+'form.profile.mode_time' => 'Tid',
+'form.profile.mode_projects' => 'Projekter',
+'form.profile.mode_projects_and_tasks' => 'Projekter og opgaver',
+'form.profile.record_type' => 'Registrerings type',
+'form.profile.uncompleted_indicators' => 'Uafsluttede indikatore',
+'form.profile.uncompleted_indicators_none' => 'Vis ikke',
+'form.profile.uncompleted_indicators_show' => 'Vis',
+'form.profile.type_all' => 'Alle',
+'form.profile.type_start_finish' => 'Start og slut',
+'form.profile.type_duration' => 'Varighed',
+'form.profile.plugins' => 'Plugins',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
-// TODO: Translate the following.
-// 'form.mail.from' => 'From',
-// 'form.mail.to' => 'To',
-// 'form.mail.cc' => 'Cc',
-// 'form.mail.subject' => 'Subject',
-// 'form.mail.report_subject' => 'Time Tracker Report',
-// 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
-// 'form.mail.report_sent' => 'Report sent.',
-// 'form.mail.invoice_sent' => 'Invoice sent.',
+'form.mail.from' => 'Fra',
+'form.mail.to' => 'Til',
+'form.mail.cc' => 'Cc',
+'form.mail.subject' => 'Emne',
+'form.mail.report_subject' => 'Tidsregistrerings Rapport',
+'form.mail.footer' => 'Anuko Time Tracker er et simpelt, let at bruge, open source<br>tidsregistrerings system. Besøg <a href="https://www.anuko.com">www.anuko.com</a> for mere information.',
+'form.mail.report_sent' => 'Rapport sendt.',
+'form.mail.invoice_sent' => 'Faktura sendt.',
 
 // Quotas configuration form.
-// TODO: Translate the following.
-// 'form.quota.year' => 'Year',
-// 'form.quota.month' => 'Month',
-// 'form.quota.quota' => 'Quota',
-// 'form.quota.workday_hours' => 'Hours in a work day',
-// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-
-// TODO: refactoring ongoing down form here. All these below are old string, but perhaps we can reuse some of them above...
-
-"form.mytime.total" => 'timer i alt: ',
-"form.mytime.del_yes" => 'tids post slettet',
-"form.mytime.no_finished_rec" => 'denne post er gemt med kun en start tid. Det er ikke nødvendigvis en fejl. Du kan nu logge af.',
-// Note to translators: the 3 strings below are missing in the translation and need to be added
-"form.mytime.billable" => 'Fakturerbar',
-// "form.mytime.warn_tozero_rec" => 'this time record must be deleted because this time period is locked',
-// "form.mytime.uncompleted" => 'uncompleted',
-
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => 'Dan ny manager konot',
-"form.profile.edit_title" => 'Rediger profil',
-"form.profile.name" => 'Navn',
-"form.profile.login" => 'Login', 
-
-// Note to translators: the strings below are missing in the translation and need to be added
-// "form.profile.showchart" => 'show pie charts',
-"form.profile.lang" => 'Sprog',
-"form.profile.custom_date_format" => "Dato format",
-"form.profile.custom_time_format" => "Tids format",
-// "form.profile.default_format" => "(default)",
-"form.profile.start_week" => "Første dag i ugen",
-
-// people form attributes
-"form.people.ppl_str" => 'Brugere',
-"form.people.createu_str" => 'Dan ny bruger',
-"form.people.edit_str" => 'Rediger bruger',
-"form.people.del_str" => 'Slet bruger',
-"form.people.th.name" => 'Navn',
-"form.people.th.login" => 'Login', 
-"form.people.th.role" => 'rolle',
-"form.people.th.edit" => 'rediger',
-"form.people.th.del" => 'slet',
-"form.people.th.status" => 'status',
-"form.people.th.project" => 'projekt',
-"form.people.th.rate" => 'rate',
-"form.people.manager" => 'manager',
-"form.people.comanager" => 'co-manager',
-"form.people.empl" => 'bruger',
-"form.people.name" => 'navn',
-"form.people.login" => 'login', 
-
-"form.people.rate" => 'standard tidsfaktor',
-"form.people.comanager" => 'co-manager',
-"form.people.projects" => 'projekter',
-
-// projects form attributes
-"form.project.proj_title" => 'Projekter',
-"form.project.edit_str" => 'Rediger projekter',
-"form.project.add_str" => 'Tilføj projekt', 
-"form.project.del_str" => 'Slet projekt',
-"form.project.th.name" => 'Navn',
-"form.project.th.edit" => 'Rediger',
-"form.project.th.del" => 'Slet',
-"form.project.name" => 'navn',
-
-// activities form attributes
-"form.activity.act_title" => 'Aktiviteter',
-"form.activity.add_title" => 'Tilføj ny aktivitet', 
-"form.activity.edit_str" => 'Rediger aktivitet',
-"form.activity.del_str" => 'Slet aktivitet',
-"form.activity.name" => 'Navn',
-"form.activity.project" => 'Projekt',
-"form.activity.th.name" => 'Navn',
-"form.activity.th.project" => 'Projekt',
-"form.activity.th.edit" => 'Rediger',
-"form.activity.th.del" => 'Slet',
-
-// report attributes
-"form.report.title" => 'rapport',
-"form.report.from" => 'start dato',
-"form.report.to"=> 'slut dato',
-"form.report.groupby_user" => 'bruger',
-"form.report.groupby_project" => 'projekt',
-"form.report.groupby_activity" => 'aktivitet',
-"form.report.duration" => 'varighed',
-"form.report.start" => 'start',
-"form.report.activity" => 'aktivitet',
-"form.report.show_idle" => 'Ledig tid',
-"form.report.finish" => 'slut',
-"form.report.note" => 'notat',
-"form.report.project" => 'projekt',
-"form.report.totals_only" => 'kun totaler',
-"form.report.total" => 'timer totalt',
-"form.report.th.empllist" => 'bruger',
-"form.report.th.date" => 'dato',
-"form.report.th.project" => 'projekt',
-"form.report.th.activity" => 'aktivitet',
-"form.report.th.start" => 'start',
-"form.report.th.finish" => 'slut',
-"form.report.th.duration" => 'varighed',
-"form.report.th.note" => 'notat',
-
-// mail form attributes
-"form.mail.from" => 'fra',
-"form.mail.to" => 'til',
-"form.mail.cc" => 'cc',
-"form.mail.subject" => 'emne',
-"form.mail.comment" => 'komment',
-"form.mail.above" => 'send denne rapport pr. e-mail',
-// Note to translators: this string needs to be translated.
-// "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
-"form.mail.sending_str" => '<b>E-mail sendt</b>',
-
-// invoice attributes
-"form.invoice.title" => 'Faktura',
-"form.invoice.caption" => 'Faktura',
-"form.invoice.above" => 'Yderligere information om faktura',
-"form.invoice.select_cust" => 'Vælg kunde', 
-"form.invoice.fillform" => 'udfyld felterne',
-"form.invoice.date" => 'dato',
-"form.invoice.number" => 'Faktura nummer',
-"form.invoice.tax" => 'Moms',
-"form.invoice.comment" => 'Kommentar',
-"form.invoice.th.username" => 'person',
-"form.invoice.th.time" => 'timer',
-"form.invoice.th.rate" => 'rate',
-"form.invoice.th.summ" => 'beløb', 
-"form.invoice.subtotal" => 'subtotal',
-"form.invoice.customer" => 'kunde',
-"form.invoice.mailinv_above" => 'Send denne faktura pr. e-mail',
-"form.invoice.sending_str" => '<b>Faktura sendt</b>',
-
-"form.migration.zip" => 'komprimering',
-"form.migration.file" => 'Vælg fil', 
-"form.migration.import.title" => 'import data',
-"form.migration.import.success" => 'import gennemført', 
-"form.migration.import.text" => 'import team data fra en xml fil',
-"form.migration.export.title" => 'Eksport data',
-"form.migration.export.success" => 'Eksport gennemført', 
-"form.migration.export.text" => 'Du kan eksporterer data til en xml fil. Dette kan være praktisk, hvis du flytter til egen server.', 
-// Note to translators: the 3 strings below are missing in the translation and must be added
-"form.migration.compression.none" => 'Ingen',
-"form.migration.compression.gzip" => 'gzip',
-"form.migration.compression.bzip" => 'bzip',
-
-"form.client.title" => 'kunder',
-"form.client.add_title" => 'tilføj kunde', 
-"form.client.edit_title" => 'rediger kunde',
-"form.client.del_title" => 'slet kunde',
-"form.client.th.name" => 'navn',
-"form.client.th.edit" => 'rediger',
-"form.client.th.del" => 'slet',
-"form.client.name" => 'naavn',
-"form.client.tax" => 'Moms',
-"form.client.comment" => 'kommenter ',
-
-// miscellaneous strings
-"forward.forgot_password" => 'Glemt adgangskode?',
-"forward.edit" => 'rediger',
-"forward.delete" => 'slet',
-"forward.tocsvfile" => 'exporter data til .csv fil',
-// Note to translators:  the string below is missing in the translation and must be added
-"forward.toxmlfile" => 'Eksport data som xml fil',
-"forward.geninvoice" => 'Dan faktura',
-"forward.change" => 'Konfigurer kunder',
-
-// strings inside contols on forms
-"controls.select.project" => '--- vælg projekt ---',
-"controls.select.activity" => '--- vælg aktivitet ---',
-"controls.select.client" => '---  vælg kunde---',
-"controls.project_bind" => '--- alle ---',
-"controls.all" => '--- alle ---',
-"controls.notbind" => '--- ingen ---',
-"controls.per_tm" => 'denne mеned',
-"controls.per_lm" => 'sidste mеned',
-"controls.per_tw" => 'denne uge',
-"controls.per_lw" => 'sidste uge',
-// Note to translators: the 3 strings below are missing in the translation and must be added
-"controls.per_td" => 'I dag',
-"controls.per_at" => 'Total tid',
-"controls.per_ty" => 'I år',
-"controls.sel_period" => '--- vælg tids periode ---',
-"controls.sel_groupby" => '--- vælg gruppe ---', 
-// Note to translators: the 3 strings below are missing in the translation and must be added
-"controls.inc_billable" => 'Fakturerbar',
-"controls.inc_nbillable" => 'Ikke fakturerbar',
-// "controls.default" => '--- default ---',
-
-// labels
-// Note to translators: the 3 strings below are missing in the translation and must be added
-"label.chart.title1" => 'Bruger aktiviteter',
-"label.chart.title2" => 'Bruger projekter',
-// "label.chart.period" => 'chart for period',
-
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
-"label.pbehalf_info" => '%s %s <b>pе vegne af %s</b>',
-"label.pminfo" => ' (manager)',
-"label.pcminfo" => ' (co-manager)',
-"label.painfo" => ' (administrator)',
-"label.time_noentry" => 'ingen input',
-"label.today" => 'I dag',
-"label.req_fields"=> '* krævede felter', 
-"label.sel_project" => 'vælg projekt',
-"label.sel_activity" => 'vælg aktivtet',
-"label.sel_tp" => 'vælg periode',
-"label.set_tp" => 'eller vælg datoer',
-"label.fields" => 'Vis fleter',
-"label.group_title" => 'gruper',
-// Note to translators: the string below is missing in the translation and must be added
-// "label.include_title" => 'include records',
-"label.inv_str" => 'Faktura',
-"label.set_empl" => 'vælg brugere',
-"label.sel_all" => 'vælg alle',
-"label.sel_none" => 'fravælg alle', 
-"label.or" => 'eller',
-"label.disable" => 'disable',
-"label.enable" => 'enable',
-"label.filter" => 'filtrer',
-// Note to translators: strings below are missing in the translation and must be added
-// "label.timeweek" => 'weekly total',
-// "label.hrs" => 'hrs',
-// "label.errors" => 'errors',
-// "label.ldap_hint" => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-
-// login hello text
-"login.hello.text" => "Anuko Time Tracker er et let anvendeligt Open Source værktøj til tidsregistrering.",
+'form.quota.year' => 'År',
+'form.quota.month' => 'Måned',
+'form.quota.quota' => 'Kvota',
+'form.quota.workday_hours' => 'Timer på en arbejdsdag',
+'form.quota.hint' => 'Hvis værdierne er tomme, beregnes kvoter automatisk baseret på arbejdsdage og helligdage.',
 );
+
