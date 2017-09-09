@@ -129,8 +129,9 @@ $i18n_key_words = array(
 // 'label.manager_login' => 'manager login',
 'label.password' => 'senha',
 'label.confirm_password' => 'confirme a senha',
-// 'label.email' => 'email',
 // TODO: translate the following.
+// 'label.email' => 'email',
+// 'label.bcc' => 'Bcc',
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
 

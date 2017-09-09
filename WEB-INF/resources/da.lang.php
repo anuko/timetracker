@@ -131,6 +131,8 @@ $i18n_key_words = array(
 'label.password' => 'Adgangskode',
 'label.confirm_password' => 'Gentag adgangskode',
 'label.email' => 'E-mail',
+// TODO: translate the following.
+// 'label.bcc' => 'Bcc',
 'label.date' => 'Dato',
 'label.start_date' => 'Start dato',
 'label.end_date' => 'Slut dato',

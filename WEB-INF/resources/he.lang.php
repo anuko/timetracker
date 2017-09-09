@@ -143,6 +143,8 @@ $i18n_key_words = array(
 'label.password' => 'סיסמה',
 'label.confirm_password' => 'בדיקת סיסמה',
 'label.email' => 'דואר אלקטרוני',
+// TODO: translate the following.
+// 'label.bcc' => 'Bcc',
 'label.date' => 'תאריך',
 'label.start_date' => 'תאריך התחלה',
 'label.end_date' => 'תאריך סיום',

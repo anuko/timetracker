@@ -136,6 +136,8 @@ $i18n_key_words = array(
 'label.password' => 'parola',
 'label.confirm_password' => 'parolayı tekrala',
 'label.email' => 'e-posta',
+// TODO: translate the following.
+// 'label.bcc' => 'Bcc',
 'label.total' => 'toplam',
 // TODO: translate the following.
 // 'label.page' => 'Page',

@@ -131,6 +131,7 @@ $i18n_key_words = array(
 'label.password' => 'Пароль',
 'label.confirm_password' => 'Подтверждение пароля',
 'label.email' => 'Адрес e-mail',
+'label.bcc' => 'Скрытая копия',
 'label.date' => 'Дата',
 'label.start_date' => 'Начальная дата',
 'label.end_date' => 'Конечная дата',

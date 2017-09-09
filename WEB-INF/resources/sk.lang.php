@@ -140,6 +140,8 @@ $i18n_key_words = array(
 'label.password' => 'Heslo',
 'label.confirm_password' => 'Potvrdenie hesla',
 'label.email' => 'E-mail',
+// TODO: translate the following.
+// 'label.bcc' => 'Bcc',
 'label.date' => 'Dátum',
 'label.start_date' => 'Dátum začiatku',
 'label.end_date' => 'Dátum konca',

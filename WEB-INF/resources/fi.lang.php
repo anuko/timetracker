@@ -129,6 +129,8 @@ $i18n_key_words = array(
 'label.password' => 'Salasana',
 'label.confirm_password' => 'Vahvista salasana',
 'label.email' => 'Sähköposti',
+// TODO: translate the following.
+// 'label.bcc' => 'Bcc',
 'label.date' => 'Päiväys',
 'label.start_date' => 'Aloituspäivä',
 'label.end_date' => 'Päättymispäivä',

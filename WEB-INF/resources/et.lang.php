@@ -153,6 +153,7 @@ $i18n_key_words = array(
 'label.confirm_password' => 'Kinnita salasõna',
 // TODO: translate the following.
 // 'label.email' => 'Email',
+// 'label.bcc' => 'Bcc',
 // 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',

@@ -135,7 +135,9 @@ $i18n_key_words = array(
 // 'label.manager_login' => 'manager login',
 'label.password' => 'parola',
 'label.confirm_password' => 'confirma parola',
+// TODO: translate the following.
 // 'label.email' => 'email',
+// 'label.bcc' => 'Bcc',
 'label.total' => 'total',
 // TODO: translate the following.
 // 'label.page' => 'Page',

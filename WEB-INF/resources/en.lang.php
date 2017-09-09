@@ -131,6 +131,7 @@ $i18n_key_words = array(
 'label.password' => 'Password',
 'label.confirm_password' => 'Confirm password',
 'label.email' => 'Email',
+'label.bcc' => 'Bcc',
 'label.date' => 'Date',
 'label.start_date' => 'Start date',
 'label.end_date' => 'End date',

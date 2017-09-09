@@ -33,6 +33,7 @@ class Mailer {
   var $mSender;
   var $mReceiver;
   var $mReceiverCC;
+  var $mReceiverBCC;
 
   function __construct($type='mail') {
     $this->mMailMode = $type;
@@ -58,6 +59,10 @@ class Mailer {
     $this->mReceiverCC = $value;
   }
 
+  function setReceiverBCC($value) {
+    $this->mReceiverBCC = $value;
+  }
+
   function setSender($value) {
     $this->mSender = $value;
   }
@@ -68,6 +73,7 @@ class Mailer {
 
     $headers = array('From' => $this->mSender, 'To' => $this->mReceiver);
     if (isset($this->mReceiverCC)) $headers = array_merge($headers, array('CC' => $this->mReceiverCC));
+    if (isset($this->mReceiverBCC)) $headers = array_merge($headers, array('BCC' => $this->mReceiverBCC));
     $headers = array_merge($headers, array(
       'Subject' => $subject,
       'MIME-Version' => '1.0',
@@ -84,10 +90,14 @@ class Mailer {
         break;
 
     case 'smtp':
-        // Mail_smtp does not do CC -> recipients conversion
+        // Mail_smtp does not do CC or BCC -> recipients conversion.
         if (!empty($this->mReceiverCC)) {
           // make exactly one space after a comma
           $recipients .= ', ' . preg_replace('/,[[:space:]]+/', ', ', $this->mReceiverCC);
+        }
+        if (!empty($this->mReceiverBCC)) {
+          // make exactly one space after a comma
+          $recipients .= ', ' . preg_replace('/,[[:space:]]+/', ', ', $this->mReceiverBCC);
         }
 
         $host = defined('MAIL_SMTP_HOST') ? MAIL_SMTP_HOST : 'localhost';

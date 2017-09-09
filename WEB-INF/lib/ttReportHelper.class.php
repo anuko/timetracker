@@ -1575,7 +1575,7 @@ class ttReportHelper {
   // sendFavReport - sends a favorite report to a specified email, called from cron.php
   static function sendFavReport($report, $email) {
     // We are called from cron.php, we have no $bean in session.
-    // cron.php set global $user and $i18n objects to match our favorite report user.
+    // cron.php sets global $user and $i18n objects to match our favorite report user.
     global $user;
     global $i18n;
 
@@ -1587,6 +1587,8 @@ class ttReportHelper {
     $mailer->setCharSet(CHARSET);
     $mailer->setContentType('text/html');
     $mailer->setSender(SENDER);
+    if (!empty($user->bcc_email))
+      $mailer->setReceiverBCC($user->bcc_email);
     $mailer->setReceiver($email);
     $mailer->setMailMode(MAIL_MODE);
     if (!$mailer->send($report['name'], $body))

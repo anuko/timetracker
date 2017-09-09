@@ -164,7 +164,12 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$i18n.form.profile.uncompleted_indicators}:</td>
             <td>{$forms.profileForm.uncompleted_indicators.control}</td>
           </tr>
-
+{if $user->isManager()}
+          <tr>
+            <td align="right" nowrap>{$i18n.label.bcc}:</td>
+            <td>{$forms.profileForm.bcc_email.control} <a href="https://www.anuko.com/lp/tt_10.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+          </tr>
+{/if}
           {* initialize preview text *}
           <script>
             MakeFormatPreview("date_format_preview", document.getElementById("format_date"));

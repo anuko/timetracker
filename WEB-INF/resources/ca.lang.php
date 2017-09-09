@@ -150,6 +150,8 @@ $i18n_key_words = array(
 'label.password' => 'Paraula de pas',
 'label.confirm_password' => 'Confirmar paraula de pas',
 'label.email' => 'E-mail',
+// TODO: translate the following.
+// 'label.bcc' => 'Bcc',
 'label.date' => 'Data',
 // TODO: translate the following.
 // 'label.start_date' => 'Start date',

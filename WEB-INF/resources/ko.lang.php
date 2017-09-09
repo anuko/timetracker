@@ -132,6 +132,8 @@ $i18n_key_words = array(
 'label.password' => '암호',
 'label.confirm_password' => '암호 확인',
 'label.email' => '이메일',
+// TODO: translate the following.
+// 'label.bcc' => 'Bcc',
 'label.total' => '합계',
 // TODO: translate the following.
 // 'label.page' => 'Page',

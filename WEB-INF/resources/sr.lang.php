@@ -131,6 +131,8 @@ $i18n_key_words = array(
 'label.password' => 'Lozinka',
 'label.confirm_password' => 'Potvrdi lozinku',
 'label.email' => 'Email',
+// TODO: translate the following.
+// 'label.bcc' => 'Bcc',
 'label.date' => 'Datum',
 'label.start_date' => 'Početni datum',
 'label.end_date' => 'Krajnji datum',

@@ -142,6 +142,8 @@ $i18n_key_words = array(
 'label.password' => 'Mot de passe',
 'label.confirm_password' => 'Confirmez le mot de passe',
 'label.email' => 'Email',
+// TODO: translate the following.
+// 'label.bcc' => 'Bcc',
 'label.date' => 'Date',
 'label.start_date' => 'Date de début',
 'label.end_date' => 'Date de fin',

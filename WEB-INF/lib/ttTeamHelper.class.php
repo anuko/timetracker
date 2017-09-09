@@ -776,6 +776,7 @@ class ttTeamHelper {
     $task_required_part = ' , task_required = '.intval($fields['task_required']);
     $record_type_part = '';
     $uncompleted_indicators_part = '';
+    $bcc_email_part = '';
     $plugins_part = '';
     $lock_spec_part = '';
     $workday_hours_part = '';
@@ -790,13 +791,14 @@ class ttTeamHelper {
     if (isset($fields['tracking_mode'])) $tracking_mode_part = ', tracking_mode = '.intval($fields['tracking_mode']);
     if (isset($fields['record_type'])) $record_type_part = ', record_type = '.intval($fields['record_type']);
     if (isset($fields['uncompleted_indicators'])) $uncompleted_indicators_part = ', uncompleted_indicators = '.intval($fields['uncompleted_indicators']);
+    if (!empty($fields['bcc_email'])) $bcc_email_part = ', bcc_email = '.$mdb2->quote($fields['bcc_email']);
     if (isset($fields['plugins'])) $plugins_part = ', plugins = '.$mdb2->quote($fields['plugins']);
     if (isset($fields['lock_spec'])) $lock_spec_part = ', lock_spec = '.$mdb2->quote($fields['lock_spec']);
     if (isset($fields['workday_hours'])) $workday_hours_part = ', workday_hours = '.$mdb2->quote($fields['workday_hours']);
 
     $sql = "update tt_teams set $name_part $addr_part $currency_part $lang_part $decimal_mark_part
       $date_format_part $time_format_part $week_start_part $tracking_mode_part $task_required_part $record_type_part
-      $uncompleted_indicators_part $plugins_part $lock_spec_part $workday_hours_part where id = $team_id";
+      $uncompleted_indicators_part $bcc_email_part $plugins_part $lock_spec_part $workday_hours_part where id = $team_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 

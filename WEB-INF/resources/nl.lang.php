@@ -130,6 +130,8 @@ $i18n_key_words = array(
 'label.password' => 'Wachtwoord',
 'label.confirm_password' => 'Bevestig wachtwoord',
 'label.email' => 'E-mailadres',
+// TODO: translate the following.
+// 'label.bcc' => 'Bcc',
 'label.date' => 'Datum',
 'label.start_date' => 'Begindatum',
 'label.end_date' => 'Einddatum',

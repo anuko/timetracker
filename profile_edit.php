@@ -71,6 +71,7 @@ if ($request->isPost()) {
     $cl_expenses = $request->getParameter('expenses');
     $cl_tax_expenses = $request->getParameter('tax_expenses');
     $cl_notifications = $request->getParameter('notifications');
+    $cl_bcc_email = trim($request->getParameter('bcc_email'));
     $cl_locking = $request->getParameter('locking');
     $cl_quotas = $request->getParameter('quotas');
   }
@@ -92,6 +93,7 @@ if ($request->isPost()) {
     $cl_task_required = $user->task_required;
     $cl_record_type = $user->record_type;
     $cl_uncompleted_indicators = $user->uncompleted_indicators;
+    $cl_bcc_email = $user->bcc_email;
 
     // Which plugins do we have enabled?
     $plugins = explode(',', $user->plugins);
@@ -182,6 +184,11 @@ if ($user->canManageTeam()) {
   $uncompleted_indicators_options[UNCOMPLETED_INDICATORS] = $i18n->getKey('form.profile.uncompleted_indicators_show');
   $form->addInput(array('type'=>'combobox','name'=>'uncompleted_indicators','style'=>'width: 150px;','data'=>$uncompleted_indicators_options,'value'=>$cl_uncompleted_indicators));
 
+  // Add bcc email control, for manager only.
+  if ($user->isManager()) {
+    $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'bcc_email','value'=>$cl_bcc_email));
+  }
+
   $form->addInput(array('type'=>'checkbox','name'=>'charts','value'=>$cl_charts));
   $form->addInput(array('type'=>'checkbox','name'=>'clients','value'=>$cl_clients,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'client_required','value'=>$cl_client_required));
@@ -217,6 +224,9 @@ if ($request->isPost()) {
     if (!ttValidString($cl_team, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
     if (!ttValidString($cl_address, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.address'));
     if (!ttValidString($cl_currency, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));
+    if ($user->isManager()) {
+      if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.bcc'));
+    }
   }
   // Finished validating user input.
 
@@ -261,6 +271,7 @@ if ($request->isPost()) {
         'task_required' => $cl_task_required,
         'record_type' => $cl_record_type,
         'uncompleted_indicators' => $cl_uncompleted_indicators,
+        'bcc_email' => $cl_bcc_email,
         'plugins' => $plugins));
     }
     if ($update_result) {

@@ -133,6 +133,8 @@ $i18n_key_words = array(
 'label.password' => 'jelszó',
 'label.confirm_password' => 'jelszó megerősítése',
 // 'label.email' => 'email',
+// TODO: translate the following.
+// 'label.bcc' => 'Bcc',
 'label.total' => 'összesen',
 // Translate the following.
 // 'label.page' => 'Page',

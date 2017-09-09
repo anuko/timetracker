@@ -136,6 +136,8 @@ $i18n_key_words = array(
 'label.password' => 'geslo',
 // 'label.confirm_password' => 'confirm password',
 'label.email' => 'email',
+// TODO: translate the following.
+// 'label.bcc' => 'Bcc',
 'label.total' => 'total',
 // TODO: translate the following.
 // 'label.page' => 'Page',

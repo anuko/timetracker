@@ -28,6 +28,7 @@ CREATE TABLE `tt_teams` (
   `task_required` smallint(2) NOT NULL DEFAULT '0',          # whether a task selection is required or optional
   `record_type` smallint(2) NOT NULL DEFAULT '0',            # time record type ("start and finish", "duration", or both)
   `uncompleted_indicators` smallint(2) NOT NULL DEFAULT '0', # whether to show indicators for users with uncompleted time entries
+  `bcc_email` varchar(100) default NULL,                     # bcc email to copy all reports to
   `plugins` varchar(255) default NULL,                       # a list of enabled plugins for team
   `lock_spec` varchar(255) default NULL,                     # Cron specification for record locking,
                                                              # for example: "0 10 * * 1" for "weekly on Mon at 10:00".

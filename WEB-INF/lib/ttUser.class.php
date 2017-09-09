@@ -46,6 +46,7 @@ class ttUser {
   var $task_required = 0;       // Whether task selection is required on time entires.
   var $record_type = 0;         // Record type (duration vs start and finish, or both).
   var $uncompleted_indicators = 0; // Uncompleted time entry indicators (show nowhere or on users page).
+  var $bcc_email = null;        // Bcc email.
   var $currency = null;         // Currency.
   var $plugins = null;          // Comma-separated list of enabled plugins.
   var $team = null;             // Team name.
@@ -67,7 +68,7 @@ class ttUser {
     $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role, u.client_id, u.email, t.name as team_name, 
       t.address, t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
       t.tracking_mode, t.project_required, t.task_required, t.record_type, t.uncompleted_indicators,
-      t.plugins, t.lock_spec, t.workday_hours, t.custom_logo
+      t.bcc_email, t.plugins, t.lock_spec, t.workday_hours, t.custom_logo
       FROM tt_users u LEFT JOIN tt_teams t ON (u.team_id = t.id) WHERE ";
     if ($id)
       $sql .= "u.id = $id";
@@ -99,6 +100,7 @@ class ttUser {
       $this->task_required = $val['task_required'];
       $this->record_type = $val['record_type'];
       $this->uncompleted_indicators = $val['uncompleted_indicators'];
+      $this->bcc_email = $val['bcc_email'];
       $this->team = $val['team_name'];
       $this->address = $val['address'];
       $this->currency = $val['currency'];
