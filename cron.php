@@ -47,7 +47,7 @@ import('ttReportHelper');
 $mdb2 = getConnection();
 $now = time();
 
- $sql = "select c.id, c.cron_spec, c.report_id, c.email, c.report_condition from tt_cron c
+ $sql = "select c.id, c.cron_spec, c.report_id, c.email, c.cc, c.subject, c.report_condition from tt_cron c
    left join tt_fav_reports fr on (c.report_id = fr.id)
    where $now >= c.next and fr.status = 1
    and c.status = 1 and c.report_id is not null and c.email is not null";
@@ -75,7 +75,7 @@ while ($val = $res->fetchRow()) {
 
   // Email report if condition is okay.
   if ($condition_ok) {
-    if (ttReportHelper::sendFavReport($report, $val['email']))
+    if (ttReportHelper::sendFavReport($report, $val['subject'], $val['email'], $val['cc']))
       echo "Report ".$val['report_id']. " sent to ".$val['email']."<br>";
     else
       echo "Error while emailing report...<br>";

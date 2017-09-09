@@ -641,6 +641,8 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_cron` ADD `report_condition` varchar(255) default NULL AFTER `email`");
     setChange("ALTER TABLE `tt_fav_reports` ADD `status` tinyint(4) default '1'");
     setChange("ALTER TABLE `tt_teams` ADD `bcc_email` varchar(100) default NULL AFTER `uncompleted_indicators`");
+    setChange("ALTER TABLE `tt_cron` ADD `cc` varchar(100) default NULL AFTER `email`");
+    setChange("ALTER TABLE `tt_cron` ADD `subject` varchar(100) default NULL AFTER `cc`");
   }
   
   // The update_clients function updates projects field in tt_clients table.

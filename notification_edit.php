@@ -46,12 +46,16 @@ if ($request->isPost()) {
   $cl_fav_report = trim($request->getParameter('fav_report'));
   $cl_cron_spec = trim($request->getParameter('cron_spec'));
   $cl_email = trim($request->getParameter('email'));
+  $cl_cc = trim($request->getParameter('cc'));
+  $cl_subject = trim($request->getParameter('subject'));
   $cl_report_condition = trim($request->getParameter('report_condition'));
 } else {
   $notification = ttNotificationHelper::get($notification_id);
   $cl_fav_report = $notification['report_id'];
   $cl_cron_spec = $notification['cron_spec'];
   $cl_email = $notification['email'];
+  $cl_cc = $notification['cc'];
+  $cl_subject = $notification['subject'];
   $cl_report_condition = $notification['report_condition'];
 }
 
@@ -66,6 +70,8 @@ $form->addInput(array('type'=>'combobox',
   'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'cron_spec','style'=>'width: 250px;','value'=>$cl_cron_spec));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','style'=>'width: 250px;','value'=>$cl_email));
+$form->addInput(array('type'=>'text','name'=>'cc','style'=>'width: 300px;','value'=>$cl_cc));
+$form->addInput(array('type'=>'text','name'=>'subject','style'=>'width: 300px;','value'=>$cl_subject));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'report_condition','style'=>'width: 250px;','value'=>$cl_report_condition));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.save')));
 
@@ -74,6 +80,8 @@ if ($request->isPost()) {
   if (!$cl_fav_report) $err->add($i18n->getKey('error.report'));
   if (!ttValidCronSpec($cl_cron_spec)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cron_schedule'));
   if (!ttValidEmail($cl_email)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+  if (!ttValidEmail($cl_cc, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.cc'));
+  if (!ttValidString($cl_subject, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.subject'));
   if (!ttValidCondition($cl_report_condition)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.condition'));
 
   if ($err->no()) {
@@ -87,6 +95,8 @@ if ($request->isPost()) {
         'next' => $next,
         'report_id' => $cl_fav_report,
         'email' => $cl_email,
+        'cc' => $cl_cc,
+        'subject' => $cl_subject,
         'report_condition' => $cl_report_condition,
         'status' => ACTIVE))) {
         header('Location: notifications.php');

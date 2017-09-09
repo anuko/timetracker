@@ -229,6 +229,8 @@ CREATE TABLE `tt_cron` (
   `next` int(11) default NULL,                  # UNIX timestamp of when to run next job
   `report_id` int(11) default NULL,             # report id from tt_fav_reports, a report to mail on schedule
   `email` varchar(100) default NULL,            # email to send results to
+  `cc` varchar(100) default NULL,               # cc email to send results to
+  `subject` varchar(100) default NULL,          # email subject
   `report_condition` varchar(255) default NULL, # report condition, "count > 0" for sending not empty reports
   `status` tinyint(4) default '1',              # entry status
   PRIMARY KEY (`id`)
