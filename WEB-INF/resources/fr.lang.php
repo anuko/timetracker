@@ -142,10 +142,10 @@ $i18n_key_words = array(
 'label.password' => 'Mot de passe',
 'label.confirm_password' => 'Confirmez le mot de passe',
 'label.email' => 'Email',
+'label.cc' => 'Cc',
 // TODO: translate the following.
-// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'Objet',
 'label.date' => 'Date',
 'label.start_date' => 'Date de début',
 'label.end_date' => 'Date de fin',
@@ -448,8 +448,6 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'De',
 'form.mail.to' => 'À',
-'form.mail.cc' => 'Cc',
-'form.mail.subject' => 'Objet',
 'form.mail.report_subject' => 'Rapport Time Tracker',
 // Note to translators: the following strings need to be translated.
 // The problem seems to be that the first sentence does not seem like a complete sentence.

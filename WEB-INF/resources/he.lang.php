@@ -143,10 +143,10 @@ $i18n_key_words = array(
 'label.password' => 'סיסמה',
 'label.confirm_password' => 'בדיקת סיסמה',
 'label.email' => 'דואר אלקטרוני',
+'label.cc' => 'העתק',
 // TODO: translate the following.
-// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'נושא',
 'label.date' => 'תאריך',
 'label.start_date' => 'תאריך התחלה',
 'label.end_date' => 'תאריך סיום',
@@ -432,8 +432,6 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'מאת',
 'form.mail.to' => 'אל',
-'form.mail.cc' => 'העתק',
-'form.mail.subject' => 'נושא',
 'form.mail.report_subject' => 'דוח Time Tracker',
 'form.mail.footer' => 'Anuko Time Tracker הינה מערכת פשוטה, קלה לשימוש וחינמית לניהול זמן. בקר באתר <a href="https://www.anuko.com">www.anuko.com</a> לפרטים נוספים.',
 'form.mail.report_sent' => 'הדוח נשלח.',

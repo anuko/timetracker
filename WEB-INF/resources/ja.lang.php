@@ -139,7 +139,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => '主題',
 'label.total' => '合計',
 // Translate the following.
 // 'label.page' => 'Page',
@@ -300,8 +300,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'から',
 "form.mail.to" => 'まで',
-"form.mail.cc" => 'cc',
-"form.mail.subject" => '主題',
 "form.mail.comment" => 'コメント',
 "form.mail.above" => 'このレポートをEメールで送信',
 // Note to translators: this string needs to be translated.

@@ -129,11 +129,11 @@ $i18n_key_words = array(
 // 'label.manager_login' => 'manager login',
 'label.password' => 'senha',
 'label.confirm_password' => 'confirme a senha',
-// TODO: translate the following.
 // 'label.email' => 'Email',
-// 'label.cc' => 'Cc',
+'label.cc' => 'Cc',
+// TODO: translate the following.
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'Assunto',
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
 
@@ -307,8 +307,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'de',
 "form.mail.to" => 'para',
-"form.mail.cc" => 'cc',
-"form.mail.subject" => 'assunto',
 "form.mail.comment" => 'comentário',
 "form.mail.above" => 'enviar este relatório por e-mail',
 // Note to translators: the strings below must be translated

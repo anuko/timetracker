@@ -298,8 +298,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => '從',
 "form.mail.to" => '到',
-"form.mail.cc" => '抄送',
-"form.mail.subject" => '主題',
 "form.mail.comment" => '留言',
 "form.mail.above" => '通過電子郵件發送該報告',
 // Note to translators: this string needs to be translated.

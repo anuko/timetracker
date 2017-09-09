@@ -131,10 +131,10 @@ $i18n_key_words = array(
 'label.password' => 'Lozinka',
 'label.confirm_password' => 'Potvrdi lozinku',
 'label.email' => 'Email',
+'label.cc' => 'Cc',
 // TODO: translate the following.
-// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'Naslov',
 'label.date' => 'Datum',
 'label.start_date' => 'Početni datum',
 'label.end_date' => 'Krajnji datum',
@@ -407,8 +407,6 @@ $i18n_key_words = array(
 // Forma mejla. Pogledajte primer na https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'Od',
 'form.mail.to' => 'Za',
-'form.mail.cc' => 'Cc',
-'form.mail.subject' => 'Naslov',
 'form.mail.report_subject' => 'Evidencija vremena',
 'form.mail.footer' => 'Anuko Time Tracker je jednostavan i lak za korišćenje za praćenje <br>radnog vremena. Posetite <a href="https://www.anuko.com">www.anuko.com</a> za više informacija.',
 'form.mail.report_sent' => 'Izveštaj poslat.',

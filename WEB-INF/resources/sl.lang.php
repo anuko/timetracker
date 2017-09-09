@@ -136,10 +136,10 @@ $i18n_key_words = array(
 'label.password' => 'geslo',
 // 'label.confirm_password' => 'confirm password',
 'label.email' => 'Email',
+'label.cc' => 'Cc',
 // TODO: translate the following.
-// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'Predmet',
 'label.total' => 'total',
 // TODO: translate the following.
 // 'label.page' => 'Page',
@@ -299,8 +299,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'od',
 "form.mail.to" => 'za',
-"form.mail.cc" => 'cc',
-"form.mail.subject" => 'predmet',
 "form.mail.comment" => 'komentar',
 "form.mail.above" => 'pošlji to poročilo preko elektronske pošte',
 // Note to translators: this string needs to be translated.

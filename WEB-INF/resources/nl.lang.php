@@ -130,10 +130,10 @@ $i18n_key_words = array(
 'label.password' => 'Wachtwoord',
 'label.confirm_password' => 'Bevestig wachtwoord',
 'label.email' => 'E-mailadres',
+'label.cc' => 'Cc',
 // TODO: translate the following.
-// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'Onderwerp',
 'label.date' => 'Datum',
 'label.start_date' => 'Begindatum',
 'label.end_date' => 'Einddatum',
@@ -408,8 +408,6 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'Van',
 'form.mail.to' => 'Aan',
-'form.mail.cc' => 'Cc',
-'form.mail.subject' => 'Onderwerp',
 'form.mail.report_subject' => 'Time Tracker Rapport',
 'form.mail.footer' => 'Anuko Time Tracker is een eenvoudig en gemakkelijk te gebruiken open source tijdregistratiesysteem. Bezoek <a href="https://www.anuko.com">www.anuko.com</a> voor meer informatie.',
 'form.mail.report_sent' => 'Rapport is verzonden.',

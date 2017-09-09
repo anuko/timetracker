@@ -304,8 +304,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'kimden',
 "form.mail.to" => 'kime',
-"form.mail.cc" => 'bilgi',
-"form.mail.subject" => 'konu',
 "form.mail.comment" => 'yorum',
 "form.mail.above" => 'bu raporu e-posta ile yolla',
 // Note to translators: this string needs to be translated.

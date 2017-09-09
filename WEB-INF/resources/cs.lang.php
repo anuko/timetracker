@@ -307,8 +307,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'od',
 "form.mail.to" => 'komu',
-"form.mail.cc" => 'cc',
-"form.mail.subject" => 'předmět',
 "form.mail.comment" => 'komentář',
 "form.mail.above" => 'poslat sestavu e-mailem',
 // Note to translators: this string needs to be translated.

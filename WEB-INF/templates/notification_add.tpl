@@ -16,11 +16,11 @@
           <td>{$forms.notificationForm.email.control}</td>
         </tr>
         <tr>
-          <td align="right">{$i18n.form.mail.cc}:</td>
+          <td align="right">{$i18n.label.cc}:</td>
           <td>{$forms.notificationForm.cc.control}</td>
         </tr>
         <tr>
-          <td align="right">{$i18n.form.mail.subject}:</td>
+          <td align="right">{$i18n.label.subject}:</td>
           <td>{$forms.notificationForm.subject.control}</td>
         </tr>
         <tr>

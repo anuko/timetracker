@@ -487,8 +487,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'De',
 "form.mail.to" => 'Per a',
-"form.mail.cc" => 'cc',
-"form.mail.subject" => 'Assumpte',
 "form.mail.comment" => 'Comentari',
 "form.mail.above" => 'Enviar aquest report por e-mail',
 // Note to translators: this string needs to be translated.

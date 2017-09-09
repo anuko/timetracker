@@ -151,11 +151,11 @@ $i18n_key_words = array(
 'label.login' => 'Login',
 'label.password' => 'Salasõna',
 'label.confirm_password' => 'Kinnita salasõna',
-// TODO: translate the following.
 // 'label.email' => 'Email',
-// 'label.cc' => 'Cc',
+'label.cc' => 'Cc',
+// TODO: translate the following.
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'Teema',
 // 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
@@ -389,8 +389,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'kellelt',
 "form.mail.to" => 'kellele',
-"form.mail.cc" => 'cc',
-"form.mail.subject" => 'teema',
 "form.mail.comment" => 'märkus',
 "form.mail.above" => 'saada aruanne e-mailiga',
 // Note to translators: this string needs to be translated.

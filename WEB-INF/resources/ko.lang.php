@@ -135,7 +135,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => '제목',
 'label.total' => '합계',
 // TODO: translate the following.
 // 'label.page' => 'Page',
@@ -296,8 +296,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => '부터',
 "form.mail.to" => '까지',
-"form.mail.cc" => 'cc',
-"form.mail.subject" => '제목',
 "form.mail.comment" => '코멘트',
 "form.mail.above" => '이 보고서를 이메일로 송신',
 // Note to translators: this string needs to be translated.

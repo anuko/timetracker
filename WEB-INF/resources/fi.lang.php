@@ -129,10 +129,10 @@ $i18n_key_words = array(
 'label.password' => 'Salasana',
 'label.confirm_password' => 'Vahvista salasana',
 'label.email' => 'Sähköposti',
+'label.cc' => 'Kopio',
 // TODO: translate the following.
-// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'Aihe',
 'label.date' => 'Päiväys',
 'label.start_date' => 'Aloituspäivä',
 'label.end_date' => 'Päättymispäivä',
@@ -402,8 +402,6 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'Lähettäjä',
 'form.mail.to' => 'Vastaanottaja',
-'form.mail.cc' => 'Kopio',
-'form.mail.subject' => 'Aihe',
 'form.mail.report_subject' => 'Time Tracker -raportti',
 'form.mail.footer' => 'Anuko Time Tracker on yksinkertainen ja helppokäyttöinen vapaan koodin tuntiseurantaohjelmisto. Lisätietoja sivulla <a href="https://www.anuko.com">www.anuko.com</a>.',
 'form.mail.report_sent' => 'Raportti lähetetty.',

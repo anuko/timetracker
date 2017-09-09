@@ -135,11 +135,11 @@ $i18n_key_words = array(
 // 'label.manager_login' => 'manager login',
 'label.password' => 'parola',
 'label.confirm_password' => 'confirma parola',
+'label.email' => 'E-mail',
+'label.cc' => 'Copie',
 // TODO: translate the following.
-// 'label.email' => 'Email',
-// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'Subiect',
 'label.total' => 'total',
 // TODO: translate the following.
 // 'label.page' => 'Page',
@@ -306,8 +306,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'de la',
 "form.mail.to" => 'catre',
-"form.mail.cc" => 'copie',
-"form.mail.subject" => 'subiect',
 "form.mail.comment" => 'comentariu',
 "form.mail.above" => 'trimite acest raport pe e-mail',
 // Note to translators: this string needs to be translated.

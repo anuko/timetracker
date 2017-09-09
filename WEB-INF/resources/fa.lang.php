@@ -139,10 +139,10 @@ $i18n_key_words = array(
 'label.password' => 'رمز عبور',
 'label.confirm_password' => 'تکرار رمزعبور',
 'label.email' => 'ایمیل',
+'label.cc' => 'کپی',
 // TODO: translate the following.
-// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'موضوع',
 'label.date' => 'تاریخ',
 'label.start_date' => 'تاریخ شروع',
 'label.end_date' => 'تاریخ اتمام',
@@ -430,8 +430,6 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'از',
 'form.mail.to' => 'به',
-'form.mail.cc' => 'کپی',
-'form.mail.subject' => 'موضوع',
 'form.mail.report_subject' => 'گزارش تایم شیت',
 // TODO: translate form.mail.footer.
 // 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',

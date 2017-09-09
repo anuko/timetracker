@@ -130,10 +130,10 @@ $i18n_key_words = array(
 'label.password' => 'Lösenord',
 'label.confirm_password' => 'Bekräfta lösenord',
 'label.email' => 'E-postadress',
+'label.cc' => 'Cc',
 // TODO: translate the following.
-// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'Ämne',
 'label.date' => 'Datum',
 'label.start_date' => 'Startdatum',
 'label.end_date' => 'Slutdatum',
@@ -405,8 +405,6 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'Från',
 'form.mail.to' => 'Till',
-'form.mail.cc' => 'Cc',
-'form.mail.subject' => 'Ämne',
 'form.mail.report_subject' => 'Tidsrapport',
 'form.mail.footer' => 'Anuko Time Tracker är en lättanvänd applikation byggd med öppen källkod för att enkelt spåra och hålla koll på arbetstider. Besök <a href="https://www.anuko.com">www.anuko.com</a> för mer information.',
 'form.mail.report_sent' => 'Rapporten skickades.',

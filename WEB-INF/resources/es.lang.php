@@ -152,10 +152,10 @@ $i18n_key_words = array(
 'label.password' => 'Contraseña',
 'label.confirm_password' => 'Confirmar Contraseña',
 'label.email' => 'Email',
+'label.cc' => 'Cc',
 // TODO: translate the following.
-// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'Asunto',
 'label.date' => 'Fecha',
 'label.start_date' => 'Fecha de inicio',
 'label.end_date' => 'Fecha de fin',
@@ -471,8 +471,6 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'De',
 'form.mail.to' => 'Para',
-'form.mail.cc' => 'Cc',
-'form.mail.subject' => 'Asunta',
 // TODO: translate form.mail.report_subject.
 // 'form.mail.report_subject' => 'Time Tracker Report',
 // Note to translators: the following strings need to be translated.

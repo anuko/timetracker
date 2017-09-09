@@ -135,7 +135,7 @@ $i18n_key_words = array(
 // 'label.email' => 'Email',
 // 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'Emne',
 'label.total' => 'totalt',
 // TODO: translate the following.
 // 'label.page' => 'Page',
@@ -306,8 +306,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'fra',
 "form.mail.to" => 'til',
-"form.mail.cc" => 'cc',
-"form.mail.subject" => 'emne',
 "form.mail.comment" => 'kommentar',
 "form.mail.above" => 'send denne rapporten som e-post',
 // Note to translators: the strings below must be translated

@@ -134,9 +134,10 @@ $i18n_key_words = array(
 'label.confirm_password' => 'jelszó megerősítése',
 // TODO: translate the following.
 // 'label.email' => 'Email',
-// 'label.cc' => 'Cc',
+'label.cc' => 'Másolatot kap',
+// TODO: translate the following.
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'Tárgy',
 'label.total' => 'összesen',
 // Translate the following.
 // 'label.page' => 'Page',
@@ -304,8 +305,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'feladó',
 "form.mail.to" => 'címzett',
-"form.mail.cc" => 'másolatot kap',
-"form.mail.subject" => 'tárgy',
 "form.mail.comment" => 'megjegyzés',
 "form.mail.above" => 'küldjük el ezt a riportot e-mail-ben...',
 // Note to translators: the string below must be translated

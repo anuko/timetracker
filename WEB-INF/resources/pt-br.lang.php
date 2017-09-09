@@ -129,10 +129,10 @@ $i18n_key_words = array(
 'label.password' => 'Senha',
 'label.confirm_password' => 'Confirme a senha',
 'label.email' => 'E-mail',
+'label.cc' => 'Cc',
 // TODO: translate the following.
-// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
-// 'label.subject' => 'Subject',
+'label.subject' => 'Assunto',
 'label.date' => 'Data',
 'label.start_date' => 'Data inicial',
 'label.end_date' => 'Data final',
@@ -403,8 +403,6 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'De',
 'form.mail.to' => 'Para',
-'form.mail.cc' => 'Cc',
-'form.mail.subject' => 'Assunto',
 'form.mail.report_subject' => 'Relatório do Time Tracker',
 'form.mail.footer' => 'Anuko Time Tracker é um sistema, simples, de fácil uso, de código aberto,<br>de rastreamento do tempo. Visite <a href="https://www.anuko.com">www.anuko.com</a> para mais informações.',
 'form.mail.report_sent' => 'Relatório enviado.',

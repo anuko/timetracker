@@ -61,8 +61,8 @@ $form->addInput(array('type'=>'submit','name'=>'btn_send','value'=>$i18n->getKey
 if ($request->isPost()) {
   // Validate user input.
   if (!ttValidEmailList($cl_receiver)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.to'));
-  if (!ttValidEmailList($cl_cc, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.cc'));
-  if (!ttValidString($cl_subject)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.subject'));
+  if (!ttValidEmailList($cl_cc, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cc'));
+  if (!ttValidString($cl_subject)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.subject'));
   if (!ttValidString($cl_comment, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.comment'));
 
   if ($err->no()) {

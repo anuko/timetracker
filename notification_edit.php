@@ -80,8 +80,8 @@ if ($request->isPost()) {
   if (!$cl_fav_report) $err->add($i18n->getKey('error.report'));
   if (!ttValidCronSpec($cl_cron_spec)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cron_schedule'));
   if (!ttValidEmail($cl_email)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
-  if (!ttValidEmail($cl_cc, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.cc'));
-  if (!ttValidString($cl_subject, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.mail.subject'));
+  if (!ttValidEmail($cl_cc, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cc'));
+  if (!ttValidString($cl_subject, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.subject'));
   if (!ttValidCondition($cl_report_condition)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.condition'));
 
   if ($err->no()) {
