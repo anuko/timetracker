@@ -140,7 +140,9 @@ $i18n_key_words = array(
 'label.confirm_password' => 'تکرار رمزعبور',
 'label.email' => 'ایمیل',
 // TODO: translate the following.
+// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
+// 'label.subject' => 'Subject',
 'label.date' => 'تاریخ',
 'label.start_date' => 'تاریخ شروع',
 'label.end_date' => 'تاریخ اتمام',

@@ -146,8 +146,10 @@ $i18n_key_words = array(
 'label.password' => '密码',
 'label.confirm_password' => '确认密码',
 'label.email' => '电子邮件',
+'label.cc' => '抄送',
 // TODO: translate the following.
 // 'label.bcc' => 'Bcc',
+'label.subject' => '主题',
 // 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',

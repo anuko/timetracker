@@ -131,7 +131,9 @@ $i18n_key_words = array(
 'label.confirm_password' => 'Bekräfta lösenord',
 'label.email' => 'E-postadress',
 // TODO: translate the following.
+// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
+// 'label.subject' => 'Subject',
 'label.date' => 'Datum',
 'label.start_date' => 'Startdatum',
 'label.end_date' => 'Slutdatum',

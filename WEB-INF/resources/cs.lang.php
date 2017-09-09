@@ -139,9 +139,12 @@ $i18n_key_words = array(
 
 'label.password' => 'heslo',
 'label.confirm_password' => 'potvrdit heslo',
+// TODO: Translate the following.
 // 'label.email' => 'email',
-// TODO: translate the following.
+'label.cc' => 'Cc',
+// TODO: Translate the following.
 // 'label.bcc' => 'Bcc',
+'label.subject' => 'Předmět',
 'label.total' => 'celkem',
 // TODO: translate the following.
 // 'label.page' => 'Page',

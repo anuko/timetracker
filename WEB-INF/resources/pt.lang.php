@@ -130,8 +130,10 @@ $i18n_key_words = array(
 'label.password' => 'senha',
 'label.confirm_password' => 'confirme a senha',
 // TODO: translate the following.
-// 'label.email' => 'email',
+// 'label.email' => 'Email',
+// 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
+// 'label.subject' => 'Subject',
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
 
