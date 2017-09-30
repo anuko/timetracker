@@ -270,6 +270,7 @@ $i18n_key_words = array(
 'dropdown.all' => '--- все ---',
 'dropdown.no' => '--- нет ---',
 'dropdown.this_day' => 'этот день',
+'dropdown.last_day' => 'прошлый день',
 'dropdown.this_week' => 'эта неделя',
 'dropdown.last_week' => 'прошлая неделя',
 'dropdown.this_month' => 'этот месяц',

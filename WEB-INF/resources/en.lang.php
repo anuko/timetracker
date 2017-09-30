@@ -273,6 +273,7 @@ $i18n_key_words = array(
 'dropdown.no' => '--- no ---',
 // NOTE TO TRANSLATORS: dropdown.this_day does not necessarily means "today". It means a specific ("this") day selected on calendar. See Charts.
 'dropdown.this_day' => 'this day',
+'dropdown.last_day' => 'last day',
 'dropdown.this_week' => 'this week',
 'dropdown.last_week' => 'last week',
 'dropdown.this_month' => 'this month',

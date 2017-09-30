@@ -272,6 +272,8 @@ $i18n_key_words = array(
 'dropdown.no' => '--- Ingen ---',
 // NOTE TO TRANSLATORS: dropdown.this_day does not necessarily means "today". It means a specific ("this") day selected on calendar. See Charts.
 'dropdown.this_day' => 'Denne dag',
+// TODO: translate the following.
+// 'dropdown.last_day' => 'last day',
 'dropdown.this_week' => 'Denne uge',
 'dropdown.last_week' => 'Sidste uge',
 'dropdown.this_month' => 'Denne måned',

@@ -33,6 +33,7 @@ define('INTERVAL_THIS_YEAR', 4);
 define('INTERVAL_ALL_TIME', 5);
 define('INTERVAL_LAST_WEEK', 6);
 define('INTERVAL_LAST_MONTH', 7);
+define('INTERVAL_LAST_DAY', 8);
 
 class Period {
   var $startDate;
@@ -63,9 +64,15 @@ class Period {
 
 		switch ($period_type) {
 			case INTERVAL_THIS_DAY:
-				$date_begin->setTimestamp($date_point->getTimestamp());
-				$date_end->setTimestamp($date_point->getTimestamp());
-			break;
+                            $date_begin->setTimestamp($date_point->getTimestamp());
+                            $date_end->setTimestamp($date_point->getTimestamp());
+                        break;
+
+                        case INTERVAL_LAST_DAY:
+                            $date_begin->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-1,$t_arr[5]));
+                            $date_end->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-1,$t_arr[5]));
+                        break;
+
 			case INTERVAL_THIS_WEEK:
 			  $date_begin->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+$startWeekBias,$t_arr[5]));
 				$date_end->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
