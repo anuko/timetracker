@@ -291,6 +291,8 @@ $i18n_key_words = array(
 'dropdown.all' => '--- tous ---',
 'dropdown.no' => '--- non ---',
 'dropdown.this_day' => 'ce jour',
+// TODO: translate the following.
+// 'dropdown.last_day' => 'last day',
 'dropdown.this_week' => 'cette semaine',
 'dropdown.last_week' => 'la semaine passée',
 'dropdown.this_month' => 'ce mois',

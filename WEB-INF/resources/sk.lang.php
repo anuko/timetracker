@@ -287,6 +287,8 @@ $i18n_key_words = array(
 'dropdown.all' => '--- všetky ---',
 'dropdown.no' => '--- žiadne ---',
 'dropdown.this_day' => 'tento deň',
+// TODO: translate the following.
+// 'dropdown.last_day' => 'last day',
 'dropdown.this_week' => 'tento týždeň',
 'dropdown.last_week' => 'minulý týždeň',
 'dropdown.this_month' => 'tento mesiac',

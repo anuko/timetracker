@@ -271,6 +271,8 @@ $i18n_key_words = array(
 'dropdown.all' => '--- allemaal ---',
 'dropdown.no' => '--- geen ---',
 'dropdown.this_day' => 'vandaag',
+// TODO: translate the following.
+// 'dropdown.last_day' => 'last day',
 'dropdown.this_week' => 'deze week',
 'dropdown.last_week' => 'vorige week',
 'dropdown.this_month' => 'deze maand',

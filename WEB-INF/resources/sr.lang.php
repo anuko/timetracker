@@ -271,6 +271,8 @@ $i18n_key_words = array(
 'dropdown.all' => '--- svi ---',
 'dropdown.no' => '--- ništa ---',
 'dropdown.this_day' => 'ovaj dan',
+// TODO: translate the following.
+// 'dropdown.last_day' => 'last day',
 'dropdown.this_week' => 'ova nedelja',
 'dropdown.last_week' => 'prošla nedelja',
 'dropdown.this_month' => 'ovaj mesec',

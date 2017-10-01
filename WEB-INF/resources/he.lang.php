@@ -290,6 +290,8 @@ $i18n_key_words = array(
 'dropdown.all' => '--- כולם ---',
 'dropdown.no' => '--- ללא ---',
 'dropdown.this_day' => 'יום מסויים',
+// TODO: translate the following.
+// 'dropdown.last_day' => 'last day',
 'dropdown.this_week' => 'שבוע זה',
 'dropdown.last_week' => 'שבוע שעבר',
 'dropdown.this_month' => 'חודש זה',

@@ -313,6 +313,7 @@ $i18n_key_words = array(
 'dropdown.no' => '--- no ---',
 // TODO: translate dropdown.this_day
 // 'dropdown.this_day' => 'this day',
+// 'dropdown.last_day' => 'last day',
 'dropdown.this_week' => 'esta semana',
 // TODO: translate dropdown.last_week.
 // 'dropdown.last_week' => 'last week',

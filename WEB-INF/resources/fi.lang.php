@@ -266,6 +266,8 @@ $i18n_key_words = array(
 'dropdown.all' => '--- kaikki ---',
 'dropdown.no' => '--- ei ---',
 'dropdown.this_day' => 'tämä päivä',
+// TODO: translate the following.
+// 'dropdown.last_day' => 'last day',
 'dropdown.this_week' => 'tämä viikko',
 'dropdown.last_week' => 'viime viikko',
 'dropdown.this_month' => 'tämä kuu',

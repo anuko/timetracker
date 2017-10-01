@@ -266,6 +266,8 @@ $i18n_key_words = array(
 'dropdown.all' => '--- todos ---',
 'dropdown.no' => '--- não ---',
 'dropdown.this_day' => 'este dia',
+// TODO: translate the following.
+// 'dropdown.last_day' => 'last day',
 'dropdown.this_week' => 'esta semana',
 'dropdown.last_week' => 'última semana',
 'dropdown.this_month' => 'este mês',
