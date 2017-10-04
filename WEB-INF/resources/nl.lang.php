@@ -131,8 +131,7 @@ $i18n_key_words = array(
 'label.confirm_password' => 'Bevestig wachtwoord',
 'label.email' => 'E-mailadres',
 'label.cc' => 'Cc',
-// TODO: translate the following.
-// 'label.bcc' => 'Bcc',
+'label.bcc' => 'Bcc',
 'label.subject' => 'Onderwerp',
 'label.date' => 'Datum',
 'label.start_date' => 'Begindatum',
@@ -270,8 +269,7 @@ $i18n_key_words = array(
 'dropdown.all' => '--- allemaal ---',
 'dropdown.no' => '--- geen ---',
 'dropdown.this_day' => 'vandaag',
-// TODO: translate the following.
-// 'dropdown.last_day' => 'last day',
+'dropdown.last_day' => 'gisteren',
 'dropdown.this_week' => 'deze week',
 'dropdown.last_week' => 'vorige week',
 'dropdown.this_month' => 'deze maand',
