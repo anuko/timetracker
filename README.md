@@ -9,5 +9,4 @@ Anuko [Time Tracker](https://www.anuko.com/time_tracker/index.htm) is a simple, 
 ## Resources
 * Project home page: https://www.anuko.com/time_tracker/index.htm
 * Forum: https://www.anuko.com/forum/viewforum.php?f=4
-* Mailing list: http://mailman.anuko.com/mailman/listinfo/timetracker
 * How to contribute: https://www.anuko.com/time_tracker/contribute.htm
