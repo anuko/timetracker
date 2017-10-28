@@ -59,7 +59,7 @@ $i18n_key_words = array(
 'footer.contribute_msg' => 'Vous pouvez contribuer à Time Tracker de différentes façons.',
 'footer.credits' => 'Crédits',
 'footer.license' => 'License',
-'footer.improve' => 'Contribuer', // This is a link to a webpage that describes how to contribute to the project.
+'footer.improve' => 'Contribuer',
 
 // Error messages.
 'error.access_denied' => 'Accès refusé.',
@@ -185,7 +185,6 @@ $i18n_key_words = array(
 'label.role_admin' => '(administrateur)',
 'label.page' => 'Page',
 'label.condition' => 'Condition',
-
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Champs personalisés',
 'label.monthly_quotas' => 'Quotas mensuels',
