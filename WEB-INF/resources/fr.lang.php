@@ -61,7 +61,6 @@ $i18n_key_words = array(
 'footer.license' => 'License',
 'footer.improve' => 'Contribuer', // This is a link to a webpage that describes how to contribute to the project.
 
-
 // Error messages.
 'error.access_denied' => 'Accès refusé.',
 'error.sys' => 'Erreur système.',
@@ -96,8 +95,7 @@ $i18n_key_words = array(
 'button.login' => 'Connexion',
 'button.now' => 'Maintenant',
 'button.save' => 'Sauvegarder',
-// TODO: translate the following string.
-// 'button.copy' => 'Copy',
+'button.copy' => 'Copier',
 'button.cancel' => 'Annuler',
 'button.submit' => 'Soumettre',
 'button.add_user' => 'Ajouter un utilisateur',
@@ -110,35 +108,33 @@ $i18n_key_words = array(
 'button.generate' => 'Générer',
 'button.reset_password' => 'Réinitialiser',
 'button.send' => 'Envoyer',
-'button.send_by_email' => 'Envoyer par email',
+'button.send_by_email' => 'Envoyer par courriel',
 'button.create_team' => 'Créer une équipe',
 'button.export' => 'Exporter l\\\'équipe',
 'button.import' => 'Importer une équipe',
 'button.close' => 'Fermer',
-// TODO: translate the following string. 
-// 'button.stop' => 'Stop',
+'button.stop' => 'Arrêter',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Nom équipe',
 'label.address' => 'Adresse',
 'label.currency' => 'Devise',
 'label.manager_name' => 'Nom du responsable',
-'label.manager_login' => 'Identifiant responsable',
+'label.manager_login' => 'Identifiant du responsable',
 'label.person_name' => 'Nom',
 'label.thing_name' => 'Nom',
 'label.login' => 'Identifiant',
 'label.password' => 'Mot de passe',
 'label.confirm_password' => 'Confirmez le mot de passe',
-'label.email' => 'Email',
+'label.email' => 'Adresse courriel',
 'label.cc' => 'Cc',
-// TODO: translate the following.
-// 'label.bcc' => 'Bcc',
+'label.bcc' => 'Cci',
 'label.subject' => 'Objet',
 'label.date' => 'Date',
 'label.start_date' => 'Date de début',
 'label.end_date' => 'Date de fin',
 'label.user' => 'Utilisateur',
-'label.users' => 'Personnes',
+'label.users' => 'Utilisateurs',
 'label.client' => 'Client',
 'label.clients' => 'Clients',
 'label.option' => 'Option',
@@ -152,27 +148,23 @@ $i18n_key_words = array(
 'label.finish' => 'Fin',
 'label.duration' => 'Durée',
 'label.note' => 'Note',
-// TODO: translate label.item
-// 'label.item' => 'Item',
+'label.item' => 'Item',
 'label.cost' => 'Coût',
-// TODO: translate the following string.
-// 'label.day_total' => 'Day total',
+'label.day_total' => 'Total quotidien',
 'label.week_total' => 'Total hebdomadaire',
-// TODO: translate the following.
-// 'label.month_total' => 'Month total',
+'label.month_total' => 'Total mensuel',
 'label.today' => 'Aujourd\\\'hui',
-'label.total_hours' => 'Total d\\\'heures',
+'label.total_hours' => 'Total des heures',
 'label.total_cost' => 'Coût total',
-'label.view' => 'Voir',
+'label.view' => 'Visionner',
 'label.edit' => 'Modifier',
 'label.delete' => 'Supprimer',
 'label.configure' => 'Configurer',
 'label.select_all' => 'Tout sélectionner',
-'label.select_none' => 'Tout désélectionner',
+'label.select_none' => 'Aucun',
 'label.id' => 'ID',
 'label.language' => 'Langage',
-// TODO: translate the following string.
-// 'label.decimal_mark' => 'Decimal mark',
+'label.decimal_mark' => 'Séparateur de décimale',
 'label.date_format' => 'Format date',
 'label.time_format' => 'Format heure',
 'label.week_start' => '1er jour de la semaine',
@@ -191,88 +183,77 @@ $i18n_key_words = array(
 'label.role_manager' => '(responsable)',
 'label.role_comanager' => '(co-responsable)',
 'label.role_admin' => '(administrateur)',
-// TODO: translate the following.
-// 'label.page' => 'Page',
-// 'label.condition' => 'Condition',
+'label.page' => 'Page',
+'label.condition' => 'Condition',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Champs personalisés',
-// Translate the following.
-// 'label.monthly_quotas' => 'Monthly quotas',
+'label.monthly_quotas' => 'Quotas mensuels',
 'label.type' => 'Type',
-'label.type_dropdown' => 'liste déroulante',
-'label.type_text' => 'texte',
+'label.type_dropdown' => 'Liste déroulante',
+'label.type_text' => 'Texte',
 'label.required' => 'Obligatoire',
 'label.fav_report' => 'Rapport favori',
-// TODO: translate the following strings.
-// 'label.cron_schedule' => 'Cron schedule',
-// 'label.what_is_it' => 'What is it?',
+'label.cron_schedule' => 'Horaire Cron',
+'label.what_is_it' => 'Qu\\\'est-ce que c\\\'est?',
 
 // Form titles.
 'title.login' => 'Connexion',
 'title.teams' => 'Équipes',
-// TODO: for consistency, the titles below need to be refactored. Recommended way is using nouns such as in 'Modification du projet', not 'Modifier la tâche'.
-// Notice usage of the noun Modification versus the verb Modifier.
-'title.create_team' => 'Créez une nouvelle équipe', // TODO: use a noun.
-// TODO: translate the following string.
-// 'title.edit_team' => 'Editing Team',
-'title.delete_team' => 'Suppression de l\\\'équipe',
-'title.reset_password' => 'Réinitialisation du mot de passer',
+'title.create_team' => 'Création d\\\'une nouvelle équipe',
+'title.edit_team' => 'Modification d\\\'une équipe',
+'title.delete_team' => 'Suppression d\\\'une équipe',
+'title.reset_password' => 'Réinitialisation du mot de passe',
 'title.change_password' => 'Modification du mot de passe',
 'title.time' => 'Temps',
-'title.edit_time_record' => 'Édition du l\\\'entrée de temps',
-'title.delete_time_record' => 'Supprimer l\\\'entrée de temps', // TODO: use a noun.
-// TODO: translate the following strings.
-// 'title.expenses' => 'Expenses',
-// 'title.edit_expense' => 'Editing Expense Item',
-// 'title.delete_expense' => 'Deleting Expense Item',
+'title.edit_time_record' => 'Modification de l\\\'entrée de temps',
+'title.delete_time_record' => 'Suppression de l\\\'entrée de temps',
+'title.expenses' => 'Dépenses',
+'title.edit_expense' => 'Modification d\\\'une dépense',
+'title.delete_expense' => 'Suppression d\\\'une dépense',
 'title.reports' => 'Rapports',
 'title.report' => 'Rapport',
-'title.send_report' => 'Envoyer rapport', // TODO: use a noun.
+'title.send_report' => 'Envoi du rapport',
 'title.invoice' => 'Facture',
 'title.send_invoice' => 'Envoi de la facture',
 'title.charts' => 'Graphiques',
 'title.projects' => 'Projets',
-'title.add_project' => 'Ajout du projet',
-'title.edit_project' => 'Modification du projet',
-'title.delete_project' => 'Suppression du projet',
+'title.add_project' => 'Ajout d\\\'un projet',
+'title.edit_project' => 'Modification d\\\'un projet',
+'title.delete_project' => 'Suppression d\\\'un projet',
 'title.tasks' => 'Tâches',
-'title.add_task' => 'Ajouter une tâche', // TODO: use a noun.
-'title.edit_task' => 'Modifier la tâche', // TODO: use a noun.
-'title.delete_task' => 'Supprimer une tâche', // TODO: use a noun.
-'title.users' => 'Personnes',
-'title.add_user' => 'Création de l\\\'utilisateur',
-'title.edit_user' => 'Modification de l\\\'utilisateur',
-'title.delete_user' => 'Suppression de l\\\'utilisateur',
+'title.add_task' => 'Ajout d\\\'une tâche',
+'title.edit_task' => 'Modification d\\\'une tâche',
+'title.delete_task' => 'Suppression d\\\'une tâche',
+'title.users' => 'Utilisateurs',
+'title.add_user' => 'Création d\\\'un utilisateur',
+'title.edit_user' => 'Modification d\\\'un utilisateur',
+'title.delete_user' => 'Suppression d\\\'un utilisateur',
 'title.clients' => 'Clients',
-'title.add_client' => 'Ajouter un client', // TODO: use a noun.
-'title.edit_client' => 'Modifier un client', // TODO: use a noun.
-'title.delete_client' => 'Supprimer un client', // TODO: use a noun.
+'title.add_client' => 'Ajout d\\\'un client',
+'title.edit_client' => 'Modification d\\\'un client',
+'title.delete_client' => 'Suppression d\\\'un client',
 'title.invoices' => 'Factures',
-'title.add_invoice' => 'Ajouter une facture', // TODO: use a noun.
-'title.view_invoice' => 'Voir la facture', // TODO: use a noun.
-'title.delete_invoice' => 'Supprimer la facture', // TODO: use a noun.
-// TODO: translate the following strings.
-// 'title.notifications' => 'Notifications',
-// 'title.add_notification' => 'Adding Notification',
-// 'title.edit_notification' => 'Editing Notification',
-// 'title.delete_notification' => 'Deleting Notification',
-// 'title.monthly_quotas' => 'Monthly Quotas',
-'title.export' => 'Exporter les données', // TODO: use a noun.
-'title.import' => 'Importer les données', // TODO: use a noun.
+'title.add_invoice' => 'Ajout d\\\'une facture',
+'title.view_invoice' => 'Visionnement d\\\'une facture',
+'title.delete_invoice' => 'Suppression d\\\'une facture',
+'title.notifications' => 'Notifications',
+'title.add_notification' => 'Ajout d\\\'une notification',
+'title.edit_notification' => 'Modification d\\\'une notification',
+'title.delete_notification' => 'Suppression d\\\'une notification',
+'title.monthly_quotas' => 'Quotas mensuels',
+'title.export' => 'Exportation des données',
+'title.import' => 'Importation des données',
 'title.options' => 'Options',
 'title.profile' => 'Profil',
 'title.cf_custom_fields' => 'Champs personalisés',
-'title.cf_add_custom_field' => 'Ajouter un champ', // TODO: use a noun.
-'title.cf_edit_custom_field' => 'Editer un champ', // TODO: use a noun.
-'title.cf_delete_custom_field' => 'Supprimer un champ', // TODO: use a noun.
+'title.cf_add_custom_field' => 'Ajout d\\\'un champ',
+'title.cf_edit_custom_field' => 'Édition d\\\'un champ',
+'title.cf_delete_custom_field' => 'Suppression d\\\'un champ',
 'title.cf_dropdown_options' => 'Options de liste',
-'title.cf_add_dropdown_option' => 'Ajouter une option', // TODO: use a noun.
-'title.cf_edit_dropdown_option' => 'Modifier l\\\'option', // TODO: use a noun.
-'title.cf_delete_dropdown_option' => 'Supprimer l\\\'option', // TODO: use a noun.
-// NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
-// It is also a name for the Locking plugin on the Team profile page.
-// TODO: translate the following.
-// 'title.locking' => 'Locking',
+'title.cf_add_dropdown_option' => 'Ajout d\\\'une option',
+'title.cf_edit_dropdown_option' => 'Modification d\\\'une option',
+'title.cf_delete_dropdown_option' => 'Suppression d\\\'une option',
+'title.locking' => 'Vérouillage',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
