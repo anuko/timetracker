@@ -41,68 +41,56 @@ $i18n_key_words = array(
 'menu.logout' => 'Quitter',
 'menu.forum' => 'Forum',
 'menu.help' => 'Aide',
-// Note to translators: menu.create_team needs a more accurate translation.
-// Meaning that we are now creating a "team", not a manager account. The translation should reflect that (creating a TEAM).
-// 'menu.create_team' => 'Créer un compte pour un responsable',
+'menu.create_team' => 'Créer une équipe',
 'menu.profile' => 'Profil',
 'menu.time' => 'Temps',
-// TODO: translate the following.
-// 'menu.expenses' => 'Expenses',
+'menu.expenses' => 'Dépenses',
 'menu.reports' => 'Rapports',
 'menu.charts' => 'Graphiques',
 'menu.projects' => 'Projets',
 'menu.tasks' => 'Tâches',
-'menu.users' => 'Personnes',
+'menu.users' => 'Utilisateurs',
 'menu.teams' => 'Équipes',
-'menu.export' => 'Export',
+'menu.export' => 'Exporter',
 'menu.clients' => 'Clients',
 'menu.options' => 'Options',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following.
-// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
-'footer.credits' => 'Credits',
+'footer.contribute_msg' => 'Vous pouvez contribuer à Time Tracker de différentes façons.',
+'footer.credits' => 'Crédits',
 'footer.license' => 'License',
-// TODO: translate the following.
-// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                     // This is a link to a webpage that describes how to contribute to the project.
+'footer.improve' => 'Contribuer', // This is a link to a webpage that describes how to contribute to the project.
+
 
 // Error messages.
-// TODO: translate the following.
-// 'error.access_denied' => 'Access denied.',
+'error.access_denied' => 'Accès refusé.',
 'error.sys' => 'Erreur système.',
 'error.db' => 'Erreur de base de données.',
-'error.field' => 'Données "{0}" incorrecte.',
+'error.field' => 'Donnée "{0}" incorrecte.',
 'error.empty' => 'Le champ "{0}" est vide.',
 'error.not_equal' => 'Le champ "{0}" n\\\'est pas égal au champ "{1}".',
-// TODO: trabslate error.interval.
-// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+'error.interval' => 'Le champ "{0}" doit être supérieur à "{1}".',
 'error.project' => 'Sélectionner un projet.',
-'error.task' => 'Selectionner une tâche.',
-'error.client' => 'Selectionner un client.',
-// TODO: translate the following string.
-// 'error.report' => 'Select report.',
+'error.task' => 'Sélectionner une tâche.',
+'error.client' => 'Sélectionner un client.',
+'error.report' => 'Sélectionner un rapport.',
 'error.auth' => 'Nom d\\\'utilisateur ou mot de passe incorrect.',
-'error.user_exists' => 'Un utilisateur avec ce login existe déjà.',
+'error.user_exists' => 'Un utilisateur avec cet identifiant existe déjà.',
 'error.project_exists' => 'Un projet avec ce nom existe déjà.',
 'error.task_exists' => 'Une tâche avec ce nom existe déjà.',
 'error.client_exists' => 'Un client avec ce nom existe déjà.',
 'error.invoice_exists' => 'Une facture avec ce numéro existe déjà.',
 'error.no_invoiceable_items' => 'Il n\\\'y a pas d\\\'éléments à facturer.',
-// Note to translators: this string needs to be properly translated (e-mail replaced with login).
-// Meaning that email should not be referenced at all here. There are no user with this LOGIN (not email).
-// 'error.no_login' => 'Aucun utilisateur avec cette adresse email.',
+'error.no_login' => 'Aucun utilisateur avec cet identifiant.',
 'error.no_teams' => 'Votre base de données est vide. Connectez-vous comme administrateur et créez une nouvelle équipe.',
-'error.upload' => 'Erreur de chargement de fichier.',
-// TODO: translate the following.
-// 'error.range_locked' => 'Date range is locked.',
-'error.mail_send' => 'Erreur durant l\\\'envoi de l\\\'e-mail.',
-'error.no_email' => 'Aucun e-mail associé à ce login.',
+'error.upload' => 'Erreur de chargement du fichier.',
+'error.range_locked' => 'Plage de date vérouillée.',
+'error.mail_send' => 'Erreur lors de l\\\'envoi du courriel.',
+'error.no_email' => 'Aucune adresse courriel n\\\'est associée à cet identifiant.',
 'error.uncompleted_exists' => 'Une entrée non terminée existe déjà. Fermer ou supprimer.',
 'error.goto_uncompleted' => 'Aller à l\\\'entrée non terminée.',
-// TODO: translate the following strings.
-// 'error.overlap' => 'Time interval overlaps with existing records.',
-// 'error.future_date' => 'Date is in future.',
+'error.overlap' => 'Les heures des projets ne peuvent se chevaucher.',
+'error.future_date' => 'Date ultérieure.',
 
 // Labels for buttons.
 'button.login' => 'Connexion',
