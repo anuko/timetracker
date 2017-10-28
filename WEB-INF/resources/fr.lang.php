@@ -185,6 +185,7 @@ $i18n_key_words = array(
 'label.role_admin' => '(administrateur)',
 'label.page' => 'Page',
 'label.condition' => 'Condition',
+
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Champs personalisés',
 'label.monthly_quotas' => 'Quotas mensuels',
@@ -258,28 +259,24 @@ $i18n_key_words = array(
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
 'dropdown.all' => '--- tous ---',
-'dropdown.no' => '--- non ---',
+'dropdown.no' => '--- aucun ---',
 'dropdown.this_day' => 'ce jour',
-// TODO: translate the following.
-// 'dropdown.last_day' => 'last day',
+'dropdown.last_day' => 'dernier jour',
 'dropdown.this_week' => 'cette semaine',
 'dropdown.last_week' => 'la semaine passée',
 'dropdown.this_month' => 'ce mois',
 'dropdown.last_month' => 'le mois passé',
 'dropdown.this_year' => 'cette année',
 'dropdown.all_time' => 'depuis toujours',
-'dropdown.projects' => 'projets',
-'dropdown.tasks' => 'tâches',
-// TODO: translate the following string.
-// 'dropdown.clients' => 'clients',
-'dropdown.select' =>  '--- choisir ---',
-// TODO: translate the following string.
-// 'dropdown.select_invoice' => '--- select invoice ---',
+'dropdown.projects' => 'Projets',
+'dropdown.tasks' => 'Tâches',
+'dropdown.clients' => 'Clients',
+'dropdown.select' =>  '--- sélectionnez ---',
+'dropdown.select_invoice' => '--- selectionnez facture ---',
 'dropdown.status_active' => 'actif',
 'dropdown.status_inactive' => 'inactif',
-// TODO: translate the following strings.
-// 'dropdown.delete'=>'delete',
-// 'dropdown.do_not_delete'=>'do not delete',
+'dropdown.delete'=>'supprimer',
+'dropdown.do_not_delete'=>'ne pas supprimer',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases
@@ -288,9 +285,7 @@ $i18n_key_words = array(
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Mot de passe oublié?',
-// TODO: check translation of the form.login.about. It does not look like a complete sentence. The English equivalent is:
-// 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.'
-// 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> système de gestion des temps open source simple et facile à utiliser.',
+'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> est un système de gestion du temps, open source, simple et facile à utiliser.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 // TODO: improve translation of form.reset_password.message and form.reset_password.email_subject.
@@ -298,7 +293,7 @@ $i18n_key_words = array(
 // we no longer send passwords, but RESET REQUESTS. Compare with master English file:
 // 'form.reset_password.message' => 'Password reset request sent by email.',
 // 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
-'form.reset_password.message' => 'Le mot de passe a été envoyé.', // TODO: redo this line, see the comment above.
+'form.reset_password.message' => 'Le mot de passe a été envoyé par courriel.', // TODO: redo this line, see the comment above.
 'form.reset_password.email_subject' => 'Votre mot de passe Anuko Time Tracker', // TODO: redo this line, see the comment above.
 // Note to translators: the sentence BEFORE LAST in form.reset_password.email_body needs to be translated.
 'form.reset_password.email_body' => "Cher utilisateur,\n\nQuelqu\'un, probablement vous, avez demandé une réinitialisation de votre mot de passe. Merci d\'aller à ce lien pour le réinitialiser\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visiter https://www.anuko.com pour plus d\'informations.\n\n",
@@ -312,45 +307,42 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(hh:mm ou 0.0h)',
 'form.time.billable' => 'Facturable',
 'form.time.uncompleted' => 'Non terminée',
-// TODO: translate the following.
-// 'form.time.remaining_quota' => 'Remaining quota',
-// 'form.time.over_quota' => 'Over quota',
+'form.time.remaining_quota' => 'Quota restant',
+'form.time.over_quota' => 'Quota dépassé',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
-'form.time_edit.uncompleted' => 'Cet enregistrement a été enregistré avec seulement une heure de début. Il ne s\\\'agit pas d\\\'une erreur.',
+'form.time_edit.uncompleted' => 'Cet enregistrement a été sauvegardé avec une heure de début seulement. Il ne s\\\'agit pas d\\\'une erreur.',
 
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Enregistrer comme favori',
-'form.reports.confirm_delete' => 'Êtes-vous sur de vouloir supprimer ce rapport favori?',
+'form.reports.confirm_delete' => 'Êtes-vous certain de vouloir supprimer ce rapport des favoris?',
 'form.reports.include_records' => 'Inclure les enregistrements',
 'form.reports.include_billable' => 'facturables',
 'form.reports.include_not_billable' => 'non facturables',
-// TODO: translate the following strings.
-// 'form.reports.include_invoiced' => 'invoiced',
-// 'form.reports.include_not_invoiced' => 'not invoiced',
-'form.reports.select_period' => 'Choisissez la période de temps', // TODO: should this be Choisir as above?
+'form.reports.include_invoiced' => 'facturé',
+'form.reports.include_not_invoiced' => 'non facturé',
+'form.reports.select_period' => 'Sélectionner la période de temps',
 'form.reports.set_period' => 'ou dates indiquées',
-'form.reports.show_fields' => 'Montrer les champs',
+'form.reports.show_fields' => 'Afficher les champs',
 'form.reports.group_by' => 'Regroupés par',
-'form.reports.group_by_no' => '--- aucun regroupage ---',
-'form.reports.group_by_date' => 'date',
-'form.reports.group_by_user' => 'utilisateur',
-'form.reports.group_by_client' => 'client',
-'form.reports.group_by_project' => 'projet',
-'form.reports.group_by_task' => 'tâche',
+'form.reports.group_by_no' => '--- Aucun regroupement ---',
+'form.reports.group_by_date' => 'Date',
+'form.reports.group_by_user' => 'Utilisateur',
+'form.reports.group_by_client' => 'Client',
+'form.reports.group_by_project' => 'Projet',
+'form.reports.group_by_task' => 'Tâche',
 'form.reports.totals_only' => 'Totaux uniquement',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
-'form.report.export' => 'Export',
+'form.report.export' => 'Exporté',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
 'form.invoice.number' => 'Numéro de facture',
 'form.invoice.person' => 'Personne',
-// TODO: translate the following stings.
-// 'form.invoice.invoice_to_delete' => 'Invoice to delete',
-// 'form.invoice.invoice_entries' => 'Invoice entries',
+'form.invoice.invoice_to_delete' => 'Facture à supprimer',
+'form.invoice.invoice_entries' => 'Entrées de facture',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
 'form.charts.interval' => 'Intervalle',
@@ -361,76 +353,66 @@ $i18n_key_words = array(
 'form.projects.inactive_projects' => 'Projets inactifs',
 
 // Tasks form. See example at https://timetracker.anuko.com/tasks.php
-// 'form.tasks.active_tasks' => 'Active Tasks',
-// 'form.tasks.inactive_tasks' => 'Inactive Tasks',
+'form.tasks.active_tasks' => 'Tâches actives',
+'form.tasks.inactive_tasks' => 'Tâches inactives',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
-// TODO: translate the following strings.
-// 'form.users.active_users' => 'Active Users',
-// 'form.users.inactive_users' => 'Inactive Users',
-// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
+'form.users.active_users' => 'Utilisateurs actifs',
+'form.users.inactive_users' => 'Utilisateurs inactifs',
+'form.users.uncompleted_entry' => 'L\\\'utilisateur a des entrées incomplètes', // TODO: only 1 uncompleted entry is allowed. Change plural to singular.
 'form.users.role' => 'Rôle',
 'form.users.manager' => 'Responsable',
 'form.users.comanager' => 'Co-responsable',
 'form.users.rate' => 'Tarif',
-'form.users.default_rate' => 'Tarif horaire standard',
+'form.users.default_rate' => 'Tarif horaire par défaut',
 
 // Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-// TODO: translate the following strings.
-// 'form.client.client_to_delete' => 'Client to delete',
-// 'form.client.client_entries' => 'Client entries',
+'form.client.client_to_delete' => 'Client à supprimer',
+'form.client.client_entries' => 'Entrées de client',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
-// TODO: translate the following strings.
-// 'form.clients.active_clients' => 'Active Clients',
-// 'form.clients.inactive_clients' => 'Inactive Clients',
+'form.clients.active_clients' => 'Clients actifs',
+'form.clients.inactive_clients' => 'Clients inactifs',
 
 // Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
-'form.export.hint' => 'Vous pouvez exporter toute les données d\\\'une équipe dans un ficheir xml. Cela peut être utile si vous transférer des données vers votre serveur.',
+'form.export.hint' => 'Vous pouvez exporter toutes les données d\\\'une équipe dans un ficheir xml. Cela peut être utile si vous transférez des données vers votre serveur.',
 'form.export.compression' => 'Compression',
-'form.export.compression_none' => 'aucune',
+'form.export.compression_none' => 'Aucune',
 'form.export.compression_bzip' => 'bzip',
 
 // Strings for Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
 'form.import.hint' => 'Importer les donnés des équipes depuis un fichier xml.',
 'form.import.file' => 'Sélectionner le fichier',
-'form.import.success' => 'Import réussi.',
+'form.import.success' => 'Importation réussie.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-// TODO: improve translation of form.admin.hint. No login collisions are allowed (not email).
-// Current translations says that no emails may collide. The truth is that no LOGINS (not emails) may collide. Emails actually MAY collide. The English string is:
-// 'form.teams.hint' =>  'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
-'form.teams.hint' => 'Créer une nouvelle équipe en créant un nouveau compte de responsable d\\\'équipe.<br>Vous pouvez également importer des données sur une équipe depuis un fichier xml provenant d\\\'un autre serveur Anuko Time Tracker (les doublons d\\\'email ne sont pas autorisés).',
+'form.teams.hint' => 'Créez une nouvelle équipe en créant un nouveau compte de responsable d\\\'équipe.<br>Vous pouvez également importer des données d\\\'une équipe depuis un fichier xml provenant d\\\'un autre serveur Anuko Time Tracker (les doublons d\\\'identifiants ne sont pas autorisés).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 'form.profile.12_hours' => '12 heures',
 'form.profile.24_hours' => '24 heures',
-// TODO: translate the following strings.
-// 'form.profile.tracking_mode' => 'Tracking mode',
-// 'form.profile.mode_time' => 'time',
-// 'form.profile.mode_projects' => 'projects',
-// 'form.profile.mode_projects_and_tasks' => 'projects and tasks',
-// 'form.profile.record_type' => 'Record type',
-// 'form.profile.type_all' => 'all',
-// 'form.profile.type_start_finish' => 'start and finish',
-// 'form.profile.type_duration' => 'duration',
+'form.profile.tracking_mode' => 'Mode suivi',
+'form.profile.mode_time' => 'Heures',
+'form.profile.mode_projects' => 'Projets',
+'form.profile.mode_projects_and_tasks' => 'Projets et tâches',
+'form.profile.record_type' => 'Type d\\\'enregistrement',
+'form.profile.type_all' => 'Tous',
+'form.profile.type_start_finish' => 'Début et fin',
+'form.profile.type_duration' => 'Durée',
 'form.profile.plugins' => 'Plugins',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'De',
 'form.mail.to' => 'À',
 'form.mail.report_subject' => 'Rapport Time Tracker',
-// Note to translators: the following strings need to be translated.
-// The problem seems to be that the first sentence does not seem like a complete sentence.
-// 'form.mail.footer' => 'Anuko Time Tracker système de gestion des temps open source simple et facile à utiliser. Visiter <a href="https://www.anuko.com">www.anuko.com</a> pour plus d\\\'informations.',
+'form.mail.footer' => 'Anuko Time Tracker est un système de gestion du temps, open source, simple et facile à utiliser. Visitez <a href="https://www.anuko.com">www.anuko.com</a> pour plus d\\\'informations.',
 'form.mail.report_sent' => 'Le rapport a été envoyé.',
 'form.mail.invoice_sent' => 'La facture a été envoyée.',
 
 // Quotas configuration form.
-// TODO: translate the following.
-// 'form.quota.year' => 'Year',
-// 'form.quota.month' => 'Month',
-// 'form.quota.quota' => 'Quota',
-// 'form.quota.workday_hours' => 'Hours in a work day',
-// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+'form.quota.year' => 'Année',
+'form.quota.month' => 'Mois',
+'form.quota.quota' => 'Quota',
+'form.quota.workday_hours' => 'Heures journée de travail',
+'form.quota.hint' => 'Si les valeurs sont vides, les quotas sont calculés automatiquement selon les heures des journées de travail et des congés.',
 );
