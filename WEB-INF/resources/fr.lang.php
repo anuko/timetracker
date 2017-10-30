@@ -164,7 +164,7 @@ $i18n_key_words = array(
 'label.select_none' => 'Aucun',
 'label.id' => 'ID',
 'label.language' => 'Langage',
-'label.decimal_mark' => 'Séparateur de décimale',
+'label.decimal_mark' => 'Séparateur de décimal',
 'label.date_format' => 'Format date',
 'label.time_format' => 'Format heure',
 'label.week_start' => '1er jour de la semaine',
@@ -181,7 +181,7 @@ $i18n_key_words = array(
 'label.required_fields' => '* - champs obligatoires',
 'label.on_behalf' => 'de la part de',
 'label.role_manager' => '(responsable)',
-'label.role_comanager' => '(co-responsable)',
+'label.role_comanager' => '(coresponsable)',
 'label.role_admin' => '(administrateur)',
 'label.page' => 'Page',
 'label.condition' => 'Condition',
@@ -287,20 +287,12 @@ $i18n_key_words = array(
 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> est un système de gestion du temps, open source, simple et facile à utiliser.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
-// TODO: improve translation of form.reset_password.message and form.reset_password.email_subject.
-// The English equivalents have changed. This means that French translations below are now inaccurate. The difference is that
-// we no longer send passwords, but RESET REQUESTS. Compare with master English file:
-// 'form.reset_password.message' => 'Password reset request sent by email.',
-// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
-'form.reset_password.message' => 'Le mot de passe a été envoyé par courriel.', // TODO: redo this line, see the comment above.
-'form.reset_password.email_subject' => 'Votre mot de passe Anuko Time Tracker', // TODO: redo this line, see the comment above.
-// Note to translators: the sentence BEFORE LAST in form.reset_password.email_body needs to be translated.
-'form.reset_password.email_body' => "Cher utilisateur,\n\nQuelqu\'un, probablement vous, avez demandé une réinitialisation de votre mot de passe. Merci d\'aller à ce lien pour le réinitialiser\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visiter https://www.anuko.com pour plus d\'informations.\n\n",
+'form.reset_password.message' => 'Une demande de réinitialisation du mot de passe a été envoyé par courriel.',
+'form.reset_password.email_subject' => 'Demande de réinitialisation de mot de passe Anuko Time Tracker',
+'form.reset_password.email_body' => "Cher utilisateur,\n\nQuelqu\'un, probablement vous, avez demandé une réinitialisation de votre mot de passe. Veuillez de suivre ce lien pour le réinitialiser\n\n%s\n\nAnuko Time Tracker est un système de gestion du temps, open source, simple et facile à utiliser. Visitez https://www.anuko.com pour plus d\'informations.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
-// TODO: improve translation of form.change_password.tip.
-// The English line is: 'form.change_password.tip' => 'Type new password and click on Save.',
-'form.change_password.tip' => 'Pour réinitialiser votre mot de passe, saisissez le et cliquez sur Sauvegarder.',
+'form.change_password.tip' => 'Saisissez votre nouveau mot de passe et cliquez sur Sauvegarder.',
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
 'form.time.duration_format' => '(hh:mm ou 0.0h)',
@@ -334,7 +326,7 @@ $i18n_key_words = array(
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
-'form.report.export' => 'Exporté',
+'form.report.export' => 'Exporter',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
@@ -358,10 +350,10 @@ $i18n_key_words = array(
 // Users form. See example at https://timetracker.anuko.com/users.php
 'form.users.active_users' => 'Utilisateurs actifs',
 'form.users.inactive_users' => 'Utilisateurs inactifs',
-'form.users.uncompleted_entry' => 'L\\\'utilisateur a des entrées incomplètes', // TODO: only 1 uncompleted entry is allowed. Change plural to singular.
+'form.users.uncompleted_entry' => 'L\\\'utilisateur a une entrée incomplète',
 'form.users.role' => 'Rôle',
 'form.users.manager' => 'Responsable',
-'form.users.comanager' => 'Co-responsable',
+'form.users.comanager' => 'Coresponsable',
 'form.users.rate' => 'Tarif',
 'form.users.default_rate' => 'Tarif horaire par défaut',
 
