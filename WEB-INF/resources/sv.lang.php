@@ -64,6 +64,7 @@ $i18n_key_words = array(
 'footer.license' => 'Licens',
 'footer.improve' => 'Bidra',
 
+
 // Error messages.
 'error.access_denied' => 'Åtkomst nekad.',
 'error.sys' => 'Systemfel.',
@@ -130,9 +131,8 @@ $i18n_key_words = array(
 'label.password' => 'Lösenord',
 'label.confirm_password' => 'Bekräfta lösenord',
 'label.email' => 'E-postadress',
-'label.cc' => 'Cc',
-// TODO: translate the following.
-// 'label.bcc' => 'Bcc',
+'label.cc' => 'Kopia',
+'label.bcc' => 'Hemlig kopia',
 'label.subject' => 'Ämne',
 'label.date' => 'Datum',
 'label.start_date' => 'Startdatum',
@@ -188,8 +188,7 @@ $i18n_key_words = array(
 'label.role_comanager' => '(Delansvarig)',
 'label.role_admin' => '(Administratör)',
 'label.page' => 'Sida',
-// TODO: translate the following.
-// 'label.condition' => 'Condition',
+'label.condition' => 'Villkor',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Egna fält',
 'label.monthly_quotas' => 'Månadskvoter',
@@ -200,6 +199,8 @@ $i18n_key_words = array(
 'label.fav_report' => 'Sparade rapporter',
 'label.cron_schedule' => 'CRON-schema',
 'label.what_is_it' => 'Vad är detta?',
+'label.expense' => 'Kostnad',
+'label.quantity' => 'Antal',
 
 // Rubriker för formulär
 'title.login' => 'Logga in',
@@ -215,6 +216,10 @@ $i18n_key_words = array(
 'title.expenses' => 'Kostnader',
 'title.edit_expense' => 'Redigera kostnad',
 'title.delete_expense' => 'Ta bort kostnad',
+'title.predefined_expenses' => 'Fördefinierade kostnader',
+'title.add_predefined_expense' => 'Lägg till fördefinierad kostnad',
+'title.edit_predefined_expense' => 'Redigera fördefinierad kostnad',
+'title.delete_predefined_expense' => 'Ta bort fördefinierad kostnad',
 'title.reports' => 'Rapporter',
 'title.report' => 'Rapport',
 'title.send_report' => 'Skicka rapport',
@@ -266,15 +271,18 @@ $i18n_key_words = array(
 // Strings that are used in a single form must go to the specific form section.
 'dropdown.all' => '--- Alla ---',
 'dropdown.no' => '--- Ingen ---',
-// NOTE TO TRANSLATORS: dropdown.this_day does not necessarily means "today". It means a specific ("this") day selected on calendar. See Charts.
-'dropdown.this_day' => 'Denna dagen',
-// TODO: translate the following.
-// 'dropdown.last_day' => 'last day',
-'dropdown.this_week' => 'Denna veckan',
-'dropdown.last_week' => 'Förra veckan',
-'dropdown.this_month' => 'Denna månaden',
-'dropdown.last_month' => 'Förra månaden',
-'dropdown.this_year' => 'Detta året',
+'dropdown.current_day' => 'Idag',
+'dropdown.previous_day' => 'Igår',
+'dropdown.selected_day' => 'Dag',
+'dropdown.current_week' => 'Den här veckan',
+'dropdown.previous_week' => 'Föregående vecka',
+'dropdown.selected_week' => 'Vecka',
+'dropdown.current_month' => 'Den här månaden',
+'dropdown.previous_month' => 'Föregående månad',
+'dropdown.selected_month' => 'Månad',
+'dropdown.current_year' => 'Det här året',
+'dropdown.previous_year' => 'Föregående år',
+'dropdown.selected_year' => 'År',
 'dropdown.all_time' => 'Livstid',
 'dropdown.projects' => 'Projekt',
 'dropdown.tasks' => 'Arbetsuppgifter',
@@ -418,5 +426,4 @@ $i18n_key_words = array(
 'form.quota.quota' => 'Kvot',
 'form.quota.workday_hours' => 'Arbetstimmar per dag',
 'form.quota.hint' => 'Om fälten lämnas tomma räknas kvoterna automatiskt ut baserat på arbetstimmar per dag och helgdagar.',
-
 );
