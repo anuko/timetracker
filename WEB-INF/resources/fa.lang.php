@@ -283,14 +283,22 @@ $i18n_key_words = array(
 // Strings that are used in a single form must go to the specific form section.
 'dropdown.all' => '--- همه ---',
 'dropdown.no' => '--- هیچکدام ---',
-// TODO: check translation of dropdown.this_day. It does not necessarily means "today". It means a specific ("this") day selected on calendar. See charts.php.
-// 'dropdown.this_day' => 'امروز',
-// 'dropdown.last_day' => 'last day',
-'dropdown.this_week' => 'هفته جاری',
-'dropdown.last_week' => 'هفته آخر',
-'dropdown.this_month' => 'ماه جاری',
-'dropdown.last_month' => 'ماه آخر',
-'dropdown.this_year' => 'سال جاری',
+// TODO: translate the following.
+// 'dropdown.current_day' => 'today',
+// 'dropdown.previous_day' => 'yesterday',
+// 'dropdown.selected_day' => 'day',
+'dropdown.current_week' => 'هفته جاری',
+'dropdown.previous_week' => 'هفته آخر',
+// TODO: translate the following.
+// 'dropdown.selected_week' => 'week',
+'dropdown.current_month' => 'ماه جاری',
+'dropdown.previous_month' => 'ماه آخر',
+// TODO: translate the following.
+// 'dropdown.selected_month' => 'month',
+'dropdown.current_year' => 'سال جاری',
+// TODO: translate the following.
+// 'dropdown.previous_year' => 'previous year',
+// 'dropdown.selected_year' => 'year',
 'dropdown.all_time' => 'همه زمان ها',
 'dropdown.projects' => 'پروژه ها',
 'dropdown.tasks' => 'وظایف',

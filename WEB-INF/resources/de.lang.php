@@ -261,14 +261,22 @@ $i18n_key_words = array(
 // Strings that are used in a single form must go to the specific form section.
 'dropdown.all' => '--- alle ---',
 'dropdown.no' => '--- nein ---',
-'dropdown.this_day' => 'aktueller Tag',
 // TODO: translate the following.
-// 'dropdown.last_day' => 'last day',
-'dropdown.this_week' => 'aktuelle Woche',
-'dropdown.last_week' => 'vorherige Woche',
-'dropdown.this_month' => 'aktueller Monat',
-'dropdown.last_month' => 'vorheriger Monat',
-'dropdown.this_year' => 'aktuelles Jahr',
+// 'dropdown.current_day' => 'today',
+// 'dropdown.previous_day' => 'yesterday',
+'dropdown.selected_day' => 'Tag',
+// TODO: translate the following.
+// 'dropdown.current_week' => 'this week',
+'dropdown.previous_week' => 'vorherige Woche',
+'dropdown.selected_week' => 'Woche',
+// TODO: translate the following.
+// 'dropdown.current_month' => 'this month',
+'dropdown.previous_month' => 'vorheriger Monat',
+'dropdown.selected_month' => 'Monat',
+// TODO: translate the following.
+// 'dropdown.current_year' => 'this year',
+// 'dropdown.previous_year' => 'previous year',
+'dropdown.selected_year' => 'Jahr',
 'dropdown.all_time' => 'Gesamtzeitraum',
 'dropdown.projects' => 'Projekte',
 'dropdown.tasks' => 'Aufgaben',

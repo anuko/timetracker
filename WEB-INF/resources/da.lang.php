@@ -270,15 +270,20 @@ $i18n_key_words = array(
 // Strings that are used in a single form must go to the specific form section.
 'dropdown.all' => '--- Alle ---',
 'dropdown.no' => '--- Ingen ---',
-// NOTE TO TRANSLATORS: dropdown.this_day does not necessarily means "today". It means a specific ("this") day selected on calendar. See Charts.
-'dropdown.this_day' => 'Denne dag',
 // TODO: translate the following.
-// 'dropdown.last_day' => 'last day',
-'dropdown.this_week' => 'Denne uge',
-'dropdown.last_week' => 'Sidste uge',
-'dropdown.this_month' => 'Denne måned',
-'dropdown.last_month' => 'Sidste måned',
-'dropdown.this_year' => 'Dette år',
+// 'dropdown.current_day' => 'today',
+// 'dropdown.previous_day' => 'yesterday',
+'dropdown.selected_day' => 'dag',
+'dropdown.current_week' => 'Denne uge',
+'dropdown.previous_week' => 'Sidste uge',
+'dropdown.selected_week' => 'uge',
+'dropdown.current_month' => 'Denne måned',
+'dropdown.previous_month' => 'Sidste måned',
+'dropdown.selected_month' => 'måned',
+'dropdown.current_year' => 'Dette år',
+// TODO: translate the following.
+// 'dropdown.previous_year' => 'previous year',
+'dropdown.selected_year' => 'år',
 'dropdown.all_time' => 'Alt',
 'dropdown.projects' => 'Projekter',
 'dropdown.tasks' => 'Opgaver',

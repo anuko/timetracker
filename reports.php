@@ -161,12 +161,12 @@ if ($user->canManageTeam() || $user->isClient()) {
 $form->addInput(array('type'=>'combobox',
   'name'=>'period',
   'style'=>'width: 250px;',
-  'data'=>array(INTERVAL_THIS_MONTH=>$i18n->getKey('dropdown.this_month'),
-    INTERVAL_LAST_MONTH=>$i18n->getKey('dropdown.last_month'),
-    INTERVAL_THIS_WEEK=>$i18n->getKey('dropdown.this_week'),
-    INTERVAL_LAST_WEEK=>$i18n->getKey('dropdown.last_week'),
-    INTERVAL_THIS_DAY=>$i18n->getKey('dropdown.this_day'),
-    INTERVAL_LAST_DAY=>$i18n->getKey('dropdown.last_day')),
+  'data'=>array(INTERVAL_THIS_MONTH=>$i18n->getKey('dropdown.current_month'),
+    INTERVAL_LAST_MONTH=>$i18n->getKey('dropdown.previous_month'),
+    INTERVAL_THIS_WEEK=>$i18n->getKey('dropdown.current_week'),
+    INTERVAL_LAST_WEEK=>$i18n->getKey('dropdown.previous_week'),
+    INTERVAL_THIS_DAY=>$i18n->getKey('dropdown.current_day'),
+    INTERVAL_LAST_DAY=>$i18n->getKey('dropdown.previous_day')),
   'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 // Add controls for start and end dates.
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start_date'));

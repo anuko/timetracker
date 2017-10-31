@@ -311,16 +311,22 @@ $i18n_key_words = array(
 // Strings that are used in a single form must go to the specific form section.
 'dropdown.all' => '--- todos ---',
 'dropdown.no' => '--- no ---',
-// TODO: translate dropdown.this_day
-// 'dropdown.this_day' => 'this day',
-// 'dropdown.last_day' => 'last day',
-'dropdown.this_week' => 'esta semana',
-// TODO: translate dropdown.last_week.
-// 'dropdown.last_week' => 'last week',
-'dropdown.this_month' => 'este mes',
-'dropdown.last_month' => 'el mes pasado',
-// TODO: translate dropdown.this_year and dropdown.all_time.
-// 'dropdown.this_year' => 'this year',
+// TODO: translate the following.
+// 'dropdown.current_day' => 'today',
+// 'dropdown.previous_day' => 'yesterday',
+'dropdown.selected_day' => 'dia',
+'dropdown.current_week' => 'esta semana',
+// TODO: translate the following.
+// 'dropdown.previous_week' => 'previous week',
+'dropdown.selected_week' => 'semana',
+'dropdown.current_month' => 'este mes',
+'dropdown.previous_month' => 'el mes pasado',
+'dropdown.selected_month' => 'mes',
+// TODO: translate the following.
+// 'dropdown.current_year' => 'this year',
+// 'dropdown.previous_year' => 'previous year',
+'dropdown.selected_year' => 'año',
+// TODO: translate the following.
 // 'dropdown.all_time' => 'all time',
 'dropdown.projects' => 'proyectos',
 // TODO: translate the following strings.

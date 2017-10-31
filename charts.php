@@ -139,10 +139,10 @@ if ($user->canManageTeam()) {
 
 // Chart interval options.
 $intervals = array();
-$intervals[INTERVAL_THIS_DAY] = $i18n->getKey('dropdown.this_day');
-$intervals[INTERVAL_THIS_WEEK] = $i18n->getKey('dropdown.this_week');
-$intervals[INTERVAL_THIS_MONTH] = $i18n->getKey('dropdown.this_month');
-$intervals[INTERVAL_THIS_YEAR] = $i18n->getKey('dropdown.this_year');
+$intervals[INTERVAL_THIS_DAY] = $i18n->getKey('dropdown.selected_day');
+$intervals[INTERVAL_THIS_WEEK] = $i18n->getKey('dropdown.selected_week');
+$intervals[INTERVAL_THIS_MONTH] = $i18n->getKey('dropdown.selected_month');
+$intervals[INTERVAL_THIS_YEAR] = $i18n->getKey('dropdown.selected_year');
 $intervals[INTERVAL_ALL_TIME] = $i18n->getKey('dropdown.all_time');
 
 // Chart interval dropdown.
