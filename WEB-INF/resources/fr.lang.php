@@ -269,8 +269,7 @@ $i18n_key_words = array(
 'dropdown.previous_month' => 'le mois dernier',
 'dropdown.selected_month' => 'mois',
 'dropdown.current_year' => 'année en cours',
-// TODO: translate the following.
-// 'dropdown.previous_year' => 'previous year',
+'dropdown.previous_year' => 'année dernière',
 'dropdown.selected_year' => 'année',
 'dropdown.all_time' => 'depuis toujours',
 'dropdown.projects' => 'Projets',
