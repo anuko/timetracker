@@ -273,15 +273,20 @@ $i18n_key_words = array(
 // Strings that are used in a single form must go to the specific form section.
 'dropdown.all' => '--- wszystkie ---',
 'dropdown.no' => '--- żaden ---',
-// NOTE TO TRANSLATORS: dropdown.this_day does not necessarily means "today". It means a specific ("this") day selected on calendar. See Charts.
-'dropdown.this_day' => 'wybrany dzień',
 // TODO: translate the following.
-// 'dropdown.last_day' => 'last day',
-'dropdown.this_week' => 'ten tydzień',
-'dropdown.last_week' => 'poprzedni tydzień',
-'dropdown.this_month' => 'ten miesiąc',
-'dropdown.last_month' => 'poprzedni miesiąc',
-'dropdown.this_year' => 'ten rok',
+// 'dropdown.current_day' => 'today',
+// 'dropdown.previous_day' => 'yesterday',
+'dropdown.selected_day' => 'dzień',
+'dropdown.current_week' => 'ten tydzień',
+'dropdown.previous_week' => 'poprzedni tydzień',
+'dropdown.selected_week' => 'tydzień',
+'dropdown.current_month' => 'ten miesiąc',
+'dropdown.previous_month' => 'poprzedni miesiąc',
+'dropdown.selected_month' => 'miesiąc',
+'dropdown.current_year' => 'ten rok',
+// TODO: translate the following.
+// 'dropdown.previous_year' => 'previous year',
+'dropdown.selected_year' => 'rok',
 'dropdown.all_time' => 'od początku',
 'dropdown.projects' => 'projekty',
 'dropdown.tasks' => 'zadania',
