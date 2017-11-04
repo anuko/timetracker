@@ -37,27 +37,25 @@ define('CHART_CLIENTS', 3);
 class ttChartHelper {
 
   // getTotals - returns total times by project or task for a given user in a specified period.
-  static function getTotals($user_id, $ch_type, $cl_date, $cl_period = null) {
+  static function getTotals($user_id, $chart_type, $selected_date, $interval_type) {
 
     $period = null;
-    if (isset($cl_period) && isset($cl_date)) {
-      switch ($cl_period) {
-        case INTERVAL_THIS_DAY:
-          $period = new Period(INTERVAL_THIS_DAY, new DateAndTime(DB_DATEFORMAT, $cl_date));
-          break;
+    switch ($interval_type) {
+      case INTERVAL_THIS_DAY:
+        $period = new Period(INTERVAL_THIS_DAY, new DateAndTime(DB_DATEFORMAT, $selected_date));
+        break;
  
-        case INTERVAL_THIS_WEEK:
-          $period = new Period(INTERVAL_THIS_WEEK, new DateAndTime(DB_DATEFORMAT, $cl_date));
-          break;
+      case INTERVAL_THIS_WEEK:
+        $period = new Period(INTERVAL_THIS_WEEK, new DateAndTime(DB_DATEFORMAT, $selected_date));
+        break;
 
-        case INTERVAL_THIS_MONTH:
-          $period = new Period(INTERVAL_THIS_MONTH, new DateAndTime(DB_DATEFORMAT, $cl_date));
-          break;
+      case INTERVAL_THIS_MONTH:
+        $period = new Period(INTERVAL_THIS_MONTH, new DateAndTime(DB_DATEFORMAT, $selected_date));
+        break;
 
-        case INTERVAL_THIS_YEAR:
-          $period = new Period(INTERVAL_THIS_YEAR, new DateAndTime(DB_DATEFORMAT, $cl_date));
-          break;
-      }
+      case INTERVAL_THIS_YEAR:
+        $period = new Period(INTERVAL_THIS_YEAR, new DateAndTime(DB_DATEFORMAT, $selected_date));
+        break;
     }
 
     $result = array();
@@ -67,17 +65,17 @@ class ttChartHelper {
     if ($period != null) {
       $q_period = " and date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."'";
     }
-    if (CHART_PROJECTS == $ch_type) {
+    if (CHART_PROJECTS == $chart_type) {
       // Data for projects.
       $sql = "select p.name as name, sum(time_to_sec(l.duration)) as time from tt_log l
         left join tt_projects p on (p.id = l.project_id)
         where l.status = 1 and l.duration > 0 and l.user_id = $user_id $q_period group by l.project_id";
-    } elseif (CHART_TASKS == $ch_type) {
+    } elseif (CHART_TASKS == $chart_type) {
       // Data for tasks.
       $sql = "select t.name as name, sum(time_to_sec(l.duration)) as time from tt_log l
         left join tt_tasks t on (t.id = l.task_id)
         where l.status = 1 and l.duration > 0 and l.user_id = $user_id $q_period group by l.task_id";
-    } elseif (CHART_CLIENTS == $ch_type) {
+    } elseif (CHART_CLIENTS == $chart_type) {
       // Data for clients.
       $sql = "select coalesce(c.name, 'NULL') as name, sum(time_to_sec(l.duration)) as time from tt_log l
         left join tt_clients c on (c.id = l.client_id)
