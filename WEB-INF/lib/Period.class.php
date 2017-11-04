@@ -35,6 +35,23 @@ define('INTERVAL_LAST_WEEK', 6);
 define('INTERVAL_LAST_MONTH', 7);
 define('INTERVAL_LAST_DAY', 8);
 
+/*
+// Definitions for refactored code. TODO: uncomment when done.
+define('INTERVAL_ALL_TIME', 0);
+define('INTERVAL_CURRENT_YEAR', 10);
+define('INTERVAL_PREVIOUS_YEAR', 14);
+define('INTERVAL_SELECTED_YEAR', 18);
+define('INTERVAL_CURRENT_MONTH', 20);
+define('INTERVAL_PREVIOUS_MONTH', 24);
+define('INTERVAL_SELECTED_MONTH', 28);
+define('INTERVAL_CURRENT_WEEK', 30);
+define('INTERVAL_PREVIOUS_WEEK', 34);
+define('INTERVAL_SELECTED_WEEK', 38);
+define('INTERVAL_CURRENT_DAY', 40);
+define('INTERVAL_PREVIOUS_DAY', 44);
+define('INTERVAL_SELECTED_DAY', 48);
+*/
+
 class Period {
   var $startDate;
   var $endDate;
@@ -44,15 +61,15 @@ class Period {
     global $user;
 
     if (!$date_point || !($date_point instanceof DateAndTime))
-      $date_point = new DateAndTime();
+      $date_point = new DateAndTime(); // Represents current date. TODO: verify this is needed, as this is server time, not browser today.
 
     // TODO: refactoring ongoing down from here. Make code nicer, etc.
     $weekStartDay = $user->week_start;
 
-		$date_begin = new DateAndTime();
-		$date_begin->setFormat($date_point->getFormat());
-		$date_end = new DateAndTime();
-		$date_end->setFormat($date_point->getFormat());
+		$this->startDate = new DateAndTime();
+		$this->startDate->setFormat($date_point->getFormat());
+		$this->endDate = new DateAndTime();
+		$this->endDate->setFormat($date_point->getFormat());
 		$t_arr = localtime($date_point->getTimestamp());
 		$t_arr[5] = $t_arr[5] + 1900;
 
@@ -64,39 +81,37 @@ class Period {
 
 		switch ($period_type) {
 			case INTERVAL_THIS_DAY:
-                            $date_begin->setTimestamp($date_point->getTimestamp());
-                            $date_end->setTimestamp($date_point->getTimestamp());
+                            $this->startDate->setTimestamp($date_point->getTimestamp());
+                            $this->endDate->setTimestamp($date_point->getTimestamp());
                         break;
 
                         case INTERVAL_LAST_DAY:
-                            $date_begin->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-1,$t_arr[5]));
-                            $date_end->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-1,$t_arr[5]));
+                            $this->startDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-1,$t_arr[5]));
+                            $this->endDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-1,$t_arr[5]));
                         break;
 
 			case INTERVAL_THIS_WEEK:
-			  $date_begin->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+$startWeekBias,$t_arr[5]));
-				$date_end->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
+			  $this->startDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+$startWeekBias,$t_arr[5]));
+				$this->endDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
 			break;
 			case INTERVAL_LAST_WEEK:
-				$date_begin->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]-7+$startWeekBias,$t_arr[5]));
-				$date_end->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]-1+$startWeekBias,$t_arr[5]));
+				$this->startDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]-7+$startWeekBias,$t_arr[5]));
+				$this->endDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]-1+$startWeekBias,$t_arr[5]));
 			break;
 			case INTERVAL_THIS_MONTH:
-				$date_begin->setTimestamp(mktime(0,0,0,$t_arr[4]+1,1,$t_arr[5]));
-				$date_end->setTimestamp(mktime(0,0,0,$t_arr[4]+2,0,$t_arr[5]));
+				$this->startDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,1,$t_arr[5]));
+				$this->endDate->setTimestamp(mktime(0,0,0,$t_arr[4]+2,0,$t_arr[5]));
 			break;
 			case INTERVAL_LAST_MONTH:
-				$date_begin->setTimestamp(mktime(0,0,0,$t_arr[4],1,$t_arr[5]));
-				$date_end->setTimestamp(mktime(0,0,0,$t_arr[4]+1,0,$t_arr[5]));
+				$this->startDate->setTimestamp(mktime(0,0,0,$t_arr[4],1,$t_arr[5]));
+				$this->endDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,0,$t_arr[5]));
 			break;
 
 			case INTERVAL_THIS_YEAR:
-				$date_begin->setTimestamp(mktime(0, 0, 0, 1, 1, $t_arr[5]));
-				$date_end->setTimestamp(mktime(0, 0, 0, 12, 31, $t_arr[5]));
+				$this->startDate->setTimestamp(mktime(0, 0, 0, 1, 1, $t_arr[5]));
+				$this->endDate->setTimestamp(mktime(0, 0, 0, 12, 31, $t_arr[5]));
 			break;
 		}
-		$this->startDate	= &$date_begin;
-		$this->endDate		= &$date_end;
 	}
 
 	/**
