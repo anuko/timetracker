@@ -225,7 +225,7 @@ if (($request->getMethod() == 'GET') && !$bean->isSaved()) {
   // No previous form data were found in session. Use the following default values.
   $form->setValueByElement('users', array_keys($user_list));
   $period = new Period(INTERVAL_THIS_MONTH, new DateAndTime($user->date_format));
-  $form->setValueByElement('start_date', $period->getBeginDate());
+  $form->setValueByElement('start_date', $period->getStartDate());
   $form->setValueByElement('end_date', $period->getEndDate());
   $form->setValueByElement('chclient', '1');
   $form->setValueByElement('chinvoice', '0');

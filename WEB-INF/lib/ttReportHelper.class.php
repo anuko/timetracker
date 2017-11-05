@@ -74,7 +74,7 @@ class ttReportHelper {
         new DateAndTime($user->date_format, $bean->getAttribute('start_date')),
         new DateAndTime($user->date_format, $bean->getAttribute('end_date')));
     }
-    $where = " where l.status = 1 and l.date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
+    $where = " where l.status = 1 and l.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";
     return $where;
   }
@@ -125,7 +125,7 @@ class ttReportHelper {
         new DateAndTime($user->date_format, $report['period_start']),
         new DateAndTime($user->date_format, $report['period_end']));
     }
-    $where = " where l.status = 1 and l.date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
+    $where = " where l.status = 1 and l.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";
     return $where;
   }
@@ -164,7 +164,7 @@ class ttReportHelper {
         new DateAndTime($user->date_format, $bean->getAttribute('start_date')),
         new DateAndTime($user->date_format, $bean->getAttribute('end_date')));
     }
-    $where = " where ei.status = 1 and ei.date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
+    $where = " where ei.status = 1 and ei.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";
     return $where;
   }
@@ -211,7 +211,7 @@ class ttReportHelper {
         new DateAndTime($user->date_format, $report['period_start']),
         new DateAndTime($user->date_format, $report['period_end']));
     }
-    $where = " where ei.status = 1 and ei.date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
+    $where = " where ei.status = 1 and ei.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";
     return $where;
   }
@@ -945,7 +945,7 @@ class ttReportHelper {
         new DateAndTime($user->date_format, $bean->getAttribute('end_date')));
     }
 
-    $totals['start_date'] = $period->getBeginDate();
+    $totals['start_date'] = $period->getStartDate();
     $totals['end_date'] = $period->getEndDate();
     $totals['time'] = $total_time;
     $totals['cost'] = $total_cost;
@@ -1015,7 +1015,7 @@ class ttReportHelper {
         new DateAndTime($user->date_format, $report['period_end']));
     }
 
-    $totals['start_date'] = $period->getBeginDate();
+    $totals['start_date'] = $period->getStartDate();
     $totals['end_date'] = $period->getEndDate();
     $totals['time'] = $total_time;
     $totals['cost'] = $total_cost;

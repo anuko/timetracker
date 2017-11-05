@@ -114,58 +114,18 @@ class Period {
 		}
 	}
 
-	/**
-	 * Return all days by period
-	 *
-	 * @return array
-	 */
-	function getAllDays() {
-		$ret_array = array();
-		if ($this->startDate->before($this->endDate)) {
-			$d = $this->getBegin();
-			while ($d->before($this->getEnd())) {
-				array_push($ret_array, $d);
-				$d = $d->nextDate();
-			}
-			array_push($ret_array, $d);
-		} else {
-			array_push($ret_array, $this->startDate);
-		}
-  		return $ret_array;
-	}
-
 	function setPeriod($b_date, $e_date) {
 		$this->startDate = $b_date;
 		$this->endDate = $e_date;
 	}
 
-	// return date object
-	function getBegin() {
-		return $this->startDate;
-	}
-
-	// return date object
-	function getEnd() {
-		return $this->endDate;
-	}
-
 	// return date string
-	function getBeginDate($format="") {
+	function getStartDate($format="") {
 		return $this->startDate->toString($format);
 	}
 
 	// return date string
 	function getEndDate($format="") {
 		return $this->endDate->toString($format);
-	}
-
-	function getArray($format="") {
-		$result = array();
-		$d = $this->getBegin();
-		while ($d->before($this->getEnd())) {
-			$result[] = $d->toString($format);
-			$d = $d->nextDate();
-		}
-		return $result;
 	}
 }

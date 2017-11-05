@@ -63,7 +63,7 @@ class ttChartHelper {
 
     $q_period = '';
     if ($period != null) {
-      $q_period = " and date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."'";
+      $q_period = " and date >= '".$period->getStartDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."'";
     }
     if (CHART_PROJECTS == $chart_type) {
       // Data for projects.
