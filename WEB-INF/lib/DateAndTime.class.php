@@ -287,39 +287,23 @@ class DateAndTime {
   }
 
   function isError() {
-    if ($this->mParseResult!=0) return true;
+    if ($this->mParseResult != 0) return true;
     return false;
   }
 
-  function getClone() {
-    if (version_compare(phpversion(), '5.0') < 0) {
-      $d = new DateAndTime($this->getFormat());
-      $d->setTimestamp($this->getTimestamp());
-      return $d;
-    } else {
-      return clone($this);
-    }
-  }
-
   function before(/*DateAndTime*/ $obj) {
-    if ($this->getTimestamp()<$obj->getTimestamp()) return true;
+    if ($this->getTimestamp() < $obj->getTimestamp()) return true;
     return false;
   }
 
   function after(/*DateAndTime*/ $obj) {
-    if ($this->getTimestamp()>$obj->getTimestamp()) return true;
+    if ($this->getTimestamp() > $obj->getTimestamp()) return true;
     return false;
   }
 
   function equals(/*DateAndTime*/ $obj) {
     if ($this->getTimestamp() == $obj->getTimestamp()) return true;
     return false;
-  }
-
-  function nextDate() {
-    $d = $this->getClone();
-    $d->incDay();
-    return $d;
   }
 
   function decDay(/*int*/$days=1) {

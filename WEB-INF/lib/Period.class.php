@@ -52,9 +52,14 @@ define('INTERVAL_PREVIOUS_DAY', 44);
 define('INTERVAL_SELECTED_DAY', 48);
 */
 
+// TODO: Refactoring is needed for this class. Probably by refactoring DateAndTime first, as Period is
+// basically a collection of 2 DateAndTime instances.
+//
+// Second problem is that "today" is (most likely?) server today, so reports may give incorrect dates
+// for browser users in different time zones. Verify and fix this.
 class Period {
-  var $startDate;
-  var $endDate;
+  var $startDate; // DateAndTime object.
+  var $endDate;   // DateAndTime object.
 
   function __construct($period_type = 0, $date_point = null) {
 
