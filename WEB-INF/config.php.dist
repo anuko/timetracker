@@ -112,6 +112,12 @@ define('WEEKEND_START_DAY', 6);
 // define('PHPSESSID_TTL', 86400);
 
 
+// PHP_SESSION_PATH
+// Local file system path for PHP sessions. Use it to isolate session deletions
+// (garbage collection interference) by other PHP scripts potentially running on the system.
+// define('PHP_SESSION_PATH', '/tmp/timetracker'); // Directory must exist and be writable.
+
+
 // Forum and help links from the main menu.
 //
 define('FORUM_LINK', 'https://www.anuko.com/forum/viewforum.php?f=4');

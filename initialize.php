@@ -84,6 +84,12 @@ session_cache_expire(1);
 $phpsessid_ttl = defined('PHPSESSID_TTL') ? PHPSESSID_TTL : 60*60*24;
 // Set lifetime for garbage collection.
 ini_set('session.gc_maxlifetime', $phpsessid_ttl);
+// Set PHP session path, if defined to avoid garbage collection interference from other scripts.
+if (defined('PHP_SESSION_PATH')) {
+  ini_set('session.save_path', PHP_SESSION_PATH);
+  ini_set('session.gc_probability', 1);
+}
+
 // Set session cookie lifetime.
 session_set_cookie_params($phpsessid_ttl);
 if (isset($_COOKIE['tt_PHPSESSID'])) {
