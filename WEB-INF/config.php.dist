@@ -110,6 +110,9 @@ define('WEEKEND_START_DAY', 6);
 // Lifetime in seconds for tt_PHPSESSID cookie. Time to live is extended by this value
 // with each visit to the site so that users don't have to re-login. 
 // define('PHPSESSID_TTL', 86400);
+//
+// Note: see also PHP_SESSION_PATH below as you may have to use it together with
+// PHPSESSID_TTL to avoid premature session expirations.
 
 
 // PHP_SESSION_PATH
