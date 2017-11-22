@@ -18,7 +18,7 @@
         </tr>
   {if $active_projects}
     {foreach $active_projects as $project}
-        <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$project.name|escape}</td>
           <td>{$project.description|escape}</td>
           <td><a href="project_edit.php?id={$project.id}">{$i18n.label.edit}</a></td>
@@ -46,7 +46,7 @@
           <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
     {foreach $inactive_projects as $project}
-        <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$project.name|escape}</td>
           <td>{$project.description|escape}</td>
           <td><a href="project_edit.php?id={$project.id}">{$i18n.label.edit}</a></td>
@@ -71,7 +71,7 @@
         </tr>
   {if $active_projects}
     {foreach $active_projects as $project}
-        <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$project.name|escape}</td>
           <td>{$project.description|escape}</td>
         </tr>
