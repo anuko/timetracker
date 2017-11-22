@@ -18,7 +18,7 @@
         </tr>
   {if $active_tasks}
     {foreach $active_tasks as $task}
-        <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$task.name|escape}</td>
           <td>{$task.description|escape}</td>
           <td><a href="task_edit.php?id={$task.id}">{$i18n.label.edit}</a></td>
@@ -71,7 +71,7 @@
         </tr>
   {if $active_tasks}
     {foreach $active_tasks as $task}
-        <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$task.name|escape}</td>
           <td>{$task.description|escape}</td>
         </tr>
