@@ -17,7 +17,7 @@
   {/if}
         </tr>
         {foreach $invoices as $invoice}
-        <tr valign="top" bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$invoice.name|escape}</td>
           <td>{$invoice.client_name|escape}</td>
           <td>{$invoice.date}</td>

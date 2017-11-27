@@ -20,7 +20,7 @@
     {if $time_records}
       <table class="mobile-table-details">
       {foreach $time_records as $record}
-      <tr bgcolor="{cycle values="#ccccce,#f5f5f5"}" {if !$record.billable} class="not_billable" {/if}>
+      <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td valign="top">{$record.project|escape}</td>
 {/if}

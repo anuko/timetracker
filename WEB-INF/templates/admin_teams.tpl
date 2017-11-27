@@ -17,7 +17,7 @@
   </tr>
 {if $teams}
   {foreach $teams as $team}
-  <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+  <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
     <td>{$team.id}</td>
     <td>{$team.name|escape}</td>
     <td nowrap>{$team.date}</td>

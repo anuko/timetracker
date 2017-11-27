@@ -179,7 +179,7 @@ function recalculateCost() {
         <td width="5%" class="tableHeader">{$i18n.label.edit}</td>
       </tr>
   {foreach $expense_items as $item}
-      <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
+      <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
     {if $user->isPluginEnabled('cl')}
         <td valign="top">{$item.client|escape}</td>
     {/if}

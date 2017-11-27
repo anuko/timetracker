@@ -17,7 +17,7 @@
         </tr>
   {if $active_users}
     {foreach $active_users as $u}
-        <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>
             {if $smarty.const.UNCOMPLETED_INDICATORS == $user->uncompleted_indicators}
               <span class="uncompleted-entry{if $u.has_uncompleted_entry} active{/if}"{if $u.has_uncompleted_entry} title="{$i18n.form.users.uncompleted_entry}"{/if}></span>
@@ -65,7 +65,7 @@
           <td width="10%" class="tableHeader">{$i18n.label.edit}</td>
         </tr>
     {foreach $inactive_users as $u}
-        <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>
             {if $user->isManager()}
               <a href="user_edit.php?id={$u.id}">{$u.name|escape}</a>
@@ -111,7 +111,7 @@
           <td class="tableHeader">{$i18n.form.users.role}</td>
         </tr>
   {foreach $active_users as $u}
-        <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$u.name|escape}</td>
           <td>{$u.login|escape}</td>
     {if $smarty.const.ROLE_MANAGER == $u.role}

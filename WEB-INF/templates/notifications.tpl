@@ -14,7 +14,7 @@
         </tr>
   {if $notifications}
     {foreach $notifications as $notification}
-        <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$notification['name']|escape}</td>
           <td>{$notification['cron_spec']|escape}</td>
           <td>{$notification['email']|escape}</td>

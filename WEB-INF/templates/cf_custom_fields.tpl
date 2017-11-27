@@ -13,7 +13,7 @@
         </tr>
   {if $custom_fields}
     {foreach $custom_fields as $field}
-        <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$field['label']|escape}</td>
       {if CustomFields::TYPE_TEXT == $field['type']}
           <td>{$i18n.label.type_text}</td>

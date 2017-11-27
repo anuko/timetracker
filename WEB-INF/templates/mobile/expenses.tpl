@@ -142,7 +142,7 @@ function get_date() {
         <td width="5%" class="tableHeaderCentered">{$i18n.label.cost}</td>
       </tr>
   {foreach $expense_items as $item}
-      <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
+      <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
     {if $user->isPluginEnabled('cl')}
         <td valign="top">{$item.client|escape}</td>
     {/if}

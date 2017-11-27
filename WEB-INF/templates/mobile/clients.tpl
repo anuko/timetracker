@@ -15,7 +15,7 @@
           <td width="40%" class="tableHeader">{$i18n.label.address}</td>
         </tr>
   {foreach $active_clients as $client}
-        <tr valign="top" bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td><a href="client_edit.php?id={$client.id}">{$client.name|escape}</a></td>
           <td>{$client.address|escape}</td>
         </tr>
@@ -34,7 +34,7 @@
           <td width="40%" class="tableHeader">{$i18n.label.address}</td>
         </tr>
     {foreach $inactive_clients as $client}
-        <tr valign="top" bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td><a href="client_edit.php?id={$client.id}">{$client.name|escape}</a></td>
           <td>{$client.address|escape}</td>
         </tr>

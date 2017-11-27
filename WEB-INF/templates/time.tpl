@@ -106,7 +106,7 @@
         <td width="5%" class="tableHeader">{$i18n.label.edit}</td>
       </tr>
   {foreach $time_records as $record}
-      <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}" {if !$record.billable} class="not_billable" {/if}>
+      <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
     {if $user->isPluginEnabled('cl')}
         <td valign="top">{$record.client|escape}</td>
     {/if}

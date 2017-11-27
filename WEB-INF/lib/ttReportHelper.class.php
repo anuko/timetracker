@@ -1062,7 +1062,7 @@ class ttReportHelper {
     $style_title = 'text-align: center; font-size: 15pt; font-family: Arial, Helvetica, sans-serif;';
     $tableHeader = 'font-weight: bold; background-color: #a6ccf7; text-align: left;';
     $tableHeaderCentered = 'font-weight: bold; background-color: #a6ccf7; text-align: center;';
-    $rowItem = 'background-color: #ccccce;';
+    $rowItem = 'background-color: #ffffff;';
     $rowItemAlt = 'background-color: #f5f5f5;';
     $rowSubtotal = 'background-color: #e0e0e0;';
     $cellLeftAligned = 'text-align: left; vertical-align: top;';
@@ -1334,7 +1334,7 @@ class ttReportHelper {
     $style_title = 'text-align: center; font-size: 15pt; font-family: Arial, Helvetica, sans-serif;';
     $tableHeader = 'font-weight: bold; background-color: #a6ccf7; text-align: left;';
     $tableHeaderCentered = 'font-weight: bold; background-color: #a6ccf7; text-align: center;';
-    $rowItem = 'background-color: #ccccce;';
+    $rowItem = 'background-color: #ffffff;';
     $rowItemAlt = 'background-color: #f5f5f5;';
     $rowSubtotal = 'background-color: #e0e0e0;';
     $cellLeftAligned = 'text-align: left; vertical-align: top;';
