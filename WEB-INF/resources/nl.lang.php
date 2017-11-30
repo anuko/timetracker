@@ -278,8 +278,7 @@ $i18n_key_words = array(
 'dropdown.previous_month' => 'vorige maand',
 'dropdown.selected_month' => 'maand',
 'dropdown.current_year' => 'dit jaar',
-// TODO: translate the following.
-// 'dropdown.previous_year' => 'previous year',
+'dropdown.previous_year' => 'vorig jaar',
 'dropdown.selected_year' => 'jaar',
 'dropdown.all_time' => 'alles',
 'dropdown.projects' => 'projecten',
