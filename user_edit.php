@@ -127,7 +127,7 @@ $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','for
 // Define classes for the projects table.
 class NameCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
-    $this->setOptions(array('width'=>200,'valign'=>'top'));
+    $this->setOptions(array('width'=>200));
     $this->setValue('<label for = "'.$table->name.'_'.$row.'">'.htmlspecialchars($value).'</label>');
     return $this->toString();
   }

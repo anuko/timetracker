@@ -39,17 +39,22 @@ html {
 
 body {
   font-size: 10pt;
-  font-family: verdana;
+  font-family: Verdana, sans-serif;
   background-color: white;
 }
 
-table { font-size: 10pt; font-family: verdana; }
+table { font-size: 10pt; font-family: Verdana, sans-serif; }
 
-input, button { font-size: 10pt; font-family: verdana; }
+input, button, select, textarea {
+  font-size: 10pt;
+  font-family: Verdana, sans-serif;
+  margin: 2px 2px 2px 2px;
+  padding: 2px 5px 2px 5px;
+}
 
-textarea { font-size: 10pt; font-family: verdana; }
-
-select{ font-size: 10pt; font-family: verdana; }
+input[type=checkbox], label {
+  vertical-align: middle;
+}
 
 .pageTitle {
   font-size: 12pt;
@@ -58,37 +63,33 @@ select{ font-size: 10pt; font-family: verdana; }
 }
 
 .systemMenu {
-  font-size: 12pt;
+  font-size: 11pt;
   font-weight: bold;
-  color: #ffffff;
-  background-color: #000000;
+  color: white;
+  background-color: black;
 }
 
 .mainMenu {
-  font-size: 12pt;
+  font-size: 11pt;
   color: #444444;
 }
 
 .tableHeader {
   font-weight: bold;
   text-align: left;
-  color: #000000;
-  background-color: #a6ccf7;
 }
 
 .tableHeaderCentered {
   font-weight: bold;
   text-align: center;
-  color: #000000;
-  background-color: #a6ccf7;
 }
 
 .rowReportItem {
-  background-color: #ffffff;
+  background-color: #f5f5f5;
 }
 
 .rowReportItemAlt {
-  background-color: #f5f5f5;
+  background-color: #ffffff;
 }
 
 .rowReportSubtotal {
@@ -118,11 +119,7 @@ select{ font-size: 10pt; font-family: verdana; }
 
 .sectionHeader {
   font-weight: bold;
-  border-bottom: 1px solid silver;
-}
-
-.borderTop td {
-  border-top: 1px solid silver;
+  border-bottom: 1px solid lightgray;
 }
 
 .sectionHeaderNoBorder {
@@ -130,12 +127,10 @@ select{ font-size: 10pt; font-family: verdana; }
 }
 
 .error {
-  font-weight: bold;
   color: red;
 }
 
 .info_message {
-  font-weight: bold;
   color: #0000c0;
 }
 
@@ -146,7 +141,7 @@ table.divider {
   width: 720px;
 }
 
-div#LoginAboutText { width:400px; }
+div#LoginAboutText { width: 400px; }
 
 .uncompleted-entry {
   display: inline-block;
