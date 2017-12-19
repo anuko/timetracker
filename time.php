@@ -357,6 +357,7 @@ if ($request->isPost()) {
 
 $week_total = ttTimeHelper::getTimeForWeek($user->getActiveUser(), $selected_date);
 
+$smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getActiveUser(), $cl_date));
 $smarty->assign('time_records', ttTimeHelper::getRecords($user->getActiveUser(), $cl_date));

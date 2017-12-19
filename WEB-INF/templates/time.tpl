@@ -11,7 +11,7 @@
 {if defined(WEEK_VIEW_DEBUG)}
   <tr>
     <td align="center" colspan=2">
-      <a href="week.php">{$i18n.label.day_view}</a>&nbsp;/&nbsp;<a href="time.php">{$i18n.label.week_view}</a>
+      <a href="time.php?date={$selected_date->toString()}">{$i18n.label.day_view}</a>&nbsp;/&nbsp;<a href="week.php?date={$selected_date->toString()}">{$i18n.label.week_view}</a>
     </td>
   </tr>
 {/if}
