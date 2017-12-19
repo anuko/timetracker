@@ -182,6 +182,9 @@ $i18n_key_words = array(
 'label.configure' => 'הגדר',
 'label.select_all' => 'בחר הכל',
 'label.select_none' => 'בטל בחירה',
+// TODO: translate the following.
+// 'label.day_view' => 'Day view',
+// 'label.week_view' => 'Week view',
 'label.id' => 'מזהה',
 'label.language' => 'שפה',
 // TODO: translate the following string.

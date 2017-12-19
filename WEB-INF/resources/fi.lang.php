@@ -166,6 +166,9 @@ $i18n_key_words = array(
 'label.configure' => 'Aseta',
 'label.select_all' => 'Valitse kaikki',
 'label.select_none' => 'Poista kaikki valinnat',
+// TODO: translate the following.
+// 'label.day_view' => 'Day view',
+// 'label.week_view' => 'Week view',
 'label.id' => 'ID',
 'label.language' => 'Kieli',
 'label.decimal_mark' => 'Desimaalierotin',

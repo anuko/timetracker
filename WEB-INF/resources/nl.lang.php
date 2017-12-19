@@ -165,6 +165,9 @@ $i18n_key_words = array(
 'label.configure' => 'Stel in',
 'label.select_all' => 'Selecteer alle',
 'label.select_none' => 'Selecteer niets',
+// TODO: translate the following.
+// 'label.day_view' => 'Day view',
+// 'label.week_view' => 'Week view',
 'label.id' => 'ID',
 'label.language' => 'Taal',
 'label.decimal_mark' => 'Decimaal teken',

@@ -171,6 +171,9 @@ $i18n_key_words = array(
 'label.configure' => 'Konfiguruj',
 'label.select_all' => 'Zaznacz wszystko',
 'label.select_none' => 'Odznacz wszystko',
+// TODO: translate the following.
+// 'label.day_view' => 'Day view',
+// 'label.week_view' => 'Week view',
 'label.id' => 'ID',
 'label.language' => 'Język',
 'label.decimal_mark' => 'Znak dziesiętny',

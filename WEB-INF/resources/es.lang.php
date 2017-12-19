@@ -194,6 +194,9 @@ $i18n_key_words = array(
 // 'label.configure' => 'Configure',
 'label.select_all' => 'Seleccionar todos',
 'label.select_none' => 'Quitar todas las selecciones',
+// TODO: translate the following.
+// 'label.day_view' => 'Day view',
+// 'label.week_view' => 'Week view',
 'label.id' => 'Identificación',
 // TODO: translate the following strings.
 // 'label.language' => 'Language',

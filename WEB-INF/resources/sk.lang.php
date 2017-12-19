@@ -179,6 +179,9 @@ $i18n_key_words = array(
 'label.configure' => 'Nastaviť',
 'label.select_all' => 'Označiť všetky',
 'label.select_none' => 'Odznačiť všetky',
+// TODO: translate the following.
+// 'label.day_view' => 'Day view',
+// 'label.week_view' => 'Week view',
 'label.id' => 'ID',
 'label.language' => 'Jazyk',
 // TODO: translate the following string.

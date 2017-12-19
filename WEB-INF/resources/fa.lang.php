@@ -177,6 +177,9 @@ $i18n_key_words = array(
 'label.configure' => 'پیکربندی',
 'label.select_all' => 'انتخاب همه',
 'label.select_none' => 'لغو انتخاب همه',
+// TODO: translate the following.
+// 'label.day_view' => 'Day view',
+// 'label.week_view' => 'Week view',
 'label.id' => 'شناسه',
 'label.language' => 'زبان',
 // TODO: translate the following string.
