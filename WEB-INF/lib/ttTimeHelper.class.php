@@ -689,17 +689,34 @@ class ttTimeHelper {
 
     $client_field = null;
     if ($user->isPluginEnabled('cl'))
-      $client_field = ", c.id as client_id, c.name as client";
+      $client_field = ', c.id as client_id, c.name as client';
+
+    $custom_field_1 = null;
+    if ($user->isPluginEnabled('cf')) {
+      $custom_fields = new CustomFields($user->team_id);
+      $cf_1_type = $custom_fields->fields[0]['type'];
+      if ($cf_1_type == CustomFields::TYPE_TEXT) {
+        $custom_field_1 = ', cfl.value as cf_1_value';
+      } elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
+        $custom_field_1 = ', cfo.id as cf_1_id, cfo.value as cf_1_value';
+      }
+    }
 
     $left_joins = " left join tt_projects p on (l.project_id = p.id)".
       " left join tt_tasks t on (l.task_id = t.id)";
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
+    if ($user->isPluginEnabled('cf')) {
+      if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
+        $left_joins .= 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id) ';
+      elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
+        $left_joins .= 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.option_id = cfo.id) ';
+    }
 
     $sql = "select l.id as id, l.date as date, TIME_FORMAT(l.start, $sql_time_format) as start,
       TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
       TIME_FORMAT(l.duration, '%k:%i') as duration, p.id as project_id, p.name as project,
-      t.id as task_id, t.name as task, l.comment, l.billable, l.invoice_id $client_field
+      t.id as task_id, t.name as task, l.comment, l.billable, l.invoice_id $client_field $custom_field_1
       from tt_log l
       $left_joins
       where l.date >= '$start_date' and l.date <= '$end_date' and l.user_id = $user_id and l.status = 1
@@ -719,22 +736,36 @@ class ttTimeHelper {
   // getGroupedRecordsForInterval - returns time records for a user for a given interval of dates grouped in an array of dates.
   // Example: for a week view we want one row representing the same attributes to have 7 values for each day of week.
   // We identify simlar records by a combination of client, billable, project, task, and custom field values.
-  //
-  // "cl:546,bl:0,pr:23456,ts:27464,cf_1:example text"
-  // The above means client 546, billable, project 23456, task 27464, custom field value: example text.
-  //
-  // "cl:546,bl:1,pr:23456,ts:27464,cf_1:7623"
-  // The above means client 546, not billable, project 23456, task 27464, custom field option value 7623.
   // This will allow us to extend the feature when more custom fields are added.
+  //
+  // "cl:546,bl:1,pr:23456,ts:27464,cf_1:example text"
+  // The above means client 546, billable, project 23456, task 27464, custom field text "example text".
+  //
+  // "cl:546,bl:0,pr:23456,ts:27464,cf_1:7623"
+  // The above means client 546, not billable, project 23456, task 27464, custom field option id 7623.
   static function getGroupedRecordsForInterval($user_id, $start_date, $end_date) {
     // Start by obtaining all records in interval.
     // Then, iterate through them to build an array.
     $records = ttTimeHelper::getRecordsForInterval($user_id, $start_date, $end_date);
+    $groupedRecords = array();
     foreach ($records as $record) {
-        $record_identifier = ttTimeHelper::makeRecordIdentifier($record);
+      $record_identifier_no_suffix = ttTimeHelper::makeRecordIdentifier($record);
+      // Handle potential multiple records with the same attributes by using a numerical suffix.
+      $suffix = 0;
+      $record_identifier = $record_identifier_no_suffix.'_'.$suffix;
+      while (!empty($groupedRecords[$record_identifier][$record['date']])) {
+        $suffix++;
+        $record_identifier = $record_identifier_no_suffix.'_'.$suffix;
+      }
+      $groupedRecords[$record_identifier][$record['date']] = array('id'=>$record['id'], 'duration'=>$record['duration']);
+      $groupedRecords[$record_identifier]['client'] = $record['client'];
+      $groupedRecords[$record_identifier]['cf_1_value'] = $record['cf_1_value'];
+      $groupedRecords[$record_identifier]['project'] = $record['project'];
+      $groupedRecords[$record_identifier]['task'] = $record['task'];
+      $groupedRecords[$record_identifier]['billable'] = $record['billable'];
     }
 
-    return null; // Work in progress, not implemented.
+    return $groupedRecords;
   }
 
   // makeRecordIdentifier - builds a string identifying a record for a grouped display (such as a week view).
@@ -745,20 +776,22 @@ class ttTimeHelper {
   static function makeRecordIdentifier($record) {
     global $user;
     // Start with client.
-    if ($user->isPluginEnabled('cl')) {
-      $record_identifier = 'cl:';
-      $record_identifier .= $record['client_id'] ? $record['client_id'] : '0';
-    }
+    if ($user->isPluginEnabled('cl'))
+      $record_identifier = $record['client_id'] ? 'cl'.$record['client_id'] : '';
     // Add billable flag.
     if (!empty($record_identifier)) $record_identifier .= ',';
     $record_identifier .= 'bl:'.$record['billable'];
     // Add project.
-    $record_identifier .= ',pr:';
-    $record_identifier .= $record['project_id'] ? $record['project_id'] : '0';
+    $record_identifier .= $record['project_id'] ? ',pr:'.$record['project_id'] : '';
     // Add task.
-    $record_identifier .= ',ts:';
-    $record_identifier .= $record['task_id'] ? $record['task_id'] : '0';
+    $record_identifier .= $record['task_id'] ? ',ts:'.$record['task_id'] : '';
     // Add custom field 1. This requires modifying the query to get the data we need.
+    if ($user->isPluginEnabled('cf')) {
+      if ($record['cf_1_id'])
+        $record_identifier .= ',cf_1:'.$record['cf_1_id'];
+      else if ($record['cf_1_value'])
+        $record_identifier .= ',cf_1:'.$record['cf_1_value'];
+    }
 
     return $record_identifier;
   }

@@ -369,7 +369,7 @@ $endDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeek
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getActiveUser(), $cl_date));
-$smarty->assign('time_records', ttTimeHelper::getGroupedRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT)));
+$smarty->assign('grouped_records', ttTimeHelper::getGroupedRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT)));
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);

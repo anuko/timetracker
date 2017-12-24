@@ -37,14 +37,14 @@
 <table width="720">
 <tr>
   <td valign="top">
-{if $time_records}
+{if $grouped_records}
       <table border="0" cellpadding="3" cellspacing="1" width="100%">
       <tr>
-  {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <td class="tableHeader">{$i18n.label.project}</td>
+  {if ($user->isPluginEnabled('cl') || ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode))}
+        <td class="tableHeader"></td>
   {/if}
-  {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <td class="tableHeader">{$i18n.label.task}</td>
+  {if ($user->isPluginEnabled('cf') || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+        <td class="tableHeader"></td>
   {/if}
         <td class="tableHeader">{$day_header_0}</td>
         <td class="tableHeader">{$day_header_1}</td>
@@ -54,16 +54,21 @@
         <td class="tableHeader">{$day_header_5}</td>
         <td class="tableHeader">{$day_header_6}</td>
       </tr>
-  {foreach $time_records as $record}
+  {foreach $grouped_records as $record}
       <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
-    {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <td valign="top">{$record.project|escape}</td>
+    {if ($user->isPluginEnabled('cl') || ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode))}
+        <td valign="top">{$record.project|escape}<p>{$record.client|escape}</td>
     {/if}
-    {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <td valign="top">{$record.task|escape}</td>
+    {if ($user->isPluginEnabled('cf') || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+        <td valign="top">{$record.task|escape}<p>{$record.cf_1_value|escape}</td>
     {/if}
-        <td valign="top">{$record.date}</td>
-        <td align="right" valign="top">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
+        <td valign="top">{$record.$day_header_0.duration}</td>
+        <td valign="top">{$record.$day_header_1.duration}</td>
+        <td valign="top">{$record.$day_header_2.duration}</td>
+        <td valign="top">{$record.$day_header_3.duration}</td>
+        <td valign="top">{$record.$day_header_4.duration}</td>
+        <td valign="top">{$record.$day_header_5.duration}</td>
+        <td valign="top">{$record.$day_header_6.duration}</td>
       </tr>
   {/foreach}
     </table>
