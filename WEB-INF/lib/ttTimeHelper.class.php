@@ -677,4 +677,89 @@ class ttTimeHelper {
     return $result;
   }
 
+  // getRecordsForInterval - returns time records for a user for a given interval of dates.
+  static function getRecordsForInterval($user_id, $start_date, $end_date) {
+    global $user;
+    $sql_time_format = "'%k:%i'"; //  24 hour format.
+    if ('%I:%M %p' == $user->time_format)
+      $sql_time_format = "'%h:%i %p'"; // 12 hour format for MySQL TIME_FORMAT function.
+
+    $result = array();
+    $mdb2 = getConnection();
+
+    $client_field = null;
+    if ($user->isPluginEnabled('cl'))
+      $client_field = ", c.id as client_id, c.name as client";
+
+    $left_joins = " left join tt_projects p on (l.project_id = p.id)".
+      " left join tt_tasks t on (l.task_id = t.id)";
+    if ($user->isPluginEnabled('cl'))
+      $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
+
+    $sql = "select l.id as id, l.date as date, TIME_FORMAT(l.start, $sql_time_format) as start,
+      TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
+      TIME_FORMAT(l.duration, '%k:%i') as duration, p.id as project_id, p.name as project,
+      t.id as task_id, t.name as task, l.comment, l.billable, l.invoice_id $client_field
+      from tt_log l
+      $left_joins
+      where l.date >= '$start_date' and l.date <= '$end_date' and l.user_id = $user_id and l.status = 1
+      order by p.name, t.name, l.date, l.start, l.id";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        if($val['duration']=='0:00')
+          $val['finish'] = '';
+        $result[] = $val;
+      }
+    } else return false;
+
+    return $result;
+  }
+
+  // getGroupedRecordsForInterval - returns time records for a user for a given interval of dates grouped in an array of dates.
+  // Example: for a week view we want one row representing the same attributes to have 7 values for each day of week.
+  // We identify simlar records by a combination of client, billable, project, task, and custom field values.
+  //
+  // "cl:546,bl:0,pr:23456,ts:27464,cf_1:example text"
+  // The above means client 546, billable, project 23456, task 27464, custom field value: example text.
+  //
+  // "cl:546,bl:1,pr:23456,ts:27464,cf_1:7623"
+  // The above means client 546, not billable, project 23456, task 27464, custom field option value 7623.
+  // This will allow us to extend the feature when more custom fields are added.
+  static function getGroupedRecordsForInterval($user_id, $start_date, $end_date) {
+    // Start by obtaining all records in interval.
+    // Then, iterate through them to build an array.
+    $records = ttTimeHelper::getRecordsForInterval($user_id, $start_date, $end_date);
+    foreach ($records as $record) {
+        $record_identifier = ttTimeHelper::makeRecordIdentifier($record);
+    }
+
+    return null; // Work in progress, not implemented.
+  }
+
+  // makeRecordIdentifier - builds a string identifying a record for a grouped display (such as a week view).
+  // For example:
+  // "cl:546,bl:0,pr:23456,ts:27464,cf_1:example text"
+  // "cl:546,bl:1,pr:23456,ts:27464,cf_1:7623"
+  // See comment for getGroupedRecordsForInterval.
+  static function makeRecordIdentifier($record) {
+    global $user;
+    // Start with client.
+    if ($user->isPluginEnabled('cl')) {
+      $record_identifier = 'cl:';
+      $record_identifier .= $record['client_id'] ? $record['client_id'] : '0';
+    }
+    // Add billable flag.
+    if (!empty($record_identifier)) $record_identifier .= ',';
+    $record_identifier .= 'bl:'.$record['billable'];
+    // Add project.
+    $record_identifier .= ',pr:';
+    $record_identifier .= $record['project_id'] ? $record['project_id'] : '0';
+    // Add task.
+    $record_identifier .= ',ts:';
+    $record_identifier .= $record['task_id'] ? $record['task_id'] : '0';
+    // Add custom field 1. This requires modifying the query to get the data we need.
+
+    return $record_identifier;
+  }
 }

@@ -34,19 +34,13 @@ import('ttClientHelper');
 import('ttTimeHelper');
 import('DateAndTime');
 
-// This is a now removed check whether user browser supports cookies.
-// if (!isset($_COOKIE['tt_PHPSESSID'])) {
-  // This test gives a false-positive if user goes directly to this page
-  // as from a desktop shortcut (on first request only).
-  // die ("Your browser's cookie functionality is turned off. Please turn it on.");
-// }
-
 // Access check.
 if (!ttAccessCheck(right_data_entry)) {
   header('Location: access_denied.php');
   exit();
 }
 
+// TODO: redo this block to use week start date instead.
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
 $selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date);
@@ -63,13 +57,14 @@ if ($user->isPluginEnabled('cf')) {
   $smarty->assign('custom_fields', $custom_fields);
 }
 
+// TODO: how is this plugin supposed to work for week view?
 if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
   $month_quota = $quota->get($selected_date->mYear, $selected_date->mMonth);
   $month_total = ttTimeHelper::getTimeForMonth($user->getActiveUser(), $selected_date);
   $minutes_left = ttTimeHelper::toMinutes($month_quota) - ttTimeHelper::toMinutes($month_total);
-  
+
   $smarty->assign('month_total', $month_total);
   $smarty->assign('over_quota', $minutes_left < 0);
   $smarty->assign('quota_remaining', ttTimeHelper::toAbsDuration($minutes_left));
@@ -196,7 +191,7 @@ if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type
 if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
   $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
 if (!defined('NOTE_INPUT_HEIGHT'))
-  define('NOTE_INPUT_HEIGHT', 40);
+	define('NOTE_INPUT_HEIGHT', 40);
 $form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 600px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
 $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
 if ($user->isPluginEnabled('iv'))
@@ -349,7 +344,7 @@ if ($request->isPost()) {
         $_SESSION['behalf_id'] = $on_behalf_id;
         $_SESSION['behalf_name'] = ttUserHelper::getUserName($on_behalf_id);
       }
-      header('Location: time.php');
+      header('Location: week.php');
       exit();
     }
   }
@@ -357,16 +352,46 @@ if ($request->isPost()) {
 
 $week_total = ttTimeHelper::getTimeForWeek($user->getActiveUser(), $selected_date);
 
+// Determine selected week start and end dates.
+$weekStartDay = $user->week_start;
+$t_arr = localtime($selected_date->getTimestamp());
+$t_arr[5] = $t_arr[5] + 1900;
+if ($t_arr[6] < $weekStartDay)
+  $startWeekBias = $weekStartDay - 7;
+else
+  $startWeekBias = $weekStartDay;
+$startDate = new DateAndTime();
+$startDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+$startWeekBias,$t_arr[5]));
+$endDate = new DateAndTime();
+$endDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
+// The above is needed to set date range (timestring) in page title. Consider refactoring, possibly moving into a function.
+
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getActiveUser(), $cl_date));
-$smarty->assign('time_records', ttTimeHelper::getRecords($user->getActiveUser(), $cl_date));
+$smarty->assign('time_records', ttTimeHelper::getGroupedRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT)));
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns()"');
-$smarty->assign('timestring', $selected_date->toString($user->date_format));
+$smarty->assign('timestring', $startDate->toString($user->date_format).' - '.$endDate->toString($user->date_format));
+
+// Prepare and assign date headers. Note how startDate moves to the end of the week, so it no longer holds correct start week value.
+$smarty->assign('day_header_0', $startDate->toString($user->date_format));
+$startDate->incDay();
+$smarty->assign('day_header_1', $startDate->toString($user->date_format));
+$startDate->incDay();
+$smarty->assign('day_header_2', $startDate->toString($user->date_format));
+$startDate->incDay();
+$smarty->assign('day_header_3', $startDate->toString($user->date_format));
+$startDate->incDay();
+$smarty->assign('day_header_4', $startDate->toString($user->date_format));
+$startDate->incDay();
+$smarty->assign('day_header_5', $startDate->toString($user->date_format));
+$startDate->incDay();
+$smarty->assign('day_header_6', $startDate->toString($user->date_format));
+
 $smarty->assign('title', $i18n->getKey('title.time'));
-$smarty->assign('content_page_name', 'time.tpl');
+$smarty->assign('content_page_name', 'week.tpl');
 $smarty->display('index.tpl');
