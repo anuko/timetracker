@@ -88,7 +88,7 @@ class Table extends FormElement {
     return @$this->mData[$rowindex][$this->mColumnFields[$colindex]];
   }
 	
-  function getValueAtName($rowindex,$fieldname) {
+  function getValueAtName($rowindex, $fieldname) {
     if (!$this->mProccessed) $this->_process();
     return @$this->mData[$rowindex][$fieldname];
   }
