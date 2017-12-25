@@ -369,7 +369,10 @@ $endDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeek
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getActiveUser(), $cl_date));
-$smarty->assign('grouped_records', ttTimeHelper::getGroupedRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT)));
+$groupedRecords = ttTimeHelper::getGroupedRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
+$smarty->assign('grouped_records', $groupedRecords);
+$smarty->assign('grouped_records_totals', ttTimeHelper::getGroupedRecordsTotals($groupedRecords));
+
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
@@ -378,19 +381,26 @@ $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('timestring', $startDate->toString($user->date_format).' - '.$endDate->toString($user->date_format));
 
 // Prepare and assign date headers. Note how startDate moves to the end of the week, so it no longer holds correct start week value.
-$smarty->assign('day_header_0', $startDate->toString($user->date_format));
+$smarty->assign('date_0', $startDate->toString(DB_DATEFORMAT));
+$smarty->assign('day_header_0', $startDate->getDate());
 $startDate->incDay();
-$smarty->assign('day_header_1', $startDate->toString($user->date_format));
+$smarty->assign('date_1', $startDate->toString(DB_DATEFORMAT));
+$smarty->assign('day_header_1', $startDate->getDate());
 $startDate->incDay();
-$smarty->assign('day_header_2', $startDate->toString($user->date_format));
+$smarty->assign('date_2', $startDate->toString(DB_DATEFORMAT));
+$smarty->assign('day_header_2', $startDate->getDate());
 $startDate->incDay();
-$smarty->assign('day_header_3', $startDate->toString($user->date_format));
+$smarty->assign('date_3', $startDate->toString(DB_DATEFORMAT));
+$smarty->assign('day_header_3', $startDate->getDate());
 $startDate->incDay();
-$smarty->assign('day_header_4', $startDate->toString($user->date_format));
+$smarty->assign('date_4', $startDate->toString(DB_DATEFORMAT));
+$smarty->assign('day_header_4', $startDate->getDate());
 $startDate->incDay();
-$smarty->assign('day_header_5', $startDate->toString($user->date_format));
+$smarty->assign('date_5', $startDate->toString(DB_DATEFORMAT));
+$smarty->assign('day_header_5', $startDate->getDate());
 $startDate->incDay();
-$smarty->assign('day_header_6', $startDate->toString($user->date_format));
+$smarty->assign('date_6', $startDate->toString(DB_DATEFORMAT));
+$smarty->assign('day_header_6', $startDate->getDate());
 
 $smarty->assign('title', $i18n->getKey('title.time'));
 $smarty->assign('content_page_name', 'week.tpl');

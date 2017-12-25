@@ -62,15 +62,30 @@
     {if ($user->isPluginEnabled('cf') || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td valign="top">{$record.task|escape}<p>{$record.cf_1_value|escape}</td>
     {/if}
-        <td valign="top">{$record.$day_header_0.duration}</td>
-        <td valign="top">{$record.$day_header_1.duration}</td>
-        <td valign="top">{$record.$day_header_2.duration}</td>
-        <td valign="top">{$record.$day_header_3.duration}</td>
-        <td valign="top">{$record.$day_header_4.duration}</td>
-        <td valign="top">{$record.$day_header_5.duration}</td>
-        <td valign="top">{$record.$day_header_6.duration}</td>
+        <td valign="top">{$record.$date_0.duration}</td>
+        <td valign="top">{$record.$date_1.duration}</td>
+        <td valign="top">{$record.$date_2.duration}</td>
+        <td valign="top">{$record.$date_3.duration}</td>
+        <td valign="top">{$record.$date_4.duration}</td>
+        <td valign="top">{$record.$date_5.duration}</td>
+        <td valign="top">{$record.$date_6.duration}</td>
       </tr>
   {/foreach}
+      <tr>
+  {if ($user->isPluginEnabled('cl') || ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode))}
+        <td class="tableHeader"></td>
+  {/if}
+  {if ($user->isPluginEnabled('cf') || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+        <td class="tableHeader"></td>
+  {/if}
+        <td class="tableHeader">{$grouped_records_totals.$date_0}</td>
+        <td class="tableHeader">{$grouped_records_totals.$date_1}</td>
+        <td class="tableHeader">{$grouped_records_totals.$date_2}</td>
+        <td class="tableHeader">{$grouped_records_totals.$date_3}</td>
+        <td class="tableHeader">{$grouped_records_totals.$date_4}</td>
+        <td class="tableHeader">{$grouped_records_totals.$date_5}</td>
+        <td class="tableHeader">{$grouped_records_totals.$date_6}</td>
+      </tr>
     </table>
 {/if}
   </td>

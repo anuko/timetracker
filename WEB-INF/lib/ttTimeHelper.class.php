@@ -795,4 +795,23 @@ class ttTimeHelper {
 
     return $record_identifier;
   }
+
+  // getGroupedRecordsTotals - returns day totals for grouped records.
+  static function getGroupedRecordsTotals($groupedRecords) {
+    $groupedRecordsTotals = array();
+    foreach ($groupedRecords as $groupedRecord) {
+      foreach($groupedRecord as $key => $dayEntry) {
+        if ($dayEntry['duration']) {
+          $minutes = ttTimeHelper::toMinutes($dayEntry['duration']);
+          $groupedRecordsTotals[$key] += $minutes;
+        }
+      }
+    }
+    // Convert minutes to hh:mm for display.
+    foreach ($groupedRecordsTotals as $key => $single_total) {
+      $groupedRecordsTotals[$key] = ttTimeHelper::toAbsDuration($single_total);
+    }
+
+    return $groupedRecordsTotals;
+  }
 }
