@@ -160,13 +160,11 @@ class ttTimeHelper {
     return (int)@$time_a[1] + ((int)@$time_a[0]) * 60;
   }
 
-  // toAbsDuration - converts a number of minutes to format 00:00
+  // toAbsDuration - converts a number of minutes to format 0:00
   // even if $minutes is negative.
   static function toAbsDuration($minutes){
     $hours = (string)((int)abs($minutes / 60));
     $mins = (string)(abs($minutes % 60));
-    if (strlen($hours) == 1)
-      $hours = '0'.$hours;
     if (strlen($mins) == 1)
       $mins = '0' . $mins;
     return $hours.':'.$mins;
