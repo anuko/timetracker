@@ -131,7 +131,7 @@ class Table extends FormElement {
     $html .= ">\n";
     
     // Print headers.
-	if (($this->mInteractive && (count($this->mHeaders) > 1)) || (!$this->mInteractive && (count($this->mHeaders) > 0))) {
+    if (($this->mInteractive && (count($this->mHeaders) > 1)) || (!$this->mInteractive && (count($this->mHeaders) > 0))) {
       $html .= "<tr";
       if (count($this->mRowOptions) > 0) {
         foreach ($this->mRowOptions as $k=>$v) {
