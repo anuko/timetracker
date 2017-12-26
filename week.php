@@ -28,6 +28,8 @@
 
 require_once('initialize.php');
 import('form.Form');
+import('form.DefaultCellRenderer');
+import('form.Table');
 import('ttUserHelper');
 import('ttTeamHelper');
 import('ttClientHelper');
@@ -40,7 +42,6 @@ if (!ttAccessCheck(right_data_entry)) {
   exit();
 }
 
-// TODO: redo this block to use week start date instead.
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
 $selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date);
@@ -49,6 +50,92 @@ if($selected_date->isError())
 if(!$cl_date)
   $cl_date = $selected_date->toString(DB_DATEFORMAT);
 $_SESSION['date'] = $cl_date;
+
+// Determine selected week start and end dates.
+$weekStartDay = $user->week_start;
+$t_arr = localtime($selected_date->getTimestamp());
+$t_arr[5] = $t_arr[5] + 1900;
+if ($t_arr[6] < $weekStartDay)
+  $startWeekBias = $weekStartDay - 7;
+else
+  $startWeekBias = $weekStartDay;
+$startDate = new DateAndTime();
+$startDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+$startWeekBias,$t_arr[5]));
+$endDate = new DateAndTime();
+$endDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
+// The above is needed to set date range (timestring) in page title.
+
+// Get column headers.
+$dayHeaders = ttTimeHelper::getDayHeadersForWeek($startDate->toString(DB_DATEFORMAT));
+
+// TODO: replace these two sample arrays with real data.
+$durations_with_labels = array(
+  array( // Row 0.
+    'id' => 'something goes here too', // Row identifier.
+    'label' => 'This is a label for row 0',
+    'day_0' => array('id' => '0_0', 'duration' => '00:00'),
+    'day_1' => array('id' => '0_1', 'duration' => '01:00'),
+    'day_2' => array('id' => '0_2', 'duration' => '02:00'),
+    'day_3' => array('id' => '0_3', 'duration' => null),
+    'day_4' => array('id' => '0_4', 'duration' => '04:00')
+  ),
+  array( // Row 1.
+    'label' => 'This is a label for row 1',
+    'day_0' => array('id' => '1_0', 'duration' => '00:30'),
+    'day_1' => array('id' => '1_1', 'duration' => '01:30'),
+    'day_2' => array('id' => '1_2', 'duration' => '02:30'),
+  )
+);
+
+$totals = array(
+    'label' => 'Total:',
+    'day_0' => '00:30',
+    'day_1' => '02:30',
+    'day_2' => '04:30',
+    'day_3' => null,
+    'day_4' => '04:00',
+    'day_5' => null,
+    'day_6' => null
+);
+
+// Define rendering class for a label field to the left of durations.
+class LabelCellRenderer extends DefaultCellRenderer {
+  function render(&$table, $value, $row, $column, $selected = false) {
+    $this->setOptions(array('width'=>200,'valign'=>'middle'));
+    $this->setValue(htmlspecialchars($value));
+    return $this->toString();
+  }
+}
+
+// Define rendering class for a single cell for time entry in week view table.
+class TimeCellRenderer extends DefaultCellRenderer {
+  function render(&$table, $value, $row, $column, $selected = false) {
+    $field_name = $table->getValueAtName($row,$column)['id']; // Our text field names (and ids) are like x_y (row_column).
+    $field = new TextField($field_name);
+    $field->setFormName($table->getFormName());
+    $field->setSize(2);
+    $field->setValue($table->getValueAt($row,$column)['duration']);
+    $this->setValue($field->getHtml());
+    return $this->toString();
+  }
+}
+
+
+
+
+
+
+//$durations = ttTimeHelper::getDurationsForWeek($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
+
+
+
+$groupedRecords = ttTimeHelper::getGroupedRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
+
+
+
+
+
+$dayTotals = ttTimeHelper::getGroupedRecordsTotals($groupedRecords);
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
@@ -95,8 +182,8 @@ $_SESSION['project'] = $cl_project;
 $cl_task = $request->getParameter('task', ($request->getMethod()=='POST'? null : @$_SESSION['task']));
 $_SESSION['task'] = $cl_task;
 
-// Elements of timeRecordForm.
-$form = new Form('timeRecordForm');
+// Elements of weekTimeForm.
+$form = new Form('weekTimeForm');
 
 if ($user->canManageTeam()) {
   $user_list = ttTeamHelper::getActiveUsers(array('putSelfFirst'=>true));
@@ -111,6 +198,25 @@ if ($user->canManageTeam()) {
     $smarty->assign('on_behalf_control', 1);
   }
 }
+
+// Create week_durations table.
+$table = new Table('week_durations');
+// $table->setIAScript('markModified'); // TODO: write a script to mark table or particular cells as modified.
+$table->setTableOptions(array('width'=>'100%','cellspacing'=>'1','cellpadding'=>'3','border'=>'0'));
+$table->setRowOptions(array('valign'=>'top','class'=>'tableHeader'));
+$table->setData($durations_with_labels);
+// Add columns to table.
+$table->addColumn(new TableColumn('label', '', new LabelCellRenderer(), $totals['label']));
+$table->addColumn(new TableColumn('day_0', $dayHeaders['day_header_0'], new TimeCellRenderer(), $totals['day_0']));
+$table->addColumn(new TableColumn('day_1', $dayHeaders['day_header_1'], new TimeCellRenderer(), $totals['day_1']));
+$table->addColumn(new TableColumn('day_2', $dayHeaders['day_header_2'], new TimeCellRenderer(), $totals['day_2']));
+$table->addColumn(new TableColumn('day_3', $dayHeaders['day_header_3'], new TimeCellRenderer(), $totals['day_3']));
+$table->addColumn(new TableColumn('day_4', $dayHeaders['day_header_4'], new TimeCellRenderer(), $totals['day_4']));
+$table->addColumn(new TableColumn('day_5', $dayHeaders['day_header_5'], new TimeCellRenderer()));
+$table->addColumn(new TableColumn('day_6', $dayHeaders['day_header_6'], new TimeCellRenderer()));
+$table->setInteractive(false);
+$form->addInputElement($table);
+
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
 if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
@@ -352,24 +458,12 @@ if ($request->isPost()) {
 
 $week_total = ttTimeHelper::getTimeForWeek($user->getActiveUser(), $selected_date);
 
-// Determine selected week start and end dates.
-$weekStartDay = $user->week_start;
-$t_arr = localtime($selected_date->getTimestamp());
-$t_arr[5] = $t_arr[5] + 1900;
-if ($t_arr[6] < $weekStartDay)
-  $startWeekBias = $weekStartDay - 7;
-else
-  $startWeekBias = $weekStartDay;
-$startDate = new DateAndTime();
-$startDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+$startWeekBias,$t_arr[5]));
-$endDate = new DateAndTime();
-$endDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
-// The above is needed to set date range (timestring) in page title. Consider refactoring, possibly moving into a function.
+
 
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getActiveUser(), $cl_date));
-$groupedRecords = ttTimeHelper::getGroupedRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
+//$groupedRecords = ttTimeHelper::getGroupedRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
 $smarty->assign('grouped_records', $groupedRecords);
 $smarty->assign('grouped_records_totals', ttTimeHelper::getGroupedRecordsTotals($groupedRecords));
 

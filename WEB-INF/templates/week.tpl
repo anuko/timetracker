@@ -6,7 +6,7 @@
 }
 </style>
 
-{$forms.timeRecordForm.open}
+{$forms.weekTimeForm.open}
 <table cellspacing="4" cellpadding="0" border="0">
 {if defined(WEEK_VIEW_DEBUG)}
   <tr>
@@ -21,16 +21,21 @@
 {if $on_behalf_control}
         <tr>
           <td align="right">{$i18n.label.user}:</td>
-          <td>{$forms.timeRecordForm.onBehalfUser.control}</td>
+          <td>{$forms.weekTimeForm.onBehalfUser.control}</td>
         </tr>
 {/if}
       </table>
     </td>
     <td valign="top">
       <table>
-        <tr><td>{$forms.timeRecordForm.date.control}</td></tr>
+        <tr><td>{$forms.weekTimeForm.date.control}</td></tr>
       </table>
     </td>
+  </tr>
+</table>
+<table width="720">
+  <tr valign="top">
+    <td>{$forms.weekTimeForm.week_durations.control}</td>
   </tr>
 </table>
 
@@ -113,7 +118,7 @@
 -->
 <table>
   <tr>
-    <td align="center" colspan="2">{$forms.timeRecordForm.btn_submit.control}</td>
+    <td align="center" colspan="2">{$forms.weekTimeForm.btn_submit.control}</td>
   </tr>
 </table>
-{$forms.timeRecordForm.close}
+{$forms.weekTimeForm.close}
