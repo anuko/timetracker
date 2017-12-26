@@ -34,6 +34,7 @@ class Table extends FormElement {
   var $mColumns       = array(); // array of columns in table
   var $mData          = null;    // array of rows with data for column cells
   var $mHeaders       = array(); // column headers
+  var $mFooters       = array(); // column footers
   var $mInteractive   = true;    // adds a clickable checkbox column to table
   var $mIAScript      = null;    // sctipt to execute when a checkbox is clicked
   var $mKeyField      = '';      // identifies a column used as key to access row data
@@ -110,6 +111,7 @@ class Table extends FormElement {
     foreach ($this->mColumns as $column) {
       $this->mColumnFields[] = $column->getField();
       $this->mHeaders[] = $column->getHeader();
+      $this->mFooters[] = $column->getFooter();
     }
   }
   
@@ -172,6 +174,27 @@ class Table extends FormElement {
           // Render regular cell.
           $html .= $this->mColumns[$col]->renderCell($this->getValueAt($row, $col), $row, $col);
         }
+      }
+      $html .= "</tr>\n";
+    }
+
+    // Print footers.
+    if (($this->mInteractive && (count($this->mFooters) > 1)) || (!$this->mInteractive && (count($this->mFooters) > 0))) {
+      $html .= "<tr";
+      if (count($this->mRowOptions) > 0) {
+        foreach ($this->mRowOptions as $k=>$v) {
+          $html .= " $k=\"$v\"";
+        }
+      }
+      $html .= ">\n";
+      foreach ($this->mFooters as $footer) {
+        $html .= "<th";
+        if (count($this->mHeaderOptions) > 0) {
+          foreach ($this->mHeaderOptions as $k=>$v) {
+            $html .= " $k=\"$v\"";
+          }
+        }
+        $html .= ">$footer</th>\n";
       }
       $html .= "</tr>\n";
     }
