@@ -65,8 +65,64 @@ $endDate = new DateAndTime();
 $endDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
 // The above is needed to set date range (timestring) in page title.
 
+// Use custom fields plugin if it is enabled.
+if ($user->isPluginEnabled('cf')) {
+  require_once('plugins/CustomFields.class.php');
+  $custom_fields = new CustomFields($user->team_id);
+  $smarty->assign('custom_fields', $custom_fields);
+}
+
+// TODO: how is this plugin supposed to work for week view?
+if ($user->isPluginEnabled('mq')){
+  require_once('plugins/MonthlyQuota.class.php');
+  $quota = new MonthlyQuota();
+  $month_quota = $quota->get($selected_date->mYear, $selected_date->mMonth);
+  $month_total = ttTimeHelper::getTimeForMonth($user->getActiveUser(), $selected_date);
+  $minutes_left = ttTimeHelper::toMinutes($month_quota) - ttTimeHelper::toMinutes($month_total);
+
+  $smarty->assign('month_total', $month_total);
+  $smarty->assign('over_quota', $minutes_left < 0);
+  $smarty->assign('quota_remaining', ttTimeHelper::toAbsDuration($minutes_left));
+}
+
+// Initialize variables.
+// Custom field.
+$cl_cf_1 = trim($request->getParameter('cf_1', ($request->getMethod()=='POST'? null : @$_SESSION['cf_1'])));
+$_SESSION['cf_1'] = $cl_cf_1;
+$cl_billable = 1;
+if ($user->isPluginEnabled('iv')) {
+  if ($request->isPost()) {
+    $cl_billable = $request->getParameter('billable');
+    $_SESSION['billable'] = (int) $cl_billable;
+  } else
+    if (isset($_SESSION['billable']))
+      $cl_billable = $_SESSION['billable'];
+}
+$on_behalf_id = $request->getParameter('onBehalfUser', (isset($_SESSION['behalf_id'])? $_SESSION['behalf_id'] : $user->id));
+$cl_client = $request->getParameter('client', ($request->getMethod()=='POST'? null : @$_SESSION['client']));
+$_SESSION['client'] = $cl_client;
+$cl_project = $request->getParameter('project', ($request->getMethod()=='POST'? null : @$_SESSION['project']));
+$_SESSION['project'] = $cl_project;
+$cl_task = $request->getParameter('task', ($request->getMethod()=='POST'? null : @$_SESSION['task']));
+$_SESSION['task'] = $cl_task;
+
+
+
+
+
+
+
+
+
+
+
+
 // Get column headers.
 $dayHeaders = ttTimeHelper::getDayHeadersForWeek($startDate->toString(DB_DATEFORMAT));
+// Build data array for the table.
+$dataArray = ttTimeHelper::getDataForWeekView($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
+// Build day totals.
+$dayTotals = ttTimeHelper::getDayTotals($dataArray, $dayHeaders);
 
 // TODO: replace these two sample arrays with real data.
 $durations_with_labels = array(
@@ -120,67 +176,17 @@ class TimeCellRenderer extends DefaultCellRenderer {
   }
 }
 
-
-
-
-
-
 //$durations = ttTimeHelper::getDurationsForWeek($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
 
 
 
-$groupedRecords = ttTimeHelper::getGroupedRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
+//$groupedRecords = ttTimeHelper::getGroupedRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
+//$dayTotals = ttTimeHelper::getGroupedRecordsTotals($groupedRecords);
 
 
 
 
 
-$dayTotals = ttTimeHelper::getGroupedRecordsTotals($groupedRecords);
-
-// Use custom fields plugin if it is enabled.
-if ($user->isPluginEnabled('cf')) {
-  require_once('plugins/CustomFields.class.php');
-  $custom_fields = new CustomFields($user->team_id);
-  $smarty->assign('custom_fields', $custom_fields);
-}
-
-// TODO: how is this plugin supposed to work for week view?
-if ($user->isPluginEnabled('mq')){
-  require_once('plugins/MonthlyQuota.class.php');
-  $quota = new MonthlyQuota();
-  $month_quota = $quota->get($selected_date->mYear, $selected_date->mMonth);
-  $month_total = ttTimeHelper::getTimeForMonth($user->getActiveUser(), $selected_date);
-  $minutes_left = ttTimeHelper::toMinutes($month_quota) - ttTimeHelper::toMinutes($month_total);
-
-  $smarty->assign('month_total', $month_total);
-  $smarty->assign('over_quota', $minutes_left < 0);
-  $smarty->assign('quota_remaining', ttTimeHelper::toAbsDuration($minutes_left));
-}
-
-// Initialize variables.
-$cl_start = trim($request->getParameter('start'));
-$cl_finish = trim($request->getParameter('finish'));
-$cl_duration = trim($request->getParameter('duration'));
-$cl_note = trim($request->getParameter('note'));
-// Custom field.
-$cl_cf_1 = trim($request->getParameter('cf_1', ($request->getMethod()=='POST'? null : @$_SESSION['cf_1'])));
-$_SESSION['cf_1'] = $cl_cf_1;
-$cl_billable = 1;
-if ($user->isPluginEnabled('iv')) {
-  if ($request->isPost()) {
-    $cl_billable = $request->getParameter('billable');
-    $_SESSION['billable'] = (int) $cl_billable;
-  } else
-    if (isset($_SESSION['billable']))
-      $cl_billable = $_SESSION['billable'];
-}
-$on_behalf_id = $request->getParameter('onBehalfUser', (isset($_SESSION['behalf_id'])? $_SESSION['behalf_id'] : $user->id));
-$cl_client = $request->getParameter('client', ($request->getMethod()=='POST'? null : @$_SESSION['client']));
-$_SESSION['client'] = $cl_client;
-$cl_project = $request->getParameter('project', ($request->getMethod()=='POST'? null : @$_SESSION['project']));
-$_SESSION['project'] = $cl_project;
-$cl_task = $request->getParameter('task', ($request->getMethod()=='POST'? null : @$_SESSION['task']));
-$_SESSION['task'] = $cl_task;
 
 // Elements of weekTimeForm.
 $form = new Form('weekTimeForm');
@@ -204,16 +210,16 @@ $table = new Table('week_durations');
 // $table->setIAScript('markModified'); // TODO: write a script to mark table or particular cells as modified.
 $table->setTableOptions(array('width'=>'100%','cellspacing'=>'1','cellpadding'=>'3','border'=>'0'));
 $table->setRowOptions(array('valign'=>'top','class'=>'tableHeader'));
-$table->setData($durations_with_labels);
+$table->setData($dataArray); // $durations_with_labels);
 // Add columns to table.
-$table->addColumn(new TableColumn('label', '', new LabelCellRenderer(), $totals['label']));
-$table->addColumn(new TableColumn('day_0', $dayHeaders['day_header_0'], new TimeCellRenderer(), $totals['day_0']));
-$table->addColumn(new TableColumn('day_1', $dayHeaders['day_header_1'], new TimeCellRenderer(), $totals['day_1']));
-$table->addColumn(new TableColumn('day_2', $dayHeaders['day_header_2'], new TimeCellRenderer(), $totals['day_2']));
-$table->addColumn(new TableColumn('day_3', $dayHeaders['day_header_3'], new TimeCellRenderer(), $totals['day_3']));
-$table->addColumn(new TableColumn('day_4', $dayHeaders['day_header_4'], new TimeCellRenderer(), $totals['day_4']));
-$table->addColumn(new TableColumn('day_5', $dayHeaders['day_header_5'], new TimeCellRenderer()));
-$table->addColumn(new TableColumn('day_6', $dayHeaders['day_header_6'], new TimeCellRenderer()));
+$table->addColumn(new TableColumn('label', '', new LabelCellRenderer(), $dayTotals['label']));
+$table->addColumn(new TableColumn($dayHeaders['day_header_0'], $dayHeaders['day_header_0'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_0']]));
+$table->addColumn(new TableColumn($dayHeaders['day_header_1'], $dayHeaders['day_header_1'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_1']]));
+$table->addColumn(new TableColumn($dayHeaders['day_header_2'], $dayHeaders['day_header_2'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_2']]));
+$table->addColumn(new TableColumn($dayHeaders['day_header_3'], $dayHeaders['day_header_3'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_3']]));
+$table->addColumn(new TableColumn($dayHeaders['day_header_4'], $dayHeaders['day_header_4'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_4']]));
+$table->addColumn(new TableColumn($dayHeaders['day_header_5'], $dayHeaders['day_header_5'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_5']]));
+$table->addColumn(new TableColumn($dayHeaders['day_header_6'], $dayHeaders['day_header_6'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_6']]));
 $table->setInteractive(false);
 $form->addInputElement($table);
 
@@ -464,8 +470,8 @@ $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getActiveUser(), $cl_date));
 //$groupedRecords = ttTimeHelper::getGroupedRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
-$smarty->assign('grouped_records', $groupedRecords);
-$smarty->assign('grouped_records_totals', ttTimeHelper::getGroupedRecordsTotals($groupedRecords));
+//$smarty->assign('grouped_records', $groupedRecords);
+//$smarty->assign('grouped_records_totals', ttTimeHelper::getGroupedRecordsTotals($groupedRecords));
 
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);

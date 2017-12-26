@@ -766,31 +766,57 @@ class ttTimeHelper {
     return $groupedRecords;
   }
 
-  /* This is work in progress, not working properly.
-  static function getDurationsForWeek($user_id, $start_date, $end_date) {
+  // getDataForWeekView - builds an array to render a table of durations for week view.
+  static function getDataForWeekView($user_id, $start_date, $end_date) {
     // Start by obtaining all records in interval.
-    // Then, iterate through them to build an array.
     $records = ttTimeHelper::getRecordsForInterval($user_id, $start_date, $end_date);
-    $durations_with_labels = array();
 
+    $dataArray = array();
+
+    // Iterate through records and build $dataArray cell by cell.
     foreach ($records as $record) {
+      // Create record id without suffix.
       $record_id_no_suffix = ttTimeHelper::makeRecordIdentifier($record);
       // Handle potential multiple records with the same attributes by using a numerical suffix.
       $suffix = 0;
       $record_id = $record_id_no_suffix.'_'.$suffix;
-      while (!empty($durations_with_labels[$record_id][$record['date']])) {
+      $day_header = substr($record['date'], 8); // Day number in month.
+      while (ttTimeHelper::cellExists($record_id, $day_header, $dataArray)) {
         $suffix++;
         $record_id = $record_id_no_suffix.'_'.$suffix;
       }
-      $groupedRecords[$record_identifier][$record['date']] = array('id'=>$record['id'], 'duration'=>$record['duration']);
-      $groupedRecords[$record_identifier]['client'] = $record['client'];
-      $groupedRecords[$record_identifier]['cf_1_value'] = $record['cf_1_value'];
-      $groupedRecords[$record_identifier]['project'] = $record['project'];
-      $groupedRecords[$record_identifier]['task'] = $record['task'];
-      $groupedRecords[$record_identifier]['billable'] = $record['billable'];
+      // Find row.
+      $pos = ttTimeHelper::findRow($record_id, $dataArray);
+      if ($pos < 0) {
+        $dataArray[] = array('id' => $record_id,'label' => ttTimeHelper::makeRecordLabel($record)); // Insert row.
+        $pos = ttTimeHelper::findRow($record_id, $dataArray);
+      }
+      // Insert cell data from $record.
+      $dataArray[$pos][$day_header] = array('id' => $record['id'],'duration' => $record['duration']);
     }
+    return $dataArray;
   }
-  */
+
+  // cellExists is a helper function for getDataForWeekView() to see if a cell with a given label
+  // and a day header already exists.
+  static function cellExists($record_id, $day_header, $dataArray) {
+    foreach($dataArray as $row) {
+      if ($row['id'] == $record_id && !empty($row[$day_header]['duration']))
+        return true;
+    }
+    return false;
+  }
+
+  // findRow returns an existing row position in $dataArray, -1 otherwise.
+  static function findRow($record_id, $dataArray) {
+    $pos = 0; // Row position in array.
+    foreach($dataArray as $row) {
+      if ($row['id'] == $record_id)
+        return $pos;
+      $pos++; // Increment for search.
+    }
+    return -1; // Row not found.
+  }
 
   // makeRecordIdentifier - builds a string identifying a record for a grouped display (such as a week view).
   // For example:
@@ -820,6 +846,39 @@ class ttTimeHelper {
     return $record_identifier;
   }
 
+  // makeRecordLabel - builds a human readable label for a row in week view,
+  // which is a combination ot record properties.
+  // Client - Project - Task - Custom field 1.
+  // Note that billable property is not part of the label. Instead, we intend to
+  // identify such records with a different color in week view.
+  static function makeRecordLabel($record) {
+    // TODO: debug this function.
+    global $user;
+    // Start with client.
+    if ($user->isPluginEnabled('cl'))
+      $label = $record['client'];
+
+    // Add project.
+    $project = $record['project'] ? $record['project'] : '';
+    if (!empty($label)) $label .= ' - ';
+    $label .= $project;
+
+    // Add task.
+    $task = $record['task'] ? $record['task'] : '';
+    if (!empty($label)) $label .= ' - ';
+    $label .= $task;
+
+    // Add custom field 1.
+    if ($user->isPluginEnabled('cf')) {
+      if ($record['cf_1_value']) {
+        if (!empty($label)) $label .= ' - ';
+        $label .= $record['cf_1_value'];
+      }
+    }
+
+    return $label;
+  }
+
   // getGroupedRecordsTotals - returns day totals for grouped records.
   static function getGroupedRecordsTotals($groupedRecords) {
     $groupedRecordsTotals = array();
@@ -843,7 +902,7 @@ class ttTimeHelper {
   static function getDayHeadersForWeek($start_date) {
     $dayHeaders = array();
     $objDate = new DateAndTime(DB_DATEFORMAT, $start_date);
-    $dayHeaders['day_header_0'] = $objDate->getDate();
+    $dayHeaders['day_header_0'] = (string)$objDate->getDate(); // It returns an int on first call. Why?
     $objDate->incDay();
     $dayHeaders['day_header_1'] = $objDate->getDate();
     $objDate->incDay();
@@ -859,4 +918,28 @@ class ttTimeHelper {
     unset($objDate);
     return $dayHeaders;
   }
+
+  // getDayTotals calculates total durations for each day from the existing data in $dataArray.
+  static function getDayTotals($dataArray, $dayHeaders) {
+    $dayTotals = array();
+
+    // Insert label.
+    global $i18n;
+    $dayTotals['label'] = $i18n->getKey('label.total');
+
+    foreach ($dataArray as $row) {
+      foreach($dayHeaders as $dayHeader) {
+        if (array_key_exists($dayHeader, $row)) {
+          $minutes = ttTimeHelper::toMinutes($row[$dayHeader]['duration']);
+          $dayTotals[$dayHeader] += $minutes;
+        }
+      }
+    }
+    // Convert minutes to hh:mm for display.
+    foreach($dayHeaders as $dayHeader) {
+      $dayTotals[$dayHeader] = ttTimeHelper::toAbsDuration($dayTotals[$dayHeader]);
+    }
+    return $dayTotals;
+  }
 }
+
