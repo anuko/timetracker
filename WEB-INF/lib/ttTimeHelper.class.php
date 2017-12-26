@@ -766,6 +766,32 @@ class ttTimeHelper {
     return $groupedRecords;
   }
 
+  /* This is work in progress, not working properly.
+  static function getDurationsForWeek($user_id, $start_date, $end_date) {
+    // Start by obtaining all records in interval.
+    // Then, iterate through them to build an array.
+    $records = ttTimeHelper::getRecordsForInterval($user_id, $start_date, $end_date);
+    $durations_with_labels = array();
+
+    foreach ($records as $record) {
+      $record_id_no_suffix = ttTimeHelper::makeRecordIdentifier($record);
+      // Handle potential multiple records with the same attributes by using a numerical suffix.
+      $suffix = 0;
+      $record_id = $record_id_no_suffix.'_'.$suffix;
+      while (!empty($durations_with_labels[$record_id][$record['date']])) {
+        $suffix++;
+        $record_id = $record_id_no_suffix.'_'.$suffix;
+      }
+      $groupedRecords[$record_identifier][$record['date']] = array('id'=>$record['id'], 'duration'=>$record['duration']);
+      $groupedRecords[$record_identifier]['client'] = $record['client'];
+      $groupedRecords[$record_identifier]['cf_1_value'] = $record['cf_1_value'];
+      $groupedRecords[$record_identifier]['project'] = $record['project'];
+      $groupedRecords[$record_identifier]['task'] = $record['task'];
+      $groupedRecords[$record_identifier]['billable'] = $record['billable'];
+    }
+  }
+  */
+
   // makeRecordIdentifier - builds a string identifying a record for a grouped display (such as a week view).
   // For example:
   // "cl:546,bl:0,pr:23456,ts:27464,cf_1:example text"
@@ -811,5 +837,26 @@ class ttTimeHelper {
     }
 
     return $groupedRecordsTotals;
+  }
+
+  // getDayHeadersForWeek - obtains day column headers for week view, which are simply day numbers in month.
+  static function getDayHeadersForWeek($start_date) {
+    $dayHeaders = array();
+    $objDate = new DateAndTime(DB_DATEFORMAT, $start_date);
+    $dayHeaders['day_header_0'] = $objDate->getDate();
+    $objDate->incDay();
+    $dayHeaders['day_header_1'] = $objDate->getDate();
+    $objDate->incDay();
+    $dayHeaders['day_header_2'] = $objDate->getDate();
+    $objDate->incDay();
+    $dayHeaders['day_header_3'] = $objDate->getDate();
+    $objDate->incDay();
+    $dayHeaders['day_header_4'] = $objDate->getDate();
+    $objDate->incDay();
+    $dayHeaders['day_header_5'] = $objDate->getDate();
+    $objDate->incDay();
+    $dayHeaders['day_header_6'] = $objDate->getDate();
+    unset($objDate);
+    return $dayHeaders;
   }
 }
