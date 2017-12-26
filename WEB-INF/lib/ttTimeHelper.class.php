@@ -852,28 +852,23 @@ class ttTimeHelper {
   // Note that billable property is not part of the label. Instead, we intend to
   // identify such records with a different color in week view.
   static function makeRecordLabel($record) {
-    // TODO: debug this function.
     global $user;
     // Start with client.
     if ($user->isPluginEnabled('cl'))
       $label = $record['client'];
 
     // Add project.
-    $project = $record['project'] ? $record['project'] : '';
-    if (!empty($label)) $label .= ' - ';
-    $label .= $project;
+    if (!empty($label) && !empty($record['project'])) $label .= ' - ';
+    $label .= $record['project'];
 
     // Add task.
-    $task = $record['task'] ? $record['task'] : '';
-    if (!empty($label)) $label .= ' - ';
-    $label .= $task;
+    if (!empty($label) && !empty($record['task'])) $label .= ' - ';
+    $label .= $record['task'];
 
     // Add custom field 1.
     if ($user->isPluginEnabled('cf')) {
-      if ($record['cf_1_value']) {
-        if (!empty($label)) $label .= ' - ';
-        $label .= $record['cf_1_value'];
-      }
+      if (!empty($label) && !empty($record['cf_1_value'])) $label .= ' - ';
+      $label .= $record['cf_1_value'];
     }
 
     return $label;
