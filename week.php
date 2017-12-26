@@ -209,8 +209,7 @@ if ($user->canManageTeam()) {
 $table = new Table('week_durations');
 // $table->setIAScript('markModified'); // TODO: write a script to mark table or particular cells as modified.
 $table->setTableOptions(array('width'=>'100%','cellspacing'=>'1','cellpadding'=>'3','border'=>'0'));
-$table->setHeaderOptions(array('align'=>'center')); // TODO: use a class and CSS instead, perhaps a separate class for footer.
-$table->setRowOptions(array('valign'=>'top','class'=>'tableHeader'));
+$table->setRowOptions(array('class'=>'tableHeaderCentered'));
 $table->setData($dataArray); // $durations_with_labels);
 // Add columns to table.
 $table->addColumn(new TableColumn('label', '', new LabelCellRenderer(), $dayTotals['label']));

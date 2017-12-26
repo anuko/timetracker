@@ -897,9 +897,11 @@ class ttTimeHelper {
   static function getDayHeadersForWeek($start_date) {
     $dayHeaders = array();
     $objDate = new DateAndTime(DB_DATEFORMAT, $start_date);
-    $dayHeaders['day_header_0'] = (string)$objDate->getDate(); // It returns an int on first call. Why?
+    $dayHeaders['day_header_0'] = (string) $objDate->getDate();      // It returns an int on first call.
+    if (strlen($dayHeaders['day_header_0']) == 1)                    // Which is an implementation detail of DateAndTime class.
+      $dayHeaders['day_header_0'] = '0'.$dayHeaders['day_header_0']; // Add a 0 for single digit day.
     $objDate->incDay();
-    $dayHeaders['day_header_1'] = $objDate->getDate();
+    $dayHeaders['day_header_1'] = $objDate->getDate(); // After incDay it returns a string with leading 0, when necessary.
     $objDate->incDay();
     $dayHeaders['day_header_2'] = $objDate->getDate();
     $objDate->incDay();
