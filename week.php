@@ -134,7 +134,7 @@ class LabelCellRenderer extends DefaultCellRenderer {
 // Define rendering class for a single cell for time entry in week view table.
 class TimeCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
-    $field_name = $table->getValueAtName($row,$column)['id']; // Our text field names (and ids) are like x_y (row_column).
+    $field_name = $table->getValueAt($row,$column)['id']; // Our text field names (and ids) are like x_y (row_column).
     $field = new TextField($field_name);
     $field->setFormName($table->getFormName());
     $field->setSize(2);

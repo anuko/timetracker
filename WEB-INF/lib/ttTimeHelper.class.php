@@ -745,20 +745,26 @@ class ttTimeHelper {
   // Description of $dataArray format that the function returns.
   // $dataArray = array(
   //   array( // Row 0.
-  //     'id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623', // Record identifier. See ttTimeHelper::makeRecordIdentifier().
-  //     'label' => 'Anuko - Time Tracker - Coding',        // Human readable label for the row describing what this time entry is for.
-  //     'day_0' => array('id' => '0_0', 'duration' => '00:00'),
-  //     'day_1' => array('id' => '0_1', 'duration' => '01:00'),
-  //     'day_2' => array('id' => '0_2', 'duration' => '02:00'),
-  //     'day_3' => array('id' => '0_3', 'duration' => null),
-  //     'day_4' => array('id' => '0_4', 'duration' => '04:00')
+  //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623_0', // Row identifier. See ttTimeHelper::makeRecordIdentifier().
+  //     'label' => 'Anuko - Time Tracker - Coding',              // Human readable label for the row describing what this time entry is for.
+  //     'day_0' => array('control_id' => '0_day_0', 'duration' => '00:00'), // control_id is row_id plus day header for column.
+  //     'day_1' => array('control_id' => '0_day_1', 'duration' => '01:00'),
+  //     'day_2' => array('control_id' => '0_day_2', 'duration' => '02:00'),
+  //     'day_3' => array('control_id' => '0_day_3', 'duration' => null),
+  //     'day_4' => array('control_id' => '0_day_4', 'duration' => '04:00'),
+  //     'day_5' => array('control_id' => '0_day_5', 'duration' => '04:00'),
+  //     'day_6' => array('control_id' => '0_day_6', 'duration' => null)
   //   ),
   //   array( // Row 1.
-  //     'id' => 'bl:0',
-  //     'label' => '', // In this case the label is empty as we don't have anything to put in, only not billable flag.
-  //     'day_0' => array('id' => '1_0', 'duration' => '00:30'),
-  //     'day_1' => array('id' => '1_1', 'duration' => '01:30'),
-  //     'day_2' => array('id' => '1_2', 'duration' => '02:30'),
+  //     'row_id' => 'bl:0_0',
+  //     'label' => '', // In this case the label is empty as we don't have anything to put into it, as we only have billable flag.
+  //     'day_0' => array('control_id' => '1_day_0', 'duration' => null),
+  //     'day_1' => array('control_id' => '1_day_1', 'duration' => '01:30'),
+  //     'day_2' => array('control_id' => '1_day_2', 'duration' => null),
+  //     'day_3' => array('control_id' => '1_day_3', 'duration' => '02:30'),
+  //     'day_4' => array('control_id' => '1_day_4', 'duration' => '04:00'),
+  //     'day_5' => array('control_id' => '1_day_5', 'duration' => null),
+  //     'day_6' => array('control_id' => '1_day_6', 'duration' => null)
   //   )
   // );
   static function getDataForWeekView($user_id, $start_date, $end_date) {
@@ -782,7 +788,7 @@ class ttTimeHelper {
       // Find row.
       $pos = ttTimeHelper::findRow($record_id, $dataArray);
       if ($pos < 0) {
-        $dataArray[] = array('id' => $record_id,'label' => ttTimeHelper::makeRecordLabel($record)); // Insert row.
+        $dataArray[] = array('row_id' => $record_id,'label' => ttTimeHelper::makeRecordLabel($record)); // Insert row.
         $pos = ttTimeHelper::findRow($record_id, $dataArray);
       }
       // Insert cell data from $record.
@@ -793,19 +799,19 @@ class ttTimeHelper {
 
   // cellExists is a helper function for getDataForWeekView() to see if a cell with a given label
   // and a day header already exists.
-  static function cellExists($record_id, $day_header, $dataArray) {
+  static function cellExists($row_id, $day_header, $dataArray) {
     foreach($dataArray as $row) {
-      if ($row['id'] == $record_id && !empty($row[$day_header]['duration']))
+      if ($row['row_id'] == $row_id && !empty($row[$day_header]['duration']))
         return true;
     }
     return false;
   }
 
   // findRow returns an existing row position in $dataArray, -1 otherwise.
-  static function findRow($record_id, $dataArray) {
+  static function findRow($row_id, $dataArray) {
     $pos = 0; // Row position in array.
     foreach($dataArray as $row) {
-      if ($row['id'] == $record_id)
+      if ($row['row_id'] == $row_id)
         return $pos;
       $pos++; // Increment for search.
     }
