@@ -116,18 +116,11 @@ $dayTotals = ttTimeHelper::getDayTotals($dataArray, $dayHeaders);
 
 // TODO: refactoring ongoing down from here.
 
-
-
-
-
-
-
 // Actually this is work in progress at this point, even documenting the array, as we still miss control IDs, and
 // editing entries is not yet implemented. When this is done, we will have to re-document the above.
 
 // TODO:
-// 1) escape cf_1 values in record identifiers as this may come from user for text fields.
-// 2) make sure we have IDs for cells, which are now missing.
+// 1) make sure we have IDs for cells, which are now missing.
 
 // Define rendering class for a label field to the left of durations.
 class LabelCellRenderer extends DefaultCellRenderer {
