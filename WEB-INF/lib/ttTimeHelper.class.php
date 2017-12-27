@@ -731,8 +731,8 @@ class ttTimeHelper {
     return $result;
   }
 
-  // getGroupedRecordsForInterval - returns time records for a user for a given interval of dates grouped in an array of dates.
-  // Example: for a week view we want one row representing the same attributes to have 7 values for each day of week.
+  // getDataForWeekView - builds an array to render a table of durations for week view.
+  // In a week view we want one row representing the same attributes to have 7 values for each day of week.
   // We identify simlar records by a combination of client, billable, project, task, and custom field values.
   // This will allow us to extend the feature when more custom fields are added.
   //
@@ -741,32 +741,26 @@ class ttTimeHelper {
   //
   // "cl:546,bl:0,pr:23456,ts:27464,cf_1:7623"
   // The above means client 546, not billable, project 23456, task 27464, custom field option id 7623.
-  static function getGroupedRecordsForInterval($user_id, $start_date, $end_date) {
-    // Start by obtaining all records in interval.
-    // Then, iterate through them to build an array.
-    $records = ttTimeHelper::getRecordsForInterval($user_id, $start_date, $end_date);
-    $groupedRecords = array();
-    foreach ($records as $record) {
-      $record_identifier_no_suffix = ttTimeHelper::makeRecordIdentifier($record);
-      // Handle potential multiple records with the same attributes by using a numerical suffix.
-      $suffix = 0;
-      $record_identifier = $record_identifier_no_suffix.'_'.$suffix;
-      while (!empty($groupedRecords[$record_identifier][$record['date']])) {
-        $suffix++;
-        $record_identifier = $record_identifier_no_suffix.'_'.$suffix;
-      }
-      $groupedRecords[$record_identifier][$record['date']] = array('id'=>$record['id'], 'duration'=>$record['duration']);
-      $groupedRecords[$record_identifier]['client'] = $record['client'];
-      $groupedRecords[$record_identifier]['cf_1_value'] = $record['cf_1_value'];
-      $groupedRecords[$record_identifier]['project'] = $record['project'];
-      $groupedRecords[$record_identifier]['task'] = $record['task'];
-      $groupedRecords[$record_identifier]['billable'] = $record['billable'];
-    }
-
-    return $groupedRecords;
-  }
-
-  // getDataForWeekView - builds an array to render a table of durations for week view.
+  //
+  // Description of $dataArray format that the function returns.
+  // $dataArray = array(
+  //   array( // Row 0.
+  //     'id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623', // Record identifier. See ttTimeHelper::makeRecordIdentifier().
+  //     'label' => 'Anuko - Time Tracker - Coding',        // Human readable label for the row describing what this time entry is for.
+  //     'day_0' => array('id' => '0_0', 'duration' => '00:00'),
+  //     'day_1' => array('id' => '0_1', 'duration' => '01:00'),
+  //     'day_2' => array('id' => '0_2', 'duration' => '02:00'),
+  //     'day_3' => array('id' => '0_3', 'duration' => null),
+  //     'day_4' => array('id' => '0_4', 'duration' => '04:00')
+  //   ),
+  //   array( // Row 1.
+  //     'id' => 'bl:0',
+  //     'label' => '', // In this case the label is empty as we don't have anything to put in, only not billable flag.
+  //     'day_0' => array('id' => '1_0', 'duration' => '00:30'),
+  //     'day_1' => array('id' => '1_1', 'duration' => '01:30'),
+  //     'day_2' => array('id' => '1_2', 'duration' => '02:30'),
+  //   )
+  // );
   static function getDataForWeekView($user_id, $start_date, $end_date) {
     // Start by obtaining all records in interval.
     $records = ttTimeHelper::getRecordsForInterval($user_id, $start_date, $end_date);
@@ -872,25 +866,6 @@ class ttTimeHelper {
     }
 
     return $label;
-  }
-
-  // getGroupedRecordsTotals - returns day totals for grouped records.
-  static function getGroupedRecordsTotals($groupedRecords) {
-    $groupedRecordsTotals = array();
-    foreach ($groupedRecords as $groupedRecord) {
-      foreach($groupedRecord as $key => $dayEntry) {
-        if ($dayEntry['duration']) {
-          $minutes = ttTimeHelper::toMinutes($dayEntry['duration']);
-          $groupedRecordsTotals[$key] += $minutes;
-        }
-      }
-    }
-    // Convert minutes to hh:mm for display.
-    foreach ($groupedRecordsTotals as $key => $single_total) {
-      $groupedRecordsTotals[$key] = ttTimeHelper::toAbsDuration($single_total);
-    }
-
-    return $groupedRecordsTotals;
   }
 
   // getDayHeadersForWeek - obtains day column headers for week view, which are simply day numbers in month.

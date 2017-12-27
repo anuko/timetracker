@@ -106,53 +106,28 @@ $_SESSION['project'] = $cl_project;
 $cl_task = $request->getParameter('task', ($request->getMethod()=='POST'? null : @$_SESSION['task']));
 $_SESSION['task'] = $cl_task;
 
-
-
-
-
-
-
-
-
-
-
-
-// Get column headers.
+// Get the data we need to display week view.
+// Get column headers, which are day numbers in month.
 $dayHeaders = ttTimeHelper::getDayHeadersForWeek($startDate->toString(DB_DATEFORMAT));
-// Build data array for the table.
+// Build data array for the table. Format is described in the function..
 $dataArray = ttTimeHelper::getDataForWeekView($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
-// Build day totals.
+// Build day totals (total durations for each day in week).
 $dayTotals = ttTimeHelper::getDayTotals($dataArray, $dayHeaders);
 
-// TODO: replace these two sample arrays with real data.
-$durations_with_labels = array(
-  array( // Row 0.
-    'id' => 'something goes here too', // Row identifier.
-    'label' => 'This is a label for row 0',
-    'day_0' => array('id' => '0_0', 'duration' => '00:00'),
-    'day_1' => array('id' => '0_1', 'duration' => '01:00'),
-    'day_2' => array('id' => '0_2', 'duration' => '02:00'),
-    'day_3' => array('id' => '0_3', 'duration' => null),
-    'day_4' => array('id' => '0_4', 'duration' => '04:00')
-  ),
-  array( // Row 1.
-    'label' => 'This is a label for row 1',
-    'day_0' => array('id' => '1_0', 'duration' => '00:30'),
-    'day_1' => array('id' => '1_1', 'duration' => '01:30'),
-    'day_2' => array('id' => '1_2', 'duration' => '02:30'),
-  )
-);
+// TODO: refactoring ongoing down from here.
 
-$totals = array(
-    'label' => 'Total:',
-    'day_0' => '00:30',
-    'day_1' => '02:30',
-    'day_2' => '04:30',
-    'day_3' => null,
-    'day_4' => '04:00',
-    'day_5' => null,
-    'day_6' => null
-);
+
+
+
+
+
+
+// Actually this is work in progress at this point, even documenting the array, as we still miss control IDs, and
+// editing entries is not yet implemented. When this is done, we will have to re-document the above.
+
+// TODO:
+// 1) escape cf_1 values in record identifiers as this may come from user for text fields.
+// 2) make sure we have IDs for cells, which are now missing.
 
 // Define rendering class for a label field to the left of durations.
 class LabelCellRenderer extends DefaultCellRenderer {
@@ -176,18 +151,6 @@ class TimeCellRenderer extends DefaultCellRenderer {
   }
 }
 
-//$durations = ttTimeHelper::getDurationsForWeek($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
-
-
-
-//$groupedRecords = ttTimeHelper::getGroupedRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
-//$dayTotals = ttTimeHelper::getGroupedRecordsTotals($groupedRecords);
-
-
-
-
-
-
 // Elements of weekTimeForm.
 $form = new Form('weekTimeForm');
 
@@ -210,7 +173,7 @@ $table = new Table('week_durations');
 // $table->setIAScript('markModified'); // TODO: write a script to mark table or particular cells as modified.
 $table->setTableOptions(array('width'=>'100%','cellspacing'=>'1','cellpadding'=>'3','border'=>'0'));
 $table->setRowOptions(array('class'=>'tableHeaderCentered'));
-$table->setData($dataArray); // $durations_with_labels);
+$table->setData($dataArray);
 // Add columns to table.
 $table->addColumn(new TableColumn('label', '', new LabelCellRenderer(), $dayTotals['label']));
 $table->addColumn(new TableColumn($dayHeaders['day_header_0'], $dayHeaders['day_header_0'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_0']]));
@@ -222,7 +185,6 @@ $table->addColumn(new TableColumn($dayHeaders['day_header_5'], $dayHeaders['day_
 $table->addColumn(new TableColumn($dayHeaders['day_header_6'], $dayHeaders['day_header_6'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_6']]));
 $table->setInteractive(false);
 $form->addInputElement($table);
-
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
 if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
@@ -464,14 +426,8 @@ if ($request->isPost()) {
 
 $week_total = ttTimeHelper::getTimeForWeek($user->getActiveUser(), $selected_date);
 
-
-
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
-$smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getActiveUser(), $cl_date));
-//$groupedRecords = ttTimeHelper::getGroupedRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
-//$smarty->assign('grouped_records', $groupedRecords);
-//$smarty->assign('grouped_records_totals', ttTimeHelper::getGroupedRecordsTotals($groupedRecords));
 
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
@@ -479,28 +435,6 @@ $smarty->assign('task_list', $task_list);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('timestring', $startDate->toString($user->date_format).' - '.$endDate->toString($user->date_format));
-
-// Prepare and assign date headers. Note how startDate moves to the end of the week, so it no longer holds correct start week value.
-$smarty->assign('date_0', $startDate->toString(DB_DATEFORMAT));
-$smarty->assign('day_header_0', $startDate->getDate());
-$startDate->incDay();
-$smarty->assign('date_1', $startDate->toString(DB_DATEFORMAT));
-$smarty->assign('day_header_1', $startDate->getDate());
-$startDate->incDay();
-$smarty->assign('date_2', $startDate->toString(DB_DATEFORMAT));
-$smarty->assign('day_header_2', $startDate->getDate());
-$startDate->incDay();
-$smarty->assign('date_3', $startDate->toString(DB_DATEFORMAT));
-$smarty->assign('day_header_3', $startDate->getDate());
-$startDate->incDay();
-$smarty->assign('date_4', $startDate->toString(DB_DATEFORMAT));
-$smarty->assign('day_header_4', $startDate->getDate());
-$startDate->incDay();
-$smarty->assign('date_5', $startDate->toString(DB_DATEFORMAT));
-$smarty->assign('day_header_5', $startDate->getDate());
-$startDate->incDay();
-$smarty->assign('date_6', $startDate->toString(DB_DATEFORMAT));
-$smarty->assign('day_header_6', $startDate->getDate());
 
 $smarty->assign('title', $i18n->getKey('title.time'));
 $smarty->assign('content_page_name', 'week.tpl');
