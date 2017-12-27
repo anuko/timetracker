@@ -110,23 +110,24 @@ $_SESSION['task'] = $cl_task;
 // Get column headers, which are day numbers in month.
 $dayHeaders = ttTimeHelper::getDayHeadersForWeek($startDate->toString(DB_DATEFORMAT));
 // Build data array for the table. Format is described in the function..
-$dataArray = ttTimeHelper::getDataForWeekView($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
+$dataArray = ttTimeHelper::getDataForWeekView($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT), $dayHeaders);
 // Build day totals (total durations for each day in week).
 $dayTotals = ttTimeHelper::getDayTotals($dataArray, $dayHeaders);
 
 // TODO: refactoring ongoing down from here.
 
+// 1) Start coding modification of existing records.
+// 2) Then adding new records for existing rows.
+// 3) Then add code and UI for adding a new row.
+
 // Actually this is work in progress at this point, even documenting the array, as we still miss control IDs, and
 // editing entries is not yet implemented. When this is done, we will have to re-document the above.
-
-// TODO:
-// 1) make sure we have IDs for cells, which are now missing.
 
 // Define rendering class for a label field to the left of durations.
 class LabelCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     $this->setOptions(array('width'=>200,'valign'=>'middle'));
-    $this->setValue(htmlspecialchars($value));
+    $this->setValue(htmlspecialchars($value)); // This escapes HTML for output.
     return $this->toString();
   }
 }
@@ -134,7 +135,7 @@ class LabelCellRenderer extends DefaultCellRenderer {
 // Define rendering class for a single cell for time entry in week view table.
 class TimeCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
-    $field_name = $table->getValueAt($row,$column)['id']; // Our text field names (and ids) are like x_y (row_column).
+    $field_name = $table->getValueAt($row,$column)['control_id']; // Our text field names (and ids) are like x_y (row_column).
     $field = new TextField($field_name);
     $field->setFormName($table->getFormName());
     $field->setSize(2);
@@ -169,13 +170,9 @@ $table->setRowOptions(array('class'=>'tableHeaderCentered'));
 $table->setData($dataArray);
 // Add columns to table.
 $table->addColumn(new TableColumn('label', '', new LabelCellRenderer(), $dayTotals['label']));
-$table->addColumn(new TableColumn($dayHeaders['day_header_0'], $dayHeaders['day_header_0'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_0']]));
-$table->addColumn(new TableColumn($dayHeaders['day_header_1'], $dayHeaders['day_header_1'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_1']]));
-$table->addColumn(new TableColumn($dayHeaders['day_header_2'], $dayHeaders['day_header_2'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_2']]));
-$table->addColumn(new TableColumn($dayHeaders['day_header_3'], $dayHeaders['day_header_3'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_3']]));
-$table->addColumn(new TableColumn($dayHeaders['day_header_4'], $dayHeaders['day_header_4'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_4']]));
-$table->addColumn(new TableColumn($dayHeaders['day_header_5'], $dayHeaders['day_header_5'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_5']]));
-$table->addColumn(new TableColumn($dayHeaders['day_header_6'], $dayHeaders['day_header_6'], new TimeCellRenderer(), $dayTotals[$dayHeaders['day_header_6']]));
+for ($i = 0; $i < 7; $i++) {
+  $table->addColumn(new TableColumn($dayHeaders[$i], $dayHeaders[$i], new TimeCellRenderer(), $dayTotals[$dayHeaders[$i]]));
+}
 $table->setInteractive(false);
 $form->addInputElement($table);
 

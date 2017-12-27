@@ -767,7 +767,7 @@ class ttTimeHelper {
   //     'day_6' => array('control_id' => '1_day_6', 'duration' => null)
   //   )
   // );
-  static function getDataForWeekView($user_id, $start_date, $end_date) {
+  static function getDataForWeekView($user_id, $start_date, $end_date, $dayHeaders) {
     // Start by obtaining all records in interval.
     $records = ttTimeHelper::getRecordsForInterval($user_id, $start_date, $end_date);
 
@@ -790,9 +790,14 @@ class ttTimeHelper {
       if ($pos < 0) {
         $dataArray[] = array('row_id' => $record_id,'label' => ttTimeHelper::makeRecordLabel($record)); // Insert row.
         $pos = ttTimeHelper::findRow($record_id, $dataArray);
+        // Insert empty cells with proper control ids.
+        for ($i = 0; $i < 7; $i++) {
+          $control_id = $pos.'_'. $dayHeaders[$i];
+          $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+        }
       }
-      // Insert cell data from $record.
-      $dataArray[$pos][$day_header] = array('id' => $record['id'],'duration' => $record['duration']);
+      // Insert actual cell data from $record (one cell only).
+      $dataArray[$pos][$day_header] = array('control_id' => $pos.'_'. $day_header, 'tt_log_id' => $record['id'],'duration' => $record['duration']);
     }
     return $dataArray;
   }
@@ -878,21 +883,21 @@ class ttTimeHelper {
   static function getDayHeadersForWeek($start_date) {
     $dayHeaders = array();
     $objDate = new DateAndTime(DB_DATEFORMAT, $start_date);
-    $dayHeaders['day_header_0'] = (string) $objDate->getDate();      // It returns an int on first call.
-    if (strlen($dayHeaders['day_header_0']) == 1)                    // Which is an implementation detail of DateAndTime class.
-      $dayHeaders['day_header_0'] = '0'.$dayHeaders['day_header_0']; // Add a 0 for single digit day.
+    $dayHeaders[] = (string) $objDate->getDate(); // It returns an int on first call.
+    if (strlen($dayHeaders[0]) == 1)              // Which is an implementation detail of DateAndTime class.
+      $dayHeaders[0] = '0'.$dayHeaders[0];        // Add a 0 for single digit day.
     $objDate->incDay();
-    $dayHeaders['day_header_1'] = $objDate->getDate(); // After incDay it returns a string with leading 0, when necessary.
+    $dayHeaders[] = $objDate->getDate(); // After incDay it returns a string with leading 0, when necessary.
     $objDate->incDay();
-    $dayHeaders['day_header_2'] = $objDate->getDate();
+    $dayHeaders[] = $objDate->getDate();
     $objDate->incDay();
-    $dayHeaders['day_header_3'] = $objDate->getDate();
+    $dayHeaders[] = $objDate->getDate();
     $objDate->incDay();
-    $dayHeaders['day_header_4'] = $objDate->getDate();
+    $dayHeaders[] = $objDate->getDate();
     $objDate->incDay();
-    $dayHeaders['day_header_5'] = $objDate->getDate();
+    $dayHeaders[] = $objDate->getDate();
     $objDate->incDay();
-    $dayHeaders['day_header_6'] = $objDate->getDate();
+    $dayHeaders[] = $objDate->getDate();
     unset($objDate);
     return $dayHeaders;
   }
