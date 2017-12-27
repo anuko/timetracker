@@ -109,6 +109,7 @@ $_SESSION['task'] = $cl_task;
 // Get the data we need to display week view.
 // Get column headers, which are day numbers in month.
 $dayHeaders = ttTimeHelper::getDayHeadersForWeek($startDate->toString(DB_DATEFORMAT));
+$lockedDays = ttTimeHelper::getLockedDaysForWeek($startDate->toString(DB_DATEFORMAT));
 // Build data array for the table. Format is described in the function..
 $dataArray = ttTimeHelper::getDataForWeekView($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT), $dayHeaders);
 // Build day totals (total durations for each day in week).
@@ -116,9 +117,10 @@ $dayTotals = ttTimeHelper::getDayTotals($dataArray, $dayHeaders);
 
 // TODO: refactoring ongoing down from here.
 
-// 1) Start coding modification of existing records.
-// 2) Then adding new records for existing rows.
-// 3) Then add code and UI for adding a new row.
+// 1) Handle editable - not editable records properly meaning that UI should reflect this.
+// 2) Start coding modification of existing records.
+// 3) Then adding new records for existing rows.
+// 4) Then add code and UI for adding a new row.
 
 // Actually this is work in progress at this point, even documenting the array, as we still miss control IDs, and
 // editing entries is not yet implemented. When this is done, we will have to re-document the above.
@@ -137,6 +139,10 @@ class TimeCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     $field_name = $table->getValueAt($row,$column)['control_id']; // Our text field names (and ids) are like x_y (row_column).
     $field = new TextField($field_name);
+    // Disable control if the date is locked.
+    global $lockedDays;
+    if ($lockedDays[$column-1])
+      $field->setEnabled(false);
     $field->setFormName($table->getFormName());
     $field->setSize(2);
     $field->setValue($table->getValueAt($row,$column)['duration']);

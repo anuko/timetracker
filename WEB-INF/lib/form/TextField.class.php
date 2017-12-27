@@ -36,33 +36,22 @@ class TextField extends FormElement {
     $this->name = $name;
   }
 
-  // TODO: refactoring ongoing down from here.
-	function getHtml() {
-		if (!$this->isEnabled()) {
-			$html = "<input name=\"$this->name\" value=\"".htmlspecialchars($this->getValue())."\" readonly>\n";
-		} else {
-			
-		    if ($this->id=="") $this->id = $this->name;
-		    
-			$html = "\n\t<input type=\"text\"";
-			$html .= " name=\"$this->name\" id=\"$this->id\"";
-			
-			if ($this->size!="")
-			  $html .= " size=\"$this->size\"";
-			  
-			if ($this->style!="")
-			   $html .= " style=\"$this->style\"";
-			  
-			if ($this->max_length!="")
-			   $html .= " maxlength=\"$this->max_length\"";
-			   
-			if ($this->on_change!="")
-			   $html .= " onchange=\"$this->on_change\"";
+  function getHtml() {
+    if (empty($this->id)) $this->id = $this->name;
+    $html = "\n\t<input type=\"text\"";
+    $html .= " id=\"$this->id\" name=\"$this->name\"";
+    if (!empty($this->size)) $html .= " size=\"$this->size\"";
+    if (!empty($this->style)) $html .= " style=\"$this->style\"";
 
-			$html .= " value=\"".htmlspecialchars($this->getValue())."\"";
-			$html .= ">";
-		}
-		
-		return $html;
-	}
+    if($this->isEnabled()) {
+      if (!empty($this->max_length)) $html .= " maxlength=\"$this->max_length\"";
+      if (!empty($this->on_change)) $html .= " onchange=\"$this->on_change\"";
+    }
+
+    $html .= " value=\"".htmlspecialchars($this->getValue())."\"";
+
+    if(!$this->isEnabled()) $html .= " readonly";
+    $html .= ">\n";
+    return $html;
+  }
 }

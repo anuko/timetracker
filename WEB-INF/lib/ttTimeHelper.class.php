@@ -747,24 +747,24 @@ class ttTimeHelper {
   //   array( // Row 0.
   //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623_0', // Row identifier. See ttTimeHelper::makeRecordIdentifier().
   //     'label' => 'Anuko - Time Tracker - Coding',              // Human readable label for the row describing what this time entry is for.
-  //     'day_0' => array('control_id' => '0_day_0', 'duration' => '00:00'), // control_id is row_id plus day header for column.
-  //     'day_1' => array('control_id' => '0_day_1', 'duration' => '01:00'),
-  //     'day_2' => array('control_id' => '0_day_2', 'duration' => '02:00'),
-  //     'day_3' => array('control_id' => '0_day_3', 'duration' => null),
-  //     'day_4' => array('control_id' => '0_day_4', 'duration' => '04:00'),
-  //     'day_5' => array('control_id' => '0_day_5', 'duration' => '04:00'),
-  //     'day_6' => array('control_id' => '0_day_6', 'duration' => null)
+  //     'day_0' => array('control_id' => '0_day_0', 'tt_log_id' => 12345, 'duration' => '00:00'), // control_id is row_id plus day header for column.
+  //     'day_1' => array('control_id' => '0_day_1', 'tt_log_id' => 12346, 'duration' => '01:00'),
+  //     'day_2' => array('control_id' => '0_day_2', 'tt_log_id' => 12347, 'duration' => '02:00'),
+  //     'day_3' => array('control_id' => '0_day_3', 'tt_log_id' => null, 'duration' => null),
+  //     'day_4' => array('control_id' => '0_day_4', 'tt_log_id' => 12348, 'duration' => '04:00'),
+  //     'day_5' => array('control_id' => '0_day_5', 'tt_log_id' => 12349, 'duration' => '04:00'),
+  //     'day_6' => array('control_id' => '0_day_6', 'tt_log_id' => null, 'duration' => null)
   //   ),
   //   array( // Row 1.
   //     'row_id' => 'bl:0_0',
   //     'label' => '', // In this case the label is empty as we don't have anything to put into it, as we only have billable flag.
-  //     'day_0' => array('control_id' => '1_day_0', 'duration' => null),
-  //     'day_1' => array('control_id' => '1_day_1', 'duration' => '01:30'),
-  //     'day_2' => array('control_id' => '1_day_2', 'duration' => null),
-  //     'day_3' => array('control_id' => '1_day_3', 'duration' => '02:30'),
-  //     'day_4' => array('control_id' => '1_day_4', 'duration' => '04:00'),
-  //     'day_5' => array('control_id' => '1_day_5', 'duration' => null),
-  //     'day_6' => array('control_id' => '1_day_6', 'duration' => null)
+  //     'day_0' => array('control_id' => '1_day_0', 'tt_log_id' => null, 'duration' => null),
+  //     'day_1' => array('control_id' => '1_day_1', 'tt_log_id' => 12350, 'duration' => '01:30'),
+  //     'day_2' => array('control_id' => '1_day_2', 'tt_log_id' => null, 'duration' => null),
+  //     'day_3' => array('control_id' => '1_day_3', 'tt_log_id' => 12351,'duration' => '02:30'),
+  //     'day_4' => array('control_id' => '1_day_4', 'tt_log_id' => 12352, 'duration' => '04:00'),
+  //     'day_5' => array('control_id' => '1_day_5', 'tt_log_id' => null, 'duration' => null),
+  //     'day_6' => array('control_id' => '1_day_6', 'tt_log_id' => null, 'duration' => null)
   //   )
   // );
   static function getDataForWeekView($user_id, $start_date, $end_date, $dayHeaders) {
@@ -900,6 +900,28 @@ class ttTimeHelper {
     $dayHeaders[] = $objDate->getDate();
     unset($objDate);
     return $dayHeaders;
+  }
+
+    // getLockedDaysForWeek - builds an arrays of locked days in week.
+  static function getLockedDaysForWeek($start_date) {
+    global $user;
+    $lockedDays = array();
+    $objDate = new DateAndTime(DB_DATEFORMAT, $start_date);
+    $lockedDays[] = $user->isDateLocked($objDate);
+    $objDate->incDay();
+    $lockedDays[] = $user->isDateLocked($objDate);
+    $objDate->incDay();
+    $lockedDays[] = $user->isDateLocked($objDate);
+    $objDate->incDay();
+    $lockedDays[] = $user->isDateLocked($objDate);
+    $objDate->incDay();
+    $lockedDays[] = $user->isDateLocked($objDate);
+    $objDate->incDay();
+    $lockedDays[] = $user->isDateLocked($objDate);
+    $objDate->incDay();
+    $lockedDays[] = $user->isDateLocked($objDate);
+    unset($objDate);
+    return $lockedDays;
   }
 
   // getDayTotals calculates total durations for each day from the existing data in $dataArray.
