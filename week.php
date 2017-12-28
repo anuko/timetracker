@@ -146,6 +146,12 @@ class TimeCellRenderer extends DefaultCellRenderer {
     $field->setFormName($table->getFormName());
     $field->setSize(2);
     $field->setValue($table->getValueAt($row,$column)['duration']);
+    // Disable control when time entry mode is TYPE_START_FINISH and there is no value in control
+    // because we can't supply start and finish times in week view - there are no fields for them.
+    global $user;
+    if (!$field->getValue() && TYPE_START_FINISH == $user->record_type) {
+        $field->setEnabled(false);
+    }
     $this->setValue($field->getHtml());
     return $this->toString();
   }
