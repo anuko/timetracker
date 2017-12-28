@@ -832,7 +832,7 @@ class ttTimeHelper {
     global $user;
     // Start with client.
     if ($user->isPluginEnabled('cl'))
-      $record_identifier = $record['client_id'] ? 'cl'.$record['client_id'] : '';
+      $record_identifier = $record['client_id'] ? 'cl:'.$record['client_id'] : '';
     // Add billable flag.
     if (!empty($record_identifier)) $record_identifier .= ',';
     $record_identifier .= 'bl:'.$record['billable'];
@@ -849,6 +849,28 @@ class ttTimeHelper {
     }
 
     return $record_identifier;
+  }
+
+  // parseFromWeekViewRow - obtains field value encoded in row identifier.
+  // For example, for a row id like "cl:546,bl:0,pr:23456,ts:27464,cf_1:example text"
+  // requesting a client "cl" should return 546.
+  static function parseFromWeekViewRow($row_id, $field_label) {
+    // Find beginning of label.
+    $pos = strpos($row_id, $field_label);
+    if ($pos === false) return null; // Not found.
+
+    // Strip suffix from row id.
+    $suffixPos = strrpos($row_id, '_');
+    if ($suffixPos)
+      $remaninder = substr($row_id, 0, $suffixPos);
+
+    // Find beginning of value.
+    $posBegin = 1 + strpos($remaninder, ':', $pos);
+    // Find end of value.
+    $posEnd = strpos($remaninder, ',', $posBegin);
+    if ($posEnd === false) $posEnd = strlen($remaninder);
+    // Return value.
+    return substr($remaninder, $posBegin, $posEnd - $posBegin);
   }
 
   // makeRecordLabel - builds a human readable label for a row in week view,
@@ -902,24 +924,15 @@ class ttTimeHelper {
     return $dayHeaders;
   }
 
-    // getLockedDaysForWeek - builds an arrays of locked days in week.
+    // getLockedDaysForWeek - builds an array of locked days in week.
   static function getLockedDaysForWeek($start_date) {
     global $user;
     $lockedDays = array();
     $objDate = new DateAndTime(DB_DATEFORMAT, $start_date);
-    $lockedDays[] = $user->isDateLocked($objDate);
-    $objDate->incDay();
-    $lockedDays[] = $user->isDateLocked($objDate);
-    $objDate->incDay();
-    $lockedDays[] = $user->isDateLocked($objDate);
-    $objDate->incDay();
-    $lockedDays[] = $user->isDateLocked($objDate);
-    $objDate->incDay();
-    $lockedDays[] = $user->isDateLocked($objDate);
-    $objDate->incDay();
-    $lockedDays[] = $user->isDateLocked($objDate);
-    $objDate->incDay();
-    $lockedDays[] = $user->isDateLocked($objDate);
+    for ($i = 0; $i < 7; $i++) {
+      $lockedDays[] = $user->isDateLocked($objDate);
+      $objDate->incDay();
+    }
     unset($objDate);
     return $lockedDays;
   }
@@ -947,12 +960,64 @@ class ttTimeHelper {
     return $dayTotals;
   }
 
+  // dateFromDayHeader calculates date from start date and day header in week view.
+  static function dateFromDayHeader($start_date, $day_header) {
+    $objDate = new DateAndTime(DB_DATEFORMAT, $start_date);
+    $currentDayHeader = (string) $objDate->getDate(); // It returns an int on first call.
+    if (strlen($currentDayHeader) == 1)               // Which is an implementation detail of DateAndTime class.
+      $currentDayHeader = '0'.$currentDayHeader;      // Add a 0 for single digit day.
+    $i = 1;
+    while ($currentDayHeader != $day_header && $i < 7) {
+      // Iterate through remaining days to find a match.
+      $objDate->incDay();
+      $currentDayHeader = $objDate->getDate(); // After incDay it returns a string with leading 0, when necessary.
+      $i++;
+    }
+    return $objDate->toString(DB_DATEFORMAT);
+  }
+
   // insertDurationFromWeekView - inserts a new record in log tables from a week view post.
   static function insertDurationFromWeekView($fields, $err) {
-    $err->add("Week view is work in progress. Inserting records is not yet implemented. Try again later.");
-    // $row_id, $day_header, $posted_duration, $start_date) { // TODO: potential fields?
+    global $i18n;
+    global $user;
 
-    return false; // Not implemented.
+    // Determine date for a new entry.
+    $entry_date = ttTimeHelper::dateFromDayHeader($fields['start_date'], $fields['day_header']);
+    $objEntryDate = new DateAndTime(DB_DATEFORMAT, $entry_date);
+
+    // Prohibit creating entries in future.
+    if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES) && $fields['browser_today']) {
+      $objBrowserToday = new DateAndTime(DB_DATEFORMAT, $fields['browser_today']);
+      if ($objEntryDate->after($objBrowserToday)) {
+        $err->add($i18n->getKey('error.future_date'));
+        return false;
+      }
+    }
+
+    // Temporary check for custom field and exit if one is found, as this is not yet implemented.
+    $temp = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'cf_1');
+    if ($temp) {
+      $err->add("Week view is work in progress. Inserting records with custom fields is not yet implemented. Try again later.");
+      return false;
+    }
+
+    // Prepare an array of fields for regular insert function.
+    $fields4insert = array();
+    $fields4insert['user_id'] = $user->getActiveUser();
+    $fields4insert['date'] = $entry_date;
+    $fields4insert['duration'] = $fields['duration'];
+    $fields4insert['client'] = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'cl');
+    $fields4insert['billable'] = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'bl');
+    $fields4insert['project'] = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'pr');
+    $fields4insert['task'] = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'ts');
+
+    // Try to insert a record.
+    $id = ttTimeHelper::insert($fields4insert);
+    if (!$id) return false; // Something failed.
+
+    // TODO: Deal with custom fieeld log here. Currently not implemented.
+
+    return true; // Not implemented.
   }
 
 

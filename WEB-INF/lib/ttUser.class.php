@@ -196,7 +196,7 @@ class ttUser {
       require_once(LIBRARY_DIR.'/tdcron/class.tdcron.entry.php');
 
       // Calculate the last occurrence of a lock.
-      $last = tdCron::getLastOccurrence($this->lock_spec, mktime());
+      $last = tdCron::getLastOccurrence($this->lock_spec, time());
       $lockdate = new DateAndTime(DB_DATEFORMAT, strftime('%Y-%m-%d', $last));
       if ($date->before($lockdate)) {
         return true;

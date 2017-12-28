@@ -272,7 +272,7 @@ $form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 600px; 
 $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
 if ($user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
-$form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.
+$form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'get_date()')); // User current date, which gets filled in on btn_submit click.
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.submit')));
 
 // If we have custom fields - add controls for them.
@@ -389,11 +389,12 @@ if ($request->isPost()) {
         if ($existingDuration == null) {
           // Insert a new record here.
           $fields = array();
+          $fields['row_id'] = $dataArray[$rowNumber]['row_id'];
+          $fields['day_header'] = $dayHeader;
+          $fields['start_date'] = $startDate->toString(DB_DATEFORMAT); // To be able to determine date for the entry using $dayHeader.
+          $fields['duration'] = $postedDuration;
+          $fields['browser_today'] = $request->getParameter('browser_today', null);
           $result = ttTimeHelper::insertDurationFromWeekView($fields, $err);
-            //$dataArray[$rowNumber]['row_id'],
-            //$dayHeader,
-            //$postedDuration,
-            //$startDate->toString(DB_DATEFORMAT));
         } elseif ($postedDuration == null || 0 == ttTimeHelper::toMinutes($postedDuration)) {
           // Delete an already existing record here.
           $result = ttTimeHelper::delete($dataArray[$rowNumber][$dayHeader]['tt_log_id'], $user->getActiveUser());
