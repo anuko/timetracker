@@ -394,14 +394,15 @@ if ($request->isPost()) {
           $fields['start_date'] = $startDate->toString(DB_DATEFORMAT); // To be able to determine date for the entry using $dayHeader.
           $fields['duration'] = $postedDuration;
           $fields['browser_today'] = $request->getParameter('browser_today', null);
-          $result = ttTimeHelper::insertDurationFromWeekView($fields, $err);
+          $result = ttTimeHelper::insertDurationFromWeekView($fields, $custom_fields, $err);
         } elseif ($postedDuration == null || 0 == ttTimeHelper::toMinutes($postedDuration)) {
           // Delete an already existing record here.
           $result = ttTimeHelper::delete($dataArray[$rowNumber][$dayHeader]['tt_log_id'], $user->getActiveUser());
         } else {
           $fields = array();
+          $fields['tt_log_id'] = $dataArray[$rowNumber][$dayHeader]['tt_log_id'];
+          $fields['duration'] = $postedDuration;
           $result = ttTimeHelper::modifyDurationFromWeekView($fields, $err);
-          //$result = ttTimeHelper::modifyDurationFromWeekView($dataArray[$rowNumber][$dayHeader]['tt_log_id'], $postedDuration, $user->getActiveUser());
         }
         if (!$result) break; // Break out of the loop in case of first error.
       }
@@ -412,7 +413,7 @@ if ($request->isPost()) {
       header('Location: week.php'); // Normal exit.
       exit();
     }
-    $err->add($i18n->getKey('error.db'));
+    // $err->add($i18n->getKey('error.db'));
     /*
     //
     //

@@ -977,7 +977,7 @@ class ttTimeHelper {
   }
 
   // insertDurationFromWeekView - inserts a new record in log tables from a week view post.
-  static function insertDurationFromWeekView($fields, $err) {
+  static function insertDurationFromWeekView($fields, $custom_fields, $err) {
     global $i18n;
     global $user;
 
@@ -994,13 +994,6 @@ class ttTimeHelper {
       }
     }
 
-    // Temporary check for custom field and exit if one is found, as this is not yet implemented.
-    $temp = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'cf_1');
-    if ($temp) {
-      $err->add("Week view is work in progress. Inserting records with custom fields is not yet implemented. Try again later.");
-      return false;
-    }
-
     // Prepare an array of fields for regular insert function.
     $fields4insert = array();
     $fields4insert['user_id'] = $user->getActiveUser();
@@ -1015,15 +1008,26 @@ class ttTimeHelper {
     $id = ttTimeHelper::insert($fields4insert);
     if (!$id) return false; // Something failed.
 
-    // TODO: Deal with custom fieeld log here. Currently not implemented.
+    // Insert custom field if we have it.
+    $result = true;
+    $cf_1 = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'cf_1');
+    if ($custom_fields && $cf_1) {
+      if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
+        $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], null, $cf_1);
+      elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
+        $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], $cf_1, null);
+    }
 
-    return true; // Not implemented.
+    return $result;
   }
 
 
   // modifyFromWeekView - modifies a duration of an existing record from a week view post.
   static function modifyDurationFromWeekView($fields, $err) {
-    $err->add("Week view is work in progress. Editing records is not yet implemented. Try again later.");
+
+    // Possible error conditions. Overlap? What else?
+
+    $err->add("Week view is work in progress. Editing records is not yet implemented. Try deleting and then inserting a record instead.");
     return false;
 
   // static function modifyDurationFromWeekView($tt_log_id, $new_duration, $user_id) {
