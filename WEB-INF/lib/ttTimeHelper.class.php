@@ -103,7 +103,7 @@ class ttTimeHelper {
   }
 
   // normalizeDuration - converts a valid time duration string to format 00:00.
-  static function normalizeDuration($value) {
+  static function normalizeDuration($value, $leadingZero = true) {
     $time_value = $value;
 
     // If we have a decimal format - convert to time format 00:00.
@@ -116,7 +116,7 @@ class ttTimeHelper {
       $mins = round($val * 60);
       $hours = (string)((int)($mins / 60));
       $mins = (string)($mins % 60);
-      if (strlen($hours) == 1)
+      if ($leadingZero && strlen($hours) == 1)
         $hours = '0'.$hours;
       if (strlen($mins) == 1)
         $mins = '0' . $mins;
@@ -129,7 +129,7 @@ class ttTimeHelper {
     // 0-99
     if ((strlen($time_value) >= 1) && (strlen($time_value) <= 2) && !isset($time_a[1])) {
       $hours = $time_a[0];
-      if (strlen($hours) == 1)
+      if ($leadingZero && strlen($hours) == 1)
         $hours = '0'.$hours;
        return $hours.':00';
     }
@@ -138,7 +138,7 @@ class ttTimeHelper {
     if ((strlen($time_value) >= 3) && (strlen($time_value) <= 4) && !isset($time_a[1])) {
       if (strlen($time_value)==3) $time_value = '0'.$time_value;
       $hours = substr($time_value,0,2);
-      if (strlen($hours) == 1)
+      if ($leadingZero && strlen($hours) == 1)
         $hours = '0'.$hours;
       return $hours.':'.substr($time_value,2,2);
     }
@@ -146,7 +146,7 @@ class ttTimeHelper {
     // 0:00-23:59 (24:00)
     if ((strlen($time_value) >= 4) && (strlen($time_value) <= 5) && isset($time_a[1])) {
       $hours = $time_a[0];
-      if (strlen($hours) == 1)
+      if ($leadingZero && strlen($hours) == 1)
         $hours = '0'.$hours;
       return $hours.':'.$time_a[1];
     }
@@ -945,6 +945,53 @@ class ttTimeHelper {
       $dayTotals[$dayHeader] = ttTimeHelper::toAbsDuration($dayTotals[$dayHeader]);
     }
     return $dayTotals;
+  }
+
+  // insertDurationFromWeekView - inserts a new record in log tables from a week view post.
+  static function insertDurationFromWeekView($fields, $err) {
+    $err->add("Week view is work in progress. Inserting records is not yet implemented. Try again later.");
+    // $row_id, $day_header, $posted_duration, $start_date) { // TODO: potential fields?
+
+    return false; // Not implemented.
+  }
+
+
+  // modifyFromWeekView - modifies a duration of an existing record from a week view post.
+  static function modifyDurationFromWeekView($fields, $err) {
+    $err->add("Week view is work in progress. Editing records is not yet implemented. Try again later.");
+    return false;
+
+  // static function modifyDurationFromWeekView($tt_log_id, $new_duration, $user_id) {
+
+    // TODO: handle overlaps and potential other error conditions such as going beyond 24 hr mark. Other errors?
+    // If the entry has start time, check if new duration goes beyond the existing day.
+
+    // Future entries. Possibly do this check out of this function.
+    /*
+     *     // Prohibit creating entries in future.
+    if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES)) {
+      $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
+      if ($selected_date->after($browser_today))
+        $err->add($i18n->getKey('error.future_date'));
+    }
+     */
+
+    /*
+     *     // Prohibit creating an overlapping record.
+    if ($err->no()) {
+      if (ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $cl_start, $cl_finish))
+        $err->add($i18n->getKey('error.overlap'));
+    }
+     */
+
+    $mdb2 = getConnection();
+
+    $sql = "update tt_log set duration = '$new_duration' where id = $tt_log_id and user_id = $user_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    return true;
   }
 }
 

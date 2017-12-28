@@ -282,11 +282,14 @@ if ($custom_fields && $custom_fields->fields[0]) {
       'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
   }
 }
+// TODO: the above needs to be refactored for week view.
+
+
 
 // Submit.
 if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
-
+/*
     // Validate user input.
     if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
       $err->add($i18n->getKey('error.client'));
@@ -346,7 +349,67 @@ if ($request->isPost()) {
       if (ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $cl_start, $cl_finish))
         $err->add($i18n->getKey('error.overlap'));
     }
-
+// TODO: refactor the above.
+*/
+    // Obtain values. Perhaps, it's best to iterate throigh posted parameters one by one,
+    // see if anything changed, and apply one change at a time until we see an error.
+    //  TODO: check for locked days just in case.
+    $result = true;
+    $rowNumber = 0;
+    // Iterate through existing rows.
+    foreach ($dataArray as $row) {
+      // Iterate through days.
+      foreach ($dayHeaders as $key => $dayHeader) {
+        // Do not process locked days.
+        if ($lockedDays[$key]) continue;
+        // Make control id for the cell.
+        $control_id = $rowNumber.'_'.$dayHeader;
+        // Optain existing and posted durations.
+        $postedDuration = $request->getParameter($control_id);
+        $existingDuration = $dataArray[$rowNumber][$dayHeader]['duration'];
+        // If posted value is not null, check and normalize it.
+        if ($postedDuration) {
+          if (ttTimeHelper::isValidDuration($postedDuration)) {
+            $postedDuration = ttTimeHelper::normalizeDuration($postedDuration, false); // No leading zero.
+          } else {
+            $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+            $result = false; break; // Break out. Stop any further processing.
+          }
+        }
+        // Do not process if value has not changed.
+        if ($postedDuration == $existingDuration)
+          continue;
+        // Posted value is different.
+        if ($existingDuration == null) {
+          // Insert a new record here.
+          $fields = array();
+          $result = ttTimeHelper::insertDurationFromWeekView($fields, $err);
+            //$dataArray[$rowNumber]['row_id'],
+            //$dayHeader,
+            //$postedDuration,
+            //$startDate->toString(DB_DATEFORMAT));
+        } elseif ($postedDuration == null || 0 == ttTimeHelper::toMinutes($postedDuration)) {
+          // Delete an already existing record here.
+          $result = ttTimeHelper::delete($dataArray[$rowNumber][$dayHeader]['tt_log_id'], $user->getActiveUser());
+        } else {
+          $fields = array();
+          $result = ttTimeHelper::modifyDurationFromWeekView($fields, $err);
+          //$result = ttTimeHelper::modifyDurationFromWeekView($dataArray[$rowNumber][$dayHeader]['tt_log_id'], $postedDuration, $user->getActiveUser());
+        }
+        if (!$result) break; // Break out of the loop in case of first error.
+      }
+      if (!$result) break; // Break out of the loop in case of first error.
+      $rowNumber++;
+    }
+    if ($result) {
+      header('Location: week.php'); // Normal exit.
+      exit();
+    }
+    $err->add($i18n->getKey('error.db'));
+    /*
+    //
+    //
+    //
     // Insert record.
     if ($err->no()) {
       $id = ttTimeHelper::insert(array(
@@ -403,7 +466,7 @@ if ($request->isPost()) {
       // Cannot complete, redirect for manual edit.
       header('Location: time_edit.php?id='.$record_id);
       exit();
-    }
+    }*/
   }
   elseif ($request->getParameter('onBehalfUser')) {
     if($user->canManageTeam()) {
