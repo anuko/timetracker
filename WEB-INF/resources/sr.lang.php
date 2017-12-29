@@ -326,6 +326,10 @@ $i18n_key_words = array(
 // Izmena vremenske forme. Pogledajte primer na https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Ovaj zapis je sačuvan sa početnim vremenom i nije greška.',
 
+// Week view form. See example at https://timetracker.anuko.com/week.php.
+// TODO: translate the following.
+// 'form.week.new_entry' => 'New entry',
+
 // Forma izveštaja. Pogledajte primer na https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Sačuvaj u omiljenima',
 'form.reports.confirm_delete' => 'Da li ste sigurni da želite obrisati omiljene izveštaje?',

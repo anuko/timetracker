@@ -329,6 +329,10 @@ $i18n_key_words = array(
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Ten wpis ma określony jedynie czas rozpoczęcia. To nie jest błąd.',
 
+// Week view form. See example at https://timetracker.anuko.com/week.php.
+// TODO: translate the following.
+// 'form.week.new_entry' => 'New entry',
+
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Zapisz jako ulubiony',
 'form.reports.confirm_delete' => 'Czy na pewno chcesz usunąć ten ulubiony raport?',

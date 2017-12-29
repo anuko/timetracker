@@ -324,6 +324,10 @@ $i18n_key_words = array(
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Den här tidsregistreringen har sparats utan sluttid. Fyll i en sluttid och klicka på Spara för att avsluta.',
 
+// Week view form. See example at https://timetracker.anuko.com/week.php.
+// TODO: translate the following.
+// 'form.week.new_entry' => 'New entry',
+
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Spara rapport som',
 'form.reports.confirm_delete' => 'Är du säker på att du vill ta bort den här rapporten från dina favoriter?',

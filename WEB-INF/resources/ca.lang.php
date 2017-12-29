@@ -342,6 +342,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
 
+// Week view form. See example at https://timetracker.anuko.com/week.php.
+// 'form.week.new_entry' => 'New entry',
+
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Guardar com a favorit',
 // TODO: translate the following.

@@ -321,6 +321,9 @@ $i18n_key_words = array(
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Эта запись сохранена только со временем начала. Это не ошибка.',
 
+// Week view form. See example at https://timetracker.anuko.com/week.php.
+'form.week.new_entry' => 'Новая запись',
+
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Сохранить как стандартный отчёт',
 'form.reports.confirm_delete' => 'Удалить стандартный отчёт?',

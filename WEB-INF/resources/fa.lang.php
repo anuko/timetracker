@@ -347,6 +347,10 @@ $i18n_key_words = array(
 // TODO: translate form.time_edit.uncompleted. 
 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
 
+// Week view form. See example at https://timetracker.anuko.com/week.php.
+// TODO: translate the following.
+// 'form.week.new_entry' => 'New entry',
+
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'ذخیره به عنوان برگزیده',
 'form.reports.confirm_delete' => 'آیا می خواهید گزارش برگزیده حذف شود؟',
