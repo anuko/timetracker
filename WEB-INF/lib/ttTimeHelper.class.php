@@ -587,6 +587,39 @@ class ttTimeHelper {
     return false;
   }
 
+  // ovelapsWithNewDuration - determines if an already existing tt_log record will overlap others
+  // if we were to change its duration to a new value.
+  //
+  // Another error condition we check for is whether new duration puts the existing record beyond the 24:00 day boundary.
+  static function ovelapsWithNewDuration($tt_log_id, $new_duration, $err) {
+    global $i18n;
+    $mdb2 = getConnection();
+
+    // Determine if we have start time in record, as checking does not makes sense otherwise.
+    $sql = "select start from tt_log  where id = $tt_log_id";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      if (!$res->numRows()) {
+        $err->add($i18n->getKey('error.db')); // This is not expected.
+        return true;
+      }
+      $val = $res->fetchRow();
+      if (!$val['start'])
+        return false; // No start time, therefore no overlap.
+    }
+
+    // TODO: Determine finish based on the existing record start and $new_duration.
+    // By probably using PHP time functions or toMinutes().
+
+    // Then check whether new duration puts the existing records beyond 24:00 boundary.
+    // and call the existing overlaps function.
+
+    // For now return an error, until we implement the above.
+
+    $err->add("Week view is work in progress. Editing records with existing start times is currently not supported in week view. Try day view instead.");
+    return true;
+  }
+
   // getRecord - retrieves a time record identified by its id.
   static function getRecord($id, $user_id) {
     global $user;
@@ -1024,38 +1057,22 @@ class ttTimeHelper {
 
   // modifyFromWeekView - modifies a duration of an existing record from a week view post.
   static function modifyDurationFromWeekView($fields, $err) {
+    global $i18n;
+    global $user;
 
-    // Possible error conditions. Overlap? What else?
-
-    $err->add("Week view is work in progress. Editing records is not yet implemented. Try deleting and then inserting a record instead.");
-    return false;
-
-  // static function modifyDurationFromWeekView($tt_log_id, $new_duration, $user_id) {
-
-    // TODO: handle overlaps and potential other error conditions such as going beyond 24 hr mark. Other errors?
-    // If the entry has start time, check if new duration goes beyond the existing day.
-
-    // Future entries. Possibly do this check out of this function.
-    /*
-     *     // Prohibit creating entries in future.
-    if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES)) {
-      $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
-      if ($selected_date->after($browser_today))
-        $err->add($i18n->getKey('error.future_date'));
+    // Possible errors: 1) Overlap if the existing record has start time. 2) Going beyond 24 hour boundary.
+    // TODO: rename this function.
+    // Handle different errors with specific error messages.
+    if (ttTimeHelper::ovelapsWithNewDuration($fields['tt_log_id'], $fields['duration'], $err)) {
+      // $err->add($i18n->getKey('error.overlap'));
+      return false;
     }
-     */
-
-    /*
-     *     // Prohibit creating an overlapping record.
-    if ($err->no()) {
-      if (ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $cl_start, $cl_finish))
-        $err->add($i18n->getKey('error.overlap'));
-    }
-     */
 
     $mdb2 = getConnection();
-
-    $sql = "update tt_log set duration = '$new_duration' where id = $tt_log_id and user_id = $user_id";
+    $duration = $fields['duration'];
+    $tt_log_id = $fields['tt_log_id'];
+    $user_id = $user->getActiveUser();
+    $sql = "update tt_log set duration = '$duration' where id = $tt_log_id and user_id = $user_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
