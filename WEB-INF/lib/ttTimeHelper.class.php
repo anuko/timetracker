@@ -587,37 +587,54 @@ class ttTimeHelper {
     return false;
   }
 
-  // ovelapsWithNewDuration - determines if an already existing tt_log record will overlap others
-  // if we were to change its duration to a new value.
-  //
-  // Another error condition we check for is whether new duration puts the existing record beyond the 24:00 day boundary.
-  static function ovelapsWithNewDuration($tt_log_id, $new_duration, $err) {
+  // wvCanModify (weekViewCanModify) - determines if an  already existing tt_log record
+  // can be modified with a new user-provided duration.
+  static function wvCanModify($tt_log_id, $new_duration, $err) {
     global $i18n;
     $mdb2 = getConnection();
 
-    // Determine if we have start time in record, as checking does not makes sense otherwise.
-    $sql = "select start from tt_log  where id = $tt_log_id";
+    // Determine if we have start time in record, as further checking does not makes sense otherwise.
+    $sql = "select user_id, date, start, duration from tt_log  where id = $tt_log_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if (!$res->numRows()) {
         $err->add($i18n->getKey('error.db')); // This is not expected.
-        return true;
+        return false;
       }
       $val = $res->fetchRow();
+      $oldDuration = $val['duration'];
       if (!$val['start'])
-        return false; // No start time, therefore no overlap.
+        return true; // There is no start time in the record, therefore safe to modify.
     }
 
-    // TODO: Determine finish based on the existing record start and $new_duration.
-    // By probably using PHP time functions or toMinutes().
+    // We do have start time.
+    // Quick test if new duration is less then already existing.
+    $newMinutes = ttTimeHelper::toMinutes($new_duration);
+    $oldMinutes = ttTimeHelper::toMinutes($oldDuration);
+    if ($newMinutes < $oldMinutes)
+      return true; // Safe to modify.
 
-    // Then check whether new duration puts the existing records beyond 24:00 boundary.
-    // and call the existing overlaps function.
+    // Does the new duration put the record beyond 24:00 boundary?
+    $startMinutes = ttTimeHelper::toMinutes($val['start']);
+    $newEndMinutes = $startMinutes + $newMinutes;
+    if ($newEndMinutes > 1440) {
+      // Invalid duration, as new duration puts the record beyond current day.
+      $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+      return false;
+    }
 
-    // For now return an error, until we implement the above.
+    // Does the new duration causes the record to overlap with others?
+    $user_id = $val['user_id'];
+    $date = $val['date'];
+    $startMinutes = ttTimeHelper::toMinutes($val['start']);
+    $start = ttTimeHelper::toAbsDuration($startMinutes);
+    $finish = ttTimeHelper::toAbsDuration($newEndMinutes);
+    if (ttTimeHelper::overlaps($user_id, $date, $start, $finish, $tt_log_id)) {
+      $err->add($i18n->getKey('error.overlap'));
+      return false;
+    }
 
-    $err->add("Week view is work in progress. Editing records with existing start times is currently not supported in week view. Try day view instead.");
-    return true;
+    return true; // There are no conflicts, safe to modify.
   }
 
   // getRecord - retrieves a time record identified by its id.
@@ -1063,7 +1080,7 @@ class ttTimeHelper {
     // Possible errors: 1) Overlap if the existing record has start time. 2) Going beyond 24 hour boundary.
     // TODO: rename this function.
     // Handle different errors with specific error messages.
-    if (ttTimeHelper::ovelapsWithNewDuration($fields['tt_log_id'], $fields['duration'], $err)) {
+    if (!ttTimeHelper::wvCanModify($fields['tt_log_id'], $fields['duration'], $err)) {
       // $err->add($i18n->getKey('error.overlap'));
       return false;
     }
