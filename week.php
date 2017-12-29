@@ -338,7 +338,10 @@ if ($request->isPost()) {
             continue;
           // Posted value is different.
           if ($existingDuration == null) {
-            // Insert a new record here.
+            // Skip inserting 0 duration values.
+            if (0 == ttTimeHelper::toMinutes($postedDuration))
+              continue;
+            // Insert a new record.
             $fields = array();
             $fields['row_id'] = $dataArray[$rowNumber]['row_id'];
             if (!$fields['row_id']) {
