@@ -30,6 +30,7 @@ require_once('initialize.php');
 import('form.Form');
 import('form.DefaultCellRenderer');
 import('form.Table');
+import('form.TextField');
 import('ttUserHelper');
 import('ttTeamHelper');
 import('ttClientHelper');
@@ -115,20 +116,23 @@ $dataArray = ttTimeHelper::getDataForWeekView($user->getActiveUser(), $startDate
 // Build day totals (total durations for each day in week).
 $dayTotals = ttTimeHelper::getDayTotals($dataArray, $dayHeaders);
 
-// TODO: refactoring ongoing down from here.
-
-// 1) Handle editable - not editable records properly meaning that UI should reflect this.
-// 2) Start coding modification of existing records.
-// 3) Then adding new records for existing rows.
-// 4) Then add code and UI for adding a new row.
-
-// Actually this is work in progress at this point, even documenting the array, as we still miss control IDs, and
-// editing entries is not yet implemented. When this is done, we will have to re-document the above.
-
 // Define rendering class for a label field to the left of durations.
 class LabelCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     $this->setOptions(array('width'=>200,'valign'=>'middle'));
+    // Special handling for row 0, which represents a new week entry.
+    if (0 == $row) {
+      $this->setOptions(array('style'=>'text-align: center; font-weight: bold;'));
+    }
+    // Special handling for not billable entries.
+    /* // TODO: this does not work and should be coded properly.
+    if ($row > 0) {
+      $row_id = $table->getValueAt($row,1+$column)['row_id'];
+      $billable = ttTimeHelper::parseFromWeekViewRow($row_id, 'bl');
+      if (!$billable) {
+        $this->setOptions(array('class'=>'not_billable')); // TODO: Should not we add options instead? How does it work exactly?
+      }
+    }*/
     $this->setValue(htmlspecialchars($value)); // This escapes HTML for output.
     return $this->toString();
   }
@@ -255,20 +259,6 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
 }
 
 // Add other controls.
-if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
-  $form->addInput(array('type'=>'text','name'=>'start','value'=>$cl_start,'onchange'=>"formDisable('start');"));
-  $form->addInput(array('type'=>'text','name'=>'finish','value'=>$cl_finish,'onchange'=>"formDisable('finish');"));
-  if (!$user->canManageTeam() && defined('READONLY_START_FINISH') && isTrue(READONLY_START_FINISH)) {
-    // Make the start and finish fields read-only.
-    $form->getElement('start')->setEnabled(false);
-    $form->getElement('finish')->setEnabled(false);
-  }
-}
-if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
-  $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
-if (!defined('NOTE_INPUT_HEIGHT'))
-	define('NOTE_INPUT_HEIGHT', 40);
-$form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 600px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
 $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
 if ($user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
@@ -288,193 +278,103 @@ if ($custom_fields && $custom_fields->fields[0]) {
       'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
   }
 }
-// TODO: the above needs to be refactored for week view.
-
-
 
 // Submit.
 if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
-/*
-    // Validate user input.
-    if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
-      $err->add($i18n->getKey('error.client'));
-    if ($custom_fields) {
-      if (!ttValidString($cl_cf_1, !$custom_fields->fields[0]['required'])) $err->add($i18n->getKey('error.field'), $custom_fields->fields[0]['label']);
-    }
-    if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-      if (!$cl_project) $err->add($i18n->getKey('error.project'));
-    }
-    if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode && $user->task_required) {
-      if (!$cl_task) $err->add($i18n->getKey('error.task'));
-    }
-    if (strlen($cl_duration) == 0) {
-      if ($cl_start || $cl_finish) {
-        if (!ttTimeHelper::isValidTime($cl_start))
-          $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start'));
-        if ($cl_finish) {
-          if (!ttTimeHelper::isValidTime($cl_finish))
-            $err->add($i18n->getKey('error.field'), $i18n->getKey('label.finish'));
-          if (!ttTimeHelper::isValidInterval($cl_start, $cl_finish))
-            $err->add($i18n->getKey('error.interval'), $i18n->getKey('label.finish'), $i18n->getKey('label.start'));
-        }
-      } else {
-        if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
-          $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.start'));
-          $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.finish'));
-        }
-        if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
-          $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.duration'));
+    // Validate user input for row 0.
+    // Determine if a new entry was posted.
+    $newEntryPosted = false;
+    foreach($dayHeaders as $dayHeader) {
+      $control_id = '0_'.$dayHeader;
+      if ($request->getParameter($control_id)) {
+        $newEntryPosted = true;
+        break;
       }
-    } else {
-      if (!ttTimeHelper::isValidDuration($cl_duration))
-        $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
     }
-    if (!ttValidString($cl_note, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.note'));
-    // Finished validating user input.
-
-    // Prohibit creating entries in future.
-    if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES)) {
-      $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
-      if ($selected_date->after($browser_today))
-        $err->add($i18n->getKey('error.future_date'));
+    if ($newEntryPosted) {
+      if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
+        $err->add($i18n->getKey('error.client'));
+      if ($custom_fields) {
+        if (!ttValidString($cl_cf_1, !$custom_fields->fields[0]['required'])) $err->add($i18n->getKey('error.field'), $custom_fields->fields[0]['label']);
+      }
+      if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
+        if (!$cl_project) $err->add($i18n->getKey('error.project'));
+      }
+      if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode && $user->task_required) {
+        if (!$cl_task) $err->add($i18n->getKey('error.task'));
+      }
     }
 
-    // Prohibit creating entries in locked range.
-    if ($user->isDateLocked($selected_date))
-      $err->add($i18n->getKey('error.range_locked'));
-
-    // Prohibit creating another uncompleted record.
+    // Process the table of values.
     if ($err->no()) {
-      if (($not_completed_rec = ttTimeHelper::getUncompleted($user->getActiveUser())) && (($cl_finish == '') && ($cl_duration == '')))
-        $err->add($i18n->getKey('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->getKey('error.goto_uncompleted')."</a>");
-    }
 
-    // Prohibit creating an overlapping record.
-    if ($err->no()) {
-      if (ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $cl_start, $cl_finish))
-        $err->add($i18n->getKey('error.overlap'));
-    }
-// TODO: refactor the above.
-*/
-    // Obtain values. Perhaps, it's best to iterate throigh posted parameters one by one,
-    // see if anything changed, and apply one change at a time until we see an error.
-    //  TODO: check for locked days just in case.
-    $result = true;
-    $rowNumber = 0;
-    // Iterate through existing rows.
-    foreach ($dataArray as $row) {
-      // Iterate through days.
-      foreach ($dayHeaders as $key => $dayHeader) {
-        // Do not process locked days.
-        if ($lockedDays[$key]) continue;
-        // Make control id for the cell.
-        $control_id = $rowNumber.'_'.$dayHeader;
-        // Optain existing and posted durations.
-        $postedDuration = $request->getParameter($control_id);
-        $existingDuration = $dataArray[$rowNumber][$dayHeader]['duration'];
-        // If posted value is not null, check and normalize it.
-        if ($postedDuration) {
-          if (ttTimeHelper::isValidDuration($postedDuration)) {
-            $postedDuration = ttTimeHelper::normalizeDuration($postedDuration, false); // No leading zero.
-          } else {
-            $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
-            $result = false; break; // Break out. Stop any further processing.
+      // Obtain values. Perhaps, it's best to iterate throigh posted parameters one by one,
+      // see if anything changed, and apply one change at a time until we see an error.
+      $result = true;
+      $rowNumber = 0;
+      // Iterate through existing rows.
+      foreach ($dataArray as $row) {
+        // Iterate through days.
+        foreach ($dayHeaders as $key => $dayHeader) {
+          // Do not process locked days.
+          if ($lockedDays[$key]) continue;
+          // Make control id for the cell.
+          $control_id = $rowNumber.'_'.$dayHeader;
+          // Optain existing and posted durations.
+          $postedDuration = $request->getParameter($control_id);
+          $existingDuration = $dataArray[$rowNumber][$dayHeader]['duration'];
+          // If posted value is not null, check and normalize it.
+          if ($postedDuration) {
+            if (ttTimeHelper::isValidDuration($postedDuration)) {
+              $postedDuration = ttTimeHelper::normalizeDuration($postedDuration, false); // No leading zero.
+            } else {
+              $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+              $result = false; break; // Break out. Stop any further processing.
+            }
           }
-        }
-        // Do not process if value has not changed.
-        if ($postedDuration == $existingDuration)
-          continue;
-        // Posted value is different.
-        if ($existingDuration == null) {
-          // Insert a new record here.
-          $fields = array();
-          $fields['row_id'] = $dataArray[$rowNumber]['row_id'];
-          $fields['day_header'] = $dayHeader;
-          $fields['start_date'] = $startDate->toString(DB_DATEFORMAT); // To be able to determine date for the entry using $dayHeader.
-          $fields['duration'] = $postedDuration;
-          $fields['browser_today'] = $request->getParameter('browser_today', null);
-          $result = ttTimeHelper::insertDurationFromWeekView($fields, $custom_fields, $err);
-        } elseif ($postedDuration == null || 0 == ttTimeHelper::toMinutes($postedDuration)) {
-          // Delete an already existing record here.
-          $result = ttTimeHelper::delete($dataArray[$rowNumber][$dayHeader]['tt_log_id'], $user->getActiveUser());
-        } else {
-          $fields = array();
-          $fields['tt_log_id'] = $dataArray[$rowNumber][$dayHeader]['tt_log_id'];
-          $fields['duration'] = $postedDuration;
-          $result = ttTimeHelper::modifyDurationFromWeekView($fields, $err);
+          // Do not process if value has not changed.
+          if ($postedDuration == $existingDuration)
+            continue;
+          // Posted value is different.
+          if ($existingDuration == null) {
+            // Insert a new record here.
+            $fields = array();
+            $fields['row_id'] = $dataArray[$rowNumber]['row_id'];
+            if (!$fields['row_id']) {
+              // Special handling for row 0, a new entry. Need to construct row_id.
+              $record = array();
+              $record['client_id'] = $cl_client;
+              $record['billable'] = $cl_billable ? '1' : '0';
+              $record['project_id'] = $cl_project;
+              $record['task_id'] = $cl_task;
+              $record['cf_1_value'] = $cl_cf_1;
+              $fields['row_id'] = ttTimeHelper::makeRecordIdentifier($record).'_0';
+            }
+            $fields['day_header'] = $dayHeader;
+            $fields['start_date'] = $startDate->toString(DB_DATEFORMAT); // To be able to determine date for the entry using $dayHeader.
+            $fields['duration'] = $postedDuration;
+            $fields['browser_today'] = $request->getParameter('browser_today', null);
+            $result = ttTimeHelper::insertDurationFromWeekView($fields, $custom_fields, $err);
+          } elseif ($postedDuration == null || 0 == ttTimeHelper::toMinutes($postedDuration)) {
+            // Delete an already existing record here.
+            $result = ttTimeHelper::delete($dataArray[$rowNumber][$dayHeader]['tt_log_id'], $user->getActiveUser());
+          } else {
+            $fields = array();
+            $fields['tt_log_id'] = $dataArray[$rowNumber][$dayHeader]['tt_log_id'];
+            $fields['duration'] = $postedDuration;
+            $result = ttTimeHelper::modifyDurationFromWeekView($fields, $err);
+          }
+          if (!$result) break; // Break out of the loop in case of first error.
         }
         if (!$result) break; // Break out of the loop in case of first error.
+        $rowNumber++;
       }
-      if (!$result) break; // Break out of the loop in case of first error.
-      $rowNumber++;
-    }
-    if ($result) {
-      header('Location: week.php'); // Normal exit.
-      exit();
-    }
-    // $err->add($i18n->getKey('error.db'));
-    /*
-    //
-    //
-    //
-    // Insert record.
-    if ($err->no()) {
-      $id = ttTimeHelper::insert(array(
-        'date' => $cl_date,
-        'user_id' => $user->getActiveUser(),
-        'client' => $cl_client,
-        'project' => $cl_project,
-        'task' => $cl_task,
-        'start' => $cl_start,
-        'finish' => $cl_finish,
-        'duration' => $cl_duration,
-        'note' => $cl_note,
-        'billable' => $cl_billable));
-
-      // Insert a custom field if we have it.
-      $result = true;
-      if ($id && $custom_fields && $cl_cf_1) {
-        if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
-          $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], null, $cl_cf_1);
-        elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
-          $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], $cl_cf_1, null);
-      }
-      if ($id && $result) {
-        header('Location: time.php');
+      if ($result) {
+        header('Location: week.php'); // Normal exit.
         exit();
       }
-      $err->add($i18n->getKey('error.db'));
     }
-  } elseif ($request->getParameter('btn_stop')) {
-    // Stop button pressed to finish an uncompleted record.
-    $record_id = $request->getParameter('record_id');
-    $record = ttTimeHelper::getRecord($record_id, $user->getActiveUser());
-    $browser_date = $request->getParameter('browser_date');
-    $browser_time = $request->getParameter('browser_time');
-
-    // Can we complete this record?
-    if ($record['date'] == $browser_date                                // closing today's record
-      && ttTimeHelper::isValidInterval($record['start'], $browser_time) // finish time is greater than start time
-      && !ttTimeHelper::overlaps($user->getActiveUser(), $browser_date, $record['start'], $browser_time)) { // no overlap
-      $res = ttTimeHelper::update(array(
-          'id'=>$record['id'],
-          'date'=>$record['date'],
-          'user_id'=>$user->getActiveUser(),
-          'client'=>$record['client_id'],
-          'project'=>$record['project_id'],
-          'task'=>$record['task_id'],
-          'start'=>$record['start'],
-          'finish'=>$browser_time,
-          'note'=>$record['comment'],
-          'billable'=>$record['billable']));
-      if (!$res)
-        $err->add($i18n->getKey('error.db'));
-    } else {
-      // Cannot complete, redirect for manual edit.
-      header('Location: time_edit.php?id='.$record_id);
-      exit();
-    }*/
   }
   elseif ($request->getParameter('onBehalfUser')) {
     if($user->canManageTeam()) {

@@ -22,6 +22,35 @@
           <td>{$forms.weekTimeForm.onBehalfUser.control}</td>
         </tr>
 {/if}
+{if $user->isPluginEnabled('cl')}
+        <tr>
+          <td align="right">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}:</td>
+          <td>{$forms.weekTimeForm.client.control}</td>
+        </tr>
+{/if}
+{if $user->isPluginEnabled('iv')}
+        <tr>
+          <td align="right">&nbsp;</td>
+          <td><label>{$forms.weekTimeForm.billable.control}{$i18n.form.time.billable}</label></td>
+        </tr>
+{/if}
+{if ($custom_fields && $custom_fields->fields[0])}
+        <tr>
+          <td align="right">{$custom_fields->fields[0]['label']|escape}{if $custom_fields->fields[0]['required']} (*){/if}:</td><td>{$forms.weekTimeForm.cf_1.control}</td>
+        </tr>
+{/if}
+{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+        <tr>
+          <td align="right">{$i18n.label.project} (*):</td>
+          <td>{$forms.weekTimeForm.project.control}</td>
+        </tr>
+{/if}
+{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+        <tr>
+          <td align="right">{$i18n.label.task}:</td>
+          <td>{$forms.weekTimeForm.task.control}</td>
+        </tr>
+{/if}
       </table>
     </td>
     <td valign="top">

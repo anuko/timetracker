@@ -794,34 +794,55 @@ class ttTimeHelper {
   //
   // Description of $dataArray format that the function returns.
   // $dataArray = array(
-  //   array( // Row 0.
-  //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623_0', // Row identifier. See ttTimeHelper::makeRecordIdentifier().
-  //     'label' => 'Anuko - Time Tracker - Coding',              // Human readable label for the row describing what this time entry is for.
-  //     'day_0' => array('control_id' => '0_day_0', 'tt_log_id' => 12345, 'duration' => '00:00'), // control_id is row_id plus day header for column.
-  //     'day_1' => array('control_id' => '0_day_1', 'tt_log_id' => 12346, 'duration' => '01:00'),
-  //     'day_2' => array('control_id' => '0_day_2', 'tt_log_id' => 12347, 'duration' => '02:00'),
+  //   array( // Row 0. This is a special, one-off row for a new week entry with empty values.
+  //     'row_id' => null', // Row identifier. Null for a new entry.
+  //     'label' => 'New entry', // Human readable label for the row describing what this time entry is for.
+  //     'day_0' => array('control_id' => '0_day_0', 'tt_log_id' => null, 'duration' => null), // control_id is row_id plus day header for column.
+  //     'day_1' => array('control_id' => '0_day_1', 'tt_log_id' => null, 'duration' => null),
+  //     'day_2' => array('control_id' => '0_day_2', 'tt_log_id' => null, 'duration' => null),
   //     'day_3' => array('control_id' => '0_day_3', 'tt_log_id' => null, 'duration' => null),
-  //     'day_4' => array('control_id' => '0_day_4', 'tt_log_id' => 12348, 'duration' => '04:00'),
-  //     'day_5' => array('control_id' => '0_day_5', 'tt_log_id' => 12349, 'duration' => '04:00'),
+  //     'day_4' => array('control_id' => '0_day_4', 'tt_log_id' => null, 'duration' => null),
+  //     'day_5' => array('control_id' => '0_day_5', 'tt_log_id' => null, 'duration' => null),
   //     'day_6' => array('control_id' => '0_day_6', 'tt_log_id' => null, 'duration' => null)
   //   ),
   //   array( // Row 1.
+  //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623_0', // Row identifier. See ttTimeHelper::makeRecordIdentifier().
+  //     'label' => 'Anuko - Time Tracker - Coding',              // Human readable label for the row describing what this time entry is for.
+  //     'day_0' => array('control_id' => '1_day_0', 'tt_log_id' => 12345, 'duration' => '00:00'), // control_id is row_id plus day header for column.
+  //     'day_1' => array('control_id' => '1_day_1', 'tt_log_id' => 12346, 'duration' => '01:00'),
+  //     'day_2' => array('control_id' => '1_day_2', 'tt_log_id' => 12347, 'duration' => '02:00'),
+  //     'day_3' => array('control_id' => '1_day_3', 'tt_log_id' => null, 'duration' => null),
+  //     'day_4' => array('control_id' => '1_day_4', 'tt_log_id' => 12348, 'duration' => '04:00'),
+  //     'day_5' => array('control_id' => '1_day_5', 'tt_log_id' => 12349, 'duration' => '04:00'),
+  //     'day_6' => array('control_id' => '1_day_6', 'tt_log_id' => null, 'duration' => null)
+  //   ),
+  //   array( // Row 2.
   //     'row_id' => 'bl:0_0',
   //     'label' => '', // In this case the label is empty as we don't have anything to put into it, as we only have billable flag.
-  //     'day_0' => array('control_id' => '1_day_0', 'tt_log_id' => null, 'duration' => null),
-  //     'day_1' => array('control_id' => '1_day_1', 'tt_log_id' => 12350, 'duration' => '01:30'),
-  //     'day_2' => array('control_id' => '1_day_2', 'tt_log_id' => null, 'duration' => null),
-  //     'day_3' => array('control_id' => '1_day_3', 'tt_log_id' => 12351,'duration' => '02:30'),
-  //     'day_4' => array('control_id' => '1_day_4', 'tt_log_id' => 12352, 'duration' => '04:00'),
-  //     'day_5' => array('control_id' => '1_day_5', 'tt_log_id' => null, 'duration' => null),
-  //     'day_6' => array('control_id' => '1_day_6', 'tt_log_id' => null, 'duration' => null)
+  //     'day_0' => array('control_id' => '2_day_0', 'tt_log_id' => null, 'duration' => null),
+  //     'day_1' => array('control_id' => '2_day_1', 'tt_log_id' => 12350, 'duration' => '01:30'),
+  //     'day_2' => array('control_id' => '2_day_2', 'tt_log_id' => null, 'duration' => null),
+  //     'day_3' => array('control_id' => '2_day_3', 'tt_log_id' => 12351,'duration' => '02:30'),
+  //     'day_4' => array('control_id' => '2_day_4', 'tt_log_id' => 12352, 'duration' => '04:00'),
+  //     'day_5' => array('control_id' => '2_day_5', 'tt_log_id' => null, 'duration' => null),
+  //     'day_6' => array('control_id' => '2_day_6', 'tt_log_id' => null, 'duration' => null)
   //   )
   // );
   static function getDataForWeekView($user_id, $start_date, $end_date, $dayHeaders) {
+    global $i18n;
+
     // Start by obtaining all records in interval.
     $records = ttTimeHelper::getRecordsForInterval($user_id, $start_date, $end_date);
 
     $dataArray = array();
+
+    // Construct the first row for a brand new entry.
+    $dataArray[] = array('row_id' => null,'label' => $i18n->getKey('form.week.new_entry')); // Insert row.
+    // Insert empty cells with proper control ids.
+    for ($i = 0; $i < 7; $i++) {
+      $control_id = '0_'. $dayHeaders[$i];
+      $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+    }
 
     // Iterate through records and build $dataArray cell by cell.
     foreach ($records as $record) {
