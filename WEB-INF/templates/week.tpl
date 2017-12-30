@@ -51,6 +51,10 @@
           <td>{$forms.weekTimeForm.task.control}</td>
         </tr>
 {/if}
+        <tr>
+          <td align="right">{$i18n.label.note}:</td>
+          <td align="left">{$forms.weekTimeForm.note.control}</td>
+        </tr>
       </table>
     </td>
     <td valign="top">

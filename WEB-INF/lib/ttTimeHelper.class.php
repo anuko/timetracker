@@ -1074,6 +1074,7 @@ class ttTimeHelper {
     $fields4insert['billable'] = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'bl');
     $fields4insert['project'] = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'pr');
     $fields4insert['task'] = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'ts');
+    $fields4insert['note'] = $fields['note'];
 
     // Try to insert a record.
     $id = ttTimeHelper::insert($fields4insert);

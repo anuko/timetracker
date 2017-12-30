@@ -106,6 +106,7 @@ $cl_project = $request->getParameter('project', ($request->getMethod()=='POST'? 
 $_SESSION['project'] = $cl_project;
 $cl_task = $request->getParameter('task', ($request->getMethod()=='POST'? null : @$_SESSION['task']));
 $_SESSION['task'] = $cl_task;
+$cl_note = trim($request->getParameter('note'));
 
 // Get the data we need to display week view.
 // Get column headers, which are day numbers in month.
@@ -257,6 +258,7 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 }
+$form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 250px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
 
 // Add other controls.
 $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
@@ -353,6 +355,7 @@ if ($request->isPost()) {
               $record['task_id'] = $cl_task;
               $record['cf_1_value'] = $cl_cf_1;
               $fields['row_id'] = ttTimeHelper::makeRecordIdentifier($record).'_0';
+              $fields['note'] = $cl_note;
             }
             $fields['day_header'] = $dayHeader;
             $fields['start_date'] = $startDate->toString(DB_DATEFORMAT); // To be able to determine date for the entry using $dayHeader.
