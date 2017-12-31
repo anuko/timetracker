@@ -810,9 +810,9 @@ class ttTeamHelper {
     $inactive_teams = array();
     $mdb2 = getConnection();
 
-    // Get all team ids for teams created or modified more than 1 year ago.
+    // Get all team ids for teams created or modified more than 6 months ago.
     // $ts = date('Y-m-d', strtotime('-1 year'));
-    $ts = date('Y-m-d', strtotime('-4 month'));
+    $ts = date('Y-m-d', strtotime('-6 month'));
     $sql =  "select id from tt_teams where timestamp < '$ts' order by id";
     $res = $mdb2->query($sql);
 

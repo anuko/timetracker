@@ -126,14 +126,13 @@ class LabelCellRenderer extends DefaultCellRenderer {
       $this->setOptions(array('style'=>'text-align: center; font-weight: bold;'));
     }
     // Special handling for not billable entries.
-    /* // TODO: this does not work and should be coded properly.
     if ($row > 0) {
-      $row_id = $table->getValueAt($row,1+$column)['row_id'];
+      $row_id = $table->getValueAtName($row,'row_id');
       $billable = ttTimeHelper::parseFromWeekViewRow($row_id, 'bl');
       if (!$billable) {
-        $this->setOptions(array('class'=>'not_billable')); // TODO: Should not we add options instead? How does it work exactly?
+        $this->setOptions(array('style'=>'color: red;')); // TODO: style it properly in CSS.
       }
-    }*/
+    }
     $this->setValue(htmlspecialchars($value)); // This escapes HTML for output.
     return $this->toString();
   }

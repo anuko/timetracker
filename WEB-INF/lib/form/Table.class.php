@@ -53,11 +53,11 @@ class Table extends FormElement {
   }
   
   function setKeyField($value) {
-  	$this->mKeyField = $value;
+    $this->mKeyField = $value;
   }
   
   function setData($data) {
-  	if (is_array($data) && isset($data[0]) && is_array($data[0]))
+    if (is_array($data) && isset($data[0]) && is_array($data[0]))
       $this->mData = &$data;
   }
   
