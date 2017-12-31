@@ -69,6 +69,22 @@
     <td>{$forms.weekTimeForm.week_durations.control}</td>
   </tr>
 </table>
+<table cellpadding="3" cellspacing="1" width="720">
+  <tr>
+    <td align="left">{$i18n.label.week_total}: {$week_total}</td>
+    <td></td>
+  </tr>
+  {if $user->isPluginEnabled('mq')}
+  <tr>
+    <td align="left">{$i18n.label.month_total}: {$month_total}</td>
+    {if $over_quota}
+    <td align="right">{$i18n.form.time.over_quota}: <span style="color: green;">{$quota_remaining}</span></td>
+    {else}
+    <td align="right">{$i18n.form.time.remaining_quota}: <span style="color: red;">{$quota_remaining}</span></td>
+    {/if}
+  </tr>
+  {/if}
+</table>
 <table>
   <tr>
     <td align="center" colspan="2">{$forms.weekTimeForm.btn_submit.control}</td>
