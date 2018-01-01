@@ -211,8 +211,8 @@ class ttInvoiceHelper {
       $sql = "select count(*) as num from tt_log l, tt_users u
         where l.status = 1 and l.client_id = $client_id and l.invoice_id is NULL
         and l.date >= ".$mdb2->quote($start)." and l.date <= ".$mdb2->quote($end)."
-        and l.billable * u.rate * time_to_sec(l.duration)/3600 > 0
-        and l.user_id = u.id";
+        and l.user_id = u.id
+        and l.billable = 1"; // l.billable * u.rate * time_to_sec(l.duration)/3600 > 0 // See explanation below.
     } else {
       // sql part for project id.
       if ($project_id) $project_part = " and l.project_id = $project_id";
@@ -221,8 +221,14 @@ class ttInvoiceHelper {
       $sql = "select count(*) as num from tt_log l, tt_user_project_binds upb
         where l.status = 1 and l.client_id = $client_id $project_part and l.invoice_id is NULL
         and l.date >= ".$mdb2->quote($start)." and l.date <= ".$mdb2->quote($end)."
-        and l.billable * upb.rate * time_to_sec(l.duration)/3600 > 0
-        and upb.user_id = l.user_id and upb.project_id = l.project_id";
+        and upb.user_id = l.user_id and upb.project_id = l.project_id
+        and l.billable = 1"; // l.billable * upb.rate * time_to_sec(l.duration)/3600 > 0
+        // Users with a lot of clients and projects (Jaro) may forget to set user rates properly.
+        // Specifically, user rate may be set to 0 on a project, by mistake. This leads to error.no_invoiceable_items
+        // and increased support cost. Commenting out allows us to include 0 cost items in invoices so that
+        // the problem becomes obvious.
+
+        // TODO: If the above turns out useful, rework the query to simplify it by removing left join.
     }
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -293,7 +299,7 @@ class ttInvoiceHelper {
         set l.invoice_id = $last_id
         where l.status = 1 and l.client_id = $client_id and l.invoice_id is NULL
         and l.date >= ".$mdb2->quote($start)." and l.date <= ".$mdb2->quote($end)."
-        and l.billable * u.rate * time_to_sec(l.duration)/3600 > 0";
+        and l.billable = 1"; // l.billable * u.rate * time_to_sec(l.duration)/3600 > 0"; // See explanation below.
     } else {
        // sql part for project id.
       if ($project_id) $project_part = " and l.project_id = $project_id";
@@ -304,7 +310,13 @@ class ttInvoiceHelper {
         set l.invoice_id = $last_id
         where l.status = 1 and l.client_id = $client_id $project_part and l.invoice_id is NULL
         and l.date >= ".$mdb2->quote($start)." and l.date <= ".$mdb2->quote($end)."
-        and l.billable * upb.rate * time_to_sec(l.duration)/3600 > 0";
+        and l.billable = 1"; //  l.billable * upb.rate * time_to_sec(l.duration)/3600 > 0";
+        // Users with a lot of clients and projects (Jaro) may forget to set user rates properly.
+        // Specifically, user rate may be set to 0 on a project, by mistake. This leads to error.no_invoiceable_items
+        // and increased support cost. Commenting out allows us to include 0 cost items in invoices so that
+        // the problem becomes obvious.
+
+        // TODO: If the above turns out useful, rework the query to simplify it by removing left join.
     }
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
