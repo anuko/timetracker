@@ -148,7 +148,7 @@ class TimeCellRenderer extends DefaultCellRenderer {
     if ($lockedDays[$column-1])
       $field->setEnabled(false);
     $field->setFormName($table->getFormName());
-    $field->setSize(2);
+    $field->setStyle('width: 60px;'); // TODO: need to style everything properly, eventually.
     $field->setValue($table->getValueAt($row,$column)['duration']);
     // Disable control when time entry mode is TYPE_START_FINISH and there is no value in control
     // because we can't supply start and finish times in week view - there are no fields for them.
