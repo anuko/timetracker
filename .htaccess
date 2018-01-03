@@ -2,7 +2,7 @@ AddDefaultCharset utf-8
 
 # Restrict access to Time Tracker only from certain IPs.
 #
-# See https://www.anuko.com/time_tracker/faq/restrict_access_by_ip.htm
+# See https://www.anuko.com/time_tracker/faq/restrict_access_by_ip.htm for help.
 # For this to work make sure AllowOverride is set to All in web server config file.
 # Uncomment 3 lines below and set your IP accordingly.
 #
@@ -10,7 +10,7 @@ AddDefaultCharset utf-8
 # Deny from all
 # Allow from 127.0.0.1
 #
-# An example for an entire subnet 192.168.1.0 - 192.168.1.255
+# An example for an entire subnet 192.168.1.0 - 192.168.1.255.
 # Order Deny,Allow
 # Deny from all
 # Allow from 192.168.1
