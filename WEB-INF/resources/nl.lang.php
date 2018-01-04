@@ -165,9 +165,8 @@ $i18n_key_words = array(
 'label.configure' => 'Stel in',
 'label.select_all' => 'Selecteer alle',
 'label.select_none' => 'Selecteer niets',
-// TODO: translate the following.
-// 'label.day_view' => 'Day view',
-// 'label.week_view' => 'Week view',
+'label.day_view' => 'Dag overzicht',
+'label.week_view' => 'Week overzicht',
 'label.id' => 'ID',
 'label.language' => 'Taal',
 'label.decimal_mark' => 'Decimaal teken',
@@ -322,8 +321,7 @@ $i18n_key_words = array(
 'form.time_edit.uncompleted' => 'Dit tijdrecord is opgeslagen met alleen een starttijd. Dit is geen fout.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
-// TODO: translate the following.
-// 'form.week.new_entry' => 'New entry',
+'form.week.new_entry' => 'Nieuwe toevoeging',
 
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Bewaren als standaard',
