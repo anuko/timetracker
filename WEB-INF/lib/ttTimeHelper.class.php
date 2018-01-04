@@ -1014,7 +1014,7 @@ class ttTimeHelper {
 
     // Insert label.
     global $i18n;
-    $dayTotals['label'] = $i18n->getKey('label.total');
+    $dayTotals['label'] = $i18n->getKey('label.day_total');
 
     foreach ($dataArray as $row) {
       foreach($dayHeaders as $dayHeader) {
