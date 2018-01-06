@@ -116,7 +116,7 @@ $lockedDays = ttWeekViewHelper::getLockedDaysForWeek($startDate->toString(DB_DAT
 // Build data array for the table. Format is described in the function..
 $dataArray = ttWeekViewHelper::getDataForWeekView($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT), $dayHeaders);
 // Build day totals (total durations for each day in week).
-$dayTotals = ttTimeHelper::getDayTotals($dataArray, $dayHeaders);
+$dayTotals = ttWeekViewHelper::getDayTotals($dataArray, $dayHeaders);
 
 // Define rendering class for a label field to the left of durations.
 class LabelCellRenderer extends DefaultCellRenderer {
@@ -361,7 +361,7 @@ if ($request->isPost()) {
             $fields['start_date'] = $startDate->toString(DB_DATEFORMAT); // To be able to determine date for the entry using $dayHeader.
             $fields['duration'] = $postedDuration;
             $fields['browser_today'] = $request->getParameter('browser_today', null);
-            $result = ttTimeHelper::insertDurationFromWeekView($fields, $custom_fields, $err);
+            $result = ttWeekViewHelper::insertDurationFromWeekView($fields, $custom_fields, $err);
           } elseif ($postedDuration == null || 0 == ttTimeHelper::toMinutes($postedDuration)) {
             // Delete an already existing record here.
             $result = ttTimeHelper::delete($dataArray[$rowNumber][$dayHeader]['tt_log_id'], $user->getActiveUser());
@@ -369,7 +369,7 @@ if ($request->isPost()) {
             $fields = array();
             $fields['tt_log_id'] = $dataArray[$rowNumber][$dayHeader]['tt_log_id'];
             $fields['duration'] = $postedDuration;
-            $result = ttTimeHelper::modifyDurationFromWeekView($fields, $err);
+            $result = ttWeekViewHelper::modifyDurationFromWeekView($fields, $err);
           }
           if (!$result) break; // Break out of the loop in case of first error.
         }
