@@ -114,7 +114,7 @@ $cl_note = trim($request->getParameter('note'));
 $dayHeaders = ttWeekViewHelper::getDayHeadersForWeek($startDate->toString(DB_DATEFORMAT));
 $lockedDays = ttWeekViewHelper::getLockedDaysForWeek($startDate->toString(DB_DATEFORMAT));
 // Build data array for the table. Format is described in the function..
-$dataArray = ttTimeHelper::getDataForWeekView($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT), $dayHeaders);
+$dataArray = ttWeekViewHelper::getDataForWeekView($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT), $dayHeaders);
 // Build day totals (total durations for each day in week).
 $dayTotals = ttTimeHelper::getDayTotals($dataArray, $dayHeaders);
 
