@@ -113,8 +113,10 @@ $cl_note = trim($request->getParameter('note'));
 // Get column headers, which are day numbers in month.
 $dayHeaders = ttWeekViewHelper::getDayHeadersForWeek($startDate->toString(DB_DATEFORMAT));
 $lockedDays = ttWeekViewHelper::getLockedDaysForWeek($startDate->toString(DB_DATEFORMAT));
-// Build data array for the table. Format is described in the function..
-$dataArray = ttWeekViewHelper::getDataForWeekView($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT), $dayHeaders);
+// Get already existing records.
+$records = ttWeekViewHelper::getRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
+// Build data array for the table. Format is described in the function.
+$dataArray = ttWeekViewHelper::getDataForWeekView($records, $dayHeaders);
 // Build day totals (total durations for each day in week).
 $dayTotals = ttWeekViewHelper::getDayTotals($dataArray, $dayHeaders);
 
@@ -410,6 +412,7 @@ $smarty->assign('task_list', $task_list);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('timestring', $startDate->toString($user->date_format).' - '.$endDate->toString($user->date_format));
+$smarty->assign('time_records', $records);
 
 $smarty->assign('title', $i18n->getKey('title.time'));
 $smarty->assign('content_page_name', 'week.tpl');

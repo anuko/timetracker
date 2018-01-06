@@ -72,7 +72,7 @@ class ttWeekViewHelper {
       from tt_log l
       $left_joins
       where l.date >= '$start_date' and l.date <= '$end_date' and l.user_id = $user_id and l.status = 1
-      order by p.name, t.name, l.date, l.start, l.id";
+      order by l.date, p.name, t.name, l.start, l.id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -132,11 +132,8 @@ class ttWeekViewHelper {
   //     'day_6' => array('control_id' => '2_day_6', 'tt_log_id' => null, 'duration' => null)
   //   )
   // );
-  static function getDataForWeekView($user_id, $start_date, $end_date, $dayHeaders) {
+  static function getDataForWeekView($records, $dayHeaders) {
     global $i18n;
-
-    // Start by obtaining all records in interval.
-    $records = ttWeekViewHelper::getRecordsForInterval($user_id, $start_date, $end_date);
 
     $dataArray = array();
 
