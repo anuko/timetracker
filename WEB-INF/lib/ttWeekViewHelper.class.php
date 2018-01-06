@@ -29,6 +29,34 @@
 // ttWeekViewHelper class groups together functions used in week view.
 class ttWeekViewHelper {
 
+  // makeRowLabel - builds a human readable label for a row in week view,
+  // which is a combination ot record properties.
+  // Client - Project - Task - Custom field 1.
+  // Note that billable property is not part of the label. Instead,
+  // we identify such records with a different color in week view.
+  static function makeRowLabel($record) {
+    global $user;
+    // Start with client.
+    if ($user->isPluginEnabled('cl'))
+      $label = $record['client'];
+
+    // Add project.
+    if (!empty($label) && !empty($record['project'])) $label .= ' - ';
+    $label .= $record['project'];
+
+    // Add task.
+    if (!empty($label) && !empty($record['task'])) $label .= ' - ';
+    $label .= $record['task'];
+
+    // Add custom field 1.
+    if ($user->isPluginEnabled('cf')) {
+      if (!empty($label) && !empty($record['cf_1_value'])) $label .= ' - ';
+      $label .= $record['cf_1_value'];
+    }
+
+    return $label;
+  }
+
   // parseFromWeekViewRow - obtains field value encoded in row identifier.
   // For example, for a row id like "cl:546,bl:0,pr:23456,ts:27464,cf_1:example text"
   // requesting a client "cl" should return 546.

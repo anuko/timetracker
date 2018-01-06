@@ -859,7 +859,7 @@ class ttTimeHelper {
       // Find row.
       $pos = ttTimeHelper::findRow($record_id, $dataArray);
       if ($pos < 0) {
-        $dataArray[] = array('row_id' => $record_id,'label' => ttTimeHelper::makeRecordLabel($record)); // Insert row.
+        $dataArray[] = array('row_id' => $record_id,'label' => ttWeekViewHelper::makeRowLabel($record)); // Insert row.
         $pos = ttTimeHelper::findRow($record_id, $dataArray);
         // Insert empty cells with proper control ids.
         for ($i = 0; $i < 7; $i++) {
@@ -920,34 +920,6 @@ class ttTimeHelper {
     }
 
     return $record_identifier;
-  }
-
-  // makeRecordLabel - builds a human readable label for a row in week view,
-  // which is a combination ot record properties.
-  // Client - Project - Task - Custom field 1.
-  // Note that billable property is not part of the label. Instead, we intend to
-  // identify such records with a different color in week view.
-  static function makeRecordLabel($record) {
-    global $user;
-    // Start with client.
-    if ($user->isPluginEnabled('cl'))
-      $label = $record['client'];
-
-    // Add project.
-    if (!empty($label) && !empty($record['project'])) $label .= ' - ';
-    $label .= $record['project'];
-
-    // Add task.
-    if (!empty($label) && !empty($record['task'])) $label .= ' - ';
-    $label .= $record['task'];
-
-    // Add custom field 1.
-    if ($user->isPluginEnabled('cf')) {
-      if (!empty($label) && !empty($record['cf_1_value'])) $label .= ' - ';
-      $label .= $record['cf_1_value'];
-    }
-
-    return $label;
   }
 
   // getDayHeadersForWeek - obtains day column headers for week view, which are simply day numbers in month.
