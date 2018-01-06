@@ -111,8 +111,8 @@ $cl_note = trim($request->getParameter('note'));
 
 // Get the data we need to display week view.
 // Get column headers, which are day numbers in month.
-$dayHeaders = ttTimeHelper::getDayHeadersForWeek($startDate->toString(DB_DATEFORMAT));
-$lockedDays = ttTimeHelper::getLockedDaysForWeek($startDate->toString(DB_DATEFORMAT));
+$dayHeaders = ttWeekViewHelper::getDayHeadersForWeek($startDate->toString(DB_DATEFORMAT));
+$lockedDays = ttWeekViewHelper::getLockedDaysForWeek($startDate->toString(DB_DATEFORMAT));
 // Build data array for the table. Format is described in the function..
 $dataArray = ttTimeHelper::getDataForWeekView($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT), $dayHeaders);
 // Build day totals (total durations for each day in week).

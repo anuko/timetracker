@@ -29,6 +29,42 @@
 // ttWeekViewHelper class groups together functions used in week view.
 class ttWeekViewHelper {
 
+  // getDayHeadersForWeek - obtains day column headers for week view, which are simply day numbers in month.
+  static function getDayHeadersForWeek($start_date) {
+    $dayHeaders = array();
+    $objDate = new DateAndTime(DB_DATEFORMAT, $start_date);
+    $dayHeaders[] = (string) $objDate->getDate(); // It returns an int on first call.
+    if (strlen($dayHeaders[0]) == 1)              // Which is an implementation detail of DateAndTime class.
+      $dayHeaders[0] = '0'.$dayHeaders[0];        // Add a 0 for single digit day.
+    $objDate->incDay();
+    $dayHeaders[] = $objDate->getDate(); // After incDay it returns a string with leading 0, when necessary.
+    $objDate->incDay();
+    $dayHeaders[] = $objDate->getDate();
+    $objDate->incDay();
+    $dayHeaders[] = $objDate->getDate();
+    $objDate->incDay();
+    $dayHeaders[] = $objDate->getDate();
+    $objDate->incDay();
+    $dayHeaders[] = $objDate->getDate();
+    $objDate->incDay();
+    $dayHeaders[] = $objDate->getDate();
+    unset($objDate);
+    return $dayHeaders;
+  }
+
+  // getLockedDaysForWeek - builds an array of locked days in week.
+  static function getLockedDaysForWeek($start_date) {
+    global $user;
+    $lockedDays = array();
+    $objDate = new DateAndTime(DB_DATEFORMAT, $start_date);
+    for ($i = 0; $i < 7; $i++) {
+      $lockedDays[] = $user->isDateLocked($objDate);
+      $objDate->incDay();
+    }
+    unset($objDate);
+    return $lockedDays;
+  }
+
   // makeRowLabel - builds a human readable label for a row in week view,
   // which is a combination ot record properties.
   // Client - Project - Task - Custom field 1.
