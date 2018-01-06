@@ -746,34 +746,6 @@ class ttTimeHelper {
     return -1; // Row not found.
   }
 
-  // makeRecordIdentifier - builds a string identifying a record for a grouped display (such as a week view).
-  // For example:
-  // "cl:546,bl:0,pr:23456,ts:27464,cf_1:example text"
-  // "cl:546,bl:1,pr:23456,ts:27464,cf_1:7623"
-  // See comment for getGroupedRecordsForInterval.
-  static function makeRecordIdentifier($record) {
-    global $user;
-    // Start with client.
-    if ($user->isPluginEnabled('cl'))
-      $record_identifier = $record['client_id'] ? 'cl:'.$record['client_id'] : '';
-    // Add billable flag.
-    if (!empty($record_identifier)) $record_identifier .= ',';
-    $record_identifier .= 'bl:'.$record['billable'];
-    // Add project.
-    $record_identifier .= $record['project_id'] ? ',pr:'.$record['project_id'] : '';
-    // Add task.
-    $record_identifier .= $record['task_id'] ? ',ts:'.$record['task_id'] : '';
-    // Add custom field 1. This requires modifying the query to get the data we need.
-    if ($user->isPluginEnabled('cf')) {
-      if ($record['cf_1_id'])
-        $record_identifier .= ',cf_1:'.$record['cf_1_id'];
-      else if ($record['cf_1_value'])
-        $record_identifier .= ',cf_1:'.$record['cf_1_value'];
-    }
-
-    return $record_identifier;
-  }
-
   // getDayTotals calculates total durations for each day from the existing data in $dataArray.
   static function getDayTotals($dataArray, $dayHeaders) {
     $dayTotals = array();

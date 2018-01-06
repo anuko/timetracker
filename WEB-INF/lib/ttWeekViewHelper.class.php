@@ -110,7 +110,7 @@ class ttWeekViewHelper {
   //     'day_6' => array('control_id' => '0_day_6', 'tt_log_id' => null, 'duration' => null)
   //   ),
   //   array( // Row 1.
-  //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623_0', // Row identifier. See ttTimeHelper::makeRecordIdentifier().
+  //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623_0', // Row identifier. See ttWeekViewHelper::makeRowIdentifier().
   //     'label' => 'Anuko - Time Tracker - Coding',              // Human readable label for the row describing what this time entry is for.
   //     'day_0' => array('control_id' => '1_day_0', 'tt_log_id' => 12345, 'duration' => '00:00'), // control_id is row_id plus day header for column.
   //     'day_1' => array('control_id' => '1_day_1', 'tt_log_id' => 12346, 'duration' => '01:00'),
@@ -151,20 +151,20 @@ class ttWeekViewHelper {
     // Iterate through records and build $dataArray cell by cell.
     foreach ($records as $record) {
       // Create record id without suffix.
-      $record_id_no_suffix = ttTimeHelper::makeRecordIdentifier($record);
+      $row_id_no_suffix = ttWeekViewHelper::makeRowIdentifier($record);
       // Handle potential multiple records with the same attributes by using a numerical suffix.
       $suffix = 0;
-      $record_id = $record_id_no_suffix.'_'.$suffix;
+      $row_id = $row_id_no_suffix.'_'.$suffix;
       $day_header = substr($record['date'], 8); // Day number in month.
-      while (ttTimeHelper::cellExists($record_id, $day_header, $dataArray)) {
+      while (ttTimeHelper::cellExists($row_id, $day_header, $dataArray)) {
         $suffix++;
-        $record_id = $record_id_no_suffix.'_'.$suffix;
+        $row_id = $row_id_no_suffix.'_'.$suffix;
       }
       // Find row.
-      $pos = ttTimeHelper::findRow($record_id, $dataArray);
+      $pos = ttTimeHelper::findRow($row_id, $dataArray);
       if ($pos < 0) {
-        $dataArray[] = array('row_id' => $record_id,'label' => ttWeekViewHelper::makeRowLabel($record)); // Insert row.
-        $pos = ttTimeHelper::findRow($record_id, $dataArray);
+        $dataArray[] = array('row_id' => $row_id,'label' => ttWeekViewHelper::makeRowLabel($record)); // Insert row.
+        $pos = ttTimeHelper::findRow($row_id, $dataArray);
         // Insert empty cells with proper control ids.
         for ($i = 0; $i < 7; $i++) {
           $control_id = $pos.'_'. $dayHeaders[$i];
@@ -211,6 +211,34 @@ class ttWeekViewHelper {
     }
     unset($objDate);
     return $lockedDays;
+  }
+
+  // makeRowIdentifier - builds a string identifying a row for a week view from a single record properties.
+  //                     Note that the return value is without a suffix.
+  // For example:
+  // "cl:546,bl:0,pr:23456,ts:27464,cf_1:example text"
+  // "cl:546,bl:1,pr:23456,ts:27464,cf_1:7623"
+  static function makeRowIdentifier($record) {
+    global $user;
+    // Start with client.
+    if ($user->isPluginEnabled('cl'))
+      $row_identifier = $record['client_id'] ? 'cl:'.$record['client_id'] : '';
+    // Add billable flag.
+    if (!empty($row_identifier)) $row_identifier .= ',';
+    $row_identifier .= 'bl:'.$record['billable'];
+    // Add project.
+    $row_identifier .= $record['project_id'] ? ',pr:'.$record['project_id'] : '';
+    // Add task.
+    $row_identifier .= $record['task_id'] ? ',ts:'.$record['task_id'] : '';
+    // Add custom field 1.
+    if ($user->isPluginEnabled('cf')) {
+      if ($record['cf_1_id'])
+        $row_identifier .= ',cf_1:'.$record['cf_1_id'];
+      else if ($record['cf_1_value'])
+        $row_identifier .= ',cf_1:'.$record['cf_1_value'];
+    }
+
+    return $row_identifier;
   }
 
   // makeRowLabel - builds a human readable label for a row in week view,

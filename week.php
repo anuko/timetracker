@@ -353,7 +353,7 @@ if ($request->isPost()) {
               $record['project_id'] = $cl_project;
               $record['task_id'] = $cl_task;
               $record['cf_1_value'] = $cl_cf_1;
-              $fields['row_id'] = ttTimeHelper::makeRecordIdentifier($record).'_0'; // TODO: Handle a possible conflict with already existing row...
+              $fields['row_id'] = ttWeekViewHelper::makeRowIdentifier($record).'_0'; // TODO: Handle a possible conflict with already existing row...
                                                                                     // We may have to increment the suffix here.
               $fields['note'] = $cl_note;
             }
