@@ -353,8 +353,10 @@ if ($request->isPost()) {
               $record['project_id'] = $cl_project;
               $record['task_id'] = $cl_task;
               $record['cf_1_value'] = $cl_cf_1;
-              $fields['row_id'] = ttWeekViewHelper::makeRowIdentifier($record).'_0'; // TODO: Handle a possible conflict with already existing row...
-                                                                                    // We may have to increment the suffix here.
+              $fields['row_id'] = ttWeekViewHelper::makeRowIdentifier($record).'_0';
+              // Note: no need to check for a possible conflict with an already existing row
+              // because we are doing an insert that does not affect already existing data.
+
               $fields['note'] = $cl_note;
             }
             $fields['day_header'] = $dayHeader;
