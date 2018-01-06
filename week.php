@@ -179,7 +179,7 @@ if ($user->canManageTeam()) {
 }
 
 // Create week_durations table.
-$table = new Table('week_durations');
+$table = new Table('week_durations', 'week_view_table');
 // $table->setIAScript('markModified'); // TODO: write a script to mark table or particular cells as modified.
 $table->setTableOptions(array('width'=>'100%','cellspacing'=>'1','cellpadding'=>'3','border'=>'0'));
 $table->setRowOptions(array('class'=>'tableHeaderCentered'));

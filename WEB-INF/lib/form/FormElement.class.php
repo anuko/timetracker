@@ -39,13 +39,16 @@ class FormElement {
   var $label = '';      // Optional label for control.
   var $style = '';      // Control style.
   var $enabled = true;  // Whether the control is enabled.
-  var $class = 'FormElement'; // Class name for the element.
+  var $class = 'FormElement'; // PHP class name for the element.
+  var $cssClass = null; // CSS class name for the element.
 
   function __construct() {
   }
 
   function getName() { return $this->name; }
   function getClass() { return $this->class; }
+  function getCssClass() { return $this->cssClass; }
+  function setCssClass($cssClass) { $this->cssClass = $cssClass; }
 
   function setFormName($name) { $this->form_name = $name; }
   function getFormName() { return $this->form_name; }
