@@ -33,6 +33,7 @@ import('form.Table');
 import('form.TextField');
 import('ttUserHelper');
 import('ttTeamHelper');
+import('ttWeekViewHelper');
 import('ttClientHelper');
 import('ttTimeHelper');
 import('DateAndTime');
@@ -128,7 +129,7 @@ class LabelCellRenderer extends DefaultCellRenderer {
     // Special handling for not billable entries.
     if ($row > 0) {
       $row_id = $table->getValueAtName($row,'row_id');
-      $billable = ttTimeHelper::parseFromWeekViewRow($row_id, 'bl');
+      $billable = ttWeekViewHelper::parseFromWeekViewRow($row_id, 'bl');
       if (!$billable) {
         $this->setOptions(array('style'=>'color: red;')); // TODO: style it properly in CSS.
       }

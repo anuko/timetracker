@@ -922,28 +922,6 @@ class ttTimeHelper {
     return $record_identifier;
   }
 
-  // parseFromWeekViewRow - obtains field value encoded in row identifier.
-  // For example, for a row id like "cl:546,bl:0,pr:23456,ts:27464,cf_1:example text"
-  // requesting a client "cl" should return 546.
-  static function parseFromWeekViewRow($row_id, $field_label) {
-    // Find beginning of label.
-    $pos = strpos($row_id, $field_label);
-    if ($pos === false) return null; // Not found.
-
-    // Strip suffix from row id.
-    $suffixPos = strrpos($row_id, '_');
-    if ($suffixPos)
-      $remaninder = substr($row_id, 0, $suffixPos);
-
-    // Find beginning of value.
-    $posBegin = 1 + strpos($remaninder, ':', $pos);
-    // Find end of value.
-    $posEnd = strpos($remaninder, ',', $posBegin);
-    if ($posEnd === false) $posEnd = strlen($remaninder);
-    // Return value.
-    return substr($remaninder, $posBegin, $posEnd - $posBegin);
-  }
-
   // makeRecordLabel - builds a human readable label for a row in week view,
   // which is a combination ot record properties.
   // Client - Project - Task - Custom field 1.
@@ -1070,10 +1048,10 @@ class ttTimeHelper {
     $fields4insert['user_id'] = $user->getActiveUser();
     $fields4insert['date'] = $entry_date;
     $fields4insert['duration'] = $fields['duration'];
-    $fields4insert['client'] = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'cl');
-    $fields4insert['billable'] = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'bl');
-    $fields4insert['project'] = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'pr');
-    $fields4insert['task'] = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'ts');
+    $fields4insert['client'] = ttWeekViewHelper::parseFromWeekViewRow($fields['row_id'], 'cl');
+    $fields4insert['billable'] = ttWeekViewHelper::parseFromWeekViewRow($fields['row_id'], 'bl');
+    $fields4insert['project'] = ttWeekViewHelper::parseFromWeekViewRow($fields['row_id'], 'pr');
+    $fields4insert['task'] = ttWeekViewHelper::parseFromWeekViewRow($fields['row_id'], 'ts');
     $fields4insert['note'] = $fields['note'];
 
     // Try to insert a record.
@@ -1082,7 +1060,7 @@ class ttTimeHelper {
 
     // Insert custom field if we have it.
     $result = true;
-    $cf_1 = ttTimeHelper::parseFromWeekViewRow($fields['row_id'], 'cf_1');
+    $cf_1 = ttWeekViewHelper::parseFromWeekViewRow($fields['row_id'], 'cf_1');
     if ($custom_fields && $cf_1) {
       if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
         $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], null, $cf_1);
