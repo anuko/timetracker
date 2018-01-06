@@ -73,7 +73,7 @@ if ($user->isPluginEnabled('cf')) {
   $smarty->assign('custom_fields', $custom_fields);
 }
 
-// TODO: how is this plugin supposed to work for week view?
+// Use Monthly Quotas plugin, if applicable.
 if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
@@ -180,7 +180,6 @@ if ($user->canManageTeam()) {
 
 // Create week_durations table.
 $table = new Table('week_durations', 'week_view_table');
-// $table->setIAScript('markModified'); // TODO: write a script to mark table or particular cells as modified.
 $table->setTableOptions(array('width'=>'100%','cellspacing'=>'1','cellpadding'=>'3','border'=>'0'));
 $table->setRowOptions(array('class'=>'tableHeaderCentered'));
 $table->setData($dataArray);
@@ -310,8 +309,8 @@ if ($request->isPost()) {
     // Process the table of values.
     if ($err->no()) {
 
-      // Obtain values. Perhaps, it's best to iterate throigh posted parameters one by one,
-      // see if anything changed, and apply one change at a time until we see an error.
+      // Obtain values. Iterate through posted parameters one by one,
+      // see if value changed, apply one change at a time until we see an error.
       $result = true;
       $rowNumber = 0;
       // Iterate through existing rows.
@@ -346,14 +345,15 @@ if ($request->isPost()) {
             $fields = array();
             $fields['row_id'] = $dataArray[$rowNumber]['row_id'];
             if (!$fields['row_id']) {
-              // Special handling for row 0, a new entry. Need to construct row_id.
+              // Special handling for row 0, a new entry. Need to construct new row_id.
               $record = array();
               $record['client_id'] = $cl_client;
               $record['billable'] = $cl_billable ? '1' : '0';
               $record['project_id'] = $cl_project;
               $record['task_id'] = $cl_task;
               $record['cf_1_value'] = $cl_cf_1;
-              $fields['row_id'] = ttTimeHelper::makeRecordIdentifier($record).'_0';
+              $fields['row_id'] = ttTimeHelper::makeRecordIdentifier($record).'_0'; // TODO: Handle a possible conflict with already existing row...
+                                                                                    // We may have to increment the suffix here.
               $fields['note'] = $cl_note;
             }
             $fields['day_header'] = $dayHeader;
