@@ -360,6 +360,8 @@ $i18n_key_words = array(
 'form.invoice.person' => 'Osoba',
 'form.invoice.invoice_to_delete' => 'Račun za brisanje',
 'form.invoice.invoice_entries' => 'Unos u račun',
+// TODO: translate the following.
+// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
 // Forma grafikona. Pogledajte primer na https://timetracker.anuko.com/charts.php
 'form.charts.interval' => 'Intervali',

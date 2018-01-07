@@ -1,3 +1,14 @@
+<script>
+  function confirm_deleting_entries() {
+    var dropdown = document.getElementById("delete_invoice_entries");
+    if (1 == dropdown.value) {
+      // User selected deleting values. Ask to confirm.
+      return confirm("{$i18n.form.invoice.confirm_deleting_entries}");
+    }
+    return true;
+  }
+</script>
+
 {$forms.invoiceDeleteForm.open}
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>

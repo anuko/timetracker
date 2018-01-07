@@ -354,6 +354,7 @@ $i18n_key_words = array(
 'form.invoice.person' => 'Работник',
 'form.invoice.invoice_to_delete' => 'Счёт для удаления',
 'form.invoice.invoice_entries' => 'Записи счёта',
+'form.invoice.confirm_deleting_entries' => 'Подтвердите удаление записей из Time Tracker.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
 'form.charts.interval' => 'Интервал',

@@ -353,6 +353,8 @@ $i18n_key_words = array(
 'form.invoice.person' => 'Medewerker',
 'form.invoice.invoice_to_delete' => 'Te verwijderen factuur',
 'form.invoice.invoice_entries' => 'Factuur gegevens',
+// TODO: translate the following.
+// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
 'form.charts.interval' => 'Periode',

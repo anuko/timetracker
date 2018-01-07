@@ -359,6 +359,8 @@ $i18n_key_words = array(
 // The settings tells whether we are deleting invoiced items when deleting an invoice.
 // If we select "do not delete" then the items stay, and can be included in another invoice.
 'form.invoice.invoice_entries' => 'Rechnungseintrag',
+// TODO: translate the following.
+// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
 'form.charts.interval' => 'Zeitraum',

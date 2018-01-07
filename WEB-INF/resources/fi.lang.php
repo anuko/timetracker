@@ -355,6 +355,8 @@ $i18n_key_words = array(
 'form.invoice.person' => 'Henkilö',
 'form.invoice.invoice_to_delete' => 'Poistettava lasku',
 'form.invoice.invoice_entries' => 'Laskurivit',
+// TODO: translate the following.
+// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
 'form.charts.interval' => 'Ajalta',

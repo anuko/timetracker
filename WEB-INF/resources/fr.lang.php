@@ -346,6 +346,8 @@ $i18n_key_words = array(
 'form.invoice.person' => 'Personne',
 'form.invoice.invoice_to_delete' => 'Facture à supprimer',
 'form.invoice.invoice_entries' => 'Entrées de facture',
+// TODO: translate the following.
+// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
 'form.charts.interval' => 'Intervalle',
