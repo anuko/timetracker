@@ -87,6 +87,16 @@ class Form {
         $el = new Checkbox($params['name']);
         break;
 
+      case 'hidden':
+        import('form.Hidden');
+        $el = new Hidden($params['name']);
+        break;
+
+      case 'submit':
+        import('form.Submit');
+        $el = new Submit($params['name']);
+        break;
+
 // TODO: refactoring ongoing down from here.
 			case "checkboxgroup":
 			    import('form.CheckboxGroup');
@@ -104,17 +114,7 @@ class Form {
 			    $el->setDataDefault(@$params["empty"]);
 			    if (isset($params["datakeys"])) $el->setDataKeys($params["datakeys"]);
 			    break;
-			    
-			case "hidden":
-			    import('form.Hidden');
-			    $el = new Hidden($params["name"]);
-			    break;
-			 
-			case "submit":
-			    import('form.Submit');
-			    $el = new Submit($params["name"]);
-			    break;
-			    
+
 			case "calendar":
 			    import('form.Calendar');
 			    $el = new Calendar($params["name"]);
