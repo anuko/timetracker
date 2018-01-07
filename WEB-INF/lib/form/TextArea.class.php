@@ -47,7 +47,8 @@ class TextArea extends FormElement {
 	
 	function getHtml() {
     
-	    if ($this->id=="") $this->id = $this->mName;
+	    if (empty($this->id))
+                $this->id = $this->name;
 	    
 	    $js_maxlen = "";
 	    
