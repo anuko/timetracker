@@ -40,10 +40,7 @@ class TextArea extends FormElement {
   }
 
 	function setColumns($value)	{ $this->mColumns = $value;	}
-	function getColumns()	{ return $this->mColumns; }
-
 	function setRows($value)	{ $this->mRows = $value;	}
-	function getRows()	{ return $this->mRows; }
 	
 	function getHtml() {
     
