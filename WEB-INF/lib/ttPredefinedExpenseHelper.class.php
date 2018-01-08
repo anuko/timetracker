@@ -34,6 +34,7 @@ class ttPredefinedExpenseHelper {
   static function get($id)
   {
     global $user;
+    $replaceDecimalMark = ('.' != $user->decimal_mark);
 
     $mdb2 = getConnection();
 
@@ -42,8 +43,11 @@ class ttPredefinedExpenseHelper {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-	  if ($val && $val['id'])
+      if ($val && $val['id']) {
+        if ($replaceDecimalMark)
+          $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
         return $val;
+      }
     }
     return false;
   }
@@ -65,11 +69,15 @@ class ttPredefinedExpenseHelper {
   // insert function inserts a new predefined expense into database.
   static function insert($fields)
   {
+    global $user;
+
     $mdb2 = getConnection();
 
     $team_id = (int) $fields['team_id'];
     $name = $fields['name'];
     $cost = $fields['cost'];
+    if ('.' != $user->decimal_mark)
+      $cost = str_replace($user->decimal_mark, '.', $cost);
 
     $sql = "insert into tt_predefined_expenses (team_id, name, cost)
       values ($team_id, ".$mdb2->quote($name).", ".$mdb2->quote($cost).")";
@@ -83,12 +91,16 @@ class ttPredefinedExpenseHelper {
   // update function - updates a predefined expense in database.
   static function update($fields)
   {
+    global $user;
+
     $mdb2 = getConnection();
 
     $predefined_expense_id = (int) $fields['id'];
     $team_id = (int) $fields['team_id'];
     $name = $fields['name'];
     $cost = $fields['cost'];
+    if ('.' != $user->decimal_mark)
+      $cost = str_replace($user->decimal_mark, '.', $cost);
 
     $sql = "update tt_predefined_expenses set name = ".$mdb2->quote($name).", cost = ".$mdb2->quote($cost).
       " where id = $predefined_expense_id and team_id = $team_id";

@@ -500,6 +500,9 @@ class ttTeamHelper {
 
   // getPredefinedExpenses - obtains predefined expenses for team.
   static function getPredefinedExpenses($team_id) {
+    global $user;
+    $replaceDecimalMark = ('.' != $user->decimal_mark);
+
     $mdb2 = getConnection();
 
     $result = array();
@@ -508,6 +511,8 @@ class ttTeamHelper {
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
+        if ($replaceDecimalMark)
+          $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
         $result[] = $val;
       }
       return $result;

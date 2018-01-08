@@ -77,9 +77,9 @@ class ttProjectHelper {
   // getProjects - returns an array of active and inactive projects in a team.
   static function getProjects()
   {
-  	global $user;
-  	  	
-  	$result = array();
+    global $user;
+
+    $result = array();
     $mdb2 = getConnection();
     
     $sql = "select id, name, tasks from tt_projects
