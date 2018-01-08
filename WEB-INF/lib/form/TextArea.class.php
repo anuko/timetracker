@@ -29,8 +29,6 @@
 import('form.FormElement');
 	
 class TextArea extends FormElement {
-    var $mColumns	= "";
-    var $mRows		= "";
     var $mOnKeyPress	= "";
 
   function __construct($name)
@@ -39,9 +37,6 @@ class TextArea extends FormElement {
     $this->name = $name;
   }
 
-	function setColumns($value)	{ $this->mColumns = $value;	}
-	function setRows($value)	{ $this->mRows = $value;	}
-	
 	function getHtml() {
     
 	    if (empty($this->id))
@@ -49,13 +44,7 @@ class TextArea extends FormElement {
 	    
 		$html = "\n\t<textarea";
 		$html .= " name=\"$this->name\" id=\"$this->id\"";
-		
-		if ($this->mColumns!="")
-		  $html .= " cols=\"$this->mColumns\"";
-		  
-		if ($this->mRows!="")
-		   $html .= " rows=\"$this->mRows\"";
-		   
+
 		if ($this->max_length!="") {
 			if ($this->mOnKeyPress) $this->mOnKeyPress .= ";";
 			$this->mOnKeyPress .= "return validateMaxLenght_".$this->name."(this, event);";

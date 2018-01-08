@@ -77,8 +77,6 @@ class Form {
       case 'textarea':
         import('form.TextArea');
         $el = new TextArea($params['name']);
-        if (isset($params['cols'])) $el->setColumns($params['cols']);
-        if (isset($params['rows'])) $el->setRows($params['rows']);
         if (isset($params['maxlength'])) $el->setMaxLength($params['maxlength']);
         break;
 
