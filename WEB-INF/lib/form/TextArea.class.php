@@ -50,8 +50,6 @@ class TextArea extends FormElement {
 	    if (empty($this->id))
                 $this->id = $this->name;
 	    
-	    $js_maxlen = "";
-	    
 		$html = "\n\t<textarea";
 		$html .= " name=\"$this->name\" id=\"$this->id\"";
 		
@@ -64,7 +62,6 @@ class TextArea extends FormElement {
 		if ($this->max_length!="") {
 			if ($this->mOnKeyPress) $this->mOnKeyPress .= ";";
 			$this->mOnKeyPress .= "return validateMaxLenght_".$this->name."(this, event);";
-			$js_maxlen = $this->getExtraScript();
 			$html .= " maxlength=\"$this->max_length\"";
 		}
 
@@ -76,26 +73,7 @@ class TextArea extends FormElement {
 		}
 			
 		$html .= ">".htmlspecialchars($this->getValue())."</textarea>";
-		if ($js_maxlen) $html = $js_maxlen."\n".$html;
 		
 		return $html;
-	}
-	
-	function getExtraScript() {
-		$s = "<script>\n";
-		$s .= "var isNS4 = (navigator.appName==\"Netscape\")?1:0;\n";
-		$s .= "function validateMaxLenght_".$this->name."(element, event) {\n";
-		$s .= "\tmaxlength=".$this->max_length.";\n";
-		$s .= "\tvar iKey = (!isNS4?event.keyCode:event.which);\n";
-		//$s .= "alert(iKey);";
-		$s .= "\tvar re = new RegExp(\"".'\r\n'."\",\"g\");\n";
-		$s .= "\tvar x = element.value.replace(re,\"\").length;\n";
-		$s .= "\tif ((x>=maxlength) && ((iKey > 31 && iKey < 1200) || (iKey > 95 && iKey < 106)) && (iKey != 13)) {\n";
-		$s .= "\t\treturn false;\n";
-		$s .= "\t} else {\n";
-		$s .= "\t\treturn true;\n";
-		$s .= "\t}\n}\n";
-		$s .= "</script>\n";
-		return $s;
 	}
 }
