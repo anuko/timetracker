@@ -78,7 +78,9 @@ if ($request->isGet()) {
   }
 
   // Check if PHP version is good enough.
-  $required_version = '5.2.1'; // Something in TCPDF library does not work below this one.
+  // $required_version = '5.2.1'; // Something in TCPDF library does not work below this one.
+  $required_version = '5.4.0';    // Week view (week.php) requires 5.4 because of []-way of referencing arrays.
+                                  // This needs further investigation as we use [] elsewhere without obvious problems.
   if (version_compare(phpversion(), $required_version, '>=')) {
     echo('PHP version: '.phpversion().', good enough.<br>');
   } else {
