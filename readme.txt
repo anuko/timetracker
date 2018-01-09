@@ -2,6 +2,8 @@ Anuko Time Tracker
 Copyright (c) Anuko (https://www.anuko.com)
 
 Project home page: https://www.anuko.com/time_tracker/index.htm
+Forum: https://www.anuko.com/forum/viewforum.php?f=4
+Info for developers: https://www.anuko.com/time_tracker/info_for_developers.htm
 Free hosting of Time Tracker for individuals and small teams is available at https://timetracker.anuko.com
 
 Unless otherwise noted, files in this archive are protected by the LIBERAL FREEWARE LICENSE.
