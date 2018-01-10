@@ -53,7 +53,8 @@ class MonthlyQuota {
   }
 
   // get - obtains either a single month quota or an array of quotas for an entire year.
-  public function get($year, $month) {
+  // Month starts with 1 for January, not 0.
+  public function get($year, $month = null) {
     if (is_null($month)){
       return $this->getMany($year);
     }
