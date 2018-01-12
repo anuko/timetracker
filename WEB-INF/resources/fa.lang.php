@@ -162,6 +162,8 @@ $i18n_key_words = array(
 'label.finish' => 'اتمام',
 'label.duration' => 'مدت زمان',
 'label.note' => 'توضیح',
+// TODO: translate the following.
+// 'label.notes' => 'Notes',
 'label.item' => 'آیتم',
 'label.cost' => 'هزینه',
 'label.day_total' => 'کل روز',

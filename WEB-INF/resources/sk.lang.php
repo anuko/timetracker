@@ -162,7 +162,8 @@ $i18n_key_words = array(
 'label.finish' => 'Koniec',
 'label.duration' => 'Dĺžka',
 'label.note' => 'Poznámka',
-// TODO: translate label.item
+// TODO: translate the following.
+// 'label.notes' => 'Notes',
 // 'label.item' => 'Item',
 'label.cost' => 'Náklady',
 // TODO: translate the following string.

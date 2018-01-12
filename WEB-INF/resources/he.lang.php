@@ -166,7 +166,8 @@ $i18n_key_words = array(
 'label.finish' => 'סיום',
 'label.duration' => 'משך זמן',
 'label.note' => 'הערה',
-// TODO: translate label.item
+// TODO: translate the following.
+// 'label.notes' => 'Notes',
 // 'label.item' => 'Item',
 'label.cost' => 'עלות',
 'label.day_total' => 'סיכום יומי',

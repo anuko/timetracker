@@ -177,7 +177,8 @@ $i18n_key_words = array(
 'label.finish' => 'Fin',
 'label.duration' => 'Duración',
 'label.note' => 'Nota',
-// TODO: translate the following strings.
+// TODO: translate the following.
+// 'label.notes' => 'Notes',
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',

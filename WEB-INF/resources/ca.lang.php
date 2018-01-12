@@ -173,6 +173,7 @@ $i18n_key_words = array(
 // 'label.finish' => 'Finish',
 // 'label.duration' => 'Duration',
 // 'label.note' => 'Note',
+// 'label.notes' => 'Notes',
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',

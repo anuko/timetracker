@@ -152,6 +152,7 @@ $i18n_key_words = array(
 'label.finish' => 'Окончание',
 'label.duration' => 'Длительность',
 'label.note' => 'Комментарий',
+'label.notes' => 'Комментарии',
 'label.item' => 'Предмет',
 'label.cost' => 'Стоимость',
 'label.day_total' => 'Итог за день',

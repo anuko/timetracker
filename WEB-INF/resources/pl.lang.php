@@ -156,6 +156,8 @@ $i18n_key_words = array(
 'label.finish' => 'Koniec',
 'label.duration' => 'Czas trwania',
 'label.note' => 'Uwagi',
+// TODO: translate the following.
+// 'label.notes' => 'Notes',
 'label.item' => 'Pozycja',
 'label.cost' => 'Koszt',
 'label.day_total' => 'Dziś',

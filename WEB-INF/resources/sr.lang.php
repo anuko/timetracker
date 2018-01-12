@@ -153,6 +153,8 @@ $i18n_key_words = array(
 'label.finish' => 'Završetak',
 'label.duration' => 'Trajanje',
 'label.note' => 'Napomena',
+// TODO: translate the following.
+// 'label.notes' => 'Notes',
 'label.item' => 'Stavka',
 'label.cost' => 'Cena',
 'label.day_total' => 'Zbir časova dnevno',
