@@ -30,11 +30,15 @@ import('form.FormElement');
 
 class TextField extends FormElement {
 
+  var $title = null; // Control title (ex: to display a tooltip).
+
   function __construct($name)
   {
     $this->class = 'TextField';
     $this->name = $name;
   }
+
+  function setTitle($title) { $this->title = $title; }
 
   function getHtml() {
     if (empty($this->id)) $this->id = $this->name;
@@ -42,6 +46,7 @@ class TextField extends FormElement {
     $html .= " id=\"$this->id\" name=\"$this->name\"";
     if (!empty($this->size)) $html .= " size=\"$this->size\"";
     if (!empty($this->style)) $html .= " style=\"$this->style\"";
+    if (!empty($this->title)) $html .= " title=\"$this->title\"";
 
     if($this->isEnabled()) {
       if (!empty($this->max_length)) $html .= " maxlength=\"$this->max_length\"";

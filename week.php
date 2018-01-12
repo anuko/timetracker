@@ -142,9 +142,8 @@ class LabelCellRenderer extends DefaultCellRenderer {
   }
 }
 
-// Define rendering class for a single cell for time entry in week view table.
-// TODO: Refactor the class name, as we now handle both durations and comments in these cells.
-class TimeCellRenderer extends DefaultCellRenderer {
+// Define rendering class for a single cell for a time or a comment entry in week view table.
+class WeekViewCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     $field_name = $table->getValueAt($row,$column)['control_id']; // Our text field names (and ids) are like x_y (row_column).
     $field = new TextField($field_name);
@@ -156,8 +155,10 @@ class TimeCellRenderer extends DefaultCellRenderer {
     $field->setStyle('width: 60px;'); // TODO: need to style everything properly, eventually.
     if (0 == $row % 2)
       $field->setValue($table->getValueAt($row,$column)['duration']); // Duration for even rows.
-    else
+    else {
       $field->setValue($table->getValueAt($row,$column)['note']);     // Comment for odd rows.
+      $field->setTitle($table->getValueAt($row,$column)['note']);     // Tooltip to help view the entire comment.
+    }
     // Disable control when time entry mode is TYPE_START_FINISH and there is no value in control
     // because we can't supply start and finish times in week view - there are no fields for them.
     global $user;
@@ -194,7 +195,7 @@ $table->setData($dataArray);
 // Add columns to table.
 $table->addColumn(new TableColumn('label', '', new LabelCellRenderer(), $dayTotals['label']));
 for ($i = 0; $i < 7; $i++) {
-  $table->addColumn(new TableColumn($dayHeaders[$i], $dayHeaders[$i], new TimeCellRenderer(), $dayTotals[$dayHeaders[$i]]));
+  $table->addColumn(new TableColumn($dayHeaders[$i], $dayHeaders[$i], new WeekViewCellRenderer(), $dayTotals[$dayHeaders[$i]]));
 }
 $table->setInteractive(false);
 $form->addInputElement($table);
