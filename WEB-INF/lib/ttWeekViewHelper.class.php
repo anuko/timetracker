@@ -213,6 +213,87 @@ class ttWeekViewHelper {
     return $dataArray;
   }
 
+  // prePopulateFromPastWeeks - is a complementary function to getDataForWeekView.
+  // It build an "empty" $dataArray with only labels present. Labels are taken from
+  // the most recent past week, up to 5 weeks back from this week.
+  // This is a data entry acceleration feature to help users quickly populate their
+  // regular entry list for a new week, even after a long vacation.
+  static function prePopulateFromPastWeeks($startDate, $dayHeaders) {
+    global $user;
+    global $i18n;
+
+    // First, determine past week start and end dates.
+    $objDate = new DateAndTime(DB_DATEFORMAT, $startDate);
+    $objDate->decDay(7);
+    $pastWeekStartDate = $objDate->toString(DB_DATEFORMAT);
+    $objDate->incDay(6);
+    $pastWeekEndDate = $objDate->toString(DB_DATEFORMAT);
+    unset($objDate);
+
+    // Obtain past week(s) records.
+    $records = ttWeekViewHelper::getRecordsForInterval($user->getActiveUser(), $pastWeekStartDate, $pastWeekEndDate);
+    // Handle potential situation of no records by re-trying for up to 4 more previous weeks (after a long vacation, etc.).
+    if (!$records) {
+      for ($i = 0; $i < 4; $i++) {
+        $objDate = new DateAndTime(DB_DATEFORMAT, $pastWeekStartDate);
+        $objDate->decDay(7);
+        $pastWeekStartDate = $objDate->toString(DB_DATEFORMAT);
+        $objDate->incDay(6);
+        $pastWeekEndDate = $objDate->toString(DB_DATEFORMAT);
+        unset($objDate);
+
+        $records = ttWeekViewHelper::getRecordsForInterval($user->getActiveUser(), $pastWeekStartDate, $pastWeekEndDate);
+        // Break out of the loop if we found something.
+        if ($records) break;
+      }
+    }
+
+    // TODO: consider refactoring, this block of code is used 2 times.
+    // Construct the first row for a brand new entry.
+    $dataArray[] = array('row_id' => null,'label' => $i18n->getKey('form.week.new_entry').':'); // Insert row.
+    // Insert empty cells with proper control ids.
+    for ($i = 0; $i < 7; $i++) {
+      $control_id = '0_'. $dayHeaders[$i];
+      $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+    }
+    // Construct the second row for daily comments for a brand new entry.
+    $dataArray[] = array('row_id' => null,'label' => $i18n->getKey('label.notes').':'); // Insert row.
+    // Insert empty cells with proper control ids.
+    for ($i = 0; $i < 7; $i++) {
+      $control_id = '1_'. $dayHeaders[$i];
+      $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+    }
+
+    // Iterate through records and build an "empty" $dataArray.
+    foreach ($records as $record) {
+      // Create row id with 0 suffix. In prepopulated view, we only need one row for similar records.
+      $row_id = ttWeekViewHelper::makeRowIdentifier($record).'_0';
+      // Find row.
+      $pos = ttWeekViewHelper::findRow($row_id, $dataArray);
+      if ($pos < 0) {
+        // Insert row for durations.
+        $dataArray[] = array('row_id' => $row_id,'label' => ttWeekViewHelper::makeRowLabel($record));
+        $pos = ttWeekViewHelper::findRow($row_id, $dataArray);
+        // Insert empty cells with proper control ids.
+        for ($i = 0; $i < 7; $i++) {
+          $control_id = $pos.'_'. $dayHeaders[$i];
+          $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+        }
+        // Insert row for comments.
+        $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->getKey('label.notes').':');
+        $pos++;
+        // Insert empty cells with proper control ids.
+        for ($i = 0; $i < 7; $i++) {
+          $control_id = $pos.'_'. $dayHeaders[$i];
+          $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+        }
+        $pos--;
+      }
+    }
+
+    return $dataArray;
+  }
+
   // cellExists is a helper function for getDataForWeekView() to see if a cell with a given label
   // and a day header already exists.
   static function cellExists($row_id, $day_header, $dataArray) {

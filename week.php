@@ -114,8 +114,12 @@ $dayHeaders = ttWeekViewHelper::getDayHeadersForWeek($startDate->toString(DB_DAT
 $lockedDays = ttWeekViewHelper::getLockedDaysForWeek($startDate->toString(DB_DATEFORMAT));
 // Get already existing records.
 $records = ttWeekViewHelper::getRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
-// Build data array for the table. Format is described in the function.
-$dataArray = ttWeekViewHelper::getDataForWeekView($records, $dayHeaders);
+// Build data array for the table. Format is described in ttWeekViewHelper::getDataForWeekView function.
+if ($records)
+  $dataArray = ttWeekViewHelper::getDataForWeekView($records, $dayHeaders);
+else
+  $dataArray = ttWeekViewHelper::prePopulateFromPastWeeks($startDate->toString(DB_DATEFORMAT), $dayHeaders);
+
 // Build day totals (total durations for each day in week).
 $dayTotals = ttWeekViewHelper::getDayTotals($dataArray, $dayHeaders);
 
