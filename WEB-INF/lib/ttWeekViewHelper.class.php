@@ -85,7 +85,7 @@ class ttWeekViewHelper {
     return $result;
   }
 
-  // getDataForWeekView - builds an array to render a table of durations for week view.
+  // getDataForWeekView - builds an array to render a table of durations and comments for week view.
   // In a week view we want one row representing the same attributes to have 7 values for each day of week.
   // We identify simlar records by a combination of client, billable, project, task, and custom field values.
   // This will allow us to extend the feature when more custom fields are added.
@@ -96,10 +96,14 @@ class ttWeekViewHelper {
   // "cl:546,bl:0,pr:23456,ts:27464,cf_1:7623"
   // The above means client 546, not billable, project 23456, task 27464, custom field option id 7623.
   //
+  // Daily comments are implemented as alternate rows following week durations.
+  // For example: row_0 - new entry durations, row_1 - new entry daily comments,
+  //              row_2 - existing entry durations, row_3 - existing entry comments, etc.
+  //
   // Description of $dataArray format that the function returns.
   // $dataArray = array(
   //   array( // Row 0. This is a special, one-off row for a new week entry with empty values.
-  //     'row_id' => null', // Row identifier. Null for a new entry.
+  //     'row_id' => null, // Row identifier. Null for a new entry.
   //     'label' => 'New entry', // Human readable label for the row describing what this time entry is for.
   //     'day_0' => array('control_id' => '0_day_0', 'tt_log_id' => null, 'duration' => null), // control_id is row_id plus day header for column.
   //     'day_1' => array('control_id' => '0_day_1', 'tt_log_id' => null, 'duration' => null),
@@ -109,6 +113,21 @@ class ttWeekViewHelper {
   //     'day_5' => array('control_id' => '0_day_5', 'tt_log_id' => null, 'duration' => null),
   //     'day_6' => array('control_id' => '0_day_6', 'tt_log_id' => null, 'duration' => null)
   //   ),
+  //
+  //   TODO: work in progress re-documenting the array for improved week view. Trying to implement this now.
+  //   array( // Row 1. This row represents daily comments for a new entry in row above (row 0).
+  //     'row_id' => null, // Row identifier. See ttWeekViewHelper::makeRowIdentifier().
+  //     'label' => 'Notes', // Human readable label.
+  //     'day_0' => array('control_id' => '1_day_0', 'tt_log_id' => null, 'note' => null),
+  //     'day_1' => array('control_id' => '1_day_1', 'tt_log_id' => null, 'note' => null),
+  //     'day_2' => array('control_id' => '1_day_2', 'tt_log_id' => null, 'note' => null),
+  //     'day_3' => array('control_id' => '1_day_3', 'tt_log_id' => null, 'note' => null),
+  //     'day_4' => array('control_id' => '1_day_4', 'tt_log_id' => null, 'note' => null),
+  //     'day_5' => array('control_id' => '1_day_5', 'tt_log_id' => null, 'note' => null),
+  //     'day_6' => array('control_id' => '1_day_6', 'tt_log_id' => null, 'note' => null)
+  //   ),
+  //   TODO: work in progress...
+  //
   //   array( // Row 1.
   //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623_0', // Row identifier. See ttWeekViewHelper::makeRowIdentifier().
   //     'label' => 'Anuko - Time Tracker - Coding',              // Human readable label for the row describing what this time entry is for.
@@ -138,16 +157,23 @@ class ttWeekViewHelper {
     $dataArray = array();
 
     // Construct the first row for a brand new entry.
-    $dataArray[] = array('row_id' => null,'label' => $i18n->getKey('form.week.new_entry')); // Insert row.
+    $dataArray[] = array('row_id' => null,'label' => $i18n->getKey('form.week.new_entry').':'); // Insert row.
     // Insert empty cells with proper control ids.
     for ($i = 0; $i < 7; $i++) {
       $control_id = '0_'. $dayHeaders[$i];
       $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
     }
+    // Construct the second row for daily comments for a brand new entry.
+    $dataArray[] = array('row_id' => null,'label' => $i18n->getKey('label.notes').':'); // Insert row.
+    // Insert empty cells with proper control ids.
+    for ($i = 0; $i < 7; $i++) {
+      $control_id = '1_'. $dayHeaders[$i];
+      $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+    }
 
     // Iterate through records and build $dataArray cell by cell.
     foreach ($records as $record) {
-      // Create record id without suffix.
+      // Create row id without suffix.
       $row_id_no_suffix = ttWeekViewHelper::makeRowIdentifier($record);
       // Handle potential multiple records with the same attributes by using a numerical suffix.
       $suffix = 0;
@@ -160,16 +186,29 @@ class ttWeekViewHelper {
       // Find row.
       $pos = ttWeekViewHelper::findRow($row_id, $dataArray);
       if ($pos < 0) {
-        $dataArray[] = array('row_id' => $row_id,'label' => ttWeekViewHelper::makeRowLabel($record)); // Insert row.
+        // Insert row for durations.
+        $dataArray[] = array('row_id' => $row_id,'label' => ttWeekViewHelper::makeRowLabel($record));
         $pos = ttWeekViewHelper::findRow($row_id, $dataArray);
         // Insert empty cells with proper control ids.
         for ($i = 0; $i < 7; $i++) {
           $control_id = $pos.'_'. $dayHeaders[$i];
           $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
         }
+        // Insert row for comments.
+        $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->getKey('label.notes').':');
+        $pos++;
+        // Insert empty cells with proper control ids.
+        for ($i = 0; $i < 7; $i++) {
+          $control_id = $pos.'_'. $dayHeaders[$i];
+          $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+        }
+        $pos--;
       }
       // Insert actual cell data from $record (one cell only).
       $dataArray[$pos][$day_header] = array('control_id' => $pos.'_'. $day_header, 'tt_log_id' => $record['id'],'duration' => $record['duration']);
+      // Insert existing comment from $record into the duration cell.
+      $pos++;
+      $dataArray[$pos][$day_header] = array('control_id' => $pos.'_'. $day_header, 'tt_log_id' => $record['id'],'note' => $record['comment']);
     }
     return $dataArray;
   }
@@ -201,7 +240,7 @@ class ttWeekViewHelper {
 
     // Insert label.
     global $i18n;
-    $dayTotals['label'] = $i18n->getKey('label.day_total');
+    $dayTotals['label'] = $i18n->getKey('label.day_total').':';
 
     foreach ($dataArray as $row) {
       foreach($dayHeaders as $dayHeader) {
@@ -400,12 +439,8 @@ class ttWeekViewHelper {
     global $user;
 
     // Possible errors: 1) Overlap if the existing record has start time. 2) Going beyond 24 hour boundary.
-    // TODO: rename this function.
-    // Handle different errors with specific error messages.
-    if (!ttWeekViewHelper::canModify($fields['tt_log_id'], $fields['duration'], $err)) {
-      // $err->add($i18n->getKey('error.overlap'));
+    if (!ttWeekViewHelper::canModify($fields['tt_log_id'], $fields['duration'], $err))
       return false;
-    }
 
     $mdb2 = getConnection();
     $duration = $fields['duration'];
@@ -467,5 +502,21 @@ class ttWeekViewHelper {
     }
 
     return true; // There are no conflicts, safe to modify.
+  }
+
+  // modifyCommentFromWeekView - modifies a comment in an existing record from a week view post.
+  static function modifyCommentFromWeekView($fields) {
+    global $user;
+
+    $mdb2 = getConnection();
+    $tt_log_id = $fields['tt_log_id'];
+    $comment = $fields['comment'];
+    $user_id = $user->getActiveUser();
+    $sql = "update tt_log set comment = ".$mdb2->quote($fields['comment'])." where id = $tt_log_id and user_id = $user_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    return true;
   }
 }

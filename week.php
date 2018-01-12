@@ -107,7 +107,6 @@ $cl_project = $request->getParameter('project', ($request->getMethod()=='POST'? 
 $_SESSION['project'] = $cl_project;
 $cl_task = $request->getParameter('task', ($request->getMethod()=='POST'? null : @$_SESSION['task']));
 $_SESSION['task'] = $cl_task;
-$cl_note = trim($request->getParameter('note'));
 
 // Get the data we need to display week view.
 // Get column headers, which are day numbers in month.
@@ -127,9 +126,11 @@ class LabelCellRenderer extends DefaultCellRenderer {
     // Special handling for row 0, which represents a new week entry.
     if (0 == $row) {
       $this->setOptions(array('style'=>'text-align: center; font-weight: bold;'));
+    } else if (0 != $row % 2) {
+      $this->setOptions(array('style'=>'text-align: right;'));
     }
     // Special handling for not billable entries.
-    if ($row > 0) {
+    if ($row > 1 && 0 == $row % 2) {
       $row_id = $table->getValueAtName($row,'row_id');
       $billable = ttWeekViewHelper::parseFromWeekViewRow($row_id, 'bl');
       if (!$billable) {
@@ -142,6 +143,7 @@ class LabelCellRenderer extends DefaultCellRenderer {
 }
 
 // Define rendering class for a single cell for time entry in week view table.
+// TODO: Refactor the class name, as we now handle both durations and comments in these cells.
 class TimeCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     $field_name = $table->getValueAt($row,$column)['control_id']; // Our text field names (and ids) are like x_y (row_column).
@@ -152,7 +154,10 @@ class TimeCellRenderer extends DefaultCellRenderer {
       $field->setEnabled(false);
     $field->setFormName($table->getFormName());
     $field->setStyle('width: 60px;'); // TODO: need to style everything properly, eventually.
-    $field->setValue($table->getValueAt($row,$column)['duration']);
+    if (0 == $row % 2)
+      $field->setValue($table->getValueAt($row,$column)['duration']); // Duration for even rows.
+    else
+      $field->setValue($table->getValueAt($row,$column)['note']);     // Comment for odd rows.
     // Disable control when time entry mode is TYPE_START_FINISH and there is no value in control
     // because we can't supply start and finish times in week view - there are no fields for them.
     global $user;
@@ -259,7 +264,6 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 }
-$form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 250px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
 
 // Add other controls.
 $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
@@ -324,58 +328,93 @@ if ($request->isPost()) {
           if ($lockedDays[$key]) continue;
           // Make control id for the cell.
           $control_id = $rowNumber.'_'.$dayHeader;
-          // Optain existing and posted durations.
-          $postedDuration = $request->getParameter($control_id);
-          $existingDuration = $dataArray[$rowNumber][$dayHeader]['duration'];
-          // If posted value is not null, check and normalize it.
-          if ($postedDuration) {
-            if (ttTimeHelper::isValidDuration($postedDuration)) {
-              $postedDuration = ttTimeHelper::normalizeDuration($postedDuration, false); // No leading zero.
+
+          // Handle durations and comments in separate blocks of code.
+          if (0 == $rowNumber % 2) {
+            // Handle durations row here.
+
+            // Obtain existing and posted durations.
+            $postedDuration = $request->getParameter($control_id);
+            $existingDuration = $dataArray[$rowNumber][$dayHeader]['duration'];
+            // If posted value is not null, check and normalize it.
+            if ($postedDuration) {
+              if (ttTimeHelper::isValidDuration($postedDuration)) {
+                $postedDuration = ttTimeHelper::normalizeDuration($postedDuration, false); // No leading zero.
+              } else {
+                $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+                $result = false; break; // Break out. Stop any further processing.
+              }
+            }
+            // Do not process if value has not changed.
+            if ($postedDuration == $existingDuration)
+              continue;
+            // Posted value is different.
+            if ($existingDuration == null) {
+              // Skip inserting 0 duration values.
+              if (0 == ttTimeHelper::toMinutes($postedDuration))
+                continue;
+              // Insert a new record.
+              $fields = array();
+              $fields['row_id'] = $dataArray[$rowNumber]['row_id'];
+              if (!$fields['row_id']) {
+                // Special handling for row 0, a new entry. Need to construct new row_id.
+                $record = array();
+                $record['client_id'] = $cl_client;
+                $record['billable'] = $cl_billable ? '1' : '0';
+                $record['project_id'] = $cl_project;
+                $record['task_id'] = $cl_task;
+                $record['cf_1_value'] = $cl_cf_1;
+                $fields['row_id'] = ttWeekViewHelper::makeRowIdentifier($record).'_0';
+                // Note: no need to check for a possible conflict with an already existing row
+                // because we are doing an insert that does not affect already existing data.
+              }
+              $fields['day_header'] = $dayHeader;
+              $fields['start_date'] = $startDate->toString(DB_DATEFORMAT); // To be able to determine date for the entry using $dayHeader.
+              $fields['duration'] = $postedDuration;
+              $fields['browser_today'] = $request->getParameter('browser_today', null);
+              // Take note value from the control below duration.
+              $noteRowNumber = $rowNumber + 1;
+              $note_control_id =  $noteRowNumber.'_'.$dayHeader;
+              $fields['note'] = $request->getParameter($note_control_id);
+              $result = ttWeekViewHelper::insertDurationFromWeekView($fields, $custom_fields, $err);
+            } elseif ($postedDuration == null || 0 == ttTimeHelper::toMinutes($postedDuration)) {
+              // Delete an already existing record here.
+              $result = ttTimeHelper::delete($dataArray[$rowNumber][$dayHeader]['tt_log_id'], $user->getActiveUser());
             } else {
-              $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+              $fields = array();
+              $fields['tt_log_id'] = $dataArray[$rowNumber][$dayHeader]['tt_log_id'];
+              $fields['duration'] = $postedDuration;
+              $result = ttWeekViewHelper::modifyDurationFromWeekView($fields, $err);
+            }
+            if (!$result) break; // Break out of the loop in case of first error.
+
+          } else {
+            // Handle commments row here.
+
+            // Obtain existing and posted comments.
+            $postedComment = $request->getParameter($control_id);
+            $existingComment = $dataArray[$rowNumber][$dayHeader]['note'];
+            // If posted value is not null, check it.
+            if ($postedComment && !ttValidString($postedComment, true)) {
+              $err->add($i18n->getKey('error.field'), $i18n->getKey('label.note'));
               $result = false; break; // Break out. Stop any further processing.
             }
-          }
-          // Do not process if value has not changed.
-          if ($postedDuration == $existingDuration)
-            continue;
-          // Posted value is different.
-          if ($existingDuration == null) {
-            // Skip inserting 0 duration values.
-            if (0 == ttTimeHelper::toMinutes($postedDuration))
+            // Do not process if value has not changed.
+            if ($postedComment == $existingComment)
               continue;
-            // Insert a new record.
-            $fields = array();
-            $fields['row_id'] = $dataArray[$rowNumber]['row_id'];
-            if (!$fields['row_id']) {
-              // Special handling for row 0, a new entry. Need to construct new row_id.
-              $record = array();
-              $record['client_id'] = $cl_client;
-              $record['billable'] = $cl_billable ? '1' : '0';
-              $record['project_id'] = $cl_project;
-              $record['task_id'] = $cl_task;
-              $record['cf_1_value'] = $cl_cf_1;
-              $fields['row_id'] = ttWeekViewHelper::makeRowIdentifier($record).'_0';
-              // Note: no need to check for a possible conflict with an already existing row
-              // because we are doing an insert that does not affect already existing data.
 
-              $fields['note'] = $cl_note;
-            }
-            $fields['day_header'] = $dayHeader;
-            $fields['start_date'] = $startDate->toString(DB_DATEFORMAT); // To be able to determine date for the entry using $dayHeader.
-            $fields['duration'] = $postedDuration;
-            $fields['browser_today'] = $request->getParameter('browser_today', null);
-            $result = ttWeekViewHelper::insertDurationFromWeekView($fields, $custom_fields, $err);
-          } elseif ($postedDuration == null || 0 == ttTimeHelper::toMinutes($postedDuration)) {
-            // Delete an already existing record here.
-            $result = ttTimeHelper::delete($dataArray[$rowNumber][$dayHeader]['tt_log_id'], $user->getActiveUser());
-          } else {
+            // Posted value is different.
+            // TODO: handle new entries separately in the durations block above.
+
+            // Here, only update the comment on an already existing record.
             $fields = array();
             $fields['tt_log_id'] = $dataArray[$rowNumber][$dayHeader]['tt_log_id'];
-            $fields['duration'] = $postedDuration;
-            $result = ttWeekViewHelper::modifyDurationFromWeekView($fields, $err);
+            if ($fields['tt_log_id']) {
+              $fields['comment'] = $postedComment;
+              $result = ttWeekViewHelper::modifyCommentFromWeekView($fields);
+            }
+            if (!$result) break; // Break out of the loop in case of first error.
           }
-          if (!$result) break; // Break out of the loop in case of first error.
         }
         if (!$result) break; // Break out of the loop in case of first error.
         $rowNumber++;
