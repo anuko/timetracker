@@ -41,14 +41,12 @@ class DateField extends TextField {
     $this->class = 'DateField';
     $this->name = $name;
     $this->mDateObj = new DateAndTime();
-
-    if (isset($GLOBALS["I18N"])) {
-      $this->localize($GLOBALS["I18N"]);
-    }
+    $this->localize();
   }
 
-  function localize($i18n)  {
+  function localize()  {
     global $user;
+    global $i18n;
   	
     $this->mDateObj->setFormat($user->date_format);
 
@@ -80,6 +78,7 @@ class DateField extends TextField {
   }
 
   function getHtml() {
+    global $user;
 
     if (!$this->isEnabled()) {
       $html = htmlspecialchars($this->getValue()).
@@ -296,9 +295,7 @@ class DateField extends TextField {
 
 
             function getDateString(dateVal) {\n";
-            if (isset($GLOBALS['i18n'])) {
-              $html .= "dateVal.locale = \"".$GLOBALS['i18n']->lang."\";\n";
-            }
+            $html .= "dateVal.locale = \"".$user->lang."\";\n";
             $html .=  "return dateVal.strftime(dateFormat);
             }
 

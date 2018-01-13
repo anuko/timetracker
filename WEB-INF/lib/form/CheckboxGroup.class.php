@@ -58,9 +58,10 @@ class CheckboxGroup extends FormElement {
 	function setGroupIn($value)	{ $this->mGroupIn = $value; if ($this->mGroupIn<1) $this->mGroupIn = 1;}
 	function getGroupIn() { return $this->mGroupIn; }
 	
-	function localize($i18n) {
-		$this->lSelAll = $i18n->getKey('label.select_all');
-		$this->lSelNone = $i18n->getKey('label.select_none');
+	function localize() {
+          global $i18n;
+          $this->lSelAll = $i18n->getKey('label.select_all');
+          $this->lSelNone = $i18n->getKey('label.select_none');
 	}
 		
 	function getHtml() {

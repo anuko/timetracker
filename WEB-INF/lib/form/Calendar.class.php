@@ -57,8 +57,9 @@ class Calendar extends FormElement {
     	  $this->highlight = $highlight;
     }
 
-    function localize($i18n) {
+    function localize() {
       global $user;
+      global $i18n;
       
       $this->mMonthNames = $i18n->monthNames;
       $this->mWeekDayShortNames = $i18n->weekdayShortNames;

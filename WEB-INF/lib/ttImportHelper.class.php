@@ -329,6 +329,8 @@ class ttImportHelper {
   // startElement, endElement, and dataElement functions are called as many times as necessary.
   // Actual import occurs in the endElement handler.
   function importXml() {
+    global $i18n;
+
     // Do we have a compressed file?
     $compressed = false;
     $file_ext = substr($_FILES['xmlfile']['name'], strrpos($_FILES['xmlfile']['name'], '.') + 1);
@@ -343,13 +345,13 @@ class ttImportHelper {
     // If the file is compressed - uncompress it.
     if ($compressed) {
       if (!$this->uncompress($_FILES['xmlfile']['tmp_name'], $filename)) {
-        $this->errors->add($GLOBALS['I18N']->getKey('error.sys'));
+        $this->errors->add($i18n->getKey('error.sys'));
         return;
       }
       unlink($_FILES['xmlfile']['tmp_name']);
     } else {
       if (!move_uploaded_file($_FILES['xmlfile']['tmp_name'], $filename)) {
-        $this->errors->add($GLOBALS['I18N']->getKey('error.upload'));
+        $this->errors->add($i18n->getKey('error.upload'));
         return;
       }
     }
@@ -369,7 +371,7 @@ class ttImportHelper {
           xml_get_current_line_number($parser)));
       }
       if (!$this->canImport) {
-        $this->errors->add($GLOBALS['I18N']->getKey('error.user_exists'));
+        $this->errors->add($i18n->getKey('error.user_exists'));
         break;
       }
     }

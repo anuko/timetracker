@@ -135,9 +135,9 @@ class NameCellRenderer extends DefaultCellRenderer {
 class RateCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     global $assigned_projects;
+
     $field = new FloatField('rate_'.$table->getValueAtName($row,'id'));
     $field->setFormName($table->getFormName());
-    $field->localize($GLOBALS['I18N']);
     $field->setSize(5);
     $field->setFormat('.2');
     foreach ($assigned_projects as $p) {

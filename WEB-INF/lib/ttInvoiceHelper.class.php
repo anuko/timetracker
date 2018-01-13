@@ -99,7 +99,6 @@ class ttInvoiceHelper {
   // The getInvoiceItems retrieves tt_log items associated with the invoice. 
   static function getInvoiceItems($invoice_id) {
     global $user;
-    global $i18n;
     $mdb2 = getConnection();
 
     // At this time only detailed invoice is supported.

@@ -84,8 +84,8 @@ class FormElement {
   function setOnChange($str) { $this->on_change = $str; }
   function setOnClick($str) { $this->on_click = $str; }
 
-  function localize($i18n) {} // Localization occurs in derived classes and is dependent on control type.
-                              // For example, in calendar control we need to localize day and month names.
+  function localize() {} // Localization occurs in derived classes and is dependent on control type.
+                         // For example, in calendar control we need to localize day and month names.
 
   // getHtml returns HTML for the element.
   function getHtml() { return ''; }
