@@ -199,8 +199,6 @@ if (!$lang) {
 $i18n->load($lang);
 $GLOBALS['I18N'] = &$i18n;
 
-$GLOBALS['USER'] = &$user;
-
 // Assign things for smarty to use in template files.
 $smarty->assign('i18n', $i18n->keys);
 $smarty->assign('err', $err);
