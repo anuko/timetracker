@@ -85,9 +85,9 @@ class ttWeekViewHelper {
     return $result;
   }
 
-  // getDataForWeekView - builds an array to render a table of durations and comments for week view.
+  // getDataForWeekView - builds an array to render a table of durations and comments for a week view.
   // In a week view we want one row representing the same attributes to have 7 values for each day of week.
-  // We identify simlar records by a combination of client, billable, project, task, and custom field values.
+  // We identify similar records by a combination of client, billable, project, task, and custom field values.
   // This will allow us to extend the feature when more custom fields are added.
   //
   // "cl:546,bl:1,pr:23456,ts:27464,cf_1:example text"
@@ -104,7 +104,7 @@ class ttWeekViewHelper {
   // $dataArray = array(
   //   array( // Row 0. This is a special, one-off row for a new week entry with empty values.
   //     'row_id' => null, // Row identifier. Null for a new entry.
-  //     'label' => 'New entry', // Human readable label for the row describing what this time entry is for.
+  //     'label' => 'New entry:', // Human readable label for the row describing what this time entry is for.
   //     'day_0' => array('control_id' => '0_day_0', 'tt_log_id' => null, 'duration' => null), // control_id is row_id plus day header for column.
   //     'day_1' => array('control_id' => '0_day_1', 'tt_log_id' => null, 'duration' => null),
   //     'day_2' => array('control_id' => '0_day_2', 'tt_log_id' => null, 'duration' => null),
@@ -114,10 +114,9 @@ class ttWeekViewHelper {
   //     'day_6' => array('control_id' => '0_day_6', 'tt_log_id' => null, 'duration' => null)
   //   ),
   //
-  //   TODO: work in progress re-documenting the array for improved week view. Trying to implement this now.
   //   array( // Row 1. This row represents daily comments for a new entry in row above (row 0).
-  //     'row_id' => null, // Row identifier. See ttWeekViewHelper::makeRowIdentifier().
-  //     'label' => 'Notes', // Human readable label.
+  //     'row_id' => null,
+  //     'label' => 'Notes:',
   //     'day_0' => array('control_id' => '1_day_0', 'tt_log_id' => null, 'note' => null),
   //     'day_1' => array('control_id' => '1_day_1', 'tt_log_id' => null, 'note' => null),
   //     'day_2' => array('control_id' => '1_day_2', 'tt_log_id' => null, 'note' => null),
@@ -126,29 +125,28 @@ class ttWeekViewHelper {
   //     'day_5' => array('control_id' => '1_day_5', 'tt_log_id' => null, 'note' => null),
   //     'day_6' => array('control_id' => '1_day_6', 'tt_log_id' => null, 'note' => null)
   //   ),
-  //   TODO: work in progress...
   //
-  //   array( // Row 1.
-  //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623_0', // Row identifier. See ttWeekViewHelper::makeRowIdentifier().
-  //     'label' => 'Anuko - Time Tracker - Coding',              // Human readable label for the row describing what this time entry is for.
-  //     'day_0' => array('control_id' => '1_day_0', 'tt_log_id' => 12345, 'duration' => '00:00'), // control_id is row_id plus day header for column.
-  //     'day_1' => array('control_id' => '1_day_1', 'tt_log_id' => 12346, 'duration' => '01:00'),
-  //     'day_2' => array('control_id' => '1_day_2', 'tt_log_id' => 12347, 'duration' => '02:00'),
-  //     'day_3' => array('control_id' => '1_day_3', 'tt_log_id' => null, 'duration' => null),
-  //     'day_4' => array('control_id' => '1_day_4', 'tt_log_id' => 12348, 'duration' => '04:00'),
-  //     'day_5' => array('control_id' => '1_day_5', 'tt_log_id' => 12349, 'duration' => '04:00'),
-  //     'day_6' => array('control_id' => '1_day_6', 'tt_log_id' => null, 'duration' => null)
-  //   ),
   //   array( // Row 2.
-  //     'row_id' => 'bl:0_0',
-  //     'label' => '', // In this case the label is empty as we don't have anything to put into it, as we only have billable flag.
-  //     'day_0' => array('control_id' => '2_day_0', 'tt_log_id' => null, 'duration' => null),
-  //     'day_1' => array('control_id' => '2_day_1', 'tt_log_id' => 12350, 'duration' => '01:30'),
-  //     'day_2' => array('control_id' => '2_day_2', 'tt_log_id' => null, 'duration' => null),
-  //     'day_3' => array('control_id' => '2_day_3', 'tt_log_id' => 12351,'duration' => '02:30'),
-  //     'day_4' => array('control_id' => '2_day_4', 'tt_log_id' => 12352, 'duration' => '04:00'),
-  //     'day_5' => array('control_id' => '2_day_5', 'tt_log_id' => null, 'duration' => null),
+  //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623_0',
+  //     'label' => 'Anuko - Time Tracker - Coding - Option 2',
+  //     'day_0' => array('control_id' => '2_day_0', 'tt_log_id' => 12345, 'duration' => '00:00'),
+  //     'day_1' => array('control_id' => '2_day_1', 'tt_log_id' => 12346, 'duration' => '01:00'),
+  //     'day_2' => array('control_id' => '2_day_2', 'tt_log_id' => 12347, 'duration' => '02:00'),
+  //     'day_3' => array('control_id' => '2_day_3', 'tt_log_id' => null, 'duration' => null),
+  //     'day_4' => array('control_id' => '2_day_4', 'tt_log_id' => 12348, 'duration' => '04:00'),
+  //     'day_5' => array('control_id' => '2_day_5', 'tt_log_id' => 12349, 'duration' => '04:00'),
   //     'day_6' => array('control_id' => '2_day_6', 'tt_log_id' => null, 'duration' => null)
+  //   ),
+  //   array( // Row 3.
+  //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623_0_notes',
+  //     'label' => 'Notes:',
+  //     'day_0' => array('control_id' => '3_day_0', 'tt_log_id' => 12345, 'note' => 'Comment one'),
+  //     'day_1' => array('control_id' => '3_day_1', 'tt_log_id' => 12346, 'note' => 'Comment two'),
+  //     'day_2' => array('control_id' => '3_day_2', 'tt_log_id' => 12347, 'note' => 'Comment three'),
+  //     'day_3' => array('control_id' => '3_day_3', 'tt_log_id' => null, 'note' => null),
+  //     'day_4' => array('control_id' => '3_day_4', 'tt_log_id' => 12348, 'note' => 'Comment four'),
+  //     'day_5' => array('control_id' => '3_day_5', 'tt_log_id' => 12349, 'note' => 'Comment five'),
+  //     'day_6' => array('control_id' => '3_day_6', 'tt_log_id' => null, 'note' => null)
   //   )
   // );
   static function getDataForWeekView($records, $dayHeaders) {
@@ -214,8 +212,8 @@ class ttWeekViewHelper {
   }
 
   // prePopulateFromPastWeeks - is a complementary function to getDataForWeekView.
-  // It build an "empty" $dataArray with only labels present. Labels are taken from
-  // the most recent past week, up to 5 weeks back from this week.
+  // It builds an "empty" $dataArray with only labels present. Labels are taken from
+  // the most recent active past week, up to 5 weeks back from now.
   // This is a data entry acceleration feature to help users quickly populate their
   // regular entry list for a new week, even after a long vacation.
   static function prePopulateFromPastWeeks($startDate, $dayHeaders) {
@@ -248,7 +246,6 @@ class ttWeekViewHelper {
       }
     }
 
-    // TODO: consider refactoring, this block of code is used 2 times.
     // Construct the first row for a brand new entry.
     $dataArray[] = array('row_id' => null,'label' => $i18n->getKey('form.week.new_entry').':'); // Insert row.
     // Insert empty cells with proper control ids.
