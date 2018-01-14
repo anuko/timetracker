@@ -36,7 +36,8 @@ class Auth {
 //          die ("Your browser's cookie functionality is turned off. Please turn it on.");
 //        }
 
-      $GLOBALS['SMARTY']->assign('authenticated', true); // Used in header.tpl for menu display.
+      global $smarty;
+      $smarty->assign('authenticated', true); // Used in header.tpl for menu display.
       return true;
     }
     session_write_close();

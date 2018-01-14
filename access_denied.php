@@ -29,7 +29,7 @@
 require_once('initialize.php');
 
 $err->add($i18n->getKey('error.access_denied'));
-if ($auth->isAuthenticated()) $GLOBALS['SMARTY']->assign('authenticated', true); // Used in header.tpl for menu display.
+if ($auth->isAuthenticated()) $smarty->assign('authenticated', true); // Used in header.tpl for menu display.
 
 $smarty->assign('title', $i18n->getKey('label.error'));
 $smarty->assign('content_page_name', 'access_denied.tpl');

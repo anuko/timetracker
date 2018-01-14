@@ -53,10 +53,9 @@ class Auth_ldap extends Auth {
 
   function __construct($params)
   {
+    global $smarty;
     $this->params = $params;
-    if (isset($GLOBALS['smarty'])) {
-      $GLOBALS['smarty']->assign('Auth_ldap_params', $this->params);
-    }
+    $smarty->assign('Auth_ldap_params', $this->params);
   }
 
   function ldap_escape($str){

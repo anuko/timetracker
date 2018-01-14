@@ -74,7 +74,6 @@ $smarty = new Smarty;
 $smarty->use_sub_dirs = false;
 $smarty->template_dir = TEMPLATE_DIR;
 $smarty->compile_dir  = TEMPLATE_DIR.'_c';
-$GLOBALS['SMARTY'] = &$smarty;
 
 // Note: these 3 settings below used to be in .htaccess file. Moved them here to eliminate "error 500" problems
 // with some shared hostings that do not have AllowOverride Options or AllowOverride All in their apache configurations.
