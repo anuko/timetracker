@@ -810,7 +810,7 @@ class ttTeamHelper {
     return true;
   }
 
-  // The getInactiveTeams is a maintenance function that returns an array of inactive team ids (max 50).
+  // The getInactiveTeams is a maintenance function that returns an array of inactive team ids (max 100).
   static function getInactiveTeams() {
     $inactive_teams = array();
     $mdb2 = getConnection();
@@ -829,7 +829,7 @@ class ttTeamHelper {
           $count++;
           $inactive_teams[] = $team_id;
           // Limit the array size for perfomance by allowing this operation on small chunks only.
-          if ($count >= 50) break;
+          if ($count >= 100) break;
         }
       }
       return $inactive_teams;
