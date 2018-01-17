@@ -93,7 +93,7 @@ if ($request->isPost()){
   }
 }
 
-// Get monthly quotas where for the entire year.
+// Get monthly quotas for the entire year.
 $monthsData = $quota->get($selectedYear);
 
 $form = new Form('monthlyQuotasForm');
