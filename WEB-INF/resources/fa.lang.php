@@ -68,7 +68,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 'error.sys' => 'خطا در سیستم.',
 'error.db' => 'خطا در پایگاه داده.',
@@ -80,7 +80,7 @@ $i18n_key_words = array(
 'error.project' => 'انتخاب پروژه.',
 'error.task' => 'انتخاب وظیفه.',
 'error.client' => 'انتخاب مشتری.',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 'error.auth' => 'نام کاربری یا رمز عبور اشتباه است.',
 'error.user_exists' => 'کاربری با این نام کاربری موجود است.',
@@ -100,7 +100,7 @@ $i18n_key_words = array(
 'error.uncompleted_exists' => 'قسمت ناتمامی موجود است. آن را تمام یا حذف کنید.',
 'error.goto_uncompleted' => 'مراجعه به قسمت ناتمام.',
 'error.overlap' => 'بازه زمانی با سوابق موجود هم پوشانی دارد.',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'error.future_date' => 'Date is in future.',
 
 // Labels for buttons.
@@ -126,6 +126,8 @@ $i18n_key_words = array(
 'button.import' => 'وارد کردن تیم',
 'button.close' => 'بستن',
 'button.stop' => 'توقف',
+// TODO: translate the following.
+// 'button.mark_paid' => 'Mark paid',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'نام تیم',
@@ -150,7 +152,7 @@ $i18n_key_words = array(
 'label.users' => 'کاربران',
 'label.client' => 'مشتری',
 'label.clients' => 'مشتریان',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'label.option' => 'Option',
 'label.invoice' => 'فاکتور',
 'label.project' => 'پروژه',
@@ -184,7 +186,7 @@ $i18n_key_words = array(
 // 'label.week_view' => 'Week view',
 'label.id' => 'شناسه',
 'label.language' => 'زبان',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
 'label.date_format' => 'قالب تاریخ',
 'label.time_format' => 'قالب زمان',
@@ -228,7 +230,7 @@ $i18n_key_words = array(
 'title.login' => 'ورود',
 'title.teams' => 'تیم ها',
 'title.create_team' => 'ایجاد تیم',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'title.edit_team' => 'Editing Team',
 'title.delete_team' => 'حذف تیم',
 'title.reset_password' => 'بازیابی رمزعبور',
@@ -312,7 +314,7 @@ $i18n_key_words = array(
 'dropdown.projects' => 'پروژه ها',
 'dropdown.tasks' => 'وظایف',
 'dropdown.clients' => 'مشتریان',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 'dropdown.select_invoice' => '--- انتخاب فاکتور ---',
 'dropdown.status_active' => 'فعال',

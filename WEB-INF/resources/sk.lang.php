@@ -80,7 +80,7 @@ $i18n_key_words = array(
 'error.project' => 'Vyberte projekt.',
 'error.task' => 'Vyberte úlohy.',
 'error.client' => 'Vyberte klienta.',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 'error.auth' => 'Nesprávne prihlasovacie meno alebo heslo.',
 'error.user_exists' => 'Používateľ s týmto prihlasovacím menom už existuje.',
@@ -106,7 +106,7 @@ $i18n_key_words = array(
 'button.login' => 'Prihlásiť',
 'button.now' => 'Teraz',
 'button.save' => 'Uložiť',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Zrušiť',
 'button.submit' => 'Odoslať',
@@ -125,8 +125,9 @@ $i18n_key_words = array(
 'button.export' => 'Exportovať tím',
 'button.import' => 'Importovať tím',
 'button.close' => 'Zatvoriť',
-// TODO: translate the following string. 
+// TODO: translate the following. 
 // 'button.stop' => 'Stop',
+// 'button.mark_paid' => 'Mark paid',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Názov tímu',
@@ -166,7 +167,7 @@ $i18n_key_words = array(
 // 'label.notes' => 'Notes',
 // 'label.item' => 'Item',
 'label.cost' => 'Náklady',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'label.day_total' => 'Day total',
 'label.week_total' => 'Týždeň celkom',
 // TODO: translate the following.
@@ -185,7 +186,7 @@ $i18n_key_words = array(
 // 'label.week_view' => 'Week view',
 'label.id' => 'ID',
 'label.language' => 'Jazyk',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
 'label.date_format' => 'Formát dátumu',
 'label.time_format' => 'Formát času',
@@ -229,7 +230,7 @@ $i18n_key_words = array(
 'title.login' => 'Prihlásenie',
 'title.teams' => 'Tímy',
 'title.create_team' => 'Vytváranie tímu',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'title.edit_team' => 'Editing Team',
 'title.delete_team' => 'Vymazávanie tímu',
 'title.reset_password' => 'Obnovovanie hesla',
@@ -311,10 +312,10 @@ $i18n_key_words = array(
 'dropdown.all_time' => 'celý čas',
 'dropdown.projects' => 'projekty',
 'dropdown.tasks' => 'úlohy',
-// TODO: translate the following string.
-'dropdown.clients' => 'clients',
+// TODO: translate the following.
+// 'dropdown.clients' => 'clients',
 'dropdown.select' => '--- vyberte ---',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'dropdown.select_invoice' => '--- select invoice ---',
 'dropdown.status_active' => 'aktívny',
 'dropdown.status_inactive' => 'neaktívny',

@@ -116,6 +116,8 @@ $i18n_key_words = array(
 'button.import' => 'Importar equipe',
 'button.close' => 'Fechar',
 'button.stop' => 'Parar',
+// TODO: translate the following.
+// 'button.mark_paid' => 'Mark paid',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Nome da equipe',

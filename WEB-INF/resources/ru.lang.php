@@ -118,6 +118,7 @@ $i18n_key_words = array(
 'button.import' => 'Импортировать команду',
 'button.close' => 'Закрыть',
 'button.stop' => 'Завершить',
+'button.mark_paid' => 'Отметить оплату',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Название команды',

@@ -48,7 +48,7 @@ $i18n_key_words = array(
 'menu.create_team' => 'Crear una nueva cuenta de manejador',
 'menu.profile' => 'Perfil',
 'menu.time' => 'Tiempo',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Reportes',
 // Note to translators: menu.charts needs to be translated.
@@ -112,7 +112,7 @@ $i18n_key_words = array(
 'button.login' => 'Iniciar sesion',
 'button.now' => 'Ahora',
 'button.save' => 'Guardar',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Cancelar',
 'button.submit' => 'Enviar',
@@ -135,8 +135,9 @@ $i18n_key_words = array(
 'button.import' => 'Importar grupo',
 // TODO: translate button.close.
 // 'button.close' => 'Close',
-// TODO: translate the following string. 
+// TODO: translate the following.
 // 'button.stop' => 'Stop',
+// 'button.mark_paid' => 'Mark paid',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 // TODO: translate label.team_name
@@ -165,7 +166,7 @@ $i18n_key_words = array(
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 'label.option' => 'Opción',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'label.invoice' => 'Invoice',
 'label.project' => 'Proyecto',
 'label.projects' => 'Proyectos',
@@ -404,7 +405,7 @@ $i18n_key_words = array(
 'form.reports.group_by_no' => '--- no agrupar ---',
 'form.reports.group_by_date' => 'fecha',
 'form.reports.group_by_user' => 'usuario',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'form.reports.group_by_client' => 'client',
 'form.reports.group_by_project' => 'proyecto',
 // TODO: traslate the following string.

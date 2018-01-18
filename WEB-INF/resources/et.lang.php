@@ -137,6 +137,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.close' => 'Close',
 // 'button.stop' => 'Stop',
+// 'button.mark_paid' => 'Mark paid',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 // TODO: translate the following.

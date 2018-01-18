@@ -85,7 +85,7 @@ $i18n_key_words = array(
 'error.project' => 'בחר פרוייקט',
 'error.task' => 'בחר משימה',
 'error.client' => 'בחר לקוח',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 'error.auth' => 'שם משתמש או סיסמה שגויים',
 'error.user_exists' => 'שם משתמש כבר קיים',
@@ -104,7 +104,7 @@ $i18n_key_words = array(
 'error.uncompleted_exists' => 'רישום חלקי כבר קיים. סגור או מחק אותו.',
 'error.goto_uncompleted' => 'פתח את הרישום החלקי.',
 'error.overlap' => 'טווח הזמן מתנגש עם רישומים קיימים.',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'error.future_date' => 'Date is in future.',
 
 // Labels for buttons.
@@ -130,6 +130,8 @@ $i18n_key_words = array(
 'button.import' => 'ייבא צוות',
 'button.close' => 'סגור',
 'button.stop' => 'עצור',
+// TODO: translate the following.
+// 'button.mark_paid' => 'Mark paid',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'שם הצוות',
@@ -154,7 +156,7 @@ $i18n_key_words = array(
 'label.users' => 'משתמשים',
 'label.client' => 'לקוח',
 'label.clients' => 'לקוחות',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'label.option' => 'Option',
 'label.invoice' => 'חשבונית',
 'label.project' => 'פרוייקט',
@@ -188,7 +190,7 @@ $i18n_key_words = array(
 // 'label.week_view' => 'Week view',
 'label.id' => 'מזהה',
 'label.language' => 'שפה',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
 'label.date_format' => 'תבנית של תאריך',
 'label.time_format' => 'תבנית של שעה',
@@ -232,7 +234,7 @@ $i18n_key_words = array(
 'title.login' => 'כניסה',
 'title.teams' => 'צוותים',
 'title.create_team' => 'יצירת צוות',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'title.edit_team' => 'Editing Team',
 'title.delete_team' => 'מחיקת צוות',
 'title.reset_password' => 'איפוס סיסמה',
@@ -315,7 +317,7 @@ $i18n_key_words = array(
 'dropdown.projects' => 'פרוייקטים',
 'dropdown.tasks' => 'משימות',
 'dropdown.clients' => 'לקוחות',
-// TODO: translate the following string.
+// TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 'dropdown.select_invoice' => '--- בחר חשבונית ---',
 'dropdown.status_active' => 'פעיל',
