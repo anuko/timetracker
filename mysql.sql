@@ -144,6 +144,7 @@ CREATE TABLE `tt_log` (
   `invoice_id` int(11) default NULL,   # invoice id
   `comment` text,                      # user provided comment for time record
   `billable` tinyint(4) default '0',   # whether the record is billable or not
+  `paid` tinyint(4) default '0',       # whether the record is paid
   `status` tinyint(4) default '1',     # time record status
   PRIMARY KEY (`id`)
 );

@@ -600,7 +600,7 @@ if ($_POST) {
     setChange("ALTER TABLE tt_invoices DROP end_date");
   }
 
-  if ($_POST["convert1600to11300"]) {
+  if ($_POST["convert1600to11400"]) {
     setChange("DROP TABLE IF EXISTS tt_invoice_headers");
     setChange("ALTER TABLE tt_fav_reports ADD COLUMN `client_id` int(11) default NULL");
     setChange("ALTER TABLE tt_fav_reports ADD COLUMN `cf_1_option_id` int(11) default NULL");
@@ -645,6 +645,7 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_teams` ADD `bcc_email` varchar(100) default NULL AFTER `uncompleted_indicators`");
     setChange("ALTER TABLE `tt_cron` ADD `cc` varchar(100) default NULL AFTER `email`");
     setChange("ALTER TABLE `tt_cron` ADD `subject` varchar(100) default NULL AFTER `cc`");
+    setChange("ALTER TABLE `tt_log` ADD `paid` tinyint(4) NULL default '0' AFTER `billable`");
   }
   
   // The update_clients function updates projects field in tt_clients table.
@@ -750,7 +751,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.13.0)</b>
+    <td width="80%"><b>Create database structure (v1.14.0)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -782,8 +783,8 @@ if ($_POST) {
     <td><input type="submit" name="convert1579to1600" value="Update"><br><input type="submit" name="update_clients" value="Update clients"><br><input type="submit" name="update_custom_fields" value="Update custom fields"><br><input type="submit" name="update_tracking_mode" value="Update tracking mode"></td>
   </tr>
   <tr valign="top">
-    <td>Update database structure (v1.6 to v1.13)</td>
-    <td><input type="submit" name="convert1600to11300" value="Update"><br></td>
+    <td>Update database structure (v1.6 to v1.14)</td>
+    <td><input type="submit" name="convert1600to11400" value="Update"><br></td>
   </tr>
 </table>
 
