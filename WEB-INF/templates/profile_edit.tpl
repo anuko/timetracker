@@ -205,7 +205,7 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$forms.profileForm.invoices.control}</td>
             <td><label for="invoices">{$i18n.title.invoices}</label></td>
           </tr>
-{if ($smarty.const.DEBUG_PAID_STATUS)}
+{if ($smarty.const.DEBUG_PAID_STATUS == 1)}
           <tr>
             <td align="right" nowrap>{$forms.profileForm.paid_status.control}</td>
             <td><label for="paid_status">{$i18n.label.paid_status}</label></td>
