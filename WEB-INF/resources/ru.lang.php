@@ -296,6 +296,8 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'неактивный',
 'dropdown.delete'=>'удалить',
 'dropdown.do_not_delete'=>'не удалять',
+'dropdown.paid' => 'оплачено',
+'dropdown.not_paid' => 'не оплачено',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases

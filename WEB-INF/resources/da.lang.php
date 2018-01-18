@@ -302,6 +302,9 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'Inaktive',
 'dropdown.delete'=>'Slet',
 'dropdown.do_not_delete'=>'Slet ikke',
+// TODO: translate the following.
+// 'dropdown.paid' => 'paid',
+// 'dropdown.not_paid' => 'not paid',
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Har du glemt din adgangskode?',

@@ -320,6 +320,8 @@ $i18n_key_words = array(
 // 'dropdown.status_inactive' => 'inactive',
 // 'dropdown.delete'=>'delete',
 // 'dropdown.do_not_delete'=>'do not delete',
+// 'dropdown.paid' => 'paid',
+// 'dropdown.not_paid' => 'not paid',
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 // TODO: translate the following.
