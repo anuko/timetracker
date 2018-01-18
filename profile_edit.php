@@ -74,6 +74,7 @@ if ($request->isPost()) {
     $cl_bcc_email = trim($request->getParameter('bcc_email'));
     $cl_locking = $request->getParameter('locking');
     $cl_quotas = $request->getParameter('quotas');
+    $cl_paidstatus = $request->getParameter('paidstatus');
   }
 } else {
   $cl_name = $user->name;
@@ -107,6 +108,7 @@ if ($request->isPost()) {
     $cl_notifications = in_array('no', $plugins);
     $cl_locking = in_array('lk', $plugins);
     $cl_quotas = in_array('mq', $plugins);
+    $cl_paidstatus = in_array('ps', $plugins);
   }
 }
 
@@ -199,6 +201,8 @@ if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'checkbox','name'=>'notifications','value'=>$cl_notifications,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'locking','value'=>$cl_locking,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'quotas','value'=>$cl_quotas,'onchange'=>'handlePluginCheckboxes()'));
+  $form->addInput(array('type'=>'checkbox','name'=>'paidstatus','value'=>$cl_paidstatus,'onchange'=>'handlePluginCheckboxes()'));
+  
 }
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
@@ -254,6 +258,8 @@ if ($request->isPost()) {
         $plugins .= ',lk';
       if ($cl_quotas)
         $plugins .= ',mq';
+      if ($cl_paidstatus)
+        $plugins .= ',ps';
       $plugins = trim($plugins, ',');
 
       $update_result = ttTeamHelper::update($user->team_id, array(

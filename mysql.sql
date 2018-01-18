@@ -145,6 +145,7 @@ CREATE TABLE `tt_log` (
   `comment` text,                      # user provided comment for time record
   `billable` tinyint(4) default '0',   # whether the record is billable or not
   `status` tinyint(4) default '1',     # time record status
+  `paid` tinyint(4) default '0',       # paid plugin
   PRIMARY KEY (`id`)
 );
 

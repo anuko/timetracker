@@ -647,6 +647,10 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_cron` ADD `subject` varchar(100) default NULL AFTER `cc`");
   }
   
+  if ($_POST["convert11300to11310"]) {
+    setChange("ALTER TABLE tt_log ADD COLUMN paid TINYINT(4) NULL DEFAULT '0' AFTER status");
+  }
+  
   // The update_clients function updates projects field in tt_clients table.
   if ($_POST["update_clients"]) {
     $mdb2 = getConnection();
@@ -784,6 +788,10 @@ if ($_POST) {
   <tr valign="top">
     <td>Update database structure (v1.6 to v1.13)</td>
     <td><input type="submit" name="convert1600to11300" value="Update"><br></td>
+  </tr>
+  <tr valign="top">
+    <td>Update database structure (v1.13 to v1.13.1)</td>
+    <td><input type="submit" name="convert11300to11310" value="Update"><br></td>
   </tr>
 </table>
 

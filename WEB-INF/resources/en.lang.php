@@ -118,6 +118,7 @@ $i18n_key_words = array(
 'button.import' => 'Import team',
 'button.close' => 'Close',
 'button.stop' => 'Stop',
+'button.mark_paid' => 'Mark Paid',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Team name',
@@ -204,6 +205,7 @@ $i18n_key_words = array(
 'label.what_is_it' => 'What is it?',
 'label.expense' => 'Expense',
 'label.quantity' => 'Quantity',
+'label.paidstatus' => 'Paid Status',
 
 // Form titles.
 'title.login' => 'Login',
@@ -296,6 +298,8 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'inactive',
 'dropdown.delete'=>'delete',
 'dropdown.do_not_delete'=>'do not delete',
+'dropdown.ps_paid' => 'Paid',
+'dropdown.ps_notpaid' => 'Not Paid',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases

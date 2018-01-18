@@ -192,6 +192,14 @@ if (defined('COST_ON_REPORTS') && isTrue(COST_ON_REPORTS))
 // If we have a custom field - add a checkbox for it.
 if ($custom_fields && $custom_fields->fields[0])
   $form->addInput(array('type'=>'checkbox','name'=>'chcf_1'));
+if ($user->isPluginEnabled('ps')) {
+  $form->addInput(array('type'=>'combobox',
+    'name'=>'paidstatus',
+    'style'=>'width: 250px;',
+    'data'=>array("1"=>$i18n->getKey('dropdown.ps_paid'), "2"=>$i18n->getKey('dropdown.ps_notpaid')),
+    'empty'=>array(''=>$i18n->getKey('dropdown.all'))
+  ));
+}
 
 // Add group by control.
 $group_by_options['no_grouping'] = $i18n->getKey('form.reports.group_by_no');
@@ -237,6 +245,7 @@ if (($request->getMethod() == 'GET') && !$bean->isSaved()) {
   $form->setValueByElement('chfinish', '1');
   $form->setValueByElement('chnote', '1');
   $form->setValueByElement('chcf_1', '0');
+  $form->setValueByElement('paidstatus', '0');
   $form->setValueByElement('chtotalsonly', '0');
 }
 
