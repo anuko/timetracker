@@ -45,6 +45,7 @@
   {if $bean->getAttribute('chfinish')}<td class="tableHeaderCentered" width="5%">{$i18n.label.finish}</td>{/if}
   {if $bean->getAttribute('chduration')}<td class="tableHeaderCentered" width="5%">{$i18n.label.duration}</td>{/if}
   {if $bean->getAttribute('chnote')}<td class="tableHeader">{$i18n.label.note}</td>{/if}
+  {if $bean->getAttribute('paidstatus')}<td class="tableHeader">{$i18n.label.paidstatus}</td>{/if}
   {if $bean->getAttribute('chcost')}<td class="tableHeaderCentered" width="5%">{$i18n.label.cost}</td>{/if}
   {if $bean->getAttribute('chinvoice')}<td class="tableHeader">{$i18n.label.invoice}</td>{/if}
       </tr>
@@ -65,6 +66,7 @@
         {if $bean->getAttribute('chfinish')}<td></td>{/if}
         {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$subtotals[$prev_grouped_by]['time']}</td>{/if}
         {if $bean->getAttribute('chnote')}<td></td>{/if}
+        {if $bean->getAttribute('paidstatus')}<td></td>{/if}
         {if $bean->getAttribute('chcost')}<td class="cellRightAlignedSubtotal">{if $user->canManageTeam() || $user->isClient()}{$subtotals[$prev_grouped_by]['cost']}{else}{$subtotals[$prev_grouped_by]['expenses']}{/if}</td>{/if}
         {if $bean->getAttribute('chinvoice')}<td></td>{/if}
       </tr>
@@ -87,6 +89,15 @@
     {if $bean->getAttribute('chfinish')}<td nowrap class="cellRightAligned">{$item.finish}</td>{/if}
     {if $bean->getAttribute('chduration')}<td class="cellRightAligned">{$item.duration}</td>{/if}
     {if $bean->getAttribute('chnote')}<td class="cellLeftAligned">{$item.note|escape}</td>{/if}
+    {if $bean->getAttribute('paidstatus')}
+      <td class="cellRightAligned">
+        {if $item.paid == 0}
+          No
+        {elseif $item.paid >= 1}
+          Yes
+        {/if}  
+      </td>
+    {/if}
     {if $bean->getAttribute('chcost')}<td class="cellRightAligned">{if $user->canManageTeam() || $user->isClient()}{$item.cost}{else}{$item.expense}{/if}</td>{/if}
     {if $bean->getAttribute('chinvoice')}
         <td class="cellRightAligned">{$item.invoice|escape}</td>
@@ -112,6 +123,7 @@
     {if $bean->getAttribute('chfinish')}<td></td>{/if}
     {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$subtotals[$cur_grouped_by]['time']}</td>{/if}
     {if $bean->getAttribute('chnote')}<td></td>{/if}
+    {if $bean->getAttribute('paidstatus')}<td></td>{/if}
     {if $bean->getAttribute('chcost')}<td class="cellRightAlignedSubtotal">{if $user->canManageTeam() || $user->isClient()}{$subtotals[$cur_grouped_by]['cost']}{else}{$subtotals[$cur_grouped_by]['expenses']}{/if}</td>{/if}
     {if $bean->getAttribute('chinvoice')}<td></td>{/if}
       </tr>
@@ -129,6 +141,7 @@
     {if $bean->getAttribute('chfinish')}<td></td>{/if}
     {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$totals['time']}</td>{/if}
     {if $bean->getAttribute('chnote')}<td></td>{/if}
+    {if $bean->getAttribute('paidstatus')}<td></td>{/if}
     {if $bean->getAttribute('chcost')}<td nowrap class="cellRightAlignedSubtotal">{$user->currency|escape} {if $user->canManageTeam() || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>{/if}
     {if $bean->getAttribute('chinvoice')}<td></td>{/if}
       </tr>
@@ -156,6 +169,7 @@
   <table>
   <tr>
     <td><input type="button" onclick="chLocation('report_send.php');" value="{$i18n.button.send_by_email}"></td>
+    {if $bean->getAttribute('paidstatus') == 2}<td><input type="button" onclick="chLocation('mark_paid.php');" value="{$i18n.button.mark_paid}"></td>{/if}
   </tr>
   </table>
   </td>

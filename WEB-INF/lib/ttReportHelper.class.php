@@ -53,7 +53,9 @@ class ttReportHelper {
     if ($bean->getAttribute('include_records')=='2') $dropdown_parts .= ' and l.billable = 0';
     if ($bean->getAttribute('invoice')=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
     if ($bean->getAttribute('invoice')=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
-
+    if ($bean->getAttribute('paidstatus')=='1') $dropdown_parts .= ' and l.paid = 1';
+    if ($bean->getAttribute('paidstatus')=='2') $dropdown_parts .= ' and l.paid = 0';
+    
     // Prepare user list part.
     $userlist = -1;
     if (($user->canManageTeam() || $user->isClient()) && is_array($bean->getAttribute('users')))
@@ -275,6 +277,10 @@ class ttReportHelper {
       else
         array_push($fields, "cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost"); // Use project rate for user.
       array_push($fields, "null as expense"); 
+    }
+    // get paid status
+    if ($bean->getAttribute('paidstatus')) {
+      array_push($fields, 'l.paid as paid');
     }
     // Add invoice name if it is selected.
     if (($user->canManageTeam() || $user->isClient()) && $bean->getAttribute('chinvoice'))
