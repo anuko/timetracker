@@ -225,6 +225,7 @@ $i18n_key_words = array(
 // 'label.expense' => 'Expense',
 // 'label.quantity' => 'Quantity',
 // 'label.paid_status' => 'Paid status',
+// 'label.paid' => 'Paid',
 
 // Form titles.
 // TODO: Translate the following.

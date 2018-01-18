@@ -206,6 +206,7 @@ $i18n_key_words = array(
 'label.quantity' => 'Hoeveelheid',
 // TODO: translate the following.
 // 'label.paid_status' => 'Paid status',
+// 'label.paid' => 'Paid',
 
 // Form titles.
 'title.login' => 'Aanmelden',

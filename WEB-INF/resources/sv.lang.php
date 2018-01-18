@@ -208,6 +208,7 @@ $i18n_key_words = array(
 'label.quantity' => 'Antal',
 // TODO: translate the following.
 // 'label.paid_status' => 'Paid status',
+// 'label.paid' => 'Paid',
 
 // Rubriker för formulär
 'title.login' => 'Logga in',
