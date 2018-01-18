@@ -213,17 +213,18 @@ $i18n_key_words = array(
 // 'label.condition' => 'Condition',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 // TODO: Translate the following.
-'label.custom_fields' => 'Custom fields',
-'label.monthly_quotas' => 'Monthly quotas',
-'label.type' => 'Type',
-'label.type_dropdown' => 'dropdown',
-'label.type_text' => 'text',
-'label.required' => 'Required',
-'label.fav_report' => 'Favorite report',
-'label.cron_schedule' => 'Cron schedule',
-'label.what_is_it' => 'What is it?',
-'label.expense' => 'Expense',
-'label.quantity' => 'Quantity',
+// 'label.custom_fields' => 'Custom fields',
+// 'label.monthly_quotas' => 'Monthly quotas',
+// 'label.type' => 'Type',
+// 'label.type_dropdown' => 'dropdown',
+// 'label.type_text' => 'text',
+// 'label.required' => 'Required',
+// 'label.fav_report' => 'Favorite report',
+// 'label.cron_schedule' => 'Cron schedule',
+// 'label.what_is_it' => 'What is it?',
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
+// 'label.paid_status' => 'Paid status',
 
 // Form titles.
 // TODO: Translate the following.

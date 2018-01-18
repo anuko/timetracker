@@ -225,6 +225,9 @@ $i18n_key_words = array(
 'label.fav_report' => 'Report favorit',
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
+// 'label.paid_status' => 'Paid status',
 
 // Form titles.
 'title.login' => 'Sessió iniciada',

@@ -204,6 +204,7 @@ $i18n_key_words = array(
 'label.what_is_it' => 'Что это?',
 'label.expense' => 'Расход',
 'label.quantity' => 'Количество',
+'label.paid_status' => 'Статус оплаты',
 
 // Form titles.
 'title.login' => 'Вход в систему',

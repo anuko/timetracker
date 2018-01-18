@@ -206,6 +206,8 @@ $i18n_key_words = array(
 'label.what_is_it' => 'Vad är detta?',
 'label.expense' => 'Kostnad',
 'label.quantity' => 'Antal',
+// TODO: translate the following.
+// 'label.paid_status' => 'Paid status',
 
 // Rubriker för formulär
 'title.login' => 'Logga in',

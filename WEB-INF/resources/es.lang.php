@@ -64,7 +64,7 @@ $i18n_key_words = array(
 'menu.options' => 'Opciones',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.'
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -72,7 +72,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'Error de la Base de Datos.',
@@ -82,7 +82,7 @@ $i18n_key_words = array(
 // TODO: translate error.interval.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
 'error.project' => 'Seleccionar Proyecto.',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
@@ -90,7 +90,7 @@ $i18n_key_words = array(
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'User with this login already exists.',
 'error.project_exists' => 'Ya existe un proyecto con este nombre.',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
@@ -121,7 +121,7 @@ $i18n_key_words = array(
 // TODO: translate button.add_task
 // 'button.add_task' => 'Add task',
 'button.add_client' => 'Agregar cliente',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => 'Agregar',
@@ -161,7 +161,7 @@ $i18n_key_words = array(
 'label.end_date' => 'Fecha de fin',
 'label.user' => 'Usuario',
 'label.users' => 'Personas',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 'label.option' => 'Opción',
@@ -169,7 +169,7 @@ $i18n_key_words = array(
 // 'label.invoice' => 'Invoice',
 'label.project' => 'Proyecto',
 'label.projects' => 'Proyectos',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -186,7 +186,7 @@ $i18n_key_words = array(
 // 'label.month_total' => 'Month total',
 'label.today' => 'Hoy',
 'label.total_hours' => 'Horas totales',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
 'label.edit' => 'Modificar',
@@ -199,7 +199,7 @@ $i18n_key_words = array(
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 'label.id' => 'Identificación',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'label.language' => 'Language',
 // 'label.decimal_mark' => 'Decimal mark',
 // 'label.date_format' => 'Date format',
@@ -212,7 +212,7 @@ $i18n_key_words = array(
 // TODO: check whether label.subtotal is translated correctly.
 'label.subtotal' => 'Subtotal',
 'label.total' => 'Total',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
 'label.or' => 'o',
@@ -236,16 +236,19 @@ $i18n_key_words = array(
 // 'label.type_text' => 'text',
 // 'label.required' => 'Required',
 'label.fav_report' => 'Reporte favorito',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
+// 'label.paid_status' => 'Paid status',
 
 // Form titles.
 'title.login' => 'Sesión iniciada',
 'title.teams' => 'Grupos',
 // Note to translators: we need a more accurate translation of title.create_team. English is "Creating Team".
 // 'title.create_team' => 'Crear una nueva cuenta de manejador',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
 'title.reset_password' => 'Reestablecer contraseña',
@@ -254,7 +257,7 @@ $i18n_key_words = array(
 'title.time' => 'Tiempo',
 'title.edit_time_record' => 'Modificando el historial de tiempo',
 'title.delete_time_record' => 'Eliminando el historial de tiempo',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -263,14 +266,14 @@ $i18n_key_words = array(
 // 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
 'title.invoice' => 'Factura',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => 'Proyectos',
 'title.add_project' => 'Agregando proyecto',
 'title.edit_project' => 'Modificando proyecto',
 'title.delete_project' => 'Eliminando proyecto',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -283,7 +286,7 @@ $i18n_key_words = array(
 'title.add_client' => 'Agregar cliente',
 'title.edit_client' => 'Modificar cliente',
 'title.delete_client' => 'Eliminar cliente',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'title.invoices' => 'Invoices',
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
@@ -297,7 +300,7 @@ $i18n_key_words = array(
 'title.import' => 'Importar datos',
 'title.options' => 'Opciones',
 'title.profile' => 'Perfil',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
 // 'title.cf_edit_custom_field' => 'Editing Custom Field',
@@ -333,11 +336,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'dropdown.all_time' => 'all time',
 'dropdown.projects' => 'proyectos',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
 // 'dropdown.clients' => 'clients',
 'dropdown.select' => '--- seleccionar ---',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
 // 'dropdown.status_inactive' => 'inactive',
@@ -388,7 +391,7 @@ $i18n_key_words = array(
 // 'form.reports.include_records' => 'Include records',
 'form.reports.include_billable' => 'facturable',
 'form.reports.include_not_billable' => 'no facturable',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
 'form.reports.select_period' => 'Seleccionar período de tiempo',
@@ -424,7 +427,7 @@ $i18n_key_words = array(
 // 'form.charts.chart' => 'Chart',
 
 // Projects form. See example at https://timetracker.anuko.com/projects.php
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'form.projects.active_projects' => 'Active Projects',
 // 'form.projects.inactive_projects' => 'Inactive Projects',
 
@@ -433,7 +436,7 @@ $i18n_key_words = array(
 // 'form.tasks.inactive_tasks' => 'Inactive Tasks',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'form.users.active_users' => 'Active Users',
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
@@ -445,12 +448,12 @@ $i18n_key_words = array(
 // 'form.users.default_rate' => 'Default hourly rate',
 
 // Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'form.client.client_to_delete' => 'Client to delete',
 // 'form.client.client_entries' => 'Client entries',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'form.clients.active_clients' => 'Active Clients',
 // 'form.clients.inactive_clients' => 'Inactive Clients',
 
@@ -473,7 +476,7 @@ $i18n_key_words = array(
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 'form.profile.12_hours' => '12 horas',
 'form.profile.24_hours' => '24 horas',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'form.profile.tracking_mode' => 'Tracking mode',
 // 'form.profile.mode_time' => 'time',
 // 'form.profile.mode_projects' => 'projects',

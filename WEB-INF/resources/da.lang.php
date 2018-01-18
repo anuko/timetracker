@@ -207,6 +207,8 @@ $i18n_key_words = array(
 'label.what_is_it' => 'Hvad er det?',
 'label.expense' => 'Udgift',
 'label.quantity' => 'Mængde',
+// TODO: translate the following.
+// 'label.paid_status' => 'Paid status',
 
 // Form titles.
 'title.login' => 'Login',

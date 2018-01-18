@@ -202,6 +202,10 @@ $i18n_key_words = array(
 'label.fav_report' => 'Bevorzugter Report',
 'label.cron_schedule' => 'Cronjob Zeitplan',
 'label.what_is_it' => 'Was ist es?',
+// TODO: translate the following.
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
+// 'label.paid_status' => 'Paid status',
 
 // Form titles.
 'title.login' => 'Anmelden',

@@ -206,6 +206,9 @@ $i18n_key_words = array(
 'label.fav_report' => 'Raporttipohja',
 'label.cron_schedule' => 'Cron-ajoitus',
 'label.what_is_it' => 'Mikä se on?',
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
+// 'label.paid_status' => 'Paid status',
 
 // Form titles.
 'title.login' => 'Kirjautuminen',

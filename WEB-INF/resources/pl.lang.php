@@ -211,6 +211,9 @@ $i18n_key_words = array(
 'label.fav_report' => 'Ulubiony raport',
 'label.cron_schedule' => 'Harmonogram crona',
 'label.what_is_it' => 'Co to jest?',
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
+// 'label.paid_status' => 'Paid status',
 
 // Form titles.
 'title.login' => 'Logowanie',

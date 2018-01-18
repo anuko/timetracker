@@ -60,7 +60,7 @@ $i18n_key_words = array(
 'menu.options' => 'تنظیمات',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -216,9 +216,12 @@ $i18n_key_words = array(
 'label.type_text' => 'متن',
 'label.required' => 'اجباری',
 'label.fav_report' => 'گزارش های برگزیده',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
+// 'label.paid_status' => 'Paid status',
 
 // Form titles.
 'title.login' => 'ورود',
@@ -261,7 +264,7 @@ $i18n_key_words = array(
 'title.add_invoice' => 'درج فاکتور',
 'title.view_invoice' => 'نمایش فاکتور',
 'title.delete_invoice' => 'حذف فاکتور',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'title.notifications' => 'Notifications',
 // 'title.add_notification' => 'Adding Notification',
 // 'title.edit_notification' => 'Editing Notification',
@@ -313,7 +316,7 @@ $i18n_key_words = array(
 'dropdown.select_invoice' => '--- انتخاب فاکتور ---',
 'dropdown.status_active' => 'فعال',
 'dropdown.status_inactive' => 'غیرفعال',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'dropdown.delete'=>'delete',
 // 'dropdown.do_not_delete'=>'do not delete',
 
@@ -410,7 +413,7 @@ $i18n_key_words = array(
 'form.users.default_rate' => 'نرخ ساعتی پیش فرض',
 
 // Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'form.client.client_to_delete' => 'Client to delete',
 // 'form.client.client_entries' => 'Client entries',
 

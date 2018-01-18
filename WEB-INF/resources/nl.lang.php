@@ -204,6 +204,8 @@ $i18n_key_words = array(
 'label.what_is_it' => 'Wat betekent dit?',
 'label.expense' => 'Kosten',
 'label.quantity' => 'Hoeveelheid',
+// TODO: translate the following.
+// 'label.paid_status' => 'Paid status',
 
 // Form titles.
 'title.login' => 'Aanmelden',

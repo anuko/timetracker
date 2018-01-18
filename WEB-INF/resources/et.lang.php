@@ -230,6 +230,7 @@ $i18n_key_words = array(
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
 // 'label.quantity' => 'Quantity',
+// 'label.paid_status' => 'Paid status',
 
 // Form titles.
 'title.options' => 'Suvandid',

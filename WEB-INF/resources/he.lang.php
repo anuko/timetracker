@@ -220,9 +220,12 @@ $i18n_key_words = array(
 'label.type_text' => 'טקסט',
 'label.required' => 'חובה',
 'label.fav_report' => 'דוח מועדף',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
+// 'label.paid_status' => 'Paid status',
 
 // Form titles.
 'title.login' => 'כניסה',
@@ -236,7 +239,7 @@ $i18n_key_words = array(
 'title.time' => 'זמן',
 'title.edit_time_record' => 'עריכת רשומה',
 'title.delete_time_record' => 'מחיקת רשומה',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -266,7 +269,7 @@ $i18n_key_words = array(
 'title.add_invoice' => 'הוספת חשבונית',
 'title.view_invoice' => 'הצגת חשבונית',
 'title.delete_invoice' => 'מחיקת חשבונית',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'title.notifications' => 'Notifications',
 // 'title.add_notification' => 'Adding Notification',
 // 'title.edit_notification' => 'Editing Notification',
@@ -316,7 +319,7 @@ $i18n_key_words = array(
 'dropdown.select_invoice' => '--- בחר חשבונית ---',
 'dropdown.status_active' => 'פעיל',
 'dropdown.status_inactive' => 'לא פעיל',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'dropdown.delete'=>'delete',
 // 'dropdown.do_not_delete'=>'do not delete',
 
@@ -358,7 +361,7 @@ $i18n_key_words = array(
 'form.reports.include_records' => 'כלול רישומים',
 'form.reports.include_billable' => 'לחיוב',
 'form.reports.include_not_billable' => 'לא לחיוב',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
 'form.reports.select_period' => 'בחר תקופת זמן',
@@ -411,7 +414,7 @@ $i18n_key_words = array(
 'form.users.default_rate' => 'תעריף ברירת מחדל לשעה',
 
 // Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'form.client.client_to_delete' => 'Client to delete',
 // 'form.client.client_entries' => 'Client entries',
 

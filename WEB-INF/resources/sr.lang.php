@@ -208,6 +208,10 @@ $i18n_key_words = array(
 'label.fav_report' => 'Omiljeni izveštaji',
 'label.cron_schedule' => 'Sredi raspored',
 'label.what_is_it' => 'Šta je ovo?',
+// TODO: Translate the following.
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
+// 'label.paid_status' => 'Paid status',
 
 // Form titles.
 'title.login' => 'Prijava',

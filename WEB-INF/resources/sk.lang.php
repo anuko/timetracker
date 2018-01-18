@@ -98,7 +98,7 @@ $i18n_key_words = array(
 'error.no_email' => 'K tomuto prihlasovaciemu menu nie je priradený žiadny e-mail.',
 'error.uncompleted_exists' => 'Nekompletný záznam už existuje. Zatvorte ho alebo ho vymažte.',
 'error.goto_uncompleted' => 'Ísť na nekompletný záznam.',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
 
@@ -217,9 +217,12 @@ $i18n_key_words = array(
 'label.type_text' => 'text',
 'label.required' => 'Povinné',
 'label.fav_report' => 'Obľúbená zostava',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
+// 'label.paid_status' => 'Paid status',
 
 // Form titles.
 'title.login' => 'Prihlásenie',
@@ -233,7 +236,7 @@ $i18n_key_words = array(
 'title.time' => 'Časový záznam',
 'title.edit_time_record' => 'Upravovanie časového záznamu',
 'title.delete_time_record' => 'Vymazávanie časového záznamu',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -263,7 +266,7 @@ $i18n_key_words = array(
 'title.add_invoice' => 'Pridávanie faktúry',
 'title.view_invoice' => 'Priehliadanie faktúry',
 'title.delete_invoice' => 'Vymazávanie faktúry',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'title.notifications' => 'Notifications',
 // 'title.add_notification' => 'Adding Notification',
 // 'title.edit_notification' => 'Editing Notification',
@@ -314,7 +317,7 @@ $i18n_key_words = array(
 // 'dropdown.select_invoice' => '--- select invoice ---',
 'dropdown.status_active' => 'aktívny',
 'dropdown.status_inactive' => 'neaktívny',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'dropdown.delete'=>'delete',
 // 'dropdown.do_not_delete'=>'do not delete',
 
@@ -356,13 +359,13 @@ $i18n_key_words = array(
 'form.reports.include_records' => 'Zahrnúť záznamy',
 'form.reports.include_billable' => 'faktúrovateĺné',
 'form.reports.include_not_billable' => 'nefaktúrovateľné',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
 'form.reports.select_period' => 'Vyberte časový rozsah',
 'form.reports.set_period' => 'alebo nastavte dátumy',
 'form.reports.show_fields' => 'Zobraziť polia',
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'form.reports.group_by' => 'Group by',
 // 'form.reports.group_by_no' => '--- no grouping ---',
 'form.reports.group_by_date' => 'dátum',
@@ -409,7 +412,7 @@ $i18n_key_words = array(
 'form.users.default_rate' => 'Predvolená hodinová sadzba',
 
 // Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-// TODO: translate the following strings.
+// TODO: translate the following.
 // 'form.client.client_to_delete' => 'Client to delete',
 // 'form.client.client_entries' => 'Client entries',
 
