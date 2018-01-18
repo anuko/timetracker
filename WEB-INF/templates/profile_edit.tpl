@@ -205,6 +205,12 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$forms.profileForm.invoices.control}</td>
             <td><label for="invoices">{$i18n.title.invoices}</label></td>
           </tr>
+{if ($smarty.const.DEBUG_PAID_STATUS)}
+          <tr>
+            <td align="right" nowrap>{$forms.profileForm.paid_status.control}</td>
+            <td><label for="paid_status">{$i18n.label.paid_status}</label></td>
+          </tr>
+{/if}
           <tr>
             <td align="right" nowrap>{$forms.profileForm.custom_fields.control}</td>
             <td><label for="custom_fields">{$i18n.label.custom_fields}</label> <span id="cf_config"><a href="cf_custom_fields.php">{$i18n.label.configure}</a></span></td>

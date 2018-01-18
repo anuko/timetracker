@@ -67,6 +67,7 @@ if ($request->isPost()) {
     $cl_clients = $request->getParameter('clients');
     $cl_client_required = $request->getParameter('client_required');
     $cl_invoices = $request->getParameter('invoices');
+    $cl_paid_status = $request->getParameter('paid_status');
     $cl_custom_fields = $request->getParameter('custom_fields');
     $cl_expenses = $request->getParameter('expenses');
     $cl_tax_expenses = $request->getParameter('tax_expenses');
@@ -101,6 +102,7 @@ if ($request->isPost()) {
     $cl_clients = in_array('cl', $plugins);
     $cl_client_required = in_array('cm', $plugins);
     $cl_invoices = in_array('iv', $plugins);
+    $cl_paid_status = in_array('ps', $plugins);
     $cl_custom_fields = in_array('cf', $plugins);    
     $cl_expenses = in_array('ex', $plugins);
     $cl_tax_expenses = in_array('et', $plugins);
@@ -193,6 +195,7 @@ if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'checkbox','name'=>'client_required','value'=>$cl_client_required));
 
   $form->addInput(array('type'=>'checkbox','name'=>'invoices','value'=>$cl_invoices));
+  $form->addInput(array('type'=>'checkbox','name'=>'paid_status','value'=>$cl_paid_status));
   $form->addInput(array('type'=>'checkbox','name'=>'custom_fields','value'=>$cl_custom_fields,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'expenses','value'=>$cl_expenses,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'tax_expenses','value'=>$cl_tax_expenses));
@@ -242,6 +245,8 @@ if ($request->isPost()) {
         $plugins .= ',cm';
       if ($cl_invoices)
         $plugins .= ',iv';
+      if ($cl_paid_status)
+        $plugins .= ',ps';
       if ($cl_custom_fields)
         $plugins .= ',cf';
       if ($cl_expenses)
