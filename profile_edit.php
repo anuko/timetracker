@@ -54,14 +54,17 @@ if ($request->isPost()) {
     if (!$cl_currency) $cl_currency = CURRENCY_DEFAULT;
     $cl_lang = $request->getParameter('lang');
     $cl_decimal_mark = $request->getParameter('decimal_mark');
-    $cl_custom_format_date = $request->getParameter('format_date');
-    $cl_custom_format_time = $request->getParameter('format_time');
+    $cl_date_format = $request->getParameter('date_format');
+    $cl_time_format = $request->getParameter('time_format');
     $cl_start_week = $request->getParameter('start_week');
     $cl_tracking_mode = $request->getParameter('tracking_mode');
     $cl_project_required = $request->getParameter('project_required');
     $cl_task_required = $request->getParameter('task_required');
     $cl_record_type = $request->getParameter('record_type');
     $cl_uncompleted_indicators = $request->getParameter('uncompleted_indicators');
+    $cl_bcc_email = trim($request->getParameter('bcc_email'));
+
+    // Plugin checkboxes.
     $cl_charts = $request->getParameter('charts');
     $cl_clients = $request->getParameter('clients');
     $cl_client_required = $request->getParameter('client_required');
@@ -71,7 +74,6 @@ if ($request->isPost()) {
     $cl_expenses = $request->getParameter('expenses');
     $cl_tax_expenses = $request->getParameter('tax_expenses');
     $cl_notifications = $request->getParameter('notifications');
-    $cl_bcc_email = trim($request->getParameter('bcc_email'));
     $cl_locking = $request->getParameter('locking');
     $cl_quotas = $request->getParameter('quotas');
   }
@@ -84,8 +86,8 @@ if ($request->isPost()) {
     $cl_currency = ($user->currency == ''? CURRENCY_DEFAULT : $user->currency);
     $cl_lang = $user->lang;
     $cl_decimal_mark = $user->decimal_mark;
-    $cl_custom_format_date = $user->date_format;
-    $cl_custom_format_time = $user->time_format;
+    $cl_date_format = $user->date_format;
+    $cl_time_format = $user->time_format;
     $cl_start_week = $user->week_start;
     $cl_tracking_mode = $user->tracking_mode;
     $cl_project_required = $user->project_required;
@@ -121,9 +123,7 @@ $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=
 if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team));
   $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
-  $DECIMAL_MARK_OPTIONS = array(array('id'=>'.','name'=>'.'),array('id'=>',','name'=>','));
-  $form->addInput(array('type'=>'combobox','name'=>'decimal_mark','style'=>'width: 150px','data'=>$DECIMAL_MARK_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_decimal_mark,
-    'onchange'=>'adjustDecimalPreview()'));
+
   // Prepare an array of available languages.
   $lang_files = I18n::getLangFileList();
   foreach ($lang_files as $lfile) {
@@ -141,17 +141,22 @@ if ($user->canManageTeam()) {
   }
   $longname_lang = mu_sort($longname_lang, 'name');
   $form->addInput(array('type'=>'combobox','name'=>'lang','style'=>'width: 150px','data'=>$longname_lang,'datakeys'=>array('id','name'),'value'=>$cl_lang));
+
+  $DECIMAL_MARK_OPTIONS = array(array('id'=>'.','name'=>'.'),array('id'=>',','name'=>','));
+  $form->addInput(array('type'=>'combobox','name'=>'decimal_mark','style'=>'width: 150px','data'=>$DECIMAL_MARK_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_decimal_mark,
+    'onchange'=>'adjustDecimalPreview()'));
+
   $DATE_FORMAT_OPTIONS = array(
     array('id'=>'%Y-%m-%d','name'=>'Y-m-d'),
     array('id'=>'%m/%d/%Y','name'=>'m/d/Y'),
     array('id'=>'%d.%m.%Y','name'=>'d.m.Y'),
     array('id'=>'%d.%m.%Y %a','name'=>'d.m.Y a'));
-  $form->addInput(array('type'=>'combobox','name'=>'format_date','style'=>'width: 150px;','data'=>$DATE_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_custom_format_date,
+  $form->addInput(array('type'=>'combobox','name'=>'date_format','style'=>'width: 150px;','data'=>$DATE_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_date_format,
     'onchange'=>'MakeFormatPreview(&quot;date_format_preview&quot;, this);'));
   $TIME_FORMAT_OPTIONS = array(
     array('id'=>'%H:%M','name'=>$i18n->getKey('form.profile.24_hours')),
     array('id'=>'%I:%M %p','name'=>$i18n->getKey('form.profile.12_hours')));
-  $form->addInput(array('type'=>'combobox','name'=>'format_time','style'=>'width: 150px;','data'=>$TIME_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_custom_format_time,
+  $form->addInput(array('type'=>'combobox','name'=>'time_format','style'=>'width: 150px;','data'=>$TIME_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_time_format,
     'onchange'=>'MakeFormatPreview(&quot;time_format_preview&quot;, this);'));
 
   // Prepare week start choices.
@@ -188,10 +193,10 @@ if ($user->canManageTeam()) {
     $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'bcc_email','value'=>$cl_bcc_email));
   }
 
+  // Plugin checkboxes.
   $form->addInput(array('type'=>'checkbox','name'=>'charts','value'=>$cl_charts));
   $form->addInput(array('type'=>'checkbox','name'=>'clients','value'=>$cl_clients,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'client_required','value'=>$cl_client_required));
-
   $form->addInput(array('type'=>'checkbox','name'=>'invoices','value'=>$cl_invoices));
   $form->addInput(array('type'=>'checkbox','name'=>'paid_status','value'=>$cl_paid_status));
   $form->addInput(array('type'=>'checkbox','name'=>'custom_fields','value'=>$cl_custom_fields,'onchange'=>'handlePluginCheckboxes()'));
@@ -263,8 +268,8 @@ if ($request->isPost()) {
         'currency' => $cl_currency,
         'lang' => $cl_lang,
         'decimal_mark' => $cl_decimal_mark,
-        'date_format' => $cl_custom_format_date,
-        'time_format' => $cl_custom_format_time,
+        'date_format' => $cl_date_format,
+        'time_format' => $cl_time_format,
         'week_start' => $cl_start_week,
         'tracking_mode' => $cl_tracking_mode,
         'project_required' => $cl_project_required,

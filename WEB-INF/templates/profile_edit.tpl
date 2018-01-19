@@ -142,11 +142,11 @@ function handlePluginCheckboxes() {
             <td>{$forms.profileForm.decimal_mark.control} <font id="decimal_preview" color="#777777">&nbsp;</font></td>
           <tr>
             <td align="right" nowrap>{$i18n.label.date_format}:</td>
-            <td>{$forms.profileForm.format_date.control} <font id="date_format_preview" color="#777777">&nbsp;</font></td>
+            <td>{$forms.profileForm.date_format.control} <font id="date_format_preview" color="#777777">&nbsp;</font></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.label.time_format}:</td>
-            <td>{$forms.profileForm.format_time.control} <font id="time_format_preview" color="#777777">&nbsp;</font></td>
+            <td>{$forms.profileForm.time_format.control} <font id="time_format_preview" color="#777777">&nbsp;</font></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.label.week_start}:</td>
