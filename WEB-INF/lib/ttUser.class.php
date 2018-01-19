@@ -51,7 +51,6 @@ class ttUser {
   var $plugins = null;          // Comma-separated list of enabled plugins.
   var $team = null;             // Team name.
   var $custom_logo = 0;         // Whether to use a custom logo for team.
-  var $address = null;          // Address for invoices.
   var $lock_spec = null;        // Cron specification for record locking.
   var $workday_hours = 8;       // Number of work hours in a regular day.
   var $rights = 0;              // A mask of user rights.
@@ -66,7 +65,7 @@ class ttUser {
     $mdb2 = getConnection();
 
     $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role, u.client_id, u.email, t.name as team_name, 
-      t.address, t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
+      t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
       t.tracking_mode, t.project_required, t.task_required, t.record_type, t.uncompleted_indicators,
       t.bcc_email, t.plugins, t.lock_spec, t.workday_hours, t.custom_logo
       FROM tt_users u LEFT JOIN tt_teams t ON (u.team_id = t.id) WHERE ";
@@ -102,7 +101,6 @@ class ttUser {
       $this->uncompleted_indicators = $val['uncompleted_indicators'];
       $this->bcc_email = $val['bcc_email'];
       $this->team = $val['team_name'];
-      $this->address = $val['address'];
       $this->currency = $val['currency'];
       $this->plugins = $val['plugins'];
       $this->lock_spec = $val['lock_spec'];

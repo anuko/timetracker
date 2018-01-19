@@ -50,7 +50,6 @@ if ($request->isPost()) {
 
   if ($user->canManageTeam()) {
     $cl_team = trim($request->getParameter('team_name'));
-    $cl_address = trim($request->getParameter('address'));
     $cl_currency = trim($request->getParameter('currency'));
     if (!$cl_currency) $cl_currency = CURRENCY_DEFAULT;
     $cl_lang = $request->getParameter('lang');
@@ -82,7 +81,6 @@ if ($request->isPost()) {
   $cl_email = $user->email;
   if ($user->canManageTeam()) {
     $cl_team = $user->team;
-    $cl_address = $user->address;
     $cl_currency = ($user->currency == ''? CURRENCY_DEFAULT : $user->currency);
     $cl_lang = $user->lang;
     $cl_decimal_mark = $user->decimal_mark;
@@ -224,7 +222,6 @@ if ($request->isPost()) {
   if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
   if ($user->canManageTeam()) {
     if (!ttValidString($cl_team, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
-    if (!ttValidString($cl_address, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.address'));
     if (!ttValidString($cl_currency, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));
     if ($user->isManager()) {
       if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.bcc'));
@@ -263,7 +260,6 @@ if ($request->isPost()) {
 
       $update_result = ttTeamHelper::update($user->team_id, array(
         'name' => $cl_team,
-        'address' => $cl_address,
         'currency' => $cl_currency,
         'lang' => $cl_lang,
         'decimal_mark' => $cl_decimal_mark,

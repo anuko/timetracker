@@ -750,9 +750,8 @@ class ttTeamHelper {
       $workday_hours_v = '';
     }
 
-    $sql = "insert into tt_teams (name, address, currency $lockspec_f, lang $decimal_mark_f $date_format_f $time_format_f $week_start_f $plugins_f $tracking_mode_f $task_required_f $record_type_f $uncompleted_indicators_f $workday_hours_f)
+    $sql = "insert into tt_teams (name, currency $lockspec_f, lang $decimal_mark_f $date_format_f $time_format_f $week_start_f $plugins_f $tracking_mode_f $task_required_f $record_type_f $uncompleted_indicators_f $workday_hours_f)
       values(".$mdb2->quote(trim($fields['name'])).
-      ", ".$mdb2->quote(trim($fields['address'])).
       ", ".$mdb2->quote(trim($fields['currency']))." $lockspec_v, ".$mdb2->quote($lang).
       "$decimal_mark_v $date_format_v $time_format_v $week_start_v $plugins_v $tracking_mode_v $task_required_v $record_type_v $uncompleted_indicators_v $workday_hours_v)";
     $affected = $mdb2->exec($sql);
@@ -771,7 +770,6 @@ class ttTeamHelper {
     $mdb2 = getConnection();
     $name_part = 'name = '.$mdb2->quote($fields['name']);
     $currency_part = '';
-    $addr_part = '';
     $lang_part = '';
     $decimal_mark_part = '';
     $date_format_part = '';
@@ -786,7 +784,6 @@ class ttTeamHelper {
     $lock_spec_part = '';
     $workday_hours_part = '';
 
-    if (isset($fields['address'])) $addr_part = ', address = '.$mdb2->quote($fields['address']);
     if (isset($fields['currency'])) $currency_part = ', currency = '.$mdb2->quote($fields['currency']);
     if (isset($fields['lang'])) $lang_part = ', lang = '.$mdb2->quote($fields['lang']);
     if (isset($fields['decimal_mark'])) $decimal_mark_part = ', decimal_mark = '.$mdb2->quote($fields['decimal_mark']);
@@ -801,7 +798,7 @@ class ttTeamHelper {
     if (isset($fields['lock_spec'])) $lock_spec_part = ', lock_spec = '.$mdb2->quote($fields['lock_spec']);
     if (isset($fields['workday_hours'])) $workday_hours_part = ', workday_hours = '.$mdb2->quote($fields['workday_hours']);
 
-    $sql = "update tt_teams set $name_part $addr_part $currency_part $lang_part $decimal_mark_part
+    $sql = "update tt_teams set $name_part $currency_part $lang_part $decimal_mark_part
       $date_format_part $time_format_part $week_start_part $tracking_mode_part $task_required_part $record_type_part
       $uncompleted_indicators_part $bcc_email_part $plugins_part $lock_spec_part $workday_hours_part where id = $team_id";
     $affected = $mdb2->exec($sql);
