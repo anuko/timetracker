@@ -61,7 +61,7 @@ if ($user->isPluginEnabled('cf')) {
 $cl_start = trim($request->getParameter('browser_time'));
 $cl_finish = trim($request->getParameter('browser_time'));
 // Custom field.
-$cl_cf_1 = trim($request->getParameter('cf_1', ($request->getMethod()=='POST'? null : @$_SESSION['cf_1'])));
+$cl_cf_1 = trim($request->getParameter('cf_1', ($request->isPost() ? null : @$_SESSION['cf_1'])));
 $_SESSION['cf_1'] = $cl_cf_1;
 $cl_billable = 1;
 if ($user->isPluginEnabled('iv')) {

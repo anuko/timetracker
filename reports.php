@@ -231,7 +231,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_generate','value'=>$i18n->ge
 $bean = new ActionForm('reportBean', $form, $request);
 // At this point form values are obtained from session if they are there.
 
-if (($request->getMethod() == 'GET') && !$bean->isSaved()) {
+if ($request->isGet() && !$bean->isSaved()) {
   // No previous form data were found in session. Use the following default values.
   $form->setValueByElement('users', array_keys($user_list));
   $period = new Period(INTERVAL_THIS_MONTH, new DateAndTime($user->date_format));

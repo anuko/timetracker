@@ -66,7 +66,7 @@ $cl_finish = trim($request->getParameter('finish'));
 $cl_duration = trim($request->getParameter('duration'));
 $cl_note = trim($request->getParameter('note'));
 // Custom field.
-$cl_cf_1 = trim($request->getParameter('cf_1', ($request->getMethod()=='POST'? null : @$_SESSION['cf_1'])));
+$cl_cf_1 = trim($request->getParameter('cf_1', ($request->isPost() ? null : @$_SESSION['cf_1'])));
 $_SESSION['cf_1'] = $cl_cf_1;
 $cl_billable = 1;
 if ($user->isPluginEnabled('iv')) {
@@ -77,11 +77,11 @@ if ($user->isPluginEnabled('iv')) {
     if (isset($_SESSION['billable']))
       $cl_billable = $_SESSION['billable'];
 }
-$cl_client = $request->getParameter('client', ($request->getMethod()=='POST'? null : @$_SESSION['client']));
+$cl_client = $request->getParameter('client', ($request->isPost() ? null : @$_SESSION['client']));
 $_SESSION['client'] = $cl_client;
-$cl_project = $request->getParameter('project', ($request->getMethod()=='POST'? null : @$_SESSION['project']));
+$cl_project = $request->getParameter('project', ($request->isPost() ? null : @$_SESSION['project']));
 $_SESSION['project'] = $cl_project;
-$cl_task = $request->getParameter('task', ($request->getMethod()=='POST'? null : @$_SESSION['task']));
+$cl_task = $request->getParameter('task', ($request->isPost() ? null : @$_SESSION['task']));
 $_SESSION['task'] = $cl_task;
 
 // Elements of timeRecordForm.

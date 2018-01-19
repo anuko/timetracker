@@ -42,17 +42,17 @@ class ttHttpRequest {
     return ($this->getMethod() == 'POST');
   }
 
-  // The getParameter is the primary function of this class. It returns request parameter,
+  // The getParameter is the primary function of this class. It returns request parameter
   // identified by $name.
-  function getParameter($name = "", $default = null) { 
+  function getParameter($name = '', $default = null) {
     switch ($this->getMethod())
     {
       case 'GET':
-       	if (isset($_GET[$name]) && ($_GET[$name] != ""))
+        if (isset($_GET[$name]) && ($_GET[$name] != ''))
           return $_GET[$name];
 
       case 'POST':
-        if (isset($_POST[$name]) && ($_POST[$name] != ""))
+        if (isset($_POST[$name]) && ($_POST[$name] != ''))
           return  $_POST[$name];
     }
     return $default;
