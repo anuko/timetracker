@@ -50,9 +50,9 @@ $_SESSION['date'] = $cl_date;
 
 // Initialize variables.
 $on_behalf_id = $request->getParameter('onBehalfUser', (isset($_SESSION['behalf_id']) ? $_SESSION['behalf_id'] : $user->id));
-$cl_client = $request->getParameter('client', ($request->getMethod()=='POST' ? null : @$_SESSION['client']));
+$cl_client = $request->getParameter('client', ($request->isPost() ? null : @$_SESSION['client']));
 $_SESSION['client'] = $cl_client;
-$cl_project = $request->getParameter('project', ($request->getMethod()=='POST' ? null : @$_SESSION['project']));
+$cl_project = $request->getParameter('project', ($request->isPost() ? null : @$_SESSION['project']));
 $_SESSION['project'] = $cl_project;
 $cl_item_name = $request->getParameter('item_name');
 $cl_cost = $request->getParameter('cost');

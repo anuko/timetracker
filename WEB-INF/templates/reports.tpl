@@ -209,6 +209,14 @@ function handleCheckboxes() {
           <td>{$forms.reportForm.invoice.control}</td>
         </tr>
 {/if}
+{if ($user->canManageTeam() && $user->isPluginEnabled('ps'))}
+        <tr>
+          <td><b>{$i18n.label.paid_status}</b></td>
+        </tr>
+        <tr>
+          <td>{$forms.reportForm.paid_status.control}</td>
+        </tr>
+{/if}
 {if $user->canManageTeam() || $user->isClient()}
         <tr>
           <td colspan="3"><b>{$i18n.label.users}</b></td>

@@ -122,6 +122,16 @@ $form->addInput(array('type'=>'combobox',
   'data'=>$include_options,
   'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 
+if ($user->isPluginEnabled('ps')) {
+  $form->addInput(array('type'=>'combobox',
+   'name'=>'paid_status',
+   'style'=>'width: 250px;',
+   'data'=>array('1'=>$i18n->getKey('dropdown.paid'),'2'=>$i18n->getKey('dropdown.not_paid')),
+   'empty'=>array(''=>$i18n->getKey('dropdown.all'))
+ ));
+}
+
+
 // Add invoiced / not invoiced selector.
 $invoice_options = array('1'=>$i18n->getKey('form.reports.include_invoiced'),
   '2'=>$i18n->getKey('form.reports.include_not_invoiced'));

@@ -84,7 +84,7 @@ $_SESSION['chart_type'] = $cl_type;
 // Who do we draw charts for?
 $on_behalf_id = $request->getParameter('onBehalfUser', (isset($_SESSION['behalf_id'])? $_SESSION['behalf_id'] : $user->id));
 
-if ($request->getMethod( )== 'POST') {
+if ($request->isPost()) {
   // If chart interval changed - save it.
   $cl_interval = $request->getParameter('interval');
   if ($cl_interval) {

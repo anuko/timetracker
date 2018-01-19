@@ -32,9 +32,8 @@ import('ttTeamHelper');
 import('ttUser');
 
 $cl_login = $request->getParameter('login');
+if ($cl_login == null && $request->isGet()) $cl_login = @$_COOKIE['tt_login'];
 $cl_password = $request->getParameter('password');
-if ($cl_login == null && $request->getMethod() == 'GET')
-  $cl_login = @$_COOKIE['tt_login'];
 
 $form = new Form('loginForm');
 $form->addInput(array('type'=>'text','size'=>'25','maxlength'=>'100','name'=>'login','style'=>'width: 220px;','value'=>$cl_login));
