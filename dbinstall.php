@@ -600,54 +600,6 @@ if ($_POST) {
     setChange("ALTER TABLE tt_invoices DROP end_date");
   }
 
-  if ($_POST["convert1600to11400"]) {
-    setChange("DROP TABLE IF EXISTS tt_invoice_headers");
-    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `client_id` int(11) default NULL");
-    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `cf_1_option_id` int(11) default NULL");
-    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `show_client` tinyint(4) NOT NULL default '0'");
-    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `show_invoice` tinyint(4) NOT NULL default '0'");
-    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `group_by` varchar(20) default NULL");
-    setChange("CREATE TABLE `tt_expense_items` (`id` bigint NOT NULL auto_increment, `date` date NOT NULL, `user_id` int(11) NOT NULL, `client_id` int(11) default NULL, `project_id` int(11) default NULL, `name` varchar(255) NOT NULL, `cost` decimal(10,2) default '0.00', `invoice_id` int(11) default NULL, PRIMARY KEY  (`id`))");
-    setChange("create index date_idx on tt_expense_items(date)");
-    setChange("create index user_idx on tt_expense_items(user_id)");
-    setChange("create index client_idx on tt_expense_items(client_id)");
-    setChange("create index project_idx on tt_expense_items(project_id)");
-    setChange("create index invoice_idx on tt_expense_items(invoice_id)");
-    setChange("ALTER TABLE tt_fav_reports DROP sort_by");
-    setChange("ALTER TABLE tt_fav_reports DROP show_empty_days");
-    setChange("ALTER TABLE tt_invoices DROP discount");
-    setChange("ALTER TABLE tt_users ADD COLUMN `client_id` int(11) default NULL");
-    setChange("ALTER TABLE tt_teams ADD COLUMN `decimal_mark` char(1) NOT NULL default '.'");
-    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `invoice` tinyint(4) default NULL");
-    setChange("CREATE TABLE `tt_cron` (`id` int(11) NOT NULL auto_increment, `cron_spec` varchar(255) NOT NULL, `last` int(11) default NULL, `next` int(11) default NULL, `report_id` int(11) default NULL, `email` varchar(100) default NULL, `status` tinyint(4) default '1', PRIMARY KEY (`id`))");
-    setChange("ALTER TABLE tt_cron ADD COLUMN `team_id` int(11) NOT NULL");
-    setChange("create index client_idx on tt_client_project_binds(client_id)");
-    setChange("create index project_idx on tt_client_project_binds(project_id)");
-    setChange("ALTER TABLE tt_log ADD COLUMN status tinyint(4) default '1'");
-    setChange("ALTER TABLE tt_custom_field_log ADD COLUMN status tinyint(4) default '1'");
-    setChange("ALTER TABLE tt_expense_items ADD COLUMN status tinyint(4) default '1'");
-    setChange("ALTER TABLE tt_invoices ADD COLUMN status tinyint(4) default '1'");
-    setChange("DROP INDEX name_idx on tt_invoices");
-    setChange("create unique index name_idx on tt_invoices(team_id, name, status)");
-    setChange("ALTER TABLE tt_teams ADD COLUMN lock_spec varchar(255) default NULL");
-    setChange("ALTER TABLE tt_teams DROP locktime");
-    setChange("CREATE TABLE `tt_monthly_quota` (`team_id` int(11) NOT NULL, `year` smallint(5) UNSIGNED NOT NULL, `month` tinyint(3) UNSIGNED NOT NULL, `quota` smallint(5) UNSIGNED NOT NULL, PRIMARY KEY (`year`,`month`,`team_id`))");
-    setChange("ALTER TABLE `tt_monthly_quota` ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
-    setChange("ALTER TABLE `tt_teams` ADD `workday_hours` SMALLINT NULL DEFAULT '8' AFTER `lock_spec`");
-    setChange("RENAME TABLE tt_monthly_quota TO tt_monthly_quotas");
-    setChange("ALTER TABLE tt_expense_items modify `name` text NOT NULL");
-    setChange("ALTER TABLE `tt_teams` ADD `uncompleted_indicators` SMALLINT(2) NOT NULL DEFAULT '0' AFTER `record_type`");
-    setChange("CREATE TABLE `tt_predefined_expenses` (`id` int(11) NOT NULL auto_increment, `team_id` int(11) NOT NULL, `name` varchar(255) NOT NULL, `cost` decimal(10,2) default '0.00', PRIMARY KEY  (`id`))");
-    setChange("ALTER TABLE `tt_teams` ADD `task_required` smallint(2) NOT NULL DEFAULT '0' AFTER `tracking_mode`");
-    setChange("ALTER TABLE `tt_teams` ADD `project_required` smallint(2) NOT NULL DEFAULT '0' AFTER `tracking_mode`");
-    setChange("ALTER TABLE `tt_cron` ADD `report_condition` varchar(255) default NULL AFTER `email`");
-    setChange("ALTER TABLE `tt_fav_reports` ADD `status` tinyint(4) default '1'");
-    setChange("ALTER TABLE `tt_teams` ADD `bcc_email` varchar(100) default NULL AFTER `uncompleted_indicators`");
-    setChange("ALTER TABLE `tt_cron` ADD `cc` varchar(100) default NULL AFTER `email`");
-    setChange("ALTER TABLE `tt_cron` ADD `subject` varchar(100) default NULL AFTER `cc`");
-    setChange("ALTER TABLE `tt_log` ADD `paid` tinyint(4) NULL default '0' AFTER `billable`");
-  }
-  
   // The update_clients function updates projects field in tt_clients table.
   if ($_POST["update_clients"]) {
     $mdb2 = getConnection();
@@ -709,6 +661,58 @@ if ($_POST) {
     print "Updated $affected teams...<br>\n";
   }
 
+  if ($_POST["convert1600to11400"]) {
+    setChange("DROP TABLE IF EXISTS tt_invoice_headers");
+    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `client_id` int(11) default NULL");
+    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `cf_1_option_id` int(11) default NULL");
+    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `show_client` tinyint(4) NOT NULL default '0'");
+    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `show_invoice` tinyint(4) NOT NULL default '0'");
+    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `group_by` varchar(20) default NULL");
+    setChange("CREATE TABLE `tt_expense_items` (`id` bigint NOT NULL auto_increment, `date` date NOT NULL, `user_id` int(11) NOT NULL, `client_id` int(11) default NULL, `project_id` int(11) default NULL, `name` varchar(255) NOT NULL, `cost` decimal(10,2) default '0.00', `invoice_id` int(11) default NULL, PRIMARY KEY  (`id`))");
+    setChange("create index date_idx on tt_expense_items(date)");
+    setChange("create index user_idx on tt_expense_items(user_id)");
+    setChange("create index client_idx on tt_expense_items(client_id)");
+    setChange("create index project_idx on tt_expense_items(project_id)");
+    setChange("create index invoice_idx on tt_expense_items(invoice_id)");
+    setChange("ALTER TABLE tt_fav_reports DROP sort_by");
+    setChange("ALTER TABLE tt_fav_reports DROP show_empty_days");
+    setChange("ALTER TABLE tt_invoices DROP discount");
+    setChange("ALTER TABLE tt_users ADD COLUMN `client_id` int(11) default NULL");
+    setChange("ALTER TABLE tt_teams ADD COLUMN `decimal_mark` char(1) NOT NULL default '.'");
+    setChange("ALTER TABLE tt_fav_reports ADD COLUMN `invoice` tinyint(4) default NULL");
+    setChange("CREATE TABLE `tt_cron` (`id` int(11) NOT NULL auto_increment, `cron_spec` varchar(255) NOT NULL, `last` int(11) default NULL, `next` int(11) default NULL, `report_id` int(11) default NULL, `email` varchar(100) default NULL, `status` tinyint(4) default '1', PRIMARY KEY (`id`))");
+    setChange("ALTER TABLE tt_cron ADD COLUMN `team_id` int(11) NOT NULL");
+    setChange("create index client_idx on tt_client_project_binds(client_id)");
+    setChange("create index project_idx on tt_client_project_binds(project_id)");
+    setChange("ALTER TABLE tt_log ADD COLUMN status tinyint(4) default '1'");
+    setChange("ALTER TABLE tt_custom_field_log ADD COLUMN status tinyint(4) default '1'");
+    setChange("ALTER TABLE tt_expense_items ADD COLUMN status tinyint(4) default '1'");
+    setChange("ALTER TABLE tt_invoices ADD COLUMN status tinyint(4) default '1'");
+    setChange("DROP INDEX name_idx on tt_invoices");
+    setChange("create unique index name_idx on tt_invoices(team_id, name, status)");
+    setChange("ALTER TABLE tt_teams ADD COLUMN lock_spec varchar(255) default NULL");
+    setChange("ALTER TABLE tt_teams DROP locktime");
+    setChange("CREATE TABLE `tt_monthly_quota` (`team_id` int(11) NOT NULL, `year` smallint(5) UNSIGNED NOT NULL, `month` tinyint(3) UNSIGNED NOT NULL, `quota` smallint(5) UNSIGNED NOT NULL, PRIMARY KEY (`year`,`month`,`team_id`))");
+    setChange("ALTER TABLE `tt_monthly_quota` ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+    setChange("ALTER TABLE `tt_teams` ADD `workday_hours` SMALLINT NULL DEFAULT '8' AFTER `lock_spec`");
+    setChange("RENAME TABLE tt_monthly_quota TO tt_monthly_quotas");
+    setChange("ALTER TABLE tt_expense_items modify `name` text NOT NULL");
+    setChange("ALTER TABLE `tt_teams` ADD `uncompleted_indicators` SMALLINT(2) NOT NULL DEFAULT '0' AFTER `record_type`");
+    setChange("CREATE TABLE `tt_predefined_expenses` (`id` int(11) NOT NULL auto_increment, `team_id` int(11) NOT NULL, `name` varchar(255) NOT NULL, `cost` decimal(10,2) default '0.00', PRIMARY KEY  (`id`))");
+    setChange("ALTER TABLE `tt_teams` ADD `task_required` smallint(2) NOT NULL DEFAULT '0' AFTER `tracking_mode`");
+    setChange("ALTER TABLE `tt_teams` ADD `project_required` smallint(2) NOT NULL DEFAULT '0' AFTER `tracking_mode`");
+    setChange("ALTER TABLE `tt_cron` ADD `report_condition` varchar(255) default NULL AFTER `email`");
+    setChange("ALTER TABLE `tt_fav_reports` ADD `status` tinyint(4) default '1'");
+    setChange("ALTER TABLE `tt_teams` ADD `bcc_email` varchar(100) default NULL AFTER `uncompleted_indicators`");
+    setChange("ALTER TABLE `tt_cron` ADD `cc` varchar(100) default NULL AFTER `email`");
+    setChange("ALTER TABLE `tt_cron` ADD `subject` varchar(100) default NULL AFTER `cc`");
+    setChange("ALTER TABLE `tt_log` ADD `paid` tinyint(4) NULL default '0' AFTER `billable`");
+  }
+
+  if ($_POST["convert11400to11500"]) {
+    setChange("ALTER TABLE `tt_teams` DROP `address`");
+  }
+
   if ($_POST["cleanup"]) {
 
     $mdb2 = getConnection();
@@ -751,7 +755,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.14.0)</b>
+    <td width="80%"><b>Create database structure (v1.15.0)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -785,6 +789,10 @@ if ($_POST) {
   <tr valign="top">
     <td>Update database structure (v1.6 to v1.14)</td>
     <td><input type="submit" name="convert1600to11400" value="Update"><br></td>
+  </tr>
+  <tr valign="top">
+    <td>Update database structure (v1.14 to v1.15)</td>
+    <td><input type="submit" name="convert11400to11500" value="Update"><br></td>
   </tr>
 </table>
 

@@ -16,7 +16,6 @@ CREATE TABLE `tt_teams` (
   `id` int(11) NOT NULL auto_increment,                      # team id
   `timestamp` timestamp NOT NULL,                            # modification timestamp
   `name` varchar(80) default NULL,                           # team name
-  `address` varchar(255) default NULL,                       # team address, used in invoices
   `currency` varchar(7) default NULL,                        # team currency symbol
   `decimal_mark` char(1) NOT NULL default '.',               # separator in decimals
   `lang` varchar(10) NOT NULL default 'en',                  # language
