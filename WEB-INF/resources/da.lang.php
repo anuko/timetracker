@@ -197,6 +197,9 @@ $i18n_key_words = array(
 'label.role_admin' => '(Administrator)',
 'label.page' => 'Side',
 'label.condition' => 'Betingelse',
+// TODO: translate the following.
+// 'label.yes' => 'yes',
+// 'label.no' => 'no',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Brugerdefineret felt',
 'label.monthly_quotas' => 'Månedlig kvota',

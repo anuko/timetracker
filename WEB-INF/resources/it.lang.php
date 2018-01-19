@@ -142,6 +142,9 @@ $i18n_key_words = array(
 // Translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
+// TODO: translate the following.
+// 'label.yes' => 'yes',
+// 'label.no' => 'no',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

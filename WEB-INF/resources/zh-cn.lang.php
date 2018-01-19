@@ -212,6 +212,8 @@ $i18n_key_words = array(
 'label.page' => '页码',
 // TODO: translate the following.
 // 'label.condition' => 'Condition',
+// 'label.yes' => 'yes',
+// 'label.no' => 'no',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 // TODO: Translate the following.
 // 'label.custom_fields' => 'Custom fields',

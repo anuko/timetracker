@@ -194,6 +194,9 @@ $i18n_key_words = array(
 'label.role_admin' => '(beheerder)',
 'label.page' => 'Pagina',
 'label.condition' => 'Voorwaarde',
+// TODO: translate the following.
+// 'label.yes' => 'yes',
+// 'label.no' => 'no',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Eigen velden',
 'label.monthly_quotas' => 'Doelen per maand',

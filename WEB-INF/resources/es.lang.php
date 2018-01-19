@@ -228,6 +228,8 @@ $i18n_key_words = array(
 // Translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
+// 'label.yes' => 'yes',
+// 'label.no' => 'no',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 // TODO: translate the following.
 // 'label.custom_fields' => 'Custom fields',
