@@ -116,7 +116,6 @@ class ttImportHelper {
       if ($this->canImport) {
         $team_id = ttTeamHelper::insert(array(
           'name' => $this->teamData['NAME'],
-          'address' => $this->teamData['ADDRESS'],
           'currency' => $this->teamData['CURRENCY'],
           'lock_spec' => $this->teamData['LOCK_SPEC'],
           'workday_hours' => $this->teamData['WORKDAY_HOURS'],
@@ -315,9 +314,7 @@ class ttImportHelper {
       || $this->currentTag == 'LABEL'
       || $this->currentTag == 'VALUE'
       || $this->currentTag == 'COMMENT'
-      || $this->currentTag == 'ADDRESS'
-      || $this->currentTag == 'CLIENT_NAME'
-      || $this->currentTag == 'CLIENT_ADDRESS') {
+      || $this->currentTag == 'ADDRESS') {
       if (isset($this->currentElement[$this->currentTag]))
         $this->currentElement[$this->currentTag] .= trim($data);
       else

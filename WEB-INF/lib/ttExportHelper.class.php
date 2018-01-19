@@ -67,7 +67,6 @@ class ttExportHelper {
       "\" plugins=\"".$user->plugins."\" tracking_mode=\"".$user->tracking_mode."\" task_required=\"".$user->task_required.
       "\" record_type=\"".$user->record_type."\">\n");
     fwrite($file, "  <name><![CDATA[".$user->team."]]></name>\n");
-    fwrite($file, "  <address><![CDATA[".$user->address."]]></address>\n");
     fwrite($file, "</team>\n");
 
     // Prepare user map.
