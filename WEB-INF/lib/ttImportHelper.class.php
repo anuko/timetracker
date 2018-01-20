@@ -117,17 +117,20 @@ class ttImportHelper {
         $team_id = ttTeamHelper::insert(array(
           'name' => $this->teamData['NAME'],
           'currency' => $this->teamData['CURRENCY'],
-          'lock_spec' => $this->teamData['LOCK_SPEC'],
-          'workday_hours' => $this->teamData['WORKDAY_HOURS'],
-          'lang' => $this->teamData['LANG'],
           'decimal_mark' => $this->teamData['DECIMAL_MARK'],
+          'lang' => $this->teamData['LANG'],
           'date_format' => $this->teamData['DATE_FORMAT'],
           'time_format' => $this->teamData['TIME_FORMAT'],
           'week_start' => $this->teamData['WEEK_START'],
-          'plugins' => $this->teamData['PLUGINS'],
           'tracking_mode' => $this->teamData['TRACKING_MODE'],
+          'project_required' => $this->teamData['PROJECT_REQUIRED'],
           'task_required' => $this->teamData['TASK_REQUIRED'],
-          'record_type' => $this->teamData['RECORD_TYPE']));
+          'record_type' => $this->teamData['RECORD_TYPE'],
+          'uncompleted_indicators' => $this->teamData['UNCOMPLETED_INDICATORS'],
+          'bcc_email' => $this->teamData['BCC_EMAIL'],
+          'plugins' => $this->teamData['PLUGINS'],
+          'lock_spec' => $this->teamData['LOCK_SPEC'],
+          'workday_hours' => $this->teamData['WORKDAY_HOURS']));
         if ($team_id) {
           $this->team_id = $team_id;
           foreach ($this->users as $key=>$user_item) {
@@ -231,6 +234,7 @@ class ttImportHelper {
           'invoice' => $this->invoiceMap[$this->currentElement['INVOICE_ID']],
           'note' => (isset($this->currentElement['COMMENT']) ? $this->currentElement['COMMENT'] : ''),
           'billable' => $this->currentElement['BILLABLE'],
+          'paid' => $this->currentElement['PAID'],
           'status' => $this->currentElement['STATUS']));
     }
 

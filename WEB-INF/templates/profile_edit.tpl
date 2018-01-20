@@ -172,8 +172,8 @@ function handlePluginCheckboxes() {
 {/if}
           {* initialize preview text *}
           <script>
-            MakeFormatPreview("date_format_preview", document.getElementById("format_date"));
-            MakeFormatPreview("time_format_preview", document.getElementById("format_time"));
+            MakeFormatPreview("date_format_preview", document.getElementById("date_format"));
+            MakeFormatPreview("time_format_preview", document.getElementById("time_format"));
 
             function adjustDecimalPreview()
             {

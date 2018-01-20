@@ -61,11 +61,12 @@ class ttExportHelper {
     fwrite($file, "<pack>\n");
 
     // Write team info.
-    fwrite($file, "<team currency=\"".$user->currency."\" lock_spec=\"".$user->lock_spec."\" lang=\"".$user->lang.
-      "\" decimal_mark=\"".$user->decimal_mark."\" date_format=\"".$user->date_format."\" time_format=\"".$user->time_format.
-      "\" week_start=\"".$user->week_start."\" workday_hours=\"".$user->workday_hours.
-      "\" plugins=\"".$user->plugins."\" tracking_mode=\"".$user->tracking_mode."\" task_required=\"".$user->task_required.
-      "\" record_type=\"".$user->record_type."\">\n");
+    fwrite($file, "<team currency=\"".$user->currency."\" decimal_mark=\"".$user->decimal_mark."\" lang=\"".$user->lang.
+      "\" date_format=\"".$user->date_format."\" time_format=\"".$user->time_format."\" week_start=\"".$user->week_start.
+      "\" tracking_mode=\"".$user->tracking_mode."\" project_required=\"".$user->project_required."\" task_required=\"".$user->task_required.
+      "\" record_type=\"".$user->record_type."\" uncompleted_indicators=\"".$user->uncompleted_indicators."\" bcc_email=\"".$user->bcc_email.
+      "\" plugins=\"".$user->plugins."\" lock_spec=\"".$user->lock_spec."\" workday_hours=\"".$user->workday_hours.
+      "\">\n");
     fwrite($file, "  <name><![CDATA[".$user->team."]]></name>\n");
     fwrite($file, "</team>\n");
 
@@ -217,7 +218,7 @@ class ttExportHelper {
       foreach ($records as $record) {
         $key++;
         $this->logMap[$record['id']] = $key;
-        fwrite($file, "  <log_item id=\"$key\" timestamp=\"".$record['timestamp']."\" user_id=\"".$this->userMap[$record['user_id']]."\" date=\"".$record['date']."\" start=\"".$record['start']."\" finish=\"".$record['finish']."\" duration=\"".($record['start']?"":$record['duration'])."\" client_id=\"".$this->clientMap[$record['client_id']]."\" project_id=\"".$this->projectMap[$record['project_id']]."\" task_id=\"".$this->taskMap[$record['task_id']]."\" invoice_id=\"".$this->invoiceMap[$record['invoice_id']]."\" billable=\"".$record['billable']."\" status=\"".$record['status']."\">\n");
+        fwrite($file, "  <log_item id=\"$key\" timestamp=\"".$record['timestamp']."\" user_id=\"".$this->userMap[$record['user_id']]."\" date=\"".$record['date']."\" start=\"".$record['start']."\" finish=\"".$record['finish']."\" duration=\"".($record['start']?"":$record['duration'])."\" client_id=\"".$this->clientMap[$record['client_id']]."\" project_id=\"".$this->projectMap[$record['project_id']]."\" task_id=\"".$this->taskMap[$record['task_id']]."\" invoice_id=\"".$this->invoiceMap[$record['invoice_id']]."\" billable=\"".$record['billable']."\" paid=\"".$record['paid']."\" status=\"".$record['status']."\">\n");
         fwrite($file, "    <comment><![CDATA[".$record['comment']."]]></comment>\n");
         fwrite($file, "  </log_item>\n");
       }

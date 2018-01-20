@@ -636,21 +636,6 @@ class ttTeamHelper {
 
     $mdb2 = getConnection();
 
-    $lock_spec = $fields['lock_spec'];
-    if ($lock_spec !== null) {
-      $lockspec_f = ', lock_spec';
-      $lockspec_v = ', ' . $mdb2->quote($lock_spec);
-    } else {
-      $lockspec_f = '';
-      $lockspec_v = '';
-    }
-
-    $lang = $fields['lang'];
-    if (!$lang) {
-      global $i18n;
-      $lang = $i18n->lang;
-    }
-
     $decimal_mark = $fields['decimal_mark'];
     if ($decimal_mark !== null) {
       $decimal_mark_f = ', decimal_mark';
@@ -658,6 +643,12 @@ class ttTeamHelper {
     } else {
       $decimal_mark_f = '';
       $decimal_mark_v = '';
+    }
+
+    $lang = $fields['lang'];
+    if (!$lang) {
+      global $i18n;
+      $lang = $i18n->lang;
     }
 
     $date_format = $fields['date_format'];
@@ -696,15 +687,6 @@ class ttTeamHelper {
       $week_start_v = '';
     }
 
-    $plugins = $fields['plugins'];
-    if ($plugins !== null) {
-      $plugins_f = ', plugins';
-      $plugins_v = ', ' . $mdb2->quote($plugins);
-    } else {
-      $plugins_f = '';
-      $plugins_v = '';
-    }
-
     $tracking_mode = $fields['tracking_mode'];
     if ($tracking_mode !== null) {
       $tracking_mode_f = ', tracking_mode';
@@ -712,6 +694,15 @@ class ttTeamHelper {
     } else {
       $tracking_mode_f = '';
       $tracking_mode_v = '';
+    }
+
+    $project_required = $fields['project_required'];
+    if ($project_required !== null) {
+      $project_required_f = ', project_required';
+      $project_required_v = ', ' . (int)$project_required;
+    } else {
+      $project_required_f = '';
+      $project_required_v = '';
     }
 
     $task_required = $fields['task_required'];
@@ -741,6 +732,33 @@ class ttTeamHelper {
       $uncompleted_indicators_v = '';
     }
 
+    $bcc_email = $fields['bcc_email'];
+    if ($bcc_email !== null) {
+      $bcc_email_f = ', bcc_email';
+      $bcc_email_v = ', ' . $mdb2->quote($bcc_email);
+    } else {
+      $bcc_email_f = '';
+      $bcc_email_v = '';
+    }
+
+    $plugins = $fields['plugins'];
+    if ($plugins !== null) {
+      $plugins_f = ', plugins';
+      $plugins_v = ', ' . $mdb2->quote($plugins);
+    } else {
+      $plugins_f = '';
+      $plugins_v = '';
+    }
+
+    $lock_spec = $fields['lock_spec'];
+    if ($lock_spec !== null) {
+      $lockspec_f = ', lock_spec';
+      $lockspec_v = ', ' . $mdb2->quote($lock_spec);
+    } else {
+      $lockspec_f = '';
+      $lockspec_v = '';
+    }
+
     $workday_hours = $fields['workday_hours'];
     if ($workday_hours !== null) {
       $workday_hours_f = ', workday_hours';
@@ -750,10 +768,10 @@ class ttTeamHelper {
       $workday_hours_v = '';
     }
 
-    $sql = "insert into tt_teams (name, currency $lockspec_f, lang $decimal_mark_f $date_format_f $time_format_f $week_start_f $plugins_f $tracking_mode_f $task_required_f $record_type_f $uncompleted_indicators_f $workday_hours_f)
+    $sql = "insert into tt_teams (name, currency $decimal_mark_f, lang $date_format_f $time_format_f $week_start_f $tracking_mode_f $project_required_f $task_required_f $record_type_f $uncompleted_indicators_f $bcc_email_f $plugins_f $lockspec_f $workday_hours_f)
       values(".$mdb2->quote(trim($fields['name'])).
-      ", ".$mdb2->quote(trim($fields['currency']))." $lockspec_v, ".$mdb2->quote($lang).
-      "$decimal_mark_v $date_format_v $time_format_v $week_start_v $plugins_v $tracking_mode_v $task_required_v $record_type_v $uncompleted_indicators_v $workday_hours_v)";
+      ", ".$mdb2->quote(trim($fields['currency']))." $decimal_mark_v, ".$mdb2->quote($lang).
+      "$date_format_v $time_format_v $week_start_v $tracking_mode_v $project_required_v $task_required_v $record_type_v $uncompleted_indicators_v $bcc_email_v $plugins_v $lockspec_v $workday_hours_v)";
     $affected = $mdb2->exec($sql);
 
     if (!is_a($affected, 'PEAR_Error')) {

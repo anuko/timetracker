@@ -370,6 +370,7 @@ class ttTimeHelper {
     $invoice = $fields['invoice'];
     $note = $fields['note'];
     $billable = $fields['billable'];
+    $paid = $fields['paid'];
     if (array_key_exists('status', $fields)) { // Key exists and may be NULL during migration of data.
       $status_f = ', status';
       $status_v = ', '.$mdb2->quote($fields['status']);
@@ -390,10 +391,11 @@ class ttTimeHelper {
     }
 
     if (!$billable) $billable = 0;
+    if (!$paid) $paid = 0;
 
     if ($duration) {
-      $sql = "insert into tt_log (timestamp, user_id, date, duration, client_id, project_id, task_id, invoice_id, comment, billable $status_f) ".
-        "values ('$timestamp', $user_id, ".$mdb2->quote($date).", '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable $status_v)";
+      $sql = "insert into tt_log (timestamp, user_id, date, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid $status_f) ".
+        "values ('$timestamp', $user_id, ".$mdb2->quote($date).", '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $status_v)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -403,7 +405,7 @@ class ttTimeHelper {
       if (!$duration && ttTimeHelper::getUncompleted($user_id)) return false;
 
       $sql = "insert into tt_log (timestamp, user_id, date, start, duration, client_id, project_id, task_id, invoice_id, comment, billable $status_f) ".
-        "values ('$timestamp', $user_id, ".$mdb2->quote($date).", '$start', '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable $status_v)";
+        "values ('$timestamp', $user_id, ".$mdb2->quote($date).", '$start', '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $status_v)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -625,7 +627,7 @@ class ttTimeHelper {
     $sql = "select l.id, l.timestamp, l.user_id, l.date, TIME_FORMAT(l.start, '%k:%i') as start,
       TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), '%k:%i') as finish,
       TIME_FORMAT(l.duration, '%k:%i') as duration,
-      l.client_id, l.project_id, l.task_id, l.invoice_id, l.comment, l.billable, l.status
+      l.client_id, l.project_id, l.task_id, l.invoice_id, l.comment, l.billable, l.paid, l.status
       from tt_log l where l.user_id = $user_id order by l.id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
