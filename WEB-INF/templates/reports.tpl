@@ -244,7 +244,7 @@ function handleCheckboxes() {
         <tr>
           <td colspan="3">
             <table border="0" width="100%">
-{if $user->isPluginEnabled('cl') || $user->isPluginEnabled('iv')}
+{if $user->isPluginEnabled('cl') || $user->isPluginEnabled('iv') || $user->isPluginEnabled('ps')}
               <tr>
   {if $user->isPluginEnabled('cl')}
                 <td width="25%"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td>
