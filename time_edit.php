@@ -72,6 +72,8 @@ if ($request->isPost()) {
   $cl_billable = 1;
   if ($user->isPluginEnabled('iv'))
     $cl_billable = $request->getParameter('billable');
+  if ($user->isPluginEnabled('ps'))
+    $cl_paid = $request->getParameter('paid');
 } else {
   $cl_client = $time_rec['client_id'];
   $cl_project = $time_rec['project_id'];
@@ -93,6 +95,7 @@ if ($request->isPost()) {
   }
 
   $cl_billable = $time_rec['billable'];
+  $cl_paid = $time_rec['paid'];
 
   // Add an info message to the form if we are editing an uncompleted record.
   if (strlen($cl_start) > 0 && $cl_start == $cl_finish && $cl_duration == '0:00') {
@@ -203,6 +206,8 @@ if ($custom_fields && $custom_fields->fields[0]) {
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 if ($user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
+if ($user->isPluginEnabled('ps'))
+  $form->addInput(array('type'=>'checkbox','name'=>'paid','value'=>$cl_paid));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_save or btn_copy click.
 $form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.copy')));
@@ -307,7 +312,8 @@ if ($request->isPost()) {
         'finish'=>$cl_finish,
         'duration'=>$cl_duration,
         'note'=>$cl_note,
-        'billable'=>$cl_billable));
+        'billable'=>$cl_billable,
+        'paid'=>$cl_paid));
 
       // If we have custom fields - update values.
       if ($res && $custom_fields) {
@@ -366,7 +372,8 @@ if ($request->isPost()) {
         'finish'=>$cl_finish,
         'duration'=>$cl_duration,
         'note'=>$cl_note,
-        'billable'=>$cl_billable));
+        'billable'=>$cl_billable,
+        'paid'=>$cl_paid));
 
       // Insert a custom field if we have it.
       $res = true;

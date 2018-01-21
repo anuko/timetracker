@@ -20,6 +20,12 @@
       <td><label>{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td>
     </tr>
 {/if}
+{if ($user->canManageTeam() && $user->isPluginEnabled('ps'))}
+    <tr>
+      <td align="right">&nbsp;</td>
+      <td><label>{$forms.timeRecordForm.paid.control}{$i18n.label.paid}</label></td>
+    </tr>
+{/if}
 {if ($custom_fields && $custom_fields->fields[0])} 
     <tr>
       <td align="right">{$custom_fields->fields[0]['label']|escape}{if $custom_fields->fields[0]['required']} (*){/if}:</td><td>{$forms.timeRecordForm.cf_1.control}</td>
@@ -33,7 +39,7 @@
 {/if}
 {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
     <tr>
-      <td align="right">{$i18n.label.task}:</td>
+      <td align="right">{$i18n.label.task}{if $user->task_required} (*){/if}:</td>
       <td>{$forms.timeRecordForm.task.control}</td>
     </tr>
 {/if}

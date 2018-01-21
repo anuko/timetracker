@@ -418,6 +418,7 @@ class ttTimeHelper {
   // update - updates a record in log table. Does not update its custom fields.
   static function update($fields)
   {
+    global $user;
     $mdb2 = getConnection();
 
     $id = $fields['id'];
@@ -430,19 +431,26 @@ class ttTimeHelper {
     $finish = $fields['finish'];
     $duration = $fields['duration'];
     $note = $fields['note'];
-    $billable = $fields['billable'];
+
+    $billable_part = '';
+    if ($user->isPluginEnabled('iv')) {
+      $billable_part = $fields['billable'] ? ', billable = 1' : ', billable = 0';
+    }
+    $paid_part = '';
+    if ($user->canManageTeam() && $user->isPluginEnabled('ps')) {
+      $paid_part = $fields['paid'] ? ', paid = 1' : ', paid = 0';
+    }
 
     $start = ttTimeHelper::to24HourFormat($start);
     $finish = ttTimeHelper::to24HourFormat($finish);
     if ('00:00' == $finish) $finish = '24:00';
     $duration = ttTimeHelper::normalizeDuration($duration);
 
-    if (!$billable) $billable = 0;
     if ($start) $duration = '';
 
     if ($duration) {
       $sql = "UPDATE tt_log set start = NULL, duration = '$duration', client_id = ".$mdb2->quote($client).", project_id = ".$mdb2->quote($project).", task_id = ".$mdb2->quote($task).", ".
-        "comment = ".$mdb2->quote($note).", billable = $billable, date = '$date' WHERE id = $id";
+        "comment = ".$mdb2->quote($note)."$billable_part $paid_part, date = '$date' WHERE id = $id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -455,7 +463,7 @@ class ttTimeHelper {
         return false;
 
       $sql = "UPDATE tt_log SET start = '$start', duration = '$duration', client_id = ".$mdb2->quote($client).", project_id = ".$mdb2->quote($project).", task_id = ".$mdb2->quote($task).", ".
-        "comment = ".$mdb2->quote($note).", billable = $billable, date = '$date' WHERE id = $id";
+        "comment = ".$mdb2->quote($note)."$billable_part $paid_part, date = '$date' WHERE id = $id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -601,7 +609,7 @@ class ttTimeHelper {
     $sql = "select l.id as id, l.timestamp as timestamp, TIME_FORMAT(l.start, $sql_time_format) as start,
       TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
       TIME_FORMAT(l.duration, '%k:%i') as duration,
-      p.name as project_name, t.name as task_name, l.comment, l.client_id, l.project_id, l.task_id, l.invoice_id, l.billable, l.date
+      p.name as project_name, t.name as task_name, l.comment, l.client_id, l.project_id, l.task_id, l.invoice_id, l.billable, l.paid, l.date
       from tt_log l
       left join tt_projects p on (p.id = l.project_id)
       left join tt_tasks t on (t.id = l.task_id)
