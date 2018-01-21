@@ -53,7 +53,7 @@ $bean = new ActionForm('reportBean', new Form('reportForm'), $request);
 $type = $request->getParameter('type');
 
 // Also, there are 2 variations of report: totals only, or normal. Totals only means that the report
-// is grouped by (either date, user, client, project, task or cf_1) and user only needs to see subtotals by group.
+// is grouped by (either date, user, client, project, task, or cf_1) and user only needs to see subtotals by group.
 $totals_only = $bean->getAttribute('chtotalsonly');
 
 // Obtain items.
@@ -132,6 +132,7 @@ if ('xml' == $type) {
           print $item['expense'];
         print "]]></cost>\n";
       }
+      if ($bean->getAttribute('chpaid')) print "\t<paid><![CDATA[".$item['paid']."]]></paid>\n";
       if ($bean->getAttribute('chinvoice')) print "\t<invoice><![CDATA[".$item['invoice']."]]></invoice>\n";
 
       print "</row>\n";
@@ -198,6 +199,7 @@ if ('csv' == $type) {
     if ($bean->getAttribute('chduration')) print ',"'.$i18n->getKey('label.duration').'"';
     if ($bean->getAttribute('chnote')) print ',"'.$i18n->getKey('label.note').'"';
     if ($bean->getAttribute('chcost')) print ',"'.$i18n->getKey('label.cost').'"';
+    if ($bean->getAttribute('chpaid')) print ',"'.$i18n->getKey('label.paid').'"';
     if ($bean->getAttribute('chinvoice')) print ',"'.$i18n->getKey('label.invoice').'"';
     print "\n";
 
@@ -224,6 +226,7 @@ if ('csv' == $type) {
         else
           print ',"'.$item['expense'].'"';
       }
+      if ($bean->getAttribute('chpaid')) print ',"'.$item['paid'].'"';
       if ($bean->getAttribute('chinvoice')) print ',"'.str_replace('"','""',$item['invoice']).'"';
       print "\n";
     }
