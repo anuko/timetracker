@@ -53,6 +53,8 @@ class ttReportHelper {
     if ($bean->getAttribute('include_records')=='2') $dropdown_parts .= ' and l.billable = 0';
     if ($bean->getAttribute('invoice')=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
     if ($bean->getAttribute('invoice')=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
+    if ($bean->getAttribute('paid_status')=='1') $dropdown_parts .= ' and l.paid = 1';
+    if ($bean->getAttribute('paid_status')=='2') $dropdown_parts .= ' and l.paid = 0';
 
     // Prepare user list part.
     $userlist = -1;
