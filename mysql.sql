@@ -191,18 +191,21 @@ CREATE TABLE `tt_fav_reports` (
   `id` int(11) NOT NULL auto_increment,                  # favorite report id
   `name` varchar(200) NOT NULL,                          # favorite report name
   `user_id` int(11) NOT NULL,                            # user id favorite report belongs to
+  `report_spec` text default NULL,                       # future replacement field for all report settings
   `client_id` int(11) default NULL,                      # client id (if selected)
   `cf_1_option_id` int(11) default NULL,                 # custom field 1 option id (if selected)
   `project_id` int(11) default NULL,                     # project id (if selected)
   `task_id` int(11) default NULL,                        # task id (if selected)
   `billable` tinyint(4) default NULL,                    # whether to include billable, not billable, or all records
   `invoice` tinyint(4) default NULL,                     # whether to include invoiced, not invoiced, or all records
+  `paid_status` tinyint(4) default NULL,                 # whether to include paid, not paid, or all records
   `users` text default NULL,                             # Comma-separated list of user ids. Nothing here means "all" users.
   `period` tinyint(4) default NULL,                      # selected period type for report
   `period_start` date default NULL,                      # period start
   `period_end` date default NULL,                        # period end
   `show_client` tinyint(4) NOT NULL default '0',         # whether to show client column
   `show_invoice` tinyint(4) NOT NULL default '0',        # whether to show invoice column
+  `show_paid` tinyint(4) NOT NULL default '0',           # whether to show paid column
   `show_project` tinyint(4) NOT NULL default '0',        # whether to show project column
   `show_start` tinyint(4) NOT NULL default '0',          # whether to show start field
   `show_duration` tinyint(4) NOT NULL default '0',       # whether to show duration field
