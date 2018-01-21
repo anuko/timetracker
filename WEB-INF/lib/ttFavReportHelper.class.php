@@ -80,8 +80,8 @@ class ttFavReportHelper {
     $mdb2 = getConnection();
 
     $sql = "insert into tt_fav_reports (name, user_id, client_id, cf_1_option_id, project_id, task_id,
-      billable, invoice, users, period, period_start, period_end,
-      show_client, show_invoice,
+      billable, invoice, paid_status, users, period, period_start, period_end,
+      show_client, show_invoice, show_paid,
       show_project, show_start, show_duration, show_cost,
       show_task, show_end, show_note, show_custom_field_1,
       group_by, show_totals_only)
@@ -90,9 +90,10 @@ class ttFavReportHelper {
       $mdb2->quote($fields['client']).", ".$mdb2->quote($fields['option']).", ".
       $mdb2->quote($fields['project']).", ".$mdb2->quote($fields['task']).", ".
       $mdb2->quote($fields['billable']).", ".$mdb2->quote($fields['invoice']).", ".
+      $mdb2->quote($fields['paid_status']).", ".
       $mdb2->quote($fields['users']).", ".$mdb2->quote($fields['period']).", ".
       $mdb2->quote($fields['from']).", ".$mdb2->quote($fields['to']).", ".
-      $fields['chclient'].", ".$fields['chinvoice'].", ".
+      $fields['chclient'].", ".$fields['chinvoice'].", ".$fields['chpaid'].", ".
       $fields['chproject'].", ".$fields['chstart'].", ".$fields['chduration'].", ".$fields['chcost'].", ".
       $fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".$fields['chcf_1'].", ".
       $mdb2->quote($fields['group_by']).", ".$fields['chtotalsonly'].")";
@@ -120,12 +121,14 @@ class ttFavReportHelper {
       "task_id = ".$mdb2->quote($fields['task']).", ".
       "billable = ".$mdb2->quote($fields['billable']).", ".
       "invoice = ".$mdb2->quote($fields['invoice']).", ".
+      "paid_status = ".$mdb2->quote($fields['paid_status']).", ".
       "users = ".$mdb2->quote($fields['users']).", ".
       "period = ".$mdb2->quote($fields['period']).", ".
       "period_start = ".$mdb2->quote($fields['from']).", ".
       "period_end = ".$mdb2->quote($fields['to']).", ".
       "show_client = ".$fields['chclient'].", ".
       "show_invoice = ".$fields['chinvoice'].", ".
+      "show_paid = ".$fields['chpaid'].", ".
       "show_project = ".$fields['chproject'].", ".
       "show_start = ".$fields['chstart'].", ".
       "show_duration = ".$fields['chduration'].", ".
@@ -152,6 +155,7 @@ class ttFavReportHelper {
     //  Later in this function we use it to construct $fields array to update database.
     if (!$bean->getAttribute('chclient')) $bean->setAttribute('chclient', 0);
     if (!$bean->getAttribute('chinvoice')) $bean->setAttribute('chinvoice', 0);
+    if (!$bean->getAttribute('chpaid')) $bean->setAttribute('chpaid', 0);
     if (!$bean->getAttribute('chproject')) $bean->setAttribute('chproject', 0);
     if (!$bean->getAttribute('chstart')) $bean->setAttribute('chstart', 0);
     if (!$bean->getAttribute('chduration')) $bean->setAttribute('chduration', 0);
@@ -198,12 +202,14 @@ class ttFavReportHelper {
       'task'=>$bean->getAttribute('task'),
       'billable'=>$bean->getAttribute('include_records'),
       'invoice'=>$bean->getAttribute('invoice'),
+      'paid_status'=>$bean->getAttribute('paid_status'),
       'users'=>$users,
       'period'=>$bean->getAttribute('period'),
       'from'=>$from,
       'to'=>$to,
       'chclient'=>$bean->getAttribute('chclient'),
       'chinvoice'=>$bean->getAttribute('chinvoice'),
+      'chpaid'=>$bean->getAttribute('chpaid'),
       'chproject'=>$bean->getAttribute('chproject'),
       'chstart'=>$bean->getAttribute('chstart'),
       'chduration'=>$bean->getAttribute('chduration'),
@@ -249,6 +255,7 @@ class ttFavReportHelper {
       $bean->setAttribute('task', $val['task_id']);
       $bean->setAttribute('include_records', $val['billable']);
       $bean->setAttribute('invoice', $val['invoice']);
+      $bean->setAttribute('paid_status', $val['paid_status']);
       if ($val['users'])
         $bean->setAttribute('users', explode(',', $val['users']));
       else {
@@ -272,6 +279,7 @@ class ttFavReportHelper {
       }
       $bean->setAttribute('chclient', $val['show_client']);
       $bean->setAttribute('chinvoice', $val['show_invoice']);
+      $bean->setAttribute('chpaid', $val['show_paid']);
       $bean->setAttribute('chproject', $val['show_project']);
       $bean->setAttribute('chstart', $val['show_start']);
       $bean->setAttribute('chduration', $val['show_duration']);

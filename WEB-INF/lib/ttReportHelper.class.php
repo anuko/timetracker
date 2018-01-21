@@ -98,6 +98,8 @@ class ttReportHelper {
     if ($report['billable']=='2') $dropdown_parts .= ' and l.billable = 0';
     if ($report['invoice']=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
     if ($report['invoice']=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
+    if ($report['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
+    if ($report['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
 
     // Prepare user list part.
     $userlist = -1;
@@ -1448,6 +1450,8 @@ class ttReportHelper {
         $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.note').'</td>';
       if ($report['show_cost'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+      if ($report['show_paid'])
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.paid').'</td>';
       if ($report['show_invoice'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.invoice').'</td>';
       $body .= '</tr>';
@@ -1489,6 +1493,7 @@ class ttReportHelper {
                 $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
                 $body .= '</td>';
               }
+              if ($report['show_paid']) $body .= '<td></td>';
               if ($report['show_invoice']) $body .= '<td></td>';
               $body .= '</tr>';
               $body .= '<tr><td>&nbsp;</td></tr>';
@@ -1521,6 +1526,11 @@ class ttReportHelper {
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['note']).'</td>';
           if ($report['show_cost'])
             $body .= '<td style="'.$cellRightAligned.'">'.$record['cost'].'</td>';
+          if ($report['show_paid']) {
+            $body .= '<td style="'.$cellRightAligned.'">';
+            $body .= $record['paid'] == 1 ? $i18n->getKey('label.yes') : $i18n->getKey('label.no');
+            $body .= '</td>';
+          }
           if ($report['show_invoice'])
             $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['invoice']).'</td>';
           $body .= '</tr>';
@@ -1550,6 +1560,7 @@ class ttReportHelper {
           $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotals[$cur_grouped_by]['cost'] : $subtotals[$cur_grouped_by]['expenses'];
           $body .= '</td>';
         }
+        if ($report['show_paid']) $body .= '<td></td>';
         if ($report['show_invoice']) $body .= '<td></td>';
         $body .= '</tr>';
       }
@@ -1572,6 +1583,7 @@ class ttReportHelper {
         $body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
         $body .= '</td>';
       }
+      if ($report['show_paid']) $body .= '<td></td>';
       if ($report['show_invoice']) $body .= '<td></td>';
       $body .= '</tr>';
 
