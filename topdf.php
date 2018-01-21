@@ -159,6 +159,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.duration').'</td>'; }
   if ($bean->getAttribute('chnote')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.note').'</td>'; }
   if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.cost').'</td>'; }
+  if ($bean->getAttribute('chpaid')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.paid').'</td>'; }
   if ($bean->getAttribute('chinvoice')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.invoice').'</td>'; }
   $html .= '</tr>';
   $html .= '</thead>';
@@ -208,6 +209,7 @@ if ($totals_only) {
             $html .= $subtotals[$prev_grouped_by]['expenses'];
           $html .= '</td>';
         }
+        if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
         if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
         $html .= '</tr>';
         $html .= '<tr><td colspan="'.$colspan.'">&nbsp;</td></tr>';
@@ -234,6 +236,11 @@ if ($totals_only) {
       else
         $html .= $item['expense'];
       $html .= '</td>';
+    }
+    if ($bean->getAttribute('chpaid')) {
+        $html .= '<td>';
+        $html .= $item['paid'] == 1 ? $i18n->getKey('label.yes') : $i18n->getKey('label.no');
+        $html .= '</td>';
     }
     if ($bean->getAttribute('chinvoice')) $html .= '<td>'.htmlspecialchars($item['invoice']).'</td>';
     $html .= '</tr>';
@@ -283,6 +290,7 @@ if ($totals_only) {
         $html .= $subtotals[$prev_grouped_by]['expenses'];
       $html .= '</td>';
     }
+    if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
     if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
     $html .= '</tr>';
   }
@@ -308,6 +316,7 @@ if ($totals_only) {
       $html .= $totals['expenses'];
     $html .= '</td>';
   }
+  if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
   if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
   $html .= '</tr>';
   $html .= '</table>';
