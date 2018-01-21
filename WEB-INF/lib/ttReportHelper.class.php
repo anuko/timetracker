@@ -1166,6 +1166,8 @@ class ttReportHelper {
         $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.note').'</td>';
       if ($bean->getAttribute('chcost'))
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+      if ($bean->getAttribute('chpaid'))
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.paid').'</td>';
       if ($bean->getAttribute('chinvoice'))
         $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.invoice').'</td>';
       $body .= '</tr>';
@@ -1207,6 +1209,7 @@ class ttReportHelper {
                 $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
                 $body .= '</td>';
               }
+              if ($bean->getAttribute('chpaid')) $body .= '<td></td>';
               if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
               $body .= '</tr>';
               $body .= '<tr><td>&nbsp;</td></tr>';
@@ -1239,6 +1242,11 @@ class ttReportHelper {
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['note']).'</td>';
           if ($bean->getAttribute('chcost'))
             $body .= '<td style="'.$cellRightAligned.'">'.$record['cost'].'</td>';
+          if ($bean->getAttribute('chpaid')) {
+            $body .= '<td style="'.$cellRightAligned.'">';
+            $body .= $record['paid'] == 1 ? $i18n->getKey('label.yes') : $i18n->getKey('label.no');
+            $body .= '</td>';
+          }
           if ($bean->getAttribute('chinvoice'))
             $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['invoice']).'</td>';
           $body .= '</tr>';
@@ -1268,6 +1276,7 @@ class ttReportHelper {
           $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotals[$cur_grouped_by]['cost'] : $subtotals[$cur_grouped_by]['expenses'];
           $body .= '</td>';
         }
+        if ($bean->getAttribute('chpaid')) $body .= '<td></td>';
         if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
         $body .= '</tr>';
       }
@@ -1290,6 +1299,7 @@ class ttReportHelper {
         $body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
         $body .= '</td>';
       }
+      if ($bean->getAttribute('chpaid')) $body .= '<td></td>';
       if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
       $body .= '</tr>';
 
