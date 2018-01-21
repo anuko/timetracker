@@ -122,7 +122,7 @@ $form->addInput(array('type'=>'combobox',
   'data'=>$include_options,
   'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 
-if ($user->isPluginEnabled('ps')) {
+if ($user->canManageTeam() && $user->isPluginEnabled('ps')) {
   $form->addInput(array('type'=>'combobox',
    'name'=>'paid_status',
    'style'=>'width: 250px;',
@@ -202,7 +202,8 @@ if (defined('COST_ON_REPORTS') && isTrue(COST_ON_REPORTS))
 // If we have a custom field - add a checkbox for it.
 if ($custom_fields && $custom_fields->fields[0])
   $form->addInput(array('type'=>'checkbox','name'=>'chcf_1'));
-
+if ($user->canManageTeam() && $user->isPluginEnabled('ps'))
+  $form->addInput(array('type'=>'checkbox','name'=>'chpaid'));
 // Add group by control.
 $group_by_options['no_grouping'] = $i18n->getKey('form.reports.group_by_no');
 $group_by_options['date'] = $i18n->getKey('form.reports.group_by_date');
@@ -247,6 +248,7 @@ if ($request->isGet() && !$bean->isSaved()) {
   $form->setValueByElement('chfinish', '1');
   $form->setValueByElement('chnote', '1');
   $form->setValueByElement('chcf_1', '0');
+  $form->setValueByElement('chpaid', '0');
   $form->setValueByElement('chtotalsonly', '0');
 }
 

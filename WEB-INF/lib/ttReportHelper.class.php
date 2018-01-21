@@ -276,6 +276,10 @@ class ttReportHelper {
         array_push($fields, "cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost"); // Use project rate for user.
       array_push($fields, "null as expense"); 
     }
+    // Add paid status.
+    if ($user->canManageTeam() && $bean->getAttribute('chpaid'))
+      array_push($fields, 'l.paid as paid');
+
     // Add invoice name if it is selected.
     if (($user->canManageTeam() || $user->isClient()) && $bean->getAttribute('chinvoice'))
       array_push($fields, 'i.name as invoice');
