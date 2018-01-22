@@ -150,6 +150,12 @@ function recalculateCost() {
       <td align="right">{$i18n.label.cost}:</td>
       <td>{$forms.expenseItemForm.cost.control} {$user->currency|escape}</td>
     </tr>
+{if ($user->canManageTeam() && $user->isPluginEnabled('ps'))}
+    <tr>
+      <td align="right">&nbsp;</td>
+      <td><label>{$forms.expenseItemForm.paid.control}{$i18n.label.paid}</label></td>
+    </tr>
+{/if}
     <tr>
       <td align="right">{$i18n.label.date}:</td>
       <td>{$forms.expenseItemForm.date.control}</td>

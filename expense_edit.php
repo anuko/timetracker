@@ -56,12 +56,15 @@ if ($request->isPost()) {
   $cl_project = $request->getParameter('project');
   $cl_item_name = trim($request->getParameter('item_name'));
   $cl_cost = trim($request->getParameter('cost'));
+  if ($user->isPluginEnabled('ps'))
+    $cl_paid = $request->getParameter('paid');
 } else {
   $cl_date = $item_date->toString($user->date_format);
   $cl_client = $expense_item['client_id'];
   $cl_project = $expense_item['project_id'];
   $cl_item_name = $expense_item['name'];
   $cl_cost = $expense_item['cost'];
+  $cl_paid = $expense_item['paid'];
 }
 
 // Initialize elements of 'expenseItemForm'.
@@ -134,6 +137,8 @@ if ($predefined_expenses) {
 }
 $form->addInput(array('type'=>'textarea','maxlength'=>'800','name'=>'item_name','style'=>'width: 250px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_item_name));
 $form->addInput(array('type'=>'text','maxlength'=>'40','name'=>'cost','style'=>'width: 100px;','value'=>$cl_cost));
+if ($user->canManageTeam() && $user->isPluginEnabled('ps'))
+  $form->addInput(array('type'=>'checkbox','name'=>'paid','value'=>$cl_paid));
 $form->addInput(array('type'=>'datefield','name'=>'date','maxlength'=>'20','value'=>$cl_date));
 // Hidden control for record id.
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
@@ -181,7 +186,7 @@ if ($request->isPost()) {
     // Now, an update.
     if ($err->no()) {
       if (ttExpenseHelper::update(array('id'=>$cl_id,'date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getActiveUser(),
-          'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost))) {
+          'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'paid'=>$cl_paid))) {
         header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
         exit();
       }
