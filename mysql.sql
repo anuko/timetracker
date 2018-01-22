@@ -340,6 +340,7 @@ CREATE TABLE `tt_expense_items` (
   `name` text NOT NULL,                # expense item name (what is an expense for)   
   `cost` decimal(10,2) default '0.00', # item cost (including taxes, etc.)
   `invoice_id` int(11) default NULL,   # invoice id
+  `paid` tinyint(4) default '0',       # whether the item is paid
   `status` tinyint(4) default '1',     # item status
   PRIMARY KEY  (`id`)
 );

@@ -147,6 +147,8 @@ class ttReportHelper {
     if ($bean->getAttribute('project')) $dropdown_parts .= ' and ei.project_id = '.$bean->getAttribute('project');
     if ($bean->getAttribute('invoice')=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
     if ($bean->getAttribute('invoice')=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
+    if ($bean->getAttribute('paid_status')=='1') $dropdown_parts .= ' and ei.paid = 1';
+    if ($bean->getAttribute('paid_status')=='2') $dropdown_parts .= ' and ei.paid = 0';
 
     // Prepare user list part.
     $userlist = -1;
@@ -186,6 +188,8 @@ class ttReportHelper {
     if ($report['project_id']) $dropdown_parts .= ' and ei.project_id = '.$report['project_id'];
     if ($report['invoice']=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
     if ($report['invoice']=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
+    if ($report['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
+    if ($report['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
 
     // Prepare user list part.
     $userlist = -1;
@@ -350,6 +354,9 @@ class ttReportHelper {
         array_push($fields, 'ei.name as note');
       array_push($fields, 'ei.cost as cost');
       array_push($fields, 'ei.cost as expense');
+      // Add paid status.
+      if ($user->canManageTeam() && $bean->getAttribute('chpaid'))
+        array_push($fields, 'ei.paid as paid');
       // Add invoice name if it is selected.
       if (($user->canManageTeam() || $user->isClient()) && $bean->getAttribute('chinvoice'))
         array_push($fields, 'i.name as invoice');

@@ -161,6 +161,9 @@
   <table>
   <tr>
     <td><input type="button" onclick="chLocation('report_send.php');" value="{$i18n.button.send_by_email}"></td>
+{if $bean->getAttribute('paid_status') == 2}
+    <td><input type="button" onclick="chLocation('mark_paid.php');" value="{$i18n.button.mark_paid}"></td>
+{/if}
   </tr>
   </table>
   </td>
