@@ -117,8 +117,7 @@ $i18n_key_words = array(
 'button.import' => 'Team importeren',
 'button.close' => 'Sluiten',
 'button.stop' => 'Stop',
-// TODO: translate the following.
-// 'button.mark_paid' => 'Mark paid',
+'button.mark_paid' => 'Markeer als betaald',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Teamnaam',
@@ -153,8 +152,7 @@ $i18n_key_words = array(
 'label.finish' => 'Einde',
 'label.duration' => 'Tijdsduur',
 'label.note' => 'Opmerking',
-// TODO: translate the following.
-// 'label.notes' => 'Notes',
+'label.notes' => 'Notities',
 'label.item' => 'Artikel',
 'label.cost' => 'Kosten',
 'label.day_total' => 'Dag totaal',
@@ -194,9 +192,8 @@ $i18n_key_words = array(
 'label.role_admin' => '(beheerder)',
 'label.page' => 'Pagina',
 'label.condition' => 'Voorwaarde',
-// TODO: translate the following.
-// 'label.yes' => 'yes',
-// 'label.no' => 'no',
+'label.yes' => 'ja',
+'label.no' => 'nee',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Eigen velden',
 'label.monthly_quotas' => 'Doelen per maand',
@@ -209,9 +206,8 @@ $i18n_key_words = array(
 'label.what_is_it' => 'Wat betekent dit?',
 'label.expense' => 'Kosten',
 'label.quantity' => 'Hoeveelheid',
-// TODO: translate the following.
-// 'label.paid_status' => 'Paid status',
-// 'label.paid' => 'Paid',
+'label.paid_status' => 'Status van betaling',
+'label.paid' => 'Betaald',
 
 // Form titles.
 'title.login' => 'Aanmelden',
@@ -302,9 +298,8 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'inactief',
 'dropdown.delete'=>'verwijderen',
 'dropdown.do_not_delete'=>'niet verwijderen',
-// TODO: translate the following.
-// 'dropdown.paid' => 'paid',
-// 'dropdown.not_paid' => 'not paid',
+'dropdown.paid' => 'betaald',
+'dropdown.not_paid' => 'niet betaald',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases
@@ -366,8 +361,7 @@ $i18n_key_words = array(
 'form.invoice.person' => 'Medewerker',
 'form.invoice.invoice_to_delete' => 'Te verwijderen factuur',
 'form.invoice.invoice_entries' => 'Factuur gegevens',
-// TODO: translate the following.
-// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
+'form.invoice.confirm_deleting_entries' => 'Bevestig het verwijderen van de facturen uit Time Tracker.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
 'form.charts.interval' => 'Periode',
