@@ -114,8 +114,7 @@ $i18n_key_words = array(
 'button.import' => 'Team importieren',
 'button.close' => 'Schließen',
 'button.stop' => 'Stop',
-// TODO: translate the following.
-// 'button.mark_paid' => 'Mark paid',
+'button.mark_paid' => 'Als bezahlt setzen',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Teamname',
@@ -130,8 +129,7 @@ $i18n_key_words = array(
 'label.confirm_password' => 'Passwort bestätigen',
 'label.email' => 'E-Mail',
 'label.cc' => 'CC',
-// TODO: translate the following.
-// 'label.bcc' => 'Bcc',
+'label.bcc' => 'BCC',
 'label.subject' => 'Betreff',
 'label.date' => 'Datum',
 'label.start_date' => 'Anfangsdatum',
@@ -151,8 +149,8 @@ $i18n_key_words = array(
 'label.finish' => 'Ende',
 'label.duration' => 'Dauer',
 'label.note' => 'Beschreibung',
-// TODO: translate the following.
-// 'label.notes' => 'Notes',
+'label.notes' => 'Bemerkungen', // TODO: label.notes means label.note (from day view) for multipe days in week view.
+                                // Suggest more accurate translation, perhaps? As Beschreibung and Bemerkungen seem different.
 'label.item' => 'Position',
 'label.cost' => 'Kosten',
 'label.day_total' => 'Summe (Tag)',
@@ -167,9 +165,8 @@ $i18n_key_words = array(
 'label.configure' => 'Konfigurieren',
 'label.select_all' => 'Alle auswählen',
 'label.select_none' => 'Alle abwählen',
-// TODO: translate the following.
-// 'label.day_view' => 'Day view',
-// 'label.week_view' => 'Week view',
+'label.day_view' => 'Tagesansicht',
+'label.week_view' => 'Wochenansicht',
 'label.id' => 'ID',
 'label.language' => 'Sprache',
 'label.decimal_mark' => 'Dezimaltrennzeichen',
@@ -180,7 +177,7 @@ $i18n_key_words = array(
 'label.status' => 'Status',
 'label.tax' => 'Umsatzsteuer',
 'label.subtotal' => 'Zwischensumme',
-'label.total' => 'Gesamtsumme',
+'label.total' => 'Endsumme',
 'label.client_name' => 'Kundenname',
 'label.client_address' => 'Adresse',
 'label.or' => 'oder',
@@ -192,10 +189,9 @@ $i18n_key_words = array(
 'label.role_comanager' => '(Co-Manager)',
 'label.role_admin' => '(Administrator)',
 'label.page' => 'Seite',
-// TODO: translate the following.
-// 'label.condition' => 'Condition',
-// 'label.yes' => 'yes',
-// 'label.no' => 'no',
+'label.condition' => 'Bedingung',
+'label.yes' => 'Ja',
+'label.no' => 'Nein',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Benutzerfelder',
 'label.monthly_quotas' => 'Monatliche Quoten',
@@ -206,11 +202,10 @@ $i18n_key_words = array(
 'label.fav_report' => 'Bevorzugter Report',
 'label.cron_schedule' => 'Cronjob Zeitplan',
 'label.what_is_it' => 'Was ist es?',
-// TODO: translate the following.
-// 'label.expense' => 'Expense',
-// 'label.quantity' => 'Quantity',
-// 'label.paid_status' => 'Paid status',
-// 'label.paid' => 'Paid',
+'label.expense' => 'Ausgaben',
+'label.quantity' => 'Menge',
+'label.paid_status' => 'Bezahlstatus',
+'label.paid' => 'Bezahlt',
 
 // Form titles.
 'title.login' => 'Anmelden',
@@ -275,21 +270,17 @@ $i18n_key_words = array(
 // Strings that are used in a single form must go to the specific form section.
 'dropdown.all' => '--- alle ---',
 'dropdown.no' => '--- nein ---',
-// TODO: translate the following.
-// 'dropdown.current_day' => 'today',
-// 'dropdown.previous_day' => 'yesterday',
+'dropdown.current_day' => 'heute',
+'dropdown.previous_day' => 'gestern',
 'dropdown.selected_day' => 'Tag',
-// TODO: translate the following.
-// 'dropdown.current_week' => 'this week',
+'dropdown.current_week' => 'diese Woche',
 'dropdown.previous_week' => 'vorherige Woche',
 'dropdown.selected_week' => 'Woche',
-// TODO: translate the following.
-// 'dropdown.current_month' => 'this month',
+'dropdown.current_month' => 'dieser Monat',
 'dropdown.previous_month' => 'vorheriger Monat',
 'dropdown.selected_month' => 'Monat',
-// TODO: translate the following.
-// 'dropdown.current_year' => 'this year',
-// 'dropdown.previous_year' => 'previous year',
+'dropdown.current_year' => 'dieses Jahr',
+'dropdown.previous_year' => 'vorheriges Jahr',
 'dropdown.selected_year' => 'Jahr',
 'dropdown.all_time' => 'Gesamtzeitraum',
 'dropdown.projects' => 'Projekte',
@@ -301,9 +292,8 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'inaktiv',
 'dropdown.delete'=>'löschen',
 'dropdown.do_not_delete'=>'nicht löschen',
-// TODO: translate the following.
-// 'dropdown.paid' => 'paid',
-// 'dropdown.not_paid' => 'not paid',
+'dropdown.paid' => 'bezahlt',
+'dropdown.not_paid' => 'nicht bezahlt',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases
@@ -333,8 +323,7 @@ $i18n_key_words = array(
 'form.time_edit.uncompleted' => 'Dieser Eintrag wurde ohne Startzeit gespeichert. Dies ist kein Fehler.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
-// TODO: translate the following.
-// 'form.week.new_entry' => 'New entry',
+'form.week.new_entry' => 'Neuer Eintrag',
 
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Als bevorzugt speichern',
@@ -367,13 +356,13 @@ $i18n_key_words = array(
 
 // Invoice delete form. See example at https://timetracker.anuko.com/invoice_delete.php
 'form.invoice.invoice_to_delete' => 'Zu löschende Rechnung',
-// TODO: check if form.invoice.invoice_entries is translated correctly.
-// This is a label for a dropdown at https://timetracker.anuko.com/invoice_delete.php with 2 options:
-// "delete" and "do not delete".
-// The settings tells whether we are deleting invoiced items when deleting an invoice.
-// If we select "do not delete" then the items stay, and can be included in another invoice.
 'form.invoice.invoice_entries' => 'Rechnungseintrag',
-// TODO: translate the following.
+'form.invoice.confirm_deleting_entries' => 'Bitte die Löschung von Rechnungseinträgen bestätigen.',
+// TODO: consider improving translation of form.invoice.confirm_deleting_entries
+// This is a warning to user when they are deleting invoice entries.
+// They may believe they delete entries from the invoice only but keep the Time Tracker (reports, etc.).
+// What is really happening we delete entries from the system, so that they are no longer in reports, etc.
+// Original English wording is as follows.
 // 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
