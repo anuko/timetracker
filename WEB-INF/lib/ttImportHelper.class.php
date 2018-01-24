@@ -273,6 +273,7 @@ class ttImportHelper {
         'name' => $this->currentElement['NAME'],
         'cost' => $this->currentElement['COST'],
         'invoice_id' => $this->invoiceMap[$this->currentElement['INVOICE_ID']],
+        'paid' => $this->currentElement['PAID'],
         'status' => $this->currentElement['STATUS']));
     }
 
@@ -295,18 +296,19 @@ class ttImportHelper {
         'period' => $this->currentElement['PERIOD'],
         'from' => $this->currentElement['PERIOD_START'],
         'to' => $this->currentElement['PERIOD_END'],
-        'chclient' => $this->currentElement['SHOW_CLIENT'],
-        'chinvoice' => $this->currentElement['SHOW_INVOICE'],
-        'chproject' => $this->currentElement['SHOW_PROJECT'],
-        'chstart' => $this->currentElement['SHOW_START'],
-        'chduration' => $this->currentElement['SHOW_DURATION'],
-        'chcost' => $this->currentElement['SHOW_COST'],
-        'chtask' => $this->currentElement['SHOW_TASK'],
-        'chfinish' => $this->currentElement['SHOW_END'],
-        'chnote' => $this->currentElement['SHOW_NOTE'],
-        'chcf_1' => $this->currentElement['SHOW_CUSTOM_FIELD_1'],
+        'chclient' => (int) $this->currentElement['SHOW_CLIENT'],
+        'chinvoice' => (int) $this->currentElement['SHOW_INVOICE'],
+        'chpaid' => (int) $this->currentElement['SHOW_PAID'],
+        'chproject' => (int) $this->currentElement['SHOW_PROJECT'],
+        'chstart' => (int) $this->currentElement['SHOW_START'],
+        'chduration' => (int) $this->currentElement['SHOW_DURATION'],
+        'chcost' => (int) $this->currentElement['SHOW_COST'],
+        'chtask' => (int) $this->currentElement['SHOW_TASK'],
+        'chfinish' => (int) $this->currentElement['SHOW_END'],
+        'chnote' => (int) $this->currentElement['SHOW_NOTE'],
+        'chcf_1' => (int) $this->currentElement['SHOW_CUSTOM_FIELD_1'],
         'group_by' => $this->currentElement['GROUP_BY'],
-        'chtotalsonly' => $this->currentElement['SHOW_TOTALS_ONLY']));
+        'chtotalsonly' => (int) $this->currentElement['SHOW_TOTALS_ONLY']));
     }
     $this->currentTag = '';
   }

@@ -41,10 +41,11 @@ class ttExpenseHelper {
     $cost = str_replace(',', '.', $fields['cost']);
     $invoice_id = $fields['invoice_id'];
     $status = $fields['status'];
+    $paid = (int) $fields['paid'];
 
-    $sql = "insert into tt_expense_items (date, user_id, client_id, project_id, name, cost, invoice_id, status) ".
+    $sql = "insert into tt_expense_items (date, user_id, client_id, project_id, name, cost, invoice_id, paid, status) ".
       "values (".$mdb2->quote($date).", $user_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).
-      ", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).", ".$mdb2->quote($status).")";
+      ", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).", $paid, ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;

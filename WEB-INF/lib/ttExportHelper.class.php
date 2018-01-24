@@ -241,7 +241,7 @@ class ttExportHelper {
     $expense_items = ttTeamHelper::getExpenseItems($user->team_id);
     fwrite($file, "<expense_items>\n");
     foreach ($expense_items as $expense_item) {
-      fwrite($file, "  <expense_item date=\"".$expense_item['date']."\" user_id=\"".$this->userMap[$expense_item['user_id']]."\" client_id=\"".$this->clientMap[$expense_item['client_id']]."\" project_id=\"".$this->projectMap[$expense_item['project_id']]."\" cost=\"".$expense_item['cost']."\" invoice_id=\"".$this->invoiceMap[$expense_item['invoice_id']]."\" status=\"".$expense_item['status']."\">\n");
+      fwrite($file, "  <expense_item date=\"".$expense_item['date']."\" user_id=\"".$this->userMap[$expense_item['user_id']]."\" client_id=\"".$this->clientMap[$expense_item['client_id']]."\" project_id=\"".$this->projectMap[$expense_item['project_id']]."\" cost=\"".$expense_item['cost']."\" invoice_id=\"".$this->invoiceMap[$expense_item['invoice_id']]."\" paid=\"".$expense_item['paid']."\" status=\"".$expense_item['status']."\">\n");
       fwrite($file, "    <name><![CDATA[".$expense_item['name']."]]></name>\n");
       fwrite($file, "  </expense_item>\n");
     }
