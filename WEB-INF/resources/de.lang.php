@@ -149,8 +149,7 @@ $i18n_key_words = array(
 'label.finish' => 'Ende',
 'label.duration' => 'Dauer',
 'label.note' => 'Beschreibung',
-'label.notes' => 'Bemerkungen', // TODO: label.notes means label.note (from day view) for multipe days in week view.
-                                // Suggest more accurate translation, perhaps? As Beschreibung and Bemerkungen seem different.
+'label.notes' => 'Beschreibungen',
 'label.item' => 'Position',
 'label.cost' => 'Kosten',
 'label.day_total' => 'Summe (Tag)',
