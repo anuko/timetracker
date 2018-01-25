@@ -100,8 +100,8 @@ if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->g
       'datakeys'=>array('id','name'),
       'empty'=>array(''=>$i18n->getKey('dropdown.select_invoice'))));
     $form->addInput(array('type'=>'submit','name'=>'btn_assign','value'=>$i18n->getKey('button.submit')));
+    $smarty->assign('use_assign_to_invoice', true);
   }
-  $smarty->assign('use_assign_to_invoice', true);
 }
 
 if ($request->isPost()) {
