@@ -156,7 +156,7 @@
   <tr>
     <td align="right">
       <table>
-        <tr><td>{$i18n.form.report.assign_to_invoice}: {$forms.reportForm.recent_invoice.control} {$forms.reportForm.btn_assign.control}</td></tr>
+        <tr><td>{$i18n.form.report.assign_to_invoice}: {$forms.reportForm.assign_invoice_select_options.control} {$forms.reportForm.recent_invoice.control} {$forms.reportForm.btn_assign.control}</td></tr>
       </table>
     </td>
   </tr>

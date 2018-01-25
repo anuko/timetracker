@@ -44,6 +44,10 @@ if ($user->isPluginEnabled('ps')) {
   $cl_mark_paid_action_option = $request->getParameter('mark_paid_action_options', ($request->isPost() ? null : @$_SESSION['mark_paid_action_option']));
   $_SESSION['mark_paid_action_option'] = $cl_mark_paid_action_option;
 }
+if ($user->isPluginEnabled('iv')) {
+  $cl_assign_invoice_select_option = $request->getParameter('assign_invoice_select_options', ($request->isPost() ? null : @$_SESSION['assign_invoice_select_option']));
+  $_SESSION['assign_invoice_select_option'] = $cl_assign_invoice_select_option;
+}
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
@@ -85,6 +89,11 @@ if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->g
   // Client is selected and we are displaying the invoice column.
   $recent_invoices = ttTeamHelper::getRecentInvoices($user->team_id, $client_id);
   if ($recent_invoices) {
+    $assign_invoice_select_options = array('1'=>$i18n->getKey('dropdown.all'),'2'=>$i18n->getKey('dropdown.select'));
+    $form->addInput(array('type'=>'combobox',
+      'name'=>'assign_invoice_select_options',
+      'data'=>$assign_invoice_select_options,
+      'value'=>$cl_assign_invoice_select_option));
     $form->addInput(array('type'=>'combobox',
       'name'=>'recent_invoice',
       'data'=>$recent_invoices,
@@ -128,17 +137,28 @@ if ($request->isPost()) {
   }
 
   if ($request->getParameter('btn_assign')) {
-    // User clicked the Submit button to assign some items to a recent invoice.
-    foreach($_POST as $key => $val) {
-      if ('log_id_' == substr($key, 0, 7))
-        $time_log_ids[] = substr($key, 7);
-      if ('item_id_' == substr($key, 0, 8))
-        $expense_item_ids[] = substr($key, 8);
-      if ('recent_invoice' == $key)
-        $invoice_id = $val;
+    // User clicked the Submit button to assign all or some items to a recent invoice.
+
+    // Determine invoice id.
+    $invoice_id = $request->getParameter('recent_invoice');
+
+    // Obtain 2 arrays or record ids, one for log, another for expense items.
+    if (1 == $request->getParameter('assign_invoice_select_options')) {
+      // We are assigning all report items. Get the arrays from session.
+      $item_ids = ttReportHelper::getFromSession();
+      $time_log_ids = $item_ids['report_item_ids'];
+      $expense_item_ids = $item_ids['report_item_expense_ids'];
+    } else if (2 == $request->getParameter('assign_invoice_select_options')) {
+      // We are marking only selected items. Get the arrays from $_POST.
+      foreach($_POST as $key => $val) {
+        if ('log_id_' == substr($key, 0, 7))
+          $time_log_ids[] = substr($key, 7);
+        if ('item_id_' == substr($key, 0, 8))
+          $expense_item_ids[] = substr($key, 8);
+      }
     }
+    // Assign as requested.
     if ($time_log_ids || $expense_item_ids) {
-      // Some records are checked for invoice editing. Adjust their invoice accordingly.
       ttReportHelper::assignToInvoice($invoice_id, $time_log_ids, $expense_item_ids);
     }
     // Re-display this form.
