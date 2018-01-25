@@ -69,6 +69,7 @@
         {if $bean->getAttribute('chcost')}<td class="cellRightAlignedSubtotal">{if $user->canManageTeam() || $user->isClient()}{$subtotals[$prev_grouped_by]['cost']}{else}{$subtotals[$prev_grouped_by]['expenses']}{/if}</td>{/if}
         {if $bean->getAttribute('chpaid')}<td></td>{/if}
         {if $bean->getAttribute('chinvoice')}<td></td>{/if}
+        {if $use_checkboxes}<td></td>{/if}
       </tr>
       <tr><td>&nbsp;</td></tr>
       {/if}
@@ -116,6 +117,7 @@
     {if $bean->getAttribute('chcost')}<td class="cellRightAlignedSubtotal">{if $user->canManageTeam() || $user->isClient()}{$subtotals[$cur_grouped_by]['cost']}{else}{$subtotals[$cur_grouped_by]['expenses']}{/if}</td>{/if}
     {if $bean->getAttribute('chpaid')}<td></td>{/if}
     {if $bean->getAttribute('chinvoice')}<td></td>{/if}
+    {if $use_checkboxes}<td></td>{/if}
       </tr>
   {/if}
   <!-- print totals -->
@@ -134,14 +136,16 @@
     {if $bean->getAttribute('chcost')}<td nowrap class="cellRightAlignedSubtotal">{$user->currency|escape} {if $user->canManageTeam() || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>{/if}
     {if $bean->getAttribute('chpaid')}<td></td>{/if}
     {if $bean->getAttribute('chinvoice')}<td></td>{/if}
+    {if $use_checkboxes}<td></td>{/if}
       </tr>
 {/if}
     </table>
   </td>
 </tr>
 </table>
-{if $use_mark_paid && $report_items}
-<table width="720" cellspacing="4" cellpadding="4" border="0">
+{if $report_items && ($use_mark_paid || $use_assign_to_invoice)}
+<table width="720" cellspacing="0" cellpadding="0" border="0">
+  {if $use_mark_paid}
   <tr>
     <td align="right">
       <table>
@@ -149,10 +153,8 @@
       </table>
     </td>
   </tr>
-</table>
-{/if}
-{if $use_assign_to_invoice && $report_items}
-<table width="720" cellspacing="4" cellpadding="4" border="0">
+  {/if}
+  {if $use_assign_to_invoice}
   <tr>
     <td align="right">
       <table>
@@ -160,6 +162,7 @@
       </table>
     </td>
   </tr>
+  {/if}
 </table>
 {/if}
 {$forms.reportForm.close}
