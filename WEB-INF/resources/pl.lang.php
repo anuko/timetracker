@@ -121,8 +121,6 @@ $i18n_key_words = array(
 'button.import' => 'Importuj zespół',
 'button.close' => 'Zamknij',
 'button.stop' => 'Zatrzymaj',
-// TODO: translate the following.
-// 'button.mark_paid' => 'Mark paid',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Nazwa zespołu',
@@ -219,6 +217,7 @@ $i18n_key_words = array(
 // 'label.quantity' => 'Quantity',
 // 'label.paid_status' => 'Paid status',
 // 'label.paid' => 'Paid',
+// 'label.mark_paid' => 'Mark paid',
 
 // Form titles.
 'title.login' => 'Logowanie',

@@ -118,8 +118,6 @@ $i18n_key_words = array(
 'button.import' => 'Importera arbetsgrupp',
 'button.close' => 'Stäng',
 'button.stop' => 'Avsluta',
-// TODO: translate the following.
-// 'button.mark_paid' => 'Mark paid',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Namn på arbetsgrupp',
@@ -214,6 +212,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.paid_status' => 'Paid status',
 // 'label.paid' => 'Paid',
+// 'label.mark_paid' => 'Mark paid',
 
 // Rubriker för formulär
 'title.login' => 'Logga in',

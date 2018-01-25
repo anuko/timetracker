@@ -130,8 +130,6 @@ $i18n_key_words = array(
 'button.import' => 'ייבא צוות',
 'button.close' => 'סגור',
 'button.stop' => 'עצור',
-// TODO: translate the following.
-// 'button.mark_paid' => 'Mark paid',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'שם הצוות',
@@ -231,6 +229,7 @@ $i18n_key_words = array(
 // 'label.quantity' => 'Quantity',
 // 'label.paid_status' => 'Paid status',
 // 'label.paid' => 'Paid',
+// 'label.mark_paid' => 'Mark paid',
 
 // Form titles.
 'title.login' => 'כניסה',

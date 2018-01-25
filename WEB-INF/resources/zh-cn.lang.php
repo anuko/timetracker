@@ -131,7 +131,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.close' => 'Close',
 // 'button.stop' => 'Stop',
-// 'button.mark_paid' => 'Mark paid',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => '团队名称',
@@ -229,6 +228,7 @@ $i18n_key_words = array(
 // 'label.quantity' => 'Quantity',
 // 'label.paid_status' => 'Paid status',
 // 'label.paid' => 'Paid',
+// 'label.mark_paid' => 'Mark paid',
 
 // Form titles.
 // TODO: Translate the following.

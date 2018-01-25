@@ -114,7 +114,6 @@ $i18n_key_words = array(
 'button.import' => 'Team importieren',
 'button.close' => 'Schließen',
 'button.stop' => 'Stop',
-'button.mark_paid' => 'Als bezahlt setzen',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Teamname',
@@ -205,6 +204,7 @@ $i18n_key_words = array(
 'label.quantity' => 'Menge',
 'label.paid_status' => 'Bezahlstatus',
 'label.paid' => 'Bezahlt',
+'label.mark_paid' => 'Als bezahlt setzen',
 
 // Form titles.
 'title.login' => 'Anmelden',
