@@ -118,8 +118,6 @@ $i18n_key_words = array(
 'button.import' => 'Importer team',
 'button.close' => 'Luk',
 'button.stop' => 'Stop',
-// TODO: translate the following.
-// 'button.mark_paid' => 'Mark paid',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Team navn',
@@ -215,6 +213,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.paid_status' => 'Paid status',
 // 'label.paid' => 'Paid',
+// 'label.mark_paid' => 'Mark paid',
 
 // Form titles.
 'title.login' => 'Login',
@@ -360,6 +359,8 @@ $i18n_key_words = array(
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Eksport',
+// TODO: translate the following.
+// 'form.report.assign_to_invoice' => 'Assign to invoice',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).

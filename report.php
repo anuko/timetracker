@@ -38,6 +38,13 @@ if (!ttAccessCheck(right_view_reports)) {
   exit();
 }
 
+if ($user->isPluginEnabled('ps')) {
+  $cl_mark_paid_select_option = $request->getParameter('mark_paid_select_options', ($request->isPost() ? null : @$_SESSION['mark_paid_select_option']));
+  $_SESSION['mark_paid_select_option'] = $cl_mark_paid_select_option;
+  $cl_mark_paid_action_option = $request->getParameter('mark_paid_action_options', ($request->isPost() ? null : @$_SESSION['mark_paid_action_option']));
+  $_SESSION['mark_paid_action_option'] = $cl_mark_paid_action_option;
+}
+
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
@@ -50,6 +57,30 @@ $form = new Form('reportForm');
 // Report settings are stored in session bean before we get here from reports.php.
 $bean = new ActionForm('reportBean', $form, $request);
 $client_id = $bean->getAttribute('client');
+
+// Do we need to show checkboxes?
+if ($bean->getAttribute('chpaid') ||
+   ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by')) && !$user->isClient())) {
+  $smarty->assign('use_checkboxes', true);
+}
+
+// Controls for "Mark paid" block.
+if ($bean->getAttribute('chpaid')) {
+  $mark_paid_select_options = array('1'=>$i18n->getKey('dropdown.all'),'2'=>$i18n->getKey('dropdown.select'));
+  $form->addInput(array('type'=>'combobox',
+    'name'=>'mark_paid_select_options',
+    'data'=>$mark_paid_select_options,
+    'value'=>$cl_mark_paid_select_option));
+  $mark_paid_action_options = array('1'=>$i18n->getKey('dropdown.paid'),'2'=>$i18n->getKey('dropdown.not_paid'));
+  $form->addInput(array('type'=>'combobox',
+    'name'=>'mark_paid_action_options',
+    'data'=>$mark_paid_action_options,
+    'value'=>$cl_mark_paid_action_option));
+  $form->addInput(array('type'=>'submit','name'=>'btn_mark_paid','value'=>$i18n->getKey('button.submit')));
+  $smarty->assign('use_mark_paid', true);
+}
+
+// Controls for "Assign to invoice" block.
 if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by')) && !$user->isClient()) {
   // Client is selected and we are displaying the invoice column.
   $recent_invoices = ttTeamHelper::getRecentInvoices($user->team_id, $client_id);
@@ -59,13 +90,44 @@ if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->g
       'data'=>$recent_invoices,
       'datakeys'=>array('id','name'),
       'empty'=>array(''=>$i18n->getKey('dropdown.select_invoice'))));
-    $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
-    $smarty->assign('use_checkboxes', true);
+    $form->addInput(array('type'=>'submit','name'=>'btn_assign','value'=>$i18n->getKey('button.submit')));
   }
+  $smarty->assign('use_assign_to_invoice', true);
 }
 
 if ($request->isPost()) {
-  if ($request->getParameter('btn_submit')) {
+  if ($request->getParameter('btn_mark_paid')) {
+    // User clicked the "Mark paid" button to mark some or all items either paid or not paid.
+
+    // Determine user action.
+    $mark_paid = $request->getParameter('mark_paid_action_options') == 1 ? true : false;
+
+    // Obtain 2 arrays or record ids, one for log, another for expense items.
+    if (1 == $request->getParameter('mark_paid_select_options')) {
+      // We are marking all report items. Get the arrays from session.
+      $item_ids = ttReportHelper::getFromSession();
+      $time_log_ids = $item_ids['report_item_ids'];
+      $expense_item_ids = $item_ids['report_item_expense_ids'];
+    } else if (2 == $request->getParameter('mark_paid_select_options')) {
+      // We are marking only selected items. Get the arrays from $_POST.
+      foreach($_POST as $key => $val) {
+        if ('log_id_' == substr($key, 0, 7))
+          $time_log_ids[] = substr($key, 7);
+        if ('item_id_' == substr($key, 0, 8))
+          $expense_item_ids[] = substr($key, 8);
+      }
+    }
+    // Mark as requested.
+    if ($time_log_ids || $expense_item_ids) {
+      ttReportHelper::markPaid($time_log_ids, $expense_item_ids, $mark_paid);
+    }
+
+    // Re-display this form.
+    header('Location: report.php');
+    exit();
+  }
+
+  if ($request->getParameter('btn_assign')) {
     // User clicked the Submit button to assign some items to a recent invoice.
     foreach($_POST as $key => $val) {
       if ('log_id_' == substr($key, 0, 7))
@@ -88,6 +150,10 @@ if ($request->isPost()) {
 $group_by = $bean->getAttribute('group_by');
 
 $report_items = ttReportHelper::getItems($bean);
+// Store record ids in session in case user wants to act on records such as marking them all paid.
+if ($request->isGet() && $user->isPluginEnabled('ps'))
+  ttReportHelper::putInSession($report_items);
+
 if ('no_grouping' != $group_by)
   $subtotals = ttReportHelper::getSubtotals($bean);
 $totals = ttReportHelper::getTotals($bean);

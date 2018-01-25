@@ -91,12 +91,10 @@
     {if $bean->getAttribute('chnote')}<td class="cellLeftAligned">{$item.note|escape}</td>{/if}
     {if $bean->getAttribute('chcost')}<td class="cellRightAligned">{if $user->canManageTeam() || $user->isClient()}{$item.cost}{else}{$item.expense}{/if}</td>{/if}
     {if $bean->getAttribute('chpaid')}<td class="cellRightAligned">{if $item.paid == 1}{$i18n.label.yes}{else}{$i18n.label.no}{/if}{/if}
-    {if $bean->getAttribute('chinvoice')}
-        <td class="cellRightAligned">{$item.invoice|escape}</td>
-      {if $use_checkboxes}
-        {if 1 == $item.type}<td bgcolor="white"><input type="checkbox" name="log_id_{$item.id}"></td>{/if}
-        {if 2 == $item.type}<td bgcolor="white"><input type="checkbox" name="item_id_{$item.id}"></td>{/if}
-      {/if}
+    {if $bean->getAttribute('chinvoice')}<td class="cellRightAligned">{$item.invoice|escape}</td>{/if}
+    {if $use_checkboxes}
+      {if 1 == $item.type}<td bgcolor="white"><input type="checkbox" name="log_id_{$item.id}"></td>{/if}
+      {if 2 == $item.type}<td bgcolor="white"><input type="checkbox" name="item_id_{$item.id}"></td>{/if}
     {/if}
       </tr>
     {$prev_date = $item.date}
@@ -142,12 +140,23 @@
   </td>
 </tr>
 </table>
-{if $use_checkboxes && $report_items}
+{if $use_mark_paid && $report_items}
 <table width="720" cellspacing="4" cellpadding="4" border="0">
   <tr>
     <td align="right">
       <table>
-        <tr><td>{$forms.reportForm.recent_invoice.control} {$forms.reportForm.btn_submit.control}</td></tr>
+        <tr><td>{$i18n.label.mark_paid}: {$forms.reportForm.mark_paid_select_options.control} {$forms.reportForm.mark_paid_action_options.control} {$forms.reportForm.btn_mark_paid.control}</td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+{/if}
+{if $use_assign_to_invoice && $report_items}
+<table width="720" cellspacing="4" cellpadding="4" border="0">
+  <tr>
+    <td align="right">
+      <table>
+        <tr><td>{$i18n.form.report.assign_to_invoice}: {$forms.reportForm.recent_invoice.control} {$forms.reportForm.btn_assign.control}</td></tr>
       </table>
     </td>
   </tr>

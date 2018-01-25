@@ -118,7 +118,6 @@ $i18n_key_words = array(
 'button.import' => 'Импортировать команду',
 'button.close' => 'Закрыть',
 'button.stop' => 'Завершить',
-'button.mark_paid' => 'Отметить оплату',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => 'Название команды',
@@ -209,6 +208,7 @@ $i18n_key_words = array(
 'label.quantity' => 'Количество',
 'label.paid_status' => 'Статус оплаты',
 'label.paid' => 'Оплачено',
+'label.mark_paid' => 'Отметить оплату',
 
 // Form titles.
 'title.login' => 'Вход в систему',
@@ -355,6 +355,7 @@ $i18n_key_words = array(
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Экспортировать',
+'form.report.assign_to_invoice' => 'Включить в счёт',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).

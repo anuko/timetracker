@@ -437,6 +437,39 @@ class ttReportHelper {
     return $report_items;
   }
 
+  // putInSession stores tt_log and tt_expense_items ids from a report in user session
+  // as 2 comma-separated lists.
+  static function putInSession($report_items) {
+    unset($_SESSION['report_item_ids']);
+    unset($_SESSION['report_item_expense_ids']);
+
+    // Iterate through records and build 2 comma-separated lists.
+    foreach($report_items as $item) {
+      if ($item['type'] == 1)
+        $report_item_ids .= ','.$item['id'];
+      else if ($item['type'] == 2)
+         $report_item_expense_ids .= ','.$item['id'];
+    }
+    $report_item_ids = trim($report_item_ids, ',');
+    $report_item_expense_ids = trim($report_item_expense_ids, ',');
+
+    // The lists are reqdy. Put them in session.
+    if ($report_item_ids) $_SESSION['report_item_ids'] = $report_item_ids;
+    if ($report_item_expense_ids) $_SESSION['report_item_expense_ids'] = $report_item_expense_ids;
+  }
+
+  // getFromSession obtains tt_log and tt_expense_items ids stored in user session.
+  static function getFromSession() {
+    $items = array();
+    $report_item_ids = $_SESSION['report_item_ids'];
+    if ($report_item_ids)
+      $items['report_item_ids'] = explode(',', $report_item_ids);
+    $report_item_expense_ids = $_SESSION['report_item_expense_ids'];
+    if ($report_item_expense_ids)
+      $items['report_item_expense_ids'] = explode(',', $report_item_expense_ids);
+    return $items;
+  }
+
   // getFavItems retrieves all items associated with a favorite report.
   // It combines tt_log and tt_expense_items in one array for presentation in one table using mysql union all.
   // Expense items use the "note" field for item name.
@@ -1052,6 +1085,23 @@ class ttReportHelper {
     if ($expense_item_ids) {
       $sql = "update tt_expense_items set invoice_id = ".$mdb2->quote($invoice_id).
         " where id in(".join(', ', $expense_item_ids).")";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
+    }
+  }
+
+  // The markPaid marks a set of records as either paid or unpaid.
+  static function markPaid($time_log_ids, $expense_item_ids, $paid = true)
+  {
+    $mdb2 = getConnection();
+    $paid_val = (int) $paid;
+    if ($time_log_ids) {
+      $sql = "update tt_log set paid = $paid_val where id in(".join(', ', $time_log_ids).")";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
+    }
+    if ($expense_item_ids) {
+      $sql = "update tt_expense_items set paid = $paid_val where id in(".join(', ', $expense_item_ids).")";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
     }

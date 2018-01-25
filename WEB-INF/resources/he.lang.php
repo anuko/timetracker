@@ -387,6 +387,8 @@ $i18n_key_words = array(
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 // TODO: form.report.export is just "Export" now in the English file. Shorten this translation.
 'form.report.export' => 'ייצא נתונים בתבנית',
+// TODO: translate the following.
+// 'form.report.assign_to_invoice' => 'Assign to invoice',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
