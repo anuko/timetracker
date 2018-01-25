@@ -47,6 +47,8 @@ if ($user->isPluginEnabled('ps')) {
 if ($user->isPluginEnabled('iv')) {
   $cl_assign_invoice_select_option = $request->getParameter('assign_invoice_select_options', ($request->isPost() ? null : @$_SESSION['assign_invoice_select_option']));
   $_SESSION['assign_invoice_select_option'] = $cl_assign_invoice_select_option;
+  $cl_recent_invoice_option = $request->getParameter('recent_invoice', ($request->isPost() ? null : @$_SESSION['recent_invoice_option']));
+  $_SESSION['recent_invoice_option'] = $cl_recent_invoice_option;
 }
 
 // Use custom fields plugin if it is enabled.
@@ -98,6 +100,7 @@ if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->g
       'name'=>'recent_invoice',
       'data'=>$recent_invoices,
       'datakeys'=>array('id','name'),
+      'value'=>$cl_recent_invoice_option,
       'empty'=>array(''=>$i18n->getKey('dropdown.select_invoice'))));
     $form->addInput(array('type'=>'submit','name'=>'btn_assign','value'=>$i18n->getKey('button.submit')));
     $smarty->assign('use_assign_to_invoice', true);
