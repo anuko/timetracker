@@ -113,7 +113,6 @@ $i18n_key_words = array(
 'button.login' => 'přihlásit',
 'button.now' => 'teď',
 'button.save' => 'uložit',
-'button.delete' => 'smazat',
 'button.cancel' => 'zrušit',
 'button.submit' => 'uložit',
 'button.add_user' => 'Přidat uživatele',
@@ -136,29 +135,33 @@ $i18n_key_words = array(
 'button.import' => 'importovat tým',
 'button.apply' => 'provést',
 
-// labels for controls on various forms
-// TODO: translate label.team_name
-// 'label.team_name' => 'team name',
-'label.currency' => 'měna',
-// TODO: translate label.manager_name and label.manager_login.
-// 'label.manager_name' => 'manager name',
-// 'label.manager_login' => 'manager login',
-'label.name' => 'jméno',
-
-'label.password' => 'heslo',
-'label.confirm_password' => 'potvrdit heslo',
-// TODO: Translate the following.
-// 'label.email' => 'email',
+// Labels for controls on forms. Labels in this section are used on multiple forms.
+// TODO: translate the following.
+// 'label.team_name' => 'Team name',
+// 'label.address' => 'Address',
+'label.currency' => 'Měna',
+// TODO: translate the following.
+// 'label.manager_name' => 'Manager name',
+// 'label.manager_login' => 'Manager login',
+// 'label.person_name' => 'Name',
+// 'label.thing_name' => 'Name',
+// 'label.login' => 'Login',
+'label.password' => 'Heslo',
+'label.confirm_password' => 'Potvrdit heslo',
+// TODO: translate the following.
+// 'label.email' => 'Email',
 'label.cc' => 'Cc',
-// TODO: Translate the following.
+// TODO: translate the following.
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Předmět',
-'label.total' => 'celkem',
+
+'label.delete' => 'Smazat',
+'label.total' => 'Celkem',
 // TODO: translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',
-// 'label.no' => 'no',
+// 'label.no' => 'no'
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.
