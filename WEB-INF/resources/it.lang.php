@@ -81,8 +81,10 @@ $i18n_key_words = array(
 'error.not_equal' => 'il campo "{0}" non è uguale al campo "{1}"',
 'error.interval' => 'intervallo errato',
 'error.project' => 'seleziona il progetto',
-'error.activity' => 'seleziona la attività',
 // TODO: translate the following.
+// 'error.task' => 'Select task.',
+// 'error.client' => 'Select client.',
+// 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'login o password errati',
 // Note to translators: this string needs to be translated.

@@ -81,8 +81,10 @@ $i18n_key_words = array(
 'error.not_equal' => '"{0}" 의 필드가 "{1}" 의 필드와 같지 않습니다',
 'error.interval' => '부정확한 간격입니다',
 'error.project' => '프로젝트의 선택',
-'error.activity' => '활동내용의 선택',
 // TODO: translate the following.
+// 'error.task' => 'Select task.',
+// 'error.client' => 'Select client.',
+// 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => '부정확한 로그인 혹은 암호가 틀립니다',
 'error.user_exists' => '본 로그인과 연계된 사용자가 이미 있습니다',

@@ -80,8 +80,10 @@ $i18n_key_words = array(
 'error.not_equal' => 'A "{0}" mező tartalma nem egyezik meg a "{1}" mező tartalmával!',
 'error.interval' => 'hibás időszak megadás',
 'error.project' => 'válassz projektet',
-'error.activity' => 'válassz tevékenységet',
 // TODO: translate the following.
+// 'error.task' => 'Select task.',
+// 'error.client' => 'Select client.',
+// 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'hibás bejelentkezési adatok',
 // Note to translators: this string needs to be translated.

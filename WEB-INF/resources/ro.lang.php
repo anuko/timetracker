@@ -85,8 +85,10 @@ $i18n_key_words = array(
 'error.not_equal' => 'campul "{0}" nu este egal cu campul "{1}"',
 'error.interval' => 'interval incorect',
 'error.project' => 'selecteaza proiect',
-'error.activity' => 'selecteaza activitate',
 // TODO: translate the following.
+// 'error.task' => 'Select task.',
+// 'error.client' => 'Select client.',
+// 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'nume de utilizator sau parola incorecta',
 // Note to translators: this string needs to be translated.

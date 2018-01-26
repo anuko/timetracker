@@ -81,8 +81,10 @@ $i18n_key_words = array(
 'error.not_equal' => '"{0}"のフィールドは"{1}"のフィールドと違います',
 'error.interval' => '不正確な間隔',
 'error.project' => 'プロジェクトの選択',
-'error.activity' => '活動内容の選択',
 // TODO: translate the following.
+// 'error.task' => 'Select task.',
+// 'error.client' => 'Select client.',
+// 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => '不正確なログインあるいはパスワードが不正確です',
 'error.user_exists' => 'このログインと関連されたユーザーは既に存在します',

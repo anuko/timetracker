@@ -84,8 +84,10 @@ $i18n_key_words = array(
 'error.not_equal' => 'alan "{0}" "{1}" alanıyla aynı değildir',
 'error.interval' => 'hatalı aralık',
 'error.project' => 'proje seç',
-'error.activity' => 'faaliyet seç',
 // TODO: translate the following.
+// 'error.task' => 'Select task.',
+// 'error.client' => 'Select client.',
+// 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'hatalı kullanıcı adı veya parola',
 // Note to translators: this string needs to be translated.

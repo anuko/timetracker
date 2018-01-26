@@ -81,8 +81,10 @@ $i18n_key_words = array(
 'error.not_equal' => 'Feltet "{0}" stemmer ikke med "{1}".',
 'error.interval' => 'Feil intervall.',
 'error.project' => 'Velg prosjekt.',
-'error.activity' => 'Velg aktivitet.',
 // TODO: translate the following.
+// 'error.task' => 'Select task.',
+// 'error.client' => 'Select client.',
+// 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'Feil brukernavn eller passord.',
 'error.user_exists' => 'Bruker med et slikt brukernavn eksisterer allerede.',
