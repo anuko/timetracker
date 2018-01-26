@@ -29,12 +29,12 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
-// Note to translators: Please use proper capitalization rules for your language.
+// Note to translators: Use proper capitalization rules for your language.
 
 $i18n_language = 'Italiano';
-$i18n_months = array('gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luiglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre');
-$i18n_weekdays = array('domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato');
-$i18n_weekdays_short = array('do', 'lu', 'ma', 'me', 'gi', 've', 'sa');
+$i18n_months = array('Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luiglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre');
+$i18n_weekdays = array('Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato');
+$i18n_weekdays_short = array('Do', 'Lu', 'Ma', 'Me', 'Gi', 'Ve', 'Sa');
 // format mm/dd
 $i18n_holidays = array('01/01', '01/06', '04/12', '04/13', '04/25', '05/01', '06/02', '08/15', '11/01', '12/08', '12/25', '12/26');
 

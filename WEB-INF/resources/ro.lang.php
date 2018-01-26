@@ -32,9 +32,9 @@
 // Note to translators: Please use proper capitalization rules for your language.
 
 $i18n_language = 'Română';
-$i18n_months = array('ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie');
-$i18n_weekdays = array('duminica', 'luni', 'marti', 'miercuri', 'joi', 'vineri', 'sambata');
-$i18n_weekdays_short = array('du', 'lu', 'ma', 'mi', 'jo', 'vi', 'sa');
+$i18n_months = array('Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie');
+$i18n_weekdays = array('Duminica', 'Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Sambata');
+$i18n_weekdays_short = array('Du', 'Lu', 'Ma', 'Mi', 'Jo', 'Vi', 'Sa');
 // format mm/dd
 $i18n_holidays = array('01/01', '01/02', '04/19', '04/20', '05/01', '06/07', '06/08', '08/15', '12/01', '12/25', '12/26');
 

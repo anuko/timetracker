@@ -32,10 +32,9 @@
 // Note to translators: Please use proper capitalization rules for your language.
 
 $i18n_language = 'Português';
-$i18n_months = array('janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'augosto', 'setembro', 'outubro', 'novembro', 'dezembro');
-$i18n_weekdays = array('domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado');
-// Note to translators: $i18n_weekdays_short needs to be translated. These are shortened days of week.
-// $i18n_weekdays_short = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+$i18n_months = array('Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Augosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
+$i18n_weekdays = array('Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado');
+$i18n_weekdays_short = array('Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab');
 // format mm/dd
 $i18n_holidays = array('01/01', '02/24', '04/10', '04/12', '04/25', '05/01', '06/10', '06/11', '08/15', '10/05', '01/11', '12/01', '12/08', '12/25');
 

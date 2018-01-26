@@ -28,7 +28,6 @@
 
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
-// Note to translators: Please use proper capitalization rules for your language.
 
 $i18n_language = 'Português brasileiro';
 $i18n_months = array('Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
@@ -36,6 +35,7 @@ $i18n_weekdays = array('Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira
 $i18n_weekdays_short = array('Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab');
 // format mm/dd
 $i18n_holidays = array('01/01', '04/21', '05/01', '09/07', '10/12', '11/15', '12/25');
+
 $i18n_key_words = array(
 
 // Menus.

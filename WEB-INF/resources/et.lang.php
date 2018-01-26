@@ -29,7 +29,7 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
-// Note to translators: Please use proper capitalization rules for your language.
+// Note to translators: Use proper capitalization rules for your language.
 
 $i18n_language = 'Eesti';
 $i18n_months = array('Jaanuar', 'Veebruar', 'Märts', 'Aprill', 'Mai', 'Juuni', 'Juuli', 'August', 'September', 'Oktoober', 'November', 'Detsember');

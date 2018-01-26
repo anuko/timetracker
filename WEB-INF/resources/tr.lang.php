@@ -29,12 +29,12 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
-// Note to translators: Please use proper capitalization rules for your language.
+// Note to translators: Use proper capitalization rules for your language.
 
 $i18n_language = 'Türkçe';
-$i18n_months = array('ocak', 'şubat', 'mart', 'nisan', 'mayis', 'haziran', 'temmuz', 'ağustos', 'eylük', 'ekim', 'kasım', 'aralık');
-$i18n_weekdays = array('pazar', 'pazartesi', 'salı', 'çarşamba', 'perşembe', 'cuma', 'cumartesi');
-$i18n_weekdays_short = array('p', 'pt', 's', 'ç', 'p', 'c', 'ct');
+$i18n_months = array('Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayis', 'Haziran', 'Temmuz', 'Ağustos', 'Eylük', 'Ekim', 'Kasım', 'Aralık');
+$i18n_weekdays = array('Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi');
+$i18n_weekdays_short = array('Pa', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct');
 // format mm/dd
 $i18n_holidays = array('01/01', '04/23', '05/01', '05/19', '08/30', '09/20', '09/21', '09/22', '10/29', '11/27', '11/28', '11/29', '11/30');
 

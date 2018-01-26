@@ -29,12 +29,12 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
-// Note to translators: Please use proper capitalization rules for your language.
+// Note to translators: Use proper capitalization rules for your language.
 
 $i18n_language = 'Slovenščina';
-$i18n_months = array('januar', 'februar', 'marec', 'april', 'maj', 'junij', 'julij', 'avgust', 'september', 'oktober', 'november', 'december');
-$i18n_weekdays = array('nedelja', 'ponedeljek', 'torek', 'sreda', 'četrtek', 'petek', 'sobota');
-$i18n_weekdays_short = array('ned', 'pon', 'tor', 'sre', 'čet', 'pet', 'sob');
+$i18n_months = array('Januar', 'Februar', 'Marec', 'April', 'Maj', 'Junij', 'Julij', 'Avgust', 'September', 'Oktober', 'November', 'December');
+$i18n_weekdays = array('Nedelja', 'Ponedeljek', 'Torek', 'Sreda', 'Četrtek', 'Petek', 'Sobota');
+$i18n_weekdays_short = array('Ned', 'Pon', 'Tor', 'Sre', 'Čet', 'Pet', 'Sob');
 // format mm/dd
 $i18n_holidays = array('01/01', '01/02', '02/08', '04/12', '04/13', '04/27', '05/01', '05/02', '06/25', '10/31', '11/01', '12/25', '12/26');
 

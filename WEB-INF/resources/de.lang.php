@@ -26,6 +26,9 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
+// Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
+// Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
+
 $i18n_language = 'Deutsch';
 $i18n_months = array('Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember');
 $i18n_weekdays = array('Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag');

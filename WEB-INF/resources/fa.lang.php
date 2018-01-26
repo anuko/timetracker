@@ -30,6 +30,7 @@
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
 $i18n_language = 'فارسی';
+// TODO: translate the following.
 $i18n_months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 $i18n_weekdays = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 $i18n_weekdays_short = array('Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa');
