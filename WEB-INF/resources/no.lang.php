@@ -110,8 +110,12 @@ $i18n_key_words = array(
 // 'button.submit' => 'Registrer',
 'button.add_user' => 'Legg til bruker',
 'button.add_project' => 'Legg til prosjekt',
-'button.add_activity' => 'Legg til aktivitet',
+// TODO: translate the following.
+// 'button.add_task' => 'Add task',
 'button.add_client' => 'Legg til klient',
+// TODO: translate the following.
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
 'button.add' => 'Legg til',
 'button.generate' => 'Generer',
 'button.reset_password' => 'Resett passord',

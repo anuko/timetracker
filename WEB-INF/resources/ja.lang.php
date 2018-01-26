@@ -115,8 +115,12 @@ $i18n_key_words = array(
 // TODO: improve translation of all button.add... strings.
 'button.add_user' => '新規ユーザーの追加',
 'button.add_project' => '新規プロジェクトの追加',
-'button.add_activity' => '新規活動内容の追加',
+// TODO: translate the following.
+// 'button.add_task' => 'Add task',
 'button.add_client' => '新規クライアントの追加',
+// TODO: translate the following.
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
 'button.add' => '追加',
 'button.generate' => '生成',
 // Note to translators: button.reset_password needs an improved translation.

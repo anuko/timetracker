@@ -101,17 +101,21 @@ $i18n_key_words = array(
 // 'error.goto_uncompleted' => 'go to uncompleted entry.',
 
 // Labels for buttons.
-'button.login' => 'login',
-'button.now' => 'hoje',
-'button.save' => 'salvar',
-'button.delete' => 'apagar',
-'button.cancel' => 'cancelar',
-'button.submit' => 'submeter',
-// Note to translators: 'button.add_user' => 'add user', // the string must be translated
-'button.add_project' => 'adicionar projeto',
-'button.add_activity' => 'adicionar atividade',
-// 'button.add_client' => 'add client', // TODO: translate this.
-'button.add' => 'adicionar',
+'button.login' => 'Login',
+'button.now' => 'Hoje',
+'button.save' => 'Salvar',
+'button.delete' => 'Apagar',
+'button.cancel' => 'Cancelar',
+'button.submit' => 'Submeter',
+// TODO: translate the following.
+// 'button.add_user' => 'Add user',
+'button.add_project' => 'Adicionar projeto',
+// TODO: translate the following.
+// 'button.add_task' => 'Add task',
+// 'button.add_client' => 'Add client',
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
+'button.add' => 'Adicionar',
 // Note to translators: strings below need to be translated.
 // 'button.generate' => 'generate',
 // 'button.reset_password' => 'reset password',

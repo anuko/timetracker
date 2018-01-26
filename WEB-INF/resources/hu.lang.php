@@ -109,12 +109,16 @@ $i18n_key_words = array(
 'button.delete' => 'törlés',
 'button.cancel' => 'vissza',
 'button.submit' => 'mentés',
-'button.add_user' => 'felhasználó felvétele',
-'button.add_project' => 'projekt felvétele',
-'button.add_activity' => 'tevékenyég felvétele',
-'button.add_client' => 'ügyfél hozzáadása',
-'button.add' => 'hozzáadás',
-'button.generate' => 'generálás',
+'button.add_user' => 'Felhasználó felvétele',
+'button.add_project' => 'Projekt felvétele',
+// TODO: translate the following.
+// 'button.add_task' => 'Add task',
+'button.add_client' => 'ügyfél hozzáadása', // TODO: capitalize properly.
+// TODO: translate the following.
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
+'button.add' => 'Hozzáadás',
+'button.generate' => 'Generálás',
 // Note to translators: button.reset_password needs an improved translation.
 'button.reset_password' => 'mehet',
 'button.send' => 'küld',
