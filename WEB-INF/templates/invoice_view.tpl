@@ -29,6 +29,9 @@
           <td class="tableHeader">{$i18n.label.note}</td>
           <td class="tableHeaderCentered" width="5%">{$i18n.label.duration}</td>
           <td class="tableHeaderCentered" width="5%">{$i18n.label.cost}</td>
+  {if $user->isPluginEnabled('ps')}
+          <td class="tableHeader">{$i18n.label.paid}</td>
+  {/if}
         </tr>
   {foreach $invoice_items as $invoice_item}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
@@ -43,6 +46,9 @@
           <td valign="top">{$invoice_item.note|escape}</td>
           <td align="right" valign="top">{$invoice_item.duration}</td>
           <td align="right" valign="top">{$invoice_item.cost}</td>
+    {if $user->isPluginEnabled('ps')}
+          <td align="right" valign="top">{if $invoice_item.paid}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
+    {/if}
         </tr>
   {/foreach}
         <tr><td>&nbsp;</td></tr>

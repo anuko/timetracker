@@ -11,6 +11,9 @@
           <td class="tableHeader">{$i18n.label.invoice}</td>
           <td class="tableHeader">{$i18n.label.client}</td>
           <td class="tableHeader">{$i18n.label.date}</td>
+  {if $user->isPluginEnabled('ps')}
+          <td class="tableHeader">{$i18n.label.paid}</td>
+  {/if}
           <td class="tableHeader">{$i18n.label.view}</td>
   {if !$user->isClient()}
           <td class="tableHeader">{$i18n.label.delete}</td>
@@ -21,6 +24,9 @@
           <td>{$invoice.name|escape}</td>
           <td>{$invoice.client_name|escape}</td>
           <td>{$invoice.date}</td>
+  {if $user->isPluginEnabled('ps')}
+          <td>{if $invoice.paid}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
+  {/if}
           <td><a href="invoice_view.php?id={$invoice.id}">{$i18n.label.view}</a></td>
   {if !$user->isClient()}
           <td><a href="invoice_delete.php?id={$invoice.id}">{$i18n.label.delete}</a></td>

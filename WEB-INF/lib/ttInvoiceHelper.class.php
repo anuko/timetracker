@@ -80,18 +80,43 @@ class ttInvoiceHelper {
 
   // The getInvoiceByName looks up an invoice by name.
   static function getInvoiceByName($invoice_name) {
-
     $mdb2 = getConnection();
     global $user;
-
     $sql = "select id from tt_invoices where team_id = $user->team_id and name = ".$mdb2->quote($invoice_name)." and status = 1";
-
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
       if ($val['id']) {
         return $val;
       }
+    }
+    return false;
+  }
+
+  // The isPaid determines if an invoice is paid by looking at the paid status of its items.
+  // If any non-paid item is found, the entire invoice is considered not paid.
+  // Therefore, the paid status of the invoice is a calculated value.
+  // This is because we maintain the paid status on individual item level.
+  static function isPaid($invoice_id) {
+
+    $mdb2 = getConnection();
+    global $user;
+
+    $sql = "select count(*) as count from tt_log where invoice_id = $invoice_id and status = 1 and paid < 1";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      if ($val['count'] > 0)
+        return false; // A non-paid time item exists.
+    }
+    $sql = "select count(*) as count from tt_expense_items where invoice_id = $invoice_id and status = 1 and paid < 1";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      if ($val['count'] > 0)
+        return false; // A non-paid expense item exists.
+      else
+        return true; // All time and expense items in invoice are paid.
     }
     return false;
   }
@@ -110,7 +135,8 @@ class ttInvoiceHelper {
       $sql = "select l.date as date, 1 as type, u.name as user_name, p.name as project_name,
       t.name as task_name, l.comment as note,
       time_format(l.duration, '%k:%i') as duration,
-      cast(l.billable * u.rate * time_to_sec(l.duration)/3600 as decimal(10, 2)) as cost from tt_log l
+      cast(l.billable * u.rate * time_to_sec(l.duration)/3600 as decimal(10, 2)) as cost,
+      l.paid as paid from tt_log l
       inner join tt_users u on (l.user_id = u.id)
       left join tt_projects p on (p.id = l.project_id)
       left join tt_tasks t on (t.id = l.task_id)
@@ -119,7 +145,8 @@ class ttInvoiceHelper {
       $sql = "select l.date as date, 1 as type, u.name as user_name, p.name as project_name,
         t.name as task_name, l.comment as note,
         time_format(l.duration, '%k:%i') as duration,
-        cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2)) as cost from tt_log l
+        cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2)) as cost,
+        l.paid as paid from tt_log l
         inner join tt_users u on (l.user_id = u.id)
         left join tt_projects p on (p.id = l.project_id)
         left join tt_tasks t on (t.id = l.task_id)
@@ -131,7 +158,8 @@ class ttInvoiceHelper {
     if ($user->isPluginEnabled('ex')) {
       $sql_for_expense_items = "select ei.date as date, 2 as type, u.name as user_name, p.name as project_name,
         null as task_name, ei.name as note,
-        null as duration, ei.cost as cost from tt_expense_items ei
+        null as duration, ei.cost as cost,
+        ei.paid as paid from tt_expense_items ei
         inner join tt_users u on (ei.user_id = u.id)
         left join tt_projects p on (p.id = ei.project_id)
         where ei.invoice_id = $invoice_id and ei.status = 1";

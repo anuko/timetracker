@@ -28,6 +28,7 @@
 
 import('ttUserHelper');
 import('DateAndTime');
+import('ttInvoiceHelper');
 
 // Class ttTeamHelper - contains helper functions that operate with teams.
 class ttTeamHelper {
@@ -328,6 +329,7 @@ class ttTeamHelper {
   static function getActiveInvoices($localizeDates = true)
   {
     global $user;
+    $addPaidStatus = $user->isPluginEnabled('ps');
 
     $result = array();
     $mdb2 = getConnection();
@@ -347,6 +349,8 @@ class ttTeamHelper {
           $dt->parseVal($val['date']);
           $val['date'] = $dt->toString($user->date_format);
         }
+        if ($addPaidStatus)
+          $val['paid'] = ttInvoiceHelper::isPaid($val['id']);
         $result[] = $val;
       }
     }
