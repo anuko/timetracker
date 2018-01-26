@@ -62,6 +62,9 @@ $form = new Form('reportForm');
 
 // Report settings are stored in session bean before we get here from reports.php.
 $bean = new ActionForm('reportBean', $form, $request);
+// If we are in post, load the bean from session, as the constructor does it only in get.
+if ($request->isPost()) $bean->loadBean();
+
 $client_id = $bean->getAttribute('client');
 
 // Do we need to show checkboxes?
@@ -108,65 +111,60 @@ if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->g
 }
 
 if ($request->isPost()) {
-  if ($request->getParameter('btn_mark_paid')) {
-    // User clicked the "Mark paid" button to mark some or all items either paid or not paid.
 
-    // Determine user action.
-    $mark_paid = $request->getParameter('mark_paid_action_options') == 1 ? true : false;
-
-    // Obtain 2 arrays or record ids, one for log, another for expense items.
-    if (1 == $request->getParameter('mark_paid_select_options')) {
-      // We are marking all report items. Get the arrays from session.
-      $item_ids = ttReportHelper::getFromSession();
-      $time_log_ids = $item_ids['report_item_ids'];
-      $expense_item_ids = $item_ids['report_item_expense_ids'];
-    } else if (2 == $request->getParameter('mark_paid_select_options')) {
-      // We are marking only selected items. Get the arrays from $_POST.
-      foreach($_POST as $key => $val) {
-        if ('log_id_' == substr($key, 0, 7))
-          $time_log_ids[] = substr($key, 7);
-        if ('item_id_' == substr($key, 0, 8))
-          $expense_item_ids[] = substr($key, 8);
-      }
+  // Validate parameters and at the same time build arrays of record ids.
+  if (($request->getParameter('btn_mark_paid') && 2 == $request->getParameter('mark_paid_select_options'))
+       || ($request->getParameter('btn_assign') && 2 == $request->getParameter('assign_invoice_select_options'))) {
+    // We act on selected records. Are there any?
+    foreach($_POST as $key => $val) {
+      if ('log_id_' == substr($key, 0, 7))
+        $time_log_ids[] = substr($key, 7);
+      if ('item_id_' == substr($key, 0, 8))
+        $expense_item_ids[] = substr($key, 8);
     }
-    // Mark as requested.
-    if ($time_log_ids || $expense_item_ids) {
-      ttReportHelper::markPaid($time_log_ids, $expense_item_ids, $mark_paid);
-    }
-
-    // Re-display this form.
-    header('Location: report.php');
-    exit();
+    if (!$time_log_ids && !$expense_item_ids) $err->Add($i18n->getKey('error.record')); // There are no selected records.
+    // Validation of parameteres ended here.
+  } else {
+    // We are assigning all report items. Get the arrays from session.
+    // Note: getting from session assures we act only on previously displayed records.
+    // Rebuilding from $bean may get us a different set.
+    $item_ids = ttReportHelper::getFromSession();
+    $time_log_ids = $item_ids['report_item_ids'];
+    $expense_item_ids = $item_ids['report_item_expense_ids'];
+    // The above code is here beacues the arrays are used in both "Mark paid" and "Assign to invoice" handlers below.
   }
 
-  if ($request->getParameter('btn_assign')) {
-    // User clicked the Submit button to assign all or some items to a recent invoice.
+  if ($err->no()) {
+    if ($request->getParameter('btn_mark_paid')) {
+      // User clicked the "Mark paid" button to mark some or all items either paid or not paid.
 
-    // Determine invoice id.
-    $invoice_id = $request->getParameter('recent_invoice');
+      // Determine user action.
+      $mark_paid = $request->getParameter('mark_paid_action_options') == 1 ? true : false;
 
-    // Obtain 2 arrays or record ids, one for log, another for expense items.
-    if (1 == $request->getParameter('assign_invoice_select_options')) {
-      // We are assigning all report items. Get the arrays from session.
-      $item_ids = ttReportHelper::getFromSession();
-      $time_log_ids = $item_ids['report_item_ids'];
-      $expense_item_ids = $item_ids['report_item_expense_ids'];
-    } else if (2 == $request->getParameter('assign_invoice_select_options')) {
-      // We are marking only selected items. Get the arrays from $_POST.
-      foreach($_POST as $key => $val) {
-        if ('log_id_' == substr($key, 0, 7))
-          $time_log_ids[] = substr($key, 7);
-        if ('item_id_' == substr($key, 0, 8))
-          $expense_item_ids[] = substr($key, 8);
+      // Mark as requested.
+      if ($time_log_ids || $expense_item_ids) {
+        ttReportHelper::markPaid($time_log_ids, $expense_item_ids, $mark_paid);
       }
+
+      // Re-display this form.
+      header('Location: report.php');
+      exit();
     }
-    // Assign as requested.
-    if ($time_log_ids || $expense_item_ids) {
-      ttReportHelper::assignToInvoice($invoice_id, $time_log_ids, $expense_item_ids);
+
+    if ($request->getParameter('btn_assign')) {
+      // User clicked the Submit button to assign all or some items to a recent invoice.
+
+      // Determine invoice id.
+      $invoice_id = $request->getParameter('recent_invoice');
+
+      // Assign as requested.
+      if ($time_log_ids || $expense_item_ids) {
+        ttReportHelper::assignToInvoice($invoice_id, $time_log_ids, $expense_item_ids);
+      }
+      // Re-display this form.
+      header('Location: report.php');
+      exit();
     }
-    // Re-display this form.
-    header('Location: report.php');
-    exit();
   }
 } // isPost
 
