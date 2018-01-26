@@ -80,8 +80,10 @@ class ttInvoiceHelper {
 
   // The getInvoiceByName looks up an invoice by name.
   static function getInvoiceByName($invoice_name) {
+
     $mdb2 = getConnection();
     global $user;
+
     $sql = "select id from tt_invoices where team_id = $user->team_id and name = ".$mdb2->quote($invoice_name)." and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -119,6 +121,24 @@ class ttInvoiceHelper {
         return true; // All time and expense items in invoice are paid.
     }
     return false;
+  }
+
+  // markPaid marks invoice items as paid.
+  static function markPaid($invoice_id, $mark_paid = true) {
+
+    global $user;
+    $mdb2 = getConnection();
+
+    $paid_status = $mark_paid ? 1 : 0;
+    $sql = "update tt_log set paid = $paid_status where invoice_id = $invoice_id and status = 1";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    $sql = "update tt_expense_items set paid = $paid_status where invoice_id = $invoice_id and status = 1";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    return true;
   }
 
   // The getInvoiceItems retrieves tt_log items associated with the invoice. 

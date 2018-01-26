@@ -67,6 +67,20 @@
           <td align="right"><nobr>{$total|escape}</nobr></td>
         </tr>
       </table>
+
+  {$forms.invoiceForm.open}
+  {if $user->isPluginEnabled('ps')}
+  <table width="720" cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td align="right">
+      <table>
+        <tr><td>{$i18n.label.mark_paid}: {$forms.invoiceForm.mark_paid_action_options.control} {$forms.invoiceForm.btn_mark_paid.control}</td></tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+  {/if}
+  {$forms.invoiceForm.close}
 {/if}
     </td>
   </tr>

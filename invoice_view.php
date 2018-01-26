@@ -30,6 +30,7 @@ require_once('initialize.php');
 import('DateAndTime');
 import('ttInvoiceHelper');
 import('ttClientHelper');
+import('form.Form');
 
 // Access check.
 if (!ttAccessCheck(right_view_invoices) || !$user->isPluginEnabled('iv')) {
@@ -37,14 +38,21 @@ if (!ttAccessCheck(right_view_invoices) || !$user->isPluginEnabled('iv')) {
   exit();
 }
 
-$invoice_id = (int)$request->getParameter('id');
-$invoice = ttInvoiceHelper::getInvoice($invoice_id);
+$cl_id = (int)$request->getParameter('id');
+$invoice = ttInvoiceHelper::getInvoice($cl_id);
+// Temporary fix for invalid invoice id. TODO: implement properly and review security of other pages,
+// where item id is passed (or posted) as parameter.
+if (!$invoice) {
+  header('Location: access_denied.php');
+  exit();
+}
+
 $invoice_date = new DateAndTime(DB_DATEFORMAT, $invoice['date']);
 $client = ttClientHelper::getClient($invoice['client_id'], true);
 if (!$client) // In case client was deleted.
   $client = ttClientHelper::getDeletedClient($invoice['client_id']);
 
-$invoice_items = ttInvoiceHelper::getInvoiceItems($invoice_id);
+$invoice_items = ttInvoiceHelper::getInvoiceItems($cl_id);
 $tax_percent = $client['tax'];
 
 $subtotal = 0;
@@ -77,7 +85,35 @@ if (MODE_PROJECTS == $user->tracking_mode)
 elseif (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $colspan += 2;
 
-$smarty->assign('invoice_id', $invoice_id);
+$form = new Form('invoiceForm');
+// Hidden control for invoice id.
+$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
+// invoiceForm only contains controls for "Mark paid" block below invoice table.
+if ($user->isPluginEnabled('ps')) {
+  $mark_paid_action_options = array('1'=>$i18n->getKey('dropdown.paid'),'2'=>$i18n->getKey('dropdown.not_paid'));
+  $form->addInput(array('type'=>'combobox',
+    'name'=>'mark_paid_action_options',
+    'data'=>$mark_paid_action_options,
+    'value'=>$cl_mark_paid_action_option));
+  $form->addInput(array('type'=>'submit','name'=>'btn_mark_paid','value'=>$i18n->getKey('button.submit')));
+}
+
+if ($request->isPost()) {
+  if ($request->getParameter('btn_mark_paid')) {
+    // User clicked the "Mark paid" button to mark all invoice items either paid or not paid.
+
+    // Determine user action.
+    $mark_paid = $request->getParameter('mark_paid_action_options') == 1 ? true : false;
+    ttInvoiceHelper::markPaid($cl_id, $mark_paid);
+
+    // Re-display this form.
+    header('Location: invoice_view.php?id='.$cl_id);
+    exit();
+  }
+}
+
+$smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('invoice_id', $cl_id);
 $smarty->assign('invoice_name', $invoice['name']);
 $smarty->assign('invoice_date', $invoice_date->toString($user->date_format));
 $smarty->assign('client_name', $client['name']);
