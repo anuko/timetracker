@@ -86,6 +86,8 @@ $i18n_key_words = array(
 'error.interval' => 'interval incorect',
 'error.project' => 'selecteaza proiect',
 'error.activity' => 'selecteaza activitate',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => 'nume de utilizator sau parola incorecta',
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'user with this login already exists',

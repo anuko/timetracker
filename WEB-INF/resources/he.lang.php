@@ -86,7 +86,8 @@ $i18n_key_words = array(
 'error.task' => 'בחר משימה',
 'error.client' => 'בחר לקוח',
 // TODO: translate the following.
-// 'error.report' => 'Select report.',
+// 'error.report' => 'Select report.'
+// 'error.record' => 'Select record.',
 'error.auth' => 'שם משתמש או סיסמה שגויים',
 'error.user_exists' => 'שם משתמש כבר קיים',
 'error.project_exists' => 'שם פרוייקט כבר קיים',

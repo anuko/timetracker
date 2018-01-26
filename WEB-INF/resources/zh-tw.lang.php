@@ -81,6 +81,8 @@ $i18n_key_words = array(
 'error.interval' => '不正確的間隔',
 'error.project' => '選擇項目',
 'error.activity' => '選擇活動',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => '不正確的用戶名或密碼',
 'error.user_exists' => '該使用者登錄資訊已經存在',
 'error.project_exists' => '該專案名稱已經存在',

@@ -85,9 +85,13 @@ $i18n_key_words = array(
 'error.not_equal' => 'pole "{0}" neodpovídá poli "{1}"',
 'error.interval' => 'nevhodný interval',
 'error.project' => 'výběr projektu',
-'error.activity' => 'výběr činnosti',
+// TODO: translate the following.
+// 'error.task' => 'Select task.',
+// 'error.client' => 'Select client.',
+// 'error.report' => 'Select report.',
+// 'error.record' => 'Select record.',
 'error.auth' => 'nesprávné jméno nebo heslo',
-// Note to translators: this string needs to be translated.
+// TODO: translate the following.
 // 'error.user_exists' => 'user with this login already exists',
 'error.project_exists' => 'projekt tohoto jména již existuje',
 'error.activity_exists' => 'činnost tohoto jména již existuje',

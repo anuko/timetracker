@@ -77,6 +77,8 @@ $i18n_key_words = array(
 'error.task' => 'Vælg opgave.',
 'error.client' => 'Vælg klient.',
 'error.report' => 'Vælg rapport.',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => 'Forkert brugernavn eller adgangskode.',
 'error.user_exists' => 'Brugernavn eksistere allerede.',
 'error.project_exists' => 'Der eksiterer allerede et projekt med det navn.',

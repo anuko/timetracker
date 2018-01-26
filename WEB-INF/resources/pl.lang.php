@@ -79,6 +79,8 @@ $i18n_key_words = array(
 'error.task' => 'Wybierz zadanie.',
 'error.client' => 'Wybierz klienta.',
 'error.report' => 'Wybierz raport.',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => 'Błędny login lub hasło.',
 'error.user_exists' => 'Użytkownik o takiej nazwie już istnieje.',
 'error.project_exists' => 'Projekt o takiej nazwie już istnieje.',

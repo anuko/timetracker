@@ -76,6 +76,8 @@ $i18n_key_words = array(
 'error.task' => 'Kies taak.',
 'error.client' => 'Kies klant.',
 'error.report' => 'Kies rapport.',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => 'Onjuiste inlognaam of wachtwoord.',
 'error.user_exists' => 'Een gebruiker met deze inlognaam bestaat al.',
 'error.project_exists' => 'Een project met deze naam bestaat al.',

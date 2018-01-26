@@ -77,6 +77,7 @@ $i18n_key_words = array(
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
+// 'error.record' => 'Select record.',
 'error.auth' => '不正确的用户名或密码',
 'error.user_exists' => '该用户登录信息已经存在',
 'error.project_exists' => '该项目名称已经存在',

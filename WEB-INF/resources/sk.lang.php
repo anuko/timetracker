@@ -82,6 +82,7 @@ $i18n_key_words = array(
 'error.client' => 'Vyberte klienta.',
 // TODO: translate the following.
 // 'error.report' => 'Select report.',
+// 'error.record' => 'Select record.',
 'error.auth' => 'Nesprávne prihlasovacie meno alebo heslo.',
 'error.user_exists' => 'Používateľ s týmto prihlasovacím menom už existuje.',
 'error.project_exists' => 'Projekt s týmto názvom už existuje.',

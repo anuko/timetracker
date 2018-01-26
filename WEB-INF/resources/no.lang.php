@@ -82,6 +82,8 @@ $i18n_key_words = array(
 'error.interval' => 'Feil intervall.',
 'error.project' => 'Velg prosjekt.',
 'error.activity' => 'Velg aktivitet.',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => 'Feil brukernavn eller passord.',
 'error.user_exists' => 'Bruker med et slikt brukernavn eksisterer allerede.',
 'error.project_exists' => 'Et prosjekt med dette navnet er allerede opprettet.',

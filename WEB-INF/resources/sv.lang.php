@@ -77,6 +77,8 @@ $i18n_key_words = array(
 'error.task' => 'Välj en arbetsuppgift.',
 'error.client' => 'Välj en kund.',
 'error.report' => 'Välj en rapport.',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => 'Ogiltigt användarnamn eller lösenord.',
 'error.user_exists' => 'Det finns redan en användare med det här användarnamnet.',
 'error.project_exists' => 'Det finns redan ett projekt med det här namnet.',

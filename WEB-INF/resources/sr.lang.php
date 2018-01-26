@@ -76,6 +76,8 @@ $i18n_key_words = array(
 'error.task' => 'Odaberi zadatak.',
 'error.client' => 'Odaberi klijenta.',
 'error.report' => 'Odaberi izveštaj.',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => 'Pogrešno korisničko ime ili lozinka.',
 'error.user_exists' => 'Korisnik pod ovim imenom već postoji.',
 'error.project_exists' => 'Projekat pod ovim nazivom već postoji.',

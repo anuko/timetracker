@@ -84,6 +84,7 @@ $i18n_key_words = array(
 // 'error.interval' => 'incorrect interval',
 // 'error.project' => 'select project',
 // 'error.activity' => 'select activity',
+// 'error.record' => 'Select record.',
 // 'error.auth' => 'incorrect login or password',
 // 'error.user_exists' => 'user with this login already exists',
 // 'error.project_exists' => 'project with this name already exists',

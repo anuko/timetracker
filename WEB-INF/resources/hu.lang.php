@@ -81,6 +81,8 @@ $i18n_key_words = array(
 'error.interval' => 'hibás időszak megadás',
 'error.project' => 'válassz projektet',
 'error.activity' => 'válassz tevékenységet',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => 'hibás bejelentkezési adatok',
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'user with this login already exists',

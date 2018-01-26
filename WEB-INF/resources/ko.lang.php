@@ -82,6 +82,8 @@ $i18n_key_words = array(
 'error.interval' => '부정확한 간격입니다',
 'error.project' => '프로젝트의 선택',
 'error.activity' => '활동내용의 선택',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => '부정확한 로그인 혹은 암호가 틀립니다',
 'error.user_exists' => '본 로그인과 연계된 사용자가 이미 있습니다',
 'error.project_exists' => '본 이름과 연계된 프로젝트가 이미 있습니다',

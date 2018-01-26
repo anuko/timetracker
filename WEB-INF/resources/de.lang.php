@@ -73,6 +73,8 @@ $i18n_key_words = array(
 'error.task' => 'Aufgabe auswählen.',
 'error.client' => 'Kunde auswählen.',
 'error.report' => 'Bericht auswählen.',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => 'Benutzername oder Passwort ungültig.',
 'error.user_exists' => 'Benutzer mit diesem Konto ist bereits vorhanden.',
 'error.project_exists' => 'Es gibt bereits ein Projekt mit diesem Namen.',

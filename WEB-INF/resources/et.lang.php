@@ -88,6 +88,7 @@ $i18n_key_words = array(
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
+// 'error.record' => 'Select record.',
 'error.auth' => 'Vale login või salasõna.',
 // TODO: translate the following.
 // 'error.user_exists' => 'User with this login already exists.',

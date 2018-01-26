@@ -82,6 +82,8 @@ $i18n_key_words = array(
 'error.interval' => 'intervallo errato',
 'error.project' => 'seleziona il progetto',
 'error.activity' => 'seleziona la attività',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => 'login o password errati',
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'user with this login already exists',

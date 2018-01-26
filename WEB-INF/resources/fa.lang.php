@@ -82,6 +82,7 @@ $i18n_key_words = array(
 'error.client' => 'انتخاب مشتری.',
 // TODO: translate the following.
 // 'error.report' => 'Select report.',
+// 'error.record' => 'Select record.',
 'error.auth' => 'نام کاربری یا رمز عبور اشتباه است.',
 'error.user_exists' => 'کاربری با این نام کاربری موجود است.',
 'error.project_exists' => 'پروژه ای با این نام موجود است.',

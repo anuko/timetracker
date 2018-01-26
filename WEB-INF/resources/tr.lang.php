@@ -85,6 +85,8 @@ $i18n_key_words = array(
 'error.interval' => 'hatalı aralık',
 'error.project' => 'proje seç',
 'error.activity' => 'faaliyet seç',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => 'hatalı kullanıcı adı veya parola',
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'user with this login already exists',

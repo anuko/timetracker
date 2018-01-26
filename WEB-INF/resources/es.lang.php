@@ -86,6 +86,7 @@ $i18n_key_words = array(
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
+// 'error.record' => 'Select record.',
 'error.auth' => 'Usuario o contraseña incorrecta.',
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'User with this login already exists.',

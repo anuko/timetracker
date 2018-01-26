@@ -75,6 +75,8 @@ $i18n_key_words = array(
 'error.task' => 'Valitse tehtävä.',
 'error.client' => 'Valitse asiakas.',
 'error.report' => 'Valitse raportti.',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => 'Virheellinen käyttäjänimi tai salasana.',
 'error.user_exists' => 'Tämä käyttäjänimi on jo olemassa.',
 'error.project_exists' => 'Tämän niminen projekti on jo olemassa.',
