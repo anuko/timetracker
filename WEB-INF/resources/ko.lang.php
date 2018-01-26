@@ -89,9 +89,9 @@ $i18n_key_words = array(
 'error.auth' => '부정확한 로그인 혹은 암호가 틀립니다',
 'error.user_exists' => '본 로그인과 연계된 사용자가 이미 있습니다',
 'error.project_exists' => '본 이름과 연계된 프로젝트가 이미 있습니다',
-'error.activity_exists' => '본 이름과 연계된 활동내용이 이미 있습니다',
-// TODO: translate error.client_exists.
-// 'error.client_exists' => 'client with this name already exists',
+// TODO: translate the following.
+// 'error.task_exists' => 'Task with this name already exists.',
+// 'error.client_exists' => 'Client with this name already exists.',
 'error.no_login' => '본 로그인과 연계된 사용자가 없습니다',
 'error.upload' => '파일 업로드 오류',
 // TODO: translate the following.

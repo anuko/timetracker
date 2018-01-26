@@ -89,9 +89,9 @@ $i18n_key_words = array(
 'error.auth' => '不正確なログインあるいはパスワードが不正確です',
 'error.user_exists' => 'このログインと関連されたユーザーは既に存在します',
 'error.project_exists' => 'この名前のプロジェクトは既に存在します',
-'error.activity_exists' => 'この名前の活動内容は既に存在します',
-// TODO: translate error.client_exists.
-// 'error.client_exists' => 'client with this name already exists',
+// TODO: translate the following.
+// 'error.task_exists' => 'Task with this name already exists.',
+// 'error.client_exists' => 'Client with this name already exists.',
 'error.no_login' => 'このログインと関連されたユーザーはいません',
 'error.upload' => 'ファイルのアップロードのエラー',
 // TODO: translate the following.

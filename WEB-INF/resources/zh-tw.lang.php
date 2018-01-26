@@ -88,8 +88,8 @@ $i18n_key_words = array(
 'error.auth' => '不正確的用戶名或密碼',
 'error.user_exists' => '該使用者登錄資訊已經存在',
 'error.project_exists' => '該專案名稱已經存在',
-'error.activity_exists' => '該活動名稱已經存在',
 // TODO: translate the following.
+// 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 'error.no_login' => '沒有該登錄資訊的使用者',
 'error.upload' => '上傳文件出錯',

@@ -89,9 +89,9 @@ $i18n_key_words = array(
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'user with this login already exists',
 'error.project_exists' => 'ilyen nevű projekt már létezik',
-'error.activity_exists' => 'ilyen névvel már van definiálva tevékenység',
-// TODO: translate error.client_exists.
-// 'error.client_exists' => 'client with this name already exists',
+// TODO: translate the following.
+// 'error.task_exists' => 'Task with this name already exists.',
+// 'error.client_exists' => 'Client with this name already exists.',
 // Note to translators: this string needs to be properly translated (e-mail replaced with login).
 // 'error.no_login' => 'nincs ilyen e-mail címmel definiált felhasználó',
 'error.upload' => 'file feltöltési hiba',

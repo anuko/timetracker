@@ -94,9 +94,9 @@ $i18n_key_words = array(
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'user with this login already exists',
 'error.project_exists' => 'proiectul cu acest nume exista deja',
-'error.activity_exists' => 'activitatea cu acest nume exista deja',
-// TODO: translate error.client_exists.
-// 'error.client_exists' => 'client with this name already exists',
+// TODO: translate the following.
+// 'error.task_exists' => 'Task with this name already exists.',
+// 'error.client_exists' => 'Client with this name already exists.',
 // Note to translators: this string needs to be properly translated (e-mail replaced with login).
 // 'error.no_login' => 'nu exista utilizator cu acest email',
 'error.upload' => 'eroare la upload-ul fisierului',

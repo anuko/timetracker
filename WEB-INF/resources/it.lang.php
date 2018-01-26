@@ -90,9 +90,9 @@ $i18n_key_words = array(
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'user with this login already exists',
 'error.project_exists' => 'esiste già un progetto con questo nome',
-'error.activity_exists' => 'esiste già una attività con questo nome',
-// TODO: translate error.client_exists.
-// 'error.client_exists' => 'client with this name already exists',
+// TODO: translate the following.
+// 'error.task_exists' => 'Task with this name already exists.',
+// 'error.client_exists' => 'Client with this name already exists.',
 // Note to translators: this string needs to be properly translated (e-mail replaced with login).
 // 'error.no_login' => 'nessun utente con questa e-mail',
 // Note to translators: the strings below need to be translated

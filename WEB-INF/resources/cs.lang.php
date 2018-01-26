@@ -94,9 +94,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.user_exists' => 'user with this login already exists',
 'error.project_exists' => 'projekt tohoto jména již existuje',
-'error.activity_exists' => 'činnost tohoto jména již existuje',
-// TODO: translate error.client_exists.
-// 'error.client_exists' => 'client with this name already exists',
+// TODO: translate the following.
+// 'error.task_exists' => 'Task with this name already exists.',
+// 'error.client_exists' => 'Client with this name already exists.',
 // Note to translators: error.no_login needs to be properly translated (e-mail replaced with login).
 // 'error.no_login' => 'uživatel s tímto e-mailem neexistuje',
 'error.upload' => 'chyba přenosu souboru',
