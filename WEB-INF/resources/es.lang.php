@@ -38,14 +38,16 @@ $i18n_holidays = array('01/01', '01/06', '04/05', '04/06', '05/01', '08/15', '10
 
 $i18n_key_words = array(
 
-// Menus - short selection strings that are displayed on the top of application web pages.
+// Menus - short selection strings that are displayed on top of application web pages.
 // Example: https://timetracker.anuko.com (black menu on top).
 'menu.login' => 'Iniciar sesión',
 'menu.logout' => 'Finalizar sesión',
 'menu.forum' => 'Foro',
 'menu.help' => 'Ayuda',
-// Note to translators: menu.create_team needs a more accurate translation.
-'menu.create_team' => 'Crear una nueva cuenta de manejador',
+// TODO: translate the following.
+// 'menu.create_team' => 'Create Team',
+
+// TODO: refactoring ongoing down from here.
 'menu.profile' => 'Perfil',
 'menu.time' => 'Tiempo',
 // TODO: translate the following.

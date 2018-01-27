@@ -39,7 +39,7 @@ $i18n_holidays = array('02/10', '04/09', '04/15', '04/29', '05/29', '09/19', '09
 $i18n_key_words = array(
 'language.rtl' => 'true', // Right-to-left language. Do not remove this line from RTL language files. This is the only string that is not found in the master English file.
 
-// Menus - short selection strings that are displayed on the top of application web pages.
+// Menus - short selection strings that are displayed on top of application web pages.
 // Example: https://timetracker.anuko.com (black menu on top).
 'menu.login' => 'כניסה',
 'menu.logout' => 'יציאה',

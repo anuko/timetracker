@@ -38,7 +38,8 @@ $i18n_holidays = array('01/01', '04/21', '05/01', '09/07', '10/12', '11/15', '12
 
 $i18n_key_words = array(
 
-// Menus.
+// Menus - short selection strings that are displayed on top of application web pages.
+// Example: https://timetracker.anuko.com (black menu on top).
 'menu.login' => 'Login',
 'menu.logout' => 'Logout',
 'menu.forum' => 'Fórum',
