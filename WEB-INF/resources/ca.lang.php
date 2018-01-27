@@ -47,16 +47,15 @@ $i18n_key_words = array(
 'menu.help' => 'Ajuda',
 // TODO: translate the following.
 // 'menu.create_team' => 'Create Team',
-
-// TODO: refactoring ongoing down from here.
 'menu.profile' => 'Perfil',
-// 'menu.time' => 'Time',
-'menu.time' => 'El meu temps', // TODO: menu.time is no longer "My time", just "Time".
 // TODO: translate the following.
+// 'menu.time' => 'Time',
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Informes',
 // TODO: translate the following.
 // 'menu.charts' => 'Charts',
+
+// TODO: refactoring ongoing down from here.
 'menu.projects' => 'Projectes',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',

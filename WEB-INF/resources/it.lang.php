@@ -48,14 +48,14 @@ $i18n_key_words = array(
 // 'menu.forum' => 'Forum',
 // 'menu.help' => 'Help',
 // 'menu.create_team' => 'Create Team',
-
-// TODO: refactoring ongoing down from here.
 'menu.profile' => 'Profilo',
-'menu.time' => 'Tempo di lavoro',
+'menu.time' => 'Tempo',
 // TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 // 'menu.reports' => 'Reports',
 // 'menu.charts' => 'Charts',
+
+// TODO: refactoring ongoing down from here.
 'menu.projects' => 'Progetti',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
