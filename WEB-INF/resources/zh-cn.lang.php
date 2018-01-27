@@ -46,13 +46,13 @@ $i18n_key_words = array(
 'menu.help' => '帮助',
 // TODO: translate the following.
 // 'menu.create_team' => 'Create Team',
-
-// TODO: refactoring ongoing down from here.
 'menu.profile' => '简介',
 'menu.time' => '时间记录',
 'menu.expenses' => '费用',
 'menu.reports' => '报告',
 'menu.charts' => '图表',
+
+// TODO: refactoring ongoing down from here.
 'menu.projects' => '项目',
 'menu.tasks' => '任务',
 'menu.users' => '用户',

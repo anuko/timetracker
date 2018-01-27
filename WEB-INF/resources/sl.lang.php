@@ -49,15 +49,15 @@ $i18n_key_words = array(
 'menu.help' => 'Pomoč',
 // TODO: translate the following.
 // 'menu.create_team' => 'Create Team',
-
-// TODO: refactoring ongoing down from here.
 'menu.profile' => 'Profil',
-'menu.time' => 'Moj čas', // TODO: Improve this, used to be "My time", now just "Time".
 // TODO: translate the following.
+// 'menu.time' => 'Time',
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Poročila',
 // TODO: translate the following.
-// 'menu.charts' => 'Charts',
+'menu.charts' => 'Charts',
+
+// TODO: refactoring ongoing down from here.
 'menu.projects' => 'Projekti',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',

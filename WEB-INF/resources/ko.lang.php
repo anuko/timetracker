@@ -47,15 +47,15 @@ $i18n_key_words = array(
 'menu.help' => '도움말',
 // TODO: translate the following.
 // 'menu.create_team' => 'Create Team',
-
-// TODO: refactoring ongoing down from here.
 'menu.profile' => '프로필',
-'menu.time' => '나의 시간', // TODO: improve this, used to be "My time", now just "Time".
 // TODO: translate the following.
+// 'menu.time' => 'Time',
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => '보고서',
 // TODO: translate the following.
 // 'menu.charts' => 'Charts',
+
+// TODO: refactoring ongoing down from here.
 'menu.projects' => '프로젝트',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
