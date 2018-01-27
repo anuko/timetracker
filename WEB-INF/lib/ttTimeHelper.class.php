@@ -142,7 +142,7 @@ class ttTimeHelper {
       // Strip optional h in the end.
       $value = trim($value, 'h');
       if ($user->decimal_mark == ',')
-        $value = str_replace($value, ',', '.');
+        $value = str_replace(',', '.', $value);
       return (float) $value;
     }
 
