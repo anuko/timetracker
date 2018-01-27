@@ -26,6 +26,8 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
+import('ttTimeHelper');
+
 // MontlyQuota class implements handling of work hour quotas.
 class MonthlyQuota {
 
@@ -41,11 +43,12 @@ class MonthlyQuota {
 
   // update - deletes a quota, then inserts a new one.
   public function update($year, $month, $quota) {
-    $teamId = $this->team_id;
-    $deleteSql = "DELETE FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $teamId";
+    $team_id = $this->team_id;
+    $deleteSql = "DELETE FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $team_id";
     $this->db->exec($deleteSql);
     if ($quota){
-      $insertSql = "INSERT INTO tt_monthly_quotas (team_id, year, month, quota) values ($teamId, $year, $month, $quota)";
+      $float_quota = ttTimeHelper::quotaToFloat($quota);
+      $insertSql = "INSERT INTO tt_monthly_quotas (team_id, year, month, quota) values ($team_id, $year, $month, $float_quota)";
       $affected = $this->db->exec($insertSql);
       return (!is_a($affected, 'PEAR_Error'));
     }
@@ -63,8 +66,8 @@ class MonthlyQuota {
 
   // getSingle - obtains a quota for a single month.
   private function getSingle($year, $month) {
-    $teamId = $this->team_id;
-    $sql = "SELECT quota FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $teamId";
+    $team_id = $this->team_id;
+    $sql = "SELECT quota FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $team_id";
     $reader = $this->db->query($sql);
     if (is_a($reader, 'PEAR_Error')) {
       return false;
@@ -82,8 +85,8 @@ class MonthlyQuota {
 
   // getMany - returns an array of quotas for a given year for team.
   private function getMany($year){
-    $teamId = $this->team_id;
-    $sql = "SELECT month, quota FROM tt_monthly_quotas WHERE year = $year AND team_id = $teamId";
+    $team_id = $this->team_id;
+    $sql = "SELECT month, quota FROM tt_monthly_quotas WHERE year = $year AND team_id = $team_id";
     $result = array();
     $res = $this->db->query($sql);
     if (is_a($res, 'PEAR_Error')) {

@@ -30,6 +30,7 @@ require_once('initialize.php');
 require_once('plugins/MonthlyQuota.class.php');
 import('form.Form');
 import('ttTeamHelper');
+import('ttTimeHelper');
 
 // Access check.
 if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('mq')) {
@@ -69,27 +70,38 @@ $months = $i18n->monthNames;
 $quota = new MonthlyQuota();
 
 if ($request->isPost()){
-  // TODO: Add parameter validation.
-  $res = false;
-  if ($_POST['btn_hours']){
+  // Validate user input.
+  for ($i = 0; $i < count($months); $i++){
+    $val = $request->getParameter($months[$i]);
+    if (!ttTimeHelper::isValidQuota($val))
+      $err->add($i18n->getKey('error.field'), $months[$i]);
+  }
+  // Finished validating user input.
 
-    // User changed workday hours for team.
-    $hours = (int)$request->getParameter('workdayHours');
-    $res = ttTeamHelper::update($user->team_id, array('name'=>$user->team,'workday_hours'=>$hours));
-  }
-  if ($_POST['btn_submit']){
-    // User pressed the Save button under monthly quotas table.
-    $postedYear = $request->getParameter('year');
-    $selectedYear = intval($postedYear);
-    for ($i = 0; $i < count($months); $i++){
-      $res = $quota->update($postedYear, $i+1, $request->getParameter($months[$i]));
+  if ($err->no()) {
+
+    $res = false;
+    if ($_POST['btn_hours']){
+
+      // User changed workday hours for team.
+      $hours = (int)$request->getParameter('workdayHours');
+      $res = ttTeamHelper::update($user->team_id, array('name'=>$user->team,'workday_hours'=>$hours));
     }
-  }
-  if ($res) {
-    header('Location: profile_edit.php');
-    exit();
-  } else {
-    $err->add($i18n->getKey('error.db'));
+    if ($_POST['btn_submit']){
+      // User pressed the Save button under monthly quotas table.
+      $postedYear = $request->getParameter('year');
+      $selectedYear = intval($postedYear);
+      for ($i = 0; $i < count($months); $i++){
+        $res = $quota->update($postedYear, $i+1, $request->getParameter($months[$i]));
+      }
+    }
+    if ($res) {
+      // header('Location: profile_edit.php');
+      header('Location: quotas.php'); // For debugging.
+      exit();
+    } else {
+      $err->add($i18n->getKey('error.db'));
+    }
   }
 }
 
@@ -103,9 +115,10 @@ for ($i=0; $i < count($months); $i++) {
   $value = "";
   if (array_key_exists($i+1, $monthsData)){
     $value = $monthsData[$i+1];
+    $value = ttTimeHelper::toAbsDuration($value * 60, true);
   }
   $name = $months[$i];
-  $form->addInput(array('type'=>'text','name'=>$name,'maxlength'=>3,'value'=> $value,'style'=>'width:50px'));
+  $form->addInput(array('type'=>'text','name'=>$name,'maxlength'=>6,'value'=> $value,'style'=>'width:70px'));
 }
 
 $smarty->assign('months', $months);

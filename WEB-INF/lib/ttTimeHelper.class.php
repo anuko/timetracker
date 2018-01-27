@@ -82,7 +82,7 @@ class ttTimeHelper {
 
   // isValidDuration validates a value as a time duration string (in hours and minutes).
   static function isValidDuration($value) {
-    if (strlen($value)==0 || !isset($value)) return false;
+    if (strlen($value) == 0 || !isset($value)) return false;
 
     if ($value == '24:00' || $value == '2400') return true;
 
@@ -100,6 +100,53 @@ class ttTimeHelper {
     }
 
     return false;
+  }
+
+  // isValidQuota validates a localized value as an hours quota string (in hours and minutes).
+  static function isValidQuota($value) {
+
+    if (strlen($value) == 0 || !isset($value)) return true;
+
+    if (preg_match('/^[0-9]{1,3}h?$/', $value )) { // 000 - 999
+      return true;
+    }
+
+    if (preg_match('/^[0-9]{1,3}:[0-5][0-9]$/', $value )) { // 000:00 - 999:59
+      return true;
+    }
+
+    global $user;
+    $localizedPattern = '/^([0-9]{1,3})?['.$user->decimal_mark.'][0-9]{1,4}h?$/';
+    if (preg_match($localizedPattern, $value )) { // decimal values like 000.5, 999.25h, ... .. 999.9999h (or with comma)
+      return true;
+    }
+
+    return false;
+  }
+
+  // quotaToFloat converts a valid quota value to a float.
+  static function quotaToFloat($value) {
+
+    if (preg_match('/^[0-9]{1,3}h?$/', $value )) { // 000 - 999
+      return (float) $value;
+    }
+
+    if (preg_match('/^[0-9]{1,3}:[0-5][0-9]$/', $value )) { // 000:00 - 999:59
+      $minutes = ttTimeHelper::toMinutes($value);
+      return ($minutes / 60.0);
+    }
+
+    global $user;
+    $localizedPattern = '/^([0-9]{1,3})?['.$user->decimal_mark.'][0-9]{1,4}h?$/';
+    if (preg_match($localizedPattern, $value )) { // decimal values like 000.5, 999.25h, ... .. 999.9999h (or with comma)
+      // Strip optional h in the end.
+      $value = trim($value, 'h');
+      if ($user->decimal_mark == ',')
+        $value = str_replace($value, ',', '.');
+      return (float) $value;
+    }
+
+    return null;
   }
 
   // normalizeDuration - converts a valid time duration string to format 00:00.
@@ -162,11 +209,14 @@ class ttTimeHelper {
 
   // toAbsDuration - converts a number of minutes to format 0:00
   // even if $minutes is negative.
-  static function toAbsDuration($minutes){
+  static function toAbsDuration($minutes, $abbreviate = false){
     $hours = (string)((int)abs($minutes / 60));
-    $mins = (string)(abs($minutes % 60));
+    $mins = (string) round(abs(fmod($minutes, 60)));
     if (strlen($mins) == 1)
       $mins = '0' . $mins;
+    if ($abbreviate && $mins == '00')
+      return $hours;
+
     return $hours.':'.$mins;
   }
 
