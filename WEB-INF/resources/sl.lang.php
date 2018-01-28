@@ -83,13 +83,16 @@ $i18n_key_words = array(
 // 'error.empty' => 'Field "{0}" is empty.',
 // 'error.not_equal' => 'Field "{0}" is not equal to field "{1}".',
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-
-// TODO: refactoring ongoing down from here.
 // 'error.project' => 'Select project.',
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // 'error.auth' => 'Incorrect login or password.',
 // 'error.user_exists' => 'User with this login already exists.',
 // 'error.project_exists' => 'Project with this name already exists.',

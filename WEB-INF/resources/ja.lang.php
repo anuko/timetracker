@@ -83,14 +83,17 @@ $i18n_key_words = array(
 'error.not_equal' => '"{0}"のフィールドは"{1}"のフィールドと違います',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-
-// TODO: refactoring ongoing down from here.
 'error.project' => 'プロジェクトの選択',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'error.auth' => '不正確なログインあるいはパスワードが不正確です',
 'error.user_exists' => 'このログインと関連されたユーザーは既に存在します',
 'error.project_exists' => 'この名前のプロジェクトは既に存在します',

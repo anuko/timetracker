@@ -75,14 +75,16 @@ $i18n_key_words = array(
 'error.not_equal' => '栏目"{0}"不等于栏目"{1}"',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-
-// TODO: refactoring ongoing down from here.
-'error.project' => '选择项目',
-// TODO: translate the following.
+// 'error.project' => 'Select project.',
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'error.auth' => '不正确的用户名或密码',
 'error.user_exists' => '该用户登录信息已经存在',
 'error.project_exists' => '该项目名称已经存在',

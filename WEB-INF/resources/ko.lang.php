@@ -83,14 +83,17 @@ $i18n_key_words = array(
 'error.not_equal' => '"{0}" 의 필드가 "{1}" 의 필드와 같지 않습니다',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-
-// TODO: refactoring ongoing down from here.
 'error.project' => '프로젝트의 선택',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'error.auth' => '부정확한 로그인 혹은 암호가 틀립니다',
 'error.user_exists' => '본 로그인과 연계된 사용자가 이미 있습니다',
 'error.project_exists' => '본 이름과 연계된 프로젝트가 이미 있습니다',

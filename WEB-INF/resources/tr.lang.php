@@ -89,14 +89,17 @@ $i18n_key_words = array(
 'error.not_equal' => 'Alan "{0}" "{1}" alanıyla aynı değildir.',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-
-// TODO: refactoring ongoing down from here.
-'error.project' => 'proje seç',
+'error.project' => 'Proje seç.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'error.auth' => 'hatalı kullanıcı adı veya parola',
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'user with this login already exists',

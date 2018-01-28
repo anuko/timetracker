@@ -81,14 +81,16 @@ $i18n_key_words = array(
 'error.not_equal' => '欄目"{0}"不等於欄目"{1}"',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-
-// TODO: refactoring ongoing down from here.
-'error.project' => '選擇項目',
-// TODO: translate the following.
+// 'error.project' => 'Select project.',
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'error.auth' => '不正確的用戶名或密碼',
 'error.user_exists' => '該使用者登錄資訊已經存在',
 'error.project_exists' => '該專案名稱已經存在',

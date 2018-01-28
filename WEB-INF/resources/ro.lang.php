@@ -86,14 +86,17 @@ $i18n_key_words = array(
 'error.not_equal' => 'Campul "{0}" nu este egal cu campul "{1}".',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-
-// TODO: refactoring ongoing down from here.
-'error.project' => 'selecteaza proiect',
+'error.project' => 'Selecteaza proiect.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'error.auth' => 'nume de utilizator sau parola incorecta',
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'user with this login already exists',
