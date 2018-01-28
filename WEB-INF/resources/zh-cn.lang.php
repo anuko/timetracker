@@ -51,8 +51,6 @@ $i18n_key_words = array(
 'menu.expenses' => '费用',
 'menu.reports' => '报告',
 'menu.charts' => '图表',
-
-// TODO: refactoring ongoing down from here.
 'menu.projects' => '项目',
 'menu.tasks' => '任务',
 'menu.users' => '用户',
@@ -60,6 +58,8 @@ $i18n_key_words = array(
 'menu.export' => '导出数据',
 'menu.clients' => '客户',
 'menu.options' => '选项',
+
+// TODO: refactoring ongoing down from here.
 
 // Footer - strings on the bottom of most pages.
 'footer.contribute_msg' => '你可以以不同的方式为Time Tracker提建议',

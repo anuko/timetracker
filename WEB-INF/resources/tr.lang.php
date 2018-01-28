@@ -56,18 +56,18 @@ $i18n_key_words = array(
 'menu.reports' => 'Raporlar',
 // TODO: translate the following.
 // 'menu.charts' => 'Charts',
-
-// TODO: refactoring ongoing down from here.
-'menu.projects' => 'projeler',
+'menu.projects' => 'Projeler',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
-'menu.teams' => 'ekipler',
+'menu.teams' => 'Ekipler',
 // TODO: translate the following.
 // 'menu.export' => 'Export',
-'menu.clients' => 'müşteriler',
+'menu.clients' => 'Müşteriler',
 // TODO: translate the following.
 // 'menu.options' => 'Options',
+
+// TODO: refactoring ongoing down from here.
 
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following.

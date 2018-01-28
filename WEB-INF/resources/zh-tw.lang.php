@@ -53,8 +53,6 @@ $i18n_key_words = array(
 'menu.reports' => '報告',
 // TODO: translate the following.
 // 'menu.charts' => 'Charts',
-
-// TODO: refactoring ongoing down from here.
 'menu.projects' => '項目',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
@@ -63,6 +61,8 @@ $i18n_key_words = array(
 'menu.export' => '輸出資料',
 'menu.clients' => '客戶',
 'menu.options' => '選項',
+
+// TODO: refactoring ongoing down from here.
 
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following.

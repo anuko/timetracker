@@ -54,17 +54,16 @@ $i18n_key_words = array(
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Rapporter',
 'menu.charts' => 'Diagrammer',
-
-// TODO: refactoring ongoing down from here.
 'menu.projects' => 'Prosjekter',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
-// Note to translators: check translation of menu.teams. This is for a list of teams in the time tracker for admin.
-// 'menu.teams' => 'team',
+// 'menu.teams' => 'Teams',
 'menu.export' => 'Eksport',
 'menu.clients' => 'Klienter',
 'menu.options' => 'Opsjoner',
+
+// TODO: refactoring ongoing down from here.
 
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following.
