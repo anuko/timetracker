@@ -81,14 +81,14 @@ $i18n_key_words = array(
 'error.not_equal' => 'Il campo "{0}" non è uguale al campo "{1}".',
 // TODO: translate the following.
 // error.interval' => 'Field "{0}" must be greater than "{1}".',
-
-// TODO: refactoring ongoing down from here.
-'error.project' => 'seleziona il progetto',
+'error.project' => 'Seleziona il progetto.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+
+// TODO: refactoring ongoing down from here.
 'error.auth' => 'login o password errati',
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'user with this login already exists',

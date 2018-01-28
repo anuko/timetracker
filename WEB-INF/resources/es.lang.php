@@ -81,14 +81,14 @@ $i18n_key_words = array(
 'error.not_equal' => 'El archivo "{0}" no es igual al archivo "{1}".',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-
-// TODO: refactoring ongoing down from here.
 'error.project' => 'Seleccionar Proyecto.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+
+// TODO: refactoring ongoing down from here.
 'error.auth' => 'Usuario o contraseña incorrecta.',
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'User with this login already exists.',

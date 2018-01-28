@@ -84,14 +84,14 @@ $i18n_key_words = array(
 'error.not_equal' => 'A "{0}" mező tartalma nem egyezik meg a "{1}" mező tartalmával.',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-
-// TODO: refactoring ongoing down from here.
-'error.project' => 'válassz projektet',
+'error.project' => 'Válassz projektet.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+
+// TODO: refactoring ongoing down from here.
 'error.auth' => 'hibás bejelentkezési adatok',
 // Note to translators: this string needs to be translated.
 // 'error.user_exists' => 'user with this login already exists',
