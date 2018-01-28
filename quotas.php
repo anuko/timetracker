@@ -80,27 +80,24 @@ if ($request->isPost()){
 
   if ($err->no()) {
 
-    $res = false;
-    if ($_POST['btn_hours']){
+    // Handle workday hours.
+    $hours = (int)$request->getParameter('workdayHours');
+    if ($hours != $user->workday_hours) {
+      if (!ttTeamHelper::update($user->team_id, array('name'=>$user->team,'workday_hours'=>$hours)))
+        $err->add($i18n->getKey('error.db'));
+    }
 
-      // User changed workday hours for team.
-      $hours = (int)$request->getParameter('workdayHours');
-      $res = ttTeamHelper::update($user->team_id, array('name'=>$user->team,'workday_hours'=>$hours));
+    // Handle monthly quotas for a selected year.
+    $selectedYear = intval($request->getParameter('year'));
+    for ($i = 0; $i < count($months); $i++){
+      if (!$quota->update($selectedYear, $i+1, $request->getParameter($months[$i])))
+        $err->add($i18n->getKey('error.db'));
     }
-    if ($_POST['btn_submit']){
-      // User pressed the Save button under monthly quotas table.
-      $postedYear = $request->getParameter('year');
-      $selectedYear = intval($postedYear);
-      for ($i = 0; $i < count($months); $i++){
-        $res = $quota->update($postedYear, $i+1, $request->getParameter($months[$i]));
-      }
-    }
-    if ($res) {
-      // header('Location: profile_edit.php');
-      header('Location: quotas.php'); // For debugging.
+
+    if ($err->no()) {
+      // Redisplay the form.
+      header('Location: quotas.php?year='.$selectedYear);
       exit();
-    } else {
-      $err->add($i18n->getKey('error.db'));
     }
   }
 }

@@ -11,7 +11,6 @@
           <tr>
             <td>{$i18n.form.quota.workday_hours}:</td>
             <td>{$forms.monthlyQuotasForm.workdayHours.control}</td>
-            <td><input type="submit" name="btn_hours" value="{$i18n.button.save}"></td>
           </tr>
         </table>
       </td>
