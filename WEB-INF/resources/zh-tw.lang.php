@@ -71,16 +71,18 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
+// TODO: All error messages should be complete sentences with a period (full stop) in the end. Put them there.
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
-
-// TODO: refactoring ongoing down from here.
 'error.db' => '資料庫錯誤',
 'error.field' => '不正確的"{0}"資料',
 'error.empty' => '欄目"{0}"為空',
 'error.not_equal' => '欄目"{0}"不等於欄目"{1}"',
-'error.interval' => '不正確的間隔',
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+
+// TODO: refactoring ongoing down from here.
 'error.project' => '選擇項目',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',

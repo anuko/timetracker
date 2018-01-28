@@ -79,13 +79,18 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
+'error.db' => 'Veritabanı hatası.',
+'error.field' => 'Hatalı veri "{0}".',
+'error.empty' => 'Alan "{0}" boştur.',
+// TODO: confirm that error.not_equal is translated correctly.
+// Test by changing password with not equal password value fields.
+// English equivalent is:
+// 'error.not_equal' => 'Field "{0}" is not equal to field "{1}".',
+'error.not_equal' => 'Alan "{0}" "{1}" alanıyla aynı değildir.',
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
 
 // TODO: refactoring ongoing down from here.
-'error.db' => 'veritabanı hatası',
-'error.field' => 'hatalı veri "{0}"',
-'error.empty' => 'alan "{0}" boştur',
-'error.not_equal' => 'alan "{0}" "{1}" alanıyla aynı değildir',
-'error.interval' => 'hatalı aralık',
 'error.project' => 'proje seç',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',

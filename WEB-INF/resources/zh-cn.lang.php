@@ -66,15 +66,17 @@ $i18n_key_words = array(
 'footer.improve' => '投稿',
 
 // Error messages.
+// TODO: All error messages should be complete sentences with a period (full stop) in the end. Put them there.
 'error.access_denied' => '拒绝访问',
 'error.sys' => '系统错误',
-
-// TODO: refactoring ongoing down from here.
 'error.db' => '数据库错误',
 'error.field' => '不正确的"{0}"数据',
 'error.empty' => '栏目"{0}"为空',
 'error.not_equal' => '栏目"{0}"不等于栏目"{1}"',
-'error.interval' => '不正确的间隔',
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+
+// TODO: refactoring ongoing down from here.
 'error.project' => '选择项目',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
