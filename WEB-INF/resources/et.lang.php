@@ -56,8 +56,6 @@ $i18n_key_words = array(
 'menu.reports' => 'Raportid',
 // TODO: translate the following.
 // 'menu.charts' => 'Charts',
-
-// TODO: refactoring ongoing down from here.
 'menu.projects' => 'Projektid',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
@@ -67,6 +65,8 @@ $i18n_key_words = array(
 // 'menu.export' => 'Export',
 'menu.clients' => 'Kliendid',
 'menu.options' => 'Suvandid',
+
+// TODO: refactoring ongoing down from here.
 
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following.

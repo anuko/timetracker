@@ -56,17 +56,17 @@ $i18n_key_words = array(
 'menu.reports' => 'Riportok',
 // TODO: translate the following.
 // 'menu.charts' => 'Charts',
+'menu.projects' => 'Projektek',
+// 'menu.tasks' => 'Tasks',
+// TODO: translate the following.
+// 'menu.users' => 'Users',
+'menu.teams' => 'Csoportok',
+// TODO: translate the following.
+// 'menu.export' => 'Export',
+'menu.clients' => 'Ügyfelek',
+'menu.options' => 'Opciók',
 
 // TODO: refactoring ongoing down from here.
-'menu.projects' => 'projektek',
-// TODO: translate the following.
-// 'menu.tasks' => 'Tasks',
-// 'menu.users' => 'Users',
-'menu.teams' => 'csoportok',
-// TODO: translate the following.
-// 'menu.export' => 'Export'
-'menu.clients' => 'ügyfelek',
-'menu.options' => 'opciók',
 
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following.
