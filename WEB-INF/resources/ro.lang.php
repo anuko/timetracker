@@ -79,14 +79,15 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
+'error.db' => 'Eroare baza de date.',
+// TODO: translate the following.
+// 'error.field' => 'Incorrect "{0}" data.',
+'error.empty' => 'Campul "{0}" este gol.',
+'error.not_equal' => 'Campul "{0}" nu este egal cu campul "{1}".',
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
 
 // TODO: refactoring ongoing down from here.
-'error.db' => 'eroare baza de date',
-// Note to translators: the string below must be translated 
-// 'error.field' => 'incorrect "{0}" data',
-'error.empty' => 'campul "{0}" este gol',
-'error.not_equal' => 'campul "{0}" nu este egal cu campul "{1}"',
-'error.interval' => 'interval incorect',
 'error.project' => 'selecteaza proiect',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',

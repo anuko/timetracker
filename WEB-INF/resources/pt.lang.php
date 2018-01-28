@@ -77,13 +77,13 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
+// 'error.db' => 'Database error.',
+// 'error.field' => 'Incorrect "{0}" data.',
+// 'error.empty' => 'Field "{0}" is empty.',
+// 'error.not_equal' => 'Field "{0}" is not equal to field "{1}".',
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
 
 // TODO: refactoring ongoing down from here.
-// 'error.db' => 'database error',
-// 'error.field' => 'incorrect "{0}" data',
-// 'error.empty' => 'field "{0}" is empty',
-// 'error.not_equal' => 'field "{0}" is not equaled to field "{1}"',
-// 'error.interval' => 'incorrect interval',
 // 'error.project' => 'select project',
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',

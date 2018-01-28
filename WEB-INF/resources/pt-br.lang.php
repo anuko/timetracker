@@ -71,7 +71,8 @@ $i18n_key_words = array(
 'error.field' => 'Dados incorretos "{0}".',
 'error.empty' => 'Campo "{0}" está vazio.',
 'error.not_equal' => 'Campo "{0}" é diferente do campo "{1}".',
-'error.interval' => 'Intervalo incorreto.',
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
 'error.project' => 'Selecione projeto.',
 'error.task' => 'Selecione tarefa.',
 'error.client' => 'Selecione cliente.',
