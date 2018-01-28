@@ -78,14 +78,14 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
-
-// TODO: refactoring ongoing down from here.
 'error.db' => 'Andmebaasi viga.',
 'error.field' => 'Valed "{0}" andmed.',
 'error.empty' => 'Väli "{0}" on tühi.',
 'error.not_equal' => 'Väli "{0}" ei ole väljaga "{1}" võrdne.',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+
+// TODO: refactoring ongoing down from here.
 'error.project' => 'Vali projekt.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',

@@ -75,14 +75,14 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
-
-// TODO: refactoring ongoing down from here.
 'error.db' => 'Error de la Base de Datos.',
 'error.field' => 'Dato "{0}" incorrecto.',
 'error.empty' => 'El archivo "{0}" esta vacío.',
 'error.not_equal' => 'El archivo "{0}" no es igual al archivo "{1}".',
-// TODO: translate error.interval.
+// TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+
+// TODO: refactoring ongoing down from here.
 'error.project' => 'Seleccionar Proyecto.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',

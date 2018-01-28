@@ -76,8 +76,8 @@ $i18n_key_words = array(
 'error.field' => 'داده اشتباه در "{0}".',
 'error.empty' => 'فیلد "{0}" خالیست.',
 'error.not_equal' => 'فیلد "{0}" با فیلد "{1}" برابر نیست.',
-// TODO: translate error.interval.
-'error.interval' => 'Field "{0}" must be greater than "{1}".',
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
 'error.project' => 'انتخاب پروژه.',
 'error.task' => 'انتخاب وظیفه.',
 'error.client' => 'انتخاب مشتری.',
