@@ -75,13 +75,14 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
-
-// TODO: refactoring ongoing down from here.
 'error.db' => 'Databasefeil.',
 'error.field' => 'Feil "{0}" data.',
 'error.empty' => 'Feltet "{0}" er tomt.',
 'error.not_equal' => 'Feltet "{0}" stemmer ikke med "{1}".',
-'error.interval' => 'Feil intervall.',
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+
+// TODO: refactoring ongoing down from here.
 'error.project' => 'Velg prosjekt.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',

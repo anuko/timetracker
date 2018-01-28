@@ -73,16 +73,18 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
+// TODO: All error messages should be complete sentences with a period (full stop) in the end. Put them there.
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
-
-// TODO: refactoring ongoing down from here.
 'error.db' => '데이터베이스 오류',
 'error.field' => '부정확한 "{0}" 의 데이터',
 'error.empty' => '"{0}" 의 필드가 비어있습니다',
 'error.not_equal' => '"{0}" 의 필드가 "{1}" 의 필드와 같지 않습니다',
-'error.interval' => '부정확한 간격입니다',
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+
+// TODO: refactoring ongoing down from here.
 'error.project' => '프로젝트의 선택',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
