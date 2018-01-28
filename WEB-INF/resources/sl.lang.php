@@ -66,8 +66,6 @@ $i18n_key_words = array(
 'menu.clients' => 'Stranke',
 'menu.options' => 'Možnosti',
 
-// TODO: refactoring ongoing down from here.
-
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
@@ -80,6 +78,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
+
+// TODO: refactoring ongoing down from here.
 // 'error.db' => 'Database error.',
 // 'error.field' => 'Incorrect "{0}" data.',
 // 'error.empty' => 'Field "{0}" is empty.',

@@ -59,8 +59,6 @@ $i18n_key_words = array(
 'menu.clients' => '客户',
 'menu.options' => '选项',
 
-// TODO: refactoring ongoing down from here.
-
 // Footer - strings on the bottom of most pages.
 'footer.contribute_msg' => '你可以以不同的方式为Time Tracker提建议',
 'footer.credits' => '信用',
@@ -70,6 +68,8 @@ $i18n_key_words = array(
 // Error messages.
 'error.access_denied' => '拒绝访问',
 'error.sys' => '系统错误',
+
+// TODO: refactoring ongoing down from here.
 'error.db' => '数据库错误',
 'error.field' => '不正确的"{0}"数据',
 'error.empty' => '栏目"{0}"为空',

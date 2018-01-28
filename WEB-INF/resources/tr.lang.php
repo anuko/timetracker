@@ -67,8 +67,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'menu.options' => 'Options',
 
-// TODO: refactoring ongoing down from here.
-
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
@@ -81,6 +79,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
+
+// TODO: refactoring ongoing down from here.
 'error.db' => 'veritabanı hatası',
 'error.field' => 'hatalı veri "{0}"',
 'error.empty' => 'alan "{0}" boştur',
