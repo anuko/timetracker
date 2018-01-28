@@ -87,17 +87,19 @@ $i18n_key_words = array(
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'error.auth' => 'Feil brukernavn eller passord.',
 'error.user_exists' => 'Bruker med et slikt brukernavn eksisterer allerede.',
 'error.project_exists' => 'Et prosjekt med dette navnet er allerede opprettet.',
 // TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',
 'error.client_exists' => 'En klient med dette navnet er allerede opprettet.',
+// TODO: translate the following.
+// 'error.invoice_exists' => 'Invoice with this number already exists.',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'error.no_login' => 'Det er ingen bruker med dette brukernavnet.',
 'error.upload' => 'Feil med lasting av fil.',
 // TODO: translate the following.

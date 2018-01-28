@@ -89,17 +89,18 @@ $i18n_key_words = array(
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'error.auth' => '不正確なログインあるいはパスワードが不正確です',
 'error.user_exists' => 'このログインと関連されたユーザーは既に存在します',
 'error.project_exists' => 'この名前のプロジェクトは既に存在します',
 // TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
+// 'error.invoice_exists' => 'Invoice with this number already exists.',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'error.no_login' => 'このログインと関連されたユーザーはいません',
 'error.upload' => 'ファイルのアップロードのエラー',
 // TODO: translate the following.

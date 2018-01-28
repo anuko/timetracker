@@ -87,16 +87,17 @@ $i18n_key_words = array(
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+// 'error.auth' => 'Incorrect login or password.',
+// 'error.user_exists' => 'User with this login already exists.',
+// 'error.project_exists' => 'Project with this name already exists.',
+// 'error.task_exists' => 'Task with this name already exists.',
+// 'error.client_exists' => 'Client with this name already exists.',
+// 'error.invoice_exists' => 'Invoice with this number already exists.',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-// 'error.auth' => 'incorrect login or password',
-// 'error.user_exists' => 'user with this login already exists',
-// 'error.project_exists' => 'project with this name already exists',
-// 'error.task_exists' => 'Task with this name already exists.',
-// 'error.client_exists' => 'Client with this name already exists.',
 // 'error.no_login' => 'no user with this e-mail',
 // 'error.upload' => 'file upload error',
 // 'error.range_locked' => 'Date range is locked.',
