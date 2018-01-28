@@ -54,7 +54,7 @@ class I18n {
 
   // TODO: refactoring ongoing down from here...
     function getWeekDayName($id) {
-      $id = intval($id);
+      $id = (int) $id;
       return $this->weekdayNames[$id];
     }
 

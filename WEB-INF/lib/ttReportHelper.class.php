@@ -1381,7 +1381,7 @@ class ttReportHelper {
     $items = ttReportHelper::getFavItems($report);
 
     $condition = str_replace('count', '', $condition);
-    $count_required = intval(trim(str_replace('>', '', $condition)));
+    $count_required = (int) trim(str_replace('>', '', $condition));
 
     if (count($items) > $count_required)
       return true; // Condition ok.

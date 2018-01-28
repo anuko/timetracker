@@ -61,7 +61,7 @@ $selectedYear = $request->getParameter('year');
 if (!$selectedYear or !ttValidInteger($selectedYear)){
   $selectedYear = date('Y');
 } else {
-  $selectedYear = intval($selectedYear);
+  $selectedYear = (int) $selectedYear;
 }
 
 // Months are zero indexed.
@@ -88,7 +88,7 @@ if ($request->isPost()){
     }
 
     // Handle monthly quotas for a selected year.
-    $selectedYear = intval($request->getParameter('year'));
+    $selectedYear = (int) $request->getParameter('year');
     for ($i = 0; $i < count($months); $i++){
       if (!$quota->update($selectedYear, $i+1, $request->getParameter($months[$i])))
         $err->add($i18n->getKey('error.db'));

@@ -798,7 +798,7 @@ class ttTeamHelper {
     $time_format_part = '';
     $week_start_part = '';
     $tracking_mode_part = '';
-    $task_required_part = ' , task_required = '.intval($fields['task_required']);
+    $task_required_part = ' , task_required = '.(int) $fields['task_required'];
     $record_type_part = '';
     $uncompleted_indicators_part = '';
     $bcc_email_part = '';
@@ -811,10 +811,10 @@ class ttTeamHelper {
     if (isset($fields['decimal_mark'])) $decimal_mark_part = ', decimal_mark = '.$mdb2->quote($fields['decimal_mark']);
     if (isset($fields['date_format'])) $date_format_part = ', date_format = '.$mdb2->quote($fields['date_format']);
     if (isset($fields['time_format'])) $time_format_part = ', time_format = '.$mdb2->quote($fields['time_format']);
-    if (isset($fields['week_start'])) $week_start_part = ', week_start = '.intval($fields['week_start']);
-    if (isset($fields['tracking_mode'])) $tracking_mode_part = ', tracking_mode = '.intval($fields['tracking_mode']);
-    if (isset($fields['record_type'])) $record_type_part = ', record_type = '.intval($fields['record_type']);
-    if (isset($fields['uncompleted_indicators'])) $uncompleted_indicators_part = ', uncompleted_indicators = '.intval($fields['uncompleted_indicators']);
+    if (isset($fields['week_start'])) $week_start_part = ', week_start = '.(int) $fields['week_start'];
+    if (isset($fields['tracking_mode'])) $tracking_mode_part = ', tracking_mode = '.(int) $fields['tracking_mode'];
+    if (isset($fields['record_type'])) $record_type_part = ', record_type = '.(int) $fields['record_type'];
+    if (isset($fields['uncompleted_indicators'])) $uncompleted_indicators_part = ', uncompleted_indicators = '.(int) $fields['uncompleted_indicators'];
     if (isset($fields['bcc_email'])) $bcc_email_part = ', bcc_email = '.$mdb2->quote($fields['bcc_email']);
     if (isset($fields['plugins'])) $plugins_part = ', plugins = '.$mdb2->quote($fields['plugins']);
     if (isset($fields['lock_spec'])) $lock_spec_part = ', lock_spec = '.$mdb2->quote($fields['lock_spec']);
