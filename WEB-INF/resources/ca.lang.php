@@ -76,13 +76,14 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
-
-// TODO: refactoring ongoing down from here.
 'error.db' => 'Error de la Base de Dades.',
 'error.field' => 'Dada "{0}" incorrecta.',
 'error.empty' => 'L\\\'Arxiu "{0}" està buit.',
 'error.not_equal' => 'L\\\'Arxiu "{0}" no és igual al arxiu "{1}".',
-'error.interval' => 'Interval incorrecte', // TODO: English string changed to 'Field "{0}" must be greater than "{1}".', re-translate.
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+
+// TODO: refactoring ongoing down from here.
 'error.project' => 'Selleccionar Projecte',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',

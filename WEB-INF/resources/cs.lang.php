@@ -77,13 +77,14 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
+'error.db' => 'Chyba databáze.',
+'error.field' => 'Nesprávná "{0}" data.',
+'error.empty' => 'Pole "{0}" je prázdné.',
+'error.not_equal' => 'Pole "{0}" neodpovídá poli "{1}".',
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
 
 // TODO: refactoring ongoing down from here.
-'error.db' => 'chyba databáze',
-'error.field' => 'nesprávná "{0}" data',
-'error.empty' => 'pole "{0}" je prázdné',
-'error.not_equal' => 'pole "{0}" neodpovídá poli "{1}"',
-'error.interval' => 'nevhodný interval',
 'error.project' => 'výběr projektu',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
