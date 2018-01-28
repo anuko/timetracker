@@ -64,8 +64,6 @@ $i18n_key_words = array(
 'menu.clients' => 'クライアント',
 'menu.options' => 'オプション',
 
-// TODO: refactoring ongoing down from here.
-
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
@@ -78,6 +76,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
+
+// TODO: refactoring ongoing down from here.
 'error.db' => 'データベースのエラー',
 'error.field' => '不正確な"{0}"データ',
 'error.empty' => '"{0}"のフィールドが空白です',

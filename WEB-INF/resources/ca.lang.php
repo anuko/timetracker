@@ -64,8 +64,6 @@ $i18n_key_words = array(
 // 'menu.clients' => 'Clients',
 // 'menu.options' => 'Options',
 
-// TODO: refactoring ongoing down from here.
-
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
@@ -78,6 +76,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
+
+// TODO: refactoring ongoing down from here.
 'error.db' => 'Error de la Base de Dades.',
 'error.field' => 'Dada "{0}" incorrecta.',
 'error.empty' => 'L\\\'Arxiu "{0}" està buit.',

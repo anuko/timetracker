@@ -64,8 +64,6 @@ $i18n_key_words = array(
 'menu.clients' => '클라이언트',
 'menu.options' => '옵션',
 
-// TODO: refactoring ongoing down from here.
-
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
@@ -78,6 +76,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
+
+// TODO: refactoring ongoing down from here.
 'error.db' => '데이터베이스 오류',
 'error.field' => '부정확한 "{0}" 의 데이터',
 'error.empty' => '"{0}" 의 필드가 비어있습니다',
