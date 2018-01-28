@@ -78,13 +78,14 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
+'error.db' => 'Adatbázis hiba.',
+'error.field' => 'Hibás "{0}" mező tartalma.',
+'error.empty' => 'A "{0}" mező üres.',
+'error.not_equal' => 'A "{0}" mező tartalma nem egyezik meg a "{1}" mező tartalmával.',
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
 
 // TODO: refactoring ongoing down from here.
-'error.db' => 'adatbázis hiba',
-'error.field' => 'hibás "{0}" mező tartalma',
-'error.empty' => 'a "{0}" mező üres',
-'error.not_equal' => 'A "{0}" mező tartalma nem egyezik meg a "{1}" mező tartalmával!',
-'error.interval' => 'hibás időszak megadás',
 'error.project' => 'válassz projektet',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',

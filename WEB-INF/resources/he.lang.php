@@ -70,6 +70,7 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
+// TODO: All error messages should be complete sentences with a period (full stop) in the end. Put them there.
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 'error.sys' => 'שגיאת מערכת',
@@ -82,6 +83,11 @@ $i18n_key_words = array(
 // TO TEST: change the string on a local Time Tracker and then try to enter a time with
 // end time less than start time. For example: Start time: 09:00, End time: 08:00.
 // Then you should see the error on screen and the problems will be clearly visible.
+// Currently the output is as:
+// השדדה סיום צריך להיות גדול יותר מהשדה התחלה
+// Compare the above with English, where the field names are surrounded with quotes,
+// and it is easier to identify which fields the error is about.
+// English variation: Field "Finish" must be greater than "Start".
 'error.project' => 'בחר פרוייקט',
 'error.task' => 'בחר משימה',
 'error.client' => 'בחר לקוח',

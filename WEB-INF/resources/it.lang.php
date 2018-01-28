@@ -75,13 +75,14 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
+// 'error.db' => 'Database error.',
+'error.field' => 'Dato "{0}" errato.',
+'error.empty' => 'Il campo "{0}" è vuoto.',
+'error.not_equal' => 'Il campo "{0}" non è uguale al campo "{1}".',
+// TODO: translate the following.
+// error.interval' => 'Field "{0}" must be greater than "{1}".',
 
 // TODO: refactoring ongoing down from here.
-// 'error.db' => 'database error',
-'error.field' => 'dato "{0}" errato',
-'error.empty' => 'il campo "{0}" è vuoto',
-'error.not_equal' => 'il campo "{0}" non è uguale al campo "{1}"',
-'error.interval' => 'intervallo errato',
 'error.project' => 'seleziona il progetto',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
