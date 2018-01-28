@@ -82,14 +82,14 @@ $i18n_key_words = array(
 'error.not_equal' => 'L\\\'Arxiu "{0}" no és igual al arxiu "{1}".',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-
-// TODO: refactoring ongoing down from here.
-'error.project' => 'Selleccionar Projecte',
+'error.project' => 'Selleccionar Projecte.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
-// 'error.report' => 'Select report.'
+// 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+
+// TODO: refactoring ongoing down from here.
 'error.auth' => 'Usuari o parula de pas incorrecta',
 // TODO: translate the following.
 // 'error.user_exists' => 'User with this login already exists.',

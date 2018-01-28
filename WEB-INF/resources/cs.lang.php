@@ -83,14 +83,14 @@ $i18n_key_words = array(
 'error.not_equal' => 'Pole "{0}" neodpovídá poli "{1}".',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-
-// TODO: refactoring ongoing down from here.
-'error.project' => 'výběr projektu',
+'error.project' => 'Výběr projektu.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+
+// TODO: refactoring ongoing down from here.
 'error.auth' => 'nesprávné jméno nebo heslo',
 // TODO: translate the following.
 // 'error.user_exists' => 'user with this login already exists',
