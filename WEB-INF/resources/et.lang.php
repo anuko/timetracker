@@ -90,8 +90,6 @@ $i18n_key_words = array(
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
-
-// TODO: refactoring ongoing down from here.
 'error.auth' => 'Vale login või salasõna.',
 // TODO: translate the following.
 // 'error.user_exists' => 'User with this login already exists.',
@@ -100,6 +98,11 @@ $i18n_key_words = array(
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 // 'error.no_login' => 'No user with this login.',
 // 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
