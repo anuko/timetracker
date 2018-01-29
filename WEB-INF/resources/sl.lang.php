@@ -123,21 +123,21 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => 'Dodaj',
+'button.generate' => 'Ustvari',
+// TODO: translate the following.
+// 'button.reset_password' => 'Reset password',
+'button.send' => 'Pošlji',
+'button.send_by_email' => 'Pošlji preko elektronske pošte',
+'button.create_team' => 'Ustvari tim',
+'button.export' => 'Izvozi tim',
+'button.import' => 'Uvozi tim',
+// TODO: translate the following.
+// 'button.close' => 'Close',
+// 'button.stop' => 'Stop',
 
 
 
 // TODO: refactoring ongoing down from here.
-
-'button.generate' => 'ustvari',
-// Note to translators: button.reset_password needs an improved translation.
-'button.reset_password' => 'pojdi',
-'button.send' => 'pošlji',
-'button.send_by_email' => 'pošlji preko elektronske pošte',
-'button.save_as_new' => 'shrani kot novo',
-'button.create_team' => 'ustvari tim',
-'button.export' => 'izvozi tim',
-'button.import' => 'uvozi tim',
-'button.apply' => 'uporabi',
 
 // labels for controls on various forms
 // TODO: translate label.team_name and the strings below.

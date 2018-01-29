@@ -117,22 +117,21 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => '添加',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'button.generate' => '创建',
 'button.reset_password' => '重置密码',
 'button.send' => '发送',
 'button.send_by_email' => '通过邮件发送',
-// TODO: improve translation of button.create_team (used to be "Create new team", now just "Create team").
-'button.create_team' => '创建新团队',
+// TODO: translate the following.
+// 'button.create_team' => 'Create team',
 'button.export' => '导出团队信息',
 'button.import' => '导入团队信息',
 // TODO: translate the following.
 // 'button.close' => 'Close',
 // 'button.stop' => 'Stop',
+
+
+
+// TODO: refactoring ongoing down from here.
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.team_name' => '团队名称',

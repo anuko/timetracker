@@ -124,22 +124,22 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => '添加',
+'button.generate' => '創建',
+// TODO: translate the following.
+// 'button.reset_password' => 'Reset password',
+'button.send' => '發送',
+'button.send_by_email' => '通過郵件發送',
+// TODO: translate the following.
+// 'button.create_team' => 'Create team',
+'button.export' => '輸出團隊資訊',
+'button.import' => '輸入團隊資訊',
+// TODO: translate the following.
+// 'button.close' => 'Close',
+// 'button.stop' => 'Stop',
 
 
 
 // TODO: refactoring ongoing down from here.
-
-'button.generate' => '創建',
-// Note to translators: button.reset_password needs to be translated.
-// 'button.reset_password' => 'reset password',
-'button.send' => '發送',
-'button.send_by_email' => '通過郵件發送',
-'button.save_as_new' => '另存為',
-// TODO: improve translation of button.create_team
-'button.create_team' => '創建新團隊',
-'button.export' => '輸出團隊資訊',
-'button.import' => '輸入團隊資訊',
-'button.apply' => '應用',
 
 // labels for controls on various forms
 // TODO: translate label.team_name

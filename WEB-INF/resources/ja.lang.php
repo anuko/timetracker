@@ -127,22 +127,22 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => '追加',
+'button.generate' => '生成',
+// TODO: translate the following.
+// 'button.reset_password' => 'Reset password',
+'button.send' => '送信',
+'button.send_by_email' => 'Eメールの送信',
+// TODO: translate the following.
+// 'button.create_team' => 'Create team',
+'button.export' => 'チームのエクスポート',
+'button.import' => 'チームのインポート',
+// TODO: translate the following.
+// 'button.close' => 'Close',
+// 'button.stop' => 'Stop',
 
 
 
 // TODO: refactoring ongoing down from here.
-
-'button.generate' => '生成',
-// Note to translators: button.reset_password needs an improved translation.
-'button.reset_password' => '進む',
-'button.send' => '送信',
-'button.send_by_email' => 'Eメールの送信',
-'button.save_as_new' => '名前を付けて保存',
-// TODO: improve translation of button.create_team
-'button.create_team' => '新規チームの作成',
-'button.export' => 'チームのエクスポート',
-'button.import' => 'チームのインポート',
-'button.apply' => '適用',
 
 // labels for controls on various forms
 // TODO: translate label.team_name

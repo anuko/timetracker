@@ -122,22 +122,21 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => 'Adicionar',
+// TODO: translate the following.
+// 'button.generate' => 'Generate',
+// 'button.reset_password' => 'Reset password',
+'button.send' => 'Enviar',
+'button.send_by_email' => 'Enviar por e-mail',
+// TODO: translate the following.
+// 'button.create_team' => 'Create team',
+// 'button.export' => 'Export team',
+// 'button.import' => 'Import team',
+// 'button.close' => 'Close',
+// 'button.stop' => 'Stop',
 
 
 
 // TODO: refactoring ongoing down from here.
-
-// Note to translators: strings below need to be translated.
-// 'button.generate' => 'generate',
-// 'button.reset_password' => 'reset password',
-'button.send' => 'enviar',
-'button.send_by_email' => 'enviar por e-mail',
-// Note to translators: the strings below are missing and must be added and translated
-// 'button.save_as_new' => 'save as new',
-// 'button.create_team' => 'create team',
-// 'button.export' => 'export team',
-// 'button.import' => 'import team',
-// 'button.apply' => 'apply',
 
 // labels for controls on various forms
 // TODO: translate label.team_name and strings below.

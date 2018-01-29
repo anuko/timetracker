@@ -133,22 +133,22 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => 'Ekle',
+'button.generate' => 'Yarat',
+// TODO: translate the following.
+// 'button.reset_password' => 'Reset password',
+'button.send' => 'Gönder',
+'button.send_by_email' => 'E-posta ile gönder',
+'button.create_team' => 'Ekip yarat',
+// TODO: translate the following.
+// 'button.export' => 'Export team',
+'button.import' => 'Ekibi içeri aktar',
+// TODO: translate the following.
+// 'button.close' => 'Close',
+// 'button.stop' => 'Stop',
 
 
 
 // TODO: refactoring ongoing down from here.
-
-'button.generate' => 'yarat',
-// Note to translators: button.reset_password needs an improved translation.
-'button.reset_password' => 'git',
-'button.send' => 'gönder',
-'button.send_by_email' => 'e-posta ile gönder',
-'button.save_as_new' => 'yeni olarak kaydet',
-'button.create_team' => 'ekip yarat',
-// TODO: improve translation of button.export
-// 'button.export' => 'ekibi dılarıya aktar',
-'button.import' => 'ekibi içeri aktar',
-'button.apply' => 'uygula',
 
 // labels for controls on various forms
 // TODO: translate label.team_name
