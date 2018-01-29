@@ -95,16 +95,19 @@ $i18n_key_words = array(
 'error.client_exists' => 'En klient med dette navnet er allerede opprettet.',
 // TODO: translate the following.
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
+// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
+'error.no_login' => 'Det er ingen bruker med dette brukernavnet.',
+// TODO: translate the following.
+// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.upload' => 'Feil med lasting av fil.',
+// TODO: translate the following.
+// 'error.range_locked' => 'Date range is locked.',
+'error.mail_send' => 'Feil ved sending av e-post.',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'error.no_login' => 'Det er ingen bruker med dette brukernavnet.',
-'error.upload' => 'Feil med lasting av fil.',
-// TODO: translate the following.
-// 'error.range_locked' => 'Date range is locked.',
-'error.mail_send' => 'Feil ved sending av e-post.',
 'error.no_email' => 'Det er ingen e-post knyttet til dette brukernavnet.',
 'error.uncompleted_exists' => 'Ufullført registrering finnes allerede. Lukk eller slett den.',
 'error.goto_uncompleted' => 'Gå til ufullført registrering.',

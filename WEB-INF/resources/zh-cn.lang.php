@@ -88,11 +88,6 @@ $i18n_key_words = array(
 'error.client_exists' => '具有此名称的客户端已经存在',
 // TODO: translate the following.
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 'error.no_login' => '没有该登录信息的用户',
 // TODO: translate the following.
@@ -100,6 +95,11 @@ $i18n_key_words = array(
 'error.upload' => '上传文件出错',
 'error.range_locked' => '日期范围锁定',
 'error.mail_send' => '发送邮件时出错',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'error.no_email' => '没有电子邮件与该用户名关联。',
 'error.uncompleted_exists' => '未完成的条目已经存在。关闭或删除。',
 'error.goto_uncompleted' => '进入未完成的条目。',
