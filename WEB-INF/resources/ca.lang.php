@@ -109,10 +109,6 @@ $i18n_key_words = array(
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
 
-
-
-// TODO: refactoring ongoing down from here.
-
 // Labels for buttons.
 'button.login' => 'Iniciar sessió',
 'button.now' => 'Ara',
@@ -120,6 +116,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Cancel·lar',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'button.submit' => 'Enviar',
 'button.add_user' => 'Agregar usuari ',
 'button.add_project' => 'Agregar projecte',
