@@ -86,17 +86,18 @@ $i18n_key_words = array(
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'error.auth' => '不正確的用戶名或密碼',
 'error.user_exists' => '該使用者登錄資訊已經存在',
 'error.project_exists' => '該專案名稱已經存在',
 // TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
+// 'error.invoice_exists' => 'Invoice with this number already exists.',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'error.no_login' => '沒有該登錄資訊的使用者',
 'error.upload' => '上傳文件出錯',
 // TODO: translate the following.

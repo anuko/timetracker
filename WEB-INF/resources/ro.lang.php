@@ -92,18 +92,19 @@ $i18n_key_words = array(
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+'error.auth' => 'Nume de utilizator sau parola incorecta.',
+// TODO: translate the following.
+// 'error.user_exists' => 'User with this login already exists.',
+'error.project_exists' => 'Proiectul cu acest nume exista deja.',
+// TODO: translate the following.
+// 'error.task_exists' => 'Task with this name already exists.',
+// 'error.client_exists' => 'Client with this name already exists.',
+// 'error.invoice_exists' => 'Invoice with this number already exists.',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'error.auth' => 'nume de utilizator sau parola incorecta',
-// Note to translators: this string needs to be translated.
-// 'error.user_exists' => 'user with this login already exists',
-'error.project_exists' => 'proiectul cu acest nume exista deja',
-// TODO: translate the following.
-// 'error.task_exists' => 'Task with this name already exists.',
-// 'error.client_exists' => 'Client with this name already exists.',
 // Note to translators: this string needs to be properly translated (e-mail replaced with login).
 // 'error.no_login' => 'nu exista utilizator cu acest email',
 'error.upload' => 'eroare la upload-ul fisierului',

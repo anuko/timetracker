@@ -95,18 +95,19 @@ $i18n_key_words = array(
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
+'error.auth' => 'Hatalı kullanıcı adı veya parola.',
+// TODO: translate the following.
+// 'error.user_exists' => 'User with this login already exists.',
+'error.project_exists' => 'Bu isimde proje zaten vardır.',
+// TODO: translate the following.
+// 'error.task_exists' => 'Task with this name already exists.',
+// 'error.client_exists' => 'Client with this name already exists.',
+// 'error.invoice_exists' => 'Invoice with this number already exists.',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'error.auth' => 'hatalı kullanıcı adı veya parola',
-// Note to translators: this string needs to be translated.
-// 'error.user_exists' => 'user with this login already exists',
-'error.project_exists' => 'bu isimde proje zaten vardır',
-// TODO: translate the following.
-// 'error.task_exists' => 'Task with this name already exists.',
-// 'error.client_exists' => 'Client with this name already exists.',
 // Note to translators: this string needs to be properly translated (e-mail replaced with login).
 // 'error.no_login' => 'bu e-posta adresini kullanan kullanıcı yoktur',
 'error.upload' => 'dosya yükleme hatası',
