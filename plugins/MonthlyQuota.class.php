@@ -47,7 +47,7 @@ class MonthlyQuota {
     $deleteSql = "DELETE FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $team_id";
     $this->db->exec($deleteSql);
     if ($quota){
-      $float_quota = ttTimeHelper::quotaToFloat($quota);
+      $float_quota = $this->quotaToFloat($quota);
       $insertSql = "INSERT INTO tt_monthly_quotas (team_id, year, month, quota) values ($team_id, $year, $month, $float_quota)";
       $affected = $this->db->exec($insertSql);
       return (!is_a($affected, 'PEAR_Error'));
@@ -114,5 +114,52 @@ class MonthlyQuota {
       }
     }
     return $workdaysInMonth;
+  }
+
+  // isValidQuota validates a localized value as an hours quota string (in hours and minutes).
+  public function isValidQuota($value) {
+
+    if (strlen($value) == 0 || !isset($value)) return true;
+
+    if (preg_match('/^[0-9]{1,3}h?$/', $value )) { // 000 - 999
+      return true;
+    }
+
+    if (preg_match('/^[0-9]{1,3}:[0-5][0-9]$/', $value )) { // 000:00 - 999:59
+      return true;
+    }
+
+    global $user;
+    $localizedPattern = '/^([0-9]{1,3})?['.$user->decimal_mark.'][0-9]{1,4}h?$/';
+    if (preg_match($localizedPattern, $value )) { // decimal values like 000.5, 999.25h, ... .. 999.9999h (or with comma)
+      return true;
+    }
+
+    return false;
+  }
+
+  // quotaToFloat converts a valid quota value to a float.
+  private function quotaToFloat($value) {
+
+    if (preg_match('/^[0-9]{1,3}h?$/', $value )) { // 000 - 999
+      return (float) $value;
+    }
+
+    if (preg_match('/^[0-9]{1,3}:[0-5][0-9]$/', $value )) { // 000:00 - 999:59
+      $minutes = ttTimeHelper::toMinutes($value);
+      return ($minutes / 60.0);
+    }
+
+    global $user;
+    $localizedPattern = '/^([0-9]{1,3})?['.$user->decimal_mark.'][0-9]{1,4}h?$/';
+    if (preg_match($localizedPattern, $value )) { // decimal values like 000.5, 999.25h, ... .. 999.9999h (or with comma)
+      // Strip optional h in the end.
+      $value = trim($value, 'h');
+      if ($user->decimal_mark == ',')
+        $value = str_replace(',', '.', $value);
+      return (float) $value;
+    }
+
+    return null;
   }
 }

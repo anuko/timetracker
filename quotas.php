@@ -73,7 +73,7 @@ if ($request->isPost()){
   // Validate user input.
   for ($i = 0; $i < count($months); $i++){
     $val = $request->getParameter($months[$i]);
-    if (!ttTimeHelper::isValidQuota($val))
+    if (!$quota->isValidQuota($val))
       $err->add($i18n->getKey('error.field'), $months[$i]);
   }
   // Finished validating user input.
