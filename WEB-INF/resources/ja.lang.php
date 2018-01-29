@@ -104,18 +104,16 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'メールの送信中のエラー',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// Note to translators: check the meaning of error.no_email. The error should say that there is no email address for user with a login provided.
-'error.no_email' => 'このログインと関連されたメールがありません',
 // TODO: translate the following.
+// 'error.no_email' => 'No email associated with this login.',
 // 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
 // 'error.goto_uncompleted' => 'Go to uncompleted entry.',
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
+
+
+
+// TODO: refactoring ongoing down from here.
 
 // Labels for buttons.
 'button.login' => 'ログイン',

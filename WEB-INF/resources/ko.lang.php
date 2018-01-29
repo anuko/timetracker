@@ -104,15 +104,16 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => '메일 보내기에서의 오류',
+'error.no_email' => '본 로그인과 연계된 이메일이 없습니다',
+// TODO: translate the following.
+// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
+// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
+// 'error.overlap' => 'Time interval overlaps with existing records.',
+// 'error.future_date' => 'Date is in future.',
 
 
 
 // TODO: refactoring ongoing down from here.
-
-'error.no_email' => '본 로그인과 연계된 이메일이 없습니다',
-// Note to translators: the strings below need to be translated.
-// 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
-// 'error.goto_uncompleted' => 'go to uncompleted entry.',
 
 // Labels for buttons.
 'button.login' => '로그인',
