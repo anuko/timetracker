@@ -101,9 +101,6 @@ $i18n_key_words = array(
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
 
-
-// TODO: refactoring ongoing down from here.
-
 // Labels for buttons.
 'button.login' => '登录',
 'button.now' => '当前时间',
@@ -111,8 +108,13 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => '取消',
-'button.submit' => '提交',
 
+
+
+// TODO: refactoring ongoing down from here.
+
+// Labels for buttons.
+'button.submit' => '提交',
 
 // TODO: check / improve translation of all button.add... strings.
 // Concern is that it used to be "add new something", now just "add something".

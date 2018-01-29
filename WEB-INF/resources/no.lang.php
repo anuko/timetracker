@@ -110,15 +110,18 @@ $i18n_key_words = array(
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
 
-
-
-// TODO: refactoring ongoing down from here.
-
 // Labels for buttons.
 'button.login' => 'Innlogging',
 'button.now' => 'Nå',
 'button.save' => 'Lagre',
+// TODO: translate the following.
+// 'button.copy' => 'Copy',
 'button.cancel' => 'Avbryt',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // TODO: check translation of button.submit. It is used on several pages, including https://timetracker.anuko.com/time.php.
 // 'button.submit' => 'Registrer',
 'button.add_user' => 'Legg til bruker',

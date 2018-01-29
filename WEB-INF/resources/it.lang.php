@@ -107,16 +107,18 @@ $i18n_key_words = array(
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
 
+// Labels for buttons.
+'button.login' => 'Login',
+'button.now' => 'Adesso',
+'button.save' => 'Salva',
+// TODO: translate the following.
+// 'button.copy' => 'Copy',
+'button.cancel' => 'Cancella',
+
 
 
 // TODO: refactoring ongoing down from here.
 
-// Labels for buttons.
-'button.login' => 'login',
-'button.now' => 'adesso',
-'button.save' => 'salva',
-'button.delete' => 'elimina',
-'button.cancel' => 'cancella',
 'button.submit' => 'invia',
 'button.add_user' => 'Aggiungi utente',
 'button.add_project' => 'Aggiungi progetto',
@@ -161,6 +163,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.yes' => 'yes',
 // 'label.no' => 'no',
+'label.delete' => 'Elimina',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

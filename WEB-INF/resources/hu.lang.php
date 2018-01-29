@@ -110,16 +110,19 @@ $i18n_key_words = array(
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
 
+// Labels for buttons.
+'button.login' => 'Bejelentkezés',
+'button.now' => 'Most',
+'button.save' => 'Mentés',
+// TODO: translate the following.
+// 'button.copy' => 'Copy',
+'button.cancel' => 'Vissza',
+
 
 
 // TODO: refactoring ongoing down from here.
 
 // Labels for buttons.
-'button.login' => 'bejelentkezés',
-'button.now' => 'most',
-'button.save' => 'mentés',
-'button.delete' => 'törlés',
-'button.cancel' => 'vissza',
 'button.submit' => 'mentés',
 'button.add_user' => 'Felhasználó felvétele',
 'button.add_project' => 'Projekt felvétele',
@@ -164,6 +167,7 @@ $i18n_key_words = array(
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',
 // 'label.no' => 'no',
+'label.delete' => 'Törlés',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

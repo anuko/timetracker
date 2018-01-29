@@ -111,16 +111,18 @@ $i18n_key_words = array(
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
 
-
-
-// TODO: refactoring ongoing down from here.
-
 // Labels for buttons.
 'button.login' => '로그인',
 'button.now' => '지금',
 'button.save' => '저장',
-'button.delete' => '삭제',
+// TODO: translate the following.
+// 'button.copy' => 'Copy',
 'button.cancel' => '취소',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'button.submit' => '발송',
 // TODO: improve translation of all button.add strings.
 'button.add_user' => '신규 사용자 추가',
@@ -164,6 +166,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.yes' => 'yes',
 // 'label.no' => 'no',
+'label.delete' => '삭제',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.
