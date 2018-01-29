@@ -115,18 +115,20 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => '取消',
+'button.submit' => '提交',
+// TODO: translate the following.
+// 'button.add_user' => 'Add user',
+// 'button.add_project' => 'Add project',
+// 'button.add_task' => 'Add task',
+// 'button.add_client' => 'Add client',
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
+'button.add' => '添加',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'button.submit' => '提交',
-// TODO: check / improve translation of all button.add... strings.
-'button.add_user' => '添加新用戶',
-'button.add_project' => '添加新項目',
-'button.add_activity' => '添加新活動',
-'button.add_client' => '添加新客戶',
-'button.add' => '添加',
 'button.generate' => '創建',
 // Note to translators: button.reset_password needs to be translated.
 // 'button.reset_password' => 'reset password',

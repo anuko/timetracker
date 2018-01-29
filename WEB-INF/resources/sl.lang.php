@@ -113,17 +113,21 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Prekliči',
+'button.submit' => 'Potrdi',
+'button.add_user' => 'Dodaj uporabnika',
+'button.add_project' => 'Dodaj projekt',
+// TODO: translate the following.
+// 'button.add_task' => 'Add task',
+'button.add_client' => 'Dodaj stranko',
+// TODO: translate the following.
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
+'button.add' => 'Dodaj',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'button.submit' => 'potrdi',
-'button.add_user' => 'dodaj uporabnika',
-'button.add_project' => 'dodaj projekt',
-'button.add_activity' => 'dodaj aktivnost',
-'button.add_client' => 'dodaj stranko',
-'button.add' => 'dodaj',
 'button.generate' => 'ustvari',
 // Note to translators: button.reset_password needs an improved translation.
 'button.reset_password' => 'pojdi',

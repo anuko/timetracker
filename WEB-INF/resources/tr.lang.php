@@ -123,17 +123,21 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Iptal',
+'button.submit' => 'Gönder',
+'button.add_user' => 'Kullanıcı ekle',
+'button.add_project' => 'Proje ekle',
+// TODO: translate the following.
+// 'button.add_task' => 'Add task',
+'button.add_client' => 'Müşteri ekle',
+// TODO: translate the following.
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
+'button.add' => 'Ekle',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'button.submit' => 'gönder',
-'button.add_user' => 'kullanıcı ekle',
-'button.add_project' => 'proje ekle',
-'button.add_activity' => 'faaliyet ekle',
-'button.add_client' => 'müşteri ekle',
-'button.add' => 'ekle',
 'button.generate' => 'yarat',
 // Note to translators: button.reset_password needs an improved translation.
 'button.reset_password' => 'git',

@@ -112,11 +112,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Cancelar',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'button.submit' => 'Submeter',
 // TODO: translate the following.
 // 'button.add_user' => 'Add user',
@@ -127,6 +122,11 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => 'Adicionar',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // Note to translators: strings below need to be translated.
 // 'button.generate' => 'generate',
 // 'button.reset_password' => 'reset password',

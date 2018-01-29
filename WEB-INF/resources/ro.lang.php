@@ -120,17 +120,21 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Renunta',
+'button.submit' => 'Trimite',
+'button.add_user' => 'Adauga utilizator',
+'button.add_project' => 'Adauga proiect',
+// TODO: translate the following.
+// 'button.add_task' => 'Add task',
+'button.add_client' => 'Adauga client',
+// TODO: translate the following.
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
+'button.add' => 'Adauga',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'button.submit' => 'trimite',
-'button.add_user' => 'adauga utilizator',
-'button.add_project' => 'adauga proiect',
-'button.add_activity' => 'adauga activitate',
-'button.add_client' => 'adauga client',
-'button.add' => 'adauga',
 'button.generate' => 'genereaza',
 // Note to translators: button.reset_password needs an improved translation.
 // 'button.reset_password' => 'reset password',

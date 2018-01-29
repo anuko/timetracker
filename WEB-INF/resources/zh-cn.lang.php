@@ -108,25 +108,20 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => '取消',
+'button.submit' => '提交',
+// TODO: translate the following.
+// 'button.add_user' => 'Add user',
+// 'button.add_project' => 'Add project',
+// 'button.add_task' => 'Add task',
+// 'button.add_client' => 'Add client',
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
+'button.add' => '添加',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-// Labels for buttons.
-'button.submit' => '提交',
-
-// TODO: check / improve translation of all button.add... strings.
-// Concern is that it used to be "add new something", now just "add something".
-'button.add_user' => '添加新用户',
-'button.add_project' => '添加新项目',
-// TODO: translate the following.
-// 'button.add_task' => 'Add task',
-'button.add_client' => '添加新客户',
-// TODO: translate the following.
-// 'button.add_invoice' => 'Add invoice',
-// 'button.add_option' => 'Add option',
-'button.add' => '添加',
 'button.generate' => '创建',
 'button.reset_password' => '重置密码',
 'button.send' => '发送',
