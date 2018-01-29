@@ -118,11 +118,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Tühista',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'button.submit' => 'Postita',
 'button.add_user' => 'Lisa kasutaja',
 'button.add_project' => 'Lisa projekt',
@@ -133,6 +128,11 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => 'Lisa',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'button.generate' => 'Loo',
 // TODO: translate the following.
 // 'button.reset_password' => 'Reset password',

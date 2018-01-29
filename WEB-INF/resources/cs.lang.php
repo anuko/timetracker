@@ -117,20 +117,21 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Zrušit',
-
-
-
-// TODO: refactoring ongoing down from here.
-'button.submit' => 'uložit',
+'button.submit' => 'Uložit',
 'button.add_user' => 'Přidat uživatele',
 'button.add_project' => 'Přidat projekt',
 // TODO: translate the following.
 // 'button.add_task' => 'Add task',
 'button.add_client' => 'Přidat zákazníka',
-// TODOL translate the following.
+// TODO: translate the following.
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => 'Přidat',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'button.generate' => 'Vytvořit',
 // Note to translators: button.reset_password needs an improved translation.
 'button.reset_password' => 'přejít',
