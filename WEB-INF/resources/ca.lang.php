@@ -138,10 +138,6 @@ $i18n_key_words = array(
 // 'button.close' => 'Close',
 // 'button.stop' => 'Stop',
 
-
-
-// TODO: refactoring ongoing down from here.
-
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 // TODO: translate the following.
 // 'label.team_name' => 'Team name',
@@ -150,6 +146,12 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
+
+
+
+// TODO: refactoring ongoing down from here.
+
+// TODO: translate the following.
 // 'label.person_name' => 'Name',
 // 'label.thing_name' => 'Name',
 // 'label.login' => 'Login',
