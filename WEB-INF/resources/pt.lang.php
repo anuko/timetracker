@@ -99,14 +99,15 @@ $i18n_key_words = array(
 // 'error.upload' => 'File upload error.',
 // 'error.range_locked' => 'Date range is locked.',
 // 'error.mail_send' => 'Error sending mail.',
+// 'error.no_email' => 'No email associated with this login.',
+// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
+// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
+// 'error.overlap' => 'Time interval overlaps with existing records.',
+// 'error.future_date' => 'Date is in future.',
 
 
 
 // TODO: refactoring ongoing down from here.
-
-// 'error.no_email' => 'no email associated with this login',
-// 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
-// 'error.goto_uncompleted' => 'go to uncompleted entry.',
 
 // Labels for buttons.
 'button.login' => 'Login',

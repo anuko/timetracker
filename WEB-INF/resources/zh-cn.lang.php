@@ -60,19 +60,18 @@ $i18n_key_words = array(
 'menu.options' => '选项',
 
 // Footer - strings on the bottom of most pages.
-'footer.contribute_msg' => '你可以以不同的方式为Time Tracker提建议',
+'footer.contribute_msg' => '你可以以不同的方式为Time Tracker提建议。',
 'footer.credits' => '信用',
 'footer.license' => '许可证',
 'footer.improve' => '投稿',
 
 // Error messages.
-// TODO: All error messages should be complete sentences with a period (full stop) in the end. Put them there.
-'error.access_denied' => '拒绝访问',
-'error.sys' => '系统错误',
-'error.db' => '数据库错误',
-'error.field' => '不正确的"{0}"数据',
-'error.empty' => '栏目"{0}"为空',
-'error.not_equal' => '栏目"{0}"不等于栏目"{1}"',
+'error.access_denied' => '拒绝访问。',
+'error.sys' => '系统错误。',
+'error.db' => '数据库错误。',
+'error.field' => '不正确的"{0}"数据。',
+'error.empty' => '栏目"{0}"为空。',
+'error.not_equal' => '栏目"{0}"不等于栏目"{1}"。',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
 // 'error.project' => 'Select project.',
@@ -80,32 +79,30 @@ $i18n_key_words = array(
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
-'error.auth' => '不正确的用户名或密码',
-'error.user_exists' => '该用户登录信息已经存在',
-'error.project_exists' => '该项目名称已经存在',
+'error.auth' => '不正确的用户名或密码。',
+'error.user_exists' => '该用户登录信息已经存在。',
+'error.project_exists' => '该项目名称已经存在。',
 // TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',
-'error.client_exists' => '具有此名称的客户端已经存在',
+'error.client_exists' => '具有此名称的客户端已经存在。',
 // TODO: translate the following.
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
-'error.no_login' => '没有该登录信息的用户',
+'error.no_login' => '没有该登录信息的用户。',
 // TODO: translate the following.
 // 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
-'error.upload' => '上传文件出错',
-'error.range_locked' => '日期范围锁定',
-'error.mail_send' => '发送邮件时出错',
-
-
-
-// TODO: refactoring ongoing down from here.
-
+'error.upload' => '上传文件出错。',
+'error.range_locked' => '日期范围锁定。',
+'error.mail_send' => '发送邮件时出错。',
 'error.no_email' => '没有电子邮件与该用户名关联。',
 'error.uncompleted_exists' => '未完成的条目已经存在。关闭或删除。',
 'error.goto_uncompleted' => '进入未完成的条目。',
 // TODO: translate the following.
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
+
+
+// TODO: refactoring ongoing down from here.
 
 // Labels for buttons.
 'button.login' => '登录',

@@ -101,17 +101,16 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => '發送郵件時出錯',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'error.no_email' => '沒有電子郵件與該用戶名關聯',
 // TODO: translate the following.
 // 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
 // 'error.goto_uncompleted' => 'Go to uncompleted entry.',
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
+
+
+
+// TODO: refactoring ongoing down from here.
 
 // Labels for buttons.
 'button.login' => '登錄',
