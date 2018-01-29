@@ -31,7 +31,7 @@ CREATE TABLE `tt_teams` (
   `plugins` varchar(255) default NULL,                       # a list of enabled plugins for team
   `lock_spec` varchar(255) default NULL,                     # Cron specification for record locking,
                                                              # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
-  `workday_hours` smallint(6) DEFAULT '8',                   # number of work hours in a regular day
+  `workday_hours` decimal(5,2) DEFAULT '8.00',               # number of work hours in a regular day
   `custom_logo` tinyint(4) default '0',                      # whether to use a custom logo or not
   `status` tinyint(4) default '1',                           # team status
   PRIMARY KEY (`id`)

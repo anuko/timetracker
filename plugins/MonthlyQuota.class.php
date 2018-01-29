@@ -139,7 +139,7 @@ class MonthlyQuota {
   }
 
   // quotaToFloat converts a valid quota value to a float.
-  private function quotaToFloat($value) {
+  public function quotaToFloat($value) {
 
     if (preg_match('/^[0-9]{1,3}h?$/', $value )) { // 000 - 999
       return (float) $value;

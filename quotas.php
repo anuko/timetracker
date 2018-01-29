@@ -71,6 +71,9 @@ $quota = new MonthlyQuota();
 
 if ($request->isPost()){
   // Validate user input.
+  if (!ttTimeHelper::isValidDuration($request->getParameter('workdayHours')))
+    $err->add($i18n->getKey('error.field'), $i18n->getKey('form.quota.workday_hours'));
+
   for ($i = 0; $i < count($months); $i++){
     $val = $request->getParameter($months[$i]);
     if (!$quota->isValidQuota($val))
@@ -81,7 +84,7 @@ if ($request->isPost()){
   if ($err->no()) {
 
     // Handle workday hours.
-    $hours = (int)$request->getParameter('workdayHours');
+    $hours = $quota->quotaToFloat($request->getParameter('workdayHours'));
     if ($hours != $user->workday_hours) {
       if (!ttTeamHelper::update($user->team_id, array('name'=>$user->team,'workday_hours'=>$hours)))
         $err->add($i18n->getKey('error.db'));
@@ -104,9 +107,10 @@ if ($request->isPost()){
 
 // Get monthly quotas for the entire year.
 $monthsData = $quota->get($selectedYear);
+$workdayHours = ttTimeHelper::toAbsDuration($user->workday_hours * 60, true);
 
 $form = new Form('monthlyQuotasForm');
-$form->addInput(array('type'=>'text', 'name'=>'workdayHours', 'value'=>$user->workday_hours, 'style'=>'width:50px'));
+$form->addInput(array('type'=>'text', 'name'=>'workdayHours', 'value'=>$workdayHours, 'style'=>'width:60px'));
 $form->addInput(array('type'=>'combobox','name'=>'year','data'=>$years,'datakeys'=>array('id','name'),'value'=>$selectedYear,'onchange'=>'yearChange(this.value);'));
 for ($i=0; $i < count($months); $i++) { 
   $value = "";
