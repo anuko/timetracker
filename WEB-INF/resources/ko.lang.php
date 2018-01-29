@@ -118,22 +118,19 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => '취소',
-
+'button.submit' => '발송',
+// TODO: translate the following.
+// 'button.add_user' => 'Add user',
+// 'button.add_project' => 'Add project',
+// 'button.add_task' => 'Add task',
+// 'button.add_client' => 'Add client',
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
+'button.add' => '추가',
 
 
 // TODO: refactoring ongoing down from here.
 
-'button.submit' => '발송',
-// TODO: improve translation of all button.add strings.
-'button.add_user' => '신규 사용자 추가',
-'button.add_project' => '신규 프로젝트 추가',
-// TODO: translate the following.
-// 'button.add_task' => 'Add task',
-'button.add_client' => '신규 클라이언트 추가',
-// TODO: translate the following.
-// 'button.add_invoice' => 'Add invoice',
-// 'button.add_option' => 'Add option',
-'button.add' => '추가',
 'button.generate' => '생성',
 // Note to translators: button.reset_password needs an improved translation.
 'button.reset_password' => '실행',

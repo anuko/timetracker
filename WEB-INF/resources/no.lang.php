@@ -117,13 +117,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Avbryt',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// TODO: check translation of button.submit. It is used on several pages, including https://timetracker.anuko.com/time.php.
-// 'button.submit' => 'Registrer',
+// TODO: translate the following.
+// 'button.submit' => 'Submit',
 'button.add_user' => 'Legg til bruker',
 'button.add_project' => 'Legg til prosjekt',
 // TODO: translate the following.
@@ -133,6 +128,11 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => 'Legg til',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'button.generate' => 'Generer',
 'button.reset_password' => 'Resett passord',
 'button.send' => 'Send',

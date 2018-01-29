@@ -117,22 +117,21 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Vissza',
+'button.submit' => 'Mentés',
+'button.add_user' => 'Felhasználó felvétele',
+'button.add_project' => 'Projekt felvétele',
+// TODO: translate the following.
+// 'button.add_task' => 'Add task',
+'button.add_client' => 'Ügyfél hozzáadása',
+// TODO: translate the following.
+// 'button.add_invoice' => 'Add invoice',
+// 'button.add_option' => 'Add option',
+'button.add' => 'Hozzáadás',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-// Labels for buttons.
-'button.submit' => 'mentés',
-'button.add_user' => 'Felhasználó felvétele',
-'button.add_project' => 'Projekt felvétele',
-// TODO: translate the following.
-// 'button.add_task' => 'Add task',
-'button.add_client' => 'ügyfél hozzáadása', // TODO: capitalize properly.
-// TODO: translate the following.
-// 'button.add_invoice' => 'Add invoice',
-// 'button.add_option' => 'Add option',
-'button.add' => 'Hozzáadás',
 'button.generate' => 'Generálás',
 // Note to translators: button.reset_password needs an improved translation.
 'button.reset_password' => 'mehet',
