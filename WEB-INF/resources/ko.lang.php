@@ -127,20 +127,22 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => '추가',
+'button.generate' => '생성',
+// TODO: translate the following.
+// 'button.reset_password' => 'Reset password',
+'button.send' => '송신',
+'button.send_by_email' => '이메일로 송신',
+// TODO: translate the following.
+// 'button.create_team' => 'Create team',
+'button.export' => '팀 익스포트',
+'button.import' => '팀 임포트',
+// TODO: translate the following.
+// 'button.close' => 'Close',
+// 'button.stop' => 'Stop',
+
 
 
 // TODO: refactoring ongoing down from here.
-
-'button.generate' => '생성',
-// Note to translators: button.reset_password needs an improved translation.
-'button.reset_password' => '실행',
-'button.send' => '송신',
-'button.send_by_email' => '이메일로 송신',
-'button.save_as_new' => '새것으로 저장',
-'button.create_team' => '신규 팀 작성',
-'button.export' => '팀 익스포트',
-'button.import' => '팀 임포트',
-'button.apply' => '적용',
 
 // labels for controls on various forms
 // TODO: translate label.team_name
