@@ -127,21 +127,21 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => 'Hozzáadás',
+'button.generate' => 'Generálás',
+// TODO: translate the following.
+// 'button.reset_password' => 'Reset password',
+'button.send' => 'Küld',
+'button.send_by_email' => 'Küldés e-mail-ben',
+'button.create_team' => 'Csoport létrehozása',
+'button.export' => 'Csoport exportálása',
+'button.import' => 'Csoport importálása',
+// TODO: translate the following.
+// 'button.close' => 'Close',
+// 'button.stop' => 'Stop',
 
 
 
 // TODO: refactoring ongoing down from here.
-
-'button.generate' => 'Generálás',
-// Note to translators: button.reset_password needs an improved translation.
-'button.reset_password' => 'mehet',
-'button.send' => 'küld',
-'button.send_by_email' => 'küldés e-mail-ben',
-'button.save_as_new' => 'mentés újként',
-'button.create_team' => 'csoport létrehozása',
-'button.export' => 'csoportok exportálása',
-'button.import' => 'csoportok importálása',
-'button.apply' => 'alkalmaz',
 
 // labels for controls on various forms
 // TODO: translate label.team_name

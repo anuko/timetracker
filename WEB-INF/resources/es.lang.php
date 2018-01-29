@@ -125,23 +125,21 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => 'Agregar',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'button.generate' => 'Generar',
-// Note to translators: button.reset_password needs an improved translation.
-'button.reset_password' => 'Ir',
+// TODO: translate the following.
+// 'button.reset_password' => 'Reset password',
 'button.send' => 'Enviar',
 'button.send_by_email' => 'Enviar por correo',
 'button.create_team' => 'Crear grupo',
 'button.export' => 'Exportar grupo',
 'button.import' => 'Importar grupo',
-// TODO: translate button.close.
-// 'button.close' => 'Close',
 // TODO: translate the following.
+// 'button.close' => 'Close',
 // 'button.stop' => 'Stop',
+
+
+
+// TODO: refactoring ongoing down from here.
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 // TODO: translate label.team_name

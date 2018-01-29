@@ -126,11 +126,6 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => 'Agregar',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'button.generate' => 'Generar',
 // TODO: translate the following.
 // 'button.reset_password' => 'Reset password',
@@ -142,6 +137,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.close' => 'Close',
 // 'button.stop' => 'Stop',
+
+
+
+// TODO: refactoring ongoing down from here.
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 // TODO: translate the following.

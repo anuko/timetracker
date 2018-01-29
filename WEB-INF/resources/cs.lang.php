@@ -127,21 +127,21 @@ $i18n_key_words = array(
 // 'button.add_invoice' => 'Add invoice',
 // 'button.add_option' => 'Add option',
 'button.add' => 'Přidat',
+'button.generate' => 'Vytvořit',
+// TODO: translate the following.
+// 'button.reset_password' => 'Reset password',
+'button.send' => 'Poslat',
+'button.send_by_email' => 'Poslat e-mailem',
+'button.create_team' => 'Vytvořit tým',
+'button.export' => 'Exportovat tým',
+'button.import' => 'Importovat tým',
+// TODO: translate the following.
+// 'button.close' => 'Close',
+// 'button.stop' => 'Stop',
 
 
 
 // TODO: refactoring ongoing down from here.
-
-'button.generate' => 'Vytvořit',
-// Note to translators: button.reset_password needs an improved translation.
-'button.reset_password' => 'přejít',
-'button.send' => 'poslat',
-'button.send_by_email' => 'poslat e-mailem',
-'button.save_as_new' => 'uložit jako nový',
-'button.create_team' => 'vytvořit tým',
-'button.export' => 'exportovat tým',
-'button.import' => 'importovat tým',
-'button.apply' => 'provést',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 // TODO: translate the following.
