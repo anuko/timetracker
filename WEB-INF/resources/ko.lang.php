@@ -96,16 +96,19 @@ $i18n_key_words = array(
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
+// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
+'error.no_login' => '본 로그인과 연계된 사용자가 없습니다',
+// TODO: translate the following.
+// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.upload' => '파일 업로드 오류',
+// TODO: translate the following.
+// 'error.range_locked' => 'Date range is locked.',
+'error.mail_send' => '메일 보내기에서의 오류',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'error.no_login' => '본 로그인과 연계된 사용자가 없습니다',
-'error.upload' => '파일 업로드 오류',
-// TODO: translate the following.
-// 'error.range_locked' => 'Date range is locked.',
-'error.mail_send' => '메일 보내기에서의 오류',
 'error.no_email' => '본 로그인과 연계된 이메일이 없습니다',
 // Note to translators: the strings below need to be translated.
 // 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',

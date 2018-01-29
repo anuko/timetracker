@@ -96,16 +96,19 @@ $i18n_key_words = array(
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
+// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
+'error.no_login' => 'このログインと関連されたユーザーはいません',
+// TODO: translate the following.
+// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.upload' => 'ファイルのアップロードのエラー',
+// TODO: translate the following.
+// 'error.range_locked' => 'Date range is locked.',
+'error.mail_send' => 'メールの送信中のエラー',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'error.no_login' => 'このログインと関連されたユーザーはいません',
-'error.upload' => 'ファイルのアップロードのエラー',
-// TODO: translate the following.
-// 'error.range_locked' => 'Date range is locked.',
-'error.mail_send' => 'メールの送信中のエラー',
 // Note to translators: check the meaning of error.no_email. The error should say that there is no email address for user with a login provided.
 'error.no_email' => 'このログインと関連されたメールがありません',
 // TODO: translate the following.

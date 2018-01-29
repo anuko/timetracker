@@ -96,11 +96,6 @@ $i18n_key_words = array(
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 // 'error.no_login' => 'No user with this login.',
 // 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
@@ -108,6 +103,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 // 'error.mail_send' => 'Error sending mail.',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // 'error.no_email' => 'No email associated with this login.',
 // 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
 // 'error.goto_uncompleted' => 'Go to uncompleted entry.',
