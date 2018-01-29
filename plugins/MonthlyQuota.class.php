@@ -80,7 +80,8 @@ class MonthlyQuota {
     // If we did not find a record, return a calculated monthly quota.
     $numWorkdays = $this->getNumWorkdays($month, $year);
     global $user;
-    return $numWorkdays * $user->workday_hours;
+    return $numWorkdays * $user->workday_hours; // TODO: fix a rounding issue for small values like 0:01
+                                                // Possibly with a database field type change (minutes?).
   }
 
   // getMany - returns an array of quotas for a given year for team.
