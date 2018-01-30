@@ -102,6 +102,65 @@ class ttTimeHelper {
     return false;
   }
 
+  // validateDuration - a future replacement of the isValidDuration above.
+  // Validates a passed in $value as a time duration string in hours and / or minutes.
+  // Returns either a normalized duration (hh:mm) or false if $value is invalid.
+  //
+  // This is a convenience function that allows users to pass in data in a variety of formats.
+  //
+  // 3 or 3h  - means 3 hours - normalized 3:00. Note: h and m letters are not localized.
+  // 0.25 or 0.25h or .25 or .25h - means a quarter of hour - normalized 0:15.
+  // 0,25 0r 0,25h or ,25 or ,25h - means the same as above for users with comma ad decimal mark.
+  // 1:30 - means 1 hour 30 mminutes - normalized 1:30.
+  // 25m - means 25 minutes - normalized 0:25.
+  static function validateDuration($value) {
+    // Handle empty value.
+    if (!isset($value) || strlen($value) == 0)
+      return false;
+
+    // Handle whole hours.
+    if (preg_match('/^([0-1]{0,1}[0-9]|2[0-4])h?$/', $value )) { // 0, 1 ... 24
+      $normalized = trim($value, 'h');
+      $normalized .= ':00';
+      return $normalized;
+    }
+    // Handle already normalized value.
+    if (preg_match('/^([0-1]{0,1}[0-9]|2[0-3]):?[0-5][0-9]$/', $value )) { // 0:00 - 23:59, 000 - 2359
+      return $value;
+    }
+    // Handle a special case of 24:00.
+    if ($value == '24:00') {
+      return $value;
+    }
+    // Handle localized fractional hours.
+    global $user;
+    $localizedPattern = '/^([0-1]{0,1}[0-9]|2[0-3])?['.$user->decimal_mark.'][0-9]{1,4}h?$/';
+    if (preg_match($localizedPattern, $value )) { // decimal values like 0.5, 1.25h, ... .. 23.9999h (or with comma)
+        if ($user->decimal_mark == ',')
+          $value = str_replace (',', '.', $value);
+
+        $val = floatval($value);
+        $mins = round($val * 60);
+        $hours = (string)((int)($mins / 60));
+        $mins = (string)($mins % 60);
+        if (strlen($mins) == 1)
+          $mins = '0' . $mins;
+        return $hours.':'.$mins;
+    }
+    // Handle minutes.
+    if (preg_match('/^\d{1,4}m$/', $value )) { // ddddm
+      $mins = (int) trim($value, 'm');
+      if ($mins > 1440) // More minutes than an entire day could hold.
+        return false;
+      $hours = (string)((int)($mins / 60));
+      $mins = (string)($mins % 60);
+      if (strlen($mins) == 1)
+        $mins = '0' . $mins;
+      return $hours.':'.$mins;
+    }
+    return false;
+  }
+
   // normalizeDuration - converts a valid time duration string to format 00:00.
   static function normalizeDuration($value, $leadingZero = true) {
     $time_value = $value;
