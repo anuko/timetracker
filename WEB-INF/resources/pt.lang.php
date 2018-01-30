@@ -146,16 +146,18 @@ $i18n_key_words = array(
 // 'label.login' => 'Login',
 'label.password' => 'Senha',
 'label.confirm_password' => 'Confirme a senha',
+'label.email' => 'E-mail',
+// TODO: translate the following.
+// 'label.cc' => 'Cc',
+// 'label.bcc' => 'Bcc',
+'label.subject' => 'Assunto',
+// TODO: translate the following.
+// 'label.date' => 'Date',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-// 'label.email' => 'Email',
-'label.cc' => 'Cc',
-// TODO: translate the following.
-// 'label.bcc' => 'Bcc',
-'label.subject' => 'Assunto',
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
 // TODO: translate the following.

@@ -153,16 +153,18 @@ $i18n_key_words = array(
 // 'label.login' => 'Login',
 'label.password' => 'パスワード',
 'label.confirm_password' => 'パスワードの確認',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'label.email' => 'Eメール',
 // TODO: translate the following.
 // 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
 'label.subject' => '主題',
+// TODO: translate the following.
+// 'label.date' => 'Date',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'label.total' => '合計',
 // Translate the following.
 // 'label.page' => 'Page',

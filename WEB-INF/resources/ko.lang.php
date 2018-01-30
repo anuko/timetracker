@@ -153,16 +153,18 @@ $i18n_key_words = array(
 // 'label.login' => 'Login',
 'label.password' => 'Password',
 'label.confirm_password' => '암호 확인',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'label.email' => '이메일',
 // TODO: translate the following.
 // 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
 'label.subject' => '제목',
+// TODO: translate the following.
+// 'label.date' => 'Date',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'label.total' => '합계',
 // TODO: translate the following.
 // 'label.page' => 'Page',

@@ -152,17 +152,18 @@ $i18n_key_words = array(
 // 'label.login' => 'Login',
 'label.password' => 'Heslo',
 'label.confirm_password' => 'Potvrdit heslo',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 // TODO: translate the following.
 // 'label.email' => 'Email',
 'label.cc' => 'Cc',
 // TODO: translate the following.
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Předmět',
+// TODO: translate the following.
+// 'label.date' => 'Date',
+
+
+
+// TODO: refactoring ongoing down from here.
 
 'label.delete' => 'Smazat',
 'label.total' => 'Celkem',

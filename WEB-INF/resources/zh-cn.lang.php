@@ -142,17 +142,18 @@ $i18n_key_words = array(
 // 'label.login' => 'Login',
 'label.password' => '密码',
 'label.confirm_password' => '确认密码',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'label.email' => '电子邮件',
 'label.cc' => '抄送',
 // TODO: translate the following.
 // 'label.bcc' => 'Bcc',
 'label.subject' => '主题',
+// TODO: translate the following.
 // 'label.date' => 'Date',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',

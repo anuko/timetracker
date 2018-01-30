@@ -150,16 +150,18 @@ $i18n_key_words = array(
 // 'label.login' => 'Login',
 'label.password' => '密碼',
 'label.confirm_password' => '確認密碼',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'label.email' => '電子郵件',
 'label.cc' => '抄送',
 // TODO: translate the following.
 // 'label.bcc' => 'Bcc',
 'label.subject' => '主題',
+// TODO: translate the following.
+// 'label.date' => 'Date',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'label.total' => '總計',
 // TODO: translate the following.
 // 'label.page' => 'Page',

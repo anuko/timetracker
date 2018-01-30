@@ -160,16 +160,18 @@ $i18n_key_words = array(
 'label.password' => 'Parola',
 // TODO: translate the following.
 // 'label.confirm_password' => 'Confirm password',
+'label.email' => 'E-posta',
+// TODO: translate the following.
+// 'label.cc' => 'Cc',
+// 'label.bcc' => 'Bcc',
+'label.subject' => 'Konu',
+// TODO: translate the following.
+// 'label.date' => 'Date',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'label.email' => 'E-posta',
-'label.cc' => 'Bilgi',
-// TODO: translate the following.
-// 'label.bcc' => 'Bcc',
-'label.subject' => 'Konu',
 'label.total' => 'toplam',
 // TODO: translate the following.
 // 'label.page' => 'Page',

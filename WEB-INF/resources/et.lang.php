@@ -153,17 +153,19 @@ $i18n_key_words = array(
 'label.login' => 'Login',
 'label.password' => 'Salasõna',
 'label.confirm_password' => 'Kinnita salasõna',
-
-
-
-// TODO: refactoring ongoing down from here.
-
+// TODO: translate the following.
 // 'label.email' => 'Email',
 'label.cc' => 'Cc',
 // TODO: translate the following.
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Teema',
+// TODO: translate the following.
 // 'label.date' => 'Date',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',

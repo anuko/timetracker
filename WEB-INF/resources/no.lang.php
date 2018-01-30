@@ -152,16 +152,18 @@ $i18n_key_words = array(
 // 'label.login' => 'Login',
 'label.password' => 'Passord',
 'label.confirm_password' => 'Bekreft passord',
+'label.email' => 'E-post',
+// TODO: translate the following.
+// 'label.cc' => 'Cc',
+// 'label.bcc' => 'Bcc',
+'label.subject' => 'Emne',
+// TODO: translate the following.
+// 'label.date' => 'Date',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-// TODO: translate the following.
-// 'label.email' => 'Email',
-// 'label.cc' => 'Cc',
-// 'label.bcc' => 'Bcc',
-'label.subject' => 'Emne',
 'label.total' => 'totalt',
 // TODO: translate the following.
 // 'label.page' => 'Page',

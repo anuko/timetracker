@@ -151,17 +151,17 @@ $i18n_key_words = array(
 // 'label.login' => 'Login',
 'label.password' => 'Paraula de pas',
 'label.confirm_password' => 'Confirmar paraula de pas',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'label.email' => 'E-mail',
 'label.cc' => 'Cc',
 // TODO: translate the following.
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Assumpte',
 'label.date' => 'Data',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // TODO: translate the following.
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
