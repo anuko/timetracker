@@ -136,17 +136,17 @@ $i18n_key_words = array(
 'label.currency' => '货币',
 'label.manager_name' => '管理员姓名',
 'label.manager_login' => '管理员登录',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 // TODO: translate the following.
 // 'label.person_name' => 'Name',
 // 'label.thing_name' => 'Name',
 // 'label.login' => 'Login',
 'label.password' => '密码',
 'label.confirm_password' => '确认密码',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'label.email' => '电子邮件',
 'label.cc' => '抄送',
 // TODO: translate the following.

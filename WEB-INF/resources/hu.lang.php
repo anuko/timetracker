@@ -147,15 +147,17 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
+'label.person_name' => 'Név',
+'label.thing_name' => 'Név',
+// TODO: translate the following.
+// 'label.login' => 'Login',
+'label.password' => 'Jelszó',
+'label.confirm_password' => 'Jelszó megerősítése',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'label.name' => 'név',
-
-'label.password' => 'jelszó',
-'label.confirm_password' => 'jelszó megerősítése',
 // TODO: translate the following.
 // 'label.email' => 'Email',
 'label.cc' => 'Másolatot kap',

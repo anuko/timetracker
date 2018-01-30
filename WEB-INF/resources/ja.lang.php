@@ -148,13 +148,16 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
+// 'label.person_name' => 'Name',
+// 'label.thing_name' => 'Name',
+// 'label.login' => 'Login',
+'label.password' => 'パスワード',
+'label.confirm_password' => 'パスワードの確認',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'label.password' => 'パスワード',
-'label.confirm_password' => 'パスワードの確認',
 'label.email' => 'Eメール',
 // TODO: translate the following.
 // 'label.cc' => 'Cc',

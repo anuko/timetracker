@@ -142,13 +142,17 @@ $i18n_key_words = array(
 // 'label.currency' => 'Currency',
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
+// 'label.person_name' => 'Name',
+// 'label.thing_name' => 'Name',
+// 'label.login' => 'Login',
+'label.password' => 'Geslo',
+// TODO: translate the following.
+// 'label.confirm_password' => 'Confirm password',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'label.password' => 'geslo',
-// 'label.confirm_password' => 'confirm password',
 'label.email' => 'Email',
 'label.cc' => 'Cc',
 // TODO: translate the following.
