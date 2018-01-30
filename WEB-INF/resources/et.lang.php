@@ -167,11 +167,6 @@ $i18n_key_words = array(
 // 'label.users' => 'Users',
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
 'label.project' => 'Projekt',
@@ -183,6 +178,11 @@ $i18n_key_words = array(
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
 // 'label.duration' => 'Duration',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // 'label.note' => 'Note',
 // 'label.notes' => 'Notes',
 // 'label.item' => 'Item',

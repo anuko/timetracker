@@ -173,6 +173,16 @@ $i18n_key_words = array(
 // 'label.users' => 'Users',
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
+// 'label.option' => 'Option',
+// 'label.invoice' => 'Invoice',
+// 'label.project' => 'Project',
+// 'label.projects' => 'Projects',
+// 'label.task' => 'Task',
+// 'label.tasks' => 'Tasks',
+// 'label.description' => 'Description',
+// 'label.start' => 'Start',
+// 'label.finish' => 'Finish',
+// 'label.duration' => 'Duration',
 
 
 
