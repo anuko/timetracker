@@ -157,18 +157,18 @@ $i18n_key_words = array(
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Asunto',
 'label.date' => 'Fecha',
+'label.start_date' => 'Fecha de inicio',
+'label.end_date' => 'Fecha de fin',
+'label.user' => 'Usuario',
+// TODO: translate the following.
+// 'label.users' => 'Users',
+// 'label.client' => 'Client',
+// 'label.clients' => 'Clients',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'label.start_date' => 'Fecha de inicio',
-'label.end_date' => 'Fecha de fin',
-'label.user' => 'Usuario',
-'label.users' => 'Personas',
-// TODO: translate the following.
-// 'label.client' => 'Client',
-// 'label.clients' => 'Clients',
 'label.option' => 'Opción',
 // TODO: translate the following.
 // 'label.invoice' => 'Invoice',

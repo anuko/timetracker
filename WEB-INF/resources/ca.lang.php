@@ -157,11 +157,6 @@ $i18n_key_words = array(
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Assumpte',
 'label.date' => 'Data',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 // TODO: translate the following.
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
@@ -169,6 +164,12 @@ $i18n_key_words = array(
 // 'label.users' => 'Users',
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
+
+
+
+// TODO: refactoring ongoing down from here.
+
+// TODO: translate the following.
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
 // 'label.project' => 'Project',

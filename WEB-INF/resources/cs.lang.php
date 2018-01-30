@@ -160,6 +160,12 @@ $i18n_key_words = array(
 'label.subject' => 'Předmět',
 // TODO: translate the following.
 // 'label.date' => 'Date',
+// 'label.start_date' => 'Start date',
+// 'label.end_date' => 'End date',
+// 'label.user' => 'User',
+// 'label.users' => 'Users',
+// 'label.client' => 'Client',
+// 'label.clients' => 'Clients',
 
 
 
