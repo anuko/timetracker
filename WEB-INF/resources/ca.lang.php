@@ -219,12 +219,8 @@ $i18n_key_words = array(
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',
 // 'label.no' => 'no',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 // Labels for plugins (extensions to Time Tracker that provide additional features).
+// TODO: translate the following.
 // 'label.custom_fields' => 'Custom fields',
 // 'label.monthly_quotas' => 'Monthly quotas',
 // 'label.type' => 'Type',
@@ -232,6 +228,7 @@ $i18n_key_words = array(
 // 'label.type_text' => 'text',
 // 'label.required' => 'Required',
 'label.fav_report' => 'Report favorit',
+// TODO: translate the following.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
@@ -239,6 +236,10 @@ $i18n_key_words = array(
 // 'label.paid_status' => 'Paid status',
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
+
+
+
+// TODO: refactoring ongoing down from here.
 
 // Form titles.
 'title.login' => 'Sessió iniciada',

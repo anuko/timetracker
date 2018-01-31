@@ -227,11 +227,6 @@ $i18n_key_words = array(
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',
 // 'label.no' => 'no',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 // TODO: translate the following.
 // 'label.custom_fields' => 'Custom fields',
@@ -249,6 +244,10 @@ $i18n_key_words = array(
 // 'label.paid_status' => 'Paid status',
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
+
+
+
+// TODO: refactoring ongoing down from here.
 
 // Form titles.
 'title.login' => 'Sesión iniciada',
