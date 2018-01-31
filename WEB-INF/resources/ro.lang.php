@@ -247,6 +247,15 @@ $i18n_key_words = array(
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
+'title.reset_password' => 'Reseteaza parola',
+// TODO: translate the following.
+// 'title.change_password' => 'Changing Password',
+// 'title.time' => 'Time',
+// 'title.edit_time_record' => 'Editing Time Record',
+// 'title.delete_time_record' => 'Deleting Time Record',
+// 'title.expenses' => 'Expenses',
+// 'title.edit_expense' => 'Editing Expense Item',
+// 'title.delete_expense' => 'Deleting Expense Item',
 
 
 
@@ -255,11 +264,8 @@ $i18n_key_words = array(
 "form.filter.project" => 'proiect',
 "form.filter.filter" => 'rapoarte favorite',
 "form.filter.filter_new" => 'salveaza ca favorit',
-// Note to translators: the string below is missing and must be added and translated 
-// "form.filter.filter_confirm_delete" => 'are you sure you want to delete this favorite report?',
 
 // password reminder form attributes
-"form.fpass.title" => 'reseteaza parola',
 "form.fpass.login" => 'autentifica', 
 "form.fpass.send_pass_str" => 'cererea de resetare a parolei a fost trimisa',
 "form.fpass.send_pass_subj" => 'Anuko Time Tracker - cerere de resetare a parolei',

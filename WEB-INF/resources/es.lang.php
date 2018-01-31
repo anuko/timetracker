@@ -252,13 +252,8 @@ $i18n_key_words = array(
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'title.reset_password' => 'Reestablecer contraseña',
-// TODO: translate title.change_password.
+// TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
 'title.time' => 'Tiempo',
 'title.edit_time_record' => 'Modificando el historial de tiempo',
@@ -267,6 +262,11 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 'title.reports' => 'Reportes',
 // TODO: translate title.report, title.send_report.
 // 'title.report' => 'Report',

@@ -252,6 +252,15 @@ $i18n_key_words = array(
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
+'title.reset_password' => 'Parolayı sıfırla',
+// TODO: translate the following.
+// 'title.change_password' => 'Changing Password',
+// 'title.time' => 'Time',
+// 'title.edit_time_record' => 'Editing Time Record',
+// 'title.delete_time_record' => 'Deleting Time Record',
+// 'title.expenses' => 'Expenses',
+// 'title.edit_expense' => 'Editing Expense Item',
+// 'title.delete_expense' => 'Deleting Expense Item',
 
 
 
@@ -260,12 +269,8 @@ $i18n_key_words = array(
 "form.filter.project" => 'proje',
 "form.filter.filter" => 'sık kullanılan rapor',
 "form.filter.filter_new" => 'sık kullanılan olarak kaydet',
-// Note to translators: the string below is missing and must be translated and added
-// "form.filter.filter_confirm_delete" => 'are you sure you want to delete this favorite report?',
 
 // password reminder form attributes
-"form.fpass.title" => 'parolayı sıfırla',
-// Note to translators: "form.fpass.login" => 'e-posta', // e-mail has been changed to login
 "form.fpass.send_pass_str" => 'parola sıfırlama talebi yollandı',
 "form.fpass.send_pass_subj" => 'Anuko Time Tracker parola sıfırlama talebi',
 // Note to translators: the ending of this string needs to be translated.

@@ -237,19 +237,19 @@ $i18n_key_words = array(
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
-
+// 'title.reset_password' => 'Resetting Password',
+// 'title.change_password' => 'Changing Password',
+// 'title.time' => 'Time',
+// 'title.edit_time_record' => 'Editing Time Record',
+// 'title.delete_time_record' => 'Deleting Time Record',
+// 'title.expenses' => 'Expenses',
+// 'title.edit_expense' => 'Editing Expense Item',
+// 'title.delete_expense' => 'Deleting Expense Item',
 
 
 // TODO: refactoring ongoing down from here.
 
-// "form.filter.project" => 'project',
-// "form.filter.filter" => 'favorite report',
-// "form.filter.filter_new" => 'save as favorite',
-// "form.filter.filter_confirm_delete" => 'are you sure you want to delete this favorite report?',
-
 // password reminder form attributes
-"form.fpass.title" => 'enviar senha',
-// Note to translators: "form.fpass.login" => 'e-mail', // email has been changed to login
 "form.fpass.send_pass_str" => 'senha foi enviada',
 "form.fpass.send_pass_subj" => 'Sua senha do Anuko Time Tracker',
 // Note to translators: the strings below are missing and must be added and translated

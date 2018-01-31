@@ -245,7 +245,15 @@ $i18n_key_words = array(
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
-
+'title.reset_password' => '암호 재설정',
+// TODO: translate the following.
+// 'title.change_password' => 'Changing Password',
+// 'title.time' => 'Time',
+// 'title.edit_time_record' => 'Editing Time Record',
+// 'title.delete_time_record' => 'Deleting Time Record',
+// 'title.expenses' => 'Expenses',
+// 'title.edit_expense' => 'Editing Expense Item',
+// 'title.delete_expense' => 'Deleting Expense Item',
 
 
 // TODO: refactoring ongoing down from here.
@@ -256,7 +264,6 @@ $i18n_key_words = array(
 "form.filter.filter_confirm_delete" => '좋아하는 이 보고서를 삭제해도 좋습니까?',
 
 // password reminder form attributes
-"form.fpass.title" => '암호 재설정',
 "form.fpass.login" => '로그인',
 "form.fpass.send_pass_str" => '송신한 암호 재설정 요청',
 "form.fpass.send_pass_subj" => 'Anuko Time Tracker 암호 재설정 요청',

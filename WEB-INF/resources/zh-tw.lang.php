@@ -242,6 +242,15 @@ $i18n_key_words = array(
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
+'title.reset_password' => '重設密碼',
+// TODO: translate the following.
+// 'title.change_password' => 'Changing Password',
+// 'title.time' => 'Time',
+// 'title.edit_time_record' => 'Editing Time Record',
+// 'title.delete_time_record' => 'Deleting Time Record',
+// 'title.expenses' => 'Expenses',
+// 'title.edit_expense' => 'Editing Expense Item',
+// 'title.delete_expense' => 'Deleting Expense Item',
 
 
 
@@ -253,7 +262,6 @@ $i18n_key_words = array(
 "form.filter.filter_confirm_delete" => '您確認要刪除收藏的這個報告嗎？',
 
 // password reminder form attributes
-"form.fpass.title" => '重設密碼',
 "form.fpass.login" => '登錄',
 "form.fpass.send_pass_str" => '密碼重設請求已經發送',
 "form.fpass.send_pass_subj" => 'Anuko時間追蹤器密碼重設請求',

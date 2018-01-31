@@ -240,18 +240,23 @@ $i18n_key_words = array(
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
+'title.reset_password' => 'Razveljavi geslo',
+// TODO: translate the following.
+// 'title.change_password' => 'Changing Password',
+// 'title.time' => 'Time',
+// 'title.edit_time_record' => 'Editing Time Record',
+// 'title.delete_time_record' => 'Deleting Time Record',
+// 'title.expenses' => 'Expenses',
+// 'title.edit_expense' => 'Editing Expense Item',
+// 'title.delete_expense' => 'Deleting Expense Item',
 
 
 
 // TODO: refactoring ongoing down from here.
 
 "form.filter.project" => 'projekt',
-"form.filter.filter" => 'favorite report',
-"form.filter.filter_new" => 'save as favorite',
-"form.filter.filter_confirm_delete" => 'are you sure you want to delete this favorite report?',
 
 // password reminder form attributes
-"form.fpass.title" => 'razveljavi geslo',
 "form.fpass.login" => 'prijava',
 "form.fpass.send_pass_str" => 'zahteva za razveljavitev gesla je bila poslana',
 "form.fpass.send_pass_subj" => 'Anuko Time Tracker zahteva za razveljavitev gesla',

@@ -229,19 +229,14 @@ $i18n_key_words = array(
 // 'label.mark_paid' => 'Mark paid',
 
 // Form titles.
-// 'title.login' => 'Login',
 // TODO: translate the following.
+// 'title.login' => 'Login',
 // 'title.teams' => 'Teams',
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// Form titles.
-// 'title.reset_password' => 'Resetting Password',
+'title.reset_password' => '重设密码',
+// TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
 // 'title.time' => 'Time',
 // 'title.edit_time_record' => 'Editing Time Record',
@@ -249,6 +244,11 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // 'title.predefined_expenses' => 'Predefined Expenses',
 // 'title.add_predefined_expense' => 'Adding Predefined Expense',
 // 'title.edit_predefined_expense' => 'Editing Predefined Expense',

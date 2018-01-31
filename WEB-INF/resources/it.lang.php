@@ -241,7 +241,14 @@ $i18n_key_words = array(
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
-
+// 'title.reset_password' => 'Resetting Password',
+// 'title.change_password' => 'Changing Password',
+// 'title.time' => 'Time',
+// 'title.edit_time_record' => 'Editing Time Record',
+// 'title.delete_time_record' => 'Deleting Time Record',
+// 'title.expenses' => 'Expenses',
+// 'title.edit_expense' => 'Editing Expense Item',
+// 'title.delete_expense' => 'Deleting Expense Item',
 
 
 // TODO: refactoring ongoing down from here.
@@ -252,8 +259,6 @@ $i18n_key_words = array(
 "form.filter.filter_confirm_delete" => 'sei sicuro di voler cancellare questo report dai preferiti?',
 
 // password reminder form attributes
-"form.fpass.title" => 'reset password',
-"form.fpass.login" => 'login',
 "form.fpass.send_pass_str" => 'richiesta di reset pasword inviata',
 "form.fpass.send_pass_subj" => 'richiesta di password reset', 
 // Note to translators: the strings below must be translated

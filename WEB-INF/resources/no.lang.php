@@ -242,7 +242,14 @@ $i18n_key_words = array(
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
-
+// 'title.reset_password' => 'Resetting Password',
+// 'title.change_password' => 'Changing Password',
+// 'title.time' => 'Time',
+// 'title.edit_time_record' => 'Editing Time Record',
+// 'title.delete_time_record' => 'Deleting Time Record',
+// 'title.expenses' => 'Expenses',
+// 'title.edit_expense' => 'Editing Expense Item',
+// 'title.delete_expense' => 'Deleting Expense Item',
 
 
 // TODO: refactoring ongoing down from here.
@@ -255,7 +262,6 @@ $i18n_key_words = array(
 // "form.filter.filter_confirm_delete" => 'er du sikker på at du vil slette denne favorittrapporten?',
 
 // password reminder form attributes
-// Note to translators: "form.fpass.title" => 'remind password', // the string must be translated
 "form.fpass.login" => 'innlogging',
 "form.fpass.send_pass_str" => 'passordet er sendt',
 "form.fpass.send_pass_subj" => 'Anuko Time Tracker passordet ditt',
