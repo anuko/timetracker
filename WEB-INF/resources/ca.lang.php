@@ -258,8 +258,8 @@ $i18n_key_words = array(
 // 'title.add_predefined_expense' => 'Adding Predefined Expense',
 // 'title.edit_predefined_expense' => 'Editing Predefined Expense',
 // 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
-// 'title.reports' => 'Reports',
-// 'title.report' => 'Report',
+'title.reports' => 'Informes',
+'title.report' => 'Informe',
 
 
 
@@ -459,20 +459,13 @@ $i18n_key_words = array(
 "form.project.del_str" => 'Eliminant projecte',
 
 // activities form attributes
-"form.activity.act_title" => 'Activitats',
-"form.activity.add_title" => 'Agregant nova activitat',
-"form.activity.edit_str" => 'Modificant activitat',
-"form.activity.del_str" => 'Eliminant activitat',
 "form.activity.project" => 'Projecte',
-"form.activity.th.project" => 'Projecte',
 
 // report attributes
-"form.report.title" => 'Reports',
 "form.report.from" => 'Data d\\\'inici',
 "form.report.to" => 'Data de fi',
 "form.report.groupby_user" => 'Usuari',
 "form.report.groupby_project" => 'Projecte',
-"form.report.groupby_activity" => 'Activitat',
 "form.report.duration" => 'Durada',
 "form.report.start" => 'Inici',
 "form.report.activity" => 'Activitat',
@@ -485,7 +478,6 @@ $i18n_key_words = array(
 "form.report.th.empllist" => 'Usuari',
 "form.report.th.date" => 'Data',
 "form.report.th.project" => 'Projecte',
-"form.report.th.activity" => 'Activitat',
 "form.report.th.start" => 'Inici',
 "form.report.th.finish" => 'Fi',
 "form.report.th.duration" => 'Durada',

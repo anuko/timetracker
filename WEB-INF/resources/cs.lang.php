@@ -53,7 +53,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'menu.time' => 'Time',
 // 'menu.expenses' => 'Expenses',
-// 'menu.reports' => 'Reports',
+'menu.reports' => 'Sestavy',
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => 'Projekty',
 // TODO: translate the following.
@@ -262,7 +263,8 @@ $i18n_key_words = array(
 // 'title.add_predefined_expense' => 'Adding Predefined Expense',
 // 'title.edit_predefined_expense' => 'Editing Predefined Expense',
 // 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
-// 'title.reports' => 'Reports',
+'title.reports' => 'Sestavy',
+// TODO: translate the following.
 // 'title.report' => 'Report',
 
 
@@ -363,15 +365,12 @@ $i18n_key_words = array(
 "form.activity.project" => 'projekt',
 
 // report attributes
-"form.report.title" => 'sestavy',
 "form.report.from" => 'počáteční datum',
 "form.report.to" => 'koncové datum',
 "form.report.groupby_user" => 'uživatel',
 "form.report.groupby_project" => 'projekt',
-"form.report.groupby_activity" => 'činnost',
 "form.report.duration" => 'trvání',
 "form.report.start" => 'počátek',
-"form.report.activity" => 'činnost',
 "form.report.show_idle" => 'ukázat nečinné',
 "form.report.finish" => 'konec',
 "form.report.note" => 'poznámka',
@@ -444,7 +443,6 @@ $i18n_key_words = array(
 
 // strings inside contols on forms
 "controls.select.project" => '--- výběr projektu ---',
-"controls.select.activity" => '--- výběr činnosti ---',
 "controls.select.client" => '--- výběr zákazníka ---',
 "controls.project_bind" => '--- všechny ---',
 "controls.all" => '--- vše ---',
@@ -460,8 +458,6 @@ $i18n_key_words = array(
 "controls.sel_groupby" => '--- vše dohromady ---',
 "controls.inc_billable" => 'k fakturaci',
 "controls.inc_nbillable" => 'mimo fakturaci',
-// Note to translators: the string below must be translated
-// "controls.default" => '--- default ---',
 
 // labels
 "label.chart.title1" => 'činnosti uživatele',
@@ -488,11 +484,4 @@ $i18n_key_words = array(
 "label.filter" => 'filtr',
 "label.timeweek" => 'celkem za týden',
 "label.hrs" => 'hodin',
-// Note to translators: the 3 strings below are missing in the translation and must be added
-// "label.errors" => 'errors',
-// "label.ldap_hint" => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-
-// login hello text
-// Note to translators: the string below is missing in the translation and must be added
-// "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
 );

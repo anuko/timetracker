@@ -261,7 +261,8 @@ $i18n_key_words = array(
 // 'title.add_predefined_expense' => 'Adding Predefined Expense',
 // 'title.edit_predefined_expense' => 'Editing Predefined Expense',
 // 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
-// 'title.reports' => 'Reports',
+'title.reports' => 'Raportid',
+// TODO: translate the following.
 // 'title.report' => 'Report',
 
 
@@ -375,7 +376,6 @@ $i18n_key_words = array(
 "form.activity.project" => 'projekt',
 
 // report attributes
-"form.report.title" => 'aruanded',
 "form.report.from" => 'algab kuupäevast',
 "form.report.to" => 'lõpeb kuupäeval',
 "form.report.groupby_user" => 'kasutaja',
