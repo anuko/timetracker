@@ -147,7 +147,7 @@ $i18n_key_words = array(
 // 'label.manager_login' => 'Manager login',
 // 'label.person_name' => 'Name',
 // 'label.thing_name' => 'Name',
-// 'label.login' => 'Login',
+'label.login' => '登錄',
 'label.password' => '密碼',
 'label.confirm_password' => '確認密碼',
 'label.email' => '電子郵件',
@@ -235,21 +235,22 @@ $i18n_key_words = array(
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
 
+// Form titles.
+'title.login' => '登錄',
+// TODO: translate the following.
+// 'title.teams' => 'Teams',
+// 'title.create_team' => 'Creating Team',
+// 'title.edit_team' => 'Editing Team',
+// 'title.delete_team' => 'Deleting Team',
+
 
 
 // TODO: refactoring ongoing down from here.
-
-// Form titles.
-// TODO: the entire title section is missing here. See the English file.
 
 "form.filter.project" => '項目',
 "form.filter.filter" => '收藏的報告',
 "form.filter.filter_new" => '保存到我的存檔',
 "form.filter.filter_confirm_delete" => '您確認要刪除收藏的這個報告嗎？',
-
-// login form attributes
-"form.login.title" => '登錄',
-"form.login.login" => '登錄',
 
 // password reminder form attributes
 "form.fpass.title" => '重設密碼',

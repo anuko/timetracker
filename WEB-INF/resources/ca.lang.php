@@ -237,10 +237,6 @@ $i18n_key_words = array(
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
 
-
-
-// TODO: refactoring ongoing down from here.
-
 // Form titles.
 'title.login' => 'Sessió iniciada',
 // TODO: translate the following.
@@ -257,8 +253,17 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
 // 'title.reports' => 'Reports',
 // 'title.report' => 'Report',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // 'title.send_report' => 'Sending Report',
 // 'title.invoice' => 'Invoice',
 // 'title.send_invoice' => 'Sending Invoice',

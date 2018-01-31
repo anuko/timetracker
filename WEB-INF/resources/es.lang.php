@@ -245,18 +245,18 @@ $i18n_key_words = array(
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
 
+// Form titles.
+'title.login' => 'Sesión iniciada',
+'title.teams' => 'Grupos',
+// TODO: translate the following.
+// 'title.create_team' => 'Creating Team',
+// 'title.edit_team' => 'Editing Team',
+// 'title.delete_team' => 'Deleting Team',
+
 
 
 // TODO: refactoring ongoing down from here.
 
-// Form titles.
-'title.login' => 'Sesión iniciada',
-'title.teams' => 'Grupos',
-// Note to translators: we need a more accurate translation of title.create_team. English is "Creating Team".
-// 'title.create_team' => 'Crear una nueva cuenta de manejador',
-// TODO: translate the following.
-// 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
 'title.reset_password' => 'Reestablecer contraseña',
 // TODO: translate title.change_password.
 // 'title.change_password' => 'Changing Password',

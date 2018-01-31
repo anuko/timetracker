@@ -228,34 +228,19 @@ $i18n_key_words = array(
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
 
-
-
-// TODO: refactoring ongoing down from here.
-
-// Labels for plugins (extensions to Time Tracker that provide additional features).
-// TODO: Translate the following.
-// 'label.custom_fields' => 'Custom fields',
-// 'label.monthly_quotas' => 'Monthly quotas',
-// 'label.type' => 'Type',
-// 'label.type_dropdown' => 'dropdown',
-// 'label.type_text' => 'text',
-// 'label.required' => 'Required',
-// 'label.fav_report' => 'Favorite report',
-// 'label.cron_schedule' => 'Cron schedule',
-// 'label.what_is_it' => 'What is it?',
-// 'label.expense' => 'Expense',
-// 'label.quantity' => 'Quantity',
-// 'label.paid_status' => 'Paid status',
-// 'label.paid' => 'Paid',
-// 'label.mark_paid' => 'Mark paid',
-
 // Form titles.
-// TODO: Translate the following.
 // 'title.login' => 'Login',
+// TODO: translate the following.
 // 'title.teams' => 'Teams',
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
+
+
+
+// TODO: refactoring ongoing down from here.
+
+// Form titles.
 // 'title.reset_password' => 'Resetting Password',
 // 'title.change_password' => 'Changing Password',
 // 'title.time' => 'Time',

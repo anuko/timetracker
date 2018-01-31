@@ -238,21 +238,22 @@ $i18n_key_words = array(
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
 
+// Form titles.
+'title.login' => '로그인',
+// TODO: translate the following.
+// 'title.teams' => 'Teams',
+// 'title.create_team' => 'Creating Team',
+// 'title.edit_team' => 'Editing Team',
+// 'title.delete_team' => 'Deleting Team',
+
 
 
 // TODO: refactoring ongoing down from here.
-
-// Form titles.
-// TODO: the entire title section is missing here. See the English file.
 
 "form.filter.project" => '프로젝트',
 "form.filter.filter" => '좋아하는 보고서',
 "form.filter.filter_new" => '좋아하는 것으로 저장',
 "form.filter.filter_confirm_delete" => '좋아하는 이 보고서를 삭제해도 좋습니까?',
-
-// login form attributes
-"form.login.title" => '로그인',
-"form.login.login" => '로그인ID',
 
 // password reminder form attributes
 "form.fpass.title" => '암호 재설정',

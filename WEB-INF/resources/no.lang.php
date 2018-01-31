@@ -235,12 +235,17 @@ $i18n_key_words = array(
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
 
+// Form titles.
+'title.login' => 'Innlogging',
+// TODO: translate the following.
+// 'title.teams' => 'Teams',
+// 'title.create_team' => 'Creating Team',
+// 'title.edit_team' => 'Editing Team',
+// 'title.delete_team' => 'Deleting Team',
+
 
 
 // TODO: refactoring ongoing down from here.
-
-// Form titles.
-// TODO: the entire title section is missing here. See the English file.
 
 // TODO: Please check the translation against the current English file as many things are being refactored. For example, many labels have been added after label.email.
 
@@ -248,10 +253,6 @@ $i18n_key_words = array(
 // "form.filter.filter" => 'favorittrapport',
 // "form.filter.filter_new" => 'lagre som favoritt',
 // "form.filter.filter_confirm_delete" => 'er du sikker på at du vil slette denne favorittrapporten?',
-
-// login form attributes
-"form.login.title" => 'innlogging',
-"form.login.login" => 'innlogging',
 
 // password reminder form attributes
 // Note to translators: "form.fpass.title" => 'remind password', // the string must be translated

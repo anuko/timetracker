@@ -238,21 +238,22 @@ $i18n_key_words = array(
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
 
+// Form titles.
+'title.login' => 'Přihlásit',
+// TODO: translate the following.
+// 'title.teams' => 'Teams',
+// 'title.create_team' => 'Creating Team',
+// 'title.edit_team' => 'Editing Team',
+// 'title.delete_team' => 'Deleting Team',
+
 
 
 // TODO: refactoring ongoing down from here.
-
-// Form titles.
-// TODO: the entire title section is missing here. See the English file.
 
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'oblíbená sestava',
 "form.filter.filter_new" => 'uložit jako oblíbenou sestavu',
 "form.filter.filter_confirm_delete" => 'opravdu chceš vymazat tuto položku z oblíbených?',
-
-// login form attributes
-"form.login.title" => 'přihlásit',
-"form.login.login" => 'přihlásit',
 
 // password reminder form attributes
 "form.fpass.title" => 'resetovat heslo',

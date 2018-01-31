@@ -238,21 +238,22 @@ $i18n_key_words = array(
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
 
+// Form titles.
+'title.login' => 'ログイン',
+// TODO: translate the following.
+// 'title.teams' => 'Teams',
+// 'title.create_team' => 'Creating Team',
+// 'title.edit_team' => 'Editing Team',
+// 'title.delete_team' => 'Deleting Team',
+
 
 
 // TODO: refactoring ongoing down from here.
-
-// Form titles.
-// TODO: the entire title section is missing here. See the English file.
 
 "form.filter.project" => 'プロジェクト',
 "form.filter.filter" => 'お気に入りレポート',
 "form.filter.filter_new" => 'お気に入りに保存',
 "form.filter.filter_confirm_delete" => 'このお気に入りレポートを削除しますか？',
-
-// login form attributes
-"form.login.title" => 'ログイン',
-"form.login.login" => 'ログインID',
 
 // password reminder form attributes
 "form.fpass.title" => 'パスワードの初期化',

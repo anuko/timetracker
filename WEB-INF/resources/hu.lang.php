@@ -241,22 +241,23 @@ $i18n_key_words = array(
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
 
+// Form titles.
+'title.login' => 'Bejelentkezés',
+// TODO: translate the following.
+// 'title.teams' => 'Teams',
+// 'title.create_team' => 'Creating Team',
+// 'title.edit_team' => 'Editing Team',
+// 'title.delete_team' => 'Deleting Team',
+
 
 
 // TODO: refactoring ongoing down from here.
-
-// Form titles.
-// TODO: the entire title section is missing here. See the English file.
 
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'előre definiált riport formátum',
 "form.filter.filter_new" => 'mentsük el ezt a riport formátumot',
 // Note to translators: the string below is missing and must be added and translated
 // "form.filter.filter_confirm_delete" => 'are you sure you want to delete this favorite report?',
-
-// login form attributes
-"form.login.title" => 'bejelentkezés',
-// Note to translators: "form.login.login" => 'e-mail cím', // email has been changed to login
 
 // password reminder form attributes
 "form.fpass.title" => 'a jelszó alap állapotra állítása',

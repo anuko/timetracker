@@ -233,21 +233,22 @@ $i18n_key_words = array(
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
 
+// Form titles.
+'title.login' => 'Prijava',
+// TODO: translate the following.
+// 'title.teams' => 'Teams',
+// 'title.create_team' => 'Creating Team',
+// 'title.edit_team' => 'Editing Team',
+// 'title.delete_team' => 'Deleting Team',
+
 
 
 // TODO: refactoring ongoing down from here.
-
-// Form titles.
-// TODO: the entire title section is missing here. See the English file.
 
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'favorite report',
 "form.filter.filter_new" => 'save as favorite',
 "form.filter.filter_confirm_delete" => 'are you sure you want to delete this favorite report?',
-
-// login form attributes
-"form.login.title" => 'prijava',
-"form.login.login" => 'prijava',
 
 // password reminder form attributes
 "form.fpass.title" => 'razveljavi geslo',

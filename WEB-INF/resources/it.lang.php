@@ -146,7 +146,7 @@ $i18n_key_words = array(
 // 'label.manager_login' => 'Manager login',
 // 'label.person_name' => 'Name',
 // 'label.thing_name' => 'Name',
-// 'label.login' => 'Login',
+'label.login' => 'Login',
 'label.password' => 'Password',
 'label.confirm_password' => 'Conferma password',
 'label.email' => 'E-mail',
@@ -234,21 +234,22 @@ $i18n_key_words = array(
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
 
+// Form titles.
+'title.login' => 'Login',
+// TODO: translate the following.
+// 'title.teams' => 'Teams',
+// 'title.create_team' => 'Creating Team',
+// 'title.edit_team' => 'Editing Team',
+// 'title.delete_team' => 'Deleting Team',
+
 
 
 // TODO: refactoring ongoing down from here.
-
-// Form titles.
-// TODO: the entire title section is missing here. See the English file.
 
 "form.filter.project" => 'progetto',
 "form.filter.filter" => 'report preferiti',
 "form.filter.filter_new" => 'salva nei preferiti',
 "form.filter.filter_confirm_delete" => 'sei sicuro di voler cancellare questo report dai preferiti?',
-
-// login form attributes
-"form.login.title" => 'login',
-"form.login.login" => 'login',
 
 // password reminder form attributes
 "form.fpass.title" => 'reset password',
