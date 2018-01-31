@@ -215,9 +215,12 @@ $i18n_key_words = array(
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 // 'label.required_fields' => '* - required fields',
 // 'label.on_behalf' => 'on behalf of',
-// 'label.role_manager' => '(manager)',
-// 'label.role_comanager' => '(co-manager)',
+// TODO: translate all 3 roles properly, see https://www.anuko.com/time_tracker/user_guide/user_accounts.htm
+// This may require different terms for role_manager and role_comanager.
+'label.role_manager' => '(管理者)',
+'label.role_comanager' => '(共同管理者)',
 // 'label.role_admin' => '(administrator)',
+// TODO: translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',
@@ -474,9 +477,6 @@ $i18n_key_words = array(
 "label.chart.period" => '期間表示のチャート',
 
 "label.pbehalf_info" => '%s %s <b>%sを代表して</b>',
-"label.pminfo" => ' (管理者)',
-"label.pcminfo" => ' (共同管理者)',
-"label.painfo" => ' (管理者)',
 "label.time_noentry" => '項目なし',
 "label.today" => '今日',
 "label.req_fields" => '* 必須のフィールド',

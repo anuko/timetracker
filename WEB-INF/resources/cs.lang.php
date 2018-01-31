@@ -215,9 +215,10 @@ $i18n_key_words = array(
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 // 'label.required_fields' => '* - required fields',
 // 'label.on_behalf' => 'on behalf of',
-// 'label.role_manager' => '(manager)',
-// 'label.role_comanager' => '(co-manager)',
-// 'label.role_admin' => '(administrator)',
+'label.role_manager' => '(manažer)',
+'label.role_comanager' => '(co-manažer)',
+'label.role_admin' => '(administrator)',
+// TODO: translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',
@@ -480,9 +481,6 @@ $i18n_key_words = array(
 "label.chart.title2" => 'projekty uživatele',
 "label.chart.period" => 'přehled za období',
 
-"label.pminfo" => ' (manažer)',
-"label.pcminfo" => ' (co-manažer)',
-"label.painfo" => ' (administrator)',
 "label.time_noentry" => 'žádné záznamy',
 "label.today" => 'dnes',
 "label.req_fields" => '* nutno vyplnit',

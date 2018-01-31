@@ -76,13 +76,13 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
-'error.db' => 'Error de la Base de Dades.',
+'error.db' => 'Error de la base de dades.',
 'error.field' => 'Dada "{0}" incorrecta.',
 'error.empty' => 'L\\\'Arxiu "{0}" està buit.',
 'error.not_equal' => 'L\\\'Arxiu "{0}" no és igual al arxiu "{1}".',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-'error.project' => 'Selleccionar Projecte.',
+'error.project' => 'Selleccionar projecte.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
@@ -212,9 +212,8 @@ $i18n_key_words = array(
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 // 'label.required_fields' => '* - required fields',
 'label.on_behalf' => 'a nom de',
-// TODO: translate the following.
-// 'label.role_manager' => '(manager)',
-// 'label.role_comanager' => '(co-manager)',
+'label.role_manager' => '(manejador)',
+'label.role_comanager' => '(auxiliar del manejador)',
 'label.role_admin' => '(administrador)',
 // TODO: translate the following.
 // 'label.page' => 'Page',
@@ -569,9 +568,6 @@ $i18n_key_words = array(
 // labels
 "label.chart.period" => 'gràfica por període',
 
-"label.pminfo" => ' (Manejador)',
-"label.pcminfo" => ' (Auxiliar del manejador)',
-"label.painfo" => ' (Administrador)',
 "label.time_noentry" => 'Sense entrada',
 "label.today" => 'Data Actual',
 "label.req_fields" => '* camps requerits',

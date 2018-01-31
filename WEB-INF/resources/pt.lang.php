@@ -208,7 +208,8 @@ $i18n_key_words = array(
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 // 'label.required_fields' => '* - required fields',
 // 'label.on_behalf' => 'on behalf of',
-// 'label.role_manager' => '(manager)',
+'label.role_manager' => '(gerente)',
+// TODO: translate the following.
 // 'label.role_comanager' => '(co-manager)',
 // 'label.role_admin' => '(administrator)',
 // 'label.page' => 'Page',
@@ -358,7 +359,6 @@ $i18n_key_words = array(
 
 // labels
 "label.pbehalf_info" => '%s %s <b>on behalf of %s</b>',
-"label.pminfo" => ' (gerente)',
 "label.time_noentry" => 'sem registro',
 "label.req_fields" => '* campos obrigatórios',
 "label.sel_tp" => 'selecione o período de tempo',

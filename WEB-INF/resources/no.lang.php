@@ -475,10 +475,6 @@ $i18n_key_words = array(
 
 // labels
 "label.pbehalf_info" => '%s %s <b>på vegne av %s</b>',
-// Note to translators: the strings below must be correctly translated
-// "label.pminfo" => ' (admin)',
-// "label.pcminfo" => ' (co-manager)',
-// "label.painfo" => ' (administrator)',
 "label.time_noentry" => 'ingen tilgang',
 "label.today" => 'i dag',
 "label.req_fields" => '* obligatoriske felt',

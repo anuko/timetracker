@@ -488,16 +488,9 @@ $i18n_key_words = array(
 // "controls.per_ty" => 'this year'
 "controls.sel_period" => '--- alege perioada ---',
 "controls.sel_groupby" => '--- fara grupare   ---',
-// Note to translators: the strings below must be translated
-// "controls.inc_billable" => 'billable',
-// "controls.inc_nbillable" => 'not billable',
-// "controls.default" => '--- default ---',
 
 // labels
 "label.pbehalf_info" => '%s %s <b>in numele %s</b>',
-"label.pminfo" => ' (manager)',
-"label.pcminfo" => ' (co-manager)',
-"label.painfo" => ' (administrator)',
 "label.time_noentry" => 'nu exista inregistrari',
 "label.today" => 'astazi',
 "label.req_fields" => '* date obligatorii',

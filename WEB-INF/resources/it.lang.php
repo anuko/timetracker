@@ -210,9 +210,10 @@ $i18n_key_words = array(
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 // 'label.required_fields' => '* - required fields',
 // 'label.on_behalf' => 'on behalf of',
-// 'label.role_manager' => '(manager)',
-// 'label.role_comanager' => '(co-manager)',
-// 'label.role_admin' => '(administrator)',
+'label.role_manager' => '(manager)',
+'label.role_comanager' => '(co-manager)',
+'label.role_admin' => '(amministratore)',
+// TODO: translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',
@@ -447,9 +448,6 @@ $i18n_key_words = array(
 "label.chart.period" => 'grafico per il periodo',
 
 "label.pbehalf_info" => '%s %s <b>a favore di %s</b>',
-"label.pminfo" => ' (manager)',
-"label.pcminfo" => ' (co-manager)',
-"label.painfo" => ' (amministratore)',
 "label.time_noentry" => 'nessun inserimento',
 "label.today" => 'oggi',
 "label.req_fields" => '* campi obbligatori',

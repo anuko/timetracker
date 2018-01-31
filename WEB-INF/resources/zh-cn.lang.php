@@ -203,9 +203,9 @@ $i18n_key_words = array(
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 // 'label.required_fields' => '* - required fields',
 // 'label.on_behalf' => 'on behalf of',
-// 'label.role_manager' => '(manager)',
-// 'label.role_comanager' => '(co-manager)',
-// 'label.role_admin' => '(administrator)',
+'label.role_manager' => '(经理)',
+'label.role_comanager' => '(合作经理人)',
+'label.role_admin' => '(管理员)',
 'label.page' => '页码',
 // TODO: translate the following.
 // 'label.condition' => 'Condition',
@@ -541,9 +541,6 @@ $i18n_key_words = array(
 "label.chart.period" => '图表期限',
 
 "label.pbehalf_info" => '%s %s <b>代表%s</b>',
-"label.pminfo" => ' (经理)',
-"label.pcminfo" => ' (合作经理人)',
-"label.painfo" => ' (管理员)',
 "label.time_noentry" => '没有条目',
 "label.today" => '今天',
 "label.req_fields" => '* 必填栏目',
