@@ -276,8 +276,6 @@ $i18n_key_words = array(
 // password reminder form attributes
 "form.fpass.send_pass_str" => 'jelszó alap állapotra állítása megkezdve',
 "form.fpass.send_pass_subj" => 'A jelszó alap állapotra állítása a Anuko TimeTracker-ben',
-// Note to translators: the string below must be translated
-// "form.fpass.send_pass_body" => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 "form.fpass.reset_comment" => "a jelszót a megváltoztatásához írja be és mentse el",
 
 // administrator form
@@ -289,12 +287,8 @@ $i18n_key_words = array(
 "form.admin.profile.noprofiles" => 'az adatbázis üres. lépj be adminisztrátorként és hozz létre egyet.',
 "form.admin.profile.comment" => 'csoport törlése',
 "form.admin.profile.th.id" => 'azonosító',
-"form.admin.profile.th.name" => 'név',
 "form.admin.profile.th.active" => 'aktív',
 "form.admin.options" => 'opciók',
-// "form.admin.custom_date_format" => "date format",
-// "form.admin.custom_time_format" => "time format",
-// "form.admin.start_week" => "first day of week",
 
 // my time form attributes
 "form.mytime.title" => 'munkaidőm',
@@ -319,35 +313,18 @@ $i18n_key_words = array(
 "form.mytime.th.note" => 'megjegyzés',
 "form.mytime.del_yes" => 'a bejegyzés törölve',
 "form.mytime.no_finished_rec" => 'csak az munka kezdete lett megjelölve, ha később visszalépsz a rendszerbe beállíthatod a vég-időpontot...',
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.mytime.billable" => 'billable',
-// "form.mytime.warn_tozero_rec" => 'this time record must be deleted because this time period is locked',
-// "form.mytime.uncompleted" => 'uncompleted',
 
 // profile form attributes
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => 'új vezetői jogosultság létrehozása',
 "form.profile.edit_title" => 'profil szerkesztése',
 "form.profile.name" => 'név',
-// Note to translators: the string below is missing and must be added and translated 
-// "form.profile.login" => 'login',
-
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.profile.showchart" => 'show pie charts',
-// "form.profile.lang" => 'language',
-// "form.profile.custom_date_format" => "date format",
-// "form.profile.custom_time_format" => "time format",
-// "form.profile.default_format" => "(default)",
-// "form.profile.start_week" => "first day of week",
 
 // people form attributes
 "form.people.ppl_str" => 'munkatársak',
 "form.people.createu_str" => 'új munkatárs hozzáadása',
 "form.people.edit_str" => 'munkatárs adatainak szerkesztése',
 "form.people.del_str" => 'munkatárs adatainak törlése',
-"form.people.th.name" => 'név',
-// Note to translators: the string below is missing and must be added and translated 
-// "form.people.th.login" => 'login',
 "form.people.th.role" => 'szerepkör',
 "form.people.th.status" => 'státusz',
 "form.people.th.project" => 'projekt',
@@ -355,9 +332,6 @@ $i18n_key_words = array(
 "form.people.manager" => 'vezető',
 "form.people.comanager" => 'helyettes',
 "form.people.empl" => 'dolgozó',
-"form.people.name" => 'név',
-// Note to translators: the string below is missing and must be added and translated 
-// "form.people.login" => 'login',
 
 "form.people.rate" => 'általános óradíj',
 "form.people.comanager" => 'helyettes',
@@ -369,18 +343,9 @@ $i18n_key_words = array(
 "form.project.edit_str" => 'projekt adatainak szerkesztése',
 "form.project.add_str" => 'új projekt hozzáadása',
 "form.project.del_str" => 'projekt törlése',
-"form.project.th.name" => 'név',
-"form.project.name" => 'név',
 
 // activities form attributes
-"form.activity.act_title" => 'tevékenységek',
-"form.activity.add_title" => 'új tevékenyég felvétele',
-"form.activity.edit_str" => 'tevékenység szerkesztése',
-"form.activity.del_str" => 'tevékenység törlése',
-"form.activity.name" => 'név',
 "form.activity.project" => 'projekt',
-"form.activity.th.name" => 'név',
-"form.activity.th.project" => 'projekt',
 
 // report attributes
 "form.report.title" => 'riportok',
@@ -443,17 +408,11 @@ $i18n_key_words = array(
 "form.migration.export.title" => 'az adatok exportálása',
 "form.migration.export.success" => 'az exportálás sikeres volt',
 "form.migration.export.text" => 'kimentheted az összes felvitt csoport adatait egy XML file-ba, ami megkönnyíti a TimeTracker szerverek közötti adatátvitelt...',
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.migration.compression.none" => 'none',
-// "form.migration.compression.gzip" => 'gzip',
-// "form.migration.compression.bzip" => 'bzip',
 
 "form.client.title"=> 'ügyfelek',
 "form.client.add_title" => 'új ügyfél hozzáadása',
 "form.client.edit_title" => 'ügyfél adatainak szerkesztése',
 "form.client.del_title" => 'ügyfél törlése',
-"form.client.th.name" => 'név',
-"form.client.name" => 'név',
 "form.client.tax" => 'adó',
 "form.client.comment" => 'megjegyzés ',
 

@@ -147,8 +147,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
-// 'label.person_name' => 'Name',
-// 'label.thing_name' => 'Name',
+// TODO: confirm that Jméno and Název are correct translations.
+'label.person_name' => 'Jméno',
+'label.thing_name' => 'Název',
+// TODO: translate the following.
 // 'label.login' => 'Login',
 'label.password' => 'Heslo',
 'label.confirm_password' => 'Potvrdit heslo',
@@ -290,7 +292,6 @@ $i18n_key_words = array(
 "form.admin.profile.noprofiles" => 'vaše databáze je prázdná. přihlašte se jako admin a vytvořte nový tým.',
 "form.admin.profile.comment" => 'smazat tým',
 "form.admin.profile.th.id" => 'id',
-"form.admin.profile.th.name" => 'jméno',
 "form.admin.profile.th.active" => 'aktovní',
 // Note to translators: the strings below are missing in the translation and must be added
 // "form.admin.custom_date_format" => "date format",
@@ -329,7 +330,6 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => 'vytvořit nový manažerský účet',
 "form.profile.edit_title" => 'upravit profil',
-"form.profile.name" => 'jméno',
 "form.profile.login" => 'přihlásit',
 
 "form.profile.showchart" => 'zobrazuj grafy',
@@ -339,7 +339,6 @@ $i18n_key_words = array(
 "form.people.createu_str" => 'vytváření nového uživatele',
 "form.people.edit_str" => 'nastavení uživatele',
 "form.people.del_str" => 'smazat uživatele',
-"form.people.th.name" => 'jméno',
 "form.people.th.login" => 'přihlásit',
 "form.people.th.role" => 'role',
 "form.people.th.status" => 'status',
@@ -348,7 +347,6 @@ $i18n_key_words = array(
 "form.people.manager" => 'manažer',
 "form.people.comanager" => 'spolumanažer',
 "form.people.empl" => 'uživatel',
-"form.people.name" => 'jméno',
 "form.people.login" => 'přihlásit',
 
 "form.people.rate" => 'hodinová sazba',
@@ -360,18 +358,9 @@ $i18n_key_words = array(
 "form.project.edit_str" => 'upravit projekt',
 "form.project.add_str" => 'pridat nový projekt',
 "form.project.del_str" => 'smazat projekt',
-"form.project.th.name" => 'jméno',
-"form.project.name" => 'Název',
 
 // activities form attributes
-"form.activity.act_title" => 'činnosti',
-"form.activity.add_title" => 'přidat činnost',
-"form.activity.edit_str" => 'upravit činnost',
-"form.activity.del_str" => 'smazat činnost',
-"form.activity.name" => 'název činnosti',
 "form.activity.project" => 'projekt',
-"form.activity.th.name" => 'jméno',
-"form.activity.th.project" => 'projekt',
 
 // report attributes
 "form.report.title" => 'sestavy',
@@ -443,8 +432,6 @@ $i18n_key_words = array(
 "form.client.add_title" => 'přidat zákazníka',
 "form.client.edit_title" => 'upravit zákazníka',
 "form.client.del_title" => 'smazat zákazníka',
-"form.client.th.name" => 'jméno',
-"form.client.name" => 'jméno',
 "form.client.tax" => 'DPH',
 "form.client.comment" => 'poznámka ',
 

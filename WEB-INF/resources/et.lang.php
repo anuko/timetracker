@@ -297,7 +297,6 @@ $i18n_key_words = array(
 "form.admin.profile.noprofiles" => 'sinu andmebaas on tühi. logi adminina sisse ja loo uus meeskond.',
 "form.admin.profile.comment" => 'kustuta meeskond',
 "form.admin.profile.th.id" => 'id',
-"form.admin.profile.th.name" => 'nimi',
 "form.admin.profile.th.active" => 'aktiivne',
 // Note to translators: the strings below are missing in the translation and must be translated
 // "form.admin.custom_date_format" => "date format",
@@ -337,7 +336,6 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => 'loo uus halduri konto',
 "form.profile.edit_title" => 'profiili muutmine',
-"form.profile.name" => 'nimi',
 "form.profile.login" => 'login',
 
 // Note to translators: the strings below must be translated and added to the localization file
@@ -353,7 +351,6 @@ $i18n_key_words = array(
 "form.people.createu_str" => 'loo uus kasutaja',
 "form.people.edit_str" => 'kasutaja muutmine',
 "form.people.del_str" => 'kasutaja kustutamine',
-"form.people.th.name" => 'nimi',
 "form.people.th.login" => 'login',
 "form.people.th.role" => 'roll',
 "form.people.th.status" => 'seisund',
@@ -362,7 +359,6 @@ $i18n_key_words = array(
 "form.people.manager" => 'haldur',
 "form.people.comanager" => 'kaashaldur',
 "form.people.empl" => 'kasutaja',
-"form.people.name" => 'nimi',
 "form.people.login" => 'login',
 
 "form.people.rate" => 'vaikimisi tunni hind',
@@ -374,18 +370,9 @@ $i18n_key_words = array(
 "form.project.edit_str" => 'projektide muutmine',
 "form.project.add_str" => 'uue projekti lisamine',
 "form.project.del_str" => 'projekti kustutamine',
-"form.project.th.name" => 'nimi',
-"form.project.name" => 'nimi',
 
 // activities form attributes
-"form.activity.act_title" => 'tegevus',
-"form.activity.add_title" => 'uue tegevuse lisamine',
-"form.activity.edit_str" => 'tegevuse muutmine',
-"form.activity.del_str" => 'tegevuse kustutamine',
-"form.activity.name" => 'nimi',
 "form.activity.project" => 'projekt',
-"form.activity.th.name" => 'nimi',
-"form.activity.th.project" => 'projekt',
 
 // report attributes
 "form.report.title" => 'aruanded',
@@ -457,8 +444,6 @@ $i18n_key_words = array(
 "form.client.add_title" => 'lisa klient',
 "form.client.edit_title" => 'muuda klienti',
 "form.client.del_title" => 'kustuta klient',
-"form.client.th.name" => 'nimi',
-"form.client.name" => 'nimi',
 "form.client.tax" => 'maks',
 "form.client.comment" => 'märkus ',
 

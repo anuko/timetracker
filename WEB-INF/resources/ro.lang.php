@@ -150,8 +150,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
-// 'label.person_name' => 'Name',
-// 'label.thing_name' => 'Name',
+'label.person_name' => 'Nume',
+'label.thing_name' => 'Nume',
+// TODO: translate the following.
 // 'label.login' => 'Login',
 'label.password' => 'Parola',
 'label.confirm_password' => 'Confirma parola',
@@ -189,8 +190,9 @@ $i18n_key_words = array(
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
-// 'label.edit' => 'Edit',
-'label.delete' => 'Sterge',
+// TODO: confirm that label.edit and label.delete are translated correctly.
+'label.edit' => 'Editează',
+'label.delete' => 'Șterge',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
 // 'label.select_all' => 'Select all',
@@ -282,9 +284,6 @@ $i18n_key_words = array(
 "form.admin.profile.noprofiles" => 'baza de date este goala. intra ca admin si adauga o noua echipa.',
 "form.admin.profile.comment" => 'sterge echipa',
 "form.admin.profile.th.id" => 'id',
-"form.admin.profile.th.name" => 'nunme',
-"form.admin.profile.th.edit" => 'editeaza',
-"form.admin.profile.th.del" => 'sterge',
 "form.admin.profile.th.active" => 'activ',
 // Note to translators: the strings below are missing and must be added and translated 
 // "form.admin.options" => 'options',
@@ -313,8 +312,6 @@ $i18n_key_words = array(
 "form.mytime.th.finish" => 'sfarsit',
 "form.mytime.th.duration" => 'durata',
 "form.mytime.th.note" => 'nota',
-"form.mytime.th.edit" => 'editeaza',
-"form.mytime.th.delete" => 'sterge',
 "form.mytime.del_yes" => 'inregistrarea timului a fost stearsa cu succes',
 "form.mytime.no_finished_rec" => 'aceasta inregistrare a fost salvata numei cu timpul de inceput. nu este o eroare. poti parasi aplicatia daca este nevoie.',
 // Note to translators: the strings below are missing and must be added and translated 
@@ -326,37 +323,19 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => 'creazaun nou cont de tip manager',
 "form.profile.edit_title" => 'editeaza profilul',
-"form.profile.name" => 'nume',
-// Note to translators: the string below is missing and must be added and translated 
-// "form.profile.login" => 'login',
-
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.profile.showchart" => 'show pie charts',
-// "form.profile.lang" => 'language',
-// "form.profile.custom_date_format" => "date format",
-// "form.profile.custom_time_format" => "time format",
-// "form.profile.default_format" => "(default)",
-// "form.profile.start_week" => "first day of week",
 
 // people form attributes
 "form.people.ppl_str" => 'persoane',
 "form.people.createu_str" => 'adaugare untilizator nou',
 "form.people.edit_str" => 'editare utilizator',
 "form.people.del_str" => 'stergee utilizator',
-"form.people.th.name" => 'nume',
-// Note to translators: the string below is missing and must be added and translated 
-// "form.people.th.login" => 'login',
 "form.people.th.role" => 'functie',
-"form.people.th.edit" => 'editeaza',
-"form.people.th.del" => 'sterge',
 "form.people.th.status" => 'stare',
 "form.people.th.project" => 'proiect',
 "form.people.th.rate" => 'rata',
 "form.people.manager" => 'manager',
 "form.people.comanager" => 'comanager',
 "form.people.empl" => 'utilizator',
-"form.people.name" => 'nume',
-// Note to translators: "form.people.login" => 'e-mail', // email has been changed to login
 
 "form.people.rate" => 'pret pe ora implicit',
 "form.people.comanager" => 'co-manager',
@@ -367,22 +346,9 @@ $i18n_key_words = array(
 "form.project.edit_str" => 'editare proiect',
 "form.project.add_str" => 'adauagre proiect nou',
 "form.project.del_str" => 'stergere proiect',
-"form.project.th.name" => 'nume',
-"form.project.th.edit" => 'editeaza',
-"form.project.th.del" => 'sterge',
-"form.project.name" => 'nume',
 
 // activities form attributes
-"form.activity.act_title" => 'activitati',
-"form.activity.add_title" => 'adaugare activitate noua',
-"form.activity.edit_str" => 'editare activitate',
-"form.activity.del_str" => 'stergere activitate',
-"form.activity.name" => 'nume',
 "form.activity.project" => 'proiect',
-"form.activity.th.name" => 'nume',
-"form.activity.th.project" => 'proiect',
-"form.activity.th.edit" => 'editare',
-"form.activity.th.del" => 'stergere',
 
 // report attributes
 "form.report.title" => 'rapoarte',
@@ -390,7 +356,6 @@ $i18n_key_words = array(
 "form.report.to" => 'data sfarsit',
 "form.report.groupby_user" => 'utilizator',
 "form.report.groupby_project" => 'proiect',
-"form.report.groupby_activity" => 'activitate',
 "form.report.duration" => 'durata',
 "form.report.start" => 'inceput',
 "form.report.activity" => 'activitate',
@@ -454,20 +419,12 @@ $i18n_key_words = array(
 "form.client.add_title" => 'adauga client',
 "form.client.edit_title" => 'editeaza client',
 "form.client.del_title" => 'sterge client',
-"form.client.th.name" => 'nume',
-"form.client.th.edit" => 'editeaza',
-"form.client.th.del" => 'sterge',
-"form.client.name" => 'nume',
 "form.client.tax" => 'taxa',
 "form.client.comment" => 'comentariu ',
 
 // miscellaneous strings
 "forward.forgot_password" => 'parola pierduta?',
-"forward.edit" => 'editeaza',
-"forward.delete" => 'sterge',
 "forward.tocsvfile" => 'exporta date in fisier .csv',
-// Note to translators: the string below is missing and must be added and translated 
-// "forward.toxmlfile" => 'export data to .xml file',
 "forward.geninvoice" => 'genereaza factura',
 "forward.change" => 'configureaza clienti',
 
@@ -510,14 +467,4 @@ $i18n_key_words = array(
 "label.disable" => 'inactiv',
 "label.enable" => 'activ',
 "label.filter" => 'filtru',
-// Note to translators: the strings below are missing and must be added and translated 
-// "label.timeweek" => 'weekly total',
-// "label.hrs" => 'hrs',
-// "label.errors" => 'errors',
-// "label.ldap_hint" => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// "label.calendar_today" => 'today',
-// "label.calendar_close" => 'close',
-
-// login hello text
-// "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
 );

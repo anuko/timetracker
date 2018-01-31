@@ -142,7 +142,7 @@ $i18n_key_words = array(
 // 'label.currency' => 'Currency',
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
-// 'label.person_name' => 'Name',
+'label.person_name' => 'Ime',
 // 'label.thing_name' => 'Name',
 // 'label.login' => 'Login',
 'label.password' => 'Geslo',
@@ -182,7 +182,7 @@ $i18n_key_words = array(
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
-// 'label.edit' => 'Edit',
+'label.edit' => 'Uredi',
 'label.delete' => 'Izbriši',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
@@ -270,21 +270,10 @@ $i18n_key_words = array(
 "form.project.add_str" => 'dodajanje novega projekta',
 "form.project.del_str" => 'brisanje projekta',
 "form.project.th.name" => 'ime',
-"form.project.th.edit" => 'uredi',
-"form.project.th.del" => 'izbriši',
 "form.project.name" => 'ime',
 
 // activities form attributes
-"form.activity.act_title" => 'aktivnosti',
-"form.activity.add_title" => 'dodajanje novih aktivnosti',
-"form.activity.edit_str" => 'urejanje aktivnosti',
-"form.activity.del_str" => 'brisanje aktivnosti',
-"form.activity.name" => 'ime',
 "form.activity.project" => 'projekt',
-"form.activity.th.name" => 'ime',
-"form.activity.th.project" => 'projekt',
-"form.activity.th.edit" => 'uredi',
-"form.activity.th.del" => 'izbriši',
 
 // mail form attributes
 "form.mail.from" => 'od',
