@@ -400,13 +400,13 @@ $i18n_key_words = array(
 'form.users.rate' => 'Taksa',
 'form.users.default_rate' => 'Oletustuntitaksa',
 
-// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-'form.client.client_to_delete' => 'Poistettava asiakas',
-'form.client.client_entries' => 'Asiakassyötteet',
-
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Aktiiviset asiakkaat',
 'form.clients.inactive_clients' => 'Ei-aktiiviset asiakkaat',
+
+// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
+'form.client.client_to_delete' => 'Poistettava asiakas',
+'form.client.client_entries' => 'Asiakassyötteet',
 
 // Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'Voit viedä tiimin tiedot xml-tiedostoksi, mikä voi helpottaa tietojen siirtoa omalle palvelimelle.',
@@ -433,6 +433,10 @@ $i18n_key_words = array(
 'form.profile.type_all' => 'kaikki',
 'form.profile.type_start_finish' => 'aloitus ja lopetus',
 'form.profile.type_duration' => 'kesto',
+// TODO: translate the following.
+// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.profile.uncompleted_indicators_none' => 'do not show',
+// 'form.profile.uncompleted_indicators_show' => 'show',
 'form.profile.plugins' => 'Lisäosat',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.

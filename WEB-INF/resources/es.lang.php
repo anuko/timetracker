@@ -458,15 +458,15 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.users.default_rate' => 'Default hourly rate',
 
-// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-// TODO: translate the following.
-// 'form.client.client_to_delete' => 'Client to delete',
-// 'form.client.client_entries' => 'Client entries',
-
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
 // 'form.clients.active_clients' => 'Active Clients',
 // 'form.clients.inactive_clients' => 'Inactive Clients',
+
+// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
+// TODO: translate the following.
+// 'form.client.client_to_delete' => 'Client to delete',
+// 'form.client.client_entries' => 'Client entries',
 
 // Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'Usted puede exportar todos los datos del grupo dentro de un archivo xml. Ésto puede ser útil si necesita migrar datos a su propio sevidor.',

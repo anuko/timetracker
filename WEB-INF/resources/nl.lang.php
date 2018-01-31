@@ -389,13 +389,13 @@ $i18n_key_words = array(
 'form.users.rate' => 'Tarief',
 'form.users.default_rate' => 'Standaard uurtarief',
 
-// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-'form.client.client_to_delete' => 'Klant die wordt verwijderd',
-'form.client.client_entries' => 'Klant gegevens',
-
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Actieve klanten',
 'form.clients.inactive_clients' => 'Inactieve klanten',
+
+// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
+'form.client.client_to_delete' => 'Klant die wordt verwijderd',
+'form.client.client_entries' => 'Klant gegevens',
 
 // Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'U kunt alle teamgegevens naar een xml bestand exporteren. Dit kan zinvol zijn als u gegevens migreert naar uw eigen server.',

@@ -399,13 +399,13 @@ $i18n_key_words = array(
 'form.users.rate' => 'Timtaxa',
 'form.users.default_rate' => 'Standard timtaxa',
 
-// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-'form.client.client_to_delete' => 'Kund',
-'form.client.client_entries' => 'Relaterade tider och kostnader',
-
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Aktiva kunder',
 'form.clients.inactive_clients' => 'Inaktiva kunder',
+
+// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
+'form.client.client_to_delete' => 'Kund',
+'form.client.client_entries' => 'Relaterade tider och kostnader',
 
 // Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'Du kan exportera all information om arbetsgrupperna till en XML-fil. Det kan vara användbart när du migrerar till en egen server.',
@@ -429,12 +429,12 @@ $i18n_key_words = array(
 'form.profile.mode_projects' => 'Projekt',
 'form.profile.mode_projects_and_tasks' => 'Projekt och arbetsuppgifter',
 'form.profile.record_type' => 'Typ av tidsregistrering',
-'form.profile.uncompleted_indicators' => 'Indikatorer för oavslutad registrering',
-'form.profile.uncompleted_indicators_none' => 'Visa inte',
-'form.profile.uncompleted_indicators_show' => 'Visa',
 'form.profile.type_all' => 'Alla',
 'form.profile.type_start_finish' => 'Starttid och sluttid',
 'form.profile.type_duration' => 'Varaktighet',
+'form.profile.uncompleted_indicators' => 'Indikatorer för oavslutad registrering',
+'form.profile.uncompleted_indicators_none' => 'Visa inte',
+'form.profile.uncompleted_indicators_show' => 'Visa',
 'form.profile.plugins' => 'Tillägg',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.

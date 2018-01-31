@@ -428,14 +428,14 @@ $i18n_key_words = array(
 'form.users.rate' => 'תעריף',
 'form.users.default_rate' => 'תעריף ברירת מחדל לשעה',
 
+// Clients form. See example at https://timetracker.anuko.com/clients.php
+'form.clients.active_clients' => 'לקוחות פעילים',
+'form.clients.inactive_clients' => 'לקוחות לא פעילים',
+
 // Client delete form. See example at https://timetracker.anuko.com/client_delete.php
 // TODO: translate the following.
 // 'form.client.client_to_delete' => 'Client to delete',
 // 'form.client.client_entries' => 'Client entries',
-
-// Clients form. See example at https://timetracker.anuko.com/clients.php
-'form.clients.active_clients' => 'לקוחות פעילים',
-'form.clients.inactive_clients' => 'לקוחות לא פעילים',
 
 // Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'ניתן לייצא את כל נתוני הצוות בקובץ XML. זה מאד שימושי אם ברצונך להשתמש בשרת משלך.',
@@ -462,6 +462,10 @@ $i18n_key_words = array(
 'form.profile.type_all' => 'הכל',
 'form.profile.type_start_finish' => 'התחלה וסיום',
 'form.profile.type_duration' => 'משך זמן',
+// TODO: translate the following.
+// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.profile.uncompleted_indicators_none' => 'do not show',
+// 'form.profile.uncompleted_indicators_show' => 'show',
 'form.profile.plugins' => 'תוספים',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.

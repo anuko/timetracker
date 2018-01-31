@@ -418,12 +418,12 @@ $i18n_key_words = array(
 'form.profile.mode_projects' => 'проекты',
 'form.profile.mode_projects_and_tasks' => 'проекты и задачи',
 'form.profile.record_type' => 'Тип записи',
-'form.profile.uncompleted_indicators' => 'Индикаторы незавершения',
-'form.profile.uncompleted_indicators_none' => 'не показывать',
-'form.profile.uncompleted_indicators_show' => 'показывать',
 'form.profile.type_all' => 'все',
 'form.profile.type_start_finish' => 'начало и конец',
 'form.profile.type_duration' => 'длительность',
+'form.profile.uncompleted_indicators' => 'Индикаторы незавершения',
+'form.profile.uncompleted_indicators_none' => 'не показывать',
+'form.profile.uncompleted_indicators_show' => 'показывать',
 'form.profile.plugins' => 'Плагины',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.

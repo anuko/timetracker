@@ -420,14 +420,14 @@ $i18n_key_words = array(
 'form.users.rate' => 'Sadzba',
 'form.users.default_rate' => 'Predvolená hodinová sadzba',
 
+// Clients form. See example at https://timetracker.anuko.com/clients.php
+'form.clients.active_clients' => 'Aktívny klienti',
+'form.clients.inactive_clients' => 'Neaktívny klienti',
+
 // Client delete form. See example at https://timetracker.anuko.com/client_delete.php
 // TODO: translate the following.
 // 'form.client.client_to_delete' => 'Client to delete',
 // 'form.client.client_entries' => 'Client entries',
-
-// Clients form. See example at https://timetracker.anuko.com/clients.php
-'form.clients.active_clients' => 'Aktívny klienti',
-'form.clients.inactive_clients' => 'Neaktívny klienti',
 
 // Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'Môžete exportovať všetky údaje o tíme do xml súboru. Toto môže byť užitočné pri prenose údajov na iný server.',
@@ -454,6 +454,10 @@ $i18n_key_words = array(
 'form.profile.type_all' => 'všetky',
 'form.profile.type_start_finish' => 'začiatok a koniec',
 'form.profile.type_duration' => 'trvanie',
+// TODO: translate the following.
+// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.profile.uncompleted_indicators_none' => 'do not show',
+// 'form.profile.uncompleted_indicators_show' => 'show',
 'form.profile.plugins' => 'Doplnkové moduly',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.

@@ -403,13 +403,13 @@ $i18n_key_words = array(
 'form.users.rate' => 'Cena',
 'form.users.default_rate' => 'Podrazumevana cena sati',
 
-// Forma brisanja klijenta. Pogledajte primer na  https://timetracker.anuko.com/client_delete.php
-'form.client.client_to_delete' => 'Klijent za brisanje',
-'form.client.client_entries' => 'Unos klijenta',
-
 // Forma klijenata. Pogledajte primer na https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Aktivni klijent',
 'form.clients.inactive_clients' => 'Neaktivni klijent',
+
+// Forma brisanja klijenta. Pogledajte primer na  https://timetracker.anuko.com/client_delete.php
+'form.client.client_to_delete' => 'Klijent za brisanje',
+'form.client.client_entries' => 'Unos klijenta',
 
 // Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'Postoji mogućnost izvoza svih podataka od timova u xml fajlu. Može vam biti korisno ako imate internu bazu podataka.',
@@ -436,6 +436,10 @@ $i18n_key_words = array(
 'form.profile.type_all' => 'sve',
 'form.profile.type_start_finish' => 'početak i kraj',
 'form.profile.type_duration' => 'trajanje',
+// TODO: translate the following.
+// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.profile.uncompleted_indicators_none' => 'do not show',
+// 'form.profile.uncompleted_indicators_show' => 'show',
 'form.profile.plugins' => 'Dodaci',
 
 // Forma mejla. Pogledajte primer na https://timetracker.anuko.com/report_send.php when emailing a report.

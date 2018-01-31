@@ -390,13 +390,13 @@ $i18n_key_words = array(
 'form.users.rate' => 'Rate',
 'form.users.default_rate' => 'Default hourly rate',
 
-// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-'form.client.client_to_delete' => 'Client to delete',
-'form.client.client_entries' => 'Client entries',
-
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Active Clients',
 'form.clients.inactive_clients' => 'Inactive Clients',
+
+// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
+'form.client.client_to_delete' => 'Client to delete',
+'form.client.client_entries' => 'Client entries',
 
 // Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
@@ -420,12 +420,12 @@ $i18n_key_words = array(
 'form.profile.mode_projects' => 'projects',
 'form.profile.mode_projects_and_tasks' => 'projects and tasks',
 'form.profile.record_type' => 'Record type',
-'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
-'form.profile.uncompleted_indicators_none' => 'do not show',
-'form.profile.uncompleted_indicators_show' => 'show',
 'form.profile.type_all' => 'all',
 'form.profile.type_start_finish' => 'start and finish',
 'form.profile.type_duration' => 'duration',
+'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
+'form.profile.uncompleted_indicators_none' => 'do not show',
+'form.profile.uncompleted_indicators_show' => 'show',
 'form.profile.plugins' => 'Plugins',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
