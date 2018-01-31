@@ -176,13 +176,7 @@ $i18n_key_words = array(
 'label.start' => 'Inicio',
 'label.finish' => 'Fin',
 'label.duration' => 'Duración',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 'label.note' => 'Nota',
-// TODO: translate the following.
 // 'label.notes' => 'Notes',
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
@@ -191,11 +185,15 @@ $i18n_key_words = array(
 // 'label.month_total' => 'Month total',
 'label.today' => 'Hoy',
 'label.total_hours' => 'Horas totales',
-// TODO: translate the following.
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
 'label.edit' => 'Modificar',
 'label.delete' => 'Eliminar',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // TODO: translate label.configure.
 // 'label.configure' => 'Configure',
 'label.select_all' => 'Seleccionar todos',

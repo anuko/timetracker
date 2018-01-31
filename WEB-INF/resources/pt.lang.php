@@ -169,6 +169,19 @@ $i18n_key_words = array(
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
 // 'label.duration' => 'Duration',
+// 'label.note' => 'Note',
+// 'label.notes' => 'Notes',
+// 'label.item' => 'Item',
+// 'label.cost' => 'Cost',
+// 'label.day_total' => 'Day total',
+// 'label.week_total' => 'Week total',
+// 'label.month_total' => 'Month total',
+// 'label.today' => 'Today',
+// 'label.total_hours' => 'Total hours',
+// 'label.total_cost' => 'Total cost',
+// 'label.view' => 'View',
+// 'label.edit' => 'Edit',
+'label.delete' => 'Apagar',
 
 
 
@@ -179,7 +192,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.yes' => 'yes',
 // 'label.no' => 'no',
-'label.delete' => 'Apagar',
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

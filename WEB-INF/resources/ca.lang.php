@@ -174,11 +174,6 @@ $i18n_key_words = array(
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
 // 'label.duration' => 'Duration',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 // 'label.note' => 'Note',
 // 'label.notes' => 'Notes',
 // 'label.item' => 'Item',
@@ -192,6 +187,11 @@ $i18n_key_words = array(
 // 'label.view' => 'View',
 // 'label.edit' => 'Edit',
 'label.delete' => 'Eliminar',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
 // 'label.select_all' => 'Select all',

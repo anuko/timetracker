@@ -165,21 +165,6 @@ $i18n_key_words = array(
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
 // 'label.duration' => 'Duration',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// 'label.option' => 'Option',
-// 'label.invoice' => 'Invoice',
-// 'label.project' => 'Project',
-// 'label.projects' => 'Projects',
-// 'label.task' => 'Task',
-// 'label.tasks' => 'Tasks',
-// 'label.description' => 'Description',
-// 'label.start' => 'Start',
-// 'label.finish' => 'Finish',
-// 'label.duration' => 'Duration',
 // 'label.note' => 'Note',
 // 'label.notes' => 'Notes',
 // 'label.item' => 'Item',
@@ -193,6 +178,11 @@ $i18n_key_words = array(
 // 'label.view' => 'View',
 // 'label.edit' => 'Edit',
 'label.delete' => '删除',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // TODO: Translate the following.
 // 'label.configure' => 'Configure',
 // 'label.select_all' => 'Select all',
