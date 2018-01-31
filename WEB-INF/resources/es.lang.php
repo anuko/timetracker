@@ -269,11 +269,6 @@ $i18n_key_words = array(
 'title.reports' => 'Reportes',
 // TODO: translate the following.
 // 'title.report' => 'Report',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 // 'title.send_report' => 'Sending Report',
 'title.invoice' => 'Factura',
 // TODO: translate the following.
@@ -294,8 +289,8 @@ $i18n_key_words = array(
 'title.delete_user' => 'Eliminando usuario',
 'title.clients' => 'Clientes',
 'title.add_client' => 'Agregar cliente',
-'title.edit_client' => 'Modificar cliente',
-'title.delete_client' => 'Eliminar cliente',
+'title.edit_client' => 'Modificando cliente',
+'title.delete_client' => 'Eliminando cliente',
 // TODO: translate the following.
 // 'title.invoices' => 'Invoices',
 // 'title.add_invoice' => 'Adding Invoice',
@@ -306,8 +301,8 @@ $i18n_key_words = array(
 // 'title.edit_notification' => 'Editing Notification',
 // 'title.delete_notification' => 'Deleting Notification',
 // 'title.monthly_quotas' => 'Monthly Quotas',
-'title.export' => 'Exportar datos',
-'title.import' => 'Importar datos',
+'title.export' => 'Exportar datos', // TODO: Consider changing to exportando for consistency with other titles.
+'title.import' => 'Importar datos', // TODO: Consider changing to importando for consistency with other titles.
 'title.options' => 'Opciones',
 'title.profile' => 'Perfil',
 // TODO: translate the following.
@@ -321,7 +316,6 @@ $i18n_key_words = array(
 // 'title.cf_delete_dropdown_option' => 'Deleting Option',
 // NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
 // It is also a name for the Locking plugin on the Team profile page.
-// TODO: translate the following.
 // 'title.locking' => 'Locking',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
@@ -366,10 +360,13 @@ $i18n_key_words = array(
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => '¿Olvido su contraseña?',
+// TODO: translate the following.
 // 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 // TODO: check / improve translation of form.reset_password.message.
+// English form is: 'form.reset_password.message' => 'Password reset request sent by email.',
+// "by email" is missing here, and it is unclear how exactly it was sent.
 'form.reset_password.message' => 'Se ha enviado la petición de reestablecer contraseña.',
 'form.reset_password.email_subject' => 'Solicitud de reestablecimiento de la contraseña de Anuko Time Tracker',
 // Note to translators: the ending of this string needs to be translated.
@@ -377,6 +374,7 @@ $i18n_key_words = array(
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 // TODO: improve translation of form.change_password.tip.
+// The English form is: 'form.change_password.tip' => 'Type new password and click on Save.',
 'form.change_password.tip' => 'Para reestablecer su contraseña, por favor digítela y de clic en Guardar.',
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
@@ -399,7 +397,6 @@ $i18n_key_words = array(
 'form.reports.save_as_favorite' => 'Guardar como favorito',
 // TODO: translate form.reports.confirm_delete.
 // 'form.reports.confirm_delete' => 'Are you sure you want to delete this favorite report?',
-// TODO: translate form.reports.include_records.
 // 'form.reports.include_records' => 'Include records',
 'form.reports.include_billable' => 'facturable',
 'form.reports.include_not_billable' => 'no facturable',
@@ -436,7 +433,7 @@ $i18n_key_words = array(
 // 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
-// TODO: translate form.charts.interval and form.charts.chart.
+// TODO: translate the following.
 // 'form.charts.interval' => 'Interval',
 // 'form.charts.chart' => 'Chart',
 
@@ -458,7 +455,7 @@ $i18n_key_words = array(
 'form.users.manager' => 'Manejador',
 'form.users.comanager' => 'Auxiliar del manejador',
 'form.users.rate' => 'Tasa',
-// TODO: translate form.users.default_rate.
+// TODO: translate the following.
 // 'form.users.default_rate' => 'Default hourly rate',
 
 // Client delete form. See example at https://timetracker.anuko.com/client_delete.php
@@ -499,6 +496,9 @@ $i18n_key_words = array(
 // 'form.profile.type_all' => 'all',
 // 'form.profile.type_start_finish' => 'start and finish',
 // 'form.profile.type_duration' => 'duration',
+// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.profile.uncompleted_indicators_none' => 'do not show',
+// 'form.profile.uncompleted_indicators_show' => 'show',
 // 'form.profile.plugins' => 'Plugins',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
@@ -516,6 +516,6 @@ $i18n_key_words = array(
 // 'form.quota.year' => 'Year',
 // 'form.quota.month' => 'Month',
 // 'form.quota.quota' => 'Quota',
-// 'form.quota.workday_hours' => 'Hours in a work day',
+// 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 );
