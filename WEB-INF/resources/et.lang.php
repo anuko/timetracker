@@ -191,20 +191,20 @@ $i18n_key_words = array(
 // 'label.view' => 'View',
 // 'label.edit' => 'Edit',
 'label.delete' => 'Kustuta',
+// TODO: translate the following.
+// 'label.configure' => 'Configure',
+// 'label.select_all' => 'Select all',
+// 'label.select_none' => 'Deselect all',
+// 'label.day_view' => 'Day view',
+// 'label.week_view' => 'Week view',
+// 'label.id' => 'ID',
+// 'label.language' => 'Language',
 
 
 
 // TODO: refactoring ongoing down from here.
 
 // TODO: translate the following.
-// 'label.configure' => 'Configure',
-// 'label.select_all' => 'Select all',
-// 'label.select_none' => 'Deselect all',
-// TODO: translate the following.
-// 'label.day_view' => 'Day view',
-// 'label.week_view' => 'Week view',
-// 'label.id' => 'ID',
-// 'label.language' => 'Language',
 // 'label.decimal_mark' => 'Decimal mark',
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',

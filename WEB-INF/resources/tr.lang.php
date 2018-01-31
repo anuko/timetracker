@@ -196,6 +196,14 @@ $i18n_key_words = array(
 // 'label.view' => 'View',
 // 'label.edit' => 'Edit',
 'label.delete' => 'Sil',
+// TODO: translate the following.
+// 'label.configure' => 'Configure',
+// 'label.select_all' => 'Select all',
+// 'label.select_none' => 'Deselect all',
+// 'label.day_view' => 'Day view',
+// 'label.week_view' => 'Week view',
+// 'label.id' => 'ID',
+// 'label.language' => 'Language',
 
 
 
@@ -205,7 +213,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
-// TODO: translate the following.
 // 'label.yes' => 'yes',
 // 'label.no' => 'no',
 

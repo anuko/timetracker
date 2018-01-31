@@ -178,12 +178,7 @@ $i18n_key_words = array(
 // 'label.view' => 'View',
 // 'label.edit' => 'Edit',
 'label.delete' => '删除',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// TODO: Translate the following.
+// TODO: translate the following.
 // 'label.configure' => 'Configure',
 // 'label.select_all' => 'Select all',
 // 'label.select_none' => 'Deselect all',
@@ -191,6 +186,12 @@ $i18n_key_words = array(
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
 // 'label.language' => 'Language',
+
+
+
+// TODO: refactoring ongoing down from here.
+
+// TODO: Translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',

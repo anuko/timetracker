@@ -189,12 +189,7 @@ $i18n_key_words = array(
 // 'label.view' => 'View',
 'label.edit' => 'Modificar',
 'label.delete' => 'Eliminar',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// TODO: translate label.configure.
+// TODO: translate the following.
 // 'label.configure' => 'Configure',
 'label.select_all' => 'Seleccionar todos',
 'label.select_none' => 'Quitar todas las selecciones',
@@ -204,6 +199,11 @@ $i18n_key_words = array(
 'label.id' => 'Identificación',
 // TODO: translate the following.
 // 'label.language' => 'Language',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // 'label.decimal_mark' => 'Decimal mark',
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
