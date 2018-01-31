@@ -500,8 +500,6 @@ $i18n_key_words = array(
 // "label.chart.title2" => 'projects for user',
 "label.chart.period" => 'dönem için grafik',
 
-"label.pinfo" => '%, %',
-"label.pinfo2" => '%',
 "label.pbehalf_info" => '% % <b>% adına</b>',
 "label.pminfo" => ' (yönetici)',
 "label.pcminfo" => ' (yardımcı yönetici)',
@@ -525,13 +523,4 @@ $i18n_key_words = array(
 "label.enable" => 'devreye sok',
 "label.filter" => 'filtre',
 "label.timeweek" => 'haftalık toplam',
-// Note to translators: the strings below are missing and must be added and translated
-// "label.hrs" => 'hrs',
-// "label.errors" => 'errors',
-// "label.ldap_hint" => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// "label.calendar_today" => 'today',
-// "label.calendar_close" => 'close',
-
-// login hello text
-// "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
 );

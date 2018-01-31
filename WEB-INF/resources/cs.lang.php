@@ -187,7 +187,7 @@ $i18n_key_words = array(
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
-// 'label.edit' => 'Edit',
+'label.edit' => 'Upravit',
 'label.delete' => 'Smazat',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
@@ -196,7 +196,8 @@ $i18n_key_words = array(
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
-// 'label.language' => 'Language',
+'label.language' => 'Jazyk',
+// TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
@@ -254,6 +255,12 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+// 'title.reports' => 'Reports',
+// 'title.report' => 'Report',
 
 
 
@@ -283,8 +290,6 @@ $i18n_key_words = array(
 "form.admin.profile.comment" => 'smazat tým',
 "form.admin.profile.th.id" => 'id',
 "form.admin.profile.th.name" => 'jméno',
-"form.admin.profile.th.edit" => 'upravit',
-"form.admin.profile.th.del" => 'smazat',
 "form.admin.profile.th.active" => 'aktovní',
 // Note to translators: the strings below are missing in the translation and must be added
 // "form.admin.custom_date_format" => "date format",
@@ -312,8 +317,6 @@ $i18n_key_words = array(
 "form.mytime.th.finish" => 'konec',
 "form.mytime.th.duration" => 'trvání',
 "form.mytime.th.note" => 'poznámka',
-"form.mytime.th.edit" => 'upravit',
-"form.mytime.th.delete" => 'odstranit',
 "form.mytime.del_yes" => 'časový záznam úspěšně odstraněn',
 "form.mytime.no_finished_rec" => 'záznam byl uložen pouze s časem zahájení. není to chyba. můžete se odhlásit, potřebujete-li.',
 "form.mytime.billable" => 'k fakturaci',
@@ -329,12 +332,6 @@ $i18n_key_words = array(
 "form.profile.login" => 'přihlásit',
 
 "form.profile.showchart" => 'zobrazuj grafy',
-"form.profile.lang" => 'jazyk',
-// Note to translators: the strings below are missing in the translation and must be added
-// "form.profile.custom_date_format" => "date format",
-// "form.profile.custom_time_format" => "time format",
-// "form.profile.default_format" => "(default)",
-// "form.profile.start_week" => "first day of week",
 
 // people form attributes
 "form.people.ppl_str" => 'pracovnící',
@@ -344,8 +341,6 @@ $i18n_key_words = array(
 "form.people.th.name" => 'jméno',
 "form.people.th.login" => 'přihlásit',
 "form.people.th.role" => 'role',
-"form.people.th.edit" => 'upravit',
-"form.people.th.del" => 'smazat',
 "form.people.th.status" => 'status',
 "form.people.th.project" => 'projekt',
 "form.people.th.rate" => 'sazba',
@@ -365,8 +360,6 @@ $i18n_key_words = array(
 "form.project.add_str" => 'pridat nový projekt',
 "form.project.del_str" => 'smazat projekt',
 "form.project.th.name" => 'jméno',
-"form.project.th.edit" => 'upravit',
-"form.project.th.del" => 'smazat',
 "form.project.name" => 'Název',
 
 // activities form attributes
@@ -378,8 +371,6 @@ $i18n_key_words = array(
 "form.activity.project" => 'projekt',
 "form.activity.th.name" => 'jméno',
 "form.activity.th.project" => 'projekt',
-"form.activity.th.edit" => 'upravit',
-"form.activity.th.del" => 'smazat',
 
 // report attributes
 "form.report.title" => 'sestavy',
@@ -452,16 +443,12 @@ $i18n_key_words = array(
 "form.client.edit_title" => 'upravit zákazníka',
 "form.client.del_title" => 'smazat zákazníka',
 "form.client.th.name" => 'jméno',
-"form.client.th.edit" => 'upravit',
-"form.client.th.del" => 'smazat',
 "form.client.name" => 'jméno',
 "form.client.tax" => 'DPH',
 "form.client.comment" => 'poznámka ',
 
 // miscellaneous strings
 "forward.forgot_password" => 'zapomenuté heslo?',
-"forward.edit" => 'upravit',
-"forward.delete" => 'smazat',
 "forward.tocsvfile" => 'exportovat data do .csv souboru',
 "forward.toxmlfile" => 'exportovat data do .xml souboru',
 "forward.geninvoice" => 'vytvořit fakturu',
@@ -493,10 +480,6 @@ $i18n_key_words = array(
 "label.chart.title2" => 'projekty uživatele',
 "label.chart.period" => 'přehled za období',
 
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
-// Note to translators: the string below must be translated
-// "label.pbehalf_info" => '%s %s <b>on behalf of %s</b>',
 "label.pminfo" => ' (manažer)',
 "label.pcminfo" => ' (co-manažer)',
 "label.painfo" => ' (administrator)',

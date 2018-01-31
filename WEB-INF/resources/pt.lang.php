@@ -141,8 +141,9 @@ $i18n_key_words = array(
 // 'label.currency' => 'Currency',
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
-// 'label.person_name' => 'Name',
-// 'label.thing_name' => 'Name',
+'label.person_name' => 'Nome',
+'label.thing_name' => 'Nome',
+// TODO: translate the following.
 // 'label.login' => 'Login',
 'label.password' => 'Senha',
 'label.confirm_password' => 'Confirme a senha',
@@ -168,7 +169,8 @@ $i18n_key_words = array(
 // 'label.description' => 'Description',
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
-// 'label.duration' => 'Duration',
+'label.duration' => 'Duração',
+// TODO: translate the following.
 // 'label.note' => 'Note',
 // 'label.notes' => 'Notes',
 // 'label.item' => 'Item',
@@ -180,7 +182,7 @@ $i18n_key_words = array(
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
-// 'label.edit' => 'Edit',
+'label.edit' => 'Editar',
 'label.delete' => 'Apagar',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
@@ -245,6 +247,14 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+'title.reports' => 'Relatórios',
+// TODO: translate the following.
+// 'title.report' => 'Report',
+
 
 
 // TODO: refactoring ongoing down from here.
@@ -252,44 +262,17 @@ $i18n_key_words = array(
 // password reminder form attributes
 "form.fpass.send_pass_str" => 'senha foi enviada',
 "form.fpass.send_pass_subj" => 'Sua senha do Anuko Time Tracker',
-// Note to translators: the strings below are missing and must be added and translated
-// "form.fpass.send_pass_body" => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
-// "form.fpass.reset_comment" => "to reset your password please type it in and click on save",
 
 // administrator form
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.admin.title" => 'administrator',
-// "form.admin.duty_text" => 'create a new team by creating a new team manager account.<br>you can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
-
-// "form.admin.change_pass" => 'change password of administrator account',
-// "form.admin.profile.title" => 'teams',
-// "form.admin.profile.noprofiles" => 'your database is empty. login as admin and create a new team.',
-// "form.admin.profile.comment" => 'delete team',
-// "form.admin.profile.th.id" => 'id',
-// "form.admin.profile.th.name" => 'name',
-// "form.admin.profile.th.edit" => 'edit',
-// "form.admin.profile.th.del" => 'delete',
-// "form.admin.profile.th.active" => 'active',
 "form.admin.options" => 'opções',
-// "form.admin.custom_date_format" => "date format",
-// "form.admin.custom_time_format" => "time format",
-// "form.admin.start_week" => "first day of week",
 
 // my time form attributes
 "form.mytime.title" => 'adicionar período',
-// Note to translators: the strings below must be translated
-// "form.mytime.edit_title" => 'editing time record',
-// "form.mytime.del_str" => 'deleting time record',
-// "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.date" => 'data',
 "form.mytime.project" => 'projeto',
-"form.mytime.activity" => 'atividade',
 "form.mytime.start" => 'início',
 "form.mytime.finish" => 'fim',
-"form.mytime.duration" => 'duração',
 "form.mytime.note" => 'anotação',
-// Note to translators: the string below must be translated
-// "form.mytime.behalf" => 'daily work for',
 "form.mytime.daily" => 'trabalho diário',
 "form.mytime.total" => 'horas totais: ',
 "form.mytime.th.project" => 'projeto',
@@ -298,8 +281,6 @@ $i18n_key_words = array(
 "form.mytime.th.finish" => 'finish',
 "form.mytime.th.duration" => 'duração',
 "form.mytime.th.note" => 'fim',
-"form.mytime.th.edit" => 'editar',
-"form.mytime.th.delete" => 'apagar',
 "form.mytime.del_yes" => 'o período registrado foi apagado com sucesso',
 // Note to translators: the strings below are missing and must be added and translated 
 // "form.mytime.no_finished_rec" => 'this record was saved with only start time. it is not an error. logout if you need to.',
@@ -311,28 +292,15 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => 'criar nova conta de gerência',
 "form.profile.edit_title" => 'editando perfil',
-"form.profile.name" => 'nome',
-// Note to translators: the string below is missing and must be added and translated 
-// "form.profile.login" => 'login',
-
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.profile.showchart" => 'show pie charts',
-// "form.profile.lang" => 'language',
-// "form.profile.custom_date_format" => "date format",
-// "form.profile.custom_time_format" => "time format",
-// "form.profile.default_format" => "(default)",
-// "form.profile.start_week" => "first day of week",
 
 // people form attributes
 "form.people.ppl_str" => 'pessoas',
 "form.people.createu_str" => 'adicionar novo usuário',
 "form.people.edit_str" => 'editando usuário',
 "form.people.del_str" => 'apagando usuário',
-"form.people.th.name" => 'nome',
+
 // Note to translators: "form.people.th.login" => 'e-mail', // email has been changed to login
 "form.people.th.role" => 'regra',
-"form.people.th.edit" => 'editar',
-"form.people.th.del" => 'apagar',
 "form.people.th.status" => 'status',
 // Note to translators: the strings below are missing and must be added and translated 
 // "form.people.th.project" => 'project',
@@ -341,51 +309,23 @@ $i18n_key_words = array(
 // Note to translators: the string below is missing and must be added and translated 
 // "form.people.comanager" => 'comanager',
 "form.people.empl" => 'usuário',
-"form.people.name" => 'nome',
-// Note to translators: the string below is missing and must be added and translated 
-// "form.people.login" => 'login',
-
-"form.people.rate" => 'hourly rate',
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.people.comanager" => 'co-manager',
-// "form.people.projects" => 'projects',
 
 // projects form attributes
 "form.project.proj_title" => 'projetos',
 "form.project.edit_str" => 'editando projeto',
 "form.project.add_str" => 'adicionando novo projeto',
 "form.project.del_str" => 'apagando projeto',
-"form.project.th.name" => 'nome',
-"form.project.th.edit" => 'editar',
-"form.project.th.del" => 'apagar',
-"form.project.name" => 'nome',
 
 // activities form attributes
-"form.activity.act_title" => 'atividades',
-"form.activity.add_title" => 'adicionando nova atividade',
-"form.activity.edit_str" => 'editando atividade',
-// Note to translators: the string below must be translated
-// "form.activity.del_str" => 'deleting activity',
-"form.activity.name" => 'nome',
 "form.activity.project" => 'project',
-"form.activity.th.name" => 'nome',
-"form.activity.th.project" => 'project',
-"form.activity.th.edit" => 'editar',
-"form.activity.th.del" => 'apagar',
 
 // report attributes
 "form.report.title" => 'relatórios',
 "form.report.from" => 'data inicial',
 "form.report.to" => 'data final',
-// Note to translators: the strings below must be translated
-// "form.report.groupby_user" => 'user',
-// "form.report.groupby_project" => 'project',
-// "form.report.groupby_activity" => 'activity',
 "form.report.duration" => 'duração',
 "form.report.start" => 'início',
 "form.report.activity" => 'atividade',
-// Note to translators: the string below must be translated
-// "form.report.show_idle" => 'show idle',
 "form.report.finish" => 'fim',
 "form.report.note" => 'anotação',
 "form.report.project" => 'projeto',
@@ -395,12 +335,6 @@ $i18n_key_words = array(
 "form.report.th.empllist" => 'usuário',
 // Note to translators: the strings below must be translated
 // "form.report.th.date" => 'data',
-// "form.report.th.project" => 'project',
-// "form.report.th.activity" => 'activity',
-// "form.report.th.start" => 'start',
-// "form.report.th.finish" => 'finish',
-// "form.report.th.duration" => 'duration',
-// "form.report.th.note" => 'note',
 
 // mail form attributes
 "form.mail.from" => 'de',
@@ -411,125 +345,23 @@ $i18n_key_words = array(
 // "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 // "form.mail.sending_str" => '<b>the message has been sent</b>',
 
-// invoice attributes
-// Note to translators: the strings below must be translated
-// "form.invoice.title" => 'invoice',
-// "form.invoice.caption" => 'invoice',
-// "form.invoice.above" => 'additional information for invoice',
-// "form.invoice.select_cust" => 'select client',
-// "form.invoice.fillform" => 'fill the fields',
-// "form.invoice.date" => 'invoice date',
-// "form.invoice.number" => 'invoice number',
-// "form.invoice.tax" => 'tax',
-// "form.invoice.comment" => 'comment ',
-// "form.invoice.th.username" => 'person',
-// "form.invoice.th.time" => 'hours',
-// "form.invoice.th.rate" => 'rate',
-// "form.invoice.th.summ" => 'amount',
-// "form.invoice.subtotal" => 'subtotal',
-// "form.invoice.customer" =>'customer',
-// Note to translators: the strings below must be translated
-// "form.invoice.mailinv_above" => 'send this invoice by e-mail',
-// "form.invoice.sending_str" => '<b>invoice has been sent</b>',
-
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.migration.zip" => 'compression',
-// "form.migration.file" => 'select file',
-// "form.migration.import.title" => 'import data',
-// "form.migration.import.success" => 'import completed successfully',
-// "form.migration.import.text" => 'import team data from an xml file',
-// "form.migration.export.title" => 'export data',
-// "form.migration.export.success" => 'export completed successfully',
-// "form.migration.export.text" => 'you can export all team data into an xml file. this could be useful if you are migrating data to your own server.',
-// "form.migration.compression.none" => 'none',
-// "form.migration.compression.gzip" => 'gzip',
-// "form.migration.compression.bzip" => 'bzip',
-
-// "form.client.title" => 'clients',
-// "form.client.add_title" => 'add client',
-// "form.client.edit_title" => 'edit client',
-// "form.client.del_title" => 'delete client',
-// "form.client.th.name" => 'name',
-// "form.client.th.edit" => 'edit',
-// "form.client.th.del" => 'delete',
-// "form.client.name" => 'name',
-// "form.client.tax" => 'tax',
-// "form.client.comment" => 'comment ',
-
 // miscellaneous strings
 "forward.forgot_password" => 'esqueceu a senha?',
-// Note to translators: the strings below must be translated 
-// "forward.edit" => 'edit',
-// "forward.delete" => 'delete',
-// Note to translators: the string below must be translated 
-// "forward.tocsvfile" => 'export data to .csv file',
-// Note to translators: the strings below are missing and must be added and translated 
-// "forward.toxmlfile" => 'export data to .xml file',
-// "forward.geninvoice" => 'generate invoice',
-// "forward.change" => 'configure clients',
 
 // strings inside contols on forms
 "controls.select.project" => '--- selecione projeto ---',
-"controls.select.activity" => '--- selecione atividade ---',
-// Note to translators: the strings below are missing and must be added and translated 
-// "controls.select.client" => '--- select client ---',
-// "controls.project_bind" => '--- all ---',
-// "controls.all" => '--- all ---',
-// "controls.notbind" => '--- no ---',
 "controls.per_tm" => 'este mês',
 "controls.per_lm" => 'último mês',
 "controls.per_tw" => 'esta semana',
 "controls.per_lw" => 'última semana',
-// Note to translators: the strings below are missing and must be added and translated 
-// "controls.per_td" => 'this day',
-// "controls.per_at" => 'all time',
-// "controls.per_ty" => 'this year',
 "controls.sel_period" => '--- selecione o período de tempo ---',
-// Note to translators: the strings below must be translated 
-// "controls.sel_groupby" => '--- no grouping ---',
-// "controls.inc_billable" => 'billable',
-// "controls.inc_nbillable" => 'not billable',
-// "controls.default" => '--- default ---',
 
 // labels
-// Note to translators: the strings below are missing and must be added and translated 
-// "label.chart.title1" => 'activities for user',
-// "label.chart.title2" => 'projects for user',
-// "label.chart.period" => 'chart for period',
-
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
 "label.pbehalf_info" => '%s %s <b>on behalf of %s</b>',
 "label.pminfo" => ' (gerente)',
-// Note to translators: the strings below are missing and must be added and translated 
-// "label.pcminfo" => ' (co-manager)',
-// "label.painfo" => ' (administrator)',
 "label.time_noentry" => 'sem registro',
-"label.today" => 'today',
 "label.req_fields" => '* campos obrigatórios',
-// Note to translators: the strings below must be translated 
-// "label.sel_project" => 'select project',
-// "label.sel_activity" => 'select activity',
 "label.sel_tp" => 'selecione o período de tempo',
 "label.set_tp" => 'ou selecionar datas',
 "label.fields" => 'exibir campos',
-// Note to translators: the strings below must be translated
-// "label.group_title" => 'group by',
-// "label.include_title" => 'include records',
-// "label.inv_str" => 'invoice',
-//" label.sel_all" => 'select all',
-// "label.sel_none" => 'deselect all',
-// "label.or" => 'or',
-// "label.disable" => 'disable',
-// "label.enable" => 'enable',
-// "label.filter" => 'filter',
-// "label.timeweek" => 'weekly total',
-// "label.hrs" => 'hrs',
-// "label.errors" => 'errors',
-// "label.ldap_hint" => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// "label.calendar_today" => 'today',
-// "label.calendar_close" => 'close',
-
-// login hello text
-// "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
 );

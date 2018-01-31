@@ -189,7 +189,7 @@ $i18n_key_words = array(
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
-// 'label.edit' => 'Edit',
+'label.edit' => 'Muuda',
 'label.delete' => 'Kustuta',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
@@ -256,6 +256,12 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+// 'title.reports' => 'Reports',
+// 'title.report' => 'Report',
 
 
 
@@ -291,8 +297,6 @@ $i18n_key_words = array(
 "form.admin.profile.comment" => 'kustuta meeskond',
 "form.admin.profile.th.id" => 'id',
 "form.admin.profile.th.name" => 'nimi',
-"form.admin.profile.th.edit" => 'muuda',
-"form.admin.profile.th.del" => 'kustuta',
 "form.admin.profile.th.active" => 'aktiivne',
 // Note to translators: the strings below are missing in the translation and must be translated
 // "form.admin.custom_date_format" => "date format",
@@ -321,8 +325,6 @@ $i18n_key_words = array(
 "form.mytime.th.finish" => 'lõpp',
 "form.mytime.th.duration" => 'kestus',
 "form.mytime.th.note" => 'märkus',
-"form.mytime.th.edit" => 'muuda',
-"form.mytime.th.delete" => 'kustuta',
 "form.mytime.del_yes" => 'ajakanne kustutatud',
 "form.mytime.no_finished_rec" => 'kanne salvestati ainult alguse ajaga. see ei ole viga. logi välja kui vaja peaks olema.',
 "form.mytime.billable" => 'arvestatav',
@@ -353,8 +355,6 @@ $i18n_key_words = array(
 "form.people.th.name" => 'nimi',
 "form.people.th.login" => 'login',
 "form.people.th.role" => 'roll',
-"form.people.th.edit" => 'muuda',
-"form.people.th.del" => 'kustuta',
 "form.people.th.status" => 'seisund',
 "form.people.th.project" => 'projekt',
 "form.people.th.rate" => 'hind',
@@ -374,8 +374,6 @@ $i18n_key_words = array(
 "form.project.add_str" => 'uue projekti lisamine',
 "form.project.del_str" => 'projekti kustutamine',
 "form.project.th.name" => 'nimi',
-"form.project.th.edit" => 'muuda',
-"form.project.th.del" => 'kustuta',
 "form.project.name" => 'nimi',
 
 // activities form attributes
@@ -387,8 +385,6 @@ $i18n_key_words = array(
 "form.activity.project" => 'projekt',
 "form.activity.th.name" => 'nimi',
 "form.activity.th.project" => 'projekt',
-"form.activity.th.edit" => 'muuda',
-"form.activity.th.del" => 'kustuta',
 
 // report attributes
 "form.report.title" => 'aruanded',
@@ -461,16 +457,12 @@ $i18n_key_words = array(
 "form.client.edit_title" => 'muuda klienti',
 "form.client.del_title" => 'kustuta klient',
 "form.client.th.name" => 'nimi',
-"form.client.th.edit" => 'muuda',
-"form.client.th.del" => 'kustuta',
 "form.client.name" => 'nimi',
 "form.client.tax" => 'maks',
 "form.client.comment" => 'märkus ',
 
 // miscellaneous strings
 "forward.forgot_password" => 'unustasid salasõna?',
-"forward.edit" => 'muuda',
-"forward.delete" => 'kustuta',
 "forward.tocsvfile" => 'ekspordi andmed .csv faili',
 "forward.toxmlfile" => 'ekspordi andmed .xml faili',
 "forward.geninvoice" => 'loo arve',
@@ -504,9 +496,6 @@ $i18n_key_words = array(
 // "label.chart.title2" => 'projects for user',
 "label.chart.period" => 'tabel perioodiks',
 
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
-"label.pbehalf_info" => '%s %s <b>on behalf of %s</b>',
 "label.pminfo" => ' (haldur)',
 "label.pcminfo" => ' (kaashaldur)',
 "label.painfo" => ' (administraator)',

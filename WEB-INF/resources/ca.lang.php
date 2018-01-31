@@ -595,8 +595,6 @@ $i18n_key_words = array(
 "label.chart.title1" => 'activitats per usuari',
 "label.chart.period" => 'gràfica por període',
 
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
 "label.pbehalf_info" => '%s %s <b>A nom de %s</b>',
 "label.pminfo" => ' (Manejador)',
 "label.pcminfo" => ' (Auxiliar del manejador)',

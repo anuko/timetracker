@@ -494,13 +494,6 @@ $i18n_key_words = array(
 // "controls.default" => '--- default ---',
 
 // labels
-// Note to translators: the strings below are missing and must be added and translated 
-// "label.chart.title1" => 'activities for user',
-// "label.chart.title2" => 'projects for user',
-// "label.chart.period" => 'chart for period',
-
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
 "label.pbehalf_info" => '%s %s <b>in numele %s</b>',
 "label.pminfo" => ' (manager)',
 "label.pcminfo" => ' (co-manager)',

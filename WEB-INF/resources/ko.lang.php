@@ -148,8 +148,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
-// 'label.person_name' => 'Name',
-// 'label.thing_name' => 'Name',
+'label.person_name' => '이름',
+'label.thing_name' => '이름',
+// TODO: translate the following.
 // 'label.login' => 'Login',
 'label.password' => 'Password',
 'label.confirm_password' => '암호 확인',
@@ -187,7 +188,7 @@ $i18n_key_words = array(
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
-// 'label.edit' => 'Edit',
+'label.edit' => '편집',
 'label.delete' => '삭제',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
@@ -196,7 +197,8 @@ $i18n_key_words = array(
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
-// 'label.language' => 'Language',
+'label.language' => '언어',
+// TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
@@ -254,6 +256,13 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+// 'title.reports' => 'Reports',
+'title.report' => '보고서',
+
 
 
 // TODO: refactoring ongoing down from here.
@@ -280,9 +289,6 @@ $i18n_key_words = array(
 "form.admin.profile.noprofiles" => '당신의 데이터베이스는 비어있습니다. 관리자로 로그인하여 새로운 팀을 생성하십시오.',
 "form.admin.profile.comment" => '팀 삭제',
 "form.admin.profile.th.id" => '식별자',
-"form.admin.profile.th.name" => '이름',
-"form.admin.profile.th.edit" => '편집',
-"form.admin.profile.th.del" => '삭제',
 "form.admin.profile.th.active" => '활동내용',
 "form.admin.options" => '옵션',
 "form.admin.custom_date_format" => "날짜 포맷",
@@ -296,7 +302,6 @@ $i18n_key_words = array(
 "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.date" => '날짜',
 "form.mytime.project" => '프로젝트',
-"form.mytime.activity" => '활동내용',
 "form.mytime.start" => '시작',
 "form.mytime.finish" => '마감',
 "form.mytime.duration" => '기간',
@@ -310,8 +315,6 @@ $i18n_key_words = array(
 "form.mytime.th.finish" => '마감',
 "form.mytime.th.duration" => '기간',
 "form.mytime.th.note" => '표식',
-"form.mytime.th.edit" => '편집',
-"form.mytime.th.delete" => '삭제',
 "form.mytime.del_yes" => '성과적으로 삭제된 시간기록',
 "form.mytime.no_finished_rec" => '이 기록은 시작 시간으로만 저장되었습니다. 이것은 오류는 아닙니다. 필요하면 로그아웃 하십시오.',
 "form.mytime.billable" => '청구가능',
@@ -322,11 +325,9 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => '신규 관리자 계정을 생성',
 "form.profile.edit_title" => '프로필을 편집하기',
-"form.profile.name" => '이름',
 "form.profile.login" => '로그인ID',
 
 "form.profile.showchart" => '원 그래프를 보기',
-"form.profile.lang" => '언어',
 "form.profile.custom_date_format" => "날짜 포맷",
 "form.profile.custom_time_format" => "시간 포맷",
 "form.profile.default_format" => "(디폴트)",
@@ -337,18 +338,14 @@ $i18n_key_words = array(
 "form.people.createu_str" => '신규 사용자를 만들기',
 "form.people.edit_str" => '사용자를 편집하기',
 "form.people.del_str" => '사용자를 삭제하기',
-"form.people.th.name" => '이름',
 "form.people.th.login" => '로그인ID',
 "form.people.th.role" => '직위',
-"form.people.th.edit" => '편집',
-"form.people.th.del" => '삭제',
 "form.people.th.status" => '상태',
 "form.people.th.project" => '프로젝트',
 "form.people.th.rate" => '급여',
 "form.people.manager" => '관리자',
 "form.people.comanager" => '공동관리자',
 "form.people.empl" => '사용자',
-"form.people.name" => '이름',
 "form.people.login" => '로그인ID',
 
 "form.people.rate" => '디폴트 시간당 급여',
@@ -360,22 +357,9 @@ $i18n_key_words = array(
 "form.project.edit_str" => '프로젝트를 편집하기',
 "form.project.add_str" => '신규 프로젝트를 추가하기',
 "form.project.del_str" => '프로젝트를 삭제하기',
-"form.project.th.name" => '이름',
-"form.project.th.edit" => '편집',
-"form.project.th.del" => '삭제',
-"form.project.name" => '이름',
 
 // activities form attributes
-"form.activity.act_title" => '활동내용',
-"form.activity.add_title" => '신규 활동내용을 추가하기',
-"form.activity.edit_str" => '활동내용을 편집하기',
-"form.activity.del_str" => '활동내용을 삭제하기',
-"form.activity.name" => '이름',
 "form.activity.project" => '프로젝트',
-"form.activity.th.name" => '이름',
-"form.activity.th.project" => '프로젝트',
-"form.activity.th.edit" => '편집',
-"form.activity.th.del" => '삭제',
 
 // report attributes
 "form.report.title" => '보고서',
@@ -446,10 +430,6 @@ $i18n_key_words = array(
 "form.client.add_title" => '클라이언트 추가',
 "form.client.edit_title" => '클라이언트 편집',
 "form.client.del_title" => '클라이언트 삭제',
-"form.client.th.name" => '이름',
-"form.client.th.edit" => '편집',
-"form.client.th.del" => '삭제',
-"form.client.name" => '이름',
 "form.client.tax" => '세금',
 "form.client.comment" => '코멘트 ',
 
@@ -487,8 +467,6 @@ $i18n_key_words = array(
 "label.chart.title2" => '사용자별 프로젝트',
 "label.chart.period" => '기간에 따른 그래프',
 
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
 "label.pbehalf_info" => '%s %s <b>%s 을 대표하여</b>',
 "label.pminfo" => ' (관리자)',
 "label.pcminfo" => ' (공동관리자)',
@@ -515,10 +493,4 @@ $i18n_key_words = array(
 "label.hrs" => '시간',
 "label.errors" => '오류',
 "label.ldap_hint" => '아래의 필드들에서 <b>Windows 로그인</b> 및 <b>암호</b> 를 입력하십시오.',
-// Note to translators: the strings below need to be translated.
-// "label.calendar_today" => 'today',
-// "label.calendar_close" => 'close',
-
-// login hello text
-// "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
 );

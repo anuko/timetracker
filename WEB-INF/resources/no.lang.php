@@ -147,8 +147,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
-// 'label.person_name' => 'Name',
-// 'label.thing_name' => 'Name',
+'label.person_name' => 'Navn',
+'label.thing_name' => 'Navn',
+// TODO: translate the following.
 // 'label.login' => 'Login',
 'label.password' => 'Passord',
 'label.confirm_password' => 'Bekreft passord',
@@ -186,8 +187,9 @@ $i18n_key_words = array(
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
-// 'label.edit' => 'Edit',
-// 'label.delete' => 'Delete',
+'label.edit' => 'Endre',
+'label.delete' => 'Slett',
+// TODO: translate the following.
 // 'label.configure' => 'Configure',
 // 'label.select_all' => 'Select all',
 // 'label.select_none' => 'Deselect all',
@@ -250,6 +252,13 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+// 'title.reports' => 'Reports',
+// 'title.report' => 'Report',
+
 
 
 // TODO: refactoring ongoing down from here.
@@ -279,9 +288,6 @@ $i18n_key_words = array(
 // "form.admin.profile.noprofiles" => 'databasen din er tom. logg inn som admin og opprett et nytt team.',
 // "form.admin.profile.comment" => 'slett team',
 // "form.admin.profile.th.id" => 'id',
-// "form.admin.profile.th.name" => 'navn',
-// "form.admin.profile.th.edit" => 'endre',
-// "form.admin.profile.th.del" => 'slett',
 // "form.admin.profile.th.active" => 'aktiv',
 // "form.admin.options" => 'opsjoner',
 // "form.admin.custom_date_format" => "datoformat",
@@ -296,7 +302,6 @@ $i18n_key_words = array(
 "form.mytime.time_form" => ' (tt:mm)',
 // Note to translators: "form.mytime.date" => 'dato', // the string must be translated
 "form.mytime.project" => 'prosjekt',
-"form.mytime.activity" => 'aktivitet',
 "form.mytime.start" => 'starttid',
 "form.mytime.finish" => 'ferdig',
 "form.mytime.duration" => 'varighet',
@@ -310,8 +315,6 @@ $i18n_key_words = array(
 "form.mytime.th.finish" => 'ferdig',
 "form.mytime.th.duration" => 'varighet',
 "form.mytime.th.note" => 'notat',
-"form.mytime.th.edit" => 'endre',
-"form.mytime.th.delete" => 'slett',
 // Note to translators: the strings below must be translated
 // "form.mytime.del_yes" => 'tidsoppføringen er slettet', 
 // "form.mytime.no_finished_rec" => 'Denne oppføringen ble lagret kun med starttid. Det er ikke en feil. Logg ut om nødvendig.',
@@ -323,7 +326,6 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => 'lag ny adminkonto',
 "form.profile.edit_title" => 'endre profil',
-"form.profile.name" => 'navn',
 "form.profile.login" => 'innlogging',
 
 // Note to translators: the strings below are missing and must be added and translated
@@ -339,11 +341,8 @@ $i18n_key_words = array(
 "form.people.createu_str" => 'legg til ny bruker',
 "form.people.edit_str" => 'endre bruker',
 "form.people.del_str" => 'slett bruker',
-"form.people.th.name" => 'navn',
 "form.people.th.login" => 'innlogging',
 "form.people.th.role" => 'rolle',
-"form.people.th.edit" => 'endre',
-"form.people.th.del" => 'slett',
 "form.people.th.status" => 'status',
 // Note to translators: the 2 strings below are missing and must be added and translated
 // "form.people.th.project" => 'prosjekt',
@@ -352,7 +351,6 @@ $i18n_key_words = array(
 // "form.people.manager" => 'admin',
 // "form.people.comanager" => 'co-manager',
 "form.people.empl" => 'bruker',
-"form.people.name" => 'navn',
 "form.people.login" => 'innlogging',
 
 "form.people.rate" => 'timesats',
@@ -365,22 +363,9 @@ $i18n_key_words = array(
 "form.project.edit_str" => 'endre prosjekt',
 "form.project.add_str" => 'legg til nytt prosjekt',
 "form.project.del_str" => 'slett prosjekt',
-"form.project.th.name" => 'navn',
-"form.project.th.edit" => 'endre',
-"form.project.th.del" => 'slett',
-"form.project.name" => 'navn',
 
 // activities form attributes
-"form.activity.act_title" => 'aktiviteter',
-"form.activity.add_title" => 'legg til ny aktivitet',
-"form.activity.edit_str" => 'endre aktivitet',
-// Note to translators: "form.activity.del_str" => 'slett aktivitet', // the string is incompletely translated
-"form.activity.name" => 'navn',
 "form.activity.project" => 'prosjekt',
-"form.activity.th.name" => 'navn',
-"form.activity.th.project" => 'prosjekt',
-"form.activity.th.edit" => 'endre',
-"form.activity.th.del" => 'slett',
 
 // report attributes
 "form.report.title" => 'rapporter',
@@ -388,7 +373,6 @@ $i18n_key_words = array(
 "form.report.to" => 'ferdig',
 "form.report.groupby_user" => 'bruker',
 "form.report.groupby_project" => 'prosjekt',
-"form.report.groupby_activity" => 'aktivitet',
 "form.report.duration" => 'varighet',
 "form.report.start" => 'starttid',
 "form.report.activity" => 'aktivitet',
@@ -454,17 +438,11 @@ $i18n_key_words = array(
 // "form.client.add_title" => 'legg til klient',
 // "form.client.edit_title" => 'endre klient',
 // "form.client.del_title" => 'slett klient',
-// "form.client.th.name" => 'navn',
-// "form.client.th.edit" => 'endre',
-// "form.client.th.del" => 'slett',
-// "form.client.name" => 'navn',
 // "form.client.tax" => 'avgift',
 // "form.client.comment" => 'kommentar ',
 
 // miscellaneous strings
 "forward.forgot_password" => 'glemt passordet?',
-"forward.edit" => 'endre',
-"forward.delete" => 'slett',
 "forward.tocsvfile" => 'eksporter data til en .csv fil',
 // Note to translators: the strings below are missing and must be translated and added
 // "forward.toxmlfile" => 'eksporter data til en .xml fil',
@@ -496,13 +474,6 @@ $i18n_key_words = array(
 // "controls.default" => '--- default ---',
 
 // labels
-// Note to translators: the strings below are missing and must be translated and added
-// "label.chart.title1" => 'aktiviteter for bruker',
-// "label.chart.title2" => 'prosjekter for bruker',
-// "label.chart.period" => 'diagram for perioden',
-
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
 "label.pbehalf_info" => '%s %s <b>på vegne av %s</b>',
 // Note to translators: the strings below must be correctly translated
 // "label.pminfo" => ' (admin)',

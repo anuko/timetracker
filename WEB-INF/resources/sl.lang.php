@@ -479,8 +479,6 @@ $i18n_key_words = array(
 "label.chart.title2" => 'projekti uporabnika',
 "label.chart.period" => 'graf za obdobje',
 
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
 "label.pbehalf_info" => '%s %s <b>on behalf of %s</b>',
 "label.pminfo" => ' (manager)',
 "label.pcminfo" => ' (co-manager)',

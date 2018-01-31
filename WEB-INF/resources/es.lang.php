@@ -262,14 +262,18 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+'title.reports' => 'Reportes',
+// TODO: translate the following.
+// 'title.report' => 'Report',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'title.reports' => 'Reportes',
-// TODO: translate title.report, title.send_report.
-// 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
 'title.invoice' => 'Factura',
 // TODO: translate the following.

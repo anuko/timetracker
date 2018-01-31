@@ -144,8 +144,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
-// 'label.person_name' => 'Name',
-// 'label.thing_name' => 'Name',
+'label.person_name' => 'Nome',
+'label.thing_name' => 'Nome',
 'label.login' => 'Login',
 'label.password' => 'Password',
 'label.confirm_password' => 'Conferma password',
@@ -183,7 +183,7 @@ $i18n_key_words = array(
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
-// 'label.edit' => 'Edit',
+'label.edit' => 'Modifica',
 'label.delete' => 'Elimina',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
@@ -249,6 +249,13 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+// 'title.reports' => 'Reports',
+// 'title.report' => 'Report',
+
 
 
 // TODO: refactoring ongoing down from here.
@@ -275,15 +282,8 @@ $i18n_key_words = array(
 "form.admin.profile.noprofiles" => 'il database è vuoto. loggati come amministratore e crea un nuovo team.',
 "form.admin.profile.comment" => 'elimina team',
 "form.admin.profile.th.id" => 'id',
-"form.admin.profile.th.name" => 'nome',
-"form.admin.profile.th.edit" => 'edit',
-"form.admin.profile.th.del" => 'elimina',
 "form.admin.profile.th.active" => 'attivo',
 "form.admin.options" => 'opzioni',
-// Note to translators: the strings below are missing and must be added and translated
-// "form.admin.custom_date_format" => "date format",
-// "form.admin.custom_time_format" => "time format",
-// "form.admin.start_week" => "first day of week",
 
 // my time form attributes
 "form.mytime.title" => 'giorno',
@@ -306,8 +306,6 @@ $i18n_key_words = array(
 "form.mytime.th.finish" => 'fine',
 "form.mytime.th.duration" => 'durata',
 "form.mytime.th.note" => 'note',
-"form.mytime.th.edit" => 'edit',
-"form.mytime.th.delete" => 'elimina',
 "form.mytime.del_yes" => 'time record cancellato',
 "form.mytime.no_finished_rec" => 'questo record è stato salvato con la sola ora di inzio attività. non è un errore. esegui il logout per altro....',
 "form.mytime.billable" => 'fatturabile',
@@ -316,39 +314,20 @@ $i18n_key_words = array(
 // "form.mytime.uncompleted" => 'uncompleted',
 
 // profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => 'crea un nuovo account manager',
 "form.profile.edit_title" => 'modifca il profilo',
-"form.profile.name" => 'nome',
-"form.profile.login" => 'login',
-
-// Note to translators: the strings below are missing and must be added and translated
-// "form.profile.showchart" => 'show pie charts',
-// "form.profile.lang" => 'language',
-// "form.profile.custom_date_format" => "date format",
-// "form.profile.custom_time_format" => "time format",
-// "form.profile.default_format" => "(default)",
-// "form.profile.start_week" => "first day of week",
 
 // people form attributes
 "form.people.ppl_str" => 'persone',
 "form.people.createu_str" => 'crea un nuovo utente',
 "form.people.edit_str" => 'modifica utente',
 "form.people.del_str" => 'elimina utente',
-"form.people.th.name" => 'nome',
-"form.people.th.login" => 'login',
 "form.people.th.role" => 'funzione',
-"form.people.th.edit" => 'modifica',
-"form.people.th.del" => 'elimina',
 "form.people.th.status" => 'stato',
 "form.people.th.project" => 'progetto',
 "form.people.th.rate" => 'costo',
 "form.people.manager" => 'manager',
 "form.people.comanager" => 'comanager',
 "form.people.empl" => 'utente',
-"form.people.name" => 'nome',
-"form.people.login" => 'login',
-
 "form.people.rate" => 'costo per ora di default',
 "form.people.comanager" => 'co-manager',
 "form.people.projects" => 'progetti',
@@ -358,22 +337,9 @@ $i18n_key_words = array(
 "form.project.edit_str" => 'mofifca progetto',
 "form.project.add_str" => 'aggiungi nuovo progetto',
 "form.project.del_str" => 'elimina progetto',
-"form.project.th.name" => 'nome',
-"form.project.th.edit" => 'modifica',
-"form.project.th.del" => 'elimina',
-"form.project.name" => 'nome',
 
 // activities form attributes
-"form.activity.act_title" => 'attività',
-"form.activity.add_title" => 'aggiungi nuova attività',
-"form.activity.edit_str" => 'modifica attività',
-"form.activity.del_str" => 'elimina attività',
-"form.activity.name" => 'nome',
 "form.activity.project" => 'progetto',
-"form.activity.th.name" => 'nome',
-"form.activity.th.project" => 'progetto',
-"form.activity.th.edit" => 'modifica',
-"form.activity.th.del" => 'elimina',
 
 // report attributes
 "form.report.title" => 'report',
@@ -436,19 +402,11 @@ $i18n_key_words = array(
 "form.migration.export.title" => 'esporta i dati',
 "form.migration.export.success" => 'esportazione eseguita con successo',
 "form.migration.export.text" => 'puoi esporate tutti i dati dei team in un file xml. questo può essere utile se devi trasferire i dati da un server ad un altro.',
-// Note to translators: the strings below are missing and must be added and translated
-// "form.migration.compression.none" => 'none',
-// "form.migration.compression.gzip" => 'gzip',
-// "form.migration.compression.bzip" => 'bzip',
 
 "form.client.title" => 'clienti',
 "form.client.add_title" => 'aggiungi cliente',
 "form.client.edit_title" => 'modifica cliente',
 "form.client.del_title" => 'elimina cliente',
-"form.client.th.name" => 'nome',
-"form.client.th.edit" => 'modifica',
-"form.client.th.del" => 'elimina',
-"form.client.name" => 'nome',
 "form.client.tax" => 'tassa',
 "form.client.comment" => 'commento ',
 
@@ -488,8 +446,6 @@ $i18n_key_words = array(
 // "label.chart.title2" => 'projects for user',
 "label.chart.period" => 'grafico per il periodo',
 
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
 "label.pbehalf_info" => '%s %s <b>a favore di %s</b>',
 "label.pminfo" => ' (manager)',
 "label.pcminfo" => ' (co-manager)',

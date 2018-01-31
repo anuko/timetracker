@@ -148,8 +148,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
-// 'label.person_name' => 'Name',
-// 'label.thing_name' => 'Name',
+'label.person_name' => '名前',
+'label.thing_name' => '名前',
+// TODO: translate the following.
 // 'label.login' => 'Login',
 'label.password' => 'パスワード',
 'label.confirm_password' => 'パスワードの確認',
@@ -187,7 +188,7 @@ $i18n_key_words = array(
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
-// 'label.edit' => 'Edit',
+'label.edit' => '編集',
 'label.delete' => '削除',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
@@ -254,6 +255,12 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+// 'title.reports' => 'Reports',
+// 'title.report' => 'Report',
 
 
 
@@ -281,9 +288,6 @@ $i18n_key_words = array(
 "form.admin.profile.noprofiles" => 'あなたのデータベースは空いています。管理者にログインして新規チームを作成してください。',
 "form.admin.profile.comment" => 'チームの削除',
 "form.admin.profile.th.id" => '識別子',
-"form.admin.profile.th.name" => '名前',
-"form.admin.profile.th.edit" => '編集',
-"form.admin.profile.th.del" => '削除',
 "form.admin.profile.th.active" => '活動内容',
 "form.admin.options" => 'オプション',
 "form.admin.custom_date_format" => "日付形式",
@@ -311,8 +315,6 @@ $i18n_key_words = array(
 "form.mytime.th.finish" => '終了',
 "form.mytime.th.duration" => '期間',
 "form.mytime.th.note" => 'ノート',
-"form.mytime.th.edit" => '編集',
-"form.mytime.th.delete" => '削除',
 "form.mytime.del_yes" => '時間レコードが成功的に削除されました',
 "form.mytime.no_finished_rec" => 'このレコードは開始時間だけで保存されました。これはエラーではありません。もし必要があればログアウトしてください。',
 "form.mytime.billable" => '請求できる',
@@ -323,7 +325,6 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => '新規管理者のアカウントの作成',
 "form.profile.edit_title" => 'プロファイルの編集',
-"form.profile.name" => '名前',
 "form.profile.login" => 'ログインID',
 
 "form.profile.showchart" => 'パイ図表の表示',
@@ -338,18 +339,14 @@ $i18n_key_words = array(
 "form.people.createu_str" => '新規ユーザーの作成',
 "form.people.edit_str" => 'ユーザーの編集',
 "form.people.del_str" => 'ユーザーの削除',
-"form.people.th.name" => '名前',
 "form.people.th.login" => 'ログインID',
 "form.people.th.role" => 'ルール',
-"form.people.th.edit" => '編集',
-"form.people.th.del" => '削除',
 "form.people.th.status" => '状態',
 "form.people.th.project" => 'プロジェクト',
 "form.people.th.rate" => '給料',
 "form.people.manager" => '管理者',
 "form.people.comanager" => '共同管理者',
 "form.people.empl" => 'ユーザー',
-"form.people.name" => '名前',
 "form.people.login" => 'ログインID',
 
 "form.people.rate" => 'デフォルト時間当り給料',
@@ -361,22 +358,14 @@ $i18n_key_words = array(
 "form.project.edit_str" => 'プロジェクトの編集',
 "form.project.add_str" => '新規プロジェクトの追加',
 "form.project.del_str" => 'プロジェクトの削除',
-"form.project.th.name" => '名前',
-"form.project.th.edit" => '編集',
-"form.project.th.del" => '削除',
-"form.project.name" => '名前',
 
 // activities form attributes
 "form.activity.act_title" => '活動内容',
 "form.activity.add_title" => '新規活動内容の追加',
 "form.activity.edit_str" => '活動内容の編集',
 "form.activity.del_str" => '活動内容の削除',
-"form.activity.name" => '名前',
 "form.activity.project" => 'プロジェクト',
-"form.activity.th.name" => '名前',
 "form.activity.th.project" => 'プロジェクト',
-"form.activity.th.edit" => '編集',
-"form.activity.th.del" => '削除',
 
 // report attributes
 "form.report.title" => 'レポート',
@@ -447,10 +436,6 @@ $i18n_key_words = array(
 "form.client.add_title" => 'クライアントの追加',
 "form.client.edit_title" => 'クライアントの編集',
 "form.client.del_title" => 'クライアントの削除',
-"form.client.th.name" => '名前',
-"form.client.th.edit" => '編集',
-"form.client.th.del" => '削除',
-"form.client.name" => '名前',
 "form.client.tax" => '税',
 "form.client.comment" => 'コメント ',
 
@@ -488,8 +473,6 @@ $i18n_key_words = array(
 "label.chart.title2" => 'ユーザーに対するプロジェクト',
 "label.chart.period" => '期間表示のチャート',
 
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
 "label.pbehalf_info" => '%s %s <b>%sを代表して</b>',
 "label.pminfo" => ' (管理者)',
 "label.pcminfo" => ' (共同管理者)',
@@ -516,10 +499,4 @@ $i18n_key_words = array(
 "label.hrs" => '時間',
 "label.errors" => 'エラー',
 "label.ldap_hint" => '下記のフィールドにあなたの<b>WindowsのログインID</b>と<b>パスワード</b>を入力してください。',
-// Note to translators: the strings below are missing and must be translated.
-// "label.calendar_today" => 'today',
-// "label.calendar_close" => 'close',
-
-// login hello text
-// "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
 );

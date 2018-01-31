@@ -485,8 +485,6 @@ $i18n_key_words = array(
 "label.chart.title2" => '項目用戶',
 "label.chart.period" => '圖表期限',
 
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
 "label.pbehalf_info" => '%s %s <b>代表%s</b>',
 "label.pminfo" => ' (經理)',
 "label.pcminfo" => ' (合作經理人)',

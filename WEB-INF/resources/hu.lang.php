@@ -190,7 +190,7 @@ $i18n_key_words = array(
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
-// 'label.edit' => 'Edit',
+'label.edit' => 'Szerkesztés',
 'label.delete' => 'Törlés',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
@@ -256,7 +256,12 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
-
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+// 'title.reports' => 'Reports',
+// 'title.report' => 'Report',
 
 
 // TODO: refactoring ongoing down from here.
@@ -284,8 +289,6 @@ $i18n_key_words = array(
 "form.admin.profile.comment" => 'csoport törlése',
 "form.admin.profile.th.id" => 'azonosító',
 "form.admin.profile.th.name" => 'név',
-"form.admin.profile.th.edit" => 'szerkesztés',
-"form.admin.profile.th.del" => 'törlés',
 "form.admin.profile.th.active" => 'aktív',
 "form.admin.options" => 'opciók',
 // "form.admin.custom_date_format" => "date format",
@@ -313,8 +316,6 @@ $i18n_key_words = array(
 "form.mytime.th.finish" => 'vége',
 "form.mytime.th.duration" => 'hossz',
 "form.mytime.th.note" => 'megjegyzés',
-"form.mytime.th.edit" => 'szerkesztés',
-"form.mytime.th.delete" => 'törlés',
 "form.mytime.del_yes" => 'a bejegyzés törölve',
 "form.mytime.no_finished_rec" => 'csak az munka kezdete lett megjelölve, ha később visszalépsz a rendszerbe beállíthatod a vég-időpontot...',
 // Note to translators: the strings below are missing and must be added and translated 
@@ -347,8 +348,6 @@ $i18n_key_words = array(
 // Note to translators: the string below is missing and must be added and translated 
 // "form.people.th.login" => 'login',
 "form.people.th.role" => 'szerepkör',
-"form.people.th.edit" => 'szerkesztés',
-"form.people.th.del" => 'törlés',
 "form.people.th.status" => 'státusz',
 "form.people.th.project" => 'projekt',
 "form.people.th.rate" => 'tarifa',
@@ -370,8 +369,6 @@ $i18n_key_words = array(
 "form.project.add_str" => 'új projekt hozzáadása',
 "form.project.del_str" => 'projekt törlése',
 "form.project.th.name" => 'név',
-"form.project.th.edit" => 'szerkesztés',
-"form.project.th.del" => 'törlés',
 "form.project.name" => 'név',
 
 // activities form attributes
@@ -383,8 +380,6 @@ $i18n_key_words = array(
 "form.activity.project" => 'projekt',
 "form.activity.th.name" => 'név',
 "form.activity.th.project" => 'projekt',
-"form.activity.th.edit" => 'szerkesztés',
-"form.activity.th.del" => 'törlés',
 
 // report attributes
 "form.report.title" => 'riportok',
@@ -457,8 +452,6 @@ $i18n_key_words = array(
 "form.client.edit_title" => 'ügyfél adatainak szerkesztése',
 "form.client.del_title" => 'ügyfél törlése',
 "form.client.th.name" => 'név',
-"form.client.th.edit" => 'szerkesztés',
-"form.client.th.del" => 'törlés',
 "form.client.name" => 'név',
 "form.client.tax" => 'adó',
 "form.client.comment" => 'megjegyzés ',
@@ -484,25 +477,10 @@ $i18n_key_words = array(
 "controls.per_lm" => 'múlt hónapban',
 "controls.per_tw" => 'ezen a héten',
 "controls.per_lw" => 'múlt héten',
-// Note to translators: the strings below are missing and must be added and translated 
-// "controls.per_td" => 'this day',
-// "controls.per_at" => 'all time',
-// "controls.per_ty" => 'this year',
 "controls.sel_period" => '--- válassz időszakot ---',
 "controls.sel_groupby" => '--- csoportosítás nélkül ---',
-// Note to translators: the strings below are missing and must be added and translated 
-// "controls.inc_billable" => 'billable',
-// "controls.inc_nbillable" => 'not billable',
-// "controls.default" => '--- default ---',
 
 // labels
-// Note to translators: the strings below are missing and must be added and translated 
-// "label.chart.title1" => 'activities for user',
-// "label.chart.title2" => 'projects for user',
-// "label.chart.period" => 'chart for period',
-
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
 "label.pbehalf_info" => '%s %s <b>helyett %s</b>',
 "label.pminfo" => ' (vezető)',
 "label.pcminfo" => ' (helyettes)',
