@@ -204,12 +204,6 @@ $i18n_key_words = array(
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
 // 'label.total' => 'Total',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// TODO: translate the following.
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
 // 'label.or' => 'or',
@@ -225,6 +219,11 @@ $i18n_key_words = array(
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',
 // 'label.no' => 'no',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 // 'label.custom_fields' => 'Custom fields',
 // 'label.monthly_quotas' => 'Monthly quotas',

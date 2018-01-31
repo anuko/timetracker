@@ -170,7 +170,8 @@ $i18n_key_words = array(
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
-// 'label.project' => 'Project',
+'label.project' => 'Projekt',
+// TODO: translate the following.
 // 'label.projects' => 'Projects',
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
@@ -208,16 +209,25 @@ $i18n_key_words = array(
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
 'label.total' => 'Összesen',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// Translate the following.
+// TODO: translate the following.
+// 'label.client_name' => 'Client name',
+// 'label.client_address' => 'Client address',
+// 'label.or' => 'or',
+// 'label.error' => 'Error',
+// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
+// 'label.required_fields' => '* - required fields',
+// 'label.on_behalf' => 'on behalf of',
+// 'label.role_manager' => '(manager)',
+// 'label.role_comanager' => '(co-manager)',
+// 'label.role_admin' => '(administrator)',
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',
 // 'label.no' => 'no',
+
+
+
+// TODO: refactoring ongoing down from here.
 
 // Form titles.
 // TODO: the entire title section is missing here. See the English file.

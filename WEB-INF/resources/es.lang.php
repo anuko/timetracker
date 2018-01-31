@@ -210,28 +210,28 @@ $i18n_key_words = array(
 // TODO: translate the following.
 'label.subtotal' => 'Subtotal',
 'label.total' => 'Total',
+// TODO: translate the following.
+// 'label.client_name' => 'Client name',
+// 'label.client_address' => 'Client address',
+'label.or' => 'o',
+// TODO: translate the following.
+// 'label.error' => 'Error',
+// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
+'label.required_fields' => '* - campos requeridos',
+'label.on_behalf' => 'a nombre de',
+'label.role_manager' => '(manejador)',
+'label.role_comanager' => '(auxiliar del manejador)',
+'label.role_admin' => '(administrador)',
+// TODO: translate the following.
+// 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
+// 'label.yes' => 'yes',
+// 'label.no' => 'no',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-// TODO: translate the following.
-// 'label.client_name' => 'Client name',
-// 'label.client_address' => 'Client address',
-'label.or' => 'o',
-// TODO: translate the strings below.
-// 'label.error' => 'Error',
-// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-'label.required_fields' => '* - campos requeridos',
-'label.on_behalf' => 'a nombre de',
-'label.role_manager' =>'(manejador)',
-'label.role_comanager' => '(auxiliar del manejador)',
-'label.role_admin' => '(administrador)',
-// Translate the following.
-// 'label.page' => 'Page',
-// 'label.condition' => 'Condition',
-// 'label.yes' => 'yes',
-// 'label.no' => 'no',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 // TODO: translate the following.
 // 'label.custom_fields' => 'Custom fields',
