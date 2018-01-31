@@ -199,12 +199,20 @@ $i18n_key_words = array(
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
 // 'label.language' => 'Language',
+// 'label.decimal_mark' => 'Decimal mark',
+// 'label.date_format' => 'Date format',
+// 'label.time_format' => 'Time format',
+// 'label.week_start' => 'First day of week',
+// 'label.comment' => 'Comment',
+// 'label.status' => 'Status',
+// 'label.tax' => 'Tax',
+// 'label.subtotal' => 'Subtotal',
+'label.total' => 'Összesen',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-'label.total' => 'összesen',
 // Translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',

@@ -186,12 +186,6 @@ $i18n_key_words = array(
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
 // 'label.language' => 'Language',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// TODO: Translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
@@ -201,6 +195,11 @@ $i18n_key_words = array(
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
 'label.total' => '总计',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // TODO: Translate the following.
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',

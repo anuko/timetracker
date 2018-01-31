@@ -199,22 +199,22 @@ $i18n_key_words = array(
 'label.id' => 'Identificación',
 // TODO: translate the following.
 // 'label.language' => 'Language',
-
-
-
-// TODO: refactoring ongoing down from here.
-
 // 'label.decimal_mark' => 'Decimal mark',
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
 'label.comment' => 'Comentario',
-// TODO: translate label.status.
+// TODO: translate the following.
 // 'label.status' => 'Status',
 'label.tax' => 'Impuesto',
-// TODO: check whether label.subtotal is translated correctly.
+// TODO: translate the following.
 'label.subtotal' => 'Subtotal',
 'label.total' => 'Total',
+
+
+
+// TODO: refactoring ongoing down from here.
+
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
