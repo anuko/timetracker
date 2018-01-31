@@ -518,13 +518,4 @@ $i18n_key_words = array(
 "label.enable" => 'luba',
 "label.filter" => 'filtreeri',
 "label.timeweek" => 'nädalane summa',
-// Note to translators: the strings below must be translated and added to the localization file
-// "label.hrs" => 'hrs',
-// "label.errors" => 'errors',
-// "label.ldap_hint" => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// "label.calendar_today" => 'today',
-// "label.calendar_close" => 'close',
-
-// login hello text
-// "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
 );

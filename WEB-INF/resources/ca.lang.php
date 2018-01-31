@@ -146,8 +146,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
-// 'label.person_name' => 'Name',
-// 'label.thing_name' => 'Name',
+'label.person_name' => 'Nom',
+'label.thing_name' => 'Nom',
+// TODO: translate the following.
 // 'label.login' => 'Login',
 'label.password' => 'Paraula de pas',
 'label.confirm_password' => 'Confirmar paraula de pas',
@@ -185,7 +186,7 @@ $i18n_key_words = array(
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
-// 'label.edit' => 'Edit',
+'label.edit' => 'Modificar',
 'label.delete' => 'Eliminar',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
@@ -210,7 +211,8 @@ $i18n_key_words = array(
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 // 'label.required_fields' => '* - required fields',
-// 'label.on_behalf' => 'on behalf of',
+'label.on_behalf' => 'a nom de',
+// TODO: translate the following.
 // 'label.role_manager' => '(manager)',
 // 'label.role_comanager' => '(co-manager)',
 'label.role_admin' => '(administrador)',
@@ -401,9 +403,6 @@ $i18n_key_words = array(
 "form.admin.profile.noprofiles" => 'La seva base de dades està buida. Iniciï sessió com a administrador i creï un nou grup.',
 "form.admin.profile.comment" => 'Eliminar grup',
 "form.admin.profile.th.id" => 'Identificació',
-"form.admin.profile.th.name" => 'Nom',
-"form.admin.profile.th.edit" => 'Modificar',
-"form.admin.profile.th.del" => 'Eliminar',
 "form.admin.profile.th.active" => 'Actiu',
 
 // my time form attributes
@@ -427,8 +426,6 @@ $i18n_key_words = array(
 "form.mytime.th.finish" => 'Fi',
 "form.mytime.th.duration" => 'Durada',
 "form.mytime.th.note" => 'Nota',
-"form.mytime.th.edit" => 'Modificar',
-"form.mytime.th.delete" => 'Eliminar',
 "form.mytime.del_yes" => 'L\\\'historial de temps s\\\'ha eliminat amb èxit',
 "form.mytime.no_finished_rec" => 'Aquest historial s\\\'ha guardat únicament amb l\\\'hora d\\\'inici. Aixó no és un error. Finalitzi sessió si ho necessita.',
 "form.mytime.billable" => 'facturable',
@@ -437,30 +434,20 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => 'Crear un nou compte de manejador',
 "form.profile.edit_title" => 'Modificant perfil',
-"form.profile.name" => 'Nom',
-// Note to translators: a few strings in this section a missing. Please check against the English file.
-// TODO: translate the following.
-// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
-// 'form.profile.uncompleted_indicators_none' => 'do not show',
-// 'form.profile.uncompleted_indicators_show' => 'show',
 
 // people form attributes
 "form.people.ppl_str" => 'Persones',
 "form.people.createu_str" => 'Creant nou usuari',
 "form.people.edit_str" => 'Modificant usuari',
 "form.people.del_str" => 'Eliminant usuari',
-"form.people.th.name" => 'Nom',
 "form.people.th.email" => 'e-mail',
 "form.people.th.role" => 'Rol',
-"form.people.th.edit" => 'Modificar',
-"form.people.th.del" => 'Eliminar',
 "form.people.th.status" => 'Estat',
 "form.people.th.project" => 'Projecte',
 "form.people.th.rate" => 'Taxa',
 "form.people.manager" => 'Manejador',
 "form.people.comanager" => 'Auxiliar del manejador',
 "form.people.empl" => 'Usuari',
-"form.people.name" => 'Nom',
 
 "form.people.rate" => 'Taxa per defecte en hores',
 "form.people.comanager" => 'Auxiliar del manejador',
@@ -471,22 +458,14 @@ $i18n_key_words = array(
 "form.project.edit_str" => 'Modificant projecte',
 "form.project.add_str" => 'Agregant nou projecte',
 "form.project.del_str" => 'Eliminant projecte',
-"form.project.th.name" => 'Nom',
-"form.project.th.edit" => 'Modificar',
-"form.project.th.del" => 'Eliminar',
-"form.project.name" => 'Nom',
 
 // activities form attributes
 "form.activity.act_title" => 'Activitats',
 "form.activity.add_title" => 'Agregant nova activitat',
 "form.activity.edit_str" => 'Modificant activitat',
 "form.activity.del_str" => 'Eliminant activitat',
-"form.activity.name" => 'Nom',
 "form.activity.project" => 'Projecte',
-"form.activity.th.name" => 'Nom',
 "form.activity.th.project" => 'Projecte',
-"form.activity.th.edit" => 'Editar',
-"form.activity.th.del" => 'Eliminar',
 
 // report attributes
 "form.report.title" => 'Reports',
@@ -558,10 +537,6 @@ $i18n_key_words = array(
 "form.client.add_title" => 'Agregar client',
 "form.client.edit_title" => 'Modificar client',
 "form.client.del_title" => 'Eliminar client',
-"form.client.th.name" => 'Nom',
-"form.client.th.edit" => 'Modificar',
-"form.client.th.del" => 'Eliminar',
-"form.client.name" => 'Nom',
 "form.client.tax" => 'Impost',
 "form.client.comment" => 'Comentari ',
 
@@ -592,10 +567,8 @@ $i18n_key_words = array(
 "controls.inc_nbillable" => 'no facturable',
 
 // labels
-"label.chart.title1" => 'activitats per usuari',
 "label.chart.period" => 'gràfica por període',
 
-"label.pbehalf_info" => '%s %s <b>A nom de %s</b>',
 "label.pminfo" => ' (Manejador)',
 "label.pcminfo" => ' (Auxiliar del manejador)',
 "label.painfo" => ' (Administrador)',
@@ -603,7 +576,6 @@ $i18n_key_words = array(
 "label.today" => 'Data Actual',
 "label.req_fields" => '* camps requerits',
 "label.sel_project" => 'Seleccionar projecte',
-"label.sel_activity" => 'Seleccionar activitat',
 "label.sel_tp" => 'Seleccionar període de temps',
 "label.set_tp" => 'o establir dates',
 "label.fields" => 'Mostrar camps',
@@ -618,13 +590,4 @@ $i18n_key_words = array(
 "label.enable" => 'Habilitar',
 "label.filter" => 'Filtrar',
 "label.timeweek" => 'total setmanal',
-// Note to translators: strings below are missing from the translation and need to be added.
-// "label.hrs" => 'hrs',
-// "label.errors" => 'errors',
-// "label.ldap_hint" => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// "label.calendar_today" => 'today',
-// "label.calendar_close" => 'close',
-
-// login hello text
-// "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
 );
