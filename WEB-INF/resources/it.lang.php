@@ -184,7 +184,7 @@ $i18n_key_words = array(
 // 'label.day_total' => 'Day total',
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
-// 'label.today' => 'Today',
+'label.today' => 'Oggi',
 'label.total_hours' => 'Ore totali',
 // TODO: translate the following.
 // 'label.total_cost' => 'Total cost',
@@ -559,7 +559,6 @@ $i18n_key_words = array(
 
 "label.pbehalf_info" => '%s %s <b>a favore di %s</b>',
 "label.time_noentry" => 'nessun inserimento',
-"label.today" => 'oggi',
 "label.req_fields" => '* campi obbligatori',
 "label.sel_project" => 'seleziona il progetto',
 "label.sel_activity" => 'seleziona la attività',

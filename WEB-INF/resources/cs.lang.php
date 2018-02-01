@@ -186,7 +186,8 @@ $i18n_key_words = array(
 // 'label.day_total' => 'Day total',
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
-// 'label.today' => 'Today',
+// TODO: translate the following.
+'label.today' => 'Dnes',
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
@@ -463,7 +464,6 @@ $i18n_key_words = array(
 "label.chart.period" => 'přehled za období',
 
 "label.time_noentry" => 'žádné záznamy',
-"label.today" => 'dnes',
 "label.req_fields" => '* nutno vyplnit',
 "label.sel_project" => 'výběr projektu',
 "label.sel_activity" => 'výběr činnosti',

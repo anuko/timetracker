@@ -185,7 +185,8 @@ $i18n_key_words = array(
 // 'label.day_total' => 'Day total',
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
-// 'label.today' => 'Today',
+'label.today' => 'Täna',
+// TODO: translate the following.
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
@@ -479,7 +480,6 @@ $i18n_key_words = array(
 "label.chart.period" => 'tabel perioodiks',
 
 "label.time_noentry" => 'sissekanne puudub',
-"label.today" => 'täna',
 "label.req_fields" => '* nõutud väljad',
 "label.sel_project" => 'vali projekt',
 "label.sel_activity" => 'vali tegevus',

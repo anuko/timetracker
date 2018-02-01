@@ -172,7 +172,8 @@ $i18n_key_words = array(
 // 'label.day_total' => 'Day total',
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
-// 'label.today' => 'Today',
+'label.today' => '今天',
+// TODO: translate the following.
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
@@ -538,7 +539,6 @@ $i18n_key_words = array(
 
 "label.pbehalf_info" => '%s %s <b>代表%s</b>',
 "label.time_noentry" => '没有条目',
-"label.today" => '今天',
 "label.req_fields" => '* 必填栏目',
 "label.sel_project" => '选择项目',
 "label.sel_activity" => '选择活动',

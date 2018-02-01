@@ -183,7 +183,8 @@ $i18n_key_words = array(
 // 'label.day_total' => 'Day total',
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
-// 'label.today' => 'Today',
+'label.today' => 'I dag',
+// TODO: translate the following.
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
@@ -473,7 +474,6 @@ $i18n_key_words = array(
 // labels
 "label.pbehalf_info" => '%s %s <b>på vegne av %s</b>',
 "label.time_noentry" => 'ingen tilgang',
-"label.today" => 'i dag',
 "label.req_fields" => '* obligatoriske felt',
 "label.sel_project" => 'velg prosjekt',
 "label.sel_activity" => 'velg aktivitet',

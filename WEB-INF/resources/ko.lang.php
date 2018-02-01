@@ -184,7 +184,8 @@ $i18n_key_words = array(
 // 'label.day_total' => 'Day total',
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
-// 'label.today' => 'Today',
+'label.today' => '오늘',
+// TODO: translate the following.
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
@@ -468,7 +469,6 @@ $i18n_key_words = array(
 
 "label.pbehalf_info" => '%s %s <b>%s 을 대표하여</b>',
 "label.time_noentry" => '항목이 없음',
-"label.today" => '오늘',
 "label.req_fields" => '* 필수 필드',
 "label.sel_project" => '프로젝트 선택',
 "label.sel_activity" => '활동내용 선택',

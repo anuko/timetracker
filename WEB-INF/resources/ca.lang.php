@@ -559,7 +559,6 @@ $i18n_key_words = array(
 "label.chart.period" => 'gràfica por període',
 
 "label.time_noentry" => 'Sense entrada',
-"label.today" => 'Data Actual',
 "label.req_fields" => '* camps requerits',
 "label.sel_project" => 'Seleccionar projecte',
 "label.sel_tp" => 'Seleccionar període de temps',

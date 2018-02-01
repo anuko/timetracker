@@ -186,7 +186,8 @@ $i18n_key_words = array(
 // 'label.day_total' => 'Day total',
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
-// 'label.today' => 'Today',
+'label.today' => 'Astazi',
+// TODO: translate the following.
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
@@ -446,7 +447,6 @@ $i18n_key_words = array(
 // labels
 "label.pbehalf_info" => '%s %s <b>in numele %s</b>',
 "label.time_noentry" => 'nu exista inregistrari',
-"label.today" => 'astazi',
 "label.req_fields" => '* date obligatorii',
 "label.sel_project" => 'alege proiect',
 "label.sel_activity" => 'alege activitate',

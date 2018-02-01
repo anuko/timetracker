@@ -184,7 +184,8 @@ $i18n_key_words = array(
 // 'label.day_total' => 'Day total',
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
-// 'label.today' => 'Today',
+'label.today' => '今日',
+// TODO: translate the following.
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
@@ -474,7 +475,6 @@ $i18n_key_words = array(
 
 "label.pbehalf_info" => '%s %s <b>%sを代表して</b>',
 "label.time_noentry" => '項目なし',
-"label.today" => '今日',
 "label.req_fields" => '* 必須のフィールド',
 "label.sel_project" => 'プロジェクトの選択',
 "label.sel_activity" => '活動内容の選択',
