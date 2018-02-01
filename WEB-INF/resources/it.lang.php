@@ -85,7 +85,8 @@ $i18n_key_words = array(
 'error.project' => 'Seleziona il progetto.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-// 'error.client' => 'Select client.',
+'error.client' => 'Seleziona il cliente.',
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'Login o password errati.',
@@ -175,8 +176,8 @@ $i18n_key_words = array(
 'label.start' => 'Inizio',
 'label.finish' => 'Fine',
 'label.duration' => 'Durata',
+'label.note' => 'Nota',
 // TODO: translate the following.
-// 'label.note' => 'Note',
 // 'label.notes' => 'Notes',
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
@@ -203,10 +204,10 @@ $i18n_key_words = array(
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
-// 'label.comment' => 'Comment',
+'label.comment' => 'Commento',
 'label.status' => 'Stato',
+'label.tax' => 'Imposta',
 // TODO: translate the following.
-// 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
 'label.total' => 'Totale',
 // TODO: translate the following.
@@ -249,6 +250,7 @@ $i18n_key_words = array(
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 'title.delete_team' => 'Elimina team',
+// TODO: translate the following.
 // 'title.reset_password' => 'Resetting Password',
 // 'title.change_password' => 'Changing Password',
 // 'title.time' => 'Time',
@@ -264,7 +266,8 @@ $i18n_key_words = array(
 // 'title.reports' => 'Reports',
 // 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
-// 'title.invoice' => 'Invoice',
+'title.invoice' => 'Fattura',
+// TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => 'Progetti',
@@ -279,11 +282,11 @@ $i18n_key_words = array(
 'title.add_user' => 'Crea utente',
 'title.edit_user' => 'Modifica utente',
 'title.delete_user' => 'Elimina utente',
+'title.clients' => 'Clienti',
+'title.add_client' => 'Aggiungi cliente',
+'title.edit_client' => 'Modifica cliente',
+'title.delete_client' => 'Elimina cliente',
 // TODO: translate the following.
-// 'title.clients' => 'Clients',
-// 'title.add_client' => 'Adding Client',
-// 'title.edit_client' => 'Editing Client',
-// 'title.delete_client' => 'Deleting Client',
 // 'title.invoices' => 'Invoices',
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
@@ -328,9 +331,11 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
-// 'dropdown.projects' => 'projects',
+'dropdown.projects' => 'progetti',
+// TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
-// 'dropdown.clients' => 'clients',
+'dropdown.clients' => 'clienti',
+// TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
@@ -400,7 +405,7 @@ $i18n_key_words = array(
 'form.reports.group_by_project' => 'progetto',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
-// 'form.reports.totals_only' => 'Totals only',
+'form.reports.totals_only' => 'Solo i totali',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -489,8 +494,8 @@ $i18n_key_words = array(
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 // TODO: translate the following.
-// 'form.mail.from' => 'From',
-// 'form.mail.to' => 'To',
+'form.mail.from' => 'Da',
+'form.mail.to' => 'A',
 // 'form.mail.report_subject' => 'Time Tracker Report',
 // 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 // 'form.mail.report_sent' => 'Report sent.',
@@ -509,38 +514,11 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 // Strings below are not use in current code. See if we can recycle something from below.
 
-// report attributes
-"form.report.finish" => 'fine',
-"form.report.note" => 'nota',
-"form.report.project" => 'progetto',
-"form.report.totals_only" => 'solo i totali',
-"form.report.total" => 'ore totali',
-"form.report.th.empllist" => 'utente',
-"form.report.th.date" => 'data',
-"form.report.th.project" => 'progetto',
-"form.report.th.start" => 'inizio',
-"form.report.th.finish" => 'fine',
-"form.report.th.note" => 'note',
-
-// mail form attributes
-"form.mail.from" => 'da',
-"form.mail.to" => 'a',
-"form.mail.comment" => 'commento',
-"form.mail.above" => 'invia questo report tramite e-mail',
-// Note to translators: this string needs to be translated.
-// "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
-"form.mail.sending_str" => '<b>messaggio inviato</b>',
-
 // invoice attributes
-"form.invoice.title" => 'fattura',
-"form.invoice.caption" => 'fattura',
-"form.invoice.above" => 'informazioni aggiuntive per la fattura',
 "form.invoice.select_cust" => 'seleziona il cliente',
 "form.invoice.fillform" => 'compila i campi',
 "form.invoice.date" => 'data',
 "form.invoice.number" => 'numero fattura',
-"form.invoice.tax" => 'tassa',
-"form.invoice.comment" => 'commento ',
 "form.invoice.th.username" => 'persona',
 "form.invoice.th.time" => 'ore',
 "form.invoice.th.rate" => 'costo',
@@ -558,13 +536,6 @@ $i18n_key_words = array(
 "form.migration.export.title" => 'esporta i dati',
 "form.migration.export.success" => 'esportazione eseguita con successo',
 "form.migration.export.text" => 'puoi esporate tutti i dati dei team in un file xml. questo può essere utile se devi trasferire i dati da un server ad un altro.',
-
-"form.client.title" => 'clienti',
-"form.client.add_title" => 'aggiungi cliente',
-"form.client.edit_title" => 'modifica cliente',
-"form.client.del_title" => 'elimina cliente',
-"form.client.tax" => 'tassa',
-"form.client.comment" => 'commento ',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'esporta i dati in un file .csv',
