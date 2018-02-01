@@ -326,7 +326,6 @@ $i18n_key_words = array(
 "form.report.to" => 'data final',
 "form.report.duration" => 'duração',
 "form.report.start" => 'início',
-"form.report.activity" => 'atividade',
 "form.report.finish" => 'fim',
 "form.report.note" => 'anotação',
 "form.report.project" => 'projeto',

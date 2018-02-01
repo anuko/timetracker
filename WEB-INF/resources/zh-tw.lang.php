@@ -382,11 +382,8 @@ $i18n_key_words = array(
 "form.report.to" => '結束日期',
 "form.report.groupby_user" => '用戶',
 "form.report.groupby_project" => '項目',
-"form.report.groupby_activity" => '活動',
 "form.report.duration" => '持續時間',
 "form.report.start" => '開始',
-"form.report.activity" => '活動',
-"form.report.show_idle" => '顯示空閒',
 "form.report.finish" => '結束',
 "form.report.note" => '備註',
 "form.report.project" => '項目',
@@ -395,7 +392,6 @@ $i18n_key_words = array(
 "form.report.th.empllist" => '用戶',
 "form.report.th.date" => '日期',
 "form.report.th.project" => '項目',
-"form.report.th.activity" => '活動',
 "form.report.th.start" => '開始',
 "form.report.th.finish" => '結束',
 "form.report.th.duration" => '持續時間',
@@ -509,10 +505,4 @@ $i18n_key_words = array(
 "label.hrs" => '小時',
 "label.errors" => '錯誤',
 "label.ldap_hint" => '在下麵的欄目輸入您的<b>Windows用戶名</b>和<b>密碼</b>。',
-// Note to translators: string below must be translated.
-// "label.calendar_today" => 'today',
-// "label.calendar_close" => 'close',
-
-// login hello text
-// "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
 );

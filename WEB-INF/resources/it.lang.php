@@ -157,9 +157,9 @@ $i18n_key_words = array(
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Oggetto',
 'label.date' => 'Data',
+'label.start_date' => 'Data inizio',
+'label.end_date' => 'Data fine',
 // TODO: translate the following.
-// 'label.start_date' => 'Start date',
-// 'label.end_date' => 'End date',
 // 'label.user' => 'User',
 // 'label.users' => 'Users',
 // 'label.client' => 'Client',
@@ -167,8 +167,8 @@ $i18n_key_words = array(
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
 'label.project' => 'Progetto',
+'label.projects' => 'Progetti',
 // TODO: translate the following.
-// 'label.projects' => 'Projects',
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -204,7 +204,8 @@ $i18n_key_words = array(
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
 // 'label.comment' => 'Comment',
-// 'label.status' => 'Status',
+'label.status' => 'Stato',
+// TODO: translate the following.
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
 'label.total' => 'Totale',
@@ -266,10 +267,10 @@ $i18n_key_words = array(
 // 'title.invoice' => 'Invoice',
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
-// 'title.projects' => 'Projects',
-// 'title.add_project' => 'Adding Project',
-// 'title.edit_project' => 'Editing Project',
-// 'title.delete_project' => 'Deleting Project',
+'title.projects' => 'Progetti',
+'title.add_project' => 'Aggiungi progetto',
+'title.edit_project' => 'Modifica progetto',
+'title.delete_project' => 'Elimina progetto',
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -392,8 +393,9 @@ $i18n_key_words = array(
 // 'form.reports.show_fields' => 'Show fields',
 // 'form.reports.group_by' => 'Group by',
 // 'form.reports.group_by_no' => '--- no grouping ---',
-// 'form.reports.group_by_date' => 'date',
-// 'form.reports.group_by_user' => 'user',
+'form.reports.group_by_date' => 'data',
+'form.reports.group_by_user' => 'utente',
+// TODO: translate the following.
 // 'form.reports.group_by_client' => 'client',
 'form.reports.group_by_project' => 'progetto',
 // TODO: translate the following.
@@ -436,10 +438,10 @@ $i18n_key_words = array(
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 // 'form.users.role' => 'Role',
-// 'form.users.manager' => 'Manager',
-// 'form.users.comanager' => 'Co-manager',
-// 'form.users.rate' => 'Rate',
-// 'form.users.default_rate' => 'Default hourly rate',
+'form.users.manager' => 'Manager',
+'form.users.comanager' => 'Co-manager',
+'form.users.rate' => 'Costo',
+'form.users.default_rate' => 'Costo per ora di default',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
@@ -507,37 +509,7 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 // Strings below are not use in current code. See if we can recycle something from below.
 
-// people form attributes
-"form.people.th.status" => 'stato',
-"form.people.th.project" => 'progetto',
-"form.people.th.rate" => 'costo',
-"form.people.manager" => 'manager',
-"form.people.comanager" => 'comanager',
-"form.people.empl" => 'utente',
-"form.people.rate" => 'costo per ora di default',
-"form.people.comanager" => 'co-manager',
-"form.people.projects" => 'progetti',
-
-// projects form attributes
-"form.project.proj_title" => 'progetti',
-"form.project.edit_str" => 'mofifca progetto',
-"form.project.add_str" => 'aggiungi nuovo progetto',
-"form.project.del_str" => 'elimina progetto',
-
-// activities form attributes
-"form.activity.project" => 'progetto',
-
 // report attributes
-"form.report.title" => 'report',
-"form.report.from" => 'data inizio',
-"form.report.to" => 'data fine',
-"form.report.groupby_user" => 'utente',
-"form.report.groupby_project" => 'progetto',
-"form.report.groupby_activity" => 'attività',
-"form.report.duration" => 'durata',
-"form.report.start" => 'inizio',
-"form.report.activity" => 'attività',
-"form.report.show_idle" => 'mostra inattivi',
 "form.report.finish" => 'fine',
 "form.report.note" => 'nota',
 "form.report.project" => 'progetto',
@@ -546,10 +518,8 @@ $i18n_key_words = array(
 "form.report.th.empllist" => 'utente',
 "form.report.th.date" => 'data',
 "form.report.th.project" => 'progetto',
-"form.report.th.activity" => 'attività',
 "form.report.th.start" => 'inizio',
 "form.report.th.finish" => 'fine',
-"form.report.th.duration" => 'durata',
 "form.report.th.note" => 'note',
 
 // mail form attributes
