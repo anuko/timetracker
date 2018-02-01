@@ -404,17 +404,17 @@ $i18n_key_words = array(
 'form.clients.active_clients' => 'Aktiiviset asiakkaat',
 'form.clients.inactive_clients' => 'Ei-aktiiviset asiakkaat',
 
-// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
+// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
 'form.client.client_to_delete' => 'Poistettava asiakas',
 'form.client.client_entries' => 'Asiakassyötteet',
 
-// Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'Voit viedä tiimin tiedot xml-tiedostoksi, mikä voi helpottaa tietojen siirtoa omalle palvelimelle.',
 'form.export.compression' => 'Pakkaus',
 'form.export.compression_none' => 'ei pakata',
 'form.export.compression_bzip' => 'bzip',
 
-// Strings for Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
 'form.import.hint' => 'Tuo tiimitiedot xml-tiedostosta.',
 'form.import.file' => 'Valitse tiedosto',
 'form.import.success' => 'Tietojen tuonti onnistui.',

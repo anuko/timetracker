@@ -207,8 +207,7 @@ $i18n_key_words = array(
 'label.comment' => 'Commento',
 'label.status' => 'Stato',
 'label.tax' => 'Imposta',
-// TODO: translate the following.
-// 'label.subtotal' => 'Subtotal',
+'label.subtotal' => 'Subtotale',
 'label.total' => 'Totale',
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
@@ -244,6 +243,9 @@ $i18n_key_words = array(
 // 'label.mark_paid' => 'Mark paid',
 
 // Form titles.
+// TODO: Improve titles for consistency, so that each title explains correctly what each
+// page is about and is "consistent" from page to page, meaning that correct grammar is used everywhere.
+// Compare with English file to see how it is done there and do Italian titles similarly.
 'title.login' => 'Login',
 // TODO: translate the following.
 // 'title.teams' => 'Teams',
@@ -267,8 +269,8 @@ $i18n_key_words = array(
 // 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
 'title.invoice' => 'Fattura',
+'title.send_invoice' => 'Invia fattura',
 // TODO: translate the following.
-// 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => 'Progetti',
 'title.add_project' => 'Aggiungi progetto',
@@ -415,9 +417,9 @@ $i18n_key_words = array(
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
+'form.invoice.number' => 'Numero fattura',
+'form.invoice.person' => 'Persona',
 // TODO: translate the following.
-// 'form.invoice.number' => 'Invoice number',
-// 'form.invoice.person' => 'Person',
 // 'form.invoice.invoice_to_delete' => 'Invoice to delete',
 // 'form.invoice.invoice_entries' => 'Invoice entries',
 // 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
@@ -453,19 +455,20 @@ $i18n_key_words = array(
 // 'form.clients.active_clients' => 'Active Clients',
 // 'form.clients.inactive_clients' => 'Inactive Clients',
 
-// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
+// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
 // TODO: translate the following.
 // 'form.client.client_to_delete' => 'Client to delete',
 // 'form.client.client_entries' => 'Client entries',
 
-// Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 // TODO: translate the following.
 // 'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
-// 'form.export.compression' => 'Compression',
+'form.export.compression' => 'Compressione',
+// TODO: translate the following.
 // 'form.export.compression_none' => 'none',
 // 'form.export.compression_bzip' => 'bzip',
 
-// Strings for Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
 // TODO: translate the following.
 // 'form.import.hint' => 'Import team data from an xml file.',
 // 'form.import.file' => 'Select file',
@@ -499,7 +502,7 @@ $i18n_key_words = array(
 // 'form.mail.report_subject' => 'Time Tracker Report',
 // 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 // 'form.mail.report_sent' => 'Report sent.',
-// 'form.mail.invoice_sent' => 'Invoice sent.',
+'form.mail.invoice_sent' => 'Fattura inviata.',
 
 // Quotas configuration form.
 // TODO: translate the following.
@@ -514,22 +517,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 // Strings below are not use in current code. See if we can recycle something from below.
 
-// invoice attributes
-"form.invoice.select_cust" => 'seleziona il cliente',
-"form.invoice.fillform" => 'compila i campi',
-"form.invoice.date" => 'data',
-"form.invoice.number" => 'numero fattura',
-"form.invoice.th.username" => 'persona',
-"form.invoice.th.time" => 'ore',
-"form.invoice.th.rate" => 'costo',
-"form.invoice.th.summ" => 'ammontare',
-"form.invoice.subtotal" => 'subtotale',
-"form.invoice.customer" => 'cliente',
-"form.invoice.mailinv_above" => 'invia la fattura tramite e-mail',
-"form.invoice.sending_str" => '<b>fattura inviata</b>',
-
-"form.migration.zip" => 'compressione',
-"form.migration.file" => 'seleziona il file',
 "form.migration.import.title" => 'importa i dati',
 "form.migration.import.success" => 'importazione eseguita con successo',
 "form.migration.import.text" => 'importa i dati del team da un file xml',

@@ -426,18 +426,18 @@ $i18n_key_words = array(
 'form.clients.active_clients' => 'مشتری های فعال',
 'form.clients.inactive_clients' => 'مشتری های غیرفعال',
 
-// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
+// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
 // TODO: translate the following.
 // 'form.client.client_to_delete' => 'Client to delete',
 // 'form.client.client_entries' => 'Client entries',
 
-// Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'می توانید از همه اطلاعات تیم یک پشتیبان به فرمت xml تهیه کنید. اگر میخواهید داده ها را به سرور خودتان منتقل کنید این قسمت می تواند مفید باشد.',
 'form.export.compression' => 'فشرده سازی',
 'form.export.compression_none' => 'هیچ کدام',
 'form.export.compression_bzip' => 'bzip',
 
-// Strings for Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
 'form.import.hint' => 'وارد کردن اطلاعات تیم از یک فایل xml',
 'form.import.file' => 'انتخاب فایل',
 'form.import.success' => 'وارد کردن اطلاعات با موفقیت انجام شد',

@@ -394,17 +394,17 @@ $i18n_key_words = array(
 'form.clients.active_clients' => 'Active Clients',
 'form.clients.inactive_clients' => 'Inactive Clients',
 
-// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
+// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
 'form.client.client_to_delete' => 'Client to delete',
 'form.client.client_entries' => 'Client entries',
 
-// Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
 'form.export.compression' => 'Compression',
 'form.export.compression_none' => 'none',
 'form.export.compression_bzip' => 'bzip',
 
-// Strings for Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
 'form.import.hint' => 'Import team data from an xml file.',
 'form.import.file' => 'Select file',
 'form.import.success' => 'Import completed successfully.',

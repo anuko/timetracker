@@ -411,13 +411,13 @@ $i18n_key_words = array(
 'form.client.client_to_delete' => 'Klijent za brisanje',
 'form.client.client_entries' => 'Unos klijenta',
 
-// Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'Postoji mogućnost izvoza svih podataka od timova u xml fajlu. Može vam biti korisno ako imate internu bazu podataka.',
 'form.export.compression' => 'Kompresija',
 'form.export.compression_none' => 'ništa',
 'form.export.compression_bzip' => 'bzip',
 
-// Strings for Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
 'form.import.hint' => 'Uvezi podatke timova iz xml fajla.',
 'form.import.file' => 'Odaberi datoteku',
 'form.import.success' => 'Uvoz uspešan.',

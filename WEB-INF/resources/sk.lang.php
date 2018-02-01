@@ -424,18 +424,18 @@ $i18n_key_words = array(
 'form.clients.active_clients' => 'Aktívny klienti',
 'form.clients.inactive_clients' => 'Neaktívny klienti',
 
-// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
+// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
 // TODO: translate the following.
 // 'form.client.client_to_delete' => 'Client to delete',
 // 'form.client.client_entries' => 'Client entries',
 
-// Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'Môžete exportovať všetky údaje o tíme do xml súboru. Toto môže byť užitočné pri prenose údajov na iný server.',
 'form.export.compression' => 'Kompresia',
 'form.export.compression_none' => 'žiadna',
 'form.export.compression_bzip' => 'bzip',
 
-// Strings for Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
 'form.import.hint' => 'Importovať dáta o tíme z xml súboru.',
 'form.import.file' => 'Vyberte súbor',
 'form.import.success' => 'Import úspešne dokončený.',
