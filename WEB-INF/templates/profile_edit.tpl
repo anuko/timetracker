@@ -229,6 +229,12 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$forms.profileForm.quotas.control}</td>
             <td><label for="quotas">{$i18n.label.monthly_quotas}</label> <span id="quotas_config"><a href="quotas.php">{$i18n.label.configure}</a></span></td>
           </tr>
+  {if $smarty.const.WEEK_VIEW_DEBUG == 1}
+          <tr>
+            <td align="right" nowrap>{$forms.profileForm.week_view.control}</td>
+            <td><label for="quotas">{$i18n.label.week_view}</label> <span id="week_view_config"><a href="week_view.php">{$i18n.label.configure}</a></span></td>
+          </tr>
+  {/if}
 {/if}
 
           <tr>

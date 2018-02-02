@@ -76,6 +76,7 @@ if ($request->isPost()) {
     $cl_notifications = $request->getParameter('notifications');
     $cl_locking = $request->getParameter('locking');
     $cl_quotas = $request->getParameter('quotas');
+    $cl_week_view = $request->getParameter('week_view');
   }
 } else {
   $cl_name = $user->name;
@@ -109,6 +110,7 @@ if ($request->isPost()) {
     $cl_notifications = in_array('no', $plugins);
     $cl_locking = in_array('lk', $plugins);
     $cl_quotas = in_array('mq', $plugins);
+    $cl_week_view = in_array('wv', $plugins);
   }
 }
 
@@ -205,6 +207,9 @@ if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'checkbox','name'=>'notifications','value'=>$cl_notifications,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'locking','value'=>$cl_locking,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'quotas','value'=>$cl_quotas,'onchange'=>'handlePluginCheckboxes()'));
+  if (defined('WEEK_VIEW_DEBUG') && isTrue(WEEK_VIEW_DEBUG)) {
+    $form->addInput(array('type'=>'checkbox','name'=>'week_view','value'=>$cl_week_view));
+  }
 }
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
@@ -261,6 +266,8 @@ if ($request->isPost()) {
         $plugins .= ',lk';
       if ($cl_quotas)
         $plugins .= ',mq';
+      if ($cl_week_view)
+        $plugins .= ',wv';
       $plugins = trim($plugins, ',');
 
       $update_result = ttTeamHelper::update($user->team_id, array(

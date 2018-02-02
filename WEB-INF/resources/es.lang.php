@@ -317,6 +317,7 @@ $i18n_key_words = array(
 // NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
 // It is also a name for the Locking plugin on the Team profile page.
 // 'title.locking' => 'Locking',
+// 'title.week_view' => 'Week View',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.

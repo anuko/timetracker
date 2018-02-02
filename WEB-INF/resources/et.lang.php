@@ -265,15 +265,57 @@ $i18n_key_words = array(
 'title.reports' => 'Raportid',
 // TODO: translate the following.
 // 'title.report' => 'Report',
+// 'title.send_report' => 'Sending Report',
+// 'title.invoice' => 'Invoice',
+// 'title.send_invoice' => 'Sending Invoice',
+// 'title.charts' => 'Charts',
+// 'title.projects' => 'Projects',
+// 'title.add_project' => 'Adding Project',
+// 'title.edit_project' => 'Editing Project',
+// 'title.delete_project' => 'Deleting Project',
+// 'title.tasks' => 'Tasks',
+// 'title.add_task' => 'Adding Task',
+// 'title.edit_task' => 'Editing Task',
+// 'title.delete_task' => 'Deleting Task',
+// 'title.users' => 'Users',
+// 'title.add_user' => 'Adding User',
+// 'title.edit_user' => 'Editing User',
+// 'title.delete_user' => 'Deleting User',
+// 'title.clients' => 'Clients',
+// 'title.add_client' => 'Adding Client',
+// 'title.edit_client' => 'Editing Client',
+// 'title.delete_client' => 'Deleting Client',
+// 'title.invoices' => 'Invoices',
+// 'title.add_invoice' => 'Adding Invoice',
+// 'title.view_invoice' => 'Viewing Invoice',
+// 'title.delete_invoice' => 'Deleting Invoice',
+// 'title.notifications' => 'Notifications',
+// 'title.add_notification' => 'Adding Notification',
+// 'title.edit_notification' => 'Editing Notification',
+// 'title.delete_notification' => 'Deleting Notification',
+// 'title.monthly_quotas' => 'Monthly Quotas',
+// 'title.export' => 'Exporting Team Data',
+// 'title.import' => 'Importing Team Data',
+'title.options' => 'Suvandid',
+// TODO: translate the following.
+// 'title.profile' => 'Profile',
+// 'title.cf_custom_fields' => 'Custom Fields',
+// 'title.cf_add_custom_field' => 'Adding Custom Field',
+// 'title.cf_edit_custom_field' => 'Editing Custom Field',
+// 'title.cf_delete_custom_field' => 'Deleting Custom Field',
+// 'title.cf_dropdown_options' => 'Dropdown Options',
+// 'title.cf_add_dropdown_option' => 'Adding Option',
+// 'title.cf_edit_dropdown_option' => 'Editing Option',
+// 'title.cf_delete_dropdown_option' => 'Deleting Option',
+// NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
+// It is also a name for the Locking plugin on the Team profile page.
+// 'title.locking' => 'Locking',
+// 'title.week_view' => 'Week View',
 
 
 
 // TODO: refactoring ongoing down from here.
 
-// Form titles.
-'title.options' => 'Suvandid',
-
-// TODO: file refactoring is ongoing down from here.
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'lemmikraport',
 "form.filter.filter_new" => 'salvesta lemmikuna',
