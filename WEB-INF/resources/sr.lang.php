@@ -348,7 +348,6 @@ $i18n_key_words = array(
 // Forma izveštaja. Pogledajte primer na https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Sačuvaj u omiljenima',
 'form.reports.confirm_delete' => 'Da li ste sigurni da želite obrisati omiljene izveštaje?',
-'form.reports.include_records' => 'Uključi zapise',
 'form.reports.include_billable' => 'naplativo',
 'form.reports.include_not_billable' => 'ne naplativo',
 'form.reports.include_invoiced' => 'obračunato',

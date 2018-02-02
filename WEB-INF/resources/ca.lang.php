@@ -373,7 +373,6 @@ $i18n_key_words = array(
 'form.reports.save_as_favorite' => 'Guardar com a favorit',
 // TODO: translate the following.
 // 'form.reports.confirm_delete' => 'Are you sure you want to delete this favorite report?',
-// 'form.reports.include_records' => 'Include records',
 // 'form.reports.include_billable' => 'billable',
 // 'form.reports.include_not_billable' => 'not billable',
 // 'form.reports.include_invoiced' => 'invoiced',

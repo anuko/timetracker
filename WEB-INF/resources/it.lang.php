@@ -53,7 +53,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 // 'menu.reports' => 'Reports',
-// 'menu.charts' => 'Charts',
+'menu.charts' => 'Grafici',
 'menu.projects' => 'Progetti',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
@@ -160,13 +160,13 @@ $i18n_key_words = array(
 'label.date' => 'Data',
 'label.start_date' => 'Data inizio',
 'label.end_date' => 'Data fine',
+'label.user' => 'Utente',
+'label.users' => 'Utenti',
+'label.client' => 'Cliente',
+'label.clients' => 'Clienti',
 // TODO: translate the following.
-// 'label.user' => 'User',
-// 'label.users' => 'Users',
-// 'label.client' => 'Client',
-// 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
-// 'label.invoice' => 'Invoice',
+'label.invoice' => 'Fattura',
 'label.project' => 'Progetto',
 'label.projects' => 'Progetti',
 // TODO: translate the following.
@@ -191,8 +191,8 @@ $i18n_key_words = array(
 // 'label.view' => 'View',
 'label.edit' => 'Modifica',
 'label.delete' => 'Elimina',
+'label.configure' => 'Configura',
 // TODO: translate the following.
-// 'label.configure' => 'Configure',
 // 'label.select_all' => 'Select all',
 // 'label.select_none' => 'Deselect all',
 // 'label.day_view' => 'Day view',
@@ -215,8 +215,8 @@ $i18n_key_words = array(
 // 'label.or' => 'or',
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// 'label.required_fields' => '* - required fields',
-// 'label.on_behalf' => 'on behalf of',
+'label.required_fields' => '* campi obbligatori',
+'label.on_behalf' => 'a favore di',
 'label.role_manager' => '(manager)',
 'label.role_comanager' => '(co-manager)',
 'label.role_admin' => '(amministratore)',
@@ -270,8 +270,7 @@ $i18n_key_words = array(
 // 'title.send_report' => 'Sending Report',
 'title.invoice' => 'Fattura',
 'title.send_invoice' => 'Invia fattura',
-// TODO: translate the following.
-// 'title.charts' => 'Charts',
+'title.charts' => 'Grafici',
 'title.projects' => 'Progetti',
 'title.add_project' => 'Aggiungi progetto',
 'title.edit_project' => 'Modifica progetto',
@@ -298,8 +297,8 @@ $i18n_key_words = array(
 // 'title.edit_notification' => 'Editing Notification',
 // 'title.delete_notification' => 'Deleting Notification',
 // 'title.monthly_quotas' => 'Monthly Quotas',
-// 'title.export' => 'Exporting Team Data',
-// 'title.import' => 'Importing Team Data',
+'title.export' => 'Esporta i dati del team',
+'title.import' => 'Importa i dati del team',
 'title.options' => 'Opzioni',
 'title.profile' => 'Profilo',
 // TODO: translate the following.
@@ -317,22 +316,22 @@ $i18n_key_words = array(
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
+'dropdown.all' => '--- tutti ---',
+'dropdown.no' => '--- no ---',
+'dropdown.current_day' => 'oggi',
+'dropdown.previous_day' => 'ieri',
+'dropdown.selected_day' => 'giorno',
+'dropdown.current_week' => 'questa settimana',
+'dropdown.previous_week' => 'settimana scorsa',
+'dropdown.selected_week' => 'settimana',
+'dropdown.current_month' => 'questo mese',
+'dropdown.previous_month' => 'mese scorso',
+'dropdown.selected_month' => 'mese',
+'dropdown.current_year' => 'quest\\\'anno',
 // TODO: translate the following.
-// 'dropdown.all' => '--- all ---',
-// 'dropdown.no' => '--- no ---',
-// 'dropdown.current_day' => 'today',
-// 'dropdown.previous_day' => 'yesterday',
-// 'dropdown.selected_day' => 'day',
-// 'dropdown.current_week' => 'this week',
-// 'dropdown.previous_week' => 'previous week',
-// 'dropdown.selected_week' => 'week',
-// 'dropdown.current_month' => 'this month',
-// 'dropdown.previous_month' => 'previous month',
-// 'dropdown.selected_month' => 'month',
-// 'dropdown.current_year' => 'this year',
 // 'dropdown.previous_year' => 'previous year',
-// 'dropdown.selected_year' => 'year',
-// 'dropdown.all_time' => 'all time',
+'dropdown.selected_year' => 'anno',
+'dropdown.all_time' => 'tutto il tempo',
 'dropdown.projects' => 'progetti',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
@@ -389,21 +388,18 @@ $i18n_key_words = array(
 // TODO: translate the following.
 'form.reports.save_as_favorite' => 'Salva nei preferiti',
 'form.reports.confirm_delete' => 'Sei sicuro di voler cancellare questo report dai preferiti?',
-// TODO: translate the following.
-// 'form.reports.include_records' => 'Include records',
-// 'form.reports.include_billable' => 'billable',
-// 'form.reports.include_not_billable' => 'not billable',
+'form.reports.include_billable' => 'fatturabile',
+'form.reports.include_not_billable' => 'non fatturabile',
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
-// 'form.reports.select_period' => 'Select time period',
-// 'form.reports.set_period' => 'or set dates',
-// 'form.reports.show_fields' => 'Show fields',
-// 'form.reports.group_by' => 'Group by',
-// 'form.reports.group_by_no' => '--- no grouping ---',
+'form.reports.select_period' => 'Seleziona il periodo di tempo',
+'form.reports.set_period' => 'oppure setta le date',
+'form.reports.show_fields' => 'Mostra i campi',
+'form.reports.group_by' => 'Raggruppa per',
+'form.reports.group_by_no' => '--- non raggruppare ---',
 'form.reports.group_by_date' => 'data',
 'form.reports.group_by_user' => 'utente',
-// TODO: translate the following.
-// 'form.reports.group_by_client' => 'client',
+'form.reports.group_by_client' => 'cliente',
 'form.reports.group_by_project' => 'progetto',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
@@ -411,8 +407,8 @@ $i18n_key_words = array(
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
+'form.report.export' => 'Esporta',
 // TODO: translate the following.
-// 'form.report.export' => 'Export',
 // 'form.report.assign_to_invoice' => 'Assign to invoice',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
@@ -427,7 +423,7 @@ $i18n_key_words = array(
 // Charts form. See example at https://timetracker.anuko.com/charts.php
 // TODO: translate the following.
 // 'form.charts.interval' => 'Interval',
-// 'form.charts.chart' => 'Chart',
+'form.charts.chart' => 'Grafico',
 
 // Projects form. See example at https://timetracker.anuko.com/projects.php
 // TODO: translate the following.
@@ -462,17 +458,16 @@ $i18n_key_words = array(
 
 // Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 // TODO: translate the following.
-// 'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
+'form.export.hint' => 'Puoi esporate tutti i dati dei team in un file xml. Questo può essere utile se devi trasferire i dati da un server ad un altro.',
 'form.export.compression' => 'Compressione',
 // TODO: translate the following.
 // 'form.export.compression_none' => 'none',
 // 'form.export.compression_bzip' => 'bzip',
 
 // Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-// TODO: translate the following.
-// 'form.import.hint' => 'Import team data from an xml file.',
-// 'form.import.file' => 'Select file',
-// 'form.import.success' => 'Import completed successfully.',
+'form.import.hint' => 'Importa i dati del team da un file xml.',
+'form.import.file' => 'Seleziona il file',
+'form.import.success' => 'Importazione eseguita con successo.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
 // TODO: translate the following.
@@ -516,57 +511,6 @@ $i18n_key_words = array(
 
 // TODO: refactoring ongoing down from here.
 // Strings below are not use in current code. See if we can recycle something from below.
-
-"form.migration.import.title" => 'importa i dati',
-"form.migration.import.success" => 'importazione eseguita con successo',
-"form.migration.import.text" => 'importa i dati del team da un file xml',
-"form.migration.export.title" => 'esporta i dati',
-"form.migration.export.success" => 'esportazione eseguita con successo',
-"form.migration.export.text" => 'puoi esporate tutti i dati dei team in un file xml. questo può essere utile se devi trasferire i dati da un server ad un altro.',
-
-// miscellaneous strings
-"forward.tocsvfile" => 'esporta i dati in un file .csv',
-"forward.toxmlfile" => 'esporta i dati in un file .xml',
-"forward.geninvoice" => 'genera la fattura',
-"forward.change" => 'configura i clienti',
-
-// strings inside contols on forms
-"controls.select.project" => '--- seleziona il progetto ---',
-"controls.select.activity" => '--- seleziona la attività ---',
-"controls.select.client" => '--- seleziona il cliente ---',
-"controls.project_bind" => '--- tutti ---',
-"controls.all" => '--- tutti ---',
-"controls.notbind" => '--- no ---',
-"controls.per_tm" => 'questo mese',
-"controls.per_lm" => 'mese scorso',
-"controls.per_tw" => 'questa settimana',
-"controls.per_lw" => 'settimana scorsa',
-"controls.per_td" => 'questo giorno',
-"controls.per_at" => 'tutto il tempo',
-"controls.per_ty" => 'quest\\\'anno',
-"controls.sel_period" => '--- seleziona il periodo di tempo ---',
-"controls.sel_groupby" => '--- non raggruppare ---',
-"controls.inc_billable" => 'fatturabile',
-"controls.inc_nbillable" => 'non fatturabile',
-// Note to translators: the string below must be translated
-// "controls.default" => '--- default ---',
-
-// labels
-"label.chart.title1" => 'attività per utente',
-// Note to translators: the string below is missing and must be added and translated
-// "label.chart.title2" => 'projects for user',
-"label.chart.period" => 'grafico per il periodo',
-
-"label.pbehalf_info" => '%s %s <b>a favore di %s</b>',
-"label.time_noentry" => 'nessun inserimento',
-"label.req_fields" => '* campi obbligatori',
-"label.sel_project" => 'seleziona il progetto',
-"label.sel_activity" => 'seleziona la attività',
-"label.sel_tp" => 'seleziona il periodo di tempo',
-"label.set_tp" => 'oppure setta le date',
-"label.fields" => 'mostra i campi',
-"label.group_title" => 'raggruppa per',
-"label.include_title" => 'includi records',
 "label.inv_str" => 'fattura',
 "label.set_empl" => 'seleziona utenti',
 "label.sel_all" => 'seleziona tutti',

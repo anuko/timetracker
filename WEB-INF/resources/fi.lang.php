@@ -345,7 +345,6 @@ $i18n_key_words = array(
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Tallenna raporttipohjaksi',
 'form.reports.confirm_delete' => 'Haluatko varmasti poistaa tämän raporttipohjan?',
-'form.reports.include_records' => 'Sisällytä tietueet',
 'form.reports.include_billable' => 'laskutettavat',
 'form.reports.include_not_billable' => 'ei-laskutettavat',
 'form.reports.include_invoiced' => 'laskutettu',

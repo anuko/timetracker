@@ -363,7 +363,6 @@ $i18n_key_words = array(
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Uložiť ako obľúbenú zostavu',
 'form.reports.confirm_delete' => 'Ste si istý, že chcete vymazať túto obľúbenú zostavu?',
-'form.reports.include_records' => 'Zahrnúť záznamy',
 'form.reports.include_billable' => 'faktúrovateĺné',
 'form.reports.include_not_billable' => 'nefaktúrovateľné',
 // TODO: translate the following.

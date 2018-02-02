@@ -367,7 +367,6 @@ $i18n_key_words = array(
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'ذخیره به عنوان برگزیده',
 'form.reports.confirm_delete' => 'آیا می خواهید گزارش برگزیده حذف شود؟',
-'form.reports.include_records' => 'شامل رکوردهای',
 'form.reports.include_billable' => 'قابل پرداخت',
 'form.reports.include_not_billable' => 'غیرقابل پرداخت',
 'form.reports.select_period' => 'انتخاب بازه زمانی',
