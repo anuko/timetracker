@@ -210,6 +210,9 @@ $i18n_key_words = array(
 'label.paid_status' => 'Status van betaling',
 'label.paid' => 'Betaald',
 'label.mark_paid' => 'Markeer als betaald',
+// TODO: translate the following.
+// 'label.week_note' => 'Week note',
+// 'label.week_list' => 'Week list',
 
 // Form titles.
 'title.login' => 'Aanmelden',

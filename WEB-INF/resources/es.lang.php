@@ -244,6 +244,8 @@ $i18n_key_words = array(
 // 'label.paid_status' => 'Paid status',
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
+// 'label.week_note' => 'Week note',
+// 'label.week_list' => 'Week list',
 
 // Form titles.
 'title.login' => 'Sesión iniciada',

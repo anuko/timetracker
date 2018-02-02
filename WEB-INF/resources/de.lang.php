@@ -210,6 +210,9 @@ $i18n_key_words = array(
 'label.paid_status' => 'Bezahlstatus',
 'label.paid' => 'Bezahlt',
 'label.mark_paid' => 'Als bezahlt setzen',
+// TODO: translate the following.
+// 'label.week_note' => 'Week note',
+// 'label.week_list' => 'Week list',
 
 // Form titles.
 'title.login' => 'Anmelden',
