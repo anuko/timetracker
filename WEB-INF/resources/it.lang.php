@@ -42,8 +42,8 @@ $i18n_key_words = array(
 
 // Menus - short selection strings that are displayed on top of application web pages.
 // Example: https://timetracker.anuko.com (black menu on top).
+'menu.login' => 'Login',
 // TODO: translate the following.
-// 'menu.login' => 'Login',
 // 'menu.logout' => 'Logout',
 // 'menu.forum' => 'Forum',
 // 'menu.help' => 'Help',
@@ -164,8 +164,7 @@ $i18n_key_words = array(
 'label.users' => 'Utenti',
 'label.client' => 'Cliente',
 'label.clients' => 'Clienti',
-// TODO: translate the following.
-// 'label.option' => 'Option',
+'label.option' => 'Opzion',
 'label.invoice' => 'Fattura',
 'label.project' => 'Progetto',
 'label.projects' => 'Progetti',
@@ -180,7 +179,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.notes' => 'Notes',
 // 'label.item' => 'Item',
-// 'label.cost' => 'Cost',
+'label.cost' => 'Costo',
+// TODO: translate the following.
 // 'label.day_total' => 'Day total',
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
@@ -192,9 +192,9 @@ $i18n_key_words = array(
 'label.edit' => 'Modifica',
 'label.delete' => 'Elimina',
 'label.configure' => 'Configura',
+'label.select_all' => 'Seleziona tutti',
+'label.select_none' => 'Deseleziona tutti',
 // TODO: translate the following.
-// 'label.select_all' => 'Select all',
-// 'label.select_none' => 'Deselect all',
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 'label.id' => 'ID',
@@ -212,7 +212,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
-// 'label.or' => 'or',
+'label.or' => 'o',
+// TODO: translate the following.
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* campi obbligatori',
@@ -287,8 +288,8 @@ $i18n_key_words = array(
 'title.add_client' => 'Aggiungi cliente',
 'title.edit_client' => 'Modifica cliente',
 'title.delete_client' => 'Elimina cliente',
+'title.invoices' => 'Fatture',
 // TODO: translate the following.
-// 'title.invoices' => 'Invoices',
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
 // 'title.delete_invoice' => 'Deleting Invoice',
@@ -338,9 +339,10 @@ $i18n_key_words = array(
 'dropdown.clients' => 'clienti',
 // TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
-// 'dropdown.select_invoice' => '--- select invoice ---',
-// 'dropdown.status_active' => 'active',
-// 'dropdown.status_inactive' => 'inactive',
+'dropdown.select_invoice' => '--- seleziona la fattura ---',
+'dropdown.status_active' => 'attivo',
+'dropdown.status_inactive' => 'inattivo',
+// TODO: translate the following.
 // 'dropdown.delete'=>'delete',
 // 'dropdown.do_not_delete'=>'do not delete',
 // 'dropdown.paid' => 'paid',
@@ -506,19 +508,4 @@ $i18n_key_words = array(
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-
-
-// TODO: refactoring ongoing down from here.
-// Strings below are not use in current code. See if we can recycle something from below.
-"label.inv_str" => 'fattura',
-"label.set_empl" => 'seleziona utenti',
-"label.sel_all" => 'seleziona tutti',
-"label.sel_none" => 'deseleziona tutti',
-"label.or" => 'o',
-"label.disable" => 'disabilita',
-"label.enable" => 'abilita',
-"label.filter" => 'filtro',
-"label.timeweek" => 'totale settimanale',
-"label.hrs" => 'ore',
 );
