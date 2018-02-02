@@ -272,6 +272,8 @@ $i18n_key_words = array(
 'title.cf_edit_dropdown_option' => 'Modification d\\\'une option',
 'title.cf_delete_dropdown_option' => 'Suppression d\\\'une option',
 'title.locking' => 'Vérouillage',
+// TODO: translate the following.
+// 'title.week_view' => 'Week View',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.

@@ -263,6 +263,7 @@ $i18n_key_words = array(
 'title.add_notification' => 'Ilmoituksen lisäys',
 'title.edit_notification' => 'Ilmoituksen muokkaus',
 'title.delete_notification' => 'Ilmoituksen poisto',
+// TODO: translate the following.
 // 'title.monthly_quotas' => 'Monthly Quotas',
 'title.export' => 'Tiimitietojen vienti',
 'title.import' => 'Tiimitietojen tunti',
@@ -277,6 +278,8 @@ $i18n_key_words = array(
 'title.cf_edit_dropdown_option' => 'Vaihtoehdon muokkaus',
 'title.cf_delete_dropdown_option' => 'Vaihtoehdon poisto',
 'title.locking' => 'Lukitus',
+// TODO: translate the following.
+// 'title.week_view' => 'Week View',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
