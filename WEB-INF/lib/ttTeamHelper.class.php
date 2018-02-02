@@ -1044,10 +1044,11 @@ class ttTeamHelper {
 
     $plugins = implode(',', $plugin_array);
     if ($plugins != $user->plugins) {
-      return ttTeamHelper::update($user->team_id, array(
-        'name' => $user->team,
-        'plugins' => $plugins));
+      if (!ttTeamHelper::update($user->team_id, array('name' => $user->team,'plugins' => $plugins)))
+        return false;
+      $user->plugins = $plugins;
     }
+
     return true;
   }
 }

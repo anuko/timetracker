@@ -27,10 +27,8 @@
 // +----------------------------------------------------------------------+
 
 require_once('initialize.php');
-require_once('plugins/MonthlyQuota.class.php');
 import('form.Form');
 import('ttTeamHelper');
-import('ttTimeHelper');
 
 // Access check.
 if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('wv')) {
