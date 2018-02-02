@@ -38,65 +38,29 @@ if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('wv')) {
   exit();
 }
 
-
-// Get selected year from url parameter.
-$selectedYear = $request->getParameter('year');
-if (!$selectedYear or !ttValidInteger($selectedYear)){
-  $selectedYear = date('Y');
+if ($request->isPost()) {
+  $cl_week_note = $request->getParameter('week_note');
+  $cl_week_list = $request->getParameter('week_list');
 } else {
-  $selectedYear = (int) $selectedYear;
+  $plugins = explode(',', $user->plugins);
+  $cl_week_note = in_array('wn', $plugins);
+  $cl_week_list = in_array('wl', $plugins);
 }
 
-// Months are zero indexed.
-$months = $i18n->monthNames;
-
-$quota = new MonthlyQuota();
-
-if ($request->isPost()){
-  // Validate user input.
-  if (!ttTimeHelper::isValidDuration($request->getParameter('workdayHours')))
-    $err->add($i18n->getKey('error.field'), $i18n->getKey('form.quota.workday_hours'));
-
-  for ($i = 0; $i < count($months); $i++){
-    $val = $request->getParameter($months[$i]);
-    if (!$quota->isValidQuota($val))
-      $err->add($i18n->getKey('error.field'), $months[$i]);
-  }
-  // Finished validating user input.
-
-  if ($err->no()) {
-
-    // Handle workday hours.
-    $hours = $quota->quotaToFloat($request->getParameter('workdayHours'));
-    if ($hours != $user->workday_hours) {
-      if (!ttTeamHelper::update($user->team_id, array('name'=>$user->team,'workday_hours'=>$hours)))
-        $err->add($i18n->getKey('error.db'));
-    }
-
-    // Handle monthly quotas for a selected year.
-    $selectedYear = (int) $request->getParameter('year');
-    for ($i = 0; $i < count($months); $i++){
-      if (!$quota->update($selectedYear, $i+1, $request->getParameter($months[$i])))
-        $err->add($i18n->getKey('error.db'));
-    }
-
-    if ($err->no()) {
-      // Redisplay the form.
-      header('Location: quotas.php?year='.$selectedYear);
-      exit();
-    }
-  }
-}
-
-// Get monthly quotas for the entire year.
-$monthsData = $quota->get($selectedYear);
-$workdayHours = ttTimeHelper::toAbsDuration($user->workday_hours * 60, true);
 
 $form = new Form('weekViewForm');
 $form->addInput(array('type'=>'checkbox','name'=>'week_note','value'=>$cl_week_note));
 $form->addInput(array('type'=>'checkbox','name'=>'week_list','value'=>$cl_week_list));
+$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+
+if ($request->isPost()){
+  if (!ttTeamHelper::enablePlugin('wn', $cl_week_note) ||
+      !ttTeamHelper::enablePlugin('wl', $cl_week_list)) {
+    $err->add($i18n->getKey('error.db'));
+  }
+}
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('label.week_view'));
+$smarty->assign('title', $i18n->getKey('title.week_view'));
 $smarty->assign('content_page_name', 'week_view.tpl');
 $smarty->display('index.tpl');
