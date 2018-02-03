@@ -407,7 +407,6 @@ $i18n_key_words = array(
 "form.mytime.daily" => 'igapäevane töö',
 "form.mytime.total" => 'tunde kokku: ',
 "form.mytime.th.project" => 'projekt',
-"form.mytime.th.activity" => 'tegevus',
 "form.mytime.th.start" => 'algus',
 "form.mytime.th.finish" => 'lõpp',
 "form.mytime.th.duration" => 'kestus',
@@ -564,7 +563,6 @@ $i18n_key_words = array(
 // "label.chart.title2" => 'projects for user',
 "label.chart.period" => 'tabel perioodiks',
 
-"label.time_noentry" => 'sissekanne puudub',
 "label.req_fields" => '* nõutud väljad',
 "label.sel_project" => 'vali projekt',
 "label.sel_activity" => 'vali tegevus',

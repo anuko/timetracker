@@ -422,7 +422,6 @@ $i18n_key_words = array(
 "form.mytime.daily" => 'Treball diari',
 "form.mytime.total" => 'Hores totals: ',
 "form.mytime.th.project" => 'Projecte',
-"form.mytime.th.activity" => 'Activitat',
 "form.mytime.th.start" => 'Inici',
 "form.mytime.th.finish" => 'Fi',
 "form.mytime.th.duration" => 'Durada',
@@ -560,7 +559,6 @@ $i18n_key_words = array(
 // labels
 "label.chart.period" => 'gràfica por període',
 
-"label.time_noentry" => 'Sense entrada',
 "label.req_fields" => '* camps requerits',
 "label.sel_project" => 'Seleccionar projecte',
 "label.sel_tp" => 'Seleccionar període de temps',

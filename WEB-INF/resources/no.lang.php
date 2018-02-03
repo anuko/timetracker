@@ -213,7 +213,8 @@ $i18n_key_words = array(
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 // 'label.required_fields' => '* - required fields',
-// 'label.on_behalf' => 'on behalf of',
+'label.on_behalf' => 'på vegne av',
+// TODO: translate the following.
 // 'label.role_manager' => '(manager)',
 // 'label.role_comanager' => '(co-manager)',
 // 'label.role_admin' => '(administrator)',
@@ -399,7 +400,6 @@ $i18n_key_words = array(
 "form.mytime.daily" => 'daglig arbeide',
 "form.mytime.total" => 'totalt antall timer: ',
 "form.mytime.th.project" => 'prosjekt',
-"form.mytime.th.activity" => 'aktivitet',
 "form.mytime.th.start" => 'starttid',
 "form.mytime.th.finish" => 'ferdig',
 "form.mytime.th.duration" => 'varighet',
@@ -561,7 +561,6 @@ $i18n_key_words = array(
 
 // labels
 "label.pbehalf_info" => '%s %s <b>på vegne av %s</b>',
-"label.time_noentry" => 'ingen tilgang',
 "label.req_fields" => '* obligatoriske felt',
 "label.sel_project" => 'velg prosjekt',
 "label.sel_activity" => 'velg aktivitet',

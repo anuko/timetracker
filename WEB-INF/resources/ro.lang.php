@@ -402,17 +402,12 @@ $i18n_key_words = array(
 "form.mytime.daily" => 'activitatea zilnica',
 "form.mytime.total" => 'ore total: ',
 "form.mytime.th.project" => 'proiect',
-"form.mytime.th.activity" => 'activitate',
 "form.mytime.th.start" => 'inceput',
 "form.mytime.th.finish" => 'sfarsit',
 "form.mytime.th.duration" => 'durata',
 "form.mytime.th.note" => 'nota',
 "form.mytime.del_yes" => 'inregistrarea timului a fost stearsa cu succes',
 "form.mytime.no_finished_rec" => 'aceasta inregistrare a fost salvata numei cu timpul de inceput. nu este o eroare. poti parasi aplicatia daca este nevoie.',
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.mytime.billable" => 'billable',
-// "form.mytime.warn_tozero_rec" => 'this time record must be deleted because this time period is locked',
-// "form.mytime.uncompleted" => 'uncompleted',
 
 // profile form attributes
 // Note to translators: we need a more accurate translation of form.profile.create_title
@@ -540,7 +535,6 @@ $i18n_key_words = array(
 
 // labels
 "label.pbehalf_info" => '%s %s <b>in numele %s</b>',
-"label.time_noentry" => 'nu exista inregistrari',
 "label.req_fields" => '* date obligatorii',
 "label.sel_project" => 'alege proiect',
 "label.sel_activity" => 'alege activitate',

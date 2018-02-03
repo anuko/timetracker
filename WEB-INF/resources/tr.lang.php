@@ -408,7 +408,6 @@ $i18n_key_words = array(
 "form.mytime.daily" => 'günlük çalışma',
 "form.mytime.total" => 'toplam saat: ',
 "form.mytime.th.project" => 'proje',
-"form.mytime.th.activity" => 'faaliyet',
 "form.mytime.th.start" => 'başlat',
 "form.mytime.th.finish" => 'tamamla',
 "form.mytime.th.duration" => 'süre',
@@ -593,7 +592,6 @@ $i18n_key_words = array(
 "label.chart.period" => 'dönem için grafik',
 
 "label.pbehalf_info" => '% % <b>% adına</b>',
-"label.time_noentry" => 'giriş yok',
 "label.today" => 'bugün',
 "label.req_fields" => '* zorunlu bilgi',
 "label.sel_project" => 'proje seç',

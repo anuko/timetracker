@@ -216,7 +216,7 @@ $i18n_key_words = array(
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 // 'label.required_fields' => '* - required fields',
-// 'label.on_behalf' => 'on behalf of',
+'label.on_behalf' => '을 대표하여',
 // TODO: translate all 3 roles properly, see https://www.anuko.com/time_tracker/user_guide/user_accounts.htm
 // This may require different terms for role_manager and role_comanager.
 'label.role_manager' => '(관리자)',
@@ -403,7 +403,6 @@ $i18n_key_words = array(
 "form.mytime.daily" => '하루일과',
 "form.mytime.total" => '전체 시간: ',
 "form.mytime.th.project" => '프로젝트',
-"form.mytime.th.activity" => '활동내용',
 "form.mytime.th.start" => '시작',
 "form.mytime.th.finish" => '마감',
 "form.mytime.th.duration" => '기간',
@@ -557,7 +556,6 @@ $i18n_key_words = array(
 "label.chart.period" => '기간에 따른 그래프',
 
 "label.pbehalf_info" => '%s %s <b>%s 을 대표하여</b>',
-"label.time_noentry" => '항목이 없음',
 "label.req_fields" => '* 필수 필드',
 "label.sel_project" => '프로젝트 선택',
 "label.sel_activity" => '활동내용 선택',

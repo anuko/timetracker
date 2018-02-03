@@ -365,7 +365,6 @@ $i18n_key_words = array(
 "form.mytime.daily" => 'trabalho diário',
 "form.mytime.total" => 'horas totais: ',
 "form.mytime.th.project" => 'projeto',
-"form.mytime.th.activity" => 'actividade',
 "form.mytime.th.start" => 'início',
 "form.mytime.th.finish" => 'finish',
 "form.mytime.th.duration" => 'duração',
@@ -446,7 +445,6 @@ $i18n_key_words = array(
 
 // labels
 "label.pbehalf_info" => '%s %s <b>on behalf of %s</b>',
-"label.time_noentry" => 'sem registro',
 "label.req_fields" => '* campos obrigatórios',
 "label.sel_tp" => 'selecione o período de tempo',
 "label.set_tp" => 'ou selecionar datas',

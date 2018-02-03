@@ -215,7 +215,7 @@ $i18n_key_words = array(
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 // 'label.required_fields' => '* - required fields',
-// 'label.on_behalf' => 'on behalf of',
+'label.on_behalf' => 'を代表して',
 // TODO: translate all 3 roles properly, see https://www.anuko.com/time_tracker/user_guide/user_accounts.htm
 // This may require different terms for role_manager and role_comanager.
 'label.role_manager' => '(管理者)',
@@ -402,7 +402,6 @@ $i18n_key_words = array(
 "form.mytime.daily" => '日課',
 "form.mytime.total" => '合計時間： ',
 "form.mytime.th.project" => 'プロジェクト',
-"form.mytime.th.activity" => '活動内容',
 "form.mytime.th.start" => '開始',
 "form.mytime.th.finish" => '終了',
 "form.mytime.th.duration" => '期間',
@@ -562,7 +561,6 @@ $i18n_key_words = array(
 "label.chart.period" => '期間表示のチャート',
 
 "label.pbehalf_info" => '%s %s <b>%sを代表して</b>',
-"label.time_noentry" => '項目なし',
 "label.req_fields" => '* 必須のフィールド',
 "label.sel_project" => 'プロジェクトの選択',
 "label.sel_activity" => '活動内容の選択',

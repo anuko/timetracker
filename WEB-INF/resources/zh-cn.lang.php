@@ -400,7 +400,6 @@ $i18n_key_words = array(
 "form.mytime.daily" => '每日工作',
 "form.mytime.total" => '总小时数： ',
 "form.mytime.th.project" => '项目',
-"form.mytime.th.activity" => '活动',
 "form.mytime.th.start" => '开始',
 "form.mytime.th.finish" => '结束',
 "form.mytime.th.duration" => '持续时间',
@@ -579,7 +578,6 @@ $i18n_key_words = array(
 "label.chart.period" => '图表期限',
 
 "label.pbehalf_info" => '%s %s <b>代表%s</b>',
-"label.time_noentry" => '没有条目',
 "label.req_fields" => '* 必填栏目',
 "label.sel_project" => '选择项目',
 "label.sel_activity" => '选择活动',

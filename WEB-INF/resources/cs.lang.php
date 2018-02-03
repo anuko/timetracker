@@ -406,7 +406,6 @@ $i18n_key_words = array(
 "form.mytime.daily" => 'denní práce',
 "form.mytime.total" => 'součet hodin: ',
 "form.mytime.th.project" => 'projekt',
-"form.mytime.th.activity" => 'činnost',
 "form.mytime.th.start" => 'začátek',
 "form.mytime.th.finish" => 'konec',
 "form.mytime.th.duration" => 'trvání',
@@ -552,7 +551,6 @@ $i18n_key_words = array(
 "label.chart.title2" => 'projekty uživatele',
 "label.chart.period" => 'přehled za období',
 
-"label.time_noentry" => 'žádné záznamy',
 "label.req_fields" => '* nutno vyplnit',
 "label.sel_project" => 'výběr projektu',
 "label.sel_activity" => 'výběr činnosti',
