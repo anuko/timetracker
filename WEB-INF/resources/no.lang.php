@@ -349,6 +349,18 @@ $i18n_key_words = array(
 // 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
 // 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
+// Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
+// TODO: translate the following.
+// 'form.change_password.tip' => 'Type new password and click on Save.',
+
+// Time form. See example at https://timetracker.anuko.com/time.php.
+// TODO: translate the following.
+// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+// 'form.time.billable' => 'Billable',
+// 'form.time.uncompleted' => 'Uncompleted',
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
+
 
 
 // TODO: refactoring ongoing down from here.
@@ -396,7 +408,6 @@ $i18n_key_words = array(
 "form.mytime.finish" => 'ferdig',
 "form.mytime.duration" => 'varighet',
 "form.mytime.note" => 'notat',
-"form.mytime.behalf" => 'daglig arbeide for',
 "form.mytime.daily" => 'daglig arbeide',
 "form.mytime.total" => 'totalt antall timer: ',
 "form.mytime.th.project" => 'prosjekt',
@@ -560,7 +571,6 @@ $i18n_key_words = array(
 // "controls.default" => '--- default ---',
 
 // labels
-"label.pbehalf_info" => '%s %s <b>på vegne av %s</b>',
 "label.req_fields" => '* obligatoriske felt',
 "label.sel_project" => 'velg prosjekt',
 "label.sel_activity" => 'velg aktivitet',

@@ -218,7 +218,8 @@ $i18n_key_words = array(
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 // 'label.required_fields' => '* - required fields',
-// 'label.on_behalf' => 'on behalf of',
+'label.on_behalf' => 'in numele',
+// TODO: translate the following.
 // 'label.role_manager' => '(manager)',
 // 'label.role_comanager' => '(co-manager)',
 // 'label.role_admin' => '(administrator)',
@@ -354,6 +355,18 @@ $i18n_key_words = array(
 // 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
 // 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
+// Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
+// TODO: translate the following.
+// 'form.change_password.tip' => 'Type new password and click on Save.',
+
+// Time form. See example at https://timetracker.anuko.com/time.php.
+// TODO: translate the following.
+// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+// 'form.time.billable' => 'Billable',
+// 'form.time.uncompleted' => 'Uncompleted',
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
+
 
 
 // TODO: refactoring ongoing down from here.
@@ -398,7 +411,6 @@ $i18n_key_words = array(
 "form.mytime.finish" => 'sfarsit',
 "form.mytime.duration" => 'durata',
 "form.mytime.note" => 'nota',
-"form.mytime.behalf" => 'activitatea zilnica pentru',
 "form.mytime.daily" => 'activitatea zilnica',
 "form.mytime.total" => 'ore total: ',
 "form.mytime.th.project" => 'proiect',
@@ -534,7 +546,6 @@ $i18n_key_words = array(
 "controls.sel_groupby" => '--- fara grupare   ---',
 
 // labels
-"label.pbehalf_info" => '%s %s <b>in numele %s</b>',
 "label.req_fields" => '* date obligatorii',
 "label.sel_project" => 'alege proiect',
 "label.sel_activity" => 'alege activitate',

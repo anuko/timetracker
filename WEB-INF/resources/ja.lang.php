@@ -354,6 +354,18 @@ $i18n_key_words = array(
 // 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
 // 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
+// Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
+// TODO: translate the following.
+// 'form.change_password.tip' => 'Type new password and click on Save.',
+
+// Time form. See example at https://timetracker.anuko.com/time.php.
+// TODO: translate the following.
+// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+// 'form.time.billable' => 'Billable',
+// 'form.time.uncompleted' => 'Uncompleted',
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
+
 
 
 // TODO: refactoring ongoing down from here.
@@ -398,7 +410,6 @@ $i18n_key_words = array(
 "form.mytime.finish" => '終了',
 "form.mytime.duration" => '期間',
 "form.mytime.note" => 'ノート',
-"form.mytime.behalf" => '日課',
 "form.mytime.daily" => '日課',
 "form.mytime.total" => '合計時間： ',
 "form.mytime.th.project" => 'プロジェクト',
@@ -560,7 +571,6 @@ $i18n_key_words = array(
 "label.chart.title2" => 'ユーザーに対するプロジェクト',
 "label.chart.period" => '期間表示のチャート',
 
-"label.pbehalf_info" => '%s %s <b>%sを代表して</b>',
 "label.req_fields" => '* 必須のフィールド',
 "label.sel_project" => 'プロジェクトの選択',
 "label.sel_activity" => '活動内容の選択',

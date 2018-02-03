@@ -203,7 +203,7 @@ $i18n_key_words = array(
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 // 'label.required_fields' => '* - required fields',
-// 'label.on_behalf' => 'on behalf of',
+'label.on_behalf' => '代表',
 'label.role_manager' => '(经理)',
 'label.role_comanager' => '(合作经理人)',
 'label.role_admin' => '(管理员)',
@@ -340,6 +340,18 @@ $i18n_key_words = array(
 // 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
 // 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
+// Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
+// TODO: translate the following.
+// 'form.change_password.tip' => 'Type new password and click on Save.',
+
+// Time form. See example at https://timetracker.anuko.com/time.php.
+// TODO: translate the following.
+// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+// 'form.time.billable' => 'Billable',
+// 'form.time.uncompleted' => 'Uncompleted',
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
+
 
 
 // TODO: refactoring ongoing down from here.
@@ -396,7 +408,6 @@ $i18n_key_words = array(
 "form.mytime.finish" => '结束',
 "form.mytime.duration" => '持续时间',
 "form.mytime.note" => '备注',
-"form.mytime.behalf" => '每日工作，人员：',
 "form.mytime.daily" => '每日工作',
 "form.mytime.total" => '总小时数： ',
 "form.mytime.th.project" => '项目',
@@ -577,7 +588,6 @@ $i18n_key_words = array(
 "label.chart.title2" => '项目用户',
 "label.chart.period" => '图表期限',
 
-"label.pbehalf_info" => '%s %s <b>代表%s</b>',
 "label.req_fields" => '* 必填栏目',
 "label.sel_project" => '选择项目',
 "label.sel_activity" => '选择活动',

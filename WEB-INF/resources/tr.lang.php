@@ -221,7 +221,7 @@ $i18n_key_words = array(
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 // 'label.required_fields' => '* - required fields',
-// 'label.on_behalf' => 'on behalf of',
+'label.on_behalf' => 'adına',
 'label.role_manager' => '(yönetici)',
 'label.role_comanager' => '(yardımcı yönetici)',
 'label.role_admin' => '(sistem yönetici)',
@@ -358,6 +358,18 @@ $i18n_key_words = array(
 // 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
 // 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
+// Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
+// TODO: translate the following.
+// 'form.change_password.tip' => 'Type new password and click on Save.',
+
+// Time form. See example at https://timetracker.anuko.com/time.php.
+// TODO: translate the following.
+// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+// 'form.time.billable' => 'Billable',
+// 'form.time.uncompleted' => 'Uncompleted',
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
+
 
 
 // TODO: refactoring ongoing down from here.
@@ -404,7 +416,6 @@ $i18n_key_words = array(
 "form.mytime.finish" => 'tamamla',
 "form.mytime.duration" => 'süre',
 "form.mytime.note" => 'not',
-"form.mytime.behalf" => 'kişiye yönelik günlük çalışma',
 "form.mytime.daily" => 'günlük çalışma',
 "form.mytime.total" => 'toplam saat: ',
 "form.mytime.th.project" => 'proje',
@@ -591,7 +602,6 @@ $i18n_key_words = array(
 // "label.chart.title2" => 'projects for user',
 "label.chart.period" => 'dönem için grafik',
 
-"label.pbehalf_info" => '% % <b>% adına</b>',
 "label.today" => 'bugün',
 "label.req_fields" => '* zorunlu bilgi',
 "label.sel_project" => 'proje seç',
