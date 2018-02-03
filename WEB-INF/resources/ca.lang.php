@@ -361,16 +361,17 @@ $i18n_key_words = array(
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
 
-
-
-// TODO: refactoring ongoing down from here.
-
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 // TODO: translate the following.
 // 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
+// TODO: translate the following.
 // 'form.week.new_entry' => 'New entry',
+
+
+
+// TODO: refactoring ongoing down from here.
 
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Guardar com a favorit',
