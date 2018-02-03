@@ -6,7 +6,11 @@
   </tr>
   <tr>
     <td align="right" nowrap>{$forms.weekViewForm.week_list.control}</td>
-    <td><label for="week_note">{$i18n.label.week_list}</label> <a href="https://www.anuko.com/lp/tt_12.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+    <td><label for="week_list">{$i18n.label.week_list}</label> <a href="https://www.anuko.com/lp/tt_12.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+  </tr>
+  <tr>
+    <td align="right" nowrap>{$forms.weekViewForm.notes.control}</td>
+    <td><label for="notes">{$i18n.label.notes}</label> <a href="https://www.anuko.com/lp/tt_13.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
   </tr>
 
   <tr>
