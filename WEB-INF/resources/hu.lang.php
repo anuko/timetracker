@@ -401,8 +401,6 @@ $i18n_key_words = array(
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'előre definiált riport formátum',
 "form.filter.filter_new" => 'mentsük el ezt a riport formátumot',
-// Note to translators: the string below is missing and must be added and translated
-// "form.filter.filter_confirm_delete" => 'are you sure you want to delete this favorite report?',
 
 // password reminder form attributes
 "form.fpass.send_pass_str" => 'jelszó alap állapotra állítása megkezdve',

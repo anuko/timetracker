@@ -379,7 +379,8 @@ $i18n_key_words = array(
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 // TODO: translate the following.
 // 'form.reports.save_as_favorite' => 'Save as favorite',
-// 'form.reports.confirm_delete' => 'Are you sure you want to delete this favorite report?',
+'form.reports.confirm_delete' => '좋아하는 이 보고서를 삭제해도 좋습니까?',
+// TODO: translate the following.
 // 'form.reports.include_billable' => 'billable',
 // 'form.reports.include_not_billable' => 'not billable',
 // 'form.reports.include_invoiced' => 'invoiced',
@@ -403,7 +404,6 @@ $i18n_key_words = array(
 "form.filter.project" => '프로젝트',
 "form.filter.filter" => '좋아하는 보고서',
 "form.filter.filter_new" => '좋아하는 것으로 저장',
-"form.filter.filter_confirm_delete" => '좋아하는 이 보고서를 삭제해도 좋습니까?',
 
 // password reminder form attributes
 "form.fpass.login" => '로그인',

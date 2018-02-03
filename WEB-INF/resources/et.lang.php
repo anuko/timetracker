@@ -402,8 +402,6 @@ $i18n_key_words = array(
 "form.filter.project" => 'projekt',
 "form.filter.filter" => 'lemmikraport',
 "form.filter.filter_new" => 'salvesta lemmikuna',
-// Note to translators: the string below is missing and must be added to the translation
-// "form.filter.filter_confirm_delete" => 'are you sure you want to delete this favorite report?',
 
 // password reminder form attributes
 "form.fpass.title" => 'tühjenda salasõna',
