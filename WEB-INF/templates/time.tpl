@@ -8,11 +8,13 @@
 
 {$forms.timeRecordForm.open}
 <table cellspacing="4" cellpadding="0" border="0">
+{if $user->isPluginEnabled('wv')}
   <tr>
     <td align="center" colspan=2">
       <a href="time.php?date={$selected_date->toString()}">{$i18n.label.day_view}</a>&nbsp;/&nbsp;<a href="week.php?date={$selected_date->toString()}">{$i18n.label.week_view}</a>
     </td>
   </tr>
+{/if}
   <tr>
     <td valign="top">
       <table>

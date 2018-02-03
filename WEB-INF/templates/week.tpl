@@ -51,6 +51,12 @@
           <td>{$forms.weekTimeForm.task.control}</td>
         </tr>
 {/if}
+{if $user->isPluginEnabled('wvn')}
+        <tr>
+          <td align="right">{$i18n.label.week_note}:</td>
+          <td>{$forms.weekTimeForm.note.control}</td>
+        </tr>
+{/if}
       </table>
     </td>
     <td valign="top">
@@ -73,6 +79,7 @@
   <tr><td>&nbsp;</td></tr>
 </table>
 
+{if $user->isPluginEnabled('wvl')}
 <table width="720">
 <tr>
   <td valign="top">
@@ -135,12 +142,16 @@
   </td>
 </tr>
 </table>
+{/if}
+
 {if $time_records}
 <table cellpadding="3" cellspacing="1" width="720">
+  {if $user->isPluginEnabled('wvl')}
   <tr>
     <td align="left">{$i18n.label.week_total}: {$week_total}</td>
     <td></td>
   </tr>
+  {/if}
   {if $user->isPluginEnabled('mq')}
   <tr>
     <td align="left">{$i18n.label.month_total}: {$month_total}</td>

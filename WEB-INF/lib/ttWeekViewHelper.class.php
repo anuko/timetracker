@@ -150,6 +150,7 @@ class ttWeekViewHelper {
   //   )
   // );
   static function getDataForWeekView($records, $dayHeaders) {
+    global $user;
     global $i18n;
 
     $dataArray = array();
@@ -161,12 +162,14 @@ class ttWeekViewHelper {
       $control_id = '0_'. $dayHeaders[$i];
       $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
     }
-    // Construct the second row for daily comments for a brand new entry.
-    $dataArray[] = array('row_id' => null,'label' => $i18n->getKey('label.notes').':'); // Insert row.
-    // Insert empty cells with proper control ids.
-    for ($i = 0; $i < 7; $i++) {
-      $control_id = '1_'. $dayHeaders[$i];
-      $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+    if ($user->isPluginEnabled('wvns')) {
+      // Construct the second row for daily comments for a brand new entry.
+      $dataArray[] = array('row_id' => null,'label' => $i18n->getKey('label.notes').':'); // Insert row.
+      // Insert empty cells with proper control ids.
+      for ($i = 0; $i < 7; $i++) {
+        $control_id = '1_'. $dayHeaders[$i];
+        $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+      }
     }
 
     // Iterate through records and build $dataArray cell by cell.
@@ -193,20 +196,24 @@ class ttWeekViewHelper {
           $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
         }
         // Insert row for comments.
-        $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->getKey('label.notes').':');
-        $pos++;
-        // Insert empty cells with proper control ids.
-        for ($i = 0; $i < 7; $i++) {
-          $control_id = $pos.'_'. $dayHeaders[$i];
-          $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+        if ($user->isPluginEnabled('wvns')) {
+          $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->getKey('label.notes').':');
+          $pos++;
+          // Insert empty cells with proper control ids.
+          for ($i = 0; $i < 7; $i++) {
+            $control_id = $pos.'_'. $dayHeaders[$i];
+            $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+          }
+          $pos--;
         }
-        $pos--;
       }
       // Insert actual cell data from $record (one cell only).
       $dataArray[$pos][$day_header] = array('control_id' => $pos.'_'. $day_header, 'tt_log_id' => $record['id'],'duration' => $record['duration']);
-      // Insert existing comment from $record into the duration cell.
-      $pos++;
-      $dataArray[$pos][$day_header] = array('control_id' => $pos.'_'. $day_header, 'tt_log_id' => $record['id'],'note' => $record['comment']);
+      // Insert existing comment from $record into the comment cell.
+      if ($user->isPluginEnabled('wvns')) {
+        $pos++;
+        $dataArray[$pos][$day_header] = array('control_id' => $pos.'_'. $day_header, 'tt_log_id' => $record['id'],'note' => $record['comment']);
+      }
     }
     return $dataArray;
   }

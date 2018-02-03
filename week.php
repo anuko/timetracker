@@ -39,7 +39,7 @@ import('ttTimeHelper');
 import('DateAndTime');
 
 // Access check.
-if (!ttAccessCheck(right_data_entry)) {
+if (!ttAccessCheck(right_data_entry) || !$user->isPluginEnabled('wv')) {
   header('Location: access_denied.php');
   exit();
 }
@@ -107,6 +107,8 @@ $cl_project = $request->getParameter('project', ($request->isPost() ? null : @$_
 $_SESSION['project'] = $cl_project;
 $cl_task = $request->getParameter('task', ($request->isPost() ? null : @$_SESSION['task']));
 $_SESSION['task'] = $cl_task;
+$cl_note = $request->getParameter('note', ($request->isPost() ? null : @$_SESSION['note']));
+$_SESSION['note'] = $cl_note;
 
 // Get the data we need to display week view.
 // Get column headers, which are day numbers in month.
@@ -126,19 +128,27 @@ $dayTotals = ttWeekViewHelper::getDayTotals($dataArray, $dayHeaders);
 // Define rendering class for a label field to the left of durations.
 class LabelCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
+    global $user;
+
     $this->setOptions(array('width'=>200,'valign'=>'middle'));
-    // Special handling for row 0, which represents a new week entry.
+
+    // Special handling for a new week entry (row 0, or 0 and 1 if we show notes).
     if (0 == $row) {
-      $this->setOptions(array('style'=>'text-align: center; font-weight: bold;'));
-    } else if (0 != $row % 2) {
+      $this->setOptions(array('style'=>'text-align: center; font-weight: bold; vertical-align: top;'));
+    } else if ($user->isPluginEnabled('wvns') && (1 == $row)) {
+      $this->setOptions(array('style'=>'text-align: right; vertical-align: top;'));
+    } else if ($user->isPluginEnabled('wvns') && (0 != $row % 2)) {
       $this->setOptions(array('style'=>'text-align: right;'));
     }
     // Special handling for not billable entries.
-    if ($row > 1 && 0 == $row % 2) {
+    $ignoreRow = $user->isPluginEnabled('wvns') ? 1 : 0; 
+    if ($row > $ignoreRow) {
       $row_id = $table->getValueAtName($row,'row_id');
       $billable = ttWeekViewHelper::parseFromWeekViewRow($row_id, 'bl');
       if (!$billable) {
-        $this->setOptions(array('style'=>'color: red;')); // TODO: style it properly in CSS.
+        if (($user->isPluginEnabled('wvns') && (0 == $row % 2)) || !$user->isPluginEnabled('wvns')) {
+          $this->setOptions(array('style'=>'color: red;')); // TODO: style it properly in CSS.
+        }
       }
     }
     $this->setValue(htmlspecialchars($value)); // This escapes HTML for output.
@@ -149,6 +159,8 @@ class LabelCellRenderer extends DefaultCellRenderer {
 // Define rendering class for a single cell for a time or a comment entry in week view table.
 class WeekViewCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
+    global $user;
+
     $field_name = $table->getValueAt($row,$column)['control_id']; // Our text field names (and ids) are like x_y (row_column).
     $field = new TextField($field_name);
     // Disable control if the date is locked.
@@ -157,15 +169,24 @@ class WeekViewCellRenderer extends DefaultCellRenderer {
       $field->setEnabled(false);
     $field->setFormName($table->getFormName());
     $field->setStyle('width: 60px;'); // TODO: need to style everything properly, eventually.
-    if (0 == $row % 2)
-      $field->setValue($table->getValueAt($row,$column)['duration']); // Duration for even rows.
-    else {
-      $field->setValue($table->getValueAt($row,$column)['note']);     // Comment for odd rows.
-      $field->setTitle($table->getValueAt($row,$column)['note']);     // Tooltip to help view the entire comment.
+    // Provide visual separation for new entry row.
+    $rowToSeparate = $user->isPluginEnabled('wvns') ? 1 : 0;
+    if ($rowToSeparate == $row) {
+      $field->setStyle('width: 60px; margin-bottom: 40px');
+    }
+    if ($user->isPluginEnabled('wvns')) {
+      if (0 == $row % 2) {
+        $field->setValue($table->getValueAt($row,$column)['duration']); // Duration for even rows.
+      } else {
+        $field->setValue($table->getValueAt($row,$column)['note']);     // Comment for odd rows.
+        $field->setTitle($table->getValueAt($row,$column)['note']);     // Tooltip to help view the entire comment.
+      }
+    } else {
+      $field->setValue($table->getValueAt($row,$column)['duration']);
+      // $field->setTitle($table->getValueAt($row,$column)['note']); // Tooltip to see comment. TODO - value not available.
     }
     // Disable control when time entry mode is TYPE_START_FINISH and there is no value in control
     // because we can't supply start and finish times in week view - there are no fields for them.
-    global $user;
     if (!$field->getValue() && TYPE_START_FINISH == $user->record_type) {
         $field->setEnabled(false);
     }
@@ -269,6 +290,9 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 }
+if (!defined('NOTE_INPUT_HEIGHT'))
+  define('NOTE_INPUT_HEIGHT', 40);
+$form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 250px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
 
 // Add other controls.
 $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
@@ -317,6 +341,7 @@ if ($request->isPost()) {
         if (!$cl_task) $err->add($i18n->getKey('error.task'));
       }
     }
+    // Finished validating user input for row 0.
 
     // Process the table of values.
     if ($err->no()) {
@@ -335,7 +360,7 @@ if ($request->isPost()) {
           $control_id = $rowNumber.'_'.$dayHeader;
 
           // Handle durations and comments in separate blocks of code.
-          if (0 == $rowNumber % 2) {
+          if (!$user->isPluginEnabled('wvns') || (0 == $rowNumber % 2)) {
             // Handle durations row here.
 
             // Obtain existing and posted durations.
@@ -372,15 +397,21 @@ if ($request->isPost()) {
                 $fields['row_id'] = ttWeekViewHelper::makeRowIdentifier($record).'_0';
                 // Note: no need to check for a possible conflict with an already existing row
                 // because we are doing an insert that does not affect already existing data.
+
+                if ($user->isPluginEnabled('wvn')) {
+                  $fields['note'] = $request->getParameter('note');
+                }
               }
               $fields['day_header'] = $dayHeader;
               $fields['start_date'] = $startDate->toString(DB_DATEFORMAT); // To be able to determine date for the entry using $dayHeader.
               $fields['duration'] = $postedDuration;
               $fields['browser_today'] = $request->getParameter('browser_today', null);
-              // Take note value from the control below duration.
-              $noteRowNumber = $rowNumber + 1;
-              $note_control_id =  $noteRowNumber.'_'.$dayHeader;
-              $fields['note'] = $request->getParameter($note_control_id);
+              if ($user->isPluginEnabled('wvns')) {
+                // Take note value from the control below duration.
+                $noteRowNumber = $rowNumber + 1;
+                $note_control_id =  $noteRowNumber.'_'.$dayHeader;
+                $fields['note'] = $request->getParameter($note_control_id);
+              }
               $result = ttWeekViewHelper::insertDurationFromWeekView($fields, $custom_fields, $err);
             } elseif ($postedDuration == null || 0 == ttTimeHelper::toMinutes($postedDuration)) {
               // Delete an already existing record here.
@@ -393,7 +424,7 @@ if ($request->isPost()) {
             }
             if (!$result) break; // Break out of the loop in case of first error.
 
-          } else {
+          } else if ($user->isPluginEnabled('wvns')) {
             // Handle commments row here.
 
             // Obtain existing and posted comments.

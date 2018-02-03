@@ -1026,7 +1026,7 @@ class ttTeamHelper {
   }
 
   // enablePlugin either enables or disables a specific plugin for team.
-  function enablePlugin($plugin, $enable = true)
+  static function enablePlugin($plugin, $enable = true)
   {
     global $user;
     if (!$user->canManageTeam())
