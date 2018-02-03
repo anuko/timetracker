@@ -266,6 +266,16 @@ if ($request->isPost()) {
         $plugins .= ',mq';
       if ($cl_week_view)
         $plugins .= ',wv';
+
+      // Recycle week view plugin options as they are not configured on this page.
+      $existing_plugins = explode(',', $user->plugins);
+      if (in_array('wvn', $existing_plugins))
+        $plugins .= ',wvn';
+      if (in_array('wvl', $existing_plugins))
+        $plugins .= ',wvl';
+      if (in_array('wvns', $existing_plugins))
+        $plugins .= ',wvns';
+
       $plugins = trim($plugins, ',');
 
       $update_result = ttTeamHelper::update($user->team_id, array(
