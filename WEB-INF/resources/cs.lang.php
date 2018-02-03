@@ -414,7 +414,6 @@ $i18n_key_words = array(
 "form.mytime.finish" => 'konec',
 "form.mytime.duration" => 'trvání',
 "form.mytime.note" => 'poznámka',
-"form.mytime.behalf" => 'denní práce pracovníka',
 "form.mytime.daily" => 'denní práce',
 "form.mytime.total" => 'součet hodin: ',
 "form.mytime.th.project" => 'projekt',

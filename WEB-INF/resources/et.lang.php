@@ -415,7 +415,6 @@ $i18n_key_words = array(
 "form.mytime.finish" => 'lõpp',
 "form.mytime.duration" => 'kestus',
 "form.mytime.note" => 'märkus',
-// Note to translators: "form.mytime.behalf" => 'igapäevane töö', // the translation is incorrect
 "form.mytime.daily" => 'igapäevane töö',
 "form.mytime.total" => 'tunde kokku: ',
 "form.mytime.th.project" => 'projekt',

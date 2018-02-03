@@ -418,7 +418,6 @@ $i18n_key_words = array(
 "form.mytime.finish" => 'Fi',
 "form.mytime.duration" => 'Durada',
 "form.mytime.note" => 'Nota',
-"form.mytime.behalf" => 'Treball del dia per a',
 "form.mytime.daily" => 'Treball diari',
 "form.mytime.total" => 'Hores totals: ',
 "form.mytime.th.project" => 'Projecte',
