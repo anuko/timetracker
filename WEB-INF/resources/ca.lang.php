@@ -571,6 +571,5 @@ $i18n_key_words = array(
 "label.or" => 'o',
 "label.disable" => 'Deshabilitar',
 "label.enable" => 'Habilitar',
-"label.filter" => 'Filtrar',
 "label.timeweek" => 'total setmanal',
 );

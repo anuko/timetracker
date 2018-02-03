@@ -616,7 +616,6 @@ $i18n_key_words = array(
 // "label.or" => 'or',
 // "label.disable" => 'slå av',
 // "label.enable" => 'slå på',
-// "label.filter" => 'filter',
 // "label.timeweek" => 'uken totalt',
 // "label.hrs" => 'timer',
 // "label.errors" => 'feil',

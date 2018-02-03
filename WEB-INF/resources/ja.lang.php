@@ -614,7 +614,6 @@ $i18n_key_words = array(
 "label.or" => 'あるいは',
 "label.disable" => '使用中止',
 "label.enable" => '使用可能',
-"label.filter" => 'フィルター',
 "label.timeweek" => '週合計',
 "label.hrs" => '時間',
 "label.errors" => 'エラー',

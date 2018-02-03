@@ -590,5 +590,4 @@ $i18n_key_words = array(
 "label.or" => 'sau',
 "label.disable" => 'inactiv',
 "label.enable" => 'activ',
-"label.filter" => 'filtru',
 );

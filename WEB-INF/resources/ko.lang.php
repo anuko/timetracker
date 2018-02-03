@@ -609,7 +609,6 @@ $i18n_key_words = array(
 "label.or" => '혹은',
 "label.disable" => '무력화',
 "label.enable" => '가능화',
-"label.filter" => '필터',
 "label.timeweek" => '주별 합계',
 "label.hrs" => '시간',
 "label.errors" => '오류',

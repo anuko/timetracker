@@ -603,7 +603,6 @@ $i18n_key_words = array(
 "label.or" => 'nebo',
 "label.disable" => 'zakázat',
 "label.enable" => 'povolit',
-"label.filter" => 'filtr',
 "label.timeweek" => 'celkem za týden',
 "label.hrs" => 'hodin',
 );

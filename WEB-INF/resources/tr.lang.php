@@ -646,6 +646,5 @@ $i18n_key_words = array(
 "label.or" => 'ya da',
 "label.disable" => 'devre dışı bırak',
 "label.enable" => 'devreye sok',
-"label.filter" => 'filtre',
 "label.timeweek" => 'haftalık toplam',
 );

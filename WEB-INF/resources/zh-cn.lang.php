@@ -631,7 +631,6 @@ $i18n_key_words = array(
 "label.or" => '或',
 "label.disable" => '禁用',
 "label.enable" => '启用',
-"label.filter" => '过滤器',
 "label.timeweek" => '一周总计',
 "label.hrs" => '小时',
 "label.errors" => '错误',

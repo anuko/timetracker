@@ -579,15 +579,4 @@ $i18n_key_words = array(
 "label.or" => 'vagy',
 "label.disable" => 'tiltva',
 "label.enable" => 'engedélyezve',
-"label.filter" => 'szűrés',
-// Note to translators: the strings below are missing and must be added and translated 
-//"label.timeweek" => 'weekly total',
-// "label.hrs" => 'hrs',
-// "label.errors" => 'errors',
-// "label.ldap_hint" => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// "label.calendar_today" => 'today',
-// "label.calendar_close" => 'close',
-
-// login hello text
-// "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
 );
