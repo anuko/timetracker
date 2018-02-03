@@ -172,7 +172,8 @@ $i18n_key_words = array(
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
 // 'label.project' => 'Project',
-// 'label.projects' => 'Projects',
+'label.projects' => 'Projekty',
+// TODO: translate the following.
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -186,8 +187,8 @@ $i18n_key_words = array(
 // 'label.day_total' => 'Day total',
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
-// TODO: translate the following.
 'label.today' => 'Dnes',
+// TODO: translate the following.
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
@@ -235,7 +236,8 @@ $i18n_key_words = array(
 // 'label.type_dropdown' => 'dropdown',
 // 'label.type_text' => 'text',
 // 'label.required' => 'Required',
-// 'label.fav_report' => 'Favorite report',
+'label.fav_report' => 'Oblíbená sestava',
+// TODO: translate the following.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
@@ -273,7 +275,8 @@ $i18n_key_words = array(
 // 'title.invoice' => 'Invoice',
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
-// 'title.projects' => 'Projects',
+'title.projects' => 'Projekty',
+// TODO: translate the following.
 // 'title.add_project' => 'Adding Project',
 // 'title.edit_project' => 'Editing Project',
 // 'title.delete_project' => 'Deleting Project',
@@ -315,13 +318,41 @@ $i18n_key_words = array(
 // 'title.locking' => 'Locking',
 // 'title.week_view' => 'Week View',
 
+// Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
+// Strings that are used in a single form must go to the specific form section.
+// TODO: translate the following.
+// 'dropdown.all' => '--- all ---',
+// 'dropdown.no' => '--- no ---',
+// 'dropdown.current_day' => 'today',
+// 'dropdown.previous_day' => 'yesterday',
+// 'dropdown.selected_day' => 'day',
+// 'dropdown.current_week' => 'this week',
+// 'dropdown.previous_week' => 'previous week',
+// 'dropdown.selected_week' => 'week',
+// 'dropdown.current_month' => 'this month',
+// 'dropdown.previous_month' => 'previous month',
+// 'dropdown.selected_month' => 'month',
+// 'dropdown.current_year' => 'this year',
+// 'dropdown.previous_year' => 'previous year',
+// 'dropdown.selected_year' => 'year',
+// 'dropdown.all_time' => 'all time',
+'dropdown.projects' => 'projekty',
+// TODO: translate the following.
+// 'dropdown.tasks' => 'tasks',
+// 'dropdown.clients' => 'clients',
+// 'dropdown.select' => '--- select ---',
+// 'dropdown.select_invoice' => '--- select invoice ---',
+// 'dropdown.status_active' => 'active',
+// 'dropdown.status_inactive' => 'inactive',
+// 'dropdown.delete'=>'delete',
+// 'dropdown.do_not_delete'=>'do not delete',
+// 'dropdown.paid' => 'paid',
+// 'dropdown.not_paid' => 'not paid',
+
 
 
 // TODO: refactoring ongoing down from here.
 
-"form.filter.project" => 'projekt',
-"form.filter.filter" => 'oblíbená sestava',
-"form.filter.filter_new" => 'uložit jako oblíbenou sestavu',
 "form.filter.filter_confirm_delete" => 'opravdu chceš vymazat tuto položku z oblíbených?',
 
 // password reminder form attributes

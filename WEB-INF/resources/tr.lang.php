@@ -317,6 +317,36 @@ $i18n_key_words = array(
 // 'title.locking' => 'Locking',
 // 'title.week_view' => 'Week View',
 
+// Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
+// Strings that are used in a single form must go to the specific form section.
+// TODO: translate the following.
+// 'dropdown.all' => '--- all ---',
+// 'dropdown.no' => '--- no ---',
+// 'dropdown.current_day' => 'today',
+// 'dropdown.previous_day' => 'yesterday',
+// 'dropdown.selected_day' => 'day',
+// 'dropdown.current_week' => 'this week',
+// 'dropdown.previous_week' => 'previous week',
+// 'dropdown.selected_week' => 'week',
+// 'dropdown.current_month' => 'this month',
+// 'dropdown.previous_month' => 'previous month',
+// 'dropdown.selected_month' => 'month',
+// 'dropdown.current_year' => 'this year',
+// 'dropdown.previous_year' => 'previous year',
+// 'dropdown.selected_year' => 'year',
+// 'dropdown.all_time' => 'all time',
+// 'dropdown.projects' => 'projects',
+// 'dropdown.tasks' => 'tasks',
+// 'dropdown.clients' => 'clients',
+// 'dropdown.select' => '--- select ---',
+// 'dropdown.select_invoice' => '--- select invoice ---',
+// 'dropdown.status_active' => 'active',
+// 'dropdown.status_inactive' => 'inactive',
+// 'dropdown.delete'=>'delete',
+// 'dropdown.do_not_delete'=>'do not delete',
+// 'dropdown.paid' => 'paid',
+// 'dropdown.not_paid' => 'not paid',
+
 
 
 // TODO: refactoring ongoing down from here.

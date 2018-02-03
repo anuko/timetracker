@@ -309,10 +309,6 @@ $i18n_key_words = array(
 // 'title.locking' => 'Locking',
 // 'title.week_view' => 'Week View',
 
-
-
-// TODO: refactoring ongoing down from here.
-
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
 // TODO: translate the following.
@@ -342,6 +338,10 @@ $i18n_key_words = array(
 // 'dropdown.do_not_delete'=>'do not delete',
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',
+
+
+
+// TODO: refactoring ongoing down from here.
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 // TODO: translate the following.
