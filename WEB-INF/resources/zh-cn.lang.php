@@ -329,6 +329,17 @@ $i18n_key_words = array(
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',
 
+// Login form. See example at https://timetracker.anuko.com/login.php.
+// TODO: translate the following.
+// 'form.login.forgot_password' => 'Forgot password?',
+// 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
+
+// Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
+// TODO: translate the following.
+// 'form.reset_password.message' => 'Password reset request sent by email.',
+// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+
 
 
 // TODO: refactoring ongoing down from here.
