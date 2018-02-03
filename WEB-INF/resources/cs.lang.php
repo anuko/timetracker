@@ -380,6 +380,25 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.week.new_entry' => 'New entry',
 
+// Reports form. See example at https://timetracker.anuko.com/reports.php
+// TODO: translate the following.
+// 'form.reports.save_as_favorite' => 'Save as favorite',
+// 'form.reports.confirm_delete' => 'Are you sure you want to delete this favorite report?',
+// 'form.reports.include_billable' => 'billable',
+// 'form.reports.include_not_billable' => 'not billable',
+// 'form.reports.include_invoiced' => 'invoiced',
+// 'form.reports.include_not_invoiced' => 'not invoiced',
+// 'form.reports.select_period' => 'Select time period',
+// 'form.reports.set_period' => 'or set dates',
+// 'form.reports.show_fields' => 'Show fields',
+// 'form.reports.group_by' => 'Group by',
+// 'form.reports.group_by_no' => '--- no grouping ---',
+// 'form.reports.group_by_date' => 'date',
+// 'form.reports.group_by_user' => 'user',
+// 'form.reports.group_by_client' => 'client',
+// 'form.reports.group_by_project' => 'project',
+// 'form.reports.group_by_task' => 'task',
+// 'form.reports.totals_only' => 'Totals only',
 
 
 // TODO: refactoring ongoing down from here.

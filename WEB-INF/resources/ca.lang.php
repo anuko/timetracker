@@ -369,10 +369,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.week.new_entry' => 'New entry',
 
-
-
-// TODO: refactoring ongoing down from here.
-
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Guardar com a favorit',
 // TODO: translate the following.
@@ -395,7 +391,9 @@ $i18n_key_words = array(
 // 'form.reports.group_by_task' => 'task',
 // 'form.reports.totals_only' => 'Totals only',
 
-// TODO: the entire section from here to bottom needs refactoring.
+
+
+// TODO: refactoring ongoing down from here.
 
 // administrator form
 "form.admin.duty_text" => 'Crear un nou grup, creant un nou compte del manejador de l\\\'equip.<br>També pot importar dades de grups, d\\\'un arxiu xml d\\\'un altre servidor Anuko Time Tracker.(No està permès col·lisions de e-mail).',
