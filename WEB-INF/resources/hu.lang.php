@@ -171,8 +171,8 @@ $i18n_key_words = array(
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
 'label.project' => 'Projekt',
+'label.projects' => 'Projektek',
 // TODO: translate the following.
-// 'label.projects' => 'Projects',
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -234,7 +234,8 @@ $i18n_key_words = array(
 // 'label.type_dropdown' => 'dropdown',
 // 'label.type_text' => 'text',
 // 'label.required' => 'Required',
-// 'label.fav_report' => 'Favorite report',
+'label.fav_report' => 'Előre definiált riport formátum',
+// TODO: translate the following.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
@@ -271,7 +272,8 @@ $i18n_key_words = array(
 // 'title.invoice' => 'Invoice',
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
-// 'title.projects' => 'Projects',
+'title.projects' => 'Projektek',
+// TODO: translate the following.
 // 'title.add_project' => 'Adding Project',
 // 'title.edit_project' => 'Editing Project',
 // 'title.delete_project' => 'Deleting Project',
@@ -331,7 +333,8 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
-// 'dropdown.projects' => 'projects',
+'dropdown.projects' => 'projektek',
+// TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
 // 'dropdown.clients' => 'clients',
 // 'dropdown.select' => '--- select ---',
@@ -375,8 +378,8 @@ $i18n_key_words = array(
 // 'form.week.new_entry' => 'New entry',
 
 // Reports form. See example at https://timetracker.anuko.com/reports.php
+'form.reports.save_as_favorite' => 'Mentsük el ezt a riport formátumot',
 // TODO: translate the following.
-// 'form.reports.save_as_favorite' => 'Save as favorite',
 // 'form.reports.confirm_delete' => 'Are you sure you want to delete this favorite report?',
 // 'form.reports.include_billable' => 'billable',
 // 'form.reports.include_not_billable' => 'not billable',
@@ -390,17 +393,14 @@ $i18n_key_words = array(
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
-// 'form.reports.group_by_project' => 'project',
+'form.reports.group_by_project' => 'projekt',
+// TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
 // 'form.reports.totals_only' => 'Totals only',
 
 
 
 // TODO: refactoring ongoing down from here.
-
-"form.filter.project" => 'projekt',
-"form.filter.filter" => 'előre definiált riport formátum',
-"form.filter.filter_new" => 'mentsük el ezt a riport formátumot',
 
 // password reminder form attributes
 "form.fpass.send_pass_str" => 'jelszó alap állapotra állítása megkezdve',
@@ -426,7 +426,6 @@ $i18n_key_words = array(
 "form.mytime.time_form" => ' (óó:pp)',
 "form.mytime.date" => 'dátum',
 "form.mytime.project" => 'projekt',
-"form.mytime.activity" => 'tevékenység',
 "form.mytime.start" => 'kezdete',
 "form.mytime.finish" => 'vége',
 "form.mytime.duration" => 'hossz',

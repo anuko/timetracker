@@ -169,8 +169,9 @@ $i18n_key_words = array(
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
-// 'label.project' => 'Project',
-// 'label.projects' => 'Projects',
+'label.project' => 'プロジェクト',
+'label.projects' => 'プロジェクト',
+// TODO: translate the following.
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -234,7 +235,8 @@ $i18n_key_words = array(
 // 'label.type_dropdown' => 'dropdown',
 // 'label.type_text' => 'text',
 // 'label.required' => 'Required',
-// 'label.fav_report' => 'Favorite report',
+'label.fav_report' => 'お気に入りレポート',
+// TODO: translate the following.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
@@ -271,7 +273,8 @@ $i18n_key_words = array(
 // 'title.invoice' => 'Invoice',
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
-// 'title.projects' => 'Projects',
+'title.projects' => 'プロジェクト',
+// TODO: translate the following.
 // 'title.add_project' => 'Adding Project',
 // 'title.edit_project' => 'Editing Project',
 // 'title.delete_project' => 'Deleting Project',
@@ -331,7 +334,8 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
-// 'dropdown.projects' => 'projects',
+'dropdown.projects' => 'プロジェクト',
+// TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
 // 'dropdown.clients' => 'clients',
 // 'dropdown.select' => '--- select ---',
@@ -375,8 +379,7 @@ $i18n_key_words = array(
 // 'form.week.new_entry' => 'New entry',
 
 // Reports form. See example at https://timetracker.anuko.com/reports.php
-// TODO: translate the following.
-// 'form.reports.save_as_favorite' => 'Save as favorite',
+'form.reports.save_as_favorite' => 'お気に入りに保存',
 'form.reports.confirm_delete' => 'このお気に入りレポートを削除しますか？',
 // TODO: translate the following.
 // 'form.reports.include_billable' => 'billable',
@@ -391,17 +394,14 @@ $i18n_key_words = array(
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
-// 'form.reports.group_by_project' => 'project',
+'form.reports.group_by_project' => 'プロジェクト',
+// TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
 // 'form.reports.totals_only' => 'Totals only',
 
 
 
 // TODO: refactoring ongoing down from here.
-
-"form.filter.project" => 'プロジェクト',
-"form.filter.filter" => 'お気に入りレポート',
-"form.filter.filter_new" => 'お気に入りに保存',
 
 // password reminder form attributes
 "form.fpass.login" => 'ログイン',
@@ -433,7 +433,6 @@ $i18n_key_words = array(
 "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.date" => '日付',
 "form.mytime.project" => 'プロジェクト',
-"form.mytime.activity" => '活動内容',
 "form.mytime.start" => '開始',
 "form.mytime.finish" => '終了',
 "form.mytime.duration" => '期間',

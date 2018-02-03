@@ -430,7 +430,6 @@ $i18n_key_words = array(
 "form.mytime.time_form" => ' (時:分)',
 "form.mytime.date" => '日期',
 "form.mytime.project" => '項目',
-"form.mytime.activity" => '活動',
 "form.mytime.start" => '開始',
 "form.mytime.finish" => '結束',
 "form.mytime.duration" => '持續時間',

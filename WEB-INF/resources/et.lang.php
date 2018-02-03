@@ -436,7 +436,6 @@ $i18n_key_words = array(
 // "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.date" => 'kuupäev',
 "form.mytime.project" => 'projekt',
-"form.mytime.activity" => 'tegevus',
 "form.mytime.start" => 'algus',
 "form.mytime.finish" => 'lõpp',
 "form.mytime.duration" => 'kestus',

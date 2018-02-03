@@ -435,7 +435,6 @@ $i18n_key_words = array(
 // Note to translators: "form.mytime.time_form" => ' (hh:mm)', // the string must be translated
 "form.mytime.date" => 'datum',
 "form.mytime.project" => 'projekt',
-"form.mytime.activity" => 'činnost',
 "form.mytime.start" => 'začátek',
 "form.mytime.finish" => 'konec',
 "form.mytime.duration" => 'trvání',

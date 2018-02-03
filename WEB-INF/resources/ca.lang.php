@@ -412,7 +412,6 @@ $i18n_key_words = array(
 "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.date" => 'Data',
 "form.mytime.project" => 'Projecte',
-"form.mytime.activity" => 'Activitat',
 "form.mytime.start" => 'Inici',
 "form.mytime.finish" => 'Fi',
 "form.mytime.duration" => 'Durada',
