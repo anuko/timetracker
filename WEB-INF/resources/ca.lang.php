@@ -61,7 +61,8 @@ $i18n_key_words = array(
 'menu.teams' => 'Equips',
 // TODO: translate the following.
 // 'menu.export' => 'Export',
-// 'menu.clients' => 'Clients',
+'menu.clients' => 'Clients',
+// TODO: translate the following.
 // 'menu.options' => 'Options',
 
 // Footer - strings on the bottom of most pages.
@@ -164,10 +165,12 @@ $i18n_key_words = array(
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',
 // 'label.users' => 'Users',
-// 'label.client' => 'Client',
-// 'label.clients' => 'Clients',
+'label.client' => 'Client',
+'label.clients' => 'Clients',
+// TODO: translate the following.
 // 'label.option' => 'Option',
-// 'label.invoice' => 'Invoice',
+'label.invoice' => 'Factura',
+// TODO: translate the following.
 // 'label.project' => 'Project',
 // 'label.projects' => 'Projects',
 // 'label.task' => 'Task',
@@ -201,9 +204,11 @@ $i18n_key_words = array(
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
-// 'label.comment' => 'Comment',
+'label.comment' => 'Comentari',
+// TODO: translate the following.
 // 'label.status' => 'Status',
-// 'label.tax' => 'Tax',
+'label.tax' => 'Impost',
+// TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
 // 'label.total' => 'Total',
 // 'label.client_name' => 'Client name',
@@ -266,7 +271,8 @@ $i18n_key_words = array(
 'title.report' => 'Informe',
 // TODO: translate the following.
 // 'title.send_report' => 'Sending Report',
-// 'title.invoice' => 'Invoice',
+'title.invoice' => 'Factura',
+// TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 // 'title.projects' => 'Projects',
@@ -281,11 +287,12 @@ $i18n_key_words = array(
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
-// 'title.clients' => 'Clients',
-// 'title.add_client' => 'Adding Client',
-// 'title.edit_client' => 'Editing Client',
-// 'title.delete_client' => 'Deleting Client',
-// 'title.invoices' => 'Invoices',
+'title.clients' => 'Clients',
+'title.add_client' => 'Agregar client',
+'title.edit_client' => 'Modificar client',
+'title.delete_client' => 'Eliminar client',
+'title.invoices' => 'Factures',
+// TODO: translate the following.
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
 // 'title.delete_invoice' => 'Deleting Invoice',
@@ -331,7 +338,8 @@ $i18n_key_words = array(
 // 'dropdown.all_time' => 'all time',
 // 'dropdown.projects' => 'projects',
 // 'dropdown.tasks' => 'tasks',
-// 'dropdown.clients' => 'clients',
+'dropdown.clients' => 'clients',
+// TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
@@ -491,8 +499,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>Missatge enviat</b>',
 
 // invoice attributes
-"form.invoice.title" => 'Factura',
-"form.invoice.caption" => 'Factura',
 "form.invoice.above" => 'Informació addicional per factura',
 "form.invoice.select_cust" => 'Seleccioni el client',
 "form.invoice.fillform" => 'Empleni els camps',
@@ -518,17 +524,9 @@ $i18n_key_words = array(
 "form.migration.export.success" => 'Exportació finalitzada amb èxit',
 "form.migration.export.text" => 'Vosté pot exportar totes les dades del grup dins d\\\'un archivo xml. Això pot ser útil si necessita migrar dades al seu propi servidor.',
 
-"form.client.title" => 'Clients',
-"form.client.add_title" => 'Agregar client',
-"form.client.edit_title" => 'Modificar client',
-"form.client.del_title" => 'Eliminar client',
-"form.client.tax" => 'Impost',
-"form.client.comment" => 'Comentari ',
-
 // miscellaneous strings
 "forward.forgot_password" => '¿Ha oblidat la seva paraula de pas?',
 "forward.tocsvfile" => 'Exportar dades a un arxiu .csv',
-"forward.geninvoice" => 'Generar factura',
 
 "controls.project_bind" => '--- Tots ---',
 "controls.all" => '--- Tots ---',
@@ -540,7 +538,6 @@ $i18n_key_words = array(
 "controls.per_td" => 'Aquest dia',
 "controls.per_lw" => 'La setmana passada',
 
-"label.inv_str" => 'Factura',
 "label.set_empl" => 'Seleccionar usuaris',
 "label.sel_all" => 'Seleccionar tots',
 "label.sel_none" => 'Treure totes las seleccions',
