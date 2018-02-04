@@ -164,8 +164,9 @@ $i18n_key_words = array(
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
-// 'label.project' => 'Project',
-// 'label.projects' => 'Projects',
+'label.project' => 'Projekt',
+'label.projects' => 'Projekti',
+// TODO: translate the following.
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -262,10 +263,11 @@ $i18n_key_words = array(
 // 'title.invoice' => 'Invoice',
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
-// 'title.projects' => 'Projects',
-// 'title.add_project' => 'Adding Project',
-// 'title.edit_project' => 'Editing Project',
-// 'title.delete_project' => 'Deleting Project',
+'title.projects' => 'Projekti',
+'title.add_project' => 'Dodajanje projekta',
+'title.edit_project' => 'Urejanje projekta',
+'title.delete_project' => 'Brisanje projekta',
+// TODO: translate the following.
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -322,7 +324,8 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
-// 'dropdown.projects' => 'projects',
+'dropdown.projects' => 'projekti',
+// TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
 // 'dropdown.clients' => 'clients',
 // 'dropdown.select' => '--- select ---',
@@ -389,24 +392,11 @@ $i18n_key_words = array(
 
 // TODO: refactoring ongoing down from here.
 
-"form.filter.project" => 'projekt',
-
-// password reminder form attributes
-"form.fpass.login" => 'prijava',
 "form.fpass.send_pass_str" => 'zahteva za razveljavitev gesla je bila poslana',
 "form.fpass.send_pass_subj" => 'Anuko Time Tracker zahteva za razveljavitev gesla',
 // Note to translators: the ending of this tring below needs to be translated.
 "form.fpass.send_pass_body" => "Spoštovani uporabnik,\n\nNekdo, najverjetneje vi, je zahteval razveljavitev vašega Anuko Time Tracker gesla. Prosimo obiščite to povezavo, če želite razveljaviti vaše geslo.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 "form.fpass.reset_comment" => "za razveljavitev gesla, prosimo vtipkajte geslo in kliknite gumb shrani",
-
-// projects form attributes
-"form.project.proj_title" => 'projekti',
-"form.project.edit_str" => 'urejanje projektov',
-"form.project.add_str" => 'dodajanje novega projekta',
-"form.project.del_str" => 'brisanje projekta',
-
-// activities form attributes
-"form.activity.project" => 'projekt',
 
 // mail form attributes
 "form.mail.from" => 'od',
