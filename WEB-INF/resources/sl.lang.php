@@ -416,9 +416,4 @@ $i18n_key_words = array(
 // Note to translators: this string needs to be translated.
 // "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 "form.mail.sending_str" => '<b>sporočilo poslano</b>',
-
-// labels
-"label.chart.title2" => 'projekti uporabnika',
-"label.chart.period" => 'graf za obdobje',
-
 );

@@ -583,11 +583,6 @@ $i18n_key_words = array(
 "controls.inc_nbillable" => '非計費時間',
 "controls.default" => '--- 默認 ---',
 
-// labels
-"label.chart.title1" => '活動用戶',
-"label.chart.title2" => '項目用戶',
-"label.chart.period" => '圖表期限',
-
 "label.sel_tp" => '選擇時間段',
 "label.set_tp" => '或設定日期',
 "label.fields" => '顯示欄目',

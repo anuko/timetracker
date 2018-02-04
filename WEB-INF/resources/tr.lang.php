@@ -574,10 +574,6 @@ $i18n_key_words = array(
 "controls.per_td" => 'bugün',
 "controls.per_at" => 'tüm zamanlar',
 
-// labels
-"label.chart.title1" => 'kullanıcı için faaliyetler',
-"label.chart.period" => 'dönem için grafik',
-
 "label.group_title" => 'gruplandırma kıstası',
 
 "label.set_empl" => 'kullanıcıları seç',

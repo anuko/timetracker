@@ -588,12 +588,6 @@ $i18n_key_words = array(
 "controls.inc_billable" => 'arvestatav',
 "controls.inc_nbillable" => 'mittearvestatav',
 
-// labels
-"label.chart.title1" => 'tegevused kasutajal',
-// Note to translators: the string below is missing and must be translated and added
-// "label.chart.title2" => 'projects for user',
-"label.chart.period" => 'tabel perioodiks',
-
 "label.inv_str" => 'arved',
 "label.set_empl" => 'vali kasutajad',
 "label.sel_all" => 'vali kõik',

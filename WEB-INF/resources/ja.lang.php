@@ -588,11 +588,6 @@ $i18n_key_words = array(
 "controls.inc_nbillable" => '請求できません',
 "controls.default" => '--- デフォルト ---',
 
-// labels
-"label.chart.title1" => 'ユーザーに対する活動内容',
-"label.chart.title2" => 'ユーザーに対するプロジェクト',
-"label.chart.period" => '期間表示のチャート',
-
 "label.sel_tp" => '時間期間の選択',
 "label.set_tp" => 'あるいは日付を設定',
 "label.fields" => 'フィールドの表示',

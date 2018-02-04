@@ -584,11 +584,6 @@ $i18n_key_words = array(
 "controls.inc_nbillable" => '청구 가능하지 않은',
 "controls.default" => '--- 디폴트 ---',
 
-// labels
-"label.chart.title1" => '사용자별 활동내용',
-"label.chart.title2" => '사용자별 프로젝트',
-"label.chart.period" => '기간에 따른 그래프',
-
 "label.sel_tp" => '시간 기간을 선택',
 "label.set_tp" => '혹은 날짜를 설정',
 "label.fields" => '필드들을 보기',

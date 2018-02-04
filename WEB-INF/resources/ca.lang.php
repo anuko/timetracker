@@ -539,9 +539,6 @@ $i18n_key_words = array(
 "controls.per_td" => 'Aquest dia',
 "controls.per_lw" => 'La setmana passada',
 
-// labels
-"label.chart.period" => 'gràfica por període',
-
 "label.inv_str" => 'Factura',
 "label.set_empl" => 'Seleccionar usuaris',
 "label.sel_all" => 'Seleccionar tots',

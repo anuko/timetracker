@@ -583,11 +583,6 @@ $i18n_key_words = array(
 "controls.inc_nbillable" => '非计费时间',
 "controls.default" => '--- 默认 ---',
 
-// labels
-"label.chart.title1" => '活动用户',
-"label.chart.title2" => '项目用户',
-"label.chart.period" => '图表期限',
-
 "label.inv_str" => '发票',
 "label.set_empl" => '选择用户',
 "label.sel_all" => '全部选择',

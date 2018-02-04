@@ -579,11 +579,6 @@ $i18n_key_words = array(
 "controls.inc_billable" => 'k fakturaci',
 "controls.inc_nbillable" => 'mimo fakturaci',
 
-// labels
-"label.chart.title1" => 'činnosti uživatele',
-"label.chart.title2" => 'projekty uživatele',
-"label.chart.period" => 'přehled za období',
-
 "label.sel_tp" => 'výberte období',
 "label.set_tp" => 'nebo určete dny',
 "label.fields" => 'zobrazit pole',
