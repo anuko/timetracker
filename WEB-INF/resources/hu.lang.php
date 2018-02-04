@@ -216,7 +216,7 @@ $i18n_key_words = array(
 // 'label.or' => 'or',
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// 'label.required_fields' => '* - required fields',
+'label.required_fields' => '* kötelezően kitöltendő mezők',
 'label.on_behalf' => 'helyett',
 'label.role_manager' => '(vezető)',
 'label.role_comanager' => '(helyettes)',
@@ -562,15 +562,10 @@ $i18n_key_words = array(
 "controls.sel_groupby" => '--- csoportosítás nélkül ---',
 
 // labels
-"label.req_fields" => '* kötelezően kitöltendő mezők',
-"label.sel_project" => 'válassz projektet',
-"label.sel_activity" => 'válassz tevékenységet',
 "label.sel_tp" => 'jelölj meg egy időszakot',
 "label.set_tp" => '... vagy állíts be konkrét dátumot',
 "label.fields" => 'csak a kijelölt mezők fognak szerepelni a riportban',
 "label.group_title" => 'csoportosítva',
-// Note to translators: the string below is missing and must be added and translated 
-// "label.include_title" => 'include records',
 "label.inv_str" => 'számla',
 "label.set_empl" => 'válassz dolgozót',
 "label.sel_all" => 'mindenkit kijelöl',

@@ -210,7 +210,7 @@ $i18n_key_words = array(
 // 'label.or' => 'or',
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// 'label.required_fields' => '* - required fields',
+'label.required_fields' => '* camps requerits',
 'label.on_behalf' => 'a nom de',
 'label.role_manager' => '(manejador)',
 'label.role_comanager' => '(auxiliar del manejador)',
@@ -556,8 +556,6 @@ $i18n_key_words = array(
 // labels
 "label.chart.period" => 'gràfica por període',
 
-"label.req_fields" => '* camps requerits',
-"label.sel_project" => 'Seleccionar projecte',
 "label.sel_tp" => 'Seleccionar període de temps',
 "label.set_tp" => 'o establir dates',
 "label.fields" => 'Mostrar camps',

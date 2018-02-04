@@ -215,7 +215,8 @@ $i18n_key_words = array(
 // 'label.or' => 'or',
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// 'label.required_fields' => '* - required fields',
+'label.required_fields' => '* nõutud väljad',
+// TODO: translate the following.
 // 'label.on_behalf' => 'on behalf of',
 'label.role_manager' => '(haldur)',
 'label.role_comanager' => '(kaashaldur)',
@@ -599,9 +600,6 @@ $i18n_key_words = array(
 // "label.chart.title2" => 'projects for user',
 "label.chart.period" => 'tabel perioodiks',
 
-"label.req_fields" => '* nõutud väljad',
-"label.sel_project" => 'vali projekt',
-"label.sel_activity" => 'vali tegevus',
 "label.sel_tp" => 'vali ajaperiood',
 "label.set_tp" => 'või märgi kuupäevad',
 "label.fields" => 'näita välju',

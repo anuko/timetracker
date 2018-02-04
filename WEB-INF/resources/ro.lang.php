@@ -217,7 +217,7 @@ $i18n_key_words = array(
 // 'label.or' => 'or',
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// 'label.required_fields' => '* - required fields',
+'label.required_fields' => '* date obligatorii',
 'label.on_behalf' => 'in numele',
 // TODO: translate the following.
 // 'label.role_manager' => '(manager)',
@@ -573,9 +573,7 @@ $i18n_key_words = array(
 "controls.sel_groupby" => '--- fara grupare   ---',
 
 // labels
-"label.req_fields" => '* date obligatorii',
 "label.sel_project" => 'alege proiect',
-"label.sel_activity" => 'alege activitate',
 "label.sel_tp" => 'alege perioada',
 "label.set_tp" => 'sau introdu intervalul de date',
 "label.fields" => 'arata campuri',

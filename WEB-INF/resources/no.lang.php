@@ -212,7 +212,7 @@ $i18n_key_words = array(
 // 'label.or' => 'or',
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// 'label.required_fields' => '* - required fields',
+'label.required_fields' => '* obligatoriske felt',
 'label.on_behalf' => 'på vegne av',
 // TODO: translate the following.
 // 'label.role_manager' => '(manager)',
@@ -599,9 +599,7 @@ $i18n_key_words = array(
 // "controls.default" => '--- default ---',
 
 // labels
-"label.req_fields" => '* obligatoriske felt',
 "label.sel_project" => 'velg prosjekt',
-"label.sel_activity" => 'velg aktivitet',
 "label.sel_tp" => 'velg tidsperiode',
 "label.set_tp" => 'eller sett dato',
 "label.fields" => 'vis feltene',

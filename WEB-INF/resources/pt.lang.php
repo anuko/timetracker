@@ -206,7 +206,8 @@ $i18n_key_words = array(
 // 'label.or' => 'or',
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// 'label.required_fields' => '* - required fields',
+'label.required_fields' => '* campos obrigatórios',
+// TODO: translate the following.
 // 'label.on_behalf' => 'on behalf of',
 'label.role_manager' => '(gerente)',
 // TODO: translate the following.
@@ -484,7 +485,6 @@ $i18n_key_words = array(
 "controls.sel_period" => '--- selecione o período de tempo ---',
 
 // labels
-"label.req_fields" => '* campos obrigatórios',
 "label.sel_tp" => 'selecione o período de tempo',
 "label.set_tp" => 'ou selecionar datas',
 "label.fields" => 'exibir campos',
