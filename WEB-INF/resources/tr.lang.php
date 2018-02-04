@@ -154,8 +154,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
-// 'label.person_name' => 'Name',
-// 'label.thing_name' => 'Name',
+'label.person_name' => 'Isim',
+'label.thing_name' => 'Isim',
+// TODO: translate the following.
 // 'label.login' => 'Login',
 'label.password' => 'Parola',
 // TODO: translate the following.
@@ -197,7 +198,7 @@ $i18n_key_words = array(
 // 'label.total_hours' => 'Total hours',
 // 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
-// 'label.edit' => 'Edit',
+'label.edit' => 'Düzenle',
 'label.delete' => 'Sil',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
@@ -429,15 +430,7 @@ $i18n_key_words = array(
 "form.admin.profile.noprofiles" => 'veritabanınız boş. yeni bir ekip yaratmak için yönetici olarak giriş yapın.',
 "form.admin.profile.comment" => 'ekibi sil',
 "form.admin.profile.th.id" => 'id',
-"form.admin.profile.th.name" => 'isim',
-"form.admin.profile.th.edit" => 'düzenle',
-"form.admin.profile.th.del" => 'sil',
 "form.admin.profile.th.active" => 'aktif',
-// Note to translators: the strings below are missing and must be translated and added
-// "form.admin.options" => 'options',
-// "form.admin.custom_date_format" => "date format",
-// "form.admin.custom_time_format" => "time format",
-// "form.admin.start_week" => "first day of week",
 
 // my time form attributes
 "form.mytime.title" => 'zamanım',
@@ -457,8 +450,6 @@ $i18n_key_words = array(
 "form.mytime.th.finish" => 'tamamla',
 "form.mytime.th.duration" => 'süre',
 "form.mytime.th.note" => 'not',
-"form.mytime.th.edit" => 'düzenle',
-"form.mytime.th.delete" => 'sil',
 "form.mytime.del_yes" => 'zaman kaydı başarıyla silindi',
 "form.mytime.no_finished_rec" => 'bu kayıt sadece başlangıç zamanıyla silindi. bu hata değildir. gerekirse çıkış yapın.',
 "form.mytime.warn_tozero_rec" => 'bu zaman kaydı silinmeli çünkü zaman aralığı kilitli',
@@ -469,35 +460,19 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => 'yeni yönetici hesabı yarat',
 "form.profile.edit_title" => 'profili düzenliyor',
-"form.profile.name" => 'isim',
-// Note to translators: "form.profile.login" => 'e-posta', // email has been changed to login
-
-// Note to translators: the string below is missing and must be translated and added
-// "form.profile.showchart" => 'show pie charts',
-// "form.profile.lang" => 'language',
-// "form.profile.custom_date_format" => "date format",
-// "form.profile.custom_time_format" => "time format",
-// "form.profile.default_format" => "(default)",
-// "form.profile.start_week" => "first day of week",
 
 // people form attributes
 "form.people.ppl_str" => 'insanlar',
 "form.people.createu_str" => 'yeni kullanıcı yarat',
 "form.people.edit_str" => 'kullanıcı düzenleniyor',
 "form.people.del_str" => 'kullanıcı siliniyor',
-"form.people.th.name" => 'isim',
-// Note to translators: "form.people.th.login" => 'e-posta', // email has been changed to login
 "form.people.th.role" => 'rol',
-"form.people.th.edit" => 'düzenle',
-"form.people.th.del" => 'sil',
 "form.people.th.status" => 'durum',
 "form.people.th.project" => 'proje',
 "form.people.th.rate" => 'tarife',
 "form.people.manager" => 'yönetici',
 "form.people.comanager" => 'yardımcı yönetici',
 "form.people.empl" => 'kullanıcı',
-"form.people.name" => 'isim',
-// Note to translators: "form.people.login" => 'e-posta', // email has been changed to login
 
 "form.people.rate" => 'varsayılan saat ücreti',
 "form.people.comanager" => 'yardımcı yönetici',
@@ -508,22 +483,14 @@ $i18n_key_words = array(
 "form.project.edit_str" => 'proje düzenleniyor',
 "form.project.add_str" => 'yeni proje ekleniyor',
 "form.project.del_str" => 'proje siliniyor',
-"form.project.th.name" => 'isim',
-"form.project.th.edit" => 'düzenle',
-"form.project.th.del" => 'sil',
-"form.project.name" => 'isim',
 
 // activities form attributes
 "form.activity.act_title" => 'faaliyetler',
 "form.activity.add_title" => 'yeni faaliyetler ekleniyor',
 "form.activity.edit_str" => 'faaliyetler düzenleniyor',
 "form.activity.del_str" => 'faaliyetler siliniyor',
-"form.activity.name" => 'isim',
 "form.activity.project" => 'proje',
-"form.activity.th.name" => 'isim',
 "form.activity.th.project" => 'proje',
-"form.activity.th.edit" => 'düzenle',
-"form.activity.th.del" => 'sil',
 
 // report attributes
 "form.report.title" => 'raporlar',
@@ -582,19 +549,11 @@ $i18n_key_words = array(
 "form.migration.export.title" => 'dışarı aktar',
 "form.migration.export.success" => 'dışarı aktarma başarıyla tamamlandı',
 "form.migration.export.text" => 'tüm ekip bilgilerinizi bir xml dosyasına aktarabilirsiniz. bu, kendi sunucunuza bilgi aktarmak istediğinizde faydalı olabilir.',
-// Note to translators: the strings below are missing and must be added and translated
-// "form.migration.compression.none" => 'none',
-// "form.migration.compression.gzip" => 'gzip',
-// "form.migration.compression.bzip" => 'bzip',
 
 "form.client.title" => 'müşteriler',
 "form.client.add_title" => 'müşteri ekle',
 "form.client.edit_title" => 'müşteriyi düzenle',
 "form.client.del_title" => 'müşteriyi sil',
-"form.client.th.name" => 'isim',
-"form.client.th.edit" => 'düzenle',
-"form.client.th.del" => 'sil',
-"form.client.name" => 'isim',
 "form.client.tax" => 'vergi',
 "form.client.comment" => 'yorum ',
 

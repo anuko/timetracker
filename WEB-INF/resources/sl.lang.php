@@ -143,7 +143,8 @@ $i18n_key_words = array(
 // 'label.manager_name' => 'Manager name',
 // 'label.manager_login' => 'Manager login',
 'label.person_name' => 'Ime',
-// 'label.thing_name' => 'Name',
+'label.thing_name' => 'Ime',
+// TODO: translate the following.
 // 'label.login' => 'Login',
 'label.password' => 'Geslo',
 // TODO: translate the following.
@@ -403,8 +404,6 @@ $i18n_key_words = array(
 "form.project.edit_str" => 'urejanje projektov',
 "form.project.add_str" => 'dodajanje novega projekta',
 "form.project.del_str" => 'brisanje projekta',
-"form.project.th.name" => 'ime',
-"form.project.name" => 'ime',
 
 // activities form attributes
 "form.activity.project" => 'projekt',

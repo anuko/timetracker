@@ -444,7 +444,6 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => 'új vezetői jogosultság létrehozása',
 "form.profile.edit_title" => 'profil szerkesztése',
-"form.profile.name" => 'név',
 
 // people form attributes
 "form.people.ppl_str" => 'munkatársak',
