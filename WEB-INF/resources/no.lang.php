@@ -604,9 +604,7 @@ $i18n_key_words = array(
 "label.set_tp" => 'eller sett dato',
 "label.fields" => 'vis feltene',
 "label.group_title" => 'sorter på',
-// Note to translators: the strings below must be translated
-// "label.include_title" => 'ta med oppføringer',
-// "label.inv_str" => 'faktura',
+"label.inv_str" => 'faktura',
 "label.set_empl" => 'velg brukere',
 // Note to translators: the strings below are missing and must be translated and added
 // "label.sel_all" => 'velg alle',

@@ -603,7 +603,7 @@ $i18n_key_words = array(
 "label.set_tp" => 'あるいは日付を設定',
 "label.fields" => 'フィールドの表示',
 "label.group_title" => '次のようにグループ化',
-"label.include_title" => 'レコードの含み',
+
 "label.inv_str" => '送り状',
 "label.set_empl" => 'ユーザーの選択',
 "label.sel_all" => 'すべて選択',

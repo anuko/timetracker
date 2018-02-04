@@ -620,7 +620,7 @@ $i18n_key_words = array(
 "label.set_tp" => '或設定日期',
 "label.fields" => '顯示欄目',
 "label.group_title" => '分組方式：',
-"label.include_title" => '包含記錄',
+
 "label.inv_str" => '發票',
 "label.set_empl" => '選擇用戶',
 "label.sel_all" => '全部選擇',

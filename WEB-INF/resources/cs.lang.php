@@ -593,7 +593,6 @@ $i18n_key_words = array(
 "label.set_tp" => 'nebo určete dny',
 "label.fields" => 'zobrazit pole',
 "label.group_title" => 'seskupit podle',
-"label.include_title" => 'včetně záznamů',
 "label.inv_str" => 'faktura',
 "label.set_empl" => 'výběr uživatelů',
 "label.sel_all" => 'vybrat všechno',

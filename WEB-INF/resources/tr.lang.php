@@ -634,7 +634,7 @@ $i18n_key_words = array(
 "label.set_tp" => 'ya da tarihleri belirle',
 "label.fields" => 'alanları göster',
 "label.group_title" => 'gruplandırma kıstası',
-"label.include_title" => 'kayıtları dahil et',
+
 "label.inv_str" => 'fatura',
 "label.set_empl" => 'kullanıcıları seç',
 "label.sel_all" => 'tümünü seç',

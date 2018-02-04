@@ -599,7 +599,7 @@ $i18n_key_words = array(
 "label.set_tp" => '혹은 날짜를 설정',
 "label.fields" => '필드들을 보기',
 "label.group_title" => '다음것에 의한 그룹화',
-"label.include_title" => '기록을 포함',
+
 "label.inv_str" => '송장',
 "label.set_empl" => '사용자들을 선택',
 "label.sel_all" => '모두 선택',

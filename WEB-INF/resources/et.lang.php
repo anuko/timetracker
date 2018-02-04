@@ -605,7 +605,7 @@ $i18n_key_words = array(
 "label.set_tp" => 'või märgi kuupäevad',
 "label.fields" => 'näita välju',
 "label.group_title" => 'grupeeri',
-"label.include_title" => 'kaasa kanded',
+
 "label.inv_str" => 'arved',
 "label.set_empl" => 'vali kasutajad',
 "label.sel_all" => 'vali kõik',
