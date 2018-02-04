@@ -620,11 +620,6 @@ $i18n_key_words = array(
 "controls.per_lw" => 'geçen hafta',
 "controls.per_td" => 'bugün',
 "controls.per_at" => 'tüm zamanlar',
-// Note to translators: the string below is missing and must be added and translated
-// "controls.per_ty" => 'this year',
-"controls.sel_period" => '--- zaman dönemi seç ---',
-"controls.inc_billable" => 'faturalandırılabilir',
-"controls.inc_nbillable" => 'faturalandırılamaz',
 
 // labels
 "label.chart.title1" => 'kullanıcı için faaliyetler',
