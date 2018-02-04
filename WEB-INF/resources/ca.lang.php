@@ -82,10 +82,11 @@ $i18n_key_words = array(
 'error.not_equal' => 'L\\\'Arxiu "{0}" no és igual al arxiu "{1}".',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-'error.project' => 'Selleccionar projecte.',
+'error.project' => 'Selleccionar projecte.', // TODO: Selleccionar or Sel·leccionar? Is this correct?
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-// 'error.client' => 'Select client.',
+'error.client' => 'Sel·leccionar client.',
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'Usuari o parula de pas incorrecta.',
@@ -531,9 +532,6 @@ $i18n_key_words = array(
 "forward.geninvoice" => 'Generar factura',
 "forward.change" => 'Configurar clients',
 
-// strings inside contols on forms
-"controls.select.project" => '--- Sel·leccionar projecte ---',
-"controls.select.activity" => '--- Sel·leccionar activitat ---',
 "controls.select.client" => '--- Sel·leccionar client ---',
 "controls.project_bind" => '--- Tots ---',
 "controls.all" => '--- Tots ---',

@@ -575,9 +575,6 @@ $i18n_key_words = array(
 // "forward.geninvoice" => 'lag faktura',
 // "forward.change" => 'konfigur klienter',
 
-// strings inside contols on forms
-"controls.select.project" => '--- velg prosjekt ---',
-"controls.select.activity" => '--- velg aktivitet ---',
 // Note to translators: the string below is missing and must be translated and added
 // "controls.select.client" => '--- velg klient ---',
 "controls.project_bind" => '--- alle ---',

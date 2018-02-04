@@ -591,9 +591,6 @@ $i18n_key_words = array(
 "forward.geninvoice" => '生成發票',
 "forward.change" => '客戶設置',
 
-// strings inside contols on forms
-"controls.select.project" => '--- 選擇項目 ---',
-"controls.select.activity" => '--- 選擇活動 ---',
 "controls.select.client" => '--- 選擇客戶 ---',
 "controls.project_bind" => '--- 全部 ---',
 "controls.all" => '--- 全部 ---',

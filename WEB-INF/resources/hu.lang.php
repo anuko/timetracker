@@ -547,9 +547,6 @@ $i18n_key_words = array(
 "forward.geninvoice" => 'számla készítés',
 "forward.change" => 'ügyfelek adatainak beállítása',
 
-// strings inside contols on forms
-"controls.select.project" => '--- válassz projektet ---',
-"controls.select.activity" => '--- válassz tevékenységet ---',
 "controls.select.client" => '--- válassz ügyfelet ---',
 "controls.project_bind" => '--- összes ---',
 "controls.all" => '--- összes ---',

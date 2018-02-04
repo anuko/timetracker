@@ -573,9 +573,6 @@ $i18n_key_words = array(
 "forward.geninvoice" => 'loo arve',
 "forward.change" => 'konfigureeri kliendid',
 
-// strings inside contols on forms
-"controls.select.project" => '--- vali projekt ---',
-"controls.select.activity" => '--- vali tegevus ---',
 "controls.select.client" => '--- vali klient ---',
 "controls.project_bind" => '--- kõik ---',
 "controls.all" => '--- kõik ---',

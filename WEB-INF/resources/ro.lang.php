@@ -554,9 +554,6 @@ $i18n_key_words = array(
 "forward.geninvoice" => 'genereaza factura',
 "forward.change" => 'configureaza clienti',
 
-// strings inside contols on forms
-"controls.select.project" => '--- alege proiect    ---',
-"controls.select.activity" => '--- alege activitate ---',
 "controls.select.client" => '--- alege client     ---',
 "controls.project_bind" => '--- toate ---',
 "controls.all" => '--- toate ---',
@@ -565,10 +562,6 @@ $i18n_key_words = array(
 "controls.per_lm" => 'luna trecuta',
 "controls.per_tw" => 'saptamana curenta',
 "controls.per_lw" => 'saptamana trecuta',
-// Note to translators: the strings below must be translated
-// "controls.per_td" => 'this day',
-// "controls.per_at" => 'all time',
-// "controls.per_ty" => 'this year'
 "controls.sel_period" => '--- alege perioada ---',
 "controls.sel_groupby" => '--- fara grupare   ---',
 

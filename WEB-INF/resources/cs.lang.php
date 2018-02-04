@@ -566,8 +566,6 @@ $i18n_key_words = array(
 "forward.geninvoice" => 'vytvořit fakturu',
 "forward.change" => 'upravit zákazníky',
 
-// strings inside contols on forms
-"controls.select.project" => '--- výběr projektu ---',
 "controls.select.client" => '--- výběr zákazníka ---',
 "controls.project_bind" => '--- všechny ---',
 "controls.all" => '--- vše ---',

@@ -574,9 +574,6 @@ $i18n_key_words = array(
 "forward.geninvoice" => '送り状の作成',
 "forward.change" => 'クライアントの構成',
 
-// strings inside contols on forms
-"controls.select.project" => '--- プロジェクトの選択 ---',
-"controls.select.activity" => '--- 活動内容の選択 ---',
 "controls.select.client" => '--- クライアントの選択 ---',
 "controls.project_bind" => '--- すべて ---',
 "controls.all" => '--- すべて ---',

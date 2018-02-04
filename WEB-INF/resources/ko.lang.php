@@ -570,9 +570,6 @@ $i18n_key_words = array(
 "forward.geninvoice" => '송장 만들기',
 "forward.change" => '클라이언트 구성',
 
-// strings inside contols on forms
-"controls.select.project" => '--- 프로젝트 선택 ---',
-"controls.select.activity" => '--- 활동내용 선택 ---',
 "controls.select.client" => '--- 클라이언트 선택 ---',
 "controls.project_bind" => '--- 전부 ---',
 "controls.all" => '--- 전부 ---',

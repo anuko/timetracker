@@ -82,7 +82,8 @@ $i18n_key_words = array(
 // 'error.empty' => 'Field "{0}" is empty.',
 // 'error.not_equal' => 'Field "{0}" is not equal to field "{1}".',
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-// 'error.project' => 'Select project.',
+'error.project' => 'Selecione projeto.',
+// TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
@@ -476,8 +477,6 @@ $i18n_key_words = array(
 // miscellaneous strings
 "forward.forgot_password" => 'esqueceu a senha?',
 
-// strings inside contols on forms
-"controls.select.project" => '--- selecione projeto ---',
 "controls.per_tm" => 'este mês',
 "controls.per_lm" => 'último mês',
 "controls.per_tw" => 'esta semana',

@@ -607,9 +607,6 @@ $i18n_key_words = array(
 "forward.geninvoice" => 'fatura yarat',
 "forward.change" => 'müşterileri düzenle',
 
-// strings inside contols on forms
-"controls.select.project" => '--- proje seç ---',
-"controls.select.activity" => '--- faaliyet seç ---',
 "controls.select.client" => '--- müşteri seç ---',
 "controls.project_bind" => '--- tümü ---',
 "controls.all" => '--- tümü ---',
