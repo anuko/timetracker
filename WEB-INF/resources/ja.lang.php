@@ -213,7 +213,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
-// 'label.or' => 'or',
+'label.or' => 'あるいは',
+// TODO: translate the following.
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* 必須のフィールド',
@@ -597,7 +598,6 @@ $i18n_key_words = array(
 "label.set_empl" => 'ユーザーの選択',
 "label.sel_all" => 'すべて選択',
 "label.sel_none" => 'すべて解除',
-"label.or" => 'あるいは',
 "label.disable" => '使用中止',
 "label.enable" => '使用可能',
 "label.hrs" => '時間',

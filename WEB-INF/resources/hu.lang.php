@@ -213,7 +213,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
-// 'label.or' => 'or',
+'label.or' => 'vagy',
+// TODO: translate the following.
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* kötelezően kitöltendő mezők',
@@ -561,7 +562,6 @@ $i18n_key_words = array(
 "label.set_empl" => 'válassz dolgozót',
 "label.sel_all" => 'mindenkit kijelöl',
 "label.sel_none" => 'senkit nem jelöl ki',
-"label.or" => 'vagy',
 "label.disable" => 'tiltva',
 "label.enable" => 'engedélyezve',
 );

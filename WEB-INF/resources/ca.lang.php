@@ -208,7 +208,8 @@ $i18n_key_words = array(
 // 'label.total' => 'Total',
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
-// 'label.or' => 'or',
+'label.or' => 'o',
+// TODO: translate the following.
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* camps requerits',
@@ -543,7 +544,6 @@ $i18n_key_words = array(
 "label.set_empl" => 'Seleccionar usuaris',
 "label.sel_all" => 'Seleccionar tots',
 "label.sel_none" => 'Treure totes las seleccions',
-"label.or" => 'o',
 "label.disable" => 'Deshabilitar',
 "label.enable" => 'Habilitar',
 );

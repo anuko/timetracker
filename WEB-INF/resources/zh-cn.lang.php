@@ -200,7 +200,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
-// 'label.or' => 'or',
+'label.or' => '或',
+// TODO: translate the following.
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* 必填栏目',
@@ -587,7 +588,6 @@ $i18n_key_words = array(
 "label.set_empl" => '选择用户',
 "label.sel_all" => '全部选择',
 "label.sel_none" => '全部不选',
-"label.or" => '或',
 "label.disable" => '禁用',
 "label.enable" => '启用',
 "label.hrs" => '小时',

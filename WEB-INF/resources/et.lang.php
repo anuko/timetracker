@@ -213,7 +213,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
-// 'label.or' => 'or',
+'label.or' => 'või',
+// TODO: translate the following.
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* nõutud väljad',
@@ -592,7 +593,6 @@ $i18n_key_words = array(
 "label.set_empl" => 'vali kasutajad',
 "label.sel_all" => 'vali kõik',
 "label.sel_none" => 'märgi kõik mittevalituks',
-"label.or" => 'või',
 "label.disable" => 'keela',
 "label.enable" => 'luba',
 );

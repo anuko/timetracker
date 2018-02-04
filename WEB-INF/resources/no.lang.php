@@ -210,7 +210,8 @@ $i18n_key_words = array(
 // 'label.total' => 'Total',
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
-// 'label.or' => 'or',
+'label.or' => 'eller',
+// TODO: translate the following.
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* obligatoriske felt',
@@ -604,7 +605,6 @@ $i18n_key_words = array(
 // Note to translators: the strings below are missing and must be translated and added
 // "label.sel_all" => 'velg alle',
 // "label.sel_none" => 'velg ingen',
-// "label.or" => 'or',
 // "label.disable" => 'slå av',
 // "label.enable" => 'slå på',
 // "label.hrs" => 'timer',

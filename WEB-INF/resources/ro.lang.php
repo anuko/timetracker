@@ -214,7 +214,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
-// 'label.or' => 'or',
+'label.or' => 'sau',
+// TODO: translate the following.
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* date obligatorii',
@@ -573,7 +574,6 @@ $i18n_key_words = array(
 "label.set_empl" => 'alege utilizatori',
 "label.sel_all" => 'selecteaza   tot',
 "label.sel_none" => 'deselecteaza tot',
-"label.or" => 'sau',
 "label.disable" => 'inactiv',
 "label.enable" => 'activ',
 );

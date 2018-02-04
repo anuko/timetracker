@@ -213,7 +213,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
-// 'label.or' => 'or',
+'label.or' => '혹은',
+// TODO: translate the following.
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* 필수 필드',
@@ -593,7 +594,6 @@ $i18n_key_words = array(
 "label.set_empl" => '사용자들을 선택',
 "label.sel_all" => '모두 선택',
 "label.sel_none" => '모두 해제',
-"label.or" => '혹은',
 "label.disable" => '무력화',
 "label.enable" => '가능화',
 "label.hrs" => '시간',

@@ -220,7 +220,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
-// 'label.or' => 'or',
+'label.or' => 'ya da',
+// TODO: translate the following.
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* zorunlu bilgi',
@@ -579,7 +580,6 @@ $i18n_key_words = array(
 "label.set_empl" => 'kullanıcıları seç',
 "label.sel_all" => 'tümünü seç',
 "label.sel_none" => 'hiçbirini seçme',
-"label.or" => 'ya da',
 "label.disable" => 'devre dışı bırak',
 "label.enable" => 'devreye sok',
 );

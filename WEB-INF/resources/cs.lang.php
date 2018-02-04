@@ -216,7 +216,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
-// 'label.or' => 'or',
+'label.or' => 'nebo',
+// TODO: translate the following.
 // 'label.error' => 'Error',
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* nutno vyplnit',
@@ -587,7 +588,6 @@ $i18n_key_words = array(
 "label.set_empl" => 'výběr uživatelů',
 "label.sel_all" => 'vybrat všechno',
 "label.sel_none" => 'zrušit výběr',
-"label.or" => 'nebo',
 "label.disable" => 'zakázat',
 "label.enable" => 'povolit',
 "label.hrs" => 'hodin',
