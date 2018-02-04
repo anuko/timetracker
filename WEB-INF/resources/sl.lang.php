@@ -198,7 +198,8 @@ $i18n_key_words = array(
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
-// 'label.comment' => 'Comment',
+'label.comment' => 'Komentar',
+// TODO: translate the following.
 // 'label.status' => 'Status',
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
@@ -343,10 +344,10 @@ $i18n_key_words = array(
 // 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
-// TODO: translate the following.
-// 'form.reset_password.message' => 'Password reset request sent by email.',
-// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+'form.reset_password.message' => 'Zahteva za razveljavitev gesla je bila poslana.', // TODO: add "by email" to match the English string.
+'form.reset_password.email_subject' => 'Anuko Time Tracker zahteva za razveljavitev gesla',
+// TODO: translate the ending of this string properly.
+'form.reset_password.email_body' => "Spoštovani uporabnik,\n\nNekdo, najverjetneje vi, je zahteval razveljavitev vašega Anuko Time Tracker gesla. Prosimo obiščite to povezavo, če želite razveljaviti vaše geslo.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 // TODO: translate the following.
@@ -384,26 +385,110 @@ $i18n_key_words = array(
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
-// 'form.reports.group_by_project' => 'project',
+'form.reports.group_by_project' => 'projekt',
+// TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
 // 'form.reports.totals_only' => 'Totals only',
 
+// Report form. See example at https://timetracker.anuko.com/report.php
+// (after generating a report at https://timetracker.anuko.com/reports.php).
+// TODO: translate the following.
+// 'form.report.export' => 'Export',
+// 'form.report.assign_to_invoice' => 'Assign to invoice',
 
+// Invoice form. See example at https://timetracker.anuko.com/invoice.php
+// (you can get to this form after generating a report).
+// TODO: translate the following.
+// 'form.invoice.number' => 'Invoice number',
+// 'form.invoice.person' => 'Person',
+// 'form.invoice.invoice_to_delete' => 'Invoice to delete',
+// 'form.invoice.invoice_entries' => 'Invoice entries',
+// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
-// TODO: refactoring ongoing down from here.
+// Charts form. See example at https://timetracker.anuko.com/charts.php
+// TODO: translate the following.
+// 'form.charts.interval' => 'Interval',
+// 'form.charts.chart' => 'Chart',
 
-"form.fpass.send_pass_str" => 'zahteva za razveljavitev gesla je bila poslana',
-"form.fpass.send_pass_subj" => 'Anuko Time Tracker zahteva za razveljavitev gesla',
-// Note to translators: the ending of this tring below needs to be translated.
-"form.fpass.send_pass_body" => "Spoštovani uporabnik,\n\nNekdo, najverjetneje vi, je zahteval razveljavitev vašega Anuko Time Tracker gesla. Prosimo obiščite to povezavo, če želite razveljaviti vaše geslo.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
-"form.fpass.reset_comment" => "za razveljavitev gesla, prosimo vtipkajte geslo in kliknite gumb shrani",
+// Projects form. See example at https://timetracker.anuko.com/projects.php
+// TODO: translate the following.
+// 'form.projects.active_projects' => 'Active Projects',
+// 'form.projects.inactive_projects' => 'Inactive Projects',
 
-// mail form attributes
-"form.mail.from" => 'od',
-"form.mail.to" => 'za',
-"form.mail.comment" => 'komentar',
-"form.mail.above" => 'pošlji to poročilo preko elektronske pošte',
-// Note to translators: this string needs to be translated.
-// "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
-"form.mail.sending_str" => '<b>sporočilo poslano</b>',
+// Tasks form. See example at https://timetracker.anuko.com/tasks.php
+// TODO: translate the following.
+// 'form.tasks.active_tasks' => 'Active Tasks',
+// 'form.tasks.inactive_tasks' => 'Inactive Tasks',
+
+// Users form. See example at https://timetracker.anuko.com/users.php
+// TODO: translate the following.
+// 'form.users.active_users' => 'Active Users',
+// 'form.users.inactive_users' => 'Inactive Users',
+// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
+// 'form.users.role' => 'Role',
+// 'form.users.manager' => 'Manager',
+// 'form.users.comanager' => 'Co-manager',
+// 'form.users.rate' => 'Rate',
+// 'form.users.default_rate' => 'Default hourly rate',
+
+// Clients form. See example at https://timetracker.anuko.com/clients.php
+// TODO: translate the following.
+// 'form.clients.active_clients' => 'Active Clients',
+// 'form.clients.inactive_clients' => 'Inactive Clients',
+
+// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
+// TODO: translate the following.
+// 'form.client.client_to_delete' => 'Client to delete',
+// 'form.client.client_entries' => 'Client entries',
+
+// Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// TODO: translate the following.
+// 'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
+// 'form.export.compression' => 'Compression',
+// 'form.export.compression_none' => 'none',
+// 'form.export.compression_bzip' => 'bzip',
+
+// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// TODO: translate the following.
+// 'form.import.hint' => 'Import team data from an xml file.',
+// 'form.import.file' => 'Select file',
+// 'form.import.success' => 'Import completed successfully.',
+
+// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// TODO: translate the following.
+// 'form.teams.hint' =>  'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+
+// Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
+// TODO: translate the following.
+// 'form.profile.12_hours' => '12 hours',
+// 'form.profile.24_hours' => '24 hours',
+// 'form.profile.tracking_mode' => 'Tracking mode',
+// 'form.profile.mode_time' => 'time',
+// 'form.profile.mode_projects' => 'projects',
+// 'form.profile.mode_projects_and_tasks' => 'projects and tasks',
+// 'form.profile.record_type' => 'Record type',
+// 'form.profile.type_all' => 'all',
+// 'form.profile.type_start_finish' => 'start and finish',
+// 'form.profile.type_duration' => 'duration',
+// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.profile.uncompleted_indicators_none' => 'do not show',
+// 'form.profile.uncompleted_indicators_show' => 'show',
+// 'form.profile.plugins' => 'Plugins',
+
+// Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
+'form.mail.from' => 'Od',
+'form.mail.to' => 'Za',
+// TODO: translate the following.
+// 'form.mail.report_subject' => 'Time Tracker Report',
+// 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
+// 'form.mail.report_sent' => 'Report sent.',
+// 'form.mail.invoice_sent' => 'Invoice sent.',
+
+// Quotas configuration form.
+// TODO: translate the following.
+// 'form.quota.year' => 'Year',
+// 'form.quota.month' => 'Month',
+// 'form.quota.quota' => 'Quota',
+// 'form.quota.workday_hours' => 'Hours in work day',
+// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 );
