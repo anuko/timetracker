@@ -541,7 +541,6 @@ $i18n_key_words = array(
 "controls.per_lw" => 'La setmana passada',
 "controls.per_td" => 'Aquest dia',
 "controls.per_lw" => 'La setmana passada',
-"controls.sel_period" => '--- Seleccionar període de temps ---',
 
 // labels
 "label.chart.period" => 'gràfica por període',

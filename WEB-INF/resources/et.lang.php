@@ -367,7 +367,8 @@ $i18n_key_words = array(
 // Time form. See example at https://timetracker.anuko.com/time.php.
 // TODO: translate the following.
 // 'form.time.duration_format' => '(hh:mm or 0.0h)',
-// 'form.time.billable' => 'Billable',
+'form.time.billable' => 'Arvestatav',
+// TODO: translate the following.
 // 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
@@ -384,15 +385,17 @@ $i18n_key_words = array(
 'form.reports.save_as_favorite' => 'Salvesta lemmikuna',
 // TODO: translate the following.
 // 'form.reports.confirm_delete' => 'Are you sure you want to delete this favorite report?',
-// 'form.reports.include_billable' => 'billable',
-// 'form.reports.include_not_billable' => 'not billable',
+'form.reports.include_billable' => 'arvestatav',
+'form.reports.include_not_billable' => 'mittearvestatav',
+// TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
-// 'form.reports.select_period' => 'Select time period',
-// 'form.reports.set_period' => 'or set dates',
-// 'form.reports.show_fields' => 'Show fields',
-// 'form.reports.group_by' => 'Group by',
-// 'form.reports.group_by_no' => '--- no grouping ---',
+'form.reports.select_period' => 'Vali ajaperiood',
+'form.reports.set_period' => 'või märgi kuupäevad',
+'form.reports.show_fields' => 'Näita välju',
+'form.reports.group_by' => 'Grupeeri',
+'form.reports.group_by_no' => '--- ilma grupeerimata ---',
+// TODO: translate the following.
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
@@ -583,25 +586,14 @@ $i18n_key_words = array(
 "controls.per_lw" => 'eelmine nädal',
 "controls.per_td" => 'täna',
 "controls.per_at" => 'kõik ajad',
-// Note to translators: the string below must be translated and added
-// "controls.per_ty" => 'this year',
-"controls.sel_period" => '--- vali ajaperiood ---',
-"controls.sel_groupby" => '--- ilma grupeerimata ---',
 "controls.inc_billable" => 'arvestatav',
 "controls.inc_nbillable" => 'mittearvestatav',
-// Note to translators: the string below must be translated and added
-// "controls.default" => '--- default ---',
 
 // labels
 "label.chart.title1" => 'tegevused kasutajal',
 // Note to translators: the string below is missing and must be translated and added
 // "label.chart.title2" => 'projects for user',
 "label.chart.period" => 'tabel perioodiks',
-
-"label.sel_tp" => 'vali ajaperiood',
-"label.set_tp" => 'või märgi kuupäevad',
-"label.fields" => 'näita välju',
-"label.group_title" => 'grupeeri',
 
 "label.inv_str" => 'arved',
 "label.set_empl" => 'vali kasutajad',

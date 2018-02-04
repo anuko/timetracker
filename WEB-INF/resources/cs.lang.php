@@ -577,7 +577,6 @@ $i18n_key_words = array(
 "controls.per_td" => 'dnes',
 "controls.per_at" => 'od počátku',
 "controls.per_ty" => 'letos',
-"controls.sel_period" => '--- výběr období ---',
 "controls.sel_groupby" => '--- vše dohromady ---',
 "controls.inc_billable" => 'k fakturaci',
 "controls.inc_nbillable" => 'mimo fakturaci',
