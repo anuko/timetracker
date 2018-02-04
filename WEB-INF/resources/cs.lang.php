@@ -185,7 +185,8 @@ $i18n_key_words = array(
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
-// 'label.week_total' => 'Week total',
+'label.week_total' => 'Celkem za týden',
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
 'label.today' => 'Dnes',
 // TODO: translate the following.
@@ -600,6 +601,5 @@ $i18n_key_words = array(
 "label.or" => 'nebo',
 "label.disable" => 'zakázat',
 "label.enable" => 'povolit',
-"label.timeweek" => 'celkem za týden',
 "label.hrs" => 'hodin',
 );

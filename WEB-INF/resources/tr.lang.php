@@ -188,7 +188,8 @@ $i18n_key_words = array(
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
-// 'label.week_total' => 'Week total',
+'label.week_total' => 'Haftalık toplam',
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
 'label.today' => 'Bugün',
 // TODO: translate the following.
@@ -629,7 +630,6 @@ $i18n_key_words = array(
 // "label.chart.title2" => 'projects for user',
 "label.chart.period" => 'dönem için grafik',
 
-"label.sel_project" => 'proje seç',
 "label.sel_tp" => 'zaman aralığını seç',
 "label.set_tp" => 'ya da tarihleri belirle',
 "label.fields" => 'alanları göster',
@@ -642,5 +642,4 @@ $i18n_key_words = array(
 "label.or" => 'ya da',
 "label.disable" => 'devre dışı bırak',
 "label.enable" => 'devreye sok',
-"label.timeweek" => 'haftalık toplam',
 );

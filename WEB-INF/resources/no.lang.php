@@ -135,8 +135,8 @@ $i18n_key_words = array(
 'button.create_team' => 'Opprett team',
 'button.export' => 'Eksport team',
 'button.import' => 'Importer team',
+'button.close' => 'Lukk',
 // TODO: translate the following.
-// 'button.close' => 'Close',
 // 'button.stop' => 'Stop',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
@@ -181,7 +181,8 @@ $i18n_key_words = array(
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
-// 'label.week_total' => 'Week total',
+'label.week_total' => 'Uken totalt',
+// TODO: translate the following.    
 // 'label.month_total' => 'Month total',
 'label.today' => 'I dag',
 // TODO: translate the following.
@@ -599,7 +600,6 @@ $i18n_key_words = array(
 // "controls.default" => '--- default ---',
 
 // labels
-"label.sel_project" => 'velg prosjekt',
 "label.sel_tp" => 'velg tidsperiode',
 "label.set_tp" => 'eller sett dato',
 "label.fields" => 'vis feltene',
@@ -614,12 +614,9 @@ $i18n_key_words = array(
 // "label.or" => 'or',
 // "label.disable" => 'slå av',
 // "label.enable" => 'slå på',
-// "label.timeweek" => 'uken totalt',
 // "label.hrs" => 'timer',
 // "label.errors" => 'feil',
 // "label.ldap_hint" => 'Skriv din <b>Windows login</b> og <b>passord</b> i feltene nedenfor.',
-// "label.calendar_today" => 'i dag',
-// "label.calendar_close" => 'lukk',
 
 // login hello text
 // "login.hello.text" => "Anuko Time Tracker er et enkelt, brukervennlig tidsregistreringssystem basert på åpen kildekode.",

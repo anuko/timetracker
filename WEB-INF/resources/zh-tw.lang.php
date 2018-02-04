@@ -81,7 +81,8 @@ $i18n_key_words = array(
 'error.not_equal' => '欄目"{0}"不等於欄目"{1}"',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-// 'error.project' => 'Select project.',
+'error.project' => '選擇項目',
+// TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
@@ -178,7 +179,8 @@ $i18n_key_words = array(
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
-// 'label.week_total' => 'Week total',
+'label.week_total' => '一周總計',
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
 'label.today' => '今天',
 // TODO: translate the following.
@@ -614,7 +616,6 @@ $i18n_key_words = array(
 "label.chart.title2" => '項目用戶',
 "label.chart.period" => '圖表期限',
 
-"label.sel_project" => '選擇項目',
 "label.sel_tp" => '選擇時間段',
 "label.set_tp" => '或設定日期',
 "label.fields" => '顯示欄目',
@@ -627,7 +628,6 @@ $i18n_key_words = array(
 "label.or" => '或',
 "label.disable" => '禁用',
 "label.enable" => '啟用',
-"label.timeweek" => '一周總計',
 "label.hrs" => '小時',
 "label.errors" => '錯誤',
 "label.ldap_hint" => '在下麵的欄目輸入您的<b>Windows用戶名</b>和<b>密碼</b>。',

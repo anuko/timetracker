@@ -183,7 +183,8 @@ $i18n_key_words = array(
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
-// 'label.week_total' => 'Week total',
+'label.week_total' => 'Nädalane summa',
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
 'label.today' => 'Täna',
 // TODO: translate the following.
@@ -612,5 +613,4 @@ $i18n_key_words = array(
 "label.or" => 'või',
 "label.disable" => 'keela',
 "label.enable" => 'luba',
-"label.timeweek" => 'nädalane summa',
 );

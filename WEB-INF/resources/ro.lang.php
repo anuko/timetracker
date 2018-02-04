@@ -573,7 +573,6 @@ $i18n_key_words = array(
 "controls.sel_groupby" => '--- fara grupare   ---',
 
 // labels
-"label.sel_project" => 'alege proiect',
 "label.sel_tp" => 'alege perioada',
 "label.set_tp" => 'sau introdu intervalul de date',
 "label.fields" => 'arata campuri',

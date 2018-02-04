@@ -183,7 +183,8 @@ $i18n_key_words = array(
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
-// 'label.week_total' => 'Week total',
+'label.week_total' => '週合計',
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
 'label.today' => '今日',
 // TODO: translate the following.
@@ -598,7 +599,6 @@ $i18n_key_words = array(
 "label.chart.title2" => 'ユーザーに対するプロジェクト',
 "label.chart.period" => '期間表示のチャート',
 
-"label.sel_project" => 'プロジェクトの選択',
 "label.sel_tp" => '時間期間の選択',
 "label.set_tp" => 'あるいは日付を設定',
 "label.fields" => 'フィールドの表示',
@@ -611,7 +611,6 @@ $i18n_key_words = array(
 "label.or" => 'あるいは',
 "label.disable" => '使用中止',
 "label.enable" => '使用可能',
-"label.timeweek" => '週合計',
 "label.hrs" => '時間',
 "label.errors" => 'エラー',
 "label.ldap_hint" => '下記のフィールドにあなたの<b>WindowsのログインID</b>と<b>パスワード</b>を入力してください。',

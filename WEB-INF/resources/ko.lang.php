@@ -182,7 +182,8 @@ $i18n_key_words = array(
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
-// 'label.week_total' => 'Week total',
+'label.week_total' => '주별 합계',
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
 'label.today' => '오늘',
 // TODO: translate the following.
@@ -594,7 +595,6 @@ $i18n_key_words = array(
 "label.chart.title2" => '사용자별 프로젝트',
 "label.chart.period" => '기간에 따른 그래프',
 
-"label.sel_project" => '프로젝트 선택',
 "label.sel_tp" => '시간 기간을 선택',
 "label.set_tp" => '혹은 날짜를 설정',
 "label.fields" => '필드들을 보기',
@@ -607,7 +607,6 @@ $i18n_key_words = array(
 "label.or" => '혹은',
 "label.disable" => '무력화',
 "label.enable" => '가능화',
-"label.timeweek" => '주별 합계',
 "label.hrs" => '시간',
 "label.errors" => '오류',
 "label.ldap_hint" => '아래의 필드들에서 <b>Windows 로그인</b> 및 <b>암호</b> 를 입력하십시오.',

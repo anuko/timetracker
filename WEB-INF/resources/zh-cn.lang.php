@@ -74,7 +74,8 @@ $i18n_key_words = array(
 'error.not_equal' => '栏目"{0}"不等于栏目"{1}"。',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-// 'error.project' => 'Select project.',
+'error.project' => '选择项目。',
+// TODO: translate the following.
 // 'error.task' => 'Select task.',
 // 'error.client' => 'Select client.',
 // 'error.report' => 'Select report.',
@@ -125,8 +126,8 @@ $i18n_key_words = array(
 // 'button.create_team' => 'Create team',
 'button.export' => '导出团队信息',
 'button.import' => '导入团队信息',
+'button.close' => '关闭',
 // TODO: translate the following.
-// 'button.close' => 'Close',
 // 'button.stop' => 'Stop',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
@@ -170,7 +171,8 @@ $i18n_key_words = array(
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
-// 'label.week_total' => 'Week total',
+'label.week_total' => '一周总计',
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
 'label.today' => '今天',
 // TODO: translate the following.
@@ -615,7 +617,6 @@ $i18n_key_words = array(
 "label.chart.title2" => '项目用户',
 "label.chart.period" => '图表期限',
 
-"label.sel_project" => '选择项目',
 "label.sel_tp" => '选择时间段',
 "label.set_tp" => '或设定日期',
 "label.fields" => '显示栏目',
@@ -628,13 +629,9 @@ $i18n_key_words = array(
 "label.or" => '或',
 "label.disable" => '禁用',
 "label.enable" => '启用',
-"label.timeweek" => '一周总计',
 "label.hrs" => '小时',
 "label.errors" => '错误',
 "label.ldap_hint" => '在下面的栏目输入您的<b>Windows用户名</b>和<b>密码</b>。',
-// Note to translators: strings below must be translated.
- "label.calendar_today" => '今天',
- "label.calendar_close" => '关闭',
 
 // login hello text
  "login.hello.text" => "anuko时间跟踪器是一种简单、易用、开放源代码的实时跟踪系统。",
