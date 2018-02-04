@@ -356,7 +356,8 @@ $i18n_key_words = array(
 // Time form. See example at https://timetracker.anuko.com/time.php.
 // TODO: translate the following.
 // 'form.time.duration_format' => '(hh:mm or 0.0h)',
-// 'form.time.billable' => 'Billable',
+'form.time.billable' => 'Facturable',
+// TODO: translate the following.
 // 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
@@ -373,15 +374,16 @@ $i18n_key_words = array(
 'form.reports.save_as_favorite' => 'Guardar com a favorit',
 // TODO: translate the following.
 // 'form.reports.confirm_delete' => 'Are you sure you want to delete this favorite report?',
-// 'form.reports.include_billable' => 'billable',
-// 'form.reports.include_not_billable' => 'not billable',
+'form.reports.include_billable' => 'facturable',
+'form.reports.include_not_billable' => 'no facturable',
+// TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
-// 'form.reports.select_period' => 'Select time period',
-// 'form.reports.set_period' => 'or set dates',
-// 'form.reports.show_fields' => 'Show fields',
-// 'form.reports.group_by' => 'Group by',
-// 'form.reports.group_by_no' => '--- no grouping ---',
+'form.reports.select_period' => 'Seleccionar període de temps',
+'form.reports.set_period' => 'o establir dates',
+'form.reports.show_fields' => 'Mostrar camps',
+'form.reports.group_by' => 'Agrupar per',
+'form.reports.group_by_no' => '--- no agrupar ---',
 'form.reports.group_by_date' => 'data',
 // TODO: translate the following.
 // 'form.reports.group_by_user' => 'user',
@@ -425,12 +427,6 @@ $i18n_key_words = array(
 "form.mytime.th.note" => 'Nota',
 "form.mytime.del_yes" => 'L\\\'historial de temps s\\\'ha eliminat amb èxit',
 "form.mytime.no_finished_rec" => 'Aquest historial s\\\'ha guardat únicament amb l\\\'hora d\\\'inici. Aixó no és un error. Finalitzi sessió si ho necessita.',
-"form.mytime.billable" => 'facturable',
-
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => 'Crear un nou compte de manejador',
-"form.profile.edit_title" => 'Modificant perfil',
 
 // people form attributes
 "form.people.ppl_str" => 'Persones',
@@ -549,18 +545,10 @@ $i18n_key_words = array(
 "controls.per_td" => 'Aquest dia',
 "controls.per_lw" => 'La setmana passada',
 "controls.sel_period" => '--- Seleccionar període de temps ---',
-"controls.sel_groupby" => '--- No agrupar ---',
-"controls.inc_billable" => 'facturable',
-"controls.inc_nbillable" => 'no facturable',
 
 // labels
 "label.chart.period" => 'gràfica por període',
 
-"label.sel_tp" => 'Seleccionar període de temps',
-"label.set_tp" => 'o establir dates',
-"label.fields" => 'Mostrar camps',
-"label.group_title" => 'Agrupar per',
-"label.include_title" => 'include records',
 "label.inv_str" => 'Factura',
 "label.set_empl" => 'Seleccionar usuaris',
 "label.sel_all" => 'Seleccionar tots',

@@ -577,8 +577,6 @@ $i18n_key_words = array(
 "label.set_tp" => 'sau introdu intervalul de date',
 "label.fields" => 'arata campuri',
 "label.group_title" => 'grupat dupa',
-// Note to translators: the string below is missing and must be added and translated 
-// "label.include_title" => 'include records',
 "label.inv_str" => 'factura',
 "label.set_empl" => 'alege utilizatori',
 "label.sel_all" => 'selecteaza   tot',
