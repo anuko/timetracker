@@ -174,7 +174,8 @@ $i18n_key_words = array(
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
-// 'label.invoice' => 'Invoice',
+'label.invoice' => 'Fatura',
+// TODO: translate the following.
 // 'label.project' => 'Project',
 // 'label.projects' => 'Projects',
 // 'label.task' => 'Task',
@@ -273,7 +274,8 @@ $i18n_key_words = array(
 // 'title.reports' => 'Reports',
 // 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
-// 'title.invoice' => 'Invoice',
+'title.invoice' => 'Fatura',
+// TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 // 'title.projects' => 'Projects',
@@ -292,7 +294,8 @@ $i18n_key_words = array(
 // 'title.add_client' => 'Adding Client',
 // 'title.edit_client' => 'Editing Client',
 // 'title.delete_client' => 'Deleting Client',
-// 'title.invoices' => 'Invoices',
+'title.invoices' => 'Faturalar',
+// TODO: translate the following.
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
 // 'title.delete_invoice' => 'Deleting Invoice',
@@ -366,7 +369,8 @@ $i18n_key_words = array(
 // Time form. See example at https://timetracker.anuko.com/time.php.
 // TODO: translate the following.
 // 'form.time.duration_format' => '(hh:mm or 0.0h)',
-// 'form.time.billable' => 'Billable',
+'form.time.billable' => 'Faturalandırılabilir',
+// TODO: translate the following.
 // 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
@@ -383,15 +387,17 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.save_as_favorite' => 'Save as favorite',
 // 'form.reports.confirm_delete' => 'Are you sure you want to delete this favorite report?',
-// 'form.reports.include_billable' => 'billable',
-// 'form.reports.include_not_billable' => 'not billable',
+'form.reports.include_billable' => 'faturalandırılabilir',
+'form.reports.include_not_billable' => 'faturalandırılamaz',
+// TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
-// 'form.reports.select_period' => 'Select time period',
-// 'form.reports.set_period' => 'or set dates',
-// 'form.reports.show_fields' => 'Show fields',
-// 'form.reports.group_by' => 'Group by',
-// 'form.reports.group_by_no' => '--- no grouping ---',
+'form.reports.select_period' => 'Zaman aralığını seç',
+'form.reports.set_period' => 'ya da tarihleri belirle',
+'form.reports.show_fields' => 'Alanları göster',
+'form.reports.group_by' => 'Gruplandırma kıstas',
+'form.reports.group_by_no' => '--- gruplama yok ---',
+// TODO: translate the following.
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
@@ -455,7 +461,6 @@ $i18n_key_words = array(
 "form.mytime.th.delete" => 'sil',
 "form.mytime.del_yes" => 'zaman kaydı başarıyla silindi',
 "form.mytime.no_finished_rec" => 'bu kayıt sadece başlangıç zamanıyla silindi. bu hata değildir. gerekirse çıkış yapın.',
-"form.mytime.billable" => 'faturalandırılabilir',
 "form.mytime.warn_tozero_rec" => 'bu zaman kaydı silinmeli çünkü zaman aralığı kilitli',
 // Note to translators: the string below is missing and must be translated and added
 // "form.mytime.uncompleted" => 'uncompleted',
@@ -618,24 +623,15 @@ $i18n_key_words = array(
 // Note to translators: the string below is missing and must be added and translated
 // "controls.per_ty" => 'this year',
 "controls.sel_period" => '--- zaman dönemi seç ---',
-"controls.sel_groupby" => '--- gruplama yok ---',
 "controls.inc_billable" => 'faturalandırılabilir',
 "controls.inc_nbillable" => 'faturalandırılamaz',
-// Note to translators: the string below is missing and must be added and translated
-// "controls.default" => '--- default ---',
 
 // labels
 "label.chart.title1" => 'kullanıcı için faaliyetler',
-// Note to translators: the string below is missing and must be added and translated
-// "label.chart.title2" => 'projects for user',
 "label.chart.period" => 'dönem için grafik',
 
-"label.sel_tp" => 'zaman aralığını seç',
-"label.set_tp" => 'ya da tarihleri belirle',
-"label.fields" => 'alanları göster',
 "label.group_title" => 'gruplandırma kıstası',
 
-"label.inv_str" => 'fatura',
 "label.set_empl" => 'kullanıcıları seç',
 "label.sel_all" => 'tümünü seç',
 "label.sel_none" => 'hiçbirini seçme',
