@@ -391,7 +391,8 @@ $i18n_key_words = array(
 // 'form.reports.set_period' => 'or set dates',
 // 'form.reports.show_fields' => 'Show fields',
 // 'form.reports.group_by' => 'Group by',
-// 'form.reports.group_by_no' => '--- no grouping ---',
+'form.reports.group_by_no' => '--- グループの機能がありません ---',
+// TODO: translate the following.
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
@@ -567,12 +568,9 @@ $i18n_key_words = array(
 
 // miscellaneous strings
 "forward.forgot_password" => 'パスワードを忘れましたか？',
-"forward.edit" => '編集',
-"forward.delete" => '削除',
 "forward.tocsvfile" => 'csvファイルにエクスポート',
 "forward.toxmlfile" => 'xmlファイルにエクスポート',
 "forward.geninvoice" => '送り状の作成',
-"forward.change" => 'クライアントの構成',
 
 "controls.select.client" => '--- クライアントの選択 ---',
 "controls.project_bind" => '--- すべて ---',
@@ -586,7 +584,6 @@ $i18n_key_words = array(
 "controls.per_at" => 'すべての時間',
 "controls.per_ty" => '今年',
 "controls.sel_period" => '--- 時間期間の選択 ---',
-"controls.sel_groupby" => '--- グループの機能がありません ---',
 "controls.inc_billable" => '請求できる',
 "controls.inc_nbillable" => '請求できません',
 "controls.default" => '--- デフォルト ---',

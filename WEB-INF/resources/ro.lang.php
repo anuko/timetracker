@@ -194,8 +194,8 @@ $i18n_key_words = array(
 // TODO: confirm that label.edit and label.delete are translated correctly.
 'label.edit' => 'Editează',
 'label.delete' => 'Șterge',
+'label.configure' => 'Configureaza',
 // TODO: translate the following.
-// 'label.configure' => 'Configure',
 // 'label.select_all' => 'Select all',
 // 'label.select_none' => 'Deselect all',
 // 'label.day_view' => 'Day view',
@@ -387,7 +387,8 @@ $i18n_key_words = array(
 // 'form.reports.set_period' => 'or set dates',
 // 'form.reports.show_fields' => 'Show fields',
 // 'form.reports.group_by' => 'Group by',
-// 'form.reports.group_by_no' => '--- no grouping ---',
+'form.reports.group_by_no' => '--- fara grupare ---',
+// TODO: translate the following.
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
@@ -552,7 +553,6 @@ $i18n_key_words = array(
 "forward.forgot_password" => 'parola pierduta?',
 "forward.tocsvfile" => 'exporta date in fisier .csv',
 "forward.geninvoice" => 'genereaza factura',
-"forward.change" => 'configureaza clienti',
 
 "controls.select.client" => '--- alege client     ---',
 "controls.project_bind" => '--- toate ---',
@@ -563,7 +563,6 @@ $i18n_key_words = array(
 "controls.per_tw" => 'saptamana curenta',
 "controls.per_lw" => 'saptamana trecuta',
 "controls.sel_period" => '--- alege perioada ---',
-"controls.sel_groupby" => '--- fara grupare   ---',
 
 // labels
 "label.sel_tp" => 'alege perioada',

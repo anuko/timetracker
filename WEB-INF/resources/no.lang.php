@@ -182,7 +182,7 @@ $i18n_key_words = array(
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
 'label.week_total' => 'Uken totalt',
-// TODO: translate the following.    
+// TODO: translate the following.
 // 'label.month_total' => 'Month total',
 'label.today' => 'I dag',
 // TODO: translate the following.
@@ -573,7 +573,6 @@ $i18n_key_words = array(
 // Note to translators: the strings below are missing and must be translated and added
 // "forward.toxmlfile" => 'eksporter data til en .xml fil',
 // "forward.geninvoice" => 'lag faktura',
-// "forward.change" => 'konfigur klienter',
 
 // Note to translators: the string below is missing and must be translated and added
 // "controls.select.client" => '--- velg klient ---',
@@ -590,7 +589,6 @@ $i18n_key_words = array(
 // "controls.per_at" => 'all tid',
 // "controls.per_ty" => 'dette årr',
 "controls.sel_period" => '--- velg tidsperiode ---',
-"controls.sel_groupby" => '--- ingen sortering ---',
 // Note to translators: the strings below are missing and must be translated and added
 // "controls.inc_billable" => 'fakturerbar',
 // "controls.inc_nbillable" => 'ikke fakturerbar',

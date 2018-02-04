@@ -564,7 +564,6 @@ $i18n_key_words = array(
 "forward.tocsvfile" => 'exportovat data do .csv souboru',
 "forward.toxmlfile" => 'exportovat data do .xml souboru',
 "forward.geninvoice" => 'vytvořit fakturu',
-"forward.change" => 'upravit zákazníky',
 
 "controls.select.client" => '--- výběr zákazníka ---',
 "controls.project_bind" => '--- všechny ---',
@@ -577,7 +576,6 @@ $i18n_key_words = array(
 "controls.per_td" => 'dnes',
 "controls.per_at" => 'od počátku',
 "controls.per_ty" => 'letos',
-"controls.sel_groupby" => '--- vše dohromady ---',
 "controls.inc_billable" => 'k fakturaci',
 "controls.inc_nbillable" => 'mimo fakturaci',
 

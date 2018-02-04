@@ -189,8 +189,8 @@ $i18n_key_words = array(
 // 'label.view' => 'View',
 'label.edit' => 'Modificar',
 'label.delete' => 'Eliminar',
+'label.configure' => 'Configurar',
 // TODO: translate the following.
-// 'label.configure' => 'Configure',
 // 'label.select_all' => 'Select all',
 // 'label.select_none' => 'Deselect all',
 // 'label.day_view' => 'Day view',
@@ -526,11 +526,8 @@ $i18n_key_words = array(
 
 // miscellaneous strings
 "forward.forgot_password" => '¿Ha oblidat la seva paraula de pas?',
-"forward.edit" => 'Modificar',
-"forward.delete" => 'Eliminar',
 "forward.tocsvfile" => 'Exportar dades a un arxiu .csv',
 "forward.geninvoice" => 'Generar factura',
-"forward.change" => 'Configurar clients',
 
 "controls.project_bind" => '--- Tots ---',
 "controls.all" => '--- Tots ---',

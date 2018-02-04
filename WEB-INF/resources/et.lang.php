@@ -193,8 +193,8 @@ $i18n_key_words = array(
 // 'label.view' => 'View',
 'label.edit' => 'Muuda',
 'label.delete' => 'Kustuta',
+'label.configure' => 'Konfigureeri',
 // TODO: translate the following.
-// 'label.configure' => 'Configure',
 // 'label.select_all' => 'Select all',
 // 'label.select_none' => 'Deselect all',
 // 'label.day_view' => 'Day view',
@@ -574,7 +574,6 @@ $i18n_key_words = array(
 "forward.tocsvfile" => 'ekspordi andmed .csv faili',
 "forward.toxmlfile" => 'ekspordi andmed .xml faili',
 "forward.geninvoice" => 'loo arve',
-"forward.change" => 'konfigureeri kliendid',
 
 "controls.select.client" => '--- vali klient ---',
 "controls.project_bind" => '--- kõik ---',

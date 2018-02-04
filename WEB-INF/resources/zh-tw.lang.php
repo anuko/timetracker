@@ -383,7 +383,8 @@ $i18n_key_words = array(
 // 'form.reports.set_period' => 'or set dates',
 // 'form.reports.show_fields' => 'Show fields',
 // 'form.reports.group_by' => 'Group by',
-// 'form.reports.group_by_no' => '--- no grouping ---',
+'form.reports.group_by_no' => '--- 沒有分組 ---',
+// TODO: translate the following.
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
@@ -562,12 +563,9 @@ $i18n_key_words = array(
 
 // miscellaneous strings
 "forward.forgot_password" => '忘記密碼？',
-"forward.edit" => '編輯',
-"forward.delete" => '刪除',
 "forward.tocsvfile" => '將資料輸出到.csv文件',
 "forward.toxmlfile" => '將資料輸出到.xml文件',
 "forward.geninvoice" => '生成發票',
-"forward.change" => '客戶設置',
 
 "controls.select.client" => '--- 選擇客戶 ---',
 "controls.project_bind" => '--- 全部 ---',
@@ -581,7 +579,6 @@ $i18n_key_words = array(
 "controls.per_at" => '全部時間',
 "controls.per_ty" => '今年',
 "controls.sel_period" => '--- 選擇時間段 ---',
-"controls.sel_groupby" => '--- 沒有分組 ---',
 "controls.inc_billable" => '計費時間',
 "controls.inc_nbillable" => '非計費時間',
 "controls.default" => '--- 默認 ---',

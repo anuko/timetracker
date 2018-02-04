@@ -126,7 +126,7 @@ $i18n_key_words = array(
 'button.export' => 'Exportovať tím',
 'button.import' => 'Importovať tím',
 'button.close' => 'Zatvoriť',
-// TODO: translate the following. 
+// TODO: translate the following.
 // 'button.stop' => 'Stop',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.

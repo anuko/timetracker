@@ -390,7 +390,8 @@ $i18n_key_words = array(
 // 'form.reports.set_period' => 'or set dates',
 // 'form.reports.show_fields' => 'Show fields',
 // 'form.reports.group_by' => 'Group by',
-// 'form.reports.group_by_no' => '--- no grouping ---',
+'form.reports.group_by_no' => '--- 그룹화되지 않음 ---',
+// TODO: translate the following.
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
@@ -563,12 +564,9 @@ $i18n_key_words = array(
 
 // miscellaneous strings
 "forward.forgot_password" => '암호를 잊으셨습니까?',
-"forward.edit" => '편집',
-"forward.delete" => '삭제',
 "forward.tocsvfile" => '데이터를 .csv 파일로 익스포트',
 "forward.toxmlfile" => '데이터를 .xml 파일로 익스포트',
 "forward.geninvoice" => '송장 만들기',
-"forward.change" => '클라이언트 구성',
 
 "controls.select.client" => '--- 클라이언트 선택 ---',
 "controls.project_bind" => '--- 전부 ---',
@@ -582,7 +580,6 @@ $i18n_key_words = array(
 "controls.per_at" => '전시간',
 "controls.per_ty" => '올해',
 "controls.sel_period" => '--- 시간 기간을 선택 ---',
-"controls.sel_groupby" => '--- 그룹화되지 않음 ---',
 "controls.inc_billable" => '청구 가능한',
 "controls.inc_nbillable" => '청구 가능하지 않은',
 "controls.default" => '--- 디폴트 ---',

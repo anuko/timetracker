@@ -389,7 +389,8 @@ $i18n_key_words = array(
 // 'form.reports.set_period' => 'or set dates',
 // 'form.reports.show_fields' => 'Show fields',
 // 'form.reports.group_by' => 'Group by',
-// 'form.reports.group_by_no' => '--- no grouping ---',
+'form.reports.group_by_no' => '--- csoportosítás nélkül ---',
+// TODO: translate the following.
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
@@ -538,13 +539,8 @@ $i18n_key_words = array(
 
 // miscellaneous strings
 "forward.forgot_password" => 'elfelejtetted a jelszót?',
-"forward.edit" => 'szerkesztés',
-"forward.delete" => 'törlés',
 "forward.tocsvfile" => 'az adatok exportálása CSV file-ba',
-// Note to translators: the string below is missing and must be added and translated 
-// "forward.toxmlfile" => 'export data to .xml file',
 "forward.geninvoice" => 'számla készítés',
-"forward.change" => 'ügyfelek adatainak beállítása',
 
 "controls.select.client" => '--- válassz ügyfelet ---',
 "controls.project_bind" => '--- összes ---',
@@ -555,7 +551,6 @@ $i18n_key_words = array(
 "controls.per_tw" => 'ezen a héten',
 "controls.per_lw" => 'múlt héten',
 "controls.sel_period" => '--- válassz időszakot ---',
-"controls.sel_groupby" => '--- csoportosítás nélkül ---',
 
 // labels
 "label.sel_tp" => 'jelölj meg egy időszakot',

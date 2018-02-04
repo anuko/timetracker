@@ -559,12 +559,9 @@ $i18n_key_words = array(
 
 // miscellaneous strings
 "forward.forgot_password" => 'parolanızı unuttunuz mu?',
-"forward.edit" => 'düzenle',
-"forward.delete" => 'sil',
 "forward.tocsvfile" => 'bilgileri .csv dosyasına aktar',
 "forward.toxmlfile" => 'bilgileri .xml dosyasına aktar',
 "forward.geninvoice" => 'fatura yarat',
-"forward.change" => 'müşterileri düzenle',
 
 "controls.select.client" => '--- müşteri seç ---',
 "controls.project_bind" => '--- tümü ---',
