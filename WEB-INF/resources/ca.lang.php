@@ -82,7 +82,7 @@ $i18n_key_words = array(
 'error.not_equal' => 'L\\\'Arxiu "{0}" no és igual al arxiu "{1}".',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-'error.project' => 'Selleccionar projecte.', // TODO: Selleccionar or Sel·leccionar? Is this correct?
+'error.project' => 'Sel·leccionar projecte.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
 'error.client' => 'Sel·leccionar client.',
@@ -532,7 +532,6 @@ $i18n_key_words = array(
 "forward.geninvoice" => 'Generar factura',
 "forward.change" => 'Configurar clients',
 
-"controls.select.client" => '--- Sel·leccionar client ---',
 "controls.project_bind" => '--- Tots ---',
 "controls.all" => '--- Tots ---',
 "controls.notbind" => '--- No ---',
