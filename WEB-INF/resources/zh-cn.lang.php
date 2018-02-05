@@ -332,8 +332,8 @@ $i18n_key_words = array(
 // 'dropdown.not_paid' => 'not paid',
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
+'form.login.forgot_password' => '忘记密码？',
 // TODO: translate the following.
-// 'form.login.forgot_password' => 'Forgot password?',
 // 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
@@ -563,7 +563,6 @@ $i18n_key_words = array(
 "form.client.comment" => '备注',
 
 // miscellaneous strings
-"forward.forgot_password" => '忘记密码？',
 "forward.tocsvfile" => '将数据导出到.csv文件',
 "forward.toxmlfile" => '将数据导出到.xml文件',
 "forward.geninvoice" => '生成发票',

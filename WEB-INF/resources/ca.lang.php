@@ -350,8 +350,8 @@ $i18n_key_words = array(
 // 'dropdown.not_paid' => 'not paid',
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
+'form.login.forgot_password' => '¿Ha oblidat la seva paraula de pas?',
 // TODO: translate the following.
-// 'form.login.forgot_password' => 'Forgot password?',
 // 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
@@ -525,7 +525,6 @@ $i18n_key_words = array(
 "form.migration.export.text" => 'Vosté pot exportar totes les dades del grup dins d\\\'un archivo xml. Això pot ser útil si necessita migrar dades al seu propi servidor.',
 
 // miscellaneous strings
-"forward.forgot_password" => '¿Ha oblidat la seva paraula de pas?',
 "forward.tocsvfile" => 'Exportar dades a un arxiu .csv',
 
 "controls.project_bind" => '--- Tots ---',

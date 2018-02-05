@@ -337,8 +337,8 @@ $i18n_key_words = array(
 // 'dropdown.not_paid' => 'not paid',
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
+'form.login.forgot_password' => 'Esqueceu a senha?',
 // TODO: translate the following.
-// 'form.login.forgot_password' => 'Forgot password?',
 // 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
@@ -474,9 +474,6 @@ $i18n_key_words = array(
 // Note to translators: the strings below must be translated
 // "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 // "form.mail.sending_str" => '<b>the message has been sent</b>',
-
-// miscellaneous strings
-"forward.forgot_password" => 'esqueceu a senha?',
 
 "controls.per_tm" => 'este mês',
 "controls.per_lm" => 'último mês',
