@@ -207,7 +207,8 @@ $i18n_key_words = array(
 'label.comment' => 'Kommentar',
 // TODO: translate the following.
 // 'label.status' => 'Status',
-// 'label.tax' => 'Tax',
+'label.tax' => 'MVA',
+// TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
 // 'label.total' => 'Total',
 // 'label.client_name' => 'Client name',
@@ -534,7 +535,6 @@ $i18n_key_words = array(
 // "form.invoice.fillform" => 'fyll inn i feltene',
 "form.invoice.date" => 'dato',
 "form.invoice.number" => 'fakturanummer',
-"form.invoice.tax" => 'MVA',
 "form.invoice.th.username" => 'person',
 "form.invoice.th.time" => 'timer',
 "form.invoice.th.rate" => 'sats',
@@ -561,7 +561,6 @@ $i18n_key_words = array(
 // "form.client.add_title" => 'legg til klient',
 // "form.client.edit_title" => 'endre klient',
 // "form.client.del_title" => 'slett klient',
-// "form.client.tax" => 'avgift',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'eksporter data til en .csv fil',

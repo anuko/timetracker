@@ -209,7 +209,8 @@ $i18n_key_words = array(
 'label.comment' => '코멘트',
 // TODO: translate the following.
 // 'label.status' => 'Status',
-// 'label.tax' => 'Tax',
+'label.tax' => '세금',
+// TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
 'label.total' => '합계',
 // TODO: translate the following.
@@ -530,7 +531,6 @@ $i18n_key_words = array(
 "form.invoice.fillform" => '필드들을 채우십시오',
 "form.invoice.date" => '날짜',
 "form.invoice.number" => '송장 번호',
-"form.invoice.tax" => '세금',
 "form.invoice.th.username" => '개인',
 "form.invoice.th.time" => '시간',
 "form.invoice.th.rate" => '급여',
@@ -556,7 +556,6 @@ $i18n_key_words = array(
 "form.client.add_title" => '클라이언트 추가',
 "form.client.edit_title" => '클라이언트 편집',
 "form.client.del_title" => '클라이언트 삭제',
-"form.client.tax" => '세금',
 
 // miscellaneous strings
 "forward.tocsvfile" => '데이터를 .csv 파일로 익스포트',

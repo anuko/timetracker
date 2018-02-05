@@ -216,7 +216,8 @@ $i18n_key_words = array(
 'label.comment' => 'Yorum',
 // TODO: translate the following.
 // 'label.status' => 'Status',
-// 'label.tax' => 'Tax',
+'label.tax' => 'Vergi',
+// TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
 'label.total' => 'Toplam',
 // TODO: translate the following.
@@ -528,7 +529,6 @@ $i18n_key_words = array(
 "form.invoice.fillform" => 'alanları doldur',
 "form.invoice.date" => 'tarih',
 "form.invoice.number" => 'fatura numarası',
-"form.invoice.tax" => 'vergi',
 "form.invoice.th.username" => 'kişi',
 "form.invoice.th.time" => 'saatler',
 "form.invoice.th.rate" => 'tarife',
@@ -551,7 +551,6 @@ $i18n_key_words = array(
 "form.client.add_title" => 'müşteri ekle',
 "form.client.edit_title" => 'müşteriyi düzenle',
 "form.client.del_title" => 'müşteriyi sil',
-"form.client.tax" => 'vergi',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'bilgileri .csv dosyasına aktar',

@@ -196,7 +196,8 @@ $i18n_key_words = array(
 'label.comment' => '留言',
 // TODO: translate the following.
 // 'label.status' => 'Status',
-// 'label.tax' => 'Tax',
+'label.tax' => '税',
+// TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
 'label.total' => '总计',
 // TODO: translate the following.
@@ -529,7 +530,6 @@ $i18n_key_words = array(
 "form.invoice.fillform" => '填写该栏目',
 "form.invoice.date" => '日期',
 "form.invoice.number" => '发票号码',
-"form.invoice.tax" => '税',
 "form.invoice.th.username" => '收费人',
 "form.invoice.th.time" => '小时数',
 "form.invoice.th.rate" => '费率',
@@ -555,7 +555,6 @@ $i18n_key_words = array(
 "form.client.add_title" => '添加客户',
 "form.client.edit_title" => '编辑客户',
 "form.client.del_title" => '删除客户',
-"form.client.tax" => '税',
 
 // miscellaneous strings
 "forward.tocsvfile" => '将数据导出到.csv文件',

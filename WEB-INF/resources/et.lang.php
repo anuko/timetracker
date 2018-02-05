@@ -209,7 +209,8 @@ $i18n_key_words = array(
 'label.comment' => 'Kommentaar',
 // TODO: translate the following.
 // 'label.status' => 'Status',
-// 'label.tax' => 'Tax',
+'label.tax' => 'Maks',
+// TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
 'label.total' => 'Kokku',
 // TODO: translate the following.
@@ -535,8 +536,6 @@ $i18n_key_words = array(
 "form.invoice.fillform" => 'täida väljad',
 "form.invoice.date" => 'kuupäev',
 "form.invoice.number" => 'arve number',
-"form.invoice.tax" => 'maks',
-"form.invoice.comment" => 'kommentaar ',
 "form.invoice.th.username" => 'isik',
 "form.invoice.th.time" => 'tunde',
 "form.invoice.th.rate" => 'hind',
@@ -563,8 +562,6 @@ $i18n_key_words = array(
 "form.client.add_title" => 'lisa klient',
 "form.client.edit_title" => 'muuda klienti',
 "form.client.del_title" => 'kustuta klient',
-"form.client.tax" => 'maks',
-"form.client.comment" => 'märkus ',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'ekspordi andmed .csv faili',

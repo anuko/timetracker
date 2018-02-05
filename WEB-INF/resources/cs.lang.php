@@ -212,7 +212,8 @@ $i18n_key_words = array(
 'label.comment' => 'Komentář',
 // TODO: translate the following.
 // 'label.status' => 'Status',
-// 'label.tax' => 'Tax',
+'label.tax' => 'DPH',
+// TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
 'label.total' => 'Celkem',
 // TODO: translate the following.
@@ -526,7 +527,6 @@ $i18n_key_words = array(
 "form.invoice.fillform" => 'vyplňte pole',
 "form.invoice.date" => 'datum',
 "form.invoice.number" => 'faktura číslo',
-"form.invoice.tax" => 'DPH',
 "form.invoice.th.username" => 'osoba',
 "form.invoice.th.time" => 'hodin',
 "form.invoice.th.rate" => 'sazba',
@@ -553,7 +553,6 @@ $i18n_key_words = array(
 "form.client.add_title" => 'přidat zákazníka',
 "form.client.edit_title" => 'upravit zákazníka',
 "form.client.del_title" => 'smazat zákazníka',
-"form.client.tax" => 'DPH',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'exportovat data do .csv souboru',

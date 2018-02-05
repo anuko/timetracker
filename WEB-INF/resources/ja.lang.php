@@ -209,7 +209,8 @@ $i18n_key_words = array(
 'label.comment' => 'コメント',
 // TODO: translate the following.
 // 'label.status' => 'Status',
-// 'label.tax' => 'Tax',
+'label.tax' => '税',
+// TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
 'label.total' => '合計',
 // TODO: translate the following.
@@ -535,7 +536,6 @@ $i18n_key_words = array(
 "form.invoice.fillform" => 'フィールドの作成',
 "form.invoice.date" => '日付',
 "form.invoice.number" => '送り状の番号',
-"form.invoice.tax" => '税',
 "form.invoice.th.username" => '個人',
 "form.invoice.th.time" => '時間',
 "form.invoice.th.rate" => '給料',
@@ -561,7 +561,6 @@ $i18n_key_words = array(
 "form.client.add_title" => 'クライアントの追加',
 "form.client.edit_title" => 'クライアントの編集',
 "form.client.del_title" => 'クライアントの削除',
-"form.client.tax" => '税',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'csvファイルにエクスポート',

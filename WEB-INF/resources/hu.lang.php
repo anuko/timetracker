@@ -209,7 +209,8 @@ $i18n_key_words = array(
 'label.comment' => 'Megjegyzés',
 // TODO: translate the following.
 // 'label.status' => 'Status',
-// 'label.tax' => 'Tax',
+'label.tax' => 'Adó',
+// TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
 'label.total' => 'Összesen',
 // TODO: translate the following.
@@ -509,7 +510,6 @@ $i18n_key_words = array(
 "form.invoice.fillform" => 'töltsd ki a mezőket',
 "form.invoice.date" => 'Dátum',
 "form.invoice.number" => 'számla azonosító száma',
-"form.invoice.tax" => 'adó',
 "form.invoice.th.username" => 'személy',
 "form.invoice.th.time" => 'óra',
 "form.invoice.th.rate" => 'tarifa',
@@ -532,7 +532,6 @@ $i18n_key_words = array(
 "form.client.add_title" => 'új ügyfél hozzáadása',
 "form.client.edit_title" => 'ügyfél adatainak szerkesztése',
 "form.client.del_title" => 'ügyfél törlése',
-"form.client.tax" => 'adó',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'az adatok exportálása CSV file-ba',

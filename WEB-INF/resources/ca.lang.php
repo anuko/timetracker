@@ -500,7 +500,6 @@ $i18n_key_words = array(
 "form.invoice.fillform" => 'Empleni els camps',
 "form.invoice.date" => 'Data',
 "form.invoice.number" => 'Número de factura',
-"form.invoice.tax" => 'Impost',
 "form.invoice.th.username" => 'Persona',
 "form.invoice.th.time" => 'Hores',
 "form.invoice.th.rate" => 'Taxa',

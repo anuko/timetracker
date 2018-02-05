@@ -209,7 +209,8 @@ $i18n_key_words = array(
 'label.comment' => 'Comentariu',
 // TODO: translate the following.
 // 'label.status' => 'Status',
-// 'label.tax' => 'Tax',
+'label.tax' => 'Taxa',
+// TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
 'label.total' => 'Total',
 // TODO: translate the following.
@@ -515,7 +516,6 @@ $i18n_key_words = array(
 "form.invoice.fillform" => 'comleteaza campurile',
 "form.invoice.date" => 'data',
 "form.invoice.number" => 'numar factura',
-"form.invoice.tax" => 'taxa',
 "form.invoice.th.username" => 'persoana',
 "form.invoice.th.time" => 'ore',
 "form.invoice.th.rate" => 'rata',
@@ -542,7 +542,6 @@ $i18n_key_words = array(
 "form.client.add_title" => 'adauga client',
 "form.client.edit_title" => 'editeaza client',
 "form.client.del_title" => 'sterge client',
-"form.client.tax" => 'taxa',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'exporta date in fisier .csv',
