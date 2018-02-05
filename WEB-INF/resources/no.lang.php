@@ -381,9 +381,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
-// 'form.reports.select_period' => 'Select time period',
-// 'form.reports.set_period' => 'or set dates',
-// 'form.reports.show_fields' => 'Show fields',
+'form.reports.select_period' => 'Velg tidsperiode',
+'form.reports.set_period' => 'eller sett dato',
+'form.reports.show_fields' => 'Vis feltene',
 // 'form.reports.group_by' => 'Group by',
 // 'form.reports.group_by_no' => '--- no grouping ---',
 // 'form.reports.group_by_date' => 'date',
@@ -589,13 +589,7 @@ $i18n_key_words = array(
 // "controls.per_td" => 'i dag',
 // "controls.per_at" => 'all tid',
 // "controls.per_ty" => 'dette årr',
-"controls.sel_period" => '--- velg tidsperiode ---',
 
-// labels
-"label.sel_tp" => 'velg tidsperiode',
-"label.set_tp" => 'eller sett dato',
-"label.fields" => 'vis feltene',
-"label.group_title" => 'sorter på',
 "label.inv_str" => 'faktura',
 "label.set_empl" => 'velg brukere',
 // Note to translators: the strings below are missing and must be translated and added

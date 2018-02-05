@@ -381,10 +381,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
-// 'form.reports.select_period' => 'Select time period',
-// 'form.reports.set_period' => 'or set dates',
-// 'form.reports.show_fields' => 'Show fields',
-// 'form.reports.group_by' => 'Group by',
+'form.reports.select_period' => '選擇時間段',
+'form.reports.set_period' => '或設定日期',
+'form.reports.show_fields' => '顯示欄目',
+'form.reports.group_by' => '分組方式',
 'form.reports.group_by_no' => '--- 沒有分組 ---',
 // TODO: translate the following.
 // 'form.reports.group_by_date' => 'date',
@@ -579,12 +579,6 @@ $i18n_key_words = array(
 "controls.per_td" => '今天',
 "controls.per_at" => '全部時間',
 "controls.per_ty" => '今年',
-"controls.sel_period" => '--- 選擇時間段 ---',
-
-"label.sel_tp" => '選擇時間段',
-"label.set_tp" => '或設定日期',
-"label.fields" => '顯示欄目',
-"label.group_title" => '分組方式：',
 
 "label.inv_str" => '發票',
 "label.set_empl" => '選擇用戶',

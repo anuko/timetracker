@@ -388,10 +388,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
-// 'form.reports.select_period' => 'Select time period',
-// 'form.reports.set_period' => 'or set dates',
-// 'form.reports.show_fields' => 'Show fields',
-// 'form.reports.group_by' => 'Group by',
+'form.reports.select_period' => '시간 기간을 선택',
+'form.reports.set_period' => '혹은 날짜를 설정',
+'form.reports.show_fields' => '필드들을 보기',
+'form.reports.group_by' => '다음것에 의한 그룹화',
 'form.reports.group_by_no' => '--- 그룹화되지 않음 ---',
 // TODO: translate the following.
 // 'form.reports.group_by_date' => 'date',
@@ -580,12 +580,6 @@ $i18n_key_words = array(
 "controls.per_td" => '오늘',
 "controls.per_at" => '전시간',
 "controls.per_ty" => '올해',
-"controls.sel_period" => '--- 시간 기간을 선택 ---',
-
-"label.sel_tp" => '시간 기간을 선택',
-"label.set_tp" => '혹은 날짜를 설정',
-"label.fields" => '필드들을 보기',
-"label.group_title" => '다음것에 의한 그룹화',
 
 "label.inv_str" => '송장',
 "label.set_empl" => '사용자들을 선택',

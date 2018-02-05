@@ -384,10 +384,10 @@ $i18n_key_words = array(
 // 'form.reports.include_not_billable' => 'not billable',
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
-// 'form.reports.select_period' => 'Select time period',
-// 'form.reports.set_period' => 'or set dates',
-// 'form.reports.show_fields' => 'Show fields',
-// 'form.reports.group_by' => 'Group by',
+'form.reports.select_period' => 'Alege perioada',
+'form.reports.set_period' => 'sau introdu intervalul de date',
+'form.reports.show_fields' => 'Arata campuri',
+'form.reports.group_by' => 'Grupat dupa',
 'form.reports.group_by_no' => '--- fara grupare ---',
 // TODO: translate the following.
 // 'form.reports.group_by_date' => 'date',
@@ -563,13 +563,7 @@ $i18n_key_words = array(
 "controls.per_lm" => 'luna trecuta',
 "controls.per_tw" => 'saptamana curenta',
 "controls.per_lw" => 'saptamana trecuta',
-"controls.sel_period" => '--- alege perioada ---',
 
-// labels
-"label.sel_tp" => 'alege perioada',
-"label.set_tp" => 'sau introdu intervalul de date',
-"label.fields" => 'arata campuri',
-"label.group_title" => 'grupat dupa',
 "label.inv_str" => 'factura',
 "label.set_empl" => 'alege utilizatori',
 "label.sel_all" => 'selecteaza   tot',

@@ -392,10 +392,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
-// 'form.reports.select_period' => 'Select time period',
-// 'form.reports.set_period' => 'or set dates',
-// 'form.reports.show_fields' => 'Show fields',
-// 'form.reports.group_by' => 'Group by',
+'form.reports.select_period' => 'Výberte období',
+'form.reports.set_period' => 'nebo určete dny',
+'form.reports.show_fields' => 'Zobrazit pole',
+'form.reports.group_by' => 'Seskupit podle',
+// TODO: translate the following.
 // 'form.reports.group_by_no' => '--- no grouping ---',
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
@@ -577,8 +578,6 @@ $i18n_key_words = array(
 "controls.per_at" => 'od počátku',
 "controls.per_ty" => 'letos',
 
-"label.sel_tp" => 'výberte období',
-"label.set_tp" => 'nebo určete dny',
 "label.fields" => 'zobrazit pole',
 "label.group_title" => 'seskupit podle',
 "label.inv_str" => 'faktura',

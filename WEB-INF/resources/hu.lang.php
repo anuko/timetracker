@@ -386,10 +386,11 @@ $i18n_key_words = array(
 // 'form.reports.include_not_billable' => 'not billable',
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
-// 'form.reports.select_period' => 'Select time period',
-// 'form.reports.set_period' => 'or set dates',
+'form.reports.select_period' => 'Jelölj meg egy időszakot',
+'form.reports.set_period' => 'vagy állíts be konkrét dátumot',
+// TODO: translate the following.
 // 'form.reports.show_fields' => 'Show fields',
-// 'form.reports.group_by' => 'Group by',
+'form.reports.group_by' => 'Csoportosítva',
 'form.reports.group_by_no' => '--- csoportosítás nélkül ---',
 // TODO: translate the following.
 // 'form.reports.group_by_date' => 'date',
@@ -551,13 +552,8 @@ $i18n_key_words = array(
 "controls.per_lm" => 'múlt hónapban',
 "controls.per_tw" => 'ezen a héten',
 "controls.per_lw" => 'múlt héten',
-"controls.sel_period" => '--- válassz időszakot ---',
 
 // labels
-"label.sel_tp" => 'jelölj meg egy időszakot',
-"label.set_tp" => '... vagy állíts be konkrét dátumot',
-"label.fields" => 'csak a kijelölt mezők fognak szerepelni a riportban',
-"label.group_title" => 'csoportosítva',
 "label.inv_str" => 'számla',
 "label.set_empl" => 'válassz dolgozót',
 "label.sel_all" => 'mindenkit kijelöl',

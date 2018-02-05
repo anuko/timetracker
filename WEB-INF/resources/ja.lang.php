@@ -390,10 +390,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
-// 'form.reports.select_period' => 'Select time period',
-// 'form.reports.set_period' => 'or set dates',
-// 'form.reports.show_fields' => 'Show fields',
-// 'form.reports.group_by' => 'Group by',
+'form.reports.select_period' => '時間期間の選択',
+'form.reports.set_period' => 'あるいは日付を設定',
+'form.reports.show_fields' => 'フィールドの表示',
+'form.reports.group_by' => '次のようにグループ化',
 'form.reports.group_by_no' => '--- グループの機能がありません ---',
 // TODO: translate the following.
 // 'form.reports.group_by_date' => 'date',
@@ -585,12 +585,6 @@ $i18n_key_words = array(
 "controls.per_td" => '今日',
 "controls.per_at" => 'すべての時間',
 "controls.per_ty" => '今年',
-"controls.sel_period" => '--- 時間期間の選択 ---',
-
-"label.sel_tp" => '時間期間の選択',
-"label.set_tp" => 'あるいは日付を設定',
-"label.fields" => 'フィールドの表示',
-"label.group_title" => '次のようにグループ化',
 
 "label.inv_str" => '送り状',
 "label.set_empl" => 'ユーザーの選択',

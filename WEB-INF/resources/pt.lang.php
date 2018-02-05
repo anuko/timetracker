@@ -375,9 +375,9 @@ $i18n_key_words = array(
 // 'form.reports.include_not_billable' => 'not billable',
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
-// 'form.reports.select_period' => 'Select time period',
-// 'form.reports.set_period' => 'or set dates',
-// 'form.reports.show_fields' => 'Show fields',
+'form.reports.select_period' => 'Selecione o período de tempo',
+'form.reports.set_period' => 'ou selecionar datas',
+'form.reports.show_fields' => 'Exibir campos',
 // 'form.reports.group_by' => 'Group by',
 // 'form.reports.group_by_no' => '--- no grouping ---',
 // 'form.reports.group_by_date' => 'date',
@@ -482,10 +482,4 @@ $i18n_key_words = array(
 "controls.per_lm" => 'último mês',
 "controls.per_tw" => 'esta semana',
 "controls.per_lw" => 'última semana',
-"controls.sel_period" => '--- selecione o período de tempo ---',
-
-// labels
-"label.sel_tp" => 'selecione o período de tempo',
-"label.set_tp" => 'ou selecionar datas',
-"label.fields" => 'exibir campos',
 );
