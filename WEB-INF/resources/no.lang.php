@@ -204,7 +204,8 @@ $i18n_key_words = array(
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
-// 'label.comment' => 'Comment',
+'label.comment' => 'Kommentar',
+// TODO: translate the following.
 // 'label.status' => 'Status',
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
@@ -519,7 +520,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'fra',
 "form.mail.to" => 'til',
-"form.mail.comment" => 'kommentar',
 "form.mail.above" => 'send denne rapporten som e-post',
 // Note to translators: the strings below must be translated
 // "form.mail.footer_str" => 'Anuko Time Tracker is et enkelt, brukervennlig tidsregistreringssystem<br>basert på åpen kildekode. Besøk <a href="https://www.anuko.com">www.anuko.com</a> for flere opplysninger.',
@@ -535,7 +535,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'dato',
 "form.invoice.number" => 'fakturanummer',
 "form.invoice.tax" => 'MVA',
-"form.invoice.comment" => 'notat',
 "form.invoice.th.username" => 'person',
 "form.invoice.th.time" => 'timer',
 "form.invoice.th.rate" => 'sats',
@@ -563,7 +562,6 @@ $i18n_key_words = array(
 // "form.client.edit_title" => 'endre klient',
 // "form.client.del_title" => 'slett klient',
 // "form.client.tax" => 'avgift',
-// "form.client.comment" => 'kommentar ',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'eksporter data til en .csv fil',

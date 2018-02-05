@@ -489,7 +489,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'De',
 "form.mail.to" => 'Per a',
-"form.mail.comment" => 'Comentari',
 "form.mail.above" => 'Enviar aquest report por e-mail',
 // Note to translators: this string needs to be translated.
 // "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
@@ -502,7 +501,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'Data',
 "form.invoice.number" => 'Número de factura',
 "form.invoice.tax" => 'Impost',
-"form.invoice.comment" => 'Comentari ',
 "form.invoice.th.username" => 'Persona',
 "form.invoice.th.time" => 'Hores',
 "form.invoice.th.rate" => 'Taxa',

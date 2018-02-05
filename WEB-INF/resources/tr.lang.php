@@ -213,7 +213,8 @@ $i18n_key_words = array(
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
-// 'label.comment' => 'Comment',
+'label.comment' => 'Yorum',
+// TODO: translate the following.
 // 'label.status' => 'Status',
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
@@ -514,7 +515,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'kimden',
 "form.mail.to" => 'kime',
-"form.mail.comment" => 'yorum',
 "form.mail.above" => 'bu raporu e-posta ile yolla',
 // Note to translators: this string needs to be translated.
 // "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
@@ -529,7 +529,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'tarih',
 "form.invoice.number" => 'fatura numarası',
 "form.invoice.tax" => 'vergi',
-"form.invoice.comment" => 'yorum ',
 "form.invoice.th.username" => 'kişi',
 "form.invoice.th.time" => 'saatler',
 "form.invoice.th.rate" => 'tarife',
@@ -553,7 +552,6 @@ $i18n_key_words = array(
 "form.client.edit_title" => 'müşteriyi düzenle',
 "form.client.del_title" => 'müşteriyi sil',
 "form.client.tax" => 'vergi',
-"form.client.comment" => 'yorum ',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'bilgileri .csv dosyasına aktar',

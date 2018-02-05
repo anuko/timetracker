@@ -197,7 +197,8 @@ $i18n_key_words = array(
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
-// 'label.comment' => 'Comment',
+'label.comment' => 'Comentário',
+// TODO: translate the following.
 // 'label.status' => 'Status',
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
@@ -461,7 +462,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'de',
 "form.mail.to" => 'para',
-"form.mail.comment" => 'comentário',
 "form.mail.above" => 'enviar este relatório por e-mail',
 // Note to translators: the strings below must be translated
 // "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',

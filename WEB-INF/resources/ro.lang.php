@@ -206,7 +206,8 @@ $i18n_key_words = array(
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
-// 'label.comment' => 'Comment',
+'label.comment' => 'Comentariu',
+// TODO: translate the following.
 // 'label.status' => 'Status',
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
@@ -501,7 +502,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'de la',
 "form.mail.to" => 'catre',
-"form.mail.comment" => 'comentariu',
 "form.mail.above" => 'trimite acest raport pe e-mail',
 // Note to translators: this string needs to be translated.
 // "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
@@ -516,7 +516,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'data',
 "form.invoice.number" => 'numar factura',
 "form.invoice.tax" => 'taxa',
-"form.invoice.comment" => 'comentariu ',
 "form.invoice.th.username" => 'persoana',
 "form.invoice.th.time" => 'ore',
 "form.invoice.th.rate" => 'rata',
@@ -544,7 +543,6 @@ $i18n_key_words = array(
 "form.client.edit_title" => 'editeaza client',
 "form.client.del_title" => 'sterge client',
 "form.client.tax" => 'taxa',
-"form.client.comment" => 'comentariu ',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'exporta date in fisier .csv',

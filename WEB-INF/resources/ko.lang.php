@@ -206,7 +206,8 @@ $i18n_key_words = array(
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
-// 'label.comment' => 'Comment',
+'label.comment' => '코멘트',
+// TODO: translate the following.
 // 'label.status' => 'Status',
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
@@ -516,7 +517,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => '부터',
 "form.mail.to" => '까지',
-"form.mail.comment" => '코멘트',
 "form.mail.above" => '이 보고서를 이메일로 송신',
 // Note to translators: this string needs to be translated.
 // "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
@@ -531,7 +531,6 @@ $i18n_key_words = array(
 "form.invoice.date" => '날짜',
 "form.invoice.number" => '송장 번호',
 "form.invoice.tax" => '세금',
-"form.invoice.comment" => '코멘트 ',
 "form.invoice.th.username" => '개인',
 "form.invoice.th.time" => '시간',
 "form.invoice.th.rate" => '급여',
@@ -558,7 +557,6 @@ $i18n_key_words = array(
 "form.client.edit_title" => '클라이언트 편집',
 "form.client.del_title" => '클라이언트 삭제',
 "form.client.tax" => '세금',
-"form.client.comment" => '코멘트 ',
 
 // miscellaneous strings
 "forward.tocsvfile" => '데이터를 .csv 파일로 익스포트',

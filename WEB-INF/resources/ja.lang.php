@@ -206,7 +206,8 @@ $i18n_key_words = array(
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
-// 'label.comment' => 'Comment',
+'label.comment' => 'コメント',
+// TODO: translate the following.
 // 'label.status' => 'Status',
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
@@ -521,7 +522,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'から',
 "form.mail.to" => 'まで',
-"form.mail.comment" => 'コメント',
 "form.mail.above" => 'このレポートをEメールで送信',
 // Note to translators: this string needs to be translated.
 // "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
@@ -536,7 +536,6 @@ $i18n_key_words = array(
 "form.invoice.date" => '日付',
 "form.invoice.number" => '送り状の番号',
 "form.invoice.tax" => '税',
-"form.invoice.comment" => 'コメント ',
 "form.invoice.th.username" => '個人',
 "form.invoice.th.time" => '時間',
 "form.invoice.th.rate" => '給料',
@@ -563,7 +562,6 @@ $i18n_key_words = array(
 "form.client.edit_title" => 'クライアントの編集',
 "form.client.del_title" => 'クライアントの削除',
 "form.client.tax" => '税',
-"form.client.comment" => 'コメント ',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'csvファイルにエクスポート',

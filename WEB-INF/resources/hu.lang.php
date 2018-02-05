@@ -206,7 +206,8 @@ $i18n_key_words = array(
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
-// 'label.comment' => 'Comment',
+'label.comment' => 'Megjegyzés',
+// TODO: translate the following.
 // 'label.status' => 'Status',
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
@@ -495,7 +496,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => 'feladó',
 "form.mail.to" => 'címzett',
-"form.mail.comment" => 'megjegyzés',
 "form.mail.above" => 'küldjük el ezt a riportot e-mail-ben...',
 // Note to translators: the string below must be translated
 // "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
@@ -510,7 +510,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'Dátum',
 "form.invoice.number" => 'számla azonosító száma',
 "form.invoice.tax" => 'adó',
-"form.invoice.comment" => 'megjegyzés ',
 "form.invoice.th.username" => 'személy',
 "form.invoice.th.time" => 'óra',
 "form.invoice.th.rate" => 'tarifa',
@@ -534,7 +533,6 @@ $i18n_key_words = array(
 "form.client.edit_title" => 'ügyfél adatainak szerkesztése',
 "form.client.del_title" => 'ügyfél törlése',
 "form.client.tax" => 'adó',
-"form.client.comment" => 'megjegyzés ',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'az adatok exportálása CSV file-ba',

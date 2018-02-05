@@ -193,7 +193,8 @@ $i18n_key_words = array(
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
-// 'label.comment' => 'Comment',
+'label.comment' => '留言',
+// TODO: translate the following.
 // 'label.status' => 'Status',
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
@@ -515,7 +516,6 @@ $i18n_key_words = array(
 // mail form attributes
 "form.mail.from" => '从',
 "form.mail.to" => '到',
-"form.mail.comment" => '留言',
 "form.mail.above" => '通过电子邮件发送该报告',
 // Note to translators: this string needs to be translated.
  "form.mail.footer_str" => 'anuko时间跟踪器是一种简单、易用、开放源码的时间跟踪系统。 看<a href ="https://www.anuko.com"> www.anuko网</a>更多信息。',
@@ -530,7 +530,6 @@ $i18n_key_words = array(
 "form.invoice.date" => '日期',
 "form.invoice.number" => '发票号码',
 "form.invoice.tax" => '税',
-"form.invoice.comment" => '留言',
 "form.invoice.th.username" => '收费人',
 "form.invoice.th.time" => '小时数',
 "form.invoice.th.rate" => '费率',
@@ -557,7 +556,6 @@ $i18n_key_words = array(
 "form.client.edit_title" => '编辑客户',
 "form.client.del_title" => '删除客户',
 "form.client.tax" => '税',
-"form.client.comment" => '备注',
 
 // miscellaneous strings
 "forward.tocsvfile" => '将数据导出到.csv文件',
