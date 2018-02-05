@@ -358,7 +358,8 @@ $i18n_key_words = array(
 // Time form. See example at https://timetracker.anuko.com/time.php.
 // TODO: translate the following.
 // 'form.time.duration_format' => '(hh:mm or 0.0h)',
-// 'form.time.billable' => 'Billable',
+'form.time.billable' => 'Fakturerbar',
+// TODO: translate the following.
 // 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
@@ -375,9 +376,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.save_as_favorite' => 'Save as favorite',
 'form.reports.confirm_delete' => 'Er du sikker på at du vil slette denne favorittrapporten?',
+'form.reports.include_billable' => 'fakturerbar',
+'form.reports.include_not_billable' => 'ikke fakturerbar',
 // TODO: translate the following.
-// 'form.reports.include_billable' => 'billable',
-// 'form.reports.include_not_billable' => 'not billable',
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
 // 'form.reports.select_period' => 'Select time period',
@@ -448,7 +449,6 @@ $i18n_key_words = array(
 // Note to translators: the strings below must be translated
 // "form.mytime.del_yes" => 'tidsoppføringen er slettet', 
 // "form.mytime.no_finished_rec" => 'Denne oppføringen ble lagret kun med starttid. Det er ikke en feil. Logg ut om nødvendig.',
-// "form.mytime.billable" => 'kan faktureres',
 // "form.mytime.warn_tozero_rec" => 'Denne oppføringen må slettes fordi tidsperioden er låst',
 // "form.mytime.uncompleted" => 'uferdig',
 
@@ -590,10 +590,6 @@ $i18n_key_words = array(
 // "controls.per_at" => 'all tid',
 // "controls.per_ty" => 'dette årr',
 "controls.sel_period" => '--- velg tidsperiode ---',
-// Note to translators: the strings below are missing and must be translated and added
-// "controls.inc_billable" => 'fakturerbar',
-// "controls.inc_nbillable" => 'ikke fakturerbar',
-// "controls.default" => '--- default ---',
 
 // labels
 "label.sel_tp" => 'velg tidsperiode',

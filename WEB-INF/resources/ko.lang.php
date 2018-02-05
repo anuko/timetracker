@@ -365,7 +365,8 @@ $i18n_key_words = array(
 // Time form. See example at https://timetracker.anuko.com/time.php.
 // TODO: translate the following.
 // 'form.time.duration_format' => '(hh:mm or 0.0h)',
-// 'form.time.billable' => 'Billable',
+'form.time.billable' => '청구가능',
+// TODO: translate the following.
 // 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
@@ -382,9 +383,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.save_as_favorite' => 'Save as favorite',
 'form.reports.confirm_delete' => '좋아하는 이 보고서를 삭제해도 좋습니까?',
+'form.reports.include_billable' => '청구 가능한',
+'form.reports.include_not_billable' => '청구 가능하지 않은',
 // TODO: translate the following.
-// 'form.reports.include_billable' => 'billable',
-// 'form.reports.include_not_billable' => 'not billable',
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
 // 'form.reports.select_period' => 'Select time period',
@@ -451,7 +452,6 @@ $i18n_key_words = array(
 "form.mytime.th.note" => '표식',
 "form.mytime.del_yes" => '성과적으로 삭제된 시간기록',
 "form.mytime.no_finished_rec" => '이 기록은 시작 시간으로만 저장되었습니다. 이것은 오류는 아닙니다. 필요하면 로그아웃 하십시오.',
-"form.mytime.billable" => '청구가능',
 "form.mytime.warn_tozero_rec" => '이 시간기간이 로크되었으므로 이 시간기록은 삭제되어야 합니다',
 "form.mytime.uncompleted" => '완성되지 않은',
 
@@ -581,9 +581,6 @@ $i18n_key_words = array(
 "controls.per_at" => '전시간',
 "controls.per_ty" => '올해',
 "controls.sel_period" => '--- 시간 기간을 선택 ---',
-"controls.inc_billable" => '청구 가능한',
-"controls.inc_nbillable" => '청구 가능하지 않은',
-"controls.default" => '--- 디폴트 ---',
 
 "label.sel_tp" => '시간 기간을 선택',
 "label.set_tp" => '혹은 날짜를 설정',

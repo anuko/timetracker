@@ -358,7 +358,8 @@ $i18n_key_words = array(
 // Time form. See example at https://timetracker.anuko.com/time.php.
 // TODO: translate the following.
 // 'form.time.duration_format' => '(hh:mm or 0.0h)',
-// 'form.time.billable' => 'Billable',
+'form.time.billable' => '計費時間',
+// TODO: translate the following.
 // 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
@@ -375,9 +376,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.save_as_favorite' => 'Save as favorite',
 'form.reports.confirm_delete' => '您確認要刪除收藏的這個報告嗎？',
+'form.reports.include_billable' => '計費時間',
+'form.reports.include_not_billable' => '非計費時間',
 // TODO: translate the following.
-// 'form.reports.include_billable' => 'billable',
-// 'form.reports.include_not_billable' => 'not billable',
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
 // 'form.reports.select_period' => 'Select time period',
@@ -444,7 +445,6 @@ $i18n_key_words = array(
 "form.mytime.th.note" => '備註',
 "form.mytime.del_yes" => '成功刪除時間記錄',
 "form.mytime.no_finished_rec" => '該記錄只保存了開始時間。這不是錯誤。如果需要，請登出。',
-"form.mytime.billable" => '計費時間',
 "form.mytime.warn_tozero_rec" => '由於這段時間是鎖定的，該時間記錄必須刪除',
 "form.mytime.uncompleted" => '未完成',
 
@@ -580,9 +580,6 @@ $i18n_key_words = array(
 "controls.per_at" => '全部時間',
 "controls.per_ty" => '今年',
 "controls.sel_period" => '--- 選擇時間段 ---',
-"controls.inc_billable" => '計費時間',
-"controls.inc_nbillable" => '非計費時間',
-"controls.default" => '--- 默認 ---',
 
 "label.sel_tp" => '選擇時間段',
 "label.set_tp" => '或設定日期',

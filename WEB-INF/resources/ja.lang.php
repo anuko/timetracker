@@ -586,7 +586,6 @@ $i18n_key_words = array(
 "controls.per_at" => 'すべての時間',
 "controls.per_ty" => '今年',
 "controls.sel_period" => '--- 時間期間の選択 ---',
-"controls.default" => '--- デフォルト ---',
 
 "label.sel_tp" => '時間期間の選択',
 "label.set_tp" => 'あるいは日付を設定',
