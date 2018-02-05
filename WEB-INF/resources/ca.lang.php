@@ -179,8 +179,9 @@ $i18n_key_words = array(
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
 // 'label.duration' => 'Duration',
-// 'label.note' => 'Note',
-// 'label.notes' => 'Notes',
+'label.note' => 'Nota',
+'label.notes' => 'Notes',
+// TODO: translate the following.
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
@@ -427,14 +428,12 @@ $i18n_key_words = array(
 "form.mytime.start" => 'Inici',
 "form.mytime.finish" => 'Fi',
 "form.mytime.duration" => 'Durada',
-"form.mytime.note" => 'Nota',
 "form.mytime.daily" => 'Treball diari',
 "form.mytime.total" => 'Hores totals: ',
 "form.mytime.th.project" => 'Projecte',
 "form.mytime.th.start" => 'Inici',
 "form.mytime.th.finish" => 'Fi',
 "form.mytime.th.duration" => 'Durada',
-"form.mytime.th.note" => 'Nota',
 "form.mytime.del_yes" => 'L\\\'historial de temps s\\\'ha eliminat amb èxit',
 "form.mytime.no_finished_rec" => 'Aquest historial s\\\'ha guardat únicament amb l\\\'hora d\\\'inici. Aixó no és un error. Finalitzi sessió si ho necessita.',
 
@@ -473,7 +472,6 @@ $i18n_key_words = array(
 "form.report.duration" => 'Durada',
 "form.report.start" => 'Inici',
 "form.report.finish" => 'Fi',
-"form.report.note" => 'Nota',
 "form.report.project" => 'Projecte',
 "form.report.totals_only" => 'Només totals',
 "form.report.total" => 'Hores Totals',
@@ -483,7 +481,6 @@ $i18n_key_words = array(
 "form.report.th.start" => 'Inici',
 "form.report.th.finish" => 'Fi',
 "form.report.th.duration" => 'Durada',
-"form.report.th.note" => 'Nota',
 
 // charts form attributes
 // Note to translators: form.charts.title needs to be translated.

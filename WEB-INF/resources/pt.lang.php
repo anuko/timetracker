@@ -171,9 +171,9 @@ $i18n_key_words = array(
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
 'label.duration' => 'Duração',
+'label.note' => 'Anotação',
+'label.notes' => 'Anotações',
 // TODO: translate the following.
-// 'label.note' => 'Note',
-// 'label.notes' => 'Notes',
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
@@ -404,20 +404,13 @@ $i18n_key_words = array(
 "form.mytime.project" => 'projeto',
 "form.mytime.start" => 'início',
 "form.mytime.finish" => 'fim',
-"form.mytime.note" => 'anotação',
 "form.mytime.daily" => 'trabalho diário',
 "form.mytime.total" => 'horas totais: ',
 "form.mytime.th.project" => 'projeto',
 "form.mytime.th.start" => 'início',
 "form.mytime.th.finish" => 'finish',
 "form.mytime.th.duration" => 'duração',
-"form.mytime.th.note" => 'fim',
 "form.mytime.del_yes" => 'o período registrado foi apagado com sucesso',
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.mytime.no_finished_rec" => 'this record was saved with only start time. it is not an error. logout if you need to.',
-// "form.mytime.billable" => 'billable',
-// "form.mytime.warn_tozero_rec" => 'this time record must be deleted because this time period is locked',
-// "form.mytime.uncompleted" => 'uncompleted',
 
 // profile form attributes
 // Note to translators: we need a more accurate translation of form.profile.create_title
@@ -457,7 +450,6 @@ $i18n_key_words = array(
 "form.report.duration" => 'duração',
 "form.report.start" => 'início',
 "form.report.finish" => 'fim',
-"form.report.note" => 'anotação',
 "form.report.project" => 'projeto',
 // Note to translators: the string below is missing and must be added and translated 
 // "form.report.totals_only" => 'totals only',

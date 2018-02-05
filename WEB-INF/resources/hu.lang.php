@@ -179,8 +179,9 @@ $i18n_key_words = array(
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
 // 'label.duration' => 'Duration',
-// 'label.note' => 'Note',
-// 'label.notes' => 'Notes',
+'label.note' => 'Megjegyzés',
+'label.notes' => 'Megjegyzések',
+// TODO: translate the following.
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
@@ -432,14 +433,12 @@ $i18n_key_words = array(
 "form.mytime.start" => 'kezdete',
 "form.mytime.finish" => 'vége',
 "form.mytime.duration" => 'hossz',
-"form.mytime.note" => 'megjegyzés',
 "form.mytime.daily" => 'napi munka',
 "form.mytime.total" => 'összesített óraszám: ',
 "form.mytime.th.project" => 'projekt',
 "form.mytime.th.start" => 'kezdete',
 "form.mytime.th.finish" => 'vége',
 "form.mytime.th.duration" => 'hossz',
-"form.mytime.th.note" => 'megjegyzés',
 "form.mytime.del_yes" => 'a bejegyzés törölve',
 "form.mytime.no_finished_rec" => 'csak az munka kezdete lett megjelölve, ha később visszalépsz a rendszerbe beállíthatod a vég-időpontot...',
 
@@ -483,7 +482,6 @@ $i18n_key_words = array(
 "form.report.duration" => 'időtartam',
 "form.report.start" => 'kezdet',
 "form.report.finish" => 'befejezés',
-"form.report.note" => 'megjegyzés',
 "form.report.project" => 'projekt',
 "form.report.totals_only" => 'csak a teljes óraszám',
 "form.report.total" => 'összesített óraszám',
@@ -493,7 +491,6 @@ $i18n_key_words = array(
 "form.report.th.start" => 'elkezdve',
 "form.report.th.finish" => 'befejezve',
 "form.report.th.duration" => 'időtartam',
-"form.report.th.note" => 'megjegyzés',
 
 // mail form attributes
 "form.mail.from" => 'feladó',

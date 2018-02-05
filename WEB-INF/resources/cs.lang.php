@@ -180,8 +180,9 @@ $i18n_key_words = array(
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
 // 'label.duration' => 'Duration',
-// 'label.note' => 'Note',
-// 'label.notes' => 'Notes',
+'label.note' => 'Poznámka',
+'label.notes' => 'Poznámky',
+// TODO: translate the following.
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
@@ -208,7 +209,8 @@ $i18n_key_words = array(
 // 'label.date_format' => 'Date format',
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
-// 'label.comment' => 'Comment',
+'label.comment' => 'Komentář',
+// TODO: translate the following.
 // 'label.status' => 'Status',
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
@@ -442,14 +444,12 @@ $i18n_key_words = array(
 "form.mytime.start" => 'začátek',
 "form.mytime.finish" => 'konec',
 "form.mytime.duration" => 'trvání',
-"form.mytime.note" => 'poznámka',
 "form.mytime.daily" => 'denní práce',
 "form.mytime.total" => 'součet hodin: ',
 "form.mytime.th.project" => 'projekt',
 "form.mytime.th.start" => 'začátek',
 "form.mytime.th.finish" => 'konec',
 "form.mytime.th.duration" => 'trvání',
-"form.mytime.th.note" => 'poznámka',
 "form.mytime.del_yes" => 'časový záznam úspěšně odstraněn',
 "form.mytime.no_finished_rec" => 'záznam byl uložen pouze s časem zahájení. není to chyba. můžete se odhlásit, potřebujete-li.',
 "form.mytime.warn_tozero_rec" => 'tento záznam musí být smazán, neboť období je uzamčeno',
@@ -500,7 +500,6 @@ $i18n_key_words = array(
 "form.report.duration" => 'trvání',
 "form.report.start" => 'počátek',
 "form.report.finish" => 'konec',
-"form.report.note" => 'poznámka',
 "form.report.project" => 'projekt',
 "form.report.totals_only" => 'pouze součty',
 "form.report.total" => 'součty hodin',
@@ -510,12 +509,10 @@ $i18n_key_words = array(
 "form.report.th.start" => 'počátek',
 "form.report.th.finish" => 'konec',
 "form.report.th.duration" => 'trvání',
-"form.report.th.note" => 'poznámka',
 
 // mail form attributes
 "form.mail.from" => 'od',
 "form.mail.to" => 'komu',
-"form.mail.comment" => 'komentář',
 "form.mail.above" => 'poslat sestavu e-mailem',
 // Note to translators: this string needs to be translated.
 // "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
@@ -530,7 +527,6 @@ $i18n_key_words = array(
 "form.invoice.date" => 'datum',
 "form.invoice.number" => 'faktura číslo',
 "form.invoice.tax" => 'DPH',
-"form.invoice.comment" => 'komentář ',
 "form.invoice.th.username" => 'osoba',
 "form.invoice.th.time" => 'hodin',
 "form.invoice.th.rate" => 'sazba',
@@ -558,7 +554,6 @@ $i18n_key_words = array(
 "form.client.edit_title" => 'upravit zákazníka',
 "form.client.del_title" => 'smazat zákazníka',
 "form.client.tax" => 'DPH',
-"form.client.comment" => 'poznámka ',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'exportovat data do .csv souboru',

@@ -176,8 +176,9 @@ $i18n_key_words = array(
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
 // 'label.duration' => 'Duration',
-// 'label.note' => 'Note',
-// 'label.notes' => 'Notes',
+'label.note' => 'Notat',
+'label.notes' => 'Notater',
+// TODO: translate the following.
 // 'label.item' => 'Item',
 // 'label.cost' => 'Cost',
 // 'label.day_total' => 'Day total',
@@ -438,14 +439,12 @@ $i18n_key_words = array(
 "form.mytime.start" => 'starttid',
 "form.mytime.finish" => 'ferdig',
 "form.mytime.duration" => 'varighet',
-"form.mytime.note" => 'notat',
 "form.mytime.daily" => 'daglig arbeide',
 "form.mytime.total" => 'totalt antall timer: ',
 "form.mytime.th.project" => 'prosjekt',
 "form.mytime.th.start" => 'starttid',
 "form.mytime.th.finish" => 'ferdig',
 "form.mytime.th.duration" => 'varighet',
-"form.mytime.th.note" => 'notat',
 // Note to translators: the strings below must be translated
 // "form.mytime.del_yes" => 'tidsoppføringen er slettet', 
 // "form.mytime.no_finished_rec" => 'Denne oppføringen ble lagret kun med starttid. Det er ikke en feil. Logg ut om nødvendig.',
@@ -506,7 +505,6 @@ $i18n_key_words = array(
 "form.report.duration" => 'varighet',
 "form.report.start" => 'starttid',
 "form.report.finish" => 'ferdig',
-"form.report.note" => 'notat',
 "form.report.project" => 'prosjekt',
 // Note to translators: the strings below must be translated 
 // "form.report.totals_only" => 'kun summer',
@@ -517,7 +515,6 @@ $i18n_key_words = array(
 "form.report.th.start" => 'starttid',
 "form.report.th.finish" => 'ferdig',
 "form.report.th.duration" => 'varighet',
-"form.report.th.note" => 'notat',
 
 // mail form attributes
 "form.mail.from" => 'fra',
