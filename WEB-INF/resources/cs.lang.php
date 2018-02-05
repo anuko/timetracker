@@ -370,7 +370,7 @@ $i18n_key_words = array(
 // Time form. See example at https://timetracker.anuko.com/time.php.
 // TODO: translate the following.
 // 'form.time.duration_format' => '(hh:mm or 0.0h)',
-// 'form.time.billable' => 'Billable',
+'form.time.billable' => 'K fakturaci',
 // 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
@@ -387,9 +387,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.save_as_favorite' => 'Save as favorite',
 'form.reports.confirm_delete' => 'Opravdu chceš vymazat tuto položku z oblíbených?',
+'form.reports.include_billable' => 'k fakturaci',
+'form.reports.include_not_billable' => 'mimo fakturaci',
 // TODO: translate the following.
-// 'form.reports.include_billable' => 'billable',
-// 'form.reports.include_not_billable' => 'not billable',
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
 // 'form.reports.select_period' => 'Select time period',
@@ -451,7 +451,6 @@ $i18n_key_words = array(
 "form.mytime.th.note" => 'poznámka',
 "form.mytime.del_yes" => 'časový záznam úspěšně odstraněn',
 "form.mytime.no_finished_rec" => 'záznam byl uložen pouze s časem zahájení. není to chyba. můžete se odhlásit, potřebujete-li.',
-"form.mytime.billable" => 'k fakturaci',
 "form.mytime.warn_tozero_rec" => 'tento záznam musí být smazán, neboť období je uzamčeno',
 // Note to translators: the string below is missing in the translation and must be added
 // "form.mytime.uncompleted" => 'uncompleted',
@@ -577,8 +576,6 @@ $i18n_key_words = array(
 "controls.per_td" => 'dnes',
 "controls.per_at" => 'od počátku',
 "controls.per_ty" => 'letos',
-"controls.inc_billable" => 'k fakturaci',
-"controls.inc_nbillable" => 'mimo fakturaci',
 
 "label.sel_tp" => 'výberte období',
 "label.set_tp" => 'nebo určete dny',

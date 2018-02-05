@@ -455,7 +455,6 @@ $i18n_key_words = array(
 "form.mytime.th.note" => 'märkus',
 "form.mytime.del_yes" => 'ajakanne kustutatud',
 "form.mytime.no_finished_rec" => 'kanne salvestati ainult alguse ajaga. see ei ole viga. logi välja kui vaja peaks olema.',
-"form.mytime.billable" => 'arvestatav',
 "form.mytime.warn_tozero_rec" => 'see ajakanne tuleb kustutada kuna see ajaperiood on lukustatud',
 // Note to translators: the string below must be translated and added
 // "form.mytime.uncompleted" => 'uncompleted',
@@ -586,8 +585,6 @@ $i18n_key_words = array(
 "controls.per_lw" => 'eelmine nädal',
 "controls.per_td" => 'täna',
 "controls.per_at" => 'kõik ajad',
-"controls.inc_billable" => 'arvestatav',
-"controls.inc_nbillable" => 'mittearvestatav',
 
 "label.inv_str" => 'arved',
 "label.set_empl" => 'vali kasutajad',

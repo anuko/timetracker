@@ -367,7 +367,8 @@ $i18n_key_words = array(
 // Time form. See example at https://timetracker.anuko.com/time.php.
 // TODO: translate the following.
 // 'form.time.duration_format' => '(hh:mm or 0.0h)',
-// 'form.time.billable' => 'Billable',
+'form.time.billable' => '請求できる',
+// TODO: translate the following.
 // 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
@@ -384,8 +385,9 @@ $i18n_key_words = array(
 'form.reports.save_as_favorite' => 'お気に入りに保存',
 'form.reports.confirm_delete' => 'このお気に入りレポートを削除しますか？',
 // TODO: translate the following.
-// 'form.reports.include_billable' => 'billable',
-// 'form.reports.include_not_billable' => 'not billable',
+'form.reports.include_billable' => '請求できる',
+'form.reports.include_not_billable' => '請求できません',
+// TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
 // 'form.reports.select_period' => 'Select time period',
@@ -449,7 +451,6 @@ $i18n_key_words = array(
 "form.mytime.th.note" => 'ノート',
 "form.mytime.del_yes" => '時間レコードが成功的に削除されました',
 "form.mytime.no_finished_rec" => 'このレコードは開始時間だけで保存されました。これはエラーではありません。もし必要があればログアウトしてください。',
-"form.mytime.billable" => '請求できる',
 "form.mytime.warn_tozero_rec" => 'この時間レコードの期間が満了されましたから、この時間レコードは削除されることが必要です',
 "form.mytime.uncompleted" => '未完成の',
 
@@ -585,8 +586,6 @@ $i18n_key_words = array(
 "controls.per_at" => 'すべての時間',
 "controls.per_ty" => '今年',
 "controls.sel_period" => '--- 時間期間の選択 ---',
-"controls.inc_billable" => '請求できる',
-"controls.inc_nbillable" => '請求できません',
 "controls.default" => '--- デフォルト ---',
 
 "label.sel_tp" => '時間期間の選択',
