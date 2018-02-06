@@ -277,10 +277,10 @@ $i18n_key_words = array(
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => 'Projektek',
+'title.add_project' => 'Projekt hozzáadása',
+'title.edit_project' => 'Projekt szerkesztése',
+'title.delete_project' => 'Projekt törlése',
 // TODO: translate the following.
-// 'title.add_project' => 'Adding Project',
-// 'title.edit_project' => 'Editing Project',
-// 'title.delete_project' => 'Deleting Project',
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -431,13 +431,11 @@ $i18n_key_words = array(
 "form.mytime.del_str" => 'törlés',
 "form.mytime.time_form" => ' (óó:pp)',
 "form.mytime.date" => 'dátum',
-"form.mytime.project" => 'projekt',
 "form.mytime.start" => 'kezdete',
 "form.mytime.finish" => 'vége',
 "form.mytime.duration" => 'hossz',
 "form.mytime.daily" => 'napi munka',
 "form.mytime.total" => 'összesített óraszám: ',
-"form.mytime.th.project" => 'projekt',
 "form.mytime.th.start" => 'kezdete',
 "form.mytime.th.finish" => 'vége',
 "form.mytime.th.duration" => 'hossz',
@@ -455,7 +453,6 @@ $i18n_key_words = array(
 "form.people.edit_str" => 'munkatárs adatainak szerkesztése',
 "form.people.del_str" => 'munkatárs adatainak törlése',
 "form.people.th.role" => 'szerepkör',
-"form.people.th.project" => 'projekt',
 "form.people.th.rate" => 'tarifa',
 "form.people.manager" => 'vezető',
 "form.people.comanager" => 'helyettes',
@@ -463,17 +460,6 @@ $i18n_key_words = array(
 
 "form.people.rate" => 'általános óradíj',
 "form.people.comanager" => 'helyettes',
-"form.people.projects" => 'projektek',
-// Note to translators: the string below is missing and must be added and translated 
-
-// projects form attributes
-"form.project.proj_title" => 'projektek',
-"form.project.edit_str" => 'projekt adatainak szerkesztése',
-"form.project.add_str" => 'új projekt hozzáadása',
-"form.project.del_str" => 'projekt törlése',
-
-// activities form attributes
-"form.activity.project" => 'projekt',
 
 // report attributes
 "form.report.from" => 'kezdő időpont',
@@ -483,12 +469,10 @@ $i18n_key_words = array(
 "form.report.duration" => 'időtartam',
 "form.report.start" => 'kezdet',
 "form.report.finish" => 'befejezés',
-"form.report.project" => 'projekt',
 "form.report.totals_only" => 'csak a teljes óraszám',
 "form.report.total" => 'összesített óraszám',
 "form.report.th.empllist" => 'dolgozó',
 "form.report.th.date" => 'dátum',
-"form.report.th.project" => 'projekt',
 "form.report.th.start" => 'elkezdve',
 "form.report.th.finish" => 'befejezve',
 "form.report.th.duration" => 'időtartam',

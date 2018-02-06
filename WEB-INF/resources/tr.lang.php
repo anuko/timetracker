@@ -178,8 +178,9 @@ $i18n_key_words = array(
 // 'label.option' => 'Option',
 'label.invoice' => 'Fatura',
 // TODO: translate the following.
-// 'label.project' => 'Project',
-// 'label.projects' => 'Projects',
+'label.project' => 'Proje',
+'label.projects' => 'Projeler',
+// TODO: translate the following.
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -283,10 +284,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
-// 'title.projects' => 'Projects',
-// 'title.add_project' => 'Adding Project',
-// 'title.edit_project' => 'Editing Project',
-// 'title.delete_project' => 'Deleting Project',
+'title.projects' => 'Projeler',
+'title.add_project' => 'Proje ekleniyor',
+'title.edit_project' => 'Proje düzenleniyor',
+'title.delete_project' => 'Proje siliniyor',
+// TODO: translate the following.
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -344,7 +346,8 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
-// 'dropdown.projects' => 'projects',
+'dropdown.projects' => 'projeler',
+// TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
 // 'dropdown.clients' => 'clients',
 // 'dropdown.select' => '--- select ---',
@@ -414,7 +417,6 @@ $i18n_key_words = array(
 
 // TODO: refactoring ongoing down from here.
 
-"form.filter.project" => 'proje',
 "form.filter.filter" => 'sık kullanılan rapor',
 "form.filter.filter_new" => 'sık kullanılan olarak kaydet',
 
@@ -442,13 +444,11 @@ $i18n_key_words = array(
 "form.mytime.del_str" => 'zaman kaydını siliyor',
 "form.mytime.time_form" => ' (ss:dd)',
 "form.mytime.date" => 'tarih',
-"form.mytime.project" => 'proje',
 "form.mytime.start" => 'başlat',
 "form.mytime.finish" => 'tamamla',
 "form.mytime.duration" => 'süre',
 "form.mytime.daily" => 'günlük çalışma',
 "form.mytime.total" => 'toplam saat: ',
-"form.mytime.th.project" => 'proje',
 "form.mytime.th.start" => 'başlat',
 "form.mytime.th.finish" => 'tamamla',
 "form.mytime.th.duration" => 'süre',
@@ -469,7 +469,6 @@ $i18n_key_words = array(
 "form.people.edit_str" => 'kullanıcı düzenleniyor',
 "form.people.del_str" => 'kullanıcı siliniyor',
 "form.people.th.role" => 'rol',
-"form.people.th.project" => 'proje',
 "form.people.th.rate" => 'tarife',
 "form.people.manager" => 'yönetici',
 "form.people.comanager" => 'yardımcı yönetici',
@@ -477,21 +476,6 @@ $i18n_key_words = array(
 
 "form.people.rate" => 'varsayılan saat ücreti',
 "form.people.comanager" => 'yardımcı yönetici',
-"form.people.projects" => 'projeler',
-
-// projects form attributes
-"form.project.proj_title" => 'projeler',
-"form.project.edit_str" => 'proje düzenleniyor',
-"form.project.add_str" => 'yeni proje ekleniyor',
-"form.project.del_str" => 'proje siliniyor',
-
-// activities form attributes
-"form.activity.act_title" => 'faaliyetler',
-"form.activity.add_title" => 'yeni faaliyetler ekleniyor',
-"form.activity.edit_str" => 'faaliyetler düzenleniyor',
-"form.activity.del_str" => 'faaliyetler siliniyor',
-"form.activity.project" => 'proje',
-"form.activity.th.project" => 'proje',
 
 // report attributes
 "form.report.title" => 'raporlar',
@@ -502,12 +486,10 @@ $i18n_key_words = array(
 "form.report.duration" => 'süre',
 "form.report.start" => 'başlangıç',
 "form.report.finish" => 'son',
-"form.report.project" => 'proje',
 "form.report.totals_only" => 'sadece toplamlar',
 "form.report.total" => 'saat toplamı',
 "form.report.th.empllist" => 'kullanıcı',
 "form.report.th.date" => 'tarih',
-"form.report.th.project" => 'proje',
 "form.report.th.start" => 'başlangıç',
 "form.report.th.finish" => 'son',
 "form.report.th.duration" => 'süre',

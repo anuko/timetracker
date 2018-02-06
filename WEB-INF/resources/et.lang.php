@@ -279,10 +279,10 @@ $i18n_key_words = array(
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => 'Projektid',
+'title.add_project' => 'Projekti lisamine',
+'title.edit_project' => 'Projekti muutmine',
+'title.delete_project' => 'Projekti kustutamine',
 // TODO: translate the following.
-// 'title.add_project' => 'Adding Project',
-// 'title.edit_project' => 'Editing Project',
-// 'title.delete_project' => 'Deleting Project',
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -444,13 +444,11 @@ $i18n_key_words = array(
 // Note to translators: the string below must be translated
 // "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.date" => 'kuupäev',
-"form.mytime.project" => 'projekt',
 "form.mytime.start" => 'algus',
 "form.mytime.finish" => 'lõpp',
 "form.mytime.duration" => 'kestus',
 "form.mytime.daily" => 'igapäevane töö',
 "form.mytime.total" => 'tunde kokku: ',
-"form.mytime.th.project" => 'projekt',
 "form.mytime.th.start" => 'algus',
 "form.mytime.th.finish" => 'lõpp',
 "form.mytime.th.duration" => 'kestus',
@@ -481,7 +479,6 @@ $i18n_key_words = array(
 "form.people.del_str" => 'kasutaja kustutamine',
 "form.people.th.login" => 'login',
 "form.people.th.role" => 'roll',
-"form.people.th.project" => 'projekt',
 "form.people.th.rate" => 'hind',
 "form.people.manager" => 'haldur',
 "form.people.comanager" => 'kaashaldur',
@@ -490,16 +487,6 @@ $i18n_key_words = array(
 
 "form.people.rate" => 'vaikimisi tunni hind',
 "form.people.comanager" => 'kaashaldur',
-"form.people.projects" => 'projektid',
-
-// projects form attributes
-"form.project.proj_title" => 'projektid',
-"form.project.edit_str" => 'projektide muutmine',
-"form.project.add_str" => 'uue projekti lisamine',
-"form.project.del_str" => 'projekti kustutamine',
-
-// activities form attributes
-"form.activity.project" => 'projekt',
 
 // report attributes
 "form.report.from" => 'algab kuupäevast',
@@ -509,12 +496,10 @@ $i18n_key_words = array(
 "form.report.duration" => 'kestus',
 "form.report.start" => 'algus',
 "form.report.finish" => 'lõpp',
-"form.report.project" => 'projekt',
 "form.report.totals_only" => 'ainult summad',
 "form.report.total" => 'tunde kokku',
 "form.report.th.empllist" => 'kasutaja',
 "form.report.th.date" => 'kuupäev',
-"form.report.th.project" => 'projekt',
 "form.report.th.start" => 'algus',
 "form.report.th.finish" => 'lõpp',
 "form.report.th.duration" => 'kestus',
