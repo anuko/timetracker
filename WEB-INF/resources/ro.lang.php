@@ -86,10 +86,12 @@ $i18n_key_words = array(
 'error.not_equal' => 'Campul "{0}" nu este egal cu campul "{1}".',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+// TODO: for "select" errors: Selecteaza or Alege? We need consistent usage.
 'error.project' => 'Selecteaza proiect.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-// 'error.client' => 'Select client.',
+'error.client' => 'Alege client.',
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'Nume de utilizator sau parola incorecta.',
@@ -207,8 +209,7 @@ $i18n_key_words = array(
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
 'label.comment' => 'Comentariu',
-// TODO: translate the following.
-// 'label.status' => 'Status',
+'label.status' => 'Stare',
 'label.tax' => 'Taxa',
 // TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
@@ -461,7 +462,6 @@ $i18n_key_words = array(
 "form.people.edit_str" => 'editare utilizator',
 "form.people.del_str" => 'stergee utilizator',
 "form.people.th.role" => 'functie',
-"form.people.th.status" => 'stare',
 "form.people.th.project" => 'proiect',
 "form.people.th.rate" => 'rata',
 "form.people.manager" => 'manager',
@@ -547,7 +547,6 @@ $i18n_key_words = array(
 "forward.tocsvfile" => 'exporta date in fisier .csv',
 "forward.geninvoice" => 'genereaza factura',
 
-"controls.select.client" => '--- alege client     ---',
 "controls.project_bind" => '--- toate ---',
 "controls.all" => '--- toate ---',
 "controls.notbind" => '--- nu ---',

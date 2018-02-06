@@ -84,7 +84,8 @@ $i18n_key_words = array(
 'error.project' => 'Velg prosjekt.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-// 'error.client' => 'Select client.',
+'error.client' => 'Velg klient.',
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'Feil brukernavn eller passord.',
@@ -205,8 +206,7 @@ $i18n_key_words = array(
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
 'label.comment' => 'Kommentar',
-// TODO: translate the following.
-// 'label.status' => 'Status',
+'label.status' => 'Status',
 'label.tax' => 'MVA',
 // TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
@@ -474,7 +474,6 @@ $i18n_key_words = array(
 "form.people.del_str" => 'slett bruker',
 "form.people.th.login" => 'innlogging',
 "form.people.th.role" => 'rolle',
-"form.people.th.status" => 'status',
 // Note to translators: the 2 strings below are missing and must be added and translated
 // "form.people.th.project" => 'prosjekt',
 // "form.people.th.rate" => 'timesats',
@@ -568,8 +567,6 @@ $i18n_key_words = array(
 // "forward.toxmlfile" => 'eksporter data til en .xml fil',
 // "forward.geninvoice" => 'lag faktura',
 
-// Note to translators: the string below is missing and must be translated and added
-// "controls.select.client" => '--- velg klient ---',
 "controls.project_bind" => '--- alle ---',
 "controls.all" => '--- alle ---',
 // Note to translators: the strings below are missing and must be translated and added 

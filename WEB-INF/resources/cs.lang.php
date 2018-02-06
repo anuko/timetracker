@@ -87,7 +87,8 @@ $i18n_key_words = array(
 'error.project' => 'Výběr projektu.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-// 'error.client' => 'Select client.',
+'error.client' => 'Výběr zákazníka.',
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'Nesprávné jméno nebo heslo.',
@@ -210,8 +211,7 @@ $i18n_key_words = array(
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
 'label.comment' => 'Komentář',
-// TODO: translate the following.
-// 'label.status' => 'Status',
+'label.status' => 'Status',
 'label.tax' => 'DPH',
 // TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
@@ -470,7 +470,6 @@ $i18n_key_words = array(
 "form.people.del_str" => 'smazat uživatele',
 "form.people.th.login" => 'přihlásit',
 "form.people.th.role" => 'role',
-"form.people.th.status" => 'status',
 "form.people.th.rate" => 'sazba',
 "form.people.manager" => 'manažer',
 "form.people.comanager" => 'spolumanažer',
@@ -544,7 +543,6 @@ $i18n_key_words = array(
 "forward.toxmlfile" => 'exportovat data do .xml souboru',
 "forward.geninvoice" => 'vytvořit fakturu',
 
-"controls.select.client" => '--- výběr zákazníka ---',
 "controls.project_bind" => '--- všechny ---',
 "controls.all" => '--- vše ---',
 "controls.notbind" => '--- nic ---',

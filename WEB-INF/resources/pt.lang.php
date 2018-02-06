@@ -198,8 +198,8 @@ $i18n_key_words = array(
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
 'label.comment' => 'Comentário',
+'label.status' => 'Status',
 // TODO: translate the following.
-// 'label.status' => 'Status',
 // 'label.tax' => 'Tax',
 // 'label.subtotal' => 'Subtotal',
 // 'label.total' => 'Total',
@@ -424,15 +424,8 @@ $i18n_key_words = array(
 "form.people.edit_str" => 'editando usuário',
 "form.people.del_str" => 'apagando usuário',
 
-// Note to translators: "form.people.th.login" => 'e-mail', // email has been changed to login
 "form.people.th.role" => 'regra',
-"form.people.th.status" => 'status',
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.people.th.project" => 'project',
-// "form.people.th.rate" => 'rate',
 "form.people.manager" => 'gerente',
-// Note to translators: the string below is missing and must be added and translated 
-// "form.people.comanager" => 'comanager',
 "form.people.empl" => 'usuário',
 
 // projects form attributes

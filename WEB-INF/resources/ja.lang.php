@@ -86,7 +86,8 @@ $i18n_key_words = array(
 'error.project' => 'プロジェクトの選択',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-// 'error.client' => 'Select client.',
+'error.client' => 'クライアントの選択',
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => '不正確なログインあるいはパスワードが不正確です',
@@ -207,8 +208,7 @@ $i18n_key_words = array(
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
 'label.comment' => 'コメント',
-// TODO: translate the following.
-// 'label.status' => 'Status',
+'label.status' => '状態',
 'label.tax' => '税',
 // TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
@@ -475,7 +475,6 @@ $i18n_key_words = array(
 "form.people.del_str" => 'ユーザーの削除',
 "form.people.th.login" => 'ログインID',
 "form.people.th.role" => 'ルール',
-"form.people.th.status" => '状態',
 "form.people.th.project" => 'プロジェクト',
 "form.people.th.rate" => '給料',
 "form.people.manager" => '管理者',
@@ -567,7 +566,6 @@ $i18n_key_words = array(
 "forward.toxmlfile" => 'xmlファイルにエクスポート',
 "forward.geninvoice" => '送り状の作成',
 
-"controls.select.client" => '--- クライアントの選択 ---',
 "controls.project_bind" => '--- すべて ---',
 "controls.all" => '--- すべて ---',
 "controls.notbind" => '--- いいえ ---',

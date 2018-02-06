@@ -206,8 +206,7 @@ $i18n_key_words = array(
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
 'label.comment' => 'Comentari',
-// TODO: translate the following.
-// 'label.status' => 'Status',
+'label.status' => 'Estat',
 'label.tax' => 'Impost',
 // TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
@@ -447,7 +446,6 @@ $i18n_key_words = array(
 "form.people.del_str" => 'Eliminant usuari',
 "form.people.th.email" => 'e-mail',
 "form.people.th.role" => 'Rol',
-"form.people.th.status" => 'Estat',
 "form.people.th.rate" => 'Taxa',
 "form.people.manager" => 'Manejador',
 "form.people.comanager" => 'Auxiliar del manejador',

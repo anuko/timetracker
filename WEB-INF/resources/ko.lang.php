@@ -86,7 +86,8 @@ $i18n_key_words = array(
 'error.project' => '프로젝트의 선택',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-// 'error.client' => 'Select client.',
+'error.client' => '클라이언트 선택',
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => '부정확한 로그인 혹은 암호가 틀립니다',
@@ -207,8 +208,7 @@ $i18n_key_words = array(
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
 'label.comment' => '코멘트',
-// TODO: translate the following.
-// 'label.status' => 'Status',
+'label.status' => '상태',
 'label.tax' => '세금',
 // TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
@@ -475,7 +475,6 @@ $i18n_key_words = array(
 "form.people.del_str" => '사용자를 삭제하기',
 "form.people.th.login" => '로그인ID',
 "form.people.th.role" => '직위',
-"form.people.th.status" => '상태',
 "form.people.th.project" => '프로젝트',
 "form.people.th.rate" => '급여',
 "form.people.manager" => '관리자',
@@ -562,7 +561,6 @@ $i18n_key_words = array(
 "forward.toxmlfile" => '데이터를 .xml 파일로 익스포트',
 "forward.geninvoice" => '송장 만들기',
 
-"controls.select.client" => '--- 클라이언트 선택 ---',
 "controls.project_bind" => '--- 전부 ---',
 "controls.all" => '--- 전부 ---',
 "controls.notbind" => '--- 아니 ---',

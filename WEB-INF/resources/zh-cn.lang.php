@@ -77,7 +77,8 @@ $i18n_key_words = array(
 'error.project' => '选择项目。',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-// 'error.client' => 'Select client.',
+'error.client' => '选择客户。',
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => '不正确的用户名或密码。',
@@ -194,8 +195,7 @@ $i18n_key_words = array(
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
 'label.comment' => '留言',
-// TODO: translate the following.
-// 'label.status' => 'Status',
+'label.status' => '状态',
 'label.tax' => '税',
 // TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
@@ -469,7 +469,6 @@ $i18n_key_words = array(
 "form.people.del_str" => '删除用户',
 "form.people.th.login" => '登录',
 "form.people.th.role" => '角色',
-"form.people.th.status" => '状态',
 "form.people.th.project" => '项目',
 "form.people.th.rate" => '费率',
 "form.people.manager" => '经理',
@@ -561,7 +560,6 @@ $i18n_key_words = array(
 "forward.toxmlfile" => '将数据导出到.xml文件',
 "forward.geninvoice" => '生成发票',
 
-"controls.select.client" => '--- 选择客户 ---',
 "controls.project_bind" => '--- 全部 ---',
 "controls.all" => '--- 全部 ---',
 "controls.notbind" => '--- 无 ---',

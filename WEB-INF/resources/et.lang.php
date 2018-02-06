@@ -87,7 +87,8 @@ $i18n_key_words = array(
 'error.project' => 'Vali projekt.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-// 'error.client' => 'Select client.',
+'error.client' => 'Vali klient.',
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'Vale login või salasõna.',
@@ -207,8 +208,7 @@ $i18n_key_words = array(
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
 'label.comment' => 'Kommentaar',
-// TODO: translate the following.
-// 'label.status' => 'Status',
+'label.status' => 'Seisund',
 'label.tax' => 'Maks',
 // TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
@@ -481,7 +481,6 @@ $i18n_key_words = array(
 "form.people.del_str" => 'kasutaja kustutamine',
 "form.people.th.login" => 'login',
 "form.people.th.role" => 'roll',
-"form.people.th.status" => 'seisund',
 "form.people.th.project" => 'projekt',
 "form.people.th.rate" => 'hind',
 "form.people.manager" => 'haldur',
@@ -568,7 +567,6 @@ $i18n_key_words = array(
 "forward.toxmlfile" => 'ekspordi andmed .xml faili',
 "forward.geninvoice" => 'loo arve',
 
-"controls.select.client" => '--- vali klient ---',
 "controls.project_bind" => '--- kõik ---',
 "controls.all" => '--- kõik ---',
 "controls.notbind" => '--- ei ---',

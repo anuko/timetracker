@@ -92,7 +92,8 @@ $i18n_key_words = array(
 'error.project' => 'Proje seç.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-// 'error.client' => 'Select client.',
+'error.client' => 'Müşteri seç',
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'Hatalı kullanıcı adı veya parola.',
@@ -214,8 +215,7 @@ $i18n_key_words = array(
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
 'label.comment' => 'Yorum',
-// TODO: translate the following.
-// 'label.status' => 'Status',
+'label.status' => 'Durum',
 'label.tax' => 'Vergi',
 // TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
@@ -469,7 +469,6 @@ $i18n_key_words = array(
 "form.people.edit_str" => 'kullanıcı düzenleniyor',
 "form.people.del_str" => 'kullanıcı siliniyor',
 "form.people.th.role" => 'rol',
-"form.people.th.status" => 'durum',
 "form.people.th.project" => 'proje',
 "form.people.th.rate" => 'tarife',
 "form.people.manager" => 'yönetici',
@@ -557,7 +556,6 @@ $i18n_key_words = array(
 "forward.toxmlfile" => 'bilgileri .xml dosyasına aktar',
 "forward.geninvoice" => 'fatura yarat',
 
-"controls.select.client" => '--- müşteri seç ---',
 "controls.project_bind" => '--- tümü ---',
 "controls.all" => '--- tümü ---',
 "controls.notbind" => '--- hiç ---',

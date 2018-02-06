@@ -87,7 +87,8 @@ $i18n_key_words = array(
 'error.project' => 'Válassz projektet.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-// 'error.client' => 'Select client.',
+'error.client' => 'Válassz ügyfelet.',
+// TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 // 'error.auth' => 'Incorrect login or password.',
@@ -207,8 +208,7 @@ $i18n_key_words = array(
 // 'label.time_format' => 'Time format',
 // 'label.week_start' => 'First day of week',
 'label.comment' => 'Megjegyzés',
-// TODO: translate the following.
-// 'label.status' => 'Status',
+'label.status' => 'Státusz',
 'label.tax' => 'Adó',
 // TODO: translate the following.
 // 'label.subtotal' => 'Subtotal',
@@ -455,7 +455,6 @@ $i18n_key_words = array(
 "form.people.edit_str" => 'munkatárs adatainak szerkesztése',
 "form.people.del_str" => 'munkatárs adatainak törlése',
 "form.people.th.role" => 'szerepkör',
-"form.people.th.status" => 'státusz',
 "form.people.th.project" => 'projekt',
 "form.people.th.rate" => 'tarifa',
 "form.people.manager" => 'vezető',
@@ -537,7 +536,6 @@ $i18n_key_words = array(
 "forward.tocsvfile" => 'az adatok exportálása CSV file-ba',
 "forward.geninvoice" => 'számla készítés',
 
-"controls.select.client" => '--- válassz ügyfelet ---',
 "controls.project_bind" => '--- összes ---',
 "controls.all" => '--- összes ---',
 "controls.notbind" => '--- nincs ---',
