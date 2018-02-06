@@ -170,8 +170,9 @@ $i18n_key_words = array(
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
-// 'label.project' => 'Project',
-// 'label.projects' => 'Projects',
+'label.project' => '프로젝트',
+'label.projects' => '프로젝트',
+// TODO: translate the following.
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -278,10 +279,11 @@ $i18n_key_words = array(
 // 'title.invoice' => 'Invoice',
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
-// 'title.projects' => 'Projects',
-// 'title.add_project' => 'Adding Project',
-// 'title.edit_project' => 'Editing Project',
-// 'title.delete_project' => 'Deleting Project',
+'title.projects' => '프로젝트',
+'title.add_project' => '프로젝트를 추가하기',
+'title.edit_project' => '프로젝트를 편집하기',
+'title.delete_project' => '프로젝트를 편집하기',
+// TODO: translate the following.
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -338,7 +340,8 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
-// 'dropdown.projects' => 'projects',
+'dropdown.projects' => '프로젝트',
+// TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
 // 'dropdown.clients' => 'clients',
 // 'dropdown.select' => '--- select ---',
@@ -408,7 +411,6 @@ $i18n_key_words = array(
 
 // TODO: refactoring ongoing down from here.
 
-"form.filter.project" => '프로젝트',
 "form.filter.filter" => '좋아하는 보고서',
 "form.filter.filter_new" => '좋아하는 것으로 저장',
 
@@ -441,13 +443,11 @@ $i18n_key_words = array(
 "form.mytime.del_str" => '시간기록을 삭제하기',
 "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.date" => '날짜',
-"form.mytime.project" => '프로젝트',
 "form.mytime.start" => '시작',
 "form.mytime.finish" => '마감',
 "form.mytime.duration" => '기간',
 "form.mytime.daily" => '하루일과',
 "form.mytime.total" => '전체 시간: ',
-"form.mytime.th.project" => '프로젝트',
 "form.mytime.th.start" => '시작',
 "form.mytime.th.finish" => '마감',
 "form.mytime.th.duration" => '기간',
@@ -475,7 +475,6 @@ $i18n_key_words = array(
 "form.people.del_str" => '사용자를 삭제하기',
 "form.people.th.login" => '로그인ID',
 "form.people.th.role" => '직위',
-"form.people.th.project" => '프로젝트',
 "form.people.th.rate" => '급여',
 "form.people.manager" => '관리자',
 "form.people.comanager" => '공동관리자',
@@ -484,16 +483,6 @@ $i18n_key_words = array(
 
 "form.people.rate" => '디폴트 시간당 급여',
 "form.people.comanager" => '공동관리자',
-"form.people.projects" => '프로젝트',
-
-// projects form attributes
-"form.project.proj_title" => '프로젝트',
-"form.project.edit_str" => '프로젝트를 편집하기',
-"form.project.add_str" => '신규 프로젝트를 추가하기',
-"form.project.del_str" => '프로젝트를 삭제하기',
-
-// activities form attributes
-"form.activity.project" => '프로젝트',
 
 // report attributes
 "form.report.title" => '보고서',
@@ -504,12 +493,10 @@ $i18n_key_words = array(
 "form.report.duration" => '기간',
 "form.report.start" => '시작',
 "form.report.finish" => '마감',
-"form.report.project" => '프로젝트',
 "form.report.totals_only" => '오직 전체만',
 "form.report.total" => '시간 총합',
 "form.report.th.empllist" => '사용자',
 "form.report.th.date" => '날짜',
-"form.report.th.project" => '프로젝트',
 "form.report.th.start" => '시작',
 "form.report.th.finish" => '마감',
 "form.report.th.duration" => '기간',

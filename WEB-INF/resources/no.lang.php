@@ -169,8 +169,9 @@ $i18n_key_words = array(
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
-// 'label.project' => 'Project',
-// 'label.projects' => 'Projects',
+'label.project' => 'Prosjekt',
+'label.projects' => 'Prosjekter',
+// TODO: translate the following.
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -271,10 +272,11 @@ $i18n_key_words = array(
 // 'title.invoice' => 'Invoice',
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
-// 'title.projects' => 'Projects',
-// 'title.add_project' => 'Adding Project',
-// 'title.edit_project' => 'Editing Project',
-// 'title.delete_project' => 'Deleting Project',
+'title.projects' => 'Prosjekter',
+'title.add_project' => 'Legg til prosjekt',
+'title.edit_project' => 'Endre prosjekt',
+'title.delete_project' => 'Slett prosjekt',
+// TODO: translate the following.
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -331,7 +333,8 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
-// 'dropdown.projects' => 'projects',
+'dropdown.projects' => 'prosjekter',
+// TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
 // 'dropdown.clients' => 'clients',
 // 'dropdown.select' => '--- select ---',
@@ -402,7 +405,6 @@ $i18n_key_words = array(
 
 // TODO: Please check the translation against the current English file as many things are being refactored. For example, many labels have been added after label.email.
 
-// "form.filter.project" => 'prosjekt',
 // "form.filter.filter" => 'favorittrapport',
 // "form.filter.filter_new" => 'lagre som favoritt',
 
@@ -437,13 +439,11 @@ $i18n_key_words = array(
 "form.mytime.del_str" => 'slett tids oppføringen',
 "form.mytime.time_form" => ' (tt:mm)',
 // Note to translators: "form.mytime.date" => 'dato', // the string must be translated
-"form.mytime.project" => 'prosjekt',
 "form.mytime.start" => 'starttid',
 "form.mytime.finish" => 'ferdig',
 "form.mytime.duration" => 'varighet',
 "form.mytime.daily" => 'daglig arbeide',
 "form.mytime.total" => 'totalt antall timer: ',
-"form.mytime.th.project" => 'prosjekt',
 "form.mytime.th.start" => 'starttid',
 "form.mytime.th.finish" => 'ferdig',
 "form.mytime.th.duration" => 'varighet',
@@ -475,27 +475,13 @@ $i18n_key_words = array(
 "form.people.th.login" => 'innlogging',
 "form.people.th.role" => 'rolle',
 // Note to translators: the 2 strings below are missing and must be added and translated
-// "form.people.th.project" => 'prosjekt',
 // "form.people.th.rate" => 'timesats',
 // Note to translators: the strings below must be correctly translated
 // "form.people.manager" => 'admin',
 // "form.people.comanager" => 'co-manager',
 "form.people.empl" => 'bruker',
 "form.people.login" => 'innlogging',
-
 "form.people.rate" => 'timesats',
-// Note to translators: the strings below are missing and must be added and translated
-// "form.people.comanager" => 'co-manager',
-// "form.people.projects" => 'prosjekter',
-
-// projects form attributes
-"form.project.proj_title" => 'prosjekter',
-"form.project.edit_str" => 'endre prosjekt',
-"form.project.add_str" => 'legg til nytt prosjekt',
-"form.project.del_str" => 'slett prosjekt',
-
-// activities form attributes
-"form.activity.project" => 'prosjekt',
 
 // report attributes
 "form.report.title" => 'rapporter',
@@ -506,13 +492,11 @@ $i18n_key_words = array(
 "form.report.duration" => 'varighet',
 "form.report.start" => 'starttid',
 "form.report.finish" => 'ferdig',
-"form.report.project" => 'prosjekt',
 // Note to translators: the strings below must be translated 
 // "form.report.totals_only" => 'kun summer',
 "form.report.total" => 'totalt antall timer',
 "form.report.th.empllist" => 'bruker',
 "form.report.th.date" => 'dato',
-"form.report.th.project" => 'prosjekt',
 "form.report.th.start" => 'starttid',
 "form.report.th.finish" => 'ferdig',
 "form.report.th.duration" => 'varighet',

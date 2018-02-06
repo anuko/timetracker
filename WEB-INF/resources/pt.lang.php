@@ -163,8 +163,9 @@ $i18n_key_words = array(
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
-// 'label.project' => 'Project',
-// 'label.projects' => 'Projects',
+'label.project' => 'Projeto',
+'label.projects' => 'Projetos',
+// TODO: translate the following.
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -265,10 +266,11 @@ $i18n_key_words = array(
 // 'title.invoice' => 'Invoice',
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
-// 'title.projects' => 'Projects',
-// 'title.add_project' => 'Adding Project',
-// 'title.edit_project' => 'Editing Project',
-// 'title.delete_project' => 'Deleting Project',
+'title.projects' => 'Projetos',
+'title.add_project' => 'Adicionando projeto',
+'title.edit_project' => 'Editando projeto',
+'title.delete_project' => 'Apagando projeto',
+// TODO: translate the following.
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -325,7 +327,8 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
-// 'dropdown.projects' => 'projects',
+'dropdown.projects' => 'projetos',
+// TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
 // 'dropdown.clients' => 'clients',
 // 'dropdown.select' => '--- select ---',
@@ -402,12 +405,10 @@ $i18n_key_words = array(
 // my time form attributes
 "form.mytime.title" => 'adicionar período',
 "form.mytime.date" => 'data',
-"form.mytime.project" => 'projeto',
 "form.mytime.start" => 'início',
 "form.mytime.finish" => 'fim',
 "form.mytime.daily" => 'trabalho diário',
 "form.mytime.total" => 'horas totais: ',
-"form.mytime.th.project" => 'projeto',
 "form.mytime.th.start" => 'início',
 "form.mytime.th.finish" => 'finish',
 "form.mytime.th.duration" => 'duração',
@@ -428,15 +429,6 @@ $i18n_key_words = array(
 "form.people.manager" => 'gerente',
 "form.people.empl" => 'usuário',
 
-// projects form attributes
-"form.project.proj_title" => 'projetos',
-"form.project.edit_str" => 'editando projeto',
-"form.project.add_str" => 'adicionando novo projeto',
-"form.project.del_str" => 'apagando projeto',
-
-// activities form attributes
-"form.activity.project" => 'project',
-
 // report attributes
 "form.report.title" => 'relatórios',
 "form.report.from" => 'data inicial',
@@ -444,9 +436,6 @@ $i18n_key_words = array(
 "form.report.duration" => 'duração',
 "form.report.start" => 'início',
 "form.report.finish" => 'fim',
-"form.report.project" => 'projeto',
-// Note to translators: the string below is missing and must be added and translated 
-// "form.report.totals_only" => 'totals only',
 "form.report.total" => 'horas totais',
 "form.report.th.empllist" => 'usuário',
 // Note to translators: the strings below must be translated

@@ -173,8 +173,9 @@ $i18n_key_words = array(
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
-// 'label.project' => 'Project',
-// 'label.projects' => 'Projects',
+'label.project' => 'Proiect',
+'label.projects' => 'Proiecte',
+// TODO: translate the following.
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -276,10 +277,11 @@ $i18n_key_words = array(
 // 'title.invoice' => 'Invoice',
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
-// 'title.projects' => 'Projects',
-// 'title.add_project' => 'Adding Project',
-// 'title.edit_project' => 'Editing Project',
-// 'title.delete_project' => 'Deleting Project',
+'title.projects' => 'Proiecte',
+'title.add_project' => 'Adaugare proiect',
+'title.edit_project' => 'Editare proiect',
+'title.delete_project' => 'Stergere proiect',
+// TODO: translate the following.
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -336,7 +338,7 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
-// 'dropdown.projects' => 'projects',
+'dropdown.projects' => 'proiecte',
 // 'dropdown.tasks' => 'tasks',
 // 'dropdown.clients' => 'clients',
 // 'dropdown.select' => '--- select ---',
@@ -404,7 +406,6 @@ $i18n_key_words = array(
 
 // TODO: refactoring ongoing down from here.
 
-"form.filter.project" => 'proiect',
 "form.filter.filter" => 'rapoarte favorite',
 "form.filter.filter_new" => 'salveaza ca favorit',
 
@@ -438,13 +439,11 @@ $i18n_key_words = array(
 "form.mytime.del_str" => 'stergerea inregistrarii timpului',
 "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.date" => 'data',
-"form.mytime.project" => 'proiect',
 "form.mytime.start" => 'inceput',
 "form.mytime.finish" => 'sfarsit',
 "form.mytime.duration" => 'durata',
 "form.mytime.daily" => 'activitatea zilnica',
 "form.mytime.total" => 'ore total: ',
-"form.mytime.th.project" => 'proiect',
 "form.mytime.th.start" => 'inceput',
 "form.mytime.th.finish" => 'sfarsit',
 "form.mytime.th.duration" => 'durata',
@@ -462,7 +461,6 @@ $i18n_key_words = array(
 "form.people.edit_str" => 'editare utilizator',
 "form.people.del_str" => 'stergee utilizator',
 "form.people.th.role" => 'functie',
-"form.people.th.project" => 'proiect',
 "form.people.th.rate" => 'rata',
 "form.people.manager" => 'manager',
 "form.people.comanager" => 'comanager',
@@ -470,16 +468,6 @@ $i18n_key_words = array(
 
 "form.people.rate" => 'pret pe ora implicit',
 "form.people.comanager" => 'co-manager',
-"form.people.projects" => 'proiecte',
-
-// projects form attributes
-"form.project.proj_title" => 'proiecte',
-"form.project.edit_str" => 'editare proiect',
-"form.project.add_str" => 'adauagre proiect nou',
-"form.project.del_str" => 'stergere proiect',
-
-// activities form attributes
-"form.activity.project" => 'proiect',
 
 // report attributes
 "form.report.title" => 'rapoarte',
@@ -490,12 +478,10 @@ $i18n_key_words = array(
 "form.report.duration" => 'durata',
 "form.report.start" => 'inceput',
 "form.report.finish" => 'sfarsit',
-"form.report.project" => 'proiect',
 "form.report.totals_only" => 'numai totaluri',
 "form.report.total" => 'ore total',
 "form.report.th.empllist" => 'utilizator',
 "form.report.th.date" => 'data',
-"form.report.th.project" => 'proiect',
 "form.report.th.start" => 'inceput',
 "form.report.th.finish" => 'sfarsit',
 "form.report.th.duration" => 'durata',
