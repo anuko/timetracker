@@ -455,11 +455,6 @@ $i18n_key_words = array(
 "form.admin.profile.comment" => 'sterge echipa',
 "form.admin.profile.th.id" => 'id',
 "form.admin.profile.th.active" => 'activ',
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.admin.options" => 'options',
-// "form.admin.custom_date_format" => "date format",
-// "form.admin.custom_time_format" => "time format",
-// "form.admin.start_week" => "first day of week",
 
 // my time form attributes
 "form.mytime.title" => 'timpul meu',

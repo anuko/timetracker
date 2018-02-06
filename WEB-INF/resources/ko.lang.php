@@ -205,9 +205,9 @@ $i18n_key_words = array(
 'label.language' => '언어',
 // TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
-// 'label.date_format' => 'Date format',
-// 'label.time_format' => 'Time format',
-// 'label.week_start' => 'First day of week',
+'label.date_format' => '날짜 포맷',
+'label.time_format' => '시간 포맷',
+'label.week_start' => '주의 시작요일',
 'label.comment' => '코멘트',
 'label.status' => '상태',
 'label.tax' => '세금',
@@ -460,9 +460,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.id" => '식별자',
 "form.admin.profile.th.active" => '활동내용',
 "form.admin.options" => '옵션',
-"form.admin.custom_date_format" => "날짜 포맷",
-"form.admin.custom_time_format" => "시간 포맷",
-"form.admin.start_week" => "주의 시작요일",
 
 // my time form attributes
 "form.mytime.title" => '나의 시간',
@@ -481,12 +478,7 @@ $i18n_key_words = array(
 "form.profile.create_title" => '신규 관리자 계정을 생성',
 "form.profile.edit_title" => '프로필을 편집하기',
 "form.profile.login" => '로그인ID',
-
 "form.profile.showchart" => '원 그래프를 보기',
-"form.profile.custom_date_format" => "날짜 포맷",
-"form.profile.custom_time_format" => "시간 포맷",
-"form.profile.default_format" => "(디폴트)",
-"form.profile.start_week" => "주의 시작요일",
 
 // people form attributes
 "form.people.ppl_str" => '멤버',

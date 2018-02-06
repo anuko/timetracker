@@ -200,9 +200,9 @@ $i18n_key_words = array(
 // 'label.id' => 'ID',
 // 'label.language' => 'Language',
 // 'label.decimal_mark' => 'Decimal mark',
-// 'label.date_format' => 'Date format',
-// 'label.time_format' => 'Time format',
-// 'label.week_start' => 'First day of week',
+'label.date_format' => '日期格式',
+'label.time_format' => '時間格式',
+'label.week_start' => '每週的第一天',
 'label.comment' => '留言',
 'label.status' => '狀態',
 'label.tax' => '稅',
@@ -452,9 +452,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.id" => 'ID號',
 "form.admin.profile.th.active" => '啟動',
 "form.admin.options" => '選項',
-"form.admin.custom_date_format" => "日期格式",
-"form.admin.custom_time_format" => "時間格式",
-"form.admin.start_week" => "每週的第一天",
 
 // my time form attributes
 "form.mytime.title" => '我的時間記錄',
@@ -476,10 +473,6 @@ $i18n_key_words = array(
 
 "form.profile.showchart" => '顯示餅狀圖',
 "form.profile.lang" => '語言',
-"form.profile.custom_date_format" => "日期格式",
-"form.profile.custom_time_format" => "時間格式",
-"form.profile.default_format" => "(默認)",
-"form.profile.start_week" => "每週的第一天",
 
 // people form attributes
 "form.people.ppl_str" => '人員',

@@ -203,9 +203,9 @@ $i18n_key_words = array(
 // 'label.id' => 'ID',
 // 'label.language' => 'Language',
 // 'label.decimal_mark' => 'Decimal mark',
-// 'label.date_format' => 'Date format',
-// 'label.time_format' => 'Time format',
-// 'label.week_start' => 'First day of week',
+'label.date_format' => 'Datoformat',
+'label.time_format' => 'Tidsformat',
+'label.week_start' => 'Første ukedag',
 'label.comment' => 'Kommentar',
 'label.status' => 'Status',
 'label.tax' => 'MVA',
@@ -453,9 +453,6 @@ $i18n_key_words = array(
 // "form.admin.profile.th.id" => 'id',
 // "form.admin.profile.th.active" => 'aktiv',
 // "form.admin.options" => 'opsjoner',
-// "form.admin.custom_date_format" => "datoformat",
-// "form.admin.custom_time_format" => "tidsformat",
-// "form.admin.start_week" => "første ukedag",
 
 // my time form attributes
 // Note to translators: the 2 strings below must be translated
@@ -480,10 +477,6 @@ $i18n_key_words = array(
 // Note to translators: the strings below are missing and must be added and translated
 // "form.profile.showchart" => 'vis kakediagram',
 // "form.profile.lang" => 'språk',
-// "form.profile.custom_date_format" => "dato format",
-// "form.profile.custom_time_format" => "tims format",
-// "form.profile.default_format" => "(default)",
-// "form.profile.start_week" => "første dag i uken",
 
 // people form attributes
 "form.people.ppl_str" => 'personer',

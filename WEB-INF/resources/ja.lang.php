@@ -204,9 +204,9 @@ $i18n_key_words = array(
 // 'label.id' => 'ID',
 // 'label.language' => 'Language',
 // 'label.decimal_mark' => 'Decimal mark',
-// 'label.date_format' => 'Date format',
-// 'label.time_format' => 'Time format',
-// 'label.week_start' => 'First day of week',
+'label.date_format' => '日付形式',
+'label.time_format' => '時間形式',
+'label.week_start' => '週の開始日',
 'label.comment' => 'コメント',
 'label.status' => '状態',
 'label.tax' => '税',
@@ -459,9 +459,6 @@ $i18n_key_words = array(
 "form.admin.profile.th.id" => '識別子',
 "form.admin.profile.th.active" => '活動内容',
 "form.admin.options" => 'オプション',
-"form.admin.custom_date_format" => "日付形式",
-"form.admin.custom_time_format" => "時間形式",
-"form.admin.start_week" => "週の開始日",
 
 // my time form attributes
 "form.mytime.title" => '私の時間',
@@ -480,13 +477,8 @@ $i18n_key_words = array(
 "form.profile.create_title" => '新規管理者のアカウントの作成',
 "form.profile.edit_title" => 'プロファイルの編集',
 "form.profile.login" => 'ログインID',
-
 "form.profile.showchart" => 'パイ図表の表示',
 "form.profile.lang" => '言語',
-"form.profile.custom_date_format" => "日付形式",
-"form.profile.custom_time_format" => "時間形式",
-"form.profile.default_format" => "(デフォルト)",
-"form.profile.start_week" => "週の開始日",
 
 // people form attributes
 "form.people.ppl_str" => 'メンバー',
