@@ -127,8 +127,7 @@ $i18n_key_words = array(
 // 'button.add_option' => 'Add option',
 'button.add' => '添加',
 'button.generate' => '創建',
-// TODO: translate the following.
-// 'button.reset_password' => 'Reset password',
+'button.reset_password' => '重設密碼',
 'button.send' => '發送',
 'button.send_by_email' => '通過郵件發送',
 // TODO: translate the following.

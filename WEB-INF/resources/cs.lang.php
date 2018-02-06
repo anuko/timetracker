@@ -130,8 +130,7 @@ $i18n_key_words = array(
 // 'button.add_option' => 'Add option',
 'button.add' => 'Přidat',
 'button.generate' => 'Vytvořit',
-// TODO: translate the following.
-// 'button.reset_password' => 'Reset password',
+'button.reset_password' => 'Resetovat heslo',
 'button.send' => 'Poslat',
 'button.send_by_email' => 'Poslat e-mailem',
 'button.create_team' => 'Vytvořit tým',
@@ -443,7 +442,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.title" => 'resetovat heslo',
 "form.fpass.login" => 'přihlásit',
 "form.fpass.send_pass_str" => 'zaslán požadavek k vymazání hesla',
 "form.fpass.send_pass_subj" => 'Anuko Time Tracker požadavek na vymazání hesla',

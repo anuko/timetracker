@@ -140,7 +140,7 @@ $i18n_key_words = array(
 'label.manager_login' => '管理员登录',
 'label.person_name' => '姓名',
 'label.thing_name' => '名称',
-// 'label.login' => 'Login',
+'label.login' => '登录',
 'label.password' => '密码',
 'label.confirm_password' => '确认密码',
 'label.email' => '电子邮件',
@@ -239,8 +239,8 @@ $i18n_key_words = array(
 // 'label.week_list' => 'Week list',
 
 // Form titles.
+'title.login' => '登录',
 // TODO: translate the following.
-// 'title.login' => 'Login',
 // 'title.teams' => 'Teams',
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
@@ -425,13 +425,7 @@ $i18n_key_words = array(
 
 // TODO: refactoring ongoing down from here.
 
-// login form attributes
-"form.login.title" => '登录',
-"form.login.login" => '登录',
-
 // password reminder form attributes
-"form.fpass.title" => '重设密码',
-"form.fpass.login" => '登录',
 "form.fpass.send_pass_str" => '密码重设请求已经发送',
 "form.fpass.send_pass_subj" => 'Anuko时间追踪器密码重设请求',
 // Note to translators: the ending of this string below needs to be translated.
@@ -475,7 +469,6 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => '新建管理账号',
 "form.profile.edit_title" => '编辑简介',
-"form.profile.login" => '登录',
 
 "form.profile.showchart" => '显示饼状图',
 "form.profile.lang" => '语言',
@@ -489,13 +482,11 @@ $i18n_key_words = array(
 "form.people.createu_str" => '新建用户',
 "form.people.edit_str" => '编辑用户',
 "form.people.del_str" => '删除用户',
-"form.people.th.login" => '登录',
 "form.people.th.role" => '角色',
 "form.people.th.rate" => '费率',
 "form.people.manager" => '经理',
 "form.people.comanager" => '合作经理人',
 "form.people.empl" => '用户',
-"form.people.login" => '登录',
 
 "form.people.rate" => '默认小时收费',
 "form.people.comanager" => '合作经理人',

@@ -130,8 +130,7 @@ $i18n_key_words = array(
 // 'button.add_option' => 'Add option',
 'button.add' => 'Lisa',
 'button.generate' => 'Loo',
-// TODO: translate the following.
-// 'button.reset_password' => 'Reset password',
+'button.reset_password' => 'Tühjenda salasõna',
 'button.send' => 'Saada',
 'button.send_by_email' => 'Saada e-mailiga',
 'button.create_team' => 'Loo meeskond',
@@ -443,7 +442,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.title" => 'tühjenda salasõna',
 "form.fpass.login" => 'login',
 "form.fpass.send_pass_str" => 'salasõna tühjendamise käsk edastatud',
 // Note to translators: the 3 strings below must be translated
