@@ -347,7 +347,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
-// 'dropdown.status_active' => 'active',
+'dropdown.status_active' => 'actiu',
+// TODO: translate the following.
 // 'dropdown.status_inactive' => 'inactive',
 // 'dropdown.delete'=>'delete',
 // 'dropdown.do_not_delete'=>'do not delete',
@@ -408,13 +409,27 @@ $i18n_key_words = array(
 // 'form.reports.group_by_task' => 'task',
 // 'form.reports.totals_only' => 'Totals only',
 
+// Report form. See example at https://timetracker.anuko.com/report.php
+// (after generating a report at https://timetracker.anuko.com/reports.php).
+// TODO: translate the following.
+// 'form.report.export' => 'Export',
+// 'form.report.assign_to_invoice' => 'Assign to invoice',
+
+// Invoice form. See example at https://timetracker.anuko.com/invoice.php
+// (you can get to this form after generating a report).
+// TODO: translate the following.
+// 'form.invoice.number' => 'Invoice number',
+// 'form.invoice.person' => 'Person',
+// 'form.invoice.invoice_to_delete' => 'Invoice to delete',
+// 'form.invoice.invoice_entries' => 'Invoice entries',
+// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
+
 
 
 // TODO: refactoring ongoing down from here.
 
-// administrator form
-"form.admin.duty_text" => 'Crear un nou grup, creant un nou compte del manejador de l\\\'equip.<br>També pot importar dades de grups, d\\\'un arxiu xml d\\\'un altre servidor Anuko Time Tracker.(No està permès col·lisions de e-mail).',
-"form.admin.profile.th.active" => 'Actiu',
+// form.admin.duty_text is now used in form.teams.hint with email changed to login.
+"form.teams.hint" => 'Crear un nou grup, creant un nou compte del manejador de l\\\'equip.<br>També pot importar dades de grups, d\\\'un arxiu xml d\\\'un altre servidor Anuko Time Tracker. (No està permès col·lisions de e-mail).',
 
 // my time form attributes
 "form.mytime.title" => 'El meu temps',
