@@ -158,8 +158,9 @@ $i18n_key_words = array(
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
-// 'label.project' => 'Project',
-// 'label.projects' => 'Projects',
+'label.project' => '项目',
+'label.projects' => '项目',
+// TODO: translate the following.
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -262,10 +263,11 @@ $i18n_key_words = array(
 // 'title.invoice' => 'Invoice',
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
-// 'title.projects' => 'Projects',
-// 'title.add_project' => 'Adding Project',
-// 'title.edit_project' => 'Editing Project',
-// 'title.delete_project' => 'Deleting Project',
+'title.projects' => '项目',
+'title.add_project' => '添加项目',
+'title.edit_project' => '编辑项目',
+'title.delete_project' => '删除项目',
+// TODO: translate the following.
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -322,7 +324,8 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
-// 'dropdown.projects' => 'projects',
+'dropdown.projects' => '项目',
+// TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
 // 'dropdown.clients' => 'clients',
 // 'dropdown.select' => '--- select ---',
@@ -396,7 +399,6 @@ $i18n_key_words = array(
 // For example, form.filter.project property no longer exists, and so on.
 
 // If you intend to improve perhaps go in small steps and coordinate with the maintainer if anything is unclear.
-"form.filter.project" => '项目',
 "form.filter.filter" => '收藏的报告',
 "form.filter.filter_new" => '保存到我的收藏夹',
 
@@ -434,13 +436,11 @@ $i18n_key_words = array(
 "form.mytime.del_str" => '删除时间记录',
 "form.mytime.time_form" => ' (时:分)',
 "form.mytime.date" => '日期',
-"form.mytime.project" => '项目',
 "form.mytime.start" => '开始',
 "form.mytime.finish" => '结束',
 "form.mytime.duration" => '持续时间',
 "form.mytime.daily" => '每日工作',
 "form.mytime.total" => '总小时数： ',
-"form.mytime.th.project" => '项目',
 "form.mytime.th.start" => '开始',
 "form.mytime.th.finish" => '结束',
 "form.mytime.th.duration" => '持续时间',
@@ -469,7 +469,6 @@ $i18n_key_words = array(
 "form.people.del_str" => '删除用户',
 "form.people.th.login" => '登录',
 "form.people.th.role" => '角色',
-"form.people.th.project" => '项目',
 "form.people.th.rate" => '费率',
 "form.people.manager" => '经理',
 "form.people.comanager" => '合作经理人',
@@ -478,21 +477,6 @@ $i18n_key_words = array(
 
 "form.people.rate" => '默认小时收费',
 "form.people.comanager" => '合作经理人',
-"form.people.projects" => '项目',
-
-// projects form attributes
-"form.project.proj_title" => '项目',
-"form.project.edit_str" => '编辑项目',
-"form.project.add_str" => '添加新项目',
-"form.project.del_str" => '删除项目',
-
-// activities form attributes
-"form.activity.act_title" => '活动',
-"form.activity.add_title" => '新建活动',
-"form.activity.edit_str" => '编辑活动',
-"form.activity.del_str" => '删除活动',
-"form.activity.project" => '项目',
-"form.activity.th.project" => '项目',
 
 // report attributes
 "form.report.title" => '报告',
@@ -503,12 +487,10 @@ $i18n_key_words = array(
 "form.report.duration" => '持续时间',
 "form.report.start" => '开始',
 "form.report.finish" => '结束',
-"form.report.project" => '项目',
 "form.report.totals_only" => '仅仅今天',
 "form.report.total" => '总计时间',
 "form.report.th.empllist" => '用户',
 "form.report.th.date" => '日期',
-"form.report.th.project" => '项目',
 "form.report.th.start" => '开始',
 "form.report.th.finish" => '结束',
 "form.report.th.duration" => '持续时间',
@@ -518,7 +500,7 @@ $i18n_key_words = array(
 "form.mail.to" => '到',
 "form.mail.above" => '通过电子邮件发送该报告',
 // Note to translators: this string needs to be translated.
- "form.mail.footer_str" => 'anuko时间跟踪器是一种简单、易用、开放源码的时间跟踪系统。 看<a href ="https://www.anuko.com"> www.anuko网</a>更多信息。',
+"form.mail.footer_str" => 'anuko时间跟踪器是一种简单、易用、开放源码的时间跟踪系统。 看<a href ="https://www.anuko.com"> www.anuko网</a>更多信息。',
 "form.mail.sending_str" => '<b>消息已发送</b>',
 
 // invoice attributes

@@ -167,8 +167,9 @@ $i18n_key_words = array(
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
-// 'label.project' => 'Project',
-// 'label.projects' => 'Projects',
+'label.project' => '項目',
+'label.projects' => '項目',
+// TODO: translate the following.
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -271,10 +272,11 @@ $i18n_key_words = array(
 // 'title.invoice' => 'Invoice',
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
-// 'title.projects' => 'Projects',
-// 'title.add_project' => 'Adding Project',
-// 'title.edit_project' => 'Editing Project',
-// 'title.delete_project' => 'Deleting Project',
+'title.projects' => '項目',
+'title.add_project' => '添加項目',
+'title.edit_project' => '編輯專案', // TODO: is this correct? I do not see 項目 here.
+'title.delete_project' => '刪除項目',
+// TODO: translate the following.
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -331,7 +333,8 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
-// 'dropdown.projects' => 'projects',
+'dropdown.projects' => '項目',
+// TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
 // 'dropdown.clients' => 'clients',
 // 'dropdown.select' => '--- select ---',
@@ -401,7 +404,6 @@ $i18n_key_words = array(
 
 // TODO: refactoring ongoing down from here.
 
-"form.filter.project" => '項目',
 "form.filter.filter" => '收藏的報告',
 "form.filter.filter_new" => '保存到我的存檔',
 
@@ -434,13 +436,11 @@ $i18n_key_words = array(
 "form.mytime.del_str" => '刪除時間記錄',
 "form.mytime.time_form" => ' (時:分)',
 "form.mytime.date" => '日期',
-"form.mytime.project" => '項目',
 "form.mytime.start" => '開始',
 "form.mytime.finish" => '結束',
 "form.mytime.duration" => '持續時間',
 "form.mytime.daily" => '每日工作',
 "form.mytime.total" => '總小時數： ',
-"form.mytime.th.project" => '項目',
 "form.mytime.th.start" => '開始',
 "form.mytime.th.finish" => '結束',
 "form.mytime.th.duration" => '持續時間',
@@ -469,7 +469,6 @@ $i18n_key_words = array(
 "form.people.del_str" => '刪除用戶',
 "form.people.th.login" => '登錄',
 "form.people.th.role" => '角色',
-"form.people.th.project" => '項目',
 "form.people.th.rate" => '費率',
 "form.people.manager" => '經理',
 "form.people.comanager" => '合作經理人',
@@ -478,21 +477,6 @@ $i18n_key_words = array(
 
 "form.people.rate" => '默認小時收費',
 "form.people.comanager" => '合作經理人',
-"form.people.projects" => '項目',
-
-// projects form attributes
-"form.project.proj_title" => '項目',
-"form.project.edit_str" => '編輯專案',
-"form.project.add_str" => '添加新項目',
-"form.project.del_str" => '刪除項目',
-
-// activities form attributes
-"form.activity.act_title" => '活動',
-"form.activity.add_title" => '新建活動',
-"form.activity.edit_str" => '編輯活動',
-"form.activity.del_str" => '刪除活動',
-"form.activity.project" => '項目',
-"form.activity.th.project" => '項目',
 
 // report attributes
 "form.report.title" => '報告',
@@ -503,12 +487,10 @@ $i18n_key_words = array(
 "form.report.duration" => '持續時間',
 "form.report.start" => '開始',
 "form.report.finish" => '結束',
-"form.report.project" => '項目',
 "form.report.totals_only" => '僅僅今天',
 "form.report.total" => '總計時間',
 "form.report.th.empllist" => '用戶',
 "form.report.th.date" => '日期',
-"form.report.th.project" => '項目',
 "form.report.th.start" => '開始',
 "form.report.th.finish" => '結束',
 "form.report.th.duration" => '持續時間',
