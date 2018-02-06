@@ -169,8 +169,8 @@ $i18n_key_words = array(
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
-// 'label.start' => 'Start',
-// 'label.finish' => 'Finish',
+'label.start' => 'Início',
+'label.finish' => 'Fim',
 'label.duration' => 'Duração',
 'label.note' => 'Anotação',
 'label.notes' => 'Anotações',
@@ -435,13 +435,8 @@ $i18n_key_words = array(
 // my time form attributes
 "form.mytime.title" => 'adicionar período',
 "form.mytime.date" => 'data',
-"form.mytime.start" => 'início',
-"form.mytime.finish" => 'fim',
 "form.mytime.daily" => 'trabalho diário',
 "form.mytime.total" => 'horas totais: ',
-"form.mytime.th.start" => 'início',
-"form.mytime.th.finish" => 'finish',
-"form.mytime.th.duration" => 'duração',
 "form.mytime.del_yes" => 'o período registrado foi apagado com sucesso',
 
 // profile form attributes
@@ -463,9 +458,6 @@ $i18n_key_words = array(
 "form.report.title" => 'relatórios',
 "form.report.from" => 'data inicial',
 "form.report.to" => 'data final',
-"form.report.duration" => 'duração',
-"form.report.start" => 'início',
-"form.report.finish" => 'fim',
 "form.report.total" => 'horas totais',
 "form.report.th.empllist" => 'usuário',
 // Note to translators: the strings below must be translated

@@ -175,8 +175,8 @@ $i18n_key_words = array(
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
-// 'label.start' => 'Start',
-// 'label.finish' => 'Finish',
+'label.start' => 'Starttid',
+'label.finish' => 'Ferdig',
 'label.duration' => 'Varighet',
 'label.note' => 'Notat',
 'label.notes' => 'Notater',
@@ -464,12 +464,8 @@ $i18n_key_words = array(
 "form.mytime.del_str" => 'slett tids oppføringen',
 "form.mytime.time_form" => ' (tt:mm)',
 // Note to translators: "form.mytime.date" => 'dato', // the string must be translated
-"form.mytime.start" => 'starttid',
-"form.mytime.finish" => 'ferdig',
 "form.mytime.daily" => 'daglig arbeide',
 "form.mytime.total" => 'totalt antall timer: ',
-"form.mytime.th.start" => 'starttid',
-"form.mytime.th.finish" => 'ferdig',
 // Note to translators: the strings below must be translated
 // "form.mytime.del_yes" => 'tidsoppføringen er slettet', 
 // "form.mytime.no_finished_rec" => 'Denne oppføringen ble lagret kun med starttid. Det er ikke en feil. Logg ut om nødvendig.',
@@ -508,18 +504,12 @@ $i18n_key_words = array(
 
 // report attributes
 "form.report.title" => 'rapporter',
-"form.report.from" => 'starttid',
-"form.report.to" => 'ferdig',
 "form.report.groupby_user" => 'bruker',
-"form.report.start" => 'starttid',
-"form.report.finish" => 'ferdig',
 // Note to translators: the strings below must be translated 
 // "form.report.totals_only" => 'kun summer',
 "form.report.total" => 'totalt antall timer',
 "form.report.th.empllist" => 'bruker',
 "form.report.th.date" => 'dato',
-"form.report.th.start" => 'starttid',
-"form.report.th.finish" => 'ferdig',
 
 // mail form attributes
 "form.mail.from" => 'fra',

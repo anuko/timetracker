@@ -175,8 +175,8 @@ $i18n_key_words = array(
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
-// 'label.start' => 'Start',
-// 'label.finish' => 'Finish',
+'label.start' => 'Algus',
+'label.finish' => 'Lõpp',
 'label.duration' => 'Kestus',
 'label.note' => 'Märkus',
 'label.notes' => 'Märkused',
@@ -467,12 +467,8 @@ $i18n_key_words = array(
 // Note to translators: the string below must be translated
 // "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.date" => 'kuupäev',
-"form.mytime.start" => 'algus',
-"form.mytime.finish" => 'lõpp',
 "form.mytime.daily" => 'igapäevane töö',
 "form.mytime.total" => 'tunde kokku: ',
-"form.mytime.th.start" => 'algus',
-"form.mytime.th.finish" => 'lõpp',
 "form.mytime.del_yes" => 'ajakanne kustutatud',
 "form.mytime.no_finished_rec" => 'kanne salvestati ainult alguse ajaga. see ei ole viga. logi välja kui vaja peaks olema.',
 "form.mytime.warn_tozero_rec" => 'see ajakanne tuleb kustutada kuna see ajaperiood on lukustatud',
@@ -484,14 +480,6 @@ $i18n_key_words = array(
 "form.profile.create_title" => 'loo uus halduri konto',
 "form.profile.edit_title" => 'profiili muutmine',
 "form.profile.login" => 'login',
-
-// Note to translators: the strings below must be translated and added to the localization file
-// "form.profile.showchart" => 'show pie charts',
-// "form.profile.lang" => 'language',
-// "form.profile.custom_date_format" => "date format",
-// "form.profile.custom_time_format" => "time format",
-// "form.profile.default_format" => "(default)",
-// "form.profile.start_week" => "first day of week",
 
 // people form attributes
 "form.people.ppl_str" => 'inimesed',
@@ -513,14 +501,10 @@ $i18n_key_words = array(
 "form.report.from" => 'algab kuupäevast',
 "form.report.to" => 'lõpeb kuupäeval',
 "form.report.groupby_user" => 'kasutaja',
-"form.report.start" => 'algus',
-"form.report.finish" => 'lõpp',
 "form.report.totals_only" => 'ainult summad',
 "form.report.total" => 'tunde kokku',
 "form.report.th.empllist" => 'kasutaja',
 "form.report.th.date" => 'kuupäev',
-"form.report.th.start" => 'algus',
-"form.report.th.finish" => 'lõpp',
 
 // mail form attributes
 "form.mail.from" => 'kellelt',
