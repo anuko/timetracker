@@ -160,8 +160,8 @@ $i18n_key_words = array(
 // 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
 'label.subject' => '主題',
+'label.date' => '日付',
 // TODO: translate the following.
-// 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',
@@ -468,7 +468,6 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => '時間レコードの編集',
 "form.mytime.del_str" => '時間レコードの削除',
 "form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.date" => '日付',
 "form.mytime.daily" => '日課',
 "form.mytime.total" => '合計時間： ',
 "form.mytime.del_yes" => '時間レコードが成功的に削除されました',
@@ -513,7 +512,6 @@ $i18n_key_words = array(
 "form.report.totals_only" => '全体だけ',
 "form.report.total" => '合計時間',
 "form.report.th.empllist" => 'ユーザー',
-"form.report.th.date" => '日付',
 
 // mail form attributes
 "form.mail.from" => 'から',
@@ -529,7 +527,6 @@ $i18n_key_words = array(
 "form.invoice.above" => '送り状の追加の情報',
 "form.invoice.select_cust" => 'クライアントの選択',
 "form.invoice.fillform" => 'フィールドの作成',
-"form.invoice.date" => '日付',
 "form.invoice.number" => '送り状の番号',
 "form.invoice.th.username" => '個人',
 "form.invoice.th.time" => '時間',

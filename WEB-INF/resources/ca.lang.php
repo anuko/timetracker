@@ -451,7 +451,6 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => 'Modificant l\\\'historial de temps',
 "form.mytime.del_str" => 'Eliminant l\\\'historial de temps',
 "form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.date" => 'Data',
 "form.mytime.daily" => 'Treball diari',
 "form.mytime.total" => 'Hores totals: ',
 "form.mytime.del_yes" => 'L\\\'historial de temps s\\\'ha eliminat amb èxit',
@@ -479,7 +478,6 @@ $i18n_key_words = array(
 "form.report.totals_only" => 'Només totals',
 "form.report.total" => 'Hores Totals',
 "form.report.th.empllist" => 'Usuari',
-"form.report.th.date" => 'Data',
 
 // charts form attributes
 // Note to translators: form.charts.title needs to be translated.
@@ -497,7 +495,6 @@ $i18n_key_words = array(
 "form.invoice.above" => 'Informació addicional per factura',
 "form.invoice.select_cust" => 'Seleccioni el client',
 "form.invoice.fillform" => 'Empleni els camps',
-"form.invoice.date" => 'Data',
 "form.invoice.number" => 'Número de factura',
 "form.invoice.th.username" => 'Persona',
 "form.invoice.th.time" => 'Hores',

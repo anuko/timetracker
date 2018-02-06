@@ -159,8 +159,8 @@ $i18n_key_words = array(
 // 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Emne',
+'label.date' => 'Dato',
 // TODO: translate the following.
-// 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',
@@ -463,7 +463,6 @@ $i18n_key_words = array(
 // "form.mytime.edit_title" => 'endre tidsoppføringen',
 "form.mytime.del_str" => 'slett tids oppføringen',
 "form.mytime.time_form" => ' (tt:mm)',
-// Note to translators: "form.mytime.date" => 'dato', // the string must be translated
 "form.mytime.daily" => 'daglig arbeide',
 "form.mytime.total" => 'totalt antall timer: ',
 // Note to translators: the strings below must be translated
@@ -509,7 +508,6 @@ $i18n_key_words = array(
 // "form.report.totals_only" => 'kun summer',
 "form.report.total" => 'totalt antall timer',
 "form.report.th.empllist" => 'bruker',
-"form.report.th.date" => 'dato',
 
 // mail form attributes
 "form.mail.from" => 'fra',
@@ -526,7 +524,6 @@ $i18n_key_words = array(
 // Note to translators: the strings below are missing and must be added and translated
 // "form.invoice.select_cust" => 'velg klient',
 // "form.invoice.fillform" => 'fyll inn i feltene',
-"form.invoice.date" => 'dato',
 "form.invoice.number" => 'fakturanummer',
 "form.invoice.th.username" => 'person',
 "form.invoice.th.time" => 'timer',

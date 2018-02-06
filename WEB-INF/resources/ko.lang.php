@@ -160,8 +160,8 @@ $i18n_key_words = array(
 // 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
 'label.subject' => '제목',
+'label.date' => '날짜',
 // TODO: translate the following.
-// 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',
@@ -469,7 +469,6 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => '시간기록을 편집하기',
 "form.mytime.del_str" => '시간기록을 삭제하기',
 "form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.date" => '날짜',
 "form.mytime.daily" => '하루일과',
 "form.mytime.total" => '전체 시간: ',
 "form.mytime.del_yes" => '성과적으로 삭제된 시간기록',
@@ -513,7 +512,6 @@ $i18n_key_words = array(
 "form.report.totals_only" => '오직 전체만',
 "form.report.total" => '시간 총합',
 "form.report.th.empllist" => '사용자',
-"form.report.th.date" => '날짜',
 
 // mail form attributes
 "form.mail.from" => '부터',
@@ -529,7 +527,6 @@ $i18n_key_words = array(
 "form.invoice.above" => '송장에 대한 보충정보',
 "form.invoice.select_cust" => '클라이언트의 선택',
 "form.invoice.fillform" => '필드들을 채우십시오',
-"form.invoice.date" => '날짜',
 "form.invoice.number" => '송장 번호',
 "form.invoice.th.username" => '개인',
 "form.invoice.th.time" => '시간',

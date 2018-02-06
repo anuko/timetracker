@@ -163,8 +163,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Subiect',
+'label.date' => 'Data',
 // TODO: translate the following.
-// 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',
@@ -466,7 +466,6 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => 'editarea inregistrarii timpului',
 "form.mytime.del_str" => 'stergerea inregistrarii timpului',
 "form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.date" => 'data',
 "form.mytime.daily" => 'activitatea zilnica',
 "form.mytime.total" => 'ore total: ',
 "form.mytime.del_yes" => 'inregistrarea timului a fost stearsa cu succes',
@@ -499,7 +498,6 @@ $i18n_key_words = array(
 "form.report.totals_only" => 'numai totaluri',
 "form.report.total" => 'ore total',
 "form.report.th.empllist" => 'utilizator',
-"form.report.th.date" => 'data',
 
 // mail form attributes
 "form.mail.from" => 'de la',
@@ -515,7 +513,6 @@ $i18n_key_words = array(
 "form.invoice.above" => 'informatii aditionale pentru factura',
 "form.invoice.select_cust" => 'alege client',
 "form.invoice.fillform" => 'comleteaza campurile',
-"form.invoice.date" => 'data',
 "form.invoice.number" => 'numar factura',
 "form.invoice.th.username" => 'persoana',
 "form.invoice.th.time" => 'ore',

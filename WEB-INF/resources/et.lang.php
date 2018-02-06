@@ -159,8 +159,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Teema',
+'label.date' => 'Kuupäev',
 // TODO: translate the following.
-// 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',
@@ -464,9 +464,6 @@ $i18n_key_words = array(
 "form.mytime.title" => 'minu aeg',
 "form.mytime.edit_title" => 'ajakande muutmine',
 "form.mytime.del_str" => 'ajakande kustutamine',
-// Note to translators: the string below must be translated
-// "form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.date" => 'kuupäev',
 "form.mytime.daily" => 'igapäevane töö',
 "form.mytime.total" => 'tunde kokku: ',
 "form.mytime.del_yes" => 'ajakanne kustutatud',
@@ -504,7 +501,6 @@ $i18n_key_words = array(
 "form.report.totals_only" => 'ainult summad',
 "form.report.total" => 'tunde kokku',
 "form.report.th.empllist" => 'kasutaja',
-"form.report.th.date" => 'kuupäev',
 
 // mail form attributes
 "form.mail.from" => 'kellelt',
@@ -520,7 +516,6 @@ $i18n_key_words = array(
 "form.invoice.above" => 'lisainformatsioon arvele',
 "form.invoice.select_cust" => 'vali klient',
 "form.invoice.fillform" => 'täida väljad',
-"form.invoice.date" => 'kuupäev',
 "form.invoice.number" => 'arve number',
 "form.invoice.th.username" => 'isik',
 "form.invoice.th.time" => 'tunde',

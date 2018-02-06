@@ -167,8 +167,8 @@ $i18n_key_words = array(
 // 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Konu',
+'label.date' => 'Tarih',
 // TODO: translate the following.
-// 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',
@@ -471,7 +471,6 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => 'zaman kaydını düzenliyor',
 "form.mytime.del_str" => 'zaman kaydını siliyor',
 "form.mytime.time_form" => ' (ss:dd)',
-"form.mytime.date" => 'tarih',
 "form.mytime.daily" => 'günlük çalışma',
 "form.mytime.total" => 'toplam saat: ',
 "form.mytime.del_yes" => 'zaman kaydı başarıyla silindi',
@@ -507,7 +506,6 @@ $i18n_key_words = array(
 "form.report.totals_only" => 'sadece toplamlar',
 "form.report.total" => 'saat toplamı',
 "form.report.th.empllist" => 'kullanıcı',
-"form.report.th.date" => 'tarih',
 
 // mail form attributes
 "form.mail.from" => 'kimden',
@@ -523,7 +521,6 @@ $i18n_key_words = array(
 "form.invoice.above" => 'fatura için ek bilgi',
 "form.invoice.select_cust" => 'müşteri seç',
 "form.invoice.fillform" => 'alanları doldur',
-"form.invoice.date" => 'tarih',
 "form.invoice.number" => 'fatura numarası',
 "form.invoice.th.username" => 'kişi',
 "form.invoice.th.time" => 'saatler',

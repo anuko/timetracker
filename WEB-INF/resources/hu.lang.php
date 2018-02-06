@@ -161,8 +161,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Tárgy',
+'label.date' => 'Dátum',
 // TODO: translate the following.
-// 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',
@@ -459,7 +459,6 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => 'szerkesztés',
 "form.mytime.del_str" => 'törlés',
 "form.mytime.time_form" => ' (óó:pp)',
-"form.mytime.date" => 'dátum',
 "form.mytime.daily" => 'napi munka',
 "form.mytime.total" => 'összesített óraszám: ',
 "form.mytime.del_yes" => 'a bejegyzés törölve',
@@ -491,7 +490,6 @@ $i18n_key_words = array(
 "form.report.totals_only" => 'csak a teljes óraszám',
 "form.report.total" => 'összesített óraszám',
 "form.report.th.empllist" => 'dolgozó',
-"form.report.th.date" => 'dátum',
 
 // mail form attributes
 "form.mail.from" => 'feladó',
@@ -507,7 +505,6 @@ $i18n_key_words = array(
 "form.invoice.above" => 'a számlához tartozó adatok',
 "form.invoice.select_cust" => 'válassz ügyfelet',
 "form.invoice.fillform" => 'töltsd ki a mezőket',
-"form.invoice.date" => 'Dátum',
 "form.invoice.number" => 'számla azonosító száma',
 "form.invoice.th.username" => 'személy',
 "form.invoice.th.time" => 'óra',

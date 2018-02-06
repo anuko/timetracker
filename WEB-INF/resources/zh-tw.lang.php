@@ -156,8 +156,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.bcc' => 'Bcc',
 'label.subject' => '主題',
+'label.date' => '日期',
 // TODO: translate the following.
-// 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',
@@ -461,7 +461,6 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => '編輯時間記錄',
 "form.mytime.del_str" => '刪除時間記錄',
 "form.mytime.time_form" => ' (時:分)',
-"form.mytime.date" => '日期',
 "form.mytime.daily" => '每日工作',
 "form.mytime.total" => '總小時數： ',
 "form.mytime.del_yes" => '成功刪除時間記錄',
@@ -506,7 +505,6 @@ $i18n_key_words = array(
 "form.report.totals_only" => '僅僅今天',
 "form.report.total" => '總計時間',
 "form.report.th.empllist" => '用戶',
-"form.report.th.date" => '日期',
 
 // mail form attributes
 "form.mail.from" => '從',
@@ -522,7 +520,6 @@ $i18n_key_words = array(
 "form.invoice.above" => '發票附加資訊',
 "form.invoice.select_cust" => '選擇客戶',
 "form.invoice.fillform" => '填寫該欄目',
-"form.invoice.date" => '日期',
 "form.invoice.number" => '發票號碼',
 "form.invoice.th.username" => '收費人',
 "form.invoice.th.time" => '小時數',

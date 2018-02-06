@@ -153,8 +153,8 @@ $i18n_key_words = array(
 // 'label.cc' => 'Cc',
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Assunto',
+'label.date' => 'Data',
 // TODO: translate the following.
-// 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',
@@ -434,7 +434,6 @@ $i18n_key_words = array(
 
 // my time form attributes
 "form.mytime.title" => 'adicionar período',
-"form.mytime.date" => 'data',
 "form.mytime.daily" => 'trabalho diário',
 "form.mytime.total" => 'horas totais: ',
 "form.mytime.del_yes" => 'o período registrado foi apagado com sucesso',
@@ -460,8 +459,6 @@ $i18n_key_words = array(
 "form.report.to" => 'data final',
 "form.report.total" => 'horas totais',
 "form.report.th.empllist" => 'usuário',
-// Note to translators: the strings below must be translated
-// "form.report.th.date" => 'data',
 
 // mail form attributes
 "form.mail.from" => 'de',

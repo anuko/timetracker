@@ -161,8 +161,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Předmět',
+'label.date' => 'Datum',
 // TODO: translate the following.
-// 'label.date' => 'Date',
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',
@@ -463,8 +463,6 @@ $i18n_key_words = array(
 "form.mytime.title" => 'můj deník',
 "form.mytime.edit_title" => 'upravit časový záznam',
 "form.mytime.del_str" => 'smazat časový záznam',
-// Note to translators: "form.mytime.time_form" => ' (hh:mm)', // the string must be translated
-"form.mytime.date" => 'datum',
 "form.mytime.daily" => 'denní práce',
 "form.mytime.total" => 'součet hodin: ',
 "form.mytime.del_yes" => 'časový záznam úspěšně odstraněn',
@@ -504,7 +502,6 @@ $i18n_key_words = array(
 "form.report.totals_only" => 'pouze součty',
 "form.report.total" => 'součty hodin',
 "form.report.th.empllist" => 'uzivatel',
-"form.report.th.date" => 'datum',
 
 // mail form attributes
 "form.mail.from" => 'od',
@@ -520,7 +517,6 @@ $i18n_key_words = array(
 "form.invoice.above" => 'fakturační informace',
 "form.invoice.select_cust" => 'výběr firmy',
 "form.invoice.fillform" => 'vyplňte pole',
-"form.invoice.date" => 'datum',
 "form.invoice.number" => 'faktura číslo',
 "form.invoice.th.username" => 'osoba',
 "form.invoice.th.time" => 'hodin',
