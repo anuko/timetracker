@@ -171,7 +171,7 @@ $i18n_key_words = array(
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
-// 'label.project' => 'Project',
+'label.project' => 'Projekt',
 'label.projects' => 'Projekty',
 // TODO: translate the following.
 // 'label.task' => 'Task',
@@ -282,10 +282,10 @@ $i18n_key_words = array(
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => 'Projekty',
+'title.add_project' => 'Pridat projekt',
+'title.edit_project' => 'Upravit projekt',
+'title.delete_project' => 'Smazat projekt',
 // TODO: translate the following.
-// 'title.add_project' => 'Adding Project',
-// 'title.edit_project' => 'Editing Project',
-// 'title.delete_project' => 'Deleting Project',
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -441,13 +441,11 @@ $i18n_key_words = array(
 "form.mytime.del_str" => 'smazat časový záznam',
 // Note to translators: "form.mytime.time_form" => ' (hh:mm)', // the string must be translated
 "form.mytime.date" => 'datum',
-"form.mytime.project" => 'projekt',
 "form.mytime.start" => 'začátek',
 "form.mytime.finish" => 'konec',
 "form.mytime.duration" => 'trvání',
 "form.mytime.daily" => 'denní práce',
 "form.mytime.total" => 'součet hodin: ',
-"form.mytime.th.project" => 'projekt',
 "form.mytime.th.start" => 'začátek',
 "form.mytime.th.finish" => 'konec',
 "form.mytime.th.duration" => 'trvání',
@@ -473,7 +471,6 @@ $i18n_key_words = array(
 "form.people.th.login" => 'přihlásit',
 "form.people.th.role" => 'role',
 "form.people.th.status" => 'status',
-"form.people.th.project" => 'projekt',
 "form.people.th.rate" => 'sazba',
 "form.people.manager" => 'manažer',
 "form.people.comanager" => 'spolumanažer',
@@ -482,16 +479,6 @@ $i18n_key_words = array(
 
 "form.people.rate" => 'hodinová sazba',
 "form.people.comanager" => 'spolumanažer',
-"form.people.projects" => 'projekty',
-
-// projects form attributes
-"form.project.proj_title" => 'projekty',
-"form.project.edit_str" => 'upravit projekt',
-"form.project.add_str" => 'pridat nový projekt',
-"form.project.del_str" => 'smazat projekt',
-
-// activities form attributes
-"form.activity.project" => 'projekt',
 
 // report attributes
 "form.report.from" => 'počáteční datum',
@@ -501,12 +488,10 @@ $i18n_key_words = array(
 "form.report.duration" => 'trvání',
 "form.report.start" => 'počátek',
 "form.report.finish" => 'konec',
-"form.report.project" => 'projekt',
 "form.report.totals_only" => 'pouze součty',
 "form.report.total" => 'součty hodin',
 "form.report.th.empllist" => 'uzivatel',
 "form.report.th.date" => 'datum',
-"form.report.th.project" => 'projekt',
 "form.report.th.start" => 'počátek',
 "form.report.th.finish" => 'konec',
 "form.report.th.duration" => 'trvání',

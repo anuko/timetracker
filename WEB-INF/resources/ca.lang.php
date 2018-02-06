@@ -170,9 +170,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.option' => 'Option',
 'label.invoice' => 'Factura',
+'label.project' => 'Projecte',
+'label.projects' => 'Projectes',
 // TODO: translate the following.
-// 'label.project' => 'Project',
-// 'label.projects' => 'Projects',
 // 'label.task' => 'Task',
 // 'label.tasks' => 'Tasks',
 // 'label.description' => 'Description',
@@ -249,6 +249,10 @@ $i18n_key_words = array(
 // 'label.week_list' => 'Week list',
 
 // Form titles.
+// TODO: Improve titles for consistency, so that each title explains correctly what each
+// page is about and is "consistent" from page to page, meaning that correct grammar is used everywhere.
+// Compare with English file to see how it is done there and do Catalan titles similarly.
+// Specifically: Agregant vs Agregar, etc.
 'title.login' => 'Sessió iniciada',
 // TODO: translate the following.
 // 'title.teams' => 'Teams',
@@ -276,10 +280,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
-// 'title.projects' => 'Projects',
-// 'title.add_project' => 'Adding Project',
-// 'title.edit_project' => 'Editing Project',
-// 'title.delete_project' => 'Deleting Project',
+'title.projects' => 'Projectes',
+'title.add_project' => 'Agregant projecte',
+'title.edit_project' => 'Modificant projecte',
+'title.delete_project' => 'Eliminant projecte',
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -337,7 +341,8 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
-// 'dropdown.projects' => 'projects',
+'dropdown.projects' => 'projectes',
+// TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
 'dropdown.clients' => 'clients',
 // TODO: translate the following.
@@ -424,13 +429,11 @@ $i18n_key_words = array(
 "form.mytime.del_str" => 'Eliminant l\\\'historial de temps',
 "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.date" => 'Data',
-"form.mytime.project" => 'Projecte',
 "form.mytime.start" => 'Inici',
 "form.mytime.finish" => 'Fi',
 "form.mytime.duration" => 'Durada',
 "form.mytime.daily" => 'Treball diari',
 "form.mytime.total" => 'Hores totals: ',
-"form.mytime.th.project" => 'Projecte',
 "form.mytime.th.start" => 'Inici',
 "form.mytime.th.finish" => 'Fi',
 "form.mytime.th.duration" => 'Durada',
@@ -445,7 +448,6 @@ $i18n_key_words = array(
 "form.people.th.email" => 'e-mail',
 "form.people.th.role" => 'Rol',
 "form.people.th.status" => 'Estat',
-"form.people.th.project" => 'Projecte',
 "form.people.th.rate" => 'Taxa',
 "form.people.manager" => 'Manejador',
 "form.people.comanager" => 'Auxiliar del manejador',
@@ -453,16 +455,6 @@ $i18n_key_words = array(
 
 "form.people.rate" => 'Taxa per defecte en hores',
 "form.people.comanager" => 'Auxiliar del manejador',
-"form.people.projects" => 'Projectes',
-
-// projects form attributes
-"form.project.proj_title" => 'Projectes',
-"form.project.edit_str" => 'Modificant projecte',
-"form.project.add_str" => 'Agregant nou projecte',
-"form.project.del_str" => 'Eliminant projecte',
-
-// activities form attributes
-"form.activity.project" => 'Projecte',
 
 // report attributes
 "form.report.from" => 'Data d\\\'inici',
@@ -472,12 +464,10 @@ $i18n_key_words = array(
 "form.report.duration" => 'Durada',
 "form.report.start" => 'Inici',
 "form.report.finish" => 'Fi',
-"form.report.project" => 'Projecte',
 "form.report.totals_only" => 'Només totals',
 "form.report.total" => 'Hores Totals',
 "form.report.th.empllist" => 'Usuari',
 "form.report.th.date" => 'Data',
-"form.report.th.project" => 'Projecte',
 "form.report.th.start" => 'Inici',
 "form.report.th.finish" => 'Fi',
 "form.report.th.duration" => 'Durada',
