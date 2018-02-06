@@ -58,7 +58,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
-'menu.teams' => 'Equips',
+'menu.teams' => 'Grups',
 // TODO: translate the following.
 // 'menu.export' => 'Export',
 'menu.clients' => 'Clients',
@@ -100,7 +100,7 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 // 'error.no_login' => 'No user with this login.',
-// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.no_teams' => 'La seva base de dades està buida. Iniciï sessió com a administrador i creï un nou grup.',
 'error.upload' => 'Error pujant l\\\'arxiu.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
@@ -253,11 +253,11 @@ $i18n_key_words = array(
 // Compare with English file to see how it is done there and do Catalan titles similarly.
 // Specifically: Agregant vs Agregar, etc.
 'title.login' => 'Sessió iniciada',
+'title.teams' => 'Grups',
 // TODO: translate the following.
-// 'title.teams' => 'Teams',
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
+'title.delete_team' => 'Eliminar grup',
 'title.reset_password' => 'Restablir paraula de pas',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
@@ -414,12 +414,6 @@ $i18n_key_words = array(
 
 // administrator form
 "form.admin.duty_text" => 'Crear un nou grup, creant un nou compte del manejador de l\\\'equip.<br>També pot importar dades de grups, d\\\'un arxiu xml d\\\'un altre servidor Anuko Time Tracker.(No està permès col·lisions de e-mail).',
-
-"form.admin.change_pass" => 'Canviar la paraula de pas de l\\\'administrador de compte',
-"form.admin.profile.title" => 'Grups',
-"form.admin.profile.noprofiles" => 'La seva base de dades està buida. Iniciï sessió com a administrador i creï un nou grup.',
-"form.admin.profile.comment" => 'Eliminar grup',
-"form.admin.profile.th.id" => 'Identificació',
 "form.admin.profile.th.active" => 'Actiu',
 
 // my time form attributes

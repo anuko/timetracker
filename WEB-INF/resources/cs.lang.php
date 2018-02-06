@@ -423,17 +423,11 @@ $i18n_key_words = array(
 // administrator form
 "form.admin.title" => 'administrator',
 "form.admin.duty_text" => 'vytvořit nový tým prostřednictvím účtu týmového manažera.<br>můžete také importovat týmová data z xml souboru z jiného time tracker serveru (nejsou povoleny shody e-mailových adres!).',
-
-"form.admin.change_pass" => 'změna hesla účtu administrator',
 "form.admin.profile.title" => 'týmy',
 "form.admin.profile.noprofiles" => 'vaše databáze je prázdná. přihlašte se jako admin a vytvořte nový tým.',
 "form.admin.profile.comment" => 'smazat tým',
 "form.admin.profile.th.id" => 'id',
 "form.admin.profile.th.active" => 'aktovní',
-// Note to translators: the strings below are missing in the translation and must be added
-// "form.admin.custom_date_format" => "date format",
-// "form.admin.custom_time_format" => "time format",
-// "form.admin.start_week" => "first day of week",
 
 // my time form attributes
 "form.mytime.title" => 'můj deník',

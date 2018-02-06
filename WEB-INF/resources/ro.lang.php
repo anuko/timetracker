@@ -421,7 +421,6 @@ $i18n_key_words = array(
 "form.admin.title" => 'administrator',
 "form.admin.duty_text" => 'adauga o noua echipa prin adaugarea unui nou cont de tip manager.<br>deasemeni poti importa datele despre echipa dintr-un fisier xml generat de un alt server Anuko Time Tracker  (nu sunt permise duplicate pentru emailuri).',
 
-"form.admin.change_pass" => 'schimba parola contului de administrator',
 "form.admin.profile.title" => 'echipe',
 "form.admin.profile.noprofiles" => 'baza de date este goala. intra ca admin si adauga o noua echipa.',
 "form.admin.profile.comment" => 'sterge echipa',

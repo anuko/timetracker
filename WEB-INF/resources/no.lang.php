@@ -421,7 +421,6 @@ $i18n_key_words = array(
 // "form.admin.title" => 'administrator',
 // "form.admin.duty_text" => 'opprett et nytt team ved å opprette en ny team manager konto.<br>du kan også importere team data fra en xml fil fra en annen Anuko Time Tracker server (ingen login kollisjoner er tillatt).',
 
-// "form.admin.change_pass" => 'bytt passord på administratorkontoen',
 // "form.admin.profile.title" => 'team',
 // "form.admin.profile.noprofiles" => 'databasen din er tom. logg inn som admin og opprett et nytt team.',
 // "form.admin.profile.comment" => 'slett team',

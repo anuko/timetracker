@@ -417,7 +417,6 @@ $i18n_key_words = array(
 "form.admin.title" => 'Adminisztrátor',
 "form.admin.duty_text" => 'új csoport létrehozása egy csoport-vezetői jogosultsággal.<br>a csoport adatokat importálhatjuk XML-ből (csak az e-mail címek ne ütközzenek).',
 
-"form.admin.change_pass" => 'az adminisztrátori jelszó megváltoztatása',
 "form.admin.profile.title" => 'csoportok',
 "form.admin.profile.noprofiles" => 'az adatbázis üres. lépj be adminisztrátorként és hozz létre egyet.',
 "form.admin.profile.comment" => 'csoport törlése',

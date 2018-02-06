@@ -426,16 +426,11 @@ $i18n_key_words = array(
 // Note to translators: the string below must be translated
 // "form.admin.duty_text" => 'create a new meeskond by creating a new meeskond manager account.<br>you can also import meeskond data from an xml file from another Anuko time tracker server (no e-mail collisions are allowed).',
 
-"form.admin.change_pass" => 'muuda administraatori konto salasõna',
 "form.admin.profile.title" => 'meeskonnad',
 "form.admin.profile.noprofiles" => 'sinu andmebaas on tühi. logi adminina sisse ja loo uus meeskond.',
 "form.admin.profile.comment" => 'kustuta meeskond',
 "form.admin.profile.th.id" => 'id',
 "form.admin.profile.th.active" => 'aktiivne',
-// Note to translators: the strings below are missing in the translation and must be translated
-// "form.admin.custom_date_format" => "date format",
-// "form.admin.custom_time_format" => "time format",
-// "form.admin.start_week" => "first day of week",
 
 // my time form attributes
 "form.mytime.title" => 'minu aeg',

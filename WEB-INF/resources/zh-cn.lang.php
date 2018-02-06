@@ -419,7 +419,6 @@ $i18n_key_words = array(
 "form.admin.title" => '管理员',
 "form.admin.duty_text" => '通过创建新的团队经理账号来创建新团队。<br>您也可以从其它的Anuko时间追踪器服务器的xml文件导入团队数据(登录信息不能发生冲突)。',
 
-"form.admin.change_pass" => '修改管理员账号的密码',
 "form.admin.profile.title" => '团队',
 "form.admin.profile.noprofiles" => '您的数据库没有任何记录。请以管理员身份登录并创建一个新团队。',
 "form.admin.profile.comment" => '删除团队',

@@ -431,7 +431,6 @@ $i18n_key_words = array(
 "form.admin.title" => 'yönetici',
 "form.admin.duty_text" => 'yeni bir ekip yönetimi hesabı yaratarak yeni bir ekibi yaratın.<br>ayrıca başka bir Anuko Time Tracker sunucusundan ekip bilgilerini bir xml dosyasından aktarabilirsiniz (e-posta çakışmalarına izin verilmemekte).',
 
-"form.admin.change_pass" => 'yönetici hesabın parolasını değiştir',
 "form.admin.profile.title" => 'ekipler',
 "form.admin.profile.noprofiles" => 'veritabanınız boş. yeni bir ekip yaratmak için yönetici olarak giriş yapın.',
 "form.admin.profile.comment" => 'ekibi sil',

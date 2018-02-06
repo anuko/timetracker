@@ -426,7 +426,6 @@ $i18n_key_words = array(
 "form.admin.title" => '관리자',
 "form.admin.duty_text" => '신규 팀관리자 계정을 생성하여 신규 팀을 생성합니다.<br>또한 다른 Anuko Time Tracker 서버 에서 xml 파일로부터 팀 데이터를 임포트할수 있습니다 (로그인 충돌은 허용되지 안음).',
 
-"form.admin.change_pass" => '관리자 계정의 암호 변경',
 "form.admin.profile.title" => '팀',
 "form.admin.profile.noprofiles" => '당신의 데이터베이스는 비어있습니다. 관리자로 로그인하여 새로운 팀을 생성하십시오.',
 "form.admin.profile.comment" => '팀 삭제',
