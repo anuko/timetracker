@@ -592,6 +592,5 @@ $i18n_key_words = array(
 "label.disable" => '무력화',
 "label.enable" => '가능화',
 "label.hrs" => '시간',
-"label.errors" => '오류',
 "label.ldap_hint" => '아래의 필드들에서 <b>Windows 로그인</b> 및 <b>암호</b> 를 입력하십시오.',
 );

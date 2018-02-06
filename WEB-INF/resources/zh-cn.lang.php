@@ -574,7 +574,6 @@ $i18n_key_words = array(
 "label.disable" => '禁用',
 "label.enable" => '启用',
 "label.hrs" => '小时',
-"label.errors" => '错误',
 "label.ldap_hint" => '在下面的栏目输入您的<b>Windows用户名</b>和<b>密码</b>。',
 
 // login hello text

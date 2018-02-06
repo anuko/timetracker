@@ -596,7 +596,6 @@ $i18n_key_words = array(
 // "label.disable" => 'slå av',
 // "label.enable" => 'slå på',
 // "label.hrs" => 'timer',
-// "label.errors" => 'feil',
 // "label.ldap_hint" => 'Skriv din <b>Windows login</b> og <b>passord</b> i feltene nedenfor.',
 
 // login hello text
