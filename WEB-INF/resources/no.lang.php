@@ -177,7 +177,7 @@ $i18n_key_words = array(
 // 'label.description' => 'Description',
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
-// 'label.duration' => 'Duration',
+'label.duration' => 'Varighet',
 'label.note' => 'Notat',
 'label.notes' => 'Notater',
 // TODO: translate the following.
@@ -395,7 +395,8 @@ $i18n_key_words = array(
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
-// 'form.reports.group_by_project' => 'project',
+'form.reports.group_by_project' => 'prosjekt',
+// TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
 // 'form.reports.totals_only' => 'Totals only',
 
@@ -465,12 +466,10 @@ $i18n_key_words = array(
 // Note to translators: "form.mytime.date" => 'dato', // the string must be translated
 "form.mytime.start" => 'starttid',
 "form.mytime.finish" => 'ferdig',
-"form.mytime.duration" => 'varighet',
 "form.mytime.daily" => 'daglig arbeide',
 "form.mytime.total" => 'totalt antall timer: ',
 "form.mytime.th.start" => 'starttid',
 "form.mytime.th.finish" => 'ferdig',
-"form.mytime.th.duration" => 'varighet',
 // Note to translators: the strings below must be translated
 // "form.mytime.del_yes" => 'tidsoppføringen er slettet', 
 // "form.mytime.no_finished_rec" => 'Denne oppføringen ble lagret kun med starttid. Det er ikke en feil. Logg ut om nødvendig.',
@@ -512,8 +511,6 @@ $i18n_key_words = array(
 "form.report.from" => 'starttid',
 "form.report.to" => 'ferdig',
 "form.report.groupby_user" => 'bruker',
-"form.report.groupby_project" => 'prosjekt',
-"form.report.duration" => 'varighet',
 "form.report.start" => 'starttid',
 "form.report.finish" => 'ferdig',
 // Note to translators: the strings below must be translated 
@@ -523,7 +520,6 @@ $i18n_key_words = array(
 "form.report.th.date" => 'dato',
 "form.report.th.start" => 'starttid',
 "form.report.th.finish" => 'ferdig',
-"form.report.th.duration" => 'varighet',
 
 // mail form attributes
 "form.mail.from" => 'fra',

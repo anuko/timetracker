@@ -178,7 +178,7 @@ $i18n_key_words = array(
 // 'label.description' => 'Description',
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
-// 'label.duration' => 'Duration',
+'label.duration' => '기간',
 'label.note' => '표식',
 'label.notes' => '표식',
 // TODO: translate the following.
@@ -403,7 +403,8 @@ $i18n_key_words = array(
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
-// 'form.reports.group_by_project' => 'project',
+'form.reports.group_by_project' => '프로젝트',
+// TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
 // 'form.reports.totals_only' => 'Totals only',
 
@@ -471,12 +472,10 @@ $i18n_key_words = array(
 "form.mytime.date" => '날짜',
 "form.mytime.start" => '시작',
 "form.mytime.finish" => '마감',
-"form.mytime.duration" => '기간',
 "form.mytime.daily" => '하루일과',
 "form.mytime.total" => '전체 시간: ',
 "form.mytime.th.start" => '시작',
 "form.mytime.th.finish" => '마감',
-"form.mytime.th.duration" => '기간',
 "form.mytime.del_yes" => '성과적으로 삭제된 시간기록',
 "form.mytime.no_finished_rec" => '이 기록은 시작 시간으로만 저장되었습니다. 이것은 오류는 아닙니다. 필요하면 로그아웃 하십시오.',
 "form.mytime.warn_tozero_rec" => '이 시간기간이 로크되었으므로 이 시간기록은 삭제되어야 합니다',
@@ -515,8 +514,6 @@ $i18n_key_words = array(
 "form.report.from" => '시작 날짜',
 "form.report.to" => '마감 날짜',
 "form.report.groupby_user" => '사용자',
-"form.report.groupby_project" => '프로젝트',
-"form.report.duration" => '기간',
 "form.report.start" => '시작',
 "form.report.finish" => '마감',
 "form.report.totals_only" => '오직 전체만',
@@ -525,7 +522,6 @@ $i18n_key_words = array(
 "form.report.th.date" => '날짜',
 "form.report.th.start" => '시작',
 "form.report.th.finish" => '마감',
-"form.report.th.duration" => '기간',
 
 // mail form attributes
 "form.mail.from" => '부터',

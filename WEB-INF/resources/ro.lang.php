@@ -181,7 +181,7 @@ $i18n_key_words = array(
 // 'label.description' => 'Description',
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
-// 'label.duration' => 'Duration',
+'label.duration' => 'Durata',
 'label.note' => 'Nota',
 // 'label.notes' => 'Notes',
 // 'label.item' => 'Item',
@@ -399,7 +399,8 @@ $i18n_key_words = array(
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
-// 'form.reports.group_by_project' => 'project',
+'form.reports.group_by_project' => 'proiect',
+// TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
 // 'form.reports.totals_only' => 'Totals only',
 
@@ -468,12 +469,10 @@ $i18n_key_words = array(
 "form.mytime.date" => 'data',
 "form.mytime.start" => 'inceput',
 "form.mytime.finish" => 'sfarsit',
-"form.mytime.duration" => 'durata',
 "form.mytime.daily" => 'activitatea zilnica',
 "form.mytime.total" => 'ore total: ',
 "form.mytime.th.start" => 'inceput',
 "form.mytime.th.finish" => 'sfarsit',
-"form.mytime.th.duration" => 'durata',
 "form.mytime.del_yes" => 'inregistrarea timului a fost stearsa cu succes',
 "form.mytime.no_finished_rec" => 'aceasta inregistrare a fost salvata numei cu timpul de inceput. nu este o eroare. poti parasi aplicatia daca este nevoie.',
 
@@ -501,8 +500,6 @@ $i18n_key_words = array(
 "form.report.from" => 'data inceput',
 "form.report.to" => 'data sfarsit',
 "form.report.groupby_user" => 'utilizator',
-"form.report.groupby_project" => 'proiect',
-"form.report.duration" => 'durata',
 "form.report.start" => 'inceput',
 "form.report.finish" => 'sfarsit',
 "form.report.totals_only" => 'numai totaluri',
@@ -511,7 +508,6 @@ $i18n_key_words = array(
 "form.report.th.date" => 'data',
 "form.report.th.start" => 'inceput',
 "form.report.th.finish" => 'sfarsit',
-"form.report.th.duration" => 'durata',
 
 // mail form attributes
 "form.mail.from" => 'de la',

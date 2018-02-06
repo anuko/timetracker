@@ -179,7 +179,7 @@ $i18n_key_words = array(
 // 'label.description' => 'Description',
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
-// 'label.duration' => 'Duration',
+'label.duration' => 'Trvání',
 'label.note' => 'Poznámka',
 'label.notes' => 'Poznámky',
 // TODO: translate the following.
@@ -403,7 +403,8 @@ $i18n_key_words = array(
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
-// 'form.reports.group_by_project' => 'project',
+'form.reports.group_by_project' => 'projekt',
+// TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
 // 'form.reports.totals_only' => 'Totals only',
 
@@ -466,12 +467,10 @@ $i18n_key_words = array(
 "form.mytime.date" => 'datum',
 "form.mytime.start" => 'začátek',
 "form.mytime.finish" => 'konec',
-"form.mytime.duration" => 'trvání',
 "form.mytime.daily" => 'denní práce',
 "form.mytime.total" => 'součet hodin: ',
 "form.mytime.th.start" => 'začátek',
 "form.mytime.th.finish" => 'konec',
-"form.mytime.th.duration" => 'trvání',
 "form.mytime.del_yes" => 'časový záznam úspěšně odstraněn',
 "form.mytime.no_finished_rec" => 'záznam byl uložen pouze s časem zahájení. není to chyba. můžete se odhlásit, potřebujete-li.',
 "form.mytime.warn_tozero_rec" => 'tento záznam musí být smazán, neboť období je uzamčeno',
@@ -506,8 +505,6 @@ $i18n_key_words = array(
 "form.report.from" => 'počáteční datum',
 "form.report.to" => 'koncové datum',
 "form.report.groupby_user" => 'uživatel',
-"form.report.groupby_project" => 'projekt',
-"form.report.duration" => 'trvání',
 "form.report.start" => 'počátek',
 "form.report.finish" => 'konec',
 "form.report.totals_only" => 'pouze součty',
@@ -516,7 +513,6 @@ $i18n_key_words = array(
 "form.report.th.date" => 'datum',
 "form.report.th.start" => 'počátek',
 "form.report.th.finish" => 'konec',
-"form.report.th.duration" => 'trvání',
 
 // mail form attributes
 "form.mail.from" => 'od',

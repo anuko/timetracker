@@ -174,7 +174,7 @@ $i18n_key_words = array(
 // 'label.description' => 'Description',
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
-// 'label.duration' => 'Duration',
+'label.duration' => '持續時間',
 'label.note' => '備註',
 'label.notes' => '備註',
 // TODO: translate the following.
@@ -395,7 +395,8 @@ $i18n_key_words = array(
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
-// 'form.reports.group_by_project' => 'project',
+'form.reports.group_by_project' => '項目',
+// TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
 // 'form.reports.totals_only' => 'Totals only',
 
@@ -463,12 +464,10 @@ $i18n_key_words = array(
 "form.mytime.date" => '日期',
 "form.mytime.start" => '開始',
 "form.mytime.finish" => '結束',
-"form.mytime.duration" => '持續時間',
 "form.mytime.daily" => '每日工作',
 "form.mytime.total" => '總小時數： ',
 "form.mytime.th.start" => '開始',
 "form.mytime.th.finish" => '結束',
-"form.mytime.th.duration" => '持續時間',
 "form.mytime.del_yes" => '成功刪除時間記錄',
 "form.mytime.no_finished_rec" => '該記錄只保存了開始時間。這不是錯誤。如果需要，請登出。',
 "form.mytime.warn_tozero_rec" => '由於這段時間是鎖定的，該時間記錄必須刪除',
@@ -508,8 +507,6 @@ $i18n_key_words = array(
 "form.report.from" => '開始日期',
 "form.report.to" => '結束日期',
 "form.report.groupby_user" => '用戶',
-"form.report.groupby_project" => '項目',
-"form.report.duration" => '持續時間',
 "form.report.start" => '開始',
 "form.report.finish" => '結束',
 "form.report.totals_only" => '僅僅今天',
@@ -518,7 +515,6 @@ $i18n_key_words = array(
 "form.report.th.date" => '日期',
 "form.report.th.start" => '開始',
 "form.report.th.finish" => '結束',
-"form.report.th.duration" => '持續時間',
 
 // mail form attributes
 "form.mail.from" => '從',

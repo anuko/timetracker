@@ -186,7 +186,7 @@ $i18n_key_words = array(
 // 'label.description' => 'Description',
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
-// 'label.duration' => 'Duration',
+'label.duration' => 'Süre',
 'label.note' => 'Not',
 'label.notes' => 'Notlar',
 // TODO: translate the following.
@@ -410,7 +410,8 @@ $i18n_key_words = array(
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
-// 'form.reports.group_by_project' => 'project',
+'form.reports.group_by_project' => 'proje',
+// TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
 // 'form.reports.totals_only' => 'Totals only',
 
@@ -473,12 +474,10 @@ $i18n_key_words = array(
 "form.mytime.date" => 'tarih',
 "form.mytime.start" => 'başlat',
 "form.mytime.finish" => 'tamamla',
-"form.mytime.duration" => 'süre',
 "form.mytime.daily" => 'günlük çalışma',
 "form.mytime.total" => 'toplam saat: ',
 "form.mytime.th.start" => 'başlat',
 "form.mytime.th.finish" => 'tamamla',
-"form.mytime.th.duration" => 'süre',
 "form.mytime.del_yes" => 'zaman kaydı başarıyla silindi',
 "form.mytime.no_finished_rec" => 'bu kayıt sadece başlangıç zamanıyla silindi. bu hata değildir. gerekirse çıkış yapın.',
 "form.mytime.warn_tozero_rec" => 'bu zaman kaydı silinmeli çünkü zaman aralığı kilitli',
@@ -509,8 +508,6 @@ $i18n_key_words = array(
 "form.report.from" => 'başlangıç tarihi',
 "form.report.to" => 'son tarihi',
 "form.report.groupby_user" => 'kullanıcı',
-"form.report.groupby_project" => 'proje',
-"form.report.duration" => 'süre',
 "form.report.start" => 'başlangıç',
 "form.report.finish" => 'son',
 "form.report.totals_only" => 'sadece toplamlar',
@@ -519,7 +516,6 @@ $i18n_key_words = array(
 "form.report.th.date" => 'tarih',
 "form.report.th.start" => 'başlangıç',
 "form.report.th.finish" => 'son',
-"form.report.th.duration" => 'süre',
 
 // mail form attributes
 "form.mail.from" => 'kimden',

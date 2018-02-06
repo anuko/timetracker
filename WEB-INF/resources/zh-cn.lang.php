@@ -166,7 +166,7 @@ $i18n_key_words = array(
 // 'label.description' => 'Description',
 // 'label.start' => 'Start',
 // 'label.finish' => 'Finish',
-// 'label.duration' => 'Duration',
+'label.duration' => '持续时间',
 'label.note' => '备注',
 'label.notes' => '备注',
 // TODO: translate the following.
@@ -387,7 +387,8 @@ $i18n_key_words = array(
 // 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
-// 'form.reports.group_by_project' => 'project',
+'form.reports.group_by_project' => '项目',
+// TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
 // 'form.reports.totals_only' => 'Totals only',
 
@@ -454,12 +455,10 @@ $i18n_key_words = array(
 "form.mytime.date" => '日期',
 "form.mytime.start" => '开始',
 "form.mytime.finish" => '结束',
-"form.mytime.duration" => '持续时间',
 "form.mytime.daily" => '每日工作',
 "form.mytime.total" => '总小时数： ',
 "form.mytime.th.start" => '开始',
 "form.mytime.th.finish" => '结束',
-"form.mytime.th.duration" => '持续时间',
 "form.mytime.del_yes" => '成功删除时间记录',
 "form.mytime.no_finished_rec" => '该记录只保存了开始时间。这不是错误。如果需要，请注销。',
 "form.mytime.warn_tozero_rec" => '由于这段时间是锁定的，该时间记录必须删除',
@@ -496,8 +495,6 @@ $i18n_key_words = array(
 "form.report.from" => '开始日期',
 "form.report.to" => '结束日期',
 "form.report.groupby_user" => '用户',
-"form.report.groupby_project" => '项目',
-"form.report.duration" => '持续时间',
 "form.report.start" => '开始',
 "form.report.finish" => '结束',
 "form.report.totals_only" => '仅仅今天',
@@ -506,7 +503,6 @@ $i18n_key_words = array(
 "form.report.th.date" => '日期',
 "form.report.th.start" => '开始',
 "form.report.th.finish" => '结束',
-"form.report.th.duration" => '持续时间',
 
 // mail form attributes
 "form.mail.from" => '从',
