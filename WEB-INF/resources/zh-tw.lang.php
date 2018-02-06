@@ -198,7 +198,8 @@ $i18n_key_words = array(
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
-// 'label.language' => 'Language',
+'label.language' => '語言',
+// TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
 'label.date_format' => '日期格式',
 'label.time_format' => '時間格式',
@@ -391,9 +392,9 @@ $i18n_key_words = array(
 'form.reports.show_fields' => '顯示欄目',
 'form.reports.group_by' => '分組方式',
 'form.reports.group_by_no' => '--- 沒有分組 ---',
+'form.reports.group_by_date' => '日期',
+'form.reports.group_by_user' => '用戶',
 // TODO: translate the following.
-// 'form.reports.group_by_date' => 'date',
-// 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
 'form.reports.group_by_project' => '項目',
 // TODO: translate the following.
@@ -435,7 +436,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.login" => '登錄',
 "form.fpass.send_pass_str" => '密碼重設請求已經發送',
 "form.fpass.send_pass_subj" => 'Anuko時間追蹤器密碼重設請求',
 // Note to translators: the ending of this string below needs to be translated.
@@ -469,23 +469,18 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => '創建新管理帳號',
 "form.profile.edit_title" => '編輯簡介',
-"form.profile.login" => '登錄',
-
 "form.profile.showchart" => '顯示餅狀圖',
-"form.profile.lang" => '語言',
 
 // people form attributes
 "form.people.ppl_str" => '人員',
 "form.people.createu_str" => '新建用戶',
 "form.people.edit_str" => '編輯用戶',
 "form.people.del_str" => '刪除用戶',
-"form.people.th.login" => '登錄',
 "form.people.th.role" => '角色',
 "form.people.th.rate" => '費率',
 "form.people.manager" => '經理',
 "form.people.comanager" => '合作經理人',
 "form.people.empl" => '用戶',
-"form.people.login" => '登錄',
 
 "form.people.rate" => '默認小時收費',
 "form.people.comanager" => '合作經理人',
@@ -494,7 +489,6 @@ $i18n_key_words = array(
 "form.report.title" => '報告',
 "form.report.from" => '開始日期',
 "form.report.to" => '結束日期',
-"form.report.groupby_user" => '用戶',
 "form.report.totals_only" => '僅僅今天',
 "form.report.total" => '總計時間',
 "form.report.th.empllist" => '用戶',

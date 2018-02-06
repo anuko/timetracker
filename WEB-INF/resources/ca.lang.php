@@ -401,8 +401,8 @@ $i18n_key_words = array(
 'form.reports.group_by' => 'Agrupar per',
 'form.reports.group_by_no' => '--- no agrupar ---',
 'form.reports.group_by_date' => 'data',
+'form.reports.group_by_user' => 'usuari',
 // TODO: translate the following.
-// 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
 'form.reports.group_by_project' => 'projecte',
 // TODO: translate the following.
@@ -474,7 +474,6 @@ $i18n_key_words = array(
 // report attributes
 "form.report.from" => 'Data d\\\'inici',
 "form.report.to" => 'Data de fi',
-"form.report.groupby_user" => 'Usuari',
 "form.report.totals_only" => 'Només totals',
 "form.report.total" => 'Hores Totals',
 "form.report.th.empllist" => 'Usuari',

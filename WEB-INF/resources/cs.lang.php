@@ -400,8 +400,9 @@ $i18n_key_words = array(
 'form.reports.group_by' => 'Seskupit podle',
 // TODO: translate the following.
 // 'form.reports.group_by_no' => '--- no grouping ---',
-// 'form.reports.group_by_date' => 'date',
-// 'form.reports.group_by_user' => 'user',
+// TODO: translate the following.
+'form.reports.group_by_date' => 'datum',
+'form.reports.group_by_user' => 'uživatel',
 // 'form.reports.group_by_client' => 'client',
 'form.reports.group_by_project' => 'projekt',
 // TODO: translate the following.
@@ -443,7 +444,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.login" => 'přihlásit',
 "form.fpass.send_pass_str" => 'zaslán požadavek k vymazání hesla',
 "form.fpass.send_pass_subj" => 'Anuko Time Tracker požadavek na vymazání hesla',
 // Note to translators: this string needs to be translated.
@@ -475,7 +475,6 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => 'vytvořit nový manažerský účet',
 "form.profile.edit_title" => 'upravit profil',
-"form.profile.login" => 'přihlásit',
 
 "form.profile.showchart" => 'zobrazuj grafy',
 
@@ -484,13 +483,11 @@ $i18n_key_words = array(
 "form.people.createu_str" => 'vytváření nového uživatele',
 "form.people.edit_str" => 'nastavení uživatele',
 "form.people.del_str" => 'smazat uživatele',
-"form.people.th.login" => 'přihlásit',
 "form.people.th.role" => 'role',
 "form.people.th.rate" => 'sazba',
 "form.people.manager" => 'manažer',
 "form.people.comanager" => 'spolumanažer',
 "form.people.empl" => 'uživatel',
-"form.people.login" => 'přihlásit',
 
 "form.people.rate" => 'hodinová sazba',
 "form.people.comanager" => 'spolumanažer',
@@ -498,7 +495,6 @@ $i18n_key_words = array(
 // report attributes
 "form.report.from" => 'počáteční datum',
 "form.report.to" => 'koncové datum',
-"form.report.groupby_user" => 'uživatel',
 "form.report.totals_only" => 'pouze součty',
 "form.report.total" => 'součty hodin',
 "form.report.th.empllist" => 'uzivatel',

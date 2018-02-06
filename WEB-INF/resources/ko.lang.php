@@ -151,8 +151,7 @@ $i18n_key_words = array(
 // 'label.manager_login' => 'Manager login',
 'label.person_name' => '이름',
 'label.thing_name' => '이름',
-// TODO: translate the following.
-// 'label.login' => 'Login',
+'label.login' => '로그인ID',
 'label.password' => 'Password',
 'label.confirm_password' => '암호 확인',
 'label.email' => '이메일',
@@ -164,8 +163,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
-// 'label.user' => 'User',
-// 'label.users' => 'Users',
+'label.user' => '사용자',
+'label.users' => '사용자',
+// TODO: translate the following.
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
@@ -399,9 +399,9 @@ $i18n_key_words = array(
 'form.reports.show_fields' => '필드들을 보기',
 'form.reports.group_by' => '다음것에 의한 그룹화',
 'form.reports.group_by_no' => '--- 그룹화되지 않음 ---',
+'form.reports.group_by_date' => '날짜',
+'form.reports.group_by_user' => '사용자',
 // TODO: translate the following.
-// 'form.reports.group_by_date' => 'date',
-// 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
 'form.reports.group_by_project' => '프로젝트',
 // TODO: translate the following.
@@ -443,7 +443,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.login" => '로그인',
 "form.fpass.send_pass_str" => '송신한 암호 재설정 요청',
 "form.fpass.send_pass_subj" => 'Anuko Time Tracker 암호 재설정 요청',
 // Note to translators: the ending of this string below needs to be translated.
@@ -477,7 +476,6 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => '신규 관리자 계정을 생성',
 "form.profile.edit_title" => '프로필을 편집하기',
-"form.profile.login" => '로그인ID',
 "form.profile.showchart" => '원 그래프를 보기',
 
 // people form attributes
@@ -485,13 +483,11 @@ $i18n_key_words = array(
 "form.people.createu_str" => '신규 사용자를 만들기',
 "form.people.edit_str" => '사용자를 편집하기',
 "form.people.del_str" => '사용자를 삭제하기',
-"form.people.th.login" => '로그인ID',
 "form.people.th.role" => '직위',
 "form.people.th.rate" => '급여',
 "form.people.manager" => '관리자',
 "form.people.comanager" => '공동관리자',
 "form.people.empl" => '사용자',
-"form.people.login" => '로그인ID',
 
 "form.people.rate" => '디폴트 시간당 급여',
 "form.people.comanager" => '공동관리자',
@@ -500,7 +496,6 @@ $i18n_key_words = array(
 "form.report.title" => '보고서',
 "form.report.from" => '시작 날짜',
 "form.report.to" => '마감 날짜',
-"form.report.groupby_user" => '사용자',
 "form.report.totals_only" => '오직 전체만',
 "form.report.total" => '시간 총합',
 "form.report.th.empllist" => '사용자',

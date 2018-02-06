@@ -150,8 +150,7 @@ $i18n_key_words = array(
 // 'label.manager_login' => 'Manager login',
 'label.person_name' => 'Navn',
 'label.thing_name' => 'Navn',
-// TODO: translate the following.
-// 'label.login' => 'Login',
+'label.login' => 'Innlogging', // TODO: is this correct translation for a label?
 'label.password' => 'Passord',
 'label.confirm_password' => 'Bekreft passord',
 'label.email' => 'E-post',
@@ -201,7 +200,8 @@ $i18n_key_words = array(
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
-// 'label.language' => 'Language',
+'label.language' => 'Språk',
+// TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
 'label.date_format' => 'Datoformat',
 'label.time_format' => 'Tidsformat',
@@ -392,8 +392,9 @@ $i18n_key_words = array(
 'form.reports.show_fields' => 'Vis feltene',
 // 'form.reports.group_by' => 'Group by',
 // 'form.reports.group_by_no' => '--- no grouping ---',
-// 'form.reports.group_by_date' => 'date',
-// 'form.reports.group_by_user' => 'user',
+'form.reports.group_by_date' => 'dato',
+'form.reports.group_by_user' => 'bruker',
+// TODO: translate the following.
 // 'form.reports.group_by_client' => 'client',
 'form.reports.group_by_project' => 'prosjekt',
 // TODO: translate the following.
@@ -435,7 +436,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.login" => 'innlogging',
 "form.fpass.send_pass_str" => 'passordet er sendt',
 "form.fpass.send_pass_subj" => 'Anuko Time Tracker passordet ditt',
 // Note to translators: strings below need to be translated.
@@ -472,31 +472,23 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => 'lag ny adminkonto',
 "form.profile.edit_title" => 'endre profil',
-"form.profile.login" => 'innlogging',
 
 // Note to translators: the strings below are missing and must be added and translated
 // "form.profile.showchart" => 'vis kakediagram',
-// "form.profile.lang" => 'språk',
 
 // people form attributes
 "form.people.ppl_str" => 'personer',
 "form.people.createu_str" => 'legg til ny bruker',
 "form.people.edit_str" => 'endre bruker',
 "form.people.del_str" => 'slett bruker',
-"form.people.th.login" => 'innlogging',
 "form.people.th.role" => 'rolle',
 // Note to translators: the 2 strings below are missing and must be added and translated
 // "form.people.th.rate" => 'timesats',
-// Note to translators: the strings below must be correctly translated
-// "form.people.manager" => 'admin',
-// "form.people.comanager" => 'co-manager',
 "form.people.empl" => 'bruker',
-"form.people.login" => 'innlogging',
 "form.people.rate" => 'timesats',
 
 // report attributes
 "form.report.title" => 'rapporter',
-"form.report.groupby_user" => 'bruker',
 // Note to translators: the strings below must be translated 
 // "form.report.totals_only" => 'kun summer',
 "form.report.total" => 'totalt antall timer',

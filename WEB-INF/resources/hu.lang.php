@@ -486,7 +486,6 @@ $i18n_key_words = array(
 // report attributes
 "form.report.from" => 'kezdő időpont',
 "form.report.to" => 'vég időpont',
-"form.report.groupby_user" => 'személyek szerint',
 "form.report.totals_only" => 'csak a teljes óraszám',
 "form.report.total" => 'összesített óraszám',
 "form.report.th.empllist" => 'dolgozó',

@@ -190,7 +190,8 @@ $i18n_key_words = array(
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
-// 'label.language' => 'Language',
+'label.language' => '语言',
+// TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
 'label.date_format' => '日期格式',
 'label.time_format' => '时间格式',
@@ -383,9 +384,9 @@ $i18n_key_words = array(
 'form.reports.show_fields' => '显示栏目',
 'form.reports.group_by' => '分组方式',
 'form.reports.group_by_no' => '--- 没有分组 ---',
+'form.reports.group_by_date' => '日期',
+'form.reports.group_by_user' => '用户',
 // TODO: translate the following.
-// 'form.reports.group_by_date' => 'date',
-// 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
 'form.reports.group_by_project' => '项目',
 // TODO: translate the following.
@@ -460,9 +461,7 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => '新建管理账号',
 "form.profile.edit_title" => '编辑简介',
-
 "form.profile.showchart" => '显示饼状图',
-"form.profile.lang" => '语言',
 
 // people form attributes
 "form.people.ppl_str" => '人员',
@@ -482,7 +481,6 @@ $i18n_key_words = array(
 "form.report.title" => '报告',
 "form.report.from" => '开始日期',
 "form.report.to" => '结束日期',
-"form.report.groupby_user" => '用户',
 "form.report.totals_only" => '仅仅今天',
 "form.report.total" => '总计时间',
 "form.report.th.empllist" => '用户',

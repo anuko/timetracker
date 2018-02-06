@@ -395,9 +395,9 @@ $i18n_key_words = array(
 'form.reports.show_fields' => 'Arata campuri',
 'form.reports.group_by' => 'Grupat dupa',
 'form.reports.group_by_no' => '--- fara grupare ---',
+'form.reports.group_by_date' => 'data',
+'form.reports.group_by_user' => 'utilizator',
 // TODO: translate the following.
-// 'form.reports.group_by_date' => 'date',
-// 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
 'form.reports.group_by_project' => 'proiect',
 // TODO: translate the following.
@@ -489,7 +489,6 @@ $i18n_key_words = array(
 "form.report.title" => 'rapoarte',
 "form.report.from" => 'data inceput',
 "form.report.to" => 'data sfarsit',
-"form.report.groupby_user" => 'utilizator',
 "form.report.totals_only" => 'numai totaluri',
 "form.report.total" => 'ore total',
 "form.report.th.empllist" => 'utilizator',

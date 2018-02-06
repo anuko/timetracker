@@ -398,9 +398,9 @@ $i18n_key_words = array(
 'form.reports.show_fields' => 'Näita välju',
 'form.reports.group_by' => 'Grupeeri',
 'form.reports.group_by_no' => '--- ilma grupeerimata ---',
+'form.reports.group_by_date' => 'kuupäev',
+'form.reports.group_by_user' => 'kasutaja',
 // TODO: translate the following.
-// 'form.reports.group_by_date' => 'date',
-// 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
 'form.reports.group_by_project' => 'projekt',
 // TODO: translate the following.
@@ -442,7 +442,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.login" => 'login',
 "form.fpass.send_pass_str" => 'salasõna tühjendamise käsk edastatud',
 // Note to translators: the 3 strings below must be translated
 // "form.fpass.send_pass_subj" => 'AnukoTime Tracker password reset request',
@@ -476,20 +475,17 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => 'loo uus halduri konto',
 "form.profile.edit_title" => 'profiili muutmine',
-"form.profile.login" => 'login',
 
 // people form attributes
 "form.people.ppl_str" => 'inimesed',
 "form.people.createu_str" => 'loo uus kasutaja',
 "form.people.edit_str" => 'kasutaja muutmine',
 "form.people.del_str" => 'kasutaja kustutamine',
-"form.people.th.login" => 'login',
 "form.people.th.role" => 'roll',
 "form.people.th.rate" => 'hind',
 "form.people.manager" => 'haldur',
 "form.people.comanager" => 'kaashaldur',
 "form.people.empl" => 'kasutaja',
-"form.people.login" => 'login',
 
 "form.people.rate" => 'vaikimisi tunni hind',
 "form.people.comanager" => 'kaashaldur',
@@ -497,7 +493,6 @@ $i18n_key_words = array(
 // report attributes
 "form.report.from" => 'algab kuupäevast',
 "form.report.to" => 'lõpeb kuupäeval',
-"form.report.groupby_user" => 'kasutaja',
 "form.report.totals_only" => 'ainult summad',
 "form.report.total" => 'tunde kokku',
 "form.report.th.empllist" => 'kasutaja',

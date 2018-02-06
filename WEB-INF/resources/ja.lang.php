@@ -151,8 +151,7 @@ $i18n_key_words = array(
 // 'label.manager_login' => 'Manager login',
 'label.person_name' => '名前',
 'label.thing_name' => '名前',
-// TODO: translate the following.
-// 'label.login' => 'Login',
+'label.login' => 'ログインID',
 'label.password' => 'パスワード',
 'label.confirm_password' => 'パスワードの確認',
 'label.email' => 'Eメール',
@@ -164,8 +163,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
-// 'label.user' => 'User',
-// 'label.users' => 'Users',
+'label.user' => 'ユーザー',
+'label.users' => 'ユーザー',
+// TODO: translate the following.
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
@@ -202,7 +202,8 @@ $i18n_key_words = array(
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
-// 'label.language' => 'Language',
+'label.language' => '言語',
+// TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
 'label.date_format' => '日付形式',
 'label.time_format' => '時間形式',
@@ -398,9 +399,9 @@ $i18n_key_words = array(
 'form.reports.show_fields' => 'フィールドの表示',
 'form.reports.group_by' => '次のようにグループ化',
 'form.reports.group_by_no' => '--- グループの機能がありません ---',
+'form.reports.group_by_date' => '日付',
+'form.reports.group_by_user' => 'ユーザー',
 // TODO: translate the following.
-// 'form.reports.group_by_date' => 'date',
-// 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
 'form.reports.group_by_project' => 'プロジェクト',
 // TODO: translate the following.
@@ -442,7 +443,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.login" => 'ログイン',
 "form.fpass.send_pass_str" => '送信したパスワードの初期化の要求',
 "form.fpass.send_pass_subj" => 'Anuko Time Trackerのパスワードの初期化の要求',
 // Note to translators: the ending of this string below needs to be translated.
@@ -476,22 +476,18 @@ $i18n_key_words = array(
 // Note to translators: we need a more accurate translation of form.profile.create_title
 "form.profile.create_title" => '新規管理者のアカウントの作成',
 "form.profile.edit_title" => 'プロファイルの編集',
-"form.profile.login" => 'ログインID',
 "form.profile.showchart" => 'パイ図表の表示',
-"form.profile.lang" => '言語',
 
 // people form attributes
 "form.people.ppl_str" => 'メンバー',
 "form.people.createu_str" => '新規ユーザーの作成',
 "form.people.edit_str" => 'ユーザーの編集',
 "form.people.del_str" => 'ユーザーの削除',
-"form.people.th.login" => 'ログインID',
 "form.people.th.role" => 'ルール',
 "form.people.th.rate" => '給料',
 "form.people.manager" => '管理者',
 "form.people.comanager" => '共同管理者',
 "form.people.empl" => 'ユーザー',
-"form.people.login" => 'ログインID',
 
 "form.people.rate" => 'デフォルト時間当り給料',
 "form.people.comanager" => '共同管理者',
@@ -500,7 +496,6 @@ $i18n_key_words = array(
 "form.report.title" => 'レポート',
 "form.report.from" => '開始日付',
 "form.report.to" => '終了日付',
-"form.report.groupby_user" => 'ユーザー',
 "form.report.totals_only" => '全体だけ',
 "form.report.total" => '合計時間',
 "form.report.th.empllist" => 'ユーザー',

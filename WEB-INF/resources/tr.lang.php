@@ -406,9 +406,9 @@ $i18n_key_words = array(
 'form.reports.show_fields' => 'Alanları göster',
 'form.reports.group_by' => 'Gruplandırma kıstas',
 'form.reports.group_by_no' => '--- gruplama yok ---',
+'form.reports.group_by_date' => 'tarih',
+'form.reports.group_by_user' => 'kullanıcı',
 // TODO: translate the following.
-// 'form.reports.group_by_date' => 'date',
-// 'form.reports.group_by_user' => 'user',
 // 'form.reports.group_by_client' => 'client',
 'form.reports.group_by_project' => 'proje',
 // TODO: translate the following.
@@ -502,7 +502,6 @@ $i18n_key_words = array(
 "form.report.title" => 'raporlar',
 "form.report.from" => 'başlangıç tarihi',
 "form.report.to" => 'son tarihi',
-"form.report.groupby_user" => 'kullanıcı',
 "form.report.totals_only" => 'sadece toplamlar',
 "form.report.total" => 'saat toplamı',
 "form.report.th.empllist" => 'kullanıcı',
