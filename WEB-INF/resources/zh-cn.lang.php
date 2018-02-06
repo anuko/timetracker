@@ -226,7 +226,8 @@ $i18n_key_words = array(
 // 'label.type_dropdown' => 'dropdown',
 // 'label.type_text' => 'text',
 // 'label.required' => 'Required',
-// 'label.fav_report' => 'Favorite report',
+'label.fav_report' => '收藏的报告',
+// TODO: translate the following.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
@@ -370,8 +371,7 @@ $i18n_key_words = array(
 // 'form.week.new_entry' => 'New entry',
 
 // Reports form. See example at https://timetracker.anuko.com/reports.php
-// TODO: translate the following.
-// 'form.reports.save_as_favorite' => 'Save as favorite',
+'form.reports.save_as_favorite' => '保存到我的收藏夹',
 'form.reports.confirm_delete' => '您确认要删除收藏的这个报告吗？',
 'form.reports.include_billable' => '计费时间',
 'form.reports.include_not_billable' => '非计费时间',
@@ -406,16 +406,24 @@ $i18n_key_words = array(
 // 'form.invoice.invoice_entries' => 'Invoice entries',
 // 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
+// Charts form. See example at https://timetracker.anuko.com/charts.php
+// TODO: translate the following.
+// 'form.charts.interval' => 'Interval',
+// 'form.charts.chart' => 'Chart',
+
+// Projects form. See example at https://timetracker.anuko.com/projects.php
+// TODO: translate the following.
+// 'form.projects.active_projects' => 'Active Projects',
+// 'form.projects.inactive_projects' => 'Inactive Projects',
+
+// Tasks form. See example at https://timetracker.anuko.com/tasks.php
+// TODO: translate the following.
+// 'form.tasks.active_tasks' => 'Active Tasks',
+// 'form.tasks.inactive_tasks' => 'Inactive Tasks',
+
 
 
 // TODO: refactoring ongoing down from here.
-
-// TODO: everything below needs serious work and be synchronized with the master English file.
-// For example, form.filter.project property no longer exists, and so on.
-
-// If you intend to improve perhaps go in small steps and coordinate with the maintainer if anything is unclear.
-"form.filter.filter" => '收藏的报告',
-"form.filter.filter_new" => '保存到我的收藏夹',
 
 // login form attributes
 "form.login.title" => '登录',

@@ -241,7 +241,8 @@ $i18n_key_words = array(
 // 'label.type_dropdown' => 'dropdown',
 // 'label.type_text' => 'text',
 // 'label.required' => 'Required',
-// 'label.fav_report' => 'Favorite report',
+'label.fav_report' => '좋아하는 보고서',
+// TODO: translate the following.
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
@@ -386,8 +387,7 @@ $i18n_key_words = array(
 // 'form.week.new_entry' => 'New entry',
 
 // Reports form. See example at https://timetracker.anuko.com/reports.php
-// TODO: translate the following.
-// 'form.reports.save_as_favorite' => 'Save as favorite',
+'form.reports.save_as_favorite' => '좋아하는 것으로 저장',
 'form.reports.confirm_delete' => '좋아하는 이 보고서를 삭제해도 좋습니까?',
 'form.reports.include_billable' => '청구 가능한',
 'form.reports.include_not_billable' => '청구 가능하지 않은',
@@ -422,12 +422,24 @@ $i18n_key_words = array(
 // 'form.invoice.invoice_entries' => 'Invoice entries',
 // 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
+// Charts form. See example at https://timetracker.anuko.com/charts.php
+// TODO: translate the following.
+// 'form.charts.interval' => 'Interval',
+// 'form.charts.chart' => 'Chart',
+
+// Projects form. See example at https://timetracker.anuko.com/projects.php
+// TODO: translate the following.
+// 'form.projects.active_projects' => 'Active Projects',
+// 'form.projects.inactive_projects' => 'Inactive Projects',
+
+// Tasks form. See example at https://timetracker.anuko.com/tasks.php
+// TODO: translate the following.
+// 'form.tasks.active_tasks' => 'Active Tasks',
+// 'form.tasks.inactive_tasks' => 'Inactive Tasks',
+
 
 
 // TODO: refactoring ongoing down from here.
-
-"form.filter.filter" => '좋아하는 보고서',
-"form.filter.filter_new" => '좋아하는 것으로 저장',
 
 // password reminder form attributes
 "form.fpass.login" => '로그인',
