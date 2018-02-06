@@ -162,9 +162,9 @@ $i18n_key_words = array(
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Předmět',
 'label.date' => 'Datum',
+'label.start_date' => 'Počáteční datum',
+'label.end_date' => 'Koncové datum',
 // TODO: translate the following.
-// 'label.start_date' => 'Start date',
-// 'label.end_date' => 'End date',
 // 'label.user' => 'User',
 // 'label.users' => 'Users',
 // 'label.client' => 'Client',
@@ -400,14 +400,13 @@ $i18n_key_words = array(
 'form.reports.group_by' => 'Seskupit podle',
 // TODO: translate the following.
 // 'form.reports.group_by_no' => '--- no grouping ---',
-// TODO: translate the following.
 'form.reports.group_by_date' => 'datum',
 'form.reports.group_by_user' => 'uživatel',
-// 'form.reports.group_by_client' => 'client',
+'form.reports.group_by_client' => 'zákazník',
 'form.reports.group_by_project' => 'projekt',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
-// 'form.reports.totals_only' => 'Totals only',
+'form.reports.totals_only' => 'Pouze součty',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -493,8 +492,6 @@ $i18n_key_words = array(
 "form.people.comanager" => 'spolumanažer',
 
 // report attributes
-"form.report.from" => 'počáteční datum',
-"form.report.to" => 'koncové datum',
 "form.report.totals_only" => 'pouze součty',
 "form.report.total" => 'součty hodin',
 "form.report.th.empllist" => 'uzivatel',

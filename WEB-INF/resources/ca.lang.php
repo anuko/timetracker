@@ -160,11 +160,10 @@ $i18n_key_words = array(
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Assumpte',
 'label.date' => 'Data',
-// TODO: translate the following.
-// 'label.start_date' => 'Start date',
-// 'label.end_date' => 'End date',
-// 'label.user' => 'User',
-// 'label.users' => 'Users',
+'label.start_date' => 'Data d\\\'inici',
+'label.end_date' => 'Data de fi',
+'label.user' => 'Usuari',
+'label.users' => 'Usuaris',
 'label.client' => 'Client',
 'label.clients' => 'Clients',
 // TODO: translate the following.
@@ -407,7 +406,7 @@ $i18n_key_words = array(
 'form.reports.group_by_project' => 'projecte',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
-// 'form.reports.totals_only' => 'Totals only',
+'form.reports.totals_only' => 'Només totals',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -472,15 +471,8 @@ $i18n_key_words = array(
 "form.people.comanager" => 'Auxiliar del manejador',
 
 // report attributes
-"form.report.from" => 'Data d\\\'inici',
-"form.report.to" => 'Data de fi',
 "form.report.totals_only" => 'Només totals',
 "form.report.total" => 'Hores Totals',
-"form.report.th.empllist" => 'Usuari',
-
-// charts form attributes
-// Note to translators: form.charts.title needs to be translated.
-// 'form.charts.title' => 'charts',
 
 // mail form attributes
 "form.mail.from" => 'De',
