@@ -446,6 +446,22 @@ $i18n_key_words = array(
 // 'form.tasks.active_tasks' => 'Active Tasks',
 // 'form.tasks.inactive_tasks' => 'Inactive Tasks',
 
+// Users form. See example at https://timetracker.anuko.com/users.php
+// TODO: translate the following.
+// 'form.users.active_users' => 'Active Users',
+// 'form.users.inactive_users' => 'Inactive Users',
+// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
+// 'form.users.role' => 'Role',
+// 'form.users.manager' => 'Manager',
+// 'form.users.comanager' => 'Co-manager',
+// 'form.users.rate' => 'Rate',
+// 'form.users.default_rate' => 'Default hourly rate',
+
+// Clients form. See example at https://timetracker.anuko.com/clients.php
+// TODO: translate the following.
+// 'form.clients.active_clients' => 'Active Clients',
+// 'form.clients.inactive_clients' => 'Inactive Clients',
+
 
 
 // TODO: refactoring ongoing down from here.

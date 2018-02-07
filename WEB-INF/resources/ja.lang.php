@@ -330,19 +330,19 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'dropdown.all' => '--- all ---',
 // 'dropdown.no' => '--- no ---',
-// 'dropdown.current_day' => 'today',
-// 'dropdown.previous_day' => 'yesterday',
-// 'dropdown.selected_day' => 'day',
-// 'dropdown.current_week' => 'this week',
-// 'dropdown.previous_week' => 'previous week',
-// 'dropdown.selected_week' => 'week',
-// 'dropdown.current_month' => 'this month',
-// 'dropdown.previous_month' => 'previous month',
-// 'dropdown.selected_month' => 'month',
-// 'dropdown.current_year' => 'this year',
-// 'dropdown.previous_year' => 'previous year',
-// 'dropdown.selected_year' => 'year',
-// 'dropdown.all_time' => 'all time',
+'dropdown.current_day' => '今日',
+'dropdown.previous_day' => '昨日',
+'dropdown.selected_day' => '日',
+'dropdown.current_week' => '今週',
+'dropdown.previous_week' => '先週',
+'dropdown.selected_week' => '週',
+'dropdown.current_month' => '今月',
+'dropdown.previous_month' => '先月',
+'dropdown.selected_month' => '月',
+'dropdown.current_year' => '今年',
+'dropdown.previous_year' => '昨年',
+'dropdown.selected_year' => '年',
+'dropdown.all_time' => 'すべての時間',
 'dropdown.projects' => 'プロジェクト',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
@@ -442,6 +442,22 @@ $i18n_key_words = array(
 // 'form.tasks.active_tasks' => 'Active Tasks',
 // 'form.tasks.inactive_tasks' => 'Inactive Tasks',
 
+// Users form. See example at https://timetracker.anuko.com/users.php
+// TODO: translate the following.
+// 'form.users.active_users' => 'Active Users',
+// 'form.users.inactive_users' => 'Inactive Users',
+// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
+// 'form.users.role' => 'Role',
+// 'form.users.manager' => 'Manager',
+// 'form.users.comanager' => 'Co-manager',
+// 'form.users.rate' => 'Rate',
+// 'form.users.default_rate' => 'Default hourly rate',
+
+// Clients form. See example at https://timetracker.anuko.com/clients.php
+// TODO: translate the following.
+// 'form.clients.active_clients' => 'Active Clients',
+// 'form.clients.inactive_clients' => 'Inactive Clients',
+
 
 
 // TODO: refactoring ongoing down from here.
@@ -533,11 +549,4 @@ $i18n_key_words = array(
 "controls.project_bind" => '--- すべて ---',
 "controls.all" => '--- すべて ---',
 "controls.notbind" => '--- いいえ ---',
-"controls.per_tm" => '今月',
-"controls.per_lm" => '先月',
-"controls.per_tw" => '今週',
-"controls.per_lw" => '先週',
-"controls.per_td" => '今日',
-"controls.per_at" => 'すべての時間',
-"controls.per_ty" => '今年',
 );
