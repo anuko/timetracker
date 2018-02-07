@@ -302,7 +302,7 @@ $i18n_key_words = array(
 // 'title.monthly_quotas' => 'Monthly Quotas',
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
-// 'title.options' => 'Options',
+'title.options' => '選項',
 // 'title.profile' => 'Profile',
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
@@ -357,8 +357,8 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => '密碼重設請求已經發送。', // TODO: Add "by email" to match the English string.
 'form.reset_password.email_subject' => 'Anuko時間追蹤器密碼重設請求',
-// TODO: translate the following.
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// TODO: translate the ending of the following.
+'form.reset_password.email_body' => "親愛的用戶，\n\n有人，也可能是您自己，請求重新設置您的Anuko時間追蹤器密碼。如果您希望重設您的密碼，請訪問下麵的連結：\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 // TODO: translate the following.
@@ -437,11 +437,6 @@ $i18n_key_words = array(
 
 // TODO: refactoring ongoing down from here.
 
-// password reminder form attributes
-// Note to translators: the ending of this string below needs to be translated.
-"form.fpass.send_pass_body" => "親愛的用戶，\n\n有人，也可能是您自己，請求重新設置您的Anuko時間追蹤器密碼。如果您希望重設您的密碼，請訪問下麵的連結：\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
-"form.fpass.reset_comment" => "要重設密碼，請輸入新密碼並點擊保存按鈕",
-
 // administrator form
 "form.admin.title" => '管理員',
 "form.admin.duty_text" => '通過創建新的團隊經理帳號來創建新團隊。<br>您也可以從其它的Anuko時間追蹤器伺服器的xml檔導入團隊資料(登錄資訊不能發生衝突)。',
@@ -451,7 +446,6 @@ $i18n_key_words = array(
 "form.admin.profile.comment" => '刪除團隊',
 "form.admin.profile.th.id" => 'ID號',
 "form.admin.profile.th.active" => '啟動',
-"form.admin.options" => '選項',
 
 // my time form attributes
 "form.mytime.title" => '我的時間記錄',

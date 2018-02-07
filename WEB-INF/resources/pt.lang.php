@@ -295,7 +295,7 @@ $i18n_key_words = array(
 // 'title.monthly_quotas' => 'Monthly Quotas',
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
-// 'title.options' => 'Options',
+'title.options' => 'Opções',
 'title.profile' => 'Perfil',
 // TODO: translate the following.
 // 'title.cf_custom_fields' => 'Custom Fields',
@@ -426,9 +426,6 @@ $i18n_key_words = array(
 
 
 // TODO: refactoring ongoing down from here.
-
-// administrator form
-"form.admin.options" => 'opções',
 
 // my time form attributes
 "form.mytime.title" => 'adicionar período',

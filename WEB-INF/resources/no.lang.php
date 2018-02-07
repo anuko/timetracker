@@ -302,7 +302,7 @@ $i18n_key_words = array(
 // 'title.monthly_quotas' => 'Monthly Quotas',
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
-// 'title.options' => 'Options',
+'title.options' => 'Opsjoner',
 'title.profile' => 'Profil',
 // TODO: translate the following.
 // 'title.cf_custom_fields' => 'Custom Fields',
@@ -357,7 +357,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reset_password.message' => 'Password reset request sent by email.',
 // 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+'form.reset_password.email_body' => "Kjære bruker,\n\nNoen, trolig deg, bad om å få ditt Anuko Time Tracker password resatt. Vær vennlig å besøk denne lenken dersom du ønsker at passordet ditt skal resettes.\n\n%s\n\nAnuko Time Tracker er et enkelt og brukervennlig system for tidsregistrering basert på åpen kildekode. Les mer på https://www.anuko.com.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 // TODO: translate the following.
@@ -436,14 +436,7 @@ $i18n_key_words = array(
 
 // TODO: refactoring ongoing down from here.
 
-// password reminder form attributes
-
-// Note to translators: strings below need to be translated.
-// "form.fpass.send_pass_body" => "Kjære bruker,\n\nNoen, trolig deg, bad om å få ditt Anuko Time Tracker password resatt. Vær vennlig å besøk denne lenken dersom du ønsker at passordet ditt skal resettes.\n\n%s\n\nAnuko Time Tracker er et enkelt og brukervennlig system for tidsregistrering basert på åpen kildekode. Les mer på https://www.anuko.com.\n\n",
-// "form.fpass.reset_comment" => "vennligst skriv inn passordet og klikk på lagre for å resette passsordet.",
-
 // Note to translators: the strings below must be translated
-// // administrator form
 // "form.admin.title" => 'administrator',
 // "form.admin.duty_text" => 'opprett et nytt team ved å opprette en ny team manager konto.<br>du kan også importere team data fra en xml fil fra en annen Anuko Time Tracker server (ingen login kollisjoner er tillatt).',
 
@@ -452,7 +445,6 @@ $i18n_key_words = array(
 // "form.admin.profile.comment" => 'slett team',
 // "form.admin.profile.th.id" => 'id',
 // "form.admin.profile.th.active" => 'aktiv',
-// "form.admin.options" => 'opsjoner',
 
 // my time form attributes
 // Note to translators: the 2 strings below must be translated
