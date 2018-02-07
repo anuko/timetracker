@@ -326,9 +326,9 @@ $i18n_key_words = array(
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
+'dropdown.all' => '--- toate ---',
+'dropdown.no' => '--- nu ---',
 // TODO: translate the following.
-// 'dropdown.all' => '--- all ---',
-// 'dropdown.no' => '--- no ---',
 // 'dropdown.current_day' => 'today',
 // 'dropdown.previous_day' => 'yesterday',
 // 'dropdown.selected_day' => 'day',
@@ -567,8 +567,4 @@ $i18n_key_words = array(
 // miscellaneous strings
 "forward.tocsvfile" => 'exporta date in fisier .csv',
 "forward.geninvoice" => 'genereaza factura',
-
-"controls.project_bind" => '--- toate ---',
-"controls.all" => '--- toate ---',
-"controls.notbind" => '--- nu ---',
 );

@@ -327,9 +327,8 @@ $i18n_key_words = array(
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
-// TODO: translate the following.
-// 'dropdown.all' => '--- all ---',
-// 'dropdown.no' => '--- no ---',
+'dropdown.all' => '--- 전부 ---',
+'dropdown.no' => '--- 아니 ---',
 'dropdown.current_day' => '오늘',
 // TODO: translate the following.
 // 'dropdown.previous_day' => 'yesterday',
@@ -568,8 +567,4 @@ $i18n_key_words = array(
 "forward.tocsvfile" => '데이터를 .csv 파일로 익스포트',
 "forward.toxmlfile" => '데이터를 .xml 파일로 익스포트',
 "forward.geninvoice" => '송장 만들기',
-
-"controls.project_bind" => '--- 전부 ---',
-"controls.all" => '--- 전부 ---',
-"controls.notbind" => '--- 아니 ---',
 );

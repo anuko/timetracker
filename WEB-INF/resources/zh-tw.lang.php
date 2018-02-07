@@ -323,9 +323,8 @@ $i18n_key_words = array(
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
-// TODO: translate the following.
-// 'dropdown.all' => '--- all ---',
-// 'dropdown.no' => '--- no ---',
+'dropdown.all' => '--- 全部 ---',
+'dropdown.no' => '--- 無 ---',
 'dropdown.current_day' => '今天',
 'dropdown.previous_day' => '昨天',
 'dropdown.selected_day' => '天',
@@ -563,8 +562,4 @@ $i18n_key_words = array(
 "forward.tocsvfile" => '將資料輸出到.csv文件',
 "forward.toxmlfile" => '將資料輸出到.xml文件',
 "forward.geninvoice" => '生成發票',
-
-"controls.project_bind" => '--- 全部 ---',
-"controls.all" => '--- 全部 ---',
-"controls.notbind" => '--- 無 ---',
 );
