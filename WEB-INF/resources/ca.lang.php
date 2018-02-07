@@ -491,7 +491,6 @@ $i18n_key_words = array(
 "form.invoice.th.rate" => 'Taxa',
 "form.invoice.th.summ" => 'Quantitat',
 "form.invoice.subtotal" => 'Subtotal',
-"form.invoice.customer" => 'Client',
 "form.invoice.mailinv_above" => 'Enviar aquesta factura per e-mail',
 "form.invoice.sending_str" => '<b>Factura enviada</b>',
 

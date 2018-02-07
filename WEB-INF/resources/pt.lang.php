@@ -276,10 +276,10 @@ $i18n_key_words = array(
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
-// 'title.users' => 'Users',
-// 'title.add_user' => 'Adding User',
-// 'title.edit_user' => 'Editing User',
-// 'title.delete_user' => 'Deleting User',
+'title.users' => 'Usuários',
+'title.add_user' => 'Adicionando usuário',
+'title.edit_user' => 'Editando usuário',
+'title.delete_user' => 'Apagando usuário',
 // 'title.clients' => 'Clients',
 // 'title.add_client' => 'Adding Client',
 // 'title.edit_client' => 'Editing Client',
@@ -445,19 +445,12 @@ $i18n_key_words = array(
 "form.profile.edit_title" => 'editando perfil',
 
 // people form attributes
-"form.people.ppl_str" => 'pessoas',
-"form.people.createu_str" => 'adicionar novo usuário',
-"form.people.edit_str" => 'editando usuário',
-"form.people.del_str" => 'apagando usuário',
-
 "form.people.th.role" => 'regra',
 "form.people.manager" => 'gerente',
-"form.people.empl" => 'usuário',
 
 // report attributes
 "form.report.title" => 'relatórios',
 "form.report.total" => 'horas totais',
-"form.report.th.empllist" => 'usuário',
 
 // mail form attributes
 "form.mail.from" => 'de',

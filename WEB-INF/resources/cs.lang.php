@@ -167,8 +167,9 @@ $i18n_key_words = array(
 'label.user' => 'Uživatel',
 // TODO: translate the following.
 // 'label.users' => 'Users',
-// 'label.client' => 'Client',
-// 'label.clients' => 'Clients',
+'label.client' => 'Zákazník',
+'label.clients' => 'Zákazníci',
+// TODO: translate the following.
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
 'label.project' => 'Projekt',
@@ -293,10 +294,10 @@ $i18n_key_words = array(
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
-// 'title.clients' => 'Clients',
-// 'title.add_client' => 'Adding Client',
-// 'title.edit_client' => 'Editing Client',
-// 'title.delete_client' => 'Deleting Client',
+'title.clients' => 'Zákazníci',
+'title.add_client' => 'Přidat zákazníka',
+'title.edit_client' => 'Upravit zákazníka',
+'title.delete_client' => 'Smazat zákazníka',
 // 'title.invoices' => 'Invoices',
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
@@ -344,7 +345,8 @@ $i18n_key_words = array(
 'dropdown.projects' => 'projekty',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
-// 'dropdown.clients' => 'clients',
+'dropdown.clients' => 'zákazníci',
+// TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
@@ -530,11 +532,6 @@ $i18n_key_words = array(
 // "form.migration.compression.none" => 'none',
 "form.migration.compression.gzip" => 'gzip',
 "form.migration.compression.bzip" => 'bzip',
-
-"form.client.title" => 'zákazníci',
-"form.client.add_title" => 'přidat zákazníka',
-"form.client.edit_title" => 'upravit zákazníka',
-"form.client.del_title" => 'smazat zákazníka',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'exportovat data do .csv souboru',

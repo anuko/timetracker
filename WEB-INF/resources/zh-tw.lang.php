@@ -160,10 +160,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
-// 'label.user' => 'User',
-// 'label.users' => 'Users',
-// 'label.client' => 'Client',
-// 'label.clients' => 'Clients',
+'label.user' => '用戶',
+'label.users' => '用戶',
+'label.client' => '客戶',
+'label.clients' => '客戶',
+// TODO: translate the following.
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
 'label.project' => '項目',
@@ -282,14 +283,15 @@ $i18n_key_words = array(
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
-// 'title.users' => 'Users',
+'title.users' => '用戶',
+// TODO: translate the following.
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
-// 'title.clients' => 'Clients',
-// 'title.add_client' => 'Adding Client',
-// 'title.edit_client' => 'Editing Client',
-// 'title.delete_client' => 'Deleting Client',
+'title.clients' => '客戶',
+'title.add_client' => '添加客戶',
+'title.edit_client' => '編輯客戶',
+'title.delete_client' => '刪除客戶',
 // 'title.invoices' => 'Invoices',
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
@@ -337,7 +339,8 @@ $i18n_key_words = array(
 'dropdown.projects' => '項目',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
-// 'dropdown.clients' => 'clients',
+'dropdown.clients' => '客戶',
+// TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
@@ -480,7 +483,6 @@ $i18n_key_words = array(
 "form.people.th.rate" => '費率',
 "form.people.manager" => '經理',
 "form.people.comanager" => '合作經理人',
-"form.people.empl" => '用戶',
 
 "form.people.rate" => '默認小時收費',
 "form.people.comanager" => '合作經理人',
@@ -488,7 +490,6 @@ $i18n_key_words = array(
 // report attributes
 "form.report.title" => '報告',
 "form.report.total" => '總計時間',
-"form.report.th.empllist" => '用戶',
 
 // mail form attributes
 "form.mail.from" => '從',
@@ -525,11 +526,6 @@ $i18n_key_words = array(
 "form.migration.compression.none" => '不压缩',
 "form.migration.compression.gzip" => 'gzip格式',
 "form.migration.compression.bzip" => 'bzip格式',
-
-"form.client.title" => '客戶',
-"form.client.add_title" => '添加客戶',
-"form.client.edit_title" => '編輯客戶',
-"form.client.del_title" => '刪除客戶',
 
 // miscellaneous strings
 "forward.tocsvfile" => '將資料輸出到.csv文件',

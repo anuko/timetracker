@@ -493,7 +493,6 @@ $i18n_key_words = array(
 "form.people.th.rate" => 'tarife',
 "form.people.manager" => 'yönetici',
 "form.people.comanager" => 'yardımcı yönetici',
-"form.people.empl" => 'kullanıcı',
 
 "form.people.rate" => 'varsayılan saat ücreti',
 "form.people.comanager" => 'yardımcı yönetici',
@@ -501,7 +500,6 @@ $i18n_key_words = array(
 // report attributes
 "form.report.title" => 'raporlar',
 "form.report.total" => 'saat toplamı',
-"form.report.th.empllist" => 'kullanıcı',
 
 // mail form attributes
 "form.mail.from" => 'kimden',
