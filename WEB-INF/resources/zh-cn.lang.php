@@ -155,8 +155,8 @@ $i18n_key_words = array(
 'label.users' => '用户',
 'label.client' => '客户',
 'label.clients' => '客户',
+'label.option' => '选项',
 // TODO: translate the following.
-// 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
 'label.project' => '项目',
 'label.projects' => '项目',
@@ -208,7 +208,7 @@ $i18n_key_words = array(
 'label.or' => '或',
 // TODO: translate the following.
 // 'label.error' => 'Error',
-// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
+'label.ldap_hint' => '在下面的栏目输入您的<b>Windows用户名</b>和<b>密码</b>。',
 'label.required_fields' => '* 必填栏目',
 'label.on_behalf' => '代表',
 'label.role_manager' => '(经理)',
@@ -294,8 +294,9 @@ $i18n_key_words = array(
 // 'title.monthly_quotas' => 'Monthly Quotas',
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
-// 'title.options' => 'Options',
-// 'title.profile' => 'Profile',
+'title.options' => '选项',
+'title.profile' => '简介',
+// TODO: translate the following.
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
 // 'title.cf_edit_custom_field' => 'Editing Custom Field',
@@ -445,7 +446,6 @@ $i18n_key_words = array(
 "form.admin.profile.comment" => '删除团队',
 "form.admin.profile.th.id" => 'ID号',
 "form.admin.profile.th.active" => '启用',
-"form.admin.options" => '选项',
 
 // my time form attributes
 "form.mytime.title" => '我的时间记录',
@@ -541,7 +541,6 @@ $i18n_key_words = array(
 "label.disable" => '禁用',
 "label.enable" => '启用',
 "label.hrs" => '小时',
-"label.ldap_hint" => '在下面的栏目输入您的<b>Windows用户名</b>和<b>密码</b>。',
 
 // login hello text
  "login.hello.text" => "anuko时间跟踪器是一种简单、易用、开放源代码的实时跟踪系统。",

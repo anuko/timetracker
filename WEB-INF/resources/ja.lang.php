@@ -220,7 +220,7 @@ $i18n_key_words = array(
 'label.or' => 'あるいは',
 // TODO: translate the following.
 // 'label.error' => 'Error',
-// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
+'label.ldap_hint' => '下記のフィールドにあなたの<b>WindowsのログインID</b>と<b>パスワード</b>を入力してください。',
 'label.required_fields' => '* 必須のフィールド',
 'label.on_behalf' => 'を代表して',
 // TODO: translate all 3 roles properly, see https://www.anuko.com/time_tracker/user_guide/user_accounts.htm
@@ -292,10 +292,11 @@ $i18n_key_words = array(
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
-// 'title.clients' => 'Clients',
-// 'title.add_client' => 'Adding Client',
-// 'title.edit_client' => 'Editing Client',
-// 'title.delete_client' => 'Deleting Client',
+'title.clients' => 'クライアント',
+'title.add_client' => 'クライアントの追加',
+'title.edit_client' => 'クライアントの編集',
+'title.delete_client' => 'クライアントの削除',
+// TODO: translate the following.
 // 'title.invoices' => 'Invoices',
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
@@ -308,8 +309,8 @@ $i18n_key_words = array(
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
 'title.options' => 'オプション',
+'title.profile' => 'プロファイル',
 // TODO: translate the following.
-// 'title.profile' => 'Profile',
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
 // 'title.cf_edit_custom_field' => 'Editing Custom Field',
@@ -530,11 +531,6 @@ $i18n_key_words = array(
 "form.migration.compression.gzip" => 'gzip',
 "form.migration.compression.bzip" => 'bzip',
 
-"form.client.title" => 'クライアント',
-"form.client.add_title" => 'クライアントの追加',
-"form.client.edit_title" => 'クライアントの編集',
-"form.client.del_title" => 'クライアントの削除',
-
 // miscellaneous strings
 "forward.tocsvfile" => 'csvファイルにエクスポート',
 "forward.toxmlfile" => 'xmlファイルにエクスポート',
@@ -558,5 +554,4 @@ $i18n_key_words = array(
 "label.disable" => '使用中止',
 "label.enable" => '使用可能',
 "label.hrs" => '時間',
-"label.ldap_hint" => '下記のフィールドにあなたの<b>WindowsのログインID</b>と<b>パスワード</b>を入力してください。',
 );

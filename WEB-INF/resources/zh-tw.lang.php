@@ -217,7 +217,7 @@ $i18n_key_words = array(
 'label.or' => '或',
 // TODO: translate the following.
 // 'label.error' => 'Error',
-// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
+'label.ldap_hint' => '在下麵的欄目輸入您的<b>Windows用戶名</b>和<b>密碼</b>。',
 'label.required_fields' => '* 必填欄目',
 'label.on_behalf' => '代表',
 'label.role_manager' => '(經理)',
@@ -549,5 +549,4 @@ $i18n_key_words = array(
 "label.disable" => '禁用',
 "label.enable" => '啟用',
 "label.hrs" => '小時',
-"label.ldap_hint" => '在下麵的欄目輸入您的<b>Windows用戶名</b>和<b>密碼</b>。',
 );

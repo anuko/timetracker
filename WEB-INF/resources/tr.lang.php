@@ -315,7 +315,8 @@ $i18n_key_words = array(
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
 // 'title.options' => 'Options',
-// 'title.profile' => 'Profile',
+'title.profile' => 'Profili',
+// TODO: translate the following.
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
 // 'title.cf_edit_custom_field' => 'Editing Custom Field',

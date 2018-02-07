@@ -165,8 +165,9 @@ $i18n_key_words = array(
 'label.user' => 'Kasutaja',
 // TODO: translate the following.
 // 'label.users' => 'Users',
-// 'label.client' => 'Client',
-// 'label.clients' => 'Clients',
+'label.client' => 'Klient',
+'label.clients' => 'Kliendid',
+// TODO: translate the following.
 // 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
 'label.project' => 'Projekt',
@@ -251,6 +252,10 @@ $i18n_key_words = array(
 // 'label.week_list' => 'Week list',
 
 // Form titles.
+// TODO: Improve titles for consistency, so that each title explains correctly what each
+// page is about and is "consistent" from page to page, meaning that correct grammar is used everywhere.
+// Compare with English file to see how it is done there and do Estonian titles similarly.
+// Specifically: lisamine vs lisa, etc.
 'title.login' => 'Login',
 // TODO: translate the following.
 // 'title.teams' => 'Teams',
@@ -290,10 +295,11 @@ $i18n_key_words = array(
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
-// 'title.clients' => 'Clients',
-// 'title.add_client' => 'Adding Client',
-// 'title.edit_client' => 'Editing Client',
-// 'title.delete_client' => 'Deleting Client',
+'title.clients' => 'Kliendid',
+'title.add_client' => 'Lisa klient',
+'title.edit_client' => 'Muuda klienti',
+'title.delete_client' => 'Kustuta klient',
+// TODO: translate the following.
 // 'title.invoices' => 'Invoices',
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
@@ -306,8 +312,8 @@ $i18n_key_words = array(
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
 'title.options' => 'Suvandid',
+'title.profile' => 'Profiili',
 // TODO: translate the following.
-// 'title.profile' => 'Profile',
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
 // 'title.cf_edit_custom_field' => 'Editing Custom Field',
@@ -342,7 +348,8 @@ $i18n_key_words = array(
 'dropdown.projects' => 'projektid',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
-// 'dropdown.clients' => 'clients',
+'dropdown.clients' => 'kliendid',
+// TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
@@ -527,11 +534,6 @@ $i18n_key_words = array(
 // "form.migration.compression.none" => 'none',
 "form.migration.compression.gzip" => 'gzip',
 "form.migration.compression.bzip" => 'bzip',
-
-"form.client.title" => 'kliendid',
-"form.client.add_title" => 'lisa klient',
-"form.client.edit_title" => 'muuda klienti',
-"form.client.del_title" => 'kustuta klient',
 
 // miscellaneous strings
 "forward.tocsvfile" => 'ekspordi andmed .csv faili',

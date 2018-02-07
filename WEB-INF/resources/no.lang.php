@@ -218,7 +218,7 @@ $i18n_key_words = array(
 'label.or' => 'eller',
 // TODO: translate the following.
 // 'label.error' => 'Error',
-// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
+'label.ldap_hint' => 'Skriv din <b>Windows login</b> og <b>passord</b> i feltene nedenfor.',
 'label.required_fields' => '* obligatoriske felt',
 'label.on_behalf' => 'på vegne av',
 // TODO: translate the following.
@@ -303,7 +303,8 @@ $i18n_key_words = array(
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
 // 'title.options' => 'Options',
-// 'title.profile' => 'Profile',
+'title.profile' => 'Profil',
+// TODO: translate the following.
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
 // 'title.cf_edit_custom_field' => 'Editing Custom Field',
@@ -559,7 +560,6 @@ $i18n_key_words = array(
 // "label.disable" => 'slå av',
 // "label.enable" => 'slå på',
 // "label.hrs" => 'timer',
-// "label.ldap_hint" => 'Skriv din <b>Windows login</b> og <b>passord</b> i feltene nedenfor.',
 
 // login hello text
 // "login.hello.text" => "Anuko Time Tracker er et enkelt, brukervennlig tidsregistreringssystem basert på åpen kildekode.",

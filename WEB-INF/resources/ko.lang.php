@@ -219,7 +219,7 @@ $i18n_key_words = array(
 'label.or' => '혹은',
 // TODO: translate the following.
 // 'label.error' => 'Error',
-// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
+'label.ldap_hint' => '아래의 필드들에서 <b>Windows 로그인</b> 및 <b>암호</b> 를 입력하십시오.',
 'label.required_fields' => '* 필수 필드',
 'label.on_behalf' => '을 대표하여',
 // TODO: translate all 3 roles properly, see https://www.anuko.com/time_tracker/user_guide/user_accounts.htm
@@ -309,8 +309,8 @@ $i18n_key_words = array(
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
 'title.options' => '옵션',
+'title.profile' => '프로필',
 // TODO: translate the following.
-// 'title.profile' => 'Profile',
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
 // 'title.cf_edit_custom_field' => 'Editing Custom Field',
@@ -554,5 +554,4 @@ $i18n_key_words = array(
 "label.disable" => '무력화',
 "label.enable" => '가능화',
 "label.hrs" => '시간',
-"label.ldap_hint" => '아래의 필드들에서 <b>Windows 로그인</b> 및 <b>암호</b> 를 입력하십시오.',
 );
