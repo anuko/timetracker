@@ -199,8 +199,9 @@ $i18n_key_words = array(
 'label.delete' => 'Smazat',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
-// 'label.select_all' => 'Select all',
-// 'label.select_none' => 'Deselect all',
+'label.select_all' => 'Vybrat všechno',
+'label.select_none' => 'Zrušit výběr',
+// TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
@@ -538,8 +539,4 @@ $i18n_key_words = array(
 
 "label.inv_str" => 'faktura',
 "label.set_empl" => 'výběr uživatelů',
-"label.sel_all" => 'vybrat všechno',
-"label.sel_none" => 'zrušit výběr',
-"label.disable" => 'zakázat',
-"label.enable" => 'povolit',
 );

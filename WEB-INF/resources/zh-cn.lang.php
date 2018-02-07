@@ -528,6 +528,4 @@ $i18n_key_words = array(
 "label.set_empl" => '选择用户',
 "label.sel_all" => '全部选择',
 "label.sel_none" => '全部不选',
-"label.disable" => '禁用',
-"label.enable" => '启用',
 );

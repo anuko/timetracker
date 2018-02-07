@@ -193,9 +193,9 @@ $i18n_key_words = array(
 'label.edit' => 'Modificar',
 'label.delete' => 'Eliminar',
 'label.configure' => 'Configurar',
+'label.select_all' => 'Seleccionar tots',
+'label.select_none' => 'Treure totes las seleccions',
 // TODO: translate the following.
-// 'label.select_all' => 'Select all',
-// 'label.select_none' => 'Deselect all',
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
@@ -517,8 +517,4 @@ $i18n_key_words = array(
 "controls.per_lw" => 'La setmana passada',
 
 "label.set_empl" => 'Seleccionar usuaris',
-"label.sel_all" => 'Seleccionar tots',
-"label.sel_none" => 'Treure totes las seleccions',
-"label.disable" => 'Deshabilitar',
-"label.enable" => 'Habilitar',
 );

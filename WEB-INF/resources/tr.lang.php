@@ -547,6 +547,4 @@ $i18n_key_words = array(
 "label.set_empl" => 'kullanıcıları seç',
 "label.sel_all" => 'tümünü seç',
 "label.sel_none" => 'hiçbirini seçme',
-"label.disable" => 'devre dışı bırak',
-"label.enable" => 'devreye sok',
 );

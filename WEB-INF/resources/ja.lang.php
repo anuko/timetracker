@@ -543,6 +543,4 @@ $i18n_key_words = array(
 "label.set_empl" => 'ユーザーの選択',
 "label.sel_all" => 'すべて選択',
 "label.sel_none" => 'すべて解除',
-"label.disable" => '使用中止',
-"label.enable" => '使用可能',
 );

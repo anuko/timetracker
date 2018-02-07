@@ -536,6 +536,4 @@ $i18n_key_words = array(
 "label.set_empl" => '選擇用戶',
 "label.sel_all" => '全部選擇',
 "label.sel_none" => '全部不選',
-"label.disable" => '禁用',
-"label.enable" => '啟用',
 );

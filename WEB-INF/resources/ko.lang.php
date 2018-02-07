@@ -542,6 +542,4 @@ $i18n_key_words = array(
 "label.set_empl" => '사용자들을 선택',
 "label.sel_all" => '모두 선택',
 "label.sel_none" => '모두 해제',
-"label.disable" => '무력화',
-"label.enable" => '가능화',
 );

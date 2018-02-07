@@ -197,8 +197,9 @@ $i18n_key_words = array(
 'label.delete' => 'Törlés',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
-// 'label.select_all' => 'Select all',
-// 'label.select_none' => 'Deselect all',
+// TODO: translate the following.
+'label.select_all' => 'Mindenkit kijelöl',
+'label.select_none' => 'Senkit nem jelöl ki',
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
@@ -530,8 +531,4 @@ $i18n_key_words = array(
 
 // labels
 "label.inv_str" => 'számla',
-"label.sel_all" => 'mindenkit kijelöl',
-"label.sel_none" => 'senkit nem jelöl ki',
-"label.disable" => 'tiltva',
-"label.enable" => 'engedélyezve',
 );

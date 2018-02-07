@@ -196,9 +196,9 @@ $i18n_key_words = array(
 'label.edit' => 'Muuda',
 'label.delete' => 'Kustuta',
 'label.configure' => 'Konfigureeri',
+'label.select_all' => 'Vali kõik',
+'label.select_none' => 'Märgi kõik mittevalituks',
 // TODO: translate the following.
-// 'label.select_all' => 'Select all',
-// 'label.select_none' => 'Deselect all',
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
@@ -546,6 +546,4 @@ $i18n_key_words = array(
 "label.set_empl" => 'vali kasutajad',
 "label.sel_all" => 'vali kõik',
 "label.sel_none" => 'märgi kõik mittevalituks',
-"label.disable" => 'keela',
-"label.enable" => 'luba',
 );

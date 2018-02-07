@@ -547,6 +547,4 @@ $i18n_key_words = array(
 // Note to translators: the strings below are missing and must be translated and added
 // "label.sel_all" => 'velg alle',
 // "label.sel_none" => 'velg ingen',
-// "label.disable" => 'slå av',
-// "label.enable" => 'slå på',
 );
