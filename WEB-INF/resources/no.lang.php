@@ -437,7 +437,7 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.send_pass_subj" => 'Anuko Time Tracker passordet ditt',
+
 // Note to translators: strings below need to be translated.
 // "form.fpass.send_pass_body" => "Kjære bruker,\n\nNoen, trolig deg, bad om å få ditt Anuko Time Tracker password resatt. Vær vennlig å besøk denne lenken dersom du ønsker at passordet ditt skal resettes.\n\n%s\n\nAnuko Time Tracker er et enkelt og brukervennlig system for tidsregistrering basert på åpen kildekode. Les mer på https://www.anuko.com.\n\n",
 // "form.fpass.reset_comment" => "vennligst skriv inn passordet og klikk på lagre for å resette passsordet.",

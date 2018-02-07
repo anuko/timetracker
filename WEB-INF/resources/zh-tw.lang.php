@@ -355,9 +355,9 @@ $i18n_key_words = array(
 // 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
+'form.reset_password.message' => '密碼重設請求已經發送。', // TODO: Add "by email" to match the English string.
+'form.reset_password.email_subject' => 'Anuko時間追蹤器密碼重設請求',
 // TODO: translate the following.
-// 'form.reset_password.message' => 'Password reset request sent by email.',
-// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
 // 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
@@ -438,8 +438,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.send_pass_str" => '密碼重設請求已經發送',
-"form.fpass.send_pass_subj" => 'Anuko時間追蹤器密碼重設請求',
 // Note to translators: the ending of this string below needs to be translated.
 "form.fpass.send_pass_body" => "親愛的用戶，\n\n有人，也可能是您自己，請求重新設置您的Anuko時間追蹤器密碼。如果您希望重設您的密碼，請訪問下麵的連結：\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 "form.fpass.reset_comment" => "要重設密碼，請輸入新密碼並點擊保存按鈕",

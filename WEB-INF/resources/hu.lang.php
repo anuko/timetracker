@@ -440,8 +440,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.send_pass_str" => 'jelszó alap állapotra állítása megkezdve',
-"form.fpass.send_pass_subj" => 'A jelszó alap állapotra állítása a Anuko TimeTracker-ben',
 "form.fpass.reset_comment" => "a jelszót a megváltoztatásához írja be és mentse el",
 
 // administrator form

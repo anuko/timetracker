@@ -365,8 +365,8 @@ $i18n_key_words = array(
 // 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
+'form.reset_password.message' => 'Salasõna tühjendamise käsk edastatud.', // TODO: add "by email" to match the English string.
 // TODO: translate the following.
-// 'form.reset_password.message' => 'Password reset request sent by email.',
 // 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
 // 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
@@ -447,13 +447,6 @@ $i18n_key_words = array(
 
 
 // TODO: refactoring ongoing down from here.
-
-// password reminder form attributes
-"form.fpass.send_pass_str" => 'salasõna tühjendamise käsk edastatud',
-// Note to translators: the 3 strings below must be translated
-// "form.fpass.send_pass_subj" => 'AnukoTime Tracker password reset request',
-// "form.fpass.send_pass_body" => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
-// "form.fpass.reset_comment" => "to reset your password please type it in and click on save",
 
 // administrator form
 "form.admin.title" => 'administraator',

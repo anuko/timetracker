@@ -73,38 +73,37 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: All error messages should be complete sentences with a period (full stop) in the end. Put them there.
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
-'error.db' => 'データベースのエラー',
-'error.field' => '不正確な"{0}"データ',
-'error.empty' => '"{0}"のフィールドが空白です',
-'error.not_equal' => '"{0}"のフィールドは"{1}"のフィールドと違います',
+'error.db' => 'データベースのエラー。',
+'error.field' => '不正確な"{0}"データ。',
+'error.empty' => '"{0}"のフィールドが空白です。',
+'error.not_equal' => '"{0}"のフィールドは"{1}"のフィールドと違います。',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-'error.project' => 'プロジェクトの選択',
+'error.project' => 'プロジェクトの選択。',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-'error.client' => 'クライアントの選択',
+'error.client' => 'クライアントの選択。',
 // TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
-'error.auth' => '不正確なログインあるいはパスワードが不正確です',
-'error.user_exists' => 'このログインと関連されたユーザーは既に存在します',
-'error.project_exists' => 'この名前のプロジェクトは既に存在します',
+'error.auth' => '不正確なログインあるいはパスワードが不正確です。',
+'error.user_exists' => 'このログインと関連されたユーザーは既に存在します。',
+'error.project_exists' => 'この名前のプロジェクトは既に存在します。',
 // TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
-'error.no_login' => 'このログインと関連されたユーザーはいません',
+'error.no_login' => 'このログインと関連されたユーザーはいません。',
 // TODO: translate the following.
 // 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
-'error.upload' => 'ファイルのアップロードのエラー',
+'error.upload' => 'ファイルのアップロードのエラー。',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
-'error.mail_send' => 'メールの送信中のエラー',
+'error.mail_send' => 'メールの送信中のエラー。',
 // TODO: translate the following.
 // 'error.no_email' => 'No email associated with this login.',
 // 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
@@ -361,9 +360,9 @@ $i18n_key_words = array(
 // 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
+'form.reset_password.message' => '送信したパスワードの初期化の要求。', // TODO: add "by email" to match the English string.
+'form.reset_password.email_subject' => 'Anuko Time Trackerのパスワードの初期化の要求',
 // TODO: translate the following.
-// 'form.reset_password.message' => 'Password reset request sent by email.',
-// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
 // 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
@@ -445,8 +444,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.send_pass_str" => '送信したパスワードの初期化の要求',
-"form.fpass.send_pass_subj" => 'Anuko Time Trackerのパスワードの初期化の要求',
 // Note to translators: the ending of this string below needs to be translated.
 "form.fpass.send_pass_body" => "尊敬なるお客様、\n\n誰から（多分あなた）あなたのAnuko Time Trackerのパスワードの初期化が要求されました。あなたのパスワードを初期化しようとこのリンクを押してください。\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 "form.fpass.reset_comment" => "あなたのパスワードを初期化しようとパスワードを入力して保存をクリックしてください",

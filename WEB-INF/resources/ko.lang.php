@@ -73,39 +73,38 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: All error messages should be complete sentences with a period (full stop) in the end. Put them there.
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
-'error.db' => '데이터베이스 오류',
-'error.field' => '부정확한 "{0}" 의 데이터',
-'error.empty' => '"{0}" 의 필드가 비어있습니다',
-'error.not_equal' => '"{0}" 의 필드가 "{1}" 의 필드와 같지 않습니다',
+'error.db' => '데이터베이스 오류.',
+'error.field' => '부정확한 "{0}" 의 데이터.',
+'error.empty' => '"{0}" 의 필드가 비어있습니다.',
+'error.not_equal' => '"{0}" 의 필드가 "{1}" 의 필드와 같지 않습니다.',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-'error.project' => '프로젝트의 선택',
+'error.project' => '프로젝트의 선택.',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-'error.client' => '클라이언트 선택',
+'error.client' => '클라이언트 선택.',
 // TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
-'error.auth' => '부정확한 로그인 혹은 암호가 틀립니다',
-'error.user_exists' => '본 로그인과 연계된 사용자가 이미 있습니다',
-'error.project_exists' => '본 이름과 연계된 프로젝트가 이미 있습니다',
+'error.auth' => '부정확한 로그인 혹은 암호가 틀립니다.',
+'error.user_exists' => '본 로그인과 연계된 사용자가 이미 있습니다.',
+'error.project_exists' => '본 이름과 연계된 프로젝트가 이미 있습니다.',
 // TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
-'error.no_login' => '본 로그인과 연계된 사용자가 없습니다',
+'error.no_login' => '본 로그인과 연계된 사용자가 없습니다.',
 // TODO: translate the following.
 // 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
-'error.upload' => '파일 업로드 오류',
+'error.upload' => '파일 업로드 오류.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
-'error.mail_send' => '메일 보내기에서의 오류',
-'error.no_email' => '본 로그인과 연계된 이메일이 없습니다',
+'error.mail_send' => '메일 보내기에서의 오류.',
+'error.no_email' => '본 로그인과 연계된 이메일이 없습니다.',
 // TODO: translate the following.
 // 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
 // 'error.goto_uncompleted' => 'Go to uncompleted entry.',
@@ -362,9 +361,9 @@ $i18n_key_words = array(
 // 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
+'form.reset_password.message' => '송신한 암호 재설정 요청.', // TODO: add "by email" to match the English string.
+'form.reset_password.email_subject' => 'Anuko Time Tracker 암호 재설정 요청',
 // TODO: translate the following.
-// 'form.reset_password.message' => 'Password reset request sent by email.',
-// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
 // 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
@@ -445,8 +444,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.send_pass_str" => '송신한 암호 재설정 요청',
-"form.fpass.send_pass_subj" => 'Anuko Time Tracker 암호 재설정 요청',
 // Note to translators: the ending of this string below needs to be translated.
 "form.fpass.send_pass_body" => "사용자님께,\n\n누군가 (아마 당신) 가 당신의 Anuko Time Tracker 암호 재설정을 요청하였습니다. 당신의 암호를 재설정하기 바란다면 이 링크를 찾아주십시오. \n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 "form.fpass.reset_comment" => "암호를 재설정하려면 암호를 입력하고 저장을 클릭하십시오",

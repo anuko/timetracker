@@ -427,10 +427,6 @@ $i18n_key_words = array(
 
 // TODO: refactoring ongoing down from here.
 
-// password reminder form attributes
-"form.fpass.send_pass_str" => 'senha foi enviada',
-"form.fpass.send_pass_subj" => 'Sua senha do Anuko Time Tracker',
-
 // administrator form
 "form.admin.options" => 'opções',
 
