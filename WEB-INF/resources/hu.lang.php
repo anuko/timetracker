@@ -331,11 +331,13 @@ $i18n_key_words = array(
 // 'dropdown.current_day' => 'today',
 // 'dropdown.previous_day' => 'yesterday',
 // 'dropdown.selected_day' => 'day',
-// 'dropdown.current_week' => 'this week',
-// 'dropdown.previous_week' => 'previous week',
+'dropdown.current_week' => 'ezen a héten',
+'dropdown.previous_week' => 'múlt héten',
+// TODO: translate the following.
 // 'dropdown.selected_week' => 'week',
-// 'dropdown.current_month' => 'this month',
-// 'dropdown.previous_month' => 'previous month',
+'dropdown.current_month' => 'ebben a hónapban',
+'dropdown.previous_month' => 'múlt hónapban',
+// TODO: translate the following.
 // 'dropdown.selected_month' => 'month',
 // 'dropdown.current_year' => 'this year',
 // 'dropdown.previous_year' => 'previous year',
@@ -526,8 +528,4 @@ $i18n_key_words = array(
 "controls.project_bind" => '--- összes ---',
 "controls.all" => '--- összes ---',
 "controls.notbind" => '--- nincs ---',
-"controls.per_tm" => 'ebben a hónapban',
-"controls.per_lm" => 'múlt hónapban',
-"controls.per_tw" => 'ezen a héten',
-"controls.per_lw" => 'múlt héten',
 );
