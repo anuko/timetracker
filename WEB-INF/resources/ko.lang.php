@@ -330,19 +330,21 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'dropdown.all' => '--- all ---',
 // 'dropdown.no' => '--- no ---',
-// 'dropdown.current_day' => 'today',
+'dropdown.current_day' => '오늘',
+// TODO: translate the following.
 // 'dropdown.previous_day' => 'yesterday',
-// 'dropdown.selected_day' => 'day',
-// 'dropdown.current_week' => 'this week',
-// 'dropdown.previous_week' => 'previous week',
-// 'dropdown.selected_week' => 'week',
-// 'dropdown.current_month' => 'this month',
-// 'dropdown.previous_month' => 'previous month',
-// 'dropdown.selected_month' => 'month',
-// 'dropdown.current_year' => 'this year',
+'dropdown.selected_day' => '일',
+'dropdown.current_week' => '이번주',
+'dropdown.previous_week' => '전번주',
+'dropdown.selected_week' => '주',
+'dropdown.current_month' => '이번달',
+'dropdown.previous_month' => '전번달',
+'dropdown.selected_month' => '달',
+'dropdown.current_year' => '올해',
+// TODO: translate the following.
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
-// 'dropdown.all_time' => 'all time',
+'dropdown.all_time' => '전시간',
 'dropdown.projects' => '프로젝트',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
@@ -457,6 +459,18 @@ $i18n_key_words = array(
 // 'form.clients.active_clients' => 'Active Clients',
 // 'form.clients.inactive_clients' => 'Inactive Clients',
 
+// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
+// TODO: translate the following.
+// 'form.client.client_to_delete' => 'Client to delete',
+// 'form.client.client_entries' => 'Client entries',
+
+// Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// TODO: translate the following.
+// 'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
+// 'form.export.compression' => 'Compression',
+// 'form.export.compression_none' => 'none',
+// 'form.export.compression_bzip' => 'bzip',
+
 
 
 // TODO: refactoring ongoing down from here.
@@ -548,11 +562,4 @@ $i18n_key_words = array(
 "controls.project_bind" => '--- 전부 ---',
 "controls.all" => '--- 전부 ---',
 "controls.notbind" => '--- 아니 ---',
-"controls.per_tm" => '이번달',
-"controls.per_lm" => '전번달',
-"controls.per_tw" => '이번주',
-"controls.per_lw" => '전번주',
-"controls.per_td" => '오늘',
-"controls.per_at" => '전시간',
-"controls.per_ty" => '올해',
 );
