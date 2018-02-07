@@ -487,9 +487,6 @@ $i18n_key_words = array(
 
 // report attributes
 "form.report.title" => '報告',
-"form.report.from" => '開始日期',
-"form.report.to" => '結束日期',
-"form.report.totals_only" => '僅僅今天',
 "form.report.total" => '總計時間',
 "form.report.th.empllist" => '用戶',
 

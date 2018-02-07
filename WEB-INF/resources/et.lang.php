@@ -160,10 +160,10 @@ $i18n_key_words = array(
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Teema',
 'label.date' => 'Kuupäev',
+'label.start_date' => 'Algab kuupäevast',
+'label.end_date' => 'Lõpeb kuupäeval',
+'label.user' => 'Kasutaja',
 // TODO: translate the following.
-// 'label.start_date' => 'Start date',
-// 'label.end_date' => 'End date',
-// 'label.user' => 'User',
 // 'label.users' => 'Users',
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
@@ -405,7 +405,7 @@ $i18n_key_words = array(
 'form.reports.group_by_project' => 'projekt',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
-// 'form.reports.totals_only' => 'Totals only',
+'form.reports.totals_only' => 'Ainult summad',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -485,17 +485,12 @@ $i18n_key_words = array(
 "form.people.th.rate" => 'hind',
 "form.people.manager" => 'haldur',
 "form.people.comanager" => 'kaashaldur',
-"form.people.empl" => 'kasutaja',
 
 "form.people.rate" => 'vaikimisi tunni hind',
 "form.people.comanager" => 'kaashaldur',
 
 // report attributes
-"form.report.from" => 'algab kuupäevast',
-"form.report.to" => 'lõpeb kuupäeval',
-"form.report.totals_only" => 'ainult summad',
 "form.report.total" => 'tunde kokku',
-"form.report.th.empllist" => 'kasutaja',
 
 // mail form attributes
 "form.mail.from" => 'kellelt',

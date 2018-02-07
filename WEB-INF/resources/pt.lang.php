@@ -59,7 +59,8 @@ $i18n_key_words = array(
 'menu.projects' => 'Projetos',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
-// 'menu.users' => 'Users',
+'menu.users' => 'Usuários',
+// TODO: translate the following.
 // 'menu.teams' => 'Teams',
 // 'menu.export' => 'Export',
 // 'menu.clients' => 'Clients',
@@ -154,11 +155,11 @@ $i18n_key_words = array(
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Assunto',
 'label.date' => 'Data',
+'label.start_date' => 'Data inicial',
+'label.end_date' => 'Data final',
+'label.user' => 'Usuário',
+'label.users' => 'Usuários',
 // TODO: translate the following.
-// 'label.start_date' => 'Start date',
-// 'label.end_date' => 'End date',
-// 'label.user' => 'User',
-// 'label.users' => 'Users',
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
@@ -455,8 +456,6 @@ $i18n_key_words = array(
 
 // report attributes
 "form.report.title" => 'relatórios',
-"form.report.from" => 'data inicial',
-"form.report.to" => 'data final',
 "form.report.total" => 'horas totais',
 "form.report.th.empllist" => 'usuário',
 

@@ -59,7 +59,7 @@ $i18n_key_words = array(
 'menu.projects' => 'Proiecte',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
-// 'menu.users' => 'Users',
+'menu.users' => 'Utilizatori',
 'menu.teams' => 'Echipe',
 // TODO: translate the following.
 // 'menu.export' => 'Export',
@@ -164,11 +164,11 @@ $i18n_key_words = array(
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Subiect',
 'label.date' => 'Data',
+'label.start_date' => 'Data inceput',
+'label.end_date' => 'Data sfarsit',
+'label.user' => 'Utilizator',
+'label.users' => 'Utilizatori',
 // TODO: translate the following.
-// 'label.start_date' => 'Start date',
-// 'label.end_date' => 'End date',
-// 'label.user' => 'User',
-// 'label.users' => 'Users',
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
@@ -402,7 +402,7 @@ $i18n_key_words = array(
 'form.reports.group_by_project' => 'proiect',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
-// 'form.reports.totals_only' => 'Totals only',
+'form.reports.totals_only' => 'Numai totaluri',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -480,18 +480,13 @@ $i18n_key_words = array(
 "form.people.th.rate" => 'rata',
 "form.people.manager" => 'manager',
 "form.people.comanager" => 'comanager',
-"form.people.empl" => 'utilizator',
 
 "form.people.rate" => 'pret pe ora implicit',
 "form.people.comanager" => 'co-manager',
 
 // report attributes
 "form.report.title" => 'rapoarte',
-"form.report.from" => 'data inceput',
-"form.report.to" => 'data sfarsit',
-"form.report.totals_only" => 'numai totaluri',
 "form.report.total" => 'ore total',
-"form.report.th.empllist" => 'utilizator',
 
 // mail form attributes
 "form.mail.from" => 'de la',

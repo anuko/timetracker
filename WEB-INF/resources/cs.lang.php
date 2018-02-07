@@ -164,8 +164,8 @@ $i18n_key_words = array(
 'label.date' => 'Datum',
 'label.start_date' => 'Počáteční datum',
 'label.end_date' => 'Koncové datum',
+'label.user' => 'Uživatel',
 // TODO: translate the following.
-// 'label.user' => 'User',
 // 'label.users' => 'Users',
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
@@ -486,7 +486,6 @@ $i18n_key_words = array(
 "form.people.th.rate" => 'sazba',
 "form.people.manager" => 'manažer',
 "form.people.comanager" => 'spolumanažer',
-"form.people.empl" => 'uživatel',
 
 "form.people.rate" => 'hodinová sazba',
 "form.people.comanager" => 'spolumanažer',
@@ -494,7 +493,6 @@ $i18n_key_words = array(
 // report attributes
 "form.report.totals_only" => 'pouze součty',
 "form.report.total" => 'součty hodin',
-"form.report.th.empllist" => 'uzivatel',
 
 // mail form attributes
 "form.mail.from" => 'od',

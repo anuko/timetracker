@@ -162,8 +162,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.start_date' => 'Start date',
 // 'label.end_date' => 'End date',
-// 'label.user' => 'User',
-// 'label.users' => 'Users',
+'label.user' => 'Bruker',
+'label.users' => 'Brukere',
+// TODO: translate the following.
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
@@ -484,15 +485,11 @@ $i18n_key_words = array(
 "form.people.th.role" => 'rolle',
 // Note to translators: the 2 strings below are missing and must be added and translated
 // "form.people.th.rate" => 'timesats',
-"form.people.empl" => 'bruker',
 "form.people.rate" => 'timesats',
 
 // report attributes
 "form.report.title" => 'rapporter',
-// Note to translators: the strings below must be translated 
-// "form.report.totals_only" => 'kun summer',
 "form.report.total" => 'totalt antall timer',
-"form.report.th.empllist" => 'bruker',
 
 // mail form attributes
 "form.mail.from" => 'fra',

@@ -168,10 +168,10 @@ $i18n_key_words = array(
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Konu',
 'label.date' => 'Tarih',
+'label.start_date' => 'Başlangıç tarihi',
+'label.end_date' => 'Son tarihi',
+'label.user' => 'Kullanıcı',
 // TODO: translate the following.
-// 'label.start_date' => 'Start date',
-// 'label.end_date' => 'End date',
-// 'label.user' => 'User',
 // 'label.users' => 'Users',
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
@@ -413,7 +413,7 @@ $i18n_key_words = array(
 'form.reports.group_by_project' => 'proje',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
-// 'form.reports.totals_only' => 'Totals only',
+'form.reports.totals_only' => 'Sadece toplamlar',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -500,9 +500,6 @@ $i18n_key_words = array(
 
 // report attributes
 "form.report.title" => 'raporlar',
-"form.report.from" => 'başlangıç tarihi',
-"form.report.to" => 'son tarihi',
-"form.report.totals_only" => 'sadece toplamlar',
 "form.report.total" => 'saat toplamı',
 "form.report.th.empllist" => 'kullanıcı',
 

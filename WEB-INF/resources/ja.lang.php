@@ -160,9 +160,8 @@ $i18n_key_words = array(
 // 'label.bcc' => 'Bcc',
 'label.subject' => '主題',
 'label.date' => '日付',
-// TODO: translate the following.
-// 'label.start_date' => 'Start date',
-// 'label.end_date' => 'End date',
+'label.start_date' => '開始日付',
+'label.end_date' => '終了日付',
 'label.user' => 'ユーザー',
 'label.users' => 'ユーザー',
 // TODO: translate the following.
@@ -406,7 +405,7 @@ $i18n_key_words = array(
 'form.reports.group_by_project' => 'プロジェクト',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
-// 'form.reports.totals_only' => 'Totals only',
+'form.reports.totals_only' => '全体だけ',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -487,18 +486,13 @@ $i18n_key_words = array(
 "form.people.th.rate" => '給料',
 "form.people.manager" => '管理者',
 "form.people.comanager" => '共同管理者',
-"form.people.empl" => 'ユーザー',
 
 "form.people.rate" => 'デフォルト時間当り給料',
 "form.people.comanager" => '共同管理者',
 
 // report attributes
 "form.report.title" => 'レポート',
-"form.report.from" => '開始日付',
-"form.report.to" => '終了日付',
-"form.report.totals_only" => '全体だけ',
 "form.report.total" => '合計時間',
-"form.report.th.empllist" => 'ユーザー',
 
 // mail form attributes
 "form.mail.from" => 'から',

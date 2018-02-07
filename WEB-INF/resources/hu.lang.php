@@ -162,9 +162,9 @@ $i18n_key_words = array(
 // 'label.bcc' => 'Bcc',
 'label.subject' => 'Tárgy',
 'label.date' => 'Dátum',
+'label.start_date' => 'Kezdő időpont',
+'label.end_date' => 'Vég időpont',
 // TODO: translate the following.
-// 'label.start_date' => 'Start date',
-// 'label.end_date' => 'End date',
 // 'label.user' => 'User',
 // 'label.users' => 'Users',
 // 'label.client' => 'Client',
@@ -478,17 +478,12 @@ $i18n_key_words = array(
 "form.people.th.rate" => 'tarifa',
 "form.people.manager" => 'vezető',
 "form.people.comanager" => 'helyettes',
-"form.people.empl" => 'dolgozó',
 
 "form.people.rate" => 'általános óradíj',
 "form.people.comanager" => 'helyettes',
 
 // report attributes
-"form.report.from" => 'kezdő időpont',
-"form.report.to" => 'vég időpont',
-"form.report.totals_only" => 'csak a teljes óraszám',
 "form.report.total" => 'összesített óraszám',
-"form.report.th.empllist" => 'dolgozó',
 
 // mail form attributes
 "form.mail.from" => 'feladó',
@@ -542,7 +537,6 @@ $i18n_key_words = array(
 
 // labels
 "label.inv_str" => 'számla',
-"label.set_empl" => 'válassz dolgozót',
 "label.sel_all" => 'mindenkit kijelöl',
 "label.sel_none" => 'senkit nem jelöl ki',
 "label.disable" => 'tiltva',

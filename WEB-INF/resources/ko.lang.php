@@ -160,9 +160,8 @@ $i18n_key_words = array(
 // 'label.bcc' => 'Bcc',
 'label.subject' => '제목',
 'label.date' => '날짜',
-// TODO: translate the following.
-// 'label.start_date' => 'Start date',
-// 'label.end_date' => 'End date',
+'label.start_date' => '시작 날짜',
+'label.end_date' => '마감 날짜',
 'label.user' => '사용자',
 'label.users' => '사용자',
 // TODO: translate the following.
@@ -406,7 +405,7 @@ $i18n_key_words = array(
 'form.reports.group_by_project' => '프로젝트',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
-// 'form.reports.totals_only' => 'Totals only',
+'form.reports.totals_only' => '오직 전체만',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -487,18 +486,13 @@ $i18n_key_words = array(
 "form.people.th.rate" => '급여',
 "form.people.manager" => '관리자',
 "form.people.comanager" => '공동관리자',
-"form.people.empl" => '사용자',
 
 "form.people.rate" => '디폴트 시간당 급여',
 "form.people.comanager" => '공동관리자',
 
 // report attributes
 "form.report.title" => '보고서',
-"form.report.from" => '시작 날짜',
-"form.report.to" => '마감 날짜',
-"form.report.totals_only" => '오직 전체만',
 "form.report.total" => '시간 총합',
-"form.report.th.empllist" => '사용자',
 
 // mail form attributes
 "form.mail.from" => '부터',

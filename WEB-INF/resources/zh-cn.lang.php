@@ -149,9 +149,9 @@ $i18n_key_words = array(
 // 'label.bcc' => 'Bcc',
 'label.subject' => '主题',
 'label.date' => '日期',
+'label.start_date' => '开始日期',
+'label.end_date' => '结束日期',
 // TODO: translate the following.
-// 'label.start_date' => 'Start date',
-// 'label.end_date' => 'End date',
 // 'label.user' => 'User',
 // 'label.users' => 'Users',
 // 'label.client' => 'Client',
@@ -479,9 +479,6 @@ $i18n_key_words = array(
 
 // report attributes
 "form.report.title" => '报告',
-"form.report.from" => '开始日期',
-"form.report.to" => '结束日期',
-"form.report.totals_only" => '仅仅今天',
 "form.report.total" => '总计时间',
 "form.report.th.empllist" => '用户',
 

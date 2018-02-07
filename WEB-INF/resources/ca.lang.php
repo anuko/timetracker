@@ -465,7 +465,6 @@ $i18n_key_words = array(
 "form.people.th.rate" => 'Taxa',
 "form.people.manager" => 'Manejador',
 "form.people.comanager" => 'Auxiliar del manejador',
-"form.people.empl" => 'Usuari',
 
 "form.people.rate" => 'Taxa per defecte en hores',
 "form.people.comanager" => 'Auxiliar del manejador',
