@@ -463,7 +463,6 @@ $i18n_key_words = array(
 "form.mytime.title" => 'minu aeg',
 "form.mytime.edit_title" => 'ajakande muutmine',
 "form.mytime.del_str" => 'ajakande kustutamine',
-"form.mytime.daily" => 'igapäevane töö',
 "form.mytime.total" => 'tunde kokku: ',
 "form.mytime.del_yes" => 'ajakanne kustutatud',
 "form.mytime.no_finished_rec" => 'kanne salvestati ainult alguse ajaga. see ei ole viga. logi välja kui vaja peaks olema.',

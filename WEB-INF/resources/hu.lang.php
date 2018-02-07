@@ -304,7 +304,8 @@ $i18n_key_words = array(
 // 'title.monthly_quotas' => 'Monthly Quotas',
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
-// 'title.options' => 'Options',
+'title.options' => 'Opciók',
+// TODO: translate the following.
 // 'title.profile' => 'Profile',
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
@@ -452,14 +453,12 @@ $i18n_key_words = array(
 "form.admin.profile.comment" => 'csoport törlése',
 "form.admin.profile.th.id" => 'azonosító',
 "form.admin.profile.th.active" => 'aktív',
-"form.admin.options" => 'opciók',
 
 // my time form attributes
 "form.mytime.title" => 'munkaidőm',
 "form.mytime.edit_title" => 'szerkesztés',
 "form.mytime.del_str" => 'törlés',
 "form.mytime.time_form" => ' (óó:pp)',
-"form.mytime.daily" => 'napi munka',
 "form.mytime.total" => 'összesített óraszám: ',
 "form.mytime.del_yes" => 'a bejegyzés törölve',
 "form.mytime.no_finished_rec" => 'csak az munka kezdete lett megjelölve, ha később visszalépsz a rendszerbe beállíthatod a vég-időpontot...',

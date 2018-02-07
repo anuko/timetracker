@@ -360,7 +360,7 @@ $i18n_key_words = array(
 // 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
-'form.reset_password.message' => 'S\\\'ha enviat la petició de restablir paraula de pas.',
+'form.reset_password.message' => 'S\\\'ha enviat la petició de restablir paraula de pas.', // TODO: add "by email" to match the English string.
 'form.reset_password.email_subject' => 'Sol·licitud de restabliment de la paraula de pas de Anuko Time Tracker',
 // TODO: translate the following.
 // 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
@@ -450,7 +450,6 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => 'Modificant l\\\'historial de temps',
 "form.mytime.del_str" => 'Eliminant l\\\'historial de temps',
 "form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.daily" => 'Treball diari',
 "form.mytime.total" => 'Hores totals: ',
 "form.mytime.del_yes" => 'L\\\'historial de temps s\\\'ha eliminat amb èxit',
 "form.mytime.no_finished_rec" => 'Aquest historial s\\\'ha guardat únicament amb l\\\'hora d\\\'inici. Aixó no és un error. Finalitzi sessió si ho necessita.',

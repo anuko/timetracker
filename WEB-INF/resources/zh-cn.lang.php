@@ -452,7 +452,6 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => '编辑时间记录',
 "form.mytime.del_str" => '删除时间记录',
 "form.mytime.time_form" => ' (时:分)',
-"form.mytime.daily" => '每日工作',
 "form.mytime.total" => '总小时数： ',
 "form.mytime.del_yes" => '成功删除时间记录',
 "form.mytime.no_finished_rec" => '该记录只保存了开始时间。这不是错误。如果需要，请注销。',

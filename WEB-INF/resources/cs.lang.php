@@ -265,8 +265,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
 // 'title.time' => 'Time',
-// 'title.edit_time_record' => 'Editing Time Record',
-// 'title.delete_time_record' => 'Deleting Time Record',
+'title.edit_time_record' => 'Upravit časový záznam',
+'title.delete_time_record' => 'Smazat časový záznam',
+// TODO: translate the following.
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -362,9 +363,9 @@ $i18n_key_words = array(
 // 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
+'form.reset_password.message' => 'Zaslán požadavek k vymazání hesla.', // TODO: add "by email" to match the English string.
+'form.reset_password.email_subject' => 'Anuko Time Tracker požadavek na vymazání hesla',
 // TODO: translate the following.
-// 'form.reset_password.message' => 'Password reset request sent by email.',
-// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
 // 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
@@ -444,13 +445,6 @@ $i18n_key_words = array(
 
 // TODO: refactoring ongoing down from here.
 
-// password reminder form attributes
-"form.fpass.send_pass_str" => 'zaslán požadavek k vymazání hesla',
-"form.fpass.send_pass_subj" => 'Anuko Time Tracker požadavek na vymazání hesla',
-// Note to translators: this string needs to be translated.
-// "form.fpass.send_pass_body" => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
-"form.fpass.reset_comment" => "pro změnu hesla jej napište a zvolte uložit",
-
 // administrator form
 "form.admin.title" => 'administrator',
 "form.admin.duty_text" => 'vytvořit nový tým prostřednictvím účtu týmového manažera.<br>můžete také importovat týmová data z xml souboru z jiného time tracker serveru (nejsou povoleny shody e-mailových adres!).',
@@ -461,16 +455,10 @@ $i18n_key_words = array(
 "form.admin.profile.th.active" => 'aktovní',
 
 // my time form attributes
-"form.mytime.title" => 'můj deník',
-"form.mytime.edit_title" => 'upravit časový záznam',
-"form.mytime.del_str" => 'smazat časový záznam',
-"form.mytime.daily" => 'denní práce',
 "form.mytime.total" => 'součet hodin: ',
 "form.mytime.del_yes" => 'časový záznam úspěšně odstraněn',
 "form.mytime.no_finished_rec" => 'záznam byl uložen pouze s časem zahájení. není to chyba. můžete se odhlásit, potřebujete-li.',
 "form.mytime.warn_tozero_rec" => 'tento záznam musí být smazán, neboť období je uzamčeno',
-// Note to translators: the string below is missing in the translation and must be added
-// "form.mytime.uncompleted" => 'uncompleted',
 
 // profile form attributes
 // Note to translators: we need a more accurate translation of form.profile.create_title

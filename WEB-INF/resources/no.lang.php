@@ -437,7 +437,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // password reminder form attributes
-"form.fpass.send_pass_str" => 'passordet er sendt',
 "form.fpass.send_pass_subj" => 'Anuko Time Tracker passordet ditt',
 // Note to translators: strings below need to be translated.
 // "form.fpass.send_pass_body" => "Kjære bruker,\n\nNoen, trolig deg, bad om å få ditt Anuko Time Tracker password resatt. Vær vennlig å besøk denne lenken dersom du ønsker at passordet ditt skal resettes.\n\n%s\n\nAnuko Time Tracker er et enkelt og brukervennlig system for tidsregistrering basert på åpen kildekode. Les mer på https://www.anuko.com.\n\n",
@@ -461,7 +460,6 @@ $i18n_key_words = array(
 // "form.mytime.edit_title" => 'endre tidsoppføringen',
 "form.mytime.del_str" => 'slett tids oppføringen',
 "form.mytime.time_form" => ' (tt:mm)',
-"form.mytime.daily" => 'daglig arbeide',
 "form.mytime.total" => 'totalt antall timer: ',
 // Note to translators: the strings below must be translated
 // "form.mytime.del_yes" => 'tidsoppføringen er slettet', 

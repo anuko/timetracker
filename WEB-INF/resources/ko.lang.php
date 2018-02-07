@@ -164,10 +164,10 @@ $i18n_key_words = array(
 'label.end_date' => '마감 날짜',
 'label.user' => '사용자',
 'label.users' => '사용자',
+'label.client' => '클라이언트',
+'label.clients' => '클라이언트',
+'label.option' => '옵션',
 // TODO: translate the following.
-// 'label.client' => 'Client',
-// 'label.clients' => 'Clients',
-// 'label.option' => 'Option',
 // 'label.invoice' => 'Invoice',
 'label.project' => '프로젝트',
 'label.projects' => '프로젝트',
@@ -292,10 +292,11 @@ $i18n_key_words = array(
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
-// 'title.clients' => 'Clients',
-// 'title.add_client' => 'Adding Client',
-// 'title.edit_client' => 'Editing Client',
-// 'title.delete_client' => 'Deleting Client',
+'title.clients' => '클라이언트',
+'title.add_client' => '클라이언트 추가',
+'title.edit_client' => '클라이언트 편집',
+'title.delete_client' => '클라이언트 삭제',
+// TODO: translate the following.
 // 'title.invoices' => 'Invoices',
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
@@ -307,7 +308,8 @@ $i18n_key_words = array(
 // 'title.monthly_quotas' => 'Monthly Quotas',
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
-// 'title.options' => 'Options',
+'title.options' => '옵션',
+// TODO: translate the following.
 // 'title.profile' => 'Profile',
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
@@ -343,7 +345,8 @@ $i18n_key_words = array(
 'dropdown.projects' => '프로젝트',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
-// 'dropdown.clients' => 'clients',
+'dropdown.clients' => '클라이언트',
+// TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
@@ -457,14 +460,12 @@ $i18n_key_words = array(
 "form.admin.profile.comment" => '팀 삭제',
 "form.admin.profile.th.id" => '식별자',
 "form.admin.profile.th.active" => '활동내용',
-"form.admin.options" => '옵션',
 
 // my time form attributes
 "form.mytime.title" => '나의 시간',
 "form.mytime.edit_title" => '시간기록을 편집하기',
 "form.mytime.del_str" => '시간기록을 삭제하기',
 "form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.daily" => '하루일과',
 "form.mytime.total" => '전체 시간: ',
 "form.mytime.del_yes" => '성과적으로 삭제된 시간기록',
 "form.mytime.no_finished_rec" => '이 기록은 시작 시간으로만 저장되었습니다. 이것은 오류는 아닙니다. 필요하면 로그아웃 하십시오.',
@@ -529,11 +530,6 @@ $i18n_key_words = array(
 "form.migration.compression.none" => '없음',
 "form.migration.compression.gzip" => 'gzip',
 "form.migration.compression.bzip" => 'bzip',
-
-"form.client.title" => '클라이언트',
-"form.client.add_title" => '클라이언트 추가',
-"form.client.edit_title" => '클라이언트 편집',
-"form.client.del_title" => '클라이언트 삭제',
 
 // miscellaneous strings
 "forward.tocsvfile" => '데이터를 .csv 파일로 익스포트',

@@ -167,7 +167,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
-// 'label.option' => 'Option',
+'label.option' => 'オプション',
+// TODO: translate the following.
 // 'label.invoice' => 'Invoice',
 'label.project' => 'プロジェクト',
 'label.projects' => 'プロジェクト',
@@ -306,7 +307,8 @@ $i18n_key_words = array(
 // 'title.monthly_quotas' => 'Monthly Quotas',
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
-// 'title.options' => 'Options',
+'title.options' => 'オプション',
+// TODO: translate the following.
 // 'title.profile' => 'Profile',
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
@@ -457,14 +459,12 @@ $i18n_key_words = array(
 "form.admin.profile.comment" => 'チームの削除',
 "form.admin.profile.th.id" => '識別子',
 "form.admin.profile.th.active" => '活動内容',
-"form.admin.options" => 'オプション',
 
 // my time form attributes
 "form.mytime.title" => '私の時間',
 "form.mytime.edit_title" => '時間レコードの編集',
 "form.mytime.del_str" => '時間レコードの削除',
 "form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.daily" => '日課',
 "form.mytime.total" => '合計時間： ',
 "form.mytime.del_yes" => '時間レコードが成功的に削除されました',
 "form.mytime.no_finished_rec" => 'このレコードは開始時間だけで保存されました。これはエラーではありません。もし必要があればログアウトしてください。',

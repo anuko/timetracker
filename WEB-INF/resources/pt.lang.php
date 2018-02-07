@@ -435,7 +435,6 @@ $i18n_key_words = array(
 
 // my time form attributes
 "form.mytime.title" => 'adicionar período',
-"form.mytime.daily" => 'trabalho diário',
 "form.mytime.total" => 'horas totais: ',
 "form.mytime.del_yes" => 'o período registrado foi apagado com sucesso',
 
