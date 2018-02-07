@@ -325,13 +325,11 @@ $i18n_key_words = array(
 // Strings that are used in a single form must go to the specific form section.
 'dropdown.all' => '--- todos ---',
 'dropdown.no' => '--- no ---',
-// TODO: translate the following.
-// 'dropdown.current_day' => 'today',
-// 'dropdown.previous_day' => 'yesterday',
+'dropdown.current_day' => 'hoy',
+'dropdown.previous_day' => 'ayer',
 'dropdown.selected_day' => 'dia',
 'dropdown.current_week' => 'esta semana',
-// TODO: translate the following.
-// 'dropdown.previous_week' => 'previous week',
+'dropdown.previous_week' => 'la semana pasada',
 'dropdown.selected_week' => 'semana',
 'dropdown.current_month' => 'este mes',
 'dropdown.previous_month' => 'el mes pasado',
