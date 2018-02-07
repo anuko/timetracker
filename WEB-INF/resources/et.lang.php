@@ -474,6 +474,16 @@ $i18n_key_words = array(
 // 'form.export.compression_none' => 'none',
 // 'form.export.compression_bzip' => 'bzip',
 
+// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// TODO: translate the following.
+// 'form.import.hint' => 'Import team data from an xml file.',
+// 'form.import.file' => 'Select file',
+// 'form.import.success' => 'Import completed successfully.',
+
+// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// TODO: translate the following.
+// 'form.teams.hint' =>  'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+
 
 
 // TODO: refactoring ongoing down from here.

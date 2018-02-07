@@ -439,6 +439,28 @@ $i18n_key_words = array(
 // 'form.clients.active_clients' => 'Active Clients',
 // 'form.clients.inactive_clients' => 'Inactive Clients',
 
+// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
+// TODO: translate the following.
+// 'form.client.client_to_delete' => 'Client to delete',
+// 'form.client.client_entries' => 'Client entries',
+
+// Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// TODO: translate the following.
+// 'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
+// 'form.export.compression' => 'Compression',
+// 'form.export.compression_none' => 'none',
+// 'form.export.compression_bzip' => 'bzip',
+
+// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// TODO: translate the following.
+// 'form.import.hint' => 'Import team data from an xml file.',
+// 'form.import.file' => 'Select file',
+// 'form.import.success' => 'Import completed successfully.',
+
+// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// TODO: translate the following.
+// 'form.teams.hint' =>  'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+
 
 
 // TODO: refactoring ongoing down from here.

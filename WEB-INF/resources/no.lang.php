@@ -327,15 +327,16 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'dropdown.all' => '--- all ---',
 // 'dropdown.no' => '--- no ---',
-// 'dropdown.current_day' => 'today',
-// 'dropdown.previous_day' => 'yesterday',
-// 'dropdown.selected_day' => 'day',
-// 'dropdown.current_week' => 'this week',
-// 'dropdown.previous_week' => 'previous week',
-// 'dropdown.selected_week' => 'week',
-// 'dropdown.current_month' => 'this month',
-// 'dropdown.previous_month' => 'previous month',
-// 'dropdown.selected_month' => 'month',
+'dropdown.current_day' => 'i dag',
+'dropdown.previous_day' => 'i går',
+'dropdown.selected_day' => 'dag',
+'dropdown.current_week' => 'denne uken',
+'dropdown.previous_week' => 'forrige uke',
+'dropdown.selected_week' => 'uke',
+'dropdown.current_month' => 'denne måneden',
+'dropdown.previous_month' => 'forrige måned',
+'dropdown.selected_month' => 'måned',
+// TODO: translate the following.
 // 'dropdown.current_year' => 'this year',
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
@@ -464,6 +465,16 @@ $i18n_key_words = array(
 // 'form.export.compression_none' => 'none',
 // 'form.export.compression_bzip' => 'bzip',
 
+// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// TODO: translate the following.
+// 'form.import.hint' => 'Import team data from an xml file.',
+// 'form.import.file' => 'Select file',
+// 'form.import.success' => 'Import completed successfully.',
+
+// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// TODO: translate the following.
+// 'form.teams.hint' =>  'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+
 
 
 // TODO: refactoring ongoing down from here.
@@ -563,14 +574,4 @@ $i18n_key_words = array(
 
 "controls.project_bind" => '--- alle ---',
 "controls.all" => '--- alle ---',
-// Note to translators: the strings below are missing and must be translated and added 
-// "controls.notbind" => '--- no ---',
-"controls.per_tm" => 'denne måneden',
-"controls.per_lm" => 'forrige måned',
-"controls.per_tw" => 'denne uken',
-"controls.per_lw" => 'forrige uke',
-// Note to translators: the strings below are missing and must be translated and added
-// "controls.per_td" => 'i dag',
-// "controls.per_at" => 'all tid',
-// "controls.per_ty" => 'dette årr',
 );
