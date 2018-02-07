@@ -475,15 +475,11 @@ $i18n_key_words = array(
 // 'form.import.success' => 'Import completed successfully.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-// TODO: translate the following.
-// 'form.teams.hint' =>  'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+'form.teams.hint' => 'Crear un nou grup, creant un nou compte del manejador de l\\\'equip.<br>També pot importar dades de grups, d\\\'un arxiu xml d\\\'un altre servidor Anuko Time Tracker (no està permès col·lisions de login).',
 
 
 
 // TODO: refactoring ongoing down from here.
-
-// form.admin.duty_text is now used in form.teams.hint with email changed to login.
-"form.teams.hint" => 'Crear un nou grup, creant un nou compte del manejador de l\\\'equip.<br>També pot importar dades de grups, d\\\'un arxiu xml d\\\'un altre servidor Anuko Time Tracker. (No està permès col·lisions de e-mail).',
 
 // my time form attributes
 "form.mytime.title" => 'El meu temps',
