@@ -552,8 +552,6 @@ $i18n_key_words = array(
 "controls.per_td" => 'bugün',
 "controls.per_at" => 'tüm zamanlar',
 
-"label.group_title" => 'gruplandırma kıstası',
-
 "label.set_empl" => 'kullanıcıları seç',
 "label.sel_all" => 'tümünü seç',
 "label.sel_none" => 'hiçbirini seçme',

@@ -351,8 +351,7 @@ $i18n_key_words = array(
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Glemt passordet?',
-// TODO: translate the following.
-// 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
+'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> er et enkelt, brukervennlig tidsregistreringssystem basert på åpen kildekode.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 // TODO: translate the following.
@@ -559,8 +558,4 @@ $i18n_key_words = array(
 // "label.sel_none" => 'velg ingen',
 // "label.disable" => 'slå av',
 // "label.enable" => 'slå på',
-// "label.hrs" => 'timer',
-
-// login hello text
-// "login.hello.text" => "Anuko Time Tracker er et enkelt, brukervennlig tidsregistreringssystem basert på åpen kildekode.",
 );

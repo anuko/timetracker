@@ -344,8 +344,7 @@ $i18n_key_words = array(
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => '忘记密码？',
-// TODO: translate the following.
-// 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
+'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> 是一种简单、易用、开放源代码的实时跟踪系统。',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 // TODO: translate the following.
@@ -532,7 +531,6 @@ $i18n_key_words = array(
 "controls.per_td" => '今天',
 "controls.per_at" => '全部时间',
 "controls.per_ty" => '今年',
-"controls.sel_period" => '--- 选择时间段 ---',
 
 "label.inv_str" => '发票',
 "label.set_empl" => '选择用户',
@@ -540,8 +538,4 @@ $i18n_key_words = array(
 "label.sel_none" => '全部不选',
 "label.disable" => '禁用',
 "label.enable" => '启用',
-"label.hrs" => '小时',
-
-// login hello text
- "login.hello.text" => "anuko时间跟踪器是一种简单、易用、开放源代码的实时跟踪系统。",
 );

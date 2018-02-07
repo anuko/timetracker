@@ -172,7 +172,7 @@ $i18n_key_words = array(
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
-// 'label.invoice' => 'Invoice',
+'label.invoice' => 'Factura',
 'label.project' => 'Proiect',
 'label.projects' => 'Proiecte',
 // TODO: translate the following.
@@ -198,9 +198,9 @@ $i18n_key_words = array(
 'label.edit' => 'Editează',
 'label.delete' => 'Șterge',
 'label.configure' => 'Configureaza',
+'label.select_all' => 'Selecteaza tot',
+'label.select_none' => 'Deselecteaza tot',
 // TODO: translate the following.
-// 'label.select_all' => 'Select all',
-// 'label.select_none' => 'Deselect all',
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
@@ -275,7 +275,8 @@ $i18n_key_words = array(
 // 'title.reports' => 'Reports',
 // 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
-// 'title.invoice' => 'Invoice',
+'title.invoice' => 'Factura',
+// TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => 'Proiecte',
@@ -287,15 +288,16 @@ $i18n_key_words = array(
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
-// 'title.users' => 'Users',
-// 'title.add_user' => 'Adding User',
-// 'title.edit_user' => 'Editing User',
-// 'title.delete_user' => 'Deleting User',
+'title.users' => 'Utilizatori',
+'title.add_user' => 'Adaugare utilizator', // TODO: is this correct?
+'title.edit_user' => 'Editare utilizator', // TODO: is this correct?
+'title.delete_user' => 'Stergere utilizator', // TODO: is this correct?
 // 'title.clients' => 'Clients',
 // 'title.add_client' => 'Adding Client',
 // 'title.edit_client' => 'Editing Client',
 // 'title.delete_client' => 'Deleting Client',
-// 'title.invoices' => 'Invoices',
+'title.invoices' => 'Facturi',
+// TODO: translate the following.
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
 // 'title.delete_invoice' => 'Deleting Invoice',
@@ -341,12 +343,14 @@ $i18n_key_words = array(
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
 'dropdown.projects' => 'proiecte',
+// TODO: translate the following.    
 // 'dropdown.tasks' => 'tasks',
 // 'dropdown.clients' => 'clients',
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
-// 'dropdown.status_active' => 'active',
-// 'dropdown.status_inactive' => 'inactive',
+'dropdown.status_active' => 'activ',
+'dropdown.status_inactive' => 'inactiv',
+// TODO: translate the following.
 // 'dropdown.delete'=>'delete',
 // 'dropdown.do_not_delete'=>'do not delete',
 // 'dropdown.paid' => 'paid',
@@ -541,11 +545,4 @@ $i18n_key_words = array(
 "controls.per_lm" => 'luna trecuta',
 "controls.per_tw" => 'saptamana curenta',
 "controls.per_lw" => 'saptamana trecuta',
-
-"label.inv_str" => 'factura',
-"label.set_empl" => 'alege utilizatori',
-"label.sel_all" => 'selecteaza   tot',
-"label.sel_none" => 'deselecteaza tot',
-"label.disable" => 'inactiv',
-"label.enable" => 'activ',
 );

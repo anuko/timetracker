@@ -71,39 +71,38 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: All error messages should be complete sentences with a period (full stop) in the end. Put them there.
 // TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
-'error.db' => '資料庫錯誤',
-'error.field' => '不正確的"{0}"資料',
-'error.empty' => '欄目"{0}"為空',
-'error.not_equal' => '欄目"{0}"不等於欄目"{1}"',
+'error.db' => '資料庫錯誤。',
+'error.field' => '不正確的"{0}"資料。',
+'error.empty' => '欄目"{0}"為空。',
+'error.not_equal' => '欄目"{0}"不等於欄目"{1}"。',
 // TODO: translate the following.
 // 'error.interval' => 'Field "{0}" must be greater than "{1}".',
-'error.project' => '選擇項目',
+'error.project' => '選擇項目。',
 // TODO: translate the following.
 // 'error.task' => 'Select task.',
-'error.client' => '選擇客戶',
+'error.client' => '選擇客戶。',
 // TODO: translate the following.
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
-'error.auth' => '不正確的用戶名或密碼',
-'error.user_exists' => '該使用者登錄資訊已經存在',
-'error.project_exists' => '該專案名稱已經存在',
+'error.auth' => '不正確的用戶名或密碼。',
+'error.user_exists' => '該使用者登錄資訊已經存在。',
+'error.project_exists' => '該專案名稱已經存在。',
 // TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
-'error.no_login' => '沒有該登錄資訊的使用者',
+'error.no_login' => '沒有該登錄資訊的使用者。',
 // TODO: translate the following.
 // 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
-'error.upload' => '上傳文件出錯',
+'error.upload' => '上傳文件出錯。',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
-'error.mail_send' => '發送郵件時出錯',
-'error.no_email' => '沒有電子郵件與該用戶名關聯',
+'error.mail_send' => '發送郵件時出錯。',
+'error.no_email' => '沒有電子郵件與該用戶名關聯。',
 // TODO: translate the following.
 // 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
 // 'error.goto_uncompleted' => 'Go to uncompleted entry.',
@@ -548,5 +547,4 @@ $i18n_key_words = array(
 "label.sel_none" => '全部不選',
 "label.disable" => '禁用',
 "label.enable" => '啟用',
-"label.hrs" => '小時',
 );

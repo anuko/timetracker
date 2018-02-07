@@ -553,5 +553,4 @@ $i18n_key_words = array(
 "label.sel_none" => 'すべて解除',
 "label.disable" => '使用中止',
 "label.enable" => '使用可能',
-"label.hrs" => '時間',
 );

@@ -537,13 +537,10 @@ $i18n_key_words = array(
 "controls.per_at" => 'od počátku',
 "controls.per_ty" => 'letos',
 
-"label.fields" => 'zobrazit pole',
-"label.group_title" => 'seskupit podle',
 "label.inv_str" => 'faktura',
 "label.set_empl" => 'výběr uživatelů',
 "label.sel_all" => 'vybrat všechno',
 "label.sel_none" => 'zrušit výběr',
 "label.disable" => 'zakázat',
 "label.enable" => 'povolit',
-"label.hrs" => 'hodin',
 );
