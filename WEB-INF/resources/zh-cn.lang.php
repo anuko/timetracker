@@ -526,5 +526,4 @@ $i18n_key_words = array(
 "controls.per_ty" => '今年',
 
 "label.inv_str" => '发票',
-"label.set_empl" => '选择用户',
 );

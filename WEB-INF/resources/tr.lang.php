@@ -59,7 +59,7 @@ $i18n_key_words = array(
 'menu.projects' => 'Projeler',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
-// 'menu.users' => 'Users',
+'menu.users' => 'Kullanıcılar',
 'menu.teams' => 'Ekipler',
 // TODO: translate the following.
 // 'menu.export' => 'Export',
@@ -171,8 +171,8 @@ $i18n_key_words = array(
 'label.start_date' => 'Başlangıç tarihi',
 'label.end_date' => 'Son tarihi',
 'label.user' => 'Kullanıcı',
+'label.users' => 'Kullanıcılar',
 // TODO: translate the following.
-// 'label.users' => 'Users',
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
@@ -295,7 +295,8 @@ $i18n_key_words = array(
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
-// 'title.users' => 'Users',
+'title.users' => 'Kullanıcılar',
+// TODO: translate the following.
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
@@ -544,6 +545,4 @@ $i18n_key_words = array(
 "controls.per_lw" => 'geçen hafta',
 "controls.per_td" => 'bugün',
 "controls.per_at" => 'tüm zamanlar',
-
-"label.set_empl" => 'kullanıcıları seç',
 );

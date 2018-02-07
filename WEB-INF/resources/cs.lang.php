@@ -59,7 +59,7 @@ $i18n_key_words = array(
 'menu.projects' => 'Projekty',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
-// 'menu.users' => 'Users',
+'menu.users' => 'Uživatelů',
 'menu.teams' => 'Týmy',
 'menu.export' => 'Export',
 'menu.clients' => 'Zákazníci',
@@ -165,8 +165,7 @@ $i18n_key_words = array(
 'label.start_date' => 'Počáteční datum',
 'label.end_date' => 'Koncové datum',
 'label.user' => 'Uživatel',
-// TODO: translate the following.
-// 'label.users' => 'Users',
+'label.users' => 'Uživatelů',
 'label.client' => 'Zákazník',
 'label.clients' => 'Zákazníci',
 // TODO: translate the following.
@@ -292,7 +291,8 @@ $i18n_key_words = array(
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
-// 'title.users' => 'Users',
+'title.users' => 'Uživatelů',
+// TODO: translate the following.
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
@@ -538,5 +538,4 @@ $i18n_key_words = array(
 "controls.per_ty" => 'letos',
 
 "label.inv_str" => 'faktura',
-"label.set_empl" => 'výběr uživatelů',
 );

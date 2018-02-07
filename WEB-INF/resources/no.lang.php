@@ -57,7 +57,7 @@ $i18n_key_words = array(
 'menu.projects' => 'Prosjekter',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
-// 'menu.users' => 'Users',
+'menu.users' => 'Brukere',
 // 'menu.teams' => 'Teams',
 'menu.export' => 'Eksport',
 'menu.clients' => 'Klienter',
@@ -284,7 +284,8 @@ $i18n_key_words = array(
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
-// 'title.users' => 'Users',
+'title.users' => 'Brukere',
+// TODO: translate the following.
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
@@ -544,5 +545,4 @@ $i18n_key_words = array(
 // "controls.per_ty" => 'dette årr',
 
 "label.inv_str" => 'faktura',
-"label.set_empl" => 'velg brukere',
 );

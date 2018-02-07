@@ -59,7 +59,7 @@ $i18n_key_words = array(
 'menu.projects' => 'Projektid',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
-// 'menu.users' => 'Users',
+'menu.users' => 'Kasutajad',
 'menu.teams' => 'Meeskonnad',
 // TODO: translate the following.
 // 'menu.export' => 'Export',
@@ -163,8 +163,7 @@ $i18n_key_words = array(
 'label.start_date' => 'Algab kuupäevast',
 'label.end_date' => 'Lõpeb kuupäeval',
 'label.user' => 'Kasutaja',
-// TODO: translate the following.
-// 'label.users' => 'Users',
+'label.users' => 'Kasutajad',
 'label.client' => 'Klient',
 'label.clients' => 'Kliendid',
 // TODO: translate the following.
@@ -291,7 +290,8 @@ $i18n_key_words = array(
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
-// 'title.users' => 'Users',
+'title.users' => 'Kasutajad',
+// TODO: translate the following.
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
@@ -543,5 +543,4 @@ $i18n_key_words = array(
 "controls.per_at" => 'kõik ajad',
 
 "label.inv_str" => 'arved',
-"label.set_empl" => 'vali kasutajad',
 );

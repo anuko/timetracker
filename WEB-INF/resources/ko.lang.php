@@ -57,7 +57,7 @@ $i18n_key_words = array(
 'menu.projects' => '프로젝트',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
-// 'menu.users' => 'Users',
+'menu.users' => '사용자',
 'menu.teams' => '팀',
 // TODO: translate the following.
 // 'menu.export' => 'Export',
@@ -288,7 +288,8 @@ $i18n_key_words = array(
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
-// 'title.users' => 'Users',
+'title.users' => '사용자',
+// TODO: translate the following.
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
@@ -540,5 +541,4 @@ $i18n_key_words = array(
 "controls.per_ty" => '올해',
 
 "label.inv_str" => '송장',
-"label.set_empl" => '사용자들을 선택',
 );

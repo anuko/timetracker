@@ -57,7 +57,7 @@ $i18n_key_words = array(
 'menu.projects' => 'プロジェクト',
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
-// 'menu.users' => 'Users',
+'menu.users' => 'ユーザー',
 'menu.teams' => 'チーム',
 // TODO: translate the following.
 // 'menu.export' => 'Export',
@@ -288,7 +288,8 @@ $i18n_key_words = array(
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
-// 'title.users' => 'Users',
+'title.users' => 'ユーザー',
+// TODO: translate the following.
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
@@ -541,5 +542,4 @@ $i18n_key_words = array(
 "controls.per_ty" => '今年',
 
 "label.inv_str" => '送り状',
-"label.set_empl" => 'ユーザーの選択',
 );
