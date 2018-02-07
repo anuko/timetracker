@@ -327,9 +327,8 @@ $i18n_key_words = array(
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
-// TODO: translate the following.
-// 'dropdown.all' => '--- all ---',
-// 'dropdown.no' => '--- no ---',
+'dropdown.all' => '--- すべて ---',
+'dropdown.no' => '--- いいえ ---',
 'dropdown.current_day' => '今日',
 'dropdown.previous_day' => '昨日',
 'dropdown.selected_day' => '日',
@@ -567,8 +566,4 @@ $i18n_key_words = array(
 "forward.tocsvfile" => 'csvファイルにエクスポート',
 "forward.toxmlfile" => 'xmlファイルにエクスポート',
 "forward.geninvoice" => '送り状の作成',
-
-"controls.project_bind" => '--- すべて ---',
-"controls.all" => '--- すべて ---',
-"controls.notbind" => '--- いいえ ---',
 );

@@ -331,9 +331,8 @@ $i18n_key_words = array(
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
-// TODO: translate the following.
-// 'dropdown.all' => '--- all ---',
-// 'dropdown.no' => '--- no ---',
+'dropdown.all' => '--- vše ---',
+'dropdown.no' => '--- nic ---',
 'dropdown.current_day' => 'dnes',
 'dropdown.previous_day' => 'včera',
 'dropdown.selected_day' => 'den',
@@ -565,8 +564,4 @@ $i18n_key_words = array(
 "forward.tocsvfile" => 'exportovat data do .csv souboru',
 "forward.toxmlfile" => 'exportovat data do .xml souboru',
 "forward.geninvoice" => 'vytvořit fakturu',
-
-"controls.project_bind" => '--- všechny ---',
-"controls.all" => '--- vše ---',
-"controls.notbind" => '--- nic ---',
 );

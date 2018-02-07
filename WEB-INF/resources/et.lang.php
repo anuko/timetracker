@@ -330,9 +330,8 @@ $i18n_key_words = array(
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
-// TODO: translate the following.
-// 'dropdown.all' => '--- all ---',
-// 'dropdown.no' => '--- no ---',
+'dropdown.all' => '--- kõik ---',
+'dropdown.no' => '--- ei ---',
 'dropdown.current_day' => 'täna',
 'dropdown.previous_day' => 'eile',
 'dropdown.selected_day' => 'päev',
@@ -571,8 +570,4 @@ $i18n_key_words = array(
 "forward.tocsvfile" => 'ekspordi andmed .csv faili',
 "forward.toxmlfile" => 'ekspordi andmed .xml faili',
 "forward.geninvoice" => 'loo arve',
-
-"controls.project_bind" => '--- kõik ---',
-"controls.all" => '--- kõik ---',
-"controls.notbind" => '--- ei ---',
 );

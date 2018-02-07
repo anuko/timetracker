@@ -325,9 +325,9 @@ $i18n_key_words = array(
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
+'dropdown.all' => '--- összes ---',
+'dropdown.no' => '--- nincs ---',
 // TODO: translate the following.
-// 'dropdown.all' => '--- all ---',
-// 'dropdown.no' => '--- no ---',
 // 'dropdown.current_day' => 'today',
 // 'dropdown.previous_day' => 'yesterday',
 // 'dropdown.selected_day' => 'day',
@@ -562,8 +562,4 @@ $i18n_key_words = array(
 // miscellaneous strings
 "forward.tocsvfile" => 'az adatok exportálása CSV file-ba',
 "forward.geninvoice" => 'számla készítés',
-
-"controls.project_bind" => '--- összes ---',
-"controls.all" => '--- összes ---',
-"controls.notbind" => '--- nincs ---',
 );
