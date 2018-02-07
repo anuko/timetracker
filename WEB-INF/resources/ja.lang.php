@@ -445,7 +445,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // administrator form
-"form.admin.title" => '管理者',
 "form.admin.duty_text" => '新規チームの管理者のアカウントを生成して新規チームを作成します。<br>あなたはなお他のAnuko Time Trackerサーバのxmlのファイルからチームデータをインポートすることができます(ログインの衝突は許可されません)。',
 
 "form.admin.profile.title" => 'チーム',

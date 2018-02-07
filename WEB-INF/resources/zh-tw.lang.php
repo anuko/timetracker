@@ -438,7 +438,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // administrator form
-"form.admin.title" => '管理員',
 "form.admin.duty_text" => '通過創建新的團隊經理帳號來創建新團隊。<br>您也可以從其它的Anuko時間追蹤器伺服器的xml檔導入團隊資料(登錄資訊不能發生衝突)。',
 
 "form.admin.profile.title" => '團隊',

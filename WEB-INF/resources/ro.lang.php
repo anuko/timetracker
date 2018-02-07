@@ -224,10 +224,10 @@ $i18n_key_words = array(
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* date obligatorii',
 'label.on_behalf' => 'in numele',
+'label.role_manager' => '(manager)',
+'label.role_comanager' => '(co-manager)',
+'label.role_admin' => '(administrator)',
 // TODO: translate the following.
-// 'label.role_manager' => '(manager)',
-// 'label.role_comanager' => '(co-manager)',
-// 'label.role_admin' => '(administrator)',
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',
@@ -444,7 +444,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // administrator form
-"form.admin.title" => 'administrator',
 "form.admin.duty_text" => 'adauga o noua echipa prin adaugarea unui nou cont de tip manager.<br>deasemeni poti importa datele despre echipa dintr-un fisier xml generat de un alt server Anuko Time Tracker  (nu sunt permise duplicate pentru emailuri).',
 
 "form.admin.profile.title" => 'echipe',

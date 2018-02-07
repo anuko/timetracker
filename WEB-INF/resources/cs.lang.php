@@ -447,7 +447,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // administrator form
-"form.admin.title" => 'administrator',
 "form.admin.duty_text" => 'vytvořit nový tým prostřednictvím účtu týmového manažera.<br>můžete také importovat týmová data z xml souboru z jiného time tracker serveru (nejsou povoleny shody e-mailových adres!).',
 "form.admin.profile.title" => 'týmy',
 "form.admin.profile.noprofiles" => 'vaše databáze je prázdná. přihlašte se jako admin a vytvořte nový tým.',

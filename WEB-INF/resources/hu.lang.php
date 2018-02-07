@@ -440,7 +440,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // administrator form
-"form.admin.title" => 'Adminisztrátor',
 "form.admin.duty_text" => 'új csoport létrehozása egy csoport-vezetői jogosultsággal.<br>a csoport adatokat importálhatjuk XML-ből (csak az e-mail címek ne ütközzenek).',
 
 "form.admin.profile.title" => 'csoportok',

@@ -437,7 +437,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // Note to translators: the strings below must be translated
-// "form.admin.title" => 'administrator',
 // "form.admin.duty_text" => 'opprett et nytt team ved å opprette en ny team manager konto.<br>du kan også importere team data fra en xml fil fra en annen Anuko Time Tracker server (ingen login kollisjoner er tillatt).',
 
 // "form.admin.profile.title" => 'team',
