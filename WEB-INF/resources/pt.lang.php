@@ -319,12 +319,13 @@ $i18n_key_words = array(
 // 'dropdown.current_day' => 'today',
 // 'dropdown.previous_day' => 'yesterday',
 // 'dropdown.selected_day' => 'day',
-// 'dropdown.current_week' => 'this week',
-// 'dropdown.previous_week' => 'previous week',
-// 'dropdown.selected_week' => 'week',
-// 'dropdown.current_month' => 'this month',
-// 'dropdown.previous_month' => 'previous month',
-// 'dropdown.selected_month' => 'month',
+'dropdown.current_week' => 'esta semana',
+'dropdown.previous_week' => 'última semana',
+'dropdown.selected_week' => 'semana',
+'dropdown.current_month' => 'este mês',
+'dropdown.previous_month' => 'último mês',
+'dropdown.selected_month' => 'mês',
+// TODO: translate the following.
 // 'dropdown.current_year' => 'this year',
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
@@ -487,12 +488,4 @@ $i18n_key_words = array(
 "form.mail.from" => 'de',
 "form.mail.to" => 'para',
 "form.mail.above" => 'enviar este relatório por e-mail',
-// Note to translators: the strings below must be translated
-// "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
-// "form.mail.sending_str" => '<b>the message has been sent</b>',
-
-"controls.per_tm" => 'este mês',
-"controls.per_lm" => 'último mês',
-"controls.per_tw" => 'esta semana',
-"controls.per_lw" => 'última semana',
 );
