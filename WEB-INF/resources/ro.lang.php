@@ -475,16 +475,14 @@ $i18n_key_words = array(
 // 'form.import.success' => 'Import completed successfully.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-// TODO: translate the following.
-// 'form.teams.hint' =>  'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+// TODO: check form.teams.hint for accuracy.
+'form.teams.hint' => 'Adauga o noua echipa prin adaugarea unui nou cont de tip manager.<br>Deasemeni poti importa datele despre echipa dintr-un fisier xml generat de un alt server Anuko Time Tracker (nu sunt permise duplicate pentru login).',
 
 
 
 // TODO: refactoring ongoing down from here.
 
 // administrator form
-"form.admin.duty_text" => 'adauga o noua echipa prin adaugarea unui nou cont de tip manager.<br>deasemeni poti importa datele despre echipa dintr-un fisier xml generat de un alt server Anuko Time Tracker  (nu sunt permise duplicate pentru emailuri).',
-
 "form.admin.profile.title" => 'echipe',
 "form.admin.profile.noprofiles" => 'baza de date este goala. intra ca admin si adauga o noua echipa.',
 "form.admin.profile.comment" => 'sterge echipa',

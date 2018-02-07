@@ -488,9 +488,6 @@ $i18n_key_words = array(
 // TODO: refactoring ongoing down from here.
 
 // administrator form
-// Note to translators: the string below must be translated
-// "form.admin.duty_text" => 'create a new meeskond by creating a new meeskond manager account.<br>you can also import meeskond data from an xml file from another Anuko time tracker server (no e-mail collisions are allowed).',
-
 "form.admin.profile.title" => 'meeskonnad',
 "form.admin.profile.noprofiles" => 'sinu andmebaas on tühi. logi adminina sisse ja loo uus meeskond.',
 "form.admin.profile.comment" => 'kustuta meeskond',
