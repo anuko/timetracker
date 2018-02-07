@@ -168,7 +168,7 @@ $i18n_key_words = array(
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
-// 'label.invoice' => 'Invoice',
+'label.invoice' => 'Faktura',
 'label.project' => 'Prosjekt',
 'label.projects' => 'Prosjekter',
 // TODO: translate the following.
@@ -272,7 +272,8 @@ $i18n_key_words = array(
 // 'title.reports' => 'Reports',
 // 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
-// 'title.invoice' => 'Invoice',
+'title.invoice' => 'Faktura',
+// TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => 'Prosjekter',
@@ -293,7 +294,8 @@ $i18n_key_words = array(
 // 'title.add_client' => 'Adding Client',
 // 'title.edit_client' => 'Editing Client',
 // 'title.delete_client' => 'Deleting Client',
-// 'title.invoices' => 'Invoices',
+'title.invoices' => 'Fakturaer',
+// TODO: translate the following.
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
 // 'title.delete_invoice' => 'Deleting Invoice',
@@ -543,6 +545,4 @@ $i18n_key_words = array(
 // "controls.per_td" => 'i dag',
 // "controls.per_at" => 'all tid',
 // "controls.per_ty" => 'dette årr',
-
-"label.inv_str" => 'faktura',
 );

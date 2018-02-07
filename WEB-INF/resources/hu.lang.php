@@ -170,7 +170,7 @@ $i18n_key_words = array(
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
-// 'label.invoice' => 'Invoice',
+'label.invoice' => 'Számla',
 'label.project' => 'Projekt',
 'label.projects' => 'Projektek',
 // TODO: translate the following.
@@ -274,7 +274,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
-// 'title.invoice' => 'Invoice',
+'title.invoice' => 'Számla',
+// TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => 'Projektek',
@@ -294,7 +295,8 @@ $i18n_key_words = array(
 // 'title.add_client' => 'Adding Client',
 // 'title.edit_client' => 'Editing Client',
 // 'title.delete_client' => 'Deleting Client',
-// 'title.invoices' => 'Invoices',
+'title.invoices' => 'Számlák',
+// TODO: translate the following.
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
 // 'title.delete_invoice' => 'Deleting Invoice',
@@ -528,7 +530,4 @@ $i18n_key_words = array(
 "controls.per_lm" => 'múlt hónapban',
 "controls.per_tw" => 'ezen a héten',
 "controls.per_lw" => 'múlt héten',
-
-// labels
-"label.inv_str" => 'számla',
 );

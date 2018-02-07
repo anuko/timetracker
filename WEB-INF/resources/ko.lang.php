@@ -166,8 +166,7 @@ $i18n_key_words = array(
 'label.client' => '클라이언트',
 'label.clients' => '클라이언트',
 'label.option' => '옵션',
-// TODO: translate the following.
-// 'label.invoice' => 'Invoice',
+'label.invoice' => '송장',
 'label.project' => '프로젝트',
 'label.projects' => '프로젝트',
 // TODO: translate the following.
@@ -276,7 +275,8 @@ $i18n_key_words = array(
 'title.report' => '보고서',
 // TODO: translate the following.
 // 'title.send_report' => 'Sending Report',
-// 'title.invoice' => 'Invoice',
+'title.invoice' => '송장',
+// TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => '프로젝트',
@@ -297,8 +297,8 @@ $i18n_key_words = array(
 'title.add_client' => '클라이언트 추가',
 'title.edit_client' => '클라이언트 편집',
 'title.delete_client' => '클라이언트 삭제',
+'title.invoices' => '송장',
 // TODO: translate the following.
-// 'title.invoices' => 'Invoices',
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
 // 'title.delete_invoice' => 'Deleting Invoice',
@@ -539,6 +539,4 @@ $i18n_key_words = array(
 "controls.per_td" => '오늘',
 "controls.per_at" => '전시간',
 "controls.per_ty" => '올해',
-
-"label.inv_str" => '송장',
 );

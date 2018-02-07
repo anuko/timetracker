@@ -165,7 +165,7 @@ $i18n_key_words = array(
 'label.clients' => '客戶',
 // TODO: translate the following.
 // 'label.option' => 'Option',
-// 'label.invoice' => 'Invoice',
+'label.invoice' => '發票',
 'label.project' => '項目',
 'label.projects' => '項目',
 // TODO: translate the following.
@@ -271,7 +271,8 @@ $i18n_key_words = array(
 // 'title.reports' => 'Reports',
 // 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
-// 'title.invoice' => 'Invoice',
+'title.invoice' => '發票',
+// TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => '項目',
@@ -292,7 +293,8 @@ $i18n_key_words = array(
 'title.add_client' => '添加客戶',
 'title.edit_client' => '編輯客戶',
 'title.delete_client' => '刪除客戶',
-// 'title.invoices' => 'Invoices',
+'title.invoices' => '發票',
+// TODO: translate the following.
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
 // 'title.delete_invoice' => 'Deleting Invoice',
@@ -304,6 +306,7 @@ $i18n_key_words = array(
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
 'title.options' => '選項',
+// TODO: translate the following.
 // 'title.profile' => 'Profile',
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
@@ -532,6 +535,4 @@ $i18n_key_words = array(
 "controls.per_td" => '今天',
 "controls.per_at" => '全部時間',
 "controls.per_ty" => '今年',
-
-"label.inv_str" => '發票',
 );

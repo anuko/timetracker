@@ -156,8 +156,7 @@ $i18n_key_words = array(
 'label.client' => '客户',
 'label.clients' => '客户',
 'label.option' => '选项',
-// TODO: translate the following.
-// 'label.invoice' => 'Invoice',
+'label.invoice' => '发票',
 'label.project' => '项目',
 'label.projects' => '项目',
 // TODO: translate the following.
@@ -263,7 +262,8 @@ $i18n_key_words = array(
 // 'title.reports' => 'Reports',
 // 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
-// 'title.invoice' => 'Invoice',
+'title.invoice' => '发票',
+// TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => '项目',
@@ -284,7 +284,8 @@ $i18n_key_words = array(
 'title.add_client' => '添加客户',
 'title.edit_client' => '编辑客户',
 'title.delete_client' => '删除客户',
-// 'title.invoices' => 'Invoices',
+'title.invoices' => '发票',
+// TODO: translate the following.
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
 // 'title.delete_invoice' => 'Deleting Invoice',
@@ -524,6 +525,4 @@ $i18n_key_words = array(
 "controls.per_td" => '今天',
 "controls.per_at" => '全部时间',
 "controls.per_ty" => '今年',
-
-"label.inv_str" => '发票',
 );

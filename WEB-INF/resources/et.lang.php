@@ -168,7 +168,7 @@ $i18n_key_words = array(
 'label.clients' => 'Kliendid',
 // TODO: translate the following.
 // 'label.option' => 'Option',
-// 'label.invoice' => 'Invoice',
+'label.invoice' => 'Arve',
 'label.project' => 'Projekt',
 'label.projects' => 'Projektid',
 // TODO: translate the following.
@@ -278,7 +278,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
-// 'title.invoice' => 'Invoice',
+'title.invoice' => 'Arve',
+// TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => 'Projektid',
@@ -299,8 +300,8 @@ $i18n_key_words = array(
 'title.add_client' => 'Lisa klient',
 'title.edit_client' => 'Muuda klienti',
 'title.delete_client' => 'Kustuta klient',
+'title.invoices' => 'Arved',
 // TODO: translate the following.
-// 'title.invoices' => 'Invoices',
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
 // 'title.delete_invoice' => 'Deleting Invoice',
@@ -541,6 +542,4 @@ $i18n_key_words = array(
 "controls.per_lw" => 'eelmine nädal',
 "controls.per_td" => 'täna',
 "controls.per_at" => 'kõik ajad',
-
-"label.inv_str" => 'arved',
 );

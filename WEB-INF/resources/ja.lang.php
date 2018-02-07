@@ -167,8 +167,7 @@ $i18n_key_words = array(
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',
 'label.option' => 'オプション',
-// TODO: translate the following.
-// 'label.invoice' => 'Invoice',
+'label.invoice' => '送り状',
 'label.project' => 'プロジェクト',
 'label.projects' => 'プロジェクト',
 // TODO: translate the following.
@@ -276,7 +275,8 @@ $i18n_key_words = array(
 // 'title.reports' => 'Reports',
 // 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
-// 'title.invoice' => 'Invoice',
+'title.invoice' => '送り状',
+// TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => 'プロジェクト',
@@ -297,8 +297,8 @@ $i18n_key_words = array(
 'title.add_client' => 'クライアントの追加',
 'title.edit_client' => 'クライアントの編集',
 'title.delete_client' => 'クライアントの削除',
+'title.invoices' => '送り状',
 // TODO: translate the following.
-// 'title.invoices' => 'Invoices',
 // 'title.add_invoice' => 'Adding Invoice',
 // 'title.view_invoice' => 'Viewing Invoice',
 // 'title.delete_invoice' => 'Deleting Invoice',
@@ -540,6 +540,4 @@ $i18n_key_words = array(
 "controls.per_td" => '今日',
 "controls.per_at" => 'すべての時間',
 "controls.per_ty" => '今年',
-
-"label.inv_str" => '送り状',
 );
