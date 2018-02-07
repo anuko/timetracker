@@ -570,5 +570,4 @@ $i18n_key_words = array(
 // miscellaneous strings
 "forward.tocsvfile" => 'bilgileri .csv dosyasına aktar',
 "forward.toxmlfile" => 'bilgileri .xml dosyasına aktar',
-"forward.geninvoice" => 'fatura yarat',
 );

@@ -563,5 +563,4 @@ $i18n_key_words = array(
 // miscellaneous strings
 "forward.tocsvfile" => '데이터를 .csv 파일로 익스포트',
 "forward.toxmlfile" => '데이터를 .xml 파일로 익스포트',
-"forward.geninvoice" => '송장 만들기',
 );

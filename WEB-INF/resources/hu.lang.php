@@ -559,5 +559,4 @@ $i18n_key_words = array(
 
 // miscellaneous strings
 "forward.tocsvfile" => 'az adatok exportálása CSV file-ba',
-"forward.geninvoice" => 'számla készítés',
 );

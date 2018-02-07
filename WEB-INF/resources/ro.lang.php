@@ -564,5 +564,4 @@ $i18n_key_words = array(
 
 // miscellaneous strings
 "forward.tocsvfile" => 'exporta date in fisier .csv',
-"forward.geninvoice" => 'genereaza factura',
 );

@@ -416,8 +416,8 @@ $i18n_key_words = array(
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
+'form.report.export' => 'Exportovat',
 // TODO: translate the following.
-// 'form.report.export' => 'Export',
 // 'form.report.assign_to_invoice' => 'Assign to invoice',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
@@ -558,9 +558,4 @@ $i18n_key_words = array(
 // "form.migration.compression.none" => 'none',
 "form.migration.compression.gzip" => 'gzip',
 "form.migration.compression.bzip" => 'bzip',
-
-// miscellaneous strings
-"forward.tocsvfile" => 'exportovat data do .csv souboru',
-"forward.toxmlfile" => 'exportovat data do .xml souboru',
-"forward.geninvoice" => 'vytvořit fakturu',
 );

@@ -417,8 +417,10 @@ $i18n_key_words = array(
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
+'form.report.export' => 'Eksportimine', // TODO: is this correct? We want a verb as in "Export XML" - see report export options.
+                                        // The current combined English string is "Export PDF, XML or CSV".
+                                        // Meaning: user can have a displayed report in these formats.
 // TODO: translate the following.
-// 'form.report.export' => 'Export',
 // 'form.report.assign_to_invoice' => 'Assign to invoice',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
@@ -562,9 +564,4 @@ $i18n_key_words = array(
 // "form.migration.compression.none" => 'none',
 "form.migration.compression.gzip" => 'gzip',
 "form.migration.compression.bzip" => 'bzip',
-
-// miscellaneous strings
-"forward.tocsvfile" => 'ekspordi andmed .csv faili',
-"forward.toxmlfile" => 'ekspordi andmed .xml faili',
-"forward.geninvoice" => 'loo arve',
 );

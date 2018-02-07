@@ -548,5 +548,4 @@ $i18n_key_words = array(
 // miscellaneous strings
 "forward.tocsvfile" => '将数据导出到.csv文件',
 "forward.toxmlfile" => '将数据导出到.xml文件',
-"forward.geninvoice" => '生成发票',
 );
