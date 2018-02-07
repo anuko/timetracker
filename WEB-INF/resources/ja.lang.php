@@ -196,8 +196,9 @@ $i18n_key_words = array(
 'label.delete' => '削除',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
-// 'label.select_all' => 'Select all',
-// 'label.select_none' => 'Deselect all',
+'label.select_all' => 'すべて選択',
+'label.select_none' => 'すべて解除',
+// TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
@@ -541,6 +542,4 @@ $i18n_key_words = array(
 
 "label.inv_str" => '送り状',
 "label.set_empl" => 'ユーザーの選択',
-"label.sel_all" => 'すべて選択',
-"label.sel_none" => 'すべて解除',
 );

@@ -544,6 +544,4 @@ $i18n_key_words = array(
 
 "label.inv_str" => 'arved',
 "label.set_empl" => 'vali kasutajad',
-"label.sel_all" => 'vali kõik',
-"label.sel_none" => 'märgi kõik mittevalituks',
 );

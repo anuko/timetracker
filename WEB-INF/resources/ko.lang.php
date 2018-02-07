@@ -195,8 +195,9 @@ $i18n_key_words = array(
 'label.delete' => '삭제',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
-// 'label.select_all' => 'Select all',
-// 'label.select_none' => 'Deselect all',
+'label.select_all' => '모두 선택',
+'label.select_none' => '모두 해제',
+// TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
@@ -540,6 +541,4 @@ $i18n_key_words = array(
 
 "label.inv_str" => '송장',
 "label.set_empl" => '사용자들을 선택',
-"label.sel_all" => '모두 선택',
-"label.sel_none" => '모두 해제',
 );

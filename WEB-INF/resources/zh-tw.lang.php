@@ -193,8 +193,9 @@ $i18n_key_words = array(
 'label.delete' => '刪除',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
-// 'label.select_all' => 'Select all',
-// 'label.select_none' => 'Deselect all',
+'label.select_all' => '全部選擇',
+'label.select_none' => '全部不選',
+// TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
@@ -534,6 +535,4 @@ $i18n_key_words = array(
 
 "label.inv_str" => '發票',
 "label.set_empl" => '選擇用戶',
-"label.sel_all" => '全部選擇',
-"label.sel_none" => '全部不選',
 );

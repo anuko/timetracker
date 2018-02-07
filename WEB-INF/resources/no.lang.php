@@ -196,8 +196,9 @@ $i18n_key_words = array(
 'label.delete' => 'Slett',
 // TODO: translate the following.
 // 'label.configure' => 'Configure',
-// 'label.select_all' => 'Select all',
-// 'label.select_none' => 'Deselect all',
+'label.select_all' => 'Velg alle',
+'label.select_none' => 'Velg ingen',
+// TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
 // 'label.id' => 'ID',
@@ -544,7 +545,4 @@ $i18n_key_words = array(
 
 "label.inv_str" => 'faktura',
 "label.set_empl" => 'velg brukere',
-// Note to translators: the strings below are missing and must be translated and added
-// "label.sel_all" => 'velg alle',
-// "label.sel_none" => 'velg ingen',
 );
