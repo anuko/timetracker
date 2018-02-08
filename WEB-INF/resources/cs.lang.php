@@ -191,8 +191,6 @@ $i18n_key_words = array(
 // 'label.month_total' => 'Month total',
 'label.today' => 'Dnes',
 // TODO: translate the following.
-// 'label.total_hours' => 'Total hours',
-// 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
 'label.edit' => 'Upravit',
 'label.delete' => 'Smazat',
@@ -553,8 +551,4 @@ $i18n_key_words = array(
 
 "form.people.rate" => 'hodinová sazba',
 "form.people.comanager" => 'spolumanažer',
-
-// report attributes
-"form.report.totals_only" => 'pouze součty',
-"form.report.total" => 'součty hodin',
 );

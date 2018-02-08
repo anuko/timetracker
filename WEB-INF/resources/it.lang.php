@@ -185,9 +185,7 @@ $i18n_key_words = array(
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
 'label.today' => 'Oggi',
-'label.total_hours' => 'Ore totali',
 // TODO: translate the following.
-// 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
 'label.edit' => 'Modifica',
 'label.delete' => 'Elimina',

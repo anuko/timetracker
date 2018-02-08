@@ -187,8 +187,6 @@ $i18n_key_words = array(
 // 'label.month_total' => 'Month total',
 'label.today' => '오늘',
 // TODO: translate the following.
-// 'label.total_hours' => 'Total hours',
-// 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
 'label.edit' => '편집',
 'label.delete' => '삭제',
@@ -271,7 +269,7 @@ $i18n_key_words = array(
 // 'title.add_predefined_expense' => 'Adding Predefined Expense',
 // 'title.edit_predefined_expense' => 'Editing Predefined Expense',
 // 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
-// 'title.reports' => 'Reports',
+'title.reports' => '보고서',
 'title.report' => '보고서',
 // TODO: translate the following.
 // 'title.send_report' => 'Sending Report',
@@ -552,8 +550,4 @@ $i18n_key_words = array(
 
 "form.people.rate" => '디폴트 시간당 급여',
 "form.people.comanager" => '공동관리자',
-
-// report attributes
-"form.report.title" => '보고서',
-"form.report.total" => '시간 총합',
 );

@@ -188,8 +188,6 @@ $i18n_key_words = array(
 // 'label.month_total' => 'Month total',
 'label.today' => 'I dag',
 // TODO: translate the following.
-// 'label.total_hours' => 'Total hours',
-// 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
 'label.edit' => 'Endre',
 'label.delete' => 'Slett',
@@ -268,8 +266,8 @@ $i18n_key_words = array(
 // 'title.add_predefined_expense' => 'Adding Predefined Expense',
 // 'title.edit_predefined_expense' => 'Editing Predefined Expense',
 // 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
-// 'title.reports' => 'Reports',
-// 'title.report' => 'Report',
+'title.reports' => 'Rapporter',
+'title.report' => 'Rapport',
 // 'title.send_report' => 'Sending Report',
 'title.invoice' => 'Faktura',
 // TODO: translate the following.
@@ -546,8 +544,4 @@ $i18n_key_words = array(
 // Note to translators: the 2 strings below are missing and must be added and translated
 // "form.people.th.rate" => 'timesats',
 "form.people.rate" => 'timesats',
-
-// report attributes
-"form.report.title" => 'rapporter',
-"form.report.total" => 'totalt antall timer',
 );

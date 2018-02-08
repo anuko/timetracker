@@ -189,8 +189,6 @@ $i18n_key_words = array(
 // 'label.month_total' => 'Month total',
 'label.today' => 'Täna',
 // TODO: translate the following.
-// 'label.total_hours' => 'Total hours',
-// 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
 'label.edit' => 'Muuda',
 'label.delete' => 'Kustuta',
@@ -557,7 +555,4 @@ $i18n_key_words = array(
 
 "form.people.rate" => 'vaikimisi tunni hind',
 "form.people.comanager" => 'kaashaldur',
-
-// report attributes
-"form.report.total" => 'tunde kokku',
 );

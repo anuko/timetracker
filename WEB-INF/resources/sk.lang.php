@@ -173,8 +173,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.month_total' => 'Month total',
 'label.today' => 'Dnes',
-'label.total_hours' => 'Hodín celkom',
-'label.total_cost' => 'Náklady celkom',
 'label.view' => 'Zobraziť',
 'label.edit' => 'Upraviť',
 'label.delete' => 'Vymazať',

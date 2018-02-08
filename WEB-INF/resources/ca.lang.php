@@ -186,9 +186,7 @@ $i18n_key_words = array(
 // 'label.day_total' => 'Day total',
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
-// 'label.today' => 'Today',
-// 'label.total_hours' => 'Total hours',
-// 'label.total_cost' => 'Total cost',
+'label.today' => 'Avui',
 // 'label.view' => 'View',
 'label.edit' => 'Modificar',
 'label.delete' => 'Eliminar',
@@ -539,8 +537,4 @@ $i18n_key_words = array(
 
 "form.people.rate" => 'Taxa per defecte en hores',
 "form.people.comanager" => 'Auxiliar del manejador',
-
-// report attributes
-"form.report.totals_only" => 'Només totals',
-"form.report.total" => 'Hores Totals',
 );

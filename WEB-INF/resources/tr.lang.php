@@ -197,8 +197,6 @@ $i18n_key_words = array(
 // 'label.month_total' => 'Month total',
 'label.today' => 'Bugün',
 // TODO: translate the following.
-// 'label.total_hours' => 'Total hours',
-// 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
 'label.edit' => 'Düzenle',
 'label.delete' => 'Sil',
@@ -282,8 +280,9 @@ $i18n_key_words = array(
 // 'title.add_predefined_expense' => 'Adding Predefined Expense',
 // 'title.edit_predefined_expense' => 'Editing Predefined Expense',
 // 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
-// 'title.reports' => 'Reports',
-// 'title.report' => 'Report',
+'title.reports' => 'Raporlar',
+'title.report' => 'Rapor',
+// TODO: translate the following.
 // 'title.send_report' => 'Sending Report',
 'title.invoice' => 'Fatura',
 // TODO: translate the following.
@@ -562,8 +561,4 @@ $i18n_key_words = array(
 
 "form.people.rate" => 'varsayılan saat ücreti',
 "form.people.comanager" => 'yardımcı yönetici',
-
-// report attributes
-"form.report.title" => 'raporlar',
-"form.report.total" => 'saat toplamı',
 );

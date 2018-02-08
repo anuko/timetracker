@@ -187,8 +187,6 @@ $i18n_key_words = array(
 // 'label.month_total' => 'Month total',
 'label.today' => '今日',
 // TODO: translate the following.
-// 'label.total_hours' => 'Total hours',
-// 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
 'label.edit' => '編集',
 'label.delete' => '削除',
@@ -270,8 +268,9 @@ $i18n_key_words = array(
 // 'title.add_predefined_expense' => 'Adding Predefined Expense',
 // 'title.edit_predefined_expense' => 'Editing Predefined Expense',
 // 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
-// 'title.reports' => 'Reports',
-// 'title.report' => 'Report',
+'title.reports' => 'レポート',
+'title.report' => 'レポート',
+// TODO: translate the following.
 // 'title.send_report' => 'Sending Report',
 'title.invoice' => '送り状',
 // TODO: translate the following.
@@ -549,8 +548,4 @@ $i18n_key_words = array(
 
 "form.people.rate" => 'デフォルト時間当り給料',
 "form.people.comanager" => '共同管理者',
-
-// report attributes
-"form.report.title" => 'レポート',
-"form.report.total" => '合計時間',
 );

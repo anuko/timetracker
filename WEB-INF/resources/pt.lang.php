@@ -182,8 +182,6 @@ $i18n_key_words = array(
 // 'label.week_total' => 'Week total',
 // 'label.month_total' => 'Month total',
 // 'label.today' => 'Today',
-// 'label.total_hours' => 'Total hours',
-// 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
 'label.edit' => 'Editar',
 'label.delete' => 'Apagar',
@@ -261,8 +259,8 @@ $i18n_key_words = array(
 // 'title.edit_predefined_expense' => 'Editing Predefined Expense',
 // 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
 'title.reports' => 'Relatórios',
+'title.report' => 'Relatório',
 // TODO: translate the following.
-// 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
 // 'title.invoice' => 'Invoice',
 // 'title.send_invoice' => 'Sending Invoice',
@@ -515,8 +513,4 @@ $i18n_key_words = array(
 // people form attributes
 "form.people.th.role" => 'regra',
 "form.people.manager" => 'gerente',
-
-// report attributes
-"form.report.title" => 'relatórios',
-"form.report.total" => 'horas totais',
 );

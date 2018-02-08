@@ -173,8 +173,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.month_total' => 'Month total',
 'label.today' => 'امروز',
-'label.total_hours' => 'مجموع ساعت',
-'label.total_cost' => 'مجموع هزینه ها',
 'label.view' => 'نمایش',
 'label.edit' => 'ویرایش',
 'label.delete' => 'حذف',

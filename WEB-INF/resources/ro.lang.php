@@ -191,8 +191,6 @@ $i18n_key_words = array(
 // 'label.month_total' => 'Month total',
 'label.today' => 'Astazi',
 // TODO: translate the following.
-// 'label.total_hours' => 'Total hours',
-// 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
 // TODO: confirm that label.edit and label.delete are translated correctly.
 'label.edit' => 'Editează',
@@ -274,8 +272,9 @@ $i18n_key_words = array(
 // 'title.add_predefined_expense' => 'Adding Predefined Expense',
 // 'title.edit_predefined_expense' => 'Editing Predefined Expense',
 // 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
-// 'title.reports' => 'Reports',
-// 'title.report' => 'Report',
+'title.reports' => 'Rapoarte',
+'title.report' => 'Raport',
+// TODO: translate the following.
 // 'title.send_report' => 'Sending Report',
 'title.invoice' => 'Factura',
 // TODO: translate the following.
@@ -552,8 +551,4 @@ $i18n_key_words = array(
 
 "form.people.rate" => 'pret pe ora implicit',
 "form.people.comanager" => 'co-manager',
-
-// report attributes
-"form.report.title" => 'rapoarte',
-"form.report.total" => 'ore total',
 );

@@ -177,8 +177,6 @@ $i18n_key_words = array(
 // 'label.month_total' => 'Month total',
 'label.today' => '今天',
 // TODO: translate the following.
-// 'label.total_hours' => 'Total hours',
-// 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
 'label.edit' => '编辑',
 'label.delete' => '删除',
@@ -259,8 +257,9 @@ $i18n_key_words = array(
 // 'title.add_predefined_expense' => 'Adding Predefined Expense',
 // 'title.edit_predefined_expense' => 'Editing Predefined Expense',
 // 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
-// 'title.reports' => 'Reports',
-// 'title.report' => 'Report',
+'title.reports' => '报告',
+'title.report' => '报告',
+// TODO: translate the following.
 // 'title.send_report' => 'Sending Report',
 'title.invoice' => '发票',
 // TODO: translate the following.
@@ -537,8 +536,4 @@ $i18n_key_words = array(
 
 "form.people.rate" => '默认小时收费',
 "form.people.comanager" => '合作经理人',
-
-// report attributes
-"form.report.title" => '报告',
-"form.report.total" => '总计时间',
 );

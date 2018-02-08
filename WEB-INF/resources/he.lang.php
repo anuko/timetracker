@@ -182,8 +182,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.month_total' => 'Month total',
 'label.today' => 'היום',
-'label.total_hours' => 'סך הכל שעות',
-'label.total_cost' => 'סך הכל עלות',
 'label.view' => 'הצג',
 'label.edit' => 'ערוך',
 'label.delete' => 'מחק',

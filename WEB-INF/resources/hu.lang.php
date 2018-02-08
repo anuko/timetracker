@@ -190,8 +190,6 @@ $i18n_key_words = array(
 // 'label.month_total' => 'Month total',
 'label.today' => 'Ma',
 // TODO: translate the following.
-// 'label.total_hours' => 'Total hours',
-// 'label.total_cost' => 'Total cost',
 // 'label.view' => 'View',
 'label.edit' => 'Szerkesztés',
 'label.delete' => 'Törlés',
@@ -551,7 +549,4 @@ $i18n_key_words = array(
 
 "form.people.rate" => 'általános óradíj',
 "form.people.comanager" => 'helyettes',
-
-// report attributes
-"form.report.total" => 'összesített óraszám',
 );

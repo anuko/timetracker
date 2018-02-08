@@ -164,8 +164,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.month_total' => 'Month total',
 'label.today' => 'Danas',
-'label.total_hours' => 'Ukupno časova',
-'label.total_cost' => 'Ukupna cena',
 'label.view' => 'Pregledaj',
 'label.edit' => 'Izmeni',
 'label.delete' => 'Obriši',
