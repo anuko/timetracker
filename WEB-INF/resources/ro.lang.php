@@ -466,9 +466,9 @@ $i18n_key_words = array(
 // 'form.client.client_entries' => 'Client entries',
 
 // Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+'form.export.hint' => 'Poti exporta toate datele despre echipa intr-un fisier xml. Acesta poate fi folositor daca transferi datele pe alt server.',
+'form.export.compression' => 'Compresie',
 // TODO: translate the following.
-// 'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
-// 'form.export.compression' => 'Compression',
 // 'form.export.compression_none' => 'none',
 // 'form.export.compression_bzip' => 'bzip',
 
@@ -548,12 +548,10 @@ $i18n_key_words = array(
 "form.invoice.mailinv_above" => 'trimite aceasta factura pe email',
 "form.invoice.sending_str" => '<b>factura trimisa</b>',
 
-"form.migration.zip" => 'compresie',
 "form.migration.file" => 'alege fisier',
 "form.migration.import.title" => 'importa date',
 "form.migration.import.success" => 'importul s-a incheiat cu succes',
 "form.migration.import.text" => 'importa date echipa dintr-un fisier xml',
 "form.migration.export.title" => 'exporta date',
 "form.migration.export.success" => 'exportul s-a inchieat cu succes',
-"form.migration.export.text" => 'poti exporta toate datele despre echipa intr-un fisier xml. acesta poate fi folositor daca transferi datele pe alt server',
 );

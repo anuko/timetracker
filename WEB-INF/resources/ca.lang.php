@@ -462,9 +462,9 @@ $i18n_key_words = array(
 // 'form.client.client_entries' => 'Client entries',
 
 // Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+'form.export.hint' => 'Vosté pot exportar totes les dades del grup dins d\\\'un archivo xml. Això pot ser útil si necessita migrar dades al seu propi servidor.',
+'form.export.compression' => 'Compressió',
 // TODO: translate the following.
-// 'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
-// 'form.export.compression' => 'Compression',
 // 'form.export.compression_none' => 'none',
 // 'form.export.compression_bzip' => 'bzip',
 
@@ -529,12 +529,10 @@ $i18n_key_words = array(
 "form.invoice.mailinv_above" => 'Enviar aquesta factura per e-mail',
 "form.invoice.sending_str" => '<b>Factura enviada</b>',
 
-"form.migration.zip" => 'Comprimir',
 "form.migration.file" => 'Sel·leccioni l\\\'arxiu',
 "form.migration.import.title" => 'Importar dades',
 "form.migration.import.success" => 'Importació finalitzada amb èxit',
 "form.migration.import.text" => 'Importar dades del grup des d\\\'un arxiu xml',
 "form.migration.export.title" => 'Exportar dades',
 "form.migration.export.success" => 'Exportació finalitzada amb èxit',
-"form.migration.export.text" => 'Vosté pot exportar totes les dades del grup dins d\\\'un archivo xml. Això pot ser útil si necessita migrar dades al seu propi servidor.',
 );

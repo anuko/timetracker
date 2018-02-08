@@ -459,8 +459,7 @@ $i18n_key_words = array(
 // 'form.client.client_entries' => 'Client entries',
 
 // Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
-// TODO: translate the following.
-// 'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
+'form.export.hint' => '您可以將所有團隊資料匯出到xml檔。如果您要將資料轉移到您自己的伺服器，這項操作很有用。',
 'form.export.compression' => '壓縮',
 'form.export.compression_none' => '不压缩',
 'form.export.compression_bzip' => 'bzip格式',
@@ -549,5 +548,4 @@ $i18n_key_words = array(
 "form.migration.import.text" => '從xml檔導入團隊資料',
 "form.migration.export.title" => '匯出數據',
 "form.migration.export.success" => '成功完成匯出',
-"form.migration.export.text" => '您可以將所有團隊資料匯出到xml檔。如果您要將資料轉移到您自己的伺服器，這項操作很有用。',
 );

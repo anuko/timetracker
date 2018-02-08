@@ -463,9 +463,11 @@ $i18n_key_words = array(
 // 'form.client.client_entries' => 'Client entries',
 
 // Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// TODO: improve or check form.export.hint as the translation seems incorrect if we trust translate.google.com.
+// Export does a single team export (all data in ONE team).
+'form.export.hint' => 'Kimentheted az összes felvitt csoport adatait egy XML file-ba, ami megkönnyíti a TimeTracker szerverek közötti adatátvitelt.',
+'form.export.compression' => 'Tömörítés',
 // TODO: translate the following.
-// 'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
-// 'form.export.compression' => 'Compression',
 // 'form.export.compression_none' => 'none',
 // 'form.export.compression_bzip' => 'bzip',
 
@@ -544,12 +546,10 @@ $i18n_key_words = array(
 "form.invoice.mailinv_above" => 'küldjük el ezt a számlát e-mail-en',
 "form.invoice.sending_str" => '<b>a számla elküldve</b>',
 
-"form.migration.zip" => 'tömörítés',
 "form.migration.file" => 'válassz file-nevet',
 "form.migration.import.title" => 'adatok importálása',
 "form.migration.import.success" => 'az importálás sikeresen véget ért',
 "form.migration.import.text" => 'csoport adatok importja XML file-ból',
 "form.migration.export.title" => 'az adatok exportálása',
 "form.migration.export.success" => 'az exportálás sikeres volt',
-"form.migration.export.text" => 'kimentheted az összes felvitt csoport adatait egy XML file-ba, ami megkönnyíti a TimeTracker szerverek közötti adatátvitelt...',
 );
