@@ -496,13 +496,13 @@ $i18n_key_words = array(
 // 'form.profile.plugins' => 'Plugins',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
+'form.mail.from' => '부터',
+'form.mail.to' => '까지', // TODO: is this correct? The meaning is that we send an email TO this person.
 // TODO: translate the following.
-// 'form.mail.from' => 'From',
-// 'form.mail.to' => 'To',
 // 'form.mail.report_subject' => 'Time Tracker Report',
 // 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 // 'form.mail.report_sent' => 'Report sent.',
-// 'form.mail.invoice_sent' => 'Invoice sent.',
+'form.mail.invoice_sent' => '송신한 송장.',
 
 // Quotas configuration form.
 // TODO: translate the following.
@@ -556,15 +556,4 @@ $i18n_key_words = array(
 // report attributes
 "form.report.title" => '보고서',
 "form.report.total" => '시간 총합',
-
-// mail form attributes
-"form.mail.from" => '부터',
-"form.mail.to" => '까지',
-"form.mail.above" => '이 보고서를 이메일로 송신',
-// Note to translators: this string needs to be translated.
-// "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
-"form.mail.sending_str" => '<b>송신된 메시지</b>',
-
-// invoice attributes
-"form.invoice.sending_str" => '<b>송신한 송장</b>',
 );

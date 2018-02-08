@@ -497,13 +497,13 @@ $i18n_key_words = array(
 // 'form.profile.plugins' => 'Plugins',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
+'form.mail.from' => 'De',
+'form.mail.to' => 'Per a',
 // TODO: translate the following.
-// 'form.mail.from' => 'From',
-// 'form.mail.to' => 'To',
 // 'form.mail.report_subject' => 'Time Tracker Report',
 // 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 // 'form.mail.report_sent' => 'Report sent.',
-// 'form.mail.invoice_sent' => 'Invoice sent.',
+'form.mail.invoice_sent' => 'Factura enviada.',
 
 // Quotas configuration form.
 // TODO: translate the following.
@@ -543,15 +543,4 @@ $i18n_key_words = array(
 // report attributes
 "form.report.totals_only" => 'Només totals',
 "form.report.total" => 'Hores Totals',
-
-// mail form attributes
-"form.mail.from" => 'De',
-"form.mail.to" => 'Per a',
-"form.mail.above" => 'Enviar aquest report por e-mail',
-// Note to translators: this string needs to be translated.
-// "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
-"form.mail.sending_str" => '<b>Missatge enviat</b>',
-
-// invoice attributes
-"form.invoice.sending_str" => '<b>Factura enviada</b>',
 );

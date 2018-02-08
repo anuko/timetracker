@@ -481,13 +481,13 @@ $i18n_key_words = array(
 // 'form.profile.plugins' => 'Plugins',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
+'form.mail.from' => '从',
+'form.mail.to' => '到',
 // TODO: translate the following.
-// 'form.mail.from' => 'From',
-// 'form.mail.to' => 'To',
 // 'form.mail.report_subject' => 'Time Tracker Report',
 // 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 // 'form.mail.report_sent' => 'Report sent.',
-// 'form.mail.invoice_sent' => 'Invoice sent.',
+'form.mail.invoice_sent' => '发票已送出。',
 
 // Quotas configuration form.
 // TODO: translate the following.
@@ -541,15 +541,4 @@ $i18n_key_words = array(
 // report attributes
 "form.report.title" => '报告',
 "form.report.total" => '总计时间',
-
-// mail form attributes
-"form.mail.from" => '从',
-"form.mail.to" => '到',
-"form.mail.above" => '通过电子邮件发送该报告',
-// Note to translators: this string needs to be translated.
-"form.mail.footer_str" => 'anuko时间跟踪器是一种简单、易用、开放源码的时间跟踪系统。 看<a href ="https://www.anuko.com"> www.anuko网</a>更多信息。',
-"form.mail.sending_str" => '<b>消息已发送</b>',
-
-// invoice attributes
-"form.invoice.sending_str" => '<b>发票已送出</b>',
 );

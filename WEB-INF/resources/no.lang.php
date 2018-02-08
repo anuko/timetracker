@@ -490,9 +490,9 @@ $i18n_key_words = array(
 // 'form.profile.plugins' => 'Plugins',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
+'form.mail.from' => 'Fra',
+'form.mail.to' => 'Til',
 // TODO: translate the following.
-// 'form.mail.from' => 'From',
-// 'form.mail.to' => 'To',
 // 'form.mail.report_subject' => 'Time Tracker Report',
 // 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 // 'form.mail.report_sent' => 'Report sent.',
@@ -550,12 +550,4 @@ $i18n_key_words = array(
 // report attributes
 "form.report.title" => 'rapporter',
 "form.report.total" => 'totalt antall timer',
-
-// mail form attributes
-"form.mail.from" => 'fra',
-"form.mail.to" => 'til',
-"form.mail.above" => 'send denne rapporten som e-post',
-// Note to translators: the strings below must be translated
-// "form.mail.footer_str" => 'Anuko Time Tracker is et enkelt, brukervennlig tidsregistreringssystem<br>basert på åpen kildekode. Besøk <a href="https://www.anuko.com">www.anuko.com</a> for flere opplysninger.',
-// "form.mail.sending_str" => '<b>the message has been sent</b>',
 );
