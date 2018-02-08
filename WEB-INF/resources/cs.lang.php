@@ -473,10 +473,9 @@ $i18n_key_words = array(
 'form.export.compression_bzip' => 'bzip',
 
 // Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-// TODO: translate the following.
-// 'form.import.hint' => 'Import team data from an xml file.',
-// 'form.import.file' => 'Select file',
-// 'form.import.success' => 'Import completed successfully.',
+'form.import.hint' => 'Importovat týmová data z xml souboru.',
+'form.import.file' => 'Výběr souboru',
+'form.import.success' => 'Import byl úspěšně dokončen.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
 // TODO: translate the following. This part is not translated accurately from English:
@@ -545,11 +544,4 @@ $i18n_key_words = array(
 "form.invoice.subtotal" => 'subtotal',
 "form.invoice.mailinv_above" => 'poslat fakturu e-mailem',
 "form.invoice.sending_str" => '<b>faktura odeslána</b>',
-
-"form.migration.file" => 'výběr souboru',
-"form.migration.import.title" => 'importovat data',
-"form.migration.import.success" => 'import byl úspěšně dokončen',
-"form.migration.import.text" => 'importovat týmová data z xml souboru',
-"form.migration.export.title" => 'exportovat data',
-"form.migration.export.success" => 'export byl úspěšně dokončen',
 );

@@ -476,10 +476,9 @@ $i18n_key_words = array(
 'form.export.compression_bzip' => 'bzip',
 
 // Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-// TODO: translate the following.
-// 'form.import.hint' => 'Import team data from an xml file.',
-// 'form.import.file' => 'Select file',
-// 'form.import.success' => 'Import completed successfully.',
+'form.import.hint' => 'Impordi meeskonna andmed xml-failist.',
+'form.import.file' => 'Vali fail',
+'form.import.success' => 'Andmed imporditud.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
 // TODO: translate the following.
@@ -551,11 +550,4 @@ $i18n_key_words = array(
 "form.invoice.customer" => 'klient',
 "form.invoice.mailinv_above" => 'saada see arve e-mailiga',
 "form.invoice.sending_str" => '<b>arve saadetud</b>',
-
-"form.migration.file" => 'vali fail',
-"form.migration.import.title" => 'impordi andmed',
-"form.migration.import.success" => 'andmed imporditud',
-"form.migration.import.text" => 'impordi meeskonna andmed xml-failist',
-"form.migration.export.title" => 'ekspordi andmed',
-"form.migration.export.success" => 'andmed eksporditud',
 );

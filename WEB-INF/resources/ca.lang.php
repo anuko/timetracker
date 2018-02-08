@@ -469,10 +469,9 @@ $i18n_key_words = array(
 // 'form.export.compression_bzip' => 'bzip',
 
 // Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-// TODO: translate the following.
-// 'form.import.hint' => 'Import team data from an xml file.',
-// 'form.import.file' => 'Select file',
-// 'form.import.success' => 'Import completed successfully.',
+'form.import.hint' => 'Importar dades del grup des d\\\'un arxiu xml.',
+'form.import.file' => 'Sel·leccioni l\\\'arxiu',
+'form.import.success' => 'Importació finalitzada amb èxit.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
 'form.teams.hint' => 'Crear un nou grup, creant un nou compte del manejador de l\\\'equip.<br>També pot importar dades de grups, d\\\'un arxiu xml d\\\'un altre servidor Anuko Time Tracker (no està permès col·lisions de login).',
@@ -528,11 +527,4 @@ $i18n_key_words = array(
 "form.invoice.subtotal" => 'Subtotal',
 "form.invoice.mailinv_above" => 'Enviar aquesta factura per e-mail',
 "form.invoice.sending_str" => '<b>Factura enviada</b>',
-
-"form.migration.file" => 'Sel·leccioni l\\\'arxiu',
-"form.migration.import.title" => 'Importar dades',
-"form.migration.import.success" => 'Importació finalitzada amb èxit',
-"form.migration.import.text" => 'Importar dades del grup des d\\\'un arxiu xml',
-"form.migration.export.title" => 'Exportar dades',
-"form.migration.export.success" => 'Exportació finalitzada amb èxit',
 );
