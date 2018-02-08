@@ -405,9 +405,8 @@ $i18n_key_words = array(
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
-// TODO: translate the following.
-// 'form.invoice.number' => 'Invoice number',
-// 'form.invoice.person' => 'Person',
+'form.invoice.number' => '发票号码',
+'form.invoice.person' => '人', // TODO: is this correct?
 
 // Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
 // 'form.invoice.invoice_to_delete' => 'Invoice to delete',
@@ -518,8 +517,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>消息已发送</b>',
 
 // invoice attributes
-"form.invoice.number" => '发票号码',
-"form.invoice.th.username" => '收费人',
 "form.invoice.th.time" => '小时数',
 "form.invoice.th.rate" => '费率',
 "form.invoice.th.summ" => '账号',

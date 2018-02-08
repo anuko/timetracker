@@ -432,9 +432,8 @@ $i18n_key_words = array(
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
-// TODO: translate the following.
-// 'form.invoice.number' => 'Invoice number',
-// 'form.invoice.person' => 'Person',
+'form.invoice.number' => 'Fatura numarası',
+'form.invoice.person' => 'Kişi',
 
 // Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
 // 'form.invoice.invoice_to_delete' => 'Invoice to delete',
@@ -545,8 +544,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>ileti yollandı</b>',
 
 // invoice attributes
-"form.invoice.number" => 'fatura numarası',
-"form.invoice.th.username" => 'kişi',
 "form.invoice.th.time" => 'saatler',
 "form.invoice.th.rate" => 'tarife',
 "form.invoice.th.summ" => 'tutar',
