@@ -461,9 +461,9 @@ $i18n_key_words = array(
 // Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
 // TODO: translate the following.
 // 'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
-// 'form.export.compression' => 'Compression',
-// 'form.export.compression_none' => 'none',
-// 'form.export.compression_bzip' => 'bzip',
+'form.export.compression' => '壓縮',
+'form.export.compression_none' => '不压缩',
+'form.export.compression_bzip' => 'bzip格式',
 
 // Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
 // TODO: translate the following.
@@ -543,7 +543,6 @@ $i18n_key_words = array(
 "form.invoice.mailinv_above" => '通過電子郵件發送此發票',
 "form.invoice.sending_str" => '<b>發票已送出</b>',
 
-"form.migration.zip" => '壓縮',
 "form.migration.file" => '選擇檔',
 "form.migration.import.title" => '導入數據',
 "form.migration.import.success" => '成功完成導入',
@@ -551,7 +550,4 @@ $i18n_key_words = array(
 "form.migration.export.title" => '匯出數據',
 "form.migration.export.success" => '成功完成匯出',
 "form.migration.export.text" => '您可以將所有團隊資料匯出到xml檔。如果您要將資料轉移到您自己的伺服器，這項操作很有用。',
-"form.migration.compression.none" => '不压缩',
-"form.migration.compression.gzip" => 'gzip格式',
-"form.migration.compression.bzip" => 'bzip格式',
 );

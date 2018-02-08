@@ -556,8 +556,4 @@ $i18n_key_words = array(
 "form.migration.export.title" => 'exporta date',
 "form.migration.export.success" => 'exportul s-a inchieat cu succes',
 "form.migration.export.text" => 'poti exporta toate datele despre echipa intr-un fisier xml. acesta poate fi folositor daca transferi datele pe alt server',
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.migration.compression.none" => 'none',
-// "form.migration.compression.gzip" => 'gzip',
-// "form.migration.compression.bzip" => 'bzip',
 );
