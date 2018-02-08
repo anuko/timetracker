@@ -464,10 +464,9 @@ $i18n_key_words = array(
 'form.export.compression_bzip' => 'bzip',
 
 // Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-// TODO: translate the following.
-// 'form.import.hint' => 'Import team data from an xml file.',
-// 'form.import.file' => 'Select file',
-// 'form.import.success' => 'Import completed successfully.',
+'form.import.hint' => 'Import team data fra en xml fil.',
+'form.import.file' => 'Velg fil',
+'form.import.success' => 'Import gjennomført vellykket.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
 'form.teams.hint' => 'Opprett et nytt team ved å opprette en ny team manager konto.<br>Du kan også importere team data fra en xml fil fra en annen Anuko Time Tracker server (ingen login kollisjoner er tillatt).',
@@ -540,13 +539,4 @@ $i18n_key_words = array(
 "form.invoice.subtotal" => 'delsum',
 "form.invoice.customer" => 'kommentar',
 "form.invoice.mailinv_above" => 'send denne fakturaen som e-post',
-// Note to translators: "form.invoice.sending_str" => '<b>invoice has been sent</b>', // the string must be translated
-
-// Note to translators: the strings below are missing and must be added and translated
-// "form.migration.file" => 'velg fil',
-// "form.migration.import.title" => 'import data',
-// "form.migration.import.success" => 'import gjennomført vellykket',
-// "form.migration.import.text" => 'import team data fra en xml fil',
-// "form.migration.export.title" => 'export data',
-// "form.migration.export.success" => 'eksport gjennomført vellykket',
 );

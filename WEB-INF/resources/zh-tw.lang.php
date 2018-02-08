@@ -465,10 +465,9 @@ $i18n_key_words = array(
 'form.export.compression_bzip' => 'bzip格式',
 
 // Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-// TODO: translate the following.
-// 'form.import.hint' => 'Import team data from an xml file.',
-// 'form.import.file' => 'Select file',
-// 'form.import.success' => 'Import completed successfully.',
+'form.import.hint' => '從xml檔導入團隊資料。',
+'form.import.file' => '選擇檔',
+'form.import.success' => '成功完成導入。',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
 // TODO: translate the following.
@@ -541,11 +540,4 @@ $i18n_key_words = array(
 "form.invoice.customer" => '客戶',
 "form.invoice.mailinv_above" => '通過電子郵件發送此發票',
 "form.invoice.sending_str" => '<b>發票已送出</b>',
-
-"form.migration.file" => '選擇檔',
-"form.migration.import.title" => '導入數據',
-"form.migration.import.success" => '成功完成導入',
-"form.migration.import.text" => '從xml檔導入團隊資料',
-"form.migration.export.title" => '匯出數據',
-"form.migration.export.success" => '成功完成匯出',
 );

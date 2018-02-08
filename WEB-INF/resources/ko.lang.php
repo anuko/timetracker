@@ -470,10 +470,9 @@ $i18n_key_words = array(
 'form.export.compression_bzip' => 'bzip',
 
 // Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-// TODO: translate the following.
-// 'form.import.hint' => 'Import team data from an xml file.',
-// 'form.import.file' => 'Select file',
-// 'form.import.success' => 'Import completed successfully.',
+'form.import.hint' => 'xml 파일로부터 팀 데이터를 임포트.',
+'form.import.file' => '파일 선택',
+'form.import.success' => '성과적으로 완료된 임포트.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
 'form.teams.hint' => '신규 팀관리자 계정을 생성하여 신규 팀을 생성합니다.<br>또한 다른 Anuko Time Tracker 서버 에서 xml 파일로부터 팀 데이터를 임포트할수 있습니다 (로그인 충돌은 허용되지 안음).',
@@ -546,11 +545,4 @@ $i18n_key_words = array(
 "form.invoice.customer" => '클라이언트',
 "form.invoice.mailinv_above" => '이 송장을 이메일로 송신',
 "form.invoice.sending_str" => '<b>송신한 송장</b>',
-
-"form.migration.file" => '파일 선택',
-"form.migration.import.title" => '데이터 임포트',
-"form.migration.import.success" => '성과적으로 완료된 임포트',
-"form.migration.import.text" => 'xml 파일로부터 팀 데이터를 임포트',
-"form.migration.export.title" => '데이터 익스포트',
-"form.migration.export.success" => '성과적으로 완료된 익스포트',
 );

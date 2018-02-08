@@ -483,10 +483,9 @@ $i18n_key_words = array(
 // 'form.export.compression_bzip' => 'bzip',
 
 // Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-// TODO: translate the following.
-// 'form.import.hint' => 'Import team data from an xml file.',
-// 'form.import.file' => 'Select file',
-// 'form.import.success' => 'Import completed successfully.',
+'form.import.hint' => 'Ekip bilgileri bir xml dosyasından içe aktar.',
+'form.import.file' => 'Dosya seç',
+'form.import.success' => 'Içe aktarma başarıyla tamamlandı.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
 // TODO: check form.teams.hint for accuracy. I did not not how to translate "login", so this may be garbage now.
@@ -558,11 +557,4 @@ $i18n_key_words = array(
 "form.invoice.customer" => 'müşteri',
 "form.invoice.mailinv_above" => 'bu faturayı e-posta ile yolla',
 "form.invoice.sending_str" => '<b>fatura yollandı</b>',
-
-"form.migration.file" => 'dosya seç',
-"form.migration.import.title" => 'veri içe aktar',
-"form.migration.import.success" => 'içe aktarma başarıyla tamamlandı',
-"form.migration.import.text" => 'ekip bilgileri bir xml dosyasından içe aktar',
-"form.migration.export.title" => 'dışarı aktar',
-"form.migration.export.success" => 'dışarı aktarma başarıyla tamamlandı',
 );
