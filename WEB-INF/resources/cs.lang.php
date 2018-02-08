@@ -213,8 +213,7 @@ $i18n_key_words = array(
 'label.comment' => 'Komentář',
 'label.status' => 'Status',
 'label.tax' => 'DPH',
-// TODO: translate the following.
-// 'label.subtotal' => 'Subtotal',
+'label.subtotal' => 'Subtotal', // TODO: is this correct?
 'label.total' => 'Celkem',
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
@@ -247,7 +246,8 @@ $i18n_key_words = array(
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
-// 'label.quantity' => 'Quantity',
+'label.quantity' => 'Množství',
+// TODO: translate the following.
 // 'label.paid_status' => 'Paid status',
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
@@ -533,10 +533,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>zpráva odeslána</b>',
 
 // invoice attributes
-"form.invoice.th.time" => 'hodin',
-"form.invoice.th.rate" => 'sazba',
-"form.invoice.th.summ" => 'množství',
-"form.invoice.subtotal" => 'subtotal',
 "form.invoice.mailinv_above" => 'poslat fakturu e-mailem',
 "form.invoice.sending_str" => '<b>faktura odeslána</b>',
 );

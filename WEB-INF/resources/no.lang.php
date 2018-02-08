@@ -210,8 +210,8 @@ $i18n_key_words = array(
 'label.comment' => 'Kommentar',
 'label.status' => 'Status',
 'label.tax' => 'MVA',
+'label.subtotal' => 'Delsum',
 // TODO: translate the following.
-// 'label.subtotal' => 'Subtotal',
 // 'label.total' => 'Total',
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
@@ -526,10 +526,5 @@ $i18n_key_words = array(
 // "form.mail.sending_str" => '<b>the message has been sent</b>',
 
 // invoice attributes
-"form.invoice.th.time" => 'timer',
-"form.invoice.th.rate" => 'sats',
-"form.invoice.th.summ" => 'antall',
-"form.invoice.subtotal" => 'delsum',
-"form.invoice.customer" => 'kommentar',
 "form.invoice.mailinv_above" => 'send denne fakturaen som e-post',
 );

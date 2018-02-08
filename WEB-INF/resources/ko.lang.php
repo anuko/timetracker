@@ -209,8 +209,7 @@ $i18n_key_words = array(
 'label.comment' => '코멘트',
 'label.status' => '상태',
 'label.tax' => '세금',
-// TODO: translate the following.
-// 'label.subtotal' => 'Subtotal',
+'label.subtotal' => '소계',
 'label.total' => '합계',
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
@@ -244,7 +243,8 @@ $i18n_key_words = array(
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
-// 'label.quantity' => 'Quantity',
+'label.quantity' => '수량',
+// TODO: translate the following.
 // 'label.paid_status' => 'Paid status',
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
@@ -532,11 +532,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>송신된 메시지</b>',
 
 // invoice attributes
-"form.invoice.th.time" => '시간',
-"form.invoice.th.rate" => '급여',
-"form.invoice.th.summ" => '수량',
-"form.invoice.subtotal" => '소계',
-"form.invoice.customer" => '클라이언트',
 "form.invoice.mailinv_above" => '이 송장을 이메일로 송신',
 "form.invoice.sending_str" => '<b>송신한 송장</b>',
 );

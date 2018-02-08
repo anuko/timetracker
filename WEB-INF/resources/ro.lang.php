@@ -212,8 +212,7 @@ $i18n_key_words = array(
 'label.comment' => 'Comentariu',
 'label.status' => 'Stare',
 'label.tax' => 'Taxa',
-// TODO: translate the following.
-// 'label.subtotal' => 'Subtotal',
+'label.subtotal' => 'Subtotal',
 'label.total' => 'Total',
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
@@ -533,11 +532,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>mesaj trimis</b>',
 
 // invoice attributes
-"form.invoice.th.time" => 'ore',
-"form.invoice.th.rate" => 'rata',
-"form.invoice.th.summ" => 'valoare',
-"form.invoice.subtotal" => 'subtotal',
-"form.invoice.customer" => 'client',
 "form.invoice.mailinv_above" => 'trimite aceasta factura pe email',
 "form.invoice.sending_str" => '<b>factura trimisa</b>',
 );

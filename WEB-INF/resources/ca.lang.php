@@ -207,9 +207,9 @@ $i18n_key_words = array(
 'label.comment' => 'Comentari',
 'label.status' => 'Estat',
 'label.tax' => 'Impost',
+'label.subtotal' => 'Subtotal',
+'label.total' => 'Total',
 // TODO: translate the following.
-// 'label.subtotal' => 'Subtotal',
-// 'label.total' => 'Total',
 // 'label.client_name' => 'Client name',
 // 'label.client_address' => 'Client address',
 'label.or' => 'o',
@@ -239,7 +239,8 @@ $i18n_key_words = array(
 // 'label.cron_schedule' => 'Cron schedule',
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
-// 'label.quantity' => 'Quantity',
+'label.quantity' => 'Quantitat',
+// TODO: translate the following.
 // 'label.paid_status' => 'Paid status',
 // 'label.paid' => 'Paid',
 // 'label.mark_paid' => 'Mark paid',
@@ -518,10 +519,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>Missatge enviat</b>',
 
 // invoice attributes
-"form.invoice.th.time" => 'Hores',
-"form.invoice.th.rate" => 'Taxa',
-"form.invoice.th.summ" => 'Quantitat',
-"form.invoice.subtotal" => 'Subtotal',
 "form.invoice.mailinv_above" => 'Enviar aquesta factura per e-mail',
 "form.invoice.sending_str" => '<b>Factura enviada</b>',
 );

@@ -211,8 +211,7 @@ $i18n_key_words = array(
 'label.comment' => 'Megjegyzés',
 'label.status' => 'Státusz',
 'label.tax' => 'Adó',
-// TODO: translate the following.
-// 'label.subtotal' => 'Subtotal',
+'label.subtotal' => 'Részösszeg',
 'label.total' => 'Összesen',
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
@@ -531,11 +530,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>az üzenet elküldve</b>',
 
 // invoice attributes
-"form.invoice.th.time" => 'óra',
-"form.invoice.th.rate" => 'tarifa',
-"form.invoice.th.summ" => 'darab',
-"form.invoice.subtotal" => 'részösszeg',
-"form.invoice.customer" => 'Ügyfél',
 "form.invoice.mailinv_above" => 'küldjük el ezt a számlát e-mail-en',
 "form.invoice.sending_str" => '<b>a számla elküldve</b>',
 );

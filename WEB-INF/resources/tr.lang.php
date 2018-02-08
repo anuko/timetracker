@@ -172,12 +172,11 @@ $i18n_key_words = array(
 'label.end_date' => 'Son tarihi',
 'label.user' => 'Kullanıcı',
 'label.users' => 'Kullanıcılar',
+'label.client' => 'Müşteri',
+'label.clients' => 'Müşteriler',
 // TODO: translate the following.
-// 'label.client' => 'Client',
-// 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
 'label.invoice' => 'Fatura',
-// TODO: translate the following.
 'label.project' => 'Proje',
 'label.projects' => 'Projeler',
 // TODO: translate the following.
@@ -219,8 +218,7 @@ $i18n_key_words = array(
 'label.comment' => 'Yorum',
 'label.status' => 'Durum',
 'label.tax' => 'Vergi',
-// TODO: translate the following.
-// 'label.subtotal' => 'Subtotal',
+'label.subtotal' => 'Alt toplamı',
 'label.total' => 'Toplam',
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
@@ -544,11 +542,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>ileti yollandı</b>',
 
 // invoice attributes
-"form.invoice.th.time" => 'saatler',
-"form.invoice.th.rate" => 'tarife',
-"form.invoice.th.summ" => 'tutar',
-"form.invoice.subtotal" => 'alt toplamı',
-"form.invoice.customer" => 'müşteri',
 "form.invoice.mailinv_above" => 'bu faturayı e-posta ile yolla',
 "form.invoice.sending_str" => '<b>fatura yollandı</b>',
 );

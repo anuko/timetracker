@@ -517,11 +517,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>消息已发送</b>',
 
 // invoice attributes
-"form.invoice.th.time" => '小时数',
-"form.invoice.th.rate" => '费率',
-"form.invoice.th.summ" => '账号',
-"form.invoice.subtotal" => '共计',
-"form.invoice.customer" => '客户',
 "form.invoice.mailinv_above" => '通过电子邮件发送此发票',
 "form.invoice.sending_str" => '<b>发票已送出</b>',
 );

@@ -209,8 +209,7 @@ $i18n_key_words = array(
 'label.comment' => 'Kommentaar',
 'label.status' => 'Seisund',
 'label.tax' => 'Maks',
-// TODO: translate the following.
-// 'label.subtotal' => 'Subtotal',
+'label.subtotal' => 'Vahesumma',
 'label.total' => 'Kokku',
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
@@ -537,11 +536,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>teade saadetud</b>',
 
 // invoice attributes
-"form.invoice.th.time" => 'tunde',
-"form.invoice.th.rate" => 'hind',
-"form.invoice.th.summ" => 'summa',
-"form.invoice.subtotal" => 'vahesumma',
-"form.invoice.customer" => 'klient',
 "form.invoice.mailinv_above" => 'saada see arve e-mailiga',
 "form.invoice.sending_str" => '<b>arve saadetud</b>',
 );

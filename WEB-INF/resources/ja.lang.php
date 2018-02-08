@@ -163,9 +163,8 @@ $i18n_key_words = array(
 'label.end_date' => '終了日付',
 'label.user' => 'ユーザー',
 'label.users' => 'ユーザー',
-// TODO: translate the following.
-// 'label.client' => 'Client',
-// 'label.clients' => 'Clients',
+'label.client' => 'クライアント',
+'label.clients' => 'クライアント',
 'label.option' => 'オプション',
 'label.invoice' => '送り状',
 'label.project' => 'プロジェクト',
@@ -210,8 +209,7 @@ $i18n_key_words = array(
 'label.comment' => 'コメント',
 'label.status' => '状態',
 'label.tax' => '税',
-// TODO: translate the following.
-// 'label.subtotal' => 'Subtotal',
+'label.subtotal' => '小計',
 'label.total' => '合計',
 // TODO: translate the following.
 // 'label.client_name' => 'Client name',
@@ -531,11 +529,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>送信したメッセージ</b>',
 
 // invoice attributes
-"form.invoice.th.time" => '時間',
-"form.invoice.th.rate" => '給料',
-"form.invoice.th.summ" => '数量',
-"form.invoice.subtotal" => '小計',
-"form.invoice.customer" => 'クライアント',
 "form.invoice.mailinv_above" => '送り状をEメールで送信',
 "form.invoice.sending_str" => '<b>送信した送り状</b>',
 );
