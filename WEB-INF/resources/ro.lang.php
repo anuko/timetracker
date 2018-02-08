@@ -481,6 +481,40 @@ $i18n_key_words = array(
 // TODO: check form.teams.hint for accuracy.
 'form.teams.hint' => 'Adauga o noua echipa prin adaugarea unui nou cont de tip manager.<br>Deasemeni poti importa datele despre echipa dintr-un fisier xml generat de un alt server Anuko Time Tracker (nu sunt permise duplicate pentru login).',
 
+// Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
+// TODO: translate the following.
+// 'form.profile.12_hours' => '12 hours',
+// 'form.profile.24_hours' => '24 hours',
+// 'form.profile.tracking_mode' => 'Tracking mode',
+// 'form.profile.mode_time' => 'time',
+// 'form.profile.mode_projects' => 'projects',
+// 'form.profile.mode_projects_and_tasks' => 'projects and tasks',
+// 'form.profile.record_type' => 'Record type',
+// 'form.profile.type_all' => 'all',
+// 'form.profile.type_start_finish' => 'start and finish',
+// 'form.profile.type_duration' => 'duration',
+// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.profile.uncompleted_indicators_none' => 'do not show',
+// 'form.profile.uncompleted_indicators_show' => 'show',
+// 'form.profile.plugins' => 'Plugins',
+
+// Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
+// TODO: translate the following.
+// 'form.mail.from' => 'From',
+// 'form.mail.to' => 'To',
+// 'form.mail.report_subject' => 'Time Tracker Report',
+// 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
+// 'form.mail.report_sent' => 'Report sent.',
+// 'form.mail.invoice_sent' => 'Invoice sent.',
+
+// Quotas configuration form.
+// TODO: translate the following.
+// 'form.quota.year' => 'Year',
+// 'form.quota.month' => 'Month',
+// 'form.quota.quota' => 'Quota',
+// 'form.quota.workday_hours' => 'Hours in work day',
+// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+
 
 
 // TODO: refactoring ongoing down from here.
@@ -532,6 +566,5 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>mesaj trimis</b>',
 
 // invoice attributes
-"form.invoice.mailinv_above" => 'trimite aceasta factura pe email',
 "form.invoice.sending_str" => '<b>factura trimisa</b>',
 );
