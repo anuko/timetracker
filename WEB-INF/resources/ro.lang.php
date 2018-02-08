@@ -168,9 +168,9 @@ $i18n_key_words = array(
 'label.end_date' => 'Data sfarsit',
 'label.user' => 'Utilizator',
 'label.users' => 'Utilizatori',
+'label.client' => 'Client',
+'label.clients' => 'Clienti',
 // TODO: translate the following.
-// 'label.client' => 'Client',
-// 'label.clients' => 'Clients',
 // 'label.option' => 'Option',
 'label.invoice' => 'Factura',
 'label.project' => 'Proiect',
@@ -253,6 +253,9 @@ $i18n_key_words = array(
 // 'label.week_list' => 'Week list',
 
 // Form titles.
+// TODO: Improve titles for consistency, so that each title explains correctly what each
+// page is about and is "consistent" from page to page, meaning that correct grammar is used everywhere.
+// Compare with English file to see how it is done there and do Romanian titles similarly.
 'title.login' => 'Autentificare',
 // TODO: translate the following.
 // 'title.teams' => 'Teams',
@@ -292,10 +295,10 @@ $i18n_key_words = array(
 'title.add_user' => 'Adaugare utilizator', // TODO: is this correct?
 'title.edit_user' => 'Editare utilizator', // TODO: is this correct?
 'title.delete_user' => 'Stergere utilizator', // TODO: is this correct?
-// 'title.clients' => 'Clients',
-// 'title.add_client' => 'Adding Client',
-// 'title.edit_client' => 'Editing Client',
-// 'title.delete_client' => 'Deleting Client',
+'title.clients' => 'Clienti',
+'title.add_client' => 'Adaugare client', // TODO: is this correct?
+'title.edit_client' => 'Editare client', // TODO: is this correct?
+'title.delete_client' => 'Stergere client', // TODO: is this correct?
 'title.invoices' => 'Facturi',
 // TODO: translate the following.
 // 'title.add_invoice' => 'Adding Invoice',
@@ -344,9 +347,10 @@ $i18n_key_words = array(
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
 'dropdown.projects' => 'proiecte',
-// TODO: translate the following.    
+// TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
-// 'dropdown.clients' => 'clients',
+'dropdown.clients' => 'clienti',
+// TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
 'dropdown.status_active' => 'activ',
@@ -412,8 +416,8 @@ $i18n_key_words = array(
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
+'form.report.export' => 'Exporta',
 // TODO: translate the following.
-// 'form.report.export' => 'Export',
 // 'form.report.assign_to_invoice' => 'Assign to invoice',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
@@ -556,12 +560,4 @@ $i18n_key_words = array(
 // "form.migration.compression.none" => 'none',
 // "form.migration.compression.gzip" => 'gzip',
 // "form.migration.compression.bzip" => 'bzip',
-
-"form.client.title" => 'clienti',
-"form.client.add_title" => 'adauga client',
-"form.client.edit_title" => 'editeaza client',
-"form.client.del_title" => 'sterge client',
-
-// miscellaneous strings
-"forward.tocsvfile" => 'exporta date in fisier .csv',
 );

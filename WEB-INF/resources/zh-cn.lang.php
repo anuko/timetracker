@@ -544,8 +544,4 @@ $i18n_key_words = array(
 "form.migration.compression.none" => '不压缩',
 "form.migration.compression.gzip" => 'gzip格式',
 "form.migration.compression.bzip" => 'bzip格式',
-
-// miscellaneous strings
-"forward.tocsvfile" => '将数据导出到.csv文件',
-"forward.toxmlfile" => '将数据导出到.xml文件',
 );

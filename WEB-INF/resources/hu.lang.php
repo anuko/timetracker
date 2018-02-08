@@ -167,9 +167,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.user' => 'User',
 // 'label.users' => 'Users',
-// 'label.client' => 'Client',
-// 'label.clients' => 'Clients',
-// 'label.option' => 'Option',
+'label.client' => 'Ügyfél',
+'label.clients' => 'Ügyfelek',
+'label.option' => 'Opció',
 'label.invoice' => 'Számla',
 'label.project' => 'Projekt',
 'label.projects' => 'Projektek',
@@ -291,10 +291,10 @@ $i18n_key_words = array(
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
-// 'title.clients' => 'Clients',
-// 'title.add_client' => 'Adding Client',
-// 'title.edit_client' => 'Editing Client',
-// 'title.delete_client' => 'Deleting Client',
+'title.clients' => 'Ügyfelek',
+'title.add_client' => 'Ügyfél hozzáadása',
+'title.edit_client' => 'Ügyfél szerkesztése',
+'title.delete_client' => 'Ügyfél törlése',
 'title.invoices' => 'Számlák',
 // TODO: translate the following.
 // 'title.add_invoice' => 'Adding Invoice',
@@ -346,7 +346,8 @@ $i18n_key_words = array(
 'dropdown.projects' => 'projektek',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
-// 'dropdown.clients' => 'clients',
+'dropdown.clients' => 'ügyfelek',
+// TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
@@ -412,8 +413,8 @@ $i18n_key_words = array(
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
+'form.report.export' => 'Exportálása', // TODO: is this correct?
 // TODO: translate the following.
-// 'form.report.export' => 'Export',
 // 'form.report.assign_to_invoice' => 'Assign to invoice',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
@@ -551,12 +552,4 @@ $i18n_key_words = array(
 "form.migration.export.title" => 'az adatok exportálása',
 "form.migration.export.success" => 'az exportálás sikeres volt',
 "form.migration.export.text" => 'kimentheted az összes felvitt csoport adatait egy XML file-ba, ami megkönnyíti a TimeTracker szerverek közötti adatátvitelt...',
-
-"form.client.title"=> 'ügyfelek',
-"form.client.add_title" => 'új ügyfél hozzáadása',
-"form.client.edit_title" => 'ügyfél adatainak szerkesztése',
-"form.client.del_title" => 'ügyfél törlése',
-
-// miscellaneous strings
-"forward.tocsvfile" => 'az adatok exportálása CSV file-ba',
 );

@@ -260,6 +260,11 @@ $i18n_key_words = array(
 // 'label.week_list' => 'Week list',
 
 // Form titles.
+// Form titles.
+// TODO: Improve titles for consistency, so that each title explains correctly what each
+// page is about and is "consistent" from page to page, meaning that correct grammar is used everywhere.
+// Compare with English file to see how it is done there and do Romanian titles similarly.
+// Specifically: compare project and client titles and see how they differ.
 'title.login' => 'Giriş',
 // TODO: translate the following.
 // 'title.teams' => 'Teams',
@@ -300,10 +305,10 @@ $i18n_key_words = array(
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
-// 'title.clients' => 'Clients',
-// 'title.add_client' => 'Adding Client',
-// 'title.edit_client' => 'Editing Client',
-// 'title.delete_client' => 'Deleting Client',
+'title.clients' => 'Müşteriler',
+'title.add_client' => 'Müşteri ekle',
+'title.edit_client' => 'Müşteriyi düzenle',
+'title.delete_client' => 'Müşteriyi sil',
 'title.invoices' => 'Faturalar',
 // TODO: translate the following.
 // 'title.add_invoice' => 'Adding Invoice',
@@ -353,7 +358,8 @@ $i18n_key_words = array(
 'dropdown.projects' => 'projeler',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
-// 'dropdown.clients' => 'clients',
+'dropdown.clients' => 'müşteriler',
+// TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
@@ -561,13 +567,4 @@ $i18n_key_words = array(
 "form.migration.export.title" => 'dışarı aktar',
 "form.migration.export.success" => 'dışarı aktarma başarıyla tamamlandı',
 "form.migration.export.text" => 'tüm ekip bilgilerinizi bir xml dosyasına aktarabilirsiniz. bu, kendi sunucunuza bilgi aktarmak istediğinizde faydalı olabilir.',
-
-"form.client.title" => 'müşteriler',
-"form.client.add_title" => 'müşteri ekle',
-"form.client.edit_title" => 'müşteriyi düzenle',
-"form.client.del_title" => 'müşteriyi sil',
-
-// miscellaneous strings
-"forward.tocsvfile" => 'bilgileri .csv dosyasına aktar',
-"forward.toxmlfile" => 'bilgileri .xml dosyasına aktar',
 );

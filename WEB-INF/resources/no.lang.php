@@ -164,10 +164,9 @@ $i18n_key_words = array(
 // 'label.end_date' => 'End date',
 'label.user' => 'Bruker',
 'label.users' => 'Brukere',
-// TODO: translate the following.
-// 'label.client' => 'Client',
-// 'label.clients' => 'Clients',
-// 'label.option' => 'Option',
+'label.client' => 'Klient',
+'label.clients' => 'Klienter',
+'label.option' => 'Opsjon', // TODO: is this correct?
 'label.invoice' => 'Faktura',
 'label.project' => 'Prosjekt',
 'label.projects' => 'Prosjekter',
@@ -290,10 +289,10 @@ $i18n_key_words = array(
 // 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
 // 'title.delete_user' => 'Deleting User',
-// 'title.clients' => 'Clients',
-// 'title.add_client' => 'Adding Client',
-// 'title.edit_client' => 'Editing Client',
-// 'title.delete_client' => 'Deleting Client',
+'title.clients' => 'Klienter',
+'title.add_client' => 'Legg til klient',
+'title.edit_client' => 'Endre klient',
+'title.delete_client' => 'Slett klient',
 'title.invoices' => 'Fakturaer',
 // TODO: translate the following.
 // 'title.add_invoice' => 'Adding Invoice',
@@ -343,7 +342,8 @@ $i18n_key_words = array(
 'dropdown.projects' => 'prosjekter',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',
-// 'dropdown.clients' => 'clients',
+'dropdown.clients' => 'klienter',
+// TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
@@ -408,8 +408,8 @@ $i18n_key_words = array(
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
+'form.report.export' => 'Eksporter',
 // TODO: translate the following.
-// 'form.report.export' => 'Export',
 // 'form.report.assign_to_invoice' => 'Assign to invoice',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
@@ -555,14 +555,4 @@ $i18n_key_words = array(
 // "form.migration.compression.none" => 'ingen',
 // "form.migration.compression.gzip" => 'gzip',
 // "form.migration.compression.bzip" => 'bzip',
-
-// "form.client.title" => 'klienter',
-// "form.client.add_title" => 'legg til klient',
-// "form.client.edit_title" => 'endre klient',
-// "form.client.del_title" => 'slett klient',
-
-// miscellaneous strings
-"forward.tocsvfile" => 'eksporter data til en .csv fil',
-// Note to translators: the strings below are missing and must be translated and added
-// "forward.toxmlfile" => 'eksporter data til en .xml fil',
 );

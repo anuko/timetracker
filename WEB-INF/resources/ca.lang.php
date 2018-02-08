@@ -412,8 +412,8 @@ $i18n_key_words = array(
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
+'form.report.export' => 'Exportar',
 // TODO: translate the following.
-// 'form.report.export' => 'Export',
 // 'form.report.assign_to_invoice' => 'Assign to invoice',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
@@ -537,7 +537,4 @@ $i18n_key_words = array(
 "form.migration.export.title" => 'Exportar dades',
 "form.migration.export.success" => 'Exportació finalitzada amb èxit',
 "form.migration.export.text" => 'Vosté pot exportar totes les dades del grup dins d\\\'un archivo xml. Això pot ser útil si necessita migrar dades al seu propi servidor.',
-
-// miscellaneous strings
-"forward.tocsvfile" => 'Exportar dades a un arxiu .csv',
 );
