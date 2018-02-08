@@ -347,8 +347,8 @@ $i18n_key_words = array(
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
 // 'dropdown.status_inactive' => 'inactive',
-// 'dropdown.delete'=>'delete',
-// 'dropdown.do_not_delete'=>'do not delete',
+// 'dropdown.delete' => 'delete',
+// 'dropdown.do_not_delete' => 'do not delete',
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',
 
@@ -544,8 +544,6 @@ $i18n_key_words = array(
 "form.people.th.role" => 'ルール',
 "form.people.th.rate" => '給料',
 "form.people.manager" => '管理者',
-"form.people.comanager" => '共同管理者',
-
 "form.people.rate" => 'デフォルト時間当り給料',
 "form.people.comanager" => '共同管理者',
 );

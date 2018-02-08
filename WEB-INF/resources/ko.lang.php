@@ -351,8 +351,8 @@ $i18n_key_words = array(
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
 // 'dropdown.status_inactive' => 'inactive',
-// 'dropdown.delete'=>'delete',
-// 'dropdown.do_not_delete'=>'do not delete',
+// 'dropdown.delete' => 'delete',
+// 'dropdown.do_not_delete' => 'do not delete',
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',
 
@@ -546,8 +546,6 @@ $i18n_key_words = array(
 "form.people.th.role" => '직위',
 "form.people.th.rate" => '급여',
 "form.people.manager" => '관리자',
-"form.people.comanager" => '공동관리자',
-
 "form.people.rate" => '디폴트 시간당 급여',
 "form.people.comanager" => '공동관리자',
 );

@@ -299,8 +299,8 @@ $i18n_key_words = array(
 'dropdown.select_invoice' => '--- выберите счёт ---',
 'dropdown.status_active' => 'активный',
 'dropdown.status_inactive' => 'неактивный',
-'dropdown.delete'=>'удалить',
-'dropdown.do_not_delete'=>'не удалять',
+'dropdown.delete' => 'удалить',
+'dropdown.do_not_delete' => 'не удалять',
 'dropdown.paid' => 'оплачено',
 'dropdown.not_paid' => 'не оплачено',
 

@@ -48,8 +48,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'menu.create_team' => 'Create Team',
 'menu.profile' => 'Perfil',
+'menu.time' => 'Temps',
 // TODO: translate the following.
-// 'menu.time' => 'Time',
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Informes',
 // TODO: translate the following.
@@ -62,8 +62,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'menu.export' => 'Export',
 'menu.clients' => 'Clients',
-// TODO: translate the following.
-// 'menu.options' => 'Options',
+'menu.options' => 'Opcions',
 
 // Footer - strings on the bottom of most pages.
 // TODO: translate the following.
@@ -115,8 +114,7 @@ $i18n_key_words = array(
 'button.login' => 'Iniciar sessió',
 'button.now' => 'Ara',
 'button.save' => 'Guardar',
-// TODO: translate the following.
-// 'button.copy' => 'Copy',
+'button.copy' => 'Copiar',
 'button.cancel' => 'Cancel·lar',
 'button.submit' => 'Enviar',
 'button.add_user' => 'Agregar usuari',
@@ -166,8 +164,7 @@ $i18n_key_words = array(
 'label.users' => 'Usuaris',
 'label.client' => 'Client',
 'label.clients' => 'Clients',
-// TODO: translate the following.
-// 'label.option' => 'Option',
+'label.option' => 'Opció',
 'label.invoice' => 'Factura',
 'label.project' => 'Projecte',
 'label.projects' => 'Projectes',
@@ -259,9 +256,10 @@ $i18n_key_words = array(
 'title.reset_password' => 'Restablir paraula de pas',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
-// 'title.time' => 'Time',
-// 'title.edit_time_record' => 'Editing Time Record',
-// 'title.delete_time_record' => 'Deleting Time Record',
+'title.time' => 'Temps',
+'title.edit_time_record' => 'Modificant l\\\'historial de temps',
+'title.delete_time_record' => 'Eliminant l\\\'historial de temps',
+// TODO: translate the following.
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -286,10 +284,9 @@ $i18n_key_words = array(
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
 'title.users' => 'Usuaris',
-// TODO: translate the following.
-// 'title.add_user' => 'Adding User',
-// 'title.edit_user' => 'Editing User',
-// 'title.delete_user' => 'Deleting User',
+'title.add_user' => 'Agregant usuari',
+'title.edit_user' => 'Modificant usuari',
+'title.delete_user' => 'Eliminant usuari',
 'title.clients' => 'Clients',
 'title.add_client' => 'Agregar client',
 'title.edit_client' => 'Modificar client',
@@ -306,7 +303,7 @@ $i18n_key_words = array(
 // 'title.monthly_quotas' => 'Monthly Quotas',
 // 'title.export' => 'Exporting Team Data',
 // 'title.import' => 'Importing Team Data',
-// 'title.options' => 'Options',
+'title.options' => 'Opcions',
 'title.profile' => 'Perfil',
 // TODO: translate the following.
 // 'title.cf_custom_fields' => 'Custom Fields',
@@ -350,8 +347,8 @@ $i18n_key_words = array(
 'dropdown.status_active' => 'actiu',
 // TODO: translate the following.
 // 'dropdown.status_inactive' => 'inactive',
-// 'dropdown.delete'=>'delete',
-// 'dropdown.do_not_delete'=>'do not delete',
+// 'dropdown.delete' => 'delete',
+// 'dropdown.do_not_delete' => 'do not delete',
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',
 
@@ -370,8 +367,7 @@ $i18n_key_words = array(
 'form.change_password.tip' => 'Per restablir la paraula de pas, si us plau escrigui-la i faci clic en guardar.',
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
-// TODO: translate the following.
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.duration_format' => '(hh:mm o 0.0h)',
 'form.time.billable' => 'Facturable',
 // TODO: translate the following.
 // 'form.time.uncompleted' => 'Uncompleted',
@@ -379,8 +375,7 @@ $i18n_key_words = array(
 // 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
-// TODO: translate the following.
-// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
+'form.time_edit.uncompleted' => 'Aquest historial s\\\'ha guardat únicament amb l\\\'hora d\\\'inici. Aixó no és un error.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
 // TODO: translate the following.
@@ -446,11 +441,11 @@ $i18n_key_words = array(
 // 'form.users.active_users' => 'Active Users',
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
-// 'form.users.role' => 'Role',
-// 'form.users.manager' => 'Manager',
-// 'form.users.comanager' => 'Co-manager',
-// 'form.users.rate' => 'Rate',
-// 'form.users.default_rate' => 'Default hourly rate',
+'form.users.role' => 'Rol',
+'form.users.manager' => 'Manejador',
+'form.users.comanager' => 'Auxiliar del manejador',
+'form.users.rate' => 'Taxa',
+'form.users.default_rate' => 'Taxa per defecte per hora',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
@@ -510,31 +505,4 @@ $i18n_key_words = array(
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// my time form attributes
-"form.mytime.title" => 'El meu temps',
-"form.mytime.edit_title" => 'Modificant l\\\'historial de temps',
-"form.mytime.del_str" => 'Eliminant l\\\'historial de temps',
-"form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.total" => 'Hores totals: ',
-"form.mytime.del_yes" => 'L\\\'historial de temps s\\\'ha eliminat amb èxit',
-"form.mytime.no_finished_rec" => 'Aquest historial s\\\'ha guardat únicament amb l\\\'hora d\\\'inici. Aixó no és un error. Finalitzi sessió si ho necessita.',
-
-// people form attributes
-"form.people.ppl_str" => 'Persones',
-"form.people.createu_str" => 'Creant nou usuari',
-"form.people.edit_str" => 'Modificant usuari',
-"form.people.del_str" => 'Eliminant usuari',
-"form.people.th.email" => 'e-mail',
-"form.people.th.role" => 'Rol',
-"form.people.th.rate" => 'Taxa',
-"form.people.manager" => 'Manejador',
-"form.people.comanager" => 'Auxiliar del manejador',
-
-"form.people.rate" => 'Taxa per defecte en hores',
-"form.people.comanager" => 'Auxiliar del manejador',
 );

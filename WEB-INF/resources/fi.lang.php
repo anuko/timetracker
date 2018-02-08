@@ -307,8 +307,8 @@ $i18n_key_words = array(
 'dropdown.select_invoice' => '--- valitse lasku ---',
 'dropdown.status_active' => 'aktiivinen',
 'dropdown.status_inactive' => 'inaktiivinen',
-'dropdown.delete'=>'poista',
-'dropdown.do_not_delete'=>'älä poista',
+'dropdown.delete' => 'poista',
+'dropdown.do_not_delete' => 'älä poista',
 // TODO: translate the following.
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',

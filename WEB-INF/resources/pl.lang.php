@@ -310,8 +310,8 @@ $i18n_key_words = array(
 'dropdown.select_invoice' => '--- wybierz fakturę ---',
 'dropdown.status_active' => 'aktywny',
 'dropdown.status_inactive' => 'nieaktywny',
-'dropdown.delete'=>'usuń',
-'dropdown.do_not_delete'=>'nie usuwaj',
+'dropdown.delete' => 'usuń',
+'dropdown.do_not_delete' => 'nie usuwaj',
 // TODO: translate the following.
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',

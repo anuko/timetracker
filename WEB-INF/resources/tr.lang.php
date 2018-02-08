@@ -361,8 +361,8 @@ $i18n_key_words = array(
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
 // 'dropdown.status_inactive' => 'inactive',
-// 'dropdown.delete'=>'delete',
-// 'dropdown.do_not_delete'=>'do not delete',
+// 'dropdown.delete' => 'delete',
+// 'dropdown.do_not_delete' => 'do not delete',
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',
 
@@ -558,7 +558,5 @@ $i18n_key_words = array(
 "form.people.th.rate" => 'tarife',
 "form.people.manager" => 'yönetici',
 "form.people.comanager" => 'yardımcı yönetici',
-
 "form.people.rate" => 'varsayılan saat ücreti',
-"form.people.comanager" => 'yardımcı yönetici',
 );

@@ -354,8 +354,8 @@ $i18n_key_words = array(
 'dropdown.status_active' => 'activ',
 'dropdown.status_inactive' => 'inactiv',
 // TODO: translate the following.
-// 'dropdown.delete'=>'delete',
-// 'dropdown.do_not_delete'=>'do not delete',
+// 'dropdown.delete' => 'delete',
+// 'dropdown.do_not_delete' => 'do not delete',
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',
 
@@ -548,7 +548,5 @@ $i18n_key_words = array(
 "form.people.th.rate" => 'rata',
 "form.people.manager" => 'manager',
 "form.people.comanager" => 'comanager',
-
 "form.people.rate" => 'pret pe ora implicit',
-"form.people.comanager" => 'co-manager',
 );

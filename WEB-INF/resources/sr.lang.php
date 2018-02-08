@@ -308,8 +308,8 @@ $i18n_key_words = array(
 'dropdown.select_invoice' => '--- odaberi račun ---',
 'dropdown.status_active' => 'aktivan',
 'dropdown.status_inactive' => 'neaktivan',
-'dropdown.delete'=>'obriši',
-'dropdown.do_not_delete'=>'nemoj obrisati',
+'dropdown.delete' => 'obriši',
+'dropdown.do_not_delete' => 'nemoj obrisati',
 // TODO: translate the following.
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',

@@ -338,8 +338,8 @@ $i18n_key_words = array(
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
 // 'dropdown.status_inactive' => 'inactive',
-// 'dropdown.delete'=>'delete',
-// 'dropdown.do_not_delete'=>'do not delete',
+// 'dropdown.delete' => 'delete',
+// 'dropdown.do_not_delete' => 'do not delete',
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',
 
@@ -533,7 +533,5 @@ $i18n_key_words = array(
 "form.people.th.rate" => '费率',
 "form.people.manager" => '经理',
 "form.people.comanager" => '合作经理人',
-
 "form.people.rate" => '默认小时收费',
-"form.people.comanager" => '合作经理人',
 );

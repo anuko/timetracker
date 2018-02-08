@@ -297,8 +297,8 @@ $i18n_key_words = array(
 'dropdown.select_invoice' => '--- Rechnung auswählen ---',
 'dropdown.status_active' => 'aktiv',
 'dropdown.status_inactive' => 'inaktiv',
-'dropdown.delete'=>'löschen',
-'dropdown.do_not_delete'=>'nicht löschen',
+'dropdown.delete' => 'löschen',
+'dropdown.do_not_delete' => 'nicht löschen',
 'dropdown.paid' => 'bezahlt',
 'dropdown.not_paid' => 'nicht bezahlt',
 

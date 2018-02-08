@@ -353,8 +353,8 @@ $i18n_key_words = array(
 // 'dropdown.select_invoice' => '--- select invoice ---',
 // 'dropdown.status_active' => 'active',
 // 'dropdown.status_inactive' => 'inactive',
-// 'dropdown.delete'=>'delete',
-// 'dropdown.do_not_delete'=>'do not delete',
+// 'dropdown.delete' => 'delete',
+// 'dropdown.do_not_delete' => 'do not delete',
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',
 
@@ -548,7 +548,5 @@ $i18n_key_words = array(
 "form.people.th.rate" => 'sazba',
 "form.people.manager" => 'manažer',
 "form.people.comanager" => 'spolumanažer',
-
 "form.people.rate" => 'hodinová sazba',
-"form.people.comanager" => 'spolumanažer',
 );
