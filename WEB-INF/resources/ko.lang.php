@@ -423,6 +423,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.invoice.number' => 'Invoice number',
 // 'form.invoice.person' => 'Person',
+
+// Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
 // 'form.invoice.invoice_to_delete' => 'Invoice to delete',
 // 'form.invoice.invoice_entries' => 'Invoice entries',
 // 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
@@ -531,8 +533,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>송신된 메시지</b>',
 
 // invoice attributes
-"form.invoice.select_cust" => '클라이언트의 선택',
-"form.invoice.fillform" => '필드들을 채우십시오',
 "form.invoice.number" => '송장 번호',
 "form.invoice.th.username" => '개인',
 "form.invoice.th.time" => '시간',

@@ -377,6 +377,8 @@ $i18n_key_words = array(
 // (you can get to this form after generating a report).
 'form.invoice.number' => 'Broj računa',
 'form.invoice.person' => 'Osoba',
+
+// Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
 'form.invoice.invoice_to_delete' => 'Račun za brisanje',
 'form.invoice.invoice_entries' => 'Unos u račun',
 // TODO: translate the following.

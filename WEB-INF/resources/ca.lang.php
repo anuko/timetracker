@@ -418,9 +418,11 @@ $i18n_key_words = array(
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
+'form.invoice.number' => 'Número de factura',
+'form.invoice.person' => 'Persona',
+
+// Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
 // TODO: translate the following.
-// 'form.invoice.number' => 'Invoice number',
-// 'form.invoice.person' => 'Person',
 // 'form.invoice.invoice_to_delete' => 'Invoice to delete',
 // 'form.invoice.invoice_entries' => 'Invoice entries',
 // 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
@@ -516,10 +518,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>Missatge enviat</b>',
 
 // invoice attributes
-"form.invoice.select_cust" => 'Seleccioni el client',
-"form.invoice.fillform" => 'Empleni els camps',
-"form.invoice.number" => 'Número de factura',
-"form.invoice.th.username" => 'Persona',
 "form.invoice.th.time" => 'Hores',
 "form.invoice.th.rate" => 'Taxa',
 "form.invoice.th.summ" => 'Quantitat',

@@ -417,6 +417,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.invoice.number' => 'Invoice number',
 // 'form.invoice.person' => 'Person',
+
+// Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
 // 'form.invoice.invoice_to_delete' => 'Invoice to delete',
 // 'form.invoice.invoice_entries' => 'Invoice entries',
 // 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
@@ -525,9 +527,6 @@ $i18n_key_words = array(
 // "form.mail.sending_str" => '<b>the message has been sent</b>',
 
 // invoice attributes
-// Note to translators: the strings below are missing and must be added and translated
-// "form.invoice.select_cust" => 'velg klient',
-// "form.invoice.fillform" => 'fyll inn i feltene',
 "form.invoice.number" => 'fakturanummer',
 "form.invoice.th.username" => 'person',
 "form.invoice.th.time" => 'timer',

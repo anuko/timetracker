@@ -364,7 +364,7 @@ $i18n_key_words = array(
 'form.invoice.number' => 'Rechnungsnummer',
 'form.invoice.person' => 'Person',
 
-// Invoice delete form. See example at https://timetracker.anuko.com/invoice_delete.php
+// Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
 'form.invoice.invoice_to_delete' => 'Zu löschende Rechnung',
 'form.invoice.invoice_entries' => 'Rechnungseintrag',
 'form.invoice.confirm_deleting_entries' => 'Bitte die Löschung von Rechnungseinträgen bestätigen.',
