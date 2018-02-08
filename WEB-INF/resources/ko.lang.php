@@ -531,9 +531,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>송신된 메시지</b>',
 
 // invoice attributes
-"form.invoice.title" => '송장',
-"form.invoice.caption" => '송장',
-"form.invoice.above" => '송장에 대한 보충정보',
 "form.invoice.select_cust" => '클라이언트의 선택',
 "form.invoice.fillform" => '필드들을 채우십시오',
 "form.invoice.number" => '송장 번호',

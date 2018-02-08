@@ -530,9 +530,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>az üzenet elküldve</b>',
 
 // invoice attributes
-"form.invoice.title" => 'számla',
-"form.invoice.caption" => 'Számla',
-"form.invoice.above" => 'a számlához tartozó adatok',
 "form.invoice.select_cust" => 'válassz ügyfelet',
 "form.invoice.fillform" => 'töltsd ki a mezőket',
 "form.invoice.number" => 'számla azonosító száma',

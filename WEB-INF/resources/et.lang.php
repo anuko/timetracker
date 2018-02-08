@@ -536,9 +536,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>teade saadetud</b>',
 
 // invoice attributes
-"form.invoice.title" => 'arve',
-"form.invoice.caption" => 'arve',
-"form.invoice.above" => 'lisainformatsioon arvele',
 "form.invoice.select_cust" => 'vali klient',
 "form.invoice.fillform" => 'täida väljad',
 "form.invoice.number" => 'arve number',

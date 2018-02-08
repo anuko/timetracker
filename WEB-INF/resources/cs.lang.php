@@ -531,9 +531,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>zpráva odeslána</b>',
 
 // invoice attributes
-"form.invoice.title" => 'faktura',
-"form.invoice.caption" => 'faktura',
-"form.invoice.above" => 'fakturační informace',
 "form.invoice.select_cust" => 'výběr firmy',
 "form.invoice.fillform" => 'vyplňte pole',
 "form.invoice.number" => 'faktura číslo',

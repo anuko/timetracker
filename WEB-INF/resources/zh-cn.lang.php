@@ -516,9 +516,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>消息已发送</b>',
 
 // invoice attributes
-"form.invoice.title" => '发票',
-"form.invoice.caption" => '发票',
-"form.invoice.above" => '发票附加信息',
 "form.invoice.select_cust" => '选择客户',
 "form.invoice.fillform" => '填写该栏目',
 "form.invoice.number" => '发票号码',

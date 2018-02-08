@@ -525,9 +525,6 @@ $i18n_key_words = array(
 // "form.mail.sending_str" => '<b>the message has been sent</b>',
 
 // invoice attributes
-"form.invoice.title" => 'faktura',
-"form.invoice.caption" => 'faktura',
-"form.invoice.above" => 'tilleggsinformasjon for faktura',
 // Note to translators: the strings below are missing and must be added and translated
 // "form.invoice.select_cust" => 'velg klient',
 // "form.invoice.fillform" => 'fyll inn i feltene',

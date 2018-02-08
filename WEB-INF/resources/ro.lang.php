@@ -532,9 +532,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>mesaj trimis</b>',
 
 // invoice attributes
-"form.invoice.title" => 'factura',
-"form.invoice.caption" => 'factura',
-"form.invoice.above" => 'informatii aditionale pentru factura',
 "form.invoice.select_cust" => 'alege client',
 "form.invoice.fillform" => 'comleteaza campurile',
 "form.invoice.number" => 'numar factura',

@@ -543,9 +543,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>ileti yollandı</b>',
 
 // invoice attributes
-"form.invoice.title" => 'fatura',
-"form.invoice.caption" => 'fatura',
-"form.invoice.above" => 'fatura için ek bilgi',
 "form.invoice.select_cust" => 'müşteri seç',
 "form.invoice.fillform" => 'alanları doldur',
 "form.invoice.number" => 'fatura numarası',

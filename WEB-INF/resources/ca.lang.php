@@ -516,7 +516,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>Missatge enviat</b>',
 
 // invoice attributes
-"form.invoice.above" => 'Informació addicional per factura',
 "form.invoice.select_cust" => 'Seleccioni el client',
 "form.invoice.fillform" => 'Empleni els camps',
 "form.invoice.number" => 'Número de factura',

@@ -530,9 +530,6 @@ $i18n_key_words = array(
 "form.mail.sending_str" => '<b>送信したメッセージ</b>',
 
 // invoice attributes
-"form.invoice.title" => '送り状',
-"form.invoice.caption" => '送り状',
-"form.invoice.above" => '送り状の追加の情報',
 "form.invoice.select_cust" => 'クライアントの選択',
 "form.invoice.fillform" => 'フィールドの作成',
 "form.invoice.number" => '送り状の番号',
