@@ -50,8 +50,8 @@ $i18n_key_words = array(
 // 'menu.create_team' => 'Create Team',
 'menu.profile' => 'Profilo',
 'menu.time' => 'Tempo',
+'menu.expenses' => 'Spese',
 // TODO: translate the following.
-// 'menu.expenses' => 'Expenses',
 // 'menu.reports' => 'Reports',
 'menu.charts' => 'Grafici',
 'menu.projects' => 'Progetti',
@@ -259,7 +259,8 @@ $i18n_key_words = array(
 // 'title.time' => 'Time',
 // 'title.edit_time_record' => 'Editing Time Record',
 // 'title.delete_time_record' => 'Deleting Time Record',
-// 'title.expenses' => 'Expenses',
+'title.expenses' => 'Spese',
+// TODO: translate the following.
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
 // 'title.predefined_expenses' => 'Predefined Expenses',
