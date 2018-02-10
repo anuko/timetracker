@@ -48,8 +48,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'menu.create_team' => 'Create Team',
 'menu.profile' => '프로필',
+'menu.time' => '시간',
 // TODO: translate the following.
-// 'menu.time' => 'Time',
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => '보고서',
 // TODO: translate the following.
@@ -98,8 +98,7 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 'error.no_login' => '본 로그인과 연계된 사용자가 없습니다.',
-// TODO: translate the following.
-// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.no_teams' => '당신의 데이터베이스는 비어있습니다. 관리자로 로그인하여 새로운 팀을 생성하십시오.',
 'error.upload' => '파일 업로드 오류.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
@@ -197,7 +196,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
-// 'label.id' => 'ID',
+'label.id' => '식별자',
 'label.language' => '언어',
 // TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
@@ -255,13 +254,14 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
+'title.delete_team' => '팀 삭제',
 'title.reset_password' => '암호 재설정',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
-// 'title.time' => 'Time',
-// 'title.edit_time_record' => 'Editing Time Record',
-// 'title.delete_time_record' => 'Deleting Time Record',
+'title.time' => '시간',
+'title.edit_time_record' => '시간기록을 편집하기',
+'title.delete_time_record' => '시간기록을 삭제하기',
+// TODO: translate the following.
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -372,8 +372,7 @@ $i18n_key_words = array(
 // 'form.change_password.tip' => 'Type new password and click on Save.',
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
-// TODO: translate the following.
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.duration_format' => '(hh:mm 혹은 0.0h)', // TODO: is there a better term for hh:mm as a hint to user what to enter?
 'form.time.billable' => '청구가능',
 'form.time.uncompleted' => '완성되지 않은',
 // TODO: translate the following.
@@ -381,8 +380,7 @@ $i18n_key_words = array(
 // 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
-// TODO: translate the following.
-// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
+'form.time_edit.uncompleted' => '이 기록은 시작 시간으로만 저장되었습니다. 이것은 오류는 아닙니다.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
 // TODO: translate the following.
@@ -447,10 +445,10 @@ $i18n_key_words = array(
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 'form.users.role' => '직위', // TODO: is this correct? The term "role" describes user function, as in "team manager role".
-// 'form.users.manager' => 'Manager',
-// 'form.users.comanager' => 'Co-manager',
-// 'form.users.rate' => 'Rate',
-// 'form.users.default_rate' => 'Default hourly rate',
+'form.users.manager' => '관리자',
+'form.users.comanager' => '공동관리자',
+'form.users.rate' => '급여',
+'form.users.default_rate' => '디폴트 시간당 급여',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
@@ -509,28 +507,4 @@ $i18n_key_words = array(
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// administrator form
-"form.admin.profile.title" => '팀',
-"form.admin.profile.noprofiles" => '당신의 데이터베이스는 비어있습니다. 관리자로 로그인하여 새로운 팀을 생성하십시오.',
-"form.admin.profile.comment" => '팀 삭제',
-"form.admin.profile.th.id" => '식별자',
-"form.admin.profile.th.active" => '활동내용',
-
-// my time form attributes
-"form.mytime.title" => '나의 시간',
-"form.mytime.edit_title" => '시간기록을 편집하기',
-"form.mytime.del_str" => '시간기록을 삭제하기',
-"form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.no_finished_rec" => '이 기록은 시작 시간으로만 저장되었습니다. 이것은 오류는 아닙니다. 필요하면 로그아웃 하십시오.',
-
-// people form attributes
-"form.people.th.rate" => '급여',
-"form.people.manager" => '관리자',
-"form.people.rate" => '디폴트 시간당 급여',
-"form.people.comanager" => '공동관리자',
 );
