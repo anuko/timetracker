@@ -96,8 +96,7 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 'error.no_login' => '沒有該登錄資訊的使用者。',
-// TODO: translate the following.
-// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.no_teams' => '您的資料庫沒有任何記錄。請以管理員身份登錄並創建一個新團隊。',
 'error.upload' => '上傳文件出錯。',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
@@ -163,8 +162,7 @@ $i18n_key_words = array(
 'label.users' => '用戶',
 'label.client' => '客戶',
 'label.clients' => '客戶',
-// TODO: translate the following.
-// 'label.option' => 'Option',
+'label.option' => '選項',
 'label.invoice' => '發票',
 'label.project' => '項目',
 'label.projects' => '項目',
@@ -196,7 +194,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
-// 'label.id' => 'ID',
+'label.id' => 'ID號',
 'label.language' => '語言',
 // TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
@@ -252,13 +250,14 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
+'title.delete_team' => '刪除團隊',
 'title.reset_password' => '重設密碼',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
 // 'title.time' => 'Time',
-// 'title.edit_time_record' => 'Editing Time Record',
-// 'title.delete_time_record' => 'Deleting Time Record',
+'title.edit_time_record' => '編輯時間記錄',
+'title.delete_time_record' => '刪除時間記錄',
+// TODO: translate the following.
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -367,17 +366,15 @@ $i18n_key_words = array(
 // 'form.change_password.tip' => 'Type new password and click on Save.',
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
-// TODO: translate the following.
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.duration_format' => '(時:分 或 0.0h)',
 'form.time.billable' => '計費時間',
+'form.time.uncompleted' => '未完成',
 // TODO: translate the following.
-// 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
-// TODO: translate the following.
-// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
+'form.time_edit.uncompleted' => '該記錄只保存了開始時間。這不是錯誤。',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
 // TODO: translate the following.
@@ -442,12 +439,10 @@ $i18n_key_words = array(
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 'form.users.role' => '角色',
-// TODO: translate the following.
-// 'form.users.manager' => 'Manager',
-// 'form.users.comanager' => 'Co-manager',
+'form.users.manager' => '經理',
+'form.users.comanager' => '合作經理人',
 'form.users.rate' => '費率',
-// TODO: translate the following.
-// 'form.users.default_rate' => 'Default hourly rate',
+'form.users.default_rate' => '默認小時收費',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
@@ -507,36 +502,4 @@ $i18n_key_words = array(
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-"form.admin.profile.title" => '團隊',
-"form.admin.profile.noprofiles" => '您的資料庫沒有任何記錄。請以管理員身份登錄並創建一個新團隊。',
-"form.admin.profile.comment" => '刪除團隊',
-"form.admin.profile.th.id" => 'ID號',
-"form.admin.profile.th.active" => '啟動',
-
-// my time form attributes
-"form.mytime.title" => '我的時間記錄',
-"form.mytime.edit_title" => '編輯時間記錄',
-"form.mytime.del_str" => '刪除時間記錄',
-"form.mytime.time_form" => ' (時:分)',
-"form.mytime.total" => '總小時數： ',
-"form.mytime.del_yes" => '成功刪除時間記錄',
-"form.mytime.no_finished_rec" => '該記錄只保存了開始時間。這不是錯誤。如果需要，請登出。',
-"form.mytime.warn_tozero_rec" => '由於這段時間是鎖定的，該時間記錄必須刪除',
-"form.mytime.uncompleted" => '未完成',
-
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => '創建新管理帳號',
-"form.profile.edit_title" => '編輯簡介',
-"form.profile.showchart" => '顯示餅狀圖',
-
-// people form attributes
-"form.people.manager" => '經理',
-"form.people.comanager" => '合作經理人',
-"form.people.rate" => '默認小時收費',
 );

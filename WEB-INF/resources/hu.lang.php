@@ -529,8 +529,6 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => 'szerkesztés',
 "form.mytime.del_str" => 'törlés',
 "form.mytime.time_form" => ' (óó:pp)',
-"form.mytime.total" => 'összesített óraszám: ',
-"form.mytime.del_yes" => 'a bejegyzés törölve',
 "form.mytime.no_finished_rec" => 'csak az munka kezdete lett megjelölve, ha később visszalépsz a rendszerbe beállíthatod a vég-időpontot...',
 
 // profile form attributes

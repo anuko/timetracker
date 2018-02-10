@@ -531,8 +531,6 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => 'editarea inregistrarii timpului',
 "form.mytime.del_str" => 'stergerea inregistrarii timpului',
 "form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.total" => 'ore total: ',
-"form.mytime.del_yes" => 'inregistrarea timului a fost stearsa cu succes',
 "form.mytime.no_finished_rec" => 'aceasta inregistrare a fost salvata numei cu timpul de inceput. nu este o eroare. poti parasi aplicatia daca este nevoie.',
 
 // profile form attributes

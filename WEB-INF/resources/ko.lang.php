@@ -375,8 +375,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.time.duration_format' => '(hh:mm or 0.0h)',
 'form.time.billable' => '청구가능',
+'form.time.uncompleted' => '완성되지 않은',
 // TODO: translate the following.
-// 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
 
@@ -526,11 +526,7 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => '시간기록을 편집하기',
 "form.mytime.del_str" => '시간기록을 삭제하기',
 "form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.total" => '전체 시간: ',
-"form.mytime.del_yes" => '성과적으로 삭제된 시간기록',
 "form.mytime.no_finished_rec" => '이 기록은 시작 시간으로만 저장되었습니다. 이것은 오류는 아닙니다. 필요하면 로그아웃 하십시오.',
-"form.mytime.warn_tozero_rec" => '이 시간기간이 로크되었으므로 이 시간기록은 삭제되어야 합니다',
-"form.mytime.uncompleted" => '완성되지 않은',
 
 // profile form attributes
 // Note to translators: we need a more accurate translation of form.profile.create_title

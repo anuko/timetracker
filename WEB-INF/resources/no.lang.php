@@ -368,8 +368,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.time.duration_format' => '(hh:mm or 0.0h)',
 'form.time.billable' => 'Fakturerbar',
+'form.time.uncompleted' => 'Uferdig',
 // TODO: translate the following.
-// 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
 
@@ -520,12 +520,8 @@ $i18n_key_words = array(
 // "form.mytime.edit_title" => 'endre tidsoppføringen',
 "form.mytime.del_str" => 'slett tids oppføringen',
 "form.mytime.time_form" => ' (tt:mm)',
-"form.mytime.total" => 'totalt antall timer: ',
 // Note to translators: the strings below must be translated
-// "form.mytime.del_yes" => 'tidsoppføringen er slettet', 
 // "form.mytime.no_finished_rec" => 'Denne oppføringen ble lagret kun med starttid. Det er ikke en feil. Logg ut om nødvendig.',
-// "form.mytime.warn_tozero_rec" => 'Denne oppføringen må slettes fordi tidsperioden er låst',
-// "form.mytime.uncompleted" => 'uferdig',
 
 // profile form attributes
 // Note to translators: we need a more accurate translation of form.profile.create_title

@@ -371,8 +371,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.time.duration_format' => '(hh:mm or 0.0h)',
 'form.time.billable' => '請求できる',
+'form.time.uncompleted' => '未完成の',
 // TODO: translate the following.
-// 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
 
@@ -523,11 +523,7 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => '時間レコードの編集',
 "form.mytime.del_str" => '時間レコードの削除',
 "form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.total" => '合計時間： ',
-"form.mytime.del_yes" => '時間レコードが成功的に削除されました',
 "form.mytime.no_finished_rec" => 'このレコードは開始時間だけで保存されました。これはエラーではありません。もし必要があればログアウトしてください。',
-"form.mytime.warn_tozero_rec" => 'この時間レコードの期間が満了されましたから、この時間レコードは削除されることが必要です',
-"form.mytime.uncompleted" => '未完成の',
 
 // profile form attributes
 // Note to translators: we need a more accurate translation of form.profile.create_title

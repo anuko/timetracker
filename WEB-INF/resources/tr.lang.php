@@ -539,10 +539,7 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => 'zaman kaydını düzenliyor',
 "form.mytime.del_str" => 'zaman kaydını siliyor',
 "form.mytime.time_form" => ' (ss:dd)',
-"form.mytime.total" => 'toplam saat: ',
-"form.mytime.del_yes" => 'zaman kaydı başarıyla silindi',
 "form.mytime.no_finished_rec" => 'bu kayıt sadece başlangıç zamanıyla silindi. bu hata değildir. gerekirse çıkış yapın.',
-"form.mytime.warn_tozero_rec" => 'bu zaman kaydı silinmeli çünkü zaman aralığı kilitli',
 
 // profile form attributes
 // Note to translators: we need a more accurate translation of form.profile.create_title

@@ -360,8 +360,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.time.duration_format' => '(hh:mm or 0.0h)',
 'form.time.billable' => '计费时间',
+'form.time.uncompleted' => '未完成',
 // TODO: translate the following.
-// 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
 
@@ -513,11 +513,7 @@ $i18n_key_words = array(
 "form.mytime.edit_title" => '编辑时间记录',
 "form.mytime.del_str" => '删除时间记录',
 "form.mytime.time_form" => ' (时:分)',
-"form.mytime.total" => '总小时数： ',
-"form.mytime.del_yes" => '成功删除时间记录',
 "form.mytime.no_finished_rec" => '该记录只保存了开始时间。这不是错误。如果需要，请注销。',
-"form.mytime.warn_tozero_rec" => '由于这段时间是锁定的，该时间记录必须删除',
-"form.mytime.uncompleted" => '未完成',
 
 // profile form attributes
 // Note to translators: we need a more accurate translation of form.profile.create_title

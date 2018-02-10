@@ -502,8 +502,6 @@ $i18n_key_words = array(
 
 // my time form attributes
 "form.mytime.title" => 'adicionar período',
-"form.mytime.total" => 'horas totais: ',
-"form.mytime.del_yes" => 'o período registrado foi apagado com sucesso',
 
 // profile form attributes
 // Note to translators: we need a more accurate translation of form.profile.create_title

@@ -531,12 +531,7 @@ $i18n_key_words = array(
 "form.mytime.title" => 'minu aeg',
 "form.mytime.edit_title" => 'ajakande muutmine',
 "form.mytime.del_str" => 'ajakande kustutamine',
-"form.mytime.total" => 'tunde kokku: ',
-"form.mytime.del_yes" => 'ajakanne kustutatud',
 "form.mytime.no_finished_rec" => 'kanne salvestati ainult alguse ajaga. see ei ole viga. logi välja kui vaja peaks olema.',
-"form.mytime.warn_tozero_rec" => 'see ajakanne tuleb kustutada kuna see ajaperiood on lukustatud',
-// Note to translators: the string below must be translated and added
-// "form.mytime.uncompleted" => 'uncompleted',
 
 // profile form attributes
 // Note to translators: we need a more accurate translation of form.profile.create_title
