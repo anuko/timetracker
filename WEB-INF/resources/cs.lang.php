@@ -101,7 +101,7 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 // 'error.no_login' => 'No user with this login.',
-// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.no_teams' => 'Vaše databáze je prázdná. Přihlašte se jako admin a vytvořte nový tým.',
 'error.upload' => 'Chyba přenosu souboru.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
@@ -201,7 +201,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
-// 'label.id' => 'ID',
+'label.id' => 'ID',
 'label.language' => 'Jazyk',
 // TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
@@ -224,7 +224,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.on_behalf' => 'on behalf of',
 'label.role_manager' => '(manažer)',
-'label.role_comanager' => '(co-manažer)',
+'label.role_comanager' => '(spolumanažer)',
 'label.role_admin' => '(administrator)',
 // TODO: translate the following.
 // 'label.page' => 'Page',
@@ -258,11 +258,11 @@ $i18n_key_words = array(
 // Compare with English file to see how it is done there and do Czech titles similarly.
 // Specifically: Vytváření vs Pridat, etc.
 'title.login' => 'Přihlásit',
+'title.teams' => 'Týmy',
 // TODO: translate the following.
-// 'title.teams' => 'Teams',
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
+'title.delete_team' => 'Smazat tým',
 'title.reset_password' => 'Resetovat heslo',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
@@ -387,8 +387,7 @@ $i18n_key_words = array(
 // 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
-// TODO: translate the following.
-// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
+'form.time_edit.uncompleted' => 'Záznam byl uložen pouze s časem zahájení. Není to chyba.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
 // TODO: translate the following.
@@ -454,10 +453,11 @@ $i18n_key_words = array(
 // 'form.users.active_users' => 'Active Users',
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
-// 'form.users.role' => 'Role',
-// 'form.users.manager' => 'Manager',
-// 'form.users.comanager' => 'Co-manager',
-// 'form.users.rate' => 'Rate',
+'form.users.role' => 'Role',
+'form.users.manager' => 'Manažer',
+'form.users.comanager' => 'Spolumanažer',
+'form.users.rate' => 'Sazba',
+// TODO: translate the following.
 // 'form.users.default_rate' => 'Default hourly rate',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
@@ -520,34 +520,4 @@ $i18n_key_words = array(
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-"form.admin.profile.title" => 'týmy',
-"form.admin.profile.noprofiles" => 'vaše databáze je prázdná. přihlašte se jako admin a vytvořte nový tým.',
-"form.admin.profile.comment" => 'smazat tým',
-"form.admin.profile.th.id" => 'id',
-"form.admin.profile.th.active" => 'aktovní',
-
-// my time form attributes
-"form.mytime.total" => 'součet hodin: ',
-"form.mytime.del_yes" => 'časový záznam úspěšně odstraněn',
-"form.mytime.no_finished_rec" => 'záznam byl uložen pouze s časem zahájení. není to chyba. můžete se odhlásit, potřebujete-li.',
-"form.mytime.warn_tozero_rec" => 'tento záznam musí být smazán, neboť období je uzamčeno',
-
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => 'vytvořit nový manažerský účet',
-"form.profile.edit_title" => 'upravit profil',
-
-"form.profile.showchart" => 'zobrazuj grafy',
-
-// people form attributes
-"form.people.th.role" => 'role',
-"form.people.th.rate" => 'sazba',
-"form.people.manager" => 'manažer',
-"form.people.comanager" => 'spolumanažer',
-"form.people.rate" => 'hodinová sazba',
 );
