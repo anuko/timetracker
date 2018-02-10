@@ -253,6 +253,10 @@ $i18n_key_words = array(
 // 'label.week_list' => 'Week list',
 
 // Form titles.
+// TODO: Improve titles for consistency, so that each title explains correctly what each
+// page is about and is "consistent" from page to page, meaning that correct grammar is used everywhere.
+// Compare with English file to see how it is done there and do Czech titles similarly.
+// Specifically: Vytváření vs Pridat, etc.
 'title.login' => 'Přihlásit',
 // TODO: translate the following.
 // 'title.teams' => 'Teams',
@@ -291,10 +295,11 @@ $i18n_key_words = array(
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
 'title.users' => 'Uživatelů',
+'title.add_user' => 'Vytváření uživatele', // TODO: Need to be consistent with all titles.
 // TODO: translate the following.
-// 'title.add_user' => 'Adding User',
 // 'title.edit_user' => 'Editing User',
-// 'title.delete_user' => 'Deleting User',
+'title.delete_user' => 'Smazat uživatele',
+// TODO: translate the following.
 'title.clients' => 'Zákazníci',
 'title.add_client' => 'Přidat zákazníka',
 'title.edit_client' => 'Upravit zákazníka',
@@ -540,10 +545,6 @@ $i18n_key_words = array(
 "form.profile.showchart" => 'zobrazuj grafy',
 
 // people form attributes
-"form.people.ppl_str" => 'pracovnící',
-"form.people.createu_str" => 'vytváření nového uživatele',
-"form.people.edit_str" => 'nastavení uživatele',
-"form.people.del_str" => 'smazat uživatele',
 "form.people.th.role" => 'role',
 "form.people.th.rate" => 'sazba',
 "form.people.manager" => 'manažer',
