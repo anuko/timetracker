@@ -254,8 +254,8 @@ $i18n_key_words = array(
 // page is about and is "consistent" from page to page, meaning that correct grammar is used everywhere.
 // Compare with English file to see how it is done there and do Romanian titles similarly.
 'title.login' => 'Autentificare',
+'title.teams' => 'Echipe',
 // TODO: translate the following.
-// 'title.teams' => 'Teams',
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',

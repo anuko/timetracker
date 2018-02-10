@@ -251,8 +251,8 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => '로그인',
+'title.teams' => '팀',
 // TODO: translate the following.
-// 'title.teams' => 'Teams',
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',

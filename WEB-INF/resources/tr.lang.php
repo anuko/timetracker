@@ -262,8 +262,8 @@ $i18n_key_words = array(
 // Compare with English file to see how it is done there and do Romanian titles similarly.
 // Specifically: compare project and client titles and see how they differ.
 'title.login' => 'Giriş',
+'title.teams' => 'Ekipler',
 // TODO: translate the following.
-// 'title.teams' => 'Teams',
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
@@ -298,10 +298,9 @@ $i18n_key_words = array(
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
 'title.users' => 'Kullanıcılar',
-// TODO: translate the following.
-// 'title.add_user' => 'Adding User',
-// 'title.edit_user' => 'Editing User',
-// 'title.delete_user' => 'Deleting User',
+'title.add_user' => 'Kullanıcı yarat', // TODO: we need consistency with all titles. Why not ekleniyor?
+'title.edit_user' => 'Kullanıcı düzenleniyor',
+'title.delete_user' => 'Kullanıcı siliniyor',
 'title.clients' => 'Müşteriler',
 'title.add_client' => 'Müşteri ekle',
 'title.edit_client' => 'Müşteriyi düzenle',
@@ -550,10 +549,6 @@ $i18n_key_words = array(
 "form.profile.edit_title" => 'profili düzenliyor',
 
 // people form attributes
-"form.people.ppl_str" => 'insanlar',
-"form.people.createu_str" => 'yeni kullanıcı yarat',
-"form.people.edit_str" => 'kullanıcı düzenleniyor',
-"form.people.del_str" => 'kullanıcı siliniyor',
 "form.people.th.role" => 'rol',
 "form.people.th.rate" => 'tarife',
 "form.people.manager" => 'yönetici',
