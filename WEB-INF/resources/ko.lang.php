@@ -446,7 +446,7 @@ $i18n_key_words = array(
 // 'form.users.active_users' => 'Active Users',
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
-// 'form.users.role' => 'Role',
+'form.users.role' => '직위', // TODO: is this correct? The term "role" describes user function, as in "team manager role".
 // 'form.users.manager' => 'Manager',
 // 'form.users.comanager' => 'Co-manager',
 // 'form.users.rate' => 'Rate',
@@ -539,7 +539,6 @@ $i18n_key_words = array(
 "form.profile.showchart" => '원 그래프를 보기',
 
 // people form attributes
-"form.people.th.role" => '직위',
 "form.people.th.rate" => '급여',
 "form.people.manager" => '관리자',
 "form.people.rate" => '디폴트 시간당 급여',

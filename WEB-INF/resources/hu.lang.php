@@ -444,7 +444,8 @@ $i18n_key_words = array(
 // 'form.users.active_users' => 'Active Users',
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
-// 'form.users.role' => 'Role',
+'form.users.role' => 'Szerepkör',
+// TODO: translate the following.
 // 'form.users.manager' => 'Manager',
 // 'form.users.comanager' => 'Co-manager',
 // 'form.users.rate' => 'Rate',
@@ -538,7 +539,6 @@ $i18n_key_words = array(
 "form.profile.edit_title" => 'profil szerkesztése',
 
 // people form attributes
-"form.people.th.role" => 'szerepkör',
 "form.people.th.rate" => 'tarifa',
 "form.people.manager" => 'vezető',
 "form.people.rate" => 'általános óradíj',

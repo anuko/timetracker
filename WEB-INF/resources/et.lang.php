@@ -449,7 +449,8 @@ $i18n_key_words = array(
 // 'form.users.active_users' => 'Active Users',
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
-// 'form.users.role' => 'Role',
+'form.users.role' => 'Roll',
+// TODO: translate the following.
 // 'form.users.manager' => 'Manager',
 // 'form.users.comanager' => 'Co-manager',
 // 'form.users.rate' => 'Rate',
@@ -543,7 +544,6 @@ $i18n_key_words = array(
 "form.profile.edit_title" => 'profiili muutmine',
 
 // people form attributes
-"form.people.th.role" => 'roll',
 "form.people.th.rate" => 'hind',
 "form.people.manager" => 'haldur',
 "form.people.comanager" => 'kaashaldur',

@@ -439,7 +439,8 @@ $i18n_key_words = array(
 // 'form.users.active_users' => 'Active Users',
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
-// 'form.users.role' => 'Role',
+'form.users.role' => 'Rolle',
+// TODO: translate the following.
 // 'form.users.manager' => 'Manager',
 // 'form.users.comanager' => 'Co-manager',
 // 'form.users.rate' => 'Rate',
@@ -535,8 +536,5 @@ $i18n_key_words = array(
 // "form.profile.showchart" => 'vis kakediagram',
 
 // people form attributes
-"form.people.th.role" => 'rolle',
-// Note to translators: the 2 strings below are missing and must be added and translated
-// "form.people.th.rate" => 'timesats',
 "form.people.rate" => 'timesats',
 );

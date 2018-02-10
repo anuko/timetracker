@@ -511,6 +511,5 @@ $i18n_key_words = array(
 "form.profile.edit_title" => 'editando perfil',
 
 // people form attributes
-"form.people.th.role" => 'regra',
 "form.people.manager" => 'gerente',
 );

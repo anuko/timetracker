@@ -448,7 +448,8 @@ $i18n_key_words = array(
 // 'form.users.active_users' => 'Active Users',
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
-// 'form.users.role' => 'Role',
+'form.users.role' => 'Functie', // TODO: is "Rol" a better term here?
+// TODO: translate the following.
 // 'form.users.manager' => 'Manager',
 // 'form.users.comanager' => 'Co-manager',
 // 'form.users.rate' => 'Rate',
@@ -540,7 +541,6 @@ $i18n_key_words = array(
 "form.profile.edit_title" => 'editeaza profilul',
 
 // people form attributes
-"form.people.th.role" => 'functie',
 "form.people.th.rate" => 'rata',
 "form.people.manager" => 'manager',
 "form.people.comanager" => 'comanager',

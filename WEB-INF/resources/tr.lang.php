@@ -456,11 +456,12 @@ $i18n_key_words = array(
 // 'form.users.active_users' => 'Active Users',
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
-// 'form.users.role' => 'Role',
+'form.users.role' => 'Rol',
+// TODO: translate the following.
 // 'form.users.manager' => 'Manager',
 // 'form.users.comanager' => 'Co-manager',
-// 'form.users.rate' => 'Rate',
-// 'form.users.default_rate' => 'Default hourly rate',
+'form.users.rate' => 'Tarife', // TODO: is this correct?
+'form.users.default_rate' => 'Varsayılan saat ücreti',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
@@ -549,9 +550,6 @@ $i18n_key_words = array(
 "form.profile.edit_title" => 'profili düzenliyor',
 
 // people form attributes
-"form.people.th.role" => 'rol',
-"form.people.th.rate" => 'tarife',
 "form.people.manager" => 'yönetici',
 "form.people.comanager" => 'yardımcı yönetici',
-"form.people.rate" => 'varsayılan saat ücreti',
 );

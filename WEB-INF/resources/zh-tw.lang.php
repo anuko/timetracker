@@ -441,10 +441,12 @@ $i18n_key_words = array(
 // 'form.users.active_users' => 'Active Users',
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
-// 'form.users.role' => 'Role',
+'form.users.role' => '角色',
+// TODO: translate the following.
 // 'form.users.manager' => 'Manager',
 // 'form.users.comanager' => 'Co-manager',
-// 'form.users.rate' => 'Rate',
+'form.users.rate' => '費率',
+// TODO: translate the following.
 // 'form.users.default_rate' => 'Default hourly rate',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
@@ -534,8 +536,6 @@ $i18n_key_words = array(
 "form.profile.showchart" => '顯示餅狀圖',
 
 // people form attributes
-"form.people.th.role" => '角色',
-"form.people.th.rate" => '費率',
 "form.people.manager" => '經理',
 "form.people.comanager" => '合作經理人',
 "form.people.rate" => '默認小時收費',
