@@ -449,11 +449,10 @@ $i18n_key_words = array(
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 'form.users.role' => 'Functie', // TODO: is "Rol" a better term here?
-// TODO: translate the following.
-// 'form.users.manager' => 'Manager',
-// 'form.users.comanager' => 'Co-manager',
-// 'form.users.rate' => 'Rate',
-// 'form.users.default_rate' => 'Default hourly rate',
+'form.users.manager' => 'Manager',
+'form.users.comanager' => 'Co-manager',
+'form.users.rate' => 'Rată',
+'form.users.default_rate' => 'Pret pe ora implicit',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
@@ -532,10 +531,4 @@ $i18n_key_words = array(
 "form.mytime.del_str" => 'stergerea inregistrarii timpului',
 "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.no_finished_rec" => 'aceasta inregistrare a fost salvata numei cu timpul de inceput. nu este o eroare. poti parasi aplicatia daca este nevoie.',
-
-// people form attributes
-"form.people.th.rate" => 'rata',
-"form.people.manager" => 'manager',
-"form.people.comanager" => 'comanager',
-"form.people.rate" => 'pret pe ora implicit',
 );

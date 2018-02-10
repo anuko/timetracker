@@ -48,7 +48,7 @@ $i18n_key_words = array(
 // 'menu.forum' => 'Forum',
 'menu.help' => 'Abiinfo',
 // TODO: translate the following.
-'menu.create_team' => 'Create Team',
+// 'menu.create_team' => 'Create Team',
 'menu.profile' => 'Profiili',
 'menu.time' => 'Aeg',
 // TODO: translate the following.
@@ -101,7 +101,7 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 // 'error.no_login' => 'No user with this login.',
-// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.no_teams' => 'Sinu andmebaas on tühi. Logi adminina sisse ja loo uus meeskond.',
 'error.upload' => 'Viga faili vastuvõtmisel.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
@@ -198,7 +198,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
-// 'label.id' => 'ID',
+'label.id' => 'ID',
+// TODO: translate the following.
 // 'label.language' => 'Language',
 // 'label.decimal_mark' => 'Decimal mark',
 // 'label.date_format' => 'Date format',
@@ -257,13 +258,14 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
+'title.delete_team' => 'Kustuta meeskond',
 'title.reset_password' => 'Tühjenda salasõna',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
-// 'title.time' => 'Time',
-// 'title.edit_time_record' => 'Editing Time Record',
-// 'title.delete_time_record' => 'Deleting Time Record',
+'title.time' => 'Aeg',
+'title.edit_time_record' => 'Ajakande muutmine',
+'title.delete_time_record' => 'Ajakande kustutamine',
+// TODO: translate the following.
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -349,7 +351,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
-// 'dropdown.status_active' => 'active',
+'dropdown.status_active' => 'aktiivne',
+// TODO: translate the following.
 // 'dropdown.status_inactive' => 'inactive',
 // 'dropdown.delete' => 'delete',
 // 'dropdown.do_not_delete' => 'do not delete',
@@ -381,8 +384,7 @@ $i18n_key_words = array(
 // 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
-// TODO: translate the following.
-// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
+'form.time_edit.uncompleted' => 'Kanne salvestati ainult alguse ajaga. See ei ole viga.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
 // TODO: translate the following.
@@ -450,11 +452,10 @@ $i18n_key_words = array(
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 'form.users.role' => 'Roll',
-// TODO: translate the following.
-// 'form.users.manager' => 'Manager',
-// 'form.users.comanager' => 'Co-manager',
-// 'form.users.rate' => 'Rate',
-// 'form.users.default_rate' => 'Default hourly rate',
+'form.users.manager' => 'Haldur',
+'form.users.comanager' => 'Kaashaldur',
+'form.users.rate' => 'Hind',
+'form.users.default_rate' => 'Vaikimisi tunni hind',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
@@ -515,27 +516,4 @@ $i18n_key_words = array(
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// administrator form
-"form.admin.profile.title" => 'meeskonnad',
-"form.admin.profile.noprofiles" => 'sinu andmebaas on tühi. logi adminina sisse ja loo uus meeskond.',
-"form.admin.profile.comment" => 'kustuta meeskond',
-"form.admin.profile.th.id" => 'id',
-"form.admin.profile.th.active" => 'aktiivne',
-
-// my time form attributes
-"form.mytime.title" => 'minu aeg',
-"form.mytime.edit_title" => 'ajakande muutmine',
-"form.mytime.del_str" => 'ajakande kustutamine',
-"form.mytime.no_finished_rec" => 'kanne salvestati ainult alguse ajaga. see ei ole viga. logi välja kui vaja peaks olema.',
-
-// people form attributes
-"form.people.th.rate" => 'hind',
-"form.people.manager" => 'haldur',
-"form.people.comanager" => 'kaashaldur',
-"form.people.rate" => 'vaikimisi tunni hind',
 );

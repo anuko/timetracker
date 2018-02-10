@@ -445,11 +445,10 @@ $i18n_key_words = array(
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 'form.users.role' => 'Szerepkör',
-// TODO: translate the following.
-// 'form.users.manager' => 'Manager',
-// 'form.users.comanager' => 'Co-manager',
-// 'form.users.rate' => 'Rate',
-// 'form.users.default_rate' => 'Default hourly rate',
+'form.users.manager' => 'Vezető',
+'form.users.comanager' => 'Helyettes',
+'form.users.rate' => 'Tarifa',
+'form.users.default_rate' => 'Általános óradíj',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
@@ -530,10 +529,4 @@ $i18n_key_words = array(
 "form.mytime.del_str" => 'törlés',
 "form.mytime.time_form" => ' (óó:pp)',
 "form.mytime.no_finished_rec" => 'csak az munka kezdete lett megjelölve, ha később visszalépsz a rendszerbe beállíthatod a vég-időpontot...',
-
-// people form attributes
-"form.people.th.rate" => 'tarifa',
-"form.people.manager" => 'vezető',
-"form.people.rate" => 'általános óradíj',
-"form.people.comanager" => 'helyettes',
 );

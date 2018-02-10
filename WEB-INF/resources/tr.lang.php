@@ -458,8 +458,8 @@ $i18n_key_words = array(
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 'form.users.role' => 'Rol',
 // TODO: translate the following.
-// 'form.users.manager' => 'Manager',
-// 'form.users.comanager' => 'Co-manager',
+'form.users.manager' => 'Yönetici',
+'form.users.comanager' => 'Yardımcı yönetici',
 'form.users.rate' => 'Tarife', // TODO: is this correct?
 'form.users.default_rate' => 'Varsayılan saat ücreti',
 
@@ -540,8 +540,4 @@ $i18n_key_words = array(
 "form.mytime.del_str" => 'zaman kaydını siliyor',
 "form.mytime.time_form" => ' (ss:dd)',
 "form.mytime.no_finished_rec" => 'bu kayıt sadece başlangıç zamanıyla silindi. bu hata değildir. gerekirse çıkış yapın.',
-
-// people form attributes
-"form.people.manager" => 'yönetici',
-"form.people.comanager" => 'yardımcı yönetici',
 );
