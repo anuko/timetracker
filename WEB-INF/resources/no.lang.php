@@ -98,8 +98,7 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 'error.no_login' => 'Det er ingen bruker med dette brukernavnet.',
-// TODO: translate the following.
-// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.no_teams' => 'Databasen din er tom. Logg inn som admin og opprett et nytt team.',
 'error.upload' => 'Feil med lasting av fil.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
@@ -198,7 +197,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
-// 'label.id' => 'ID',
+'label.id' => 'ID',
 'label.language' => 'Språk',
 // TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
@@ -253,10 +252,11 @@ $i18n_key_words = array(
 // 'title.teams' => 'Teams',
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
+'title.delete_team' => 'Slett team',
+// TODO: translate the following.
 // 'title.reset_password' => 'Resetting Password',
 // 'title.change_password' => 'Changing Password',
-// 'title.time' => 'Time',
+'title.time' => 'Tid',
 // 'title.edit_time_record' => 'Editing Time Record',
 // 'title.delete_time_record' => 'Deleting Time Record',
 // 'title.expenses' => 'Expenses',
@@ -343,8 +343,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
-// 'dropdown.status_active' => 'active',
-// 'dropdown.status_inactive' => 'inactive',
+'dropdown.status_active' => 'aktiv',
+'dropdown.status_inactive' => 'inaktiv',
+// TODO: translate the following.
 // 'dropdown.delete' => 'delete',
 // 'dropdown.do_not_delete' => 'do not delete',
 // 'dropdown.paid' => 'paid',
@@ -504,25 +505,10 @@ $i18n_key_words = array(
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 
-
-
 // TODO: refactoring ongoing down from here.
-
-// "form.admin.profile.title" => 'team',
-// "form.admin.profile.noprofiles" => 'databasen din er tom. logg inn som admin og opprett et nytt team.',
-// "form.admin.profile.comment" => 'slett team',
-// "form.admin.profile.th.id" => 'id',
-// "form.admin.profile.th.active" => 'aktiv',
-
-// my time form attributes
-// Note to translators: the 2 strings below must be translated
-// "form.mytime.title" => 'min tid',
 // "form.mytime.edit_title" => 'endre tidsoppføringen',
 "form.mytime.del_str" => 'slett tids oppføringen',
 "form.mytime.time_form" => ' (tt:mm)',
 // Note to translators: the strings below must be translated
 // "form.mytime.no_finished_rec" => 'Denne oppføringen ble lagret kun med starttid. Det er ikke en feil. Logg ut om nødvendig.',
-
-// people form attributes
-"form.people.rate" => 'timesats',
 );

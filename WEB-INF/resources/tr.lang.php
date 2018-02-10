@@ -50,8 +50,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'menu.create_team' => 'Create Team',
 'menu.profile' => 'Profili',
+'menu.time' => 'Zaman',
 // TODO: translate the following.
-// 'menu.time' => 'Time',
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Raporlar',
 // TODO: translate the following.
@@ -106,7 +106,7 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 // 'error.no_login' => 'No user with this login.',
-// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.no_teams' => 'Veritabanınız boş. Yeni bir ekip yaratmak için yönetici olarak giriş yapın.',
 'error.upload' => 'Dosya yükleme hatası.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
@@ -207,7 +207,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
-// 'label.id' => 'ID',
+'label.id' => 'ID',
+// TODO: translate the following.
 // 'label.language' => 'Language',
 // 'label.decimal_mark' => 'Decimal mark',
 // 'label.date_format' => 'Date format',
@@ -266,13 +267,14 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
+'title.delete_team' => 'Ekibi sil',
 'title.reset_password' => 'Parolayı sıfırla',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
-// 'title.time' => 'Time',
-// 'title.edit_time_record' => 'Editing Time Record',
-// 'title.delete_time_record' => 'Deleting Time Record',
+'title.time' => 'Zaman',
+'title.edit_time_record' => 'Zaman kaydını düzenliyor',
+'title.delete_time_record' => 'Zaman kaydını siliyor',
+// TODO: translate the following.
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -358,7 +360,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
-// 'dropdown.status_active' => 'active',
+'dropdown.status_active' => 'aktif',
+// TODO: translate the following.
 // 'dropdown.status_inactive' => 'inactive',
 // 'dropdown.delete' => 'delete',
 // 'dropdown.do_not_delete' => 'do not delete',
@@ -382,7 +385,7 @@ $i18n_key_words = array(
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
 // TODO: translate the following.
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.duration_format' => '(ss:dd ya da 0.0h)',
 'form.time.billable' => 'Faturalandırılabilir',
 // TODO: translate the following.
 // 'form.time.uncompleted' => 'Uncompleted',
@@ -390,8 +393,7 @@ $i18n_key_words = array(
 // 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
-// TODO: translate the following.
-// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
+'form.time_edit.uncompleted' => 'Bu kayıt sadece başlangıç zamanıyla silindi. Bu hata değildir.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
 // TODO: translate the following.
@@ -522,22 +524,4 @@ $i18n_key_words = array(
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// administrator form
-"form.admin.profile.title" => 'ekipler',
-"form.admin.profile.noprofiles" => 'veritabanınız boş. yeni bir ekip yaratmak için yönetici olarak giriş yapın.',
-"form.admin.profile.comment" => 'ekibi sil',
-"form.admin.profile.th.id" => 'id',
-"form.admin.profile.th.active" => 'aktif',
-
-// my time form attributes
-"form.mytime.title" => 'zamanım',
-"form.mytime.edit_title" => 'zaman kaydını düzenliyor',
-"form.mytime.del_str" => 'zaman kaydını siliyor',
-"form.mytime.time_form" => ' (ss:dd)',
-"form.mytime.no_finished_rec" => 'bu kayıt sadece başlangıç zamanıyla silindi. bu hata değildir. gerekirse çıkış yapın.',
 );

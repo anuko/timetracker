@@ -104,7 +104,7 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 // 'error.no_login' => 'No user with this login.',
-// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.no_teams' => 'Baza de date este goala. Intra ca admin si adauga o noua echipa.',
 'error.upload' => 'Eroare la upload-ul fisierului.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
@@ -201,7 +201,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
-// 'label.id' => 'ID',
+'label.id' => 'ID',
+// TODO: translate the following.
 // 'label.language' => 'Language',
 // 'label.decimal_mark' => 'Decimal mark',
 // 'label.date_format' => 'Date format',
@@ -258,11 +259,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
+'title.delete_team' => 'Șterge echipa',
 'title.reset_password' => 'Reseteaza parola',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
-// 'title.time' => 'Time',
+'title.time' => 'Timpul',
 // 'title.edit_time_record' => 'Editing Time Record',
 // 'title.delete_time_record' => 'Deleting Time Record',
 // 'title.expenses' => 'Expenses',
@@ -518,15 +519,6 @@ $i18n_key_words = array(
 
 // TODO: refactoring ongoing down from here.
 
-// administrator form
-"form.admin.profile.title" => 'echipe',
-"form.admin.profile.noprofiles" => 'baza de date este goala. intra ca admin si adauga o noua echipa.',
-"form.admin.profile.comment" => 'sterge echipa',
-"form.admin.profile.th.id" => 'id',
-"form.admin.profile.th.active" => 'activ',
-
-// my time form attributes
-"form.mytime.title" => 'timpul meu',
 "form.mytime.edit_title" => 'editarea inregistrarii timpului',
 "form.mytime.del_str" => 'stergerea inregistrarii timpului',
 "form.mytime.time_form" => ' (hh:mm)',

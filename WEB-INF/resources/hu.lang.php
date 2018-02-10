@@ -200,7 +200,8 @@ $i18n_key_words = array(
 'label.select_none' => 'Senkit nem jelöl ki',
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
-// 'label.id' => 'ID',
+'label.id' => 'Azonosító',
+// TODO: translate the following.
 // 'label.language' => 'Language',
 // 'label.decimal_mark' => 'Decimal mark',
 // 'label.date_format' => 'Date format',
@@ -254,7 +255,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
+'title.delete_team' => 'Csoport törlése',
+// TODO: translate the following.
 // 'title.reset_password' => 'Resetting Password',
 // 'title.change_password' => 'Changing Password',
 // 'title.time' => 'Time',
@@ -347,7 +349,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 // 'dropdown.select_invoice' => '--- select invoice ---',
-// 'dropdown.status_active' => 'active',
+'dropdown.status_active' => 'aktív',
+// TODO: translate the following.
 // 'dropdown.status_inactive' => 'inactive',
 // 'dropdown.delete' => 'delete',
 // 'dropdown.do_not_delete' => 'do not delete',
@@ -512,19 +515,8 @@ $i18n_key_words = array(
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 
-
-
 // TODO: refactoring ongoing down from here.
 
-// administrator form
-"form.admin.profile.title" => 'csoportok',
-"form.admin.profile.noprofiles" => 'az adatbázis üres. lépj be adminisztrátorként és hozz létre egyet.',
-"form.admin.profile.comment" => 'csoport törlése',
-"form.admin.profile.th.id" => 'azonosító',
-"form.admin.profile.th.active" => 'aktív',
-
-// my time form attributes
-"form.mytime.title" => 'munkaidőm',
 "form.mytime.edit_title" => 'szerkesztés',
 "form.mytime.del_str" => 'törlés',
 "form.mytime.time_form" => ' (óó:pp)',
