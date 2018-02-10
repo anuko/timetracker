@@ -283,10 +283,9 @@ $i18n_key_words = array(
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
 'title.users' => 'Brukere',
-// TODO: translate the following.
-// 'title.add_user' => 'Adding User',
-// 'title.edit_user' => 'Editing User',
-// 'title.delete_user' => 'Deleting User',
+'title.add_user' => 'Legg til bruker',
+'title.edit_user' => 'Endre bruker',
+'title.delete_user' => 'Slett bruker',
 'title.clients' => 'Klienter',
 'title.add_client' => 'Legg til klient',
 'title.edit_client' => 'Endre klient',
@@ -536,10 +535,6 @@ $i18n_key_words = array(
 // "form.profile.showchart" => 'vis kakediagram',
 
 // people form attributes
-"form.people.ppl_str" => 'personer',
-"form.people.createu_str" => 'legg til ny bruker',
-"form.people.edit_str" => 'endre bruker',
-"form.people.del_str" => 'slett bruker',
 "form.people.th.role" => 'rolle',
 // Note to translators: the 2 strings below are missing and must be added and translated
 // "form.people.th.rate" => 'timesats',

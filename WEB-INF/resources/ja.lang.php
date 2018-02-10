@@ -286,10 +286,9 @@ $i18n_key_words = array(
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
 'title.users' => 'ユーザー',
-// TODO: translate the following.
-// 'title.add_user' => 'Adding User',
-// 'title.edit_user' => 'Editing User',
-// 'title.delete_user' => 'Deleting User',
+'title.add_user' => 'ユーザーの作成',
+'title.edit_user' => 'ユーザーの編集',
+'title.delete_user' => 'ユーザーの削除',
 'title.clients' => 'クライアント',
 'title.add_client' => 'クライアントの追加',
 'title.edit_client' => 'クライアントの編集',
@@ -537,10 +536,6 @@ $i18n_key_words = array(
 "form.profile.showchart" => 'パイ図表の表示',
 
 // people form attributes
-"form.people.ppl_str" => 'メンバー',
-"form.people.createu_str" => '新規ユーザーの作成',
-"form.people.edit_str" => 'ユーザーの編集',
-"form.people.del_str" => 'ユーザーの削除',
 "form.people.th.role" => 'ルール',
 "form.people.th.rate" => '給料',
 "form.people.manager" => '管理者',

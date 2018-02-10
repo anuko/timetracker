@@ -290,8 +290,8 @@ $i18n_key_words = array(
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
 'title.users' => 'Utilizatori',
-'title.add_user' => 'Adaugare utilizator', // TODO: is this correct?
-'title.edit_user' => 'Editare utilizator', // TODO: is this correct?
+'title.add_user' => 'Adaugare utilizator',
+'title.edit_user' => 'Editare utilizator',
 'title.delete_user' => 'Stergere utilizator', // TODO: is this correct?
 'title.clients' => 'Clienti',
 'title.add_client' => 'Adaugare client', // TODO: is this correct?
@@ -540,10 +540,6 @@ $i18n_key_words = array(
 "form.profile.edit_title" => 'editeaza profilul',
 
 // people form attributes
-"form.people.ppl_str" => 'persoane',
-"form.people.createu_str" => 'adaugare untilizator nou',
-"form.people.edit_str" => 'editare utilizator',
-"form.people.del_str" => 'stergee utilizator',
 "form.people.th.role" => 'functie',
 "form.people.th.rate" => 'rata',
 "form.people.manager" => 'manager',

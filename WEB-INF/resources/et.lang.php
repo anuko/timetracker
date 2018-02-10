@@ -289,10 +289,9 @@ $i18n_key_words = array(
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
 'title.users' => 'Kasutajad',
-// TODO: translate the following.
-// 'title.add_user' => 'Adding User',
-// 'title.edit_user' => 'Editing User',
-// 'title.delete_user' => 'Deleting User',
+'title.add_user' => 'Kasutaja lisamine', // TODO: is this correct?
+'title.edit_user' => 'Kasutaja muutmine',
+'title.delete_user' => 'Kasutaja kustutamine',
 'title.clients' => 'Kliendid',
 'title.add_client' => 'Lisa klient',
 'title.edit_client' => 'Muuda klienti',
@@ -544,10 +543,6 @@ $i18n_key_words = array(
 "form.profile.edit_title" => 'profiili muutmine',
 
 // people form attributes
-"form.people.ppl_str" => 'inimesed',
-"form.people.createu_str" => 'loo uus kasutaja',
-"form.people.edit_str" => 'kasutaja muutmine',
-"form.people.del_str" => 'kasutaja kustutamine',
 "form.people.th.role" => 'roll',
 "form.people.th.rate" => 'hind',
 "form.people.manager" => 'haldur',

@@ -538,10 +538,6 @@ $i18n_key_words = array(
 "form.profile.edit_title" => 'profil szerkesztése',
 
 // people form attributes
-"form.people.ppl_str" => 'munkatársak',
-"form.people.createu_str" => 'új munkatárs hozzáadása',
-"form.people.edit_str" => 'munkatárs adatainak szerkesztése',
-"form.people.del_str" => 'munkatárs adatainak törlése',
 "form.people.th.role" => 'szerepkör',
 "form.people.th.rate" => 'tarifa',
 "form.people.manager" => 'vezető',

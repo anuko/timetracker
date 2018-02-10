@@ -286,11 +286,11 @@ $i18n_key_words = array(
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
-'title.users' => '사용자',
-// TODO: translate the following.
-// 'title.add_user' => 'Adding User',
-// 'title.edit_user' => 'Editing User',
-// 'title.delete_user' => 'Deleting User',
+'title.users' => '사용자', // TODO: is this correct? Not 사용자를 as below? title.users is for many (plural) users.
+                          // title.add, title.edit, and title.delete are for a single user.
+'title.add_user' => '사용자를 추가하기', // TODO: is this correct?
+'title.edit_user' => '사용자를 편집하기',
+'title.delete_user' => '사용자를 삭제하기',
 'title.clients' => '클라이언트',
 'title.add_client' => '클라이언트 추가',
 'title.edit_client' => '클라이언트 편집',
@@ -539,10 +539,6 @@ $i18n_key_words = array(
 "form.profile.showchart" => '원 그래프를 보기',
 
 // people form attributes
-"form.people.ppl_str" => '멤버',
-"form.people.createu_str" => '신규 사용자를 만들기',
-"form.people.edit_str" => '사용자를 편집하기',
-"form.people.del_str" => '사용자를 삭제하기',
 "form.people.th.role" => '직위',
 "form.people.th.rate" => '급여',
 "form.people.manager" => '관리자',
