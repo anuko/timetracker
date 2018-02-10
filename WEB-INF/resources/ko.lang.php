@@ -528,12 +528,6 @@ $i18n_key_words = array(
 "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.no_finished_rec" => '이 기록은 시작 시간으로만 저장되었습니다. 이것은 오류는 아닙니다. 필요하면 로그아웃 하십시오.',
 
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => '신규 관리자 계정을 생성',
-"form.profile.edit_title" => '프로필을 편집하기',
-"form.profile.showchart" => '원 그래프를 보기',
-
 // people form attributes
 "form.people.th.rate" => '급여',
 "form.people.manager" => '관리자',

@@ -430,7 +430,8 @@ $i18n_key_words = array(
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 // 'form.users.role' => 'Role',
-// 'form.users.manager' => 'Manager',
+'form.users.manager' => 'Gerente',
+// TODO: translate the following.
 // 'form.users.comanager' => 'Co-manager',
 // 'form.users.rate' => 'Rate',
 // 'form.users.default_rate' => 'Default hourly rate',
@@ -495,19 +496,4 @@ $i18n_key_words = array(
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// my time form attributes
-"form.mytime.title" => 'adicionar período',
-
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => 'criar nova conta de gerência',
-"form.profile.edit_title" => 'editando perfil',
-
-// people form attributes
-"form.people.manager" => 'gerente',
 );

@@ -531,11 +531,6 @@ $i18n_key_words = array(
 "form.mytime.time_form" => ' (óó:pp)',
 "form.mytime.no_finished_rec" => 'csak az munka kezdete lett megjelölve, ha később visszalépsz a rendszerbe beállíthatod a vég-időpontot...',
 
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => 'új vezetői jogosultság létrehozása',
-"form.profile.edit_title" => 'profil szerkesztése',
-
 // people form attributes
 "form.people.th.rate" => 'tarifa',
 "form.people.manager" => 'vezető',

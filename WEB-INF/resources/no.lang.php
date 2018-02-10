@@ -523,14 +523,6 @@ $i18n_key_words = array(
 // Note to translators: the strings below must be translated
 // "form.mytime.no_finished_rec" => 'Denne oppføringen ble lagret kun med starttid. Det er ikke en feil. Logg ut om nødvendig.',
 
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => 'lag ny adminkonto',
-"form.profile.edit_title" => 'endre profil',
-
-// Note to translators: the strings below are missing and must be added and translated
-// "form.profile.showchart" => 'vis kakediagram',
-
 // people form attributes
 "form.people.rate" => 'timesats',
 );

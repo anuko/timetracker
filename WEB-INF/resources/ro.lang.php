@@ -533,11 +533,6 @@ $i18n_key_words = array(
 "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.no_finished_rec" => 'aceasta inregistrare a fost salvata numei cu timpul de inceput. nu este o eroare. poti parasi aplicatia daca este nevoie.',
 
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => 'creazaun nou cont de tip manager',
-"form.profile.edit_title" => 'editeaza profilul',
-
 // people form attributes
 "form.people.th.rate" => 'rata',
 "form.people.manager" => 'manager',

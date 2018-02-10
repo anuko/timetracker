@@ -432,12 +432,10 @@ $i18n_key_words = array(
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 'form.users.role' => '角色',
-// TODO: translate the following.
-// 'form.users.manager' => 'Manager',
-// 'form.users.comanager' => 'Co-manager',
+'form.users.manager' => '经理',
+'form.users.comanager' => '合作经理人',
 'form.users.rate' => '费率',
-// TODO: translate the following.
-// 'form.users.default_rate' => 'Default hourly rate',
+'form.users.default_rate' => '默认小时收费',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
@@ -514,15 +512,4 @@ $i18n_key_words = array(
 "form.mytime.del_str" => '删除时间记录',
 "form.mytime.time_form" => ' (时:分)',
 "form.mytime.no_finished_rec" => '该记录只保存了开始时间。这不是错误。如果需要，请注销。',
-
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => '新建管理账号',
-"form.profile.edit_title" => '编辑简介',
-"form.profile.showchart" => '显示饼状图',
-
-// people form attributes
-"form.people.manager" => '经理',
-"form.people.comanager" => '合作经理人',
-"form.people.rate" => '默认小时收费',
 );

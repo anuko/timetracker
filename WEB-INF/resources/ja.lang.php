@@ -525,12 +525,6 @@ $i18n_key_words = array(
 "form.mytime.time_form" => ' (hh:mm)',
 "form.mytime.no_finished_rec" => 'このレコードは開始時間だけで保存されました。これはエラーではありません。もし必要があればログアウトしてください。',
 
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => '新規管理者のアカウントの作成',
-"form.profile.edit_title" => 'プロファイルの編集',
-"form.profile.showchart" => 'パイ図表の表示',
-
 // people form attributes
 "form.people.th.rate" => '給料',
 "form.people.manager" => '管理者',

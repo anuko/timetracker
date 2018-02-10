@@ -533,11 +533,6 @@ $i18n_key_words = array(
 "form.mytime.del_str" => 'ajakande kustutamine',
 "form.mytime.no_finished_rec" => 'kanne salvestati ainult alguse ajaga. see ei ole viga. logi välja kui vaja peaks olema.',
 
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => 'loo uus halduri konto',
-"form.profile.edit_title" => 'profiili muutmine',
-
 // people form attributes
 "form.people.th.rate" => 'hind',
 "form.people.manager" => 'haldur',

@@ -541,11 +541,6 @@ $i18n_key_words = array(
 "form.mytime.time_form" => ' (ss:dd)',
 "form.mytime.no_finished_rec" => 'bu kayıt sadece başlangıç zamanıyla silindi. bu hata değildir. gerekirse çıkış yapın.',
 
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => 'yeni yönetici hesabı yarat',
-"form.profile.edit_title" => 'profili düzenliyor',
-
 // people form attributes
 "form.people.manager" => 'yönetici',
 "form.people.comanager" => 'yardımcı yönetici',
