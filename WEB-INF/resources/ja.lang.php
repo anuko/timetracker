@@ -98,8 +98,7 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 'error.no_login' => 'このログインと関連されたユーザーはいません。',
-// TODO: translate the following.
-// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.no_teams' => 'あなたのデータベースは空いています。管理者にログインして新規チームを作成してください。',
 'error.upload' => 'ファイルのアップロードのエラー。',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
@@ -197,7 +196,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
-// 'label.id' => 'ID',
+'label.id' => '識別子',
 'label.language' => '言語',
 // TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
@@ -254,13 +253,14 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
+'title.delete_team' => 'チームの削除',
 'title.reset_password' => 'パスワードの初期化',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
-// 'title.time' => 'Time',
-// 'title.edit_time_record' => 'Editing Time Record',
-// 'title.delete_time_record' => 'Deleting Time Record',
+'title.time' => '時間',
+'title.edit_time_record' => '時間レコードの編集',
+'title.delete_time_record' => '時間レコードの削除',
+// TODO: translate the following.
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -369,7 +369,7 @@ $i18n_key_words = array(
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
 // TODO: translate the following.
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.duration_format' => '(hh:mm あるいは 0.0h)', // TODO: is there a better term for hh:mm as a hint to user what to enter?
 'form.time.billable' => '請求できる',
 'form.time.uncompleted' => '未完成の',
 // TODO: translate the following.
@@ -377,8 +377,7 @@ $i18n_key_words = array(
 // 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
-// TODO: translate the following.
-// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
+'form.time_edit.uncompleted' => 'このレコードは開始時間だけで保存されました。これはエラーではありません。',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
 // TODO: translate the following.
@@ -444,10 +443,10 @@ $i18n_key_words = array(
 // 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 'form.users.role' => '役割', // TODO: is this correct?
-// 'form.users.manager' => 'Manager',
-// 'form.users.comanager' => 'Co-manager',
-// 'form.users.rate' => 'Rate',
-// 'form.users.default_rate' => 'Default hourly rate',
+'form.users.manager' => '管理者',
+'form.users.comanager' => '共同管理者',
+'form.users.rate' => '給料',
+'form.users.default_rate' => 'デフォルト時間当り給料',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
@@ -506,28 +505,4 @@ $i18n_key_words = array(
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// administrator form
-"form.admin.profile.title" => 'チーム',
-"form.admin.profile.noprofiles" => 'あなたのデータベースは空いています。管理者にログインして新規チームを作成してください。',
-"form.admin.profile.comment" => 'チームの削除',
-"form.admin.profile.th.id" => '識別子',
-"form.admin.profile.th.active" => '活動内容',
-
-// my time form attributes
-"form.mytime.title" => '私の時間',
-"form.mytime.edit_title" => '時間レコードの編集',
-"form.mytime.del_str" => '時間レコードの削除',
-"form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.no_finished_rec" => 'このレコードは開始時間だけで保存されました。これはエラーではありません。もし必要があればログアウトしてください。',
-
-// people form attributes
-"form.people.th.rate" => '給料',
-"form.people.manager" => '管理者',
-"form.people.rate" => 'デフォルト時間当り給料',
-"form.people.comanager" => '共同管理者',
 );
