@@ -374,7 +374,8 @@ $i18n_key_words = array(
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
 // TODO: translate the following.
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.duration_format' => '(óó:pp vagy 0.0h)',
+// TODO: translate the following.
 // 'form.time.billable' => 'Billable',
 // 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
@@ -402,10 +403,10 @@ $i18n_key_words = array(
 // 'form.reports.show_fields' => 'Show fields',
 'form.reports.group_by' => 'Csoportosítva',
 'form.reports.group_by_no' => '--- csoportosítás nélkül ---',
+'form.reports.group_by_date' => 'dátum',
 // TODO: translate the following.
-// 'form.reports.group_by_date' => 'date',
 // 'form.reports.group_by_user' => 'user',
-// 'form.reports.group_by_client' => 'client',
+'form.reports.group_by_client' => 'ügyfél',
 'form.reports.group_by_project' => 'projekt',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
@@ -514,11 +515,4 @@ $i18n_key_words = array(
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-// TODO: refactoring ongoing down from here.
-
-"form.mytime.edit_title" => 'szerkesztés',
-"form.mytime.del_str" => 'törlés',
-"form.mytime.time_form" => ' (óó:pp)',
-"form.mytime.no_finished_rec" => 'csak az munka kezdete lett megjelölve, ha később visszalépsz a rendszerbe beállíthatod a vég-időpontot...',
 );

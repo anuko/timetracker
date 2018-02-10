@@ -257,8 +257,9 @@ $i18n_key_words = array(
 // 'title.reset_password' => 'Resetting Password',
 // 'title.change_password' => 'Changing Password',
 'title.time' => 'Tid',
-// 'title.edit_time_record' => 'Editing Time Record',
-// 'title.delete_time_record' => 'Deleting Time Record',
+'title.edit_time_record' => 'Endre tids oppføringen',
+'title.delete_time_record' => 'Slett tids oppføringen',
+// TODO: translate the following.
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -367,7 +368,7 @@ $i18n_key_words = array(
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
 // TODO: translate the following.
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.duration_format' => '(tt:mm eller 0.0h)',
 'form.time.billable' => 'Fakturerbar',
 'form.time.uncompleted' => 'Uferdig',
 // TODO: translate the following.
@@ -375,8 +376,7 @@ $i18n_key_words = array(
 // 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
-// TODO: translate the following.
-// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
+'form.time_edit.uncompleted' => 'Denne oppføringen ble lagret kun med starttid. Det er ikke en feil.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
 // TODO: translate the following.
@@ -397,8 +397,7 @@ $i18n_key_words = array(
 // 'form.reports.group_by_no' => '--- no grouping ---',
 'form.reports.group_by_date' => 'dato',
 'form.reports.group_by_user' => 'bruker',
-// TODO: translate the following.
-// 'form.reports.group_by_client' => 'client',
+'form.reports.group_by_client' => 'klient',
 'form.reports.group_by_project' => 'prosjekt',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
@@ -504,11 +503,4 @@ $i18n_key_words = array(
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-// TODO: refactoring ongoing down from here.
-// "form.mytime.edit_title" => 'endre tidsoppføringen',
-"form.mytime.del_str" => 'slett tids oppføringen',
-"form.mytime.time_form" => ' (tt:mm)',
-// Note to translators: the strings below must be translated
-// "form.mytime.no_finished_rec" => 'Denne oppføringen ble lagret kun med starttid. Det er ikke en feil. Logg ut om nødvendig.',
 );

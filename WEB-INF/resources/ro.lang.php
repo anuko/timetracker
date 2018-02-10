@@ -264,8 +264,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
 'title.time' => 'Timpul',
-// 'title.edit_time_record' => 'Editing Time Record',
-// 'title.delete_time_record' => 'Deleting Time Record',
+'title.edit_time_record' => 'Editarea inregistrarii timpului',
+'title.delete_time_record' => 'Ștergerea inregistrarii timpului',
+// TODO: translate the following.
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -376,16 +377,15 @@ $i18n_key_words = array(
 // 'form.change_password.tip' => 'Type new password and click on Save.',
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
+'form.time.duration_format' => '(hh:mm sau 0.0h)',
 // TODO: translate the following.
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
 // 'form.time.billable' => 'Billable',
 // 'form.time.uncompleted' => 'Uncompleted',
 // 'form.time.remaining_quota' => 'Remaining quota',
 // 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
-// TODO: translate the following.
-// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
+'form.time_edit.uncompleted' => 'Aceasta inregistrare a fost salvata numei cu timpul de inceput. Nu este o eroare.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
 // TODO: translate the following.
@@ -406,8 +406,7 @@ $i18n_key_words = array(
 'form.reports.group_by_no' => '--- fara grupare ---',
 'form.reports.group_by_date' => 'data',
 'form.reports.group_by_user' => 'utilizator',
-// TODO: translate the following.
-// 'form.reports.group_by_client' => 'client',
+'form.reports.group_by_client' => 'client',
 'form.reports.group_by_project' => 'proiect',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
@@ -514,13 +513,4 @@ $i18n_key_words = array(
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-"form.mytime.edit_title" => 'editarea inregistrarii timpului',
-"form.mytime.del_str" => 'stergerea inregistrarii timpului',
-"form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.no_finished_rec" => 'aceasta inregistrare a fost salvata numei cu timpul de inceput. nu este o eroare. poti parasi aplicatia daca este nevoie.',
 );
