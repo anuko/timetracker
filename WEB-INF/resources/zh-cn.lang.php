@@ -239,8 +239,8 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => '登录',
+'title.teams' => '团队',
 // TODO: translate the following.
-// 'title.teams' => 'Teams',
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
 // 'title.delete_team' => 'Deleting Team',
@@ -275,10 +275,9 @@ $i18n_key_words = array(
 // 'title.edit_task' => 'Editing Task',
 // 'title.delete_task' => 'Deleting Task',
 'title.users' => '用户',
-// TODO: translate the following.
-// 'title.add_user' => 'Adding User',
-// 'title.edit_user' => 'Editing User',
-// 'title.delete_user' => 'Deleting User',
+'title.add_user' => '添加用户', // TODO: is this correct?
+'title.edit_user' => '编辑用户',
+'title.delete_user' => '删除用户',
 'title.clients' => '客户',
 'title.add_client' => '添加客户',
 'title.edit_client' => '编辑客户',
@@ -525,10 +524,6 @@ $i18n_key_words = array(
 "form.profile.showchart" => '显示饼状图',
 
 // people form attributes
-"form.people.ppl_str" => '人员',
-"form.people.createu_str" => '新建用户',
-"form.people.edit_str" => '编辑用户',
-"form.people.del_str" => '删除用户',
 "form.people.th.role" => '角色',
 "form.people.th.rate" => '费率',
 "form.people.manager" => '经理',
