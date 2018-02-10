@@ -91,8 +91,7 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 'error.no_login' => '没有该登录信息的用户。',
-// TODO: translate the following.
-// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.no_teams' => '您的数据库没有任何记录。请以管理员身份登录并创建一个新团队。',
 'error.upload' => '上传文件出错。',
 'error.range_locked' => '日期范围锁定。',
 'error.mail_send' => '发送邮件时出错。',
@@ -187,7 +186,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
-// 'label.id' => 'ID',
+'label.id' => 'ID号',
 'label.language' => '语言',
 // TODO: translate the following.
 // 'label.decimal_mark' => 'Decimal mark',
@@ -243,13 +242,14 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
+'title.delete_team' => '删除团队',
 'title.reset_password' => '重设密码',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',
 // 'title.time' => 'Time',
-// 'title.edit_time_record' => 'Editing Time Record',
-// 'title.delete_time_record' => 'Deleting Time Record',
+'title.edit_time_record' => '编辑时间记录',
+'title.delete_time_record' => '删除时间记录',
+// TODO: translate the following.
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
@@ -357,8 +357,7 @@ $i18n_key_words = array(
 // 'form.change_password.tip' => 'Type new password and click on Save.',
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
-// TODO: translate the following.
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.duration_format' => '(时:分 或 0.0h)',
 'form.time.billable' => '计费时间',
 'form.time.uncompleted' => '未完成',
 // TODO: translate the following.
@@ -366,8 +365,7 @@ $i18n_key_words = array(
 // 'form.time.over_quota' => 'Over quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
-// TODO: translate the following.
-// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
+'form.time_edit.uncompleted' => '该记录只保存了开始时间。这不是错误。',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
 // TODO: translate the following.
@@ -494,22 +492,4 @@ $i18n_key_words = array(
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
-
-
-
-// TODO: refactoring ongoing down from here.
-
-// administrator form
-"form.admin.profile.title" => '团队',
-"form.admin.profile.noprofiles" => '您的数据库没有任何记录。请以管理员身份登录并创建一个新团队。',
-"form.admin.profile.comment" => '删除团队',
-"form.admin.profile.th.id" => 'ID号',
-"form.admin.profile.th.active" => '启用',
-
-// my time form attributes
-"form.mytime.title" => '我的时间记录',
-"form.mytime.edit_title" => '编辑时间记录',
-"form.mytime.del_str" => '删除时间记录',
-"form.mytime.time_form" => ' (时:分)',
-"form.mytime.no_finished_rec" => '该记录只保存了开始时间。这不是错误。如果需要，请注销。',
 );
