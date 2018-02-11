@@ -323,7 +323,7 @@ $i18n_key_words = array(
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' =>  'Nie pamiętasz hasła?',
-'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> jest prostym, łatwym w użyciu, otwartoźródłowym systemem śledzenia czasu.',
+'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> jest prostym, łatwym w użyciu, otwartoźródłowym systemem śledzenia czasu.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Instrukcje zmiany hasła zostały wysłane na adres e-mail połączony z kontem.',

@@ -320,7 +320,7 @@ $i18n_key_words = array(
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Glömt lösenordet?',
-'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> är en lättanvänd applikation byggd med öppen källkod som enkelt låter dig spåra och hålla koll på arbetstider.',
+'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> är en lättanvänd applikation byggd med öppen källkod som enkelt låter dig spåra och hålla koll på arbetstider.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Begäran om att återställa lösenordet skickades via e-post.',

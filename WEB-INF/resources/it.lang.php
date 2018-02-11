@@ -296,24 +296,20 @@ $i18n_key_words = array(
 'dropdown.previous_month' => 'mese scorso',
 'dropdown.selected_month' => 'mese',
 'dropdown.current_year' => 'quest\\\'anno',
-// TODO: translate the following.
-// 'dropdown.previous_year' => 'previous year',
+'dropdown.previous_year' => 'anno precedente',
 'dropdown.selected_year' => 'anno',
 'dropdown.all_time' => 'tutto il tempo',
 'dropdown.projects' => 'progetti',
-// TODO: translate the following.
-// 'dropdown.tasks' => 'tasks',
+'dropdown.tasks' => 'compiti',
 'dropdown.clients' => 'clienti',
-// TODO: translate the following.
-// 'dropdown.select' => '--- select ---',
+'dropdown.select' => '--- seleziona ---',
 'dropdown.select_invoice' => '--- seleziona la fattura ---',
 'dropdown.status_active' => 'attivo',
 'dropdown.status_inactive' => 'inattivo',
-// TODO: translate the following.
-// 'dropdown.delete' => 'delete',
-// 'dropdown.do_not_delete' => 'do not delete',
-// 'dropdown.paid' => 'paid',
-// 'dropdown.not_paid' => 'not paid',
+'dropdown.delete' => 'elimina',
+'dropdown.do_not_delete' => 'non eliminare',
+'dropdown.paid' => 'pagato',
+'dropdown.not_paid' => 'non pagato',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases
@@ -322,8 +318,7 @@ $i18n_key_words = array(
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Password dimenticata?',
-// TODO: translate the following.
-// 'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
+'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> è un sistema semplice e open source per registrare i tempi di lavoro.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 // TODO: improve form.reset_password.message by specifying that it was sent "by email".

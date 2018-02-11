@@ -155,7 +155,7 @@ if ($request->isPost()) {
     if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
       if (!$cl_project) $err->add($i18n->getKey('error.project'));
     }
-    if (!ttValidString($cl_item_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.item'));
+    if (!ttValidString($cl_item_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.comment'));
     if (!ttValidFloat($cl_cost)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cost'));
 
     // Prohibit creating entries in future.
