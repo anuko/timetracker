@@ -216,6 +216,7 @@ $i18n_key_words = array(
 // TODO: Improve titles for consistency, so that each title explains correctly what each
 // page is about and is "consistent" from page to page, meaning that correct grammar is used everywhere.
 // Compare with English file to see how it is done there and do Italian titles similarly.
+// Specifically: Eliminazione vs Elimina - we probably want nouns in titles.
 'title.login' => 'Login',
 'title.teams' => 'Gruppi',
 'title.create_team' => 'Creazione gruppo',
@@ -256,32 +257,30 @@ $i18n_key_words = array(
 'title.edit_client' => 'Modifica cliente',
 'title.delete_client' => 'Elimina cliente',
 'title.invoices' => 'Fatture',
-// TODO: translate the following.
-// 'title.add_invoice' => 'Adding Invoice',
-// 'title.view_invoice' => 'Viewing Invoice',
-// 'title.delete_invoice' => 'Deleting Invoice',
-// 'title.notifications' => 'Notifications',
-// 'title.add_notification' => 'Adding Notification',
-// 'title.edit_notification' => 'Editing Notification',
-// 'title.delete_notification' => 'Deleting Notification',
-// 'title.monthly_quotas' => 'Monthly Quotas',
-'title.export' => 'Esporta i dati del team',
-'title.import' => 'Importa i dati del team',
+'title.add_invoice' => 'Aggiunta fattura',
+'title.view_invoice' => 'Visualizzazione fattura',
+'title.delete_invoice' => 'Eliminazione fattura',
+'title.notifications' => 'Notifiche',
+'title.add_notification' => 'Aggiunta notifica',
+'title.edit_notification' => 'Modifica notifica',
+'title.delete_notification' => 'Eliminazione notifica',
+'title.monthly_quotas' => 'Quote mensili',
+'title.export' => 'Esporta i dati del gruppo',
+'title.import' => 'Importa i dati del gruppo',
 'title.options' => 'Opzioni',
 'title.profile' => 'Profilo',
-// TODO: translate the following.
-// 'title.cf_custom_fields' => 'Custom Fields',
-// 'title.cf_add_custom_field' => 'Adding Custom Field',
-// 'title.cf_edit_custom_field' => 'Editing Custom Field',
-// 'title.cf_delete_custom_field' => 'Deleting Custom Field',
-// 'title.cf_dropdown_options' => 'Dropdown Options',
-// 'title.cf_add_dropdown_option' => 'Adding Option',
-// 'title.cf_edit_dropdown_option' => 'Editing Option',
-// 'title.cf_delete_dropdown_option' => 'Deleting Option',
+'title.cf_custom_fields' => 'Campi personalizzati',
+'title.cf_add_custom_field' => 'Aggiunta campo personalizzato',
+'title.cf_edit_custom_field' => 'Modifica campo personalizzato',
+'title.cf_delete_custom_field' => 'Eliminazione campo personalizzato',
+'title.cf_dropdown_options' => 'Opzioni menu di scelta',
+'title.cf_add_dropdown_option' => 'Aggiunta opzione',
+'title.cf_edit_dropdown_option' => 'Modifica opzione',
+'title.cf_delete_dropdown_option' => 'Eliminazione opzione',
 // NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
 // It is also a name for the Locking plugin on the Team profile page.
-// 'title.locking' => 'Locking',
-// 'title.week_view' => 'Week View',
+'title.locking' => 'Bloccaggio',
+'title.week_view' => 'Vista settimanale',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
