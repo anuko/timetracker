@@ -32,7 +32,7 @@
 // Note to translators: Use proper capitalization rules for your language.
 
 $i18n_language = 'Italiano';
-$i18n_months = array('Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luiglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre');
+$i18n_months = array('Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre');
 $i18n_weekdays = array('Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato');
 $i18n_weekdays_short = array('Do', 'Lu', 'Ma', 'Me', 'Gi', 'Ve', 'Sa');
 // format mm/dd
@@ -43,40 +43,33 @@ $i18n_key_words = array(
 // Menus - short selection strings that are displayed on top of application web pages.
 // Example: https://timetracker.anuko.com (black menu on top).
 'menu.login' => 'Login',
-// TODO: translate the following.
-// 'menu.logout' => 'Logout',
-// 'menu.forum' => 'Forum',
-// 'menu.help' => 'Help',
-// 'menu.create_team' => 'Create Team',
+'menu.logout' => 'Logout',
+'menu.forum' => 'Forum',
+'menu.help' => 'Aiuto',
+'menu.create_team' => 'Crea gruppo',
 'menu.profile' => 'Profilo',
 'menu.time' => 'Tempo',
 'menu.expenses' => 'Spese',
-// TODO: translate the following.
-// 'menu.reports' => 'Reports',
+'menu.reports' => 'Rapporti',
 'menu.charts' => 'Grafici',
 'menu.projects' => 'Progetti',
-// TODO: translate the following.
-// 'menu.tasks' => 'Tasks',
+'menu.tasks' => 'Compiti',
 'menu.users' => 'Utenti',
-// TODO: translate the following.
-// 'menu.teams' => 'Teams',
-// 'menu.export' => 'Export',
+'menu.teams' => 'Gruppi',
+'menu.export' => 'Esportazione', // TODO: is this correct? Also, I auto-translated some other terms in menu section. Check for accuracy.
 'menu.clients' => 'Clienti',
 'menu.options' => 'Opzioni',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following.
-// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
-// 'footer.credits' => 'Credits',
-// 'footer.license' => 'License',
-// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                     // This is a link to a webpage that describes how to contribute to the project.
+'footer.contribute_msg' => 'Puoi collaborare al progetto Time Tracker in diversi modi.',
+'footer.credits' => 'Credits',
+'footer.license' => 'Licenza',
+'footer.improve' => 'Collabora',
 
 // Error messages.
-// TODO: translate the following.
-// 'error.access_denied' => 'Access denied.',
-// 'error.sys' => 'System error.',
-// 'error.db' => 'Database error.',
+'error.access_denied' => 'Accesso negato.',
+'error.sys' => 'Errore di sistema.',
+'error.db' => 'Errore database.',
 'error.field' => 'Dato "{0}" errato.',
 'error.empty' => 'Il campo "{0}" è vuoto.',
 'error.not_equal' => 'Il campo "{0}" non è uguale al campo "{1}".',
@@ -483,7 +476,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.profile.12_hours' => '12 hours',
 // 'form.profile.24_hours' => '24 hours',
-// 'form.profile.show_holidays' => 'Show holidays',
 // 'form.profile.tracking_mode' => 'Tracking mode',
 // 'form.profile.mode_time' => 'time',
 // 'form.profile.mode_projects' => 'projects',
