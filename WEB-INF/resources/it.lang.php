@@ -73,35 +73,29 @@ $i18n_key_words = array(
 'error.field' => 'Dato "{0}" errato.',
 'error.empty' => 'Il campo "{0}" è vuoto.',
 'error.not_equal' => 'Il campo "{0}" non è uguale al campo "{1}".',
-// TODO: translate the following.
-// error.interval' => 'Field "{0}" must be greater than "{1}".',
+'error.interval' => 'Il campo "{0}" deve essere maggiore di "{1}".',
 'error.project' => 'Seleziona il progetto.',
-// TODO: translate the following.
-// 'error.task' => 'Select task.',
+'error.task' => 'Seleziona compito.', // TODO: is this correct?
 'error.client' => 'Seleziona il cliente.',
-// TODO: translate the following.
-// 'error.report' => 'Select report.',
-// 'error.record' => 'Select record.',
+'error.report' => 'Seleziona rapporto.',
+'error.record' => 'Seleziona record.',
 'error.auth' => 'Login o password errati.',
-// TODO: translate the following.
-// 'error.user_exists' => 'User with this login already exists.',
+'error.user_exists' => 'Esiste già un utente con questo username.',
 'error.project_exists' => 'Esiste già un progetto con questo nome.',
-// TODO: translate the following.
-// 'error.task_exists' => 'Task with this name already exists.',
-// 'error.client_exists' => 'Client with this name already exists.',
-// 'error.invoice_exists' => 'Invoice with this number already exists.',
-// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
-// 'error.no_login' => 'No user with this login.',
-'error.no_teams' => 'Il database è vuoto. loggati come amministratore e crea un nuovo team.',
-// TODO: translate the following.
-// 'error.upload' => 'File upload error.',
-// 'error.range_locked' => 'Date range is locked.',
-// 'error.mail_send' => 'Error sending mail.',
-// 'error.no_email' => 'No email associated with this login.',
-// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
-// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
-// 'error.overlap' => 'Time interval overlaps with existing records.',
-// 'error.future_date' => 'Date is in future.',
+'error.task_exists' => 'Esiste già un compito con questo nome.', // TODO: is this correct? "un compito"?
+'error.client_exists' => 'Esiste già un cliente con questo nome.',
+'error.invoice_exists' => 'Esiste già una fattura con questo numero.',
+'error.no_invoiceable_items' => 'Non ci sono voci fatturabili.',
+'error.no_login' => 'Non esiste un utente con questo username.',
+'error.no_teams' => 'Il database è vuoto. Loggati come amministratore e crea un nuovo gruppo.',
+'error.upload' => 'Errore di caricamento file.',
+'error.range_locked' => 'Intervallo data bloccato.',
+'error.mail_send' => 'Errore nella fase di invio mail.',
+'error.no_email' => 'Non ci sono email associate a questo username.',
+'error.uncompleted_exists' => 'Esiste una voce incompleta. Chiudila o cancellala.',
+'error.goto_uncompleted' => 'Vai alle voce incompleta.',
+'error.overlap' => 'Intervallo temporale sovrapposto a voci esistenti.',
+'error.future_date' => 'La data è nel futuro.',
 
 // Labels for buttons.
 'button.login' => 'Login',
