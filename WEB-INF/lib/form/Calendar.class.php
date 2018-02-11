@@ -172,7 +172,9 @@ class Calendar extends FormElement {
             }
 
               // holidays
-              if ($this->showHolidays) {
+              //if ($this->showHolidays) {
+              global $user;
+              if ($user->show_holidays) {
               foreach ($this->holidays as $day) {
                 if($day == $date) {
                   $stl_cell = ' class="CalendarDayHoliday"';

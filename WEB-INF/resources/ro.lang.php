@@ -484,6 +484,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.profile.12_hours' => '12 hours',
 // 'form.profile.24_hours' => '24 hours',
+// 'form.profile.show_holidays' => 'Show holidays',
 // 'form.profile.tracking_mode' => 'Tracking mode',
 // 'form.profile.mode_time' => 'time',
 // 'form.profile.mode_projects' => 'projects',

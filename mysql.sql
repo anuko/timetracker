@@ -32,7 +32,9 @@ CREATE TABLE `tt_teams` (
   `lock_spec` varchar(255) default NULL,                     # Cron specification for record locking,
                                                              # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
   `workday_hours` decimal(5,2) DEFAULT '8.00',               # number of work hours in a regular day
+  `workday_minutes` smallint(4) DEFAULT '480',               # number of work minutes in a regular working day
   `custom_logo` tinyint(4) default '0',                      # whether to use a custom logo or not
+  `config` text default NULL,                                # miscellaneous team configuration settings
   `status` tinyint(4) default '1',                           # team status
   PRIMARY KEY (`id`)
 );
@@ -375,6 +377,7 @@ CREATE TABLE `tt_monthly_quotas` (
   `year` smallint(5) UNSIGNED NOT NULL,   # quota year
   `month` tinyint(3) UNSIGNED NOT NULL,   # quota month
   `quota` decimal(5,2) NOT NULL,          # number of work hours in specified month and year
+  `minutes` int(11) DEFAULT NULL,         # quota in minutes in specified month and year
   PRIMARY KEY (`team_id`,`year`,`month`)
 );
 

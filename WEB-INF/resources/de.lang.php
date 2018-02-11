@@ -420,6 +420,8 @@ $i18n_key_words = array(
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 'form.profile.12_hours' => '12 Stunden',
 'form.profile.24_hours' => '24 Stunden',
+// TODO: translate the following.
+// 'form.profile.show_holidays' => 'Show holidays',
 'form.profile.tracking_mode' => 'Nachverfolgung',
 'form.profile.mode_time' => 'Zeit',
 'form.profile.mode_projects' => 'Projekte',

@@ -39,7 +39,11 @@ class ttTimeHelper {
 
   // isHoliday determines if $date falls on a holiday.
   static function isHoliday($date) {
+    global $user;
     global $i18n;
+
+    if (!$user->show_holidays) return false;
+
     // $date is expected as string in DB_DATEFORMAT.
     $month = date('m', strtotime($date));
     $day = date('d', strtotime($date));

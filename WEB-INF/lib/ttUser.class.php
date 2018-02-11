@@ -41,6 +41,7 @@ class ttUser {
   var $date_format = null;      // Date format.
   var $time_format = null;      // Time format.
   var $week_start = 0;          // Week start day.
+  var $show_holidays = 1;       // Whether to show holidays in calendar.
   var $tracking_mode = 0;       // Tracking mode.
   var $project_required = 0;    // Whether project selection is required on time entires.
   var $task_required = 0;       // Whether task selection is required on time entires.
@@ -49,6 +50,7 @@ class ttUser {
   var $bcc_email = null;        // Bcc email.
   var $currency = null;         // Currency.
   var $plugins = null;          // Comma-separated list of enabled plugins.
+  var $config = null;           // Comma-separated list of miscellaneous config options.
   var $team = null;             // Team name.
   var $custom_logo = 0;         // Whether to use a custom logo for team.
   var $lock_spec = null;        // Cron specification for record locking.
@@ -67,7 +69,7 @@ class ttUser {
     $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role, u.client_id, u.email, t.name as team_name, 
       t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
       t.tracking_mode, t.project_required, t.task_required, t.record_type, t.uncompleted_indicators,
-      t.bcc_email, t.plugins, t.lock_spec, t.workday_hours, t.custom_logo
+      t.bcc_email, t.plugins, t.config, t.lock_spec, t.workday_hours, t.custom_logo
       FROM tt_users u LEFT JOIN tt_teams t ON (u.team_id = t.id) WHERE ";
     if ($id)
       $sql .= "u.id = $id";
@@ -106,6 +108,10 @@ class ttUser {
       $this->lock_spec = $val['lock_spec'];
       $this->workday_hours = $val['workday_hours'];
       $this->custom_logo = $val['custom_logo'];
+
+      // Set user config options.
+      $this->config = $val['config'];
+      $this->show_holidays = in_array('show_holidays', explode(',', $this->config));
 
       // Set "on behalf" id and name.
       if (isset($_SESSION['behalf_id'])) {

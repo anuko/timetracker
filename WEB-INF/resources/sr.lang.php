@@ -430,6 +430,8 @@ $i18n_key_words = array(
 // Forma profila. Pogledajte primer na at https://timetracker.anuko.com/profile_edit.php.
 'form.profile.12_hours' => '12 časova',
 'form.profile.24_hours' => '24 časova',
+// TODO: translate the following.
+// 'form.profile.show_holidays' => 'Show holidays',
 'form.profile.tracking_mode' => 'Način evidencije',
 'form.profile.mode_time' => 'vreme',
 'form.profile.mode_projects' => 'projekti',

@@ -57,6 +57,7 @@ if ($request->isPost()) {
     $cl_date_format = $request->getParameter('date_format');
     $cl_time_format = $request->getParameter('time_format');
     $cl_start_week = $request->getParameter('start_week');
+    $cl_show_holidays = $request->getParameter('show_holidays');
     $cl_tracking_mode = $request->getParameter('tracking_mode');
     $cl_project_required = $request->getParameter('project_required');
     $cl_task_required = $request->getParameter('task_required');
@@ -90,6 +91,7 @@ if ($request->isPost()) {
     $cl_date_format = $user->date_format;
     $cl_time_format = $user->time_format;
     $cl_start_week = $user->week_start;
+    $cl_show_holidays = $user->show_holidays;
     $cl_tracking_mode = $user->tracking_mode;
     $cl_project_required = $user->project_required;
     $cl_task_required = $user->task_required;
@@ -167,6 +169,9 @@ if ($user->canManageTeam()) {
     $week_start_options[] = array('id' => $id, 'name' => $week_dn);
   }
   $form->addInput(array('type'=>'combobox','name'=>'start_week','style'=>'width: 150px;','data'=>$week_start_options,'datakeys'=>array('id','name'),'value'=>$cl_start_week));
+
+  // Show holidays checkbox.
+  $form->addInput(array('type'=>'checkbox','name'=>'show_holidays','value'=>$cl_show_holidays));
 
   // Prepare tracking mode choices.
   $tracking_mode_options = array();
@@ -278,6 +283,11 @@ if ($request->isPost()) {
 
       $plugins = trim($plugins, ',');
 
+      // Prepare config string. At this time we only handle show_holidays here.
+      if ($cl_show_holidays)
+        $config .= ',show_holidays';
+      $config = trim($config, ',');
+
       $update_result = ttTeamHelper::update($user->team_id, array(
         'name' => $cl_team,
         'currency' => $cl_currency,
@@ -292,7 +302,8 @@ if ($request->isPost()) {
         'record_type' => $cl_record_type,
         'uncompleted_indicators' => $cl_uncompleted_indicators,
         'bcc_email' => $cl_bcc_email,
-        'plugins' => $plugins));
+        'plugins' => $plugins,
+        'config' => $config));
     }
     if ($update_result) {
       $update_result = ttUserHelper::update($user->id, array(

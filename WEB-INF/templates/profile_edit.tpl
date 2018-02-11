@@ -161,6 +161,10 @@ function handlePluginCheckboxes() {
             <td>{$forms.profileForm.start_week.control}</td>
           </tr>
           <tr>
+            <td align="right" nowrap>{$i18n.form.profile.show_holidays}:</td>
+            <td>{$forms.profileForm.show_holidays.control} <a href="https://www.anuko.com/lp/tt_14.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+          </tr>
+          <tr>
             <td align="right" nowrap>{$i18n.form.profile.tracking_mode}:</td>
             <td>{$forms.profileForm.tracking_mode.control} {$forms.profileForm.task_required.control} <span id="task_required_label"><label for="task_required">{$i18n.label.required}</label></span></td></td>
           </tr>
