@@ -322,7 +322,7 @@ $i18n_key_words = array(
 // Strings that are used on multiple unrelated forms should be placed in shared sections such as label.<stringname>, etc.
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
-'form.login.forgot_password' =>  'Nie pamiętasz hasła?',
+'form.login.forgot_password' => 'Nie pamiętasz hasła?',
 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> jest prostym, łatwym w użyciu, otwartoźródłowym systemem śledzenia czasu.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
@@ -427,7 +427,7 @@ $i18n_key_words = array(
 'form.import.success' => 'Import zakończony powodzeniem.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' =>  'Załóż nowy zespół najpierw tworząc konto managera.<br>Możesz także zaimportować plik xml z danymi zespołu z innego serwera Anuko Time Tracker (nazwy loginów nie mogą się powtarzać).',
+'form.teams.hint' => 'Załóż nowy zespół najpierw tworząc konto managera.<br>Możesz także zaimportować plik xml z danymi zespołu z innego serwera Anuko Time Tracker (nazwy loginów nie mogą się powtarzać).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 'form.profile.12_hours' => '12 godzin',

@@ -443,7 +443,7 @@ $i18n_key_words = array(
 'form.import.success' => 'Import úspešne dokončený.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' =>  'Pomocou vytvorenia nového účtu tímového manažéra vytvorte nový tím.<br>Taktiež môžete importovať údaje o tíme z xml súboru z iného Anuko Time Tracker serveru (nie sú povolené kolízie v prihlasovacom mene).',
+'form.teams.hint' => 'Pomocou vytvorenia nového účtu tímového manažéra vytvorte nový tím.<br>Taktiež môžete importovať údaje o tíme z xml súboru z iného Anuko Time Tracker serveru (nie sú povolené kolízie v prihlasovacom mene).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 'form.profile.12_hours' => '12-hodinový',

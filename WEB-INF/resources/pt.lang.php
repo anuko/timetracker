@@ -461,7 +461,7 @@ $i18n_key_words = array(
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
 // TODO: translate the following.
-// 'form.teams.hint' =>  'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+// 'form.teams.hint' => 'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 // TODO: translate the following.

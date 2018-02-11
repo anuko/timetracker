@@ -417,40 +417,37 @@ $i18n_key_words = array(
 'form.import.success' => 'Importazione eseguita con successo.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-// TODO: translate the following.
-// 'form.teams.hint' =>  'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+'form.teams.hint' => 'Crea un nuovo gruppo creando un account gruppo manager.<br>Puoi anche importare i dati di un team da un file xml esportato da un altro server Anuko Time Tracker (non sono ammessi login duplicati).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-// TODO: translate the following.
-// 'form.profile.12_hours' => '12 hours',
-// 'form.profile.24_hours' => '24 hours',
-// 'form.profile.tracking_mode' => 'Tracking mode',
-// 'form.profile.mode_time' => 'time',
-// 'form.profile.mode_projects' => 'projects',
-// 'form.profile.mode_projects_and_tasks' => 'projects and tasks',
-// 'form.profile.record_type' => 'Record type',
-// 'form.profile.type_all' => 'all',
-// 'form.profile.type_start_finish' => 'start and finish',
-// 'form.profile.type_duration' => 'duration',
-// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
-// 'form.profile.uncompleted_indicators_none' => 'do not show',
-// 'form.profile.uncompleted_indicators_show' => 'show',
+'form.profile.12_hours' => '12 ore',
+'form.profile.24_hours' => '24 ore',
+'form.profile.tracking_mode' => 'Modalità di registrazione',
+'form.profile.mode_time' => 'tempo',
+'form.profile.mode_projects' => 'progetti',
+'form.profile.mode_projects_and_tasks' => 'progetti e compiti',
+'form.profile.record_type' => 'Tipo di record',
+'form.profile.type_all' => 'tutto',
+'form.profile.type_start_finish' => 'inizio e fine',
+'form.profile.type_duration' => 'durata',
+'form.profile.uncompleted_indicators' => 'Indicatori incompleti',
+'form.profile.uncompleted_indicators_none' => 'non mostrare',
+'form.profile.uncompleted_indicators_show' => 'mostra',
+// TODO: translate the following. If the translation is the same word, indicate so. Plugini, perhaps?
 // 'form.profile.plugins' => 'Plugins',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
-// TODO: translate the following.
 'form.mail.from' => 'Da',
 'form.mail.to' => 'A',
-// 'form.mail.report_subject' => 'Time Tracker Report',
-// 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
-// 'form.mail.report_sent' => 'Report sent.',
+'form.mail.report_subject' => 'Rapporto Time Tracker',
+'form.mail.footer' => 'Anuko Time Tracker è un sistema semplice e open source <br>per registrare i tempi di lavoro. Visita <a href="https://www.anuko.com">www.anuko.com</a> per maggiori informazioni.',
+'form.mail.report_sent' => 'Rapporto inviato.',
 'form.mail.invoice_sent' => 'Fattura inviata.',
 
 // Quotas configuration form.
-// TODO: translate the following.
-// 'form.quota.year' => 'Year',
-// 'form.quota.month' => 'Month',
-// 'form.quota.quota' => 'Quota',
-// 'form.quota.workday_hours' => 'Hours in work day',
-// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+'form.quota.year' => 'Anno',
+'form.quota.month' => 'Mese',
+'form.quota.quota' => 'Quota',
+'form.quota.workday_hours' => 'Ore lavorative in un giorno',
+'form.quota.hint' => 'Se i valori sono vuoti, le quote vengono calcolate automaticamente basandosi su ore giornaliere e vacanze.',
 );
