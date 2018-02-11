@@ -321,41 +321,33 @@ $i18n_key_words = array(
 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> è un sistema semplice e open source per registrare i tempi di lavoro.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
-// TODO: improve form.reset_password.message by specifying that it was sent "by email".
-// English form: 'form.reset_password.message' => 'Password reset request sent by email.',
-'form.reset_password.message' => 'Richiesta di reset pasword inviata.',
-// TODO: translate the following.
-// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+'form.reset_password.message' => 'Richiesta di reset password inviata via mail.',
+'form.reset_password.email_subject' => 'Richiesta reset password per Anuko Time Tracker',
+'form.reset_password.email_body' => "Caro utente,\n\n qualcuno, speriamo tu, ha richiesto di reimpostare la tua password per Anuko Time Tracker. Per favore visita questo link per reimpostare la tua password.\n\n%s\n\nAnuko Time Tracker è un sistema semplice e open source per registrare i tempi di lavoro. Visita https://www.anuko.com per maggiori informazioni.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
-// TODO: translate the following.
-// 'form.change_password.tip' => 'Type new password and click on Save.',
+'form.change_password.tip' => 'Digita una nuova password e clicca su Salva.',
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
-// TODO: translate the following.
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.duration_format' => '(oo:mm o 0.0h)',
 'form.time.billable' => 'Fatturabile',
-// TODO: translate the following.
-// 'form.time.uncompleted' => 'Uncompleted',
-// 'form.time.remaining_quota' => 'Remaining quota',
-// 'form.time.over_quota' => 'Over quota',
+'form.time.uncompleted' => 'Incompleti',
+'form.time.remaining_quota' => 'Quota rimanente',
+'form.time.over_quota' => 'Sopra quota',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Questo record è stato salvato con la sola ora di inzio attività. Non è un errore.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
-// TODO: translate the following.
-// 'form.week.new_entry' => 'New entry',
+'form.week.new_entry' => 'Nuova voce',
 
 // Reports form. See example at https://timetracker.anuko.com/reports.php
-// TODO: translate the following.
 'form.reports.save_as_favorite' => 'Salva nei preferiti',
 'form.reports.confirm_delete' => 'Sei sicuro di voler cancellare questo report dai preferiti?',
 'form.reports.include_billable' => 'fatturabile',
 'form.reports.include_not_billable' => 'non fatturabile',
-// 'form.reports.include_invoiced' => 'invoiced',
-// 'form.reports.include_not_invoiced' => 'not invoiced',
+'form.reports.include_invoiced' => 'fatturato',
+'form.reports.include_not_invoiced' => 'non fatturato',
 'form.reports.select_period' => 'Seleziona il periodo di tempo',
 'form.reports.set_period' => 'oppure setta le date',
 'form.reports.show_fields' => 'Mostra i campi',
@@ -365,15 +357,13 @@ $i18n_key_words = array(
 'form.reports.group_by_user' => 'utente',
 'form.reports.group_by_client' => 'cliente',
 'form.reports.group_by_project' => 'progetto',
-// TODO: translate the following.
-// 'form.reports.group_by_task' => 'task',
+'form.reports.group_by_task' => 'compito',
 'form.reports.totals_only' => 'Solo i totali',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Esporta',
-// TODO: translate the following.
-// 'form.report.assign_to_invoice' => 'Assign to invoice',
+'form.report.assign_to_invoice' => 'Assegna alla fattura',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
@@ -381,57 +371,48 @@ $i18n_key_words = array(
 'form.invoice.person' => 'Persona',
 
 // Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
-// TODO: translate the following.
-// 'form.invoice.invoice_to_delete' => 'Invoice to delete',
-// 'form.invoice.invoice_entries' => 'Invoice entries',
-// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
+'form.invoice.invoice_to_delete' => 'Fattura da eliminare',
+'form.invoice.invoice_entries' => 'Voci fattura',
+'form.invoice.confirm_deleting_entries' => 'Per favore conferma di voler eliminare le voci fattura da Time Tracker.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
-// TODO: translate the following.
-// 'form.charts.interval' => 'Interval',
+'form.charts.interval' => 'Intervallo',
 'form.charts.chart' => 'Grafico',
 
 // Projects form. See example at https://timetracker.anuko.com/projects.php
-// TODO: translate the following.
-//'form.projects.active_projects' => 'Active Projects',
-// 'form.projects.inactive_projects' => 'Inactive Projects',
+'form.projects.active_projects' => 'Progetti attivi',
+'form.projects.inactive_projects' => 'Progetti inattivi',
 
 // Tasks form. See example at https://timetracker.anuko.com/tasks.php
-// TODO: translate the following.
-// 'form.tasks.active_tasks' => 'Active Tasks',
-// 'form.tasks.inactive_tasks' => 'Inactive Tasks',
+'form.tasks.active_tasks' => 'Compiti attivi',
+'form.tasks.inactive_tasks' => 'Compiti inattivi',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
-// TODO: translate the following.
-// 'form.users.active_users' => 'Active Users',
-// 'form.users.inactive_users' => 'Inactive Users',
-// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
-// 'form.users.role' => 'Role',
+'form.users.active_users' => 'Utenti attivi',
+'form.users.inactive_users' => 'Utenti inattivi',
+'form.users.uncompleted_entry' => 'Questo utente ha un record temporale incompleto',
+'form.users.role' => 'Ruolo',
 'form.users.manager' => 'Manager',
 'form.users.comanager' => 'Co-manager',
 'form.users.rate' => 'Costo',
 'form.users.default_rate' => 'Costo per ora di default',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
-// TODO: translate the following.
-// 'form.clients.active_clients' => 'Active Clients',
-// 'form.clients.inactive_clients' => 'Inactive Clients',
+'form.clients.active_clients' => 'Clienti attivi',
+'form.clients.inactive_clients' => 'Clienti inattivi',
 
 // Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
-// TODO: translate the following.
-// 'form.client.client_to_delete' => 'Client to delete',
-// 'form.client.client_entries' => 'Client entries',
+'form.client.client_to_delete' => 'Client da eliminare',
+'form.client.client_entries' => 'Voci client',
 
 // Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
-// TODO: translate the following.
-'form.export.hint' => 'Puoi esporate tutti i dati dei team in un file xml. Questo può essere utile se devi trasferire i dati da un server ad un altro.',
+'form.export.hint' => 'Puoi esporate tutti i dati dei gruppo in un file xml. Questo può essere utile se devi trasferire i dati da un server ad un altro.',
 'form.export.compression' => 'Compressione',
-// TODO: translate the following.
-// 'form.export.compression_none' => 'none',
-// 'form.export.compression_bzip' => 'bzip',
+'form.export.compression_none' => 'niente',
+'form.export.compression_bzip' => 'bzip',
 
 // Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-'form.import.hint' => 'Importa i dati del team da un file xml.',
+'form.import.hint' => 'Importa i dati del gruppo da un file xml.',
 'form.import.file' => 'Seleziona il file',
 'form.import.success' => 'Importazione eseguita con successo.',
 
