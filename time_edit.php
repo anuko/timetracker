@@ -248,7 +248,7 @@ if ($request->isPost()) {
         $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.duration'));
     }
   } else {
-    if (!ttTimeHelper::isValidDuration($cl_duration))
+    if (false === ttTimeHelper::postedDurationToMinutes($cl_duration))
       $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
   }
   if (!ttValidDate($cl_date)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.date'));

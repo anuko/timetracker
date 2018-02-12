@@ -71,12 +71,12 @@ $quota = new MonthlyQuota();
 
 if ($request->isPost()){
   // Validate user input.
-  if (false === ttTimeHelper::durationToMinutes($request->getParameter('workdayHours')))
+  if (false === ttTimeHelper::postedDurationToMinutes($request->getParameter('workdayHours')))
     $err->add($i18n->getKey('error.field'), $i18n->getKey('form.quota.workday_hours'));
 
   for ($i = 0; $i < count($months); $i++){
     $val = $request->getParameter($months[$i]);
-    if (false === ttTimeHelper::quotaToMinutes($val))
+    if (false === ttTimeHelper::postedDurationToMinutes($val, 44640/*24*60*31*/))
       $err->add($i18n->getKey('error.field'), $months[$i]);
   }
   // Finished validating user input.
@@ -84,7 +84,7 @@ if ($request->isPost()){
   if ($err->no()) {
 
     // Handle workday hours.
-    $workday_minutes = ttTimeHelper::durationToMinutes($request->getParameter('workdayHours'));
+    $workday_minutes = ttTimeHelper::postedDurationToMinutes($request->getParameter('workdayHours'));
     if ($workday_minutes != $user->workday_minutes) {
       if (!ttTeamHelper::update($user->team_id, array('name'=>$user->team,'workday_minutes'=>$workday_minutes)))
         $err->add($i18n->getKey('error.db'));
@@ -93,7 +93,7 @@ if ($request->isPost()){
     // Handle monthly quotas for a selected year.
     $selectedYear = (int) $request->getParameter('year');
     for ($i = 0; $i < count($months); $i++){
-      $quota_in_minutes = ttTimeHelper::quotaToMinutes($request->getParameter($months[$i]));
+      $quota_in_minutes = ttTimeHelper::postedDurationToMinutes($request->getParameter($months[$i]), 44640/*24*60*31*/);
       if (!$quota->update($selectedYear, $i+1, $quota_in_minutes))
         $err->add($i18n->getKey('error.db'));
     }

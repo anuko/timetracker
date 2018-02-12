@@ -107,19 +107,27 @@ class ttTimeHelper {
   }
 
   // postedDurationToMinutes - converts a value representing a duration
-  // (usually enetered in a form by a user) to integer number of minutes.
+  // (usually enetered in a form by a user) to an integer number of minutes.
   //
-  // At the moment, we have 2 variations of duration types:
+  // Parameters:
+  //   $duration - user entered duration string. Valid strings are:
+  //               3 or 3h - means 3 hours. Note: h and m letters are not localized.
+  //               0.25 or 0.25h or .25 or .25h - means a quarter of hour.
+  //               0,25 or 0,25h or ,25 or ,25h - same as above for users with comma ad decimal mark.
+  //               1:30 - means 1 hour 30 minutes.
+  //               25m - means 25 minutes.
+  //   $max - maximum number of minutes that is valid.
+  //
+  //   At the moment, we have 2 variations of duration types:
   //   1) A duration within a day, such as in a time entry.
-  //   These are less or equal to 24 hours.
+  //   These are less or equal to 24*60 minutes.
   //
-  //   2) A duration of a monthly quota, with max value of 31*24 hours.
+  //   2) A duration of a monthly quota, with max value of 31*24*60 minutes.
   //
   // This function is generic to be used for both types.
-  // Other functions will be used to check for specific max values.
   //
   // Returns false if the value cannot be converted.
-  static function postedDurationToMinutes($duration) {
+  static function postedDurationToMinutes($duration, $max = 1440) {
     // Handle empty value.
     if (!isset($duration) || strlen($duration) == 0)
       return null; // Value is not set. Caller decides whether it is valid or not.
@@ -127,14 +135,14 @@ class ttTimeHelper {
     // Handle whole hours.
     if (preg_match('/^\d{1,3}h?$/', $duration )) { // 0 - 999, 0h - 999h
       $minutes = 60 * trim($duration, 'h');
-      return $minutes;
+      return $minutes > $max ? false : $minutes;
     }
 
     // Handle a normalized duration value.
     if (preg_match('/^\d{1,3}:[0-5][0-9]$/', $duration )) { // 0:00 - 999:59
       $time_array = explode(':', $duration);
       $minutes = (int)@$time_array[1] + ((int)@$time_array[0]) * 60;
-      return $minutes;
+      return $minutes > $max ? false : $minutes;
     }
 
     // Handle localized fractional hours.
@@ -145,142 +153,32 @@ class ttTimeHelper {
           $duration = str_replace (',', '.', $duration);
 
         $minutes = (int)round(60 * floatval($duration));
-        return $minutes;
+        return $minutes > $max ? false : $minutes;
     }
 
     // Handle minutes. Some users enter durations like 10m (meaning 10 minutes).
     if (preg_match('/^\d{1,5}m$/', $duration )) { // 0m - 99999m
       $minutes = (int) trim($duration, 'm');
-      return $minutes;
+      return $minutes > $max ? false : $minutes;
     }
 
     // Everything else is not a valid duration.
     return false;
   }
 
-  static function durationToMinutes($duration) {
-    $minutes = ttTimeHelper::postedDurationToMinutes($duration);
-    if (false === $minutes || $minutes > 24*60)
-      return false; // $duration is not valid for a day entry.
-    return $minutes;
-  }
+  // minutesToDuration converts an integer number of minutes into duration string.
+  // Formats returned HH:MM, HHH:MM, HH, or HHH.
+  static function minutesToDuration($minutes, $abbreviate = false) {
+    if ($minutes < 0) return false;
 
-  static function quotaToMinutes($duration) {
-    $minutes = ttTimeHelper::postedDurationToMinutes($duration);
-    if (false === $minutes || $minutes > 31*24*60)
-      return false; // $duration is not valid for a monthly quota.
-    return $minutes;
-  }
+    $hours = (string) (int)($minutes / 60);
+    $mins = (string) round(fmod($minutes, 60));
+    if (strlen($mins) == 1)
+      $mins = '0' . $mins;
+    if ($abbreviate && $mins == '00')
+      return $hours;
 
-  // validateDuration - a future replacement of the isValidDuration above.
-  // Validates a passed in $value as a time duration string in hours and / or minutes.
-  // Returns either a normalized duration (hh:mm) or false if $value is invalid.
-  //
-  // This is a convenience function that allows users to pass in data in a variety of formats.
-  //
-  // 3 or 3h  - means 3 hours - normalized 3:00. Note: h and m letters are not localized.
-  // 0.25 or 0.25h or .25 or .25h - means a quarter of hour - normalized 0:15.
-  // 0,25 0r 0,25h or ,25 or ,25h - means the same as above for users with comma ad decimal mark.
-  // 1:30 - means 1 hour 30 mminutes - normalized 1:30.
-  // 25m - means 25 minutes - normalized 0:25.
-  static function validateDuration($value) {
-    // Handle empty value.
-    if (!isset($value) || strlen($value) == 0)
-      return false;
-
-    // Handle whole hours.
-    if (preg_match('/^([0-1]{0,1}[0-9]|2[0-4])h?$/', $value )) { // 0, 1 ... 24
-      $normalized = trim($value, 'h');
-      $normalized .= ':00';
-      return $normalized;
-    }
-    // Handle already normalized value.
-    if (preg_match('/^([0-1]{0,1}[0-9]|2[0-3]):?[0-5][0-9]$/', $value )) { // 0:00 - 23:59, 000 - 2359
-      return $value;
-    }
-    // Handle a special case of 24:00.
-    if ($value == '24:00') {
-      return $value;
-    }
-    // Handle localized fractional hours.
-    global $user;
-    $localizedPattern = '/^([0-1]{0,1}[0-9]|2[0-3])?['.$user->decimal_mark.'][0-9]{1,4}h?$/';
-    if (preg_match($localizedPattern, $value )) { // decimal values like 0.5, 1.25h, ... .. 23.9999h (or with comma)
-        if ($user->decimal_mark == ',')
-          $value = str_replace (',', '.', $value);
-
-        $val = floatval($value);
-        $mins = round($val * 60);
-        $hours = (string)((int)($mins / 60));
-        $mins = (string)($mins % 60);
-        if (strlen($mins) == 1)
-          $mins = '0' . $mins;
-        return $hours.':'.$mins;
-    }
-    // Handle minutes.
-    if (preg_match('/^\d{1,4}m$/', $value )) { // ddddm
-      $mins = (int) trim($value, 'm');
-      if ($mins > 1440) // More minutes than an entire day could hold.
-        return false;
-      $hours = (string)((int)($mins / 60));
-      $mins = (string)($mins % 60);
-      if (strlen($mins) == 1)
-        $mins = '0' . $mins;
-      return $hours.':'.$mins;
-    }
-    return false;
-  }
-
-  // normalizeDuration - converts a valid time duration string to format 00:00.
-  static function normalizeDuration($value, $leadingZero = true) {
-    $time_value = $value;
-
-    // If we have a decimal format - convert to time format 00:00.
-    global $user;
-    if ($user->decimal_mark == ',')
-      $time_value = str_replace (',', '.', $time_value);
-
-    if((strpos($time_value, '.') !== false) || (strpos($time_value, 'h') !== false)) {
-      $val = floatval($time_value);
-      $mins = round($val * 60);
-      $hours = (string)((int)($mins / 60));
-      $mins = (string)($mins % 60);
-      if ($leadingZero && strlen($hours) == 1)
-        $hours = '0'.$hours;
-      if (strlen($mins) == 1)
-        $mins = '0' . $mins;
-      return $hours.':'.$mins;
-    }
-
-    $time_a = explode(':', $time_value);
-    $res = '';
-
-    // 0-99
-    if ((strlen($time_value) >= 1) && (strlen($time_value) <= 2) && !isset($time_a[1])) {
-      $hours = $time_a[0];
-      if ($leadingZero && strlen($hours) == 1)
-        $hours = '0'.$hours;
-       return $hours.':00';
-    }
-
-    // 000-2359 (2400)
-    if ((strlen($time_value) >= 3) && (strlen($time_value) <= 4) && !isset($time_a[1])) {
-      if (strlen($time_value)==3) $time_value = '0'.$time_value;
-      $hours = substr($time_value,0,2);
-      if ($leadingZero && strlen($hours) == 1)
-        $hours = '0'.$hours;
-      return $hours.':'.substr($time_value,2,2);
-    }
-
-    // 0:00-23:59 (24:00)
-    if ((strlen($time_value) >= 4) && (strlen($time_value) <= 5) && isset($time_a[1])) {
-      $hours = $time_a[0];
-      if ($leadingZero && strlen($hours) == 1)
-        $hours = '0'.$hours;
-      return $hours.':'.$time_a[1];
-    }
-
-    return $res;
+    return $hours.':'.$mins;
   }
 
   // toMinutes - converts a time string in format 00:00 to a number of minutes.
@@ -496,6 +394,10 @@ class ttTimeHelper {
     $start = $fields['start'];
     $finish = $fields['finish'];
     $duration = $fields['duration'];
+    if ($duration) {
+      $minutes = ttTimeHelper::postedDurationToMinutes($duration);
+      $duration = ttTimeHelper::minutesToDuration($minutes);
+    }
     $client = $fields['client'];
     $project = $fields['project'];
     $task = $fields['task'];
@@ -513,7 +415,6 @@ class ttTimeHelper {
       $finish = ttTimeHelper::to24HourFormat($finish);
       if ('00:00' == $finish) $finish = '24:00';
     }
-    $duration = ttTimeHelper::normalizeDuration($duration);
 
     if (!$timestamp) {
       $timestamp = date('YmdHis'); //yyyymmddhhmmss
@@ -562,6 +463,10 @@ class ttTimeHelper {
     $start = $fields['start'];
     $finish = $fields['finish'];
     $duration = $fields['duration'];
+    if ($duration) {
+      $minutes = ttTimeHelper::postedDurationToMinutes($duration);
+      $duration = ttTimeHelper::minutesToDuration($minutes);
+    }
     $note = $fields['note'];
 
     $billable_part = '';
@@ -576,8 +481,7 @@ class ttTimeHelper {
     $start = ttTimeHelper::to24HourFormat($start);
     $finish = ttTimeHelper::to24HourFormat($finish);
     if ('00:00' == $finish) $finish = '24:00';
-    $duration = ttTimeHelper::normalizeDuration($duration);
-
+    
     if ($start) $duration = '';
 
     if ($duration) {

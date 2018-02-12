@@ -368,11 +368,12 @@ if ($request->isPost()) {
             $existingDuration = $dataArray[$rowNumber][$dayHeader]['duration'];
             // If posted value is not null, check and normalize it.
             if ($postedDuration) {
-              if (ttTimeHelper::isValidDuration($postedDuration)) {
-                $postedDuration = ttTimeHelper::normalizeDuration($postedDuration, false); // No leading zero.
-              } else {
+              if (false === ttTimeHelper::postedDurationToMinutes($postedDuration)) {
                 $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
                 $result = false; break; // Break out. Stop any further processing.
+              } else {
+                $minutes = ttTimeHelper::postedDurationToMinutes($postedDuration);
+                $postedDuration = ttTimeHelper::minutesToDuration($minutes);
               }
             }
             // Do not process if value has not changed.
