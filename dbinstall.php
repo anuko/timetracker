@@ -709,7 +709,7 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_log` ADD `paid` tinyint(4) NULL default '0' AFTER `billable`");
   }
 
-  if ($_POST["convert11400to11714"]) {
+  if ($_POST["convert11400to11715"]) {
     setChange("ALTER TABLE `tt_teams` DROP `address`");
     setChange("ALTER TABLE `tt_fav_reports` ADD `report_spec` text default NULL AFTER `user_id`");
     setChange("ALTER TABLE `tt_fav_reports` ADD `paid_status` tinyint(4) default NULL AFTER `invoice`");
@@ -720,6 +720,10 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_teams` ADD `config` text default NULL AFTER `custom_logo`");
     setChange("ALTER TABLE `tt_monthly_quotas` ADD `minutes` int(11) DEFAULT NULL");
     setChange("ALTER TABLE `tt_teams` ADD `workday_minutes` smallint(4) DEFAULT '480' AFTER `workday_hours`");
+    setChange("UPDATE `tt_teams` SET `workday_minutes` = 60 * `workday_hours`");
+    setChange("ALTER TABLE `tt_teams` DROP `workday_hours`");
+    setChange("UPDATE `tt_monthly_quotas` SET `minutes` = 60 * `quota`");
+    setChange("ALTER TABLE `tt_monthly_quotas` DROP `quota`");
   }
 
   if ($_POST["cleanup"]) {
@@ -764,7 +768,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.17.14)</b>
+    <td width="80%"><b>Create database structure (v1.17.15)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -800,8 +804,8 @@ if ($_POST) {
     <td><input type="submit" name="convert1600to11400" value="Update"><br></td>
   </tr>
   <tr valign="top">
-    <td>Update database structure (v1.14 to v1.17.14)</td>
-    <td><input type="submit" name="convert11400to11714" value="Update"><br></td>
+    <td>Update database structure (v1.14 to v1.17.15)</td>
+    <td><input type="submit" name="convert11400to11715" value="Update"><br></td>
   </tr>
 </table>
 

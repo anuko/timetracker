@@ -71,12 +71,12 @@ $quota = new MonthlyQuota();
 
 if ($request->isPost()){
   // Validate user input.
-  if (!ttTimeHelper::isValidDuration($request->getParameter('workdayHours')))
+  if (false === ttTimeHelper::durationToMinutes($request->getParameter('workdayHours')))
     $err->add($i18n->getKey('error.field'), $i18n->getKey('form.quota.workday_hours'));
 
   for ($i = 0; $i < count($months); $i++){
     $val = $request->getParameter($months[$i]);
-    if (!$quota->isValidQuota($val))
+    if (false === ttTimeHelper::quotaToMinutes($val))
       $err->add($i18n->getKey('error.field'), $months[$i]);
   }
   // Finished validating user input.
@@ -84,16 +84,17 @@ if ($request->isPost()){
   if ($err->no()) {
 
     // Handle workday hours.
-    $hours = $quota->quotaToFloat($request->getParameter('workdayHours'));
-    if ($hours != $user->workday_hours) {
-      if (!ttTeamHelper::update($user->team_id, array('name'=>$user->team,'workday_hours'=>$hours)))
+    $workday_minutes = ttTimeHelper::durationToMinutes($request->getParameter('workdayHours'));
+    if ($workday_minutes != $user->workday_minutes) {
+      if (!ttTeamHelper::update($user->team_id, array('name'=>$user->team,'workday_minutes'=>$workday_minutes)))
         $err->add($i18n->getKey('error.db'));
     }
 
     // Handle monthly quotas for a selected year.
     $selectedYear = (int) $request->getParameter('year');
     for ($i = 0; $i < count($months); $i++){
-      if (!$quota->update($selectedYear, $i+1, $request->getParameter($months[$i])))
+      $quota_in_minutes = ttTimeHelper::quotaToMinutes($request->getParameter($months[$i]));
+      if (!$quota->update($selectedYear, $i+1, $quota_in_minutes))
         $err->add($i18n->getKey('error.db'));
     }
 
@@ -107,7 +108,7 @@ if ($request->isPost()){
 
 // Get monthly quotas for the entire year.
 $monthsData = $quota->get($selectedYear);
-$workdayHours = ttTimeHelper::toAbsDuration($user->workday_hours * 60, true);
+$workdayHours = ttTimeHelper::toAbsDuration($user->workday_minutes, true);
 
 $form = new Form('monthlyQuotasForm');
 $form->addInput(array('type'=>'text', 'name'=>'workdayHours', 'value'=>$workdayHours, 'style'=>'width:60px'));
@@ -116,7 +117,7 @@ for ($i=0; $i < count($months); $i++) {
   $value = "";
   if (array_key_exists($i+1, $monthsData)){
     $value = $monthsData[$i+1];
-    $value = ttTimeHelper::toAbsDuration($value * 60, true);
+    $value = ttTimeHelper::toAbsDuration($value, true);
   }
   $name = $months[$i];
   $form->addInput(array('type'=>'text','name'=>$name,'maxlength'=>6,'value'=> $value,'style'=>'width:70px'));

@@ -376,7 +376,6 @@ CREATE TABLE `tt_monthly_quotas` (
   `team_id` int(11) NOT NULL,             # team id
   `year` smallint(5) UNSIGNED NOT NULL,   # quota year
   `month` tinyint(3) UNSIGNED NOT NULL,   # quota month
-  `quota` decimal(5,2) NOT NULL,          # number of work hours in specified month and year
   `minutes` int(11) DEFAULT NULL,         # quota in minutes in specified month and year
   PRIMARY KEY (`team_id`,`year`,`month`)
 );

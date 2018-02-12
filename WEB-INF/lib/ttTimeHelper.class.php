@@ -106,6 +106,72 @@ class ttTimeHelper {
     return false;
   }
 
+  // postedDurationToMinutes - converts a value representing a duration
+  // (usually enetered in a form by a user) to integer number of minutes.
+  //
+  // At the moment, we have 2 variations of duration types:
+  //   1) A duration within a day, such as in a time entry.
+  //   These are less or equal to 24 hours.
+  //
+  //   2) A duration of a monthly quota, with max value of 31*24 hours.
+  //
+  // This function is generic to be used for both types.
+  // Other functions will be used to check for specific max values.
+  //
+  // Returns false if the value cannot be converted.
+  static function postedDurationToMinutes($duration) {
+    // Handle empty value.
+    if (!isset($duration) || strlen($duration) == 0)
+      return null; // Value is not set. Caller decides whether it is valid or not.
+
+    // Handle whole hours.
+    if (preg_match('/^\d{1,3}h?$/', $duration )) { // 0 - 999, 0h - 999h
+      $minutes = 60 * trim($duration, 'h');
+      return $minutes;
+    }
+
+    // Handle a normalized duration value.
+    if (preg_match('/^\d{1,3}:[0-5][0-9]$/', $duration )) { // 0:00 - 999:59
+      $time_array = explode(':', $duration);
+      $minutes = (int)@$time_array[1] + ((int)@$time_array[0]) * 60;
+      return $minutes;
+    }
+
+    // Handle localized fractional hours.
+    global $user;
+    $localizedPattern = '/^(\d{1,3})?['.$user->decimal_mark.'][0-9]{1,4}h?$/';
+    if (preg_match($localizedPattern, $duration )) { // decimal values like .5, 1.25h, ... .. 999.9999h (or with comma)
+        if ($user->decimal_mark == ',')
+          $duration = str_replace (',', '.', $duration);
+
+        $minutes = (int)round(60 * floatval($duration));
+        return $minutes;
+    }
+
+    // Handle minutes. Some users enter durations like 10m (meaning 10 minutes).
+    if (preg_match('/^\d{1,5}m$/', $duration )) { // 0m - 99999m
+      $minutes = (int) trim($duration, 'm');
+      return $minutes;
+    }
+
+    // Everything else is not a valid duration.
+    return false;
+  }
+
+  static function durationToMinutes($duration) {
+    $minutes = ttTimeHelper::postedDurationToMinutes($duration);
+    if (false === $minutes || $minutes > 24*60)
+      return false; // $duration is not valid for a day entry.
+    return $minutes;
+  }
+
+  static function quotaToMinutes($duration) {
+    $minutes = ttTimeHelper::postedDurationToMinutes($duration);
+    if (false === $minutes || $minutes > 31*24*60)
+      return false; // $duration is not valid for a monthly quota.
+    return $minutes;
+  }
+
   // validateDuration - a future replacement of the isValidDuration above.
   // Validates a passed in $value as a time duration string in hours and / or minutes.
   // Returns either a normalized duration (hh:mm) or false if $value is invalid.

@@ -115,7 +115,7 @@ $i18n_key_words = array(
 'button.reset_password' => 'Reset password',
 'button.send' => 'Invia',
 'button.send_by_email' => 'Invia tramite e-mail',
-'button.create_team' => 'Crea team',
+'button.create_team' => 'Crea gruppo',
 'button.export' => 'Esporta gruppo',
 'button.import' => 'Importa gruppo',
 'button.close' => 'Chiudi',
@@ -417,7 +417,7 @@ $i18n_key_words = array(
 'form.import.success' => 'Importazione eseguita con successo.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' => 'Crea un nuovo gruppo creando un account gruppo manager.<br>Puoi anche importare i dati di un team da un file xml esportato da un altro server Anuko Time Tracker (non sono ammessi login duplicati).',
+'form.teams.hint' => 'Crea un nuovo gruppo creando un account gruppo manager.<br>Puoi anche importare i dati di un gruppo da un file xml esportato da un altro server Anuko Time Tracker (non sono ammessi login duplicati).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 'form.profile.12_hours' => '12 ore',

@@ -34,7 +34,6 @@ class MonthlyQuota {
   var $db;       // Database connection.
   var $team_id;  // Team id.
 
-  // Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use __construct() in new code.
   function __construct() {
     $this->db = getConnection();
     global $user;
@@ -42,13 +41,12 @@ class MonthlyQuota {
   }
 
   // update - deletes a quota, then inserts a new one.
-  public function update($year, $month, $quota) {
+  public function update($year, $month, $minutes) {
     $team_id = $this->team_id;
     $deleteSql = "DELETE FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $team_id";
     $this->db->exec($deleteSql);
-    if ($quota){
-      $float_quota = $this->quotaToFloat($quota);
-      $insertSql = "INSERT INTO tt_monthly_quotas (team_id, year, month, quota) values ($team_id, $year, $month, $float_quota)";
+    if ($minutes){
+      $insertSql = "INSERT INTO tt_monthly_quotas (team_id, year, month, minutes) values ($team_id, $year, $month, $minutes)";
       $affected = $this->db->exec($insertSql);
       return (!is_a($affected, 'PEAR_Error'));
     }
@@ -67,7 +65,7 @@ class MonthlyQuota {
   // getSingle - obtains a quota for a single month.
   private function getSingle($year, $month) {
     $team_id = $this->team_id;
-    $sql = "SELECT quota FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $team_id";
+    $sql = "SELECT minutes FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $team_id";
     $reader = $this->db->query($sql);
     if (is_a($reader, 'PEAR_Error')) {
       return false;
@@ -75,19 +73,18 @@ class MonthlyQuota {
 
     $row = $reader->fetchRow();
     if ($row)
-      return $row['quota'];
+      return $row['minutes'];
 
     // If we did not find a record, return a calculated monthly quota.
     $numWorkdays = $this->getNumWorkdays($month, $year);
     global $user;
-    return $numWorkdays * $user->workday_hours; // TODO: fix a rounding issue for small values like 0:01
-                                                // Possibly with a database field type change (minutes?).
+    return $numWorkdays * $user->workday_minutes;
   }
 
   // getMany - returns an array of quotas for a given year for team.
   private function getMany($year){
     $team_id = $this->team_id;
-    $sql = "SELECT month, quota FROM tt_monthly_quotas WHERE year = $year AND team_id = $team_id";
+    $sql = "SELECT month, minutes FROM tt_monthly_quotas WHERE year = $year AND team_id = $team_id";
     $result = array();
     $res = $this->db->query($sql);
     if (is_a($res, 'PEAR_Error')) {
@@ -95,7 +92,7 @@ class MonthlyQuota {
     }
 
     while ($val = $res->fetchRow()) {
-      $result[$val['month']] = $val['quota'];
+      $result[$val['month']] = $val['minutes'];
     }
 
     return $result;
