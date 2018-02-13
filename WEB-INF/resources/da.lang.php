@@ -432,6 +432,8 @@ $i18n_key_words = array(
 'form.profile.type_all' => 'Alle',
 'form.profile.type_start_finish' => 'Start og slut',
 'form.profile.type_duration' => 'Varighed',
+// TODO: translate the following.
+// 'form.profile.allow_overlap' => 'Allow overlap',
 'form.profile.uncompleted_indicators' => 'Uafsluttede indikatore',
 'form.profile.uncompleted_indicators_none' => 'Vis ikke',
 'form.profile.uncompleted_indicators_show' => 'Vis',

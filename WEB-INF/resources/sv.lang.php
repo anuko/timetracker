@@ -437,6 +437,8 @@ $i18n_key_words = array(
 'form.profile.type_all' => 'Alla',
 'form.profile.type_start_finish' => 'Starttid och sluttid',
 'form.profile.type_duration' => 'Varaktighet',
+// TODO: translate the following.
+// 'form.profile.allow_overlap' => 'Allow overlap',
 'form.profile.uncompleted_indicators' => 'Indikatorer för oavslutad registrering',
 'form.profile.uncompleted_indicators_none' => 'Visa inte',
 'form.profile.uncompleted_indicators_show' => 'Visa',

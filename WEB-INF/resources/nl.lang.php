@@ -425,12 +425,14 @@ $i18n_key_words = array(
 'form.profile.mode_projects' => 'projecten',
 'form.profile.mode_projects_and_tasks' => 'projecten en taken',
 'form.profile.record_type' => 'Registratie type',
-'form.profile.uncompleted_indicators' => 'Onvolledige indicatoren',
-'form.profile.uncompleted_indicators_none' => 'verberg',
-'form.profile.uncompleted_indicators_show' => 'toon',
 'form.profile.type_all' => 'begin, einde en duur',
 'form.profile.type_start_finish' => 'begin en einde',
 'form.profile.type_duration' => 'duur',
+// TODO: translate the following.
+// 'form.profile.allow_overlap' => 'Allow overlap',
+'form.profile.uncompleted_indicators' => 'Onvolledige indicatoren',
+'form.profile.uncompleted_indicators_none' => 'verberg',
+'form.profile.uncompleted_indicators_show' => 'toon',
 'form.profile.plugins' => 'Plugins',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.

@@ -467,6 +467,7 @@ $i18n_key_words = array(
 'form.profile.type_start_finish' => 'התחלה וסיום',
 'form.profile.type_duration' => 'משך זמן',
 // TODO: translate the following.
+// 'form.profile.allow_overlap' => 'Allow overlap',
 // 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
 // 'form.profile.uncompleted_indicators_none' => 'do not show',
 // 'form.profile.uncompleted_indicators_show' => 'show',
