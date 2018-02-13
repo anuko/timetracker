@@ -166,11 +166,15 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.profile.tracking_mode}:</td>
-            <td>{$forms.profileForm.tracking_mode.control} {$forms.profileForm.task_required.control} <span id="task_required_label"><label for="task_required">{$i18n.label.required}</label></span></td></td>
+            <td>{$forms.profileForm.tracking_mode.control} {$forms.profileForm.task_required.control} <span id="task_required_label"><label for="task_required">{$i18n.label.required}</label></span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.profile.record_type}:</td>
             <td>{$forms.profileForm.record_type.control}</td>
+          </tr>
+          <tr>
+            <td align="right" nowrap>{$i18n.form.profile.allow_overlap}:</td>
+            <td>{$forms.profileForm.allow_overlap.control} <a href="https://www.anuko.com/lp/tt_16.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.profile.uncompleted_indicators}:</td>

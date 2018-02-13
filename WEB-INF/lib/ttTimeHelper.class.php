@@ -595,8 +595,8 @@ class ttTimeHelper {
   //   $record_id - optional record id we may be editing, excluded from overlap set
   static function overlaps($user_id, $date, $start, $finish, $record_id = null) {
     // Do not bother checking if we allow overlaps.
-    if (defined('ALLOW_OVERLAP') && ALLOW_OVERLAP == true)
-      return false;
+    global $user;
+    if ($user->allow_overlap) return false;
 
     $mdb2 = getConnection();
 

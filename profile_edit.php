@@ -62,6 +62,7 @@ if ($request->isPost()) {
     $cl_project_required = $request->getParameter('project_required');
     $cl_task_required = $request->getParameter('task_required');
     $cl_record_type = $request->getParameter('record_type');
+    $cl_allow_overlap = $request->getParameter('allow_overlap');
     $cl_uncompleted_indicators = $request->getParameter('uncompleted_indicators');
     $cl_bcc_email = trim($request->getParameter('bcc_email'));
 
@@ -96,6 +97,7 @@ if ($request->isPost()) {
     $cl_project_required = $user->project_required;
     $cl_task_required = $user->task_required;
     $cl_record_type = $user->record_type;
+    $cl_allow_overlap = $user->allow_overlap;
     $cl_uncompleted_indicators = $user->uncompleted_indicators;
     $cl_bcc_email = $user->bcc_email;
 
@@ -188,6 +190,9 @@ if ($user->canManageTeam()) {
   $record_type_options[TYPE_START_FINISH] = $i18n->getKey('form.profile.type_start_finish');
   $record_type_options[TYPE_DURATION] = $i18n->getKey('form.profile.type_duration');
   $form->addInput(array('type'=>'combobox','name'=>'record_type','style'=>'width: 150px;','data'=>$record_type_options,'value'=>$cl_record_type));
+
+  // Allow overlap checkbox.
+  $form->addInput(array('type'=>'checkbox','name'=>'allow_overlap','value'=>$cl_allow_overlap));
 
   // Uncompleted indicators checkbox.
   $form->addInput(array('type'=>'checkbox','name'=>'uncompleted_indicators','value'=>$cl_uncompleted_indicators));
@@ -283,6 +288,8 @@ if ($request->isPost()) {
       // Prepare config string.
       if ($cl_show_holidays)
         $config .= ',show_holidays';
+      if ($cl_allow_overlap)
+        $config .= ',allow_overlap';
       if ($cl_uncompleted_indicators)
         $config .= ',uncompleted_indicators';
       $config = trim($config, ',');
