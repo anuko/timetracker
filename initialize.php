@@ -125,10 +125,6 @@ define('TYPE_ALL', 0); // Time record can be specified with either duration or s
 define('TYPE_START_FINISH', 1); // Time record has start and finish times.
 define('TYPE_DURATION', 2); // Time record has only duration, no start and finish times.
 
-// Definitions for uncompleted time entry indicators.
-define('UNCOMPLETED_INDICATORS_NONE', 0); // Do not show indicators.
-define('UNCOMPLETED_INDICATORS', 1); // Show indicators.
-
 // User access rights - bits that collectively define an access mask to the system (a role).
 // We'll have some bits here (1,2, etc...) reserved for future use.
 define('right_data_entry', 4);     // Right to enter work hours and expenses.

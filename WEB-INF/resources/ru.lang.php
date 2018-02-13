@@ -426,8 +426,6 @@ $i18n_key_words = array(
 'form.profile.type_duration' => 'длительность',
 'form.profile.allow_overlap' => 'Возможное перекрывание',
 'form.profile.uncompleted_indicators' => 'Индикаторы незавершения',
-'form.profile.uncompleted_indicators_none' => 'не показывать',
-'form.profile.uncompleted_indicators_show' => 'показывать',
 'form.profile.plugins' => 'Плагины',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.

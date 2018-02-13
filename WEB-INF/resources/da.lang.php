@@ -435,8 +435,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.profile.allow_overlap' => 'Allow overlap',
 'form.profile.uncompleted_indicators' => 'Uafsluttede indikatore',
-'form.profile.uncompleted_indicators_none' => 'Vis ikke',
-'form.profile.uncompleted_indicators_show' => 'Vis',
 'form.profile.plugins' => 'Plugins',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
