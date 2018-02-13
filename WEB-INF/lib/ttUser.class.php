@@ -46,6 +46,7 @@ class ttUser {
   var $project_required = 0;    // Whether project selection is required on time entires.
   var $task_required = 0;       // Whether task selection is required on time entires.
   var $record_type = 0;         // Record type (duration vs start and finish, or both).
+  var $allow_overlap = 0;       // Whether to allow overlapping time entries.
   var $uncompleted_indicators = 0; // Uncompleted time entry indicators (show nowhere or on users page).
   var $bcc_email = null;        // Bcc email.
   var $currency = null;         // Currency.
@@ -100,7 +101,7 @@ class ttUser {
       $this->project_required = $val['project_required'];
       $this->task_required = $val['task_required'];
       $this->record_type = $val['record_type'];
-      $this->uncompleted_indicators = $val['uncompleted_indicators'];
+      // $this->uncompleted_indicators = $val['uncompleted_indicators']; // TODO: remove the field from query and drop the field.
       $this->bcc_email = $val['bcc_email'];
       $this->team = $val['team_name'];
       $this->currency = $val['currency'];
@@ -109,9 +110,13 @@ class ttUser {
       $this->workday_minutes = $val['workday_minutes'];
       $this->custom_logo = $val['custom_logo'];
 
-      // Set user config options.
       $this->config = $val['config'];
-      $this->show_holidays = in_array('show_holidays', explode(',', $this->config));
+      $config_array = explode(',', $this->config);
+
+      // Set user config options.
+      $this->show_holidays = in_array('show_holidays', $config_array);
+      $this->allow_overlap = in_array('allow_overlap', $config_array);
+      $this->uncompleted_indicators = in_array('uncompleted_indicators', $config_array);
 
       // Set "on behalf" id and name.
       if (isset($_SESSION['behalf_id'])) {

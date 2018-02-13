@@ -174,7 +174,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.profile.uncompleted_indicators}:</td>
-            <td>{$forms.profileForm.uncompleted_indicators.control}</td>
+            <td>{$forms.profileForm.uncompleted_indicators.control} <a href="https://www.anuko.com/lp/tt_15.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
 {if $user->isManager()}
           <tr>

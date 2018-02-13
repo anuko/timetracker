@@ -190,10 +190,14 @@ if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'combobox','name'=>'record_type','style'=>'width: 150px;','data'=>$record_type_options,'value'=>$cl_record_type));
 
   // Prepare uncompleted indicators choices.
+  /*
   $uncompleted_indicators_options = array();
   $uncompleted_indicators_options[UNCOMPLETED_INDICATORS_NONE] = $i18n->getKey('form.profile.uncompleted_indicators_none');
   $uncompleted_indicators_options[UNCOMPLETED_INDICATORS] = $i18n->getKey('form.profile.uncompleted_indicators_show');
   $form->addInput(array('type'=>'combobox','name'=>'uncompleted_indicators','style'=>'width: 150px;','data'=>$uncompleted_indicators_options,'value'=>$cl_uncompleted_indicators));
+  */
+  // Uncompleted indicators checkbox.
+  $form->addInput(array('type'=>'checkbox','name'=>'uncompleted_indicators','value'=>$cl_uncompleted_indicators));
 
   // Add bcc email control, for manager only.
   if ($user->isManager()) {
@@ -283,9 +287,11 @@ if ($request->isPost()) {
 
       $plugins = trim($plugins, ',');
 
-      // Prepare config string. At this time we only handle show_holidays here.
+      // Prepare config string.
       if ($cl_show_holidays)
         $config .= ',show_holidays';
+      if ($cl_uncompleted_indicators)
+        $config .= ',uncompleted_indicators';
       $config = trim($config, ',');
 
       $update_result = ttTeamHelper::update($user->team_id, array(
