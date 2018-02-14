@@ -640,13 +640,13 @@ class ttTeamHelper {
 
     $mdb2 = getConnection();
 
-    $decimal_mark = $fields['decimal_mark'];
-    if ($decimal_mark !== null) {
-      $decimal_mark_f = ', decimal_mark';
-      $decimal_mark_v = ', ' . $mdb2->quote($decimal_mark);
-    } else {
-      $decimal_mark_f = '';
-      $decimal_mark_v = '';
+    // Start with team name and currency.
+    $columns = 'name, currency';
+    $values = $mdb2->quote(trim($fields['name'])).', '.$mdb2->quote(trim($fields['currency']));
+
+    if ($fields['decimal_mark']) {
+      $columns .= ', decimal_mark';
+      $values .= ', '.$mdb2->quote($fields['decimal_mark']);
     }
 
     $lang = $fields['lang'];
@@ -654,17 +654,13 @@ class ttTeamHelper {
       global $i18n;
       $lang = $i18n->lang;
     }
+    $columns .= ', lang';
+    $values .= ', '.$mdb2->quote($lang);
 
-    $date_format = $fields['date_format'];
-    if ($date_format !== null) {
-      $date_format_f = ', date_format';
-      $date_format_v = ', ' . $mdb2->quote($date_format);
-    } elseif (defined('DATE_FORMAT_DEFAULT')) {
-      $date_format_f = ', date_format';
-      $date_format_v = ', ' . $mdb2->quote(DATE_FORMAT_DEFAULT);
-    } else {
-      $date_format_f = '';
-      $date_format_v = '';
+    if ($fields['date_format'] || defined('DATE_FORMAT_DEFAULT')) {
+      $date_format = $fields['date_format'] ? $fields['date_format'] : DATE_FORMAT_DEFAULT;
+      $columns .= ', date_format';
+      $values .= ', '.$mdb2->quote($date_format);
     }
 
     $time_format = $fields['time_format'];
@@ -772,10 +768,8 @@ class ttTeamHelper {
       $config_f = '';
     }
 
-    $sql = "insert into tt_teams (name, currency $decimal_mark_f, lang $date_format_f $time_format_f $week_start_f $tracking_mode_f $project_required_f $task_required_f $record_type_f $bcc_email_f $plugins_f $lockspec_f $workday_minutes_f $config_f)
-      values(".$mdb2->quote(trim($fields['name'])).
-      ", ".$mdb2->quote(trim($fields['currency']))." $decimal_mark_v, ".$mdb2->quote($lang).
-      "$date_format_v $time_format_v $week_start_v $tracking_mode_v $project_required_v $task_required_v $record_type_v $bcc_email_v $plugins_v $lockspec_v $workday_minutes_v $config_v)";
+    $sql = "insert into tt_teams ($columns $time_format_f $week_start_f $tracking_mode_f $project_required_f $task_required_f $record_type_f $bcc_email_f $plugins_f $lockspec_f $workday_minutes_f $config_f)
+      values($values $time_format_v $week_start_v $tracking_mode_v $project_required_v $task_required_v $record_type_v $bcc_email_v $plugins_v $lockspec_v $workday_minutes_v $config_v)";
     $affected = $mdb2->exec($sql);
 
     if (!is_a($affected, 'PEAR_Error')) {
