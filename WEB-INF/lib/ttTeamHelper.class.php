@@ -663,113 +663,64 @@ class ttTeamHelper {
       $values .= ', '.$mdb2->quote($date_format);
     }
 
-    $time_format = $fields['time_format'];
-    if ($time_format !== null) {
-      $time_format_f = ', time_format';
-      $time_format_v = ', ' . $mdb2->quote($time_format);
-    } elseif (defined('TIME_FORMAT_DEFAULT')) {
-      $time_format_f = ', time_format';
-      $time_format_v = ', ' . $mdb2->quote(TIME_FORMAT_DEFAULT);
-    } else {
-      $time_format_f = '';
-      $time_format_v = '';
+    if ($fields['time_format'] || defined('TIME_FORMAT_DEFAULT')) {
+      $time_format = $fields['time_format'] ? $fields['time_format'] : TIME_FORMAT_DEFAULT;
+      $columns .= ', time_format';
+      $values .= ', '.$mdb2->quote($time_format);
     }
 
-    $week_start = $fields['week_start'];
-    if ($week_start !== null) {
-      $week_start_f = ', week_start';
-      $week_start_v = ', ' . (int)$week_start;
-    } elseif (defined('WEEK_START_DEFAULT')) {
-      $week_start_f = ', week_start';
-      $week_start_v = ', ' . (int)WEEK_START_DEFAULT;
-    } else {
-      $week_start_f = '';
-      $week_start_v = '';
+    if ($fields['week_start'] || defined('WEEK_START_DEFAULT')) {
+      $week_start = $fields['week_start'] ? $fields['week_start'] : WEEK_START_DEFAULT;
+      $columns .= ', week_start';
+      $values .= ', '.(int)$week_start;
     }
 
-    $tracking_mode = $fields['tracking_mode'];
-    if ($tracking_mode !== null) {
-      $tracking_mode_f = ', tracking_mode';
-      $tracking_mode_v = ', ' . (int)$tracking_mode;
-    } else {
-      $tracking_mode_f = '';
-      $tracking_mode_v = '';
+    if ($fields['tracking_mode']) {
+      $columns .= ', tracking_mode';
+      $values .= ', '.(int)$fields['tracking_mode'];
     }
 
-    $project_required = $fields['project_required'];
-    if ($project_required !== null) {
-      $project_required_f = ', project_required';
-      $project_required_v = ', ' . (int)$project_required;
-    } else {
-      $project_required_f = '';
-      $project_required_v = '';
+    if ($fields['project_required']) {
+      $columns .= ', project_required';
+      $values .= ', '.(int)$fields['project_required'];
     }
 
-    $task_required = $fields['task_required'];
-    if ($task_required !== null) {
-      $task_required_f = ', task_required';
-      $task_required_v = ', ' . (int)$task_required;
-    } else {
-      $task_required_f = '';
-      $task_required_v = '';
+    if ($fields['task_required']) {
+      $columns .= ', task_required';
+      $values .= ', '.(int)$fields['task_required'];
     }
 
-    $record_type = $fields['record_type'];
-    if ($record_type !== null) {
-      $record_type_f = ', record_type';
-      $record_type_v = ', ' . (int)$record_type;
-    } else {
-      $record_type_f = '';
-      $record_type_v = '';
+    if ($fields['record_type']) {
+      $columns .= ', record_type';
+      $values .= ', '.(int)$fields['record_type'];
     }
 
-    $bcc_email = $fields['bcc_email'];
-    if ($bcc_email !== null) {
-      $bcc_email_f = ', bcc_email';
-      $bcc_email_v = ', ' . $mdb2->quote($bcc_email);
-    } else {
-      $bcc_email_f = '';
-      $bcc_email_v = '';
+    if ($fields['bcc_email']) {
+      $columns .= ', bcc_email';
+      $values .= ', '.$mdb2->quote($fields['bcc_email']);
     }
 
-    $plugins = $fields['plugins'];
-    if ($plugins !== null) {
-      $plugins_f = ', plugins';
-      $plugins_v = ', ' . $mdb2->quote($plugins);
-    } else {
-      $plugins_f = '';
-      $plugins_v = '';
+    if ($fields['plugins']) {
+      $columns .= ', plugins';
+      $values .= ', '.$mdb2->quote($fields['plugins']);
     }
 
-    $lock_spec = $fields['lock_spec'];
-    if ($lock_spec !== null) {
-      $lockspec_f = ', lock_spec';
-      $lockspec_v = ', ' . $mdb2->quote($lock_spec);
-    } else {
-      $lockspec_f = '';
-      $lockspec_v = '';
+    if ($fields['lock_spec']) {
+      $columns .= ', lock_spec';
+      $values .= ', '.$mdb2->quote($fields['lock_spec']);
     }
 
-    $workday_minutes = $fields['workday_minutes'];
-    if ($workday_minutes !== null) {
-      $workday_minutes_f = ', workday_minutes';
-      $workday_minutes_v = ', ' . (int)$workday_minutes;
-    } else {
-      $workday_minutes_f = '';
-      $workday_minutes_v = '';
+    if ($fields['workday_minutes']) {
+      $columns .= ', workday_minutes';
+      $values .= ', '.(int)$fields['workday_minutes'];
     }
 
-    $config = $fields['config'];
-    if ($config !== null) {
-      $config_f = ', config';
-      $config_v = ', ' . $mdb2->quote($config);
-    } else {
-      $config_f = '';
-      $config_f = '';
+    if ($fields['config']) {
+      $columns .= ', config';
+      $values .= ', '.$mdb2->quote($fields['config']);
     }
 
-    $sql = "insert into tt_teams ($columns $time_format_f $week_start_f $tracking_mode_f $project_required_f $task_required_f $record_type_f $bcc_email_f $plugins_f $lockspec_f $workday_minutes_f $config_f)
-      values($values $time_format_v $week_start_v $tracking_mode_v $project_required_v $task_required_v $record_type_v $bcc_email_v $plugins_v $lockspec_v $workday_minutes_v $config_v)";
+    $sql = "insert into tt_teams ($columns) values($values)";
     $affected = $mdb2->exec($sql);
 
     if (!is_a($affected, 'PEAR_Error')) {
