@@ -26,12 +26,10 @@ CREATE TABLE `tt_teams` (
   `project_required` smallint(2) NOT NULL DEFAULT '0',       # whether a project selection is required or optional
   `task_required` smallint(2) NOT NULL DEFAULT '0',          # whether a task selection is required or optional
   `record_type` smallint(2) NOT NULL DEFAULT '0',            # time record type ("start and finish", "duration", or both)
-  `uncompleted_indicators` smallint(2) NOT NULL DEFAULT '0', # whether to show indicators for users with uncompleted time entries
   `bcc_email` varchar(100) default NULL,                     # bcc email to copy all reports to
   `plugins` varchar(255) default NULL,                       # a list of enabled plugins for team
   `lock_spec` varchar(255) default NULL,                     # Cron specification for record locking,
                                                              # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
-  `workday_hours` decimal(5,2) DEFAULT '8.00',               # number of work hours in a regular day
   `workday_minutes` smallint(4) DEFAULT '480',               # number of work minutes in a regular working day
   `custom_logo` tinyint(4) default '0',                      # whether to use a custom logo or not
   `config` text default NULL,                                # miscellaneous team configuration settings

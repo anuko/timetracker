@@ -548,7 +548,7 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     $result = array();
-    $sql = "select year, month, quota from tt_monthly_quotas where team_id = $team_id";
+    $sql = "select year, month, minutes from tt_monthly_quotas where team_id = $team_id";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -727,15 +727,6 @@ class ttTeamHelper {
       $record_type_v = '';
     }
 
-    $uncompleted_indicators = $fields['uncompleted_indicators'];
-    if ($uncompleted_indicators !== null) {
-      $uncompleted_indicators_f = ', uncompleted_indicators';
-      $uncompleted_indicators_v = ', ' . (int)$uncompleted_indicators;
-    } else {
-      $uncompleted_indicators_f = '';
-      $uncompleted_indicators_v = '';
-    }
-
     $bcc_email = $fields['bcc_email'];
     if ($bcc_email !== null) {
       $bcc_email_f = ', bcc_email';
@@ -763,19 +754,28 @@ class ttTeamHelper {
       $lockspec_v = '';
     }
 
-    $workday_hours = $fields['workday_hours'];
-    if ($workday_hours !== null) {
-      $workday_hours_f = ', workday_hours';
-      $workday_hours_v = ', ' . (int)$workday_hours;
+    $workday_minutes = $fields['workday_minutes'];
+    if ($workday_minutes !== null) {
+      $workday_minutes_f = ', workday_minutes';
+      $workday_minutes_v = ', ' . (int)$workday_minutes;
     } else {
-      $workday_hours_f = '';
-      $workday_hours_v = '';
+      $workday_minutes_f = '';
+      $workday_minutes_v = '';
     }
 
-    $sql = "insert into tt_teams (name, currency $decimal_mark_f, lang $date_format_f $time_format_f $week_start_f $tracking_mode_f $project_required_f $task_required_f $record_type_f $uncompleted_indicators_f $bcc_email_f $plugins_f $lockspec_f $workday_hours_f)
+    $config = $fields['config'];
+    if ($config !== null) {
+      $config_f = ', config';
+      $config_v = ', ' . $mdb2->quote($config);
+    } else {
+      $config_f = '';
+      $config_f = '';
+    }
+
+    $sql = "insert into tt_teams (name, currency $decimal_mark_f, lang $date_format_f $time_format_f $week_start_f $tracking_mode_f $project_required_f $task_required_f $record_type_f $bcc_email_f $plugins_f $lockspec_f $workday_minutes_f $config_f)
       values(".$mdb2->quote(trim($fields['name'])).
       ", ".$mdb2->quote(trim($fields['currency']))." $decimal_mark_v, ".$mdb2->quote($lang).
-      "$date_format_v $time_format_v $week_start_v $tracking_mode_v $project_required_v $task_required_v $record_type_v $uncompleted_indicators_v $bcc_email_v $plugins_v $lockspec_v $workday_hours_v)";
+      "$date_format_v $time_format_v $week_start_v $tracking_mode_v $project_required_v $task_required_v $record_type_v $bcc_email_v $plugins_v $lockspec_v $workday_minutes_v $config_v)";
     $affected = $mdb2->exec($sql);
 
     if (!is_a($affected, 'PEAR_Error')) {
@@ -800,7 +800,6 @@ class ttTeamHelper {
     $tracking_mode_part = '';
     $task_required_part = ' , task_required = '.(int) $fields['task_required'];
     $record_type_part = '';
-    $uncompleted_indicators_part = '';
     $bcc_email_part = '';
     $plugins_part = '';
     $config_part = '';
@@ -815,7 +814,6 @@ class ttTeamHelper {
     if (isset($fields['week_start'])) $week_start_part = ', week_start = '.(int) $fields['week_start'];
     if (isset($fields['tracking_mode'])) $tracking_mode_part = ', tracking_mode = '.(int) $fields['tracking_mode'];
     if (isset($fields['record_type'])) $record_type_part = ', record_type = '.(int) $fields['record_type'];
-    if (isset($fields['uncompleted_indicators'])) $uncompleted_indicators_part = ', uncompleted_indicators = '.(int) $fields['uncompleted_indicators'];
     if (isset($fields['bcc_email'])) $bcc_email_part = ', bcc_email = '.$mdb2->quote($fields['bcc_email']);
     if (isset($fields['plugins'])) $plugins_part = ', plugins = '.$mdb2->quote($fields['plugins']);
     if (isset($fields['config'])) $config_part = ', config = '.$mdb2->quote($fields['config']);
@@ -824,7 +822,7 @@ class ttTeamHelper {
 
     $sql = "update tt_teams set $name_part $currency_part $lang_part $decimal_mark_part
       $date_format_part $time_format_part $week_start_part $tracking_mode_part $task_required_part $record_type_part
-      $uncompleted_indicators_part $bcc_email_part $plugins_part $config_part $lock_spec_part $workday_minutes_part where id = $team_id";
+      $bcc_email_part $plugins_part $config_part $lock_spec_part $workday_minutes_part where id = $team_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 

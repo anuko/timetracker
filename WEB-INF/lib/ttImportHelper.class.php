@@ -126,11 +126,11 @@ class ttImportHelper {
           'project_required' => $this->teamData['PROJECT_REQUIRED'],
           'task_required' => $this->teamData['TASK_REQUIRED'],
           'record_type' => $this->teamData['RECORD_TYPE'],
-          'uncompleted_indicators' => $this->teamData['UNCOMPLETED_INDICATORS'],
           'bcc_email' => $this->teamData['BCC_EMAIL'],
           'plugins' => $this->teamData['PLUGINS'],
           'lock_spec' => $this->teamData['LOCK_SPEC'],
-          'workday_hours' => $this->teamData['WORKDAY_HOURS']));
+          'workday_minutes' => $this->teamData['WORKDAY_MINUTES'],
+          'config' => $this->teamData['CONFIG']));
         if ($team_id) {
           $this->team_id = $team_id;
           foreach ($this->users as $key=>$user_item) {
@@ -216,7 +216,7 @@ class ttImportHelper {
     }
 
     if ($name == 'MONTHLY_QUOTA' && $this->canImport) {
-      $this->insertMonthlyQuota($this->team_id, $this->currentElement['YEAR'], $this->currentElement['MONTH'], $this->currentElement['QUOTA']);
+      $this->insertMonthlyQuota($this->team_id, $this->currentElement['YEAR'], $this->currentElement['MONTH'], $this->currentElement['MINUTES']);
     }
 
     if ($name == 'LOG_ITEM' && $this->canImport) {
@@ -410,9 +410,9 @@ class ttImportHelper {
   }
 
   // insertMonthlyQuota - a helper function to insert a monthly quota.
-  private function insertMonthlyQuota($team_id, $year, $month, $quota) {
+  private function insertMonthlyQuota($team_id, $year, $month, $minutes) {
     $mdb2 = getConnection();
-    $sql = "INSERT INTO tt_monthly_quotas (team_id, year, month, quota) values ($team_id, $year, $month, $quota)";
+    $sql = "INSERT INTO tt_monthly_quotas (team_id, year, month, minutes) values ($team_id, $year, $month, $minutes)";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
