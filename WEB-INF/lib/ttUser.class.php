@@ -47,6 +47,7 @@ class ttUser {
   var $task_required = 0;       // Whether task selection is required on time entires.
   var $record_type = 0;         // Record type (duration vs start and finish, or both).
   var $allow_overlap = 0;       // Whether to allow overlapping time entries.
+  var $future_entries = 0;      // Whether to allow creating future entries.
   var $uncompleted_indicators = 0; // Uncompleted time entry indicators (show nowhere or on users page).
   var $bcc_email = null;        // Bcc email.
   var $currency = null;         // Currency.
@@ -115,6 +116,7 @@ class ttUser {
       // Set user config options.
       $this->show_holidays = in_array('show_holidays', $config_array);
       $this->allow_overlap = in_array('allow_overlap', $config_array);
+      $this->future_entries = in_array('future_entries', $config_array);
       $this->uncompleted_indicators = in_array('uncompleted_indicators', $config_array);
 
       // Set "on behalf" id and name.

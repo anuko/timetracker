@@ -81,11 +81,6 @@ define('COST_ON_REPORTS', true);
 // define('READONLY_START_FINISH', false);
 
 
-// FUTURE_ENTRIES - defines whether users can create entries for future dates. Defaults to true.
-//
-// define('FUTURE_ENTRIES', false);
-
-
 // WEEKEND_START_DAY
 //
 // This option defines which days are highlighted with weekend color.

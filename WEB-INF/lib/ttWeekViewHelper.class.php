@@ -482,7 +482,7 @@ class ttWeekViewHelper {
     $objEntryDate = new DateAndTime(DB_DATEFORMAT, $entry_date);
 
     // Prohibit creating entries in future.
-    if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES) && $fields['browser_today']) {
+    if (!$user->future_entries && $fields['browser_today']) {
       $objBrowserToday = new DateAndTime(DB_DATEFORMAT, $fields['browser_today']);
       if ($objEntryDate->after($objBrowserToday)) {
         $err->add($i18n->getKey('error.future_date'));

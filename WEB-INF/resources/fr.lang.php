@@ -431,6 +431,7 @@ $i18n_key_words = array(
 'form.profile.type_duration' => 'Durée',
 // TODO: translate the following.
 // 'form.profile.allow_overlap' => 'Allow overlap',
+// 'form.profile.future_entries' => 'Future entries',
 // 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
 'form.profile.plugins' => 'Plugins',
 

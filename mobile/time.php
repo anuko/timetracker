@@ -225,7 +225,7 @@ if ($request->isPost()) {
     // Finished validating user input.
 
     // Prohibit creating entries in future.
-    if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES)) {
+    if (!$user->future_entries) {
       $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
       if ($selected_date->after($browser_today))
         $err->add($i18n->getKey('error.future_date'));

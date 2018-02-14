@@ -63,6 +63,7 @@ if ($request->isPost()) {
     $cl_task_required = $request->getParameter('task_required');
     $cl_record_type = $request->getParameter('record_type');
     $cl_allow_overlap = $request->getParameter('allow_overlap');
+    $cl_future_entries = $request->getParameter('future_entries');
     $cl_uncompleted_indicators = $request->getParameter('uncompleted_indicators');
     $cl_bcc_email = trim($request->getParameter('bcc_email'));
 
@@ -98,6 +99,7 @@ if ($request->isPost()) {
     $cl_task_required = $user->task_required;
     $cl_record_type = $user->record_type;
     $cl_allow_overlap = $user->allow_overlap;
+    $cl_future_entries = $user->future_entries;
     $cl_uncompleted_indicators = $user->uncompleted_indicators;
     $cl_bcc_email = $user->bcc_email;
 
@@ -193,6 +195,9 @@ if ($user->canManageTeam()) {
 
   // Allow overlap checkbox.
   $form->addInput(array('type'=>'checkbox','name'=>'allow_overlap','value'=>$cl_allow_overlap));
+
+  // Future entries checkbox.
+  $form->addInput(array('type'=>'checkbox','name'=>'future_entries','value'=>$cl_future_entries));
 
   // Uncompleted indicators checkbox.
   $form->addInput(array('type'=>'checkbox','name'=>'uncompleted_indicators','value'=>$cl_uncompleted_indicators));
@@ -290,6 +295,8 @@ if ($request->isPost()) {
         $config .= ',show_holidays';
       if ($cl_allow_overlap)
         $config .= ',allow_overlap';
+      if ($cl_future_entries)
+        $config .= ',future_entries';
       if ($cl_uncompleted_indicators)
         $config .= ',uncompleted_indicators';
       $config = trim($config, ',');

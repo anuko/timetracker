@@ -434,6 +434,7 @@ $i18n_key_words = array(
 'form.profile.type_duration' => 'durata',
 // TODO: translate the following.
 // 'form.profile.allow_overlap' => 'Allow overlap',
+// 'form.profile.future_entries' => 'Future entries',
 'form.profile.uncompleted_indicators' => 'Indicatori incompleti',
 // TODO: translate the following. If the translation is the same word, indicate so. Plugini, perhaps?
 // 'form.profile.plugins' => 'Plugins',

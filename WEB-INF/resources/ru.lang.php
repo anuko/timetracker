@@ -425,6 +425,7 @@ $i18n_key_words = array(
 'form.profile.type_start_finish' => 'начало и конец',
 'form.profile.type_duration' => 'длительность',
 'form.profile.allow_overlap' => 'Возможное перекрывание',
+'form.profile.future_entries' => 'Будущие записи',
 'form.profile.uncompleted_indicators' => 'Индикаторы незавершения',
 'form.profile.plugins' => 'Плагины',
 
