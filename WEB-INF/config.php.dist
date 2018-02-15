@@ -70,11 +70,6 @@ define('APP_NAME', '');
 // define('OLD_PASSWORDS', true);
 
 
-// COST_ON_REPORTS - defines the availability of the Cost field on the Reports page.
-//
-define('COST_ON_REPORTS', true);
-
-
 // WEEKEND_START_DAY
 //
 // This option defines which days are highlighted with weekend color.
