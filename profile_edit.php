@@ -62,6 +62,7 @@ if ($request->isPost()) {
     $cl_project_required = $request->getParameter('project_required');
     $cl_task_required = $request->getParameter('task_required');
     $cl_record_type = $request->getParameter('record_type');
+    $cl_punch_in_mode = $request->getParameter('punch_in_mode');
     $cl_allow_overlap = $request->getParameter('allow_overlap');
     $cl_future_entries = $request->getParameter('future_entries');
     $cl_uncompleted_indicators = $request->getParameter('uncompleted_indicators');
@@ -98,6 +99,7 @@ if ($request->isPost()) {
     $cl_project_required = $user->project_required;
     $cl_task_required = $user->task_required;
     $cl_record_type = $user->record_type;
+    $cl_punch_in_mode = $user->punch_in_mode;
     $cl_allow_overlap = $user->allow_overlap;
     $cl_future_entries = $user->future_entries;
     $cl_uncompleted_indicators = $user->uncompleted_indicators;
@@ -192,6 +194,9 @@ if ($user->canManageTeam()) {
   $record_type_options[TYPE_START_FINISH] = $i18n->getKey('form.profile.type_start_finish');
   $record_type_options[TYPE_DURATION] = $i18n->getKey('form.profile.type_duration');
   $form->addInput(array('type'=>'combobox','name'=>'record_type','style'=>'width: 150px;','data'=>$record_type_options,'value'=>$cl_record_type));
+
+  // Punch in mode checkbox.
+  $form->addInput(array('type'=>'checkbox','name'=>'punch_in_mode','value'=>$cl_punch_in_mode));
 
   // Allow overlap checkbox.
   $form->addInput(array('type'=>'checkbox','name'=>'allow_overlap','value'=>$cl_allow_overlap));
@@ -293,6 +298,8 @@ if ($request->isPost()) {
       // Prepare config string.
       if ($cl_show_holidays)
         $config .= ',show_holidays';
+      if ($cl_punch_in_mode)
+        $config .= ',punch_in_mode';
       if ($cl_allow_overlap)
         $config .= ',allow_overlap';
       if ($cl_future_entries)

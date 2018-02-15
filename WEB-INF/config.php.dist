@@ -75,12 +75,6 @@ define('APP_NAME', '');
 define('COST_ON_REPORTS', true);
 
 
-// READONLY_START_FINISH - defines whether the start and finish fields on time entry pages are read-only.
-// This applies to regular users only. Manager and co-managers can edit these values.
-//
-// define('READONLY_START_FINISH', false);
-
-
 // WEEKEND_START_DAY
 //
 // This option defines which days are highlighted with weekend color.
