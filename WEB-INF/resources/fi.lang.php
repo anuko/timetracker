@@ -440,6 +440,7 @@ $i18n_key_words = array(
 'form.profile.type_start_finish' => 'aloitus ja lopetus',
 'form.profile.type_duration' => 'kesto',
 // TODO: translate the following.
+// 'form.profile.allow_overlap' => 'Punch in mode',
 // 'form.profile.allow_overlap' => 'Allow overlap',
 // 'form.profile.future_entries' => 'Future entries',
 // 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
