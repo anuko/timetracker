@@ -129,7 +129,7 @@ function handlePluginCheckboxes() {
             <td>{$i18n.label.required_fields}</td>
           </tr>
 
-{if $user->canManageTeam()}
+{if $user->isManager() || ($user->canManageTeam() && !defined(MANAGER_ONLY_TEAM_SETTINGS))}
           <tr>
             <td colspan="2">&nbsp;</td>
           </tr>

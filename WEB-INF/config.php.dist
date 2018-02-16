@@ -208,3 +208,7 @@ define('AUTH_MODULE', 'db');
 
 // Height in pixels for the note input field in time.php. Defaults to 40.
 // define('NOTE_INPUT_HEIGHT', 100);
+
+// define('MANAGER_ONLY_TEAM_SETTINGS', true); // Note: temporary define, to be removed after introduction of role edits.
+                                               // Currently checked for "defined" only in profile_edit.tpl, meaning that false
+                                               // value here means the same thing.
