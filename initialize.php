@@ -125,6 +125,12 @@ define('TYPE_ALL', 0); // Time record can be specified with either duration or s
 define('TYPE_START_FINISH', 1); // Time record has start and finish times.
 define('TYPE_DURATION', 2); // Time record has only duration, no start and finish times.
 
+// TODO: redesign of user rights and roles is currently ongoing.
+// As we run our of bits for sure at some point, rights should be strings instead,
+// for example: "data_entry".
+// Also, we need rights editor page and team-customized roles.
+// Move this stuff from here to ttUser class.
+//
 // User access rights - bits that collectively define an access mask to the system (a role).
 // We'll have some bits here (1,2, etc...) reserved for future use.
 define('right_data_entry', 4);     // Right to enter work hours and expenses.

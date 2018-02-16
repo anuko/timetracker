@@ -59,6 +59,7 @@ class ttUser {
   var $lock_spec = null;        // Cron specification for record locking.
   var $workday_minutes = 480;   // Number of work minutes in a regular day.
   var $rights = 0;              // A mask of user rights.
+  var $rights_array = array();  // An array of user rights, planned replacement of array mask.
 
   // Constructor.
   function __construct($login, $id = null) {
@@ -130,8 +131,15 @@ class ttUser {
       // Set user rights.
       if ($this->role == ROLE_USER) {
         $this->rights = right_data_entry|right_view_charts|right_view_reports;
+        // TODO: get customized rights from the database instead.
+        $this->rights_array[] = "data_entry";       // Right to enter time and expense records into Time Tracker.
+        $this->rights_array[] = "view_own_reports"; // Right to view own reports (for a specific user).
+        $this->rights_array[] = "view_own_charts";  // Right to view own charts (for a specific user).
       } elseif ($this->role == ROLE_CLIENT) {
         $this->rights = right_view_reports|right_view_invoices; // TODO: how about right_view_charts, too?
+        $this->rights_array[] = "view_client_reports";  // Right to view reports for a specific client.
+        $this->rights_array[] = "view_client_charts";   // Right to view charts for a specific client.
+        $this->rights_array[] = "view_client_invoices"; // Right to view invoices for a specific client.
       } elseif ($this->role == ROLE_COMANAGER) {
         $this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team;
       } elseif ($this->role == ROLE_MANAGER) {
@@ -139,6 +147,32 @@ class ttUser {
       } elseif ($this->role == ROLE_SITE_ADMIN) {
         $this->rights = right_administer_site;
       }
+
+/*
+// TODO: redesign of user rights and roles is currently ongoing.
+// As we run our of bits for sure at some point, rights should be strings instead,
+// for example: "data_entry".
+// Also, we need rights editor page and team-customized roles.
+// Move this stuff from here to ttUser class.
+//
+// User access rights - bits that collectively define an access mask to the system (a role).
+// We'll have some bits here (1,2, etc...) reserved for future use.
+define('right_data_entry', 4);     // Right to enter work hours and expenses.
+define('right_view_charts', 8);    // Right to view charts.
+define('right_view_reports', 16);  // Right to view reports.
+define('right_view_invoices', 32); // Right to view invoices.
+define('right_manage_team', 64);   // Right to manage team. Note that this is not full access to team.
+define('right_assign_roles', 128); // Right to assign user roles.
+define('right_export_team', 256);  // Right to export team data to a file.
+define('right_administer_site', 1024); // Admin account right to manage the application as a whole.
+
+// User roles.
+define('ROLE_USER', 4);          // Regular user.
+define('ROLE_CLIENT', 16);       // Client (to view reports and invoices).
+define('ROLE_COMANAGER', 68);    // Team co-manager. Can do many things but not as much as team manager.
+define('ROLE_MANAGER', 324);     // Team manager. Can do everything for a team.
+define('ROLE_SITE_ADMIN', 1024); // Site administrator.
+*/
 
       // Adjust punch_in_mode for managers as they are allowed to overwrite start and end times.
       if ($this->canManageTeam()) $this->punch_in_mode = 0;
