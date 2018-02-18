@@ -441,7 +441,7 @@ $i18n_key_words = array(
 'form.profile.type_start_finish' => 'početak i kraj',
 'form.profile.type_duration' => 'trajanje',
 // TODO: translate the following.
-// 'form.profile.punch_in_mode' => 'Punch in mode',
+// 'form.profile.punch_mode' => 'Punch mode',
 // 'form.profile.allow_overlap' => 'Allow overlap',
 // 'form.profile.future_entries' => 'Future entries',
 // 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',

@@ -173,8 +173,8 @@ function handlePluginCheckboxes() {
             <td>{$forms.profileForm.record_type.control}</td>
           </tr>
           <tr>
-            <td align="right" nowrap>{$i18n.form.profile.punch_in_mode}:</td>
-            <td>{$forms.profileForm.punch_in_mode.control} <a href="https://www.anuko.com/lp/tt_18.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+            <td align="right" nowrap>{$i18n.form.profile.punch_mode}:</td>
+            <td>{$forms.profileForm.punch_mode.control} <a href="https://www.anuko.com/lp/tt_18.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.profile.allow_overlap}:</td>

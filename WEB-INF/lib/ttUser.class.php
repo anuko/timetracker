@@ -46,7 +46,7 @@ class ttUser {
   var $project_required = 0;    // Whether project selection is required on time entires.
   var $task_required = 0;       // Whether task selection is required on time entires.
   var $record_type = 0;         // Record type (duration vs start and finish, or both).
-  var $punch_in_mode = 0;       // Whether punch in mode is enabled for user.
+  var $punch_mode = 0;          // Whether punch mode is enabled for user.
   var $allow_overlap = 0;       // Whether to allow overlapping time entries.
   var $future_entries = 0;      // Whether to allow creating future entries.
   var $uncompleted_indicators = 0; // Uncompleted time entry indicators (show nowhere or on users page).
@@ -117,7 +117,7 @@ class ttUser {
 
       // Set user config options.
       $this->show_holidays = in_array('show_holidays', $config_array);
-      $this->punch_in_mode = in_array('punch_in_mode', $config_array);
+      $this->punch_mode = in_array('punch_mode', $config_array);
       $this->allow_overlap = in_array('allow_overlap', $config_array);
       $this->future_entries = in_array('future_entries', $config_array);
       $this->uncompleted_indicators = in_array('uncompleted_indicators', $config_array);
@@ -174,8 +174,9 @@ define('ROLE_MANAGER', 324);     // Team manager. Can do everything for a team.
 define('ROLE_SITE_ADMIN', 1024); // Site administrator.
 */
 
-      // Adjust punch_in_mode for managers as they are allowed to overwrite start and end times.
-      if ($this->canManageTeam()) $this->punch_in_mode = 0;
+      // Adjust punch_mode for managers as they are allowed to overwrite start and end times.
+      // TODO: because of this we currently have a bug on the Team Profile page with "Punch mode" checkbox always off.
+      if ($this->canManageTeam()) $this->punch_mode = 0;
     }
   }
 

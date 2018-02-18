@@ -155,7 +155,7 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
 if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
   $form->addInput(array('type'=>'text','name'=>'start','value'=>$cl_start,'onchange'=>"formDisable('start');"));
   $form->addInput(array('type'=>'text','name'=>'finish','value'=>$cl_finish,'onchange'=>"formDisable('finish');"));
-  if ($user->punch_in_mode) {
+  if ($user->punch_mode) {
     // Make the start and finish fields read-only.
     $form->getElement('start')->setEnabled(false);
     $form->getElement('finish')->setEnabled(false);
