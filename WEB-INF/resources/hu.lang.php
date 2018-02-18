@@ -44,10 +44,8 @@ $i18n_key_words = array(
 // Example: https://timetracker.anuko.com (black menu on top).
 'menu.login' => 'Bejelentkezés',
 'menu.logout' => 'Kijelentkezés',
-// TODO: translate the following.
 'menu.forum' => 'Fórum',
 'menu.help' => 'Segítség',
-// TODO: translate the following.
 'menu.create_team' => 'Csoport létrehozása',
 'menu.profile' => 'Profil',
 'menu.time' => 'Munkaidő',
