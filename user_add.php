@@ -141,6 +141,8 @@ if ($request->isPost()) {
       $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
   }
   if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+  // Require selection of a client for a client role.
+  if ($user->isPluginEnabled('cl') && $cl_role == ROLE_CLIENT && !$cl_client_id) $err->add($i18n->getKey('error.client'));
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.users.default_rate'));
 
   if ($err->no()) {
