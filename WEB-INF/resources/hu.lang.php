@@ -45,10 +45,10 @@ $i18n_key_words = array(
 'menu.login' => 'Bejelentkezés',
 'menu.logout' => 'Kijelentkezés',
 // TODO: translate the following.
-// 'menu.forum' => 'Forum',
+'menu.forum' => 'Fórum',
 'menu.help' => 'Segítség',
 // TODO: translate the following.
-// 'menu.create_team' => 'Create Team',
+'menu.create_team' => 'Csoport létrehozása',
 'menu.profile' => 'Profil',
 'menu.time' => 'Munkaidő',
 // TODO: translate the following.
