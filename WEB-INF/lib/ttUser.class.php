@@ -132,18 +132,27 @@ class ttUser {
       if ($this->role == ROLE_USER) {
         $this->rights = right_data_entry|right_view_charts|right_view_reports;
         // TODO: get customized rights from the database instead.
-        $this->rights_array[] = "data_entry";       // Right to enter time and expense records into Time Tracker.
-        $this->rights_array[] = "view_own_reports"; // Right to view own reports (for a specific user).
-        $this->rights_array[] = "view_own_charts";  // Right to view own charts (for a specific user).
+        // $this->rights_array[] = "data_entry";          // Enter time and expense records into Time Tracker.
+        // $this->rights_array[] = "view_own_data";       // View own reports and charts.
+        // $this->rights_array[] = "manage_own_settings"; // Edit own settings.
+        // $this->rights_array[] = "view_users";          // View user names and roles in a group.
       } elseif ($this->role == ROLE_CLIENT) {
         $this->rights = right_view_reports|right_view_invoices; // TODO: how about right_view_charts, too?
-        $this->rights_array[] = "view_client_reports";  // Right to view reports for a specific client.
-        $this->rights_array[] = "view_client_charts";   // Right to view charts for a specific client.
-        $this->rights_array[] = "view_client_invoices"; // Right to view invoices for a specific client.
+        // $this->rights_array[] = "view_own_data";       // View own reports, charts, and invoices.
+        // $this->rights_array[] = "manage_own_settings"; // Edit own settings.
       } elseif ($this->role == ROLE_COMANAGER) {
         $this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team;
+        // $this->rights_array[] = "data_entry";          // Enter time and expense records into Time Tracker.
+        // $this->rights_array[] = "view_own_data";       // View own reports and charts.
+        // $this->rights_array[] = "manage_own_settings"; // Edit own settings.
+        // $this->rights_array[] = "view_users";          // View user names and roles in a group.
+        // $this->rights_array[] = "on_behalf_data_entry";// Can enter data on behalf of lower roles.
+        // $this->rights_array[] = "view_data";           // Can view data for lower roles.
+        $this->rights_array[] = "override_punch_mode"; // Can input any start and finish times for self and lower roles.
+        // TODO: get rights from the database instead.
       } elseif ($this->role == ROLE_MANAGER) {
         $this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team|right_assign_roles|right_export_team;
+        $this->rights_array[] = "override_punch_mode"; // Can input any start and finish times for self and lower roles.
       } elseif ($this->role == ROLE_SITE_ADMIN) {
         $this->rights = right_administer_site;
       }
@@ -173,10 +182,6 @@ define('ROLE_COMANAGER', 68);    // Team co-manager. Can do many things but not 
 define('ROLE_MANAGER', 324);     // Team manager. Can do everything for a team.
 define('ROLE_SITE_ADMIN', 1024); // Site administrator.
 */
-
-      // Adjust punch_mode for managers as they are allowed to overwrite start and end times.
-      // TODO: because of this we currently have a bug on the Team Profile page with "Punch mode" checkbox always off.
-      if ($this->canManageTeam()) $this->punch_mode = 0;
     }
   }
 
