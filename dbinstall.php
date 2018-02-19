@@ -61,7 +61,7 @@ if ($request->isGet()) {
     // spit white space before output in some situations such as in PDF reports.
     $file = fopen(APP_DIR.'/WEB-INF/config.php', 'r');
     $line = fgets($file);
-    if (strcmp('<?php'.PHP_EOL, $line) !== 0) {
+    if (strcmp("<?php\n", $line) !== 0 && strcmp("<?php\r\n", $line) !== 0) {
       echo('<font color="red">Error: WEB-INF/config.php file does not start with PHP opening tag.</font><br>');
     }
     fclose($file);
