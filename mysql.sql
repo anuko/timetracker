@@ -14,7 +14,7 @@
 #
 CREATE TABLE `tt_teams` (
   `id` int(11) NOT NULL auto_increment,                      # team id
-  `timestamp` timestamp NOT NULL,                            # modification timestamp
+  `timestamp` timestamp default CURRENT_TIMESTAMP,           # modification timestamp
   `name` varchar(80) default NULL,                           # team name
   `currency` varchar(7) default NULL,                        # team currency symbol
   `decimal_mark` char(1) NOT NULL default '.',               # separator in decimals
@@ -42,17 +42,17 @@ CREATE TABLE `tt_teams` (
 # Structure for table tt_users. This table is used to store user properties.
 #
 CREATE TABLE `tt_users` (
-  `id` int(11) NOT NULL auto_increment,          # user id
-  `timestamp` timestamp NOT NULL,                # modification timestamp
-  `login` varchar(50) COLLATE utf8_bin NOT NULL, # user login
-  `password` varchar(50) default NULL,           # password hash
-  `name` varchar(100) default NULL,              # user name
-  `team_id` int(11) NOT NULL,                    # team id
-  `role` int(11) default '4',                    # user role ("manager", "co-manager", "client", or "user")
-  `client_id` int(11) default NULL,              # client id for "client" user role
-  `rate` float(6,2) NOT NULL default '0.00',     # default hourly rate
-  `email` varchar(100) default NULL,             # user email
-  `status` tinyint(4) default '1',               # user status
+  `id` int(11) NOT NULL auto_increment,            # user id
+  `timestamp` timestamp default CURRENT_TIMESTAMP, # modification timestamp
+  `login` varchar(50) COLLATE utf8_bin NOT NULL,   # user login
+  `password` varchar(50) default NULL,             # password hash
+  `name` varchar(100) default NULL,                # user name
+  `team_id` int(11) NOT NULL,                      # team id
+  `role` int(11) default '4',                      # user role ("manager", "co-manager", "client", or "user")
+  `client_id` int(11) default NULL,                # client id for "client" user role
+  `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
+  `email` varchar(100) default NULL,               # user email
+  `status` tinyint(4) default '1',                 # user status
   PRIMARY KEY (`id`)
 );
 
