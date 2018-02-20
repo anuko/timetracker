@@ -21,19 +21,19 @@ CREATE TABLE `tt_teams` (
   `lang` varchar(10) NOT NULL default 'en',                  # language
   `date_format` varchar(20) NOT NULL default '%Y-%m-%d',     # date format
   `time_format` varchar(20) NOT NULL default '%H:%M',        # time format
-  `week_start` smallint(2) NOT NULL DEFAULT '0',             # Week start day, 0 == Sunday.
-  `tracking_mode` smallint(2) NOT NULL DEFAULT '1',          # tracking mode ("time", "projects" or "projects and tasks")
-  `project_required` smallint(2) NOT NULL DEFAULT '0',       # whether a project selection is required or optional
-  `task_required` smallint(2) NOT NULL DEFAULT '0',          # whether a task selection is required or optional
-  `record_type` smallint(2) NOT NULL DEFAULT '0',            # time record type ("start and finish", "duration", or both)
+  `week_start` smallint(2) NOT NULL default 0,               # Week start day, 0 == Sunday.
+  `tracking_mode` smallint(2) NOT NULL default 1,            # tracking mode ("time", "projects" or "projects and tasks")
+  `project_required` smallint(2) NOT NULL default 0,         # whether a project selection is required or optional
+  `task_required` smallint(2) NOT NULL default 0,            # whether a task selection is required or optional
+  `record_type` smallint(2) NOT NULL default 0,              # time record type ("start and finish", "duration", or both)
   `bcc_email` varchar(100) default NULL,                     # bcc email to copy all reports to
   `plugins` varchar(255) default NULL,                       # a list of enabled plugins for team
   `lock_spec` varchar(255) default NULL,                     # Cron specification for record locking,
                                                              # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
-  `workday_minutes` smallint(4) DEFAULT '480',               # number of work minutes in a regular working day
-  `custom_logo` tinyint(4) default '0',                      # whether to use a custom logo or not
+  `workday_minutes` smallint(4) default 480,                 # number of work minutes in a regular working day
+  `custom_logo` tinyint(4) default 0,                        # whether to use a custom logo or not
   `config` text default NULL,                                # miscellaneous team configuration settings
-  `status` tinyint(4) default '1',                           # team status
+  `status` tinyint(4) default 1,                             # team status
   PRIMARY KEY (`id`)
 );
 
@@ -48,11 +48,11 @@ CREATE TABLE `tt_users` (
   `password` varchar(50) default NULL,             # password hash
   `name` varchar(100) default NULL,                # user name
   `team_id` int(11) NOT NULL,                      # team id
-  `role` int(11) default '4',                      # user role ("manager", "co-manager", "client", or "user")
+  `role` int(11) default 4,                        # user role ("manager", "co-manager", "client", or "user")
   `client_id` int(11) default NULL,                # client id for "client" user role
   `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
   `email` varchar(100) default NULL,               # user email
-  `status` tinyint(4) default '1',                 # user status
+  `status` tinyint(4) default 1,                   # user status
   PRIMARY KEY (`id`)
 );
 
@@ -73,7 +73,7 @@ CREATE TABLE `tt_projects` (
   `name` varchar(80) COLLATE utf8_bin NOT NULL, # project name
   `description` varchar(255) default NULL,      # project description
   `tasks` text default NULL,                    # comma-separated list of task ids associated with this project
-  `status` tinyint(4) default '1',              # project status
+  `status` tinyint(4) default 1,                # project status
   PRIMARY KEY (`id`)
 );
 
@@ -89,7 +89,7 @@ CREATE TABLE `tt_tasks` (
   `team_id` int(11) NOT NULL,                   # team id
   `name` varchar(80) COLLATE utf8_bin NOT NULL, # task name
   `description` varchar(255) default NULL,      # task description
-  `status` tinyint(4) default '1',              # task status
+  `status` tinyint(4) default 1,                # task status
   PRIMARY KEY (`id`)
 );
 
@@ -105,7 +105,7 @@ CREATE TABLE `tt_user_project_binds` (
   `user_id` int(11) NOT NULL,           # user id
   `project_id` int(11) NOT NULL,        # project id
   `rate` float(6,2) default '0.00',     # rate for this user when working on this project
-  `status` tinyint(4) default '1',      # bind status
+  `status` tinyint(4) default 1,        # bind status
   PRIMARY KEY (`id`)
 );
 
@@ -131,20 +131,20 @@ create index task_idx on tt_project_task_binds(task_id);
 # If you use custom fields, additional info for each record may exist in tt_custom_field_log.
 #
 CREATE TABLE `tt_log` (
-  `id` bigint NOT NULL auto_increment, # time record id
-  `timestamp` timestamp NOT NULL,      # modification timestamp
-  `user_id` int(11) NOT NULL,          # user id
-  `date` date NOT NULL,                # date the record is for
-  `start` time default NULL,           # record start time (for example, 09:00)
-  `duration` time default NULL,        # record duration (for example, 1 hour)
-  `client_id` int(11) default NULL,    # client id
-  `project_id` int(11) default NULL,   # project id
-  `task_id` int(11) default NULL,      # task id
-  `invoice_id` int(11) default NULL,   # invoice id
-  `comment` text,                      # user provided comment for time record
-  `billable` tinyint(4) default '0',   # whether the record is billable or not
-  `paid` tinyint(4) default '0',       # whether the record is paid
-  `status` tinyint(4) default '1',     # time record status
+  `id` bigint NOT NULL auto_increment,             # time record id
+  `timestamp` timestamp default CURRENT_TIMESTAMP, # modification timestamp
+  `user_id` int(11) NOT NULL,                      # user id
+  `date` date NOT NULL,                            # date the record is for
+  `start` time default NULL,                       # record start time (for example, 09:00)
+  `duration` time default NULL,                    # record duration (for example, 1 hour)
+  `client_id` int(11) default NULL,                # client id
+  `project_id` int(11) default NULL,               # project id
+  `task_id` int(11) default NULL,                  # task id
+  `invoice_id` int(11) default NULL,               # invoice id
+  `comment` text,                                  # user provided comment for time record
+  `billable` tinyint(4) default 0,                 # whether the record is billable or not
+  `paid` tinyint(4) default 0,                     # whether the record is paid
+  `status` tinyint(4) default 1,                   # time record status
   PRIMARY KEY (`id`)
 );
 
@@ -166,7 +166,7 @@ CREATE TABLE `tt_invoices` (
   `name` varchar(80) COLLATE utf8_bin NOT NULL, # invoice name
   `date` date NOT NULL,                         # invoice date
   `client_id` int(11) NOT NULL,                 # client id
-  `status` tinyint(4) default '1',              # invoice status
+  `status` tinyint(4) default 1,                # invoice status
   PRIMARY KEY (`id`)
 );
 
@@ -178,9 +178,9 @@ create unique index name_idx on tt_invoices(team_id, name, status);
 # Structure for table tt_tmp_refs. Used for reset password mechanism.
 #
 CREATE TABLE `tt_tmp_refs` (
-  `timestamp` timestamp NOT NULL,     # creation timestamp
-  `ref` char(32) NOT NULL default '', # unique reference for user, used in urls
-  `user_id` int(11) NOT NULL          # user id
+  `timestamp` timestamp default CURRENT_TIMESTAMP, # creation timestamp
+  `ref` char(32) NOT NULL default '',              # unique reference for user, used in urls
+  `user_id` int(11) NOT NULL                       # user id
 );
 
 
@@ -203,20 +203,20 @@ CREATE TABLE `tt_fav_reports` (
   `period` tinyint(4) default NULL,                      # selected period type for report
   `period_start` date default NULL,                      # period start
   `period_end` date default NULL,                        # period end
-  `show_client` tinyint(4) NOT NULL default '0',         # whether to show client column
-  `show_invoice` tinyint(4) NOT NULL default '0',        # whether to show invoice column
-  `show_paid` tinyint(4) NOT NULL default '0',           # whether to show paid column
-  `show_project` tinyint(4) NOT NULL default '0',        # whether to show project column
-  `show_start` tinyint(4) NOT NULL default '0',          # whether to show start field
-  `show_duration` tinyint(4) NOT NULL default '0',       # whether to show duration field
-  `show_cost` tinyint(4) NOT NULL default '0',           # whether to show cost field
-  `show_task` tinyint(4) NOT NULL default '0',           # whether to show task column
-  `show_end` tinyint(4) NOT NULL default '0',            # whether to show end field
-  `show_note` tinyint(4) NOT NULL default '0',           # whether to show note column
-  `show_custom_field_1` tinyint(4) NOT NULL default '0', # whether to show custom field 1
-  `show_totals_only` tinyint(4) NOT NULL default '0',    # whether to show totals only
+  `show_client` tinyint(4) NOT NULL default 0,           # whether to show client column
+  `show_invoice` tinyint(4) NOT NULL default 0,          # whether to show invoice column
+  `show_paid` tinyint(4) NOT NULL default 0,             # whether to show paid column
+  `show_project` tinyint(4) NOT NULL default 0,          # whether to show project column
+  `show_start` tinyint(4) NOT NULL default 0,            # whether to show start field
+  `show_duration` tinyint(4) NOT NULL default 0,         # whether to show duration field
+  `show_cost` tinyint(4) NOT NULL default 0,             # whether to show cost field
+  `show_task` tinyint(4) NOT NULL default 0,             # whether to show task column
+  `show_end` tinyint(4) NOT NULL default 0,              # whether to show end field
+  `show_note` tinyint(4) NOT NULL default 0,             # whether to show note column
+  `show_custom_field_1` tinyint(4) NOT NULL default 0,   # whether to show custom field 1
+  `show_totals_only` tinyint(4) NOT NULL default 0,      # whether to show totals only
   `group_by` varchar(20) default NULL,                   # group by field
-  `status` tinyint(4) default '1',                       # favorite report status
+  `status` tinyint(4) default 1,                         # favorite report status
   PRIMARY KEY (`id`)
 );
 
@@ -235,7 +235,7 @@ CREATE TABLE `tt_cron` (
   `cc` varchar(100) default NULL,               # cc email to send results to
   `subject` varchar(100) default NULL,          # email subject
   `report_condition` varchar(255) default NULL, # report condition, "count > 0" for sending not empty reports
-  `status` tinyint(4) default '1',              # entry status
+  `status` tinyint(4) default 1,                # entry status
   PRIMARY KEY (`id`)
 );
 
@@ -250,7 +250,7 @@ CREATE TABLE `tt_clients` (
   `address` varchar(255) default NULL,          # client address
   `tax` float(6,2) default '0.00',              # applicable tax for this client
   `projects` text default NULL,                 # comma-separated list of project ids assigned to this client
-  `status` tinyint(4) default '1',              # client status
+  `status` tinyint(4) default 1,                # client status
   PRIMARY KEY (`id`)
 );
 
@@ -293,10 +293,10 @@ create unique index param_idx on tt_config(user_id, param_name);
 CREATE TABLE `tt_custom_fields` (
   `id` int(11) NOT NULL auto_increment,    # custom field id
   `team_id` int(11) NOT NULL,              # team id
-  `type` tinyint(4) NOT NULL default '0',  # custom field type (text or dropdown)
+  `type` tinyint(4) NOT NULL default 0,    # custom field type (text or dropdown)
   `label` varchar(32) NOT NULL default '', # custom field label
-  `required` tinyint(4) default '0',       # whether this custom field is mandatory for time records
-  `status` tinyint(4) default '1',         # custom field status
+  `required` tinyint(4) default 0,         # whether this custom field is mandatory for time records
+  `status` tinyint(4) default 1,           # custom field status
   PRIMARY KEY  (`id`)
 );
 
@@ -322,7 +322,7 @@ CREATE TABLE `tt_custom_field_log` (
   `field_id` int(11) NOT NULL,         # custom field id
   `option_id` int(11) default NULL,    # Option id. Used for dropdown custom fields.
   `value` varchar(255) default NULL,   # Text value. Used for text custom fields.
-  `status` tinyint(4) default '1',     # custom field log entry status
+  `status` tinyint(4) default 1,       # custom field log entry status
   PRIMARY KEY  (`id`)
 );
 
@@ -340,8 +340,8 @@ CREATE TABLE `tt_expense_items` (
   `name` text NOT NULL,                # expense item name (what is an expense for)   
   `cost` decimal(10,2) default '0.00', # item cost (including taxes, etc.)
   `invoice_id` int(11) default NULL,   # invoice id
-  `paid` tinyint(4) default '0',       # whether the item is paid
-  `status` tinyint(4) default '1',     # item status
+  `paid` tinyint(4) default 0,         # whether the item is paid
+  `status` tinyint(4) default 1,       # item status
   PRIMARY KEY  (`id`)
 );
 
@@ -374,7 +374,7 @@ CREATE TABLE `tt_monthly_quotas` (
   `team_id` int(11) NOT NULL,             # team id
   `year` smallint(5) UNSIGNED NOT NULL,   # quota year
   `month` tinyint(3) UNSIGNED NOT NULL,   # quota month
-  `minutes` int(11) DEFAULT NULL,         # quota in minutes in specified month and year
+  `minutes` int(11) default NULL,         # quota in minutes in specified month and year
   PRIMARY KEY (`team_id`,`year`,`month`)
 );
 
