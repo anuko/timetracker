@@ -36,6 +36,7 @@ import('ttClientHelper');
 import('ttCustomFieldHelper');
 import('ttFavReportHelper');
 import('ttExpenseHelper');
+import('ttRoleHelper');
 
 // ttImportHelper - this class is used to import team data from a file.
 class ttImportHelper {
@@ -83,7 +84,8 @@ class ttImportHelper {
       || $name == 'INVOICE_HEADER'
       || $name == 'USER_PROJECT_BIND'
       || $name == 'EXPENSE_ITEM'
-      || $name == 'FAV_REPORT') {
+      || $name == 'FAV_REPORT'
+      || $name == 'ROLE') {
       $this->currentElement = $attrs;
     }
     $this->currentTag = $name;
@@ -309,6 +311,15 @@ class ttImportHelper {
         'chcf_1' => (int) $this->currentElement['SHOW_CUSTOM_FIELD_1'],
         'group_by' => $this->currentElement['GROUP_BY'],
         'chtotalsonly' => (int) $this->currentElement['SHOW_TOTALS_ONLY']));
+    }
+
+    if ($name == 'ROLE' && $this->canImport) {
+      ttRoleHelper::insert(array(
+        'team_id' => $this->team_id,
+        'name' => $this->currentElement['NAME'],
+        'rank' => $this->currentElement['RANK'],
+        'rights' => $this->currentElement['RIGHTS'],
+        'status' => $this->currentElement['STATUS']));
     }
     $this->currentTag = '';
   }

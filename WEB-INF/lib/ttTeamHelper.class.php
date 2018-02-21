@@ -485,6 +485,23 @@ class ttTeamHelper {
     return false;
   }
 
+  // getRoles - obtains all roles defined for team.
+  static function getRoles($team_id) {
+    $mdb2 = getConnection();
+
+    $result = array();
+    $sql = "select * from tt_roles where team_id = $team_id";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
   // getExpenseItems - obtains all expense items for all users in team.
   static function getExpenseItems($team_id) {
     $mdb2 = getConnection();

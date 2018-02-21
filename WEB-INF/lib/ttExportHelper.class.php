@@ -289,6 +289,18 @@ class ttExportHelper {
     fwrite($file, "</fav_reports>\n");
     unset($fav_reports);
 
+    // Write roles.
+    fwrite($file, "<roles>\n");
+    $roles = ttTeamHelper::getRoles($user->team_id);
+    foreach ($roles as $role) {
+      fwrite($file, "\t<role rank=\"".$role['rank']."\"".
+        " rights=\"".$role['rights']."\">\n");
+      fwrite($file, "\t\t<name><![CDATA[".$role['name']."]]></name>\n");
+      fwrite($file, "\t</role>\n");
+    }
+    fwrite($file, "</roles>\n");
+    unset($roles);
+
     // Cleanup.
     unset($users);
     $this->userMap = array();
