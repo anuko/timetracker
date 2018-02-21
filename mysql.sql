@@ -380,3 +380,24 @@ CREATE TABLE `tt_monthly_quotas` (
 
 ALTER TABLE `tt_monthly_quotas`
   ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+#
+# Structure for table tt_roles. This table stores customized team roles.
+#
+CREATE TABLE `tt_roles` (
+  `id` int(11) NOT NULL auto_increment, # role id
+  `team_id` int(11) NOT NULL,           # team id
+  `name` varchar(80) default NULL,      # role name - may be used to rename standard roles
+  `rank` int(11) default 0,             # Role rank and identifier in comparison with other roles,
+                                        # used to determine what "lesser roles" are
+                                        # and also identifies a role within a team, used as role in tt_users.
+  `rights` text default NULL,           # Comma-separated list of rights assigned to a role.
+                                        # NULL here for predefined roles (4, 16, 68, 324 - manager)
+                                        # means a hard-coded set of default access rights.
+  `status` tinyint(4) default 1,        # role status
+  PRIMARY KEY  (`id`)
+);
+
+# Create an index that guarantees unique active and inactive role ranks per team.
+create unique index role_idx on tt_roles(team_id, rank, status);
