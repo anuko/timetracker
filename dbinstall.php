@@ -763,6 +763,7 @@ if ($_POST) {
     setChange("OPTIMIZE TABLE tt_tmp_refs");
     setChange("OPTIMIZE TABLE tt_user_project_binds");
     setChange("OPTIMIZE TABLE tt_users");
+    setChange("OPTIMIZE TABLE tt_roles");
   }
 
   print "done.<br>\n";

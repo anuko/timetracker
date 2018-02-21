@@ -885,6 +885,11 @@ class ttTeamHelper {
     // Delete custom fields.
     if (!ttTeamHelper::deleteCustomFields($team_id)) return false;
 
+    // Delete roles.
+    $sql = "delete from tt_roles where team_id = $team_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
     // Delete team.
     $sql = "delete from tt_teams where id = $team_id";
     $affected = $mdb2->exec($sql);
