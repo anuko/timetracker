@@ -1,5 +1,20 @@
 {include file="time_script.tpl"}
 
+<script>
+// This is here because fillDropdowns() in time_script.tpl uses a different form name.
+// Perhaps a better fix would be to provide form name as paramater to fillDropdowns()?
+// TODO: try to fix it properly.
+//
+// The fillDropdowns function populates the "project" and "task" dropdown controls
+// with relevant values.
+function fillDropdowns() {
+  if(document.body.contains(document.weekTimeForm.client))
+    fillProjectDropdown(document.weekTimeForm.client.value);
+
+  fillTaskDropdown(document.weekTimeForm.project.value);
+}
+</script>
+
 <style>
 .not_billable td {
   color: #ff6666;
