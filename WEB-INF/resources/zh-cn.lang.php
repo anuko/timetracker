@@ -152,6 +152,8 @@ $i18n_key_words = array(
 'label.end_date' => '结束日期',
 'label.user' => '用户',
 'label.users' => '用户',
+// TODO: translate the following.
+// 'label.roles' => 'Roles',
 'label.client' => '客户',
 'label.clients' => '客户',
 'label.option' => '选项',

@@ -168,6 +168,8 @@ $i18n_key_words = array(
 'label.end_date' => 'Data sfarsit',
 'label.user' => 'Utilizator',
 'label.users' => 'Utilizatori',
+// TODO: translate the following.
+// 'label.roles' => 'Roles',
 'label.client' => 'Client',
 'label.clients' => 'Clienti',
 // TODO: translate the following.

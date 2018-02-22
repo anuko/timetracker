@@ -140,6 +140,7 @@ $i18n_key_words = array(
 'label.end_date' => 'Конечная дата',
 'label.user' => 'Пользователь',
 'label.users' => 'Сотрудники',
+'label.roles' => 'Роли',
 'label.client' => 'Клиент',
 'label.clients' => 'Клиенты',
 'label.option' => 'Опция',

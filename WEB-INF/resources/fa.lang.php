@@ -150,6 +150,8 @@ $i18n_key_words = array(
 'label.end_date' => 'تاریخ اتمام',
 'label.user' => 'کاربر',
 'label.users' => 'کاربران',
+// TODO: translate the following.
+// 'label.roles' => 'Roles',
 'label.client' => 'مشتری',
 'label.clients' => 'مشتریان',
 // TODO: translate the following.

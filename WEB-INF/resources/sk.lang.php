@@ -150,6 +150,8 @@ $i18n_key_words = array(
 'label.end_date' => 'Dátum konca',
 'label.user' => 'Používateľ',
 'label.users' => 'Používatelia',
+// TODO: translate the following.
+// 'label.roles' => 'Roles',
 'label.client' => 'Klient',
 'label.clients' => 'Klienti',
 'label.option' => 'Možnosť',

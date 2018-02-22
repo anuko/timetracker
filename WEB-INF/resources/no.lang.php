@@ -163,6 +163,8 @@ $i18n_key_words = array(
 // 'label.end_date' => 'End date',
 'label.user' => 'Bruker',
 'label.users' => 'Brukere',
+// TODO: translate the following.
+// 'label.roles' => 'Roles',
 'label.client' => 'Klient',
 'label.clients' => 'Klienter',
 'label.option' => 'Opsjon', // TODO: is this correct?

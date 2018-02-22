@@ -142,6 +142,8 @@ $i18n_key_words = array(
 'label.end_date' => 'Krajnji datum',
 'label.user' => 'Korisnik',
 'label.users' => 'Korisnici',
+// TODO: translate the following.
+// 'label.roles' => 'Roles',
 'label.client' => 'Klijent',
 'label.clients' => 'Klijenti',
 'label.option' => 'Opcije',

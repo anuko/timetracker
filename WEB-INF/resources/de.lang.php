@@ -140,6 +140,8 @@ $i18n_key_words = array(
 'label.end_date' => 'Enddatum',
 'label.user' => 'Benutzer',
 'label.users' => 'Personen',
+// TODO: translate the following.
+// 'label.roles' => 'Roles',
 'label.client' => 'Kunde',
 'label.clients' => 'Kunden',
 'label.option' => 'Option',

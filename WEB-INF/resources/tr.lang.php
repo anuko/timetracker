@@ -172,6 +172,8 @@ $i18n_key_words = array(
 'label.end_date' => 'Son tarihi',
 'label.user' => 'Kullanıcı',
 'label.users' => 'Kullanıcılar',
+// TODO: translate the following.
+// 'label.roles' => 'Roles',
 'label.client' => 'Müşteri',
 'label.clients' => 'Müşteriler',
 // TODO: translate the following.

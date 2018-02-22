@@ -143,6 +143,8 @@ $i18n_key_words = array(
 'label.end_date' => 'Päättymispäivä',
 'label.user' => 'Käyttäjä',
 'label.users' => 'Käyttäjät',
+// TODO: translate the following.
+// 'label.roles' => 'Roles',
 'label.client' => 'Asiakas',
 'label.clients' => 'Asiakkaat',
 'label.option' => 'Optio',
