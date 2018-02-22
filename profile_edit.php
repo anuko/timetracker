@@ -52,6 +52,7 @@ if ($request->isPost()) {
     $cl_team = trim($request->getParameter('team_name'));
     $cl_currency = trim($request->getParameter('currency'));
     if (!$cl_currency) $cl_currency = CURRENCY_DEFAULT;
+    $cl_roles = $request->getParameter('roles');
     $cl_lang = $request->getParameter('lang');
     $cl_decimal_mark = $request->getParameter('decimal_mark');
     $cl_date_format = $request->getParameter('date_format');
@@ -89,6 +90,7 @@ if ($request->isPost()) {
   if ($user->canManageTeam()) {
     $cl_team = $user->team;
     $cl_currency = ($user->currency == ''? CURRENCY_DEFAULT : $user->currency);
+    $cl_roles = $user->roles;
     $cl_lang = $user->lang;
     $cl_decimal_mark = $user->decimal_mark;
     $cl_date_format = $user->date_format;
@@ -133,6 +135,8 @@ $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=
 if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team));
   $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
+  // Roles checkbox.
+  $form->addInput(array('type'=>'checkbox','name'=>'roles','value'=>$cl_roles));
 
   // Prepare an array of available languages.
   $lang_files = I18n::getLangFileList();
@@ -296,6 +300,8 @@ if ($request->isPost()) {
       $plugins = trim($plugins, ',');
 
       // Prepare config string.
+      if ($cl_roles)
+        $config .= ',roles';
       if ($cl_show_holidays)
         $config .= ',show_holidays';
       if ($cl_punch_mode)

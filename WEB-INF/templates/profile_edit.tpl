@@ -141,6 +141,12 @@ function handlePluginCheckboxes() {
             <td align="right">{$i18n.label.currency}:</td>
             <td>{$forms.profileForm.currency.control}</td>
           </tr>
+  {if defined(DEBUG_ROLES)}
+          <tr>
+            <td align="right" nowrap>{$i18n.label.roles}:</td>
+            <td>{$forms.profileForm.roles.control} <a href="https://www.anuko.com/lp/tt_19.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+          </tr>
+  {/if}
           <tr>
            <td align="right" nowrap>{$i18n.label.language}:</td>
            <td>{$forms.profileForm.lang.control}</td>

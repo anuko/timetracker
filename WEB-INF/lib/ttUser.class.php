@@ -52,6 +52,7 @@ class ttUser {
   var $uncompleted_indicators = 0; // Uncompleted time entry indicators (show nowhere or on users page).
   var $bcc_email = null;        // Bcc email.
   var $currency = null;         // Currency.
+  var $roles = 1;               // Whether we use configurable roles.
   var $plugins = null;          // Comma-separated list of enabled plugins.
   var $config = null;           // Comma-separated list of miscellaneous config options.
   var $team = null;             // Team name.
@@ -116,6 +117,7 @@ class ttUser {
       $config_array = explode(',', $this->config);
 
       // Set user config options.
+      $this->roles = in_array('roles', $config_array);
       $this->show_holidays = in_array('show_holidays', $config_array);
       $this->punch_mode = in_array('punch_mode', $config_array);
       $this->allow_overlap = in_array('allow_overlap', $config_array);
