@@ -136,7 +136,7 @@ if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team));
   $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
   // Roles checkbox.
-  $form->addInput(array('type'=>'checkbox','name'=>'roles','value'=>$cl_roles));
+  $form->addInput(array('type'=>'checkbox','name'=>'roles','value'=>$cl_roles,'onchange'=>'handleRolesCheckbox()'));
 
   // Prepare an array of available languages.
   $lang_files = I18n::getLangFileList();
@@ -349,7 +349,7 @@ if ($request->isPost()) {
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="handleTaskRequiredCheckbox(); handlePluginCheckboxes();"');
+$smarty->assign('onload', 'onLoad="handleRolesCheckbox(); handleTaskRequiredCheckbox(); handlePluginCheckboxes();"');
 $smarty->assign('title', $i18n->getKey('title.profile'));
 $smarty->assign('content_page_name', 'profile_edit.tpl');
 $smarty->display('index.tpl');
