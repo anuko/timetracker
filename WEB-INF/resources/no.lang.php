@@ -119,11 +119,6 @@ $i18n_key_words = array(
 'button.cancel' => 'Avbryt',
 // TODO: translate the following.
 // 'button.submit' => 'Submit',
-'button.add_user' => 'Legg til bruker',
-'button.add_project' => 'Legg til prosjekt',
-// TODO: translate the following.
-// 'button.add_task' => 'Add task',
-'button.add_client' => 'Legg til klient',
 'button.add' => 'Legg til',
 'button.generate' => 'Generer',
 'button.reset_password' => 'Resett passord',

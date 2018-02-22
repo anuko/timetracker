@@ -120,11 +120,6 @@ $i18n_key_words = array(
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Tühista',
 'button.submit' => 'Postita',
-'button.add_user' => 'Lisa kasutaja',
-'button.add_project' => 'Lisa projekt',
-// TODO: translate the following.
-// 'button.add_task' => 'Add task',
-'button.add_client' => 'Lisa klient',
 'button.add' => 'Lisa',
 'button.generate' => 'Loo',
 'button.reset_password' => 'Tühjenda salasõna',

@@ -123,11 +123,6 @@ $i18n_key_words = array(
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Renunta',
 'button.submit' => 'Trimite',
-'button.add_user' => 'Adauga utilizator',
-'button.add_project' => 'Adauga proiect',
-// TODO: translate the following.
-// 'button.add_task' => 'Add task',
-'button.add_client' => 'Adauga client',
 'button.add' => 'Adauga',
 'button.generate' => 'Genereaza',
 // TODO: translate the following.

@@ -118,11 +118,6 @@ $i18n_key_words = array(
 // 'button.copy' => 'Copy',
 'button.cancel' => '취소',
 'button.submit' => '발송',
-// TODO: translate the following.
-// 'button.add_user' => 'Add user',
-// 'button.add_project' => 'Add project',
-// 'button.add_task' => 'Add task',
-// 'button.add_client' => 'Add client',
 'button.add' => '추가',
 'button.generate' => '생성',
 // TODO: translate the following.

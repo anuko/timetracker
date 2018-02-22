@@ -118,11 +118,6 @@ $i18n_key_words = array(
 // 'button.copy' => 'Copy',
 'button.cancel' => 'キャンセル',
 'button.submit' => '送信',
-// TODO: translate the following.
-// 'button.add_user' => 'Add user',
-// 'button.add_project' => 'Add project',
-// 'button.add_task' => 'Add task',
-// 'button.add_client' => 'Add client',
 'button.add' => '追加',
 'button.generate' => '生成',
 // TODO: translate the following.

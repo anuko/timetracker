@@ -110,11 +110,6 @@ $i18n_key_words = array(
 // 'button.copy' => 'Copy',
 'button.cancel' => '取消',
 'button.submit' => '提交',
-// TODO: translate the following.
-// 'button.add_user' => 'Add user',
-// 'button.add_project' => 'Add project',
-// 'button.add_task' => 'Add task',
-// 'button.add_client' => 'Add client',
 'button.add' => '添加',
 'button.generate' => '创建',
 'button.reset_password' => '重置密码',

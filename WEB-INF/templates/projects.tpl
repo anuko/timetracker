@@ -31,7 +31,7 @@
       <table width="100%">
         <tr>
           <td align="center"><br>
-            <form><input type="button" onclick="chLocation('project_add.php');" value="{$i18n.button.add_project}"></form>
+            <form><input type="button" onclick="chLocation('project_add.php');" value="{$i18n.button.add}"></form>
           </td>
         </tr>
       </table>
@@ -58,7 +58,7 @@
       <table width="100%">
         <tr>
           <td align="center"><br>
-            <form><input type="button" onclick="chLocation('project_add.php');" value="{$i18n.button.add_project}"></form>
+            <form><input type="button" onclick="chLocation('project_add.php');" value="{$i18n.button.add}"></form>
           </td>
         </tr>
       </table>

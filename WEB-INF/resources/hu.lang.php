@@ -117,11 +117,6 @@ $i18n_key_words = array(
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Vissza',
 'button.submit' => 'Mentés',
-'button.add_user' => 'Felhasználó felvétele',
-'button.add_project' => 'Projekt felvétele',
-// TODO: translate the following.
-// 'button.add_task' => 'Add task',
-'button.add_client' => 'Ügyfél hozzáadása',
 'button.add' => 'Hozzáadás',
 'button.generate' => 'Generálás',
 // TODO: translate the following.

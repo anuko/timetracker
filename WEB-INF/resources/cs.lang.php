@@ -120,11 +120,6 @@ $i18n_key_words = array(
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Zrušit',
 'button.submit' => 'Uložit',
-'button.add_user' => 'Přidat uživatele',
-'button.add_project' => 'Přidat projekt',
-// TODO: translate the following.
-// 'button.add_task' => 'Add task',
-'button.add_client' => 'Přidat zákazníka',
 'button.add' => 'Přidat',
 'button.generate' => 'Vytvořit',
 'button.reset_password' => 'Resetovat heslo',

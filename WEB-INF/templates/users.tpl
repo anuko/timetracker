@@ -53,7 +53,7 @@
       <table width="100%">
         <tr>
           <td align="center"><br>
-            <form><input type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add_user}"></form>
+            <form><input type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add}"></form>
           </td>
         </tr>
       </table>
@@ -98,7 +98,7 @@
       <table width="100%">
         <tr>
           <td align="center" height="50">
-            <form><input type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add_user}"></form>
+            <form><input type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add}"></form>
           </td>
         </tr>
       </table>

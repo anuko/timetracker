@@ -116,11 +116,6 @@ $i18n_key_words = array(
 // 'button.copy' => 'Copy',
 'button.cancel' => 'Cancelar',
 'button.submit' => 'Enviar',
-'button.add_user' => 'Agregar usuario',
-'button.add_project' => 'Agregar proyecto',
-// TODO: translate the following.
-// 'button.add_task' => 'Add task',
-'button.add_client' => 'Agregar cliente',
 'button.add' => 'Agregar',
 'button.generate' => 'Generar',
 // TODO: translate the following.

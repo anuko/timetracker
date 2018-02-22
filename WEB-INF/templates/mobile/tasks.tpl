@@ -27,7 +27,7 @@
       <table width="100%">
         <tr>
           <td align="center"><br>
-            <form><input type="button" onclick="chLocation('task_add.php');" value="{$i18n.button.add_task}"></form>
+            <form><input type="button" onclick="chLocation('task_add.php');" value="{$i18n.button.add}"></form>
           </td>
         </tr>
       </table>
@@ -50,7 +50,7 @@
       <table width="100%">
         <tr>
           <td align="center"><br>
-            <form><input type="button" onclick="chLocation('task_add.php');" value="{$i18n.button.add_task}"></form>
+            <form><input type="button" onclick="chLocation('task_add.php');" value="{$i18n.button.add}"></form>
           </td>
         </tr>
       </table>
