@@ -396,6 +396,11 @@ $i18n_key_words = array(
 'form.users.rate' => 'Tarif',
 'form.users.default_rate' => 'Tarif horaire par défaut',
 
+// Roles form. See example at https://timetracker.anuko.com/roles.php
+// TODO: translate the following.
+// 'form.roles.active_roles' => 'Active Roles',
+// 'form.roles.inactive_roles' => 'Inactive Roles',
+
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Clients actifs',
 'form.clients.inactive_clients' => 'Clients inactifs',

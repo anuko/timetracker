@@ -452,6 +452,11 @@ $i18n_key_words = array(
 'form.users.rate' => '급여',
 'form.users.default_rate' => '디폴트 시간당 급여',
 
+// Roles form. See example at https://timetracker.anuko.com/roles.php
+// TODO: translate the following.
+// 'form.roles.active_roles' => 'Active Roles',
+// 'form.roles.inactive_roles' => 'Inactive Roles',
+
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
 // 'form.clients.active_clients' => 'Active Clients',

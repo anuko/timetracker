@@ -449,6 +449,11 @@ $i18n_key_words = array(
 'form.users.rate' => 'Taxa',
 'form.users.default_rate' => 'Taxa per defecte per hora',
 
+// Roles form. See example at https://timetracker.anuko.com/roles.php
+// TODO: translate the following.
+// 'form.roles.active_roles' => 'Active Roles',
+// 'form.roles.inactive_roles' => 'Inactive Roles',
+
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
 // 'form.clients.active_clients' => 'Active Clients',

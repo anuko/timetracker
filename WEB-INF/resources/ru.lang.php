@@ -391,6 +391,10 @@ $i18n_key_words = array(
 'form.users.rate' => 'Ставка',
 'form.users.default_rate' => 'Почасовая ставка',
 
+// Roles form. See example at https://timetracker.anuko.com/roles.php
+'form.roles.active_roles' => 'Активные роли',
+'form.roles.inactive_roles' => 'Неактивные роли',
+
 // Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
 'form.client.client_to_delete' => 'Клиент для удаления',
 'form.client.client_entries' => 'Записи клиента',

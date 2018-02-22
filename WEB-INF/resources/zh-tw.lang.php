@@ -446,6 +446,11 @@ $i18n_key_words = array(
 'form.users.rate' => '費率',
 'form.users.default_rate' => '默認小時收費',
 
+// Roles form. See example at https://timetracker.anuko.com/roles.php
+// TODO: translate the following.
+// 'form.roles.active_roles' => 'Active Roles',
+// 'form.roles.inactive_roles' => 'Inactive Roles',
+
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
 // 'form.clients.active_clients' => 'Active Clients',
