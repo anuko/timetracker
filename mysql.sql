@@ -386,21 +386,22 @@ ALTER TABLE `tt_monthly_quotas`
 # Structure for table tt_roles. This table stores customized team roles.
 #
 CREATE TABLE `tt_roles` (
-  `id` int(11) NOT NULL auto_increment, # Role id. Identifies roles for all groups on the server.
-  `team_id` int(11) NOT NULL,           # Team id the role is defined for.
-  `name` varchar(80) default NULL,      # Role name - custom role name. In case we are editing a
-                                        # predefined role (USER, etc.), we can rename the role here.
-  `rank` int(11) default 0,             # Role rank, an integer value between 0-324. Predefined role ranks:
-                                        # USER - 4, CLIENT - 16, COMANAGER - 68, MANAGER - 324.
-                                        # Rank is used to determine what "lesser roles" are in each group
-                                        # for sutuations such as "manage_users".
-                                        # It also identifies a role within a team (by its "rank").
-                                        # Value of rank is to be used in role field in tt_users table,
-                                        # just like standard roles now.
-  `rights` text default NULL,           # Comma-separated list of rights assigned to a role.
-                                        # NULL here for predefined roles (4, 16, 68, 324 - manager)
-                                        # means a hard-coded set of default access rights.
-  `status` tinyint(4) default 1,        # Role status.
+  `id` int(11) NOT NULL auto_increment,    # Role id. Identifies roles for all groups on the server.
+  `team_id` int(11) NOT NULL,              # Team id the role is defined for.
+  `name` varchar(80) default NULL,         # Role name - custom role name. In case we are editing a
+                                           # predefined role (USER, etc.), we can rename the role here.
+  `description` varchar(255) default NULL, # Role description.
+  `rank` int(11) default 0,                # Role rank, an integer value between 0-324. Predefined role ranks:
+                                           # USER - 4, CLIENT - 16, COMANAGER - 68, MANAGER - 324.
+                                           # Rank is used to determine what "lesser roles" are in each group
+                                           # for sutuations such as "manage_users".
+                                           # It also identifies a role within a team (by its "rank").
+                                           # Value of rank is to be used in role field in tt_users table,
+                                           # just like standard roles now.
+  `rights` text default NULL,              # Comma-separated list of rights assigned to a role.
+                                           # NULL here for predefined roles (4, 16, 68, 324 - manager)
+                                           # means a hard-coded set of default access rights.
+  `status` tinyint(4) default 1,           # Role status.
   PRIMARY KEY  (`id`)
 );
 

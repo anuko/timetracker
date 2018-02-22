@@ -11,7 +11,7 @@
   {/if}
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
-          <td width="35%" class="tableHeader">{$i18n.form.roles.rights}</td>
+          <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
           <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
@@ -19,9 +19,9 @@
     {foreach $active_roles as $role}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$role.name|escape}</td>
-          <td>{$role.rights|escape}</td>
-          <td><a href="task_edit.php?id={$task.id}">{$i18n.label.edit}</a></td>
-          <td><a href="task_delete.php?id={$task.id}">{$i18n.label.delete}</a></td>
+          <td>{$role.description|escape}</td>
+          <td><a href="role_edit.php?id={$role.id}">{$i18n.label.edit}</a></td>
+          <td><a href="role_delete.php?id={$role.id}">{$i18n.label.delete}</a></td>
         </tr>
     {/foreach}
   {/if}
@@ -40,7 +40,7 @@
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.roles.inactive_roles}</td></tr>
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
-          <td width="35%" class="tableHeader">{$i18n.form.roles.rights}</td>
+          <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
           <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
@@ -48,8 +48,8 @@
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$role.name|escape}</td>
           <td>{$role.rights|escape}</td>
-          <td><a href="task_edit.php?id={$task.id}">{$i18n.label.edit}</a></td>
-          <td><a href="task_delete.php?id={$task.id}">{$i18n.label.delete}</a></td>
+          <td><a href="role_edit.php?id={$role.id}">{$i18n.label.edit}</a></td>
+          <td><a href="role_delete.php?id={$role.id}">{$i18n.label.delete}</a></td>
         </tr>
     {/foreach}
       </table>
