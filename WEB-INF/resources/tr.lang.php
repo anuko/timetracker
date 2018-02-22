@@ -130,9 +130,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.add_task' => 'Add task',
 'button.add_client' => 'Müşteri ekle',
-// TODO: translate the following.
-// 'button.add_invoice' => 'Add invoice',
-// 'button.add_option' => 'Add option',
 'button.add' => 'Ekle',
 'button.generate' => 'Yarat',
 // TODO: translate the following.

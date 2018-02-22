@@ -125,9 +125,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.add_task' => 'Add task',
 'button.add_client' => 'Přidat zákazníka',
-// TODO: translate the following.
-// 'button.add_invoice' => 'Add invoice',
-// 'button.add_option' => 'Add option',
 'button.add' => 'Přidat',
 'button.generate' => 'Vytvořit',
 'button.reset_password' => 'Resetovat heslo',

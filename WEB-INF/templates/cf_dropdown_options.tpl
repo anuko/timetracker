@@ -29,7 +29,7 @@
           <td align="center">
             <br>
             <form>
-              <input type="button" onclick="chLocation('cf_dropdown_option_add.php?field_id={$field_id}');" value="{$i18n.button.add_option}">
+              <input type="button" onclick="chLocation('cf_dropdown_option_add.php?field_id={$field_id}');" value="{$i18n.button.add}">
             </form>
           </td>
         </tr>

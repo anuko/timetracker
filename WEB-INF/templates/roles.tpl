@@ -30,7 +30,7 @@
       <table width="100%">
         <tr>
           <td align="center"><br>
-            <form><input type="button" onclick="chLocation('role_add.php');" value="{$i18n.button.add_role}"></form>
+            <form><input type="button" onclick="chLocation('role_add.php');" value="{$i18n.button.add}"></form>
           </td>
         </tr>
       </table>
@@ -57,7 +57,7 @@
       <table width="100%">
         <tr>
           <td align="center"><br>
-            <form><input type="button" onclick="chLocation('role_add.php');" value="{$i18n.button.add_role}"></form>
+            <form><input type="button" onclick="chLocation('role_add.php');" value="{$i18n.button.add}"></form>
           </td>
         </tr>
       </table>

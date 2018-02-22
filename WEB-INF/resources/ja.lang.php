@@ -123,8 +123,6 @@ $i18n_key_words = array(
 // 'button.add_project' => 'Add project',
 // 'button.add_task' => 'Add task',
 // 'button.add_client' => 'Add client',
-// 'button.add_invoice' => 'Add invoice',
-// 'button.add_option' => 'Add option',
 'button.add' => '追加',
 'button.generate' => '生成',
 // TODO: translate the following.
