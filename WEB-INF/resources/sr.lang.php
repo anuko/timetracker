@@ -411,6 +411,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
 // 'form.roles.inactive_roles' => 'Inactive Roles',
+// 'form.roles.rights' => 'Rights',
 
 // Forma klijenata. Pogledajte primer na https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Aktivni klijent',

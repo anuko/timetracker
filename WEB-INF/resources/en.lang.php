@@ -396,6 +396,7 @@ $i18n_key_words = array(
  // Roles form. See example at https://timetracker.anuko.com/roles.php
 'form.roles.active_roles' => 'Active Roles',
 'form.roles.inactive_roles' => 'Inactive Roles',
+'form.roles.rights' => 'Rights',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Active Clients',

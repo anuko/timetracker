@@ -263,6 +263,41 @@ class ttTeamHelper {
     return false;
   }
 
+  // getActiveRoles - returns an array of active roles for team.
+  static function getActiveRoles($team_id)
+  {
+    $result = array();
+    $mdb2 = getConnection();
+
+    $sql = "select id, name, rights from tt_roles where team_id = $team_id and status = 1 order by upper(name)";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
+  // getInactiveRoles - returns an array of inactive roles for team.
+  static function getInactiveRoles($team_id)
+  {
+    $result = array();
+    $mdb2 = getConnection();
+
+    $sql = "select id, name, rights from tt_roles
+      where team_id = $team_id and status = 0 order by upper(name)";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
   // The getActiveClients returns an array of active clients for team.
   static function getActiveClients($team_id, $all_fields = false)
   {

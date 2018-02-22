@@ -394,6 +394,7 @@ $i18n_key_words = array(
 // Roles form. See example at https://timetracker.anuko.com/roles.php
 'form.roles.active_roles' => 'Активные роли',
 'form.roles.inactive_roles' => 'Неактивные роли',
+'form.roles.rights' => 'Права',
 
 // Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
 'form.client.client_to_delete' => 'Клиент для удаления',
