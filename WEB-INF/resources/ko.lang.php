@@ -286,6 +286,11 @@ $i18n_key_words = array(
 'title.add_user' => '사용자를 추가하기', // TODO: is this correct?
 'title.edit_user' => '사용자를 편집하기',
 'title.delete_user' => '사용자를 삭제하기',
+// TODO: translate the following.
+// 'title.roles' => 'Roles',
+// 'title.add_role' => 'Adding Role',
+// 'title.edit_role' => 'Editing Role',
+// 'title.delete_role' => 'Deleting Role',
 'title.clients' => '클라이언트',
 'title.add_client' => '클라이언트 추가',
 'title.edit_client' => '클라이언트 편집',

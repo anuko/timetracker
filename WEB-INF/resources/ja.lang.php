@@ -284,6 +284,11 @@ $i18n_key_words = array(
 'title.add_user' => 'ユーザーの作成',
 'title.edit_user' => 'ユーザーの編集',
 'title.delete_user' => 'ユーザーの削除',
+// TODO: translate the following.
+// 'title.roles' => 'Roles',
+// 'title.add_role' => 'Adding Role',
+// 'title.edit_role' => 'Editing Role',
+// 'title.delete_role' => 'Deleting Role',
 'title.clients' => 'クライアント',
 'title.add_client' => 'クライアントの追加',
 'title.edit_client' => 'クライアントの編集',

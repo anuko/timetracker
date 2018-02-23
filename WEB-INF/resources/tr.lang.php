@@ -297,6 +297,11 @@ $i18n_key_words = array(
 'title.add_user' => 'Kullanıcı yarat', // TODO: we need consistency with all titles. Why not ekleniyor?
 'title.edit_user' => 'Kullanıcı düzenleniyor',
 'title.delete_user' => 'Kullanıcı siliniyor',
+// TODO: translate the following.
+// 'title.roles' => 'Roles',
+// 'title.add_role' => 'Adding Role',
+// 'title.edit_role' => 'Editing Role',
+// 'title.delete_role' => 'Deleting Role',
 'title.clients' => 'Müşteriler',
 'title.add_client' => 'Müşteri ekle',
 'title.edit_client' => 'Müşteriyi düzenle',

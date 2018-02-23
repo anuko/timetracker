@@ -42,6 +42,6 @@ if (!ttRoleHelper::rolesExist()) ttRoleHelper::createDefaultRoles();
 
 $smarty->assign('active_roles', ttTeamHelper::getActiveRoles($user->team_id));
 $smarty->assign('inactive_roles', ttTeamHelper::getInactiveRoles($user->team_id));
-$smarty->assign('title', $i18n->getKey('label.roles'));
+$smarty->assign('title', $i18n->getKey('title.roles'));
 $smarty->assign('content_page_name', 'roles.tpl');
 $smarty->display('index.tpl');

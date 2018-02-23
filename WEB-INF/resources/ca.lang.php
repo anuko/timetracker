@@ -273,6 +273,7 @@ $i18n_key_words = array(
 'title.add_project' => 'Agregant projecte',
 'title.edit_project' => 'Modificant projecte',
 'title.delete_project' => 'Eliminant projecte',
+// TODO: translate the following.
 // 'title.tasks' => 'Tasks',
 // 'title.add_task' => 'Adding Task',
 // 'title.edit_task' => 'Editing Task',
@@ -281,6 +282,11 @@ $i18n_key_words = array(
 'title.add_user' => 'Agregant usuari',
 'title.edit_user' => 'Modificant usuari',
 'title.delete_user' => 'Eliminant usuari',
+// TODO: translate the following.
+// 'title.roles' => 'Roles',
+// 'title.add_role' => 'Adding Role',
+// 'title.edit_role' => 'Editing Role',
+// 'title.delete_role' => 'Deleting Role',
 'title.clients' => 'Clients',
 'title.add_client' => 'Agregar client',
 'title.edit_client' => 'Modificar client',

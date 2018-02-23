@@ -240,6 +240,11 @@ $i18n_key_words = array(
 'title.add_user' => 'Benutzerkonto erstellen',
 'title.edit_user' => 'Benutzerdaten bearbeiten',
 'title.delete_user' => 'Benutzer löschen',
+// TODO: translate the following.
+// 'title.roles' => 'Roles',
+// 'title.add_role' => 'Adding Role',
+// 'title.edit_role' => 'Editing Role',
+// 'title.delete_role' => 'Deleting Role',
 'title.clients' => 'Kunden',
 'title.add_client' => 'Kunden hinzufügen',
 'title.edit_client' => 'Kunden bearbeiten',

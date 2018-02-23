@@ -46,7 +46,7 @@ if ($request->isPost()) {
   $cl_status = $request->getParameter('status');
   $cl_projects = $request->getParameter('projects');
 } else {
-  $task = ttTaskHelper::getTask($cl_task_id);
+  $task = ttTaskHelper::get($cl_task_id);
   $cl_name = $task['name'];
   $cl_description = $task['description'];
   $cl_status = $task['status'];

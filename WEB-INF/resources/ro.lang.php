@@ -289,6 +289,11 @@ $i18n_key_words = array(
 'title.add_user' => 'Adaugare utilizator',
 'title.edit_user' => 'Editare utilizator',
 'title.delete_user' => 'Stergere utilizator', // TODO: is this correct?
+// TODO: translate the following.
+// 'title.roles' => 'Roles',
+// 'title.add_role' => 'Adding Role',
+// 'title.edit_role' => 'Editing Role',
+// 'title.delete_role' => 'Deleting Role',
 'title.clients' => 'Clienti',
 'title.add_client' => 'Adaugare client', // TODO: is this correct?
 'title.edit_client' => 'Editare client', // TODO: is this correct?

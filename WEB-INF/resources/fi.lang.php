@@ -247,6 +247,11 @@ $i18n_key_words = array(
 'title.add_user' => 'Käyttäjän lisäys',
 'title.edit_user' => 'Käyttäjän muokkaus',
 'title.delete_user' => 'Käyttäjän poisto',
+// TODO: translate the following.
+// 'title.roles' => 'Roles',
+// 'title.add_role' => 'Adding Role',
+// 'title.edit_role' => 'Editing Role',
+// 'title.delete_role' => 'Deleting Role',
 'title.clients' => 'Asiakkaat',
 'title.add_client' => 'Asiakkaan lisäys',
 'title.edit_client' => 'Asiakkaan muokkaus',

@@ -28,6 +28,40 @@
 
 // The ttRoleHelper is a class to help with custom group roles.
 class ttRoleHelper {
+
+  // get - gets details of a role identified by its id.
+  static function get($id)
+  {
+    global $user;
+
+    $mdb2 = getConnection();
+
+    $sql = "select id, name, description, rank, rights, status from tt_roles
+      where id = $id and team_id = $user->team_id and (status = 0 or status = 1)";
+    $res = $mdb2->query($sql);
+
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+	  if ($val['id'] != '') {
+        return $val;
+      } else
+        return false;
+    }
+    return false;
+  }
+
+  // delete - marks the role as deleted.
+  static function delete($role_id) {
+    global $user;
+
+    $mdb2 = getConnection();
+
+    // Mark the task as deleted.
+    $sql = "update tt_roles set status = NULL where id = $role_id and team_id = $user->team_id";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
+
   // insert - inserts an entry into tt_roles table.
   static function insert($fields)
   {

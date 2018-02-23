@@ -258,6 +258,11 @@ $i18n_key_words = array(
 'title.add_user' => 'درج کاربر',
 'title.edit_user' => 'ویرایش کاربر',
 'title.delete_user' => 'حذف کاربر',
+// TODO: translate the following.
+// 'title.roles' => 'Roles',
+// 'title.add_role' => 'Adding Role',
+// 'title.edit_role' => 'Editing Role',
+// 'title.delete_role' => 'Deleting Role',
 'title.clients' => 'مشتریان',
 'title.add_client' => 'درج مشتری',
 'title.edit_client' => 'ویرایش مشتری',

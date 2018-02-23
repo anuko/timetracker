@@ -281,6 +281,11 @@ $i18n_key_words = array(
 'title.add_user' => '添加用戶', // TODO: is this correct?
 'title.edit_user' => '編輯用戶',
 'title.delete_user' => '刪除用戶',
+// TODO: translate the following.
+// 'title.roles' => 'Roles',
+// 'title.add_role' => 'Adding Role',
+// 'title.edit_role' => 'Editing Role',
+// 'title.delete_role' => 'Deleting Role',
 'title.clients' => '客戶',
 'title.add_client' => '添加客戶',
 'title.edit_client' => '編輯客戶',

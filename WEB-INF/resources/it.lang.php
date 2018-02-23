@@ -248,6 +248,11 @@ $i18n_key_words = array(
 'title.add_user' => 'Crea utente',
 'title.edit_user' => 'Modifica utente',
 'title.delete_user' => 'Elimina utente',
+// TODO: translate the following.
+// 'title.roles' => 'Roles',
+// 'title.add_role' => 'Adding Role',
+// 'title.edit_role' => 'Editing Role',
+// 'title.delete_role' => 'Deleting Role',
 'title.clients' => 'Clienti',
 'title.add_client' => 'Aggiungi cliente',
 'title.edit_client' => 'Modifica cliente',

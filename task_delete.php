@@ -37,7 +37,7 @@ if (!ttAccessCheck(right_manage_team) || MODE_PROJECTS_AND_TASKS != $user->track
 }
 
 $cl_task_id = (int)$request->getParameter('id');
-$task = ttTaskHelper::getTask($cl_task_id);
+$task = ttTaskHelper::get($cl_task_id);
 $task_to_delete = $task['name'];
 
 $form = new Form('taskDeleteForm');
@@ -47,7 +47,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getK
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if(ttTaskHelper::getTask($cl_task_id)) {
+    if(ttTaskHelper::get($cl_task_id)) {
       if (ttTaskHelper::delete($cl_task_id)) {
         header('Location: tasks.php');
         exit();

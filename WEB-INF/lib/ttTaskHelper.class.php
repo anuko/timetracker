@@ -29,8 +29,8 @@
 // Class ttTaskHelper is used to help with task related operations.
 class ttTaskHelper {
 
-  // getTask - gets details of the task identified by its id. 
-  static function getTask($id)
+  // get - gets details of a task identified by its id.
+  static function get($id)
   {
     global $user;
  

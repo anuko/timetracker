@@ -26,44 +26,44 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-require_once('../initialize.php');
-import('ttTaskHelper');
+require_once('initialize.php');
+import('ttRoleHelper');
 import('form.Form');
 
 // Access check.
-if (!ttAccessCheck(right_manage_team) || MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+if (!ttAccessCheck(right_manage_team)) {
   header('Location: access_denied.php');
   exit();
 }
 
-$cl_task_id = (int)$request->getParameter('id');
-$task = ttTaskHelper::get($cl_task_id);
-$task_to_delete = $task['name'];
+$cl_role_id = (int)$request->getParameter('id');
+$role = ttRoleHelper::get($cl_role_id);
+$role_to_delete = $role['name'];
 
-$form = new Form('taskDeleteForm');
-$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_task_id));
+$form = new Form('roleDeleteForm');
+$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_role_id));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if(ttTaskHelper::get($cl_task_id)) {
-      if (ttTaskHelper::delete($cl_task_id)) {
-        header('Location: tasks.php');
+    if(ttRoleHelper::get($cl_role_id)) {
+      if (ttRoleHelper::delete($cl_role_id)) {
+        header('Location: roles.php');
         exit();
       } else
         $err->add($i18n->getKey('error.db'));
     } else
       $err->add($i18n->getKey('error.db'));
   } elseif ($request->getParameter('btn_cancel')) {
-    header('Location: tasks.php');
+    header('Location: roles.php');
     exit();
   }
 } // isPost
 
-$smarty->assign('task_to_delete', $task_to_delete);
+$smarty->assign('role_to_delete', $role_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.taskDeleteForm.btn_cancel.focus()"');
-$smarty->assign('title', $i18n->getKey('title.delete_task'));
-$smarty->assign('content_page_name', 'mobile/task_delete.tpl');
-$smarty->display('mobile/index.tpl');
+$smarty->assign('title', $i18n->getKey('title.delete_role'));
+$smarty->assign('content_page_name', 'role_delete.tpl');
+$smarty->display('index.tpl');
