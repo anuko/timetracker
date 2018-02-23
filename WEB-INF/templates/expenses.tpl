@@ -136,7 +136,6 @@ function recalculateCost() {
         </tr>
 {/if}
 {if $predefined_expenses}
-
         <tr>
           <td align="right">{$i18n.label.expense}:</td>
           <td>{$forms.expensesForm.predefined_expense.control}</td>
