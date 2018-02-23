@@ -29,6 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
+import('ttRoleHelper');
 
 // Access check.
 if (!ttAccessCheck(right_data_entry|right_view_reports)) {
@@ -298,6 +299,12 @@ if ($request->isPost()) {
         $plugins .= ',wvns';
 
       $plugins = trim($plugins, ',');
+
+      // If we use roles... No, we'll do it differently.
+      /*
+      if ($cl_roles && !ttRoleHelper::rolesExist()) {
+         ttRoleHelper::createDefaultRoles();
+      }*/
 
       // Prepare config string.
       if ($cl_roles)

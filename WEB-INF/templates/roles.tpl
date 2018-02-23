@@ -47,7 +47,7 @@
     {foreach $inactive_roles as $role}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$role.name|escape}</td>
-          <td>{$role.rights|escape}</td>
+          <td>{$role.description|escape}</td>
           <td><a href="role_edit.php?id={$role.id}">{$i18n.label.edit}</a></td>
           <td><a href="role_delete.php?id={$role.id}">{$i18n.label.delete}</a></td>
         </tr>

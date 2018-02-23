@@ -446,4 +446,16 @@ $i18n_key_words = array(
 'form.quota.quota' => 'Quota',
 'form.quota.workday_hours' => 'Hours in work day',
 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+
+// Roles.
+'role.user.label' => 'User',
+'role.user.description' => 'A regular member without management rights.',
+'role.supervisor.label' => 'Supervisor',
+'role.supervisor.description' => 'A person with a small set of management rights.',
+'role.client.label' => 'Client',
+'role.client.description' => 'A client can view its own reports, charts, and invoices.',
+'role.comanager.label' => 'Co-manager',
+'role.comanager.description' => 'A person with an extended set of management functions, who is helping group manager with most of the work.',
+'role.manager.label' => 'Manager',
+'role.manager.description' => 'Group manager. Can do most of things for a group.',
 );

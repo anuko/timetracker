@@ -47,4 +47,72 @@ class ttRoleHelper {
 
     return true;
   }
+
+  // rolesExist - checks whether roles for team already exist.
+  static function rolesExist()
+  {
+    $mdb2 = getConnection();
+    global $user;
+
+    $sql = "select count(*) as count from tt_roles where team_id = $user->team_id";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      if ($val['count'] > 0)
+        return true; // Roles for team exist.
+    }
+    return false;
+  }
+
+  // createDefaultRoles - creates a set of predefined roles for the team to use.
+  static function createDefaultRoles()
+  {
+    $mdb2 = getConnection();
+    global $i18n;
+    global $user;
+
+    // Active roles.
+    $name = $mdb2->quote($i18n->getKey('role.user.label'));
+    $description = $mdb2->quote($i18n->getKey('role.user.description'));
+    $rights = $mdb2->quote('data_entry,view_own_data,manage_own_settings,view_users');
+    $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($user->team_id, $name, $description, 4, $rights, 1)";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    $name = $mdb2->quote($i18n->getKey('role.client.label'));
+    $description = $mdb2->quote($i18n->getKey('role.client.description'));
+    $rights = $mdb2->quote('data_entry,view_own_data,manage_own_settings,view_users');  // TODO: adjust rights.
+    $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($user->team_id, $name, $description, 16, $rights, 1)";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    $name = $mdb2->quote($i18n->getKey('role.comanager.label'));
+    $description = $mdb2->quote($i18n->getKey('role.comanager.description'));
+    $rights = $mdb2->quote('data_entry,view_own_data,manage_own_settings,view_users');  // TODO: adjust rights.
+    $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($user->team_id, $name, $description, 68, $rights, 1)";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    $name = $mdb2->quote($i18n->getKey('role.manager.label'));
+    $description = $mdb2->quote($i18n->getKey('role.manager.description'));
+    $rights = $mdb2->quote('data_entry,view_own_data,manage_own_settings,view_users');  // TODO: adjust rights.
+    $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($user->team_id, $name, $description, 324, $rights, 1)";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    // Inactive roles.
+    $name = $mdb2->quote($i18n->getKey('role.supervisor.label'));
+    $description = $mdb2->quote($i18n->getKey('role.supervisor.description'));
+    $rights = $mdb2->quote('data_entry,view_own_data,manage_own_settings,view_users'); // TODO: adjust rights.
+    $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($user->team_id, $name, $description, 12, $rights, 0)";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    return true;
+  }
 }
