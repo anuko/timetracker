@@ -451,4 +451,28 @@ $i18n_key_words = array(
 'form.quota.quota' => 'Quota',
 'form.quota.workday_hours' => 'Werkuren per dag',
 'form.quota.hint' => 'Als de velden leeg worden gelaten, dan zullen de doelen worden berekend op bassis van het aantal werkuren per dag en vakantiedagen.',
+
+// Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
+// TODO: translate the following.
+// 'role.user.label' => 'User',
+// 'role.user.label.low_case' => 'user',
+// 'role.user.description' => 'A regular member without management rights.',
+// 'role.client.label' => 'Client',
+// 'role.client.label.low_case' => 'client',
+// 'role.client.description' => 'A client can view its own reports, charts, and invoices.',
+// 'role.supervisor.label' => 'Supervisor',
+// 'role.supervisor.label.low_case' => 'supervisor',
+// 'role.supervisor.description' => 'A person with a small set of management rights.',
+// 'role.comanager.label' => 'Co-manager',
+// 'role.comanager.label.low_case' => 'co-manager',
+// 'role.comanager.description' => 'A person with a big set of management functions.',
+// 'role.manager.label' => 'Manager',
+// 'role.manager.label.low_case' => 'manager',
+// 'role.manager.description' => 'Group manager. Can do most of things for a group.',
+// 'role.top_manager.label' => 'Top manager',
+// 'role.top_manager.label.low_case' => 'top manager',
+// 'role.top_manager.description' => 'Top group manager. Can do everything in a tree of groups.',
+// 'role.admin.label' => 'Administrator',
+// 'role.admin.label.low_case' => 'administrator',
+// 'role.admin.description' => 'Site adminsitrator.',
 );
