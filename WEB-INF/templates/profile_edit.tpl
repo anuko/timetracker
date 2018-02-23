@@ -1,19 +1,4 @@
 <script>
-// handleRolesCheckbox - controls visibility of the Configure and What is it? links on the right.
-function handleRolesCheckbox() {
-  var rolesCheckbox = document.getElementById("roles");
-  var configureLabel = document.getElementById("roles_config");
-  var whatIsItLabel = document.getElementById("roles_what_is_it");
-  if (rolesCheckbox.checked) {
-    configureLabel.style.display = "inline";
-    whatIsItLabel.style.display = "none";
-  } else {
-    configureLabel.style.display = "none";
-    whatIsItLabel.style.display = "inline";
-  }
-}
-
-
 // handleTaskRequiredCheckbox - controls visibility of the Task Required checkbox.
 function handleTaskRequiredCheckbox() {
   var taskRequiredCheckbox = document.getElementById("task_required");
@@ -159,7 +144,7 @@ function handlePluginCheckboxes() {
   {if defined(DEBUG_ROLES)}
           <tr>
             <td align="right" nowrap>{$i18n.label.roles}:</td>
-            <td>{$forms.profileForm.roles.control} <span id="roles_config"><a href="roles.php">{$i18n.label.configure}</a></span> <span id="roles_what_is_it"><a href="https://www.anuko.com/lp/tt_19.htm" target="_blank">{$i18n.label.what_is_it}</a></span></td>
+            <td><a href="roles.php">{$i18n.label.configure}</a></td>
           </tr>
   {/if}
           <tr>

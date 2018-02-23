@@ -29,12 +29,16 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttTeamHelper');
+import('ttRoleHelper');
 
 // Access check.
 if (!ttAccessCheck(right_manage_team)) {
   header('Location: access_denied.php');
   exit();
 }
+
+// If there are no roles in team, introduce default ones.
+if (!ttRoleHelper::rolesExist()) ttRoleHelper::createDefaultRoles();
 
 $smarty->assign('active_roles', ttTeamHelper::getActiveRoles($user->team_id));
 $smarty->assign('inactive_roles', ttTeamHelper::getInactiveRoles($user->team_id));

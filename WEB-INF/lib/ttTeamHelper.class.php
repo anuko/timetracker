@@ -269,7 +269,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description from tt_roles where team_id = $team_id and status = 1 order by upper(name)";
+    $sql = "select id, name, description from tt_roles where team_id = $team_id and status = 1 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -287,7 +287,7 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     $sql = "select id, name, description from tt_roles
-      where team_id = $team_id and status = 0 order by upper(name)";
+      where team_id = $team_id and status = 0 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
