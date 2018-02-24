@@ -89,6 +89,8 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => '不正確的用戶名或密碼。',
 'error.user_exists' => '該使用者登錄資訊已經存在。',
+// TODO: translate the following.
+// 'error.object_exists' => 'Object with this name already exists.',
 'error.project_exists' => '該專案名稱已經存在。',
 // TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',

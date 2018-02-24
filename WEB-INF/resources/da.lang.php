@@ -80,6 +80,8 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => 'Forkert brugernavn eller adgangskode.',
 'error.user_exists' => 'Brugernavn eksistere allerede.',
+// TODO: translate the following.
+// 'error.object_exists' => 'Object with this name already exists.',
 'error.project_exists' => 'Der eksiterer allerede et projekt med det navn.',
 'error.task_exists' => 'Opgavenavn eksistere allerede.',
 'error.client_exists' => 'Der eksistere allerede en klient med dette navn.',

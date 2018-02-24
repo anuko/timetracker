@@ -50,6 +50,42 @@ class ttRoleHelper {
     return false;
   }
 
+  // The getRoleByName looks up a role by name.
+  static function getRoleByName($role_name) {
+
+    $mdb2 = getConnection();
+    global $user;
+
+    $sql = "select id from tt_roless where team_id = $user->team_id and name = ".
+      $mdb2->quote($role_name)." and (status = 1 or status = 0)";
+    $res = $mdb2->query($sql);
+
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      if ($val['id'])
+        return $val;
+    }
+    return false;
+  }
+
+  // update function updates a role in the database.
+  static function update($fields)
+  {
+    global $user;
+    $mdb2 = getConnection();
+
+    $id = (int)$fields['id'];
+    $name = $fields['name'];
+    $description = $fields['description'];
+    $status = (int)$fields['status'];
+    // TODO: add rights later when we have them.
+
+    $sql = "update tt_roles set name = ".$mdb2->quote($name).", description = ".$mdb2->quote($description).
+      ", status = $status where id = $id and team_id = $user->team_id";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
+
   // delete - marks the role as deleted.
   static function delete($role_id) {
     global $user;

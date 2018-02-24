@@ -80,6 +80,8 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => 'Pogrešno korisničko ime ili lozinka.',
 'error.user_exists' => 'Korisnik pod ovim imenom već postoji.',
+// TODO: translate the following.
+// 'error.object_exists' => 'Object with this name already exists.',
 'error.project_exists' => 'Projekat pod ovim nazivom već postoji.',
 'error.task_exists' => 'Zadatak pod ovim nazivom već postoji.',
 'error.client_exists' => 'Klijent pod ovim imenom već postoji.',

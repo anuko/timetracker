@@ -94,6 +94,7 @@ $i18n_key_words = array(
 'error.auth' => 'Vale login või salasõna.',
 // TODO: translate the following.
 // 'error.user_exists' => 'User with this login already exists.',
+// 'error.object_exists' => 'Object with this name already exists.',
 'error.project_exists' => 'Selle nimega projekt on juba olemas.',
 // TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',

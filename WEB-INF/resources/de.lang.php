@@ -80,6 +80,8 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => 'Benutzername oder Passwort ungültig.',
 'error.user_exists' => 'Benutzer mit diesem Konto ist bereits vorhanden.',
+// TODO: translate the following.
+// 'error.object_exists' => 'Object with this name already exists.',
 'error.project_exists' => 'Es gibt bereits ein Projekt mit diesem Namen.',
 'error.task_exists' => 'Task mit diesem Namen existiert bereits.',
 'error.client_exists' => 'Der Kunde mit dem Namen existiert schon.',

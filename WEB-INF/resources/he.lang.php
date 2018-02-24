@@ -96,6 +96,8 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => 'שם משתמש או סיסמה שגויים',
 'error.user_exists' => 'שם משתמש כבר קיים',
+// TODO: translate the following.
+// 'error.object_exists' => 'Object with this name already exists.',
 'error.project_exists' => 'שם פרוייקט כבר קיים',
 'error.task_exists' => 'קיימת משימה עם שם דומה',
 'error.client_exists' => 'שם לקוח כבר קיים',

@@ -97,6 +97,7 @@ $i18n_key_words = array(
 'error.auth' => 'Nume de utilizator sau parola incorecta.',
 // TODO: translate the following.
 // 'error.user_exists' => 'User with this login already exists.',
+// 'error.object_exists' => 'Object with this name already exists.',
 'error.project_exists' => 'Proiectul cu acest nume exista deja.',
 // TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',

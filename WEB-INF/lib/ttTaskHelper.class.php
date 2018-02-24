@@ -79,13 +79,12 @@ class ttTaskHelper {
 
     $sql = "select id from tt_tasks where team_id = $user->team_id and name = ".
       $mdb2->quote($task_name)." and (status = 1 or status = 0)";
-  	$res = $mdb2->query($sql);
+      $res = $mdb2->query($sql);
 
-  	if (!is_a($res, 'PEAR_Error')) {
+      if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-	  if ($val['id']) {
+      if ($val['id'])
         return $val;
-      }
     }
     return false;
   }
@@ -185,7 +184,7 @@ class ttTaskHelper {
     return $last_id;
   }
  
- // update function updates a task in database.
+ // update function updates a task in the database.
   static function update($fields)
   {
     global $user;

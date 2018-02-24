@@ -90,6 +90,7 @@ $i18n_key_words = array(
 'error.auth' => 'Usuario o contraseña incorrecta.',
 // TODO: translate the following.
 // 'error.user_exists' => 'User with this login already exists.',
+// 'error.object_exists' => 'Object with this name already exists.',
 'error.project_exists' => 'Ya existe un proyecto con este nombre.',
 // TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',

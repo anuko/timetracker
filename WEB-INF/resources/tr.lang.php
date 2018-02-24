@@ -99,6 +99,7 @@ $i18n_key_words = array(
 'error.auth' => 'Hatalı kullanıcı adı veya parola.',
 // TODO: translate the following.
 // 'error.user_exists' => 'User with this login already exists.',
+// 'error.object_exists' => 'Object with this name already exists.',
 'error.project_exists' => 'Bu isimde proje zaten vardır.',
 // TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',

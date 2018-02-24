@@ -81,6 +81,8 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => 'Usuário ou senha incorretos.',
 'error.user_exists' => 'Já existe usuário com este login.',
+// TODO: translate the following.
+// 'error.object_exists' => 'Object with this name already exists.',
 'error.project_exists' => 'Já existe projeto com este nome.',
 'error.task_exists' => 'Já existe tarefa com este nome.',
 'error.client_exists' => 'Já existe cliente com este nome.',

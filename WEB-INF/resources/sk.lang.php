@@ -85,6 +85,8 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => 'Nesprávne prihlasovacie meno alebo heslo.',
 'error.user_exists' => 'Používateľ s týmto prihlasovacím menom už existuje.',
+// TODO: translate the following.
+// 'error.object_exists' => 'Object with this name already exists.',
 'error.project_exists' => 'Projekt s týmto názvom už existuje.',
 'error.task_exists' => 'Úloha s týmto názvom už existuje.',
 'error.client_exists' => 'Klient s týmto menom už existuje.',
