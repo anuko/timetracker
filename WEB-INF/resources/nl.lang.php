@@ -76,8 +76,7 @@ $i18n_key_words = array(
 'error.task' => 'Kies taak.',
 'error.client' => 'Kies klant.',
 'error.report' => 'Kies rapport.',
-// TODO: translate the following.
-// 'error.record' => 'Select record.',
+'error.record' => 'Selecteer record.', // TODO: why not Kies as above?
 'error.auth' => 'Onjuiste inlognaam of wachtwoord.',
 'error.user_exists' => 'Een gebruiker met deze inlognaam bestaat al.',
 'error.project_exists' => 'Een project met deze naam bestaat al.',
@@ -134,8 +133,7 @@ $i18n_key_words = array(
 'label.end_date' => 'Einddatum',
 'label.user' => 'Medewerker',
 'label.users' => 'Medewerkers',
-// TODO: translate the following.
-// 'label.roles' => 'Roles',
+'label.roles' => 'Rollen',
 'label.client' => 'Klant',
 'label.clients' => 'Klanten',
 'label.option' => 'Optie',
@@ -204,9 +202,8 @@ $i18n_key_words = array(
 'label.paid_status' => 'Status van betaling',
 'label.paid' => 'Betaald',
 'label.mark_paid' => 'Markeer als betaald',
-// TODO: translate the following.
-// 'label.week_note' => 'Week note',
-// 'label.week_list' => 'Week list',
+'label.week_note' => 'Week aantekening',
+'label.week_list' => 'Week overzicht',
 
 // Form titles.
 'title.login' => 'Aanmelden',
@@ -244,11 +241,10 @@ $i18n_key_words = array(
 'title.add_user' => 'Medewerker toevoegen',
 'title.edit_user' => 'Medewerker wijzigen',
 'title.delete_user' => 'Medewerker verwijderen',
-// TODO: translate the following.
-// 'title.roles' => 'Roles',
-// 'title.add_role' => 'Adding Role',
-// 'title.edit_role' => 'Editing Role',
-// 'title.delete_role' => 'Deleting Role',
+'title.roles' => 'Rollen',
+'title.add_role' => 'Rol toevoegen', // TODO: Confirm correctness.
+'title.edit_role' => 'Rol wijzigen', // TODO: Confirm correctness.
+'title.delete_role' => 'Rol verwijderen', // TODO: Confirm correctness.
 'title.clients' => 'Klanten',
 'title.add_client' => 'Klant toevoegen',
 'title.edit_client' => 'Klant wijzigen',
@@ -275,8 +271,7 @@ $i18n_key_words = array(
 'title.cf_edit_dropdown_option' => 'Uitvouwmogelijkheid bewerken',
 'title.cf_delete_dropdown_option' => 'Uitvouwmogelijkheid verwijderen',
 'title.locking' => 'Blokkeren',
-// TODO: translate the following.
-// 'title.week_view' => 'Week View',
+'title.week_view' => 'Week overzicht',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -359,8 +354,7 @@ $i18n_key_words = array(
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Exporteer',
-// TODO: translate the following.
-// 'form.report.assign_to_invoice' => 'Assign to invoice',
+'form.report.assign_to_invoice' => 'Voeg toe aan factuur',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
@@ -395,10 +389,10 @@ $i18n_key_words = array(
 'form.users.default_rate' => 'Standaard uurtarief',
 
 // Roles form. See example at https://timetracker.anuko.com/roles.php
+'form.roles.active_roles' => 'Actieve rollen',
+'form.roles.inactive_roles' => 'Inactieve Rollen',
 // TODO: translate the following.
-// 'form.roles.active_roles' => 'Active Roles',
-// 'form.roles.inactive_roles' => 'Inactive Roles',
-// 'form.roles.rights' => 'Rights',
+// 'form.roles.rights' => 'Rights', // TODO: Rechten?
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Actieve klanten',
@@ -425,8 +419,7 @@ $i18n_key_words = array(
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 'form.profile.12_hours' => '12 uurs',
 'form.profile.24_hours' => '24 uurs',
-// TODO: translate the following.
-// 'form.profile.show_holidays' => 'Show holidays',
+'form.profile.show_holidays' => 'Toon vakantiedagen',
 'form.profile.tracking_mode' => 'Bijhouden',
 'form.profile.mode_time' => 'tijd',
 'form.profile.mode_projects' => 'projecten',
@@ -435,10 +428,9 @@ $i18n_key_words = array(
 'form.profile.type_all' => 'begin, einde en duur',
 'form.profile.type_start_finish' => 'begin en einde',
 'form.profile.type_duration' => 'duur',
-// TODO: translate the following.
-// 'form.profile.punch_mode' => 'Punch mode',
-// 'form.profile.allow_overlap' => 'Allow overlap',
-// 'form.profile.future_entries' => 'Future entries',
+'form.profile.punch_mode' => 'Start/stop modus',
+'form.profile.allow_overlap' => 'Sta overlapping van tijden toe',
+'form.profile.future_entries' => 'Toevoegingen toestaan in de toekomst',
 'form.profile.uncompleted_indicators' => 'Onvolledige indicatoren',
 'form.profile.plugins' => 'Plugins',
 
@@ -458,25 +450,25 @@ $i18n_key_words = array(
 'form.quota.hint' => 'Als de velden leeg worden gelaten, dan zullen de doelen worden berekend op bassis van het aantal werkuren per dag en vakantiedagen.',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
-// TODO: translate the following.
-// 'role.user.label' => 'User',
-// 'role.user.low_case_label' => 'user',
-// 'role.user.description' => 'A regular member without management rights.',
-// 'role.client.label' => 'Client',
-// 'role.client.low_case_label' => 'client',
-// 'role.client.description' => 'A client can view its own reports, charts, and invoices.',
-// 'role.supervisor.label' => 'Supervisor',
-// 'role.supervisor.low_case_label' => 'supervisor',
-// 'role.supervisor.description' => 'A person with a small set of management rights.',
-// 'role.comanager.label' => 'Co-manager',
-// 'role.comanager.low_case_label' => 'co-manager',
-// 'role.comanager.description' => 'A person with a big set of management functions.',
-// 'role.manager.label' => 'Manager',
-// 'role.manager.low_case_label' => 'manager',
-// 'role.manager.description' => 'Group manager. Can do most of things for a group.',
-// 'role.top_manager.label' => 'Top manager',
-// 'role.top_manager.low_case_label' => 'top manager',
-// 'role.top_manager.description' => 'Top group manager. Can do everything in a tree of groups.',
+'role.user.label' => 'Gebruiker',
+'role.user.low_case_label' => 'gebruiker',
+'role.user.description' => 'Een gebruiker zonder beheer rechten.',
+'role.client.label' => 'Klant',
+'role.client.low_case_label' => 'klant',
+'role.client.description' => 'Een klant kan zijn eigen rapporten, grafieken en facturen inzien.',
+'role.supervisor.label' => 'Supervisor',
+'role.supervisor.low_case_label' => 'supervisor',
+'role.supervisor.description' => 'Een persoon met beperkte beheer rechten.',
+'role.comanager.label' => 'Co-beheerder',
+'role.comanager.low_case_label' => 'co-beheerder',
+'role.comanager.description' => 'Een persoon met gemiddelde beheer rechten.',
+'role.manager.label' => 'Beheerder',
+'role.manager.low_case_label' => 'beheerder',
+'role.manager.description' => 'Group beheerder. Kan een groep beheren.',
+'role.top_manager.label' => 'Top beheerder',
+'role.top_manager.low_case_label' => 'top beheerder',
+'role.top_manager.description' => 'Top groepsbeheerder. Kan alle groepen beheren.',
+// TODO: translate the following. This could not be Beheerder as admin account is for the entire site. Administrateur or Admin perhaps?
 // 'role.admin.label' => 'Administrator',
 // 'role.admin.low_case_label' => 'administrator',
 // 'role.admin.description' => 'Site adminsitrator.',
