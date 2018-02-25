@@ -291,7 +291,7 @@ class ttExportHelper {
 
     // Write roles.
     fwrite($file, "<roles>\n");
-    $roles = ttTeamHelper::getRoles($user->team_id);
+    $roles = ttTeamHelper::getAllRoles($user->team_id);
     foreach ($roles as $role) {
       fwrite($file, "\t<role rank=\"".$role['rank']."\"".
         " rights=\"".$role['rights']."\">\n");

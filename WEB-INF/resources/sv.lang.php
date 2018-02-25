@@ -87,6 +87,8 @@ $i18n_key_words = array(
 'error.task_exists' => 'Det finns redan en arbetsuppgift med det här namnet.',
 'error.client_exists' => 'Det finns redan en kund med det här namnet.',
 'error.invoice_exists' => 'Det finns redan en faktura med det här numret.',
+// TODO: translate the following.
+// 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Det finns inga debiterbara tidsregistreringar.',
 'error.no_login' => 'Det finns ingen användare med det här användarnamnet.',
 'error.no_teams' => 'Databasen är tom. Logga in som administratör och skapa en ny arbetsgrupp.',
@@ -410,7 +412,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
 // 'form.roles.inactive_roles' => 'Inactive Roles',
+// 'form.roles.rank' => 'Rank',
 // 'form.roles.rights' => 'Rights',
+// 'form.roles.assigned' => 'Assigned',
+// 'form.roles.not_assigned' => 'Not assigned',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Aktiva kunder',

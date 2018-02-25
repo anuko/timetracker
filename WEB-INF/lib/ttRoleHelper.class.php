@@ -56,8 +56,26 @@ class ttRoleHelper {
     $mdb2 = getConnection();
     global $user;
 
-    $sql = "select id from tt_roless where team_id = $user->team_id and name = ".
+    $sql = "select id from tt_roles where team_id = $user->team_id and name = ".
       $mdb2->quote($role_name)." and (status = 1 or status = 0)";
+    $res = $mdb2->query($sql);
+
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      if ($val['id'])
+        return $val;
+    }
+    return false;
+  }
+
+  // The getRoleByRank looks up a role by its rank.
+  static function getRoleByRank($rank) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $rank = (int) $rank; // Cast to int just in case for better security.
+
+    $sql = "select id from tt_roles where team_id = $user->team_id and rank = $rank and (status = 1 or status = 0)";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
@@ -104,11 +122,12 @@ class ttRoleHelper {
     $team_id = (int) $fields['team_id'];
     $name = $fields['name'];
     $rank = (int) $fields['rank'];
+    $description = $fields['description'];
     $rights = $fields['rights'];
     $status = $fields['status'];
 
-    $sql = "insert into tt_roles (team_id, name, rank, rights, status)
-      values ($team_id, ".$mdb2->quote($name).", $rank, ".$mdb2->quote($rights).", ".$mdb2->quote($status).")";
+    $sql = "insert into tt_roles (team_id, name, rank, description, rights, status)
+      values ($team_id, ".$mdb2->quote($name).", $rank, ".$mdb2->quote($description).", ".$mdb2->quote($rights).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;

@@ -92,6 +92,8 @@ $i18n_key_words = array(
 'error.task_exists' => 'وظیفه ای با این نام هم اکنون وجود دارد.',
 'error.client_exists' => 'مشتری با این نام هم اکنون وجود دارد.',
 'error.invoice_exists' => 'فاکتوری با این شماره هم اکنون موجود است.',
+// TODO: translate the following.
+// 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'آیتمی جهت فاکتور کردن وجود ندارد.',
 'error.no_login' => 'کاربری با این نام کاربری موجود نیست.',
 'error.no_teams' => 'پایگاه داده شما خالی است با کاربر admin وارد شوید و تیم ایجاد کنید.',
@@ -432,7 +434,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
 // 'form.roles.inactive_roles' => 'Inactive Roles',
+// 'form.roles.rank' => 'Rank',
 // 'form.roles.rights' => 'Rights',
+// 'form.roles.assigned' => 'Assigned',
+// 'form.roles.not_assigned' => 'Not assigned',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'مشتری های فعال',

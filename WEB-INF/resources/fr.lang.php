@@ -86,6 +86,8 @@ $i18n_key_words = array(
 'error.task_exists' => 'Une tâche avec ce nom existe déjà.',
 'error.client_exists' => 'Un client avec ce nom existe déjà.',
 'error.invoice_exists' => 'Une facture avec ce numéro existe déjà.',
+// TODO: translate the following.
+// 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Il n\\\'y a pas d\\\'éléments à facturer.',
 'error.no_login' => 'Aucun utilisateur avec cet identifiant.',
 'error.no_teams' => 'Votre base de données est vide. Connectez-vous comme administrateur et créez une nouvelle équipe.',
@@ -402,7 +404,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
 // 'form.roles.inactive_roles' => 'Inactive Roles',
+// 'form.roles.rank' => 'Rank',
 // 'form.roles.rights' => 'Rights',
+// 'form.roles.assigned' => 'Assigned',
+// 'form.roles.not_assigned' => 'Not assigned',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Clients actifs',

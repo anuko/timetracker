@@ -100,6 +100,7 @@ $i18n_key_words = array(
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
+// 'error.role_exists' => 'Role with this rank already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 // 'error.no_login' => 'No user with this login.',
 'error.no_teams' => 'Sinu andmebaas on tühi. Logi adminina sisse ja loo uus meeskond.',
@@ -462,7 +463,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
 // 'form.roles.inactive_roles' => 'Inactive Roles',
+// 'form.roles.rank' => 'Rank',
 // 'form.roles.rights' => 'Rights',
+// 'form.roles.assigned' => 'Assigned',
+// 'form.roles.not_assigned' => 'Not assigned',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.

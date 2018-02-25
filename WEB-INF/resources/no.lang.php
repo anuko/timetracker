@@ -98,6 +98,7 @@ $i18n_key_words = array(
 'error.client_exists' => 'En klient med dette navnet er allerede opprettet.',
 // TODO: translate the following.
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
+// 'error.role_exists' => 'Role with this rank already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 'error.no_login' => 'Det er ingen bruker med dette brukernavnet.',
 'error.no_teams' => 'Databasen din er tom. Logg inn som admin og opprett et nytt team.',
@@ -452,7 +453,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
 // 'form.roles.inactive_roles' => 'Inactive Roles',
+// 'form.roles.rank' => 'Rank',
 // 'form.roles.rights' => 'Rights',
+// 'form.roles.assigned' => 'Assigned',
+// 'form.roles.not_assigned' => 'Not assigned',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.

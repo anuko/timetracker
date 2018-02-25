@@ -269,7 +269,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description from tt_roles where team_id = $team_id and status = 1 order by rank";
+    $sql = "select id, name, rank, description from tt_roles where team_id = $team_id and status = 1 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -286,7 +286,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description from tt_roles
+    $sql = "select id, name, rank, description from tt_roles
       where team_id = $team_id and status = 0 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
@@ -296,6 +296,23 @@ class ttTeamHelper {
       }
     }
     return $result;
+  }
+
+  // getAllRoles - obtains all roles defined for team.
+  static function getAllRoles($team_id) {
+    $mdb2 = getConnection();
+
+    $result = array();
+    $sql = "select * from tt_roles where team_id = $team_id";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
   }
 
   // The getActiveClients returns an array of active clients for team.
@@ -509,23 +526,6 @@ class ttTeamHelper {
 
     $result = array();
     $sql = "select * from tt_fav_reports where user_id in (select id from tt_users where team_id = $team_id)";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
-  // getRoles - obtains all roles defined for team.
-  static function getRoles($team_id) {
-    $mdb2 = getConnection();
-
-    $result = array();
-    $sql = "select * from tt_roles where team_id = $team_id";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {

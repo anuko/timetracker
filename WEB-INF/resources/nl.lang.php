@@ -85,6 +85,8 @@ $i18n_key_words = array(
 'error.task_exists' => 'Er bestaat al een taak met deze naam.',
 'error.client_exists' => 'Een klant met deze naam bestaat al.',
 'error.invoice_exists' => 'Dit nummer is al eens toegekend aan een factuur.',
+// TODO: translate the following.
+// 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Er zijn geen factuureerbare onderdelen.',
 'error.no_login' => 'Een medewerker met deze inlognaam bestaat niet.',
 'error.no_teams' => 'Uw database is leeg. Meld je aan als admin en maak een nieuw team.',
@@ -393,8 +395,13 @@ $i18n_key_words = array(
 
 // Roles form. See example at https://timetracker.anuko.com/roles.php
 'form.roles.active_roles' => 'Actieve rollen',
-'form.roles.inactive_roles' => 'Inactieve Rollen',
+'form.roles.inactive_roles' => 'Inactieve rollen',
+// TODO: translate the following.
+// 'form.roles.rank' => 'Rank',
 'form.roles.rights' => 'Rechten',
+// TODO: translate the following.
+// 'form.roles.assigned' => 'Assigned',
+// 'form.roles.not_assigned' => 'Not assigned',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Actieve klanten',

@@ -102,6 +102,8 @@ $i18n_key_words = array(
 'error.task_exists' => 'קיימת משימה עם שם דומה',
 'error.client_exists' => 'שם לקוח כבר קיים',
 'error.invoice_exists' => 'קיימת חשבונית עם מספר זה',
+// TODO: translate the following.
+// 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'אין פריטים לחיוב',
 'error.no_login' => 'משתמש זה אינו קיים',
 'error.no_teams' => 'בסיס הנתונים שלך ריק. התחבר כמנהל וצור צוות חדש',
@@ -438,7 +440,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
 // 'form.roles.inactive_roles' => 'Inactive Roles',
+// 'form.roles.rank' => 'Rank',
 // 'form.roles.rights' => 'Rights',
+// 'form.roles.assigned' => 'Assigned',
+// 'form.roles.not_assigned' => 'Not assigned',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'לקוחות פעילים',

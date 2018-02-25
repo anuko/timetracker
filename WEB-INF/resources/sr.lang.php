@@ -86,6 +86,8 @@ $i18n_key_words = array(
 'error.task_exists' => 'Zadatak pod ovim nazivom već postoji.',
 'error.client_exists' => 'Klijent pod ovim imenom već postoji.',
 'error.invoice_exists' => 'Račun pod ovim brojem već postoji.',
+// TODO: translate the following.
+// 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Nema stavke za naplatu.',
 'error.no_login' => 'Nema korisnika pod ovom prijavom',
 'error.no_teams' => 'Vaša baza podataka je prazna. Prijavite se kao administrator i napravite novi tim.',
@@ -413,7 +415,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
 // 'form.roles.inactive_roles' => 'Inactive Roles',
+// 'form.roles.rank' => 'Rank',
 // 'form.roles.rights' => 'Rights',
+// 'form.roles.assigned' => 'Assigned',
+// 'form.roles.not_assigned' => 'Not assigned',
 
 // Forma klijenata. Pogledajte primer na https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Aktivni klijent',

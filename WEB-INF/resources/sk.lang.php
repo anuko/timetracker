@@ -91,6 +91,8 @@ $i18n_key_words = array(
 'error.task_exists' => 'Úloha s týmto názvom už existuje.',
 'error.client_exists' => 'Klient s týmto menom už existuje.',
 'error.invoice_exists' => 'Faktúra s týmto číslom už existuje.',
+// TODO: translate the following.
+// 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Neexistujú položky, ktoré by bolo možné fakturovať.',
 'error.no_login' => 'Neexistuje používateľ s týmto prihlasovacím menom.',
 'error.no_teams' => 'Vaša databáza je prázdna. Prihláste sa ako admin a vytvorte nový tím.',
@@ -430,7 +432,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
 // 'form.roles.inactive_roles' => 'Inactive Roles',
+// 'form.roles.rank' => 'Rank',
 // 'form.roles.rights' => 'Rights',
+// 'form.roles.assigned' => 'Assigned',
+// 'form.roles.not_assigned' => 'Not assigned',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Aktívny klienti',

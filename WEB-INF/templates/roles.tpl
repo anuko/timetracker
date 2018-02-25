@@ -10,7 +10,8 @@
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.roles.active_roles}</td></tr>
   {/if}
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
+          <td width="25%" class="tableHeader">{$i18n.label.thing_name}</td>
+          <td class="tableHeader">{$i18n.form.roles.rank}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
           <td class="tableHeader">{$i18n.label.delete}</td>
@@ -19,6 +20,7 @@
     {foreach $active_roles as $role}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$role.name|escape}</td>
+          <td>{$role.rank}</td>
           <td>{$role.description|escape}</td>
           <td><a href="role_edit.php?id={$role.id}">{$i18n.label.edit}</a></td>
           <td><a href="role_delete.php?id={$role.id}">{$i18n.label.delete}</a></td>
@@ -39,7 +41,8 @@
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.roles.inactive_roles}</td></tr>
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
+          <td width="25%" class="tableHeader">{$i18n.label.thing_name}</td>
+          <td class="tableHeader">{$i18n.form.roles.rank}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
           <td class="tableHeader">{$i18n.label.delete}</td>
@@ -47,6 +50,7 @@
     {foreach $inactive_roles as $role}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$role.name|escape}</td>
+          <td>{$role.rank}</td>
           <td>{$role.description|escape}</td>
           <td><a href="role_edit.php?id={$role.id}">{$i18n.label.edit}</a></td>
           <td><a href="role_delete.php?id={$role.id}">{$i18n.label.delete}</a></td>

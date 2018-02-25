@@ -88,6 +88,8 @@ $i18n_key_words = array(
 'error.task_exists' => 'Tämän niminen tehtävä on jo olemassa.',
 'error.client_exists' => 'Tämän niminen asiakas on jo olemassa.',
 'error.invoice_exists' => 'Tällä numerolla oleva lasku on jo olemassa.',
+// TODO: translate the following.
+// 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Ei laskutettavia syötteitä.',
 'error.no_login' => 'Tuntematon käyttäjänimi.',
 'error.no_teams' => 'Tietokanta on tyhjä. Kirjaudu ylläpitäjänä ja luo uusi tiimi.',
@@ -412,7 +414,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
 // 'form.roles.inactive_roles' => 'Inactive Roles',
+// 'form.roles.rank' => 'Rank',
 // 'form.roles.rights' => 'Rights',
+// 'form.roles.assigned' => 'Assigned',
+// 'form.roles.not_assigned' => 'Not assigned',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Aktiiviset asiakkaat',

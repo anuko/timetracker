@@ -84,6 +84,7 @@ $i18n_key_words = array(
 'error.task_exists' => 'Задача с таким названием уже есть.',
 'error.client_exists' => 'Клиент с таким именем уже есть.',
 'error.invoice_exists' => 'Счёт с таким номером уже есть.',
+'error.role_exists' => 'Роль с таким рангом уже есть.',
 'error.no_invoiceable_items' => 'Нет записей для включения в счёт.',
 'error.no_login' => 'Нет пользователя с таким логином.',
 'error.no_teams' => 'Ваша база данных пуста. Войдите в систему как администратор и создайте новую команду.',
@@ -393,7 +394,10 @@ $i18n_key_words = array(
 // Roles form. See example at https://timetracker.anuko.com/roles.php
 'form.roles.active_roles' => 'Активные роли',
 'form.roles.inactive_roles' => 'Неактивные роли',
+'form.roles.rank' => 'Ранг',
 'form.roles.rights' => 'Права',
+'form.roles.assigned' => 'Присвоены',
+'form.roles.not_assigned' => 'Не присвоены',
 
 // Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
 'form.client.client_to_delete' => 'Клиент для удаления',
