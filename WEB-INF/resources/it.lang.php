@@ -107,6 +107,7 @@ $i18n_key_words = array(
 'button.cancel' => 'Cancella',
 'button.submit' => 'Invia',
 'button.add' => 'Aggiungi',
+'button.delete' => 'Elimina',
 'button.generate' => 'Genera',
 'button.reset_password' => 'Reset password',
 'button.send' => 'Invia',

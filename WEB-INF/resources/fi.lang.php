@@ -108,6 +108,7 @@ $i18n_key_words = array(
 'button.cancel' => 'Keskeytä',
 'button.submit' => 'Hyväksy',
 'button.add' => 'Lisää',
+'button.delete' => 'Poista',
 'button.generate' => 'Luo',
 'button.reset_password' => 'Nollaa salasana',
 'button.send' => 'Lähetä',

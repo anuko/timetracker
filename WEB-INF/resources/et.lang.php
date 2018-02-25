@@ -122,6 +122,7 @@ $i18n_key_words = array(
 'button.cancel' => 'Tühista',
 'button.submit' => 'Postita',
 'button.add' => 'Lisa',
+'button.delete' => 'Kustuta',
 'button.generate' => 'Loo',
 'button.reset_password' => 'Tühjenda salasõna',
 'button.send' => 'Saada',

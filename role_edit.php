@@ -37,15 +37,20 @@ if (!ttAccessCheck(right_manage_team)) {
   header('Location: access_denied.php');
   exit();
 }
-
 $cl_role_id = (int)$request->getParameter('id');
+$role = ttRoleHelper::get($cl_role_id);
+if (!$role) {
+  header('Location: access_denied.php');
+  exit();
+}
+$assigned_rights = explode(',', $role['rights']);
+$available_rights = array_diff($user->rights_array, $assigned_rights);
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_description = trim($request->getParameter('description'));
   $cl_status = $request->getParameter('status');
 } else {
-  $role = ttRoleHelper::get($cl_role_id);
   $cl_name = $role['name'];
   $cl_description = $role['description'];
   $cl_status = $role['status'];
@@ -55,30 +60,74 @@ $form = new Form('roleForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_role_id));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
+
+// Multiple select controls for assigned and available rights.
+$form->addInput(array('type'=>'combobox','name'=>'assigned_rights','style'=>'width: 250px;','multiple'=>true,'data'=>$assigned_rights));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('button.delete')));
+$form->addInput(array('type'=>'combobox','name'=>'available_rights','style'=>'width: 250px;','multiple'=>true,'data'=>$available_rights));
+$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
+
+
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
 if ($request->isPost()) {
-  // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
-  if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
+    if ($request->getParameter('btn_save')) {
+    // Validate user input.
+    if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
+    if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
 
-  if ($err->no()) {
-    $existing_role = ttRoleHelper::getRoleByName($cl_name);
-    if (!$existing_role || ($cl_role_id == $existing_role['id'])) {
-      // Update role information.
-      if (ttRoleHelper::update(array(
-        'id' => $cl_role_id,
-        'name' => $cl_name,
-        'description' => $cl_description,
-        'status' => $cl_status))) {
-        header('Location: roles.php');
-        exit();
+    if ($err->no()) {
+      $existing_role = ttRoleHelper::getRoleByName($cl_name);
+      if (!$existing_role || ($cl_role_id == $existing_role['id'])) {
+        // Update role information.
+        if (ttRoleHelper::update(array(
+          'id' => $cl_role_id,
+          'name' => $cl_name,
+          'description' => $cl_description,
+          'status' => $cl_status))) {
+          header('Location: roles.php');
+          exit();
+        } else
+          $err->add($i18n->getKey('error.db'));
       } else
-        $err->add($i18n->getKey('error.db'));
-    } else
-      $err->add($i18n->getKey('error.object_exists'));
+        $err->add($i18n->getKey('error.object_exists'));
+    }
+  }
+  if ($request->getParameter('btn_delete') && $request->getParameter('assigned_rights')) {
+     $rights = $role['rights'];
+     $to_delete = $request->getParameter('assigned_rights');
+     foreach($to_delete as $index) {
+       $right_to_delete = $assigned_rights[$index];
+       $rights = str_replace($right_to_delete, '', $rights);
+       $rights = str_replace(',,',',', $rights);
+     }
+     $rights = trim($rights, ',');
+     if (ttRoleHelper::update(array('id' => $cl_role_id,'rights'=> $rights))) {
+       header('Location: role_edit.php?id='.$role['id']);
+       exit();
+     } else
+       $err->add($i18n->getKey('error.db'));
+  }
+  if ($request->getParameter('btn_add') && $request->getParameter('available_rights')) {
+     $rights = $role['rights'];
+     $to_add = $request->getParameter('available_rights');
+     foreach($to_add as $index) {
+       $right_to_add = $available_rights[$index];
+       // Just in case remove it.
+       $rights = str_replace($right_to_add, '', $rights);
+       $rights = str_replace(',,',',', $rights);
+       // Add the right only if we have it ourselves.
+       if (in_array($right_to_add, $user->rights_array))
+         $rights .= ','.$right_to_add;
+     }
+     $rights = trim($rights, ',');
+     if (ttRoleHelper::update(array('id' => $cl_role_id,'rights'=> $rights))) {
+       header('Location: role_edit.php?id='.$role['id']);
+       exit();
+     } else
+       $err->add($i18n->getKey('error.db'));
   }
 } // isPost
 

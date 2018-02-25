@@ -124,6 +124,7 @@ $i18n_key_words = array(
 'button.cancel' => 'ביטול',
 'button.submit' => 'שלח',
 'button.add' => 'הוסף',
+'button.delete' => 'מחק',
 'button.generate' => 'הרץ',
 'button.reset_password' => 'איפוס סיסמה',
 'button.send' => 'שלח',

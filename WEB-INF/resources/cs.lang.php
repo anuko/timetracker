@@ -122,6 +122,7 @@ $i18n_key_words = array(
 'button.cancel' => 'Zrušit',
 'button.submit' => 'Uložit',
 'button.add' => 'Přidat',
+'button.delete' => 'Smazat',
 'button.generate' => 'Vytvořit',
 'button.reset_password' => 'Resetovat heslo',
 'button.send' => 'Poslat',

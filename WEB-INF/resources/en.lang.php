@@ -105,6 +105,7 @@ $i18n_key_words = array(
 'button.cancel' => 'Cancel',
 'button.submit' => 'Submit',
 'button.add' => 'Add',
+'button.delete' => 'Delete',
 'button.generate' => 'Generate',
 'button.reset_password' => 'Reset password',
 'button.send' => 'Send',
@@ -396,6 +397,8 @@ $i18n_key_words = array(
 'form.roles.active_roles' => 'Active Roles',
 'form.roles.inactive_roles' => 'Inactive Roles',
 'form.roles.rights' => 'Rights',
+'form.roles.assigned' => 'Assigned',
+'form.roles.not_assigned' => 'Not assigned',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Active Clients',

@@ -110,6 +110,10 @@ class Form {
 			    $el = new Combobox($params["name"]);
 			    $el->setData(@$params["data"]);
 			    $el->setDataDefault(@$params["empty"]);
+                            if (isset($params["multiple"])) {
+                              $el->setMultiple($params["multiple"]);
+                              $el->name .= '[]'; // Add brackets to the end of name to get back an array on POST.
+                            }
 			    if (isset($params["datakeys"])) $el->setDataKeys($params["datakeys"]);
 			    break;
 

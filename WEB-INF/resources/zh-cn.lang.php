@@ -113,6 +113,7 @@ $i18n_key_words = array(
 'button.cancel' => '取消',
 'button.submit' => '提交',
 'button.add' => '添加',
+'button.delete' => '删除',
 'button.generate' => '创建',
 'button.reset_password' => '重置密码',
 'button.send' => '发送',

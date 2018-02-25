@@ -121,6 +121,7 @@ $i18n_key_words = array(
 'button.cancel' => '취소',
 'button.submit' => '발송',
 'button.add' => '추가',
+'button.delete' => '삭제',
 'button.generate' => '생성',
 // TODO: translate the following.
 // 'button.reset_password' => 'Reset password',

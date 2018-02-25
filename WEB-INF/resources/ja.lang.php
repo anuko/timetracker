@@ -121,6 +121,7 @@ $i18n_key_words = array(
 'button.cancel' => 'キャンセル',
 'button.submit' => '送信',
 'button.add' => '追加',
+'button.delete' => '削除',
 'button.generate' => '生成',
 // TODO: translate the following.
 // 'button.reset_password' => 'Reset password',

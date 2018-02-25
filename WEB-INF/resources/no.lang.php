@@ -122,6 +122,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'button.submit' => 'Submit',
 'button.add' => 'Legg til',
+'button.delete' => 'Slett',
 'button.generate' => 'Generer',
 'button.reset_password' => 'Resett passord',
 'button.send' => 'Send',

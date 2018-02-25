@@ -115,6 +115,7 @@ $i18n_key_words = array(
 'button.cancel' => 'لغو',
 'button.submit' => 'ثبت',
 'button.add' => 'درج',
+'button.delete' => 'حذف',
 'button.generate' => 'تولید',
 'button.reset_password' => 'بازسازی رمزعبور',
 'button.send' => 'ارسال',

@@ -107,6 +107,7 @@ $i18n_key_words = array(
 'button.cancel' => 'Otkaži',
 'button.submit' => 'Pošalji',
 'button.add' => 'Dodaj',
+'button.delete' => 'Obriši',
 'button.generate' => 'Napravi',
 'button.reset_password' => 'Resetuj lozinku',
 'button.send' => 'Pošalji',

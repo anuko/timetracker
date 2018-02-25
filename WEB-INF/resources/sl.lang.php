@@ -116,6 +116,7 @@ $i18n_key_words = array(
 'button.cancel' => 'Prekliči',
 'button.submit' => 'Potrdi',
 'button.add' => 'Dodaj',
+'button.delete' => 'Izbriši',
 'button.generate' => 'Ustvari',
 // TODO: translate the following.
 // 'button.reset_password' => 'Reset password',

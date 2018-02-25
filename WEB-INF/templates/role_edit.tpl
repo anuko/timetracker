@@ -20,11 +20,19 @@
           <td>{$i18n.label.required_fields}</td>
         </tr>
         <tr>
+          <td colspan="2" align="center" height="50">{$forms.roleForm.btn_save.control}</td>
+        </tr>
+        <tr>
           <td></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="2" align="center" height="50">{$forms.roleForm.btn_save.control}</td>
+          <td align = "right">{$i18n.form.roles.assigned}:</td>
+          <td>{$forms.roleForm.assigned_rights.control}</td><td>{$forms.roleForm.btn_delete.control}</td>
+        </tr>
+        <tr>
+          <td align = "right">{$i18n.form.roles.not_assigned}:</td>
+          <td>{$forms.roleForm.available_rights.control}</td><td>{$forms.roleForm.btn_add.control}</td>
         </tr>
       </table>
     </td>

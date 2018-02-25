@@ -114,6 +114,7 @@ $i18n_key_words = array(
 'button.cancel' => 'Zrušiť',
 'button.submit' => 'Odoslať',
 'button.add' => 'Pridať',
+'button.delete' => 'Vymazať',
 'button.generate' => 'Generovať',
 'button.reset_password' => 'Obnoviť heslo',
 'button.send' => 'Odoslať',

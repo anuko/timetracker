@@ -118,6 +118,7 @@ $i18n_key_words = array(
 'button.cancel' => 'Cancelar',
 'button.submit' => 'Enviar',
 'button.add' => 'Agregar',
+'button.delete' => 'Eliminar',
 'button.generate' => 'Generar',
 // TODO: translate the following.
 // 'button.reset_password' => 'Reset password',

@@ -69,19 +69,17 @@ class ttRoleHelper {
   }
 
   // update function updates a role in the database.
-  static function update($fields)
-  {
+  static function update($fields) {
     global $user;
     $mdb2 = getConnection();
 
     $id = (int)$fields['id'];
-    $name = $fields['name'];
-    $description = $fields['description'];
-    $status = (int)$fields['status'];
-    // TODO: add rights later when we have them.
-
-    $sql = "update tt_roles set name = ".$mdb2->quote($name).", description = ".$mdb2->quote($description).
-      ", status = $status where id = $id and team_id = $user->team_id";
+    if (isset($fields['name'])) $name_part = 'name = '.$mdb2->quote($fields['name']);
+    if (isset($fields['description'])) $descr_part = ', description = '.$mdb2->quote($fields['description']);
+    if (isset($fields['status'])) $status_part = ', status = '.(int)$fields['status'];
+    if (isset($fields['rights'])) $rights_part = ', rights = '.$mdb2->quote($fields['rights']);
+    $parts = trim($name_part.$descr_part.$status_part.$rights_part, ',');
+    $sql = "update tt_roles set $parts where id = $id and team_id = $user->team_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }

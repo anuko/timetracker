@@ -106,6 +106,7 @@ $i18n_key_words = array(
 'button.cancel' => 'Fortryd',
 'button.submit' => 'Gem',
 'button.add' => 'Tilføj',
+'button.delete' => 'Slet',
 'button.generate' => 'Generer',
 'button.reset_password' => 'Nulstil adgangskode',
 'button.send' => 'Send',

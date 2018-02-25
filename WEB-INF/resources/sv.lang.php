@@ -107,6 +107,7 @@ $i18n_key_words = array(
 'button.cancel' => 'Avbryt',
 'button.submit' => 'Skicka',
 'button.add' => 'Lägg till',
+'button.delete' => 'Ta bort',
 'button.generate' => 'Generera',
 'button.reset_password' => 'Återställ lösenord',
 'button.send' => 'Skicka',

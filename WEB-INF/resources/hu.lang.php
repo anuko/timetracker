@@ -119,6 +119,7 @@ $i18n_key_words = array(
 'button.cancel' => 'Vissza',
 'button.submit' => 'Mentés',
 'button.add' => 'Hozzáadás',
+'button.delete' => 'Törlés',
 'button.generate' => 'Generálás',
 // TODO: translate the following.
 // 'button.reset_password' => 'Reset password',
