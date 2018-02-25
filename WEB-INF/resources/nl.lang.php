@@ -245,9 +245,9 @@ $i18n_key_words = array(
 'title.edit_user' => 'Medewerker wijzigen',
 'title.delete_user' => 'Medewerker verwijderen',
 'title.roles' => 'Rollen',
-'title.add_role' => 'Rol toevoegen', // TODO: Confirm correctness.
-'title.edit_role' => 'Rol wijzigen', // TODO: Confirm correctness.
-'title.delete_role' => 'Rol verwijderen', // TODO: Confirm correctness.
+'title.add_role' => 'Rol toevoegen',
+'title.edit_role' => 'Rol wijzigen',
+'title.delete_role' => 'Rol verwijderen',
 'title.clients' => 'Klanten',
 'title.add_client' => 'Klant toevoegen',
 'title.edit_client' => 'Klant wijzigen',
@@ -394,8 +394,7 @@ $i18n_key_words = array(
 // Roles form. See example at https://timetracker.anuko.com/roles.php
 'form.roles.active_roles' => 'Actieve rollen',
 'form.roles.inactive_roles' => 'Inactieve Rollen',
-// TODO: translate the following.
-// 'form.roles.rights' => 'Rights', // TODO: Rechten?
+'form.roles.rights' => 'Rechten',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Actieve klanten',
@@ -440,7 +439,7 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'Van',
 'form.mail.to' => 'Aan',
-'form.mail.report_subject' => 'Time Tracker Rapport',
+'form.mail.report_subject' => 'Time Tracker rapport',
 'form.mail.footer' => 'Anuko Time Tracker is een eenvoudig en gemakkelijk te gebruiken open source tijdregistratiesysteem. Bezoek <a href="https://www.anuko.com">www.anuko.com</a> voor meer informatie.',
 'form.mail.report_sent' => 'Rapport is verzonden.',
 'form.mail.invoice_sent' => 'Factuur is verzonden.',
@@ -471,8 +470,7 @@ $i18n_key_words = array(
 'role.top_manager.label' => 'Top beheerder',
 'role.top_manager.low_case_label' => 'top beheerder',
 'role.top_manager.description' => 'Top groepsbeheerder. Kan alle groepen beheren.',
-// TODO: translate the following. This could not be Beheerder as admin account is for the entire site. Administrateur or Admin perhaps?
-// 'role.admin.label' => 'Administrator',
-// 'role.admin.low_case_label' => 'administrator',
-// 'role.admin.description' => 'Site adminsitrator.',
+'role.admin.label' => 'Administrator',
+'role.admin.low_case_label' => 'administrator',
+'role.admin.description' => 'Website beheerder.', // TODO: perhaps, 'Time Tracker administrator.'?
 );
