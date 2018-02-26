@@ -331,7 +331,10 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Salasanan nollauspyyntöviesti lähetetty.',
 'form.reset_password.email_subject' => 'Anuko Time Tracker -salasanan nollauspyyntö',
-'form.reset_password.email_body' => "Hyvä käyttäjä,\n\nJoku, mahdollisesti sinä itse, on pyytänyt nollaamaan Anuko Time Tracker -ohjelman salasanasi. Jos haluat nollata salasanasi, käy sivulla \n\n%s\n\nAnuko Time Tracker on yksinkertainen ja helppokäyttöinen vapaan koodin tuntiseurantaohjelmisto. Lisätietoja sivulla https://www.anuko.com.\n\n",
+// TODO: English string has changed. "from IP added. Re-translate the beginning.
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// "IP %s" probably sounds awkward.
+'form.reset_password.email_body' => "Hyvä käyttäjä,\n\nJoku, IP %s, on pyytänyt nollaamaan Anuko Time Tracker -ohjelman salasanasi. Jos haluat nollata salasanasi, käy sivulla \n\n%s\n\nAnuko Time Tracker on yksinkertainen ja helppokäyttöinen vapaan koodin tuntiseurantaohjelmisto. Lisätietoja sivulla https://www.anuko.com.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Syötä uusi salasana ja osoita Tallenna.',

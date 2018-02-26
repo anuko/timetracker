@@ -355,7 +355,10 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'הבקשה לאיפוס בסיסמה נשלחה בדואר אלקטרוני.',
 'form.reset_password.email_subject' => 'בקשה לאיפוס סיסמה למערכת Anuko Time Tracker',
-'form.reset_password.email_body' => "משתמש יקר,\n\n התקבלה בקשה לאיפוס סיסמתך. נא ללחוץ על קישור זה אם ברצונך לאפס את הסיסמה.\n\n%s\n\n. Anuko Time Tracker הינה מערכת לניהול זמן פשוטה וחינמית. בקר באתרנו בכתובת https://www.anuko.com לפרטים נוספים.\n\n",
+// TODO: English string has changed. "from IP added. Re-translate the beginning.
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// Older translation is below.
+// 'form.reset_password.email_body' => "משתמש יקר,\n\n התקבלה בקשה לאיפוס סיסמתך. נא ללחוץ על קישור זה אם ברצונך לאפס את הסיסמה.\n\n%s\n\n. Anuko Time Tracker הינה מערכת לניהול זמן פשוטה וחינמית. בקר באתרנו בכתובת https://www.anuko.com לפרטים נוספים.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'הכנס סיסמה חדשה ולחץ על שמירה',

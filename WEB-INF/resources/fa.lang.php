@@ -350,7 +350,10 @@ $i18n_key_words = array(
 // TODO: check translation of form.reset_password.email_subject. This is the subject for email message for password reset. Below is the English original.
 // 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
 'form.reset_password.email_subject' => 'درخواست بازیابی رمزعبور فرستاده شد',
-'form.reset_password.email_body' => "کاربران گرامی\n\n یک نفر، شاید خودتان، درخواست بازیابی رمزعبور نرم افزار رهگیری زمان شما را داشته است.لطفا برای تغییر رمزعبور روی لینک زیر کلیک کنید: \n\n%s\n\n",
+// TODO: English string has changed. "from IP added. Re-translate the beginning.
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// Older translation is below.
+// 'form.reset_password.email_body' => "کاربران گرامی\n\n یک نفر، شاید خودتان، درخواست بازیابی رمزعبور نرم افزار رهگیری زمان شما را داشته است.لطفا برای تغییر رمزعبور روی لینک زیر کلیک کنید: \n\n%s\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'رمز عبور جدید را وارد کنید سپس روی ذخیره کلیک کنید',

@@ -326,7 +326,10 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Nulstilling af adgangskode er sendt på email.',
 'form.reset_password.email_subject' => 'Anuko Time Tracker - Anmodning om nulstilling af adgangskode',
-'form.reset_password.email_body' => "Hej\n\nNogen, formodentlig dig, har bedt om at få nulstillet din adgangskode. Tryk på linket hvis du vil have nulstillet din adgangskode.\n\n%s\n\nAnuko Time Tracker er et nemt, let at bruge, open source tidsregistrerings system. Besøg https://www.anuko.com for mere information.\n\n",
+// TODO: English string has changed. "from IP added. Re-translate the beginning.
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// "IP %s" probably sounds awkward.
+'form.reset_password.email_body' => "Hej\n\nNogen, IP %s, har bedt om at få nulstillet din adgangskode. Tryk på linket hvis du vil have nulstillet din adgangskode.\n\n%s\n\nAnuko Time Tracker er et nemt, let at bruge, open source tidsregistrerings system. Besøg https://www.anuko.com for mere information.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Skriv en ny adgangskode og tryk Gem.',

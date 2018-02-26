@@ -331,7 +331,10 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Begäran om att återställa lösenordet skickades via e-post.',
 'form.reset_password.email_subject' => 'Återställning av lösenord för Anuko Time Tracker begärd',
-'form.reset_password.email_body' => "Kära användare,\n\Någon, förmodligen du, begärde att ditt lösenord för Anuko Time Tracker skulle återställas. Vänligen besök den här länken ifall du vill återställa ditt lösenord.\n\n%s\n\nAnuko Time Tracker är en lättanvänd applikation byggd med öppen källkod som enkelt låter dig spåra och hålla koll på arbetstider. Besök https://www.anuko.com för mer information.\n\n",
+// TODO: English string has changed. "from IP" added. Re-translate the beginning.
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// "IP %s" probably sounds awkward.
+'form.reset_password.email_body' => "Kära användare,\n\Någon, IP %s, begärde att ditt lösenord för Anuko Time Tracker skulle återställas. Vänligen besök den här länken ifall du vill återställa ditt lösenord.\n\n%s\n\nAnuko Time Tracker är en lättanvänd applikation byggd med öppen källkod som enkelt låter dig spåra och hålla koll på arbetstider. Besök https://www.anuko.com för mer information.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Fyll i ett nytt lösenord och klicka på Spara.',

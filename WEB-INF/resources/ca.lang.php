@@ -364,7 +364,7 @@ $i18n_key_words = array(
 'form.reset_password.message' => 'S\\\'ha enviat la petició de restablir paraula de pas.', // TODO: add "by email" to match the English string.
 'form.reset_password.email_subject' => 'Sol·licitud de restabliment de la paraula de pas de Anuko Time Tracker',
 // TODO: translate the following.
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Per restablir la paraula de pas, si us plau escrigui-la i faci clic en guardar.',

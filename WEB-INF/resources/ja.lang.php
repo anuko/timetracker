@@ -365,7 +365,10 @@ $i18n_key_words = array(
 'form.reset_password.message' => '送信したパスワードの初期化の要求。', // TODO: add "by email" to match the English string.
 'form.reset_password.email_subject' => 'Anuko Time Trackerのパスワードの初期化の要求',
 // TODO: translate the ending of this string.
-'form.reset_password.email_body' => "尊敬なるお客様、\n\n誰から（多分あなた）あなたのAnuko Time Trackerのパスワードの初期化が要求されました。あなたのパスワードを初期化しようとこのリンクを押してください。\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// TODO: English string has changed. "from IP added. Re-translate the beginning.
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// Older translation is below.
+// 'form.reset_password.email_body' => "尊敬なるお客様、\n\n誰から（多分あなた）あなたのAnuko Time Trackerのパスワードの初期化が要求されました。あなたのパスワードを初期化しようとこのリンクを押してください。\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.

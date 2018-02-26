@@ -332,7 +332,10 @@ $i18n_key_words = array(
 // Izmena forme za lozinku. Pogledajte primer na https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Zahtev za izmenu lozinke je poslat mejlom.',
 'form.reset_password.email_subject' => 'Anuko Time Tracker zahtev za izmenu lozinke',
-'form.reset_password.email_body' => "Poštovani korisniče,\n\nneko, najverovatnije vi, ste poslali zahtev za izmenu lozinke na Anuko Time Tracker nalogu. Molimo da pratite link ako želite da izmenite lozinku.\n\n%s\n\nAnuko Time Tracker je jednostavan i lak za korišćenje za praćenje radnog vremena. Posetite nas na https://www.anuko.com za više informacija.\n\n",
+// TODO: English string has changed. "from IP" added. Re-translate the beginning.
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// "IP %s" probably sounds awkward.
+'form.reset_password.email_body' => "Poštovani korisniče,\n\nneko, IP %s, ste poslali zahtev za izmenu lozinke na Anuko Time Tracker nalogu. Molimo da pratite link ako želite da izmenite lozinku.\n\n%s\n\nAnuko Time Tracker je jednostavan i lak za korišćenje za praćenje radnog vremena. Posetite nas na https://www.anuko.com za više informacija.\n\n",
 
 // Forma za izmenu lozinke. Pogledajte primer na https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Unesite novu lozinku i sačuvajte isti.',
