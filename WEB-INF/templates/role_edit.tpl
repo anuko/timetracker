@@ -12,6 +12,10 @@
           <td>{$forms.roleForm.description.control}</td>
         </tr>
         <tr>
+          <td align = "right">{$i18n.form.roles.rank}:</td>
+          <td>{$forms.roleForm.rank.control} <a href="https://www.anuko.com/lp/tt_20.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+        </tr>
+        <tr>
           <td align = "right">{$i18n.label.status}:</td>
           <td>{$forms.roleForm.status.control}</td>
         </tr>

@@ -49,10 +49,12 @@ $available_rights = array_diff($user->rights_array, $assigned_rights);
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_description = trim($request->getParameter('description'));
+  $cl_rank = $request->getParameter('rank');
   $cl_status = $request->getParameter('status');
 } else {
   $cl_name = $role['name'];
   $cl_description = $role['description'];
+  $cl_rank = $role['rank'];
   $cl_status = $role['status'];
 }
 
@@ -60,17 +62,20 @@ $form = new Form('roleForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_role_id));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
+for ($i = 0; $i < $user->role; $i++) {
+  $existing_role_name = null;
+  $rank_data[] = $i;
+}
+$form->addInput(array('type'=>'combobox','name'=>'rank','data'=>$rank_data,'value'=>$cl_rank));
+$form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
+  'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
+$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
 // Multiple select controls for assigned and available rights.
 $form->addInput(array('type'=>'combobox','name'=>'assigned_rights','style'=>'width: 250px;','multiple'=>true,'data'=>$assigned_rights));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('button.delete')));
 $form->addInput(array('type'=>'combobox','name'=>'available_rights','style'=>'width: 250px;','multiple'=>true,'data'=>$available_rights));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
-
-
-$form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
-  'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
 if ($request->isPost()) {
     if ($request->getParameter('btn_save')) {

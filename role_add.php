@@ -61,12 +61,13 @@ if ($request->isPost()) {
   if ($err->no()) {
     $existing_role = ttRoleHelper::getRoleByRank($cl_rank);
     if (!$existing_role) {
-        // Update role information.
+        // Insert a role with default user rights.
         if (ttRoleHelper::insert(array(
           'team_id' => $user->team_id,
           'name' => $cl_name,
           'rank' => $cl_rank,
           'description' => $cl_description,
+          'rights' => 'data_entry,view_own_data,manage_own_settings,view_users', // Default user rights.
           'status' => ACTIVE))) {
           header('Location: roles.php');
           exit();
