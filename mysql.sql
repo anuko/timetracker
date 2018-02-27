@@ -49,6 +49,7 @@ CREATE TABLE `tt_users` (
   `name` varchar(100) default NULL,                # user name
   `team_id` int(11) NOT NULL,                      # team id
   `role` int(11) default 4,                        # user role ("manager", "co-manager", "client", or "user")
+  `role_id` int(11) default NULL,                  # future replacement of role
   `client_id` int(11) default NULL,                # client id for "client" user role
   `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
   `email` varchar(100) default NULL,               # user email
@@ -407,3 +408,19 @@ CREATE TABLE `tt_roles` (
 
 # Create an index that guarantees unique active and inactive role ranks in each group.
 create unique index role_idx on tt_roles(team_id, rank, status);
+
+
+#
+# Structure for table tt_site_config. This table stores configuration data
+# for Time Tracker site as a whole.
+# For example, database version, code version, site language, etc.
+#
+CREATE TABLE `tt_site_config` (
+  `param_name` varchar(32) NOT NULL,              # parameter name
+  `param_value` text default NULL,                # parameter value
+  `created` datetime default CURRENT_TIMESTAMP,   # creation time
+  `updated` datetime ON UPDATE CURRENT_TIMESTAMP, # modification time
+  PRIMARY KEY  (`param_name`)
+);
+
+INSERT INTO `tt_site_config` (`param_name`, `param_value`) VALUES ('version_db', '1.17.34'); # TODO: change when structure changes.
