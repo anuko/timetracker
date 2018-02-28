@@ -162,7 +162,7 @@ class ttRoleHelper {
     $rights_user = 'data_entry,view_own_data,manage_own_settings,view_users';
     $rights_supervisor = $rights_user.',on_behalf_data_entry,view_data,override_punch_mode,swap_roles,approve_timesheets';
     $rights_comanager = $rights_supervisor.',manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices';
-    $rights_manager = $rights_comanager.'manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups';
+    $rights_manager = $rights_comanager.',manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups';
 
     // Active roles.
     $name = $mdb2->quote($i18n->getKey('role.user.label'));

@@ -32,6 +32,8 @@ require_once('initialize.php');
 import('ttUserHelper');
 import('ttTaskHelper');
 
+// setChange - executes an sql statement. TODO: rename this function to something better.
+// Better yet, redo the entire thing and make an installer.
 function setChange($sql) {
   print "<pre>".$sql."</pre>";
   $mdb2 = getConnection();
@@ -41,6 +43,7 @@ function setChange($sql) {
   else
     print "successful update<br>\n";
 }
+
 
 if ($request->isGet()) {
   echo('<h2>Environment Checks</h2>');
@@ -735,6 +738,10 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_users` ADD `role_id` int(11) default NULL AFTER `role`");
     setChange("CREATE TABLE `tt_site_config` (`param_name` varchar(32) NOT NULL, `param_value` text default NULL, `created` datetime default NULL, `updated` datetime default NULL, PRIMARY KEY (`param_name`))");
     setChange("INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.34', now())");
+    setChange("DELETE from `tt_roles` WHERE team_id = 0");
+    setChange("INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Site administrator', 1024, 'administer_site')");
+    setChange("INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'data_entry,view_own_data,manage_own_settings,view_users,on_behalf_data_entry,view_data,override_punch_mode,swap_roles,approve_timesheets,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups')");
+    setChange("UPDATE `tt_site_config` SET `param_value` = '1.17.35' where param_name = 'version_db'");
   }
 
   if ($_POST["cleanup"]) {
