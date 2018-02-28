@@ -733,8 +733,8 @@ if ($_POST) {
     setChange("create unique index role_idx on tt_roles(team_id, rank, status)");
     setChange("ALTER TABLE `tt_roles` ADD `description` varchar(255) default NULL AFTER `name`");
     setChange("ALTER TABLE `tt_users` ADD `role_id` int(11) default NULL AFTER `role`");
-    setChange("CREATE TABLE `tt_site_config` (`param_name` varchar(32) NOT NULL, `param_value` text default NULL, `created` datetime default CURRENT_TIMESTAMP, `updated` datetime ON UPDATE CURRENT_TIMESTAMP, PRIMARY KEY (`param_name`))");
-    setChange("INSERT INTO `tt_site_config` (`param_name`, `param_value`) VALUES ('version_db', '1.17.34')");
+    setChange("CREATE TABLE `tt_site_config` (`param_name` varchar(32) NOT NULL, `param_value` text default NULL, `created` datetime default NULL, `updated` datetime default NULL, PRIMARY KEY (`param_name`))");
+    setChange("INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.34', now())");
   }
 
   if ($_POST["cleanup"]) {

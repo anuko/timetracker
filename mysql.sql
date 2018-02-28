@@ -416,11 +416,11 @@ create unique index role_idx on tt_roles(team_id, rank, status);
 # For example, database version, code version, site language, etc.
 #
 CREATE TABLE `tt_site_config` (
-  `param_name` varchar(32) NOT NULL,              # parameter name
-  `param_value` text default NULL,                # parameter value
-  `created` datetime default CURRENT_TIMESTAMP,   # creation time
-  `updated` datetime ON UPDATE CURRENT_TIMESTAMP, # modification time
+  `param_name` varchar(32) NOT NULL, # parameter name
+  `param_value` text default NULL,   # parameter value
+  `created` datetime default NULL,   # creation time
+  `updated` datetime default NULL,   # modification time
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`) VALUES ('version_db', '1.17.34'); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.34', now()); # TODO: change when structure changes.
