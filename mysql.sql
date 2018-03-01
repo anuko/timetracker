@@ -410,9 +410,9 @@ CREATE TABLE `tt_roles` (
 create unique index role_idx on tt_roles(team_id, rank, status);
 
 # Insert site-wide roles - site administrator and top manager.
-DELETE from `tt_roles` WHERE team_id = 0;
 INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Site administrator', 1024, 'administer_site');
 INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'data_entry,view_own_data,manage_own_settings,view_users,on_behalf_data_entry,view_data,override_punch_mode,swap_roles,approve_timesheets,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups');
+# TODO: move this code above, create roles before creating admin account and assign admin account its role.
 
 #
 # Structure for table tt_site_config. This table stores configuration data

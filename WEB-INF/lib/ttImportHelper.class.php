@@ -53,6 +53,7 @@ class ttImportHelper {
   // The following arrays are maps between entity ids in the file versus the database.
   // In the file they are sequential (1,2,3...) while in the database the entities have different ids.
   var $userMap       = array(); // User ids.
+  var $roleMap       = array(); // Role ids.
   var $projectMap    = array(); // Project ids.
   var $taskMap       = array(); // Task ids.
   var $clientMap     = array(); // Client ids.
@@ -314,12 +315,20 @@ class ttImportHelper {
     }
 
     if ($name == 'ROLE' && $this->canImport) {
-      ttRoleHelper::insert(array(
+      $this->roleMap[$this->currentElement['ID']] = ttRoleHelper::insert(array(
         'team_id' => $this->team_id,
         'name' => $this->currentElement['NAME'],
         'rank' => $this->currentElement['RANK'],
         'rights' => $this->currentElement['RIGHTS'],
         'status' => $this->currentElement['STATUS']));
+
+      // Update role_id for tt_users to a mapped value.
+      // We did not do it during user insertion because roleMap was not ready then.
+      // TODO: write setMappedRole function.
+      /*
+        if ($this->currentElement['ID'] != $this->roleMap[$this->currentElement['ID']])
+          ttRoleHelper::setMappedRole($this->team_id, $this->currentElement['ID'], $this->roleMap[$this->currentElement['ID']]);
+       */
     }
     $this->currentTag = '';
   }
