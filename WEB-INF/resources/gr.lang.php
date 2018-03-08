@@ -97,18 +97,24 @@ $i18n_key_words = array(
 'error.client_exists' => 'Ο πελάτης με αυτό το όνομα υπάρχει ήδη.',
 'error.invoice_exists' => 'Το τιμολόγιο με αυτόν τον αριθμό υπάρχει ήδη.',
 'error.role_exists' => 'Ο ρόλος σε αυτή τη σειρά υπάρχει ήδη.',
-
-
-
-
-// TODO: refactoring ongoing down from here.
-'error.no_invoiceable_items' => 'Δεν υπάρχουν τιμολόγια.',
+// TODO: translate the folloiwng.
+// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
+// The error occurs when we add a new invoice for a client, but there are
+// no items (of time or expenses) to put into it.
+// In other words, 'Δεν υπάρχουν τιμολόγια.' is incorrect.
 'error.no_login' => 'Δεν υπάρχει χρήστης με αυτά τα στοιχεία.',
 'error.no_teams' => 'Η βάση δεδομένων σας είναι κενή. Συνδεθείτε ως διαχειριστής και δημιουργήστε μια νέα ομάδα.',
 'error.upload' => 'Σφάλμα φόρτωσης αρχείου.',
 'error.range_locked' => 'Το χρονικό διάστημα είναι κλειδωμένο.',
 'error.mail_send' => 'Σφάλμα κατά την αποστολή του μηνύματος.',
-'error.no_email' => 'Δεν βρέθηκε λογαριασμός με αυτήν τη διεύθυνση ηλεκτρονικού ταχυδρομείου.',
+// TODO: translate the following.
+// 'error.no_email' => 'No email associated with this login.',
+// The meaning of the error is: we try to find an email for the account
+// identified by user login, and there is no such email, as when user did not provide
+// it when creating an account. Therefore, we can't email anything to such user,
+// for example, when sending password reset email.
+// Therefore, this appears incorrect, if we believe Google translator.
+// error.no_email' => 'Δεν βρέθηκε λογαριασμός με αυτήν τη διεύθυνση ηλεκτρονικού ταχυδρομείου.',
 'error.uncompleted_exists' => 'Η μη ολοκληρωμένη καταχώρηση υπάρχει ήδη. Κλείσιμο ή διαγραφή του.',
 'error.goto_uncompleted' => 'Μεταβείτε στην μη ολοκληρωμένη καταχώρηση.',
 'error.overlap' => 'Το χρονικό διάστημα επικαλύπτει υπάρχουσες καταχωρήσεις.',
@@ -146,7 +152,8 @@ $i18n_key_words = array(
 'label.confirm_password' => 'Επιβεβαίωση κωδικού',
 'label.email' => 'Email',
 'label.cc' => 'Κοινοποίηση',
-'label.bcc' => 'Ιδιαίτερη κοινοποίηση',
+'label.bcc' => 'Κρυφή κοινοποίηση', // TODO: this is taken from roundcube mail - check for accuracy anyway.
+                                    // This is a "blind carbon copy" label on emails, see https://en.wiktionary.org/wiki/blind_carbon_copy
 'label.subject' => 'Θέμα',
 'label.date' => 'Ημερομηνία',
 'label.start_date' => 'Ημερομηνία έναρξης',
@@ -159,7 +166,7 @@ $i18n_key_words = array(
 'label.option' => 'Επιλογή',
 'label.invoice' => 'Τιμολόγιο',
 'label.project' => 'Πρότζεκτ',
-'label.projects' => 'Πρότζεκτ',
+'label.projects' => 'Πρότζεκτ', // TODO: no plural form for projects? As this is the same as 'label.project'.
 'label.task' => 'Έργο',
 'label.tasks' => 'Εργα',
 'label.description' => 'Περιγραφή',
@@ -174,6 +181,10 @@ $i18n_key_words = array(
 'label.week_total' => 'Σύνολο εβδομάδας',
 'label.month_total' => 'Σύνολο μήνα',
 'label.today' => 'Σήμερα',
+
+
+
+// TODO: refactoring ongoing down from here.
 'label.view' => 'Προβολή',
 'label.edit' => 'Επεξεργασία',
 'label.delete' => 'Διαγραφή',
@@ -336,9 +347,8 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Το αίτημα  επαναφοράς κωδικού πρόσβασης αποστέλλεται μέσω ηλεκτρονικού ταχυδρομείου.',
 'form.reset_password.email_subject' => 'Αίτημα επαναφοράς κωδικού Anuko Time Tracker',
-);
-?>
-<!--
+
+/*
 'form.reset_password.email_body' => "Αγαπητέ χρήστη,\n\n πιθανώς ζητήσατε επαναφορά του κωδικού σας στο Anuko Time Tracker.",
 
 
@@ -504,3 +514,5 @@ $i18n_key_words = array(
 'role.admin.description' => 'Διαχειριστής δικτυακού τόπου.',
 );
 -->
+*/
+);
