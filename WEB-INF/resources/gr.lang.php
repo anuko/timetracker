@@ -224,19 +224,24 @@ $i18n_key_words = array(
 'label.fav_report' => 'Αγαπημένη αναφορά',
 // TODO: translate the following.
 // 'label.schedule' => 'Schedule',
-
-
-
-// TODO: refactoring ongoing down from here.
 'label.what_is_it' => 'Τι είναι αυτό?',
 'label.expense' => 'Δαπάνη',
 'label.quantity' => 'Ποσότητα',
 'label.paid_status' => 'Κατάσταση πληρωμής',
 'label.paid' => 'Πληρωμένο',
-'label.mark_paid' => 'Το σήμα έχει πληρωθεί',
+// TODO: translate the following.
+// 'label.mark_paid' => 'Mark paid',
+// The meaning is "Go ahead and mark the selected items as paid." Mark is a verb here (to mark as paid).
 'label.week_note' => 'Σημείωση εβδομάδας',
-'label.week_list' => 'Λίστα εβδομάδων',
+// TODO: translate the following.
+// 'label.week_list' => 'Week list',
+// This is a list of entries for the whole week on the bottom of week view.
+// See https://www.anuko.com/time_tracker/week_list.htm - I suggest trying the week view to see it.
+// It is similar to a list of entries in day view. The difference is that week list is for 7 days.
 
+
+
+// TODO: refactoring ongoing down from here.
 // Form titles.
 'title.login' => 'Σύνδεση',
 'title.teams' => 'Ομάδες',
