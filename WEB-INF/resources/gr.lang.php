@@ -60,11 +60,11 @@ $i18n_key_words = array(
 'menu.options' => 'Επιλογές',
 
 // Footer - strings on the bottom of most pages.
-'footer.contribute_msg' => 'Συντελεστές',
+// TODO: translate the following.
+// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 'footer.credits' => 'Πιστώσεις',
 'footer.license' => 'Άδεια',
-'footer.improve' => 'Βελτίωση', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                  // This is a link to a webpage that describes how to contribute to the project.
+'footer.improve' => 'Βελτίωση',
 
 // Error messages.
 'error.access_denied' => 'Δεν επιτρέπεται η πρόσβαση.',
@@ -74,6 +74,8 @@ $i18n_key_words = array(
 'error.empty' => 'Το πεδίο "{0}" είναι κενό.',
 'error.not_equal' => 'Το πεδίο "{0}" δεν είναι ίσο με το πεδίο "{1}".',
 'error.interval' => 'Πεδίο "{0}"  πρέπει να έχει τιμή μεγαλύτερη από "{1}".',
+// TODO: improve "project" and "task" translations throughout the file.
+// Problem: 'menu.projects' => 'Πρότζεκτ', yet here we have εργασίας.
 'error.project' => 'Επιλογή εργασίας.',
 'error.task' => 'Επιλογή έργου.',
 'error.client' => 'Επιλογή πελάτη.',
@@ -81,12 +83,25 @@ $i18n_key_words = array(
 'error.record' => 'Επιλογή εγγραφής.',
 'error.auth' => 'Λανθασμένο όνομα εισόδου ή κωδικός.',
 'error.user_exists' => 'Ο χρήστης με αυτήν τη σύνδεση υπάρχει ήδη.',
-'error.object_exists' => 'Το έργο με αυτό το όνομα υπάρχει ήδη.',
+// TODO: 'error.object_exists' string is a future replacement for
+// 'error.---something---_exists'. We have too many of those, and
+// the goal is to simplify translation maintenance by replacing
+// most of them with a single 'error.object_exists'.
+// Here, OBJECT means many things, depending on context: project, task,
+// client, role, etc.
+// English string:
+// 'error.object_exists' => 'Object with this name already exists.',
+// 'error.object_exists' => 'Το έργο με αυτό το όνομα υπάρχει ήδη.', // TODO: έργο seems incorrect here.
 'error.project_exists' => 'Το πρότζεκτ με αυτό το όνομα υπάρχει ήδη.',
 'error.task_exists' => 'Το έργο με αυτό το όνομα υπάρχει ήδη.',
 'error.client_exists' => 'Ο πελάτης με αυτό το όνομα υπάρχει ήδη.',
 'error.invoice_exists' => 'Το τιμολόγιο με αυτόν τον αριθμό υπάρχει ήδη.',
 'error.role_exists' => 'Ο ρόλος σε αυτή τη σειρά υπάρχει ήδη.',
+
+
+
+
+// TODO: refactoring ongoing down from here.
 'error.no_invoiceable_items' => 'Δεν υπάρχουν τιμολόγια.',
 'error.no_login' => 'Δεν υπάρχει χρήστης με αυτά τα στοιχεία.',
 'error.no_teams' => 'Η βάση δεδομένων σας είναι κενή. Συνδεθείτε ως διαχειριστής και δημιουργήστε μια νέα ομάδα.',
