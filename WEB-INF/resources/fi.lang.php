@@ -203,14 +203,15 @@ $i18n_key_words = array(
 // 'label.no' => 'no',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Omat kentät',
-// Translate the following.
+// TODO: translate the following.
 // 'label.monthly_quotas' => 'Monthly quotas',
 'label.type' => 'Tyyppi',
 'label.type_dropdown' => 'pudotusvalikko',
 'label.type_text' => 'teksti',
 'label.required' => 'Pakollinen',
 'label.fav_report' => 'Raporttipohja',
-'label.cron_schedule' => 'Cron-ajoitus',
+// TODO: translate the following.
+// 'label.schedule' => 'Schedule',
 'label.what_is_it' => 'Mikä se on?',
 // 'label.expense' => 'Expense',
 // 'label.quantity' => 'Quantity',

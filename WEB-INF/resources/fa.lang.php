@@ -220,7 +220,7 @@ $i18n_key_words = array(
 'label.required' => 'اجباری',
 'label.fav_report' => 'گزارش های برگزیده',
 // TODO: translate the following.
-// 'label.cron_schedule' => 'Cron schedule',
+// 'label.schedule' => 'Schedule',
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
 // 'label.quantity' => 'Quantity',

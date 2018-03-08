@@ -6,7 +6,7 @@
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr>
           <td class="tableHeader">{$i18n.label.thing_name}</td>
-          <td class="tableHeader">{$i18n.label.cron_schedule}</td>
+          <td class="tableHeader">{$i18n.label.schedule}</td>
           <td class="tableHeader">{$i18n.label.email}</td>
           <td class="tableHeader">{$i18n.label.condition}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>

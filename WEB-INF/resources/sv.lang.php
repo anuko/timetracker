@@ -206,7 +206,8 @@ $i18n_key_words = array(
 'label.type_text' => 'Text',
 'label.required' => 'Obligatorisk',
 'label.fav_report' => 'Sparade rapporter',
-'label.cron_schedule' => 'CRON-schema',
+// TODO: translate the following.
+// 'label.schedule' => 'Schedule',
 'label.what_is_it' => 'Vad är detta?',
 'label.expense' => 'Kostnad',
 'label.quantity' => 'Antal',

@@ -233,7 +233,7 @@ $i18n_key_words = array(
 // 'label.required' => 'Required',
 'label.fav_report' => 'Előre definiált riport formátum',
 // TODO: translate the following.
-// 'label.cron_schedule' => 'Cron schedule',
+// 'label.schedule' => 'Schedule',
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
 // 'label.quantity' => 'Quantity',

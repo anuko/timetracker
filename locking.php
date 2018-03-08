@@ -44,7 +44,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidCronSpec($cl_lock_spec)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cron_schedule'));
+  if (!ttValidCronSpec($cl_lock_spec)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.schedule'));
 
   if ($err->no()) {
     if (ttTeamHelper::update($user->team_id, array(

@@ -200,7 +200,8 @@ $i18n_key_words = array(
 'label.type_text' => 'tekst',
 'label.required' => 'Verplicht veld',
 'label.fav_report' => 'Standaard rapport',
-'label.cron_schedule' => 'Cron schema',
+// TODO: translate the following.
+// 'label.schedule' => 'Schedule',
 'label.what_is_it' => 'Wat betekent dit?',
 'label.expense' => 'Kosten',
 'label.quantity' => 'Hoeveelheid',

@@ -181,10 +181,6 @@ $i18n_key_words = array(
 'label.week_total' => 'Σύνολο εβδομάδας',
 'label.month_total' => 'Σύνολο μήνα',
 'label.today' => 'Σήμερα',
-
-
-
-// TODO: refactoring ongoing down from here.
 'label.view' => 'Προβολή',
 'label.edit' => 'Επεξεργασία',
 'label.delete' => 'Διαγραφή',
@@ -208,7 +204,7 @@ $i18n_key_words = array(
 'label.client_address' => 'Διεύθυνση πελάτη',
 'label.or' => 'ή',
 'label.error' => 'Σφάλμα',
-'label.ldap_hint' => 'Εισάγετε το <b> όνομα σύνδεσης των Windows </ b> και <b> κωδικό πρόσβασης </ b> στα παρακάτω πεδία.',
+'label.ldap_hint' => 'Εισάγετε το <b>όνομα σύνδεσης των Windows</b> και <b>κωδικό πρόσβασης</b> στα παρακάτω πεδία.',
 'label.required_fields' => '* - υποχρεωτικά πεδία',
 'label.on_behalf' => 'εκ μέρους του',
 'label.role_manager' => '(Διευθυντής)',
@@ -216,8 +212,8 @@ $i18n_key_words = array(
 'label.role_admin' => '(Διαχειριστής)',
 'label.page' => 'Σελίδα',
 'label.condition' => 'Κατάσταση',
-'label.yes' => 'Ναι',
-'label.no' => 'Όχι',
+'label.yes' => 'ναι',
+'label.no' => 'όχι',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Προσαρμοσμένα πεδία',
 'label.monthly_quotas' => 'Μηνιαίες ποσοστώσεις',
@@ -226,7 +222,12 @@ $i18n_key_words = array(
 'label.type_text' => 'Κείμενο',
 'label.required' => 'Απαιτείται',
 'label.fav_report' => 'Αγαπημένη αναφορά',
-'label.cron_schedule' => 'Πρόγραμμα εκτέλεσης εντολών',
+// TODO: translate the following.
+// 'label.schedule' => 'Schedule',
+
+
+
+// TODO: refactoring ongoing down from here.
 'label.what_is_it' => 'Τι είναι αυτό?',
 'label.expense' => 'Δαπάνη',
 'label.quantity' => 'Ποσότητα',

@@ -209,7 +209,8 @@ $i18n_key_words = array(
 'label.type_text' => 'text',
 'label.required' => 'Obavezan',
 'label.fav_report' => 'Omiljeni izveštaji',
-'label.cron_schedule' => 'Sredi raspored',
+// TODO: translate the following.
+// 'label.schedule' => 'Schedule',
 'label.what_is_it' => 'Šta je ovo?',
 // TODO: Translate the following.
 // 'label.expense' => 'Expense',

@@ -71,7 +71,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey(
 if ($request->isPost()) {
   // Validate user input.
   if (!$cl_fav_report) $err->add($i18n->getKey('error.report'));
-  if (!ttValidCronSpec($cl_cron_spec)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cron_schedule'));
+  if (!ttValidCronSpec($cl_cron_spec)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.schedule'));
   if (!ttValidEmail($cl_email)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
   if (!ttValidEmail($cl_cc, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cc'));
   if (!ttValidString($cl_subject, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.subject'));
