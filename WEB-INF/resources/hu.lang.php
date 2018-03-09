@@ -31,7 +31,7 @@
 
 // Note to translators: Use proper capitalization rules for your language.
 
-$i18n_language = 'Magyar';
+$i18n_language = 'Hungarian (Magyar)';
 $i18n_months = array('Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December');
 $i18n_weekdays = array('Vasárnap', 'Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat');
 $i18n_weekdays_short = array('V', 'H', 'K', 'Sz', 'Cs', 'P', 'Sz');

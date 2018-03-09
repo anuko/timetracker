@@ -151,7 +151,7 @@ if ($user->canManageTeam()) {
     $longname_lang[] = array('id'=>I18n::getLangFromFilename($lfile),'name'=>$lname);
   }
   $longname_lang = mu_sort($longname_lang, 'name');
-  $form->addInput(array('type'=>'combobox','name'=>'lang','style'=>'width: 150px','data'=>$longname_lang,'datakeys'=>array('id','name'),'value'=>$cl_lang));
+  $form->addInput(array('type'=>'combobox','name'=>'lang','style'=>'width: 200px','data'=>$longname_lang,'datakeys'=>array('id','name'),'value'=>$cl_lang));
 
   $DECIMAL_MARK_OPTIONS = array(array('id'=>'.','name'=>'.'),array('id'=>',','name'=>','));
   $form->addInput(array('type'=>'combobox','name'=>'decimal_mark','style'=>'width: 150px','data'=>$DECIMAL_MARK_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_decimal_mark,

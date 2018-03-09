@@ -31,7 +31,7 @@
 
 // Note to translators: Use proper capitalization rules for your language.
 
-$i18n_language = 'Česky';
+$i18n_language = 'Czech (Česky)';
 $i18n_months = array('Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec');
 $i18n_weekdays = array('Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota');
 $i18n_weekdays_short = array('Ne', 'Po', 'Út', 'St', 'Čt', 'Pá', 'So');

@@ -29,7 +29,7 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
-$i18n_language = 'Slovenčina';
+$i18n_language = 'Slovak (Slovenčina)';
 $i18n_months = array('Január', 'Február', 'Marec', 'Apríl', 'Máj', 'Jún', 'Júl', 'August', 'September', 'Október', 'November', 'December');
 $i18n_weekdays = array('Nedeľa', 'Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota');
 $i18n_weekdays_short = array('Ne', 'Po', 'Ut', 'St', 'Št', 'Pi', 'So');

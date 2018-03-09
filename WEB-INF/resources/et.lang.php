@@ -31,7 +31,7 @@
 
 // Note to translators: Use proper capitalization rules for your language.
 
-$i18n_language = 'Eesti';
+$i18n_language = 'Estonian (Eesti)';
 $i18n_months = array('Jaanuar', 'Veebruar', 'Märts', 'Aprill', 'Mai', 'Juuni', 'Juuli', 'August', 'September', 'Oktoober', 'November', 'Detsember');
 $i18n_weekdays = array('Pühapäev', 'Esmaspäev', 'Teisipäev', 'Kolmapäev', 'Neljapäev', 'Reede', 'Laupäev');
 $i18n_weekdays_short = array('P', 'E', 'T', 'K', 'N', 'R', 'L');
