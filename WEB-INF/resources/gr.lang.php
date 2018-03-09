@@ -343,7 +343,7 @@ $i18n_key_words = array(
 // Strings that are used on multiple unrelated forms should be placed in shared sections such as label.<stringname>, etc.
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
-'form.login.forgot_password' => 'Ξεχάσατε τον κωδικό πρόσβασης?',
+'form.login.forgot_password' => 'Ξεχάσατε τον κωδικό πρόσβασης?', // TODO: Should the question mark be the Greek symbol ; instead?
 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> είναι ένα απλό, εύχρηστο, ανοικτού κώδικα σύστημα παρακολούθησης χρόνου.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
@@ -355,12 +355,8 @@ $i18n_key_words = array(
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Πληκτρολογήστε νέο κωδικό πρόσβασης και κάντε κλικ στην επιλογή Αποθήκευση.',
 
-
-
-// TODO: refactoring ongoing down from here.
-/*
 // Time form. See example at https://timetracker.anuko.com/time.php.
-'form.time.duration_format' => '(ωω:λλ ή 0.0ω)',
+'form.time.duration_format' => '(ωω:λλ ή 0.0)',
 'form.time.billable' => 'Χρεώσιμο',
 'form.time.uncompleted' => 'Μη ολοκληρωμένο',
 'form.time.remaining_quota' => 'Υπολειπόμενη ποσόστωση',
@@ -375,20 +371,20 @@ $i18n_key_words = array(
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Αποθήκευση ως αγαπημένο',
 'form.reports.confirm_delete' => 'Διαγραφή της αγαπημένης αναφοράς;',
-'form.reports.include_billable' => 'Χρεώσιμο',
-'form.reports.include_not_billable' => 'Μη χρεώσιμο',
-'form.reports.include_invoiced' => 'Τιμολόγηση',
-'form.reports.include_not_invoiced' => 'Χωρίς τιμολόγηση',
+'form.reports.include_billable' => 'χρεώσιμο',
+'form.reports.include_not_billable' => 'μη χρεώσιμο',
+'form.reports.include_invoiced' => 'τιμολόγηση',
+'form.reports.include_not_invoiced' => 'χωρίς τιμολόγηση',
 'form.reports.select_period' => 'Επιλογή χρονικής περιόδου',
 'form.reports.set_period' => 'ή εύρος ημερομηνιών',
 'form.reports.show_fields' => 'Εμφάνιση πεδίων',
 'form.reports.group_by' => 'Ομαδοποίηση με βάση',
 'form.reports.group_by_no' => '--- χωρίς ομαδοποίηση ---',
-'form.reports.group_by_date' => 'Ημερομηνία',
-'form.reports.group_by_user' => 'Χρήστη',
-'form.reports.group_by_client' => 'Πελάτης',
-'form.reports.group_by_project' => 'Πρότζεκτ',
-'form.reports.group_by_task' => 'Έργο',
+'form.reports.group_by_date' => 'ημερομηνία',
+'form.reports.group_by_user' => 'χρήστη',
+'form.reports.group_by_client' => 'πελάτης',
+'form.reports.group_by_project' => 'πρότζεκτ',
+'form.reports.group_by_task' => 'έργο',
 'form.reports.totals_only' => 'Σύνολα μόνο',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
@@ -428,7 +424,7 @@ $i18n_key_words = array(
 'form.users.rate' => 'Τιμή',
 'form.users.default_rate' => 'Προκαθορισμένη ωριαία τιμή',
 
- // Roles form. See example at https://timetracker.anuko.com/roles.php
+// Roles form. See example at https://timetracker.anuko.com/roles.php
 'form.roles.active_roles' => 'Ενεργοί ρόλοι',
 'form.roles.inactive_roles' => 'Ανενεργοί ρόλοι',
 'form.roles.rank' => 'Τάξη',
@@ -456,20 +452,20 @@ $i18n_key_words = array(
 'form.import.success' => 'Η εισαγωγή ολοκληρώθηκε με επιτυχία.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' => 'Δημιουργήστε μια νέα ομάδα δημιουργώντας ένα νέο λογαριασμό διαχειριστή ομάδας. <br> Μπορείτε επίσης να εισαγάγετε δεδομένα ομάδας από ένα αρχείο xml από άλλο διακομιστή Anuko Time Tracker (δεν επιτρέπονται συγκρούσεις σύνδεσης).',
+'form.teams.hint' => 'Δημιουργήστε μια νέα ομάδα δημιουργώντας ένα νέο λογαριασμό διαχειριστή ομάδας.<br>Μπορείτε επίσης να εισαγάγετε δεδομένα ομάδας από ένα αρχείο xml από άλλο διακομιστή Anuko Time Tracker (δεν επιτρέπονται συγκρούσεις σύνδεσης).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 'form.profile.12_hours' => '12 ώρες',
 'form.profile.24_hours' => '24 ώρες',
 'form.profile.show_holidays' => 'Προβολή διακοπών',
 'form.profile.tracking_mode' => 'Λειτουργία καταγραφής',
-'form.profile.mode_time' => 'Χρόνος',
-'form.profile.mode_projects' => 'Πρότζεκτ',
-'form.profile.mode_projects_and_tasks' => 'Πρότζεκτ και έργα',
+'form.profile.mode_time' => 'χρόνος',
+'form.profile.mode_projects' => 'πρότζεκτ',
+'form.profile.mode_projects_and_tasks' => 'πρότζεκτ και έργα',
 'form.profile.record_type' => 'Τύπος εγγραφής',
-'form.profile.type_all' => 'Ολα',
-'form.profile.type_start_finish' => 'Αρχή και τέλος',
-'form.profile.type_duration' => 'Διάρκεια',
+'form.profile.type_all' => 'όλα',
+'form.profile.type_start_finish' => 'αρχή και τέλος',
+'form.profile.type_duration' => 'διάρκεια',
 'form.profile.punch_mode' => 'Λειτουργία διάτρησης',
 'form.profile.allow_overlap' => 'Επικάλυψη επιτρεπτή',
 'form.profile.future_entries' => 'Μελλοντικές καταχωρήσεις',
@@ -479,10 +475,10 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'Από',
 'form.mail.to' => 'Προς',
-'form.mail.report_subject' => 'Time Tracker αναφορά ',
-'form.mail.footer' => 'Το Anuko Time Tracker είναι ένα απλό, εύχρηστο, ανοικτού κώδικα σύστημα παρακολούθησης χρόνου. Επισκεφθείτε τη διεύθυνση <a href="https://www.anuko.com"> www.anuko.com </a> για περισσότερες πληροφορίες.',
-'form.mail.report_sent' => 'Η αναφορά στάλθηκε .',
-'form.mail.invoice_sent' => 'Το τιμολόγιο στάλθηκε .',
+'form.mail.report_subject' => 'Time Tracker αναφορά',
+'form.mail.footer' => 'Το Anuko Time Tracker είναι ένα απλό, εύχρηστο, ανοικτού κώδικα σύστημα παρακολούθησης χρόνου. Επισκεφθείτε τη διεύθυνση <a href="https://www.anuko.com">www.anuko.com</a> για περισσότερες πληροφορίες.',
+'form.mail.report_sent' => 'Η αναφορά στάλθηκε.',
+'form.mail.invoice_sent' => 'Το τιμολόγιο στάλθηκε.',
 
 // Quotas configuration form.
 'form.quota.year' => 'Χρόνος',
@@ -497,9 +493,9 @@ $i18n_key_words = array(
 'role.user.description' => 'Μέλος χωρίς δικαιώματα διαχείρισης.',
 'role.client.label' => 'Πελάτης',
 'role.client.low_case_label' => 'πελάτης',
-'role.client.description' => 'Ο πελάτης μπορεί να δει τις δικές του αναφορές, πίνακες και τιμολόγια.',
+'role.client.description' => 'Ο πελάτης μπορεί να δει τις δικές του αναφορές, πίνακες και τιμολόγια.', // TODO: replace πίνακες with "charts" (Διάγραμμα)?
 'role.supervisor.label' => 'Επόπτης',
-'role.supervisor.low_case_label' => 'Επόπτης',
+'role.supervisor.low_case_label' => 'επόπτης',
 'role.supervisor.description' => 'Άτομο με μικρό σύνολο δικαιωμάτων διαχείρισης.',
 'role.comanager.label' => 'Υποδιευθυντής',
 'role.comanager.low_case_label' => 'υποδιευθυντής',
@@ -508,12 +504,9 @@ $i18n_key_words = array(
 'role.manager.low_case_label' => 'διευθυντής',
 'role.manager.description' => 'Διευθυντής ομάδας. Μπορεί να κάνει τα περισσότερα πράγματα σε μια ομάδα.',
 'role.top_manager.label' => 'Γενικός διευθυντής',
-'role.top_manager.low_case_label' => 'Γενικός διευθυντής',
+'role.top_manager.low_case_label' => 'γενικός διευθυντής',
 'role.top_manager.description' => 'Γενικός διευθυντής ομάδας. Πλήρη δικαιώματα σε εύρος ομάδων.',
 'role.admin.label' => 'Διαχειριστής',
 'role.admin.low_case_label' => 'διαχειριστής',
 'role.admin.description' => 'Διαχειριστής δικτυακού τόπου.',
-);
--->
-*/
 );
