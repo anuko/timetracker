@@ -206,21 +206,7 @@ $i18n_key_words = array(
 'label.paid' => 'Πληρωμένο',
 'label.mark_paid' => 'Σήμανση πληρωμένα',
 'label.week_note' => 'Σημείωση εβδομάδας',
-// TODO: translate the following.
-// 'label.week_list' => 'Week list',
-// Currently suggested translation "Προβολή εβδομάδας" seems incorrect as it is the same
-// as 'title.week_view' => 'Προβολή εβδομάδας'.
-// Week list is one of 3 groups of elements in a week view.
-// See some screenshots at https://www.anuko.com/forum/viewtopic.php?f=4&t=1786&start=30
-// The "Week list" is the bottom part (below the week table).
-// In other words:
-//   week view - a page in Time Tracker - https://timetracker.anuko.com/week.php
-//               (available only when Week View plugin is enabled).
-//   week list - an optional list of time entries on the bottom of week view.
-//               (can be turned on or off the week view).
-//
-// To reiterate: a week list is an optiona bottom element of week view, that lists
-// all week entries as a chronological list (as opposed to week table above it - table layout).
+'label.week_list' => 'Λίστα εβδομάδων',
 
 // Form titles.
 'title.login' => 'Σύνδεση',
