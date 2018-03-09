@@ -239,9 +239,6 @@ $i18n_key_words = array(
 // See https://www.anuko.com/time_tracker/week_list.htm - I suggest trying the week view to see it.
 // It is similar to a list of entries in day view. The difference is that week list is for 7 days.
 
-
-
-// TODO: refactoring ongoing down from here.
 // Form titles.
 'title.login' => 'Σύνδεση',
 'title.teams' => 'Ομάδες',
@@ -307,8 +304,6 @@ $i18n_key_words = array(
 'title.cf_add_dropdown_option' => 'Προσθήκη επιλογής',
 'title.cf_edit_dropdown_option' => 'Επεξεργασία επιλογής',
 'title.cf_delete_dropdown_option' => 'Διαγραφή επιλογής',
-// NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
-// It is also a name for the Locking plugin on the Team profile page.
 'title.locking' => 'Κλείδωμα',
 'title.week_view' => 'Προβολή εβδομάδας',
 
@@ -316,30 +311,31 @@ $i18n_key_words = array(
 // Strings that are used in a single form must go to the specific form section.
 'dropdown.all' => '--- όλα ---',
 'dropdown.no' => '--- χωρίς ---',
-'dropdown.current_day' => 'Σήμερα',
-'dropdown.previous_day' => 'Χθες',
-'dropdown.selected_day' => 'Ημερομηνία',
-'dropdown.current_week' => 'Τρέχουσα εβδομάδα',
-'dropdown.previous_week' => 'Προηγούμενη εβδομάδα',
-'dropdown.selected_week' => 'Εβδομάδα',
-'dropdown.current_month' => 'Τρέχων μήνας',
-'dropdown.previous_month' => 'Προηγούμενος μήνα',
-'dropdown.selected_month' => 'Μήνας',
-'dropdown.current_year' => 'Τρέχον έτος',
-'dropdown.previous_year' => 'Προηγούμενο έτος',
-'dropdown.selected_year' => 'Έτος',
-'dropdown.all_time' => 'Όλο το έτος',
-'dropdown.projects' => 'Πρότζεκτ',
-'dropdown.tasks' => 'Έργα',
-'dropdown.clients' => 'Πελάτες',
+'dropdown.current_day' => 'σήμερα',
+'dropdown.previous_day' => 'χθές',
+'dropdown.selected_day' => 'ημέρα',
+'dropdown.current_week' => 'τρέχουσα εβδομάδα',
+'dropdown.previous_week' => 'προηγούμενη εβδομάδα',
+'dropdown.selected_week' => 'εβδομάδα',
+'dropdown.current_month' => 'τρέχων μήνας',
+'dropdown.previous_month' => 'προηγούμενος μήνα',
+'dropdown.selected_month' => 'μήνας',
+'dropdown.current_year' => 'τρέχον έτος',
+'dropdown.previous_year' => 'προηγούμενο έτος',
+'dropdown.selected_year' => 'έτος',
+// TODO: translate the following. The meaning is to output all existing records (not just for "this month", etc.).
+// 'dropdown.all_time' => 'all time',
+'dropdown.projects' => 'πρότζεκτ',
+'dropdown.tasks' => 'έργα',
+'dropdown.clients' => 'πελάτες',
 'dropdown.select' => '--- επιλογή ---',
-'dropdown.select_invoice' => '--- Επιλογή τιμολόγιου ---',
-'dropdown.status_active' => 'Ενεργός',
-'dropdown.status_inactive' => 'Ανένεργος',
-'dropdown.delete' => 'Διαγραφή',
-'dropdown.do_not_delete' => 'Μη το διαγράψετε',
-'dropdown.paid' => 'Εξοφλημένο',
-'dropdown.not_paid' => 'Δεν έχει εξοφληθεί',
+'dropdown.select_invoice' => '--- επιλογή τιμολόγιου ---',
+'dropdown.status_active' => 'ενεργός',
+'dropdown.status_inactive' => 'ανένεργος',
+'dropdown.delete' => 'διαγραφή',
+'dropdown.do_not_delete' => 'μη το διαγράψετε',
+'dropdown.paid' => 'εξοφλημένο',
+'dropdown.not_paid' => 'δεν έχει εξοφληθεί',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases
@@ -353,17 +349,16 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Το αίτημα  επαναφοράς κωδικού πρόσβασης αποστέλλεται μέσω ηλεκτρονικού ταχυδρομείου.',
 'form.reset_password.email_subject' => 'Αίτημα επαναφοράς κωδικού Anuko Time Tracker',
-
-/*
-'form.reset_password.email_body' => "Αγαπητέ χρήστη,\n\n πιθανώς ζητήσατε επαναφορά του κωδικού σας στο Anuko Time Tracker.",
-
-
- \n\n Πατήστε στον ακόλουθο σύνδεσμο για επαναφορά του κωδικού σας.\n\n%s\n\n\n\nΤο Anuko Time Tracker είναι ένα απλό, εύχρηστο, ανοικτού κώδικα σύστημα παρακολούθησης χρόνου. Επισκεφθείτε τη διεύθυνση https://www.anuko.com για περισσότερες πληροφορίες.\n\n",
-
+// TODO: Translate the second part in the following string: "Someone from IP %s requested your Anuko Time Tracker password reset."
+'form.reset_password.email_body' => "Αγαπητέ χρήστη,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Πατήστε στον ακόλουθο σύνδεσμο για επαναφορά του κωδικού σας.\n\n%s\n\nΤο Anuko Time Tracker είναι ένα απλό, εύχρηστο, ανοικτού κώδικα σύστημα παρακολούθησης χρόνου. Επισκεφθείτε τη διεύθυνση https://www.anuko.com για περισσότερες πληροφορίες.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Πληκτρολογήστε νέο κωδικό πρόσβασης και κάντε κλικ στην επιλογή Αποθήκευση.',
 
+
+
+// TODO: refactoring ongoing down from here.
+/*
 // Time form. See example at https://timetracker.anuko.com/time.php.
 'form.time.duration_format' => '(ωω:λλ ή 0.0ω)',
 'form.time.billable' => 'Χρεώσιμο',
