@@ -50,9 +50,8 @@ $i18n_key_words = array(
 'menu.expenses' => 'Έξοδα',
 'menu.reports' => 'Αναφορές',
 'menu.charts' => 'Διαγράμματα',
- // TODO: Improve, as we need a plural of projects. Auto-translate gets it as a single project.
-'menu.projects' => 'Πρότζεκτ',
-'menu.tasks' => 'Έργα',
+'menu.projects' => 'Έργα',
+'menu.tasks' => 'Εργασίες',
 'menu.users' => 'Χρήστες',
 'menu.teams' => 'Ομάδες',
 'menu.export' => 'Εξαγωγή',
@@ -60,8 +59,7 @@ $i18n_key_words = array(
 'menu.options' => 'Επιλογές',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following.
-// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+'footer.contribute_msg' => 'Μπορείτε να συμβάλλετε στο Time Tracker με διάφορους τρόπους.',
 'footer.credits' => 'Πιστώσεις',
 'footer.license' => 'Άδεια',
 'footer.improve' => 'Βελτίωση',
@@ -73,48 +71,27 @@ $i18n_key_words = array(
 'error.field' => 'Λανθασμένο "{0}" δεδομένο.',
 'error.empty' => 'Το πεδίο "{0}" είναι κενό.',
 'error.not_equal' => 'Το πεδίο "{0}" δεν είναι ίσο με το πεδίο "{1}".',
-'error.interval' => 'Πεδίο "{0}"  πρέπει να έχει τιμή μεγαλύτερη από "{1}".',
-// TODO: improve "project" and "task" translations throughout the file.
-// Problem: 'menu.projects' => 'Πρότζεκτ', yet here we have εργασίας.
-'error.project' => 'Επιλογή εργασίας.',
-'error.task' => 'Επιλογή έργου.',
+'error.interval' => 'Το πεδίο "{0}" πρέπει να είναι μεγαλύτερο από "{1}".',
+'error.project' => 'Επιλογή έργου.',
+'error.task' => 'Επιλογή εργασίας.',
 'error.client' => 'Επιλογή πελάτη.',
 'error.report' => 'Επιλογή αναφοράς.',
 'error.record' => 'Επιλογή εγγραφής.',
 'error.auth' => 'Λανθασμένο όνομα εισόδου ή κωδικός.',
 'error.user_exists' => 'Ο χρήστης με αυτήν τη σύνδεση υπάρχει ήδη.',
-// TODO: 'error.object_exists' string is a future replacement for
-// 'error.---something---_exists'. We have too many of those, and
-// the goal is to simplify translation maintenance by replacing
-// most of them with a single 'error.object_exists'.
-// Here, OBJECT means many things, depending on context: project, task,
-// client, role, etc.
-// English string:
-// 'error.object_exists' => 'Object with this name already exists.',
-// 'error.object_exists' => 'Το έργο με αυτό το όνομα υπάρχει ήδη.', // TODO: έργο seems incorrect here.
-'error.project_exists' => 'Το πρότζεκτ με αυτό το όνομα υπάρχει ήδη.',
-'error.task_exists' => 'Το έργο με αυτό το όνομα υπάρχει ήδη.',
+'error.object_exists' => 'Το αντικείμενο με αυτό το όνομα υπάρχει ήδη.',
+'error.project_exists' => 'Το έργα με αυτό το όνομα υπάρχει ήδη.',
+'error.task_exists' => 'Η εργασία με αυτό το όνομα υπάρχει ήδη.',
 'error.client_exists' => 'Ο πελάτης με αυτό το όνομα υπάρχει ήδη.',
 'error.invoice_exists' => 'Το τιμολόγιο με αυτόν τον αριθμό υπάρχει ήδη.',
 'error.role_exists' => 'Ο ρόλος σε αυτή τη σειρά υπάρχει ήδη.',
-// TODO: translate the folloiwng.
-// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
-// The error occurs when we add a new invoice for a client, but there are
-// no items (of time or expenses) to put into it.
-// In other words, 'Δεν υπάρχουν τιμολόγια.' is incorrect.
+'error.no_invoiceable_items' => 'Δεν υπάρχουν στοιχεία προς τιμολόγηση.',
 'error.no_login' => 'Δεν υπάρχει χρήστης με αυτά τα στοιχεία.',
 'error.no_teams' => 'Η βάση δεδομένων σας είναι κενή. Συνδεθείτε ως διαχειριστής και δημιουργήστε μια νέα ομάδα.',
 'error.upload' => 'Σφάλμα φόρτωσης αρχείου.',
 'error.range_locked' => 'Το χρονικό διάστημα είναι κλειδωμένο.',
 'error.mail_send' => 'Σφάλμα κατά την αποστολή του μηνύματος.',
-// TODO: translate the following.
-// 'error.no_email' => 'No email associated with this login.',
-// The meaning of the error is: we try to find an email for the account
-// identified by user login, and there is no such email, as when user did not provide
-// it when creating an account. Therefore, we can't email anything to such user,
-// for example, when sending password reset email.
-// Therefore, this appears incorrect, if we believe Google translator.
-// error.no_email' => 'Δεν βρέθηκε λογαριασμός με αυτήν τη διεύθυνση ηλεκτρονικού ταχυδρομείου.',
+'error.no_email' => 'Δεν βρέθηκε διεύθυνση ηλεκτρονικού ταχυδρομείου που να αντιστοιχεί σε αυτή την σύνδεση.',
 'error.uncompleted_exists' => 'Η μη ολοκληρωμένη καταχώρηση υπάρχει ήδη. Κλείσιμο ή διαγραφή του.',
 'error.goto_uncompleted' => 'Μεταβείτε στην μη ολοκληρωμένη καταχώρηση.',
 'error.overlap' => 'Το χρονικό διάστημα επικαλύπτει υπάρχουσες καταχωρήσεις.',
@@ -152,8 +129,7 @@ $i18n_key_words = array(
 'label.confirm_password' => 'Επιβεβαίωση κωδικού',
 'label.email' => 'Email',
 'label.cc' => 'Κοινοποίηση',
-'label.bcc' => 'Κρυφή κοινοποίηση', // TODO: this is taken from roundcube mail - check for accuracy anyway.
-                                    // This is a "blind carbon copy" label on emails, see https://en.wiktionary.org/wiki/blind_carbon_copy
+'label.bcc' => 'Κρυφή κοινοποίηση',
 'label.subject' => 'Θέμα',
 'label.date' => 'Ημερομηνία',
 'label.start_date' => 'Ημερομηνία έναρξης',
@@ -165,10 +141,10 @@ $i18n_key_words = array(
 'label.clients' => 'Πελάτες',
 'label.option' => 'Επιλογή',
 'label.invoice' => 'Τιμολόγιο',
-'label.project' => 'Πρότζεκτ',
-'label.projects' => 'Πρότζεκτ', // TODO: no plural form for projects? As this is the same as 'label.project'.
-'label.task' => 'Έργο',
-'label.tasks' => 'Εργα',
+'label.project' => 'Έργο',
+'label.projects' => 'Έργα',
+'label.task' => 'Εργασία',
+'label.tasks' => 'Εργασίες',
 'label.description' => 'Περιγραφή',
 'label.start' => 'Αρχή',
 'label.finish' => 'Τέλος',
@@ -222,22 +198,29 @@ $i18n_key_words = array(
 'label.type_text' => 'Κείμενο',
 'label.required' => 'Απαιτείται',
 'label.fav_report' => 'Αγαπημένη αναφορά',
-// TODO: translate the following.
-// 'label.schedule' => 'Schedule',
-'label.what_is_it' => 'Τι είναι αυτό?',
+'label.schedule' => 'Χρονοδιάγραμμα',
+'label.what_is_it' => 'Τι είναι αυτό;',
 'label.expense' => 'Δαπάνη',
 'label.quantity' => 'Ποσότητα',
 'label.paid_status' => 'Κατάσταση πληρωμής',
 'label.paid' => 'Πληρωμένο',
-// TODO: translate the following.
-// 'label.mark_paid' => 'Mark paid',
-// The meaning is "Go ahead and mark the selected items as paid." Mark is a verb here (to mark as paid).
+'label.mark_paid' => 'Σήμανση πληρωμένα',
 'label.week_note' => 'Σημείωση εβδομάδας',
 // TODO: translate the following.
 // 'label.week_list' => 'Week list',
-// This is a list of entries for the whole week on the bottom of week view.
-// See https://www.anuko.com/time_tracker/week_list.htm - I suggest trying the week view to see it.
-// It is similar to a list of entries in day view. The difference is that week list is for 7 days.
+// Currently suggested translation "Προβολή εβδομάδας" seems incorrect as it is the same
+// as 'title.week_view' => 'Προβολή εβδομάδας'.
+// Week list is one of 3 groups of elements in a week view.
+// See some screenshots at https://www.anuko.com/forum/viewtopic.php?f=4&t=1786&start=30
+// The "Week list" is the bottom part (below the week table).
+// In other words:
+//   week view - a page in Time Tracker - https://timetracker.anuko.com/week.php
+//               (available only when Week View plugin is enabled).
+//   week list - an optional list of time entries on the bottom of week view.
+//               (can be turned on or off the week view).
+//
+// To reiterate: a week list is an optiona bottom element of week view, that lists
+// all week entries as a chronological list (as opposed to week table above it - table layout).
 
 // Form titles.
 'title.login' => 'Σύνδεση',
@@ -263,14 +246,14 @@ $i18n_key_words = array(
 'title.invoice' => 'Τιμολόγιο',
 'title.send_invoice' => 'Αποστολή τιμολόγιου',
 'title.charts' => 'Γραφήματα',
-'title.projects' => 'Πρότζεκτ',
-'title.add_project' => 'Προσθήκη πρότζεκτ',
-'title.edit_project' => 'Επεξεργασία πρότζεκτ',
-'title.delete_project' => 'Διαγραφή πρότζεκτ',
-'title.tasks' => 'Έργα',
-'title.add_task' => 'Προσθήκη έργου',
-'title.edit_task' => 'Επεξεργασία έργου',
-'title.delete_task' => 'Διαγραφή έργου',
+'title.projects' => 'Έργο',
+'title.add_project' => 'Προσθήκη έργου',
+'title.edit_project' => 'Επεξεργασία έργου',
+'title.delete_project' => 'Διαγραφή έργου',
+'title.tasks' => 'Εργασίες',
+'title.add_task' => 'Προσθήκη εργασίας',
+'title.edit_task' => 'Επεξεργασία εργασίας',
+'title.delete_task' => 'Διαγραφή εργασίας',
 'title.users' => 'Χρήστες',
 'title.add_user' => 'Προσθήκη χρήστη',
 'title.edit_user' => 'Επεξεργασία χρήστη',
@@ -323,10 +306,9 @@ $i18n_key_words = array(
 'dropdown.current_year' => 'τρέχον έτος',
 'dropdown.previous_year' => 'προηγούμενο έτος',
 'dropdown.selected_year' => 'έτος',
-// TODO: translate the following. The meaning is to output all existing records (not just for "this month", etc.).
-// 'dropdown.all_time' => 'all time',
-'dropdown.projects' => 'πρότζεκτ',
-'dropdown.tasks' => 'έργα',
+'dropdown.all_time' => 'όλη την περίοδο',
+'dropdown.projects' => 'έργα',
+'dropdown.tasks' => 'εργασίες',
 'dropdown.clients' => 'πελάτες',
 'dropdown.select' => '--- επιλογή ---',
 'dropdown.select_invoice' => '--- επιλογή τιμολόγιου ---',
@@ -343,14 +325,13 @@ $i18n_key_words = array(
 // Strings that are used on multiple unrelated forms should be placed in shared sections such as label.<stringname>, etc.
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
-'form.login.forgot_password' => 'Ξεχάσατε τον κωδικό πρόσβασης?', // TODO: Should the question mark be the Greek symbol ; instead?
+'form.login.forgot_password' => 'Ξεχάσατε τον κωδικό πρόσβασης;',
 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> είναι ένα απλό, εύχρηστο, ανοικτού κώδικα σύστημα παρακολούθησης χρόνου.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Το αίτημα  επαναφοράς κωδικού πρόσβασης αποστέλλεται μέσω ηλεκτρονικού ταχυδρομείου.',
 'form.reset_password.email_subject' => 'Αίτημα επαναφοράς κωδικού Anuko Time Tracker',
-// TODO: Translate the second part in the following string: "Someone from IP %s requested your Anuko Time Tracker password reset."
-'form.reset_password.email_body' => "Αγαπητέ χρήστη,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Πατήστε στον ακόλουθο σύνδεσμο για επαναφορά του κωδικού σας.\n\n%s\n\nΤο Anuko Time Tracker είναι ένα απλό, εύχρηστο, ανοικτού κώδικα σύστημα παρακολούθησης χρόνου. Επισκεφθείτε τη διεύθυνση https://www.anuko.com για περισσότερες πληροφορίες.\n\n",
+'form.reset_password.email_body' => "Αγαπητέ χρήστη,\n\nΚάποιος από την IP %s ζήτησε επαναφορά του κωδικού πρόσβασης στο Anuko Time Tracker. Πατήστε στον ακόλουθο σύνδεσμο για επαναφορά του κωδικού σας.\n\n%s\n\nΤο Anuko Time Tracker είναι ένα απλό, εύχρηστο, ανοικτού κώδικα σύστημα παρακολούθησης χρόνου. Επισκεφθείτε τη διεύθυνση https://www.anuko.com για περισσότερες πληροφορίες.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Πληκτρολογήστε νέο κωδικό πρόσβασης και κάντε κλικ στην επιλογή Αποθήκευση.',
@@ -383,8 +364,8 @@ $i18n_key_words = array(
 'form.reports.group_by_date' => 'ημερομηνία',
 'form.reports.group_by_user' => 'χρήστη',
 'form.reports.group_by_client' => 'πελάτης',
-'form.reports.group_by_project' => 'πρότζεκτ',
-'form.reports.group_by_task' => 'έργο',
+'form.reports.group_by_project' => 'έργο',
+'form.reports.group_by_task' => 'εργασία',
 'form.reports.totals_only' => 'Σύνολα μόνο',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
@@ -407,12 +388,12 @@ $i18n_key_words = array(
 'form.charts.chart' => 'Διάγραμμα',
 
 // Projects form. See example at https://timetracker.anuko.com/projects.php
-'form.projects.active_projects' => 'Ενεργά πρότζεκτ',
-'form.projects.inactive_projects' => 'Ανενεργά πρότζεκτ',
+'form.projects.active_projects' => 'Ενεργά έργα',
+'form.projects.inactive_projects' => 'Ανενεργά έργα',
 
 // Tasks form. See example at https://timetracker.anuko.com/tasks.php
-'form.tasks.active_tasks' => 'Ενεργά έργα',
-'form.tasks.inactive_tasks' => 'Ανενεργά έργα',
+'form.tasks.active_tasks' => 'Ενεργές εργασίες',
+'form.tasks.inactive_tasks' => 'Ανενεργές εργασίες',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
 'form.users.active_users' => 'Ενεργοί χρήστες',
@@ -460,8 +441,8 @@ $i18n_key_words = array(
 'form.profile.show_holidays' => 'Προβολή διακοπών',
 'form.profile.tracking_mode' => 'Λειτουργία καταγραφής',
 'form.profile.mode_time' => 'χρόνος',
-'form.profile.mode_projects' => 'πρότζεκτ',
-'form.profile.mode_projects_and_tasks' => 'πρότζεκτ και έργα',
+'form.profile.mode_projects' => 'έργα',
+'form.profile.mode_projects_and_tasks' => 'έργα και εργασίες',
 'form.profile.record_type' => 'Τύπος εγγραφής',
 'form.profile.type_all' => 'όλα',
 'form.profile.type_start_finish' => 'αρχή και τέλος',
@@ -493,7 +474,7 @@ $i18n_key_words = array(
 'role.user.description' => 'Μέλος χωρίς δικαιώματα διαχείρισης.',
 'role.client.label' => 'Πελάτης',
 'role.client.low_case_label' => 'πελάτης',
-'role.client.description' => 'Ο πελάτης μπορεί να δει τις δικές του αναφορές, πίνακες και τιμολόγια.', // TODO: replace πίνακες with "charts" (Διάγραμμα)?
+'role.client.description' => 'Ο πελάτης μπορεί να δει τις δικές του αναφορές, διαγράμματα και τιμολόγια.',
 'role.supervisor.label' => 'Επόπτης',
 'role.supervisor.low_case_label' => 'επόπτης',
 'role.supervisor.description' => 'Άτομο με μικρό σύνολο δικαιωμάτων διαχείρισης.',
