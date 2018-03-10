@@ -7,6 +7,10 @@
           <td align="right" nowrap>{$i18n.label.team_name}:</td>
           <td>{$forms.teamForm.team_name.control}</td>
         </tr>
+        <tr>
+           <td align="right" nowrap>{$i18n.label.language}:</td>
+           <td>{$forms.teamForm.lang.control}</td>
+        </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
           <td align="right" nowrap>{$i18n.label.manager_name} (*):</td>

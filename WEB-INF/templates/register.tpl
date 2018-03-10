@@ -11,6 +11,10 @@
           <td align="right">{$i18n.label.currency}:</td>
           <td>{$forms.profileForm.currency.control}</td>
         </tr>
+        <tr>
+           <td align="right" nowrap>{$i18n.label.language}:</td>
+           <td>{$forms.profileForm.lang.control}</td>
+        </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
           <td align="right" nowrap>{$i18n.label.manager_name} (*):</td>

@@ -125,9 +125,9 @@ class ttUserHelper {
       $status_v = ', '.$mdb2->quote($fields['status']);
     }
 
-    $sql = "insert into tt_users (name, login, password, team_id, role, client_id, rate, email $status_f) values (".
+    $sql = "insert into tt_users (name, login, password, team_id, role, role_id, client_id, rate, email $status_f) values (".
       $mdb2->quote($fields['name']).", ".$mdb2->quote($fields['login']).
-      ", $password, $team_id, $role, ".$mdb2->quote($fields['client_id']).", $rate, ".$mdb2->quote($email)." $status_v)";
+      ", $password, $team_id, $role, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, ".$mdb2->quote($email)." $status_v)";
     $affected = $mdb2->exec($sql);
 
     // Now deal with project assignment.
