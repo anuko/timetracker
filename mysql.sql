@@ -39,6 +39,37 @@ CREATE TABLE `tt_teams` (
 
 
 #
+# Structure for table tt_roles. This table stores customized team roles.
+#
+CREATE TABLE `tt_roles` (
+  `id` int(11) NOT NULL auto_increment,    # Role id. Identifies roles for all groups on the server.
+  `team_id` int(11) NOT NULL,              # Team id the role is defined for.
+  `name` varchar(80) default NULL,         # Role name - custom role name. In case we are editing a
+                                           # predefined role (USER, etc.), we can rename the role here.
+  `description` varchar(255) default NULL, # Role description.
+  `rank` int(11) default 0,                # Role rank, an integer value between 0-324. Predefined role ranks:
+                                           # USER - 4, CLIENT - 16, COMANAGER - 68, MANAGER - 324.
+                                           # Rank is used to determine what "lesser roles" are in each group
+                                           # for sutuations such as "manage_users".
+                                           # It also identifies a role within a team (by its "rank").
+                                           # Value of rank is to be used in role field in tt_users table,
+                                           # just like standard roles now.
+  `rights` text default NULL,              # Comma-separated list of rights assigned to a role.
+                                           # NULL here for predefined roles (4, 16, 68, 324 - manager)
+                                           # means a hard-coded set of default access rights.
+  `status` tinyint(4) default 1,           # Role status.
+  PRIMARY KEY  (`id`)
+);
+
+# Create an index that guarantees unique active and inactive role ranks in each group.
+create unique index role_idx on tt_roles(team_id, rank, status);
+
+# Insert site-wide roles - site administrator and top manager.
+INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Site administrator', 1024, 'administer_site');
+INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'data_entry,view_own_data,manage_own_settings,view_users,on_behalf_data_entry,view_data,override_punch_mode,swap_roles,approve_timesheets,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups');
+
+
+#
 # Structure for table tt_users. This table is used to store user properties.
 #
 CREATE TABLE `tt_users` (
@@ -62,7 +93,7 @@ create unique index login_idx on tt_users(login, status);
 
 # Create admin account with password 'secret'. Admin is a superuser, who can create teams.
 DELETE from `tt_users` WHERE login = 'admin';
-INSERT INTO `tt_users` (`login`, `password`, `name`, `team_id`, `role`) VALUES ('admin', md5('secret'), 'Admin', '0', '1024');
+INSERT INTO `tt_users` (`login`, `password`, `name`, `team_id`, `role`, `role_id`) VALUES ('admin', md5('secret'), 'Admin', '0', '1024', (select id from tt_roles where rank = 1024));
 
 
 #
@@ -382,37 +413,6 @@ CREATE TABLE `tt_monthly_quotas` (
 ALTER TABLE `tt_monthly_quotas`
   ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-
-#
-# Structure for table tt_roles. This table stores customized team roles.
-#
-CREATE TABLE `tt_roles` (
-  `id` int(11) NOT NULL auto_increment,    # Role id. Identifies roles for all groups on the server.
-  `team_id` int(11) NOT NULL,              # Team id the role is defined for.
-  `name` varchar(80) default NULL,         # Role name - custom role name. In case we are editing a
-                                           # predefined role (USER, etc.), we can rename the role here.
-  `description` varchar(255) default NULL, # Role description.
-  `rank` int(11) default 0,                # Role rank, an integer value between 0-324. Predefined role ranks:
-                                           # USER - 4, CLIENT - 16, COMANAGER - 68, MANAGER - 324.
-                                           # Rank is used to determine what "lesser roles" are in each group
-                                           # for sutuations such as "manage_users".
-                                           # It also identifies a role within a team (by its "rank").
-                                           # Value of rank is to be used in role field in tt_users table,
-                                           # just like standard roles now.
-  `rights` text default NULL,              # Comma-separated list of rights assigned to a role.
-                                           # NULL here for predefined roles (4, 16, 68, 324 - manager)
-                                           # means a hard-coded set of default access rights.
-  `status` tinyint(4) default 1,           # Role status.
-  PRIMARY KEY  (`id`)
-);
-
-# Create an index that guarantees unique active and inactive role ranks in each group.
-create unique index role_idx on tt_roles(team_id, rank, status);
-
-# Insert site-wide roles - site administrator and top manager.
-INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Site administrator', 1024, 'administer_site');
-INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'data_entry,view_own_data,manage_own_settings,view_users,on_behalf_data_entry,view_data,override_punch_mode,swap_roles,approve_timesheets,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups');
-# TODO: move this code above, create roles before creating admin account and assign admin account its role.
 
 #
 # Structure for table tt_site_config. This table stores configuration data

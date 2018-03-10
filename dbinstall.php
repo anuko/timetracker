@@ -159,10 +159,10 @@ if ($request->isGet()) {
   $sql = "select param_value from tt_site_config where param_name = 'version_db'";
   $res = $conn->query($sql);
   if (is_a($res, 'MDB2_Error')) {
-    die('<font color="red">Error: database schema version query failed. '.$res->getMessage().'</font><br>');
+    echo('<font color="red">Error: database schema version query failed. '.$res->getMessage().'</font><br>');
   } else {
     $val = $res->fetchRow();
-    echo('Current database version is: '.$val['param_value'].'.');
+    echo('Database version is: '.$val['param_value'].'.');
   }
 
   $conn->disconnect();
@@ -751,6 +751,7 @@ if ($_POST) {
     setChange("INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Site administrator', 1024, 'administer_site')");
     setChange("INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'data_entry,view_own_data,manage_own_settings,view_users,on_behalf_data_entry,view_data,override_punch_mode,swap_roles,approve_timesheets,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups')");
     setChange("UPDATE `tt_site_config` SET `param_value` = '1.17.35' where param_name = 'version_db'");
+    setChange("update `tt_users` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.35') set role_id = (select id from tt_roles where rank = 1024) where role = 1024");
   }
 
   if ($_POST["cleanup"]) {
