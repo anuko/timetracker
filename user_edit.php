@@ -196,7 +196,7 @@ if ($request->isPost()) {
         'status' => $cl_status,
         'rate' => $cl_rate,
         'projects' => $assigned_projects);
-      if (right_assign_roles & $user->rights) {
+      if (right_assign_roles & $user->rights && $cl_role) {
         // Get legacy role value.
         $legacy_role = ttRoleHelper::getLegacyRole($cl_role); // TODO: remove after roles revamp.
         $fields['role'] = $legacy_role;
