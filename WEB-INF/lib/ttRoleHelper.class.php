@@ -141,7 +141,7 @@ class ttRoleHelper {
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
       if ($val['id'])
-        return $val;
+        return $val['id'];
     }
     return false;
   }
