@@ -31,7 +31,9 @@ class ttUser {
   var $name = null;             // User name.
   var $id = null;               // User id.
   var $team_id = null;          // Team id.
-  var $role = null;             // User role (user, client, comanager, manager, admin).
+  var $role = null;             // User role (user, client, comanager, manager, admin). TODO: remove when new roles are done.
+  var $role_id = null;          // Role id.
+  var $rank = null;             // User role rank.
   var $client_id = null;        // Client id for client user role.
   var $behalf_id = null;        // User id, on behalf of whom we are working.
   var $behalf_name = null;      // User name, on behalf of whom we are working.
@@ -70,11 +72,11 @@ class ttUser {
 
     $mdb2 = getConnection();
 
-    $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role, u.client_id, u.email, t.name as team_name, 
+    $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role, u.role_id, r.rank, u.client_id, u.email, t.name as team_name,
       t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
       t.tracking_mode, t.project_required, t.task_required, t.record_type,
       t.bcc_email, t.plugins, t.config, t.lock_spec, t.workday_minutes, t.custom_logo
-      FROM tt_users u LEFT JOIN tt_teams t ON (u.team_id = t.id) WHERE ";
+      FROM tt_users u LEFT JOIN tt_teams t ON (u.team_id = t.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
     if ($id)
       $sql .= "u.id = $id";
     else
@@ -93,6 +95,14 @@ class ttUser {
       $this->id = $val['id'];
       $this->team_id = $val['team_id'];
       $this->role = $val['role'];
+      $this->role_id = $val['role_id'];
+      $this->rank = $val['rank'];
+      // Downgrade rank to legacy role, if it is still in use.
+      if ($this->role > 0 && $this->rank > $this->role)
+        $this->rank = $this->role; // TODO: remove after roles revamp.
+      // Upgrade rank from legacy role, for user who does not yet have a role_id.
+      if (!$this->rank && !$this->role_id && $this->role > 0)
+        $this->rank = $this->role; // TODO: remove after roles revamp.
       $this->client_id = $val['client_id'];
       $this->email = $val['email'];
       $this->lang = $val['lang'];

@@ -33,6 +33,7 @@ import('ttTeamHelper');
 import('ttUserHelper');
 import('form.Table');
 import('form.TableColumn');
+import('ttRoleHelper');
 
 // Access check.
 if (!ttAccessCheck(right_manage_team)) {
@@ -93,7 +94,12 @@ if ($request->isPost()) {
   $cl_login = $user_details['login'];
   $cl_email = $user_details['email'];
   $cl_rate = str_replace('.', $user->decimal_mark, $user_details['rate']);
-  $cl_role = $user_details['role'];
+  $cl_role = $user_details['role_id'];
+
+  // In case role_id is not yet assigned...
+  if (!$cl_role && $user_details['role'])
+    $cl_role = ttRoleHelper::gerRoleByRank($user_details['role']); // TODO: remove after roles revamp.
+  
   $cl_client_id = $user_details['client_id'];
   $cl_status = $user_details['status'];
   $cl_projects = array();
@@ -112,11 +118,12 @@ if (!$auth->isPasswordExternal()) {
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','style'=>'width: 300px;','value'=>$cl_email));
 
-$roles[ROLE_USER] = $i18n->getKey('label.user');
-$roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');
-if ($user->isPluginEnabled('cl'))
-  $roles[ROLE_CLIENT] = $i18n->getKey('label.client');
-$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role,'data'=>$roles));
+$active_roles = ttTeamHelper::getActiveRolesForUser();
+//$roles[ROLE_USER] = $i18n->getKey('label.user');
+//$roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');
+//if ($user->isPluginEnabled('cl'))
+//  $roles[ROLE_CLIENT] = $i18n->getKey('label.client');
+$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role,'data'=>$active_roles, 'datakeys'=>array('id', 'name')));
 if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
@@ -174,14 +181,14 @@ if ($request->isPost()) {
   }
   if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
   // Require selection of a client for a client role.
-  if ($user->isPluginEnabled('cl') && $cl_role == ROLE_CLIENT && !$cl_client_id) $err->add($i18n->getKey('error.client'));
+  if ($user->isPluginEnabled('cl') && ttRoleHelper::isClientRole($cl_role) && !$cl_client_id) $err->add($i18n->getKey('error.client'));
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.users.default_rate'));
 
   if ($err->no()) {
     $existing_user = ttUserHelper::getUserByLogin($cl_login);
     if (!$existing_user || ($user_id == $existing_user['id'])) {
 
-      $fields = array(
+        $fields = array(
         'name' => $cl_name,
         'login' => $cl_login,
         'password' => $cl_password1,
@@ -190,7 +197,10 @@ if ($request->isPost()) {
         'rate' => $cl_rate,
         'projects' => $assigned_projects);
       if (right_assign_roles & $user->rights) {
-        $fields['role'] = $cl_role;
+        // Get legacy role value.
+        $legacy_role = ttRoleHelper::getLegacyRole($cl_role); // TODO: remove after roles revamp.
+        $fields['role'] = $legacy_role;
+        $fields['role_id'] = $cl_role;
         $fields['client_id'] = $cl_client_id;
       }
 
@@ -231,6 +241,7 @@ $rates = ttProjectHelper::getRates($user_id);
 $smarty->assign('rates', $rates);
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
+$smarty->assign('active_roles', $active_roles);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
 $smarty->assign('user_id', $user_id);

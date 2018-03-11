@@ -172,6 +172,10 @@ class ttUserHelper {
         $role = (int) $fields['role'];
         $role_part = ", role = $role";
       }
+      if (isset($fields['role_id'])) {
+        $role_id = (int) $fields['role_id'];
+        $role_id_part = ", role_id = $role_id";
+      }
       if (array_key_exists('client_id', $fields)) // Could be NULL.
         $client_part = ", client_id = ".$mdb2->quote($fields['client_id']);
     }
@@ -189,7 +193,7 @@ class ttUserHelper {
 
     $sql = "update tt_users set login = ".$mdb2->quote($fields['login']).
       "$pass_part, name = ".$mdb2->quote($fields['name']).
-      "$role_part $client_part $rate_part $status_part, email = ".$mdb2->quote($fields['email']).
+      "$role_part $role_id_part $client_part $rate_part $status_part, email = ".$mdb2->quote($fields['email']).
       " where id = $user_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;

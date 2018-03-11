@@ -263,17 +263,40 @@ class ttTeamHelper {
     return false;
   }
 
+  // getActiveRolesForUser - returns an array of relevant active roles for user with rank less than self.
+  // "Relevant" means that client roles are filtered out if Client plugin is disabled.
+  static function getActiveRolesForUser()
+  {
+    global $user;
+    $result = array();
+    $mdb2 = getConnection();
+
+    $sql = "select id, name, description, rank, rights from tt_roles where team_id = $user->team_id and rank < $user->rank and status = 1 order by rank";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $val['is_client'] = in_array('data_entry', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have data entry right.
+        if ($val['is_client'] && !$user->isPluginEnabled('cl'))
+          continue; // Skip adding a client role/
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
   // getActiveRoles - returns an array of active roles for team.
   static function getActiveRoles($team_id)
   {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, rank, description from tt_roles where team_id = $team_id and status = 1 order by rank";
+    $sql = "select id, name, description, rank, rights from tt_roles where team_id = $team_id and status = 1 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
+        $val['is_client'] = in_array('data_entry', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have data entry right.
         $result[] = $val;
       }
     }
