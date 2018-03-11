@@ -119,10 +119,6 @@ if (!$auth->isPasswordExternal()) {
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','style'=>'width: 300px;','value'=>$cl_email));
 
 $active_roles = ttTeamHelper::getActiveRolesForUser();
-//$roles[ROLE_USER] = $i18n->getKey('label.user');
-//$roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');
-//if ($user->isPluginEnabled('cl'))
-//  $roles[ROLE_CLIENT] = $i18n->getKey('label.client');
 $form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role,'data'=>$active_roles, 'datakeys'=>array('id', 'name')));
 if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->getKey('dropdown.select'))));

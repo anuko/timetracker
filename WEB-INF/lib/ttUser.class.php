@@ -269,4 +269,28 @@ define('ROLE_SITE_ADMIN', 1024); // Site administrator.
     }
     return false;
   }
+
+  // migrateLegacyRole makes changes to user database record and assigns a user to
+  // one of pre-defined roles, which are created if necessary.
+  // No changes to $this instance are done.
+  function migrateLegacyRole() {
+    // Do nothing if we already have a role_id.
+    if ($this->role_id) return false;
+
+    // Create default roles if necessary.
+    import ('ttRoleHelper');
+    if (!ttRoleHelper::rolesExist()) ttRoleHelper::createDefaultRoles(); // TODO: refactor or remove after roles revamp.
+
+    // Obtain new role id based on legacy role.
+    $role_id = ttRoleHelper::getRoleByRank($this->role);
+    if (!$role_id) return false; // Role not found, nothing to do.
+
+    $mdb2 = getConnection();
+    $sql = "update tt_users set role_id = $role_id where id = $this->id and team_id = $this->team_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    return true;
+  }
 }
