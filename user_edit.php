@@ -98,7 +98,7 @@ if ($request->isPost()) {
 
   // In case role_id is not yet assigned...
   if (!$cl_role && $user_details['role'])
-    $cl_role = ttRoleHelper::gerRoleByRank($user_details['role']); // TODO: remove after roles revamp.
+    $cl_role = ttRoleHelper::getRoleByRank($user_details['role']); // TODO: remove after roles revamp.
   
   $cl_client_id = $user_details['client_id'];
   $cl_status = $user_details['status'];
