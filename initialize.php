@@ -170,11 +170,12 @@ $msg = new ActionErrors(); // Notification messages (not errrors) for user.
 import('ttUser');
 $user = new ttUser(null, $auth->getUserId());
 // Temporary code to assign role_id to users who don't yet have it.
+/*
 if ($user->login && !$user->role_id) {
   $user->migrateLegacyRole();
   // Recycle User object, now with proper role_id.
   $user = new ttUser(null, $auth->getUserId());
-}
+}*/
 if ($user->custom_logo) {
   $smarty->assign('custom_logo', 'images/'.$user->team_id.'.png');
   $smarty->assign('mobile_custom_logo', '../images/'.$user->team_id.'.png');
