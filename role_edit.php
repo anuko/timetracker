@@ -44,7 +44,7 @@ if (!$role) {
   exit();
 }
 $assigned_rights = explode(',', $role['rights']);
-$available_rights = array_diff($user->rights_array, $assigned_rights);
+$available_rights = array_diff($user->rights, $assigned_rights);
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -124,7 +124,7 @@ if ($request->isPost()) {
        $rights = str_replace($right_to_add, '', $rights);
        $rights = str_replace(',,',',', $rights);
        // Add the right only if we have it ourselves.
-       if (in_array($right_to_add, $user->rights_array))
+       if (in_array($right_to_add, $user->rights))
          $rights .= ','.$right_to_add;
      }
      $rights = trim($rights, ',');
