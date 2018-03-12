@@ -188,7 +188,7 @@ if ($request->isPost()) {
           'status' => $cl_status,
           'rate' => $cl_rate,
           'projects' => $assigned_projects);
-        if (right_assign_roles & $user->rights) {
+        if (right_assign_roles & $user->rights_mask) {
           $fields['role'] = $cl_role;
           $fields['client_id'] = $cl_client_id;
         }

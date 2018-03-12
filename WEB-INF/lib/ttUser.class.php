@@ -60,8 +60,8 @@ class ttUser {
   var $custom_logo = 0;         // Whether to use a custom logo for team.
   var $lock_spec = null;        // Cron specification for record locking.
   var $workday_minutes = 480;   // Number of work minutes in a regular day.
-  var $rights = 0;              // A mask of user rights.
-  var $rights_array = array();  // An array of user rights, planned replacement of array mask.
+  var $rights_mask = 0;         // A mask of user rights. TODO: remove after roles revamp.
+  var $rights_array = array();  // An array of user rights, planned replacement of $rights_mask.
 
   // Constructor.
   function __construct($login, $id = null) {
@@ -140,18 +140,18 @@ class ttUser {
 
       // Set user rights.
       if ($this->role == ROLE_USER) {
-        $this->rights = right_data_entry|right_view_charts|right_view_reports;
+        $this->rights_mask = right_data_entry|right_view_charts|right_view_reports;
         // TODO: get customized rights from the database instead.
         // $this->rights_array[] = "data_entry";          // Enter time and expense records into Time Tracker.
         // $this->rights_array[] = "view_own_data";       // View own reports and charts.
         // $this->rights_array[] = "manage_own_settings"; // Edit own settings.
         // $this->rights_array[] = "view_users";          // View user names and roles in a group.
       } elseif ($this->role == ROLE_CLIENT) {
-        $this->rights = right_view_reports|right_view_invoices; // TODO: how about right_view_charts, too?
+        $this->rights_mask = right_view_reports|right_view_invoices; // TODO: how about right_view_charts, too?
         // $this->rights_array[] = "view_own_data";       // View own reports, charts, and invoices.
         // $this->rights_array[] = "manage_own_settings"; // Edit own settings.
       } elseif ($this->role == ROLE_COMANAGER) {
-        $this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team;
+        $this->rights_mask = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team;
         // $this->rights_array[] = "data_entry";          // Enter time and expense records into Time Tracker.
         // $this->rights_array[] = "view_own_data";       // View own reports and charts.
         // $this->rights_array[] = "manage_own_settings"; // Edit own settings.
@@ -161,10 +161,10 @@ class ttUser {
         $this->rights_array[] = "override_punch_mode"; // Can input any start and finish times for self and lower roles.
         // TODO: get rights from the database instead.
       } elseif ($this->role == ROLE_MANAGER) {
-        $this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team|right_assign_roles|right_export_team;
+        $this->rights_mask = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team|right_assign_roles|right_export_team;
         $this->rights_array[] = "override_punch_mode"; // Can input any start and finish times for self and lower roles.
       } elseif ($this->role == ROLE_SITE_ADMIN) {
-        $this->rights = right_administer_site;
+        $this->rights_mask = right_administer_site;
       }
 
 /*

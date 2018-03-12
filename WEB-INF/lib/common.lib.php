@@ -339,7 +339,7 @@ function ttAccessCheck($required_rights)
   }
   
   // Check rights.
-  if (!($required_rights & $user->rights))
+  if (!($required_rights & $user->rights_mask))
     return false;
     
   return true;
