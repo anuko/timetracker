@@ -31,7 +31,7 @@ import('form.Form');
 import('ttUserHelper');
 
 // Access check.
-if (!ttAccessCheck(right_administer_site)) {
+if (!ttAccessAllowed('administer_site')) {
   header('Location: access_denied.php');
   exit();
 }

@@ -344,3 +344,25 @@ function ttAccessCheck($required_rights)
     
   return true;
 }
+
+// ttAccessAllowed checks whether user is allowed access to a particular page.
+// This function is a replacement for ttAccessCheck above as part of roles revamp.
+// To be used as an initial check on all publicly available pages
+// (except login.php and register.php where we don't have to check).
+function ttAccessAllowed($required_right)
+{
+  global $auth;
+  global $user;
+
+  // Redirect to login page if user is not authenticated.
+  if (!$auth->isAuthenticated()) {
+    header('Location: login.php');
+    exit();
+  }
+
+  // Check if user has the right.
+  if (in_array($required_right, $user->rights))
+    return true;
+
+  return false;
+}
