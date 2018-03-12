@@ -722,7 +722,7 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_log` ADD `paid` tinyint(4) NULL default '0' AFTER `billable`");
   }
 
-  if ($_POST["convert11400to11735"]) {
+  if ($_POST["convert11400to11740"]) {
     setChange("ALTER TABLE `tt_teams` DROP `address`");
     setChange("ALTER TABLE `tt_fav_reports` ADD `report_spec` text default NULL AFTER `user_id`");
     setChange("ALTER TABLE `tt_fav_reports` ADD `paid_status` tinyint(4) default NULL AFTER `invoice`");
@@ -755,7 +755,8 @@ if ($_POST) {
     setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.35') set rights = 'data_entry,view_own_reports,view_own_charts,view_own_invoices,manage_own_settings,view_users,on_behalf_data_entry,view_reports,view_charts,override_punch_mode,swap_roles,approve_timesheets,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups' where team_id = 0 and rank = 512");
     setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.35') set rights = replace(rights, 'view_own_data', 'view_own_reports,view_own_charts') where team_id > 0");
     setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.35') set rights = replace(rights, 'view_data', 'view_reports,view_charts') where team_id > 0");
-    setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.35') set rights = replace(rights, 'view_own_charts', 'view_own_charts,view_own_invoices') where team_id > 0 and rank = 16");
+    setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.35') set rights = replace(rights, 'view_own_charts,manage_own_settings', 'view_own_charts,view_own_invoices,manage_own_settings') where team_id > 0 and rank = 16");
+    setChange("UPDATE `tt_site_config` SET `param_value` = '1.17.40' where param_name = 'version_db'");
   }
 
   if ($_POST["cleanup"]) {
@@ -801,7 +802,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.17.35)</b>
+    <td width="80%"><b>Create database structure (v1.17.40)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -837,8 +838,8 @@ if ($_POST) {
     <td><input type="submit" name="convert1600to11400" value="Update"><br></td>
   </tr>
   <tr valign="top">
-    <td>Update database structure (v1.14 to v1.17.35)</td>
-    <td><input type="submit" name="convert11400to11735" value="Update"><br></td>
+    <td>Update database structure (v1.14 to v1.17.40)</td>
+    <td><input type="submit" name="convert11400to11740" value="Update"><br></td>
   </tr>
 </table>
 
