@@ -169,13 +169,6 @@ $msg = new ActionErrors(); // Notification messages (not errrors) for user.
 // Create an instance of ttUser class. This gets us most of user details.
 import('ttUser');
 $user = new ttUser(null, $auth->getUserId());
-// Temporary code to assign role_id to users who don't yet have it.
-/*
-if ($user->login && !$user->role_id) {
-  $user->migrateLegacyRole();
-  // Recycle User object, now with proper role_id.
-  $user = new ttUser(null, $auth->getUserId());
-}*/
 if ($user->custom_logo) {
   $smarty->assign('custom_logo', 'images/'.$user->team_id.'.png');
   $smarty->assign('mobile_custom_logo', '../images/'.$user->team_id.'.png');
@@ -205,6 +198,13 @@ if (!$lang) {
 
 // Load i18n file.
 $i18n->load($lang);
+
+// Temporary code to assign role_id to users who don't yet have it.
+if ($user->login && !$user->role_id) {
+  $user->migrateLegacyRole(); // Note: this requires initialized $i18n.
+  // Recycle User object, now with proper role_id.
+  $user = new ttUser(null, $auth->getUserId());
+}
 
 // Assign things for smarty to use in template files.
 $smarty->assign('i18n', $i18n->keys);
