@@ -752,6 +752,10 @@ if ($_POST) {
     setChange("INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'data_entry,view_own_data,manage_own_settings,view_users,on_behalf_data_entry,view_data,override_punch_mode,swap_roles,approve_timesheets,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups')");
     setChange("UPDATE `tt_site_config` SET `param_value` = '1.17.35' where param_name = 'version_db'");
     setChange("update `tt_users` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.35') set role_id = (select id from tt_roles where rank = 1024) where role = 1024");
+    setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.35') set rights = 'data_entry,view_own_reports,view_own_charts,view_own_invoices,manage_own_settings,view_users,on_behalf_data_entry,view_reports,view_charts,override_punch_mode,swap_roles,approve_timesheets,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups' where team_id = 0 and rank = 512");
+    setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.35') set rights = replace(rights, 'view_own_data', 'view_own_reports,view_own_charts') where team_id > 0");
+    setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.35') set rights = replace(rights, 'view_data', 'view_reports,view_charts') where team_id > 0");
+    setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.35') set rights = replace(rights, 'view_own_charts', 'view_own_charts,view_own_invoices') where team_id > 0 and rank = 16");
   }
 
   if ($_POST["cleanup"]) {

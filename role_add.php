@@ -67,7 +67,7 @@ if ($request->isPost()) {
           'name' => $cl_name,
           'rank' => $cl_rank,
           'description' => $cl_description,
-          'rights' => 'data_entry,view_own_data,manage_own_settings,view_users', // Default user rights.
+          'rights' => 'data_entry,view_own_reports,view_own_charts,manage_own_settings,view_users', // Default user rights.
           'status' => ACTIVE))) {
           header('Location: roles.php');
           exit();

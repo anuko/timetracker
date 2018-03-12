@@ -221,9 +221,9 @@ class ttRoleHelper {
 
     $mdb2 = getConnection();
 
-    $rights_client = 'view_own_data,manage_own_settings';
-    $rights_user = 'data_entry,view_own_data,manage_own_settings,view_users';
-    $rights_supervisor = $rights_user.',on_behalf_data_entry,view_data,override_punch_mode,swap_roles,approve_timesheets';
+    $rights_client = 'view_own_reports,view_own_charts,view_own_invoices,manage_own_settings';
+    $rights_user = 'data_entry,view_own_reports,view_own_charts,manage_own_settings,view_users';
+    $rights_supervisor = $rights_user.',on_behalf_data_entry,view_reports,view_charts,override_punch_mode,swap_roles,approve_timesheets';
     $rights_comanager = $rights_supervisor.',manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices';
     $rights_manager = $rights_comanager.',manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups';
 
@@ -279,9 +279,9 @@ class ttRoleHelper {
     global $i18n;
     global $user;
 
-    $rights_client = 'view_own_data,manage_own_settings';
-    $rights_user = 'data_entry,view_own_data,manage_own_settings,view_users';
-    $rights_supervisor = $rights_user.',on_behalf_data_entry,view_data,override_punch_mode,swap_roles,approve_timesheets';
+    $rights_client = 'view_own_reports,view_own_charts,view_own_invoices,manage_own_settings';
+    $rights_user = 'data_entry,view_own_reports,view_own_charts,manage_own_settings,view_users';
+    $rights_supervisor = $rights_user.',on_behalf_data_entry,view_reports,view_charts,override_punch_mode,swap_roles,approve_timesheets';
     $rights_comanager = $rights_supervisor.',manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices';
     $rights_manager = $rights_comanager.',manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups';
 

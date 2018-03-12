@@ -31,7 +31,7 @@ import('ttExportHelper');
 import('form.Form');
 
 // Access check.
-if (!ttAccessCheck(right_export_team)) {
+if (!ttAccessAllowed('export_data')) {
   header('Location: access_denied.php');
   exit();
 }
