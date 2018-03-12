@@ -38,7 +38,7 @@ import('ttUserHelper');
 import('ttTeamHelper');
 
 // Access check.
-if (!ttAccessCheck(right_view_charts) || !$user->isPluginEnabled('ch')) {
+if (!ttAccessAllowed('view_own_data') || !$user->isPluginEnabled('ch')) {
   header('Location: access_denied.php');
   exit();
 }

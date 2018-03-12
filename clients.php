@@ -31,7 +31,7 @@ import('form.Form');
 import('ttTeamHelper');
 
 // Access check.
-if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('cl')) {
+if (!ttAccessAllowed('manage_clients') || !$user->isPluginEnabled('cl')) {
   header('Location: access_denied.php');
   exit();
 }
