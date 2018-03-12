@@ -72,7 +72,7 @@ class ttUser {
 
     $mdb2 = getConnection();
 
-    $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role, u.role_id, r.rank, u.client_id, u.email, t.name as team_name,
+    $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role, u.role_id, r.rank, r.rights, u.client_id, u.email, t.name as team_name,
       t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
       t.tracking_mode, t.project_required, t.task_required, t.record_type,
       t.bcc_email, t.plugins, t.config, t.lock_spec, t.workday_minutes, t.custom_logo
@@ -96,6 +96,7 @@ class ttUser {
       $this->team_id = $val['team_id'];
       $this->role = $val['role'];
       $this->role_id = $val['role_id'];
+      $this->rights = explode(',', $val['rights']);
       $this->rank = $val['rank'];
       // Downgrade rank to legacy role, if it is still in use.
       if ($this->role > 0 && $this->rank > $this->role)
@@ -138,60 +139,18 @@ class ttUser {
           $this->behalf_name = $_SESSION['behalf_name'];
       }
 
-      // Set user rights.
+      // Set user rights. TODO: remove during roles revamp, whe we redo access checks.
       if ($this->role == ROLE_USER) {
         $this->rights_mask = right_data_entry|right_view_charts|right_view_reports;
-        // TODO: get customized rights from the database instead.
-        // $this->rights[] = "data_entry";          // Enter time and expense records into Time Tracker.
-        // $this->rights[] = "view_own_data";       // View own reports and charts.
-        // $this->rights[] = "manage_own_settings"; // Edit own settings.
-        // $this->rights[] = "view_users";          // View user names and roles in a group.
       } elseif ($this->role == ROLE_CLIENT) {
-        $this->rights_mask = right_view_reports|right_view_invoices; // TODO: how about right_view_charts, too?
-        // $this->rights[] = "view_own_data";       // View own reports, charts, and invoices.
-        // $this->rights[] = "manage_own_settings"; // Edit own settings.
+        $this->rights_mask = right_view_reports|right_view_invoices;
       } elseif ($this->role == ROLE_COMANAGER) {
         $this->rights_mask = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team;
-        // $this->rights[] = "data_entry";          // Enter time and expense records into Time Tracker.
-        // $this->rights[] = "view_own_data";       // View own reports and charts.
-        // $this->rights[] = "manage_own_settings"; // Edit own settings.
-        // $this->rights[] = "view_users";          // View user names and roles in a group.
-        // $this->rights[] = "on_behalf_data_entry";// Can enter data on behalf of lower roles.
-        // $this->rights[] = "view_data";           // Can view data for lower roles.
-        $this->rights[] = "override_punch_mode"; // Can input any start and finish times for self and lower roles.
-        // TODO: get rights from the database instead.
       } elseif ($this->role == ROLE_MANAGER) {
         $this->rights_mask = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team|right_assign_roles|right_export_team;
-        $this->rights[] = "override_punch_mode"; // Can input any start and finish times for self and lower roles.
       } elseif ($this->role == ROLE_SITE_ADMIN) {
         $this->rights_mask = right_administer_site;
       }
-
-/*
-// TODO: redesign of user rights and roles is currently ongoing.
-// As we run our of bits for sure at some point, rights should be strings instead,
-// for example: "data_entry".
-// Also, we need rights editor page and team-customized roles.
-// Move this stuff from here to ttUser class.
-//
-// User access rights - bits that collectively define an access mask to the system (a role).
-// We'll have some bits here (1,2, etc...) reserved for future use.
-define('right_data_entry', 4);     // Right to enter work hours and expenses.
-define('right_view_charts', 8);    // Right to view charts.
-define('right_view_reports', 16);  // Right to view reports.
-define('right_view_invoices', 32); // Right to view invoices.
-define('right_manage_team', 64);   // Right to manage team. Note that this is not full access to team.
-define('right_assign_roles', 128); // Right to assign user roles.
-define('right_export_team', 256);  // Right to export team data to a file.
-define('right_administer_site', 1024); // Admin account right to manage the application as a whole.
-
-// User roles.
-define('ROLE_USER', 4);          // Regular user.
-define('ROLE_CLIENT', 16);       // Client (to view reports and invoices).
-define('ROLE_COMANAGER', 68);    // Team co-manager. Can do many things but not as much as team manager.
-define('ROLE_MANAGER', 324);     // Team manager. Can do everything for a team.
-define('ROLE_SITE_ADMIN', 1024); // Site administrator.
-*/
     }
   }
 
