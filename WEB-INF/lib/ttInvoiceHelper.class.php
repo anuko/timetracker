@@ -69,7 +69,9 @@ class ttInvoiceHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $sql = "select * from tt_invoices where id = $invoice_id and team_id = $user->team_id and status = 1";
+    if ($user->isClient()) $client_part = " and client_id = $user->client_id";
+
+    $sql = "select * from tt_invoices where id = $invoice_id and team_id = $user->team_id $client_part and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if ($val = $res->fetchRow())
