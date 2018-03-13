@@ -33,7 +33,7 @@ import('DateAndTime');
 import('ttExpenseHelper');
 
 // Access check.
-if (!ttAccessAllowed('data_entry') || !$user->isPluginEnabled('ex')) {
+if (!ttAccessAllowed('track_own_expenses') || !$user->isPluginEnabled('ex')) {
   header('Location: access_denied.php');
   exit();
 }

@@ -276,9 +276,9 @@ class ttTeamHelper {
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-        $val['is_client'] = in_array('data_entry', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have data entry right.
+        $val['is_client'] = in_array('track_own_time', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have data entry right.
         if ($val['is_client'] && !$user->isPluginEnabled('cl'))
-          continue; // Skip adding a client role/
+          continue; // Skip adding a client role.
         $result[] = $val;
       }
     }
@@ -296,7 +296,7 @@ class ttTeamHelper {
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-        $val['is_client'] = in_array('data_entry', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have data entry right.
+        $val['is_client'] = in_array('track_own_time', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have data entry right.
         $result[] = $val;
       }
     }
@@ -409,7 +409,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    if (ROLE_CLIENT == $user->role && $user->client_id)
+    if ($user->isClient())
       $client_part = " and i.client_id = $user->client_id";
 
     $sql = "select i.id, i.name, i.date, i.client_id, i.status, c.name as client_name from tt_invoices i

@@ -42,7 +42,7 @@ import('DateAndTime');
 // }
 
 // Access check.
-if (!ttAccessAllowed('data_entry')) {
+if (!ttAccessAllowed('track_own_time')) {
   header('Location: access_denied.php');
   exit();
 }

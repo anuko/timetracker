@@ -722,7 +722,7 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_log` ADD `paid` tinyint(4) NULL default '0' AFTER `billable`");
   }
 
-  if ($_POST["convert11400to11740"]) {
+  if ($_POST["convert11400to11743"]) {
     setChange("ALTER TABLE `tt_teams` DROP `address`");
     setChange("ALTER TABLE `tt_fav_reports` ADD `report_spec` text default NULL AFTER `user_id`");
     setChange("ALTER TABLE `tt_fav_reports` ADD `paid_status` tinyint(4) default NULL AFTER `invoice`");
@@ -757,6 +757,9 @@ if ($_POST) {
     setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.35') set rights = replace(rights, 'view_data', 'view_reports,view_charts') where team_id > 0");
     setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.35') set rights = replace(rights, 'view_own_charts,manage_own_settings', 'view_own_charts,view_own_invoices,manage_own_settings') where team_id > 0 and rank = 16");
     setChange("UPDATE `tt_site_config` SET `param_value` = '1.17.40' where param_name = 'version_db'");
+    setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.40') set rights = replace(rights, 'on_behalf_data_entry', 'track_time,track_expenses')");
+    setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.40') set rights = replace(rights, 'data_entry', 'track_own_time,track_own_expenses')");
+    setChange("UPDATE `tt_site_config` SET `param_value` = '1.17.43' where param_name = 'version_db'");
   }
 
   if ($_POST["cleanup"]) {
@@ -802,7 +805,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.17.40)</b>
+    <td width="80%"><b>Create database structure (v1.17.43)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -838,8 +841,8 @@ if ($_POST) {
     <td><input type="submit" name="convert1600to11400" value="Update"><br></td>
   </tr>
   <tr valign="top">
-    <td>Update database structure (v1.14 to v1.17.40)</td>
-    <td><input type="submit" name="convert11400to11740" value="Update"><br></td>
+    <td>Update database structure (v1.14 to v1.17.43)</td>
+    <td><input type="submit" name="convert11400to11743" value="Update"><br></td>
   </tr>
 </table>
 

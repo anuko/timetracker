@@ -31,7 +31,7 @@ import('form.Form');
 import('ttTeamHelper');
 
 // Access check.
-if (!ttAccessAllowed('data_entry') || (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode)) {
+if (!ttAccessAllowed('track_own_time') || (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode)) {
   header('Location: access_denied.php');
   exit();
 }

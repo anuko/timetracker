@@ -60,8 +60,8 @@ class ttUser {
   var $custom_logo = 0;         // Whether to use a custom logo for team.
   var $lock_spec = null;        // Cron specification for record locking.
   var $workday_minutes = 480;   // Number of work minutes in a regular day.
-  var $rights = array();        // An array of user rights such as 'data_entry', etc.
-  var $is_client = false;       // Whether user is a client as determined by missing 'data_entry' right.
+  var $rights = array();        // An array of user rights such as 'track_own_time', etc.
+  var $is_client = false;       // Whether user is a client as determined by missing 'track_own_time' right.
 
   // Constructor.
   function __construct($login, $id = null) {
@@ -97,7 +97,7 @@ class ttUser {
       $this->role = $val['role'];
       $this->role_id = $val['role_id'];
       $this->rights = explode(',', $val['rights']);
-      $this->is_client = !in_array('data_entry', $this->rights);
+      $this->is_client = !in_array('track_own_time', $this->rights);
       $this->rank = $val['rank'];
       // Downgrade rank to legacy role, if it is still in use.
       if ($this->role > 0 && $this->rank > $this->role)
@@ -142,9 +142,14 @@ class ttUser {
     }
   }
 
-  // The getActiveUser returns user id on behalf of whom current user is operating.
+  // The getActiveUser returns user id on behalf of whom the current user is operating.
   function getActiveUser() {
     return ($this->behalf_id ? $this->behalf_id : $this->id);
+  }
+
+  // can - determines whether user has a right to do something.
+  function can($do_something) {
+    return in_array($do_something, $this->rights);
   }
 
   // isAdmin - determines whether current user is admin (has right_administer_site).
