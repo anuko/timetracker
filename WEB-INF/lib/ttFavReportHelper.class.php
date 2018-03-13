@@ -171,7 +171,7 @@ class ttFavReportHelper {
 
       // If all users are selected - use a null value (which means "all users").
       $all_users_selected = true;
-      if ($user->canManageTeam()) {
+      if ($user->can('view_reports')) {
         $all = ttTeamHelper::getActiveUsers();
         foreach ($all as $one) {
           if (!in_array($one['id'], $users_in_bean)) {
@@ -260,7 +260,7 @@ class ttFavReportHelper {
         $bean->setAttribute('users', explode(',', $val['users']));
       else {
         // Null users value means "all users". Add them to the bean.
-        if ($user->canManageTeam()) {
+        if ($user->can('view_reports')) {
           $all = ttTeamHelper::getActiveUsers();
           foreach ($all as $one) {
             $all_user_ids[] = $one['id'];

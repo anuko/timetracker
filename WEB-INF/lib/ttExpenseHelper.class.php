@@ -70,7 +70,7 @@ class ttExpenseHelper {
     $invoice_id = $fields['invoice_id'];
 
     $paid_part = '';
-    if ($user->canManageTeam() && $user->isPluginEnabled('ps')) {
+    if ($user->can('manage_invoices') && $user->isPluginEnabled('ps')) {
       $paid_part = $fields['paid'] ? ', paid = 1' : ', paid = 0';
     }
 

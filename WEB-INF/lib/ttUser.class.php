@@ -154,7 +154,7 @@ class ttUser {
 
   // isAdmin - determines whether current user is admin (has right_administer_site).
   function isAdmin() {
-    return (right_administer_site & $this->role);
+    return $this->can('administer_site');
   }
 
   // isManager - determines whether current user is team manager.
