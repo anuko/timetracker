@@ -58,11 +58,11 @@ class ttReportHelper {
 
     // Prepare user list part.
     $userlist = -1;
-    if (($user->canManageTeam() || $user->isClient()) && is_array($bean->getAttribute('users')))
+    if (($user->can('view_reports') || $user->isClient()) && is_array($bean->getAttribute('users')))
       $userlist = join(',', $bean->getAttribute('users'));
     // Prepare sql query part for user list.
     $user_list_part = null;
-    if ($user->canManageTeam() || $user->isClient())
+    if ($user->can('view_reports') || $user->isClient())
       $user_list_part = " and l.user_id in ($userlist)";
     else
       $user_list_part = " and l.user_id = ".$user->id;
@@ -103,7 +103,7 @@ class ttReportHelper {
 
     // Prepare user list part.
     $userlist = -1;
-    if (($user->canManageTeam() || $user->isClient())) {
+    if (($user->can('view_reports') || $user->isClient())) {
       if ($report['users'])
         $userlist = $report['users'];
       else {
@@ -115,7 +115,7 @@ class ttReportHelper {
     }
     // Prepare sql query part for user list.
     $user_list_part = null;
-    if ($user->canManageTeam() || $user->isClient())
+    if ($user->can('view_reports') || $user->isClient())
       $user_list_part = " and l.user_id in ($userlist)";
     else
       $user_list_part = " and l.user_id = ".$user->id;
@@ -152,11 +152,11 @@ class ttReportHelper {
 
     // Prepare user list part.
     $userlist = -1;
-    if (($user->canManageTeam() || $user->isClient()) && is_array($bean->getAttribute('users')))
+    if (($user->can('view_reports') || $user->isClient()) && is_array($bean->getAttribute('users')))
       $userlist = join(',', $bean->getAttribute('users'));
     // Prepare sql query part for user list.
     $user_list_part = null;
-    if ($user->canManageTeam() || $user->isClient())
+    if ($user->can('view_reports') || $user->isClient())
       $user_list_part = " and ei.user_id in ($userlist)";
     else
       $user_list_part = " and ei.user_id = ".$user->id;
@@ -193,7 +193,7 @@ class ttReportHelper {
 
     // Prepare user list part.
     $userlist = -1;
-    if (($user->canManageTeam() || $user->isClient())) {
+    if (($user->can('view_reports') || $user->isClient())) {
       if ($report['users'])
         $userlist = $report['users'];
       else {
@@ -205,7 +205,7 @@ class ttReportHelper {
     }
     // Prepare sql query part for user list.
     $user_list_part = null;
-    if ($user->canManageTeam() || $user->isClient())
+    if ($user->can('view_reports') || $user->isClient())
       $user_list_part = " and ei.user_id in ($userlist)";
     else
       $user_list_part = " and ei.user_id = ".$user->id;
@@ -239,7 +239,7 @@ class ttReportHelper {
     array_push($fields, 'l.id as id');
     array_push($fields, '1 as type'); // Type 1 is for tt_log entries.
     array_push($fields, 'l.date as date');
-    if($user->canManageTeam() || $user->isClient())
+    if($user->can('view_reports') || $user->isClient())
       array_push($fields, 'u.name as user');
     // Add client name if it is selected.
     if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
