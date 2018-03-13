@@ -33,7 +33,7 @@ import('ttTeamHelper');
 import('ttTimeHelper');
 
 // Access check.
-if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('mq')) {
+if (!ttAccessAllowed('manage_advanced_settings') || !$user->isPluginEnabled('mq')) {
   header('Location: access_denied.php');
   exit();
 }

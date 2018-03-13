@@ -42,7 +42,7 @@ import('DateAndTime');
 // }
 
 // Access check.
-if (!ttAccessCheck(right_data_entry)) {
+if (!ttAccessAllowed('data_entry')) {
   header('Location: access_denied.php');
   exit();
 }

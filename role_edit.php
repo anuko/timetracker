@@ -33,7 +33,7 @@ import('ttTaskHelper'); // TODO: remove this?
 import('ttRoleHelper');
 
 // Access check.
-if (!ttAccessCheck(right_manage_team)) {
+if (!ttAccessAllowed('manage_roles')) {
   header('Location: access_denied.php');
   exit();
 }

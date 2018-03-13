@@ -39,7 +39,7 @@ import('ttTimeHelper');
 import('DateAndTime');
 
 // Access check.
-if (!ttAccessCheck(right_data_entry) || !$user->isPluginEnabled('wv')) {
+if (!ttAccessAllowed('data_entry') || !$user->isPluginEnabled('wv')) {
   header('Location: access_denied.php');
   exit();
 }

@@ -325,30 +325,9 @@ function ttValidCondition($val, $emptyValid = true)
   return true;
 }
 
-// ttAccessCheck is used to check whether user is allowed to proceed. This function is used
-// as an initial check on all publicly available pages.
-function ttAccessCheck($required_rights)
-{
-  global $auth;
-  global $user;
-  
-  // Redirect to login page if user is not authenticated.
-  if (!$auth->isAuthenticated()) {
-    header('Location: login.php');
-    exit();
-  }
-  
-  // Check rights.
-  if (!($required_rights & $user->rights_mask))
-    return false;
-    
-  return true;
-}
-
 // ttAccessAllowed checks whether user is allowed access to a particular page.
-// This function is a replacement for ttAccessCheck above as part of roles revamp.
-// To be used as an initial check on all publicly available pages
-// (except login.php and register.php where we don't have to check).
+// It is used as an initial check on all publicly available pages
+// (except login.php, register.php, and others where we don't have to check).
 function ttAccessAllowed($required_right)
 {
   global $auth;

@@ -32,7 +32,7 @@ import('ttUserHelper');
 import('ttRoleHelper');
 
 // Access check.
-if (!ttAccessCheck(right_data_entry|right_view_reports)) {
+if (!ttAccessAllowed('manage_own_settings')) {
   header('Location: access_denied.php');
   exit();
 }

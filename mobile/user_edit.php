@@ -35,7 +35,7 @@ import('form.Table');
 import('form.TableColumn');
 
 // Access check.
-if (!ttAccessCheck(right_manage_team)) {
+if (!ttAccessAllowed('manage_users')) {
   header('Location: access_denied.php');
   exit();
 }

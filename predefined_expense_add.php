@@ -31,7 +31,7 @@ import('form.Form');
 import('ttPredefinedExpenseHelper');
 
 // Access check.
-if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('ex')) {
+if (!ttAccessAllowed('manage_advanced_settings') || !$user->isPluginEnabled('ex')) {
   header('Location: access_denied.php');
   exit();
 }

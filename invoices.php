@@ -31,7 +31,7 @@ import('form.Form');
 import('ttTeamHelper');
 
 // Access check.
-if (!ttAccessCheck(right_view_invoices) || !$user->isPluginEnabled('iv')) {
+if (!(ttAccessAllowed('manage_invoices') || ttAccessAllowed('view_own_invoices')) || !$user->isPluginEnabled('iv')) {
   header('Location: access_denied.php');
   exit();
 }

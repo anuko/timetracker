@@ -33,7 +33,7 @@ import('ttReportHelper');
 import('ttTeamHelper');
 
 // Access check.
-if (!ttAccessCheck(right_view_reports)) {
+if (!ttAccessAllowed('view_own_reports')) {
   header('Location: access_denied.php');
   exit();
 }

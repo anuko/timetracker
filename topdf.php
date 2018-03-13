@@ -35,18 +35,18 @@ import('form.Form');
 import('form.ActionForm');
 import('ttReportHelper');
 
+// Access check.
+if (!ttAccessAllowed('view_own_reports')) {
+  header('Location: access_denied.php');
+  exit();
+}
+
 // Check whether TCPDF library is available.
 if (!file_exists('WEB-INF/lib/tcpdf/'))
   die('TCPDF library is not found in WEB-INF/lib/tcpdf/');
 
 // Include TCPDF library.
 require_once('WEB-INF/lib/tcpdf/tcpdf.php');
-
-// Access check.
-if (!ttAccessCheck(right_view_reports)) {
-  header('Location: access_denied.php');
-  exit();
-}
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
