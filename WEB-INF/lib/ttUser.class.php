@@ -60,8 +60,8 @@ class ttUser {
   var $custom_logo = 0;         // Whether to use a custom logo for team.
   var $lock_spec = null;        // Cron specification for record locking.
   var $workday_minutes = 480;   // Number of work minutes in a regular day.
-  var $rights_mask = 0;         // A mask of user rights. TODO: remove after roles revamp.
-  var $rights = array();        // An array of user rights, planned replacement of $rights_mask.
+  var $rights = array();        // An array of user rights such as 'data_entry', etc.
+  var $is_client = false;       // Whether user is a client as determined by missing 'data_entry' right.
 
   // Constructor.
   function __construct($login, $id = null) {
@@ -97,6 +97,7 @@ class ttUser {
       $this->role = $val['role'];
       $this->role_id = $val['role_id'];
       $this->rights = explode(',', $val['rights']);
+      $this->is_client = !in_array('data_entry', $this->rights);
       $this->rank = $val['rank'];
       // Downgrade rank to legacy role, if it is still in use.
       if ($this->role > 0 && $this->rank > $this->role)
@@ -138,19 +139,6 @@ class ttUser {
           $this->behalf_id = $_SESSION['behalf_id'];
           $this->behalf_name = $_SESSION['behalf_name'];
       }
-
-      // Set user rights. TODO: remove during roles revamp, whe we redo access checks.
-      if ($this->role == ROLE_USER) {
-        $this->rights_mask = right_data_entry|right_view_charts|right_view_reports;
-      } elseif ($this->role == ROLE_CLIENT) {
-        $this->rights_mask = right_view_reports|right_view_invoices;
-      } elseif ($this->role == ROLE_COMANAGER) {
-        $this->rights_mask = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team;
-      } elseif ($this->role == ROLE_MANAGER) {
-        $this->rights_mask = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team|right_assign_roles|right_export_team;
-      } elseif ($this->role == ROLE_SITE_ADMIN) {
-        $this->rights_mask = right_administer_site;
-      }
     }
   }
 
@@ -176,7 +164,7 @@ class ttUser {
 
   // isClient - determines whether current user is a client.
   function isClient() {
-    return (ROLE_CLIENT == $this->role);
+    return $this->is_client;
   }
 
   // canManageTeam - determines whether current user is manager or co-manager.

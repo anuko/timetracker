@@ -167,7 +167,7 @@ class ttUserHelper {
     // Prepare query parts.
     if (isset($fields['password']))
       $pass_part = ', password = md5('.$mdb2->quote($fields['password']).')';
-    if (right_assign_roles & $user->rights_mask) {
+    if (in_array('manage_users', $user->rights)) {
       if (isset($fields['role'])) {
         $role = (int) $fields['role'];
         $role_part = ", role = $role";
