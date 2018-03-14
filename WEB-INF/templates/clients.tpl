@@ -5,7 +5,7 @@
 <table cellspacing="0" cellpadding="7" border="0" width="720">
   <tr>
     <td valign="top">
-{if ($user->canManageTeam())}
+{if $user->can('manage_clients')}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
   {if $inactive_clients}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.clients.active_clients}</td></tr>

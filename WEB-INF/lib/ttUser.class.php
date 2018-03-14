@@ -206,8 +206,9 @@ class ttUser {
   function isDateLocked($date)
   {
     if ($this->isPluginEnabled('lk') && $this->lock_spec) {
-      // Override for managers.
-      if ($this->canManageTeam()) return false;
+
+      // Override.
+      if ($this->can('override_date_lock')) return false;
 
       require_once(LIBRARY_DIR.'/tdcron/class.tdcron.php');
       require_once(LIBRARY_DIR.'/tdcron/class.tdcron.entry.php');

@@ -102,7 +102,7 @@
             &middot; <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
     {/if}
             {if !$user->isClient()}&middot; {/if}<a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a>
-    {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
+    {if $user->isPluginEnabled('iv') && ($user->can('manage_invoices') || $user->can('view_own_invoices'))}
             &middot; <a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a>
     {/if}
     {if ($user->isPluginEnabled('ch') && !$user->isClient()) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode
@@ -112,13 +112,13 @@
     {if !$user->isClient() && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
             &middot; <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
     {/if}
-    {if $user->canManageTeam() && ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode) && $user->can('manage_tasks')}
             &middot; <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
     {/if}
     {if !$user->isClient()}
             &middot; <a class="mainMenu" href="users.php">{$i18n.menu.users}</a>
     {/if}
-    {if $user->canManageTeam() && $user->isPluginEnabled('cl')}
+    {if $user->isPluginEnabled('cl') && $user->can('manage_clients')}
             &middot; <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
     {/if}
     {if $user->isManager()}
