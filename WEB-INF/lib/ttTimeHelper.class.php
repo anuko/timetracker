@@ -474,7 +474,7 @@ class ttTimeHelper {
       $billable_part = $fields['billable'] ? ', billable = 1' : ', billable = 0';
     }
     $paid_part = '';
-    if ($user->canManageTeam() && $user->isPluginEnabled('ps')) {
+    if ($user->can('manage_invoices') && $user->isPluginEnabled('ps')) {
       $paid_part = $fields['paid'] ? ', paid = 1' : ', paid = 0';
     }
 

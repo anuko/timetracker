@@ -1054,7 +1054,7 @@ class ttTeamHelper {
   static function enablePlugin($plugin, $enable = true)
   {
     global $user;
-    if (!$user->canManageTeam())
+    if (!$user->can('manage_features'))
       return false;
 
     $plugin_array = explode(',', $user->plugins);
