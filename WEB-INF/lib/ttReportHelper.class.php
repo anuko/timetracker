@@ -1407,6 +1407,10 @@ class ttReportHelper {
     global $user;
     global $i18n;
 
+    // Determine these once as they are used in multiple places in this function.
+    $canViewReports = $user->can('view_reports');
+    $isClient = $user->isClient();
+
     $items = ttReportHelper::getFavItems($report);
     $group_by = $report['group_by'];
     if ($group_by && 'no_grouping' != $group_by)
@@ -1469,7 +1473,7 @@ class ttReportHelper {
         }
         if ($report['show_cost']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-          $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotal['cost'] : $subtotal['expenses'];
+          $body .= ($canViewReports || $isClient) ? $subtotal['cost'] : $subtotal['expenses'];
           $body .= '</td>';
         }
         $body .= '</tr>';
@@ -1486,7 +1490,7 @@ class ttReportHelper {
       }
       if ($report['show_cost']) {
         $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
-        $body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
+        $body .= ($canViewReports || $isClient) ? $totals['cost'] : $totals['expenses'];
         $body .= '</td>';
       }
       $body .= '</tr>';
@@ -1499,7 +1503,7 @@ class ttReportHelper {
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
       $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.date').'</td>';
-      if ($user->canManageTeam() || $user->isClient())
+      if ($canViewReports || $isClient)
         $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.user').'</td>';
       if ($report['show_client'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.client').'</td>';
@@ -1548,7 +1552,7 @@ class ttReportHelper {
               $body .= '<tr style="'.$rowSubtotal.'">';
               $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.subtotal').'</td>';
               $subtotal_name = htmlspecialchars($subtotals[$prev_grouped_by]['name']);
-              if ($user->canManageTeam() || $user->isClient()) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
+              if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
               if ($report['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
               if ($report['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
               if ($report['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
@@ -1559,7 +1563,7 @@ class ttReportHelper {
               if ($report['show_note']) $body .= '<td></td>';
               if ($report['show_cost']) {
                 $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-                $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
+                $body .= ($canViewReports || $isClient) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
                 $body .= '</td>';
               }
               if ($report['show_paid']) $body .= '<td></td>';
@@ -1575,7 +1579,7 @@ class ttReportHelper {
             $row_style = ($row_style == $rowItem) ? $rowItemAlt : $rowItem;
           $body .= '<tr style="'.$row_style.'">';
           $body .= '<td style="'.$cellLeftAligned.'">'.$record['date'].'</td>';
-          if ($user->canManageTeam() || $user->isClient())
+          if ($canViewReports || $isClient)
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['user']).'</td>';
           if ($report['show_client'])
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['client']).'</td>';
@@ -1615,7 +1619,7 @@ class ttReportHelper {
         $body .= '<tr style="'.$rowSubtotal.'">';
         $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.subtotal').'</td>';
         $subtotal_name = htmlspecialchars($subtotals[$cur_grouped_by]['name']);
-        if ($user->canManageTeam() || $user->isClient()) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
+        if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
         if ($report['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
         if ($report['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
         if ($report['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
@@ -1626,7 +1630,7 @@ class ttReportHelper {
         if ($report['show_note']) $body .= '<td></td>';
         if ($report['show_cost']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-          $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotals[$cur_grouped_by]['cost'] : $subtotals[$cur_grouped_by]['expenses'];
+          $body .= ($canViewReports || $isClient) ? $subtotals[$cur_grouped_by]['cost'] : $subtotals[$cur_grouped_by]['expenses'];
           $body .= '</td>';
         }
         if ($report['show_paid']) $body .= '<td></td>';
@@ -1638,7 +1642,7 @@ class ttReportHelper {
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
       $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.total').'</td>';
-      if ($user->canManageTeam() || $user->isClient()) $body .= '<td></td>';
+      if ($canViewReports || $isClient) $body .= '<td></td>';
       if ($report['show_client']) $body .= '<td></td>';
       if ($report['show_project']) $body .= '<td></td>';
       if ($report['show_task']) $body .= '<td></td>';
@@ -1649,7 +1653,7 @@ class ttReportHelper {
       if ($report['show_note']) $body .= '<td></td>';
       if ($report['show_cost']) {
         $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
-        $body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
+        $body .= ($canViewReports || $isClient) ? $totals['cost'] : $totals['expenses'];
         $body .= '</td>';
       }
       if ($report['show_paid']) $body .= '<td></td>';
