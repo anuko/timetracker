@@ -198,7 +198,7 @@ class WeekViewCellRenderer extends DefaultCellRenderer {
 // Elements of weekTimeForm.
 $form = new Form('weekTimeForm');
 
-if ($user->canManageTeam()) {
+if ($user->can('track_time')) {
   $user_list = ttTeamHelper::getActiveUsers(array('putSelfFirst'=>true));
   if (count($user_list) > 1) {
     $form->addInput(array('type'=>'combobox',
@@ -463,7 +463,7 @@ if ($request->isPost()) {
     }
   }
   elseif ($request->getParameter('onBehalfUser')) {
-    if($user->canManageTeam()) {
+    if($user->can('track_time')) {
       unset($_SESSION['behalf_id']);
       unset($_SESSION['behalf_name']);
 

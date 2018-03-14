@@ -31,6 +31,7 @@ require_once('WEB-INF/lib/common.lib.php');
 require_once('initialize.php');
 import('ttUserHelper');
 import('ttTaskHelper');
+import('ttUser');
 
 // setChange - executes an sql statement. TODO: rename this function to something better.
 // Better yet, redo the entire thing and make an installer.
@@ -764,6 +765,52 @@ if ($_POST) {
     setChange("UPDATE `tt_site_config` SET `param_value` = '1.17.44' where param_name = 'version_db'");
   }
 
+  // The update_role_id function assigns a role_id to users, who don't have it.
+  if ($_POST['update_role_id']) {
+    import('I18n');
+
+    $mdb2 = getConnection();
+
+    $sql = "select u.id, u.status from tt_users u inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.44') where u.role_id is NULL and u.status is NOT NULL";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) {
+      die($res->getMessage());
+    }
+
+    $users_updated = 0;
+    // Iterate through users.
+    while ($val = $res->fetchRow()) {
+
+      $user_id = $val['id'];
+
+      // Code only works on active users. Temporarily activate a user.
+      $deactivate = false;
+      if ($val['status'] == 0) {
+        $deactivate = true; // To deactivate later.
+        $sql = "update tt_users set status = 1 where id = $user_id";
+        $mdb2->exec($sql);
+      }
+
+      $user = new ttUser(null, $user_id);
+      $i18n = new I18n();
+      $i18n->load($val['lang']);
+      if ($user->login)
+        $user->migrateLegacyRole();
+
+      if ($deactivate) {
+        // Deactivate temporarily activated user back.
+        $sql = "update tt_users set status = 0 where id = $user_id";
+        $mdb2->exec($sql);
+      }
+
+      unset($user);
+      unset($i18n);
+      $users_updated++;
+      // if ($users_updated >= 1000) break; // TODO: uncomment for large user sets to run multiple times.
+    }
+    print "Updated $users_updated users...<br>\n";
+  }
+
   if ($_POST["cleanup"]) {
 
     $mdb2 = getConnection();
@@ -844,7 +891,7 @@ if ($_POST) {
   </tr>
   <tr valign="top">
     <td>Update database structure (v1.14 to v1.17.44)</td>
-    <td><input type="submit" name="convert11400to11744" value="Update"><br></td>
+    <td><input type="submit" name="convert11400to11744" value="Update"><br><input type="submit" name="update_role_id" value="Update role_id"></td>
   </tr>
 </table>
 
