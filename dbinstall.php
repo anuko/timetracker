@@ -722,7 +722,7 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_log` ADD `paid` tinyint(4) NULL default '0' AFTER `billable`");
   }
 
-  if ($_POST["convert11400to11743"]) {
+  if ($_POST["convert11400to11744"]) {
     setChange("ALTER TABLE `tt_teams` DROP `address`");
     setChange("ALTER TABLE `tt_fav_reports` ADD `report_spec` text default NULL AFTER `user_id`");
     setChange("ALTER TABLE `tt_fav_reports` ADD `paid_status` tinyint(4) default NULL AFTER `invoice`");
@@ -760,6 +760,8 @@ if ($_POST) {
     setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.40') set rights = replace(rights, 'on_behalf_data_entry', 'track_time,track_expenses')");
     setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.40') set rights = replace(rights, 'data_entry', 'track_own_time,track_own_expenses')");
     setChange("UPDATE `tt_site_config` SET `param_value` = '1.17.43' where param_name = 'version_db'");
+    setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.43') set rights = replace(rights, 'override_punch_mode,swap_roles', 'override_punch_mode,override_date_lock,swap_roles')");
+    setChange("UPDATE `tt_site_config` SET `param_value` = '1.17.44' where param_name = 'version_db'");
   }
 
   if ($_POST["cleanup"]) {
@@ -805,7 +807,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.17.43)</b>
+    <td width="80%"><b>Create database structure (v1.17.44)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -841,8 +843,8 @@ if ($_POST) {
     <td><input type="submit" name="convert1600to11400" value="Update"><br></td>
   </tr>
   <tr valign="top">
-    <td>Update database structure (v1.14 to v1.17.43)</td>
-    <td><input type="submit" name="convert11400to11743" value="Update"><br></td>
+    <td>Update database structure (v1.14 to v1.17.44)</td>
+    <td><input type="submit" name="convert11400to11744" value="Update"><br></td>
   </tr>
 </table>
 
