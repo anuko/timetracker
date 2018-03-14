@@ -481,6 +481,10 @@ class ttReportHelper {
     global $user;
     $mdb2 = getConnection();
 
+    // Determine these once as they are used in multiple places in this function.
+    $canViewReports = $user->can('view_reports');
+    $isClient = $user->isClient();
+
     $group_by_option = $report['group_by'];
     $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($report['show_start'] || $report['show_end']);
 
@@ -489,7 +493,7 @@ class ttReportHelper {
     array_push($fields, 'l.id as id');
     array_push($fields, '1 as type'); // Type 1 is for tt_log entries.
     array_push($fields, 'l.date as date');
-    if($user->canManageTeam() || $user->isClient())
+    if($canViewReports || $isClient)
       array_push($fields, 'u.name as user');
     // Add client name if it is selected.
     if ($report['show_client'] || 'client' == $group_by_option)
@@ -535,16 +539,16 @@ class ttReportHelper {
       array_push($fields, "null as expense"); 
     }
     // Add invoice name if it is selected.
-    if (($user->canManageTeam() || $user->isClient()) && $report['show_invoice'])
+    if (($canViewReports || $isClient) && $report['show_invoice'])
       array_push($fields, 'i.name as invoice');
 
     // Prepare sql query part for left joins.
     $left_joins = null;
     if ($report['show_client'] || 'client' == $group_by_option)
       $left_joins .= " left join tt_clients c on (c.id = l.client_id)";
-    if (($user->canManageTeam() || $user->isClient()) && $report['show_invoice'])
+    if (($canViewReports || $isClient) && $report['show_invoice'])
       $left_joins .= " left join tt_invoices i on (i.id = l.invoice_id and i.status = 1)";
-    if ($user->canManageTeam() || $user->isClient() || $user->isPluginEnabled('ex'))
+    if ($canViewReports || $isClient || $user->isPluginEnabled('ex'))
        $left_joins .= " left join tt_users u on (u.id = l.user_id)";
     if ($report['show_project'] || 'project' == $group_by_option)
       $left_joins .= " left join tt_projects p on (p.id = l.project_id)";
@@ -575,7 +579,7 @@ class ttReportHelper {
       array_push($fields, 'ei.id');
       array_push($fields, '2 as type'); // Type 2 is for tt_expense_items entries.
       array_push($fields, 'ei.date');
-      if($user->canManageTeam() || $user->isClient())
+      if($canViewReports || $isClient)
         array_push($fields, 'u.name as user');
       // Add client name if it is selected.
       if ($report['show_client'] || 'client' == $group_by_option)
@@ -601,18 +605,18 @@ class ttReportHelper {
       array_push($fields, 'ei.cost as cost');
       array_push($fields, 'ei.cost as expense');
       // Add invoice name if it is selected.
-      if (($user->canManageTeam() || $user->isClient()) && $report['show_invoice'])
+      if (($canViewReports || $isClient) && $report['show_invoice'])
         array_push($fields, 'i.name as invoice');
 
       // Prepare sql query part for left joins.
       $left_joins = null;
-      if ($user->canManageTeam() || $user->isClient())
+      if ($canViewReports || $isClient)
         $left_joins .= " left join tt_users u on (u.id = ei.user_id)";
       if ($report['show_client'] || 'client' == $group_by_option)
         $left_joins .= " left join tt_clients c on (c.id = ei.client_id)";
       if ($report['show_project'] || 'project' == $group_by_option)
         $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";
-      if (($user->canManageTeam() || $user->isClient()) && $report['show_invoice'])
+      if (($canViewReports || $isClient) && $report['show_invoice'])
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
 
       $where = ttReportHelper::getFavExpenseWhere($report);
@@ -630,7 +634,7 @@ class ttReportHelper {
       $sort_part .= 'date';
     else
       $sort_part .= $group_by_option.', date';
-    if (($user->canManageTeam() || $user->isClient()) /*&& is_array($bean->getAttribute('users'))*/ && 'user' != $group_by_option)
+    if (($canViewReports || $isClient) /*&& is_array($bean->getAttribute('users'))*/ && 'user' != $group_by_option)
       $sort_part .= ', user, type';
     if ($report['show_start'])
       $sort_part .= ', unformatted_start';
