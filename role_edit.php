@@ -62,8 +62,7 @@ $form = new Form('roleForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_role_id));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
-for ($i = 0; $i < $user->role; $i++) {
-  $existing_role_name = null;
+for ($i = 0; $i < $user->rank; $i++) {
   $rank_data[] = $i;
 }
 $form->addInput(array('type'=>'combobox','name'=>'rank','data'=>$rank_data,'value'=>$cl_rank));

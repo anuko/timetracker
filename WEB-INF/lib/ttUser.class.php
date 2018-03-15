@@ -31,7 +31,10 @@ class ttUser {
   var $name = null;             // User name.
   var $id = null;               // User id.
   var $team_id = null;          // Team id.
-  var $role = null;             // User role (user, client, comanager, manager, admin). TODO: remove when new roles are done.
+  var $legacy_role = null;      // Old user role (user, client, comanager, manager, admin). TODO: remove when new roles are done.
+                                // Complete removal requires refactoring migrateLegacyRole, which is used in dbinstall.php.
+                                // Perhaps, after doing an installer?
+
   var $role_id = null;          // Role id.
   var $rank = null;             // User role rank.
   var $client_id = null;        // Client id for client user role.
@@ -94,17 +97,13 @@ class ttUser {
       $this->name = $val['name'];
       $this->id = $val['id'];
       $this->team_id = $val['team_id'];
-      $this->role = $val['role'];
+      $this->legacy_role = $val['role'];
       $this->role_id = $val['role_id'];
       $this->rights = explode(',', $val['rights']);
       $this->is_client = !in_array('track_own_time', $this->rights);
       $this->rank = $val['rank'];
-      // Downgrade rank to legacy role, if it is still in use.
-      if ($this->role > 0 && $this->rank > $this->role)
-        $this->rank = $this->role; // TODO: remove after roles revamp.
-      // Upgrade rank from legacy role, for user who does not yet have a role_id.
-      if (!$this->rank && !$this->role_id && $this->role > 0)
-        $this->rank = $this->role; // TODO: remove after roles revamp.
+      // Downgrade rank to legacy ROLE_MANAGER rank, until we have sub-groups implemented.
+      if ($this->rank > ROLE_MANAGER) $this->rank = ROLE_MANAGER;
       $this->client_id = $val['client_id'];
       $this->email = $val['email'];
       $this->lang = $val['lang'];
@@ -158,13 +157,17 @@ class ttUser {
   }
 
   // isManager - determines whether current user is team manager.
+  // This is a legacy function that we are getting rid of by replacing with rights check.
   function isManager() {
-    return (ROLE_MANAGER == $this->role);
+    return $this->can('export_data'); // By default this is assigned to managers but not co-managers.
+                                      // Which is sufficient for now until we refactor all calls
+                                      // to this function and then remove it.
   }
 
   // isCoManager - determines whether current user is team comanager.
+  // This is a legacy function that we are getting rid of by replacing with rights check.
   function isCoManager() {
-    return (ROLE_COMANAGER == $this->role);
+    return ($this->can('manage_users') && !$this->can('export_data'));
   }
 
   // isClient - determines whether current user is a client.
@@ -173,8 +176,11 @@ class ttUser {
   }
 
   // canManageTeam - determines whether current user is manager or co-manager.
+  // This is a legacy function that we are getting rid of by replacing with rights check.
   function canManageTeam() {
-    return (right_manage_team & $this->role);
+    return $this->can('manage_users'); // By default this is assigned to co-managers (an managers).
+                                       // Which is sufficient for now until we refactor all calls
+                                       // to this function and then remove it.
   }
 
   // isPluginEnabled checks whether a plugin is enabled for user.
@@ -235,7 +241,7 @@ class ttUser {
     if (!ttRoleHelper::rolesExist()) ttRoleHelper::createDefaultRoles(); // TODO: refactor or remove after roles revamp.
 
     // Obtain new role id based on legacy role.
-    $role_id = ttRoleHelper::getRoleByRank($this->role);
+    $role_id = ttRoleHelper::getRoleByRank($this->legacy_role);
     if (!$role_id) return false; // Role not found, nothing to do.
 
     $mdb2 = getConnection();
