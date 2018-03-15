@@ -83,33 +83,6 @@ class ttRoleHelper {
     return false;
   }
 
-  // The getLegacyRole obtains a legacy role value for a role_id.
-  // This is a temporary function to allow usage of both old and new roles
-  // while new role code is being written and deployed.
-  static function getLegacyRole($role_id) {
-    global $user;
-    $mdb2 = getConnection();
-
-    $sql = "select rank from tt_roles where team_id = $user->team_id and id = $role_id";
-    $res = $mdb2->query($sql);
-
-    if (!is_a($res, 'PEAR_Error')) {
-      $val = $res->fetchRow();
-      if ($val['rank']) {
-        $rank = $val['rank'];
-        if ($rank >= ROLE_MANAGER)
-          return ROLE_MANAGER;
-        else if ($rank >= ROLE_COMANAGER)
-          return ROLE_COMANAGER;
-        else if ($rank >= ROLE_CLIENT)
-          return ROLE_CLIENT;
-        else
-          return ROLE_USER;
-      }
-    }
-    return false;
-  }
-
   // isClientRole determines if the role is a "client" role.
   // This simply means the role has no "track_own_time" right.
   static function isClientRole($role_id) {

@@ -44,18 +44,16 @@ $user_id = (int) $request->getParameter('id');
 $user_details = ttUserHelper::getUserDetails($user_id);
 
 // Security checks.
-$ok_to_go = $user->canManageTeam(); // Are we authorized for user deletes?
-if ($ok_to_go) $ok_to_go = $ok_to_go && $user_details; // Are we deleting a real user?
-if ($ok_to_go) $ok_to_go = $ok_to_go && ($user->team_id == $user_details['team_id']); // User belongs to our team?
-if ($ok_to_go && $user->isCoManager() && (ROLE_COMANAGER == $user_details['role']))
-  $ok_to_go = ($user->id == $user_details['id']); // Comanager is not allowed to delete other comanagers.
-if ($ok_to_go && $user->isCoManager() && (ROLE_MANAGER == $user_details['role']))
-  $ok_to_go = false; // Comanager is not allowed to delete a manager.
+if (!$user_details || // No details.
+     $user_details['team_id'] <> $user->team_id || // User not in team.
+     $user_details['rank'] > $user->rank || // User has a bigger rank.
+     ($user_details['rank'] == $user->rank && $user_details['id'] <> $user->id) // Same rank but not us.
+   ) {
+  header('Location: access_denied.php');
+  exit();
+}
 
-if (!$ok_to_go)
-  die ($i18n->getKey('error.sys'));
-else
-  $smarty->assign('user_to_delete', $user_details['name']." (".$user_details['login'].")");
+$smarty->assign('user_to_delete', $user_details['name']." (".$user_details['login'].")");
 
 // Create confirmation form.
 $form = new Form('userDeleteForm');

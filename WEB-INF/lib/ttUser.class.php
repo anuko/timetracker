@@ -31,10 +31,6 @@ class ttUser {
   var $name = null;             // User name.
   var $id = null;               // User id.
   var $team_id = null;          // Team id.
-  var $legacy_role = null;      // Old user role (user, client, comanager, manager, admin). TODO: remove when new roles are done.
-                                // Complete removal requires refactoring migrateLegacyRole, which is used in dbinstall.php.
-                                // Perhaps, after doing an installer?
-
   var $role_id = null;          // Role id.
   var $rank = null;             // User role rank.
   var $client_id = null;        // Client id for client user role.
@@ -97,7 +93,6 @@ class ttUser {
       $this->name = $val['name'];
       $this->id = $val['id'];
       $this->team_id = $val['team_id'];
-      $this->legacy_role = $val['role'];
       $this->role_id = $val['role_id'];
       $this->rights = explode(',', $val['rights']);
       $this->is_client = !in_array('track_own_time', $this->rights);

@@ -73,12 +73,10 @@ function handleClientControl() {
       <td align="right" nowrap>{$i18n.label.email}:</td>
       <td>{$forms.userForm.email.control}</td>
     </tr>
-{if $user->isManager()}
     <tr>
       <td align="right">{$i18n.form.users.role}:</td>
       <td>{$forms.userForm.role.control} {$forms.userForm.client.control}</td>
     </tr>
-{/if}
     <tr>
       <td align="right">{$i18n.form.users.default_rate}&nbsp;(0{$user->decimal_mark}00):</td>
       <td>{$forms.userForm.rate.control}</td>

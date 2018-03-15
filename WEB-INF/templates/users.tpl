@@ -5,7 +5,7 @@
 <table cellspacing="0" cellpadding="7" border="0" width="720">
   <tr>
     <td valign="top">
-{if $user->canManageTeam()}
+{if $user->can('manage_users')}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
   {if $inactive_users}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.active_users}</td></tr>
@@ -27,23 +27,13 @@
             {$u.name|escape}
           </td>
           <td>{$u.login|escape}</td>
-      {if $smarty.const.ROLE_MANAGER == $u.role}
-            <td>{$i18n.form.users.manager}</td>
-      {elseif $smarty.const.ROLE_COMANAGER == $u.role}
-            <td>{$i18n.form.users.comanager}</td>
-      {elseif $smarty.const.ROLE_CLIENT == $u.role}
-            <td>{$i18n.label.client}</td>
-      {elseif $smarty.const.ROLE_USER == $u.role}
-            <td>{$i18n.label.user}</td>
-      {/if}
-      {if $user->isManager()}
-          <!-- Manager can edit everybody. -->
+          <td>{$u.role_name|escape}</td>
+      {if $u.rank <= $user->rank}
           <td><a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a></td>
-          <td>{if $smarty.const.ROLE_MANAGER != $u.role || $can_delete_manager}<a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a>{/if}</td>
+         {if $u.id != $user->id}<td><a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a></td>{else}<td></td>{/if}
       {else}
-          <!--  Comanager can edit self and clients or users but not manager and other comanagers. -->
-          <td>{if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a>{/if}</td>
-          <td>{if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a>{/if}</td>
+          <td></td>
+          <td></td>
       {/if}
         </tr>
     {/foreach}
@@ -72,23 +62,13 @@
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$u.name|escape}</td>
           <td>{$u.login|escape}</td>
-      {if $smarty.const.ROLE_MANAGER == $u.role}
-            <td>{$i18n.form.users.manager}</td>
-      {elseif $smarty.const.ROLE_COMANAGER == $u.role}
-            <td>{$i18n.form.users.comanager}</td>
-      {elseif $smarty.const.ROLE_CLIENT == $u.role}
-            <td>{$i18n.label.client}</td>
-      {elseif $smarty.const.ROLE_USER == $u.role}
-            <td>{$i18n.label.user}</td>
-      {/if}
-      {if $user->isManager()}
-          <!-- Manager can edit everybody. -->
+          <td>{$u.role_name|escape}</td>
+      {if $u.rank <= $user->rank}
           <td><a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a></td>
-          <td>{if $smarty.const.ROLE_MANAGER != $u.role || $can_delete_manager}<a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a>{/if}</td>
+         {if $u.id != $user->id}<td><a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a></td>{else}<td></td>{/if}
       {else}
-          <!--  Comanager can edit self and clients or users but not manager and other comanagers. -->
-          <td>{if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a>{/if}</td>
-          <td>{if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a>{/if}</td>
+          <td></td>
+          <td></td>
       {/if}
         </tr>
     {/foreach}
@@ -114,15 +94,7 @@
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$u.name|escape}</td>
           <td>{$u.login|escape}</td>
-    {if $smarty.const.ROLE_MANAGER == $u.role}
-            <td>{$i18n.form.users.manager}</td>
-    {elseif $smarty.const.ROLE_COMANAGER == $u.role}
-            <td>{$i18n.form.users.comanager}</td>
-    {elseif $smarty.const.ROLE_CLIENT == $u.role}
-            <td>{$i18n.label.client}</td>
-    {elseif $smarty.const.ROLE_USER == $u.role}
-            <td>{$i18n.label.user}</td>
-    {/if}
+          <td>{$u.role_name|escape}</td>
         </tr>
   {/foreach}
       </table>

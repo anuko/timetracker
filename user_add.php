@@ -56,8 +56,7 @@ if ($request->isPost()) {
     $cl_password2 = $request->getParameter('pas2');
   }
   $cl_email = trim($request->getParameter('email'));
-  $cl_role = $request->getParameter('role');
-  if (!$cl_role) $cl_role = ROLE_USER;
+  $cl_role_id = $request->getParameter('role');
   $cl_client_id = $request->getParameter('client');
   $cl_rate = $request->getParameter('rate');
   $cl_projects = $request->getParameter('projects');
@@ -84,7 +83,7 @@ if (!$auth->isPasswordExternal()) {
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email));
 
 $active_roles = ttTeamHelper::getActiveRolesForUser();
-$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role,'data'=>$active_roles,'datakeys'=>array('id', 'name')));
+$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role_id,'data'=>$active_roles,'datakeys'=>array('id', 'name')));
 if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
@@ -140,21 +139,18 @@ if ($request->isPost()) {
   }
   if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
   // Require selection of a client for a client role.
-  if ($user->isPluginEnabled('cl') && ttRoleHelper::isClientRole($cl_role) && !$cl_client_id) $err->add($i18n->getKey('error.client'));
+  if ($user->isPluginEnabled('cl') && ttRoleHelper::isClientRole($cl_role_id) && !$cl_client_id) $err->add($i18n->getKey('error.client'));
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.users.default_rate'));
 
   if ($err->no()) {
     if (!ttUserHelper::getUserByLogin($cl_login)) {
-      // Get legacy role value.
-      $legacy_role = ttRoleHelper::getLegacyRole($cl_role); // TODO: remove after roles revamp.
       $fields = array(
         'name' => $cl_name,
         'login' => $cl_login,
         'password' => $cl_password1,
         'rate' => $cl_rate,
         'team_id' => $user->team_id,
-        'role' => $legacy_role,
-        'role_id' => $cl_role,
+        'role_id' => $cl_role_id,
         'client_id' => $cl_client_id,
         'projects' => $assigned_projects,
         'email' => $cl_email);

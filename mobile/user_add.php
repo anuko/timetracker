@@ -55,8 +55,7 @@ if ($request->isPost()) {
     $cl_password2 = $request->getParameter('pas2');
   }
   $cl_email = trim($request->getParameter('email'));
-  $cl_role = $request->getParameter('role');
-  if (!$cl_role) $cl_role = ROLE_USER;
+  $cl_role_id = $request->getParameter('role');
   $cl_client_id = $request->getParameter('client');
   $cl_rate = $request->getParameter('rate');
   $cl_projects = $request->getParameter('projects');
@@ -82,11 +81,8 @@ if (!$auth->isPasswordExternal()) {
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email));
 
-$roles[ROLE_USER] = $i18n->getKey('label.user');
-$roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');
-if ($user->isPluginEnabled('cl'))
-  $roles[ROLE_CLIENT] = $i18n->getKey('label.client');
-$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role,'data'=>$roles));
+$active_roles = ttTeamHelper::getActiveRolesForUser();
+$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role_id,'data'=>$active_roles,'datakeys'=>array('id', 'name')));
 if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
@@ -151,7 +147,7 @@ if ($request->isPost()) {
         'password' => $cl_password1,
         'rate' => $cl_rate,
         'team_id' => $user->team_id,
-        'role' => $cl_role,
+        'role_id' => $cl_role_id,
         'client_id' => $cl_client_id,
         'projects' => $assigned_projects,
         'email' => $cl_email);
@@ -166,6 +162,7 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
+$smarty->assign('active_roles', $active_roles);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
 $smarty->assign('title', $i18n->getKey('title.add_user'));

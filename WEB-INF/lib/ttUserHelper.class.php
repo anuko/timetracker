@@ -33,10 +33,10 @@ class ttUserHelper {
 
   // The getUserDetails function returns user details.
   static function getUserDetails($user_id) {
-    $result = array();
+    global $user;
     $mdb2 = getConnection();
 
-    $sql =  "select * from tt_users where id = $user_id";
+    $sql =  "select u.*, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.id = $user_id and u.team_id = $user->team_id";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
@@ -116,7 +116,6 @@ class ttUserHelper {
       $password = 'md5('.$password.')';
     $email = isset($fields['email']) ? $fields['email'] : '';
     $team_id = (int) $fields['team_id'];
-    $role = (int) $fields['role'];
     $rate = str_replace(',', '.', isset($fields['rate']) ? $fields['rate'] : 0);
     if($rate == '')
       $rate = 0;
@@ -125,9 +124,9 @@ class ttUserHelper {
       $status_v = ', '.$mdb2->quote($fields['status']);
     }
 
-    $sql = "insert into tt_users (name, login, password, team_id, role, role_id, client_id, rate, email $status_f) values (".
+    $sql = "insert into tt_users (name, login, password, team_id, role_id, client_id, rate, email $status_f) values (".
       $mdb2->quote($fields['name']).", ".$mdb2->quote($fields['login']).
-      ", $password, $team_id, $role, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, ".$mdb2->quote($email)." $status_v)";
+      ", $password, $team_id, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, ".$mdb2->quote($email)." $status_v)";
     $affected = $mdb2->exec($sql);
 
     // Now deal with project assignment.
@@ -168,10 +167,6 @@ class ttUserHelper {
     if (isset($fields['password']))
       $pass_part = ', password = md5('.$mdb2->quote($fields['password']).')';
     if (in_array('manage_users', $user->rights)) {
-      if (isset($fields['role'])) {
-        $role = (int) $fields['role'];
-        $role_part = ", role = $role";
-      }
       if (isset($fields['role_id'])) {
         $role_id = (int) $fields['role_id'];
         $role_id_part = ", role_id = $role_id";
@@ -193,7 +188,7 @@ class ttUserHelper {
 
     $sql = "update tt_users set login = ".$mdb2->quote($fields['login']).
       "$pass_part, name = ".$mdb2->quote($fields['name']).
-      "$role_part $role_id_part $client_part $rate_part $status_part, email = ".$mdb2->quote($fields['email']).
+      "$role_id_part $client_part $rate_part $status_part, email = ".$mdb2->quote($fields['email']).
       " where id = $user_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;

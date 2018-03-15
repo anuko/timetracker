@@ -95,14 +95,11 @@ function handleClientControl() {
       <td align="right" nowrap>{$i18n.label.email}:</td>
       <td>{$forms.userForm.email.control}</td>
     </tr>
-{if $user->isManager() && ($user->id != $user_id)}
+{if $user->id != $user_id}
     <tr>
       <td align="right">{$i18n.form.users.role}:</td>
       <td>{$forms.userForm.role.control} {$forms.userForm.client.control}</td>
     </tr>
-{/if}
-{* Prohibit deactivating team manager. Deactivating others is ok. *}
-{if $user->canManageTeam() && !($user->isManager() && $user->id == $user_id)}
     <tr>
       <td align="right">{$i18n.label.status}:</td>
       <td>{$forms.userForm.status.control}</td>

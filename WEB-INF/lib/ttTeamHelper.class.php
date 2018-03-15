@@ -74,7 +74,7 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     if (isset($options['getAllFields']))
-      $sql = "select * from tt_users where team_id = $user->team_id and status = 1 order by upper(name)";
+      $sql = "select u.*, r.name as role_name, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.team_id = $user->team_id and u.status = 1 order by upper(u.name)";
     else
       $sql = "select id, name from tt_users where team_id = $user->team_id and status = 1 order by upper(name)";
     $res = $mdb2->query($sql);
@@ -121,7 +121,7 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select * from tt_users where team_id = $team_id and status = 0 order by upper(name)";
+      $sql = "select u.*, r.name as role_name from tt_users u left join tt_roles r on (u.role_id = r.id) where u.team_id = $team_id and u.status = 0 order by upper(u.name)";
     else
       $sql = "select id, name from tt_users where team_id = $team_id and status = 0 order by upper(name)";
     $res = $mdb2->query($sql);

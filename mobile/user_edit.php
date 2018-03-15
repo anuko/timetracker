@@ -42,20 +42,17 @@ if (!ttAccessAllowed('manage_users')) {
 
 // Get user id we are editing from the request.
 $user_id = (int) $request->getParameter('id');
-
 // Get user details.
 $user_details = ttUserHelper::getUserDetails($user_id);
 
 // Security checks.
-$ok_to_go = $user->canManageTeam(); // Are we authorized for user management?
-if ($ok_to_go) $ok_to_go = $ok_to_go && $user_details; // Are we editing a real user?
-if ($ok_to_go) $ok_to_go = $ok_to_go && ($user->team_id == $user_details['team_id']); // User belongs to our team?
-if ($ok_to_go && $user->isCoManager() && (ROLE_COMANAGER == $user_details['role']))
-  $ok_to_go = ($user->id == $user_details['id']); // Comanager is not allowed to edit other comanagers.
-if ($ok_to_go && $user->isCoManager() && (ROLE_MANAGER == $user_details['role']))
-  $ok_to_go = false; // Comanager is not allowed to edit a manager.
-if (!$ok_to_go) {
-  die ($i18n->getKey('error.sys'));
+if (!$user_details || // No details.
+     $user_details['team_id'] <> $user->team_id || // User not in team.
+     $user_details['rank'] > $user->rank || // User has a bigger rank.
+     ($user_details['rank'] == $user->rank && $user_details['id'] <> $user->id) // Same rank but not us.
+   ) {
+  header('Location: access_denied.php');
+  exit();
 }
 
 if ($user->isPluginEnabled('cl'))
@@ -72,7 +69,7 @@ if ($request->isPost()) {
     $cl_password2 = $request->getParameter('pas2');
   }
   $cl_email = trim($request->getParameter('email'));
-  $cl_role = $request->getParameter('role');
+  $cl_role_id = $request->getParameter('role');
   $cl_client_id = $request->getParameter('client');
   $cl_status = $request->getParameter('status');
   $cl_rate = $request->getParameter('rate');
@@ -93,7 +90,7 @@ if ($request->isPost()) {
   $cl_login = $user_details['login'];
   $cl_email = $user_details['email'];
   $cl_rate = str_replace('.', $user->decimal_mark, $user_details['rate']);
-  $cl_role = $user_details['role'];
+  $cl_role_id = $user_details['role_id'];
   $cl_client_id = $user_details['client_id'];
   $cl_status = $user_details['status'];
   $cl_projects = array();
@@ -112,11 +109,8 @@ if (!$auth->isPasswordExternal()) {
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email));
 
-$roles[ROLE_USER] = $i18n->getKey('label.user');
-$roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');
-if ($user->isPluginEnabled('cl'))
-  $roles[ROLE_CLIENT] = $i18n->getKey('label.client');
-$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role,'data'=>$roles));
+$active_roles = ttTeamHelper::getActiveRolesForUser();
+$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role_id,'data'=>$active_roles,'datakeys'=>array('id', 'name')));
 if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
@@ -189,7 +183,7 @@ if ($request->isPost()) {
           'rate' => $cl_rate,
           'projects' => $assigned_projects);
         if (in_array('manage_users', $user->rights)) {
-          $fields['role'] = $cl_role;
+          $fields['role_id'] = $cl_role_id;
           $fields['client_id'] = $cl_client_id;
         }
   
@@ -236,6 +230,7 @@ $rates = ttProjectHelper::getRates($user_id);
 $smarty->assign('rates', $rates);
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
+$smarty->assign('active_roles', $active_roles);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
 $smarty->assign('user_id', $user_id);
