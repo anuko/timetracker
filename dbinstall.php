@@ -771,7 +771,7 @@ if ($_POST) {
 
     $mdb2 = getConnection();
 
-    $sql = "select u.id, u.team_id, u.role, u.status, t.lang from tt_users u inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.44') left join tt_teams t on (u.team_id = t.id) where u.role_id is NULL and u.status is NOT NULL";
+    $sql = "select u.id, u.team_id, u.role, t.lang from tt_users u inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.44') left join tt_teams t on (u.team_id = t.id) where u.role_id is NULL and u.status is NOT NULL";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
 
