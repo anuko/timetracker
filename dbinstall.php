@@ -31,7 +31,7 @@ require_once('WEB-INF/lib/common.lib.php');
 require_once('initialize.php');
 import('ttUserHelper');
 import('ttTaskHelper');
-import('ttUser');
+import('ttRoleHelper');
 
 // setChange - executes an sql statement. TODO: rename this function to something better.
 // Better yet, redo the entire thing and make an installer.
@@ -771,40 +771,34 @@ if ($_POST) {
 
     $mdb2 = getConnection();
 
-    $sql = "select u.id, u.status from tt_users u inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.44') where u.role_id is NULL and u.status is NOT NULL";
+    $sql = "select u.id, u.team_id, u.role, u.status, t.lang from tt_users u inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.44') left join tt_teams t on (u.team_id = t.id) where u.role_id is NULL and u.status is NOT NULL";
     $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error')) {
-      die($res->getMessage());
-    }
+    if (is_a($res, 'PEAR_Error')) die($res->getMessage());
 
     $users_updated = 0;
     // Iterate through users.
     while ($val = $res->fetchRow()) {
 
       $user_id = $val['id'];
+      $team_id = $val['team_id'];
+      $lang = $val['lang'];
+      $legacy_role = $val['role'];
+  
+      $sql = "select count(*) as count from tt_roles where team_id = $team_id";
+      $result = $mdb2->query($sql);
+      if (is_a($result, 'PEAR_Error')) die($result->getMessage());
+      $row = $result->fetchRow();
+      if ($row['count'] == 0)
+        ttRoleHelper::createPredefinedRoles($team_id, $lang);
 
-      // Code only works on active users. Temporarily activate a user.
-      $deactivate = false;
-      if ($val['status'] == 0) {
-        $deactivate = true; // To deactivate later.
-        $sql = "update tt_users set status = 1 where id = $user_id";
-        $mdb2->exec($sql);
-      }
+      // Obtain new role id based on legacy role.
+      $role_id = ttRoleHelper::getRoleByRank($legacy_role, $team_id);
+      if (!$role_id) continue; // Role not found, nothing to do.
 
-      $user = new ttUser(null, $user_id);
-      $i18n = new I18n();
-      $i18n->load($val['lang']);
-      if ($user->login)
-        $user->migrateLegacyRole();
+      $sql = "update tt_users set role_id = $role_id where id = $user_id and team_id = $team_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
 
-      if ($deactivate) {
-        // Deactivate temporarily activated user back.
-        $sql = "update tt_users set status = 0 where id = $user_id";
-        $mdb2->exec($sql);
-      }
-
-      unset($user);
-      unset($i18n);
       $users_updated++;
       // if ($users_updated >= 1000) break; // TODO: uncomment for large user sets to run multiple times.
     }

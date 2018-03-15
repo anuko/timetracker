@@ -129,13 +129,13 @@ class ttRoleHelper {
   }
 
   // getRoleByRank looks up a role by its rank.
-  static function getRoleByRank($rank) {
+  static function getRoleByRank($rank, $team_id) {
     global $user;
     $mdb2 = getConnection();
 
     $rank = (int) $rank; // Cast to int just in case for better security.
 
-    $sql = "select id from tt_roles where team_id = $user->team_id and rank = $rank and (status = 1 or status = 0)";
+    $sql = "select id from tt_roles where team_id = $team_id and rank = $rank and (status = 1 or status = 0)";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
@@ -193,22 +193,6 @@ class ttRoleHelper {
       return false;
 
     return true;
-  }
-
-  // rolesExist - checks whether roles for team already exist.
-  static function rolesExist()
-  {
-    $mdb2 = getConnection();
-    global $user;
-
-    $sql = "select count(*) as count from tt_roles where team_id = $user->team_id";
-    $res = $mdb2->query($sql);
-    if (!is_a($res, 'PEAR_Error')) {
-      $val = $res->fetchRow();
-      if ($val['count'] > 0)
-        return true; // Roles for team exist.
-    }
-    return false;
   }
 
   // createPredefinedRoles - creates a set of predefined roles for the team to use.

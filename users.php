@@ -41,12 +41,6 @@ if (!ttAccessAllowed('view_users')) {
 // Get users.
 $active_users = ttTeamHelper::getActiveUsers(array('getAllFields'=>true));
 if($user->canManageTeam()) {
-
-  // If there are no roles in team, introduce default ones.
-  if (!ttRoleHelper::rolesExist()) ttRoleHelper::createDefaultRoles(); // TODO: refactor or remove after roles revamp.
-  // This is here temporarily so that we have roles to work with to manage users.
-  // Normally, this should be done during an upgrade step (not yet implemented).
-
   $can_delete_manager = (1 == count($active_users));
   $inactive_users = ttTeamHelper::getInactiveUsers($user->team_id, true);
 }

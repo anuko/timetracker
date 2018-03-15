@@ -95,11 +95,6 @@ if ($request->isPost()) {
   $cl_email = $user_details['email'];
   $cl_rate = str_replace('.', $user->decimal_mark, $user_details['rate']);
   $cl_role = $user_details['role_id'];
-
-  // In case role_id is not yet assigned...
-  if (!$cl_role && $user_details['role'])
-    $cl_role = ttRoleHelper::getRoleByRank($user_details['role']); // TODO: remove after roles revamp.
-  
   $cl_client_id = $user_details['client_id'];
   $cl_status = $user_details['status'];
   $cl_projects = array();

@@ -58,7 +58,7 @@ if ($request->isPost()) {
   if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
 
   if ($err->no()) {
-    $existing_role = ttRoleHelper::getRoleByRank($cl_rank);
+    $existing_role = ttRoleHelper::getRoleByRank($cl_rank, $user->team_id);
     if (!$existing_role) {
         // Insert a role with default user rights.
         if (ttRoleHelper::insert(array(
