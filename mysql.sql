@@ -79,8 +79,7 @@ CREATE TABLE `tt_users` (
   `password` varchar(50) default NULL,             # password hash
   `name` varchar(100) default NULL,                # user name
   `team_id` int(11) NOT NULL,                      # team id
-  `role` int(11) default 4,                        # user role ("manager", "co-manager", "client", or "user")
-  `role_id` int(11) default NULL,                  # future replacement of role
+  `role_id` int(11) default NULL,                  # role id
   `client_id` int(11) default NULL,                # client id for "client" user role
   `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
   `email` varchar(100) default NULL,               # user email
@@ -93,7 +92,7 @@ create unique index login_idx on tt_users(login, status);
 
 # Create admin account with password 'secret'. Admin is a superuser, who can create teams.
 DELETE from `tt_users` WHERE login = 'admin';
-INSERT INTO `tt_users` (`login`, `password`, `name`, `team_id`, `role`, `role_id`) VALUES ('admin', md5('secret'), 'Admin', '0', '1024', (select id from tt_roles where rank = 1024));
+INSERT INTO `tt_users` (`login`, `password`, `name`, `team_id`, `role_id`) VALUES ('admin', md5('secret'), 'Admin', '0', (select id from tt_roles where rank = 1024));
 
 
 #
@@ -427,4 +426,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.48', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.50', now()); # TODO: change when structure changes.

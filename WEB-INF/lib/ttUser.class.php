@@ -71,7 +71,7 @@ class ttUser {
 
     $mdb2 = getConnection();
 
-    $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role, u.role_id, r.rank, r.rights, u.client_id, u.email, t.name as team_name,
+    $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role_id, r.rank, r.rights, u.client_id, u.email, t.name as team_name,
       t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
       t.tracking_mode, t.project_required, t.task_required, t.record_type,
       t.bcc_email, t.plugins, t.config, t.lock_spec, t.workday_minutes, t.custom_logo
