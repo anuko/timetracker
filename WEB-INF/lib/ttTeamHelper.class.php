@@ -699,7 +699,6 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $role_manager = ROLE_MANAGER;
     $sql = "select t.name as team_name, u.id as manager_id, u.name as manager_name, u.login as manager_login, u.email as manager_email
       from tt_teams t
       inner join tt_users u on (u.team_id = t.id)
