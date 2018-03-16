@@ -325,6 +325,28 @@ class ttTeamHelper {
     return $result;
   }
 
+  // getInactiveRolesForUser - returns an array of relevant active roles for user with rank less than self.
+  // "Relevant" means that client roles are filtered out if Client plugin is disabled.
+  static function getInactiveRolesForUser()
+  {
+    global $user;
+    $result = array();
+    $mdb2 = getConnection();
+
+    $sql = "select id, name, description, rank, rights from tt_roles where team_id = $user->team_id and rank < $user->rank and status = 0 order by rank";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $val['is_client'] = in_array('track_own_time', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have data entry right.
+        if ($val['is_client'] && !$user->isPluginEnabled('cl'))
+          continue; // Skip adding a client role.
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
   // getAllRoles - obtains all roles defined for team.
   static function getAllRoles($team_id) {
     $mdb2 = getConnection();

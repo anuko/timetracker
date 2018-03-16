@@ -89,6 +89,7 @@ if ($request->isPost()) {
         if (ttRoleHelper::update(array(
           'id' => $cl_role_id,
           'name' => $cl_name,
+          'rank' => $cl_rank,
           'description' => $cl_description,
           'status' => $cl_status))) {
           header('Location: roles.php');

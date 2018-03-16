@@ -141,7 +141,7 @@ function handlePluginCheckboxes() {
             <td align="right">{$i18n.label.currency}:</td>
             <td>{$forms.profileForm.currency.control}</td>
           </tr>
-  {if defined(DEBUG_ROLES)}
+  {if $user->can('manage_roles')}
           <tr>
             <td align="right" nowrap>{$i18n.label.roles}:</td>
             <td><a href="roles.php">{$i18n.label.configure}</a></td>

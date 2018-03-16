@@ -37,8 +37,8 @@ if (!ttAccessAllowed('manage_roles')) {
   exit();
 }
 
-$smarty->assign('active_roles', ttTeamHelper::getActiveRoles($user->team_id));
-$smarty->assign('inactive_roles', ttTeamHelper::getInactiveRoles($user->team_id));
+$smarty->assign('active_roles', ttTeamHelper::getActiveRolesForUser());
+$smarty->assign('inactive_roles', ttTeamHelper::getInactiveRolesForUser());
 $smarty->assign('title', $i18n->getKey('title.roles'));
 $smarty->assign('content_page_name', 'roles.tpl');
 $smarty->display('index.tpl');
