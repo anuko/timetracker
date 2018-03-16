@@ -109,7 +109,6 @@ if ($request->isPost()) {
         // Team created, now create a team manager.
         $user_id = ttUserHelper::insert(array(
           'team_id' => $team_id,
-          'role' => ROLE_MANAGER, // TODO: this is now out of sync (324 vs 512 for new role id). Work in progress.
           'role_id' => $role_id,
           'name' => $cl_manager_name,
           'login' => $cl_manager_login,

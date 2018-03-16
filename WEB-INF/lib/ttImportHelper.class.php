@@ -139,7 +139,7 @@ class ttImportHelper {
           foreach ($this->users as $key=>$user_item) {
             $user_id = ttUserHelper::insert(array(
               'team_id' => $this->team_id,
-              'role' => $user_item['ROLE'],
+              'role_id' => $user_item['ROLE_ID'], // Note: NOT mapped value. Not implemented currently, need to fix.
               'client_id' => $user_item['CLIENT_ID'], // Note: NOT mapped value, replaced in CLIENT handler.
               'name' => $user_item['NAME'],
               'login' => $user_item['LOGIN'],

@@ -107,7 +107,6 @@ if ($request->isPost()) {
         // Team created, now create a team manager.
         $user_id = ttUserHelper::insert(array(
           'team_id' => $team_id,
-          'role' => ROLE_MANAGER,
           'role_id' => $role_id,
           'name' => $cl_manager_name,
           'login' => $cl_manager_login,
