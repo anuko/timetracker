@@ -71,6 +71,7 @@ class ttTeamHelper {
   // The getActiveUsers obtains all active users in a given team.
   static function getActiveUsers($options = null) {
     global $user;
+    global $i18n;
     $mdb2 = getConnection();
 
     if (isset($options['getAllFields']))
@@ -82,6 +83,9 @@ class ttTeamHelper {
     if (is_a($res, 'PEAR_Error'))
       return false;
     while ($val = $res->fetchRow()) {
+      // Localize top manager role name, as it is not localized in db.
+      if ($val['rank'] == 512)
+        $val['role_name'] = $i18n->getKey('role.top_manager.label');
       $user_list[] = $val;
     }
 
