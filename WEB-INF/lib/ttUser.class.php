@@ -223,4 +223,16 @@ class ttUser {
     }
     return false;
   }
+
+  // canOverridePunchMode checks whether a user can override punch mode in a situation.
+  function canOverridePunchMode()
+  {
+    if (!$this->behalf_id && !$this->can('override_own_punch_mode'))
+      return false; // User is working as self and cannot override for self.
+
+    if ($this->behalf_id && !$this->can('override_punch_mode'))
+      return false; // User is working on behalf of someone else and cannot override.
+
+    return true;
+  }
 }
