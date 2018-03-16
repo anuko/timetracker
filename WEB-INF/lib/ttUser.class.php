@@ -97,8 +97,6 @@ class ttUser {
       $this->rights = explode(',', $val['rights']);
       $this->is_client = !in_array('track_own_time', $this->rights);
       $this->rank = $val['rank'];
-      // Downgrade rank to legacy ROLE_MANAGER rank, until we have sub-groups implemented.
-      if ($this->rank > ROLE_MANAGER) $this->rank = ROLE_MANAGER;
       $this->client_id = $val['client_id'];
       $this->email = $val['email'];
       $this->lang = $val['lang'];
