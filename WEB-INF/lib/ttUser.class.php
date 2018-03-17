@@ -204,21 +204,27 @@ class ttUser {
   // isDateLocked checks whether a specifc date is locked for modifications.
   function isDateLocked($date)
   {
-    if ($this->isPluginEnabled('lk') && $this->lock_spec) {
+    if (!$this->isPluginEnabled('lk'))
+      return false; // Locking feature is disabled.
 
-      // Override.
-      if ($this->can('override_date_lock')) return false;
+    if (!$this->lock_spec)
+      return false; // There is no lock specification.
 
-      require_once(LIBRARY_DIR.'/tdcron/class.tdcron.php');
-      require_once(LIBRARY_DIR.'/tdcron/class.tdcron.entry.php');
+    if (!$this->behalf_id && $this->can('override_own_date_lock'))
+      return false; // User is working as self and can override own date lock.
 
-      // Calculate the last occurrence of a lock.
-      $last = tdCron::getLastOccurrence($this->lock_spec, time());
-      $lockdate = new DateAndTime(DB_DATEFORMAT, strftime('%Y-%m-%d', $last));
-      if ($date->before($lockdate)) {
-        return true;
-      }
-    }
+    if ($this->behalf_id && $this->can('override_date_lock'))
+      return false; // User is working on behalf of someone else and can override date lock.
+
+    require_once(LIBRARY_DIR.'/tdcron/class.tdcron.php');
+    require_once(LIBRARY_DIR.'/tdcron/class.tdcron.entry.php');
+
+    // Calculate the last occurrence of a lock.
+    $last = tdCron::getLastOccurrence($this->lock_spec, time());
+    $lockdate = new DateAndTime(DB_DATEFORMAT, strftime('%Y-%m-%d', $last));
+    if ($date->before($lockdate))
+      return true;
+
     return false;
   }
 
