@@ -52,8 +52,8 @@ class ttImportHelper {
 
   // The following arrays are maps between entity ids in the file versus the database.
   // In the file they are sequential (1,2,3...) while in the database the entities have different ids.
-  var $userMap       = array(); // User ids.
   var $roleMap       = array(); // Role ids.
+  var $userMap       = array(); // User ids.
   var $projectMap    = array(); // Project ids.
   var $taskMap       = array(); // Task ids.
   var $clientMap     = array(); // Client ids.

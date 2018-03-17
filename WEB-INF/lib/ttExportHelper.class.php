@@ -36,6 +36,7 @@ class ttExportHelper {
   // The following arrays are maps between entity ids in the file versus the database.
   // We write to the file sequentially (1,2,3...) while in the database the entities have different ids.
   var $userMap     = array(); // User ids.
+  var $roleMap     = array(); // Role ids.
   var $projectMap  = array(); // Project ids.
   var $taskMap     = array(); // Task ids.
   var $clientMap   = array(); // Client ids.
@@ -71,8 +72,13 @@ class ttExportHelper {
     fwrite($file, "  <name><![CDATA[".$user->team."]]></name>\n");
     fwrite($file, "</team>\n");
 
+    // Prepare role map.
+    $roles = ttTeamHelper::getAllRoles($user->team_id);
+    foreach ($roles as $key=>$role_item)
+      $this->roleMap[$role_item['id']] = $key + 1;
+
     // Prepare user map.
-    $users = ttTeamHelper::getAllUsers($user->team_id, true);
+    $users = ttExportHelper::getAllUsers();
     foreach ($users as $key=>$user_item)
       $this->userMap[$user_item['id']] = $key + 1;
 
@@ -106,10 +112,22 @@ class ttExportHelper {
     foreach ($custom_field_options as $key=>$option)
       $this->customFieldOptionMap[$option['id']] = $key + 1;
 
+    // Write roles.
+    fwrite($file, "<roles>\n");
+    $roles = ttTeamHelper::getAllRoles($user->team_id);
+    foreach ($roles as $role) {
+      fwrite($file, "  <role id=\"".$this->roleMap[$role['id']]."\" rank=\"".$role['rank']."\"".
+        " rights=\"".$role['rights']."\">\n");
+      fwrite($file, "    <name><![CDATA[".$role['name']."]]></name>\n");
+      fwrite($file, "  </role>\n");
+    }
+    fwrite($file, "</roles>\n");
+    unset($roles);
+
     // Write users.
     fwrite($file, "<users>\n");
     foreach ($users as $user_item) {
-      fwrite($file, "  <user id=\"".$this->userMap[$user_item['id']]."\" login=\"".htmlentities($user_item['login'])."\" password=\"".$user_item['password']."\" role=\"".$user_item['role']."\" client_id=\"".$this->clientMap[$user_item['client_id']]."\" rate=\"".$user_item['rate']."\" email=\"".$user_item['email']."\" status=\"".$user_item['status']."\">\n");
+      fwrite($file, "  <user id=\"".$this->userMap[$user_item['id']]."\" login=\"".htmlentities($user_item['login'])."\" password=\"".$user_item['password']."\" role_id=\"".$this->roleMap[$user_item['role_id']]."\" client_id=\"".$this->clientMap[$user_item['client_id']]."\" rate=\"".$user_item['rate']."\" email=\"".$user_item['email']."\" status=\"".$user_item['status']."\">\n");
       fwrite($file, "    <name><![CDATA[".$user_item['name']."]]></name>\n");
       fwrite($file, "  </user>\n");
     }
@@ -261,7 +279,7 @@ class ttExportHelper {
             $user_list .= (strlen($user_list) == 0? '' : ',').$this->userMap[$v];
         }
       }
-      fwrite($file, "\t<fav_report user_id=\"".$this->userMap[$fav_report['user_id']]."\"".
+      fwrite($file, "  <fav_report user_id=\"".$this->userMap[$fav_report['user_id']]."\"".
         " client_id=\"".$this->clientMap[$fav_report['client_id']]."\"".
         " cf_1_option_id=\"".$this->customFieldOptionMap[$fav_report['cf_1_option_id']]."\"".
         " project_id=\"".$this->projectMap[$fav_report['project_id']]."\"".
@@ -283,26 +301,15 @@ class ttExportHelper {
         " show_custom_field_1=\"".$fav_report['show_custom_field_1']."\"".
         " group_by=\"".$fav_report['group_by']."\"".
         " show_totals_only=\"".$fav_report['show_totals_only']."\">\n");
-      fwrite($file, "\t\t<name><![CDATA[".$fav_report["name"]."]]></name>\n");
-      fwrite($file, "\t</fav_report>\n");
+      fwrite($file, "    <name><![CDATA[".$fav_report["name"]."]]></name>\n");
+      fwrite($file, "  </fav_report>\n");
     }
     fwrite($file, "</fav_reports>\n");
     unset($fav_reports);
 
-    // Write roles.
-    fwrite($file, "<roles>\n");
-    $roles = ttTeamHelper::getAllRoles($user->team_id);
-    foreach ($roles as $role) {
-      fwrite($file, "\t<role rank=\"".$role['rank']."\"".
-        " rights=\"".$role['rights']."\">\n");
-      fwrite($file, "\t\t<name><![CDATA[".$role['name']."]]></name>\n");
-      fwrite($file, "\t</role>\n");
-    }
-    fwrite($file, "</roles>\n");
-    unset($roles);
-
     // Cleanup.
     unset($users);
+    $this->roleMap = array();
     $this->userMap = array();
     $this->projectMap = array();
     $this->taskMap = array();
@@ -347,5 +354,22 @@ class ttExportHelper {
     }
     fclose ($in_file);
     return true;
+  }
+
+  // The getAllUsers obtains all users in team.
+  static function getAllUsers() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $sql = "select * from tt_users where team_id = $user->team_id order by upper(name)"; // Note: deleted users are included.
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
   }
 }
