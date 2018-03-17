@@ -73,7 +73,7 @@ class ttExportHelper {
     fwrite($file, "</team>\n");
 
     // Prepare role map.
-    $roles = ttTeamHelper::getAllRoles($user->team_id);
+    $roles = ttExportHelper::getAllRoles();
     foreach ($roles as $key=>$role_item)
       $this->roleMap[$role_item['id']] = $key + 1;
 
@@ -114,7 +114,6 @@ class ttExportHelper {
 
     // Write roles.
     fwrite($file, "<roles>\n");
-    $roles = ttTeamHelper::getAllRoles($user->team_id);
     foreach ($roles as $role) {
       fwrite($file, "  <role id=\"".$this->roleMap[$role['id']]."\" rank=\"".$role['rank']."\"".
         " rights=\"".$role['rights']."\">\n");
@@ -127,7 +126,8 @@ class ttExportHelper {
     // Write users.
     fwrite($file, "<users>\n");
     foreach ($users as $user_item) {
-      fwrite($file, "  <user id=\"".$this->userMap[$user_item['id']]."\" login=\"".htmlentities($user_item['login'])."\" password=\"".$user_item['password']."\" role_id=\"".$this->roleMap[$user_item['role_id']]."\" client_id=\"".$this->clientMap[$user_item['client_id']]."\" rate=\"".$user_item['rate']."\" email=\"".$user_item['email']."\" status=\"".$user_item['status']."\">\n");
+      $role_id = $user_item['rank'] == 512 ? 0 : $this->roleMap[$user_item['role_id']]; // Special role_id 0 (not null) for top manager.
+      fwrite($file, "  <user id=\"".$this->userMap[$user_item['id']]."\" login=\"".htmlentities($user_item['login'])."\" password=\"".$user_item['password']."\" role_id=\"".$role_id."\" client_id=\"".$this->clientMap[$user_item['client_id']]."\" rate=\"".$user_item['rate']."\" email=\"".$user_item['email']."\" status=\"".$user_item['status']."\">\n");
       fwrite($file, "    <name><![CDATA[".$user_item['name']."]]></name>\n");
       fwrite($file, "  </user>\n");
     }
@@ -356,12 +356,30 @@ class ttExportHelper {
     return true;
   }
 
-  // The getAllUsers obtains all users in team.
+  // getAllRoles - obtains all roles defined for team.
+  static function getAllRoles() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $result = array();
+    $sql = "select * from tt_roles where team_id = $user->team_id";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
+  // The getAllUsers obtains all users in team for the purpose of export.
   static function getAllUsers() {
     global $user;
     $mdb2 = getConnection();
 
-    $sql = "select * from tt_users where team_id = $user->team_id order by upper(name)"; // Note: deleted users are included.
+    $sql = "select u.*, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.team_id = $user->team_id order by upper(u.name)"; // Note: deleted users are included.
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
