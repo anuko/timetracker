@@ -139,6 +139,24 @@ class ttTeamHelper {
     return false;
   }
 
+  // The getAllUsers obtains all users in a given team.
+  static function getAllUsers($team_id, $all_fields = false) {
+    $mdb2 = getConnection();
+    if ($all_fields)
+      $sql = "select * from tt_users where team_id = $team_id order by upper(name)";
+    else
+      $sql = "select id, name from tt_users where team_id = $team_id order by upper(name)";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
   // getActiveProjects - returns an array of active projects for team.
   static function getActiveProjects($team_id)
   {
