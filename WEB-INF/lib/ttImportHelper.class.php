@@ -48,7 +48,9 @@ class ttImportHelper {
   var $canImport      = true;    // False if we cannot import data due to a login collision.
   var $teamData       = array(); // Array of team data such as team name, etc.
   var $team_id        = null;    // New team id we are importing. It is created during the import operation.
+  var $roles          = array(); // Array of arrays of role properties.
   var $users          = array(); // Array of arrays of user properties.
+  var $top_role_id    = null;    // Top manager role id on the new server.
 
   // The following arrays are maps between entity ids in the file versus the database.
   // In the file they are sequential (1,2,3...) while in the database the entities have different ids.
@@ -102,6 +104,10 @@ class ttImportHelper {
       // Cannot create the team here. Need to determine whether logins collide with existing logins.
       $this->currentElement = array();
     }
+    if ($name == 'ROLE') {
+      $this->roles[$this->currentElement['ID']] = $this->currentElement;
+      $this->currentElement = array();
+    }
     if ($name == 'USER') {
       $this->users[$this->currentElement['ID']] = $this->currentElement;
       $this->currentElement = array();
@@ -117,6 +123,7 @@ class ttImportHelper {
 
       // Now we can create a team.
       if ($this->canImport) {
+        $this->top_role_id = ttRoleHelper::getRoleByRank(512, 0);
         $team_id = ttTeamHelper::insert(array(
           'name' => $this->teamData['NAME'],
           'currency' => $this->teamData['CURRENCY'],
@@ -136,10 +143,23 @@ class ttImportHelper {
           'config' => $this->teamData['CONFIG']));
         if ($team_id) {
           $this->team_id = $team_id;
+
+          // Create roles.
+          foreach ($this->roles as $key=>$role_item) {
+            $role_id = ttRoleHelper::insert(array(
+              'team_id' => $this->team_id,
+              'name' => $role_item['NAME'],
+              'rank' => $role_item['RANK'],
+              'rights' => $role_item['RIGHTS'],
+              'status' => $role_item['STATUS']));
+            $this->roleMap[$role_item['ID']] = $role_id;
+          }
+
           foreach ($this->users as $key=>$user_item) {
+            $role_id = $user_item['ROLE_ID'] === '0' ? $this->top_role_id :  $this->roleMap[$user_item['ROLE_ID']]; // 0 (not null) means top manager role.
             $user_id = ttUserHelper::insert(array(
               'team_id' => $this->team_id,
-              'role_id' => $user_item['ROLE_ID'], // Note: NOT mapped value. Not implemented currently, need to fix.
+              'role_id' => $role_id,
               'client_id' => $user_item['CLIENT_ID'], // Note: NOT mapped value, replaced in CLIENT handler.
               'name' => $user_item['NAME'],
               'login' => $user_item['LOGIN'],
@@ -312,23 +332,6 @@ class ttImportHelper {
         'chcf_1' => (int) $this->currentElement['SHOW_CUSTOM_FIELD_1'],
         'group_by' => $this->currentElement['GROUP_BY'],
         'chtotalsonly' => (int) $this->currentElement['SHOW_TOTALS_ONLY']));
-    }
-
-    if ($name == 'ROLE' && $this->canImport) {
-      $this->roleMap[$this->currentElement['ID']] = ttRoleHelper::insert(array(
-        'team_id' => $this->team_id,
-        'name' => $this->currentElement['NAME'],
-        'rank' => $this->currentElement['RANK'],
-        'rights' => $this->currentElement['RIGHTS'],
-        'status' => $this->currentElement['STATUS']));
-
-      // Update role_id for tt_users to a mapped value.
-      // We did not do it during user insertion because roleMap was not ready then.
-      // TODO: write setMappedRole function.
-      /*
-        if ($this->currentElement['ID'] != $this->roleMap[$this->currentElement['ID']])
-          ttRoleHelper::setMappedRole($this->team_id, $this->currentElement['ID'], $this->roleMap[$this->currentElement['ID']]);
-       */
     }
     $this->currentTag = '';
   }

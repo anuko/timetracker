@@ -166,7 +166,11 @@ class ttRoleHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    return true;
+    $sql = "SELECT LAST_INSERT_ID() AS last_id";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $last_id = $val['last_id'];
+    return $last_id;
   }
 
   // createPredefinedRoles - creates a set of predefined roles for the team to use.
