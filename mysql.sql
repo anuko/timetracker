@@ -14,7 +14,7 @@
 #
 CREATE TABLE `tt_teams` (
   `id` int(11) NOT NULL auto_increment,                      # team id
-  `timestamp` timestamp default CURRENT_TIMESTAMP,           # modification timestamp
+  `timestamp` timestamp default CURRENT_TIMESTAMP,           # Modification timestamp. TODO: redo all timestamps to survive beyond 2038.
   `name` varchar(80) default NULL,                           # team name
   `currency` varchar(7) default NULL,                        # team currency symbol
   `decimal_mark` char(1) NOT NULL default '.',               # separator in decimals
@@ -83,6 +83,14 @@ CREATE TABLE `tt_users` (
   `client_id` int(11) default NULL,                # client id for "client" user role
   `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
   `email` varchar(100) default NULL,               # user email
+  `created_timestamp` timestamp default NULL,      # creation timestamp
+  `created_ip` varchar(45) default NULL,           # creation ip
+  `created_by` int(11) default NULL,               # creator user_id (null for self)
+  `modified_timestamp` timestamp default NULL,     # modification timestamp
+  `modified_ip` varchar(45) default NULL,          # modification ip
+  `modified_by` int(11) default NULL,              # modifier user_id
+  `last_access_timestamp` timestamp default NULL,  # last access timestamp
+  `last_access_ip` varchar(45) default NULL,       # last access ip
   `status` tinyint(4) default 1,                   # user status
   PRIMARY KEY (`id`)
 );
@@ -426,4 +434,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.51', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.52', now()); # TODO: change when structure changes.

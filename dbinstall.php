@@ -805,7 +805,7 @@ if ($_POST) {
     print "Updated $users_updated users...<br>\n";
   }
 
-  if ($_POST["convert11744to11751"]) {
+  if ($_POST["convert11744to11752"]) {
     setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.44') set rights = replace(rights, 'override_punch_mode,override_date_lock', 'override_punch_mode,override_own_punch_mode,override_date_lock')");
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.48' where param_name = 'version_db' and param_value = '1.17.44'");
     setChange("update `tt_users` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.48') set role_id = (select id from tt_roles where team_id = 0 and rank = 512) where role = 324");
@@ -814,6 +814,15 @@ if ($_POST) {
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.50' where param_name = 'version_db' and param_value = '1.17.49'");
     setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.50') set rights = replace(rights, 'override_date_lock,swap_roles', 'override_date_lock,override_own_date_lock,swap_roles')");
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.51' where param_name = 'version_db' and param_value = '1.17.50'");
+    setChange("ALTER TABLE `tt_users` ADD `created` datetime default NULL AFTER `email`");
+    setChange("ALTER TABLE `tt_users` ADD `created_ip` varchar(45) default NULL AFTER `created`");
+    setChange("ALTER TABLE `tt_users` ADD `created_by` int(11) default NULL AFTER `created_ip`");
+    setChange("ALTER TABLE `tt_users` ADD `modified` datetime default NULL AFTER `created_by`");
+    setChange("ALTER TABLE `tt_users` ADD `modified_ip` varchar(45) default NULL AFTER `modified`");
+    setChange("ALTER TABLE `tt_users` ADD `modified_by` int(11) default NULL AFTER `modified_ip`");
+    setChange("ALTER TABLE `tt_users` ADD `accessed` datetime default NULL AFTER `modified_by`");
+    setChange("ALTER TABLE `tt_users` ADD `accessed_ip` varchar(45) default NULL AFTER `accessed`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.17.52' where param_name = 'version_db' and param_value = '1.17.51'");
   }
 
   if ($_POST["cleanup"]) {
@@ -859,7 +868,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.17.51)</b>
+    <td width="80%"><b>Create database structure (v1.17.52)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -899,8 +908,8 @@ if ($_POST) {
     <td><input type="submit" name="convert11400to11744" value="Update"><br><input type="submit" name="update_role_id" value="Update role_id"></td>
   </tr>
     <tr valign="top">
-    <td>Update database structure (v1.17.44 to v1.17.51)</td>
-    <td><input type="submit" name="convert11744to11751" value="Update"></td>
+    <td>Update database structure (v1.17.44 to v1.17.52)</td>
+    <td><input type="submit" name="convert11744to11752" value="Update"></td>
   </tr>
 </table>
 

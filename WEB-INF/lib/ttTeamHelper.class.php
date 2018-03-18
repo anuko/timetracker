@@ -675,6 +675,11 @@ class ttTeamHelper {
 
     $mdb2 = getConnection();
 
+    // Mark roles deleted.
+    $sql = "update tt_roles set status = NULL where team_id = $team_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
     // Mark projects deleted.
     $sql = "update tt_projects set status = NULL where team_id = $team_id";
     $affected = $mdb2->exec($sql);
