@@ -244,7 +244,7 @@ function handleCheckboxes() {
         <tr>
           <td colspan="3">
             <table border="0" width="100%">
-{if $user->isPluginEnabled('cl') || $user->isPluginEnabled('iv') || $user->isPluginEnabled('ps')}
+{if $user->canManageTeam() || $user->isPluginEnabled('cl') || $user->isPluginEnabled('iv') || $user->isPluginEnabled('ps')}
               <tr>
   {if $user->isPluginEnabled('cl')}
                 <td width="25%"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td>
@@ -255,7 +255,7 @@ function handleCheckboxes() {
   {if ($user->canManageTeam() && $user->isPluginEnabled('ps'))}
                 <td width="25%"><label>{$forms.reportForm.chpaid.control}&nbsp;{$i18n.label.paid}</label></td>
   {/if}
-  {if ($user->canManageTeam())}
+  {if $user->canManageTeam()}
                 <td width="25%"><label>{$forms.reportForm.chip.control}&nbsp;{$i18n.label.ip}</label></td>
   {/if}
               </tr>
