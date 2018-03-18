@@ -84,10 +84,10 @@ CREATE TABLE `tt_users` (
   `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
   `email` varchar(100) default NULL,               # user email
   `created` datetime default NULL,                 # creation timestamp
-  `created_ip` varchar(45) default NULL,           # creation ip
+  `created_ip` varchar(45) default NULL,           # creator ip
   `created_by` int(11) default NULL,               # creator user_id (null for self)
   `modified` datetime default NULL,                # modification timestamp
-  `modified_ip` varchar(45) default NULL,          # modification ip
+  `modified_ip` varchar(45) default NULL,          # modifier ip
   `modified_by` int(11) default NULL,              # modifier user_id
   `accessed` datetime default NULL,                # last access timestamp
   `accessed_ip` varchar(45) default NULL,          # last access ip
@@ -183,6 +183,12 @@ CREATE TABLE `tt_log` (
   `comment` text,                                  # user provided comment for time record
   `billable` tinyint(4) default 0,                 # whether the record is billable or not
   `paid` tinyint(4) default 0,                     # whether the record is paid
+  `created` datetime default NULL,                 # creation timestamp
+  `created_ip` varchar(45) default NULL,           # creator ip
+  `created_by` int(11) default NULL,               # creator user_id
+  `modified` datetime default NULL,                # modification timestamp
+  `modified_ip` varchar(45) default NULL,          # modifier ip
+  `modified_by` int(11) default NULL,              # modifier user_id
   `status` tinyint(4) default 1,                   # time record status
   PRIMARY KEY (`id`)
 );
@@ -434,4 +440,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.53', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.56', now()); # TODO: change when structure changes.
