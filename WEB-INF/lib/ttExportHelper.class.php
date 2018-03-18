@@ -73,12 +73,12 @@ class ttExportHelper {
     fwrite($file, "</team>\n");
 
     // Prepare role map.
-    $roles = ttExportHelper::getAllRoles();
+    $roles = $this->getRoles();
     foreach ($roles as $key=>$role_item)
       $this->roleMap[$role_item['id']] = $key + 1;
 
     // Prepare user map.
-    $users = ttExportHelper::getAllUsers();
+    $users = $this->getUsers();
     foreach ($users as $key=>$user_item)
       $this->userMap[$user_item['id']] = $key + 1;
 
@@ -356,8 +356,24 @@ class ttExportHelper {
     return true;
   }
 
-  // getAllRoles - obtains all roles defined for team.
-  static function getAllRoles() {
+  /*
+   * Note about the utility functions below.
+   * We have roughly 3 groups of operations:
+   *   1) Regular system usage for tracking time, etc.
+   *   2) Admin usage - used infrequently.
+   *   3) Export - used infrequently.
+   *
+   * It is tempting to have a generic function to get things done for
+   * all situations. However, as export and admin access are one-off
+   * operations, while regular system usage is daily and must be efficient,
+   * the current approach is to have SEPARATE functions for each mode.
+   *
+   * This is because each mode requires a slightly different approach,
+   * and we don't want to over-complicate things.
+   */
+
+  // getRoles - obtains all roles defined for team.
+  function getRoles() {
     global $user;
     $mdb2 = getConnection();
 
@@ -374,8 +390,8 @@ class ttExportHelper {
     return false;
   }
 
-  // The getAllUsers obtains all users in team for the purpose of export.
-  static function getAllUsers() {
+  // The getUsers obtains all users in team for the purpose of export.
+  function getUsers() {
     global $user;
     $mdb2 = getConnection();
 
