@@ -363,6 +363,9 @@ class ttExportHelper {
    *   2) Admin usage - used infrequently.
    *   3) Export - used infrequently.
    *
+   * TODO: we also have user registration process without initialized user.
+   * Perhaps we need a separate helper class for this. Think about it.
+   *
    * It is tempting to have a generic function to get things done for
    * all situations. However, as export and admin access are one-off
    * operations, while regular system usage is daily and must be efficient,

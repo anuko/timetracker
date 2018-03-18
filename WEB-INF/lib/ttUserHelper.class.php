@@ -189,9 +189,11 @@ class ttUserHelper {
       $status_part = ", status = $status";
     }
 
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+
     $sql = "update tt_users set login = ".$mdb2->quote($fields['login']).
       "$pass_part, name = ".$mdb2->quote($fields['name']).
-      "$role_id_part $client_part $rate_part $status_part, email = ".$mdb2->quote($fields['email']).
+      "$role_id_part $client_part $rate_part $modified_part $status_part, email = ".$mdb2->quote($fields['email']).
       " where id = $user_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
