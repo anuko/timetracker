@@ -255,6 +255,9 @@ function handleCheckboxes() {
   {if ($user->canManageTeam() && $user->isPluginEnabled('ps'))}
                 <td width="25%"><label>{$forms.reportForm.chpaid.control}&nbsp;{$i18n.label.paid}</label></td>
   {/if}
+  {if ($user->canManageTeam())}
+                <td width="25%"><label>{$forms.reportForm.chip.control}&nbsp;{$i18n.label.ip}</label></td>
+  {/if}
               </tr>
 {/if}
               <tr>

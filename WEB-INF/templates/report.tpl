@@ -47,6 +47,7 @@
   {if $bean->getAttribute('chnote')}<td class="tableHeader">{$i18n.label.note}</td>{/if}
   {if $bean->getAttribute('chcost')}<td class="tableHeaderCentered" width="5%">{$i18n.label.cost}</td>{/if}
   {if $bean->getAttribute('chpaid')}<td class="tableHeader">{$i18n.label.paid}</td>{/if}
+  {if $bean->getAttribute('chip')}<td class="tableHeader">{$i18n.label.ip}</td>{/if}
   {if $bean->getAttribute('chinvoice')}<td class="tableHeader">{$i18n.label.invoice}</td>{/if}
       </tr>
   {foreach $report_items as $item}
@@ -68,6 +69,7 @@
         {if $bean->getAttribute('chnote')}<td></td>{/if}
         {if $bean->getAttribute('chcost')}<td class="cellRightAlignedSubtotal">{if $user->canManageTeam() || $user->isClient()}{$subtotals[$prev_grouped_by]['cost']}{else}{$subtotals[$prev_grouped_by]['expenses']}{/if}</td>{/if}
         {if $bean->getAttribute('chpaid')}<td></td>{/if}
+        {if $bean->getAttribute('chip')}<td></td>{/if}
         {if $bean->getAttribute('chinvoice')}<td></td>{/if}
         {if $use_checkboxes}<td></td>{/if}
       </tr>
@@ -92,6 +94,7 @@
     {if $bean->getAttribute('chnote')}<td class="cellLeftAligned">{$item.note|escape}</td>{/if}
     {if $bean->getAttribute('chcost')}<td class="cellRightAligned">{if $user->canManageTeam() || $user->isClient()}{$item.cost}{else}{$item.expense}{/if}</td>{/if}
     {if $bean->getAttribute('chpaid')}<td class="cellRightAligned">{if $item.paid == 1}{$i18n.label.yes}{else}{$i18n.label.no}{/if}{/if}
+    {if $bean->getAttribute('chip')}<td class="cellRightAligned">{if $item.modified}{$item.modified_ip} {$item.modified}{else}{$item.created_ip} {$item.created}{/if}{/if}
     {if $bean->getAttribute('chinvoice')}<td class="cellRightAligned">{$item.invoice|escape}</td>{/if}
     {if $use_checkboxes}
       {if 1 == $item.type}<td bgcolor="white"><input type="checkbox" name="log_id_{$item.id}"></td>{/if}
@@ -116,6 +119,7 @@
     {if $bean->getAttribute('chnote')}<td></td>{/if}
     {if $bean->getAttribute('chcost')}<td class="cellRightAlignedSubtotal">{if $user->canManageTeam() || $user->isClient()}{$subtotals[$cur_grouped_by]['cost']}{else}{$subtotals[$cur_grouped_by]['expenses']}{/if}</td>{/if}
     {if $bean->getAttribute('chpaid')}<td></td>{/if}
+    {if $bean->getAttribute('chip')}<td></td>{/if}
     {if $bean->getAttribute('chinvoice')}<td></td>{/if}
     {if $use_checkboxes}<td></td>{/if}
       </tr>
@@ -135,6 +139,7 @@
     {if $bean->getAttribute('chnote')}<td></td>{/if}
     {if $bean->getAttribute('chcost')}<td nowrap class="cellRightAlignedSubtotal">{$user->currency|escape} {if $user->canManageTeam() || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>{/if}
     {if $bean->getAttribute('chpaid')}<td></td>{/if}
+    {if $bean->getAttribute('chip')}<td></td>{/if}
     {if $bean->getAttribute('chinvoice')}<td></td>{/if}
     {if $use_checkboxes}<td></td>{/if}
       </tr>

@@ -291,6 +291,13 @@ class ttReportHelper {
     // Add paid status.
     if ($canViewReports && $bean->getAttribute('chpaid'))
       array_push($fields, 'l.paid as paid');
+    // Add IP address.
+    if ($canViewReports && $bean->getAttribute('chip')) {
+      array_push($fields, 'l.created as created');
+      array_push($fields, 'l.created_ip as created_ip');
+      array_push($fields, 'l.modified as modified');
+      array_push($fields, 'l.modified_ip as modified_ip');
+    }
 
     // Add invoice name if it is selected.
     if (($canViewReports || $isClient) && $bean->getAttribute('chinvoice'))
@@ -361,6 +368,14 @@ class ttReportHelper {
       // Add paid status.
       if ($canViewReports && $bean->getAttribute('chpaid'))
         array_push($fields, 'ei.paid as paid');
+      // Add IP address. NULL for now for expenses.
+      if ($canViewReports && $bean->getAttribute('chip')) {
+        array_push($fields, 'null as created');
+        array_push($fields, 'null as created_ip');
+        array_push($fields, 'null as modified');
+        array_push($fields, 'null as modified_ip');
+      }
+
       // Add invoice name if it is selected.
       if (($canViewReports || $isClient) && $bean->getAttribute('chinvoice'))
         array_push($fields, 'i.name as invoice');

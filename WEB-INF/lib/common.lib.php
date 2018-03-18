@@ -341,6 +341,7 @@ function ttAccessAllowed($required_right)
 
   // Check if user has the right.
   if (in_array($required_right, $user->rights)) {
+    import('ttUserHelper');
     ttUserHelper::updateLastAccess();
     return true;
   }

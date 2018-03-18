@@ -154,6 +154,7 @@ $i18n_key_words = array(
 'label.notes' => 'Notes',
 'label.item' => 'Item',
 'label.cost' => 'Cost',
+'label.ip' => 'IP',
 'label.day_total' => 'Day total',
 'label.week_total' => 'Week total',
 'label.month_total' => 'Month total',

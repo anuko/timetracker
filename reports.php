@@ -187,6 +187,10 @@ if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'checkbox','name'=>'chclient'));
 if (($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'chinvoice'));
+if ($user->canManageTeam() && $user->isPluginEnabled('ps'))
+  $form->addInput(array('type'=>'checkbox','name'=>'chpaid'));
+if ($user->canManageTeam())
+  $form->addInput(array('type'=>'checkbox','name'=>'chip'));
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkbox','name'=>'chproject'));
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
@@ -201,8 +205,6 @@ $form->addInput(array('type'=>'checkbox','name'=>'chcost'));
 // If we have a custom field - add a checkbox for it.
 if ($custom_fields && $custom_fields->fields[0])
   $form->addInput(array('type'=>'checkbox','name'=>'chcf_1'));
-if ($user->canManageTeam() && $user->isPluginEnabled('ps'))
-  $form->addInput(array('type'=>'checkbox','name'=>'chpaid'));
 // Add group by control.
 $group_by_options['no_grouping'] = $i18n->getKey('form.reports.group_by_no');
 $group_by_options['date'] = $i18n->getKey('form.reports.group_by_date');
@@ -239,6 +241,8 @@ if ($request->isGet() && !$bean->isSaved()) {
   $form->setValueByElement('end_date', $period->getEndDate());
   $form->setValueByElement('chclient', '1');
   $form->setValueByElement('chinvoice', '0');
+  $form->setValueByElement('chpaid', '0');
+  $form->setValueByElement('chip', '0');
   $form->setValueByElement('chproject', '1');
   $form->setValueByElement('chstart', '1');
   $form->setValueByElement('chduration', '1');
@@ -247,7 +251,6 @@ if ($request->isGet() && !$bean->isSaved()) {
   $form->setValueByElement('chfinish', '1');
   $form->setValueByElement('chnote', '1');
   $form->setValueByElement('chcf_1', '0');
-  $form->setValueByElement('chpaid', '0');
   $form->setValueByElement('chtotalsonly', '0');
 }
 
