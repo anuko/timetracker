@@ -474,4 +474,13 @@ class ttUserHelper {
     }
     return true;
   }
+
+  // updateLastAccess - updates last access info for user in db.
+  static function updateLastAccess() {
+    global $user;
+    $mdb2 = getConnection();
+    $accessed_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
+    $sql = "update tt_users set accessed = now(), accessed_ip = $accessed_ip where id = $user->id";
+    $mdb2->exec($sql);
+  }
 }
