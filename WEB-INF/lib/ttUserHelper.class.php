@@ -109,6 +109,7 @@ class ttUserHelper {
 
   // insert - inserts a user into database.
   static function insert($fields, $hash = true) {
+    global $user;
     $mdb2 = getConnection();
 
     $password = $mdb2->quote($fields['password']);
@@ -123,10 +124,12 @@ class ttUserHelper {
       $status_f = ', status';
       $status_v = ', '.$mdb2->quote($fields['status']);
     }
+    $created_ip_v = ', '.$mdb2->quote($_SERVER['REMOTE_ADDR']);
+    $created_by_v = ', '.$mdb2->quote($user->id);
 
-    $sql = "insert into tt_users (name, login, password, team_id, role_id, client_id, rate, email $status_f) values (".
+    $sql = "insert into tt_users (name, login, password, team_id, role_id, client_id, rate, email, created, created_ip, created_by $status_f) values (".
       $mdb2->quote($fields['name']).", ".$mdb2->quote($fields['login']).
-      ", $password, $team_id, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, ".$mdb2->quote($email)." $status_v)";
+      ", $password, $team_id, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, ".$mdb2->quote($email).", now() $created_ip_v $created_by_v $status_v)";
     $affected = $mdb2->exec($sql);
 
     // Now deal with project assignment.
