@@ -823,6 +823,8 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_users` ADD `accessed` datetime default NULL AFTER `modified_by`");
     setChange("ALTER TABLE `tt_users` ADD `accessed_ip` varchar(45) default NULL AFTER `accessed`");
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.52' where param_name = 'version_db' and param_value = '1.17.51'");
+    setChange("ALTER TABLE `tt_site_config` CHANGE `updated` `modified` datetime default NULL");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.17.53', modified = now() where param_name = 'version_db' and param_value = '1.17.52'");
   }
 
   if ($_POST["cleanup"]) {

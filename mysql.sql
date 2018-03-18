@@ -83,14 +83,14 @@ CREATE TABLE `tt_users` (
   `client_id` int(11) default NULL,                # client id for "client" user role
   `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
   `email` varchar(100) default NULL,               # user email
-  `created_timestamp` timestamp default NULL,      # creation timestamp
+  `created` datetime default NULL,                 # creation timestamp
   `created_ip` varchar(45) default NULL,           # creation ip
   `created_by` int(11) default NULL,               # creator user_id (null for self)
-  `modified_timestamp` timestamp default NULL,     # modification timestamp
+  `modified` datetime default NULL,                # modification timestamp
   `modified_ip` varchar(45) default NULL,          # modification ip
   `modified_by` int(11) default NULL,              # modifier user_id
-  `last_access_timestamp` timestamp default NULL,  # last access timestamp
-  `last_access_ip` varchar(45) default NULL,       # last access ip
+  `accessed` datetime default NULL,                # last access timestamp
+  `accessed_ip` varchar(45) default NULL,          # last access ip
   `status` tinyint(4) default 1,                   # user status
   PRIMARY KEY (`id`)
 );
@@ -429,9 +429,9 @@ ALTER TABLE `tt_monthly_quotas`
 CREATE TABLE `tt_site_config` (
   `param_name` varchar(32) NOT NULL, # parameter name
   `param_value` text default NULL,   # parameter value
-  `created` datetime default NULL,   # creation time
-  `updated` datetime default NULL,   # modification time
+  `created` datetime default NULL,   # creation timestamp
+  `modified` datetime default NULL,  # modification timestamp
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.52', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.53', now()); # TODO: change when structure changes.
