@@ -389,7 +389,6 @@ class ttTimeHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $timestamp = isset($fields['timestamp']) ? $fields['timestamp'] : '';
     $user_id = $fields['user_id'];
     $date = $fields['date'];
     $start = $fields['start'];
@@ -417,21 +416,14 @@ class ttTimeHelper {
       if ('00:00' == $finish) $finish = '24:00';
     }
 
-    if (!$timestamp) {
-      $timestamp = date('YmdHis'); //yyyymmddhhmmss
-      // TODO: this timestamp could be illegal if we hit inside DST switch deadzone, such as '2016-03-13 02:30:00'
-      // Anything between 2am and 3am on DST introduction date will not work if we run on a system with DST on.
-      // We need to address this properly to avoid potential complications.
-    }
-
     $created_v = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
 
     if (!$billable) $billable = 0;
     if (!$paid) $paid = 0;
 
     if ($duration) {
-      $sql = "insert into tt_log (timestamp, user_id, date, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by $status_f) ".
-        "values ('$timestamp', $user_id, ".$mdb2->quote($date).", '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v $status_v)";
+      $sql = "insert into tt_log (user_id, date, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by $status_f) ".
+        "values ($user_id, ".$mdb2->quote($date).", '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v $status_v)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -440,8 +432,8 @@ class ttTimeHelper {
       if ($duration === false) $duration = 0;
       if (!$duration && ttTimeHelper::getUncompleted($user_id)) return false;
 
-      $sql = "insert into tt_log (timestamp, user_id, date, start, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by $status_f) ".
-        "values ('$timestamp', $user_id, ".$mdb2->quote($date).", '$start', '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v $status_v)";
+      $sql = "insert into tt_log (user_id, date, start, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by $status_f) ".
+        "values ($user_id, ".$mdb2->quote($date).", '$start', '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v $status_v)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -646,7 +638,7 @@ class ttTimeHelper {
 
     $mdb2 = getConnection();
 
-    $sql = "select l.id as id, l.timestamp as timestamp, TIME_FORMAT(l.start, $sql_time_format) as start,
+    $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,
       TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
       TIME_FORMAT(l.duration, '%k:%i') as duration,
       p.name as project_name, t.name as task_name, l.comment, l.client_id, l.project_id, l.task_id, l.invoice_id, l.billable, l.paid, l.date
@@ -672,7 +664,7 @@ class ttTimeHelper {
 
     $mdb2 = getConnection();
 
-    $sql = "select l.id, l.timestamp, l.user_id, l.date, TIME_FORMAT(l.start, '%k:%i') as start,
+    $sql = "select l.id, l.user_id, l.date, TIME_FORMAT(l.start, '%k:%i') as start,
       TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), '%k:%i') as finish,
       TIME_FORMAT(l.duration, '%k:%i') as duration,
       l.client_id, l.project_id, l.task_id, l.invoice_id, l.comment, l.billable, l.paid, l.status

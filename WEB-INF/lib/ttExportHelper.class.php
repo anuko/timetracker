@@ -237,7 +237,7 @@ class ttExportHelper {
       foreach ($records as $record) {
         $key++;
         $this->logMap[$record['id']] = $key;
-        fwrite($file, "  <log_item id=\"$key\" timestamp=\"".$record['timestamp']."\" user_id=\"".$this->userMap[$record['user_id']]."\" date=\"".$record['date']."\" start=\"".$record['start']."\" finish=\"".$record['finish']."\" duration=\"".($record['start']?"":$record['duration'])."\" client_id=\"".$this->clientMap[$record['client_id']]."\" project_id=\"".$this->projectMap[$record['project_id']]."\" task_id=\"".$this->taskMap[$record['task_id']]."\" invoice_id=\"".$this->invoiceMap[$record['invoice_id']]."\" billable=\"".$record['billable']."\" paid=\"".$record['paid']."\" status=\"".$record['status']."\">\n");
+        fwrite($file, "  <log_item id=\"$key\" user_id=\"".$this->userMap[$record['user_id']]."\" date=\"".$record['date']."\" start=\"".$record['start']."\" finish=\"".$record['finish']."\" duration=\"".($record['start']?"":$record['duration'])."\" client_id=\"".$this->clientMap[$record['client_id']]."\" project_id=\"".$this->projectMap[$record['project_id']]."\" task_id=\"".$this->taskMap[$record['task_id']]."\" invoice_id=\"".$this->invoiceMap[$record['invoice_id']]."\" billable=\"".$record['billable']."\" paid=\"".$record['paid']."\" status=\"".$record['status']."\">\n");
         fwrite($file, "    <comment><![CDATA[".$record['comment']."]]></comment>\n");
         fwrite($file, "  </log_item>\n");
       }

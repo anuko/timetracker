@@ -171,7 +171,6 @@ create index task_idx on tt_project_task_binds(task_id);
 #
 CREATE TABLE `tt_log` (
   `id` bigint NOT NULL auto_increment,             # time record id
-  `timestamp` timestamp default CURRENT_TIMESTAMP, # modification timestamp
   `user_id` int(11) NOT NULL,                      # user id
   `date` date NOT NULL,                            # date the record is for
   `start` time default NULL,                       # record start time (for example, 09:00)
