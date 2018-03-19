@@ -133,6 +133,10 @@ if ('xml' == $type) {
         print "]]></cost>\n";
       }
       if ($bean->getAttribute('chpaid')) print "\t<paid><![CDATA[".$item['paid']."]]></paid>\n";
+      if ($bean->getAttribute('chip')) {
+        $ip = $item['modified'] ? $item['modified_ip'].' '.$item['modified'] : $item['created_ip'].' '.$item['created'];
+        print "\t<ip><![CDATA[".$ip."]]></ip>\n";
+      }
       if ($bean->getAttribute('chinvoice')) print "\t<invoice><![CDATA[".$item['invoice']."]]></invoice>\n";
 
       print "</row>\n";
@@ -200,6 +204,7 @@ if ('csv' == $type) {
     if ($bean->getAttribute('chnote')) print ',"'.$i18n->getKey('label.note').'"';
     if ($bean->getAttribute('chcost')) print ',"'.$i18n->getKey('label.cost').'"';
     if ($bean->getAttribute('chpaid')) print ',"'.$i18n->getKey('label.paid').'"';
+    if ($bean->getAttribute('chip')) print ',"'.$i18n->getKey('label.ip').'"';
     if ($bean->getAttribute('chinvoice')) print ',"'.$i18n->getKey('label.invoice').'"';
     print "\n";
 
@@ -227,6 +232,10 @@ if ('csv' == $type) {
           print ',"'.$item['expense'].'"';
       }
       if ($bean->getAttribute('chpaid')) print ',"'.$item['paid'].'"';
+      if ($bean->getAttribute('chip')) {
+        $ip = $item['modified'] ? $item['modified_ip'].' '.$item['modified'] : $item['created_ip'].' '.$item['created'];
+        print ',"'.$ip.'"';
+      }
       if ($bean->getAttribute('chinvoice')) print ',"'.str_replace('"','""',$item['invoice']).'"';
       print "\n";
     }

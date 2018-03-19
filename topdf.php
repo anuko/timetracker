@@ -160,6 +160,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chnote')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.note').'</td>'; }
   if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.cost').'</td>'; }
   if ($bean->getAttribute('chpaid')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.paid').'</td>'; }
+  if ($bean->getAttribute('chip')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.ip').'</td>'; }
   if ($bean->getAttribute('chinvoice')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.invoice').'</td>'; }
   $html .= '</tr>';
   $html .= '</thead>';
@@ -210,6 +211,7 @@ if ($totals_only) {
           $html .= '</td>';
         }
         if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
+        if ($bean->getAttribute('chip')) $html .= '<td></td>';
         if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
         $html .= '</tr>';
         $html .= '<tr><td colspan="'.$colspan.'">&nbsp;</td></tr>';
@@ -240,6 +242,11 @@ if ($totals_only) {
     if ($bean->getAttribute('chpaid')) {
         $html .= '<td>';
         $html .= $item['paid'] == 1 ? $i18n->getKey('label.yes') : $i18n->getKey('label.no');
+        $html .= '</td>';
+    }
+    if ($bean->getAttribute('chip')) {
+        $html .= '<td>';
+        $html .= $item['modified'] ? $item['modified_ip'].' '.$item['modified'] : $item['created_ip'].' '.$item['created'];
         $html .= '</td>';
     }
     if ($bean->getAttribute('chinvoice')) $html .= '<td>'.htmlspecialchars($item['invoice']).'</td>';
@@ -291,6 +298,7 @@ if ($totals_only) {
       $html .= '</td>';
     }
     if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
+    if ($bean->getAttribute('chip')) $html .= '<td></td>';
     if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
     $html .= '</tr>';
   }
@@ -317,6 +325,7 @@ if ($totals_only) {
     $html .= '</td>';
   }
   if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
+  if ($bean->getAttribute('chip')) $html .= '<td></td>';
   if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
   $html .= '</tr>';
   $html .= '</table>';
