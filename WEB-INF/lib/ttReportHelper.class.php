@@ -368,7 +368,7 @@ class ttReportHelper {
       // Add paid status.
       if ($canViewReports && $bean->getAttribute('chpaid'))
         array_push($fields, 'ei.paid as paid');
-      // Add IP address. NULL for now for expenses.
+      // Add IP address.
       if ($canViewReports && $bean->getAttribute('chip')) {
         array_push($fields, 'ei.created as created');
         array_push($fields, 'ei.created_ip as created_ip');
@@ -553,6 +553,16 @@ class ttReportHelper {
         array_push($fields, "cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost"); // Use project rate for user.
       array_push($fields, "null as expense"); 
     }
+    // Add paid status.
+    if ($canViewReports && $report['show_paid'])
+      array_push($fields, 'l.paid as paid');
+    // Add IP address.
+    if ($canViewReports && $report['show_ip']) {
+      array_push($fields, 'l.created as created');
+      array_push($fields, 'l.created_ip as created_ip');
+      array_push($fields, 'l.modified as modified');
+      array_push($fields, 'l.modified_ip as modified_ip');
+    }
     // Add invoice name if it is selected.
     if (($canViewReports || $isClient) && $report['show_invoice'])
       array_push($fields, 'i.name as invoice');
@@ -619,6 +629,16 @@ class ttReportHelper {
         array_push($fields, 'ei.name as note');
       array_push($fields, 'ei.cost as cost');
       array_push($fields, 'ei.cost as expense');
+      // Add paid status.
+      if ($canViewReports && $report['show_paid'])
+        array_push($fields, 'ei.paid as paid');
+      // Add IP address.
+      if ($canViewReports && $report['show_ip']) {
+        array_push($fields, 'ei.created as created');
+        array_push($fields, 'ei.created_ip as created_ip');
+        array_push($fields, 'ei.modified as modified');
+        array_push($fields, 'ei.modified_ip as modified_ip');
+      }
       // Add invoice name if it is selected.
       if (($canViewReports || $isClient) && $report['show_invoice'])
         array_push($fields, 'i.name as invoice');
