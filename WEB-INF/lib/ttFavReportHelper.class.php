@@ -81,7 +81,7 @@ class ttFavReportHelper {
 
     $sql = "insert into tt_fav_reports (name, user_id, client_id, cf_1_option_id, project_id, task_id,
       billable, invoice, paid_status, users, period, period_start, period_end,
-      show_client, show_invoice, show_paid,
+      show_client, show_invoice, show_paid, show_ip,
       show_project, show_start, show_duration, show_cost,
       show_task, show_end, show_note, show_custom_field_1,
       group_by, show_totals_only)
@@ -93,7 +93,7 @@ class ttFavReportHelper {
       $mdb2->quote($fields['paid_status']).", ".
       $mdb2->quote($fields['users']).", ".$mdb2->quote($fields['period']).", ".
       $mdb2->quote($fields['from']).", ".$mdb2->quote($fields['to']).", ".
-      $fields['chclient'].", ".$fields['chinvoice'].", ".$fields['chpaid'].", ".
+      $fields['chclient'].", ".$fields['chinvoice'].", ".$fields['chpaid'].", ".$fields['chip'].", ".
       $fields['chproject'].", ".$fields['chstart'].", ".$fields['chduration'].", ".$fields['chcost'].", ".
       $fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".$fields['chcf_1'].", ".
       $mdb2->quote($fields['group_by']).", ".$fields['chtotalsonly'].")";
@@ -129,6 +129,7 @@ class ttFavReportHelper {
       "show_client = ".$fields['chclient'].", ".
       "show_invoice = ".$fields['chinvoice'].", ".
       "show_paid = ".$fields['chpaid'].", ".
+      "show_ip = ".$fields['chip'].", ".
       "show_project = ".$fields['chproject'].", ".
       "show_start = ".$fields['chstart'].", ".
       "show_duration = ".$fields['chduration'].", ".
@@ -156,6 +157,7 @@ class ttFavReportHelper {
     if (!$bean->getAttribute('chclient')) $bean->setAttribute('chclient', 0);
     if (!$bean->getAttribute('chinvoice')) $bean->setAttribute('chinvoice', 0);
     if (!$bean->getAttribute('chpaid')) $bean->setAttribute('chpaid', 0);
+    if (!$bean->getAttribute('chip')) $bean->setAttribute('chip', 0);
     if (!$bean->getAttribute('chproject')) $bean->setAttribute('chproject', 0);
     if (!$bean->getAttribute('chstart')) $bean->setAttribute('chstart', 0);
     if (!$bean->getAttribute('chduration')) $bean->setAttribute('chduration', 0);
@@ -210,6 +212,7 @@ class ttFavReportHelper {
       'chclient'=>$bean->getAttribute('chclient'),
       'chinvoice'=>$bean->getAttribute('chinvoice'),
       'chpaid'=>$bean->getAttribute('chpaid'),
+      'chip'=>$bean->getAttribute('chip'),
       'chproject'=>$bean->getAttribute('chproject'),
       'chstart'=>$bean->getAttribute('chstart'),
       'chduration'=>$bean->getAttribute('chduration'),
@@ -280,6 +283,7 @@ class ttFavReportHelper {
       $bean->setAttribute('chclient', $val['show_client']);
       $bean->setAttribute('chinvoice', $val['show_invoice']);
       $bean->setAttribute('chpaid', $val['show_paid']);
+      $bean->setAttribute('chip', $val['show_ip']);
       $bean->setAttribute('chproject', $val['show_project']);
       $bean->setAttribute('chstart', $val['show_start']);
       $bean->setAttribute('chduration', $val['show_duration']);
