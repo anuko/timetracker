@@ -279,6 +279,7 @@ $i18n_key_words = array(
 // It is also a name for the Locking plugin on the Team profile page.
 'title.locking' => 'Locking',
 'title.week_view' => 'Week View',
+'title.swap_roles' => 'Swapping Roles',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -457,6 +458,9 @@ $i18n_key_words = array(
 'form.quota.quota' => 'Quota',
 'form.quota.workday_hours' => 'Hours in work day',
 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+
+// Swap roles form.
+'form.swap.swap_with' => 'Swap roles with',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 'role.user.label' => 'User',

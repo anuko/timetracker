@@ -103,11 +103,57 @@ class ttTeamHelper {
     return $user_list;
   }
 
-  // The getUsers obtains all active and inactive (but not deleted) users in a given team.
-  static function getUsers() {
+  // The swapRolesWith swaps existing user role with that of another user.
+  static function swapRolesWith($user_id) {
     global $user;
     $mdb2 = getConnection();
 
+    $sql = "select u.id, u.role_id from tt_users u left join tt_roles r on (u.role_id = r.id) where u.id = $user_id and u.team_id = $user->team_id and u.status = 1 and r.rank < $user->rank";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    $val = $res->fetchRow();
+    if (!$val['id'] || !$val['role_id'])
+      return false;
+
+    // Promote user.
+    $sql = "update tt_users set role_id = $user->role_id where id = $user_id and team_id = $user->team_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    // Demote self.
+    $role_id = $val['role_id'];
+    $sql = "update tt_users set role_id = $role_id where id = $user->id and team_id = $user->team_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    return true;
+  }
+
+  // The getUsersForSwap obtains all users a current user can swap roles with.
+  static function getUsersForSwap() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $sql = "select u.id, u.name, r.rank, r.rights from tt_users u left join tt_roles r on (u.role_id = r.id) where u.team_id = $user->team_id and u.status = 1 and r.rank < $user->rank order by upper(u.name)";
+    $res = $mdb2->query($sql);
+    $user_list = array();
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    while ($val = $res->fetchRow()) {
+      $isClient = in_array('track_own_time', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have data entry right.
+      if ($isClient)
+        continue; // Skip adding clients.
+      $user_list[] = $val;
+    }
+
+    return $user_list;
+  }
+
+    // The getUsers obtains all active and inactive (but not deleted) users in a given team.
+  static function getUsers() {
+    global $user;
+    $mdb2 = getConnection();
     $sql = "select id, name from tt_users where team_id = $user->team_id and (status = 1 or status = 0) order by upper(name)";
     $res = $mdb2->query($sql);
     $user_list = array();
@@ -116,7 +162,6 @@ class ttTeamHelper {
     while ($val = $res->fetchRow()) {
       $user_list[] = $val;
     }
-
     return $user_list;
   }
 
