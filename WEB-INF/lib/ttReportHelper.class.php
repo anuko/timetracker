@@ -1570,6 +1570,8 @@ class ttReportHelper {
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
       if ($report['show_paid'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.paid').'</td>';
+      if ($report['show_ip'])
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.ip').'</td>';
       if ($report['show_invoice'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.invoice').'</td>';
       $body .= '</tr>';
@@ -1612,6 +1614,7 @@ class ttReportHelper {
                 $body .= '</td>';
               }
               if ($report['show_paid']) $body .= '<td></td>';
+              if ($report['show_ip']) $body .= '<td></td>';
               if ($report['show_invoice']) $body .= '<td></td>';
               $body .= '</tr>';
               $body .= '<tr><td>&nbsp;</td></tr>';
@@ -1649,6 +1652,11 @@ class ttReportHelper {
             $body .= $record['paid'] == 1 ? $i18n->getKey('label.yes') : $i18n->getKey('label.no');
             $body .= '</td>';
           }
+          if ($report['show_ip']) {
+            $body .= '<td style="'.$cellRightAligned.'">';
+            $body .= $record['modified'] ? $record['modified_ip'].' '.$record['modified'] : $record['created_ip'].' '.$record['created'];
+            $body .= '</td>';
+          }
           if ($report['show_invoice'])
             $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['invoice']).'</td>';
           $body .= '</tr>';
@@ -1679,6 +1687,7 @@ class ttReportHelper {
           $body .= '</td>';
         }
         if ($report['show_paid']) $body .= '<td></td>';
+        if ($report['show_ip']) $body .= '<td></td>';
         if ($report['show_invoice']) $body .= '<td></td>';
         $body .= '</tr>';
       }
@@ -1702,6 +1711,7 @@ class ttReportHelper {
         $body .= '</td>';
       }
       if ($report['show_paid']) $body .= '<td></td>';
+      if ($report['show_ip']) $body .= '<td></td>';
       if ($report['show_invoice']) $body .= '<td></td>';
       $body .= '</tr>';
 
