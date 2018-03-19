@@ -333,6 +333,7 @@ $i18n_key_words = array(
 // It is also a name for the Locking plugin on the Team profile page.
 // 'title.locking' => 'Locking',
 // 'title.week_view' => 'Week View',
+// 'title.swap_roles' => 'Swapping Roles',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.

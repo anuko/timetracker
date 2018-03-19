@@ -277,6 +277,8 @@ $i18n_key_words = array(
 'title.cf_delete_dropdown_option' => 'Διαγραφή επιλογής',
 'title.locking' => 'Κλείδωμα',
 'title.week_view' => 'Προβολή εβδομάδας',
+// TODO: translate the following.
+// 'title.swap_roles' => 'Swapping Roles',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
