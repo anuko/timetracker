@@ -76,7 +76,7 @@ while ($val = $res->fetchRow()) {
   // Email report if condition is okay.
   if ($condition_ok) {
     if (ttReportHelper::sendFavReport($report, $val['subject'], $val['email'], $val['cc']))
-      echo "Report ".$val['report_id']. " sent to ".$val['email']."<br>";
+      echo "Report ".$val['report_id']. " sent.<br>";
     else
       echo "Error while emailing report...<br>";
   }
