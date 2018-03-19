@@ -839,6 +839,8 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_expense_items` ADD `modified_ip` varchar(45) default NULL AFTER `modified`");
     setChange("ALTER TABLE `tt_expense_items` ADD `modified_by` int(11) default NULL AFTER `modified_ip`");
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.59', modified = now() where param_name = 'version_db' and param_value = '1.17.56'");
+    setChange("ALTER TABLE `tt_fav_reports` ADD `show_ip` tinyint(4) NOT NULL DEFAULT '0' AFTER `show_paid`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.17.61', modified = now() where param_name = 'version_db' and param_value = '1.17.59'");
   }
 
   if ($_POST["cleanup"]) {

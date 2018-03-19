@@ -251,6 +251,7 @@ CREATE TABLE `tt_fav_reports` (
   `show_client` tinyint(4) NOT NULL default 0,           # whether to show client column
   `show_invoice` tinyint(4) NOT NULL default 0,          # whether to show invoice column
   `show_paid` tinyint(4) NOT NULL default 0,             # whether to show paid column
+  `show_ip` tinyint(4) NOT NULL default 0,               # whether to show ip column
   `show_project` tinyint(4) NOT NULL default 0,          # whether to show project column
   `show_start` tinyint(4) NOT NULL default 0,            # whether to show start field
   `show_duration` tinyint(4) NOT NULL default 0,         # whether to show duration field
