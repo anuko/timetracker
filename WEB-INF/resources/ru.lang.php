@@ -456,6 +456,9 @@ $i18n_key_words = array(
 'form.quota.workday_hours' => 'Количество часов в рабочем дне',
 'form.quota.hint' => 'При пустых значениях квоты автоматически определяются из длительности рабочего дня и праздников.',
 
+// Swap roles form.
+'form.swap.swap_with' => 'Обменять роль с',
+
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 'role.user.label' => 'Пользователь',
 'role.user.low_case_label' => 'пользователь',

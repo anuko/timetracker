@@ -481,6 +481,10 @@ $i18n_key_words = array(
 'form.quota.workday_hours' => 'Arbetstimmar per dag',
 'form.quota.hint' => 'Om fälten lämnas tomma räknas kvoterna automatiskt ut baserat på arbetstimmar per dag och helgdagar.',
 
+// Swap roles form.
+// TODO: translate the following.
+// 'form.swap.swap_with' => 'Swap roles with',
+
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 // TODO: translate the following.
 // 'role.user.label' => 'User',

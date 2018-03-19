@@ -466,6 +466,10 @@ $i18n_key_words = array(
 'form.quota.workday_hours' => 'Werkuren per dag',
 'form.quota.hint' => 'Als de velden leeg worden gelaten, dan zullen de doelen worden berekend op bassis van het aantal werkuren per dag en vakantiedagen.',
 
+// Swap roles form.
+// TODO: translate the following.
+// 'form.swap.swap_with' => 'Swap roles with',
+
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 'role.user.label' => 'Gebruiker',
 'role.user.low_case_label' => 'gebruiker',

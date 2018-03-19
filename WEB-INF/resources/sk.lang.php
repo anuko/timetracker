@@ -501,6 +501,10 @@ $i18n_key_words = array(
 // 'form.quota.workday_hours' => 'Hours in a work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 
+// Swap roles form.
+// TODO: translate the following.
+// 'form.swap.swap_with' => 'Swap roles with',
+
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 // TODO: translate the following.
 // 'role.user.label' => 'User',
