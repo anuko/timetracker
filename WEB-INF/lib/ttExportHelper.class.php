@@ -291,6 +291,8 @@ class ttExportHelper {
         " period_end=\"".$fav_report['period_end']."\"".
         " show_client=\"".$fav_report['show_client']."\"".
         " show_invoice=\"".$fav_report['show_invoice']."\"".
+        " show_paid=\"".$fav_report['show_paid']."\"".
+        " show_ip=\"".$fav_report['show_ip']."\"".
         " show_project=\"".$fav_report['show_project']."\"".
         " show_start=\"".$fav_report['show_start']."\"".
         " show_duration=\"".$fav_report['show_duration']."\"".

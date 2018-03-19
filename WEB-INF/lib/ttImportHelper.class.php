@@ -322,6 +322,7 @@ class ttImportHelper {
         'chclient' => (int) $this->currentElement['SHOW_CLIENT'],
         'chinvoice' => (int) $this->currentElement['SHOW_INVOICE'],
         'chpaid' => (int) $this->currentElement['SHOW_PAID'],
+        'chip' => (int) $this->currentElement['SHOW_IP'],
         'chproject' => (int) $this->currentElement['SHOW_PROJECT'],
         'chstart' => (int) $this->currentElement['SHOW_START'],
         'chduration' => (int) $this->currentElement['SHOW_DURATION'],
