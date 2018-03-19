@@ -168,6 +168,8 @@ $i18n_key_words = array(
 // 'label.notes' => 'Notes',
 'label.item' => 'آیتم',
 'label.cost' => 'هزینه',
+// TODO: translate the following.
+// 'label.ip' => 'IP',
 'label.day_total' => 'کل روز',
 'label.week_total' => 'کل هفته',
 // TODO: translate the following.

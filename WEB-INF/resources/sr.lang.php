@@ -160,6 +160,8 @@ $i18n_key_words = array(
 // 'label.notes' => 'Notes',
 'label.item' => 'Stavka',
 'label.cost' => 'Cena',
+// TODO: translate the following.
+// 'label.ip' => 'IP',
 'label.day_total' => 'Zbir časova dnevno',
 'label.week_total' => 'Zbir časova nedeljno',
 // TODO: translate the following.

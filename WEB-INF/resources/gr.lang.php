@@ -153,6 +153,8 @@ $i18n_key_words = array(
 'label.notes' => 'Σημειώσεις',
 'label.item' => 'Αντικείμενο',
 'label.cost' => 'Κόστος',
+// TODO: translate the following.
+// 'label.ip' => 'IP',
 'label.day_total' => 'Σύνολο ημέρας',
 'label.week_total' => 'Σύνολο εβδομάδας',
 'label.month_total' => 'Σύνολο μήνα',

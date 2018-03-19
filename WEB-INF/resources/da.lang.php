@@ -159,6 +159,8 @@ $i18n_key_words = array(
 // 'label.notes' => 'Notes',
 'label.item' => 'Emne',
 'label.cost' => 'Pris',
+// TODO: translate the following.
+// 'label.ip' => 'IP',
 'label.day_total' => 'Dagens total',
 'label.week_total' => 'Ugens total',
 'label.month_total' => 'Måneds total',

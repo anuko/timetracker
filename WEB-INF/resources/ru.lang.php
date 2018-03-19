@@ -153,6 +153,7 @@ $i18n_key_words = array(
 'label.notes' => 'Комментарии',
 'label.item' => 'Предмет',
 'label.cost' => 'Стоимость',
+'label.ip' => 'IP адрес',
 'label.day_total' => 'Итог за день',
 'label.week_total' => 'Итог за неделю',
 'label.month_total' => 'Итог за месяц',
