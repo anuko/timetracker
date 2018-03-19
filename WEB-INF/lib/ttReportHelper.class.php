@@ -1254,6 +1254,8 @@ class ttReportHelper {
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
       if ($bean->getAttribute('chpaid'))
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.paid').'</td>';
+      if ($bean->getAttribute('chip'))
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.ip').'</td>';
       if ($bean->getAttribute('chinvoice'))
         $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.invoice').'</td>';
       $body .= '</tr>';
@@ -1296,6 +1298,7 @@ class ttReportHelper {
                 $body .= '</td>';
               }
               if ($bean->getAttribute('chpaid')) $body .= '<td></td>';
+              if ($bean->getAttribute('chip')) $body .= '<td></td>';
               if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
               $body .= '</tr>';
               $body .= '<tr><td>&nbsp;</td></tr>';
@@ -1333,6 +1336,11 @@ class ttReportHelper {
             $body .= $record['paid'] == 1 ? $i18n->getKey('label.yes') : $i18n->getKey('label.no');
             $body .= '</td>';
           }
+          if ($bean->getAttribute('chip')) {
+            $body .= '<td style="'.$cellRightAligned.'">';
+            $body .= $record['modified'] ? $record['modified_ip'].' '.$record['modified'] : $$record['created_ip'].' '.$record['created'];
+            $body .= '</td>';
+          }
           if ($bean->getAttribute('chinvoice'))
             $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['invoice']).'</td>';
           $body .= '</tr>';
@@ -1363,6 +1371,7 @@ class ttReportHelper {
           $body .= '</td>';
         }
         if ($bean->getAttribute('chpaid')) $body .= '<td></td>';
+        if ($bean->getAttribute('chip')) $body .= '<td></td>';
         if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
         $body .= '</tr>';
       }
@@ -1386,6 +1395,7 @@ class ttReportHelper {
         $body .= '</td>';
       }
       if ($bean->getAttribute('chpaid')) $body .= '<td></td>';
+      if ($bean->getAttribute('chip')) $body .= '<td></td>';
       if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
       $body .= '</tr>';
 
