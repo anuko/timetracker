@@ -1338,7 +1338,7 @@ class ttReportHelper {
           }
           if ($bean->getAttribute('chip')) {
             $body .= '<td style="'.$cellRightAligned.'">';
-            $body .= $record['modified'] ? $record['modified_ip'].' '.$record['modified'] : $$record['created_ip'].' '.$record['created'];
+            $body .= $record['modified'] ? $record['modified_ip'].' '.$record['modified'] : $record['created_ip'].' '.$record['created'];
             $body .= '</td>';
           }
           if ($bean->getAttribute('chinvoice'))
