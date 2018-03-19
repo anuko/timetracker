@@ -377,16 +377,22 @@ CREATE TABLE `tt_custom_field_log` (
 # This table lists expense items.
 #
 CREATE TABLE `tt_expense_items` (
-  `id` bigint NOT NULL auto_increment, # expense item id
-  `date` date NOT NULL,                # date the record is for
-  `user_id` int(11) NOT NULL,          # user id the expense item is reported by
-  `client_id` int(11) default NULL,    # client id
-  `project_id` int(11) default NULL,   # project id
-  `name` text NOT NULL,                # expense item name (what is an expense for)   
-  `cost` decimal(10,2) default '0.00', # item cost (including taxes, etc.)
-  `invoice_id` int(11) default NULL,   # invoice id
-  `paid` tinyint(4) default 0,         # whether the item is paid
-  `status` tinyint(4) default 1,       # item status
+  `id` bigint NOT NULL auto_increment,    # expense item id
+  `date` date NOT NULL,                   # date the record is for
+  `user_id` int(11) NOT NULL,             # user id the expense item is reported by
+  `client_id` int(11) default NULL,       # client id
+  `project_id` int(11) default NULL,      # project id
+  `name` text NOT NULL,                   # expense item name (what is an expense for)
+  `cost` decimal(10,2) default '0.00',    # item cost (including taxes, etc.)
+  `invoice_id` int(11) default NULL,      # invoice id
+  `paid` tinyint(4) default 0,            # whether the item is paid
+  `created` datetime default NULL,        # creation timestamp
+  `created_ip` varchar(45) default NULL,  # creator ip
+  `created_by` int(11) default NULL,      # creator user_id
+  `modified` datetime default NULL,       # modification timestamp
+  `modified_ip` varchar(45) default NULL, # modifier ip
+  `modified_by` int(11) default NULL,     # modifier user_id
+  `status` tinyint(4) default 1,          # item status
   PRIMARY KEY  (`id`)
 );
 
@@ -440,4 +446,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.56', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.59', now()); # TODO: change when structure changes.
