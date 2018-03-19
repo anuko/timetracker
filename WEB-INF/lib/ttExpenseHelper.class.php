@@ -31,6 +31,7 @@ class ttExpenseHelper {
   // insert - inserts an entry into tt_expense_items table.
   static function insert($fields)
   {
+    global $user;
     $mdb2 = getConnection();
 
     $date = $fields['date'];
@@ -42,10 +43,11 @@ class ttExpenseHelper {
     $invoice_id = $fields['invoice_id'];
     $status = $fields['status'];
     $paid = (int) $fields['paid'];
+    $created = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
 
-    $sql = "insert into tt_expense_items (date, user_id, client_id, project_id, name, cost, invoice_id, paid, status) ".
+    $sql = "insert into tt_expense_items (date, user_id, client_id, project_id, name, cost, invoice_id, paid, created, created_ip, created_by, status) ".
       "values (".$mdb2->quote($date).", $user_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).
-      ", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).", $paid, ".$mdb2->quote($status).")";
+      ", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).", $paid $created, ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -73,10 +75,11 @@ class ttExpenseHelper {
     if ($user->can('manage_invoices') && $user->isPluginEnabled('ps')) {
       $paid_part = $fields['paid'] ? ', paid = 1' : ', paid = 0';
     }
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
 
     $sql = "UPDATE tt_expense_items set date = ".$mdb2->quote($date).", user_id = $user_id, client_id = ".$mdb2->quote($client_id).
       ", project_id = ".$mdb2->quote($project_id).", name = ".$mdb2->quote($name).
-      ", cost = ".$mdb2->quote($cost)."$paid_part, invoice_id = ".$mdb2->quote($invoice_id).
+      ", cost = ".$mdb2->quote($cost)."$paid_part $modified_part, invoice_id = ".$mdb2->quote($invoice_id).
       " WHERE id = $id";
 
     $affected = $mdb2->exec($sql);

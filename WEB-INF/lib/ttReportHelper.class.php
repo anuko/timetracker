@@ -370,10 +370,10 @@ class ttReportHelper {
         array_push($fields, 'ei.paid as paid');
       // Add IP address. NULL for now for expenses.
       if ($canViewReports && $bean->getAttribute('chip')) {
-        array_push($fields, 'null as created');
-        array_push($fields, 'null as created_ip');
-        array_push($fields, 'null as modified');
-        array_push($fields, 'null as modified_ip');
+        array_push($fields, 'ei.created as created');
+        array_push($fields, 'ei.created_ip as created_ip');
+        array_push($fields, 'ei.modified as modified');
+        array_push($fields, 'ei.modified_ip as modified_ip');
       }
 
       // Add invoice name if it is selected.
