@@ -33,6 +33,12 @@ CREATE TABLE `tt_teams` (
   `workday_minutes` smallint(4) default 480,                 # number of work minutes in a regular working day
   `custom_logo` tinyint(4) default 0,                        # whether to use a custom logo or not
   `config` text default NULL,                                # miscellaneous team configuration settings
+  `created` datetime default NULL,                           # creation timestamp
+  `created_ip` varchar(45) default NULL,                     # creator ip
+  `created_by` int(11) default NULL,                         # creator user_id
+  `modified` datetime default NULL,                          # modification timestamp
+  `modified_ip` varchar(45) default NULL,                    # modifier ip
+  `modified_by` int(11) default NULL,                        # modifier user_id
   `status` tinyint(4) default 1,                             # team status
   PRIMARY KEY (`id`)
 );
