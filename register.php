@@ -28,8 +28,6 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttUserHelper');
-import('ttRoleHelper');
 
 if (!isTrue(MULTITEAM_MODE) || $auth->isPasswordExternal()) {
   header('Location: login.php');
@@ -99,39 +97,17 @@ if ($request->isPost()) {
   // Create an instance of ttRegistrator class.
   import('ttRegistrator');
   $registrator = new ttRegistrator($fields, $err);
-  // Validation of user input occurs in ttRegistrator constructor above.
+  $registrator->register();
 
   if ($err->no()) {
-    if (!ttUserHelper::getUserByLogin($cl_manager_login)) {
-      // Create a new team.
-      $team_id = ttTeamHelper::insert(array('name'=>$cl_team_name,'currency'=>$cl_currency,'lang'=>$cl_lang));
-      if ($team_id) {
-        if (!ttRoleHelper::createPredefinedRoles($team_id, $cl_lang))
-          $err->add($i18n->getKey('error.db'));
-
-        $role_id = ttRoleHelper::getTopManagerRoleID();
-
-        // Team created, now create a team manager.
-        $user_id = ttUserHelper::insert(array(
-          'team_id' => $team_id,
-          'role_id' => $role_id,
-          'name' => $cl_manager_name,
-          'login' => $cl_manager_login,
-          'password' => $cl_password1,
-          'email' => $cl_manager_email));
-      }
-      if ($team_id && $user_id) {
-        if ($auth->doLogin($cl_manager_login, $cl_password1)) {
-          setcookie('tt_login', $cl_manager_login, time() + COOKIE_EXPIRE, '/');
-          header('Location: time.php');
-        } else {
-          header('Location: login.php');
-        }
-        exit();
-      } else
-        $err->add($i18n->getKey('error.db'));
-    } else
-      $err->add($i18n->getKey('error.user_exists'));
+    // Registration successful.
+    if ($auth->doLogin($cl_manager_login, $cl_password1)) {
+      setcookie('tt_login', $cl_manager_login, time() + COOKIE_EXPIRE, '/');
+      header('Location: time.php');
+    } else {
+      header('Location: login.php');
+    }
+    exit();
   }
 } // isPost
 

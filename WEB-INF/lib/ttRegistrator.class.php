@@ -35,6 +35,9 @@ class ttRegistrator {
   var $group_name = null; // Group name.
   var $currency = null;   // Currency.
   var $lang = null;       // Language.
+  var $group_id = null;   // Group id, set after we create a group.
+  var $role_id = null;    // Role id for top managers.
+  var $user_id = null;    // User id after registration.
   var $err = null;        // Error object, passed to us as reference.
                           // We use it to communicate errors to caller.
 
@@ -48,7 +51,7 @@ class ttRegistrator {
     $this->group_name = $fields['group_name'];
     $this->currency = $fields['currency'];
     $this->lang = $fields['lang'];
-    if (!$thins->lang) $this->lang = 'en';
+    if (!$this->lang) $this->lang = 'en';
     $this->err = $err;
 
     // Validate passed in parameters.
@@ -78,6 +81,76 @@ class ttRegistrator {
 
   // The register function registers a user in Time Tracker.
   function register() {
-    // TODO: work in progress. Not implemented.
+    global $i18n;
+
+    if ($this->err->yes())
+      return; // There are errors, do not proceed.
+
+    import('ttUserHelper');
+    if (ttUserHelper::getUserByLogin($this->login)) {
+      // User login already exists.
+      $this->err->add($i18n->getKey('error.user_exists'));
+      return;
+    }
+
+    // Create a new group.
+    $this->group_id = $this->createGroup();
+    if (!$this->group_id) {
+      $this->err->add($i18n->getKey('error.db'));
+      return;
+    }
+
+    import('ttRoleHelper');
+    if (!ttRoleHelper::createPredefinedRoles($this->group_id, $this->lang)) {
+      $err->add($i18n->getKey('error.db'));
+      return;
+    }
+    $this->role_id = ttRoleHelper::getTopManagerRoleID();
+    $this->user_id = $this->createUser();
+
+    if (!$this->user_id) {
+      $err->add($i18n->getKey('error.db'));
+      return;
+    }
+  }
+
+  // The createGroup function creates a group in Time Tracker as part
+  // of user registration process. This is a top group for user as top manager.
+  function createGroup() {
+    $mdb2 = getConnection();
+
+    $name = $mdb2->quote($this->group_name);
+    $currency = $mdb2->quote($this->currency);
+    $lang = $mdb2->quote($this->lang);
+
+    $sql = "insert into tt_teams (name, currency, lang) values($name, $currency, $lang)";
+    $affected = $mdb2->exec($sql);
+
+    if (!is_a($affected, 'PEAR_Error')) {
+      $group_id = $mdb2->lastInsertID('tt_teams', 'id');
+      return $group_id;
+    }
+    return false;
+  }
+
+  // The createUser creates a user in database as part of registration process.
+  function createUser() {
+    $mdb2 = getConnection();
+
+    $login = $mdb2->quote($this->login);
+    $password = 'md5('.$mdb2->quote($this->password1).')';
+    $name = $mdb2->quote($this->user_name);
+    $email = $mdb2->quote($this->email);
+    $created = 'now()';
+    $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
+    $values = "values($login, $password, $name, $this->group_id, $this->role_id, $email, $created, $created_ip)";
+
+    $sql = 'insert into tt_users (login, password, name, team_id, role_id, email, created, created_ip) '.$values;
+    $affected = $mdb2->exec($sql);
+    if (!is_a($affected, 'PEAR_Error')) {
+      $user_id = $mdb2->lastInsertID('tt_users', 'id');
+      return $user_id;
+    }
+    return false;
   }
 }
