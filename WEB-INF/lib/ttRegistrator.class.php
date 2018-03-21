@@ -122,8 +122,10 @@ class ttRegistrator {
     $name = $mdb2->quote($this->group_name);
     $currency = $mdb2->quote($this->currency);
     $lang = $mdb2->quote($this->lang);
+    $created = 'now()';
+    $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
 
-    $sql = "insert into tt_teams (name, currency, lang) values($name, $currency, $lang)";
+    $sql = "insert into tt_teams (name, currency, lang, created, created_ip) values($name, $currency, $lang, $created, $created_ip)";
     $affected = $mdb2->exec($sql);
 
     if (!is_a($affected, 'PEAR_Error')) {
@@ -149,6 +151,15 @@ class ttRegistrator {
     $affected = $mdb2->exec($sql);
     if (!is_a($affected, 'PEAR_Error')) {
       $user_id = $mdb2->lastInsertID('tt_users', 'id');
+
+      // Update created_by field for the team with user id, now that we have it.
+      $sql = "update tt_teams set created_by = $user_id where id = $this->group_id and created_by is null";
+      $affected = $mdb2->exec($sql);
+
+      // Update created_by field for user by setting to self.
+      $sql = "update tt_users set created_by = $user_id where id = $user_id and team_id = $this->group_id and created_by is null";
+      $affected = $mdb2->exec($sql);
+
       return $user_id;
     }
     return false;
