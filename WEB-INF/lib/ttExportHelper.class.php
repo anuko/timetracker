@@ -360,16 +360,14 @@ class ttExportHelper {
 
   /*
    * Note about the utility functions below.
-   * We have roughly 3 groups of operations:
+   * We have roughly 4 groups of operations:
    *   1) Regular system usage for tracking time, etc.
-   *   2) Admin usage - used infrequently.
-   *   3) Export - used infrequently.
-   *
-   * TODO: we also have user registration process without initialized user.
-   * Perhaps we need a separate helper class for this. Think about it.
+   *   2) Registration process - used infrequently.
+   *   3) Admin usage - used infrequently.
+   *   4) Export - used infrequently.
    *
    * It is tempting to have a generic function to get things done for
-   * all situations. However, as export and admin access are one-off
+   * all situations. However, as registration, export and admin access are one-off
    * operations, while regular system usage is daily and must be efficient,
    * the current approach is to have SEPARATE functions for each mode.
    *

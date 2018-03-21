@@ -85,16 +85,21 @@ $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_email',
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
 
 if ($request->isPost()) {
-  // Validate user input.
-  if (!ttValidString($cl_team_name, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
-  if (!ttValidString($cl_currency, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));
-  if (!ttValidString($cl_manager_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_name'));
-  if (!ttValidString($cl_manager_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_login'));
-  if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-  if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
-  if ($cl_password1 !== $cl_password2)
-    $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
-  if (!ttValidEmail($cl_manager_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+  // Create fields array for ttRegistrator instance.
+  $fields = array(
+    'user_name' => $cl_manager_name,
+    'login' => $cl_manager_login,
+    'password1' => $cl_password1,
+    'password2' => $cl_password2,
+    'email' => $cl_manager_email,
+    'group_name' => $cl_team_name,
+    'currency' => $cl_currency,
+    'lang' => $cl_lang);
+
+  // Create an instance of ttRegistrator class.
+  import('ttRegistrator');
+  $registrator = new ttRegistrator($fields, $err);
+  // Validation of user input occurs in ttRegistrator constructor above.
 
   if ($err->no()) {
     if (!ttUserHelper::getUserByLogin($cl_manager_login)) {
