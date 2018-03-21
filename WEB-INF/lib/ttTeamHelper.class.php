@@ -867,6 +867,7 @@ class ttTeamHelper {
   // The update function updates team information.
   static function update($team_id, $fields)
   {
+    global $user;
     $mdb2 = getConnection();
     $name_part = 'name = '.$mdb2->quote($fields['name']);
     $currency_part = '';
@@ -897,10 +898,11 @@ class ttTeamHelper {
     if (isset($fields['config'])) $config_part = ', config = '.$mdb2->quote($fields['config']);
     if (isset($fields['lock_spec'])) $lock_spec_part = ', lock_spec = '.$mdb2->quote($fields['lock_spec']);
     if (isset($fields['workday_minutes'])) $workday_minutes_part = ', workday_minutes = '.$mdb2->quote($fields['workday_minutes']);
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
 
     $sql = "update tt_teams set $name_part $currency_part $lang_part $decimal_mark_part
       $date_format_part $time_format_part $week_start_part $tracking_mode_part $task_required_part $record_type_part
-      $bcc_email_part $plugins_part $config_part $lock_spec_part $workday_minutes_part where id = $team_id";
+      $bcc_email_part $plugins_part $config_part $lock_spec_part $workday_minutes_part $modified_part where id = $team_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
