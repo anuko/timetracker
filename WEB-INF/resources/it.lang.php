@@ -474,7 +474,7 @@ $i18n_key_words = array(
 'form.quota.workday_hours' => 'Ore lavorative in un giorno',
 'form.quota.hint' => 'Se i valori sono vuoti, le quote vengono calcolate automaticamente basandosi su ore giornaliere e vacanze.',
 
-// Swap roles form.
+// Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
 // TODO: translate the following.
 // 'form.swap.swap_with' => 'Swap roles with',
 

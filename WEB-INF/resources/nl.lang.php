@@ -466,7 +466,7 @@ $i18n_key_words = array(
 'form.quota.workday_hours' => 'Werkuren per dag',
 'form.quota.hint' => 'Als de velden leeg worden gelaten, dan zullen de doelen worden berekend op bassis van het aantal werkuren per dag en vakantiedagen.',
 
-// Swap roles form.
+// Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
 // TODO: translate the following.
 // 'form.swap.swap_with' => 'Swap roles with',
 

@@ -458,7 +458,7 @@ $i18n_key_words = array(
 'form.quota.workday_hours' => 'Ώρες ανά ημέρα εργασίας',
 'form.quota.hint' => 'Εάν οι τιμές είναι κενές, οι ποσοστώσεις υπολογίζονται αυτόματα με βάση τις ώρες της εργάσιμης ημέρας και τις αργίες.',
 
-// Swap roles form.
+// Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
 // TODO: translate the following.
 // 'form.swap.swap_with' => 'Swap roles with',
 

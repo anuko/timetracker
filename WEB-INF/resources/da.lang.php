@@ -475,7 +475,7 @@ $i18n_key_words = array(
 'form.quota.workday_hours' => 'Timer på en arbejdsdag',
 'form.quota.hint' => 'Hvis værdierne er tomme, beregnes kvoter automatisk baseret på arbejdsdage og helligdage.',
 
-// Swap roles form.
+// Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
 // TODO: translate the following.
 // 'form.swap.swap_with' => 'Swap roles with',
 
