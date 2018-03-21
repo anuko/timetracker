@@ -452,14 +452,14 @@ $i18n_key_words = array(
 'form.mail.report_sent' => 'Report sent.',
 'form.mail.invoice_sent' => 'Invoice sent.',
 
-// Quotas configuration form.
+// Quotas configuration form. See example at https://timetracker.anuko.com/quotas.php after enabling Monthly quotas plugin.
 'form.quota.year' => 'Year',
 'form.quota.month' => 'Month',
 'form.quota.quota' => 'Quota',
 'form.quota.workday_hours' => 'Hours in work day',
 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 
-// Swap roles form.
+// Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
 'form.swap.swap_with' => 'Swap roles with',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.

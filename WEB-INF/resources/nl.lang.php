@@ -459,7 +459,7 @@ $i18n_key_words = array(
 'form.mail.report_sent' => 'Rapport is verzonden.',
 'form.mail.invoice_sent' => 'Factuur is verzonden.',
 
-// Quotas configuration form.
+// Quotas configuration form. See example at https://timetracker.anuko.com/quotas.php after enabling Monthly quotas plugin.
 'form.quota.year' => 'Jaar',
 'form.quota.month' => 'Maand',
 'form.quota.quota' => 'Quota',
