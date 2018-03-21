@@ -245,7 +245,6 @@ class ttImportHelper {
     if ($name == 'LOG_ITEM' && $this->canImport) {
       $this->logMap[$this->currentElement['ID']] =
         ttTimeHelper::insert(array(
-          'timestamp' => $this->currentElement['TIMESTAMP'],
           'user_id' => $this->userMap[$this->currentElement['USER_ID']],
           'date' => $this->currentElement['DATE'],
           'start' => $this->currentElement['START'],
