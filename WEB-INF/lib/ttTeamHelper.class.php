@@ -688,24 +688,6 @@ class ttTeamHelper {
     return false;
   }
 
-  // The getTeams function returns an array of all active teams on the server.
-  static function getTeams() {
-    $result = array();
-    $mdb2 = getConnection();
-
-    $sql =  "select id, name, created, lang from tt_teams where status = 1 order by id desc";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $val['date'] = substr($val['created'], 0, 10); // Strip the time.
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
   // The markDeleted function marks the team and everything in it as deleted.
   static function markDeleted($team_id) {
 
