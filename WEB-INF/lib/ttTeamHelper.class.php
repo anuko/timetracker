@@ -693,12 +693,12 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql =  "select id, name, lang, timestamp from tt_teams where status = 1 order by id desc";
+    $sql =  "select id, name, created, lang from tt_teams where status = 1 order by id desc";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-      	$val['date'] = substr($val['timestamp'], 0, 10); // Strip the time.
+        $val['date'] = substr($val['created'], 0, 10); // Strip the time.
         $result[] = $val;
       }
       return $result;
@@ -914,9 +914,9 @@ class ttTeamHelper {
     $inactive_teams = array();
     $mdb2 = getConnection();
 
-    // Get all team ids for teams created or modified more than 6 months ago.
+    // Get all team ids for teams created or modified more than 8 months ago.
     // $ts = date('Y-m-d', strtotime('-1 year'));
-    $ts = date('Y-m-d', strtotime('-6 month'));
+    $ts = date('Y-m-d', strtotime('-8 month'));
     $sql =  "select id from tt_teams where timestamp < '$ts' order by id";
     $res = $mdb2->query($sql);
 
