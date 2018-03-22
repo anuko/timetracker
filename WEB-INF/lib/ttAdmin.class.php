@@ -263,28 +263,4 @@ class ttAdmin {
 
     return true;
   }
-
-  // setCreatedByAdmin sets created_by field for both group and its top manager to admin account.
-  function setCreatedByAdmin($team_id, $user_id) {
-    global $user;
-    $mdb2 = getConnection();
-
-    // Update created_by for group.
-    $sql = "update tt_teams set created_by = $user->id where id = $team_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) {
-      $this->err->add($i18n->getKey('error.db'));
-      return false;
-    }
-
-    // Update created_by for top manager.
-    $sql = "update tt_users set created_by = $user->id where id = $user_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) {
-      $this->err->add($i18n->getKey('error.db'));
-      return false;
-    }
-
-    return true;
-  }
 }
