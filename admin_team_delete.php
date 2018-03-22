@@ -47,7 +47,10 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getK
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if (ttTeamHelper::markDeleted($team_id)) {
+    import('ttAdmin');
+    $admin = new ttAdmin();
+    $result = $admin->markGroupDeleted($team_id);
+    if ($result) {
       header('Location: admin_teams.php');
       exit();
     } else
