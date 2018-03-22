@@ -898,8 +898,8 @@ class ttTeamHelper {
 
     // Get all team ids for teams created or modified more than 8 months ago.
     // $ts = date('Y-m-d', strtotime('-1 year'));
-    $ts = date('Y-m-d', strtotime('-8 month'));
-    $sql =  "select id from tt_teams where timestamp < '$ts' order by id";
+    $ts = $mdb2->quote(date('Y-m-d', strtotime('-8 month')));
+    $sql =  "select id from tt_teams where created < $ts and (modified is null or modified < $ts) order by id";
     $res = $mdb2->query($sql);
 
     $count = 0;
@@ -935,7 +935,7 @@ class ttTeamHelper {
 
     $count = 0;
     $ts = date('Y-m-d', strtotime('-2 years'));
-    $sql = "select count(*) as cnt from tt_log where user_id in ($user_list) and timestamp > '$ts'";
+    $sql = "select count(*) as cnt from tt_log where user_id in ($user_list) and created > '$ts'";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if ($val = $res->fetchRow()) {
@@ -950,7 +950,7 @@ class ttTeamHelper {
       // We will consider a team inactive if it has 5 or less time entries made more than 1 year ago.
       $count_last_year = 0;
       $ts = date('Y-m-d', strtotime('-1 year'));
-      $sql = "select count(*) as cnt from tt_log where user_id in ($user_list) and timestamp > '$ts'";
+      $sql = "select count(*) as cnt from tt_log where user_id in ($user_list) and created > '$ts'";
       $res = $mdb2->query($sql);
       if (!is_a($res, 'PEAR_Error')) {
         if ($val = $res->fetchRow()) {

@@ -61,6 +61,26 @@ $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
 
 if ($request->isPost()) {
+/*
+ * This is work in progress... refactoring to replace the block below.
+
+  // Create fields array for ttAdmin instance.
+  $fields = array(
+    'name' => $cl_name,
+    'login' => $cl_login,
+    'password1' => $cl_password1,
+    'password2' => $cl_password2,
+    'email' => $cl_email);
+
+    import('ttAdmin');
+    $admin = new ttAdmin($err);
+    $result = $admin->updateSelf($fields);
+    if ($result) {
+      header('Location: admin_teams.php');
+      exit();
+    }
+ */
+
   // Validate user input.
   if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
   if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));

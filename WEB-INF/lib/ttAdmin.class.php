@@ -183,8 +183,8 @@ class ttAdmin {
     return true;
   }
 
-  // validateTeamInfo validates team information entered by user.
-  function validateTeamInfo($fields) {
+  // validateGroupInfo validates group information entered by user.
+  function validateGroupInfo($fields) {
     global $i18n;
     global $auth;
 
@@ -233,9 +233,9 @@ class ttAdmin {
     return $result;
   }
 
-  // updateTeam validates user input and updates the team with new information.
-  function updateTeam($team_id, $fields) {
-    if (!$this->validateTeamInfo($fields)) return false; // Can't continue as user input is invalid.
+  // updateGroup validates user input and updates the group with new information.
+  function updateGroup($team_id, $fields) {
+    if (!$this->validateGroupInfo($fields)) return false; // Can't continue as user input is invalid.
 
     global $user;
     $mdb2 = getConnection();
@@ -262,5 +262,10 @@ class ttAdmin {
     if (is_a($affected, 'PEAR_Error')) return false;
 
     return true;
+  }
+
+  // updateSelf validates user input and updates admin account with new information.
+  function updateSelf($fields) {
+    return false; // Not yet implemeneted.
   }
 }

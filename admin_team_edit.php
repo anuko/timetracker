@@ -88,7 +88,7 @@ if ($request->isPost()) {
 
     import('ttAdmin');
     $admin = new ttAdmin($err);
-    $result = $admin->updateTeam($team_id, $fields);
+    $result = $admin->updateGroup($team_id, $fields);
     if ($result) {
       header('Location: admin_teams.php');
       exit();
