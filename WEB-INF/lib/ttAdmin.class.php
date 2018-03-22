@@ -26,11 +26,17 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
+import('ttUser');
+
 // ttAdmin class is used to perform admin tasks.
 class ttAdmin {
 
+  var $err = null;        // Error object, passed to us as reference.
+                          // We use it to communicate errors to caller.
+
   // Constructor.
-  function __construct() {
+  function __construct(&$err = null) {
+    $this->err = $err;
   }
 
   // getSubgroups rerurns an array of subgroups for a group.
@@ -171,6 +177,85 @@ class ttAdmin {
     global $user;
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
     $sql = "update tt_teams set status = NULL $modified_part where id = $group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    return true;
+  }
+
+  // validateTeamInfo validates team information entered by user.
+  function validateTeamInfo($fields) {
+    global $i18n;
+    global $auth;
+
+    $result = true;
+
+    if (!ttValidString($fields['group_name'], true)) {
+      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
+      $result = false;
+    }
+    if (!ttValidString($fields['user_name'])) {
+      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_name'));
+      $result = false;
+    }
+    if (!ttValidString($fields['new_login'])) {
+      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_login'));
+      $result = false;
+    }
+
+    // If we change login, it must be unique.
+    if ($fields['new_login'] != $fields['old_login']) {
+      if (ttUserHelper::getUserByLogin($fields['new_login'])) {
+        $this->err->add($i18n->getKey('error.user_exists'));
+        $result = false;
+      }
+    }
+
+    if (!$auth->isPasswordExternal() && ($fields['password1'] || $fields['password2'])) {
+      if (!ttValidString($fields['password1'])) {
+        $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
+        $result = false;
+      }
+      if (!ttValidString($fields['password2'])) {
+        $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+        $result = false;
+      }
+      if ($fields['password1'] !== $fields['password2']) {
+        $this->err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+        $result = false;
+      }
+    }
+    if (!ttValidEmail($fields['email'], true)) {
+      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+      $result = false;
+    }
+
+    return $result;
+  }
+
+  // updateTeam validates user input and updates the team with new information.
+  function updateTeam($team_id, $fields) {
+    if (!$this->validateTeamInfo($fields)) return false; // Can't continue as user input is invalid.
+
+    $mdb2 = getConnection();
+
+    // Update group name if it changed.
+    if ($fields['old_group_name'] != $fields['new_group_name']) {
+      $name = $mdb2->quote($fields['new_group_name']);
+      $sql = "update tt_teams set name = $name where id = $team_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) return false;
+    }
+
+    // Update group manager.
+    $user_id = $fields['user_id'];
+    $login_part = 'login = '.$mdb2->quote($fields['new_login']);
+    if ($fields['password1'])
+      $password_part = ', password = md5('.$mdb2->quote($fields['password1']).')';
+    $name_part = ', name = '.$mdb2->quote($fields['user_name']);
+    $email_part = ', email = '.$mdb2->quote($fields['email']);
+
+    $sql = 'update tt_users set '.$login_part.$password_part.$name_part.$email_part.'where id = '.$user_id;
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 

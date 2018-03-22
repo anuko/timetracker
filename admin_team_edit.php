@@ -74,37 +74,24 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getK
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_save')) {
-    // Validate user input.
-    if (!ttValidString($cl_team_name, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
-    if (!ttValidString($cl_manager_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_name'));
-    if (!ttValidString($cl_manager_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_login'));
-    if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
-      if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-      if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
-      if ($cl_password1 !== $cl_password2)
-        $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
-    }
-    if (!ttValidEmail($cl_manager_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+    // Create fields array for ttAdmin instance.
+    $fields = array(
+      'old_group_name' => $team_details['team_name'],
+      'new_group_name' => $cl_team_name,
+      'user_id' => $team_details['manager_id'],
+      'user_name' => $cl_manager_name,
+      'old_login' => $team_details['manager_login'],
+      'new_login' => $cl_manager_login,
+      'password1' => $cl_password1,
+      'password2' => $cl_password2,
+      'email' => $cl_manager_email);
 
-    // New login must be unique.
-    if ($cl_manager_login != $team_details['manager_login'])
-      if (ttUserHelper::getUserByLogin($cl_manager_login)) $err->add($i18n->getKey('error.user_exists'));
-
-    if ($err->no()) {
-      $update_result = ttTeamHelper::update($team_id, array('name'=>$cl_team_name));
-      if ($update_result) {
-        $update_result = ttUserHelper::update($team_details['manager_id'], array(
-          'name' => $cl_manager_name,
-          'login' => $cl_manager_login,
-          'password' => $cl_password1,
-          'email' => $cl_manager_email,
-          'status' => ACTIVE));
-      }
-      if ($update_result) {
-        header('Location: admin_teams.php');
-        exit();
-      } else
-        $err->add($i18n->getKey('error.db'));
+    import('ttAdmin');
+    $admin = new ttAdmin($err);
+    $result = $admin->updateTeam($team_id, $fields);
+    if ($result) {
+      header('Location: admin_teams.php');
+      exit();
     }
   }
 
