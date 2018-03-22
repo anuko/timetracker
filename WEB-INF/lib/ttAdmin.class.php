@@ -237,12 +237,14 @@ class ttAdmin {
   function updateTeam($team_id, $fields) {
     if (!$this->validateTeamInfo($fields)) return false; // Can't continue as user input is invalid.
 
+    global $user;
     $mdb2 = getConnection();
 
     // Update group name if it changed.
     if ($fields['old_group_name'] != $fields['new_group_name']) {
-      $name = $mdb2->quote($fields['new_group_name']);
-      $sql = "update tt_teams set name = $name where id = $team_id";
+      $name_part = 'name = '.$mdb2->quote($fields['new_group_name']);
+      $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+      $sql = 'update tt_teams set '.$name_part.$modified_part.' where id = '.$team_id;
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error')) return false;
     }
@@ -254,10 +256,34 @@ class ttAdmin {
       $password_part = ', password = md5('.$mdb2->quote($fields['password1']).')';
     $name_part = ', name = '.$mdb2->quote($fields['user_name']);
     $email_part = ', email = '.$mdb2->quote($fields['email']);
-
-    $sql = 'update tt_users set '.$login_part.$password_part.$name_part.$email_part.'where id = '.$user_id;
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+    $sql = 'update tt_users set '.$login_part.$password_part.$name_part.$email_part.$modified_part.'where id = '.$user_id;
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
+
+    return true;
+  }
+
+  // setCreatedByAdmin sets created_by field for both group and its top manager to admin account.
+  function setCreatedByAdmin($team_id, $user_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    // Update created_by for group.
+    $sql = "update tt_teams set created_by = $user->id where id = $team_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) {
+      $this->err->add($i18n->getKey('error.db'));
+      return false;
+    }
+
+    // Update created_by for top manager.
+    $sql = "update tt_users set created_by = $user->id where id = $user_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) {
+      $this->err->add($i18n->getKey('error.db'));
+      return false;
+    }
 
     return true;
   }

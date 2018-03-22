@@ -81,44 +81,33 @@ $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_email',
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
 
 if ($request->isPost()) {
-  // Validate user input.
-  if (!ttValidString($cl_team_name, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
-  if (!ttValidString($cl_manager_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_name'));
-  if (!ttValidString($cl_manager_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_login'));
-  if (!$auth->isPasswordExternal()) {
-    if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-    if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
-    if ($cl_password1 !== $cl_password2)
-      $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
-  }
-  if (!ttValidEmail($cl_manager_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+  /*
+   * Note: creating a group by admin is pretty much the same as self-registration,
+   * except that created_by gields for group and user must be set to admin account.
+   * Therefore, we'll reuse ttRegistrator instance to create a group here
+   * and override created_by fields using ttRegistrator::setCreatedBy() function.
+   */
 
+  // Create fields array for ttRegistrator instance.
+  if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
+  $fields = array(
+    'user_name' => $cl_manager_name,
+    'login' => $cl_manager_login,
+    'password1' => $cl_password1,
+    'password2' => $cl_password2,
+    'email' => $cl_manager_email,
+    'group_name' => $cl_team_name,
+    'currency' => CURRENCY_DEFAULT,
+    'lang' => $cl_lang);
+
+  // Create an instance of ttRegistrator class.
+  import('ttRegistrator');
+  $registrator = new ttRegistrator($fields, $err);
+  $registrator->register();
+  $registrator->setCreatedBy($user->id); // Override created_by to admin account.
   if ($err->no()) {
-    if (!ttUserHelper::getUserByLogin($cl_manager_login)) {
-      // Create a new team.
-      if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
-      $team_id = ttTeamHelper::insert(array('name'=>$cl_team_name,'currency'=>CURRENCY_DEFAULT,'lang'=>$cl_lang));
-      if ($team_id) {
-        if (!ttRoleHelper::createPredefinedRoles($team_id, $cl_lang))
-          $err->add($i18n->getKey('error.db'));
-
-        $role_id = ttRoleHelper::getTopManagerRoleID();
-
-        // Team created, now create a team manager.
-        $user_id = ttUserHelper::insert(array(
-          'team_id' => $team_id,
-          'role_id' => $role_id,
-          'name' => $cl_manager_name,
-          'login' => $cl_manager_login,
-          'password' => $cl_password1,
-          'email' => $cl_manager_email));
-      }
-      if ($team_id && $user_id) {
-        header('Location: admin_teams.php');
-      } else
-        $err->add($i18n->getKey('error.db'));
-    } else
-      $err->add($i18n->getKey('error.user_exists'));
+    header('Location: admin_teams.php');
+    exit();
   }
 } // isPost
 

@@ -81,10 +81,9 @@ class ttRegistrator {
 
   // The register function registers a user in Time Tracker.
   function register() {
-    global $i18n;
+    if ($this->err->yes()) return; // There are errors, do not proceed.
 
-    if ($this->err->yes())
-      return; // There are errors, do not proceed.
+    global $i18n;
 
     import('ttUserHelper');
     if (ttUserHelper::getUserByLogin($this->login)) {
@@ -112,6 +111,8 @@ class ttRegistrator {
       $err->add($i18n->getKey('error.db'));
       return;
     }
+
+    $this->setCreatedBy($this->user_id);
   }
 
   // The createGroup function creates a group in Time Tracker as part
@@ -151,17 +152,34 @@ class ttRegistrator {
     $affected = $mdb2->exec($sql);
     if (!is_a($affected, 'PEAR_Error')) {
       $user_id = $mdb2->lastInsertID('tt_users', 'id');
-
-      // Update created_by field for the team with user id, now that we have it.
-      $sql = "update tt_teams set created_by = $user_id where id = $this->group_id and created_by is null";
-      $affected = $mdb2->exec($sql);
-
-      // Update created_by field for user by setting to self.
-      $sql = "update tt_users set created_by = $user_id where id = $user_id and team_id = $this->group_id and created_by is null";
-      $affected = $mdb2->exec($sql);
-
       return $user_id;
     }
     return false;
+  }
+
+  // The setCreatedBy sets created_by field for both group and user to passed in user_id.
+  function setCreatedBy($user_id) {
+    if ($this->err->yes()) return false; // There are errors, do not proceed.
+
+    global $i18n;
+    $mdb2 = getConnection();
+
+    // Update group.
+    $sql = "update tt_teams set created_by = $user_id where id = $this->group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) {
+      $this->err->add($i18n->getKey('error.db'));
+      return false;
+    }
+
+    // Update top manager.
+    $sql = "update tt_users set created_by = $user_id where id = $user_id and team_id = $this->group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) {
+      $this->err->add($i18n->getKey('error.db'));
+      return false;
+    }
+
+    return true;
   }
 }
