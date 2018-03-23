@@ -68,7 +68,7 @@ if ($request->isPost()) {
         $project_with_rate['rate'] = $request->getParameter('rate_'.$p);
         $assigned_projects[] = $project_with_rate;
       } else
-        $err->add($i18n->getKey('error.field'), 'rate_'.$p);
+        $err->add($i18n->get('error.field'), 'rate_'.$p);
     }
   }
 }
@@ -85,7 +85,7 @@ $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=
 $active_roles = ttTeamHelper::getActiveRolesForUser();
 $form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role_id,'data'=>$active_roles,'datakeys'=>array('id', 'name')));
 if ($user->isPluginEnabled('cl'))
-  $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+  $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->get('dropdown.select'))));
 
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','format'=>'.2','value'=>$cl_rate));
 
@@ -121,26 +121,26 @@ $table->setRowOptions(array('valign'=>'top','class'=>'tableHeader'));
 $table->setData($projects);
 $table->setKeyField('id');
 $table->setValue($cl_projects);
-$table->addColumn(new TableColumn('name', $i18n->getKey('label.project'), new NameCellRenderer()));
-$table->addColumn(new TableColumn('p_rate', $i18n->getKey('form.users.rate'), new RateCellRenderer()));
+$table->addColumn(new TableColumn('name', $i18n->get('label.project'), new NameCellRenderer()));
+$table->addColumn(new TableColumn('p_rate', $i18n->get('form.users.rate'), new RateCellRenderer()));
 $form->addInputElement($table);
 
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.submit')));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
-  if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
+  if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.person_name'));
+  if (!ttValidString($cl_login)) $err->add($i18n->get('error.field'), $i18n->get('label.login'));
   if (!$auth->isPasswordExternal()) {
-    if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-    if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+    if (!ttValidString($cl_password1)) $err->add($i18n->get('error.field'), $i18n->get('label.password'));
+    if (!ttValidString($cl_password2)) $err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
     if ($cl_password1 !== $cl_password2)
-      $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+      $err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
   }
-  if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+  if (!ttValidEmail($cl_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.email'));
   // Require selection of a client for a client role.
-  if ($user->isPluginEnabled('cl') && ttRoleHelper::isClientRole($cl_role_id) && !$cl_client_id) $err->add($i18n->getKey('error.client'));
-  if (!ttValidFloat($cl_rate, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.users.default_rate'));
+  if ($user->isPluginEnabled('cl') && ttRoleHelper::isClientRole($cl_role_id) && !$cl_client_id) $err->add($i18n->get('error.client'));
+  if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
 
   if ($err->no()) {
     if (!ttUserHelper::getUserByLogin($cl_login)) {
@@ -158,9 +158,9 @@ if ($request->isPost()) {
         header('Location: users.php');
         exit();
       } else
-        $err->add($i18n->getKey('error.db'));
+        $err->add($i18n->get('error.db'));
     } else
-      $err->add($i18n->getKey('error.user_exists'));
+      $err->add($i18n->get('error.user_exists'));
   }
 } // isPost
 
@@ -168,6 +168,6 @@ $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('active_roles', $active_roles);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
-$smarty->assign('title', $i18n->getKey('title.add_user'));
+$smarty->assign('title', $i18n->get('title.add_user'));
 $smarty->assign('content_page_name', 'user_add.tpl');
 $smarty->display('index.tpl');

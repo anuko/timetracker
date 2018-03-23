@@ -104,7 +104,7 @@ $table->addColumn(new TableColumn('day_6', 'day 6', new TimeCellRenderer()));
 $table->setInteractive(false);
 $form->addInputElement($table);
 
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.submit')));
 
 // Submit.
 if ($request->isPost()) {
@@ -113,6 +113,6 @@ if ($request->isPost()) {
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.time'));
+$smarty->assign('title', $i18n->get('title.time'));
 $smarty->assign('content_page_name', 'table_test.tpl');
 $smarty->display('index.tpl');

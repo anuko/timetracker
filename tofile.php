@@ -63,7 +63,7 @@ else
   $items = ttReportHelper::getItems($bean);
 
 // Build a string to use as filename for the files being downloaded.
-$filename = strtolower($i18n->getKey('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
+$filename = strtolower($i18n->get('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
 
 header('Pragma: public'); // This is needed for IE8 to download files over https.
 header('Content-Type: text/html; charset=utf-8');
@@ -164,13 +164,13 @@ if ('csv' == $type) {
       $group_by_header = $custom_fields->fields[0]['label'];
     else {
       $key = 'label.'.$group_by;
-      $group_by_header = $i18n->getKey($key);
+      $group_by_header = $i18n->get($key);
     }
 
     // Print headers.
     print '"'.$group_by_header.'"';
-    if ($bean->getAttribute('chduration')) print ',"'.$i18n->getKey('label.duration').'"';
-    if ($bean->getAttribute('chcost')) print ',"'.$i18n->getKey('label.cost').'"';
+    if ($bean->getAttribute('chduration')) print ',"'.$i18n->get('label.duration').'"';
+    if ($bean->getAttribute('chcost')) print ',"'.$i18n->get('label.cost').'"';
     print "\n";
 
     // Print subtotals.
@@ -192,20 +192,20 @@ if ('csv' == $type) {
     }
   } else {
     // Normal report. Print headers.
-    print '"'.$i18n->getKey('label.date').'"';
-    if ($user->canManageTeam() || $user->isClient()) print ',"'.$i18n->getKey('label.user').'"';
-    if ($bean->getAttribute('chclient')) print ',"'.$i18n->getKey('label.client').'"';
-    if ($bean->getAttribute('chproject')) print ',"'.$i18n->getKey('label.project').'"';
-    if ($bean->getAttribute('chtask')) print ',"'.$i18n->getKey('label.task').'"';
+    print '"'.$i18n->get('label.date').'"';
+    if ($user->canManageTeam() || $user->isClient()) print ',"'.$i18n->get('label.user').'"';
+    if ($bean->getAttribute('chclient')) print ',"'.$i18n->get('label.client').'"';
+    if ($bean->getAttribute('chproject')) print ',"'.$i18n->get('label.project').'"';
+    if ($bean->getAttribute('chtask')) print ',"'.$i18n->get('label.task').'"';
     if ($bean->getAttribute('chcf_1')) print ',"'.$custom_fields->fields[0]['label'].'"';
-    if ($bean->getAttribute('chstart')) print ',"'.$i18n->getKey('label.start').'"';
-    if ($bean->getAttribute('chfinish')) print ',"'.$i18n->getKey('label.finish').'"';
-    if ($bean->getAttribute('chduration')) print ',"'.$i18n->getKey('label.duration').'"';
-    if ($bean->getAttribute('chnote')) print ',"'.$i18n->getKey('label.note').'"';
-    if ($bean->getAttribute('chcost')) print ',"'.$i18n->getKey('label.cost').'"';
-    if ($bean->getAttribute('chpaid')) print ',"'.$i18n->getKey('label.paid').'"';
-    if ($bean->getAttribute('chip')) print ',"'.$i18n->getKey('label.ip').'"';
-    if ($bean->getAttribute('chinvoice')) print ',"'.$i18n->getKey('label.invoice').'"';
+    if ($bean->getAttribute('chstart')) print ',"'.$i18n->get('label.start').'"';
+    if ($bean->getAttribute('chfinish')) print ',"'.$i18n->get('label.finish').'"';
+    if ($bean->getAttribute('chduration')) print ',"'.$i18n->get('label.duration').'"';
+    if ($bean->getAttribute('chnote')) print ',"'.$i18n->get('label.note').'"';
+    if ($bean->getAttribute('chcost')) print ',"'.$i18n->get('label.cost').'"';
+    if ($bean->getAttribute('chpaid')) print ',"'.$i18n->get('label.paid').'"';
+    if ($bean->getAttribute('chip')) print ',"'.$i18n->get('label.ip').'"';
+    if ($bean->getAttribute('chinvoice')) print ',"'.$i18n->get('label.invoice').'"';
     print "\n";
 
     // Print items.

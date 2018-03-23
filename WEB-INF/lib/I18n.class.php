@@ -52,11 +52,6 @@ class I18n {
     return $value;
   }
 
-  // getKey is a legacy function that we are replacing with get.
-  function getKey($kword) {
-    return $this->get($kword);
-  }
-
   // TODO: refactoring ongoing down from here...
     function getWeekDayName($id) {
       $id = (int) $id;

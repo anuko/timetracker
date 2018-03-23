@@ -235,7 +235,7 @@ if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
     'value'=>$cl_client,
     'data'=>$active_clients,
     'datakeys'=>array('id', 'name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+    'empty'=>array(''=>$i18n->get('dropdown.select'))));
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
@@ -249,7 +249,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+    'empty'=>array(''=>$i18n->get('dropdown.select'))));
 
   // Dropdown for clients if the clients plugin is enabled.
   if ($user->isPluginEnabled('cl')) {
@@ -276,7 +276,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+      'empty'=>array(''=>$i18n->get('dropdown.select'))));
   }
 }
 
@@ -288,7 +288,7 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
     'value'=>$cl_task,
     'data'=>$task_list,
     'datakeys'=>array('id','name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+    'empty'=>array(''=>$i18n->get('dropdown.select'))));
 }
 if (!defined('NOTE_INPUT_HEIGHT'))
   define('NOTE_INPUT_HEIGHT', 40);
@@ -299,7 +299,7 @@ $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // 
 if ($user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'get_date()')); // User current date, which gets filled in on btn_submit click.
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.submit')));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.submit')));
 
 // If we have custom fields - add controls for them.
 if ($custom_fields && $custom_fields->fields[0]) {
@@ -311,7 +311,7 @@ if ($custom_fields && $custom_fields->fields[0]) {
       'style'=>'width: 250px;',
       'value'=>$cl_cf_1,
       'data'=>$custom_fields->options,
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+      'empty'=>array(''=>$i18n->get('dropdown.select'))));
   }
 }
 
@@ -330,15 +330,15 @@ if ($request->isPost()) {
     }
     if ($newEntryPosted) {
       if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
-        $err->add($i18n->getKey('error.client'));
+        $err->add($i18n->get('error.client'));
       if ($custom_fields) {
-        if (!ttValidString($cl_cf_1, !$custom_fields->fields[0]['required'])) $err->add($i18n->getKey('error.field'), $custom_fields->fields[0]['label']);
+        if (!ttValidString($cl_cf_1, !$custom_fields->fields[0]['required'])) $err->add($i18n->get('error.field'), $custom_fields->fields[0]['label']);
       }
       if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-        if (!$cl_project) $err->add($i18n->getKey('error.project'));
+        if (!$cl_project) $err->add($i18n->get('error.project'));
       }
       if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode && $user->task_required) {
-        if (!$cl_task) $err->add($i18n->getKey('error.task'));
+        if (!$cl_task) $err->add($i18n->get('error.task'));
       }
     }
     // Finished validating user input for row 0.
@@ -369,7 +369,7 @@ if ($request->isPost()) {
             // If posted value is not null, check and normalize it.
             if ($postedDuration) {
               if (false === ttTimeHelper::postedDurationToMinutes($postedDuration)) {
-                $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+                $err->add($i18n->get('error.field'), $i18n->get('label.duration'));
                 $result = false; break; // Break out. Stop any further processing.
               } else {
                 $minutes = ttTimeHelper::postedDurationToMinutes($postedDuration);
@@ -433,7 +433,7 @@ if ($request->isPost()) {
             $existingComment = $dataArray[$rowNumber][$dayHeader]['note'];
             // If posted value is not null, check it.
             if ($postedComment && !ttValidString($postedComment, true)) {
-              $err->add($i18n->getKey('error.field'), $i18n->getKey('label.note'));
+              $err->add($i18n->get('error.field'), $i18n->get('label.note'));
               $result = false; break; // Break out. Stop any further processing.
             }
             // Do not process if value has not changed.
@@ -490,6 +490,6 @@ $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('timestring', $startDate->toString($user->date_format).' - '.$endDate->toString($user->date_format));
 $smarty->assign('time_records', $records);
 
-$smarty->assign('title', $i18n->getKey('title.time'));
+$smarty->assign('title', $i18n->get('title.time'));
 $smarty->assign('content_page_name', 'week.tpl');
 $smarty->display('index.tpl');

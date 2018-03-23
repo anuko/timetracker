@@ -52,17 +52,17 @@ $form = new Form('weekViewForm');
 $form->addInput(array('type'=>'checkbox','name'=>'week_note','value'=>$cl_week_note));
 $form->addInput(array('type'=>'checkbox','name'=>'week_list','value'=>$cl_week_list));
 $form->addInput(array('type'=>'checkbox','name'=>'notes','value'=>$cl_notes));
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()){
   if (!ttTeamHelper::enablePlugin('wvn', $cl_week_note) ||
       !ttTeamHelper::enablePlugin('wvl', $cl_week_list) ||
       !ttTeamHelper::enablePlugin('wvns', $cl_notes)) {
-    $err->add($i18n->getKey('error.db'));
+    $err->add($i18n->get('error.db'));
   }
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.week_view'));
+$smarty->assign('title', $i18n->get('title.week_view'));
 $smarty->assign('content_page_name', 'week_view.tpl');
 $smarty->display('index.tpl');

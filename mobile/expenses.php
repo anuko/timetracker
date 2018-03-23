@@ -88,7 +88,7 @@ if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
       'value'=>$cl_client,
       'data'=>$active_clients,
       'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+      'empty'=>array(''=>$i18n->get('dropdown.select'))));
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
@@ -102,7 +102,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+    'empty'=>array(''=>$i18n->get('dropdown.select'))));
 
   // Dropdown for clients if the clients plugin is enabled.
   if ($user->isPluginEnabled('cl')) {
@@ -128,7 +128,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+      'empty'=>array(''=>$i18n->get('dropdown.select'))));
   }
 }
 // If predefined expenses are configured, add controls to select an expense and quantity.
@@ -141,38 +141,38 @@ if ($predefined_expenses) {
     'value'=>$cl_predefined_expense,
     'data'=>$predefined_expenses,
     'datakeys'=>array('id', 'name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+    'empty'=>array(''=>$i18n->get('dropdown.select'))));
   $form->addInput(array('type'=>'text','onchange'=>'recalculateCost();','maxlength'=>'40','name'=>'quantity','style'=>'width: 100px;','value'=>$cl_quantity));
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'item_name','style'=>'width: 250px;','value'=>$cl_item_name));
 $form->addInput(array('type'=>'text','maxlength'=>'40','name'=>'cost','style'=>'width: 100px;','value'=>$cl_cost));
 $form->addInput(array('type'=>'calendar','name'=>'date','highlight'=>'expenses','value'=>$cl_date)); // calendar
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.submit')));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.submit')));
 
 // Submit.
 if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
     // Validate user input.
     if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
-      $err->add($i18n->getKey('error.client'));
+      $err->add($i18n->get('error.client'));
     if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-      if (!$cl_project) $err->add($i18n->getKey('error.project'));
+      if (!$cl_project) $err->add($i18n->get('error.project'));
     }
-    if (!ttValidString($cl_item_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.item'));
-    if (!ttValidFloat($cl_cost)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cost'));
+    if (!ttValidString($cl_item_name)) $err->add($i18n->get('error.field'), $i18n->get('label.item'));
+    if (!ttValidFloat($cl_cost)) $err->add($i18n->get('error.field'), $i18n->get('label.cost'));
 
     // Prohibit creating entries in future.
     if (!$user->future_entries) {
       $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
       if ($selected_date->after($browser_today))
-        $err->add($i18n->getKey('error.future_date'));
+        $err->add($i18n->get('error.future_date'));
     }
     // Finished validating input data.
 
     // Prohibit creating entries in locked range.
     if ($user->isDateLocked($selected_date))
-      $err->add($i18n->getKey('error.range_locked'));
+      $err->add($i18n->get('error.range_locked'));
 
     // Insert record.
     if ($err->no()) {
@@ -181,7 +181,7 @@ if ($request->isPost()) {
         header('Location: expenses.php');
         exit();
       } else
-        $err->add($i18n->getKey('error.db'));
+        $err->add($i18n->get('error.db'));
     }
   } elseif ($request->getParameter('onBehalfUser')) {
     if($user->canManageTeam()) {
@@ -207,6 +207,6 @@ $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('timestring', $selected_date->toString($user->date_format));
-$smarty->assign('title', $i18n->getKey('title.expenses'));
+$smarty->assign('title', $i18n->get('title.expenses'));
 $smarty->assign('content_page_name', 'mobile/expenses.tpl');
 $smarty->display('mobile/index.tpl');

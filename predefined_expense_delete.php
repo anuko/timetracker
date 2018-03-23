@@ -42,8 +42,8 @@ $predefined_expense_to_delete = $predefined_expense['name'];
 
 $form = new Form('predefinedExpenseDeleteForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_predefined_expense_id));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
-$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
+$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
@@ -52,9 +52,9 @@ if ($request->isPost()) {
         header('Location: predefined_expenses.php');
         exit();
       } else
-        $err->add($i18n->getKey('error.db'));
+        $err->add($i18n->get('error.db'));
     } else
-      $err->add($i18n->getKey('error.db'));
+      $err->add($i18n->get('error.db'));
   } elseif ($request->getParameter('btn_cancel')) {
     header('Location: predefined_expenses.php');
     exit();
@@ -64,6 +64,6 @@ if ($request->isPost()) {
 $smarty->assign('predefined_expense_to_delete', $predefined_expense_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.predefinedExpenseDeleteForm.btn_cancel.focus()"');
-$smarty->assign('title', $i18n->getKey('title.delete_predefined_expense'));
+$smarty->assign('title', $i18n->get('title.delete_predefined_expense'));
 $smarty->assign('content_page_name', 'predefined_expense_delete.tpl');
 $smarty->display('index.tpl');

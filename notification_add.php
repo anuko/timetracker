@@ -59,23 +59,23 @@ $form->addInput(array('type'=>'combobox',
   'value'=>$cl_fav_report,
   'data'=>$fav_reports,
   'datakeys'=>array('id','name'),
-  'empty'=>array(''=>$i18n->getKey('dropdown.select'))
+  'empty'=>array(''=>$i18n->get('dropdown.select'))
 ));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'cron_spec','style'=>'width: 250px;','value'=>$cl_cron_spec));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','style'=>'width: 250px;','value'=>$cl_email));
 $form->addInput(array('type'=>'text','name'=>'cc','style'=>'width: 300px;','value'=>$cl_cc));
 $form->addInput(array('type'=>'text','name'=>'subject','style'=>'width: 300px;','value'=>$cl_subject));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'report_condition','style'=>'width: 250px;','value'=>$cl_report_condition));
-$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
+$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!$cl_fav_report) $err->add($i18n->getKey('error.report'));
-  if (!ttValidCronSpec($cl_cron_spec)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.schedule'));
-  if (!ttValidEmail($cl_email)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
-  if (!ttValidEmail($cl_cc, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cc'));
-  if (!ttValidString($cl_subject, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.subject'));
-  if (!ttValidCondition($cl_report_condition)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.condition'));
+  if (!$cl_fav_report) $err->add($i18n->get('error.report'));
+  if (!ttValidCronSpec($cl_cron_spec)) $err->add($i18n->get('error.field'), $i18n->get('label.schedule'));
+  if (!ttValidEmail($cl_email)) $err->add($i18n->get('error.field'), $i18n->get('label.email'));
+  if (!ttValidEmail($cl_cc, true)) $err->add($i18n->get('error.field'), $i18n->get('label.cc'));
+  if (!ttValidString($cl_subject, true)) $err->add($i18n->get('error.field'), $i18n->get('label.subject'));
+  if (!ttValidCondition($cl_report_condition)) $err->add($i18n->get('error.field'), $i18n->get('label.condition'));
 
   if ($err->no()) {
     // Calculate next execution time.
@@ -94,11 +94,11 @@ if ($request->isPost()) {
         header('Location: notifications.php');
         exit();
       } else
-        $err->add($i18n->getKey('error.db'));
+        $err->add($i18n->get('error.db'));
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.add_notification'));
+$smarty->assign('title', $i18n->get('title.add_notification'));
 $smarty->assign('content_page_name', 'notification_add.tpl');
 $smarty->display('index.tpl');

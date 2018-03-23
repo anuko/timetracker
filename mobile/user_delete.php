@@ -58,8 +58,8 @@ $smarty->assign('user_to_delete', $user_details['name']." (".$user_details['logi
 // Create confirmation form.
 $form = new Form('userDeleteForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$user_id));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
-$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
+$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
@@ -82,7 +82,7 @@ if ($request->isPost()) {
       }
       exit();
     } else {
-      $err->add($i18n->getKey('error.db'));
+      $err->add($i18n->get('error.db'));
     }
   }
   if ($request->getParameter('btn_cancel')) {
@@ -92,6 +92,6 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.delete_user'));
+$smarty->assign('title', $i18n->get('title.delete_user'));
 $smarty->assign('content_page_name', 'mobile/user_delete.tpl');
 $smarty->display('mobile/index.tpl');

@@ -45,12 +45,12 @@ if ($request->isPost()) {
     exit();
   }
 } else {
-  $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
+  $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
   $predefinedExpenses = ttTeamHelper::getPredefinedExpenses($user->team_id);
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('predefined_expenses', $predefinedExpenses);
-$smarty->assign('title', $i18n->getKey('title.predefined_expenses'));
+$smarty->assign('title', $i18n->get('title.predefined_expenses'));
 $smarty->assign('content_page_name', 'predefined_expenses.tpl');
 $smarty->display('index.tpl');

@@ -67,20 +67,20 @@ for ($i = 0; $i < $user->rank; $i++) {
 }
 $form->addInput(array('type'=>'combobox','name'=>'rank','data'=>$rank_data,'value'=>$cl_rank));
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
-  'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+  'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
+$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 // Multiple select controls for assigned and available rights.
 $form->addInput(array('type'=>'combobox','name'=>'assigned_rights','style'=>'width: 250px;','multiple'=>true,'data'=>$assigned_rights));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('button.delete')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('button.delete')));
 $form->addInput(array('type'=>'combobox','name'=>'available_rights','style'=>'width: 250px;','multiple'=>true,'data'=>$available_rights));
-$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
+$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
     if ($request->getParameter('btn_save')) {
     // Validate user input.
-    if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
-    if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
+    if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
+    if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
 
     if ($err->no()) {
       $existing_role = ttRoleHelper::getRoleByName($cl_name);
@@ -95,9 +95,9 @@ if ($request->isPost()) {
           header('Location: roles.php');
           exit();
         } else
-          $err->add($i18n->getKey('error.db'));
+          $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->getKey('error.object_exists'));
+        $err->add($i18n->get('error.object_exists'));
     }
   }
   if ($request->getParameter('btn_delete') && $request->getParameter('assigned_rights')) {
@@ -113,7 +113,7 @@ if ($request->isPost()) {
        header('Location: role_edit.php?id='.$role['id']);
        exit();
      } else
-       $err->add($i18n->getKey('error.db'));
+       $err->add($i18n->get('error.db'));
   }
   if ($request->getParameter('btn_add') && $request->getParameter('available_rights')) {
      $rights = $role['rights'];
@@ -132,11 +132,11 @@ if ($request->isPost()) {
        header('Location: role_edit.php?id='.$role['id']);
        exit();
      } else
-       $err->add($i18n->getKey('error.db'));
+       $err->add($i18n->get('error.db'));
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.edit_role'));
+$smarty->assign('title', $i18n->get('title.edit_role'));
 $smarty->assign('content_page_name', 'role_edit.tpl');
 $smarty->display('index.tpl');

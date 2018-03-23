@@ -44,6 +44,6 @@ if($user->canManageTeam()) {
 
 $smarty->assign('active_projects', $active_projects);
 $smarty->assign('inactive_projects', $inactive_projects);
-$smarty->assign('title', $i18n->getKey('title.projects'));
+$smarty->assign('title', $i18n->get('title.projects'));
 $smarty->assign('content_page_name', 'projects.tpl');
 $smarty->display('index.tpl');

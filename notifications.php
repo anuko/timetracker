@@ -45,12 +45,12 @@ if ($request->isPost()) {
     exit();
   }
 } else {
-  $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
+  $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
   $notifications = ttTeamHelper::getNotifications($user->team_id);
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('notifications', $notifications);
-$smarty->assign('title', $i18n->getKey('title.notifications'));
+$smarty->assign('title', $i18n->get('title.notifications'));
 $smarty->assign('content_page_name', 'notifications.tpl');
 $smarty->display('index.tpl');

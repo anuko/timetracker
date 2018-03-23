@@ -61,17 +61,17 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_task_id));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','class'=>'mobile-textarea','value'=>$cl_description));
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
-  'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
+  'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
 $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','layout'=>'H','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_projects));
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
-$form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
+$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
+$form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->get('button.copy')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
-  if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
+  if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
+  if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
 
   if ($err->no()) {
     if ($request->getParameter('btn_save')) {
@@ -87,9 +87,9 @@ if ($request->isPost()) {
           header('Location: tasks.php');
           exit();
         } else
-          $err->add($i18n->getKey('error.db'));
+          $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->getKey('error.task_exists'));
+        $err->add($i18n->get('error.task_exists'));
     }
 
     if ($request->getParameter('btn_copy')) {
@@ -103,9 +103,9 @@ if ($request->isPost()) {
           header('Location: tasks.php');
           exit();
         } else
-          $err->add($i18n->getKey('error.db'));
+          $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->getKey('error.task_exists'));
+        $err->add($i18n->get('error.task_exists'));
     }
     
     if ($request->getParameter('btn_delete')) {
@@ -116,6 +116,6 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.edit_task'));
+$smarty->assign('title', $i18n->get('title.edit_task'));
 $smarty->assign('content_page_name', 'mobile/task_edit.tpl');
 $smarty->display('mobile/index.tpl');

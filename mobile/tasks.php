@@ -38,6 +38,6 @@ if (!ttAccessAllowed('manage_tasks') || MODE_PROJECTS_AND_TASKS != $user->tracki
 
 $smarty->assign('active_tasks', ttTeamHelper::getActiveTasks($user->team_id));
 $smarty->assign('inactive_tasks', ttTeamHelper::getInactiveTasks($user->team_id));
-$smarty->assign('title', $i18n->getKey('title.tasks'));
+$smarty->assign('title', $i18n->get('title.tasks'));
 $smarty->assign('content_page_name', 'mobile/tasks.tpl');
 $smarty->display('mobile/index.tpl');

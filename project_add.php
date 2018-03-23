@@ -63,12 +63,12 @@ $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 
 $form->addInput(array('type'=>'checkboxgroup','name'=>'users','data'=>$all_users,'layout'=>'H','value'=>$cl_users));
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkboxgroup','name'=>'tasks','data'=>$all_tasks,'layout'=>'H','value'=>$cl_tasks));
-$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
+$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
-  if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
+  if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
+  if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
 
   if ($err->no()) {
     if (!ttProjectHelper::getProjectByName($cl_name)) {
@@ -82,14 +82,14 @@ if ($request->isPost()) {
           header('Location: projects.php');
           exit();
         } else
-          $err->add($i18n->getKey('error.db'));
+          $err->add($i18n->get('error.db'));
     } else
-      $err->add($i18n->getKey('error.project_exists'));
+      $err->add($i18n->get('error.project_exists'));
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.projectForm.project_name.focus()"');
-$smarty->assign('title', $i18n->getKey('title.add_project'));
+$smarty->assign('title', $i18n->get('title.add_project'));
 $smarty->assign('content_page_name', 'project_add.tpl');
 $smarty->display('index.tpl');

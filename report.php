@@ -75,17 +75,17 @@ if ($bean->getAttribute('chpaid') ||
 
 // Controls for "Mark paid" block.
 if ($bean->getAttribute('chpaid')) {
-  $mark_paid_select_options = array('1'=>$i18n->getKey('dropdown.all'),'2'=>$i18n->getKey('dropdown.select'));
+  $mark_paid_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'mark_paid_select_options',
     'data'=>$mark_paid_select_options,
     'value'=>$cl_mark_paid_select_option));
-  $mark_paid_action_options = array('1'=>$i18n->getKey('dropdown.paid'),'2'=>$i18n->getKey('dropdown.not_paid'));
+  $mark_paid_action_options = array('1'=>$i18n->get('dropdown.paid'),'2'=>$i18n->get('dropdown.not_paid'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'mark_paid_action_options',
     'data'=>$mark_paid_action_options,
     'value'=>$cl_mark_paid_action_option));
-  $form->addInput(array('type'=>'submit','name'=>'btn_mark_paid','value'=>$i18n->getKey('button.submit')));
+  $form->addInput(array('type'=>'submit','name'=>'btn_mark_paid','value'=>$i18n->get('button.submit')));
   $smarty->assign('use_mark_paid', true);
 }
 
@@ -94,7 +94,7 @@ if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->g
   // Client is selected and we are displaying the invoice column.
   $recent_invoices = ttTeamHelper::getRecentInvoices($user->team_id, $client_id);
   if ($recent_invoices) {
-    $assign_invoice_select_options = array('1'=>$i18n->getKey('dropdown.all'),'2'=>$i18n->getKey('dropdown.select'));
+    $assign_invoice_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
     $form->addInput(array('type'=>'combobox',
       'name'=>'assign_invoice_select_options',
       'data'=>$assign_invoice_select_options,
@@ -104,8 +104,8 @@ if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->g
       'data'=>$recent_invoices,
       'datakeys'=>array('id','name'),
       'value'=>$cl_recent_invoice_option,
-      'empty'=>array(''=>$i18n->getKey('dropdown.select_invoice'))));
-    $form->addInput(array('type'=>'submit','name'=>'btn_assign','value'=>$i18n->getKey('button.submit')));
+      'empty'=>array(''=>$i18n->get('dropdown.select_invoice'))));
+    $form->addInput(array('type'=>'submit','name'=>'btn_assign','value'=>$i18n->get('button.submit')));
     $smarty->assign('use_assign_to_invoice', true);
   }
 }
@@ -122,7 +122,7 @@ if ($request->isPost()) {
       if ('item_id_' == substr($key, 0, 8))
         $expense_item_ids[] = substr($key, 8);
     }
-    if (!$time_log_ids && !$expense_item_ids) $err->Add($i18n->getKey('error.record')); // There are no selected records.
+    if (!$time_log_ids && !$expense_item_ids) $err->Add($i18n->get('error.record')); // There are no selected records.
     // Validation of parameteres ended here.
   } else {
     // We are assigning all report items. Get the arrays from session.
@@ -193,7 +193,7 @@ if ('no_grouping' != $group_by) {
     $smarty->assign('group_by_header', $custom_fields->fields[0]['label']);
   else {
     $key = 'label.'.$group_by;
-    $smarty->assign('group_by_header', $i18n->getKey($key));
+    $smarty->assign('group_by_header', $i18n->get($key));
   }
 }
 // Assign variables that are used to alternate color of rows for different dates.
@@ -207,6 +207,6 @@ $smarty->assign('report_items', $report_items);
 $smarty->assign('subtotals', $subtotals);
 $smarty->assign('totals', $totals);
 $smarty->assign('bean', $bean);
-$smarty->assign('title', $i18n->getKey('title.report').": ".$totals['start_date']." - ".$totals['end_date']);
+$smarty->assign('title', $i18n->get('title.report').": ".$totals['start_date']." - ".$totals['end_date']);
 $smarty->assign('content_page_name', 'report.tpl');
 $smarty->display('index.tpl');

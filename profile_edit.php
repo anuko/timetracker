@@ -165,8 +165,8 @@ if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'combobox','name'=>'date_format','style'=>'width: 150px;','data'=>$DATE_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_date_format,
     'onchange'=>'MakeFormatPreview(&quot;date_format_preview&quot;, this);'));
   $TIME_FORMAT_OPTIONS = array(
-    array('id'=>'%H:%M','name'=>$i18n->getKey('form.profile.24_hours')),
-    array('id'=>'%I:%M %p','name'=>$i18n->getKey('form.profile.12_hours')));
+    array('id'=>'%H:%M','name'=>$i18n->get('form.profile.24_hours')),
+    array('id'=>'%I:%M %p','name'=>$i18n->get('form.profile.12_hours')));
   $form->addInput(array('type'=>'combobox','name'=>'time_format','style'=>'width: 150px;','data'=>$TIME_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_time_format,
     'onchange'=>'MakeFormatPreview(&quot;time_format_preview&quot;, this);'));
 
@@ -182,18 +182,18 @@ if ($user->canManageTeam()) {
 
   // Prepare tracking mode choices.
   $tracking_mode_options = array();
-  $tracking_mode_options[MODE_TIME] = $i18n->getKey('form.profile.mode_time');
-  $tracking_mode_options[MODE_PROJECTS] = $i18n->getKey('form.profile.mode_projects');
-  $tracking_mode_options[MODE_PROJECTS_AND_TASKS] = $i18n->getKey('form.profile.mode_projects_and_tasks');
+  $tracking_mode_options[MODE_TIME] = $i18n->get('form.profile.mode_time');
+  $tracking_mode_options[MODE_PROJECTS] = $i18n->get('form.profile.mode_projects');
+  $tracking_mode_options[MODE_PROJECTS_AND_TASKS] = $i18n->get('form.profile.mode_projects_and_tasks');
   $form->addInput(array('type'=>'combobox','name'=>'tracking_mode','style'=>'width: 150px;','data'=>$tracking_mode_options,'value'=>$cl_tracking_mode,'onchange'=>'handleTaskRequiredCheckbox()'));
   $form->addInput(array('type'=>'checkbox','name'=>'project_required','value'=>$cl_project_required));
   $form->addInput(array('type'=>'checkbox','name'=>'task_required','value'=>$cl_task_required));
 
   // Prepare record type choices.
   $record_type_options = array();
-  $record_type_options[TYPE_ALL] = $i18n->getKey('form.profile.type_all');
-  $record_type_options[TYPE_START_FINISH] = $i18n->getKey('form.profile.type_start_finish');
-  $record_type_options[TYPE_DURATION] = $i18n->getKey('form.profile.type_duration');
+  $record_type_options[TYPE_ALL] = $i18n->get('form.profile.type_all');
+  $record_type_options[TYPE_START_FINISH] = $i18n->get('form.profile.type_start_finish');
+  $record_type_options[TYPE_DURATION] = $i18n->get('form.profile.type_duration');
   $form->addInput(array('type'=>'combobox','name'=>'record_type','style'=>'width: 150px;','data'=>$record_type_options,'value'=>$cl_record_type));
 
   // Punch mode checkbox.
@@ -227,30 +227,30 @@ if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'checkbox','name'=>'quotas','value'=>$cl_quotas,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'week_view','value'=>$cl_week_view,'onchange'=>'handlePluginCheckboxes()'));
 }
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
+  if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.person_name'));
   if ($can_change_login) {
-    if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
+    if (!ttValidString($cl_login)) $err->add($i18n->get('error.field'), $i18n->get('label.login'));
 
     // New login must be unique.
     if ($cl_login != $user->login && ttUserHelper::getUserByLogin($cl_login))
-      $err->add($i18n->getKey('error.user_exists'));
+      $err->add($i18n->get('error.user_exists'));
   }
   if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
-    if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-    if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+    if (!ttValidString($cl_password1)) $err->add($i18n->get('error.field'), $i18n->get('label.password'));
+    if (!ttValidString($cl_password2)) $err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
     if ($cl_password1 !== $cl_password2)
-      $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+      $err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
   }
-  if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+  if (!ttValidEmail($cl_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.email'));
   if ($user->canManageTeam()) {
-    if (!ttValidString($cl_team, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
-    if (!ttValidString($cl_currency, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));
+    if (!ttValidString($cl_team, true)) $err->add($i18n->get('error.field'), $i18n->get('label.team_name'));
+    if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));
     if ($user->isManager()) {
-      if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.bcc'));
+      if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
     }
   }
   // Finished validating user input.
@@ -338,13 +338,13 @@ if ($request->isPost()) {
       header('Location: time.php');
       exit();
     } else
-      $err->add($i18n->getKey('error.db'));
+      $err->add($i18n->get('error.db'));
   }
 } // isPost
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="handleTaskRequiredCheckbox(); handlePluginCheckboxes();"');
-$smarty->assign('title', $i18n->getKey('title.profile'));
+$smarty->assign('title', $i18n->get('title.profile'));
 $smarty->assign('content_page_name', 'profile_edit.tpl');
 $smarty->display('index.tpl');

@@ -56,6 +56,6 @@ if ($user->uncompleted_indicators) {
 $smarty->assign('active_users', $active_users);
 $smarty->assign('inactive_users', $inactive_users);
 $smarty->assign('can_delete_manager', $can_delete_manager);
-$smarty->assign('title', $i18n->getKey('title.users'));
+$smarty->assign('title', $i18n->get('title.users'));
 $smarty->assign('content_page_name', 'users.tpl');
 $smarty->display('index.tpl');

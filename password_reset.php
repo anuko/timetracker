@@ -38,13 +38,13 @@ if ($auth->isPasswordExternal()) {
 
 $form = new Form('resetPasswordForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','style'=>'width: 300px;'));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.reset_password')));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.reset_password')));
 
 if ($request->isPost()) {
   $cl_login = $request->getParameter('login');
 
   // Validate user input.
-  if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
+  if (!ttValidString($cl_login)) $err->add($i18n->get('error.field'), $i18n->get('label.login'));
 
   if ($err->no()) {
     if (!ttUserHelper::getUserByLogin($cl_login)) {
@@ -55,9 +55,9 @@ if ($request->isPost()) {
         if ($login)
           $cl_login = $login;
         else
-          $err->add($i18n->getKey('error.no_login'));
+          $err->add($i18n->get('error.no_login'));
       } else
-        $err->add($i18n->getKey('error.no_login'));
+        $err->add($i18n->get('error.no_login'));
     }
   }
 
@@ -83,7 +83,7 @@ if ($request->isPost()) {
       if (ttValidEmail($cl_login))
         $receiver = $cl_login;
       else
-        $err->add($i18n->getKey('error.no_email'));
+        $err->add($i18n->get('error.no_email'));
     }
 
     if ($receiver) {
@@ -99,21 +99,21 @@ if ($request->isPost()) {
       else
         $http = 'http';
 
-      $cl_subject = $user_i18n->getKey('form.reset_password.email_subject');
+      $cl_subject = $user_i18n->get('form.reset_password.email_subject');
       if (APP_NAME)
         $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/'.APP_NAME.'/password_change.php?ref='.$temp_ref;
       else
         $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/password_change.php?ref='.$temp_ref;
 
       $sender->setMailMode(MAIL_MODE);
-      $res = $sender->send($cl_subject, sprintf($user_i18n->getKey('form.reset_password.email_body'), $_SERVER['REMOTE_ADDR'], $pass_edit_url));
-      $smarty->assign('result_message', $res ? $i18n->getKey('form.reset_password.message') : $i18n->getKey('error.mail_send'));
+      $res = $sender->send($cl_subject, sprintf($user_i18n->get('form.reset_password.email_body'), $_SERVER['REMOTE_ADDR'], $pass_edit_url));
+      $smarty->assign('result_message', $res ? $i18n->get('form.reset_password.message') : $i18n->get('error.mail_send'));
     }
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.resetPasswordForm.login.focus()"');
-$smarty->assign('title', $i18n->getKey('title.reset_password'));
+$smarty->assign('title', $i18n->get('title.reset_password'));
 $smarty->assign('content_page_name', 'password_reset.tpl');
 $smarty->display('index.tpl');

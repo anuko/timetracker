@@ -62,14 +62,14 @@ $form = new Form('newPasswordForm');
 $form->addInput(array('type'=>'password','maxlength'=>'120','name'=>'password1','value'=>$cl_password1));
 $form->addInput(array('type'=>'password','maxlength'=>'120','name'=>'password2','value'=>$cl_password2));
 $form->addInput(array('type'=>'hidden','name'=>'ref','value'=>$cl_ref));
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-  if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+  if (!ttValidString($cl_password1)) $err->add($i18n->get('error.field'), $i18n->get('label.password'));
+  if (!ttValidString($cl_password2)) $err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
   if ($cl_password1 !== $cl_password2)
-    $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+    $err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
 
   if ($err->no()) {
     // Use the "limit" plugin if we have one. Ignore include errors.
@@ -91,12 +91,12 @@ if ($request->isPost()) {
       }
       exit();
     } else {
-      $err->add($i18n->getKey('error.auth'));
+      $err->add($i18n->get('error.auth'));
     }
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName() => $form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.change_password'));
+$smarty->assign('title', $i18n->get('title.change_password'));
 $smarty->assign('content_page_name', 'password_change.tpl');
 $smarty->display('index.tpl');

@@ -50,12 +50,12 @@ for ($i = 0; $i < $user->rank; $i++) {
   $rank_data[] = $i;
 }
 $form->addInput(array('type'=>'combobox','name'=>'rank','data'=>$rank_data));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.submit')));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
-  if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
+  if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
+  if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
 
   if ($err->no()) {
     $existing_role = ttRoleHelper::getRoleByRank($cl_rank, $user->team_id);
@@ -71,13 +71,13 @@ if ($request->isPost()) {
           header('Location: roles.php');
           exit();
         } else
-          $err->add($i18n->getKey('error.db'));
+          $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->getKey('error.role_exists'));
+        $err->add($i18n->get('error.role_exists'));
     }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.add_role'));
+$smarty->assign('title', $i18n->get('title.add_role'));
 $smarty->assign('content_page_name', 'role_add.tpl');
 $smarty->display('index.tpl');

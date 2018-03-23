@@ -42,8 +42,8 @@ $project_to_delete = $project['name'];
 
 $form = new Form('projectDeleteForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_project_id));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
-$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
+$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
@@ -52,9 +52,9 @@ if ($request->isPost()) {
         header('Location: projects.php');
         exit();
       } else
-        $err->add($i18n->getKey('error.db'));
+        $err->add($i18n->get('error.db'));
     } else
-      $err->add($i18n->getKey('error.db'));
+      $err->add($i18n->get('error.db'));
   } elseif ($request->getParameter('btn_cancel')) {
     header('Location: projects.php');
     exit();
@@ -64,6 +64,6 @@ if ($request->isPost()) {
 $smarty->assign('project_to_delete', $project_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.projectDeleteForm.btn_cancel.focus()"');
-$smarty->assign('title', $i18n->getKey('title.delete_project'));
+$smarty->assign('title', $i18n->get('title.delete_project'));
 $smarty->assign('content_page_name', 'mobile/project_delete.tpl');
 $smarty->display('mobile/index.tpl');
