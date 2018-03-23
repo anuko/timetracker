@@ -8,7 +8,7 @@
       <td>{$forms.swapForm.swap_with.control}</td>
     </tr>
     <tr>
-      <td colspan="2" align="center" height="50">{$forms.swapForm.btn_submit.control}</td>
+      <td colspan="2" align="center">{$forms.swapForm.btn_submit.control} {$forms.swapForm.btn_cancel.control}</td>
     </tr>
   </table>
 </table>

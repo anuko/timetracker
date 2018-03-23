@@ -45,16 +45,25 @@ if ($request->isPost()) {
 $form = new Form('swapForm');
 $form->addInput(array('type'=>'combobox','name'=>'swap_with','style'=>'width: 250px;','data'=>$users,'datakeys'=>array('id','name')));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.submit')));
+$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 
 if ($request->isPost()) {
-  if (ttTeamHelper::swapRolesWith($cl_id)) {
+  if ($request->getParameter('btn_submit')) {
+    if (ttTeamHelper::swapRolesWith($cl_id)) {
+      header('Location: users.php');
+      exit();
+    } else
+      $err->add($i18n->get('error.db'));
+  }
+
+  if ($request->getParameter('btn_cancel')) {
     header('Location: users.php');
     exit();
-  } else
-    $err->add($i18n->get('error.db'));
+  }
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('onload', 'onLoad="document.swapForm.btn_cancel.focus()"');
 $smarty->assign('title', $i18n->get('title.swap_roles'));
 $smarty->assign('content_page_name', 'swap_roles.tpl');
 $smarty->display('index.tpl');
