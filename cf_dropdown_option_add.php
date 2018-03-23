@@ -39,20 +39,20 @@ if (!ttAccessAllowed('manage_custom_fields') || !$user->isPluginEnabled('cf')) {
 $cl_field_id = $request->getParameter('field_id');
 $field = CustomFields::getField($cl_field_id);
 if (false === $field)
-  $err->add($i18n->getKey('error.db'));
+  $err->add($i18n->get('error.db'));
 
 $form = new Form('optionAddForm');
 if ($err->no()) {
   $form->addInput(array('type'=>'hidden','name'=>'field_id','value'=>$cl_field_id));
   $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>''));
-  $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
+  $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 }
 
 if ($request->isPost()) {
   $cl_option_name = trim($request->getParameter('name'));
 
   // Validate user input.
-  if (!ttValidString($cl_option_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
+  if (!ttValidString($cl_option_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
 
   if ($err->no()) {
     $res = CustomFields::insertOption($cl_field_id, $cl_option_name);
@@ -60,12 +60,12 @@ if ($request->isPost()) {
       header("Location: cf_dropdown_options.php?field_id=$cl_field_id");
       exit();
     } else
-      $err->add($i18n->getKey('error.db'));
+      $err->add($i18n->get('error.db'));
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.optionAddForm.name.focus()"');
-$smarty->assign('title', $i18n->getKey('title.cf_add_dropdown_option'));
+$smarty->assign('title', $i18n->get('title.cf_add_dropdown_option'));
 $smarty->assign('content_page_name', 'cf_dropdown_option_add.tpl');
 $smarty->display('index.tpl');

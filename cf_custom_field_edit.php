@@ -39,7 +39,7 @@ if (!ttAccessAllowed('manage_custom_fields') || !$user->isPluginEnabled('cf')) {
 $cl_id = $request->getParameter('id');
 $field = CustomFields::getField($cl_id);
 if (false === $field)
-  $err->add($i18n->getKey('error.db'));
+  $err->add($i18n->get('error.db'));
 
 $form = new Form('fieldForm');
 if ($err->no()) {
@@ -47,9 +47,9 @@ if ($err->no()) {
   $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
   $form->addInput(array('type'=>'checkbox','name'=>'required','value'=>$field['required']));
   $form->addInput(array('type'=>'combobox','name'=>'type','value'=>$field['type'],
-    'data'=>array(CustomFields::TYPE_TEXT=>$i18n->getKey('label.type_text'),
-                  CustomFields::TYPE_DROPDOWN=>$i18n->getKey('label.type_dropdown'))));
-  $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+    'data'=>array(CustomFields::TYPE_TEXT=>$i18n->get('label.type_text'),
+                  CustomFields::TYPE_DROPDOWN=>$i18n->get('label.type_dropdown'))));
+  $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 }
 
 if ($request->isPost()) {
@@ -60,7 +60,7 @@ if ($request->isPost()) {
     $cl_required = 0;
 
   // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
+  if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
 
   if ($err->no()) {
     $res = CustomFields::updateField($cl_id, $cl_name, $cl_type, $cl_required);
@@ -68,12 +68,12 @@ if ($request->isPost()) {
       header('Location: cf_custom_fields.php');
       exit();
     } else
-      $err->add($i18n->getKey('error.db'));
+      $err->add($i18n->get('error.db'));
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.fieldForm.name.focus()"');
-$smarty->assign('title', $i18n->getKey('title.cf_edit_custom_field'));
+$smarty->assign('title', $i18n->get('title.cf_edit_custom_field'));
 $smarty->assign('content_page_name', 'cf_custom_field_edit.tpl');
 $smarty->display('index.tpl');

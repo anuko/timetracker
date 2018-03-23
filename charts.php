@@ -139,11 +139,11 @@ if ($user->canManageTeam()) {
 
 // Chart interval options.
 $intervals = array();
-$intervals[INTERVAL_THIS_DAY] = $i18n->getKey('dropdown.selected_day');
-$intervals[INTERVAL_THIS_WEEK] = $i18n->getKey('dropdown.selected_week');
-$intervals[INTERVAL_THIS_MONTH] = $i18n->getKey('dropdown.selected_month');
-$intervals[INTERVAL_THIS_YEAR] = $i18n->getKey('dropdown.selected_year');
-$intervals[INTERVAL_ALL_TIME] = $i18n->getKey('dropdown.all_time');
+$intervals[INTERVAL_THIS_DAY] = $i18n->get('dropdown.selected_day');
+$intervals[INTERVAL_THIS_WEEK] = $i18n->get('dropdown.selected_week');
+$intervals[INTERVAL_THIS_MONTH] = $i18n->get('dropdown.selected_month');
+$intervals[INTERVAL_THIS_YEAR] = $i18n->get('dropdown.selected_year');
+$intervals[INTERVAL_ALL_TIME] = $i18n->get('dropdown.all_time');
 
 // Chart interval dropdown.
 $chart_form->addInput(array('type' => 'combobox',
@@ -158,11 +158,11 @@ $chart_selector = (MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isP
 if ($chart_selector) {
   $types = array();
   if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
-    $types[CHART_PROJECTS] = $i18n->getKey('dropdown.projects');
+    $types[CHART_PROJECTS] = $i18n->get('dropdown.projects');
   if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
-    $types[CHART_TASKS] = $i18n->getKey('dropdown.tasks');
+    $types[CHART_TASKS] = $i18n->get('dropdown.tasks');
   if ($user->isPluginEnabled('cl'))
-    $types[CHART_CLIENTS] = $i18n->getKey('dropdown.clients');
+    $types[CHART_CLIENTS] = $i18n->get('dropdown.clients');
 
   // Add chart type dropdown.
   $chart_form->addInput(array('type' => 'combobox',
@@ -223,6 +223,6 @@ $chart->renderEx(array('fileName'=>$file_name,'hideLogo'=>true,'hideTitle'=>true
 $smarty->assign('img_file_name', $img_ref);
 $smarty->assign('chart_selector', $chart_selector);
 $smarty->assign('forms', array($chart_form->getName() => $chart_form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.charts'));
+$smarty->assign('title', $i18n->get('title.charts'));
 $smarty->assign('content_page_name', 'charts.tpl');
 $smarty->display('index.tpl');
