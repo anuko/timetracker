@@ -61,9 +61,6 @@ $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
 
 if ($request->isPost()) {
-/*
- * This is work in progress... refactoring to replace the block below.
-
   // Create fields array for ttAdmin instance.
   $fields = array(
     'name' => $cl_name,
@@ -72,42 +69,12 @@ if ($request->isPost()) {
     'password2' => $cl_password2,
     'email' => $cl_email);
 
-    import('ttAdmin');
-    $admin = new ttAdmin($err);
-    $result = $admin->updateSelf($fields);
-    if ($result) {
-      header('Location: admin_teams.php');
-      exit();
-    }
- */
-
-  // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
-  if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
-  // New login must be unique.
-  if ($cl_login != $user->login && ttUserHelper::getUserByLogin($cl_login))
-    $err->add($i18n->getKey('error.user_exists'));
-  if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
-    if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-    if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
-    if ($cl_password1 !== $cl_password2)
-      $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
-  }
-  if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
-  // Finished validating user input.
-
-  if ($err->no()) {
-    if (ttUserHelper::update($user->id, array(
-      'name' => $cl_name,
-      'login' => $cl_login,
-      'password' => $cl_password1,
-      'email' => $cl_email,
-      'status' => ACTIVE))) {
-      header('Location: admin_teams.php');
-      exit();
-    } else {
-      $err->add($i18n->getKey('error.db'));
-    }
+  import('ttAdmin');
+  $admin = new ttAdmin($err);
+  $result = $admin->updateSelf($fields);
+  if ($result) {
+    header('Location: admin_teams.php');
+    exit();
   }
 } // isPost
 

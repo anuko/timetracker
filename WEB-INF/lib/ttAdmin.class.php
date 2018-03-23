@@ -31,8 +31,8 @@ import('ttUser');
 // ttAdmin class is used to perform admin tasks.
 class ttAdmin {
 
-  var $err = null;        // Error object, passed to us as reference.
-                          // We use it to communicate errors to caller.
+  var $err = null; // Error object, passed to us as reference.
+                   // We use it to communicate errors to caller.
 
   // Constructor.
   function __construct(&$err = null) {
@@ -65,22 +65,19 @@ class ttAdmin {
     // Mark user binds as deleted.
     $sql = "update tt_user_project_binds set status = NULL where user_id = $user_id";
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error'))
-      return false;
+    if (is_a($affected, 'PEAR_Error')) return false;
 
     // Mark favorite reports as deleted.
     $sql = "update tt_fav_reports set status = NULL where user_id = $user_id";
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error'))
-      return false;
+    if (is_a($affected, 'PEAR_Error')) return false;
 
     // Mark user as deleted.
     global $user;
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
     $sql = "update tt_users set status = NULL $modified_part where id = $user_id";
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error'))
-      return false;
+    if (is_a($affected, 'PEAR_Error')) return false;
 
     return true;
   }
@@ -104,6 +101,7 @@ class ttAdmin {
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error')) return false;
     }
+
     return true;
   }
 
@@ -264,8 +262,74 @@ class ttAdmin {
     return true;
   }
 
+  // validateUserInfo validates account information entered by user.
+  function validateUserInfo($fields) {
+    global $i18n;
+    global $user;
+    global $auth;
+
+    $result = true;
+
+    if (!ttValidString($fields['name'])) {
+      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
+      $result = false;
+    }
+    if (!ttValidString($fields['login'])) {
+      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
+      $result = false;
+    }
+    // If we change login, it must be unique.
+    if ($fields['login'] != $user->login) {
+      if (ttUserHelper::getUserByLogin($fields['login'])) {
+        $this->err->add($i18n->getKey('error.user_exists'));
+        $result = false;
+      }
+    }
+    if (!$auth->isPasswordExternal() && ($fields['password1'] || $fields['password2'])) {
+      if (!ttValidString($fields['password1'])) {
+        $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
+        $result = false;
+      }
+      if (!ttValidString($fields['password2'])) {
+        $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+        $result = false;
+      }
+      if ($fields['password1'] !== $fields['password2']) {
+        $this->err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+        $result = false;
+      }
+    }
+    if (!ttValidEmail($fields['email'], true)) {
+      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+      $result = false;
+    }
+
+    return $result;
+  }
+
   // updateSelf validates user input and updates admin account with new information.
   function updateSelf($fields) {
-    return false; // Not yet implemeneted.
+    if (!$this->validateUserInfo($fields)) return false; // Can't continue as user input is invalid.
+
+    global $user;
+    global $i18n;
+    $mdb2 = getConnection();
+
+    // Update self.
+    $user_id = $user->id;
+    $login_part = 'login = '.$mdb2->quote($fields['login']);
+    if ($fields['password1'])
+      $password_part = ', password = md5('.$mdb2->quote($fields['password1']).')';
+    $name_part = ', name = '.$mdb2->quote($fields['name']);
+    $email_part = ', email = '.$mdb2->quote($fields['email']);
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+    $sql = 'update tt_users set '.$login_part.$password_part.$name_part.$email_part.$modified_part.'where id = '.$user_id;
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) {
+      $this->err->add($i18n->getKey('error.db'));
+      return false;
+    }
+
+    return true;
   }
 }

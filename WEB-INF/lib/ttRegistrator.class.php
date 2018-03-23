@@ -81,7 +81,7 @@ class ttRegistrator {
 
   // The register function registers a user in Time Tracker.
   function register() {
-    if ($this->err->yes()) return; // There are errors, do not proceed.
+    if ($this->err->yes()) return false; // There are errors, do not proceed.
 
     global $i18n;
 
@@ -89,30 +89,33 @@ class ttRegistrator {
     if (ttUserHelper::getUserByLogin($this->login)) {
       // User login already exists.
       $this->err->add($i18n->getKey('error.user_exists'));
-      return;
+      return false;
     }
 
     // Create a new group.
     $this->group_id = $this->createGroup();
     if (!$this->group_id) {
       $this->err->add($i18n->getKey('error.db'));
-      return;
+      return false;
     }
 
     import('ttRoleHelper');
     if (!ttRoleHelper::createPredefinedRoles($this->group_id, $this->lang)) {
       $err->add($i18n->getKey('error.db'));
-      return;
+      return false;
     }
     $this->role_id = ttRoleHelper::getTopManagerRoleID();
     $this->user_id = $this->createUser();
 
     if (!$this->user_id) {
       $err->add($i18n->getKey('error.db'));
-      return;
+      return false;
     }
 
-    $this->setCreatedBy($this->user_id);
+    if (!$this->setCreatedBy($this->user_id))
+      return false;
+
+    return true;
   }
 
   // The createGroup function creates a group in Time Tracker as part
