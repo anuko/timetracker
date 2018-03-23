@@ -116,14 +116,16 @@ class ttTeamHelper {
     if (!$val['id'] || !$val['role_id'])
       return false;
 
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+
     // Promote user.
-    $sql = "update tt_users set role_id = $user->role_id where id = $user_id and team_id = $user->team_id";
+    $sql = "update tt_users set role_id = $user->role_id".$modified_part." where id = $user_id and team_id = $user->team_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Demote self.
     $role_id = $val['role_id'];
-    $sql = "update tt_users set role_id = $role_id where id = $user->id and team_id = $user->team_id";
+    $sql = "update tt_users set role_id = $role_id".$modified_part." where id = $user->id and team_id = $user->team_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
