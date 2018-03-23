@@ -111,7 +111,7 @@ class ttAdmin {
     // Keep the logic simple by returning false on first error.
 
     // Obtain subgroups and call self recursively on them.
-    $subgroups = $this->getSubgroups();
+    $subgroups = $this->getSubgroups($group_id);
     foreach($subgroups as $subgroup) {
       if (!$this->markGroupDeleted($subgroup['id']))
         return false;
