@@ -44,7 +44,7 @@ $cl_id = $request->getParameter('id');
 $expense_item = ttExpenseHelper::getItem($cl_id, $user->getActiveUser());
 
 // Prohibit editing invoiced items.
-if ($expense_item['invoice_id']) die($i18n->getKey('error.sys'));
+if ($expense_item['invoice_id']) die($i18n->get('error.sys'));
 
 $item_date = new DateAndTime(DB_DATEFORMAT, $expense_item['date']);
 
@@ -80,7 +80,7 @@ if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
     'value'=>$cl_client,
     'data'=>$active_clients,
     'datakeys'=>array('id', 'name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+    'empty'=>array(''=>$i18n->get('dropdown.select'))));
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
@@ -93,7 +93,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+    'empty'=>array(''=>$i18n->get('dropdown.select'))));
 
   // Dropdown for clients if the clients plugin is enabled.
   if ($user->isPluginEnabled('cl')) {
@@ -119,7 +119,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+      'empty'=>array(''=>$i18n->get('dropdown.select'))));
   }
 }
 // If predefined expenses are configured, add controls to select an expense and quantity.
@@ -132,7 +132,7 @@ if ($predefined_expenses) {
       'value'=>$cl_predefined_expense,
       'data'=>$predefined_expenses,
       'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+      'empty'=>array(''=>$i18n->get('dropdown.select'))));
     $form->addInput(array('type'=>'text','onchange'=>'recalculateCost();','maxlength'=>'40','name'=>'quantity','style'=>'width: 100px;','value'=>$cl_quantity));
 }
 $form->addInput(array('type'=>'textarea','maxlength'=>'800','name'=>'item_name','style'=>'width: 250px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_item_name));
@@ -143,20 +143,20 @@ $form->addInput(array('type'=>'datefield','name'=>'date','maxlength'=>'20','valu
 // Hidden control for record id.
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_save or btn_copy click.
-$form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.save')));
-$form->addInput(array('type'=>'submit','name'=>'btn_copy','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.copy')));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
+$form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.save')));
+$form->addInput(array('type'=>'submit','name'=>'btn_copy','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.copy')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 
 if ($request->isPost()) {
   // Validate user input.
   if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
-    $err->add($i18n->getKey('error.client'));
+    $err->add($i18n->get('error.client'));
   if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-    if (!$cl_project) $err->add($i18n->getKey('error.project'));
+    if (!$cl_project) $err->add($i18n->get('error.project'));
   }
-  if (!ttValidString($cl_item_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.item'));
-  if (!ttValidFloat($cl_cost)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cost'));
-  if (!ttValidDate($cl_date)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.date'));
+  if (!ttValidString($cl_item_name)) $err->add($i18n->get('error.field'), $i18n->get('label.item'));
+  if (!ttValidFloat($cl_cost)) $err->add($i18n->get('error.field'), $i18n->get('label.cost'));
+  if (!ttValidDate($cl_date)) $err->add($i18n->get('error.field'), $i18n->get('label.date'));
 
   // This is a new date for the expense item.
   $new_date = new DateAndTime($user->date_format, $cl_date);
@@ -165,7 +165,7 @@ if ($request->isPost()) {
   if (!$user->future_entries) {
     $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
     if ($new_date->after($browser_today))
-      $err->add($i18n->getKey('error.future_date'));
+      $err->add($i18n->get('error.future_date'));
   }
 
   // Save record.
@@ -177,11 +177,11 @@ if ($request->isPost()) {
     // Now, step by step.
     // 1) Prohibit saving locked entries in any form.
     if ($user->isDateLocked($item_date))
-      $err->add($i18n->getKey('error.range_locked'));
+      $err->add($i18n->get('error.range_locked'));
 
     // 2) Prohibit saving unlocked entries into locked range.
     if ($err->no() && $user->isDateLocked($new_date))
-      $err->add($i18n->getKey('error.range_locked'));
+      $err->add($i18n->get('error.range_locked'));
 
     // Now, an update.
     if ($err->no()) {
@@ -197,7 +197,7 @@ if ($request->isPost()) {
   if ($request->getParameter('btn_copy')) {
     // We need to prohibit saving into locked interval.
     if ($user->isDateLocked($new_date))
-      $err->add($i18n->getKey('error.range_locked'));
+      $err->add($i18n->get('error.range_locked'));
 
     // Now, a new insert.
     if ($err->no()) {
@@ -206,7 +206,7 @@ if ($request->isPost()) {
         header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
         exit();
       } else
-        $err->add($i18n->getKey('error.db'));
+        $err->add($i18n->get('error.db'));
     }
   }
 
@@ -221,6 +221,6 @@ $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.edit_expense'));
+$smarty->assign('title', $i18n->get('title.edit_expense'));
 $smarty->assign('content_page_name', 'expense_edit.tpl');
 $smarty->display('index.tpl');

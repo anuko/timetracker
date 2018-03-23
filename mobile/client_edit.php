@@ -65,18 +65,18 @@ $form->addInput(array('type'=>'text','name'=>'name','maxlength'=>'100','value'=>
 $form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','class'=>'mobile-textarea','value'=>$cl_address));
 $form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
-  'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
+  'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'datakeys'=>array('id','name'),'layout'=>'H','value'=>$cl_projects));
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
-$form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
+$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
+$form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->get('button.copy')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_name'));
-  if (!ttValidString($cl_address, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_address'));
-  if (!ttValidFloat($cl_tax, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.tax'));
+  if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.client_name'));
+  if (!ttValidString($cl_address, true)) $err->add($i18n->get('error.field'), $i18n->get('label.client_address'));
+  if (!ttValidFloat($cl_tax, true)) $err->add($i18n->get('error.field'), $i18n->get('label.tax'));
 
   if ($err->no()) {
     if ($request->getParameter('btn_save')) {
@@ -92,9 +92,9 @@ if ($request->isPost()) {
           header('Location: clients.php');
           exit();
         } else
-          $err->add($i18n->getKey('error.db'));
+          $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->getKey('error.client_exists'));
+        $err->add($i18n->get('error.client_exists'));
     }
 
     if ($request->getParameter('btn_copy')) {
@@ -109,9 +109,9 @@ if ($request->isPost()) {
           header('Location: clients.php');
           exit();
         } else
-          $err->add($i18n->getKey('error.db'));
+          $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->getKey('error.client_exists'));
+        $err->add($i18n->get('error.client_exists'));
     }
     
     if ($request->getParameter('btn_delete')) {
@@ -122,6 +122,6 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.edit_client'));
+$smarty->assign('title', $i18n->get('title.edit_client'));
 $smarty->assign('content_page_name', 'mobile/client_edit.tpl');
 $smarty->display('mobile/index.tpl');

@@ -90,12 +90,12 @@ $form = new Form('invoiceForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 // invoiceForm only contains controls for "Mark paid" block below invoice table.
 if ($user->isPluginEnabled('ps')) {
-  $mark_paid_action_options = array('1'=>$i18n->getKey('dropdown.paid'),'2'=>$i18n->getKey('dropdown.not_paid'));
+  $mark_paid_action_options = array('1'=>$i18n->get('dropdown.paid'),'2'=>$i18n->get('dropdown.not_paid'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'mark_paid_action_options',
     'data'=>$mark_paid_action_options,
     'value'=>$cl_mark_paid_action_option));
-  $form->addInput(array('type'=>'submit','name'=>'btn_mark_paid','value'=>$i18n->getKey('button.submit')));
+  $form->addInput(array('type'=>'submit','name'=>'btn_mark_paid','value'=>$i18n->get('button.submit')));
 }
 
 if ($request->isPost()) {
@@ -120,6 +120,6 @@ $smarty->assign('client_name', $client['name']);
 $smarty->assign('client_address', $client['address']);
 $smarty->assign('invoice_items', $invoice_items);
 $smarty->assign('colspan', $colspan);
-$smarty->assign('title', $i18n->getKey('title.view_invoice'));
+$smarty->assign('title', $i18n->get('title.view_invoice'));
 $smarty->assign('content_page_name', 'invoice_view.tpl');
 $smarty->display('index.tpl');

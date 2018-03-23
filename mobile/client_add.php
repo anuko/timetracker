@@ -56,13 +56,13 @@ $form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','c
 $form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'layout'=>'H','datakeys'=>array('id','name'),'value'=>$cl_projects));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.add')));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_name'));
-  if (!ttValidString($cl_address, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_address'));
-  if (!ttValidFloat($cl_tax, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.tax'));
+  if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.client_name'));
+  if (!ttValidString($cl_address, true)) $err->add($i18n->get('error.field'), $i18n->get('label.client_address'));
+  if (!ttValidFloat($cl_tax, true)) $err->add($i18n->get('error.field'), $i18n->get('label.tax'));
 
   if ($err->no()) {
     if (!ttClientHelper::getClientByName($cl_name)) {
@@ -76,14 +76,14 @@ if ($request->isPost()) {
         header('Location: clients.php');
         exit();
       } else
-        $err->add($i18n->getKey('error.db'));
+        $err->add($i18n->get('error.db'));
      } else
-       $err->add($i18n->getKey('error.client_exists'));
+       $err->add($i18n->get('error.client_exists'));
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.clientForm.name.focus()"');
-$smarty->assign('title', $i18n->getKey('title.add_client'));
+$smarty->assign('title', $i18n->get('title.add_client'));
 $smarty->assign('content_page_name', 'mobile/client_add.tpl');
 $smarty->display('mobile/index.tpl');

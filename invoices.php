@@ -39,6 +39,6 @@ if (!(ttAccessAllowed('manage_invoices') || ttAccessAllowed('view_own_invoices')
 $invoices = ttTeamHelper::getActiveInvoices();
 
 $smarty->assign('invoices', $invoices);
-$smarty->assign('title', $i18n->getKey('title.invoices'));
+$smarty->assign('title', $i18n->get('title.invoices'));
 $smarty->assign('content_page_name', 'invoices.tpl');
 $smarty->display('index.tpl');

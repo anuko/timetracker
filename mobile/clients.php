@@ -38,6 +38,6 @@ if (!ttAccessAllowed('manage_clients') || !$user->isPluginEnabled('cl')) {
 
 $smarty->assign('active_clients', ttTeamHelper::getActiveClients($user->team_id, true));
 $smarty->assign('inactive_clients', ttTeamHelper::getInactiveClients($user->team_id, true));
-$smarty->assign('title', $i18n->getKey('title.clients'));
+$smarty->assign('title', $i18n->get('title.clients'));
 $smarty->assign('content_page_name', 'mobile/clients.tpl');
 $smarty->display('mobile/index.tpl');
