@@ -189,42 +189,42 @@ class ttAdmin {
     $result = true;
 
     if (!ttValidString($fields['group_name'], true)) {
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.team_name'));
       $result = false;
     }
     if (!ttValidString($fields['user_name'])) {
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_name'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.manager_name'));
       $result = false;
     }
     if (!ttValidString($fields['new_login'])) {
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_login'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.manager_login'));
       $result = false;
     }
 
     // If we change login, it must be unique.
     if ($fields['new_login'] != $fields['old_login']) {
       if (ttUserHelper::getUserByLogin($fields['new_login'])) {
-        $this->err->add($i18n->getKey('error.user_exists'));
+        $this->err->add($i18n->get('error.user_exists'));
         $result = false;
       }
     }
 
     if (!$auth->isPasswordExternal() && ($fields['password1'] || $fields['password2'])) {
       if (!ttValidString($fields['password1'])) {
-        $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
+        $this->err->add($i18n->get('error.field'), $i18n->get('label.password'));
         $result = false;
       }
       if (!ttValidString($fields['password2'])) {
-        $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+        $this->err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
         $result = false;
       }
       if ($fields['password1'] !== $fields['password2']) {
-        $this->err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+        $this->err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
         $result = false;
       }
     }
     if (!ttValidEmail($fields['email'], true)) {
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.email'));
       $result = false;
     }
 
@@ -271,36 +271,36 @@ class ttAdmin {
     $result = true;
 
     if (!ttValidString($fields['name'])) {
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.person_name'));
       $result = false;
     }
     if (!ttValidString($fields['login'])) {
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.login'));
       $result = false;
     }
     // If we change login, it must be unique.
     if ($fields['login'] != $user->login) {
       if (ttUserHelper::getUserByLogin($fields['login'])) {
-        $this->err->add($i18n->getKey('error.user_exists'));
+        $this->err->add($i18n->get('error.user_exists'));
         $result = false;
       }
     }
     if (!$auth->isPasswordExternal() && ($fields['password1'] || $fields['password2'])) {
       if (!ttValidString($fields['password1'])) {
-        $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
+        $this->err->add($i18n->get('error.field'), $i18n->get('label.password'));
         $result = false;
       }
       if (!ttValidString($fields['password2'])) {
-        $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+        $this->err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
         $result = false;
       }
       if ($fields['password1'] !== $fields['password2']) {
-        $this->err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+        $this->err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
         $result = false;
       }
     }
     if (!ttValidEmail($fields['email'], true)) {
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.email'));
       $result = false;
     }
 
@@ -326,7 +326,7 @@ class ttAdmin {
     $sql = 'update tt_users set '.$login_part.$password_part.$name_part.$email_part.$modified_part.'where id = '.$user_id;
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) {
-      $this->err->add($i18n->getKey('error.db'));
+      $this->err->add($i18n->get('error.db'));
       return false;
     }
 

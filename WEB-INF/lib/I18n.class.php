@@ -35,21 +35,26 @@ class I18n {
   var $holidays;
   var $keys = array(); // These are our localized strings.
 
-  // The getKey obtains localized keyword value.
-  function getKey($kword) {
+  // get - obtains a localized value from $keys array.
+  function get($key) {
     $value = '';
-    $pos = strpos($kword, '.'); // Keywords can have separating dots such as in form.login.about.
+    $pos = strpos($key, '.'); // Keywords can have separating dots such as in form.login.about.
     if (!($pos === false)) {
-      $words = explode('.', $kword);
+      $words = explode('.', $key);
       $str = '';
       foreach ($words as $word) {
         $str .= "['".$word."']";
       }
       eval("\$value = \$this->keys".$str.";");
     } else {
-      $value = $this->keys[$kword];
+      $value = $this->keys[$key];
     }
     return $value;
+  }
+
+  // getKey is a legacy function that we are replacing with get.
+  function getKey($kword) {
+    return $this->get($kword);
   }
 
   // TODO: refactoring ongoing down from here...

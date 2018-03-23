@@ -207,7 +207,7 @@ class Calendar extends FormElement {
         $str .= "</TR>\n";
       }
 
-      $str .= "<tr><td colspan=\"7\" align=\"center\"><a id=\"today_link\" href=\"?".$this->controlName."=".strftime(DB_DATEFORMAT)."\" tabindex=\"-1\">".$i18n->getKey('label.today')."</a></td></tr>\n";
+      $str .= "<tr><td colspan=\"7\" align=\"center\"><a id=\"today_link\" href=\"?".$this->controlName."=".strftime(DB_DATEFORMAT)."\" tabindex=\"-1\">".$i18n->get('label.today')."</a></td></tr>\n";
       $str .= "</table>\n";
 
       $str .= "<input type=\"hidden\" name=\"$this->controlName\" value=\"$indate\">\n";

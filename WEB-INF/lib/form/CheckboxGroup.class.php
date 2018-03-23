@@ -60,8 +60,8 @@ class CheckboxGroup extends FormElement {
 	
 	function localize() {
           global $i18n;
-          $this->lSelAll = $i18n->getKey('label.select_all');
-          $this->lSelNone = $i18n->getKey('label.select_none');
+          $this->lSelAll = $i18n->get('label.select_all');
+          $this->lSelNone = $i18n->get('label.select_none');
 	}
 		
 	function getHtml() {

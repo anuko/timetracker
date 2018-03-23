@@ -429,16 +429,16 @@ class ttInvoiceHelper {
     $body .= '<body>';
 
     // Output title.
-    $body .= '<p style="'.$style_title.'">'.$i18n->getKey('title.invoice').' '.htmlspecialchars($invoice['name']).'</p>';
+    $body .= '<p style="'.$style_title.'">'.$i18n->get('title.invoice').' '.htmlspecialchars($invoice['name']).'</p>';
 
     // Output comment.
     if($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>';
 
     // Output invoice info.
     $body .= '<table>';
-    $body .= '<tr><td><b>'.$i18n->getKey('label.date').':</b> '.$invoice['date'].'</td></tr>';
-    $body .= '<tr><td><b>'.$i18n->getKey('label.client').':</b> '.htmlspecialchars($client['name']).'</td></tr>';
-    $body .= '<tr><td><b>'.$i18n->getKey('label.client_address').':</b> '.htmlspecialchars($client['address']).'</td></tr>';
+    $body .= '<tr><td><b>'.$i18n->get('label.date').':</b> '.$invoice['date'].'</td></tr>';
+    $body .= '<tr><td><b>'.$i18n->get('label.client').':</b> '.htmlspecialchars($client['name']).'</td></tr>';
+    $body .= '<tr><td><b>'.$i18n->get('label.client_address').':</b> '.htmlspecialchars($client['address']).'</td></tr>';
     $body .= '</table>';
 
     $body .= '<p></p>';
@@ -446,15 +446,15 @@ class ttInvoiceHelper {
     // Output invoice items.
     $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
     $body .= '<tr>';
-    $body .= '<td style="'.$style_tableHeader.'">'.$i18n->getKey('label.date').'</td>';
-    $body .= '<td style="'.$style_tableHeader.'">'.$i18n->getKey('form.invoice.person').'</td>';
+    $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('label.date').'</td>';
+    $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('form.invoice.person').'</td>';
     if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
-      $body .= '<td style="'.$style_tableHeader.'">'.$i18n->getKey('label.project').'</td>';
+      $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('label.project').'</td>';
     if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
-      $body .= '<td style="'.$style_tableHeader.'">'.$i18n->getKey('label.task').'</td>';
-    $body .= '<td style="'.$style_tableHeader.'">'.$i18n->getKey('label.note').'</td>';
-    $body .= '<td style="'.$style_tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
-    $body .= '<td style="'.$style_tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+      $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('label.task').'</td>';
+    $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('label.note').'</td>';
+    $body .= '<td style="'.$style_tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
+    $body .= '<td style="'.$style_tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
     $body .= '</tr>';
     foreach ($invoice_items as $item) {
       $body .= '<tr>';
@@ -477,15 +477,15 @@ class ttInvoiceHelper {
       $colspan += 2;
     $body .= '<tr><td>&nbsp;</td></tr>';
     if ($tax) {
-      $body .= '<tr><td colspan="'.$colspan.'" align="right"><b>'.$i18n->getKey('label.subtotal').':</b></td><td nowrap align="right">'.$subtotal.'</td></tr>';
-      $body .= '<tr><td colspan="'.$colspan.'" align="right"><b>'.$i18n->getKey('label.tax').':</b></td><td nowrap align="right">'.$tax.'</td></tr>';
+      $body .= '<tr><td colspan="'.$colspan.'" align="right"><b>'.$i18n->get('label.subtotal').':</b></td><td nowrap align="right">'.$subtotal.'</td></tr>';
+      $body .= '<tr><td colspan="'.$colspan.'" align="right"><b>'.$i18n->get('label.tax').':</b></td><td nowrap align="right">'.$tax.'</td></tr>';
     }
-    $body .= '<tr><td colspan="'.$colspan.'" align="right"><b>'.$i18n->getKey('label.total').':</b></td><td nowrap align="right">'.$total.'</td></tr>';
+    $body .= '<tr><td colspan="'.$colspan.'" align="right"><b>'.$i18n->get('label.total').':</b></td><td nowrap align="right">'.$total.'</td></tr>';
     $body .= '</table>';
 
     // Output footer.
     if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false))
-      $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
+      $body .= '<p style="text-align: center;">'.$i18n->get('form.mail.footer').'</p>';
 
     // Finish creating email body.
     $body .= '</body></html>';

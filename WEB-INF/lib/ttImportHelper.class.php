@@ -371,13 +371,13 @@ class ttImportHelper {
     // If the file is compressed - uncompress it.
     if ($compressed) {
       if (!$this->uncompress($_FILES['xmlfile']['tmp_name'], $filename)) {
-        $this->errors->add($i18n->getKey('error.sys'));
+        $this->errors->add($i18n->get('error.sys'));
         return;
       }
       unlink($_FILES['xmlfile']['tmp_name']);
     } else {
       if (!move_uploaded_file($_FILES['xmlfile']['tmp_name'], $filename)) {
-        $this->errors->add($i18n->getKey('error.upload'));
+        $this->errors->add($i18n->get('error.upload'));
         return;
       }
     }
@@ -397,7 +397,7 @@ class ttImportHelper {
           xml_get_current_line_number($parser)));
       }
       if (!$this->canImport) {
-        $this->errors->add($i18n->getKey('error.user_exists'));
+        $this->errors->add($i18n->get('error.user_exists'));
         break;
       }
     }

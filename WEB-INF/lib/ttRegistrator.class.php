@@ -62,21 +62,21 @@ class ttRegistrator {
     global $i18n;
 
     if (!ttValidString($this->group_name, true))
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.team_name'));
     if (!ttValidString($this->currency, true))
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.currency'));
     if (!ttValidString($this->user_name))
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_name'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.manager_name'));
     if (!ttValidString($this->login))
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.manager_login'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.manager_login'));
     if (!ttValidString($this->password1))
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.password'));
     if (!ttValidString($this->password2))
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
     if ($this->password1 !== $this->password2)
-      $this->err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));    
+      $this->err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
     if (!ttValidEmail($this->email, true))
-      $this->err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.email'));
   }
 
   // The register function registers a user in Time Tracker.
@@ -88,27 +88,27 @@ class ttRegistrator {
     import('ttUserHelper');
     if (ttUserHelper::getUserByLogin($this->login)) {
       // User login already exists.
-      $this->err->add($i18n->getKey('error.user_exists'));
+      $this->err->add($i18n->get('error.user_exists'));
       return false;
     }
 
     // Create a new group.
     $this->group_id = $this->createGroup();
     if (!$this->group_id) {
-      $this->err->add($i18n->getKey('error.db'));
+      $this->err->add($i18n->get('error.db'));
       return false;
     }
 
     import('ttRoleHelper');
     if (!ttRoleHelper::createPredefinedRoles($this->group_id, $this->lang)) {
-      $err->add($i18n->getKey('error.db'));
+      $err->add($i18n->get('error.db'));
       return false;
     }
     $this->role_id = ttRoleHelper::getTopManagerRoleID();
     $this->user_id = $this->createUser();
 
     if (!$this->user_id) {
-      $err->add($i18n->getKey('error.db'));
+      $err->add($i18n->get('error.db'));
       return false;
     }
 
@@ -171,7 +171,7 @@ class ttRegistrator {
     $sql = "update tt_teams set created_by = $user_id where id = $this->group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) {
-      $this->err->add($i18n->getKey('error.db'));
+      $this->err->add($i18n->get('error.db'));
       return false;
     }
 
@@ -179,7 +179,7 @@ class ttRegistrator {
     $sql = "update tt_users set created_by = $user_id where id = $user_id and team_id = $this->group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) {
-      $this->err->add($i18n->getKey('error.db'));
+      $this->err->add($i18n->get('error.db'));
       return false;
     }
 
