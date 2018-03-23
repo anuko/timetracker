@@ -156,7 +156,7 @@ class ttWeekViewHelper {
     $dataArray = array();
 
     // Construct the first row for a brand new entry.
-    $dataArray[] = array('row_id' => null,'label' => $i18n->getKey('form.week.new_entry').':'); // Insert row.
+    $dataArray[] = array('row_id' => null,'label' => $i18n->get('form.week.new_entry').':'); // Insert row.
     // Insert empty cells with proper control ids.
     for ($i = 0; $i < 7; $i++) {
       $control_id = '0_'. $dayHeaders[$i];
@@ -164,7 +164,7 @@ class ttWeekViewHelper {
     }
     if ($user->isPluginEnabled('wvns')) {
       // Construct the second row for daily comments for a brand new entry.
-      $dataArray[] = array('row_id' => null,'label' => $i18n->getKey('label.notes').':'); // Insert row.
+      $dataArray[] = array('row_id' => null,'label' => $i18n->get('label.notes').':'); // Insert row.
       // Insert empty cells with proper control ids.
       for ($i = 0; $i < 7; $i++) {
         $control_id = '1_'. $dayHeaders[$i];
@@ -197,7 +197,7 @@ class ttWeekViewHelper {
         }
         // Insert row for comments.
         if ($user->isPluginEnabled('wvns')) {
-          $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->getKey('label.notes').':');
+          $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->get('label.notes').':');
           $pos++;
           // Insert empty cells with proper control ids.
           for ($i = 0; $i < 7; $i++) {
@@ -254,14 +254,14 @@ class ttWeekViewHelper {
     }
 
     // Construct the first row for a brand new entry.
-    $dataArray[] = array('row_id' => null,'label' => $i18n->getKey('form.week.new_entry').':'); // Insert row.
+    $dataArray[] = array('row_id' => null,'label' => $i18n->get('form.week.new_entry').':'); // Insert row.
     // Insert empty cells with proper control ids.
     for ($i = 0; $i < 7; $i++) {
       $control_id = '0_'. $dayHeaders[$i];
       $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
     }
     // Construct the second row for daily comments for a brand new entry.
-    $dataArray[] = array('row_id' => null,'label' => $i18n->getKey('label.notes').':'); // Insert row.
+    $dataArray[] = array('row_id' => null,'label' => $i18n->get('label.notes').':'); // Insert row.
     // Insert empty cells with proper control ids.
     for ($i = 0; $i < 7; $i++) {
       $control_id = '1_'. $dayHeaders[$i];
@@ -284,7 +284,7 @@ class ttWeekViewHelper {
           $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
         }
         // Insert row for comments.
-        $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->getKey('label.notes').':');
+        $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->get('label.notes').':');
         $pos++;
         // Insert empty cells with proper control ids.
         for ($i = 0; $i < 7; $i++) {
@@ -325,7 +325,7 @@ class ttWeekViewHelper {
 
     // Insert label.
     global $i18n;
-    $dayTotals['label'] = $i18n->getKey('label.day_total').':';
+    $dayTotals['label'] = $i18n->get('label.day_total').':';
 
     foreach ($dataArray as $row) {
       foreach($dayHeaders as $dayHeader) {
@@ -485,7 +485,7 @@ class ttWeekViewHelper {
     if (!$user->future_entries && $fields['browser_today']) {
       $objBrowserToday = new DateAndTime(DB_DATEFORMAT, $fields['browser_today']);
       if ($objEntryDate->after($objBrowserToday)) {
-        $err->add($i18n->getKey('error.future_date'));
+        $err->add($i18n->get('error.future_date'));
         return false;
       }
     }
@@ -550,7 +550,7 @@ class ttWeekViewHelper {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if (!$res->numRows()) {
-        $err->add($i18n->getKey('error.db')); // This is not expected.
+        $err->add($i18n->get('error.db')); // This is not expected.
         return false;
       }
       $val = $res->fetchRow();
@@ -571,7 +571,7 @@ class ttWeekViewHelper {
     $newEndMinutes = $startMinutes + $newMinutes;
     if ($newEndMinutes > 1440) {
       // Invalid duration, as new duration puts the record beyond current day.
-      $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+      $err->add($i18n->get('error.field'), $i18n->get('label.duration'));
       return false;
     }
 
@@ -582,7 +582,7 @@ class ttWeekViewHelper {
     $start = ttTimeHelper::toAbsDuration($startMinutes);
     $finish = ttTimeHelper::toAbsDuration($newEndMinutes);
     if (ttTimeHelper::overlaps($user_id, $date, $start, $finish, $tt_log_id)) {
-      $err->add($i18n->getKey('error.overlap'));
+      $err->add($i18n->get('error.overlap'));
       return false;
     }
 

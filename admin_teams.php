@@ -36,6 +36,6 @@ if (!ttAccessAllowed('administer_site')) {
 }
 
 $smarty->assign('teams', ttGroupHelper::getTopGroups());
-$smarty->assign('title', $i18n->getKey('title.teams'));
+$smarty->assign('title', $i18n->get('title.teams'));
 $smarty->assign('content_page_name', 'admin_teams.tpl');
 $smarty->display('index.tpl');

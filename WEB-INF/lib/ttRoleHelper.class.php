@@ -190,32 +190,32 @@ class ttRoleHelper {
     $rights_manager = $rights_comanager.',manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups';
 
     // Active roles.
-    $name = $mdb2->quote($i18n->getKey('role.user.label'));
-    $description = $mdb2->quote($i18n->getKey('role.user.description'));
+    $name = $mdb2->quote($i18n->get('role.user.label'));
+    $description = $mdb2->quote($i18n->get('role.user.description'));
     $rights = $mdb2->quote($rights_user);
     $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($team_id, $name, $description, 4, $rights, 1)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $name = $mdb2->quote($i18n->getKey('role.client.label'));
-    $description = $mdb2->quote($i18n->getKey('role.client.description'));
+    $name = $mdb2->quote($i18n->get('role.client.label'));
+    $description = $mdb2->quote($i18n->get('role.client.description'));
     $rights = $mdb2->quote($rights_client);
     $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($team_id, $name, $description, 16, $rights, 1)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $name = $mdb2->quote($i18n->getKey('role.comanager.label'));
-    $description = $mdb2->quote($i18n->getKey('role.comanager.description'));
+    $name = $mdb2->quote($i18n->get('role.comanager.label'));
+    $description = $mdb2->quote($i18n->get('role.comanager.description'));
     $rights = $mdb2->quote($rights_comanager);
     $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($team_id, $name, $description, 68, $rights, 1)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $name = $mdb2->quote($i18n->getKey('role.manager.label'));
-    $description = $mdb2->quote($i18n->getKey('role.manager.description'));
+    $name = $mdb2->quote($i18n->get('role.manager.label'));
+    $description = $mdb2->quote($i18n->get('role.manager.description'));
     $rights = $mdb2->quote($rights_manager);
     $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($team_id, $name, $description, 324, $rights, 1)";
     $affected = $mdb2->exec($sql);
@@ -223,8 +223,8 @@ class ttRoleHelper {
       return false;
 
     // Inactive roles.
-    $name = $mdb2->quote($i18n->getKey('role.supervisor.label'));
-    $description = $mdb2->quote($i18n->getKey('role.supervisor.description'));
+    $name = $mdb2->quote($i18n->get('role.supervisor.label'));
+    $description = $mdb2->quote($i18n->get('role.supervisor.description'));
     $rights = $mdb2->quote($rights_supervisor);
     $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($team_id, $name, $description, 12, $rights, 0)";
     $affected = $mdb2->exec($sql);
@@ -248,32 +248,32 @@ class ttRoleHelper {
     $rights_manager = $rights_comanager.',manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups';
 
     // Active roles.
-    $name = $mdb2->quote($i18n->getKey('role.user.label'));
-    $description = $mdb2->quote($i18n->getKey('role.user.description'));
+    $name = $mdb2->quote($i18n->get('role.user.label'));
+    $description = $mdb2->quote($i18n->get('role.user.description'));
     $rights = $mdb2->quote($rights_user);
     $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($user->team_id, $name, $description, 4, $rights, 1)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $name = $mdb2->quote($i18n->getKey('role.client.label'));
-    $description = $mdb2->quote($i18n->getKey('role.client.description'));
+    $name = $mdb2->quote($i18n->get('role.client.label'));
+    $description = $mdb2->quote($i18n->get('role.client.description'));
     $rights = $mdb2->quote($rights_client);
     $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($user->team_id, $name, $description, 16, $rights, 1)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $name = $mdb2->quote($i18n->getKey('role.comanager.label'));
-    $description = $mdb2->quote($i18n->getKey('role.comanager.description'));
+    $name = $mdb2->quote($i18n->get('role.comanager.label'));
+    $description = $mdb2->quote($i18n->get('role.comanager.description'));
     $rights = $mdb2->quote($rights_comanager);
     $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($user->team_id, $name, $description, 68, $rights, 1)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $name = $mdb2->quote($i18n->getKey('role.manager.label'));
-    $description = $mdb2->quote($i18n->getKey('role.manager.description'));
+    $name = $mdb2->quote($i18n->get('role.manager.label'));
+    $description = $mdb2->quote($i18n->get('role.manager.description'));
     $rights = $mdb2->quote($rights_manager);
     $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($user->team_id, $name, $description, 324, $rights, 1)";
     $affected = $mdb2->exec($sql);
@@ -281,8 +281,8 @@ class ttRoleHelper {
       return false;
 
     // Inactive roles.
-    $name = $mdb2->quote($i18n->getKey('role.supervisor.label'));
-    $description = $mdb2->quote($i18n->getKey('role.supervisor.description'));
+    $name = $mdb2->quote($i18n->get('role.supervisor.label'));
+    $description = $mdb2->quote($i18n->get('role.supervisor.description'));
     $rights = $mdb2->quote($rights_supervisor);
     $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($user->team_id, $name, $description, 12, $rights, 0)";
     $affected = $mdb2->exec($sql);

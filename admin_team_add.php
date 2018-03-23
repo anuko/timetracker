@@ -78,7 +78,7 @@ if (!$auth->isPasswordExternal()) {
   $form->addInput(array('type'=>'password','maxlength'=>'30','name'=>'password2','value'=>$cl_password2));
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_email','value'=>$cl_manager_email));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.submit')));
 
 if ($request->isPost()) {
   /*
@@ -115,5 +115,5 @@ $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.teamForm.team.focus()"');
 $smarty->assign('content_page_name', 'admin_team_add.tpl');
-$smarty->assign('title', $i18n->getKey('title.create_team'));
+$smarty->assign('title', $i18n->get('title.create_team'));
 $smarty->display('index.tpl');

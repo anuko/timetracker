@@ -1188,7 +1188,7 @@ class ttReportHelper {
     $body .= '<body>';
 
     // Output title.
-    $body .= '<p style="'.$style_title.'">'.$i18n->getKey('form.mail.report_subject').': '.$totals['start_date'].' - '.$totals['end_date'].'</p>';
+    $body .= '<p style="'.$style_title.'">'.$i18n->get('form.mail.report_subject').': '.$totals['start_date'].' - '.$totals['end_date'].'</p>';
 
     // Output comment.
     if ($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>';
@@ -1201,16 +1201,16 @@ class ttReportHelper {
         $group_by_header = htmlspecialchars($custom_fields->fields[0]['label']);
       else {
         $key = 'label.'.$group_by;
-        $group_by_header = $i18n->getKey($key);
+        $group_by_header = $i18n->get($key);
       }
 
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
       $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
       if ($bean->getAttribute('chduration'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
       if ($bean->getAttribute('chcost'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
       $body .= '</tr>';
       foreach($subtotals as $subtotal) {
         $body .= '<tr style="'.$rowSubtotal.'">';
@@ -1231,7 +1231,7 @@ class ttReportHelper {
       // Print totals.
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
-      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.total').'</td>';
+      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.total').'</td>';
       if ($bean->getAttribute('chduration')) {
         $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
         if ($totals['time'] <> '0:00') $body .= $totals['time'];
@@ -1251,33 +1251,33 @@ class ttReportHelper {
       // Print table header.
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
-      $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.date').'</td>';
+      $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.date').'</td>';
       if ($canViewReports || $isClient)
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.user').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.user').'</td>';
       if ($bean->getAttribute('chclient'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.client').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.client').'</td>';
       if ($bean->getAttribute('chproject'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.project').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.project').'</td>';
       if ($bean->getAttribute('chtask'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.task').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.task').'</td>';
       if ($bean->getAttribute('chcf_1'))
         $body .= '<td style="'.$tableHeader.'">'.htmlspecialchars($custom_fields->fields[0]['label']).'</td>';
       if ($bean->getAttribute('chstart'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.start').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.start').'</td>';
       if ($bean->getAttribute('chfinish'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.finish').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.finish').'</td>';
       if ($bean->getAttribute('chduration'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
       if ($bean->getAttribute('chnote'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.note').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.note').'</td>';
       if ($bean->getAttribute('chcost'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
       if ($bean->getAttribute('chpaid'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.paid').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.paid').'</td>';
       if ($bean->getAttribute('chip'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.ip').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.ip').'</td>';
       if ($bean->getAttribute('chinvoice'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.invoice').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.invoice').'</td>';
       $body .= '</tr>';
 
       // Initialize variables to print subtotals.
@@ -1301,7 +1301,7 @@ class ttReportHelper {
             $cur_grouped_by = $record['grouped_by'];
             if ($cur_grouped_by != $prev_grouped_by && !$first_pass) {
               $body .= '<tr style="'.$rowSubtotal.'">';
-              $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.subtotal').'</td>';
+              $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
               $subtotal_name = htmlspecialchars($subtotals[$prev_grouped_by]['name']);
               if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
               if ($bean->getAttribute('chclient')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
@@ -1353,7 +1353,7 @@ class ttReportHelper {
             $body .= '<td style="'.$cellRightAligned.'">'.$record['cost'].'</td>';
           if ($bean->getAttribute('chpaid')) {
             $body .= '<td style="'.$cellRightAligned.'">';
-            $body .= $record['paid'] == 1 ? $i18n->getKey('label.yes') : $i18n->getKey('label.no');
+            $body .= $record['paid'] == 1 ? $i18n->get('label.yes') : $i18n->get('label.no');
             $body .= '</td>';
           }
           if ($bean->getAttribute('chip')) {
@@ -1374,7 +1374,7 @@ class ttReportHelper {
       // Print a terminating subtotal.
       if ($print_subtotals) {
         $body .= '<tr style="'.$rowSubtotal.'">';
-        $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.subtotal').'</td>';
+        $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
         $subtotal_name = htmlspecialchars($subtotals[$cur_grouped_by]['name']);
         if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
         if ($bean->getAttribute('chclient')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
@@ -1399,7 +1399,7 @@ class ttReportHelper {
       // Print totals.
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
-      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.total').'</td>';
+      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.total').'</td>';
       if ($canViewReports || $isClient) $body .= '<td></td>';
       if ($bean->getAttribute('chclient')) $body .= '<td></td>';
       if ($bean->getAttribute('chproject')) $body .= '<td></td>';
@@ -1424,7 +1424,7 @@ class ttReportHelper {
 
     // Output footer.
     if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false))
-      $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
+      $body .= '<p style="text-align: center;">'.$i18n->get('form.mail.footer').'</p>';
 
     // Finish creating email body.
     $body .= '</body></html>';
@@ -1484,7 +1484,7 @@ class ttReportHelper {
     $body .= '<body>';
 
     // Output title.
-    $body .= '<p style="'.$style_title.'">'.$i18n->getKey('form.mail.report_subject').': '.$totals['start_date'].' - '.$totals['end_date'].'</p>';
+    $body .= '<p style="'.$style_title.'">'.$i18n->get('form.mail.report_subject').': '.$totals['start_date'].' - '.$totals['end_date'].'</p>';
 
     // Output comment.
     // if ($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>'; // No comment for fav. reports.
@@ -1497,16 +1497,16 @@ class ttReportHelper {
         $group_by_header = htmlspecialchars($custom_fields->fields[0]['label']);
       else {
         $key = 'label.'.$group_by;
-        $group_by_header = $i18n->getKey($key);
+        $group_by_header = $i18n->get($key);
       }
 
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
       $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
       if ($report['show_duration'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
       if ($report['show_cost'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
       $body .= '</tr>';
       foreach($subtotals as $subtotal) {
         $body .= '<tr style="'.$rowSubtotal.'">';
@@ -1527,7 +1527,7 @@ class ttReportHelper {
       // Print totals.
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
-      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.total').'</td>';
+      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.total').'</td>';
       if ($report['show_duration']) {
         $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
         if ($totals['time'] <> '0:00') $body .= $totals['time'];
@@ -1547,33 +1547,33 @@ class ttReportHelper {
       // Print table header.
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
-      $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.date').'</td>';
+      $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.date').'</td>';
       if ($canViewReports || $isClient)
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.user').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.user').'</td>';
       if ($report['show_client'])
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.client').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.client').'</td>';
       if ($report['show_project'])
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.project').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.project').'</td>';
       if ($report['show_task'])
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.task').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.task').'</td>';
       if ($report['show_custom_field_1'])
         $body .= '<td style="'.$tableHeader.'">'.htmlspecialchars($custom_fields->fields[0]['label']).'</td>';
       if ($report['show_start'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.start').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.start').'</td>';
       if ($report['show_end'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.finish').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.finish').'</td>';
       if ($report['show_duration'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
       if ($report['show_note'])
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.note').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.note').'</td>';
       if ($report['show_cost'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
       if ($report['show_paid'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.paid').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.paid').'</td>';
       if ($report['show_ip'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.ip').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.ip').'</td>';
       if ($report['show_invoice'])
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.invoice').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.invoice').'</td>';
       $body .= '</tr>';
 
       // Initialize variables to print subtotals.
@@ -1597,7 +1597,7 @@ class ttReportHelper {
             $cur_grouped_by = $record['grouped_by'];
             if ($cur_grouped_by != $prev_grouped_by && !$first_pass) {
               $body .= '<tr style="'.$rowSubtotal.'">';
-              $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.subtotal').'</td>';
+              $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
               $subtotal_name = htmlspecialchars($subtotals[$prev_grouped_by]['name']);
               if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
               if ($report['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
@@ -1649,7 +1649,7 @@ class ttReportHelper {
             $body .= '<td style="'.$cellRightAligned.'">'.$record['cost'].'</td>';
           if ($report['show_paid']) {
             $body .= '<td style="'.$cellRightAligned.'">';
-            $body .= $record['paid'] == 1 ? $i18n->getKey('label.yes') : $i18n->getKey('label.no');
+            $body .= $record['paid'] == 1 ? $i18n->get('label.yes') : $i18n->get('label.no');
             $body .= '</td>';
           }
           if ($report['show_ip']) {
@@ -1670,7 +1670,7 @@ class ttReportHelper {
       // Print a terminating subtotal.
       if ($print_subtotals) {
         $body .= '<tr style="'.$rowSubtotal.'">';
-        $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.subtotal').'</td>';
+        $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
         $subtotal_name = htmlspecialchars($subtotals[$cur_grouped_by]['name']);
         if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
         if ($report['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
@@ -1695,7 +1695,7 @@ class ttReportHelper {
       // Print totals.
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
-      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.total').'</td>';
+      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.total').'</td>';
       if ($canViewReports || $isClient) $body .= '<td></td>';
       if ($report['show_client']) $body .= '<td></td>';
       if ($report['show_project']) $body .= '<td></td>';
@@ -1720,7 +1720,7 @@ class ttReportHelper {
 
     // Output footer.
     if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false))
-      $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
+      $body .= '<p style="text-align: center;">'.$i18n->get('form.mail.footer').'</p>';
 
     // Finish creating email body.
     $body .= '</body></html>';

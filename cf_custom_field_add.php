@@ -47,15 +47,15 @@ if ($request->isPost()) {
 $form = new Form('fieldForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>''));
 $form->addInput(array('type'=>'combobox','name'=>'type',
-  'data'=>array(CustomFields::TYPE_TEXT=>$i18n->getKey('label.type_text'),
-                CustomFields::TYPE_DROPDOWN=>$i18n->getKey('label.type_dropdown'))
+  'data'=>array(CustomFields::TYPE_TEXT=>$i18n->get('label.type_text'),
+                CustomFields::TYPE_DROPDOWN=>$i18n->get('label.type_dropdown'))
 ));
 $form->addInput(array('type'=>'checkbox','name'=>'required'));
-$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));	
+$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_field_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
+  if (!ttValidString($cl_field_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
 
   if ($err->no()) {
     $res = CustomFields::insertField($cl_field_name, $cl_field_type, $cl_required);
@@ -63,12 +63,12 @@ if ($request->isPost()) {
       header('Location: cf_custom_fields.php');
       exit();
     } else
-      $err->add($i18n->getKey('error.db'));
+      $err->add($i18n->get('error.db'));
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.fieldForm.name.focus()"');
-$smarty->assign('title', $i18n->getKey('title.cf_add_custom_field'));
+$smarty->assign('title', $i18n->get('title.cf_add_custom_field'));
 $smarty->assign('content_page_name', 'cf_custom_field_add.tpl');
 $smarty->display('index.tpl');

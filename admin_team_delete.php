@@ -42,8 +42,8 @@ $team_name = $team_details['team_name'];
 
 $form = new Form('teamForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$team_id));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
-$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
+$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
@@ -54,7 +54,7 @@ if ($request->isPost()) {
       header('Location: admin_teams.php');
       exit();
     } else
-      $err->add($i18n->getKey('error.db'));
+      $err->add($i18n->get('error.db'));
   }
 
   if ($request->getParameter('btn_cancel')) {
@@ -65,6 +65,6 @@ if ($request->isPost()) {
 
 $smarty->assign('team_to_delete', $team_name);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.delete_team'));
+$smarty->assign('title', $i18n->get('title.delete_team'));
 $smarty->assign('content_page_name', 'admin_team_delete.tpl');
 $smarty->display('index.tpl');

@@ -85,7 +85,7 @@ class ttTeamHelper {
     while ($val = $res->fetchRow()) {
       // Localize top manager role name, as it is not localized in db.
       if ($val['rank'] == 512)
-        $val['role_name'] = $i18n->getKey('role.top_manager.label');
+        $val['role_name'] = $i18n->get('role.top_manager.label');
       $user_list[] = $val;
     }
 
