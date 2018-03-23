@@ -415,10 +415,10 @@ class ttUserHelper {
   static function saveTmpRef($ref, $user_id) {
     $mdb2 = getConnection();
 
-    $sql = "delete from tt_tmp_refs where timestamp + 86400 < now()";
+    $sql = "delete from tt_tmp_refs where created < now() - interval 1 hour";
     $affected = $mdb2->exec($sql);
 
-    $sql = "insert into tt_tmp_refs (ref, user_id) values(".$mdb2->quote($ref).", $user_id)";
+    $sql = "insert into tt_tmp_refs (created, ref, user_id) values(now(), ".$mdb2->quote($ref).", $user_id)";
     $affected = $mdb2->exec($sql);
   }
 
