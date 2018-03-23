@@ -852,6 +852,7 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_teams` ADD `modified_by` int(11) default NULL AFTER `modified_ip`");
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.65', modified = now() where param_name = 'version_db' and param_value = '1.17.64'");
     setChange("update `tt_teams` t inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.65') set t.created = t.timestamp where t.created is null");
+    setChange("update `tt_users` u inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.65') set u.created = u.timestamp where u.created is null");
   }
 
   if ($_POST["cleanup"]) {
