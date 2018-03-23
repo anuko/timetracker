@@ -449,6 +449,8 @@ $i18n_key_words = array(
 'form.teams.hint' => 'Luo uusi tiimi luomalla ensin tiimin esimiehen käyttäjätili.<br>Tiimin tiedot voi myös tuoda toiselta Anuko Time Tracker -palvelimelta xml-muodossa (käyttäjänimien oltava uusia).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
+// TODO: translate the following.
+// 'form.profile.swap_roles' => 'Swap roles',
 'form.profile.12_hours' => '12-tuntinen',
 'form.profile.24_hours' => '24-tuntinen',
 // TODO: translate the following.

@@ -441,6 +441,8 @@ $i18n_key_words = array(
 'form.teams.hint' => 'Crea un nuovo gruppo creando un account gruppo manager.<br>Puoi anche importare i dati di un gruppo da un file xml esportato da un altro server Anuko Time Tracker (non sono ammessi login duplicati).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
+// TODO: translate the following.
+// 'form.profile.swap_roles' => 'Swap roles',
 'form.profile.12_hours' => '12 ore',
 'form.profile.24_hours' => '24 ore',
 'form.profile.show_holidays' => 'Mostra vacanze',

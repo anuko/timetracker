@@ -441,6 +441,8 @@ $i18n_key_words = array(
 'form.teams.hint' => 'Opret et nyt team ved at oprette en ny teamadministrator konto. <br> Du kan også importere teamdata fra en xml-fil fra en anden Anuko Time Tracker-server (eksisterende brugernavne er ikke tilladt).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
+// TODO: translate the following.
+// 'form.profile.swap_roles' => 'Swap roles',
 'form.profile.12_hours' => '12 timers',
 'form.profile.24_hours' => '24 timers',
 // TODO: translate the following.

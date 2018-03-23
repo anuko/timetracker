@@ -451,6 +451,8 @@ $i18n_key_words = array(
 'form.teams.hint' => 'Załóż nowy zespół najpierw tworząc konto managera.<br>Możesz także zaimportować plik xml z danymi zespołu z innego serwera Anuko Time Tracker (nazwy loginów nie mogą się powtarzać).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
+// TODO: translate the following.
+// 'form.profile.swap_roles' => 'Swap roles',
 'form.profile.12_hours' => '12 godzin',
 'form.profile.24_hours' => '24 godziny',
 // TODO: translate the following.

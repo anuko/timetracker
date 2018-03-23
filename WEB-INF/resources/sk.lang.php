@@ -466,6 +466,8 @@ $i18n_key_words = array(
 'form.teams.hint' => 'Pomocou vytvorenia nového účtu tímového manažéra vytvorte nový tím.<br>Taktiež môžete importovať údaje o tíme z xml súboru z iného Anuko Time Tracker serveru (nie sú povolené kolízie v prihlasovacom mene).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
+// TODO: translate the following.
+// 'form.profile.swap_roles' => 'Swap roles',
 'form.profile.12_hours' => '12-hodinový',
 'form.profile.24_hours' => '24-hodinový',
 // TODO: translate the following.

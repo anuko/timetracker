@@ -434,6 +434,8 @@ $i18n_key_words = array(
 'form.teams.hint' => 'Maak een nieuw team door een team  manager account aan te maken.<br>U kunt ook teamgegevens importeren uit een xml file van een andere Anuko Time Tracker server (login namen moeten uniek zijn).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
+// TODO: translate the following.
+// 'form.profile.swap_roles' => 'Swap roles',
 'form.profile.12_hours' => '12 uurs',
 'form.profile.24_hours' => '24 uurs',
 'form.profile.show_holidays' => 'Toon vakantiedagen',
