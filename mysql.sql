@@ -14,7 +14,6 @@
 #
 CREATE TABLE `tt_teams` (
   `id` int(11) NOT NULL auto_increment,                      # team id
-  `timestamp` timestamp default CURRENT_TIMESTAMP,           # Modification timestamp. TODO: redo all timestamps to survive beyond 2038.
   `name` varchar(80) default NULL,                           # team name
   `currency` varchar(7) default NULL,                        # team currency symbol
   `decimal_mark` char(1) NOT NULL default '.',               # separator in decimals
@@ -80,7 +79,6 @@ INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Top man
 #
 CREATE TABLE `tt_users` (
   `id` int(11) NOT NULL auto_increment,            # user id
-  `timestamp` timestamp default CURRENT_TIMESTAMP, # modification timestamp
   `login` varchar(50) COLLATE utf8_bin NOT NULL,   # user login
   `password` varchar(50) default NULL,             # password hash
   `name` varchar(100) default NULL,                # user name
@@ -452,4 +450,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.65', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.66', now()); # TODO: change when structure changes.
