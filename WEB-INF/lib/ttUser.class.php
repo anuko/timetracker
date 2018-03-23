@@ -32,6 +32,7 @@ class ttUser {
   var $id = null;               // User id.
   var $team_id = null;          // Team id.
   var $role_id = null;          // Role id.
+  var $role_name = null;        // Role name.
   var $rank = null;             // User role rank.
   var $client_id = null;        // Client id for client user role.
   var $behalf_id = null;        // User id, on behalf of whom we are working.
@@ -71,7 +72,7 @@ class ttUser {
 
     $mdb2 = getConnection();
 
-    $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role_id, r.rank, r.rights, u.client_id, u.email, t.name as team_name,
+    $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id, u.email, t.name as team_name,
       t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
       t.tracking_mode, t.project_required, t.task_required, t.record_type,
       t.bcc_email, t.plugins, t.config, t.lock_spec, t.workday_minutes, t.custom_logo
@@ -94,6 +95,7 @@ class ttUser {
       $this->id = $val['id'];
       $this->team_id = $val['team_id'];
       $this->role_id = $val['role_id'];
+      $this->role_name = $val['role_name'];
       $this->rights = explode(',', $val['rights']);
       $this->is_client = !in_array('track_own_time', $this->rights);
       $this->rank = $val['rank'];

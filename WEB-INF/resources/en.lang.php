@@ -427,6 +427,7 @@ $i18n_key_words = array(
 'form.teams.hint' => 'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
+'form.profile.swap_roles' => 'Swap roles',
 'form.profile.12_hours' => '12 hours',
 'form.profile.24_hours' => '24 hours',
 'form.profile.show_holidays' => 'Show holidays',
@@ -460,6 +461,7 @@ $i18n_key_words = array(
 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 
 // Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
+'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
 'form.swap.swap_with' => 'Swap roles with',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.

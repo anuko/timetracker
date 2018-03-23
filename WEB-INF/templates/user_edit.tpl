@@ -105,6 +105,12 @@ function handleClientControl() {
       <td>{$forms.userForm.status.control}</td>
     </tr>
 {/if}
+{if $user->id == $user_id}
+      <tr>
+      <td align="right">{$i18n.form.users.role}:</td>
+      <td>{$user->role_name} {if $user->can('swap_roles')}<a href="swap_roles.php">{$i18n.form.profile.swap_roles}</a>{/if}</td>
+    </tr>
+{/if}
     <tr>
       <td align="right">{$i18n.form.users.default_rate}&nbsp;(0{$user->decimal_mark}00):</td>
       <td>{$forms.userForm.rate.control}</td>
