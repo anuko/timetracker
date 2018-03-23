@@ -505,6 +505,7 @@ $i18n_key_words = array(
 
 // Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
 // TODO: translate the following.
+// 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
 // 'form.swap.swap_with' => 'Swap roles with',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.

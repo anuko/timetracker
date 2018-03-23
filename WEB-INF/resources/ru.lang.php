@@ -458,6 +458,7 @@ $i18n_key_words = array(
 'form.quota.hint' => 'При пустых значениях квоты автоматически определяются из длительности рабочего дня и праздников.',
 
 // Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
+'form.swap.hint' => 'Уменьшите свою роль, обменявшись с другим пользователем. Роль не может восстановлена.',
 'form.swap.swap_with' => 'Обменять роль с',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
