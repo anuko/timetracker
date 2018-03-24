@@ -30,7 +30,7 @@ require_once('../initialize.php');
 
 // Redirects for admin and client roles.
 if ($auth->isAuthenticated()) {
-  if ($user->isAdmin()) {
+  if ($user->can('administer_site')) {
     header('Location: ../admin_teams.php');
     exit();
   } elseif ($user->isClient()) {

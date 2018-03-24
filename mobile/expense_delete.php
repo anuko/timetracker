@@ -31,9 +31,13 @@ import('form.Form');
 import('DateAndTime');
 import('ttExpenseHelper');
 
-// Access check.
-if (!ttAccessAllowed('track_own_expenses') || !$user->isPluginEnabled('ex')) {
+// Access checks.
+if (!(ttAccessAllowed('track_own_expenses') || ttAccessAllowed('track_expenses'))) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('ex')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 

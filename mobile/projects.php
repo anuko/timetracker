@@ -30,9 +30,13 @@ require_once('../initialize.php');
 import('form.Form');
 import('ttTeamHelper');
 
-// Access check.
-if (!ttAccessAllowed('track_own_time') || (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode)) {
+// Access checks.
+if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
   header('Location: access_denied.php');
+  exit();
+}
+if (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+  header('Location: feature_disabled.php');
   exit();
 }
 
