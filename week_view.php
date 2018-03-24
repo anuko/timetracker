@@ -30,9 +30,13 @@ require_once('initialize.php');
 import('form.Form');
 import('ttTeamHelper');
 
-// Access check.
-if (!ttAccessAllowed('manage_advanced_settings') || !$user->isPluginEnabled('wv')) {
+// Access checks.
+if (!ttAccessAllowed('manage_advanced_settings')) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('wv')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 

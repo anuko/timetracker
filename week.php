@@ -38,9 +38,13 @@ import('ttClientHelper');
 import('ttTimeHelper');
 import('DateAndTime');
 
-// Access check.
-if (!ttAccessAllowed('track_own_time') || !$user->isPluginEnabled('wv')) {
+// Access checks.
+if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('wv')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 

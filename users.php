@@ -33,7 +33,7 @@ import('ttTimeHelper');
 import('ttRoleHelper');
 
 // Access check.
-if (!ttAccessAllowed('view_users')) {
+if (!(ttAccessAllowed('view_users') || ttAccessAllowed('manage_users'))) {
   header('Location: access_denied.php');
   exit();
 }
