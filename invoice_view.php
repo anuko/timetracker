@@ -32,9 +32,13 @@ import('ttInvoiceHelper');
 import('ttClientHelper');
 import('form.Form');
 
-// Access check.
-if (!(ttAccessAllowed('manage_invoices') || ttAccessAllowed('view_own_invoices')) || !$user->isPluginEnabled('iv')) {
+// Access checks.
+if (!(ttAccessAllowed('manage_invoices') || ttAccessAllowed('view_own_invoices'))) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('iv')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 

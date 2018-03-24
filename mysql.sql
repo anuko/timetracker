@@ -13,32 +13,32 @@
 # This table stores settings common to all team members such as language, week start day, etc.
 #
 CREATE TABLE `tt_teams` (
-  `id` int(11) NOT NULL auto_increment,                      # team id
-  `name` varchar(80) default NULL,                           # team name
-  `currency` varchar(7) default NULL,                        # team currency symbol
-  `decimal_mark` char(1) NOT NULL default '.',               # separator in decimals
-  `lang` varchar(10) NOT NULL default 'en',                  # language
-  `date_format` varchar(20) NOT NULL default '%Y-%m-%d',     # date format
-  `time_format` varchar(20) NOT NULL default '%H:%M',        # time format
-  `week_start` smallint(2) NOT NULL default 0,               # Week start day, 0 == Sunday.
-  `tracking_mode` smallint(2) NOT NULL default 1,            # tracking mode ("time", "projects" or "projects and tasks")
-  `project_required` smallint(2) NOT NULL default 0,         # whether a project selection is required or optional
-  `task_required` smallint(2) NOT NULL default 0,            # whether a task selection is required or optional
-  `record_type` smallint(2) NOT NULL default 0,              # time record type ("start and finish", "duration", or both)
-  `bcc_email` varchar(100) default NULL,                     # bcc email to copy all reports to
-  `plugins` varchar(255) default NULL,                       # a list of enabled plugins for team
-  `lock_spec` varchar(255) default NULL,                     # Cron specification for record locking,
-                                                             # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
-  `workday_minutes` smallint(4) default 480,                 # number of work minutes in a regular working day
-  `custom_logo` tinyint(4) default 0,                        # whether to use a custom logo or not
-  `config` text default NULL,                                # miscellaneous team configuration settings
-  `created` datetime default NULL,                           # creation timestamp
-  `created_ip` varchar(45) default NULL,                     # creator ip
-  `created_by` int(11) default NULL,                         # creator user_id
-  `modified` datetime default NULL,                          # modification timestamp
-  `modified_ip` varchar(45) default NULL,                    # modifier ip
-  `modified_by` int(11) default NULL,                        # modifier user_id
-  `status` tinyint(4) default 1,                             # team status
+  `id` int(11) NOT NULL auto_increment,                  # team id
+  `name` varchar(80) default NULL,                       # team name
+  `currency` varchar(7) default NULL,                    # team currency symbol
+  `decimal_mark` char(1) NOT NULL default '.',           # separator in decimals
+  `lang` varchar(10) NOT NULL default 'en',              # language
+  `date_format` varchar(20) NOT NULL default '%Y-%m-%d', # date format
+  `time_format` varchar(20) NOT NULL default '%H:%M',    # time format
+  `week_start` smallint(2) NOT NULL default 0,           # Week start day, 0 == Sunday.
+  `tracking_mode` smallint(2) NOT NULL default 1,        # tracking mode ("time", "projects" or "projects and tasks")
+  `project_required` smallint(2) NOT NULL default 0,     # whether a project selection is required or optional
+  `task_required` smallint(2) NOT NULL default 0,        # whether a task selection is required or optional
+  `record_type` smallint(2) NOT NULL default 0,          # time record type ("start and finish", "duration", or both)
+  `bcc_email` varchar(100) default NULL,                 # bcc email to copy all reports to
+  `plugins` varchar(255) default NULL,                   # a list of enabled plugins for team
+  `lock_spec` varchar(255) default NULL,                 # Cron specification for record locking,
+                                                         # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
+  `workday_minutes` smallint(4) default 480,             # number of work minutes in a regular working day
+  `custom_logo` tinyint(4) default 0,                    # whether to use a custom logo or not
+  `config` text default NULL,                            # miscellaneous team configuration settings
+  `created` datetime default NULL,                       # creation timestamp
+  `created_ip` varchar(45) default NULL,                 # creator ip
+  `created_by` int(11) default NULL,                     # creator user_id
+  `modified` datetime default NULL,                      # modification timestamp
+  `modified_ip` varchar(45) default NULL,                # modifier ip
+  `modified_by` int(11) default NULL,                    # modifier user_id
+  `status` tinyint(4) default 1,                         # team status
   PRIMARY KEY (`id`)
 );
 

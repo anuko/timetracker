@@ -30,9 +30,13 @@ require_once('initialize.php');
 import('form.Form');
 import('ttNotificationHelper');
 
-// Access check.
-if (!ttAccessAllowed('manage_advanced_settings') || !$user->isPluginEnabled('no')) {
+// Access checks.
+if (!ttAccessAllowed('manage_advanced_settings')) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('no')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 

@@ -26,23 +26,11 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-require_once('initialize.php');
-import('form.Form');
-import('ttTeamHelper');
+require_once('../initialize.php');
 
-// Access checks.
-if (!(ttAccessAllowed('manage_invoices') || ttAccessAllowed('view_own_invoices'))) {
-  header('Location: access_denied.php');
-  exit();
-}
-if (!$user->isPluginEnabled('iv')) {
-  header('Location: feature_disabled.php');
-  exit();
-}
+$err->add($i18n->get('error.feature_disabled'));
+if ($auth->isAuthenticated()) $smarty->assign('authenticated', true); // Used in header.tpl for menu display.
 
-$invoices = ttTeamHelper::getActiveInvoices();
-
-$smarty->assign('invoices', $invoices);
-$smarty->assign('title', $i18n->get('title.invoices'));
-$smarty->assign('content_page_name', 'invoices.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('title', $i18n->get('label.error'));
+$smarty->assign('content_page_name', 'mobile/access_denied.tpl');
+$smarty->display('mobile/index.tpl');
