@@ -85,6 +85,12 @@ class ttRegistrator {
 
     global $i18n;
 
+    // Protection fom too many recent bot registrations from user IP.
+    if ($this->registeredRecently()) {
+      $this->err->add($i18n->get('error.access_denied'));
+      return false;
+    }
+
     import('ttUserHelper');
     if (ttUserHelper::getUserByLogin($this->login)) {
       // User login already exists.
@@ -184,5 +190,23 @@ class ttRegistrator {
     }
 
     return true;
+  }
+
+  // registeredRecently determines if we already have a successful recent registration from user IP.
+  // "recent" means "within the last minute" and is set in a query by the following condition:
+  // "and created > now() - interval 1 minute". Change if necessary.
+  function registeredRecently() {
+    $mdb2 = getConnection();
+
+    $ip_part = ' created_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']);
+    $sql = 'select created from tt_teams where '.$ip_part.' and created > now() - interval 1 minute';
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    $val = $res->fetchRow();
+    if ($val)
+      return true;
+
+    return false;
   }
 }
