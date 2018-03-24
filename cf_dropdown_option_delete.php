@@ -30,9 +30,13 @@ require_once('initialize.php');
 require_once('plugins/CustomFields.class.php');
 import('form.Form');
 
-// Access check.
-if (!ttAccessAllowed('manage_custom_fields') || !$user->isPluginEnabled('cf')) {
+// Access checks.
+if (!ttAccessAllowed('manage_custom_fields')) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('cf')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 

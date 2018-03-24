@@ -27,29 +27,10 @@
 // +----------------------------------------------------------------------+
 
 require_once('initialize.php');
-require_once('plugins/CustomFields.class.php');
-import('form.Form');
 
-// Access checks.
-if (!ttAccessAllowed('manage_custom_fields')) {
-  header('Location: access_denied.php');
-  exit();
-}
-if (!$user->isPluginEnabled('cf')) {
-  header('Location: feature_disabled.php');
-  exit();
-}
+$err->add($i18n->get('error.feature_disabled'));
+if ($auth->isAuthenticated()) $smarty->assign('authenticated', true); // Used in header.tpl for menu display.
 
-$field_id = $request->getParameter('field_id');
-$options = CustomFields::getOptions($field_id);
-if (false === $options)
-  $err->add($i18n->get('error.db'));
-
-$form = new Form('dropdownOptionsForm');
-
-$smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('field_id', $field_id);
-$smarty->assign('options', $options);
-$smarty->assign('title', $i18n->get('title.cf_dropdown_options'));
-$smarty->assign('content_page_name', 'cf_dropdown_options.tpl');
+$smarty->assign('title', $i18n->get('label.error'));
+$smarty->assign('content_page_name', 'access_denied.tpl');
 $smarty->display('index.tpl');

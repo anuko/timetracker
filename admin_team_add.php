@@ -81,9 +81,10 @@ $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_email',
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.submit')));
 
 if ($request->isPost()) {
+
   /*
    * Note: creating a group by admin is pretty much the same as self-registration,
-   * except that created_by gields for group and user must be set to admin account.
+   * except that created_by fields for group and user must be set to admin account.
    * Therefore, we'll reuse ttRegistrator instance to create a group here
    * and override created_by fields using ttRegistrator::setCreatedBy() function.
    */

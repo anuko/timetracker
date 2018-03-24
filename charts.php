@@ -37,11 +37,17 @@ import('PieChartEx');
 import('ttUserHelper');
 import('ttTeamHelper');
 
-// Access check.
-if (!ttAccessAllowed('view_own_charts') || !$user->isPluginEnabled('ch')) {
+// Access checks.
+if (!ttAccessAllowed('view_own_charts')) {
   header('Location: access_denied.php');
   exit();
 }
+if (!$user->isPluginEnabled('ch')) {
+  header('Location: feature_disabled.php');
+  exit();
+}
+
+
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
