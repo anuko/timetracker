@@ -68,6 +68,8 @@ $i18n_key_words = array(
 'error.access_denied' => 'Pristup odbijen.',
 'error.sys' => 'Greška u sistemu.',
 'error.db' => 'Greška u bazi podataka.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Pogrešan "{0}" podatak.',
 'error.empty' => 'Polje "{0}" je prazno.',
 'error.not_equal' => 'Polje "{0}" nije jednak polju "{1}".',

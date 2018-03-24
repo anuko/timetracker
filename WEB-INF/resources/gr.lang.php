@@ -68,6 +68,8 @@ $i18n_key_words = array(
 'error.access_denied' => 'Δεν επιτρέπεται η πρόσβαση.',
 'error.sys' => 'Σφάλμα συστήματος.',
 'error.db' => 'Σφάλμα βάσης δεδομένων.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Λανθασμένο "{0}" δεδομένο.',
 'error.empty' => 'Το πεδίο "{0}" είναι κενό.',
 'error.not_equal' => 'Το πεδίο "{0}" δεν είναι ίσο με το πεδίο "{1}".',

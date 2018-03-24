@@ -75,6 +75,8 @@ $i18n_key_words = array(
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => '資料庫錯誤。',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => '不正確的"{0}"資料。',
 'error.empty' => '欄目"{0}"為空。',
 'error.not_equal' => '欄目"{0}"不等於欄目"{1}"。',

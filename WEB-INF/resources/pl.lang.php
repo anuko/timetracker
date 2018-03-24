@@ -71,6 +71,8 @@ $i18n_key_words = array(
 'error.access_denied' => 'Odmowa dostępu.',
 'error.sys' => 'Błąd systemu.',
 'error.db' => 'Błąd bazy danych.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Niepoprawne dane: "{0}".',
 'error.empty' => 'Pole "{0}" jest puste.',
 'error.not_equal' => 'Wartość z pola "{0}" jest inna niż wartość z pola "{1}".',

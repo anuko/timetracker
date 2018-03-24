@@ -75,6 +75,8 @@ $i18n_key_words = array(
 // 'error.access_denied' => 'Access denied.',
 'error.sys' => 'שגיאת מערכת',
 'error.db' => 'שגיאה של בסיס הנתונים',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'נתון "{0}" שגוי',
 'error.empty' => 'השדה "{0}" ריק',
 'error.not_equal' => 'השדה "{1}" אינו שווה לשדה "{0}"',

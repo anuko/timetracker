@@ -79,6 +79,8 @@ $i18n_key_words = array(
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'Chyba databáze.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Nesprávná "{0}" data.',
 'error.empty' => 'Pole "{0}" je prázdné.',
 'error.not_equal' => 'Pole "{0}" neodpovídá poli "{1}".',

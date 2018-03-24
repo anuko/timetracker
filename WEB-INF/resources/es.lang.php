@@ -76,6 +76,8 @@ $i18n_key_words = array(
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'Error de la base de datos.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Dato "{0}" incorrecto.',
 'error.empty' => 'El archivo "{0}" esta vacío.',
 'error.not_equal' => 'El archivo "{0}" no es igual al archivo "{1}".',

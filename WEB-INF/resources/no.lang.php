@@ -76,6 +76,8 @@ $i18n_key_words = array(
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'Databasefeil.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Feil "{0}" data.',
 'error.empty' => 'Feltet "{0}" er tomt.',
 'error.not_equal' => 'Feltet "{0}" stemmer ikke med "{1}".',

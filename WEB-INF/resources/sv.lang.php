@@ -69,6 +69,8 @@ $i18n_key_words = array(
 'error.access_denied' => 'Åtkomst nekad.',
 'error.sys' => 'Systemfel.',
 'error.db' => 'Databasfel.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => '"{0}" innehåller ett felaktigt värde.',
 'error.empty' => '"{0}" kan inte vara tomt.',
 'error.not_equal' => '"{0}" matchar inte "{1}".',

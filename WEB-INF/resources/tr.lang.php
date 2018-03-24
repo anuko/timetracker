@@ -80,6 +80,8 @@ $i18n_key_words = array(
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'Veritabanı hatası.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Hatalı veri "{0}".',
 'error.empty' => 'Alan "{0}" boştur.',
 // TODO: confirm that error.not_equal is translated correctly.

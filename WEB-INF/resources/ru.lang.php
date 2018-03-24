@@ -68,6 +68,7 @@ $i18n_key_words = array(
 'error.access_denied' => 'Доступ запрещён.',
 'error.sys' => 'Системная ошибка.',
 'error.db' => 'Ошибка базы данных.',
+'error.feature_disabled' => 'Функция отключена.',
 'error.field' => 'Некорректные данные в поле "{0}".',
 'error.empty' => 'Пустое поле "{0}".',
 'error.not_equal' => 'Значение "{0}" не соответствует "{1}".',

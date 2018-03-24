@@ -68,6 +68,8 @@ $i18n_key_words = array(
 'error.access_denied' => 'Adgang nægtet.',
 'error.sys' => 'System fejl.',
 'error.db' => 'Database fejl.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Forkert "{0}" data.',
 'error.empty' => 'Felt "{0}" er tom.',
 'error.not_equal' => 'Felt "{0}" er ikke lig med "{1}".',

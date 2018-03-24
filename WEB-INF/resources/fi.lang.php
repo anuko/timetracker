@@ -70,6 +70,8 @@ $i18n_key_words = array(
 'error.access_denied' => 'Pääsy estetty.',
 'error.sys' => 'Järjestelmävirhe.',
 'error.db' => 'Tietokantavirhe.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Virheellinen "{0}" tieto.',
 'error.empty' => 'Kenttä "{0}" on tyhjä.',
 'error.not_equal' => 'Kentät "{0}" ja "{1}" eivät ole samat.',

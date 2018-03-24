@@ -79,6 +79,8 @@ $i18n_key_words = array(
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'Andmebaasi viga.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Valed "{0}" andmed.',
 'error.empty' => 'Väli "{0}" on tühi.',
 'error.not_equal' => 'Väli "{0}" ei ole väljaga "{1}" võrdne.',

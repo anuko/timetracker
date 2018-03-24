@@ -81,6 +81,7 @@ $i18n_key_words = array(
 // 'error.sys' => 'System error.',
 'error.db' => 'Eroare baza de date.',
 // TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 // 'error.field' => 'Incorrect "{0}" data.',
 'error.empty' => 'Campul "{0}" este gol.',
 'error.not_equal' => 'Campul "{0}" nu este egal cu campul "{1}".',

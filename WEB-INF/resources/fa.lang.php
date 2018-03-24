@@ -72,6 +72,8 @@ $i18n_key_words = array(
 // 'error.access_denied' => 'Access denied.',
 'error.sys' => 'خطا در سیستم.',
 'error.db' => 'خطا در پایگاه داده.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'داده اشتباه در "{0}".',
 'error.empty' => 'فیلد "{0}" خالیست.',
 'error.not_equal' => 'فیلد "{0}" با فیلد "{1}" برابر نیست.',

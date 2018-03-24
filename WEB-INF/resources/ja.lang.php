@@ -77,6 +77,8 @@ $i18n_key_words = array(
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
 'error.db' => 'データベースのエラー。',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => '不正確な"{0}"データ。',
 'error.empty' => '"{0}"のフィールドが空白です。',
 'error.not_equal' => '"{0}"のフィールドは"{1}"のフィールドと違います。',

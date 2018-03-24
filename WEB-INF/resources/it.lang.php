@@ -70,6 +70,8 @@ $i18n_key_words = array(
 'error.access_denied' => 'Accesso negato.',
 'error.sys' => 'Errore di sistema.',
 'error.db' => 'Errore database.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Dato "{0}" errato.',
 'error.empty' => 'Il campo "{0}" è vuoto.',
 'error.not_equal' => 'Il campo "{0}" non è uguale al campo "{1}".',
