@@ -95,33 +95,35 @@
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
-    {if !$user->isClient()}
+    {if $user->can('track_time') || $user->can('track_own_time')}
            <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
     {/if}
-    {if $user->isPluginEnabled('ex') && !$user->isClient()}
+    {if $user->isPluginEnabled('ex') && ($user->can('track_expenses') || $user->can('track_own_expenses'))}
             &middot; <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
     {/if}
-            {if !$user->isClient()}&middot; {/if}<a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a>
+    {if $user->can('view_invoices') || $user->can('view_own_reports')}
+            &middot; <a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a> 
+    {/if}        
     {if $user->isPluginEnabled('iv') && ($user->can('manage_invoices') || $user->can('view_own_invoices'))}
             &middot; <a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a>
     {/if}
-    {if ($user->isPluginEnabled('ch') && !$user->isClient()) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode
+    {if ($user->isPluginEnabled('ch') && ($user->can('view_charts') || $user->can('view_own_charts'))) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode
       || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isPluginEnabled('cl'))}
             &middot; <a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a>
     {/if}
-    {if !$user->isClient() && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if $user->can('manage_projects') && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
             &middot; <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
     {/if}
     {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode) && $user->can('manage_tasks')}
             &middot; <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
     {/if}
-    {if !$user->isClient()}
+    {if $user->can('view_users') || $user->can('manage_users')}
             &middot; <a class="mainMenu" href="users.php">{$i18n.menu.users}</a>
     {/if}
     {if $user->isPluginEnabled('cl') && $user->can('manage_clients')}
             &middot; <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
     {/if}
-    {if $user->isManager()}
+    {if $user->can('export_data')}
             &middot; <a class="mainMenu" href="export.php">{$i18n.menu.export}</a>
     {/if}
           </td>
