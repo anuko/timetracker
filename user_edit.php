@@ -222,11 +222,19 @@ if ($request->isPost()) {
   }
 } // isPost
 
+$can_swap = false;
+if ($user->id == $user_id && $user->can('swap_roles')) {
+  $users_for_swap = ttTeamHelper::getUsersForSwap();
+  if (is_array($users_for_swap) && sizeof($users_for_swap) > 0)
+    $can_swap = true;
+}
+
 $rates = ttProjectHelper::getRates($user_id);
 $smarty->assign('rates', $rates);
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('active_roles', $active_roles);
+$smarty->assign('can_swap', $can_swap);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
 $smarty->assign('user_id', $user_id);

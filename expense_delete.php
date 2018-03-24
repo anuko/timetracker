@@ -41,8 +41,6 @@ if (!$user->isPluginEnabled('ex')) {
   exit();
 }
 
-
-
 $cl_id = $request->getParameter('id');
 $expense_item = ttExpenseHelper::getItem($cl_id, $user->getActiveUser());
 

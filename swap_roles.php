@@ -30,20 +30,23 @@ require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
 
-// Access check.
+// Access checks.
 if (!ttAccessAllowed('swap_roles')) {
   header('Location: access_denied.php');
   exit();
 }
-
-$users = ttTeamHelper::getUsersForSwap();
+$users_for_swap = ttTeamHelper::getUsersForSwap();
+if (!is_array($users_for_swap) || sizeof($users_for_swap) == 0) {
+  header('Location: access_denied.php');
+  exit();
+}
 
 if ($request->isPost()) {
   $cl_id = $request->getParameter('swap_with');
 }
 
 $form = new Form('swapForm');
-$form->addInput(array('type'=>'combobox','name'=>'swap_with','style'=>'width: 250px;','data'=>$users,'datakeys'=>array('id','name')));
+$form->addInput(array('type'=>'combobox','name'=>'swap_with','style'=>'width: 250px;','data'=>$users_for_swap,'datakeys'=>array('id','name')));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.submit')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 

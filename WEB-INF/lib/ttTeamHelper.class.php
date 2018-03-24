@@ -143,7 +143,7 @@ class ttTeamHelper {
     if (is_a($res, 'PEAR_Error'))
       return false;
     while ($val = $res->fetchRow()) {
-      $isClient = in_array('track_own_time', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have data entry right.
+      $isClient = in_array('track_own_time', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have track_own_time right.
       if ($isClient)
         continue; // Skip adding clients.
       $user_list[] = $val;

@@ -32,7 +32,7 @@ import('ttTeamHelper'); // TODO: remove this?
 import('ttTaskHelper'); // TODO: remove this?
 import('ttRoleHelper');
 
-// Access check.
+// Access checks.
 if (!ttAccessAllowed('manage_roles')) {
   header('Location: access_denied.php');
   exit();
@@ -43,6 +43,7 @@ if (!$role) {
   header('Location: access_denied.php');
   exit();
 }
+
 $assigned_rights = explode(',', $role['rights']);
 $available_rights = array_diff($user->rights, $assigned_rights);
 

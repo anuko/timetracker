@@ -31,9 +31,13 @@ import('form.Form');
 import('ttProjectHelper');
 import('ttTeamHelper');
 
-// Access check.
-if (!ttAccessAllowed('manage_projects') || (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode)) {
+// Access checks.
+if (!ttAccessAllowed('manage_projects')) {
   header('Location: access_denied.php');
+  exit();
+}
+if (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+  header('Location: feature_disabled.php');
   exit();
 }
 

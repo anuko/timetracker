@@ -30,9 +30,13 @@ require_once('initialize.php');
 import('form.Form');
 import('ttPredefinedExpenseHelper');
 
-// Access check.
-if (!ttAccessAllowed('manage_advanced_settings') || !$user->isPluginEnabled('ex')) {
+// Access checks.
+if (!ttAccessAllowed('manage_advanced_settings')) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('ex')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 

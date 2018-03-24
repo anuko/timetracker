@@ -108,7 +108,7 @@ function handleClientControl() {
 {if $user->id == $user_id}
       <tr>
       <td align="right">{$i18n.form.users.role}:</td>
-      <td>{$user->role_name} {if $user->can('swap_roles')}<a href="swap_roles.php">{$i18n.form.profile.swap_roles}</a>{/if}</td>
+      <td>{$user->role_name} {if $can_swap}<a href="swap_roles.php">{$i18n.form.profile.swap_roles}</a>{/if}</td>
     </tr>
 {/if}
     <tr>

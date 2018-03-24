@@ -32,9 +32,13 @@ import('form.Form');
 import('ttTeamHelper');
 import('ttTimeHelper');
 
-// Access check.
-if (!ttAccessAllowed('manage_advanced_settings') || !$user->isPluginEnabled('mq')) {
+// Access checks.
+if (!ttAccessAllowed('manage_advanced_settings')) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('mq')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 

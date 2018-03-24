@@ -37,7 +37,7 @@ import('ttFavReportHelper');
 import('ttClientHelper');
 
 // Access check.
-if (!ttAccessAllowed('view_own_reports')) {
+if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports'))) {
   header('Location: access_denied.php');
   exit();
 }
