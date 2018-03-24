@@ -83,7 +83,9 @@
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
             <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a> &middot;
-            <a class="systemMenu" href="profile_edit.php">{$i18n.menu.profile}</a> &middot;
+            {if $user->can('manage_own_settings')}
+              <a class="systemMenu" href="profile_edit.php">{$i18n.menu.profile}</a> &middot;
+            {/if}
             <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a> &middot;
             <a class="systemMenu" href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a>
           </td>
