@@ -47,8 +47,6 @@ if (!$user->isPluginEnabled('ch')) {
   exit();
 }
 
-
-
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
 if(!$cl_date) {
@@ -111,7 +109,7 @@ if ($request->isPost()) {
   }
   // If user has changed - set behalf_id accordingly in the session.
   if ($request->getParameter('onBehalfUser')) {
-    if($user->canManageTeam()) {
+    if($user->can('view_charts')) {
       unset($_SESSION['behalf_id']);
       unset($_SESSION['behalf_name']);
 
@@ -129,7 +127,7 @@ if ($request->isPost()) {
 $chart_form = new Form('chartForm');
 
 // User dropdown. Changes the user "on behalf" of whom we are working. 
-if ($user->canManageTeam()) {
+if ($user->can('view_charts')) {
   $user_list = ttTeamHelper::getActiveUsers(array('putSelfFirst'=>true));
   if (count($user_list) > 1) {
     $chart_form->addInput(array('type'=>'combobox',
