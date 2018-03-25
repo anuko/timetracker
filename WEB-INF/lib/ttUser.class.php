@@ -305,14 +305,13 @@ class ttUser {
       if ($one_user['id'] == $this->behalf_id)
         return true;
     }
-
     return false;
   }
 
   // adjustBehalfId attempts to adjust behalf_id and behalf_name to a first found
-  // aapropriate user.
+  // apropriate user.
   //
-  // Needed for situations when use does not have do_own_something right.
+  // Needed for situations when user does not have do_own_something right.
   // Example: has view_charts but does not have view_own_charts.
   // In this case we still allow access to charts, but set behalf_id to someone else.
   function adjustBehalfId() {
