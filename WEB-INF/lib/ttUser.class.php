@@ -295,4 +295,37 @@ class ttUser {
     }
     return $user_list;
   }
+
+  // checkBehalfId checks whether behalf_id is appropriate.
+  // On behalf user must be active and have lower rank.
+  function checkBehalfId() {
+    $options = array('status'=>ACTIVE,'max_rank'=>$this->rank-1);
+    $users = $this->getUsers($options);
+    foreach($users as $one_user) {
+      if ($one_user['id'] == $this->behalf_id)
+        return true;
+    }
+
+    return false;
+  }
+
+  // adjustBehalfId attempts to adjust behalf_id and behalf_name to a first found
+  // aapropriate user.
+  //
+  // Needed for situations when use does not have do_own_something right.
+  // Example: has view_charts but does not have view_own_charts.
+  // In this case we still allow access to charts, but set behalf_id to someone else.
+  function adjustBehalfId() {
+    $options = array('status'=>ACTIVE,'max_rank'=>$this->rank-1);
+    $users = $this->getUsers($options);
+    foreach($users as $one_user) {
+      // Fake loop to access first element.
+      $this->behalf_id = $one_user['id'];
+      $this->behalf_name = $one_user['name'];
+      $_SESSION['behalf_id'] = $this->behalf_id;
+      $_SESSION['behalf_name'] = $this->behalf_name;
+      return true;
+    }
+    return false;
+  }
 }

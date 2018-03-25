@@ -46,6 +46,14 @@ if (!$user->isPluginEnabled('ch')) {
   header('Location: feature_disabled.php');
   exit();
 }
+if ($user->behalf_id && (!$user->can('view_charts') || !$user->checkBehalfId())) {
+  header('Location: access_denied.php'); // Trying on behalf, but no right or wrong user.
+  exit();
+}
+if (!$user->behalf_id && !$user->can('view_own_charts') && !$user->adjustBehalfId()) {
+  header('Location: access_denied.php'); // Trying as self, but no right for self, and noone to view on behalf.
+  exit();
+}
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
