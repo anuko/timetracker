@@ -39,6 +39,14 @@ if (!ttAccessAllowed('track_own_time')) {
   header('Location: access_denied.php');
   exit();
 }
+$cl_id = (int)$request->getParameter('id');
+// Get the time record we are editing.
+$time_rec = ttTimeHelper::getRecord($cl_id, $user->getActiveUser());
+if (!$time_rec || $time_rec['invoice_id']) {
+  // Prohibit editing not ours or invoiced records.
+  header('Location: access_denied.php');
+  exit();
+}
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
@@ -46,14 +54,6 @@ if ($user->isPluginEnabled('cf')) {
   $custom_fields = new CustomFields($user->team_id);
   $smarty->assign('custom_fields', $custom_fields);
 }
-
-$cl_id = $request->getParameter('id');
-
-// Get the time record we are editing.
-$time_rec = ttTimeHelper::getRecord($cl_id, $user->getActiveUser());
-
-// Prohibit editing invoiced records.
-if ($time_rec['invoice_id']) die($i18n->get('error.sys'));
 
 $item_date = new DateAndTime(DB_DATEFORMAT, $time_rec['date']);
 

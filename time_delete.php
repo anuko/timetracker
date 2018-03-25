@@ -32,17 +32,19 @@ import('ttUserHelper');
 import('ttTimeHelper');
 import('DateAndTime');
 
-// Access check.
+// Access checks.
 if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
   header('Location: access_denied.php');
   exit();
 }
-
-$cl_id = $request->getParameter('id');
+$cl_id = (int)$request->getParameter('id');
+// Get the time record we are deleting.
 $time_rec = ttTimeHelper::getRecord($cl_id, $user->getActiveUser());
-
-// Prohibit deleting invoiced records.
-if ($time_rec['invoice_id']) die($i18n->get('error.sys'));
+if (!$time_rec || $time_rec['invoice_id']) {
+  // Prohibit deleting not ours or invoiced records.
+  header('Location: access_denied.php');
+  exit();
+}
 
 // Escape comment for presentation.
 $time_rec['comment'] = htmlspecialchars($time_rec['comment']);

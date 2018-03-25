@@ -41,14 +41,14 @@ if (!$user->isPluginEnabled('ex')) {
   header('Location: feature_disabled.php');
   exit();
 }
-
-$cl_id = $request->getParameter('id');
-
+$cl_id = (int)$request->getParameter('id');
 // Get the expense item we are editing.
 $expense_item = ttExpenseHelper::getItem($cl_id, $user->getActiveUser());
-
-// Prohibit editing invoiced items.
-if ($expense_item['invoice_id']) die($i18n->get('error.sys'));
+if (!$expense_item || $expense_item['invoice_id']) {
+  // Prohibit editing not ours or invoiced items.
+  header('Location: access_denied.php');
+  exit();
+}
 
 $item_date = new DateAndTime(DB_DATEFORMAT, $expense_item['date']);
 

@@ -40,12 +40,14 @@ if (!$user->isPluginEnabled('ex')) {
   header('Location: feature_disabled.php');
   exit();
 }
-
-$cl_id = $request->getParameter('id');
+$cl_id = (int)$request->getParameter('id');
+// Get the expense item we are deleting.
 $expense_item = ttExpenseHelper::getItem($cl_id, $user->getActiveUser());
-
-// Prohibit deleting invoiced records.
-if ($expense_item['invoice_id']) die($i18n->get('error.sys'));
+if (!$expense_item || $expense_item['invoice_id']) {
+  // Prohibit deleting not ours or invoiced items.
+  header('Location: access_denied.php');
+  exit();
+}
 
 if ($request->isPost()) {
   if ($request->getParameter('delete_button')) { // Delete button pressed.
