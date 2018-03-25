@@ -51,7 +51,7 @@ if ($user->behalf_id && (!$user->can('track_time') || !$user->checkBehalfId())) 
   exit();
 }
 if (!$user->behalf_id && !$user->can('track_own_time') && !$user->adjustBehalfId()) {
-  header('Location: access_denied.php'); // Trying as self, but no right for self, and noone to view on behalf.
+  header('Location: access_denied.php'); // Trying as self, but no right for self, and noone to work on behalf.
   exit();
 }
 

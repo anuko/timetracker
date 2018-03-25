@@ -42,6 +42,14 @@ if (!$user->isPluginEnabled('ex')) {
   header('Location: feature_disabled.php');
   exit();
 }
+if ($user->behalf_id && (!$user->can('track_expenses') || !$user->checkBehalfId())) {
+  header('Location: access_denied.php'); // Trying on behalf, but no right or wrong user.
+  exit();
+}
+if (!$user->behalf_id && !$user->can('track_own_expenses') && !$user->adjustBehalfId()) {
+  header('Location: access_denied.php'); // Trying as self, but no right for self, and noone to work on behalf.
+  exit();
+}
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
@@ -68,9 +76,13 @@ $cl_cost = $request->getParameter('cost');
 // Elements of expensesForm.
 $form = new Form('expensesForm');
 
-if ($user->canManageTeam()) {
-  $user_list = ttTeamHelper::getActiveUsers(array('putSelfFirst'=>true));
-  if (count($user_list) > 1) {
+if ($user->can('track_expenses')) {
+  if ($user->can('track_own_expenses'))
+    $options = array('status'=>ACTIVE,'max_rank'=>$user->rank-1,'include_self'=>true,'self_first'=>true);
+  else
+    $options = array('status'=>ACTIVE,'max_rank'=>$user->rank-1);
+  $user_list = $user->getUsers($options);
+  if (count($user_list) >= 1) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'this.form.submit();',
       'name'=>'onBehalfUser',

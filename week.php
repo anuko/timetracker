@@ -47,6 +47,14 @@ if (!$user->isPluginEnabled('wv')) {
   header('Location: feature_disabled.php');
   exit();
 }
+if ($user->behalf_id && (!$user->can('track_time') || !$user->checkBehalfId())) {
+  header('Location: access_denied.php'); // Trying on behalf, but no right or wrong user.
+  exit();
+}
+if (!$user->behalf_id && !$user->can('track_own_time') && !$user->adjustBehalfId()) {
+  header('Location: access_denied.php'); // Trying as self, but no right for self, and noone to work on behalf.
+  exit();
+}
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
@@ -203,8 +211,12 @@ class WeekViewCellRenderer extends DefaultCellRenderer {
 $form = new Form('weekTimeForm');
 
 if ($user->can('track_time')) {
-  $user_list = ttTeamHelper::getActiveUsers(array('putSelfFirst'=>true));
-  if (count($user_list) > 1) {
+  if ($user->can('track_own_time'))
+    $options = array('status'=>ACTIVE,'max_rank'=>$user->rank-1,'include_self'=>true,'self_first'=>true);
+  else
+    $options = array('status'=>ACTIVE,'max_rank'=>$user->rank-1);
+  $user_list = $user->getUsers($options);
+  if (count($user_list) >= 1) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'this.form.submit();',
       'name'=>'onBehalfUser',
