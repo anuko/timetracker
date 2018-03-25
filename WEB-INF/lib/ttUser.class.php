@@ -241,4 +241,58 @@ class ttUser {
 
     return true;
   }
+
+  // getUsers obtains users in a group, as specififed by options.
+  function getUsers($options) {
+
+    $mdb2 = getConnection();
+
+    $skipClients = !isset($options['include_clients']);
+    $includeSelf = isset($options['include_self']);
+
+    $select_part = 'select u.id, u.name';
+    if (!isset($options['include_clients'])) $select_part .= ', r.rights';
+
+    $from_part = ' from tt_users u';
+
+    $left_joins = null;
+    if (isset($options['max_rank']) || $skipClients)
+        $left_joins .= ' left join tt_roles r on (u.role_id = r.id)';
+
+    $where_part = " where u.team_id = $this->team_id";
+    if (isset($options['status'])) $where_part .= ' and u.status = '.(int)$options['status'];
+    if ($includeSelf) {
+      $where_part .= " and (u.id = $this->id || r.rank <= ".(int)$options['max_rank'].')';
+    } else {
+      if (isset($options['max_rank'])) $where_part .= ' and r.rank <= '.(int)$options['max_rank'];
+    }
+
+    $sql = $select_part.$from_part.$left_joins.$where_part;
+    $res = $mdb2->query($sql);
+    $user_list = array();
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+
+    while ($val = $res->fetchRow()) {
+      if ($skipClients) {
+        $isClient = in_array('track_own_time', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have track_own_time right.
+        if ($isClient)
+          continue; // Skip adding clients.
+      }
+      $user_list[] = $val;
+    }
+
+    if (isset($options['self_first'])) {
+      // Put own entry at the front.
+      $cnt = count($user_list);
+      for($i = 0; $i < $cnt; $i++) {
+        if ($user_list[$i]['id'] == $this->id) {
+          $self = $user_list[$i]; // Found self.
+          array_unshift($user_list, $self); // Put own entry at the front.
+          array_splice($user_list, $i+1, 1); // Remove duplicate.
+        }
+      }
+    }
+    return $user_list;
+  }
 }

@@ -38,7 +38,7 @@ import('ttUserHelper');
 import('ttTeamHelper');
 
 // Access checks.
-if (!ttAccessAllowed('view_own_charts')) {
+if (!(ttAccessAllowed('view_own_charts') || ttAccessAllowed('view_charts'))) {
   header('Location: access_denied.php');
   exit();
 }
@@ -128,8 +128,12 @@ $chart_form = new Form('chartForm');
 
 // User dropdown. Changes the user "on behalf" of whom we are working. 
 if ($user->can('view_charts')) {
-  $user_list = ttTeamHelper::getActiveUsers(array('putSelfFirst'=>true));
-  if (count($user_list) > 1) {
+  if ($user->can('view_own_charts'))
+    $options = array('status'=>ACTIVE,'max_rank'=>$user->rank-1,'include_self'=>true,'self_first'=>true);
+  else
+    $options = array('status'=>ACTIVE,'max_rank'=>$user->rank-1);
+  $user_list = $user->getUsers($options);
+  if (count($user_list) >= 1) {
     $chart_form->addInput(array('type'=>'combobox',
       'onchange'=>'this.form.submit();',
       'name'=>'onBehalfUser',

@@ -11,9 +11,9 @@
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.active_users}</td></tr>
   {/if}
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.person_name}</td>
-          <td width="35%" class="tableHeader">{$i18n.label.login}</td>
-          <td width="10%" class="tableHeader">{$i18n.form.users.role}</td>
+          <td width="30%" class="tableHeader">{$i18n.label.person_name}</td>
+          <td width="30%" class="tableHeader">{$i18n.label.login}</td>
+          <td width="20%" class="tableHeader">{$i18n.form.users.role}</td>
           <td width="10%" class="tableHeader">{$i18n.label.edit}</td>
           <td width="10%" class="tableHeader">{$i18n.label.delete}</td>
         </tr>
@@ -52,9 +52,9 @@
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.inactive_users}</td></tr>
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.person_name}</td>
-          <td width="35%" class="tableHeader">{$i18n.label.login}</td>
-          <td width="10%" class="tableHeader">{$i18n.form.users.role}</td>
+          <td width="30%" class="tableHeader">{$i18n.label.person_name}</td>
+          <td width="30%" class="tableHeader">{$i18n.label.login}</td>
+          <td width="20%" class="tableHeader">{$i18n.form.users.role}</td>
           <td width="10%" class="tableHeader">{$i18n.label.edit}</td>
           <td width="10%" class="tableHeader">{$i18n.label.delete}</td>
         </tr>
