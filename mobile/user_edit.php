@@ -34,12 +34,12 @@ import('ttUserHelper');
 import('form.Table');
 import('form.TableColumn');
 
-// Access check.
+// Access checks.
 if (!ttAccessAllowed('manage_users')) {
   header('Location: access_denied.php');
   exit();
 }
-$user_id = (int) $request->getParameter('id');
+$user_id = (int)$request->getParameter('id');
 $user_details = $user->getUser($user_id);
 if (!$user_details) {
   header('Location: access_denied.php');

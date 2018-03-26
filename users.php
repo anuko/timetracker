@@ -32,11 +32,12 @@ import('ttTeamHelper');
 import('ttTimeHelper');
 import('ttRoleHelper');
 
-// Access check.
+// Access checks.
 if (!(ttAccessAllowed('view_users') || ttAccessAllowed('manage_users'))) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 // Prepare a list of active users.
 if ($user->can('view_users'))

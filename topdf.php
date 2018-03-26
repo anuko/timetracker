@@ -35,11 +35,12 @@ import('form.Form');
 import('form.ActionForm');
 import('ttReportHelper');
 
-// Access check.
+// Access checks.
 if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports'))) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 // Check whether TCPDF library is available.
 if (!file_exists('WEB-INF/lib/tcpdf/'))

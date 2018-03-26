@@ -38,13 +38,13 @@ if (!ttAccessAllowed('track_own_time')) {
   exit();
 }
 $cl_id = (int)$request->getParameter('id');
-// Get the time record we are deleting.
 $time_rec = ttTimeHelper::getRecord($cl_id, $user->getActiveUser());
 if (!$time_rec || $time_rec['invoice_id']) {
   // Prohibit deleting not ours or invoiced records.
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 // Escape comment for presentation.
 $time_rec['comment'] = htmlspecialchars($time_rec['comment']);

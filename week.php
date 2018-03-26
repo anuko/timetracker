@@ -55,6 +55,7 @@ if (!$user->behalf_id && !$user->can('track_own_time') && !$user->adjustBehalfId
   header('Location: access_denied.php'); // Trying as self, but no right for self, and noone to work on behalf.
   exit();
 }
+// End of access checks.
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);

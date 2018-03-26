@@ -34,13 +34,6 @@ import('ttClientHelper');
 import('ttTimeHelper');
 import('DateAndTime');
 
-// This is a now removed check whether user browser supports cookies.
-// if (!isset($_COOKIE['tt_PHPSESSID'])) {
-  // This test gives a false-positive if user goes directly to this page
-  // as from a desktop shortcut (on first request only).
-  // die ("Your browser's cookie functionality is turned off. Please turn it on.");
-// }
-
 // Access checks.
 if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
   header('Location: access_denied.php');
@@ -54,6 +47,7 @@ if (!$user->behalf_id && !$user->can('track_own_time') && !$user->adjustBehalfId
   header('Location: access_denied.php'); // Trying as self, but no right for self, and noone to work on behalf.
   exit();
 }
+// End of access checks.
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);

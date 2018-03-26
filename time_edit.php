@@ -40,13 +40,13 @@ if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
   exit();
 }
 $cl_id = (int)$request->getParameter('id');
-// Get the time record we are editing.
 $time_rec = ttTimeHelper::getRecord($cl_id, $user->getActiveUser());
 if (!$time_rec || $time_rec['invoice_id']) {
   // Prohibit editing not ours or invoiced records.
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {

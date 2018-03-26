@@ -34,11 +34,12 @@ import('ttClientHelper');
 import('ttTimeHelper');
 import('DateAndTime');
 
-// Access check.
+// Access checks.
 if (!ttAccessAllowed('track_own_time')) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);

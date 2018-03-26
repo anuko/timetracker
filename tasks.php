@@ -39,6 +39,7 @@ if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
   header('Location: feature_disabled.php');
   exit();
 }
+// End of access checks.
 
 $smarty->assign('active_tasks', ttTeamHelper::getActiveTasks($user->team_id));
 $smarty->assign('inactive_tasks', ttTeamHelper::getInactiveTasks($user->team_id));

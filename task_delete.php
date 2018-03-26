@@ -39,9 +39,14 @@ if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
   header('Location: feature_disabled.php');
   exit();
 }
-
 $cl_task_id = (int)$request->getParameter('id');
 $task = ttTaskHelper::get($cl_task_id);
+if (!$task) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
+
 $task_to_delete = $task['name'];
 
 $form = new Form('taskDeleteForm');

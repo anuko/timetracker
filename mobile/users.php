@@ -31,11 +31,12 @@ import('form.Form');
 import('ttTeamHelper');
 import('ttTimeHelper');
 
-// Access check.
+// Access checks.
 if (!(ttAccessAllowed('view_users') || ttAccessAllowed('manage_users'))) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 // Get users.
 $active_users = ttTeamHelper::getActiveUsers(array('getAllFields'=>true));

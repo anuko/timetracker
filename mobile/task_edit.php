@@ -40,8 +40,14 @@ if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
   header('Location: feature_disabled.php');
   exit();
 }
-
 $cl_task_id = (int)$request->getParameter('id');
+$task = ttTaskHelper::get($cl_task_id);
+if (!$task) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
+
 $projects = ttTeamHelper::getActiveProjects($user->team_id);
 
 if ($request->isPost()) {
@@ -50,11 +56,9 @@ if ($request->isPost()) {
   $cl_status = $request->getParameter('status');
   $cl_projects = $request->getParameter('projects');
 } else {
-  $task = ttTaskHelper::get($cl_task_id);
   $cl_name = $task['name'];
   $cl_description = $task['description'];
   $cl_status = $task['status'];
-
   $assigned_projects = ttTaskHelper::getAssignedProjects($cl_task_id);
   foreach ($assigned_projects as $project_item)
     $cl_projects[] = $project_item['id'];

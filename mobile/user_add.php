@@ -33,11 +33,12 @@ import('ttUserHelper');
 import('form.Table');
 import('form.TableColumn');
 
-// Access check.
+// Access checks.
 if (!ttAccessAllowed('manage_users')) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 // Use the "limit" plugin if we have one. Ignore include errors.
 // The "limit" plugin is not required for normal operation of the Time Tracker.
