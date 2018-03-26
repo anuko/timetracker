@@ -42,7 +42,7 @@ if (!(ttAccessAllowed('view_users') || ttAccessAllowed('manage_users'))) {
 if ($user->can('view_users'))
   $options = array('status'=>ACTIVE,'include_clients'=>true,'include_login'=>true,'include_role'=>true);
 else /* if ($user->can('manage_users')) */
-  $options = array('status'=>ACTIVE,'max_rank'=>$user->rank-1,'include_clients'=>true,'include_self'=>true,'self_first'=>true,'include_login'=>true,'include_role'=>true);
+  $options = array('status'=>ACTIVE,'max_rank'=>$user->rank-1,'include_clients'=>true,'include_self'=>true,'include_login'=>true,'include_role'=>true);
 $active_users = $user->getUsers($options);
 
 // Prepare a list of inactive users.
