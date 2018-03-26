@@ -36,7 +36,7 @@ class ttUserHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $sql =  "select u.*, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.id = $user_id and u.team_id = $user->team_id";
+    $sql =  "select u.*, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.id = $user_id and u.team_id = $user->team_id and u.status is not null";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {

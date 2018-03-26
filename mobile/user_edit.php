@@ -47,7 +47,6 @@ $user_details = ttUserHelper::getUserDetails($user_id);
 
 // Security checks.
 if (!$user_details || // No details.
-     $user_details['team_id'] <> $user->team_id || // User not in team.
      $user_details['rank'] > $user->rank || // User has a bigger rank.
      ($user_details['rank'] == $user->rank && $user_details['id'] <> $user->id) // Same rank but not us.
    ) {

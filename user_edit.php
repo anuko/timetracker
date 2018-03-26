@@ -35,26 +35,23 @@ import('form.Table');
 import('form.TableColumn');
 import('ttRoleHelper');
 
-// Access check.
+// Access checks.
 if (!ttAccessAllowed('manage_users')) {
   header('Location: access_denied.php');
   exit();
 }
-
 // Get user id we are editing from the request.
 $user_id = (int) $request->getParameter('id');
 // Get user details.
 $user_details = ttUserHelper::getUserDetails($user_id);
-
-// Security checks.
 if (!$user_details || // No details.
-     $user_details['team_id'] <> $user->team_id || // User not in team.
      $user_details['rank'] > $user->rank || // User has a bigger rank.
      ($user_details['rank'] == $user->rank && $user_details['id'] <> $user->id) // Same rank but not us.
    ) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 if ($user->isPluginEnabled('cl'))
   $clients = ttTeamHelper::getActiveClients($user->team_id);
