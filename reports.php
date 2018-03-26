@@ -122,16 +122,6 @@ $form->addInput(array('type'=>'combobox',
   'data'=>$include_options,
   'empty'=>array(''=>$i18n->get('dropdown.all'))));
 
-if ($user->canManageTeam() && $user->isPluginEnabled('ps')) {
-  $form->addInput(array('type'=>'combobox',
-   'name'=>'paid_status',
-   'style'=>'width: 250px;',
-   'data'=>array('1'=>$i18n->get('dropdown.paid'),'2'=>$i18n->get('dropdown.not_paid')),
-   'empty'=>array(''=>$i18n->get('dropdown.all'))
- ));
-}
-
-
 // Add invoiced / not invoiced selector.
 $invoice_options = array('1'=>$i18n->get('form.reports.include_invoiced'),
   '2'=>$i18n->get('form.reports.include_not_invoiced'));
@@ -141,11 +131,26 @@ $form->addInput(array('type'=>'combobox',
   'data'=>$invoice_options,
   'empty'=>array(''=>$i18n->get('dropdown.all'))));
 
+if ($user->canManageTeam() && $user->isPluginEnabled('ps')) {
+  $form->addInput(array('type'=>'combobox',
+   'name'=>'paid_status',
+   'style'=>'width: 250px;',
+   'data'=>array('1'=>$i18n->get('dropdown.paid'),'2'=>$i18n->get('dropdown.not_paid')),
+   'empty'=>array(''=>$i18n->get('dropdown.all'))
+ ));
+}
+
 $user_list = array();
-if ($user->canManageTeam() || $user->isClient()) {
+if ($user->can('view_reports') || $user->isClient()) {
   // Prepare user and assigned projects arrays.
-  if ($user->canManageTeam())
-    $users = ttTeamHelper::getUsers(); // Active and inactive users for managers.
+  if ($user->can('view_reports')) {
+    // $users = ttTeamHelper::getUsers(); // Active and inactive users for managers.
+    if ($user->can('view_own_reports'))
+      $options = array('max_rank'=>$user->rank-1,'include_self'=>true);
+    else
+      $options = array('max_rank'=>$user->rank-1);
+    $users = $user->getUsers($options); // Active and inactive users for managers.
+  }
   elseif ($user->isClient())
     $users = ttTeamHelper::getUsersForClient(); // Active and inactive users for clients.
 

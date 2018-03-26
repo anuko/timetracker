@@ -262,7 +262,10 @@ class ttUser {
         $left_joins .= ' left join tt_roles r on (u.role_id = r.id)';
 
     $where_part = " where u.team_id = $this->team_id";
-    if (isset($options['status'])) $where_part .= ' and u.status = '.(int)$options['status'];
+    if (isset($options['status']))
+      $where_part .= ' and u.status = '.(int)$options['status'];
+    else
+      $where_part .= ' and u.status is not null';
     if ($includeSelf) {
       $where_part .= " and (u.id = $this->id || r.rank <= ".(int)$options['max_rank'].')';
     } else {
