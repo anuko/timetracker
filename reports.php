@@ -144,12 +144,11 @@ $user_list = array();
 if ($user->can('view_reports') || $user->isClient()) {
   // Prepare user and assigned projects arrays.
   if ($user->can('view_reports')) {
-    // $users = ttTeamHelper::getUsers(); // Active and inactive users for managers.
     if ($user->can('view_own_reports'))
       $options = array('max_rank'=>$user->rank-1,'include_self'=>true);
     else
       $options = array('max_rank'=>$user->rank-1);
-    $users = $user->getUsers($options); // Active and inactive users for managers.
+    $users = $user->getUsers($options); // Active and inactive users.
   }
   elseif ($user->isClient())
     $users = ttTeamHelper::getUsersForClient(); // Active and inactive users for clients.
