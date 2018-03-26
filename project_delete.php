@@ -39,9 +39,14 @@ if (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->t
   header('Location: feature_disabled.php');
   exit();
 }
-
 $cl_project_id = (int)$request->getParameter('id');
 $project = ttProjectHelper::get($cl_project_id);
+if (!$project) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
+
 $project_to_delete = $project['name'];
 
 $form = new Form('projectDeleteForm');
@@ -51,12 +56,9 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get(
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if(ttProjectHelper::get($cl_project_id)) {
-      if (ttProjectHelper::delete($cl_project_id)) {
-        header('Location: projects.php');
-        exit();
-      } else
-        $err->add($i18n->get('error.db'));
+    if (ttProjectHelper::delete($cl_project_id)) {
+      header('Location: projects.php');
+      exit();
     } else
       $err->add($i18n->get('error.db'));
   } elseif ($request->getParameter('btn_cancel')) {
