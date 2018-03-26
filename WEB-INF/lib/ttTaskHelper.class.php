@@ -198,7 +198,7 @@ class ttTaskHelper {
     $projects = $fields['projects'];
 
     $sql = "update tt_tasks set name = ".$mdb2->quote($name).", description = ".$mdb2->quote($description).
-      ", status = $status where id = $task_id";
+      ", status = $status where id = $task_id and team_id = $user->team_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       die($affected->getMessage());
