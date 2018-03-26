@@ -31,11 +31,12 @@ import('form.Form');
 import('ttTeamHelper');
 import('ttRoleHelper');
 
-// Access check.
+// Access checks.
 if (!ttAccessAllowed('manage_roles')) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 $smarty->assign('active_roles', ttTeamHelper::getActiveRolesForUser());
 $smarty->assign('inactive_roles', ttTeamHelper::getInactiveRolesForUser());

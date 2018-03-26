@@ -35,9 +35,14 @@ if (!ttAccessAllowed('manage_roles')) {
   header('Location: access_denied.php');
   exit();
 }
-
 $cl_role_id = (int)$request->getParameter('id');
 $role = ttRoleHelper::get($cl_role_id);
+if (!$role) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
+
 $role_to_delete = $role['name'];
 
 $form = new Form('roleDeleteForm');

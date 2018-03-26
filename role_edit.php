@@ -28,8 +28,6 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttTeamHelper'); // TODO: remove this?
-import('ttTaskHelper'); // TODO: remove this?
 import('ttRoleHelper');
 
 // Access checks.
@@ -43,6 +41,7 @@ if (!$role) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 $assigned_rights = explode(',', $role['rights']);
 $available_rights = array_diff($user->rights, $assigned_rights);
@@ -82,6 +81,7 @@ if ($request->isPost()) {
     // Validate user input.
     if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
     if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
+    if ($cl_rank >= $user->rank || $cl_rank < 0) $err->add($i18n->get('error.field'), $i18n->get('form.roles.rank'));
 
     if ($err->no()) {
       $existing_role = ttRoleHelper::getRoleByName($cl_name);
