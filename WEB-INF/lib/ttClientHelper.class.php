@@ -120,8 +120,9 @@ class ttClientHelper {
     }
 
     // Handle time records.
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
     if ($delete_client_entries) {
-      $sql = "update tt_log set status = NULL where client_id = $id";
+      $sql = 'update tt_log set status = NULL'.$modified_part." where client_id = $id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -129,7 +130,7 @@ class ttClientHelper {
 
     // Handle expense items.
     if ($delete_client_entries) {
-      $sql = "update tt_expense_items set status = NULL where client_id = $id";
+      $sql = 'update tt_expense_items set status = NULL'.$modified_part." where client_id = $id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -137,7 +138,7 @@ class ttClientHelper {
 
     // Handle invoices.
     if ($delete_client_entries) {
-      $sql = "update tt_invoices set status = NULL where client_id = $id";
+      $sql = "update tt_invoices set status = NULL where client_id = $id and team_id = $user->team_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -149,7 +150,14 @@ class ttClientHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $sql = "update tt_clients set status = NULL where id = $id and team_id = ".$user->team_id;
+    // Handle users for client.
+    $sql = 'update tt_users set status = NULL'.$modified_part." where client_id = $id and team_id = $user->team_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    // Mark client deleted.
+    $sql = "update tt_clients set status = NULL where id = $id and team_id = $user->team_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
