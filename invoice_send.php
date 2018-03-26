@@ -40,14 +40,15 @@ if (!$user->isPluginEnabled('iv')) {
   header('Location: feature_disabled.php');
   exit();
 }
-
 $cl_invoice_id = (int)$request->getParameter('id');
-$invoice = ttInvoiceHelper::getInvoice($cl_invoice_id); 
-$sc = new ttSysConfig($user->id);
+$invoice = ttInvoiceHelper::getInvoice($cl_invoice_id);
+if (!$invoice) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
 
-// Security check.
-if (!$cl_invoice_id || !$invoice)
-  die ($i18n->get('error.sys'));
+$sc = new ttSysConfig($user->id);
 
 if ($request->isPost()) {
   $cl_receiver = trim($request->getParameter('receiver'));

@@ -41,15 +41,13 @@ if (!$user->isPluginEnabled('iv')) {
   header('Location: feature_disabled.php');
   exit();
 }
-
-$cl_id = (int)$request->getParameter('id');
-$invoice = ttInvoiceHelper::getInvoice($cl_id);
-// Temporary fix for invalid invoice id. TODO: implement properly and review security of other pages,
-// where item id is passed (or posted) as parameter.
+$cl_invoice_id = (int)$request->getParameter('id');
+$invoice = ttInvoiceHelper::getInvoice($cl_invoice_id);
 if (!$invoice) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 $invoice_date = new DateAndTime(DB_DATEFORMAT, $invoice['date']);
 $client = ttClientHelper::getClient($invoice['client_id'], true);

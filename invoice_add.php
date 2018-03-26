@@ -40,6 +40,7 @@ if (!$user->isPluginEnabled('iv')) {
   header('Location: feature_disabled.php');
   exit();
 }
+// End of access checks.
 
 if ($request->isPost()) {
   $cl_date = $request->getParameter('date');
