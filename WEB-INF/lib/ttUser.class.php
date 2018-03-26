@@ -298,6 +298,25 @@ class ttUser {
     return $user_list;
   }
 
+  // getUser function is used to manage users in group and returns user details.
+  // At the moment, the function is used for user edits and deletes.
+  function getUser($user_id) {
+    if (!$this->can('manage_users')) return false;
+
+    $mdb2 = getConnection();
+
+    $sql =  "select u.id, u.name, u.login, u.role_id, u.status, u.rate, u.email, r.rank from tt_users u".
+            " left join tt_roles r on (u.role_id = r.id)".
+            " where u.id = $user_id and u.team_id = $this->team_id and u.status is not null".
+            " and (r.rank < $this->rank or (r.rank = $this->rank and u.id = $this->id))"; // Users with lesser roles or self.
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      return $val;
+    }
+    return false;
+  }
+
   // checkBehalfId checks whether behalf_id is appropriate.
   // On behalf user must be active and have lower rank.
   function checkBehalfId() {

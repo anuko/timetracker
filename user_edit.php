@@ -40,14 +40,9 @@ if (!ttAccessAllowed('manage_users')) {
   header('Location: access_denied.php');
   exit();
 }
-// Get user id we are editing from the request.
 $user_id = (int) $request->getParameter('id');
-// Get user details.
-$user_details = ttUserHelper::getUserDetails($user_id);
-if (!$user_details || // No details.
-     $user_details['rank'] > $user->rank || // User has a bigger rank.
-     ($user_details['rank'] == $user->rank && $user_details['id'] <> $user->id) // Same rank but not us.
-   ) {
+$user_details = $user->getUser($user_id);
+if (!$user_details) {
   header('Location: access_denied.php');
   exit();
 }

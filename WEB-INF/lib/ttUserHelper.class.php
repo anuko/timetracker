@@ -31,21 +31,6 @@ import('ttTeamHelper');
 // Class ttUserHelper contains helper functions for operations with users.
 class ttUserHelper {
 
-  // The getUserDetails function returns user details.
-  static function getUserDetails($user_id) {
-    global $user;
-    $mdb2 = getConnection();
-
-    $sql =  "select u.*, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.id = $user_id and u.team_id = $user->team_id and u.status is not null";
-    $res = $mdb2->query($sql);
-
-    if (!is_a($res, 'PEAR_Error')) {
-      $val = $res->fetchRow();
-      return $val;
-    }
-    return false;
-  }
-
   // The getUserName function returns user name.
   static function getUserName($user_id) {
     $mdb2 = getConnection();
