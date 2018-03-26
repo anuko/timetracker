@@ -251,12 +251,14 @@ class ttUser {
     $includeSelf = isset($options['include_self']);
 
     $select_part = 'select u.id, u.name';
+    if (isset($options['include_login'])) $select_part .= ', u.login';
     if (!isset($options['include_clients'])) $select_part .= ', r.rights';
+    if (isset($options['include_role'])) $select_part .= ', r.name as role_name, r.rank';
 
     $from_part = ' from tt_users u';
 
     $left_joins = null;
-    if (isset($options['max_rank']) || $skipClients)
+    if (isset($options['max_rank']) || $skipClients || isset($options['include_role']))
         $left_joins .= ' left join tt_roles r on (u.role_id = r.id)';
 
     $where_part = " where u.team_id = $this->team_id";
