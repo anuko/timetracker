@@ -269,7 +269,9 @@ class ttUser {
       if (isset($options['max_rank'])) $where_part .= ' and r.rank <= '.(int)$options['max_rank'];
     }
 
-    $sql = $select_part.$from_part.$left_joins.$where_part;
+    $order_part = " order by upper(u.name)";
+
+    $sql = $select_part.$from_part.$left_joins.$where_part.$order_part;
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
