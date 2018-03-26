@@ -108,6 +108,7 @@ class ttTeamHelper {
     global $user;
     $mdb2 = getConnection();
 
+    // Obtain role id for the user we are swapping ourselves with.
     $sql = "select u.id, u.role_id from tt_users u left join tt_roles r on (u.role_id = r.id) where u.id = $user_id and u.team_id = $user->team_id and u.status = 1 and r.rank < $user->rank";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))

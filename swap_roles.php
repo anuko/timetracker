@@ -40,10 +40,15 @@ if (!is_array($users_for_swap) || sizeof($users_for_swap) == 0) {
   header('Location: access_denied.php');
   exit();
 }
-
 if ($request->isPost()) {
-  $cl_id = $request->getParameter('swap_with');
+  $user_id = (int)$request->getParameter('swap_with');
+  $user_details = $user->getUser($user_id);
+  if (!$user_details) {
+    header('Location: access_denied.php');
+    exit();
+  }
 }
+// End of access checks.
 
 $form = new Form('swapForm');
 $form->addInput(array('type'=>'combobox','name'=>'swap_with','style'=>'width: 250px;','data'=>$users_for_swap,'datakeys'=>array('id','name')));
@@ -52,7 +57,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get(
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
-    if (ttTeamHelper::swapRolesWith($cl_id)) {
+    if (ttTeamHelper::swapRolesWith($user_id)) {
       header('Location: users.php');
       exit();
     } else
