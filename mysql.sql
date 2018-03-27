@@ -10,12 +10,14 @@
 
 #
 # Structure for table tt_teams. A team is a group of users for whom we are tracking work time.
-# This table stores settings common to all team members such as language, week start day, etc.
+# This table stores settings common to all group members such as language, week start day, etc.
 #
 CREATE TABLE `tt_teams` (
-  `id` int(11) NOT NULL auto_increment,                  # team id
-  `name` varchar(80) default NULL,                       # team name
-  `currency` varchar(7) default NULL,                    # team currency symbol
+  `id` int(11) NOT NULL auto_increment,                  # group id
+  `parent_id` int(11) default NULL,                      # parent group id
+  `org_id` int(11) default NULL,                         # organization id (id of top group)
+  `name` varchar(80) default NULL,                       # group name
+  `currency` varchar(7) default NULL,                    # currency symbol
   `decimal_mark` char(1) NOT NULL default '.',           # separator in decimals
   `lang` varchar(10) NOT NULL default 'en',              # language
   `date_format` varchar(20) NOT NULL default '%Y-%m-%d', # date format
@@ -31,14 +33,14 @@ CREATE TABLE `tt_teams` (
                                                          # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
   `workday_minutes` smallint(4) default 480,             # number of work minutes in a regular working day
   `custom_logo` tinyint(4) default 0,                    # whether to use a custom logo or not
-  `config` text default NULL,                            # miscellaneous team configuration settings
+  `config` text default NULL,                            # miscellaneous group configuration settings
   `created` datetime default NULL,                       # creation timestamp
   `created_ip` varchar(45) default NULL,                 # creator ip
   `created_by` int(11) default NULL,                     # creator user_id
   `modified` datetime default NULL,                      # modification timestamp
   `modified_ip` varchar(45) default NULL,                # modifier ip
   `modified_by` int(11) default NULL,                    # modifier user_id
-  `status` tinyint(4) default 1,                         # team status
+  `status` tinyint(4) default 1,                         # group status
   PRIMARY KEY (`id`)
 );
 
@@ -450,4 +452,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.67', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.76', now()); # TODO: change when structure changes.
