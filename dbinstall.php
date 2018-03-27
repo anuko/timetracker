@@ -805,7 +805,7 @@ if ($_POST) {
     print "Updated $users_updated users...<br>\n";
   }
 
-  if ($_POST["convert11744to11778"]) {
+  if ($_POST["convert11744to11779"]) {
     setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.44') set rights = replace(rights, 'override_punch_mode,override_date_lock', 'override_punch_mode,override_own_punch_mode,override_date_lock')");
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.48' where param_name = 'version_db' and param_value = '1.17.44'");
     setChange("update `tt_users` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.48') set role_id = (select id from tt_roles where team_id = 0 and rank = 512) where role = 324");
@@ -867,6 +867,8 @@ if ($_POST) {
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.77', modified = now() where param_name = 'version_db' and param_value = '1.17.76'");
     setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.77') set rights = replace(rights, 'manage_own_settings,view_users', 'manage_own_settings,view_projects,view_users')");
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.78', modified = now() where param_name = 'version_db' and param_value = '1.17.77'");
+    setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.78') set rights = replace(rights, 'manage_own_settings,view_projects,view_users', 'view_own_projects,manage_own_settings,view_users')");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.17.79', modified = now() where param_name = 'version_db' and param_value = '1.17.78'");
   }
 
   if ($_POST["cleanup"]) {
@@ -912,7 +914,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.17.78)</b>
+    <td width="80%"><b>Create database structure (v1.17.79)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -952,8 +954,8 @@ if ($_POST) {
     <td><input type="submit" name="convert11400to11744" value="Update"><br><input type="submit" name="update_role_id" value="Update role_id"></td>
   </tr>
     <tr valign="top">
-    <td>Update database structure (v1.17.44 to v1.17.78)</td>
-    <td><input type="submit" name="convert11744to11778" value="Update"></td>
+    <td>Update database structure (v1.17.44 to v1.17.79)</td>
+    <td><input type="submit" name="convert11744to11779" value="Update"></td>
   </tr>
 </table>
 
