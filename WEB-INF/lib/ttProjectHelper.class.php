@@ -154,33 +154,31 @@ class ttProjectHelper {
   
   // delete - deletes things associated with a project and marks the project as deleted. 
   static function delete($id) {
+    global $user;
     $mdb2 = getConnection();
-    
+
+    // Start with project itself. Reason: if the passed in project_id is bogus,
+    // we'll fail right here and don't damage any other data.
+
+    // Mark project as deleted and remove associated tasks.
+    $sql = "update tt_projects set status = NULL, tasks = NULL where id = $id and team_id = $user->team_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error') || 0 == $affected)
+      return false; // An error ocurred, or 0 rows updated.
+
     // Delete user binds to this project.
     $sql = "delete from tt_user_project_binds where project_id = $id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
-    
-  	// Delete task binds to this project.
+
+    // Delete task binds to this project.
     $sql = "delete from tt_project_task_binds where project_id = $id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
-    
-    // Remove associated tasks.
-    $sql = "update tt_projects set tasks = NULL where id = $id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error'))
-      return false;
 
-    // Mark project as deleted.
-    $sql = "update tt_projects set status = NULL where id = $id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error'))
-      return false;
-
-  	return true;
+    return true;
   }
   
   // insert function inserts a new project into database.
@@ -236,8 +234,8 @@ class ttProjectHelper {
   } 
 
   // update function - updates the project in database.
-  static function update($fields)
-  {
+  static function update($fields) {
+    global $user;
     $mdb2 = getConnection();
     
     $project_id = $fields['id']; // Project we are updating.
@@ -313,7 +311,8 @@ class ttProjectHelper {
     
     // Update project name, description, tasks and status in tt_projects table.
     $comma_separated = implode(",", $tasks_to_bind); // This is a comma-separated list of associated task ids.
-    $sql = "update tt_projects set name = ".$mdb2->quote($name).", description = ".$mdb2->quote($description).", tasks = ".$mdb2->quote($comma_separated).", status = $status where id = $project_id";
+    $sql = "update tt_projects set name = ".$mdb2->quote($name).", description = ".$mdb2->quote($description).
+           ", tasks = ".$mdb2->quote($comma_separated).", status = $status where id = $project_id and team_id = $user->team_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
