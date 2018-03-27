@@ -73,7 +73,7 @@ create unique index role_idx on tt_roles(team_id, rank, status);
 
 # Insert site-wide roles - site administrator and top manager.
 INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Site administrator', 1024, 'administer_site');
-INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'track_own_time,track_own_expenses,view_own_reports,view_own_charts,view_own_invoices,manage_own_settings,view_users,track_time,track_expenses,view_reports,view_charts,override_punch_mode,override_own_punch_mode,override_date_lock,override_own_date_lock,swap_roles,approve_timesheets,manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups');
+INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'track_own_time,track_own_expenses,view_own_reports,view_own_charts,view_own_invoices,manage_own_settings,view_projects,view_users,track_time,track_expenses,view_reports,view_charts,override_punch_mode,override_own_punch_mode,override_date_lock,override_own_date_lock,swap_roles,approve_timesheets,manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups');
 
 
 #
@@ -452,4 +452,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.77', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.78', now()); # TODO: change when structure changes.
