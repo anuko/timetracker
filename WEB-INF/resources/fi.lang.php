@@ -282,6 +282,8 @@ $i18n_key_words = array(
 'title.import' => 'Tiimitietojen tunti',
 'title.options' => 'Optiot',
 'title.profile' => 'Profiili',
+// TODO: translate the following.
+// 'title.group' => 'Group Settings',
 'title.cf_custom_fields' => 'Omat kentät',
 'title.cf_add_custom_field' => 'Oman kentän lisäys',
 'title.cf_edit_custom_field' => 'Oman kentän muokkaus',

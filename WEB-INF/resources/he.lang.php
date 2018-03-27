@@ -302,6 +302,8 @@ $i18n_key_words = array(
 'title.import' => 'ייבוא נתוני צוות',
 'title.options' => 'אפשרויות',
 'title.profile' => 'פרופיל',
+// TODO: translate the following.
+// 'title.group' => 'Group Settings',
 'title.cf_custom_fields' => 'שדות אישיים',
 'title.cf_add_custom_field' => 'הוספת שדה אישי',
 'title.cf_edit_custom_field' => 'עריכת שדה אישי',

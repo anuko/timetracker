@@ -273,6 +273,8 @@ $i18n_key_words = array(
 'title.import' => 'Daten importieren',
 'title.options' => 'Optionen',
 'title.profile' => 'Profil',
+// TODO: translate the following.
+// 'title.group' => 'Group Settings',
 'title.cf_custom_fields' => 'Benutzerfelder',
 'title.cf_add_custom_field' => 'Benutzerfeld hinzufügen',
 'title.cf_edit_custom_field' => 'Benutzerfeld bearbeiten',

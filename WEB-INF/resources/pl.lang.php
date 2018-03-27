@@ -282,6 +282,8 @@ $i18n_key_words = array(
 'title.import' => 'Import danych zespołu',
 'title.options' => 'Opcje',
 'title.profile' => 'Profil',
+// TODO: translate the following.
+// 'title.group' => 'Group Settings',
 'title.cf_custom_fields' => 'Pola niestandardowe',
 'title.cf_add_custom_field' => 'Dodawanie pola niestandardowego',
 'title.cf_edit_custom_field' => 'Edytowanie pola niestandardowego',
