@@ -31,11 +31,12 @@ import('form.Form');
 import('ttUserHelper');
 import('ttRoleHelper');
 
-// Access check.
+// Access checks.
 if (!ttAccessAllowed('manage_own_settings')) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
 $can_change_login = $user->canManageTeam();
