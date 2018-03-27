@@ -39,7 +39,7 @@ if (!ttAccessAllowed('manage_own_settings')) {
 // End of access checks.
 
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
-$can_change_login = $user->canManageTeam();
+$can_manage_account = $user->can('manage_own_account');
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -125,13 +125,13 @@ if ($request->isPost()) {
 }
 
 $form = new Form('profileForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','value'=>$cl_login,'enable'=>$can_change_login));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name,'enable'=>$can_manage_account));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','value'=>$cl_login,'enable'=>$can_manage_account));
 if (!$auth->isPasswordExternal()) {
   $form->addInput(array('type'=>'password','maxlength'=>'30','name'=>'password1','value'=>$cl_password1));
   $form->addInput(array('type'=>'password','maxlength'=>'30','name'=>'password2','value'=>$cl_password2));
 }
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email,'enable'=>$can_change_login));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email,'enable'=>$can_manage_account));
 if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team));
   $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
@@ -233,13 +233,12 @@ $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('b
 if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.person_name'));
-  if ($can_change_login) {
-    if (!ttValidString($cl_login)) $err->add($i18n->get('error.field'), $i18n->get('label.login'));
+  if (!ttValidString($cl_login)) $err->add($i18n->get('error.field'), $i18n->get('label.login'));
 
-    // New login must be unique.
-    if ($cl_login != $user->login && ttUserHelper::getUserByLogin($cl_login))
-      $err->add($i18n->get('error.user_exists'));
-  }
+  // New login must be unique.
+  if ($cl_login != $user->login && ttUserHelper::getUserByLogin($cl_login))
+    $err->add($i18n->get('error.user_exists'));
+
   if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
     if (!ttValidString($cl_password1)) $err->add($i18n->get('error.field'), $i18n->get('label.password'));
     if (!ttValidString($cl_password2)) $err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
