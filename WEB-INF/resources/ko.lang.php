@@ -48,6 +48,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'menu.create_team' => 'Create Team',
 'menu.profile' => '프로필',
+// TODO: translate the following.
+// 'menu.group' => 'Group',
 'menu.time' => '시간',
 // TODO: translate the following.
 // 'menu.expenses' => 'Expenses',

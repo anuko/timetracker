@@ -46,6 +46,8 @@ $i18n_key_words = array(
 'menu.help' => 'Apua',
 'menu.create_team' => 'Luo tiimi',
 'menu.profile' => 'Profiili',
+// TODO: translate the following.
+// 'menu.group' => 'Group',
 'menu.time' => 'Tunnit',
 'menu.expenses' => 'Kulut',
 'menu.reports' => 'Raportit',

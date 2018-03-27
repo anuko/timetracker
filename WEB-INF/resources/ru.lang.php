@@ -46,6 +46,7 @@ $i18n_key_words = array(
 'menu.help' => 'Справка',
 'menu.create_team' => 'Создать команду',
 'menu.profile' => 'Профиль',
+'menu.group' => 'Группа',
 'menu.time' => 'Время',
 'menu.expenses' => 'Расходы',
 'menu.reports' => 'Отчёты',

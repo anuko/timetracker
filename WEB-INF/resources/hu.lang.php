@@ -48,6 +48,8 @@ $i18n_key_words = array(
 'menu.help' => 'Segítség',
 'menu.create_team' => 'Csoport létrehozása',
 'menu.profile' => 'Profil',
+// TODO: translate the following.
+// 'menu.group' => 'Group',
 'menu.time' => 'Munkaidő',
 // TODO: translate the following.
 // 'menu.expenses' => 'Expenses',

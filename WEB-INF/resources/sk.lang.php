@@ -46,6 +46,8 @@ $i18n_key_words = array(
 'menu.help' => 'Pomoc',
 'menu.create_team' => 'Vytvoriť tím',
 'menu.profile' => 'Profil',
+// TODO: translate the following.
+// 'menu.group' => 'Group',
 'menu.time' => 'Časový záznam',
 // TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
