@@ -756,6 +756,7 @@ class ttTeamHelper {
   // The insert function creates a new team.
   static function insert($fields) {
 
+    global $user;
     $mdb2 = getConnection();
 
     // Start with team name and currency.
@@ -837,6 +838,9 @@ class ttTeamHelper {
       $columns .= ', config';
       $values .= ', '.$mdb2->quote($fields['config']);
     }
+
+    $columns .= ', created, created_ip, created_by';
+    $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
 
     $sql = "insert into tt_teams ($columns) values($values)";
     $affected = $mdb2->exec($sql);
