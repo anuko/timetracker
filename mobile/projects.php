@@ -31,8 +31,7 @@ import('form.Form');
 import('ttTeamHelper');
 
 // Access checks.
-// TODO: introduce view_own_projects right to keep access checks simple.
-if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time') || ttAccessAllowed('manage_projects'))) {
+if (!(ttAccessAllowed('view_own_projects') || ttAccessAllowed('manage_projects'))) {
   header('Location: access_denied.php');
   exit();
 }
@@ -40,6 +39,7 @@ if (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->t
   header('Location: feature_disabled.php');
   exit();
 }
+// End of access checks.
 
 if($user->can('manage_projects')) {
   $active_projects = ttTeamHelper::getActiveProjects($user->team_id);

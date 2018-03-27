@@ -40,6 +40,7 @@ if (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->t
   header('Location: feature_disabled.php');
   exit();
 }
+// End of access checks.
 
 $users = ttTeamHelper::getActiveUsers();
 foreach ($users as $user_item)

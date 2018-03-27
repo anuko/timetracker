@@ -79,7 +79,7 @@
     {if $user->isPluginEnabled('ex') && ($user->can('track_own_expenses') || $user->can('track_expenses'))}
             &middot; <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
     {/if}
-    {if ($user->can('manage_projects') || $user->can('track_own_time') || $user->can('track_time')) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if ($user->can('view_own_projects') || $user->can('manage_projects')) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
             &middot; <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
     {/if}
     {if $user->can('manage_tasks') && $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode}

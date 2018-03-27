@@ -31,8 +31,7 @@ import('form.Form');
 import('ttTeamHelper');
 
 // Access checks.
-// TODO: introduce view_projects right to keep access checks simple.
-if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time') || ttAccessAllowed('manage_projects'))) {
+if (!(ttAccessAllowed('view_own_projects') || ttAccessAllowed('manage_projects'))) {
   header('Location: access_denied.php');
   exit();
 }
