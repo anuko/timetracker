@@ -58,7 +58,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 'menu.users' => '用戶',
-'menu.teams' => '團隊',
+// TODO: translate the following.
+// 'menu.groups' => 'Groups',
 'menu.export' => '輸出資料',
 'menu.clients' => '客戶',
 'menu.options' => '選項',

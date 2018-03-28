@@ -60,8 +60,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
 'menu.users' => '사용자',
-'menu.teams' => '팀',
 // TODO: translate the following.
+// 'menu.groups' => 'Groups',
 // 'menu.export' => 'Export',
 'menu.clients' => '클라이언트',
 'menu.options' => '옵션',

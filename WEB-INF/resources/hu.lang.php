@@ -59,7 +59,7 @@ $i18n_key_words = array(
 // 'menu.tasks' => 'Tasks',
 // TODO: translate the following.
 // 'menu.users' => 'Users',
-'menu.teams' => 'Csoportok',
+'menu.groups' => 'Csoportok',
 // TODO: translate the following.
 // 'menu.export' => 'Export',
 'menu.clients' => 'Ügyfelek',

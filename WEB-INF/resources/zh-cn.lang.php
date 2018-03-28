@@ -56,7 +56,8 @@ $i18n_key_words = array(
 'menu.projects' => '项目',
 'menu.tasks' => '任务',
 'menu.users' => '用户',
-'menu.teams' => '团队',
+// TODO: translate the following.
+// 'menu.groups' => 'Groups',
 'menu.export' => '导出数据',
 'menu.clients' => '客户',
 'menu.options' => '选项',
