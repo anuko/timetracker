@@ -44,7 +44,8 @@ $i18n_key_words = array(
 'menu.logout' => 'Αποσύνδεση',
 'menu.forum' => 'Φόρουμ',
 'menu.help' => 'Βοήθεια',
-'menu.create_team' => 'Δημιουργία ομάδας',
+// TODO: translate the following.
+// 'menu.create_group' => 'Create Group',
 'menu.profile' => 'Προφίλ',
 // TODO: translate the following.
 // 'menu.group' => 'Group',

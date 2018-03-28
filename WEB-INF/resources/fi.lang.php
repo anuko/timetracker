@@ -44,7 +44,8 @@ $i18n_key_words = array(
 'menu.logout' => 'Kirjaudu ulos',
 'menu.forum' => 'Keskustelupalsta',
 'menu.help' => 'Apua',
-'menu.create_team' => 'Luo tiimi',
+// TODO: translate the following.
+// 'menu.create_group' => 'Create Group',
 'menu.profile' => 'Profiili',
 // TODO: translate the following.
 // 'menu.group' => 'Group',

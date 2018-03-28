@@ -44,10 +44,9 @@ $i18n_key_words = array(
 'menu.logout' => 'Logga ut',
 'menu.forum' => 'Forum',
 'menu.help' => 'Hjälp',
-'menu.create_team' => 'Skapa arbetsgrupp',
+'menu.create_group' => 'Skapa grupp',
 'menu.profile' => 'Profil',
-// TODO: translate the following.
-// 'menu.group' => 'Group',
+'menu.group' => 'Grupp',
 'menu.time' => 'Tider',
 'menu.expenses' => 'Kostnader',
 'menu.reports' => 'Rapporter',
