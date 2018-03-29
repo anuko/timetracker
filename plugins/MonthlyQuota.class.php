@@ -32,21 +32,21 @@ import('ttTimeHelper');
 class MonthlyQuota {
 
   var $db;       // Database connection.
-  var $team_id;  // Team id.
+  var $group_id; // Group id.
 
   function __construct() {
     $this->db = getConnection();
     global $user;
-    $this->team_id = $user->team_id;
+    $this->group_id = $user->group_id;
   }
 
   // update - deletes a quota, then inserts a new one.
   public function update($year, $month, $minutes) {
-    $team_id = $this->team_id;
-    $deleteSql = "DELETE FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $team_id";
+    $group_id = $this->group_id;
+    $deleteSql = "DELETE FROM tt_monthly_quotas WHERE year = $year AND month = $month AND group_id = $group_id";
     $this->db->exec($deleteSql);
     if ($minutes){
-      $insertSql = "INSERT INTO tt_monthly_quotas (team_id, year, month, minutes) values ($team_id, $year, $month, $minutes)";
+      $insertSql = "INSERT INTO tt_monthly_quotas (group_id, year, month, minutes) values ($group_id, $year, $month, $minutes)";
       $affected = $this->db->exec($insertSql);
       return (!is_a($affected, 'PEAR_Error'));
     }
@@ -64,8 +64,8 @@ class MonthlyQuota {
 
   // getSingle - obtains a quota for a single month.
   private function getSingle($year, $month) {
-    $team_id = $this->team_id;
-    $sql = "SELECT minutes FROM tt_monthly_quotas WHERE year = $year AND month = $month AND team_id = $team_id";
+    $group_id = $this->group_id;
+    $sql = "SELECT minutes FROM tt_monthly_quotas WHERE year = $year AND month = $month AND group_id = $group_id";
     $reader = $this->db->query($sql);
     if (is_a($reader, 'PEAR_Error')) {
       return false;
@@ -83,8 +83,8 @@ class MonthlyQuota {
 
   // getMany - returns an array of quotas for a given year for team.
   private function getMany($year){
-    $team_id = $this->team_id;
-    $sql = "SELECT month, minutes FROM tt_monthly_quotas WHERE year = $year AND team_id = $team_id";
+    $group_id = $this->group_id;
+    $sql = "SELECT month, minutes FROM tt_monthly_quotas WHERE year = $year AND group_id = $group_id";
     $result = array();
     $res = $this->db->query($sql);
     if (is_a($res, 'PEAR_Error')) {

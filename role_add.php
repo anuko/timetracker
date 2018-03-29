@@ -59,11 +59,11 @@ if ($request->isPost()) {
   if ($cl_rank >= $user->rank || $cl_rank < 0) $err->add($i18n->get('error.field'), $i18n->get('form.roles.rank'));
 
   if ($err->no()) {
-    $existing_role = ttRoleHelper::getRoleByRank($cl_rank, $user->team_id);
+    $existing_role = ttRoleHelper::getRoleByRank($cl_rank, $user->group_id);
     if (!$existing_role) {
         // Insert a role with default user rights.
         if (ttRoleHelper::insert(array(
-          'team_id' => $user->team_id,
+          'group_id' => $user->group_id,
           'name' => $cl_name,
           'rank' => $cl_rank,
           'description' => $cl_description,

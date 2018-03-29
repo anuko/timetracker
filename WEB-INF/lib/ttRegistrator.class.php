@@ -157,7 +157,7 @@ class ttRegistrator {
     $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
     $values = "values($login, $password, $name, $this->group_id, $this->role_id, $email, $created, $created_ip)";
 
-    $sql = 'insert into tt_users (login, password, name, team_id, role_id, email, created, created_ip) '.$values;
+    $sql = 'insert into tt_users (login, password, name, group_id, role_id, email, created, created_ip) '.$values;
     $affected = $mdb2->exec($sql);
     if (!is_a($affected, 'PEAR_Error')) {
       $user_id = $mdb2->lastInsertID('tt_users', 'id');
@@ -182,7 +182,7 @@ class ttRegistrator {
     }
 
     // Update top manager.
-    $sql = "update tt_users set created_by = $user_id where id = $user_id and team_id = $this->group_id";
+    $sql = "update tt_users set created_by = $user_id where id = $user_id and group_id = $this->group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) {
       $this->err->add($i18n->get('error.db'));

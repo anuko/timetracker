@@ -45,7 +45,7 @@ if (!ttAccessAllowed('manage_users')) {
 @include('plugins/limit/user_add.php');
 
 if ($user->isPluginEnabled('cl'))
-  $clients = ttTeamHelper::getActiveClients($user->team_id);
+  $clients = ttTeamHelper::getActiveClients($user->group_id);
 
 $assigned_projects = array();
 if ($request->isPost()) {
@@ -89,7 +89,7 @@ if ($user->isPluginEnabled('cl'))
 
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','format'=>'.2','value'=>$cl_rate));
 
-$projects = ttTeamHelper::getActiveProjects($user->team_id);
+$projects = ttTeamHelper::getActiveProjects($user->group_id);
 
 // Define classes for the projects table.
 class NameCellRenderer extends DefaultCellRenderer {
@@ -147,7 +147,7 @@ if ($request->isPost()) {
         'login' => $cl_login,
         'password' => $cl_password1,
         'rate' => $cl_rate,
-        'team_id' => $user->team_id,
+        'group_id' => $user->group_id,
         'role_id' => $cl_role_id,
         'client_id' => $cl_client_id,
         'projects' => $assigned_projects,

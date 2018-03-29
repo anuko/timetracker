@@ -30,7 +30,7 @@ class ttUser {
   var $login = null;            // User login.
   var $name = null;             // User name.
   var $id = null;               // User id.
-  var $team_id = null;          // Team id.
+  var $group_id = null;         // Group id.
   var $role_id = null;          // Role id.
   var $role_name = null;        // Role name.
   var $rank = null;             // User role rank.
@@ -72,11 +72,11 @@ class ttUser {
 
     $mdb2 = getConnection();
 
-    $sql = "SELECT u.id, u.login, u.name, u.team_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id, u.email, t.name as team_name,
+    $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id, u.email, t.name as team_name,
       t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
       t.tracking_mode, t.project_required, t.task_required, t.record_type,
       t.bcc_email, t.plugins, t.config, t.lock_spec, t.workday_minutes, t.custom_logo
-      FROM tt_users u LEFT JOIN tt_groups t ON (u.team_id = t.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
+      FROM tt_users u LEFT JOIN tt_groups t ON (u.group_id = t.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
     if ($id)
       $sql .= "u.id = $id";
     else
@@ -93,7 +93,7 @@ class ttUser {
       $this->login = $val['login'];
       $this->name = $val['name'];
       $this->id = $val['id'];
-      $this->team_id = $val['team_id'];
+      $this->group_id = $val['group_id'];
       $this->role_id = $val['role_id'];
       $this->role_name = $val['role_name'];
       $this->rights = explode(',', $val['rights']);
@@ -193,7 +193,7 @@ class ttUser {
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name, p.description, p.tasks, upb.rate from tt_projects p
       inner join tt_user_project_binds upb on (upb.user_id = ".$this->getActiveUser()." and upb.project_id = p.id and upb.status = 1)
-      where p.team_id = $this->team_id and p.status = 1 order by p.name";
+      where p.group_id = $this->group_id and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -261,7 +261,7 @@ class ttUser {
     if (isset($options['max_rank']) || $skipClients || isset($options['include_role']))
         $left_joins .= ' left join tt_roles r on (u.role_id = r.id)';
 
-    $where_part = " where u.team_id = $this->team_id";
+    $where_part = " where u.group_id = $this->group_id";
     if (isset($options['status']))
       $where_part .= ' and u.status = '.(int)$options['status'];
     else
@@ -312,7 +312,7 @@ class ttUser {
 
     $sql =  "select u.id, u.name, u.login, u.role_id, u.status, u.rate, u.email from tt_users u".
             " left join tt_roles r on (u.role_id = r.id)".
-            " where u.id = $user_id and u.team_id = $this->team_id and u.status is not null".
+            " where u.id = $user_id and u.group_id = $this->group_id and u.status is not null".
             " and (r.rank < $this->rank or (r.rank = $this->rank and u.id = $this->id))"; // Users with lesser roles or self.
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {

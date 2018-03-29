@@ -64,7 +64,7 @@ if ($request->isPost()) {
   if ($err->no()) {
     if (ttPredefinedExpenseHelper::update(array(
         'id' => $predefined_expense_id,
-        'team_id' => $user->team_id,
+        'group_id' => $user->group_id,
         'name' => $cl_name,
         'cost' => $cl_cost))) {
         header('Location: predefined_expenses.php');

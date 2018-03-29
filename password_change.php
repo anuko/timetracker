@@ -49,8 +49,8 @@ if ($user_id) {
     $smarty->assign('i18n', $i18n->keys);
   }
   if ($user->custom_logo) {
-    $smarty->assign('custom_logo', 'images/'.$user->team_id.'.png');
-    $smarty->assign('mobile_custom_logo', '../images/'.$user->team_id.'.png');
+    $smarty->assign('custom_logo', 'images/'.$user->group_id.'.png');
+    $smarty->assign('mobile_custom_logo', '../images/'.$user->group_id.'.png');
   }
   $smarty->assign('user', $user);
 }

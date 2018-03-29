@@ -37,7 +37,7 @@ class ttTaskHelper {
     $mdb2 = getConnection();
 
     $sql = "select id, name, description, status from tt_tasks
-      where id = $id and team_id = $user->team_id and (status = 0 or status = 1)";
+      where id = $id and group_id = $user->group_id and (status = 0 or status = 1)";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
@@ -61,7 +61,7 @@ class ttTaskHelper {
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name from tt_projects p
       inner join tt_project_task_binds ptb on (ptb.project_id = p.id and ptb.task_id = $task_id)
-      where p.team_id = $user->team_id and p.status = 1 order by p.name";
+      where p.group_id = $user->group_id and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -77,7 +77,7 @@ class ttTaskHelper {
     $mdb2 = getConnection();
     global $user;
 
-    $sql = "select id from tt_tasks where team_id = $user->team_id and name = ".
+    $sql = "select id from tt_tasks where group_id = $user->group_id and name = ".
       $mdb2->quote($task_name)." and (status = 1 or status = 0)";
       $res = $mdb2->query($sql);
 
@@ -103,7 +103,7 @@ class ttTaskHelper {
         
     // Delete project binds to this task from the tasks field in tt_projects table.
     // Get projects where tasks is not NULL.
-    $sql = "select id, tasks from tt_projects where team_id = $user->team_id and tasks is not NULL";
+    $sql = "select id, tasks from tt_projects where group_id = $user->group_id and tasks is not NULL";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))
       return false;
@@ -135,14 +135,14 @@ class ttTaskHelper {
   {
     $mdb2 = getConnection();
 
-    $team_id = (int) $fields['team_id'];
+    $group_id = (int) $fields['group_id'];
     $name = $fields['name'];
     $description = $fields['description'];
     $projects = $fields['projects'];
     $status = $fields['status'];
         
-    $sql = "insert into tt_tasks (team_id, name, description, status)
-      values ($team_id, ".$mdb2->quote($name).", ".$mdb2->quote($description).", ".$mdb2->quote($status).")";
+    $sql = "insert into tt_tasks (group_id, name, description, status)
+      values ($group_id, ".$mdb2->quote($name).", ".$mdb2->quote($description).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     $last_id = 0;
     if (is_a($affected, 'PEAR_Error'))
@@ -198,7 +198,7 @@ class ttTaskHelper {
     $projects = $fields['projects'];
 
     $sql = "update tt_tasks set name = ".$mdb2->quote($name).", description = ".$mdb2->quote($description).
-      ", status = $status where id = $task_id and team_id = $user->team_id";
+      ", status = $status where id = $task_id and group_id = $user->group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       die($affected->getMessage());
@@ -220,7 +220,7 @@ class ttTaskHelper {
     // We need to either delete or insert task id in all affected projects.
     
     // Get all not deleted projects for team.
-    $sql = "select id, tasks from tt_projects where team_id = $user->team_id and status is not NULL";
+    $sql = "select id, tasks from tt_projects where group_id = $user->group_id and status is not NULL";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))
       die($res->getMessage());

@@ -83,17 +83,17 @@ class ttExportHelper {
       $this->userMap[$user_item['id']] = $key + 1;
 
     // Prepare project map.
-    $projects = ttTeamHelper::getAllProjects($user->team_id, true);
+    $projects = ttTeamHelper::getAllProjects($user->group_id, true);
     foreach ($projects as $key=>$project_item)
       $this->projectMap[$project_item['id']] = $key + 1;
 
     // Prepare task map.
-    $tasks = ttTeamHelper::getAllTasks($user->team_id, true);
+    $tasks = ttTeamHelper::getAllTasks($user->group_id, true);
     foreach ($tasks as $key=>$task_item)
       $this->taskMap[$task_item['id']] = $key + 1;
 
     // Prepare client map.
-    $clients = ttTeamHelper::getAllClients($user->team_id, true);
+    $clients = ttTeamHelper::getAllClients($user->group_id, true);
     foreach ($clients as $key=>$client_item)
       $this->clientMap[$client_item['id']] = $key + 1;
 
@@ -103,12 +103,12 @@ class ttExportHelper {
       $this->invoiceMap[$invoice_item['id']] = $key + 1;
 
     // Prepare custom fields map.
-    $custom_fields = ttTeamHelper::getAllCustomFields($user->team_id);
+    $custom_fields = ttTeamHelper::getAllCustomFields($user->group_id);
     foreach ($custom_fields as $key=>$custom_field)
       $this->customFieldMap[$custom_field['id']] = $key + 1;
 
     // Prepare custom field options map.
-    $custom_field_options = ttTeamHelper::getAllCustomFieldOptions($user->team_id);
+    $custom_field_options = ttTeamHelper::getAllCustomFieldOptions($user->group_id);
     foreach ($custom_field_options as $key=>$option)
       $this->customFieldOptionMap[$option['id']] = $key + 1;
 
@@ -164,7 +164,7 @@ class ttExportHelper {
 
     // Write user to project binds.
     fwrite($file, "<user_project_binds>\n");
-    $user_binds = ttTeamHelper::getUserToProjectBinds($user->team_id);
+    $user_binds = ttTeamHelper::getUserToProjectBinds($user->group_id);
     foreach ($user_binds as $bind) {
       $user_id = $this->userMap[$bind['user_id']];
       $project_id = $this->projectMap[$bind['project_id']];
@@ -222,7 +222,7 @@ class ttExportHelper {
     unset($custom_field_options);
 
     // Write monthly quotas.
-    $quotas = ttTeamHelper::getMonthlyQuotas($user->team_id);
+    $quotas = ttTeamHelper::getMonthlyQuotas($user->group_id);
     fwrite($file, "<monthly_quotas>\n");
     foreach ($quotas as $quota) {
       fwrite($file, "  <monthly_quota year=\"".$quota['year']."\" month=\"".$quota['month']."\" minutes=\"".$quota['minutes']."\"/>\n");
@@ -246,7 +246,7 @@ class ttExportHelper {
     unset($records);
 
     // Write custom field log.
-    $custom_field_log = ttTeamHelper::getCustomFieldLog($user->team_id);
+    $custom_field_log = ttTeamHelper::getCustomFieldLog($user->group_id);
     fwrite($file, "<custom_field_log>\n");
     foreach ($custom_field_log as $entry) {
       fwrite($file, "  <custom_field_log_entry log_id=\"".$this->logMap[$entry['log_id']]."\" field_id=\"".$this->customFieldMap[$entry['field_id']]."\" option_id=\"".$this->customFieldOptionMap[$entry['option_id']]."\" status=\"".$entry['status']."\">\n");
@@ -257,7 +257,7 @@ class ttExportHelper {
     unset($custom_field_log);
 
     // Write expense items.
-    $expense_items = ttTeamHelper::getExpenseItems($user->team_id);
+    $expense_items = ttTeamHelper::getExpenseItems($user->group_id);
     fwrite($file, "<expense_items>\n");
     foreach ($expense_items as $expense_item) {
       fwrite($file, "  <expense_item date=\"".$expense_item['date']."\" user_id=\"".$this->userMap[$expense_item['user_id']]."\" client_id=\"".$this->clientMap[$expense_item['client_id']]."\" project_id=\"".$this->projectMap[$expense_item['project_id']]."\" cost=\"".$expense_item['cost']."\" invoice_id=\"".$this->invoiceMap[$expense_item['invoice_id']]."\" paid=\"".$expense_item['paid']."\" status=\"".$expense_item['status']."\">\n");
@@ -269,7 +269,7 @@ class ttExportHelper {
 
     // Write fav reports.
     fwrite($file, "<fav_reports>\n");
-    $fav_reports = ttTeamHelper::getFavReports($user->team_id);
+    $fav_reports = ttTeamHelper::getFavReports($user->group_id);
     foreach ($fav_reports as $fav_report) {
       $user_list = '';
       if (strlen($fav_report['users']) > 0) {
@@ -381,7 +381,7 @@ class ttExportHelper {
     $mdb2 = getConnection();
 
     $result = array();
-    $sql = "select * from tt_roles where team_id = $user->team_id";
+    $sql = "select * from tt_roles where group_id = $user->group_id";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -398,7 +398,7 @@ class ttExportHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $sql = "select u.*, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.team_id = $user->team_id order by upper(u.name)"; // Note: deleted users are included.
+    $sql = "select u.*, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.group_id = $user->group_id order by upper(u.name)"; // Note: deleted users are included.
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {

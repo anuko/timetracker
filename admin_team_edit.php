@@ -37,8 +37,8 @@ if (!ttAccessAllowed('administer_site')) {
   exit();
 }
 
-$team_id = $request->getParameter('id');
-$team_details = ttTeamHelper::getTeamDetails($team_id);	
+$group_id = $request->getParameter('id');
+$team_details = ttTeamHelper::getTeamDetails($group_id);
 
 if ($request->isPost()) {
   $cl_team_name = trim($request->getParameter('team_name'));
@@ -68,7 +68,7 @@ if (!$auth->isPasswordExternal()) {
   $form->addInput(array('type'=>'password','maxlength'=>'30','name'=>'password2','value'=>$cl_password2));
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_email','value'=>$cl_manager_email));
-$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$team_id));
+$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$group_id));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 
@@ -88,7 +88,7 @@ if ($request->isPost()) {
 
     import('ttAdmin');
     $admin = new ttAdmin($err);
-    $result = $admin->updateGroup($team_id, $fields);
+    $result = $admin->updateGroup($group_id, $fields);
     if ($result) {
       header('Location: admin_teams.php');
       exit();

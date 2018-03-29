@@ -51,7 +51,7 @@ if (!$time_rec || $time_rec['invoice_id']) {
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('../plugins/CustomFields.class.php');
-  $custom_fields = new CustomFields($user->team_id);
+  $custom_fields = new CustomFields($user->group_id);
   $smarty->assign('custom_fields', $custom_fields);
 }
 
@@ -107,7 +107,7 @@ $form = new Form('timeRecordForm');
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
 if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
-    $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
+    $active_clients = ttTeamHelper::getActiveClients($user->group_id, true);
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'client',
@@ -133,7 +133,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
 
   // Dropdown for clients if the clients plugin is enabled.
   if ($user->isPluginEnabled('cl')) {
-    $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
+    $active_clients = ttTeamHelper::getActiveClients($user->group_id, true);
     // We need an array of assigned project ids to do some trimming.
     foreach($project_list as $project)
       $projects_assigned_to_user[] = $project['id'];
@@ -161,7 +161,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
 }
 
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-  $task_list = ttTeamHelper::getActiveTasks($user->team_id);
+  $task_list = ttTeamHelper::getActiveTasks($user->group_id);
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
     'style'=>'width: 250px;',

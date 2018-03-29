@@ -34,14 +34,14 @@ class ttCustomFieldHelper {
   {
     $mdb2 = getConnection();
 
-    $team_id = (int) $fields['team_id'];
+    $group_id = (int) $fields['group_id'];
     $type = (int) $fields['type'];
     $label = $fields['label'];
     $required = (int) $fields['required'];
     $status = $fields['status'];
     
-    $sql = "insert into tt_custom_fields (team_id, type, label, required, status) 
-      values ($team_id, $type, ".$mdb2->quote($label).", $required, ".$mdb2->quote($status).")";
+    $sql = "insert into tt_custom_fields (group_id, type, label, required, status)".
+      " values ($group_id, $type, ".$mdb2->quote($label).", $required, ".$mdb2->quote($status).")";
       
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))

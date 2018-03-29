@@ -42,8 +42,8 @@ if (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->t
 // End of access checks.
 
 if($user->can('manage_projects')) {
-  $active_projects = ttTeamHelper::getActiveProjects($user->team_id);
-  $inactive_projects = ttTeamHelper::getInactiveProjects($user->team_id);
+  $active_projects = ttTeamHelper::getActiveProjects($user->group_id);
+  $inactive_projects = ttTeamHelper::getInactiveProjects($user->group_id);
 } else
   $active_projects = $user->getAssignedProjects();
 

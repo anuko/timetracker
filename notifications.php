@@ -50,7 +50,7 @@ if ($request->isPost()) {
   }
 } else {
   $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
-  $notifications = ttTeamHelper::getNotifications($user->team_id);
+  $notifications = ttTeamHelper::getNotifications($user->group_id);
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

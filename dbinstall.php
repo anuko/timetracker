@@ -872,6 +872,17 @@ if ($_POST) {
     setChange("RENAME TABLE `tt_teams` TO `tt_groups`");
     setChange("ALTER TABLE `tt_monthly_quotas` DROP FOREIGN KEY FK_TT_TEAM_CONSTRAING");
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.80', modified = now() where param_name = 'version_db' and param_value = '1.17.79'");
+    setChange("ALTER TABLE `tt_roles` CHANGE `team_id` `group_id` int(11) NOT NULL");
+    setChange("ALTER TABLE `tt_users` CHANGE `team_id` `group_id` int(11) NOT NULL");
+    setChange("ALTER TABLE `tt_projects` CHANGE `team_id` `group_id` int(11) NOT NULL");
+    setChange("ALTER TABLE `tt_tasks` CHANGE `team_id` `group_id` int(11) NOT NULL");
+    setChange("ALTER TABLE `tt_invoices` CHANGE `team_id` `group_id` int(11) NOT NULL");
+    setChange("ALTER TABLE `tt_cron` CHANGE `team_id` `group_id` int(11) NOT NULL");
+    setChange("ALTER TABLE `tt_clients` CHANGE `team_id` `group_id` int(11) NOT NULL");
+    setChange("ALTER TABLE `tt_custom_fields` CHANGE `team_id` `group_id` int(11) NOT NULL");
+    setChange("ALTER TABLE `tt_predefined_expenses` CHANGE `team_id` `group_id` int(11) NOT NULL");
+    setChange("ALTER TABLE `tt_monthly_quotas` CHANGE `team_id` `group_id` int(11) NOT NULL");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.17.81', modified = now() where param_name = 'version_db' and param_value = '1.17.80'");
   }
 
   if ($_POST["cleanup"]) {

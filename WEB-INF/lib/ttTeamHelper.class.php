@@ -34,10 +34,10 @@ import('ttInvoiceHelper');
 class ttTeamHelper {
 
   // The getUserCount function returns number of people in team.
-  static function getUserCount($team_id) {
+  static function getUserCount($group_id) {
     $mdb2 = getConnection();
 
-    $sql = "select count(id) as cnt from tt_users where team_id = $team_id and status = 1";
+    $sql = "select count(id) as cnt from tt_users where group_id = $group_id and status = 1";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
@@ -75,9 +75,9 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     if (isset($options['getAllFields']))
-      $sql = "select u.*, r.name as role_name, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.team_id = $user->team_id and u.status = 1 order by upper(u.name)";
+      $sql = "select u.*, r.name as role_name, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.group_id = $user->group_id and u.status = 1 order by upper(u.name)";
     else
-      $sql = "select id, name from tt_users where team_id = $user->team_id and status = 1 order by upper(name)";
+      $sql = "select id, name from tt_users where group_id = $user->group_id and status = 1 order by upper(name)";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
@@ -109,7 +109,7 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     // Obtain role id for the user we are swapping ourselves with.
-    $sql = "select u.id, u.role_id from tt_users u left join tt_roles r on (u.role_id = r.id) where u.id = $user_id and u.team_id = $user->team_id and u.status = 1 and r.rank < $user->rank";
+    $sql = "select u.id, u.role_id from tt_users u left join tt_roles r on (u.role_id = r.id) where u.id = $user_id and u.group_id = $user->group_id and u.status = 1 and r.rank < $user->rank";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))
       return false;
@@ -120,13 +120,13 @@ class ttTeamHelper {
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
 
     // Promote user.
-    $sql = "update tt_users set role_id = $user->role_id".$modified_part." where id = $user_id and team_id = $user->team_id";
+    $sql = "update tt_users set role_id = $user->role_id".$modified_part." where id = $user_id and group_id = $user->group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Demote self.
     $role_id = $val['role_id'];
-    $sql = "update tt_users set role_id = $role_id".$modified_part." where id = $user->id and team_id = $user->team_id";
+    $sql = "update tt_users set role_id = $role_id".$modified_part." where id = $user->id and group_id = $user->group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -138,7 +138,7 @@ class ttTeamHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $sql = "select u.id, u.name, r.rank, r.rights from tt_users u left join tt_roles r on (u.role_id = r.id) where u.team_id = $user->team_id and u.status = 1 and r.rank < $user->rank order by upper(u.name)";
+    $sql = "select u.id, u.name, r.rank, r.rights from tt_users u left join tt_roles r on (u.role_id = r.id) where u.group_id = $user->group_id and u.status = 1 and r.rank < $user->rank order by upper(u.name)";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
@@ -157,7 +157,7 @@ class ttTeamHelper {
   static function getUsers() {
     global $user;
     $mdb2 = getConnection();
-    $sql = "select id, name from tt_users where team_id = $user->team_id and (status = 1 or status = 0) order by upper(name)";
+    $sql = "select id, name from tt_users where group_id = $user->group_id and (status = 1 or status = 0) order by upper(name)";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
@@ -169,13 +169,13 @@ class ttTeamHelper {
   }
 
   // The getInactiveUsers obtains all inactive users in a given team.
-  static function getInactiveUsers($team_id, $all_fields = false) {
+  static function getInactiveUsers($group_id, $all_fields = false) {
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select u.*, r.name as role_name from tt_users u left join tt_roles r on (u.role_id = r.id) where u.team_id = $team_id and u.status = 0 order by upper(u.name)";
+      $sql = "select u.*, r.name as role_name from tt_users u left join tt_roles r on (u.role_id = r.id) where u.group_id = $group_id and u.status = 0 order by upper(u.name)";
     else
-      $sql = "select id, name from tt_users where team_id = $team_id and status = 0 order by upper(name)";
+      $sql = "select id, name from tt_users where group_id = $group_id and status = 0 order by upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -188,12 +188,12 @@ class ttTeamHelper {
   }
 
   // The getAllUsers obtains all users in a given team.
-  static function getAllUsers($team_id, $all_fields = false) {
+  static function getAllUsers($group_id, $all_fields = false) {
     $mdb2 = getConnection();
     if ($all_fields)
-      $sql = "select * from tt_users where team_id = $team_id order by upper(name)";
+      $sql = "select * from tt_users where group_id = $group_id order by upper(name)";
     else
-      $sql = "select id, name from tt_users where team_id = $team_id order by upper(name)";
+      $sql = "select id, name from tt_users where group_id = $group_id order by upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -206,13 +206,13 @@ class ttTeamHelper {
   }
 
   // getActiveProjects - returns an array of active projects for team.
-  static function getActiveProjects($team_id)
+  static function getActiveProjects($group_id)
   {
     $result = array();
     $mdb2 = getConnection();
 
     $sql = "select id, name, description, tasks from tt_projects
-      where team_id = $team_id and status = 1 order by upper(name)";
+      where group_id = $group_id and status = 1 order by upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -224,13 +224,13 @@ class ttTeamHelper {
   }
 
   // getInactiveProjects - returns an array of inactive projects for team.
-  static function getInactiveProjects($team_id)
+  static function getInactiveProjects($group_id)
   {
     $result = array();
     $mdb2 = getConnection();
 
     $sql = "select id, name, description, tasks from tt_projects
-      where team_id = $team_id and status = 0 order by upper(name)";
+      where group_id = $group_id and status = 0 order by upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -242,13 +242,13 @@ class ttTeamHelper {
   }
 
   // The getAllProjects obtains all projects in a given team.
-  static function getAllProjects($team_id, $all_fields = false) {
+  static function getAllProjects($group_id, $all_fields = false) {
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select * from tt_projects where team_id = $team_id order by status, upper(name)";
+      $sql = "select * from tt_projects where group_id = $group_id order by status, upper(name)";
     else
-      $sql = "select id, name from tt_projects where team_id = $team_id order by status, upper(name)";
+      $sql = "select id, name from tt_projects where group_id = $group_id order by status, upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -261,12 +261,12 @@ class ttTeamHelper {
   }
 
   // getActiveTasks - returns an array of active tasks for team.
-  static function getActiveTasks($team_id)
+  static function getActiveTasks($group_id)
   {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description from tt_tasks where team_id = $team_id and status = 1 order by upper(name)";
+    $sql = "select id, name, description from tt_tasks where group_id = $group_id and status = 1 order by upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -278,13 +278,13 @@ class ttTeamHelper {
   }
 
   // getInactiveTasks - returns an array of inactive tasks for team.
-  static function getInactiveTasks($team_id)
+  static function getInactiveTasks($group_id)
   {
     $result = array();
     $mdb2 = getConnection();
 
     $sql = "select id, name, description from tt_tasks
-      where team_id = $team_id and status = 0 order by upper(name)";
+      where group_id = $group_id and status = 0 order by upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -296,13 +296,13 @@ class ttTeamHelper {
   }
 
   // The getAllTasks obtains all tasks in a given team.
-  static function getAllTasks($team_id, $all_fields = false) {
+  static function getAllTasks($group_id, $all_fields = false) {
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select * from tt_tasks where team_id = $team_id order by status, upper(name)";
+      $sql = "select * from tt_tasks where group_id = $group_id order by status, upper(name)";
     else
-      $sql = "select id, name from tt_tasks where team_id = $team_id order by status, upper(name)";
+      $sql = "select id, name from tt_tasks where group_id = $group_id order by status, upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -322,7 +322,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, rank, rights from tt_roles where team_id = $user->team_id and rank < $user->rank and status = 1 order by rank";
+    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $user->group_id and rank < $user->rank and status = 1 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -337,12 +337,12 @@ class ttTeamHelper {
   }
 
   // getActiveRoles - returns an array of active roles for team.
-  static function getActiveRoles($team_id)
+  static function getActiveRoles($group_id)
   {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, rank, rights from tt_roles where team_id = $team_id and status = 1 order by rank";
+    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $group_id and status = 1 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -355,13 +355,13 @@ class ttTeamHelper {
   }
 
   // getInactiveRoles - returns an array of inactive roles for team.
-  static function getInactiveRoles($team_id)
+  static function getInactiveRoles($group_id)
   {
     $result = array();
     $mdb2 = getConnection();
 
     $sql = "select id, name, rank, description from tt_roles
-      where team_id = $team_id and status = 0 order by rank";
+      where group_id = $group_id and status = 0 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -380,7 +380,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, rank, rights from tt_roles where team_id = $user->team_id and rank < $user->rank and status = 0 order by rank";
+    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $user->group_id and rank < $user->rank and status = 0 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -395,15 +395,15 @@ class ttTeamHelper {
   }
 
   // The getActiveClients returns an array of active clients for team.
-  static function getActiveClients($team_id, $all_fields = false)
+  static function getActiveClients($group_id, $all_fields = false)
   {
     $result = array();
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select * from tt_clients where team_id = $team_id and status = 1 order by upper(name)";
+      $sql = "select * from tt_clients where group_id = $group_id and status = 1 order by upper(name)";
     else
-      $sql = "select id, name from tt_clients where team_id = $team_id and status = 1 order by upper(name)";
+      $sql = "select id, name from tt_clients where group_id = $group_id and status = 1 order by upper(name)";
 
     $res = $mdb2->query($sql);
     $result = array();
@@ -416,15 +416,15 @@ class ttTeamHelper {
   }
 
   // The getInactiveClients returns an array of inactive clients for team.
-  static function getInactiveClients($team_id, $all_fields = false)
+  static function getInactiveClients($group_id, $all_fields = false)
   {
     $result = array();
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select * from tt_clients where team_id = $team_id and status = 0 order by upper(name)";
+      $sql = "select * from tt_clients where group_id = $group_id and status = 0 order by upper(name)";
     else
-      $sql = "select id, name from tt_clients where team_id = $team_id and status = 0 order by upper(name)";
+      $sql = "select id, name from tt_clients where group_id = $group_id and status = 0 order by upper(name)";
 
     $res = $mdb2->query($sql);
     $result = array();
@@ -437,13 +437,13 @@ class ttTeamHelper {
   }
 
   // The getAllClients obtains all clients in a given team.
-  static function getAllClients($team_id, $all_fields = false) {
+  static function getAllClients($group_id, $all_fields = false) {
     $mdb2 = getConnection();
 
     if ($all_fields)
-      $sql = "select * from tt_clients where team_id = $team_id order by status, upper(name)";
+      $sql = "select * from tt_clients where group_id = $group_id order by status, upper(name)";
     else
-      $sql = "select id, name from tt_clients where team_id = $team_id order by status, upper(name)";
+      $sql = "select id, name from tt_clients where group_id = $group_id order by status, upper(name)";
 
     $res = $mdb2->query($sql);
     $result = array();
@@ -470,7 +470,7 @@ class ttTeamHelper {
 
     $sql = "select i.id, i.name, i.date, i.client_id, i.status, c.name as client_name from tt_invoices i
       left join tt_clients c on (c.id = i.client_id)
-      where i.status = 1 and i.team_id = $user->team_id $client_part order by i.name";
+      where i.status = 1 and i.group_id = $user->group_id $client_part order by i.name";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -496,7 +496,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select * from tt_invoices where team_id = $user->team_id";
+    $sql = "select * from tt_invoices where group_id = $user->group_id";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -509,7 +509,7 @@ class ttTeamHelper {
   }
 
   // The getRecentInvoices returns an array of recent invoices (max 3) for a client.
-  static function getRecentInvoices($team_id, $client_id)
+  static function getRecentInvoices($group_id, $client_id)
   {
     global $user;
 
@@ -518,7 +518,7 @@ class ttTeamHelper {
 
     $sql = "select i.id, i.name from tt_invoices i
       left join tt_clients c on (c.id = i.client_id)
-      where i.team_id = $team_id and i.status = 1 and c.id = $client_id
+      where i.group_id = $group_id and i.status = 1 and c.id = $client_id
       order by i.id desc limit 3";
     $res = $mdb2->query($sql);
     $result = array();
@@ -532,11 +532,11 @@ class ttTeamHelper {
   }
 
   // getUserToProjectBinds - obtains all user to project binds for a team.
-  static function getUserToProjectBinds($team_id) {
+  static function getUserToProjectBinds($group_id) {
     $mdb2 = getConnection();
 
     $result = array();
-    $sql = "select * from tt_user_project_binds where user_id in (select id from tt_users where team_id = $team_id) order by user_id, status, project_id";
+    $sql = "select * from tt_user_project_binds where user_id in (select id from tt_users where group_id = $group_id) order by user_id, status, project_id";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -549,10 +549,10 @@ class ttTeamHelper {
   }
 
   // The getAllCustomFields obtains all custom fields in a given team.
-  static function getAllCustomFields($team_id) {
+  static function getAllCustomFields($group_id) {
     $mdb2 = getConnection();
 
-    $sql = "select * from tt_custom_fields where team_id = $team_id order by status";
+    $sql = "select * from tt_custom_fields where group_id = $group_id order by status";
 
     $res = $mdb2->query($sql);
     $result = array();
@@ -566,10 +566,10 @@ class ttTeamHelper {
   }
 
   // The getAllCustomFieldOptions obtains all custom field options in a given team.
-  static function getAllCustomFieldOptions($team_id) {
+  static function getAllCustomFieldOptions($group_id) {
     $mdb2 = getConnection();
 
-    $sql = "select * from tt_custom_field_options where field_id in (select id from tt_custom_fields where team_id = $team_id) order by id";
+    $sql = "select * from tt_custom_field_options where field_id in (select id from tt_custom_fields where group_id = $group_id) order by id";
 
     $res = $mdb2->query($sql);
     $result = array();
@@ -583,10 +583,10 @@ class ttTeamHelper {
   }
 
   // The getCustomFieldLog obtains all custom field log entries for a given team.
-  static function getCustomFieldLog($team_id) {
+  static function getCustomFieldLog($group_id) {
     $mdb2 = getConnection();
 
-    $sql = "select * from tt_custom_field_log where field_id in (select id from tt_custom_fields where team_id = $team_id) order by id";
+    $sql = "select * from tt_custom_field_log where field_id in (select id from tt_custom_fields where group_id = $group_id) order by id";
 
     $res = $mdb2->query($sql);
     $result = array();
@@ -600,11 +600,11 @@ class ttTeamHelper {
   }
 
   // getFavReports - obtains all favorite reports for all users in team.
-  static function getFavReports($team_id) {
+  static function getFavReports($group_id) {
     $mdb2 = getConnection();
 
     $result = array();
-    $sql = "select * from tt_fav_reports where user_id in (select id from tt_users where team_id = $team_id)";
+    $sql = "select * from tt_fav_reports where user_id in (select id from tt_users where group_id = $group_id)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -617,11 +617,11 @@ class ttTeamHelper {
   }
 
   // getExpenseItems - obtains all expense items for all users in team.
-  static function getExpenseItems($team_id) {
+  static function getExpenseItems($group_id) {
     $mdb2 = getConnection();
 
     $result = array();
-    $sql = "select * from tt_expense_items where user_id in (select id from tt_users where team_id = $team_id)";
+    $sql = "select * from tt_expense_items where user_id in (select id from tt_users where group_id = $group_id)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -634,14 +634,14 @@ class ttTeamHelper {
   }
 
   // getPredefinedExpenses - obtains predefined expenses for team.
-  static function getPredefinedExpenses($team_id) {
+  static function getPredefinedExpenses($group_id) {
     global $user;
     $replaceDecimalMark = ('.' != $user->decimal_mark);
 
     $mdb2 = getConnection();
 
     $result = array();
-    $sql = "select id, name, cost from tt_predefined_expenses where team_id = $team_id";
+    $sql = "select id, name, cost from tt_predefined_expenses where group_id = $group_id";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -656,13 +656,13 @@ class ttTeamHelper {
   }
 
   // getNotifications - obtains notification descriptions for team.
-  static function getNotifications($team_id) {
+  static function getNotifications($group_id) {
     $mdb2 = getConnection();
 
     $result = array();
     $sql = "select c.id, c.cron_spec, c.email, c.report_condition, fr.name from tt_cron c
       left join tt_fav_reports fr on (fr.id = c.report_id)
-      where c.team_id = $team_id and c.status = 1 and fr.status = 1";
+      where c.group_id = $group_id and c.status = 1 and fr.status = 1";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -675,11 +675,11 @@ class ttTeamHelper {
   }
 
   // getMonthlyQuotas - obtains monthly quotas for team.
-  static function getMonthlyQuotas($team_id) {
+  static function getMonthlyQuotas($group_id) {
     $mdb2 = getConnection();
 
     $result = array();
-    $sql = "select year, month, minutes from tt_monthly_quotas where team_id = $team_id";
+    $sql = "select year, month, minutes from tt_monthly_quotas where group_id = $group_id";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -692,41 +692,41 @@ class ttTeamHelper {
   }
 
   // The markDeleted function marks the team and everything in it as deleted.
-  static function markDeleted($team_id) {
+  static function markDeleted($group_id) {
 
     // Iterate through team users and mark them as deleted.
-    $users = ttTeamHelper::getAllUsers($team_id);
+    $users = ttTeamHelper::getAllUsers($group_id);
     foreach ($users as $one_user) {
       if (!ttUserHelper::markDeleted($one_user['id'])) return false;
     }
 
     // Mark tasks deleted.
-    if (!ttTeamHelper::markTasksDeleted($team_id)) return false;
+    if (!ttTeamHelper::markTasksDeleted($group_id)) return false;
 
     $mdb2 = getConnection();
 
     // Mark roles deleted.
-    $sql = "update tt_roles set status = NULL where team_id = $team_id";
+    $sql = "update tt_roles set status = NULL where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Mark projects deleted.
-    $sql = "update tt_projects set status = NULL where team_id = $team_id";
+    $sql = "update tt_projects set status = NULL where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Mark clients deleted.
-    $sql = "update tt_clients set status = NULL where team_id = $team_id";
+    $sql = "update tt_clients set status = NULL where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Mark custom fields deleted.
-    $sql = "update tt_custom_fields set status = NULL where team_id = $team_id";
+    $sql = "update tt_custom_fields set status = NULL where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Mark group deleted.
-    $sql = "update tt_groups set status = NULL where id = $team_id";
+    $sql = "update tt_groups set status = NULL where id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -734,15 +734,15 @@ class ttTeamHelper {
   }
 
   // The getTeamDetails function returns team details.
-  static function getTeamDetails($team_id) {
+  static function getTeamDetails($group_id) {
     $result = array();
     $mdb2 = getConnection();
 
     $sql = "select t.name as team_name, u.id as manager_id, u.name as manager_name, u.login as manager_login, u.email as manager_email
       from tt_groups t
-      inner join tt_users u on (u.team_id = t.id)
+      inner join tt_users u on (u.group_id = t.id)
       inner join tt_roles r on (r.id = u.role_id and r.rank = 512)
-      where t.id = $team_id";
+      where t.id = $group_id";
 
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -846,15 +846,15 @@ class ttTeamHelper {
     $affected = $mdb2->exec($sql);
 
     if (!is_a($affected, 'PEAR_Error')) {
-      $team_id = $mdb2->lastInsertID('tt_groups', 'id');
-      return $team_id;
+      $group_id = $mdb2->lastInsertID('tt_groups', 'id');
+      return $group_id;
     }
 
     return false;
   }
 
   // The update function updates team information.
-  static function update($team_id, $fields)
+  static function update($group_id, $fields)
   {
     global $user;
     $mdb2 = getConnection();
@@ -891,7 +891,7 @@ class ttTeamHelper {
 
     $sql = "update tt_groups set $name_part $currency_part $lang_part $decimal_mark_part
       $date_format_part $time_format_part $week_start_part $tracking_mode_part $task_required_part $record_type_part
-      $bcc_email_part $plugins_part $config_part $lock_spec_part $workday_minutes_part $modified_part where id = $team_id";
+      $bcc_email_part $plugins_part $config_part $lock_spec_part $workday_minutes_part $modified_part where id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -912,10 +912,10 @@ class ttTeamHelper {
     $count = 0;
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-        $team_id = $val['id'];
-        if (ttTeamHelper::isTeamActive($team_id) == false) {
+        $group_id = $val['id'];
+        if (ttTeamHelper::isTeamActive($group_id) == false) {
           $count++;
-          $inactive_teams[] = $team_id;
+          $inactive_teams[] = $group_id;
           // Limit the array size for perfomance by allowing this operation on small chunks only.
           if ($count >= 100) break;
         }
@@ -926,11 +926,11 @@ class ttTeamHelper {
   }
 
   // The isTeamActive determines if a team is using Time Tracker or abandoned it.
-  static function isTeamActive($team_id) {
+  static function isTeamActive($group_id) {
     $users = array();
 
     $mdb2 = getConnection();
-    $sql = "select id from tt_users where team_id = $team_id";
+    $sql = "select id from tt_users where group_id = $group_id";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
     while ($val = $res->fetchRow()) {
@@ -971,11 +971,11 @@ class ttTeamHelper {
   }
 
   // The delete function permanently deletes all data for a team.
-  static function delete($team_id) {
+  static function delete($group_id) {
     $mdb2 = getConnection();
 
     // Delete users.
-    $sql = "select id from tt_users where team_id = $team_id";
+    $sql = "select id from tt_users where group_id = $group_id";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) return false;
     while ($val = $res->fetchRow()) {
@@ -984,38 +984,38 @@ class ttTeamHelper {
     }
 
     // Delete tasks.
-    if (!ttTeamHelper::deleteTasks($team_id)) return false;
+    if (!ttTeamHelper::deleteTasks($group_id)) return false;
 
     // Delete client to project binds.
-    $sql = "delete from tt_client_project_binds where client_id in (select id from tt_clients where team_id = $team_id)";
+    $sql = "delete from tt_client_project_binds where client_id in (select id from tt_clients where group_id = $group_id)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Delete projects.
-    $sql = "delete from tt_projects where team_id = $team_id";
+    $sql = "delete from tt_projects where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Delete clients.
-    $sql = "delete from tt_clients where team_id = $team_id";
+    $sql = "delete from tt_clients where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Delete invoices.
-    $sql = "delete from tt_invoices where team_id = $team_id";
+    $sql = "delete from tt_invoices where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Delete custom fields.
-    if (!ttTeamHelper::deleteCustomFields($team_id)) return false;
+    if (!ttTeamHelper::deleteCustomFields($group_id)) return false;
 
     // Delete roles.
-    $sql = "delete from tt_roles where team_id = $team_id";
+    $sql = "delete from tt_roles where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Delete group.
-    $sql = "delete from tt_groups where id = $team_id";
+    $sql = "delete from tt_groups where id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -1023,9 +1023,9 @@ class ttTeamHelper {
   }
 
   // The markTasksDeleted deletes task binds and marks the tasks as deleted for a team.
-  static function markTasksDeleted($team_id) {
+  static function markTasksDeleted($group_id) {
     $mdb2 = getConnection();
-    $sql = "select id from tt_tasks where team_id = $team_id";
+    $sql = "select id from tt_tasks where group_id = $group_id";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) return false;
 
@@ -1047,9 +1047,9 @@ class ttTeamHelper {
   }
 
   // The deleteTasks deletes all tasks and task binds for an inactive team.
-  static function deleteTasks($team_id) {
+  static function deleteTasks($group_id) {
     $mdb2 = getConnection();
-    $sql = "select id from tt_tasks where team_id = $team_id";
+    $sql = "select id from tt_tasks where group_id = $group_id";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) return false;
 
@@ -1071,9 +1071,9 @@ class ttTeamHelper {
   }
 
   // The deleteCustomFields cleans up tt_custom_field_log, tt_custom_field_options and tt_custom_fields tables for an inactive team.
-  static function deleteCustomFields($team_id) {
+  static function deleteCustomFields($group_id) {
     $mdb2 = getConnection();
-    $sql = "select id from tt_custom_fields where team_id = $team_id";
+    $sql = "select id from tt_custom_fields where group_id = $group_id";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) return false;
 
@@ -1118,7 +1118,7 @@ class ttTeamHelper {
 
     $plugins = implode(',', $plugin_array);
     if ($plugins != $user->plugins) {
-      if (!ttTeamHelper::update($user->team_id, array('name' => $user->team,'plugins' => $plugins)))
+      if (!ttTeamHelper::update($user->group_id, array('name' => $user->team,'plugins' => $plugins)))
         return false;
       $user->plugins = $plugins;
     }

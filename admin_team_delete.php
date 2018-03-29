@@ -36,12 +36,12 @@ if (!ttAccessAllowed('administer_site')) {
   exit();
 }
 
-$team_id = (int)$request->getParameter('id');
-$team_details = ttTeamHelper::getTeamDetails($team_id);
+$group_id = (int)$request->getParameter('id');
+$team_details = ttTeamHelper::getTeamDetails($group_id);
 $team_name = $team_details['team_name'];
 
 $form = new Form('teamForm');
-$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$team_id));
+$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$group_id));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 
@@ -49,7 +49,7 @@ if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
     import('ttAdmin');
     $admin = new ttAdmin();
-    $result = $admin->markGroupDeleted($team_id);
+    $result = $admin->markGroupDeleted($group_id);
     if ($result) {
       header('Location: admin_teams.php');
       exit();

@@ -257,7 +257,7 @@ class ttReportHelper {
     // Add custom field.
     $include_cf_1 = $bean->getAttribute('chcf_1') || 'cf_1' == $group_by_option;
     if ($include_cf_1) {
-      $custom_fields = new CustomFields($user->team_id);
+      $custom_fields = new CustomFields($user->group_id);
       $cf_1_type = $custom_fields->fields[0]['type'];
       if ($cf_1_type == CustomFields::TYPE_TEXT) {
         array_push($fields, 'cfl.value as cf_1');
@@ -522,7 +522,7 @@ class ttReportHelper {
     // Add custom field.
     $include_cf_1 = $report['show_custom_field_1'] || 'cf_1' == $group_by_option;
     if ($include_cf_1) {
-      $custom_fields = new CustomFields($user->team_id);
+      $custom_fields = new CustomFields($user->group_id);
       $cf_1_type = $custom_fields->fields[0]['type'];
       if ($cf_1_type == CustomFields::TYPE_TEXT) {
         array_push($fields, 'cfl.value as cf_1');
@@ -756,7 +756,7 @@ class ttReportHelper {
         break;
       case 'cf_1':
         $group_field = 'cfo.value';
-        $custom_fields = new CustomFields($user->team_id);
+        $custom_fields = new CustomFields($user->group_id);
         if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
           $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id) ';
         elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
@@ -884,7 +884,7 @@ class ttReportHelper {
         break;
       case 'cf_1':
         $group_field = 'cfo.value';
-        $custom_fields = new CustomFields($user->team_id);
+        $custom_fields = new CustomFields($user->group_id);
         if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
           $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id) ';
         elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
@@ -1168,7 +1168,7 @@ class ttReportHelper {
 
     // Use custom fields plugin if it is enabled.
     if ($user->isPluginEnabled('cf'))
-      $custom_fields = new CustomFields($user->team_id);
+      $custom_fields = new CustomFields($user->group_id);
 
     // Define some styles to use in email.
     $style_title = 'text-align: center; font-size: 15pt; font-family: Arial, Helvetica, sans-serif;';
@@ -1464,7 +1464,7 @@ class ttReportHelper {
 
     // Use custom fields plugin if it is enabled.
     if ($user->isPluginEnabled('cf'))
-      $custom_fields = new CustomFields($user->team_id);
+      $custom_fields = new CustomFields($user->group_id);
 
     // Define some styles to use in email.
     $style_title = 'text-align: center; font-size: 15pt; font-family: Arial, Helvetica, sans-serif;';

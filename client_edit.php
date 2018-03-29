@@ -43,7 +43,7 @@ if (!$user->isPluginEnabled('cl')) {
 
 $cl_id = (int) $request->getParameter('id');
 
-$projects = ttTeamHelper::getActiveProjects($user->team_id);
+$projects = ttTeamHelper::getActiveProjects($user->group_id);
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -103,7 +103,7 @@ if ($request->isPost()) {
     if ($request->getParameter('btn_copy')) {
       if (!ttClientHelper::getClientByName($cl_name)) {
         if (ttClientHelper::insert(array(
-          'team_id' => $user->team_id,
+          'group_id' => $user->group_id,
           'name' => $cl_name,
           'address' => $cl_address,
           'tax' => $cl_tax,

@@ -47,7 +47,7 @@ class ttImportHelper {
 
   var $canImport      = true;    // False if we cannot import data due to a login collision.
   var $teamData       = array(); // Array of team data such as team name, etc.
-  var $team_id        = null;    // New team id we are importing. It is created during the import operation.
+  var $group_id       = null;    // New group id we are importing. It is created during the import operation.
   var $roles          = array(); // Array of arrays of role properties.
   var $users          = array(); // Array of arrays of user properties.
   var $top_role_id    = null;    // Top manager role id on the new server.
@@ -124,7 +124,7 @@ class ttImportHelper {
       // Now we can create a team.
       if ($this->canImport) {
         $this->top_role_id = ttRoleHelper::getRoleByRank(512, 0);
-        $team_id = ttTeamHelper::insert(array(
+        $group_id = ttTeamHelper::insert(array(
           'name' => $this->teamData['NAME'],
           'currency' => $this->teamData['CURRENCY'],
           'decimal_mark' => $this->teamData['DECIMAL_MARK'],
@@ -141,13 +141,13 @@ class ttImportHelper {
           'lock_spec' => $this->teamData['LOCK_SPEC'],
           'workday_minutes' => $this->teamData['WORKDAY_MINUTES'],
           'config' => $this->teamData['CONFIG']));
-        if ($team_id) {
-          $this->team_id = $team_id;
+        if ($group_id) {
+          $this->group_id = $group_id;
 
           // Create roles.
           foreach ($this->roles as $key=>$role_item) {
             $role_id = ttRoleHelper::insert(array(
-              'team_id' => $this->team_id,
+              'group_id' => $this->group_id,
               'name' => $role_item['NAME'],
               'rank' => $role_item['RANK'],
               'rights' => $role_item['RIGHTS'],
@@ -158,7 +158,7 @@ class ttImportHelper {
           foreach ($this->users as $key=>$user_item) {
             $role_id = $user_item['ROLE_ID'] === '0' ? $this->top_role_id :  $this->roleMap[$user_item['ROLE_ID']]; // 0 (not null) means top manager role.
             $user_id = ttUserHelper::insert(array(
-              'team_id' => $this->team_id,
+              'group_id' => $this->group_id,
               'role_id' => $role_id,
               'client_id' => $user_item['CLIENT_ID'], // Note: NOT mapped value, replaced in CLIENT handler.
               'name' => $user_item['NAME'],
@@ -176,7 +176,7 @@ class ttImportHelper {
     if ($name == 'TASK' && $this->canImport) {
       $this->taskMap[$this->currentElement['ID']] =
         ttTaskHelper::insert(array(
-          'team_id' => $this->team_id,
+          'group_id' => $this->group_id,
           'name' => $this->currentElement['NAME'],
           'description' => $this->currentElement['DESCRIPTION'],
           'status' => $this->currentElement['STATUS']));
@@ -190,7 +190,7 @@ class ttImportHelper {
       // Add a new project.
       $this->projectMap[$this->currentElement['ID']] =
         ttProjectHelper::insert(array(
-          'team_id' => $this->team_id,
+          'group_id' => $this->group_id,
           'name' => $this->currentElement['NAME'],
           'description' => $this->currentElement['DESCRIPTION'],
           'tasks' => $mapped_tasks,
@@ -214,7 +214,7 @@ class ttImportHelper {
 
       $this->clientMap[$this->currentElement['ID']] =
         ttClientHelper::insert(array(
-          'team_id' => $this->team_id,
+          'group_id' => $this->group_id,
           'name' => $this->currentElement['NAME'],
           'address' => $this->currentElement['ADDRESS'],
           'tax' => $this->currentElement['TAX'],
@@ -224,13 +224,13 @@ class ttImportHelper {
         // Update client_id for tt_users to a mapped value.
         // We did not do it during user insertion because clientMap was not ready then.
         if ($this->currentElement['ID'] != $this->clientMap[$this->currentElement['ID']])
-          ttClientHelper::setMappedClient($this->team_id, $this->currentElement['ID'], $this->clientMap[$this->currentElement['ID']]);
+          ttClientHelper::setMappedClient($this->group_id, $this->currentElement['ID'], $this->clientMap[$this->currentElement['ID']]);
     }
 
     if ($name == 'INVOICE' && $this->canImport) {
       $this->invoiceMap[$this->currentElement['ID']] =
         ttInvoiceHelper::insert(array(
-          'team_id' => $this->team_id,
+          'group_id' => $this->group_id,
           'name' => $this->currentElement['NAME'],
           'date' => $this->currentElement['DATE'],
           'client_id' => $this->clientMap[$this->currentElement['CLIENT_ID']],
@@ -239,7 +239,7 @@ class ttImportHelper {
     }
 
     if ($name == 'MONTHLY_QUOTA' && $this->canImport) {
-      $this->insertMonthlyQuota($this->team_id, $this->currentElement['YEAR'], $this->currentElement['MONTH'], $this->currentElement['MINUTES']);
+      $this->insertMonthlyQuota($this->group_id, $this->currentElement['YEAR'], $this->currentElement['MONTH'], $this->currentElement['MINUTES']);
     }
 
     if ($name == 'LOG_ITEM' && $this->canImport) {
@@ -263,7 +263,7 @@ class ttImportHelper {
     if ($name == 'CUSTOM_FIELD' && $this->canImport) {
       $this->customFieldMap[$this->currentElement['ID']] =
         ttCustomFieldHelper::insertField(array(
-          'team_id' => $this->team_id,
+          'group_id' => $this->group_id,
           'type' => $this->currentElement['TYPE'],
           'label' => $this->currentElement['LABEL'],
           'required' => $this->currentElement['REQUIRED'],
@@ -433,9 +433,9 @@ class ttImportHelper {
   }
 
   // insertMonthlyQuota - a helper function to insert a monthly quota.
-  private function insertMonthlyQuota($team_id, $year, $month, $minutes) {
+  private function insertMonthlyQuota($group_id, $year, $month, $minutes) {
     $mdb2 = getConnection();
-    $sql = "INSERT INTO tt_monthly_quotas (team_id, year, month, minutes) values ($team_id, $year, $month, $minutes)";
+    $sql = "INSERT INTO tt_monthly_quotas (group_id, year, month, minutes) values ($group_id, $year, $month, $minutes)";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }

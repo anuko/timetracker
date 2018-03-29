@@ -43,7 +43,7 @@ if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
 }
 // End of access checks.
 
-$projects = ttTeamHelper::getActiveProjects($user->team_id);
+$projects = ttTeamHelper::getActiveProjects($user->group_id);
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -68,7 +68,7 @@ if ($request->isPost()) {
   if ($err->no()) {
     if (!ttTaskHelper::getTaskByName($cl_name)) {
       if (ttTaskHelper::insert(array(
-        'team_id' => $user->team_id,
+        'group_id' => $user->group_id,
         'name' => $cl_name,
         'description' => $cl_description,
         'status' => ACTIVE,

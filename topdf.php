@@ -52,7 +52,7 @@ require_once('WEB-INF/lib/tcpdf/tcpdf.php');
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
-  $custom_fields = new CustomFields($user->team_id);
+  $custom_fields = new CustomFields($user->group_id);
 }
 
 // Report settings are stored in session bean before we get here.
@@ -391,8 +391,8 @@ class ttPDF extends TCPDF {
 $pdf = new ttPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // If custom logo file exists - set it.
-if (file_exists('images/'.$user->team_id.'.png'))
-  $pdf->SetImageFile('images/'.$user->team_id.'.png');
+if (file_exists('images/'.$user->group_id.'.png'))
+  $pdf->SetImageFile('images/'.$user->group_id.'.png');
 
 // Set page word for the footer.
 $pdf->SetPageWord($i18n->get('label.page'));

@@ -101,7 +101,7 @@ class ttUserHelper {
     if($hash)
       $password = 'md5('.$password.')';
     $email = isset($fields['email']) ? $fields['email'] : '';
-    $team_id = (int) $fields['team_id'];
+    $group_id = (int) $fields['group_id'];
     $rate = str_replace(',', '.', isset($fields['rate']) ? $fields['rate'] : 0);
     if($rate == '')
       $rate = 0;
@@ -112,9 +112,9 @@ class ttUserHelper {
     $created_ip_v = ', '.$mdb2->quote($_SERVER['REMOTE_ADDR']);
     $created_by_v = ', '.$mdb2->quote($user->id);
 
-    $sql = "insert into tt_users (name, login, password, team_id, role_id, client_id, rate, email, created, created_ip, created_by $status_f) values (".
+    $sql = "insert into tt_users (name, login, password, group_id, role_id, client_id, rate, email, created, created_ip, created_by $status_f) values (".
       $mdb2->quote($fields['name']).", ".$mdb2->quote($fields['login']).
-      ", $password, $team_id, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, ".$mdb2->quote($email).", now() $created_ip_v $created_by_v $status_v)";
+      ", $password, $group_id, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, ".$mdb2->quote($email).", now() $created_ip_v $created_by_v $status_v)";
     $affected = $mdb2->exec($sql);
 
     // Now deal with project assignment.
@@ -191,7 +191,7 @@ class ttUserHelper {
       // otherwise de-activate the bind (set its status to inactive). This will keep the bind
       // and its rate in database for reporting.
 
-      $all_projects = ttTeamHelper::getAllProjects($user->team_id);
+      $all_projects = ttTeamHelper::getAllProjects($user->group_id);
       $assigned_projects = isset($fields['projects']) ? $fields['projects'] : array();
 
       foreach($all_projects as $p) {
@@ -282,13 +282,13 @@ class ttUserHelper {
         return false;
 
       // Mark user as deleted.
-      $sql = "update tt_users set status = NULL where id = $user_id and team_id = ".$user->team_id;
+      $sql = "update tt_users set status = NULL where id = $user_id and group_id = ".$user->group_id;
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
 
     } elseif ($user->isManager()) {
-      $user_count = ttTeamHelper::getUserCount($user->team_id);
+      $user_count = ttTeamHelper::getUserCount($user->group_id);
 
       // Marking deleted a manager with active users is not allowed.
        if (($user_id == $user->id) && ($user_count > 1))
@@ -296,29 +296,29 @@ class ttUserHelper {
 
       if (1 == $user_count) {
         // Mark tasks deleted.
-        if (!ttTeamHelper::markTasksDeleted($user->team_id))
+        if (!ttTeamHelper::markTasksDeleted($user->group_id))
           return false;
 
         // Mark projects deleted.
-        $sql = "update tt_projects set status = NULL where team_id = $user->team_id";
+        $sql = "update tt_projects set status = NULL where group_id = $user->group_id";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
           return false;
 
         // Mark clients deleted.
-        $sql = "update tt_clients set status = NULL where team_id = $user->team_id";
+        $sql = "update tt_clients set status = NULL where group_id = $user->group_id";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
           return false;
 
         // Mark custom fields deleted.
-        $sql = "update tt_custom_fields set status = NULL where team_id = $user->team_id";
+        $sql = "update tt_custom_fields set status = NULL where group_id = $user->group_id";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
           return false;
  
         // Mark team deleted.
-        $sql = "update tt_groups set status = NULL where id = $user->team_id";
+        $sql = "update tt_groups set status = NULL where id = $user->group_id";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
           return false;
@@ -337,7 +337,7 @@ class ttUserHelper {
         return false;
 
       // Mark user as deleted.
-      $sql = "update tt_users set status = NULL where id = $user_id and team_id = ".$user->team_id;
+      $sql = "update tt_users set status = NULL where id = $user_id and group_id = ".$user->group_id;
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;

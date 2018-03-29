@@ -86,7 +86,7 @@ if ($request->isPost()) {
     $next = tdCron::getNextOccurrence($cl_cron_spec, mktime()); 
 
     if (ttNotificationHelper::insert(array(
-        'team_id' => $user->team_id,
+        'group_id' => $user->group_id,
         'cron_spec' => $cl_cron_spec,
         'next' => $next,
         'report_id' => $cl_fav_report,

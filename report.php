@@ -54,7 +54,7 @@ if ($user->isPluginEnabled('iv')) {
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
-  $custom_fields = new CustomFields($user->team_id);
+  $custom_fields = new CustomFields($user->group_id);
   $smarty->assign('custom_fields', $custom_fields);
 }
 
@@ -92,7 +92,7 @@ if ($bean->getAttribute('chpaid')) {
 // Controls for "Assign to invoice" block.
 if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by')) && !$user->isClient()) {
   // Client is selected and we are displaying the invoice column.
-  $recent_invoices = ttTeamHelper::getRecentInvoices($user->team_id, $client_id);
+  $recent_invoices = ttTeamHelper::getRecentInvoices($user->group_id, $client_id);
   if ($recent_invoices) {
     $assign_invoice_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
     $form->addInput(array('type'=>'combobox',

@@ -41,8 +41,8 @@ if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
 }
 // End of access checks.
 
-$smarty->assign('active_tasks', ttTeamHelper::getActiveTasks($user->team_id));
-$smarty->assign('inactive_tasks', ttTeamHelper::getInactiveTasks($user->team_id));
+$smarty->assign('active_tasks', ttTeamHelper::getActiveTasks($user->group_id));
+$smarty->assign('inactive_tasks', ttTeamHelper::getInactiveTasks($user->group_id));
 $smarty->assign('title', $i18n->get('title.tasks'));
 $smarty->assign('content_page_name', 'tasks.tpl');
 $smarty->display('index.tpl');

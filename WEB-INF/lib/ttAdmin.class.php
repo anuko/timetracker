@@ -47,7 +47,7 @@ class ttAdmin {
   // getUsers obtains user ids in a group.
   function getUsers($group_id) {
     $mdb2 = getConnection();
-    $sql = "select id from tt_users where team_id = $group_id";
+    $sql = "select id from tt_users where group_id = $group_id";
     $res = $mdb2->query($sql);
     $users = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -85,7 +85,7 @@ class ttAdmin {
   // The markTasksDeleted deletes task binds and marks the tasks as deleted for a group.
   function markTasksDeleted($group_id) {
     $mdb2 = getConnection();
-    $sql = "select id from tt_tasks where team_id = $group_id";
+    $sql = "select id from tt_tasks where group_id = $group_id";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) return false;
 
@@ -120,7 +120,7 @@ class ttAdmin {
     // Now that we are done with subgroups, handle this group.
     $users = $this->getUsers($group_id);
 
-    // Iterate through team users and mark them as deleted.
+    // Iterate through group users and mark them as deleted.
     foreach ($users as $one_user) {
       if (!$this->markUserDeleted($one_user['id']))
           return false;
@@ -132,32 +132,32 @@ class ttAdmin {
     $mdb2 = getConnection();
 
     // Mark roles deleted.
-    $sql = "update tt_roles set status = NULL where team_id = $group_id";
+    $sql = "update tt_roles set status = NULL where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Mark projects deleted.
-    $sql = "update tt_projects set status = NULL where team_id = $group_id";
+    $sql = "update tt_projects set status = NULL where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Mark clients deleted.
-    $sql = "update tt_clients set status = NULL where team_id = $group_id";
+    $sql = "update tt_clients set status = NULL where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Mark invoices deleted.
-    $sql = "update tt_invoices set status = NULL where team_id = $group_id";
+    $sql = "update tt_invoices set status = NULL where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Mark custom fields deleted.
-    $sql = "update tt_custom_fields set status = NULL where team_id = $group_id";
+    $sql = "update tt_custom_fields set status = NULL where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Mark notifications deleted.
-    $sql = "update tt_cron set status = NULL where team_id = $group_id";
+    $sql = "update tt_cron set status = NULL where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -232,7 +232,7 @@ class ttAdmin {
   }
 
   // updateGroup validates user input and updates the group with new information.
-  function updateGroup($team_id, $fields) {
+  function updateGroup($group_id, $fields) {
     if (!$this->validateGroupInfo($fields)) return false; // Can't continue as user input is invalid.
 
     global $user;
@@ -242,7 +242,7 @@ class ttAdmin {
     if ($fields['old_group_name'] != $fields['new_group_name']) {
       $name_part = 'name = '.$mdb2->quote($fields['new_group_name']);
       $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
-      $sql = 'update tt_groups set '.$name_part.$modified_part.' where id = '.$team_id;
+      $sql = 'update tt_groups set '.$name_part.$modified_part.' where id = '.$group_id;
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error')) return false;
     }

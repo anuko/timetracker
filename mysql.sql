@@ -50,7 +50,7 @@ CREATE TABLE `tt_groups` (
 #
 CREATE TABLE `tt_roles` (
   `id` int(11) NOT NULL auto_increment,    # Role id. Identifies roles for all groups on the server.
-  `team_id` int(11) NOT NULL,              # Team id the role is defined for.
+  `group_id` int(11) NOT NULL,             # Group id the role is defined for.
   `name` varchar(80) default NULL,         # Role name - custom role name. In case we are editing a
                                            # predefined role (USER, etc.), we can rename the role here.
   `description` varchar(255) default NULL, # Role description.
@@ -69,11 +69,11 @@ CREATE TABLE `tt_roles` (
 );
 
 # Create an index that guarantees unique active and inactive role ranks in each group.
-create unique index role_idx on tt_roles(team_id, rank, status);
+create unique index role_idx on tt_roles(group_id, rank, status);
 
 # Insert site-wide roles - site administrator and top manager.
-INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Site administrator', 1024, 'administer_site');
-INSERT INTO `tt_roles` (`team_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'track_own_time,track_own_expenses,view_own_reports,view_own_charts,view_own_invoices,view_own_projects,manage_own_settings,view_users,track_time,track_expenses,view_reports,view_charts,override_punch_mode,override_own_punch_mode,override_date_lock,override_own_date_lock,swap_roles,approve_timesheets,manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups');
+INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Site administrator', 1024, 'administer_site');
+INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'track_own_time,track_own_expenses,view_own_reports,view_own_charts,view_own_invoices,view_own_projects,manage_own_settings,view_users,track_time,track_expenses,view_reports,view_charts,override_punch_mode,override_own_punch_mode,override_date_lock,override_own_date_lock,swap_roles,approve_timesheets,manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups');
 
 
 #
@@ -84,7 +84,7 @@ CREATE TABLE `tt_users` (
   `login` varchar(50) COLLATE utf8_bin NOT NULL,   # user login
   `password` varchar(50) default NULL,             # password hash
   `name` varchar(100) default NULL,                # user name
-  `team_id` int(11) NOT NULL,                      # team id
+  `group_id` int(11) NOT NULL,                     # group id
   `role_id` int(11) default NULL,                  # role id
   `client_id` int(11) default NULL,                # client id for "client" user role
   `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
@@ -106,7 +106,7 @@ create unique index login_idx on tt_users(login, status);
 
 # Create admin account with password 'secret'. Admin is a superuser, who can create teams.
 DELETE from `tt_users` WHERE login = 'admin';
-INSERT INTO `tt_users` (`login`, `password`, `name`, `team_id`, `role_id`) VALUES ('admin', md5('secret'), 'Admin', '0', (select id from tt_roles where rank = 1024));
+INSERT INTO `tt_users` (`login`, `password`, `name`, `group_id`, `role_id`) VALUES ('admin', md5('secret'), 'Admin', '0', (select id from tt_roles where rank = 1024));
 
 
 #
@@ -114,7 +114,7 @@ INSERT INTO `tt_users` (`login`, `password`, `name`, `team_id`, `role_id`) VALUE
 #
 CREATE TABLE `tt_projects` (
   `id` int(11) NOT NULL auto_increment,         # project id
-  `team_id` int(11) NOT NULL,                   # team id
+  `group_id` int(11) NOT NULL,                  # group id
   `name` varchar(80) COLLATE utf8_bin NOT NULL, # project name
   `description` varchar(255) default NULL,      # project description
   `tasks` text default NULL,                    # comma-separated list of task ids associated with this project
@@ -122,8 +122,8 @@ CREATE TABLE `tt_projects` (
   PRIMARY KEY (`id`)
 );
 
-# Create an index that guarantees unique active and inactive projects per team.
-create unique index project_idx on tt_projects(team_id, name, status);
+# Create an index that guarantees unique active and inactive projects per group.
+create unique index project_idx on tt_projects(group_id, name, status);
 
 
 #
@@ -131,15 +131,15 @@ create unique index project_idx on tt_projects(team_id, name, status);
 #
 CREATE TABLE `tt_tasks` (
   `id` int(11) NOT NULL auto_increment,         # task id
-  `team_id` int(11) NOT NULL,                   # team id
+  `group_id` int(11) NOT NULL,                  # group id
   `name` varchar(80) COLLATE utf8_bin NOT NULL, # task name
   `description` varchar(255) default NULL,      # task description
   `status` tinyint(4) default 1,                # task status
   PRIMARY KEY (`id`)
 );
 
-# Create an index that guarantees unique active and inactive tasks per team.
-create unique index task_idx on tt_tasks(team_id, name, status);
+# Create an index that guarantees unique active and inactive tasks per group.
+create unique index task_idx on tt_tasks(group_id, name, status);
 
 
 #
@@ -212,7 +212,7 @@ create index task_idx on tt_log(task_id);
 #
 CREATE TABLE `tt_invoices` (
   `id` int(11) NOT NULL auto_increment,         # invoice id
-  `team_id` int(11) NOT NULL,                   # team id
+  `group_id` int(11) NOT NULL,                  # group id
   `name` varchar(80) COLLATE utf8_bin NOT NULL, # invoice name
   `date` date NOT NULL,                         # invoice date
   `client_id` int(11) NOT NULL,                 # client id
@@ -221,7 +221,7 @@ CREATE TABLE `tt_invoices` (
 );
 
 # Create an index that guarantees unique invoice names per team.
-create unique index name_idx on tt_invoices(team_id, name, status);
+create unique index name_idx on tt_invoices(group_id, name, status);
 
 
 #
@@ -277,7 +277,7 @@ CREATE TABLE `tt_fav_reports` (
 #
 CREATE TABLE `tt_cron` (
   `id` int(11) NOT NULL auto_increment,         # entry id
-  `team_id` int(11) NOT NULL,                   # team id
+  `group_id` int(11) NOT NULL,                  # group id
   `cron_spec` varchar(255) NOT NULL,            # cron specification, "0 1 * * *" for "daily at 01:00"
   `last` int(11) default NULL,                  # UNIX timestamp of when job was last run
   `next` int(11) default NULL,                  # UNIX timestamp of when to run next job
@@ -296,7 +296,7 @@ CREATE TABLE `tt_cron` (
 #
 CREATE TABLE `tt_clients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,         # client id
-  `team_id` int(11) NOT NULL,                   # team id
+  `group_id` int(11) NOT NULL,                  # group id
   `name` varchar(80) COLLATE utf8_bin NOT NULL, # client name
   `address` varchar(255) default NULL,          # client address
   `tax` float(6,2) default '0.00',              # applicable tax for this client
@@ -306,7 +306,7 @@ CREATE TABLE `tt_clients` (
 );
 
 # Create an index that guarantees unique active and inactive clients per team.
-create unique index client_name_idx on tt_clients(team_id, name, status);
+create unique index client_name_idx on tt_clients(group_id, name, status);
 
 
 #
@@ -343,7 +343,7 @@ create unique index param_idx on tt_config(user_id, param_name);
 #
 CREATE TABLE `tt_custom_fields` (
   `id` int(11) NOT NULL auto_increment,    # custom field id
-  `team_id` int(11) NOT NULL,              # team id
+  `group_id` int(11) NOT NULL,             # group id
   `type` tinyint(4) NOT NULL default 0,    # custom field type (text or dropdown)
   `label` varchar(32) NOT NULL default '', # custom field label
   `required` tinyint(4) default 0,         # whether this custom field is mandatory for time records
@@ -416,7 +416,7 @@ create index invoice_idx on tt_expense_items(invoice_id);
 #
 CREATE TABLE `tt_predefined_expenses` (
   `id` int(11) NOT NULL auto_increment, # predefined expense id
-  `team_id` int(11) NOT NULL,           # team id
+  `group_id` int(11) NOT NULL,          # group id
   `name` varchar(255) NOT NULL,         # predefined expense name, such as mileage
   `cost` decimal(10,2) default '0.00',  # cost for one unit
   PRIMARY KEY  (`id`)
@@ -428,11 +428,11 @@ CREATE TABLE `tt_predefined_expenses` (
 # This table keeps monthly work hour quotas for groups.
 #
 CREATE TABLE `tt_monthly_quotas` (
-  `team_id` int(11) NOT NULL,             # group id
+  `group_id` int(11) NOT NULL,            # group id
   `year` smallint(5) UNSIGNED NOT NULL,   # quota year
   `month` tinyint(3) UNSIGNED NOT NULL,   # quota month
   `minutes` int(11) default NULL,         # quota in minutes in specified month and year
-  PRIMARY KEY (`team_id`,`year`,`month`)
+  PRIMARY KEY (`group_id`,`year`,`month`)
 );
 
 
@@ -449,4 +449,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.80', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.81', now()); # TODO: change when structure changes.

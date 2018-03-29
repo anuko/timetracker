@@ -96,7 +96,7 @@ if ($user->can('track_expenses')) {
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
 if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
-    $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
+    $active_clients = ttTeamHelper::getActiveClients($user->group_id, true);
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'client',
@@ -122,7 +122,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
 
   // Dropdown for clients if the clients plugin is enabled.
   if ($user->isPluginEnabled('cl')) {
-    $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
+    $active_clients = ttTeamHelper::getActiveClients($user->group_id, true);
     // We need an array of assigned project ids to do some trimming. 
     foreach($project_list as $project)
       $projects_assigned_to_user[] = $project['id'];
@@ -148,7 +148,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
   }
 }
 // If predefined expenses are configured, add controls to select an expense and quantity.
-$predefined_expenses = ttTeamHelper::getPredefinedExpenses($user->team_id);
+$predefined_expenses = ttTeamHelper::getPredefinedExpenses($user->group_id);
 if ($predefined_expenses) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'recalculateCost();',

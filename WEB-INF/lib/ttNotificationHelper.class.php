@@ -41,7 +41,7 @@ class ttNotificationHelper {
 
     $sql = "select c.id, c.cron_spec, c.report_id, c.email, c.cc, c.subject, c.report_condition, c.status, fr.name from tt_cron c
       left join tt_fav_reports fr on (fr.id = c.report_id)
-      where c.id = $id and c.team_id = $user->team_id";
+      where c.id = $id and c.group_id = $user->group_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -57,7 +57,7 @@ class ttNotificationHelper {
   	    
     $mdb2 = getConnection();
     
-    $sql = "delete from tt_cron where id = $id and team_id = $user->team_id";
+    $sql = "delete from tt_cron where id = $id and group_id = $user->group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -70,7 +70,7 @@ class ttNotificationHelper {
   {
     $mdb2 = getConnection();
 
-    $team_id = (int) $fields['team_id'];
+    $group_id = (int) $fields['group_id'];
     $cron_spec = $fields['cron_spec'];
     $next = (int) $fields['next'];
     $report_id = (int) $fields['report_id'];
@@ -80,8 +80,8 @@ class ttNotificationHelper {
     $report_condition = $fields['report_condition'];
     $status = $fields['status'];
     
-    $sql = "insert into tt_cron (team_id, cron_spec, next, report_id, email, cc, subject, report_condition, status)
-      values ($team_id, ".$mdb2->quote($cron_spec).", $next, $report_id, ".$mdb2->quote($email).", ".$mdb2->quote($cc).", ".$mdb2->quote($subject).", ".$mdb2->quote($report_condition).", ".$mdb2->quote($status).")";
+    $sql = "insert into tt_cron (group_id, cron_spec, next, report_id, email, cc, subject, report_condition, status)
+      values ($group_id, ".$mdb2->quote($cron_spec).", $next, $report_id, ".$mdb2->quote($email).", ".$mdb2->quote($cc).", ".$mdb2->quote($subject).", ".$mdb2->quote($report_condition).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -95,7 +95,7 @@ class ttNotificationHelper {
     $mdb2 = getConnection();
     
     $notification_id = (int) $fields['id'];
-    $team_id = (int) $fields['team_id'];
+    $group_id = (int) $fields['group_id'];
     $cron_spec = $fields['cron_spec'];
     $next = (int) $fields['next'];
     $report_id = (int) $fields['report_id'];
@@ -106,7 +106,7 @@ class ttNotificationHelper {
     $status = $fields['status'];
     
     $sql = "update tt_cron set cron_spec = ".$mdb2->quote($cron_spec).", next = $next, report_id = $report_id, email = ".$mdb2->quote($email).", cc = ".$mdb2->quote($cc).", subject = ".$mdb2->quote($subject).", report_condition = ".$mdb2->quote($report_condition).", status = ".$mdb2->quote($status).
-      " where id = $notification_id and team_id = $team_id";
+      " where id = $notification_id and group_id = $group_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }

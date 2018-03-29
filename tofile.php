@@ -41,7 +41,7 @@ if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports'))) {
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
-  $custom_fields = new CustomFields($user->team_id);
+  $custom_fields = new CustomFields($user->group_id);
 }
 
 // Report settings are stored in session bean before we get here.

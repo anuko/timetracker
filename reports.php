@@ -45,7 +45,7 @@ if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports'))) {
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
-  $custom_fields = new CustomFields($user->team_id);
+  $custom_fields = new CustomFields($user->group_id);
   $smarty->assign('custom_fields', $custom_fields);
 }
 
@@ -104,7 +104,7 @@ $form->addInput(array('type'=>'combobox',
   'datakeys'=>array('id','name'),
   'empty'=>array(''=>$i18n->get('dropdown.all'))));
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-  $task_list = ttTeamHelper::getActiveTasks($user->team_id);
+  $task_list = ttTeamHelper::getActiveTasks($user->group_id);
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
     'style'=>'width: 250px;',
