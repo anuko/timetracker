@@ -89,7 +89,7 @@ $i18n_key_words = array(
 'error.task_exists' => 'Er bestaat al een taak met deze naam.',
 'error.client_exists' => 'Een klant met deze naam bestaat al.',
 'error.invoice_exists' => 'Dit nummer is al eens toegekend aan een factuur.',
-// TODO: translate the following. It seems like rank is misplaced ith rights.
+// TODO: translate the following. It seems like rank is misplaced with rights.
 // 'error.role_exists' => 'Role with this rank already exists.',
 // 'error.role_exists' => 'Een rol met deze rechten bestaat al.', // TODO: rank is not rights. Rank is a number.
                                                                   // Rights (rechten) is a set of permissions ("view_users", etc.).

@@ -725,8 +725,8 @@ class ttTeamHelper {
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
-    // Mark team deleted.
-    $sql = "update tt_teams set status = NULL where id = $team_id";
+    // Mark group deleted.
+    $sql = "update tt_groups set status = NULL where id = $team_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -739,7 +739,7 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     $sql = "select t.name as team_name, u.id as manager_id, u.name as manager_name, u.login as manager_login, u.email as manager_email
-      from tt_teams t
+      from tt_groups t
       inner join tt_users u on (u.team_id = t.id)
       inner join tt_roles r on (r.id = u.role_id and r.rank = 512)
       where t.id = $team_id";
@@ -842,11 +842,11 @@ class ttTeamHelper {
     $columns .= ', created, created_ip, created_by';
     $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
 
-    $sql = "insert into tt_teams ($columns) values($values)";
+    $sql = "insert into tt_groups ($columns) values($values)";
     $affected = $mdb2->exec($sql);
 
     if (!is_a($affected, 'PEAR_Error')) {
-      $team_id = $mdb2->lastInsertID('tt_teams', 'id');
+      $team_id = $mdb2->lastInsertID('tt_groups', 'id');
       return $team_id;
     }
 
@@ -889,7 +889,7 @@ class ttTeamHelper {
     if (isset($fields['workday_minutes'])) $workday_minutes_part = ', workday_minutes = '.$mdb2->quote($fields['workday_minutes']);
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
 
-    $sql = "update tt_teams set $name_part $currency_part $lang_part $decimal_mark_part
+    $sql = "update tt_groups set $name_part $currency_part $lang_part $decimal_mark_part
       $date_format_part $time_format_part $week_start_part $tracking_mode_part $task_required_part $record_type_part
       $bcc_email_part $plugins_part $config_part $lock_spec_part $workday_minutes_part $modified_part where id = $team_id";
     $affected = $mdb2->exec($sql);
@@ -906,7 +906,7 @@ class ttTeamHelper {
     // Get all team ids for teams created or modified more than 8 months ago.
     // $ts = date('Y-m-d', strtotime('-1 year'));
     $ts = $mdb2->quote(date('Y-m-d', strtotime('-8 month')));
-    $sql =  "select id from tt_teams where created < $ts and (modified is null or modified < $ts) order by id";
+    $sql =  "select id from tt_groups where created < $ts and (modified is null or modified < $ts) order by id";
     $res = $mdb2->query($sql);
 
     $count = 0;
@@ -1014,8 +1014,8 @@ class ttTeamHelper {
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
-    // Delete team.
-    $sql = "delete from tt_teams where id = $team_id";
+    // Delete group.
+    $sql = "delete from tt_groups where id = $team_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 

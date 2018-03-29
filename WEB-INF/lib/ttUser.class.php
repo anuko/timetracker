@@ -76,7 +76,7 @@ class ttUser {
       t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
       t.tracking_mode, t.project_required, t.task_required, t.record_type,
       t.bcc_email, t.plugins, t.config, t.lock_spec, t.workday_minutes, t.custom_logo
-      FROM tt_users u LEFT JOIN tt_teams t ON (u.team_id = t.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
+      FROM tt_users u LEFT JOIN tt_groups t ON (u.team_id = t.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
     if ($id)
       $sql .= "u.id = $id";
     else

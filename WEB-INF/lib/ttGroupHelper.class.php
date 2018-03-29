@@ -35,8 +35,8 @@ class ttGroupHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    // TODO: when we have subgroups, improve the query to return only top groups.
-    $sql =  "select id, name, created, lang from tt_teams where status = 1 order by id desc";
+    $sql =  "select id, name, created, lang from tt_groups".
+            " where status = 1 and org_id is NULL order by id desc";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {

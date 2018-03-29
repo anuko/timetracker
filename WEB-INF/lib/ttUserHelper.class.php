@@ -318,7 +318,7 @@ class ttUserHelper {
           return false;
  
         // Mark team deleted.
-        $sql = "update tt_teams set status = NULL where id = $user->team_id";
+        $sql = "update tt_groups set status = NULL where id = $user->team_id";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
           return false;

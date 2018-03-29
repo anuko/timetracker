@@ -9,10 +9,10 @@
 
 
 #
-# Structure for table tt_teams. A team is a group of users for whom we are tracking work time.
+# Structure for table tt_groups. A team is a group of users for whom we are tracking work time.
 # This table stores settings common to all group members such as language, week start day, etc.
 #
-CREATE TABLE `tt_teams` (
+CREATE TABLE `tt_groups` (
   `id` int(11) NOT NULL auto_increment,                  # group id
   `parent_id` int(11) default NULL,                      # parent group id
   `org_id` int(11) default NULL,                         # organization id (id of top group)
@@ -425,18 +425,15 @@ CREATE TABLE `tt_predefined_expenses` (
 
 #
 # Structure for table tt_monthly_quotas.
-# This table keeps monthly work hour quotas for teams.
+# This table keeps monthly work hour quotas for groups.
 #
 CREATE TABLE `tt_monthly_quotas` (
-  `team_id` int(11) NOT NULL,             # team id
+  `team_id` int(11) NOT NULL,             # group id
   `year` smallint(5) UNSIGNED NOT NULL,   # quota year
   `month` tinyint(3) UNSIGNED NOT NULL,   # quota month
   `minutes` int(11) default NULL,         # quota in minutes in specified month and year
   PRIMARY KEY (`team_id`,`year`,`month`)
 );
-
-ALTER TABLE `tt_monthly_quotas`
-  ADD CONSTRAINT `FK_TT_TEAM_CONSTRAING` FOREIGN KEY (`team_id`) REFERENCES `tt_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 #
@@ -452,4 +449,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.79', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.80', now()); # TODO: change when structure changes.

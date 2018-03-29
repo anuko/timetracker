@@ -174,7 +174,7 @@ class ttAdmin {
     // Mark group deleted.
     global $user;
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
-    $sql = "update tt_teams set status = NULL $modified_part where id = $group_id";
+    $sql = "update tt_groups set status = NULL $modified_part where id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -242,7 +242,7 @@ class ttAdmin {
     if ($fields['old_group_name'] != $fields['new_group_name']) {
       $name_part = 'name = '.$mdb2->quote($fields['new_group_name']);
       $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
-      $sql = 'update tt_teams set '.$name_part.$modified_part.' where id = '.$team_id;
+      $sql = 'update tt_groups set '.$name_part.$modified_part.' where id = '.$team_id;
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error')) return false;
     }

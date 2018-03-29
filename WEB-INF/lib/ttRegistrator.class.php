@@ -135,11 +135,11 @@ class ttRegistrator {
     $created = 'now()';
     $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
 
-    $sql = "insert into tt_teams (name, currency, lang, created, created_ip) values($name, $currency, $lang, $created, $created_ip)";
+    $sql = "insert into tt_groups (name, currency, lang, created, created_ip) values($name, $currency, $lang, $created, $created_ip)";
     $affected = $mdb2->exec($sql);
 
     if (!is_a($affected, 'PEAR_Error')) {
-      $group_id = $mdb2->lastInsertID('tt_teams', 'id');
+      $group_id = $mdb2->lastInsertID('tt_groups', 'id');
       return $group_id;
     }
     return false;
@@ -174,7 +174,7 @@ class ttRegistrator {
     $mdb2 = getConnection();
 
     // Update group.
-    $sql = "update tt_teams set created_by = $user_id where id = $this->group_id";
+    $sql = "update tt_groups set created_by = $user_id where id = $this->group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) {
       $this->err->add($i18n->get('error.db'));
@@ -199,7 +199,7 @@ class ttRegistrator {
     $mdb2 = getConnection();
 
     $ip_part = ' created_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']);
-    $sql = 'select created from tt_teams where '.$ip_part.' and created > now() - interval 1 minute';
+    $sql = 'select created from tt_groups where '.$ip_part.' and created > now() - interval 1 minute';
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))
       return false;
