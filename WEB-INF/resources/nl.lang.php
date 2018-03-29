@@ -72,8 +72,7 @@ $i18n_key_words = array(
 'error.access_denied' => 'Toegang geweigerd.',
 'error.sys' => 'Systeem fout.',
 'error.db' => 'Database fout.',
-// TODO: translate the following.
-// 'error.feature_disabled' => 'Feature is disabled.',
+'error.feature_disabled' => 'Functie is uitgeschakeld.',
 'error.field' => 'Incorrecte gegevens: "{0}".',
 'error.empty' => 'Veld "{0}" is leeg.',
 'error.not_equal' => 'Veld "{0}" is niet gelijk aan veld "{1}".',
@@ -82,17 +81,18 @@ $i18n_key_words = array(
 'error.task' => 'Kies taak.',
 'error.client' => 'Kies klant.',
 'error.report' => 'Kies rapport.',
-'error.record' => 'Selecteer record.', // TODO: why not Kies as above?
+'error.record' => 'Kies record.',
 'error.auth' => 'Onjuiste inlognaam of wachtwoord.',
 'error.user_exists' => 'Een gebruiker met deze inlognaam bestaat al.',
-// TODO: translate the following.
-// 'error.object_exists' => 'Object with this name already exists.',
+'error.object_exists' => 'Een object met deze naam bestaat al.',
 'error.project_exists' => 'Een project met deze naam bestaat al.',
 'error.task_exists' => 'Er bestaat al een taak met deze naam.',
 'error.client_exists' => 'Een klant met deze naam bestaat al.',
 'error.invoice_exists' => 'Dit nummer is al eens toegekend aan een factuur.',
-// TODO: translate the following.
+// TODO: translate the following. It seems like rank is misplaced ith rights.
 // 'error.role_exists' => 'Role with this rank already exists.',
+// 'error.role_exists' => 'Een rol met deze rechten bestaat al.', // TODO: rank is not rights. Rank is a number.
+                                                                  // Rights (rechten) is a set of permissions ("view_users", etc.).
 'error.no_invoiceable_items' => 'Er zijn geen factuureerbare onderdelen.',
 'error.no_login' => 'Een medewerker met deze inlognaam bestaat niet.',
 'error.no_teams' => 'Uw database is leeg. Meld je aan als admin en maak een nieuw team.',
@@ -161,8 +161,7 @@ $i18n_key_words = array(
 'label.notes' => 'Notities',
 'label.item' => 'Artikel',
 'label.cost' => 'Kosten',
-// TODO: translate the following.
-// 'label.ip' => 'IP',
+'label.ip' => 'IP adres',
 'label.day_total' => 'Dag totaal',
 'label.week_total' => 'Week totaal',
 'label.month_total' => 'Maand totaal',
@@ -208,8 +207,7 @@ $i18n_key_words = array(
 'label.type_text' => 'tekst',
 'label.required' => 'Verplicht veld',
 'label.fav_report' => 'Standaard rapport',
-// TODO: translate the following.
-// 'label.schedule' => 'Schedule',
+'label.schedule' => 'Planning',
 'label.what_is_it' => 'Wat betekent dit?',
 'label.expense' => 'Kosten',
 'label.quantity' => 'Hoeveelheid',
@@ -288,8 +286,7 @@ $i18n_key_words = array(
 'title.cf_delete_dropdown_option' => 'Uitvouwmogelijkheid verwijderen',
 'title.locking' => 'Blokkeren',
 'title.week_view' => 'Week overzicht',
-// TODO: translate the following.
-// 'title.swap_roles' => 'Swapping Roles',
+'title.swap_roles' => 'Rollen verruilen',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -332,10 +329,7 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Het verzoek om het wachtwoord te herstellen is verzonden per email.',
 'form.reset_password.email_subject' => 'Anuko Time Tracker wachtwoord herstel verzoek',
-// TODO: English string has changed. "from IP" added. Re-translate the beginning.
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
-// "IP %s" probably sounds awkward.
-'form.reset_password.email_body' => "Geachte medewerker,\n\nIemand, IP %s, heeft verzocht uw wachtwoord in Anuko Time Tracker te herstellen. Klik op deze link als u uw wachtwoord wil wijzigen.\n\n%s\n\nAnuko Time Tracker is een eenvoudig en gemakkelijk te gebruiken open source tijdregistratiesysteem. Bezoek https://www.anuko.com voor meer informatie.\n\n",
+'form.reset_password.email_body' => "Geachte medewerker,\n\nIemand, met IP adres %s, heeft verzocht uw wachtwoord in Anuko Time Tracker te herstellen. Klik op deze link als u uw wachtwoord wil wijzigen.\n\n%s\n\nAnuko Time Tracker is een eenvoudig en gemakkelijk te gebruiken open source tijdregistratiesysteem. Bezoek https://www.anuko.com voor meer informatie.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Voer het nieuwe wachtwoord in en klik op Bewaren.',
@@ -412,12 +406,10 @@ $i18n_key_words = array(
 // Roles form. See example at https://timetracker.anuko.com/roles.php
 'form.roles.active_roles' => 'Actieve rollen',
 'form.roles.inactive_roles' => 'Inactieve rollen',
-// TODO: translate the following.
-// 'form.roles.rank' => 'Rank',
+'form.roles.rank' => 'Volgorde',
 'form.roles.rights' => 'Rechten',
-// TODO: translate the following.
-// 'form.roles.assigned' => 'Assigned',
-// 'form.roles.not_assigned' => 'Not assigned',
+'form.roles.assigned' => 'Toegewezen',
+'form.roles.not_assigned' => 'Niet toegewezen',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Actieve klanten',
@@ -442,8 +434,7 @@ $i18n_key_words = array(
 'form.teams.hint' => 'Maak een nieuw team door een team  manager account aan te maken.<br>U kunt ook teamgegevens importeren uit een xml file van een andere Anuko Time Tracker server (login namen moeten uniek zijn).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-// TODO: translate the following.
-// 'form.profile.swap_roles' => 'Swap roles',
+'form.profile.swap_roles' => 'Rollen verruilen',
 'form.profile.12_hours' => '12 uurs',
 'form.profile.24_hours' => '24 uurs',
 'form.profile.show_holidays' => 'Toon vakantiedagen',
@@ -477,9 +468,8 @@ $i18n_key_words = array(
 'form.quota.hint' => 'Als de velden leeg worden gelaten, dan zullen de doelen worden berekend op bassis van het aantal werkuren per dag en vakantiedagen.',
 
 // Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
-// TODO: translate the following.
-// 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
-// 'form.swap.swap_with' => 'Swap roles with',
+'form.swap.hint' => 'Degradeer jezelf naar een lagere rol door een rol te verruilen met iemand anders. Dit kan niet ongedaan worden gemaakt.',
+'form.swap.swap_with' => 'Verruil rol met',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 'role.user.label' => 'Gebruiker',
@@ -502,5 +492,5 @@ $i18n_key_words = array(
 'role.top_manager.description' => 'Top groepsbeheerder. Kan alle groepen beheren.',
 'role.admin.label' => 'Administrator',
 'role.admin.low_case_label' => 'administrator',
-'role.admin.description' => 'Website beheerder.', // TODO: perhaps, 'Time Tracker administrator.'?
+'role.admin.description' => 'Time Tracker beheerder.',
 );
