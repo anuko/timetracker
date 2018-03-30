@@ -70,11 +70,12 @@ $client_id = $bean->getAttribute('client');
 // Do we need to show checkboxes?
 if ($bean->getAttribute('chpaid') ||
    ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by')) && !$user->isClient())) {
-  $smarty->assign('use_checkboxes', true);
+  if ($user->can('manage_invoices'))
+    $smarty->assign('use_checkboxes', true);
 }
 
 // Controls for "Mark paid" block.
-if ($bean->getAttribute('chpaid')) {
+if ($user->can('manage_invoices') && $bean->getAttribute('chpaid')) {
   $mark_paid_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'mark_paid_select_options',
@@ -90,7 +91,8 @@ if ($bean->getAttribute('chpaid')) {
 }
 
 // Controls for "Assign to invoice" block.
-if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by')) && !$user->isClient()) {
+if ($user->can('manage_invoices') &&
+  ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by')) && !$user->isClient())) {
   // Client is selected and we are displaying the invoice column.
   $recent_invoices = ttTeamHelper::getRecentInvoices($user->group_id, $client_id);
   if ($recent_invoices) {
