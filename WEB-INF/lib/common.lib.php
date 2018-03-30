@@ -325,6 +325,26 @@ function ttValidCondition($val, $emptyValid = true)
   return true;
 }
 
+// ttValidIP is used to check user input to validate a comma-separated
+// list of IP subnet "prefixes", for example 192.168.0 (note: no .* in the end).
+// We keep regexp checks here simple - they are not precise.
+// For example, IPv4-mapped IPv6 addresses will fail. This may need to be fixed.
+function ttValidIP($val, $emptyValid = false)
+{
+  $val = trim($val);
+  if (strlen($val) == 0 && !$emptyValid)
+    return false;
+
+  $subnets = explode(',', $val);
+  foreach ($subnets as $subnet) {
+    $ipv4 = preg_match('/^\d\d?\d?(\.\d\d?\d?){0,3}\.?$/', $subnet); // Not precise check.
+    $ipv6 = preg_match('/^([0-9a-fA-F]{4})(:[0-9a-fA-F]{4}){0,7}$/', $subnet); // Not precise check.
+    if (!$ipv4 && !$ipv6)
+      return false;
+  }
+  return true;
+}
+
 // ttAccessAllowed checks whether user is allowed access to a particular page.
 // It is used as an initial check on all publicly available pages
 // (except login.php, register.php, and others where we don't have to check).
@@ -346,7 +366,7 @@ function ttAccessAllowed($required_right)
     $allowed_ip_array = explode(',', $user->allow_ip);
     foreach ($allowed_ip_array as $allowed_ip) {
       $len = strlen($allowed_ip);
-      if (substr($user_ip, 0, $len) === $allowed_ip) {
+      if (substr($user_ip, 0, $len) === $allowed_ip) { // startsWith check.
          $access_allowed = true;
          break;
       }
