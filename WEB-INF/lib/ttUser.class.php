@@ -53,6 +53,7 @@ class ttUser {
   var $future_entries = 0;      // Whether to allow creating future entries.
   var $uncompleted_indicators = 0; // Uncompleted time entry indicators (show nowhere or on users page).
   var $bcc_email = null;        // Bcc email.
+  var $allow_ip = null;         // Specification from where user is allowed access.
   var $currency = null;         // Currency.
   var $plugins = null;          // Comma-separated list of enabled plugins.
   var $config = null;           // Comma-separated list of miscellaneous config options.
@@ -72,11 +73,11 @@ class ttUser {
 
     $mdb2 = getConnection();
 
-    $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id, u.email, t.name as team_name,
-      t.currency, t.lang, t.decimal_mark, t.date_format, t.time_format, t.week_start,
-      t.tracking_mode, t.project_required, t.task_required, t.record_type,
-      t.bcc_email, t.plugins, t.config, t.lock_spec, t.workday_minutes, t.custom_logo
-      FROM tt_users u LEFT JOIN tt_groups t ON (u.group_id = t.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
+    $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id, u.email, g.name as group_name,
+      g.currency, g.lang, g.decimal_mark, g.date_format, g.time_format, g.week_start,
+      g.tracking_mode, g.project_required, g.task_required, g.record_type,
+      g.bcc_email, g.allow_ip, g.plugins, g.config, g.lock_spec, g.workday_minutes, g.custom_logo
+      FROM tt_users u LEFT JOIN tt_groups g ON (u.group_id = g.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
     if ($id)
       $sql .= "u.id = $id";
     else
@@ -111,7 +112,8 @@ class ttUser {
       $this->task_required = $val['task_required'];
       $this->record_type = $val['record_type'];
       $this->bcc_email = $val['bcc_email'];
-      $this->team = $val['team_name'];
+      $this->allow_ip = $val['allow_ip'];
+      $this->team = $val['group_name'];
       $this->currency = $val['currency'];
       $this->plugins = $val['plugins'];
       $this->lock_spec = $val['lock_spec'];

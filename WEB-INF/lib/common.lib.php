@@ -339,6 +339,21 @@ function ttAccessAllowed($required_right)
     exit();
   }
 
+  // Check IP restriction, if set.
+  if ($user->allow_ip && !$user->can('override_allow_ip')) {
+    $access_allowed = false;
+    $user_ip = $_SERVER['REMOTE_ADDR'];
+    $allowed_ip_array = explode(',', $user->allow_ip);
+    foreach ($allowed_ip_array as $allowed_ip) {
+      $len = strlen($allowed_ip);
+      if (substr($user_ip, 0, $len) === $allowed_ip) {
+         $access_allowed = true;
+         break;
+      }
+    }
+    if (!$access_allowed) return false;
+  }
+
   // Check if user has the right.
   if (in_array($required_right, $user->rights)) {
     import('ttUserHelper');

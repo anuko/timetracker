@@ -164,10 +164,14 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$i18n.form.profile.uncompleted_indicators}:</td>
             <td>{$forms.groupForm.uncompleted_indicators.control} <a href="https://www.anuko.com/lp/tt_15.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
-{if $user->isManager()}
+{if $user->can('manage_advanced_settings')}
           <tr>
             <td align="right" nowrap>{$i18n.label.bcc}:</td>
             <td>{$forms.groupForm.bcc_email.control} <a href="https://www.anuko.com/lp/tt_10.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+          </tr>
+          <tr>
+            <td align="right" nowrap>{$i18n.form.profile.allow_ip}:</td>
+            <td>{$forms.groupForm.allow_ip.control} <a href="https://www.anuko.com/lp/tt_21.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
 {/if}
           {* initialize preview text *}

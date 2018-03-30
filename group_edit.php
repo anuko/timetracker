@@ -59,6 +59,7 @@ if ($request->isPost()) {
   $cl_future_entries = $request->getParameter('future_entries');
   $cl_uncompleted_indicators = $request->getParameter('uncompleted_indicators');
   $cl_bcc_email = trim($request->getParameter('bcc_email'));
+  $cl_allow_ip = trim($request->getParameter('allow_ip'));
 
   // Plugin checkboxes.
   $cl_charts = $request->getParameter('charts');
@@ -91,6 +92,7 @@ if ($request->isPost()) {
   $cl_future_entries = $user->future_entries;
   $cl_uncompleted_indicators = $user->uncompleted_indicators;
   $cl_bcc_email = $user->bcc_email;
+  $cl_allow_ip = $user->allow_ip;
 
   // Which plugins do we have enabled?
   $plugins = explode(',', $user->plugins);
@@ -188,6 +190,7 @@ $form->addInput(array('type'=>'checkbox','name'=>'uncompleted_indicators','value
 // Add bcc email control, for manager only.
 if ($user->can('manage_advanced_settings')) {
   $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'bcc_email','value'=>$cl_bcc_email));
+  $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'allow_ip','value'=>$cl_allow_ip));
 }
 
 // Plugin checkboxes.
@@ -211,6 +214,8 @@ if ($request->isPost()) {
   if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));
   if ($user->can('manage_advanced_settings')) {
     if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
+    // TODO: how about writing ttValidIP?
+    if (!ttValidString($cl_allow_ip, true)) $err->add($i18n->get('error.field'), $i18n->get('form.profile.allow_ip'));
   }
   // Finished validating user input.
 
@@ -282,6 +287,7 @@ if ($request->isPost()) {
         'record_type' => $cl_record_type,
         'uncompleted_indicators' => $cl_uncompleted_indicators,
         'bcc_email' => $cl_bcc_email,
+        'allow_ip' => $cl_allow_ip,
         'plugins' => $plugins,
         'config' => $config));
     }
