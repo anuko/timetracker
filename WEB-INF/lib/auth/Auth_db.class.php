@@ -44,8 +44,8 @@ class Auth_db extends Auth {
     $mdb2 = getConnection();
 
     // Try md5 password match first.
-    $sql = "SELECT id FROM tt_users
-      WHERE login = ".$mdb2->quote($login)." AND password = md5(".$mdb2->quote($password).") AND status = 1";
+    $sql = "SELECT id FROM tt_users".
+      " WHERE login = ".$mdb2->quote($login)." AND password = md5(".$mdb2->quote($password).") AND status = 1";
 
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) {
@@ -84,8 +84,9 @@ class Auth_db extends Auth {
 
     // Special handling for admin@localhost - search for an account with admin role with a matching password.
     if ($login == 'admin@localhost') {
-      $sql = "SELECT id, login FROM tt_users
-        WHERE role = 1024 AND password = md5(".$mdb2->quote($password).") AND status = 1";
+      $sql = "SELECT u.id, u.login FROM tt_users u".
+        " LEFT JOIN tt_roles r on (u.role_id = r.id)".
+        " WHERE r.rank = 1024 AND password = md5(".$mdb2->quote($password).") AND u.status = 1";
       $res = $mdb2->query($sql);
       if (is_a($res, 'PEAR_Error')) {
         die($res->getMessage());
