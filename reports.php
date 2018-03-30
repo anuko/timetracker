@@ -37,7 +37,7 @@ import('ttFavReportHelper');
 import('ttClientHelper');
 
 // Access check.
-if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports'))) {
+if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports') || ttAccessAllowed('view_all_reports'))) {
   header('Location: access_denied.php');
   exit();
 }
@@ -141,13 +141,15 @@ if ($user->canManageTeam() && $user->isPluginEnabled('ps')) {
 }
 
 $user_list = array();
-if ($user->can('view_reports') || $user->isClient()) {
+if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
   // Prepare user and assigned projects arrays.
-  if ($user->can('view_reports')) {
+  if ($user->can('view_reports') || $user->can('view_all_reports')) {
+    $max_rank = $user->rank-1;
+    if ($user->can('view_all_reports')) $max_rank = 512;
     if ($user->can('view_own_reports'))
-      $options = array('max_rank'=>$user->rank-1,'include_self'=>true);
+      $options = array('max_rank'=>$max_rank,'include_self'=>true);
     else
-      $options = array('max_rank'=>$user->rank-1);
+      $options = array('max_rank'=>$max_rank);
     $users = $user->getUsers($options); // Active and inactive users.
   }
   elseif ($user->isClient())

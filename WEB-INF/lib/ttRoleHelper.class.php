@@ -186,7 +186,7 @@ class ttRoleHelper {
     $rights_client = 'view_own_reports,view_own_charts,view_own_invoices,manage_own_settings';
     $rights_user = 'track_own_time,track_own_expenses,view_own_reports,view_own_charts,view_own_projects,manage_own_settings,view_users';
     $rights_supervisor = $rights_user.',track_time,track_expenses,view_reports,view_charts,override_punch_mode,override_date_lock,override_own_date_lock,swap_roles,approve_timesheets';
-    $rights_comanager = $rights_supervisor.',manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices';
+    $rights_comanager = $rights_supervisor.',manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,view_all_reports';
     $rights_manager = $rights_comanager.',manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups';
 
     // Active roles.
@@ -244,7 +244,7 @@ class ttRoleHelper {
     $rights_client = 'view_own_reports,view_own_charts,view_own_invoices,manage_own_settings';
     $rights_user = 'track_own_time,track_own_expenses,view_own_reports,view_own_charts,view_own_projects,manage_own_settings,view_users';
     $rights_supervisor = $rights_user.',track_time,track_expenses,view_reports,view_charts,override_punch_mode,override_date_lock,override_own_date_lock,swap_roles,approve_timesheets';
-    $rights_comanager = $rights_supervisor.',manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices';
+    $rights_comanager = $rights_supervisor.',manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,view_all_reports';
     $rights_manager = $rights_comanager.',manage_features,manage_basic_settings,manage_advanced_settings,manage_roles,export_data,manage_subgroups';
 
     // Active roles.
