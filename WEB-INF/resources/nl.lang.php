@@ -443,8 +443,7 @@ $i18n_key_words = array(
 'form.profile.allow_overlap' => 'Sta overlapping van tijden toe',
 'form.profile.future_entries' => 'Toevoegingen toestaan in de toekomst',
 'form.profile.uncompleted_indicators' => 'Onvolledige indicatoren',
-// TODO: translate the following.
-// 'form.profile.allow_ip' => 'Allow IP',
+'form.profile.allow_ip' => 'Toegestane IP adressen',
 'form.profile.plugins' => 'Plugins',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
