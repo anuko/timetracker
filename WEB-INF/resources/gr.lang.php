@@ -448,6 +448,8 @@ $i18n_key_words = array(
 'form.profile.allow_overlap' => 'Επικάλυψη επιτρεπτή',
 'form.profile.future_entries' => 'Μελλοντικές καταχωρήσεις',
 'form.profile.uncompleted_indicators' => 'Μη ολοκληρωμένες ενδείξεις',
+// TODO: translate the following.
+// 'form.profile.allow_ip' => 'Allow IP',
 'form.profile.plugins' => 'Πρόσθετα',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.

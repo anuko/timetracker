@@ -443,6 +443,7 @@ $i18n_key_words = array(
 'form.profile.allow_overlap' => 'Возможное перекрывание',
 'form.profile.future_entries' => 'Будущие записи',
 'form.profile.uncompleted_indicators' => 'Индикаторы незавершения',
+'form.profile.allow_ip' => 'Разрешить доступ с IP',
 'form.profile.plugins' => 'Плагины',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
