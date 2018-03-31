@@ -44,11 +44,9 @@ $i18n_key_words = array(
 'menu.logout' => 'Afmelden',
 'menu.forum' => 'Forum',
 'menu.help' => 'Help',
-// TODO: translate the following.
-// 'menu.create_group' => 'Create Group',
+'menu.create_group' => 'Maak groep',
 'menu.profile' => 'Profiel',
-// TODO: translate the following.
-// 'menu.group' => 'Group',
+'menu.group' => 'Groep',
 'menu.time' => 'Tijden',
 'menu.expenses' => 'Kosten',
 'menu.reports' => 'Rapporten',
@@ -56,8 +54,7 @@ $i18n_key_words = array(
 'menu.projects' => 'Projecten',
 'menu.tasks' => 'Taken',
 'menu.users' => 'Medewerkers',
-// TODO: translate the following.
-// 'menu.groups' => 'Groups',
+'menu.groups' => 'Groepen',
 'menu.export' => 'Exporteren',
 'menu.clients' => 'Klanten',
 'menu.options' => 'Opties',
@@ -89,10 +86,7 @@ $i18n_key_words = array(
 'error.task_exists' => 'Er bestaat al een taak met deze naam.',
 'error.client_exists' => 'Een klant met deze naam bestaat al.',
 'error.invoice_exists' => 'Dit nummer is al eens toegekend aan een factuur.',
-// TODO: translate the following. It seems like rank is misplaced with rights.
-// 'error.role_exists' => 'Role with this rank already exists.',
-// 'error.role_exists' => 'Een rol met deze rechten bestaat al.', // TODO: rank is not rights. Rank is a number.
-                                                                  // Rights (rechten) is a set of permissions ("view_users", etc.).
+'error.role_exists' => 'Een rol met deze rangorde bestaat al.',
 'error.no_invoiceable_items' => 'Er zijn geen factuureerbare onderdelen.',
 'error.no_login' => 'Een medewerker met deze inlognaam bestaat niet.',
 'error.no_teams' => 'Uw database is leeg. Meld je aan als admin en maak een nieuw team.',
@@ -274,8 +268,7 @@ $i18n_key_words = array(
 'title.import' => 'Importeer teamgegevens',
 'title.options' => 'Opties',
 'title.profile' => 'Profiel',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
+'title.group' => 'Groep instelling',
 'title.cf_custom_fields' => 'Eigen velden',
 'title.cf_add_custom_field' => 'Eigen veld toevoegen',
 'title.cf_edit_custom_field' => 'Eigen veld bewerken',
