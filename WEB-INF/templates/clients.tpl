@@ -53,6 +53,21 @@
         <tr><td align="center"><br><form><input type="button" onclick="chLocation('client_add.php');" value="{$i18n.button.add}"></form></td></tr>
       </table>
   {/if}
+{else}
+      <table cellspacing="1" cellpadding="3" border="0" width="100%">
+        <tr>
+          <td class="tableHeader">{$i18n.label.thing_name}</td>
+          <td class="tableHeader">{$i18n.label.address}</td>
+        </tr>
+  {if $active_clients}
+    {foreach $active_clients as $client}
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
+          <td>{$client.name|escape}</td>
+          <td>{$client.address|escape}</td>
+        </tr>
+    {/foreach}
+  {/if}
+      </table>
 {/if}
     </td>
   </tr>

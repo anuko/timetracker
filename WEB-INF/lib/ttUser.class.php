@@ -236,6 +236,33 @@ class ttUser {
     return $result;
   }
 
+  // getAssignedClients - returns an array of clients assigned to own projects.
+  function getAssignedClients()
+  {
+    // Start with projects;
+    $projects = $this->getAssignedProjects();
+    if (!$projects) return false;
+    $assigned_project_ids = array();
+    foreach($projects as $project) {
+      $assigned_project_ids[] = $project['id'];
+    }
+
+    $mdb2 = getConnection();
+
+    // Get active clients for group.
+    $clients = array();
+    $sql = "select id, name, address, projects from tt_clients where group_id = $this->group_id and status = 1";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $client_project_ids = $val['projects'] ? explode(',', $val['projects']) : array();
+        if (array_intersect($assigned_project_ids, $client_project_ids))
+          $clients[] = $val; // Add client if one of user projects is a client project, too.
+      }
+    }
+    return $clients;
+  }
+
   // isDateLocked checks whether a specifc date is locked for modifications.
   function isDateLocked($date)
   {

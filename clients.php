@@ -31,7 +31,7 @@ import('form.Form');
 import('ttTeamHelper');
 
 // Access checks.
-if (!ttAccessAllowed('manage_clients')) {
+if (!(ttAccessAllowed('view_own_clients') || ttAccessAllowed('manage_clients'))) {
   header('Location: access_denied.php');
   exit();
 }
@@ -40,8 +40,14 @@ if (!$user->isPluginEnabled('cl')) {
   exit();
 }
 
-$smarty->assign('active_clients', ttTeamHelper::getActiveClients($user->group_id, true));
-$smarty->assign('inactive_clients', ttTeamHelper::getInactiveClients($user->group_id, true));
+if($user->can('manage_clients')) {
+  $active_clients = ttTeamHelper::getActiveClients($user->group_id, true);
+  $inactive_clients = ttTeamHelper::getInactiveClients($user->group_id, true);
+} else
+  $active_clients = $user->getAssignedClients();
+
+$smarty->assign('active_clients', $active_clients);
+$smarty->assign('inactive_clients', $inactive_clients);
 $smarty->assign('title', $i18n->get('title.clients'));
 $smarty->assign('content_page_name', 'clients.tpl');
 $smarty->display('index.tpl');
