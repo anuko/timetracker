@@ -31,7 +31,7 @@ import('form.Form');
 import('ttTeamHelper');
 
 // Access checks.
-if (!ttAccessAllowed('manage_tasks')) {
+if (!(ttAccessAllowed('view_own_tasks') || ttAccessAllowed('manage_tasks'))) {
   header('Location: access_denied.php');
   exit();
 }
@@ -41,8 +41,14 @@ if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
 }
 // End of access checks.
 
-$smarty->assign('active_tasks', ttTeamHelper::getActiveTasks($user->group_id));
-$smarty->assign('inactive_tasks', ttTeamHelper::getInactiveTasks($user->group_id));
+if($user->can('manage_tasks')) {
+  $active_tasks = ttTeamHelper::getActiveTasks($user->group_id);
+  $inactive_tasks = ttTeamHelper::getInactiveTasks($user->group_id);
+} else
+  $active_tasks = $user->getAssignedTasks();
+
+$smarty->assign('active_tasks', $active_tasks);
+$smarty->assign('inactive_tasks', $inactive_tasks);
 $smarty->assign('title', $i18n->get('title.tasks'));
 $smarty->assign('content_page_name', 'tasks.tpl');
 $smarty->display('index.tpl');

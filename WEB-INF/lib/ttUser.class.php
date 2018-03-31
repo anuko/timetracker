@@ -205,6 +205,37 @@ class ttUser {
     return $result;
   }
 
+  // getAssignedTasks - returns an array of assigned tasks.
+  function getAssignedTasks()
+  {
+    // Start with projects;
+    $projects = $this->getAssignedProjects();
+    if (!$projects) return false;
+
+    // Build an array of task ids.
+    $task_ids = array();
+    foreach($projects as $project) {
+      $one_project_tasks = $project['tasks'] ? explode(',', $project['tasks']) : array();
+      $task_ids = array_unique(array_merge($task_ids, $one_project_tasks));
+    }
+    if (!$task_ids) return false;
+
+    // Get task descriptions.
+    $result = array();
+    $mdb2 = getConnection();
+    $tasks = implode(',', $task_ids); // This is a comma-separated list of task ids.
+
+    $sql = "select id, name, description from tt_tasks".
+      " where group_id = $this->group_id and status = 1 and id in ($tasks) order by name";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
   // isDateLocked checks whether a specifc date is locked for modifications.
   function isDateLocked($date)
   {

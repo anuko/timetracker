@@ -332,8 +332,8 @@ function ttValidCondition($val, $emptyValid = true)
 function ttValidIP($val, $emptyValid = false)
 {
   $val = trim($val);
-  if (strlen($val) == 0 && !$emptyValid)
-    return false;
+  if (strlen($val) == 0 && $emptyValid)
+    return true;
 
   $subnets = explode(',', $val);
   foreach ($subnets as $subnet) {

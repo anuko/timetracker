@@ -82,7 +82,7 @@
     {if ($user->can('view_own_projects') || $user->can('manage_projects')) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
             &middot; <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
     {/if}
-    {if $user->can('manage_tasks') && $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode}
+    {if ($user->can('view_own_tasks') || $user->can('manage_tasks')) && $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode}
             &middot; <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
     {/if}
     {if $user->can('view_users') || $user->can('manage_users')}
