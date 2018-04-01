@@ -135,8 +135,8 @@ $i18n_key_words = array(
 'button.send_by_email' => 'Eメールの送信',
 // TODO: translate the following.
 // 'button.create_group' => 'Create group',
-'button.export' => 'チームのエクスポート',
-'button.import' => 'チームのインポート',
+'button.export' => 'チームのエクスポート', // TODO: replace "team" with "group".
+'button.import' => 'チームのインポート', // TODO: replace "team" with "group".
 // TODO: translate the following.
 // 'button.close' => 'Close',
 // 'button.stop' => 'Stop',

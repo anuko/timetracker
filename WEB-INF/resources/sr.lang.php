@@ -121,8 +121,8 @@ $i18n_key_words = array(
 'button.send' => 'Pošalji',
 'button.send_by_email' => 'Pošalji mejlom',
 'button.create_group' => 'Napravi tim', // TODO: replace "team" with "group".
-'button.export' => 'Izvezi tim',
-'button.import' => 'Uvezi tim',
+'button.export' => 'Izvezi tim', // TODO: replace "team" with "group".
+'button.import' => 'Uvezi tim', // TODO: replace "team" with "group".
 'button.close' => 'Zatvori',
 'button.stop' => 'Stani',
 

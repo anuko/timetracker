@@ -126,8 +126,8 @@ $i18n_key_words = array(
 'button.send_by_email' => '通过邮件发送',
 // TODO: translate the following.
 // 'button.create_group' => 'Create group',
-'button.export' => '导出团队信息',
-'button.import' => '导入团队信息',
+'button.export' => '导出团队信息', // TODO: replace "team" with "group".
+'button.import' => '导入团队信息', // TODO: replace "team" with "group".
 'button.close' => '关闭',
 // TODO: translate the following.
 // 'button.stop' => 'Stop',

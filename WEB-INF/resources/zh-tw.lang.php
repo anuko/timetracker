@@ -131,8 +131,8 @@ $i18n_key_words = array(
 'button.send_by_email' => '通過郵件發送',
 // TODO: translate the following.
 // 'button.create_group' => 'Create group',
-'button.export' => '輸出團隊資訊',
-'button.import' => '輸入團隊資訊',
+'button.export' => '輸出團隊資訊', // TODO: replace "team" with "group".
+'button.import' => '輸入團隊資訊', // TODO: replace "team" with "group".
 // TODO: translate the following.
 // 'button.close' => 'Close',
 // 'button.stop' => 'Stop',

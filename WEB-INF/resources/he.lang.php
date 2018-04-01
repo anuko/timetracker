@@ -138,8 +138,8 @@ $i18n_key_words = array(
 'button.send' => 'שלח',
 'button.send_by_email' => 'שלח בדואר אלקטרוני',
 'button.create_group' => 'צור צוות', // TODO: replace "team" with "group".
-'button.export' => 'ייצא צוות',
-'button.import' => 'ייבא צוות',
+'button.export' => 'ייצא צוות', // TODO: replace "team" with "group".
+'button.import' => 'ייבא צוות', // TODO: replace "team" with "group".
 'button.close' => 'סגור',
 'button.stop' => 'עצור',
 

@@ -133,8 +133,8 @@ $i18n_key_words = array(
 'button.send' => 'Saada',
 'button.send_by_email' => 'Saada e-mailiga',
 'button.create_group' => 'Loo meeskond', // TODO: replace "team" with "group".
-'button.export' => 'Ekspordi meeskond',
-'button.import' => 'Impordi meeskond',
+'button.export' => 'Ekspordi meeskond', // TODO: replace "team" with "group".
+'button.import' => 'Impordi meeskond', // TODO: replace "team" with "group".
 // TODO: translate the following.
 // 'button.close' => 'Close',
 // 'button.stop' => 'Stop',

@@ -121,8 +121,8 @@ $i18n_key_words = array(
 'button.send' => 'Enviar',
 'button.send_by_email' => 'Enviar por e-mail',
 'button.create_group' => 'Criar equipe', // TODO: replace "team" with "group".
-'button.export' => 'Exportar equipe',
-'button.import' => 'Importar equipe',
+'button.export' => 'Exportar equipe', // TODO: replace "team" with "group".
+'button.import' => 'Importar equipe', // TODO: replace "team" with "group".
 'button.close' => 'Fechar',
 'button.stop' => 'Parar',
 

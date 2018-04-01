@@ -136,8 +136,8 @@ $i18n_key_words = array(
 'button.send' => 'Trimite',
 'button.send_by_email' => 'Trimite pe e-mail',
 'button.create_group' => 'Adauga echipa', // TODO: replace "team" with "group".
-'button.export' => 'Exporta echipa',
-'button.import' => 'Importa echipa',
+'button.export' => 'Exporta echipa', // TODO: replace "team" with "group".
+'button.import' => 'Importa echipa', // TODO: replace "team" with "group".
 // TODO: translate the following.
 // 'button.close' => 'Close',
 // 'button.stop' => 'Stop',

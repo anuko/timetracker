@@ -128,8 +128,8 @@ $i18n_key_words = array(
 'button.send' => 'Odoslať',
 'button.send_by_email' => 'Odoslať na e-mail',
 'button.create_group' => 'Vytvoriť tím', // TODO: replace "team" with "group".
-'button.export' => 'Exportovať tím',
-'button.import' => 'Importovať tím',
+'button.export' => 'Exportovať tím', // TODO: replace "team" with "group".
+'button.import' => 'Importovať tím', // TODO: replace "team" with "group".
 'button.close' => 'Zatvoriť',
 // TODO: translate the following.
 // 'button.stop' => 'Stop',
