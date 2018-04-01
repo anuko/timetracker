@@ -99,7 +99,7 @@ $i18n_key_words = array(
 // 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Brak przedmiotów do faktury.',
 'error.no_login' => 'Użytkownik o takiej nazwie nie istnieje.',
-'error.no_teams' => 'Twoja baza danych jest pusta. Zaloguj się jako administrator i stwórz nowy zespół.',
+'error.no_groups' => 'Twoja baza danych jest pusta. Zaloguj się jako administrator i stwórz nowy zespół.', // TODO: replace "team" with "group".
 'error.upload' => 'Błąd podczas wysyłania pliku.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',

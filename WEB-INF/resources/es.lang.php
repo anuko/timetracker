@@ -103,7 +103,7 @@ $i18n_key_words = array(
 // 'error.role_exists' => 'Role with this rank already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 // 'error.no_login' => 'No user with this login.',
-'error.no_teams' => 'Su base de datos esta vacía. Inicie sesión como administrador y cree un nuevo grupo.',
+'error.no_groups' => 'Su base de datos esta vacía. Inicie sesión como administrador y cree un nuevo grupo.',
 'error.upload' => 'Error subiendo el archivo.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',

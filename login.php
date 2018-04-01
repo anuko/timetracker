@@ -76,7 +76,7 @@ if ($request->isPost()) {
 } // isPost
 
 if(!isTrue(MULTITEAM_MODE) && !ttGroupHelper::getTopGroups())
-  $err->add($i18n->get('error.no_teams'));
+  $err->add($i18n->get('error.no_groups'));
 
 // Determine whether to show login hint. It is currently used only for Windows LDAP authentication.
 $show_hint = ('ad' == $GLOBALS['AUTH_MODULE_PARAMS']['type']);

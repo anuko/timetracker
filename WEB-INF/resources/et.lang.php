@@ -107,7 +107,7 @@ $i18n_key_words = array(
 // 'error.role_exists' => 'Role with this rank already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 // 'error.no_login' => 'No user with this login.',
-'error.no_teams' => 'Sinu andmebaas on tühi. Logi adminina sisse ja loo uus meeskond.',
+'error.no_groups' => 'Sinu andmebaas on tühi. Logi adminina sisse ja loo uus meeskond.',  // TODO: replace "team" with "group".
 'error.upload' => 'Viga faili vastuvõtmisel.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',

@@ -101,7 +101,7 @@ $i18n_key_words = array(
 // 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Neexistujú položky, ktoré by bolo možné fakturovať.',
 'error.no_login' => 'Neexistuje používateľ s týmto prihlasovacím menom.',
-'error.no_teams' => 'Vaša databáza je prázdna. Prihláste sa ako admin a vytvorte nový tím.',
+'error.no_groups' => 'Vaša databáza je prázdna. Prihláste sa ako admin a vytvorte nový tím.', // TODO: replace "team" with "group".
 'error.upload' => 'Prenos súboru bol neúspešný.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',

@@ -103,7 +103,7 @@ $i18n_key_words = array(
 // 'error.role_exists' => 'Role with this rank already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 // 'error.no_login' => 'No user with this login.',
-// 'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+// 'error.no_groups' => 'Your database is empty. Login as admin and create a new group.',
 'error.upload' => 'File feltöltési hiba.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',

@@ -106,7 +106,7 @@ $i18n_key_words = array(
 // 'error.role_exists' => 'Role with this rank already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 'error.no_login' => 'Det er ingen bruker med dette brukernavnet.',
-'error.no_teams' => 'Databasen din er tom. Logg inn som admin og opprett et nytt team.',
+'error.no_groups' => 'Databasen din er tom. Logg inn som admin og opprett et nytt team.', // TODO: replace "team" with "group".
 'error.upload' => 'Feil med lasting av fil.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',

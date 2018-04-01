@@ -106,7 +106,7 @@ $i18n_key_words = array(
 // 'error.role_exists' => 'Role with this rank already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 'error.no_login' => 'このログインと関連されたユーザーはいません。',
-'error.no_teams' => 'あなたのデータベースは空いています。管理者にログインして新規チームを作成してください。',
+'error.no_groups' => 'あなたのデータベースは空いています。管理者にログインして新規チームを作成してください。', // TODO: replace "team" with "group".
 'error.upload' => 'ファイルのアップロードのエラー。',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',

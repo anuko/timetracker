@@ -96,7 +96,7 @@ $i18n_key_words = array(
 // 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Nema stavke za naplatu.',
 'error.no_login' => 'Nema korisnika pod ovom prijavom',
-'error.no_teams' => 'Vaša baza podataka je prazna. Prijavite se kao administrator i napravite novi tim.',
+'error.no_groups' => 'Vaša baza podataka je prazna. Prijavite se kao administrator i napravite novi tim.', // TODO: replace "team" with "group".
 'error.upload' => 'Greška pri otpremanju podatka.',
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
