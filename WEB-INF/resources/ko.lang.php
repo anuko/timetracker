@@ -133,7 +133,7 @@ $i18n_key_words = array(
 'button.send' => '송신',
 'button.send_by_email' => '이메일로 송신',
 // TODO: translate the following.
-// 'button.create_team' => 'Create team',
+// 'button.create_group' => 'Create group',
 'button.export' => '팀 익스포트',
 'button.import' => '팀 임포트',
 // TODO: translate the following.

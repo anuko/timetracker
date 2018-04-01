@@ -117,9 +117,9 @@ $i18n_key_words = array(
 'button.reset_password' => 'Återställ lösenord',
 'button.send' => 'Skicka',
 'button.send_by_email' => 'Skicka som e-post',
-'button.create_team' => 'Skapa ny arbetsgrupp',
-'button.export' => 'Exportera arbetsgrupp',
-'button.import' => 'Importera arbetsgrupp',
+'button.create_group' => 'Skapa grupp',
+'button.export' => 'Exportera grupp',
+'button.import' => 'Importera grupp',
 'button.close' => 'Stäng',
 'button.stop' => 'Avsluta',
 

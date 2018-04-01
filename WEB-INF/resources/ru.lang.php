@@ -112,9 +112,9 @@ $i18n_key_words = array(
 'button.reset_password' => 'Сбросить пароль',
 'button.send' => 'Отправить',
 'button.send_by_email' => 'Отправить по e-mail',
-'button.create_team' => 'Создать команду',
-'button.export' => 'Экспортировать команду',
-'button.import' => 'Импортировать команду',
+'button.create_group' => 'Создать группу',
+'button.export' => 'Экспортировать группу',
+'button.import' => 'Импортировать группу',
 'button.close' => 'Закрыть',
 'button.stop' => 'Завершить',
 

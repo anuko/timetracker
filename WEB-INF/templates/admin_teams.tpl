@@ -34,7 +34,7 @@
     <td align="center">
       <br>
       <form>
-        <input type="button" onclick="chLocation('admin_team_add.php');" value="{$i18n.button.create_team}">&nbsp;{$i18n.label.or}&nbsp;
+        <input type="button" onclick="chLocation('admin_team_add.php');" value="{$i18n.button.create_group}">&nbsp;{$i18n.label.or}&nbsp;
         <input type="button" onclick="chLocation('import.php');" value="{$i18n.button.import}">
       </form>
     </td>

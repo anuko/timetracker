@@ -129,7 +129,7 @@ $i18n_key_words = array(
 // 'button.reset_password' => 'Reset password',
 'button.send' => 'Enviar',
 'button.send_by_email' => 'Enviar por correo',
-'button.create_team' => 'Crear grupo',
+'button.create_group' => 'Crear grupo',
 'button.export' => 'Exportar grupo',
 'button.import' => 'Importar grupo',
 // TODO: translate the following.

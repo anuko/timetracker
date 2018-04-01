@@ -129,7 +129,7 @@ $i18n_key_words = array(
 // 'button.reset_password' => 'Reset password',
 'button.send' => 'Küld',
 'button.send_by_email' => 'Küldés e-mail-ben',
-'button.create_team' => 'Csoport létrehozása',
+'button.create_group' => 'Csoport létrehozása',
 'button.export' => 'Csoport exportálása',
 'button.import' => 'Csoport importálása',
 // TODO: translate the following.

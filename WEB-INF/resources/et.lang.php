@@ -132,7 +132,7 @@ $i18n_key_words = array(
 'button.reset_password' => 'Tühjenda salasõna',
 'button.send' => 'Saada',
 'button.send_by_email' => 'Saada e-mailiga',
-'button.create_team' => 'Loo meeskond',
+'button.create_group' => 'Loo meeskond', // TODO: replace "team" with "group".
 'button.export' => 'Ekspordi meeskond',
 'button.import' => 'Impordi meeskond',
 // TODO: translate the following.

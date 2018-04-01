@@ -135,7 +135,7 @@ $i18n_key_words = array(
 // 'button.reset_password' => 'Reset password',
 'button.send' => 'Trimite',
 'button.send_by_email' => 'Trimite pe e-mail',
-'button.create_team' => 'Adauga echipa',
+'button.create_group' => 'Adauga echipa', // TODO: replace "team" with "group".
 'button.export' => 'Exporta echipa',
 'button.import' => 'Importa echipa',
 // TODO: translate the following.

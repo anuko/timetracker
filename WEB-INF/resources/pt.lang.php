@@ -128,7 +128,7 @@ $i18n_key_words = array(
 'button.send' => 'Enviar',
 'button.send_by_email' => 'Enviar por e-mail',
 // TODO: translate the following.
-// 'button.create_team' => 'Create team',
+// 'button.create_group' => 'Create group',
 // 'button.export' => 'Export team',
 // 'button.import' => 'Import team',
 // 'button.close' => 'Close',

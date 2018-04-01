@@ -124,7 +124,7 @@ $i18n_key_words = array(
 // 'button.reset_password' => 'Reset password',
 'button.send' => 'Pošlji',
 'button.send_by_email' => 'Pošlji preko elektronske pošte',
-'button.create_team' => 'Ustvari tim',
+'button.create_group' => 'Ustvari tim', // TODO: replace "team" with "group".
 'button.export' => 'Izvozi tim',
 'button.import' => 'Uvozi tim',
 // TODO: translate the following.
