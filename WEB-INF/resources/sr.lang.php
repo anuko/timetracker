@@ -231,7 +231,7 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => 'Prijava',
-'title.teams' => 'Timovi',
+'title.groups' => 'Timovi', // TODO: change "teams" to "groups".
 'title.create_team' => 'Napravi tim',
 'title.edit_team' => 'Izmeni tim',
 'title.delete_team' => 'Obriši tim',

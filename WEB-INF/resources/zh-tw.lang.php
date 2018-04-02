@@ -250,7 +250,7 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => '登錄',
-'title.teams' => '團隊',
+'title.groups' => '團隊', // TODO: change "teams" to "groups".
 // TODO: translate the following.
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',

@@ -265,7 +265,7 @@ $i18n_key_words = array(
 // Compare with English file to see how it is done there and do Romanian titles similarly.
 // Specifically: compare project and client titles and see how they differ.
 'title.login' => 'Giriş',
-'title.teams' => 'Ekipler',
+'title.groups' => 'Ekipler', // TODO: change "teams" to "groups".
 // TODO: translate the following.
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',

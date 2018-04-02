@@ -225,7 +225,7 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => 'Connexion',
-'title.teams' => 'Équipes',
+'title.groups' => 'Équipes', // TODO: change "teams" to "groups".
 'title.create_team' => 'Création d\\\'une nouvelle équipe',
 'title.edit_team' => 'Modification d\\\'une équipe',
 'title.delete_team' => 'Suppression d\\\'une équipe',

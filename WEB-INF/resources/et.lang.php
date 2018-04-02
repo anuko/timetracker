@@ -256,7 +256,7 @@ $i18n_key_words = array(
 // Compare with English file to see how it is done there and do Estonian titles similarly.
 // Specifically: lisamine vs lisa, etc.
 'title.login' => 'Login',
-'title.teams' => 'Meeskonnad',
+'title.groups' => 'Meeskonnad', // TODO: change "teams" to "groups".
 // TODO: translate the following.
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',

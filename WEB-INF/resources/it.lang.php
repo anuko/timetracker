@@ -224,7 +224,7 @@ $i18n_key_words = array(
 // Compare with English file to see how it is done there and do Italian titles similarly.
 // Specifically: Eliminazione vs Elimina - we probably want nouns in titles.
 'title.login' => 'Login',
-'title.teams' => 'Gruppi',
+'title.groups' => 'Gruppi',
 'title.create_team' => 'Creazione gruppo',
 'title.edit_team' => 'Modifica gruppo',
 'title.delete_team' => 'Elimina gruppo',

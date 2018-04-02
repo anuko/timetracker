@@ -223,7 +223,7 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => 'Anmelden',
-'title.teams' => 'Teams',
+'title.groups' => 'Teams', // TODO: change "teams" to "groups".
 'title.create_team' => 'Arbeitsgruppe anlegen',
 'title.edit_team' => 'Team bearbeiten',
 'title.delete_team' => 'Team löschen',

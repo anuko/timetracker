@@ -213,7 +213,7 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => 'Вход в систему',
-'title.teams' => 'Команды',
+'title.groups' => 'Группы',
 'title.create_team' => 'Создание команды',
 'title.edit_team' => 'Редактирование команды',
 'title.delete_team' => 'Удаление команды',

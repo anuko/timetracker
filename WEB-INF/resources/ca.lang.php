@@ -250,7 +250,7 @@ $i18n_key_words = array(
 // Compare with English file to see how it is done there and do Catalan titles similarly.
 // Specifically: Agregant vs Agregar, etc.
 'title.login' => 'Sessió iniciada',
-'title.teams' => 'Grups',
+'title.groups' => 'Grups',
 // TODO: translate the following.
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',

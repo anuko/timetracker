@@ -239,7 +239,7 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => 'Prihlásenie',
-'title.teams' => 'Tímy',
+'title.groups' => 'Tímy', // TODO: change "teams" to "groups".
 'title.create_team' => 'Vytváranie tímu',
 // TODO: translate the following.
 // 'title.edit_team' => 'Editing Team',

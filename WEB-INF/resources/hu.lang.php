@@ -249,7 +249,7 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => 'Bejelentkezés',
-'title.teams' => 'Csoportok',
+'title.groups' => 'Csoportok',
 // TODO: translate the following.
 // 'title.create_team' => 'Creating Team',
 // 'title.edit_team' => 'Editing Team',

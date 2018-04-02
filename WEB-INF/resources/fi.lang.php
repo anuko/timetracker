@@ -231,7 +231,7 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => 'Kirjautuminen',
-'title.teams' => 'Tiimit',
+'title.groupd' => 'Tiimit', // TODO: change "teams" to "groups".
 'title.create_team' => 'Tiimin luonti',
 'title.edit_team' => 'Tiimin muokkaus',
 'title.delete_team' => 'Tiimin poisto',
