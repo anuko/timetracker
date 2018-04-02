@@ -277,8 +277,8 @@ $i18n_key_words = array(
 'title.edit_notification' => 'Editando notificação',
 'title.delete_notification' => 'Apagando notificação',
 // 'title.monthly_quotas' => 'Monthly Quotas',
-'title.export' => 'Exportando dados de equipe',
-'title.import' => 'Importando dados de equipe',
+'title.export' => 'Exportando dados de equipe', // TODO: replace "team" with "group".
+'title.import' => 'Importando dados de equipe', // TODO: replace "team" with "group".
 'title.options' => 'Opções',
 'title.profile' => 'Perfil',
 // TODO: translate the following.

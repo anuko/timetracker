@@ -280,8 +280,8 @@ $i18n_key_words = array(
 'title.edit_notification' => 'Edytowanie powiadomienia',
 'title.delete_notification' => 'Usuwanie powiadomienia',
 // 'title.monthly_quotas' => 'Monthly Quotas',
-'title.export' => 'Eksport danych zespołu',
-'title.import' => 'Import danych zespołu',
+'title.export' => 'Eksport danych zespołu', // TODO: replace "team" with "group".
+'title.import' => 'Import danych zespołu', // TODO: replace "team" with "group".
 'title.options' => 'Opcje',
 'title.profile' => 'Profil',
 // TODO: translate the following.

@@ -280,8 +280,8 @@ $i18n_key_words = array(
 'title.delete_notification' => 'Ilmoituksen poisto',
 // TODO: translate the following.
 // 'title.monthly_quotas' => 'Monthly Quotas',
-'title.export' => 'Tiimitietojen vienti',
-'title.import' => 'Tiimitietojen tunti',
+'title.export' => 'Tiimitietojen vienti', // TODO: replace "team" with "group".
+'title.import' => 'Tiimitietojen tunti', // TODO: replace "team" with "group".
 'title.options' => 'Optiot',
 'title.profile' => 'Profiili',
 // TODO: translate the following.

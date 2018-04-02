@@ -289,8 +289,8 @@ $i18n_key_words = array(
 // 'title.edit_notification' => 'Editing Notification',
 // 'title.delete_notification' => 'Deleting Notification',
 // 'title.monthly_quotas' => 'Monthly Quotas',
-'title.export' => 'پشتیانی گرفتن از اطلاعات تیم',
-'title.import' => 'وارد کردن اطلاعات تیم',
+'title.export' => 'پشتیانی گرفتن از اطلاعات تیم', // TODO: replace "team" with "group".
+'title.import' => 'وارد کردن اطلاعات تیم', // TODO: replace "team" with "group".
 'title.options' => 'گزینه ها',
 'title.profile' => 'پروفایل',
 // TODO: translate the following.

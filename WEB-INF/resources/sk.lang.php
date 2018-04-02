@@ -290,8 +290,8 @@ $i18n_key_words = array(
 // 'title.edit_notification' => 'Editing Notification',
 // 'title.delete_notification' => 'Deleting Notification',
 // 'title.monthly_quotas' => 'Monthly Quotas',
-'title.export' => 'Exportovanie údajov o tíme',
-'title.import' => 'Importovanie údajov o tíme',
+'title.export' => 'Exportovanie údajov o tíme', // TODO: replace "team" with "group".
+'title.import' => 'Importovanie údajov o tíme', // TODO: replace "team" with "group".
 'title.options' => 'Nastavenia',
 'title.profile' => 'Profil',
 // TODO: translate the following.

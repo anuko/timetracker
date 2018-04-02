@@ -277,8 +277,8 @@ $i18n_key_words = array(
 'title.edit_notification' => 'Redigera avisering',
 'title.delete_notification' => 'Ta bort avisering',
 'title.monthly_quotas' => 'Månadskvoter',
-'title.export' => 'Exportera arbetsgrupp',
-'title.import' => 'Importera arbetsgrupp',
+'title.export' => 'Exportera grupp',
+'title.import' => 'Importera grupp',
 'title.options' => 'Alternativ',
 'title.profile' => 'Profil',
 // TODO: translate the following.

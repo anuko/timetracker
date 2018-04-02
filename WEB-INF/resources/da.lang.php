@@ -279,8 +279,8 @@ $i18n_key_words = array(
 'title.edit_notification' => 'Redigér Meddelelse',
 'title.delete_notification' => 'Slet Meddelelse',
 'title.monthly_quotas' => 'Månedlig Kvota',
-'title.export' => 'Eksporter Team Data',
-'title.import' => 'Importer Team Data',
+'title.export' => 'Eksporter Team Data', // TODO: replace "team" with "group".
+'title.import' => 'Importer Team Data', // TODO: replace "team" with "group".
 'title.options' => 'Indstillinger',
 'title.profile' => 'Profil',
 // TODO: translate the following.

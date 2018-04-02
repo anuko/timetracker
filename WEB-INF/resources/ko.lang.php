@@ -314,8 +314,8 @@ $i18n_key_words = array(
 // 'title.edit_notification' => 'Editing Notification',
 // 'title.delete_notification' => 'Deleting Notification',
 // 'title.monthly_quotas' => 'Monthly Quotas',
-// 'title.export' => 'Exporting Team Data',
-// 'title.import' => 'Importing Team Data',
+// 'title.export' => 'Exporting Group Data',
+// 'title.import' => 'Importing Group Data',
 'title.options' => '옵션',
 'title.profile' => '프로필',
 // TODO: translate the following.

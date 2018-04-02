@@ -300,8 +300,8 @@ $i18n_key_words = array(
 // 'title.edit_notification' => 'Editing Notification',
 // 'title.delete_notification' => 'Deleting Notification',
 // 'title.monthly_quotas' => 'Monthly Quotas',
-'title.export' => 'ייצוא נתוני צוות',
-'title.import' => 'ייבוא נתוני צוות',
+'title.export' => 'ייצוא נתוני צוות', // TODO: replace "team" with "group".
+'title.import' => 'ייבוא נתוני צוות', // TODO: replace "team" with "group".
 'title.options' => 'אפשרויות',
 'title.profile' => 'פרופיל',
 // TODO: translate the following.

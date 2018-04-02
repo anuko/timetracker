@@ -279,8 +279,8 @@ $i18n_key_words = array(
 'title.edit_notification' => 'Izmena napomene',
 'title.delete_notification' => 'Brisanje napomene',
 // 'title.monthly_quotas' => 'Monthly Quotas',
-'title.export' => 'Izvoz podataka tim-a',
-'title.import' => 'Uvoz podataka tim-a',
+'title.export' => 'Izvoz podataka tim-a', // TODO: replace "team" with "group".
+'title.import' => 'Uvoz podataka tim-a', // TODO: replace "team" with "group".
 'title.options' => 'Opcije',
 'title.profile' => 'Profil',
 // TODO: translate the following.
