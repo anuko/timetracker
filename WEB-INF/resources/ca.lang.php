@@ -252,9 +252,9 @@ $i18n_key_words = array(
 'title.login' => 'Sessió iniciada',
 'title.groups' => 'Grups',
 // TODO: translate the following.
-// 'title.create_team' => 'Creating Team',
-// 'title.edit_team' => 'Editing Team',
-'title.delete_team' => 'Eliminar grup',
+// 'title.create_group' => 'Creating Group',
+// 'title.edit_group' => 'Editing Group',
+'title.delete_group' => 'Eliminar grup',
 'title.reset_password' => 'Restablir paraula de pas',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',

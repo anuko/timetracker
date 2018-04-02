@@ -214,9 +214,9 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'Aanmelden',
 'title.groups' => 'Teams', // TODO: change "teams" to "groups".
-'title.create_team' => 'Team maken',
-'title.edit_team' => 'Team bewerken',
-'title.delete_team' => 'Team aan het verwijderen',
+'title.create_group' => 'Team maken', // TODO: change "team" to "group".
+'title.edit_group' => 'Team bewerken', // TODO: change "team" to "group".
+'title.delete_group' => 'Team aan het verwijderen', // TODO: change "team" to "group".
 'title.reset_password' => 'Wachtwoord herstellen',
 'title.change_password' => 'Wachtwoord aan het veranderen',
 'title.time' => 'Tijdsregistraties',

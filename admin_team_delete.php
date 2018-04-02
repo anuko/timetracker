@@ -65,6 +65,6 @@ if ($request->isPost()) {
 
 $smarty->assign('team_to_delete', $team_name);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->get('title.delete_team'));
+$smarty->assign('title', $i18n->get('title.delete_group'));
 $smarty->assign('content_page_name', 'admin_team_delete.tpl');
 $smarty->display('index.tpl');

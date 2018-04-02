@@ -230,9 +230,9 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'Login',
 'title.groups' => 'Equipes', // TODO: change "teams" to "groups".
-'title.create_team' => 'Criando equipe',
-'title.edit_team' => 'Editando equipe',
-'title.delete_team' => 'Apagando equipe',
+'title.create_group' => 'Criando equipe', // TODO: change "team" to "group".
+'title.edit_group' => 'Editando equipe', // TODO: change "team" to "group".
+'title.delete_group' => 'Apagando equipe', // TODO: change "team" to "group".
 'title.reset_password' => 'Resetando a senha',
 'title.change_password' => 'Alterando a senha',
 'title.time' => 'Tempo',

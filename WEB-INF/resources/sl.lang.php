@@ -238,9 +238,9 @@ $i18n_key_words = array(
 'title.login' => 'Prijava',
 'title.groups' => 'Timi', // TODO: change "teams" to "groups".
 // TODO: translate the following.
-// 'title.create_team' => 'Creating Team',
-// 'title.edit_team' => 'Editing Team',
-// 'title.delete_team' => 'Deleting Team',
+// 'title.create_group' => 'Creating Group',
+// 'title.edit_group' => 'Editing Group',
+// 'title.delete_group' => 'Deleting Group',
 'title.reset_password' => 'Razveljavi geslo',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',

@@ -232,9 +232,9 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'Kirjautuminen',
 'title.groupd' => 'Tiimit', // TODO: change "teams" to "groups".
-'title.create_team' => 'Tiimin luonti',
-'title.edit_team' => 'Tiimin muokkaus',
-'title.delete_team' => 'Tiimin poisto',
+'title.create_group' => 'Tiimin luonti', // TODO: change "team" to "group".
+'title.edit_group' => 'Tiimin muokkaus', // TODO: change "team" to "group".
+'title.delete_group' => 'Tiimin poisto', // TODO: change "team" to "group".
 'title.reset_password' => 'Salasanan nollaus',
 'title.change_password' => 'Salasanan vaihto',
 'title.time' => 'Tuntien kirjaus',

@@ -119,9 +119,9 @@ $i18n_key_words = array(
 'button.reset_password' => 'Passwort zurücksetzen',
 'button.send' => 'Senden',
 'button.send_by_email' => 'Als E-Mail senden',
-'button.create_group' => 'Team erstellen', // TODO: replace "team" with "group".
-'button.export' => 'Team exportieren', // TODO: replace "team" with "group".
-'button.import' => 'Team importieren', // TODO: replace "team" with "group".
+'button.create_group' => 'Gruppe erstellen',
+'button.export' => 'Gruppe exportieren',
+'button.import' => 'Gruppe importieren',
 'button.close' => 'Schließen',
 'button.stop' => 'Stop',
 
@@ -223,10 +223,10 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => 'Anmelden',
-'title.groups' => 'Teams', // TODO: change "teams" to "groups".
-'title.create_team' => 'Arbeitsgruppe anlegen',
-'title.edit_team' => 'Team bearbeiten',
-'title.delete_team' => 'Team löschen',
+'title.groups' => 'Gruppen',
+'title.create_group' => 'Gruppe anlegen',
+'title.edit_group' => 'Gruppe bearbeiten',
+'title.delete_group' => 'Gruppe löschen',
 'title.reset_password' => 'Passworterinnerung',
 'title.change_password' => 'Passwortänderung',
 'title.time' => 'Zeiten',

@@ -226,9 +226,9 @@ $i18n_key_words = array(
 // Rubriker för formulär
 'title.login' => 'Logga in',
 'title.groups' => 'Grupper',
-'title.create_team' => 'Skapa arbetsgrupp',
-'title.edit_team' => 'Redigera arbetsgrupp',
-'title.delete_team' => 'Ta bort arbetsgrupp',
+'title.create_group' => 'Skapa grupp',
+'title.edit_group' => 'Redigera grupp',
+'title.delete_group' => 'Ta bort grupp',
 'title.reset_password' => 'Återställ lösenord',
 'title.change_password' => 'Ändra lösenord',
 'title.time' => 'Tider',

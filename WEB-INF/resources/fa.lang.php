@@ -240,10 +240,10 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'ورود',
 'title.groups' => 'تیم ها', // TODO: change "teams" to "groups".
-'title.create_team' => 'ایجاد تیم',
+'title.create_group' => 'ایجاد تیم', // TODO: change "team" to "group".
 // TODO: translate the following.
-// 'title.edit_team' => 'Editing Team',
-'title.delete_team' => 'حذف تیم',
+// 'title.edit_group' => 'Editing Group',
+'title.delete_group' => 'حذف تیم', // TODO: change "team" to "group".
 'title.reset_password' => 'بازیابی رمزعبور',
 'title.change_password' => 'تغییر رمزعبور',
 'title.time' => 'زمان',

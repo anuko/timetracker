@@ -254,9 +254,9 @@ $i18n_key_words = array(
 'title.login' => 'Innlogging',
 // TODO: translate the following.
 // 'title.groups' => 'Groups',
-// 'title.create_team' => 'Creating Team',
-// 'title.edit_team' => 'Editing Team',
-'title.delete_team' => 'Slett team',
+// 'title.create_group' => 'Creating Group',
+// 'title.edit_group' => 'Editing Group',
+'title.delete_group' => 'Slett team', // TODO: change "team" to "group".
 // TODO: translate the following.
 // 'title.reset_password' => 'Resetting Password',
 // 'title.change_password' => 'Changing Password',

@@ -225,9 +225,9 @@ $i18n_key_words = array(
 // Specifically: Eliminazione vs Elimina - we probably want nouns in titles.
 'title.login' => 'Login',
 'title.groups' => 'Gruppi',
-'title.create_team' => 'Creazione gruppo',
-'title.edit_team' => 'Modifica gruppo',
-'title.delete_team' => 'Elimina gruppo',
+'title.create_group' => 'Creazione gruppo',
+'title.edit_group' => 'Modifica gruppo',
+'title.delete_group' => 'Elimina gruppo',
 'title.reset_password' => 'Reset password',
 'title.change_password' => 'Cambio password',
 'title.time' => 'Tempo',

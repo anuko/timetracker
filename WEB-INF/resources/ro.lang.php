@@ -258,9 +258,9 @@ $i18n_key_words = array(
 'title.login' => 'Autentificare',
 'title.groups' => 'Echipe', // TODO: change "teams" to "groups".
 // TODO: translate the following.
-// 'title.create_team' => 'Creating Team',
-// 'title.edit_team' => 'Editing Team',
-'title.delete_team' => 'Șterge echipa',
+// 'title.create_group' => 'Creating Team',
+// 'title.edit_group' => 'Editing Team',
+'title.delete_group' => 'Șterge echipa', // TODO: change "team" to "group".
 'title.reset_password' => 'Reseteaza parola',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',

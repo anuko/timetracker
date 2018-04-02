@@ -251,9 +251,9 @@ $i18n_key_words = array(
 'title.login' => 'Bejelentkezés',
 'title.groups' => 'Csoportok',
 // TODO: translate the following.
-// 'title.create_team' => 'Creating Team',
-// 'title.edit_team' => 'Editing Team',
-'title.delete_team' => 'Csoport törlése',
+// 'title.create_group' => 'Creating Group',
+// 'title.edit_group' => 'Editing Group',
+'title.delete_group' => 'Csoport törlése',
 // TODO: translate the following.
 // 'title.reset_password' => 'Resetting Password',
 // 'title.change_password' => 'Changing Password',

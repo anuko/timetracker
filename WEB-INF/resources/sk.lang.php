@@ -240,10 +240,10 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'Prihlásenie',
 'title.groups' => 'Tímy', // TODO: change "teams" to "groups".
-'title.create_team' => 'Vytváranie tímu',
+'title.create_group' => 'Vytváranie tímu', // TODO: change "team" to "group".
 // TODO: translate the following.
-// 'title.edit_team' => 'Editing Team',
-'title.delete_team' => 'Vymazávanie tímu',
+// 'title.edit_group' => 'Editing Group',
+'title.delete_group' => 'Vymazávanie tímu', // TODO: change "team" to "group".
 'title.reset_password' => 'Obnovovanie hesla',
 'title.change_password' => 'Menenie hesla',
 'title.time' => 'Časový záznam',

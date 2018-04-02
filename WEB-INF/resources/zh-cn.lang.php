@@ -245,9 +245,9 @@ $i18n_key_words = array(
 'title.login' => '登录',
 'title.groups' => '团队', // TODO: change "teams" to "groups".
 // TODO: translate the following.
-// 'title.create_team' => 'Creating Team',
-// 'title.edit_team' => 'Editing Team',
-'title.delete_team' => '删除团队',
+// 'title.create_group' => 'Creating Group',
+// 'title.edit_group' => 'Editing Group',
+'title.delete_group' => '删除团队', // TODO: change "team" to "group".
 'title.reset_password' => '重设密码',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',

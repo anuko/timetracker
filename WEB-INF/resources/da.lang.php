@@ -228,9 +228,9 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'Login',
 'title.groups' => 'Teams', // TODO: change "teams" to "groups".
-'title.create_team' => 'Opret Team',
-'title.edit_team' => 'Redigér Team',
-'title.delete_team' => 'Slet Team',
+'title.create_gtoup' => 'Opret Team', // TODO: change "team" to "group".
+'title.edit_group' => 'Redigér Team', // TODO: change "team" to "group".
+'title.delete_group' => 'Slet Team', // TODO: change "team" to "group".
 'title.reset_password' => 'Nulstilling af Adgangskode',
 'title.change_password' => 'Skift af Adgangskode',
 'title.time' => 'Tid',

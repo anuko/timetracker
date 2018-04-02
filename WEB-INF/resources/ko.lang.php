@@ -256,9 +256,9 @@ $i18n_key_words = array(
 'title.login' => '로그인',
 'title.groups' => '팀', // TODO: change "teams" to "groups".
 // TODO: translate the following.
-// 'title.create_team' => 'Creating Team',
-// 'title.edit_team' => 'Editing Team',
-'title.delete_team' => '팀 삭제',
+// 'title.create_group' => 'Creating Group',
+// 'title.edit_group' => 'Editing Group',
+'title.delete_group' => '팀 삭제',  // TODO: change "team" to "group".
 'title.reset_password' => '암호 재설정',
 // TODO: translate the following.
 // 'title.change_password' => 'Changing Password',

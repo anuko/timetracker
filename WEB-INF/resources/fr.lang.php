@@ -226,9 +226,9 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'Connexion',
 'title.groups' => 'Équipes', // TODO: change "teams" to "groups".
-'title.create_team' => 'Création d\\\'une nouvelle équipe',
-'title.edit_team' => 'Modification d\\\'une équipe',
-'title.delete_team' => 'Suppression d\\\'une équipe',
+'title.create_group' => 'Création d\\\'une nouvelle équipe', // TODO: change "team" to "group".
+'title.edit_group' => 'Modification d\\\'une équipe', // TODO: change "team" to "group".
+'title.delete_group' => 'Suppression d\\\'une équipe', // TODO: change "team" to "group".
 'title.reset_password' => 'Réinitialisation du mot de passe',
 'title.change_password' => 'Modification du mot de passe',
 'title.time' => 'Temps',

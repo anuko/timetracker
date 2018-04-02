@@ -250,10 +250,10 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'כניסה',
 'title.groups' => 'צוותים', // TODO: change "teams" to "groups".
-'title.create_team' => 'יצירת צוות',
+'title.create_group' => 'יצירת צוות', // TODO: change "team" to "group".
 // TODO: translate the following.
-// 'title.edit_team' => 'Editing Team',
-'title.delete_team' => 'מחיקת צוות',
+// 'title.edit_group' => 'Editing Group',
+'title.delete_group' => 'מחיקת צוות', // TODO: change "team" to "group".
 'title.reset_password' => 'איפוס סיסמה',
 'title.change_password' => 'שינוי סיסמה',
 'title.time' => 'זמן',

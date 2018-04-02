@@ -216,9 +216,9 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'Σύνδεση',
 'title.groups' => 'Ομάδες',
-'title.create_team' => 'Δημιουργία ομάδας',
-'title.edit_team' => 'Επεξεργασία ομάδας',
-'title.delete_team' => 'Διαγραφή ομάδας',
+'title.create_group' => 'Δημιουργία ομάδας',
+'title.edit_group' => 'Επεξεργασία ομάδας',
+'title.delete_group' => 'Διαγραφή ομάδας',
 'title.reset_password' => 'Επαναφορά κωδικού πρόσβασης',
 'title.change_password' => 'Αλλαγή κωδικού πρόσβασης',
 'title.time' => 'Χρόνος',

@@ -232,9 +232,9 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'Prijava',
 'title.groups' => 'Timovi', // TODO: change "teams" to "groups".
-'title.create_team' => 'Napravi tim',
-'title.edit_team' => 'Izmeni tim',
-'title.delete_team' => 'Obriši tim',
+'title.create_group' => 'Napravi tim', // TODO: change "team" to "group".
+'title.edit_group' => 'Izmeni tim', // TODO: change "team" to "group".
+'title.delete_group' => 'Obriši tim', // TODO: change "team" to "group".
 'title.reset_password' => 'Resetuj Lozinku',
 'title.change_password' => 'Promeni Lozinku',
 'title.time' => 'Vreme',
