@@ -213,7 +213,7 @@ if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_team, true)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
   if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));
-  if ($user->can('manage_advanced_settings')) {
+  if ($advanced_settings) {
     if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
     if (!ttValidIP($cl_allow_ip, true)) $err->add($i18n->get('error.field'), $i18n->get('form.profile.allow_ip'));
   }
