@@ -32,12 +32,13 @@ import('ttUserHelper');
 import('ttRoleHelper');
 
 // Access checks.
-if (!ttAccessAllowed('manage_basic_settings')) {
+if (!(ttAccessAllowed('manage_basic_settings') || ttAccessAllowed('manage_advanced_settings'))) {
   header('Location: access_denied.php');
   exit();
 }
 // End of access checks.
 
+$advanced_settings = $user->can('manage_advanced_settings');
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
 
 if ($request->isPost()) {
@@ -111,7 +112,7 @@ if ($request->isPost()) {
 }
 
 $form = new Form('groupForm');
-$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team));
+$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team,'enable'=>$advanced_settings));
 $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
 
 // Prepare an array of available languages.
@@ -187,8 +188,8 @@ $form->addInput(array('type'=>'checkbox','name'=>'future_entries','value'=>$cl_f
 // Uncompleted indicators checkbox.
 $form->addInput(array('type'=>'checkbox','name'=>'uncompleted_indicators','value'=>$cl_uncompleted_indicators));
 
-// Add bcc email control, for manager only.
-if ($user->can('manage_advanced_settings')) {
+// Add bcc email control.
+if ($advanced_settings) {
   $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'bcc_email','value'=>$cl_bcc_email));
   $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'allow_ip','value'=>$cl_allow_ip));
 }
