@@ -424,8 +424,9 @@ $i18n_key_words = array(
 'form.import.file' => 'Kies bestand',
 'form.import.success' => 'Importeren gelukt.',
 
-// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' => 'Maak een nieuw team door een team  manager account aan te maken.<br>U kunt ook teamgegevens importeren uit een xml file van een andere Anuko Time Tracker server (login namen moeten uniek zijn).',
+// Groups form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// TODO: replace "team" with "group" in the string below (3 places).
+'form.groups.hint' => 'Maak een nieuw team door een team  manager account aan te maken.<br>U kunt ook teamgegevens importeren uit een xml file van een andere Anuko Time Tracker server (login namen moeten uniek zijn).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 'form.profile.swap_roles' => 'Rollen verruilen',

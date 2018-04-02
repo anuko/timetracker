@@ -478,8 +478,9 @@ $i18n_key_words = array(
 'form.import.file' => '选择档',
 'form.import.success' => '成功完成导入。',
 
-// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' => '通过创建新的团队经理账号来创建新团队。<br>您也可以从其它的Anuko时间追踪器服务器的xml文件导入团队数据(登录信息不能发生冲突)。',
+// Groups form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// TODO: replace "team" with "group" in the string below.
+'form.groups.hint' => '通过创建新的团队经理账号来创建新团队。<br>您也可以从其它的Anuko时间追踪器服务器的xml文件导入团队数据(登录信息不能发生冲突)。',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 // TODO: translate the following.

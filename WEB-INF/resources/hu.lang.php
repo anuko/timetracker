@@ -491,9 +491,9 @@ $i18n_key_words = array(
 'form.import.file' => 'Válassz file',
 'form.import.success' => 'Az importálás sikeresen véget ért.',
 
-// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-// TODO: fix form.teams.hint by translating it properly from the English string. Note that the ending is not translated at all.
-'form.teams.hint' => 'Új csoport létrehozása egy csoport-vezetői jogosultsággal.<br>A csoport adatokat importálhatjuk XML-ből (no login collisions are allowed).',
+// Groups form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// TODO: fix form.groups.hint by translating it properly from the English string. Note that the ending is not translated at all.
+'form.groups.hint' => 'Új csoport létrehozása egy csoport-vezetői jogosultsággal.<br>A csoport adatokat importálhatjuk XML-ből (no login collisions are allowed).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 // TODO: translate the following.

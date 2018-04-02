@@ -480,8 +480,9 @@ $i18n_key_words = array(
 'form.import.file' => 'בחר קובץ',
 'form.import.success' => 'הייבוא הושלם בהצלחה.',
 
-// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' => 'ניתן ליצור צוות חדש על-ידי יצירת מנהל צוות חדש.<br>ניתן לייבא נתוני צוות מקובץ XML משרת Anuko Time Tracker אחר (אין אפשרות לשמות משתמש זהים)',
+// Groups form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// TODO: replace "team" with "group" in the string below. Also improve formatting, as multiple spaces or no spaces look a bit weird.
+'form.groups.hint' => 'ניתן ליצור צוות חדש על-ידי יצירת מנהל צוות חדש.<br>ניתן לייבא נתוני צוות מקובץ XML משרת Anuko Time Tracker אחר (אין אפשרות לשמות משתמש זהים)',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 // TODO: translate the following.

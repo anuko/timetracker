@@ -500,10 +500,11 @@ $i18n_key_words = array(
 'form.import.file' => 'Výběr souboru',
 'form.import.success' => 'Import byl úspěšně dokončen.',
 
-// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// Groups form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
 // TODO: translate the following. This part is not translated accurately from English:
 // "Vytvořit nový tým prostřednictvím účtu týmového manažera." Improve and check the entire string for accuracy.
-'form.teams.hint' => 'Vytvořit nový tým prostřednictvím účtu týmového manažera.<br>Můžete také importovat týmová data z xml souboru z jiného time tracker serveru (nejsou povoleny shody login).',
+// ALSO TODO: replace "team" with "group" in the string below.
+'form.groups.hint' => 'Vytvořit nový tým prostřednictvím účtu týmového manažera.<br>Můžete také importovat týmová data z xml souboru z jiného time tracker serveru (nejsou povoleny shody login).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 // TODO: translate the following.

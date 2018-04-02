@@ -423,8 +423,8 @@ $i18n_key_words = array(
 'form.import.file' => 'Укажите файл',
 'form.import.success' => 'Импорт успешно выполнен.',
 
-// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' => 'Cоздайте новую команду, сделав новый аккаунт для её менеджера.<br>Также вы можете импортировать данные команды через xml файл из другого Anuko Time Tracker сервера (запрещено дублирование логинов).',
+// Groups form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+'form.groups.hint' => 'Cоздайте новую группу, сделав новый аккаунт для её менеджера.<br>Также вы можете импортировать данные группы через xml файл из другого Anuko Time Tracker сервера (запрещено дублирование логинов).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 'form.profile.swap_roles' => 'Обменять роль',

@@ -3,7 +3,7 @@
 </script>
 
 <table cellspacing="0" cellpadding="7" border="0" width="720">
-  <tr><td valign="top">{$i18n.form.teams.hint}</td></tr>
+  <tr><td valign="top">{$i18n.form.groups.hint}</td></tr>
 </table>
 
 <table cellspacing="1" cellpadding="3" border="0" width="720">

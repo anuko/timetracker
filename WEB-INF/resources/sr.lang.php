@@ -455,8 +455,9 @@ $i18n_key_words = array(
 'form.import.file' => 'Odaberi datoteku',
 'form.import.success' => 'Uvoz uspešan.',
 
-// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' => 'Napravite novi tim. Počnite sa otvaranjem naloga za Menadžera.<br>Takođe možete uvoziti podatke iz xml fajla sa drugog Anuko Time Tracker server-a (dupliranje prijava nisu dozvoljeni).',
+// Groups form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// TODO: replace "team" with "group" in the string below.
+'form.groups.hint' => 'Napravite novi tim. Počnite sa otvaranjem naloga za Menadžera.<br>Takođe možete uvoziti podatke iz xml fajla sa drugog Anuko Time Tracker server-a (dupliranje prijava nisu dozvoljeni).',
 
 // Forma profila. Pogledajte primer na at https://timetracker.anuko.com/profile_edit.php.
 // TODO: translate the following.

@@ -496,9 +496,10 @@ $i18n_key_words = array(
 'form.import.file' => 'Alege fisier',
 'form.import.success' => 'Importul s-a incheiat cu succes.',
 
-// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-// TODO: check form.teams.hint for accuracy.
-'form.teams.hint' => 'Adauga o noua echipa prin adaugarea unui nou cont de tip manager.<br>Deasemeni poti importa datele despre echipa dintr-un fisier xml generat de un alt server Anuko Time Tracker (nu sunt permise duplicate pentru login).',
+// Groups form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// TODO: check form.groups.hint for accuracy.
+// ALSO TODO: replace "team" with "group" in the string below (3 places).
+'form.groups.hint' => 'Adauga o noua echipa prin adaugarea unui nou cont de tip manager.<br>Deasemeni poti importa datele despre echipa dintr-un fisier xml generat de un alt server Anuko Time Tracker (nu sunt permise duplicate pentru login).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 // TODO: translate the following.

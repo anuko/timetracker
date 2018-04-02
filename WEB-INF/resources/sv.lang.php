@@ -449,8 +449,9 @@ $i18n_key_words = array(
 'form.import.file' => 'Välj fil',
 'form.import.success' => 'Importeringen lyckades utan problem.',
 
-// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' => 'Skapa en ny arbetsgrupp genom att skapa ett konto för en ansvarig person. Du kan även importera arbetsgrupper från en tidigare installation av Anuko Time Tracker via en XML-fil. Se till att inga användarnamn krockar när filen importeras.',
+// Groups form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// TODO: check translation of form.groups.hint for accuracy.
+'form.groups.hint' => 'Skapa en ny grupp genom att skapa ett konto för en ansvarig person. Du kan även importera grupp från en tidigare installation av Anuko Time Tracker via en XML-fil. Se till att inga användarnamn krockar när filen importeras.',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 // TODO: translate the following.

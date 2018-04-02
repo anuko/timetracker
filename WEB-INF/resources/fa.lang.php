@@ -473,9 +473,9 @@ $i18n_key_words = array(
 'form.import.file' => 'انتخاب فایل',
 'form.import.success' => 'وارد کردن اطلاعات با موفقیت انجام شد',
 
-// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-// TODO: translate form.teams.hint.
-'form.teams.hint' => 'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+// Groups form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// TODO: translate form.groups.hint.
+// 'form.groups.hint' => 'Create a new group by creating a new group manager account.<br>You can also import group data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 // TODO: translate the following.
