@@ -317,7 +317,7 @@ $i18n_key_words = array(
 // 'title.cf_edit_dropdown_option' => 'Editing Option',
 // 'title.cf_delete_dropdown_option' => 'Deleting Option',
 // NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
-// It is also a name for the Locking plugin on the Team profile page.
+// It is also a name for the Locking plugin on the group settings page.
 // 'title.locking' => 'Locking',
 // 'title.week_view' => 'Week View',
 // 'title.swap_roles' => 'Swapping Roles',
@@ -466,13 +466,14 @@ $i18n_key_words = array(
 // 'form.client.client_to_delete' => 'Client to delete',
 // 'form.client.client_entries' => 'Client entries',
 
-// Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
+// TODO: replace "team" with "group" in the string below.
 'form.export.hint' => '您可以将所有团队数据导出到xml文件。如果您要将数据转移到您自己的服务器，这项操作很有用。',
 'form.export.compression' => '压缩',
 'form.export.compression_none' => '不压缩',
 'form.export.compression_bzip' => 'bzip格式',
 
-// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
 'form.import.hint' => '从xml文件导入团队数据。',
 'form.import.file' => '选择档',
 'form.import.success' => '成功完成导入。',

@@ -412,13 +412,14 @@ $i18n_key_words = array(
 'form.client.client_to_delete' => 'Klant die wordt verwijderd',
 'form.client.client_entries' => 'Klant gegevens',
 
-// Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
+// TODO: replace "team" with "group" in the string below.
 'form.export.hint' => 'U kunt alle teamgegevens naar een xml bestand exporteren. Dit kan zinvol zijn als u gegevens migreert naar uw eigen server.',
 'form.export.compression' => 'Compressie',
 'form.export.compression_none' => 'geen',
 'form.export.compression_bzip' => 'bzip',
 
-// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
 'form.import.hint' => 'Importeer teamgegevens uit een xml bestand.',
 'form.import.file' => 'Kies bestand',
 'form.import.success' => 'Importeren gelukt.',

@@ -412,13 +412,13 @@ $i18n_key_words = array(
 'form.clients.active_clients' => 'Активные клиенты',
 'form.clients.inactive_clients' => 'Неактивные клиенты',
 
-// Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
-'form.export.hint' => 'Вы можете экспортировать все данные команды в xml файл. Это может быть полезно если вы переносите данные на свой собственный сервер.',
+// Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
+'form.export.hint' => 'Вы можете экспортировать все данные группы в xml файл. Это может быть полезно если вы переносите данные на свой собственный сервер.',
 'form.export.compression' => 'Сжатие',
 'form.export.compression_none' => 'нет',
 'form.export.compression_bzip' => 'в формате bzip',
 
-// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
 'form.import.hint' => 'Импортируйте данные команды из xml файла.',
 'form.import.file' => 'Укажите файл',
 'form.import.success' => 'Импорт успешно выполнен.',

@@ -416,13 +416,13 @@ $i18n_key_words = array(
 'form.client.client_to_delete' => 'Διαγραφή πελάτη',
 'form.client.client_entries' => 'Είσοδος πελάτη',
 
-// Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
 'form.export.hint' => 'Μπορείτε να εξαγάγετε όλα τα δεδομένα μιας ομάδας σε ένα αρχείο xml. Θα είναι χρήσιμο εάν μετακινήσετε τα δεδομένα σε δικό σας διακομιστή.',
 'form.export.compression' => 'Συμπίεση',
 'form.export.compression_none' => 'χωρίς',
 'form.export.compression_bzip' => 'bzip',
 
-// Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
 'form.import.hint' => 'Εισαγωγή δεδομένων ομάδας από αρχείο xml.',
 'form.import.file' => 'Επιλογή αρχείου',
 'form.import.success' => 'Η εισαγωγή ολοκληρώθηκε με επιτυχία.',
