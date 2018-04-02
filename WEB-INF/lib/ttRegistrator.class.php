@@ -62,7 +62,7 @@ class ttRegistrator {
     global $i18n;
 
     if (!ttValidString($this->group_name, true))
-      $this->err->add($i18n->get('error.field'), $i18n->get('label.team_name'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
     if (!ttValidString($this->currency, true))
       $this->err->add($i18n->get('error.field'), $i18n->get('label.currency'));
     if (!ttValidString($this->user_name))

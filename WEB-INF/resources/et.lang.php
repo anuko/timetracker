@@ -141,7 +141,7 @@ $i18n_key_words = array(
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 // TODO: translate the following.
-// 'label.team_name' => 'Team name',
+// 'label.group_name' => 'Group name',
 // 'label.address' => 'Address',
 'label.currency' => 'Valuuta',
 // TODO: translate the following.

@@ -104,7 +104,7 @@ function handlePluginCheckboxes() {
         <table cellspacing="1" cellpadding="2" border="0">
 {if $user->isManager() || ($user->canManageTeam() && !defined(MANAGER_ONLY_TEAM_SETTINGS))}
           <tr>
-            <td align="right" nowrap>{$i18n.label.team_name}:</td>
+            <td align="right" nowrap>{$i18n.label.group_name}:</td>
             <td>{$forms.groupForm.team_name.control}</td>
           </tr>
           <tr>

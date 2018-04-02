@@ -189,7 +189,7 @@ class ttAdmin {
     $result = true;
 
     if (!ttValidString($fields['group_name'], true)) {
-      $this->err->add($i18n->get('error.field'), $i18n->get('label.team_name'));
+      $this->err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
       $result = false;
     }
     if (!ttValidString($fields['user_name'])) {

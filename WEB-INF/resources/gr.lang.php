@@ -120,7 +120,7 @@ $i18n_key_words = array(
 'button.stop' => 'Τέλος',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-'label.team_name' => 'Όνομα ομάδας',
+'label.group_name' => 'Όνομα ομάδας',
 'label.address' => 'Διεύθυνση',
 'label.currency' => 'Νόμισμα',
 'label.manager_name' => 'Όνομα διαχειριστή',

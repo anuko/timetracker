@@ -135,7 +135,7 @@ $i18n_key_words = array(
 // 'button.stop' => 'Stop',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-'label.team_name' => 'Názov tímu',
+'label.group_name' => 'Názov tímu', // TODO: replace "team" with "group".
 'label.address' => 'Adresa',
 'label.currency' => 'Mena',
 'label.manager_name' => 'Meno manažéra',

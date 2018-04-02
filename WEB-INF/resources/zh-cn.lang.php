@@ -133,7 +133,7 @@ $i18n_key_words = array(
 // 'button.stop' => 'Stop',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-'label.team_name' => '团队名称',
+'label.group_name' => '团队名称', // TODO: replace "team" with "group".
 // TODO: translate the following.
 // 'label.address' => 'Address',
 'label.currency' => '货币',

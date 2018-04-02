@@ -210,7 +210,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('b
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_team, true)) $err->add($i18n->get('error.field'), $i18n->get('label.team_name'));
+  if (!ttValidString($cl_team, true)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
   if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));
   if ($user->can('manage_advanced_settings')) {
     if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));

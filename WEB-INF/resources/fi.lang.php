@@ -128,7 +128,7 @@ $i18n_key_words = array(
 'button.stop' => 'Lopeta',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-'label.team_name' => 'Tiimin nimi',
+'label.group_name' => 'Tiimin nimi', // TODO: replace "team" with "group".
 'label.address' => 'Osoite',
 'label.currency' => 'Valuutta',
 'label.manager_name' => 'Esimies',
