@@ -200,7 +200,7 @@ if ($request->isPost()) {
         $err->add($i18n->get('error.db'));
     }
   } elseif ($request->getParameter('onBehalfUser')) {
-    if($user->canManageTeam()) {
+    if($user->can('track_expenses')) {
       unset($_SESSION['behalf_id']);
       unset($_SESSION['behalf_name']);
 
