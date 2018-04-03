@@ -2,7 +2,7 @@
 <table cellspacing="0" cellpadding="7" border="0" width="720">
   <tr>
     <td align="center">
-{if $user->isManager()}
+{if $user->can('export_data')}
       <table border="0" width="60%">
         <colgroup>
           <col width="50%">
