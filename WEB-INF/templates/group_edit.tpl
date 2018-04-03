@@ -164,7 +164,7 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$i18n.form.profile.uncompleted_indicators}:</td>
             <td>{$forms.groupForm.uncompleted_indicators.control} <a href="https://www.anuko.com/lp/tt_15.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
-{if $user->can('manage_advanced_settings')}
+  {if $user->can('manage_advanced_settings')}
           <tr>
             <td align="right" nowrap>{$i18n.label.bcc}:</td>
             <td>{$forms.groupForm.bcc_email.control} <a href="https://www.anuko.com/lp/tt_10.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
@@ -173,7 +173,7 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$i18n.form.profile.allow_ip}:</td>
             <td>{$forms.groupForm.allow_ip.control} <a href="https://www.anuko.com/lp/tt_21.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
-{/if}
+  {/if}
           {* initialize preview text *}
           <script>
             MakeFormatPreview("date_format_preview", document.getElementById("date_format"));
