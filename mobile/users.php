@@ -40,7 +40,7 @@ if (!(ttAccessAllowed('view_users') || ttAccessAllowed('manage_users'))) {
 
 // Get users.
 $active_users = ttTeamHelper::getActiveUsers(array('getAllFields'=>true));
-if($user->canManageTeam()) {
+if($user->can('manage_users')) {
   $can_delete_manager = (1 == count($active_users));
   $inactive_users = ttTeamHelper::getInactiveUsers($user->group_id, true);
 }

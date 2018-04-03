@@ -2,7 +2,7 @@
 <table cellspacing="0" cellpadding="7" border="0" width="720">
   <tr>
     <td valign="top">
-{if $user->canManageTeam()}
+{if $user->can('manage_advanced_settings')}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr>
           <td class="tableHeader">{$i18n.label.thing_name}</td>

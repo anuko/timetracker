@@ -5,7 +5,7 @@
 <table class="mobile-table">
   <tr>
     <td valign="top">
-{if $user->canManageTeam()}
+{if $user->can('manage_projects')}
       <table class="mobile-table-details">
   {if $inactive_projects}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.projects.active_projects}</td></tr>
