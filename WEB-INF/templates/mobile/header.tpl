@@ -61,7 +61,7 @@
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" height="17" style="background-repeat: repeat-x;" background="../images/subm_bg.gif">&nbsp;
-            <a class="mainMenu" href="admin_teams.php">{$i18n.menu.groups}</a> &middot;
+            <a class="mainMenu" href="admin_groups.php">{$i18n.menu.groups}</a> &middot;
             <a class="mainMenu" href="admin_options.php">{$i18n.menu.options}</a>
           </td>
         </tr>

@@ -107,7 +107,7 @@ if ($request->isPost()) {
   $registrator->register();
   $registrator->setCreatedBy($user->id); // Override created_by to admin account.
   if ($err->no()) {
-    header('Location: admin_teams.php');
+    header('Location: admin_groups.php');
     exit();
   }
 } // isPost

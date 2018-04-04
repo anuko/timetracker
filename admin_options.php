@@ -73,7 +73,7 @@ if ($request->isPost()) {
   $admin = new ttAdmin($err);
   $result = $admin->updateSelf($fields);
   if ($result) {
-    header('Location: admin_teams.php');
+    header('Location: admin_groups.php');
     exit();
   }
 } // isPost

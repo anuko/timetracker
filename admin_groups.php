@@ -25,7 +25,7 @@
 // | Contributors:
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
-	
+
 require_once('initialize.php');
 import('ttGroupHelper');
 

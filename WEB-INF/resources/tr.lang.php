@@ -509,7 +509,7 @@ $i18n_key_words = array(
 'form.import.file' => 'Dosya seç',
 'form.import.success' => 'Içe aktarma başarıyla tamamlandı.',
 
-// Groups form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
 // TODO: check form.groups.hint for accuracy. I did not not how to translate "login", so this may be garbage now.
 // ALSO TODO: replace "team" with "group" in the string below.
 'form.groups.hint' => 'Yeni bir ekip yönetimi hesabı yaratarak yeni bir ekibi yaratın.<br>Ayrıca başka bir Anuko Time Tracker sunucusundan ekip bilgilerini bir xml dosyasından aktarabilirsiniz (login çakışmalarına izin verilmemekte).',

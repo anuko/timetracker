@@ -90,13 +90,13 @@ if ($request->isPost()) {
     $admin = new ttAdmin($err);
     $result = $admin->updateGroup($group_id, $fields);
     if ($result) {
-      header('Location: admin_teams.php');
+      header('Location: admin_groups.php');
       exit();
     }
   }
 
   if ($request->getParameter('btn_cancel')) {
-    header('Location: admin_teams.php');
+    header('Location: admin_groups.php');
     exit();
   }
 } // isPost

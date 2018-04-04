@@ -83,7 +83,7 @@ if ($request->isPost()) {
       setcookie('tt_login', $user->login, time() + COOKIE_EXPIRE, '/');
       // Redirect, depending on user role.
       if ($user->can('administer_site')) {
-        header('Location: admin_teams.php');
+        header('Location: admin_groups.php');
       } elseif ($user->isClient()) {
         header('Location: reports.php');
       } else {

@@ -51,14 +51,14 @@ if ($request->isPost()) {
     $admin = new ttAdmin();
     $result = $admin->markGroupDeleted($group_id);
     if ($result) {
-      header('Location: admin_teams.php');
+      header('Location: admin_groups.php');
       exit();
     } else
       $err->add($i18n->get('error.db'));
   }
 
   if ($request->getParameter('btn_cancel')) {
-    header('Location: admin_teams.php');
+    header('Location: admin_groups.php');
     exit();
   }
 } // isPost

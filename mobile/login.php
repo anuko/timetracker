@@ -68,7 +68,7 @@ if ($request->isPost()) {
       $user = new ttUser(null, $auth->getUserId());
       // Redirect, depending on user role.
       if ($user->isAdmin()) {
-        header('Location: ../admin_teams.php');
+        header('Location: ../admin_groups.php');
       } elseif ($user->isClient()) {
         header('Location: ../reports.php');
       } else {

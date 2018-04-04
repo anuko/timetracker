@@ -488,7 +488,7 @@ $i18n_key_words = array(
 'form.import.file' => 'Sel·leccioni l\\\'arxiu',
 'form.import.success' => 'Importació finalitzada amb èxit.',
 
-// Groups form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
 // TODO: replace "team" with "group" in the string below.
 'form.groups.hint' => 'Crear un nou grup, creant un nou compte del manejador de l\\\'equip.<br>També pot importar dades de grups, d\\\'un arxiu xml d\\\'un altre servidor Anuko Time Tracker (no està permès col·lisions de login).',
 

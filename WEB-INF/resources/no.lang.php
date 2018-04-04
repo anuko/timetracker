@@ -491,7 +491,7 @@ $i18n_key_words = array(
 'form.import.file' => 'Velg fil',
 'form.import.success' => 'Import gjennomført vellykket.',
 
-// Groups form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
+// Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
 // TODO: replace "team" with "group" in the string below (3 places).
 'form.groups.hint' => 'Opprett et nytt team ved å opprette en ny team manager konto.<br>Du kan også importere team data fra en xml fil fra en annen Anuko Time Tracker server (ingen login kollisjoner er tillatt).',
 
