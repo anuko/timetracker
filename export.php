@@ -47,7 +47,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get(
 
 if ($request->isPost()) {
 
-  $filename = 'team_data.xml';
+  $filename = 'group_data.xml';
   $mime_type = 'text/xml';
   $compress = false;
   if ('bzip' == $cl_compression) {

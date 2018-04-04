@@ -38,7 +38,7 @@ import('ttFavReportHelper');
 import('ttExpenseHelper');
 import('ttRoleHelper');
 
-// ttImportHelper - this class is used to import team data from a file.
+// ttImportHelper - this class is used to import group data from a file.
 class ttImportHelper {
   var $errors         = null;    // Errors go here. Set in constructor by reference.
 
@@ -46,7 +46,7 @@ class ttImportHelper {
   var $currentTag     = '';      // XML tag of the current element.
 
   var $canImport      = true;    // False if we cannot import data due to a login collision.
-  var $teamData       = array(); // Array of team data such as team name, etc.
+  var $groupData      = array(); // Array of group data such as group name, etc.
   var $group_id       = null;    // New group id we are importing. It is created during the import operation.
   var $roles          = array(); // Array of arrays of role properties.
   var $users          = array(); // Array of arrays of user properties.
@@ -73,7 +73,7 @@ class ttImportHelper {
   // startElement - callback handler for opening tag of an XML element.
   // In this function we assign passed in attributes to currentElement.
   function startElement($parser, $name, $attrs) {
-    if ($name == 'TEAM'
+    if ($name == 'GROUP'
       || $name == 'USER'
       || $name == 'TASK'
       || $name == 'PROJECT'
@@ -98,10 +98,10 @@ class ttImportHelper {
   // When we are here, currentElement is an array of the element attributes (as set in startElement).
   // Here we do the actual import of data into the database.
   function endElement($parser, $name) {
-    if ($name == 'TEAM') {
-      $this->teamData = $this->currentElement;
-      // Now teamData is an array of team properties. We'll use it later to create a team.
-      // Cannot create the team here. Need to determine whether logins collide with existing logins.
+    if ($name == 'GROUP') {
+      $this->groupData = $this->currentElement;
+      // Now groupData is an array of group properties. We'll use it later to create a group.
+      // Cannot create the group here. Need to determine whether logins collide with existing logins.
       $this->currentElement = array();
     }
     if ($name == 'ROLE') {
@@ -121,26 +121,26 @@ class ttImportHelper {
         }
       }
 
-      // Now we can create a team.
+      // Now we can create a group.
       if ($this->canImport) {
         $this->top_role_id = ttRoleHelper::getRoleByRank(512, 0);
         $group_id = ttTeamHelper::insert(array(
-          'name' => $this->teamData['NAME'],
-          'currency' => $this->teamData['CURRENCY'],
-          'decimal_mark' => $this->teamData['DECIMAL_MARK'],
-          'lang' => $this->teamData['LANG'],
-          'date_format' => $this->teamData['DATE_FORMAT'],
-          'time_format' => $this->teamData['TIME_FORMAT'],
-          'week_start' => $this->teamData['WEEK_START'],
-          'tracking_mode' => $this->teamData['TRACKING_MODE'],
-          'project_required' => $this->teamData['PROJECT_REQUIRED'],
-          'task_required' => $this->teamData['TASK_REQUIRED'],
-          'record_type' => $this->teamData['RECORD_TYPE'],
-          'bcc_email' => $this->teamData['BCC_EMAIL'],
-          'plugins' => $this->teamData['PLUGINS'],
-          'lock_spec' => $this->teamData['LOCK_SPEC'],
-          'workday_minutes' => $this->teamData['WORKDAY_MINUTES'],
-          'config' => $this->teamData['CONFIG']));
+          'name' => $this->groupData['NAME'],
+          'currency' => $this->groupData['CURRENCY'],
+          'decimal_mark' => $this->groupData['DECIMAL_MARK'],
+          'lang' => $this->groupData['LANG'],
+          'date_format' => $this->groupData['DATE_FORMAT'],
+          'time_format' => $this->groupData['TIME_FORMAT'],
+          'week_start' => $this->groupData['WEEK_START'],
+          'tracking_mode' => $this->groupData['TRACKING_MODE'],
+          'project_required' => $this->groupData['PROJECT_REQUIRED'],
+          'task_required' => $this->groupData['TASK_REQUIRED'],
+          'record_type' => $this->groupData['RECORD_TYPE'],
+          'bcc_email' => $this->groupData['BCC_EMAIL'],
+          'plugins' => $this->groupData['PLUGINS'],
+          'lock_spec' => $this->groupData['LOCK_SPEC'],
+          'workday_minutes' => $this->groupData['WORKDAY_MINUTES'],
+          'config' => $this->groupData['CONFIG']));
         if ($group_id) {
           $this->group_id = $group_id;
 

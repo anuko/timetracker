@@ -62,7 +62,7 @@ class ttExportHelper {
     fwrite($file, "<pack>\n");
 
     // Write team info.
-    fwrite($file, "<team currency=\"".$user->currency."\" decimal_mark=\"".$user->decimal_mark."\" lang=\"".$user->lang.
+    fwrite($file, "<group currency=\"".$user->currency."\" decimal_mark=\"".$user->decimal_mark."\" lang=\"".$user->lang.
       "\" date_format=\"".$user->date_format."\" time_format=\"".$user->time_format."\" week_start=\"".$user->week_start.
       "\" tracking_mode=\"".$user->tracking_mode."\" project_required=\"".$user->project_required."\" task_required=\"".$user->task_required.
       "\" record_type=\"".$user->record_type."\" bcc_email=\"".$user->bcc_email.
@@ -70,7 +70,7 @@ class ttExportHelper {
       "\" config=\"".$user->config.
       "\">\n");
     fwrite($file, "  <name><![CDATA[".$user->team."]]></name>\n");
-    fwrite($file, "</team>\n");
+    fwrite($file, "</group>\n");
 
     // Prepare role map.
     $roles = $this->getRoles();
