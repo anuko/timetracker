@@ -28,7 +28,7 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttTeamHelper');
+import('ttAdmin');
 
 // Access checks.
 if (!ttAccessAllowed('administer_site')) {
@@ -38,8 +38,10 @@ if (!ttAccessAllowed('administer_site')) {
 // End of access checks.
 
 $group_id = (int)$request->getParameter('id');
-$group_details = ttTeamHelper::getTeamDetails($group_id); // TODO: refactor this.
-$group_name = $group_details['team_name'];
+
+$admin = new ttAdmin();
+$group_details = $admin->getGroupDetails($group_id);
+$group_name = $group_details['group_name'];
 
 $form = new Form('groupForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$group_id));
@@ -48,8 +50,6 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get(
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    import('ttAdmin');
-    $admin = new ttAdmin();
     $result = $admin->markGroupDeleted($group_id);
     if ($result) {
       header('Location: admin_groups.php');

@@ -733,26 +733,6 @@ class ttTeamHelper {
     return true;
   }
 
-  // The getTeamDetails function returns team details.
-  static function getTeamDetails($group_id) {
-    $result = array();
-    $mdb2 = getConnection();
-
-    $sql = "select t.name as team_name, u.id as manager_id, u.name as manager_name, u.login as manager_login, u.email as manager_email
-      from tt_groups t
-      inner join tt_users u on (u.group_id = t.id)
-      inner join tt_roles r on (r.id = u.role_id and r.rank = 512)
-      where t.id = $group_id";
-
-    $res = $mdb2->query($sql);
-    if (!is_a($res, 'PEAR_Error')) {
-      $val = $res->fetchRow();
-      return $val;
-    }
-
-    return false;
-  }
-
   // The insert function creates a new team.
   static function insert($fields) {
 

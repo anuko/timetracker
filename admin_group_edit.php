@@ -29,7 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
-import('ttTeamHelper');
+import('ttAdmin');
 
 // Access checks.
 if (!ttAccessAllowed('administer_site')) {
@@ -39,7 +39,9 @@ if (!ttAccessAllowed('administer_site')) {
 // End of access checks.
 
 $group_id = $request->getParameter('id');
-$group_details = ttTeamHelper::getTeamDetails($group_id);
+
+$admin = new ttAdmin();
+$group_details = $admin->getGroupDetails($group_id);
 
 if ($request->isPost()) {
   $cl_group_name = trim($request->getParameter('group_name'));
@@ -51,7 +53,7 @@ if ($request->isPost()) {
   }
   $cl_manager_email = trim($request->getParameter('manager_email'));
 } else {
-  $cl_group_name = $group_details['team_name'];
+  $cl_group_name = $group_details['group_name'];
   $cl_manager_name = $group_details['manager_name'];
   $cl_manager_login = $group_details['manager_login'];
   if (!$auth->isPasswordExternal()) {
@@ -77,7 +79,7 @@ if ($request->isPost()) {
   if ($request->getParameter('btn_save')) {
     // Create fields array for ttAdmin instance.
     $fields = array(
-      'old_group_name' => $group_details['team_name'],
+      'old_group_name' => $group_details['group_name'],
       'new_group_name' => $cl_group_name,
       'user_id' => $group_details['manager_id'],
       'user_name' => $cl_manager_name,
