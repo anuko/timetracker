@@ -38,10 +38,10 @@ if (!ttAccessAllowed('administer_site')) {
 // End of access checks.
 
 $group_id = (int)$request->getParameter('id');
-$team_details = ttTeamHelper::getTeamDetails($group_id);
-$team_name = $team_details['team_name'];
+$group_details = ttTeamHelper::getTeamDetails($group_id); // TODO: refactor this.
+$group_name = $group_details['team_name'];
 
-$form = new Form('teamForm');
+$form = new Form('groupForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$group_id));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
@@ -64,7 +64,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$smarty->assign('team_to_delete', $team_name);
+$smarty->assign('group_to_delete', $group_name);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.delete_group'));
 $smarty->assign('content_page_name', 'admin_group_delete.tpl');
