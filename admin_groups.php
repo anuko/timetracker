@@ -29,11 +29,12 @@
 require_once('initialize.php');
 import('ttGroupHelper');
 
-// Access check.
+// Access checks.
 if (!ttAccessAllowed('administer_site')) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 $smarty->assign('teams', ttGroupHelper::getTopGroups());
 $smarty->assign('title', $i18n->get('title.groups'));

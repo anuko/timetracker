@@ -31,11 +31,12 @@ import('form.Form');
 import('ttUserHelper');
 import('ttTeamHelper');
 
-// Access check.
+// Access checks.
 if (!ttAccessAllowed('administer_site')) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 $group_id = $request->getParameter('id');
 $team_details = ttTeamHelper::getTeamDetails($group_id);

@@ -31,14 +31,15 @@ import('form.Form');
 import('ttUserHelper');
 import('ttRoleHelper');
 
-// Access check.
+// Access checks.
 if (!ttAccessAllowed('administer_site')) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 if ($request->isPost()) {
-  $cl_team_name = trim($request->getParameter('team_name'));
+  $cl_group_name = trim($request->getParameter('group_name'));
   $cl_lang = $request->getParameter('lang');
   $cl_manager_name = trim($request->getParameter('manager_name'));
   $cl_manager_login = trim($request->getParameter('manager_login'));
@@ -50,8 +51,8 @@ if ($request->isPost()) {
 } else
   $cl_lang = $i18n->lang; // Browser setting from initialize.php.
 
-$form = new Form('teamForm');
-$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team_name));
+$form = new Form('groupForm');
+$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','value'=>$cl_group_name));
 
 // Prepare an array of available languages.
 $lang_files = I18n::getLangFileList();
@@ -97,7 +98,7 @@ if ($request->isPost()) {
     'password1' => $cl_password1,
     'password2' => $cl_password2,
     'email' => $cl_manager_email,
-    'group_name' => $cl_team_name,
+    'group_name' => $cl_group_name,
     'currency' => CURRENCY_DEFAULT,
     'lang' => $cl_lang);
 
@@ -114,7 +115,7 @@ if ($request->isPost()) {
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="document.teamForm.team.focus()"');
+$smarty->assign('onload', 'onLoad="document.groupForm.group_name.focus()"');
 $smarty->assign('content_page_name', 'admin_group_add.tpl');
 $smarty->assign('title', $i18n->get('title.create_group'));
 $smarty->display('index.tpl');
