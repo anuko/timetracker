@@ -39,10 +39,10 @@ if (!ttAccessAllowed('administer_site')) {
 // End of access checks.
 
 $group_id = $request->getParameter('id');
-$team_details = ttTeamHelper::getTeamDetails($group_id);
+$group_details = ttTeamHelper::getTeamDetails($group_id);
 
 if ($request->isPost()) {
-  $cl_team_name = trim($request->getParameter('team_name'));
+  $cl_group_name = trim($request->getParameter('group_name'));
   $cl_manager_name = trim($request->getParameter('manager_name'));
   $cl_manager_login = trim($request->getParameter('manager_login'));
   if (!$auth->isPasswordExternal()) {
@@ -51,17 +51,17 @@ if ($request->isPost()) {
   }
   $cl_manager_email = trim($request->getParameter('manager_email'));
 } else {
-  $cl_team_name = $team_details['team_name'];
-  $cl_manager_name = $team_details['manager_name'];
-  $cl_manager_login = $team_details['manager_login'];
+  $cl_group_name = $group_details['team_name'];
+  $cl_manager_name = $group_details['manager_name'];
+  $cl_manager_login = $group_details['manager_login'];
   if (!$auth->isPasswordExternal()) {
     $cl_password1 = $cl_password2 = '';
   }
-  $cl_manager_email = $team_details['manager_email'];
+  $cl_manager_email = $group_details['manager_email'];
 }
 
-$form = new Form('teamForm');
-$form->addInput(array('type'=>'text','maxlength'=>'80','name'=>'team_name','value'=>$cl_team_name));
+$form = new Form('groupForm');
+$form->addInput(array('type'=>'text','maxlength'=>'80','name'=>'group_name','value'=>$cl_group_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_name','value'=>$cl_manager_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_login','value'=>$cl_manager_login));
 if (!$auth->isPasswordExternal()) {
@@ -77,11 +77,11 @@ if ($request->isPost()) {
   if ($request->getParameter('btn_save')) {
     // Create fields array for ttAdmin instance.
     $fields = array(
-      'old_group_name' => $team_details['team_name'],
-      'new_group_name' => $cl_team_name,
-      'user_id' => $team_details['manager_id'],
+      'old_group_name' => $group_details['team_name'],
+      'new_group_name' => $cl_group_name,
+      'user_id' => $group_details['manager_id'],
       'user_name' => $cl_manager_name,
-      'old_login' => $team_details['manager_login'],
+      'old_login' => $group_details['manager_login'],
       'new_login' => $cl_manager_login,
       'password1' => $cl_password1,
       'password2' => $cl_password2,
@@ -104,7 +104,7 @@ if ($request->isPost()) {
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="document.teamForm.manager_name.focus()"');
+$smarty->assign('onload', 'onLoad="document.groupForm.manager_name.focus()"');
 $smarty->assign('title', $i18n->get('title.edit_group'));
 $smarty->assign('content_page_name', 'admin_group_edit.tpl');
 $smarty->display('index.tpl');
