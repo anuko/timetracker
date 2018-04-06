@@ -89,7 +89,7 @@ elseif (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
 
 $form = new Form('invoiceForm');
 // Hidden control for invoice id.
-$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
+$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_invoice_id));
 // invoiceForm only contains controls for "Mark paid" block below invoice table.
 if ($user->isPluginEnabled('ps')) {
   $mark_paid_action_options = array('1'=>$i18n->get('dropdown.paid'),'2'=>$i18n->get('dropdown.not_paid'));
@@ -106,16 +106,16 @@ if ($request->isPost()) {
 
     // Determine user action.
     $mark_paid = $request->getParameter('mark_paid_action_options') == 1 ? true : false;
-    ttInvoiceHelper::markPaid($cl_id, $mark_paid);
+    ttInvoiceHelper::markPaid($cl_invoice_id, $mark_paid);
 
     // Re-display this form.
-    header('Location: invoice_view.php?id='.$cl_id);
+    header('Location: invoice_view.php?id='.$cl_invoice_id);
     exit();
   }
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('invoice_id', $cl_id);
+$smarty->assign('invoice_id', $cl_invoice_id);
 $smarty->assign('invoice_name', $invoice['name']);
 $smarty->assign('invoice_date', $invoice_date->toString($user->date_format));
 $smarty->assign('client_name', $client['name']);
