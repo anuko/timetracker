@@ -54,7 +54,7 @@ $client = ttClientHelper::getClient($invoice['client_id'], true);
 if (!$client) // In case client was deleted.
   $client = ttClientHelper::getDeletedClient($invoice['client_id']);
 
-$invoice_items = ttInvoiceHelper::getInvoiceItems($cl_id);
+$invoice_items = ttInvoiceHelper::getInvoiceItems($cl_invoice_id);
 $tax_percent = $client['tax'];
 
 $subtotal = 0;
