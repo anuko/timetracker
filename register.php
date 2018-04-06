@@ -39,7 +39,7 @@ $auth->doLogout();
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
 
 if ($request->isPost()) {
-  $cl_team_name = trim($request->getParameter('team_name'));
+  $cl_group_name = trim($request->getParameter('group_name'));
   $cl_currency = trim($request->getParameter('currency'));
   if (!$cl_currency) $cl_currency = CURRENCY_DEFAULT;
   $cl_lang = $request->getParameter('lang');
@@ -53,8 +53,8 @@ if ($request->isPost()) {
   $cl_lang = $i18n->lang; // Browser setting from initialize.php.
 }
 
-$form = new Form('profileForm');
-$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team_name));
+$form = new Form('groupForm');
+$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','value'=>$cl_group_name));
 $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
 
 // Prepare an array of available languages.
@@ -90,7 +90,7 @@ if ($request->isPost()) {
     'password1' => $cl_password1,
     'password2' => $cl_password2,
     'email' => $cl_manager_email,
-    'group_name' => $cl_team_name,
+    'group_name' => $cl_group_name,
     'currency' => $cl_currency,
     'lang' => $cl_lang);
 
@@ -113,6 +113,6 @@ if ($request->isPost()) {
 
 $smarty->assign('title', $i18n->get('title.create_group'));
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="document.profileForm.team.focus()"');
+$smarty->assign('onload', 'onLoad="document.groupForm.group_name.focus()"');
 $smarty->assign('content_page_name', 'register.tpl');
 $smarty->display('index.tpl');
