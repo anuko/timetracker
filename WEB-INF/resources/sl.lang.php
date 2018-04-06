@@ -467,7 +467,7 @@ $i18n_key_words = array(
 
 // Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
 // TODO: translate the following.
-// 'form.import.hint' => 'Import team data from an xml file.',
+// 'form.import.hint' => 'Import group data from an xml file.',
 // 'form.import.file' => 'Select file',
 // 'form.import.success' => 'Import completed successfully.',
 

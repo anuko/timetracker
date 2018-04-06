@@ -61,7 +61,7 @@ $subtotal = 0;
 $tax = 0;
 foreach($invoice_items as $item)
   $subtotal += $item['cost'];
-if ($tax_percent) {
+if ($tax_percent > 0) {
   $tax_expenses = $user->isPluginEnabled('et');
   foreach($invoice_items as $item) {
     if ($item['type'] == 2 && !$tax_expenses)

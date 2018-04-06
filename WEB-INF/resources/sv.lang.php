@@ -445,7 +445,7 @@ $i18n_key_words = array(
 'form.export.compression_bzip' => 'B-zip',
 
 // Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
-'form.import.hint' => 'Importera arbetsgrupp från en XML-fil.',
+'form.import.hint' => 'Importera grupp från en XML-fil.',
 'form.import.file' => 'Välj fil',
 'form.import.success' => 'Importeringen lyckades utan problem.',
 
