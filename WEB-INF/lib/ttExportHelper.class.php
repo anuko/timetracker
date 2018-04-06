@@ -29,7 +29,7 @@
 import('ttTeamHelper');
 import('ttTimeHelper');
 
-// ttExportHelper - this class is used to export team data to a file.
+// ttExportHelper - this class is used to export group data to a file.
 class ttExportHelper {
   var $fileName    = null;    // Name of the file with data.
 
@@ -45,7 +45,7 @@ class ttExportHelper {
   var $customFieldOptionMap = array(); // Custop field option ids.
   var $logMap      = array(); // Time log ids.
 
-  // createDataFile creates a file with all data for a given team.
+  // createDataFile creates a file with all data for a given group.
   function createDataFile($compress = false) {
     global $user;
 
@@ -61,7 +61,7 @@ class ttExportHelper {
     fwrite($file, "<?xml version=\"1.0\"?>\n");
     fwrite($file, "<pack>\n");
 
-    // Write team info.
+    // Write group info.
     fwrite($file, "<group currency=\"".$user->currency."\" decimal_mark=\"".$user->decimal_mark."\" lang=\"".$user->lang.
       "\" date_format=\"".$user->date_format."\" time_format=\"".$user->time_format."\" week_start=\"".$user->week_start.
       "\" tracking_mode=\"".$user->tracking_mode."\" project_required=\"".$user->project_required."\" task_required=\"".$user->task_required.
@@ -69,7 +69,7 @@ class ttExportHelper {
       "\" plugins=\"".$user->plugins."\" lock_spec=\"".$user->lock_spec."\" workday_minutes=\"".$user->workday_minutes.
       "\" config=\"".$user->config.
       "\">\n");
-    fwrite($file, "  <name><![CDATA[".$user->team."]]></name>\n");
+    fwrite($file, "  <name><![CDATA[".$user->group."]]></name>\n");
     fwrite($file, "</group>\n");
 
     // Prepare role map.

@@ -168,7 +168,7 @@ class ttAdmin {
     // If we mark all of them deleted here, we can't recover nicely
     // as we'll lose track of what was deleted by user.
     //
-    // 2) DB maintenance script (Clean up DB from inactive teams) should
+    // 2) DB maintenance script (Clean up DB from inactive groups) should
     // get rid of these items permanently eventually.
 
     // Mark group deleted.

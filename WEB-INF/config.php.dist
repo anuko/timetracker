@@ -42,11 +42,10 @@ define('DSN', 'mysqli://root:no@localhost/dbname?charset=utf8');
 // and now you see some corrupted characters. See http://dev.mysql.com/doc/refman/5.0/en/charset-mysql.html
 
 
-// MULTITEAM_MODE option defines whether users can create their own teams.
+// MULTITEAM_MODE option defines whether users can create their own top groups (organizations).
+// When false, a Time Tracker server is managed by admin, who creates top groups (one or many).
 //
 // Available values are true or false.
-// If true users can create their own teams.
-// If false only admin can create teams.
 //
 define('MULTITEAM_MODE', true);
 
@@ -208,7 +207,3 @@ define('AUTH_MODULE', 'db');
 
 // Height in pixels for the note input field in time.php. Defaults to 40.
 // define('NOTE_INPUT_HEIGHT', 100);
-
-// define('MANAGER_ONLY_TEAM_SETTINGS', true); // Note: temporary define, to be removed after introduction of role edits.
-                                               // Currently checked for "defined" only in profile_edit.tpl, meaning that false
-                                               // value here means the same thing.

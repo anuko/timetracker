@@ -1100,7 +1100,7 @@ class ttTeamHelper {
 
     $plugins = implode(',', $plugin_array);
     if ($plugins != $user->plugins) {
-      if (!ttTeamHelper::update($user->group_id, array('name' => $user->team,'plugins' => $plugins)))
+      if (!ttTeamHelper::update($user->group_id, array('name' => $user->group,'plugins' => $plugins)))
         return false;
       $user->plugins = $plugins;
     }

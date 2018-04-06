@@ -52,7 +52,7 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     if (ttTeamHelper::update($user->group_id, array(
-      'name' => $user->team,
+      'name' => $user->group,
       'lock_spec' => $cl_lock_spec))) {
       header('Location: profile_edit.php');
       exit();

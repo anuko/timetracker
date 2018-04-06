@@ -76,7 +76,7 @@ if ($request->isPost()) {
   $cl_quotas = $request->getParameter('quotas');
   $cl_week_view = $request->getParameter('week_view');
 } else {
-  $cl_team = $user->team;
+  $cl_team = $user->group;
   $cl_currency = ($user->currency == ''? CURRENCY_DEFAULT : $user->currency);
   $cl_lang = $user->lang;
   $cl_decimal_mark = $user->decimal_mark;

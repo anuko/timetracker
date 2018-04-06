@@ -51,7 +51,7 @@ class ttClientHelper {
     return false;
   }
 
-  // getClients - returns an array of active and inactive clients in a team.
+  // getClients - returns an array of active and inactive clients in a group.
   static function getClients()
   {
     global $user;
@@ -241,7 +241,7 @@ class ttClientHelper {
     return (!is_a($affected, 'PEAR_Error'));
   }
 
-  // The setMappedClient function is used during team import to change client_id value for tt_users to a mapped value.
+  // The setMappedClient function is used during group import to change client_id value for tt_users to a mapped value.
   static function setMappedClient($group_id, $imported_id, $mapped_id)
   {
     $mdb2 = getConnection();

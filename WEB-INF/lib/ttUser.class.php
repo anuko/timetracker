@@ -57,7 +57,7 @@ class ttUser {
   var $currency = null;         // Currency.
   var $plugins = null;          // Comma-separated list of enabled plugins.
   var $config = null;           // Comma-separated list of miscellaneous config options.
-  var $team = null;             // Team name.
+  var $group = null;            // Group name.
   var $custom_logo = 0;         // Whether to use a custom logo for team.
   var $lock_spec = null;        // Cron specification for record locking.
   var $workday_minutes = 480;   // Number of work minutes in a regular day.
@@ -113,7 +113,7 @@ class ttUser {
       $this->record_type = $val['record_type'];
       $this->bcc_email = $val['bcc_email'];
       $this->allow_ip = $val['allow_ip'];
-      $this->team = $val['group_name'];
+      $this->group = $val['group_name'];
       $this->currency = $val['currency'];
       $this->plugins = $val['plugins'];
       $this->lock_spec = $val['lock_spec'];

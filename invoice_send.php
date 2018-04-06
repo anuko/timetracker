@@ -58,7 +58,7 @@ if ($request->isPost()) {
 } else {
   $cl_receiver = $sc->getValue(SYSC_LAST_INVOICE_EMAIL);
   $cl_cc = $sc->getValue(SYSC_LAST_INVOICE_CC);
-  $cl_subject = $i18n->get('title.invoice').' '.$invoice['name'].', '.$user->team;
+  $cl_subject = $i18n->get('title.invoice').' '.$invoice['name'].', '.$user->group;
 }
 
 $form = new Form('mailForm');
