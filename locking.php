@@ -54,7 +54,7 @@ if ($request->isPost()) {
     if (ttTeamHelper::update($user->group_id, array(
       'name' => $user->group,
       'lock_spec' => $cl_lock_spec))) {
-      header('Location: profile_edit.php');
+      header('Location: group_edit.php');
       exit();
     } else {
       $err->add($i18n->get('error.db'));
