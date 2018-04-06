@@ -42,7 +42,7 @@ $advanced_settings = $user->can('manage_advanced_settings');
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
 
 if ($request->isPost()) {
-  $cl_team = trim($request->getParameter('team_name'));
+  $cl_group = trim($request->getParameter('group_name'));
   $cl_currency = trim($request->getParameter('currency'));
   if (!$cl_currency) $cl_currency = CURRENCY_DEFAULT;
   $cl_lang = $request->getParameter('lang');
@@ -76,7 +76,7 @@ if ($request->isPost()) {
   $cl_quotas = $request->getParameter('quotas');
   $cl_week_view = $request->getParameter('week_view');
 } else {
-  $cl_team = $user->group;
+  $cl_group = $user->group;
   $cl_currency = ($user->currency == ''? CURRENCY_DEFAULT : $user->currency);
   $cl_lang = $user->lang;
   $cl_decimal_mark = $user->decimal_mark;
@@ -112,7 +112,7 @@ if ($request->isPost()) {
 }
 
 $form = new Form('groupForm');
-$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team,'enable'=>$advanced_settings));
+$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','value'=>$cl_group,'enable'=>$advanced_settings));
 $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
 
 // Prepare an array of available languages.
@@ -211,7 +211,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('b
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_team, true)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
+  if (!ttValidString($cl_group, true)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
   if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));
   if ($advanced_settings) {
     if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
@@ -274,7 +274,7 @@ if ($request->isPost()) {
       $config = trim($config, ',');
 
       $update_result = ttTeamHelper::update($user->group_id, array(
-        'name' => $cl_team,
+        'name' => $cl_group,
         'currency' => $cl_currency,
         'lang' => $cl_lang,
         'decimal_mark' => $cl_decimal_mark,

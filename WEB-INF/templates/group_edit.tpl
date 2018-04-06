@@ -105,7 +105,7 @@ function handlePluginCheckboxes() {
 {if $user->can('manage_basic_settings')}
           <tr>
             <td align="right" nowrap>{$i18n.label.group_name}:</td>
-            <td>{$forms.groupForm.team_name.control}</td>
+            <td>{$forms.groupForm.group_name.control}</td>
           </tr>
           <tr>
             <td align="right">{$i18n.label.currency}:</td>
