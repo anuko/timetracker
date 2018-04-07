@@ -148,7 +148,7 @@ class ttUser {
     return in_array($do_something, $this->rights);
   }
 
-  // isAdmin - determines whether current user is admin (has right_administer_site).
+  // isAdmin - determines whether current user is admin.
   function isAdmin() {
     return $this->can('administer_site');
   }
