@@ -90,7 +90,7 @@ if ($request->isPost()){
     // Handle workday hours.
     $workday_minutes = ttTimeHelper::postedDurationToMinutes($request->getParameter('workdayHours'));
     if ($workday_minutes != $user->workday_minutes) {
-      if (!ttTeamHelper::update($user->group_id, array('name'=>$user->group,'workday_minutes'=>$workday_minutes)))
+      if (!$user->updateGroup(array('workday_minutes'=>$workday_minutes)))
         $err->add($i18n->get('error.db'));
     }
 

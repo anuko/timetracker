@@ -51,9 +51,7 @@ if ($request->isPost()) {
   if (!ttValidCronSpec($cl_lock_spec)) $err->add($i18n->get('error.field'), $i18n->get('label.schedule'));
 
   if ($err->no()) {
-    if (ttTeamHelper::update($user->group_id, array(
-      'name' => $user->group,
-      'lock_spec' => $cl_lock_spec))) {
+    if ($user->updateGroup(array('lock_spec' => $cl_lock_spec))) {
       header('Location: group_edit.php');
       exit();
     } else {

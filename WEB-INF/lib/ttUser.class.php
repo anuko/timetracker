@@ -413,4 +413,41 @@ class ttUser {
     }
     return false;
   }
+
+  // updateGroup updates group information with new data.
+  function updateGroup($fields) {
+
+    $mdb2 = getConnection();
+
+    if (isset($fields['name'])) $name_part = ', name = '.$mdb2->quote($fields['name']);
+    if (isset($fields['currency'])) $currency_part = ', currency = '.$mdb2->quote($fields['currency']);
+    if (isset($fields['lang'])) $lang_part = ', lang = '.$mdb2->quote($fields['lang']);
+    if (isset($fields['decimal_mark'])) $decimal_mark_part = ', decimal_mark = '.$mdb2->quote($fields['decimal_mark']);
+    if (isset($fields['date_format'])) $date_format_part = ', date_format = '.$mdb2->quote($fields['date_format']);
+    if (isset($fields['time_format'])) $time_format_part = ', time_format = '.$mdb2->quote($fields['time_format']);
+    if (isset($fields['week_start'])) $week_start_part = ', week_start = '.(int) $fields['week_start'];
+    if (isset($fields['tracking_mode'])) {
+      $tracking_mode_part = ', tracking_mode = '.(int) $fields['tracking_mode'];
+      $project_required_part = ' , project_required = '.(int) $fields['project_required'];
+      $task_required_part = ' , task_required = '.(int) $fields['task_required'];
+    }
+    if (isset($fields['record_type'])) $record_type_part = ', record_type = '.(int) $fields['record_type'];
+    if (isset($fields['bcc_email'])) $bcc_email_part = ', bcc_email = '.$mdb2->quote($fields['bcc_email']);
+    if (isset($fields['allow_ip'])) $allow_ip_part = ', allow_ip = '.$mdb2->quote($fields['allow_ip']);
+    if (isset($fields['plugins'])) $plugins_part = ', plugins = '.$mdb2->quote($fields['plugins']);
+    if (isset($fields['config'])) $config_part = ', config = '.$mdb2->quote($fields['config']);
+    if (isset($fields['lock_spec'])) $lock_spec_part = ', lock_spec = '.$mdb2->quote($fields['lock_spec']);
+    if (isset($fields['workday_minutes'])) $workday_minutes_part = ', workday_minutes = '.$mdb2->quote($fields['workday_minutes']);
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($this->id);
+
+    $parts = trim($name_part.$currency_part.$lang_part.$decimal_mark_part.$date_format_part.
+      $time_format_part.$week_start_part.$tracking_mode_part.$task_required_part.$project_required_part.$record_type_part.
+      $bcc_email_part.$allow_ip_part.$plugins_part.$config_part.$lock_spec_part.$workday_minutes_part.$modified_part, ',');
+
+    $sql = "update tt_groups set $parts where id = $this->group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    return true;
+  }
 }

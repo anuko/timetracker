@@ -273,7 +273,7 @@ if ($request->isPost()) {
         $config .= ',uncompleted_indicators';
       $config = trim($config, ',');
 
-      $update_result = ttTeamHelper::update($user->group_id, array(
+      $update_result = $user->updateGroup(array(
         'name' => $cl_group,
         'currency' => $cl_currency,
         'lang' => $cl_lang,
