@@ -1033,31 +1033,4 @@ class ttTeamHelper {
 
     return true;
   }
-
-  // enablePlugin either enables or disables a specific plugin for team.
-  static function enablePlugin($plugin, $enable = true)
-  {
-    global $user;
-    if (!$user->can('manage_features'))
-      return false;
-
-    $plugin_array = explode(',', $user->plugins);
-    if ($enable && !in_array($plugin, $plugin_array))
-      $plugin_array[] = $plugin; // Add plugin to array.
-
-    if (!$enable && in_array($plugin, $plugin_array)) {
-      $key = array_search($plugin, $plugin_array);
-      if ($key !== false)
-        unset($plugin_array[$key]); // Remove plugin from array.
-    }
-
-    $plugins = implode(',', $plugin_array);
-    if ($plugins != $user->plugins) {
-      if (!$user->updateGroup(array('plugins' => $plugins)))
-        return false;
-      $user->plugins = $plugins;
-    }
-
-    return true;
-  }
 }

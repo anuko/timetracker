@@ -59,9 +59,9 @@ $form->addInput(array('type'=>'checkbox','name'=>'notes','value'=>$cl_notes));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()){
-  if (!ttTeamHelper::enablePlugin('wvn', $cl_week_note) ||
-      !ttTeamHelper::enablePlugin('wvl', $cl_week_list) ||
-      !ttTeamHelper::enablePlugin('wvns', $cl_notes)) {
+  if (!$user->enablePlugin('wvn', $cl_week_note) ||
+      !$user->enablePlugin('wvl', $cl_week_list) ||
+      !$user->enablePlugin('wvns', $cl_notes)) {
     $err->add($i18n->get('error.db'));
   }
 }
