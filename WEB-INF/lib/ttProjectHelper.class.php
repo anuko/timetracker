@@ -74,7 +74,7 @@ class ttProjectHelper {
     return $result;
   }
   
-  // getProjects - returns an array of active and inactive projects in a team.
+  // getProjects - returns an array of active and inactive projects in group.
   static function getProjects()
   {
     global $user;
@@ -94,19 +94,19 @@ class ttProjectHelper {
     return $result;
   }
 
-  // getProjectsForClient - returns an array of active and inactive projects in a team for a client.
+  // getProjectsForClient - returns an array of active and inactive projects in a group for a client.
   static function getProjectsForClient()
   {
-  	global $user;
-  	  	
-  	$result = array();
+    global $user;
+
+    $result = array();
     $mdb2 = getConnection();
-    
-    $sql = "select p.id, p.name, p.tasks from tt_projects p
-	  inner join tt_client_project_binds cpb on (cpb.client_id = $user->client_id and cpb.project_id = p.id)
-	  where p.group_id = $user->group_id and (p.status = 0 or p.status = 1)
-      order by p.name";  	
-        
+
+    $sql = "select p.id, p.name, p.tasks from tt_projects p".
+      " inner join tt_client_project_binds cpb on (cpb.client_id = $user->client_id and cpb.project_id = p.id)".
+      " where p.group_id = $user->group_id and (p.status = 0 or p.status = 1)".
+      " order by p.name";
+
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {

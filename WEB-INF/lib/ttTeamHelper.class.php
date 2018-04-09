@@ -30,10 +30,10 @@ import('ttUserHelper');
 import('DateAndTime');
 import('ttInvoiceHelper');
 
-// Class ttTeamHelper - contains helper functions that operate with teams.
+// Class ttTeamHelper - contains helper functions that operate with groups.
 class ttTeamHelper {
 
-  // The getUserCount function returns number of people in team.
+  // The getUserCount function returns number of active users in a group.
   static function getUserCount($group_id) {
     $mdb2 = getConnection();
 
@@ -47,17 +47,17 @@ class ttTeamHelper {
     return false;
   }
 
-  // The getUsersForClient obtains all active and inactive users in a team that are relevant to a client.
+  // The getUsersForClient obtains all active and inactive users in a group that are relevant to a client.
   static function getUsersForClient() {
     global $user;
     $mdb2 = getConnection();
 
-    $sql = "select u.id, u.name from tt_user_project_binds upb
-      inner join tt_client_project_binds cpb on (upb.project_id = cpb.project_id and cpb.client_id = $user->client_id)
-      inner join tt_users u on (u.id = upb.user_id)
-      where (u.status = 1 or u.status = 0)
-      group by u.id
-      order by upper(u.name)";
+    $sql = "select u.id, u.name from tt_user_project_binds upb".
+      " inner join tt_client_project_binds cpb on (upb.project_id = cpb.project_id and cpb.client_id = $user->client_id)".
+      " inner join tt_users u on (u.id = upb.user_id)".
+      " where (u.status = 1 or u.status = 0)".
+      " group by u.id".
+      " order by upper(u.name)";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
@@ -68,7 +68,7 @@ class ttTeamHelper {
     return $user_list;
   }
 
-  // The getActiveUsers obtains all active users in a given team.
+  // The getActiveUsers obtains all active users in a given group.
   static function getActiveUsers($options = null) {
     global $user;
     global $i18n;
@@ -153,7 +153,7 @@ class ttTeamHelper {
     return $user_list;
   }
 
-    // The getUsers obtains all active and inactive (but not deleted) users in a given team.
+  // The getUsers obtains all active and inactive (but not deleted) users in a group.
   static function getUsers() {
     global $user;
     $mdb2 = getConnection();
@@ -168,7 +168,7 @@ class ttTeamHelper {
     return $user_list;
   }
 
-  // The getInactiveUsers obtains all inactive users in a given team.
+  // The getInactiveUsers obtains all inactive users in a group.
   static function getInactiveUsers($group_id, $all_fields = false) {
     $mdb2 = getConnection();
 
@@ -187,7 +187,7 @@ class ttTeamHelper {
     return false;
   }
 
-  // The getAllUsers obtains all users in a given team.
+  // The getAllUsers obtains all users in a group.
   static function getAllUsers($group_id, $all_fields = false) {
     $mdb2 = getConnection();
     if ($all_fields)
@@ -205,7 +205,7 @@ class ttTeamHelper {
     return false;
   }
 
-  // getActiveProjects - returns an array of active projects for team.
+  // getActiveProjects - returns an array of active projects for a group.
   static function getActiveProjects($group_id)
   {
     $result = array();
@@ -223,7 +223,7 @@ class ttTeamHelper {
     return $result;
   }
 
-  // getInactiveProjects - returns an array of inactive projects for team.
+  // getInactiveProjects - returns an array of inactive projects for a group.
   static function getInactiveProjects($group_id)
   {
     $result = array();
@@ -241,7 +241,7 @@ class ttTeamHelper {
     return $result;
   }
 
-  // The getAllProjects obtains all projects in a given team.
+  // The getAllProjects obtains all projects in a group.
   static function getAllProjects($group_id, $all_fields = false) {
     $mdb2 = getConnection();
 
@@ -260,7 +260,7 @@ class ttTeamHelper {
     return false;
   }
 
-  // getActiveTasks - returns an array of active tasks for team.
+  // getActiveTasks - returns an array of active tasks for a group.
   static function getActiveTasks($group_id)
   {
     $result = array();
@@ -277,7 +277,7 @@ class ttTeamHelper {
     return $result;
   }
 
-  // getInactiveTasks - returns an array of inactive tasks for team.
+  // getInactiveTasks - returns an array of inactive tasks for a group.
   static function getInactiveTasks($group_id)
   {
     $result = array();
@@ -295,7 +295,7 @@ class ttTeamHelper {
     return $result;
   }
 
-  // The getAllTasks obtains all tasks in a given team.
+  // The getAllTasks obtains all tasks in a group.
   static function getAllTasks($group_id, $all_fields = false) {
     $mdb2 = getConnection();
 
@@ -336,7 +336,7 @@ class ttTeamHelper {
     return $result;
   }
 
-  // getActiveRoles - returns an array of active roles for team.
+  // getActiveRoles - returns an array of active roles for a group.
   static function getActiveRoles($group_id)
   {
     $result = array();
@@ -347,7 +347,7 @@ class ttTeamHelper {
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-        $val['is_client'] = in_array('track_own_time', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have data entry right.
+        $val['is_client'] = in_array('track_own_time', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have track_own_time right.
         $result[] = $val;
       }
     }
@@ -394,7 +394,7 @@ class ttTeamHelper {
     return $result;
   }
 
-  // The getActiveClients returns an array of active clients for team.
+  // The getActiveClients returns an array of active clients for a group.
   static function getActiveClients($group_id, $all_fields = false)
   {
     $result = array();
@@ -415,7 +415,7 @@ class ttTeamHelper {
     return $result;
   }
 
-  // The getInactiveClients returns an array of inactive clients for team.
+  // The getInactiveClients returns an array of inactive clients for a group.
   static function getInactiveClients($group_id, $all_fields = false)
   {
     $result = array();
@@ -436,7 +436,7 @@ class ttTeamHelper {
     return $result;
   }
 
-  // The getAllClients obtains all clients in a given team.
+  // The getAllClients obtains all clients in a group.
   static function getAllClients($group_id, $all_fields = false) {
     $mdb2 = getConnection();
 
@@ -456,7 +456,7 @@ class ttTeamHelper {
     return false;
   }
 
-  // The getActiveInvoices returns an array of active invoices for team.
+  // The getActiveInvoices returns an array of active invoices for a group.
   static function getActiveInvoices($localizeDates = true)
   {
     global $user;
@@ -488,7 +488,7 @@ class ttTeamHelper {
     return $result;
   }
 
-  // The getAllInvoices returns an array of all invoices for team.
+  // The getAllInvoices returns an array of all invoices for a group.
   static function getAllInvoices()
   {
     global $user;
@@ -531,7 +531,7 @@ class ttTeamHelper {
     return $result;
   }
 
-  // getUserToProjectBinds - obtains all user to project binds for a team.
+  // getUserToProjectBinds - obtains all user to project binds for a group.
   static function getUserToProjectBinds($group_id) {
     $mdb2 = getConnection();
 
@@ -548,7 +548,7 @@ class ttTeamHelper {
     return false;
   }
 
-  // The getAllCustomFields obtains all custom fields in a given team.
+  // The getAllCustomFields obtains all custom fields in a group.
   static function getAllCustomFields($group_id) {
     $mdb2 = getConnection();
 
@@ -565,7 +565,7 @@ class ttTeamHelper {
     return false;
   }
 
-  // The getAllCustomFieldOptions obtains all custom field options in a given team.
+  // The getAllCustomFieldOptions obtains all custom field options in a group.
   static function getAllCustomFieldOptions($group_id) {
     $mdb2 = getConnection();
 
@@ -582,7 +582,7 @@ class ttTeamHelper {
     return false;
   }
 
-  // The getCustomFieldLog obtains all custom field log entries for a given team.
+  // The getCustomFieldLog obtains all custom field log entries for a group.
   static function getCustomFieldLog($group_id) {
     $mdb2 = getConnection();
 
@@ -599,7 +599,7 @@ class ttTeamHelper {
     return false;
   }
 
-  // getFavReports - obtains all favorite reports for all users in team.
+  // getFavReports - obtains all favorite reports for all users in a group.
   static function getFavReports($group_id) {
     $mdb2 = getConnection();
 
@@ -616,7 +616,7 @@ class ttTeamHelper {
     return false;
   }
 
-  // getExpenseItems - obtains all expense items for all users in team.
+  // getExpenseItems - obtains all expense items for all users in a group.
   static function getExpenseItems($group_id) {
     $mdb2 = getConnection();
 
@@ -633,7 +633,7 @@ class ttTeamHelper {
     return false;
   }
 
-  // getPredefinedExpenses - obtains predefined expenses for team.
+  // getPredefinedExpenses - obtains predefined expenses for a group.
   static function getPredefinedExpenses($group_id) {
     global $user;
     $replaceDecimalMark = ('.' != $user->decimal_mark);
@@ -655,7 +655,7 @@ class ttTeamHelper {
     return false;
   }
 
-  // getNotifications - obtains notification descriptions for team.
+  // getNotifications - obtains notification descriptions for a group.
   static function getNotifications($group_id) {
     $mdb2 = getConnection();
 
@@ -674,7 +674,7 @@ class ttTeamHelper {
     return false;
   }
 
-  // getMonthlyQuotas - obtains monthly quotas for team.
+  // getMonthlyQuotas - obtains monthly quotas for a group.
   static function getMonthlyQuotas($group_id) {
     $mdb2 = getConnection();
 
@@ -691,10 +691,10 @@ class ttTeamHelper {
     return false;
   }
 
-  // The markDeleted function marks the team and everything in it as deleted.
+  // The markDeleted function marks the group and everything in it as deleted.
   static function markDeleted($group_id) {
 
-    // Iterate through team users and mark them as deleted.
+    // Iterate through group users and mark them as deleted.
     $users = ttTeamHelper::getAllUsers($group_id);
     foreach ($users as $one_user) {
       if (!ttUserHelper::markDeleted($one_user['id'])) return false;
@@ -733,13 +733,13 @@ class ttTeamHelper {
     return true;
   }
 
-  // The insert function creates a new team.
+  // The insert function creates a new group.
   static function insert($fields) {
 
     global $user;
     $mdb2 = getConnection();
 
-    // Start with team name and currency.
+    // Start with group name and currency.
     $columns = 'name, currency';
     $values = $mdb2->quote(trim($fields['name'])).', '.$mdb2->quote(trim($fields['currency']));
 
@@ -833,7 +833,7 @@ class ttTeamHelper {
     return false;
   }
 
-  // The getInactiveTeams is a maintenance function that returns an array of inactive team ids (max 100).
+  // The getInactiveTeams is a maintenance function that returns an array of inactive group ids (max 100).
   static function getInactiveTeams() {
     $inactive_teams = array();
     $mdb2 = getConnection();

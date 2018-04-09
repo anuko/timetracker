@@ -173,7 +173,7 @@ class ttRoleHelper {
     return $last_id;
   }
 
-  // createPredefinedRoles - creates a set of predefined roles for the team to use.
+  // createPredefinedRoles - creates a set of predefined roles for a group to use.
   static function createPredefinedRoles($group_id, $lang)
   {
     // We need localized role names and a new I18n object to obtain them.
@@ -234,7 +234,7 @@ class ttRoleHelper {
     return true;
   }
 
-  // createDefaultRoles - creates a set of predefined roles for the team to use.
+  // createDefaultRoles - creates a set of predefined roles for a group to use.
   static function createDefaultRoles()
   {
     $mdb2 = getConnection();

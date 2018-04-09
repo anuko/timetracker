@@ -375,7 +375,7 @@ class ttExportHelper {
    * and we don't want to over-complicate things.
    */
 
-  // getRoles - obtains all roles defined for team.
+  // getRoles - obtains all roles defined for group.
   function getRoles() {
     global $user;
     $mdb2 = getConnection();
@@ -393,7 +393,7 @@ class ttExportHelper {
     return false;
   }
 
-  // The getUsers obtains all users in team for the purpose of export.
+  // The getUsers obtains all users in group for the purpose of export.
   function getUsers() {
     global $user;
     $mdb2 = getConnection();

@@ -184,7 +184,7 @@ class ttTaskHelper {
     return $last_id;
   }
  
- // update function updates a task in the database.
+  // update function updates a task in the database.
   static function update($fields)
   {
     global $user;
@@ -219,7 +219,7 @@ class ttTaskHelper {
     // Handle task binds in the tasks field of the tt_projects table.
     // We need to either delete or insert task id in all affected projects.
     
-    // Get all not deleted projects for team.
+    // Get all not deleted projects for group.
     $sql = "select id, tasks from tt_projects where group_id = $user->group_id and status is not NULL";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))
@@ -237,14 +237,14 @@ class ttTaskHelper {
       	  if ($task_ids) {
             $task_ids .= ",$task_id";
             $task_ids = ttTaskHelper::sort($task_ids);
-		  } else
-		  	$task_ids = $task_id;
+        } else
+          $task_ids = $task_id;
 
-		 $sql = "update tt_projects set tasks = ".$mdb2->quote($task_ids)." where id = $project_id";
-		 $affected = $mdb2->exec($sql);
-		 if (is_a($affected, 'PEAR_Error'))
-           die($affected->getMessage());
-		}
+        $sql = "update tt_projects set tasks = ".$mdb2->quote($task_ids)." where id = $project_id";
+        $affected = $mdb2->exec($sql);
+        if (is_a($affected, 'PEAR_Error'))
+          die($affected->getMessage());
+        }
       } else {
       	// Task needs to be removed from this project.
         if (in_array($task_id, $task_arr)) {
