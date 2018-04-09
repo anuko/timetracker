@@ -26,9 +26,6 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-import('ttTeamHelper');
-import('ttUserHelper');
-
 // Class ttNotificationHelper is used to help with notification related tasks.
 class ttNotificationHelper {
 	

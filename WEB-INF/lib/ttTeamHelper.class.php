@@ -354,7 +354,7 @@ class ttTeamHelper {
     return $result;
   }
 
-  // getInactiveRoles - returns an array of inactive roles for team.
+  // getInactiveRoles - returns an array of inactive roles for a group.
   static function getInactiveRoles($group_id)
   {
     $result = array();
@@ -833,12 +833,12 @@ class ttTeamHelper {
     return false;
   }
 
-  // The getInactiveTeams is a maintenance function that returns an array of inactive group ids (max 100).
-  static function getInactiveTeams() {
-    $inactive_teams = array();
+  // The getInactiveGroups is a maintenance function that returns an array of inactive group ids (max 100).
+  static function getInactiveGroups() {
+    $inactive_groups = array();
     $mdb2 = getConnection();
 
-    // Get all team ids for teams created or modified more than 8 months ago.
+    // Get all group ids for groups created or modified more than 8 months ago.
     // $ts = date('Y-m-d', strtotime('-1 year'));
     $ts = $mdb2->quote(date('Y-m-d', strtotime('-8 month')));
     $sql =  "select id from tt_groups where created < $ts and (modified is null or modified < $ts) order by id";
@@ -848,20 +848,20 @@ class ttTeamHelper {
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
         $group_id = $val['id'];
-        if (ttTeamHelper::isTeamActive($group_id) == false) {
+        if (ttTeamHelper::isGroupActive($group_id) == false) {
           $count++;
-          $inactive_teams[] = $group_id;
+          $inactive_groups[] = $group_id;
           // Limit the array size for perfomance by allowing this operation on small chunks only.
           if ($count >= 100) break;
         }
       }
-      return $inactive_teams;
+      return $inactive_groups;
     }
     return false;
   }
 
-  // The isTeamActive determines if a team is using Time Tracker or abandoned it.
-  static function isTeamActive($group_id) {
+  // The isGroupActive determines if a group is using Time Tracker or abandoned it.
+  static function isGroupActive($group_id) {
     $users = array();
 
     $mdb2 = getConnection();
@@ -873,7 +873,7 @@ class ttTeamHelper {
     }
     $user_list = implode(',', $users); // This is a comma-separated list of user ids.
     if (!$user_list)
-      return false; // No users in team.
+      return false; // No users in group.
 
     $count = 0;
     $ts = date('Y-m-d', strtotime('-2 years'));
@@ -889,7 +889,7 @@ class ttTeamHelper {
       return false;  // No time entries for the last 2 years.
 
     if ($count <= 5) {
-      // We will consider a team inactive if it has 5 or less time entries made more than 1 year ago.
+      // We will consider a group inactive if it has 5 or less time entries made more than 1 year ago.
       $count_last_year = 0;
       $ts = date('Y-m-d', strtotime('-1 year'));
       $sql = "select count(*) as cnt from tt_log where user_id in ($user_list) and created > '$ts'";
@@ -905,7 +905,7 @@ class ttTeamHelper {
     return true;
   }
 
-  // The delete function permanently deletes all data for a team.
+  // The delete function permanently deletes all data for a group.
   static function delete($group_id) {
     $mdb2 = getConnection();
 
@@ -957,7 +957,7 @@ class ttTeamHelper {
     return true;
   }
 
-  // The markTasksDeleted deletes task binds and marks the tasks as deleted for a team.
+  // The markTasksDeleted deletes task binds and marks the tasks as deleted for a group.
   static function markTasksDeleted($group_id) {
     $mdb2 = getConnection();
     $sql = "select id from tt_tasks where group_id = $group_id";
@@ -981,7 +981,7 @@ class ttTeamHelper {
     return true;
   }
 
-  // The deleteTasks deletes all tasks and task binds for an inactive team.
+  // The deleteTasks deletes all tasks and task binds for an inactive group.
   static function deleteTasks($group_id) {
     $mdb2 = getConnection();
     $sql = "select id from tt_tasks where group_id = $group_id";
@@ -1005,7 +1005,7 @@ class ttTeamHelper {
     return true;
   }
 
-  // The deleteCustomFields cleans up tt_custom_field_log, tt_custom_field_options and tt_custom_fields tables for an inactive team.
+  // The deleteCustomFields cleans up tt_custom_field_log, tt_custom_field_options and tt_custom_fields tables for an inactive group.
   static function deleteCustomFields($group_id) {
     $mdb2 = getConnection();
     $sql = "select id from tt_custom_fields where group_id = $group_id";

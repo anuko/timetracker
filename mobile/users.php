@@ -45,7 +45,7 @@ if($user->can('manage_users')) {
   $inactive_users = ttTeamHelper::getInactiveUsers($user->group_id, true);
 }
 
-// Check if the team is set to show indicators for uncompleted time entries.
+// Check if the group is set to show indicators for uncompleted time entries.
 if ($user->uncompleted_indicators) {
   // Check each active user if they have an uncompleted time entry.
   foreach ($active_users as $key => $user) {

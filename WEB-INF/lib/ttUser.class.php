@@ -58,7 +58,7 @@ class ttUser {
   var $plugins = null;          // Comma-separated list of enabled plugins.
   var $config = null;           // Comma-separated list of miscellaneous config options.
   var $group = null;            // Group name.
-  var $custom_logo = 0;         // Whether to use a custom logo for team.
+  var $custom_logo = 0;         // Whether to use a custom logo for group.
   var $lock_spec = null;        // Cron specification for record locking.
   var $workday_minutes = 480;   // Number of work minutes in a regular day.
   var $rights = array();        // An array of user rights such as 'track_own_time', etc.
@@ -153,7 +153,7 @@ class ttUser {
     return $this->can('administer_site');
   }
 
-  // isManager - determines whether current user is team manager.
+  // isManager - determines whether current user is group manager.
   // This is a legacy function that we are getting rid of by replacing with rights check.
   function isManager() {
     return $this->can('export_data'); // By default this is assigned to managers but not co-managers.
@@ -161,7 +161,7 @@ class ttUser {
                                       // to this function and then remove it.
   }
 
-  // isCoManager - determines whether current user is team comanager.
+  // isCoManager - determines whether current user is group comanager.
   // This is a legacy function that we are getting rid of by replacing with rights check.
   function isCoManager() {
     return ($this->can('manage_users') && !$this->can('export_data'));

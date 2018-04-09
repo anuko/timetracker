@@ -9,7 +9,7 @@
 
 
 #
-# Structure for table tt_groups. A team is a group of users for whom we are tracking work time.
+# Structure for table tt_groups. A group is a unit of users for whom we are tracking work time.
 # This table stores settings common to all group members such as language, week start day, etc.
 #
 CREATE TABLE `tt_groups` (
@@ -29,7 +29,7 @@ CREATE TABLE `tt_groups` (
   `record_type` smallint(2) NOT NULL default 0,          # time record type ("start and finish", "duration", or both)
   `bcc_email` varchar(100) default NULL,                 # bcc email to copy all reports to
   `allow_ip` varchar(255) default NULL,                  # specification from where users are allowed access
-  `plugins` varchar(255) default NULL,                   # a list of enabled plugins for team
+  `plugins` varchar(255) default NULL,                   # a list of enabled plugins for group
   `lock_spec` varchar(255) default NULL,                 # Cron specification for record locking,
                                                          # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
   `workday_minutes` smallint(4) default 480,             # number of work minutes in a regular working day
@@ -47,7 +47,7 @@ CREATE TABLE `tt_groups` (
 
 
 #
-# Structure for table tt_roles. This table stores customized team roles.
+# Structure for table tt_roles. This table stores group roles.
 #
 CREATE TABLE `tt_roles` (
   `id` int(11) NOT NULL auto_increment,    # Role id. Identifies roles for all groups on the server.
@@ -55,13 +55,11 @@ CREATE TABLE `tt_roles` (
   `name` varchar(80) default NULL,         # Role name - custom role name. In case we are editing a
                                            # predefined role (USER, etc.), we can rename the role here.
   `description` varchar(255) default NULL, # Role description.
-  `rank` int(11) default 0,                # Role rank, an integer value between 0-324. Predefined role ranks:
-                                           # USER - 4, CLIENT - 16, COMANAGER - 68, MANAGER - 324.
+  `rank` int(11) default 0,                # Role rank, an integer value between 0-512. Predefined role ranks:
+                                           # User - 4, Supervisor - 12, Client - 16,
+                                           # Co-manager - 68, Manager - 324, Top manager - 512.
                                            # Rank is used to determine what "lesser roles" are in each group
-                                           # for sutuations such as "manage_users".
-                                           # It also identifies a role within a team (by its "rank").
-                                           # Value of rank is to be used in role field in tt_users table,
-                                           # just like standard roles now.
+                                           # for situations such as "manage_users".
   `rights` text default NULL,              # Comma-separated list of rights assigned to a role.
                                            # NULL here for predefined roles (4, 16, 68, 324 - manager)
                                            # means a hard-coded set of default access rights.
@@ -105,7 +103,7 @@ CREATE TABLE `tt_users` (
 # Create an index that guarantees unique active and inactive logins.
 create unique index login_idx on tt_users(login, status);
 
-# Create admin account with password 'secret'. Admin is a superuser, who can create teams.
+# Create admin account with password 'secret'. Admin is a superuser, who can create groupd.
 DELETE from `tt_users` WHERE login = 'admin';
 INSERT INTO `tt_users` (`login`, `password`, `name`, `group_id`, `role_id`) VALUES ('admin', md5('secret'), 'Admin', '0', (select id from tt_roles where rank = 1024));
 
@@ -221,7 +219,7 @@ CREATE TABLE `tt_invoices` (
   PRIMARY KEY (`id`)
 );
 
-# Create an index that guarantees unique invoice names per team.
+# Create an index that guarantees unique invoice names per group.
 create unique index name_idx on tt_invoices(group_id, name, status);
 
 
@@ -306,7 +304,7 @@ CREATE TABLE `tt_clients` (
   PRIMARY KEY (`id`)
 );
 
-# Create an index that guarantees unique active and inactive clients per team.
+# Create an index that guarantees unique active and inactive clients per group.
 create unique index client_name_idx on tt_clients(group_id, name, status);
 
 

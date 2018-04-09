@@ -900,7 +900,7 @@ if ($_POST) {
   if ($_POST["cleanup"]) {
 
     $mdb2 = getConnection();
-    $inactive_teams = ttTeamHelper::getInactiveTeams();
+    $inactive_teams = ttTeamHelper::getInactiveGroups();
 
     $count = count($inactive_teams);
     print "$count inactive teams found...<br>\n";

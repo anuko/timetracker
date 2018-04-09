@@ -28,7 +28,6 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttTeamHelper');
 
 // Access checks.
 if (!ttAccessAllowed('manage_advanced_settings')) {

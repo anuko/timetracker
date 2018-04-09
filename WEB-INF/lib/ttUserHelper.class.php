@@ -246,7 +246,7 @@ class ttUserHelper {
 
     // Tho logic is different depending on who is doing the operation.
     // Co-manager and admin - mark user deleted.
-    // Manager - mark user deleted. If manager is the only account in team, mark team items deleted.
+    // Manager - mark user deleted. If manager is the only account in group, mark group items deleted.
 
     // admin part.
     if ($user->isAdmin()) {
@@ -317,7 +317,7 @@ class ttUserHelper {
         if (is_a($affected, 'PEAR_Error'))
           return false;
  
-        // Mark team deleted.
+        // Mark group deleted.
         $sql = "update tt_groups set status = NULL where id = $user->group_id";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))

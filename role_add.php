@@ -28,7 +28,6 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttTeamHelper');
 import('ttRoleHelper');
 
 // Access check.

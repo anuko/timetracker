@@ -33,7 +33,7 @@ class CustomFields {
   const TYPE_TEXT = 1;     // A text field.
   const TYPE_DROPDOWN = 2; // A dropdown field with pre-defined values.
 
-  var $fields = array();  // Array of custom fields for team.
+  var $fields = array();  // Array of custom fields for group.
   var $options = array(); // Array of options for a dropdown custom field.
 
   // Constructor.
@@ -223,7 +223,7 @@ class CustomFields {
     return false;
   }
 
-  // getFields returns an array of custom fields for team.
+  // getFields returns an array of custom fields for group.
   static function getFields() {
     global $user;
     $mdb2 = getConnection();
@@ -270,7 +270,7 @@ class CustomFields {
     return false;
   }
 
-  // The insertField inserts a custom field for team.
+  // The insertField inserts a custom field for group.
   static function insertField($field_name, $field_type, $required) {
     global $user;
     $mdb2 = getConnection();
@@ -279,7 +279,7 @@ class CustomFields {
     return (!is_a($affected, 'PEAR_Error'));
   }
 
-  // The updateField updates custom field for team.
+  // The updateField updates custom field for group.
   static function updateField($id, $name, $type, $required) {
     global $user;
     $mdb2 = getConnection();
@@ -288,7 +288,7 @@ class CustomFields {
     return (!is_a($affected, 'PEAR_Error'));
   }
 
-  // The deleteField deletes a custom field, its options and log entries for team.
+  // The deleteField deletes a custom field, its options and log entries for group.
   static function deleteField($field_id) {
 
     // Our overall intention is to keep the code simple and manageable.

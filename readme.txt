@@ -4,7 +4,7 @@ Copyright (c) Anuko (https://www.anuko.com)
 Project home page: https://www.anuko.com/time_tracker/index.htm
 Forum: https://www.anuko.com/forum/viewforum.php?f=4
 Info for developers: https://www.anuko.com/time_tracker/info_for_developers.htm
-Free hosting of Time Tracker for individuals and small teams is available at https://timetracker.anuko.com
+Free hosting of Time Tracker for individuals and small groups is available at https://timetracker.anuko.com
 
 Unless otherwise noted, files in this archive are protected by the LIBERAL FREEWARE LICENSE.
 Read the file license.txt for details.
@@ -30,7 +30,7 @@ The general installation procedure looks like this:
 6) Change $dsn value in /WEB-INF/config.php file to reflect your database connection parameters (user name and password).
 7) If you are upgrading from earlier Time Tracker version run dbinstall.php from your browser and do only the required "Update database structure" steps.
 8) If you install time tracker into a sub-directory of your site reflect this in the APP_NAME parameter in /WEB-INF/config.php file. For example, for http://localhost/timetracker/ set APP_NAME = "timetracker".
-9) Login to your time tracker site as admin with password "secret" without quotes and create at least one team.
+9) Login to your time tracker site as admin with password "secret" without quotes and create at least one group.
 10) Change admin password (on the admin "options" page). You can also use the following SQL console command:
   update tt_users set password = md5('new_password_here') where login='admin'
   or by using the "Change password of administrator account" option in http://your_time_tracker_site/dbinstall.php

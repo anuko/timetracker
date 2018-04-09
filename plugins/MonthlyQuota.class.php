@@ -81,7 +81,7 @@ class MonthlyQuota {
     return $numWorkdays * $user->workday_minutes;
   }
 
-  // getMany - returns an array of quotas for a given year for team.
+  // getMany - returns an array of quotas for a given year for group.
   private function getMany($year){
     $group_id = $this->group_id;
     $sql = "SELECT month, minutes FROM tt_monthly_quotas WHERE year = $year AND group_id = $group_id";

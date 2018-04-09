@@ -29,7 +29,6 @@
 require_once('initialize.php');
 require_once('plugins/MonthlyQuota.class.php');
 import('form.Form');
-import('ttTeamHelper');
 import('ttTimeHelper');
 
 // Access checks.

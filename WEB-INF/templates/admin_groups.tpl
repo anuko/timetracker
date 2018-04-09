@@ -15,15 +15,15 @@
     <td class="tableHeader">{$i18n.label.edit}</td>
     <td class="tableHeader">{$i18n.label.delete}</td>
   </tr>
-{if $teams}
-  {foreach $teams as $team}
+{if $groups}
+  {foreach $groups as $group}
   <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
-    <td>{$team.id}</td>
-    <td>{$team.name|escape}</td>
-    <td nowrap>{$team.date}</td>
-    <td align="center">{$team.lang}</td>
-    <td><a href="admin_group_edit.php?id={$team.id}">{$i18n.label.edit}</a></td>
-    <td><a href="admin_group_delete.php?id={$team.id}">{$i18n.label.delete}</a></td>
+    <td>{$group.id}</td>
+    <td>{$group.name|escape}</td>
+    <td nowrap>{$group.date}</td>
+    <td align="center">{$group.lang}</td>
+    <td><a href="admin_group_edit.php?id={$group.id}">{$i18n.label.edit}</a></td>
+    <td><a href="admin_group_delete.php?id={$group.id}">{$i18n.label.delete}</a></td>
   </tr>
   {/foreach}
 {/if}
