@@ -221,7 +221,7 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     $update_result = true;
-    if ($user->canManageTeam()) {
+    if ($user->can('manage_basic_settings') || $user->can('manage_advanced_settings')) {
 
       // Prepare plugins string.
       if ($cl_charts)
