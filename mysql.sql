@@ -29,6 +29,7 @@ CREATE TABLE `tt_groups` (
   `record_type` smallint(2) NOT NULL default 0,          # time record type ("start and finish", "duration", or both)
   `bcc_email` varchar(100) default NULL,                 # bcc email to copy all reports to
   `allow_ip` varchar(255) default NULL,                  # specification from where users are allowed access
+  `password_complexity` varchar(64) default NULL,        # password example that defines required complexity
   `plugins` varchar(255) default NULL,                   # a list of enabled plugins for group
   `lock_spec` varchar(255) default NULL,                 # Cron specification for record locking,
                                                          # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
@@ -448,4 +449,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.86', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.87', now()); # TODO: change when structure changes.
