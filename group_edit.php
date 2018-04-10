@@ -220,78 +220,73 @@ if ($request->isPost()) {
   // Finished validating user input.
 
   if ($err->no()) {
-    $update_result = true;
-    if ($user->canManageTeam()) {
+    // Prepare plugins string.
+    if ($cl_charts)
+      $plugins .= ',ch';
+    if ($cl_clients)
+      $plugins .= ',cl';
+    if ($cl_client_required)
+      $plugins .= ',cm';
+    if ($cl_invoices)
+      $plugins .= ',iv';
+    if ($cl_paid_status)
+      $plugins .= ',ps';
+    if ($cl_custom_fields)
+      $plugins .= ',cf';
+    if ($cl_expenses)
+      $plugins .= ',ex';
+    if ($cl_tax_expenses)
+      $plugins .= ',et';
+    if ($cl_notifications)
+      $plugins .= ',no';
+    if ($cl_locking)
+      $plugins .= ',lk';
+    if ($cl_quotas)
+      $plugins .= ',mq';
+    if ($cl_week_view)
+      $plugins .= ',wv';
 
-      // Prepare plugins string.
-      if ($cl_charts)
-        $plugins .= ',ch';
-      if ($cl_clients)
-        $plugins .= ',cl';
-      if ($cl_client_required)
-        $plugins .= ',cm';
-      if ($cl_invoices)
-        $plugins .= ',iv';
-      if ($cl_paid_status)
-        $plugins .= ',ps';
-      if ($cl_custom_fields)
-        $plugins .= ',cf';
-      if ($cl_expenses)
-        $plugins .= ',ex';
-      if ($cl_tax_expenses)
-        $plugins .= ',et';
-      if ($cl_notifications)
-        $plugins .= ',no';
-      if ($cl_locking)
-        $plugins .= ',lk';
-      if ($cl_quotas)
-        $plugins .= ',mq';
-      if ($cl_week_view)
-        $plugins .= ',wv';
+    // Recycle week view plugin options as they are not configured on this page.
+    $existing_plugins = explode(',', $user->plugins);
+    if (in_array('wvn', $existing_plugins))
+      $plugins .= ',wvn';
+    if (in_array('wvl', $existing_plugins))
+      $plugins .= ',wvl';
+    if (in_array('wvns', $existing_plugins))
+      $plugins .= ',wvns';
 
-      // Recycle week view plugin options as they are not configured on this page.
-      $existing_plugins = explode(',', $user->plugins);
-      if (in_array('wvn', $existing_plugins))
-        $plugins .= ',wvn';
-      if (in_array('wvl', $existing_plugins))
-        $plugins .= ',wvl';
-      if (in_array('wvns', $existing_plugins))
-        $plugins .= ',wvns';
+    $plugins = trim($plugins, ',');
 
-      $plugins = trim($plugins, ',');
+    // Prepare config string.
+    if ($cl_show_holidays)
+      $config .= ',show_holidays';
+    if ($cl_punch_mode)
+      $config .= ',punch_mode';
+    if ($cl_allow_overlap)
+      $config .= ',allow_overlap';
+    if ($cl_future_entries)
+      $config .= ',future_entries';
+    if ($cl_uncompleted_indicators)
+      $config .= ',uncompleted_indicators';
+    $config = trim($config, ',');
 
-      // Prepare config string.
-      if ($cl_show_holidays)
-        $config .= ',show_holidays';
-      if ($cl_punch_mode)
-        $config .= ',punch_mode';
-      if ($cl_allow_overlap)
-        $config .= ',allow_overlap';
-      if ($cl_future_entries)
-        $config .= ',future_entries';
-      if ($cl_uncompleted_indicators)
-        $config .= ',uncompleted_indicators';
-      $config = trim($config, ',');
-
-      $update_result = $user->updateGroup(array(
-        'name' => $cl_group,
-        'currency' => $cl_currency,
-        'lang' => $cl_lang,
-        'decimal_mark' => $cl_decimal_mark,
-        'date_format' => $cl_date_format,
-        'time_format' => $cl_time_format,
-        'week_start' => $cl_start_week,
-        'tracking_mode' => $cl_tracking_mode,
-        'project_required' => $cl_project_required,
-        'task_required' => $cl_task_required,
-        'record_type' => $cl_record_type,
-        'uncompleted_indicators' => $cl_uncompleted_indicators,
-        'bcc_email' => $cl_bcc_email,
-        'allow_ip' => $cl_allow_ip,
-        'plugins' => $plugins,
-        'config' => $config));
-    }
-    if ($update_result) {
+    if ($user->updateGroup(array(
+      'name' => $cl_group,
+      'currency' => $cl_currency,
+      'lang' => $cl_lang,
+      'decimal_mark' => $cl_decimal_mark,
+      'date_format' => $cl_date_format,
+      'time_format' => $cl_time_format,
+      'week_start' => $cl_start_week,
+      'tracking_mode' => $cl_tracking_mode,
+      'project_required' => $cl_project_required,
+      'task_required' => $cl_task_required,
+      'record_type' => $cl_record_type,
+      'uncompleted_indicators' => $cl_uncompleted_indicators,
+      'bcc_email' => $cl_bcc_email,
+      'allow_ip' => $cl_allow_ip,
+      'plugins' => $plugins,
+      'config' => $config))) {
       header('Location: time.php');
       exit();
     } else
