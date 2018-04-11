@@ -158,12 +158,6 @@ class ttUser {
                                       // to this function and then remove it.
   }
 
-  // isCoManager - determines whether current user is group comanager.
-  // This is a legacy function that we are getting rid of by replacing with rights check.
-  function isCoManager() {
-    return ($this->can('manage_users') && !$this->can('export_data'));
-  }
-
   // isClient - determines whether current user is a client.
   function isClient() {
     return $this->is_client;
@@ -447,6 +441,38 @@ class ttUser {
     $sql = "update tt_groups set $parts where id = $this->group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
+
+    return true;
+  }
+
+  // markUserDeleted marks a user in group as deleted.
+  function markUserDeleted($user_id) {
+    if (!$this->can('manage_users') || $this->id == $user_id)
+      return false;
+
+    // Make sure we operate on a legit user.
+    $user_details = $this->getUser($user_id);
+    if (!$user_details) return false;
+
+    $mdb2 = getConnection();
+
+    // Mark user to project binds as deleted.
+    $sql = "update tt_user_project_binds set status = NULL where user_id = $user_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    // Mark user favorite reports as deleted.
+    $sql = "update tt_fav_reports set status = NULL where user_id = $user_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    // Mark user as deleted.
+    $sql = "update tt_users set status = NULL where id = $user_id and group_id = ".$this->group_id;
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
 
     return true;
   }

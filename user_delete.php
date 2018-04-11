@@ -28,7 +28,7 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttUserHelper');
+import('ttUser');
 
 // Access checks.
 if (!ttAccessAllowed('manage_users')) {
@@ -53,7 +53,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get(
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if (ttUserHelper::markDeleted($user_id)) {
+    if ($user->markUserDeleted($user_id)) {
       // If we deleted the "on behalf" user reset its info in session.
       if ($user_id == $user->behalf_id) {
         unset($_SESSION['behalf_id']);
