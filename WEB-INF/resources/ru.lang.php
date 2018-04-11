@@ -446,6 +446,9 @@ $i18n_key_words = array(
 'form.profile.allow_ip' => 'Разрешить доступ с IP',
 'form.profile.plugins' => 'Плагины',
 
+// Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
+'form.group_delete.hint' => 'Вы уверены, что хотите удалить всю группу?',
+
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'От',
 'form.mail.to' => 'Кому',

@@ -28,17 +28,22 @@
 
 require_once('initialize.php');
 import('form.Form');
+import('ttAdmin');
 
 // Access checks.
 if (!ttAccessAllowed('delete_group')) {
   header('Location: access_denied.php');
   exit();
 }
+$group_id = (int)$request->getParameter('id');
+if ($user->group_id != $group_id) {
+  header('Location: access_denied.php');
+  exit();
+}
 // End of access checks.
 
-// TODO: refactor this... and the template.
-$group_id = (int)$request->getParameter('id');
-
+// Note: reuse ttAdmin class here, simply because deleting a group
+// is a complicated task.
 $admin = new ttAdmin();
 $group_details = $admin->getGroupDetails($group_id);
 $group_name = $group_details['group_name'];
@@ -50,16 +55,17 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get(
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    $result = $admin->markGroupDeleted($group_id);
-    if ($result) {
-      header('Location: admin_groups.php');
+    if ($admin->markGroupDeleted($group_id)) {
+      $auth->doLogout();
+      session_unset();
+      header('Location: login.php');
       exit();
     } else
       $err->add($i18n->get('error.db'));
   }
 
   if ($request->getParameter('btn_cancel')) {
-    header('Location: admin_groups.php');
+    header('Location: group_edit.php');
     exit();
   }
 } // isPost
@@ -67,5 +73,5 @@ if ($request->isPost()) {
 $smarty->assign('group_to_delete', $group_name);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.delete_group'));
-$smarty->assign('content_page_name', 'admin_group_delete.tpl');
+$smarty->assign('content_page_name', 'group_delete.tpl');
 $smarty->display('index.tpl');

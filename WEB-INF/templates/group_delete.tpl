@@ -3,6 +3,8 @@
   <tr>
     <td>
       <table cellspacing="0" cellpadding="0" border="0">
+        <tr><td colspan="2">{$i18n.form.group_delete.hint}</td></tr>
+        <tr><td>&nbsp;</td></tr>
         <tr>
           <td colspan="2" align="center"><b>{$group_to_delete|escape}</b></td>
         </tr>

@@ -208,8 +208,16 @@ $form->addInput(array('type'=>'checkbox','name'=>'locking','value'=>$cl_locking,
 $form->addInput(array('type'=>'checkbox','name'=>'quotas','value'=>$cl_quotas,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'week_view','value'=>$cl_week_view,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
+if ($user->can('delete_group')) $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('button.delete')));
 
 if ($request->isPost()) {
+
+  if ($request->getParameter('btn_delete')) {
+    // Delete button pressed, redirect.
+    header('Location: group_delete.php?id='.$user->group_id);
+    exit();
+  }
+
   // Validate user input.
   if (!ttValidString($cl_group, true)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
   if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));

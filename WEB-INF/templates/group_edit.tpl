@@ -1,4 +1,6 @@
 <script>
+function chLocation(newLocation) { document.location = newLocation; }
+
 // handleTaskRequiredCheckbox - controls visibility of the Task Required checkbox.
 function handleTaskRequiredCheckbox() {
   var taskRequiredCheckbox = document.getElementById("task_required");
@@ -243,7 +245,7 @@ function handlePluginCheckboxes() {
             <td colspan="2">&nbsp;</td>
           </tr>
           <tr>
-            <td colspan="2" height="50" align="center">{$forms.groupForm.btn_save.control}</td>
+            <td colspan="2" height="50" align="center">{$forms.groupForm.btn_save.control} {$forms.groupForm.btn_delete.control}</td>
           </tr>
         </table>
       </td>

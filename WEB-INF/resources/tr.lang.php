@@ -535,6 +535,10 @@ $i18n_key_words = array(
 // 'form.profile.allow_ip' => 'Allow IP',
 // 'form.profile.plugins' => 'Plugins',
 
+// Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
+// TODO: translate the following.
+// 'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
+
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'Kimden',
 'form.mail.to' => 'Kime',
