@@ -54,6 +54,7 @@ class ttUser {
   var $uncompleted_indicators = 0; // Uncompleted time entry indicators (show nowhere or on users page).
   var $bcc_email = null;        // Bcc email.
   var $allow_ip = null;         // Specification from where user is allowed access.
+  var $password_complexity = null; // Password complexity example.
   var $currency = null;         // Currency.
   var $plugins = null;          // Comma-separated list of enabled plugins.
   var $config = null;           // Comma-separated list of miscellaneous config options.
@@ -76,7 +77,7 @@ class ttUser {
     $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id, u.email, g.name as group_name,
       g.currency, g.lang, g.decimal_mark, g.date_format, g.time_format, g.week_start,
       g.tracking_mode, g.project_required, g.task_required, g.record_type,
-      g.bcc_email, g.allow_ip, g.plugins, g.config, g.lock_spec, g.workday_minutes, g.custom_logo
+      g.bcc_email, g.allow_ip, g.password_complexity, g.plugins, g.config, g.lock_spec, g.workday_minutes, g.custom_logo
       FROM tt_users u LEFT JOIN tt_groups g ON (u.group_id = g.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
     if ($id)
       $sql .= "u.id = $id";
@@ -113,6 +114,7 @@ class ttUser {
       $this->record_type = $val['record_type'];
       $this->bcc_email = $val['bcc_email'];
       $this->allow_ip = $val['allow_ip'];
+      $this->password_complexity = $val['password_complexity'];
       $this->group = $val['group_name'];
       $this->currency = $val['currency'];
       $this->plugins = $val['plugins'];
