@@ -464,25 +464,25 @@ $i18n_key_words = array(
 'form.groups.hint' => 'Napravite novi tim. Počnite sa otvaranjem naloga za Menadžera.<br>Takođe možete uvoziti podatke iz xml fajla sa drugog Anuko Time Tracker server-a (dupliranje prijava nisu dozvoljeni).',
 
 // Forma profila. Pogledajte primer na at https://timetracker.anuko.com/profile_edit.php.
-'form.profile.12_hours' => '12 časova',
-'form.profile.24_hours' => '24 časova',
+'form.group_edit.12_hours' => '12 časova',
+'form.group_edit.24_hours' => '24 časova',
 // TODO: translate the following.
-// 'form.profile.show_holidays' => 'Show holidays',
-'form.profile.tracking_mode' => 'Način evidencije',
-'form.profile.mode_time' => 'vreme',
-'form.profile.mode_projects' => 'projekti',
-'form.profile.mode_projects_and_tasks' => 'projekti i zadaci',
-'form.profile.record_type' => 'Način čuvanja',
-'form.profile.type_all' => 'sve',
-'form.profile.type_start_finish' => 'početak i kraj',
-'form.profile.type_duration' => 'trajanje',
+// 'form.group_edit.show_holidays' => 'Show holidays',
+'form.group_edit.tracking_mode' => 'Način evidencije',
+'form.group_edit.mode_time' => 'vreme',
+'form.group_edit.mode_projects' => 'projekti',
+'form.group_edit.mode_projects_and_tasks' => 'projekti i zadaci',
+'form.group_edit.record_type' => 'Način čuvanja',
+'form.group_edit.type_all' => 'sve',
+'form.group_edit.type_start_finish' => 'početak i kraj',
+'form.group_edit.type_duration' => 'trajanje',
 // TODO: translate the following.
-// 'form.profile.punch_mode' => 'Punch mode',
-// 'form.profile.allow_overlap' => 'Allow overlap',
-// 'form.profile.future_entries' => 'Future entries',
-// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
-// 'form.profile.allow_ip' => 'Allow IP',
-'form.profile.plugins' => 'Dodaci',
+// 'form.group_edit.punch_mode' => 'Punch mode',
+// 'form.group_edit.allow_overlap' => 'Allow overlap',
+// 'form.group_edit.future_entries' => 'Future entries',
+// 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.group_edit.allow_ip' => 'Allow IP',
+'form.group_edit.plugins' => 'Dodaci',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.

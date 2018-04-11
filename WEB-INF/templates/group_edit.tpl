@@ -139,31 +139,31 @@ function handlePluginCheckboxes() {
             <td>{$forms.groupForm.start_week.control}</td>
           </tr>
           <tr>
-            <td align="right" nowrap>{$i18n.form.profile.show_holidays}:</td>
+            <td align="right" nowrap>{$i18n.form.group_edit.show_holidays}:</td>
             <td>{$forms.groupForm.show_holidays.control} <a href="https://www.anuko.com/lp/tt_14.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
           <tr>
-            <td align="right" nowrap>{$i18n.form.profile.tracking_mode}:</td>
+            <td align="right" nowrap>{$i18n.form.group_edit.tracking_mode}:</td>
             <td>{$forms.groupForm.tracking_mode.control} {$forms.groupForm.task_required.control} <span id="task_required_label"><label for="task_required">{$i18n.label.required}</label></span></td>
           </tr>
           <tr>
-            <td align="right" nowrap>{$i18n.form.profile.record_type}:</td>
+            <td align="right" nowrap>{$i18n.form.group_edit.record_type}:</td>
             <td>{$forms.groupForm.record_type.control}</td>
           </tr>
           <tr>
-            <td align="right" nowrap>{$i18n.form.profile.punch_mode}:</td>
+            <td align="right" nowrap>{$i18n.form.group_edit.punch_mode}:</td>
             <td>{$forms.groupForm.punch_mode.control} <a href="https://www.anuko.com/lp/tt_18.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
           <tr>
-            <td align="right" nowrap>{$i18n.form.profile.allow_overlap}:</td>
+            <td align="right" nowrap>{$i18n.form.group_edit.allow_overlap}:</td>
             <td>{$forms.groupForm.allow_overlap.control} <a href="https://www.anuko.com/lp/tt_16.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
           <tr>
-            <td align="right" nowrap>{$i18n.form.profile.future_entries}:</td>
+            <td align="right" nowrap>{$i18n.form.group_edit.future_entries}:</td>
             <td>{$forms.groupForm.future_entries.control} <a href="https://www.anuko.com/lp/tt_17.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
           <tr>
-            <td align="right" nowrap>{$i18n.form.profile.uncompleted_indicators}:</td>
+            <td align="right" nowrap>{$i18n.form.group_edit.uncompleted_indicators}:</td>
             <td>{$forms.groupForm.uncompleted_indicators.control} <a href="https://www.anuko.com/lp/tt_15.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
   {if $user->can('manage_advanced_settings')}
@@ -172,7 +172,7 @@ function handlePluginCheckboxes() {
             <td>{$forms.groupForm.bcc_email.control} <a href="https://www.anuko.com/lp/tt_10.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
           <tr>
-            <td align="right" nowrap>{$i18n.form.profile.allow_ip}:</td>
+            <td align="right" nowrap>{$i18n.form.group_edit.allow_ip}:</td>
             <td>{$forms.groupForm.allow_ip.control} <a href="https://www.anuko.com/lp/tt_21.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
   {/if}
@@ -196,7 +196,7 @@ function handlePluginCheckboxes() {
           </tr>
 
           <tr>
-             <td colspan="2" class="sectionHeader">{$i18n.form.profile.plugins}</td>
+             <td colspan="2" class="sectionHeader">{$i18n.form.group_edit.plugins}</td>
           </tr>
           <tr><td>&nbsp;</td></tr>
           <tr>

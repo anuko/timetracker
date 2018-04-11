@@ -434,25 +434,25 @@ $i18n_key_words = array(
 // Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
 'form.groups.hint' => 'Δημιουργήστε μια νέα ομάδα δημιουργώντας ένα νέο λογαριασμό διαχειριστή ομάδας.<br>Μπορείτε επίσης να εισαγάγετε δεδομένα ομάδας από ένα αρχείο xml από άλλο διακομιστή Anuko Time Tracker (δεν επιτρέπονται συγκρούσεις σύνδεσης).',
 
-// Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-'form.profile.12_hours' => '12 ώρες',
-'form.profile.24_hours' => '24 ώρες',
-'form.profile.show_holidays' => 'Προβολή διακοπών',
-'form.profile.tracking_mode' => 'Λειτουργία καταγραφής',
-'form.profile.mode_time' => 'χρόνος',
-'form.profile.mode_projects' => 'έργα',
-'form.profile.mode_projects_and_tasks' => 'έργα και εργασίες',
-'form.profile.record_type' => 'Τύπος εγγραφής',
-'form.profile.type_all' => 'όλα',
-'form.profile.type_start_finish' => 'αρχή και τέλος',
-'form.profile.type_duration' => 'διάρκεια',
-'form.profile.punch_mode' => 'Λειτουργία διάτρησης',
-'form.profile.allow_overlap' => 'Επικάλυψη επιτρεπτή',
-'form.profile.future_entries' => 'Μελλοντικές καταχωρήσεις',
-'form.profile.uncompleted_indicators' => 'Μη ολοκληρωμένες ενδείξεις',
+// Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
+'form.group_edit.12_hours' => '12 ώρες',
+'form.group_edit.24_hours' => '24 ώρες',
+'form.group_edit.show_holidays' => 'Προβολή διακοπών',
+'form.group_edit.tracking_mode' => 'Λειτουργία καταγραφής',
+'form.group_edit.mode_time' => 'χρόνος',
+'form.group_edit.mode_projects' => 'έργα',
+'form.group_edit.mode_projects_and_tasks' => 'έργα και εργασίες',
+'form.group_edit.record_type' => 'Τύπος εγγραφής',
+'form.group_edit.type_all' => 'όλα',
+'form.group_edit.type_start_finish' => 'αρχή και τέλος',
+'form.group_edit.type_duration' => 'διάρκεια',
+'form.group_edit.punch_mode' => 'Λειτουργία διάτρησης',
+'form.group_edit.allow_overlap' => 'Επικάλυψη επιτρεπτή',
+'form.group_edit.future_entries' => 'Μελλοντικές καταχωρήσεις',
+'form.group_edit.uncompleted_indicators' => 'Μη ολοκληρωμένες ενδείξεις',
 // TODO: translate the following.
-// 'form.profile.allow_ip' => 'Allow IP',
-'form.profile.plugins' => 'Πρόσθετα',
+// 'form.group_edit.allow_ip' => 'Allow IP',
+'form.group_edit.plugins' => 'Πρόσθετα',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.

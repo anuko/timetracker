@@ -145,8 +145,8 @@ $DATE_FORMAT_OPTIONS = array(
 $form->addInput(array('type'=>'combobox','name'=>'date_format','style'=>'width: 150px;','data'=>$DATE_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_date_format,
   'onchange'=>'MakeFormatPreview(&quot;date_format_preview&quot;, this);'));
 $TIME_FORMAT_OPTIONS = array(
-  array('id'=>'%H:%M','name'=>$i18n->get('form.profile.24_hours')),
-  array('id'=>'%I:%M %p','name'=>$i18n->get('form.profile.12_hours')));
+  array('id'=>'%H:%M','name'=>$i18n->get('form.group_edit.24_hours')),
+  array('id'=>'%I:%M %p','name'=>$i18n->get('form.group_edit.12_hours')));
 $form->addInput(array('type'=>'combobox','name'=>'time_format','style'=>'width: 150px;','data'=>$TIME_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_time_format,
   'onchange'=>'MakeFormatPreview(&quot;time_format_preview&quot;, this);'));
 
@@ -162,18 +162,18 @@ $form->addInput(array('type'=>'checkbox','name'=>'show_holidays','value'=>$cl_sh
 
 // Prepare tracking mode choices.
 $tracking_mode_options = array();
-$tracking_mode_options[MODE_TIME] = $i18n->get('form.profile.mode_time');
-$tracking_mode_options[MODE_PROJECTS] = $i18n->get('form.profile.mode_projects');
-$tracking_mode_options[MODE_PROJECTS_AND_TASKS] = $i18n->get('form.profile.mode_projects_and_tasks');
+$tracking_mode_options[MODE_TIME] = $i18n->get('form.group_edit.mode_time');
+$tracking_mode_options[MODE_PROJECTS] = $i18n->get('form.group_edit.mode_projects');
+$tracking_mode_options[MODE_PROJECTS_AND_TASKS] = $i18n->get('form.group_edit.mode_projects_and_tasks');
 $form->addInput(array('type'=>'combobox','name'=>'tracking_mode','style'=>'width: 150px;','data'=>$tracking_mode_options,'value'=>$cl_tracking_mode,'onchange'=>'handleTaskRequiredCheckbox()'));
 $form->addInput(array('type'=>'checkbox','name'=>'project_required','value'=>$cl_project_required));
 $form->addInput(array('type'=>'checkbox','name'=>'task_required','value'=>$cl_task_required));
 
 // Prepare record type choices.
 $record_type_options = array();
-$record_type_options[TYPE_ALL] = $i18n->get('form.profile.type_all');
-$record_type_options[TYPE_START_FINISH] = $i18n->get('form.profile.type_start_finish');
-$record_type_options[TYPE_DURATION] = $i18n->get('form.profile.type_duration');
+$record_type_options[TYPE_ALL] = $i18n->get('form.group_edit.type_all');
+$record_type_options[TYPE_START_FINISH] = $i18n->get('form.group_edit.type_start_finish');
+$record_type_options[TYPE_DURATION] = $i18n->get('form.group_edit.type_duration');
 $form->addInput(array('type'=>'combobox','name'=>'record_type','style'=>'width: 150px;','data'=>$record_type_options,'value'=>$cl_record_type));
 
 // Punch mode checkbox.
@@ -223,7 +223,7 @@ if ($request->isPost()) {
   if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));
   if ($advanced_settings) {
     if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
-    if (!ttValidIP($cl_allow_ip, true)) $err->add($i18n->get('error.field'), $i18n->get('form.profile.allow_ip'));
+    if (!ttValidIP($cl_allow_ip, true)) $err->add($i18n->get('error.field'), $i18n->get('form.group_edit.allow_ip'));
   }
   // Finished validating user input.
 

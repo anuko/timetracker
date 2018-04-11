@@ -462,26 +462,26 @@ $i18n_key_words = array(
 // TODO: replace "team" with "group" in the string below.
 'form.groups.hint' => 'Luo uusi tiimi luomalla ensin tiimin esimiehen käyttäjätili.<br>Tiimin tiedot voi myös tuoda toiselta Anuko Time Tracker -palvelimelta xml-muodossa (käyttäjänimien oltava uusia).',
 
-// Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-'form.profile.12_hours' => '12-tuntinen',
-'form.profile.24_hours' => '24-tuntinen',
+// Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
+'form.group_edit.12_hours' => '12-tuntinen',
+'form.group_edit.24_hours' => '24-tuntinen',
 // TODO: translate the following.
-// 'form.profile.show_holidays' => 'Show holidays',
-'form.profile.tracking_mode' => 'Seurantamuoto',
-'form.profile.mode_time' => 'aika',
-'form.profile.mode_projects' => 'projektit',
-'form.profile.mode_projects_and_tasks' => 'projektit ja tehtävät',
-'form.profile.record_type' => 'Tietueen tyyppi',
-'form.profile.type_all' => 'kaikki',
-'form.profile.type_start_finish' => 'aloitus ja lopetus',
-'form.profile.type_duration' => 'kesto',
+// 'form.group_edit.show_holidays' => 'Show holidays',
+'form.group_edit.tracking_mode' => 'Seurantamuoto',
+'form.group_edit.mode_time' => 'aika',
+'form.group_edit.mode_projects' => 'projektit',
+'form.group_edit.mode_projects_and_tasks' => 'projektit ja tehtävät',
+'form.group_edit.record_type' => 'Tietueen tyyppi',
+'form.group_edit.type_all' => 'kaikki',
+'form.group_edit.type_start_finish' => 'aloitus ja lopetus',
+'form.group_edit.type_duration' => 'kesto',
 // TODO: translate the following.
-// 'form.profile.punch_mode' => 'Punch mode',
-// 'form.profile.allow_overlap' => 'Allow overlap',
-// 'form.profile.future_entries' => 'Future entries',
-// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
-// 'form.profile.allow_ip' => 'Allow IP',
-'form.profile.plugins' => 'Lisäosat',
+// 'form.group_edit.punch_mode' => 'Punch mode',
+// 'form.group_edit.allow_overlap' => 'Allow overlap',
+// 'form.group_edit.future_entries' => 'Future entries',
+// 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.group_edit.allow_ip' => 'Allow IP',
+'form.group_edit.plugins' => 'Lisäosat',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.

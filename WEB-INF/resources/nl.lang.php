@@ -431,24 +431,24 @@ $i18n_key_words = array(
 // TODO: replace "team" with "group" in the string below (3 places).
 'form.groups.hint' => 'Maak een nieuw team door een team  manager account aan te maken.<br>U kunt ook teamgegevens importeren uit een xml file van een andere Anuko Time Tracker server (login namen moeten uniek zijn).',
 
-// Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-'form.profile.12_hours' => '12 uurs',
-'form.profile.24_hours' => '24 uurs',
-'form.profile.show_holidays' => 'Toon vakantiedagen',
-'form.profile.tracking_mode' => 'Bijhouden',
-'form.profile.mode_time' => 'tijd',
-'form.profile.mode_projects' => 'projecten',
-'form.profile.mode_projects_and_tasks' => 'projecten en taken',
-'form.profile.record_type' => 'Registratie type',
-'form.profile.type_all' => 'begin, einde en duur',
-'form.profile.type_start_finish' => 'begin en einde',
-'form.profile.type_duration' => 'duur',
-'form.profile.punch_mode' => 'Start/stop modus',
-'form.profile.allow_overlap' => 'Sta overlapping van tijden toe',
-'form.profile.future_entries' => 'Toevoegingen toestaan in de toekomst',
-'form.profile.uncompleted_indicators' => 'Onvolledige indicatoren',
-'form.profile.allow_ip' => 'Toegestane IP adressen',
-'form.profile.plugins' => 'Plugins',
+// Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
+'form.group_edit.12_hours' => '12 uurs',
+'form.group_edit.24_hours' => '24 uurs',
+'form.group_edit.show_holidays' => 'Toon vakantiedagen',
+'form.group_edit.tracking_mode' => 'Bijhouden',
+'form.group_edit.mode_time' => 'tijd',
+'form.group_edit.mode_projects' => 'projecten',
+'form.group_edit.mode_projects_and_tasks' => 'projecten en taken',
+'form.group_edit.record_type' => 'Registratie type',
+'form.group_edit.type_all' => 'begin, einde en duur',
+'form.group_edit.type_start_finish' => 'begin en einde',
+'form.group_edit.type_duration' => 'duur',
+'form.group_edit.punch_mode' => 'Start/stop modus',
+'form.group_edit.allow_overlap' => 'Sta overlapping van tijden toe',
+'form.group_edit.future_entries' => 'Toevoegingen toestaan in de toekomst',
+'form.group_edit.uncompleted_indicators' => 'Onvolledige indicatoren',
+'form.group_edit.allow_ip' => 'Toegestane IP adressen',
+'form.group_edit.plugins' => 'Plugins',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.

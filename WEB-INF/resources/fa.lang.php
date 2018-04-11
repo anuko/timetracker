@@ -481,26 +481,26 @@ $i18n_key_words = array(
 // TODO: translate form.groups.hint.
 // 'form.groups.hint' => 'Create a new group by creating a new group manager account.<br>You can also import group data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
 
-// Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-'form.profile.12_hours' => '12 ساعت',
-'form.profile.24_hours' => '24 ساعت',
+// Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
+'form.group_edit.12_hours' => '12 ساعت',
+'form.group_edit.24_hours' => '24 ساعت',
 // TODO: translate the following.
-// 'form.profile.show_holidays' => 'Show holidays',
-'form.profile.tracking_mode' => 'حالت رهگیری',
-'form.profile.mode_time' => 'زمان',
-'form.profile.mode_projects' => 'پروژه ها',
-'form.profile.mode_projects_and_tasks' => 'پروژه ها و وظایف',
-'form.profile.record_type' => 'نوع رکورد',
-'form.profile.type_all' => 'همه',
-'form.profile.type_start_finish' => 'شروع و اتمام',
-'form.profile.type_duration' => 'مدت زمان',
+// 'form.group_edit.show_holidays' => 'Show holidays',
+'form.group_edit.tracking_mode' => 'حالت رهگیری',
+'form.group_edit.mode_time' => 'زمان',
+'form.group_edit.mode_projects' => 'پروژه ها',
+'form.group_edit.mode_projects_and_tasks' => 'پروژه ها و وظایف',
+'form.group_edit.record_type' => 'نوع رکورد',
+'form.group_edit.type_all' => 'همه',
+'form.group_edit.type_start_finish' => 'شروع و اتمام',
+'form.group_edit.type_duration' => 'مدت زمان',
 // TODO: translate the following.
-// 'form.profile.punch_mode' => 'Punch mode',
-// 'form.profile.allow_overlap' => 'Allow overlap',
-// 'form.profile.future_entries' => 'Future entries',
-// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
-// 'form.profile.allow_ip' => 'Allow IP',
-'form.profile.plugins' => 'پلاگین ها',
+// 'form.group_edit.punch_mode' => 'Punch mode',
+// 'form.group_edit.allow_overlap' => 'Allow overlap',
+// 'form.group_edit.future_entries' => 'Future entries',
+// 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.group_edit.allow_ip' => 'Allow IP',
+'form.group_edit.plugins' => 'پلاگین ها',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.

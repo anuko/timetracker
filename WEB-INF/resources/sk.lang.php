@@ -479,26 +479,26 @@ $i18n_key_words = array(
 // TODO: replace "team" with "group" in the string below (3 places).
 'form.groups.hint' => 'Pomocou vytvorenia nového účtu tímového manažéra vytvorte nový tím.<br>Taktiež môžete importovať údaje o tíme z xml súboru z iného Anuko Time Tracker serveru (nie sú povolené kolízie v prihlasovacom mene).',
 
-// Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-'form.profile.12_hours' => '12-hodinový',
-'form.profile.24_hours' => '24-hodinový',
+// Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
+'form.group_edit.12_hours' => '12-hodinový',
+'form.group_edit.24_hours' => '24-hodinový',
 // TODO: translate the following.
-// 'form.profile.show_holidays' => 'Show holidays',
-'form.profile.tracking_mode' => 'Režim sledovania',
-'form.profile.mode_time' => 'čas',
-'form.profile.mode_projects' => 'projekty',
-'form.profile.mode_projects_and_tasks' => 'projekty a úlohy',
-'form.profile.record_type' => 'Typ záznamu',
-'form.profile.type_all' => 'všetky',
-'form.profile.type_start_finish' => 'začiatok a koniec',
-'form.profile.type_duration' => 'trvanie',
+// 'form.group_edit.show_holidays' => 'Show holidays',
+'form.group_edit.tracking_mode' => 'Režim sledovania',
+'form.group_edit.mode_time' => 'čas',
+'form.group_edit.mode_projects' => 'projekty',
+'form.group_edit.mode_projects_and_tasks' => 'projekty a úlohy',
+'form.group_edit.record_type' => 'Typ záznamu',
+'form.group_edit.type_all' => 'všetky',
+'form.group_edit.type_start_finish' => 'začiatok a koniec',
+'form.group_edit.type_duration' => 'trvanie',
 // TODO: translate the following.
-// 'form.profile.punch_mode' => 'Punch mode',
-// 'form.profile.allow_overlap' => 'Allow overlap',
-// 'form.profile.future_entries' => 'Future entries',
-// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
-// 'form.profile.allow_ip' => 'Allow IP',
-'form.profile.plugins' => 'Doplnkové moduly',
+// 'form.group_edit.punch_mode' => 'Punch mode',
+// 'form.group_edit.allow_overlap' => 'Allow overlap',
+// 'form.group_edit.future_entries' => 'Future entries',
+// 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.group_edit.allow_ip' => 'Allow IP',
+'form.group_edit.plugins' => 'Doplnkové moduly',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.

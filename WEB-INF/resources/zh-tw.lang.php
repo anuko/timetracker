@@ -494,25 +494,25 @@ $i18n_key_words = array(
 // TODO: replace "team" with "group" in the string below.
 'form.groups.hint' => '通過創建新的團隊經理帳號來創建新團隊。<br>您也可以從其它的Anuko時間追蹤器伺服器的xml檔導入團隊資料(登錄資訊不能發生衝突)。',
 
-// Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
+// Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 // TODO: translate the following.
-// 'form.profile.12_hours' => '12 hours',
-// 'form.profile.24_hours' => '24 hours',
-// 'form.profile.show_holidays' => 'Show holidays',
-// 'form.profile.tracking_mode' => 'Tracking mode',
-// 'form.profile.mode_time' => 'time',
-// 'form.profile.mode_projects' => 'projects',
-// 'form.profile.mode_projects_and_tasks' => 'projects and tasks',
-// 'form.profile.record_type' => 'Record type',
-// 'form.profile.type_all' => 'all',
-// 'form.profile.type_start_finish' => 'start and finish',
-// 'form.profile.type_duration' => 'duration',
-// 'form.profile.punch_mode' => 'Punch mode',
-// 'form.profile.allow_overlap' => 'Allow overlap',
-// 'form.profile.future_entries' => 'Future entries',
-// 'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
-// 'form.profile.allow_ip' => 'Allow IP',
-// 'form.profile.plugins' => 'Plugins',
+// 'form.group_edit.12_hours' => '12 hours',
+// 'form.group_edit.24_hours' => '24 hours',
+// 'form.group_edit.show_holidays' => 'Show holidays',
+// 'form.group_edit.tracking_mode' => 'Tracking mode',
+// 'form.group_edit.mode_time' => 'time',
+// 'form.group_edit.mode_projects' => 'projects',
+// 'form.group_edit.mode_projects_and_tasks' => 'projects and tasks',
+// 'form.group_edit.record_type' => 'Record type',
+// 'form.group_edit.type_all' => 'all',
+// 'form.group_edit.type_start_finish' => 'start and finish',
+// 'form.group_edit.type_duration' => 'duration',
+// 'form.group_edit.punch_mode' => 'Punch mode',
+// 'form.group_edit.allow_overlap' => 'Allow overlap',
+// 'form.group_edit.future_entries' => 'Future entries',
+// 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.group_edit.allow_ip' => 'Allow IP',
+// 'form.group_edit.plugins' => 'Plugins',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.
