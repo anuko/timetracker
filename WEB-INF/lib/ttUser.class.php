@@ -150,11 +150,6 @@ class ttUser {
     return in_array($do_something, $this->rights);
   }
 
-  // isAdmin - determines whether current user is admin.
-  function isAdmin() {
-    return $this->can('administer_site');
-  }
-
   // isManager - determines whether current user is group manager.
   // This is a legacy function that we are getting rid of by replacing with rights check.
   function isManager() {
