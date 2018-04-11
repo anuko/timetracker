@@ -443,6 +443,10 @@ $i18n_key_words = array(
 'form.users.rate' => 'نرخ',
 'form.users.default_rate' => 'نرخ ساعتی پیش فرض',
 
+// Editing User form. See example at https://timetracker.anuko.com/user_edit.php
+// TODO: translate the following.
+// 'form.user_edit.swap_roles' => 'Swap roles',
+
 // Roles form. See example at https://timetracker.anuko.com/roles.php
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
@@ -478,8 +482,6 @@ $i18n_key_words = array(
 // 'form.groups.hint' => 'Create a new group by creating a new group manager account.<br>You can also import group data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-// TODO: translate the following.
-// 'form.profile.swap_roles' => 'Swap roles',
 'form.profile.12_hours' => '12 ساعت',
 'form.profile.24_hours' => '24 ساعت',
 // TODO: translate the following.

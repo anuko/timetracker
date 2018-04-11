@@ -396,6 +396,9 @@ $i18n_key_words = array(
 'form.users.rate' => 'Tarief',
 'form.users.default_rate' => 'Standaard uurtarief',
 
+// Editing User form. See example at https://timetracker.anuko.com/user_edit.php
+'form.user_edit.swap_roles' => 'Rollen verruilen',
+
 // Roles form. See example at https://timetracker.anuko.com/roles.php
 'form.roles.active_roles' => 'Actieve rollen',
 'form.roles.inactive_roles' => 'Inactieve rollen',
@@ -429,7 +432,6 @@ $i18n_key_words = array(
 'form.groups.hint' => 'Maak een nieuw team door een team  manager account aan te maken.<br>U kunt ook teamgegevens importeren uit een xml file van een andere Anuko Time Tracker server (login namen moeten uniek zijn).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-'form.profile.swap_roles' => 'Rollen verruilen',
 'form.profile.12_hours' => '12 uurs',
 'form.profile.24_hours' => '24 uurs',
 'form.profile.show_holidays' => 'Toon vakantiedagen',

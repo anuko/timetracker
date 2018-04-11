@@ -399,6 +399,9 @@ $i18n_key_words = array(
 'form.users.rate' => 'Rate',
 'form.users.default_rate' => 'Default hourly rate',
 
+// Editing User form. See example at https://timetracker.anuko.com/user_edit.php
+'form.user_edit.swap_roles' => 'Swap roles',
+
  // Roles form. See example at https://timetracker.anuko.com/roles.php
 'form.roles.active_roles' => 'Active Roles',
 'form.roles.inactive_roles' => 'Inactive Roles',
@@ -430,7 +433,6 @@ $i18n_key_words = array(
 'form.groups.hint' => 'Create a new group by creating a new group manager account.<br>You can also import group data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-'form.profile.swap_roles' => 'Swap roles',
 'form.profile.12_hours' => '12 hours',
 'form.profile.24_hours' => '24 hours',
 'form.profile.show_holidays' => 'Show holidays',

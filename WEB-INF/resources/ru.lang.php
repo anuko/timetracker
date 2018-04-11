@@ -396,6 +396,9 @@ $i18n_key_words = array(
 'form.users.rate' => 'Ставка',
 'form.users.default_rate' => 'Почасовая ставка',
 
+// Editing User form. See example at https://timetracker.anuko.com/user_edit.php
+'form.user_edit.swap_roles' => 'Обменять роль',
+
 // Roles form. See example at https://timetracker.anuko.com/roles.php
 'form.roles.active_roles' => 'Активные роли',
 'form.roles.inactive_roles' => 'Неактивные роли',
@@ -427,7 +430,6 @@ $i18n_key_words = array(
 'form.groups.hint' => 'Cоздайте новую группу, сделав новый аккаунт для её менеджера.<br>Также вы можете импортировать данные группы через xml файл из другого Anuko Time Tracker сервера (запрещено дублирование логинов).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-'form.profile.swap_roles' => 'Обменять роль',
 'form.profile.12_hours' => '12 часов',
 'form.profile.24_hours' => '24 часа',
 'form.profile.show_holidays' => 'Показывать праздники',

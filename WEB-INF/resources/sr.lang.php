@@ -426,6 +426,10 @@ $i18n_key_words = array(
 'form.users.rate' => 'Cena',
 'form.users.default_rate' => 'Podrazumevana cena sati',
 
+// Editing User form. See example at https://timetracker.anuko.com/user_edit.php
+// TODO: translate the following.
+// 'form.user_edit.swap_roles' => 'Swap roles',
+
 // Roles form. See example at https://timetracker.anuko.com/roles.php
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
@@ -460,8 +464,6 @@ $i18n_key_words = array(
 'form.groups.hint' => 'Napravite novi tim. Počnite sa otvaranjem naloga za Menadžera.<br>Takođe možete uvoziti podatke iz xml fajla sa drugog Anuko Time Tracker server-a (dupliranje prijava nisu dozvoljeni).',
 
 // Forma profila. Pogledajte primer na at https://timetracker.anuko.com/profile_edit.php.
-// TODO: translate the following.
-// 'form.profile.swap_roles' => 'Swap roles',
 'form.profile.12_hours' => '12 časova',
 'form.profile.24_hours' => '24 časova',
 // TODO: translate the following.

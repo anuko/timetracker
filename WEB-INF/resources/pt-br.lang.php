@@ -422,6 +422,10 @@ $i18n_key_words = array(
 'form.users.rate' => 'Honorário',
 'form.users.default_rate' => 'Honorário padrão por hora',
 
+// Editing User form. See example at https://timetracker.anuko.com/user_edit.php
+// TODO: translate the following.
+// 'form.user_edit.swap_roles' => 'Swap roles',
+
 // Roles form. See example at https://timetracker.anuko.com/roles.php
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
@@ -456,8 +460,6 @@ $i18n_key_words = array(
 'form.groups.hint' => 'Crie uma nova equipe fazendo uma nova conta de gerente.<br>Você também pode importar os dados de um arquivo xml de outro servidor Anuko Time Tracker (não havendo colisão de usuários).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-// TODO: translate the following.
-// 'form.profile.swap_roles' => 'Swap roles',
 'form.profile.12_hours' => '12 horas',
 'form.profile.24_hours' => '24 horas',
 // TODO: translate the following.

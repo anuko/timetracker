@@ -461,6 +461,10 @@ $i18n_key_words = array(
 'form.users.rate' => '급여',
 'form.users.default_rate' => '디폴트 시간당 급여',
 
+// Editing User form. See example at https://timetracker.anuko.com/user_edit.php
+// TODO: translate the following.
+// 'form.user_edit.swap_roles' => 'Swap roles',
+
 // Roles form. See example at https://timetracker.anuko.com/roles.php
 // TODO: translate the following.
 // 'form.roles.active_roles' => 'Active Roles',
@@ -498,7 +502,6 @@ $i18n_key_words = array(
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 // TODO: translate the following.
-// 'form.profile.swap_roles' => 'Swap roles',
 // 'form.profile.12_hours' => '12 hours',
 // 'form.profile.24_hours' => '24 hours',
 // 'form.profile.show_holidays' => 'Show holidays',
