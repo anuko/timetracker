@@ -240,35 +240,16 @@ class ttUserHelper {
     $mdb2 = getConnection();
     global $user;
 
-    // Preliminary checks. Only managers, co-managers, and admin can do this.
-    if (!$user->canManageTeam() && !$user->isAdmin())
+    // Preliminary checks. Only managers and co-managers can do this.
+    if (!$user->canManageTeam())
       return false;
 
     // Tho logic is different depending on who is doing the operation.
-    // Co-manager and admin - mark user deleted.
+    // Co-manager - mark user deleted.
     // Manager - mark user deleted. If manager is the only account in group, mark group items deleted.
 
-    // admin part.
-    if ($user->isAdmin()) {
-      // Mark user binds as deleted.
-      $sql = "update tt_user_project_binds set status = NULL where user_id = $user_id";
-      $affected = $mdb2->exec($sql);
-      if (is_a($affected, 'PEAR_Error'))
-        return false;
-
-      // Mark favorite reports as deleted.
-      $sql = "update tt_fav_reports set status = NULL where user_id = $user_id";
-      $affected = $mdb2->exec($sql);
-      if (is_a($affected, 'PEAR_Error'))
-        return false;
-
-      // Mark user as deleted.
-      $sql = "update tt_users set status = NULL where id = $user_id";
-      $affected = $mdb2->exec($sql);
-      if (is_a($affected, 'PEAR_Error'))
-        return false;
-
-    } elseif ($user->isCoManager()) {
+    // Co-manager part.
+    if ($user->isCoManager()) {
       // Mark user binds as deleted.
       $sql = "update tt_user_project_binds set status = NULL where user_id = $user_id";
       $affected = $mdb2->exec($sql);
