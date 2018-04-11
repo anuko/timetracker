@@ -124,7 +124,7 @@ class ttImportHelper {
       // Now we can create a group.
       if ($this->canImport) {
         $this->top_role_id = ttRoleHelper::getRoleByRank(512, 0);
-        $group_id = ttTeamHelper::insert(array(
+        $group_id = $this->createGroup(array(
           'name' => $this->groupData['NAME'],
           'currency' => $this->groupData['CURRENCY'],
           'decimal_mark' => $this->groupData['DECIMAL_MARK'],
@@ -137,6 +137,8 @@ class ttImportHelper {
           'task_required' => $this->groupData['TASK_REQUIRED'],
           'record_type' => $this->groupData['RECORD_TYPE'],
           'bcc_email' => $this->groupData['BCC_EMAIL'],
+          'allow_ip' => $this->groupData['ALLOW_IP'],
+          'password_complexity' => $this->groupData['PASSWORD_COMPLEXITY'],
           'plugins' => $this->groupData['PLUGINS'],
           'lock_spec' => $this->groupData['LOCK_SPEC'],
           'workday_minutes' => $this->groupData['WORKDAY_MINUTES'],
@@ -343,7 +345,9 @@ class ttImportHelper {
       || $this->currentTag == 'LABEL'
       || $this->currentTag == 'VALUE'
       || $this->currentTag == 'COMMENT'
-      || $this->currentTag == 'ADDRESS') {
+      || $this->currentTag == 'ADDRESS'
+      || $this->currentTag == 'ALLOW_IP'
+      || $this->currentTag == 'PASSWORD_COMPLEXITY') {
       if (isset($this->currentElement[$this->currentTag]))
         $this->currentElement[$this->currentTag] .= trim($data);
       else
@@ -430,6 +434,46 @@ class ttImportHelper {
     bzclose($in_file);
     fclose ($out_file);
     return true;
+  }
+
+  // createGroup function creates a new group.
+  private function createGroup($fields) {
+
+    global $user;
+    $mdb2 = getConnection();
+
+    $columns = '(name, currency, decimal_mark, lang, date_format, time_format, week_start, tracking_mode'.
+      ', project_required, task_required, record_type, bcc_email, allow_ip, password_complexity, plugins'.
+      ', lock_spec, workday_minutes, config, created, created_ip, created_by)';
+
+    $values = ' values ('.$mdb2->quote(trim($fields['name']));
+    $values .= ', '.$mdb2->quote(trim($fields['currency']));
+    $values .= ', '.$mdb2->quote($fields['decimal_mark']);
+    $values .= ', '.$mdb2->quote($fields['lang']);
+    $values .= ', '.$mdb2->quote($fields['date_format']);
+    $values .= ', '.$mdb2->quote($fields['time_format']);
+    $values .= ', '.(int)$fields['week_start'];
+    $values .= ', '.(int)$fields['tracking_mode'];
+    $values .= ', '.(int)$fields['project_required'];
+    $values .= ', '.(int)$fields['task_required'];
+    $values .= ', '.(int)$fields['record_type'];
+    $values .= ', '.$mdb2->quote($fields['bcc_email']);
+    $values .= ', '.$mdb2->quote($fields['allow_ip']);
+    $values .= ', '.$mdb2->quote($fields['password_complexity']);
+    $values .= ', '.$mdb2->quote($fields['plugins']);
+    $values .= ', '.$mdb2->quote($fields['lock_spec']);
+    $values .= ', '.(int)$fields['workday_minutes'];
+    $values .= ', '.$mdb2->quote($fields['config']);
+    $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
+    $values .= ')';
+
+    $sql = 'insert into tt_groups '.$columns.$values;
+    $affected = $mdb2->exec($sql);
+    if (!is_a($affected, 'PEAR_Error')) {
+      $group_id = $mdb2->lastInsertID('tt_groups', 'id');
+      return $group_id;
+    }
+    return false;
   }
 
   // insertMonthlyQuota - a helper function to insert a monthly quota.

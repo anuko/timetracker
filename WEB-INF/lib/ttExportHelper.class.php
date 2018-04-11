@@ -70,6 +70,8 @@ class ttExportHelper {
       "\" config=\"".$user->config.
       "\">\n");
     fwrite($file, "  <name><![CDATA[".$user->group."]]></name>\n");
+    fwrite($file, "  <allow_ip><![CDATA[".$user->allow_ip."]]></allow_ip>\n");
+    fwrite($file, "  <password_complexity><![CDATA[".$user->password_complexity."]]></password_complexity>\n");
     fwrite($file, "</group>\n");
 
     // Prepare role map.
