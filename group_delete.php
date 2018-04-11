@@ -42,8 +42,9 @@ if ($user->group_id != $group_id) {
 }
 // End of access checks.
 
-// Note: reuse ttAdmin class here, simply because deleting a group
-// is a complicated task.
+// Note: reuse ttAdmin class here because deleting a group is a complicated task.
+// This creates an issue of using the class for not intended purpose.
+// However, otherwise we have to duplicate code, so reuse it is, for now.
 $admin = new ttAdmin();
 $group_details = $admin->getGroupDetails($group_id);
 $group_name = $group_details['group_name'];
