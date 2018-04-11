@@ -691,48 +691,6 @@ class ttTeamHelper {
     return false;
   }
 
-  // The markDeleted function marks the group and everything in it as deleted.
-  static function markDeleted($group_id) {
-
-    // Iterate through group users and mark them as deleted.
-    $users = ttTeamHelper::getAllUsers($group_id);
-    foreach ($users as $one_user) {
-      if (!ttUserHelper::markDeleted($one_user['id'])) return false;
-    }
-
-    // Mark tasks deleted.
-    if (!ttTeamHelper::markTasksDeleted($group_id)) return false;
-
-    $mdb2 = getConnection();
-
-    // Mark roles deleted.
-    $sql = "update tt_roles set status = NULL where group_id = $group_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Mark projects deleted.
-    $sql = "update tt_projects set status = NULL where group_id = $group_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Mark clients deleted.
-    $sql = "update tt_clients set status = NULL where group_id = $group_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Mark custom fields deleted.
-    $sql = "update tt_custom_fields set status = NULL where group_id = $group_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Mark group deleted.
-    $sql = "update tt_groups set status = NULL where id = $group_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    return true;
-  }
-
   // The insert function creates a new group.
   static function insert($fields) {
 
