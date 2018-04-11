@@ -797,30 +797,6 @@ class ttTeamHelper {
     return true;
   }
 
-  // The markTasksDeleted deletes task binds and marks the tasks as deleted for a group.
-  static function markTasksDeleted($group_id) {
-    $mdb2 = getConnection();
-    $sql = "select id from tt_tasks where group_id = $group_id";
-    $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error')) return false;
-
-    while ($val = $res->fetchRow()) {
-
-      // Delete task binds.
-      $task_id = $val['id'];
-      $sql = "delete from tt_project_task_binds where task_id = $task_id";
-      $affected = $mdb2->exec($sql);
-      if (is_a($affected, 'PEAR_Error')) return false;
-
-      // Mark task as deleted.
-      $sql = "update tt_tasks set status = NULL where id = $task_id";
-      $affected = $mdb2->exec($sql);
-      if (is_a($affected, 'PEAR_Error')) return false;
-    }
-
-    return true;
-  }
-
   // The deleteTasks deletes all tasks and task binds for an inactive group.
   static function deleteTasks($group_id) {
     $mdb2 = getConnection();
