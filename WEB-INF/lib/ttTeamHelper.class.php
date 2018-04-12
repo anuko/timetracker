@@ -33,20 +33,6 @@ import('ttInvoiceHelper');
 // Class ttTeamHelper - contains helper functions that operate with groups.
 class ttTeamHelper {
 
-  // The getUserCount function returns number of active users in a group.
-  static function getUserCount($group_id) {
-    $mdb2 = getConnection();
-
-    $sql = "select count(id) as cnt from tt_users where group_id = $group_id and status = 1";
-    $res = $mdb2->query($sql);
-
-    if (!is_a($res, 'PEAR_Error')) {
-      $val = $res->fetchRow();
-      return $val['cnt'];
-    }
-    return false;
-  }
-
   // The getUsersForClient obtains all active and inactive users in a group that are relevant to a client.
   static function getUsersForClient() {
     global $user;
