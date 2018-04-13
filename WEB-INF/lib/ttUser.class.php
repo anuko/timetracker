@@ -150,14 +150,6 @@ class ttUser {
     return in_array($do_something, $this->rights);
   }
 
-  // isManager - determines whether current user is group manager.
-  // This is a legacy function that we are getting rid of by replacing with rights check.
-  function isManager() {
-    return $this->can('export_data'); // By default this is assigned to managers but not co-managers.
-                                      // Which is sufficient for now until we refactor all calls
-                                      // to this function and then remove it.
-  }
-
   // isClient - determines whether current user is a client.
   function isClient() {
     return $this->is_client;
