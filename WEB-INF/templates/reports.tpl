@@ -209,7 +209,7 @@ function handleCheckboxes() {
           <td>{$forms.reportForm.invoice.control}</td>
         </tr>
 {/if}
-{if ($user->canManageTeam() && $user->isPluginEnabled('ps'))}
+{if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))}
         <tr>
           <td><b>{$i18n.label.paid_status}</b></td>
         </tr>
@@ -264,7 +264,7 @@ function handleCheckboxes() {
                 <td width="25%">{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<label>{$forms.reportForm.chproject.control}&nbsp;{$i18n.label.project}</label>{/if}</td>
                 <td width="25%">{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<label>{$forms.reportForm.chstart.control}&nbsp;{$i18n.label.start}</label>{/if}</td>
                 <td width="25%"><label>{$forms.reportForm.chduration.control}&nbsp;{$i18n.label.duration}</label></td>
-{if (($user->canManageTeam() || $user->isClient()) || $user->isPluginEnabled('ex'))}
+{if ($user->can('manage_invoices') || $user->isClient()) || $user->isPluginEnabled('ex')}
                   <td width="25%"><label>{$forms.reportForm.chcost.control}&nbsp;{$i18n.label.cost}</label></td>
 {else}
                   <td></td>

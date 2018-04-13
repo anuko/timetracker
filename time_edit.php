@@ -206,7 +206,7 @@ if ($custom_fields && $custom_fields->fields[0]) {
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 if ($user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
-if ($user->canManageTeam() && $user->isPluginEnabled('ps'))
+if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))
   $form->addInput(array('type'=>'checkbox','name'=>'paid','value'=>$cl_paid));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_save or btn_copy click.
 $form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.save')));
