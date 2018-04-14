@@ -221,7 +221,7 @@ function handleCheckboxes() {
           <td>{$forms.reportForm.paid_status.control}</td>
         </tr>
 {/if}
-{if $user->canManageTeam() || $user->isClient()}
+{if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}
         <tr>
           <td colspan="3"><b>{$i18n.label.users}</b></td>
         </tr>
@@ -248,18 +248,18 @@ function handleCheckboxes() {
         <tr>
           <td colspan="3">
             <table border="0" width="100%">
-{if $user->canManageTeam() || $user->isPluginEnabled('cl') || $user->isPluginEnabled('iv') || $user->isPluginEnabled('ps')}
+{if $user->can('view_reports') || $user->can('view_all_reports') || $user->isPluginEnabled('cl') || $user->isPluginEnabled('iv') || $user->isPluginEnabled('ps')}
               <tr>
   {if $user->isPluginEnabled('cl')}
                 <td width="25%"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td>
   {/if}
-  {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
+  {if ($user->can('manage_invoices') || $user->isClient()) && $user->isPluginEnabled('iv')}
                 <td width="25%"><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></td>
   {/if}
-  {if ($user->canManageTeam() && $user->isPluginEnabled('ps'))}
+  {if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))}
                 <td width="25%"><label>{$forms.reportForm.chpaid.control}&nbsp;{$i18n.label.paid}</label></td>
   {/if}
-  {if $user->canManageTeam()}
+  {if $user->can('view_reports') || $user->can('view_all_reports')}
                 <td width="25%"><label>{$forms.reportForm.chip.control}&nbsp;{$i18n.label.ip}</label></td>
   {/if}
               </tr>
