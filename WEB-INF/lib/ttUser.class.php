@@ -353,7 +353,7 @@ class ttUser {
 
     $mdb2 = getConnection();
 
-    $sql =  "select u.id, u.name, u.login, u.role_id, u.status, u.rate, u.email from tt_users u".
+    $sql =  "select u.id, u.name, u.login, u.role_id, u.client_id, u.status, u.rate, u.email from tt_users u".
             " left join tt_roles r on (u.role_id = r.id)".
             " where u.id = $user_id and u.group_id = $this->group_id and u.status is not null".
             " and (r.rank < $this->rank or (r.rank = $this->rank and u.id = $this->id))"; // Users with lesser roles or self.
