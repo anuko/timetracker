@@ -20,7 +20,7 @@
       <td><label>{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td>
     </tr>
 {/if}
-{if ($user->canManageTeam() && $user->isPluginEnabled('ps'))}
+{if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))}
     <tr>
       <td align="right">&nbsp;</td>
       <td><label>{$forms.timeRecordForm.paid.control}{$i18n.label.paid}</label></td>
