@@ -97,7 +97,7 @@ if ('xml' == $type) {
       }
       if ($bean->getAttribute('chcost')) {
         print "\t<cost><![CDATA[";
-        if ($user->canManageTeam() || $user->isClient())
+        if ($user->can('manage_invoices') || $user->isClient())
           print $subtotal['cost'];
         else
           print $subtotal['expenses'];
@@ -111,7 +111,7 @@ if ('xml' == $type) {
       print "<row>\n";
 
       print "\t<date><![CDATA[".$item['date']."]]></date>\n";
-      if ($user->canManageTeam() || $user->isClient()) print "\t<user><![CDATA[".$item['user']."]]></user>\n"; 
+      if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print "\t<user><![CDATA[".$item['user']."]]></user>\n"; 
       if ($bean->getAttribute('chclient')) print "\t<client><![CDATA[".$item['client']."]]></client>\n";
       if ($bean->getAttribute('chproject')) print "\t<project><![CDATA[".$item['project']."]]></project>\n";
       if ($bean->getAttribute('chtask')) print "\t<task><![CDATA[".$item['task']."]]></task>\n";
@@ -127,7 +127,7 @@ if ('xml' == $type) {
       if ($bean->getAttribute('chnote')) print "\t<note><![CDATA[".$item['note']."]]></note>\n";
       if ($bean->getAttribute('chcost')) {
         print "\t<cost><![CDATA[";
-        if ($user->canManageTeam() || $user->isClient())
+        if ($user->can('manage_invoices') || $user->isClient())
           print $item['cost'];
         else
           print $item['expense'];
@@ -184,7 +184,7 @@ if ('csv' == $type) {
         print ',"'.$val.'"';
       }
       if ($bean->getAttribute('chcost')) {
-        if ($user->canManageTeam() || $user->isClient())
+        if ($user->can('manage_invoices') || $user->isClient())
           print ',"'.$subtotal['cost'].'"';
         else
           print ',"'.$subtotal['expenses'].'"';
@@ -194,7 +194,7 @@ if ('csv' == $type) {
   } else {
     // Normal report. Print headers.
     print '"'.$i18n->get('label.date').'"';
-    if ($user->canManageTeam() || $user->isClient()) print ',"'.$i18n->get('label.user').'"';
+    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print ',"'.$i18n->get('label.user').'"';
     if ($bean->getAttribute('chclient')) print ',"'.$i18n->get('label.client').'"';
     if ($bean->getAttribute('chproject')) print ',"'.$i18n->get('label.project').'"';
     if ($bean->getAttribute('chtask')) print ',"'.$i18n->get('label.task').'"';
@@ -212,7 +212,7 @@ if ('csv' == $type) {
     // Print items.
     foreach ($items as $item) {
       print '"'.$item['date'].'"';
-      if ($user->canManageTeam() || $user->isClient()) print ',"'.str_replace('"','""',$item['user']).'"';
+      if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print ',"'.str_replace('"','""',$item['user']).'"';
       if ($bean->getAttribute('chclient')) print ',"'.str_replace('"','""',$item['client']).'"';
       if ($bean->getAttribute('chproject')) print ',"'.str_replace('"','""',$item['project']).'"';
       if ($bean->getAttribute('chtask')) print ',"'.str_replace('"','""',$item['task']).'"';
@@ -227,7 +227,7 @@ if ('csv' == $type) {
       }
       if ($bean->getAttribute('chnote')) print ',"'.str_replace('"','""',$item['note']).'"';
       if ($bean->getAttribute('chcost')) {
-        if ($user->canManageTeam() || $user->isClient())
+        if ($user->can('manage_invoices') || $user->isClient())
           print ',"'.$item['cost'].'"';
         else
           print ',"'.$item['expense'].'"';

@@ -155,14 +155,6 @@ class ttUser {
     return $this->is_client;
   }
 
-  // canManageTeam - determines whether current user is manager or co-manager.
-  // This is a legacy function that we are getting rid of by replacing with rights check.
-  function canManageTeam() {
-    return $this->can('manage_users'); // By default this is assigned to co-managers (an managers).
-                                       // Which is sufficient for now until we refactor all calls
-                                       // to this function and then remove it.
-  }
-
   // isPluginEnabled checks whether a plugin is enabled for user.
   function isPluginEnabled($plugin)
   {

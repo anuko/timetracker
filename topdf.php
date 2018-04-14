@@ -119,7 +119,7 @@ if ($totals_only) {
     if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$subtotal['time'].'</td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
-      if ($user->canManageTeam() || $user->isClient())
+      if ($user->can('manage_invoices') || $user->isClient())
         $html .= $subtotal['cost'];
       else
         $html .= $subtotal['expenses'];
@@ -135,7 +135,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
       $html .= htmlspecialchars($user->currency).' ';
-      if ($user->canManageTeam() || $user->isClient())
+      if ($user->can('manage_invoices') || $user->isClient())
         $html .= $totals['cost'];
       else
         $html .= $totals['expenses'];
@@ -150,7 +150,7 @@ if ($totals_only) {
   $html .= '<thead>';
   $html .= "<tr $styleHeader>";
   $html .= '<td>'.$i18n->get('label.date').'</td>';
-  if ($user->canManageTeam() || $user->isClient()) { $colspan++; $html .= '<td>'.$i18n->get('label.user').'</td>'; }
+  if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) { $colspan++; $html .= '<td>'.$i18n->get('label.user').'</td>'; }
   if ($bean->getAttribute('chclient')) { $colspan++; $html .= '<td>'.$i18n->get('label.client').'</td>'; }
   if ($bean->getAttribute('chproject')) { $colspan++; $html .= '<td>'.$i18n->get('label.project').'</td>'; }
   if ($bean->getAttribute('chtask')) { $colspan++; $html .= '<td>'.$i18n->get('label.task').'</td>'; }
@@ -174,7 +174,7 @@ if ($totals_only) {
       if ($cur_grouped_by != $prev_grouped_by && !$first_pass) {
         $html .= '<tr style="background-color:#e0e0e0;">';
         $html .= '<td>'.$i18n->get('label.subtotal').'</td>';
-        if ($user->canManageTeam() || $user->isClient()) {
+        if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
             $html .= '<td>';
             if ($group_by == 'user') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
             $html .= '</td>';
@@ -205,7 +205,7 @@ if ($totals_only) {
         if ($bean->getAttribute('chnote')) $html .= '<td></td>';
         if ($bean->getAttribute('chcost')) {
           $html .= "<td $styleRightAligned>";
-          if ($user->canManageTeam() || $user->isClient())
+          if ($user->can('manage_invoices') || $user->isClient())
             $html .= $subtotals[$prev_grouped_by]['cost'];
           else
             $html .= $subtotals[$prev_grouped_by]['expenses'];
@@ -223,7 +223,7 @@ if ($totals_only) {
     // Print a regular row.
     $html .= '<tr>';
     $html .= '<td>'.$item['date'].'</td>';
-    if ($user->canManageTeam() || $user->isClient()) $html .= '<td>'.htmlspecialchars($item['user']).'</td>';
+    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) $html .= '<td>'.htmlspecialchars($item['user']).'</td>';
     if ($bean->getAttribute('chclient')) $html .= '<td>'.htmlspecialchars($item['client']).'</td>';
     if ($bean->getAttribute('chproject')) $html .= '<td>'.htmlspecialchars($item['project']).'</td>';
     if ($bean->getAttribute('chtask')) $html .= '<td>'.htmlspecialchars($item['task']).'</td>';
@@ -234,7 +234,7 @@ if ($totals_only) {
     if ($bean->getAttribute('chnote')) $html .= '<td>'.htmlspecialchars($item['note']).'</td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
-      if ($user->canManageTeam() || $user->isClient())
+      if ($user->can('manage_invoices') || $user->isClient())
         $html .= $item['cost'];
       else
         $html .= $item['expense'];
@@ -261,7 +261,7 @@ if ($totals_only) {
   if ($print_subtotals) {
     $html .= '<tr style="background-color:#e0e0e0;">';
     $html .= '<td>'.$i18n->get('label.subtotal').'</td>';
-    if ($user->canManageTeam() || $user->isClient()) {
+    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
       $html .= '<td>';
       if ($group_by == 'user') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
       $html .= '</td>';
@@ -292,7 +292,7 @@ if ($totals_only) {
     if ($bean->getAttribute('chnote')) $html .= '<td></td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
-      if ($user->canManageTeam() || $user->isClient())
+      if ($user->can('manage_invoices') || $user->isClient())
         $html .= $subtotals[$prev_grouped_by]['cost'];
       else
         $html .= $subtotals[$prev_grouped_by]['expenses'];
@@ -308,7 +308,7 @@ if ($totals_only) {
   $html .= '<tr><td colspan="'.$colspan.'">&nbsp;</td></tr>';
   $html .= '<tr style="background-color:#e0e0e0;">';
   $html .= '<td>'.$i18n->get('label.total').'</td>';
-  if ($user->canManageTeam() || $user->isClient()) $html .= '<td></td>';
+  if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) $html .= '<td></td>';
   if ($bean->getAttribute('chclient')) $html .= '<td></td>';
   if ($bean->getAttribute('chproject')) $html .= '<td></td>';
   if ($bean->getAttribute('chtask')) $html .= '<td></td>';
@@ -319,7 +319,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chnote')) $html .= '<td></td>';
   if ($bean->getAttribute('chcost')) {
     $html .= "<td $styleRightAligned>".htmlspecialchars($user->currency).' ';
-    if ($user->canManageTeam() || $user->isClient())
+    if ($user->can('manage_invoices') || $user->isClient())
       $html .= $totals['cost'];
     else
       $html .= $totals['expenses'];
