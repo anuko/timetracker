@@ -201,13 +201,17 @@ function handleCheckboxes() {
         <tr>
           <td><b>{$i18n.form.time.billable}</b></td>
           <td>&nbsp;</td>
+  {if $user->can('manage_invoices')}
           <td><b>{$i18n.label.invoice}</b></td>
+  {/if}
         </tr>
         <tr valign="top">
           <td>{$forms.reportForm.include_records.control}</td>
           <td>&nbsp;</td>
+  {if $user->can('manage_invoices')}
           <td>{$forms.reportForm.invoice.control}</td>
         </tr>
+  {/if}
 {/if}
 {if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))}
         <tr>

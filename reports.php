@@ -90,8 +90,8 @@ if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['ty
 }
 
 // Add controls for projects and tasks.
-if ($user->canManageTeam()) {
-  $project_list = ttProjectHelper::getProjects(); // Manager and co-managers can run reports on all active and inactive projects.
+if ($user->can('view_reports') || $user->can('view_all_reports')) {
+  $project_list = ttProjectHelper::getProjects(); // All active and inactive projects.
 } elseif ($user->isClient()) {
   $project_list = ttProjectHelper::getProjectsForClient();
 } else {
@@ -124,15 +124,17 @@ $form->addInput(array('type'=>'combobox',
   'empty'=>array(''=>$i18n->get('dropdown.all'))));
 
 // Add invoiced / not invoiced selector.
-$invoice_options = array('1'=>$i18n->get('form.reports.include_invoiced'),
-  '2'=>$i18n->get('form.reports.include_not_invoiced'));
-$form->addInput(array('type'=>'combobox',
-  'name'=>'invoice',
-  'style'=>'width: 250px;',
-  'data'=>$invoice_options,
-  'empty'=>array(''=>$i18n->get('dropdown.all'))));
+if ($user->can('manage_invoices')) {
+  $invoice_options = array('1'=>$i18n->get('form.reports.include_invoiced'),
+    '2'=>$i18n->get('form.reports.include_not_invoiced'));
+  $form->addInput(array('type'=>'combobox',
+    'name'=>'invoice',
+    'style'=>'width: 250px;',
+    'data'=>$invoice_options,
+    'empty'=>array(''=>$i18n->get('dropdown.all'))));
+}
 
-if ($user->canManageTeam() && $user->isPluginEnabled('ps')) {
+if ($user->can('manage_invoices') && $user->isPluginEnabled('ps')) {
   $form->addInput(array('type'=>'combobox',
    'name'=>'paid_status',
    'style'=>'width: 250px;',
