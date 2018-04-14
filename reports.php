@@ -66,10 +66,11 @@ $form->addInput(array('type'=>'submit','name'=>'btn_generate','value'=>$i18n->ge
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete'),'onclick'=>"return confirm('".$i18n->get('form.reports.confirm_delete')."')"));
 
 // Dropdown for clients if the clients plugin is enabled.
-if ($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) {
-  if ($user->canManageTeam() || ($user->isClient() && !$user->client_id))
-    $client_list = ttClientHelper::getClients();
-  else
+if ($user->isPluginEnabled('cl') && !$user->isClient()) {
+  if ($user->can('view_reports') || $user->can('view_all_reports')) {
+    $client_list = ttClientHelper::getClients(); // TODO: improve getClients for "view_reports"
+                                                 // by filtering out not relevant clients.
+  } else
     $client_list = ttClientHelper::getClientsForUser();
   $form->addInput(array('type'=>'combobox',
     'name'=>'client',
