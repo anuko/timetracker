@@ -194,11 +194,11 @@ $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'end_date'))
 // Add checkboxes for fields.
 if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'checkbox','name'=>'chclient'));
-if (($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv'))
+if (($user->can('manage_invoices') || $user->isClient()) && $user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'chinvoice'));
-if ($user->canManageTeam() && $user->isPluginEnabled('ps'))
+if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))
   $form->addInput(array('type'=>'checkbox','name'=>'chpaid'));
-if ($user->canManageTeam())
+if ($user->can('view_reports') || $user->can('view_all_reports'))
   $form->addInput(array('type'=>'checkbox','name'=>'chip'));
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkbox','name'=>'chproject'));
@@ -217,7 +217,7 @@ if ($custom_fields && $custom_fields->fields[0])
 // Add group by control.
 $group_by_options['no_grouping'] = $i18n->get('form.reports.group_by_no');
 $group_by_options['date'] = $i18n->get('form.reports.group_by_date');
-if ($user->canManageTeam() || $user->isClient())
+if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
   $group_by_options['user'] = $i18n->get('form.reports.group_by_user');
 if ($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id))
   $group_by_options['client'] = $i18n->get('form.reports.group_by_client');
