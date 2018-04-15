@@ -904,13 +904,13 @@ if ($_POST) {
   if ($_POST["cleanup"]) {
 
     $mdb2 = getConnection();
-    $inactive_teams = ttTeamHelper::getInactiveGroups();
+    $inactive_groups = ttTeamHelper::getInactiveGroups();
 
-    $count = count($inactive_teams);
-    print "$count inactive teams found...<br>\n";
+    $count = count($inactive_groups);
+    print "$count inactive groups found...<br>\n";
     for ($i = 0; $i < $count; $i++) {
-      print "  deleting team ".$inactive_teams[$i]."<br>\n";
-      $res = ttTeamHelper::delete($inactive_teams[$i]);
+      print "  deleting group ".$inactive_groups[$i]."<br>\n";
+      $res = ttTeamHelper::delete($inactive_groups[$i]);
     }
 
     setChange("OPTIMIZE TABLE tt_client_project_binds");

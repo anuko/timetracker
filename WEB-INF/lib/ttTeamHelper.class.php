@@ -664,9 +664,9 @@ class ttTeamHelper {
     $inactive_groups = array();
     $mdb2 = getConnection();
 
-    // Get all group ids for groups created or modified more than 8 months ago.
+    // Get all group ids for groups created or modified more than 9 months ago.
     // $ts = date('Y-m-d', strtotime('-1 year'));
-    $ts = $mdb2->quote(date('Y-m-d', strtotime('-8 month')));
+    $ts = $mdb2->quote(date('Y-m-d', strtotime('-9 month')));
     $sql =  "select id from tt_groups where created < $ts and (modified is null or modified < $ts) order by id";
     $res = $mdb2->query($sql);
 
