@@ -42,7 +42,7 @@ if (!ttAccessAllowed('manage_users')) {
 
 // Use the "limit" plugin if we have one. Ignore include errors.
 // The "limit" plugin is not required for normal operation of the Time Tracker.
-@include('plugins/limit/user_add.php');
+@include('../plugins/limit/user_add.php');
 
 if ($user->isPluginEnabled('cl'))
   $clients = ttTeamHelper::getActiveClients($user->group_id);
