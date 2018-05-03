@@ -77,14 +77,22 @@ class Form {
       case 'textarea':
         import('form.TextArea');
         $el = new TextArea($params['name']);
-        if (isset($params['cols'])) $el->setColumns($params['cols']);
-        if (isset($params['rows'])) $el->setRows($params['rows']);
         if (isset($params['maxlength'])) $el->setMaxLength($params['maxlength']);
         break;
 
       case 'checkbox':
         import('form.Checkbox');
         $el = new Checkbox($params['name']);
+        break;
+
+      case 'hidden':
+        import('form.Hidden');
+        $el = new Hidden($params['name']);
+        break;
+
+      case 'submit':
+        import('form.Submit');
+        $el = new Submit($params['name']);
         break;
 
 // TODO: refactoring ongoing down from here.
@@ -102,19 +110,13 @@ class Form {
 			    $el = new Combobox($params["name"]);
 			    $el->setData(@$params["data"]);
 			    $el->setDataDefault(@$params["empty"]);
+                            if (isset($params["multiple"])) {
+                              $el->setMultiple($params["multiple"]);
+                              $el->name .= '[]'; // Add brackets to the end of name to get back an array on POST.
+                            }
 			    if (isset($params["datakeys"])) $el->setDataKeys($params["datakeys"]);
 			    break;
-			    
-			case "hidden":
-			    import('form.Hidden');
-			    $el = new Hidden($params["name"]);
-			    break;
-			 
-			case "submit":
-			    import('form.Submit');
-			    $el = new Submit($params["name"]);
-			    break;
-			    
+
 			case "calendar":
 			    import('form.Calendar');
 			    $el = new Calendar($params["name"]);
@@ -137,7 +139,7 @@ class Form {
 		if ($el!=null) {
 			$el->setFormName($this->name);
 			if (isset($params["id"])) $el->setId($params["id"]);
-			if (isset($GLOBALS["I18N"])) $el->localize($GLOBALS["I18N"]);
+			$el->localize();
 			if (isset($params["enable"])) $el->setEnabled($params["enable"]);
 			
 			if (isset($params["style"])) $el->setStyle($params["style"]);
@@ -155,7 +157,7 @@ class Form {
 	
 	function addInputElement(&$el) {
 		if ($el && is_object($el)) {
-			if (isset($GLOBALS["I18N"])) $el->localize($GLOBALS["I18N"]);
+			$el->localize();
 		
 			$el->setFormName($this->name);
 			$this->elements[$el->name] = &$el;

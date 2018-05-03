@@ -30,31 +30,37 @@ require_once('../initialize.php');
 import('form.Form');
 import('ttProjectHelper');
 
-// Access check.
-if (!ttAccessCheck(right_manage_team) || (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode)) {
+// Access checks.
+if (!ttAccessAllowed('manage_projects')) {
   header('Location: access_denied.php');
   exit();
 }
-
+if (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+  header('Location: feature_disabled.php');
+  exit();
+}
 $cl_project_id = (int)$request->getParameter('id');
 $project = ttProjectHelper::get($cl_project_id);
+if (!$project) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
+
 $project_to_delete = $project['name'];
 
 $form = new Form('projectDeleteForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_project_id));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
-$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
+$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if(ttProjectHelper::get($cl_project_id)) {
-      if (ttProjectHelper::delete($cl_project_id)) {
-        header('Location: projects.php');
-        exit();
-      } else
-        $err->add($i18n->getKey('error.db'));
+    if (ttProjectHelper::delete($cl_project_id)) {
+      header('Location: projects.php');
+      exit();
     } else
-      $err->add($i18n->getKey('error.db'));
+      $err->add($i18n->get('error.db'));
   } elseif ($request->getParameter('btn_cancel')) {
     header('Location: projects.php');
     exit();
@@ -64,6 +70,6 @@ if ($request->isPost()) {
 $smarty->assign('project_to_delete', $project_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.projectDeleteForm.btn_cancel.focus()"');
-$smarty->assign('title', $i18n->getKey('title.delete_project'));
+$smarty->assign('title', $i18n->get('title.delete_project'));
 $smarty->assign('content_page_name', 'mobile/project_delete.tpl');
 $smarty->display('mobile/index.tpl');

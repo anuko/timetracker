@@ -31,14 +31,24 @@ import('form.Form');
 import('ttTeamHelper');
 import('ttTaskHelper');
 
-// Access check.
-if (!ttAccessCheck(right_manage_team) || MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+// Access checks.
+if (!ttAccessAllowed('manage_tasks')) {
   header('Location: access_denied.php');
   exit();
 }
-
+if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+  header('Location: feature_disabled.php');
+  exit();
+}
 $cl_task_id = (int)$request->getParameter('id');
-$projects = ttTeamHelper::getActiveProjects($user->team_id);
+$task = ttTaskHelper::get($cl_task_id);
+if (!$task) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
+
+$projects = ttTeamHelper::getActiveProjects($user->group_id);
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -46,11 +56,9 @@ if ($request->isPost()) {
   $cl_status = $request->getParameter('status');
   $cl_projects = $request->getParameter('projects');
 } else {
-  $task = ttTaskHelper::getTask($cl_task_id);
   $cl_name = $task['name'];
   $cl_description = $task['description'];
   $cl_status = $task['status'];
-
   $assigned_projects = ttTaskHelper::getAssignedProjects($cl_task_id);
   foreach ($assigned_projects as $project_item)
     $cl_projects[] = $project_item['id'];
@@ -61,17 +69,17 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_task_id));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','class'=>'mobile-textarea','value'=>$cl_description));
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
-  'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
+  'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
 $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','layout'=>'H','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_projects));
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
-$form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
+$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
+$form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->get('button.copy')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
-  if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
+  if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
+  if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
 
   if ($err->no()) {
     if ($request->getParameter('btn_save')) {
@@ -87,15 +95,15 @@ if ($request->isPost()) {
           header('Location: tasks.php');
           exit();
         } else
-          $err->add($i18n->getKey('error.db'));
+          $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->getKey('error.task_exists'));
+        $err->add($i18n->get('error.task_exists'));
     }
 
     if ($request->getParameter('btn_copy')) {
       if (!ttTaskHelper::getTaskByName($cl_name)) {
         if (ttTaskHelper::insert(array(
-          'team_id' => $user->team_id,
+          'group_id' => $user->group_id,
           'name' => $cl_name,
           'description' => $cl_description,
           'status' => $cl_status,
@@ -103,9 +111,9 @@ if ($request->isPost()) {
           header('Location: tasks.php');
           exit();
         } else
-          $err->add($i18n->getKey('error.db'));
+          $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->getKey('error.task_exists'));
+        $err->add($i18n->get('error.task_exists'));
     }
     
     if ($request->getParameter('btn_delete')) {
@@ -116,6 +124,6 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.edit_task'));
+$smarty->assign('title', $i18n->get('title.edit_task'));
 $smarty->assign('content_page_name', 'mobile/task_edit.tpl');
 $smarty->display('mobile/index.tpl');

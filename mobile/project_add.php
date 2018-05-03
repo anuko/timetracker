@@ -31,17 +31,22 @@ import('form.Form');
 import('ttProjectHelper');
 import('ttTeamHelper');
 
-// Access check.
-if (!ttAccessCheck(right_manage_team) || (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode)) {
+// Access checks.
+if (!ttAccessAllowed('manage_projects')) {
   header('Location: access_denied.php');
   exit();
 }
+if (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+  header('Location: feature_disabled.php');
+  exit();
+}
+// End of access checks.
 
 $users = ttTeamHelper::getActiveUsers();
 foreach ($users as $user_item)
   $all_users[$user_item['id']] = $user_item['name'];
 
-$tasks = ttTeamHelper::getActiveTasks($user->team_id);
+$tasks = ttTeamHelper::getActiveTasks($user->group_id);
 foreach ($tasks as $task_item)
   $all_tasks[$task_item['id']] = $task_item['name'];
 
@@ -63,17 +68,17 @@ $form->addInput(array('type'=>'textarea','name'=>'description','class'=>'mobile-
 $form->addInput(array('type'=>'checkboxgroup','name'=>'users','data'=>$all_users,'layout'=>'H','value'=>$cl_users));
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkboxgroup','name'=>'tasks','data'=>$all_tasks,'layout'=>'H','value'=>$cl_tasks));
-$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
+$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
-  if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
+  if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
+  if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
 
   if ($err->no()) {
     if (!ttProjectHelper::getProjectByName($cl_name)) {
       if (ttProjectHelper::insert(array(
-        'team_id' => $user->team_id,
+        'group_id' => $user->group_id,
         'name' => $cl_name,
         'description' => $cl_description,
         'users' => $cl_users,
@@ -82,14 +87,14 @@ if ($request->isPost()) {
           header('Location: projects.php');
           exit();
         } else
-          $err->add($i18n->getKey('error.db'));
+          $err->add($i18n->get('error.db'));
     } else
-      $err->add($i18n->getKey('error.project_exists'));
+      $err->add($i18n->get('error.project_exists'));
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.projectForm.project_name.focus()"');
-$smarty->assign('title', $i18n->getKey('title.add_project'));
+$smarty->assign('title', $i18n->get('title.add_project'));
 $smarty->assign('content_page_name', 'mobile/project_add.tpl');
 $smarty->display('mobile/index.tpl');

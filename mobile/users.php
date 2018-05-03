@@ -31,21 +31,22 @@ import('form.Form');
 import('ttTeamHelper');
 import('ttTimeHelper');
 
-// Access check.
-if (!ttAccessCheck(right_data_entry)) {
+// Access checks.
+if (!(ttAccessAllowed('view_users') || ttAccessAllowed('manage_users'))) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 // Get users.
 $active_users = ttTeamHelper::getActiveUsers(array('getAllFields'=>true));
-if($user->canManageTeam()) {
+if($user->can('manage_users')) {
   $can_delete_manager = (1 == count($active_users));
-  $inactive_users = ttTeamHelper::getInactiveUsers($user->team_id, true);
+  $inactive_users = ttTeamHelper::getInactiveUsers($user->group_id, true);
 }
 
-// Check if the team is set to show indicators for uncompleted time entries.
-if (UNCOMPLETED_INDICATORS == $user->uncompleted_indicators) {
+// Check if the group is set to show indicators for uncompleted time entries.
+if ($user->uncompleted_indicators) {
   // Check each active user if they have an uncompleted time entry.
   foreach ($active_users as $key => $user) {
     $active_users[$key]['has_uncompleted_entry'] = (bool) ttTimeHelper::getUncompleted($user['id']);
@@ -55,6 +56,6 @@ if (UNCOMPLETED_INDICATORS == $user->uncompleted_indicators) {
 $smarty->assign('active_users', $active_users);
 $smarty->assign('inactive_users', $inactive_users);
 $smarty->assign('can_delete_manager', $can_delete_manager);
-$smarty->assign('title', $i18n->getKey('title.users'));
+$smarty->assign('title', $i18n->get('title.users'));
 $smarty->assign('content_page_name', 'mobile/users.tpl');
 $smarty->display('mobile/index.tpl');

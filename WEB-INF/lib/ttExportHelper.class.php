@@ -29,13 +29,14 @@
 import('ttTeamHelper');
 import('ttTimeHelper');
 
-// ttExportHelper - this class is used to export team data to a file.
+// ttExportHelper - this class is used to export group data to a file.
 class ttExportHelper {
   var $fileName    = null;    // Name of the file with data.
 
   // The following arrays are maps between entity ids in the file versus the database.
   // We write to the file sequentially (1,2,3...) while in the database the entities have different ids.
   var $userMap     = array(); // User ids.
+  var $roleMap     = array(); // Role ids.
   var $projectMap  = array(); // Project ids.
   var $taskMap     = array(); // Task ids.
   var $clientMap   = array(); // Client ids.
@@ -44,7 +45,7 @@ class ttExportHelper {
   var $customFieldOptionMap = array(); // Custop field option ids.
   var $logMap      = array(); // Time log ids.
 
-  // createDataFile creates a file with all data for a given team.
+  // createDataFile creates a file with all data for a given group.
   function createDataFile($compress = false) {
     global $user;
 
@@ -60,32 +61,41 @@ class ttExportHelper {
     fwrite($file, "<?xml version=\"1.0\"?>\n");
     fwrite($file, "<pack>\n");
 
-    // Write team info.
-    fwrite($file, "<team currency=\"".$user->currency."\" lock_spec=\"".$user->lock_spec."\" lang=\"".$user->lang.
-      "\" decimal_mark=\"".$user->decimal_mark."\" date_format=\"".$user->date_format."\" time_format=\"".$user->time_format.
-      "\" week_start=\"".$user->week_start."\" workday_hours=\"".$user->workday_hours.
-      "\" plugins=\"".$user->plugins."\" tracking_mode=\"".$user->tracking_mode."\" record_type=\"".$user->record_type."\">\n");
-    fwrite($file, "  <name><![CDATA[".$user->team."]]></name>\n");
-    fwrite($file, "  <address><![CDATA[".$user->address."]]></address>\n");
-    fwrite($file, "</team>\n");
+    // Write group info.
+    fwrite($file, "<group currency=\"".$user->currency."\" decimal_mark=\"".$user->decimal_mark."\" lang=\"".$user->lang.
+      "\" date_format=\"".$user->date_format."\" time_format=\"".$user->time_format."\" week_start=\"".$user->week_start.
+      "\" tracking_mode=\"".$user->tracking_mode."\" project_required=\"".$user->project_required."\" task_required=\"".$user->task_required.
+      "\" record_type=\"".$user->record_type."\" bcc_email=\"".$user->bcc_email.
+      "\" plugins=\"".$user->plugins."\" lock_spec=\"".$user->lock_spec."\" workday_minutes=\"".$user->workday_minutes.
+      "\" config=\"".$user->config.
+      "\">\n");
+    fwrite($file, "  <name><![CDATA[".$user->group."]]></name>\n");
+    fwrite($file, "  <allow_ip><![CDATA[".$user->allow_ip."]]></allow_ip>\n");
+    fwrite($file, "  <password_complexity><![CDATA[".$user->password_complexity."]]></password_complexity>\n");
+    fwrite($file, "</group>\n");
+
+    // Prepare role map.
+    $roles = $this->getRoles();
+    foreach ($roles as $key=>$role_item)
+      $this->roleMap[$role_item['id']] = $key + 1;
 
     // Prepare user map.
-    $users = ttTeamHelper::getAllUsers($user->team_id, true);
+    $users = $this->getUsers();
     foreach ($users as $key=>$user_item)
       $this->userMap[$user_item['id']] = $key + 1;
 
     // Prepare project map.
-    $projects = ttTeamHelper::getAllProjects($user->team_id, true);
+    $projects = ttTeamHelper::getAllProjects($user->group_id, true);
     foreach ($projects as $key=>$project_item)
       $this->projectMap[$project_item['id']] = $key + 1;
 
     // Prepare task map.
-    $tasks = ttTeamHelper::getAllTasks($user->team_id, true);
+    $tasks = ttTeamHelper::getAllTasks($user->group_id, true);
     foreach ($tasks as $key=>$task_item)
       $this->taskMap[$task_item['id']] = $key + 1;
 
     // Prepare client map.
-    $clients = ttTeamHelper::getAllClients($user->team_id, true);
+    $clients = ttTeamHelper::getAllClients($user->group_id, true);
     foreach ($clients as $key=>$client_item)
       $this->clientMap[$client_item['id']] = $key + 1;
 
@@ -95,19 +105,31 @@ class ttExportHelper {
       $this->invoiceMap[$invoice_item['id']] = $key + 1;
 
     // Prepare custom fields map.
-    $custom_fields = ttTeamHelper::getAllCustomFields($user->team_id);
+    $custom_fields = ttTeamHelper::getAllCustomFields($user->group_id);
     foreach ($custom_fields as $key=>$custom_field)
       $this->customFieldMap[$custom_field['id']] = $key + 1;
 
     // Prepare custom field options map.
-    $custom_field_options = ttTeamHelper::getAllCustomFieldOptions($user->team_id);
+    $custom_field_options = ttTeamHelper::getAllCustomFieldOptions($user->group_id);
     foreach ($custom_field_options as $key=>$option)
       $this->customFieldOptionMap[$option['id']] = $key + 1;
+
+    // Write roles.
+    fwrite($file, "<roles>\n");
+    foreach ($roles as $role) {
+      fwrite($file, "  <role id=\"".$this->roleMap[$role['id']]."\" rank=\"".$role['rank']."\"".
+        " rights=\"".$role['rights']."\" status=\"".$role['status']."\">\n");
+      fwrite($file, "    <name><![CDATA[".$role['name']."]]></name>\n");
+      fwrite($file, "  </role>\n");
+    }
+    fwrite($file, "</roles>\n");
+    unset($roles);
 
     // Write users.
     fwrite($file, "<users>\n");
     foreach ($users as $user_item) {
-      fwrite($file, "  <user id=\"".$this->userMap[$user_item['id']]."\" login=\"".htmlentities($user_item['login'])."\" password=\"".$user_item['password']."\" role=\"".$user_item['role']."\" client_id=\"".$this->clientMap[$user_item['client_id']]."\" rate=\"".$user_item['rate']."\" email=\"".$user_item['email']."\" status=\"".$user_item['status']."\">\n");
+      $role_id = $user_item['rank'] == 512 ? 0 : $this->roleMap[$user_item['role_id']]; // Special role_id 0 (not null) for top manager.
+      fwrite($file, "  <user id=\"".$this->userMap[$user_item['id']]."\" login=\"".htmlentities($user_item['login'])."\" password=\"".$user_item['password']."\" role_id=\"".$role_id."\" client_id=\"".$this->clientMap[$user_item['client_id']]."\" rate=\"".$user_item['rate']."\" email=\"".$user_item['email']."\" status=\"".$user_item['status']."\">\n");
       fwrite($file, "    <name><![CDATA[".$user_item['name']."]]></name>\n");
       fwrite($file, "  </user>\n");
     }
@@ -144,7 +166,7 @@ class ttExportHelper {
 
     // Write user to project binds.
     fwrite($file, "<user_project_binds>\n");
-    $user_binds = ttTeamHelper::getUserToProjectBinds($user->team_id);
+    $user_binds = ttTeamHelper::getUserToProjectBinds($user->group_id);
     foreach ($user_binds as $bind) {
       $user_id = $this->userMap[$bind['user_id']];
       $project_id = $this->projectMap[$bind['project_id']];
@@ -202,10 +224,10 @@ class ttExportHelper {
     unset($custom_field_options);
 
     // Write monthly quotas.
-    $quotas = ttTeamHelper::getMonthlyQuotas($user->team_id);
+    $quotas = ttTeamHelper::getMonthlyQuotas($user->group_id);
     fwrite($file, "<monthly_quotas>\n");
     foreach ($quotas as $quota) {
-      fwrite($file, "  <monthly_quota year=\"".$quota['year']."\" month=\"".$quota['month']."\" quota=\"".$quota['quota']."\"/>\n");
+      fwrite($file, "  <monthly_quota year=\"".$quota['year']."\" month=\"".$quota['month']."\" minutes=\"".$quota['minutes']."\"/>\n");
     }
     fwrite($file, "</monthly_quotas>\n");
 
@@ -217,7 +239,7 @@ class ttExportHelper {
       foreach ($records as $record) {
         $key++;
         $this->logMap[$record['id']] = $key;
-        fwrite($file, "  <log_item id=\"$key\" timestamp=\"".$record['timestamp']."\" user_id=\"".$this->userMap[$record['user_id']]."\" date=\"".$record['date']."\" start=\"".$record['start']."\" finish=\"".$record['finish']."\" duration=\"".($record['start']?"":$record['duration'])."\" client_id=\"".$this->clientMap[$record['client_id']]."\" project_id=\"".$this->projectMap[$record['project_id']]."\" task_id=\"".$this->taskMap[$record['task_id']]."\" invoice_id=\"".$this->invoiceMap[$record['invoice_id']]."\" billable=\"".$record['billable']."\" status=\"".$record['status']."\">\n");
+        fwrite($file, "  <log_item id=\"$key\" user_id=\"".$this->userMap[$record['user_id']]."\" date=\"".$record['date']."\" start=\"".$record['start']."\" finish=\"".$record['finish']."\" duration=\"".($record['start']?"":$record['duration'])."\" client_id=\"".$this->clientMap[$record['client_id']]."\" project_id=\"".$this->projectMap[$record['project_id']]."\" task_id=\"".$this->taskMap[$record['task_id']]."\" invoice_id=\"".$this->invoiceMap[$record['invoice_id']]."\" billable=\"".$record['billable']."\" paid=\"".$record['paid']."\" status=\"".$record['status']."\">\n");
         fwrite($file, "    <comment><![CDATA[".$record['comment']."]]></comment>\n");
         fwrite($file, "  </log_item>\n");
       }
@@ -226,7 +248,7 @@ class ttExportHelper {
     unset($records);
 
     // Write custom field log.
-    $custom_field_log = ttTeamHelper::getCustomFieldLog($user->team_id);
+    $custom_field_log = ttTeamHelper::getCustomFieldLog($user->group_id);
     fwrite($file, "<custom_field_log>\n");
     foreach ($custom_field_log as $entry) {
       fwrite($file, "  <custom_field_log_entry log_id=\"".$this->logMap[$entry['log_id']]."\" field_id=\"".$this->customFieldMap[$entry['field_id']]."\" option_id=\"".$this->customFieldOptionMap[$entry['option_id']]."\" status=\"".$entry['status']."\">\n");
@@ -237,10 +259,10 @@ class ttExportHelper {
     unset($custom_field_log);
 
     // Write expense items.
-    $expense_items = ttTeamHelper::getExpenseItems($user->team_id);
+    $expense_items = ttTeamHelper::getExpenseItems($user->group_id);
     fwrite($file, "<expense_items>\n");
     foreach ($expense_items as $expense_item) {
-      fwrite($file, "  <expense_item date=\"".$expense_item['date']."\" user_id=\"".$this->userMap[$expense_item['user_id']]."\" client_id=\"".$this->clientMap[$expense_item['client_id']]."\" project_id=\"".$this->projectMap[$expense_item['project_id']]."\" cost=\"".$expense_item['cost']."\" invoice_id=\"".$this->invoiceMap[$expense_item['invoice_id']]."\" status=\"".$expense_item['status']."\">\n");
+      fwrite($file, "  <expense_item date=\"".$expense_item['date']."\" user_id=\"".$this->userMap[$expense_item['user_id']]."\" client_id=\"".$this->clientMap[$expense_item['client_id']]."\" project_id=\"".$this->projectMap[$expense_item['project_id']]."\" cost=\"".$expense_item['cost']."\" invoice_id=\"".$this->invoiceMap[$expense_item['invoice_id']]."\" paid=\"".$expense_item['paid']."\" status=\"".$expense_item['status']."\">\n");
       fwrite($file, "    <name><![CDATA[".$expense_item['name']."]]></name>\n");
       fwrite($file, "  </expense_item>\n");
     }
@@ -249,7 +271,7 @@ class ttExportHelper {
 
     // Write fav reports.
     fwrite($file, "<fav_reports>\n");
-    $fav_reports = ttTeamHelper::getFavReports($user->team_id);
+    $fav_reports = ttTeamHelper::getFavReports($user->group_id);
     foreach ($fav_reports as $fav_report) {
       $user_list = '';
       if (strlen($fav_report['users']) > 0) {
@@ -259,7 +281,7 @@ class ttExportHelper {
             $user_list .= (strlen($user_list) == 0? '' : ',').$this->userMap[$v];
         }
       }
-      fwrite($file, "\t<fav_report user_id=\"".$this->userMap[$fav_report['user_id']]."\"".
+      fwrite($file, "  <fav_report user_id=\"".$this->userMap[$fav_report['user_id']]."\"".
         " client_id=\"".$this->clientMap[$fav_report['client_id']]."\"".
         " cf_1_option_id=\"".$this->customFieldOptionMap[$fav_report['cf_1_option_id']]."\"".
         " project_id=\"".$this->projectMap[$fav_report['project_id']]."\"".
@@ -271,6 +293,8 @@ class ttExportHelper {
         " period_end=\"".$fav_report['period_end']."\"".
         " show_client=\"".$fav_report['show_client']."\"".
         " show_invoice=\"".$fav_report['show_invoice']."\"".
+        " show_paid=\"".$fav_report['show_paid']."\"".
+        " show_ip=\"".$fav_report['show_ip']."\"".
         " show_project=\"".$fav_report['show_project']."\"".
         " show_start=\"".$fav_report['show_start']."\"".
         " show_duration=\"".$fav_report['show_duration']."\"".
@@ -281,14 +305,15 @@ class ttExportHelper {
         " show_custom_field_1=\"".$fav_report['show_custom_field_1']."\"".
         " group_by=\"".$fav_report['group_by']."\"".
         " show_totals_only=\"".$fav_report['show_totals_only']."\">\n");
-      fwrite($file, "\t\t<name><![CDATA[".$fav_report["name"]."]]></name>\n");
-      fwrite($file, "\t</fav_report>\n");
+      fwrite($file, "    <name><![CDATA[".$fav_report["name"]."]]></name>\n");
+      fwrite($file, "  </fav_report>\n");
     }
     fwrite($file, "</fav_reports>\n");
     unset($fav_reports);
 
     // Cleanup.
     unset($users);
+    $this->roleMap = array();
     $this->userMap = array();
     $this->projectMap = array();
     $this->taskMap = array();
@@ -333,5 +358,57 @@ class ttExportHelper {
     }
     fclose ($in_file);
     return true;
+  }
+
+  /*
+   * Note about the utility functions below.
+   * We have roughly 4 groups of operations:
+   *   1) Regular system usage for tracking time, etc.
+   *   2) Registration process - used infrequently.
+   *   3) Admin usage - used infrequently.
+   *   4) Export - used infrequently.
+   *
+   * It is tempting to have a generic function to get things done for
+   * all situations. However, as registration, export and admin access are one-off
+   * operations, while regular system usage is daily and must be efficient,
+   * the current approach is to have SEPARATE functions for each mode.
+   *
+   * This is because each mode requires a slightly different approach,
+   * and we don't want to over-complicate things.
+   */
+
+  // getRoles - obtains all roles defined for group.
+  function getRoles() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $result = array();
+    $sql = "select * from tt_roles where group_id = $user->group_id";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
+  // The getUsers obtains all users in group for the purpose of export.
+  function getUsers() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $sql = "select u.*, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.group_id = $user->group_id order by upper(u.name)"; // Note: deleted users are included.
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
   }
 }

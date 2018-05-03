@@ -31,23 +31,23 @@ import('ttExportHelper');
 import('form.Form');
 
 // Access check.
-if (!ttAccessCheck(right_export_team)) {
+if (!ttAccessAllowed('export_data')) {
   header('Location: access_denied.php');
   exit();
 }
 
 $cl_compression = $request->getParameter('compression');
-$compressors = array('' => $i18n->getKey('form.export.compression_none'));
+$compressors = array('' => $i18n->get('form.export.compression_none'));
 if (function_exists('bzcompress'))
-  $compressors['bzip'] = $i18n->getKey('form.export.compression_bzip');
+  $compressors['bzip'] = $i18n->get('form.export.compression_bzip');
 
 $form = new Form('exportForm');
 $form->addInput(array('type'=>'combobox','name'=>'compression','value'=>$cl_compression,'data'=>$compressors));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.export')));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.export')));
 
 if ($request->isPost()) {
 
-  $filename = 'team_data.xml';
+  $filename = 'group_data.xml';
   $mime_type = 'text/xml';
   $compress = false;
   if ('bzip' == $cl_compression) {
@@ -74,10 +74,10 @@ if ($request->isPost()) {
     }
     exit;
   } else
-    $err->add($i18n->getKey('error.sys'));
+    $err->add($i18n->get('error.sys'));
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.export'));
+$smarty->assign('title', $i18n->get('title.export'));
 $smarty->assign('content_page_name', 'export.tpl');
 $smarty->display('index.tpl');

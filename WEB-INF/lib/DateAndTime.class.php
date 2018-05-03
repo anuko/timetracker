@@ -287,39 +287,23 @@ class DateAndTime {
   }
 
   function isError() {
-    if ($this->mParseResult!=0) return true;
+    if ($this->mParseResult != 0) return true;
     return false;
   }
 
-  function getClone() {
-    if (version_compare(phpversion(), '5.0') < 0) {
-      $d = new DateAndTime($this->getFormat());
-      $d->setTimestamp($this->getTimestamp());
-      return $d;
-    } else {
-      return clone($this);
-    }
-  }
-
   function before(/*DateAndTime*/ $obj) {
-    if ($this->getTimestamp()<$obj->getTimestamp()) return true;
+    if ($this->getTimestamp() < $obj->getTimestamp()) return true;
     return false;
   }
 
   function after(/*DateAndTime*/ $obj) {
-    if ($this->getTimestamp()>$obj->getTimestamp()) return true;
+    if ($this->getTimestamp() > $obj->getTimestamp()) return true;
     return false;
   }
 
   function equals(/*DateAndTime*/ $obj) {
     if ($this->getTimestamp() == $obj->getTimestamp()) return true;
     return false;
-  }
-
-  function nextDate() {
-    $d = $this->getClone();
-    $d->incDay();
-    return $d;
   }
 
   function decDay(/*int*/$days=1) {
@@ -337,18 +321,17 @@ class DateAndTime {
    */
   function preprocessFormatString($format) {
     global $i18n;
-    if (isset($GLOBALS['i18n'])) {
-      // replace locale-dependent strings
-      $format = str_replace('%a', mb_substr($i18n->getWeekDayName($this->mDay), 0, 3, 'utf-8'), $format);
-      $format = str_replace('%A', $i18n->getWeekDayName($this->mDay), $format);
-      $abbrev_month = mb_substr($i18n->monthNames[$this->mMonth], 0, 3, 'utf-8');
-      $format = str_replace('%b', $abbrev_month, $format);
-      $format = str_replace('%h', $abbrev_month, $format);
-      $format = str_replace('%z', date('O'), $format);
-      $format = str_replace('%Z', date('O'), $format); // format as 'O' for consistency with JS strftime
-      if (strpos($format, '%c') !== false) {
-        $format = str_replace('%c', $this->preprocessFormatString('%a %d %b %Y %T %Z'), $format);
-      }
+
+    // replace locale-dependent strings
+    $format = str_replace('%a', mb_substr($i18n->getWeekDayName($this->mDay), 0, 3, 'utf-8'), $format);
+    $format = str_replace('%A', $i18n->getWeekDayName($this->mDay), $format);
+    $abbrev_month = mb_substr($i18n->monthNames[$this->mMonth], 0, 3, 'utf-8');
+    $format = str_replace('%b', $abbrev_month, $format);
+    $format = str_replace('%h', $abbrev_month, $format);
+    $format = str_replace('%z', date('O'), $format);
+    $format = str_replace('%Z', date('O'), $format); // format as 'O' for consistency with JS strftime
+    if (strpos($format, '%c') !== false) {
+      $format = str_replace('%c', $this->preprocessFormatString('%a %d %b %Y %T %Z'), $format);
     }
     return $format;
   }

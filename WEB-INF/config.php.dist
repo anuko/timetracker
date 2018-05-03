@@ -42,11 +42,10 @@ define('DSN', 'mysqli://root:no@localhost/dbname?charset=utf8');
 // and now you see some corrupted characters. See http://dev.mysql.com/doc/refman/5.0/en/charset-mysql.html
 
 
-// MULTITEAM_MODE option defines whether users can create their own teams.
+// MULTITEAM_MODE option defines whether users can create their own top groups (organizations).
+// When false, a Time Tracker server is managed by admin, who creates top groups (one or many).
 //
 // Available values are true or false.
-// If true users can create their own teams.
-// If false only admin can create teams.
 //
 define('MULTITEAM_MODE', true);
 
@@ -70,33 +69,6 @@ define('APP_NAME', '');
 // define('OLD_PASSWORDS', true);
 
 
-// Holidays. At this time holiday days are defined in the localization files (one file per language).
-// The SHOW_HOLIDAYS option defines whether holidays are highlighted with holiday color.
-//
-define('SHOW_HOLIDAYS', true);
-
-
-// COST_ON_REPORTS - defines the availability of the Cost field on the Reports page.
-//
-define('COST_ON_REPORTS', true);
-
-
-// READONLY_START_FINISH - defines whether the start and finish fields on time entry pages are read-only.
-// This applies to regular users only. Manager and co-managers can edit these values.
-//
-// define('READONLY_START_FINISH', false);
-
-
-// FUTURE_ENTRIES - defines whether users can create entries for future dates. Defaults to true.
-//
-// define('FUTURE_ENTRIES', false);
-
-
-// ALLOW_OVERLAP - defines whether overlapping time entries are allowed. Defaults to false.
-//
-// define('ALLOW_OVERLAP', true);
-
-
 // WEEKEND_START_DAY
 //
 // This option defines which days are highlighted with weekend color.
@@ -110,6 +82,15 @@ define('WEEKEND_START_DAY', 6);
 // Lifetime in seconds for tt_PHPSESSID cookie. Time to live is extended by this value
 // with each visit to the site so that users don't have to re-login. 
 // define('PHPSESSID_TTL', 86400);
+//
+// Note: see also PHP_SESSION_PATH below as you may have to use it together with
+// PHPSESSID_TTL to avoid premature session expirations.
+
+
+// PHP_SESSION_PATH
+// Local file system path for PHP sessions. Use it to isolate session deletions
+// (garbage collection interference) by other PHP scripts potentially running on the system.
+// define('PHP_SESSION_PATH', '/tmp/timetracker'); // Directory must exist and be writable.
 
 
 // Forum and help links from the main menu.
@@ -196,7 +177,7 @@ define('AUTH_MODULE', 'db');
 // Configuration example for OpenLDAP server:
 // define('AUTH_MODULE', 'ldap');
 // $GLOBALS['AUTH_MODULE_PARAMS'] = array(
-//  'server' => '127.0.0.1',                    // OpenLDAP server address or name.
+//  'server' => '127.0.0.1',                    // OpenLDAP server address or name. For secure LDAP use ldaps://hostname:port here.
 //  'type' => 'openldap',                       // Type of server. openldap type should also work with Sun Directory Server when member_of is empty.
                                                 // It may work with other (non Windows AD) LDAP servers. For Windows AD use the 'ad' type.
 //  'base_dn' => 'ou=People,dc=example,dc=com', // Base distinguished name in LDAP catalog.
@@ -207,11 +188,15 @@ define('AUTH_MODULE', 'db');
 // Configuration example for Windows domains with Active Directory:
 // define('AUTH_MODULE', 'ldap');
 // $GLOBALS['AUTH_MODULE_PARAMS'] = array(
-//  'server' => '127.0.0.1',            // Domain controller IP address or name.
+//  'server' => '127.0.0.1',            // Domain controller IP address or name. For secure LDAP use ldaps://hostname:port here.
 //  'type' => 'ad',                     // Type of server.
 //  'base_dn' => 'DC=example,DC=com',   // Base distinguished name in LDAP catalog.
 //  'default_domain' => 'example.com',  // Default domain.
 //  'member_of' => array());            // List of groups, membership in which is required for user to be authenticated.
+                                        // Leave it empty if membership is not necessary. Otherwise list CN parts only.
+                                        // For example:
+                                        // array('Ldap Testers') means that the user must be a member Ldap Testers group.
+                                        // array('Ldap Testers', 'Ldap Users') means the user must be a member of both Ldap Testers and Ldap Users groups.
 
 // define('AUTH_DEBUG', false); // Note: enabling AUTH_DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
 

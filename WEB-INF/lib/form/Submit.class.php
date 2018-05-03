@@ -27,34 +27,25 @@
 // +----------------------------------------------------------------------+
 
 import('form.FormElement');
-	
+
 class Submit extends FormElement {
 
-  function __construct($name)
-  {
+  function __construct($name) {
     $this->class = 'Submit';
     $this->name = $name;
   }
 
   function getHtml() {
-	    
-	    if ($this->id=="") $this->id = $this->name;
-	    
-		$html = "\n\t<input";
-		$html .= " type=\"submit\" name=\"$this->name\" id=\"$this->id\"";
-		
-		if (!$this->isEnabled()) {
-			$html .= " disabled=\"true\"";
-		}
-		
-		$html .= " value=\"$this->value\"";
-		
-		if ($this->on_click) {
-                    $html .= " onclick=\"".$this->on_click."\"";
-		}
-		
-		$html .= ">";
-		
-		return $html;
-	}
+    if (empty($this->id))
+      $this->id = $this->name;
+
+    // Output HTML.
+    $html = "\n\t<input type=\"submit\" name=\"$this->name\" id=\"$this->id\"";
+    $html .= " value=\"$this->value\"";
+    if ($this->on_click) $html .= " onclick=\"".$this->on_click."\"";
+    if (!$this->isEnabled()) $html .= " disabled";
+    $html .= ">";
+
+    return $html;
+  }
 }

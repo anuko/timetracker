@@ -30,9 +30,13 @@ require_once('initialize.php');
 import('form.Form');
 import('ttClientHelper');
 
-// Access check.
-if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('cl')) {
+// Access checks.
+if (!ttAccessAllowed('manage_clients')) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('cl')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 
@@ -44,9 +48,9 @@ $client_to_delete = $client['name'];
 $form = new Form('clientDeleteForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$id));
 $form->addInput(array('type'=>'combobox','name'=>'delete_client_entries',
-  'data'=>array('0'=>$i18n->getKey('dropdown.do_not_delete'),'1'=>$i18n->getKey('dropdown.delete'))));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
-$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
+  'data'=>array('0'=>$i18n->get('dropdown.do_not_delete'),'1'=>$i18n->get('dropdown.delete'))));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
+$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 
 if ($request->isPost()) {
   if(ttClientHelper::getClient($id)) {
@@ -55,10 +59,10 @@ if ($request->isPost()) {
         header('Location: clients.php');
         exit();
       } else
-        $err->add($i18n->getKey('error.db'));
+        $err->add($i18n->get('error.db'));
     }
   } else
-    $err->add($i18n->getKey('error.db'));
+    $err->add($i18n->get('error.db'));
 
   if ($request->getParameter('btn_cancel')) {
     header('Location: clients.php');
@@ -68,6 +72,6 @@ if ($request->isPost()) {
 
 $smarty->assign('client_to_delete', $client_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.delete_client'));
+$smarty->assign('title', $i18n->get('title.delete_client'));
 $smarty->assign('content_page_name', 'client_delete.tpl');
 $smarty->display('index.tpl');

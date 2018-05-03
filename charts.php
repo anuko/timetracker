@@ -37,9 +37,21 @@ import('PieChartEx');
 import('ttUserHelper');
 import('ttTeamHelper');
 
-// Access check.
-if (!ttAccessCheck(right_view_charts) || !$user->isPluginEnabled('ch')) {
+// Access checks.
+if (!(ttAccessAllowed('view_own_charts') || ttAccessAllowed('view_charts'))) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('ch')) {
+  header('Location: feature_disabled.php');
+  exit();
+}
+if ($user->behalf_id && (!$user->can('view_charts') || !$user->checkBehalfId())) {
+  header('Location: access_denied.php'); // Trying on behalf, but no right or wrong user.
+  exit();
+}
+if (!$user->behalf_id && !$user->can('view_own_charts') && !$user->adjustBehalfId()) {
+  header('Location: access_denied.php'); // Trying as self, but no right for self, and noone to view on behalf.
   exit();
 }
 
@@ -84,7 +96,7 @@ $_SESSION['chart_type'] = $cl_type;
 // Who do we draw charts for?
 $on_behalf_id = $request->getParameter('onBehalfUser', (isset($_SESSION['behalf_id'])? $_SESSION['behalf_id'] : $user->id));
 
-if ($request->getMethod( )== 'POST') {
+if ($request->isPost()) {
   // If chart interval changed - save it.
   $cl_interval = $request->getParameter('interval');
   if ($cl_interval) {
@@ -105,7 +117,7 @@ if ($request->getMethod( )== 'POST') {
   }
   // If user has changed - set behalf_id accordingly in the session.
   if ($request->getParameter('onBehalfUser')) {
-    if($user->canManageTeam()) {
+    if($user->can('view_charts')) {
       unset($_SESSION['behalf_id']);
       unset($_SESSION['behalf_name']);
 
@@ -123,9 +135,13 @@ if ($request->getMethod( )== 'POST') {
 $chart_form = new Form('chartForm');
 
 // User dropdown. Changes the user "on behalf" of whom we are working. 
-if ($user->canManageTeam()) {
-  $user_list = ttTeamHelper::getActiveUsers(array('putSelfFirst'=>true));
-  if (count($user_list) > 1) {
+if ($user->can('view_charts')) {
+  if ($user->can('view_own_charts'))
+    $options = array('status'=>ACTIVE,'max_rank'=>$user->rank-1,'include_self'=>true,'self_first'=>true);
+  else
+    $options = array('status'=>ACTIVE,'max_rank'=>$user->rank-1);
+  $user_list = $user->getUsers($options);
+  if (count($user_list) >= 1) {
     $chart_form->addInput(array('type'=>'combobox',
       'onchange'=>'this.form.submit();',
       'name'=>'onBehalfUser',
@@ -139,11 +155,11 @@ if ($user->canManageTeam()) {
 
 // Chart interval options.
 $intervals = array();
-$intervals[INTERVAL_THIS_DAY] = $i18n->getKey('dropdown.this_day');
-$intervals[INTERVAL_THIS_WEEK] = $i18n->getKey('dropdown.this_week');
-$intervals[INTERVAL_THIS_MONTH] = $i18n->getKey('dropdown.this_month');
-$intervals[INTERVAL_THIS_YEAR] = $i18n->getKey('dropdown.this_year');
-$intervals[INTERVAL_ALL_TIME] = $i18n->getKey('dropdown.all_time');
+$intervals[INTERVAL_THIS_DAY] = $i18n->get('dropdown.selected_day');
+$intervals[INTERVAL_THIS_WEEK] = $i18n->get('dropdown.selected_week');
+$intervals[INTERVAL_THIS_MONTH] = $i18n->get('dropdown.selected_month');
+$intervals[INTERVAL_THIS_YEAR] = $i18n->get('dropdown.selected_year');
+$intervals[INTERVAL_ALL_TIME] = $i18n->get('dropdown.all_time');
 
 // Chart interval dropdown.
 $chart_form->addInput(array('type' => 'combobox',
@@ -158,11 +174,11 @@ $chart_selector = (MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isP
 if ($chart_selector) {
   $types = array();
   if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
-    $types[CHART_PROJECTS] = $i18n->getKey('dropdown.projects');
+    $types[CHART_PROJECTS] = $i18n->get('dropdown.projects');
   if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
-    $types[CHART_TASKS] = $i18n->getKey('dropdown.tasks');
+    $types[CHART_TASKS] = $i18n->get('dropdown.tasks');
   if ($user->isPluginEnabled('cl'))
-    $types[CHART_CLIENTS] = $i18n->getKey('dropdown.clients');
+    $types[CHART_CLIENTS] = $i18n->get('dropdown.clients');
 
   // Add chart type dropdown.
   $chart_form->addInput(array('type' => 'combobox',
@@ -223,6 +239,6 @@ $chart->renderEx(array('fileName'=>$file_name,'hideLogo'=>true,'hideTitle'=>true
 $smarty->assign('img_file_name', $img_ref);
 $smarty->assign('chart_selector', $chart_selector);
 $smarty->assign('forms', array($chart_form->getName() => $chart_form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.charts'));
+$smarty->assign('title', $i18n->get('title.charts'));
 $smarty->assign('content_page_name', 'charts.tpl');
 $smarty->display('index.tpl');

@@ -74,7 +74,6 @@ $smarty = new Smarty;
 $smarty->use_sub_dirs = false;
 $smarty->template_dir = TEMPLATE_DIR;
 $smarty->compile_dir  = TEMPLATE_DIR.'_c';
-$GLOBALS['SMARTY'] = &$smarty;
 
 // Note: these 3 settings below used to be in .htaccess file. Moved them here to eliminate "error 500" problems
 // with some shared hostings that do not have AllowOverride Options or AllowOverride All in their apache configurations.
@@ -84,6 +83,12 @@ session_cache_expire(1);
 $phpsessid_ttl = defined('PHPSESSID_TTL') ? PHPSESSID_TTL : 60*60*24;
 // Set lifetime for garbage collection.
 ini_set('session.gc_maxlifetime', $phpsessid_ttl);
+// Set PHP session path, if defined to avoid garbage collection interference from other scripts.
+if (defined('PHP_SESSION_PATH')) {
+  ini_set('session.save_path', PHP_SESSION_PATH);
+  ini_set('session.gc_probability', 1);
+}
+
 // Set session cookie lifetime.
 session_set_cookie_params($phpsessid_ttl);
 if (isset($_COOKIE['tt_PHPSESSID'])) {
@@ -120,29 +125,6 @@ define('TYPE_ALL', 0); // Time record can be specified with either duration or s
 define('TYPE_START_FINISH', 1); // Time record has start and finish times.
 define('TYPE_DURATION', 2); // Time record has only duration, no start and finish times.
 
-// Definitions for uncompleted time entry indicators.
-define('UNCOMPLETED_INDICATORS_NONE', 0); // Do not show indicators.
-define('UNCOMPLETED_INDICATORS', 1); // Show indicators.
-
-// User access rights - bits that collectively define an access mask to the system (a role).
-// We'll have some bits here (1,2, etc...) reserved for future use.
-define('right_data_entry', 4);     // Right to enter work hours and expenses.
-define('right_view_charts', 8);    // Right to view charts.
-define('right_view_reports', 16);  // Right to view reports.
-define('right_view_invoices', 32); // Right to view invoices.
-define('right_manage_team', 64);   // Right to manage team. Note that this is not full access to team.
-define('right_assign_roles', 128); // Right to assign user roles.
-define('right_export_team', 256);  // Right to export team data to a file.
-define('right_administer_site', 1024); // Admin account right to manage the application as a whole. 
-
-// User roles.
-define('ROLE_USER', 4);          // Regular user.
-define('ROLE_CLIENT', 16);       // Client (to view reports and invoices).
-define('ROLE_COMANAGER', 68);    // Team co-manager. Can do many things but not as much as team manager.
-define('ROLE_MANAGER', 324);     // Team manager. Can do everything for a team.
-define('ROLE_SITE_ADMIN', 1024); // Site administrator.
-
-
 define('CHARSET', 'utf-8');
 
 date_default_timezone_set(@date_default_timezone_get());
@@ -163,8 +145,8 @@ $msg = new ActionErrors(); // Notification messages (not errrors) for user.
 import('ttUser');
 $user = new ttUser(null, $auth->getUserId());
 if ($user->custom_logo) {
-  $smarty->assign('custom_logo', 'images/'.$user->team_id.'.png');
-  $smarty->assign('mobile_custom_logo', '../images/'.$user->team_id.'.png');
+  $smarty->assign('custom_logo', 'images/'.$user->group_id.'.png');
+  $smarty->assign('mobile_custom_logo', '../images/'.$user->group_id.'.png');
 }
 $smarty->assign('user', $user);
 
@@ -191,9 +173,6 @@ if (!$lang) {
 
 // Load i18n file.
 $i18n->load($lang);
-$GLOBALS['I18N'] = &$i18n;
-
-$GLOBALS['USER'] = &$user;
 
 // Assign things for smarty to use in template files.
 $smarty->assign('i18n', $i18n->keys);

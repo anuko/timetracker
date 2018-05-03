@@ -33,15 +33,15 @@ class CustomFields {
   const TYPE_TEXT = 1;     // A text field.
   const TYPE_DROPDOWN = 2; // A dropdown field with pre-defined values.
 
-  var $fields = array();  // Array of custom fields for team.
+  var $fields = array();  // Array of custom fields for group.
   var $options = array(); // Array of options for a dropdown custom field.
 
   // Constructor.
-  function __construct($team_id) {
+  function __construct($group_id) {
     $mdb2 = getConnection();
 
     // Get fields.
-    $sql = "select id, type, label, required from tt_custom_fields where team_id = $team_id and status = 1 and type > 0";
+    $sql = "select id, type, label, required from tt_custom_fields where group_id = $group_id and status = 1 and type > 0";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -149,12 +149,12 @@ class CustomFields {
     $field_id = CustomFields::getFieldIdForOption($id);
 
     // First make sure that the field is ours.
-    $sql = "select team_id from tt_custom_fields where id = $field_id";
+    $sql = "select group_id from tt_custom_fields where id = $field_id";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))
       return false;
     $val = $res->fetchRow();
-    if ($user->team_id != $val['team_id'])
+    if ($user->group_id != $val['group_id'])
       return false;
 
     // Delete log entries with this option.
@@ -176,12 +176,12 @@ class CustomFields {
     $options = array();
 
     // First make sure that the field is ours.
-    $sql = "select team_id from tt_custom_fields where id = $field_id";
+    $sql = "select group_id from tt_custom_fields where id = $field_id";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))
       return false;
     $val = $res->fetchRow();
-    if ($user->team_id != $val['team_id'])
+    if ($user->group_id != $val['group_id'])
       return false;
 
     // Get options.
@@ -204,12 +204,12 @@ class CustomFields {
     $field_id = CustomFields::getFieldIdForOption($id);
 
     // First make sure that the field is ours.
-    $sql = "select team_id from tt_custom_fields where id = $field_id";
+    $sql = "select group_id from tt_custom_fields where id = $field_id";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))
       return false;
     $val = $res->fetchRow();
-    if ($user->team_id != $val['team_id'])
+    if ($user->group_id != $val['group_id'])
       return false;
 
     // Get option name.
@@ -223,13 +223,13 @@ class CustomFields {
     return false;
   }
 
-  // getFields returns an array of custom fields for team.
+  // getFields returns an array of custom fields for group.
   static function getFields() {
     global $user;
     $mdb2 = getConnection();
 
     $fields = array();
-    $sql = "select id, type, label from tt_custom_fields where team_id = $user->team_id and status = 1 and type > 0";
+    $sql = "select id, type, label from tt_custom_fields where group_id = $user->group_id and status = 1 and type > 0";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -245,7 +245,7 @@ class CustomFields {
     global $user;
     $mdb2 = getConnection();
 
-    $sql = "select label, type, required from tt_custom_fields where id = $id and team_id = $user->team_id";
+    $sql = "select label, type, required from tt_custom_fields where id = $id and group_id = $user->group_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -270,25 +270,25 @@ class CustomFields {
     return false;
   }
 
-  // The insertField inserts a custom field for team.
+  // The insertField inserts a custom field for group.
   static function insertField($field_name, $field_type, $required) {
     global $user;
     $mdb2 = getConnection();
-    $sql = "insert into tt_custom_fields (team_id, type, label, required, status) values($user->team_id, $field_type, ".$mdb2->quote($field_name).", $required, 1)";
+    $sql = "insert into tt_custom_fields (group_id, type, label, required, status) values($user->group_id, $field_type, ".$mdb2->quote($field_name).", $required, 1)";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
 
-  // The updateField updates custom field for team.
+  // The updateField updates custom field for group.
   static function updateField($id, $name, $type, $required) {
     global $user;
     $mdb2 = getConnection();
-    $sql = "update tt_custom_fields set label = ".$mdb2->quote($name).", type = $type, required = $required where id = $id and team_id = $user->team_id";
+    $sql = "update tt_custom_fields set label = ".$mdb2->quote($name).", type = $type, required = $required where id = $id and group_id = $user->group_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
 
-  // The deleteField deletes a custom field, its options and log entries for team.
+  // The deleteField deletes a custom field, its options and log entries for group.
   static function deleteField($field_id) {
 
     // Our overall intention is to keep the code simple and manageable.
@@ -299,12 +299,12 @@ class CustomFields {
     $mdb2 = getConnection();
 
     // First make sure that the field is ours so that we can safely delete it.
-    $sql = "select team_id from tt_custom_fields where id = $field_id";
+    $sql = "select group_id from tt_custom_fields where id = $field_id";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))
       return false;
     $val = $res->fetchRow();
-    if ($user->team_id != $val['team_id'])
+    if ($user->group_id != $val['group_id'])
       return false;
 
     // Mark log entries as deleted.
@@ -320,7 +320,7 @@ class CustomFields {
       return false;
 
     // Delete the field.
-    $sql = "delete from tt_custom_fields where id = $field_id and team_id = $user->team_id";
+    $sql = "delete from tt_custom_fields where id = $field_id and group_id = $user->group_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }

@@ -31,15 +31,19 @@ import('form.Form');
 import('ttClientHelper');
 import('ttTeamHelper');
 
-// Access check.
-if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('cl')) {
+// Access checks.
+if (!ttAccessAllowed('manage_clients')) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('cl')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 
 $cl_id = (int) $request->getParameter('id');
 
-$projects = ttTeamHelper::getActiveProjects($user->team_id);
+$projects = ttTeamHelper::getActiveProjects($user->group_id);
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -62,20 +66,20 @@ if ($request->isPost()) {
 $form = new Form('clientForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 $form->addInput(array('type'=>'text','name'=>'name','maxlength'=>'100','style'=>'width: 350px;','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','style'=>'width: 350px;','cols'=>'55','rows'=>'5','value'=>$cl_address));
+$form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','style'=>'width: 350px; height: 80px;','value'=>$cl_address));
 $form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
-  'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
+  'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'datakeys'=>array('id','name'),'layout'=>'H','value'=>$cl_projects));
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
-$form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
+$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
+$form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->get('button.copy')));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_name'));
-  if (!ttValidString($cl_address, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.client_address'));
-  if (!ttValidFloat($cl_tax, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.tax'));
+  if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.client_name'));
+  if (!ttValidString($cl_address, true)) $err->add($i18n->get('error.field'), $i18n->get('label.client_address'));
+  if (!ttValidFloat($cl_tax, true)) $err->add($i18n->get('error.field'), $i18n->get('label.tax'));
 
   if ($err->no()) {
     if ($request->getParameter('btn_save')) {
@@ -91,15 +95,15 @@ if ($request->isPost()) {
           header('Location: clients.php');
           exit();
         } else
-          $err->add($i18n->getKey('error.db'));
+          $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->getKey('error.client_exists'));
+        $err->add($i18n->get('error.client_exists'));
     }
 
     if ($request->getParameter('btn_copy')) {
       if (!ttClientHelper::getClientByName($cl_name)) {
         if (ttClientHelper::insert(array(
-          'team_id' => $user->team_id,
+          'group_id' => $user->group_id,
           'name' => $cl_name,
           'address' => $cl_address,
           'tax' => $cl_tax,
@@ -108,14 +112,14 @@ if ($request->isPost()) {
           header('Location: clients.php');
           exit();
         } else
-          $err->add($i18n->getKey('error.db'));
+          $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->getKey('error.client_exists'));
+        $err->add($i18n->get('error.client_exists'));
     }
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.edit_client'));
+$smarty->assign('title', $i18n->get('title.edit_client'));
 $smarty->assign('content_page_name', 'client_edit.tpl');
 $smarty->display('index.tpl');

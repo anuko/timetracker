@@ -14,7 +14,7 @@
     <td class="tableHeader" align="center">{$i18n.label.item}</td>
     <td class="tableHeader" align="center">{$i18n.label.cost}</td>
   </tr>
-  <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
+  <tr>
 {if $user->isPluginEnabled('cl')}
   <td>{$expense_item.client_name|escape}</td>
 {/if}

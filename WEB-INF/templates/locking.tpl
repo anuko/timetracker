@@ -4,7 +4,7 @@
     <td>
       <table cellspacing="1" cellpadding="2" border="0">
         <tr>
-          <td align="right">{$i18n.label.cron_schedule}:</td>
+          <td align="right">{$i18n.label.schedule}:</td>
           <td>{$forms.lockingForm.lock_spec.control} <a href="https://www.anuko.com/lp/tt_6.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
         </tr>
         <tr>

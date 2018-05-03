@@ -8,12 +8,24 @@
           <td>{$forms.notificationForm.fav_report.control}</td>
         </tr>
         <tr>
-          <td align="right">{$i18n.label.cron_schedule} (*):</td>
+          <td align="right">{$i18n.label.schedule} (*):</td>
           <td>{$forms.notificationForm.cron_spec.control} <a href="https://www.anuko.com/lp/tt_6.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
         </tr>
         <tr>
           <td align="right">{$i18n.label.email} (*):</td>
           <td>{$forms.notificationForm.email.control}</td>
+        </tr>
+        <tr>
+          <td align="right">{$i18n.label.cc}:</td>
+          <td>{$forms.notificationForm.cc.control}</td>
+        </tr>
+        <tr>
+          <td align="right">{$i18n.label.subject}:</td>
+          <td>{$forms.notificationForm.subject.control}</td>
+        </tr>
+        <tr>
+          <td align="right">{$i18n.label.condition}:</td>
+          <td>{$forms.notificationForm.report_condition.control} <a href="https://www.anuko.com/lp/tt_9.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
         </tr>
         <tr>
           <td height="40"></td>

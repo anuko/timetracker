@@ -35,7 +35,7 @@ class ttProjectHelper {
   // getAssignedProjects - returns an array of assigned projects.
   static function getAssignedProjects($user_id)
   {
-  	global $user;
+    global $user;
   	
     $result = array();
     $mdb2 = getConnection();
@@ -43,7 +43,7 @@ class ttProjectHelper {
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name, p.tasks, upb.rate from tt_projects p
       inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.project_id = p.id and upb.status = 1)
-      where p.team_id = $user->team_id and p.status = 1 order by p.name";
+      where p.group_id = $user->group_id and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -63,7 +63,7 @@ class ttProjectHelper {
     
     $sql = "select p.id, upb.rate from tt_projects p
       inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.project_id = p.id)
-      where team_id = $user->team_id";
+      where group_id = $user->group_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -74,16 +74,16 @@ class ttProjectHelper {
     return $result;
   }
   
-  // getProjects - returns an array of active and inactive projects in a team.
+  // getProjects - returns an array of active and inactive projects in group.
   static function getProjects()
   {
-  	global $user;
-  	  	
-  	$result = array();
+    global $user;
+
+    $result = array();
     $mdb2 = getConnection();
     
-    $sql = "select id, name, tasks from tt_projects
-      where team_id = $user->team_id and (status = 0 or status = 1) order by name";  	
+    $sql = "select id, name, tasks from tt_projects".
+      " where group_id = $user->group_id and (status = 0 or status = 1) order by name";
         
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -94,19 +94,19 @@ class ttProjectHelper {
     return $result;
   }
 
-  // getProjectsForClient - returns an array of active and inactive projects in a team for a client.
+  // getProjectsForClient - returns an array of active and inactive projects in a group for a client.
   static function getProjectsForClient()
   {
-  	global $user;
-  	  	
-  	$result = array();
+    global $user;
+
+    $result = array();
     $mdb2 = getConnection();
-    
-    $sql = "select p.id, p.name, p.tasks from tt_projects p
-	  inner join tt_client_project_binds cpb on (cpb.client_id = $user->client_id and cpb.project_id = p.id)
-	  where p.team_id = $user->team_id and (p.status = 0 or p.status = 1)
-      order by p.name";  	
-        
+
+    $sql = "select p.id, p.name, p.tasks from tt_projects p".
+      " inner join tt_client_project_binds cpb on (cpb.client_id = $user->client_id and cpb.project_id = p.id)".
+      " where p.group_id = $user->group_id and (p.status = 0 or p.status = 1)".
+      " order by p.name";
+
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -124,7 +124,7 @@ class ttProjectHelper {
  
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, status, tasks from tt_projects where id = $id and team_id = $user->team_id and (status = 0 or status = 1)";
+    $sql = "select id, name, description, status, tasks from tt_projects where id = $id and group_id = $user->group_id and (status = 0 or status = 1)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -140,7 +140,7 @@ class ttProjectHelper {
     $mdb2 = getConnection();
     global $user;
 
-    $sql = "select id from tt_projects where team_id = $user->team_id and name = ".
+    $sql = "select id from tt_projects where group_id = $user->group_id and name = ".
       $mdb2->quote($name)." and (status = 1 or status = 0)";
   	$res = $mdb2->query($sql);
   	if (!is_a($res, 'PEAR_Error')) {
@@ -154,33 +154,31 @@ class ttProjectHelper {
   
   // delete - deletes things associated with a project and marks the project as deleted. 
   static function delete($id) {
+    global $user;
     $mdb2 = getConnection();
-    
+
+    // Start with project itself. Reason: if the passed in project_id is bogus,
+    // we'll fail right here and don't damage any other data.
+
+    // Mark project as deleted and remove associated tasks.
+    $sql = "update tt_projects set status = NULL, tasks = NULL where id = $id and group_id = $user->group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error') || 0 == $affected)
+      return false; // An error ocurred, or 0 rows updated.
+
     // Delete user binds to this project.
     $sql = "delete from tt_user_project_binds where project_id = $id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
-    
-  	// Delete task binds to this project.
+
+    // Delete task binds to this project.
     $sql = "delete from tt_project_task_binds where project_id = $id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
-    
-    // Remove associated tasks.
-    $sql = "update tt_projects set tasks = NULL where id = $id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error'))
-      return false;
 
-    // Mark project as deleted.
-    $sql = "update tt_projects set status = NULL where id = $id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error'))
-      return false;
-
-  	return true;
+    return true;
   }
   
   // insert function inserts a new project into database.
@@ -188,7 +186,7 @@ class ttProjectHelper {
   {
     $mdb2 = getConnection();
 
-    $team_id = (int) $fields['team_id'];
+    $group_id = (int) $fields['group_id'];
 
     $name = $fields['name'];
     $description = $fields['description'];
@@ -197,8 +195,8 @@ class ttProjectHelper {
     $comma_separated = implode(',', $tasks); // This is a comma-separated list of associated task ids.
     $status = $fields['status'];
     
-    $sql = "insert into tt_projects (team_id, name, description, tasks, status)
-      values ($team_id, ".$mdb2->quote($name).", ".$mdb2->quote($description).", ".$mdb2->quote($comma_separated).", ".$mdb2->quote($status).")";
+    $sql = "insert into tt_projects (group_id, name, description, tasks, status)
+      values ($group_id, ".$mdb2->quote($name).", ".$mdb2->quote($description).", ".$mdb2->quote($comma_separated).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -222,7 +220,7 @@ class ttProjectHelper {
     }
 
     // Bind the project to tasks in tt_project_task_binds table.
-    $all_tasks = ttTeamHelper::getAllTasks($team_id);
+    $all_tasks = ttTeamHelper::getAllTasks($group_id);
     foreach ($all_tasks as $task) {
       if(in_array($task['id'], $tasks)) {
         $sql = "insert into tt_project_task_binds (project_id, task_id) values($last_id, ".$task['id'].")";
@@ -236,8 +234,8 @@ class ttProjectHelper {
   } 
 
   // update function - updates the project in database.
-  static function update($fields)
-  {
+  static function update($fields) {
+    global $user;
     $mdb2 = getConnection();
     
     $project_id = $fields['id']; // Project we are updating.
@@ -313,7 +311,8 @@ class ttProjectHelper {
     
     // Update project name, description, tasks and status in tt_projects table.
     $comma_separated = implode(",", $tasks_to_bind); // This is a comma-separated list of associated task ids.
-    $sql = "update tt_projects set name = ".$mdb2->quote($name).", description = ".$mdb2->quote($description).", tasks = ".$mdb2->quote($comma_separated).", status = $status where id = $project_id";
+    $sql = "update tt_projects set name = ".$mdb2->quote($name).", description = ".$mdb2->quote($description).
+           ", tasks = ".$mdb2->quote($comma_separated).", status = $status where id = $project_id and group_id = $user->group_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }

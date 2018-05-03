@@ -35,26 +35,26 @@ class I18n {
   var $holidays;
   var $keys = array(); // These are our localized strings.
 
-  // The getKey obtains localized keyword value.
-  function getKey($kword) {
+  // get - obtains a localized value from $keys array.
+  function get($key) {
     $value = '';
-    $pos = strpos($kword, '.'); // Keywords can have separating dots such as in form.login.about.
+    $pos = strpos($key, '.'); // Keywords can have separating dots such as in form.login.about.
     if (!($pos === false)) {
-      $words = explode('.', $kword);
+      $words = explode('.', $key);
       $str = '';
       foreach ($words as $word) {
         $str .= "['".$word."']";
       }
       eval("\$value = \$this->keys".$str.";");
     } else {
-      $value = $this->keys[$kword];
+      $value = $this->keys[$key];
     }
     return $value;
   }
 
   // TODO: refactoring ongoing down from here...
     function getWeekDayName($id) {
-      $id = intval($id);
+      $id = (int) $id;
       return $this->weekdayNames[$id];
     }
 
@@ -70,9 +70,9 @@ class I18n {
       $this->weekdayNames = $i18n_weekdays;
 
         $this->weekdayShortNames = $i18n_weekdays_short;
-      if (defined('SHOW_HOLIDAYS') && isTrue(SHOW_HOLIDAYS)) {
+//      if (defined('SHOW_HOLIDAYS') && isTrue(SHOW_HOLIDAYS)) {
         $this->holidays = $i18n_holidays;
-      }
+//      }
 
       foreach ($i18n_key_words as $kword=>$value) {
         $pos = strpos($kword, ".");
@@ -97,9 +97,9 @@ class I18n {
       $this->monthNames = $i18n_months;
       $this->weekdayNames = $i18n_weekdays;
         $this->weekdayShortNames = $i18n_weekdays_short;
-      if (defined('SHOW_HOLIDAYS') && isTrue(SHOW_HOLIDAYS)) {
+//      if (defined('SHOW_HOLIDAYS') && isTrue(SHOW_HOLIDAYS)) {
         $this->holidays = $i18n_holidays;
-      }
+//      }
       foreach ($i18n_key_words as $kword=>$value) {
         if (!$value) continue;
         $pos = strpos($kword, ".");

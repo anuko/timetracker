@@ -54,7 +54,7 @@
       <!-- end of top image -->
 
 {if $authenticated}
-  {if $user->isAdmin()}
+  {if $user->can('administer_site')}
       <!-- top menu for admin -->
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
@@ -71,7 +71,7 @@
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
-            <a class="mainMenu" href="admin_teams.php">{$i18n.menu.teams}</a> &middot;
+            <a class="mainMenu" href="admin_groups.php">{$i18n.menu.groups}</a> &middot;
             <a class="mainMenu" href="admin_options.php">{$i18n.menu.options}</a>
           </td>
         </tr>
@@ -83,7 +83,12 @@
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
             <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a> &middot;
+    {if $user->can('manage_own_settings')}
             <a class="systemMenu" href="profile_edit.php">{$i18n.menu.profile}</a> &middot;
+    {/if}
+    {if $user->can('manage_basic_settings')}
+            <a class="systemMenu" href="group_edit.php">{$i18n.menu.group}</a> &middot;
+    {/if}
             <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a> &middot;
             <a class="systemMenu" href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a>
           </td>
@@ -95,33 +100,35 @@
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
-    {if !$user->isClient()}
+    {if $user->can('track_own_time') || $user->can('track_time')}
            <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
     {/if}
-    {if $user->isPluginEnabled('ex') && !$user->isClient()}
+    {if $user->isPluginEnabled('ex') && ($user->can('track_own_expenses') || $user->can('track_expenses'))}
             &middot; <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
     {/if}
-            {if !$user->isClient()}&middot; {/if}<a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a>
-    {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
+    {if $user->can('view_own_reports') || $user->can('view_reports')}
+            &middot; <a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a> 
+    {/if}        
+    {if $user->isPluginEnabled('iv') && ($user->can('view_own_invoices') || $user->can('manage_invoices'))}
             &middot; <a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a>
     {/if}
-    {if ($user->isPluginEnabled('ch') && !$user->isClient()) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode
+    {if ($user->isPluginEnabled('ch') && ($user->can('view_own_charts') || $user->can('view_charts'))) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode
       || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isPluginEnabled('cl'))}
             &middot; <a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a>
     {/if}
-    {if !$user->isClient() && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if ($user->can('view_own_projects') || $user->can('manage_projects')) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
             &middot; <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
     {/if}
-    {if $user->canManageTeam() && ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode && ($user->can('view_own_tasks') || $user->can('manage_tasks')))}
             &middot; <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
     {/if}
-    {if !$user->isClient()}
+    {if $user->can('view_users') || $user->can('manage_users')}
             &middot; <a class="mainMenu" href="users.php">{$i18n.menu.users}</a>
     {/if}
-    {if $user->canManageTeam() && $user->isPluginEnabled('cl')}
+    {if $user->isPluginEnabled('cl') && ($user->can('view_own_clients') || $user->can('manage_clients'))}
             &middot; <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
     {/if}
-    {if $user->isManager()}
+    {if $user->can('export_data')}
             &middot; <a class="mainMenu" href="export.php">{$i18n.menu.export}</a>
     {/if}
           </td>
@@ -136,7 +143,7 @@
           <td class="systemMenu" height="17" align="center">&nbsp;
             <a class="systemMenu" href="login.php">{$i18n.menu.login}</a> &middot;
   {if isTrue($smarty.const.MULTITEAM_MODE) && $smarty.const.AUTH_MODULE == 'db'}
-            <a class="systemMenu" href="register.php">{$i18n.menu.create_team}</a> &middot;
+            <a class="systemMenu" href="register.php">{$i18n.menu.create_group}</a> &middot;
   {/if}
             <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a> &middot;
             <a class="systemMenu" href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a>
@@ -150,7 +157,11 @@
 {if $title}
       <table cellspacing="0" cellpadding="5" width="{$tab_width+20}" border="0">
         <tr><td class="sectionHeader"><div class="pageTitle">{$title}{if $timestring}: {$timestring}{/if}</div></td></tr>
-        <tr><td>{$user->name|escape}{if $user->isAdmin()} {$i18n.label.role_admin}{elseif $user->isManager()} {$i18n.label.role_manager}{elseif $user->canManageTeam()} {$i18n.label.role_comanager}{/if}{if $user->behalf_id > 0} <b>{$i18n.label.on_behalf} {$user->behalf_name|escape}</b>{/if}{if $user->team}, {$user->team|escape}{/if}</td></tr>
+  {if $user->name}
+        <tr><td>{$user->name|escape} - {$user->role_name|escape}{if $user->behalf_id > 0} <b>{$i18n.label.on_behalf} {$user->behalf_name|escape}</b>{/if}{if $user->group}, {$user->group|escape}{/if}</td></tr>
+  {else}
+        <tr><td>&nbsp;</td></tr>
+  {/if}
       </table>
 {/if}
       <!-- end of page title and user details -->

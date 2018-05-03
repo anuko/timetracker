@@ -1,4 +1,13 @@
 <script>
+// Prepare an array of available roles. We need it for "is_client" property.
+// It is used to selectively display client selector for client roles.
+roles = new Array();
+var idx = 0;
+{foreach $active_roles as $active_role}
+roles[idx] = new Array({$active_role.id}, '{$active_role.is_client}');
+idx++;
+{/foreach}
+
 // The setDefaultRate function sets / unsets default rate for a project
 // when a corresponding checkbox is ticked.
 function setDefaultRate(element) {
@@ -23,11 +32,19 @@ function setDefaultRate(element) {
 // handleClientControl - controls visibility of the client dropdown depending on the selected user role.
 // We need to show it only when the "Client" user role is selected.
 function handleClientControl() {
+  var selectedRoleId = document.getElementById("role").value;
   var clientControl = document.getElementById("client");
-  if ("16" == document.getElementById("role").value)
-    clientControl.style.visibility = "visible";
-  else
-    clientControl.style.visibility = "hidden";
+  var len = roles.length;
+  for (var i = 0; i < len; i++) {
+    if (selectedRoleId == roles[i][0]) {
+      var isClient = roles[i][1];
+      if (isClient == 1)
+        clientControl.style.visibility = "visible";
+      else
+        clientControl.style.visibility = "hidden";
+      break;
+    }
+  }
 }
 </script>
 
@@ -56,12 +73,10 @@ function handleClientControl() {
       <td align="right" nowrap>{$i18n.label.email}:</td>
       <td>{$forms.userForm.email.control}</td>
     </tr>
-{if $user->isManager()}
     <tr>
       <td align="right">{$i18n.form.users.role}:</td>
       <td>{$forms.userForm.role.control} {$forms.userForm.client.control}</td>
     </tr>
-{/if}
     <tr>
       <td align="right">{$i18n.form.users.default_rate}&nbsp;(0{$user->decimal_mark}00):</td>
       <td>{$forms.userForm.rate.control}</td>

@@ -15,11 +15,11 @@
           <td>{$forms.mailForm.receiver.control}</td>
         </tr>
         <tr>
-          <td align="right">{$i18n.form.mail.cc}:</td>
+          <td align="right">{$i18n.label.cc}:</td>
           <td>{$forms.mailForm.cc.control}</td>
         </tr>
         <tr>
-          <td align="right">{$i18n.form.mail.subject} (*):</td>
+          <td align="right">{$i18n.label.subject} (*):</td>
           <td>{$forms.mailForm.subject.control}</td>
         </tr>
         <tr>

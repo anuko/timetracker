@@ -45,10 +45,12 @@ import('ttFavReportHelper');
 import('ttReportHelper');
 
 $mdb2 = getConnection();
-$now = mktime();
+$now = time();
 
-$sql = "select * from tt_cron where $now >= next 
-  and status = 1 and report_id is not null and email is not null";
+ $sql = "select c.id, c.cron_spec, c.report_id, c.email, c.cc, c.subject, c.report_condition from tt_cron c
+   left join tt_fav_reports fr on (c.report_id = fr.id)
+   where $now >= c.next and fr.status = 1
+   and c.status = 1 and c.report_id is not null and c.email is not null";
 $res = $mdb2->query($sql);
 if (is_a($res, 'PEAR_Error'))
   exit();
@@ -58,17 +60,26 @@ while ($val = $res->fetchRow()) {
 
   // Get favorite report details.
   $report = ttFavReportHelper::getReport($val['report_id']);
-  if (!$report) continue;
+  if (!$report) continue; // Skip not found report.
 
-  // Recycle global $user and $i18n objects, as user settings and language are specific for each report.
+  // Recycle global $user object, as user settings are specific for each report.
   $user = new ttUser(null, $report['user_id']);
+  if (!$user->id) continue; // Skip not found user.
+  // Recycle $i18n object because language is user-specific.
   $i18n->load($user->lang);
 
-  // Email report.
-  if (ttReportHelper::sendFavReport($report, $val['email']))
-    echo "Report ".$val['report_id']. " sent to ".$val['email']."<br>";
-  else
-    echo "Error while emailing report...<br>";
+  // Check condition on a report.
+  $condition_ok = true;
+  if ($val['report_condition'])
+    $condition_ok = ttReportHelper::checkFavReportCondition($report, $val['report_condition']);
+
+  // Email report if condition is okay.
+  if ($condition_ok) {
+    if (ttReportHelper::sendFavReport($report, $val['subject'], $val['email'], $val['cc']))
+      echo "Report ".$val['report_id']. " sent.<br>";
+    else
+      echo "Error while emailing report...<br>";
+  }
 
   // Calculate next execution time.
   $next = tdCron::getNextOccurrence($val['cron_spec'], $now + 60); // +60 sec is here to get us correct $next when $now is close to existing "next".

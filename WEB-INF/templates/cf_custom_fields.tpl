@@ -2,7 +2,7 @@
 <table cellspacing="0" cellpadding="7" border="0" width="720">
   <tr>
     <td valign="top">
-{if $user->canManageTeam()}
+{if $user->can('manage_custom_fields')}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr>
           <td width="50%" class="tableHeader">{$i18n.label.thing_name}</td>
@@ -13,7 +13,7 @@
         </tr>
   {if $custom_fields}
     {foreach $custom_fields as $field}
-        <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$field['label']|escape}</td>
       {if CustomFields::TYPE_TEXT == $field['type']}
           <td>{$i18n.label.type_text}</td>

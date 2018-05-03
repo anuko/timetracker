@@ -26,44 +26,47 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-// Note to translators: Please use proper capitalization rules for your language.
+// Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
+// Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
-$i18n_language = 'Magyar';
-$i18n_months = array('január', 'február', 'március', 'április', 'május', 'június', 'július', 'augusztus', 'szeptember', 'október', 'november', 'december');
-$i18n_weekdays = array('vasárnap', 'hétfő', 'kedd', 'szerda', 'csütörtök', 'péntek', 'szombat');
+// Note to translators: Use proper capitalization rules for your language.
+
+$i18n_language = 'Hungarian (Magyar)';
+$i18n_months = array('Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December');
+$i18n_weekdays = array('Vasárnap', 'Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat');
 $i18n_weekdays_short = array('V', 'H', 'K', 'Sz', 'Cs', 'P', 'Sz');
 // format mm/dd
 $i18n_holidays = array('01/01', '01/02', '03/15', '04/12', '04/13', '05/01', '05/31', '06/01', '08/20', '08/21', '10/23', '11/01', '12/24', '12/25', '12/26');
 
 $i18n_key_words = array(
 
-// Menus.
-'menu.login' => 'bejelentkezés',
-'menu.logout' => 'kijelentkezés',
-// TODO: Translate the following:
-// 'menu.forum' => 'Forum',
-'menu.help' => 'segítség',
-// TODO: Translate the following:
-// 'menu.create_team' => 'Create Team',
-'menu.profile' => 'profil',
-'menu.time' => 'munkaidő',
-// TODO: Translate the following:
+// Menus - short selection strings that are displayed on top of application web pages.
+// Example: https://timetracker.anuko.com (black menu on top).
+'menu.login' => 'Bejelentkezés',
+'menu.logout' => 'Kijelentkezés',
+'menu.forum' => 'Fórum',
+'menu.help' => 'Segítség',
+'menu.create_group' => 'Csoport létrehozása',
+'menu.profile' => 'Profil',
+'menu.group' => 'Csoport',
+'menu.time' => 'Munkaidő',
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
-'menu.reports' => 'riportok',
-// TODO: Translate the following:
+'menu.reports' => 'Riportok',
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
-'menu.projects' => 'projektek',
-// TODO: Translate the following:
+'menu.projects' => 'Projektek',
 // 'menu.tasks' => 'Tasks',
+// TODO: translate the following.
 // 'menu.users' => 'Users',
-'menu.teams' => 'csoportok',
-// TODO: Translate the following:
-// 'menu.export' => 'Export'
-'menu.clients' => 'ügyfelek',
-'menu.options' => 'opciók',
+'menu.groups' => 'Csoportok',
+// TODO: translate the following.
+// 'menu.export' => 'Export',
+'menu.clients' => 'Ügyfelek',
+'menu.options' => 'Opciók',
 
 // Footer - strings on the bottom of most pages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -71,357 +74,498 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
-'error.db' => 'adatbázis hiba',
-'error.field' => 'hibás "{0}" mező tartalma',
-'error.empty' => 'a "{0}" mező üres',
-'error.not_equal' => 'A "{0}" mező tartalma nem egyezik meg a "{1}" mező tartalmával!',
-'error.interval' => 'hibás időszak megadás',
-'error.project' => 'válassz projektet',
-'error.activity' => 'válassz tevékenységet',
-'error.auth' => 'hibás bejelentkezési adatok',
-// Note to translators: this string needs to be translated.
-// 'error.user_exists' => 'user with this login already exists',
-'error.project_exists' => 'ilyen nevű projekt már létezik',
-'error.activity_exists' => 'ilyen névvel már van definiálva tevékenység',
-// TODO: translate error.client_exists.
-// 'error.client_exists' => 'client with this name already exists',
-// Note to translators: this string needs to be properly translated (e-mail replaced with login).
-// 'error.no_login' => 'nincs ilyen e-mail címmel definiált felhasználó',
-'error.upload' => 'file feltöltési hiba',
-// TODO: Translate the following:
+'error.db' => 'Adatbázis hiba.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
+'error.field' => 'Hibás "{0}" mező tartalma.',
+'error.empty' => 'A "{0}" mező üres.',
+'error.not_equal' => 'A "{0}" mező tartalma nem egyezik meg a "{1}" mező tartalmával.',
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+'error.project' => 'Válassz projektet.',
+// TODO: translate the following.
+// 'error.task' => 'Select task.',
+'error.client' => 'Válassz ügyfelet.',
+// TODO: translate the following.
+// 'error.report' => 'Select report.',
+// 'error.record' => 'Select record.',
+// 'error.auth' => 'Incorrect login or password.',
+// 'error.user_exists' => 'User with this login already exists.',
+// 'error.object_exists' => 'Object with this name already exists.',
+'error.project_exists' => 'Ilyen nevű projekt már létezik.',
+// TODO: translate the following.
+// 'error.task_exists' => 'Task with this name already exists.',
+// 'error.client_exists' => 'Client with this name already exists.',
+// 'error.invoice_exists' => 'Invoice with this number already exists.',
+// 'error.role_exists' => 'Role with this rank already exists.',
+// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
+// 'error.no_login' => 'No user with this login.',
+// 'error.no_groups' => 'Your database is empty. Login as admin and create a new group.',
+'error.upload' => 'File feltöltési hiba.',
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
-// 'error.mail_send' => 'error sending mail',
-// 'error.no_email' => 'no email associated with this login',
-// 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
-// 'error.goto_uncompleted' => 'go to uncompleted entry.',
+// 'error.mail_send' => 'Error sending mail.',
+// 'error.no_email' => 'No email associated with this login.',
+// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
+// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
+// 'error.overlap' => 'Time interval overlaps with existing records.',
+// 'error.future_date' => 'Date is in future.',
 
-// labels for various buttons
-'button.login' => 'bejelentkezés',
-'button.now' => 'most',
-// 'button.set' => 'beállítás',
-'button.save' => 'mentés',
-'button.delete' => 'törlés',
-'button.cancel' => 'vissza',
-'button.submit' => 'mentés',
-'button.add_user' => 'felhasználó felvétele',
-'button.add_project' => 'projekt felvétele',
-'button.add_activity' => 'tevékenyég felvétele',
-'button.add_client' => 'ügyfél hozzáadása',
-'button.add' => 'hozzáadás',
-'button.generate' => 'generálás',
-// Note to translators: button.reset_password needs an improved translation.
-'button.reset_password' => 'mehet',
-'button.send' => 'küld',
-'button.send_by_email' => 'küldés e-mail-ben',
-'button.save_as_new' => 'mentés újként',
-'button.create_team' => 'csoport létrehozása',
-'button.export' => 'csoportok exportálása',
-'button.import' => 'csoportok importálása',
-'button.apply' => 'alkalmaz',
+// Labels for buttons.
+'button.login' => 'Bejelentkezés',
+'button.now' => 'Most',
+'button.save' => 'Mentés',
+// TODO: translate the following.
+// 'button.copy' => 'Copy',
+'button.cancel' => 'Vissza',
+'button.submit' => 'Mentés',
+'button.add' => 'Hozzáadás',
+'button.delete' => 'Törlés',
+'button.generate' => 'Generálás',
+// TODO: translate the following.
+// 'button.reset_password' => 'Reset password',
+'button.send' => 'Küld',
+'button.send_by_email' => 'Küldés e-mail-ben',
+'button.create_group' => 'Csoport létrehozása',
+'button.export' => 'Csoport exportálása',
+'button.import' => 'Csoport importálása',
+// TODO: translate the following.
+// 'button.close' => 'Close',
+// 'button.stop' => 'Stop',
 
-// labels for controls on various forms
-// TODO: translate label.team_name
-// 'label.team_name' => 'team name',
-'label.currency' => 'pénznem',
-// TODO: translate label.manager_name and label.manager_login.
-// 'label.manager_name' => 'manager name',
-// 'label.manager_login' => 'manager login',
-'label.name' => 'név',
-
-'label.password' => 'jelszó',
-'label.confirm_password' => 'jelszó megerősítése',
-// 'label.email' => 'email',
-'label.total' => 'összesen',
-// Translate the following string.
+// Labels for controls on forms. Labels in this section are used on multiple forms.
+// TODO: translate the following.
+// 'label.group_name' => 'Group name',
+// 'label.address' => 'Address',
+'label.currency' => 'Pénznem',
+// TODO: translate the following.
+// 'label.manager_name' => 'Manager name',
+// 'label.manager_login' => 'Manager login',
+'label.person_name' => 'Név',
+'label.thing_name' => 'Név',
+// TODO: translate the following.
+// 'label.login' => 'Login',
+'label.password' => 'Jelszó',
+'label.confirm_password' => 'Jelszó megerősítése',
+'label.thing_name' => 'Név',
+// TODO: translate the following.
+// 'label.email' => 'Email',
+'label.cc' => 'Másolatot kap',
+// TODO: translate the following.
+// 'label.bcc' => 'Bcc',
+'label.subject' => 'Tárgy',
+'label.date' => 'Dátum',
+'label.start_date' => 'Kezdő időpont',
+'label.end_date' => 'Vég időpont',
+// TODO: translate the following.
+// 'label.user' => 'User',
+// 'label.users' => 'Users',
+// 'label.roles' => 'Roles',
+'label.client' => 'Ügyfél',
+'label.clients' => 'Ügyfelek',
+'label.option' => 'Opció',
+'label.invoice' => 'Számla',
+'label.project' => 'Projekt',
+'label.projects' => 'Projektek',
+// TODO: translate the following.
+// 'label.task' => 'Task',
+// 'label.tasks' => 'Tasks',
+// 'label.description' => 'Description',
+'label.start' => 'Kezdete',
+'label.finish' => 'Vége',
+'label.duration' => 'Időtartam',
+'label.note' => 'Megjegyzés',
+'label.notes' => 'Megjegyzések',
+// TODO: translate the following.
+// 'label.item' => 'Item',
+// 'label.cost' => 'Cost',
+// 'label.ip' => 'IP',
+// 'label.day_total' => 'Day total',
+// 'label.week_total' => 'Week total',
+// 'label.month_total' => 'Month total',
+'label.today' => 'Ma',
+// TODO: translate the following.
+// 'label.view' => 'View',
+'label.edit' => 'Szerkesztés',
+'label.delete' => 'Törlés',
+// TODO: translate the following.
+// 'label.configure' => 'Configure',
+// TODO: translate the following.
+'label.select_all' => 'Mindenkit kijelöl',
+'label.select_none' => 'Senkit nem jelöl ki',
+// 'label.day_view' => 'Day view',
+// 'label.week_view' => 'Week view',
+'label.id' => 'Azonosító',
+// TODO: translate the following.
+// 'label.language' => 'Language',
+// 'label.decimal_mark' => 'Decimal mark',
+// 'label.date_format' => 'Date format',
+// 'label.time_format' => 'Time format',
+// 'label.week_start' => 'First day of week',
+'label.comment' => 'Megjegyzés',
+'label.status' => 'Státusz',
+'label.tax' => 'Adó',
+'label.subtotal' => 'Részösszeg',
+'label.total' => 'Összesen',
+// TODO: translate the following.
+// 'label.client_name' => 'Client name',
+// 'label.client_address' => 'Client address',
+'label.or' => 'vagy',
+// TODO: translate the following.
+// 'label.error' => 'Error',
+// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
+'label.required_fields' => '* kötelezően kitöltendő mezők',
+'label.on_behalf' => 'helyett',
+'label.role_manager' => '(vezető)',
+'label.role_comanager' => '(helyettes)',
+'label.role_admin' => '(adminisztrátor)',
+// TODO: translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
+// 'label.yes' => 'yes',
+// 'label.no' => 'no',
+// Labels for plugins (extensions to Time Tracker that provide additional features).
+// TODO: translate the following.
+// 'label.custom_fields' => 'Custom fields',
+// 'label.monthly_quotas' => 'Monthly quotas',
+// 'label.type' => 'Type',
+// 'label.type_dropdown' => 'dropdown',
+// 'label.type_text' => 'text',
+// 'label.required' => 'Required',
+'label.fav_report' => 'Előre definiált riport formátum',
+// TODO: translate the following.
+// 'label.schedule' => 'Schedule',
+// 'label.what_is_it' => 'What is it?',
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
+// 'label.paid_status' => 'Paid status',
+// 'label.paid' => 'Paid',
+// 'label.mark_paid' => 'Mark paid',
+// 'label.week_note' => 'Week note',
+// 'label.week_list' => 'Week list',
 
 // Form titles.
-// TODO: the entire title section is missing here. See the English file.
+'title.login' => 'Bejelentkezés',
+'title.groups' => 'Csoportok',
+// TODO: translate the following.
+// 'title.create_group' => 'Creating Group',
+// 'title.edit_group' => 'Editing Group',
+'title.delete_group' => 'Csoport törlése',
+// TODO: translate the following.
+// 'title.reset_password' => 'Resetting Password',
+// 'title.change_password' => 'Changing Password',
+// 'title.time' => 'Time',
+// 'title.edit_time_record' => 'Editing Time Record',
+// 'title.delete_time_record' => 'Deleting Time Record',
+// 'title.expenses' => 'Expenses',
+// 'title.edit_expense' => 'Editing Expense Item',
+// 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+'title.reports' => 'Riportok',
+// TODO: translate the following.
+// 'title.report' => 'Report',
+// 'title.send_report' => 'Sending Report',
+'title.invoice' => 'Számla',
+// TODO: translate the following.
+// 'title.send_invoice' => 'Sending Invoice',
+// 'title.charts' => 'Charts',
+'title.projects' => 'Projektek',
+'title.add_project' => 'Projekt hozzáadása',
+'title.edit_project' => 'Projekt szerkesztése',
+'title.delete_project' => 'Projekt törlése',
+// TODO: translate the following.
+// 'title.tasks' => 'Tasks',
+// 'title.add_task' => 'Adding Task',
+// 'title.edit_task' => 'Editing Task',
+// 'title.delete_task' => 'Deleting Task',
+// 'title.users' => 'Users',
+// 'title.add_user' => 'Adding User',
+// 'title.edit_user' => 'Editing User',
+// 'title.delete_user' => 'Deleting User',
+// 'title.roles' => 'Roles',
+// 'title.add_role' => 'Adding Role',
+// 'title.edit_role' => 'Editing Role',
+// 'title.delete_role' => 'Deleting Role',
+'title.clients' => 'Ügyfelek',
+'title.add_client' => 'Ügyfél hozzáadása',
+'title.edit_client' => 'Ügyfél szerkesztése',
+'title.delete_client' => 'Ügyfél törlése',
+'title.invoices' => 'Számlák',
+// TODO: translate the following.
+// 'title.add_invoice' => 'Adding Invoice',
+// 'title.view_invoice' => 'Viewing Invoice',
+// 'title.delete_invoice' => 'Deleting Invoice',
+// 'title.notifications' => 'Notifications',
+// 'title.add_notification' => 'Adding Notification',
+// 'title.edit_notification' => 'Editing Notification',
+// 'title.delete_notification' => 'Deleting Notification',
+// 'title.monthly_quotas' => 'Monthly Quotas',
+// 'title.export' => 'Exporting Group Data',
+// 'title.import' => 'Importing Group Data',
+'title.options' => 'Opciók',
+'title.profile' => 'Profil',
+// TODO: translate the following.
+// 'title.group' => 'Group Settings',
+// 'title.cf_custom_fields' => 'Custom Fields',
+// 'title.cf_add_custom_field' => 'Adding Custom Field',
+// 'title.cf_edit_custom_field' => 'Editing Custom Field',
+// 'title.cf_delete_custom_field' => 'Deleting Custom Field',
+// 'title.cf_dropdown_options' => 'Dropdown Options',
+// 'title.cf_add_dropdown_option' => 'Adding Option',
+// 'title.cf_edit_dropdown_option' => 'Editing Option',
+// 'title.cf_delete_dropdown_option' => 'Deleting Option',
+// NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
+// It is also a name for the Locking plugin on the group settings page.
+// 'title.locking' => 'Locking',
+// 'title.week_view' => 'Week View',
+// 'title.swap_roles' => 'Swapping Roles',
 
-"form.filter.project" => 'projekt',
-"form.filter.filter" => 'előre definiált riport formátum',
-"form.filter.filter_new" => 'mentsük el ezt a riport formátumot',
-// Note to translators: the string below is missing and must be added and translated
-// "form.filter.filter_confirm_delete" => 'are you sure you want to delete this favorite report?',
+// Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
+// Strings that are used in a single form must go to the specific form section.
+'dropdown.all' => '--- összes ---',
+'dropdown.no' => '--- nincs ---',
+// TODO: translate the following.
+// 'dropdown.current_day' => 'today',
+// 'dropdown.previous_day' => 'yesterday',
+// 'dropdown.selected_day' => 'day',
+'dropdown.current_week' => 'ezen a héten',
+'dropdown.previous_week' => 'múlt héten',
+// TODO: translate the following.
+// 'dropdown.selected_week' => 'week',
+'dropdown.current_month' => 'ebben a hónapban',
+'dropdown.previous_month' => 'múlt hónapban',
+// TODO: translate the following.
+// 'dropdown.selected_month' => 'month',
+// 'dropdown.current_year' => 'this year',
+// 'dropdown.previous_year' => 'previous year',
+// 'dropdown.selected_year' => 'year',
+// 'dropdown.all_time' => 'all time',
+'dropdown.projects' => 'projektek',
+// TODO: translate the following.
+// 'dropdown.tasks' => 'tasks',
+'dropdown.clients' => 'ügyfelek',
+// TODO: translate the following.
+// 'dropdown.select' => '--- select ---',
+// 'dropdown.select_invoice' => '--- select invoice ---',
+'dropdown.status_active' => 'aktív',
+// TODO: translate the following.
+// 'dropdown.status_inactive' => 'inactive',
+// 'dropdown.delete' => 'delete',
+// 'dropdown.do_not_delete' => 'do not delete',
+// 'dropdown.paid' => 'paid',
+// 'dropdown.not_paid' => 'not paid',
 
-// login form attributes
-"form.login.title" => 'bejelentkezés',
-// Note to translators: "form.login.login" => 'e-mail cím', // email has been changed to login
+// Login form. See example at https://timetracker.anuko.com/login.php.
+'form.login.forgot_password' => 'Elfelejtetted a jelszót?',
+// TODO: translate the following.
+// 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
-// password reminder form attributes
-"form.fpass.title" => 'a jelszó alap állapotra állítása',
-// Note to translators: "form.fpass.login" => 'e-mail cím', // email has been changed to login
-"form.fpass.send_pass_str" => 'jelszó alap állapotra állítása megkezdve',
-"form.fpass.send_pass_subj" => 'A jelszó alap állapotra állítása a Anuko TimeTracker-ben',
-// Note to translators: the string below must be translated
-// "form.fpass.send_pass_body" => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
-"form.fpass.reset_comment" => "a jelszót a megváltoztatásához írja be és mentse el",
+// Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
+// TODO: translate the following.
+// 'form.reset_password.message' => 'Password reset request sent by email.',
+// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
-// administrator form
-"form.admin.title" => 'Adminisztrátor',
-"form.admin.duty_text" => 'új csoport létrehozása egy csoport-vezetői jogosultsággal.<br>a csoport adatokat importálhatjuk XML-ből (csak az e-mail címek ne ütközzenek).',
+// Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
+// TODO: translate the following.
+// 'form.change_password.tip' => 'Type new password and click on Save.',
 
-"form.admin.change_pass" => 'az adminisztrátori jelszó megváltoztatása',
-"form.admin.profile.title" => 'csoportok',
-"form.admin.profile.noprofiles" => 'az adatbázis üres. lépj be adminisztrátorként és hozz létre egyet.',
-"form.admin.profile.comment" => 'csoport törlése',
-"form.admin.profile.th.id" => 'azonosító',
-"form.admin.profile.th.name" => 'név',
-"form.admin.profile.th.edit" => 'szerkesztés',
-"form.admin.profile.th.del" => 'törlés',
-"form.admin.profile.th.active" => 'aktív',
-"form.admin.options" => 'opciók',
-// "form.admin.custom_date_format" => "date format",
-// "form.admin.custom_time_format" => "time format",
-// "form.admin.start_week" => "first day of week",
+// Time form. See example at https://timetracker.anuko.com/time.php.
+// TODO: translate the following.
+'form.time.duration_format' => '(óó:pp vagy 0.0h)',
+// TODO: translate the following.
+// 'form.time.billable' => 'Billable',
+// 'form.time.uncompleted' => 'Uncompleted',
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
 
-// my time form attributes
-"form.mytime.title" => 'munkaidőm',
-"form.mytime.edit_title" => 'szerkesztés',
-"form.mytime.del_str" => 'törlés',
-"form.mytime.time_form" => ' (óó:pp)',
-"form.mytime.date" => 'dátum',
-"form.mytime.project" => 'projekt',
-"form.mytime.activity" => 'tevékenység',
-"form.mytime.start" => 'kezdete',
-"form.mytime.finish" => 'vége',
-"form.mytime.duration" => 'hossz',
-"form.mytime.note" => 'megjegyzés',
-"form.mytime.behalf" => 'napi tevékenység lista, munkatárs:',
-"form.mytime.daily" => 'napi munka',
-"form.mytime.total" => 'összesített óraszám: ',
-"form.mytime.th.project" => 'projekt',
-"form.mytime.th.activity" => 'tevékenység',
-"form.mytime.th.start" => 'kezdete',
-"form.mytime.th.finish" => 'vége',
-"form.mytime.th.duration" => 'hossz',
-"form.mytime.th.note" => 'megjegyzés',
-"form.mytime.th.edit" => 'szerkesztés',
-"form.mytime.th.delete" => 'törlés',
-"form.mytime.del_yes" => 'a bejegyzés törölve',
-"form.mytime.no_finished_rec" => 'csak az munka kezdete lett megjelölve, ha később visszalépsz a rendszerbe beállíthatod a vég-időpontot...',
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.mytime.billable" => 'billable',
-// "form.mytime.warn_tozero_rec" => 'this time record must be deleted because this time period is locked',
-// "form.mytime.uncompleted" => 'uncompleted',
+// Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
+// TODO: translate the following.
+// 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
 
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => 'új vezetői jogosultság létrehozása',
-"form.profile.edit_title" => 'profil szerkesztése',
-"form.profile.name" => 'név',
-// Note to translators: the string below is missing and must be added and translated 
-// "form.profile.login" => 'login',
+// Week view form. See example at https://timetracker.anuko.com/week.php.
+// TODO: translate the following.
+// 'form.week.new_entry' => 'New entry',
 
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.profile.showchart" => 'show pie charts',
-// "form.profile.lang" => 'language',
-// "form.profile.custom_date_format" => "date format",
-// "form.profile.custom_time_format" => "time format",
-// "form.profile.default_format" => "(default)",
-// "form.profile.start_week" => "first day of week",
+// Reports form. See example at https://timetracker.anuko.com/reports.php
+'form.reports.save_as_favorite' => 'Mentsük el ezt a riport formátumot',
+// TODO: translate the following.
+// 'form.reports.confirm_delete' => 'Are you sure you want to delete this favorite report?',
+// 'form.reports.include_billable' => 'billable',
+// 'form.reports.include_not_billable' => 'not billable',
+// 'form.reports.include_invoiced' => 'invoiced',
+// 'form.reports.include_not_invoiced' => 'not invoiced',
+'form.reports.select_period' => 'Jelölj meg egy időszakot',
+'form.reports.set_period' => 'vagy állíts be konkrét dátumot',
+// TODO: translate the following.
+// 'form.reports.show_fields' => 'Show fields',
+'form.reports.group_by' => 'Csoportosítva',
+'form.reports.group_by_no' => '--- csoportosítás nélkül ---',
+'form.reports.group_by_date' => 'dátum',
+// TODO: translate the following.
+// 'form.reports.group_by_user' => 'user',
+'form.reports.group_by_client' => 'ügyfél',
+'form.reports.group_by_project' => 'projekt',
+// TODO: translate the following.
+// 'form.reports.group_by_task' => 'task',
+// 'form.reports.totals_only' => 'Totals only',
 
-// people form attributes
-"form.people.ppl_str" => 'munkatársak',
-"form.people.createu_str" => 'új munkatárs hozzáadása',
-"form.people.edit_str" => 'munkatárs adatainak szerkesztése',
-"form.people.del_str" => 'munkatárs adatainak törlése',
-"form.people.th.name" => 'név',
-// Note to translators: the string below is missing and must be added and translated 
-// "form.people.th.login" => 'login',
-"form.people.th.role" => 'szerepkör',
-"form.people.th.edit" => 'szerkesztés',
-"form.people.th.del" => 'törlés',
-"form.people.th.status" => 'státusz',
-"form.people.th.project" => 'projekt',
-"form.people.th.rate" => 'tarifa',
-"form.people.manager" => 'vezető',
-"form.people.comanager" => 'helyettes',
-"form.people.empl" => 'dolgozó',
-"form.people.name" => 'név',
-// Note to translators: the string below is missing and must be added and translated 
-// "form.people.login" => 'login',
+// Report form. See example at https://timetracker.anuko.com/report.php
+// (after generating a report at https://timetracker.anuko.com/reports.php).
+'form.report.export' => 'Exportálása', // TODO: is this correct?
+// TODO: translate the following.
+// 'form.report.assign_to_invoice' => 'Assign to invoice',
 
-"form.people.rate" => 'általános óradíj',
-"form.people.comanager" => 'helyettes',
-"form.people.projects" => 'projektek',
-// Note to translators: the string below is missing and must be added and translated 
+// Invoice form. See example at https://timetracker.anuko.com/invoice.php
+// (you can get to this form after generating a report).
+'form.invoice.number' => 'Számla azonosító száma',
+'form.invoice.person' => 'Személy',
 
-// projects form attributes
-"form.project.proj_title" => 'projektek',
-"form.project.edit_str" => 'projekt adatainak szerkesztése',
-"form.project.add_str" => 'új projekt hozzáadása',
-"form.project.del_str" => 'projekt törlése',
-"form.project.th.name" => 'név',
-"form.project.th.edit" => 'szerkesztés',
-"form.project.th.del" => 'törlés',
-"form.project.name" => 'név',
+// Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
+// 'form.invoice.invoice_to_delete' => 'Invoice to delete',
+// 'form.invoice.invoice_entries' => 'Invoice entries',
+// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
-// activities form attributes
-"form.activity.act_title" => 'tevékenységek',
-"form.activity.add_title" => 'új tevékenyég felvétele',
-"form.activity.edit_str" => 'tevékenység szerkesztése',
-"form.activity.del_str" => 'tevékenység törlése',
-"form.activity.name" => 'név',
-"form.activity.project" => 'projekt',
-"form.activity.th.name" => 'név',
-"form.activity.th.project" => 'projekt',
-"form.activity.th.edit" => 'szerkesztés',
-"form.activity.th.del" => 'törlés',
+// Charts form. See example at https://timetracker.anuko.com/charts.php
+// TODO: translate the following.
+// 'form.charts.interval' => 'Interval',
+// 'form.charts.chart' => 'Chart',
 
-// report attributes
-"form.report.title" => 'riportok',
-"form.report.from" => 'kezdő időpont',
-"form.report.to" => 'vég időpont',
-"form.report.groupby_user" => 'személyek szerint',
-"form.report.groupby_project" => 'projektek szerint',
-"form.report.groupby_activity" => 'tevékenységek szerint',
-"form.report.duration" => 'időtartam',
-"form.report.start" => 'kezdet',
-"form.report.activity" => 'tevékenység',
-"form.report.show_idle" => 'az üres időszakok megjelenítése',
-"form.report.finish" => 'befejezés',
-"form.report.note" => 'megjegyzés',
-"form.report.project" => 'projekt',
-"form.report.totals_only" => 'csak a teljes óraszám',
-"form.report.total" => 'összesített óraszám',
-"form.report.th.empllist" => 'dolgozó',
-"form.report.th.date" => 'dátum',
-"form.report.th.project" => 'projekt',
-"form.report.th.activity" => 'tevékenység',
-"form.report.th.start" => 'elkezdve',
-"form.report.th.finish" => 'befejezve',
-"form.report.th.duration" => 'időtartam',
-"form.report.th.note" => 'megjegyzés',
+// Projects form. See example at https://timetracker.anuko.com/projects.php
+// TODO: translate the following.
+// 'form.projects.active_projects' => 'Active Projects',
+// 'form.projects.inactive_projects' => 'Inactive Projects',
 
-// mail form attributes
-"form.mail.from" => 'feladó',
-"form.mail.to" => 'címzett',
-"form.mail.cc" => 'másolatot kap',
-"form.mail.subject" => 'tárgy',
-"form.mail.comment" => 'megjegyzés',
-"form.mail.above" => 'küldjük el ezt a riportot e-mail-ben...',
-// Note to translators: the string below must be translated
-// "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
-"form.mail.sending_str" => '<b>az üzenet elküldve</b>',
+// Tasks form. See example at https://timetracker.anuko.com/tasks.php
+// TODO: translate the following.
+// 'form.tasks.active_tasks' => 'Active Tasks',
+// 'form.tasks.inactive_tasks' => 'Inactive Tasks',
 
-// invoice attributes
-"form.invoice.title" => 'számla',
-"form.invoice.caption" => 'Számla',
-"form.invoice.above" => 'a számlához tartozó adatok',
-"form.invoice.select_cust" => 'válassz ügyfelet',
-"form.invoice.fillform" => 'töltsd ki a mezőket',
-"form.invoice.date" => 'Dátum',
-"form.invoice.number" => 'számla azonosító száma',
-"form.invoice.tax" => 'adó',
-"form.invoice.comment" => 'megjegyzés ',
-"form.invoice.th.username" => 'személy',
-"form.invoice.th.time" => 'óra',
-"form.invoice.th.rate" => 'tarifa',
-"form.invoice.th.summ" => 'darab',
-"form.invoice.subtotal" => 'részösszeg',
-"form.invoice.customer" => 'Ügyfél',
-"form.invoice.mailinv_above" => 'küldjük el ezt a számlát e-mail-en',
-"form.invoice.sending_str" => '<b>a számla elküldve</b>',
+// Users form. See example at https://timetracker.anuko.com/users.php
+// TODO: translate the following.
+// 'form.users.active_users' => 'Active Users',
+// 'form.users.inactive_users' => 'Inactive Users',
+// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
+'form.users.role' => 'Szerepkör',
+'form.users.manager' => 'Vezető',
+'form.users.comanager' => 'Helyettes',
+'form.users.rate' => 'Tarifa',
+'form.users.default_rate' => 'Általános óradíj',
 
-"form.migration.zip" => 'tömörítés',
-"form.migration.file" => 'válassz file-nevet',
-"form.migration.import.title" => 'adatok importálása',
-"form.migration.import.success" => 'az importálás sikeresen véget ért',
-"form.migration.import.text" => 'csoport adatok importja XML file-ból',
-"form.migration.export.title" => 'az adatok exportálása',
-"form.migration.export.success" => 'az exportálás sikeres volt',
-"form.migration.export.text" => 'kimentheted az összes felvitt csoport adatait egy XML file-ba, ami megkönnyíti a TimeTracker szerverek közötti adatátvitelt...',
-// Note to translators: the strings below are missing and must be added and translated 
-// "form.migration.compression.none" => 'none',
-// "form.migration.compression.gzip" => 'gzip',
-// "form.migration.compression.bzip" => 'bzip',
+// Editing User form. See example at https://timetracker.anuko.com/user_edit.php
+// TODO: translate the following.
+// 'form.user_edit.swap_roles' => 'Swap roles',
 
-"form.client.title"=> 'ügyfelek',
-"form.client.add_title" => 'új ügyfél hozzáadása',
-"form.client.edit_title" => 'ügyfél adatainak szerkesztése',
-"form.client.del_title" => 'ügyfél törlése',
-"form.client.th.name" => 'név',
-"form.client.th.edit" => 'szerkesztés',
-"form.client.th.del" => 'törlés',
-"form.client.name" => 'név',
-"form.client.tax" => 'adó',
-"form.client.comment" => 'megjegyzés ',
+// Roles form. See example at https://timetracker.anuko.com/roles.php
+// TODO: translate the following.
+// 'form.roles.active_roles' => 'Active Roles',
+// 'form.roles.inactive_roles' => 'Inactive Roles',
+// 'form.roles.rank' => 'Rank',
+// 'form.roles.rights' => 'Rights',
+// 'form.roles.assigned' => 'Assigned',
+// 'form.roles.not_assigned' => 'Not assigned',
 
-// miscellaneous strings
-"forward.forgot_password" => 'elfelejtetted a jelszót?',
-"forward.edit" => 'szerkesztés',
-"forward.delete" => 'törlés',
-"forward.tocsvfile" => 'az adatok exportálása CSV file-ba',
-// Note to translators: the string below is missing and must be added and translated 
-// "forward.toxmlfile" => 'export data to .xml file',
-"forward.geninvoice" => 'számla készítés',
-"forward.change" => 'ügyfelek adatainak beállítása',
+// Clients form. See example at https://timetracker.anuko.com/clients.php
+// TODO: translate the following.
+// 'form.clients.active_clients' => 'Active Clients',
+// 'form.clients.inactive_clients' => 'Inactive Clients',
 
-// strings inside contols on forms
-"controls.select.project" => '--- válassz projektet ---',
-"controls.select.activity" => '--- válassz tevékenységet ---',
-"controls.select.client" => '--- válassz ügyfelet ---',
-"controls.project_bind" => '--- összes ---',
-"controls.all" => '--- összes ---',
-"controls.notbind" => '--- nincs ---',
-"controls.per_tm" => 'ebben a hónapban',
-"controls.per_lm" => 'múlt hónapban',
-"controls.per_tw" => 'ezen a héten',
-"controls.per_lw" => 'múlt héten',
-// Note to translators: the strings below are missing and must be added and translated 
-// "controls.per_td" => 'this day',
-// "controls.per_at" => 'all time',
-// "controls.per_ty" => 'this year',
-"controls.sel_period" => '--- válassz időszakot ---',
-"controls.sel_groupby" => '--- csoportosítás nélkül ---',
-// Note to translators: the strings below are missing and must be added and translated 
-// "controls.inc_billable" => 'billable',
-// "controls.inc_nbillable" => 'not billable',
-// "controls.default" => '--- default ---',
+// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
+// TODO: translate the following.
+// 'form.client.client_to_delete' => 'Client to delete',
+// 'form.client.client_entries' => 'Client entries',
 
-// labels
-// Note to translators: the strings below are missing and must be added and translated 
-// "label.chart.title1" => 'activities for user',
-// "label.chart.title2" => 'projects for user',
-// "label.chart.period" => 'chart for period',
+// Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
+// TODO: improve or check form.export.hint as the translation seems incorrect if we trust translate.google.com.
+// Export does a single group export (all data in ONE group).
+'form.export.hint' => 'Kimentheted az összes felvitt csoport adatait egy XML file-ba, ami megkönnyíti a TimeTracker szerverek közötti adatátvitelt.',
+'form.export.compression' => 'Tömörítés',
+// TODO: translate the following.
+// 'form.export.compression_none' => 'none',
+// 'form.export.compression_bzip' => 'bzip',
 
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
-"label.pbehalf_info" => '%s %s <b>helyett %s</b>',
-"label.pminfo" => ' (vezető)',
-"label.pcminfo" => ' (helyettes)',
-"label.painfo" => ' (adminisztrátor)',
-"label.time_noentry" => 'nincs bejegyzés',
-"label.today" => 'ma',
-"label.req_fields" => '* kötelezően kitöltendő mezők',
-"label.sel_project" => 'válassz projektet',
-"label.sel_activity" => 'válassz tevékenységet',
-"label.sel_tp" => 'jelölj meg egy időszakot',
-"label.set_tp" => '... vagy állíts be konkrét dátumot',
-"label.fields" => 'csak a kijelölt mezők fognak szerepelni a riportban',
-"label.group_title" => 'csoportosítva',
-// Note to translators: the string below is missing and must be added and translated 
-// "label.include_title" => 'include records',
-"label.inv_str" => 'számla',
-"label.set_empl" => 'válassz dolgozót',
-"label.sel_all" => 'mindenkit kijelöl',
-"label.sel_none" => 'senkit nem jelöl ki',
-"label.or" => 'vagy',
-"label.disable" => 'tiltva',
-"label.enable" => 'engedélyezve',
-"label.filter" => 'szűrés',
-// Note to translators: the strings below are missing and must be added and translated 
-//"label.timeweek" => 'weekly total',
-// "label.hrs" => 'hrs',
-// "label.errors" => 'errors',
-// "label.ldap_hint" => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
-// "label.calendar_today" => 'today',
-// "label.calendar_close" => 'close',
+// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+'form.import.hint' => 'Csoport adatok importja XML file-ból.',
+'form.import.file' => 'Válassz file',
+'form.import.success' => 'Az importálás sikeresen véget ért.',
 
-// login hello text
-// "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
+// Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
+// TODO: fix form.groups.hint by translating it properly from the English string. Note that the ending is not translated at all.
+'form.groups.hint' => 'Új csoport létrehozása egy csoport-vezetői jogosultsággal.<br>A csoport adatokat importálhatjuk XML-ből (no login collisions are allowed).',
+
+// Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
+// TODO: translate the following.
+// 'form.group_edit.12_hours' => '12 hours',
+// 'form.group_edit.24_hours' => '24 hours',
+// 'form.group_edit.show_holidays' => 'Show holidays',
+// 'form.group_edit.tracking_mode' => 'Tracking mode',
+// 'form.group_edit.mode_time' => 'time',
+// 'form.group_edit.mode_projects' => 'projects',
+// 'form.group_edit.mode_projects_and_tasks' => 'projects and tasks',
+// 'form.group_edit.record_type' => 'Record type',
+// 'form.group_edit.type_all' => 'all',
+// 'form.group_edit.type_start_finish' => 'start and finish',
+// 'form.group_edit.type_duration' => 'duration',
+// 'form.group_edit.punch_mode' => 'Punch mode',
+// 'form.group_edit.allow_overlap' => 'Allow overlap',
+// 'form.group_edit.future_entries' => 'Future entries',
+// 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.group_edit.allow_ip' => 'Allow IP',
+// 'form.group_edit.plugins' => 'Plugins',
+
+// Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
+// TODO: translate the following.
+// 'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
+
+// Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
+'form.mail.from' => 'Feladó',
+'form.mail.to' => 'Címzett',
+// TODO: translate the following.
+// 'form.mail.report_subject' => 'Time Tracker Report',
+// 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
+// 'form.mail.report_sent' => 'Report sent.',
+'form.mail.invoice_sent' => 'A számla elküldve.',
+
+// Quotas configuration form. See example at https://timetracker.anuko.com/quotas.php after enabling Monthly quotas plugin.
+// TODO: translate the following.
+// 'form.quota.year' => 'Year',
+// 'form.quota.month' => 'Month',
+// 'form.quota.quota' => 'Quota',
+// 'form.quota.workday_hours' => 'Hours in work day',
+// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+
+// Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
+// TODO: translate the following.
+// 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
+// 'form.swap.swap_with' => 'Swap roles with',
+
+// Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
+// TODO: translate the following.
+// 'role.user.label' => 'User',
+// 'role.user.low_case_label' => 'user',
+// 'role.user.description' => 'A regular member without management rights.',
+// 'role.client.label' => 'Client',
+// 'role.client.low_case_label' => 'client',
+// 'role.client.description' => 'A client can view its own reports, charts, and invoices.',
+// 'role.supervisor.label' => 'Supervisor',
+// 'role.supervisor.low_case_label' => 'supervisor',
+// 'role.supervisor.description' => 'A person with a small set of management rights.',
+// 'role.comanager.label' => 'Co-manager',
+// 'role.comanager.low_case_label' => 'co-manager',
+// 'role.comanager.description' => 'A person with a big set of management functions.',
+// 'role.manager.label' => 'Manager',
+// 'role.manager.low_case_label' => 'manager',
+// 'role.manager.description' => 'Group manager. Can do most of things for a group.',
+// 'role.top_manager.label' => 'Top manager',
+// 'role.top_manager.low_case_label' => 'top manager',
+// 'role.top_manager.description' => 'Top group manager. Can do everything in a tree of groups.',
+// 'role.admin.label' => 'Administrator',
+// 'role.admin.low_case_label' => 'administrator',
+// 'role.admin.description' => 'Site adminsitrator.',
 );

@@ -30,14 +30,25 @@ require_once('../initialize.php');
 import('form.Form');
 import('ttTeamHelper');
 
-// Access check.
-if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('cl')) {
+// Access checks.
+if (!(ttAccessAllowed('view_own_clients') || ttAccessAllowed('manage_clients'))) {
   header('Location: access_denied.php');
   exit();
 }
+if (!$user->isPluginEnabled('cl')) {
+  header('Location: feature_disabled.php');
+  exit();
+}
+// End of access checks.
 
-$smarty->assign('active_clients', ttTeamHelper::getActiveClients($user->team_id, true));
-$smarty->assign('inactive_clients', ttTeamHelper::getInactiveClients($user->team_id, true));
-$smarty->assign('title', $i18n->getKey('title.clients'));
+if($user->can('manage_clients')) {
+  $active_clients = ttTeamHelper::getActiveClients($user->group_id, true);
+  $inactive_clients = ttTeamHelper::getInactiveClients($user->group_id, true);
+} else
+  $active_clients = $user->getAssignedClients();
+
+$smarty->assign('active_clients', $active_clients);
+$smarty->assign('inactive_clients', $inactive_clients);
+$smarty->assign('title', $i18n->get('title.clients'));
 $smarty->assign('content_page_name', 'mobile/clients.tpl');
 $smarty->display('mobile/index.tpl');

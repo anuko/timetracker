@@ -31,16 +31,17 @@ import('form.Form');
 import('form.ActionForm');
 import('ttReportHelper');
 
-// Access check.
-if (!ttAccessCheck(right_view_reports)) {
+// Access checks.
+if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports'))) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
-  $custom_fields = new CustomFields($user->team_id);
+  $custom_fields = new CustomFields($user->group_id);
 }
 
 // Report settings are stored in session bean before we get here.
@@ -53,7 +54,7 @@ $bean = new ActionForm('reportBean', new Form('reportForm'), $request);
 $type = $request->getParameter('type');
 
 // Also, there are 2 variations of report: totals only, or normal. Totals only means that the report
-// is grouped by (either date, user, client, project, task or cf_1) and user only needs to see subtotals by group.
+// is grouped by (either date, user, client, project, task, or cf_1) and user only needs to see subtotals by group.
 $totals_only = $bean->getAttribute('chtotalsonly');
 
 // Obtain items.
@@ -63,7 +64,7 @@ else
   $items = ttReportHelper::getItems($bean);
 
 // Build a string to use as filename for the files being downloaded.
-$filename = strtolower($i18n->getKey('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
+$filename = strtolower($i18n->get('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
 
 header('Pragma: public'); // This is needed for IE8 to download files over https.
 header('Content-Type: text/html; charset=utf-8');
@@ -96,7 +97,7 @@ if ('xml' == $type) {
       }
       if ($bean->getAttribute('chcost')) {
         print "\t<cost><![CDATA[";
-        if ($user->canManageTeam() || $user->isClient())
+        if ($user->can('manage_invoices') || $user->isClient())
           print $subtotal['cost'];
         else
           print $subtotal['expenses'];
@@ -110,7 +111,7 @@ if ('xml' == $type) {
       print "<row>\n";
 
       print "\t<date><![CDATA[".$item['date']."]]></date>\n";
-      if ($user->canManageTeam() || $user->isClient()) print "\t<user><![CDATA[".$item['user']."]]></user>\n"; 
+      if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print "\t<user><![CDATA[".$item['user']."]]></user>\n"; 
       if ($bean->getAttribute('chclient')) print "\t<client><![CDATA[".$item['client']."]]></client>\n";
       if ($bean->getAttribute('chproject')) print "\t<project><![CDATA[".$item['project']."]]></project>\n";
       if ($bean->getAttribute('chtask')) print "\t<task><![CDATA[".$item['task']."]]></task>\n";
@@ -126,11 +127,16 @@ if ('xml' == $type) {
       if ($bean->getAttribute('chnote')) print "\t<note><![CDATA[".$item['note']."]]></note>\n";
       if ($bean->getAttribute('chcost')) {
         print "\t<cost><![CDATA[";
-        if ($user->canManageTeam() || $user->isClient())
+        if ($user->can('manage_invoices') || $user->isClient())
           print $item['cost'];
         else
           print $item['expense'];
         print "]]></cost>\n";
+      }
+      if ($bean->getAttribute('chpaid')) print "\t<paid><![CDATA[".$item['paid']."]]></paid>\n";
+      if ($bean->getAttribute('chip')) {
+        $ip = $item['modified'] ? $item['modified_ip'].' '.$item['modified'] : $item['created_ip'].' '.$item['created'];
+        print "\t<ip><![CDATA[".$ip."]]></ip>\n";
       }
       if ($bean->getAttribute('chinvoice')) print "\t<invoice><![CDATA[".$item['invoice']."]]></invoice>\n";
 
@@ -159,13 +165,13 @@ if ('csv' == $type) {
       $group_by_header = $custom_fields->fields[0]['label'];
     else {
       $key = 'label.'.$group_by;
-      $group_by_header = $i18n->getKey($key);
+      $group_by_header = $i18n->get($key);
     }
 
     // Print headers.
     print '"'.$group_by_header.'"';
-    if ($bean->getAttribute('chduration')) print ',"'.$i18n->getKey('label.duration').'"';
-    if ($bean->getAttribute('chcost')) print ',"'.$i18n->getKey('label.cost').'"';
+    if ($bean->getAttribute('chduration')) print ',"'.$i18n->get('label.duration').'"';
+    if ($bean->getAttribute('chcost')) print ',"'.$i18n->get('label.cost').'"';
     print "\n";
 
     // Print subtotals.
@@ -178,7 +184,7 @@ if ('csv' == $type) {
         print ',"'.$val.'"';
       }
       if ($bean->getAttribute('chcost')) {
-        if ($user->canManageTeam() || $user->isClient())
+        if ($user->can('manage_invoices') || $user->isClient())
           print ',"'.$subtotal['cost'].'"';
         else
           print ',"'.$subtotal['expenses'].'"';
@@ -187,24 +193,26 @@ if ('csv' == $type) {
     }
   } else {
     // Normal report. Print headers.
-    print '"'.$i18n->getKey('label.date').'"';
-    if ($user->canManageTeam() || $user->isClient()) print ',"'.$i18n->getKey('label.user').'"';
-    if ($bean->getAttribute('chclient')) print ',"'.$i18n->getKey('label.client').'"';
-    if ($bean->getAttribute('chproject')) print ',"'.$i18n->getKey('label.project').'"';
-    if ($bean->getAttribute('chtask')) print ',"'.$i18n->getKey('label.task').'"';
+    print '"'.$i18n->get('label.date').'"';
+    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print ',"'.$i18n->get('label.user').'"';
+    if ($bean->getAttribute('chclient')) print ',"'.$i18n->get('label.client').'"';
+    if ($bean->getAttribute('chproject')) print ',"'.$i18n->get('label.project').'"';
+    if ($bean->getAttribute('chtask')) print ',"'.$i18n->get('label.task').'"';
     if ($bean->getAttribute('chcf_1')) print ',"'.$custom_fields->fields[0]['label'].'"';
-    if ($bean->getAttribute('chstart')) print ',"'.$i18n->getKey('label.start').'"';
-    if ($bean->getAttribute('chfinish')) print ',"'.$i18n->getKey('label.finish').'"';
-    if ($bean->getAttribute('chduration')) print ',"'.$i18n->getKey('label.duration').'"';
-    if ($bean->getAttribute('chnote')) print ',"'.$i18n->getKey('label.note').'"';
-    if ($bean->getAttribute('chcost')) print ',"'.$i18n->getKey('label.cost').'"';
-    if ($bean->getAttribute('chinvoice')) print ',"'.$i18n->getKey('label.invoice').'"';
+    if ($bean->getAttribute('chstart')) print ',"'.$i18n->get('label.start').'"';
+    if ($bean->getAttribute('chfinish')) print ',"'.$i18n->get('label.finish').'"';
+    if ($bean->getAttribute('chduration')) print ',"'.$i18n->get('label.duration').'"';
+    if ($bean->getAttribute('chnote')) print ',"'.$i18n->get('label.note').'"';
+    if ($bean->getAttribute('chcost')) print ',"'.$i18n->get('label.cost').'"';
+    if ($bean->getAttribute('chpaid')) print ',"'.$i18n->get('label.paid').'"';
+    if ($bean->getAttribute('chip')) print ',"'.$i18n->get('label.ip').'"';
+    if ($bean->getAttribute('chinvoice')) print ',"'.$i18n->get('label.invoice').'"';
     print "\n";
 
     // Print items.
     foreach ($items as $item) {
       print '"'.$item['date'].'"';
-      if ($user->canManageTeam() || $user->isClient()) print ',"'.str_replace('"','""',$item['user']).'"';
+      if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print ',"'.str_replace('"','""',$item['user']).'"';
       if ($bean->getAttribute('chclient')) print ',"'.str_replace('"','""',$item['client']).'"';
       if ($bean->getAttribute('chproject')) print ',"'.str_replace('"','""',$item['project']).'"';
       if ($bean->getAttribute('chtask')) print ',"'.str_replace('"','""',$item['task']).'"';
@@ -219,10 +227,15 @@ if ('csv' == $type) {
       }
       if ($bean->getAttribute('chnote')) print ',"'.str_replace('"','""',$item['note']).'"';
       if ($bean->getAttribute('chcost')) {
-        if ($user->canManageTeam() || $user->isClient())
+        if ($user->can('manage_invoices') || $user->isClient())
           print ',"'.$item['cost'].'"';
         else
           print ',"'.$item['expense'].'"';
+      }
+      if ($bean->getAttribute('chpaid')) print ',"'.$item['paid'].'"';
+      if ($bean->getAttribute('chip')) {
+        $ip = $item['modified'] ? $item['modified_ip'].' '.$item['modified'] : $item['created_ip'].' '.$item['created'];
+        print ',"'.$ip.'"';
       }
       if ($bean->getAttribute('chinvoice')) print ',"'.str_replace('"','""',$item['invoice']).'"';
       print "\n";

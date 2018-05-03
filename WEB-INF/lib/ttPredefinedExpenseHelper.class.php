@@ -34,16 +34,20 @@ class ttPredefinedExpenseHelper {
   static function get($id)
   {
     global $user;
+    $replaceDecimalMark = ('.' != $user->decimal_mark);
 
     $mdb2 = getConnection();
 
     $sql = "select id, name, cost from tt_predefined_expenses
-      where id = $id and team_id = $user->team_id";
+      where id = $id and group_id = $user->group_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-	  if ($val && $val['id'])
+      if ($val && $val['id']) {
+        if ($replaceDecimalMark)
+          $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
         return $val;
+      }
     }
     return false;
   }
@@ -54,7 +58,7 @@ class ttPredefinedExpenseHelper {
 
     $mdb2 = getConnection();
 
-    $sql = "delete from tt_predefined_expenses where id = $id and team_id = $user->team_id";
+    $sql = "delete from tt_predefined_expenses where id = $id and group_id = $user->group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -65,14 +69,18 @@ class ttPredefinedExpenseHelper {
   // insert function inserts a new predefined expense into database.
   static function insert($fields)
   {
+    global $user;
+
     $mdb2 = getConnection();
 
-    $team_id = (int) $fields['team_id'];
+    $group_id = (int) $fields['group_id'];
     $name = $fields['name'];
     $cost = $fields['cost'];
+    if ('.' != $user->decimal_mark)
+      $cost = str_replace($user->decimal_mark, '.', $cost);
 
-    $sql = "insert into tt_predefined_expenses (team_id, name, cost)
-      values ($team_id, ".$mdb2->quote($name).", ".$mdb2->quote($cost).")";
+    $sql = "insert into tt_predefined_expenses (group_id, name, cost)
+      values ($group_id, ".$mdb2->quote($name).", ".$mdb2->quote($cost).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -83,15 +91,19 @@ class ttPredefinedExpenseHelper {
   // update function - updates a predefined expense in database.
   static function update($fields)
   {
+    global $user;
+
     $mdb2 = getConnection();
 
     $predefined_expense_id = (int) $fields['id'];
-    $team_id = (int) $fields['team_id'];
+    $group_id = (int) $fields['group_id'];
     $name = $fields['name'];
     $cost = $fields['cost'];
+    if ('.' != $user->decimal_mark)
+      $cost = str_replace($user->decimal_mark, '.', $cost);
 
     $sql = "update tt_predefined_expenses set name = ".$mdb2->quote($name).", cost = ".$mdb2->quote($cost).
-      " where id = $predefined_expense_id and team_id = $team_id";
+      " where id = $predefined_expense_id and group_id = $group_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }

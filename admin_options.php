@@ -31,7 +31,7 @@ import('form.Form');
 import('ttUserHelper');
 
 // Access check.
-if (!ttAccessCheck(right_administer_site)) {
+if (!ttAccessAllowed('administer_site')) {
   header('Location: access_denied.php');
   exit();
 }
@@ -58,41 +58,28 @@ if (!$auth->isPasswordExternal()) {
   $form->addInput(array('type'=>'password','maxlength'=>'30','name'=>'password2','value'=>$cl_password2));
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.submit')));
 
 if ($request->isPost()) {
-  // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
-  if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
-  // New login must be unique.
-  if ($cl_login != $user->login && ttUserHelper::getUserByLogin($cl_login))
-    $err->add($i18n->getKey('error.user_exists'));
-  if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
-    if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-    if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
-    if ($cl_password1 !== $cl_password2)
-      $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
-  }
-  if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
-  // Finished validating user input.
+  // Create fields array for ttAdmin instance.
+  $fields = array(
+    'name' => $cl_name,
+    'login' => $cl_login,
+    'password1' => $cl_password1,
+    'password2' => $cl_password2,
+    'email' => $cl_email);
 
-  if ($err->no()) {
-    if (ttUserHelper::update($user->id, array(
-      'name' => $cl_name,
-      'login' => $cl_login,
-      'password' => $cl_password1,
-      'email' => $cl_email,
-      'status' => ACTIVE))) {
-      header('Location: admin_teams.php');
-      exit();
-    } else {
-      $err->add($i18n->getKey('error.db'));
-    }
+  import('ttAdmin');
+  $admin = new ttAdmin($err);
+  $result = $admin->updateSelf($fields);
+  if ($result) {
+    header('Location: admin_groups.php');
+    exit();
   }
 } // isPost
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.options'));
+$smarty->assign('title', $i18n->get('title.options'));
 $smarty->assign('content_page_name', 'admin_options.tpl');
 $smarty->display('index.tpl');

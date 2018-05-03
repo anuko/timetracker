@@ -29,9 +29,12 @@
           <td class="tableHeader">{$i18n.label.note}</td>
           <td class="tableHeaderCentered" width="5%">{$i18n.label.duration}</td>
           <td class="tableHeaderCentered" width="5%">{$i18n.label.cost}</td>
+  {if $user->isPluginEnabled('ps')}
+          <td class="tableHeader">{$i18n.label.paid}</td>
+  {/if}
         </tr>
   {foreach $invoice_items as $invoice_item}
-        <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td valign="top">{$invoice_item.date}</td>
           <td valign="top">{$invoice_item.user_name|escape}</td>
     {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
@@ -43,6 +46,9 @@
           <td valign="top">{$invoice_item.note|escape}</td>
           <td align="right" valign="top">{$invoice_item.duration}</td>
           <td align="right" valign="top">{$invoice_item.cost}</td>
+    {if $user->isPluginEnabled('ps')}
+          <td align="right" valign="top">{if $invoice_item.paid}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
+    {/if}
         </tr>
   {/foreach}
         <tr><td>&nbsp;</td></tr>
@@ -61,6 +67,20 @@
           <td align="right"><nobr>{$total|escape}</nobr></td>
         </tr>
       </table>
+
+  {$forms.invoiceForm.open}
+  {if $user->isPluginEnabled('ps')}
+  <table width="720" cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td align="right">
+      <table>
+        <tr><td>{$i18n.label.mark_paid}: {$forms.invoiceForm.mark_paid_action_options.control} {$forms.invoiceForm.btn_mark_paid.control}</td></tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+  {/if}
+  {$forms.invoiceForm.close}
 {/if}
     </td>
   </tr>

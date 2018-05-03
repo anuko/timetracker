@@ -36,8 +36,9 @@ import('ttClientHelper');
 import('ttCustomFieldHelper');
 import('ttFavReportHelper');
 import('ttExpenseHelper');
+import('ttRoleHelper');
 
-// ttImportHelper - this class is used to import team data from a file.
+// ttImportHelper - this class is used to import group data from a file.
 class ttImportHelper {
   var $errors         = null;    // Errors go here. Set in constructor by reference.
 
@@ -45,12 +46,15 @@ class ttImportHelper {
   var $currentTag     = '';      // XML tag of the current element.
 
   var $canImport      = true;    // False if we cannot import data due to a login collision.
-  var $teamData       = array(); // Array of team data such as team name, etc.
-  var $team_id        = null;    // New team id we are importing. It is created during the import operation.
+  var $groupData      = array(); // Array of group data such as group name, etc.
+  var $group_id       = null;    // New group id we are importing. It is created during the import operation.
+  var $roles          = array(); // Array of arrays of role properties.
   var $users          = array(); // Array of arrays of user properties.
+  var $top_role_id    = null;    // Top manager role id on the new server.
 
   // The following arrays are maps between entity ids in the file versus the database.
   // In the file they are sequential (1,2,3...) while in the database the entities have different ids.
+  var $roleMap       = array(); // Role ids.
   var $userMap       = array(); // User ids.
   var $projectMap    = array(); // Project ids.
   var $taskMap       = array(); // Task ids.
@@ -69,7 +73,7 @@ class ttImportHelper {
   // startElement - callback handler for opening tag of an XML element.
   // In this function we assign passed in attributes to currentElement.
   function startElement($parser, $name, $attrs) {
-    if ($name == 'TEAM'
+    if ($name == 'GROUP'
       || $name == 'USER'
       || $name == 'TASK'
       || $name == 'PROJECT'
@@ -83,7 +87,8 @@ class ttImportHelper {
       || $name == 'INVOICE_HEADER'
       || $name == 'USER_PROJECT_BIND'
       || $name == 'EXPENSE_ITEM'
-      || $name == 'FAV_REPORT') {
+      || $name == 'FAV_REPORT'
+      || $name == 'ROLE') {
       $this->currentElement = $attrs;
     }
     $this->currentTag = $name;
@@ -93,10 +98,14 @@ class ttImportHelper {
   // When we are here, currentElement is an array of the element attributes (as set in startElement).
   // Here we do the actual import of data into the database.
   function endElement($parser, $name) {
-    if ($name == 'TEAM') {
-      $this->teamData = $this->currentElement;
-      // Now teamData is an array of team properties. We'll use it later to create a team.
-      // Cannot create the team here. Need to determine whether logins collide with existing logins.
+    if ($name == 'GROUP') {
+      $this->groupData = $this->currentElement;
+      // Now groupData is an array of group properties. We'll use it later to create a group.
+      // Cannot create the group here. Need to determine whether logins collide with existing logins.
+      $this->currentElement = array();
+    }
+    if ($name == 'ROLE') {
+      $this->roles[$this->currentElement['ID']] = $this->currentElement;
       $this->currentElement = array();
     }
     if ($name == 'USER') {
@@ -112,28 +121,47 @@ class ttImportHelper {
         }
       }
 
-      // Now we can create a team.
+      // Now we can create a group.
       if ($this->canImport) {
-        $team_id = ttTeamHelper::insert(array(
-          'name' => $this->teamData['NAME'],
-          'address' => $this->teamData['ADDRESS'],
-          'currency' => $this->teamData['CURRENCY'],
-          'lock_spec' => $this->teamData['LOCK_SPEC'],
-          'workday_hours' => $this->teamData['WORKDAY_HOURS'],
-          'lang' => $this->teamData['LANG'],
-          'decimal_mark' => $this->teamData['DECIMAL_MARK'],
-          'date_format' => $this->teamData['DATE_FORMAT'],
-          'time_format' => $this->teamData['TIME_FORMAT'],
-          'week_start' => $this->teamData['WEEK_START'],
-          'plugins' => $this->teamData['PLUGINS'],
-          'tracking_mode' => $this->teamData['TRACKING_MODE'],
-          'record_type' => $this->teamData['RECORD_TYPE']));
-        if ($team_id) {
-          $this->team_id = $team_id;
+        $this->top_role_id = ttRoleHelper::getRoleByRank(512, 0);
+        $group_id = $this->createGroup(array(
+          'name' => $this->groupData['NAME'],
+          'currency' => $this->groupData['CURRENCY'],
+          'decimal_mark' => $this->groupData['DECIMAL_MARK'],
+          'lang' => $this->groupData['LANG'],
+          'date_format' => $this->groupData['DATE_FORMAT'],
+          'time_format' => $this->groupData['TIME_FORMAT'],
+          'week_start' => $this->groupData['WEEK_START'],
+          'tracking_mode' => $this->groupData['TRACKING_MODE'],
+          'project_required' => $this->groupData['PROJECT_REQUIRED'],
+          'task_required' => $this->groupData['TASK_REQUIRED'],
+          'record_type' => $this->groupData['RECORD_TYPE'],
+          'bcc_email' => $this->groupData['BCC_EMAIL'],
+          'allow_ip' => $this->groupData['ALLOW_IP'],
+          'password_complexity' => $this->groupData['PASSWORD_COMPLEXITY'],
+          'plugins' => $this->groupData['PLUGINS'],
+          'lock_spec' => $this->groupData['LOCK_SPEC'],
+          'workday_minutes' => $this->groupData['WORKDAY_MINUTES'],
+          'config' => $this->groupData['CONFIG']));
+        if ($group_id) {
+          $this->group_id = $group_id;
+
+          // Create roles.
+          foreach ($this->roles as $key=>$role_item) {
+            $role_id = ttRoleHelper::insert(array(
+              'group_id' => $this->group_id,
+              'name' => $role_item['NAME'],
+              'rank' => $role_item['RANK'],
+              'rights' => $role_item['RIGHTS'],
+              'status' => $role_item['STATUS']));
+            $this->roleMap[$role_item['ID']] = $role_id;
+          }
+
           foreach ($this->users as $key=>$user_item) {
+            $role_id = $user_item['ROLE_ID'] === '0' ? $this->top_role_id :  $this->roleMap[$user_item['ROLE_ID']]; // 0 (not null) means top manager role.
             $user_id = ttUserHelper::insert(array(
-              'team_id' => $this->team_id,
-              'role' => $user_item['ROLE'],
+              'group_id' => $this->group_id,
+              'role_id' => $role_id,
               'client_id' => $user_item['CLIENT_ID'], // Note: NOT mapped value, replaced in CLIENT handler.
               'name' => $user_item['NAME'],
               'login' => $user_item['LOGIN'],
@@ -150,7 +178,7 @@ class ttImportHelper {
     if ($name == 'TASK' && $this->canImport) {
       $this->taskMap[$this->currentElement['ID']] =
         ttTaskHelper::insert(array(
-          'team_id' => $this->team_id,
+          'group_id' => $this->group_id,
           'name' => $this->currentElement['NAME'],
           'description' => $this->currentElement['DESCRIPTION'],
           'status' => $this->currentElement['STATUS']));
@@ -164,7 +192,7 @@ class ttImportHelper {
       // Add a new project.
       $this->projectMap[$this->currentElement['ID']] =
         ttProjectHelper::insert(array(
-          'team_id' => $this->team_id,
+          'group_id' => $this->group_id,
           'name' => $this->currentElement['NAME'],
           'description' => $this->currentElement['DESCRIPTION'],
           'tasks' => $mapped_tasks,
@@ -188,7 +216,7 @@ class ttImportHelper {
 
       $this->clientMap[$this->currentElement['ID']] =
         ttClientHelper::insert(array(
-          'team_id' => $this->team_id,
+          'group_id' => $this->group_id,
           'name' => $this->currentElement['NAME'],
           'address' => $this->currentElement['ADDRESS'],
           'tax' => $this->currentElement['TAX'],
@@ -198,13 +226,13 @@ class ttImportHelper {
         // Update client_id for tt_users to a mapped value.
         // We did not do it during user insertion because clientMap was not ready then.
         if ($this->currentElement['ID'] != $this->clientMap[$this->currentElement['ID']])
-          ttClientHelper::setMappedClient($this->team_id, $this->currentElement['ID'], $this->clientMap[$this->currentElement['ID']]);
+          ttClientHelper::setMappedClient($this->group_id, $this->currentElement['ID'], $this->clientMap[$this->currentElement['ID']]);
     }
 
     if ($name == 'INVOICE' && $this->canImport) {
       $this->invoiceMap[$this->currentElement['ID']] =
         ttInvoiceHelper::insert(array(
-          'team_id' => $this->team_id,
+          'group_id' => $this->group_id,
           'name' => $this->currentElement['NAME'],
           'date' => $this->currentElement['DATE'],
           'client_id' => $this->clientMap[$this->currentElement['CLIENT_ID']],
@@ -213,13 +241,12 @@ class ttImportHelper {
     }
 
     if ($name == 'MONTHLY_QUOTA' && $this->canImport) {
-      $this->insertMonthlyQuota($this->team_id, $this->currentElement['YEAR'], $this->currentElement['MONTH'], $this->currentElement['QUOTA']);
+      $this->insertMonthlyQuota($this->group_id, $this->currentElement['YEAR'], $this->currentElement['MONTH'], $this->currentElement['MINUTES']);
     }
 
     if ($name == 'LOG_ITEM' && $this->canImport) {
       $this->logMap[$this->currentElement['ID']] =
         ttTimeHelper::insert(array(
-          'timestamp' => $this->currentElement['TIMESTAMP'],
           'user_id' => $this->userMap[$this->currentElement['USER_ID']],
           'date' => $this->currentElement['DATE'],
           'start' => $this->currentElement['START'],
@@ -231,13 +258,14 @@ class ttImportHelper {
           'invoice' => $this->invoiceMap[$this->currentElement['INVOICE_ID']],
           'note' => (isset($this->currentElement['COMMENT']) ? $this->currentElement['COMMENT'] : ''),
           'billable' => $this->currentElement['BILLABLE'],
+          'paid' => $this->currentElement['PAID'],
           'status' => $this->currentElement['STATUS']));
     }
 
     if ($name == 'CUSTOM_FIELD' && $this->canImport) {
       $this->customFieldMap[$this->currentElement['ID']] =
         ttCustomFieldHelper::insertField(array(
-          'team_id' => $this->team_id,
+          'group_id' => $this->group_id,
           'type' => $this->currentElement['TYPE'],
           'label' => $this->currentElement['LABEL'],
           'required' => $this->currentElement['REQUIRED'],
@@ -269,6 +297,7 @@ class ttImportHelper {
         'name' => $this->currentElement['NAME'],
         'cost' => $this->currentElement['COST'],
         'invoice_id' => $this->invoiceMap[$this->currentElement['INVOICE_ID']],
+        'paid' => $this->currentElement['PAID'],
         'status' => $this->currentElement['STATUS']));
     }
 
@@ -291,18 +320,20 @@ class ttImportHelper {
         'period' => $this->currentElement['PERIOD'],
         'from' => $this->currentElement['PERIOD_START'],
         'to' => $this->currentElement['PERIOD_END'],
-        'chclient' => $this->currentElement['SHOW_CLIENT'],
-        'chinvoice' => $this->currentElement['SHOW_INVOICE'],
-        'chproject' => $this->currentElement['SHOW_PROJECT'],
-        'chstart' => $this->currentElement['SHOW_START'],
-        'chduration' => $this->currentElement['SHOW_DURATION'],
-        'chcost' => $this->currentElement['SHOW_COST'],
-        'chtask' => $this->currentElement['SHOW_TASK'],
-        'chfinish' => $this->currentElement['SHOW_END'],
-        'chnote' => $this->currentElement['SHOW_NOTE'],
-        'chcf_1' => $this->currentElement['SHOW_CUSTOM_FIELD_1'],
+        'chclient' => (int) $this->currentElement['SHOW_CLIENT'],
+        'chinvoice' => (int) $this->currentElement['SHOW_INVOICE'],
+        'chpaid' => (int) $this->currentElement['SHOW_PAID'],
+        'chip' => (int) $this->currentElement['SHOW_IP'],
+        'chproject' => (int) $this->currentElement['SHOW_PROJECT'],
+        'chstart' => (int) $this->currentElement['SHOW_START'],
+        'chduration' => (int) $this->currentElement['SHOW_DURATION'],
+        'chcost' => (int) $this->currentElement['SHOW_COST'],
+        'chtask' => (int) $this->currentElement['SHOW_TASK'],
+        'chfinish' => (int) $this->currentElement['SHOW_END'],
+        'chnote' => (int) $this->currentElement['SHOW_NOTE'],
+        'chcf_1' => (int) $this->currentElement['SHOW_CUSTOM_FIELD_1'],
         'group_by' => $this->currentElement['GROUP_BY'],
-        'chtotalsonly' => $this->currentElement['SHOW_TOTALS_ONLY']));
+        'chtotalsonly' => (int) $this->currentElement['SHOW_TOTALS_ONLY']));
     }
     $this->currentTag = '';
   }
@@ -315,8 +346,8 @@ class ttImportHelper {
       || $this->currentTag == 'VALUE'
       || $this->currentTag == 'COMMENT'
       || $this->currentTag == 'ADDRESS'
-      || $this->currentTag == 'CLIENT_NAME'
-      || $this->currentTag == 'CLIENT_ADDRESS') {
+      || $this->currentTag == 'ALLOW_IP'
+      || $this->currentTag == 'PASSWORD_COMPLEXITY') {
       if (isset($this->currentElement[$this->currentTag]))
         $this->currentElement[$this->currentTag] .= trim($data);
       else
@@ -328,6 +359,8 @@ class ttImportHelper {
   // startElement, endElement, and dataElement functions are called as many times as necessary.
   // Actual import occurs in the endElement handler.
   function importXml() {
+    global $i18n;
+
     // Do we have a compressed file?
     $compressed = false;
     $file_ext = substr($_FILES['xmlfile']['name'], strrpos($_FILES['xmlfile']['name'], '.') + 1);
@@ -342,13 +375,13 @@ class ttImportHelper {
     // If the file is compressed - uncompress it.
     if ($compressed) {
       if (!$this->uncompress($_FILES['xmlfile']['tmp_name'], $filename)) {
-        $this->errors->add($GLOBALS['I18N']->getKey('error.sys'));
+        $this->errors->add($i18n->get('error.sys'));
         return;
       }
       unlink($_FILES['xmlfile']['tmp_name']);
     } else {
       if (!move_uploaded_file($_FILES['xmlfile']['tmp_name'], $filename)) {
-        $this->errors->add($GLOBALS['I18N']->getKey('error.upload'));
+        $this->errors->add($i18n->get('error.upload'));
         return;
       }
     }
@@ -368,7 +401,7 @@ class ttImportHelper {
           xml_get_current_line_number($parser)));
       }
       if (!$this->canImport) {
-        $this->errors->add($GLOBALS['I18N']->getKey('error.user_exists'));
+        $this->errors->add($i18n->get('error.user_exists'));
         break;
       }
     }
@@ -403,10 +436,50 @@ class ttImportHelper {
     return true;
   }
 
-  // insertMonthlyQuota - a helper function to insert a monthly quota.
-  private function insertMonthlyQuota($team_id, $year, $month, $quota) {
+  // createGroup function creates a new group.
+  private function createGroup($fields) {
+
+    global $user;
     $mdb2 = getConnection();
-    $sql = "INSERT INTO tt_monthly_quotas (team_id, year, month, quota) values ($team_id, $year, $month, $quota)";
+
+    $columns = '(name, currency, decimal_mark, lang, date_format, time_format, week_start, tracking_mode'.
+      ', project_required, task_required, record_type, bcc_email, allow_ip, password_complexity, plugins'.
+      ', lock_spec, workday_minutes, config, created, created_ip, created_by)';
+
+    $values = ' values ('.$mdb2->quote(trim($fields['name']));
+    $values .= ', '.$mdb2->quote(trim($fields['currency']));
+    $values .= ', '.$mdb2->quote($fields['decimal_mark']);
+    $values .= ', '.$mdb2->quote($fields['lang']);
+    $values .= ', '.$mdb2->quote($fields['date_format']);
+    $values .= ', '.$mdb2->quote($fields['time_format']);
+    $values .= ', '.(int)$fields['week_start'];
+    $values .= ', '.(int)$fields['tracking_mode'];
+    $values .= ', '.(int)$fields['project_required'];
+    $values .= ', '.(int)$fields['task_required'];
+    $values .= ', '.(int)$fields['record_type'];
+    $values .= ', '.$mdb2->quote($fields['bcc_email']);
+    $values .= ', '.$mdb2->quote($fields['allow_ip']);
+    $values .= ', '.$mdb2->quote($fields['password_complexity']);
+    $values .= ', '.$mdb2->quote($fields['plugins']);
+    $values .= ', '.$mdb2->quote($fields['lock_spec']);
+    $values .= ', '.(int)$fields['workday_minutes'];
+    $values .= ', '.$mdb2->quote($fields['config']);
+    $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
+    $values .= ')';
+
+    $sql = 'insert into tt_groups '.$columns.$values;
+    $affected = $mdb2->exec($sql);
+    if (!is_a($affected, 'PEAR_Error')) {
+      $group_id = $mdb2->lastInsertID('tt_groups', 'id');
+      return $group_id;
+    }
+    return false;
+  }
+
+  // insertMonthlyQuota - a helper function to insert a monthly quota.
+  private function insertMonthlyQuota($group_id, $year, $month, $minutes) {
+    $mdb2 = getConnection();
+    $sql = "INSERT INTO tt_monthly_quotas (group_id, year, month, minutes) values ($group_id, $year, $month, $minutes)";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }

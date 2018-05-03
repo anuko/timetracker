@@ -41,22 +41,20 @@ class DateField extends TextField {
     $this->class = 'DateField';
     $this->name = $name;
     $this->mDateObj = new DateAndTime();
-
-    if (isset($GLOBALS["I18N"])) {
-      $this->localize($GLOBALS["I18N"]);
-    }
+    $this->localize();
   }
 
-  function localize($i18n)  {
+  function localize()  {
     global $user;
+    global $i18n;
   	
     $this->mDateObj->setFormat($user->date_format);
 
     $this->mMonthNames = $i18n->monthNames;
     $this->mWeekDayShortNames = $i18n->weekdayShortNames;
-    $this->lToday = $i18n->getKey('label.today');
-    $this->lCalendarButtons['today'] = $i18n->getKey('label.today');
-    $this->lCalendarButtons['close'] = $i18n->getKey('button.close');
+    $this->lToday = $i18n->get('label.today');
+    $this->lCalendarButtons['today'] = $i18n->get('label.today');
+    $this->lCalendarButtons['close'] = $i18n->get('button.close');
 
     $this->mDateFormat = $user->date_format;
     $this->mWeekStartDay = $user->week_start;
@@ -80,6 +78,7 @@ class DateField extends TextField {
   }
 
   function getHtml() {
+    global $user;
 
     if (!$this->isEnabled()) {
       $html = htmlspecialchars($this->getValue()).
@@ -296,9 +295,7 @@ class DateField extends TextField {
 
 
             function getDateString(dateVal) {\n";
-            if (isset($GLOBALS['i18n'])) {
-              $html .= "dateVal.locale = \"".$GLOBALS['i18n']->lang."\";\n";
-            }
+            $html .= "dateVal.locale = \"".$user->lang."\";\n";
             $html .=  "return dateVal.strftime(dateFormat);
             }
 

@@ -28,44 +28,32 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttUserHelper');
+import('ttUser');
 
-// Access check.
-if (!ttAccessCheck(right_manage_team)) {
+// Access checks.
+if (!ttAccessAllowed('manage_users')) {
   header('Location: access_denied.php');
   exit();
 }
+$user_id = (int)$request->getParameter('id');
+$user_details = $user->getUser($user_id);
+if (!$user_details) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
 
-// Get user id we are deleting from the request.
-// A cast to int is for safety against manipulation of request parameter (sql injection). 
-$user_id = (int) $request->getParameter('id');
-
-// We need user name and login to display.
-$user_details = ttUserHelper::getUserDetails($user_id);
-
-// Security checks.
-$ok_to_go = $user->canManageTeam(); // Are we authorized for user deletes?
-if ($ok_to_go) $ok_to_go = $ok_to_go && $user_details; // Are we deleting a real user?
-if ($ok_to_go) $ok_to_go = $ok_to_go && ($user->team_id == $user_details['team_id']); // User belongs to our team?
-if ($ok_to_go && $user->isCoManager() && (ROLE_COMANAGER == $user_details['role']))
-  $ok_to_go = ($user->id == $user_details['id']); // Comanager is not allowed to delete other comanagers.
-if ($ok_to_go && $user->isCoManager() && (ROLE_MANAGER == $user_details['role']))
-  $ok_to_go = false; // Comanager is not allowed to delete a manager.
-
-if (!$ok_to_go)
-  die ($i18n->getKey('error.sys'));
-else
-  $smarty->assign('user_to_delete', $user_details['name']." (".$user_details['login'].")");
+$smarty->assign('user_to_delete', $user_details['name']." (".$user_details['login'].")");
 
 // Create confirmation form.
 $form = new Form('userDeleteForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$user_id));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
-$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
+$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if (ttUserHelper::markDeleted($user_id)) {
+    if ($user->markUserDeleted($user_id)) {
       // If we deleted the "on behalf" user reset its info in session.
       if ($user_id == $user->behalf_id) {
         unset($_SESSION['behalf_id']);
@@ -84,7 +72,7 @@ if ($request->isPost()) {
       }
       exit();
     } else {
-      $err->add($i18n->getKey('error.db'));
+      $err->add($i18n->get('error.db'));
     }
   }
   if ($request->getParameter('btn_cancel')) {
@@ -94,6 +82,6 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.delete_user'));
+$smarty->assign('title', $i18n->get('title.delete_user'));
 $smarty->assign('content_page_name', 'user_delete.tpl');
 $smarty->display('index.tpl');

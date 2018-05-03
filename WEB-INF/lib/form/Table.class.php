@@ -34,6 +34,7 @@ class Table extends FormElement {
   var $mColumns       = array(); // array of columns in table
   var $mData          = null;    // array of rows with data for column cells
   var $mHeaders       = array(); // column headers
+  var $mFooters       = array(); // column footers
   var $mInteractive   = true;    // adds a clickable checkbox column to table
   var $mIAScript      = null;    // sctipt to execute when a checkbox is clicked
   var $mKeyField      = '';      // identifies a column used as key to access row data
@@ -46,17 +47,18 @@ class Table extends FormElement {
   var $mHeaderOptions = array();
   var $mProccessed    = false;
 	
-  function __construct($name) {
+  function __construct($name, $cssClass = null) {
     $this->class = 'Table';
     $this->name = $name;
+    $this->cssClass = $cssClass;
   }
   
   function setKeyField($value) {
-  	$this->mKeyField = $value;
+    $this->mKeyField = $value;
   }
   
   function setData($data) {
-  	if (is_array($data) && isset($data[0]) && is_array($data[0]))
+    if (is_array($data) && isset($data[0]) && is_array($data[0]))
       $this->mData = &$data;
   }
   
@@ -88,7 +90,7 @@ class Table extends FormElement {
     return @$this->mData[$rowindex][$this->mColumnFields[$colindex]];
   }
 	
-  function getValueAtName($rowindex,$fieldname) {
+  function getValueAtName($rowindex, $fieldname) {
     if (!$this->mProccessed) $this->_process();
     return @$this->mData[$rowindex][$fieldname];
   }
@@ -110,6 +112,7 @@ class Table extends FormElement {
     foreach ($this->mColumns as $column) {
       $this->mColumnFields[] = $column->getField();
       $this->mHeaders[] = $column->getHeader();
+      $this->mFooters[] = $column->getFooter();
     }
   }
   
@@ -120,6 +123,9 @@ class Table extends FormElement {
     if ($this->mInteractive) $html .= $this->_addJavaScript();
 
     $html .= "<table";
+    if ($this->cssClass) {
+      $html .= " class=\"".$this->cssClass."\"";
+    }
     if (count($this->mTableOptions) > 0) {
       foreach ($this->mTableOptions as $k=>$v) {
         $html .= " $k=\"$v\"";
@@ -131,7 +137,7 @@ class Table extends FormElement {
     $html .= ">\n";
     
     // Print headers.
-	if (($this->mInteractive && (count($this->mHeaders) > 1)) || (!$this->mInteractive && (count($this->mHeaders) > 0))) {
+    if (($this->mInteractive && (count($this->mHeaders) > 1)) || (!$this->mInteractive && (count($this->mHeaders) > 0))) {
       $html .= "<tr";
       if (count($this->mRowOptions) > 0) {
         foreach ($this->mRowOptions as $k=>$v) {
@@ -172,6 +178,27 @@ class Table extends FormElement {
           // Render regular cell.
           $html .= $this->mColumns[$col]->renderCell($this->getValueAt($row, $col), $row, $col);
         }
+      }
+      $html .= "</tr>\n";
+    }
+
+    // Print footers.
+    if (($this->mInteractive && (count($this->mFooters) > 1)) || (!$this->mInteractive && (count($this->mFooters) > 0))) {
+      $html .= "<tr";
+      if (count($this->mRowOptions) > 0) {
+        foreach ($this->mRowOptions as $k=>$v) {
+          $html .= " $k=\"$v\"";
+        }
+      }
+      $html .= ">\n";
+      foreach ($this->mFooters as $footer) {
+        $html .= "<th";
+        if (count($this->mHeaderOptions) > 0) {
+          foreach ($this->mHeaderOptions as $k=>$v) {
+            $html .= " $k=\"$v\"";
+          }
+        }
+        $html .= ">$footer</th>\n";
       }
       $html .= "</tr>\n";
     }

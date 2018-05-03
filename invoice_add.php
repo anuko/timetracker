@@ -31,11 +31,16 @@ import('form.Form');
 import('ttTeamHelper');
 import('ttInvoiceHelper');
 
-// Access check.
-if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('iv')) {
+// Access checks.
+if (!ttAccessAllowed('manage_invoices')) {
   header('Location: access_denied.php');
   exit();
 }
+if (!$user->isPluginEnabled('iv')) {
+  header('Location: feature_disabled.php');
+  exit();
+}
+// End of access checks.
 
 if ($request->isPost()) {
   $cl_date = $request->getParameter('date');
@@ -51,34 +56,34 @@ $form->addInput(array('type'=>'datefield','name'=>'date','size'=>'20','value'=>$
 
 // Dropdown for clients if the clients plugin is enabled.
 if ($user->isPluginEnabled('cl')) {
-  $clients = ttTeamHelper::getActiveClients($user->team_id);
-  $form->addInput(array('type'=>'combobox','name'=>'client','style'=>'width: 250px;','data'=>$clients,'datakeys'=>array('id','name'),'value'=>$cl_client,'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+  $clients = ttTeamHelper::getActiveClients($user->group_id);
+  $form->addInput(array('type'=>'combobox','name'=>'client','style'=>'width: 250px;','data'=>$clients,'datakeys'=>array('id','name'),'value'=>$cl_client,'empty'=>array(''=>$i18n->get('dropdown.select'))));
 }
 // Dropdown for projects.
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-  $projects = ttTeamHelper::getActiveProjects($user->team_id);
-  $form->addInput(array('type'=>'combobox','name'=>'project','style'=>'width: 250px;','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_project,'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
+  $projects = ttTeamHelper::getActiveProjects($user->group_id);
+  $form->addInput(array('type'=>'combobox','name'=>'project','style'=>'width: 250px;','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_project,'empty'=>array(''=>$i18n->get('dropdown.all'))));
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'number','style'=>'width: 250px;','value'=>$cl_number));
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start','value'=>$cl_start));
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'finish','value'=>$cl_finish));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.add')));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_number)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.invoice.number'));
-  if (!ttValidDate($cl_date)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.date'));
-  if (!$cl_client) $err->add($i18n->getKey('error.client'));
-  if (!ttValidDate($cl_start)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start_date'));
-  if (!ttValidDate($cl_finish)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.end_date'));
+  if (!ttValidString($cl_number)) $err->add($i18n->get('error.field'), $i18n->get('form.invoice.number'));
+  if (!ttValidDate($cl_date)) $err->add($i18n->get('error.field'), $i18n->get('label.date'));
+  if (!$cl_client) $err->add($i18n->get('error.client'));
+  if (!ttValidDate($cl_start)) $err->add($i18n->get('error.field'), $i18n->get('label.start_date'));
+  if (!ttValidDate($cl_finish)) $err->add($i18n->get('error.field'), $i18n->get('label.end_date'));
 
   $fields = array('date'=>$cl_date,'name'=>$cl_number,'client_id'=>$cl_client,'project_id'=>$cl_project,'start_date'=>$cl_start,'end_date'=>$cl_finish);
   if ($err->no()) {
     if (ttInvoiceHelper::getInvoiceByName($cl_number))
-      $err->add($i18n->getKey('error.invoice_exists'));
+      $err->add($i18n->get('error.invoice_exists'));
 
     if (!ttInvoiceHelper::invoiceableItemsExist($fields))
-      $err->add($i18n->getKey('error.no_invoiceable_items'));
+      $err->add($i18n->get('error.no_invoiceable_items'));
   }
 
   if ($err->no()) {
@@ -87,13 +92,13 @@ if ($request->isPost()) {
       header('Location: invoices.php');
       exit();
     } else {
-      $err->add($i18n->getKey('error.db'));
+      $err->add($i18n->get('error.db'));
     }
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.invoiceForm.number.focus()"');
-$smarty->assign('title', $i18n->getKey('title.add_invoice'));
+$smarty->assign('title', $i18n->get('title.add_invoice'));
 $smarty->assign('content_page_name', 'invoice_add.tpl');
 $smarty->display('index.tpl');

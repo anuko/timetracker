@@ -30,9 +30,13 @@ require_once('initialize.php');
 import('form.Form');
 import('ttTeamHelper');
 
-// Access check.
-if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('ex')) {
+// Access checks.
+if (!ttAccessAllowed('manage_advanced_settings')) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('ex')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 
@@ -45,12 +49,12 @@ if ($request->isPost()) {
     exit();
   }
 } else {
-  $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
-  $predefinedExpenses = ttTeamHelper::getPredefinedExpenses($user->team_id);
+  $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
+  $predefinedExpenses = ttTeamHelper::getPredefinedExpenses($user->group_id);
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('predefined_expenses', $predefinedExpenses);
-$smarty->assign('title', $i18n->getKey('title.predefined_expenses'));
+$smarty->assign('title', $i18n->get('title.predefined_expenses'));
 $smarty->assign('content_page_name', 'predefined_expenses.tpl');
 $smarty->display('index.tpl');

@@ -30,15 +30,19 @@ require_once('initialize.php');
 import('form.Form');
 import('ttTeamHelper');
 
-// Access check.
-if (!ttAccessCheck(right_view_invoices) || !$user->isPluginEnabled('iv')) {
+// Access checks.
+if (!(ttAccessAllowed('manage_invoices') || ttAccessAllowed('view_own_invoices'))) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('iv')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 
 $invoices = ttTeamHelper::getActiveInvoices();
 
 $smarty->assign('invoices', $invoices);
-$smarty->assign('title', $i18n->getKey('title.invoices'));
+$smarty->assign('title', $i18n->get('title.invoices'));
 $smarty->assign('content_page_name', 'invoices.tpl');
 $smarty->display('index.tpl');

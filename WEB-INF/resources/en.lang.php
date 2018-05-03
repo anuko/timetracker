@@ -38,14 +38,15 @@ $i18n_holidays = array('01/01', '01/16', '02/20', '05/28', '07/04', '09/03', '10
 
 $i18n_key_words = array(
 
-// Menus - short selection strings that are displayed on the top of application web pages.
+// Menus - short selection strings that are displayed on top of application web pages.
 // Example: https://timetracker.anuko.com (black menu on top).
 'menu.login' => 'Login',
 'menu.logout' => 'Logout',
 'menu.forum' => 'Forum',
 'menu.help' => 'Help',
-'menu.create_team' => 'Create Team',
+'menu.create_group' => 'Create Group',
 'menu.profile' => 'Profile',
+'menu.group' => 'Group',
 'menu.time' => 'Time',
 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Reports',
@@ -53,7 +54,7 @@ $i18n_key_words = array(
 'menu.projects' => 'Projects',
 'menu.tasks' => 'Tasks',
 'menu.users' => 'Users',
-'menu.teams' => 'Teams',
+'menu.groups' => 'Groups',
 'menu.export' => 'Export',
 'menu.clients' => 'Clients',
 'menu.options' => 'Options',
@@ -69,6 +70,7 @@ $i18n_key_words = array(
 'error.access_denied' => 'Access denied.',
 'error.sys' => 'System error.',
 'error.db' => 'Database error.',
+'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Incorrect "{0}" data.',
 'error.empty' => 'Field "{0}" is empty.',
 'error.not_equal' => 'Field "{0}" is not equal to field "{1}".',
@@ -77,15 +79,18 @@ $i18n_key_words = array(
 'error.task' => 'Select task.',
 'error.client' => 'Select client.',
 'error.report' => 'Select report.',
+'error.record' => 'Select record.',
 'error.auth' => 'Incorrect login or password.',
 'error.user_exists' => 'User with this login already exists.',
+'error.object_exists' => 'Object with this name already exists.',
 'error.project_exists' => 'Project with this name already exists.',
 'error.task_exists' => 'Task with this name already exists.',
 'error.client_exists' => 'Client with this name already exists.',
 'error.invoice_exists' => 'Invoice with this number already exists.',
+'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'There are no invoiceable items.',
 'error.no_login' => 'No user with this login.',
-'error.no_teams' => 'Your database is empty. Login as admin and create a new team.',
+'error.no_groups' => 'Your database is empty. Login as admin and create a new group.',
 'error.upload' => 'File upload error.',
 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Error sending mail.',
@@ -102,25 +107,20 @@ $i18n_key_words = array(
 'button.copy' => 'Copy',
 'button.cancel' => 'Cancel',
 'button.submit' => 'Submit',
-'button.add_user' => 'Add user',
-'button.add_project' => 'Add project',
-'button.add_task' => 'Add task',
-'button.add_client' => 'Add client',
-'button.add_invoice' => 'Add invoice',
-'button.add_option' => 'Add option',
 'button.add' => 'Add',
+'button.delete' => 'Delete',
 'button.generate' => 'Generate',
 'button.reset_password' => 'Reset password',
 'button.send' => 'Send',
 'button.send_by_email' => 'Send by e-mail',
-'button.create_team' => 'Create team',
-'button.export' => 'Export team',
-'button.import' => 'Import team',
+'button.create_group' => 'Create group',
+'button.export' => 'Export group',
+'button.import' => 'Import group',
 'button.close' => 'Close',
 'button.stop' => 'Stop',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-'label.team_name' => 'Team name',
+'label.group_name' => 'Group name',
 'label.address' => 'Address',
 'label.currency' => 'Currency',
 'label.manager_name' => 'Manager name',
@@ -131,11 +131,15 @@ $i18n_key_words = array(
 'label.password' => 'Password',
 'label.confirm_password' => 'Confirm password',
 'label.email' => 'Email',
+'label.cc' => 'Cc',
+'label.bcc' => 'Bcc',
+'label.subject' => 'Subject',
 'label.date' => 'Date',
 'label.start_date' => 'Start date',
 'label.end_date' => 'End date',
 'label.user' => 'User',
 'label.users' => 'Users',
+'label.roles' => 'Roles',
 'label.client' => 'Client',
 'label.clients' => 'Clients',
 'label.option' => 'Option',
@@ -149,20 +153,22 @@ $i18n_key_words = array(
 'label.finish' => 'Finish',
 'label.duration' => 'Duration',
 'label.note' => 'Note',
+'label.notes' => 'Notes',
 'label.item' => 'Item',
 'label.cost' => 'Cost',
+'label.ip' => 'IP',
 'label.day_total' => 'Day total',
 'label.week_total' => 'Week total',
 'label.month_total' => 'Month total',
 'label.today' => 'Today',
-'label.total_hours' => 'Total hours',
-'label.total_cost' => 'Total cost',
 'label.view' => 'View',
 'label.edit' => 'Edit',
 'label.delete' => 'Delete',
 'label.configure' => 'Configure',
 'label.select_all' => 'Select all',
 'label.select_none' => 'Deselect all',
+'label.day_view' => 'Day view',
+'label.week_view' => 'Week view',
 'label.id' => 'ID',
 'label.language' => 'Language',
 'label.decimal_mark' => 'Decimal mark',
@@ -185,6 +191,9 @@ $i18n_key_words = array(
 'label.role_comanager' => '(co-manager)',
 'label.role_admin' => '(administrator)',
 'label.page' => 'Page',
+'label.condition' => 'Condition',
+'label.yes' => 'yes',
+'label.no' => 'no',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Custom fields',
 'label.monthly_quotas' => 'Monthly quotas',
@@ -193,17 +202,22 @@ $i18n_key_words = array(
 'label.type_text' => 'text',
 'label.required' => 'Required',
 'label.fav_report' => 'Favorite report',
-'label.cron_schedule' => 'Cron schedule',
+'label.schedule' => 'Schedule',
 'label.what_is_it' => 'What is it?',
 'label.expense' => 'Expense',
 'label.quantity' => 'Quantity',
+'label.paid_status' => 'Paid status',
+'label.paid' => 'Paid',
+'label.mark_paid' => 'Mark paid',
+'label.week_note' => 'Week note',
+'label.week_list' => 'Week list',
 
 // Form titles.
 'title.login' => 'Login',
-'title.teams' => 'Teams',
-'title.create_team' => 'Creating Team',
-'title.edit_team' => 'Editing Team',
-'title.delete_team' => 'Deleting Team',
+'title.groups' => 'Groups',
+'title.create_group' => 'Creating Group',
+'title.edit_group' => 'Editing Group',
+'title.delete_group' => 'Deleting Group',
 'title.reset_password' => 'Resetting Password',
 'title.change_password' => 'Changing Password',
 'title.time' => 'Time',
@@ -234,6 +248,10 @@ $i18n_key_words = array(
 'title.add_user' => 'Adding User',
 'title.edit_user' => 'Editing User',
 'title.delete_user' => 'Deleting User',
+'title.roles' => 'Roles',
+'title.add_role' => 'Adding Role',
+'title.edit_role' => 'Editing Role',
+'title.delete_role' => 'Deleting Role',
 'title.clients' => 'Clients',
 'title.add_client' => 'Adding Client',
 'title.edit_client' => 'Editing Client',
@@ -247,10 +265,11 @@ $i18n_key_words = array(
 'title.edit_notification' => 'Editing Notification',
 'title.delete_notification' => 'Deleting Notification',
 'title.monthly_quotas' => 'Monthly Quotas',
-'title.export' => 'Exporting Team Data',
-'title.import' => 'Importing Team Data',
+'title.export' => 'Exporting Group Data',
+'title.import' => 'Importing Group Data',
 'title.options' => 'Options',
 'title.profile' => 'Profile',
+'title.group' => 'Group Settings',
 'title.cf_custom_fields' => 'Custom Fields',
 'title.cf_add_custom_field' => 'Adding Custom Field',
 'title.cf_edit_custom_field' => 'Editing Custom Field',
@@ -260,20 +279,27 @@ $i18n_key_words = array(
 'title.cf_edit_dropdown_option' => 'Editing Option',
 'title.cf_delete_dropdown_option' => 'Deleting Option',
 // NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
-// It is also a name for the Locking plugin on the Team profile page.
+// It is also a name for the Locking plugin on the group settings page.
 'title.locking' => 'Locking',
+'title.week_view' => 'Week View',
+'title.swap_roles' => 'Swapping Roles',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
 'dropdown.all' => '--- all ---',
 'dropdown.no' => '--- no ---',
-// NOTE TO TRANSLATORS: dropdown.this_day does not necessarily means "today". It means a specific ("this") day selected on calendar. See Charts.
-'dropdown.this_day' => 'this day',
-'dropdown.this_week' => 'this week',
-'dropdown.last_week' => 'last week',
-'dropdown.this_month' => 'this month',
-'dropdown.last_month' => 'last month',
-'dropdown.this_year' => 'this year',
+'dropdown.current_day' => 'today',
+'dropdown.previous_day' => 'yesterday',
+'dropdown.selected_day' => 'day',
+'dropdown.current_week' => 'this week',
+'dropdown.previous_week' => 'previous week',
+'dropdown.selected_week' => 'week',
+'dropdown.current_month' => 'this month',
+'dropdown.previous_month' => 'previous month',
+'dropdown.selected_month' => 'month',
+'dropdown.current_year' => 'this year',
+'dropdown.previous_year' => 'previous year',
+'dropdown.selected_year' => 'year',
 'dropdown.all_time' => 'all time',
 'dropdown.projects' => 'projects',
 'dropdown.tasks' => 'tasks',
@@ -282,8 +308,10 @@ $i18n_key_words = array(
 'dropdown.select_invoice' => '--- select invoice ---',
 'dropdown.status_active' => 'active',
 'dropdown.status_inactive' => 'inactive',
-'dropdown.delete'=>'delete',
-'dropdown.do_not_delete'=>'do not delete',
+'dropdown.delete' => 'delete',
+'dropdown.do_not_delete' => 'do not delete',
+'dropdown.paid' => 'paid',
+'dropdown.not_paid' => 'not paid',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases
@@ -292,12 +320,12 @@ $i18n_key_words = array(
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Forgot password?',
-'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
+'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Password reset request sent by email.',
 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
-'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Type new password and click on Save.',
@@ -312,10 +340,12 @@ $i18n_key_words = array(
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'This record was saved with only start time. It is not an error.',
 
+// Week view form. See example at https://timetracker.anuko.com/week.php.
+'form.week.new_entry' => 'New entry',
+
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Save as favorite',
 'form.reports.confirm_delete' => 'Are you sure you want to delete this favorite report?',
-'form.reports.include_records' => 'Include records',
 'form.reports.include_billable' => 'billable',
 'form.reports.include_not_billable' => 'not billable',
 'form.reports.include_invoiced' => 'invoiced',
@@ -335,13 +365,17 @@ $i18n_key_words = array(
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Export',
+'form.report.assign_to_invoice' => 'Assign to invoice',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
 'form.invoice.number' => 'Invoice number',
 'form.invoice.person' => 'Person',
+
+// Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
 'form.invoice.invoice_to_delete' => 'Invoice to delete',
 'form.invoice.invoice_entries' => 'Invoice entries',
+'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
 'form.charts.interval' => 'Interval',
@@ -365,59 +399,100 @@ $i18n_key_words = array(
 'form.users.rate' => 'Rate',
 'form.users.default_rate' => 'Default hourly rate',
 
-// Client delete form. See example at https://timetracker.anuko.com/client_delete.php
-'form.client.client_to_delete' => 'Client to delete',
-'form.client.client_entries' => 'Client entries',
+// Editing User form. See example at https://timetracker.anuko.com/user_edit.php
+'form.user_edit.swap_roles' => 'Swap roles',
+
+ // Roles form. See example at https://timetracker.anuko.com/roles.php
+'form.roles.active_roles' => 'Active Roles',
+'form.roles.inactive_roles' => 'Inactive Roles',
+'form.roles.rank' => 'Rank',
+'form.roles.rights' => 'Rights',
+'form.roles.assigned' => 'Assigned',
+'form.roles.not_assigned' => 'Not assigned',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Active Clients',
 'form.clients.inactive_clients' => 'Inactive Clients',
 
-// Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
-'form.export.hint' => 'You can export all team data into an xml file. It could be useful if you are migrating data to your own server.',
+// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
+'form.client.client_to_delete' => 'Client to delete',
+'form.client.client_entries' => 'Client entries',
+
+// Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
+'form.export.hint' => 'You can export all group data into an xml file. It could be useful if you are migrating data to your own server.',
 'form.export.compression' => 'Compression',
 'form.export.compression_none' => 'none',
 'form.export.compression_bzip' => 'bzip',
 
-// Strings for Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-'form.import.hint' => 'Import team data from an xml file.',
+// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+'form.import.hint' => 'Import group data from an xml file.',
 'form.import.file' => 'Select file',
 'form.import.success' => 'Import completed successfully.',
 
-// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' =>  'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+// Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
+'form.groups.hint' => 'Create a new group by creating a new group manager account.<br>You can also import group data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
 
-// Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-'form.profile.12_hours' => '12 hours',
-'form.profile.24_hours' => '24 hours',
-'form.profile.tracking_mode' => 'Tracking mode',
-'form.profile.mode_time' => 'time',
-'form.profile.mode_projects' => 'projects',
-'form.profile.mode_projects_and_tasks' => 'projects and tasks',
-'form.profile.record_type' => 'Record type',
-'form.profile.uncompleted_indicators' => 'Uncompleted indicators',
-'form.profile.uncompleted_indicators_none' => 'do not show',
-'form.profile.uncompleted_indicators_show' => 'show',
-'form.profile.type_all' => 'all',
-'form.profile.type_start_finish' => 'start and finish',
-'form.profile.type_duration' => 'duration',
-'form.profile.plugins' => 'Plugins',
+// Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
+'form.group_edit.12_hours' => '12 hours',
+'form.group_edit.24_hours' => '24 hours',
+'form.group_edit.show_holidays' => 'Show holidays',
+'form.group_edit.tracking_mode' => 'Tracking mode',
+'form.group_edit.mode_time' => 'time',
+'form.group_edit.mode_projects' => 'projects',
+'form.group_edit.mode_projects_and_tasks' => 'projects and tasks',
+'form.group_edit.record_type' => 'Record type',
+'form.group_edit.type_all' => 'all',
+'form.group_edit.type_start_finish' => 'start and finish',
+'form.group_edit.type_duration' => 'duration',
+'form.group_edit.punch_mode' => 'Punch mode',
+'form.group_edit.allow_overlap' => 'Allow overlap',
+'form.group_edit.future_entries' => 'Future entries',
+'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
+'form.group_edit.allow_ip' => 'Allow IP',
+'form.group_edit.plugins' => 'Plugins',
+
+// Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
+'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'From',
 'form.mail.to' => 'To',
-'form.mail.cc' => 'Cc',
-'form.mail.subject' => 'Subject',
 'form.mail.report_subject' => 'Time Tracker Report',
 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 'form.mail.report_sent' => 'Report sent.',
 'form.mail.invoice_sent' => 'Invoice sent.',
 
-// Quotas configuration form.
+// Quotas configuration form. See example at https://timetracker.anuko.com/quotas.php after enabling Monthly quotas plugin.
 'form.quota.year' => 'Year',
 'form.quota.month' => 'Month',
 'form.quota.quota' => 'Quota',
-'form.quota.workday_hours' => 'Hours in a work day',
+'form.quota.workday_hours' => 'Hours in work day',
 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 
+// Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
+'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
+'form.swap.swap_with' => 'Swap roles with',
+
+// Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
+'role.user.label' => 'User',
+'role.user.low_case_label' => 'user',
+'role.user.description' => 'A regular member without management rights.',
+'role.client.label' => 'Client',
+'role.client.low_case_label' => 'client',
+'role.client.description' => 'A client can view its own reports, charts, and invoices.',
+'role.supervisor.label' => 'Supervisor',
+'role.supervisor.low_case_label' => 'supervisor',
+'role.supervisor.description' => 'A person with a small set of management rights.',
+'role.comanager.label' => 'Co-manager',
+'role.comanager.low_case_label' => 'co-manager',
+'role.comanager.description' => 'A person with a big set of management functions.',
+'role.manager.label' => 'Manager',
+'role.manager.low_case_label' => 'manager',
+'role.manager.description' => 'Group manager. Can do most of things for a group.',
+'role.top_manager.label' => 'Top manager',
+'role.top_manager.low_case_label' => 'top manager',
+'role.top_manager.description' => 'Top group manager. Can do everything in a tree of groups.',
+'role.admin.label' => 'Administrator',
+'role.admin.low_case_label' => 'administrator',
+'role.admin.description' => 'Site adminsitrator.',
 );

@@ -29,7 +29,7 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
-$i18n_language = 'Polski';
+$i18n_language = 'Polish (Polski)';
 $i18n_months = array('Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień');
 $i18n_weekdays = array('Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota');
 $i18n_weekdays_short = array('Nd', 'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob');
@@ -38,14 +38,17 @@ $i18n_holidays = array('01/01', '01/05', '04/05', '04/06', '05/01', '05/03', '05
 
 $i18n_key_words = array(
 
-// Menus - short selection strings that are displayed on the top of application web pages.
+// Menus - short selection strings that are displayed on top of application web pages.
 // Example: https://timetracker.anuko.com (black menu on top).
 'menu.login' => 'Zaloguj',
 'menu.logout' => 'Wyloguj',
 'menu.forum' => 'Forum',
 'menu.help' => 'Pomoc',
-'menu.create_team' => 'Stwórz zespół',
+// TODO: translate the following.
+// 'menu.create_group' => 'Create Group',
 'menu.profile' => 'Profil',
+// TODO: translate the following.
+// 'menu.group' => 'Group',
 'menu.time' => 'Czas',
 'menu.expenses' => 'Wydatki',
 'menu.reports' => 'Raporty',
@@ -53,17 +56,18 @@ $i18n_key_words = array(
 'menu.projects' => 'Projekty',
 'menu.tasks' => 'Zadania',
 'menu.users' => 'Użytkownicy',
-'menu.teams' => 'Zespoły',
+// TODO: translate the following.
+// 'menu.groups' => 'Groups',
 'menu.export' => 'Eksport',
 'menu.clients' => 'Klienci',
 'menu.options' => 'Opcje',
 
 // Footer - strings on the bottom of most pages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 'footer.credits' => 'Twórcy',
 'footer.license' => 'Licencja',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
                                      // This is a link to a webpage that describes how to contribute to the project.
 
@@ -71,6 +75,8 @@ $i18n_key_words = array(
 'error.access_denied' => 'Odmowa dostępu.',
 'error.sys' => 'Błąd systemu.',
 'error.db' => 'Błąd bazy danych.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Niepoprawne dane: "{0}".',
 'error.empty' => 'Pole "{0}" jest puste.',
 'error.not_equal' => 'Wartość z pola "{0}" jest inna niż wartość z pola "{1}".',
@@ -79,17 +85,23 @@ $i18n_key_words = array(
 'error.task' => 'Wybierz zadanie.',
 'error.client' => 'Wybierz klienta.',
 'error.report' => 'Wybierz raport.',
+// TODO: translate the following.
+// 'error.record' => 'Select record.',
 'error.auth' => 'Błędny login lub hasło.',
 'error.user_exists' => 'Użytkownik o takiej nazwie już istnieje.',
+// TODO: translate the following.
+// 'error.object_exists' => 'Object with this name already exists.',
 'error.project_exists' => 'Projekt o takiej nazwie już istnieje.',
 'error.task_exists' => 'Zadanie o takiej nazwie już istnieje.',
 'error.client_exists' => 'Klient o takiej nazwie już istnieje.',
 'error.invoice_exists' => 'Faktura o tym numerze już istnieje.',
+// TODO: translate the following.
+// 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Brak przedmiotów do faktury.',
 'error.no_login' => 'Użytkownik o takiej nazwie nie istnieje.',
-'error.no_teams' => 'Twoja baza danych jest pusta. Zaloguj się jako administrator i stwórz nowy zespół.',
+'error.no_groups' => 'Twoja baza danych jest pusta. Zaloguj się jako administrator i stwórz nowy zespół.', // TODO: replace "team" with "group".
 'error.upload' => 'Błąd podczas wysyłania pliku.',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Błąd podczas wysyłania wiadomości e-mail.',
 'error.no_email' => 'Żaden adres e-mail nie jest skojarzony z tym loginem.',
@@ -105,25 +117,20 @@ $i18n_key_words = array(
 'button.copy' => 'Kopiuj',
 'button.cancel' => 'Anuluj',
 'button.submit' => 'Zatwierdź',
-'button.add_user' => 'Dodaj użytkownika',
-'button.add_project' => 'Dodaj projekt',
-'button.add_task' => 'Dodaj zadanie',
-'button.add_client' => 'Dodaj klienta',
-'button.add_invoice' => 'Dodaj fakturę',
-'button.add_option' => 'Dodaj opcję',
 'button.add' => 'Dodaj',
+'button.delete' => 'Usuń',
 'button.generate' => 'Wygeneruj',
 'button.reset_password' => 'Resetuj hasło',
 'button.send' => 'Wyślij',
 'button.send_by_email' => 'Wyślij e-mail',
-'button.create_team' => 'Stwórz zespół',
-'button.export' => 'Eksportuj zespół',
-'button.import' => 'Importuj zespół',
+'button.create_group' => 'Stwórz zespół', // TODO: replace "team" with "group".
+'button.export' => 'Eksportuj zespół', // TODO: replace "team" with "group".
+'button.import' => 'Importuj zespół', // TODO: replace "team" with "group".
 'button.close' => 'Zamknij',
 'button.stop' => 'Zatrzymaj',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-'label.team_name' => 'Nazwa zespołu',
+'label.group_name' => 'Nazwa zespołu',  // TODO: replace "team" with "group".
 'label.address' => 'Adres',
 'label.currency' => 'Waluta',
 'label.manager_name' => 'Nazwa managera',
@@ -134,11 +141,17 @@ $i18n_key_words = array(
 'label.password' => 'Hasło',
 'label.confirm_password' => 'Potwierdź hasło',
 'label.email' => 'E-mail',
+// TODO: translate the following.
+// 'label.cc' => 'Cc',
+// 'label.bcc' => 'Bcc',
+'label.subject' => 'Temat',
 'label.date' => 'Data',
 'label.start_date' => 'Data początkowa',
 'label.end_date' => 'Data końcowa',
 'label.user' => 'Użytkownik',
 'label.users' => 'Użytkownicy',
+// TODO: translate the following.
+// 'label.roles' => 'Roles',
 'label.client' => 'Klient',
 'label.clients' => 'Klienci',
 'label.option' => 'Opcja',
@@ -152,21 +165,26 @@ $i18n_key_words = array(
 'label.finish' => 'Koniec',
 'label.duration' => 'Czas trwania',
 'label.note' => 'Uwagi',
+// TODO: translate the following.
+// 'label.notes' => 'Notes',
 'label.item' => 'Pozycja',
 'label.cost' => 'Koszt',
+// TODO: translate the following.
+// 'label.ip' => 'IP',
 'label.day_total' => 'Dziś',
 'label.week_total' => 'W tym tygodniu',
 // TODO: translate the following.
 // 'label.month_total' => 'Month total',
 'label.today' => 'Dziś',
-'label.total_hours' => 'Całkowita liczba godzin',
-'label.total_cost' => 'Koszt całkowity',
 'label.view' => 'Widok',
 'label.edit' => 'Edycja',
 'label.delete' => 'Usuń',
 'label.configure' => 'Konfiguruj',
 'label.select_all' => 'Zaznacz wszystko',
 'label.select_none' => 'Odznacz wszystko',
+// TODO: translate the following.
+// 'label.day_view' => 'Day view',
+// 'label.week_view' => 'Week view',
 'label.id' => 'ID',
 'label.language' => 'Język',
 'label.decimal_mark' => 'Znak dziesiętny',
@@ -188,8 +206,11 @@ $i18n_key_words = array(
 'label.role_manager' => '(Manager)',
 'label.role_comanager' => '(Co-manager)',
 'label.role_admin' => '(Administrator)',
-// Translate the following string.
+// TODO: translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
+// 'label.yes' => 'yes',
+// 'label.no' => 'no',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Niestandardowe pola',
 // Translate the following.
@@ -199,15 +220,22 @@ $i18n_key_words = array(
 'label.type_text' => 'tekst',
 'label.required' => 'Wymagane',
 'label.fav_report' => 'Ulubiony raport',
-'label.cron_schedule' => 'Harmonogram crona',
+'label.schedule' => 'Harmonogram',
 'label.what_is_it' => 'Co to jest?',
+// 'label.expense' => 'Expense',
+// 'label.quantity' => 'Quantity',
+// 'label.paid_status' => 'Paid status',
+// 'label.paid' => 'Paid',
+// 'label.mark_paid' => 'Mark paid',
+// 'label.week_note' => 'Week note',
+// 'label.week_list' => 'Week list',
 
 // Form titles.
 'title.login' => 'Logowanie',
-'title.teams' => 'Zespoły',
-'title.create_team' => 'Zakładanie zespołu',
-'title.edit_team' => 'Edytowanie zespołu',
-'title.delete_team' => 'Usuwanie zespołu',
+'title.groups' => 'Zespoły', // TODO: change "teams" to "groups".
+'title.create_group' => 'Zakładanie zespołu', // TODO: change "team" to "group".
+'title.edit_group' => 'Edytowanie zespołu', // TODO: change "team" to "group".
+'title.delete_group' => 'Usuwanie zespołu', // TODO: change "team" to "group".
 'title.reset_password' => 'Resetowanie hasła',
 'title.change_password' => 'Zmiana hasła',
 'title.time' => 'Wybrana data',
@@ -234,6 +262,11 @@ $i18n_key_words = array(
 'title.add_user' => 'Dodawanie użytkownika',
 'title.edit_user' => 'Edytowanie użytkownika',
 'title.delete_user' => 'Usuwanie użytkownika',
+// TODO: translate the following.
+// 'title.roles' => 'Roles',
+// 'title.add_role' => 'Adding Role',
+// 'title.edit_role' => 'Editing Role',
+// 'title.delete_role' => 'Deleting Role',
 'title.clients' => 'Klienci',
 'title.add_client' => 'Dodawanie klienta',
 'title.edit_client' => 'Edytowanie klienta',
@@ -247,10 +280,12 @@ $i18n_key_words = array(
 'title.edit_notification' => 'Edytowanie powiadomienia',
 'title.delete_notification' => 'Usuwanie powiadomienia',
 // 'title.monthly_quotas' => 'Monthly Quotas',
-'title.export' => 'Eksport danych zespołu',
-'title.import' => 'Import danych zespołu',
+'title.export' => 'Eksport danych zespołu', // TODO: replace "team" with "group".
+'title.import' => 'Import danych zespołu', // TODO: replace "team" with "group".
 'title.options' => 'Opcje',
 'title.profile' => 'Profil',
+// TODO: translate the following.
+// 'title.group' => 'Group Settings',
 'title.cf_custom_fields' => 'Pola niestandardowe',
 'title.cf_add_custom_field' => 'Dodawanie pola niestandardowego',
 'title.cf_edit_custom_field' => 'Edytowanie pola niestandardowego',
@@ -260,21 +295,30 @@ $i18n_key_words = array(
 'title.cf_edit_dropdown_option' => 'Edytowanie opcji',
 'title.cf_delete_dropdown_option' => 'Usuwanie opcji',
 // NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
-// It is also a name for the Locking plugin on the Team profile page.
-// TODO: Translate the following:
+// It is also a name for the Locking plugin on the group settings page.
+// TODO: translate the following.
 // 'title.locking' => 'Locking',
+// 'title.week_view' => 'Week View',
+// 'title.swap_roles' => 'Swapping Roles',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
 'dropdown.all' => '--- wszystkie ---',
 'dropdown.no' => '--- żaden ---',
-// NOTE TO TRANSLATORS: dropdown.this_day does not necessarily means "today". It means a specific ("this") day selected on calendar. See Charts.
-'dropdown.this_day' => 'wybrany dzień',
-'dropdown.this_week' => 'ten tydzień',
-'dropdown.last_week' => 'poprzedni tydzień',
-'dropdown.this_month' => 'ten miesiąc',
-'dropdown.last_month' => 'poprzedni miesiąc',
-'dropdown.this_year' => 'ten rok',
+// TODO: translate the following.
+// 'dropdown.current_day' => 'today',
+// 'dropdown.previous_day' => 'yesterday',
+'dropdown.selected_day' => 'dzień',
+'dropdown.current_week' => 'ten tydzień',
+'dropdown.previous_week' => 'poprzedni tydzień',
+'dropdown.selected_week' => 'tydzień',
+'dropdown.current_month' => 'ten miesiąc',
+'dropdown.previous_month' => 'poprzedni miesiąc',
+'dropdown.selected_month' => 'miesiąc',
+'dropdown.current_year' => 'ten rok',
+// TODO: translate the following.
+// 'dropdown.previous_year' => 'previous year',
+'dropdown.selected_year' => 'rok',
 'dropdown.all_time' => 'od początku',
 'dropdown.projects' => 'projekty',
 'dropdown.tasks' => 'zadania',
@@ -283,8 +327,11 @@ $i18n_key_words = array(
 'dropdown.select_invoice' => '--- wybierz fakturę ---',
 'dropdown.status_active' => 'aktywny',
 'dropdown.status_inactive' => 'nieaktywny',
-'dropdown.delete'=>'usuń',
-'dropdown.do_not_delete'=>'nie usuwaj',
+'dropdown.delete' => 'usuń',
+'dropdown.do_not_delete' => 'nie usuwaj',
+// TODO: translate the following.
+// 'dropdown.paid' => 'paid',
+// 'dropdown.not_paid' => 'not paid',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases
@@ -292,13 +339,16 @@ $i18n_key_words = array(
 // Strings that are used on multiple unrelated forms should be placed in shared sections such as label.<stringname>, etc.
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
-'form.login.forgot_password' =>  'Nie pamiętasz hasła?',
-'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> jest prostym, łatwym w użyciu, otwartoźródłowym systemem śledzenia czasu.',
+'form.login.forgot_password' => 'Nie pamiętasz hasła?',
+'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> jest prostym, łatwym w użyciu, otwartoźródłowym systemem śledzenia czasu.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Instrukcje zmiany hasła zostały wysłane na adres e-mail połączony z kontem.',
 'form.reset_password.email_subject' => 'Anuko Time Tracker - żądanie zmiany hasła',
-'form.reset_password.email_body' => "Drogi Użytkowniku,\n\nktoś, prawdopodobnie Ty, poprosił o zmianę hasła w aplikacji Anuko Time Tracker. Aby ustawić nowe hasło, proszę kliknąć na poniższy link lub go skopiować i otworzyć w oknie przeglądarki WWW.\n\n%s\n\nJeśli to nie Ty poprosiłeś o zmianę hasła, zignoruj tą wiadomość.\n\nAnuko Time Tracker jest prostym, łatwym w użyciu, otwartoźródłowym systemem do śledzenia czasu. Odwiedź https://www.anuko.com aby uzyskać więcej informacji.\n\n",
+// TODO: English string has changed. "from IP" added. Re-translate the beginning.
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// "IP %s" probably sounds awkward.
+'form.reset_password.email_body' => "Drogi Użytkowniku,\n\nktoś, IP %s, poprosił o zmianę hasła w aplikacji Anuko Time Tracker. Aby ustawić nowe hasło, proszę kliknąć na poniższy link lub go skopiować i otworzyć w oknie przeglądarki WWW.\n\n%s\n\nJeśli to nie Ty poprosiłeś o zmianę hasła, zignoruj tą wiadomość.\n\nAnuko Time Tracker jest prostym, łatwym w użyciu, otwartoźródłowym systemem do śledzenia czasu. Odwiedź https://www.anuko.com aby uzyskać więcej informacji.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Wpisz nowe hasło i kliknij Zapisz.',
@@ -314,10 +364,13 @@ $i18n_key_words = array(
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Ten wpis ma określony jedynie czas rozpoczęcia. To nie jest błąd.',
 
+// Week view form. See example at https://timetracker.anuko.com/week.php.
+// TODO: translate the following.
+// 'form.week.new_entry' => 'New entry',
+
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Zapisz jako ulubiony',
 'form.reports.confirm_delete' => 'Czy na pewno chcesz usunąć ten ulubiony raport?',
-'form.reports.include_records' => 'Zawrzyj wpisy',
 'form.reports.include_billable' => 'płatne',
 'form.reports.include_not_billable' => 'bezpłatne',
 'form.reports.include_invoiced' => 'fakturowane',
@@ -337,13 +390,19 @@ $i18n_key_words = array(
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Eksport',
+// TODO: translate the following.
+// 'form.report.assign_to_invoice' => 'Assign to invoice',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
 'form.invoice.number' => 'Numer faktury',
 'form.invoice.person' => 'Osoba',
+
+// Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
 'form.invoice.invoice_to_delete' => 'Faktura do usunięcia',
 'form.invoice.invoice_entries' => 'Wpisy dot. faktury',
+// TODO: translate the following.
+// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.phpp
 'form.charts.interval' => 'Okres',
@@ -368,56 +427,110 @@ $i18n_key_words = array(
 'form.users.rate' => 'Stawka',
 'form.users.default_rate' => 'Domyślna stawka godzinowa',
 
-// Client delete form. See example at https://timetracker.anuko.com/client_delete.php.
-'form.client.client_to_delete' => 'Klient do usunięcia',
-'form.client.client_entries' => 'Wpisy dot. klienta',
+// Editing User form. See example at https://timetracker.anuko.com/user_edit.php
+// TODO: translate the following.
+// 'form.user_edit.swap_roles' => 'Swap roles',
+
+// Roles form. See example at https://timetracker.anuko.com/roles.php
+// TODO: translate the following.
+// 'form.roles.active_roles' => 'Active Roles',
+// 'form.roles.inactive_roles' => 'Inactive Roles',
+// 'form.roles.rank' => 'Rank',
+// 'form.roles.rights' => 'Rights',
+// 'form.roles.assigned' => 'Assigned',
+// 'form.roles.not_assigned' => 'Not assigned',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.phpp
 'form.clients.active_clients' => 'Aktywni klienci',
 'form.clients.inactive_clients' => 'Nieaktywni klienci',
 
-// Strings for Exporting Team Data form. See example at https://timetracker.anuko.com/export.php
+// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php.
+'form.client.client_to_delete' => 'Klient do usunięcia',
+'form.client.client_entries' => 'Wpisy dot. klienta',
+
+// Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
+// TODO: replace "team" with "group" in the string below.
 'form.export.hint' => 'Możesz wyeksportować wszystkie dane zespołu do pliku xml. Przydatne przy migracji danych na własny serwer.',
 'form.export.compression' => 'Kompresja',
 'form.export.compression_none' => 'brak',
 'form.export.compression_bzip' => 'bzip',
 
-// Strings for Importing Team Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-'form.import.hint' => 'Import danych zespołu z pliku xml.',
+// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+'form.import.hint' => 'Import danych zespołu z pliku xml.', // TODO: replace "team" with "group".
 'form.import.file' => 'Wybierz plik',
 'form.import.success' => 'Import zakończony powodzeniem.',
 
-// Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' =>  'Załóż nowy zespół najpierw tworząc konto managera.<br>Możesz także zaimportować plik xml z danymi zespołu z innego serwera Anuko Time Tracker (nazwy loginów nie mogą się powtarzać).',
+// Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
+// TODO: replace "team" with "group" in the string below.
+'form.groups.hint' => 'Załóż nowy zespół najpierw tworząc konto managera.<br>Możesz także zaimportować plik xml z danymi zespołu z innego serwera Anuko Time Tracker (nazwy loginów nie mogą się powtarzać).',
 
-// Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
-'form.profile.12_hours' => '12 godzin',
-'form.profile.24_hours' => '24 godziny',
-'form.profile.tracking_mode' => 'Tryb śledzenia',
-'form.profile.mode_time' => 'czas',
-'form.profile.mode_projects' => 'projekty',
-'form.profile.mode_projects_and_tasks' => 'projekty i zadania',
-'form.profile.record_type' => 'Rejestrowanie czasu',
-'form.profile.type_all' => 'wszystko',
-'form.profile.type_start_finish' => 'początek i koniec',
-'form.profile.type_duration' => 'czas trwania',
-'form.profile.plugins' => 'Dodatkowe moduły',
+// Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
+'form.group_edit.12_hours' => '12 godzin',
+'form.group_edit.24_hours' => '24 godziny',
+// TODO: translate the following.
+// 'form.group_edit.show_holidays' => 'Show holidays',
+'form.group_edit.tracking_mode' => 'Tryb śledzenia',
+'form.group_edit.mode_time' => 'czas',
+'form.group_edit.mode_projects' => 'projekty',
+'form.group_edit.mode_projects_and_tasks' => 'projekty i zadania',
+'form.group_edit.record_type' => 'Rejestrowanie czasu',
+'form.group_edit.type_all' => 'wszystko',
+'form.group_edit.type_start_finish' => 'początek i koniec',
+'form.group_edit.type_duration' => 'czas trwania',
+// TODO: translate the following.
+// 'form.group_edit.punch_mode' => 'Punch mode',
+// 'form.group_edit.allow_overlap' => 'Allow overlap',
+// 'form.group_edit.future_entries' => 'Future entries',
+// 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.group_edit.allow_ip' => 'Allow IP',
+'form.group_edit.plugins' => 'Dodatkowe moduły',
+
+// Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
+// TODO: translate the following.
+// 'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'Od',
 'form.mail.to' => 'Do',
-'form.mail.cc' => 'DW',
-'form.mail.subject' => 'Temat',
 'form.mail.report_subject' => 'Raport Time Tracker',
 'form.mail.footer' => 'Anuko Time Tracker jest prostym, łatwym w użyciu, otwartoźródłowym<br>systemem śledzenia czasu. Odwiedź <a href="https://www.anuko.com">www.anuko.com</a>, aby uzyskać więcej informacji.',
 'form.mail.report_sent' => 'Wysłano raport',
 'form.mail.invoice_sent' => 'Wysłano fakturę',
 
-// Quotas configuration form.
+// Quotas configuration form. See example at https://timetracker.anuko.com/quotas.php after enabling Monthly quotas plugin.
 // TODO: translate the following.
 // 'form.quota.year' => 'Year',
 // 'form.quota.month' => 'Month',
 // 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in a work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+
+// Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
+// TODO: translate the following.
+// 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
+// 'form.swap.swap_with' => 'Swap roles with',
+
+// Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
+// TODO: translate the following.
+// 'role.user.label' => 'User',
+// 'role.user.low_case_label' => 'user',
+// 'role.user.description' => 'A regular member without management rights.',
+// 'role.client.label' => 'Client',
+// 'role.client.low_case_label' => 'client',
+// 'role.client.description' => 'A client can view its own reports, charts, and invoices.',
+// 'role.supervisor.label' => 'Supervisor',
+// 'role.supervisor.low_case_label' => 'supervisor',
+// 'role.supervisor.description' => 'A person with a small set of management rights.',
+// 'role.comanager.label' => 'Co-manager',
+// 'role.comanager.low_case_label' => 'co-manager',
+// 'role.comanager.description' => 'A person with a big set of management functions.',
+// 'role.manager.label' => 'Manager',
+// 'role.manager.low_case_label' => 'manager',
+// 'role.manager.description' => 'Group manager. Can do most of things for a group.',
+// 'role.top_manager.label' => 'Top manager',
+// 'role.top_manager.low_case_label' => 'top manager',
+// 'role.top_manager.description' => 'Top group manager. Can do everything in a tree of groups.',
+// 'role.admin.label' => 'Administrator',
+// 'role.admin.low_case_label' => 'administrator',
+// 'role.admin.description' => 'Site adminsitrator.',
 );

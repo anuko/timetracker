@@ -39,7 +39,11 @@ class ttTimeHelper {
 
   // isHoliday determines if $date falls on a holiday.
   static function isHoliday($date) {
+    global $user;
     global $i18n;
+
+    if (!$user->show_holidays) return false;
+
     // $date is expected as string in DB_DATEFORMAT.
     $month = date('m', strtotime($date));
     $day = date('d', strtotime($date));
@@ -82,7 +86,7 @@ class ttTimeHelper {
 
   // isValidDuration validates a value as a time duration string (in hours and minutes).
   static function isValidDuration($value) {
-    if (strlen($value)==0 || !isset($value)) return false;
+    if (strlen($value) == 0 || !isset($value)) return false;
 
     if ($value == '24:00' || $value == '2400') return true;
 
@@ -92,59 +96,89 @@ class ttTimeHelper {
     if (preg_match('/^([0-1]{0,1}[0-9]|2[0-4])h?$/', $value )) { // 0, 1 ... 24
       return true;
     }
-    if (preg_match('/^([0-1]{0,1}[0-9]|2[0-3])?[.][0-9]{1,4}h?$/', $value )) { // decimal values like 0.5, 1.25h, ... .. 23.9999h
+
+    global $user;
+    $localizedPattern = '/^([0-1]{0,1}[0-9]|2[0-3])?['.$user->decimal_mark.'][0-9]{1,4}h?$/';
+    if (preg_match($localizedPattern, $value )) { // decimal values like 0.5, 1.25h, ... .. 23.9999h (or with comma)
       return true;
     }
 
     return false;
   }
 
-  // normalizeDuration - converts a valid time duration string to format 00:00.
-  static function normalizeDuration($value) {
-    $time_value = $value;
+  // postedDurationToMinutes - converts a value representing a duration
+  // (usually enetered in a form by a user) to an integer number of minutes.
+  //
+  // Parameters:
+  //   $duration - user entered duration string. Valid strings are:
+  //               3 or 3h - means 3 hours. Note: h and m letters are not localized.
+  //               0.25 or 0.25h or .25 or .25h - means a quarter of hour.
+  //               0,25 or 0,25h or ,25 or ,25h - same as above for users with comma ad decimal mark.
+  //               1:30 - means 1 hour 30 minutes.
+  //               25m - means 25 minutes.
+  //   $max - maximum number of minutes that is valid.
+  //
+  //   At the moment, we have 2 variations of duration types:
+  //   1) A duration within a day, such as in a time entry.
+  //   These are less or equal to 24*60 minutes.
+  //
+  //   2) A duration of a monthly quota, with max value of 31*24*60 minutes.
+  //
+  // This function is generic to be used for both types.
+  //
+  // Returns false if the value cannot be converted.
+  static function postedDurationToMinutes($duration, $max = 1440) {
+    // Handle empty value.
+    if (!isset($duration) || strlen($duration) == 0)
+      return null; // Value is not set. Caller decides whether it is valid or not.
 
-    // If we have a decimal format - convert to time format 00:00.
-    if((strpos($time_value, '.') !== false) || (strpos($time_value, 'h') !== false)) {
-      $val = floatval($time_value);
-      $mins = round($val * 60);
-      $hours = (string)((int)($mins / 60));
-      $mins = (string)($mins % 60);
-      if (strlen($hours) == 1)
-        $hours = '0'.$hours;
-      if (strlen($mins) == 1)
-        $mins = '0' . $mins;
-      return $hours.':'.$mins;
+    // Handle whole hours.
+    if (preg_match('/^\d{1,3}h?$/', $duration )) { // 0 - 999, 0h - 999h
+      $minutes = 60 * trim($duration, 'h');
+      return $minutes > $max ? false : $minutes;
     }
 
-    $time_a = explode(':', $time_value);
-    $res = '';
-
-    // 0-99
-    if ((strlen($time_value) >= 1) && (strlen($time_value) <= 2) && !isset($time_a[1])) {
-      $hours = $time_a[0];
-      if (strlen($hours) == 1)
-        $hours = '0'.$hours;
-       return $hours.':00';
+    // Handle a normalized duration value.
+    if (preg_match('/^\d{1,3}:[0-5][0-9]$/', $duration )) { // 0:00 - 999:59
+      $time_array = explode(':', $duration);
+      $minutes = (int)@$time_array[1] + ((int)@$time_array[0]) * 60;
+      return $minutes > $max ? false : $minutes;
     }
 
-    // 000-2359 (2400)
-    if ((strlen($time_value) >= 3) && (strlen($time_value) <= 4) && !isset($time_a[1])) {
-      if (strlen($time_value)==3) $time_value = '0'.$time_value;
-      $hours = substr($time_value,0,2);
-      if (strlen($hours) == 1)
-        $hours = '0'.$hours;
-      return $hours.':'.substr($time_value,2,2);
+    // Handle localized fractional hours.
+    global $user;
+    $localizedPattern = '/^(\d{1,3})?['.$user->decimal_mark.'][0-9]{1,4}h?$/';
+    if (preg_match($localizedPattern, $duration )) { // decimal values like .5, 1.25h, ... .. 999.9999h (or with comma)
+        if ($user->decimal_mark == ',')
+          $duration = str_replace (',', '.', $duration);
+
+        $minutes = (int)round(60 * floatval($duration));
+        return $minutes > $max ? false : $minutes;
     }
 
-    // 0:00-23:59 (24:00)
-    if ((strlen($time_value) >= 4) && (strlen($time_value) <= 5) && isset($time_a[1])) {
-      $hours = $time_a[0];
-      if (strlen($hours) == 1)
-        $hours = '0'.$hours;
-      return $hours.':'.$time_a[1];
+    // Handle minutes. Some users enter durations like 10m (meaning 10 minutes).
+    if (preg_match('/^\d{1,5}m$/', $duration )) { // 0m - 99999m
+      $minutes = (int) trim($duration, 'm');
+      return $minutes > $max ? false : $minutes;
     }
 
-    return $res;
+    // Everything else is not a valid duration.
+    return false;
+  }
+
+  // minutesToDuration converts an integer number of minutes into duration string.
+  // Formats returned HH:MM, HHH:MM, HH, or HHH.
+  static function minutesToDuration($minutes, $abbreviate = false) {
+    if ($minutes < 0) return false;
+
+    $hours = (string) (int)($minutes / 60);
+    $mins = (string) round(fmod($minutes, 60));
+    if (strlen($mins) == 1)
+      $mins = '0' . $mins;
+    if ($abbreviate && $mins == '00')
+      return $hours;
+
+    return $hours.':'.$mins;
   }
 
   // toMinutes - converts a time string in format 00:00 to a number of minutes.
@@ -153,15 +187,16 @@ class ttTimeHelper {
     return (int)@$time_a[1] + ((int)@$time_a[0]) * 60;
   }
 
-  // toAbsDuration - converts a number of minutes to format 00:00
+  // toAbsDuration - converts a number of minutes to format 0:00
   // even if $minutes is negative.
-  static function toAbsDuration($minutes){
+  static function toAbsDuration($minutes, $abbreviate = false){
     $hours = (string)((int)abs($minutes / 60));
-    $mins = (string)(abs($minutes % 60));
-    if (strlen($hours) == 1)
-      $hours = '0'.$hours;
+    $mins = (string) round(abs(fmod($minutes, 60)));
     if (strlen($mins) == 1)
       $mins = '0' . $mins;
+    if ($abbreviate && $mins == '00')
+      return $hours;
+
     return $hours.':'.$mins;
   }
 
@@ -351,20 +386,25 @@ class ttTimeHelper {
   // insert - inserts a time record into log table. Does not deal with custom fields.
   static function insert($fields)
   {
+    global $user;
     $mdb2 = getConnection();
 
-    $timestamp = isset($fields['timestamp']) ? $fields['timestamp'] : '';
     $user_id = $fields['user_id'];
     $date = $fields['date'];
     $start = $fields['start'];
     $finish = $fields['finish'];
     $duration = $fields['duration'];
+    if ($duration) {
+      $minutes = ttTimeHelper::postedDurationToMinutes($duration);
+      $duration = ttTimeHelper::minutesToDuration($minutes);
+    }
     $client = $fields['client'];
     $project = $fields['project'];
     $task = $fields['task'];
     $invoice = $fields['invoice'];
     $note = $fields['note'];
     $billable = $fields['billable'];
+    $paid = $fields['paid'];
     if (array_key_exists('status', $fields)) { // Key exists and may be NULL during migration of data.
       $status_f = ', status';
       $status_v = ', '.$mdb2->quote($fields['status']);
@@ -375,20 +415,15 @@ class ttTimeHelper {
       $finish = ttTimeHelper::to24HourFormat($finish);
       if ('00:00' == $finish) $finish = '24:00';
     }
-    $duration = ttTimeHelper::normalizeDuration($duration);
 
-    if (!$timestamp) {
-      $timestamp = date('YmdHis'); //yyyymmddhhmmss
-      // TODO: this timestamp could be illegal if we hit inside DST switch deadzone, such as '2016-03-13 02:30:00'
-      // Anything between 2am and 3am on DST introduction date will not work if we run on a system with DST on.
-      // We need to address this properly to avoid potential complications.
-    }
+    $created_v = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
 
     if (!$billable) $billable = 0;
+    if (!$paid) $paid = 0;
 
     if ($duration) {
-      $sql = "insert into tt_log (timestamp, user_id, date, duration, client_id, project_id, task_id, invoice_id, comment, billable $status_f) ".
-        "values ('$timestamp', $user_id, ".$mdb2->quote($date).", '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable $status_v)";
+      $sql = "insert into tt_log (user_id, date, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by $status_f) ".
+        "values ($user_id, ".$mdb2->quote($date).", '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v $status_v)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -397,8 +432,8 @@ class ttTimeHelper {
       if ($duration === false) $duration = 0;
       if (!$duration && ttTimeHelper::getUncompleted($user_id)) return false;
 
-      $sql = "insert into tt_log (timestamp, user_id, date, start, duration, client_id, project_id, task_id, invoice_id, comment, billable $status_f) ".
-        "values ('$timestamp', $user_id, ".$mdb2->quote($date).", '$start', '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable $status_v)";
+      $sql = "insert into tt_log (user_id, date, start, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by $status_f) ".
+        "values ($user_id, ".$mdb2->quote($date).", '$start', '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v $status_v)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -411,6 +446,7 @@ class ttTimeHelper {
   // update - updates a record in log table. Does not update its custom fields.
   static function update($fields)
   {
+    global $user;
     $mdb2 = getConnection();
 
     $id = $fields['id'];
@@ -422,20 +458,31 @@ class ttTimeHelper {
     $start = $fields['start'];
     $finish = $fields['finish'];
     $duration = $fields['duration'];
+    if ($duration) {
+      $minutes = ttTimeHelper::postedDurationToMinutes($duration);
+      $duration = ttTimeHelper::minutesToDuration($minutes);
+    }
     $note = $fields['note'];
-    $billable = $fields['billable'];
+
+    $billable_part = '';
+    if ($user->isPluginEnabled('iv')) {
+      $billable_part = $fields['billable'] ? ', billable = 1' : ', billable = 0';
+    }
+    $paid_part = '';
+    if ($user->can('manage_invoices') && $user->isPluginEnabled('ps')) {
+      $paid_part = $fields['paid'] ? ', paid = 1' : ', paid = 0';
+    }
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
 
     $start = ttTimeHelper::to24HourFormat($start);
     $finish = ttTimeHelper::to24HourFormat($finish);
     if ('00:00' == $finish) $finish = '24:00';
-    $duration = ttTimeHelper::normalizeDuration($duration);
-
-    if (!$billable) $billable = 0;
+    
     if ($start) $duration = '';
 
     if ($duration) {
       $sql = "UPDATE tt_log set start = NULL, duration = '$duration', client_id = ".$mdb2->quote($client).", project_id = ".$mdb2->quote($project).", task_id = ".$mdb2->quote($task).", ".
-        "comment = ".$mdb2->quote($note).", billable = $billable, date = '$date' WHERE id = $id";
+        "comment = ".$mdb2->quote($note)."$billable_part $paid_part $modified_part, date = '$date' WHERE id = $id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -448,7 +495,7 @@ class ttTimeHelper {
         return false;
 
       $sql = "UPDATE tt_log SET start = '$start', duration = '$duration', client_id = ".$mdb2->quote($client).", project_id = ".$mdb2->quote($project).", task_id = ".$mdb2->quote($task).", ".
-        "comment = ".$mdb2->quote($note).", billable = $billable, date = '$date' WHERE id = $id";
+        "comment = ".$mdb2->quote($note)."$billable_part $paid_part $modified_part, date = '$date' WHERE id = $id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -492,7 +539,7 @@ class ttTimeHelper {
     $mdb2 = getConnection();
 
     $period = new Period(INTERVAL_THIS_WEEK, $date);
-    $sql = "select sum(time_to_sec(duration)) as sm from tt_log where user_id = $user_id and date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."' and status = 1";
+    $sql = "select sum(time_to_sec(duration)) as sm from tt_log where user_id = $user_id and date >= '".$period->getStartDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."' and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -507,7 +554,7 @@ class ttTimeHelper {
     $mdb2 = getConnection();
 
     $period = new Period(INTERVAL_THIS_MONTH, $date);
-    $sql = "select sum(time_to_sec(duration)) as sm from tt_log where user_id = $user_id and date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."' and status = 1";
+    $sql = "select sum(time_to_sec(duration)) as sm from tt_log where user_id = $user_id and date >= '".$period->getStartDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."' and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -544,8 +591,8 @@ class ttTimeHelper {
   //   $record_id - optional record id we may be editing, excluded from overlap set
   static function overlaps($user_id, $date, $start, $finish, $record_id = null) {
     // Do not bother checking if we allow overlaps.
-    if (defined('ALLOW_OVERLAP') && ALLOW_OVERLAP == true)
-      return false;
+    global $user;
+    if ($user->allow_overlap) return false;
 
     $mdb2 = getConnection();
 
@@ -591,10 +638,10 @@ class ttTimeHelper {
 
     $mdb2 = getConnection();
 
-    $sql = "select l.id as id, l.timestamp as timestamp, TIME_FORMAT(l.start, $sql_time_format) as start,
+    $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,
       TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
       TIME_FORMAT(l.duration, '%k:%i') as duration,
-      p.name as project_name, t.name as task_name, l.comment, l.client_id, l.project_id, l.task_id, l.invoice_id, l.billable, l.date
+      p.name as project_name, t.name as task_name, l.comment, l.client_id, l.project_id, l.task_id, l.invoice_id, l.billable, l.paid, l.date
       from tt_log l
       left join tt_projects p on (p.id = l.project_id)
       left join tt_tasks t on (t.id = l.task_id)
@@ -617,10 +664,10 @@ class ttTimeHelper {
 
     $mdb2 = getConnection();
 
-    $sql = "select l.id, l.timestamp, l.user_id, l.date, TIME_FORMAT(l.start, '%k:%i') as start,
+    $sql = "select l.id, l.user_id, l.date, TIME_FORMAT(l.start, '%k:%i') as start,
       TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), '%k:%i') as finish,
       TIME_FORMAT(l.duration, '%k:%i') as duration,
-      l.client_id, l.project_id, l.task_id, l.invoice_id, l.comment, l.billable, l.status
+      l.client_id, l.project_id, l.task_id, l.invoice_id, l.comment, l.billable, l.paid, l.status
       from tt_log l where l.user_id = $user_id order by l.id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -669,5 +716,4 @@ class ttTimeHelper {
 
     return $result;
   }
-
 }

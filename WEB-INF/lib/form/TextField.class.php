@@ -30,39 +30,33 @@ import('form.FormElement');
 
 class TextField extends FormElement {
 
+  var $title = null; // Control title (ex: to display a tooltip).
+
   function __construct($name)
   {
     $this->class = 'TextField';
     $this->name = $name;
   }
 
-  // TODO: refactoring ongoing down from here.
-	function getHtml() {
-		if (!$this->isEnabled()) {
-			$html = "<input name=\"$this->name\" value=\"".htmlspecialchars($this->getValue())."\" readonly>\n";
-		} else {
-			
-		    if ($this->id=="") $this->id = $this->name;
-		    
-			$html = "\n\t<input type=\"text\"";
-			$html .= " name=\"$this->name\" id=\"$this->id\"";
-			
-			if ($this->size!="")
-			  $html .= " size=\"$this->size\"";
-			  
-			if ($this->style!="")
-			   $html .= " style=\"$this->style\"";
-			  
-			if ($this->max_length!="")
-			   $html .= " maxlength=\"$this->max_length\"";
-			   
-			if ($this->on_change!="")
-			   $html .= " onchange=\"$this->on_change\"";
+  function setTitle($title) { $this->title = $title; }
 
-			$html .= " value=\"".htmlspecialchars($this->getValue())."\"";
-			$html .= ">";
-		}
-		
-		return $html;
-	}
+  function getHtml() {
+    if (empty($this->id)) $this->id = $this->name;
+    $html = "\n\t<input type=\"text\"";
+    $html .= " id=\"$this->id\" name=\"$this->name\"";
+    if (!empty($this->size)) $html .= " size=\"$this->size\"";
+    if (!empty($this->style)) $html .= " style=\"$this->style\"";
+    if (!empty($this->title)) $html .= " title=\"$this->title\"";
+
+    if($this->isEnabled()) {
+      if (!empty($this->max_length)) $html .= " maxlength=\"$this->max_length\"";
+      if (!empty($this->on_change)) $html .= " onchange=\"$this->on_change\"";
+    }
+
+    $html .= " value=\"".htmlspecialchars($this->getValue())."\"";
+
+    if(!$this->isEnabled()) $html .= " readonly";
+    $html .= ">\n";
+    return $html;
+  }
 }

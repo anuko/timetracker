@@ -30,9 +30,13 @@ require_once('initialize.php');
 import('form.Form');
 import('ttPredefinedExpenseHelper');
 
-// Access check.
-if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('ex')) {
+// Access checks.
+if (!ttAccessAllowed('manage_advanced_settings')) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('ex')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 
@@ -44,25 +48,25 @@ if ($request->isPost()) {
 $form = new Form('predefinedExpenseForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'text','maxlength'=>'40','name'=>'cost','style'=>'width: 100px;','value'=>$cl_cost));
-$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
+$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
-  if (!ttValidFloat($cl_cost)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cost'));
+  if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
+  if (!ttValidFloat($cl_cost)) $err->add($i18n->get('error.field'), $i18n->get('label.cost'));
   if ($err->no()) {
     if (ttPredefinedExpenseHelper::insert(array(
-        'team_id' => $user->team_id,
+        'group_id' => $user->group_id,
         'name' => $cl_name,
         'cost' => $cl_cost))) {
         header('Location: predefined_expenses.php');
         exit();
       } else
-        $err->add($i18n->getKey('error.db'));
+        $err->add($i18n->get('error.db'));
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.add_predefined_expense'));
+$smarty->assign('title', $i18n->get('title.add_predefined_expense'));
 $smarty->assign('content_page_name', 'predefined_expense_add.tpl');
 $smarty->display('index.tpl');

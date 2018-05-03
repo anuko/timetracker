@@ -44,8 +44,8 @@ class Auth_db extends Auth {
     $mdb2 = getConnection();
 
     // Try md5 password match first.
-    $sql = "SELECT id FROM tt_users
-      WHERE login = ".$mdb2->quote($login)." AND password = md5(".$mdb2->quote($password).") AND status = 1";
+    $sql = "SELECT id FROM tt_users".
+      " WHERE login = ".$mdb2->quote($login)." AND password = md5(".$mdb2->quote($password).") AND status = 1";
 
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) {
@@ -56,22 +56,25 @@ class Auth_db extends Auth {
     if ($val['id'] > 0) {
       return array('login'=>$login,'id'=>$val['id']);
     } else {
-    	
+
       // If the OLD_PASSWORDS option is defined - set it.
       if (defined('OLD_PASSWORDS') && isTrue(OLD_PASSWORDS)) {
         $sql = "SET SESSION old_passwords = 1";
         $res = $mdb2->query($sql);
         if (is_a($res, 'PEAR_Error')) {
           die($res->getMessage());
-        }	
+        }
       }
 
       // Try legacy password match. This is needed for compatibility with older versions of TT.
       $sql = "SELECT id FROM tt_users
-        WHERE login = ".$mdb2->quote($login)." AND password = password(".$mdb2->quote($password).") AND status = 1";
+        WHERE login = ".$mdb2->quote($login)." AND password = old_password(".$mdb2->quote($password).") AND status = 1";
       $res = $mdb2->query($sql);
       if (is_a($res, 'PEAR_Error')) {
-        die($res->getMessage());
+        return false; // Simply return false for a meaningful error message on screen, see the comment below.
+        // die($res->getMessage()); // old_password() function is removed in MySQL 5.7.5.
+                                    // We are getting a confusing "MDB2 Error: not found" in this case if we die.
+        // TODO: perhaps it's time to simplify things and remove handling of old passwords completely.
       }
       $val = $res->fetchRow();
       if ($val['id'] > 0) {
@@ -81,8 +84,9 @@ class Auth_db extends Auth {
 
     // Special handling for admin@localhost - search for an account with admin role with a matching password.
     if ($login == 'admin@localhost') {
-      $sql = "SELECT id, login FROM tt_users
-        WHERE role = 1024 AND password = md5(".$mdb2->quote($password).") AND status = 1";
+      $sql = "SELECT u.id, u.login FROM tt_users u".
+        " LEFT JOIN tt_roles r on (u.role_id = r.id)".
+        " WHERE r.rank = 1024 AND password = md5(".$mdb2->quote($password).") AND u.status = 1";
       $res = $mdb2->query($sql);
       if (is_a($res, 'PEAR_Error')) {
         die($res->getMessage());

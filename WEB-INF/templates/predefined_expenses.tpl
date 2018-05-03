@@ -2,7 +2,7 @@
 <table cellspacing="0" cellpadding="7" border="0" width="720">
   <tr>
     <td valign="top">
-{if $user->canManageTeam()}
+{if $user->can('manage_advanced_settings')}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr>
           <td class="tableHeader">{$i18n.label.thing_name}</td>
@@ -12,7 +12,7 @@
         </tr>
   {if $predefined_expenses}
     {foreach $predefined_expenses as $predefined_expense}
-        <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$predefined_expense['name']|escape}</td>
           <td>{$predefined_expense['cost']|escape}</td>
           <td><a href="predefined_expense_edit.php?id={$predefined_expense['id']}">{$i18n.label.edit}</a></td>

@@ -30,20 +30,25 @@ require_once('../initialize.php');
 import('form.Form');
 import('ttTeamHelper');
 
-// Access check.
-if (!ttAccessCheck(right_data_entry) || (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode)) {
+// Access checks.
+if (!(ttAccessAllowed('view_own_projects') || ttAccessAllowed('manage_projects'))) {
   header('Location: access_denied.php');
   exit();
 }
+if (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+  header('Location: feature_disabled.php');
+  exit();
+}
+// End of access checks.
 
-if($user->canManageTeam()) {
-  $active_projects = ttTeamHelper::getActiveProjects($user->team_id);
-  $inactive_projects = ttTeamHelper::getInactiveProjects($user->team_id);
+if($user->can('manage_projects')) {
+  $active_projects = ttTeamHelper::getActiveProjects($user->group_id);
+  $inactive_projects = ttTeamHelper::getInactiveProjects($user->group_id);
 } else
   $active_projects = $user->getAssignedProjects();
 
 $smarty->assign('active_projects', $active_projects);
 $smarty->assign('inactive_projects', $inactive_projects);
-$smarty->assign('title', $i18n->getKey('title.projects'));
+$smarty->assign('title', $i18n->get('title.projects'));
 $smarty->assign('content_page_name', 'mobile/projects.tpl');
 $smarty->display('mobile/index.tpl');

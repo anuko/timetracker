@@ -35,6 +35,13 @@ import('form.Form');
 import('form.ActionForm');
 import('ttReportHelper');
 
+// Access checks.
+if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports'))) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
+
 // Check whether TCPDF library is available.
 if (!file_exists('WEB-INF/lib/tcpdf/'))
   die('TCPDF library is not found in WEB-INF/lib/tcpdf/');
@@ -42,16 +49,10 @@ if (!file_exists('WEB-INF/lib/tcpdf/'))
 // Include TCPDF library.
 require_once('WEB-INF/lib/tcpdf/tcpdf.php');
 
-// Access check.
-if (!ttAccessCheck(right_view_reports)) {
-  header('Location: access_denied.php');
-  exit();
-}
-
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
-  $custom_fields = new CustomFields($user->team_id);
+  $custom_fields = new CustomFields($user->group_id);
 }
 
 // Report settings are stored in session bean before we get here.
@@ -68,7 +69,7 @@ if ('no_grouping' != $group_by) {
     $group_by_header = $custom_fields->fields[0]['label'];
   else {
     $key = 'label.'.$group_by;
-    $group_by_header = $i18n->getKey($key);
+    $group_by_header = $i18n->get($key);
   }
 }
 
@@ -88,7 +89,7 @@ if ($items && 'no_grouping' != $group_by) {
 }
 
 // Build a string to use as filename for the files being downloaded.
-$filename = strtolower($i18n->getKey('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
+$filename = strtolower($i18n->get('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
 
 // Start preparing HTML to build PDF from.
 $styleHeader = 'style="background-color:#a6ccf7;"';
@@ -96,7 +97,7 @@ $styleSubtotal = 'style="background-color:#e0e0e0;"';
 $styleCentered = 'style="text-align:center;"';
 $styleRightAligned = 'style="text-align:right;"';
 
-$title = $i18n->getKey('title.report').": ".$totals['start_date']." - ".$totals['end_date'];
+$title = $i18n->get('title.report').": ".$totals['start_date']." - ".$totals['end_date'];
 $html = '<h1 style="text-align:center;">'.$title.'</h1>';
 $html .= '<table border="1" cellpadding="3" cellspacing="0" width="100%">';
 
@@ -107,8 +108,8 @@ if ($totals_only) {
   $html .= '<thead>';
   $html .= "<tr $styleHeader>";
   $html .= '<td>'.htmlspecialchars($group_by_header).'</td>';
-  if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.duration').'</td>'; }
-  if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.cost').'</td>'; }
+  if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.duration').'</td>'; }
+  if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.cost').'</td>'; }
   $html .= '</tr>';
   $html .= '</thead>';
   // Print subtotals.
@@ -118,7 +119,7 @@ if ($totals_only) {
     if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$subtotal['time'].'</td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
-      if ($user->canManageTeam() || $user->isClient())
+      if ($user->can('manage_invoices') || $user->isClient())
         $html .= $subtotal['cost'];
       else
         $html .= $subtotal['expenses'];
@@ -129,12 +130,12 @@ if ($totals_only) {
   // Print totals.
   $html .= '<tr><td colspan="'.$colspan.'">&nbsp;</td></tr>';
   $html .= "<tr $styleSubtotal>";
-  $html .= '<td>'.$i18n->getKey('label.total').'</td>';
+  $html .= '<td>'.$i18n->get('label.total').'</td>';
   if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$totals['time'].'</td>';
   if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
       $html .= htmlspecialchars($user->currency).' ';
-      if ($user->canManageTeam() || $user->isClient())
+      if ($user->can('manage_invoices') || $user->isClient())
         $html .= $totals['cost'];
       else
         $html .= $totals['expenses'];
@@ -148,18 +149,20 @@ if ($totals_only) {
   // Table header.
   $html .= '<thead>';
   $html .= "<tr $styleHeader>";
-  $html .= '<td>'.$i18n->getKey('label.date').'</td>';
-  if ($user->canManageTeam() || $user->isClient()) { $colspan++; $html .= '<td>'.$i18n->getKey('label.user').'</td>'; }
-  if ($bean->getAttribute('chclient')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.client').'</td>'; }
-  if ($bean->getAttribute('chproject')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.project').'</td>'; }
-  if ($bean->getAttribute('chtask')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.task').'</td>'; }
+  $html .= '<td>'.$i18n->get('label.date').'</td>';
+  if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) { $colspan++; $html .= '<td>'.$i18n->get('label.user').'</td>'; }
+  if ($bean->getAttribute('chclient')) { $colspan++; $html .= '<td>'.$i18n->get('label.client').'</td>'; }
+  if ($bean->getAttribute('chproject')) { $colspan++; $html .= '<td>'.$i18n->get('label.project').'</td>'; }
+  if ($bean->getAttribute('chtask')) { $colspan++; $html .= '<td>'.$i18n->get('label.task').'</td>'; }
   if ($bean->getAttribute('chcf_1')) { $colspan++; $html .= '<td>'.htmlspecialchars($custom_fields->fields[0]['label']).'</td>'; }
-  if ($bean->getAttribute('chstart')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.start').'</td>'; }
-  if ($bean->getAttribute('chfinish')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.finish').'</td>'; }
-  if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.duration').'</td>'; }
-  if ($bean->getAttribute('chnote')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.note').'</td>'; }
-  if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->getKey('label.cost').'</td>'; }
-  if ($bean->getAttribute('chinvoice')) { $colspan++; $html .= '<td>'.$i18n->getKey('label.invoice').'</td>'; }
+  if ($bean->getAttribute('chstart')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.start').'</td>'; }
+  if ($bean->getAttribute('chfinish')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.finish').'</td>'; }
+  if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.duration').'</td>'; }
+  if ($bean->getAttribute('chnote')) { $colspan++; $html .= '<td>'.$i18n->get('label.note').'</td>'; }
+  if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.cost').'</td>'; }
+  if ($bean->getAttribute('chpaid')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.paid').'</td>'; }
+  if ($bean->getAttribute('chip')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.ip').'</td>'; }
+  if ($bean->getAttribute('chinvoice')) { $colspan++; $html .= '<td>'.$i18n->get('label.invoice').'</td>'; }
   $html .= '</tr>';
   $html .= '</thead>';
 
@@ -170,8 +173,8 @@ if ($totals_only) {
       $cur_grouped_by = $item['grouped_by'];
       if ($cur_grouped_by != $prev_grouped_by && !$first_pass) {
         $html .= '<tr style="background-color:#e0e0e0;">';
-        $html .= '<td>'.$i18n->getKey('label.subtotal').'</td>';
-        if ($user->canManageTeam() || $user->isClient()) {
+        $html .= '<td>'.$i18n->get('label.subtotal').'</td>';
+        if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
             $html .= '<td>';
             if ($group_by == 'user') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
             $html .= '</td>';
@@ -202,12 +205,14 @@ if ($totals_only) {
         if ($bean->getAttribute('chnote')) $html .= '<td></td>';
         if ($bean->getAttribute('chcost')) {
           $html .= "<td $styleRightAligned>";
-          if ($user->canManageTeam() || $user->isClient())
+          if ($user->can('manage_invoices') || $user->isClient())
             $html .= $subtotals[$prev_grouped_by]['cost'];
           else
             $html .= $subtotals[$prev_grouped_by]['expenses'];
           $html .= '</td>';
         }
+        if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
+        if ($bean->getAttribute('chip')) $html .= '<td></td>';
         if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
         $html .= '</tr>';
         $html .= '<tr><td colspan="'.$colspan.'">&nbsp;</td></tr>';
@@ -218,7 +223,7 @@ if ($totals_only) {
     // Print a regular row.
     $html .= '<tr>';
     $html .= '<td>'.$item['date'].'</td>';
-    if ($user->canManageTeam() || $user->isClient()) $html .= '<td>'.htmlspecialchars($item['user']).'</td>';
+    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) $html .= '<td>'.htmlspecialchars($item['user']).'</td>';
     if ($bean->getAttribute('chclient')) $html .= '<td>'.htmlspecialchars($item['client']).'</td>';
     if ($bean->getAttribute('chproject')) $html .= '<td>'.htmlspecialchars($item['project']).'</td>';
     if ($bean->getAttribute('chtask')) $html .= '<td>'.htmlspecialchars($item['task']).'</td>';
@@ -229,11 +234,21 @@ if ($totals_only) {
     if ($bean->getAttribute('chnote')) $html .= '<td>'.htmlspecialchars($item['note']).'</td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
-      if ($user->canManageTeam() || $user->isClient())
+      if ($user->can('manage_invoices') || $user->isClient())
         $html .= $item['cost'];
       else
         $html .= $item['expense'];
       $html .= '</td>';
+    }
+    if ($bean->getAttribute('chpaid')) {
+        $html .= '<td>';
+        $html .= $item['paid'] == 1 ? $i18n->get('label.yes') : $i18n->get('label.no');
+        $html .= '</td>';
+    }
+    if ($bean->getAttribute('chip')) {
+        $html .= '<td>';
+        $html .= $item['modified'] ? $item['modified_ip'].' '.$item['modified'] : $item['created_ip'].' '.$item['created'];
+        $html .= '</td>';
     }
     if ($bean->getAttribute('chinvoice')) $html .= '<td>'.htmlspecialchars($item['invoice']).'</td>';
     $html .= '</tr>';
@@ -245,8 +260,8 @@ if ($totals_only) {
   // Print a terminating subtotal.
   if ($print_subtotals) {
     $html .= '<tr style="background-color:#e0e0e0;">';
-    $html .= '<td>'.$i18n->getKey('label.subtotal').'</td>';
-    if ($user->canManageTeam() || $user->isClient()) {
+    $html .= '<td>'.$i18n->get('label.subtotal').'</td>';
+    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
       $html .= '<td>';
       if ($group_by == 'user') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
       $html .= '</td>';
@@ -277,12 +292,14 @@ if ($totals_only) {
     if ($bean->getAttribute('chnote')) $html .= '<td></td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
-      if ($user->canManageTeam() || $user->isClient())
+      if ($user->can('manage_invoices') || $user->isClient())
         $html .= $subtotals[$prev_grouped_by]['cost'];
       else
         $html .= $subtotals[$prev_grouped_by]['expenses'];
       $html .= '</td>';
     }
+    if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
+    if ($bean->getAttribute('chip')) $html .= '<td></td>';
     if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
     $html .= '</tr>';
   }
@@ -290,8 +307,8 @@ if ($totals_only) {
   // Print totals.
   $html .= '<tr><td colspan="'.$colspan.'">&nbsp;</td></tr>';
   $html .= '<tr style="background-color:#e0e0e0;">';
-  $html .= '<td>'.$i18n->getKey('label.total').'</td>';
-  if ($user->canManageTeam() || $user->isClient()) $html .= '<td></td>';
+  $html .= '<td>'.$i18n->get('label.total').'</td>';
+  if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) $html .= '<td></td>';
   if ($bean->getAttribute('chclient')) $html .= '<td></td>';
   if ($bean->getAttribute('chproject')) $html .= '<td></td>';
   if ($bean->getAttribute('chtask')) $html .= '<td></td>';
@@ -302,12 +319,14 @@ if ($totals_only) {
   if ($bean->getAttribute('chnote')) $html .= '<td></td>';
   if ($bean->getAttribute('chcost')) {
     $html .= "<td $styleRightAligned>".htmlspecialchars($user->currency).' ';
-    if ($user->canManageTeam() || $user->isClient())
+    if ($user->can('manage_invoices') || $user->isClient())
       $html .= $totals['cost'];
     else
       $html .= $totals['expenses'];
     $html .= '</td>';
   }
+  if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
+  if ($bean->getAttribute('chip')) $html .= '<td></td>';
   if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
   $html .= '</tr>';
   $html .= '</table>';
@@ -315,12 +334,12 @@ if ($totals_only) {
 
 // Output footer.
 if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false)) // By default we print it unless explicitely defined as false.
-  $html .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
+  $html .= '<p style="text-align: center;">'.$i18n->get('form.mail.footer').'</p>';
 
 // By this time we have html ready.
 
 // Determine title for report.
-$title = $i18n->getKey('title.report').": ".$totals['start_date']." - ".$totals['end_date'];
+$title = $i18n->get('title.report').": ".$totals['start_date']." - ".$totals['end_date'];
 
 header('Pragma: public'); // This is needed for IE8 to download files over https.
 header('Content-Type: text/html; charset=utf-8');
@@ -372,11 +391,11 @@ class ttPDF extends TCPDF {
 $pdf = new ttPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // If custom logo file exists - set it.
-if (file_exists('images/'.$user->team_id.'.png'))
-  $pdf->SetImageFile('images/'.$user->team_id.'.png');
+if (file_exists('images/'.$user->group_id.'.png'))
+  $pdf->SetImageFile('images/'.$user->group_id.'.png');
 
 // Set page word for the footer.
-$pdf->SetPageWord($i18n->getKey('label.page'));
+$pdf->SetPageWord($i18n->get('label.page'));
 
 // Set document information.
 $pdf->SetCreator(PDF_CREATOR);

@@ -29,11 +29,15 @@
 require_once('initialize.php');
 require_once('plugins/MonthlyQuota.class.php');
 import('form.Form');
-import('ttTeamHelper');
+import('ttTimeHelper');
 
-// Access check.
-if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('mq')) {
+// Access checks.
+if (!ttAccessAllowed('manage_advanced_settings')) {
   header('Location: access_denied.php');
+  exit();
+}
+if (!$user->isPluginEnabled('mq')) {
+  header('Location: feature_disabled.php');
   exit();
 }
 
@@ -60,7 +64,7 @@ $selectedYear = $request->getParameter('year');
 if (!$selectedYear or !ttValidInteger($selectedYear)){
   $selectedYear = date('Y');
 } else {
-  $selectedYear = intval($selectedYear);
+  $selectedYear = (int) $selectedYear;
 }
 
 // Months are zero indexed.
@@ -69,47 +73,61 @@ $months = $i18n->monthNames;
 $quota = new MonthlyQuota();
 
 if ($request->isPost()){
-  // TODO: Add parameter validation.
-  $res = false;
-  if ($_POST['btn_hours']){
+  // Validate user input.
+  if (false === ttTimeHelper::postedDurationToMinutes($request->getParameter('workdayHours')))
+    $err->add($i18n->get('error.field'), $i18n->get('form.quota.workday_hours'));
 
-    // User changed workday hours for team.
-    $hours = (int)$request->getParameter('workdayHours');
-    $res = ttTeamHelper::update($user->team_id, array('name'=>$user->team,'workday_hours'=>$hours));
+  for ($i = 0; $i < count($months); $i++){
+    $val = $request->getParameter($months[$i]);
+    if (false === ttTimeHelper::postedDurationToMinutes($val, 44640/*24*60*31*/))
+      $err->add($i18n->get('error.field'), $months[$i]);
   }
-  if ($_POST['btn_submit']){
-    // User pressed the Save button under monthly quotas table.
-    $postedYear = $request->getParameter('year');
-    $selectedYear = intval($postedYear);
-    for ($i = 0; $i < count($months); $i++){
-      $res = $quota->update($postedYear, $i+1, $request->getParameter($months[$i]));
+  // Finished validating user input.
+
+  if ($err->no()) {
+
+    // Handle workday hours.
+    $workday_minutes = ttTimeHelper::postedDurationToMinutes($request->getParameter('workdayHours'));
+    if ($workday_minutes != $user->workday_minutes) {
+      if (!$user->updateGroup(array('workday_minutes'=>$workday_minutes)))
+        $err->add($i18n->get('error.db'));
     }
-  }
-  if ($res) {
-    header('Location: profile_edit.php');
-    exit();
-  } else {
-    $err->add($i18n->getKey('error.db'));
+
+    // Handle monthly quotas for a selected year.
+    $selectedYear = (int) $request->getParameter('year');
+    for ($i = 0; $i < count($months); $i++){
+      $quota_in_minutes = ttTimeHelper::postedDurationToMinutes($request->getParameter($months[$i]), 44640/*24*60*31*/);
+      if (!$quota->update($selectedYear, $i+1, $quota_in_minutes))
+        $err->add($i18n->get('error.db'));
+    }
+
+    if ($err->no()) {
+      // Redisplay the form.
+      header('Location: quotas.php?year='.$selectedYear);
+      exit();
+    }
   }
 }
 
-// Returns monthly quotas where January is month 1, not 0.
+// Get monthly quotas for the entire year.
 $monthsData = $quota->get($selectedYear);
+$workdayHours = ttTimeHelper::toAbsDuration($user->workday_minutes, true);
 
 $form = new Form('monthlyQuotasForm');
-$form->addInput(array('type'=>'text', 'name'=>'workdayHours', 'value'=>$user->workday_hours, 'style'=>'width:50px'));
+$form->addInput(array('type'=>'text', 'name'=>'workdayHours', 'value'=>$workdayHours, 'style'=>'width:60px'));
 $form->addInput(array('type'=>'combobox','name'=>'year','data'=>$years,'datakeys'=>array('id','name'),'value'=>$selectedYear,'onchange'=>'yearChange(this.value);'));
 for ($i=0; $i < count($months); $i++) { 
   $value = "";
   if (array_key_exists($i+1, $monthsData)){
     $value = $monthsData[$i+1];
+    $value = ttTimeHelper::toAbsDuration($value, true);
   }
   $name = $months[$i];
-  $form->addInput(array('type'=>'text','name'=>$name,'maxlength'=>3,'value'=> $value,'style'=>'width:50px'));
+  $form->addInput(array('type'=>'text','name'=>$name,'maxlength'=>6,'value'=> $value,'style'=>'width:70px'));
 }
 
 $smarty->assign('months', $months);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->getKey('title.monthly_quotas'));
+$smarty->assign('title', $i18n->get('title.monthly_quotas'));
 $smarty->assign('content_page_name', 'quotas.tpl');
 $smarty->display('index.tpl');

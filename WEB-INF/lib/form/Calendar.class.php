@@ -57,8 +57,9 @@ class Calendar extends FormElement {
     	  $this->highlight = $highlight;
     }
 
-    function localize($i18n) {
+    function localize() {
       global $user;
+      global $i18n;
       
       $this->mMonthNames = $i18n->monthNames;
       $this->mWeekDayShortNames = $i18n->weekdayShortNames;
@@ -171,7 +172,9 @@ class Calendar extends FormElement {
             }
 
               // holidays
-              if ($this->showHolidays) {
+              //if ($this->showHolidays) {
+              global $user;
+              if ($user->show_holidays) {
               foreach ($this->holidays as $day) {
                 if($day == $date) {
                   $stl_cell = ' class="CalendarDayHoliday"';
@@ -204,7 +207,7 @@ class Calendar extends FormElement {
         $str .= "</TR>\n";
       }
 
-      $str .= "<tr><td colspan=\"7\" align=\"center\"><a id=\"today_link\" href=\"?".$this->controlName."=".strftime(DB_DATEFORMAT)."\" tabindex=\"-1\">".$i18n->getKey('label.today')."</a></td></tr>\n";
+      $str .= "<tr><td colspan=\"7\" align=\"center\"><a id=\"today_link\" href=\"?".$this->controlName."=".strftime(DB_DATEFORMAT)."\" tabindex=\"-1\">".$i18n->get('label.today')."</a></td></tr>\n";
       $str .= "</table>\n";
 
       $str .= "<input type=\"hidden\" name=\"$this->controlName\" value=\"$indate\">\n";

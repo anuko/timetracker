@@ -86,6 +86,7 @@ function recalculateCost() {
 
   var comment_control = document.getElementById("item_name");
   var cost_control = document.getElementById("cost");
+  var replaceDecimalMark = ("." != "{$user->decimal_mark}");
 
   // Calculate cost.
   var dropdown = document.getElementById("predefined_expense");
@@ -98,8 +99,15 @@ function recalculateCost() {
     var quantity = quantity_control.value;
     if (isNaN(quantity))
       cost_control.value = "";
-    else
-      cost_control.value = (quantity_control.value * defined_expenses[dropdown.selectedIndex - 1][2]).toFixed(2);
+    else {
+      var expenseCost = defined_expenses[dropdown.selectedIndex - 1][2];
+      if (replaceDecimalMark)
+        expenseCost = expenseCost.replace("{$user->decimal_mark}", ".");
+      var newCost = (quantity_control.value * expenseCost).toFixed(2);
+      if (replaceDecimalMark)
+        newCost = newCost.replace(".", "{$user->decimal_mark}");
+      cost_control.value = newCost;
+    }
   }
 }
 </script>
@@ -128,7 +136,6 @@ function recalculateCost() {
         </tr>
 {/if}
 {if $predefined_expenses}
-
         <tr>
           <td align="right">{$i18n.label.expense}:</td>
           <td>{$forms.expensesForm.predefined_expense.control}</td>
@@ -179,7 +186,7 @@ function recalculateCost() {
         <td width="5%" class="tableHeader">{$i18n.label.edit}</td>
       </tr>
   {foreach $expense_items as $item}
-      <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
+      <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
     {if $user->isPluginEnabled('cl')}
         <td valign="top">{$item.client|escape}</td>
     {/if}

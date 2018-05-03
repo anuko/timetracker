@@ -28,8 +28,13 @@
 
 import('form.DefaultCellRenderer');
 
+// TableColumn class represents a single column in a table.
 class TableColumn {
-	var $mTitle			= "";
+  var $colHeader = ''; // Column header.
+  var $colFooter = ''; // Column footer, example: totals in week view.
+
+// TODO: refactoring ongoing down from here.
+
 	var $mIndexField	= "";
 	var $mRenderer		= null;
 	var $mWidth			= "";
@@ -37,9 +42,10 @@ class TableColumn {
 	var $mBgColor		= "#ffffff";
 	var $mFgColor		= "#000000";
 	
-	function __construct($indexField, $title="",$renderer=null) {
+	function __construct($indexField, $header = '', $renderer = null, $footer = '') {
 		$this->mIndexField	= $indexField;
-		$this->mTitle	    = $title;
+		$this->colHeader = $header;
+                $this->colFooter = $footer;
 		if ($renderer!=null) {
 		  $this->mRenderer	= $renderer;
 		} else {
@@ -47,8 +53,9 @@ class TableColumn {
 		}
 	}
 	
-	function getHeader() { return $this->mTitle; }
-	
+  function getHeader() { return $this->colHeader; }
+  function getFooter() { return $this->colFooter; }
+
 	function getField() { return $this->mIndexField; }
     
     function setTable(&$table) { $this->mTable = &$table; }

@@ -25,18 +25,27 @@
 // | Contributors:
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
-	
-require_once('initialize.php');
-import('form.Form');
-import('ttTeamHelper');
 
-// Access check.
-if (!ttAccessCheck(right_administer_site)) {
-  header('Location: access_denied.php');
-  exit();
+// Class ttGroupHelper - contains helper functions that operate with groups.
+// This is a planned replacement for ttTeamHelper as we move forward with subgroups.
+class ttGroupHelper {
+
+  // The getTopGroups function returns an array of all active top groups on the server.
+  static function getTopGroups() {
+    $result = array();
+    $mdb2 = getConnection();
+
+    $sql =  "select id, name, created, lang from tt_groups".
+            " where status = 1 and org_id is NULL order by id desc";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $val['date'] = substr($val['created'], 0, 10); // Strip the time.
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
 }
-
-$smarty->assign('teams', ttTeamHelper::getTeams());
-$smarty->assign('title', $i18n->getKey('title.teams'));
-$smarty->assign('content_page_name', 'admin_teams.tpl');
-$smarty->display('index.tpl');

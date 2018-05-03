@@ -37,7 +37,7 @@ class ttInvoiceHelper {
   {
     $mdb2 = getConnection();
 
-    $team_id = (int) $fields['team_id'];
+    $group_id = (int) $fields['group_id'];
     $name = $fields['name'];
     if (!$name) return false;
 
@@ -49,8 +49,8 @@ class ttInvoiceHelper {
     }
 
     // Insert a new invoice record.
-    $sql = "insert into tt_invoices (team_id, name, date, client_id $status_f)
-      values($team_id, ".$mdb2->quote($name).", ".$mdb2->quote($date).", $client_id $status_v)"; 
+    $sql = "insert into tt_invoices (group_id, name, date, client_id $status_f)".
+      " values($group_id, ".$mdb2->quote($name).", ".$mdb2->quote($date).", $client_id $status_v)";
     $affected = $mdb2->exec($sql);
 
     if (is_a($affected, 'PEAR_Error')) return false;
@@ -69,7 +69,9 @@ class ttInvoiceHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $sql = "select * from tt_invoices where id = $invoice_id and team_id = $user->team_id and status = 1";
+    if ($user->isClient()) $client_part = " and client_id = $user->client_id";
+
+    $sql = "select * from tt_invoices where id = $invoice_id and group_id = $user->group_id $client_part and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if ($val = $res->fetchRow())
@@ -84,8 +86,7 @@ class ttInvoiceHelper {
     $mdb2 = getConnection();
     global $user;
 
-    $sql = "select id from tt_invoices where team_id = $user->team_id and name = ".$mdb2->quote($invoice_name)." and status = 1";
-
+    $sql = "select id from tt_invoices where group_id = $user->group_id and name = ".$mdb2->quote($invoice_name)." and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -96,10 +97,55 @@ class ttInvoiceHelper {
     return false;
   }
 
+  // The isPaid determines if an invoice is paid by looking at the paid status of its items.
+  // If any non-paid item is found, the entire invoice is considered not paid.
+  // Therefore, the paid status of the invoice is a calculated value.
+  // This is because we maintain the paid status on individual item level.
+  static function isPaid($invoice_id) {
+
+    $mdb2 = getConnection();
+    global $user;
+
+    $sql = "select count(*) as count from tt_log where invoice_id = $invoice_id and status = 1 and paid < 1";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      if ($val['count'] > 0)
+        return false; // A non-paid time item exists.
+    }
+    $sql = "select count(*) as count from tt_expense_items where invoice_id = $invoice_id and status = 1 and paid < 1";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      if ($val['count'] > 0)
+        return false; // A non-paid expense item exists.
+      else
+        return true; // All time and expense items in invoice are paid.
+    }
+    return false;
+  }
+
+  // markPaid marks invoice items as paid.
+  static function markPaid($invoice_id, $mark_paid = true) {
+
+    global $user;
+    $mdb2 = getConnection();
+
+    $paid_status = $mark_paid ? 1 : 0;
+    $sql = "update tt_log set paid = $paid_status where invoice_id = $invoice_id and status = 1";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    $sql = "update tt_expense_items set paid = $paid_status where invoice_id = $invoice_id and status = 1";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    return true;
+  }
+
   // The getInvoiceItems retrieves tt_log items associated with the invoice. 
   static function getInvoiceItems($invoice_id) {
     global $user;
-    global $i18n;
     $mdb2 = getConnection();
 
     // At this time only detailed invoice is supported.
@@ -111,7 +157,8 @@ class ttInvoiceHelper {
       $sql = "select l.date as date, 1 as type, u.name as user_name, p.name as project_name,
       t.name as task_name, l.comment as note,
       time_format(l.duration, '%k:%i') as duration,
-      cast(l.billable * u.rate * time_to_sec(l.duration)/3600 as decimal(10, 2)) as cost from tt_log l
+      cast(l.billable * u.rate * time_to_sec(l.duration)/3600 as decimal(10, 2)) as cost,
+      l.paid as paid from tt_log l
       inner join tt_users u on (l.user_id = u.id)
       left join tt_projects p on (p.id = l.project_id)
       left join tt_tasks t on (t.id = l.task_id)
@@ -120,7 +167,8 @@ class ttInvoiceHelper {
       $sql = "select l.date as date, 1 as type, u.name as user_name, p.name as project_name,
         t.name as task_name, l.comment as note,
         time_format(l.duration, '%k:%i') as duration,
-        cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2)) as cost from tt_log l
+        cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2)) as cost,
+        l.paid as paid from tt_log l
         inner join tt_users u on (l.user_id = u.id)
         left join tt_projects p on (p.id = l.project_id)
         left join tt_tasks t on (t.id = l.task_id)
@@ -132,7 +180,8 @@ class ttInvoiceHelper {
     if ($user->isPluginEnabled('ex')) {
       $sql_for_expense_items = "select ei.date as date, 2 as type, u.name as user_name, p.name as project_name,
         null as task_name, ei.name as note,
-        null as duration, ei.cost as cost from tt_expense_items ei
+        null as duration, ei.cost as cost,
+        ei.paid as paid from tt_expense_items ei
         inner join tt_users u on (ei.user_id = u.id)
         left join tt_projects p on (p.id = ei.project_id)
         where ei.invoice_id = $invoice_id and ei.status = 1";
@@ -184,7 +233,7 @@ class ttInvoiceHelper {
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
-    $sql = "update tt_invoices set status = NULL where id = $invoice_id and team_id = $user->team_id";
+    $sql = "update tt_invoices set status = NULL where id = $invoice_id and group_id = $user->group_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
@@ -211,8 +260,8 @@ class ttInvoiceHelper {
       $sql = "select count(*) as num from tt_log l, tt_users u
         where l.status = 1 and l.client_id = $client_id and l.invoice_id is NULL
         and l.date >= ".$mdb2->quote($start)." and l.date <= ".$mdb2->quote($end)."
-        and l.billable * u.rate * time_to_sec(l.duration)/3600 > 0
-        and l.user_id = u.id";
+        and l.user_id = u.id
+        and l.billable = 1"; // l.billable * u.rate * time_to_sec(l.duration)/3600 > 0 // See explanation below.
     } else {
       // sql part for project id.
       if ($project_id) $project_part = " and l.project_id = $project_id";
@@ -221,8 +270,14 @@ class ttInvoiceHelper {
       $sql = "select count(*) as num from tt_log l, tt_user_project_binds upb
         where l.status = 1 and l.client_id = $client_id $project_part and l.invoice_id is NULL
         and l.date >= ".$mdb2->quote($start)." and l.date <= ".$mdb2->quote($end)."
-        and l.billable * upb.rate * time_to_sec(l.duration)/3600 > 0
-        and upb.user_id = l.user_id and upb.project_id = l.project_id";
+        and upb.user_id = l.user_id and upb.project_id = l.project_id
+        and l.billable = 1"; // l.billable * upb.rate * time_to_sec(l.duration)/3600 > 0
+        // Users with a lot of clients and projects (Jaro) may forget to set user rates properly.
+        // Specifically, user rate may be set to 0 on a project, by mistake. This leads to error.no_invoiceable_items
+        // and increased support cost. Commenting out allows us to include 0 cost items in invoices so that
+        // the problem becomes obvious.
+
+        // TODO: If the above turns out useful, rework the query to simplify it by removing left join.
     }
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -273,8 +328,8 @@ class ttInvoiceHelper {
     if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
 
     // Create a new invoice record.
-    $sql = "insert into tt_invoices (team_id, name, date, client_id)
-      values($user->team_id, ".$mdb2->quote($name).", ".$mdb2->quote($date).", $client_id)";
+    $sql = "insert into tt_invoices (group_id, name, date, client_id)
+      values($user->group_id, ".$mdb2->quote($name).", ".$mdb2->quote($date).", $client_id)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -293,7 +348,7 @@ class ttInvoiceHelper {
         set l.invoice_id = $last_id
         where l.status = 1 and l.client_id = $client_id and l.invoice_id is NULL
         and l.date >= ".$mdb2->quote($start)." and l.date <= ".$mdb2->quote($end)."
-        and l.billable * u.rate * time_to_sec(l.duration)/3600 > 0";
+        and l.billable = 1"; // l.billable * u.rate * time_to_sec(l.duration)/3600 > 0"; // See explanation below.
     } else {
        // sql part for project id.
       if ($project_id) $project_part = " and l.project_id = $project_id";
@@ -304,7 +359,13 @@ class ttInvoiceHelper {
         set l.invoice_id = $last_id
         where l.status = 1 and l.client_id = $client_id $project_part and l.invoice_id is NULL
         and l.date >= ".$mdb2->quote($start)." and l.date <= ".$mdb2->quote($end)."
-        and l.billable * upb.rate * time_to_sec(l.duration)/3600 > 0";
+        and l.billable = 1"; //  l.billable * upb.rate * time_to_sec(l.duration)/3600 > 0";
+        // Users with a lot of clients and projects (Jaro) may forget to set user rates properly.
+        // Specifically, user rate may be set to 0 on a project, by mistake. This leads to error.no_invoiceable_items
+        // and increased support cost. Commenting out allows us to include 0 cost items in invoices so that
+        // the problem becomes obvious.
+
+        // TODO: If the above turns out useful, rework the query to simplify it by removing left join.
     }
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
@@ -368,16 +429,16 @@ class ttInvoiceHelper {
     $body .= '<body>';
 
     // Output title.
-    $body .= '<p style="'.$style_title.'">'.$i18n->getKey('title.invoice').' '.htmlspecialchars($invoice['name']).'</p>';
+    $body .= '<p style="'.$style_title.'">'.$i18n->get('title.invoice').' '.htmlspecialchars($invoice['name']).'</p>';
 
     // Output comment.
     if($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>';
 
     // Output invoice info.
     $body .= '<table>';
-    $body .= '<tr><td><b>'.$i18n->getKey('label.date').':</b> '.$invoice['date'].'</td></tr>';
-    $body .= '<tr><td><b>'.$i18n->getKey('label.client').':</b> '.htmlspecialchars($client['name']).'</td></tr>';
-    $body .= '<tr><td><b>'.$i18n->getKey('label.client_address').':</b> '.htmlspecialchars($client['address']).'</td></tr>';
+    $body .= '<tr><td><b>'.$i18n->get('label.date').':</b> '.$invoice['date'].'</td></tr>';
+    $body .= '<tr><td><b>'.$i18n->get('label.client').':</b> '.htmlspecialchars($client['name']).'</td></tr>';
+    $body .= '<tr><td><b>'.$i18n->get('label.client_address').':</b> '.htmlspecialchars($client['address']).'</td></tr>';
     $body .= '</table>';
 
     $body .= '<p></p>';
@@ -385,15 +446,15 @@ class ttInvoiceHelper {
     // Output invoice items.
     $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
     $body .= '<tr>';
-    $body .= '<td style="'.$style_tableHeader.'">'.$i18n->getKey('label.date').'</td>';
-    $body .= '<td style="'.$style_tableHeader.'">'.$i18n->getKey('form.invoice.person').'</td>';
+    $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('label.date').'</td>';
+    $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('form.invoice.person').'</td>';
     if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
-      $body .= '<td style="'.$style_tableHeader.'">'.$i18n->getKey('label.project').'</td>';
+      $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('label.project').'</td>';
     if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
-      $body .= '<td style="'.$style_tableHeader.'">'.$i18n->getKey('label.task').'</td>';
-    $body .= '<td style="'.$style_tableHeader.'">'.$i18n->getKey('label.note').'</td>';
-    $body .= '<td style="'.$style_tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
-    $body .= '<td style="'.$style_tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+      $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('label.task').'</td>';
+    $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('label.note').'</td>';
+    $body .= '<td style="'.$style_tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
+    $body .= '<td style="'.$style_tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
     $body .= '</tr>';
     foreach ($invoice_items as $item) {
       $body .= '<tr>';
@@ -416,15 +477,15 @@ class ttInvoiceHelper {
       $colspan += 2;
     $body .= '<tr><td>&nbsp;</td></tr>';
     if ($tax) {
-      $body .= '<tr><td colspan="'.$colspan.'" align="right"><b>'.$i18n->getKey('label.subtotal').':</b></td><td nowrap align="right">'.$subtotal.'</td></tr>';
-      $body .= '<tr><td colspan="'.$colspan.'" align="right"><b>'.$i18n->getKey('label.tax').':</b></td><td nowrap align="right">'.$tax.'</td></tr>';
+      $body .= '<tr><td colspan="'.$colspan.'" align="right"><b>'.$i18n->get('label.subtotal').':</b></td><td nowrap align="right">'.$subtotal.'</td></tr>';
+      $body .= '<tr><td colspan="'.$colspan.'" align="right"><b>'.$i18n->get('label.tax').':</b></td><td nowrap align="right">'.$tax.'</td></tr>';
     }
-    $body .= '<tr><td colspan="'.$colspan.'" align="right"><b>'.$i18n->getKey('label.total').':</b></td><td nowrap align="right">'.$total.'</td></tr>';
+    $body .= '<tr><td colspan="'.$colspan.'" align="right"><b>'.$i18n->get('label.total').':</b></td><td nowrap align="right">'.$total.'</td></tr>';
     $body .= '</table>';
 
     // Output footer.
     if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false))
-      $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
+      $body .= '<p style="text-align: center;">'.$i18n->get('form.mail.footer').'</p>';
 
     // Finish creating email body.
     $body .= '</body></html>';

@@ -34,34 +34,23 @@ import('ttUserHelper');
 import('form.Table');
 import('form.TableColumn');
 
-// Access check.
-if (!ttAccessCheck(right_manage_team)) {
+// Access checks.
+if (!ttAccessAllowed('manage_users')) {
   header('Location: access_denied.php');
   exit();
 }
-
-// Get user id we are editing from the request.
-$user_id = (int) $request->getParameter('id');
-
-// Get user details.
-$user_details = ttUserHelper::getUserDetails($user_id);
-
-// Security checks.
-$ok_to_go = $user->canManageTeam(); // Are we authorized for user management?
-if ($ok_to_go) $ok_to_go = $ok_to_go && $user_details; // Are we editing a real user?
-if ($ok_to_go) $ok_to_go = $ok_to_go && ($user->team_id == $user_details['team_id']); // User belongs to our team?
-if ($ok_to_go && $user->isCoManager() && (ROLE_COMANAGER == $user_details['role']))
-  $ok_to_go = ($user->id == $user_details['id']); // Comanager is not allowed to edit other comanagers.
-if ($ok_to_go && $user->isCoManager() && (ROLE_MANAGER == $user_details['role']))
-  $ok_to_go = false; // Comanager is not allowed to edit a manager.
-if (!$ok_to_go) {
-  die ($i18n->getKey('error.sys'));
+$user_id = (int)$request->getParameter('id');
+$user_details = $user->getUser($user_id);
+if (!$user_details) {
+  header('Location: access_denied.php');
+  exit();
 }
+// End of access checks.
 
 if ($user->isPluginEnabled('cl'))
-  $clients = ttTeamHelper::getActiveClients($user->team_id);
+  $clients = ttTeamHelper::getActiveClients($user->group_id);
 
-$projects = ttTeamHelper::getActiveProjects($user->team_id);
+$projects = ttTeamHelper::getActiveProjects($user->group_id);
 $assigned_projects = array();
 
 if ($request->isPost()) {
@@ -72,7 +61,7 @@ if ($request->isPost()) {
     $cl_password2 = $request->getParameter('pas2');
   }
   $cl_email = trim($request->getParameter('email'));
-  $cl_role = $request->getParameter('role');
+  $cl_role_id = $request->getParameter('role');
   $cl_client_id = $request->getParameter('client');
   $cl_status = $request->getParameter('status');
   $cl_rate = $request->getParameter('rate');
@@ -85,7 +74,7 @@ if ($request->isPost()) {
         $project_with_rate['rate'] = $request->getParameter('rate_'.$p);
         $assigned_projects[] = $project_with_rate;
       } else
-        $err->add($i18n->getKey('error.field'), 'rate_'.$p);
+        $err->add($i18n->get('error.field'), 'rate_'.$p);
     }
   }
 } else {
@@ -93,7 +82,7 @@ if ($request->isPost()) {
   $cl_login = $user_details['login'];
   $cl_email = $user_details['email'];
   $cl_rate = str_replace('.', $user->decimal_mark, $user_details['rate']);
-  $cl_role = $user_details['role'];
+  $cl_role_id = $user_details['role_id'];
   $cl_client_id = $user_details['client_id'];
   $cl_status = $user_details['status'];
   $cl_projects = array();
@@ -112,16 +101,13 @@ if (!$auth->isPasswordExternal()) {
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email));
 
-$roles[ROLE_USER] = $i18n->getKey('label.user');
-$roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');
+$active_roles = ttTeamHelper::getActiveRolesForUser();
+$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role_id,'data'=>$active_roles,'datakeys'=>array('id', 'name')));
 if ($user->isPluginEnabled('cl'))
-  $roles[ROLE_CLIENT] = $i18n->getKey('label.client');
-$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role,'data'=>$roles));
-if ($user->isPluginEnabled('cl'))
-  $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+  $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->get('dropdown.select'))));
 
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
-  'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
+  'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','format'=>'.2','value'=>$cl_rate));
 
 // Define classes for the projects table.
@@ -137,7 +123,6 @@ class RateCellRenderer extends DefaultCellRenderer {
     global $assigned_projects;
     $field = new FloatField('rate_'.$table->getValueAtName($row,'id'));
     $field->setFormName($table->getFormName());
-    $field->localize($GLOBALS['I18N']);
     $field->setSize(5);
     $field->setFormat('.2');
     foreach ($assigned_projects as $p) {
@@ -155,27 +140,27 @@ $table->setRowOptions(array('valign'=>'top','class'=>'tableHeader'));
 $table->setData($projects);
 $table->setKeyField('id');
 $table->setValue($cl_projects);
-$table->addColumn(new TableColumn('name', $i18n->getKey('label.project'), new NameCellRenderer()));
-$table->addColumn(new TableColumn('p_rate', $i18n->getKey('form.users.rate'), new RateCellRenderer()));
+$table->addColumn(new TableColumn('name', $i18n->get('label.project'), new NameCellRenderer()));
+$table->addColumn(new TableColumn('p_rate', $i18n->get('form.users.rate'), new RateCellRenderer()));
 $form->addInputElement($table);
 
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$user_id));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.save')));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.save')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
     // Validate user input.
-    if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
-    if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
+    if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.person_name'));
+    if (!ttValidString($cl_login)) $err->add($i18n->get('error.field'), $i18n->get('label.login'));
     if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
-      if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
-      if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+      if (!ttValidString($cl_password1)) $err->add($i18n->get('error.field'), $i18n->get('label.password'));
+      if (!ttValidString($cl_password2)) $err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
       if ($cl_password1 !== $cl_password2)
-        $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
+        $err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
     }
-    if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
-    if (!ttValidFloat($cl_rate, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.users.default_rate'));
+    if (!ttValidEmail($cl_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.email'));
+    if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
   
     if ($err->no()) {
       $existing_user = ttUserHelper::getUserByLogin($cl_login);
@@ -189,8 +174,8 @@ if ($request->isPost()) {
           'status' => $cl_status,
           'rate' => $cl_rate,
           'projects' => $assigned_projects);
-        if (right_assign_roles & $user->rights) {
-          $fields['role'] = $cl_role;
+        if (in_array('manage_users', $user->rights)) {
+          $fields['role_id'] = $cl_role_id;
           $fields['client_id'] = $cl_client_id;
         }
   
@@ -221,9 +206,9 @@ if ($request->isPost()) {
           exit();
   
         } else
-          $err->add($i18n->getKey('error.db'));
+          $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->getKey('error.user_exists'));
+        $err->add($i18n->get('error.user_exists'));
     }
   }
   
@@ -237,9 +222,10 @@ $rates = ttProjectHelper::getRates($user_id);
 $smarty->assign('rates', $rates);
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
+$smarty->assign('active_roles', $active_roles);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
 $smarty->assign('user_id', $user_id);
-$smarty->assign('title', $i18n->getKey('title.edit_user'));
+$smarty->assign('title', $i18n->get('title.edit_user'));
 $smarty->assign('content_page_name', 'mobile/user_edit.tpl');
 $smarty->display('mobile/index.tpl');

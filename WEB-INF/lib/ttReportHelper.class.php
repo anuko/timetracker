@@ -53,14 +53,16 @@ class ttReportHelper {
     if ($bean->getAttribute('include_records')=='2') $dropdown_parts .= ' and l.billable = 0';
     if ($bean->getAttribute('invoice')=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
     if ($bean->getAttribute('invoice')=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
+    if ($bean->getAttribute('paid_status')=='1') $dropdown_parts .= ' and l.paid = 1';
+    if ($bean->getAttribute('paid_status')=='2') $dropdown_parts .= ' and l.paid = 0';
 
     // Prepare user list part.
     $userlist = -1;
-    if (($user->canManageTeam() || $user->isClient()) && is_array($bean->getAttribute('users')))
+    if (($user->can('view_reports') || $user->isClient()) && is_array($bean->getAttribute('users')))
       $userlist = join(',', $bean->getAttribute('users'));
     // Prepare sql query part for user list.
     $user_list_part = null;
-    if ($user->canManageTeam() || $user->isClient())
+    if ($user->can('view_reports') || $user->isClient())
       $user_list_part = " and l.user_id in ($userlist)";
     else
       $user_list_part = " and l.user_id = ".$user->id;
@@ -74,7 +76,7 @@ class ttReportHelper {
         new DateAndTime($user->date_format, $bean->getAttribute('start_date')),
         new DateAndTime($user->date_format, $bean->getAttribute('end_date')));
     }
-    $where = " where l.status = 1 and l.date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
+    $where = " where l.status = 1 and l.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";
     return $where;
   }
@@ -96,10 +98,12 @@ class ttReportHelper {
     if ($report['billable']=='2') $dropdown_parts .= ' and l.billable = 0';
     if ($report['invoice']=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
     if ($report['invoice']=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
+    if ($report['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
+    if ($report['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
 
     // Prepare user list part.
     $userlist = -1;
-    if (($user->canManageTeam() || $user->isClient())) {
+    if (($user->can('view_reports') || $user->isClient())) {
       if ($report['users'])
         $userlist = $report['users'];
       else {
@@ -111,7 +115,7 @@ class ttReportHelper {
     }
     // Prepare sql query part for user list.
     $user_list_part = null;
-    if ($user->canManageTeam() || $user->isClient())
+    if ($user->can('view_reports') || $user->isClient())
       $user_list_part = " and l.user_id in ($userlist)";
     else
       $user_list_part = " and l.user_id = ".$user->id;
@@ -125,7 +129,7 @@ class ttReportHelper {
         new DateAndTime($user->date_format, $report['period_start']),
         new DateAndTime($user->date_format, $report['period_end']));
     }
-    $where = " where l.status = 1 and l.date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
+    $where = " where l.status = 1 and l.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";
     return $where;
   }
@@ -143,14 +147,16 @@ class ttReportHelper {
     if ($bean->getAttribute('project')) $dropdown_parts .= ' and ei.project_id = '.$bean->getAttribute('project');
     if ($bean->getAttribute('invoice')=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
     if ($bean->getAttribute('invoice')=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
+    if ($bean->getAttribute('paid_status')=='1') $dropdown_parts .= ' and ei.paid = 1';
+    if ($bean->getAttribute('paid_status')=='2') $dropdown_parts .= ' and ei.paid = 0';
 
     // Prepare user list part.
     $userlist = -1;
-    if (($user->canManageTeam() || $user->isClient()) && is_array($bean->getAttribute('users')))
+    if (($user->can('view_reports') || $user->isClient()) && is_array($bean->getAttribute('users')))
       $userlist = join(',', $bean->getAttribute('users'));
     // Prepare sql query part for user list.
     $user_list_part = null;
-    if ($user->canManageTeam() || $user->isClient())
+    if ($user->can('view_reports') || $user->isClient())
       $user_list_part = " and ei.user_id in ($userlist)";
     else
       $user_list_part = " and ei.user_id = ".$user->id;
@@ -164,7 +170,7 @@ class ttReportHelper {
         new DateAndTime($user->date_format, $bean->getAttribute('start_date')),
         new DateAndTime($user->date_format, $bean->getAttribute('end_date')));
     }
-    $where = " where ei.status = 1 and ei.date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
+    $where = " where ei.status = 1 and ei.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";
     return $where;
   }
@@ -182,10 +188,12 @@ class ttReportHelper {
     if ($report['project_id']) $dropdown_parts .= ' and ei.project_id = '.$report['project_id'];
     if ($report['invoice']=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
     if ($report['invoice']=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
+    if ($report['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
+    if ($report['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
 
     // Prepare user list part.
     $userlist = -1;
-    if (($user->canManageTeam() || $user->isClient())) {
+    if (($user->can('view_reports') || $user->isClient())) {
       if ($report['users'])
         $userlist = $report['users'];
       else {
@@ -197,7 +205,7 @@ class ttReportHelper {
     }
     // Prepare sql query part for user list.
     $user_list_part = null;
-    if ($user->canManageTeam() || $user->isClient())
+    if ($user->can('view_reports') || $user->isClient())
       $user_list_part = " and ei.user_id in ($userlist)";
     else
       $user_list_part = " and ei.user_id = ".$user->id;
@@ -211,7 +219,7 @@ class ttReportHelper {
         new DateAndTime($user->date_format, $report['period_start']),
         new DateAndTime($user->date_format, $report['period_end']));
     }
-    $where = " where ei.status = 1 and ei.date >= '".$period->getBeginDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
+    $where = " where ei.status = 1 and ei.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";
     return $where;
   }
@@ -223,6 +231,10 @@ class ttReportHelper {
     global $user;
     $mdb2 = getConnection();
 
+    // Determine these once as they are used in multiple places in this function.
+    $canViewReports = $user->can('view_reports');
+    $isClient = $user->isClient();
+
     $group_by_option = $bean->getAttribute('group_by');
     $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($bean->getAttribute('chstart') || $bean->getAttribute('chfinish'));
 
@@ -231,7 +243,7 @@ class ttReportHelper {
     array_push($fields, 'l.id as id');
     array_push($fields, '1 as type'); // Type 1 is for tt_log entries.
     array_push($fields, 'l.date as date');
-    if($user->canManageTeam() || $user->isClient())
+    if($canViewReports || $isClient)
       array_push($fields, 'u.name as user');
     // Add client name if it is selected.
     if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
@@ -245,7 +257,7 @@ class ttReportHelper {
     // Add custom field.
     $include_cf_1 = $bean->getAttribute('chcf_1') || 'cf_1' == $group_by_option;
     if ($include_cf_1) {
-      $custom_fields = new CustomFields($user->team_id);
+      $custom_fields = new CustomFields($user->group_id);
       $cf_1_type = $custom_fields->fields[0]['type'];
       if ($cf_1_type == CustomFields::TYPE_TEXT) {
         array_push($fields, 'cfl.value as cf_1');
@@ -276,17 +288,28 @@ class ttReportHelper {
         array_push($fields, "cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost"); // Use project rate for user.
       array_push($fields, "null as expense"); 
     }
+    // Add paid status.
+    if ($canViewReports && $bean->getAttribute('chpaid'))
+      array_push($fields, 'l.paid as paid');
+    // Add IP address.
+    if ($canViewReports && $bean->getAttribute('chip')) {
+      array_push($fields, 'l.created as created');
+      array_push($fields, 'l.created_ip as created_ip');
+      array_push($fields, 'l.modified as modified');
+      array_push($fields, 'l.modified_ip as modified_ip');
+    }
+
     // Add invoice name if it is selected.
-    if (($user->canManageTeam() || $user->isClient()) && $bean->getAttribute('chinvoice'))
+    if (($canViewReports || $isClient) && $bean->getAttribute('chinvoice'))
       array_push($fields, 'i.name as invoice');
 
     // Prepare sql query part for left joins.
     $left_joins = null;
     if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
       $left_joins .= " left join tt_clients c on (c.id = l.client_id)";
-    if (($user->canManageTeam() || $user->isClient()) && $bean->getAttribute('chinvoice'))
+    if (($canViewReports || $isClient) && $bean->getAttribute('chinvoice'))
       $left_joins .= " left join tt_invoices i on (i.id = l.invoice_id and i.status = 1)";
-    if ($user->canManageTeam() || $user->isClient() || $user->isPluginEnabled('ex'))
+    if ($canViewReports || $isClient || $user->isPluginEnabled('ex'))
        $left_joins .= " left join tt_users u on (u.id = l.user_id)";
     if ($bean->getAttribute('chproject') || 'project' == $group_by_option)
       $left_joins .= " left join tt_projects p on (p.id = l.project_id)";
@@ -317,7 +340,7 @@ class ttReportHelper {
       array_push($fields, 'ei.id');
       array_push($fields, '2 as type'); // Type 2 is for tt_expense_items entries.
       array_push($fields, 'ei.date');
-      if($user->canManageTeam() || $user->isClient())
+      if($canViewReports || $isClient)
         array_push($fields, 'u.name as user');
       // Add client name if it is selected.
       if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
@@ -342,19 +365,30 @@ class ttReportHelper {
         array_push($fields, 'ei.name as note');
       array_push($fields, 'ei.cost as cost');
       array_push($fields, 'ei.cost as expense');
+      // Add paid status.
+      if ($canViewReports && $bean->getAttribute('chpaid'))
+        array_push($fields, 'ei.paid as paid');
+      // Add IP address.
+      if ($canViewReports && $bean->getAttribute('chip')) {
+        array_push($fields, 'ei.created as created');
+        array_push($fields, 'ei.created_ip as created_ip');
+        array_push($fields, 'ei.modified as modified');
+        array_push($fields, 'ei.modified_ip as modified_ip');
+      }
+
       // Add invoice name if it is selected.
-      if (($user->canManageTeam() || $user->isClient()) && $bean->getAttribute('chinvoice'))
+      if (($canViewReports || $isClient) && $bean->getAttribute('chinvoice'))
         array_push($fields, 'i.name as invoice');
 
       // Prepare sql query part for left joins.
       $left_joins = null;
-      if ($user->canManageTeam() || $user->isClient())
+      if ($canViewReports || $isClient)
         $left_joins .= " left join tt_users u on (u.id = ei.user_id)";
       if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
         $left_joins .= " left join tt_clients c on (c.id = ei.client_id)";
       if ($bean->getAttribute('chproject') || 'project' == $group_by_option)
         $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";
-      if (($user->canManageTeam() || $user->isClient()) && $bean->getAttribute('chinvoice'))
+      if (($canViewReports || $isClient) && $bean->getAttribute('chinvoice'))
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
 
       $where = ttReportHelper::getExpenseWhere($bean);
@@ -372,7 +406,7 @@ class ttReportHelper {
       $sort_part .= 'date';
     else
       $sort_part .= $group_by_option.', date';
-    if (($user->canManageTeam() || $user->isClient()) && is_array($bean->getAttribute('users')) && 'user' != $group_by_option)
+    if (($canViewReports || $isClient) && is_array($bean->getAttribute('users')) && 'user' != $group_by_option)
       $sort_part .= ', user, type';
     if ($bean->getAttribute('chstart'))
       $sort_part .= ', unformatted_start';
@@ -422,12 +456,49 @@ class ttReportHelper {
     return $report_items;
   }
 
+  // putInSession stores tt_log and tt_expense_items ids from a report in user session
+  // as 2 comma-separated lists.
+  static function putInSession($report_items) {
+    unset($_SESSION['report_item_ids']);
+    unset($_SESSION['report_item_expense_ids']);
+
+    // Iterate through records and build 2 comma-separated lists.
+    foreach($report_items as $item) {
+      if ($item['type'] == 1)
+        $report_item_ids .= ','.$item['id'];
+      else if ($item['type'] == 2)
+         $report_item_expense_ids .= ','.$item['id'];
+    }
+    $report_item_ids = trim($report_item_ids, ',');
+    $report_item_expense_ids = trim($report_item_expense_ids, ',');
+
+    // The lists are reqdy. Put them in session.
+    if ($report_item_ids) $_SESSION['report_item_ids'] = $report_item_ids;
+    if ($report_item_expense_ids) $_SESSION['report_item_expense_ids'] = $report_item_expense_ids;
+  }
+
+  // getFromSession obtains tt_log and tt_expense_items ids stored in user session.
+  static function getFromSession() {
+    $items = array();
+    $report_item_ids = $_SESSION['report_item_ids'];
+    if ($report_item_ids)
+      $items['report_item_ids'] = explode(',', $report_item_ids);
+    $report_item_expense_ids = $_SESSION['report_item_expense_ids'];
+    if ($report_item_expense_ids)
+      $items['report_item_expense_ids'] = explode(',', $report_item_expense_ids);
+    return $items;
+  }
+
   // getFavItems retrieves all items associated with a favorite report.
   // It combines tt_log and tt_expense_items in one array for presentation in one table using mysql union all.
   // Expense items use the "note" field for item name.
   static function getFavItems($report) {
     global $user;
     $mdb2 = getConnection();
+
+    // Determine these once as they are used in multiple places in this function.
+    $canViewReports = $user->can('view_reports');
+    $isClient = $user->isClient();
 
     $group_by_option = $report['group_by'];
     $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($report['show_start'] || $report['show_end']);
@@ -437,7 +508,7 @@ class ttReportHelper {
     array_push($fields, 'l.id as id');
     array_push($fields, '1 as type'); // Type 1 is for tt_log entries.
     array_push($fields, 'l.date as date');
-    if($user->canManageTeam() || $user->isClient())
+    if($canViewReports || $isClient)
       array_push($fields, 'u.name as user');
     // Add client name if it is selected.
     if ($report['show_client'] || 'client' == $group_by_option)
@@ -451,7 +522,7 @@ class ttReportHelper {
     // Add custom field.
     $include_cf_1 = $report['show_custom_field_1'] || 'cf_1' == $group_by_option;
     if ($include_cf_1) {
-      $custom_fields = new CustomFields($user->team_id);
+      $custom_fields = new CustomFields($user->group_id);
       $cf_1_type = $custom_fields->fields[0]['type'];
       if ($cf_1_type == CustomFields::TYPE_TEXT) {
         array_push($fields, 'cfl.value as cf_1');
@@ -482,17 +553,27 @@ class ttReportHelper {
         array_push($fields, "cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost"); // Use project rate for user.
       array_push($fields, "null as expense"); 
     }
+    // Add paid status.
+    if ($canViewReports && $report['show_paid'])
+      array_push($fields, 'l.paid as paid');
+    // Add IP address.
+    if ($canViewReports && $report['show_ip']) {
+      array_push($fields, 'l.created as created');
+      array_push($fields, 'l.created_ip as created_ip');
+      array_push($fields, 'l.modified as modified');
+      array_push($fields, 'l.modified_ip as modified_ip');
+    }
     // Add invoice name if it is selected.
-    if (($user->canManageTeam() || $user->isClient()) && $report['show_invoice'])
+    if (($canViewReports || $isClient) && $report['show_invoice'])
       array_push($fields, 'i.name as invoice');
 
     // Prepare sql query part for left joins.
     $left_joins = null;
     if ($report['show_client'] || 'client' == $group_by_option)
       $left_joins .= " left join tt_clients c on (c.id = l.client_id)";
-    if (($user->canManageTeam() || $user->isClient()) && $report['show_invoice'])
+    if (($canViewReports || $isClient) && $report['show_invoice'])
       $left_joins .= " left join tt_invoices i on (i.id = l.invoice_id and i.status = 1)";
-    if ($user->canManageTeam() || $user->isClient() || $user->isPluginEnabled('ex'))
+    if ($canViewReports || $isClient || $user->isPluginEnabled('ex'))
        $left_joins .= " left join tt_users u on (u.id = l.user_id)";
     if ($report['show_project'] || 'project' == $group_by_option)
       $left_joins .= " left join tt_projects p on (p.id = l.project_id)";
@@ -523,7 +604,7 @@ class ttReportHelper {
       array_push($fields, 'ei.id');
       array_push($fields, '2 as type'); // Type 2 is for tt_expense_items entries.
       array_push($fields, 'ei.date');
-      if($user->canManageTeam() || $user->isClient())
+      if($canViewReports || $isClient)
         array_push($fields, 'u.name as user');
       // Add client name if it is selected.
       if ($report['show_client'] || 'client' == $group_by_option)
@@ -548,19 +629,29 @@ class ttReportHelper {
         array_push($fields, 'ei.name as note');
       array_push($fields, 'ei.cost as cost');
       array_push($fields, 'ei.cost as expense');
+      // Add paid status.
+      if ($canViewReports && $report['show_paid'])
+        array_push($fields, 'ei.paid as paid');
+      // Add IP address.
+      if ($canViewReports && $report['show_ip']) {
+        array_push($fields, 'ei.created as created');
+        array_push($fields, 'ei.created_ip as created_ip');
+        array_push($fields, 'ei.modified as modified');
+        array_push($fields, 'ei.modified_ip as modified_ip');
+      }
       // Add invoice name if it is selected.
-      if (($user->canManageTeam() || $user->isClient()) && $report['show_invoice'])
+      if (($canViewReports || $isClient) && $report['show_invoice'])
         array_push($fields, 'i.name as invoice');
 
       // Prepare sql query part for left joins.
       $left_joins = null;
-      if ($user->canManageTeam() || $user->isClient())
+      if ($canViewReports || $isClient)
         $left_joins .= " left join tt_users u on (u.id = ei.user_id)";
       if ($report['show_client'] || 'client' == $group_by_option)
         $left_joins .= " left join tt_clients c on (c.id = ei.client_id)";
       if ($report['show_project'] || 'project' == $group_by_option)
         $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";
-      if (($user->canManageTeam() || $user->isClient()) && $report['show_invoice'])
+      if (($canViewReports || $isClient) && $report['show_invoice'])
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
 
       $where = ttReportHelper::getFavExpenseWhere($report);
@@ -578,7 +669,7 @@ class ttReportHelper {
       $sort_part .= 'date';
     else
       $sort_part .= $group_by_option.', date';
-    if (($user->canManageTeam() || $user->isClient()) /*&& is_array($bean->getAttribute('users'))*/ && 'user' != $group_by_option)
+    if (($canViewReports || $isClient) /*&& is_array($bean->getAttribute('users'))*/ && 'user' != $group_by_option)
       $sort_part .= ', user, type';
     if ($report['show_start'])
       $sort_part .= ', unformatted_start';
@@ -665,7 +756,7 @@ class ttReportHelper {
         break;
       case 'cf_1':
         $group_field = 'cfo.value';
-        $custom_fields = new CustomFields($user->team_id);
+        $custom_fields = new CustomFields($user->group_id);
         if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
           $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id) ';
         elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
@@ -793,7 +884,7 @@ class ttReportHelper {
         break;
       case 'cf_1':
         $group_field = 'cfo.value';
-        $custom_fields = new CustomFields($user->team_id);
+        $custom_fields = new CustomFields($user->group_id);
         if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
           $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id) ';
         elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
@@ -945,7 +1036,7 @@ class ttReportHelper {
         new DateAndTime($user->date_format, $bean->getAttribute('end_date')));
     }
 
-    $totals['start_date'] = $period->getBeginDate();
+    $totals['start_date'] = $period->getStartDate();
     $totals['end_date'] = $period->getEndDate();
     $totals['time'] = $total_time;
     $totals['cost'] = $total_cost;
@@ -1015,7 +1106,7 @@ class ttReportHelper {
         new DateAndTime($user->date_format, $report['period_end']));
     }
 
-    $totals['start_date'] = $period->getBeginDate();
+    $totals['start_date'] = $period->getStartDate();
     $totals['end_date'] = $period->getEndDate();
     $totals['time'] = $total_time;
     $totals['cost'] = $total_cost;
@@ -1042,11 +1133,32 @@ class ttReportHelper {
     }
   }
 
+  // The markPaid marks a set of records as either paid or unpaid.
+  static function markPaid($time_log_ids, $expense_item_ids, $paid = true)
+  {
+    $mdb2 = getConnection();
+    $paid_val = (int) $paid;
+    if ($time_log_ids) {
+      $sql = "update tt_log set paid = $paid_val where id in(".join(', ', $time_log_ids).")";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
+    }
+    if ($expense_item_ids) {
+      $sql = "update tt_expense_items set paid = $paid_val where id in(".join(', ', $expense_item_ids).")";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
+    }
+  }
+
   // prepareReportBody - prepares an email body for report.
   static function prepareReportBody($bean, $comment)
   {
     global $user;
     global $i18n;
+
+    // Determine these once as they are used in multiple places in this function.
+    $canViewReports = $user->can('view_reports');
+    $isClient = $user->isClient();
 
     $items = ttReportHelper::getItems($bean);
     $group_by = $bean->getAttribute('group_by');
@@ -1056,13 +1168,13 @@ class ttReportHelper {
 
     // Use custom fields plugin if it is enabled.
     if ($user->isPluginEnabled('cf'))
-      $custom_fields = new CustomFields($user->team_id);
+      $custom_fields = new CustomFields($user->group_id);
 
     // Define some styles to use in email.
     $style_title = 'text-align: center; font-size: 15pt; font-family: Arial, Helvetica, sans-serif;';
     $tableHeader = 'font-weight: bold; background-color: #a6ccf7; text-align: left;';
     $tableHeaderCentered = 'font-weight: bold; background-color: #a6ccf7; text-align: center;';
-    $rowItem = 'background-color: #ccccce;';
+    $rowItem = 'background-color: #ffffff;';
     $rowItemAlt = 'background-color: #f5f5f5;';
     $rowSubtotal = 'background-color: #e0e0e0;';
     $cellLeftAligned = 'text-align: left; vertical-align: top;';
@@ -1076,7 +1188,7 @@ class ttReportHelper {
     $body .= '<body>';
 
     // Output title.
-    $body .= '<p style="'.$style_title.'">'.$i18n->getKey('form.mail.report_subject').': '.$totals['start_date'].' - '.$totals['end_date'].'</p>';
+    $body .= '<p style="'.$style_title.'">'.$i18n->get('form.mail.report_subject').': '.$totals['start_date'].' - '.$totals['end_date'].'</p>';
 
     // Output comment.
     if ($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>';
@@ -1089,16 +1201,16 @@ class ttReportHelper {
         $group_by_header = htmlspecialchars($custom_fields->fields[0]['label']);
       else {
         $key = 'label.'.$group_by;
-        $group_by_header = $i18n->getKey($key);
+        $group_by_header = $i18n->get($key);
       }
 
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
       $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
       if ($bean->getAttribute('chduration'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
       if ($bean->getAttribute('chcost'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
       $body .= '</tr>';
       foreach($subtotals as $subtotal) {
         $body .= '<tr style="'.$rowSubtotal.'">';
@@ -1110,7 +1222,7 @@ class ttReportHelper {
         }
         if ($bean->getAttribute('chcost')) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-          $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotal['cost'] : $subtotal['expenses'];
+          $body .= ($canViewReports || $isClient) ? $subtotal['cost'] : $subtotal['expenses'];
           $body .= '</td>';
         }
         $body .= '</tr>';
@@ -1119,7 +1231,7 @@ class ttReportHelper {
       // Print totals.
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
-      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.total').'</td>';
+      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.total').'</td>';
       if ($bean->getAttribute('chduration')) {
         $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
         if ($totals['time'] <> '0:00') $body .= $totals['time'];
@@ -1127,7 +1239,7 @@ class ttReportHelper {
       }
       if ($bean->getAttribute('chcost')) {
         $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
-        $body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
+        $body .= ($canViewReports || $isClient) ? $totals['cost'] : $totals['expenses'];
         $body .= '</td>';
       }
       $body .= '</tr>';
@@ -1139,29 +1251,33 @@ class ttReportHelper {
       // Print table header.
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
-      $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.date').'</td>';
-      if ($user->canManageTeam() || $user->isClient())
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.user').'</td>';
+      $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.date').'</td>';
+      if ($canViewReports || $isClient)
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.user').'</td>';
       if ($bean->getAttribute('chclient'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.client').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.client').'</td>';
       if ($bean->getAttribute('chproject'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.project').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.project').'</td>';
       if ($bean->getAttribute('chtask'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.task').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.task').'</td>';
       if ($bean->getAttribute('chcf_1'))
         $body .= '<td style="'.$tableHeader.'">'.htmlspecialchars($custom_fields->fields[0]['label']).'</td>';
       if ($bean->getAttribute('chstart'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.start').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.start').'</td>';
       if ($bean->getAttribute('chfinish'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.finish').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.finish').'</td>';
       if ($bean->getAttribute('chduration'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
       if ($bean->getAttribute('chnote'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.note').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.note').'</td>';
       if ($bean->getAttribute('chcost'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
+      if ($bean->getAttribute('chpaid'))
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.paid').'</td>';
+      if ($bean->getAttribute('chip'))
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.ip').'</td>';
       if ($bean->getAttribute('chinvoice'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.invoice').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.invoice').'</td>';
       $body .= '</tr>';
 
       // Initialize variables to print subtotals.
@@ -1185,9 +1301,9 @@ class ttReportHelper {
             $cur_grouped_by = $record['grouped_by'];
             if ($cur_grouped_by != $prev_grouped_by && !$first_pass) {
               $body .= '<tr style="'.$rowSubtotal.'">';
-              $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.subtotal').'</td>';
+              $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
               $subtotal_name = htmlspecialchars($subtotals[$prev_grouped_by]['name']);
-              if ($user->canManageTeam() || $user->isClient()) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
+              if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
               if ($bean->getAttribute('chclient')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
               if ($bean->getAttribute('chproject')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
               if ($bean->getAttribute('chtask')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
@@ -1198,9 +1314,11 @@ class ttReportHelper {
               if ($bean->getAttribute('chnote')) $body .= '<td></td>';
               if ($bean->getAttribute('chcost')) {
                 $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-                $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
+                $body .= ($canViewReports || $isClient) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
                 $body .= '</td>';
               }
+              if ($bean->getAttribute('chpaid')) $body .= '<td></td>';
+              if ($bean->getAttribute('chip')) $body .= '<td></td>';
               if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
               $body .= '</tr>';
               $body .= '<tr><td>&nbsp;</td></tr>';
@@ -1213,7 +1331,7 @@ class ttReportHelper {
             $row_style = ($row_style == $rowItem) ? $rowItemAlt : $rowItem;
           $body .= '<tr style="'.$row_style.'">';
           $body .= '<td style="'.$cellLeftAligned.'">'.$record['date'].'</td>';
-          if ($user->canManageTeam() || $user->isClient())
+          if ($canViewReports || $isClient)
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['user']).'</td>';
           if ($bean->getAttribute('chclient'))
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['client']).'</td>';
@@ -1233,6 +1351,16 @@ class ttReportHelper {
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['note']).'</td>';
           if ($bean->getAttribute('chcost'))
             $body .= '<td style="'.$cellRightAligned.'">'.$record['cost'].'</td>';
+          if ($bean->getAttribute('chpaid')) {
+            $body .= '<td style="'.$cellRightAligned.'">';
+            $body .= $record['paid'] == 1 ? $i18n->get('label.yes') : $i18n->get('label.no');
+            $body .= '</td>';
+          }
+          if ($bean->getAttribute('chip')) {
+            $body .= '<td style="'.$cellRightAligned.'">';
+            $body .= $record['modified'] ? $record['modified_ip'].' '.$record['modified'] : $record['created_ip'].' '.$record['created'];
+            $body .= '</td>';
+          }
           if ($bean->getAttribute('chinvoice'))
             $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['invoice']).'</td>';
           $body .= '</tr>';
@@ -1246,9 +1374,9 @@ class ttReportHelper {
       // Print a terminating subtotal.
       if ($print_subtotals) {
         $body .= '<tr style="'.$rowSubtotal.'">';
-        $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.subtotal').'</td>';
+        $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
         $subtotal_name = htmlspecialchars($subtotals[$cur_grouped_by]['name']);
-        if ($user->canManageTeam() || $user->isClient()) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
+        if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
         if ($bean->getAttribute('chclient')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
         if ($bean->getAttribute('chproject')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
         if ($bean->getAttribute('chtask')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
@@ -1259,9 +1387,11 @@ class ttReportHelper {
         if ($bean->getAttribute('chnote')) $body .= '<td></td>';
         if ($bean->getAttribute('chcost')) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-          $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotals[$cur_grouped_by]['cost'] : $subtotals[$cur_grouped_by]['expenses'];
+          $body .= ($canViewReports || $isClient) ? $subtotals[$cur_grouped_by]['cost'] : $subtotals[$cur_grouped_by]['expenses'];
           $body .= '</td>';
         }
+        if ($bean->getAttribute('chpaid')) $body .= '<td></td>';
+        if ($bean->getAttribute('chip')) $body .= '<td></td>';
         if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
         $body .= '</tr>';
       }
@@ -1269,8 +1399,8 @@ class ttReportHelper {
       // Print totals.
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
-      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.total').'</td>';
-      if ($user->canManageTeam() || $user->isClient()) $body .= '<td></td>';
+      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.total').'</td>';
+      if ($canViewReports || $isClient) $body .= '<td></td>';
       if ($bean->getAttribute('chclient')) $body .= '<td></td>';
       if ($bean->getAttribute('chproject')) $body .= '<td></td>';
       if ($bean->getAttribute('chtask')) $body .= '<td></td>';
@@ -1281,9 +1411,11 @@ class ttReportHelper {
       if ($bean->getAttribute('chnote')) $body .= '<td></td>';
       if ($bean->getAttribute('chcost')) {
         $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
-        $body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
+        $body .= ($canViewReports || $isClient) ? $totals['cost'] : $totals['expenses'];
         $body .= '</td>';
       }
+      if ($bean->getAttribute('chpaid')) $body .= '<td></td>';
+      if ($bean->getAttribute('chip')) $body .= '<td></td>';
       if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
       $body .= '</tr>';
 
@@ -1292,7 +1424,7 @@ class ttReportHelper {
 
     // Output footer.
     if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false))
-      $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
+      $body .= '<p style="text-align: center;">'.$i18n->get('form.mail.footer').'</p>';
 
     // Finish creating email body.
     $body .= '</body></html>';
@@ -1300,11 +1432,29 @@ class ttReportHelper {
     return $body;
   }
 
+  // checkFavReportCondition - checks whether it is okay to send fav report.
+  static function checkFavReportCondition($report, $condition)
+  {
+    $items = ttReportHelper::getFavItems($report);
+
+    $condition = str_replace('count', '', $condition);
+    $count_required = (int) trim(str_replace('>', '', $condition));
+
+    if (count($items) > $count_required)
+      return true; // Condition ok.
+
+    return false;
+  }
+
   // prepareFavReportBody - prepares an email body for a favorite report.
   static function prepareFavReportBody($report)
   {
     global $user;
     global $i18n;
+
+    // Determine these once as they are used in multiple places in this function.
+    $canViewReports = $user->can('view_reports');
+    $isClient = $user->isClient();
 
     $items = ttReportHelper::getFavItems($report);
     $group_by = $report['group_by'];
@@ -1314,13 +1464,13 @@ class ttReportHelper {
 
     // Use custom fields plugin if it is enabled.
     if ($user->isPluginEnabled('cf'))
-      $custom_fields = new CustomFields($user->team_id);
+      $custom_fields = new CustomFields($user->group_id);
 
     // Define some styles to use in email.
     $style_title = 'text-align: center; font-size: 15pt; font-family: Arial, Helvetica, sans-serif;';
     $tableHeader = 'font-weight: bold; background-color: #a6ccf7; text-align: left;';
     $tableHeaderCentered = 'font-weight: bold; background-color: #a6ccf7; text-align: center;';
-    $rowItem = 'background-color: #ccccce;';
+    $rowItem = 'background-color: #ffffff;';
     $rowItemAlt = 'background-color: #f5f5f5;';
     $rowSubtotal = 'background-color: #e0e0e0;';
     $cellLeftAligned = 'text-align: left; vertical-align: top;';
@@ -1334,7 +1484,7 @@ class ttReportHelper {
     $body .= '<body>';
 
     // Output title.
-    $body .= '<p style="'.$style_title.'">'.$i18n->getKey('form.mail.report_subject').': '.$totals['start_date'].' - '.$totals['end_date'].'</p>';
+    $body .= '<p style="'.$style_title.'">'.$i18n->get('form.mail.report_subject').': '.$totals['start_date'].' - '.$totals['end_date'].'</p>';
 
     // Output comment.
     // if ($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>'; // No comment for fav. reports.
@@ -1347,16 +1497,16 @@ class ttReportHelper {
         $group_by_header = htmlspecialchars($custom_fields->fields[0]['label']);
       else {
         $key = 'label.'.$group_by;
-        $group_by_header = $i18n->getKey($key);
+        $group_by_header = $i18n->get($key);
       }
 
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
       $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
       if ($report['show_duration'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
       if ($report['show_cost'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
       $body .= '</tr>';
       foreach($subtotals as $subtotal) {
         $body .= '<tr style="'.$rowSubtotal.'">';
@@ -1368,7 +1518,7 @@ class ttReportHelper {
         }
         if ($report['show_cost']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-          $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotal['cost'] : $subtotal['expenses'];
+          $body .= ($canViewReports || $isClient) ? $subtotal['cost'] : $subtotal['expenses'];
           $body .= '</td>';
         }
         $body .= '</tr>';
@@ -1377,7 +1527,7 @@ class ttReportHelper {
       // Print totals.
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
-      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.total').'</td>';
+      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.total').'</td>';
       if ($report['show_duration']) {
         $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
         if ($totals['time'] <> '0:00') $body .= $totals['time'];
@@ -1385,7 +1535,7 @@ class ttReportHelper {
       }
       if ($report['show_cost']) {
         $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
-        $body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
+        $body .= ($canViewReports || $isClient) ? $totals['cost'] : $totals['expenses'];
         $body .= '</td>';
       }
       $body .= '</tr>';
@@ -1397,29 +1547,33 @@ class ttReportHelper {
       // Print table header.
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
-      $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.date').'</td>';
-      if ($user->canManageTeam() || $user->isClient())
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.user').'</td>';
+      $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.date').'</td>';
+      if ($canViewReports || $isClient)
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.user').'</td>';
       if ($report['show_client'])
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.client').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.client').'</td>';
       if ($report['show_project'])
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.project').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.project').'</td>';
       if ($report['show_task'])
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.task').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.task').'</td>';
       if ($report['show_custom_field_1'])
         $body .= '<td style="'.$tableHeader.'">'.htmlspecialchars($custom_fields->fields[0]['label']).'</td>';
       if ($report['show_start'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.start').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.start').'</td>';
       if ($report['show_end'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.finish').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.finish').'</td>';
       if ($report['show_duration'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
       if ($report['show_note'])
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.note').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.note').'</td>';
       if ($report['show_cost'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
+      if ($report['show_paid'])
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.paid').'</td>';
+      if ($report['show_ip'])
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.ip').'</td>';
       if ($report['show_invoice'])
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.invoice').'</td>';
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.invoice').'</td>';
       $body .= '</tr>';
 
       // Initialize variables to print subtotals.
@@ -1443,9 +1597,9 @@ class ttReportHelper {
             $cur_grouped_by = $record['grouped_by'];
             if ($cur_grouped_by != $prev_grouped_by && !$first_pass) {
               $body .= '<tr style="'.$rowSubtotal.'">';
-              $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.subtotal').'</td>';
+              $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
               $subtotal_name = htmlspecialchars($subtotals[$prev_grouped_by]['name']);
-              if ($user->canManageTeam() || $user->isClient()) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
+              if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
               if ($report['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
               if ($report['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
               if ($report['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
@@ -1456,9 +1610,11 @@ class ttReportHelper {
               if ($report['show_note']) $body .= '<td></td>';
               if ($report['show_cost']) {
                 $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-                $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
+                $body .= ($canViewReports || $isClient) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
                 $body .= '</td>';
               }
+              if ($report['show_paid']) $body .= '<td></td>';
+              if ($report['show_ip']) $body .= '<td></td>';
               if ($report['show_invoice']) $body .= '<td></td>';
               $body .= '</tr>';
               $body .= '<tr><td>&nbsp;</td></tr>';
@@ -1471,7 +1627,7 @@ class ttReportHelper {
             $row_style = ($row_style == $rowItem) ? $rowItemAlt : $rowItem;
           $body .= '<tr style="'.$row_style.'">';
           $body .= '<td style="'.$cellLeftAligned.'">'.$record['date'].'</td>';
-          if ($user->canManageTeam() || $user->isClient())
+          if ($canViewReports || $isClient)
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['user']).'</td>';
           if ($report['show_client'])
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['client']).'</td>';
@@ -1491,6 +1647,16 @@ class ttReportHelper {
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['note']).'</td>';
           if ($report['show_cost'])
             $body .= '<td style="'.$cellRightAligned.'">'.$record['cost'].'</td>';
+          if ($report['show_paid']) {
+            $body .= '<td style="'.$cellRightAligned.'">';
+            $body .= $record['paid'] == 1 ? $i18n->get('label.yes') : $i18n->get('label.no');
+            $body .= '</td>';
+          }
+          if ($report['show_ip']) {
+            $body .= '<td style="'.$cellRightAligned.'">';
+            $body .= $record['modified'] ? $record['modified_ip'].' '.$record['modified'] : $record['created_ip'].' '.$record['created'];
+            $body .= '</td>';
+          }
           if ($report['show_invoice'])
             $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['invoice']).'</td>';
           $body .= '</tr>';
@@ -1504,9 +1670,9 @@ class ttReportHelper {
       // Print a terminating subtotal.
       if ($print_subtotals) {
         $body .= '<tr style="'.$rowSubtotal.'">';
-        $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.subtotal').'</td>';
+        $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
         $subtotal_name = htmlspecialchars($subtotals[$cur_grouped_by]['name']);
-        if ($user->canManageTeam() || $user->isClient()) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
+        if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
         if ($report['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
         if ($report['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
         if ($report['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
@@ -1517,9 +1683,11 @@ class ttReportHelper {
         if ($report['show_note']) $body .= '<td></td>';
         if ($report['show_cost']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-          $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotals[$cur_grouped_by]['cost'] : $subtotals[$cur_grouped_by]['expenses'];
+          $body .= ($canViewReports || $isClient) ? $subtotals[$cur_grouped_by]['cost'] : $subtotals[$cur_grouped_by]['expenses'];
           $body .= '</td>';
         }
+        if ($report['show_paid']) $body .= '<td></td>';
+        if ($report['show_ip']) $body .= '<td></td>';
         if ($report['show_invoice']) $body .= '<td></td>';
         $body .= '</tr>';
       }
@@ -1527,8 +1695,8 @@ class ttReportHelper {
       // Print totals.
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
-      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->getKey('label.total').'</td>';
-      if ($user->canManageTeam() || $user->isClient()) $body .= '<td></td>';
+      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.total').'</td>';
+      if ($canViewReports || $isClient) $body .= '<td></td>';
       if ($report['show_client']) $body .= '<td></td>';
       if ($report['show_project']) $body .= '<td></td>';
       if ($report['show_task']) $body .= '<td></td>';
@@ -1539,9 +1707,11 @@ class ttReportHelper {
       if ($report['show_note']) $body .= '<td></td>';
       if ($report['show_cost']) {
         $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
-        $body .= ($user->canManageTeam() || $user->isClient()) ? $totals['cost'] : $totals['expenses'];
+        $body .= ($canViewReports || $isClient) ? $totals['cost'] : $totals['expenses'];
         $body .= '</td>';
       }
+      if ($report['show_paid']) $body .= '<td></td>';
+      if ($report['show_ip']) $body .= '<td></td>';
       if ($report['show_invoice']) $body .= '<td></td>';
       $body .= '</tr>';
 
@@ -1550,7 +1720,7 @@ class ttReportHelper {
 
     // Output footer.
     if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false))
-      $body .= '<p style="text-align: center;">'.$i18n->getKey('form.mail.footer').'</p>';
+      $body .= '<p style="text-align: center;">'.$i18n->get('form.mail.footer').'</p>';
 
     // Finish creating email body.
     $body .= '</body></html>';
@@ -1559,9 +1729,9 @@ class ttReportHelper {
   }
 
   // sendFavReport - sends a favorite report to a specified email, called from cron.php
-  static function sendFavReport($report, $email) {
+  static function sendFavReport($report, $subject, $email, $cc) {
     // We are called from cron.php, we have no $bean in session.
-    // cron.php set global $user and $i18n objects to match our favorite report user.
+    // cron.php sets global $user and $i18n objects to match our favorite report user.
     global $user;
     global $i18n;
 
@@ -1573,9 +1743,14 @@ class ttReportHelper {
     $mailer->setCharSet(CHARSET);
     $mailer->setContentType('text/html');
     $mailer->setSender(SENDER);
+    if (!empty($cc))
+      $mailer->setReceiverCC($cc);
+    if (!empty($user->bcc_email))
+      $mailer->setReceiverBCC($user->bcc_email);
     $mailer->setReceiver($email);
     $mailer->setMailMode(MAIL_MODE);
-    if (!$mailer->send($report['name'], $body))
+    if (empty($subject)) $subject = $report['name'];
+    if (!$mailer->send($subject, $body))
       return false;
 
     return true;

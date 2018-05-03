@@ -29,7 +29,7 @@
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
-$i18n_language = '한국어';
+$i18n_language = 'Korean (한국어)';
 $i18n_months = array('1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월');
 $i18n_weekdays = array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일');
 $i18n_weekdays_short = array('일', '월', '화', '수', '목', '금', '토');
@@ -38,33 +38,36 @@ $i18n_holidays = array('01/01', '01/25', '01/26', '01/27', '03/02', '03/05', '08
 
 $i18n_key_words = array(
 
-// Menus.
+// Menus - short selection strings that are displayed on top of application web pages.
+// Example: https://timetracker.anuko.com (black menu on top).
 'menu.login' => '로그인',
 'menu.logout' => '로그아웃',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.forum' => 'Forum',
 'menu.help' => '도움말',
-// Note to translators: menu.create_team needs a more accurate translation.
-'menu.create_team' => '새로운 관리자 계정을 생성',
+// TODO: translate the following.
+// 'menu.create_group' => 'Create Group',
 'menu.profile' => '프로필',
-'menu.time' => '나의 시간', // TODO: improve this, used to be "My time", now just "Time".
-// TODO: Translate the following:
+// TODO: translate the following.
+// 'menu.group' => 'Group',
+'menu.time' => '시간',
+// TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => '보고서',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.charts' => 'Charts',
 'menu.projects' => '프로젝트',
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'menu.tasks' => 'Tasks',
-// 'menu.users' => 'Users',
-'menu.teams' => '팀',
-// TODO: Translate the following:
+'menu.users' => '사용자',
+// TODO: translate the following.
+// 'menu.groups' => 'Groups',
 // 'menu.export' => 'Export',
 'menu.clients' => '클라이언트',
 'menu.options' => '옵션',
 
 // Footer - strings on the bottom of most pages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
 // 'footer.credits' => 'Credits',
 // 'footer.license' => 'License',
@@ -72,342 +75,498 @@ $i18n_key_words = array(
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: Translate the following:
+// TODO: translate the following.
 // 'error.access_denied' => 'Access denied.',
 // 'error.sys' => 'System error.',
-'error.db' => '데이터베이스 오류',
-'error.field' => '부정확한 "{0}" 의 데이터',
-'error.empty' => '"{0}" 의 필드가 비어있습니다',
-'error.not_equal' => '"{0}" 의 필드가 "{1}" 의 필드와 같지 않습니다',
-'error.interval' => '부정확한 간격입니다',
-'error.project' => '프로젝트의 선택',
-'error.activity' => '활동내용의 선택',
-'error.auth' => '부정확한 로그인 혹은 암호가 틀립니다',
-'error.user_exists' => '본 로그인과 연계된 사용자가 이미 있습니다',
-'error.project_exists' => '본 이름과 연계된 프로젝트가 이미 있습니다',
-'error.activity_exists' => '본 이름과 연계된 활동내용이 이미 있습니다',
-// TODO: translate error.client_exists.
-// 'error.client_exists' => 'client with this name already exists',
-'error.no_login' => '본 로그인과 연계된 사용자가 없습니다',
-'error.upload' => '파일 업로드 오류',
-// TODO: Translate the following:
+'error.db' => '데이터베이스 오류.',
+// TODO: translate the following.
+// 'error.feature_disabled' => 'Feature is disabled.',
+'error.field' => '부정확한 "{0}" 의 데이터.',
+'error.empty' => '"{0}" 의 필드가 비어있습니다.',
+'error.not_equal' => '"{0}" 의 필드가 "{1}" 의 필드와 같지 않습니다.',
+// TODO: translate the following.
+// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+'error.project' => '프로젝트의 선택.',
+// TODO: translate the following.
+// 'error.task' => 'Select task.',
+'error.client' => '클라이언트 선택.',
+// TODO: translate the following.
+// 'error.report' => 'Select report.',
+// 'error.record' => 'Select record.',
+'error.auth' => '부정확한 로그인 혹은 암호가 틀립니다.',
+'error.user_exists' => '본 로그인과 연계된 사용자가 이미 있습니다.',
+// TODO: translate the following.
+// 'error.object_exists' => 'Object with this name already exists.',
+'error.project_exists' => '본 이름과 연계된 프로젝트가 이미 있습니다.',
+// TODO: translate the following.
+// 'error.task_exists' => 'Task with this name already exists.',
+// 'error.client_exists' => 'Client with this name already exists.',
+// 'error.invoice_exists' => 'Invoice with this number already exists.',
+// 'error.role_exists' => 'Role with this rank already exists.',
+// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
+'error.no_login' => '본 로그인과 연계된 사용자가 없습니다.',
+'error.no_groups' => '당신의 데이터베이스는 비어있습니다. 관리자로 로그인하여 새로운 팀을 생성하십시오.', // TODO: replace "team" with "group".
+'error.upload' => '파일 업로드 오류.',
+// TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
-'error.mail_send' => '메일 보내기에서의 오류',
-'error.no_email' => '본 로그인과 연계된 이메일이 없습니다',
-// Note to translators: the strings below need to be translated.
-// 'error.uncompleted_exists' => 'uncompleted entry already exists. close or delete it.',
-// 'error.goto_uncompleted' => 'go to uncompleted entry.',
+'error.mail_send' => '메일 보내기에서의 오류.',
+'error.no_email' => '본 로그인과 연계된 이메일이 없습니다.',
+// TODO: translate the following.
+// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
+// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
+// 'error.overlap' => 'Time interval overlaps with existing records.',
+// 'error.future_date' => 'Date is in future.',
 
-// labels for various buttons
+// Labels for buttons.
 'button.login' => '로그인',
 'button.now' => '지금',
-// 'button.set' => '설정',
 'button.save' => '저장',
-'button.delete' => '삭제',
+// TODO: translate the following.
+// 'button.copy' => 'Copy',
 'button.cancel' => '취소',
 'button.submit' => '발송',
-// TODO: impprove translation of all button.add strings.
-'button.add_user' => '신규 사용자 추가',
-'button.add_project' => '신규 프로젝트 추가',
-'button.add_activity' => '신규 활동내용 추가',
-'button.add_client' => '신규 클라이언트 추가',
 'button.add' => '추가',
+'button.delete' => '삭제',
 'button.generate' => '생성',
-// Note to translators: button.reset_password needs an improved translation.
-'button.reset_password' => '실행',
+// TODO: translate the following.
+// 'button.reset_password' => 'Reset password',
 'button.send' => '송신',
 'button.send_by_email' => '이메일로 송신',
-'button.save_as_new' => '새것으로 저장',
-'button.create_team' => '신규 팀 작성',
-'button.export' => '팀 익스포트',
-'button.import' => '팀 임포트',
-'button.apply' => '적용',
+// TODO: translate the following.
+// 'button.create_group' => 'Create group',
+'button.export' => '팀 익스포트', // TODO: replace "team" with "group".
+'button.import' => '팀 임포트', // TODO: replace "team" with "group".
+// TODO: translate the following.
+// 'button.close' => 'Close',
+// 'button.stop' => 'Stop',
 
-// labels for controls on various forms
-// TODO: translate label.team_name
-// 'label.team_name' => 'team name',
+// Labels for controls on forms. Labels in this section are used on multiple forms.
+// TODO: translate the following.
+// 'label.group_name' => 'Group name',
+// 'label.address' => 'Address',
 'label.currency' => '화폐',
-// TODO: translate label.manager_name and label.manager_login.
-// 'label.manager_name' => 'manager name',
-// 'label.manager_login' => 'manager login',
-'label.password' => '암호',
+// TODO: translate the following.
+// 'label.manager_name' => 'Manager name',
+// 'label.manager_login' => 'Manager login',
+'label.person_name' => '이름',
+'label.thing_name' => '이름',
+'label.login' => '로그인ID',
+'label.password' => 'Password',
 'label.confirm_password' => '암호 확인',
 'label.email' => '이메일',
+// TODO: translate the following.
+// 'label.cc' => 'Cc',
+// 'label.bcc' => 'Bcc',
+'label.subject' => '제목',
+'label.date' => '날짜',
+'label.start_date' => '시작 날짜',
+'label.end_date' => '마감 날짜',
+'label.user' => '사용자',
+'label.users' => '사용자',
+// TODO: translate the following.
+// 'label.roles' => 'Roles',
+'label.client' => '클라이언트',
+'label.clients' => '클라이언트',
+'label.option' => '옵션',
+'label.invoice' => '송장',
+'label.project' => '프로젝트',
+'label.projects' => '프로젝트',
+// TODO: translate the following.
+// 'label.task' => 'Task',
+// 'label.tasks' => 'Tasks',
+// 'label.description' => 'Description',
+'label.start' => '시작',
+'label.finish' => '마감',
+'label.duration' => '기간',
+'label.note' => '표식',
+'label.notes' => '표식',
+// TODO: translate the following.
+// 'label.item' => 'Item',
+// 'label.cost' => 'Cost',
+// 'label.ip' => 'IP',
+// 'label.day_total' => 'Day total',
+'label.week_total' => '주별 합계',
+// TODO: translate the following.
+// 'label.month_total' => 'Month total',
+'label.today' => '오늘',
+// TODO: translate the following.
+// 'label.view' => 'View',
+'label.edit' => '편집',
+'label.delete' => '삭제',
+// TODO: translate the following.
+// 'label.configure' => 'Configure',
+'label.select_all' => '모두 선택',
+'label.select_none' => '모두 해제',
+// TODO: translate the following.
+// 'label.day_view' => 'Day view',
+// 'label.week_view' => 'Week view',
+'label.id' => '식별자',
+'label.language' => '언어',
+// TODO: translate the following.
+// 'label.decimal_mark' => 'Decimal mark',
+'label.date_format' => '날짜 포맷',
+'label.time_format' => '시간 포맷',
+'label.week_start' => '주의 시작요일',
+'label.comment' => '코멘트',
+'label.status' => '상태',
+'label.tax' => '세금',
+'label.subtotal' => '소계',
 'label.total' => '합계',
-// Translate the following string.
+// TODO: translate the following.
+// 'label.client_name' => 'Client name',
+// 'label.client_address' => 'Client address',
+'label.or' => '혹은',
+// TODO: translate the following.
+// 'label.error' => 'Error',
+'label.ldap_hint' => '아래의 필드들에서 <b>Windows 로그인</b> 및 <b>암호</b> 를 입력하십시오.',
+'label.required_fields' => '* 필수 필드',
+'label.on_behalf' => '을 대표하여',
+// TODO: translate all 3 roles properly, see https://www.anuko.com/time_tracker/user_guide/user_accounts.htm
+// This may require different terms for role_manager and role_comanager.
+'label.role_manager' => '(관리자)',
+'label.role_comanager' => '(공동관리자)',
+// 'label.role_admin' => '(administrator)',
+// TODO: translate the following.
 // 'label.page' => 'Page',
+// 'label.condition' => 'Condition',
+// 'label.yes' => 'yes',
+// 'label.no' => 'no',
+// Labels for plugins (extensions to Time Tracker that provide additional features).
+// TODO: translate the following.
+// 'label.custom_fields' => 'Custom fields',
+// 'label.monthly_quotas' => 'Monthly quotas',
+// 'label.type' => 'Type',
+// 'label.type_dropdown' => 'dropdown',
+// 'label.type_text' => 'text',
+// 'label.required' => 'Required',
+'label.fav_report' => '좋아하는 보고서',
+// TODO: translate the following.
+// 'label.schedule' => 'Schedule',
+// 'label.what_is_it' => 'What is it?',
+// 'label.expense' => 'Expense',
+'label.quantity' => '수량',
+// TODO: translate the following.
+// 'label.paid_status' => 'Paid status',
+// 'label.paid' => 'Paid',
+// 'label.mark_paid' => 'Mark paid',
+// 'label.week_note' => 'Week note',
+// 'label.week_list' => 'Week list',
 
 // Form titles.
-// TODO: the entire title section is missing here. See the English file.
+'title.login' => '로그인',
+'title.groups' => '팀', // TODO: change "teams" to "groups".
+// TODO: translate the following.
+// 'title.create_group' => 'Creating Group',
+// 'title.edit_group' => 'Editing Group',
+'title.delete_group' => '팀 삭제',  // TODO: change "team" to "group".
+'title.reset_password' => '암호 재설정',
+// TODO: translate the following.
+// 'title.change_password' => 'Changing Password',
+'title.time' => '시간',
+'title.edit_time_record' => '시간기록을 편집하기',
+'title.delete_time_record' => '시간기록을 삭제하기',
+// TODO: translate the following.
+// 'title.expenses' => 'Expenses',
+// 'title.edit_expense' => 'Editing Expense Item',
+// 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.predefined_expenses' => 'Predefined Expenses',
+// 'title.add_predefined_expense' => 'Adding Predefined Expense',
+// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
+// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+'title.reports' => '보고서',
+'title.report' => '보고서',
+// TODO: translate the following.
+// 'title.send_report' => 'Sending Report',
+'title.invoice' => '송장',
+// TODO: translate the following.
+// 'title.send_invoice' => 'Sending Invoice',
+// 'title.charts' => 'Charts',
+'title.projects' => '프로젝트',
+'title.add_project' => '프로젝트를 추가하기',
+'title.edit_project' => '프로젝트를 편집하기',
+'title.delete_project' => '프로젝트를 편집하기',
+// TODO: translate the following.
+// 'title.tasks' => 'Tasks',
+// 'title.add_task' => 'Adding Task',
+// 'title.edit_task' => 'Editing Task',
+// 'title.delete_task' => 'Deleting Task',
+'title.users' => '사용자', // TODO: is this correct? Not 사용자를 as below? title.users is for many (plural) users.
+                          // title.add, title.edit, and title.delete are for a single user.
+'title.add_user' => '사용자를 추가하기', // TODO: is this correct?
+'title.edit_user' => '사용자를 편집하기',
+'title.delete_user' => '사용자를 삭제하기',
+// TODO: translate the following.
+// 'title.roles' => 'Roles',
+// 'title.add_role' => 'Adding Role',
+// 'title.edit_role' => 'Editing Role',
+// 'title.delete_role' => 'Deleting Role',
+'title.clients' => '클라이언트',
+'title.add_client' => '클라이언트 추가',
+'title.edit_client' => '클라이언트 편집',
+'title.delete_client' => '클라이언트 삭제',
+'title.invoices' => '송장',
+// TODO: translate the following.
+// 'title.add_invoice' => 'Adding Invoice',
+// 'title.view_invoice' => 'Viewing Invoice',
+// 'title.delete_invoice' => 'Deleting Invoice',
+// 'title.notifications' => 'Notifications',
+// 'title.add_notification' => 'Adding Notification',
+// 'title.edit_notification' => 'Editing Notification',
+// 'title.delete_notification' => 'Deleting Notification',
+// 'title.monthly_quotas' => 'Monthly Quotas',
+// 'title.export' => 'Exporting Group Data',
+// 'title.import' => 'Importing Group Data',
+'title.options' => '옵션',
+'title.profile' => '프로필',
+// TODO: translate the following.
+// 'title.group' => 'Group Settings',
+// 'title.cf_custom_fields' => 'Custom Fields',
+// 'title.cf_add_custom_field' => 'Adding Custom Field',
+// 'title.cf_edit_custom_field' => 'Editing Custom Field',
+// 'title.cf_delete_custom_field' => 'Deleting Custom Field',
+// 'title.cf_dropdown_options' => 'Dropdown Options',
+// 'title.cf_add_dropdown_option' => 'Adding Option',
+// 'title.cf_edit_dropdown_option' => 'Editing Option',
+// 'title.cf_delete_dropdown_option' => 'Deleting Option',
+// NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
+// It is also a name for the Locking plugin on the group settings page.
+// 'title.locking' => 'Locking',
+// 'title.week_view' => 'Week View',
+// 'title.swap_roles' => 'Swapping Roles',
 
-"form.filter.project" => '프로젝트',
-"form.filter.filter" => '좋아하는 보고서',
-"form.filter.filter_new" => '좋아하는 것으로 저장',
-"form.filter.filter_confirm_delete" => '좋아하는 이 보고서를 삭제해도 좋습니까?',
+// Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
+// Strings that are used in a single form must go to the specific form section.
+'dropdown.all' => '--- 전부 ---',
+'dropdown.no' => '--- 아니 ---',
+'dropdown.current_day' => '오늘',
+// TODO: translate the following.
+// 'dropdown.previous_day' => 'yesterday',
+'dropdown.selected_day' => '일',
+'dropdown.current_week' => '이번주',
+'dropdown.previous_week' => '전번주',
+'dropdown.selected_week' => '주',
+'dropdown.current_month' => '이번달',
+'dropdown.previous_month' => '전번달',
+'dropdown.selected_month' => '달',
+'dropdown.current_year' => '올해',
+// TODO: translate the following.
+// 'dropdown.previous_year' => 'previous year',
+// 'dropdown.selected_year' => 'year',
+'dropdown.all_time' => '전시간',
+'dropdown.projects' => '프로젝트',
+// TODO: translate the following.
+// 'dropdown.tasks' => 'tasks',
+'dropdown.clients' => '클라이언트',
+// TODO: translate the following.
+// 'dropdown.select' => '--- select ---',
+// 'dropdown.select_invoice' => '--- select invoice ---',
+// 'dropdown.status_active' => 'active',
+// 'dropdown.status_inactive' => 'inactive',
+// 'dropdown.delete' => 'delete',
+// 'dropdown.do_not_delete' => 'do not delete',
+// 'dropdown.paid' => 'paid',
+// 'dropdown.not_paid' => 'not paid',
 
-// login form attributes
-"form.login.title" => '로그인',
-"form.login.login" => '로그인ID',
+// Login form. See example at https://timetracker.anuko.com/login.php.
+'form.login.forgot_password' => '암호를 잊으셨습니까?',
+// TODO: translate the following.
+// 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
-// password reminder form attributes
-"form.fpass.title" => '암호 재설정',
-"form.fpass.login" => '로그인',
-"form.fpass.send_pass_str" => '송신한 암호 재설정 요청',
-"form.fpass.send_pass_subj" => 'Anuko Time Tracker 암호 재설정 요청',
-// Note to translators: the ending of this string below needs to be translated.
-"form.fpass.send_pass_body" => "사용자님께,\n\n누군가 (아마 당신) 가 당신의 Anuko Time Tracker 암호 재설정을 요청하였습니다. 당신의 암호를 재설정하기 바란다면 이 링크를 찾아주십시오. \n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
-"form.fpass.reset_comment" => "암호를 재설정하려면 암호를 입력하고 저장을 클릭하십시오",
+// Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
+'form.reset_password.message' => '송신한 암호 재설정 요청.', // TODO: add "by email" to match the English string.
+'form.reset_password.email_subject' => 'Anuko Time Tracker 암호 재설정 요청',
+// TODO: translate the following.
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
-// administrator form
-"form.admin.title" => '관리자',
-"form.admin.duty_text" => '신규 팀관리자 계정을 생성하여 신규 팀을 생성합니다.<br>또한 다른 Anuko Time Tracker 서버 에서 xml 파일로부터 팀 데이터를 임포트할수 있습니다 (로그인 충돌은 허용되지 안음).',
+// Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
+// TODO: translate the following.
+// 'form.change_password.tip' => 'Type new password and click on Save.',
 
-"form.admin.change_pass" => '관리자 계정의 암호 변경',
-"form.admin.profile.title" => '팀',
-"form.admin.profile.noprofiles" => '당신의 데이터베이스는 비어있습니다. 관리자로 로그인하여 새로운 팀을 생성하십시오.',
-"form.admin.profile.comment" => '팀 삭제',
-"form.admin.profile.th.id" => '식별자',
-"form.admin.profile.th.name" => '이름',
-"form.admin.profile.th.edit" => '편집',
-"form.admin.profile.th.del" => '삭제',
-"form.admin.profile.th.active" => '활동내용',
-"form.admin.options" => '옵션',
-"form.admin.custom_date_format" => "날짜 포맷",
-"form.admin.custom_time_format" => "시간 포맷",
-"form.admin.start_week" => "주의 시작요일",
+// Time form. See example at https://timetracker.anuko.com/time.php.
+'form.time.duration_format' => '(hh:mm 혹은 0.0h)', // TODO: is there a better term for hh:mm as a hint to user what to enter?
+'form.time.billable' => '청구가능',
+'form.time.uncompleted' => '완성되지 않은',
+// TODO: translate the following.
+// 'form.time.remaining_quota' => 'Remaining quota',
+// 'form.time.over_quota' => 'Over quota',
 
-// my time form attributes
-"form.mytime.title" => '나의 시간',
-"form.mytime.edit_title" => '시간기록을 편집하기',
-"form.mytime.del_str" => '시간기록을 삭제하기',
-"form.mytime.time_form" => ' (hh:mm)',
-"form.mytime.date" => '날짜',
-"form.mytime.project" => '프로젝트',
-"form.mytime.activity" => '활동내용',
-"form.mytime.start" => '시작',
-"form.mytime.finish" => '마감',
-"form.mytime.duration" => '기간',
-"form.mytime.note" => '표식',
-"form.mytime.behalf" => '다음을 위한 하루일과',
-"form.mytime.daily" => '하루일과',
-"form.mytime.total" => '전체 시간: ',
-"form.mytime.th.project" => '프로젝트',
-"form.mytime.th.activity" => '활동내용',
-"form.mytime.th.start" => '시작',
-"form.mytime.th.finish" => '마감',
-"form.mytime.th.duration" => '기간',
-"form.mytime.th.note" => '표식',
-"form.mytime.th.edit" => '편집',
-"form.mytime.th.delete" => '삭제',
-"form.mytime.del_yes" => '성과적으로 삭제된 시간기록',
-"form.mytime.no_finished_rec" => '이 기록은 시작 시간으로만 저장되었습니다. 이것은 오류는 아닙니다. 필요하면 로그아웃 하십시오.',
-"form.mytime.billable" => '청구가능',
-"form.mytime.warn_tozero_rec" => '이 시간기간이 로크되었으므로 이 시간기록은 삭제되어야 합니다',
-"form.mytime.uncompleted" => '완성되지 않은',
+// Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
+'form.time_edit.uncompleted' => '이 기록은 시작 시간으로만 저장되었습니다. 이것은 오류는 아닙니다.',
 
-// profile form attributes
-// Note to translators: we need a more accurate translation of form.profile.create_title
-"form.profile.create_title" => '신규 관리자 계정을 생성',
-"form.profile.edit_title" => '프로필을 편집하기',
-"form.profile.name" => '이름',
-"form.profile.login" => '로그인ID',
+// Week view form. See example at https://timetracker.anuko.com/week.php.
+// TODO: translate the following.
+// 'form.week.new_entry' => 'New entry',
 
-"form.profile.showchart" => '원 그래프를 보기',
-"form.profile.lang" => '언어',
-"form.profile.custom_date_format" => "날짜 포맷",
-"form.profile.custom_time_format" => "시간 포맷",
-"form.profile.default_format" => "(디폴트)",
-"form.profile.start_week" => "주의 시작요일",
+// Reports form. See example at https://timetracker.anuko.com/reports.php
+'form.reports.save_as_favorite' => '좋아하는 것으로 저장',
+'form.reports.confirm_delete' => '좋아하는 이 보고서를 삭제해도 좋습니까?',
+'form.reports.include_billable' => '청구 가능한',
+'form.reports.include_not_billable' => '청구 가능하지 않은',
+// TODO: translate the following.
+// 'form.reports.include_invoiced' => 'invoiced',
+// 'form.reports.include_not_invoiced' => 'not invoiced',
+'form.reports.select_period' => '시간 기간을 선택',
+'form.reports.set_period' => '혹은 날짜를 설정',
+'form.reports.show_fields' => '필드들을 보기',
+'form.reports.group_by' => '다음것에 의한 그룹화',
+'form.reports.group_by_no' => '--- 그룹화되지 않음 ---',
+'form.reports.group_by_date' => '날짜',
+'form.reports.group_by_user' => '사용자',
+// TODO: translate the following.
+// 'form.reports.group_by_client' => 'client',
+'form.reports.group_by_project' => '프로젝트',
+// TODO: translate the following.
+// 'form.reports.group_by_task' => 'task',
+'form.reports.totals_only' => '오직 전체만',
 
-// people form attributes
-"form.people.ppl_str" => '멤버',
-"form.people.createu_str" => '신규 사용자를 만들기',
-"form.people.edit_str" => '사용자를 편집하기',
-"form.people.del_str" => '사용자를 삭제하기',
-"form.people.th.name" => '이름',
-"form.people.th.login" => '로그인ID',
-"form.people.th.role" => '직위',
-"form.people.th.edit" => '편집',
-"form.people.th.del" => '삭제',
-"form.people.th.status" => '상태',
-"form.people.th.project" => '프로젝트',
-"form.people.th.rate" => '급여',
-"form.people.manager" => '관리자',
-"form.people.comanager" => '공동관리자',
-"form.people.empl" => '사용자',
-"form.people.name" => '이름',
-"form.people.login" => '로그인ID',
+// Report form. See example at https://timetracker.anuko.com/report.php
+// (after generating a report at https://timetracker.anuko.com/reports.php).
+'form.report.export' => '익스포트', // TODO: is this correct?
+// TODO: translate the following.
+// 'form.report.assign_to_invoice' => 'Assign to invoice',
 
-"form.people.rate" => '디폴트 시간당 급여',
-"form.people.comanager" => '공동관리자',
-"form.people.projects" => '프로젝트',
+// Invoice form. See example at https://timetracker.anuko.com/invoice.php
+// (you can get to this form after generating a report).
+'form.invoice.number' => '송장 번호',
+'form.invoice.person' => '개인',
 
-// projects form attributes
-"form.project.proj_title" => '프로젝트',
-"form.project.edit_str" => '프로젝트를 편집하기',
-"form.project.add_str" => '신규 프로젝트를 추가하기',
-"form.project.del_str" => '프로젝트를 삭제하기',
-"form.project.th.name" => '이름',
-"form.project.th.edit" => '편집',
-"form.project.th.del" => '삭제',
-"form.project.name" => '이름',
+// Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
+// 'form.invoice.invoice_to_delete' => 'Invoice to delete',
+// 'form.invoice.invoice_entries' => 'Invoice entries',
+// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
 
-// activities form attributes
-"form.activity.act_title" => '활동내용',
-"form.activity.add_title" => '신규 활동내용을 추가하기',
-"form.activity.edit_str" => '활동내용을 편집하기',
-"form.activity.del_str" => '활동내용을 삭제하기',
-"form.activity.name" => '이름',
-"form.activity.project" => '프로젝트',
-"form.activity.th.name" => '이름',
-"form.activity.th.project" => '프로젝트',
-"form.activity.th.edit" => '편집',
-"form.activity.th.del" => '삭제',
+// Charts form. See example at https://timetracker.anuko.com/charts.php
+// TODO: translate the following.
+// 'form.charts.interval' => 'Interval',
+// 'form.charts.chart' => 'Chart',
 
-// report attributes
-"form.report.title" => '보고서',
-"form.report.from" => '시작 날짜',
-"form.report.to" => '마감 날짜',
-"form.report.groupby_user" => '사용자',
-"form.report.groupby_project" => '프로젝트',
-"form.report.groupby_activity" => '활동내용',
-"form.report.duration" => '기간',
-"form.report.start" => '시작',
-"form.report.activity" => '활동내용',
-"form.report.show_idle" => '유휴 상태를 보기',
-"form.report.finish" => '마감',
-"form.report.note" => '표식',
-"form.report.project" => '프로젝트',
-"form.report.totals_only" => '오직 전체만',
-"form.report.total" => '시간 총합',
-"form.report.th.empllist" => '사용자',
-"form.report.th.date" => '날짜',
-"form.report.th.project" => '프로젝트',
-"form.report.th.activity" => '활동내용',
-"form.report.th.start" => '시작',
-"form.report.th.finish" => '마감',
-"form.report.th.duration" => '기간',
-"form.report.th.note" => '주의',
+// Projects form. See example at https://timetracker.anuko.com/projects.php
+// TODO: translate the following.
+// 'form.projects.active_projects' => 'Active Projects',
+// 'form.projects.inactive_projects' => 'Inactive Projects',
 
-// mail form attributes
-"form.mail.from" => '부터',
-"form.mail.to" => '까지',
-"form.mail.cc" => 'cc',
-"form.mail.subject" => '제목',
-"form.mail.comment" => '코멘트',
-"form.mail.above" => '이 보고서를 이메일로 송신',
-// Note to translators: this string needs to be translated.
-// "form.mail.footer_str" => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
-"form.mail.sending_str" => '<b>송신된 메시지</b>',
+// Tasks form. See example at https://timetracker.anuko.com/tasks.php
+// TODO: translate the following.
+// 'form.tasks.active_tasks' => 'Active Tasks',
+// 'form.tasks.inactive_tasks' => 'Inactive Tasks',
 
-// invoice attributes
-"form.invoice.title" => '송장',
-"form.invoice.caption" => '송장',
-"form.invoice.above" => '송장에 대한 보충정보',
-"form.invoice.select_cust" => '클라이언트의 선택',
-"form.invoice.fillform" => '필드들을 채우십시오',
-"form.invoice.date" => '날짜',
-"form.invoice.number" => '송장 번호',
-"form.invoice.tax" => '세금',
-"form.invoice.comment" => '코멘트 ',
-"form.invoice.th.username" => '개인',
-"form.invoice.th.time" => '시간',
-"form.invoice.th.rate" => '급여',
-"form.invoice.th.summ" => '수량',
-"form.invoice.subtotal" => '소계',
-"form.invoice.customer" => '클라이언트',
-"form.invoice.mailinv_above" => '이 송장을 이메일로 송신',
-"form.invoice.sending_str" => '<b>송신한 송장</b>',
+// Users form. See example at https://timetracker.anuko.com/users.php
+// TODO: translate the following.
+// 'form.users.active_users' => 'Active Users',
+// 'form.users.inactive_users' => 'Inactive Users',
+// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
+'form.users.role' => '직위', // TODO: is this correct? The term "role" describes user function, as in "team manager role".
+'form.users.manager' => '관리자',
+'form.users.comanager' => '공동관리자',
+'form.users.rate' => '급여',
+'form.users.default_rate' => '디폴트 시간당 급여',
 
-"form.migration.zip" => '압축',
-"form.migration.file" => '파일 선택',
-"form.migration.import.title" => '데이터 임포트',
-"form.migration.import.success" => '성과적으로 완료된 임포트',
-"form.migration.import.text" => 'xml 파일로부터 팀 데이터를 임포트',
-"form.migration.export.title" => '데이터 익스포트',
-"form.migration.export.success" => '성과적으로 완료된 익스포트',
-"form.migration.export.text" => '팀의 모든 데이터를 xml 파일로 익스포트 할수 있습니다. 이것은 데이터를 당신자신의 서버에로 옮길때 쓸모있을수 있습니다.',
-"form.migration.compression.none" => '없음',
-"form.migration.compression.gzip" => 'gzip',
-"form.migration.compression.bzip" => 'bzip',
+// Editing User form. See example at https://timetracker.anuko.com/user_edit.php
+// TODO: translate the following.
+// 'form.user_edit.swap_roles' => 'Swap roles',
 
-"form.client.title" => '클라이언트',
-"form.client.add_title" => '클라이언트 추가',
-"form.client.edit_title" => '클라이언트 편집',
-"form.client.del_title" => '클라이언트 삭제',
-"form.client.th.name" => '이름',
-"form.client.th.edit" => '편집',
-"form.client.th.del" => '삭제',
-"form.client.name" => '이름',
-"form.client.tax" => '세금',
-"form.client.comment" => '코멘트 ',
+// Roles form. See example at https://timetracker.anuko.com/roles.php
+// TODO: translate the following.
+// 'form.roles.active_roles' => 'Active Roles',
+// 'form.roles.inactive_roles' => 'Inactive Roles',
+// 'form.roles.rank' => 'Rank',
+// 'form.roles.rights' => 'Rights',
+// 'form.roles.assigned' => 'Assigned',
+// 'form.roles.not_assigned' => 'Not assigned',
 
-// miscellaneous strings
-"forward.forgot_password" => '암호를 잊으셨습니까?',
-"forward.edit" => '편집',
-"forward.delete" => '삭제',
-"forward.tocsvfile" => '데이터를 .csv 파일로 익스포트',
-"forward.toxmlfile" => '데이터를 .xml 파일로 익스포트',
-"forward.geninvoice" => '송장 만들기',
-"forward.change" => '클라이언트 구성',
+// Clients form. See example at https://timetracker.anuko.com/clients.php
+// TODO: translate the following.
+// 'form.clients.active_clients' => 'Active Clients',
+// 'form.clients.inactive_clients' => 'Inactive Clients',
 
-// strings inside contols on forms
-"controls.select.project" => '--- 프로젝트 선택 ---',
-"controls.select.activity" => '--- 활동내용 선택 ---',
-"controls.select.client" => '--- 클라이언트 선택 ---',
-"controls.project_bind" => '--- 전부 ---',
-"controls.all" => '--- 전부 ---',
-"controls.notbind" => '--- 아니 ---',
-"controls.per_tm" => '이번달',
-"controls.per_lm" => '전번달',
-"controls.per_tw" => '이번주',
-"controls.per_lw" => '전번주',
-"controls.per_td" => '오늘',
-"controls.per_at" => '전시간',
-"controls.per_ty" => '올해',
-"controls.sel_period" => '--- 시간 기간을 선택 ---',
-"controls.sel_groupby" => '--- 그룹화되지 않음 ---',
-"controls.inc_billable" => '청구 가능한',
-"controls.inc_nbillable" => '청구 가능하지 않은',
-"controls.default" => '--- 디폴트 ---',
+// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
+// TODO: translate the following.
+// 'form.client.client_to_delete' => 'Client to delete',
+// 'form.client.client_entries' => 'Client entries',
 
-// labels
-"label.chart.title1" => '사용자별 활동내용',
-"label.chart.title2" => '사용자별 프로젝트',
-"label.chart.period" => '기간에 따른 그래프',
+// Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
+// TODO: replace "team" with "group" in the string below.
+'form.export.hint' => '팀의 모든 데이터를 xml 파일로 익스포트 할수 있습니다. 이것은 데이터를 당신자신의 서버에로 옮길때 쓸모있을수 있습니다.',
+'form.export.compression' => '압축',
+'form.export.compression_none' => '없음',
+'form.export.compression_bzip' => 'bzip',
 
-"label.pinfo" => '%s, %s',
-"label.pinfo2" => '%s',
-"label.pbehalf_info" => '%s %s <b>%s 을 대표하여</b>',
-"label.pminfo" => ' (관리자)',
-"label.pcminfo" => ' (공동관리자)',
-"label.painfo" => ' (관리자)',
-"label.time_noentry" => '항목이 없음',
-"label.today" => '오늘',
-"label.req_fields" => '* 필수 필드',
-"label.sel_project" => '프로젝트 선택',
-"label.sel_activity" => '활동내용 선택',
-"label.sel_tp" => '시간 기간을 선택',
-"label.set_tp" => '혹은 날짜를 설정',
-"label.fields" => '필드들을 보기',
-"label.group_title" => '다음것에 의한 그룹화',
-"label.include_title" => '기록을 포함',
-"label.inv_str" => '송장',
-"label.set_empl" => '사용자들을 선택',
-"label.sel_all" => '모두 선택',
-"label.sel_none" => '모두 해제',
-"label.or" => '혹은',
-"label.disable" => '무력화',
-"label.enable" => '가능화',
-"label.filter" => '필터',
-"label.timeweek" => '주별 합계',
-"label.hrs" => '시간',
-"label.errors" => '오류',
-"label.ldap_hint" => '아래의 필드들에서 <b>Windows 로그인</b> 및 <b>암호</b> 를 입력하십시오.',
-// Note to translators: the strings below need to be translated.
-// "label.calendar_today" => 'today',
-// "label.calendar_close" => 'close',
+// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+'form.import.hint' => 'xml 파일로부터 팀 데이터를 임포트.', // TODO: replace "team" with "group".
+'form.import.file' => '파일 선택',
+'form.import.success' => '성과적으로 완료된 임포트.',
 
-// login hello text
-// "login.hello.text" => "Anuko Time Tracker is a simple, easy to use, open source time tracking system.",
+// Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
+// TODO: replace "team" with "group" in the string below.
+'form.groups.hint' => '신규 팀관리자 계정을 생성하여 신규 팀을 생성합니다.<br>또한 다른 Anuko Time Tracker 서버 에서 xml 파일로부터 팀 데이터를 임포트할수 있습니다 (로그인 충돌은 허용되지 안음).',
+
+// Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
+// TODO: translate the following.
+// 'form.group_edit.12_hours' => '12 hours',
+// 'form.group_edit.24_hours' => '24 hours',
+// 'form.group_edit.show_holidays' => 'Show holidays',
+// 'form.group_edit.tracking_mode' => 'Tracking mode',
+// 'form.group_edit.mode_time' => 'time',
+// 'form.group_edit.mode_projects' => 'projects',
+// 'form.group_edit.mode_projects_and_tasks' => 'projects and tasks',
+// 'form.group_edit.record_type' => 'Record type',
+// 'form.group_edit.type_all' => 'all',
+// 'form.group_edit.type_start_finish' => 'start and finish',
+// 'form.group_edit.type_duration' => 'duration',
+// 'form.group_edit.punch_mode' => 'Punch mode',
+// 'form.group_edit.allow_overlap' => 'Allow overlap',
+// 'form.group_edit.future_entries' => 'Future entries',
+// 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
+// 'form.group_edit.allow_ip' => 'Allow IP',
+// 'form.group_edit.plugins' => 'Plugins',
+
+// Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
+// TODO: translate the following.
+// 'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
+
+// Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
+'form.mail.from' => '부터',
+'form.mail.to' => '까지', // TODO: is this correct? The meaning is that we send an email TO this person.
+// TODO: translate the following.
+// 'form.mail.report_subject' => 'Time Tracker Report',
+// 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
+// 'form.mail.report_sent' => 'Report sent.',
+'form.mail.invoice_sent' => '송신한 송장.',
+
+// Quotas configuration form. See example at https://timetracker.anuko.com/quotas.php after enabling Monthly quotas plugin.
+// TODO: translate the following.
+// 'form.quota.year' => 'Year',
+// 'form.quota.month' => 'Month',
+// 'form.quota.quota' => 'Quota',
+// 'form.quota.workday_hours' => 'Hours in work day',
+// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+
+// Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
+// TODO: translate the following.
+// 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
+// 'form.swap.swap_with' => 'Swap roles with',
+
+// Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
+// TODO: translate the following.
+// 'role.user.label' => 'User',
+// 'role.user.low_case_label' => 'user',
+// 'role.user.description' => 'A regular member without management rights.',
+// 'role.client.label' => 'Client',
+// 'role.client.low_case_label' => 'client',
+// 'role.client.description' => 'A client can view its own reports, charts, and invoices.',
+// 'role.supervisor.label' => 'Supervisor',
+// 'role.supervisor.low_case_label' => 'supervisor',
+// 'role.supervisor.description' => 'A person with a small set of management rights.',
+// 'role.comanager.label' => 'Co-manager',
+// 'role.comanager.low_case_label' => 'co-manager',
+// 'role.comanager.description' => 'A person with a big set of management functions.',
+// 'role.manager.label' => 'Manager',
+// 'role.manager.low_case_label' => 'manager',
+// 'role.manager.description' => 'Group manager. Can do most of things for a group.',
+// 'role.top_manager.label' => 'Top manager',
+// 'role.top_manager.low_case_label' => 'top manager',
+// 'role.top_manager.description' => 'Top group manager. Can do everything in a tree of groups.',
+// 'role.admin.label' => 'Administrator',
+// 'role.admin.low_case_label' => 'administrator',
+// 'role.admin.description' => 'Site adminsitrator.',
 );
