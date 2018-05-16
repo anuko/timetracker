@@ -34,7 +34,7 @@ $i18n_months = array('Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli
 $i18n_weekdays = array('Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag');
 $i18n_weekdays_short = array('So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa');
 // format mm/dd
-$i18n_holidays = array('01/01', '04/02', '05/01', '05/10', '05/28', '10/03', '12/25', '12/26');
+$i18n_holidays = array('01/01', '04/02', '05/01', '05/10', '05/21', '10/03', '12/25', '12/26');
 
 $i18n_key_words = array(
 
