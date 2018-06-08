@@ -789,10 +789,10 @@ if ($_POST) {
       if (is_a($result, 'PEAR_Error')) die($result->getMessage());
       $row = $result->fetchRow();
       if ($row['count'] == 0)
-        ttRoleHelper::createPredefinedRoles($team_id, $lang);
+        ttRoleHelper::createPredefinedRoles_1_17_44($team_id, $lang);
 
       // Obtain new role id based on legacy role.
-      $role_id = ttRoleHelper::getRoleByRank($legacy_role, $team_id);
+      $role_id = ttRoleHelper::getRoleByRank_1_17_44($legacy_role, $team_id);
       if (!$role_id) continue; // Role not found, nothing to do.
 
       $sql = "update tt_users set role_id = $role_id where id = $user_id and team_id = $team_id";

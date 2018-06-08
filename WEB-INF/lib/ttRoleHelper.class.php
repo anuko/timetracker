@@ -234,12 +234,15 @@ class ttRoleHelper {
     return true;
   }
 
-  // createDefaultRoles - creates a set of predefined roles for a group to use.
-  static function createDefaultRoles()
+  // createPredefinedRoles_1_17_44 - used in dbinstall.php during database schema update.
+  static function createPredefinedRoles_1_17_44($group_id, $lang)
   {
+    // We need localized role names and a new I18n object to obtain them.
+    import('I18n');
+    $i18n = new I18n();
+    $i18n->load($lang);
+
     $mdb2 = getConnection();
-    global $i18n;
-    global $user;
 
     $rights_client = 'view_own_reports,view_own_charts,view_own_invoices,manage_own_settings';
     $rights_user = 'track_own_time,track_own_expenses,view_own_reports,view_own_charts,view_own_projects,view_own_tasks,manage_own_settings,view_users';
@@ -251,7 +254,7 @@ class ttRoleHelper {
     $name = $mdb2->quote($i18n->get('role.user.label'));
     $description = $mdb2->quote($i18n->get('role.user.description'));
     $rights = $mdb2->quote($rights_user);
-    $sql = "insert into tt_roles (group_id, name, description, rank, rights, status) values($user->group_id, $name, $description, 4, $rights, 1)";
+    $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($group_id, $name, $description, 4, $rights, 1)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -259,7 +262,7 @@ class ttRoleHelper {
     $name = $mdb2->quote($i18n->get('role.client.label'));
     $description = $mdb2->quote($i18n->get('role.client.description'));
     $rights = $mdb2->quote($rights_client);
-    $sql = "insert into tt_roles (group_id, name, description, rank, rights, status) values($user->group_id, $name, $description, 16, $rights, 1)";
+    $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($group_id, $name, $description, 16, $rights, 1)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -267,7 +270,7 @@ class ttRoleHelper {
     $name = $mdb2->quote($i18n->get('role.comanager.label'));
     $description = $mdb2->quote($i18n->get('role.comanager.description'));
     $rights = $mdb2->quote($rights_comanager);
-    $sql = "insert into tt_roles (group_id, name, description, rank, rights, status) values($user->group_id, $name, $description, 68, $rights, 1)";
+    $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($group_id, $name, $description, 68, $rights, 1)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -275,7 +278,7 @@ class ttRoleHelper {
     $name = $mdb2->quote($i18n->get('role.manager.label'));
     $description = $mdb2->quote($i18n->get('role.manager.description'));
     $rights = $mdb2->quote($rights_manager);
-    $sql = "insert into tt_roles (group_id, name, description, rank, rights, status) values($user->group_id, $name, $description, 324, $rights, 1)";
+    $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($group_id, $name, $description, 324, $rights, 1)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -284,11 +287,29 @@ class ttRoleHelper {
     $name = $mdb2->quote($i18n->get('role.supervisor.label'));
     $description = $mdb2->quote($i18n->get('role.supervisor.description'));
     $rights = $mdb2->quote($rights_supervisor);
-    $sql = "insert into tt_roles (group_id, name, description, rank, rights, status) values($user->group_id, $name, $description, 12, $rights, 0)";
+    $sql = "insert into tt_roles (team_id, name, description, rank, rights, status) values($group_id, $name, $description, 12, $rights, 0)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
     return true;
+  }
+
+  // getRoleByRank_1_17_44 is used in dbinstall.php and looks up a role by its rank.
+  static function getRoleByRank_1_17_44($rank, $group_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $rank = (int) $rank; // Cast to int just in case for better security.
+
+    $sql = "select id from tt_roles where team_id = $group_id and rank = $rank and (status = 1 or status = 0)";
+    $res = $mdb2->query($sql);
+
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      if ($val['id'])
+        return $val['id'];
+    }
+    return false;
   }
 }
