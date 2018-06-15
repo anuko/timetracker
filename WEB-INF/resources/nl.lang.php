@@ -112,14 +112,14 @@ $i18n_key_words = array(
 'button.reset_password' => 'Herstel het wachtwoord',
 'button.send' => 'Verzenden',
 'button.send_by_email' => 'Verzend per e-mail',
-'button.create_group' => 'Maak team', // TODO: replace "team" with "group".
-'button.export' => 'Team exporteren', // TODO: replace "team" with "group".
-'button.import' => 'Team importeren', // TODO: replace "team" with "group".
+'button.create_group' => 'Maak groep',
+'button.export' => 'Groep exporteren',
+'button.import' => 'Groep importeren',
 'button.close' => 'Sluiten',
 'button.stop' => 'Stop',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-'label.group_name' => 'Teamnaam', // TODO: replace "team" with "group".
+'label.group_name' => 'Groepsnaam',
 'label.address' => 'Adres',
 'label.currency' => 'Munteenheid',
 'label.manager_name' => 'Naam van de manager',
@@ -213,10 +213,10 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.login' => 'Aanmelden',
-'title.groups' => 'Teams', // TODO: change "teams" to "groups".
-'title.create_group' => 'Team maken', // TODO: change "team" to "group".
-'title.edit_group' => 'Team bewerken', // TODO: change "team" to "group".
-'title.delete_group' => 'Team aan het verwijderen', // TODO: change "team" to "group".
+'title.groups' => 'Groepen',
+'title.create_group' => 'Groep maken',
+'title.edit_group' => 'Groep bewerken',
+'title.delete_group' => 'Groep aan het verwijderen',
 'title.reset_password' => 'Wachtwoord herstellen',
 'title.change_password' => 'Wachtwoord aan het veranderen',
 'title.time' => 'Tijdsregistraties',
@@ -264,8 +264,8 @@ $i18n_key_words = array(
 'title.edit_notification' => 'Notificatie bewerken',
 'title.delete_notification' => 'Notificatie verwijderen',
 'title.monthly_quotas' => 'Doelen per maand',
-'title.export' => 'Exporteer teamgegevens', // TODO: replace "team" with "group".
-'title.import' => 'Importeer teamgegevens', // TODO: replace "team" with "group".
+'title.export' => 'Exporteer groepsgegevens',
+'title.import' => 'Importeer groepsgegevens',
 'title.options' => 'Opties',
 'title.profile' => 'Profiel',
 'title.group' => 'Groep instelling',
@@ -416,20 +416,19 @@ $i18n_key_words = array(
 'form.client.client_entries' => 'Klant gegevens',
 
 // Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
-// TODO: replace "team" with "group" in the string below.
-'form.export.hint' => 'U kunt alle teamgegevens naar een xml bestand exporteren. Dit kan zinvol zijn als u gegevens migreert naar uw eigen server.',
+'form.export.hint' => 'U kunt alle groepsgegevens naar een xml bestand exporteren. Dit kan zinvol zijn als u gegevens migreert naar uw eigen server.',
 'form.export.compression' => 'Compressie',
 'form.export.compression_none' => 'geen',
 'form.export.compression_bzip' => 'bzip',
 
 // Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-'form.import.hint' => 'Importeer teamgegevens uit een xml bestand.', // TODO: replace "team" with "group".
+'form.import.hint' => 'Importeer groepsgegevens uit een xml bestand.',
 'form.import.file' => 'Kies bestand',
 'form.import.success' => 'Importeren gelukt.',
 
 // Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
-// TODO: replace "team" with "group" in the string below (3 places).
-'form.groups.hint' => 'Maak een nieuw team door een team  manager account aan te maken.<br>U kunt ook teamgegevens importeren uit een xml file van een andere Anuko Time Tracker server (login namen moeten uniek zijn).',
+// TODO: replace "team" with "group" in the string below (1 place - teamgegevens).
+'form.groups.hint' => 'Maak een nieuwe groep door een groeps manager account aan te maken.<br>U kunt ook teamgegevens importeren uit een xml file van een andere Anuko Time Tracker server (login namen moeten uniek zijn).',
 
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 'form.group_edit.12_hours' => '12 uurs',
@@ -451,8 +450,7 @@ $i18n_key_words = array(
 'form.group_edit.plugins' => 'Plugins',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
-// TODO: translate the following.
-// 'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
+'form.group_delete.hint' => 'Bent u er zeker van dat u de hele groep wilt verwijderen?',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'Van',
