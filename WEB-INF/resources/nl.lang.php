@@ -427,8 +427,7 @@ $i18n_key_words = array(
 'form.import.success' => 'Importeren gelukt.',
 
 // Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
-// TODO: replace "team" with "group" in the string below (1 place - teamgegevens).
-'form.groups.hint' => 'Maak een nieuwe groep door een groeps manager account aan te maken.<br>U kunt ook teamgegevens importeren uit een xml file van een andere Anuko Time Tracker server (login namen moeten uniek zijn).',
+'form.groups.hint' => 'Maak een nieuwe groep door een groeps manager account aan te maken.<br>U kunt ook groepsgegevens importeren uit een xml file van een andere Anuko Time Tracker server (login namen moeten uniek zijn).',
 
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 'form.group_edit.12_hours' => '12 uurs',
