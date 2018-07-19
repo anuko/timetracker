@@ -212,6 +212,8 @@ $i18n_key_words = array(
 'label.mark_paid' => 'Σήμανση πληρωμένα',
 'label.week_note' => 'Σημείωση εβδομάδας',
 'label.week_list' => 'Λίστα εβδομάδων',
+// TODO: translate the following.
+// 'label.work_units' => 'Work units',
 
 // Form titles.
 'title.login' => 'Σύνδεση',

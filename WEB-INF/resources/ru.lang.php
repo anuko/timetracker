@@ -210,6 +210,7 @@ $i18n_key_words = array(
 'label.mark_paid' => 'Отметить оплату',
 'label.week_note' => 'Комментарий недели',
 'label.week_list' => 'Список недели',
+'label.work_units' => 'Единицы работы',
 
 // Form titles.
 'title.login' => 'Вход в систему',

@@ -217,6 +217,8 @@ $i18n_key_words = array(
 'label.mark_paid' => 'Segna come pagato',
 'label.week_note' => 'Nota settimanale',
 'label.week_list' => 'Lista settimanale',
+// TODO: translate the following.
+// 'label.work_units' => 'Work units',
 
 // Form titles.
 // TODO: Improve titles for consistency, so that each title explains correctly what each

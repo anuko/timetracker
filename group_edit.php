@@ -75,6 +75,7 @@ if ($request->isPost()) {
   $cl_locking = $request->getParameter('locking');
   $cl_quotas = $request->getParameter('quotas');
   $cl_week_view = $request->getParameter('week_view');
+  $cl_work_units = $request->getParameter('work_units');
 } else {
   $cl_group = $user->group;
   $cl_currency = ($user->currency == ''? CURRENCY_DEFAULT : $user->currency);
@@ -109,6 +110,7 @@ if ($request->isPost()) {
   $cl_locking = in_array('lk', $plugins);
   $cl_quotas = in_array('mq', $plugins);
   $cl_week_view = in_array('wv', $plugins);
+  $cl_work_units = in_array('wu', $plugins);
 }
 
 $form = new Form('groupForm');
@@ -207,6 +209,10 @@ $form->addInput(array('type'=>'checkbox','name'=>'notifications','value'=>$cl_no
 $form->addInput(array('type'=>'checkbox','name'=>'locking','value'=>$cl_locking,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'quotas','value'=>$cl_quotas,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'week_view','value'=>$cl_week_view,'onchange'=>'handlePluginCheckboxes()'));
+if (defined('WORK_UNITS_DEBUG')) {
+  $form->addInput(array('type'=>'checkbox','name'=>'work_units','value'=>$cl_work_units,'onchange'=>'handlePluginCheckboxes()'));
+}
+
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 if ($user->can('delete_group')) $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('button.delete')));
 
