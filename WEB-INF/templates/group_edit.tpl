@@ -205,7 +205,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.groupForm.clients.control}</td>
-            <td><label for="clients">{$i18n.title.clients}</label> {$forms.profileForm.client_required.control} <span id="client_required_label"><label for="client_required">{$i18n.label.required}</label></span></td>
+            <td><label for="clients">{$i18n.title.clients}</label> {$forms.groupForm.client_required.control} <span id="client_required_label"><label for="client_required">{$i18n.label.required}</label></span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.groupForm.invoices.control}</td>
@@ -221,7 +221,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.groupForm.expenses.control}</td>
-            <td><label for="expenses">{$i18n.title.expenses}</label> {$forms.profileForm.tax_expenses.control} <span id="tax_label"><label for="tax_expenses">{$i18n.label.tax}</label></span> <span id="expenses_config"><a href="predefined_expenses.php">{$i18n.label.configure}</a></span></td>
+            <td><label for="expenses">{$i18n.title.expenses}</label> {$forms.groupForm.tax_expenses.control} <span id="tax_label"><label for="tax_expenses">{$i18n.label.tax}</label></span> <span id="expenses_config"><a href="predefined_expenses.php">{$i18n.label.configure}</a></span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.groupForm.notifications.control}</td>
