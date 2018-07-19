@@ -282,6 +282,8 @@ $i18n_key_words = array(
 'title.locking' => 'Blokkeren',
 'title.week_view' => 'Week overzicht',
 'title.swap_roles' => 'Rollen verruilen',
+// TODO: translate the following.
+// 'title.work_units' => 'Work Units',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
