@@ -259,6 +259,8 @@ if ($request->isPost()) {
       $plugins .= ',mq';
     if ($cl_week_view)
       $plugins .= ',wv';
+    if ($cl_work_units)
+      $plugins .= ',wu';
 
     // Recycle week view plugin options as they are not configured on this page.
     $existing_plugins = explode(',', $user->plugins);

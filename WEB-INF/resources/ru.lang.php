@@ -472,6 +472,10 @@ $i18n_key_words = array(
 'form.swap.hint' => 'Уменьшите свою роль, обменявшись с другим пользователем. Роль не может восстановлена.',
 'form.swap.swap_with' => 'Обменять роль с',
 
+// Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
+'form.work_units.minutes_in_unit' => 'Минут в единице работы',
+'form.work_units.1st_unit_threshold' => 'Порог для 1-й единицы',
+
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 'role.user.label' => 'Пользователь',
 'role.user.low_case_label' => 'пользователь',

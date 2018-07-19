@@ -474,6 +474,11 @@ $i18n_key_words = array(
 'form.swap.hint' => 'Degradeer jezelf naar een lagere rol door een rol te verruilen met iemand anders. Dit kan niet ongedaan worden gemaakt.',
 'form.swap.swap_with' => 'Verruil rol met',
 
+// Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
+// TODO: translate the following.
+// 'form.work_units.minutes_in_unit' => 'Minutes in unit',
+// 'form.work_units.1st_unit_threshold' => '1st unit threshold',
+
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 'role.user.label' => 'Gebruiker',
 'role.user.low_case_label' => 'gebruiker',
