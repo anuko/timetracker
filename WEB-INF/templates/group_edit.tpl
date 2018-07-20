@@ -247,12 +247,10 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$forms.groupForm.week_view.control}</td>
             <td><label for="week_view">{$i18n.label.week_view}</label> <span id="week_view_config"><a href="week_view.php">{$i18n.label.configure}</a></span></td>
           </tr>
-  {if defined('WORK_UNITS_DEBUG')}
           <tr>
             <td align="right" nowrap>{$forms.groupForm.work_units.control}</td>
             <td><label for="week_view">{$i18n.label.work_units}</label> <span id="work_units_config"><a href="work_units.php">{$i18n.label.configure}</a></span></td>
           </tr>
-  {/if}
 {/if}
 
           <tr>
