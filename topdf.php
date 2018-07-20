@@ -109,6 +109,7 @@ if ($totals_only) {
   $html .= "<tr $styleHeader>";
   $html .= '<td>'.htmlspecialchars($group_by_header).'</td>';
   if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.duration').'</td>'; }
+  if ($bean->getAttribute('chunits')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.work_units_short').'</td>'; }
   if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.cost').'</td>'; }
   $html .= '</tr>';
   $html .= '</thead>';
@@ -117,6 +118,7 @@ if ($totals_only) {
     $html .= '<tr>';
     $html .= '<td>'.htmlspecialchars($subtotal['name']).'</td>';
     if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$subtotal['time'].'</td>';
+    if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$subtotal['units'].'</td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
       if ($user->can('manage_invoices') || $user->isClient())
@@ -132,6 +134,7 @@ if ($totals_only) {
   $html .= "<tr $styleSubtotal>";
   $html .= '<td>'.$i18n->get('label.total').'</td>';
   if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$totals['time'].'</td>';
+  if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$totals['units'].'</td>';
   if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
       $html .= htmlspecialchars($user->currency).' ';
@@ -158,6 +161,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chstart')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.start').'</td>'; }
   if ($bean->getAttribute('chfinish')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.finish').'</td>'; }
   if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.duration').'</td>'; }
+  if ($bean->getAttribute('chunits')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.work_units_short').'</td>'; }
   if ($bean->getAttribute('chnote')) { $colspan++; $html .= '<td>'.$i18n->get('label.note').'</td>'; }
   if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.cost').'</td>'; }
   if ($bean->getAttribute('chpaid')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.paid').'</td>'; }
@@ -202,6 +206,7 @@ if ($totals_only) {
         if ($bean->getAttribute('chstart')) $html .= '<td></td>';
         if ($bean->getAttribute('chfinish')) $html .= '<td></td>';
         if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$subtotals[$prev_grouped_by]['time'].'</td>';
+        if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$subtotals[$prev_grouped_by]['units'].'</td>';
         if ($bean->getAttribute('chnote')) $html .= '<td></td>';
         if ($bean->getAttribute('chcost')) {
           $html .= "<td $styleRightAligned>";
@@ -231,6 +236,7 @@ if ($totals_only) {
     if ($bean->getAttribute('chstart')) $html .= "<td $styleRightAligned>".$item['start'].'</td>';
     if ($bean->getAttribute('chfinish')) $html .= "<td $styleRightAligned>".$item['finish'].'</td>';
     if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$item['duration'].'</td>';
+    if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$item['units'].'</td>';
     if ($bean->getAttribute('chnote')) $html .= '<td>'.htmlspecialchars($item['note']).'</td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
@@ -289,6 +295,7 @@ if ($totals_only) {
     if ($bean->getAttribute('chstart')) $html .= '<td></td>';
     if ($bean->getAttribute('chfinish')) $html .= '<td></td>';
     if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$subtotals[$prev_grouped_by]['time'].'</td>';
+    if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$subtotals[$prev_grouped_by]['units'].'</td>';
     if ($bean->getAttribute('chnote')) $html .= '<td></td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
@@ -316,6 +323,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chstart')) $html .= '<td></td>';
   if ($bean->getAttribute('chfinish')) $html .= '<td></td>';
   if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$totals['time'].'</td>';
+  if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$totals['units'].'</td>';
   if ($bean->getAttribute('chnote')) $html .= '<td></td>';
   if ($bean->getAttribute('chcost')) {
     $html .= "<td $styleRightAligned>".htmlspecialchars($user->currency).' ';
