@@ -284,6 +284,14 @@ function handleCheckboxes() {
                 <td></td>
 {/if}
               </tr>
+{if $user->isPluginEnabled('wu')}
+              <tr>
+                <td></td>
+                <td></td>
+                <td width="25%"><label>{$forms.reportForm.chunits.control}&nbsp;{$i18n.label.work_units}</label></td>
+                <td></td>
+              </tr>
+{/if}
             </table>
           </td>
         </tr>

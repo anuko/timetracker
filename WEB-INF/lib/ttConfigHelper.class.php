@@ -44,7 +44,7 @@ class ttConfigHelper {
 
   // getDefinedValue determines if a value identified by name is defined.
   function getDefinedValue($name) {
-    return in_array($name, $this->$config_array);
+    return in_array($name, $this->config_array);
   }
 
   // The getIntValue parses an integer value from the source config string.

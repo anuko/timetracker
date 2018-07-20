@@ -214,6 +214,9 @@ $form->addInput(array('type'=>'checkbox','name'=>'chcost'));
 // If we have a custom field - add a checkbox for it.
 if ($custom_fields && $custom_fields->fields[0])
   $form->addInput(array('type'=>'checkbox','name'=>'chcf_1'));
+if ($user->isPluginEnabled('wu'))
+  $form->addInput(array('type'=>'checkbox','name'=>'chunits'));
+
 // Add group by control.
 $group_by_options['no_grouping'] = $i18n->get('form.reports.group_by_no');
 $group_by_options['date'] = $i18n->get('form.reports.group_by_date');
@@ -260,6 +263,7 @@ if ($request->isGet() && !$bean->isSaved()) {
   $form->setValueByElement('chfinish', '1');
   $form->setValueByElement('chnote', '1');
   $form->setValueByElement('chcf_1', '0');
+  $form->setValueByElement('chunits', '0');
   $form->setValueByElement('chtotalsonly', '0');
 }
 

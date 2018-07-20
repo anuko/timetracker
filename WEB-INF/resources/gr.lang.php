@@ -214,6 +214,7 @@ $i18n_key_words = array(
 'label.week_list' => 'Λίστα εβδομάδων',
 // TODO: translate the following.
 // 'label.work_units' => 'Work units',
+// 'label.work_units_short' => 'Units',
 
 // Form titles.
 'title.login' => 'Σύνδεση',

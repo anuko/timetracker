@@ -26,6 +26,8 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
+import('ttConfigHelper');
+
 class ttUser {
   var $login = null;            // User login.
   var $name = null;             // User name.
@@ -64,6 +66,8 @@ class ttUser {
   var $workday_minutes = 480;   // Number of work minutes in a regular day.
   var $rights = array();        // An array of user rights such as 'track_own_time', etc.
   var $is_client = false;       // Whether user is a client as determined by missing 'track_own_time' right.
+  var $minutes_in_unit = 15;    // Number of minutes in unit for Work units plugin.
+  var $first_unit_threshold = 0;// Threshold for 1st unit for Work units plugin.
 
   // Constructor.
   function __construct($login, $id = null) {
@@ -123,15 +127,20 @@ class ttUser {
       $this->custom_logo = $val['custom_logo'];
 
       $this->config = $val['config'];
-      $config_array = explode(',', $this->config);
-
+      $config = new ttConfigHelper($this->config);
       // Set user config options.
-      $this->show_holidays = in_array('show_holidays', $config_array);
-      $this->punch_mode = in_array('punch_mode', $config_array);
-      $this->allow_overlap = in_array('allow_overlap', $config_array);
-      $this->future_entries = in_array('future_entries', $config_array);
-      $this->uncompleted_indicators = in_array('uncompleted_indicators', $config_array);
-
+      $this->show_holidays = $config->getDefinedValue('show_holidays');
+      $this->punch_mode = $config->getDefinedValue('punch_mode');
+      $this->allow_overlap = $config->getDefinedValue('allow_overlap');
+      $this->future_entries = $config->getDefinedValue('future_entries');
+      $this->uncompleted_indicators = $config->getDefinedValue('uncompleted_indicators');
+      if ($this->isPluginEnabled('wu')) {
+        $minutes_in_unit = $config->getIntValue('minutes_in_unit');
+        if ($minutes_in_unit) $this->minutes_in_unit = $minutes_in_unit;
+        $first_unit_threshold = $config->getIntValue('1st_unit_threshold');
+        if ($first_unit_threshold) $this->first_unit_threshold = $first_unit_threshold;
+      }
+      
       // Set "on behalf" id and name.
       if (isset($_SESSION['behalf_id'])) {
           $this->behalf_id = $_SESSION['behalf_id'];

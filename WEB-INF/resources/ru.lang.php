@@ -211,6 +211,7 @@ $i18n_key_words = array(
 'label.week_note' => 'Комментарий недели',
 'label.week_list' => 'Список недели',
 'label.work_units' => 'Единицы работы',
+'label.work_units_short' => 'Единицы',
 
 // Form titles.
 'title.login' => 'Вход в систему',

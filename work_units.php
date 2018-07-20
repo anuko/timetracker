@@ -46,8 +46,8 @@ if ($request->isPost()) {
   $cl_minutes_in_unit = $request->getParameter('minutes_in_unit');
   $cl_1st_unit_threshold = $request->getParameter('1st_unit_threshold');
 } else {
-  $cl_minutes_in_unit = $config->getIntValue('minutes_in_unit');
-  $cl_1st_unit_threshold = $config->getIntValue('1st_unit_threshold');
+  $cl_minutes_in_unit = $user->minutes_in_unit;
+  $cl_1st_unit_threshold = $user->first_unit_threshold;
 }
 
 $form = new Form('workUnitsForm');

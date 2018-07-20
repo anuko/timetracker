@@ -237,6 +237,7 @@ $i18n_key_words = array(
 // 'label.week_note' => 'Week note',
 // 'label.week_list' => 'Week list',
 // 'label.work_units' => 'Work units',
+// 'label.work_units_short' => 'Units',
 
 // Form titles.
 'title.login' => 'Prihlásenie',
