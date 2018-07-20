@@ -95,6 +95,9 @@ if ('xml' == $type) {
           $val = time_to_decimal($val);
         print "\t<duration><![CDATA[".$val."]]></duration>\n";
       }
+      if ($bean->getAttribute('chunits')) {
+        print "\t<units><![CDATA[".$subtotal['units']."]]></units>\n";
+      }
       if ($bean->getAttribute('chcost')) {
         print "\t<cost><![CDATA[";
         if ($user->can('manage_invoices') || $user->isClient())
@@ -124,6 +127,7 @@ if ('xml' == $type) {
           $duration = time_to_decimal($duration);
           print "\t<duration><![CDATA[".$duration."]]></duration>\n";
       }
+      if ($bean->getAttribute('chunits')) print "\t<units><![CDATA[".$item['units']."]]></units>\n";
       if ($bean->getAttribute('chnote')) print "\t<note><![CDATA[".$item['note']."]]></note>\n";
       if ($bean->getAttribute('chcost')) {
         print "\t<cost><![CDATA[";
@@ -171,6 +175,7 @@ if ('csv' == $type) {
     // Print headers.
     print '"'.$group_by_header.'"';
     if ($bean->getAttribute('chduration')) print ',"'.$i18n->get('label.duration').'"';
+    if ($bean->getAttribute('chunits')) print ',"'.$i18n->get('label.work_units_short').'"';
     if ($bean->getAttribute('chcost')) print ',"'.$i18n->get('label.cost').'"';
     print "\n";
 
@@ -183,6 +188,7 @@ if ('csv' == $type) {
           $val = time_to_decimal($val);
         print ',"'.$val.'"';
       }
+      if ($bean->getAttribute('chunits')) print ',"'.$subtotal['units'].'"';
       if ($bean->getAttribute('chcost')) {
         if ($user->can('manage_invoices') || $user->isClient())
           print ',"'.$subtotal['cost'].'"';
@@ -202,6 +208,7 @@ if ('csv' == $type) {
     if ($bean->getAttribute('chstart')) print ',"'.$i18n->get('label.start').'"';
     if ($bean->getAttribute('chfinish')) print ',"'.$i18n->get('label.finish').'"';
     if ($bean->getAttribute('chduration')) print ',"'.$i18n->get('label.duration').'"';
+    if ($bean->getAttribute('chunits')) print ',"'.$i18n->get('label.work_units_short').'"';
     if ($bean->getAttribute('chnote')) print ',"'.$i18n->get('label.note').'"';
     if ($bean->getAttribute('chcost')) print ',"'.$i18n->get('label.cost').'"';
     if ($bean->getAttribute('chpaid')) print ',"'.$i18n->get('label.paid').'"';
@@ -225,6 +232,7 @@ if ('csv' == $type) {
           $val = time_to_decimal($val);
         print ',"'.$val.'"';
       }
+      if ($bean->getAttribute('chunits')) print ',"'.$item['units'].'"';
       if ($bean->getAttribute('chnote')) print ',"'.str_replace('"','""',$item['note']).'"';
       if ($bean->getAttribute('chcost')) {
         if ($user->can('manage_invoices') || $user->isClient())
