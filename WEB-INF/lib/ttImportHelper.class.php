@@ -332,6 +332,7 @@ class ttImportHelper {
         'chfinish' => (int) $this->currentElement['SHOW_END'],
         'chnote' => (int) $this->currentElement['SHOW_NOTE'],
         'chcf_1' => (int) $this->currentElement['SHOW_CUSTOM_FIELD_1'],
+        'chunits' => (int) $this->currentElement['SHOW_WORK_UNITS'],
         'group_by' => $this->currentElement['GROUP_BY'],
         'chtotalsonly' => (int) $this->currentElement['SHOW_TOTALS_ONLY']));
     }

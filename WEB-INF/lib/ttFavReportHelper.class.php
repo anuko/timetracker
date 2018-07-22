@@ -83,7 +83,7 @@ class ttFavReportHelper {
       billable, invoice, paid_status, users, period, period_start, period_end,
       show_client, show_invoice, show_paid, show_ip,
       show_project, show_start, show_duration, show_cost,
-      show_task, show_end, show_note, show_custom_field_1,
+      show_task, show_end, show_note, show_custom_field_1, show_work_units,
       group_by, show_totals_only)
       values(".
       $mdb2->quote($fields['name']).", ".$fields['user_id'].", ".
@@ -95,7 +95,7 @@ class ttFavReportHelper {
       $mdb2->quote($fields['from']).", ".$mdb2->quote($fields['to']).", ".
       $fields['chclient'].", ".$fields['chinvoice'].", ".$fields['chpaid'].", ".$fields['chip'].", ".
       $fields['chproject'].", ".$fields['chstart'].", ".$fields['chduration'].", ".$fields['chcost'].", ".
-      $fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".$fields['chcf_1'].", ".
+      $fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".$fields['chcf_1'].", ".$fields['chunits'].", ".
       $mdb2->quote($fields['group_by']).", ".$fields['chtotalsonly'].")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
@@ -138,6 +138,7 @@ class ttFavReportHelper {
       "show_end = ".$fields['chfinish'].", ".
       "show_note = ".$fields['chnote'].", ".
       "show_custom_field_1 = ".$fields['chcf_1'].", ".
+      "show_work_units = ".$fields['chunits'].", ".
       "group_by = ".$mdb2->quote($fields['group_by']).", ".
       "show_totals_only = ".$fields['chtotalsonly'].
       " where id = ".$fields['id'];
@@ -166,6 +167,7 @@ class ttFavReportHelper {
     if (!$bean->getAttribute('chfinish')) $bean->setAttribute('chfinish', 0);
     if (!$bean->getAttribute('chnote')) $bean->setAttribute('chnote', 0);
     if (!$bean->getAttribute('chcf_1')) $bean->setAttribute('chcf_1', 0);
+    if (!$bean->getAttribute('chunits')) $bean->setAttribute('chunits', 0);
     if (!$bean->getAttribute('chtotalsonly')) $bean->setAttribute('chtotalsonly', 0);
 
     if ($bean->getAttribute('users') && is_array($bean->getAttribute('users'))) {
@@ -221,6 +223,7 @@ class ttFavReportHelper {
       'chfinish'=>$bean->getAttribute('chfinish'),
       'chnote'=>$bean->getAttribute('chnote'),
       'chcf_1'=>$bean->getAttribute('chcf_1'),
+      'chunits'=>$bean->getAttribute('chunits'),
       'group_by'=>$bean->getAttribute('group_by'),
       'chtotalsonly'=>$bean->getAttribute('chtotalsonly'));
 
@@ -292,6 +295,7 @@ class ttFavReportHelper {
       $bean->setAttribute('chfinish', $val['show_end']);
       $bean->setAttribute('chnote', $val['show_note']);
       $bean->setAttribute('chcf_1', $val['show_custom_field_1']);
+      $bean->setAttribute('chunits', $val['show_work_units']);
       $bean->setAttribute('group_by', $val['group_by']);
       $bean->setAttribute('chtotalsonly', $val['show_totals_only']);
       $bean->setAttribute('new_fav_report', $val['name']);
@@ -316,6 +320,7 @@ class ttFavReportHelper {
         'chfinish'=>'1',
         'chnote'=>'1',
         'chcf_1'=>'',
+        'chunits'=>'',
         'group_by'=>'',
         'chtotalsonly'=>'',
         'new_fav_report'=>''));
