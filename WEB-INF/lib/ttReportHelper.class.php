@@ -1078,26 +1078,30 @@ class ttReportHelper {
     if ($report['show_cost']) {
       if (MODE_TIME == $user->tracking_mode) {
         $sql = "select sum(time_to_sec(l.duration)) as time,
+          sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units,
           sum(cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2))) as cost,
           null as expenses 
           from tt_log l
           left join tt_users u on (l.user_id = u.id) $where";
       } else {
         $sql = "select sum(time_to_sec(l.duration)) as time,
+          sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units,
           sum(cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2))) as cost,
           null as expenses
           from tt_log l
           left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id) $where";
       }
     } else
-      $sql = "select sum(time_to_sec(l.duration)) as time, null as cost, null as expenses from tt_log l $where";
+      $sql = "select sum(time_to_sec(l.duration)) as time,
+        sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units,
+        null as cost, null as expenses from tt_log l $where";
 
     // If we have expenses, query becomes a bit more complex.
     if ($report['show_cost'] && $user->isPluginEnabled('ex')) {
       $where = ttReportHelper::getFavExpenseWhere($report);
-      $sql_for_expenses = "select null as time, sum(cost) as cost, sum(cost) as expenses from tt_expense_items ei $where";
+      $sql_for_expenses = "select null as time, null as units, sum(cost) as cost, sum(cost) as expenses from tt_expense_items ei $where";
       // Create a combined query.
-      $sql = "select sum(time) as time, sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t";
+      $sql = "select sum(time) as time, sum(units) as units, sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t";
     }
 
     // Execute query.
@@ -1129,6 +1133,7 @@ class ttReportHelper {
     $totals['start_date'] = $period->getStartDate();
     $totals['end_date'] = $period->getEndDate();
     $totals['time'] = $total_time;
+    $totals['units'] = $val['units'];
     $totals['cost'] = $total_cost;
     $totals['expenses'] = $total_expenses;
 
@@ -1229,6 +1234,8 @@ class ttReportHelper {
       $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
       if ($bean->getAttribute('chduration'))
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
+      if ($bean->getAttribute('chunits'))
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.work_units_short').'</td>';
       if ($bean->getAttribute('chcost'))
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
       $body .= '</tr>';
@@ -1238,6 +1245,11 @@ class ttReportHelper {
         if ($bean->getAttribute('chduration')) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
           if ($subtotal['time'] <> '0:00') $body .= $subtotal['time'];
+          $body .= '</td>';
+        }
+        if ($bean->getAttribute('chunits')) {
+          $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
+          $body .= $subtotal['units'];
           $body .= '</td>';
         }
         if ($bean->getAttribute('chcost')) {
@@ -1255,6 +1267,11 @@ class ttReportHelper {
       if ($bean->getAttribute('chduration')) {
         $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
         if ($totals['time'] <> '0:00') $body .= $totals['time'];
+        $body .= '</td>';
+      }
+      if ($bean->getAttribute('chunits')) {
+        $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
+        $body .= $totals['units'];
         $body .= '</td>';
       }
       if ($bean->getAttribute('chcost')) {
@@ -1288,6 +1305,8 @@ class ttReportHelper {
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.finish').'</td>';
       if ($bean->getAttribute('chduration'))
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
+      if ($bean->getAttribute('chunits'))
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.work_units_short').'</td>';
       if ($bean->getAttribute('chnote'))
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.note').'</td>';
       if ($bean->getAttribute('chcost'))
@@ -1331,6 +1350,7 @@ class ttReportHelper {
               if ($bean->getAttribute('chstart')) $body .= '<td></td>';
               if ($bean->getAttribute('chfinish')) $body .= '<td></td>';
               if ($bean->getAttribute('chduration')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['time'].'</td>';
+              if ($bean->getAttribute('chunits')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['units'].'</td>';
               if ($bean->getAttribute('chnote')) $body .= '<td></td>';
               if ($bean->getAttribute('chcost')) {
                 $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
@@ -1367,6 +1387,8 @@ class ttReportHelper {
             $body .= '<td nowrap style="'.$cellRightAligned.'">'.$record['finish'].'</td>';
           if ($bean->getAttribute('chduration'))
             $body .= '<td style="'.$cellRightAligned.'">'.$record['duration'].'</td>';
+          if ($bean->getAttribute('chunits'))
+            $body .= '<td style="'.$cellRightAligned.'">'.$record['units'].'</td>';
           if ($bean->getAttribute('chnote'))
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['note']).'</td>';
           if ($bean->getAttribute('chcost'))
@@ -1404,6 +1426,7 @@ class ttReportHelper {
         if ($bean->getAttribute('chstart')) $body .= '<td></td>';
         if ($bean->getAttribute('chfinish')) $body .= '<td></td>';
         if ($bean->getAttribute('chduration')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['time'].'</td>';
+        if ($bean->getAttribute('chunits')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['units'].'</td>';
         if ($bean->getAttribute('chnote')) $body .= '<td></td>';
         if ($bean->getAttribute('chcost')) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
@@ -1428,6 +1451,7 @@ class ttReportHelper {
       if ($bean->getAttribute('chstart')) $body .= '<td></td>';
       if ($bean->getAttribute('chfinish')) $body .= '<td></td>';
       if ($bean->getAttribute('chduration')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['time'].'</td>';
+      if ($bean->getAttribute('chunits')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['units'].'</td>';
       if ($bean->getAttribute('chnote')) $body .= '<td></td>';
       if ($bean->getAttribute('chcost')) {
         $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
