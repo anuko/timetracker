@@ -56,7 +56,6 @@ class ttConfigHelper {
         $this->config = implode(',', $this->config_array);
         return;
       }
-
     } else {
       // Deleting part.
       foreach ($this->config_array as $key => $value) {
