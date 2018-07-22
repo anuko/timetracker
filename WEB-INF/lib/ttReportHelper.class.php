@@ -276,6 +276,9 @@ class ttReportHelper {
     // Add duration.
     if ($bean->getAttribute('chduration'))
       array_push($fields, "TIME_FORMAT(l.duration, '%k:%i') as duration");
+    // Add work units.
+    if ($bean->getAttribute('chunits'))
+      array_push($fields, "if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit)) as units");
     // Add note.
     if ($bean->getAttribute('chnote'))
       array_push($fields, 'l.comment as note');
@@ -302,10 +305,6 @@ class ttReportHelper {
     // Add invoice name if it is selected.
     if (($canViewReports || $isClient) && $bean->getAttribute('chinvoice'))
       array_push($fields, 'i.name as invoice');
-
-    // Add work units.
-    if ($bean->getAttribute('chunits'))
-      array_push($fields, "if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit)) as units");
 
     // Prepare sql query part for left joins.
     $left_joins = null;
@@ -549,6 +548,10 @@ class ttReportHelper {
     // Add duration.
     if ($report['show_duration'])
       array_push($fields, "TIME_FORMAT(l.duration, '%k:%i') as duration");
+    // Add work units.
+    if ($report['show_work_units'])
+      array_push($fields, "if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit)) as units");
+
     // Add note.
     if ($report['show_note'])
       array_push($fields, 'l.comment as note');
@@ -632,6 +635,8 @@ class ttReportHelper {
         array_push($fields, 'null'); // null for finish.
       if ($report['show_duration'])
         array_push($fields, 'null'); // null for duration.
+      if ($report['show_work_units'])
+        array_push($fields, 'null'); // null for work units.
       // Use the note field to print item name.
       if ($report['show_note'])
         array_push($fields, 'ei.name as note');
@@ -909,21 +914,25 @@ class ttReportHelper {
       if (MODE_TIME == $user->tracking_mode) {
         if ($group_by_option != 'user')
           $left_join = 'left join tt_users u on (l.user_id = u.id)';
-        $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time, 
+        $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time,
+          sum(if(l.billable = 0 or  time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units,
           sum(cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2))) as cost,
           null as expenses from tt_log l
           $group_join $left_join $where group by $group_field";
       } else {
         // If we are including cost and tracking projects, our query (the same as above) needs to join the tt_user_project_binds table.
-        $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time, 
+        $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time,
+          sum(if(l.billable = 0 or  time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units,
           sum(cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2))) as cost,
           null as expenses from tt_log l 
           $group_join
           left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id) $where group by $group_field";
       }
     } else {
-      $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time, null as expenses from tt_log l 
-         $group_join $where group by $group_field";
+      $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time,
+        sum(if(l.billable = 0 or  time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units,
+        null as expenses from tt_log l 
+        $group_join $where group by $group_field";
     }
     // By now we have sql for time items.
 
@@ -953,13 +962,13 @@ class ttReportHelper {
       }
 
       $where = ttReportHelper::getFavExpenseWhere($report);
-      $sql_for_expenses = "select $group_field as group_field, null as time, sum(ei.cost) as cost, sum(ei.cost) as expenses from tt_expense_items ei 
+      $sql_for_expenses = "select $group_field as group_field, null as time, null as units, sum(ei.cost) as cost, sum(ei.cost) as expenses from tt_expense_items ei 
         $group_join $where";
       // Add a "group by" clause if we are grouping.
       if ('null' != $group_field) $sql_for_expenses .= " group by $group_field";
 
       // Create a combined query.
-      $sql = "select group_field, sum(time) as time, sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t group by group_field";
+      $sql = "select group_field, sum(time) as time, sum(units) as units, sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t group by group_field";
     }
 
     // Execute query.
@@ -979,9 +988,9 @@ class ttReportHelper {
           $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
           $val['expenses'] = str_replace('.', $user->decimal_mark, $val['expenses']);
         }
-        $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time,'cost'=>$val['cost'],'expenses'=>$val['expenses']);
+        $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time, 'units'=> $val['units'], 'cost'=>$val['cost'],'expenses'=>$val['expenses']);
       } else
-        $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time);
+        $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time, 'units'=> $val['units']);
     }
 
     return $subtotals;
@@ -1549,6 +1558,8 @@ class ttReportHelper {
       $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
       if ($report['show_duration'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
+      if ($report['show_work_units'])
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.work_units_short').'</td>';
       if ($report['show_cost'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
       $body .= '</tr>';
@@ -1558,6 +1569,11 @@ class ttReportHelper {
         if ($report['show_duration']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
           if ($subtotal['time'] <> '0:00') $body .= $subtotal['time'];
+          $body .= '</td>';
+        }
+        if ($report['show_work_units']) {
+          $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
+          $body .= $subtotal['units'];
           $body .= '</td>';
         }
         if ($report['show_cost']) {
@@ -1575,6 +1591,11 @@ class ttReportHelper {
       if ($report['show_duration']) {
         $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
         if ($totals['time'] <> '0:00') $body .= $totals['time'];
+        $body .= '</td>';
+      }
+      if ($report['show_work_units']) {
+        $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
+        $body .= $totals['units'];
         $body .= '</td>';
       }
       if ($report['show_cost']) {
@@ -1608,6 +1629,8 @@ class ttReportHelper {
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.finish').'</td>';
       if ($report['show_duration'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
+      if ($report['show_work_units'])
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.work_units_short').'</td>';
       if ($report['show_note'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.note').'</td>';
       if ($report['show_cost'])
@@ -1651,6 +1674,7 @@ class ttReportHelper {
               if ($report['show_start']) $body .= '<td></td>';
               if ($report['show_end']) $body .= '<td></td>';
               if ($report['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['time'].'</td>';
+              if ($report['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['units'].'</td>';
               if ($report['show_note']) $body .= '<td></td>';
               if ($report['show_cost']) {
                 $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
@@ -1687,6 +1711,8 @@ class ttReportHelper {
             $body .= '<td nowrap style="'.$cellRightAligned.'">'.$record['finish'].'</td>';
           if ($report['show_duration'])
             $body .= '<td style="'.$cellRightAligned.'">'.$record['duration'].'</td>';
+          if ($report['show_work_units'])
+            $body .= '<td style="'.$cellRightAligned.'">'.$record['units'].'</td>';
           if ($report['show_note'])
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['note']).'</td>';
           if ($report['show_cost'])
@@ -1724,6 +1750,7 @@ class ttReportHelper {
         if ($report['show_start']) $body .= '<td></td>';
         if ($report['show_end']) $body .= '<td></td>';
         if ($report['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['time'].'</td>';
+        if ($report['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['units'].'</td>';
         if ($report['show_note']) $body .= '<td></td>';
         if ($report['show_cost']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
@@ -1748,6 +1775,7 @@ class ttReportHelper {
       if ($report['show_start']) $body .= '<td></td>';
       if ($report['show_end']) $body .= '<td></td>';
       if ($report['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['time'].'</td>';
+      if ($report['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['units'].'</td>';
       if ($report['show_note']) $body .= '<td></td>';
       if ($report['show_cost']) {
         $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
