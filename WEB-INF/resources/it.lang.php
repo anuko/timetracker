@@ -220,6 +220,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.work_units' => 'Work units',
 // 'label.work_units_short' => 'Units',
+'label.totals_only' => 'Solo i totali',
 
 // Form titles.
 // TODO: Improve titles for consistency, so that each title explains correctly what each
@@ -379,7 +380,6 @@ $i18n_key_words = array(
 'form.reports.group_by_client' => 'cliente',
 'form.reports.group_by_project' => 'progetto',
 'form.reports.group_by_task' => 'compito',
-'form.reports.totals_only' => 'Solo i totali',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).

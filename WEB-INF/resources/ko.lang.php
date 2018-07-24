@@ -253,6 +253,7 @@ $i18n_key_words = array(
 // 'label.week_list' => 'Week list',
 // 'label.work_units' => 'Work units',
 // 'label.work_units_short' => 'Units',
+'label.totals_only' => '오직 전체만',
 
 // Form titles.
 'title.login' => '로그인',
@@ -420,7 +421,6 @@ $i18n_key_words = array(
 'form.reports.group_by_project' => '프로젝트',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
-'form.reports.totals_only' => '오직 전체만',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).

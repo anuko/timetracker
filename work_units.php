@@ -53,6 +53,7 @@ if ($request->isPost()) {
 $form = new Form('workUnitsForm');
 $form->addInput(array('type'=>'text', 'name'=>'minutes_in_unit', 'value'=>$cl_minutes_in_unit, 'style'=>'width:40px'));
 $form->addInput(array('type'=>'text', 'name'=>'1st_unit_threshold', 'value'=>$cl_1st_unit_threshold, 'style'=>'width:40px'));
+$form->addInput(array('type'=>'checkbox','name'=>'totals_only','value'=>$cl_totals_only));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()){

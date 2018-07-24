@@ -224,6 +224,7 @@ $i18n_key_words = array(
 // 'label.week_list' => 'Week list',
 // 'label.work_units' => 'Work units',
 // 'label.work_units_short' => 'Units',
+'label.totals_only' => 'Visa endast summeringar',
 
 // Rubriker för formulär
 'title.login' => 'Logga in',
@@ -382,7 +383,6 @@ $i18n_key_words = array(
 'form.reports.group_by_client' => 'Kund',
 'form.reports.group_by_project' => 'Projekt',
 'form.reports.group_by_task' => 'Arbetsuppgift',
-'form.reports.totals_only' => 'Visa endast summeringar',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).

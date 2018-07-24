@@ -238,6 +238,7 @@ $i18n_key_words = array(
 // 'label.week_list' => 'Week list',
 // 'label.work_units' => 'Work units',
 // 'label.work_units_short' => 'Units',
+'label.totals_only' => 'Iba celkové',
 
 // Form titles.
 'title.login' => 'Prihlásenie',
@@ -402,7 +403,6 @@ $i18n_key_words = array(
 'form.reports.group_by_client' => 'klient',
 'form.reports.group_by_project' => 'projekt',
 'form.reports.group_by_task' => 'úloha',
-'form.reports.totals_only' => 'Iba celkové',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).

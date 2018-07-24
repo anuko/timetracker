@@ -229,6 +229,7 @@ $i18n_key_words = array(
 // 'label.week_note' => 'Week note',
 // 'label.week_list' => 'Week list',
 // 'label.work_units' => 'Work units',
+'label.totals_only' => 'Samo zbirno',
 
 // Form titles.
 'title.login' => 'Prijava',
@@ -386,7 +387,6 @@ $i18n_key_words = array(
 'form.reports.group_by_client' => 'klijent',
 'form.reports.group_by_project' => 'projekat',
 'form.reports.group_by_task' => 'zadatak',
-'form.reports.totals_only' => 'Samo zbirno',
 
 // Forma izveštaja. Pogledajte primer na https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).

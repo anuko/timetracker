@@ -9,6 +9,10 @@
     <td>{$forms.workUnitsForm.1st_unit_threshold.control} <a href="https://www.anuko.com/lp/tt_24.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
   </tr>
   <tr>
+    <td align="right" nowrap>{$i18n.label.totals_only}:</td>
+    <td>{$forms.workUnitsForm.totals_only.control} <a href="https://www.anuko.com/lp/tt_25.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+  </tr>
+  <tr>
     <td colspan="2">&nbsp;</td>
   </tr>
   <tr>

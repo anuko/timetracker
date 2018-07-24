@@ -238,6 +238,7 @@ $i18n_key_words = array(
 // 'label.week_list' => 'Week list',
 // 'label.work_units' => 'Work units',
 // 'label.work_units_short' => 'Units',
+// 'label.totals_only' => 'Totals only',
 
 // Form titles.
 'title.login' => 'ورود',
@@ -402,9 +403,6 @@ $i18n_key_words = array(
 'form.reports.group_by_client' => 'مشتری',
 'form.reports.group_by_project' => 'پروژه',
 'form.reports.group_by_task' => 'وظیفه',
-// TODO: translate form.reports.totals_only. Selecting this option means to print subtotals only for a "grouped by" report.
-// In other words, items are not printed, only subtotals for grouped items are printed.  
-// 'form.reports.totals_only' => 'Totals only',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
