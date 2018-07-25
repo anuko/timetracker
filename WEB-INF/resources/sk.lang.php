@@ -473,7 +473,7 @@ $i18n_key_words = array(
 'form.export.compression_none' => 'žiadna',
 'form.export.compression_bzip' => 'bzip',
 
-// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
 'form.import.hint' => 'Importovať dáta o tíme z xml súboru.', // TODO: replace "team" with "group".
 'form.import.file' => 'Vyberte súbor',
 'form.import.success' => 'Import úspešne dokončený.',
