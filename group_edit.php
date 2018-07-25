@@ -30,6 +30,7 @@ require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
 import('ttRoleHelper');
+import('ttConfigHelper');
 
 // Access checks.
 if (!(ttAccessAllowed('manage_basic_settings') || ttAccessAllowed('manage_advanced_settings'))) {
@@ -37,6 +38,8 @@ if (!(ttAccessAllowed('manage_basic_settings') || ttAccessAllowed('manage_advanc
   exit();
 }
 // End of access checks.
+
+$config = new ttConfigHelper($user->config);
 
 $advanced_settings = $user->can('manage_advanced_settings');
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
@@ -271,18 +274,12 @@ if ($request->isPost()) {
 
     $plugins = trim($plugins, ',');
 
-    // Prepare config string.
-    if ($cl_show_holidays)
-      $config .= ',show_holidays';
-    if ($cl_punch_mode)
-      $config .= ',punch_mode';
-    if ($cl_allow_overlap)
-      $config .= ',allow_overlap';
-    if ($cl_future_entries)
-      $config .= ',future_entries';
-    if ($cl_uncompleted_indicators)
-      $config .= ',uncompleted_indicators';
-    $config = trim($config, ',');
+    // Update config.
+    $config->setDefinedValue('show_holidays', $cl_show_holidays);
+    $config->setDefinedValue('punch_mode', $cl_punch_mode);
+    $config->setDefinedValue('allow_overlap', $cl_allow_overlap);
+    $config->setDefinedValue('future_entries', $cl_future_entries);
+    $config->setDefinedValue('uncompleted_indicators', $cl_uncompleted_indicators);
 
     if ($user->updateGroup(array(
       'name' => $cl_group,
@@ -300,7 +297,7 @@ if ($request->isPost()) {
       'bcc_email' => $cl_bcc_email,
       'allow_ip' => $cl_allow_ip,
       'plugins' => $plugins,
-      'config' => $config))) {
+      'config' => $config->getConfig()))) {
       header('Location: time.php');
       exit();
     } else

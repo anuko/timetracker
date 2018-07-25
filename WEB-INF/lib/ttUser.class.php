@@ -68,6 +68,7 @@ class ttUser {
   var $is_client = false;       // Whether user is a client as determined by missing 'track_own_time' right.
   var $minutes_in_unit = 15;    // Number of minutes in unit for Work units plugin.
   var $first_unit_threshold = 0;// Threshold for 1st unit for Work units plugin.
+  var $unit_totals_only = 0;    // Totlas only option for the Work units plugin.
 
   // Constructor.
   function __construct($login, $id = null) {
@@ -139,6 +140,7 @@ class ttUser {
         if ($minutes_in_unit) $this->minutes_in_unit = $minutes_in_unit;
         $first_unit_threshold = $config->getIntValue('1st_unit_threshold');
         if ($first_unit_threshold) $this->first_unit_threshold = $first_unit_threshold;
+        $this->unit_totals_only = $config->getDefinedValue('unit_totals_only');
       }
       
       // Set "on behalf" id and name.

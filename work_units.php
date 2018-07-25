@@ -45,9 +45,11 @@ $config = new ttConfigHelper($user->config);
 if ($request->isPost()) {
   $cl_minutes_in_unit = $request->getParameter('minutes_in_unit');
   $cl_1st_unit_threshold = $request->getParameter('1st_unit_threshold');
+  $cl_totals_only = $request->getParameter('totals_only');
 } else {
   $cl_minutes_in_unit = $user->minutes_in_unit;
   $cl_1st_unit_threshold = $user->first_unit_threshold;
+  $cl_totals_only = $user->unit_totals_only;
 }
 
 $form = new Form('workUnitsForm');
@@ -65,6 +67,7 @@ if ($request->isPost()){
   if ($err->no()) {
     $config->setIntValue('minutes_in_unit', $cl_minutes_in_unit);
     $config->setIntValue('1st_unit_threshold', $cl_1st_unit_threshold);
+    $config->setDefinedValue('unit_totals_only', $cl_totals_only);
     if (!$user->updateGroup(array('config' => $config->getConfig()))) {
       $err->add($i18n->get('error.db'));
     }
