@@ -58,10 +58,11 @@ $type = $request->getParameter('type');
 $totals_only = $bean->getAttribute('chtotalsonly');
 
 // Obtain items.
+$options = ttReportHelper::getReportOptions($bean);
 if ($totals_only)
-  $subtotals = ttReportHelper::getSubtotals($bean);
+  $subtotals = ttReportHelper::getSubtotals($bean, $options);
 else
-  $items = ttReportHelper::getItems($bean);
+  $items = ttReportHelper::getItems($bean, $options);
 
 // Build a string to use as filename for the files being downloaded.
 $filename = strtolower($i18n->get('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];

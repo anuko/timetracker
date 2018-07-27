@@ -37,13 +37,14 @@ require_once(dirname(__FILE__).'/../../plugins/CustomFields.class.php');
 class ttReportHelper {
 
   // getWhere prepares a WHERE clause for a report query.
-  static function getWhere($bean) {
+  // Note: $options is a future replacement of $bean, which is work in progress.
+  static function getWhere($bean, $options) {
     global $user;
 
     // Prepare dropdown parts.
     $dropdown_parts = '';
-    if ($bean->getAttribute('client'))
-      $dropdown_parts .= ' and l.client_id = '.$bean->getAttribute('client');
+    if ($options['client_id'])
+      $dropdown_parts .= ' and l.client_id = '.$options['client_id'];
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and l.client_id = '.$user->client_id;
     if ($bean->getAttribute('option')) $dropdown_parts .= ' and l.id in(select log_id from tt_custom_field_log where status = 1 and option_id = '.$bean->getAttribute('option').')';
@@ -135,13 +136,13 @@ class ttReportHelper {
   }
 
   // getExpenseWhere prepares WHERE clause for expenses query in a report.
-  static function getExpenseWhere($bean) {
+  static function getExpenseWhere($bean, $options) {
     global $user;
 
     // Prepare dropdown parts.
     $dropdown_parts = '';
-    if ($bean->getAttribute('client'))
-      $dropdown_parts .= ' and ei.client_id = '.$bean->getAttribute('client');
+    if ($options['client_id'])
+      $dropdown_parts .= ' and l.client_id = '.$options['client_id'];
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and ei.client_id = '.$user->client_id;
     if ($bean->getAttribute('project')) $dropdown_parts .= ' and ei.project_id = '.$bean->getAttribute('project');
@@ -227,7 +228,7 @@ class ttReportHelper {
   // getItems retrieves all items associated with a report.
   // It combines tt_log and tt_expense_items in one array for presentation in one table using mysql union all.
   // Expense items use the "note" field for item name.
-  static function getItems($bean) {
+  static function getItems($bean, $options) {
     global $user;
     $mdb2 = getConnection();
 
@@ -333,7 +334,7 @@ class ttReportHelper {
     if ($includeCost && MODE_TIME != $user->tracking_mode)
       $left_joins .= " left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
 
-    $where = ttReportHelper::getWhere($bean);
+    $where = ttReportHelper::getWhere($bean, $options);
 
     // Construct sql query for tt_log items.
     $sql = "select ".join(', ', $fields)." from tt_log l $left_joins $where";
@@ -401,7 +402,7 @@ class ttReportHelper {
       if (($canViewReports || $isClient) && $bean->getAttribute('chinvoice'))
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
 
-      $where = ttReportHelper::getExpenseWhere($bean);
+      $where = ttReportHelper::getExpenseWhere($bean, $options);
 
       // Construct sql query for expense items.
       $sql_for_expense_items = "select ".join(', ', $fields)." from tt_expense_items ei $left_joins $where";
@@ -742,7 +743,7 @@ class ttReportHelper {
   // getSubtotals calculates report items subtotals when a report is grouped by.
   // Without expenses, it's a simple select with group by.
   // With expenses, it becomes a select with group by from a combined set of records obtained with "union all".
-  static function getSubtotals($bean) {
+  static function getSubtotals($bean, $options) {
     global $user;
 
     $group_by_option = $bean->getAttribute('group_by');
@@ -784,7 +785,7 @@ class ttReportHelper {
         break;
     }
 
-    $where = ttReportHelper::getWhere($bean);
+    $where = ttReportHelper::getWhere($bean, $options);
     if ($bean->getAttribute('chcost')) {
       if (MODE_TIME == $user->tracking_mode) {
         if ($group_by_option != 'user')
@@ -851,7 +852,7 @@ class ttReportHelper {
           break;
       }
 
-      $where = ttReportHelper::getExpenseWhere($bean);
+      $where = ttReportHelper::getExpenseWhere($bean, $options);
       $sql_for_expenses = "select $group_field as group_field, null as time";
       if ($bean->getAttribute('chunits')) $sql_for_expenses .= ", null as units";
       $sql_for_expenses .= ", sum(ei.cost) as cost, sum(ei.cost) as expenses from tt_expense_items ei $group_join $where";
@@ -1043,13 +1044,13 @@ class ttReportHelper {
   }
 
   // getTotals calculates total hours and cost for all report items.
-  static function getTotals($bean)
+  static function getTotals($bean, $options)
   {
     global $user;
 
     $mdb2 = getConnection();
 
-    $where = ttReportHelper::getWhere($bean);
+    $where = ttReportHelper::getWhere($bean, $options);
 
     // Prepare parts.
     $time_part = "sum(time_to_sec(l.duration)) as time";
@@ -1076,7 +1077,7 @@ class ttReportHelper {
 
     // If we have expenses, query becomes a bit more complex.
     if ($bean->getAttribute('chcost') && $user->isPluginEnabled('ex')) {
-      $where = ttReportHelper::getExpenseWhere($bean);
+      $where = ttReportHelper::getExpenseWhere($bean, $options);
       $sql_for_expenses = "select null as time";
       if ($bean->getAttribute('chunits')) $sql_for_expenses .= ", null as units";
       $sql_for_expenses .= ", sum(cost) as cost, sum(cost) as expenses from tt_expense_items ei $where";
@@ -1250,12 +1251,13 @@ class ttReportHelper {
     // Determine these once as they are used in multiple places in this function.
     $canViewReports = $user->can('view_reports');
     $isClient = $user->isClient();
+    $options = ttReportHelper::getReportOptions($bean);
 
-    $items = ttReportHelper::getItems($bean);
+    $items = ttReportHelper::getItems($bean, $options);
     $group_by = $bean->getAttribute('group_by');
     if ($group_by && 'no_grouping' != $group_by)
-      $subtotals = ttReportHelper::getSubtotals($bean);
-    $totals = ttReportHelper::getTotals($bean);
+      $subtotals = ttReportHelper::getSubtotals($bean, $options);
+    $totals = ttReportHelper::getTotals($bean, $options);
 
     // Use custom fields plugin if it is enabled.
     if ($user->isPluginEnabled('cf'))
@@ -1883,5 +1885,57 @@ class ttReportHelper {
       return false;
 
     return true;
+  }
+
+  // getReportOptions - returns an array of report options constructed from session bean.
+  //
+  // Note: similarly to ttFavReportHelper::getReportOptions, this function is a part of
+  // refactoring to simplify maintenance of report generating functions, as we currently
+  // have 2 sets: normal reporting (from bean), and fav report emailing (from db fields).
+  // Using options obtained from either db or bean shall allow us to use only one set of functions.
+  static function getReportOptions($bean) {
+    global $user;
+
+    // Prepare an array of report options.
+    $options = array();
+
+    // Construct one by one.
+    $options['name'] = null; // No name required.
+    $options['user_id'] = $user->id; // Not sure if we need user_id here. Fav reports use it to recycle $user object in cron.php.
+    $options['client_id'] = $bean->getAttribute('client');
+
+/*
+ * TODO: remaining fields to fill in...
+  `client_id` int(11) default NULL,                      # client id (if selected)
+  `cf_1_option_id` int(11) default NULL,                 # custom field 1 option id (if selected)
+  `project_id` int(11) default NULL,                     # project id (if selected)
+  `task_id` int(11) default NULL,                        # task id (if selected)
+  `billable` tinyint(4) default NULL,                    # whether to include billable, not billable, or all records
+  `invoice` tinyint(4) default NULL,                     # whether to include invoiced, not invoiced, or all records
+  `paid_status` tinyint(4) default NULL,                 # whether to include paid, not paid, or all records
+  `users` text default NULL,                             # Comma-separated list of user ids. Nothing here means "all" users.
+  `period` tinyint(4) default NULL,                      # selected period type for report
+  `period_start` date default NULL,                      # period start
+  `period_end` date default NULL,                        # period end
+  `show_client` tinyint(4) NOT NULL default 0,           # whether to show client column
+  `show_invoice` tinyint(4) NOT NULL default 0,          # whether to show invoice column
+  `show_paid` tinyint(4) NOT NULL default 0,             # whether to show paid column
+  `show_ip` tinyint(4) NOT NULL default 0,               # whether to show ip column
+  `show_project` tinyint(4) NOT NULL default 0,          # whether to show project column
+  `show_start` tinyint(4) NOT NULL default 0,            # whether to show start field
+  `show_duration` tinyint(4) NOT NULL default 0,         # whether to show duration field
+  `show_cost` tinyint(4) NOT NULL default 0,             # whether to show cost field
+  `show_task` tinyint(4) NOT NULL default 0,             # whether to show task column
+  `show_end` tinyint(4) NOT NULL default 0,              # whether to show end field
+  `show_note` tinyint(4) NOT NULL default 0,             # whether to show note column
+  `show_custom_field_1` tinyint(4) NOT NULL default 0,   # whether to show custom field 1
+  `show_work_units` tinyint(4) NOT NULL default 0,       # whether to show work units
+  `show_totals_only` tinyint(4) NOT NULL default 0,      # whether to show totals only
+  `group_by` varchar(20) default NULL,                   # group by field
+  `status` tinyint(4) default 1,                         # favorite report status
+  PRIMARY KEY (`id`)
+);
+     */
+    return $options;
   }
 }

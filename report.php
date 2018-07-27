@@ -172,14 +172,15 @@ if ($request->isPost()) {
 
 $group_by = $bean->getAttribute('group_by');
 
-$report_items = ttReportHelper::getItems($bean);
+$options = ttReportHelper::getReportOptions($bean);
+$report_items = ttReportHelper::getItems($bean, $options);
 // Store record ids in session in case user wants to act on records such as marking them all paid.
 if ($request->isGet() && $user->isPluginEnabled('ps'))
   ttReportHelper::putInSession($report_items);
 
 if ('no_grouping' != $group_by)
-  $subtotals = ttReportHelper::getSubtotals($bean);
-$totals = ttReportHelper::getTotals($bean);
+  $subtotals = ttReportHelper::getSubtotals($bean, $options);
+$totals = ttReportHelper::getTotals($bean, $options);
 
 // Assign variables that are used to print subtotals.
 if ($report_items && 'no_grouping' != $group_by) {
