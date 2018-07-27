@@ -59,7 +59,7 @@ while ($val = $res->fetchRow()) {
   // We have jobs to execute in user language.
 
   // Get favorite report details.
-  $report = ttFavReportHelper::getReport($val['report_id']);
+  $report = ttFavReportHelper::getReportOptions($val['report_id']);
   if (!$report) continue; // Skip not found report.
 
   // Recycle global $user object, as user settings are specific for each report.

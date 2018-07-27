@@ -327,4 +327,26 @@ class ttFavReportHelper {
       $bean->setAttributes($attrs);
     }
   }
+
+  // getReportOptions - returns an array of fav report options from database data.
+  // Note: this function is a part of refactoring to simplify maintenance of report
+  // generating functions, as we currently have 2 sets: normal reporting (from bean),
+  // and fav report emailing (from db fields). Using options obtained from either db or bean
+  // shall allow us to use only one set of functions.
+  static function getReportOptions($id) {
+
+    // Start with getting the fields from the database.
+    $db_fields = ttFavReportHelper::getReport($id);
+    if (!$db_fields) return false;
+
+    // Prepare an array of report options.
+    $options = $db_fields; // For now, use db field names as options.
+    // Drop things we don't need in reports.
+    unset($options['id']);
+    unset($options['report_spec']); // Currently not used.
+    unset($options['status']);
+
+    // $options now is a subset of db fields from tt_fav_reports table.
+    return $options;
+  }
 }
