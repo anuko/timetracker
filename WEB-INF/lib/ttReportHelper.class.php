@@ -83,30 +83,30 @@ class ttReportHelper {
   }
 
   // getFavWhere prepares a WHERE clause for a favorite report query.
-  static function getFavWhere($report) {
+  static function getFavWhere($options) {
     global $user;
 
     // Prepare dropdown parts.
     $dropdown_parts = '';
-    if ($report['client_id'])
-      $dropdown_parts .= ' and l.client_id = '.$report['client_id'];
+    if ($options['client_id'])
+      $dropdown_parts .= ' and l.client_id = '.$options['client_id'];
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and l.client_id = '.$user->client_id;
-    if ($report['cf_1_option_id']) $dropdown_parts .= ' and l.id in(select log_id from tt_custom_field_log where status = 1 and option_id = '.$report['cf_1_option_id'].')';
-    if ($report['project_id']) $dropdown_parts .= ' and l.project_id = '.$report['project_id'];
-    if ($report['task_id']) $dropdown_parts .= ' and l.task_id = '.$report['task_id'];
-    if ($report['billable']=='1') $dropdown_parts .= ' and l.billable = 1';
-    if ($report['billable']=='2') $dropdown_parts .= ' and l.billable = 0';
-    if ($report['invoice']=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
-    if ($report['invoice']=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
-    if ($report['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
-    if ($report['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
+    if ($options['cf_1_option_id']) $dropdown_parts .= ' and l.id in(select log_id from tt_custom_field_log where status = 1 and option_id = '.$options['cf_1_option_id'].')';
+    if ($options['project_id']) $dropdown_parts .= ' and l.project_id = '.$options['project_id'];
+    if ($options['task_id']) $dropdown_parts .= ' and l.task_id = '.$options['task_id'];
+    if ($options['billable']=='1') $dropdown_parts .= ' and l.billable = 1';
+    if ($options['billable']=='2') $dropdown_parts .= ' and l.billable = 0';
+    if ($options['invoice']=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
+    if ($options['invoice']=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
+    if ($options['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
+    if ($options['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
 
     // Prepare user list part.
     $userlist = -1;
     if (($user->can('view_reports') || $user->isClient())) {
-      if ($report['users'])
-        $userlist = $report['users'];
+      if ($options['users'])
+        $userlist = $options['users'];
       else {
         $active_users = ttTeamHelper::getActiveUsers();
         foreach ($active_users as $single_user)
@@ -122,13 +122,13 @@ class ttReportHelper {
       $user_list_part = " and l.user_id = ".$user->id;
 
     // Prepare sql query part for where.
-    if ($report['period'])
-      $period = new Period($report['period'], new DateAndTime($user->date_format));
+    if ($options['period'])
+      $period = new Period($options['period'], new DateAndTime($user->date_format));
     else {
       $period = new Period();
       $period->setPeriod(
-        new DateAndTime($user->date_format, $report['period_start']),
-        new DateAndTime($user->date_format, $report['period_end']));
+        new DateAndTime($user->date_format, $options['period_start']),
+        new DateAndTime($user->date_format, $options['period_end']));
     }
     $where = " where l.status = 1 and l.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";
@@ -177,26 +177,26 @@ class ttReportHelper {
   }
 
   // getFavExpenseWhere prepares a WHERE clause for expenses query in a favorite report.
-  static function getFavExpenseWhere($report) {
+  static function getFavExpenseWhere($options) {
     global $user;
 
     // Prepare dropdown parts.
     $dropdown_parts = '';
-    if ($report['client_id'])
-      $dropdown_parts .= ' and ei.client_id = '.$report['client_id'];
+    if ($options['client_id'])
+      $dropdown_parts .= ' and ei.client_id = '.$options['client_id'];
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and ei.client_id = '.$user->client_id;
-    if ($report['project_id']) $dropdown_parts .= ' and ei.project_id = '.$report['project_id'];
-    if ($report['invoice']=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
-    if ($report['invoice']=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
-    if ($report['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
-    if ($report['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
+    if ($options['project_id']) $dropdown_parts .= ' and ei.project_id = '.$options['project_id'];
+    if ($options['invoice']=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
+    if ($options['invoice']=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
+    if ($options['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
+    if ($options['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
 
     // Prepare user list part.
     $userlist = -1;
     if (($user->can('view_reports') || $user->isClient())) {
-      if ($report['users'])
-        $userlist = $report['users'];
+      if ($options['users'])
+        $userlist = $options['users'];
       else {
       	$active_users = ttTeamHelper::getActiveUsers();
         foreach ($active_users as $single_user)
@@ -212,13 +212,13 @@ class ttReportHelper {
       $user_list_part = " and ei.user_id = ".$user->id;
 
     // Prepare sql query part for where.
-    if ($report['period'])
-      $period = new Period($report['period'], new DateAndTime($user->date_format));
+    if ($options['period'])
+      $period = new Period($options['period'], new DateAndTime($user->date_format));
     else {
       $period = new Period();
       $period->setPeriod(
-        new DateAndTime($user->date_format, $report['period_start']),
-        new DateAndTime($user->date_format, $report['period_end']));
+        new DateAndTime($user->date_format, $options['period_start']),
+        new DateAndTime($user->date_format, $options['period_end']));
     }
     $where = " where ei.status = 1 and ei.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";
@@ -503,7 +503,7 @@ class ttReportHelper {
   // getFavItems retrieves all items associated with a favorite report.
   // It combines tt_log and tt_expense_items in one array for presentation in one table using mysql union all.
   // Expense items use the "note" field for item name.
-  static function getFavItems($report) {
+  static function getFavItems($options) {
     global $user;
     $mdb2 = getConnection();
 
@@ -511,8 +511,8 @@ class ttReportHelper {
     $canViewReports = $user->can('view_reports');
     $isClient = $user->isClient();
 
-    $group_by_option = $report['group_by'];
-    $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($report['show_start'] || $report['show_end']);
+    $group_by_option = $options['group_by'];
+    $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($options['show_start'] || $options['show_end']);
 
     // Prepare a query for time items in tt_log table.
     $fields = array(); // An array of fields for database query.
@@ -522,16 +522,16 @@ class ttReportHelper {
     if($canViewReports || $isClient)
       array_push($fields, 'u.name as user');
     // Add client name if it is selected.
-    if ($report['show_client'] || 'client' == $group_by_option)
+    if ($options['show_client'] || 'client' == $group_by_option)
       array_push($fields, 'c.name as client');
     // Add project name if it is selected.
-    if ($report['show_project'] || 'project' == $group_by_option)
+    if ($options['show_project'] || 'project' == $group_by_option)
       array_push($fields, 'p.name as project');
     // Add task name if it is selected.
-    if ($report['show_task'] || 'task' == $group_by_option)
+    if ($options['show_task'] || 'task' == $group_by_option)
       array_push($fields, 't.name as task');
     // Add custom field.
-    $include_cf_1 = $report['show_custom_field_1'] || 'cf_1' == $group_by_option;
+    $include_cf_1 = $options['show_custom_field_1'] || 'cf_1' == $group_by_option;
     if ($include_cf_1) {
       $custom_fields = new CustomFields($user->group_id);
       $cf_1_type = $custom_fields->fields[0]['type'];
@@ -542,18 +542,18 @@ class ttReportHelper {
       }
     }
     // Add start time.
-    if ($report['show_start']) {
+    if ($options['show_start']) {
       array_push($fields, "l.start as unformatted_start");
       array_push($fields, "TIME_FORMAT(l.start, '%k:%i') as start");
     }
     // Add finish time.
-    if ($report['show_end'])
+    if ($options['show_end'])
       array_push($fields, "TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), '%k:%i') as finish");
     // Add duration.
-    if ($report['show_duration'])
+    if ($options['show_duration'])
       array_push($fields, "TIME_FORMAT(l.duration, '%k:%i') as duration");
     // Add work units.
-    if ($report['show_work_units']) {
+    if ($options['show_work_units']) {
       if ($user->unit_totals_only)
         array_push($fields, "null as units");
       else
@@ -561,10 +561,10 @@ class ttReportHelper {
     }
 
     // Add note.
-    if ($report['show_note'])
+    if ($options['show_note'])
       array_push($fields, 'l.comment as note');
     // Handle cost.
-    $includeCost = $report['show_cost'];
+    $includeCost = $options['show_cost'];
     if ($includeCost) {
       if (MODE_TIME == $user->tracking_mode)
         array_push($fields, "cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost");   // Use default user rate.
@@ -573,30 +573,30 @@ class ttReportHelper {
       array_push($fields, "null as expense"); 
     }
     // Add paid status.
-    if ($canViewReports && $report['show_paid'])
+    if ($canViewReports && $options['show_paid'])
       array_push($fields, 'l.paid as paid');
     // Add IP address.
-    if ($canViewReports && $report['show_ip']) {
+    if ($canViewReports && $options['show_ip']) {
       array_push($fields, 'l.created as created');
       array_push($fields, 'l.created_ip as created_ip');
       array_push($fields, 'l.modified as modified');
       array_push($fields, 'l.modified_ip as modified_ip');
     }
     // Add invoice name if it is selected.
-    if (($canViewReports || $isClient) && $report['show_invoice'])
+    if (($canViewReports || $isClient) && $options['show_invoice'])
       array_push($fields, 'i.name as invoice');
 
     // Prepare sql query part for left joins.
     $left_joins = null;
-    if ($report['show_client'] || 'client' == $group_by_option)
+    if ($options['show_client'] || 'client' == $group_by_option)
       $left_joins .= " left join tt_clients c on (c.id = l.client_id)";
-    if (($canViewReports || $isClient) && $report['show_invoice'])
+    if (($canViewReports || $isClient) && $options['show_invoice'])
       $left_joins .= " left join tt_invoices i on (i.id = l.invoice_id and i.status = 1)";
     if ($canViewReports || $isClient || $user->isPluginEnabled('ex'))
        $left_joins .= " left join tt_users u on (u.id = l.user_id)";
-    if ($report['show_project'] || 'project' == $group_by_option)
+    if ($options['show_project'] || 'project' == $group_by_option)
       $left_joins .= " left join tt_projects p on (p.id = l.project_id)";
-    if ($report['show_task'] || 'task' == $group_by_option)
+    if ($options['show_task'] || 'task' == $group_by_option)
       $left_joins .= " left join tt_tasks t on (t.id = l.task_id)";
     if ($include_cf_1) {
       if ($cf_1_type == CustomFields::TYPE_TEXT)
@@ -609,7 +609,7 @@ class ttReportHelper {
     if ($includeCost && MODE_TIME != $user->tracking_mode)
       $left_joins .= " left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
 
-    $where = ttReportHelper::getFavWhere($report);
+    $where = ttReportHelper::getFavWhere($options);
 
     // Construct sql query for tt_log items.
     $sql = "select ".join(', ', $fields)." from tt_log l $left_joins $where";
@@ -617,7 +617,7 @@ class ttReportHelper {
     // with an exception of sorting part, that is added in the end.
 
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
-    if ($report['show_cost'] && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
+    if ($options['show_cost'] && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
 
       $fields = array(); // An array of fields for database query.
       array_push($fields, 'ei.id');
@@ -626,56 +626,56 @@ class ttReportHelper {
       if($canViewReports || $isClient)
         array_push($fields, 'u.name as user');
       // Add client name if it is selected.
-      if ($report['show_client'] || 'client' == $group_by_option)
+      if ($options['show_client'] || 'client' == $group_by_option)
         array_push($fields, 'c.name as client');
       // Add project name if it is selected.
-      if ($report['show_project'] || 'project' == $group_by_option)
+      if ($options['show_project'] || 'project' == $group_by_option)
         array_push($fields, 'p.name as project');
-      if ($report['show_task'] || 'task' == $group_by_option)
+      if ($options['show_task'] || 'task' == $group_by_option)
         array_push($fields, 'null'); // null for task name. We need to match column count for union.
-      if ($report['show_custom_field_1'] || 'cf_1' == $group_by_option)
+      if ($options['show_custom_field_1'] || 'cf_1' == $group_by_option)
         array_push($fields, 'null'); // null for cf_1.
-      if ($report['show_start']) {
+      if ($options['show_start']) {
         array_push($fields, 'null'); // null for unformatted_start.
         array_push($fields, 'null'); // null for start.
       }
-      if ($report['show_end'])
+      if ($options['show_end'])
         array_push($fields, 'null'); // null for finish.
-      if ($report['show_duration'])
+      if ($options['show_duration'])
         array_push($fields, 'null'); // null for duration.
-      if ($report['show_work_units'])
+      if ($options['show_work_units'])
         array_push($fields, 'null as units'); // null for work units.
       // Use the note field to print item name.
-      if ($report['show_note'])
+      if ($options['show_note'])
         array_push($fields, 'ei.name as note');
       array_push($fields, 'ei.cost as cost');
       array_push($fields, 'ei.cost as expense');
       // Add paid status.
-      if ($canViewReports && $report['show_paid'])
+      if ($canViewReports && $options['show_paid'])
         array_push($fields, 'ei.paid as paid');
       // Add IP address.
-      if ($canViewReports && $report['show_ip']) {
+      if ($canViewReports && $options['show_ip']) {
         array_push($fields, 'ei.created as created');
         array_push($fields, 'ei.created_ip as created_ip');
         array_push($fields, 'ei.modified as modified');
         array_push($fields, 'ei.modified_ip as modified_ip');
       }
       // Add invoice name if it is selected.
-      if (($canViewReports || $isClient) && $report['show_invoice'])
+      if (($canViewReports || $isClient) && $options['show_invoice'])
         array_push($fields, 'i.name as invoice');
 
       // Prepare sql query part for left joins.
       $left_joins = null;
       if ($canViewReports || $isClient)
         $left_joins .= " left join tt_users u on (u.id = ei.user_id)";
-      if ($report['show_client'] || 'client' == $group_by_option)
+      if ($options['show_client'] || 'client' == $group_by_option)
         $left_joins .= " left join tt_clients c on (c.id = ei.client_id)";
-      if ($report['show_project'] || 'project' == $group_by_option)
+      if ($options['show_project'] || 'project' == $group_by_option)
         $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";
-      if (($canViewReports || $isClient) && $report['show_invoice'])
+      if (($canViewReports || $isClient) && $options['show_invoice'])
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
 
-      $where = ttReportHelper::getFavExpenseWhere($report);
+      $where = ttReportHelper::getFavExpenseWhere($options);
 
       // Construct sql query for expense items.
       $sql_for_expense_items = "select ".join(', ', $fields)." from tt_expense_items ei $left_joins $where";
@@ -692,7 +692,7 @@ class ttReportHelper {
       $sort_part .= $group_by_option.', date';
     if (($canViewReports || $isClient) /*&& is_array($bean->getAttribute('users'))*/ && 'user' != $group_by_option)
       $sort_part .= ', user, type';
-    if ($report['show_start'])
+    if ($options['show_start'])
       $sort_part .= ', unformatted_start';
     $sort_part .= ', id';
 
@@ -894,10 +894,10 @@ class ttReportHelper {
   // getFavSubtotals calculates report items subtotals when a favorite report is grouped by.
   // Without expenses, it's a simple select with group by.
   // With expenses, it becomes a select with group by from a combined set of records obtained with "union all".
-  static function getFavSubtotals($report) {
+  static function getFavSubtotals($options) {
     global $user;
 
-    $group_by_option = $report['group_by'];
+    $group_by_option = $options['group_by'];
     if ('no_grouping' == $group_by_option) return null;
 
     $mdb2 = getConnection();
@@ -936,13 +936,13 @@ class ttReportHelper {
         break;
     }
 
-    $where = ttReportHelper::getFavWhere($report);
-    if ($report['show_cost']) {
+    $where = ttReportHelper::getFavWhere($options);
+    if ($options['show_cost']) {
       if (MODE_TIME == $user->tracking_mode) {
         if ($group_by_option != 'user')
           $left_join = 'left join tt_users u on (l.user_id = u.id)';
           $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time";
-          if ($report['show_work_units']) {
+          if ($options['show_work_units']) {
             if ($user->unit_totals_only)
               $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $user->first_unit_threshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
             else
@@ -955,7 +955,7 @@ class ttReportHelper {
       } else {
         // If we are including cost and tracking projects, our query (the same as above) needs to join the tt_user_project_binds table.
         $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time";
-        if ($report['show_work_units']) {
+        if ($options['show_work_units']) {
           if ($user->unit_totals_only)
             $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $user->first_unit_threshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
           else
@@ -968,7 +968,7 @@ class ttReportHelper {
       }
     } else {
       $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time";
-      if ($report['show_work_units']) {
+      if ($options['show_work_units']) {
         if ($user->unit_totals_only)
           $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $user->first_unit_threshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
         else
@@ -980,7 +980,7 @@ class ttReportHelper {
     // By now we have sql for time items.
 
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
-    if ($report['show_cost'] && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
+    if ($options['show_cost'] && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
 
       // Determine group by field and a required join.
       $group_join = null;
@@ -1004,16 +1004,16 @@ class ttReportHelper {
           break;
       }
 
-      $where = ttReportHelper::getFavExpenseWhere($report);
+      $where = ttReportHelper::getFavExpenseWhere($options);
       $sql_for_expenses = "select $group_field as group_field, null as time";
-      if ($report['show_work_units']) $sql_for_expenses .= ", null as units";
+      if ($options['show_work_units']) $sql_for_expenses .= ", null as units";
       $sql_for_expenses .= ", sum(ei.cost) as cost, sum(ei.cost) as expenses from tt_expense_items ei $group_join $where";
       // Add a "group by" clause if we are grouping.
       if ('null' != $group_field) $sql_for_expenses .= " group by $group_field";
 
       // Create a combined query.
       $combined = "select group_field, sum(time) as time";
-      if ($report['show_work_units']) $combined .= ", sum(units) as units";
+      if ($options['show_work_units']) $combined .= ", sum(units) as units";
       $combined .= ", sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t group by group_field";
       $sql = $combined;
     }
@@ -1030,7 +1030,7 @@ class ttReportHelper {
         unset($o_date);
       }
       $time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
-      if ($report['show_cost']) {
+      if ($options['show_cost']) {
         if ('.' != $user->decimal_mark) {
           $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
           $val['expenses'] = str_replace('.', $user->decimal_mark, $val['expenses']);
@@ -1126,20 +1126,20 @@ class ttReportHelper {
   }
 
   // getFavTotals calculates total hours and cost for all favorite report items.
-  static function getFavTotals($report)
+  static function getFavTotals($options)
   {
     global $user;
 
     $mdb2 = getConnection();
 
-    $where = ttReportHelper::getFavWhere($report);
+    $where = ttReportHelper::getFavWhere($options);
 
     // Prepare parts.
     $time_part = "sum(time_to_sec(l.duration)) as time";
-    if ($report['show_work_units']) {
+    if ($options['show_work_units']) {
       $units_part = $user->unit_totals_only ? ", null as units" : ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
     }
-    if ($report['show_cost']) {
+    if ($options['show_cost']) {
       if (MODE_TIME == $user->tracking_mode)
         $cost_part = ", sum(cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2))) as cost, null as expenses";
       else
@@ -1147,7 +1147,7 @@ class ttReportHelper {
     } else {
       $cost_part = ", null as cost, null as expenses";
     }
-    if ($report['show_cost']) {
+    if ($options['show_cost']) {
       if (MODE_TIME == $user->tracking_mode) {
         $left_joins = "left join tt_users u on (l.user_id = u.id)";
       } else {
@@ -1158,15 +1158,15 @@ class ttReportHelper {
     $sql = "select $time_part $units_part $cost_part from tt_log l $left_joins $where";
 
     // If we have expenses, query becomes a bit more complex.
-    if ($report['show_cost'] && $user->isPluginEnabled('ex')) {
-      $where = ttReportHelper::getFavExpenseWhere($report);
+    if ($options['show_cost'] && $user->isPluginEnabled('ex')) {
+      $where = ttReportHelper::getFavExpenseWhere($options);
       $sql_for_expenses = "select null as time";
-      if ($report['show_work_units']) $sql_for_expenses .= ", null as units";
+      if ($options['show_work_units']) $sql_for_expenses .= ", null as units";
       $sql_for_expenses .= ", sum(cost) as cost, sum(cost) as expenses from tt_expense_items ei $where";
 
       // Create a combined query.
       $combined = "select sum(time) as time";
-      if ($report['show_work_units']) $combined .= ", sum(units) as units";
+      if ($options['show_work_units']) $combined .= ", sum(units) as units";
       $combined .= ", sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t";
       $sql = $combined;
     }
@@ -1177,7 +1177,7 @@ class ttReportHelper {
 
     $val = $res->fetchRow();
     $total_time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
-    if ($report['show_cost']) {
+    if ($options['show_cost']) {
       $total_cost = $val['cost'];
       if (!$total_cost) $total_cost = '0.00';
       if ('.' != $user->decimal_mark)
@@ -1188,13 +1188,13 @@ class ttReportHelper {
         $total_expenses = str_replace('.', $user->decimal_mark, $total_expenses);
     }
 
-    if ($report['period'])
-      $period = new Period($report['period'], new DateAndTime($user->date_format));
+    if ($options['period'])
+      $period = new Period($options['period'], new DateAndTime($user->date_format));
     else {
       $period = new Period();
       $period->setPeriod(
-        new DateAndTime($user->date_format, $report['period_start']),
-        new DateAndTime($user->date_format, $report['period_end']));
+        new DateAndTime($user->date_format, $options['period_start']),
+        new DateAndTime($user->date_format, $options['period_end']));
     }
 
     $totals['start_date'] = $period->getStartDate();
@@ -1545,9 +1545,9 @@ class ttReportHelper {
   }
 
   // checkFavReportCondition - checks whether it is okay to send fav report.
-  static function checkFavReportCondition($report, $condition)
+  static function checkFavReportCondition($options, $condition)
   {
-    $items = ttReportHelper::getFavItems($report);
+    $items = ttReportHelper::getFavItems($options);
 
     $condition = str_replace('count', '', $condition);
     $count_required = (int) trim(str_replace('>', '', $condition));
@@ -1559,7 +1559,7 @@ class ttReportHelper {
   }
 
   // prepareFavReportBody - prepares an email body for a favorite report.
-  static function prepareFavReportBody($report)
+  static function prepareFavReportBody($options)
   {
     global $user;
     global $i18n;
@@ -1568,11 +1568,11 @@ class ttReportHelper {
     $canViewReports = $user->can('view_reports');
     $isClient = $user->isClient();
 
-    $items = ttReportHelper::getFavItems($report);
-    $group_by = $report['group_by'];
+    $items = ttReportHelper::getFavItems($options);
+    $group_by = $options['group_by'];
     if ($group_by && 'no_grouping' != $group_by)
-      $subtotals = ttReportHelper::getFavSubtotals($report);
-    $totals = ttReportHelper::getFavTotals($report);
+      $subtotals = ttReportHelper::getFavSubtotals($options);
+    $totals = ttReportHelper::getFavTotals($options);
 
     // Use custom fields plugin if it is enabled.
     if ($user->isPluginEnabled('cf'))
@@ -1601,7 +1601,7 @@ class ttReportHelper {
     // Output comment.
     // if ($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>'; // No comment for fav. reports.
 
-    if ($report['show_totals_only']) {
+    if ($options['show_totals_only']) {
       // Totals only report. Output subtotals.
 
       // Determine group_by header.
@@ -1615,27 +1615,27 @@ class ttReportHelper {
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
       $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
-      if ($report['show_duration'])
+      if ($options['show_duration'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
-      if ($report['show_work_units'])
+      if ($options['show_work_units'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.work_units_short').'</td>';
-      if ($report['show_cost'])
+      if ($options['show_cost'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
       $body .= '</tr>';
       foreach($subtotals as $subtotal) {
         $body .= '<tr style="'.$rowSubtotal.'">';
         $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($subtotal['name'] ? htmlspecialchars($subtotal['name']) : '&nbsp;').'</td>';
-        if ($report['show_duration']) {
+        if ($options['show_duration']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
           if ($subtotal['time'] <> '0:00') $body .= $subtotal['time'];
           $body .= '</td>';
         }
-        if ($report['show_work_units']) {
+        if ($options['show_work_units']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
           $body .= $subtotal['units'];
           $body .= '</td>';
         }
-        if ($report['show_cost']) {
+        if ($options['show_cost']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
           $body .= ($canViewReports || $isClient) ? $subtotal['cost'] : $subtotal['expenses'];
           $body .= '</td>';
@@ -1647,17 +1647,17 @@ class ttReportHelper {
       $body .= '<tr><td>&nbsp;</td></tr>';
       $body .= '<tr style="'.$rowSubtotal.'">';
       $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.total').'</td>';
-      if ($report['show_duration']) {
+      if ($options['show_duration']) {
         $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
         if ($totals['time'] <> '0:00') $body .= $totals['time'];
         $body .= '</td>';
       }
-      if ($report['show_work_units']) {
+      if ($options['show_work_units']) {
         $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
         $body .= $totals['units'];
         $body .= '</td>';
       }
-      if ($report['show_cost']) {
+      if ($options['show_cost']) {
         $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
         $body .= ($canViewReports || $isClient) ? $totals['cost'] : $totals['expenses'];
         $body .= '</td>';
@@ -1674,31 +1674,31 @@ class ttReportHelper {
       $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.date').'</td>';
       if ($canViewReports || $isClient)
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.user').'</td>';
-      if ($report['show_client'])
+      if ($options['show_client'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.client').'</td>';
-      if ($report['show_project'])
+      if ($options['show_project'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.project').'</td>';
-      if ($report['show_task'])
+      if ($options['show_task'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.task').'</td>';
-      if ($report['show_custom_field_1'])
+      if ($options['show_custom_field_1'])
         $body .= '<td style="'.$tableHeader.'">'.htmlspecialchars($custom_fields->fields[0]['label']).'</td>';
-      if ($report['show_start'])
+      if ($options['show_start'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.start').'</td>';
-      if ($report['show_end'])
+      if ($options['show_end'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.finish').'</td>';
-      if ($report['show_duration'])
+      if ($options['show_duration'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
-      if ($report['show_work_units'])
+      if ($options['show_work_units'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.work_units_short').'</td>';
-      if ($report['show_note'])
+      if ($options['show_note'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.note').'</td>';
-      if ($report['show_cost'])
+      if ($options['show_cost'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
-      if ($report['show_paid'])
+      if ($options['show_paid'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.paid').'</td>';
-      if ($report['show_ip'])
+      if ($options['show_ip'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.ip').'</td>';
-      if ($report['show_invoice'])
+      if ($options['show_invoice'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.invoice').'</td>';
       $body .= '</tr>';
 
@@ -1726,23 +1726,23 @@ class ttReportHelper {
               $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
               $subtotal_name = htmlspecialchars($subtotals[$prev_grouped_by]['name']);
               if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
-              if ($report['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
-              if ($report['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
-              if ($report['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
-              if ($report['show_custom_field_1']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'cf_1' ? $subtotal_name : '').'</td>';
-              if ($report['show_start']) $body .= '<td></td>';
-              if ($report['show_end']) $body .= '<td></td>';
-              if ($report['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['time'].'</td>';
-              if ($report['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['units'].'</td>';
-              if ($report['show_note']) $body .= '<td></td>';
-              if ($report['show_cost']) {
+              if ($options['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
+              if ($options['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
+              if ($options['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
+              if ($options['show_custom_field_1']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'cf_1' ? $subtotal_name : '').'</td>';
+              if ($options['show_start']) $body .= '<td></td>';
+              if ($options['show_end']) $body .= '<td></td>';
+              if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['time'].'</td>';
+              if ($options['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['units'].'</td>';
+              if ($options['show_note']) $body .= '<td></td>';
+              if ($options['show_cost']) {
                 $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
                 $body .= ($canViewReports || $isClient) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
                 $body .= '</td>';
               }
-              if ($report['show_paid']) $body .= '<td></td>';
-              if ($report['show_ip']) $body .= '<td></td>';
-              if ($report['show_invoice']) $body .= '<td></td>';
+              if ($options['show_paid']) $body .= '<td></td>';
+              if ($options['show_ip']) $body .= '<td></td>';
+              if ($options['show_invoice']) $body .= '<td></td>';
               $body .= '</tr>';
               $body .= '<tr><td>&nbsp;</td></tr>';
             }
@@ -1756,37 +1756,37 @@ class ttReportHelper {
           $body .= '<td style="'.$cellLeftAligned.'">'.$record['date'].'</td>';
           if ($canViewReports || $isClient)
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['user']).'</td>';
-          if ($report['show_client'])
+          if ($options['show_client'])
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['client']).'</td>';
-          if ($report['show_project'])
+          if ($options['show_project'])
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['project']).'</td>';
-          if ($report['show_task'])
+          if ($options['show_task'])
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['task']).'</td>';
-          if ($report['show_custom_field_1'])
+          if ($options['show_custom_field_1'])
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['cf_1']).'</td>';
-          if ($report['show_start'])
+          if ($options['show_start'])
             $body .= '<td nowrap style="'.$cellRightAligned.'">'.$record['start'].'</td>';
-          if ($report['show_end'])
+          if ($options['show_end'])
             $body .= '<td nowrap style="'.$cellRightAligned.'">'.$record['finish'].'</td>';
-          if ($report['show_duration'])
+          if ($options['show_duration'])
             $body .= '<td style="'.$cellRightAligned.'">'.$record['duration'].'</td>';
-          if ($report['show_work_units'])
+          if ($options['show_work_units'])
             $body .= '<td style="'.$cellRightAligned.'">'.$record['units'].'</td>';
-          if ($report['show_note'])
+          if ($options['show_note'])
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['note']).'</td>';
-          if ($report['show_cost'])
+          if ($options['show_cost'])
             $body .= '<td style="'.$cellRightAligned.'">'.$record['cost'].'</td>';
-          if ($report['show_paid']) {
+          if ($options['show_paid']) {
             $body .= '<td style="'.$cellRightAligned.'">';
             $body .= $record['paid'] == 1 ? $i18n->get('label.yes') : $i18n->get('label.no');
             $body .= '</td>';
           }
-          if ($report['show_ip']) {
+          if ($options['show_ip']) {
             $body .= '<td style="'.$cellRightAligned.'">';
             $body .= $record['modified'] ? $record['modified_ip'].' '.$record['modified'] : $record['created_ip'].' '.$record['created'];
             $body .= '</td>';
           }
-          if ($report['show_invoice'])
+          if ($options['show_invoice'])
             $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['invoice']).'</td>';
           $body .= '</tr>';
 
@@ -1802,23 +1802,23 @@ class ttReportHelper {
         $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
         $subtotal_name = htmlspecialchars($subtotals[$cur_grouped_by]['name']);
         if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
-        if ($report['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
-        if ($report['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
-        if ($report['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
-        if ($report['show_custom_field_1']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'cf_1' ? $subtotal_name : '').'</td>';
-        if ($report['show_start']) $body .= '<td></td>';
-        if ($report['show_end']) $body .= '<td></td>';
-        if ($report['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['time'].'</td>';
-        if ($report['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['units'].'</td>';
-        if ($report['show_note']) $body .= '<td></td>';
-        if ($report['show_cost']) {
+        if ($options['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
+        if ($options['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
+        if ($options['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
+        if ($options['show_custom_field_1']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'cf_1' ? $subtotal_name : '').'</td>';
+        if ($options['show_start']) $body .= '<td></td>';
+        if ($options['show_end']) $body .= '<td></td>';
+        if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['time'].'</td>';
+        if ($options['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['units'].'</td>';
+        if ($options['show_note']) $body .= '<td></td>';
+        if ($options['show_cost']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
           $body .= ($canViewReports || $isClient) ? $subtotals[$cur_grouped_by]['cost'] : $subtotals[$cur_grouped_by]['expenses'];
           $body .= '</td>';
         }
-        if ($report['show_paid']) $body .= '<td></td>';
-        if ($report['show_ip']) $body .= '<td></td>';
-        if ($report['show_invoice']) $body .= '<td></td>';
+        if ($options['show_paid']) $body .= '<td></td>';
+        if ($options['show_ip']) $body .= '<td></td>';
+        if ($options['show_invoice']) $body .= '<td></td>';
         $body .= '</tr>';
       }
 
@@ -1827,23 +1827,23 @@ class ttReportHelper {
       $body .= '<tr style="'.$rowSubtotal.'">';
       $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.total').'</td>';
       if ($canViewReports || $isClient) $body .= '<td></td>';
-      if ($report['show_client']) $body .= '<td></td>';
-      if ($report['show_project']) $body .= '<td></td>';
-      if ($report['show_task']) $body .= '<td></td>';
-      if ($report['show_custom_field_1']) $body .= '<td></td>';
-      if ($report['show_start']) $body .= '<td></td>';
-      if ($report['show_end']) $body .= '<td></td>';
-      if ($report['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['time'].'</td>';
-      if ($report['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['units'].'</td>';
-      if ($report['show_note']) $body .= '<td></td>';
-      if ($report['show_cost']) {
+      if ($options['show_client']) $body .= '<td></td>';
+      if ($options['show_project']) $body .= '<td></td>';
+      if ($options['show_task']) $body .= '<td></td>';
+      if ($options['show_custom_field_1']) $body .= '<td></td>';
+      if ($options['show_start']) $body .= '<td></td>';
+      if ($options['show_end']) $body .= '<td></td>';
+      if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['time'].'</td>';
+      if ($options['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['units'].'</td>';
+      if ($options['show_note']) $body .= '<td></td>';
+      if ($options['show_cost']) {
         $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
         $body .= ($canViewReports || $isClient) ? $totals['cost'] : $totals['expenses'];
         $body .= '</td>';
       }
-      if ($report['show_paid']) $body .= '<td></td>';
-      if ($report['show_ip']) $body .= '<td></td>';
-      if ($report['show_invoice']) $body .= '<td></td>';
+      if ($options['show_paid']) $body .= '<td></td>';
+      if ($options['show_ip']) $body .= '<td></td>';
+      if ($options['show_invoice']) $body .= '<td></td>';
       $body .= '</tr>';
 
       $body .= '</table>';
@@ -1860,14 +1860,14 @@ class ttReportHelper {
   }
 
   // sendFavReport - sends a favorite report to a specified email, called from cron.php
-  static function sendFavReport($report, $subject, $email, $cc) {
+  static function sendFavReport($options, $subject, $email, $cc) {
     // We are called from cron.php, we have no $bean in session.
     // cron.php sets global $user and $i18n objects to match our favorite report user.
     global $user;
     global $i18n;
 
     // Prepare report body.
-    $body = ttReportHelper::prepareFavReportBody($report);
+    $body = ttReportHelper::prepareFavReportBody($options);
 
     import('mail.Mailer');
     $mailer = new Mailer();
@@ -1880,7 +1880,7 @@ class ttReportHelper {
       $mailer->setReceiverBCC($user->bcc_email);
     $mailer->setReceiver($email);
     $mailer->setMailMode(MAIL_MODE);
-    if (empty($subject)) $subject = $report['name'];
+    if (empty($subject)) $subject = $options['name'];
     if (!$mailer->send($subject, $body))
       return false;
 

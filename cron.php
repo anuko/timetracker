@@ -59,11 +59,11 @@ while ($val = $res->fetchRow()) {
   // We have jobs to execute in user language.
 
   // Get favorite report details.
-  $report = ttFavReportHelper::getReportOptions($val['report_id']);
-  if (!$report) continue; // Skip not found report.
+  $options = ttFavReportHelper::getReportOptions($val['report_id']);
+  if (!$options) continue; // Skip not found report.
 
   // Recycle global $user object, as user settings are specific for each report.
-  $user = new ttUser(null, $report['user_id']);
+  $user = new ttUser(null, $options['user_id']);
   if (!$user->id) continue; // Skip not found user.
   // Recycle $i18n object because language is user-specific.
   $i18n->load($user->lang);
@@ -71,11 +71,11 @@ while ($val = $res->fetchRow()) {
   // Check condition on a report.
   $condition_ok = true;
   if ($val['report_condition'])
-    $condition_ok = ttReportHelper::checkFavReportCondition($report, $val['report_condition']);
+    $condition_ok = ttReportHelper::checkFavReportCondition($options, $val['report_condition']);
 
   // Email report if condition is okay.
   if ($condition_ok) {
-    if (ttReportHelper::sendFavReport($report, $val['subject'], $val['email'], $val['cc']))
+    if (ttReportHelper::sendFavReport($options, $val['subject'], $val['email'], $val['cc']))
       echo "Report ".$val['report_id']. " sent.<br>";
     else
       echo "Error while emailing report...<br>";
