@@ -50,12 +50,12 @@ class ttReportHelper {
     if ($options['cf_1_option_id']) $dropdown_parts .= ' and l.id in(select log_id from tt_custom_field_log where status = 1 and option_id = '.$options['cf_1_option_id'].')';
     if ($options['project_id']) $dropdown_parts .= ' and l.project_id = '.$options['project_id'];
     if ($options['task_id']) $dropdown_parts .= ' and l.task_id = '.$options['task_id'];
-    if ($bean->getAttribute('include_records')=='1') $dropdown_parts .= ' and l.billable = 1';
-    if ($bean->getAttribute('include_records')=='2') $dropdown_parts .= ' and l.billable = 0';
-    if ($bean->getAttribute('invoice')=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
-    if ($bean->getAttribute('invoice')=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
-    if ($bean->getAttribute('paid_status')=='1') $dropdown_parts .= ' and l.paid = 1';
-    if ($bean->getAttribute('paid_status')=='2') $dropdown_parts .= ' and l.paid = 0';
+    if ($options['billable']=='1') $dropdown_parts .= ' and l.billable = 1';
+    if ($options['billable']=='2') $dropdown_parts .= ' and l.billable = 0';
+    if ($options['invoice']=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
+    if ($options['invoice']=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
+    if ($options['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
+    if ($options['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
 
     // Prepare user list part.
     $userlist = -1;
@@ -146,10 +146,10 @@ class ttReportHelper {
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and ei.client_id = '.$user->client_id;
     if ($options['project_id']) $dropdown_parts .= ' and ei.project_id = '.$options['project_id'];
-    if ($bean->getAttribute('invoice')=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
-    if ($bean->getAttribute('invoice')=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
-    if ($bean->getAttribute('paid_status')=='1') $dropdown_parts .= ' and ei.paid = 1';
-    if ($bean->getAttribute('paid_status')=='2') $dropdown_parts .= ' and ei.paid = 0';
+    if ($options['invoice']=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
+    if ($options['invoice']=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
+    if ($options['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
+    if ($options['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
 
     // Prepare user list part.
     $userlist = -1;
@@ -1906,12 +1906,12 @@ class ttReportHelper {
     $options['cf_1_option_id'] = $bean->getAttribute('option');
     $options['project_id'] = $bean->getAttribute('project');
     $options['task_id'] = $bean->getAttribute('task');
+    $options['billable'] = $bean->getAttribute('include_records');
+    $options['invoice'] = $bean->getAttribute('invoice');
+    $options['paid_status'] = $bean->getAttribute('paid_status');
 
 /*
  * TODO: remaining fields to fill in...
-  `billable` tinyint(4) default NULL,                    # whether to include billable, not billable, or all records
-  `invoice` tinyint(4) default NULL,                     # whether to include invoiced, not invoiced, or all records
-  `paid_status` tinyint(4) default NULL,                 # whether to include paid, not paid, or all records
   `users` text default NULL,                             # Comma-separated list of user ids. Nothing here means "all" users.
   `period` tinyint(4) default NULL,                      # selected period type for report
   `period_start` date default NULL,                      # period start
