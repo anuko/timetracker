@@ -57,25 +57,27 @@ class ttReportHelper {
     if ($options['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
 
-    // Prepare user list part.
-    $userlist = -1;
-    if (($user->can('view_reports') || $user->isClient()) && is_array($bean->getAttribute('users')))
-      $userlist = join(',', $bean->getAttribute('users'));
+    // Note: "Prepare sql query part for user list" is different in getFavWhere because of
+    // special meaning of NULL value (all "active" users).
+    //
+    // If we are merging into one function, one needs to take care of this, perhaps, with redesign.
+
     // Prepare sql query part for user list.
+    $userlist = $options['users'] ? $options['users'] : '-1';
     $user_list_part = null;
-    if ($user->can('view_reports') || $user->isClient())
+    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and l.user_id in ($userlist)";
     else
       $user_list_part = " and l.user_id = ".$user->id;
 
     // Prepare sql query part for where.
-    if ($bean->getAttribute('period'))
-      $period = new Period($bean->getAttribute('period'), new DateAndTime($user->date_format));
+    if ($options['period'])
+      $period = new Period($options['period'], new DateAndTime($user->date_format));
     else {
       $period = new Period();
       $period->setPeriod(
-        new DateAndTime($user->date_format, $bean->getAttribute('start_date')),
-        new DateAndTime($user->date_format, $bean->getAttribute('end_date')));
+        new DateAndTime($user->date_format, $options['period_start']),
+        new DateAndTime($user->date_format, $options['period_end']));
     }
     $where = " where l.status = 1 and l.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";
@@ -151,25 +153,22 @@ class ttReportHelper {
     if ($options['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
 
-    // Prepare user list part.
-    $userlist = -1;
-    if (($user->can('view_reports') || $user->isClient()) && is_array($bean->getAttribute('users')))
-      $userlist = join(',', $bean->getAttribute('users'));
     // Prepare sql query part for user list.
+    $userlist = $options['users'] ? $options['users'] : '-1';
     $user_list_part = null;
-    if ($user->can('view_reports') || $user->isClient())
+    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and ei.user_id in ($userlist)";
     else
       $user_list_part = " and ei.user_id = ".$user->id;
 
     // Prepare sql query part for where.
-    if ($bean->getAttribute('period'))
-      $period = new Period($bean->getAttribute('period'), new DateAndTime($user->date_format));
+    if ($options['period'])
+      $period = new Period($options['period'], new DateAndTime($user->date_format));
     else {
       $period = new Period();
       $period->setPeriod(
-        new DateAndTime($user->date_format, $bean->getAttribute('start_date')),
-        new DateAndTime($user->date_format, $bean->getAttribute('end_date')));
+        new DateAndTime($user->date_format, $options['period_start']),
+        new DateAndTime($user->date_format, $options['period_end']));
     }
     $where = " where ei.status = 1 and ei.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";
@@ -1909,13 +1908,13 @@ class ttReportHelper {
     $options['billable'] = $bean->getAttribute('include_records');
     $options['invoice'] = $bean->getAttribute('invoice');
     $options['paid_status'] = $bean->getAttribute('paid_status');
+    if (is_array($bean->getAttribute('users'))) $options['users'] = join(',', $bean->getAttribute('users'));
+    $options['period'] = $bean->getAttribute('period');
+    $options['period_start'] = $bean->getAttribute('start_date');
+    $options['period_end'] = $bean->getAttribute('end_date');
 
 /*
  * TODO: remaining fields to fill in...
-  `users` text default NULL,                             # Comma-separated list of user ids. Nothing here means "all" users.
-  `period` tinyint(4) default NULL,                      # selected period type for report
-  `period_start` date default NULL,                      # period start
-  `period_end` date default NULL,                        # period end
   `show_client` tinyint(4) NOT NULL default 0,           # whether to show client column
   `show_invoice` tinyint(4) NOT NULL default 0,          # whether to show invoice column
   `show_paid` tinyint(4) NOT NULL default 0,             # whether to show paid column
