@@ -47,9 +47,9 @@ class ttReportHelper {
       $dropdown_parts .= ' and l.client_id = '.$options['client_id'];
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and l.client_id = '.$user->client_id;
-    if ($bean->getAttribute('option')) $dropdown_parts .= ' and l.id in(select log_id from tt_custom_field_log where status = 1 and option_id = '.$bean->getAttribute('option').')';
-    if ($bean->getAttribute('project')) $dropdown_parts .= ' and l.project_id = '.$bean->getAttribute('project');
-    if ($bean->getAttribute('task')) $dropdown_parts .= ' and l.task_id = '.$bean->getAttribute('task');
+    if ($options['cf_1_option_id']) $dropdown_parts .= ' and l.id in(select log_id from tt_custom_field_log where status = 1 and option_id = '.$options['cf_1_option_id'].')';
+    if ($options['project_id']) $dropdown_parts .= ' and l.project_id = '.$options['project_id'];
+    if ($options['task_id']) $dropdown_parts .= ' and l.task_id = '.$options['task_id'];
     if ($bean->getAttribute('include_records')=='1') $dropdown_parts .= ' and l.billable = 1';
     if ($bean->getAttribute('include_records')=='2') $dropdown_parts .= ' and l.billable = 0';
     if ($bean->getAttribute('invoice')=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
@@ -145,7 +145,7 @@ class ttReportHelper {
       $dropdown_parts .= ' and l.client_id = '.$options['client_id'];
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and ei.client_id = '.$user->client_id;
-    if ($bean->getAttribute('project')) $dropdown_parts .= ' and ei.project_id = '.$bean->getAttribute('project');
+    if ($options['project_id']) $dropdown_parts .= ' and ei.project_id = '.$options['project_id'];
     if ($bean->getAttribute('invoice')=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
     if ($bean->getAttribute('invoice')=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
     if ($bean->getAttribute('paid_status')=='1') $dropdown_parts .= ' and ei.paid = 1';
@@ -1903,13 +1903,12 @@ class ttReportHelper {
     $options['name'] = null; // No name required.
     $options['user_id'] = $user->id; // Not sure if we need user_id here. Fav reports use it to recycle $user object in cron.php.
     $options['client_id'] = $bean->getAttribute('client');
+    $options['cf_1_option_id'] = $bean->getAttribute('option');
+    $options['project_id'] = $bean->getAttribute('project');
+    $options['task_id'] = $bean->getAttribute('task');
 
 /*
  * TODO: remaining fields to fill in...
-  `client_id` int(11) default NULL,                      # client id (if selected)
-  `cf_1_option_id` int(11) default NULL,                 # custom field 1 option id (if selected)
-  `project_id` int(11) default NULL,                     # project id (if selected)
-  `task_id` int(11) default NULL,                        # task id (if selected)
   `billable` tinyint(4) default NULL,                    # whether to include billable, not billable, or all records
   `invoice` tinyint(4) default NULL,                     # whether to include invoiced, not invoiced, or all records
   `paid_status` tinyint(4) default NULL,                 # whether to include paid, not paid, or all records
