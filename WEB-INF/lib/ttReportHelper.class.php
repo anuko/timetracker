@@ -1936,4 +1936,26 @@ class ttReportHelper {
      */
     return $options;
   }
+
+  // verifyBean is a security function to make sure data in bean makes sense for a group.
+  static function verifyBean($bean) {
+    global $user;
+
+    // Check users.
+    $users_in_bean = $bean->getAttribute('users');
+    if (is_array($users_in_bean)) {
+      $users_in_group = ttTeamHelper::getUsers();
+      foreach ($users_in_group as $user_in_group) {
+        $valid_ids[] = $user_in_group['id'];
+      }
+      foreach ($users_in_bean as $user_in_bean) {
+        if (!in_array($user_in_bean, $valid_ids)) {
+          return false;
+        }
+      }
+    }
+
+    // TODO: add additional checks here. Perhaps do it before saving the bean for consistency.
+    return true;
+  }
 }

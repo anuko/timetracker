@@ -35,6 +35,7 @@ import('Period');
 import('ttProjectHelper');
 import('ttFavReportHelper');
 import('ttClientHelper');
+import('ttReportHelper');
 
 // Access check.
 if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports') || ttAccessAllowed('view_all_reports'))) {
@@ -334,6 +335,9 @@ if ($request->isPost()) {
     }
 
     $bean->saveBean();
+    // Check some more values. TODO: Perhaps it's not a good place to check values, re-evaluate this.
+    // Also make sure other post variations are sane.
+    if (!ttReportHelper::verifyBean($bean)) $err->add($i18n->get('error.sys'));
 
     if ($err->no()) {
       // Now we can go ahead and create a report.
