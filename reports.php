@@ -333,13 +333,11 @@ if ($request->isPost()) {
       if ($start_date->compare($end_date) > 0)
         $err->add($i18n->get('error.interval'), $i18n->get('label.end_date'), $i18n->get('label.start_date'));
     }
-
-    $bean->saveBean();
-    // Check some more values. TODO: Perhaps it's not a good place to check values, re-evaluate this.
-    // Also make sure other post variations are sane.
+    // Check remaining values.
     if (!ttReportHelper::verifyBean($bean)) $err->add($i18n->get('error.sys'));
 
     if ($err->no()) {
+      $bean->saveBean();
       // Now we can go ahead and create a report.
       header('Location: report.php');
       exit();
