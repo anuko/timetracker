@@ -178,6 +178,7 @@ create index task_idx on tt_project_task_binds(task_id);
 CREATE TABLE `tt_log` (
   `id` bigint NOT NULL auto_increment,             # time record id
   `user_id` int(11) NOT NULL,                      # user id
+  `group_id` int(11) default NULL,                 # group id
   `date` date NOT NULL,                            # date the record is for
   `start` time default NULL,                       # record start time (for example, 09:00)
   `duration` time default NULL,                    # record duration (for example, 1 hour)
@@ -387,6 +388,7 @@ CREATE TABLE `tt_expense_items` (
   `id` bigint NOT NULL auto_increment,    # expense item id
   `date` date NOT NULL,                   # date the record is for
   `user_id` int(11) NOT NULL,             # user id the expense item is reported by
+  `group_id` int(11) default NULL,        # group id
   `client_id` int(11) default NULL,       # client id
   `project_id` int(11) default NULL,      # project id
   `name` text NOT NULL,                   # expense item name (what is an expense for)
@@ -450,4 +452,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.92', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.96', now()); # TODO: change when structure changes.
