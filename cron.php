@@ -65,6 +65,10 @@ while ($val = $res->fetchRow()) {
   // Recycle global $user object, as user settings are specific for each report.
   $user = new ttUser(null, $options['user_id']);
   if (!$user->id) continue; // Skip not found user.
+
+  // Skip users with disabled Notifications plugin.
+  if (!$user->isPluginEnabled('no')) continue;
+
   // Recycle $i18n object because language is user-specific.
   $i18n->load($user->lang);
 
