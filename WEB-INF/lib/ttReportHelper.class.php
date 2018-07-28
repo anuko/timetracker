@@ -64,11 +64,11 @@ class ttReportHelper {
 
     // Prepare sql query part for user list.
     $userlist = $options['users'] ? $options['users'] : '-1';
-    $user_list_part = null;
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and l.user_id in ($userlist)";
     else
       $user_list_part = " and l.user_id = ".$user->id;
+    $user_list_part .= " and l.group_id = ".$user->getActiveGroup();
 
     // Prepare sql query part for where.
     if ($options['period'])
@@ -106,22 +106,22 @@ class ttReportHelper {
 
     // Prepare user list part.
     $userlist = -1;
-    if (($user->can('view_reports') || $user->isClient())) {
+    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
       if ($options['users'])
         $userlist = $options['users'];
       else {
-        $active_users = ttTeamHelper::getActiveUsers();
-        foreach ($active_users as $single_user)
+        $group_users = ttTeamHelper::getUsers(); // active and inactive users
+        foreach ($group_users as $single_user)
           $users[] = $single_user['id'];
         $userlist = join(',', $users);
       }
     }
     // Prepare sql query part for user list.
-    $user_list_part = null;
-    if ($user->can('view_reports') || $user->isClient())
+    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and l.user_id in ($userlist)";
     else
       $user_list_part = " and l.user_id = ".$user->id;
+    $user_list_part .= " and l.group_id = ".$user->getActiveGroup();
 
     // Prepare sql query part for where.
     if ($options['period'])
@@ -155,11 +155,11 @@ class ttReportHelper {
 
     // Prepare sql query part for user list.
     $userlist = $options['users'] ? $options['users'] : '-1';
-    $user_list_part = null;
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and ei.user_id in ($userlist)";
     else
       $user_list_part = " and ei.user_id = ".$user->id;
+    $user_list_part .= " and ei.group_id = ".$user->getActiveGroup();
 
     // Prepare sql query part for where.
     if ($options['period'])
@@ -204,11 +204,11 @@ class ttReportHelper {
       }
     }
     // Prepare sql query part for user list.
-    $user_list_part = null;
-    if ($user->can('view_reports') || $user->isClient())
+    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and ei.user_id in ($userlist)";
     else
       $user_list_part = " and ei.user_id = ".$user->id;
+    $user_list_part .= " and ei.group_id = ".$user->getActiveGroup();
 
     // Prepare sql query part for where.
     if ($options['period'])
