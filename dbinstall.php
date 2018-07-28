@@ -906,6 +906,53 @@ if ($_POST) {
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.96', modified = now() where param_name = 'version_db' and param_value = '1.17.92'");
   }
 
+  // The update_group_id function updates group_id field in tt_log and tt_expense_items tables.
+  if ($_POST["update_group_id"]) {
+    $mdb2 = getConnection();
+
+    $sql = "(select distinct user_id from tt_log where group_id is null) union distinct (select distinct user_id from tt_expense_items where group_id is null)";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) {
+      die($res->getMessage());
+    }
+    $users_updated = 0;
+    $tt_log_records_updated = 0;
+    $tt_expense_items_updated = 0;
+
+    // Iterate through result set.
+    while ($val = $res->fetchRow()) {
+      $user_id = $val['user_id'];
+      $sql = "select group_id from tt_users where id = $user_id";
+      $result = $mdb2->query($sql);
+      if (is_a($result, 'PEAR_Error')) {
+        die($res->getMessage());
+      }
+      $value = $result->fetchRow();
+      $group_id = $value['group_id'];
+
+      if ($group_id) {
+        $sql = "update tt_log set group_id = $group_id where user_id = $user_id";
+        $affected = $mdb2->exec($sql);
+        if (is_a($affected, 'PEAR_Error')) {
+          die($affected->getMessage());
+        }
+        $tt_log_records_updated += $affected;
+
+        $sql = "update tt_expense_items set group_id = $group_id where user_id = $user_id";
+        $affected = $mdb2->exec($sql);
+        if (is_a($affected, 'PEAR_Error')) {
+          die($affected->getMessage());
+        }
+        $tt_expense_items_updated += $affected;
+        $users_updated++;
+      } else {
+         print "Error: Could not find group for user $user_id...<br>\n";
+      }
+    }
+    print "Updated $tt_log_records_updated tt_log records...<br>\n";
+    print "Updated $tt_expense_items_updated tt_expense_items records...<br>\n";
+  }
+
   if ($_POST["cleanup"]) {
 
     $mdb2 = getConnection();
@@ -990,7 +1037,7 @@ if ($_POST) {
   </tr>
     <tr valign="top">
     <td>Update database structure (v1.17.44 to v1.17.96)</td>
-    <td><input type="submit" name="convert11744to11796" value="Update"></td>
+    <td><input type="submit" name="convert11744to11796" value="Update"><br><input type="submit" name="update_group_id" value="Update group_id"></td>
   </tr>
 </table>
 
