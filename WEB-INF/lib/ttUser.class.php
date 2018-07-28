@@ -38,7 +38,9 @@ class ttUser {
   var $rank = null;             // User role rank.
   var $client_id = null;        // Client id for client user role.
   var $behalf_id = null;        // User id, on behalf of whom we are working.
+  var $behalf_group_id = null;  // Group id, on behalf of which we are working.
   var $behalf_name = null;      // User name, on behalf of whom we are working.
+  var $behalf_group = null;     // Group name, on behalf of which we are working.
   var $email = null;            // User email.
   var $lang = null;             // Language.
   var $decimal_mark = null;     // Decimal separator.
@@ -143,10 +145,15 @@ class ttUser {
         $this->unit_totals_only = $config->getDefinedValue('unit_totals_only');
       }
       
-      // Set "on behalf" id and name.
+      // Set "on behalf" id and name (user).
       if (isset($_SESSION['behalf_id'])) {
           $this->behalf_id = $_SESSION['behalf_id'];
           $this->behalf_name = $_SESSION['behalf_name'];
+      }
+      // Set "on behalf" id and name (group).
+      if (isset($_SESSION['behalf_group_id'])) {
+          $this->behalf_group_id = $_SESSION['behalf_group_id'];
+          $this->behalf_group = $_SESSION['behalf_group'];
       }
     }
   }
@@ -154,6 +161,11 @@ class ttUser {
   // The getActiveUser returns user id on behalf of whom the current user is operating.
   function getActiveUser() {
     return ($this->behalf_id ? $this->behalf_id : $this->id);
+  }
+
+  // The getActiveGroup returns group id on behalf of which the current user is operating.
+  function getActiveGroup() {
+    return ($this->behalf_group_id ? $this->behalf_group_id : $this->group_id);
   }
 
   // can - determines whether user has a right to do something.

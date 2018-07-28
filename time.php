@@ -293,6 +293,7 @@ if ($request->isPost()) {
       $id = ttTimeHelper::insert(array(
         'date' => $cl_date,
         'user_id' => $user->getActiveUser(),
+        'group_id' => $user->getActiveGroup(),
         'client' => $cl_client,
         'project' => $cl_project,
         'task' => $cl_task,
