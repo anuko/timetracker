@@ -365,6 +365,7 @@ if ($request->isPost()) {
       $id = ttTimeHelper::insert(array(
         'date'=>$new_date->toString(DB_DATEFORMAT),
         'user_id'=>$user->getActiveUser(),
+        'group_id'=>$user->getActiveGroup(),
         'client'=>$cl_client,
         'project'=>$cl_project,
         'task'=>$cl_task,

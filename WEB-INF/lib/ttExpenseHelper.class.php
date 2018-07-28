@@ -36,6 +36,7 @@ class ttExpenseHelper {
 
     $date = $fields['date'];
     $user_id = (int) $fields['user_id'];
+    $group_id = (int) $fields['group_id'];
     $client_id = $fields['client_id'];
     $project_id = $fields['project_id'];
     $name = $fields['name'];
@@ -45,8 +46,8 @@ class ttExpenseHelper {
     $paid = (int) $fields['paid'];
     $created = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
 
-    $sql = "insert into tt_expense_items (date, user_id, client_id, project_id, name, cost, invoice_id, paid, created, created_ip, created_by, status) ".
-      "values (".$mdb2->quote($date).", $user_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).
+    $sql = "insert into tt_expense_items (date, user_id, group_id, client_id, project_id, name, cost, invoice_id, paid, created, created_ip, created_by, status) ".
+      "values (".$mdb2->quote($date).", $user_id, $group_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).
       ", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).", $paid $created, ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))

@@ -248,6 +248,7 @@ class ttImportHelper {
       $this->logMap[$this->currentElement['ID']] =
         ttTimeHelper::insert(array(
           'user_id' => $this->userMap[$this->currentElement['USER_ID']],
+          'group_id' => $this->group_id,
           'date' => $this->currentElement['DATE'],
           'start' => $this->currentElement['START'],
           'finish' => $this->currentElement['FINISH'],
@@ -292,6 +293,7 @@ class ttImportHelper {
       ttExpenseHelper::insert(array(
         'date' => $this->currentElement['DATE'],
         'user_id' => $this->userMap[$this->currentElement['USER_ID']],
+        'group_id' => $this->group_id,
         'client_id' => $this->clientMap[$this->currentElement['CLIENT_ID']],
         'project_id' => $this->projectMap[$this->currentElement['PROJECT_ID']],
         'name' => $this->currentElement['NAME'],
