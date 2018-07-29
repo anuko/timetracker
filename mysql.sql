@@ -202,6 +202,7 @@ CREATE TABLE `tt_log` (
 # Create indexes on tt_log for performance.
 create index date_idx on tt_log(date);
 create index user_idx on tt_log(user_id);
+create index group_idx on tt_log(group_id);
 create index client_idx on tt_log(client_id);
 create index invoice_idx on tt_log(invoice_id);
 create index project_idx on tt_log(project_id);
@@ -408,6 +409,7 @@ CREATE TABLE `tt_expense_items` (
 # Create indexes on tt_expense_items for performance.
 create index date_idx on tt_expense_items(date);
 create index user_idx on tt_expense_items(user_id);
+create index group_idx on tt_expense_items(group_id);
 create index client_idx on tt_expense_items(client_id);
 create index project_idx on tt_expense_items(project_id);
 create index invoice_idx on tt_expense_items(invoice_id);
@@ -452,4 +454,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.96', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.97', now()); # TODO: change when structure changes.
