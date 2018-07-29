@@ -664,9 +664,8 @@ class ttTeamHelper {
     $inactive_groups = array();
     $mdb2 = getConnection();
 
-    // Get all group ids for groups created or modified more than 9 months ago.
-    // $ts = date('Y-m-d', strtotime('-1 year'));
-    $ts = $mdb2->quote(date('Y-m-d', strtotime('-9 month')));
+    // Get all group ids for groups created or modified more than 1 year ago.
+    $ts = $mdb2->quote(date('Y-m-d', strtotime('-1 year')));
     $sql =  "select id from tt_groups where created < $ts and (modified is null or modified < $ts) order by id";
     $res = $mdb2->query($sql);
 
@@ -688,22 +687,11 @@ class ttTeamHelper {
 
   // The isGroupActive determines if a group is using Time Tracker or abandoned it.
   static function isGroupActive($group_id) {
-    $users = array();
-
     $mdb2 = getConnection();
-    $sql = "select id from tt_users where group_id = $group_id";
-    $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error')) die($res->getMessage());
-    while ($val = $res->fetchRow()) {
-      $users[] = $val['id'];
-    }
-    $user_list = implode(',', $users); // This is a comma-separated list of user ids.
-    if (!$user_list)
-      return false; // No users in group.
 
     $count = 0;
     $ts = date('Y-m-d', strtotime('-2 years'));
-    $sql = "select count(*) as cnt from tt_log where user_id in ($user_list) and created > '$ts'";
+    $sql = "select count(*) as cnt from tt_log where group_id = $group_id and created > '$ts'";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if ($val = $res->fetchRow()) {
@@ -718,7 +706,7 @@ class ttTeamHelper {
       // We will consider a group inactive if it has 5 or less time entries made more than 1 year ago.
       $count_last_year = 0;
       $ts = date('Y-m-d', strtotime('-1 year'));
-      $sql = "select count(*) as cnt from tt_log where user_id in ($user_list) and created > '$ts'";
+      $sql = "select count(*) as cnt from tt_log where group_id = $group_id and created > '$ts'";
       $res = $mdb2->query($sql);
       if (!is_a($res, 'PEAR_Error')) {
         if ($val = $res->fetchRow()) {
