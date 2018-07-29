@@ -37,8 +37,7 @@ require_once(dirname(__FILE__).'/../../plugins/CustomFields.class.php');
 class ttReportHelper {
 
   // getWhere prepares a WHERE clause for a report query.
-  // Note: $options is a future replacement of $bean, which is work in progress.
-  static function getWhere($bean, $options) {
+  static function getWhere($options) {
     global $user;
 
     // Prepare dropdown parts.
@@ -56,67 +55,9 @@ class ttReportHelper {
     if ($options['invoice']=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
     if ($options['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
-
-    // Note: "Prepare sql query part for user list" is different in getFavWhere because of
-    // special meaning of NULL value (all "active" users).
-    //
-    // If we are merging into one function, one needs to take care of this, perhaps, with redesign.
 
     // Prepare sql query part for user list.
     $userlist = $options['users'] ? $options['users'] : '-1';
-    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
-      $user_list_part = " and l.user_id in ($userlist)";
-    else
-      $user_list_part = " and l.user_id = ".$user->id;
-    $user_list_part .= " and l.group_id = ".$user->getActiveGroup();
-
-    // Prepare sql query part for where.
-    if ($options['period'])
-      $period = new Period($options['period'], new DateAndTime($user->date_format));
-    else {
-      $period = new Period();
-      $period->setPeriod(
-        new DateAndTime($user->date_format, $options['period_start']),
-        new DateAndTime($user->date_format, $options['period_end']));
-    }
-    $where = " where l.status = 1 and l.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
-      " $user_list_part $dropdown_parts";
-    return $where;
-  }
-
-  // getFavWhere prepares a WHERE clause for a favorite report query.
-  static function getFavWhere($options) {
-    global $user;
-
-    // Prepare dropdown parts.
-    $dropdown_parts = '';
-    if ($options['client_id'])
-      $dropdown_parts .= ' and l.client_id = '.$options['client_id'];
-    elseif ($user->isClient() && $user->client_id)
-      $dropdown_parts .= ' and l.client_id = '.$user->client_id;
-    if ($options['cf_1_option_id']) $dropdown_parts .= ' and l.id in(select log_id from tt_custom_field_log where status = 1 and option_id = '.$options['cf_1_option_id'].')';
-    if ($options['project_id']) $dropdown_parts .= ' and l.project_id = '.$options['project_id'];
-    if ($options['task_id']) $dropdown_parts .= ' and l.task_id = '.$options['task_id'];
-    if ($options['billable']=='1') $dropdown_parts .= ' and l.billable = 1';
-    if ($options['billable']=='2') $dropdown_parts .= ' and l.billable = 0';
-    if ($options['invoice']=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
-    if ($options['invoice']=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
-    if ($options['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
-    if ($options['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
-
-    // Prepare user list part.
-    $userlist = -1;
-    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
-      if ($options['users'])
-        $userlist = $options['users'];
-      else {
-        $group_users = ttTeamHelper::getUsers(); // active and inactive users
-        foreach ($group_users as $single_user)
-          $users[] = $single_user['id'];
-        $userlist = join(',', $users);
-      }
-    }
-    // Prepare sql query part for user list.
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and l.user_id in ($userlist)";
     else
@@ -138,45 +79,7 @@ class ttReportHelper {
   }
 
   // getExpenseWhere prepares WHERE clause for expenses query in a report.
-  static function getExpenseWhere($bean, $options) {
-    global $user;
-
-    // Prepare dropdown parts.
-    $dropdown_parts = '';
-    if ($options['client_id'])
-      $dropdown_parts .= ' and l.client_id = '.$options['client_id'];
-    elseif ($user->isClient() && $user->client_id)
-      $dropdown_parts .= ' and ei.client_id = '.$user->client_id;
-    if ($options['project_id']) $dropdown_parts .= ' and ei.project_id = '.$options['project_id'];
-    if ($options['invoice']=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
-    if ($options['invoice']=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
-    if ($options['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
-    if ($options['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
-
-    // Prepare sql query part for user list.
-    $userlist = $options['users'] ? $options['users'] : '-1';
-    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
-      $user_list_part = " and ei.user_id in ($userlist)";
-    else
-      $user_list_part = " and ei.user_id = ".$user->id;
-    $user_list_part .= " and ei.group_id = ".$user->getActiveGroup();
-
-    // Prepare sql query part for where.
-    if ($options['period'])
-      $period = new Period($options['period'], new DateAndTime($user->date_format));
-    else {
-      $period = new Period();
-      $period->setPeriod(
-        new DateAndTime($user->date_format, $options['period_start']),
-        new DateAndTime($user->date_format, $options['period_end']));
-    }
-    $where = " where ei.status = 1 and ei.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
-      " $user_list_part $dropdown_parts";
-    return $where;
-  }
-
-  // getFavExpenseWhere prepares a WHERE clause for expenses query in a favorite report.
-  static function getFavExpenseWhere($options) {
+  static function getExpenseWhere($options) {
     global $user;
 
     // Prepare dropdown parts.
@@ -191,19 +94,8 @@ class ttReportHelper {
     if ($options['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
 
-    // Prepare user list part.
-    $userlist = -1;
-    if (($user->can('view_reports') || $user->isClient())) {
-      if ($options['users'])
-        $userlist = $options['users'];
-      else {
-      	$active_users = ttTeamHelper::getActiveUsers();
-        foreach ($active_users as $single_user)
-          $users[] = $single_user['id'];
-        $userlist = join(',', $users);
-      }
-    }
     // Prepare sql query part for user list.
+    $userlist = $options['users'] ? $options['users'] : '-1';
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and ei.user_id in ($userlist)";
     else
@@ -333,7 +225,7 @@ class ttReportHelper {
     if ($includeCost && MODE_TIME != $user->tracking_mode)
       $left_joins .= " left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
 
-    $where = ttReportHelper::getWhere($bean, $options);
+    $where = ttReportHelper::getWhere($options);
 
     // Construct sql query for tt_log items.
     $sql = "select ".join(', ', $fields)." from tt_log l $left_joins $where";
@@ -401,7 +293,7 @@ class ttReportHelper {
       if (($canViewReports || $isClient) && $bean->getAttribute('chinvoice'))
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
 
-      $where = ttReportHelper::getExpenseWhere($bean, $options);
+      $where = ttReportHelper::getExpenseWhere($options);
 
       // Construct sql query for expense items.
       $sql_for_expense_items = "select ".join(', ', $fields)." from tt_expense_items ei $left_joins $where";
@@ -608,7 +500,7 @@ class ttReportHelper {
     if ($includeCost && MODE_TIME != $user->tracking_mode)
       $left_joins .= " left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
 
-    $where = ttReportHelper::getFavWhere($options);
+    $where = ttReportHelper::getWhere($options);
 
     // Construct sql query for tt_log items.
     $sql = "select ".join(', ', $fields)." from tt_log l $left_joins $where";
@@ -674,7 +566,7 @@ class ttReportHelper {
       if (($canViewReports || $isClient) && $options['show_invoice'])
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
 
-      $where = ttReportHelper::getFavExpenseWhere($options);
+      $where = ttReportHelper::getExpenseWhere($options);
 
       // Construct sql query for expense items.
       $sql_for_expense_items = "select ".join(', ', $fields)." from tt_expense_items ei $left_joins $where";
@@ -784,7 +676,7 @@ class ttReportHelper {
         break;
     }
 
-    $where = ttReportHelper::getWhere($bean, $options);
+    $where = ttReportHelper::getWhere($options);
     if ($bean->getAttribute('chcost')) {
       if (MODE_TIME == $user->tracking_mode) {
         if ($group_by_option != 'user')
@@ -851,7 +743,7 @@ class ttReportHelper {
           break;
       }
 
-      $where = ttReportHelper::getExpenseWhere($bean, $options);
+      $where = ttReportHelper::getExpenseWhere($options);
       $sql_for_expenses = "select $group_field as group_field, null as time";
       if ($bean->getAttribute('chunits')) $sql_for_expenses .= ", null as units";
       $sql_for_expenses .= ", sum(ei.cost) as cost, sum(ei.cost) as expenses from tt_expense_items ei $group_join $where";
@@ -935,7 +827,7 @@ class ttReportHelper {
         break;
     }
 
-    $where = ttReportHelper::getFavWhere($options);
+    $where = ttReportHelper::getWhere($options);
     if ($options['show_cost']) {
       if (MODE_TIME == $user->tracking_mode) {
         if ($group_by_option != 'user')
@@ -1003,7 +895,7 @@ class ttReportHelper {
           break;
       }
 
-      $where = ttReportHelper::getFavExpenseWhere($options);
+      $where = ttReportHelper::getExpenseWhere($options);
       $sql_for_expenses = "select $group_field as group_field, null as time";
       if ($options['show_work_units']) $sql_for_expenses .= ", null as units";
       $sql_for_expenses .= ", sum(ei.cost) as cost, sum(ei.cost) as expenses from tt_expense_items ei $group_join $where";
@@ -1049,7 +941,7 @@ class ttReportHelper {
 
     $mdb2 = getConnection();
 
-    $where = ttReportHelper::getWhere($bean, $options);
+    $where = ttReportHelper::getWhere($options);
 
     // Prepare parts.
     $time_part = "sum(time_to_sec(l.duration)) as time";
@@ -1076,7 +968,7 @@ class ttReportHelper {
 
     // If we have expenses, query becomes a bit more complex.
     if ($bean->getAttribute('chcost') && $user->isPluginEnabled('ex')) {
-      $where = ttReportHelper::getExpenseWhere($bean, $options);
+      $where = ttReportHelper::getExpenseWhere($options);
       $sql_for_expenses = "select null as time";
       if ($bean->getAttribute('chunits')) $sql_for_expenses .= ", null as units";
       $sql_for_expenses .= ", sum(cost) as cost, sum(cost) as expenses from tt_expense_items ei $where";
@@ -1131,7 +1023,7 @@ class ttReportHelper {
 
     $mdb2 = getConnection();
 
-    $where = ttReportHelper::getFavWhere($options);
+    $where = ttReportHelper::getWhere($options);
 
     // Prepare parts.
     $time_part = "sum(time_to_sec(l.duration)) as time";
@@ -1158,7 +1050,7 @@ class ttReportHelper {
 
     // If we have expenses, query becomes a bit more complex.
     if ($options['show_cost'] && $user->isPluginEnabled('ex')) {
-      $where = ttReportHelper::getFavExpenseWhere($options);
+      $where = ttReportHelper::getExpenseWhere($options);
       $sql_for_expenses = "select null as time";
       if ($options['show_work_units']) $sql_for_expenses .= ", null as units";
       $sql_for_expenses .= ", sum(cost) as cost, sum(cost) as expenses from tt_expense_items ei $where";

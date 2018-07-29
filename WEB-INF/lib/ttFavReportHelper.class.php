@@ -170,24 +170,9 @@ class ttFavReportHelper {
     if (!$bean->getAttribute('chunits')) $bean->setAttribute('chunits', 0);
     if (!$bean->getAttribute('chtotalsonly')) $bean->setAttribute('chtotalsonly', 0);
 
-    if ($bean->getAttribute('users') && is_array($bean->getAttribute('users'))) {
-      $users_in_bean = $bean->getAttribute('users');
-
-      // If all users are selected - use a null value (which means "all users").
-      $all_users_selected = true;
-      if ($user->can('view_reports')) {
-        $all = ttTeamHelper::getActiveUsers();
-        foreach ($all as $one) {
-          if (!in_array($one['id'], $users_in_bean)) {
-            $all_users_selected = false;
-            break;
-          }
-        }
-      }
-      if ($all_users_selected)
-        $users = null;
-      else
-        $users = join(',', $users_in_bean);
+    $users_in_bean = $bean->getAttribute('users');
+    if ($users_in_bean && is_array($users_in_bean)) {
+      $users = join(',', $users_in_bean);
     }
     if ($bean->getAttribute('start_date')) {
       $dt = new DateAndTime($user->date_format, $bean->getAttribute('start_date'));
@@ -262,18 +247,7 @@ class ttFavReportHelper {
       $bean->setAttribute('include_records', $val['billable']);
       $bean->setAttribute('invoice', $val['invoice']);
       $bean->setAttribute('paid_status', $val['paid_status']);
-      if ($val['users'])
-        $bean->setAttribute('users', explode(',', $val['users']));
-      else {
-        // Null users value means "all users". Add them to the bean.
-        if ($user->can('view_reports')) {
-          $all = ttTeamHelper::getActiveUsers();
-          foreach ($all as $one) {
-            $all_user_ids[] = $one['id'];
-          }
-          $bean->setAttribute('users', $all_user_ids);
-        }
-      }
+      $bean->setAttribute('users', explode(',', $val['users']));
       $bean->setAttribute('period', $val['period']);
       if ($val['period_start']) {
         $dt = new DateAndTime(DB_DATEFORMAT, $val['period_start']);
@@ -345,6 +319,8 @@ class ttFavReportHelper {
     unset($options['id']);
     unset($options['report_spec']); // Currently not used.
     unset($options['status']);
+
+    // Note: special handling for NULL users field is done in cron.php
 
     // $options now is a subset of db fields from tt_fav_reports table.
     return $options;
