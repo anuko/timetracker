@@ -127,8 +127,8 @@ class ttReportHelper {
     $canViewReports = $user->can('view_reports');
     $isClient = $user->isClient();
 
-    $group_by_option = $bean->getAttribute('group_by');
-    $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($bean->getAttribute('chstart') || $bean->getAttribute('chfinish'));
+    $group_by_option = $options['group_by'];
+    $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($options['show_start'] || $options['show_end']);
 
     // Prepare a query for time items in tt_log table.
     $fields = array(); // An array of fields for database query.
@@ -138,9 +138,11 @@ class ttReportHelper {
     if($canViewReports || $isClient)
       array_push($fields, 'u.name as user');
     // Add client name if it is selected.
-    if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
+    if ($options['show_client'] || 'client' == $group_by_option)
       array_push($fields, 'c.name as client');
     // Add project name if it is selected.
+
+// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
     if ($bean->getAttribute('chproject') || 'project' == $group_by_option)
       array_push($fields, 'p.name as project');
     // Add task name if it is selected.
@@ -1804,23 +1806,33 @@ class ttReportHelper {
     $options['period'] = $bean->getAttribute('period');
     $options['period_start'] = $bean->getAttribute('start_date');
     $options['period_end'] = $bean->getAttribute('end_date');
+    $options['show_client'] = $bean->getAttribute('chclient');
 
 /*
  * TODO: remaining fields to fill in...
-  `show_client` tinyint(4) NOT NULL default 0,           # whether to show client column
   `show_invoice` tinyint(4) NOT NULL default 0,          # whether to show invoice column
   `show_paid` tinyint(4) NOT NULL default 0,             # whether to show paid column
   `show_ip` tinyint(4) NOT NULL default 0,               # whether to show ip column
   `show_project` tinyint(4) NOT NULL default 0,          # whether to show project column
+ */
+    $options['show_start'] = $bean->getAttribute('chstart');
+/*
   `show_start` tinyint(4) NOT NULL default 0,            # whether to show start field
   `show_duration` tinyint(4) NOT NULL default 0,         # whether to show duration field
   `show_cost` tinyint(4) NOT NULL default 0,             # whether to show cost field
   `show_task` tinyint(4) NOT NULL default 0,             # whether to show task column
+ */
+    $options['show_end'] = $bean->getAttribute('chfinish');
+    /*
   `show_end` tinyint(4) NOT NULL default 0,              # whether to show end field
   `show_note` tinyint(4) NOT NULL default 0,             # whether to show note column
   `show_custom_field_1` tinyint(4) NOT NULL default 0,   # whether to show custom field 1
   `show_work_units` tinyint(4) NOT NULL default 0,       # whether to show work units
   `show_totals_only` tinyint(4) NOT NULL default 0,      # whether to show totals only
+ **/
+  $options['group_by'] = $bean->getAttribute('group_by');
+/*
+ * TODO: remaining fields to fill in...
   `group_by` varchar(20) default NULL,                   # group by field
   `status` tinyint(4) default 1,                         # favorite report status
   PRIMARY KEY (`id`)
