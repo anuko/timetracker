@@ -141,15 +141,13 @@ class ttReportHelper {
     if ($options['show_client'] || 'client' == $group_by_option)
       array_push($fields, 'c.name as client');
     // Add project name if it is selected.
-
-// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
-    if ($bean->getAttribute('chproject') || 'project' == $group_by_option)
+    if ($options['show_project'] || 'project' == $group_by_option)
       array_push($fields, 'p.name as project');
     // Add task name if it is selected.
-    if ($bean->getAttribute('chtask') || 'task' == $group_by_option)
+    if ($options['show_task'] || 'task' == $group_by_option)
       array_push($fields, 't.name as task');
     // Add custom field.
-    $include_cf_1 = $bean->getAttribute('chcf_1') || 'cf_1' == $group_by_option;
+    $include_cf_1 = $options['show_custom_field_1'] || 'cf_1' == $group_by_option;
     if ($include_cf_1) {
       $custom_fields = new CustomFields($user->group_id);
       $cf_1_type = $custom_fields->fields[0]['type'];
@@ -159,6 +157,8 @@ class ttReportHelper {
         array_push($fields, 'cfo.value as cf_1');
       }
     }
+
+// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
     // Add start time.
     if ($bean->getAttribute('chstart')) {
       array_push($fields, "l.start as unformatted_start");
@@ -1813,27 +1813,27 @@ class ttReportHelper {
   `show_invoice` tinyint(4) NOT NULL default 0,          # whether to show invoice column
   `show_paid` tinyint(4) NOT NULL default 0,             # whether to show paid column
   `show_ip` tinyint(4) NOT NULL default 0,               # whether to show ip column
-  `show_project` tinyint(4) NOT NULL default 0,          # whether to show project column
  */
+    $options['show_project'] = $bean->getAttribute('chproject');
     $options['show_start'] = $bean->getAttribute('chstart');
 /*
-  `show_start` tinyint(4) NOT NULL default 0,            # whether to show start field
   `show_duration` tinyint(4) NOT NULL default 0,         # whether to show duration field
   `show_cost` tinyint(4) NOT NULL default 0,             # whether to show cost field
-  `show_task` tinyint(4) NOT NULL default 0,             # whether to show task column
  */
+    $options['show_task'] = $bean->getAttribute('chtask');
     $options['show_end'] = $bean->getAttribute('chfinish');
-    /*
-  `show_end` tinyint(4) NOT NULL default 0,              # whether to show end field
+/*
   `show_note` tinyint(4) NOT NULL default 0,             # whether to show note column
   `show_custom_field_1` tinyint(4) NOT NULL default 0,   # whether to show custom field 1
+ */
+    $options['show_custom_field_1'] = $bean->getAttribute('chcf_1');
+ /*
   `show_work_units` tinyint(4) NOT NULL default 0,       # whether to show work units
   `show_totals_only` tinyint(4) NOT NULL default 0,      # whether to show totals only
  **/
-  $options['group_by'] = $bean->getAttribute('group_by');
+    $options['group_by'] = $bean->getAttribute('group_by');
 /*
  * TODO: remaining fields to fill in...
-  `group_by` varchar(20) default NULL,                   # group by field
   `status` tinyint(4) default 1,                         # favorite report status
   PRIMARY KEY (`id`)
 );
