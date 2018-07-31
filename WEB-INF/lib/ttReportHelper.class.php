@@ -168,20 +168,18 @@ class ttReportHelper {
     // Add duration.
     if ($options['show_duration'])
       array_push($fields, "TIME_FORMAT(l.duration, '%k:%i') as duration");
-
-// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
     // Add work units.
-    if ($bean->getAttribute('chunits')) {
+    if ($options['show_work_units']) {
       if ($user->unit_totals_only)
         array_push($fields, "null as units");
       else
-       array_push($fields, "if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit)) as units");
+        array_push($fields, "if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit)) as units");
     }
     // Add note.
-    if ($bean->getAttribute('chnote'))
+    if ($options['show_note'])
       array_push($fields, 'l.comment as note');
     // Handle cost.
-    $includeCost = $bean->getAttribute('chcost');
+    $includeCost = $options['show_cost'];
     if ($includeCost) {
       if (MODE_TIME == $user->tracking_mode)
         array_push($fields, "cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost");   // Use default user rate.
@@ -190,8 +188,10 @@ class ttReportHelper {
       array_push($fields, "null as expense"); 
     }
     // Add paid status.
-    if ($canViewReports && $bean->getAttribute('chpaid'))
+    if ($canViewReports && $options['show_paid'])
       array_push($fields, 'l.paid as paid');
+
+// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
     // Add IP address.
     if ($canViewReports && $bean->getAttribute('chip')) {
       array_push($fields, 'l.created as created');
@@ -452,7 +452,6 @@ class ttReportHelper {
       else
         array_push($fields, "if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit)) as units");
     }
-
     // Add note.
     if ($options['show_note'])
       array_push($fields, 'l.comment as note');
@@ -1811,33 +1810,30 @@ class ttReportHelper {
 /*
  * TODO: remaining fields to fill in...
   `show_invoice` tinyint(4) NOT NULL default 0,          # whether to show invoice column
-  `show_paid` tinyint(4) NOT NULL default 0,             # whether to show paid column
+*/
+    $options['show_paid'] = $bean->getAttribute('chpaid');
+/*
   `show_ip` tinyint(4) NOT NULL default 0,               # whether to show ip column
- */
+*/
     $options['show_project'] = $bean->getAttribute('chproject');
     $options['show_start'] = $bean->getAttribute('chstart');
     $options['show_duration'] = $bean->getAttribute('chduration');
-/*
-  `show_cost` tinyint(4) NOT NULL default 0,             # whether to show cost field
- */
+    $options['show_cost'] = $bean->getAttribute('chcost');
     $options['show_task'] = $bean->getAttribute('chtask');
     $options['show_end'] = $bean->getAttribute('chfinish');
-/*
-  `show_note` tinyint(4) NOT NULL default 0,             # whether to show note column
-  `show_custom_field_1` tinyint(4) NOT NULL default 0,   # whether to show custom field 1
- */
+    $options['show_note'] = $bean->getAttribute('chnote');
     $options['show_custom_field_1'] = $bean->getAttribute('chcf_1');
- /*
-  `show_work_units` tinyint(4) NOT NULL default 0,       # whether to show work units
+    $options['show_work_units'] = $bean->getAttribute('chunits');
+/*
   `show_totals_only` tinyint(4) NOT NULL default 0,      # whether to show totals only
- **/
+*/
     $options['group_by'] = $bean->getAttribute('group_by');
 /*
  * TODO: remaining fields to fill in...
   `status` tinyint(4) default 1,                         # favorite report status
   PRIMARY KEY (`id`)
 );
-     */
+*/
     return $options;
   }
 
