@@ -157,19 +157,19 @@ class ttReportHelper {
         array_push($fields, 'cfo.value as cf_1');
       }
     }
-
-// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
     // Add start time.
-    if ($bean->getAttribute('chstart')) {
+    if ($options['show_start']) {
       array_push($fields, "l.start as unformatted_start");
       array_push($fields, "TIME_FORMAT(l.start, '%k:%i') as start");
     }
     // Add finish time.
-    if ($bean->getAttribute('chfinish'))
+    if ($options['show_end'])
       array_push($fields, "TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), '%k:%i') as finish");
     // Add duration.
-    if ($bean->getAttribute('chduration'))
+    if ($options['show_duration'])
       array_push($fields, "TIME_FORMAT(l.duration, '%k:%i') as duration");
+
+// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
     // Add work units.
     if ($bean->getAttribute('chunits')) {
       if ($user->unit_totals_only)
@@ -1816,8 +1816,8 @@ class ttReportHelper {
  */
     $options['show_project'] = $bean->getAttribute('chproject');
     $options['show_start'] = $bean->getAttribute('chstart');
+    $options['show_duration'] = $bean->getAttribute('chduration');
 /*
-  `show_duration` tinyint(4) NOT NULL default 0,         # whether to show duration field
   `show_cost` tinyint(4) NOT NULL default 0,             # whether to show cost field
  */
     $options['show_task'] = $bean->getAttribute('chtask');
