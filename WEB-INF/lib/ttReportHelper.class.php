@@ -279,16 +279,15 @@ class ttReportHelper {
       if (($canViewReports || $isClient) && $options['show_invoice'])
         array_push($fields, 'i.name as invoice');
 
-// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
       // Prepare sql query part for left joins.
       $left_joins = null;
       if ($canViewReports || $isClient)
         $left_joins .= " left join tt_users u on (u.id = ei.user_id)";
-      if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
+      if ($options['show_client'] || 'client' == $group_by_option)
         $left_joins .= " left join tt_clients c on (c.id = ei.client_id)";
-      if ($bean->getAttribute('chproject') || 'project' == $group_by_option)
+      if ($options['show_project'] || 'project' == $group_by_option)
         $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";
-      if (($canViewReports || $isClient) && $bean->getAttribute('chinvoice'))
+      if (($canViewReports || $isClient) && $options['show_invoice'])
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
 
       $where = ttReportHelper::getExpenseWhere($options);
@@ -299,6 +298,9 @@ class ttReportHelper {
       // Construct a union.
       $sql = "($sql) union all ($sql_for_expense_items)";
     }
+
+// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
+// Note: this sort part below is different in getFavItems. Need to figure out why and fix properly.
 
     // Determine sort part.
     $sort_part = ' order by ';
@@ -1814,16 +1816,8 @@ class ttReportHelper {
     $options['show_note'] = $bean->getAttribute('chnote');
     $options['show_custom_field_1'] = $bean->getAttribute('chcf_1');
     $options['show_work_units'] = $bean->getAttribute('chunits');
-/*
-  `show_totals_only` tinyint(4) NOT NULL default 0,      # whether to show totals only
-*/
+    $options['show_totals_only'] = $bean->getAttribute('chtotalsonly');
     $options['group_by'] = $bean->getAttribute('group_by');
-/*
- * TODO: remaining fields to fill in...
-  `status` tinyint(4) default 1,                         # favorite report status
-  PRIMARY KEY (`id`)
-);
-*/
     return $options;
   }
 
