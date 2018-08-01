@@ -190,31 +190,28 @@ class ttReportHelper {
     // Add paid status.
     if ($canViewReports && $options['show_paid'])
       array_push($fields, 'l.paid as paid');
-
-// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
     // Add IP address.
-    if ($canViewReports && $bean->getAttribute('chip')) {
+    if ($canViewReports && $options['show_ip']) {
       array_push($fields, 'l.created as created');
       array_push($fields, 'l.created_ip as created_ip');
       array_push($fields, 'l.modified as modified');
       array_push($fields, 'l.modified_ip as modified_ip');
     }
-
     // Add invoice name if it is selected.
-    if (($canViewReports || $isClient) && $bean->getAttribute('chinvoice'))
+    if (($canViewReports || $isClient) && $options['show_invoice'])
       array_push($fields, 'i.name as invoice');
 
     // Prepare sql query part for left joins.
     $left_joins = null;
-    if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
+    if ($options['show_client'] || 'client' == $group_by_option)
       $left_joins .= " left join tt_clients c on (c.id = l.client_id)";
-    if (($canViewReports || $isClient) && $bean->getAttribute('chinvoice'))
+    if (($canViewReports || $isClient) && $options['show_invoice'])
       $left_joins .= " left join tt_invoices i on (i.id = l.invoice_id and i.status = 1)";
     if ($canViewReports || $isClient || $user->isPluginEnabled('ex'))
        $left_joins .= " left join tt_users u on (u.id = l.user_id)";
-    if ($bean->getAttribute('chproject') || 'project' == $group_by_option)
+    if ($options['show_project'] || 'project' == $group_by_option)
       $left_joins .= " left join tt_projects p on (p.id = l.project_id)";
-    if ($bean->getAttribute('chtask') || 'task' == $group_by_option)
+    if ($options['show_task'] || 'task' == $group_by_option)
       $left_joins .= " left join tt_tasks t on (t.id = l.task_id)";
     if ($include_cf_1) {
       if ($cf_1_type == CustomFields::TYPE_TEXT)
@@ -233,6 +230,8 @@ class ttReportHelper {
     $sql = "select ".join(', ', $fields)." from tt_log l $left_joins $where";
     // If we don't have expense items (such as when the Expenses plugin is desabled), the above is all sql we need,
     // with an exception of sorting part, that is added in the end.
+
+// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
 
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
     if ($bean->getAttribute('chcost') && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
@@ -1806,15 +1805,9 @@ class ttReportHelper {
     $options['period_start'] = $bean->getAttribute('start_date');
     $options['period_end'] = $bean->getAttribute('end_date');
     $options['show_client'] = $bean->getAttribute('chclient');
-
-/*
- * TODO: remaining fields to fill in...
-  `show_invoice` tinyint(4) NOT NULL default 0,          # whether to show invoice column
-*/
+    $options['show_invoice'] = $bean->getAttribute('chinvoice');
     $options['show_paid'] = $bean->getAttribute('chpaid');
-/*
-  `show_ip` tinyint(4) NOT NULL default 0,               # whether to show ip column
-*/
+    $options['show_ip'] = $bean->getAttribute('chip');
     $options['show_project'] = $bean->getAttribute('chproject');
     $options['show_start'] = $bean->getAttribute('chstart');
     $options['show_duration'] = $bean->getAttribute('chduration');
