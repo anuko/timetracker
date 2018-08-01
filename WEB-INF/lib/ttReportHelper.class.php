@@ -231,10 +231,8 @@ class ttReportHelper {
     // If we don't have expense items (such as when the Expenses plugin is desabled), the above is all sql we need,
     // with an exception of sorting part, that is added in the end.
 
-// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
-
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
-    if ($bean->getAttribute('chcost') && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
+    if ($options['show_cost'] && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
 
       $fields = array(); // An array of fields for database query.
       array_push($fields, 'ei.id');
@@ -243,46 +241,45 @@ class ttReportHelper {
       if($canViewReports || $isClient)
         array_push($fields, 'u.name as user');
       // Add client name if it is selected.
-      if ($bean->getAttribute('chclient') || 'client' == $group_by_option)
+      if ($options['show_client'] || 'client' == $group_by_option)
         array_push($fields, 'c.name as client');
       // Add project name if it is selected.
-      if ($bean->getAttribute('chproject') || 'project' == $group_by_option)
+      if ($options['show_project'] || 'project' == $group_by_option)
         array_push($fields, 'p.name as project');
-      if ($bean->getAttribute('chtask') || 'task' == $group_by_option)
+      if ($options['show_task'] || 'task' == $group_by_option)
         array_push($fields, 'null'); // null for task name. We need to match column count for union.
-      if ($bean->getAttribute('chcf_1') || 'cf_1' == $group_by_option)
+      if ($options['show_custom_field_1'] || 'cf_1' == $group_by_option)
         array_push($fields, 'null'); // null for cf_1.
-      if ($bean->getAttribute('chstart')) {
+      if ($options['show_start']) {
         array_push($fields, 'null'); // null for unformatted_start.
         array_push($fields, 'null'); // null for start.
       }
-      if ($bean->getAttribute('chfinish'))
+      if ($options['show_end'])
         array_push($fields, 'null'); // null for finish.
-      if ($bean->getAttribute('chduration'))
+      if ($options['show_duration'])
         array_push($fields, 'null'); // null for duration.
-      // Add work units.
-      if ($bean->getAttribute('chunits'))
+      if ($options['show_work_units'])
         array_push($fields, 'null as units'); // null for work units.
       // Use the note field to print item name.
-      if ($bean->getAttribute('chnote'))
+      if ($options['show_note'])
         array_push($fields, 'ei.name as note');
       array_push($fields, 'ei.cost as cost');
       array_push($fields, 'ei.cost as expense');
       // Add paid status.
-      if ($canViewReports && $bean->getAttribute('chpaid'))
+      if ($canViewReports && $options['show_paid'])
         array_push($fields, 'ei.paid as paid');
       // Add IP address.
-      if ($canViewReports && $bean->getAttribute('chip')) {
+      if ($canViewReports && $options['show_ip']) {
         array_push($fields, 'ei.created as created');
         array_push($fields, 'ei.created_ip as created_ip');
         array_push($fields, 'ei.modified as modified');
         array_push($fields, 'ei.modified_ip as modified_ip');
       }
-
       // Add invoice name if it is selected.
-      if (($canViewReports || $isClient) && $bean->getAttribute('chinvoice'))
+      if (($canViewReports || $isClient) && $options['show_invoice'])
         array_push($fields, 'i.name as invoice');
 
+// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
       // Prepare sql query part for left joins.
       $left_joins = null;
       if ($canViewReports || $isClient)
