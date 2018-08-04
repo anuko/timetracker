@@ -66,6 +66,12 @@ while ($val = $res->fetchRow()) {
   $user = new ttUser(null, $options['user_id']);
   if (!$user->id) continue; // Skip not found user.
 
+  // TODO: write a new function ttFavReportHelper::adjustReportOptions that will use
+  // a $user objected recycled above. Put user handling below into it.
+  // Also adjust all other options for potentially changed user access rights and group properties.
+  // For example, tracking mode may have changed, but fav report options are still old...
+  // This needs to be fixed.
+
   // Special handling of the NULL $options['users'] field (this used to mean "all users").
   if (!$options['users']) {
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {

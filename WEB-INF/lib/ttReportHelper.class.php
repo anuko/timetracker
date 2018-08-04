@@ -391,158 +391,7 @@ class ttReportHelper {
   // getSubtotals calculates report items subtotals when a report is grouped by.
   // Without expenses, it's a simple select with group by.
   // With expenses, it becomes a select with group by from a combined set of records obtained with "union all".
-  static function getSubtotals($bean, $options) {
-    global $user;
-
-    $group_by_option = $options['group_by'];
-    if ('no_grouping' == $group_by_option) return null;
-
-    $mdb2 = getConnection();
-
-    // Start with sql to obtain subtotals for time items. This simple sql will be used when we have no expenses.
-
-    // Determine group by field and a required join.
-    switch ($group_by_option) {
-      case 'date':
-        $group_field = 'l.date';
-        $group_join = '';
-        break;
-      case 'user':
-        $group_field = 'u.name';
-        $group_join = 'left join tt_users u on (l.user_id = u.id) ';
-        break;
-      case 'client':
-        $group_field = 'c.name';
-        $group_join = 'left join tt_clients c on (l.client_id = c.id) ';
-        break;
-      case 'project':
-        $group_field = 'p.name';
-        $group_join = 'left join tt_projects p on (l.project_id = p.id) ';
-        break;
-      case 'task':
-        $group_field = 't.name';
-        $group_join = 'left join tt_tasks t on (l.task_id = t.id) ';
-        break;
-      case 'cf_1':
-        $group_field = 'cfo.value';
-        $custom_fields = new CustomFields($user->group_id);
-        if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
-          $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id) ';
-        elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
-          $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.option_id = cfo.id) ';
-        break;
-    }
-
-    $where = ttReportHelper::getWhere($options);
-    if ($options['show_cost']) {
-      if (MODE_TIME == $user->tracking_mode) {
-        if ($group_by_option != 'user')
-          $left_join = 'left join tt_users u on (l.user_id = u.id)';
-        $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time";
-        if ($options['show_work_units']) {
-          if ($user->unit_totals_only)
-            $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $user->first_unit_threshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
-          else
-            $sql .= ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
-        }
-        $sql .= ", sum(cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2))) as cost,
-          null as expenses from tt_log l
-          $group_join $left_join $where group by $group_field";
-      } else {
-        // If we are including cost and tracking projects, our query (the same as above) needs to join the tt_user_project_binds table.
-        $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time";
-        if ($bean->getAttribute('chunits')) {
-          if ($user->unit_totals_only)
-            $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $user->first_unit_threshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
-          else
-            $sql .= ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
-        }
-        $sql .= ", sum(cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2))) as cost,
-          null as expenses from tt_log l
-          $group_join
-          left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id) $where group by $group_field";
-      }
-    } else {
-      $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time";
-      if ($bean->getAttribute('chunits')) {
-        if ($user->unit_totals_only)
-          $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $user->first_unit_threshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
-        else
-          $sql .= ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
-      }
-      $sql .= ", null as expenses from tt_log l
-        $group_join $where group by $group_field";
-    }
-    // By now we have sql for time items.
-
-    // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
-    if ($bean->getAttribute('chcost') && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
-
-      // Determine group by field and a required join.
-      $group_join = null;
-      $group_field = 'null';
-      switch ($group_by_option) {
-        case 'date':
-          $group_field = 'ei.date';
-          $group_join = '';
-          break;
-        case 'user':
-          $group_field = 'u.name';
-          $group_join = 'left join tt_users u on (ei.user_id = u.id) ';
-          break;
-        case 'client':
-          $group_field = 'c.name';
-          $group_join = 'left join tt_clients c on (ei.client_id = c.id) ';
-          break;
-        case 'project':
-          $group_field = 'p.name';
-          $group_join = 'left join tt_projects p on (ei.project_id = p.id) ';
-          break;
-      }
-
-      $where = ttReportHelper::getExpenseWhere($options);
-      $sql_for_expenses = "select $group_field as group_field, null as time";
-      if ($bean->getAttribute('chunits')) $sql_for_expenses .= ", null as units";
-      $sql_for_expenses .= ", sum(ei.cost) as cost, sum(ei.cost) as expenses from tt_expense_items ei $group_join $where";
-      // Add a "group by" clause if we are grouping.
-      if ('null' != $group_field) $sql_for_expenses .= " group by $group_field";
-
-      // Create a combined query.
-      $combined = "select group_field, sum(time) as time";
-      if ($bean->getAttribute('chunits')) $combined .= ", sum(units) as units";
-      $combined .= ", sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t group by group_field";
-      $sql = $combined;
-    }
-
-    // Execute query.
-    $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error')) die($res->getMessage());
-
-    while ($val = $res->fetchRow()) {
-      if ('date' == $group_by_option) {
-        // This is needed to get the date in user date format.
-        $o_date = new DateAndTime(DB_DATEFORMAT, $val['group_field']);
-        $val['group_field'] = $o_date->toString($user->date_format);
-        unset($o_date);
-      }
-      $time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
-      if ($bean->getAttribute('chcost')) {
-        if ('.' != $user->decimal_mark) {
-          $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
-          $val['expenses'] = str_replace('.', $user->decimal_mark, $val['expenses']);
-        }
-        $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time, 'units'=> $val['units'],'cost'=>$val['cost'],'expenses'=>$val['expenses']);
-      } else
-        $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time, 'units'=> $val['units']);
-    }
-
-    return $subtotals;
-  }
-
-  // getFavSubtotals calculates report items subtotals when a favorite report is grouped by.
-  // Without expenses, it's a simple select with group by.
-  // With expenses, it becomes a select with group by from a combined set of records obtained with "union all".
-  static function getFavSubtotals($options) {
+  static function getSubtotals($options) {
     global $user;
 
     $group_by_option = $options['group_by'];
@@ -821,7 +670,7 @@ class ttReportHelper {
     $items = ttReportHelper::getItems($options);
     $group_by = $bean->getAttribute('group_by');
     if ($group_by && 'no_grouping' != $group_by)
-      $subtotals = ttReportHelper::getSubtotals($bean, $options);
+      $subtotals = ttReportHelper::getSubtotals($options);
     $totals = ttReportHelper::getTotals($options);
 
     // Use custom fields plugin if it is enabled.
@@ -1136,7 +985,7 @@ class ttReportHelper {
     $items = ttReportHelper::getItems($options);
     $group_by = $options['group_by'];
     if ($group_by && 'no_grouping' != $group_by)
-      $subtotals = ttReportHelper::getFavSubtotals($options);
+      $subtotals = ttReportHelper::getSubtotals($options);
     $totals = ttReportHelper::getTotals($options);
 
     // Use custom fields plugin if it is enabled.

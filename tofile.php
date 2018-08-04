@@ -60,7 +60,7 @@ $totals_only = $bean->getAttribute('chtotalsonly');
 // Obtain items.
 $options = ttReportHelper::getReportOptions($bean);
 if ($totals_only)
-  $subtotals = ttReportHelper::getSubtotals($bean, $options);
+  $subtotals = ttReportHelper::getSubtotals($options);
 else
   $items = ttReportHelper::getItems($options);
 
