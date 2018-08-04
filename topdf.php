@@ -76,7 +76,7 @@ if ('no_grouping' != $group_by) {
 // Obtain items for report.
 $options = ttReportHelper::getReportOptions($bean);
 if (!$totals_only)
-  $items = ttReportHelper::getItems($bean, $options); // Individual entries.
+  $items = ttReportHelper::getItems($options); // Individual entries.
 if ($totals_only || 'no_grouping' != $group_by)
   $subtotals = ttReportHelper::getSubtotals($bean, $options); // Subtotals for groups of items.
 $totals = ttReportHelper::getTotals($bean, $options); // Totals for the entire report.

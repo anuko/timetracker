@@ -62,7 +62,7 @@ $options = ttReportHelper::getReportOptions($bean);
 if ($totals_only)
   $subtotals = ttReportHelper::getSubtotals($bean, $options);
 else
-  $items = ttReportHelper::getItems($bean, $options);
+  $items = ttReportHelper::getItems($options);
 
 // Build a string to use as filename for the files being downloaded.
 $filename = strtolower($i18n->get('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];

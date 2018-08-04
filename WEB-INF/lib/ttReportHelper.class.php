@@ -119,7 +119,7 @@ class ttReportHelper {
   // getItems retrieves all items associated with a report.
   // It combines tt_log and tt_expense_items in one array for presentation in one table using mysql union all.
   // Expense items use the "note" field for item name.
-  static function getItems($bean, $options) {
+  static function getItems($options) {
     global $user;
     $mdb2 = getConnection();
 
@@ -386,245 +386,6 @@ class ttReportHelper {
     if ($report_item_expense_ids)
       $items['report_item_expense_ids'] = explode(',', $report_item_expense_ids);
     return $items;
-  }
-
-  // getFavItems retrieves all items associated with a favorite report.
-  // It combines tt_log and tt_expense_items in one array for presentation in one table using mysql union all.
-  // Expense items use the "note" field for item name.
-  static function getFavItems($options) {
-    global $user;
-    $mdb2 = getConnection();
-
-    // Determine these once as they are used in multiple places in this function.
-    $canViewReports = $user->can('view_reports') || $user->can('view_all_reports');
-    $isClient = $user->isClient();
-
-    $group_by_option = $options['group_by'];
-    $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($options['show_start'] || $options['show_end']);
-
-    // Prepare a query for time items in tt_log table.
-    $fields = array(); // An array of fields for database query.
-    array_push($fields, 'l.id as id');
-    array_push($fields, '1 as type'); // Type 1 is for tt_log entries.
-    array_push($fields, 'l.date as date');
-    if($canViewReports || $isClient)
-      array_push($fields, 'u.name as user');
-    // Add client name if it is selected.
-    if ($options['show_client'] || 'client' == $group_by_option)
-      array_push($fields, 'c.name as client');
-    // Add project name if it is selected.
-    if ($options['show_project'] || 'project' == $group_by_option)
-      array_push($fields, 'p.name as project');
-    // Add task name if it is selected.
-    if ($options['show_task'] || 'task' == $group_by_option)
-      array_push($fields, 't.name as task');
-    // Add custom field.
-    $include_cf_1 = $options['show_custom_field_1'] || 'cf_1' == $group_by_option;
-    if ($include_cf_1) {
-      $custom_fields = new CustomFields($user->group_id);
-      $cf_1_type = $custom_fields->fields[0]['type'];
-      if ($cf_1_type == CustomFields::TYPE_TEXT) {
-        array_push($fields, 'cfl.value as cf_1');
-      } elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
-        array_push($fields, 'cfo.value as cf_1');
-      }
-    }
-    // Add start time.
-    if ($options['show_start']) {
-      array_push($fields, "l.start as unformatted_start");
-      array_push($fields, "TIME_FORMAT(l.start, '%k:%i') as start");
-    }
-    // Add finish time.
-    if ($options['show_end'])
-      array_push($fields, "TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), '%k:%i') as finish");
-    // Add duration.
-    if ($options['show_duration'])
-      array_push($fields, "TIME_FORMAT(l.duration, '%k:%i') as duration");
-    // Add work units.
-    if ($options['show_work_units']) {
-      if ($user->unit_totals_only)
-        array_push($fields, "null as units");
-      else
-        array_push($fields, "if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit)) as units");
-    }
-    // Add note.
-    if ($options['show_note'])
-      array_push($fields, 'l.comment as note');
-    // Handle cost.
-    $includeCost = $options['show_cost'];
-    if ($includeCost) {
-      if (MODE_TIME == $user->tracking_mode)
-        array_push($fields, "cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost");   // Use default user rate.
-      else
-        array_push($fields, "cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost"); // Use project rate for user.
-      array_push($fields, "null as expense"); 
-    }
-    // Add paid status.
-    if ($canViewReports && $options['show_paid'])
-      array_push($fields, 'l.paid as paid');
-    // Add IP address.
-    if ($canViewReports && $options['show_ip']) {
-      array_push($fields, 'l.created as created');
-      array_push($fields, 'l.created_ip as created_ip');
-      array_push($fields, 'l.modified as modified');
-      array_push($fields, 'l.modified_ip as modified_ip');
-    }
-    // Add invoice name if it is selected.
-    if (($canViewReports || $isClient) && $options['show_invoice'])
-      array_push($fields, 'i.name as invoice');
-
-    // Prepare sql query part for left joins.
-    $left_joins = null;
-    if ($options['show_client'] || 'client' == $group_by_option)
-      $left_joins .= " left join tt_clients c on (c.id = l.client_id)";
-    if (($canViewReports || $isClient) && $options['show_invoice'])
-      $left_joins .= " left join tt_invoices i on (i.id = l.invoice_id and i.status = 1)";
-    if ($canViewReports || $isClient || $user->isPluginEnabled('ex'))
-       $left_joins .= " left join tt_users u on (u.id = l.user_id)";
-    if ($options['show_project'] || 'project' == $group_by_option)
-      $left_joins .= " left join tt_projects p on (p.id = l.project_id)";
-    if ($options['show_task'] || 'task' == $group_by_option)
-      $left_joins .= " left join tt_tasks t on (t.id = l.task_id)";
-    if ($include_cf_1) {
-      if ($cf_1_type == CustomFields::TYPE_TEXT)
-        $left_joins .= " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)";
-      elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
-        $left_joins .=  " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)".
-          " left join tt_custom_field_options cfo on (cfl.option_id = cfo.id)";
-      }
-    }
-    if ($includeCost && MODE_TIME != $user->tracking_mode)
-      $left_joins .= " left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
-
-    $where = ttReportHelper::getWhere($options);
-
-    // Construct sql query for tt_log items.
-    $sql = "select ".join(', ', $fields)." from tt_log l $left_joins $where";
-    // If we don't have expense items (such as when the Expenses plugin is desabled), the above is all sql we need,
-    // with an exception of sorting part, that is added in the end.
-
-    // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
-    if ($options['show_cost'] && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
-
-      $fields = array(); // An array of fields for database query.
-      array_push($fields, 'ei.id');
-      array_push($fields, '2 as type'); // Type 2 is for tt_expense_items entries.
-      array_push($fields, 'ei.date');
-      if($canViewReports || $isClient)
-        array_push($fields, 'u.name as user');
-      // Add client name if it is selected.
-      if ($options['show_client'] || 'client' == $group_by_option)
-        array_push($fields, 'c.name as client');
-      // Add project name if it is selected.
-      if ($options['show_project'] || 'project' == $group_by_option)
-        array_push($fields, 'p.name as project');
-      if ($options['show_task'] || 'task' == $group_by_option)
-        array_push($fields, 'null'); // null for task name. We need to match column count for union.
-      if ($options['show_custom_field_1'] || 'cf_1' == $group_by_option)
-        array_push($fields, 'null'); // null for cf_1.
-      if ($options['show_start']) {
-        array_push($fields, 'null'); // null for unformatted_start.
-        array_push($fields, 'null'); // null for start.
-      }
-      if ($options['show_end'])
-        array_push($fields, 'null'); // null for finish.
-      if ($options['show_duration'])
-        array_push($fields, 'null'); // null for duration.
-      if ($options['show_work_units'])
-        array_push($fields, 'null as units'); // null for work units.
-      // Use the note field to print item name.
-      if ($options['show_note'])
-        array_push($fields, 'ei.name as note');
-      array_push($fields, 'ei.cost as cost');
-      array_push($fields, 'ei.cost as expense');
-      // Add paid status.
-      if ($canViewReports && $options['show_paid'])
-        array_push($fields, 'ei.paid as paid');
-      // Add IP address.
-      if ($canViewReports && $options['show_ip']) {
-        array_push($fields, 'ei.created as created');
-        array_push($fields, 'ei.created_ip as created_ip');
-        array_push($fields, 'ei.modified as modified');
-        array_push($fields, 'ei.modified_ip as modified_ip');
-      }
-      // Add invoice name if it is selected.
-      if (($canViewReports || $isClient) && $options['show_invoice'])
-        array_push($fields, 'i.name as invoice');
-
-      // Prepare sql query part for left joins.
-      $left_joins = null;
-      if ($canViewReports || $isClient)
-        $left_joins .= " left join tt_users u on (u.id = ei.user_id)";
-      if ($options['show_client'] || 'client' == $group_by_option)
-        $left_joins .= " left join tt_clients c on (c.id = ei.client_id)";
-      if ($options['show_project'] || 'project' == $group_by_option)
-        $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";
-      if (($canViewReports || $isClient) && $options['show_invoice'])
-        $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
-
-      $where = ttReportHelper::getExpenseWhere($options);
-
-      // Construct sql query for expense items.
-      $sql_for_expense_items = "select ".join(', ', $fields)." from tt_expense_items ei $left_joins $where";
-
-      // Construct a union.
-      $sql = "($sql) union all ($sql_for_expense_items)";
-    }
-
-    // Determine sort part.
-    $sort_part = ' order by ';
-    if ($group_by_option == null || 'no_grouping' == $group_by_option || 'date' == $group_by_option)
-      $sort_part .= 'date';
-    else
-      $sort_part .= $group_by_option.', date';
-    if (($canViewReports || $isClient) && $options['users'] && 'user' != $group_by_option)
-      $sort_part .= ', user, type';
-    if ($options['show_start'])
-      $sort_part .= ', unformatted_start';
-    $sort_part .= ', id';
-
-    $sql .= $sort_part;
-    // By now we are ready with sql.
-
-    // Obtain items for report.
-    $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error')) die($res->getMessage());
-
-    while ($val = $res->fetchRow()) {
-      if ($convertTo12Hour) {
-        if($val['start'] != '')
-          $val['start'] = ttTimeHelper::to12HourFormat($val['start']);
-        if($val['finish'] != '')
-          $val['finish'] = ttTimeHelper::to12HourFormat($val['finish']);
-      }
-      if (isset($val['cost'])) {
-        if ('.' != $user->decimal_mark)
-          $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
-      }
-      if (isset($val['expense'])) {
-        if ('.' != $user->decimal_mark)
-          $val['expense'] = str_replace('.', $user->decimal_mark, $val['expense']);
-      }
-      if ('no_grouping' != $group_by_option) {
-        $val['grouped_by'] = $val[$group_by_option];
-        if ('date' == $group_by_option) {
-          // This is needed to get the date in user date format.
-          $o_date = new DateAndTime(DB_DATEFORMAT, $val['grouped_by']);
-          $val['grouped_by'] = $o_date->toString($user->date_format);
-          unset($o_date);
-        }
-      }
-
-      // This is needed to get the date in user date format.
-      $o_date = new DateAndTime(DB_DATEFORMAT, $val['date']);
-      $val['date'] = $o_date->toString($user->date_format);
-      unset($o_date);
-
-      $row = $val;
-      $report_items[] = $row;
-    }
-
-    return $report_items;
   }
 
   // getSubtotals calculates report items subtotals when a report is grouped by.
@@ -1136,11 +897,11 @@ class ttReportHelper {
     global $i18n;
 
     // Determine these once as they are used in multiple places in this function.
-    $canViewReports = $user->can('view_reports');
+    $canViewReports = $user->can('view_reports') || $user->can('view_all_reports');
     $isClient = $user->isClient();
     $options = ttReportHelper::getReportOptions($bean);
 
-    $items = ttReportHelper::getItems($bean, $options);
+    $items = ttReportHelper::getItems($options);
     $group_by = $bean->getAttribute('group_by');
     if ($group_by && 'no_grouping' != $group_by)
       $subtotals = ttReportHelper::getSubtotals($bean, $options);
@@ -1434,7 +1195,7 @@ class ttReportHelper {
   // checkFavReportCondition - checks whether it is okay to send fav report.
   static function checkFavReportCondition($options, $condition)
   {
-    $items = ttReportHelper::getFavItems($options);
+    $items = ttReportHelper::getItems($options);
 
     $condition = str_replace('count', '', $condition);
     $count_required = (int) trim(str_replace('>', '', $condition));
@@ -1452,10 +1213,10 @@ class ttReportHelper {
     global $i18n;
 
     // Determine these once as they are used in multiple places in this function.
-    $canViewReports = $user->can('view_reports');
+    $canViewReports = $user->can('view_reports') || $user->can('view_all_reports');
     $isClient = $user->isClient();
 
-    $items = ttReportHelper::getFavItems($options);
+    $items = ttReportHelper::getItems($options);
     $group_by = $options['group_by'];
     if ($group_by && 'no_grouping' != $group_by)
       $subtotals = ttReportHelper::getFavSubtotals($options);
