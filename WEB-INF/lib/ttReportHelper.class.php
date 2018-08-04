@@ -299,15 +299,15 @@ class ttReportHelper {
       $sql = "($sql) union all ($sql_for_expense_items)";
     }
 
-// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
-// Note: this sort part below is different in getFavItems. Need to figure out why and fix properly.
-
     // Determine sort part.
     $sort_part = ' order by ';
-    if ('no_grouping' == $group_by_option || 'date' == $group_by_option)
+    if ($group_by_option == null || 'no_grouping' == $group_by_option || 'date' == $group_by_option)
       $sort_part .= 'date';
     else
       $sort_part .= $group_by_option.', date';
+
+// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
+// Note: this sort part below is different in getFavItems. Need to figure out why and fix properly.
     if (($canViewReports || $isClient) && is_array($bean->getAttribute('users')) && 'user' != $group_by_option)
       $sort_part .= ', user, type';
     if ($bean->getAttribute('chstart'))
@@ -576,7 +576,7 @@ class ttReportHelper {
 
     // Determine sort part.
     $sort_part = ' order by ';
-    if ($group_by_option == null || 'no_grouping' == $group_by_option || 'date' == $group_by_option) // TODO: fix DB for NULL values in group_by field.
+    if ($group_by_option == null || 'no_grouping' == $group_by_option || 'date' == $group_by_option)
       $sort_part .= 'date';
     else
       $sort_part .= $group_by_option.', date';
