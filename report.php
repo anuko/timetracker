@@ -180,7 +180,7 @@ if ($request->isGet() && $user->isPluginEnabled('ps'))
 
 if ('no_grouping' != $group_by)
   $subtotals = ttReportHelper::getSubtotals($bean, $options);
-$totals = ttReportHelper::getTotals($bean, $options);
+$totals = ttReportHelper::getTotals($options);
 
 // Assign variables that are used to print subtotals.
 if ($report_items && 'no_grouping' != $group_by) {
