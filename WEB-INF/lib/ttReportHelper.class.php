@@ -124,7 +124,7 @@ class ttReportHelper {
     $mdb2 = getConnection();
 
     // Determine these once as they are used in multiple places in this function.
-    $canViewReports = $user->can('view_reports');
+    $canViewReports = $user->can('view_reports') || $user->can('view_all_reports');
     $isClient = $user->isClient();
 
     $group_by_option = $options['group_by'];
@@ -305,12 +305,9 @@ class ttReportHelper {
       $sort_part .= 'date';
     else
       $sort_part .= $group_by_option.', date';
-
-// TODO: refactoring in progress down from here... The above is identical to getFavItems and is ready to merge.
-// Note: this sort part below is different in getFavItems. Need to figure out why and fix properly.
-    if (($canViewReports || $isClient) && is_array($bean->getAttribute('users')) && 'user' != $group_by_option)
+    if (($canViewReports || $isClient) && $options['users'] && 'user' != $group_by_option)
       $sort_part .= ', user, type';
-    if ($bean->getAttribute('chstart'))
+    if ($options['show_start'])
       $sort_part .= ', unformatted_start';
     $sort_part .= ', id';
 
@@ -399,7 +396,7 @@ class ttReportHelper {
     $mdb2 = getConnection();
 
     // Determine these once as they are used in multiple places in this function.
-    $canViewReports = $user->can('view_reports');
+    $canViewReports = $user->can('view_reports') || $user->can('view_all_reports');
     $isClient = $user->isClient();
 
     $group_by_option = $options['group_by'];
@@ -580,7 +577,7 @@ class ttReportHelper {
       $sort_part .= 'date';
     else
       $sort_part .= $group_by_option.', date';
-    if (($canViewReports || $isClient) /*&& is_array($bean->getAttribute('users'))*/ && 'user' != $group_by_option)
+    if (($canViewReports || $isClient) && $options['users'] && 'user' != $group_by_option)
       $sort_part .= ', user, type';
     if ($options['show_start'])
       $sort_part .= ', unformatted_start';
