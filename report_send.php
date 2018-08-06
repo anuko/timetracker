@@ -75,7 +75,7 @@ if ($request->isPost()) {
     $options = ttReportHelper::getReportOptions($bean);
 
     // Prepare report body.
-    $body = ttReportHelper::prepareReportBody($bean, $options, $cl_comment);
+    $body = ttReportHelper::prepareReportBody($options, $cl_comment);
 
     import('mail.Mailer');
     $mailer = new Mailer();

@@ -657,327 +657,7 @@ class ttReportHelper {
   }
 
   // prepareReportBody - prepares an email body for report.
-  static function prepareReportBody($bean, $options, $comment)
-  {
-    global $user;
-    global $i18n;
-
-    // Determine these once as they are used in multiple places in this function.
-    $canViewReports = $user->can('view_reports') || $user->can('view_all_reports');
-    $isClient = $user->isClient();
-
-    $items = ttReportHelper::getItems($options);
-    $group_by = $options['group_by'];
-    if ($group_by && 'no_grouping' != $group_by)
-      $subtotals = ttReportHelper::getSubtotals($options);
-    $totals = ttReportHelper::getTotals($options);
-
-    // Use custom fields plugin if it is enabled.
-    if ($user->isPluginEnabled('cf'))
-      $custom_fields = new CustomFields($user->group_id);
-
-    // Define some styles to use in email.
-    $style_title = 'text-align: center; font-size: 15pt; font-family: Arial, Helvetica, sans-serif;';
-    $tableHeader = 'font-weight: bold; background-color: #a6ccf7; text-align: left;';
-    $tableHeaderCentered = 'font-weight: bold; background-color: #a6ccf7; text-align: center;';
-    $rowItem = 'background-color: #ffffff;';
-    $rowItemAlt = 'background-color: #f5f5f5;';
-    $rowSubtotal = 'background-color: #e0e0e0;';
-    $cellLeftAligned = 'text-align: left; vertical-align: top;';
-    $cellRightAligned = 'text-align: right; vertical-align: top;';
-    $cellLeftAlignedSubtotal = 'font-weight: bold; text-align: left; vertical-align: top;';
-    $cellRightAlignedSubtotal = 'font-weight: bold; text-align: right; vertical-align: top;';
-
-    // Start creating email body.
-    $body = '<html>';
-    $body .= '<head><meta http-equiv="content-type" content="text/html; charset='.CHARSET.'"></head>';
-    $body .= '<body>';
-
-    // Output title.
-    $body .= '<p style="'.$style_title.'">'.$i18n->get('form.mail.report_subject').': '.$totals['start_date'].' - '.$totals['end_date'].'</p>';
-
-    // Output comment.
-    if ($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>';
-
-    if ($options['show_totals_only']) {
-      // Totals only report. Output subtotals.
-
-      // Determine group_by header.
-      if ('cf_1' == $group_by)
-        $group_by_header = htmlspecialchars($custom_fields->fields[0]['label']);
-      else {
-        $key = 'label.'.$group_by;
-        $group_by_header = $i18n->get($key);
-      }
-
-      $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
-      $body .= '<tr>';
-      $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
-      if ($options['show_duration'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
-      if ($options['show_work_units'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.work_units_short').'</td>';
-      if ($options['show_cost'])
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
-      $body .= '</tr>';
-      foreach($subtotals as $subtotal) {
-        $body .= '<tr style="'.$rowSubtotal.'">';
-        $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($subtotal['name'] ? htmlspecialchars($subtotal['name']) : '&nbsp;').'</td>';
-        if ($options['show_duration']) {
-          $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-          if ($subtotal['time'] <> '0:00') $body .= $subtotal['time'];
-          $body .= '</td>';
-        }
-        if ($options['show_work_units']) {
-          $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-          $body .= $subtotal['units'];
-          $body .= '</td>';
-        }
-        if ($options['show_cost']) {
-          $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-          $body .= ($canViewReports || $isClient) ? $subtotal['cost'] : $subtotal['expenses'];
-          $body .= '</td>';
-        }
-        $body .= '</tr>';
-      }
-
-// TODO: refactoring ongoing down from here...
-
-
-
-
-      // Print totals.
-      $body .= '<tr><td>&nbsp;</td></tr>';
-      $body .= '<tr style="'.$rowSubtotal.'">';
-      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.total').'</td>';
-      if ($bean->getAttribute('chduration')) {
-        $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-        if ($totals['time'] <> '0:00') $body .= $totals['time'];
-        $body .= '</td>';
-      }
-      if ($bean->getAttribute('chunits')) {
-        $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-        $body .= $totals['units'];
-        $body .= '</td>';
-      }
-      if ($bean->getAttribute('chcost')) {
-        $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
-        $body .= ($canViewReports || $isClient) ? $totals['cost'] : $totals['expenses'];
-        $body .= '</td>';
-      }
-      $body .= '</tr>';
-
-      $body .= '</table>';
-    } else {
-      // Regular report.
-
-      // Print table header.
-      $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
-      $body .= '<tr>';
-      $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.date').'</td>';
-      if ($canViewReports || $isClient)
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.user').'</td>';
-      if ($bean->getAttribute('chclient'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.client').'</td>';
-      if ($bean->getAttribute('chproject'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.project').'</td>';
-      if ($bean->getAttribute('chtask'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.task').'</td>';
-      if ($bean->getAttribute('chcf_1'))
-        $body .= '<td style="'.$tableHeader.'">'.htmlspecialchars($custom_fields->fields[0]['label']).'</td>';
-      if ($bean->getAttribute('chstart'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.start').'</td>';
-      if ($bean->getAttribute('chfinish'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.finish').'</td>';
-      if ($bean->getAttribute('chduration'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
-      if ($bean->getAttribute('chunits'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.work_units_short').'</td>';
-      if ($bean->getAttribute('chnote'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.note').'</td>';
-      if ($bean->getAttribute('chcost'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
-      if ($bean->getAttribute('chpaid'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.paid').'</td>';
-      if ($bean->getAttribute('chip'))
-        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.ip').'</td>';
-      if ($bean->getAttribute('chinvoice'))
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.invoice').'</td>';
-      $body .= '</tr>';
-
-      // Initialize variables to print subtotals.
-      if ($items && 'no_grouping' != $group_by) {
-        $print_subtotals = true;
-        $first_pass = true;
-        $prev_grouped_by = '';
-        $cur_grouped_by = '';
-      }
-      // Initialize variables to alternate color of rows for different dates.
-      $prev_date = '';
-      $cur_date = '';
-      $row_style = $rowItem;
-
-      // Print report items.
-      if (is_array($items)) {
-        foreach ($items as $record) {
-          $cur_date = $record['date'];
-          // Print a subtotal row after a block of grouped items.
-          if ($print_subtotals) {
-            $cur_grouped_by = $record['grouped_by'];
-            if ($cur_grouped_by != $prev_grouped_by && !$first_pass) {
-              $body .= '<tr style="'.$rowSubtotal.'">';
-              $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
-              $subtotal_name = htmlspecialchars($subtotals[$prev_grouped_by]['name']);
-              if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
-              if ($bean->getAttribute('chclient')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
-              if ($bean->getAttribute('chproject')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
-              if ($bean->getAttribute('chtask')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
-              if ($bean->getAttribute('chcf_1')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'cf_1' ? $subtotal_name : '').'</td>';
-              if ($bean->getAttribute('chstart')) $body .= '<td></td>';
-              if ($bean->getAttribute('chfinish')) $body .= '<td></td>';
-              if ($bean->getAttribute('chduration')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['time'].'</td>';
-              if ($bean->getAttribute('chunits')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['units'].'</td>';
-              if ($bean->getAttribute('chnote')) $body .= '<td></td>';
-              if ($bean->getAttribute('chcost')) {
-                $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-                $body .= ($canViewReports || $isClient) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
-                $body .= '</td>';
-              }
-              if ($bean->getAttribute('chpaid')) $body .= '<td></td>';
-              if ($bean->getAttribute('chip')) $body .= '<td></td>';
-              if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
-              $body .= '</tr>';
-              $body .= '<tr><td>&nbsp;</td></tr>';
-            }
-            $first_pass = false;
-          }
-
-          // Print a regular row.
-          if ($cur_date != $prev_date)
-            $row_style = ($row_style == $rowItem) ? $rowItemAlt : $rowItem;
-          $body .= '<tr style="'.$row_style.'">';
-          $body .= '<td style="'.$cellLeftAligned.'">'.$record['date'].'</td>';
-          if ($canViewReports || $isClient)
-            $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['user']).'</td>';
-          if ($bean->getAttribute('chclient'))
-            $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['client']).'</td>';
-          if ($bean->getAttribute('chproject'))
-            $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['project']).'</td>';
-          if ($bean->getAttribute('chtask'))
-            $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['task']).'</td>';
-          if ($bean->getAttribute('chcf_1'))
-            $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['cf_1']).'</td>';
-          if ($bean->getAttribute('chstart'))
-            $body .= '<td nowrap style="'.$cellRightAligned.'">'.$record['start'].'</td>';
-          if ($bean->getAttribute('chfinish'))
-            $body .= '<td nowrap style="'.$cellRightAligned.'">'.$record['finish'].'</td>';
-          if ($bean->getAttribute('chduration'))
-            $body .= '<td style="'.$cellRightAligned.'">'.$record['duration'].'</td>';
-          if ($bean->getAttribute('chunits'))
-            $body .= '<td style="'.$cellRightAligned.'">'.$record['units'].'</td>';
-          if ($bean->getAttribute('chnote'))
-            $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['note']).'</td>';
-          if ($bean->getAttribute('chcost'))
-            $body .= '<td style="'.$cellRightAligned.'">'.$record['cost'].'</td>';
-          if ($bean->getAttribute('chpaid')) {
-            $body .= '<td style="'.$cellRightAligned.'">';
-            $body .= $record['paid'] == 1 ? $i18n->get('label.yes') : $i18n->get('label.no');
-            $body .= '</td>';
-          }
-          if ($bean->getAttribute('chip')) {
-            $body .= '<td style="'.$cellRightAligned.'">';
-            $body .= $record['modified'] ? $record['modified_ip'].' '.$record['modified'] : $record['created_ip'].' '.$record['created'];
-            $body .= '</td>';
-          }
-          if ($bean->getAttribute('chinvoice'))
-            $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['invoice']).'</td>';
-          $body .= '</tr>';
-
-          $prev_date = $record['date'];
-          if ($print_subtotals)
-            $prev_grouped_by = $record['grouped_by'];
-        }
-      }
-
-      // Print a terminating subtotal.
-      if ($print_subtotals) {
-        $body .= '<tr style="'.$rowSubtotal.'">';
-        $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
-        $subtotal_name = htmlspecialchars($subtotals[$cur_grouped_by]['name']);
-        if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
-        if ($bean->getAttribute('chclient')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
-        if ($bean->getAttribute('chproject')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
-        if ($bean->getAttribute('chtask')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
-        if ($bean->getAttribute('chcf_1')) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'cf_1' ? $subtotal_name : '').'</td>';
-        if ($bean->getAttribute('chstart')) $body .= '<td></td>';
-        if ($bean->getAttribute('chfinish')) $body .= '<td></td>';
-        if ($bean->getAttribute('chduration')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['time'].'</td>';
-        if ($bean->getAttribute('chunits')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['units'].'</td>';
-        if ($bean->getAttribute('chnote')) $body .= '<td></td>';
-        if ($bean->getAttribute('chcost')) {
-          $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
-          $body .= ($canViewReports || $isClient) ? $subtotals[$cur_grouped_by]['cost'] : $subtotals[$cur_grouped_by]['expenses'];
-          $body .= '</td>';
-        }
-        if ($bean->getAttribute('chpaid')) $body .= '<td></td>';
-        if ($bean->getAttribute('chip')) $body .= '<td></td>';
-        if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
-        $body .= '</tr>';
-      }
-
-      // Print totals.
-      $body .= '<tr><td>&nbsp;</td></tr>';
-      $body .= '<tr style="'.$rowSubtotal.'">';
-      $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.total').'</td>';
-      if ($canViewReports || $isClient) $body .= '<td></td>';
-      if ($bean->getAttribute('chclient')) $body .= '<td></td>';
-      if ($bean->getAttribute('chproject')) $body .= '<td></td>';
-      if ($bean->getAttribute('chtask')) $body .= '<td></td>';
-      if ($bean->getAttribute('chcf_1')) $body .= '<td></td>';
-      if ($bean->getAttribute('chstart')) $body .= '<td></td>';
-      if ($bean->getAttribute('chfinish')) $body .= '<td></td>';
-      if ($bean->getAttribute('chduration')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['time'].'</td>';
-      if ($bean->getAttribute('chunits')) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['units'].'</td>';
-      if ($bean->getAttribute('chnote')) $body .= '<td></td>';
-      if ($bean->getAttribute('chcost')) {
-        $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
-        $body .= ($canViewReports || $isClient) ? $totals['cost'] : $totals['expenses'];
-        $body .= '</td>';
-      }
-      if ($bean->getAttribute('chpaid')) $body .= '<td></td>';
-      if ($bean->getAttribute('chip')) $body .= '<td></td>';
-      if ($bean->getAttribute('chinvoice')) $body .= '<td></td>';
-      $body .= '</tr>';
-
-      $body .= '</table>';
-    }
-
-    // Output footer.
-    if (!defined('REPORT_FOOTER') || !(REPORT_FOOTER == false))
-      $body .= '<p style="text-align: center;">'.$i18n->get('form.mail.footer').'</p>';
-
-    // Finish creating email body.
-    $body .= '</body></html>';
-
-    return $body;
-  }
-
-  // checkFavReportCondition - checks whether it is okay to send fav report.
-  static function checkFavReportCondition($options, $condition)
-  {
-    $items = ttReportHelper::getItems($options);
-
-    $condition = str_replace('count', '', $condition);
-    $count_required = (int) trim(str_replace('>', '', $condition));
-
-    if (count($items) > $count_required)
-      return true; // Condition ok.
-
-    return false;
-  }
-
-  // prepareFavReportBody - prepares an email body for a favorite report.
-  static function prepareFavReportBody($options, $comment = null)
+  static function prepareReportBody($options, $comment = null)
   {
     global $user;
     global $i18n;
@@ -1277,6 +957,20 @@ class ttReportHelper {
     return $body;
   }
 
+  // checkFavReportCondition - checks whether it is okay to send fav report.
+  static function checkFavReportCondition($options, $condition)
+  {
+    $items = ttReportHelper::getItems($options);
+
+    $condition = str_replace('count', '', $condition);
+    $count_required = (int) trim(str_replace('>', '', $condition));
+
+    if (count($items) > $count_required)
+      return true; // Condition ok.
+
+    return false;
+  }
+
   // sendFavReport - sends a favorite report to a specified email, called from cron.php
   static function sendFavReport($options, $subject, $email, $cc) {
     // We are called from cron.php, we have no $bean in session.
@@ -1285,7 +979,7 @@ class ttReportHelper {
     global $i18n;
 
     // Prepare report body.
-    $body = ttReportHelper::prepareFavReportBody($options);
+    $body = ttReportHelper::prepareReportBody($options);
 
     import('mail.Mailer');
     $mailer = new Mailer();
