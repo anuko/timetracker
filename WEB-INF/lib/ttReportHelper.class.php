@@ -657,7 +657,7 @@ class ttReportHelper {
   }
 
   // prepareReportBody - prepares an email body for report.
-  static function prepareReportBody($bean, $comment)
+  static function prepareReportBody($bean, $options, $comment)
   {
     global $user;
     global $i18n;
@@ -665,10 +665,9 @@ class ttReportHelper {
     // Determine these once as they are used in multiple places in this function.
     $canViewReports = $user->can('view_reports') || $user->can('view_all_reports');
     $isClient = $user->isClient();
-    $options = ttReportHelper::getReportOptions($bean);
 
     $items = ttReportHelper::getItems($options);
-    $group_by = $bean->getAttribute('group_by');
+    $group_by = $options['group_by'];
     if ($group_by && 'no_grouping' != $group_by)
       $subtotals = ttReportHelper::getSubtotals($options);
     $totals = ttReportHelper::getTotals($options);
@@ -699,6 +698,8 @@ class ttReportHelper {
 
     // Output comment.
     if ($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>';
+
+// TODO: refactoring ongoing down from here...
 
     if ($bean->getAttribute('chtotalsonly')) {
       // Totals only report. Output subtotals.
@@ -973,7 +974,7 @@ class ttReportHelper {
   }
 
   // prepareFavReportBody - prepares an email body for a favorite report.
-  static function prepareFavReportBody($options)
+  static function prepareFavReportBody($options, $comment = null)
   {
     global $user;
     global $i18n;
@@ -1013,7 +1014,7 @@ class ttReportHelper {
     $body .= '<p style="'.$style_title.'">'.$i18n->get('form.mail.report_subject').': '.$totals['start_date'].' - '.$totals['end_date'].'</p>';
 
     // Output comment.
-    // if ($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>'; // No comment for fav. reports.
+    if ($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>';
 
     if ($options['show_totals_only']) {
       // Totals only report. Output subtotals.
