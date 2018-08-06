@@ -699,9 +699,7 @@ class ttReportHelper {
     // Output comment.
     if ($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>';
 
-// TODO: refactoring ongoing down from here...
-
-    if ($bean->getAttribute('chtotalsonly')) {
+    if ($options['show_totals_only']) {
       // Totals only report. Output subtotals.
 
       // Determine group_by header.
@@ -715,33 +713,38 @@ class ttReportHelper {
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
       $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
-      if ($bean->getAttribute('chduration'))
+      if ($options['show_duration'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
-      if ($bean->getAttribute('chunits'))
+      if ($options['show_work_units'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.work_units_short').'</td>';
-      if ($bean->getAttribute('chcost'))
+      if ($options['show_cost'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
       $body .= '</tr>';
       foreach($subtotals as $subtotal) {
         $body .= '<tr style="'.$rowSubtotal.'">';
         $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($subtotal['name'] ? htmlspecialchars($subtotal['name']) : '&nbsp;').'</td>';
-        if ($bean->getAttribute('chduration')) {
+        if ($options['show_duration']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
           if ($subtotal['time'] <> '0:00') $body .= $subtotal['time'];
           $body .= '</td>';
         }
-        if ($bean->getAttribute('chunits')) {
+        if ($options['show_work_units']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
           $body .= $subtotal['units'];
           $body .= '</td>';
         }
-        if ($bean->getAttribute('chcost')) {
+        if ($options['show_cost']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
           $body .= ($canViewReports || $isClient) ? $subtotal['cost'] : $subtotal['expenses'];
           $body .= '</td>';
         }
         $body .= '</tr>';
       }
+
+// TODO: refactoring ongoing down from here...
+
+
+
 
       // Print totals.
       $body .= '<tr><td>&nbsp;</td></tr>';
