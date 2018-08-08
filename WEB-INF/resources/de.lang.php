@@ -44,11 +44,9 @@ $i18n_key_words = array(
 'menu.logout' => 'Abmelden',
 'menu.forum' => 'Forum',
 'menu.help' => 'Hilfe',
-// TODO: translate the following.
-// 'menu.create_group' => 'Create Group',
+'menu.create_group' => 'Erstelle Gruppe',
 'menu.profile' => 'Profil',
-// TODO: translate the following.
-// 'menu.group' => 'Group',
+'menu.group' => 'Gruppe',
 'menu.time' => 'Zeiten',
 'menu.expenses' => 'Kosten',
 'menu.reports' => 'Berichte',
@@ -56,8 +54,7 @@ $i18n_key_words = array(
 'menu.projects' => 'Projekte',
 'menu.tasks' => 'Aufgaben',
 'menu.users' => 'Personen',
-// TODO: translate the following.
-// 'menu.groups' => 'Groups',
+'menu.groups' => 'Gruppen',
 'menu.export' => 'Exportieren',
 'menu.clients' => 'Kunden',
 'menu.options' => 'Optionen',
@@ -126,7 +123,7 @@ $i18n_key_words = array(
 'button.stop' => 'Stop',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-'label.group_name' => 'Teamname', // TODO: replace "team" with "group".
+'label.group_name' => 'Gruppenname', // TODO: replace "team" with "group".
 'label.address' => 'Adresse',
 'label.currency' => 'Währung',
 'label.manager_name' => 'Manager Name',
@@ -256,11 +253,10 @@ $i18n_key_words = array(
 'title.add_user' => 'Benutzerkonto erstellen',
 'title.edit_user' => 'Benutzerdaten bearbeiten',
 'title.delete_user' => 'Benutzer löschen',
-// TODO: translate the following.
-// 'title.roles' => 'Roles',
-// 'title.add_role' => 'Adding Role',
-// 'title.edit_role' => 'Editing Role',
-// 'title.delete_role' => 'Deleting Role',
+'title.roles' => 'Rolle',
+'title.add_role' => 'Rolle hinzufügen',
+'title.edit_role' => 'Rolle bearbeiten',
+'title.delete_role' => 'Rolle löschen',
 'title.clients' => 'Kunden',
 'title.add_client' => 'Kunden hinzufügen',
 'title.edit_client' => 'Kunden bearbeiten',
@@ -278,8 +274,7 @@ $i18n_key_words = array(
 'title.import' => 'Daten importieren',
 'title.options' => 'Optionen',
 'title.profile' => 'Profil',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
+'title.group' => 'Gruppeneinstellungen',
 'title.cf_custom_fields' => 'Benutzerfelder',
 'title.cf_add_custom_field' => 'Benutzerfeld hinzufügen',
 'title.cf_edit_custom_field' => 'Benutzerfeld bearbeiten',
@@ -290,7 +285,7 @@ $i18n_key_words = array(
 'title.cf_delete_dropdown_option' => 'Auswahlmöglichkeit löschen',
 'title.locking' => 'Sperren',
 // TODO: translate the following.
-// 'title.week_view' => 'Week View',
+'title.week_view' => 'Wochenansicht',
 // 'title.swap_roles' => 'Swapping Roles',
 // 'title.work_units' => 'Work Units',
 
@@ -440,26 +435,24 @@ $i18n_key_words = array(
 'form.client.client_entries' => 'Kundeneintrag',
 
 // Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
-// TODO: replace "team" with "group" in the string below.
-'form.export.hint' => 'Sie können alle Teamdaten in eine XML-Datei exportieren. Diese können in andere Zeiterfassungs-Programme importiert werden.',
+'form.export.hint' => 'Sie können alle Gruppendaten in eine XML-Datei exportieren. Diese können in andere Zeiterfassungs-Programme importiert werden.',
 'form.export.compression' => 'Kompression',
 'form.export.compression_none' => 'Keine',
 'form.export.compression_bzip' => 'bzip',
 
 // Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
-'form.import.hint' => 'Teamdaten von einer XML-Datei importieren.', // TODO: replace "team" with "group".
+'form.import.hint' => 'Gruppendaten von einer XML-Datei importieren.',
 'form.import.file' => 'Datei auswählen',
 'form.import.success' => 'Import erfolgreich abgeschlossen.',
 
 // Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
-// TODO: replace "team" with "group" in the string below.
-'form.groups.hint' => 'Das Erzeugen eines neuen Manager Kontos, erzeugt eine neues Team.<br>Diese Teams können auch von XML-Dateien importiert werden.',
+'form.groups.hint' => 'Das Erzeugen eines neuen Manager Kontos, erzeugt eine neue Gruppe.<br>Diese Gruppen können auch von XML-Dateien importiert werden.',
 
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 'form.group_edit.12_hours' => '12 Stunden',
 'form.group_edit.24_hours' => '24 Stunden',
 // TODO: translate the following.
-// 'form.group_edit.show_holidays' => 'Show holidays',
+'form.group_edit.show_holidays' => 'Zeige Feiertage',
 'form.group_edit.tracking_mode' => 'Nachverfolgung',
 'form.group_edit.mode_time' => 'Zeit',
 'form.group_edit.mode_projects' => 'Projekte',
@@ -469,11 +462,11 @@ $i18n_key_words = array(
 'form.group_edit.type_start_finish' => 'Start und Ende',
 'form.group_edit.type_duration' => 'Dauer',
 // TODO: translate the following.
-// 'form.group_edit.punch_mode' => 'Punch mode',
+'form.group_edit.punch_mode' => 'Stechuhr-Modus',
 // 'form.group_edit.allow_overlap' => 'Allow overlap',
 // 'form.group_edit.future_entries' => 'Future entries',
 // 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
-// 'form.group_edit.allow_ip' => 'Allow IP',
+'form.group_edit.allow_ip' => 'Erlaube IP',
 'form.group_edit.plugins' => 'Erweiterungen',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
@@ -490,9 +483,9 @@ $i18n_key_words = array(
 
 // Quotas configuration form. See example at https://timetracker.anuko.com/quotas.php after enabling Monthly quotas plugin.
 // TODO: translate the following.
-// 'form.quota.year' => 'Year',
-// 'form.quota.month' => 'Month',
-// 'form.quota.quota' => 'Quota',
+'form.quota.year' => 'Jahr',
+'form.quota.month' => 'Monat',
+'form.quota.quota' => 'Quote',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 
@@ -508,8 +501,8 @@ $i18n_key_words = array(
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 // TODO: translate the following.
-// 'role.user.label' => 'User',
-// 'role.user.low_case_label' => 'user',
+'role.user.label' => 'Benutzer',
+'role.user.low_case_label' => 'Benutzer',
 // 'role.user.description' => 'A regular member without management rights.',
 // 'role.client.label' => 'Client',
 // 'role.client.low_case_label' => 'client',
@@ -521,12 +514,12 @@ $i18n_key_words = array(
 // 'role.comanager.low_case_label' => 'co-manager',
 // 'role.comanager.description' => 'A person with a big set of management functions.',
 // 'role.manager.label' => 'Manager',
-// 'role.manager.low_case_label' => 'manager',
+// 'role.manager.low_case_label' => 'Manager',
 // 'role.manager.description' => 'Group manager. Can do most of things for a group.',
 // 'role.top_manager.label' => 'Top manager',
 // 'role.top_manager.low_case_label' => 'top manager',
 // 'role.top_manager.description' => 'Top group manager. Can do everything in a tree of groups.',
-// 'role.admin.label' => 'Administrator',
-// 'role.admin.low_case_label' => 'administrator',
+'role.admin.label' => 'Administrator',
+'role.admin.low_case_label' => 'Administrator',
 // 'role.admin.description' => 'Site adminsitrator.',
 );
