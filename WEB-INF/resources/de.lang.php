@@ -69,8 +69,7 @@ $i18n_key_words = array(
 'error.access_denied' => 'Zugriff verweigert.',
 'error.sys' => 'Systemfehler.',
 'error.db' => 'Datenbankfehler.',
-// TODO: translate the following.
-// 'error.feature_disabled' => 'Feature is disabled.',
+'error.feature_disabled' => 'Funktion ist deaktiviert.',
 'error.field' => 'Ungültige "{0}" Daten.',
 'error.empty' => 'Feld "{0}" ist leer.',
 'error.not_equal' => 'Feld "{0}" ist nicht gleich Feld "{1}".',
@@ -79,18 +78,15 @@ $i18n_key_words = array(
 'error.task' => 'Aufgabe auswählen.',
 'error.client' => 'Kunde auswählen.',
 'error.report' => 'Bericht auswählen.',
-// TODO: translate the following.
-// 'error.record' => 'Select record.',
+'error.record' => 'Eintrag auswählen.',
 'error.auth' => 'Benutzername oder Passwort ungültig.',
 'error.user_exists' => 'Benutzer mit diesem Konto ist bereits vorhanden.',
-// TODO: translate the following.
-// 'error.object_exists' => 'Object with this name already exists.',
+'error.object_exists' => 'Objekt mit diesem Namen ist bereits vorhanden.',
 'error.project_exists' => 'Es gibt bereits ein Projekt mit diesem Namen.',
 'error.task_exists' => 'Task mit diesem Namen existiert bereits.',
 'error.client_exists' => 'Der Kunde mit dem Namen existiert schon.',
 'error.invoice_exists' => 'Rechnung mit dieser Nummer existiert bereits.',
-// TODO: translate the following.
-// 'error.role_exists' => 'Role with this rank already exists.',
+'error.role_exists' => 'Rolle mit diesem Rang existiert bereits.',
 'error.no_invoiceable_items' => 'Keine Einträge zur Rechnungsstellung gefunden.',
 'error.no_login' => 'Benutzer mit diesen Anmeldedaten nicht vorhanden.',
 'error.no_groups' => 'Die Datenbank ist leer. Als Administrator anmelden und ein neues Team erzeugen.', // TODO: replace "team" with "group".
@@ -123,7 +119,7 @@ $i18n_key_words = array(
 'button.stop' => 'Stop',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-'label.group_name' => 'Gruppenname', // TODO: replace "team" with "group".
+'label.group_name' => 'Gruppenname',
 'label.address' => 'Adresse',
 'label.currency' => 'Währung',
 'label.manager_name' => 'Manager Name',
@@ -142,8 +138,7 @@ $i18n_key_words = array(
 'label.end_date' => 'Enddatum',
 'label.user' => 'Benutzer',
 'label.users' => 'Personen',
-// TODO: translate the following.
-// 'label.roles' => 'Roles',
+'label.roles' => 'Rollen',
 'label.client' => 'Kunde',
 'label.clients' => 'Kunden',
 'label.option' => 'Option',
@@ -160,8 +155,7 @@ $i18n_key_words = array(
 'label.notes' => 'Beschreibungen',
 'label.item' => 'Position',
 'label.cost' => 'Kosten',
-// TODO: translate the following.
-// 'label.ip' => 'IP',
+'label.ip' => 'IP',
 'label.day_total' => 'Summe (Tag)',
 'label.week_total' => 'Summe (Woche)',
 'label.month_total' => 'Summe (Monat)',
@@ -215,10 +209,10 @@ $i18n_key_words = array(
 'label.paid' => 'Bezahlt',
 'label.mark_paid' => 'Als bezahlt setzen',
 // TODO: translate the following.
-// 'label.week_note' => 'Week note',
-// 'label.week_list' => 'Week list',
-// 'label.work_units' => 'Work units',
-// 'label.work_units_short' => 'Units',
+'label.week_note' => 'Wochennotiz',
+'label.week_list' => 'Wochenliste',
+'label.work_units' => 'Arbeitseinheiten',
+'label.work_units_short' => 'Einheiten',
 'label.totals_only' => 'Nur Gesamtstunden',
 
 // Form titles.
@@ -284,10 +278,9 @@ $i18n_key_words = array(
 'title.cf_edit_dropdown_option' => 'Auswahlmöglichkeit bearbeiten',
 'title.cf_delete_dropdown_option' => 'Auswahlmöglichkeit löschen',
 'title.locking' => 'Sperren',
-// TODO: translate the following.
 'title.week_view' => 'Wochenansicht',
-// 'title.swap_roles' => 'Swapping Roles',
-// 'title.work_units' => 'Work Units',
+'title.swap_roles' => 'Tausche Rollen',
+'title.work_units' => 'Arbeitseinheiten',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -330,10 +323,7 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Anfrage zur Zurücksetzung des Passwortes wurde per E-mail gesendet.',
 'form.reset_password.email_subject' => 'Anuko Time Tracker Anfrage zur Zurücksetzung des Passwortes',
-// TODO: English string has changed. "from IP added. Re-translate the beginning.
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
-// "IP %s" probably sounds awkward.
-'form.reset_password.email_body' => "Sehr geehrter Nutzer,\n\nJemand, IP %s, sendete die Aufforderung Ihr Anuko Time Tracker Passwort zurückzusetzen. Bitte rufen Sie diesen Link auf wenn Sie Ihr Passwort zurücksetzen möchten.\n\n%s\n\nAnuko Time Tracker ist ein einfaches, leicht zu bedienendes, Open-Source Zeiterfassungs-System. Besuchen Sie https://www.anuko.com für weitere Informationen.\n\n",
+'form.reset_password.email_body' => "Sehr geehrte(r) Nutzer(in),\n\nEin Benutzer mit der IP %s hat vor Kurzem die Zurücksetzung Ihres Passworts für Anuko Time Tracker Passwort angefordert. Bitte rufen Sie diesen Link auf wenn Sie Ihr Passwort zurücksetzen möchten.\n\n%s\n\nAnuko Time Tracker ist ein einfaches, leicht zu bedienendes, Open-Source Zeiterfassungs-System. Besuchen Sie https://www.anuko.com für weitere Informationen.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Um das Passwort zurückzusetzen, geben Sie ein Neues ein und klicken dann auf Speichern.',
@@ -372,8 +362,7 @@ $i18n_key_words = array(
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Exportiere',
-// TODO: translate the following.
-// 'form.report.assign_to_invoice' => 'Assign to invoice',
+'form.report.assign_to_invoice' => 'Zu Rechnung hinzufügen',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
@@ -383,13 +372,7 @@ $i18n_key_words = array(
 // Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
 'form.invoice.invoice_to_delete' => 'Zu löschende Rechnung',
 'form.invoice.invoice_entries' => 'Rechnungseintrag',
-'form.invoice.confirm_deleting_entries' => 'Bitte die Löschung von Rechnungseinträgen bestätigen.',
-// TODO: consider improving translation of form.invoice.confirm_deleting_entries
-// This is a warning to user when they are deleting invoice entries.
-// They may believe they delete entries from the invoice only but keep the Time Tracker (reports, etc.).
-// What is really happening we delete entries from the system, so that they are no longer in reports, etc.
-// Original English wording is as follows.
-// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
+'form.invoice.confirm_deleting_entries' => 'Bitte bestätigen Sie, dass die Einträge der Rechnung aus dem gesamten System gelöscht werden sollen.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
 'form.charts.interval' => 'Zeitraum',
@@ -414,17 +397,15 @@ $i18n_key_words = array(
 'form.users.default_rate' => 'Normaler Stundensatz',
 
 // Editing User form. See example at https://timetracker.anuko.com/user_edit.php
-// TODO: translate the following.
-// 'form.user_edit.swap_roles' => 'Swap roles',
+'form.user_edit.swap_roles' => 'Rollen tauschen',
 
 // Roles form. See example at https://timetracker.anuko.com/roles.php
-// TODO: translate the following.
-// 'form.roles.active_roles' => 'Active Roles',
-// 'form.roles.inactive_roles' => 'Inactive Roles',
-// 'form.roles.rank' => 'Rank',
-// 'form.roles.rights' => 'Rights',
-// 'form.roles.assigned' => 'Assigned',
-// 'form.roles.not_assigned' => 'Not assigned',
+'form.roles.active_roles' => 'Aktive Rollen',
+'form.roles.inactive_roles' => 'Inaktive Rollen',
+'form.roles.rank' => 'Rang',
+'form.roles.rights' => 'Rechte',
+'form.roles.assigned' => 'Zugewiesen',
+'form.roles.not_assigned' => 'Nicht zugewiesen',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Aktive Kunden',
@@ -451,7 +432,6 @@ $i18n_key_words = array(
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 'form.group_edit.12_hours' => '12 Stunden',
 'form.group_edit.24_hours' => '24 Stunden',
-// TODO: translate the following.
 'form.group_edit.show_holidays' => 'Zeige Feiertage',
 'form.group_edit.tracking_mode' => 'Nachverfolgung',
 'form.group_edit.mode_time' => 'Zeit',
@@ -461,17 +441,15 @@ $i18n_key_words = array(
 'form.group_edit.type_all' => 'alle',
 'form.group_edit.type_start_finish' => 'Start und Ende',
 'form.group_edit.type_duration' => 'Dauer',
-// TODO: translate the following.
 'form.group_edit.punch_mode' => 'Stechuhr-Modus',
-// 'form.group_edit.allow_overlap' => 'Allow overlap',
-// 'form.group_edit.future_entries' => 'Future entries',
-// 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
+'form.group_edit.allow_overlap' => 'Erlaube Überschneidung',
+'form.group_edit.future_entries' => 'Einträge in der Zukunft',
+'form.group_edit.uncompleted_indicators' => 'Zeige unfertige Einträge',
 'form.group_edit.allow_ip' => 'Erlaube IP',
 'form.group_edit.plugins' => 'Erweiterungen',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
-// TODO: translate the following.
-// 'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
+'form.group_delete.hint' => 'Sind Sie sicher, dass Sie die gesamte Gruppe löschen möchten?',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'Von',
@@ -482,44 +460,40 @@ $i18n_key_words = array(
 'form.mail.invoice_sent' => 'Die Rechnung wurde gesendet.',
 
 // Quotas configuration form. See example at https://timetracker.anuko.com/quotas.php after enabling Monthly quotas plugin.
-// TODO: translate the following.
 'form.quota.year' => 'Jahr',
 'form.quota.month' => 'Monat',
 'form.quota.quota' => 'Quote',
-// 'form.quota.workday_hours' => 'Hours in work day',
-// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+'form.quota.workday_hours' => 'Arbeitsstunden pro Tag',
+'form.quota.hint' => 'Wenn leergelassen wird die Quote automatisch berechnet (Basierend auf Arbeitsstunden pro Tag und Feiertagen)',
 
 // Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
-// TODO: translate the following.
-// 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
-// 'form.swap.swap_with' => 'Swap roles with',
+'form.swap.hint' => 'Stufen Sie ihre Rolle auf eine niedrigere indem Sie mit jemadem die Rollen tauschen. Dies kann nicht rückgängig gemacht werden.',  
+'form.swap.swap_with' => 'Tausche Rolle mit',
 
 // Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
-// TODO: translate the following.
-// 'form.work_units.minutes_in_unit' => 'Minutes in unit',
-// 'form.work_units.1st_unit_threshold' => '1st unit threshold',
+'form.work_units.minutes_in_unit' => 'Minuten in einer Arbeitseinheit',
+'form.work_units.1st_unit_threshold' => 'Schwellenwert für erste Arbeitseinheit',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
-// TODO: translate the following.
 'role.user.label' => 'Benutzer',
 'role.user.low_case_label' => 'Benutzer',
-// 'role.user.description' => 'A regular member without management rights.',
-// 'role.client.label' => 'Client',
-// 'role.client.low_case_label' => 'client',
-// 'role.client.description' => 'A client can view its own reports, charts, and invoices.',
-// 'role.supervisor.label' => 'Supervisor',
-// 'role.supervisor.low_case_label' => 'supervisor',
-// 'role.supervisor.description' => 'A person with a small set of management rights.',
-// 'role.comanager.label' => 'Co-manager',
-// 'role.comanager.low_case_label' => 'co-manager',
-// 'role.comanager.description' => 'A person with a big set of management functions.',
-// 'role.manager.label' => 'Manager',
-// 'role.manager.low_case_label' => 'Manager',
-// 'role.manager.description' => 'Group manager. Can do most of things for a group.',
-// 'role.top_manager.label' => 'Top manager',
-// 'role.top_manager.low_case_label' => 'top manager',
-// 'role.top_manager.description' => 'Top group manager. Can do everything in a tree of groups.',
+'role.user.description' => 'Ein normaler Benutzer ohne Administrationsrechte.',
+'role.client.label' => 'Kunde',
+'role.client.low_case_label' => 'Kunde',
+'role.client.description' => 'Ein Kunde kann zu ihm gehörende Berichte, Diagramme und Rechnungen ansehen.',
+'role.supervisor.label' => 'Dienstvorgesetzter',
+'role.supervisor.low_case_label' => 'Dienstvorgesetzter',
+'role.supervisor.description' => 'Eine Person mit ein paar Administrationsrechten.',
+'role.comanager.label' => 'Co-Manager',
+'role.comanager.low_case_label' => 'Co-Manager',
+'role.comanager.description' => 'Ein Person mit vielen Administrationsrechten.',
+'role.manager.label' => 'Manager',
+'role.manager.low_case_label' => 'Manager',
+'role.manager.description' => 'Gruppen-Manager. Kann fast alles innerhalb einer Gruppe administrieren.',
+'role.top_manager.label' => 'Top-Manager',
+'role.top_manager.low_case_label' => 'Top-Manager',
+'role.top_manager.description' => 'Top Gruppen-Manager. Kann alles innerhalb eines Gruppenbaums administrieren',
 'role.admin.label' => 'Administrator',
 'role.admin.low_case_label' => 'Administrator',
-// 'role.admin.description' => 'Site adminsitrator.',
+'role.admin.description' => 'Aadminsitrator der Seite.',
 );
