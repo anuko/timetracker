@@ -89,7 +89,7 @@ $i18n_key_words = array(
 'error.role_exists' => 'Rolle mit diesem Rang existiert bereits.',
 'error.no_invoiceable_items' => 'Keine Einträge zur Rechnungsstellung gefunden.',
 'error.no_login' => 'Benutzer mit diesen Anmeldedaten nicht vorhanden.',
-'error.no_groups' => 'Die Datenbank ist leer. Als Administrator anmelden und ein neues Team erzeugen.', // TODO: replace "team" with "group".
+'error.no_groups' => 'Die Datenbank ist leer. Als Administrator anmelden und ein neues Gruppe erzeugen.',
 'error.upload' => 'Fehler beim hochladen einer Datei.',
 'error.range_locked' => 'Zeitinterval ist gesperrt.',
 'error.mail_send' => 'Fehler beim versenden einer E-Mail.',
@@ -208,7 +208,6 @@ $i18n_key_words = array(
 'label.paid_status' => 'Bezahlstatus',
 'label.paid' => 'Bezahlt',
 'label.mark_paid' => 'Als bezahlt setzen',
-// TODO: translate the following.
 'label.week_note' => 'Wochennotiz',
 'label.week_list' => 'Wochenliste',
 'label.work_units' => 'Arbeitseinheiten',
@@ -323,7 +322,7 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Anfrage zur Zurücksetzung des Passwortes wurde per E-mail gesendet.',
 'form.reset_password.email_subject' => 'Anuko Time Tracker Anfrage zur Zurücksetzung des Passwortes',
-'form.reset_password.email_body' => "Sehr geehrte(r) Nutzer(in),\n\nEin Benutzer mit der IP %s hat vor Kurzem die Zurücksetzung Ihres Passworts für Anuko Time Tracker Passwort angefordert. Bitte rufen Sie diesen Link auf wenn Sie Ihr Passwort zurücksetzen möchten.\n\n%s\n\nAnuko Time Tracker ist ein einfaches, leicht zu bedienendes, Open-Source Zeiterfassungs-System. Besuchen Sie https://www.anuko.com für weitere Informationen.\n\n",
+'form.reset_password.email_body' => "Sehr geehrter Nutzer,\n\nEin Benutzer mit der IP %s hat vor Kurzem die Zurücksetzung Ihres Passworts für Anuko Time Tracker Passwort angefordert. Bitte rufen Sie diesen Link auf wenn Sie Ihr Passwort zurücksetzen möchten.\n\n%s\n\nAnuko Time Tracker ist ein einfaches, leicht zu bedienendes, Open-Source Zeiterfassungs-System. Besuchen Sie https://www.anuko.com für weitere Informationen.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Um das Passwort zurückzusetzen, geben Sie ein Neues ein und klicken dann auf Speichern.',
