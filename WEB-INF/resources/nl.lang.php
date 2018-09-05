@@ -210,9 +210,8 @@ $i18n_key_words = array(
 'label.mark_paid' => 'Markeer als betaald',
 'label.week_note' => 'Week aantekening',
 'label.week_list' => 'Week overzicht',
-// TODO: translate the following.
-// 'label.work_units' => 'Work units',
-// 'label.work_units_short' => 'Units',
+'label.work_units' => 'Werk eenheid',
+'label.work_units_short' => 'Eenheid',
 'label.totals_only' => 'Alleen totalen',
 
 // Form titles.
@@ -284,8 +283,7 @@ $i18n_key_words = array(
 'title.locking' => 'Blokkeren',
 'title.week_view' => 'Week overzicht',
 'title.swap_roles' => 'Rollen verruilen',
-// TODO: translate the following.
-// 'title.work_units' => 'Work Units',
+'title.work_units' => 'Werk eenheid',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -476,9 +474,8 @@ $i18n_key_words = array(
 'form.swap.swap_with' => 'Verruil rol met',
 
 // Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
-// TODO: translate the following.
-// 'form.work_units.minutes_in_unit' => 'Minutes in unit',
-// 'form.work_units.1st_unit_threshold' => '1st unit threshold',
+'form.work_units.minutes_in_unit' => 'Minuten per eenheid',
+'form.work_units.1st_unit_threshold' => 'Drempel eerste eenheid',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 'role.user.label' => 'Gebruiker',
