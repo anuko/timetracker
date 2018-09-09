@@ -89,6 +89,9 @@
     {if $user->can('manage_basic_settings')}
             <a class="systemMenu" href="group_edit.php">{$i18n.menu.group}</a> &middot;
     {/if}
+    {if $user->can('manage_features')}
+            <a class="systemMenu" href="plugins.php">{$i18n.menu.plugins}</a> &middot;
+    {/if}
             <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a> &middot;
             <a class="systemMenu" href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a>
           </td>
