@@ -204,7 +204,7 @@ function handlePluginCheckboxes() {
           </tr>
 
           <tr>
-             <td colspan="2" class="sectionHeader">{$i18n.form.group_edit.plugins}</td>
+             <td colspan="2" class="sectionHeader">{$i18n.title.plugins}</td>
           </tr>
           <tr><td>&nbsp;</td></tr>
           <tr>

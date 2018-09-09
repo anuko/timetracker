@@ -47,8 +47,7 @@ $i18n_key_words = array(
 'menu.create_group' => 'Maak groep',
 'menu.profile' => 'Profiel',
 'menu.group' => 'Groep',
-// TODO: translate the following.
-// 'menu.plugins' => 'Plugins',
+'menu.plugins' => 'Plugins',
 'menu.time' => 'Tijden',
 'menu.expenses' => 'Kosten',
 'menu.reports' => 'Rapporten',
@@ -274,8 +273,7 @@ $i18n_key_words = array(
 'title.options' => 'Opties',
 'title.profile' => 'Profiel',
 'title.group' => 'Groep instelling',
-// TODO: translate the following.
-// 'title.plugins' => 'Plugins',
+'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Eigen velden',
 'title.cf_add_custom_field' => 'Eigen veld toevoegen',
 'title.cf_edit_custom_field' => 'Eigen veld bewerken',
@@ -453,7 +451,6 @@ $i18n_key_words = array(
 'form.group_edit.future_entries' => 'Toevoegingen toestaan in de toekomst',
 'form.group_edit.uncompleted_indicators' => 'Onvolledige indicatoren',
 'form.group_edit.allow_ip' => 'Toegestane IP adressen',
-'form.group_edit.plugins' => 'Plugins',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 'form.group_delete.hint' => 'Bent u er zeker van dat u de hele groep wilt verwijderen?',

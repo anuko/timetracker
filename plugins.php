@@ -146,6 +146,6 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="handlePluginCheckboxes();"');
-$smarty->assign('title', $i18n->get('form.group_edit.plugins')); // TODO: fix this in transl;ation files.
+$smarty->assign('title', $i18n->get('title.plugins'));
 $smarty->assign('content_page_name', 'plugins.tpl');
 $smarty->display('index.tpl');

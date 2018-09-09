@@ -49,7 +49,7 @@ $i18n_key_words = array(
 'menu.profile' => 'Profiili',
 // TODO: translate the following.
 // 'menu.group' => 'Group',
-// 'menu.plugins' => 'Plugins',
+'menu.plugins' => 'Lisäosat',
 'menu.time' => 'Tunnit',
 'menu.expenses' => 'Kulut',
 'menu.reports' => 'Raportit',
@@ -290,7 +290,7 @@ $i18n_key_words = array(
 'title.profile' => 'Profiili',
 // TODO: translate the following.
 // 'title.group' => 'Group Settings',
-// 'title.plugins' => 'Plugins',
+'title.plugins' => 'Lisäosat',
 'title.cf_custom_fields' => 'Omat kentät',
 'title.cf_add_custom_field' => 'Oman kentän lisäys',
 'title.cf_edit_custom_field' => 'Oman kentän muokkaus',
@@ -486,7 +486,6 @@ $i18n_key_words = array(
 // 'form.group_edit.future_entries' => 'Future entries',
 // 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
 // 'form.group_edit.allow_ip' => 'Allow IP',
-'form.group_edit.plugins' => 'Lisäosat',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.

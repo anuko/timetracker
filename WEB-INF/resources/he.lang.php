@@ -50,7 +50,7 @@ $i18n_key_words = array(
 'menu.profile' => 'פרופיל',
 // TODO: translate the following.
 // 'menu.group' => 'Group',
-// 'menu.plugins' => 'Plugins',
+'menu.plugins' => 'תוספים',
 'menu.time' => 'זמן',
 // TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
@@ -310,7 +310,7 @@ $i18n_key_words = array(
 'title.profile' => 'פרופיל',
 // TODO: translate the following.
 // 'title.group' => 'Group Settings',
-// 'title.plugins' => 'Plugins',
+'title.plugins' => 'תוספים',
 'title.cf_custom_fields' => 'שדות אישיים',
 'title.cf_add_custom_field' => 'הוספת שדה אישי',
 'title.cf_edit_custom_field' => 'עריכת שדה אישי',
@@ -512,7 +512,6 @@ $i18n_key_words = array(
 // 'form.group_edit.future_entries' => 'Future entries',
 // 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
 // 'form.group_edit.allow_ip' => 'Allow IP',
-'form.group_edit.plugins' => 'תוספים',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.

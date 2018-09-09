@@ -49,8 +49,7 @@ $i18n_key_words = array(
 'menu.create_group' => 'Crea gruppo',
 'menu.profile' => 'Profilo',
 'menu.group' => 'Gruppo',
-// TODO: translate the following.
-// 'menu.plugins' => 'Plugins',
+'menu.plugins' => 'Plugin',
 'menu.time' => 'Tempo',
 'menu.expenses' => 'Spese',
 'menu.reports' => 'Rapporti',
@@ -288,7 +287,7 @@ $i18n_key_words = array(
 'title.profile' => 'Profilo',
 // TODO: translate the following.
 // 'title.group' => 'Group Settings',
-// 'title.plugins' => 'Plugins',
+'title.plugins' => 'Plugin',
 'title.cf_custom_fields' => 'Campi personalizzati',
 'title.cf_add_custom_field' => 'Aggiunta campo personalizzato',
 'title.cf_edit_custom_field' => 'Modifica campo personalizzato',
@@ -475,7 +474,6 @@ $i18n_key_words = array(
 'form.group_edit.uncompleted_indicators' => 'Indicatori incompleti',
 // TODO: translate the following.
 // 'form.group_edit.allow_ip' => 'Allow IP',
-'form.group_edit.plugins' => 'Plugin',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.
