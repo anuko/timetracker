@@ -16,7 +16,7 @@ function handleTaskRequiredCheckbox() {
 }
 
 
-// handleControls - controls visibility of controls.
+// handlePluginCheckboxes - controls visibility of controls.
 function handlePluginCheckboxes() {
   var clientsCheckbox = document.getElementById("clients");
   var invoicesCheckbox = document.getElementById("invoices");
