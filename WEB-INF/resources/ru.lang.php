@@ -47,6 +47,7 @@ $i18n_key_words = array(
 'menu.create_group' => 'Создать группу',
 'menu.profile' => 'Профиль',
 'menu.group' => 'Группа',
+'menu.plugins' => 'Плагины',
 'menu.time' => 'Время',
 'menu.expenses' => 'Расходы',
 'menu.reports' => 'Отчёты',

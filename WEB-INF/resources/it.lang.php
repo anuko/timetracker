@@ -49,6 +49,8 @@ $i18n_key_words = array(
 'menu.create_group' => 'Crea gruppo',
 'menu.profile' => 'Profilo',
 'menu.group' => 'Gruppo',
+// TODO: translate the following.
+// 'menu.plugins' => 'Plugins',
 'menu.time' => 'Tempo',
 'menu.expenses' => 'Spese',
 'menu.reports' => 'Rapporti',
