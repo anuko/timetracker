@@ -67,33 +67,11 @@ while ($val = $res->fetchRow()) {
   if (!$user->id) continue; // Skip not found user.
 
   // TODO: write a new function ttFavReportHelper::adjustOptions that will use
-  // a $user objecte recycled above. Put user handling below into it.
+  // a $user object recycled above. Put user handling below into it.
   // Also adjust remaining options for potentially changed user access rights and group properties.
   // For example, tracking mode may have changed, but fav report options are still old...
   // This needs to be fixed.
-
-  // Special handling of the NULL $options['users'] field (this used to mean "all users").
-  if (!$options['users']) {
-    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
-      if ($user->can('view_reports') || $user->can('view_all_reports')) {
-        $max_rank = $user->rank-1;
-        if ($user->can('view_all_reports')) $max_rank = 512;
-        if ($user->can('view_own_reports'))
-          $user_options = array('max_rank'=>$max_rank,'include_self'=>true);
-        else
-          $user_options = array('max_rank'=>$max_rank);
-        $users = $user->getUsers($user_options); // Active and inactive users.
-      } elseif ($user->isClient()) {
-        $users = ttTeamHelper::getUsersForClient(); // Active and inactive users for clients.
-      }
-      foreach ($users as $single_user) {
-        $user_ids[] = $single_user['id'];
-      }
-      $options['users'] = implode(',', $user_ids);
-    }
-  } else {
-    // TODO: add checking the existing user list for potentially changed access rights for user.
-  }
+  $options = ttFavReportHelper::adjustOptions($options);
 
   // Skip users with disabled Notifications plugin.
   if (!$user->isPluginEnabled('no')) continue;

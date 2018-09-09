@@ -325,4 +325,50 @@ class ttFavReportHelper {
     // $options now is a subset of db fields from tt_fav_reports table.
     return $options;
   }
+
+  // adjustOptions takes and array or report options and adjusts them for current user
+  // (and group) settings. This is needed in situations when a fav report is stored in db
+  // long ago, but user or group attributes are now changed, so we have to adjust.
+  static function adjustOptions($options) {
+    global $user;
+
+    // Check and optionally adjust users.
+    // Special handling of the NULL $options['users'] field (this used to mean "all users").
+    if (!$options['users']) {
+      if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
+        if ($user->can('view_reports') || $user->can('view_all_reports')) {
+          $max_rank = $user->rank-1;
+          if ($user->can('view_all_reports')) $max_rank = 512;
+          if ($user->can('view_own_reports'))
+            $user_options = array('max_rank'=>$max_rank,'include_self'=>true);
+          else
+            $user_options = array('max_rank'=>$max_rank);
+          $users = $user->getUsers($user_options); // Active and inactive users.
+        } elseif ($user->isClient()) {
+          $users = ttTeamHelper::getUsersForClient(); // Active and inactive users for clients.
+        }
+        foreach ($users as $single_user) {
+          $user_ids[] = $single_user['id'];
+        }
+        $options['users'] = implode(',', $user_ids);
+      }
+    } else {
+      $users_to_adjust = explode(',', $options['users']); // Users to adjust.
+      if ($user->isClient()) {
+        $users = ttTeamHelper::getUsersForClient(); // Active and inactive users for clients.
+        foreach ($users as $single_user) {
+          $user_ids[] = $single_user['id'];
+        }
+        foreach ($users_to_adjust as $user_to_adjust) {
+          if (in_array($user_to_adjust['id'], $user_ids)) {
+            $adjusted_user_ids[] = $user_to_adjust['id'];
+          }
+        }
+        $options['users'] = implode(',', $adjusted_user_ids);
+      }
+      // TODO: add checking the existing user list for potentially changed access rights for user.
+    }
+
+    return $options;
+  }
 }
