@@ -270,6 +270,8 @@ $i18n_key_words = array(
 'title.options' => 'Optionen',
 'title.profile' => 'Profil',
 'title.group' => 'Gruppeneinstellungen',
+// TODO: translate the followwing.
+// 'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Benutzerfelder',
 'title.cf_add_custom_field' => 'Benutzerfeld hinzufügen',
 'title.cf_edit_custom_field' => 'Benutzerfeld bearbeiten',

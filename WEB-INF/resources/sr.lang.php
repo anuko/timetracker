@@ -288,6 +288,7 @@ $i18n_key_words = array(
 'title.profile' => 'Profil',
 // TODO: translate the following.
 // 'title.group' => 'Group Settings',
+// 'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Dodatna polja',
 'title.cf_add_custom_field' => 'Dodavanje dodatnih polja',
 'title.cf_edit_custom_field' => 'Izmena dodatnih polja',
