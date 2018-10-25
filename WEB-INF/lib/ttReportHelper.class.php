@@ -967,11 +967,14 @@ class ttReportHelper {
     $greater_or_equal = ttStartsWith($condition, '>=');
     if ($greater_or_equal) $condition = trim(str_replace('>=', '', $condition));
 
-    $greater = ttStartsWith($condition, '>');
-    if ($greater) $condition = trim(str_replace('>', '', $condition));
-
     $less_or_equal = ttStartsWith($condition, '<=');
     if ($less_or_equal) $condition = trim(str_replace('<=', '', $condition));
+
+    $not_equal = ttStartsWith($condition, '<>');
+    if ($not_equal) $condition = trim(str_replace('<>', '', $condition));
+
+    $greater = ttStartsWith($condition, '>');
+    if ($greater) $condition = trim(str_replace('>', '', $condition));
 
     $less = ttStartsWith($condition, '<');
     if ($less) $condition = trim(str_replace('<', '', $condition));
@@ -986,6 +989,7 @@ class ttReportHelper {
     if ($less && count($items) < $count_required) return true;
     if ($less_or_equal && count($items) <= $count_required) return true;
     if ($equal && count($items) == $count_required) return true;
+    if ($not_equal && count($items) <> $count_required) return true;
 
     return false;
   }
