@@ -962,11 +962,30 @@ class ttReportHelper {
   {
     $items = ttReportHelper::getItems($options);
 
-    $condition = str_replace('count', '', $condition);
-    $count_required = (int) trim(str_replace('>', '', $condition));
+    $condition = trim(str_replace('count', '', $condition));
 
-    if (count($items) > $count_required)
-      return true; // Condition ok.
+    $greater_or_equal = ttStartsWith($condition, '>=');
+    if ($greater_or_equal) $condition = trim(str_replace('>=', '', $condition));
+
+    $greater = ttStartsWith($condition, '>');
+    if ($greater) $condition = trim(str_replace('>', '', $condition));
+
+    $less_or_equal = ttStartsWith($condition, '<=');
+    if ($less_or_equal) $condition = trim(str_replace('<=', '', $condition));
+
+    $less = ttStartsWith($condition, '<');
+    if ($less) $condition = trim(str_replace('<', '', $condition));
+
+    $equal = ttStartsWith($condition, '=');
+    if ($equal) $condition = trim(str_replace('=', '', $condition));
+
+    $count_required = (int) $condition;
+
+    if ($greater && count($items) > $count_required) return true;
+    if ($greater_or_equal && count($items) >= $count_required) return true;
+    if ($less && count($items) < $count_required) return true;
+    if ($less_or_equal && count($items) <= $count_required) return true;
+    if ($equal && count($items) == $count_required) return true;
 
     return false;
   }

@@ -319,7 +319,7 @@ function ttValidCondition($val, $emptyValid = true)
   if (stristr($val, '<script>') || stristr($val, '<script '))
     return false;
 
-  if (!preg_match("/^count\s?>\s?\d+$/", $val))
+  if (!preg_match("/^count\s?(=|[<>]=?)\s?\d+$/", $val))
     return false;
 
   return true;
@@ -382,4 +382,11 @@ function ttAccessAllowed($required_right)
   }
 
   return false;
+}
+
+// ttStartsWith functions checks if a string starts with a given substring.
+function ttStartsWith($string, $startString)
+{
+    $len = strlen($startString);
+    return (substr($string, 0, $len) === $startString);
 }
