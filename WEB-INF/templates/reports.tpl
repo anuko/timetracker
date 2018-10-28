@@ -296,10 +296,15 @@ function handleCheckboxes() {
           </td>
         </tr>
         <tr>
-          <td><b>{$i18n.form.reports.group_by}</b></td>
+            <td><b>{$i18n.form.reports.group_by}</b></td>
         </tr>
         <tr valign="top">
-          <td>{$forms.reportForm.group_by.control} <label>{$forms.reportForm.chtotalsonly.control} {$i18n.label.totals_only}</label></td>
+          <td>{$forms.reportForm.group_by.control}</td>
+          <td>{$forms.reportForm.group_by2.control}</td>
+          <td>{$forms.reportForm.group_by3.control}</td>
+        </tr>
+        <tr>
+          <td><label>{$forms.reportForm.chtotalsonly.control} {$i18n.label.totals_only}</label></td>
         </tr>
       </table>
 
