@@ -94,6 +94,8 @@ $i18n_key_words = array(
 'error.upload' => 'Fout bij het uploaden van het bestand.',
 'error.range_locked' => 'Datums zijn geblokkeerd.',
 'error.mail_send' => 'Fout bij het versturen van een e-mailbericht.',
+// TODO: improve the translation above bv adding MAIL_SMTP_DEBUG part.
+// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Geen e-mailadres bekend voor dit account.',
 'error.uncompleted_exists' => 'Niet afgeronde invoer bestaat al. Sluit of verwijder deze.',
 'error.goto_uncompleted' => 'Ga naar onvolledige invoer.',

@@ -109,6 +109,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => '發送郵件時出錯。',
+// TODO: improve the translation above bv adding MAIL_SMTP_DEBUG part.
+// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => '沒有電子郵件與該用戶名關聯。',
 // TODO: translate the following.
 // 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',

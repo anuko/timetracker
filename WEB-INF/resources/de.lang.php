@@ -94,6 +94,8 @@ $i18n_key_words = array(
 'error.upload' => 'Fehler beim hochladen einer Datei.',
 'error.range_locked' => 'Zeitinterval ist gesperrt.',
 'error.mail_send' => 'Fehler beim versenden einer E-Mail.',
+// TODO: improve the translation above bv adding MAIL_SMTP_DEBUG part.
+// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Dieser Benutzer besitzt keine e-Mail Adresse.',
 'error.uncompleted_exists' => 'Unvollständiger Eintrag bereits vorhanden. Schließen oder Löschen.',
 'error.goto_uncompleted' => 'Zum unvollständigen Eintrag gehen.',

@@ -101,6 +101,8 @@ $i18n_key_words = array(
 'error.upload' => 'Erreur de chargement du fichier.',
 'error.range_locked' => 'Plage de date vérouillée.',
 'error.mail_send' => 'Erreur lors de l\\\'envoi du courriel.',
+// TODO: improve the translation above bv adding MAIL_SMTP_DEBUG part.
+// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Aucune adresse courriel n\\\'est associée à cet identifiant.',
 'error.uncompleted_exists' => 'Une entrée non terminée existe déjà. Fermer ou supprimer.',
 'error.goto_uncompleted' => 'Aller à l\\\'entrée non terminée.',

@@ -99,6 +99,8 @@ $i18n_key_words = array(
 'error.upload' => 'Ett fel uppstod när filen laddades upp.',
 'error.range_locked' => 'Datumintervallet är låst.',
 'error.mail_send' => 'Ett fel uppstod när när e-postmeddelandet skulle skickas.',
+// TODO: improve the translation above bv adding MAIL_SMTP_DEBUG part.
+// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Det finns ingen e-postadress kopplad till det här användarnamnet.',
 'error.uncompleted_exists' => 'En oavslutad registrering existerar redan. Avsluta eller ta bort den.',
 'error.goto_uncompleted' => 'Visa registrering.',

@@ -101,6 +101,8 @@ $i18n_key_words = array(
 'error.upload' => 'Fil upload problem.',
 'error.range_locked' => 'Dato interval er spærret.',
 'error.mail_send' => 'Fejl under sending af mail.',
+// TODO: improve the translation above bv adding MAIL_SMTP_DEBUG part.
+// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Der er ingen email tilknyttet dette brugernavn.',
 'error.uncompleted_exists' => 'Uafsluttet registrering eksistere allerede. Luk eller slet det.',
 'error.goto_uncompleted' => 'Gå til uafsluttet registrering.',
