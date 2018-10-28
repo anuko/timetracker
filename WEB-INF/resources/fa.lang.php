@@ -107,7 +107,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'خطا در ارسال ایمیل.',
-// TODO: improve the translation above bv adding MAIL_SMTP_DEBUG part.
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
 // 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'ایمیل مرتبط با این نام کاربری موجود نیست.',
 // TODO: check translation and punctuation of error.uncompleted_exists. Is the sentence ending dot in the right place?

@@ -105,7 +105,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Błąd podczas wysyłania wiadomości e-mail.',
-// TODO: improve the translation above bv adding MAIL_SMTP_DEBUG part.
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
 // 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Żaden adres e-mail nie jest skojarzony z tym loginem.',
 'error.uncompleted_exists' => 'Istnieje niedokończony wpis. Zamknij go lub usuń.',

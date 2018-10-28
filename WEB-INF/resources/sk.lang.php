@@ -107,7 +107,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Chyba v odosielaní e-mailu.',
-// TODO: improve the translation above bv adding MAIL_SMTP_DEBUG part.
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
 // 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'K tomuto prihlasovaciemu menu nie je priradený žiadny e-mail.',
 'error.uncompleted_exists' => 'Nekompletný záznam už existuje. Zatvorte ho alebo ho vymažte.',

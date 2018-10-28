@@ -99,7 +99,7 @@ $i18n_key_words = array(
 'error.upload' => 'Errore di caricamento file.',
 'error.range_locked' => 'Intervallo data bloccato.',
 'error.mail_send' => 'Errore nella fase di invio mail.',
-// TODO: improve the translation above bv adding MAIL_SMTP_DEBUG part.
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
 // 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Non ci sono email associate a questo username.',
 'error.uncompleted_exists' => 'Esiste una voce incompleta. Chiudila o cancellala.',

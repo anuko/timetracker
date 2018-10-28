@@ -104,7 +104,7 @@ $i18n_key_words = array(
 'error.upload' => '上传文件出错。',
 'error.range_locked' => '日期范围锁定。',
 'error.mail_send' => '发送邮件时出错。',
-// TODO: improve the translation above bv adding MAIL_SMTP_DEBUG part.
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
 // 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => '没有电子邮件与该用户名关联。',
 'error.uncompleted_exists' => '未完成的条目已经存在。关闭或删除。',

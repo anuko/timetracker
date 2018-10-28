@@ -103,7 +103,7 @@ $i18n_key_words = array(
 'error.upload' => 'Virhe tiedoston lataus.',
 'error.range_locked' => 'Aikaväli on lukittu.',
 'error.mail_send' => 'Virhe postinlähetyksessä.',
-// TODO: improve the translation above bv adding MAIL_SMTP_DEBUG part.
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
 // 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Käyttäjätunnukseen ei ole liitetty sähköpostiosoitetta.',
 'error.uncompleted_exists' => 'Kesken oleva syötetieto on jo olemassa. Sulje tai poista se.',

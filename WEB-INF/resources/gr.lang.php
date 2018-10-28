@@ -95,7 +95,7 @@ $i18n_key_words = array(
 'error.upload' => 'Σφάλμα φόρτωσης αρχείου.',
 'error.range_locked' => 'Το χρονικό διάστημα είναι κλειδωμένο.',
 'error.mail_send' => 'Σφάλμα κατά την αποστολή του μηνύματος.',
-// TODO: improve the translation above bv adding MAIL_SMTP_DEBUG part.
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
 // 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Δεν βρέθηκε διεύθυνση ηλεκτρονικού ταχυδρομείου που να αντιστοιχεί σε αυτή την σύνδεση.',
 'error.uncompleted_exists' => 'Η μη ολοκληρωμένη καταχώρηση υπάρχει ήδη. Κλείσιμο ή διαγραφή του.',
