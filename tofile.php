@@ -84,12 +84,12 @@ if ('xml' == $type) {
   print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
   print "<rows>\n";
 
-  $group_by = $bean->getAttribute('group_by');
+  $group_by1 = $bean->getAttribute('group_by1');
   if ($totals_only) {
     // Totals only report. Print subtotals.
     foreach ($subtotals as $subtotal) {
       print "<row>\n";
-      print "\t<".$group_by."><![CDATA[".$subtotal['name']."]]></".$group_by.">\n";
+      print "\t<".$group_by1."><![CDATA[".$subtotal['name']."]]></".$group_by1.">\n";
       if ($bean->getAttribute('chduration')) {
         $val = $subtotal['time'];
         if($val && defined('EXPORT_DECIMAL_DURATION') && isTrue(EXPORT_DECIMAL_DURATION))
@@ -161,15 +161,15 @@ if ('csv' == $type) {
   $bom = chr(239).chr(187).chr(191); // 0xEF 0xBB 0xBF in the beginning of the file is UTF8 BOM.
   print $bom; // Without this Excel does not display UTF8 characters properly.
 
-  $group_by = $bean->getAttribute('group_by');
+  $group_by1 = $bean->getAttribute('group_by1');
   if ($totals_only) {
     // Totals only report.
 
     // Determine group_by header.
-    if ('cf_1' == $group_by)
+    if ('cf_1' == $group_by1)
       $group_by_header = $custom_fields->fields[0]['label'];
     else {
-      $key = 'label.'.$group_by;
+      $key = 'label.'.$group_by1;
       $group_by_header = $i18n->get($key);
     }
 
