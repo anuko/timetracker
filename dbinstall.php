@@ -956,6 +956,13 @@ if ($_POST) {
     print "Updated $tt_expense_items_updated tt_expense_items records...<br>\n";
   }
 
+  if ($_POST["convert11797to11800"]) {
+    setChange("ALTER TABLE `tt_fav_reports` CHANGE `group_by` `group_by1` varchar(20) default NULL");
+    setChange("ALTER TABLE `tt_fav_reports` ADD `group_by2` varchar(20) default NULL AFTER `group_by1`");
+    setChange("ALTER TABLE `tt_fav_reports` ADD `group_by3` varchar(20) default NULL AFTER `group_by2`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.00', modified = now() where param_name = 'version_db' and param_value = '1.17.97'");
+  }
+
   if ($_POST["cleanup"]) {
 
     $mdb2 = getConnection();
@@ -999,7 +1006,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.17.97)</b>
+    <td width="80%"><b>Create database structure (v1.18.00)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -1040,7 +1047,12 @@ if ($_POST) {
   </tr>
     <tr valign="top">
     <td>Update database structure (v1.17.44 to v1.17.97)</td>
-    <td><input type="submit" name="convert11744to11797" value="Update"><br><input type="submit" name="update_group_id" value="Update group_id"></td>
+    <td><input type="submit" name="convert11744to117797" value="Update"><br><input type="submit" name="update_group_id" value="Update group_id"></td>
+  </tr>
+  </tr>
+  <tr valign="top">
+    <td>Update database structure (v1.17.97 to v1.18.00)</td>
+    <td><input type="submit" name="convert11797to11800" value="Update"></td>
   </tr>
 </table>
 

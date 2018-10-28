@@ -84,7 +84,7 @@ class ttFavReportHelper {
       show_client, show_invoice, show_paid, show_ip,
       show_project, show_start, show_duration, show_cost,
       show_task, show_end, show_note, show_custom_field_1, show_work_units,
-      group_by, show_totals_only)
+      group_by1, show_totals_only)
       values(".
       $mdb2->quote($fields['name']).", ".$fields['user_id'].", ".
       $mdb2->quote($fields['client']).", ".$mdb2->quote($fields['option']).", ".
@@ -139,7 +139,7 @@ class ttFavReportHelper {
       "show_note = ".$fields['chnote'].", ".
       "show_custom_field_1 = ".$fields['chcf_1'].", ".
       "show_work_units = ".$fields['chunits'].", ".
-      "group_by = ".$mdb2->quote($fields['group_by']).", ".
+      "group_by1 = ".$mdb2->quote($fields['group_by']).", ".
       "show_totals_only = ".$fields['chtotalsonly'].
       " where id = ".$fields['id'];
     $affected = $mdb2->exec($sql);
@@ -270,7 +270,7 @@ class ttFavReportHelper {
       $bean->setAttribute('chnote', $val['show_note']);
       $bean->setAttribute('chcf_1', $val['show_custom_field_1']);
       $bean->setAttribute('chunits', $val['show_work_units']);
-      $bean->setAttribute('group_by', $val['group_by']);
+      $bean->setAttribute('group_by', $val['group_by1']);
       $bean->setAttribute('chtotalsonly', $val['show_totals_only']);
       $bean->setAttribute('new_fav_report', $val['name']);
     } else {

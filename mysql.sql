@@ -269,7 +269,9 @@ CREATE TABLE `tt_fav_reports` (
   `show_custom_field_1` tinyint(4) NOT NULL default 0,   # whether to show custom field 1
   `show_work_units` tinyint(4) NOT NULL default 0,       # whether to show work units
   `show_totals_only` tinyint(4) NOT NULL default 0,      # whether to show totals only
-  `group_by` varchar(20) default NULL,                   # group by field
+  `group_by1` varchar(20) default NULL,                  # group by field 1
+  `group_by2` varchar(20) default NULL,                  # group by field 2
+  `group_by3` varchar(20) default NULL,                  # group by field 3
   `status` tinyint(4) default 1,                         # favorite report status
   PRIMARY KEY (`id`)
 );
@@ -454,4 +456,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.97', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.00', now()); # TODO: change when structure changes.
