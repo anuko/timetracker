@@ -233,7 +233,7 @@ if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['ty
   $group_by_options['cf_1'] = $custom_fields->fields[0]['label'];
 }
 $group_by_options_size = sizeof($group_by_options);
-$form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by','data'=>$group_by_options));
+$form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by1','data'=>$group_by_options));
 if (defined('MULTIPLE_GROUP_BY_DEBUG') && isTrue(MULTIPLE_GROUP_BY_DEBUG)) {
   if ($group_by_options_size > 2) $form->addInput(array('type'=>'combobox','name'=>'group_by2','data'=>$group_by_options));
   if ($group_by_options_size > 3) $form->addInput(array('type'=>'combobox','name'=>'group_by3','data'=>$group_by_options));

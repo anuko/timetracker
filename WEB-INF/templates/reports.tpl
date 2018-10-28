@@ -138,7 +138,7 @@ function selectAssignedUsers(project_id) {
 function handleCheckboxes() {
   var totalsOnlyCheckbox = document.getElementById("chtotalsonly");
   var totalsOnlyLabel = document.getElementById("totals_only_label");
-  if ("no_grouping" == document.getElementById("group_by").value) {
+  if ("no_grouping" == document.getElementById("group_by1").value) {
     // Unmark and disable the "Totals only" checkbox.
     totalsOnlyCheckbox.checked = false;
     totalsOnlyCheckbox.style.visibility = "hidden";
@@ -302,7 +302,7 @@ function handleCheckboxes() {
             <td><b>{$i18n.form.reports.group_by}</b></td>
         </tr>
         <tr valign="top">
-          <td>{$forms.reportForm.group_by.control}</td>
+          <td>{$forms.reportForm.group_by1.control}</td>
           <td>{$forms.reportForm.group_by2.control}</td>
           <td>{$forms.reportForm.group_by3.control}</td>
         </tr>

@@ -96,7 +96,7 @@ class ttFavReportHelper {
       $fields['chclient'].", ".$fields['chinvoice'].", ".$fields['chpaid'].", ".$fields['chip'].", ".
       $fields['chproject'].", ".$fields['chstart'].", ".$fields['chduration'].", ".$fields['chcost'].", ".
       $fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".$fields['chcf_1'].", ".$fields['chunits'].", ".
-      $mdb2->quote($fields['group_by']).", ".$fields['chtotalsonly'].")";
+      $mdb2->quote($fields['group_by1']).", ".$fields['chtotalsonly'].")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -139,7 +139,7 @@ class ttFavReportHelper {
       "show_note = ".$fields['chnote'].", ".
       "show_custom_field_1 = ".$fields['chcf_1'].", ".
       "show_work_units = ".$fields['chunits'].", ".
-      "group_by1 = ".$mdb2->quote($fields['group_by']).", ".
+      "group_by1 = ".$mdb2->quote($fields['group_by1']).", ".
       "show_totals_only = ".$fields['chtotalsonly'].
       " where id = ".$fields['id'];
     $affected = $mdb2->exec($sql);
@@ -209,7 +209,7 @@ class ttFavReportHelper {
       'chnote'=>$bean->getAttribute('chnote'),
       'chcf_1'=>$bean->getAttribute('chcf_1'),
       'chunits'=>$bean->getAttribute('chunits'),
-      'group_by'=>$bean->getAttribute('group_by'),
+      'group_by1'=>$bean->getAttribute('group_by1'),
       'chtotalsonly'=>$bean->getAttribute('chtotalsonly'));
 
     $id = false;
@@ -270,7 +270,7 @@ class ttFavReportHelper {
       $bean->setAttribute('chnote', $val['show_note']);
       $bean->setAttribute('chcf_1', $val['show_custom_field_1']);
       $bean->setAttribute('chunits', $val['show_work_units']);
-      $bean->setAttribute('group_by', $val['group_by1']);
+      $bean->setAttribute('group_by1', $val['group_by1']);
       $bean->setAttribute('chtotalsonly', $val['show_totals_only']);
       $bean->setAttribute('new_fav_report', $val['name']);
     } else {
@@ -295,7 +295,7 @@ class ttFavReportHelper {
         'chnote'=>'1',
         'chcf_1'=>'',
         'chunits'=>'',
-        'group_by'=>'',
+        'group_by1'=>'',
         'chtotalsonly'=>'',
         'new_fav_report'=>''));
       $bean->setAttributes($attrs);

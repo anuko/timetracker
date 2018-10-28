@@ -127,7 +127,7 @@ class ttReportHelper {
     $canViewReports = $user->can('view_reports') || $user->can('view_all_reports');
     $isClient = $user->isClient();
 
-    $group_by_option = $options['group_by'];
+    $group_by_option = $options['group_by1'];
     $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($options['show_start'] || $options['show_end']);
 
     // Prepare a query for time items in tt_log table.
@@ -394,7 +394,7 @@ class ttReportHelper {
   static function getSubtotals($options) {
     global $user;
 
-    $group_by_option = $options['group_by'];
+    $group_by_option = $options['group_by1'];
     if ('no_grouping' == $group_by_option) return null;
 
     $mdb2 = getConnection();
@@ -667,7 +667,7 @@ class ttReportHelper {
     $isClient = $user->isClient();
 
     $items = ttReportHelper::getItems($options);
-    $group_by = $options['group_by'];
+    $group_by = $options['group_by1'];
     if ($group_by && 'no_grouping' != $group_by)
       $subtotals = ttReportHelper::getSubtotals($options);
     $totals = ttReportHelper::getTotals($options);
@@ -1062,7 +1062,7 @@ class ttReportHelper {
     $options['show_custom_field_1'] = $bean->getAttribute('chcf_1');
     $options['show_work_units'] = $bean->getAttribute('chunits');
     $options['show_totals_only'] = $bean->getAttribute('chtotalsonly');
-    $options['group_by'] = $bean->getAttribute('group_by');
+    $options['group_by1'] = $bean->getAttribute('group_by1');
     return $options;
   }
 
