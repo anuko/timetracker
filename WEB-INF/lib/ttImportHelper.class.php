@@ -336,6 +336,8 @@ class ttImportHelper {
         'chcf_1' => (int) $this->currentElement['SHOW_CUSTOM_FIELD_1'],
         'chunits' => (int) $this->currentElement['SHOW_WORK_UNITS'],
         'group_by1' => $this->currentElement['GROUP_BY1'],
+        'group_by2' => $this->currentElement['GROUP_BY2'],
+        'group_by3' => $this->currentElement['GROUP_BY3'],
         'chtotalsonly' => (int) $this->currentElement['SHOW_TOTALS_ONLY']));
     }
     $this->currentTag = '';

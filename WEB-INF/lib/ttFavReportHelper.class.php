@@ -84,7 +84,7 @@ class ttFavReportHelper {
       show_client, show_invoice, show_paid, show_ip,
       show_project, show_start, show_duration, show_cost,
       show_task, show_end, show_note, show_custom_field_1, show_work_units,
-      group_by1, show_totals_only)
+      group_by1, group_by2, group_by3, show_totals_only)
       values(".
       $mdb2->quote($fields['name']).", ".$fields['user_id'].", ".
       $mdb2->quote($fields['client']).", ".$mdb2->quote($fields['option']).", ".
@@ -96,7 +96,8 @@ class ttFavReportHelper {
       $fields['chclient'].", ".$fields['chinvoice'].", ".$fields['chpaid'].", ".$fields['chip'].", ".
       $fields['chproject'].", ".$fields['chstart'].", ".$fields['chduration'].", ".$fields['chcost'].", ".
       $fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".$fields['chcf_1'].", ".$fields['chunits'].", ".
-      $mdb2->quote($fields['group_by1']).", ".$fields['chtotalsonly'].")";
+      $mdb2->quote($fields['group_by1']).", ".$mdb2->quote($fields['group_by2']).", ".
+      $mdb2->quote($fields['group_by3']).", ".$fields['chtotalsonly'].")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -140,6 +141,8 @@ class ttFavReportHelper {
       "show_custom_field_1 = ".$fields['chcf_1'].", ".
       "show_work_units = ".$fields['chunits'].", ".
       "group_by1 = ".$mdb2->quote($fields['group_by1']).", ".
+      "group_by2 = ".$mdb2->quote($fields['group_by2']).", ".
+      "group_by3 = ".$mdb2->quote($fields['group_by3']).", ".
       "show_totals_only = ".$fields['chtotalsonly'].
       " where id = ".$fields['id'];
     $affected = $mdb2->exec($sql);
@@ -210,6 +213,8 @@ class ttFavReportHelper {
       'chcf_1'=>$bean->getAttribute('chcf_1'),
       'chunits'=>$bean->getAttribute('chunits'),
       'group_by1'=>$bean->getAttribute('group_by1'),
+      'group_by2'=>$bean->getAttribute('group_by2'),
+      'group_by3'=>$bean->getAttribute('group_by3'),
       'chtotalsonly'=>$bean->getAttribute('chtotalsonly'));
 
     $id = false;
@@ -271,6 +276,8 @@ class ttFavReportHelper {
       $bean->setAttribute('chcf_1', $val['show_custom_field_1']);
       $bean->setAttribute('chunits', $val['show_work_units']);
       $bean->setAttribute('group_by1', $val['group_by1']);
+      $bean->setAttribute('group_by2', $val['group_by2']);
+      $bean->setAttribute('group_by3', $val['group_by3']);
       $bean->setAttribute('chtotalsonly', $val['show_totals_only']);
       $bean->setAttribute('new_fav_report', $val['name']);
     } else {
@@ -296,6 +303,8 @@ class ttFavReportHelper {
         'chcf_1'=>'',
         'chunits'=>'',
         'group_by1'=>'',
+        'group_by2'=>'',
+        'group_by3'=>'',
         'chtotalsonly'=>'',
         'new_fav_report'=>''));
       $bean->setAttributes($attrs);

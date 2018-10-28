@@ -305,6 +305,8 @@ class ttExportHelper {
         " show_custom_field_1=\"".$fav_report['show_custom_field_1']."\"".
         " show_work_units=\"".$fav_report['show_work_units']."\"".
         " group_by1=\"".$fav_report['group_by1']."\"".
+        " group_by2=\"".$fav_report['group_by2']."\"".
+        " group_by3=\"".$fav_report['group_by3']."\"".
         " show_totals_only=\"".$fav_report['show_totals_only']."\">\n");
       fwrite($file, "    <name><![CDATA[".$fav_report["name"]."]]></name>\n");
       fwrite($file, "  </fav_report>\n");
