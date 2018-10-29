@@ -352,19 +352,11 @@ class ttReportHelper {
       if ('no_grouping' != $group_by_option) {
         $val['grouped_by'] = $val[$group_by_option];
         if ('date' == $group_by_option) {
-          // This is needed to get the date in user date format.
-          //$o_date = new DateAndTime(DB_DATEFORMAT, $val['grouped_by']);
-          //$val['grouped_by'] = $o_date->toString($user->date_format);
-          //unset($o_date);
-
           $val['grouped_by'] = ttDateToUserFormat($val['grouped_by']);
         }
       }
 
-      // This is needed to get the date in user date format.
-      $o_date = new DateAndTime(DB_DATEFORMAT, $val['date']);
-      $val['date'] = $o_date->toString($user->date_format);
-      unset($o_date);
+      $val['date'] = ttDateToUserFormat($val['date']);
 
       $row = $val;
       $report_items[] = $row;
@@ -538,10 +530,7 @@ class ttReportHelper {
 
     while ($val = $res->fetchRow()) {
       if ('date' == $group_by_option) {
-        // This is needed to get the date in user date format.
-        $o_date = new DateAndTime(DB_DATEFORMAT, $val['group_field']);
-        $val['group_field'] = $o_date->toString($user->date_format);
-        unset($o_date);
+        $val['group_field'] = ttDateToUserFormat($val['group_field']);
       }
       $time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
       if ($options['show_cost']) {
