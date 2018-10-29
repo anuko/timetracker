@@ -348,18 +348,11 @@ class ttReportHelper {
         if ('.' != $user->decimal_mark)
           $val['expense'] = str_replace('.', $user->decimal_mark, $val['expense']);
       }
-// CODING STOPPED RIGHT HERE replace with a combined key...
-      if ('no_grouping' != $group_by_option) {
-        $val['grouped_by'] = $val[$group_by_option];
-        if ('date' == $group_by_option) {
-          $val['grouped_by'] = ttDateToUserFormat($val['grouped_by']);
-        }
-      }
 
+      if (!$no_grouping) $val['grouped_by'] = ttReportHelper::makeGroupByKey($options, $val);
       $val['date'] = ttDateToUserFormat($val['date']);
 
-      $row = $val;
-      $report_items[] = $row;
+      $report_items[] = $val;
     }
 
     return $report_items;
@@ -1095,5 +1088,33 @@ class ttReportHelper {
 
     // TODO: add additional checks here. Perhaps do it before saving the bean for consistency.
     return true;
+  }
+
+  // makeGroupByKey - builds a combined group by key from group_by1, group_by2 and group_by3 values
+  // (passed in $options) and a row of data ($row obtained from a db query).
+  static function makeGroupByKey($options, $row) {
+    if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
+      // We have group_by1.
+      $group_by1 = $options['group_by1'];
+      $group_by1_value = $row[$group_by1];
+      if ($group_by1 == 'date') $group_by1_value = ttDateToUserFormat($group_by1_value);
+      $group_by_key .= ' - '.$group_by1_value;
+    }
+    if ($options['group_by2'] != null && $options['group_by2'] != 'no_grouping') {
+      // We have group_by2.
+      $group_by2 = $options['group_by2'];
+      $group_by2_value = $row[$group_by2];
+      if ($group_by2 == 'date') $group_by2_value = ttDateToUserFormat($group_by2_value);
+      $group_by_key .= ' - '.$group_by2_value;
+    }
+    if ($options['group_by3'] != null && $options['group_by3'] != 'no_grouping') {
+      // We have group_by3.
+      $group_by3 = $options['group_by3'];
+      $group_by3_value = $row[$group_by3];
+      if ($group_by3 == 'date') $group_by3_value = ttDateToUserFormat($group_by3_value);
+      $group_by_key .= ' - '.$group_by3_value;
+    }
+    $group_by_key = trim($group_by_key, ' -');
+    return $group_by_key;
   }
 }
