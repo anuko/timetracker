@@ -338,6 +338,13 @@ if ($request->isPost()) {
       if ($start_date->compare($end_date) > 0)
         $err->add($i18n->get('error.interval'), $i18n->get('label.end_date'), $i18n->get('label.start_date'));
     }
+    $group_by1 = $bean->getAttribute('group_by1');
+    $group_by2 = $bean->getAttribute('group_by2');
+    $group_by3 = $bean->getAttribute('group_by3');
+    if (($group_by3 != null && $group_by3 != 'no_grouping') && ($group_by3 == $group_by1 || $group_by3 == $group_by2))
+      $err->add($i18n->get('error.field'), $i18n->get('form.reports.group_by'));
+    if (($group_by2 != null && $group_by2 != 'no_grouping') && ($group_by2 == $group_by1 || $group_by3 == $group_by2))
+      $err->add($i18n->get('error.field'), $i18n->get('form.reports.group_by'));
     // Check remaining values.
     if (!ttReportHelper::verifyBean($bean)) $err->add($i18n->get('error.sys'));
 
