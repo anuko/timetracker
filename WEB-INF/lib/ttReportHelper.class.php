@@ -127,6 +127,16 @@ class ttReportHelper {
     $canViewReports = $user->can('view_reports') || $user->can('view_all_reports');
     $isClient = $user->isClient();
 
+    $no_grouping = ($options['group_by1'] == null || $options['group_by1'] == 'no_grouping') &&
+                   ($options['group_by2'] == null || $options['group_by2'] == 'no_grouping') &&
+                   ($options['group_by3'] == null || $options['group_by3'] == 'no_grouping');
+    $grouping_by_date = ($options['group_by1'] == 'date'|| $options['group_by2'] == 'date' || $options['group_by3'] == 'date');
+    $grouping_by_client = ($options['group_by1'] == 'client'|| $options['group_by2'] == 'client' || $options['group_by3'] == 'client');
+    $grouping_by_project = ($options['group_by1'] == 'project'|| $options['group_by2'] == 'project' || $options['group_by3'] == 'project');
+    $grouping_by_task = ($options['group_by1'] == 'task'|| $options['group_by2'] == 'task' || $options['group_by3'] == 'task');
+    $grouping_by_user = ($options['group_by1'] == 'user'|| $options['group_by2'] == 'user' || $options['group_by3'] == 'user');
+    $grouping_by_cf_1 = ($options['group_by1'] == 'cf_1'|| $options['group_by2'] == 'cf_1' || $options['group_by3'] == 'cf_1');
+
     $group_by_option = $options['group_by1'];
     $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($options['show_start'] || $options['show_end']);
 
@@ -138,16 +148,16 @@ class ttReportHelper {
     if($canViewReports || $isClient)
       array_push($fields, 'u.name as user');
     // Add client name if it is selected.
-    if ($options['show_client'] || 'client' == $group_by_option)
+    if ($options['show_client'] || $grouping_by_client)
       array_push($fields, 'c.name as client');
     // Add project name if it is selected.
-    if ($options['show_project'] || 'project' == $group_by_option)
+    if ($options['show_project'] || $grouping_by_project)
       array_push($fields, 'p.name as project');
     // Add task name if it is selected.
-    if ($options['show_task'] || 'task' == $group_by_option)
+    if ($options['show_task'] || $grouping_by_task)
       array_push($fields, 't.name as task');
     // Add custom field.
-    $include_cf_1 = $options['show_custom_field_1'] || 'cf_1' == $group_by_option;
+    $include_cf_1 = $options['show_custom_field_1'] || $grouping_by_cf_1;
     if ($include_cf_1) {
       $custom_fields = new CustomFields($user->group_id);
       $cf_1_type = $custom_fields->fields[0]['type'];
@@ -203,15 +213,15 @@ class ttReportHelper {
 
     // Prepare sql query part for left joins.
     $left_joins = null;
-    if ($options['show_client'] || 'client' == $group_by_option)
+    if ($options['show_client'] || $grouping_by_client)
       $left_joins .= " left join tt_clients c on (c.id = l.client_id)";
     if (($canViewReports || $isClient) && $options['show_invoice'])
       $left_joins .= " left join tt_invoices i on (i.id = l.invoice_id and i.status = 1)";
     if ($canViewReports || $isClient || $user->isPluginEnabled('ex'))
        $left_joins .= " left join tt_users u on (u.id = l.user_id)";
-    if ($options['show_project'] || 'project' == $group_by_option)
+    if ($options['show_project'] || $grouping_by_project)
       $left_joins .= " left join tt_projects p on (p.id = l.project_id)";
-    if ($options['show_task'] || 'task' == $group_by_option)
+    if ($options['show_task'] || $grouping_by_task)
       $left_joins .= " left join tt_tasks t on (t.id = l.task_id)";
     if ($include_cf_1) {
       if ($cf_1_type == CustomFields::TYPE_TEXT)
@@ -228,7 +238,7 @@ class ttReportHelper {
 
     // Construct sql query for tt_log items.
     $sql = "select ".join(', ', $fields)." from tt_log l $left_joins $where";
-    // If we don't have expense items (such as when the Expenses plugin is desabled), the above is all sql we need,
+    // If we don't have expense items (such as when the Expenses plugin is disabled), the above is all sql we need,
     // with an exception of sorting part, that is added in the end.
 
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
@@ -241,14 +251,14 @@ class ttReportHelper {
       if($canViewReports || $isClient)
         array_push($fields, 'u.name as user');
       // Add client name if it is selected.
-      if ($options['show_client'] || 'client' == $group_by_option)
+      if ($options['show_client'] || $grouping_by_client)
         array_push($fields, 'c.name as client');
       // Add project name if it is selected.
-      if ($options['show_project'] || 'project' == $group_by_option)
+      if ($options['show_project'] || $grouping_by_project)
         array_push($fields, 'p.name as project');
-      if ($options['show_task'] || 'task' == $group_by_option)
+      if ($options['show_task'] || $grouping_by_task)
         array_push($fields, 'null'); // null for task name. We need to match column count for union.
-      if ($options['show_custom_field_1'] || 'cf_1' == $group_by_option)
+      if ($options['show_custom_field_1'] || $grouping_by_cf_1)
         array_push($fields, 'null'); // null for cf_1.
       if ($options['show_start']) {
         array_push($fields, 'null'); // null for unformatted_start.
@@ -283,9 +293,9 @@ class ttReportHelper {
       $left_joins = null;
       if ($canViewReports || $isClient)
         $left_joins .= " left join tt_users u on (u.id = ei.user_id)";
-      if ($options['show_client'] || 'client' == $group_by_option)
+      if ($options['show_client'] || $grouping_by_client)
         $left_joins .= " left join tt_clients c on (c.id = ei.client_id)";
-      if ($options['show_project'] || 'project' == $group_by_option)
+      if ($options['show_project'] || $grouping_by_project)
         $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";
       if (($canViewReports || $isClient) && $options['show_invoice'])
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
@@ -301,11 +311,16 @@ class ttReportHelper {
 
     // Determine sort part.
     $sort_part = ' order by ';
-    if ($group_by_option == null || 'no_grouping' == $group_by_option || 'date' == $group_by_option)
+    if ($no_grouping)
       $sort_part .= 'date';
-    else
-      $sort_part .= $group_by_option.', date';
-    if (($canViewReports || $isClient) && $options['users'] && 'user' != $group_by_option)
+    else {
+      $sort_part2 .= ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') ? ', '.$options['group_by1'] : '';
+      $sort_part2 .= ($options['group_by2'] != null && $options['group_by2'] != 'no_grouping') ? ', '.$options['group_by2'] : '';
+      $sort_part2 .= ($options['group_by3'] != null && $options['group_by3'] != 'no_grouping') ? ', '.$options['group_by3'] : '';
+      if (!$grouping_by_date) $sort_part2 .= ', date';
+      $sort_part .= ltrim($sort_part2, ', '); // Remove leading comma and space.
+    }
+    if (($canViewReports || $isClient) && $options['users'] && !$grouping_by_user)
       $sort_part .= ', user, type';
     if ($options['show_start'])
       $sort_part .= ', unformatted_start';
@@ -333,13 +348,16 @@ class ttReportHelper {
         if ('.' != $user->decimal_mark)
           $val['expense'] = str_replace('.', $user->decimal_mark, $val['expense']);
       }
+// CODING STOPPED RIGHT HERE replace with a combined key...
       if ('no_grouping' != $group_by_option) {
         $val['grouped_by'] = $val[$group_by_option];
         if ('date' == $group_by_option) {
           // This is needed to get the date in user date format.
-          $o_date = new DateAndTime(DB_DATEFORMAT, $val['grouped_by']);
-          $val['grouped_by'] = $o_date->toString($user->date_format);
-          unset($o_date);
+          //$o_date = new DateAndTime(DB_DATEFORMAT, $val['grouped_by']);
+          //$val['grouped_by'] = $o_date->toString($user->date_format);
+          //unset($o_date);
+
+          $val['grouped_by'] = ttDateToUserFormat($val['grouped_by']);
         }
       }
 
@@ -1063,6 +1081,8 @@ class ttReportHelper {
     $options['show_work_units'] = $bean->getAttribute('chunits');
     $options['show_totals_only'] = $bean->getAttribute('chtotalsonly');
     $options['group_by1'] = $bean->getAttribute('group_by1');
+    $options['group_by2'] = $bean->getAttribute('group_by2');
+    $options['group_by3'] = $bean->getAttribute('group_by3');
     return $options;
   }
 

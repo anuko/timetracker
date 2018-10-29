@@ -390,3 +390,11 @@ function ttStartsWith($string, $startString)
     $len = strlen($startString);
     return (substr($string, 0, $len) === $startString);
 }
+
+// ttDateToUserFormat converts a date from database format to user format.
+function ttDateToUserFormat($date)
+{
+  global $user;
+  $o_date = new DateAndTime(DB_DATEFORMAT, $date);
+  return $o_date->toString($user->date_format);
+}
