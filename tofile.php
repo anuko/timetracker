@@ -164,14 +164,7 @@ if ('csv' == $type) {
   $group_by1 = $bean->getAttribute('group_by1');
   if ($totals_only) {
     // Totals only report.
-
-    // Determine group_by header.
-    if ('cf_1' == $group_by1)
-      $group_by_header = $custom_fields->fields[0]['label'];
-    else {
-      $key = 'label.'.$group_by1;
-      $group_by_header = $i18n->get($key);
-    }
+    $group_by_header = ttReportHelper::makeGroupByHeader($options);
 
     // Print headers.
     print '"'.$group_by_header.'"';

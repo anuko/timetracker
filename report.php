@@ -192,12 +192,14 @@ if ($report_items && 'no_grouping' != $group_by1) {
 }
 // Determine group by header.
 if ('no_grouping' != $group_by) {
+  /*
   if ('cf_1' == $group_by)
     $smarty->assign('group_by_header', $custom_fields->fields[0]['label']);
   else {
     $key = 'label.'.$group_by;
     $smarty->assign('group_by_header', $i18n->get($key));
-  }
+  } */
+  $smarty->assign('group_by_header', ttReportHelper::makeGroupByHeader($options));
 }
 // Assign variables that are used to alternate color of rows for different dates.
 $smarty->assign('prev_date', '');

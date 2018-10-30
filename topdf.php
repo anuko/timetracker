@@ -62,17 +62,6 @@ $bean = new ActionForm('reportBean', new Form('reportForm'), $request);
 // is grouped by either date, user, client, project, task or cf_1 and user only needs to see subtotals by group.
 $totals_only = ($bean->getAttribute('chtotalsonly') == '1');
 
-// Determine group by header.
-$group_by1 = $bean->getAttribute('group_by1');
-if ('no_grouping' != $group_by1) {
-  if ('cf_1' == $group_by1)
-    $group_by_header = $custom_fields->fields[0]['label'];
-  else {
-    $key = 'label.'.$group_by1;
-    $group_by_header = $i18n->get($key);
-  }
-}
-
 // Obtain items for report.
 $options = ttReportHelper::getReportOptions($bean);
 if (!$totals_only)
@@ -104,6 +93,7 @@ $html .= '<table border="1" cellpadding="3" cellspacing="0" width="100%">';
 
 if ($totals_only) {
   // We are building a "totals only" report with only subtotals and total.
+  $group_by_header = ttReportHelper::makeGroupByHeader($options);
   $colspan = 1; // Column span for an empty row.
   // Table header.
   $html .= '<thead>';

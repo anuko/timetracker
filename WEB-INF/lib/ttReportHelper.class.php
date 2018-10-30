@@ -397,51 +397,20 @@ class ttReportHelper {
   static function getSubtotals($options) {
     global $user;
 
-    $group_by_option = $options['group_by1'];
-    if ('no_grouping' == $group_by_option) return null;
+    $group_fields = ttReportHelper::makeGroupByFieldsPart($options);
+    if (!$group_fields) return null;
 
     $mdb2 = getConnection();
 
-    // Start with sql to obtain subtotals for time items. This simple sql will be used when we have no expenses.
-
-    // Determine group by field and a required join.
-    switch ($group_by_option) {
-      case 'date':
-        $group_field = 'l.date';
-        $group_join = '';
-        break;
-      case 'user':
-        $group_field = 'u.name';
-        $group_join = 'left join tt_users u on (l.user_id = u.id) ';
-        break;
-      case 'client':
-        $group_field = 'c.name';
-        $group_join = 'left join tt_clients c on (l.client_id = c.id) ';
-        break;
-      case 'project':
-        $group_field = 'p.name';
-        $group_join = 'left join tt_projects p on (l.project_id = p.id) ';
-        break;
-      case 'task':
-        $group_field = 't.name';
-        $group_join = 'left join tt_tasks t on (l.task_id = t.id) ';
-        break;
-      case 'cf_1':
-        $group_field = 'cfo.value';
-        $custom_fields = new CustomFields($user->group_id);
-        if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
-          $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id) ';
-        elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
-          $group_join = 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.option_id = cfo.id) ';
-        break;
-    }
-
+    $concat_part = ttReportHelper::makeConcatPart($options);
+    $join_part = ttReportHelper::makeJoinPart($options);
     $where = ttReportHelper::getWhere($options);
+    $group_by_part = ttReportHelper::makeGroupByPart($options);
     if ($options['show_cost']) {
       if (MODE_TIME == $user->tracking_mode) {
-        if ($group_by_option != 'user')
+        if (!ttReportHelper::groupingByUser($options))
           $left_join = 'left join tt_users u on (l.user_id = u.id)';
-        $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time";
+        $sql = "select $concat_part, sum(time_to_sec(l.duration)) as time";
         if ($options['show_work_units']) {
           if ($user->unit_totals_only)
             $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $user->first_unit_threshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
@@ -450,10 +419,10 @@ class ttReportHelper {
         }
         $sql .= ", sum(cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2))) as cost,
           null as expenses from tt_log l
-          $group_join $left_join $where group by $group_field";
+          $join_part $left_join $where $group_by_part";
       } else {
         // If we are including cost and tracking projects, our query (the same as above) needs to join the tt_user_project_binds table.
-        $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time";
+        $sql = "select $concat_part, sum(time_to_sec(l.duration)) as time";
         if ($options['show_work_units']) {
           if ($user->unit_totals_only)
             $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $user->first_unit_threshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
@@ -462,11 +431,12 @@ class ttReportHelper {
         }
         $sql .= ", sum(cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2))) as cost,
           null as expenses from tt_log l 
-          $group_join
-          left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id) $where group by $group_field";
+          $join_part
+          left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id) $where $group_by_part";
       }
-    } else {
-      $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time";
+    }  else {
+      // $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time";
+      $sql = "select $concat_part, sum(time_to_sec(l.duration)) as time";
       if ($options['show_work_units']) {
         if ($user->unit_totals_only)
           $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $user->first_unit_threshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
@@ -474,41 +444,20 @@ class ttReportHelper {
           $sql .= ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
       }
       $sql .= ", null as expenses from tt_log l 
-        $group_join $where group by $group_field";
+        $join_part $where $group_by_part";
     }
     // By now we have sql for time items.
 
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
     if ($options['show_cost'] && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
 
-      // Determine group by field and a required join.
-      $group_join = null;
-      $group_field = 'null';
-      switch ($group_by_option) {
-        case 'date':
-          $group_field = 'ei.date';
-          $group_join = '';
-          break;
-        case 'user':
-          $group_field = 'u.name';
-          $group_join = 'left join tt_users u on (ei.user_id = u.id) ';
-          break;
-        case 'client':
-          $group_field = 'c.name';
-          $group_join = 'left join tt_clients c on (ei.client_id = c.id) ';
-          break;
-        case 'project':
-          $group_field = 'p.name';
-          $group_join = 'left join tt_projects p on (ei.project_id = p.id) ';
-          break;
-      }
-
+      $concat_part = ttReportHelper::makeConcatExpensesPart($options);
+      $join_part = ttReportHelper::makeJoinExpensesPart($options);
       $where = ttReportHelper::getExpenseWhere($options);
-      $sql_for_expenses = "select $group_field as group_field, null as time";
+      $group_by_part = ttReportHelper::makeGroupByExpensesPart($options);
+      $sql_for_expenses = "select $concat_part, null as time";
       if ($options['show_work_units']) $sql_for_expenses .= ", null as units";
-      $sql_for_expenses .= ", sum(ei.cost) as cost, sum(ei.cost) as expenses from tt_expense_items ei $group_join $where";
-      // Add a "group by" clause if we are grouping.
-      if ('null' != $group_field) $sql_for_expenses .= " group by $group_field";
+      $sql_for_expenses .= ", sum(ei.cost) as cost, sum(ei.cost) as expenses from tt_expense_items ei $join_part $where $group_by_part";
 
       // Create a combined query.
       $combined = "select group_field, sum(time) as time";
@@ -520,11 +469,12 @@ class ttReportHelper {
     // Execute query.
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
-
     while ($val = $res->fetchRow()) {
-      if ('date' == $group_by_option) {
-        $val['group_field'] = ttDateToUserFormat($val['group_field']);
-      }
+// TODO: consider writing a function that properly formats a date part in a multi-part key.
+//
+//      if ('date' == $group_by_option) {
+//        $val['group_field'] = ttDateToUserFormat($val['group_field']);
+//      }
       $time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
       if ($options['show_cost']) {
         if ('.' != $user->decimal_mark) {
@@ -1090,31 +1040,426 @@ class ttReportHelper {
     return true;
   }
 
-  // makeGroupByKey - builds a combined group by key from group_by1, group_by2 and group_by3 values
+  // makeGroupByKey builds a combined group by key from group_by1, group_by2 and group_by3 values
   // (passed in $options) and a row of data ($row obtained from a db query).
   static function makeGroupByKey($options, $row) {
     if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
       // We have group_by1.
       $group_by1 = $options['group_by1'];
       $group_by1_value = $row[$group_by1];
-      if ($group_by1 == 'date') $group_by1_value = ttDateToUserFormat($group_by1_value);
+      //if ($group_by1 == 'date') $group_by1_value = ttDateToUserFormat($group_by1_value);
+      if (empty($group_by1_value)) $group_by1_value = 'Null'; // To match what comes out of makeConcatPart.
       $group_by_key .= ' - '.$group_by1_value;
     }
     if ($options['group_by2'] != null && $options['group_by2'] != 'no_grouping') {
       // We have group_by2.
       $group_by2 = $options['group_by2'];
       $group_by2_value = $row[$group_by2];
-      if ($group_by2 == 'date') $group_by2_value = ttDateToUserFormat($group_by2_value);
+      //if ($group_by2 == 'date') $group_by2_value = ttDateToUserFormat($group_by2_value);
+      if (empty($group_by2_value)) $group_by2_value = 'Null'; // To match what comes out of makeConcatPart.
       $group_by_key .= ' - '.$group_by2_value;
     }
     if ($options['group_by3'] != null && $options['group_by3'] != 'no_grouping') {
       // We have group_by3.
       $group_by3 = $options['group_by3'];
       $group_by3_value = $row[$group_by3];
-      if ($group_by3 == 'date') $group_by3_value = ttDateToUserFormat($group_by3_value);
+      //if ($group_by3 == 'date') $group_by3_value = ttDateToUserFormat($group_by3_value);
+      if (empty($group_by3_value)) $group_by3_value = 'Null'; // To match what comes out of makeConcatPart.
       $group_by_key .= ' - '.$group_by3_value;
     }
     $group_by_key = trim($group_by_key, ' -');
     return $group_by_key;
+  }
+
+  // makeGroupByPart builds a combined group by part for sql query for time items using group_by1,
+  // group_by2, and group_by3 values passed in $options.
+  static function makeGroupByPart($options) {
+    $no_grouping = ($options['group_by1'] == null || $options['group_by1'] == 'no_grouping') &&
+      ($options['group_by2'] == null || $options['group_by2'] == 'no_grouping') &&
+      ($options['group_by3'] == null || $options['group_by3'] == 'no_grouping');
+    if ($no_grouping) return null;
+
+    $group_by1 = $options['group_by1'];
+    $group_by2 = $options['group_by2'];
+    $group_by3 = $options['group_by3'];
+
+    switch ($group_by1) {
+      case 'date':
+        $group_by_parts .= ', l.date';
+        break;
+      case 'user':
+        $group_by_parts .= ', u.name';
+        break;
+      case 'client':
+        $group_by_parts .= ', c.name';
+        break;
+      case 'project':
+        $group_by_parts .= ', p.name';
+        break;
+      case 'task':
+        $group_by_parts .= ', t.name';
+        break;
+      case 'cf_1':
+        $group_by_parts .= ', cfo.value';
+        break;
+    }
+    switch ($group_by2) {
+      case 'date':
+        $group_by_parts .= ', l.date';
+        break;
+      case 'user':
+        $group_by_parts .= ', u.name';
+        break;
+      case 'client':
+        $group_by_parts .= ', c.name';
+        break;
+      case 'project':
+        $group_by_parts .= ', p.name';
+        break;
+      case 'task':
+        $group_by_parts .= ', t.name';
+        break;
+      case 'cf_1':
+        $group_by_parts .= ', cfo.value';
+        break;
+    }
+    switch ($group_by3) {
+      case 'date':
+        $group_by_parts .= ', l.date';
+        break;
+      case 'user':
+        $group_by_parts .= ', u.name';
+        break;
+      case 'client':
+        $group_by_parts .= ', c.name';
+        break;
+      case 'project':
+        $group_by_parts .= ', p.name';
+        break;
+      case 'task':
+        $group_by_parts .= ', t.name';
+        break;
+      case 'cf_1':
+        $group_by_parts .= ', cfo.value';
+        break;
+    }
+    // Remove garbage from the beginning.
+    $group_by_parts = ltrim($group_by_parts, ', ');
+    $group_by_part = "group by $group_by_parts";
+    return $group_by_part;
+  }
+
+  // makeGroupByExpensesPart builds a combined group by part for sql query for expense items using
+  // group_by1, group_by2, and group_by3 values passed in $options.
+  static function makeGroupByExpensesPart($options) {
+    $no_grouping = ($options['group_by1'] == null || $options['group_by1'] == 'no_grouping') &&
+      ($options['group_by2'] == null || $options['group_by2'] == 'no_grouping') &&
+      ($options['group_by3'] == null || $options['group_by3'] == 'no_grouping');
+    if ($no_grouping) return null;
+
+    $group_by1 = $options['group_by1'];
+    $group_by2 = $options['group_by2'];
+    $group_by3 = $options['group_by3'];
+
+    switch ($group_by1) {
+      case 'date':
+        $group_by_parts .= ', ei.date';
+        break;
+      case 'user':
+        $group_by_parts .= ', u.name';
+        break;
+      case 'client':
+        $group_by_parts .= ', c.name';
+        break;
+      case 'project':
+        $group_by_parts .= ', p.name';
+        break;
+    }
+    switch ($group_by2) {
+      case 'date':
+        $group_by_parts .= ', ei.date';
+        break;
+      case 'user':
+        $group_by_parts .= ', u.name';
+        break;
+      case 'client':
+        $group_by_parts .= ', c.name';
+        break;
+      case 'project':
+        $group_by_parts .= ', p.name';
+        break;
+    }
+    switch ($group_by3) {
+      case 'date':
+        $group_by_parts .= ', ei.date';
+        break;
+      case 'user':
+        $group_by_parts .= ', u.name';
+        break;
+      case 'client':
+        $group_by_parts .= ', c.name';
+        break;
+      case 'project':
+        $group_by_parts .= ', p.name';
+        break;
+    }
+    // Remove garbage from the beginning.
+    $group_by_parts = ltrim($group_by_parts, ', ');
+    $group_by_part = "group by $group_by_parts";
+    return $group_by_part;
+  }
+
+  // makeConcatPart builds a concatenation part for getSubtotals query (for time items).
+  static function makeConcatPart($options) {
+    $group_by1 = $options['group_by1'];
+    $group_by2 = $options['group_by2'];
+    $group_by3 = $options['group_by3'];
+
+    switch ($group_by1) {
+      case 'date':
+        $what_to_concat .= ", ' - ', l.date";
+        break;
+      case 'user':
+        $what_to_concat .= ", ' - ', u.name";
+        break;
+      case 'client':
+        $what_to_concat .= ", ' - ', coalesce(c.name, 'Null')";
+        break;
+      case 'project':
+        $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
+        break;
+      case 'task':
+        $what_to_concat .= ", ' - ', coalesce(t.name, 'Null')";
+        break;
+      case 'cf_1':
+        $what_to_concat .= ", ' - ', coalesce(cfo.value, 'Null')";
+        break;
+    }
+    switch ($group_by2) {
+      case 'date':
+        $what_to_concat .= ", ' - ', l.date";
+        break;
+      case 'user':
+        $what_to_concat .= ", ' - ', u.name";
+        break;
+      case 'client':
+        $what_to_concat .= ", ' - ', coalesce(c.name, 'Null')";
+        break;
+      case 'project':
+        $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
+        break;
+      case 'task':
+        $what_to_concat .= ", ' - ', coalesce(t.name, 'Null')";
+        break;
+      case 'cf_1':
+        $what_to_concat .= ", ' - ', coalesce(cfo.value, 'Null')";
+        break;
+    }
+    switch ($group_by3) {
+      case 'date':
+        $what_to_concat .= ", ' - ', l.date";
+        break;
+      case 'user':
+        $what_to_concat .= ", ' - ', u.name";
+        break;
+      case 'client':
+        $what_to_concat .= ", ' - ', coalesce(c.name, 'Null')";
+        break;
+      case 'project':
+        $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
+        break;
+      case 'task':
+        $what_to_concat .= ", ' - ', coalesce(t.name, 'Null')";
+        break;
+      case 'cf_1':
+        $what_to_concat .= ", ' - ', coalesce(cfo.value, 'Null')";
+        break;
+    }
+    // Remove garbage from both ends.
+    $what_to_concat = trim($what_to_concat, "', -");
+    $concat_part = "concat($what_to_concat) as group_field";
+    $concat_part = trim($concat_part, ' -');
+    return $concat_part;
+  }
+
+  // makeConcatPart builds a concatenation part for getSubtotals query (for expense items).
+  static function makeConcatExpensesPart($options) {
+    $group_by1 = $options['group_by1'];
+    $group_by2 = $options['group_by2'];
+    $group_by3 = $options['group_by3'];
+
+    switch ($group_by1) {
+      case 'date':
+        $what_to_concat .= ", ' - ', ei.date";
+        break;
+      case 'user':
+        $what_to_concat .= ", ' - ', u.name";
+        break;
+      case 'client':
+        $what_to_concat .= ", ' - ', coalesce(c.name, 'Null')";
+        break;
+      case 'project':
+        $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
+        break;
+    }
+    switch ($group_by2) {
+      case 'date':
+        $what_to_concat .= ", ' - ', ei.date";
+        break;
+      case 'user':
+        $what_to_concat .= ", ' - ', u.name";
+        break;
+      case 'client':
+        $what_to_concat .= ", ' - ', coalesce(c.name, 'Null')";
+        break;
+      case 'project':
+        $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
+        break;
+    }
+    switch ($group_by3) {
+      case 'date':
+        $what_to_concat .= ", ' - ', ei.date";
+        break;
+      case 'user':
+        $what_to_concat .= ", ' - ', u.name";
+        break;
+      case 'client':
+        $what_to_concat .= ", ' - ', coalesce(c.name, 'Null')";
+        break;
+      case 'project':
+        $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
+        break;
+    }
+    // Remove garbage from both ends.
+    $what_to_concat = trim($what_to_concat, "', -");
+    $concat_part = "concat($what_to_concat) as group_field";
+    $concat_part = trim($concat_part, ' -');
+    return $concat_part;
+  }
+
+  // makeJoinPart builds a left join part for getSubtotals query (for time items).
+  static function makeJoinPart($options) {
+    global $custom_fields; // TODO: is it safe to assume the object is there when needed?
+
+    $group_by_fields = ttReportHelper::makeGroupByFieldsPart($options); // TODO: refactor this, perhaps?
+    if (strpos($group_by_fields, 'user') !== false) {
+      // Grouping by user, add a join on tt_users table.
+      $join .= ' left join tt_users u on (l.user_id = u.id)';
+    }
+    if (strpos($group_by_fields, 'client') !== false) {
+      // Grouping by client, add a join on tt_clients table.
+      $join .= ' left join tt_clients c on (l.client_id = c.id)';
+    }
+    if (strpos($group_by_fields, 'project') !== false) {
+      // Grouping by project, add a join on tt_projects table.
+      $join .= ' left join tt_projects p on (l.project_id = p.id)';
+    }
+    if (strpos($group_by_fields, 'task') !== false) {
+      // Grouping by task, add a join on tt_tasks table.
+      $join .= ' left join tt_tasks t on (l.task_id = t.id)';
+    }
+    if (strpos($group_by_fields, 'cf_1') !== false) {
+      // Grouping by custom field 1, add a join for it.
+      // $custom_fields = new CustomFields($user->group_id);
+      if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
+        $join .= ' left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id)';
+      elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
+        $join .= ' left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.option_id = cfo.id)';
+    }
+    return $join;
+  }
+
+  // makeJoinExpensesPart builds a left join part for getSubtotals query for expense items.
+  static function makeJoinExpensesPart($options) {
+    $group_by_fields = ttReportHelper::makeGroupByFieldsPart($options); // TODO: refactor this, perhaps?
+    if (strpos($group_by_fields, 'user') !== false) {
+      // Grouping by user, add a join on tt_users table.
+      $join .= ' left join tt_users u on (ei.user_id = u.id)';
+    }
+    if (strpos($group_by_fields, 'client') !== false) {
+      // Grouping by client, add a join on tt_clients table.
+      $join .= ' left join tt_clients c on (ei.client_id = c.id)';
+    }
+    if (strpos($group_by_fields, 'project') !== false) {
+      // Grouping by project, add a join on tt_projects table.
+      $join .= ' left join tt_projects p on (ei.project_id = p.id)';
+    }
+    return $join;
+  }
+  
+  // makeGroupByFieldsPart builds a commma-separated list of fields for sql query using group_by1,
+  // group_by2, and group_by3 values passed in $options.
+  static function makeGroupByFieldsPart($options) {
+    $no_grouping = ($options['group_by1'] == null || $options['group_by1'] == 'no_grouping') &&
+      ($options['group_by2'] == null || $options['group_by2'] == 'no_grouping') &&
+      ($options['group_by3'] == null || $options['group_by3'] == 'no_grouping');
+    if ($no_grouping) return null;
+
+    if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
+      // We have group_by1.
+      $group_by_fields .= ', '.$options['group_by1'];
+    }
+    if ($options['group_by2'] != null && $options['group_by2'] != 'no_grouping') {
+      // We have group_by2.
+      $group_by_fields .= ', '.$options['group_by2'];
+    }
+    if ($options['group_by3'] != null && $options['group_by3'] != 'no_grouping') {
+      // We have group_by3.
+      $group_by_fields .= ', '.$options['group_by3'];
+    }
+    $group_by_fields = ltrim($group_by_fields, ', ');
+    return $group_by_fields;
+  }
+
+  // groupingByUser determines if we are grouping a report by user.
+  static function groupingByUser($options) {
+    if ($options['group_by1'] == 'user' || $options['group_by2'] == 'user' || $options['group_by3'] == 'user') return true;
+
+    return false;
+  }
+
+  // makeGroupByHeader builds a column header for a totals-only report using group_by1,
+  // group_by2, and group_by3 values passed in $options.
+  static function makeGroupByHeader($options) {
+    global $i18n;
+    global $custom_fields;
+
+    $no_grouping = ($options['group_by1'] == null || $options['group_by1'] == 'no_grouping') &&
+      ($options['group_by2'] == null || $options['group_by2'] == 'no_grouping') &&
+      ($options['group_by3'] == null || $options['group_by3'] == 'no_grouping');
+    if ($no_grouping) return null;
+
+    if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
+      // We have group_by1.
+      $group_by1 = $options['group_by1'];
+      if ('cf_1' == $group_by1)
+        $group_by_header .= ' - '.$custom_fields->fields[0]['label'];
+      else {
+        $key = 'label.'.$group_by1;
+        $group_by_header .= ' - '.$i18n->get($key);
+      }
+    }
+    if ($options['group_by2'] != null && $options['group_by2'] != 'no_grouping') {
+      // We have group_by2.
+      $group_by2 = $options['group_by2'];
+      if ('cf_1' == $group_by2)
+        $group_by_header .= ' - '.$custom_fields->fields[0]['label'];
+      else {
+        $key = 'label.'.$group_by2;
+        $group_by_header .= ' - '.$i18n->get($key);
+      }
+    }
+    if ($options['group_by3'] != null && $options['group_by3'] != 'no_grouping') {
+      // We have group_by3.
+      $group_by3 = $options['group_by3'];
+      if ('cf_1' == $group_by3)
+        $group_by_header .= ' - '.$custom_fields->fields[0]['label'];
+      else {
+        $key = 'label.'.$group_by3;
+        $group_by_header .= ' - '.$i18n->get($key);
+      }
+    }
+    $group_by_header = ltrim($group_by_header, ' -');
+    return $group_by_header;
   }
 }
