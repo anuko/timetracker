@@ -468,11 +468,6 @@ class ttReportHelper {
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
     while ($val = $res->fetchRow()) {
-// TODO: consider writing a function that properly formats a date part in a multi-part key.
-//
-//      if ('date' == $group_by_option) {
-//        $val['group_field'] = ttDateToUserFormat($val['group_field']);
-//      }
       $time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
       $rowLabel = ttReportHelper::makeGroupByLabel($val['group_field'], $options);
       if ($options['show_cost']) {
@@ -1476,6 +1471,25 @@ class ttReportHelper {
     }
     $group_by_header = ltrim($group_by_header, ' -');
     return $group_by_header;
+  }
+
+  // makeGroupByXmlTag creates an xml tag for a totals only report using group_by1,
+  // group_by2, and group_by3 values passed in $options.
+  static function makeGroupByXmlTag($options) {
+    if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
+      // We have group_by1.
+      $tag .= '_'.$options['group_by1'];
+    }
+    if ($options['group_by2'] != null && $options['group_by2'] != 'no_grouping') {
+      // We have group_by2.
+      $tag .= '_'.$options['group_by2'];
+    }
+    if ($options['group_by3'] != null && $options['group_by3'] != 'no_grouping') {
+      // We have group_by3.
+      $tag .= '_'.$options['group_by3'];
+    }
+    $tag = ltrim($tag, '_');
+    return $tag;
   }
 
   // makeGroupByLabel builds a label for one row in a "Totals only" report of grouped by items.
