@@ -178,7 +178,7 @@ $report_items = ttReportHelper::getItems($options);
 if ($request->isGet() && $user->isPluginEnabled('ps'))
   ttReportHelper::putInSession($report_items);
 
-if ('no_grouping' != $group_by)
+if (ttReportHelper::grouping($options))
   $subtotals = ttReportHelper::getSubtotals($options);
 $totals = ttReportHelper::getTotals($options);
 

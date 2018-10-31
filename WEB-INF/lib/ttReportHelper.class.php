@@ -1411,6 +1411,15 @@ class ttReportHelper {
     return $group_by_fields;
   }
 
+  // grouping determines if we are grooping the project by either group_by1,
+  // group_by2, or group_by3 values passed in $options.
+  static function grouping($options) {
+    $grouping = ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') ||
+      ($options['group_by2'] != null && $options['group_by2'] != 'no_grouping') ||
+      ($options['group_by3'] != null && $options['group_by3'] != 'no_grouping');
+    return $grouping;
+  }
+
   // groupingByUser determines if we are grouping a report by user.
   static function groupingByUser($options) {
     if ($options['group_by1'] == 'user' || $options['group_by2'] == 'user' || $options['group_by3'] == 'user') return true;
