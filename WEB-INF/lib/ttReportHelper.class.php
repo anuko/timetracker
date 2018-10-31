@@ -127,9 +127,7 @@ class ttReportHelper {
     $canViewReports = $user->can('view_reports') || $user->can('view_all_reports');
     $isClient = $user->isClient();
 
-    $no_grouping = ($options['group_by1'] == null || $options['group_by1'] == 'no_grouping') &&
-                   ($options['group_by2'] == null || $options['group_by2'] == 'no_grouping') &&
-                   ($options['group_by3'] == null || $options['group_by3'] == 'no_grouping');
+    $grouping = ttReportHelper::grouping($options);
     $grouping_by_date = ($options['group_by1'] == 'date'|| $options['group_by2'] == 'date' || $options['group_by3'] == 'date');
     $grouping_by_client = ($options['group_by1'] == 'client'|| $options['group_by2'] == 'client' || $options['group_by3'] == 'client');
     $grouping_by_project = ($options['group_by1'] == 'project'|| $options['group_by2'] == 'project' || $options['group_by3'] == 'project');
@@ -311,14 +309,14 @@ class ttReportHelper {
 
     // Determine sort part.
     $sort_part = ' order by ';
-    if ($no_grouping)
-      $sort_part .= 'date';
-    else {
+    if ($grouping) {
       $sort_part2 .= ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') ? ', '.$options['group_by1'] : '';
       $sort_part2 .= ($options['group_by2'] != null && $options['group_by2'] != 'no_grouping') ? ', '.$options['group_by2'] : '';
       $sort_part2 .= ($options['group_by3'] != null && $options['group_by3'] != 'no_grouping') ? ', '.$options['group_by3'] : '';
       if (!$grouping_by_date) $sort_part2 .= ', date';
       $sort_part .= ltrim($sort_part2, ', '); // Remove leading comma and space.
+    } else {
+      $sort_part .= 'date';
     }
     if (($canViewReports || $isClient) && $options['users'] && !$grouping_by_user)
       $sort_part .= ', user, type';
@@ -349,7 +347,7 @@ class ttReportHelper {
           $val['expense'] = str_replace('.', $user->decimal_mark, $val['expense']);
       }
 
-      if (!$no_grouping) $val['grouped_by'] = ttReportHelper::makeGroupByKey($options, $val);
+      if ($grouping) $val['grouped_by'] = ttReportHelper::makeGroupByKey($options, $val);
       $val['date'] = ttDateToUserFormat($val['date']);
 
       $report_items[] = $val;
@@ -476,14 +474,15 @@ class ttReportHelper {
 //        $val['group_field'] = ttDateToUserFormat($val['group_field']);
 //      }
       $time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
+      $rowLabel = ttReportHelper::makeGroupByLabel($val['group_field'], $options);
       if ($options['show_cost']) {
         if ('.' != $user->decimal_mark) {
           $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
           $val['expenses'] = str_replace('.', $user->decimal_mark, $val['expenses']);
         }
-        $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time, 'units'=> $val['units'], 'cost'=>$val['cost'],'expenses'=>$val['expenses']);
+        $subtotals[$val['group_field']] = array('name'=>$rowLabel,'time'=>$time, 'units'=> $val['units'], 'cost'=>$val['cost'],'expenses'=>$val['expenses']);
       } else
-        $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time, 'units'=> $val['units']);
+        $subtotals[$val['group_field']] = array('name'=>$rowLabel,'time'=>$time, 'units'=> $val['units']);
     }
 
     return $subtotals;
@@ -1074,10 +1073,7 @@ class ttReportHelper {
   // makeGroupByPart builds a combined group by part for sql query for time items using group_by1,
   // group_by2, and group_by3 values passed in $options.
   static function makeGroupByPart($options) {
-    $no_grouping = ($options['group_by1'] == null || $options['group_by1'] == 'no_grouping') &&
-      ($options['group_by2'] == null || $options['group_by2'] == 'no_grouping') &&
-      ($options['group_by3'] == null || $options['group_by3'] == 'no_grouping');
-    if ($no_grouping) return null;
+    if (!ttReportHelper::grouping($options)) return null;
 
     $group_by1 = $options['group_by1'];
     $group_by2 = $options['group_by2'];
@@ -1411,7 +1407,7 @@ class ttReportHelper {
     return $group_by_fields;
   }
 
-  // grouping determines if we are grooping the project by either group_by1,
+  // grouping determines if we are grouping the report by either group_by1,
   // group_by2, or group_by3 values passed in $options.
   static function grouping($options) {
     $grouping = ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') ||
@@ -1425,6 +1421,16 @@ class ttReportHelper {
     if ($options['group_by1'] == 'user' || $options['group_by2'] == 'user' || $options['group_by3'] == 'user') return true;
 
     return false;
+  }
+  
+  // groupingBy determines if we are grouping a report by a value of $what
+  // ('user', 'project', etc.) by checking group_by1, group_by2, and group_by3
+  // values passed in $options.
+  static function groupingBy($what, $options) {
+    $grouping = ($options['group_by1'] != null && $options['group_by1'] != $what) ||
+      ($options['group_by2'] != null && $options['group_by2'] != $what) ||
+      ($options['group_by3'] != null && $options['group_by3'] != $what);
+    return $grouping;
   }
 
   // makeGroupByHeader builds a column header for a totals-only report using group_by1,
@@ -1470,5 +1476,25 @@ class ttReportHelper {
     }
     $group_by_header = ltrim($group_by_header, ' -');
     return $group_by_header;
+  }
+
+  // makeGroupByLabel builds a label for one row in a "Totals only" report of grouped by items.
+  // It does one thing: if we are grouping by date, the date format is converted for user.
+  static function makeGroupByLabel($key, $options) {
+    if (!ttReportHelper::groupingBy('date', $options))
+      return $key; // No need to format.
+
+    global $user;
+    if ($user->date_format == DB_DATEFORMAT)
+      return $key; // No need to format.
+
+    $label = $key;
+    if (preg_match('/\d\d\d\d-\d\d-\d\d/', $key, $matches)) {
+      // Replace the first found match of a date in DB_DATEFORMAT.
+      // This is not entirely clean but better than nothing for a label in a row.
+      $userDate = ttDateToUserFormat($matches[0]);
+      $label = str_replace($matches[0], $userDate, $key);
+    }
+    return $label;
   }
 }
