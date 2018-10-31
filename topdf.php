@@ -64,14 +64,15 @@ $totals_only = ($bean->getAttribute('chtotalsonly') == '1');
 
 // Obtain items for report.
 $options = ttReportHelper::getReportOptions($bean);
+$grouping = ttReportHelper::grouping($options);
 if (!$totals_only)
   $items = ttReportHelper::getItems($options); // Individual entries.
-if ($totals_only || ttReportHelper::grouping($options))
+if ($totals_only || $grouping)
   $subtotals = ttReportHelper::getSubtotals($options); // Subtotals for groups of items.
 $totals = ttReportHelper::getTotals($options); // Totals for the entire report.
 
 // Assign variables that are used to print subtotals.
-if ($items && 'no_grouping' != $group_by1) {
+if ($items && $grouping) {
   $print_subtotals = true;
   $first_pass = true;
   $prev_grouped_by = '';

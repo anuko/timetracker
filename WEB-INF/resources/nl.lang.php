@@ -93,9 +93,7 @@ $i18n_key_words = array(
 'error.no_groups' => 'Uw database is leeg. Meld je aan als admin en maak een nieuw groep.',
 'error.upload' => 'Fout bij het uploaden van het bestand.',
 'error.range_locked' => 'Datums zijn geblokkeerd.',
-'error.mail_send' => 'Fout bij het versturen van een e-mailbericht.',
-// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
-// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
+'error.mail_send' => 'Fout bij het versturen van een e-mailbericht. Gebruik MAIL_SMTP_DEBUG om het probleem te diagnosticeren',
 'error.no_email' => 'Geen e-mailadres bekend voor dit account.',
 'error.uncompleted_exists' => 'Niet afgeronde invoer bestaat al. Sluit of verwijder deze.',
 'error.goto_uncompleted' => 'Ga naar onvolledige invoer.',
