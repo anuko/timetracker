@@ -134,20 +134,28 @@ function selectAssignedUsers(project_id) {
 }
 
 // handleCheckboxes - unmarks and hides the "Totals only" checkbox when
-// "no grouping" is selected in the associated dropdown.
+// "no grouping" is selected in the associated group by dropdowns.
 function handleCheckboxes() {
   var totalsOnlyCheckbox = document.getElementById("chtotalsonly");
   var totalsOnlyLabel = document.getElementById("totals_only_label");
-  if ("no_grouping" == document.getElementById("group_by1").value
-      && "no_grouping" == document.getElementById("group_by2").value
-      && "no_grouping" == document.getElementById("group_by3").value) {
+  var groupBy1 = document.getElementById("group_by1");
+  var groupBy2 = document.getElementById("group_by2");
+  var groupBy3 = document.getElementById("group_by3");
+  var grouping = false;
+  if ((groupBy1 != null && "no_grouping" != groupBy1.value) ||
+      (groupBy2 != null && "no_grouping" != groupBy2.value) ||
+      (groupBy3 != null && "no_grouping" != groupBy3.value)) {
+    grouping = true;
+  }
+  if (grouping) {
+    // Show the "Totals only" checkbox.
+    totalsOnlyCheckbox.style.visibility = "visible";
+    totalsOnlyLabel.style.visibility = "visible";
+  } else {
     // Unmark and hide the "Totals only" checkbox.
     totalsOnlyCheckbox.checked = false;
     totalsOnlyCheckbox.style.visibility = "hidden";
     totalsOnlyLabel.style.visibility = "hidden";
-  } else {
-    totalsOnlyCheckbox.style.visibility = "visible";
-    totalsOnlyLabel.style.visibility = "visible";
   }
 }
 </script>
