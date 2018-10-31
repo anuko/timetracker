@@ -138,8 +138,10 @@ function selectAssignedUsers(project_id) {
 function handleCheckboxes() {
   var totalsOnlyCheckbox = document.getElementById("chtotalsonly");
   var totalsOnlyLabel = document.getElementById("totals_only_label");
-  if ("no_grouping" == document.getElementById("group_by1").value) {
-    // Unmark and disable the "Totals only" checkbox.
+  if ("no_grouping" == document.getElementById("group_by1").value
+      && "no_grouping" == document.getElementById("group_by2").value
+      && "no_grouping" == document.getElementById("group_by3").value) {
+    // Unmark and hide the "Totals only" checkbox.
     totalsOnlyCheckbox.checked = false;
     totalsOnlyCheckbox.style.visibility = "hidden";
     totalsOnlyLabel.style.visibility = "hidden";
