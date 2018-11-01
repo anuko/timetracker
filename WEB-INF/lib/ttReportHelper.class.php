@@ -395,9 +395,6 @@ class ttReportHelper {
   static function getSubtotals($options) {
     global $user;
 
-    $group_fields = ttReportHelper::makeGroupByFieldsPart($options);
-    if (!$group_fields) return null;
-
     $mdb2 = getConnection();
 
     $concat_part = ttReportHelper::makeConcatPart($options);
@@ -452,18 +449,18 @@ class ttReportHelper {
       $concat_part = ttReportHelper::makeConcatExpensesPart($options);
       $join_part = ttReportHelper::makeJoinExpensesPart($options);
       $where = ttReportHelper::getExpenseWhere($options);
-      $group_by_part = ttReportHelper::makeGroupByExpensesPart($options);
+      $group_by_expenses_part = ttReportHelper::makeGroupByExpensesPart($options);
       $sql_for_expenses = "select $concat_part, null as time";
       if ($options['show_work_units']) $sql_for_expenses .= ", null as units";
-      $sql_for_expenses .= ", sum(ei.cost) as cost, sum(ei.cost) as expenses from tt_expense_items ei $join_part $where $group_by_part";
-
+      $sql_for_expenses .= ", sum(ei.cost) as cost, sum(ei.cost) as expenses from tt_expense_items ei $join_part $where $group_by_expenses_part";
+//die($sql_for_expenses);
       // Create a combined query.
       $combined = "select group_field, sum(time) as time";
       if ($options['show_work_units']) $combined .= ", sum(units) as units";
       $combined .= ", sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t group by group_field";
       $sql = $combined;
     }
-
+//die($sql);
     // Execute query.
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
@@ -475,9 +472,9 @@ class ttReportHelper {
           $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
           $val['expenses'] = str_replace('.', $user->decimal_mark, $val['expenses']);
         }
-        $subtotals[$val['group_field']] = array('name'=>$rowLabel,'time'=>$time, 'units'=> $val['units'], 'cost'=>$val['cost'],'expenses'=>$val['expenses']);
+        $subtotals[$val['group_field']] = array('name'=>$rowLabel,'user'=>$val['user'],'project'=>$val['project'],'task'=>$val['task'],'client'=>$val['client'],'cf_1'=>$val['cf_1'],'time'=>$time,'units'=> $val['units'],'cost'=>$val['cost'],'expenses'=>$val['expenses']);
       } else
-        $subtotals[$val['group_field']] = array('name'=>$rowLabel,'time'=>$time, 'units'=> $val['units']);
+        $subtotals[$val['group_field']] = array('name'=>$rowLabel,'user'=>$val['user'],'project'=>$val['project'],'task'=>$val['task'],'client'=>$val['client'],'cf_1'=>$val['cf_1'],'time'=>$time, 'units'=> $val['units']);
     }
 
     return $subtotals;
@@ -1196,7 +1193,8 @@ class ttReportHelper {
     }
     // Remove garbage from the beginning.
     $group_by_parts = ltrim($group_by_parts, ', ');
-    $group_by_part = "group by $group_by_parts";
+    if ($group_by_parts)
+      $group_by_part = "group by $group_by_parts";
     return $group_by_part;
   }
 
@@ -1212,18 +1210,23 @@ class ttReportHelper {
         break;
       case 'user':
         $what_to_concat .= ", ' - ', u.name";
+        $fields_part .= ', u.name as user';
         break;
       case 'client':
         $what_to_concat .= ", ' - ', coalesce(c.name, 'Null')";
+        $fields_part .= ', c.name as client';
         break;
       case 'project':
         $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
+        $fields_part .= ', p.name as project';
         break;
       case 'task':
         $what_to_concat .= ", ' - ', coalesce(t.name, 'Null')";
+        $fields_part .= ', t.name as task';
         break;
       case 'cf_1':
         $what_to_concat .= ", ' - ', coalesce(cfo.value, 'Null')";
+        $fields_part .= ', cfo.value as cf_1';
         break;
     }
     switch ($group_by2) {
@@ -1232,18 +1235,23 @@ class ttReportHelper {
         break;
       case 'user':
         $what_to_concat .= ", ' - ', u.name";
+        $fields_part .= ', u.name as user';
         break;
       case 'client':
         $what_to_concat .= ", ' - ', coalesce(c.name, 'Null')";
+        $fields_part .= ', c.name as client';
         break;
       case 'project':
         $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
+        $fields_part .= ', p.name as project';
         break;
       case 'task':
         $what_to_concat .= ", ' - ', coalesce(t.name, 'Null')";
+        $fields_part .= ', t.name as task';
         break;
       case 'cf_1':
         $what_to_concat .= ", ' - ', coalesce(cfo.value, 'Null')";
+        $fields_part .= ', cfo.value as cf_1';
         break;
     }
     switch ($group_by3) {
@@ -1252,25 +1260,30 @@ class ttReportHelper {
         break;
       case 'user':
         $what_to_concat .= ", ' - ', u.name";
+        $fields_part .= ', u.name as user';
         break;
       case 'client':
         $what_to_concat .= ", ' - ', coalesce(c.name, 'Null')";
+        $fields_part .= ', c.name as client';
         break;
       case 'project':
         $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
+        $fields_part .= ', p.name as project';
         break;
       case 'task':
         $what_to_concat .= ", ' - ', coalesce(t.name, 'Null')";
+        $fields_part .= ', t.name as task';
         break;
       case 'cf_1':
         $what_to_concat .= ", ' - ', coalesce(cfo.value, 'Null')";
+        $fields_part .= ', cfo.value as cf_1';
         break;
     }
     // Remove garbage from both ends.
     $what_to_concat = trim($what_to_concat, "', -");
     $concat_part = "concat($what_to_concat) as group_field";
     $concat_part = trim($concat_part, ' -');
-    return $concat_part;
+    return "$concat_part $fields_part";
   }
 
   // makeConcatPart builds a concatenation part for getSubtotals query (for expense items).
@@ -1285,12 +1298,25 @@ class ttReportHelper {
         break;
       case 'user':
         $what_to_concat .= ", ' - ', u.name";
+        $fields_part .= ', u.name as user';
         break;
       case 'client':
         $what_to_concat .= ", ' - ', coalesce(c.name, 'Null')";
+        $fields_part .= ', c.name as client';
         break;
       case 'project':
         $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
+        $fields_part .= ', p.name as project';
+        break;
+
+      case 'task':
+        $what_to_concat .= ", ' - ', 'Null'";
+        $fields_part .= ', null as task';
+        break;
+
+      case 'cf_1':
+        $what_to_concat .= ", ' - ', 'Null'";
+        $fields_part .= ', null as cf_1';
         break;
     }
     switch ($group_by2) {
@@ -1299,12 +1325,25 @@ class ttReportHelper {
         break;
       case 'user':
         $what_to_concat .= ", ' - ', u.name";
+        $fields_part .= ', u.name as user';
         break;
       case 'client':
         $what_to_concat .= ", ' - ', coalesce(c.name, 'Null')";
+        $fields_part .= ', c.name as client';
         break;
       case 'project':
         $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
+        $fields_part .= ', p.name as project';
+        break;
+
+      case 'task':
+        $what_to_concat .= ", ' - ', 'Null'";
+        $fields_part .= ', null as task';
+        break;
+
+      case 'cf_1':
+        $what_to_concat .= ", ' - ', 'Null'";
+        $fields_part .= ', null as cf_1';
         break;
     }
     switch ($group_by3) {
@@ -1313,19 +1352,32 @@ class ttReportHelper {
         break;
       case 'user':
         $what_to_concat .= ", ' - ', u.name";
+        $fields_part .= ', u.name as user';
         break;
       case 'client':
         $what_to_concat .= ", ' - ', coalesce(c.name, 'Null')";
+        $fields_part .= ', c.name as client';
         break;
       case 'project':
         $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
+        $fields_part .= ', p.name as project';
+        break;
+
+      case 'task':
+        $what_to_concat .= ", ' - ', 'Null'";
+        $fields_part .= ', null as task';
+        break;
+
+      case 'cf_1':
+        $what_to_concat .= ", ' - ', 'Null'";
+        $fields_part .= ', null as cf_1';
         break;
     }
-    // Remove garbage from both ends.
-    $what_to_concat = trim($what_to_concat, "', -");
+    // Remove garbage from the beginning.
+    if ($what_to_concat)
+        $what_to_concat = substr($what_to_concat, 8);
     $concat_part = "concat($what_to_concat) as group_field";
-    $concat_part = trim($concat_part, ' -');
-    return $concat_part;
+    return "$concat_part $fields_part";
   }
 
   // makeJoinPart builds a left join part for getSubtotals query (for time items).

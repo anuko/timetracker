@@ -173,6 +173,8 @@ if ($request->isPost()) {
 $group_by = $bean->getAttribute('group_by1');
 
 $options = ttReportHelper::getReportOptions($bean);
+
+$group_by_tag = ttReportHelper::makeGroupByXmlTag($options);
 $report_items = ttReportHelper::getItems($options);
 // Store record ids in session in case user wants to act on records such as marking them all paid.
 if ($request->isGet() && $user->isPluginEnabled('ps'))
@@ -201,6 +203,9 @@ if ('no_grouping' != $group_by) {
   } */
   $smarty->assign('group_by_header', ttReportHelper::makeGroupByHeader($options));
 }
+
+$smarty->assign('group_by', $group_by_tag);
+
 // Assign variables that are used to alternate color of rows for different dates.
 $smarty->assign('prev_date', '');
 $smarty->assign('cur_date', '');

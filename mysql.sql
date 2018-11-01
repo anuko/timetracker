@@ -382,6 +382,8 @@ CREATE TABLE `tt_custom_field_log` (
   PRIMARY KEY  (`id`)
 );
 
+create index log_idx on tt_custom_field_log(log_id);
+
 
 #
 # Structure for table tt_expense_items.
@@ -456,4 +458,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.00', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.05', now()); # TODO: change when structure changes.

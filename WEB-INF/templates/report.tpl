@@ -62,11 +62,11 @@
       {if $cur_grouped_by != $prev_grouped_by && !$first_pass}
       <tr class="rowReportSubtotal">
         <td class="cellLeftAlignedSubtotal">{$i18n.label.subtotal}
-        {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="cellLeftAlignedSubtotal">{if $group_by == 'user'}{$subtotals[$prev_grouped_by]['name']|escape}</td>{/if}{/if}
-        {if $bean->getAttribute('chclient')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'client'}{$subtotals[$prev_grouped_by]['name']|escape}</td>{/if}{/if}
-        {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'project'}{$subtotals[$prev_grouped_by]['name']|escape}</td>{/if}{/if}
-        {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'task'}{$subtotals[$prev_grouped_by]['name']|escape}</td>{/if}{/if}
-        {if $bean->getAttribute('chcf_1')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'cf_1'}{$subtotals[$prev_grouped_by]['name']|escape}</td>{/if}{/if}
+        {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['user']|escape}</td>{/if}
+        {if $bean->getAttribute('chclient')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['client']|escape}</td>{/if}
+        {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['project']|escape}</td>{/if}
+        {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['task']|escape}</td>{/if}
+        {if $bean->getAttribute('chcf_1')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['cf_1']|escape}</td>{/if}
         {if $bean->getAttribute('chstart')}<td></td>{/if}
         {if $bean->getAttribute('chfinish')}<td></td>{/if}
         {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$subtotals[$prev_grouped_by]['time']}</td>{/if}
@@ -114,11 +114,11 @@
   {if $print_subtotals}
       <tr class="rowReportSubtotal">
         <td class="cellLeftAlignedSubtotal">{$i18n.label.subtotal}
-    {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="cellLeftAlignedSubtotal">{if $group_by == 'user'}{$subtotals[$cur_grouped_by]['name']|escape}</td>{/if}{/if}
-    {if $bean->getAttribute('chclient')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'client'}{$subtotals[$cur_grouped_by]['name']|escape}</td>{/if}{/if}
-    {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'project'}{$subtotals[$cur_grouped_by]['name']|escape}</td>{/if}{/if}
-    {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'task'}{$subtotals[$cur_grouped_by]['name']|escape}</td>{/if}{/if}
-    {if $bean->getAttribute('chcf_1')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'cf_1'}{$subtotals[$cur_grouped_by]['name']|escape}</td>{/if}{/if}
+    {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['user']|escape}</td>{/if}
+    {if $bean->getAttribute('chclient')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['client']|escape}</td>{/if}
+    {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['project']|escape}</td>{/if}
+    {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['task']|escape}</td>{/if}
+    {if $bean->getAttribute('chcf_1')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['cf_1']|escape}</td>{/if}
     {if $bean->getAttribute('chstart')}<td></td>{/if}
     {if $bean->getAttribute('chfinish')}<td></td>{/if}
     {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$subtotals[$cur_grouped_by]['time']}</td>{/if}
