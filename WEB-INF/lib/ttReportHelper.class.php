@@ -609,8 +609,8 @@ class ttReportHelper {
     $isClient = $user->isClient();
 
     $items = ttReportHelper::getItems($options);
-    $group_by = $options['group_by1'];
-    if ($group_by && 'no_grouping' != $group_by)
+    $grouping = ttReportHelper::grouping($options);
+    if ($grouping)
       $subtotals = ttReportHelper::getSubtotals($options);
     $totals = ttReportHelper::getTotals($options);
 
@@ -643,14 +643,7 @@ class ttReportHelper {
 
     if ($options['show_totals_only']) {
       // Totals only report. Output subtotals.
-
-      // Determine group_by header.
-      if ('cf_1' == $group_by)
-        $group_by_header = htmlspecialchars($custom_fields->fields[0]['label']);
-      else {
-        $key = 'label.'.$group_by;
-        $group_by_header = $i18n->get($key);
-      }
+      $group_by_header = ttReportHelper::makeGroupByHeader($options);
 
       $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
       $body .= '<tr>';
@@ -743,7 +736,7 @@ class ttReportHelper {
       $body .= '</tr>';
 
       // Initialize variables to print subtotals.
-      if ($items && 'no_grouping' != $group_by) {
+      if ($items && $grouping) {
         $print_subtotals = true;
         $first_pass = true;
         $prev_grouped_by = '';
@@ -765,11 +758,11 @@ class ttReportHelper {
               $body .= '<tr style="'.$rowSubtotal.'">';
               $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
               $subtotal_name = htmlspecialchars($subtotals[$prev_grouped_by]['name']);
-              if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
-              if ($options['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
-              if ($options['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
-              if ($options['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
-              if ($options['show_custom_field_1']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'cf_1' ? $subtotal_name : '').'</td>';
+              if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['user'].'</td>';
+              if ($options['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['client'].'</td>';
+              if ($options['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['project'].'</td>';
+              if ($options['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['task'].'</td>';
+              if ($options['show_custom_field_1']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['cf_1'].'</td>';
               if ($options['show_start']) $body .= '<td></td>';
               if ($options['show_end']) $body .= '<td></td>';
               if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['time'].'</td>';
@@ -841,11 +834,11 @@ class ttReportHelper {
         $body .= '<tr style="'.$rowSubtotal.'">';
         $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
         $subtotal_name = htmlspecialchars($subtotals[$cur_grouped_by]['name']);
-        if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'user' ? $subtotal_name : '').'</td>';
-        if ($options['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'client' ? $subtotal_name : '').'</td>';
-        if ($options['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'project' ? $subtotal_name : '').'</td>';
-        if ($options['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'task' ? $subtotal_name : '').'</td>';
-        if ($options['show_custom_field_1']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($group_by == 'cf_1' ? $subtotal_name : '').'</td>';
+        if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['user'].'</td>';
+        if ($options['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['client'].'</td>';
+        if ($options['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['project'].'</td>';
+        if ($options['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['task'].'</td>';
+        if ($options['show_custom_field_1']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['cf_1'].'</td>';
         if ($options['show_start']) $body .= '<td></td>';
         if ($options['show_end']) $body .= '<td></td>';
         if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['time'].'</td>';
