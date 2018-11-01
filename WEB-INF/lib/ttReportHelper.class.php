@@ -1445,7 +1445,10 @@ class ttReportHelper {
 
   // makeJoinPart builds a left join part for getSubtotals query (for time items).
   static function makeJoinPart($options) {
-    global $custom_fields; // TODO: is it safe to assume the object is there when needed?
+    global $user;
+    if (ttReportHelper::groupingBy('cf_1', $options)) {
+      $custom_fields = new CustomFields($user->group_id);
+    }
 
     $group_by_fields = ttReportHelper::makeGroupByFieldsPart($options); // TODO: refactor this, perhaps?
     if (strpos($group_by_fields, 'user') !== false) {
