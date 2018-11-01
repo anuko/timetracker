@@ -172,27 +172,27 @@ if ($totals_only) {
         $html .= '<td>'.$i18n->get('label.subtotal').'</td>';
         if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
             $html .= '<td>';
-            if ($group_by1 == 'user') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+            $html .= htmlspecialchars($subtotals[$prev_grouped_by]['user']);
             $html .= '</td>';
         }
         if ($bean->getAttribute('chclient')) {
             $html .= '<td>';
-            if ($group_by1 == 'client') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+            $html .= htmlspecialchars($subtotals[$prev_grouped_by]['client']);
             $html .= '</td>';
         }
         if ($bean->getAttribute('chproject')) {
             $html .= '<td>';
-            if ($group_by1 == 'project') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+            $html .= htmlspecialchars($subtotals[$prev_grouped_by]['project']);
             $html .= '</td>';
         }
         if ($bean->getAttribute('chtask')) {
             $html .= '<td>';
-            if ($group_by1 == 'task') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+            $html .= htmlspecialchars($subtotals[$prev_grouped_by]['task']);
             $html .= '</td>';
         }
         if ($bean->getAttribute('chcf_1')) {
             $html .= '<td>';
-            if ($group_by1 == 'cf_1') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+            $html .= htmlspecialchars($subtotals[$prev_grouped_by]['cf_1']);
             $html .= '</td>';
         }
         if ($bean->getAttribute('chstart')) $html .= '<td></td>';
@@ -261,27 +261,27 @@ if ($totals_only) {
     $html .= '<td>'.$i18n->get('label.subtotal').'</td>';
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
       $html .= '<td>';
-      if ($group_by1 == 'user') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+      $html .= htmlspecialchars($subtotals[$prev_grouped_by]['user']);
       $html .= '</td>';
     }
     if ($bean->getAttribute('chclient')) {
       $html .= '<td>';
-      if ($group_by1 == 'client') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+      $html .= htmlspecialchars($subtotals[$prev_grouped_by]['client']);
       $html .= '</td>';
     }
     if ($bean->getAttribute('chproject')) {
       $html .= '<td>';
-      if ($group_by1 == 'project') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+      $html .= htmlspecialchars($subtotals[$prev_grouped_by]['project']);
       $html .= '</td>';
     }
     if ($bean->getAttribute('chtask')) {
       $html .= '<td>';
-      if ($group_by1 == 'task') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+      $html .= htmlspecialchars($subtotals[$prev_grouped_by]['task']);
       $html .= '</td>';
     }
     if ($bean->getAttribute('chcf_1')) {
       $html .= '<td>';
-      if ($group_by1 == 'cf_1') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+      $html .= htmlspecialchars($subtotals[$prev_grouped_by]['cf_1']);
       $html .= '</td>';
     }
     if ($bean->getAttribute('chstart')) $html .= '<td></td>';
