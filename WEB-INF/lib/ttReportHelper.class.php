@@ -453,14 +453,15 @@ class ttReportHelper {
       $sql_for_expenses = "select $concat_part, null as time";
       if ($options['show_work_units']) $sql_for_expenses .= ", null as units";
       $sql_for_expenses .= ", sum(ei.cost) as cost, sum(ei.cost) as expenses from tt_expense_items ei $join_part $where $group_by_expenses_part";
-//die($sql_for_expenses);
+
       // Create a combined query.
-      $combined = "select group_field, sum(time) as time";
+      $fields = ttReportHelper::makeCombinedSelectPart($options);
+      $combined = "select $fields, sum(time) as time";
       if ($options['show_work_units']) $combined .= ", sum(units) as units";
-      $combined .= ", sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t group by group_field";
+      $combined .= ", sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t group by $fields";
       $sql = $combined;
     }
-//die($sql);
+
     // Execute query.
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
@@ -1378,6 +1379,75 @@ class ttReportHelper {
         $what_to_concat = substr($what_to_concat, 8);
     $concat_part = "concat($what_to_concat) as group_field";
     return "$concat_part $fields_part";
+  }
+
+  // makeCombinedSelectPart builds a list of fields for a combined select on a union for getSubtotals.
+  // This is used when we include expenses.
+  static function makeCombinedSelectPart($options) {
+    $group_by1 = $options['group_by1'];
+    $group_by2 = $options['group_by2'];
+    $group_by3 = $options['group_by3'];
+
+    $fields = "group_field";
+
+    switch ($group_by1) {
+      case 'user':
+        $fields .= ', user';
+        break;
+      case 'client':
+        $fields_part .= ', client';
+        break;
+      case 'project':
+        $fields .= ', project';
+        break;
+
+      case 'task':
+        $fields .= ', task';
+        break;
+
+      case 'cf_1':
+        $fields .= ', cf_1';
+        break;
+    }
+    switch ($group_by2) {
+      case 'user':
+        $fields .= ', user';
+        break;
+      case 'client':
+        $fields_part .= ', client';
+        break;
+      case 'project':
+        $fields .= ', project';
+        break;
+
+      case 'task':
+        $fields .= ', task';
+        break;
+
+      case 'cf_1':
+        $fields .= ', cf_1';
+        break;
+    }
+    switch ($group_by3) {
+      case 'user':
+        $fields .= ', user';
+        break;
+      case 'client':
+        $fields_part .= ', client';
+        break;
+      case 'project':
+        $fields .= ', project';
+        break;
+
+      case 'task':
+        $fields .= ', task';
+        break;
+
+      case 'cf_1':
+        $fields .= ', cf_1';
+        break;
+    }
+    return $fields;
   }
 
   // makeJoinPart builds a left join part for getSubtotals query (for time items).
