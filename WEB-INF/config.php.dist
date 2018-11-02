@@ -207,3 +207,6 @@ define('AUTH_MODULE', 'db');
 
 // Height in pixels for the note input field in time.php. Defaults to 40.
 // define('NOTE_INPUT_HEIGHT', 100);
+
+// A temporary config option while development of subgroup support is ongoing. To be removed later.
+// define('SUBGROUP_DEBUG', false);
