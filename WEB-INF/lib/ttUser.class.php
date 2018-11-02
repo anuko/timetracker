@@ -155,7 +155,7 @@ class ttUser {
       // Set "on behalf" id and name (group).
       if (isset($_SESSION['behalf_group_id'])) {
           $this->behalf_group_id = $_SESSION['behalf_group_id'];
-          $this->behalf_group = $_SESSION['behalf_group'];
+          $this->behalf_group = $_SESSION['behalf_group_name'];
       }
     }
   }
@@ -371,6 +371,7 @@ class ttUser {
     $mdb2 = getConnection();
 
     $selected_group_id = ($this->behalf_group_id ? $this->behalf_group_id : $this->group_id);
+    $selected_group_name = ($this->behalf_group_id ? $this->behalf_group : $this->group);
 
     // Start with parent group.
     if ($selected_group_id != $this->org_id) {
@@ -394,7 +395,6 @@ class ttUser {
     }
 
     // Add current group.
-    $selected_group_name = ($this->behalf_group_id ? $this->behalf_group : $this->group);
     $groups[] = array('id'=>$selected_group_id,'name'=>$selected_group_name);
 
     // Add subgroups.

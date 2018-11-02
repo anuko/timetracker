@@ -29,6 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
+import('ttGroupHelper');
 import('ttTeamHelper');
 import('ttClientHelper');
 import('ttTimeHelper');
@@ -95,6 +96,7 @@ if ($user->isPluginEnabled('iv')) {
       $cl_billable = $_SESSION['billable'];
 }
 $on_behalf_id = $request->getParameter('onBehalfUser', (isset($_SESSION['behalf_id'])? $_SESSION['behalf_id'] : $user->id));
+$on_behalf_group_id = $request->getParameter('onBehalfGroup', (isset($_SESSION['behalf_group_id'])? $_SESSION['behalf_group_id'] : $user->group_id));
 $cl_client = $request->getParameter('client', ($request->isPost() ? null : @$_SESSION['client']));
 $_SESSION['client'] = $cl_client;
 $cl_project = $request->getParameter('project', ($request->isPost() ? null : @$_SESSION['project']));
@@ -104,6 +106,22 @@ $_SESSION['task'] = $cl_task;
 
 // Elements of timeRecordForm.
 $form = new Form('timeRecordForm');
+
+if (defined('SUBGROUP_DEBUG') && isTrue(SUBGROUP_DEBUG)) {
+if ($user->can('manage_subgroups')) {
+  $groups = $user->getGroups();
+  if (count($groups) > 1) {
+    $form->addInput(array('type'=>'combobox',
+      'onchange'=>'this.form.submit();',
+      'name'=>'onBehalfGroup',
+      'style'=>'width: 250px;',
+      'value'=>$on_behalf_group_id,
+      'data'=>$groups,
+      'datakeys'=>array('id','name')));
+    $smarty->assign('on_behalf_group_control', 1);
+  }
+}
+} // SUBGROUP_DEBUG
 
 if ($user->can('track_time')) {
   if ($user->can('track_own_time'))
@@ -344,6 +362,19 @@ if ($request->isPost()) {
     } else {
       // Cannot complete, redirect for manual edit.
       header('Location: time_edit.php?id='.$record_id);
+      exit();
+    }
+  }
+  elseif ($request->getParameter('onBehalfGroup')) {
+    if($user->can('manage_subgroups')) {
+      unset($_SESSION['behalf_group_id']);
+      unset($_SESSION['behalf_group_name']);
+
+      if($on_behalf_group_id != $user->group_id) {
+        $_SESSION['behalf_group_id'] = $on_behalf_group_id;
+        $_SESSION['behalf_group_name'] = ttGroupHelper::getGroupName($on_behalf_group_id);
+      }
+      header('Location: time.php');
       exit();
     }
   }

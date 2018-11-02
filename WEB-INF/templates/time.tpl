@@ -18,6 +18,12 @@
   <tr>
     <td valign="top">
       <table>
+{if $on_behalf_group_control}
+        <tr>
+          <td align="right">{$i18n.label.group}:</td>
+          <td>{$forms.timeRecordForm.onBehalfGroup.control}</td>
+        </tr>
+{/if}
 {if $on_behalf_control}
         <tr>
           <td align="right">{$i18n.label.user}:</td>

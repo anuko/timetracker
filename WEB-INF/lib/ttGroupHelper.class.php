@@ -48,4 +48,18 @@ class ttGroupHelper {
     }
     return false;
   }
+
+  // The getGroupName function returns group name.
+  static function getGroupName($group_id) {
+    $mdb2 = getConnection();
+
+    $sql = "select name from tt_groups where id = $group_id and (status = 1 or status = 0)";
+    $res = $mdb2->query($sql);
+
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      return $val['name'];
+    }
+    return false;
+  }
 }
