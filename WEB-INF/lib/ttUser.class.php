@@ -365,7 +365,7 @@ class ttUser {
   // - A parent group (..) of a currently selected group, if available.
   // - A currently selected group (.) represented by $behalf_group_id.
   // - All subgroups (only immediate children) of a currently selected group.
-  function getGroups($options) {
+  function getGroups() {
     $mdb2 = getConnection();
 
     // $sql = 'select id, parent_id, name from tt_groups where org_id = $this->org_id ...'; // TODO: parent_id is now NULL in db, fix this.

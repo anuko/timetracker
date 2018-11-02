@@ -137,12 +137,16 @@ class ttRegistrator {
 
     $sql = "insert into tt_groups (name, currency, lang, created, created_ip) values($name, $currency, $lang, $created, $created_ip)";
     $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
 
-    if (!is_a($affected, 'PEAR_Error')) {
-      $group_id = $mdb2->lastInsertID('tt_groups', 'id');
-      return $group_id;
-    }
-    return false;
+    $group_id = $mdb2->lastInsertID('tt_groups', 'id');
+
+    // Update org_id with group_id.
+    $sql = "update tt_groups set org_id = $group_id where org_id is NULL and id = $group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    return $group_id;
   }
 
   // The createUser creates a user in database as part of registration process.
