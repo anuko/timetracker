@@ -157,6 +157,7 @@ $i18n_key_words = array(
 // 'label.end_date' => 'End date',
 // 'label.user' => 'User',
 // 'label.users' => 'Users',
+// 'label.group' => 'Group',
 // 'label.roles' => 'Roles',
 // 'label.client' => 'Client',
 // 'label.clients' => 'Clients',

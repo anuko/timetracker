@@ -167,6 +167,7 @@ $i18n_key_words = array(
 'label.user' => 'Uživatel',
 'label.users' => 'Uživatelů',
 // TODO: translate the following.
+// 'label.group' => 'Group',
 // 'label.roles' => 'Roles',
 'label.client' => 'Zákazník',
 'label.clients' => 'Zákazníci',

@@ -142,6 +142,8 @@ $i18n_key_words = array(
 'label.end_date' => 'Ημερομηνία λήξης',
 'label.user' => 'Χρήστης',
 'label.users' => 'Χρήστες',
+// TODO: translate the following.
+// 'label.group' => 'Group',
 'label.roles' => 'Ρόλους',
 'label.client' => 'Πελάτης',
 'label.clients' => 'Πελάτες',

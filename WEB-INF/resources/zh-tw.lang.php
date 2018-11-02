@@ -165,6 +165,7 @@ $i18n_key_words = array(
 'label.user' => '用戶',
 'label.users' => '用戶',
 // TODO: translate the following.
+// 'label.group' => 'Group',
 // 'label.roles' => 'Roles',
 'label.client' => '客戶',
 'label.clients' => '客戶',
