@@ -963,6 +963,8 @@ if ($_POST) {
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.00', modified = now() where param_name = 'version_db' and param_value = '1.17.97'");
     setChange("create index log_idx on tt_custom_field_log(log_id)");
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.05', modified = now() where param_name = 'version_db' and param_value = '1.18.00'");
+    setChange("update `tt_groups` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.05') set org_id = id where org_id is null");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.06', modified = now() where param_name = 'version_db' and param_value = '1.18.05'");
   }
 
   if ($_POST["cleanup"]) {
