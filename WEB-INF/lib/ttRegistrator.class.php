@@ -159,9 +159,9 @@ class ttRegistrator {
     $email = $mdb2->quote($this->email);
     $created = 'now()';
     $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
-    $values = "values($login, $password, $name, $this->group_id, $this->role_id, $email, $created, $created_ip)";
+    $values = "values($login, $password, $name, $this->group_id, $this->group_id, $this->role_id, $email, $created, $created_ip)";
 
-    $sql = 'insert into tt_users (login, password, name, group_id, role_id, email, created, created_ip) '.$values;
+    $sql = 'insert into tt_users (login, password, name, group_id, org_id, role_id, email, created, created_ip) '.$values;
     $affected = $mdb2->exec($sql);
     if (!is_a($affected, 'PEAR_Error')) {
       $user_id = $mdb2->lastInsertID('tt_users', 'id');

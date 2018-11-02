@@ -85,6 +85,7 @@ CREATE TABLE `tt_users` (
   `password` varchar(50) default NULL,             # password hash
   `name` varchar(100) default NULL,                # user name
   `group_id` int(11) NOT NULL,                     # group id
+  `org_id` int(11) default NULL,                   # organization id
   `role_id` int(11) default NULL,                  # role id
   `client_id` int(11) default NULL,                # client id for "client" user role
   `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
@@ -104,7 +105,7 @@ CREATE TABLE `tt_users` (
 # Create an index that guarantees unique active and inactive logins.
 create unique index login_idx on tt_users(login, status);
 
-# Create admin account with password 'secret'. Admin is a superuser, who can create groupd.
+# Create admin account with password 'secret'. Admin is a superuser who can create groups.
 DELETE from `tt_users` WHERE login = 'admin';
 INSERT INTO `tt_users` (`login`, `password`, `name`, `group_id`, `role_id`) VALUES ('admin', md5('secret'), 'Admin', '0', (select id from tt_roles where rank = 1024));
 
@@ -458,4 +459,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.06', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.07', now()); # TODO: change when structure changes.

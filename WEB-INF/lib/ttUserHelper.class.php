@@ -102,6 +102,7 @@ class ttUserHelper {
       $password = 'md5('.$password.')';
     $email = isset($fields['email']) ? $fields['email'] : '';
     $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
     $rate = str_replace(',', '.', isset($fields['rate']) ? $fields['rate'] : 0);
     if($rate == '')
       $rate = 0;
@@ -112,9 +113,9 @@ class ttUserHelper {
     $created_ip_v = ', '.$mdb2->quote($_SERVER['REMOTE_ADDR']);
     $created_by_v = ', '.$mdb2->quote($user->id);
 
-    $sql = "insert into tt_users (name, login, password, group_id, role_id, client_id, rate, email, created, created_ip, created_by $status_f) values (".
+    $sql = "insert into tt_users (name, login, password, group_id, org_id, role_id, client_id, rate, email, created, created_ip, created_by $status_f) values (".
       $mdb2->quote($fields['name']).", ".$mdb2->quote($fields['login']).
-      ", $password, $group_id, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, ".$mdb2->quote($email).", now() $created_ip_v $created_by_v $status_v)";
+      ", $password, $group_id, $org_id, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, ".$mdb2->quote($email).", now() $created_ip_v $created_by_v $status_v)";
     $affected = $mdb2->exec($sql);
 
     // Now deal with project assignment.
