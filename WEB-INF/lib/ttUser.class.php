@@ -70,7 +70,7 @@ class ttUser {
   var $is_client = false;       // Whether user is a client as determined by missing 'track_own_time' right.
   var $minutes_in_unit = 15;    // Number of minutes in unit for Work units plugin.
   var $first_unit_threshold = 0;// Threshold for 1st unit for Work units plugin.
-  var $unit_totals_only = 0;    // Totlas only option for the Work units plugin.
+  var $unit_totals_only = 0;    // Totals only option for the Work units plugin.
 
   // Constructor.
   function __construct($login, $id = null) {
@@ -359,6 +359,22 @@ class ttUser {
       }
     }
     return $user_list;
+  }
+
+  // getGroups obtains an array consisting of:
+  // - A parent group (..) of a currently selected group, if available.
+  // - A currently selected group (.) represented by $behalf_group_id.
+  // - All subgroups (only immediate children) of a currently selected group.
+  function getGroups($options) {
+    $mdb2 = getConnection();
+
+    // $sql = 'select id, parent_id, name from tt_groups where org_id = $this->org_id ...'; // TODO: parent_id is now NULL in db, fix this.
+    // Step 1: Get parent group (sql query).
+    // Step 2: Get current group from the class.
+    // Step 3: Get immediate subgroups (sql query).
+    // Populate an array and return it,
+
+    return false; // Work in progress here...
   }
 
   // getUser function is used to manage users in group and returns user details.
