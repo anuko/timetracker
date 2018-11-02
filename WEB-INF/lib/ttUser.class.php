@@ -32,6 +32,7 @@ class ttUser {
   var $login = null;            // User login.
   var $name = null;             // User name.
   var $id = null;               // User id.
+  var $org_id = null;           // Organization id.
   var $group_id = null;         // Group id.
   var $role_id = null;          // Role id.
   var $role_name = null;        // Role name.
@@ -81,8 +82,8 @@ class ttUser {
 
     $mdb2 = getConnection();
 
-    $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id, u.email, g.name as group_name,
-      g.currency, g.lang, g.decimal_mark, g.date_format, g.time_format, g.week_start,
+    $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id, u.email,
+      g.org_id, g.name as group_name, g.currency, g.lang, g.decimal_mark, g.date_format, g.time_format, g.week_start,
       g.tracking_mode, g.project_required, g.task_required, g.record_type,
       g.bcc_email, g.allow_ip, g.password_complexity, g.plugins, g.config, g.lock_spec, g.workday_minutes, g.custom_logo
       FROM tt_users u LEFT JOIN tt_groups g ON (u.group_id = g.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
@@ -102,6 +103,7 @@ class ttUser {
       $this->login = $val['login'];
       $this->name = $val['name'];
       $this->id = $val['id'];
+      $this->org_id = $val['org_id'];
       $this->group_id = $val['group_id'];
       $this->role_id = $val['role_id'];
       $this->role_name = $val['role_name'];
@@ -368,13 +370,42 @@ class ttUser {
   function getGroups() {
     $mdb2 = getConnection();
 
-    // $sql = 'select id, parent_id, name from tt_groups where org_id = $this->org_id ...'; // TODO: parent_id is now NULL in db, fix this.
-    // Step 1: Get parent group (sql query).
-    // Step 2: Get current group from the class.
-    // Step 3: Get immediate subgroups (sql query).
-    // Populate an array and return it,
+    $selected_group_id = ($this->behalf_group_id ? $this->behalf_group_id : $this->group_id);
 
-    return false; // Work in progress here...
+    // Start with parent group.
+    if ($selected_group_id != $this->org_id) {
+      // We are in one of the subgroups, and a parent exists.
+      // Get parent group info.
+      $sql = "select parent_id from tt_groups where org_id = $this->org_id and id = $selected_group_id";
+      $res = $mdb2->query($sql);
+      if (!is_a($res, 'PEAR_Error')) {
+        $val = $res->fetchRow();
+        $parent_id = $val['parent_id'];
+        if ($parent_id) {
+          // Get parent group name.
+          $sql = "select name from tt_groups where org_id = $this->org_id and id = $parent_id";
+          $res = $mdb2->query($sql);
+          if (!is_a($res, 'PEAR_Error')) {
+            $val = $res->fetchRow();
+            $groups[] = array('id'=>$parent_id,'name'=>$val['name']);
+          }
+        }
+      }
+    }
+
+    // Add current group.
+    $selected_group_name = ($this->behalf_group_id ? $this->behalf_group : $this->group);
+    $groups[] = array('id'=>$selected_group_id,'name'=>$selected_group_name);
+
+    // Add subgroups.
+    $sql = "select id, name from tt_groups where org_id = $this->org_id and parent_id = $selected_group_id";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $groups[] = array('id'=>$val['id'],'name'=>$val['name']);
+      }
+    }
+    return $groups;
   }
 
   // getUser function is used to manage users in group and returns user details.
