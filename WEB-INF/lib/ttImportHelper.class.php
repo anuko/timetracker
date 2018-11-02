@@ -474,11 +474,18 @@ class ttImportHelper {
 
     $sql = 'insert into tt_groups '.$columns.$values;
     $affected = $mdb2->exec($sql);
-    if (!is_a($affected, 'PEAR_Error')) {
-      $group_id = $mdb2->lastInsertID('tt_groups', 'id');
-      return $group_id;
-    }
-    return false;
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    $group_id = $mdb2->lastInsertID('tt_groups', 'id');
+
+    // Update org_id with group_id.
+    // NOTE: Both export and import need an additional effort to properly operate on subgroups.
+    // Currently we are importing one group only, which becomes a top level group.
+    $sql = "update tt_groups set org_id = $group_id where org_id is NULL and id = $group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    return $group_id;
   }
 
   // insertMonthlyQuota - a helper function to insert a monthly quota.
