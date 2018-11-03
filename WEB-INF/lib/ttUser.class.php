@@ -41,7 +41,8 @@ class ttUser {
   var $behalf_id = null;        // User id, on behalf of whom we are working.
   var $behalf_group_id = null;  // Group id, on behalf of which we are working.
   var $behalf_name = null;      // User name, on behalf of whom we are working.
-  var $behalf_group = null;     // Group name, on behalf of which we are working.
+  var $group_name = null;       // Group name.
+  var $behalf_group_name = null;// Group name, on behalf of which we are working.
   var $email = null;            // User email.
   var $lang = null;             // Language.
   var $decimal_mark = null;     // Decimal separator.
@@ -63,7 +64,6 @@ class ttUser {
   var $currency = null;         // Currency.
   var $plugins = null;          // Comma-separated list of enabled plugins.
   var $config = null;           // Comma-separated list of miscellaneous config options.
-  var $group = null;            // Group name.
   var $custom_logo = 0;         // Whether to use a custom logo for group.
   var $lock_spec = null;        // Cron specification for record locking.
   var $workday_minutes = 480;   // Number of work minutes in a regular day.
@@ -124,7 +124,7 @@ class ttUser {
       $this->bcc_email = $val['bcc_email'];
       $this->allow_ip = $val['allow_ip'];
       $this->password_complexity = $val['password_complexity'];
-      $this->group = $val['group_name'];
+      $this->group_name = $val['group_name'];
       $this->currency = $val['currency'];
       $this->plugins = $val['plugins'];
       $this->lock_spec = $val['lock_spec'];
@@ -155,7 +155,7 @@ class ttUser {
       // Set "on behalf" id and name (group).
       if (isset($_SESSION['behalf_group_id'])) {
           $this->behalf_group_id = $_SESSION['behalf_group_id'];
-          $this->behalf_group = $_SESSION['behalf_group_name'];
+          $this->behalf_group_name = $_SESSION['behalf_group_name'];
       }
     }
   }
@@ -309,6 +309,7 @@ class ttUser {
 
     $skipClients = !isset($options['include_clients']);
     $includeSelf = isset($options['include_self']);
+    $group_id = isset($options['group_id']) ? $options['group_id'] : $this->group_id;
 
     $select_part = 'select u.id, u.name';
     if (isset($options['include_login'])) $select_part .= ', u.login';
@@ -321,7 +322,7 @@ class ttUser {
     if (isset($options['max_rank']) || $skipClients || isset($options['include_role']))
         $left_joins .= ' left join tt_roles r on (u.role_id = r.id)';
 
-    $where_part = " where u.group_id = $this->group_id";
+    $where_part = " where u.org_id = $this->org_id and u.group_id = $group_id";
     if (isset($options['status']))
       $where_part .= ' and u.status = '.(int)$options['status'];
     else
@@ -371,11 +372,11 @@ class ttUser {
     $mdb2 = getConnection();
 
     $selected_group_id = ($this->behalf_group_id ? $this->behalf_group_id : $this->group_id);
-    $selected_group_name = ($this->behalf_group_id ? $this->behalf_group : $this->group);
+    $selected_group_name = ($this->behalf_group_id ? $this->behalf_group_name : $this->group_name);
 
     // Start with parent group.
-    if ($selected_group_id != $this->org_id) {
-      // We are in one of the subgroups, and a parent exists.
+    if ($selected_group_id != $this->group_id) {
+      // We are in one of subgroups, and a parent exists.
       // Get parent group info.
       $sql = "select parent_id from tt_groups where org_id = $this->org_id and id = $selected_group_id";
       $res = $mdb2->query($sql);
