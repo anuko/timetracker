@@ -559,4 +559,39 @@ class ttUser {
 
     return true;
   }
+
+  // isSubgroupValid determines if a subgroup is valid for user.
+  // A subgroup is valid if:
+  //   - user can manage_subgroups;
+  //   - subgroup is either a direct child of user group, or "on the path"
+  //   to it (grand-child, etc.).
+  function isSubgroupValid($subgroup_id) {
+    if (!$this->can('manage_subgroups')) return false; // User cannot manage subgroups.
+
+    $current_group_id = $subgroup_id;
+    while ($parent_group_id = ttGroupHelper::getParentGroup($current_group_id)) {
+      if ($parent_group_id == $this->group_id) {
+        return true; // Found it.
+      }
+      $current_group_id = $parent_group_id;
+    }
+    return false;
+  }
+
+  // getMaxRankForGroup determines effective user rank for a user in a given group.
+  // For home group it is the existing user rank (as per role) minus 1.
+  // For subgroups, if user can "manage_subgroups", it is MAX_RANK.
+  function getMaxRankForGroup($group_id) {
+
+    $max_rank = 0; // Start safely.
+    if ($this->group_id == $group_id) {
+      $max_rank = $this->rank - 1;
+      return $max_rank;
+    }
+
+    if ($this->isSubgroupValid($group_id))
+      $max_rank = MAX_RANK;
+
+    return $max_rank;
+  }
 }

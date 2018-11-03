@@ -124,12 +124,11 @@ if ($user->can('manage_subgroups')) {
 } // SUBGROUP_DEBUG
 
 if ($user->can('track_time')) {
-  // Determine max rank.
-  $max_rank = $on_behalf_group_id == $user->group_id ? $user->rank-1 : 512; // TODO: stop using magic numbers.
+  $rank = $user->getMaxRankForGroup($on_behalf_group_id);
   if ($user->can('track_own_time'))
-    $options = array('group_id'=>$on_behalf_group_id,'status'=>ACTIVE,'max_rank'=>$max_rank,'include_self'=>true,'self_first'=>true);
+    $options = array('group_id'=>$on_behalf_group_id,'status'=>ACTIVE,'max_rank'=>$rank,'include_self'=>true,'self_first'=>true);
   else
-    $options = array('group_id'=>$on_behalf_group_id,'status'=>ACTIVE,'max_rank'=>$max_rank);
+    $options = array('group_id'=>$on_behalf_group_id,'status'=>ACTIVE,'max_rank'=>$rank);
   $user_list = $user->getUsers($options);
   if (count($user_list) >= 1) {
     $form->addInput(array('type'=>'combobox',
