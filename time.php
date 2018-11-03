@@ -366,31 +366,61 @@ if ($request->isPost()) {
       exit();
     }
   }
-  elseif ($request->getParameter('onBehalfGroup')) {
-    if($user->can('manage_subgroups')) {
-      unset($_SESSION['behalf_group_id']);
-      unset($_SESSION['behalf_group_name']);
+  elseif ($request->getParameter('onBehalfUser') || $request->getParameter('onBehalfGroup')) {
+    // User changed either on behalf user or group.
+    // TODO: Organize this code into a separate function.
 
-      if($on_behalf_group_id != $user->group_id) {
-        $_SESSION['behalf_group_id'] = $on_behalf_group_id;
-        $_SESSION['behalf_group_name'] = ttGroupHelper::getGroupName($on_behalf_group_id);
-      }
-      header('Location: time.php');
-      exit();
-    }
-  }
-  elseif ($request->getParameter('onBehalfUser')) {
-    if($user->can('track_time')) {
-      unset($_SESSION['behalf_id']);
-      unset($_SESSION['behalf_name']);
+    // We get here if one of the dropdowns changed. Handle these 2 situations differently.
+    // 1) User changed. Determine if user changed. Then do exactly as before.
+    //
+    // Group changed. Determine if group changed.
+    // Adjust group info.
+    // Adjust user info to first user in group (or self if we are in home group now).
+    //
+    // Determine if user was changed.
+    if ($request->getParameter('onBehalfUser')) {
+      $request_user_id = $request->getParameter('onBehalfUser');
+      $session_user_id = $_SESSION['behalf_id'];
+      $user_changed = !(($session_user_id == null && ($user->id == $request_user_id))
+                      || ($session_user_id != null && ($request_user_id == $session_user_id)));
+      if ($user_changed && $user->can('track_time')) {
+        unset($_SESSION['behalf_id']);
+        unset($_SESSION['behalf_name']);
 
-      if($on_behalf_id != $user->id) {
-        $_SESSION['behalf_id'] = $on_behalf_id;
-        $_SESSION['behalf_name'] = ttUserHelper::getUserName($on_behalf_id);
+        if($request_user_id != $user->id) {
+          $_SESSION['behalf_id'] = $request_user_id;
+          $_SESSION['behalf_name'] = ttUserHelper::getUserName($request_user_id);
+        }
       }
-      header('Location: time.php');
-      exit();
     }
+
+    if ($request->getParameter('onBehalfGroup')) {
+      // Determine if group was changed.
+      $request_group_id = $request->getParameter('onBehalfGroup');
+      $session_group_id = $_SESSION['behalf_group_id'];
+      $group_changed = !(($session_group_id == null && ($user->group_id == $request_group_id))
+                      || ($session_group_id != null && ($request_group_id == $session_group_id)));
+
+      if ($group_changed && $user->can('manage_subgroups')) {
+        unset($_SESSION['behalf_group_id']);
+        unset($_SESSION['behalf_group_name']);
+        if ($request_group_id == $user->group_id)
+          $user->behalf_group_id = null;
+
+        if (($request_group_id != $user->group_id) && $user->isSubgroupValid($request_group_id)) {
+          $_SESSION['behalf_group_id'] = $request_group_id;
+          $_SESSION['behalf_group_name'] = ttGroupHelper::getGroupName($request_group_id);
+          $user->behalf_group_id = $request_group_id;
+        }
+
+        unset($_SESSION['behalf_id']);
+        unset($_SESSION['behalf_name']);
+        if ($request_group_id != $user->group_id)
+          $user->adjustBehalfId();
+      }
+    }
+    header('Location: time.php');
+    exit();
   }
 } // isPost
 

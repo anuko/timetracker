@@ -429,13 +429,32 @@ class ttUser {
   }
 
   // checkBehalfId checks whether behalf_id is appropriate.
-  // On behalf user must be active and have lower rank.
+  // On behalf user must be active and have lower rank if the user is from home group,
+  // otherwise:
+  // - subgroup must ve valid;
+  // - user should be a member of it.
   function checkBehalfId() {
-    $options = array('status'=>ACTIVE,'max_rank'=>$this->rank-1);
-    $users = $this->getUsers($options);
-    foreach($users as $one_user) {
-      if ($one_user['id'] == $this->behalf_id)
-        return true;
+    if (!$this->behalf_group_id) {
+      // Checking user from home group.
+      $options = array('status'=>ACTIVE,'max_rank'=>$this->rank-1);
+      $users = $this->getUsers($options);
+      foreach($users as $one_user) {
+        if ($one_user['id'] == $this->behalf_id)
+          return true;
+      }
+    } else {
+      // Checking user from a subgroup.
+      $group_id = $this->behalf_group_id;
+      if (!$this->isSubgroupValid($group_id))
+        return false;
+
+      // So far, so good. Check user now.
+      $options = array('group_id'=>$group_id,'status'=>ACTIVE,'max_rank'=>MAX_RANK);
+      $users = $this->getUsers($options);
+      foreach($users as $one_user) {
+        if ($one_user['id'] == $this->behalf_id)
+          return true;
+      }
     }
     return false;
   }
@@ -446,8 +465,13 @@ class ttUser {
   // Needed for situations when user does not have do_own_something right.
   // Example: has view_charts but does not have view_own_charts.
   // In this case we still allow access to charts, but set behalf_id to someone else.
+  // Another example: working in a subgroup on behalf of someone else.
   function adjustBehalfId() {
-    $options = array('status'=>ACTIVE,'max_rank'=>$this->rank-1);
+    $group_id = $this->behalf_group_id ? $this->behalf_group_id : $this->group_id;
+    $rank = $this->getMaxRankForGroup($group_id);
+
+    // Adjust to first found user in group.
+    $options = array('group_id'=>$group_id,'status'=>ACTIVE,'max_rank'=>$rank);
     $users = $this->getUsers($options);
     foreach($users as $one_user) {
       // Fake loop to access first element.

@@ -149,7 +149,7 @@ if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isCli
   // Prepare user and assigned projects arrays.
   if ($user->can('view_reports') || $user->can('view_all_reports')) {
     $max_rank = $user->rank-1;
-    if ($user->can('view_all_reports')) $max_rank = 512;
+    if ($user->can('view_all_reports')) $max_rank = MAX_RANK;
     if ($user->can('view_own_reports'))
       $options = array('max_rank'=>$max_rank,'include_self'=>true);
     else
