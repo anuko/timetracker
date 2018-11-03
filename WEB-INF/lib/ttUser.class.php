@@ -192,10 +192,11 @@ class ttUser {
     $result = array();
     $mdb2 = getConnection();
 
+    $group_id = $this->behalf_group_id ? $this->behalf_group_id : $this->group_id;
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name, p.description, p.tasks, upb.rate from tt_projects p
       inner join tt_user_project_binds upb on (upb.user_id = ".$this->getActiveUser()." and upb.project_id = p.id and upb.status = 1)
-      where p.group_id = $this->group_id and p.status = 1 order by p.name";
+      where p.group_id = $group_id and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
