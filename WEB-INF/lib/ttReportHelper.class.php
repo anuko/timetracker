@@ -128,14 +128,14 @@ class ttReportHelper {
     $isClient = $user->isClient();
 
     $grouping = ttReportHelper::grouping($options);
-    $grouping_by_date = ($options['group_by1'] == 'date'|| $options['group_by2'] == 'date' || $options['group_by3'] == 'date');
-    $grouping_by_client = ($options['group_by1'] == 'client'|| $options['group_by2'] == 'client' || $options['group_by3'] == 'client');
-    $grouping_by_project = ($options['group_by1'] == 'project'|| $options['group_by2'] == 'project' || $options['group_by3'] == 'project');
-    $grouping_by_task = ($options['group_by1'] == 'task'|| $options['group_by2'] == 'task' || $options['group_by3'] == 'task');
-    $grouping_by_user = ($options['group_by1'] == 'user'|| $options['group_by2'] == 'user' || $options['group_by3'] == 'user');
-    $grouping_by_cf_1 = ($options['group_by1'] == 'cf_1'|| $options['group_by2'] == 'cf_1' || $options['group_by3'] == 'cf_1');
-
-    $group_by_option = $options['group_by1'];
+    if ($grouping) {
+      $grouping_by_date = ttReportHelper::groupingBy('date', $options);
+      $grouping_by_client = ttReportHelper::groupingBy('client', $options);
+      $grouping_by_project = ttReportHelper::groupingBy('project', $options);
+      $grouping_by_task = ttReportHelper::groupingBy('task', $options);
+      $grouping_by_user = ttReportHelper::groupingBy('user', $options);
+      $grouping_by_cf_1 = ttReportHelper::groupingBy('cf_1', $options);
+    }
     $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($options['show_start'] || $options['show_end']);
 
     // Prepare a query for time items in tt_log table.
@@ -1540,9 +1540,7 @@ class ttReportHelper {
   // ('user', 'project', etc.) by checking group_by1, group_by2, and group_by3
   // values passed in $options.
   static function groupingBy($what, $options) {
-    $grouping = ($options['group_by1'] != null && $options['group_by1'] != $what) ||
-      ($options['group_by2'] != null && $options['group_by2'] != $what) ||
-      ($options['group_by3'] != null && $options['group_by3'] != $what);
+    $grouping = ($options['group_by1'] == $what) || ($options['group_by2'] == $what) || ($options['group_by3'] == $what);
     return $grouping;
   }
 
