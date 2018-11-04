@@ -36,7 +36,7 @@ class ttGroupHelper {
     $mdb2 = getConnection();
 
     $sql =  "select id, name, created, lang from tt_groups".
-            " where status = 1 and org_id is NULL or org_id = id order by id desc";
+            " where status = 1 and (org_id is NULL or org_id = id) order by id desc";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
