@@ -403,7 +403,7 @@ class ttReportHelper {
     $group_by_part = ttReportHelper::makeGroupByPart($options);
     if ($options['show_cost']) {
       if (MODE_TIME == $user->tracking_mode) {
-        if (!ttReportHelper::groupingByUser($options))
+        if (!ttReportHelper::groupingBy('user', $options))
           $left_join = 'left join tt_users u on (l.user_id = u.id)';
         $sql = "select $concat_part, sum(time_to_sec(l.duration)) as time";
         if ($options['show_work_units']) {
@@ -1446,30 +1446,21 @@ class ttReportHelper {
   // makeJoinPart builds a left join part for getSubtotals query (for time items).
   static function makeJoinPart($options) {
     global $user;
-    if (ttReportHelper::groupingBy('cf_1', $options)) {
-      $custom_fields = new CustomFields($user->group_id);
-    }
 
-    $group_by_fields = ttReportHelper::makeGroupByFieldsPart($options); // TODO: refactor this, perhaps?
-    if (strpos($group_by_fields, 'user') !== false) {
-      // Grouping by user, add a join on tt_users table.
+    if (ttReportHelper::groupingBy('user', $options)) {
       $join .= ' left join tt_users u on (l.user_id = u.id)';
     }
-    if (strpos($group_by_fields, 'client') !== false) {
-      // Grouping by client, add a join on tt_clients table.
+    if (ttReportHelper::groupingBy('client', $options)) {
       $join .= ' left join tt_clients c on (l.client_id = c.id)';
     }
-    if (strpos($group_by_fields, 'project') !== false) {
-      // Grouping by project, add a join on tt_projects table.
+    if (ttReportHelper::groupingBy('project', $options)) {
       $join .= ' left join tt_projects p on (l.project_id = p.id)';
     }
-    if (strpos($group_by_fields, 'task') !== false) {
-      // Grouping by task, add a join on tt_tasks table.
+    if (ttReportHelper::groupingBy('task', $options)) {
       $join .= ' left join tt_tasks t on (l.task_id = t.id)';
     }
-    if (strpos($group_by_fields, 'cf_1') !== false) {
-      // Grouping by custom field 1, add a join for it.
-      // $custom_fields = new CustomFields($user->group_id);
+    if (ttReportHelper::groupingBy('cf_1', $options)) {
+      $custom_fields = new CustomFields($user->group_id);
       if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
         $join .= ' left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id)';
       elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
@@ -1480,44 +1471,16 @@ class ttReportHelper {
 
   // makeJoinExpensesPart builds a left join part for getSubtotals query for expense items.
   static function makeJoinExpensesPart($options) {
-    $group_by_fields = ttReportHelper::makeGroupByFieldsPart($options); // TODO: refactor this, perhaps?
-    if (strpos($group_by_fields, 'user') !== false) {
-      // Grouping by user, add a join on tt_users table.
+    if (ttReportHelper::groupingBy('user', $options)) {
       $join .= ' left join tt_users u on (ei.user_id = u.id)';
     }
-    if (strpos($group_by_fields, 'client') !== false) {
-      // Grouping by client, add a join on tt_clients table.
+    if (ttReportHelper::groupingBy('client', $options)) {
       $join .= ' left join tt_clients c on (ei.client_id = c.id)';
     }
-    if (strpos($group_by_fields, 'project') !== false) {
-      // Grouping by project, add a join on tt_projects table.
+    if (ttReportHelper::groupingBy('project', $options)) {
       $join .= ' left join tt_projects p on (ei.project_id = p.id)';
     }
     return $join;
-  }
-  
-  // makeGroupByFieldsPart builds a commma-separated list of fields for sql query using group_by1,
-  // group_by2, and group_by3 values passed in $options.
-  static function makeGroupByFieldsPart($options) {
-    $no_grouping = ($options['group_by1'] == null || $options['group_by1'] == 'no_grouping') &&
-      ($options['group_by2'] == null || $options['group_by2'] == 'no_grouping') &&
-      ($options['group_by3'] == null || $options['group_by3'] == 'no_grouping');
-    if ($no_grouping) return null;
-
-    if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
-      // We have group_by1.
-      $group_by_fields .= ', '.$options['group_by1'];
-    }
-    if ($options['group_by2'] != null && $options['group_by2'] != 'no_grouping') {
-      // We have group_by2.
-      $group_by_fields .= ', '.$options['group_by2'];
-    }
-    if ($options['group_by3'] != null && $options['group_by3'] != 'no_grouping') {
-      // We have group_by3.
-      $group_by_fields .= ', '.$options['group_by3'];
-    }
-    $group_by_fields = ltrim($group_by_fields, ', ');
-    return $group_by_fields;
   }
 
   // grouping determines if we are grouping the report by either group_by1,
@@ -1529,16 +1492,9 @@ class ttReportHelper {
     return $grouping;
   }
 
-  // groupingByUser determines if we are grouping a report by user.
-  static function groupingByUser($options) {
-    if ($options['group_by1'] == 'user' || $options['group_by2'] == 'user' || $options['group_by3'] == 'user') return true;
-
-    return false;
-  }
-  
   // groupingBy determines if we are grouping a report by a value of $what
-  // ('user', 'project', etc.) by checking group_by1, group_by2, and group_by3
-  // values passed in $options.
+  // ('date', 'user', 'project', etc.) by checking group_by1, group_by2,
+  // and group_by3 values passed in $options.
   static function groupingBy($what, $options) {
     $grouping = ($options['group_by1'] == $what) || ($options['group_by2'] == $what) || ($options['group_by3'] == $what);
     return $grouping;
