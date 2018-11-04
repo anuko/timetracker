@@ -47,6 +47,7 @@ class ttImportHelper {
 
   var $canImport      = true;    // False if we cannot import data due to a login collision.
   var $groupData      = array(); // Array of group data such as group name, etc.
+  var $org_id         = null;    // New organization id we are importing. It is created during the import operation.
   var $group_id       = null;    // New group id we are importing. It is created during the import operation.
   var $roles          = array(); // Array of arrays of role properties.
   var $users          = array(); // Array of arrays of user properties.
@@ -144,6 +145,7 @@ class ttImportHelper {
           'workday_minutes' => $this->groupData['WORKDAY_MINUTES'],
           'config' => $this->groupData['CONFIG']));
         if ($group_id) {
+          $this->org_id = $group_id;
           $this->group_id = $group_id;
 
           // Create roles.
@@ -161,6 +163,7 @@ class ttImportHelper {
             $role_id = $user_item['ROLE_ID'] === '0' ? $this->top_role_id :  $this->roleMap[$user_item['ROLE_ID']]; // 0 (not null) means top manager role.
             $user_id = ttUserHelper::insert(array(
               'group_id' => $this->group_id,
+              'org_id' => $this->org_id,
               'role_id' => $role_id,
               'client_id' => $user_item['CLIENT_ID'], // Note: NOT mapped value, replaced in CLIENT handler.
               'name' => $user_item['NAME'],
