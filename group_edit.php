@@ -65,7 +65,7 @@ if ($request->isPost()) {
   $cl_bcc_email = trim($request->getParameter('bcc_email'));
   $cl_allow_ip = trim($request->getParameter('allow_ip'));
 } else {
-  $cl_group = $user->group;
+  $cl_group = $user->group_name;
   $cl_currency = ($user->currency == ''? CURRENCY_DEFAULT : $user->currency);
   $cl_lang = $user->lang;
   $cl_decimal_mark = $user->decimal_mark;
