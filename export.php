@@ -28,7 +28,7 @@
 
 require_once('initialize.php');
 import('ttExportHelper');
-import('ttExportHelper2');
+import('ttOrgExportHelper');
 import('form.Form');
 
 // Access check.
@@ -58,7 +58,7 @@ if ($request->isPost()) {
   }
 
   if (defined('SUBGROUP_DEBUG') && isTrue(SUBGROUP_DEBUG)) {
-    $exportHelper = new ttExportHelper2();
+    $exportHelper = new ttOrgExportHelper();
   } else {
     $exportHelper = new ttExportHelper();
   }

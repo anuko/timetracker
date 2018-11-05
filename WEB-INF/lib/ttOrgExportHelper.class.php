@@ -29,10 +29,10 @@
 import('ttTeamHelper');
 import('ttTimeHelper');
 
-// ttExportHelper2 - this class is a future replacement for ttExportHelper.
+// ttOrgExportHelper - this class is a future replacement for ttExportHelper.
 // Currently, it is work in progress.
-// When done, it should handle exporting of complex groups containing other groups.
-class ttExportHelper2 {
+// When done, it should handle export of organizations containing multiple groups.
+class ttOrgExportHelper {
   // TODO: we need a constructor...
   var $fileName    = null;    // Name of the file with data.
 
