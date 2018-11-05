@@ -28,6 +28,7 @@
 
 import('ttTeamHelper');
 import('ttTimeHelper');
+import('ttGroupExportHelper');
 
 // ttOrgExportHelper - this class is a future replacement for ttExportHelper.
 // Currently, it is work in progress.
