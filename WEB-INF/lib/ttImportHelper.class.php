@@ -154,6 +154,7 @@ class ttImportHelper {
               'group_id' => $this->group_id,
               'org_id' => $this->org_id,
               'name' => $role_item['NAME'],
+              'description' => $role_item['DESCRIPTION'],
               'rank' => $role_item['RANK'],
               'rights' => $role_item['RIGHTS'],
               'status' => $role_item['STATUS']));

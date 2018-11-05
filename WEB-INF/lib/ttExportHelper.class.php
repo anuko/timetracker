@@ -120,6 +120,7 @@ class ttExportHelper {
       fwrite($file, "  <role id=\"".$this->roleMap[$role['id']]."\" rank=\"".$role['rank']."\"".
         " rights=\"".$role['rights']."\" status=\"".$role['status']."\">\n");
       fwrite($file, "    <name><![CDATA[".$role['name']."]]></name>\n");
+      fwrite($file, "    <description><![CDATA[".$role['description']."]]></description>\n");
       fwrite($file, "  </role>\n");
     }
     fwrite($file, "</roles>\n");
