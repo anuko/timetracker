@@ -50,6 +50,11 @@ class ttGroupExportHelper {
   // writeData writes group data into file.
   function writeData() {
     // TODO: write code here.
+
+    // Write group info. Something dummy for now to test...
+    fwrite($this->file, $this->indentation."<group>\n");
+    fwrite($this->file, $this->indentation."</group>\n");
+    //
     //
     // Call itself recursively for all subgroups.
   }
