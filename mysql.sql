@@ -53,6 +53,7 @@ CREATE TABLE `tt_groups` (
 CREATE TABLE `tt_roles` (
   `id` int(11) NOT NULL auto_increment,    # Role id. Identifies roles for all groups on the server.
   `group_id` int(11) NOT NULL,             # Group id the role is defined for.
+  `org_id` int(11) default NULL,           # Organization id.
   `name` varchar(80) default NULL,         # Role name - custom role name. In case we are editing a
                                            # predefined role (USER, etc.), we can rename the role here.
   `description` varchar(255) default NULL, # Role description.
@@ -459,4 +460,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.07', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.08', now()); # TODO: change when structure changes.
