@@ -49,7 +49,7 @@ class ttGroupExportHelper {
     // Build a list of subgroups.
     $mdb2 = getConnection();
     $sql =  "select id from tt_groups".
-            " where status = 1 and parent_id = $this->group_id and org_id = $user->org_id order by id desc";
+            " where status = 1 and parent_id = $this->group_id and org_id = $user->org_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -58,14 +58,35 @@ class ttGroupExportHelper {
     }
   }
 
+  // getGroupData obtains group attributes for export.
+  function getGroupData() {
+    global $user;
+
+    $mdb2 = getConnection();
+    $sql =  "select name, currency, lang from tt_groups".
+            " where status = 1 and id = $this->group_id and org_id = $user->org_id";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+    }
+    return $val;
+  }
+
   // writeData writes group data into file.
   function writeData() {
-    // TODO: write code here.
 
-    // Write group info. Something dummy for now to test...
-    fwrite($this->file, $this->indentation."<group>\n");
+    // Write group info.
+    $group = $this->getGroupData();
+    $group_part = "<group name=\"".htmlentities($group['name'])."\"";
+    $group_part .= " currency=\"".htmlentities($group['currency'])."\"";
+    $group_part .= " lang=\"".$group['lang']."\"";
+    // TODO: add other group attributes here.
+    $group_part .= ">\n";
 
-    // Call itself recursively for all subgroups.
+    // Write group info.
+    fwrite($this->file, $this->indentation.$group_part);
+
+    // Call self recursively for all subgroups.
     foreach ($this->subgroups as $subgroup) {
       $subgroup_helper = new ttGroupExportHelper($subgroup['id'], $this->file, $this->indentation.'  ');
       $subgroup_helper->writeData();
