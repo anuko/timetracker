@@ -67,7 +67,7 @@ class ttImportHelper {
   var $logMap        = array(); // Time log ids.
 
   // Constructor.
-  function ttImportHelper(&$errors) {
+  function __construct(&$errors) {
     $this->errors = &$errors;
   }
 

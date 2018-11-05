@@ -51,7 +51,7 @@ class ttImportHelper2 {
   var $firstPass      = true;    // True during first pass through the file.
 
   // Constructor.
-  function ttImportHelper2(&$errors) {
+  function __construct(&$errors) {
     $this->errors = &$errors;
   }
 
