@@ -59,7 +59,7 @@ class ttExportHelper {
 
     // Write XML to the file.
     fwrite($file, "<?xml version=\"1.0\"?>\n");
-    fwrite($file, "<pack>\n");
+    fwrite($file, "<org>\n");
 
     // Write group info.
     fwrite($file, "<group currency=\"".$user->currency."\" decimal_mark=\"".$user->decimal_mark."\" lang=\"".$user->lang.
@@ -321,7 +321,7 @@ class ttExportHelper {
     $this->projectMap = array();
     $this->taskMap = array();
 
-    fwrite($file, "</pack>\n");
+    fwrite($file, "</org>\n");
     fclose($file);
 
     if ($compress) {
