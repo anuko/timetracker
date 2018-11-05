@@ -154,14 +154,15 @@ class ttRoleHelper {
     $mdb2 = getConnection();
 
     $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
     $name = $fields['name'];
     $rank = (int) $fields['rank'];
     $description = $fields['description'];
     $rights = $fields['rights'];
     $status = $fields['status'];
 
-    $sql = "insert into tt_roles (group_id, name, rank, description, rights, status)
-      values ($group_id, ".$mdb2->quote($name).", $rank, ".$mdb2->quote($description).", ".$mdb2->quote($rights).", ".$mdb2->quote($status).")";
+    $sql = "insert into tt_roles (group_id, org_id, name, rank, description, rights, status)
+      values ($group_id, $org_id, ".$mdb2->quote($name).", $rank, ".$mdb2->quote($description).", ".$mdb2->quote($rights).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;

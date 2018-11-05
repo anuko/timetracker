@@ -152,6 +152,7 @@ class ttImportHelper {
           foreach ($this->roles as $key=>$role_item) {
             $role_id = ttRoleHelper::insert(array(
               'group_id' => $this->group_id,
+              'org_id' => $this->org_id,
               'name' => $role_item['NAME'],
               'rank' => $role_item['RANK'],
               'rights' => $role_item['RIGHTS'],
