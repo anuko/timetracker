@@ -290,7 +290,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $user->group_id and rank < $user->rank and status = 1 order by rank";
+    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $user->group_id and org_id = $user->org_id and rank < $user->rank and status = 1 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -348,7 +348,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $user->group_id and rank < $user->rank and status = 0 order by rank";
+    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $user->group_id and org_id = $user->org_id and rank < $user->rank and status = 0 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
