@@ -38,7 +38,7 @@ class ttNotificationHelper {
 
     $sql = "select c.id, c.cron_spec, c.report_id, c.email, c.cc, c.subject, c.report_condition, c.status, fr.name from tt_cron c
       left join tt_fav_reports fr on (fr.id = c.report_id)
-      where c.id = $id and c.group_id = $user->group_id";
+      where c.id = $id and c.group_id = ".$user->getActiveGroup();
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -54,7 +54,7 @@ class ttNotificationHelper {
   	    
     $mdb2 = getConnection();
     
-    $sql = "delete from tt_cron where id = $id and group_id = $user->group_id";
+    $sql = "delete from tt_cron where id = $id and group_id = ".$user->getActiveGroup();
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;

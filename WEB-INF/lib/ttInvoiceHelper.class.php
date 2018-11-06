@@ -71,7 +71,8 @@ class ttInvoiceHelper {
 
     if ($user->isClient()) $client_part = " and client_id = $user->client_id";
 
-    $sql = "select * from tt_invoices where id = $invoice_id and group_id = $user->group_id $client_part and status = 1";
+    $sql = "select * from tt_invoices where id = $invoice_id and group_id = ".
+            $user->getActiveGroup()."$client_part and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if ($val = $res->fetchRow())
@@ -86,7 +87,8 @@ class ttInvoiceHelper {
     $mdb2 = getConnection();
     global $user;
 
-    $sql = "select id from tt_invoices where group_id = $user->group_id and name = ".$mdb2->quote($invoice_name)." and status = 1";
+    $sql = "select id from tt_invoices where group_id = ".
+            $user->getActiveGroup()." and name = ".$mdb2->quote($invoice_name)." and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -233,7 +235,7 @@ class ttInvoiceHelper {
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
-    $sql = "update tt_invoices set status = NULL where id = $invoice_id and group_id = $user->group_id";
+    $sql = "update tt_invoices set status = NULL where id = $invoice_id and group_id = ".$user->getActiveGroup();
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
@@ -328,8 +330,8 @@ class ttInvoiceHelper {
     if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
 
     // Create a new invoice record.
-    $sql = "insert into tt_invoices (group_id, name, date, client_id)
-      values($user->group_id, ".$mdb2->quote($name).", ".$mdb2->quote($date).", $client_id)";
+    $sql = "insert into tt_invoices (group_id, name, date, client_id) values(".
+            $user->getActiveGroup().", ".$mdb2->quote($name).", ".$mdb2->quote($date).", $client_id)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
