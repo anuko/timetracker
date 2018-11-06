@@ -41,8 +41,8 @@ class ttClientHelper {
     else
       $sql .= 'name ';
 
-    $sql .= "from tt_clients where group_id = $user->group_id
-      and id = $client_id and (status = 1 or status = 0)";
+    $sql .= "from tt_clients where group_id = ".$user->getActiveGroup().
+      " and id = $client_id and (status = 1 or status = 0)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -59,8 +59,7 @@ class ttClientHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name from tt_clients
-      where group_id = $user->group_id and (status = 0 or status = 1) order by upper(name)";
+    $sql = "select id, name from tt_clients where group_id = ".$user->getActiveGroup()." and (status = 0 or status = 1) order by upper(name)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -76,8 +75,8 @@ class ttClientHelper {
     $mdb2 = getConnection();
     global $user;
 
-    $sql = "select id from tt_clients where group_id = $user->group_id and name = ".
-      $mdb2->quote($client_name)." and (status = 1 or status = 0)";
+    $sql = "select id from tt_clients where group_id = ".$user->getActiveGroup().
+      " and name = ".$mdb2->quote($client_name)." and (status = 1 or status = 0)";
 
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -95,8 +94,8 @@ class ttClientHelper {
     $mdb2 = getConnection();
     global $user;
 
-    $sql = "select name, address from tt_clients where group_id = $user->group_id
-      and id = $client_id and status is NULL";
+    $sql = "select name, address from tt_clients where group_id = ".$user->getActiveGroup().
+      " and id = $client_id and status is NULL";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
