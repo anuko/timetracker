@@ -37,7 +37,7 @@ class ttRoleHelper {
     $mdb2 = getConnection();
 
     $sql = "select id, name, description, rank, rights, status from tt_roles
-      where id = $id and group_id = $user->group_id and (status = 0 or status = 1)";
+      where id = $id and group_id = ".$user->getActiveGroup()." and (status = 0 or status = 1)";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
@@ -56,8 +56,8 @@ class ttRoleHelper {
     $mdb2 = getConnection();
     global $user;
 
-    $sql = "select id from tt_roles where group_id = $user->group_id and name = ".
-      $mdb2->quote($role_name)." and (status = 1 or status = 0)";
+    $sql = "select id from tt_roles where group_id = ".$user->getActiveGroup().
+      " and name = ".$mdb2->quote($role_name)." and (status = 1 or status = 0)";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
@@ -89,7 +89,7 @@ class ttRoleHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $sql = "select rights from tt_roles where group_id = $user->group_id and id = $role_id";
+    $sql = "select rights from tt_roles where group_id = ".$user->getActiveGroup()." and id = $role_id";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
