@@ -366,6 +366,7 @@ if ($request->isPost()) {
         'date'=>$new_date->toString(DB_DATEFORMAT),
         'user_id'=>$user->getActiveUser(),
         'group_id'=>$user->getActiveGroup(),
+        'org_id' => $user->org_id,
         'client'=>$cl_client,
         'project'=>$cl_project,
         'task'=>$cl_task,

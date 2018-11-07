@@ -226,6 +226,7 @@ if ($request->isPost()) {
         'date' => $cl_date,
         'user_id' => $user->getActiveUser(),
         'group_id' => $user->getActiveGroup(),
+        'org_id' => $user->org_id,
         'client' => $cl_client,
         'project' => $cl_project,
         'task' => $cl_task,

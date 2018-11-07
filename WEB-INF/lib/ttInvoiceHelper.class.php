@@ -38,6 +38,7 @@ class ttInvoiceHelper {
     $mdb2 = getConnection();
 
     $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
     $name = $fields['name'];
     if (!$name) return false;
 
@@ -49,8 +50,8 @@ class ttInvoiceHelper {
     }
 
     // Insert a new invoice record.
-    $sql = "insert into tt_invoices (group_id, name, date, client_id $status_f)".
-      " values($group_id, ".$mdb2->quote($name).", ".$mdb2->quote($date).", $client_id $status_v)";
+    $sql = "insert into tt_invoices (group_id, org_id, name, date, client_id $status_f)".
+      " values($group_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($date).", $client_id $status_v)";
     $affected = $mdb2->exec($sql);
 
     if (is_a($affected, 'PEAR_Error')) return false;
@@ -330,8 +331,8 @@ class ttInvoiceHelper {
     if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
 
     // Create a new invoice record.
-    $sql = "insert into tt_invoices (group_id, name, date, client_id) values(".
-            $user->getActiveGroup().", ".$mdb2->quote($name).", ".$mdb2->quote($date).", $client_id)";
+    $sql = "insert into tt_invoices (group_id, org_id, name, date, client_id) values(".
+      $user->getActiveGroup().", $user->org_id, ".$mdb2->quote($name).", ".$mdb2->quote($date).", $client_id)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 

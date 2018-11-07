@@ -494,6 +494,7 @@ class ttWeekViewHelper {
     $fields4insert = array();
     $fields4insert['user_id'] = $user->getActiveUser();
     $fields4insert['group_id'] = $user->getActiveGroup();
+    $fields4insert['org_id'] = $user->org_id;
     $fields4insert['date'] = $entry_date;
     $fields4insert['duration'] = $fields['duration'];
     $fields4insert['client'] = ttWeekViewHelper::parseFromWeekViewRow($fields['row_id'], 'cl');

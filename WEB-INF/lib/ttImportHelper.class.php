@@ -241,6 +241,7 @@ class ttImportHelper {
       $this->invoiceMap[$this->currentElement['ID']] =
         ttInvoiceHelper::insert(array(
           'group_id' => $this->group_id,
+          'org_id' => $this->org_id,
           'name' => $this->currentElement['NAME'],
           'date' => $this->currentElement['DATE'],
           'client_id' => $this->clientMap[$this->currentElement['CLIENT_ID']],
@@ -257,6 +258,7 @@ class ttImportHelper {
         ttTimeHelper::insert(array(
           'user_id' => $this->userMap[$this->currentElement['USER_ID']],
           'group_id' => $this->group_id,
+          'org_id' => $this->org_id,
           'date' => $this->currentElement['DATE'],
           'start' => $this->currentElement['START'],
           'finish' => $this->currentElement['FINISH'],
