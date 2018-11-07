@@ -189,6 +189,7 @@ class ttProjectHelper {
     $mdb2 = getConnection();
 
     $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
 
     $name = $fields['name'];
     $description = $fields['description'];
@@ -197,8 +198,8 @@ class ttProjectHelper {
     $comma_separated = implode(',', $tasks); // This is a comma-separated list of associated task ids.
     $status = $fields['status'];
     
-    $sql = "insert into tt_projects (group_id, name, description, tasks, status)
-      values ($group_id, ".$mdb2->quote($name).", ".$mdb2->quote($description).", ".$mdb2->quote($comma_separated).", ".$mdb2->quote($status).")";
+    $sql = "insert into tt_projects (group_id, org_id, name, description, tasks, status)
+      values ($group_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($description).", ".$mdb2->quote($comma_separated).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;

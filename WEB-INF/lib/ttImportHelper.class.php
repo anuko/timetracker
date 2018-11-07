@@ -184,6 +184,7 @@ class ttImportHelper {
       $this->taskMap[$this->currentElement['ID']] =
         ttTaskHelper::insert(array(
           'group_id' => $this->group_id,
+          'org_id' => $this->org_id,
           'name' => $this->currentElement['NAME'],
           'description' => $this->currentElement['DESCRIPTION'],
           'status' => $this->currentElement['STATUS']));
@@ -198,6 +199,7 @@ class ttImportHelper {
       $this->projectMap[$this->currentElement['ID']] =
         ttProjectHelper::insert(array(
           'group_id' => $this->group_id,
+          'org_id' => $this->org_id,
           'name' => $this->currentElement['NAME'],
           'description' => $this->currentElement['DESCRIPTION'],
           'tasks' => $mapped_tasks,

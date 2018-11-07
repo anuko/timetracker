@@ -119,7 +119,8 @@ if ($request->isPost()) {
     if ($request->getParameter('btn_copy')) {
       if (!ttProjectHelper::getProjectByName($cl_name)) {
         if (ttProjectHelper::insert(array(
-          'group_id' => $user->group_id,
+          'group_id' => $user->getActiveGroup(),
+          'org_id' => $user->org_id,
           'name' => $cl_name,
           'description' => $cl_description,
           'users' => $cl_users,

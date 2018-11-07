@@ -977,6 +977,8 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_projects` ADD `org_id` int(11) default NULL AFTER `group_id`");
     setChange("ALTER TABLE `tt_tasks` ADD `org_id` int(11) default NULL AFTER `group_id`");
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.10', modified = now() where param_name = 'version_db' and param_value = '1.18.09'");
+    setChange("UPDATE `tt_projects` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.10') set org_id = group_id where org_id is null");
+    setChange("UPDATE `tt_tasks` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.10') set org_id = group_id where org_id is null");
   }
 
   if ($_POST["cleanup"]) {
