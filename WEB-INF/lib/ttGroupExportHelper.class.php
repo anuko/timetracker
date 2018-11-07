@@ -102,7 +102,7 @@ class ttGroupExportHelper {
     $mdb2 = getConnection();
 
     $result = array();
-    $sql = "select * from tt_roles where group_id = $this->group_id"; // and org_id = $user->org_id <-- add this when possible
+    $sql = "select * from tt_roles where group_id = $this->group_id and org_id = $user->org_id";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {

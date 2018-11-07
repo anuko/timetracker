@@ -956,7 +956,7 @@ if ($_POST) {
     print "Updated $tt_expense_items_updated tt_expense_items records...<br>\n";
   }
 
-  if ($_POST["convert11797to11808"]) {
+  if ($_POST["convert11797to11809"]) {
     setChange("ALTER TABLE `tt_fav_reports` CHANGE `group_by` `group_by1` varchar(20) default NULL");
     setChange("ALTER TABLE `tt_fav_reports` ADD `group_by2` varchar(20) default NULL AFTER `group_by1`");
     setChange("ALTER TABLE `tt_fav_reports` ADD `group_by3` varchar(20) default NULL AFTER `group_by2`");
@@ -971,6 +971,8 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_roles` ADD `org_id` int(11) default NULL AFTER `group_id`");
     setChange("UPDATE `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.07') set org_id = group_id where org_id is null");
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.08', modified = now() where param_name = 'version_db' and param_value = '1.18.07'");
+    setChange("ALTER TABLE `tt_clients` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.09', modified = now() where param_name = 'version_db' and param_value = '1.18.08'");
   }
 
   if ($_POST["cleanup"]) {
@@ -1016,7 +1018,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.18.08)</b>
+    <td width="80%"><b>Create database structure (v1.18.09)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -1061,8 +1063,8 @@ if ($_POST) {
   </tr>
   </tr>
   <tr valign="top">
-    <td>Update database structure (v1.17.97 to v1.18.08)</td>
-    <td><input type="submit" name="convert11797to11808" value="Update"></td>
+    <td>Update database structure (v1.17.97 to v1.18.09)</td>
+    <td><input type="submit" name="convert11797to11809" value="Update"></td>
   </tr>
 </table>
 

@@ -304,6 +304,7 @@ CREATE TABLE `tt_cron` (
 CREATE TABLE `tt_clients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,         # client id
   `group_id` int(11) NOT NULL,                  # group id
+  `org_id` int(11) default NULL,                # organization id
   `name` varchar(80) COLLATE utf8_bin NOT NULL, # client name
   `address` varchar(255) default NULL,          # client address
   `tax` float(6,2) default '0.00',              # applicable tax for this client
@@ -460,4 +461,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.08', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.09', now()); # TODO: change when structure changes.
