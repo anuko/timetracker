@@ -117,6 +117,7 @@ INSERT INTO `tt_users` (`login`, `password`, `name`, `group_id`, `role_id`) VALU
 CREATE TABLE `tt_projects` (
   `id` int(11) NOT NULL auto_increment,         # project id
   `group_id` int(11) NOT NULL,                  # group id
+  `org_id` int(11) default NULL,                # organization id
   `name` varchar(80) COLLATE utf8_bin NOT NULL, # project name
   `description` varchar(255) default NULL,      # project description
   `tasks` text default NULL,                    # comma-separated list of task ids associated with this project
@@ -134,6 +135,7 @@ create unique index project_idx on tt_projects(group_id, name, status);
 CREATE TABLE `tt_tasks` (
   `id` int(11) NOT NULL auto_increment,         # task id
   `group_id` int(11) NOT NULL,                  # group id
+  `org_id` int(11) default NULL,                # organization id
   `name` varchar(80) COLLATE utf8_bin NOT NULL, # task name
   `description` varchar(255) default NULL,      # task description
   `status` tinyint(4) default 1,                # task status
@@ -461,4 +463,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.09', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.10', now()); # TODO: change when structure changes.
