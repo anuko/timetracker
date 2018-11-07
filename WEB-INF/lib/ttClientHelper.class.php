@@ -168,6 +168,7 @@ class ttClientHelper {
     $mdb2 = getConnection();
 
     $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
     $name = $fields['name'];
     $address = $fields['address'];
     $tax = $fields['tax'];
@@ -179,8 +180,8 @@ class ttClientHelper {
     $tax = str_replace(',', '.', $tax);
     if ($tax == '') $tax = 0;
 
-    $sql = "insert into tt_clients (group_id, name, address, tax, projects, status)".
-      " values ($group_id, ".$mdb2->quote($name).", ".$mdb2->quote($address).", $tax, ".$mdb2->quote($comma_separated).", ".$mdb2->quote($status).")";
+    $sql = "insert into tt_clients (group_id, org_id, name, address, tax, projects, status)".
+      " values ($group_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($address).", $tax, ".$mdb2->quote($comma_separated).", ".$mdb2->quote($status).")";
 
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))

@@ -103,7 +103,8 @@ if ($request->isPost()) {
     if ($request->getParameter('btn_copy')) {
       if (!ttClientHelper::getClientByName($cl_name)) {
         if (ttClientHelper::insert(array(
-          'group_id' => $user->group_id,
+          'group_id' => $user->getActiveGroup(),
+          'org_id' => $user->org_id,
           'name' => $cl_name,
           'address' => $cl_address,
           'tax' => $cl_tax,

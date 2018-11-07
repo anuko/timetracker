@@ -222,6 +222,7 @@ class ttImportHelper {
       $this->clientMap[$this->currentElement['ID']] =
         ttClientHelper::insert(array(
           'group_id' => $this->group_id,
+          'org_id' => $this->org_id,
           'name' => $this->currentElement['NAME'],
           'address' => $this->currentElement['ADDRESS'],
           'tax' => $this->currentElement['TAX'],
