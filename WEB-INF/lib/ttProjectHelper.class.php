@@ -214,8 +214,8 @@ class ttProjectHelper {
     $active_users = ttTeamHelper::getActiveUsers(array('getAllFields'=>true));
     foreach ($active_users as $u) {
       if(in_array($u['id'], $users)) {
-        $sql = "insert into tt_user_project_binds (project_id, user_id, status, rate) values(
-          $last_id, ".$u['id'].", 1, ".$u['rate'].")";
+        $sql = "insert into tt_user_project_binds (project_id, user_id, group_id, org_id, status, rate) values(
+          $last_id, ".$u['id'].", $group_id, $org_id, 1, ".$u['rate'].")";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
           return false;
@@ -271,8 +271,11 @@ class ttProjectHelper {
       while ($row = $res->fetchRow()) {
         $user_rate[$row['id']] = $row['rate'];
       }
+      $group_id = $user->getActiveGroup();
+      $org_id = $user->org_id;
       foreach ($users_to_add as $id) {
-        $sql = "insert into tt_user_project_binds (user_id, project_id, rate, status) values($id, $project_id, ".$user_rate[$id].", 1)";
+        $sql = "insert into tt_user_project_binds (user_id, project_id, group_id, org_id, rate, status)".
+          " values($id, $project_id, $group_id, $org_id, ".$user_rate[$id].", 1)";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
           return false;

@@ -134,7 +134,8 @@ class ttUserHelper {
           else
             $p['rate'] = str_replace(',', '.', $p['rate']);
 
-          $sql = "insert into tt_user_project_binds (project_id, user_id, rate, status) values(".$p['id'].",".$last_id.",".$p['rate'].", 1)";
+          $sql = "insert into tt_user_project_binds (project_id, user_id, group_id, org_id, rate, status)".
+            " values(".$p['id'].", $last_id, $group_id, $org_id, ".$p['rate'].", 1)";
           $affected = $mdb2->exec($sql);
         }
       }
@@ -309,10 +310,33 @@ class ttUserHelper {
 
   // insertBind - inserts a user to project bind into tt_user_project_binds table.
   static function insertBind($user_id, $project_id, $rate, $status) {
+    global $user;
     $mdb2 = getConnection();
 
-    $sql = "insert into tt_user_project_binds (user_id, project_id, rate, status)
-      values($user_id, $project_id, ".$mdb2->quote($rate).", $status)";
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
+    $sql = "insert into tt_user_project_binds (user_id, project_id, group_id, org_id, rate, status)".
+      " values($user_id, $project_id, $group_id, $org_id, ".$mdb2->quote($rate).", $status)";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
+
+    // insertBind2 - inserts a user to project bind into tt_user_project_binds table.
+  static function insertBind2($fields) {
+    global $user;
+    $mdb2 = getConnection();
+
+    // This may be used during import. Use the following until we have import refactored.
+    $group_id = $fields['group_id'] ? (int) $fields['group_id'] : $user->getActiveGroup();
+    $org_id = $fields['org_id'] ? (int) $fields['org_id'] : $user->org_id;
+
+    $user_id = (int) $fields['user_id'];
+    $project_id = (int) $fields['project_id'];
+    $rate = $mdb2->quote($fields['rate']);
+    $status = $mdb2->quote($fields['status']);
+
+    $sql = "insert into tt_user_project_binds (user_id, project_id, group_id, org_id, rate, status)".
+      " values($user_id, $project_id, $group_id, $org_id, $rate, $status)";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }

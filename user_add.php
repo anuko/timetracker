@@ -150,7 +150,7 @@ if ($request->isPost()) {
         'login' => $cl_login,
         'password' => $cl_password1,
         'rate' => $cl_rate,
-        'group_id' => $user->group_id, // TODO: this needs to be fixed for on-behalf group work.
+        'group_id' => $user->getActiveGroup(),
         'org_id' => $user->org_id,
         'role_id' => $cl_role_id,
         'client_id' => $cl_client_id,
