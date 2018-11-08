@@ -143,6 +143,20 @@ class ttGroupExportHelper {
     foreach ($clients as $key=>$client_item)
       $this->clientMap[$client_item['id']] = $key + 1;
 
+    // Write roles.
+    fwrite($this->file, $this->indentation."<roles>\n");
+    foreach ($roles as $role) {
+      $role_part = $this->indentation.'  '."<role id=\"".$this->roleMap[$role['id']]."\"";
+      $role_part .= " name=\"".htmlentities($role['name'])."\"";
+      $role_part .= " description=\"".htmlentities($role['description'])."\"";
+      $role_part .= " rank=\"".$role['rank']."\"";
+      $role_part .= " rights=\"".htmlentities($role['rights'])."\"";
+      $role_part .= " status=\"".$role['status']."\"";
+      $role_part .= "></role>\n";
+      fwrite($this->file, $role_part);
+    }
+    fwrite($this->file, $this->indentation."</roles>\n");
+
     // Write users.
     fwrite($this->file, $this->indentation."<users>\n");
     foreach ($users as $user_item) {
