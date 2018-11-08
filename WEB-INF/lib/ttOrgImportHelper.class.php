@@ -50,6 +50,10 @@ class ttOrgImportHelper {
   var $canImport      = true;    // False if we cannot import data due to a login collision.
   var $firstPass      = true;    // True during first pass through the file.
 
+  var $org_id         = null;    // Organization id (same as top group_id).
+  var $current_parent_group_id = null; // Current parent group id as we parse the file.
+                                       // Set when we create a new group.
+
   // Constructor.
   function __construct(&$errors) {
     $this->errors = &$errors;
@@ -63,6 +67,32 @@ class ttOrgImportHelper {
       $this->currentElement = $attrs;
     }
     $this->currentTag = $name;
+
+    if (!$this->firstPass && $this->canImport) {
+      $mdb2 = getConnection();
+
+      // We are in second pass through the XML file and can import data.
+      if ($name == 'GROUP') {
+        // Create a new group.
+        $group_id = $this->createGroup(array(
+          'parent_id' => $this->current_parent_group_id,
+          'org_id' => $this->org_id,
+          'name' => $this->currentElement['NAME'],
+          'currency' => $this->currentElement['CURRENCY'],
+          'lang' => $this->currentElement['LANG']));
+        // We only have 3 properties in export at the moment, while work is ongoing...
+
+        // Special handling for top group.
+        if (!$this->org_id) {
+          $this->org_id = $group_id;
+          $sql = "update tt_groups set org_id = $group_id where org_id is NULL and id = $group_id";
+          $affected = $mdb2->exec($sql);
+          // TODO: design a better error handling approach for the entire import process.
+        }
+        // Set current parent group.
+        $this->current_parent_group_id = $group_id;
+      }
+    }
   }
 
   // endElement - callback handler for the closing tag of an XML element.
@@ -82,7 +112,7 @@ class ttOrgImportHelper {
 
     // During second pass we import data.
     if (!$this->firstPass && $this->canImport) {
-      // TODO: write code here. Nothing is imported currently.
+      // Nothing is done here, see startElement for second pass.
     }
   }
 
@@ -212,5 +242,50 @@ class ttOrgImportHelper {
     bzclose($in_file);
     fclose ($out_file);
     return true;
+  }
+
+  // createGroup function creates a new group.
+  private function createGroup($fields) {
+
+    global $user;
+    $mdb2 = getConnection();
+
+    $columns = '(parent_id, org_id, name, currency, lang)';
+
+//    $columns = '(name, currency, decimal_mark, lang, date_format, time_format, week_start, tracking_mode'.
+//      ', project_required, task_required, record_type, bcc_email, allow_ip, password_complexity, plugins'.
+//      ', lock_spec, workday_minutes, config, created, created_ip, created_by)';
+
+    $values = ' values (';
+    $values .= $mdb2->quote($fields['parent_id']);
+    $values .= ', '.$mdb2->quote($fields['org_id']);
+    $values .= ', '.$mdb2->quote(trim($fields['name']));
+    $values .= ', '.$mdb2->quote(trim($fields['currency']));
+    //$values .= ', '.$mdb2->quote($fields['decimal_mark']);
+    $values .= ', '.$mdb2->quote($fields['lang']);
+/*
+    $values .= ', '.$mdb2->quote($fields['date_format']);
+    $values .= ', '.$mdb2->quote($fields['time_format']);
+    $values .= ', '.(int)$fields['week_start'];
+    $values .= ', '.(int)$fields['tracking_mode'];
+    $values .= ', '.(int)$fields['project_required'];
+    $values .= ', '.(int)$fields['task_required'];
+    $values .= ', '.(int)$fields['record_type'];
+    $values .= ', '.$mdb2->quote($fields['bcc_email']);
+    $values .= ', '.$mdb2->quote($fields['allow_ip']);
+    $values .= ', '.$mdb2->quote($fields['password_complexity']);
+    $values .= ', '.$mdb2->quote($fields['plugins']);
+    $values .= ', '.$mdb2->quote($fields['lock_spec']);
+    $values .= ', '.(int)$fields['workday_minutes'];
+    $values .= ', '.$mdb2->quote($fields['config']);
+    $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id); */
+    $values .= ')';
+
+    $sql = 'insert into tt_groups '.$columns.$values;
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    $group_id = $mdb2->lastInsertID('tt_groups', 'id');
+    return $group_id;
   }
 }
