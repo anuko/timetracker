@@ -153,6 +153,8 @@ CREATE TABLE `tt_user_project_binds` (
   `id` int(11) NOT NULL auto_increment, # bind id
   `user_id` int(11) NOT NULL,           # user id
   `project_id` int(11) NOT NULL,        # project id
+  `group_id` int(11) default NULL,      # group id
+  `org_id` int(11) default NULL,        # organization id
   `rate` float(6,2) default '0.00',     # rate for this user when working on this project
   `status` tinyint(4) default 1,        # bind status
   PRIMARY KEY (`id`)
@@ -166,8 +168,10 @@ create unique index bind_idx on tt_user_project_binds(user_id, project_id);
 # Structure for table tt_project_task_binds. This table maps projects to assigned tasks.
 #
 CREATE TABLE `tt_project_task_binds` (
-  `project_id` int(11) NOT NULL, # project id
-  `task_id` int(11) NOT NULL     # task id
+  `project_id` int(11) NOT NULL,        # project id
+  `task_id` int(11) NOT NULL            # task id
+  `group_id` int(11) default NULL,      # group id
+  `org_id` int(11) default NULL,        # organization id
 );
 
 # Indexes for tt_project_task_binds.
@@ -465,4 +469,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.11', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.12', now()); # TODO: change when structure changes.
