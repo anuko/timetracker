@@ -38,10 +38,10 @@ import('ttFavReportHelper');
 import('ttExpenseHelper');
 import('ttRoleHelper');
 
-// ttImportHelper2 - this class is a future replacement for ttImportHelper.
+// ttOrgImportHelper - this class is a future replacement for ttImportHelper.
 // Currently, it is work in progress.
 // When done, it should handle import of complex groups consisting of other groups.
-class ttImportHelper2 {
+class ttOrgImportHelper {
   var $errors         = null;    // Errors go here. Set in constructor by reference.
 
   var $currentElement = array(); // Current element of the XML file we are parsing.
@@ -82,7 +82,7 @@ class ttImportHelper2 {
 
     // During second pass we import data.
     if (!$this->firstPass && $this->canImport) {
-      // TODO: write code here.
+      // TODO: write code here. Nothing is imported currently.
     }
   }
 

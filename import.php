@@ -28,7 +28,7 @@
 
 require_once('initialize.php');
 import('ttImportHelper');
-import('ttImportHelper2');
+import('ttOrgImportHelper');
 import('form.Form');
 
 // Access check.
@@ -44,7 +44,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get(
 
 if ($request->isPost()) {
   if (defined('SUBGROUP_DEBUG') && isTrue(SUBGROUP_DEBUG)) {
-    $import = new ttImportHelper2($err);
+    $import = new ttOrgImportHelper($err);
   } else {
     $import = new ttImportHelper($err);
   }
