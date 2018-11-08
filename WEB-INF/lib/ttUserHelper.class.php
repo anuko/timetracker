@@ -229,8 +229,14 @@ class ttUserHelper {
             if (is_a($affected, 'PEAR_Error')) die ($affected->getMessage());
           } else {
             // Record does not exist. Insert it.
-            ttUserHelper::insertBind($user_id, $project_id, $rate, 1);
-          }
+            ttUserHelper::insertBind(array(
+              'user_id' => $user_id,
+              'project_id' => $project_id,
+              'group_id' => $user->getActiveGroup(),
+              'org_id' => $user->org_id,
+              'rate' => $rate,
+              'status' => ACTIVE));
+           }
         }
       }
     }
@@ -309,20 +315,7 @@ class ttUserHelper {
   }
 
   // insertBind - inserts a user to project bind into tt_user_project_binds table.
-  static function insertBind($user_id, $project_id, $rate, $status) {
-    global $user;
-    $mdb2 = getConnection();
-
-    $group_id = $user->getActiveGroup();
-    $org_id = $user->org_id;
-    $sql = "insert into tt_user_project_binds (user_id, project_id, group_id, org_id, rate, status)".
-      " values($user_id, $project_id, $group_id, $org_id, ".$mdb2->quote($rate).", $status)";
-    $affected = $mdb2->exec($sql);
-    return (!is_a($affected, 'PEAR_Error'));
-  }
-
-    // insertBind2 - inserts a user to project bind into tt_user_project_binds table.
-  static function insertBind2($fields) {
+  static function insertBind($fields) {
     global $user;
     $mdb2 = getConnection();
 

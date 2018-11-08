@@ -206,13 +206,7 @@ class ttImportHelper {
           'status' => $this->currentElement['STATUS']));
     }
     if ($name == 'USER_PROJECT_BIND' && $this->canImport) {
-/*
-        ttUserHelper::insertBind(
-        $this->userMap[$this->currentElement['USER_ID']],
-        $this->projectMap[$this->currentElement['PROJECT_ID']],
-        $this->currentElement['RATE'],
-        $this->currentElement['STATUS']);*/
-      ttUserHelper::insertBind2(array(
+      ttUserHelper::insertBind(array(
         'user_id' => $this->userMap[$this->currentElement['USER_ID']],
         'project_id' => $this->projectMap[$this->currentElement['PROJECT_ID']],
         'group_id' => $this->group_id,
