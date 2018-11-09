@@ -53,6 +53,17 @@ class ttOrgImportHelper {
   var $org_id         = null;    // Organization id (same as top group_id).
   var $current_parent_group_id = null; // Current parent group id as we parse the file.
                                        // Set when we create a new group.
+  // Entities for current group.
+  var $currentGroupRoles = array(); // Array of arrays of role properties.
+  // var $currentGroupUsers = array(); // Array of arrays of user properties.
+
+  // Entity maps for current group. They map XML ids with database ids.
+  var $currentGroupRoleMap = array(); // Maps role ids from XML to their database ids.
+  //var $userMap       = array(); // User ids.
+  //var $projectMap    = array(); // Project ids.
+  //var $taskMap       = array(); // Task ids.
+  //var $clientMap     = array(); // Client ids.
+  //var $invoiceMap    = array(); // Invoice ids.
 
   // Constructor.
   function __construct(&$errors) {
@@ -62,12 +73,25 @@ class ttOrgImportHelper {
   // startElement - callback handler for opening tag of an XML element.
   // In this function we assign passed in attributes to currentElement.
   function startElement($parser, $name, $attrs) {
+/*
     if ($name == 'GROUP'
       || $name == 'USER') {
       $this->currentElement = $attrs;
     }
     $this->currentTag = $name;
+*/
+    // First pass. We only check user logins for potential collisions with existing.
+    if ($this->firstPass) {
+      if ($name == 'USER' && $this->canImport) {
+        if ('' != $attrs['STATUS'] && ttUserHelper::getUserByLogin($attrs['LOGIN'])) {
+          // We have a login collision, cannot import any data.
+          $this->canImport = false;
+        }
+      }
+      //$this->currentTag = '';
+    }
 
+    // Second pass processing. We import data here, one tag at a time.
     if (!$this->firstPass && $this->canImport) {
       $mdb2 = getConnection();
 
@@ -92,6 +116,23 @@ class ttOrgImportHelper {
         // Set current parent group.
         $this->current_parent_group_id = $group_id;
       }
+
+      if ($name == 'ROLES') {
+        // If we get here, we have to recycle both $currentGroupRoles and $currentGroupRoleMap.
+        unset($this->currentGroupRoles);
+        unset($this->currentGroupRoleMap);
+        $this->currentGroupRoles = array();
+        $this->currentGroupRoleMap = array();
+        // Both arrays are now empty.
+        // They will get reconstructed after processing of <role> elements in XML. See below.
+      }
+
+      if ($name == 'ROLE') {
+        // We get here when processing a <role> tag for the current group.
+        // Add new role to $this->currentGroupRoles and a mapping to $this->currentGroupRoleMap.
+        $this->currentGroupRoles[$this->currentElement['ID']] = $this->currentElement;
+      $this->currentElement = array();
+      }
     }
   }
 
@@ -99,6 +140,8 @@ class ttOrgImportHelper {
   // When we are here, currentElement is an array of the element attributes (as set in startElement).
   // Here we do the actual import of data into the database.
   function endElement($parser, $name) {
+    // Do nothing here. Everything is done in startElement to keep things simple.
+    /*
     // During first pass we only check user logins.
     if ($this->firstPass) {
       if ($name == 'USER' && $this->canImport) {
@@ -113,11 +156,13 @@ class ttOrgImportHelper {
     // During second pass we import data.
     if (!$this->firstPass && $this->canImport) {
       // Nothing is done here, see startElement for second pass.
-    }
+    }*/
   }
 
   // dataElement - callback handler for text data fragments. It builds up currentElement array with text pieces from XML.
   function dataElement($parser, $data) {
+    // New approach is to do nothing here. Everything is now done when processing start tag (startElement).
+      /*
     if ($this->currentTag == 'NAME'
       || $this->currentTag == 'DESCRIPTION'
       || $this->currentTag == 'LABEL'
@@ -131,6 +176,7 @@ class ttOrgImportHelper {
       else
         $this->currentElement[$this->currentTag] = trim($data);
     }
+       * */
   }
 
   // importXml - uncompresses the file, reads and parses its content. During parsing,
