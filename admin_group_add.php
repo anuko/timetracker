@@ -100,14 +100,13 @@ if ($request->isPost()) {
     'email' => $cl_manager_email,
     'group_name' => $cl_group_name,
     'currency' => CURRENCY_DEFAULT,
-    'lang' => $cl_lang);
+    'lang' => $cl_lang,
+    'created_by_id' => $user->id);
 
   // Create an instance of ttRegistrator class.
   import('ttRegistrator');
   $registrator = new ttRegistrator($fields, $err);
   $registrator->register();
-  // $registrator->setCreatedBy($user->id); // Override created_by to admin account.
-  // TODO: redo ttRegistrator class by passing in created_by_id in $fields to keep code straightforward.
   if ($err->no()) {
     header('Location: admin_groups.php');
     exit();
