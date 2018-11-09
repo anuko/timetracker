@@ -26,7 +26,6 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-import('ttTeamHelper');
 import('ttUserHelper');
 import('ttProjectHelper');
 import('ttTaskHelper');
@@ -70,8 +69,7 @@ class ttOrgImportHelper {
     $this->errors = &$errors;
   }
 
-  // startElement - callback handler for opening tag of an XML element.
-  // In this function we assign passed in attributes to currentElement.
+  // startElement - callback handler for opening tag of an XML element in the file.
   function startElement($parser, $name, $attrs) {
 /*
     if ($name == 'GROUP'
@@ -136,49 +134,6 @@ class ttOrgImportHelper {
     }
   }
 
-  // endElement - callback handler for the closing tag of an XML element.
-  // When we are here, currentElement is an array of the element attributes (as set in startElement).
-  // Here we do the actual import of data into the database.
-  function endElement($parser, $name) {
-    // Do nothing here. Everything is done in startElement to keep things simple.
-    /*
-    // During first pass we only check user logins.
-    if ($this->firstPass) {
-      if ($name == 'USER' && $this->canImport) {
-        if ('' != $this->currentElement['STATUS'] && ttUserHelper::getUserByLogin($this->currentElement['LOGIN'])) {
-          // We have a login collision, cannot import any data.
-          $this->canImport = false;
-        }
-      }
-      $this->currentTag = '';
-    }
-
-    // During second pass we import data.
-    if (!$this->firstPass && $this->canImport) {
-      // Nothing is done here, see startElement for second pass.
-    }*/
-  }
-
-  // dataElement - callback handler for text data fragments. It builds up currentElement array with text pieces from XML.
-  function dataElement($parser, $data) {
-    // New approach is to do nothing here. Everything is now done when processing start tag (startElement).
-      /*
-    if ($this->currentTag == 'NAME'
-      || $this->currentTag == 'DESCRIPTION'
-      || $this->currentTag == 'LABEL'
-      || $this->currentTag == 'VALUE'
-      || $this->currentTag == 'COMMENT'
-      || $this->currentTag == 'ADDRESS'
-      || $this->currentTag == 'ALLOW_IP'
-      || $this->currentTag == 'PASSWORD_COMPLEXITY') {
-      if (isset($this->currentElement[$this->currentTag]))
-        $this->currentElement[$this->currentTag] .= trim($data);
-      else
-        $this->currentElement[$this->currentTag] = trim($data);
-    }
-       * */
-  }
-
   // importXml - uncompresses the file, reads and parses its content. During parsing,
   // startElement, endElement, and dataElement functions are called as many times as necessary.
   // Actual import occurs in the endElement handler.
@@ -213,8 +168,7 @@ class ttOrgImportHelper {
     // Initialize XML parser.
     $parser = xml_parser_create();
     xml_set_object($parser, $this);
-    xml_set_element_handler($parser, 'startElement', 'endElement');
-    xml_set_character_data_handler($parser, 'dataElement');
+    xml_set_element_handler($parser, 'startElement', false);
 
     // We need to parse the file 2 times:
     //   1) First pass: determine if import is possible - there must be no login collisions.
@@ -247,8 +201,7 @@ class ttOrgImportHelper {
     // Now we can do a second pass, where real work is done.
     $parser = xml_parser_create();
     xml_set_object($parser, $this);
-    xml_set_element_handler($parser, 'startElement', 'endElement');
-    xml_set_character_data_handler($parser, 'dataElement');
+    xml_set_element_handler($parser, 'startElement', false);
 
     // Read and parse the content of the file. During parsing, startElement, endElement, and dataElement functions are called.
     $file = fopen($filename, 'r');
