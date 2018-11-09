@@ -86,7 +86,7 @@ class ttRegistrator {
     global $i18n;
     global $user;
 
-    // Protection fom too many recent bot registrations from user IP.
+    // Protection from too many recent bot registrations from user IP.
     if (!$user->can('administer_site')) { // No problems for site admin.
       if ($this->registeredRecently()) {
         $this->err->add($i18n->get('error.access_denied'));
@@ -121,7 +121,9 @@ class ttRegistrator {
       return false;
     }
 
-    if (!$this->setCreatedBy($this->user_id))
+    // Set created_by appropriately (admin or self).
+    $created_by = $user->can('administer_site') ? $user->id : $this->user_id;
+    if (!$this->setCreatedBy($created_by))
       return false;
 
     return true;
@@ -189,7 +191,7 @@ class ttRegistrator {
     }
 
     // Update top manager.
-    $sql = "update tt_users set created_by = $user_id where id = $user_id and group_id = $this->group_id";
+    $sql = "update tt_users set created_by = $user_id where id = $this->user_id and group_id = $this->group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) {
       $this->err->add($i18n->get('error.db'));

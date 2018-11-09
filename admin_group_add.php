@@ -106,7 +106,8 @@ if ($request->isPost()) {
   import('ttRegistrator');
   $registrator = new ttRegistrator($fields, $err);
   $registrator->register();
-  $registrator->setCreatedBy($user->id); // Override created_by to admin account.
+  // $registrator->setCreatedBy($user->id); // Override created_by to admin account.
+  // TODO: redo ttRegistrator class by passing in created_by_id in $fields to keep code straightforward.
   if ($err->no()) {
     header('Location: admin_groups.php');
     exit();
