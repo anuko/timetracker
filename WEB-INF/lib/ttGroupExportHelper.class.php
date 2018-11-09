@@ -42,6 +42,7 @@ class ttGroupExportHelper {
   // We write to the file sequentially (1,2,3...) while in the database the entities have different ids.
   var $userMap   = array(); // User ids.
   var $roleMap   = array(); // Role ids.
+  var $taskMap   = array(); // Task ids.
   var $clientMap = array(); // Client ids.
 
   // Constructor.
@@ -114,6 +115,24 @@ class ttGroupExportHelper {
     return false;
   }
 
+  // getTasks - obtains all tasks defined for group.
+  function getTasks() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $result = array();
+    $sql = "select * from tt_tasks where group_id = $this->group_id and org_id = $user->org_id";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
   // writeData writes group data into file.
   function writeData() {
 
@@ -138,15 +157,20 @@ class ttGroupExportHelper {
     foreach ($roles as $key=>$role_item)
       $this->roleMap[$role_item['id']] = $key + 1;
 
+    // Prepare task map.
+    $tasks = $this->getTasks();
+    foreach ($tasks as $key=>$task_item)
+      $this->taskMap[$task_item['id']] = $key + 1;
+
     // Prepare client map.
     $clients = ttTeamHelper::getAllClients($this->group_id, true);
     foreach ($clients as $key=>$client_item)
       $this->clientMap[$client_item['id']] = $key + 1;
 
     // Write roles.
-    fwrite($this->file, $this->indentation."<roles>\n");
+    fwrite($this->file, $this->indentation."  <roles>\n");
     foreach ($roles as $role) {
-      $role_part = $this->indentation.'  '."<role id=\"".$this->roleMap[$role['id']]."\"";
+      $role_part = $this->indentation.'    '."<role id=\"".$this->roleMap[$role['id']]."\"";
       $role_part .= " name=\"".htmlentities($role['name'])."\"";
       $role_part .= " description=\"".htmlentities($role['description'])."\"";
       $role_part .= " rank=\"".$role['rank']."\"";
@@ -155,13 +179,25 @@ class ttGroupExportHelper {
       $role_part .= "></role>\n";
       fwrite($this->file, $role_part);
     }
-    fwrite($this->file, $this->indentation."</roles>\n");
+    fwrite($this->file, $this->indentation."  </roles>\n");
+
+    // Write tasks.
+    fwrite($this->file, $this->indentation."  <tasks>\n");
+    foreach ($tasks as $task) {
+      $task_part = $this->indentation.'    '."<task id=\"".$this->taskMap[$task['id']]."\"";
+      $task_part .= " name=\"".htmlentities($task['name'])."\"";
+      $task_part .= " description=\"".htmlentities($task['description'])."\"";
+      $task_part .= " status=\"".$task['status']."\"";
+      $task_part .= "></task>\n";
+      fwrite($this->file, $task_part);
+    }
+    fwrite($this->file, $this->indentation."  </tasks>\n");
 
     // Write users.
-    fwrite($this->file, $this->indentation."<users>\n");
+    fwrite($this->file, $this->indentation."  <users>\n");
     foreach ($users as $user_item) {
       $role_id = $user_item['rank'] == 512 ? 0 : $this->roleMap[$user_item['role_id']]; // Special role_id 0 (not null) for top manager.
-      $user_part = $this->indentation.'  '."<user id=\"".$this->userMap[$user_item['id']]."\"";
+      $user_part = $this->indentation.'    '."<user id=\"".$this->userMap[$user_item['id']]."\"";
       $user_part .= " name=\"".htmlentities($user_item['name'])."\"";
       $user_part .= " login=\"".htmlentities($user_item['login'])."\"";
       $user_part .= " password=\"".$user_item['password']."\"";
@@ -173,7 +209,7 @@ class ttGroupExportHelper {
       $user_part .= "></user>\n";
       fwrite($this->file, $user_part);
     }
-    fwrite($this->file, $this->indentation."</users>\n");
+    fwrite($this->file, $this->indentation."  </users>\n");
 
     // Call self recursively for all subgroups.
     foreach ($this->subgroups as $subgroup) {

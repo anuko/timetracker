@@ -27,6 +27,7 @@
 // +----------------------------------------------------------------------+
 
 import('ttUserHelper');
+import('ttRoleHelper');
 
 // ttOrgImportHelper - this class is a future replacement for ttImportHelper.
 // Currently, it is work in progress.
@@ -37,10 +38,11 @@ class ttOrgImportHelper {
   var $canImport      = true;    // False if we cannot import data due to a conflict such as login collision.
   var $firstPass      = true;    // True during first pass through the file.
   var $org_id         = null;    // Organization id (same as top group_id).
-  var $current_parent_group_id = null; // Current parent group id as we parse the file.
+  var $current_group_id        = null; // Current group id during parsing.
+  var $current_parent_group_id = null; // Current parent group id during parsing.
                                        // Set when we create a new group.
-  // Entities for current group.
-  var $currentGroupRoles = array(); // Array of arrays of role properties.
+  // Entities for current group. -- Looks like they are not needed as we insert right away...
+  // var $currentGroupRoles = array(); // Array of arrays of role properties.
   // var $currentGroupUsers = array(); // Array of arrays of user properties.
 
   // Entity maps for current group. They map XML ids with database ids.
@@ -77,7 +79,7 @@ class ttOrgImportHelper {
       // We are in second pass and can import data.
       if ($name == 'GROUP') {
         // Create a new group.
-        $group_id = $this->createGroup(array(
+        $this->current_group_id = $this->createGroup(array(
           'parent_id' => $this->current_parent_group_id,
           'org_id' => $this->org_id,
           'name' => $attrs['NAME'],
@@ -87,13 +89,13 @@ class ttOrgImportHelper {
 
         // Special handling for top group.
         if (!$this->org_id) {
-          $this->org_id = $group_id;
-          $sql = "update tt_groups set org_id = $group_id where org_id is NULL and id = $group_id";
+          $this->org_id = $this->current_group_id;
+          $sql = "update tt_groups set org_id = $this->current_group_id where org_id is NULL and id = $this->current_group_id";
           $affected = $mdb2->exec($sql);
           // TODO: design a better error handling approach for the entire import process.
         }
         // Set current parent group.
-        $this->current_parent_group_id = $group_id;
+        $this->current_parent_group_id = $this->current_group_id;
       }
 
       if ($name == 'ROLES') {
@@ -108,8 +110,16 @@ class ttOrgImportHelper {
 
       if ($name == 'ROLE') {
         // We get here when processing a <role> tag for the current group.
-        // Add new role to $this->currentGroupRoles and a mapping to $this->currentGroupRoleMap.
-        $this->currentGroupRoles[$attrs['ID']] = $attrs;
+        $role_id = ttRoleHelper::insert(array(
+              'group_id' => $this->current_group_id,
+              'org_id' => $this->org_id,
+              'name' => $attrs['NAME'],
+              'description' => $attrs['DESCRIPTION'],
+              'rank' => $attrs['RANK'],
+              'rights' => $attrs['RIGHTS'],
+              'status' => $attrs['STATUS']));
+        // Add a mapping.
+        $this->currentGroupRoleMap[$attrs['ID']] = $role_id;
       }
     }
   }
