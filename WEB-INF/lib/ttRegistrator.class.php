@@ -84,11 +84,14 @@ class ttRegistrator {
     if ($this->err->yes()) return false; // There are errors, do not proceed.
 
     global $i18n;
+    global $user;
 
     // Protection fom too many recent bot registrations from user IP.
-    if ($this->registeredRecently()) {
-      $this->err->add($i18n->get('error.access_denied'));
-      return false;
+    if (!$user->can('administer_site')) { // No problems for site admin.
+      if ($this->registeredRecently()) {
+        $this->err->add($i18n->get('error.access_denied'));
+        return false;
+      }
     }
 
     import('ttUserHelper');
