@@ -32,11 +32,9 @@ import('ttUserHelper');
 // Currently, it is work in progress.
 // When done, it should handle import of complex groups consisting of other groups.
 class ttOrgImportHelper {
-  var $errors         = null;    // Errors go here. Set in constructor by reference.
-  var $cannotImport   = null;    // A comma-separated string of entity names that we cannot import.
-                                 // TODO: rename the above to something better.
-
-  var $canImport      = true;    // False if we cannot import data due to a login collision.
+  var $errors               = null; // Errors go here. Set in constructor by reference.
+  var $conflicting_entities = null; // A comma-separated list of entity names we cannot import.
+  var $canImport      = true;    // False if we cannot import data due to a conflict such as login collision.
   var $firstPass      = true;    // True during first pass through the file.
   var $org_id         = null;    // Organization id (same as top group_id).
   var $current_parent_group_id = null; // Current parent group id as we parse the file.
@@ -67,7 +65,7 @@ class ttOrgImportHelper {
         $login = $attrs['LOGIN'];
         if ('' != $attrs['STATUS'] && ttUserHelper::getUserByLogin($login)) {
           // We have a login collision. Append colliding login to a list of things we cannot import.
-          $this->cannotImport .= ($this->cannotImport ? ", $login" : $login);
+          $this->conflicting_entities .= ($this->conflicting_entities ? ", $login" : $login);
         }
       }
     }
@@ -168,10 +166,10 @@ class ttOrgImportHelper {
           xml_get_current_line_number($parser)));
       }
     }
-    if ($this->cannotImport) {
+    if ($this->conflicting_entities) {
       $this->canImport = false;
       $this->errors->add($i18n->get('error.user_exists'));
-      $this->errors->add(sprintf($i18n->get('error.cannot_import'), $this->cannotImport));
+      $this->errors->add(sprintf($i18n->get('error.cannot_import'), $this->conflicting_entities));
     }
 
     $this->firstPass = false; // We are done with 1st pass.
