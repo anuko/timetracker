@@ -102,6 +102,8 @@ $i18n_key_words = array(
 'error.goto_uncompleted' => 'Μεταβείτε στην μη ολοκληρωμένη καταχώρηση.',
 'error.overlap' => 'Το χρονικό διάστημα επικαλύπτει υπάρχουσες καταχωρήσεις.',
 'error.future_date' => 'Η ημερομηνία είναι στο μέλλον.',
+// TODO: translate the following.
+// 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.
 'button.login' => 'Σύνδεση',

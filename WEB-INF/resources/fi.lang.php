@@ -110,6 +110,8 @@ $i18n_key_words = array(
 'error.goto_uncompleted' => 'Siirry kesken olevaan syötteeseen.',
 'error.overlap' => 'Aikavälillä on päällekkäisiä syötteitä.',
 'error.future_date' => 'Aika on tulevaisuudessa.',
+// TODO: translate the following.
+// 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.
 'button.login' => 'Kirjaudu',

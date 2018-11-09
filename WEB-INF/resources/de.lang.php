@@ -101,6 +101,8 @@ $i18n_key_words = array(
 'error.goto_uncompleted' => 'Zum unvollständigen Eintrag gehen.',
 'error.overlap' => 'Der Zeitinterval überschneidet sich mit vorhandenen Einträgen.',
 'error.future_date' => 'Datum ist in der Zukunft.',
+// TODO: translate the following.
+// 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.
 'button.login' => 'Anmelden',

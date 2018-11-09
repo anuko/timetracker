@@ -120,6 +120,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
+// 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.
 'button.login' => 'Innlogging',

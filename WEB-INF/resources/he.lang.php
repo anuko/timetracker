@@ -126,6 +126,7 @@ $i18n_key_words = array(
 'error.overlap' => 'טווח הזמן מתנגש עם רישומים קיימים.',
 // TODO: translate the following.
 // 'error.future_date' => 'Date is in future.',
+// 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.
 'button.login' => 'היכנס',

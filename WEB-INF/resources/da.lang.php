@@ -108,6 +108,8 @@ $i18n_key_words = array(
 'error.goto_uncompleted' => 'Gå til uafsluttet registrering.',
 'error.overlap' => 'Tidsinterval overlapper eksisterende poster.',
 'error.future_date' => 'Datoen er ud i fremtiden.',
+// TODO: translate the following.
+// 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.
 'button.login' => 'Log ind',

@@ -27,28 +27,17 @@
 // +----------------------------------------------------------------------+
 
 import('ttUserHelper');
-import('ttProjectHelper');
-import('ttTaskHelper');
-import('ttInvoiceHelper');
-import('ttTimeHelper');
-import('ttClientHelper');
-import('ttCustomFieldHelper');
-import('ttFavReportHelper');
-import('ttExpenseHelper');
-import('ttRoleHelper');
 
 // ttOrgImportHelper - this class is a future replacement for ttImportHelper.
 // Currently, it is work in progress.
 // When done, it should handle import of complex groups consisting of other groups.
 class ttOrgImportHelper {
   var $errors         = null;    // Errors go here. Set in constructor by reference.
-
-  var $currentElement = array(); // Current element of the XML file we are parsing.
-  var $currentTag     = '';      // XML tag of the current element.
+  var $cannotImport   = null;    // A comma-separated string of entity names that we cannot import.
+                                 // TODO: rename the above to something better.
 
   var $canImport      = true;    // False if we cannot import data due to a login collision.
   var $firstPass      = true;    // True during first pass through the file.
-
   var $org_id         = null;    // Organization id (same as top group_id).
   var $current_parent_group_id = null; // Current parent group id as we parse the file.
                                        // Set when we create a new group.
@@ -71,38 +60,32 @@ class ttOrgImportHelper {
 
   // startElement - callback handler for opening tag of an XML element in the file.
   function startElement($parser, $name, $attrs) {
-/*
-    if ($name == 'GROUP'
-      || $name == 'USER') {
-      $this->currentElement = $attrs;
-    }
-    $this->currentTag = $name;
-*/
+
     // First pass. We only check user logins for potential collisions with existing.
     if ($this->firstPass) {
       if ($name == 'USER' && $this->canImport) {
-        if ('' != $attrs['STATUS'] && ttUserHelper::getUserByLogin($attrs['LOGIN'])) {
-          // We have a login collision, cannot import any data.
-          $this->canImport = false;
+        $login = $attrs['LOGIN'];
+        if ('' != $attrs['STATUS'] && ttUserHelper::getUserByLogin($login)) {
+          // We have a login collision. Append colliding login to a list of things we cannot import.
+          $this->cannotImport .= ($this->cannotImport ? ", $login" : $login);
         }
       }
-      //$this->currentTag = '';
     }
 
     // Second pass processing. We import data here, one tag at a time.
     if (!$this->firstPass && $this->canImport) {
       $mdb2 = getConnection();
 
-      // We are in second pass through the XML file and can import data.
+      // We are in second pass and can import data.
       if ($name == 'GROUP') {
         // Create a new group.
         $group_id = $this->createGroup(array(
           'parent_id' => $this->current_parent_group_id,
           'org_id' => $this->org_id,
-          'name' => $this->currentElement['NAME'],
-          'currency' => $this->currentElement['CURRENCY'],
-          'lang' => $this->currentElement['LANG']));
-        // We only have 3 properties in export at the moment, while work is ongoing...
+          'name' => $attrs['NAME'],
+          'currency' => $attrs['CURRENCY'],
+          'lang' => $attrs['LANG']));
+        // We only have 3 properties at the moment, while work is ongoing...
 
         // Special handling for top group.
         if (!$this->org_id) {
@@ -128,8 +111,7 @@ class ttOrgImportHelper {
       if ($name == 'ROLE') {
         // We get here when processing a <role> tag for the current group.
         // Add new role to $this->currentGroupRoles and a mapping to $this->currentGroupRoleMap.
-        $this->currentGroupRoles[$this->currentElement['ID']] = $this->currentElement;
-      $this->currentElement = array();
+        $this->currentGroupRoles[$attrs['ID']] = $attrs;
       }
     }
   }
@@ -185,11 +167,13 @@ class ttOrgImportHelper {
           xml_error_string(xml_get_error_code($parser)),
           xml_get_current_line_number($parser)));
       }
-      if (!$this->canImport) {
-        $this->errors->add($i18n->get('error.user_exists'));
-        break;
-      }
     }
+    if ($this->cannotImport) {
+      $this->canImport = false;
+      $this->errors->add($i18n->get('error.user_exists'));
+      $this->errors->add(sprintf($i18n->get('error.cannot_import'), $this->cannotImport));
+    }
+
     $this->firstPass = false; // We are done with 1st pass.
     xml_parser_free($parser);
     if ($file) fclose($file);

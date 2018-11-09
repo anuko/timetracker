@@ -106,6 +106,8 @@ $i18n_key_words = array(
 'error.goto_uncompleted' => 'Vai alle voce incompleta.',
 'error.overlap' => 'Intervallo temporale sovrapposto a voci esistenti.',
 'error.future_date' => 'La data è nel futuro.',
+// TODO: translate the following.
+// 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.
 'button.login' => 'Login',

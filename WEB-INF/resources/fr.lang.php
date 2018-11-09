@@ -108,6 +108,8 @@ $i18n_key_words = array(
 'error.goto_uncompleted' => 'Aller à l\\\'entrée non terminée.',
 'error.overlap' => 'Les heures des projets ne peuvent se chevaucher.',
 'error.future_date' => 'Date ultérieure.',
+// TODO: translate the following.
+// 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.
 'button.login' => 'Connexion',

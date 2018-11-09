@@ -112,6 +112,8 @@ $i18n_key_words = array(
 'error.goto_uncompleted' => 'Przejdź do niedokończonego wpisu.',
 'error.overlap' => 'Okres czasowy nakłada się z istniejącymi wpisami.',
 'error.future_date' => 'Data jest w przyszłości.',
+// TODO: translate the following.
+// 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons
 'button.login' => 'Login',
