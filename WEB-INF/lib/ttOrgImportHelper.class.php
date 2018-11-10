@@ -60,6 +60,7 @@ class ttOrgImportHelper {
 
   // startElement - callback handler for opening tag of an XML element in the file.
   function startElement($parser, $name, $attrs) {
+    global $i18n;
 
     // First pass. We only check user logins for potential collisions with existing.
     if ($this->firstPass) {
@@ -73,7 +74,7 @@ class ttOrgImportHelper {
     }
 
     // Second pass processing. We import data here, one tag at a time.
-    if (!$this->firstPass && $this->canImport) {
+    if (!$this->firstPass && $this->canImport && $this->errors->no()) {
       $mdb2 = getConnection();
 
       // We are in second pass and can import data.
@@ -88,28 +89,24 @@ class ttOrgImportHelper {
         // We only have 3 properties at the moment, while work is ongoing...
 
         // Special handling for top group.
-        if (!$this->org_id) {
+        if (!$this->org_id && $this->current_group_id) {
           $this->org_id = $this->current_group_id;
           $sql = "update tt_groups set org_id = $this->current_group_id where org_id is NULL and id = $this->current_group_id";
           $affected = $mdb2->exec($sql);
-          // TODO: design a better error handling approach for the entire import process.
         }
-        // Set current parent group.
+        // Set parent group to create subgroups with this group as parent at next entry here.
         $this->current_parent_group_id = $this->current_group_id;
       }
 
       if ($name == 'ROLES') {
-        // If we get here, we have to recycle both $currentGroupRoles and $currentGroupRoleMap.
-        unset($this->currentGroupRoles);
+        // If we get here, we have to recycle $currentGroupRoleMap.
         unset($this->currentGroupRoleMap);
-        $this->currentGroupRoles = array();
         $this->currentGroupRoleMap = array();
-        // Both arrays are now empty.
-        // They will get reconstructed after processing of <role> elements in XML. See below.
+        // Role map is reconstructed after processing <role> elements in XML. See below.
       }
 
       if ($name == 'ROLE') {
-        // We get here when processing a <role> tag for the current group.
+        // We get here when processing <role> tags for the current group.
         $role_id = ttRoleHelper::insert(array(
               'group_id' => $this->current_group_id,
               'org_id' => $this->org_id,
@@ -118,8 +115,10 @@ class ttOrgImportHelper {
               'rank' => $attrs['RANK'],
               'rights' => $attrs['RIGHTS'],
               'status' => $attrs['STATUS']));
-        // Add a mapping.
-        $this->currentGroupRoleMap[$attrs['ID']] = $role_id;
+        if ($role_id) {
+          // Add a mapping.
+          $this->currentGroupRoleMap[$attrs['ID']] = $role_id;
+        } else $this->errors->add($i18n->get('error.db'));
       }
     }
   }
@@ -189,6 +188,7 @@ class ttOrgImportHelper {
       unlink($filename);
       return;
     }
+    if ($this->errors->yes()) return; // Exit if we have errors.
 
     // Now we can do a second pass, where real work is done.
     $parser = xml_parser_create();
@@ -238,7 +238,7 @@ class ttOrgImportHelper {
   // createGroup function creates a new group.
   private function createGroup($fields) {
 
-    global $user;
+    global $i18n;
     $mdb2 = getConnection();
 
     $columns = '(parent_id, org_id, name, currency, lang)';
@@ -274,7 +274,10 @@ class ttOrgImportHelper {
 
     $sql = 'insert into tt_groups '.$columns.$values;
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
+    if (is_a($affected, 'PEAR_Error')) {
+      $this->errors->add($i18n->get('error.db'));
+      return false;
+    }
 
     $group_id = $mdb2->lastInsertID('tt_groups', 'id');
     return $group_id;
