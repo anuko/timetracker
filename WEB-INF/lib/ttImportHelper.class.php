@@ -247,7 +247,6 @@ class ttImportHelper {
           'name' => $this->currentElement['NAME'],
           'date' => $this->currentElement['DATE'],
           'client_id' => $this->clientMap[$this->currentElement['CLIENT_ID']],
-          'discount' => $this->currentElement['DISCOUNT'],
           'status' => $this->currentElement['STATUS']));
     }
 

@@ -45,6 +45,7 @@ class ttGroupExportHelper {
   var $taskMap    = array(); // Task ids.
   var $projectMap = array(); // Project ids.
   var $clientMap  = array(); // Client ids.
+  var $invoiceMap = array(); // Invoice ids.
 
   // Constructor.
   function __construct($group_id, $file, $indentation) {
@@ -224,6 +225,11 @@ class ttGroupExportHelper {
     foreach ($clients as $key=>$client_item)
       $this->clientMap[$client_item['id']] = $key + 1;
 
+    // Prepare invoice map.
+    $invoices = ttTeamHelper::getAllInvoices();
+    foreach ($invoices as $key=>$invoice_item)
+      $this->invoiceMap[$invoice_item['id']] = $key + 1;
+
     // Write roles.
     fwrite($this->file, $this->indentation."  <roles>\n");
     foreach ($roles as $role) {
@@ -323,6 +329,19 @@ class ttGroupExportHelper {
       fwrite($this->file, $bind_part);
     }
     fwrite($this->file, $this->indentation."  </user_project_binds>\n");
+
+    // Write invoices.
+    fwrite($this->file, $this->indentation."  <invoices>\n");
+    foreach ($invoices as $invoice_item) {
+      $invoice_part = $this->indentation.'    '."<invoice id=\"".$this->invoiceMap[$invoice_item['id']]."\"";
+      $invoice_part .= " name=\"".htmlentities($invoice_item['name'])."\"";
+      $invoice_part .= " date=\"".$invoice_item['date']."\"";
+      $invoice_part .= " client_id=\"".$this->clientMap[$invoice_item['client_id']]."\"";
+      $invoice_part .= " status=\"".$invoice_item['status']."\"";
+      $invoice_part .= "></invoice>\n";
+      fwrite($this->file, $invoice_part);
+    }
+    fwrite($this->file, $this->indentation."  </invoices>\n");
 
     // Call self recursively for all subgroups.
     foreach ($this->subgroups as $subgroup) {

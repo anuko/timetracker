@@ -31,6 +31,7 @@ import('ttRoleHelper');
 import('ttTaskHelper');
 import('ttProjectHelper');
 import('ttClientHelper');
+import('ttInvoiceHelper');
 
 // ttOrgImportHelper - this class is a future replacement for ttImportHelper.
 // Currently, it is work in progress.
@@ -52,6 +53,7 @@ class ttOrgImportHelper {
   var $currentGroupProjectMap = array();
   var $currentGroupClientMap  = array();
   var $currentGroupUserMap    = array();
+  var $currentGroupInvoiceMap = array();
 
   // Constructor.
   function __construct(&$errors) {
@@ -254,6 +256,28 @@ class ttOrgImportHelper {
           'status' => $attrs['STATUS']))) {
           $this->errors->add($i18n->get('error.db'));
         }
+      }
+
+      if ($name == 'INVOICES') {
+        // If we get here, we have to recycle $currentGroupInvoiceMap.
+        unset($this->currentGroupInvoiceMap);
+        $this->currentGroupInvoiceMap = array();
+        // Invoice map is reconstructed after processing <invoice> elements in XML. See below.
+      }
+
+      if ($name == 'INVOICE') {
+        // We get here when processing <invoice> tags for the current group.
+        $invoice_id = ttInvoiceHelper::insert(array(
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'name' => $attrs['NAME'],
+          'date' => $attrs['DATE'],
+          'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'status' => $attrs['STATUS']));
+        if ($invoice_id) {
+          // Add a mapping.
+          $this->currentGroupInvoiceMap[$attrs['ID']] = $invoice_id;
+        } else $this->errors->add($i18n->get('error.db'));
       }
     }
   }
