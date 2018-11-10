@@ -152,6 +152,24 @@ class ttGroupExportHelper {
     return false;
   }
 
+  // getClients - obtains all clients defined for group.
+  function getClients() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $result = array();
+    $sql = "select * from tt_clients where group_id = $this->group_id and org_id = $user->org_id";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
   // writeData writes group data into file.
   function writeData() {
 
@@ -187,7 +205,7 @@ class ttGroupExportHelper {
       $this->projectMap[$project_item['id']] = $key + 1;
 
     // Prepare client map.
-    $clients = ttTeamHelper::getAllClients($this->group_id, true);
+    $clients = $this->getClients();
     foreach ($clients as $key=>$client_item)
       $this->clientMap[$client_item['id']] = $key + 1;
 
@@ -236,6 +254,27 @@ class ttGroupExportHelper {
       fwrite($this->file, $project_part);
     }
     fwrite($this->file, $this->indentation."  </projects>\n");
+
+    // Write clients.
+    fwrite($this->file, $this->indentation."  <clients>\n");
+    foreach ($clients as $client_item) {
+      if($client_item['projects']){
+        $projects_db = explode(',', $client_item['projects']);
+        $projects_mapped = array();
+        foreach ($projects_db as $item)
+          $projects_mapped[] = $this->projectMap[$item];
+        $projects_str = implode(',', $projects_mapped);
+      }
+      $client_part = $this->indentation.'    '."<client id=\"".$this->clientMap[$client_item['id']]."\"";
+      $client_part .= " name=\"".htmlentities($client_item['name'])."\"";
+      $client_part .= " address=\"".htmlentities($client_item['address'])."\"";
+      $client_part .= " tax=\"".$client_item['tax']."\"";
+      $client_part .= " projects=\"".$projects_str."\"";
+      $client_part .= " status=\"".$client_item['status']."\"";
+      $client_part .= "></client>\n";
+      fwrite($this->file, $client_part);
+    }
+    fwrite($this->file, $this->indentation."  </clients>\n");
 
     // Write users.
     fwrite($this->file, $this->indentation."  <users>\n");
