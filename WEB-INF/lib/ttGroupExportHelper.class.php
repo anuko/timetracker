@@ -40,10 +40,11 @@ class ttGroupExportHelper {
 
   // The following arrays are maps between entity ids in the file versus the database.
   // We write to the file sequentially (1,2,3...) while in the database the entities have different ids.
-  var $userMap   = array(); // User ids.
-  var $roleMap   = array(); // Role ids.
-  var $taskMap   = array(); // Task ids.
-  var $clientMap = array(); // Client ids.
+  var $userMap    = array(); // User ids.
+  var $roleMap    = array(); // Role ids.
+  var $taskMap    = array(); // Task ids.
+  var $projectMap = array(); // Project ids.
+  var $clientMap  = array(); // Client ids.
 
   // Constructor.
   function __construct($group_id, $file, $indentation) {
@@ -133,6 +134,24 @@ class ttGroupExportHelper {
     return false;
   }
 
+  // getProjects - obtains all projects defined for group.
+  function getProjects() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $result = array();
+    $sql = "select * from tt_projects where group_id = $this->group_id and org_id = $user->org_id";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
   // writeData writes group data into file.
   function writeData() {
 
@@ -161,6 +180,11 @@ class ttGroupExportHelper {
     $tasks = $this->getTasks();
     foreach ($tasks as $key=>$task_item)
       $this->taskMap[$task_item['id']] = $key + 1;
+
+    // Prepare project map.
+    $projects = $this->getProjects();
+    foreach ($projects as $key=>$project_item)
+      $this->projectMap[$project_item['id']] = $key + 1;
 
     // Prepare client map.
     $clients = ttTeamHelper::getAllClients($this->group_id, true);
@@ -192,6 +216,26 @@ class ttGroupExportHelper {
       fwrite($this->file, $task_part);
     }
     fwrite($this->file, $this->indentation."  </tasks>\n");
+
+    // Write projects.
+    fwrite($this->file, $this->indentation."  <projects>\n");
+    foreach ($projects as $project_item) {
+      if($project_item['tasks']){
+        $tasks = explode(',', $project_item['tasks']);
+        $tasks_mapped = array();
+        foreach ($tasks as $item)
+          $tasks_mapped[] = $this->taskMap[$item];
+        $tasks_str = implode(',', $tasks_mapped);
+      }
+      $project_part = $this->indentation.'    '."<project id=\"".$this->projectMap[$project_item['id']]."\"";
+      $project_part .= " name=\"".htmlentities($project_item['name'])."\"";
+      $project_part .= " description=\"".htmlentities($project_item['description'])."\"";
+      $project_part .= " tasks=\"".$tasks_str."\"";
+      $project_part .= " status=\"".$project_item['status']."\"";
+      $project_part .= "></project>\n";
+      fwrite($this->file, $project_part);
+    }
+    fwrite($this->file, $this->indentation."  </projects>\n");
 
     // Write users.
     fwrite($this->file, $this->indentation."  <users>\n");
