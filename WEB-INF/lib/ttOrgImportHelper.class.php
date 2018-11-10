@@ -29,6 +29,7 @@
 import('ttUserHelper');
 import('ttRoleHelper');
 import('ttTaskHelper');
+import('ttProjectHelper');
 
 // ttOrgImportHelper - this class is a future replacement for ttImportHelper.
 // Currently, it is work in progress.
@@ -47,8 +48,9 @@ class ttOrgImportHelper {
   // var $currentGroupUsers = array(); // Array of arrays of user properties.
 
   // Entity maps for current group. They map XML ids with database ids.
-  var $currentGroupRoleMap = array();
-  var $currentGroupTaskMap = array();
+  var $currentGroupRoleMap    = array();
+  var $currentGroupTaskMap    = array();
+  var $currentGroupProjectMap = array();
   //var $userMap       = array(); // User ids.
   //var $projectMap    = array(); // Project ids.
   //var $taskMap       = array(); // Task ids.
@@ -141,6 +143,34 @@ class ttOrgImportHelper {
         if ($task_id) {
           // Add a mapping.
           $this->currentGroupTaskMap[$attrs['ID']] = $task_id;
+        } else $this->errors->add($i18n->get('error.db'));
+      }
+
+      if ($name == 'PROJECTS') {
+        // If we get here, we have to recycle $currentGroupProjectMap.
+        unset($this->currentGroupProjectMap);
+        $this->currentGroupProjectMap = array();
+        // Project map is reconstructed after processing <project> elements in XML. See below.
+      }
+
+      if ($name == 'PROJECT') {
+        // We get here when processing <project> tags for the current group.
+
+        // Prepare a list of task ids.
+        $tasks = explode(',', $attrs['TASKS']);
+        foreach ($tasks as $id)
+          $mapped_tasks[] = $this->currentGroupTaskMap[$id];
+
+        $project_id = ttProjectHelper::insert(array(
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'name' => $attrs['NAME'],
+          'description' => $attrs['DESCRIPTION'],
+          'tasks' => $mapped_tasks,
+          'status' => $attrs['STATUS']));
+        if ($project_id) {
+          // Add a mapping.
+          $this->currentGroupProjectMap[$attrs['ID']] = $project_id;
         } else $this->errors->add($i18n->get('error.db'));
       }
     }
