@@ -54,6 +54,7 @@ class ttOrgImportHelper {
   var $currentGroupClientMap  = array();
   var $currentGroupUserMap    = array();
   var $currentGroupInvoiceMap = array();
+  var $currentGroupLogMap     = array();
 
   // Constructor.
   function __construct(&$errors) {
@@ -277,6 +278,37 @@ class ttOrgImportHelper {
         if ($invoice_id) {
           // Add a mapping.
           $this->currentGroupInvoiceMap[$attrs['ID']] = $invoice_id;
+        } else $this->errors->add($i18n->get('error.db'));
+      }
+
+      if ($name == 'LOG') {
+        // If we get here, we have to recycle $currentGroupLogMap.
+        unset($this->currentGroupLogMap);
+        $this->currentGroupLogMap = array();
+        // Log map is reconstructed after processing <log_item> elements in XML. See below.
+      }
+
+      if ($name == 'LOG_ITEM') {
+        // We get here when processing <log_item> tags for the current group.
+        $log_item_id = ttTimeHelper::insert(array(
+          'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'date' => $attrs['DATE'],
+          'start' => $attrs['START'],
+          'finish' => $attrs['FINISH'],
+          'duration' => $attrs['DURATION'],
+          'client' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'project' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
+          'task' => $this->currentGroupTaskMap[$attrs['TASK_ID']],
+          'invoice' => $this->currentGroupInvoiceMap[$attrs['INVOICE_ID']],
+          'note' => (isset($attrs['COMMENT']) ? $attrs['COMMENT'] : ''),
+          'billable' => $attrs['BILLABLE'],
+          'paid' => $attrs['PAID'],
+          'status' => $attrs['STATUS']));
+        if ($log_item_id) {
+          // Add a mapping.
+          $this->currentGroupLogMap[$attrs['ID']] = $log_item_id;
         } else $this->errors->add($i18n->get('error.db'));
       }
     }
