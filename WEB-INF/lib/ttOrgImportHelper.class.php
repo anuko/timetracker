@@ -30,6 +30,7 @@ import('ttUserHelper');
 import('ttRoleHelper');
 import('ttTaskHelper');
 import('ttProjectHelper');
+import('ttClientHelper');
 
 // ttOrgImportHelper - this class is a future replacement for ttImportHelper.
 // Currently, it is work in progress.
@@ -51,11 +52,7 @@ class ttOrgImportHelper {
   var $currentGroupRoleMap    = array();
   var $currentGroupTaskMap    = array();
   var $currentGroupProjectMap = array();
-  //var $userMap       = array(); // User ids.
-  //var $projectMap    = array(); // Project ids.
-  //var $taskMap       = array(); // Task ids.
-  //var $clientMap     = array(); // Client ids.
-  //var $invoiceMap    = array(); // Invoice ids.
+  var $currentGroupClientMap  = array();
 
   // Constructor.
   function __construct(&$errors) {
@@ -171,6 +168,35 @@ class ttOrgImportHelper {
         if ($project_id) {
           // Add a mapping.
           $this->currentGroupProjectMap[$attrs['ID']] = $project_id;
+        } else $this->errors->add($i18n->get('error.db'));
+      }
+
+      if ($name == 'CLIENTS') {
+        // If we get here, we have to recycle $currentGroupClientMap.
+        unset($this->currentGroupClientMap);
+        $this->currentGroupClientMap = array();
+        // Client map is reconstructed after processing <client> elements in XML. See below.
+      }
+
+      if ($name == 'CLIENT') {
+        // We get here when processing <client> tags for the current group.
+
+        // Prepare a list of project ids.
+        $projects = explode(',', $attrs['PROJECTS']);
+        foreach ($projects as $id)
+          $mapped_projects[] = $this->currentGroupProjectMap[$id];
+
+        $client_id = ttClientHelper::insert(array(
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'name' => $attrs['NAME'],
+          'address' => $attrs['ADDRESS'],
+          'tax' => $attrs['TAX'],
+          'projects' => $mapped_projects,
+          'status' => $attrs['STATUS']));
+        if ($client_id) {
+          // Add a mapping.
+          $this->currentGroupClientMap[$attrs['ID']] = $client_id;
         } else $this->errors->add($i18n->get('error.db'));
       }
     }
