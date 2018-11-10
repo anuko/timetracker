@@ -119,6 +119,7 @@ $i18n_key_words = array(
 // 'error.goto_uncompleted' => 'Go to uncompleted entry.',
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
+// 'error.xml' => 'Error in XML file at line %d: %s.',
 // 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.

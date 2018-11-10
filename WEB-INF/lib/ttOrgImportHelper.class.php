@@ -171,9 +171,9 @@ class ttOrgImportHelper {
     $file = fopen($filename, 'r');
     while ($data = fread($file, 4096)) {
       if (!xml_parse($parser, $data, feof($file))) {
-        $this->errors->add(sprintf("XML error: %s at line %d",
-          xml_error_string(xml_get_error_code($parser)),
-          xml_get_current_line_number($parser)));
+        $this->errors->add(sprintf($i18n->get('error.xml'),
+          xml_get_current_line_number($parser),
+          xml_error_string(xml_get_error_code($parser))));
       }
     }
     if ($this->conflicting_entities) {
@@ -199,9 +199,9 @@ class ttOrgImportHelper {
     $file = fopen($filename, 'r');
     while ($data = fread($file, 4096)) {
       if (!xml_parse($parser, $data, feof($file))) {
-        $this->errors->add(sprintf("XML error: %s at line %d",
-          xml_error_string(xml_get_error_code($parser)),
-          xml_get_current_line_number($parser)));
+        $this->errors->add(sprintf($i18n->get('error.xml'),
+          xml_get_current_line_number($parser),
+          xml_error_string(xml_get_error_code($parser))));
       }
     }
     xml_parser_free($parser);

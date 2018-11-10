@@ -99,6 +99,7 @@ $i18n_key_words = array(
 'error.goto_uncompleted' => 'Посмотреть неоконченную запись.',
 'error.overlap' => 'Интервал времени перекрывается с существующими записями.',
 'error.future_date' => 'Дата в будущем.',
+'error.xml' => 'Ошибка в файле XML на строке %d: %s.',
 'error.cannot_import' => 'Невозможно импортировать: %s.',
 
 // Labels for buttons.

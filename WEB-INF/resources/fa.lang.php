@@ -116,6 +116,7 @@ $i18n_key_words = array(
 'error.overlap' => 'بازه زمانی با سوابق موجود هم پوشانی دارد.',
 // TODO: translate the following.
 // 'error.future_date' => 'Date is in future.',
+// 'error.xml' => 'Error in XML file at line %d: %s.',
 // 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.

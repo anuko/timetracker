@@ -102,6 +102,7 @@ $i18n_key_words = array(
 'error.overlap' => 'Der Zeitinterval überschneidet sich mit vorhandenen Einträgen.',
 'error.future_date' => 'Datum ist in der Zukunft.',
 // TODO: translate the following.
+// 'error.xml' => 'Error in XML file at line %d: %s.',
 // 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.

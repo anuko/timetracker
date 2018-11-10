@@ -109,6 +109,7 @@ $i18n_key_words = array(
 'error.overlap' => 'Tidsinterval overlapper eksisterende poster.',
 'error.future_date' => 'Datoen er ud i fremtiden.',
 // TODO: translate the following.
+// 'error.xml' => 'Error in XML file at line %d: %s.',
 // 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.

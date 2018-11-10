@@ -107,6 +107,7 @@ $i18n_key_words = array(
 'error.overlap' => 'Tidsintervallet överlappar med en redan existerande tidsregistrering.',
 'error.future_date' => 'Det går inte att registrera tider framåt i tiden.',
 // TODO: translate the following.
+// 'error.xml' => 'Error in XML file at line %d: %s.',
 // 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.

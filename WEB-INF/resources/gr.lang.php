@@ -103,6 +103,7 @@ $i18n_key_words = array(
 'error.overlap' => 'Το χρονικό διάστημα επικαλύπτει υπάρχουσες καταχωρήσεις.',
 'error.future_date' => 'Η ημερομηνία είναι στο μέλλον.',
 // TODO: translate the following.
+// 'error.xml' => 'Error in XML file at line %d: %s.',
 // 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.

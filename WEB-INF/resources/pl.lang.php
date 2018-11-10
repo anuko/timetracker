@@ -113,6 +113,7 @@ $i18n_key_words = array(
 'error.overlap' => 'Okres czasowy nakłada się z istniejącymi wpisami.',
 'error.future_date' => 'Data jest w przyszłości.',
 // TODO: translate the following.
+// 'error.xml' => 'Error in XML file at line %d: %s.',
 // 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons

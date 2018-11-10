@@ -110,6 +110,7 @@ $i18n_key_words = array(
 'error.overlap' => 'Navedeni vremenski interval se podudara sa već unetim vremenom.',
 'error.future_date' => 'Naveli ste budući datum.',
 // TODO: translate the following.
+// 'error.xml' => 'Error in XML file at line %d: %s.',
 // 'error.cannot_import' => 'Cannot import: %s.',
 
 // Labels for buttons.
