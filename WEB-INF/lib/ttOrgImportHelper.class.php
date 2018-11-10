@@ -28,6 +28,7 @@
 
 import('ttUserHelper');
 import('ttRoleHelper');
+import('ttTaskHelper');
 
 // ttOrgImportHelper - this class is a future replacement for ttImportHelper.
 // Currently, it is work in progress.
@@ -46,7 +47,8 @@ class ttOrgImportHelper {
   // var $currentGroupUsers = array(); // Array of arrays of user properties.
 
   // Entity maps for current group. They map XML ids with database ids.
-  var $currentGroupRoleMap = array(); // Maps role ids from XML to their database ids.
+  var $currentGroupRoleMap = array();
+  var $currentGroupTaskMap = array();
   //var $userMap       = array(); // User ids.
   //var $projectMap    = array(); // Project ids.
   //var $taskMap       = array(); // Task ids.
@@ -118,6 +120,27 @@ class ttOrgImportHelper {
         if ($role_id) {
           // Add a mapping.
           $this->currentGroupRoleMap[$attrs['ID']] = $role_id;
+        } else $this->errors->add($i18n->get('error.db'));
+      }
+
+      if ($name == 'TASKS') {
+        // If we get here, we have to recycle $currentGroupTaskMap.
+        unset($this->currentGroupTaskMap);
+        $this->currentGroupTaskMap = array();
+        // Task map is reconstructed after processing <task> elements in XML. See below.
+      }
+
+      if ($name == 'TASK') {
+        // We get here when processing <task> tags for the current group.
+        $task_id = ttTaskHelper::insert(array(
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'name' => $attrs['NAME'],
+          'description' => $attrs['DESCRIPTION'],
+          'status' => $attrs['STATUS']));
+        if ($task_id) {
+          // Add a mapping.
+          $this->currentGroupTaskMap[$attrs['ID']] = $task_id;
         } else $this->errors->add($i18n->get('error.db'));
       }
     }
