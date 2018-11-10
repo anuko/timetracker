@@ -71,7 +71,7 @@ class ttGroupExportHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $sql =  "select name, currency, lang from tt_groups".
+    $sql =  "select * from tt_groups".
             " where status = 1 and id = $this->group_id and org_id = $user->org_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -177,8 +177,23 @@ class ttGroupExportHelper {
     $group = $this->getGroupData();
     $group_part = "<group name=\"".htmlentities($group['name'])."\"";
     $group_part .= " currency=\"".htmlentities($group['currency'])."\"";
+    $group_part .= " decimal_mark=\"".$group['decimal_mark']."\"";
     $group_part .= " lang=\"".$group['lang']."\"";
-    // TODO: add other group attributes here.
+    $group_part .= " date_format=\"".$group['date_format']."\"";
+    $group_part .= " time_format=\"".$group['time_format']."\"";
+    $group_part .= " week_start=\"".$group['week_start']."\"";
+    $group_part .= " tracking_mode=\"".$group['tracking_mode']."\"";
+    $group_part .= " project_required=\"".$group['project_required']."\"";
+    $group_part .= " task_required=\"".$group['task_required']."\"";
+    $group_part .= " record_type=\"".$group['record_type']."\"";
+    $group_part .= " bcc_email=\"".$group['bcc_email']."\"";
+    $group_part .= " allow_ip=\"".$group['allow_ip']."\"";
+    $group_part .= " password_complexity=\"".$group['password_complexity']."\"";
+    $group_part .= " plugins=\"".$group['plugins']."\"";
+    $group_part .= " lock_spec=\"".$group['lock_spec']."\"";
+    $group_part .= " workday_minutes=\"".$group['workday_minutes']."\"";
+    $group_part .= " custom_logo=\"".$group['custom_logo']."\"";
+    $group_part .= " config=\"".$group['config']."\"";
     $group_part .= ">\n";
 
     // Write group info.

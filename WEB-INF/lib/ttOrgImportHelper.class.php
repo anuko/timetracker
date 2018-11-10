@@ -86,8 +86,23 @@ class ttOrgImportHelper {
           'org_id' => $this->org_id,
           'name' => $attrs['NAME'],
           'currency' => $attrs['CURRENCY'],
-          'lang' => $attrs['LANG']));
-        // We only have 3 properties at the moment, while work is ongoing...
+          'decimal_mark' => $attrs['DECIMAL_MARK'],
+          'lang' => $attrs['LANG'],
+          'date_format' => $attrs['DATE_FORMAT'],
+          'time_format' => $attrs['TIME_FORMAT'],
+          'week_start' => $attrs['WEEK_START'],
+          'tracking_mode' => $attrs['TRACKING_MODE'],
+          'project_required' => $attrs['PROJECT_REQUIRED'],
+          'task_required' => $attrs['TASK_REQUIRED'],
+          'record_type' => $attrs['RECORD_TYPE'],
+          'bcc_email' => $attrs['BCC_EMAIL'],
+          'allow_ip' => $attrs['ALLOW_IP'],
+          'password_complexity' => $attrs['PASSWORD_COMPLEXITY'],
+          'plugins' => $attrs['PLUGINS'],
+          'lock_spec' => $attrs['LOCK_SPEC'],
+          'workday_minutes' => $attrs['WORKDAY_MINUTES'],
+          'custom_logo' => $attrs['CUSTOM_LOGO'],
+          'config' => $attrs['CONFIG']));
 
         // Special handling for top group.
         if (!$this->org_id && $this->current_group_id) {
@@ -217,7 +232,7 @@ class ttOrgImportHelper {
           'org_id' => $this->org_id,
           'role_id' => $role_id,
           'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
-          'name' => $attrs['NAME'], // TODO: check if we need to decode all such things from htmlentities back. Refactor from the beginning if necessary.
+          'name' => $attrs['NAME'],
           'login' => $attrs['LOGIN'],
           'password' => $attrs['PASSWORD'],
           'rate' => $attrs['RATE'],
@@ -346,24 +361,22 @@ class ttOrgImportHelper {
 
   // createGroup function creates a new group.
   private function createGroup($fields) {
-
+    global $user;
     global $i18n;
     $mdb2 = getConnection();
 
-    $columns = '(parent_id, org_id, name, currency, lang)';
-
-//    $columns = '(name, currency, decimal_mark, lang, date_format, time_format, week_start, tracking_mode'.
-//      ', project_required, task_required, record_type, bcc_email, allow_ip, password_complexity, plugins'.
-//      ', lock_spec, workday_minutes, config, created, created_ip, created_by)';
+    $columns = '(parent_id, org_id, name, currency, decimal_mark, lang, date_format, time_format'.
+      ', week_start, tracking_mode, project_required, task_required, record_type, bcc_email'.
+      ', allow_ip, password_complexity, plugins, lock_spec'.
+      ', workday_minutes, config, created, created_ip, created_by)';
 
     $values = ' values (';
     $values .= $mdb2->quote($fields['parent_id']);
     $values .= ', '.$mdb2->quote($fields['org_id']);
     $values .= ', '.$mdb2->quote(trim($fields['name']));
     $values .= ', '.$mdb2->quote(trim($fields['currency']));
-    //$values .= ', '.$mdb2->quote($fields['decimal_mark']);
+    $values .= ', '.$mdb2->quote($fields['decimal_mark']);
     $values .= ', '.$mdb2->quote($fields['lang']);
-/*
     $values .= ', '.$mdb2->quote($fields['date_format']);
     $values .= ', '.$mdb2->quote($fields['time_format']);
     $values .= ', '.(int)$fields['week_start'];
@@ -378,7 +391,7 @@ class ttOrgImportHelper {
     $values .= ', '.$mdb2->quote($fields['lock_spec']);
     $values .= ', '.(int)$fields['workday_minutes'];
     $values .= ', '.$mdb2->quote($fields['config']);
-    $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id); */
+    $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
     $values .= ')';
 
     $sql = 'insert into tt_groups '.$columns.$values;
