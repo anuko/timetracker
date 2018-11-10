@@ -44,19 +44,19 @@ class ttOrgImportHelper {
   var $current_group_id        = null; // Current group id during parsing.
   var $current_parent_group_id = null; // Current parent group id during parsing.
                                        // Set when we create a new group.
-  // Entities for current group. -- Looks like they are not needed as we insert right away...
-  // var $currentGroupRoles = array(); // Array of arrays of role properties.
-  // var $currentGroupUsers = array(); // Array of arrays of user properties.
+  var $top_role_id    = 0;       // Top role id.
 
   // Entity maps for current group. They map XML ids with database ids.
   var $currentGroupRoleMap    = array();
   var $currentGroupTaskMap    = array();
   var $currentGroupProjectMap = array();
   var $currentGroupClientMap  = array();
+  var $currentGroupUserMap    = array();
 
   // Constructor.
   function __construct(&$errors) {
     $this->errors = &$errors;
+    $this->top_role_id = ttRoleHelper::getRoleByRank(512, 0);
   }
 
   // startElement - callback handler for opening tag of an XML element in the file.
@@ -197,6 +197,36 @@ class ttOrgImportHelper {
         if ($client_id) {
           // Add a mapping.
           $this->currentGroupClientMap[$attrs['ID']] = $client_id;
+        } else $this->errors->add($i18n->get('error.db'));
+      }
+
+      if ($name == 'USERS') {
+        // If we get here, we have to recycle $currentGroupUserMap.
+        unset($this->currentGroupUserMap);
+        $this->currentGroupUserMap = array();
+        // User map is reconstructed after processing <user> elements in XML. See below.
+      }
+
+      if ($name == 'USER') {
+        // We get here when processing <user> tags for the current group.
+
+        $role_id = $attrs['ROLE_ID'] === '0' ? $this->top_role_id :  $this->currentGroupRoleMap[$attrs['ROLE_ID']]; // 0 (not null) means top manager role.
+
+        $user_id = ttUserHelper::insert(array(
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'role_id' => $role_id,
+          'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'name' => $attrs['NAME'], // TODO: check if we need to decode all such things from htmlentities back. Refactor from the beginning if necessary.
+          'login' => $attrs['LOGIN'],
+          'password' => $attrs['PASSWORD'],
+          'rate' => $attrs['RATE'],
+          'email' => $attrs['EMAIL'],
+          'status' => $attrs['STATUS']), false);
+        // TODO: what about created_by and other audit info?
+        if ($user_id) {
+          // Add a mapping.
+          $this->currentGroupUserMap[$attrs['ID']] = $user_id;
         } else $this->errors->add($i18n->get('error.db'));
       }
     }
