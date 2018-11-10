@@ -309,6 +309,21 @@ class ttGroupExportHelper {
     }
     fwrite($this->file, $this->indentation."  </users>\n");
 
+    // Write user to project binds.
+    fwrite($this->file, $this->indentation."  <user_project_binds>\n");
+    $user_binds = ttTeamHelper::getUserToProjectBinds($this->group_id);
+    foreach ($user_binds as $bind) {
+      $user_id = $this->userMap[$bind['user_id']];
+      $project_id = $this->projectMap[$bind['project_id']];
+      $bind_part = $this->indentation.'    '."<user_project_bind user_id=\"".$user_id."\"";
+      $bind_part .= " project_id=\"".$project_id."\"";
+      $bind_part .= " rate=\"".$bind['rate']."\"";
+      $bind_part .= " status=\"".$bind['status']."\"";
+      $bind_part .= "></user_project_bind>\n";
+      fwrite($this->file, $bind_part);
+    }
+    fwrite($this->file, $this->indentation."  </user_project_binds>\n");
+
     // Call self recursively for all subgroups.
     foreach ($this->subgroups as $subgroup) {
       $subgroup_helper = new ttGroupExportHelper($subgroup['id'], $this->file, $this->indentation.'  ');

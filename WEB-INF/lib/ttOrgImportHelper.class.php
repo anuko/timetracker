@@ -238,11 +238,22 @@ class ttOrgImportHelper {
           'rate' => $attrs['RATE'],
           'email' => $attrs['EMAIL'],
           'status' => $attrs['STATUS']), false);
-        // TODO: what about created_by and other audit info?
         if ($user_id) {
           // Add a mapping.
           $this->currentGroupUserMap[$attrs['ID']] = $user_id;
         } else $this->errors->add($i18n->get('error.db'));
+      }
+
+      if ($name == 'USER_PROJECT_BIND') {
+        if (!ttUserHelper::insertBind(array(
+          'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
+          'project_id' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'rate' => $attrs['RATE'],
+          'status' => $attrs['STATUS']))) {
+          $this->errors->add($i18n->get('error.db'));
+        }
       }
     }
   }
