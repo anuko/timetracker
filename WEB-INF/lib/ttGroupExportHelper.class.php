@@ -40,13 +40,15 @@ class ttGroupExportHelper {
 
   // The following arrays are maps between entity ids in the file versus the database.
   // We write to the file sequentially (1,2,3...) while in the database the entities have different ids.
-  var $userMap    = array(); // User ids.
-  var $roleMap    = array(); // Role ids.
-  var $taskMap    = array(); // Task ids.
-  var $projectMap = array(); // Project ids.
-  var $clientMap  = array(); // Client ids.
-  var $invoiceMap = array(); // Invoice ids.
-  var $logMap     = array(); // Time log ids.
+  var $userMap    = array();
+  var $roleMap    = array();
+  var $taskMap    = array();
+  var $projectMap = array();
+  var $clientMap  = array();
+  var $invoiceMap = array();
+  var $logMap     = array();
+  var $customFieldMap = array();
+  var $customFieldOptionMap = array();
 
   // Constructor.
   function __construct($group_id, $file, $indentation) {
@@ -231,6 +233,16 @@ class ttGroupExportHelper {
     foreach ($invoices as $key=>$invoice_item)
       $this->invoiceMap[$invoice_item['id']] = $key + 1;
 
+    // Prepare custom fields map.
+    $custom_fields = ttTeamHelper::getAllCustomFields($this->group_id);
+    foreach ($custom_fields as $key=>$custom_field)
+      $this->customFieldMap[$custom_field['id']] = $key + 1;
+
+    // Prepare custom field options map.
+    $custom_field_options = ttTeamHelper::getAllCustomFieldOptions($this->group_id);
+    foreach ($custom_field_options as $key=>$option)
+      $this->customFieldOptionMap[$option['id']] = $key + 1;
+
     // Write roles.
     fwrite($this->file, $this->indentation."  <roles>\n");
     foreach ($roles as $role) {
@@ -372,6 +384,20 @@ class ttGroupExportHelper {
     }
     fwrite($this->file, $this->indentation."  </log>\n");
     unset($records);
+
+    // Write custom fields.
+    fwrite($this->file, $this->indentation."  <custom_fields>\n");
+    foreach ($custom_fields as $custom_field) {
+      $custom_field_part = $this->indentation.'    '."<custom_field id=\"".$this->customFieldMap[$custom_field['id']]."\"";
+      $custom_field_part .= " type=\"".$custom_field['type']."\"";
+      $custom_field_part .= " label=\"".htmlentities($custom_field['label'])."\"";
+      $custom_field_part .= " required=\"".$custom_field['required']."\"";
+      $custom_field_part .= " status=\"".$custom_field['status']."\"";
+      $custom_field_part .= "></custom_field>\n";
+      fwrite($this->file, $custom_field_part);
+    }
+    fwrite($this->file, $this->indentation."  </custom_fields>\n");
+    unset($custom_fields);
 
     // Call self recursively for all subgroups.
     foreach ($this->subgroups as $subgroup) {

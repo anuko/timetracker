@@ -32,6 +32,7 @@ import('ttTaskHelper');
 import('ttProjectHelper');
 import('ttClientHelper');
 import('ttInvoiceHelper');
+import('ttCustomFieldHelper');
 
 // ttOrgImportHelper - this class is a future replacement for ttImportHelper.
 // Currently, it is work in progress.
@@ -55,6 +56,8 @@ class ttOrgImportHelper {
   var $currentGroupUserMap    = array();
   var $currentGroupInvoiceMap = array();
   var $currentGroupLogMap     = array();
+  var $currentGroupCustomFieldMap = array();
+  var $currentGroupCustomFieldOptionMap = array();
 
   // Constructor.
   function __construct(&$errors) {
@@ -309,6 +312,28 @@ class ttOrgImportHelper {
         if ($log_item_id) {
           // Add a mapping.
           $this->currentGroupLogMap[$attrs['ID']] = $log_item_id;
+        } else $this->errors->add($i18n->get('error.db'));
+      }
+
+      if ($name == 'CUSTOM_FIELDS') {
+        // If we get here, we have to recycle $currentGroupCustomFieldMap.
+        unset($this->currentGroupCustomFieldMap);
+        $this->currentGroupCustomFieldMap = array();
+        // Custom field map is reconstructed after processing <custom_field> elements in XML. See below.
+      }
+
+      if ($name == 'CUSTOM_FIELD') {
+        // We get here when processing <custom_field> tags for the current group.
+        $custom_field_id = ttCustomFieldHelper::insertField(array(
+          'group_id' => $this->current_group_id,
+          // 'org_id' => $this->org_id, TODO: add this when org_id field is added to the table.
+          'type' => $attrs['TYPE'],
+          'label' => $attrs['LABEL'],
+          'required' => $attrs['REQUIRED'],
+          'status' => $attrs['STATUS']));
+        if ($custom_field_id) {
+          // Add a mapping.
+          $this->currentGroupCustomFieldMap[$attrs['ID']] = $custom_field_id;
         } else $this->errors->add($i18n->get('error.db'));
       }
     }
