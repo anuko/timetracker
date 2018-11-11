@@ -426,6 +426,25 @@ class ttGroupExportHelper {
     fwrite($this->file, $this->indentation."  </custom_field_log>\n");
     unset($custom_field_log);
 
+    // Write expense items.
+    $expense_items = ttTeamHelper::getExpenseItems($this->group_id);
+    fwrite($this->file, $this->indentation."  <expense_items>\n");
+    foreach ($expense_items as $expense_item) {
+      $expense_item_part = $this->indentation.'    '."<expense_item date=\"".$expense_item['date']."\"";
+      $expense_item_part .= " user_id=\"".$this->userMap[$expense_item['user_id']]."\"";
+      $expense_item_part .= " client_id=\"".$this->clientMap[$expense_item['client_id']]."\"";
+      $expense_item_part .= " project_id=\"".$this->projectMap[$expense_item['project_id']]."\"";
+      $expense_item_part .= " name=\"".htmlentities($expense_item['name'])."\"";
+      $expense_item_part .= " cost=\"".$expense_item['cost']."\"";
+      $expense_item_part .= " invoice_id=\"".$this->invoiceMap[$expense_item['invoice_id']]."\"";
+      $expense_item_part .= " paid=\"".$expense_item['paid']."\"";
+      $expense_item_part .= " status=\"".$expense_item['status']."\"";
+      $expense_item_part .= "></expense_item>\n";
+      fwrite($this->file, $expense_item_part);
+    }
+    fwrite($this->file, $this->indentation."  </expense_items>\n");
+    unset($expense_items);
+
     // Call self recursively for all subgroups.
     foreach ($this->subgroups as $subgroup) {
       $subgroup_helper = new ttGroupExportHelper($subgroup['id'], $this->file, $this->indentation.'  ');

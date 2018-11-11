@@ -33,6 +33,7 @@ import('ttProjectHelper');
 import('ttClientHelper');
 import('ttInvoiceHelper');
 import('ttCustomFieldHelper');
+import('ttExpenseHelper');
 
 // ttOrgImportHelper - this class is a future replacement for ttImportHelper.
 // Currently, it is work in progress.
@@ -369,6 +370,23 @@ class ttOrgImportHelper {
           'status' => $attrs['STATUS']))) {
           $this->errors->add($i18n->get('error.db'));
         }
+      }
+
+      if ($name == 'EXPENSE_ITEM') {
+        // We get here when processing <expense_item> tags for the current group.
+        $expense_item_id = ttExpenseHelper::insert(array(
+          'date' => $attrs['DATE'],
+          'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
+          'group_id' => $this->current_group_id,
+          // 'org_id' => $this->org_id, TODO: add this when org_id field is added to the table.
+          'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'project_id' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
+          'name' => $attrs['NAME'],
+          'cost' => $attrs['COST'],
+          'invoice_id' => $this->currentGroupInvoiceMap[$attrs['INVOICE_ID']],
+          'paid' => $attrs['PAID'],
+          'status' => $attrs['STATUS']));
+        if (!$expense_item_id) $this->errors->add($i18n->get('error.db'));
       }
     }
   }
