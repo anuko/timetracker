@@ -1,5 +1,6 @@
 config.php
 WEB-INF/templates_c/*.*
+WEB-INF/templates_c/import_*
 WEB-INF/lib/tcpdf/
 nbproject/
 upload/

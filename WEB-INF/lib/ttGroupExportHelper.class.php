@@ -399,6 +399,18 @@ class ttGroupExportHelper {
     fwrite($this->file, $this->indentation."  </custom_fields>\n");
     unset($custom_fields);
 
+    // Write custom field options.
+    fwrite($this->file, $this->indentation."  <custom_field_options>\n");
+    foreach ($custom_field_options as $option) {
+      $custom_field_option_part = $this->indentation.'    '."<custom_field_option id=\"".$this->customFieldOptionMap[$option['id']]."\"";
+      $custom_field_option_part .= " field_id=\"".$this->customFieldMap[$option['field_id']]."\"";
+      $custom_field_option_part .= " value=\"".htmlentities($option['value'])."\"";
+      $custom_field_option_part .= "></custom_field_option>\n";
+      fwrite($this->file, $custom_field_option_part);
+    }
+    fwrite($this->file, $this->indentation."  </custom_field_options>\n");
+    unset($custom_field_options);
+
     // Call self recursively for all subgroups.
     foreach ($this->subgroups as $subgroup) {
       $subgroup_helper = new ttGroupExportHelper($subgroup['id'], $this->file, $this->indentation.'  ');

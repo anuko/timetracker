@@ -336,6 +336,26 @@ class ttOrgImportHelper {
           $this->currentGroupCustomFieldMap[$attrs['ID']] = $custom_field_id;
         } else $this->errors->add($i18n->get('error.db'));
       }
+
+      if ($name == 'CUSTOM_FIELD_OPTIONS') {
+        // If we get here, we have to recycle $currentGroupCustomFieldOptionMap.
+        unset($this->currentGroupCustomFieldOptionMap);
+        $this->currentGroupCustomFieldOptionMap = array();
+        // Custom field option map is reconstructed after processing <custom_field_option> elements in XML. See below.
+      }
+
+      if ($name == 'CUSTOM_FIELD_OPTION') {
+        // We get here when processing <custom_field_option> tags for the current group.
+        $custom_field_option_id = ttCustomFieldHelper::insertOption(array(
+          // 'group_id' => $this->current_group_id, TODO: add this when group_id field is added to the table.
+          // 'org_id' => $this->org_id, TODO: add this when org_id field is added to the table.
+          'field_id' => $this->currentGroupCustomFieldMap[$attrs['FIELD_ID']],
+          'value' => $attrs['VALUE']));
+        if ($custom_field_option_id) {
+          // Add a mapping.
+          $this->currentGroupCustomFieldOptionMap[$attrs['ID']] = $custom_field_option_id;
+        } else $this->errors->add($i18n->get('error.db'));
+      }
     }
   }
 
