@@ -51,7 +51,8 @@ class ttOrgExportHelper {
 
     // Write XML to the file.
     fwrite($file, "<?xml version=\"1.0\"?>\n");
-    fwrite($file, "<org>\n");
+    $org_part = "<org schema=\"".$this->getVersion()."\">\n";
+    fwrite($file, $org_part);
 
     // Use ttGroupExportHelper to export all groups.
     $groupExportHelper = new ttGroupExportHelper($user->group_id, $file, '  ');  // 2 spaces indentation for home group.
@@ -97,5 +98,17 @@ class ttOrgExportHelper {
     }
     fclose ($in_file);
     return true;
+  }
+
+  private function getVersion() {
+    $mdb2 = getConnection();
+    $sql = "select param_value from tt_site_config where param_name = 'version_db'";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      return $val['param_value'];
+        $result[] = $val;
+    }
+    return false;
   }
 }

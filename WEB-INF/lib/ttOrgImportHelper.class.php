@@ -41,6 +41,7 @@ import('ttFavReportHelper');
 // When done, it should handle import of complex groups consisting of other groups.
 class ttOrgImportHelper {
   var $errors               = null; // Errors go here. Set in constructor by reference.
+  var $schema_version       = null; // Database schema version from XML file we import from.
   var $conflicting_entities = null; // A comma-separated list of entity names we cannot import.
   var $canImport      = true;    // False if we cannot import data due to a conflict such as login collision.
   var $firstPass      = true;    // True during first pass through the file.
@@ -73,6 +74,18 @@ class ttOrgImportHelper {
 
     // First pass. We only check user logins for potential collisions with existing.
     if ($this->firstPass) {
+      if ($name == 'ORG' && $this->canImport) {
+         if ($attrs['SCHEMA'] == null) {
+           // We need (database) schema attribute to be available for import to work.
+           // Old Time Tracker export files don't have this.
+           // Current import code does not work with old format because we had to
+           // restructure data in export files for subgroup support.
+           $this->canImport = false;
+           $this->errors->add($i18n->get('error.format'));
+           return;
+         }
+      }
+
       if ($name == 'USER' && $this->canImport) {
         $login = $attrs['LOGIN'];
         if ('' != $attrs['STATUS'] && ttUserHelper::getUserByLogin($login)) {
