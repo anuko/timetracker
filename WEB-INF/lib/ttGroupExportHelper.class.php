@@ -411,6 +411,21 @@ class ttGroupExportHelper {
     fwrite($this->file, $this->indentation."  </custom_field_options>\n");
     unset($custom_field_options);
 
+    // Write custom field log.
+    $custom_field_log = ttTeamHelper::getCustomFieldLog($this->group_id);
+    fwrite($this->file, $this->indentation."  <custom_field_log>\n");
+    foreach ($custom_field_log as $entry) {
+      $custom_field_log_part = $this->indentation.'    '."<custom_field_log_entry log_id=\"".$this->logMap[$entry['log_id']]."\"";
+      $custom_field_log_part .= " field_id=\"".$this->customFieldMap[$entry['field_id']]."\"";
+      $custom_field_log_part .= " option_id=\"".$this->customFieldOptionMap[$entry['option_id']]."\"";
+      $custom_field_log_part .= " value=\"".htmlentities($entry['value'])."\"";
+      $custom_field_log_part .= " status=\"".$entry['status']."\"";
+      $custom_field_log_part .= "></custom_field_log_entry>\n";
+      fwrite($this->file, $custom_field_log_part);
+    }
+    fwrite($this->file, $this->indentation."  </custom_field_log>\n");
+    unset($custom_field_log);
+
     // Call self recursively for all subgroups.
     foreach ($this->subgroups as $subgroup) {
       $subgroup_helper = new ttGroupExportHelper($subgroup['id'], $this->file, $this->indentation.'  ');

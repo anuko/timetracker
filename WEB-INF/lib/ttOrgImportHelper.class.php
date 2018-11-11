@@ -356,6 +356,20 @@ class ttOrgImportHelper {
           $this->currentGroupCustomFieldOptionMap[$attrs['ID']] = $custom_field_option_id;
         } else $this->errors->add($i18n->get('error.db'));
       }
+
+      if ($name == 'CUSTOM_FIELD_LOG_ENTRY') {
+        // We get here when processing <custom_field_log_entry> tags for the current group.
+        if (!ttCustomFieldHelper::insertLogEntry(array(
+          // 'group_id' => $this->current_group_id, TODO: add this when group_id field is added to the table.
+          // 'org_id' => $this->org_id, TODO: add this when org_id field is added to the table.
+          'log_id' => $this->currentGroupLogMap[$attrs['LOG_ID']],
+          'field_id' => $this->currentGroupCustomFieldMap[$attrs['FIELD_ID']],
+          'option_id' => $this->currentGroupCustomFieldOptionMap[$attrs['OPTION_ID']],
+          'value' => $attrs['VALUE'],
+          'status' => $attrs['STATUS']))) {
+          $this->errors->add($i18n->get('error.db'));
+        }
+      }
     }
   }
 
