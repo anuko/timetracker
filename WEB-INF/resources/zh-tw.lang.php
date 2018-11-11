@@ -119,6 +119,7 @@ $i18n_key_words = array(
 // 'error.future_date' => 'Date is in future.',
 // 'error.xml' => 'Error in XML file at line %d: %s.',
 // 'error.cannot_import' => 'Cannot import: %s.',
+// 'error.format' => 'Invalid file format.',
 
 // Labels for buttons.
 'button.login' => '登錄',

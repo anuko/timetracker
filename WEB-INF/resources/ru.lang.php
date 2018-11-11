@@ -101,6 +101,7 @@ $i18n_key_words = array(
 'error.future_date' => 'Дата в будущем.',
 'error.xml' => 'Ошибка в файле XML на строке %d: %s.',
 'error.cannot_import' => 'Невозможно импортировать: %s.',
+'error.format' => 'Неверный формат файла.',
 
 // Labels for buttons.
 'button.login' => 'Войти',
