@@ -34,6 +34,7 @@ import('ttClientHelper');
 import('ttInvoiceHelper');
 import('ttCustomFieldHelper');
 import('ttExpenseHelper');
+import('ttFavReportHelper');
 
 // ttOrgImportHelper - this class is a future replacement for ttImportHelper.
 // Currently, it is work in progress.
@@ -397,6 +398,45 @@ class ttOrgImportHelper {
           $attrs['MINUTES'])) {
           $this->errors->add($i18n->get('error.db'));
         }
+      }
+
+      if ($name == 'FAV_REPORT') {
+        $user_list = '';
+        if (strlen($attrs['USERS']) > 0) {
+          $arr = explode(',', $attrs['USERS']);
+          foreach ($arr as $v)
+            $user_list .= (strlen($user_list) == 0 ? '' : ',').$this->currentGroupUserMap[$v];
+        }
+        $fav_report_id = ttFavReportHelper::insertReport(array(
+          'name' => $attrs['NAME'],
+          'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
+          'client' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'option' => $this->currentGroupCustomFieldOptionMap[$attrs['CF_1_OPTION_ID']],
+          'project' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
+          'task' => $this->currentGroupTaskMap[$attrs['TASK_ID']],
+          'billable' => $attrs['BILLABLE'],
+          'users' => $user_list,
+          'period' => $attrs['PERIOD'],
+          'from' => $attrs['PERIOD_START'],
+          'to' => $attrs['PERIOD_END'],
+          'chclient' => (int) $attrs['SHOW_CLIENT'],
+          'chinvoice' => (int) $attrs['SHOW_INVOICE'],
+          'chpaid' => (int) $attrs['SHOW_PAID'],
+          'chip' => (int) $attrs['SHOW_IP'],
+          'chproject' => (int) $attrs['SHOW_PROJECT'],
+          'chstart' => (int) $attrs['SHOW_START'],
+          'chduration' => (int) $attrs['SHOW_DURATION'],
+          'chcost' => (int) $attrs['SHOW_COST'],
+          'chtask' => (int) $attrs['SHOW_TASK'],
+          'chfinish' => (int) $attrs['SHOW_END'],
+          'chnote' => (int) $attrs['SHOW_NOTE'],
+          'chcf_1' => (int) $attrs['SHOW_CUSTOM_FIELD_1'],
+          'chunits' => (int) $attrs['SHOW_WORK_UNITS'],
+          'group_by1' => $attrs['GROUP_BY1'],
+          'group_by2' => $attrs['GROUP_BY2'],
+          'group_by3' => $attrs['GROUP_BY3'],
+          'chtotalsonly' => (int) $attrs['SHOW_TOTALS_ONLY']));
+         if (!$fav_report_id) $this->errors->add($i18n->get('error.db'));
       }
     }
   }

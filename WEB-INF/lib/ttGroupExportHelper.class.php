@@ -457,6 +457,52 @@ class ttGroupExportHelper {
     }
     fwrite($this->file, $this->indentation."  </monthly_quotas>\n");
 
+    // Write fav reports.
+    $fav_reports = ttTeamHelper::getFavReports($this->group_id);
+    fwrite($this->file, $this->indentation."  <fav_reports>\n");
+    foreach ($fav_reports as $fav_report) {
+      $user_list = '';
+      if (strlen($fav_report['users']) > 0) {
+        $arr = explode(',', $fav_report['users']);
+        foreach ($arr as $k=>$v) {
+          if (array_key_exists($arr[$k], $this->userMap))
+            $user_list .= (strlen($user_list) == 0? '' : ',').$this->userMap[$v];
+        }
+      }
+      $fav_report_part = $this->indentation.'    '."<fav_report user_id=\"".$this->userMap[$fav_report['user_id']]."\"";
+      $fav_report_part .= " name=\"".htmlentities($fav_report['name'])."\"";
+      $fav_report_part .= " client_id=\"".$this->clientMap[$fav_report['client_id']]."\"";
+      $fav_report_part .= " cf_1_option_id=\"".$this->customFieldOptionMap[$fav_report['cf_1_option_id']]."\"";
+      $fav_report_part .= " project_id=\"".$this->projectMap[$fav_report['project_id']]."\"";
+      $fav_report_part .= " task_id=\"".$this->taskMap[$fav_report['task_id']]."\"";
+      $fav_report_part .= " billable=\"".$fav_report['billable']."\"";
+      $fav_report_part .= " users=\"".$user_list."\"";
+      $fav_report_part .= " period=\"".$fav_report['period']."\"";
+      $fav_report_part .= " period_start=\"".$fav_report['period_start']."\"";
+      $fav_report_part .= " period_end=\"".$fav_report['period_end']."\"";
+      $fav_report_part .= " show_client=\"".$fav_report['show_client']."\"";
+      $fav_report_part .= " show_invoice=\"".$fav_report['show_invoice']."\"";
+      $fav_report_part .= " show_paid=\"".$fav_report['show_paid']."\"";
+      $fav_report_part .= " show_ip=\"".$fav_report['show_ip']."\"";
+      $fav_report_part .= " show_project=\"".$fav_report['show_project']."\"";
+      $fav_report_part .= " show_start=\"".$fav_report['show_start']."\"";
+      $fav_report_part .= " show_duration=\"".$fav_report['show_duration']."\"";
+      $fav_report_part .= " show_cost=\"".$fav_report['show_cost']."\"";
+      $fav_report_part .= " show_task=\"".$fav_report['show_task']."\"";
+      $fav_report_part .= " show_end=\"".$fav_report['show_end']."\"";
+      $fav_report_part .= " show_note=\"".$fav_report['show_note']."\"";
+      $fav_report_part .= " show_custom_field_1=\"".$fav_report['show_custom_field_1']."\"";
+      $fav_report_part .= " show_work_units=\"".$fav_report['show_work_units']."\"";
+      $fav_report_part .= " group_by1=\"".$fav_report['group_by1']."\"";
+      $fav_report_part .= " group_by2=\"".$fav_report['group_by2']."\"";
+      $fav_report_part .= " group_by3=\"".$fav_report['group_by3']."\"";
+      $fav_report_part .= " show_totals_only=\"".$fav_report['show_totals_only']."\"";
+      $fav_report_part .= "></fav_report>\n";
+      fwrite($this->file, $fav_report_part);
+    }
+    fwrite($this->file, $this->indentation."  </fav_reports>\n");
+    unset($fav_reports);
+
     // Call self recursively for all subgroups.
     foreach ($this->subgroups as $subgroup) {
       $subgroup_helper = new ttGroupExportHelper($subgroup['id'], $this->file, $this->indentation.'  ');
