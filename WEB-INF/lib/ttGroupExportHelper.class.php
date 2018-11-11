@@ -445,6 +445,18 @@ class ttGroupExportHelper {
     fwrite($this->file, $this->indentation."  </expense_items>\n");
     unset($expense_items);
 
+    // Write monthly quotas.
+    $quotas = ttTeamHelper::getMonthlyQuotas($this->group_id);
+    fwrite($this->file, $this->indentation."  <monthly_quotas>\n");
+    foreach ($quotas as $quota) {
+      $quota_part = $this->indentation.'    '."<monthly_quota year=\"".$quota['year']."\"";
+      $quota_part .= " month=\"".$quota['month']."\"";
+      $quota_part .= " minutes=\"".$quota['minutes']."\"";
+      $quota_part .= "></monthly_quota>\n";
+      fwrite($this->file, $quota_part);
+    }
+    fwrite($this->file, $this->indentation."  </monthly_quotas>\n");
+
     // Call self recursively for all subgroups.
     foreach ($this->subgroups as $subgroup) {
       $subgroup_helper = new ttGroupExportHelper($subgroup['id'], $this->file, $this->indentation.'  ');

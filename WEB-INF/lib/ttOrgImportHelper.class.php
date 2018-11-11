@@ -388,6 +388,16 @@ class ttOrgImportHelper {
           'status' => $attrs['STATUS']));
         if (!$expense_item_id) $this->errors->add($i18n->get('error.db'));
       }
+
+      if ($name == 'MONTHLY_QUOTA') {
+        if (!$this->insertMonthlyQuota($this->current_group_id,
+          // 'org_id' => $this->org_id, TODO: add this when org_id field is added to the table.
+          $attrs['YEAR'],
+          $attrs['MONTH'],
+          $attrs['MINUTES'])) {
+          $this->errors->add($i18n->get('error.db'));
+        }
+      }
     }
   }
 
@@ -547,5 +557,13 @@ class ttOrgImportHelper {
 
     $group_id = $mdb2->lastInsertID('tt_groups', 'id');
     return $group_id;
+  }
+
+  // insertMonthlyQuota - a helper function to insert a monthly quota.
+  private function insertMonthlyQuota($group_id, $year, $month, $minutes) {
+    $mdb2 = getConnection();
+    $sql = "INSERT INTO tt_monthly_quotas (group_id, year, month, minutes) values ($group_id, $year, $month, $minutes)";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
   }
 }
