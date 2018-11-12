@@ -202,6 +202,8 @@ class ttGroupExportHelper {
 
     // Write group info.
     fwrite($this->file, $this->indentation.$group_part);
+    unset($group);
+    unset($group_part);
 
     // Prepare user map.
     $users = $this->getUsers();
@@ -256,6 +258,8 @@ class ttGroupExportHelper {
       fwrite($this->file, $role_part);
     }
     fwrite($this->file, $this->indentation."  </roles>\n");
+    unset($roles);
+    unset($role_part);
 
     // Write tasks.
     fwrite($this->file, $this->indentation."  <tasks>\n");
@@ -268,6 +272,8 @@ class ttGroupExportHelper {
       fwrite($this->file, $task_part);
     }
     fwrite($this->file, $this->indentation."  </tasks>\n");
+    unset($tasks);
+    unset($task_part);
 
     // Write projects.
     fwrite($this->file, $this->indentation."  <projects>\n");
@@ -288,6 +294,8 @@ class ttGroupExportHelper {
       fwrite($this->file, $project_part);
     }
     fwrite($this->file, $this->indentation."  </projects>\n");
+    unset($projects);
+    unset($project_part);
 
     // Write clients.
     fwrite($this->file, $this->indentation."  <clients>\n");
@@ -309,6 +317,8 @@ class ttGroupExportHelper {
       fwrite($this->file, $client_part);
     }
     fwrite($this->file, $this->indentation."  </clients>\n");
+    unset($clients);
+    unset($client_part);
 
     // Write users.
     fwrite($this->file, $this->indentation."  <users>\n");
@@ -327,6 +337,8 @@ class ttGroupExportHelper {
       fwrite($this->file, $user_part);
     }
     fwrite($this->file, $this->indentation."  </users>\n");
+    unset($users);
+    unset($user_part);
 
     // Write user to project binds.
     fwrite($this->file, $this->indentation."  <user_project_binds>\n");
@@ -342,6 +354,8 @@ class ttGroupExportHelper {
       fwrite($this->file, $bind_part);
     }
     fwrite($this->file, $this->indentation."  </user_project_binds>\n");
+    unset($user_binds);
+    unset($bind_part);
 
     // Write invoices.
     fwrite($this->file, $this->indentation."  <invoices>\n");
@@ -355,12 +369,15 @@ class ttGroupExportHelper {
       fwrite($this->file, $invoice_part);
     }
     fwrite($this->file, $this->indentation."  </invoices>\n");
+    unset($invoices);
+    unset($invoice_part);
 
     // Write time log entries and build logMap at the same time.
     fwrite($this->file, $this->indentation."  <log>\n");
     $key = 0;
-    foreach ($users as $user_item) {
-      $records = ttTimeHelper::getAllRecords($user_item['id']);
+    foreach ($this->userMap as $key => $value) {
+      $user_id = $key;
+      $records = ttTimeHelper::getAllRecords($user_id);
       foreach ($records as $record) {
         $key++;
         $this->logMap[$record['id']] = $key;
@@ -384,6 +401,7 @@ class ttGroupExportHelper {
     }
     fwrite($this->file, $this->indentation."  </log>\n");
     unset($records);
+    unset($log_part);
 
     // Write custom fields.
     fwrite($this->file, $this->indentation."  <custom_fields>\n");
@@ -398,6 +416,7 @@ class ttGroupExportHelper {
     }
     fwrite($this->file, $this->indentation."  </custom_fields>\n");
     unset($custom_fields);
+    unset($custom_field_part);
 
     // Write custom field options.
     fwrite($this->file, $this->indentation."  <custom_field_options>\n");
@@ -410,6 +429,7 @@ class ttGroupExportHelper {
     }
     fwrite($this->file, $this->indentation."  </custom_field_options>\n");
     unset($custom_field_options);
+    unset($custom_field_option_part);
 
     // Write custom field log.
     $custom_field_log = ttTeamHelper::getCustomFieldLog($this->group_id);
@@ -425,6 +445,7 @@ class ttGroupExportHelper {
     }
     fwrite($this->file, $this->indentation."  </custom_field_log>\n");
     unset($custom_field_log);
+    unset($custom_field_log_part);
 
     // Write expense items.
     $expense_items = ttTeamHelper::getExpenseItems($this->group_id);
@@ -444,6 +465,7 @@ class ttGroupExportHelper {
     }
     fwrite($this->file, $this->indentation."  </expense_items>\n");
     unset($expense_items);
+    unset($expense_item_part);
 
     // Write monthly quotas.
     $quotas = ttTeamHelper::getMonthlyQuotas($this->group_id);
@@ -456,6 +478,8 @@ class ttGroupExportHelper {
       fwrite($this->file, $quota_part);
     }
     fwrite($this->file, $this->indentation."  </monthly_quotas>\n");
+    unset($quotas);
+    unset($quota_part);
 
     // Write fav reports.
     $fav_reports = ttTeamHelper::getFavReports($this->group_id);
@@ -502,12 +526,25 @@ class ttGroupExportHelper {
     }
     fwrite($this->file, $this->indentation."  </fav_reports>\n");
     unset($fav_reports);
+    unset($fav_report_part);
+
+    // We are mostly done with writing this group data, destroy all maps.
+    unset($this->roleMap);
+    unset($this->userMap);
+    unset($this->taskMap);
+    unset($this->projectMap);
+    unset($this->clientMap);
+    unset($this->invoiceMap);
+    unset($this->logMap);
+    unset($this->customFieldMap);
+    unset($this->customFieldOptionMap);
 
     // Call self recursively for all subgroups.
     foreach ($this->subgroups as $subgroup) {
       $subgroup_helper = new ttGroupExportHelper($subgroup['id'], $this->file, $this->indentation.'  ');
       $subgroup_helper->writeData();
     }
+    unset($this->subgroups);
 
     fwrite($this->file, $this->indentation."</group>\n");
   }
