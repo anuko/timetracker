@@ -43,11 +43,11 @@ $form->addInput(array('type'=>'upload','name'=>'xmlfile','value'=>'browse','maxs
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.import')));
 
 if ($request->isPost()) {
-//  if (defined('SUBGROUP_DEBUG') && isTrue(SUBGROUP_DEBUG)) {
+  if (defined('SUBGROUP_DEBUG') && isTrue(SUBGROUP_DEBUG)) {
     $import = new ttOrgImportHelper($err);
-//  } else {
-//    $import = new ttImportHelper($err);
-//  }
+  } else {
+    $import = new ttImportHelper($err);
+  }
   $import->importXml();
   if ($err->no()) $msg->add($i18n->get('form.import.success'));
 } // isPost
