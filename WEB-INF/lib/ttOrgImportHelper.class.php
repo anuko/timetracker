@@ -36,19 +36,17 @@ import('ttCustomFieldHelper');
 import('ttExpenseHelper');
 import('ttFavReportHelper');
 
-// ttOrgImportHelper - this class is a future replacement for ttImportHelper.
-// Currently, it is work in progress.
-// When done, it should handle import of complex groups consisting of other groups.
+// ttOrgImportHelper class is used to import organization data from an XML file
+// prepared by ttOrgExportHelper and consisting of nested groups with their info.
 class ttOrgImportHelper {
   var $errors               = null; // Errors go here. Set in constructor by reference.
   var $schema_version       = null; // Database schema version from XML file we import from.
-  var $conflicting_entities = null; // A comma-separated list of entity names we cannot import.
+  var $conflicting_logins   = null; // A comma-separated list of logins we cannot import.
   var $canImport      = true;    // False if we cannot import data due to a conflict such as login collision.
   var $firstPass      = true;    // True during first pass through the file.
   var $org_id         = null;    // Organization id (same as top group_id).
   var $current_group_id        = null; // Current group id during parsing.
   var $current_parent_group_id = null; // Current parent group id during parsing.
-                                       // Set when we create a new group.
   var $top_role_id    = 0;       // Top role id.
 
   // Entity maps for current group. They map XML ids with database ids.
@@ -68,11 +66,14 @@ class ttOrgImportHelper {
     $this->top_role_id = ttRoleHelper::getRoleByRank(512, 0);
   }
 
-  // startElement - callback handler for opening tag of an XML element in the file.
+  // startElement - callback handler for opening tags in XML.
   function startElement($parser, $name, $attrs) {
     global $i18n;
 
-    // First pass. We only check user logins for potential collisions with existing.
+    // First pass through the file determines if we can import data.
+    // We require 2 things:
+    //   1) Database schema version must be set. This ensures we have a compatible file.
+    //   2) No login coillisions are allowed.
     if ($this->firstPass) {
       if ($name == 'ORG' && $this->canImport) {
          if ($attrs['SCHEMA'] == null) {
@@ -86,11 +87,13 @@ class ttOrgImportHelper {
          }
       }
 
+      // In first pass we check user logins for potential collisions with existing.
       if ($name == 'USER' && $this->canImport) {
         $login = $attrs['LOGIN'];
         if ('' != $attrs['STATUS'] && ttUserHelper::getUserByLogin($login)) {
           // We have a login collision. Append colliding login to a list of things we cannot import.
-          $this->conflicting_entities .= ($this->conflicting_entities ? ", $login" : $login);
+          $this->conflicting_logins .= ($this->conflicting_logins ? ", $login" : $login);
+          // The above is printed in error message with all found colliding logins.
         }
       }
     }
@@ -133,6 +136,7 @@ class ttOrgImportHelper {
         }
         // Set parent group to create subgroups with this group as parent at next entry here.
         $this->current_parent_group_id = $this->current_group_id;
+        return;
       }
 
       if ($name == 'ROLES') {
@@ -140,22 +144,24 @@ class ttOrgImportHelper {
         unset($this->currentGroupRoleMap);
         $this->currentGroupRoleMap = array();
         // Role map is reconstructed after processing <role> elements in XML. See below.
+        return;
       }
 
       if ($name == 'ROLE') {
         // We get here when processing <role> tags for the current group.
         $role_id = ttRoleHelper::insert(array(
-              'group_id' => $this->current_group_id,
-              'org_id' => $this->org_id,
-              'name' => $attrs['NAME'],
-              'description' => $attrs['DESCRIPTION'],
-              'rank' => $attrs['RANK'],
-              'rights' => $attrs['RIGHTS'],
-              'status' => $attrs['STATUS']));
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'name' => $attrs['NAME'],
+          'description' => $attrs['DESCRIPTION'],
+          'rank' => $attrs['RANK'],
+          'rights' => $attrs['RIGHTS'],
+          'status' => $attrs['STATUS']));
         if ($role_id) {
           // Add a mapping.
           $this->currentGroupRoleMap[$attrs['ID']] = $role_id;
         } else $this->errors->add($i18n->get('error.db'));
+        return;
       }
 
       if ($name == 'TASKS') {
@@ -163,6 +169,7 @@ class ttOrgImportHelper {
         unset($this->currentGroupTaskMap);
         $this->currentGroupTaskMap = array();
         // Task map is reconstructed after processing <task> elements in XML. See below.
+        return;
       }
 
       if ($name == 'TASK') {
@@ -177,6 +184,7 @@ class ttOrgImportHelper {
           // Add a mapping.
           $this->currentGroupTaskMap[$attrs['ID']] = $task_id;
         } else $this->errors->add($i18n->get('error.db'));
+        return;
       }
 
       if ($name == 'PROJECTS') {
@@ -184,6 +192,7 @@ class ttOrgImportHelper {
         unset($this->currentGroupProjectMap);
         $this->currentGroupProjectMap = array();
         // Project map is reconstructed after processing <project> elements in XML. See below.
+        return;
       }
 
       if ($name == 'PROJECT') {
@@ -205,6 +214,7 @@ class ttOrgImportHelper {
           // Add a mapping.
           $this->currentGroupProjectMap[$attrs['ID']] = $project_id;
         } else $this->errors->add($i18n->get('error.db'));
+        return;
       }
 
       if ($name == 'CLIENTS') {
@@ -212,6 +222,7 @@ class ttOrgImportHelper {
         unset($this->currentGroupClientMap);
         $this->currentGroupClientMap = array();
         // Client map is reconstructed after processing <client> elements in XML. See below.
+        return;
       }
 
       if ($name == 'CLIENT') {
@@ -234,6 +245,7 @@ class ttOrgImportHelper {
           // Add a mapping.
           $this->currentGroupClientMap[$attrs['ID']] = $client_id;
         } else $this->errors->add($i18n->get('error.db'));
+        return;
       }
 
       if ($name == 'USERS') {
@@ -241,6 +253,7 @@ class ttOrgImportHelper {
         unset($this->currentGroupUserMap);
         $this->currentGroupUserMap = array();
         // User map is reconstructed after processing <user> elements in XML. See below.
+        return;
       }
 
       if ($name == 'USER') {
@@ -263,6 +276,7 @@ class ttOrgImportHelper {
           // Add a mapping.
           $this->currentGroupUserMap[$attrs['ID']] = $user_id;
         } else $this->errors->add($i18n->get('error.db'));
+        return;
       }
 
       if ($name == 'USER_PROJECT_BIND') {
@@ -275,6 +289,7 @@ class ttOrgImportHelper {
           'status' => $attrs['STATUS']))) {
           $this->errors->add($i18n->get('error.db'));
         }
+        return;
       }
 
       if ($name == 'INVOICES') {
@@ -282,6 +297,7 @@ class ttOrgImportHelper {
         unset($this->currentGroupInvoiceMap);
         $this->currentGroupInvoiceMap = array();
         // Invoice map is reconstructed after processing <invoice> elements in XML. See below.
+        return;
       }
 
       if ($name == 'INVOICE') {
@@ -297,6 +313,7 @@ class ttOrgImportHelper {
           // Add a mapping.
           $this->currentGroupInvoiceMap[$attrs['ID']] = $invoice_id;
         } else $this->errors->add($i18n->get('error.db'));
+        return;
       }
 
       if ($name == 'LOG') {
@@ -304,6 +321,7 @@ class ttOrgImportHelper {
         unset($this->currentGroupLogMap);
         $this->currentGroupLogMap = array();
         // Log map is reconstructed after processing <log_item> elements in XML. See below.
+        return;
       }
 
       if ($name == 'LOG_ITEM') {
@@ -328,6 +346,7 @@ class ttOrgImportHelper {
           // Add a mapping.
           $this->currentGroupLogMap[$attrs['ID']] = $log_item_id;
         } else $this->errors->add($i18n->get('error.db'));
+        return;
       }
 
       if ($name == 'CUSTOM_FIELDS') {
@@ -335,6 +354,7 @@ class ttOrgImportHelper {
         unset($this->currentGroupCustomFieldMap);
         $this->currentGroupCustomFieldMap = array();
         // Custom field map is reconstructed after processing <custom_field> elements in XML. See below.
+        return;
       }
 
       if ($name == 'CUSTOM_FIELD') {
@@ -350,6 +370,7 @@ class ttOrgImportHelper {
           // Add a mapping.
           $this->currentGroupCustomFieldMap[$attrs['ID']] = $custom_field_id;
         } else $this->errors->add($i18n->get('error.db'));
+        return;
       }
 
       if ($name == 'CUSTOM_FIELD_OPTIONS') {
@@ -357,6 +378,7 @@ class ttOrgImportHelper {
         unset($this->currentGroupCustomFieldOptionMap);
         $this->currentGroupCustomFieldOptionMap = array();
         // Custom field option map is reconstructed after processing <custom_field_option> elements in XML. See below.
+        return;
       }
 
       if ($name == 'CUSTOM_FIELD_OPTION') {
@@ -370,6 +392,7 @@ class ttOrgImportHelper {
           // Add a mapping.
           $this->currentGroupCustomFieldOptionMap[$attrs['ID']] = $custom_field_option_id;
         } else $this->errors->add($i18n->get('error.db'));
+        return;
       }
 
       if ($name == 'CUSTOM_FIELD_LOG_ENTRY') {
@@ -384,6 +407,7 @@ class ttOrgImportHelper {
           'status' => $attrs['STATUS']))) {
           $this->errors->add($i18n->get('error.db'));
         }
+        return;
       }
 
       if ($name == 'EXPENSE_ITEM') {
@@ -401,6 +425,7 @@ class ttOrgImportHelper {
           'paid' => $attrs['PAID'],
           'status' => $attrs['STATUS']));
         if (!$expense_item_id) $this->errors->add($i18n->get('error.db'));
+        return;
       }
 
       if ($name == 'MONTHLY_QUOTA') {
@@ -411,6 +436,7 @@ class ttOrgImportHelper {
           $attrs['MINUTES'])) {
           $this->errors->add($i18n->get('error.db'));
         }
+        return;
       }
 
       if ($name == 'FAV_REPORT') {
@@ -450,6 +476,7 @@ class ttOrgImportHelper {
           'group_by3' => $attrs['GROUP_BY3'],
           'chtotalsonly' => (int) $attrs['SHOW_TOTALS_ONLY']));
          if (!$fav_report_id) $this->errors->add($i18n->get('error.db'));
+         return;
       }
     }
   }
@@ -491,13 +518,10 @@ class ttOrgImportHelper {
     xml_set_element_handler($parser, 'startElement', false);
 
     // We need to parse the file 2 times:
-    //   1) First pass: determine if import is possible - there must be no login collisions.
-    //   2) Second pass: if we can import, then do import in a second pass.
-    // This is different from earlier approach for single group import, where we could
-    // do both things in one pass because user info was in the beginning of XML file.
-    // Now, with subgroups, users can be located anywhere in the file.
+    //   1) First pass: determine if import is possible.
+    //   2) Second pass: import data, one tag at a time.
 
-    // Read and parse the content of the file. During parsing, startElement, endElement, and dataElement functions are called.
+    // Read and parse the content of the file. During parsing, startElement is called back for each tag.
     $file = fopen($filename, 'r');
     while ($data = fread($file, 4096)) {
       if (!xml_parse($parser, $data, feof($file))) {
@@ -506,10 +530,10 @@ class ttOrgImportHelper {
           xml_error_string(xml_get_error_code($parser))));
       }
     }
-    if ($this->conflicting_entities) {
+    if ($this->conflicting_logins) {
       $this->canImport = false;
       $this->errors->add($i18n->get('error.user_exists'));
-      $this->errors->add(sprintf($i18n->get('error.cannot_import'), $this->conflicting_entities));
+      $this->errors->add(sprintf($i18n->get('error.cannot_import'), $this->conflicting_logins));
     }
 
     $this->firstPass = false; // We are done with 1st pass.
@@ -526,7 +550,7 @@ class ttOrgImportHelper {
     xml_set_object($parser, $this);
     xml_set_element_handler($parser, 'startElement', false);
 
-    // Read and parse the content of the file. During parsing, startElement, endElement, and dataElement functions are called.
+    // Read and parse the content of the file. During parsing, startElement is called back for each tag.
     $file = fopen($filename, 'r');
     while ($data = fread($file, 4096)) {
       if (!xml_parse($parser, $data, feof($file))) {
