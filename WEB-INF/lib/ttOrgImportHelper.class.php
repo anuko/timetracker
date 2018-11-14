@@ -229,9 +229,11 @@ class ttOrgImportHelper {
         // We get here when processing <client> tags for the current group.
 
         // Prepare a list of project ids.
-        $projects = explode(',', $attrs['PROJECTS']);
-        foreach ($projects as $id)
-          $mapped_projects[] = $this->currentGroupProjectMap[$id];
+        if ($attrs['PROJECTS']) {
+          $projects = explode(',', $attrs['PROJECTS']);
+          foreach ($projects as $id)
+            $mapped_projects[] = $this->currentGroupProjectMap[$id];
+        }
 
         $client_id = ttClientHelper::insert(array(
           'group_id' => $this->current_group_id,
