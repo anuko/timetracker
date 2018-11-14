@@ -179,8 +179,8 @@ class ttGroupExportHelper {
 
     // Write group info.
     $group = $this->getGroupData();
-    $group_part = "<group name=\"".htmlentities($group['name'])."\"";
-    $group_part .= " currency=\"".htmlentities($group['currency'])."\"";
+    $group_part = "<group name=\"".htmlspecialchars($group['name'])."\"";
+    $group_part .= " currency=\"".htmlspecialchars($group['currency'])."\"";
     $group_part .= " decimal_mark=\"".$group['decimal_mark']."\"";
     $group_part .= " lang=\"".$group['lang']."\"";
     $group_part .= " date_format=\"".$group['date_format']."\"";
@@ -249,10 +249,10 @@ class ttGroupExportHelper {
     fwrite($this->file, $this->indentation."  <roles>\n");
     foreach ($roles as $role) {
       $role_part = $this->indentation.'    '."<role id=\"".$this->roleMap[$role['id']]."\"";
-      $role_part .= " name=\"".htmlentities($role['name'])."\"";
-      $role_part .= " description=\"".htmlentities($role['description'])."\"";
+      $role_part .= " name=\"".htmlspecialchars($role['name'])."\"";
+      $role_part .= " description=\"".htmlspecialchars($role['description'])."\"";
       $role_part .= " rank=\"".$role['rank']."\"";
-      $role_part .= " rights=\"".htmlentities($role['rights'])."\"";
+      $role_part .= " rights=\"".htmlspecialchars($role['rights'])."\"";
       $role_part .= " status=\"".$role['status']."\"";
       $role_part .= "></role>\n";
       fwrite($this->file, $role_part);
@@ -265,8 +265,8 @@ class ttGroupExportHelper {
     fwrite($this->file, $this->indentation."  <tasks>\n");
     foreach ($tasks as $task) {
       $task_part = $this->indentation.'    '."<task id=\"".$this->taskMap[$task['id']]."\"";
-      $task_part .= " name=\"".htmlentities($task['name'])."\"";
-      $task_part .= " description=\"".htmlentities($task['description'])."\"";
+      $task_part .= " name=\"".htmlspecialchars($task['name'])."\"";
+      $task_part .= " description=\"".htmlspecialchars($task['description'])."\"";
       $task_part .= " status=\"".$task['status']."\"";
       $task_part .= "></task>\n";
       fwrite($this->file, $task_part);
@@ -286,8 +286,8 @@ class ttGroupExportHelper {
         $tasks_str = implode(',', $tasks_mapped);
       }
       $project_part = $this->indentation.'    '."<project id=\"".$this->projectMap[$project_item['id']]."\"";
-      $project_part .= " name=\"".htmlentities($project_item['name'])."\"";
-      $project_part .= " description=\"".htmlentities($project_item['description'])."\"";
+      $project_part .= " name=\"".htmlspecialchars($project_item['name'])."\"";
+      $project_part .= " description=\"".htmlspecialchars($project_item['description'])."\"";
       $project_part .= " tasks=\"".$tasks_str."\"";
       $project_part .= " status=\"".$project_item['status']."\"";
       $project_part .= "></project>\n";
@@ -308,8 +308,8 @@ class ttGroupExportHelper {
         $projects_str = implode(',', $projects_mapped);
       }
       $client_part = $this->indentation.'    '."<client id=\"".$this->clientMap[$client_item['id']]."\"";
-      $client_part .= " name=\"".htmlentities($client_item['name'])."\"";
-      $client_part .= " address=\"".htmlentities($client_item['address'])."\"";
+      $client_part .= " name=\"".htmlspecialchars($client_item['name'])."\"";
+      $client_part .= " address=\"".htmlspecialchars($client_item['address'])."\"";
       $client_part .= " tax=\"".$client_item['tax']."\"";
       $client_part .= " projects=\"".$projects_str."\"";
       $client_part .= " status=\"".$client_item['status']."\"";
@@ -325,8 +325,8 @@ class ttGroupExportHelper {
     foreach ($users as $user_item) {
       $role_id = $user_item['rank'] == 512 ? 0 : $this->roleMap[$user_item['role_id']]; // Special role_id 0 (not null) for top manager.
       $user_part = $this->indentation.'    '."<user id=\"".$this->userMap[$user_item['id']]."\"";
-      $user_part .= " name=\"".htmlentities($user_item['name'])."\"";
-      $user_part .= " login=\"".htmlentities($user_item['login'])."\"";
+      $user_part .= " name=\"".htmlspecialchars($user_item['name'])."\"";
+      $user_part .= " login=\"".htmlspecialchars($user_item['login'])."\"";
       $user_part .= " password=\"".$user_item['password']."\"";
       $user_part .= " role_id=\"".$role_id."\"";
       $user_part .= " client_id=\"".$this->clientMap[$user_item['client_id']]."\"";
@@ -361,7 +361,7 @@ class ttGroupExportHelper {
     fwrite($this->file, $this->indentation."  <invoices>\n");
     foreach ($invoices as $invoice_item) {
       $invoice_part = $this->indentation.'    '."<invoice id=\"".$this->invoiceMap[$invoice_item['id']]."\"";
-      $invoice_part .= " name=\"".htmlentities($invoice_item['name'])."\"";
+      $invoice_part .= " name=\"".htmlspecialchars($invoice_item['name'])."\"";
       $invoice_part .= " date=\"".$invoice_item['date']."\"";
       $invoice_part .= " client_id=\"".$this->clientMap[$invoice_item['client_id']]."\"";
       $invoice_part .= " status=\"".$invoice_item['status']."\"";
@@ -391,7 +391,7 @@ class ttGroupExportHelper {
         $log_part .= " project_id=\"".$this->projectMap[$record['project_id']]."\"";
         $log_part .= " task_id=\"".$this->taskMap[$record['task_id']]."\"";
         $log_part .= " invoice_id=\"".$this->invoiceMap[$record['invoice_id']]."\"";
-        $log_part .= " comment=\"".htmlentities($record['comment'])."\"";
+        $log_part .= " comment=\"".htmlspecialchars($record['comment'])."\"";
         $log_part .= " billable=\"".$record['billable']."\"";
         $log_part .= " paid=\"".$record['paid']."\"";
         $log_part .= " status=\"".$record['status']."\"";
@@ -408,7 +408,7 @@ class ttGroupExportHelper {
     foreach ($custom_fields as $custom_field) {
       $custom_field_part = $this->indentation.'    '."<custom_field id=\"".$this->customFieldMap[$custom_field['id']]."\"";
       $custom_field_part .= " type=\"".$custom_field['type']."\"";
-      $custom_field_part .= " label=\"".htmlentities($custom_field['label'])."\"";
+      $custom_field_part .= " label=\"".htmlspecialchars($custom_field['label'])."\"";
       $custom_field_part .= " required=\"".$custom_field['required']."\"";
       $custom_field_part .= " status=\"".$custom_field['status']."\"";
       $custom_field_part .= "></custom_field>\n";
@@ -423,7 +423,7 @@ class ttGroupExportHelper {
     foreach ($custom_field_options as $option) {
       $custom_field_option_part = $this->indentation.'    '."<custom_field_option id=\"".$this->customFieldOptionMap[$option['id']]."\"";
       $custom_field_option_part .= " field_id=\"".$this->customFieldMap[$option['field_id']]."\"";
-      $custom_field_option_part .= " value=\"".htmlentities($option['value'])."\"";
+      $custom_field_option_part .= " value=\"".htmlspecialchars($option['value'])."\"";
       $custom_field_option_part .= "></custom_field_option>\n";
       fwrite($this->file, $custom_field_option_part);
     }
@@ -438,7 +438,7 @@ class ttGroupExportHelper {
       $custom_field_log_part = $this->indentation.'    '."<custom_field_log_entry log_id=\"".$this->logMap[$entry['log_id']]."\"";
       $custom_field_log_part .= " field_id=\"".$this->customFieldMap[$entry['field_id']]."\"";
       $custom_field_log_part .= " option_id=\"".$this->customFieldOptionMap[$entry['option_id']]."\"";
-      $custom_field_log_part .= " value=\"".htmlentities($entry['value'])."\"";
+      $custom_field_log_part .= " value=\"".htmlspecialchars($entry['value'])."\"";
       $custom_field_log_part .= " status=\"".$entry['status']."\"";
       $custom_field_log_part .= "></custom_field_log_entry>\n";
       fwrite($this->file, $custom_field_log_part);
@@ -455,7 +455,7 @@ class ttGroupExportHelper {
       $expense_item_part .= " user_id=\"".$this->userMap[$expense_item['user_id']]."\"";
       $expense_item_part .= " client_id=\"".$this->clientMap[$expense_item['client_id']]."\"";
       $expense_item_part .= " project_id=\"".$this->projectMap[$expense_item['project_id']]."\"";
-      $expense_item_part .= " name=\"".htmlentities($expense_item['name'])."\"";
+      $expense_item_part .= " name=\"".htmlspecialchars($expense_item['name'])."\"";
       $expense_item_part .= " cost=\"".$expense_item['cost']."\"";
       $expense_item_part .= " invoice_id=\"".$this->invoiceMap[$expense_item['invoice_id']]."\"";
       $expense_item_part .= " paid=\"".$expense_item['paid']."\"";
@@ -494,7 +494,7 @@ class ttGroupExportHelper {
         }
       }
       $fav_report_part = $this->indentation.'    '."<fav_report user_id=\"".$this->userMap[$fav_report['user_id']]."\"";
-      $fav_report_part .= " name=\"".htmlentities($fav_report['name'])."\"";
+      $fav_report_part .= " name=\"".htmlspecialchars($fav_report['name'])."\"";
       $fav_report_part .= " client_id=\"".$this->clientMap[$fav_report['client_id']]."\"";
       $fav_report_part .= " cf_1_option_id=\"".$this->customFieldOptionMap[$fav_report['cf_1_option_id']]."\"";
       $fav_report_part .= " project_id=\"".$this->projectMap[$fav_report['project_id']]."\"";

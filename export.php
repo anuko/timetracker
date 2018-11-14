@@ -57,11 +57,11 @@ if ($request->isPost()) {
     $mime_type = 'application/x-bzip2';
   }
 
-  if (defined('SUBGROUP_DEBUG') && isTrue(SUBGROUP_DEBUG)) {
+//  if (defined('SUBGROUP_DEBUG') && isTrue(SUBGROUP_DEBUG)) {
     $exportHelper = new ttOrgExportHelper();
-  } else {
-      $exportHelper = new ttExportHelper();
-  }
+//  } else {
+//      $exportHelper = new ttExportHelper();
+//  }
   if ($exportHelper->createDataFile($compress)) {
     header('Pragma: public'); // This is needed for IE8 to download files over https.
     header('Content-Type: '.$mime_type);
