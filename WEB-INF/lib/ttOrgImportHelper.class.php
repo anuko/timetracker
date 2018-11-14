@@ -525,7 +525,7 @@ class ttOrgImportHelper {
 
     // Read and parse the content of the file. During parsing, startElement is called back for each tag.
     $file = fopen($filename, 'r');
-    while ($data = fread($file, 4096)) {
+    while (($data = fread($file, 4096)) && $this->errors->no()) {
       if (!xml_parse($parser, $data, feof($file))) {
         $this->errors->add(sprintf($i18n->get('error.xml'),
           xml_get_current_line_number($parser),
@@ -554,7 +554,7 @@ class ttOrgImportHelper {
 
     // Read and parse the content of the file. During parsing, startElement is called back for each tag.
     $file = fopen($filename, 'r');
-    while ($data = fread($file, 4096)) {
+    while (($data = fread($file, 4096)) && $this->errors->no()) {
       if (!xml_parse($parser, $data, feof($file))) {
         $this->errors->add(sprintf($i18n->get('error.xml'),
           xml_get_current_line_number($parser),
