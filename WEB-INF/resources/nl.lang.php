@@ -100,7 +100,7 @@ $i18n_key_words = array(
 'error.overlap' => 'De huidige registratie overlapt een reeds bestaande registratie.',
 'error.future_date' => 'Datum ligt in de toekomst.',
 'error.xml' => 'Fout in XML bestand in regel line %d: %s.',
-'error.cannot_import' => 'Kan niet importeren: %s.',
+'error.cannot_import' => 'Kan het volgende niet importeren: %s.',
 'error.format' => 'Bestandsformaat niet valide.',
 
 // Labels for buttons.
