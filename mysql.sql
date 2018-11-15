@@ -3,7 +3,7 @@
 # 2) Then, execute this script from command prompt with a command like this:
 # mysql -h host -u user -p -D db_name < mysql.sql
 
-# create database timetracker character set = 'utf8';
+# create database timetracker character set = 'utf8mb4';
 
 # use timetracker;
 
