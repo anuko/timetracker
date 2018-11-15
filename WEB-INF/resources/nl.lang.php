@@ -99,10 +99,9 @@ $i18n_key_words = array(
 'error.goto_uncompleted' => 'Ga naar onvolledige invoer.',
 'error.overlap' => 'De huidige registratie overlapt een reeds bestaande registratie.',
 'error.future_date' => 'Datum ligt in de toekomst.',
-// TODO: translate the following.
-// 'error.xml' => 'Error in XML file at line %d: %s.',
-// 'error.cannot_import' => 'Cannot import: %s.',
-// 'error.format' => 'Invalid file format.',
+'error.xml' => 'Fout in XML bestand in regel line %d: %s.',
+'error.cannot_import' => 'Kan niet importeren: %s.',
+'error.format' => 'Bestandsformaat niet valide.',
 
 // Labels for buttons.
 'button.login' => 'Aanmelden',
@@ -143,8 +142,7 @@ $i18n_key_words = array(
 'label.end_date' => 'Einddatum',
 'label.user' => 'Medewerker',
 'label.users' => 'Medewerkers',
-// TODO: translate the following.
-// 'label.group' => 'Group',
+'label.group' => 'Groep',
 'label.roles' => 'Rollen',
 'label.client' => 'Klant',
 'label.clients' => 'Klanten',
