@@ -95,7 +95,8 @@ if ($request->isPost()) {
     if ($result) {
       header('Location: admin_groups.php');
       exit();
-    }
+    } else
+      $err->add($i18n->get('error.db'));
   }
 
   if ($request->getParameter('btn_cancel')) {
