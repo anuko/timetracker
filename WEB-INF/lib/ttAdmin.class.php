@@ -176,7 +176,7 @@ class ttAdmin {
     //
     // 1) Users may mark some of them deleted during their work.
     // If we mark all of them deleted here, we can't recover nicely
-    // as we'll lose track of what was deleted by user.
+    // as we'll lose track of what was accidentally deleted by user.
     //
     // 2) DB maintenance script (Clean up DB from inactive groups) should
     // get rid of these items permanently eventually.

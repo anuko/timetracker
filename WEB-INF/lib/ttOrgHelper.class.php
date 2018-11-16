@@ -26,36 +26,39 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-// Class ttGroupHelper - contains helper functions that operate with groups.
-// This is a planned replacement for ttTeamHelper as we move forward with subgroups.
-class ttGroupHelper {
+// Class ttOrgHelper contains helper functions that operate with organizations.
+// Organizations are collections of nested groups of users.
+class ttOrgHelper {
 
-  // The getGroupName function returns group name.
-  static function getGroupName($group_id) {
+  // The getOrgs function returns an array of all active organizations on the server.
+  static function getOrgs() {
+    $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select name from tt_groups where id = $group_id and (status = 1 or status = 0)";
+    $sql =  "select id, name, created, lang from tt_groups".
+            " where status = 1 and org_id = id and parent_id is NULL order by id desc";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $val['date'] = substr($val['created'], 0, 10); // Strip the time.
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
+  // The getName function returns organization name (which is a name of its top group).
+  static function getName($org_id) {
+    $mdb2 = getConnection();
+
+    $sql = "select name from tt_groups where id = $org_id and (status = 1 or status = 0) and parent_id is NULL";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
       return $val['name'];
-    }
-    return false;
-  }
-
-  // The getParentGroup determines a parent group for a given group.
-  static function getParentGroup($group_id) {
-    global $user;
-
-    $mdb2 = getConnection();
-
-    $sql = "select parent_id from tt_groups where id = $group_id and org_id = $user->org_id and status = 1";
-    $res = $mdb2->query($sql);
-
-    if (!is_a($res, 'PEAR_Error')) {
-      $val = $res->fetchRow();
-      return $val['parent_id'];
     }
     return false;
   }
