@@ -32,6 +32,7 @@ require_once('initialize.php');
 import('ttUserHelper');
 import('ttTaskHelper');
 import('ttRoleHelper');
+import('ttOrgHelper');
 
 // setChange - executes an sql statement. TODO: rename this function to something better.
 // Better yet, redo the entire thing and make an installer.
@@ -1004,13 +1005,13 @@ if ($_POST) {
   if ($_POST["cleanup"]) {
 
     $mdb2 = getConnection();
-    $inactive_groups = ttTeamHelper::getInactiveGroups();
+    $inactive_groups = ttOrgHelper::getInactiveOrgs();
 
     $count = count($inactive_groups);
     print "$count inactive groups found...<br>\n";
     for ($i = 0; $i < $count; $i++) {
       print "  deleting group ".$inactive_groups[$i]."<br>\n";
-      $res = ttTeamHelper::delete($inactive_groups[$i]);
+      $res = ttTeamHelper::delete($inactive_groups[$i]); // TODO: rewrite this to delete subgroups, too.
     }
 
     setChange("OPTIMIZE TABLE tt_client_project_binds");
