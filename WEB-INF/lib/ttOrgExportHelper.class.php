@@ -30,9 +30,8 @@ import('ttTeamHelper');
 import('ttTimeHelper');
 import('ttGroupExportHelper');
 
-// ttOrgExportHelper - this class is a future replacement for ttExportHelper.
-// Currently, it is work in progress.
-// When done, it should handle export of organizations containing multiple groups.
+// ttOrgExportHelper handles export of organizations consisting of multiple groups
+// into XML file for import (migrating) to another server.
 class ttOrgExportHelper {
 
   var $fileName = null; // Name of file with data.

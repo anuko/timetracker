@@ -32,6 +32,7 @@ import('ttTaskHelper');
 import('ttProjectHelper');
 import('ttClientHelper');
 import('ttInvoiceHelper');
+import('ttTimeHelper');
 import('ttCustomFieldHelper');
 import('ttExpenseHelper');
 import('ttFavReportHelper');
