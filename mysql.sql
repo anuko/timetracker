@@ -82,7 +82,7 @@ INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Top ma
 #
 CREATE TABLE `tt_users` (
   `id` int(11) NOT NULL auto_increment,            # user id
-  `login` varchar(50) COLLATE utf8_bin NOT NULL,   # user login
+  `login` varchar(50) COLLATE utf8mb4_bin NOT NULL,# user login
   `password` varchar(50) default NULL,             # password hash
   `name` varchar(100) default NULL,                # user name
   `group_id` int(11) NOT NULL,                     # group id
@@ -115,13 +115,13 @@ INSERT INTO `tt_users` (`login`, `password`, `name`, `group_id`, `role_id`) VALU
 # Structure for table tt_projects.
 #
 CREATE TABLE `tt_projects` (
-  `id` int(11) NOT NULL auto_increment,         # project id
-  `group_id` int(11) NOT NULL,                  # group id
-  `org_id` int(11) default NULL,                # organization id
-  `name` varchar(80) COLLATE utf8_bin NOT NULL, # project name
-  `description` varchar(255) default NULL,      # project description
-  `tasks` text default NULL,                    # comma-separated list of task ids associated with this project
-  `status` tinyint(4) default 1,                # project status
+  `id` int(11) NOT NULL auto_increment,            # project id
+  `group_id` int(11) NOT NULL,                     # group id
+  `org_id` int(11) default NULL,                   # organization id
+  `name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # project name
+  `description` varchar(255) default NULL,         # project description
+  `tasks` text default NULL,                       # comma-separated list of task ids associated with this project
+  `status` tinyint(4) default 1,                   # project status
   PRIMARY KEY (`id`)
 );
 
@@ -133,12 +133,12 @@ create unique index project_idx on tt_projects(group_id, name, status);
 # Structure for table tt_tasks.
 #
 CREATE TABLE `tt_tasks` (
-  `id` int(11) NOT NULL auto_increment,         # task id
-  `group_id` int(11) NOT NULL,                  # group id
-  `org_id` int(11) default NULL,                # organization id
-  `name` varchar(80) COLLATE utf8_bin NOT NULL, # task name
-  `description` varchar(255) default NULL,      # task description
-  `status` tinyint(4) default 1,                # task status
+  `id` int(11) NOT NULL auto_increment,            # task id
+  `group_id` int(11) NOT NULL,                     # group id
+  `org_id` int(11) default NULL,                   # organization id
+  `name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # task name
+  `description` varchar(255) default NULL,         # task description
+  `status` tinyint(4) default 1,                   # task status
   PRIMARY KEY (`id`)
 );
 
@@ -222,13 +222,13 @@ create index task_idx on tt_log(task_id);
 # Structure for table tt_invoices. Invoices are issued to clients for billable work.
 #
 CREATE TABLE `tt_invoices` (
-  `id` int(11) NOT NULL auto_increment,         # invoice id
-  `group_id` int(11) NOT NULL,                  # group id
-  `org_id` int(11) default NULL,                # organization id
-  `name` varchar(80) COLLATE utf8_bin NOT NULL, # invoice name
-  `date` date NOT NULL,                         # invoice date
-  `client_id` int(11) NOT NULL,                 # client id
-  `status` tinyint(4) default 1,                # invoice status
+  `id` int(11) NOT NULL auto_increment,            # invoice id
+  `group_id` int(11) NOT NULL,                     # group id
+  `org_id` int(11) default NULL,                   # organization id
+  `name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # invoice name
+  `date` date NOT NULL,                            # invoice date
+  `client_id` int(11) NOT NULL,                    # client id
+  `status` tinyint(4) default 1,                   # invoice status
   PRIMARY KEY (`id`)
 );
 
@@ -310,14 +310,14 @@ CREATE TABLE `tt_cron` (
 # Structure for table tt_clients. A client is an entity for whom work is performed and who may be invoiced.
 #
 CREATE TABLE `tt_clients` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,         # client id
-  `group_id` int(11) NOT NULL,                  # group id
-  `org_id` int(11) default NULL,                # organization id
-  `name` varchar(80) COLLATE utf8_bin NOT NULL, # client name
-  `address` varchar(255) default NULL,          # client address
-  `tax` float(6,2) default '0.00',              # applicable tax for this client
-  `projects` text default NULL,                 # comma-separated list of project ids assigned to this client
-  `status` tinyint(4) default 1,                # client status
+  `id` int(11) NOT NULL AUTO_INCREMENT,            # client id
+  `group_id` int(11) NOT NULL,                     # group id
+  `org_id` int(11) default NULL,                   # organization id
+  `name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # client name
+  `address` varchar(255) default NULL,             # client address
+  `tax` float(6,2) default '0.00',                 # applicable tax for this client
+  `projects` text default NULL,                    # comma-separated list of project ids assigned to this client
+  `status` tinyint(4) default 1,                   # client status
   PRIMARY KEY (`id`)
 );
 
@@ -469,4 +469,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.13', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.14', now()); # TODO: change when structure changes.
