@@ -449,6 +449,7 @@ CREATE TABLE `tt_predefined_expenses` (
 #
 CREATE TABLE `tt_monthly_quotas` (
   `group_id` int(11) NOT NULL,            # group id
+  `org_id` int(11) default NULL           # organization id
   `year` smallint(5) UNSIGNED NOT NULL,   # quota year
   `month` tinyint(3) UNSIGNED NOT NULL,   # quota month
   `minutes` int(11) default NULL,         # quota in minutes in specified month and year
@@ -469,4 +470,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.14', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.15', now()); # TODO: change when structure changes.
