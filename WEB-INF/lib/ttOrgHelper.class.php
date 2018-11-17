@@ -82,4 +82,13 @@ class ttOrgHelper {
     }
     return false;
   }
+
+  // deleteOrg deletes data for the entire organization from database permanently.
+  static function deleteOrg() {
+    return false; // Work in progress, currently not implemented.
+
+    // We shall do it in a straightforward way by a delete operation from all tables by org_id.
+    // However, at this time not all tables have org_id.
+    // So, we need to add the field as we write code here.
+  }
 }

@@ -659,66 +659,6 @@ class ttTeamHelper {
     return false;
   }
 
-  // The getInactiveGroups is a maintenance function that returns an array of inactive group ids (max 100).
-  static function getInactiveGroups() {
-    $inactive_groups = array();
-    $mdb2 = getConnection();
-
-    // Get all group ids for groups created or modified more than 1 year ago.
-    $ts = $mdb2->quote(date('Y-m-d', strtotime('-1 year')));
-    $sql =  "select id from tt_groups where created < $ts and (modified is null or modified < $ts) order by id";
-    $res = $mdb2->query($sql);
-
-    $count = 0;
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $group_id = $val['id'];
-        if (ttTeamHelper::isGroupActive($group_id) == false) {
-          $count++;
-          $inactive_groups[] = $group_id;
-          // Limit the array size for perfomance by allowing this operation on small chunks only.
-          if ($count >= 100) break;
-        }
-      }
-      return $inactive_groups;
-    }
-    return false;
-  }
-
-  // The isGroupActive determines if a group is using Time Tracker or abandoned it.
-  static function isGroupActive($group_id) {
-    $mdb2 = getConnection();
-
-    $count = 0;
-    $ts = date('Y-m-d', strtotime('-2 years'));
-    $sql = "select count(*) as cnt from tt_log where group_id = $group_id and created > '$ts'";
-    $res = $mdb2->query($sql);
-    if (!is_a($res, 'PEAR_Error')) {
-      if ($val = $res->fetchRow()) {
-        $count = $val['cnt'];
-      }
-    }
-
-    if ($count == 0)
-      return false;  // No time entries for the last 2 years.
-
-    if ($count <= 5) {
-      // We will consider a group inactive if it has 5 or less time entries made more than 1 year ago.
-      $count_last_year = 0;
-      $ts = date('Y-m-d', strtotime('-1 year'));
-      $sql = "select count(*) as cnt from tt_log where group_id = $group_id and created > '$ts'";
-      $res = $mdb2->query($sql);
-      if (!is_a($res, 'PEAR_Error')) {
-        if ($val = $res->fetchRow()) {
-          $count_last_year = $val['cnt'];
-        }
-        if ($count_last_year == 0)
-          return false;  // No time entries for the last year and only a few entries before that.
-      }
-    }
-    return true;
-  }
-
   // The delete function permanently deletes all data for a group.
   static function delete($group_id) {
     $mdb2 = getConnection();
