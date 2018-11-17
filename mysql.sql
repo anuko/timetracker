@@ -405,6 +405,7 @@ CREATE TABLE `tt_expense_items` (
   `date` date NOT NULL,                   # date the record is for
   `user_id` int(11) NOT NULL,             # user id the expense item is reported by
   `group_id` int(11) default NULL,        # group id
+  `org_id` int(11) default NULL,          # organization id
   `client_id` int(11) default NULL,       # client id
   `project_id` int(11) default NULL,      # project id
   `name` text NOT NULL,                   # expense item name (what is an expense for)
@@ -471,4 +472,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.16', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.17', now()); # TODO: change when structure changes.

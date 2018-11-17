@@ -105,7 +105,7 @@ class ttPredefinedExpenseHelper {
       $cost = str_replace($user->decimal_mark, '.', $cost);
 
     $sql = "update tt_predefined_expenses set name = ".$mdb2->quote($name).", cost = ".$mdb2->quote($cost).
-      " where id = $predefined_expense_id and group_id = $group_id"; // TODO: add org_id when possible.
+      " where id = $predefined_expense_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
