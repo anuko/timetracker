@@ -384,7 +384,7 @@ CREATE TABLE `tt_custom_field_options` (
 # This table supplements tt_log and contains custom field values for records.
 #
 CREATE TABLE `tt_custom_field_log` (
-  `id` bigint NOT NULL auto_increment, # cutom field log id
+  `id` bigint NOT NULL auto_increment, # custom field log id
   `log_id` bigint NOT NULL,            # id of a record in tt_log this record corresponds to
   `field_id` int(11) NOT NULL,         # custom field id
   `option_id` int(11) default NULL,    # Option id. Used for dropdown custom fields.
