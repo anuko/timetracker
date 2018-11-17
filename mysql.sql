@@ -437,6 +437,7 @@ create index invoice_idx on tt_expense_items(invoice_id);
 CREATE TABLE `tt_predefined_expenses` (
   `id` int(11) NOT NULL auto_increment, # predefined expense id
   `group_id` int(11) NOT NULL,          # group id
+  `org_id` int(11) default NULL,        # organization id
   `name` varchar(255) NOT NULL,         # predefined expense name, such as mileage
   `cost` decimal(10,2) default '0.00',  # cost for one unit
   PRIMARY KEY  (`id`)
@@ -470,4 +471,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.15', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.16', now()); # TODO: change when structure changes.
