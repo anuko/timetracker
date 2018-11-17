@@ -192,8 +192,8 @@ if ($request->isPost()) {
 
     // Insert record.
     if ($err->no()) {
-      if (ttExpenseHelper::insert(array('date'=>$cl_date,'user_id'=>$user->getActiveUser(),'group_id'=>$user->getActiveGroup(),
-        'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1))) {
+      if (ttExpenseHelper::insert(array('date'=>$cl_date,'client_id'=>$cl_client,
+          'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1))) {
         header('Location: expenses.php');
         exit();
       } else

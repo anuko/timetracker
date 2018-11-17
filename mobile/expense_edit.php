@@ -200,8 +200,8 @@ if ($request->isPost()) {
 
     // Now, a new insert.
     if ($err->no()) {
-      if (ttExpenseHelper::insert(array('date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getActiveUser(),'group_id'=>$user->getActiveGroup(),
-        'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1))) {
+      if (ttExpenseHelper::insert(array('date'=>$new_date->toString(DB_DATEFORMAT),'client_id'=>$cl_client,
+          'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1))) {
         header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
         exit();
       } else
