@@ -226,7 +226,8 @@ class ttProjectHelper {
     $all_tasks = ttTeamHelper::getAllTasks($group_id);
     foreach ($all_tasks as $task) {
       if(in_array($task['id'], $tasks)) {
-        $sql = "insert into tt_project_task_binds (project_id, task_id) values($last_id, ".$task['id'].")";
+        $sql = "insert into tt_project_task_binds (project_id, task_id, group_id, org_id)".
+          " values($last_id, ".$task['id'].", $group_id, $org_id)";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
           return false;
@@ -240,7 +241,9 @@ class ttProjectHelper {
   static function update($fields) {
     global $user;
     $mdb2 = getConnection();
-    
+
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
     $project_id = $fields['id']; // Project we are updating.
     $name = $fields['name']; // Project name.
     $description = $fields['description']; // Project description.
@@ -271,8 +274,6 @@ class ttProjectHelper {
       while ($row = $res->fetchRow()) {
         $user_rate[$row['id']] = $row['rate'];
       }
-      $group_id = $user->getActiveGroup();
-      $org_id = $user->org_id;
       foreach ($users_to_add as $id) {
         $sql = "insert into tt_user_project_binds (user_id, project_id, group_id, org_id, rate, status)".
           " values($id, $project_id, $group_id, $org_id, ".$user_rate[$id].", 1)";
@@ -308,7 +309,8 @@ class ttProjectHelper {
         return false;
     }    
     foreach ($task_binds_to_add as $task_id) {
-      $sql = "insert into tt_project_task_binds (project_id, task_id) values($project_id, $task_id)";
+      $sql = "insert into tt_project_task_binds (project_id, task_id, group_id, org_id)".
+        " values($project_id, $task_id, $group_id, $org_id)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;

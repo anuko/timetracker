@@ -157,12 +157,13 @@ class ttTaskHelper {
     if (is_array($projects)) {
       foreach ($projects as $p_id) {
         // Insert task binds into tt_project_task_binds table.
-        $sql = "insert into tt_project_task_binds (project_id, task_id) values($p_id, $last_id)";
+        $sql = "insert into tt_project_task_binds (project_id, task_id, group_id, org_id)".
+          " values($p_id, $last_id, $group_id, $org_id)";
         $affected = $mdb2->exec($sql);
-   		if (is_a($affected, 'PEAR_Error'))
-   		  return false;
+        if (is_a($affected, 'PEAR_Error'))
+          return false;
 
-   		// Add task bind to the tasks field of the tt_projects table.
+        // Add task bind to the tasks field of the tt_projects table.
         $sql = "select tasks from tt_projects where id = $p_id";
         $res = $mdb2->query($sql);
         if (is_a($res, 'PEAR_Error'))
@@ -171,16 +172,16 @@ class ttTaskHelper {
         $val = $res->fetchRow();
         $task_ids = $val['tasks'];
         if ($task_ids) {
-		  $task_ids .= ",$last_id";
-		  $task_ids = ttTaskHelper::sort($task_ids);
-		} else
-		  $task_ids = $last_id;
+          $task_ids .= ",$last_id";
+          $task_ids = ttTaskHelper::sort($task_ids);
+        } else
+          $task_ids = $last_id;
 
         $sql = "update tt_projects set tasks = ".$mdb2->quote($task_ids)." where id = $p_id";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
           return false;
-	  }
+      }
     }
     return $last_id;
   }
@@ -189,9 +190,10 @@ class ttTaskHelper {
   static function update($fields)
   {
     global $user;
-  	    
     $mdb2 = getConnection();
 
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
     $task_id = (int)$fields['task_id'];
     $name = $fields['name'];
     $description = $fields['description'];
@@ -199,7 +201,7 @@ class ttTaskHelper {
     $projects = $fields['projects'];
 
     $sql = "update tt_tasks set name = ".$mdb2->quote($name).", description = ".$mdb2->quote($description).
-      ", status = $status where id = $task_id and group_id = $user->group_id";
+      ", status = $status where id = $task_id and group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       die($affected->getMessage());
@@ -211,7 +213,8 @@ class ttTaskHelper {
       die($affected->getMessage());
     if (count($projects) > 0)
       foreach ($projects as $p_id) {
-        $sql = "insert into tt_project_task_binds (project_id, task_id) values($p_id, $task_id)";
+        $sql = "insert into tt_project_task_binds (project_id, task_id, group_id, org_id)".
+          " values($p_id, $task_id, $group_id, $org_id)";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
           die($affected->getMessage());
@@ -221,7 +224,7 @@ class ttTaskHelper {
     // We need to either delete or insert task id in all affected projects.
     
     // Get all not deleted projects for group.
-    $sql = "select id, tasks from tt_projects where group_id = $user->group_id and status is not NULL";
+    $sql = "select id, tasks from tt_projects where group_id = $group_id and status is not NULL";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))
       die($res->getMessage());

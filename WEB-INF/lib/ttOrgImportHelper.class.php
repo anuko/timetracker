@@ -204,8 +204,8 @@ class ttOrgImportHelper {
         foreach ($tasks as $id)
           $mapped_tasks[] = $this->currentGroupTaskMap[$id];
 
-        $project_id = ttProjectHelper::insert(array(
-          'group_id' => $this->current_group_id,
+        $project_id = ttProjectHelper::insert(array( // TODO: continue refactoring, write a separate, simple function to import projects
+          'group_id' => $this->current_group_id,     // because ttProjectHelper::insert is complicated.
           'org_id' => $this->org_id,
           'name' => $attrs['NAME'],
           'description' => $attrs['DESCRIPTION'],
