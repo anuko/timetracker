@@ -431,12 +431,24 @@ class ttOrgImportHelper {
         return;
       }
 
+      if ($name == 'PREDEFINED_EXPENSE') {
+        if (!$this->insertPredefinedExpense(array(
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'name' => $attrs['NAME'],
+          'cost' => $attrs['COST']))) {
+          $this->errors->add($i18n->get('error.db'));
+        }
+        return;
+      }
+
       if ($name == 'MONTHLY_QUOTA') {
-        if (!$this->insertMonthlyQuota($this->current_group_id,
-          // 'org_id' => $this->org_id, TODO: add this when org_id field is added to the table.
-          $attrs['YEAR'],
-          $attrs['MONTH'],
-          $attrs['MINUTES'])) {
+        if (!$this->insertMonthlyQuota(array(
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'year' => $attrs['YEAR'],
+          'month' => $attrs['MONTH'],
+          'minutes' => $attrs['MINUTES']))) {
           $this->errors->add($i18n->get('error.db'));
         }
         return;
@@ -640,9 +652,30 @@ class ttOrgImportHelper {
   }
 
   // insertMonthlyQuota - a helper function to insert a monthly quota.
-  private function insertMonthlyQuota($group_id, $year, $month, $minutes) {
+  private function insertMonthlyQuota($fields) {
     $mdb2 = getConnection();
-    $sql = "INSERT INTO tt_monthly_quotas (group_id, year, month, minutes) values ($group_id, $year, $month, $minutes)";
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $year = (int) $fields['year'];
+    $month = (int) $fields['month'];
+    $minutes = (int) $fields['minutes'];
+
+    $sql = "INSERT INTO tt_monthly_quotas (group_id, org_id, year, month, minutes)".
+      " values ($group_id, $org_id, $year, $month, $minutes)";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // insertPredefinedExpense - a helper function to insert a predefined expense.
+  private function insertPredefinedExpense($fields) {
+    $mdb2 = getConnection();
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $name = $mdb2->quote($fields['name']);
+    $cost = $mdb2->quote($fields['cost']);
+
+    $sql = "INSERT INTO tt_predefined_expenses (group_id, org_id, name, cost)".
+      " values ($group_id, $org_id, $name, $cost)";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }

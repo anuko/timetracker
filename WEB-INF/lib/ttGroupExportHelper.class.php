@@ -174,6 +174,24 @@ class ttGroupExportHelper {
     return false;
   }
 
+  // getPredefinedExpenses - obtains all predefined expenses for group.
+  function getPredefinedExpenses() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $result = array();
+    $sql = "select * from tt_predefined_expenses where group_id = $this->group_id"; // TODO: add " and org_id = $user->org_id" when possible.
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
   // writeData writes group data into file.
   function writeData() {
 
@@ -466,6 +484,19 @@ class ttGroupExportHelper {
     fwrite($this->file, $this->indentation."  </expense_items>\n");
     unset($expense_items);
     unset($expense_item_part);
+
+    // Write predefined expenses.
+    $predefined_expenses = $this->getPredefinedExpenses();
+    fwrite($this->file, $this->indentation."  <predefined_expenses>\n");
+    foreach ($predefined_expenses as $predefined_expense) {
+      $predefined_expense_part = $this->indentation.'    '."<predefined_expense name=\"".htmlspecialchars($predefined_expense['name'])."\"";
+      $predefined_expense_part .= " cost=\"".$predefined_expense['cost']."\"";
+      $predefined_expense_part .= "></predefined_expense>\n";
+      fwrite($this->file, $predefined_expense_part);
+    }
+    fwrite($this->file, $this->indentation."  </predefined_expenses>\n");
+    unset($predefined_expenses);
+    unset($predefined_expense_part);
 
     // Write monthly quotas.
     $quotas = ttTeamHelper::getMonthlyQuotas($this->group_id);
