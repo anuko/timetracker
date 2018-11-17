@@ -84,11 +84,17 @@ class ttOrgHelper {
   }
 
   // deleteOrg deletes data for the entire organization from database permanently.
-  static function deleteOrg() {
-    return false; // Work in progress, currently not implemented.
-
+  // Work in progress, currently not fully implemented.
+  static function deleteOrg($org_id) {
     // We shall do it in a straightforward way by a delete operation from all tables by org_id.
     // However, at this time not all tables have org_id.
     // So, we need to add the field as we write code here.
+
+    // Delete monthly quotas.
+    $sql = "delete from tt_monthly_quotas where org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    return true; // Work in progress, currently not fully implemented.
   }
 }

@@ -703,6 +703,11 @@ class ttTeamHelper {
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
+    // Delete monthly quotas.
+    $sql = "delete from tt_monthly_quotas where group_id = $group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
     // Delete group.
     $sql = "delete from tt_groups where id = $group_id";
     $affected = $mdb2->exec($sql);
