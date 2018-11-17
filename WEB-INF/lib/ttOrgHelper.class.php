@@ -90,6 +90,11 @@ class ttOrgHelper {
     // However, at this time not all tables have org_id.
     // So, we need to add the field as we write code here.
 
+    // Delete predefined expenses.
+    $sql = "delete from tt_predefined_expenses where org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
     // Delete monthly quotas.
     $sql = "delete from tt_monthly_quotas where org_id = $org_id";
     $affected = $mdb2->exec($sql);

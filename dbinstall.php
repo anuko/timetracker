@@ -1031,6 +1031,7 @@ if ($_POST) {
     setChange("OPTIMIZE TABLE tt_invoices");
     setChange("OPTIMIZE TABLE tt_log");
     setChange("OPTIMIZE TABLE tt_monthly_quotas");
+    setChange("OPTIMIZE TABLE tt_predefined_expenses");
     setChange("OPTIMIZE TABLE tt_project_task_binds");
     setChange("OPTIMIZE TABLE tt_projects");
     setChange("OPTIMIZE TABLE tt_tasks");
