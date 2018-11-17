@@ -415,11 +415,11 @@ class ttOrgImportHelper {
 
       if ($name == 'EXPENSE_ITEM') {
         // We get here when processing <expense_item> tags for the current group.
-        $expense_item_id = ttExpenseHelper::insert(array(
+        $expense_item_id = $this->insertExpense(array(
           'date' => $attrs['DATE'],
           'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
           'group_id' => $this->current_group_id,
-          // 'org_id' => $this->org_id, TODO: add this when org_id field is added to the table.
+          'org_id' => $this->org_id,
           'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
           'project_id' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
           'name' => $attrs['NAME'],
@@ -676,6 +676,32 @@ class ttOrgImportHelper {
 
     $sql = "INSERT INTO tt_predefined_expenses (group_id, org_id, name, cost)".
       " values ($group_id, $org_id, $name, $cost)";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // insertExpense - a helper function to insert an expense item.
+  private function insertExpense($fields) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $date = $fields['date'];
+    $user_id = (int) $fields['user_id'];
+    $client_id = $fields['client_id'];
+    $project_id = $fields['project_id'];
+    $name = $fields['name'];
+    $cost = str_replace(',', '.', $fields['cost']);
+    $invoice_id = $fields['invoice_id'];
+    $status = $fields['status'];
+    $paid = (int) $fields['paid'];
+    $created = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
+
+    $sql = "insert into tt_expense_items".
+      " (date, user_id, group_id, org_id, client_id, project_id, name, cost, invoice_id, paid, created, created_ip, created_by, status)".
+      " values (".$mdb2->quote($date).", $user_id, $group_id, $org_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).
+      ", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).", $paid $created, ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
