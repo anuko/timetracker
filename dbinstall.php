@@ -1002,6 +1002,7 @@ if ($_POST) {
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.15', modified = now() where param_name = 'version_db' and param_value = '1.18.14'");
     setChange("ALTER TABLE `tt_predefined_expenses` ADD `org_id` int(11) default NULL AFTER `group_id`");
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.16', modified = now() where param_name = 'version_db' and param_value = '1.18.15'");
+    setChange("UPDATE `tt_predefined_expenses` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.16') set org_id = group_id where org_id is null");
 
     // TODO: this does not work as we just introduced group_id and it is NULL. Same for tt_project_task_binds. Improve.
     // setChange("UPDATE `tt_user_project_binds` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.12') set org_id = group_id where org_id is null");

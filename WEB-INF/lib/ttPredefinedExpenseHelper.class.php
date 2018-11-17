@@ -73,14 +73,15 @@ class ttPredefinedExpenseHelper {
 
     $mdb2 = getConnection();
 
-    $group_id = (int) $fields['group_id'];
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
     $name = $fields['name'];
     $cost = $fields['cost'];
     if ('.' != $user->decimal_mark)
       $cost = str_replace($user->decimal_mark, '.', $cost);
 
-    $sql = "insert into tt_predefined_expenses (group_id, name, cost)
-      values ($group_id, ".$mdb2->quote($name).", ".$mdb2->quote($cost).")";
+    $sql = "insert into tt_predefined_expenses (group_id, org_id, name, cost)".
+      " values ($group_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($cost).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -95,15 +96,16 @@ class ttPredefinedExpenseHelper {
 
     $mdb2 = getConnection();
 
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
     $predefined_expense_id = (int) $fields['id'];
-    $group_id = (int) $fields['group_id'];
     $name = $fields['name'];
     $cost = $fields['cost'];
     if ('.' != $user->decimal_mark)
       $cost = str_replace($user->decimal_mark, '.', $cost);
 
     $sql = "update tt_predefined_expenses set name = ".$mdb2->quote($name).", cost = ".$mdb2->quote($cost).
-      " where id = $predefined_expense_id and group_id = $group_id";
+      " where id = $predefined_expense_id and group_id = $group_id"; // TODO: add org_id when possible.
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
