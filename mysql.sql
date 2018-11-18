@@ -177,6 +177,7 @@ CREATE TABLE `tt_project_task_binds` (
 # Indexes for tt_project_task_binds.
 create index project_idx on tt_project_task_binds(project_id);
 create index task_idx on tt_project_task_binds(task_id);
+create unique index project_tax_idx on tt_project_task_binds(project_id, task_id);
 
 
 #
@@ -472,4 +473,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.17', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.18', now()); # TODO: change when structure changes.
