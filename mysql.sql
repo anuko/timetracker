@@ -177,7 +177,7 @@ CREATE TABLE `tt_project_task_binds` (
 # Indexes for tt_project_task_binds.
 create index project_idx on tt_project_task_binds(project_id);
 create index task_idx on tt_project_task_binds(task_id);
-create unique index project_tax_idx on tt_project_task_binds(project_id, task_id);
+create unique index project_task_idx on tt_project_task_binds(project_id, task_id);
 
 
 #
