@@ -296,6 +296,7 @@ class ttGroupExportHelper {
     // Write projects.
     fwrite($this->file, $this->indentation."  <projects>\n");
     foreach ($projects as $project_item) {
+      $tasks_str = null;
       if($project_item['tasks']){
         $tasks = explode(',', $project_item['tasks']);
         $tasks_mapped = array();
