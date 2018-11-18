@@ -1007,6 +1007,7 @@ if ($_POST) {
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.17', modified = now() where param_name = 'version_db' and param_value = '1.18.16'");
     setChange("UPDATE `tt_expense_items` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.17') set org_id = group_id where org_id is null");
     setChange("update `tt_user_project_binds` upb inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.17') inner join `tt_users` u on u.id = upb.user_id set upb.group_id = u.group_id, upb.org_id = u.org_id where upb.org_id is null");
+    setChange("update `tt_project_task_binds` ptb inner join tt_site_config sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.17') inner join `tt_projects` p on p.id = ptb.project_id set ptb.group_id = p.group_id, ptb.org_id = p.org_id where ptb.org_id is null");
   }
 
   if ($_POST["cleanup"]) {
