@@ -957,7 +957,7 @@ if ($_POST) {
     print "Updated $tt_expense_items_updated tt_expense_items records...<br>\n";
   }
 
-  if ($_POST["convert11797to11817"]) {
+  if ($_POST["convert11797to11818"]) {
     setChange("ALTER TABLE `tt_fav_reports` CHANGE `group_by` `group_by1` varchar(20) default NULL");
     setChange("ALTER TABLE `tt_fav_reports` ADD `group_by2` varchar(20) default NULL AFTER `group_by1`");
     setChange("ALTER TABLE `tt_fav_reports` ADD `group_by3` varchar(20) default NULL AFTER `group_by2`");
@@ -1009,6 +1009,7 @@ if ($_POST) {
     setChange("update `tt_user_project_binds` upb inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.17') inner join `tt_users` u on u.id = upb.user_id set upb.group_id = u.group_id, upb.org_id = u.org_id where upb.org_id is null");
     setChange("update `tt_project_task_binds` ptb inner join tt_site_config sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.17') inner join `tt_projects` p on p.id = ptb.project_id set ptb.group_id = p.group_id, ptb.org_id = p.org_id where ptb.org_id is null");
     setChange("create unique index project_task_idx on tt_project_task_binds(project_id, task_id)");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.18', modified = now() where param_name = 'version_db' and param_value = '1.18.17'");
   }
 
   if ($_POST["cleanup"]) {
@@ -1055,7 +1056,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.18.17)</b>
+    <td width="80%"><b>Create database structure (v1.18.18)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -1100,8 +1101,8 @@ if ($_POST) {
   </tr>
   </tr>
   <tr valign="top">
-    <td>Update database structure (v1.17.97 to v1.18.17)</td>
-    <td><input type="submit" name="convert11797to11817" value="Update"></td>
+    <td>Update database structure (v1.17.97 to v1.18.18)</td>
+    <td><input type="submit" name="convert11797to11818" value="Update"></td>
   </tr>
 </table>
 
