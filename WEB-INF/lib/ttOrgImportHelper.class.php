@@ -29,7 +29,6 @@
 import('ttUserHelper');
 import('ttRoleHelper');
 import('ttTaskHelper');
-import('ttProjectHelper');
 import('ttClientHelper');
 import('ttInvoiceHelper');
 import('ttTimeHelper');
@@ -200,12 +199,14 @@ class ttOrgImportHelper {
         // We get here when processing <project> tags for the current group.
 
         // Prepare a list of task ids.
-        $tasks = explode(',', $attrs['TASKS']);
-        foreach ($tasks as $id)
-          $mapped_tasks[] = $this->currentGroupTaskMap[$id];
+        if ($attrs['TASKS']) {
+          $tasks = explode(',', $attrs['TASKS']);
+          foreach ($tasks as $id)
+            $mapped_tasks[] = $this->currentGroupTaskMap[$id];
+        }
 
-        $project_id = ttProjectHelper::insert(array( // TODO: continue refactoring, write a separate, simple function to import projects
-          'group_id' => $this->current_group_id,     // because ttProjectHelper::insert is complicated.
+        $project_id = $this->insertProject(array(
+          'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
           'name' => $attrs['NAME'],
           'description' => $attrs['DESCRIPTION'],
@@ -704,5 +705,45 @@ class ttOrgImportHelper {
       ", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).", $paid $created, ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // insertProject - a helper function to insert a project as well as project to task binds.
+  private function insertProject($fields)
+  {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+
+    $name = $fields['name'];
+    $description = $fields['description'];
+    $tasks = $fields['tasks'];
+    $comma_separated = implode(',', $tasks); // This is a comma-separated list of associated task ids.
+    $status = $fields['status'];
+
+    $sql = "insert into tt_projects (group_id, org_id, name, description, tasks, status)
+      values ($group_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($description).", ".$mdb2->quote($comma_separated).", ".$mdb2->quote($status).")";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    $last_id = 0;
+    $sql = "select last_insert_id() as last_insert_id";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $last_id = $val['last_insert_id'];
+
+    // Insert binds into tt_project_task_binds table.
+    if (is_array($tasks)) {
+      foreach ($tasks as $task_id) {
+        $sql = "insert into tt_project_task_binds (project_id, task_id, group_id, org_id)".
+          " values($last_id, $task_id, $group_id, $org_id)";
+        $affected = $mdb2->exec($sql);
+        if (is_a($affected, 'PEAR_Error'))
+          return false;
+      }
+    }
+
+    return $last_id;
   }
 }
