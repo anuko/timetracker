@@ -254,6 +254,8 @@ CREATE TABLE `tt_fav_reports` (
   `id` int(11) NOT NULL auto_increment,                  # favorite report id
   `name` varchar(200) NOT NULL,                          # favorite report name
   `user_id` int(11) NOT NULL,                            # user id favorite report belongs to
+  `group_id` int(11) default NULL,                       # group id
+  `org_id` int(11) default NULL,                         # organization id
   `report_spec` text default NULL,                       # future replacement field for all report settings
   `client_id` int(11) default NULL,                      # client id (if selected)
   `cf_1_option_id` int(11) default NULL,                 # custom field 1 option id (if selected)
@@ -473,4 +475,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.18', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.19', now()); # TODO: change when structure changes.
