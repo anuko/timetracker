@@ -49,6 +49,7 @@ class ttGroupExportHelper {
   var $logMap     = array();
   var $customFieldMap = array();
   var $customFieldOptionMap = array();
+  var $favReportMap = array();
 
   // Constructor.
   function __construct($group_id, $file, $indentation) {
@@ -101,6 +102,9 @@ class ttGroupExportHelper {
     }
     return false;
   }
+
+  // TODO: write a generic (private?) get function for exclusive use in this class, that obtains
+  // all fields from a given table.
 
   // getRoles - obtains all roles defined for group.
   function getRoles() {
@@ -174,13 +178,49 @@ class ttGroupExportHelper {
     return false;
   }
 
+  // getFavReports - obtains all favorite reports defined for group.
+  function getFavReports() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $result = array();
+    $sql = "select * from tt_fav_reports where group_id = $this->group_id and org_id = $user->org_id";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
   // getPredefinedExpenses - obtains all predefined expenses for group.
   function getPredefinedExpenses() {
     global $user;
     $mdb2 = getConnection();
 
     $result = array();
-    $sql = "select * from tt_predefined_expenses where group_id = $this->group_id"; // TODO: add " and org_id = $user->org_id" when possible.
+    $sql = "select * from tt_predefined_expenses where group_id = $this->group_id and org_id = $user->org_id";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
+  // getNotifications - obtains all notifications defined for group.
+  function getNotifications() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $result = array();
+    $sql = "select * from tt_cron where group_id = $this->group_id and org_id = $user->org_id";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -262,6 +302,11 @@ class ttGroupExportHelper {
     $custom_field_options = ttTeamHelper::getAllCustomFieldOptions($this->group_id);
     foreach ($custom_field_options as $key=>$option)
       $this->customFieldOptionMap[$option['id']] = $key + 1;
+
+    // Prepare favorite report map.
+    $fav_reports = $this->getFavReports();
+    foreach ($fav_reports as $key=>$fav_report)
+      $this->favReportMap[$fav_report['id']] = $key + 1;
 
     // Write roles.
     fwrite($this->file, $this->indentation."  <roles>\n");
@@ -514,7 +559,7 @@ class ttGroupExportHelper {
     unset($quota_part);
 
     // Write fav reports.
-    $fav_reports = ttTeamHelper::getFavReports($this->group_id);
+    $fav_reports = $this->getFavReports();
     fwrite($this->file, $this->indentation."  <fav_reports>\n");
     foreach ($fav_reports as $fav_report) {
       $user_list = '';
@@ -525,7 +570,8 @@ class ttGroupExportHelper {
             $user_list .= (strlen($user_list) == 0? '' : ',').$this->userMap[$v];
         }
       }
-      $fav_report_part = $this->indentation.'    '."<fav_report user_id=\"".$this->userMap[$fav_report['user_id']]."\"";
+      $fav_report_part = $this->indentation.'    '."<fav_report id=\"".$this->favReportMap[$fav_report['id']]."\"";
+      $fav_report_part .= " user_id=\"".$this->userMap[$fav_report['user_id']]."\"";
       $fav_report_part .= " name=\"".htmlspecialchars($fav_report['name'])."\"";
       $fav_report_part .= " client_id=\"".$this->clientMap[$fav_report['client_id']]."\"";
       $fav_report_part .= " cf_1_option_id=\"".$this->customFieldOptionMap[$fav_report['cf_1_option_id']]."\"";
@@ -559,6 +605,26 @@ class ttGroupExportHelper {
     fwrite($this->file, $this->indentation."  </fav_reports>\n");
     unset($fav_reports);
     unset($fav_report_part);
+
+    // Write notifications.
+    $notifications = $this->getNotifications();
+    fwrite($this->file, $this->indentation."  <notifications>\n");
+    foreach ($notifications as $notification) {
+      $notification_part = $this->indentation.'    '."<notification cron_spec=\"".$notification['cron_spec']."\"";
+      $notification_part .= " last=\"".$notification['last']."\"";
+      $notification_part .= " next=\"".$notification['next']."\"";
+      $notification_part .= " report_id=\"".$this->favReportMap[$notification['report_id']]."\"";
+      $notification_part .= " email=\"".htmlspecialchars($notification['email'])."\"";
+      $notification_part .= " cc=\"".htmlspecialchars($notification['cc'])."\"";
+      $notification_part .= " subject=\"".htmlspecialchars($notification['subject'])."\"";
+      $notification_part .= " report_condition=\"".htmlspecialchars($notification['report_condition'])."\"";
+      $notification_part .= " status=\"".$notification['status']."\"";
+      $notification_part .= "></notification>\n";
+      fwrite($this->file, $notification_part);
+    }
+    fwrite($this->file, $this->indentation."  </notifications>\n");
+    unset($notifications);
+    unset($notification_part);
 
     // We are mostly done with writing this group data, destroy all maps.
     unset($this->roleMap);
