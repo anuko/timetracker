@@ -296,6 +296,7 @@ CREATE TABLE `tt_fav_reports` (
 CREATE TABLE `tt_cron` (
   `id` int(11) NOT NULL auto_increment,         # entry id
   `group_id` int(11) NOT NULL,                  # group id
+  `org_id` int(11) default NULL,                # organization id
   `cron_spec` varchar(255) NOT NULL,            # cron specification, "0 1 * * *" for "daily at 01:00"
   `last` int(11) default NULL,                  # UNIX timestamp of when job was last run
   `next` int(11) default NULL,                  # UNIX timestamp of when to run next job
@@ -475,4 +476,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.19', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.20', now()); # TODO: change when structure changes.
