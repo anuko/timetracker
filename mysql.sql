@@ -351,6 +351,8 @@ create unique index client_project_idx on tt_client_project_binds(client_id, pro
 #
 CREATE TABLE `tt_config` (
   `user_id` int(11) NOT NULL,            # user id
+  `group_id` int(11) default NULL,       # group id
+  `org_id` int(11) default NULL,         # organization id
   `param_name` varchar(32) NOT NULL,     # parameter name
   `param_value` varchar(80) default NULL # parameter value
 );
@@ -479,4 +481,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.21', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.22', now()); # TODO: change when structure changes.
