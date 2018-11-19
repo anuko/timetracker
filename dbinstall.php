@@ -1021,6 +1021,7 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_client_project_binds` ADD `org_id` int(11) default NULL AFTER `group_id`");
     setChange("update `tt_client_project_binds` cpb inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.20') inner join `tt_clients` c on c.id = cpb.client_id set cpb.group_id = c.group_id, cpb.org_id = c.org_id where cpb.org_id is null");
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.21', modified = now() where param_name = 'version_db' and param_value = '1.18.20'");
+    setChange("create unique index client_project_idx on tt_client_project_binds(client_id, project_id)");
   }
 
   if ($_POST["cleanup"]) {

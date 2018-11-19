@@ -342,6 +342,7 @@ CREATE TABLE `tt_client_project_binds` (
 # Indexes for tt_client_project_binds.
 create index client_idx on tt_client_project_binds(client_id);
 create index project_idx on tt_client_project_binds(project_id);
+create unique index client_project_idx on tt_client_project_binds(client_id, project_id);
 
 
 #
