@@ -1026,6 +1026,12 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_config` ADD `org_id` int(11) default NULL AFTER `group_id`");
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.22', modified = now() where param_name = 'version_db' and param_value = '1.18.21'");
     setChange("update `tt_config` c inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.22') inner join `tt_users` u on u.id = c.user_id set c.group_id = u.group_id, c.org_id = u.org_id where c.org_id is null");
+    setChange("ALTER TABLE `tt_custom_fields` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("ALTER TABLE `tt_custom_field_options` ADD `group_id` int(11) default NULL AFTER `id`");
+    setChange("ALTER TABLE `tt_custom_field_options` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("ALTER TABLE `tt_custom_field_log` ADD `group_id` int(11) default NULL AFTER `id`");
+    setChange("ALTER TABLE `tt_custom_field_log` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.23', modified = now() where param_name = 'version_db' and param_value = '1.18.22'");
   }
 
   if ($_POST["cleanup"]) {

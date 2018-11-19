@@ -369,6 +369,7 @@ create unique index param_idx on tt_config(user_id, param_name);
 CREATE TABLE `tt_custom_fields` (
   `id` int(11) NOT NULL auto_increment,    # custom field id
   `group_id` int(11) NOT NULL,             # group id
+  `org_id` int(11) default NULL,           # organization id
   `type` tinyint(4) NOT NULL default 0,    # custom field type (text or dropdown)
   `label` varchar(32) NOT NULL default '', # custom field label
   `required` tinyint(4) default 0,         # whether this custom field is mandatory for time records
@@ -382,6 +383,8 @@ CREATE TABLE `tt_custom_fields` (
 #
 CREATE TABLE `tt_custom_field_options` (
   `id` int(11) NOT NULL auto_increment,    # option id
+  `group_id` int(11) default NULL,         # group id
+  `org_id` int(11) default NULL,           # organization id
   `field_id` int(11) NOT NULL,             # custom field id
   `value` varchar(32) NOT NULL default '', # option value
   PRIMARY KEY  (`id`)
@@ -394,6 +397,8 @@ CREATE TABLE `tt_custom_field_options` (
 #
 CREATE TABLE `tt_custom_field_log` (
   `id` bigint NOT NULL auto_increment, # custom field log id
+  `group_id` int(11) default NULL,     # group id
+  `org_id` int(11) default NULL,       # organization id
   `log_id` bigint NOT NULL,            # id of a record in tt_log this record corresponds to
   `field_id` int(11) NOT NULL,         # custom field id
   `option_id` int(11) default NULL,    # Option id. Used for dropdown custom fields.
@@ -481,4 +486,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.22', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.23', now()); # TODO: change when structure changes.
