@@ -703,6 +703,11 @@ class ttTeamHelper {
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
+    // Delete cron entries.
+    $sql = "delete from tt_cron where group_id = $group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
     // Delete predefined expenses.
     $sql = "delete from tt_predefined_expenses where group_id = $group_id";
     $affected = $mdb2->exec($sql);

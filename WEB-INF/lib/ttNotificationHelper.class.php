@@ -65,9 +65,11 @@ class ttNotificationHelper {
   // insert function inserts a new notification into database.
   static function insert($fields)
   {
+    global $user;
     $mdb2 = getConnection();
 
-    $group_id = (int) $fields['group_id'];
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
     $cron_spec = $fields['cron_spec'];
     $next = (int) $fields['next'];
     $report_id = (int) $fields['report_id'];
@@ -77,8 +79,8 @@ class ttNotificationHelper {
     $report_condition = $fields['report_condition'];
     $status = $fields['status'];
     
-    $sql = "insert into tt_cron (group_id, cron_spec, next, report_id, email, cc, subject, report_condition, status)
-      values ($group_id, ".$mdb2->quote($cron_spec).", $next, $report_id, ".$mdb2->quote($email).", ".$mdb2->quote($cc).", ".$mdb2->quote($subject).", ".$mdb2->quote($report_condition).", ".$mdb2->quote($status).")";
+    $sql = "insert into tt_cron (group_id, org_id, cron_spec, next, report_id, email, cc, subject, report_condition, status)".
+      " values ($group_id, $org_id, ".$mdb2->quote($cron_spec).", $next, $report_id, ".$mdb2->quote($email).", ".$mdb2->quote($cc).", ".$mdb2->quote($subject).", ".$mdb2->quote($report_condition).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;

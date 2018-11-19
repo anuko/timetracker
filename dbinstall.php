@@ -1016,6 +1016,7 @@ if ($_POST) {
     setChange("update `tt_fav_reports` fr inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.19') inner join `tt_users` u on u.id = fr.user_id set fr.group_id = u.group_id, fr.org_id = u.org_id where fr.org_id is null");
     setChange("ALTER TABLE `tt_cron` ADD `org_id` int(11) default NULL AFTER `group_id`");
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.20', modified = now() where param_name = 'version_db' and param_value = '1.18.19'");
+    setChange("UPDATE `tt_cron` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.20') set org_id = group_id where org_id is null");
   }
 
   if ($_POST["cleanup"]) {
