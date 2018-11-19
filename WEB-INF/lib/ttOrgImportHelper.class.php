@@ -238,7 +238,7 @@ class ttOrgImportHelper {
             $mapped_projects[] = $this->currentGroupProjectMap[$id];
         }
 
-        $client_id = ttClientHelper::insert(array(
+        $client_id = $this->insertClient(array(
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
           'name' => $attrs['NAME'],
@@ -779,6 +779,48 @@ class ttOrgImportHelper {
     return $last_id;
   }
 
+  // The insertClient function inserts a new client as well as client to project binds.
+  private function insertClient($fields)
+  {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $name = $fields['name'];
+    $address = $fields['address'];
+    $tax = $fields['tax'];
+    $projects = $fields['projects'];
+    if ($projects)
+      $comma_separated = implode(',', $projects); // This is a comma-separated list of associated projects ids.
+    $status = $fields['status'];
+
+    $tax = str_replace(',', '.', $tax);
+    if ($tax == '') $tax = 0;
+
+    $sql = "insert into tt_clients (group_id, org_id, name, address, tax, projects, status)".
+      " values ($group_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($address).", $tax, ".$mdb2->quote($comma_separated).", ".$mdb2->quote($status).")";
+
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    $last_id = 0;
+    $sql = "select last_insert_id() as last_insert_id";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $last_id = $val['last_insert_id'];
+
+    if (count($projects) > 0)
+      foreach ($projects as $p_id) {
+        $sql = "insert into tt_client_project_binds (client_id, project_id, group_id, org_id) values($last_id, $p_id, $group_id, $org_id)";
+        $affected = $mdb2->exec($sql);
+        if (is_a($affected, 'PEAR_Error'))
+          return false;
+      }
+
+    return $last_id;
+  }
+
   // insertFavReport - inserts a favorite report in database.
   private function insertFavReport($fields) {
     $mdb2 = getConnection();
@@ -820,7 +862,7 @@ class ttOrgImportHelper {
   }
 
   // insertNotification function inserts a new notification into database.
-  static function insertNotification($fields)
+  private function insertNotification($fields)
   {
     $mdb2 = getConnection();
 
