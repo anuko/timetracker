@@ -957,7 +957,7 @@ if ($_POST) {
     print "Updated $tt_expense_items_updated tt_expense_items records...<br>\n";
   }
 
-  if ($_POST["convert11797to11820"]) {
+  if ($_POST["convert11797to11821"]) {
     setChange("ALTER TABLE `tt_fav_reports` CHANGE `group_by` `group_by1` varchar(20) default NULL");
     setChange("ALTER TABLE `tt_fav_reports` ADD `group_by2` varchar(20) default NULL AFTER `group_by1`");
     setChange("ALTER TABLE `tt_fav_reports` ADD `group_by3` varchar(20) default NULL AFTER `group_by2`");
@@ -1017,6 +1017,8 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_cron` ADD `org_id` int(11) default NULL AFTER `group_id`");
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.20', modified = now() where param_name = 'version_db' and param_value = '1.18.19'");
     setChange("UPDATE `tt_cron` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.20') set org_id = group_id where org_id is null");
+    setChange("ALTER TABLE `tt_client_project_binds` ADD `group_id` int(11) default NULL AFTER `project_id`");
+    setChange("ALTER TABLE `tt_client_project_binds` ADD `org_id` int(11) default NULL AFTER `group_id`");
   }
 
   if ($_POST["cleanup"]) {
@@ -1034,6 +1036,7 @@ if ($_POST) {
     setChange("OPTIMIZE TABLE tt_client_project_binds");
     setChange("OPTIMIZE TABLE tt_clients");
     setChange("OPTIMIZE TABLE tt_config");
+    setChange("OPTIMIZE TABLE tt_cron");
     setChange("OPTIMIZE TABLE tt_custom_field_log");
     setChange("OPTIMIZE TABLE tt_custom_field_options");
     setChange("OPTIMIZE TABLE tt_custom_fields"); 
@@ -1063,7 +1066,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.18.20)</b>
+    <td width="80%"><b>Create database structure (v1.18.21)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -1108,8 +1111,8 @@ if ($_POST) {
   </tr>
   </tr>
   <tr valign="top">
-    <td>Update database structure (v1.17.97 to v1.18.20)</td>
-    <td><input type="submit" name="convert11797to11820" value="Update"></td>
+    <td>Update database structure (v1.17.97 to v1.18.21)</td>
+    <td><input type="submit" name="convert11797to11821" value="Update"></td>
   </tr>
 </table>
 
