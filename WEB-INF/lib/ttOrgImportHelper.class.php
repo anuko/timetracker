@@ -364,9 +364,9 @@ class ttOrgImportHelper {
 
       if ($name == 'CUSTOM_FIELD') {
         // We get here when processing <custom_field> tags for the current group.
-        $custom_field_id = ttCustomFieldHelper::insertField(array(
+        $custom_field_id = $this->insertCustomField(array(
           'group_id' => $this->current_group_id,
-          // 'org_id' => $this->org_id, TODO: add this when org_id field is added to the table.
+          'org_id' => $this->org_id,
           'type' => $attrs['TYPE'],
           'label' => $attrs['LABEL'],
           'required' => $attrs['REQUIRED'],
@@ -912,5 +912,31 @@ class ttOrgImportHelper {
       " values ($user_id, $group_id, $org_id, ".$mdb2->quote($param_name).", ".$mdb2->quote($param_value).")";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // insertCustomField - a helper function to insert a custom field.
+  private function insertCustomField($fields) {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $type = (int) $fields['type'];
+    $label = $fields['label'];
+    $required = (int) $fields['required'];
+    $status = $fields['status'];
+
+    $sql = "insert into tt_custom_fields".
+      " (group_id, org_id, type, label, required, status)".
+      " values($group_id, $org_id, $type, ".$mdb2->quote($label).", $required, ".$mdb2->quote($status).")";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    $last_id = 0;
+    $sql = "select last_insert_id() as last_insert_id";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $last_id = $val['last_insert_id'];
+    return $last_id;
   }
 }

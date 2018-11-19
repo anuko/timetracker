@@ -274,7 +274,10 @@ class CustomFields {
   static function insertField($field_name, $field_type, $required) {
     global $user;
     $mdb2 = getConnection();
-    $sql = "insert into tt_custom_fields (group_id, type, label, required, status) values($user->group_id, $field_type, ".$mdb2->quote($field_name).", $required, 1)";
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
+    $sql = "insert into tt_custom_fields (group_id, org_id, type, label, required, status)".
+      " values($group_id, $org_id, $field_type, ".$mdb2->quote($field_name).", $required, 1)";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
