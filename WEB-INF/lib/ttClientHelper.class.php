@@ -195,7 +195,7 @@ class ttClientHelper {
 
     if (count($projects) > 0)
       foreach ($projects as $p_id) {
-        $sql = "insert into tt_client_project_binds (client_id, project_id) values($last_id, $p_id)";
+        $sql = "insert into tt_client_project_binds (client_id, project_id, group_id, org_id) values($last_id, $p_id, $group_id, $org_id)";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
           return false;
