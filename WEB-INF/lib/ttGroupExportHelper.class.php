@@ -72,7 +72,7 @@ class ttGroupExportHelper {
   }
 
   // getGroupData obtains group attributes for export.
-  function getGroupData() {
+  private function getGroupData() {
     global $user;
     $mdb2 = getConnection();
 
@@ -86,7 +86,7 @@ class ttGroupExportHelper {
   }
 
   // The getUsers obtains all users in group for the purpose of export.
-  function getUsers() {
+  private function getUsers() {
     global $user;
     $mdb2 = getConnection();
 
@@ -221,6 +221,24 @@ class ttGroupExportHelper {
 
     $result = array();
     $sql = "select * from tt_cron where group_id = $this->group_id and org_id = $user->org_id";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
+  // getRecordsFromTable - obtains all fields from a given table for a group.
+  function getRecordsFromTable($table_name) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $result = array();
+    $sql = "select * from $table_name where group_id = $this->group_id and org_id = $user->org_id";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -625,6 +643,20 @@ class ttGroupExportHelper {
     fwrite($this->file, $this->indentation."  </notifications>\n");
     unset($notifications);
     unset($notification_part);
+
+    // Write user config parameters.
+    $user_params = $this->getRecordsFromTable('tt_config');
+    fwrite($this->file, $this->indentation."  <user_params>\n");
+    foreach ($user_params as $user_param) {
+      $user_param_part = $this->indentation.'    '."<user_param user_id=\"".$this->userMap[$user_param['user_id']]."\"";
+      $user_param_part .= " param_name=\"".htmlspecialchars($user_param['param_name'])."\"";
+      $user_param_part .= " param_value=\"".htmlspecialchars($user_param['param_value'])."\"";
+      $user_param_part .= "></user_param>\n";
+      fwrite($this->file, $user_param_part);
+    }
+    fwrite($this->file, $this->indentation."  </user_params>\n");
+    unset($user_params);
+    unset($user_param_part);
 
     // We are mostly done with writing this group data, destroy all maps.
     unset($this->roleMap);
