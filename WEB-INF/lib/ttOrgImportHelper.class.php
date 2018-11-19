@@ -59,6 +59,7 @@ class ttOrgImportHelper {
   var $currentGroupLogMap     = array();
   var $currentGroupCustomFieldMap = array();
   var $currentGroupCustomFieldOptionMap = array();
+  var $currentGroupFavReportMap = array();
 
   // Constructor.
   function __construct(&$errors) {
@@ -455,6 +456,14 @@ class ttOrgImportHelper {
         return;
       }
 
+      if ($name == 'FAV_REPORTS') {
+        // If we get here, we have to recycle $currentGroupFavReportMap.
+        unset($this->currentGroupFavReportMap);
+        $this->currentGroupFavReportMap = array();
+        // Favorite report map is reconstructed after processing <fav_report> elements in XML. See below.
+        return;
+      }
+
       if ($name == 'FAV_REPORT') {
         $user_list = '';
         if (strlen($attrs['USERS']) > 0) {
@@ -462,7 +471,7 @@ class ttOrgImportHelper {
           foreach ($arr as $v)
             $user_list .= (strlen($user_list) == 0 ? '' : ',').$this->currentGroupUserMap[$v];
         }
-        if (!$this->insertFavReport(array(
+        $fav_report_id = $this->insertFavReport(array(
           'name' => $attrs['NAME'],
           'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
           'group_id' => $this->current_group_id,
@@ -492,10 +501,30 @@ class ttOrgImportHelper {
           'group_by1' => $attrs['GROUP_BY1'],
           'group_by2' => $attrs['GROUP_BY2'],
           'group_by3' => $attrs['GROUP_BY3'],
-          'chtotalsonly' => (int) $attrs['SHOW_TOTALS_ONLY']))) {
-           $this->errors->add($i18n->get('error.db'));
-         }
-         return;
+          'chtotalsonly' => (int) $attrs['SHOW_TOTALS_ONLY']));
+        if ($fav_report_id) {
+          // Add a mapping.
+          $this->currentGroupFavReportMap[$attrs['ID']] = $fav_report_id;
+          } else $this->errors->add($i18n->get('error.db'));
+        return;
+      }
+
+      if ($name == 'NOTIFICATION') {
+        if (!$this->insertNotification(array(
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'cron_spec' => $attrs['CRON_SPEC'],
+          'last' => $attrs['LAST'],
+          'next' => $attrs['NEXT'],
+          'report_id' => $this->currentGroupFavReportMap[$attrs['REPORT_ID']],
+          'email' => $attrs['EMAIL'],
+          'cc' => $attrs['CC'],
+          'subject' => $attrs['SUBJECT'],
+          'report_condition' => $attrs['REPORT_CONDITION'],
+          'status' => $attrs['STATUS']))) {
+          $this->errors->add($i18n->get('error.db'));
+        }
+        return;
       }
     }
   }
@@ -777,6 +806,39 @@ class ttOrgImportHelper {
       $fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".$fields['chcf_1'].", ".$fields['chunits'].", ".
       $mdb2->quote($fields['group_by1']).", ".$mdb2->quote($fields['group_by2']).", ".
       $mdb2->quote($fields['group_by3']).", ".$fields['chtotalsonly'].")";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    $sql = "select last_insert_id() as last_id";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+
+    $val = $res->fetchRow();
+    return $val['last_id'];
+  }
+
+  // insertNotification function inserts a new notification into database.
+  static function insertNotification($fields)
+  {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $cron_spec = $fields['cron_spec'];
+    $last = (int) $fields['last'];
+    $next = (int) $fields['next'];
+    $report_id = (int) $fields['report_id'];
+    $email = $fields['email'];
+    $cc = $fields['cc'];
+    $subject = $fields['subject'];
+    $report_condition = $fields['report_condition'];
+    $status = $fields['status'];
+
+    $sql = "insert into tt_cron".
+      " (group_id, org_id, cron_spec, last, next, report_id, email, cc, subject, report_condition, status)".
+      " values ($group_id, $org_id, ".$mdb2->quote($cron_spec).", $last, $next, $report_id, ".$mdb2->quote($email).", ".$mdb2->quote($cc).", ".$mdb2->quote($subject).", ".$mdb2->quote($report_condition).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
