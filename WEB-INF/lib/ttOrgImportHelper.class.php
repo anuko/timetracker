@@ -462,9 +462,11 @@ class ttOrgImportHelper {
           foreach ($arr as $v)
             $user_list .= (strlen($user_list) == 0 ? '' : ',').$this->currentGroupUserMap[$v];
         }
-        $fav_report_id = ttFavReportHelper::insertReport(array(
+        if (!$this->insertFavReport(array(
           'name' => $attrs['NAME'],
           'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
           'client' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
           'option' => $this->currentGroupCustomFieldOptionMap[$attrs['CF_1_OPTION_ID']],
           'project' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
@@ -490,8 +492,9 @@ class ttOrgImportHelper {
           'group_by1' => $attrs['GROUP_BY1'],
           'group_by2' => $attrs['GROUP_BY2'],
           'group_by3' => $attrs['GROUP_BY3'],
-          'chtotalsonly' => (int) $attrs['SHOW_TOTALS_ONLY']));
-         if (!$fav_report_id) $this->errors->add($i18n->get('error.db'));
+          'chtotalsonly' => (int) $attrs['SHOW_TOTALS_ONLY']))) {
+           $this->errors->add($i18n->get('error.db'));
+         }
          return;
       }
     }
@@ -745,5 +748,36 @@ class ttOrgImportHelper {
     }
 
     return $last_id;
+  }
+
+  // insertFavReport - inserts a favorite report in database.
+  private function insertFavReport($fields) {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+
+    $sql = "insert into tt_fav_reports".
+      " (name, user_id, group_id, org_id, client_id, cf_1_option_id, project_id, task_id,".
+      " billable, invoice, paid_status, users, period, period_start, period_end,".
+      " show_client, show_invoice, show_paid, show_ip,".
+      " show_project, show_start, show_duration, show_cost,".
+      " show_task, show_end, show_note, show_custom_field_1, show_work_units,".
+      " group_by1, group_by2, group_by3, show_totals_only)".
+      " values(".
+      $mdb2->quote($fields['name']).", ".$fields['user_id'].", $group_id, $org_id, ".
+      $mdb2->quote($fields['client']).", ".$mdb2->quote($fields['option']).", ".
+      $mdb2->quote($fields['project']).", ".$mdb2->quote($fields['task']).", ".
+      $mdb2->quote($fields['billable']).", ".$mdb2->quote($fields['invoice']).", ".
+      $mdb2->quote($fields['paid_status']).", ".
+      $mdb2->quote($fields['users']).", ".$mdb2->quote($fields['period']).", ".
+      $mdb2->quote($fields['from']).", ".$mdb2->quote($fields['to']).", ".
+      $fields['chclient'].", ".$fields['chinvoice'].", ".$fields['chpaid'].", ".$fields['chip'].", ".
+      $fields['chproject'].", ".$fields['chstart'].", ".$fields['chduration'].", ".$fields['chcost'].", ".
+      $fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".$fields['chcf_1'].", ".$fields['chunits'].", ".
+      $mdb2->quote($fields['group_by1']).", ".$mdb2->quote($fields['group_by2']).", ".
+      $mdb2->quote($fields['group_by3']).", ".$fields['chtotalsonly'].")";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
   }
 }

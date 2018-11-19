@@ -77,16 +77,21 @@ class ttFavReportHelper {
 
   // insertReport - stores reports settings in database.
   static function insertReport($fields) {
+    global $user;
     $mdb2 = getConnection();
 
-    $sql = "insert into tt_fav_reports (name, user_id, client_id, cf_1_option_id, project_id, task_id,
-      billable, invoice, paid_status, users, period, period_start, period_end,
-      show_client, show_invoice, show_paid, show_ip,
-      show_project, show_start, show_duration, show_cost,
-      show_task, show_end, show_note, show_custom_field_1, show_work_units,
-      group_by1, group_by2, group_by3, show_totals_only)
-      values(".
-      $mdb2->quote($fields['name']).", ".$fields['user_id'].", ".
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
+
+    $sql = "insert into tt_fav_reports".
+      " (name, user_id, group_id, org_id, client_id, cf_1_option_id, project_id, task_id,".
+      " billable, invoice, paid_status, users, period, period_start, period_end,".
+      " show_client, show_invoice, show_paid, show_ip,".
+      " show_project, show_start, show_duration, show_cost,".
+      " show_task, show_end, show_note, show_custom_field_1, show_work_units,".
+      " group_by1, group_by2, group_by3, show_totals_only)".
+      " values(".
+      $mdb2->quote($fields['name']).", ".$fields['user_id'].", $group_id, $org_id, ".
       $mdb2->quote($fields['client']).", ".$mdb2->quote($fields['option']).", ".
       $mdb2->quote($fields['project']).", ".$mdb2->quote($fields['task']).", ".
       $mdb2->quote($fields['billable']).", ".$mdb2->quote($fields['invoice']).", ".

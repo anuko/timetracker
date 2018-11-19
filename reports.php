@@ -298,7 +298,7 @@ if ($request->isPost()) {
     if (!ttValidString($bean->getAttribute('new_fav_report'))) $err->add($i18n->get('error.field'), $i18n->get('form.reports.save_as_favorite'));
 
     if ($err->no()) {
-      $id = ttFavReportHelper::saveReport($user->id, $bean);
+      $id = ttFavReportHelper::saveReport($user->id, $bean); // TODO: review "on behalf" situations (both user and group), redesign if needed.
       if (!$id)
         $err->add($i18n->get('error.db'));
       if ($err->no()) {
