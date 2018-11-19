@@ -526,6 +526,18 @@ class ttOrgImportHelper {
         }
         return;
       }
+
+      if ($name == 'USER_PARAM') {
+        if (!$this->insertUserParam(array(
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
+          'param_name' => $attrs['PARAM_NAME'],
+          'param_value' => $attrs['PARAM_VALUE']))) {
+          $this->errors->add($i18n->get('error.db'));
+        }
+        return;
+      }
     }
   }
 
@@ -881,6 +893,23 @@ class ttOrgImportHelper {
     $sql = "insert into tt_cron".
       " (group_id, org_id, cron_spec, last, next, report_id, email, cc, subject, report_condition, status)".
       " values ($group_id, $org_id, ".$mdb2->quote($cron_spec).", $last, $next, $report_id, ".$mdb2->quote($email).", ".$mdb2->quote($cc).", ".$mdb2->quote($subject).", ".$mdb2->quote($report_condition).", ".$mdb2->quote($status).")";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // insertUserParam - a helper function to insert a user parameter.
+  private function insertUserParam($fields) {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $user_id = (int) $fields['user_id'];
+    $param_name = $fields['param_name'];
+    $param_value = $fields['param_value'];
+
+    $sql = "insert into tt_config".
+      " (user_id, group_id, org_id, param_name, param_value)".
+      " values ($user_id, $group_id, $org_id, ".$mdb2->quote($param_name).", ".$mdb2->quote($param_value).")";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
