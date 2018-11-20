@@ -63,9 +63,14 @@ class CustomFields {
   }
 
   function insert($log_id, $field_id, $option_id, $value) {
-
+    global $user;
     $mdb2 = getConnection();
-    $sql = "insert into tt_custom_field_log (log_id, field_id, option_id, value) values($log_id, $field_id, ".$mdb2->quote($option_id).", ".$mdb2->quote($value).")";
+
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
+
+    $sql = "insert into tt_custom_field_log (group_id, org_id, log_id, field_id, option_id, value)".
+      " values($group_id, $org_id, $log_id, $field_id, ".$mdb2->quote($option_id).", ".$mdb2->quote($value).")";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }

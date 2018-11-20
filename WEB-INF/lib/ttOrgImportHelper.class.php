@@ -32,7 +32,6 @@ import('ttTaskHelper');
 import('ttClientHelper');
 import('ttInvoiceHelper');
 import('ttTimeHelper');
-import('ttCustomFieldHelper');
 import('ttExpenseHelper');
 import('ttFavReportHelper');
 
@@ -402,9 +401,9 @@ class ttOrgImportHelper {
 
       if ($name == 'CUSTOM_FIELD_LOG_ENTRY') {
         // We get here when processing <custom_field_log_entry> tags for the current group.
-        if (!ttCustomFieldHelper::insertLogEntry(array(
-          // 'group_id' => $this->current_group_id, TODO: add this when group_id field is added to the table.
-          // 'org_id' => $this->org_id, TODO: add this when org_id field is added to the table.
+        if (!$this->insertCustomFieldLogEntry(array(
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
           'log_id' => $this->currentGroupLogMap[$attrs['LOG_ID']],
           'field_id' => $this->currentGroupCustomFieldMap[$attrs['FIELD_ID']],
           'option_id' => $this->currentGroupCustomFieldOptionMap[$attrs['OPTION_ID']],
@@ -961,5 +960,23 @@ class ttOrgImportHelper {
     $val = $res->fetchRow();
     $last_id = $val['last_insert_id'];
     return $last_id;
+  }
+
+  // insertCustomFieldLogEntry - a helper function to insert a custom field log entry.
+  private function insertCustomFieldLogEntry($fields) {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $log_id = (int) $fields['log_id'];
+    $field_id = (int) $fields['field_id'];
+    $option_id = $fields['option_id'];
+    $value = $fields['value'];
+    $status = $fields['status'];
+
+    $sql = "insert into tt_custom_field_log (group_id, org_id, log_id, field_id, option_id, value, status)".
+      " values ($group_id, $org_id, $log_id, $field_id, ".$mdb2->quote($option_id).", ".$mdb2->quote($value).", ".$mdb2->quote($status).")";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
   }
 }
