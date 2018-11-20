@@ -387,6 +387,7 @@ CREATE TABLE `tt_custom_field_options` (
   `org_id` int(11) default NULL,           # organization id
   `field_id` int(11) NOT NULL,             # custom field id
   `value` varchar(32) NOT NULL default '', # option value
+  `status` tinyint(4) default 1,           # option status
   PRIMARY KEY  (`id`)
 );
 
@@ -486,4 +487,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.23', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.24', now()); # TODO: change when structure changes.

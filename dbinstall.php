@@ -957,7 +957,7 @@ if ($_POST) {
     print "Updated $tt_expense_items_updated tt_expense_items records...<br>\n";
   }
 
-  if ($_POST["convert11797to11822"]) {
+  if ($_POST["convert11797to11824"]) {
     setChange("ALTER TABLE `tt_fav_reports` CHANGE `group_by` `group_by1` varchar(20) default NULL");
     setChange("ALTER TABLE `tt_fav_reports` ADD `group_by2` varchar(20) default NULL AFTER `group_by1`");
     setChange("ALTER TABLE `tt_fav_reports` ADD `group_by3` varchar(20) default NULL AFTER `group_by2`");
@@ -1035,6 +1035,7 @@ if ($_POST) {
     setChange("UPDATE `tt_custom_fields` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.23') set org_id = group_id where org_id is null");
     setChange("update `tt_custom_field_options` cfo inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.23') inner join `tt_custom_fields` cf on cf.id = cfo.field_id set cfo.group_id = cf.group_id, cfo.org_id = cf.org_id where cfo.org_id is null");
     setChange("update `tt_custom_field_log` cfl inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.23') inner join `tt_custom_fields` cf on cf.id = cfl.field_id set cfl.group_id = cf.group_id, cfl.org_id = cf.org_id where cfl.org_id is null");
+    setChange("ALTER TABLE `tt_custom_field_options` ADD `status` tinyint(4) default '1' after `value`");
   }
 
   if ($_POST["cleanup"]) {
@@ -1082,7 +1083,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.18.22)</b>
+    <td width="80%"><b>Create database structure (v1.18.24)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -1127,8 +1128,8 @@ if ($_POST) {
   </tr>
   </tr>
   <tr valign="top">
-    <td>Update database structure (v1.17.97 to v1.18.22)</td>
-    <td><input type="submit" name="convert11797to11822" value="Update"></td>
+    <td>Update database structure (v1.17.97 to v1.18.24)</td>
+    <td><input type="submit" name="convert11797to11824" value="Update"></td>
   </tr>
 </table>
 
