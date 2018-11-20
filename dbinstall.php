@@ -1033,6 +1033,7 @@ if ($_POST) {
     setChange("ALTER TABLE `tt_custom_field_log` ADD `org_id` int(11) default NULL AFTER `group_id`");
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.23', modified = now() where param_name = 'version_db' and param_value = '1.18.22'");
     setChange("UPDATE `tt_custom_fields` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.23') set org_id = group_id where org_id is null");
+    setChange("update `tt_custom_field_options` cfo inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.23') inner join `tt_custom_fields` cf on cf.id = cfo.field_id set cfo.group_id = cf.group_id, cfo.org_id = cf.org_id where cfo.org_id is null");
   }
 
   if ($_POST["cleanup"]) {

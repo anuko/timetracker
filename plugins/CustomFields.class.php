@@ -110,8 +110,11 @@ class CustomFields {
 
   // insertOption adds a new option to a custom field.
   static function insertOption($field_id, $option_name) {
-
+    global $user;
     $mdb2 = getConnection();
+
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
 
     // Check if the option exists.
     $id = 0;
@@ -123,7 +126,8 @@ class CustomFields {
 
     // Insert option.
     if (!$id) {
-      $sql = "insert into tt_custom_field_options (field_id, value) values($field_id, ".$mdb2->quote($option_name).")";
+      $sql = "insert into tt_custom_field_options (group_id, org_id, field_id, value)".
+        " values($group_id, $org_id, $field_id, ".$mdb2->quote($option_name).")";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;

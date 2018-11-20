@@ -388,9 +388,9 @@ class ttOrgImportHelper {
 
       if ($name == 'CUSTOM_FIELD_OPTION') {
         // We get here when processing <custom_field_option> tags for the current group.
-        $custom_field_option_id = ttCustomFieldHelper::insertOption(array(
-          // 'group_id' => $this->current_group_id, TODO: add this when group_id field is added to the table.
-          // 'org_id' => $this->org_id, TODO: add this when org_id field is added to the table.
+        $custom_field_option_id = $this->insertCustomFieldOption(array(
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
           'field_id' => $this->currentGroupCustomFieldMap[$attrs['FIELD_ID']],
           'value' => $attrs['VALUE']));
         if ($custom_field_option_id) {
@@ -928,6 +928,29 @@ class ttOrgImportHelper {
     $sql = "insert into tt_custom_fields".
       " (group_id, org_id, type, label, required, status)".
       " values($group_id, $org_id, $type, ".$mdb2->quote($label).", $required, ".$mdb2->quote($status).")";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    $last_id = 0;
+    $sql = "select last_insert_id() as last_insert_id";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $last_id = $val['last_insert_id'];
+    return $last_id;
+  }
+
+  // insertCustomFieldOption - a helper function to insert a custom field option.
+  private function insertCustomFieldOption($fields) {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $field_id = (int) $fields['field_id'];
+    $value = $fields['value'];
+
+    $sql = "insert into tt_custom_field_options (group_id, org_id, field_id, value)".
+      " values ($group_id, $org_id, $field_id, ".$mdb2->quote($value).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
