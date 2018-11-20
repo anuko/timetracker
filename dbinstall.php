@@ -1042,13 +1042,13 @@ if ($_POST) {
   if ($_POST["cleanup"]) {
 
     $mdb2 = getConnection();
-    $inactive_groups = ttOrgHelper::getInactiveOrgs();
+    $inactive_orgs = ttOrgHelper::getInactiveOrgs();
 
-    $count = count($inactive_groups);
-    print "$count inactive groups found...<br>\n";
+    $count = count($inactive_orgs);
+    print "$count inactive organizations found...<br>\n";
     for ($i = 0; $i < $count; $i++) {
-      print "  deleting group ".$inactive_groups[$i]."<br>\n";
-      $res = ttTeamHelper::delete($inactive_groups[$i]); // TODO: rewrite this to delete subgroups, too.
+      print "  deleting organization ".$inactive_orgs[$i]."<br>\n";
+      $res = ttOrgHelper::deleteOrg($inactive_orgs[$i]);
     }
 
     setChange("OPTIMIZE TABLE tt_client_project_binds");

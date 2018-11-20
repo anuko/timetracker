@@ -63,7 +63,7 @@ class ttOrgHelper {
     return false;
   }
 
-  // The getInactiveOrgs is a maintenance function that returns an array of inactive organization ids (max 5 for now).
+  // The getInactiveOrgs is a maintenance function that returns an array of inactive organization ids (max 1 for now).
   static function getInactiveOrgs() {
     $inactive_orgs = array();
     $mdb2 = getConnection();
@@ -72,7 +72,7 @@ class ttOrgHelper {
     $cutoff_timestamp = $mdb2->quote(date('Y-m-d', strtotime('-1 year')));
     $sql = "select org_id from".
       " (select max(accessed) as last_access, org_id from tt_users group by org_id order by last_access, org_id) as t".
-      " where last_access is null or last_access < $cutoff_timestamp limit 5"; // Max 5 orgs at a time for now...
+      " where last_access is null or last_access < $cutoff_timestamp limit 1"; // Max 1 orgs at a time for now...
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -84,27 +84,39 @@ class ttOrgHelper {
   }
 
   // deleteOrg deletes data for the entire organization from database permanently.
-  // Work in progress, currently not fully implemented.
   static function deleteOrg($org_id) {
-    // We shall do it in a straightforward way by a delete operation from all tables by org_id.
-    // However, at this time not all tables have org_id.
-    // So, we need to add the field as we write code here.
+    // Go one table at a time and remove all records with matching org_id.
+    // The order is backwards to import (see ttOrgImportHelper). Remove groups last.
+    // This leaves us with something partially working if an error occurs.
+    $mdb2 = getConnection();
 
-    // Delete expense items.
-    $sql = "delete from tt_expense_items where org_id = $org_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Delete predefined expenses.
-    $sql = "delete from tt_predefined_expenses where org_id = $org_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Delete monthly quotas.
-    $sql = "delete from tt_monthly_quotas where org_id = $org_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    return true; // Work in progress, currently not fully implemented.
+    $tables = array(
+      'tt_config',
+      'tt_cron',
+      'tt_fav_reports',
+      'tt_monthly_quotas',
+      'tt_predefined_expenses',
+      'tt_expense_items',
+      'tt_custom_field_log',
+      'tt_custom_field_options',
+      'tt_custom_fields',
+      'tt_log',
+      'tt_invoices',
+      'tt_user_project_binds',
+      'tt_users',
+      'tt_client_project_binds',
+      'tt_clients',
+      'tt_project_task_binds',
+      'tt_projects',
+      'tt_tasks',
+      'tt_roles',
+      'tt_groups'
+    );
+    foreach($tables as $table) {
+      $sql = "delete from $table where org_id = $org_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) return false;
+    }
+    return true;
   }
 }
