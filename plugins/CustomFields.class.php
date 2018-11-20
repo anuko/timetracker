@@ -52,7 +52,7 @@ class CustomFields {
     // If we have a dropdown obtain options for it.
     if ((count($this->fields) > 0) && ($this->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)) {
 
-      $sql = "select id, value from tt_custom_field_options where field_id = ".$this->fields[0]['id']." order by value";
+      $sql = "select id, value from tt_custom_field_options where field_id = ".$this->fields[0]['id']." and status = 1 order by value";
       $res = $mdb2->query($sql);
       if (!is_a($res, 'PEAR_Error')) {
         while ($val = $res->fetchRow()) {
@@ -173,7 +173,7 @@ class CustomFields {
       return false;
 
     // Delete the option.
-    $sql = "delete from tt_custom_field_options where id = $id";
+    $sql = "update tt_custom_field_options set status = NULL where id = $id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
@@ -194,7 +194,7 @@ class CustomFields {
       return false;
 
     // Get options.
-    $sql = "select id, value from tt_custom_field_options where field_id = $field_id order by value";
+    $sql = "select id, value from tt_custom_field_options where field_id = $field_id and status = 1 order by value";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -303,10 +303,6 @@ class CustomFields {
   // The deleteField deletes a custom field, its options and log entries for group.
   static function deleteField($field_id) {
 
-    // Our overall intention is to keep the code simple and manageable.
-    // If a user wishes to delete a field, we will delete all its options and log entries.
-    // Otherwise we have to do conditional queries depending on field status (this complicates things).
-
     global $user;
     $mdb2 = getConnection();
 
@@ -325,14 +321,14 @@ class CustomFields {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    // Delete field options.
-    $sql = "delete from tt_custom_field_options where field_id = $field_id";
+    // Mark field options as deleted.
+    $sql = "update tt_custom_field_options set status = NULL where field_id = $field_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    // Delete the field.
-    $sql = "delete from tt_custom_fields where id = $field_id and group_id = $user->group_id";
+    // Mark custom field as deleted.
+    $sql = "update tt_custom_fields set status = NULL where id = $field_id and group_id = $user->group_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
