@@ -169,6 +169,7 @@ $i18n_key_words = array(
 // 'label.user' => 'User',
 // 'label.users' => 'Users',
 // 'label.group' => 'Group',
+// 'label.subgroups' => 'Subgroups',
 // 'label.roles' => 'Roles',
 'label.client' => 'Ügyfél',
 'label.clients' => 'Ügyfelek',

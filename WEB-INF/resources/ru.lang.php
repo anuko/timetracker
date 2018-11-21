@@ -143,6 +143,7 @@ $i18n_key_words = array(
 'label.user' => 'Пользователь',
 'label.users' => 'Сотрудники',
 'label.group' => 'Группа',
+'label.subgroups' => 'Подгруппы',
 'label.roles' => 'Роли',
 'label.client' => 'Клиент',
 'label.clients' => 'Клиенты',
