@@ -84,7 +84,6 @@ $i18n_key_words = array(
 'error.auth' => 'Неправильно введен логин или пароль.',
 'error.user_exists' => 'Пользователь с таким логином уже существует.',
 'error.object_exists' => 'Объект с таким именем уже есть.',
-'error.project_exists' => 'Проект с таким именем уже есть.',
 'error.task_exists' => 'Задача с таким названием уже есть.',
 'error.client_exists' => 'Клиент с таким именем уже есть.',
 'error.invoice_exists' => 'Счёт с таким номером уже есть.',

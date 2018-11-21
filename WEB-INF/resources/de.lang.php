@@ -85,7 +85,6 @@ $i18n_key_words = array(
 'error.auth' => 'Benutzername oder Passwort ungültig.',
 'error.user_exists' => 'Benutzer mit diesem Konto ist bereits vorhanden.',
 'error.object_exists' => 'Objekt mit diesem Namen ist bereits vorhanden.',
-'error.project_exists' => 'Es gibt bereits ein Projekt mit diesem Namen.',
 'error.task_exists' => 'Task mit diesem Namen existiert bereits.',
 'error.client_exists' => 'Der Kunde mit dem Namen existiert schon.',
 'error.invoice_exists' => 'Rechnung mit dieser Nummer existiert bereits.',

@@ -85,7 +85,6 @@ $i18n_key_words = array(
 'error.auth' => 'Onjuiste inlognaam of wachtwoord.',
 'error.user_exists' => 'Een gebruiker met deze inlognaam bestaat al.',
 'error.object_exists' => 'Een object met deze naam bestaat al.',
-'error.project_exists' => 'Een project met deze naam bestaat al.',
 'error.task_exists' => 'Er bestaat al een taak met deze naam.',
 'error.client_exists' => 'Een klant met deze naam bestaat al.',
 'error.invoice_exists' => 'Dit nummer is al eens toegekend aan een factuur.',

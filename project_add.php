@@ -89,7 +89,7 @@ if ($request->isPost()) {
         } else
           $err->add($i18n->get('error.db'));
     } else
-      $err->add($i18n->get('error.project_exists'));
+      $err->add($i18n->get('error.object_exists'));
   }
 } // isPost
 

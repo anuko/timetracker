@@ -99,8 +99,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'Bruker med et slikt brukernavn eksisterer allerede.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.project_exists' => 'Et prosjekt med dette navnet er allerede opprettet.',
-// TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',
 'error.client_exists' => 'En klient med dette navnet er allerede opprettet.',
 // TODO: translate the following.

@@ -99,8 +99,6 @@ $i18n_key_words = array(
 // 'error.auth' => 'Incorrect login or password.',
 // 'error.user_exists' => 'User with this login already exists.',
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.project_exists' => 'Ilyen nevű projekt már létezik.',
-// TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',

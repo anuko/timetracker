@@ -99,8 +99,6 @@ $i18n_key_words = array(
 'error.user_exists' => '본 로그인과 연계된 사용자가 이미 있습니다.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.project_exists' => '본 이름과 연계된 프로젝트가 이미 있습니다.',
-// TODO: translate the following.
 // 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
