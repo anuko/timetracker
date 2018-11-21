@@ -244,6 +244,8 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'Prijava',
 'title.groups' => 'Timovi', // TODO: change "teams" to "groups".
+// TODO: translate the following.
+// 'title.subgroups' => 'Subgroups',
 'title.create_group' => 'Napravi tim', // TODO: change "team" to "group".
 'title.edit_group' => 'Izmeni tim', // TODO: change "team" to "group".
 'title.delete_group' => 'Obriši tim', // TODO: change "team" to "group".

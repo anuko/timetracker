@@ -224,6 +224,7 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'Вход в систему',
 'title.groups' => 'Группы',
+'title.subgroups' => 'Подгруппы',
 'title.create_group' => 'Создание группы',
 'title.edit_group' => 'Редактирование группы',
 'title.delete_group' => 'Удаление группы',

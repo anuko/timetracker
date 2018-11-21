@@ -240,6 +240,8 @@ $i18n_key_words = array(
 // Rubriker för formulär
 'title.login' => 'Logga in',
 'title.groups' => 'Grupper',
+// TODO: translate the following.
+// 'title.subgroups' => 'Subgroups',
 'title.create_group' => 'Skapa grupp',
 'title.edit_group' => 'Redigera grupp',
 'title.delete_group' => 'Ta bort grupp',

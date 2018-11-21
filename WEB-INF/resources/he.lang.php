@@ -262,6 +262,8 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'כניסה',
 'title.groups' => 'צוותים', // TODO: change "teams" to "groups".
+// TODO: translate the following.
+// 'title.subgroups' => 'Subgroups',
 'title.create_group' => 'יצירת צוות', // TODO: change "team" to "group".
 // TODO: translate the following.
 // 'title.edit_group' => 'Editing Group',

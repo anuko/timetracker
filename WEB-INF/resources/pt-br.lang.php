@@ -243,6 +243,8 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'Login',
 'title.groups' => 'Equipes', // TODO: change "teams" to "groups".
+// TODO: translate the following.
+// 'title.subgroups' => 'Subgroups',
 'title.create_group' => 'Criando equipe', // TODO: change "team" to "group".
 'title.edit_group' => 'Editando equipe', // TODO: change "team" to "group".
 'title.delete_group' => 'Apagando equipe', // TODO: change "team" to "group".

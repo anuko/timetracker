@@ -226,6 +226,8 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'Aanmelden',
 'title.groups' => 'Groepen',
+// TODO: translate the following.
+// 'title.subgroups' => 'Subgroups',
 'title.create_group' => 'Groep maken',
 'title.edit_group' => 'Groep bewerken',
 'title.delete_group' => 'Groep aan het verwijderen',

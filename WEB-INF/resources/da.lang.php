@@ -241,7 +241,9 @@ $i18n_key_words = array(
 // Form titles.
 'title.login' => 'Login',
 'title.groups' => 'Teams', // TODO: change "teams" to "groups".
-'title.create_gtoup' => 'Opret Team', // TODO: change "team" to "group".
+// TODO: translate the following.
+// 'title.subgroups' => 'Subgroups',
+'title.create_group' => 'Opret Team', // TODO: change "team" to "group".
 'title.edit_group' => 'Redigér Team', // TODO: change "team" to "group".
 'title.delete_group' => 'Slet Team', // TODO: change "team" to "group".
 'title.reset_password' => 'Nulstilling af Adgangskode',
