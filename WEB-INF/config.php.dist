@@ -59,16 +59,6 @@ define('MULTITEAM_MODE', true);
 define('APP_NAME', '');
 
 
-// OLD_PASSWORDS
-//
-// You may need to set this option if you migrate an older version of TT installation to a new server.
-// Older versions of TT used mysql password function to hash user passwords. Newer versions use md5.
-// Because the password function may behave differently between servers, the OLD_PASSWORD settings
-// gives you an opportunity to control it, if needed.
-//  
-// define('OLD_PASSWORDS', true);
-
-
 // WEEKEND_START_DAY
 //
 // This option defines which days are highlighted with weekend color.
