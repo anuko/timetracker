@@ -101,7 +101,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.user_exists' => 'User with this login already exists.',
 // 'error.object_exists' => 'Object with this name already exists.',
-// 'error.task_exists' => 'Task with this name already exists.',
 // 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.role_exists' => 'Role with this rank already exists.',

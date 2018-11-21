@@ -92,7 +92,6 @@ $i18n_key_words = array(
 'error.user_exists' => '该用户登录信息已经存在。',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-// 'error.task_exists' => 'Task with this name already exists.',
 'error.client_exists' => '具有此名称的客户端已经存在。',
 // TODO: translate the following.
 // 'error.invoice_exists' => 'Invoice with this number already exists.',

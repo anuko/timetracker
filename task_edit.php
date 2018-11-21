@@ -95,7 +95,7 @@ if ($request->isPost()) {
         } else
           $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->get('error.task_exists'));
+        $err->add($i18n->get('error.object_exists'));
     }
 
     if ($request->getParameter('btn_copy')) {
@@ -112,7 +112,7 @@ if ($request->isPost()) {
         } else
           $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->get('error.task_exists'));
+        $err->add($i18n->get('error.object_exists'));
     }
   }
 } // isPost

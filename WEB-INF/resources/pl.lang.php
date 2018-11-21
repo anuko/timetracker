@@ -93,7 +93,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'Użytkownik o takiej nazwie już istnieje.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.task_exists' => 'Zadanie o takiej nazwie już istnieje.',
 'error.client_exists' => 'Klient o takiej nazwie już istnieje.',
 'error.invoice_exists' => 'Faktura o tym numerze już istnieje.',
 // TODO: translate the following.

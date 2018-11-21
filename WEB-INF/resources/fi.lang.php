@@ -92,7 +92,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'Tämä käyttäjänimi on jo olemassa.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.task_exists' => 'Tämän niminen tehtävä on jo olemassa.',
 'error.client_exists' => 'Tämän niminen asiakas on jo olemassa.',
 'error.invoice_exists' => 'Tällä numerolla oleva lasku on jo olemassa.',
 // TODO: translate the following.

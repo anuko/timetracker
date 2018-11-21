@@ -90,7 +90,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'Korisnik pod ovim imenom već postoji.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.task_exists' => 'Zadatak pod ovim nazivom već postoji.',
 'error.client_exists' => 'Klijent pod ovim imenom već postoji.',
 'error.invoice_exists' => 'Račun pod ovim brojem već postoji.',
 // TODO: translate the following.

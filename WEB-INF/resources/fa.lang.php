@@ -95,7 +95,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'کاربری با این نام کاربری موجود است.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.task_exists' => 'وظیفه ای با این نام هم اکنون وجود دارد.',
 'error.client_exists' => 'مشتری با این نام هم اکنون وجود دارد.',
 'error.invoice_exists' => 'فاکتوری با این شماره هم اکنون موجود است.',
 // TODO: translate the following.
