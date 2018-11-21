@@ -56,6 +56,8 @@ $i18n_key_words = array(
 'menu.tasks' => 'Arbetsuppgifter',
 'menu.users' => 'Användare',
 'menu.groups' => 'Grupper',
+// TODO: translate the following.
+// 'menu.subgroups' => 'Subgroups',
 'menu.export' => 'Exportera',
 'menu.clients' => 'Kunder',
 'menu.options' => 'Alternativ',

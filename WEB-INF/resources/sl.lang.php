@@ -63,6 +63,7 @@ $i18n_key_words = array(
 // 'menu.tasks' => 'Tasks',
 // 'menu.users' => 'Users',
 // 'menu.groups' => 'Groups',
+// 'menu.subgroups' => 'Subgroups',
 // 'menu.export' => 'Export',
 'menu.clients' => 'Stranke',
 'menu.options' => 'Možnosti',

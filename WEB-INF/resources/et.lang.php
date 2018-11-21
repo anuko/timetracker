@@ -65,6 +65,7 @@ $i18n_key_words = array(
 'menu.users' => 'Kasutajad',
 // TODO: translate the following.
 // 'menu.groups' => 'Groups',
+// 'menu.subgroups' => 'Subgroups',
 // 'menu.export' => 'Export',
 'menu.clients' => 'Kliendid',
 'menu.options' => 'Suvandid',
