@@ -273,7 +273,7 @@ $i18n_key_words = array(
 'title.groups' => 'Týmy', // TODO: change "teams" to "groups".
 // TODO: translate the following.
 // 'title.subgroups' => 'Subgroups',
-// 'title.create_group' => 'Creating Group',
+// 'title.add_group' => 'Adding Group',
 // 'title.edit_group' => 'Editing Group',
 'title.delete_group' => 'Smazat tým', // TODO: change "team" to "group".
 'title.reset_password' => 'Resetovat heslo',

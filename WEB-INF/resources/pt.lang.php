@@ -254,7 +254,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.groups' => 'Groups',
 // 'title.subgroups' => 'Subgroups',
-// 'title.create_group' => 'Creating Group',
+// 'title.add_group' => 'Adding Group',
 // 'title.edit_group' => 'Editing Group',
 // 'title.delete_group' => 'Deleting Group',
 // 'title.reset_password' => 'Resetting Password',

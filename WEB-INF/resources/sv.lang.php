@@ -242,7 +242,7 @@ $i18n_key_words = array(
 'title.groups' => 'Grupper',
 // TODO: translate the following.
 // 'title.subgroups' => 'Subgroups',
-'title.create_group' => 'Skapa grupp',
+// 'title.add_group' => 'Adding Group',
 'title.edit_group' => 'Redigera grupp',
 'title.delete_group' => 'Ta bort grupp',
 'title.reset_password' => 'Återställ lösenord',

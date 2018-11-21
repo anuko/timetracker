@@ -246,7 +246,7 @@ $i18n_key_words = array(
 'title.groups' => 'Timovi', // TODO: change "teams" to "groups".
 // TODO: translate the following.
 // 'title.subgroups' => 'Subgroups',
-'title.create_group' => 'Napravi tim', // TODO: change "team" to "group".
+// 'title.add_group' => 'Adding Group',
 'title.edit_group' => 'Izmeni tim', // TODO: change "team" to "group".
 'title.delete_group' => 'Obriši tim', // TODO: change "team" to "group".
 'title.reset_password' => 'Resetuj Lozinku',

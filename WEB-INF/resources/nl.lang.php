@@ -228,7 +228,7 @@ $i18n_key_words = array(
 'title.groups' => 'Groepen',
 // TODO: translate the following.
 // 'title.subgroups' => 'Subgroups',
-'title.create_group' => 'Groep maken',
+// 'title.add_group' => 'Adding Group',
 'title.edit_group' => 'Groep bewerken',
 'title.delete_group' => 'Groep aan het verwijderen',
 'title.reset_password' => 'Wachtwoord herstellen',
