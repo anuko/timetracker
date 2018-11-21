@@ -70,9 +70,7 @@ class I18n {
       $this->weekdayNames = $i18n_weekdays;
 
         $this->weekdayShortNames = $i18n_weekdays_short;
-//      if (defined('SHOW_HOLIDAYS') && isTrue(SHOW_HOLIDAYS)) {
         $this->holidays = $i18n_holidays;
-//      }
 
       foreach ($i18n_key_words as $kword=>$value) {
         $pos = strpos($kword, ".");
@@ -97,9 +95,7 @@ class I18n {
       $this->monthNames = $i18n_months;
       $this->weekdayNames = $i18n_weekdays;
         $this->weekdayShortNames = $i18n_weekdays_short;
-//      if (defined('SHOW_HOLIDAYS') && isTrue(SHOW_HOLIDAYS)) {
         $this->holidays = $i18n_holidays;
-//      }
       foreach ($i18n_key_words as $kword=>$value) {
         if (!$value) continue;
         $pos = strpos($kword, ".");

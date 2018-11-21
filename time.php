@@ -107,7 +107,7 @@ $_SESSION['task'] = $cl_task;
 // Elements of timeRecordForm.
 $form = new Form('timeRecordForm');
 
-if (defined('SUBGROUP_DEBUG') && isTrue(SUBGROUP_DEBUG)) {
+if (isTrue(SUBGROUP_DEBUG)) {
 if ($user->can('manage_subgroups')) {
   $groups = $user->getGroups();
   if (count($groups) > 1) {
