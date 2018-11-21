@@ -85,7 +85,6 @@ $i18n_key_words = array(
 'error.auth' => 'Benutzername oder Passwort ungültig.',
 'error.user_exists' => 'Benutzer mit diesem Konto ist bereits vorhanden.',
 'error.object_exists' => 'Objekt mit diesem Namen ist bereits vorhanden.',
-'error.client_exists' => 'Der Kunde mit dem Namen existiert schon.',
 'error.invoice_exists' => 'Rechnung mit dieser Nummer existiert bereits.',
 'error.role_exists' => 'Rolle mit diesem Rang existiert bereits.',
 'error.no_invoiceable_items' => 'Keine Einträge zur Rechnungsstellung gefunden.',

@@ -106,7 +106,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'שם משתמש כבר קיים',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.client_exists' => 'שם לקוח כבר קיים',
 'error.invoice_exists' => 'קיימת חשבונית עם מספר זה',
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',

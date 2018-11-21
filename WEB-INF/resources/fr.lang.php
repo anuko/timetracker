@@ -90,7 +90,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'Un utilisateur avec cet identifiant existe déjà.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.client_exists' => 'Un client avec ce nom existe déjà.',
 'error.invoice_exists' => 'Une facture avec ce numéro existe déjà.',
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',

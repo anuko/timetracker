@@ -99,7 +99,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'このログインと関連されたユーザーは既に存在します。',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-// 'error.client_exists' => 'Client with this name already exists.',
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
