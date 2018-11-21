@@ -297,8 +297,6 @@ $i18n_key_words = array(
 'title.import' => 'Importera grupp',
 'title.options' => 'Alternativ',
 'title.profile' => 'Profil',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
 'title.plugins' => 'Tillägg',
 'title.cf_custom_fields' => 'Egna fält',
 'title.cf_add_custom_field' => 'Lägg till fält',

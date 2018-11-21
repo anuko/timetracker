@@ -327,7 +327,6 @@ $i18n_key_words = array(
 'title.options' => '選項',
 // TODO: translate the following.
 // 'title.profile' => 'Profile',
-// 'title.group' => 'Group Settings',
 // 'title.plugins' => 'Plugins',
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',

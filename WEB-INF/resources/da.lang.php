@@ -298,8 +298,6 @@ $i18n_key_words = array(
 'title.import' => 'Importer Team Data', // TODO: replace "team" with "group".
 'title.options' => 'Indstillinger',
 'title.profile' => 'Profil',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
 'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Brugerdefineret Felt',
 'title.cf_add_custom_field' => 'Tilføj Brugerdefineret Felt',

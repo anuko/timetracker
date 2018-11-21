@@ -296,8 +296,6 @@ $i18n_key_words = array(
 'title.import' => 'Importando dados de equipe', // TODO: replace "team" with "group".
 'title.options' => 'Opções',
 'title.profile' => 'Perfil',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
 'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Campos personalizados',
 'title.cf_add_custom_field' => 'Adicionando campo personalizado',

@@ -306,8 +306,6 @@ $i18n_key_words = array(
 'title.import' => 'وارد کردن اطلاعات تیم', // TODO: replace "team" with "group".
 'title.options' => 'گزینه ها',
 'title.profile' => 'پروفایل',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
 'title.plugins' => 'پلاگین ها',
 'title.cf_custom_fields' => 'فیلدهای سفارشی',
 'title.cf_add_custom_field' => 'درج فیلد سفارشی',

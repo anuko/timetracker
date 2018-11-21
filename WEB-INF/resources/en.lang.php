@@ -280,7 +280,6 @@ $i18n_key_words = array(
 'title.import' => 'Importing Group Data',
 'title.options' => 'Options',
 'title.profile' => 'Profile',
-'title.group' => 'Group Settings',
 'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Custom Fields',
 'title.cf_add_custom_field' => 'Adding Custom Field',

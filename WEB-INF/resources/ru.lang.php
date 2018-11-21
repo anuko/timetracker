@@ -279,7 +279,6 @@ $i18n_key_words = array(
 'title.import' => 'Импортирование данных группы',
 'title.options' => 'Опции',
 'title.profile' => 'Профиль',
-'title.group' => 'Настройки группы',
 'title.plugins' => 'Плагины',
 'title.cf_custom_fields' => 'Дополнительные поля',
 'title.cf_add_custom_field' => 'Добавление поля',

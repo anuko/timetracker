@@ -297,8 +297,6 @@ $i18n_key_words = array(
 'title.import' => 'Uvoz podataka tim-a', // TODO: replace "team" with "group".
 'title.options' => 'Opcije',
 'title.profile' => 'Profil',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
 'title.plugins' => 'Dodaci',
 'title.cf_custom_fields' => 'Dodatna polja',
 'title.cf_add_custom_field' => 'Dodavanje dodatnih polja',

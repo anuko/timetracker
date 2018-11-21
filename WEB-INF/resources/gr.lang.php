@@ -288,8 +288,6 @@ $i18n_key_words = array(
 'title.import' => 'Εισαγωγή δεδομένων ομάδας',
 'title.options' => 'Επιλογές',
 'title.profile' => 'Προφίλ',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
 'title.plugins' => 'Πρόσθετα',
 'title.cf_custom_fields' => 'Προσαρμοσμένα πεδία',
 'title.cf_add_custom_field' => 'Προσθήκη προσαρμοσμένου πεδίου',

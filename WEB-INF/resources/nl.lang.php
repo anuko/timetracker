@@ -282,7 +282,6 @@ $i18n_key_words = array(
 'title.import' => 'Importeer groepsgegevens',
 'title.options' => 'Opties',
 'title.profile' => 'Profiel',
-'title.group' => 'Groep instelling',
 'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Eigen velden',
 'title.cf_add_custom_field' => 'Eigen veld toevoegen',

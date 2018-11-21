@@ -307,8 +307,6 @@ $i18n_key_words = array(
 'title.import' => 'Importovanie údajov o tíme', // TODO: replace "team" with "group".
 'title.options' => 'Nastavenia',
 'title.profile' => 'Profil',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
 'title.plugins' => 'Doplnkové moduly',
 'title.cf_custom_fields' => 'Vlastné polia',
 'title.cf_add_custom_field' => 'Pridávanie vlastného poľa',
