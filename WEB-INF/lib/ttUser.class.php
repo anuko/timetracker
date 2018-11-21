@@ -410,6 +410,20 @@ class ttUser {
     return $groups;
   }
 
+  // getSubgroups obtains a list of immediate subgroups.
+  function getSubgroups() {
+    $mdb2 = getConnection();
+
+    $sql = "select id, name from tt_groups where org_id = $this->org_id and parent_id = ".$this->getActiveGroup();;
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $groups[] = array('id'=>$val['id'],'name'=>$val['name']);
+      }
+    }
+    return $groups;
+  }
+
   // getUser function is used to manage users in group and returns user details.
   // At the moment, the function is used for user edits and deletes.
   function getUser($user_id) {

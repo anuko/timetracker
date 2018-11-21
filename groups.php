@@ -39,7 +39,7 @@ if (!ttAccessAllowed('manage_subgroups')) {
 }
 // End of access checks.
 
-$smarty->assign('groups', $user->getGroups());
-$smarty->assign('title', $i18n->get('title.groups'));
+$smarty->assign('groups', $user->getSubgroups());
+$smarty->assign('title', $i18n->get('label.subgroups'));
 $smarty->assign('content_page_name', 'groups.tpl');
 $smarty->display('index.tpl');

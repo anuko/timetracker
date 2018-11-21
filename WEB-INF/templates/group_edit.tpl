@@ -41,6 +41,14 @@ function handleTaskRequiredCheckbox() {
             <td><a href="roles.php">{$i18n.label.configure}</a></td>
           </tr>
   {/if}
+{if $smarty.const.SUBGROUP_DEBUG == 'true'}
+  {if $user->can('manage_subgroups')}
+          <tr>
+            <td align="right" nowrap>{$i18n.label.subgroups}:</td>
+            <td><a href="groups.php">{$i18n.label.configure}</a></td>
+          </tr>
+  {/if}
+{/if}
           <tr>
            <td align="right" nowrap>{$i18n.label.language}:</td>
            <td>{$forms.groupForm.lang.control}</td>
