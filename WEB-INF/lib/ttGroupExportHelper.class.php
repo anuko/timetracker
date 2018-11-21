@@ -28,9 +28,6 @@
 
 // ttGroupExportHelper - this class is used to write data for a single group
 // to a file. When group contains other groups, it reuses itself recursively.
-//
-// Currently, it is work in progress.
-// When done, it should handle export of organizations containing multiple groups.
 class ttGroupExportHelper {
 
   var $group_id = null;     // Group we are exporting.
@@ -71,8 +68,8 @@ class ttGroupExportHelper {
     }
   }
 
-  // getGroupData obtains group attributes for export.
-  private function getGroupData() {
+  // getGroupAttrs obtains group attributes for export.
+  private function getGroupAttrs() {
     global $user;
     $mdb2 = getConnection();
 
@@ -83,153 +80,6 @@ class ttGroupExportHelper {
       $val = $res->fetchRow();
     }
     return $val;
-  }
-
-  // The getUsers obtains all users in group for the purpose of export.
-  private function getUsers() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $sql = "select u.*, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id)".
-      " where u.group_id = $this->group_id and u.org_id = $user->org_id order by upper(u.name)"; // Note: deleted users are included.
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
-  // TODO: write a generic (private?) get function for exclusive use in this class, that obtains
-  // all fields from a given table.
-
-  // getRoles - obtains all roles defined for group.
-  function getRoles() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $result = array();
-    $sql = "select * from tt_roles where group_id = $this->group_id and org_id = $user->org_id";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
-  // getTasks - obtains all tasks defined for group.
-  function getTasks() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $result = array();
-    $sql = "select * from tt_tasks where group_id = $this->group_id and org_id = $user->org_id";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
-  // getProjects - obtains all projects defined for group.
-  function getProjects() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $result = array();
-    $sql = "select * from tt_projects where group_id = $this->group_id and org_id = $user->org_id";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
-  // getClients - obtains all clients defined for group.
-  function getClients() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $result = array();
-    $sql = "select * from tt_clients where group_id = $this->group_id and org_id = $user->org_id";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
-  // getFavReports - obtains all favorite reports defined for group.
-  function getFavReports() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $result = array();
-    $sql = "select * from tt_fav_reports where group_id = $this->group_id and org_id = $user->org_id";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
-  // getPredefinedExpenses - obtains all predefined expenses for group.
-  function getPredefinedExpenses() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $result = array();
-    $sql = "select * from tt_predefined_expenses where group_id = $this->group_id and org_id = $user->org_id";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
-  // getNotifications - obtains all notifications defined for group.
-  function getNotifications() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $result = array();
-    $sql = "select * from tt_cron where group_id = $this->group_id and org_id = $user->org_id";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
   }
 
   // getRecordsFromTable - obtains all fields from a given table for a group.
@@ -254,7 +104,7 @@ class ttGroupExportHelper {
   function writeData() {
 
     // Write group info.
-    $group = $this->getGroupData();
+    $group = $this->getGroupAttrs();
     $group_part = "<group name=\"".htmlspecialchars($group['name'])."\"";
     $group_part .= " currency=\"".htmlspecialchars($group['currency'])."\"";
     $group_part .= " decimal_mark=\"".$group['decimal_mark']."\"";
@@ -282,27 +132,27 @@ class ttGroupExportHelper {
     unset($group_part);
 
     // Prepare user map.
-    $users = $this->getUsers();
+    $users = $this->getRecordsFromTable('tt_users');
     foreach ($users as $key=>$user_item)
       $this->userMap[$user_item['id']] = $key + 1;
 
     // Prepare role map.
-    $roles = $this->getRoles();
+    $roles = $this->getRecordsFromTable('tt_roles');
     foreach ($roles as $key=>$role_item)
       $this->roleMap[$role_item['id']] = $key + 1;
 
     // Prepare task map.
-    $tasks = $this->getTasks();
+    $tasks = $this->getRecordsFromTable('tt_tasks');
     foreach ($tasks as $key=>$task_item)
       $this->taskMap[$task_item['id']] = $key + 1;
 
     // Prepare project map.
-    $projects = $this->getProjects();
+    $projects = $this->getRecordsFromTable('tt_projects');
     foreach ($projects as $key=>$project_item)
       $this->projectMap[$project_item['id']] = $key + 1;
 
     // Prepare client map.
-    $clients = $this->getClients();
+    $clients = $this->getRecordsFromTable('tt_clients');
     foreach ($clients as $key=>$client_item)
       $this->clientMap[$client_item['id']] = $key + 1;
 
@@ -322,7 +172,7 @@ class ttGroupExportHelper {
       $this->customFieldOptionMap[$option['id']] = $key + 1;
 
     // Prepare favorite report map.
-    $fav_reports = $this->getFavReports();
+    $fav_reports = $this->getRecordsFromTable('tt_fav_reports');
     foreach ($fav_reports as $key=>$fav_report)
       $this->favReportMap[$fav_report['id']] = $key + 1;
 
@@ -550,7 +400,7 @@ class ttGroupExportHelper {
     unset($expense_item_part);
 
     // Write predefined expenses.
-    $predefined_expenses = $this->getPredefinedExpenses();
+    $predefined_expenses = $this->getRecordsFromTable('tt_predefined_expenses');
     fwrite($this->file, $this->indentation."  <predefined_expenses>\n");
     foreach ($predefined_expenses as $predefined_expense) {
       $predefined_expense_part = $this->indentation.'    '."<predefined_expense name=\"".htmlspecialchars($predefined_expense['name'])."\"";
@@ -577,7 +427,6 @@ class ttGroupExportHelper {
     unset($quota_part);
 
     // Write fav reports.
-    $fav_reports = $this->getFavReports();
     fwrite($this->file, $this->indentation."  <fav_reports>\n");
     foreach ($fav_reports as $fav_report) {
       $user_list = '';
@@ -625,7 +474,7 @@ class ttGroupExportHelper {
     unset($fav_report_part);
 
     // Write notifications.
-    $notifications = $this->getNotifications();
+    $notifications = $this->getRecordsFromTable('tt_cron');
     fwrite($this->file, $this->indentation."  <notifications>\n");
     foreach ($notifications as $notification) {
       $notification_part = $this->indentation.'    '."<notification cron_spec=\"".$notification['cron_spec']."\"";
