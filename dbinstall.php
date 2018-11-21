@@ -1037,6 +1037,8 @@ if ($_POST) {
     setChange("update `tt_custom_field_log` cfl inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.23') inner join `tt_custom_fields` cf on cf.id = cfl.field_id set cfl.group_id = cf.group_id, cfl.org_id = cf.org_id where cfl.org_id is null");
     setChange("ALTER TABLE `tt_custom_field_options` ADD `status` tinyint(4) default '1' after `value`");
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.24', modified = now() where param_name = 'version_db' and param_value = '1.18.23'");
+    setChange("ALTER TABLE `tt_groups` ADD COLUMN `description` varchar(255) default NULL after `name`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.26', modified = now() where param_name = 'version_db' and param_value = '1.18.24'");
   }
 
   if ($_POST["cleanup"]) {
