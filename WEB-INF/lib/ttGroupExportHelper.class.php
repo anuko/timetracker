@@ -82,6 +82,23 @@ class ttGroupExportHelper {
     return $val;
   }
 
+  // The getUsers obtains all users in group for the purpose of export.
+  private function getUsers() {
+    global $user;
+    $mdb2 = getConnection();
+    $sql = "select u.*, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id)".
+      " where u.group_id = $this->group_id and u.org_id = $user->org_id order by upper(u.name)"; // Note: deleted users are included.
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
   // getRecordsFromTable - obtains all fields from a given table for a group.
   function getRecordsFromTable($table_name) {
     global $user;
@@ -132,7 +149,7 @@ class ttGroupExportHelper {
     unset($group_part);
 
     // Prepare user map.
-    $users = $this->getRecordsFromTable('tt_users');
+    $users = $this->getUsers();
     foreach ($users as $key=>$user_item)
       $this->userMap[$user_item['id']] = $key + 1;
 
