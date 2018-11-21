@@ -414,11 +414,11 @@ class ttUser {
   function getSubgroups() {
     $mdb2 = getConnection();
 
-    $sql = "select id, name from tt_groups where org_id = $this->org_id and parent_id = ".$this->getActiveGroup();;
+    $sql = "select id, name, description from tt_groups where org_id = $this->org_id and parent_id = ".$this->getActiveGroup();;
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-        $groups[] = array('id'=>$val['id'],'name'=>$val['name']);
+        $groups[] = $val; // array('id'=>$val['id'],'name'=>$val['name']);
       }
     }
     return $groups;
