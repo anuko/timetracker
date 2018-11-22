@@ -224,6 +224,9 @@ $i18n_key_words = array(
 'label.totals_only' => 'Nur Gesamtstunden',
 
 // Form titles.
+// TODO: Translate the following.
+// 'title.error' => 'Error',
+// 'title.success' => 'Success',
 'title.login' => 'Anmelden',
 'title.groups' => 'Gruppen',
 // TODO: translate the following.

@@ -265,6 +265,9 @@ $i18n_key_words = array(
 // page is about and is "consistent" from page to page, meaning that correct grammar is used everywhere.
 // Compare with English file to see how it is done there and do Czech titles similarly.
 // Specifically: Vytváření vs Pridat, etc.
+// TODO: Translate the following.
+// 'title.error' => 'Error',
+// 'title.success' => 'Success',
 'title.login' => 'Přihlásit',
 'title.groups' => 'Týmy', // TODO: change "teams" to "groups".
 // TODO: translate the following.

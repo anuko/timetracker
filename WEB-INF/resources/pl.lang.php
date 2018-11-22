@@ -241,6 +241,9 @@ $i18n_key_words = array(
 'label.totals_only' => 'Tylko sumy',
 
 // Form titles.
+// TODO: Translate the following.
+// 'title.error' => 'Error',
+// 'title.success' => 'Success',
 'title.login' => 'Logowanie',
 'title.groups' => 'Zespoły', // TODO: change "teams" to "groups".
 // TODO: translate the following.

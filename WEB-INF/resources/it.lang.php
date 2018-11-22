@@ -235,6 +235,9 @@ $i18n_key_words = array(
 // page is about and is "consistent" from page to page, meaning that correct grammar is used everywhere.
 // Compare with English file to see how it is done there and do Italian titles similarly.
 // Specifically: Eliminazione vs Elimina - we probably want nouns in titles.
+// TODO: Translate the following.
+// 'title.error' => 'Error',
+// 'title.success' => 'Success',
 'title.login' => 'Login',
 'title.groups' => 'Gruppi',
 // TODO: translate the following.

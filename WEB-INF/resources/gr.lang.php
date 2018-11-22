@@ -227,6 +227,9 @@ $i18n_key_words = array(
 'label.totals_only' => 'Σύνολα μόνο',
 
 // Form titles.
+// TODO: Translate the following.
+// 'title.error' => 'Error',
+// 'title.success' => 'Success',
 'title.login' => 'Σύνδεση',
 'title.groups' => 'Ομάδες',
 // TODO: translate the following.

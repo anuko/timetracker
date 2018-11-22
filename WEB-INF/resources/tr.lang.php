@@ -270,6 +270,9 @@ $i18n_key_words = array(
 // page is about and is "consistent" from page to page, meaning that correct grammar is used everywhere.
 // Compare with English file to see how it is done there and do Romanian titles similarly.
 // Specifically: compare project and client titles and see how they differ.
+// TODO: Translate the following.
+// 'title.error' => 'Error',
+// 'title.success' => 'Success',
 'title.login' => 'Giriş',
 'title.groups' => 'Ekipler', // TODO: change "teams" to "groups".
 // TODO: translate the following.

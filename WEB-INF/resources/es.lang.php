@@ -254,6 +254,9 @@ $i18n_key_words = array(
 'label.totals_only' => 'Solo totales',
 
 // Form titles.
+// TODO: Translate the following.
+// 'title.error' => 'Error',
+// 'title.success' => 'Success',
 'title.login' => 'Sesión iniciada',
 'title.groups' => 'Grupos',
 // TODO: translate the following.

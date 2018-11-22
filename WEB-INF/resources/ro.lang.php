@@ -261,6 +261,9 @@ $i18n_key_words = array(
 // TODO: Improve titles for consistency, so that each title explains correctly what each
 // page is about and is "consistent" from page to page, meaning that correct grammar is used everywhere.
 // Compare with English file to see how it is done there and do Romanian titles similarly.
+// TODO: Translate the following.
+// 'title.error' => 'Error',
+// 'title.success' => 'Success',
 'title.login' => 'Autentificare',
 'title.groups' => 'Echipe', // TODO: change "teams" to "groups".
 // TODO: translate the following.

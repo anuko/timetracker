@@ -102,6 +102,9 @@ $i18n_key_words = array(
 'error.cannot_import' => 'Cannot import: %s.',
 'error.format' => 'Invalid file format.',
 
+// Success messages.
+'msg.success' => 'Operation completed successfully.',
+
 // Labels for buttons.
 'button.login' => 'Login',
 'button.now' => 'Now',
@@ -220,6 +223,8 @@ $i18n_key_words = array(
 'label.totals_only' => 'Totals only',
 
 // Form titles.
+'title.error' => 'Error',
+'title.success' => 'Success',
 'title.login' => 'Login',
 'title.groups' => 'Groups',
 'title.subgroups' => 'Subgroups',

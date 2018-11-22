@@ -257,6 +257,9 @@ $i18n_key_words = array(
 'labl.totals_only' => 'סיכומים בלבד',
 
 // Form titles.
+// TODO: Translate the following.
+// 'title.error' => 'Error',
+// 'title.success' => 'Success',
 'title.login' => 'כניסה',
 'title.groups' => 'צוותים', // TODO: change "teams" to "groups".
 // TODO: translate the following.

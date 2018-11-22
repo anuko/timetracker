@@ -261,6 +261,9 @@ $i18n_key_words = array(
 'label.totals_only' => '오직 전체만',
 
 // Form titles.
+// TODO: Translate the following.
+// 'title.error' => 'Error',
+// 'title.success' => 'Success',
 'title.login' => '로그인',
 'title.groups' => '팀', // TODO: change "teams" to "groups".
 // TODO: translate the following.

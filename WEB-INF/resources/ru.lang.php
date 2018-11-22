@@ -219,6 +219,8 @@ $i18n_key_words = array(
 'label.totals_only' => 'Только итоги',
 
 // Form titles.
+'title.error' => 'Ошибка',
+'title.success' => 'Успешная операция',
 'title.login' => 'Вход в систему',
 'title.groups' => 'Группы',
 'title.subgroups' => 'Подгруппы',
