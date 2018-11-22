@@ -115,7 +115,7 @@ class ttAdmin {
     return true;
   }
 
-  // markGroupDeleted marks the group and everything in it as deleted.
+  // markGroupDeleted marks a group and everything in it as deleted.
   function markGroupDeleted($group_id) {
 
     // Keep the logic simple by returning false on first error.

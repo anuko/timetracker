@@ -380,14 +380,14 @@ class ttUser {
     if ($selected_group_id != $this->group_id) {
       // We are in one of subgroups, and a parent exists.
       // Get parent group info.
-      $sql = "select parent_id from tt_groups where org_id = $this->org_id and id = $selected_group_id";
+      $sql = "select parent_id from tt_groups where org_id = $this->org_id and id = $selected_group_id and status = 1";
       $res = $mdb2->query($sql);
       if (!is_a($res, 'PEAR_Error')) {
         $val = $res->fetchRow();
         $parent_id = $val['parent_id'];
         if ($parent_id) {
           // Get parent group name.
-          $sql = "select name from tt_groups where org_id = $this->org_id and id = $parent_id";
+          $sql = "select name from tt_groups where org_id = $this->org_id and id = $parent_id and status = 1";
           $res = $mdb2->query($sql);
           if (!is_a($res, 'PEAR_Error')) {
             $val = $res->fetchRow();
@@ -401,11 +401,12 @@ class ttUser {
     $groups[] = array('id'=>$selected_group_id,'name'=>$selected_group_name);
 
     // Add subgroups.
-    $sql = "select id, name from tt_groups where org_id = $this->org_id and parent_id = $selected_group_id";
+    $sql = "select id, name from tt_groups where org_id = $this->org_id and parent_id = $selected_group_id and status = 1";
+    //die($sql);
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-        $groups[] = array('id'=>$val['id'],'name'=>$val['name']);
+        $groups[] = $val;
       }
     }
     return $groups;
@@ -417,7 +418,8 @@ class ttUser {
 
     if (!$group_id) $group_id = $this->getActiveGroup();
 
-    $sql = "select id, name, description from tt_groups where org_id = $this->org_id and parent_id = $group_id";
+    $sql = "select id, name, description from tt_groups where org_id = $this->org_id".
+      " and parent_id = $group_id and status is not null";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
