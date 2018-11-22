@@ -39,7 +39,21 @@ if (!ttAccessAllowed('manage_subgroups')) {
 }
 // End of access checks.
 
-$smarty->assign('groups', $user->getSubgroups());
+$form = new Form('groupsForm');
+$groups = $user->getGroups();
+if (count($groups) > 1) {
+  $form->addInput(array('type'=>'combobox',
+    'onchange'=>'this.form.submit();',
+    'name'=>'onBehalfGroup',
+    'style'=>'width: 250px;',
+    'value'=>$on_behalf_group_id,
+    'data'=>$groups,
+    'datakeys'=>array('id','name')));
+  $smarty->assign('on_behalf_group_control', 1);
+}
+
+$smarty->assign('subgroups', $user->getSubgroups());
+$smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('label.subgroups'));
 $smarty->assign('content_page_name', 'groups.tpl');
 $smarty->display('index.tpl');

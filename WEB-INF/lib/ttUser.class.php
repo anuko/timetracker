@@ -418,7 +418,7 @@ class ttUser {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-        $groups[] = $val; // array('id'=>$val['id'],'name'=>$val['name']);
+        $groups[] = $val;
       }
     }
     return $groups;
