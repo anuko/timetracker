@@ -1,12 +1,12 @@
 <script>
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
-{$forms.groupsForm.open}
+{$forms.subgroupsForm.open}
 <table cellspacing="1" cellpadding="3" border="0" width="720">
-{if $on_behalf_group_control}
+{if $group_dropdown}
   <tr>
     <td align="right">{$i18n.label.group}:</td>
-    <td>{$forms.groupsForm.onBehalfGroup.control}</td>
+    <td>{$forms.subgroupsForm.group.control}</td>
   </tr>
   <tr><td colspan="2">&nbsp;</td></tr>
 {/if}
@@ -27,7 +27,7 @@
   {/foreach}
 {/if}
 </table>
-{$forms.groupsForm.close}
+{$forms.subgroupsForm.close}
 
 <table width="100%">
   <tr>

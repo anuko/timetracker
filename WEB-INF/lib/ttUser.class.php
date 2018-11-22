@@ -27,6 +27,7 @@
 // +----------------------------------------------------------------------+
 
 import('ttConfigHelper');
+import('ttGroupHelper');
 
 class ttUser {
   var $login = null;            // User login.
@@ -411,10 +412,12 @@ class ttUser {
   }
 
   // getSubgroups obtains a list of immediate subgroups.
-  function getSubgroups() {
+  function getSubgroups($group_id = null) {
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description from tt_groups where org_id = $this->org_id and parent_id = ".$this->getActiveGroup();;
+    if (!$group_id) $group_id = $this->getActiveGroup();
+
+    $sql = "select id, name, description from tt_groups where org_id = $this->org_id and parent_id = $group_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -597,6 +600,14 @@ class ttUser {
     }
 
     return true;
+  }
+
+  // isGroupValid determines if a group is valid for user.
+  function isGroupValid($group_id) {
+    if ($group_id == $this->group_id)
+      return true;
+    else
+      return $this->isSubgroupValid($group_id);
   }
 
   // isSubgroupValid determines if a subgroup is valid for user.

@@ -27,32 +27,40 @@
 // +----------------------------------------------------------------------+
 
 require_once('initialize.php');
+import('ttUser');
 import('form.Form');
-import('ttUserHelper');
-import('ttRoleHelper');
-import('ttConfigHelper');
 
 // Access checks.
 if (!ttAccessAllowed('manage_subgroups')) {
   header('Location: access_denied.php');
   exit();
 }
+if ($request->isPost() && !$user->isGroupValid($request->getParameter('group'))) {
+  header('Location: access_denied.php'); // Wrong group id in post.
+  exit();
+}
 // End of access checks.
 
-$form = new Form('groupsForm');
+if ($request->isPost()) {
+  $group_id = $request->getParameter('group');
+} else {
+  $group_id = $user->getActiveGroup();
+}
+
+$form = new Form('subgroupsForm');
 $groups = $user->getGroups();
 if (count($groups) > 1) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'this.form.submit();',
-    'name'=>'onBehalfGroup',
+    'name'=>'group',
     'style'=>'width: 250px;',
-    'value'=>$on_behalf_group_id,
+    'value'=>$group_id,
     'data'=>$groups,
     'datakeys'=>array('id','name')));
-  $smarty->assign('on_behalf_group_control', 1);
+  $smarty->assign('group_dropdown', 1);
 }
 
-$smarty->assign('subgroups', $user->getSubgroups());
+$smarty->assign('subgroups', $user->getSubgroups($group_id));
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('label.subgroups'));
 $smarty->assign('content_page_name', 'groups.tpl');
