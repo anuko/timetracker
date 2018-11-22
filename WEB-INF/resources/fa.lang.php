@@ -247,8 +247,8 @@ $i18n_key_words = array(
 // 'label.totals_only' => 'Totals only',
 
 // Form titles.
+'title.error' => 'خطا',
 // TODO: Translate the following.
-// 'title.error' => 'Error',
 // 'title.success' => 'Success',
 'title.login' => 'ورود',
 'title.groups' => 'تیم ها', // TODO: change "teams" to "groups".

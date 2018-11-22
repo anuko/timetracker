@@ -240,8 +240,8 @@ $i18n_key_words = array(
 'label.totals_only' => 'Vain yhteissummat',
 
 // Form titles.
+'title.error' => 'Virhe',
 // TODO: Translate the following.
-// 'title.error' => 'Error',
 // 'title.success' => 'Success',
 'title.login' => 'Kirjautuminen',
 'title.groups' => 'Tiimit', // TODO: change "teams" to "groups".

@@ -247,8 +247,8 @@ $i18n_key_words = array(
 'label.totals_only' => 'Iba celkové',
 
 // Form titles.
+'title.error' => 'Chyba',
 // TODO: Translate the following.
-// 'title.error' => 'Error',
 // 'title.success' => 'Success',
 'title.login' => 'Prihlásenie',
 'title.groups' => 'Tímy', // TODO: change "teams" to "groups".

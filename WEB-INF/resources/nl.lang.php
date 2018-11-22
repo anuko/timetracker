@@ -221,8 +221,8 @@ $i18n_key_words = array(
 'label.totals_only' => 'Alleen totalen',
 
 // Form titles.
+'title.error' => 'Fout',
 // TODO: Translate the following.
-// 'title.error' => 'Error',
 // 'title.success' => 'Success',
 'title.login' => 'Aanmelden',
 'title.groups' => 'Groepen',

@@ -236,8 +236,8 @@ $i18n_key_words = array(
 'label.totals_only' => 'Kun Total',
 
 // Form titles.
+'title.error' => 'Fejl',
 // TODO: Translate the following.
-// 'title.error' => 'Error',
 // 'title.success' => 'Success',
 'title.login' => 'Login',
 'title.groups' => 'Teams', // TODO: change "teams" to "groups".

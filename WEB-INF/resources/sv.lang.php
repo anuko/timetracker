@@ -235,8 +235,8 @@ $i18n_key_words = array(
 'label.totals_only' => 'Visa endast summeringar',
 
 // Rubriker för formulär
+'title.error' => 'Fel',
 // TODO: Translate the following.
-// 'title.error' => 'Error',
 // 'title.success' => 'Success',
 'title.login' => 'Logga in',
 'title.groups' => 'Grupper',

@@ -220,7 +220,7 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.error' => 'Ошибка',
-'title.success' => 'Успешная операция',
+'title.success' => 'Успех',
 'title.login' => 'Вход в систему',
 'title.groups' => 'Группы',
 'title.subgroups' => 'Подгруппы',

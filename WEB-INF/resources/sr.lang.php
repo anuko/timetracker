@@ -239,8 +239,8 @@ $i18n_key_words = array(
 'label.totals_only' => 'Samo zbirno',
 
 // Form titles.
+'title.error' => 'Greška',
 // TODO: Translate the following.
-// 'title.error' => 'Error',
 // 'title.success' => 'Success',
 'title.login' => 'Prijava',
 'title.groups' => 'Timovi', // TODO: change "teams" to "groups".
