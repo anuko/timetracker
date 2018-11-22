@@ -110,6 +110,10 @@ $i18n_key_words = array(
 // 'error.cannot_import' => 'Cannot import: %s.',
 // 'error.format' => 'Invalid file format.',
 
+// Success messages.
+// TODO: translate the following.
+// 'msg.success' => 'Operation completed successfully.',
+
 // Labels for buttons.
 'button.login' => 'Login',
 'button.now' => 'Adesso',
