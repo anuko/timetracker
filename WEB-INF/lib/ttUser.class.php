@@ -509,8 +509,13 @@ class ttUser {
     if (!($this->can('manage_basic_settings') ||
       $this->can('manage_advanced_settings') ||
       $this->can('manage_features'))) return false;
+    // TODO: update the above for subgroup updates.
+
+    $group_id = $fields['group_id'];
+    if ($group_id && !$this->isGroupValid($group_id)) return false;
 
     $mdb2 = getConnection();
+    if (!$group_id) $group_id = $this->getActiveGroup();
 
     if (isset($fields['name'])) $name_part = ', name = '.$mdb2->quote($fields['name']);
     if (isset($fields['currency'])) $currency_part = ', currency = '.$mdb2->quote($fields['currency']);
@@ -537,7 +542,7 @@ class ttUser {
       $time_format_part.$week_start_part.$tracking_mode_part.$task_required_part.$project_required_part.$record_type_part.
       $bcc_email_part.$allow_ip_part.$plugins_part.$config_part.$lock_spec_part.$workday_minutes_part.$modified_part, ',');
 
-    $sql = "update tt_groups set $parts where id = $this->group_id";
+    $sql = "update tt_groups set $parts where id = $group_id and org_id = $this->org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
