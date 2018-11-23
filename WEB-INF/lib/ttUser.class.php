@@ -652,4 +652,23 @@ class ttUser {
 
     return $max_rank;
   }
+
+  // getUserPartForHeader constructs a string for user to display on pages header.
+  // It changes with "on behalf" attributes for both user and group.
+  function getUserPartForHeader() {
+    global $i18n;
+
+    $user_part = htmlspecialchars($this->name);
+    $user_part .= ' - '.htmlspecialchars($this->role_name);
+    if ($this->behalf_id) {
+      $user_part .= ' <span class="onBehalf">'.$i18n->get('label.on_behalf').' '.htmlspecialchars($this->behalf_name).'</span>';
+    }
+    if ($this->behalf_group_id) {
+      $user_part .= ',  <span class="onBehalf">'.$i18n->get('label.on_behalf').' '.htmlspecialchars($this->behalf_group_name).'</span>';
+    } else {
+      if ($this->group_name) // Note: we did not require group names in the past.
+        $user_part .= ', '.$this->group_name;
+    }
+    return $user_part;
+  }
 }
