@@ -313,4 +313,29 @@ class ttRoleHelper {
     }
     return false;
   }
+
+  // copyRoles copies roles from one group to another.
+  static function copyRolesToGroup($group_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $org_id = $user->org_id;
+    $columns = '(group_id, org_id, name, description, rank, rights, status)';
+    $roles = ttGroupHelper::getRoles(); // Roles in current on behalf group.
+
+    foreach ($roles as $role) {
+      $values = "values($group_id, $org_id".
+        ', '.$mdb2->quote($role['name']).
+        ', '.$mdb2->quote($role['description']).
+        ', '.(int)$role['rank'].
+        ', '.$mdb2->quote($role['rights']).
+        ', '.$mdb2->quote($role['status']).
+        ')';
+      $sql = "insert into tt_roles $columns $values";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error'))
+        return false;
+    }
+    return true;
+  }
 }

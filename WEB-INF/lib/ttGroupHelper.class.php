@@ -26,6 +26,8 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
+import('ttRoleHelper');
+
 // Class ttGroupHelper - contains helper functions that operate with groups.
 // This is a planned replacement for ttTeamHelper as we move forward with subgroups.
 class ttGroupHelper {
@@ -86,19 +88,51 @@ class ttGroupHelper {
     $mdb2 = getConnection();
     $parent_id = $user->getActiveGroup();
     $org_id = $user->org_id;
-
-    // TODO: inherit all attributes from the parent group, if not supplied.
     $name = $fields['name'];
     $description = $fields['description'];
 
-    $created = 'now()';
-    $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
+    // We need to inherit other attributes from the parent group.
+    $attrs = ttGroupHelper::getGroupAttrs($parent_id);
 
-    $sql = "insert into tt_groups (parent_id, org_id, name, description, created, created_ip)".
-      " values($parent_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($description).", $created, $created_ip)";
+    $columns = '(parent_id, org_id, name, description, currency, decimal_mark, lang, date_format, time_format'.
+      ', week_start, tracking_mode, project_required, task_required, record_type, bcc_email'.
+      ', allow_ip, password_complexity, plugins, lock_spec'.
+      ', workday_minutes, config, created, created_ip, created_by)';
+
+    $values = " values ($parent_id, $org_id";
+    $values .= ', '.$mdb2->quote($name);
+    $values .= ', '.$mdb2->quote($description);
+    $values .= ', '.$mdb2->quote($attrs['currency']);
+    $values .= ', '.$mdb2->quote($attrs['decimal_mark']);
+    $values .= ', '.$mdb2->quote($attrs['lang']);
+    $values .= ', '.$mdb2->quote($attrs['date_format']);
+    $values .= ', '.$mdb2->quote($attrs['time_format']);
+    $values .= ', '.(int)$attrs['week_start'];
+    $values .= ', '.(int)$attrs['tracking_mode'];
+    $values .= ', '.(int)$attrs['project_required'];
+    $values .= ', '.(int)$attrs['task_required'];
+    $values .= ', '.(int)$attrs['record_type'];
+    $values .= ', '.$mdb2->quote($attrs['bcc_email']);
+    $values .= ', '.$mdb2->quote($attrs['allow_ip']);
+    $values .= ', '.$mdb2->quote($attrs['password_complexity']);
+    $values .= ', '.$mdb2->quote($attrs['plugins']);
+    $values .= ', '.$mdb2->quote($attrs['lock_spec']);
+    $values .= ', '.(int)$attrs['workday_minutes'];
+    $values .= ', '.$mdb2->quote($attrs['config']);
+    $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
+    $values .= ')';
+
+    $sql = 'insert into tt_groups '.$columns.$values;
     $affected = $mdb2->exec($sql);
-    return (!is_a($affected, 'PEAR_Error'));
-    // TODO: design subgroup roles carefully. Perhaps roles are not to be touched in subgroups at all.
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    $subgroup_id = $mdb2->lastInsertID('tt_groups', 'id');
+
+    // Copy roles from the parent group to child group.
+    if (!ttRoleHelper::copyRolesToGroup($subgroup_id))
+      return false;
+    
+    return $subgroup_id;
   }
 
   // markGroupDeleted marks a group and everything in it as deleted.
@@ -218,5 +252,22 @@ class ttGroupHelper {
       $val = $res->fetchRow();
     }
     return $val;
+  }
+
+  // getRoles obtains all active and inactive roles in current group.
+  static function getRoles() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
+    $sql =  "select * from tt_roles".
+      " where group_id = $group_id and org_id = $org_id and status is not null";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) return false;
+    while ($val = $res->fetchRow()) {
+      $roles[] = $val;
+    }
+    return $roles;
   }
 }
