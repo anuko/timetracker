@@ -45,7 +45,7 @@ class ttOrgImportHelper {
   var $firstPass      = true;    // True during first pass through the file.
   var $org_id         = null;    // Organization id (same as top group_id).
   var $current_group_id        = null; // Current group id during parsing.
-  var $current_parent_group_id = null; // Current parent group id during parsing.
+  var $parents        = array(); // A stack of parent group ids for current group all the way to the root including self.
   var $top_role_id    = 0;       // Top role id.
 
   // Entity maps for current group. They map XML ids with database ids.
@@ -106,7 +106,7 @@ class ttOrgImportHelper {
       if ($name == 'GROUP') {
         // Create a new group.
         $this->current_group_id = $this->createGroup(array(
-          'parent_id' => $this->current_parent_group_id,
+          'parent_id' => $this->current_group_id, // Note: after insert current_group_id changes.
           'org_id' => $this->org_id,
           'name' => $attrs['NAME'],
           'description' => $attrs['DESCRIPTION'],
@@ -135,8 +135,8 @@ class ttOrgImportHelper {
           $sql = "update tt_groups set org_id = $this->current_group_id where org_id is NULL and id = $this->current_group_id";
           $affected = $mdb2->exec($sql);
         }
-        // Set parent group to create subgroups with this group as parent at next entry here.
-        $this->current_parent_group_id = $this->current_group_id;
+        // Add self to parent stack.
+        array_push($this->parents, $this->current_group_id);
         return;
       }
 
@@ -541,6 +541,22 @@ class ttOrgImportHelper {
     }
   }
 
+  // endElement - callback handler for ending tags in XML.
+  // We use this only for process </group> element endings and
+  // set current_group_id to an immediate parent.
+  // This is required to import group hierarchy correctly.
+  function endElement($parser, $name) {
+    // No need to care about first or second pass, as this is used only in second pass.
+    // See 2nd xml_set_element_handler, where this handler is set.
+    if ($name == 'GROUP') {
+      // Remove self from the parent stack.
+      $self = array_pop($this->parents);
+      // Set current group id to an immediate parent.
+      $len = count($this->parents);
+      $this->current_group_id = $len ? $this->parents[$len-1] : null;
+    }
+  }
+
   // importXml - uncompresses the file, reads and parses its content. During parsing,
   // startElement, endElement, and dataElement functions are called as many times as necessary.
   // Actual import occurs in the endElement handler.
@@ -575,7 +591,7 @@ class ttOrgImportHelper {
     // Initialize XML parser.
     $parser = xml_parser_create();
     xml_set_object($parser, $this);
-    xml_set_element_handler($parser, 'startElement', false);
+    xml_set_element_handler($parser, 'startElement', false); // No need to process end tags in 1st pass.
 
     // We need to parse the file 2 times:
     //   1) First pass: determine if import is possible.
@@ -608,9 +624,9 @@ class ttOrgImportHelper {
     // Now we can do a second pass, where real work is done.
     $parser = xml_parser_create();
     xml_set_object($parser, $this);
-    xml_set_element_handler($parser, 'startElement', false);
+    xml_set_element_handler($parser, 'startElement', 'endElement'); // Need to process ending tags too.
 
-    // Read and parse the content of the file. During parsing, startElement is called back for each tag.
+    // Read and parse the content of the file. During parsing, startElement and endElement are called back for each tag.
     $file = fopen($filename, 'r');
     while (($data = fread($file, 4096)) && $this->errors->no()) {
       if (!xml_parse($parser, $data, feof($file))) {
