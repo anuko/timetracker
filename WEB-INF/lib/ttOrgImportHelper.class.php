@@ -109,6 +109,7 @@ class ttOrgImportHelper {
           'parent_id' => $this->current_parent_group_id,
           'org_id' => $this->org_id,
           'name' => $attrs['NAME'],
+          'description' => $attrs['DESCRIPTION'],
           'currency' => $attrs['CURRENCY'],
           'decimal_mark' => $attrs['DECIMAL_MARK'],
           'lang' => $attrs['LANG'],
@@ -655,7 +656,7 @@ class ttOrgImportHelper {
     global $i18n;
     $mdb2 = getConnection();
 
-    $columns = '(parent_id, org_id, name, currency, decimal_mark, lang, date_format, time_format'.
+    $columns = '(parent_id, org_id, name, description, currency, decimal_mark, lang, date_format, time_format'.
       ', week_start, tracking_mode, project_required, task_required, record_type, bcc_email'.
       ', allow_ip, password_complexity, plugins, lock_spec'.
       ', workday_minutes, config, created, created_ip, created_by)';
@@ -664,6 +665,7 @@ class ttOrgImportHelper {
     $values .= $mdb2->quote($fields['parent_id']);
     $values .= ', '.$mdb2->quote($fields['org_id']);
     $values .= ', '.$mdb2->quote(trim($fields['name']));
+    $values .= ', '.$mdb2->quote(trim($fields['description']));
     $values .= ', '.$mdb2->quote(trim($fields['currency']));
     $values .= ', '.$mdb2->quote($fields['decimal_mark']);
     $values .= ', '.$mdb2->quote($fields['lang']);

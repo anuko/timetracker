@@ -123,6 +123,7 @@ class ttGroupExportHelper {
     // Write group info.
     $group = $this->getGroupAttrs();
     $group_part = "<group name=\"".htmlspecialchars($group['name'])."\"";
+    $group_part .= " description=\"".htmlspecialchars($group['description'])."\"";
     $group_part .= " currency=\"".htmlspecialchars($group['currency'])."\"";
     $group_part .= " decimal_mark=\"".$group['decimal_mark']."\"";
     $group_part .= " lang=\"".$group['lang']."\"";
