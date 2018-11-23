@@ -4,7 +4,7 @@
     <td>
       <table cellspacing="1" cellpadding="2" border="0">
         <tr>
-          <td align="right" nowrap>{$i18n.label.group_name}:</td>
+          <td align="right" nowrap>{$i18n.label.group_name} (*):</td>
           <td>{$forms.groupForm.group_name.control}</td>
         </tr>
         <tr>

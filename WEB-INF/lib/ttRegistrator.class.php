@@ -67,7 +67,7 @@ class ttRegistrator {
   function validate() {
     global $i18n;
 
-    if (!ttValidString($this->group_name, true))
+    if (!ttValidString($this->group_name))
       $this->err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
     if (!ttValidString($this->currency, true))
       $this->err->add($i18n->get('error.field'), $i18n->get('label.currency'));

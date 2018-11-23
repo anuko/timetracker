@@ -191,7 +191,7 @@ if ($request->isPost()) {
   }
 
   // Validate user input.
-  if (!ttValidString($cl_group, true)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
+  if (!ttValidString($cl_group)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
   if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
   if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));
   if ($advanced_settings) {

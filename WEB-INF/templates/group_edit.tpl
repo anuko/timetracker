@@ -28,7 +28,7 @@ function handleTaskRequiredCheckbox() {
         <table cellspacing="1" cellpadding="2" border="0">
 {if $user->can('manage_basic_settings')}
           <tr>
-            <td align="right" nowrap>{$i18n.label.group_name}:</td>
+            <td align="right" nowrap>{$i18n.label.group_name} (*):</td>
             <td>{$forms.groupForm.group_name.control}</td>
           </tr>
           <tr>
@@ -108,6 +108,10 @@ function handleTaskRequiredCheckbox() {
           <tr>
             <td align="right" nowrap>{$i18n.form.group_edit.allow_ip}:</td>
             <td>{$forms.groupForm.allow_ip.control} <a href="https://www.anuko.com/lp/tt_21.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>{$i18n.label.required_fields}</td>
           </tr>
   {/if}
           {* initialize preview text *}

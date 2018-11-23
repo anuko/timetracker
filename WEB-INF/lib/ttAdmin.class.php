@@ -198,7 +198,7 @@ class ttAdmin {
 
     $result = true;
 
-    if (!ttValidString($fields['group_name'], true)) {
+    if (!ttValidString($fields['new_group_name'])) {
       $this->err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
       $result = false;
     }
