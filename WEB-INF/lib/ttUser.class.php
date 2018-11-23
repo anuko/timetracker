@@ -518,6 +518,7 @@ class ttUser {
     if (!$group_id) $group_id = $this->getActiveGroup();
 
     if (isset($fields['name'])) $name_part = ', name = '.$mdb2->quote($fields['name']);
+    if (isset($fields['description'])) $description_part = ', description = '.$mdb2->quote($fields['description']);
     if (isset($fields['currency'])) $currency_part = ', currency = '.$mdb2->quote($fields['currency']);
     if (isset($fields['lang'])) $lang_part = ', lang = '.$mdb2->quote($fields['lang']);
     if (isset($fields['decimal_mark'])) $decimal_mark_part = ', decimal_mark = '.$mdb2->quote($fields['decimal_mark']);
@@ -538,7 +539,7 @@ class ttUser {
     if (isset($fields['workday_minutes'])) $workday_minutes_part = ', workday_minutes = '.$mdb2->quote($fields['workday_minutes']);
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($this->id);
 
-    $parts = trim($name_part.$currency_part.$lang_part.$decimal_mark_part.$date_format_part.
+    $parts = trim($name_part.$description_part.$currency_part.$lang_part.$decimal_mark_part.$date_format_part.
       $time_format_part.$week_start_part.$tracking_mode_part.$task_required_part.$project_required_part.$record_type_part.
       $bcc_email_part.$allow_ip_part.$plugins_part.$config_part.$lock_spec_part.$workday_minutes_part.$modified_part, ',');
 

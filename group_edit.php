@@ -53,6 +53,7 @@ if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
 
 if ($request->isPost()) {
   $cl_group = trim($request->getParameter('group_name'));
+  $cl_description = trim($request->getParameter('description'));
   $cl_currency = trim($request->getParameter('currency'));
   if (!$cl_currency) $cl_currency = CURRENCY_DEFAULT;
   $cl_lang = $request->getParameter('lang');
@@ -73,6 +74,7 @@ if ($request->isPost()) {
   $cl_allow_ip = trim($request->getParameter('allow_ip'));
 } else {
   $cl_group = $group['name'];
+  $cl_description = $group['description'];
   $cl_currency = ($group['currency'] == ''? CURRENCY_DEFAULT : $group['currency']);
   $cl_lang = $group['lang'];
   $cl_decimal_mark = $group['decimal_mark'];
@@ -95,6 +97,7 @@ if ($request->isPost()) {
 $form = new Form('groupForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$group_id));
 $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','value'=>$cl_group,'enable'=>$advanced_settings));
+$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
 
 // Prepare an array of available languages.
@@ -189,6 +192,7 @@ if ($request->isPost()) {
 
   // Validate user input.
   if (!ttValidString($cl_group, true)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
+  if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
   if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));
   if ($advanced_settings) {
     if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
@@ -207,6 +211,7 @@ if ($request->isPost()) {
     if ($user->updateGroup(array(
       'group_id' => $group_id,
       'name' => $cl_group,
+      'description' => $cl_description,
       'currency' => $cl_currency,
       'lang' => $cl_lang,
       'decimal_mark' => $cl_decimal_mark,

@@ -32,6 +32,10 @@ function handleTaskRequiredCheckbox() {
             <td>{$forms.groupForm.group_name.control}</td>
           </tr>
           <tr>
+            <td align = "right">{$i18n.label.description}:</td>
+            <td>{$forms.groupForm.description.control}</td>
+          </tr>
+          <tr>
             <td align="right">{$i18n.label.currency}:</td>
             <td>{$forms.groupForm.currency.control}</td>
           </tr>
