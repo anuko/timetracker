@@ -657,6 +657,7 @@ class ttUser {
   // It changes with "on behalf" attributes for both user and group.
   function getUserPartForHeader() {
     global $i18n;
+    if (!$this->id) return null;
 
     $user_part = htmlspecialchars($this->name);
     $user_part .= ' - '.htmlspecialchars($this->role_name);
