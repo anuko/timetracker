@@ -205,4 +205,18 @@ class ttGroupHelper {
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
+
+  // getGroupAttrs obtains all group attributes.
+  static function getGroupAttrs($group_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $sql =  "select * from tt_groups".
+            " where status = 1 and id = $group_id and org_id = $user->org_id";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+    }
+    return $val;
+  }
 }
