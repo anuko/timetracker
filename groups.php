@@ -43,6 +43,7 @@ if ($request->isPost() && !$user->isGroupValid($request->getParameter('group')))
 
 if ($request->isPost()) {
   $group_id = $request->getParameter('group');
+  $user->setOnBehalfGroup($group_id);
 } else {
   $group_id = $user->getActiveGroup();
 }

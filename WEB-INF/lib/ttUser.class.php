@@ -419,7 +419,7 @@ class ttUser {
     if (!$group_id) $group_id = $this->getActiveGroup();
 
     $sql = "select id, name, description from tt_groups where org_id = $this->org_id".
-      " and parent_id = $group_id and status is not null";
+      " and parent_id = $group_id and status is not null order by upper(name)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -671,5 +671,38 @@ class ttUser {
         $user_part .= ', '.$this->group_name;
     }
     return $user_part;
+  }
+
+  // setOnBehalfGroup sets on behalf group for the user in both the object and the session.
+  function setOnBehalfGroup($group_id) {
+
+    // Unset things first.
+    $this->behalf_group_id = null;
+    $this->behalf_group_name = null;
+    unset($_SESSION['behalf_group_id']);
+    unset($_SESSION['behalf_group_name']);
+
+    // Do not do anything if we don't have rights.
+    if (!$this->can('manage_subgroups')) return;
+
+    // No need to set if the group is our home group.
+    if ($group_id == $this->group_id) return;
+
+    // No need to set if the subgroup is not valid.
+    if (!$this->isSubgroupValid($group_id)) return;
+
+    // We are good to set on behalf group.
+    $onBehalfGroupName = ttGroupHelper::getGroupName($group_id);
+    $_SESSION['behalf_group_id'] = $group_id;
+    $_SESSION['behalf_group_name'] = $onBehalfGroupName;
+    $this->behalf_group_id = $group_id;
+    $this->behalf_group_name = $onBehalfGroupName;
+
+    // Question remains whether or not we need to adjust on behalf user.
+    // Adjusting for now. Test it and redesign if necessary.
+    unset($_SESSION['behalf_id']);
+    unset($_SESSION['behalf_name']);
+    $this->adjustBehalfId();
+    return;
   }
 }
