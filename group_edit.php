@@ -37,9 +37,16 @@ if (!(ttAccessAllowed('manage_basic_settings') || ttAccessAllowed('manage_advanc
   header('Location: access_denied.php');
   exit();
 }
+$group_id = (int)$request->getParameter('id');
+if ($group_id && !$user->isGroupValid($group_id)) {
+  header('Location: access_denied.php');
+  exit();
+}
 // End of access checks.
 
-$config = new ttConfigHelper($user->config);
+if (!$group_id) $group_id = $user->getActiveGroup();
+$group = ttGroupHelper::getGroupAttrs($group_id);
+$config = new ttConfigHelper($group['config']);
 
 $advanced_settings = $user->can('manage_advanced_settings');
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
@@ -65,27 +72,28 @@ if ($request->isPost()) {
   $cl_bcc_email = trim($request->getParameter('bcc_email'));
   $cl_allow_ip = trim($request->getParameter('allow_ip'));
 } else {
-  $cl_group = $user->group_name;
-  $cl_currency = ($user->currency == ''? CURRENCY_DEFAULT : $user->currency);
-  $cl_lang = $user->lang;
-  $cl_decimal_mark = $user->decimal_mark;
-  $cl_date_format = $user->date_format;
-  $cl_time_format = $user->time_format;
-  $cl_start_week = $user->week_start;
-  $cl_show_holidays = $user->show_holidays;
-  $cl_tracking_mode = $user->tracking_mode;
-  $cl_project_required = $user->project_required;
-  $cl_task_required = $user->task_required;
-  $cl_record_type = $user->record_type;
-  $cl_punch_mode = $user->punch_mode;
-  $cl_allow_overlap = $user->allow_overlap;
-  $cl_future_entries = $user->future_entries;
-  $cl_uncompleted_indicators = $user->uncompleted_indicators;
-  $cl_bcc_email = $user->bcc_email;
-  $cl_allow_ip = $user->allow_ip;
+  $cl_group = $group['name'];
+  $cl_currency = ($group['currency'] == ''? CURRENCY_DEFAULT : $group['currency']);
+  $cl_lang = $group['lang'];
+  $cl_decimal_mark = $group['decimal_mark'];
+  $cl_date_format = $group['date_format'];
+  $cl_time_format = $group['time_format'];
+  $cl_start_week = $group['week_start'];
+  $cl_show_holidays = $config->getDefinedValue('show_holidays');
+  $cl_tracking_mode = $group['tracking_mode'];
+  $cl_project_required = $group['project_required'];
+  $cl_task_required = $group['task_required'];
+  $cl_record_type = $group['record_type'];
+  $cl_punch_mode = $config->getDefinedValue('punch_mode');
+  $cl_allow_overlap = $config->getDefinedValue('allow_overlap');
+  $cl_future_entries = $config->getDefinedValue('future_entries');
+  $cl_uncompleted_indicators = $config->getDefinedValue('uncompleted_indicators');
+  $cl_bcc_email = $group['bcc_email'];
+  $cl_allow_ip = $group['allow_ip'];
 }
 
 $form = new Form('groupForm');
+$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$group_id));
 $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','value'=>$cl_group,'enable'=>$advanced_settings));
 $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
 
@@ -175,7 +183,7 @@ if ($request->isPost()) {
 
   if ($request->getParameter('btn_delete')) {
     // Delete button pressed, redirect.
-    header('Location: group_delete.php?id='.$user->group_id);
+    header('Location: group_delete.php?id='.$group_id);
     exit();
   }
 
@@ -197,6 +205,7 @@ if ($request->isPost()) {
     $config->setDefinedValue('uncompleted_indicators', $cl_uncompleted_indicators);
 
     if ($user->updateGroup(array(
+      'group_id' => $group_id,
       'name' => $cl_group,
       'currency' => $cl_currency,
       'lang' => $cl_lang,
@@ -212,7 +221,7 @@ if ($request->isPost()) {
       'bcc_email' => $cl_bcc_email,
       'allow_ip' => $cl_allow_ip,
       'config' => $config->getConfig()))) {
-      header('Location: time.php');
+      header('Location: success.php');
       exit();
     } else
       $err->add($i18n->get('error.db'));
