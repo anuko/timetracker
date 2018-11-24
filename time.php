@@ -109,7 +109,7 @@ $form = new Form('timeRecordForm');
 
 if (isTrue(SUBGROUP_DEBUG)) {
 if ($user->can('manage_subgroups')) {
-  $groups = $user->getGroups();
+  $groups = $user->getGroupsForDropdown();
   if (count($groups) > 1) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'this.form.submit();',

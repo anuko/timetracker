@@ -366,47 +366,51 @@ class ttUser {
     return $user_list;
   }
 
-  // getGroups obtains an array consisting of:
-  // - A parent group (..) of a currently selected group, if available.
-  // - A currently selected group (.) represented by $behalf_group_id.
-  // - All subgroups (only immediate children) of a currently selected group.
-  function getGroups() {
+  // getGroupsForDropdown obtains an array of groups to populate "Group" dropdown.
+  // It consists of:
+  //   - User home group.
+  //   - The entire stack of groups all the way down to current on behalf group.
+  //   - All immediate children of the current on behalf group.
+  // This allows user to navigate easily to home group, anything in between, and 1 level below.
+  function getGroupsForDropdown() {
     $mdb2 = getConnection();
 
-    $selected_group_id = ($this->behalf_group_id ? $this->behalf_group_id : $this->group_id);
-    $selected_group_name = ($this->behalf_group_id ? $this->behalf_group_name : $this->group_name);
-
-    // Start with parent group.
-    if ($selected_group_id != $this->group_id) {
-      // We are in one of subgroups, and a parent exists.
-      // Get parent group info.
-      $sql = "select parent_id from tt_groups where org_id = $this->org_id and id = $selected_group_id and status = 1";
-      $res = $mdb2->query($sql);
-      if (!is_a($res, 'PEAR_Error')) {
-        $val = $res->fetchRow();
-        $parent_id = $val['parent_id'];
-        if ($parent_id) {
-          // Get parent group name.
-          $sql = "select name from tt_groups where org_id = $this->org_id and id = $parent_id and status = 1";
-          $res = $mdb2->query($sql);
-          if (!is_a($res, 'PEAR_Error')) {
-            $val = $res->fetchRow();
-            $groups[] = array('id'=>$parent_id,'name'=>$val['name']);
-          }
-        }
-      }
-    }
-
-    // Add current group.
-    $groups[] = array('id'=>$selected_group_id,'name'=>$selected_group_name);
-
-    // Add subgroups.
-    $sql = "select id, name from tt_groups where org_id = $this->org_id and parent_id = $selected_group_id and status = 1";
-    //die($sql);
+    // Start with subgroups.
+    $groups = array();
+    $group_id = $this->getActiveGroup();
+    $sql = "select id, name from tt_groups where org_id = $this->org_id and parent_id = $group_id and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
         $groups[] = $val;
+      }
+    }
+
+    // Add current on behalf group to the beginning of array.
+    $selected_group_id = ($this->behalf_group_id ? $this->behalf_group_id : $this->group_id);
+    $selected_group_name = ($this->behalf_group_id ? $this->behalf_group_name : $this->group_name);
+    array_unshift($groups,  array('id'=>$selected_group_id,'name'=>$selected_group_name));
+
+    // Iterate all the way to the home group, starting with selected ("on behalf") group.
+    $current_group_id = $selected_group_id;
+    while ($current_group_id != $this->group_id) {
+      $sql = "select parent_id from tt_groups where org_id = $this->org_id and id = $current_group_id and status = 1";
+      $res = $mdb2->query($sql);
+      if (is_a($res, 'PEAR_Error')) return false;
+
+      $val = $res->fetchRow();
+      $parent_id = $val['parent_id'];
+      if ($parent_id) {
+        // Get parent group name.
+        $sql = "select name from tt_groups where org_id = $this->org_id and id = $parent_id and status = 1";
+        $res = $mdb2->query($sql);
+        if (is_a($res, 'PEAR_Error')) return false;
+        $val = $res->fetchRow();
+        if (!$val) return false;
+        array_unshift($groups, array('id'=>$parent_id,'name'=>$val['name']));
+        $current_group_id = $parent_id;
+      } else {
+        return false;
       }
     }
     return $groups;

@@ -49,7 +49,7 @@ if ($request->isPost()) {
 }
 
 $form = new Form('subgroupsForm');
-$groups = $user->getGroups();
+$groups = $user->getGroupsForDropdown();
 if (count($groups) > 1) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'this.form.submit();',
