@@ -331,7 +331,7 @@ class ttOrgImportHelper {
 
       if ($name == 'LOG_ITEM') {
         // We get here when processing <log_item> tags for the current group.
-        $log_item_id = ttTimeHelper::insert(array(
+        $log_item_id = $this->insertLogEntry(array(
           'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
@@ -339,11 +339,11 @@ class ttOrgImportHelper {
           'start' => $attrs['START'],
           'finish' => $attrs['FINISH'],
           'duration' => $attrs['DURATION'],
-          'client' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
-          'project' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
-          'task' => $this->currentGroupTaskMap[$attrs['TASK_ID']],
-          'invoice' => $this->currentGroupInvoiceMap[$attrs['INVOICE_ID']],
-          'note' => (isset($attrs['COMMENT']) ? $attrs['COMMENT'] : ''),
+          'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'project_id' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
+          'task_id' => $this->currentGroupTaskMap[$attrs['TASK_ID']],
+          'invoice_id' => $this->currentGroupInvoiceMap[$attrs['INVOICE_ID']],
+          'comment' => (isset($attrs['COMMENT']) ? $attrs['COMMENT'] : ''),
           'billable' => $attrs['BILLABLE'],
           'paid' => $attrs['PAID'],
           'status' => $attrs['STATUS']));
@@ -978,6 +978,51 @@ class ttOrgImportHelper {
     $val = $res->fetchRow();
     $last_id = $val['last_insert_id'];
     return $last_id;
+  }
+
+  // insertLogEntry - a helper function to insert a time log entry.
+  private function insertLogEntry($fields) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $user_id = (int) $fields['user_id'];
+    $date = $fields['date'];
+    $start = $fields['start'];
+    $duration = $fields['duration'];
+    $client_id = $fields['client_id'];
+    $project_id = $fields['project_id'];
+    $task_id = $fields['task_id'];
+    $invoice_id = $fields['invoice_id'];
+    $comment = $fields['comment'];
+    $billable = (int) $fields['billable'];
+    $paid = (int) $fields['paid'];
+    $status = $fields['status'];
+
+    $sql = "insert into tt_log".
+      " (user_id, group_id, org_id, date, start, duration, client_id, project_id, task_id, invoice_id, comment".
+      ", billable, paid, created, created_ip, created_by, status)".
+      " values ($user_id, $group_id, $org_id".
+      ", ".$mdb2->quote($date).
+      ", ".$mdb2->quote($start).
+      ", ".$mdb2->quote($duration).
+      ", ".$mdb2->quote($client_id).
+      ", ".$mdb2->quote($project_id).
+      ", ".$mdb2->quote($task_id).
+      ", ".$mdb2->quote($invoice_id).
+      ", ".$mdb2->quote($comment).
+      ", $billable, $paid".
+      ", now(), ".$mdb2->quote($_SERVER['REMOTE_ADDR']).", ".$mdb2->quote($user->id).
+      ", ". $mdb2->quote($status).")";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) {
+      $this->errors->add($i18n->get('error.db')); // TODO: review whether or not to add error here in all insert calls.
+      return false;
+    }
+
+    $log_id = $mdb2->lastInsertID('tt_log', 'id');
+    return $log_id;
   }
 
   // insertCustomFieldLogEntry - a helper function to insert a custom field log entry.
