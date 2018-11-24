@@ -363,38 +363,6 @@ class ttGroupExportHelper {
       unset($log_part);
     }
 
-    /*
-    fwrite($this->file, $this->indentation."  <log>\n");
-    $key = 0;
-    foreach ($this->userMap as $key => $value) {
-      $user_id = $key;
-      $records = ttTimeHelper::getAllRecords($user_id);
-      foreach ($records as $record) {
-        $key++;
-        $this->logMap[$record['id']] = $key;
-        $log_part = $this->indentation.'    '."<log_item id=\"$key\"";
-        $log_part .= " user_id=\"".$this->userMap[$record['user_id']]."\"";
-        $log_part .= " date=\"".$record['date']."\"";
-        $log_part .= " start=\"".$record['start']."\"";
-        $log_part .= " finish=\"".$record['finish']."\"";
-        $log_part .= " duration=\"".($record['start']?"":$record['duration'])."\"";
-        $log_part .= " client_id=\"".$this->clientMap[$record['client_id']]."\"";
-        $log_part .= " project_id=\"".$this->projectMap[$record['project_id']]."\"";
-        $log_part .= " task_id=\"".$this->taskMap[$record['task_id']]."\"";
-        $log_part .= " invoice_id=\"".$this->invoiceMap[$record['invoice_id']]."\"";
-        $log_part .= " comment=\"".htmlspecialchars($record['comment'])."\"";
-        $log_part .= " billable=\"".$record['billable']."\"";
-        $log_part .= " paid=\"".$record['paid']."\"";
-        $log_part .= " status=\"".$record['status']."\"";
-        $log_part .= "></log_item>\n";
-        fwrite($this->file, $log_part);
-      }
-    }
-    fwrite($this->file, $this->indentation."  </log>\n");
-    unset($records);
-    unset($log_part);
-    */
-
     // Write custom fields.
     if (count($custom_fields) > 0) {
       fwrite($this->file, $this->indentation."  <custom_fields>\n");
