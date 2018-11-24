@@ -36,7 +36,18 @@ if (!ttAccessAllowed('manage_roles')) {
   header('Location: access_denied.php');
   exit();
 }
+$group_id = (int)$request->getParameter('group_id');
+if ($group_id && !$user->isGroupValid($group_id)) {
+  header('Location: access_denied.php');
+  exit();
+}
 // End of access checks.
+
+if ($group_id) {
+  // We are passed a valid group_id (most likely from group_edit.php).
+  // Set on behalf group accordingly.
+  $user->setOnBehalfGroup($group_id);
+}
 
 $smarty->assign('active_roles', ttTeamHelper::getActiveRolesForUser());
 $smarty->assign('inactive_roles', ttTeamHelper::getInactiveRolesForUser());

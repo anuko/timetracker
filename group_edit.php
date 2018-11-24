@@ -44,7 +44,14 @@ if ($group_id && !$user->isGroupValid($group_id)) {
 }
 // End of access checks.
 
+if ($group_id) {
+  // We are passed a valid group_id.
+  // Set on behalf group accordingly.
+  $user->setOnBehalfGroup($group_id);
+}
+
 if (!$group_id) $group_id = $user->getActiveGroup();
+$groups = $user->getGroupsForDropdown();
 $group = ttGroupHelper::getGroupAttrs($group_id);
 $config = new ttConfigHelper($group['config']);
 
@@ -96,6 +103,16 @@ if ($request->isPost()) {
 
 $form = new Form('groupForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$group_id));
+if (count($groups) > 1) {
+  $form->addInput(array('type'=>'combobox',
+    'onchange'=>'document.groupForm.group_changed.value=1;document.groupForm.submit();',
+    'name'=>'group',
+    'style'=>'width: 250px;',
+    'value'=>$group_id,
+    'data'=>$groups,
+    'datakeys'=>array('id','name')));
+  $form->addInput(array('type'=>'hidden','name'=>'group_changed'));
+}
 $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','value'=>$cl_group,'enable'=>$advanced_settings));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
@@ -182,7 +199,16 @@ if ($advanced_settings) {
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 if ($user->can('delete_group')) $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('button.delete')));
 
+$form->setValueByElement('group_changed','');
+
 if ($request->isPost()) {
+  if ($request->getParameter('group_changed')) {
+    // User changed the group in dropdown.
+    $new_group_id = $request->getParameter('group');
+    // Redirect to self.
+    header('Location: group_edit.php?id='.$new_group_id);
+    exit();
+  }
 
   if ($request->getParameter('btn_delete')) {
     // Delete button pressed, redirect.
@@ -234,6 +260,8 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
+$smarty->assign('group_id', $group_id);
+$smarty->assign('group_dropdown', count($groups) > 1);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="handleTaskRequiredCheckbox(); handlePluginCheckboxes();"');
 $smarty->assign('title', $i18n->get('title.edit_group'));

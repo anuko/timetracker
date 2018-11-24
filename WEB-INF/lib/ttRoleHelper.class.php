@@ -124,6 +124,9 @@ class ttRoleHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
+
     $id = (int)$fields['id'];
     if (isset($fields['name'])) $name_part = 'name = '.$mdb2->quote($fields['name']);
     if (isset($fields['rank'])) $rank_part = ', rank = '.(int)$fields['rank'];
@@ -131,7 +134,7 @@ class ttRoleHelper {
     if (isset($fields['status'])) $status_part = ', status = '.(int)$fields['status'];
     if (isset($fields['rights'])) $rights_part = ', rights = '.$mdb2->quote($fields['rights']);
     $parts = trim($name_part.$rank_part.$descr_part.$status_part.$rights_part, ',');
-    $sql = "update tt_roles set $parts where id = $id and group_id = $user->group_id";
+    $sql = "update tt_roles set $parts where id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
@@ -141,9 +144,11 @@ class ttRoleHelper {
     global $user;
 
     $mdb2 = getConnection();
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
 
     // Mark the task as deleted.
-    $sql = "update tt_roles set status = NULL where id = $role_id and group_id = $user->group_id";
+    $sql = "update tt_roles set status = NULL where id = $role_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
