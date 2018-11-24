@@ -314,7 +314,7 @@ class ttRoleHelper {
     return false;
   }
 
-  // copyRoles copies roles from one group to another.
+  // copyRolesToGroup copies roles from current on behalf group to another.
   static function copyRolesToGroup($group_id) {
     global $user;
     $mdb2 = getConnection();

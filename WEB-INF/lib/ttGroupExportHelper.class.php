@@ -211,116 +211,128 @@ class ttGroupExportHelper {
     unset($role_part);
 
     // Write tasks.
-    fwrite($this->file, $this->indentation."  <tasks>\n");
-    foreach ($tasks as $task) {
-      $task_part = $this->indentation.'    '."<task id=\"".$this->taskMap[$task['id']]."\"";
-      $task_part .= " name=\"".htmlspecialchars($task['name'])."\"";
-      $task_part .= " description=\"".htmlspecialchars($task['description'])."\"";
-      $task_part .= " status=\"".$task['status']."\"";
-      $task_part .= "></task>\n";
-      fwrite($this->file, $task_part);
+    if (count($tasks) > 0) {
+      fwrite($this->file, $this->indentation."  <tasks>\n");
+      foreach ($tasks as $task) {
+        $task_part = $this->indentation.'    '."<task id=\"".$this->taskMap[$task['id']]."\"";
+        $task_part .= " name=\"".htmlspecialchars($task['name'])."\"";
+        $task_part .= " description=\"".htmlspecialchars($task['description'])."\"";
+        $task_part .= " status=\"".$task['status']."\"";
+        $task_part .= "></task>\n";
+        fwrite($this->file, $task_part);
+      }
+      fwrite($this->file, $this->indentation."  </tasks>\n");
+      unset($tasks);
+      unset($task_part);
     }
-    fwrite($this->file, $this->indentation."  </tasks>\n");
-    unset($tasks);
-    unset($task_part);
 
     // Write projects.
-    fwrite($this->file, $this->indentation."  <projects>\n");
-    foreach ($projects as $project_item) {
-      $tasks_str = null;
-      if($project_item['tasks']){
-        $tasks = explode(',', $project_item['tasks']);
-        $tasks_mapped = array();
-        foreach ($tasks as $item)
-          $tasks_mapped[] = $this->taskMap[$item];
-        $tasks_str = implode(',', $tasks_mapped);
+    if (count($projects) > 0) {
+      fwrite($this->file, $this->indentation."  <projects>\n");
+      foreach ($projects as $project_item) {
+        $tasks_str = null;
+        if($project_item['tasks']){
+          $tasks = explode(',', $project_item['tasks']);
+          $tasks_mapped = array();
+          foreach ($tasks as $item)
+            $tasks_mapped[] = $this->taskMap[$item];
+          $tasks_str = implode(',', $tasks_mapped);
+        }
+        $project_part = $this->indentation.'    '."<project id=\"".$this->projectMap[$project_item['id']]."\"";
+        $project_part .= " name=\"".htmlspecialchars($project_item['name'])."\"";
+        $project_part .= " description=\"".htmlspecialchars($project_item['description'])."\"";
+        $project_part .= " tasks=\"".$tasks_str."\"";
+        $project_part .= " status=\"".$project_item['status']."\"";
+        $project_part .= "></project>\n";
+        fwrite($this->file, $project_part);
       }
-      $project_part = $this->indentation.'    '."<project id=\"".$this->projectMap[$project_item['id']]."\"";
-      $project_part .= " name=\"".htmlspecialchars($project_item['name'])."\"";
-      $project_part .= " description=\"".htmlspecialchars($project_item['description'])."\"";
-      $project_part .= " tasks=\"".$tasks_str."\"";
-      $project_part .= " status=\"".$project_item['status']."\"";
-      $project_part .= "></project>\n";
-      fwrite($this->file, $project_part);
+      fwrite($this->file, $this->indentation."  </projects>\n");
+      unset($projects);
+      unset($project_part);
     }
-    fwrite($this->file, $this->indentation."  </projects>\n");
-    unset($projects);
-    unset($project_part);
 
     // Write clients.
-    fwrite($this->file, $this->indentation."  <clients>\n");
-    foreach ($clients as $client_item) {
-      if($client_item['projects']){
-        $projects_db = explode(',', $client_item['projects']);
-        $projects_mapped = array();
-        foreach ($projects_db as $item)
-          $projects_mapped[] = $this->projectMap[$item];
-        $projects_str = implode(',', $projects_mapped);
+    if (count($clients) > 0) {
+      fwrite($this->file, $this->indentation."  <clients>\n");
+      foreach ($clients as $client_item) {
+        if($client_item['projects']){
+          $projects_db = explode(',', $client_item['projects']);
+          $projects_mapped = array();
+          foreach ($projects_db as $item)
+            $projects_mapped[] = $this->projectMap[$item];
+          $projects_str = implode(',', $projects_mapped);
+        }
+        $client_part = $this->indentation.'    '."<client id=\"".$this->clientMap[$client_item['id']]."\"";
+        $client_part .= " name=\"".htmlspecialchars($client_item['name'])."\"";
+        $client_part .= " address=\"".htmlspecialchars($client_item['address'])."\"";
+        $client_part .= " tax=\"".$client_item['tax']."\"";
+        $client_part .= " projects=\"".$projects_str."\"";
+        $client_part .= " status=\"".$client_item['status']."\"";
+        $client_part .= "></client>\n";
+        fwrite($this->file, $client_part);
       }
-      $client_part = $this->indentation.'    '."<client id=\"".$this->clientMap[$client_item['id']]."\"";
-      $client_part .= " name=\"".htmlspecialchars($client_item['name'])."\"";
-      $client_part .= " address=\"".htmlspecialchars($client_item['address'])."\"";
-      $client_part .= " tax=\"".$client_item['tax']."\"";
-      $client_part .= " projects=\"".$projects_str."\"";
-      $client_part .= " status=\"".$client_item['status']."\"";
-      $client_part .= "></client>\n";
-      fwrite($this->file, $client_part);
+      fwrite($this->file, $this->indentation."  </clients>\n");
+      unset($clients);
+      unset($client_part);
     }
-    fwrite($this->file, $this->indentation."  </clients>\n");
-    unset($clients);
-    unset($client_part);
 
     // Write users.
-    fwrite($this->file, $this->indentation."  <users>\n");
-    foreach ($users as $user_item) {
-      $role_id = $user_item['rank'] == 512 ? 0 : $this->roleMap[$user_item['role_id']]; // Special role_id 0 (not null) for top manager.
-      $user_part = $this->indentation.'    '."<user id=\"".$this->userMap[$user_item['id']]."\"";
-      $user_part .= " name=\"".htmlspecialchars($user_item['name'])."\"";
-      $user_part .= " login=\"".htmlspecialchars($user_item['login'])."\"";
-      $user_part .= " password=\"".$user_item['password']."\"";
-      $user_part .= " role_id=\"".$role_id."\"";
-      $user_part .= " client_id=\"".$this->clientMap[$user_item['client_id']]."\"";
-      $user_part .= " rate=\"".$user_item['rate']."\"";
-      $user_part .= " email=\"".$user_item['email']."\"";
-      $user_part .= " status=\"".$user_item['status']."\"";
-      $user_part .= "></user>\n";
-      fwrite($this->file, $user_part);
+    if (count($users) > 0) {
+      fwrite($this->file, $this->indentation."  <users>\n");
+      foreach ($users as $user_item) {
+        $role_id = $user_item['rank'] == 512 ? 0 : $this->roleMap[$user_item['role_id']]; // Special role_id 0 (not null) for top manager.
+        $user_part = $this->indentation.'    '."<user id=\"".$this->userMap[$user_item['id']]."\"";
+        $user_part .= " name=\"".htmlspecialchars($user_item['name'])."\"";
+        $user_part .= " login=\"".htmlspecialchars($user_item['login'])."\"";
+        $user_part .= " password=\"".$user_item['password']."\"";
+        $user_part .= " role_id=\"".$role_id."\"";
+        $user_part .= " client_id=\"".$this->clientMap[$user_item['client_id']]."\"";
+        $user_part .= " rate=\"".$user_item['rate']."\"";
+        $user_part .= " email=\"".$user_item['email']."\"";
+        $user_part .= " status=\"".$user_item['status']."\"";
+        $user_part .= "></user>\n";
+        fwrite($this->file, $user_part);
+      }
+      fwrite($this->file, $this->indentation."  </users>\n");
+      unset($users);
+      unset($user_part);
     }
-    fwrite($this->file, $this->indentation."  </users>\n");
-    unset($users);
-    unset($user_part);
 
     // Write user to project binds.
-    fwrite($this->file, $this->indentation."  <user_project_binds>\n");
     $user_binds = ttTeamHelper::getUserToProjectBinds($this->group_id);
-    foreach ($user_binds as $bind) {
-      $user_id = $this->userMap[$bind['user_id']];
-      $project_id = $this->projectMap[$bind['project_id']];
-      $bind_part = $this->indentation.'    '."<user_project_bind user_id=\"".$user_id."\"";
-      $bind_part .= " project_id=\"".$project_id."\"";
-      $bind_part .= " rate=\"".$bind['rate']."\"";
-      $bind_part .= " status=\"".$bind['status']."\"";
-      $bind_part .= "></user_project_bind>\n";
-      fwrite($this->file, $bind_part);
+    if (count($user_binds) > 0) {
+      fwrite($this->file, $this->indentation."  <user_project_binds>\n");
+      foreach ($user_binds as $bind) {
+        $user_id = $this->userMap[$bind['user_id']];
+        $project_id = $this->projectMap[$bind['project_id']];
+        $bind_part = $this->indentation.'    '."<user_project_bind user_id=\"".$user_id."\"";
+        $bind_part .= " project_id=\"".$project_id."\"";
+        $bind_part .= " rate=\"".$bind['rate']."\"";
+        $bind_part .= " status=\"".$bind['status']."\"";
+        $bind_part .= "></user_project_bind>\n";
+        fwrite($this->file, $bind_part);
+      }
+      fwrite($this->file, $this->indentation."  </user_project_binds>\n");
+      unset($user_binds);
+      unset($bind_part);
     }
-    fwrite($this->file, $this->indentation."  </user_project_binds>\n");
-    unset($user_binds);
-    unset($bind_part);
 
     // Write invoices.
-    fwrite($this->file, $this->indentation."  <invoices>\n");
-    foreach ($invoices as $invoice_item) {
-      $invoice_part = $this->indentation.'    '."<invoice id=\"".$this->invoiceMap[$invoice_item['id']]."\"";
-      $invoice_part .= " name=\"".htmlspecialchars($invoice_item['name'])."\"";
-      $invoice_part .= " date=\"".$invoice_item['date']."\"";
-      $invoice_part .= " client_id=\"".$this->clientMap[$invoice_item['client_id']]."\"";
-      $invoice_part .= " status=\"".$invoice_item['status']."\"";
-      $invoice_part .= "></invoice>\n";
-      fwrite($this->file, $invoice_part);
+    if (count($invoices) > 0) {
+      fwrite($this->file, $this->indentation."  <invoices>\n");
+      foreach ($invoices as $invoice_item) {
+        $invoice_part = $this->indentation.'    '."<invoice id=\"".$this->invoiceMap[$invoice_item['id']]."\"";
+        $invoice_part .= " name=\"".htmlspecialchars($invoice_item['name'])."\"";
+        $invoice_part .= " date=\"".$invoice_item['date']."\"";
+        $invoice_part .= " client_id=\"".$this->clientMap[$invoice_item['client_id']]."\"";
+        $invoice_part .= " status=\"".$invoice_item['status']."\"";
+        $invoice_part .= "></invoice>\n";
+        fwrite($this->file, $invoice_part);
+      }
+      fwrite($this->file, $this->indentation."  </invoices>\n");
+      unset($invoices);
+      unset($invoice_part);
     }
-    fwrite($this->file, $this->indentation."  </invoices>\n");
-    unset($invoices);
-    unset($invoice_part);
 
     // Write time log entries and build logMap at the same time.
     fwrite($this->file, $this->indentation."  <log>\n");
@@ -354,176 +366,194 @@ class ttGroupExportHelper {
     unset($log_part);
 
     // Write custom fields.
-    fwrite($this->file, $this->indentation."  <custom_fields>\n");
-    foreach ($custom_fields as $custom_field) {
-      $custom_field_part = $this->indentation.'    '."<custom_field id=\"".$this->customFieldMap[$custom_field['id']]."\"";
-      $custom_field_part .= " type=\"".$custom_field['type']."\"";
-      $custom_field_part .= " label=\"".htmlspecialchars($custom_field['label'])."\"";
-      $custom_field_part .= " required=\"".$custom_field['required']."\"";
-      $custom_field_part .= " status=\"".$custom_field['status']."\"";
-      $custom_field_part .= "></custom_field>\n";
-      fwrite($this->file, $custom_field_part);
+    if (count($custom_fields) > 0) {
+      fwrite($this->file, $this->indentation."  <custom_fields>\n");
+      foreach ($custom_fields as $custom_field) {
+        $custom_field_part = $this->indentation.'    '."<custom_field id=\"".$this->customFieldMap[$custom_field['id']]."\"";
+        $custom_field_part .= " type=\"".$custom_field['type']."\"";
+        $custom_field_part .= " label=\"".htmlspecialchars($custom_field['label'])."\"";
+        $custom_field_part .= " required=\"".$custom_field['required']."\"";
+        $custom_field_part .= " status=\"".$custom_field['status']."\"";
+        $custom_field_part .= "></custom_field>\n";
+        fwrite($this->file, $custom_field_part);
+      }
+      fwrite($this->file, $this->indentation."  </custom_fields>\n");
+      unset($custom_fields);
+      unset($custom_field_part);
     }
-    fwrite($this->file, $this->indentation."  </custom_fields>\n");
-    unset($custom_fields);
-    unset($custom_field_part);
 
     // Write custom field options.
-    fwrite($this->file, $this->indentation."  <custom_field_options>\n");
-    foreach ($custom_field_options as $option) {
-      $custom_field_option_part = $this->indentation.'    '."<custom_field_option id=\"".$this->customFieldOptionMap[$option['id']]."\"";
-      $custom_field_option_part .= " field_id=\"".$this->customFieldMap[$option['field_id']]."\"";
-      $custom_field_option_part .= " value=\"".htmlspecialchars($option['value'])."\"";
-      $custom_field_option_part .= "></custom_field_option>\n";
-      fwrite($this->file, $custom_field_option_part);
+    if (count($custom_field_options) > 0) {
+      fwrite($this->file, $this->indentation."  <custom_field_options>\n");
+      foreach ($custom_field_options as $option) {
+        $custom_field_option_part = $this->indentation.'    '."<custom_field_option id=\"".$this->customFieldOptionMap[$option['id']]."\"";
+        $custom_field_option_part .= " field_id=\"".$this->customFieldMap[$option['field_id']]."\"";
+        $custom_field_option_part .= " value=\"".htmlspecialchars($option['value'])."\"";
+        $custom_field_option_part .= "></custom_field_option>\n";
+        fwrite($this->file, $custom_field_option_part);
+      }
+      fwrite($this->file, $this->indentation."  </custom_field_options>\n");
+      unset($custom_field_options);
+      unset($custom_field_option_part);
     }
-    fwrite($this->file, $this->indentation."  </custom_field_options>\n");
-    unset($custom_field_options);
-    unset($custom_field_option_part);
 
     // Write custom field log.
     $custom_field_log = ttTeamHelper::getCustomFieldLog($this->group_id);
-    fwrite($this->file, $this->indentation."  <custom_field_log>\n");
-    foreach ($custom_field_log as $entry) {
-      $custom_field_log_part = $this->indentation.'    '."<custom_field_log_entry log_id=\"".$this->logMap[$entry['log_id']]."\"";
-      $custom_field_log_part .= " field_id=\"".$this->customFieldMap[$entry['field_id']]."\"";
-      $custom_field_log_part .= " option_id=\"".$this->customFieldOptionMap[$entry['option_id']]."\"";
-      $custom_field_log_part .= " value=\"".htmlspecialchars($entry['value'])."\"";
-      $custom_field_log_part .= " status=\"".$entry['status']."\"";
-      $custom_field_log_part .= "></custom_field_log_entry>\n";
-      fwrite($this->file, $custom_field_log_part);
+    if (count($custom_field_log) > 0) {
+      fwrite($this->file, $this->indentation."  <custom_field_log>\n");
+      foreach ($custom_field_log as $entry) {
+        $custom_field_log_part = $this->indentation.'    '."<custom_field_log_entry log_id=\"".$this->logMap[$entry['log_id']]."\"";
+        $custom_field_log_part .= " field_id=\"".$this->customFieldMap[$entry['field_id']]."\"";
+        $custom_field_log_part .= " option_id=\"".$this->customFieldOptionMap[$entry['option_id']]."\"";
+        $custom_field_log_part .= " value=\"".htmlspecialchars($entry['value'])."\"";
+        $custom_field_log_part .= " status=\"".$entry['status']."\"";
+        $custom_field_log_part .= "></custom_field_log_entry>\n";
+        fwrite($this->file, $custom_field_log_part);
+      }
+      fwrite($this->file, $this->indentation."  </custom_field_log>\n");
+      unset($custom_field_log);
+      unset($custom_field_log_part);
     }
-    fwrite($this->file, $this->indentation."  </custom_field_log>\n");
-    unset($custom_field_log);
-    unset($custom_field_log_part);
 
     // Write expense items.
     $expense_items = ttTeamHelper::getExpenseItems($this->group_id);
-    fwrite($this->file, $this->indentation."  <expense_items>\n");
-    foreach ($expense_items as $expense_item) {
-      $expense_item_part = $this->indentation.'    '."<expense_item date=\"".$expense_item['date']."\"";
-      $expense_item_part .= " user_id=\"".$this->userMap[$expense_item['user_id']]."\"";
-      $expense_item_part .= " client_id=\"".$this->clientMap[$expense_item['client_id']]."\"";
-      $expense_item_part .= " project_id=\"".$this->projectMap[$expense_item['project_id']]."\"";
-      $expense_item_part .= " name=\"".htmlspecialchars($expense_item['name'])."\"";
-      $expense_item_part .= " cost=\"".$expense_item['cost']."\"";
-      $expense_item_part .= " invoice_id=\"".$this->invoiceMap[$expense_item['invoice_id']]."\"";
-      $expense_item_part .= " paid=\"".$expense_item['paid']."\"";
-      $expense_item_part .= " status=\"".$expense_item['status']."\"";
-      $expense_item_part .= "></expense_item>\n";
-      fwrite($this->file, $expense_item_part);
+    if (count($expense_items) > 0) {
+      fwrite($this->file, $this->indentation."  <expense_items>\n");
+      foreach ($expense_items as $expense_item) {
+        $expense_item_part = $this->indentation.'    '."<expense_item date=\"".$expense_item['date']."\"";
+        $expense_item_part .= " user_id=\"".$this->userMap[$expense_item['user_id']]."\"";
+        $expense_item_part .= " client_id=\"".$this->clientMap[$expense_item['client_id']]."\"";
+        $expense_item_part .= " project_id=\"".$this->projectMap[$expense_item['project_id']]."\"";
+        $expense_item_part .= " name=\"".htmlspecialchars($expense_item['name'])."\"";
+        $expense_item_part .= " cost=\"".$expense_item['cost']."\"";
+        $expense_item_part .= " invoice_id=\"".$this->invoiceMap[$expense_item['invoice_id']]."\"";
+        $expense_item_part .= " paid=\"".$expense_item['paid']."\"";
+        $expense_item_part .= " status=\"".$expense_item['status']."\"";
+        $expense_item_part .= "></expense_item>\n";
+        fwrite($this->file, $expense_item_part);
+      }
+      fwrite($this->file, $this->indentation."  </expense_items>\n");
+      unset($expense_items);
+      unset($expense_item_part);
     }
-    fwrite($this->file, $this->indentation."  </expense_items>\n");
-    unset($expense_items);
-    unset($expense_item_part);
 
     // Write predefined expenses.
     $predefined_expenses = $this->getRecordsFromTable('tt_predefined_expenses');
-    fwrite($this->file, $this->indentation."  <predefined_expenses>\n");
-    foreach ($predefined_expenses as $predefined_expense) {
-      $predefined_expense_part = $this->indentation.'    '."<predefined_expense name=\"".htmlspecialchars($predefined_expense['name'])."\"";
-      $predefined_expense_part .= " cost=\"".$predefined_expense['cost']."\"";
-      $predefined_expense_part .= "></predefined_expense>\n";
-      fwrite($this->file, $predefined_expense_part);
+    if (count($predefined_expenses) > 0) {
+      fwrite($this->file, $this->indentation."  <predefined_expenses>\n");
+      foreach ($predefined_expenses as $predefined_expense) {
+        $predefined_expense_part = $this->indentation.'    '."<predefined_expense name=\"".htmlspecialchars($predefined_expense['name'])."\"";
+        $predefined_expense_part .= " cost=\"".$predefined_expense['cost']."\"";
+        $predefined_expense_part .= "></predefined_expense>\n";
+        fwrite($this->file, $predefined_expense_part);
+      }
+      fwrite($this->file, $this->indentation."  </predefined_expenses>\n");
+      unset($predefined_expenses);
+      unset($predefined_expense_part);
     }
-    fwrite($this->file, $this->indentation."  </predefined_expenses>\n");
-    unset($predefined_expenses);
-    unset($predefined_expense_part);
 
     // Write monthly quotas.
     $quotas = ttTeamHelper::getMonthlyQuotas($this->group_id);
-    fwrite($this->file, $this->indentation."  <monthly_quotas>\n");
-    foreach ($quotas as $quota) {
-      $quota_part = $this->indentation.'    '."<monthly_quota year=\"".$quota['year']."\"";
-      $quota_part .= " month=\"".$quota['month']."\"";
-      $quota_part .= " minutes=\"".$quota['minutes']."\"";
-      $quota_part .= "></monthly_quota>\n";
-      fwrite($this->file, $quota_part);
+    if (count($quotas) > 0) {
+      fwrite($this->file, $this->indentation."  <monthly_quotas>\n");
+      foreach ($quotas as $quota) {
+        $quota_part = $this->indentation.'    '."<monthly_quota year=\"".$quota['year']."\"";
+        $quota_part .= " month=\"".$quota['month']."\"";
+        $quota_part .= " minutes=\"".$quota['minutes']."\"";
+        $quota_part .= "></monthly_quota>\n";
+        fwrite($this->file, $quota_part);
+      }
+      fwrite($this->file, $this->indentation."  </monthly_quotas>\n");
+      unset($quotas);
+      unset($quota_part);
     }
-    fwrite($this->file, $this->indentation."  </monthly_quotas>\n");
-    unset($quotas);
-    unset($quota_part);
 
     // Write fav reports.
-    fwrite($this->file, $this->indentation."  <fav_reports>\n");
-    foreach ($fav_reports as $fav_report) {
-      $user_list = '';
-      if (strlen($fav_report['users']) > 0) {
-        $arr = explode(',', $fav_report['users']);
-        foreach ($arr as $k=>$v) {
-          if (array_key_exists($arr[$k], $this->userMap))
-            $user_list .= (strlen($user_list) == 0? '' : ',').$this->userMap[$v];
+    if (count($fav_reports) > 0) {
+      fwrite($this->file, $this->indentation."  <fav_reports>\n");
+      foreach ($fav_reports as $fav_report) {
+        $user_list = '';
+        if (strlen($fav_report['users']) > 0) {
+          $arr = explode(',', $fav_report['users']);
+          foreach ($arr as $k=>$v) {
+            if (array_key_exists($arr[$k], $this->userMap))
+              $user_list .= (strlen($user_list) == 0? '' : ',').$this->userMap[$v];
+          }
         }
+        $fav_report_part = $this->indentation.'    '."<fav_report id=\"".$this->favReportMap[$fav_report['id']]."\"";
+        $fav_report_part .= " user_id=\"".$this->userMap[$fav_report['user_id']]."\"";
+        $fav_report_part .= " name=\"".htmlspecialchars($fav_report['name'])."\"";
+        $fav_report_part .= " client_id=\"".$this->clientMap[$fav_report['client_id']]."\"";
+        $fav_report_part .= " cf_1_option_id=\"".$this->customFieldOptionMap[$fav_report['cf_1_option_id']]."\"";
+        $fav_report_part .= " project_id=\"".$this->projectMap[$fav_report['project_id']]."\"";
+        $fav_report_part .= " task_id=\"".$this->taskMap[$fav_report['task_id']]."\"";
+        $fav_report_part .= " billable=\"".$fav_report['billable']."\"";
+        $fav_report_part .= " users=\"".$user_list."\"";
+        $fav_report_part .= " period=\"".$fav_report['period']."\"";
+        $fav_report_part .= " period_start=\"".$fav_report['period_start']."\"";
+        $fav_report_part .= " period_end=\"".$fav_report['period_end']."\"";
+        $fav_report_part .= " show_client=\"".$fav_report['show_client']."\"";
+        $fav_report_part .= " show_invoice=\"".$fav_report['show_invoice']."\"";
+        $fav_report_part .= " show_paid=\"".$fav_report['show_paid']."\"";
+        $fav_report_part .= " show_ip=\"".$fav_report['show_ip']."\"";
+        $fav_report_part .= " show_project=\"".$fav_report['show_project']."\"";
+        $fav_report_part .= " show_start=\"".$fav_report['show_start']."\"";
+        $fav_report_part .= " show_duration=\"".$fav_report['show_duration']."\"";
+        $fav_report_part .= " show_cost=\"".$fav_report['show_cost']."\"";
+        $fav_report_part .= " show_task=\"".$fav_report['show_task']."\"";
+        $fav_report_part .= " show_end=\"".$fav_report['show_end']."\"";
+        $fav_report_part .= " show_note=\"".$fav_report['show_note']."\"";
+        $fav_report_part .= " show_custom_field_1=\"".$fav_report['show_custom_field_1']."\"";
+        $fav_report_part .= " show_work_units=\"".$fav_report['show_work_units']."\"";
+        $fav_report_part .= " group_by1=\"".$fav_report['group_by1']."\"";
+        $fav_report_part .= " group_by2=\"".$fav_report['group_by2']."\"";
+        $fav_report_part .= " group_by3=\"".$fav_report['group_by3']."\"";
+        $fav_report_part .= " show_totals_only=\"".$fav_report['show_totals_only']."\"";
+        $fav_report_part .= "></fav_report>\n";
+        fwrite($this->file, $fav_report_part);
       }
-      $fav_report_part = $this->indentation.'    '."<fav_report id=\"".$this->favReportMap[$fav_report['id']]."\"";
-      $fav_report_part .= " user_id=\"".$this->userMap[$fav_report['user_id']]."\"";
-      $fav_report_part .= " name=\"".htmlspecialchars($fav_report['name'])."\"";
-      $fav_report_part .= " client_id=\"".$this->clientMap[$fav_report['client_id']]."\"";
-      $fav_report_part .= " cf_1_option_id=\"".$this->customFieldOptionMap[$fav_report['cf_1_option_id']]."\"";
-      $fav_report_part .= " project_id=\"".$this->projectMap[$fav_report['project_id']]."\"";
-      $fav_report_part .= " task_id=\"".$this->taskMap[$fav_report['task_id']]."\"";
-      $fav_report_part .= " billable=\"".$fav_report['billable']."\"";
-      $fav_report_part .= " users=\"".$user_list."\"";
-      $fav_report_part .= " period=\"".$fav_report['period']."\"";
-      $fav_report_part .= " period_start=\"".$fav_report['period_start']."\"";
-      $fav_report_part .= " period_end=\"".$fav_report['period_end']."\"";
-      $fav_report_part .= " show_client=\"".$fav_report['show_client']."\"";
-      $fav_report_part .= " show_invoice=\"".$fav_report['show_invoice']."\"";
-      $fav_report_part .= " show_paid=\"".$fav_report['show_paid']."\"";
-      $fav_report_part .= " show_ip=\"".$fav_report['show_ip']."\"";
-      $fav_report_part .= " show_project=\"".$fav_report['show_project']."\"";
-      $fav_report_part .= " show_start=\"".$fav_report['show_start']."\"";
-      $fav_report_part .= " show_duration=\"".$fav_report['show_duration']."\"";
-      $fav_report_part .= " show_cost=\"".$fav_report['show_cost']."\"";
-      $fav_report_part .= " show_task=\"".$fav_report['show_task']."\"";
-      $fav_report_part .= " show_end=\"".$fav_report['show_end']."\"";
-      $fav_report_part .= " show_note=\"".$fav_report['show_note']."\"";
-      $fav_report_part .= " show_custom_field_1=\"".$fav_report['show_custom_field_1']."\"";
-      $fav_report_part .= " show_work_units=\"".$fav_report['show_work_units']."\"";
-      $fav_report_part .= " group_by1=\"".$fav_report['group_by1']."\"";
-      $fav_report_part .= " group_by2=\"".$fav_report['group_by2']."\"";
-      $fav_report_part .= " group_by3=\"".$fav_report['group_by3']."\"";
-      $fav_report_part .= " show_totals_only=\"".$fav_report['show_totals_only']."\"";
-      $fav_report_part .= "></fav_report>\n";
-      fwrite($this->file, $fav_report_part);
+      fwrite($this->file, $this->indentation."  </fav_reports>\n");
+      unset($fav_reports);
+      unset($fav_report_part);
     }
-    fwrite($this->file, $this->indentation."  </fav_reports>\n");
-    unset($fav_reports);
-    unset($fav_report_part);
 
     // Write notifications.
     $notifications = $this->getRecordsFromTable('tt_cron');
-    fwrite($this->file, $this->indentation."  <notifications>\n");
-    foreach ($notifications as $notification) {
-      $notification_part = $this->indentation.'    '."<notification cron_spec=\"".$notification['cron_spec']."\"";
-      $notification_part .= " last=\"".$notification['last']."\"";
-      $notification_part .= " next=\"".$notification['next']."\"";
-      $notification_part .= " report_id=\"".$this->favReportMap[$notification['report_id']]."\"";
-      $notification_part .= " email=\"".htmlspecialchars($notification['email'])."\"";
-      $notification_part .= " cc=\"".htmlspecialchars($notification['cc'])."\"";
-      $notification_part .= " subject=\"".htmlspecialchars($notification['subject'])."\"";
-      $notification_part .= " report_condition=\"".htmlspecialchars($notification['report_condition'])."\"";
-      $notification_part .= " status=\"".$notification['status']."\"";
-      $notification_part .= "></notification>\n";
-      fwrite($this->file, $notification_part);
+    if (count($notifications) > 0) {
+      fwrite($this->file, $this->indentation."  <notifications>\n");
+      foreach ($notifications as $notification) {
+        $notification_part = $this->indentation.'    '."<notification cron_spec=\"".$notification['cron_spec']."\"";
+        $notification_part .= " last=\"".$notification['last']."\"";
+        $notification_part .= " next=\"".$notification['next']."\"";
+        $notification_part .= " report_id=\"".$this->favReportMap[$notification['report_id']]."\"";
+        $notification_part .= " email=\"".htmlspecialchars($notification['email'])."\"";
+        $notification_part .= " cc=\"".htmlspecialchars($notification['cc'])."\"";
+        $notification_part .= " subject=\"".htmlspecialchars($notification['subject'])."\"";
+        $notification_part .= " report_condition=\"".htmlspecialchars($notification['report_condition'])."\"";
+        $notification_part .= " status=\"".$notification['status']."\"";
+        $notification_part .= "></notification>\n";
+        fwrite($this->file, $notification_part);
+      }
+      fwrite($this->file, $this->indentation."  </notifications>\n");
+      unset($notifications);
+      unset($notification_part);
     }
-    fwrite($this->file, $this->indentation."  </notifications>\n");
-    unset($notifications);
-    unset($notification_part);
 
     // Write user config parameters.
     $user_params = $this->getRecordsFromTable('tt_config');
-    fwrite($this->file, $this->indentation."  <user_params>\n");
-    foreach ($user_params as $user_param) {
-      $user_param_part = $this->indentation.'    '."<user_param user_id=\"".$this->userMap[$user_param['user_id']]."\"";
-      $user_param_part .= " param_name=\"".htmlspecialchars($user_param['param_name'])."\"";
-      $user_param_part .= " param_value=\"".htmlspecialchars($user_param['param_value'])."\"";
-      $user_param_part .= "></user_param>\n";
-      fwrite($this->file, $user_param_part);
+    if (count($user_params) > 0) {
+      fwrite($this->file, $this->indentation."  <user_params>\n");
+      foreach ($user_params as $user_param) {
+        $user_param_part = $this->indentation.'    '."<user_param user_id=\"".$this->userMap[$user_param['user_id']]."\"";
+        $user_param_part .= " param_name=\"".htmlspecialchars($user_param['param_name'])."\"";
+        $user_param_part .= " param_value=\"".htmlspecialchars($user_param['param_value'])."\"";
+        $user_param_part .= "></user_param>\n";
+        fwrite($this->file, $user_param_part);
+      }
+      fwrite($this->file, $this->indentation."  </user_params>\n");
+      unset($user_params);
+      unset($user_param_part);
     }
-    fwrite($this->file, $this->indentation."  </user_params>\n");
-    unset($user_params);
-    unset($user_param_part);
 
     // We are mostly done with writing this group data, destroy all maps.
     unset($this->roleMap);
