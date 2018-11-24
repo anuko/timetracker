@@ -137,14 +137,19 @@ class ttOrgImportHelper {
         }
         // Add self to parent stack.
         array_push($this->parents, $this->current_group_id);
-        return;
-      }
 
-      if ($name == 'ROLES') {
-        // If we get here, we have to recycle $currentGroupRoleMap.
-        unset($this->currentGroupRoleMap);
-        $this->currentGroupRoleMap = array();
-        // Role map is reconstructed after processing <role> elements in XML. See below.
+        // Recycle all maps as we are starting to work on new group.
+        // Note that for this to work properly all nested groups must be last entries in xml for each group.
+        unset($this->currentGroupRoleMap); $this->currentGroupRoleMap = array();
+        unset($this->currentGroupTaskMap); $this->currentGroupTaskMap = array();
+        unset($this->currentGroupProjectMap); $this->currentGroupProjectMap = array();
+        unset($this->currentGroupClientMap); $this->currentGroupClientMap = array();
+        unset($this->currentGroupUserMap); $this->currentGroupUserMap = array();
+        unset($this->currentGroupInvoiceMap); $this->currentGroupInvoiceMap = array();
+        unset($this->currentGroupLogMap); $this->currentGroupLogMap = array();
+        unset($this->currentGroupCustomFieldMap); $this->currentGroupCustomFieldMap = array();
+        unset($this->currentGroupCustomFieldOptionMap); $this->currentGroupCustomFieldOptionMap = array();
+        unset($this->currentGroupFavReportMap); $this->currentGroupCustomFavReportMap = array();
         return;
       }
 
@@ -165,14 +170,6 @@ class ttOrgImportHelper {
         return;
       }
 
-      if ($name == 'TASKS') {
-        // If we get here, we have to recycle $currentGroupTaskMap.
-        unset($this->currentGroupTaskMap);
-        $this->currentGroupTaskMap = array();
-        // Task map is reconstructed after processing <task> elements in XML. See below.
-        return;
-      }
-
       if ($name == 'TASK') {
         // We get here when processing <task> tags for the current group.
         $task_id = ttTaskHelper::insert(array(
@@ -185,14 +182,6 @@ class ttOrgImportHelper {
           // Add a mapping.
           $this->currentGroupTaskMap[$attrs['ID']] = $task_id;
         } else $this->errors->add($i18n->get('error.db'));
-        return;
-      }
-
-      if ($name == 'PROJECTS') {
-        // If we get here, we have to recycle $currentGroupProjectMap.
-        unset($this->currentGroupProjectMap);
-        $this->currentGroupProjectMap = array();
-        // Project map is reconstructed after processing <project> elements in XML. See below.
         return;
       }
 
@@ -220,14 +209,6 @@ class ttOrgImportHelper {
         return;
       }
 
-      if ($name == 'CLIENTS') {
-        // If we get here, we have to recycle $currentGroupClientMap.
-        unset($this->currentGroupClientMap);
-        $this->currentGroupClientMap = array();
-        // Client map is reconstructed after processing <client> elements in XML. See below.
-        return;
-      }
-
       if ($name == 'CLIENT') {
         // We get here when processing <client> tags for the current group.
 
@@ -250,14 +231,6 @@ class ttOrgImportHelper {
           // Add a mapping.
           $this->currentGroupClientMap[$attrs['ID']] = $client_id;
         } else $this->errors->add($i18n->get('error.db'));
-        return;
-      }
-
-      if ($name == 'USERS') {
-        // If we get here, we have to recycle $currentGroupUserMap.
-        unset($this->currentGroupUserMap);
-        $this->currentGroupUserMap = array();
-        // User map is reconstructed after processing <user> elements in XML. See below.
         return;
       }
 
@@ -297,14 +270,6 @@ class ttOrgImportHelper {
         return;
       }
 
-      if ($name == 'INVOICES') {
-        // If we get here, we have to recycle $currentGroupInvoiceMap.
-        unset($this->currentGroupInvoiceMap);
-        $this->currentGroupInvoiceMap = array();
-        // Invoice map is reconstructed after processing <invoice> elements in XML. See below.
-        return;
-      }
-
       if ($name == 'INVOICE') {
         // We get here when processing <invoice> tags for the current group.
         $invoice_id = ttInvoiceHelper::insert(array(
@@ -318,14 +283,6 @@ class ttOrgImportHelper {
           // Add a mapping.
           $this->currentGroupInvoiceMap[$attrs['ID']] = $invoice_id;
         } else $this->errors->add($i18n->get('error.db'));
-        return;
-      }
-
-      if ($name == 'LOG') {
-        // If we get here, we have to recycle $currentGroupLogMap.
-        unset($this->currentGroupLogMap);
-        $this->currentGroupLogMap = array();
-        // Log map is reconstructed after processing <log_item> elements in XML. See below.
         return;
       }
 
@@ -354,14 +311,6 @@ class ttOrgImportHelper {
         return;
       }
 
-      if ($name == 'CUSTOM_FIELDS') {
-        // If we get here, we have to recycle $currentGroupCustomFieldMap.
-        unset($this->currentGroupCustomFieldMap);
-        $this->currentGroupCustomFieldMap = array();
-        // Custom field map is reconstructed after processing <custom_field> elements in XML. See below.
-        return;
-      }
-
       if ($name == 'CUSTOM_FIELD') {
         // We get here when processing <custom_field> tags for the current group.
         $custom_field_id = $this->insertCustomField(array(
@@ -375,14 +324,6 @@ class ttOrgImportHelper {
           // Add a mapping.
           $this->currentGroupCustomFieldMap[$attrs['ID']] = $custom_field_id;
         } else $this->errors->add($i18n->get('error.db'));
-        return;
-      }
-
-      if ($name == 'CUSTOM_FIELD_OPTIONS') {
-        // If we get here, we have to recycle $currentGroupCustomFieldOptionMap.
-        unset($this->currentGroupCustomFieldOptionMap);
-        $this->currentGroupCustomFieldOptionMap = array();
-        // Custom field option map is reconstructed after processing <custom_field_option> elements in XML. See below.
         return;
       }
 
@@ -453,14 +394,6 @@ class ttOrgImportHelper {
           'minutes' => $attrs['MINUTES']))) {
           $this->errors->add($i18n->get('error.db'));
         }
-        return;
-      }
-
-      if ($name == 'FAV_REPORTS') {
-        // If we get here, we have to recycle $currentGroupFavReportMap.
-        unset($this->currentGroupFavReportMap);
-        $this->currentGroupFavReportMap = array();
-        // Favorite report map is reconstructed after processing <fav_report> elements in XML. See below.
         return;
       }
 
