@@ -306,12 +306,13 @@ class ttUser {
 
   // getUsers obtains users in a group, as specififed by options.
   function getUsers($options) {
-
     $mdb2 = getConnection();
+
+    $group_id = $this->getActiveGroup();
+    $org_id = $this->org_id;
 
     $skipClients = !isset($options['include_clients']);
     $includeSelf = isset($options['include_self']);
-    $group_id = isset($options['group_id']) ? $options['group_id'] : $this->group_id;
 
     $select_part = 'select u.id, u.name';
     if (isset($options['include_login'])) $select_part .= ', u.login';
@@ -324,7 +325,7 @@ class ttUser {
     if (isset($options['max_rank']) || $skipClients || isset($options['include_role']))
         $left_joins .= ' left join tt_roles r on (u.role_id = r.id)';
 
-    $where_part = " where u.org_id = $this->org_id and u.group_id = $group_id";
+    $where_part = " where u.org_id = $org_id and u.group_id = $group_id";
     if (isset($options['status']))
       $where_part .= ' and u.status = '.(int)$options['status'];
     else
