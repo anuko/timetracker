@@ -28,6 +28,7 @@
 
 import('ttConfigHelper');
 import('ttGroupHelper');
+import('ttGroup');
 
 class ttUser {
   var $login = null;            // User login.
@@ -73,6 +74,8 @@ class ttUser {
   var $minutes_in_unit = 15;    // Number of minutes in unit for Work units plugin.
   var $first_unit_threshold = 0;// Threshold for 1st unit for Work units plugin.
   var $unit_totals_only = 0;    // Totals only option for the Work units plugin.
+
+  var $behalfGroup = null;      // A ttGroup instance with on behalf group attributes.
 
   // Constructor.
   function __construct($login, $id = null) {
@@ -150,13 +153,15 @@ class ttUser {
       
       // Set "on behalf" id and name (user).
       if (isset($_SESSION['behalf_id'])) {
-          $this->behalf_id = $_SESSION['behalf_id'];
-          $this->behalf_name = $_SESSION['behalf_name'];
+        $this->behalf_id = $_SESSION['behalf_id'];
+        $this->behalf_name = $_SESSION['behalf_name'];
       }
       // Set "on behalf" id and name (group).
       if (isset($_SESSION['behalf_group_id'])) {
-          $this->behalf_group_id = $_SESSION['behalf_group_id'];
-          $this->behalf_group_name = $_SESSION['behalf_group_name'];
+        $this->behalf_group_id = $_SESSION['behalf_group_id'];
+        $this->behalf_group_name = $_SESSION['behalf_group_name'];
+
+        $this->behalfGroup = new ttGroup($this->behalf_group_id, $this->org_id);
       }
     }
   }
@@ -713,6 +718,9 @@ class ttUser {
     $_SESSION['behalf_group_name'] = $onBehalfGroupName;
     $this->behalf_group_id = $group_id;
     $this->behalf_group_name = $onBehalfGroupName;
+
+    unset($this->behalfGroup);
+    $this->behalfGroup = new ttGroup($this->behalf_group_id, $this->org_id);
 
     // Adjust on behalf user.
     $this->adjustBehalfId();
