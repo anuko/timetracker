@@ -440,11 +440,13 @@ class ttUser {
     if (!$this->can('manage_users')) return false;
 
     $mdb2 = getConnection();
+    $group_id = $this->getActiveGroup();
+    $org_id = $this->org_id;
 
     $sql =  "select u.id, u.name, u.login, u.role_id, u.client_id, u.status, u.rate, u.email from tt_users u".
-            " left join tt_roles r on (u.role_id = r.id)".
-            " where u.id = $user_id and u.group_id = $this->group_id and u.status is not null".
-            " and (r.rank < $this->rank or (r.rank = $this->rank and u.id = $this->id))"; // Users with lesser roles or self.
+      " left join tt_roles r on (u.role_id = r.id)".
+      " where u.id = $user_id and u.group_id = $group_id and u.org_id = $org_id and u.status is not null".
+      " and (r.rank < $this->rank or (r.rank = $this->rank and u.id = $this->id))"; // Users with lesser roles or self.
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -565,21 +567,26 @@ class ttUser {
     if (!$user_details) return false;
 
     $mdb2 = getConnection();
+    $group_id = $this->getActiveGroup();
+    $org_id = $this->org_id;
 
     // Mark user to project binds as deleted.
-    $sql = "update tt_user_project_binds set status = NULL where user_id = $user_id";
+    $sql = "update tt_user_project_binds set status = NULL where user_id = $user_id".
+      " and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
     // Mark user favorite reports as deleted.
-    $sql = "update tt_fav_reports set status = NULL where user_id = $user_id";
+    $sql = "update tt_fav_reports set status = NULL where user_id = $user_id".
+      " and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
     // Mark user as deleted.
-    $sql = "update tt_users set status = NULL where id = $user_id and group_id = ".$this->group_id;
+    $sql = "update tt_users set status = NULL where id = $user_id".
+      " and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -684,8 +691,12 @@ class ttUser {
     // Unset things first.
     $this->behalf_group_id = null;
     $this->behalf_group_name = null;
+    $this->behalf_id = null;
+    $this->behalf_name = null;
     unset($_SESSION['behalf_group_id']);
     unset($_SESSION['behalf_group_name']);
+    unset($_SESSION['behalf_id']);
+    unset($_SESSION['behalf_name']);
 
     // Do not do anything if we don't have rights.
     if (!$this->can('manage_subgroups')) return;
@@ -703,10 +714,7 @@ class ttUser {
     $this->behalf_group_id = $group_id;
     $this->behalf_group_name = $onBehalfGroupName;
 
-    // Question remains whether or not we need to adjust on behalf user.
-    // Adjusting for now. Test it and redesign if necessary.
-    unset($_SESSION['behalf_id']);
-    unset($_SESSION['behalf_name']);
+    // Adjust on behalf user.
     $this->adjustBehalfId();
     return;
   }
