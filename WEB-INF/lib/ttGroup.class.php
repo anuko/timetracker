@@ -84,8 +84,8 @@ class ttGroup {
       $this->date_format = $val['date_format'];
       $this->time_format = $val['time_format'];
       $this->week_start = $val['week_start'];
-      /* TODO: initialize other things here.
       $this->tracking_mode = $val['tracking_mode'];
+      /* TODO: initialize other things here.
       $this->project_required = $val['project_required'];
       $this->task_required = $val['task_required'];
       $this->record_type = $val['record_type'];

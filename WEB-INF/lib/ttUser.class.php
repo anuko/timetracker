@@ -166,6 +166,16 @@ class ttUser {
     }
   }
 
+  // getDecimalMark returns decimal mark for active group.
+  function getDecimalMark() {
+    return ($this->behalfGroup ? $this->behalfGroup->decimal_mark : $this->decimal_mark);
+  }
+
+  // getTrackingMode returns tracking mode for active group.
+  function getTrackingMode() {
+    return ($this->behalfGroup ? $this->behalfGroup->tracking_mode : $this->tracking_mode);
+  }
+
   // The getActiveUser returns user id on behalf of whom the current user is operating.
   function getActiveUser() {
     return ($this->behalf_id ? $this->behalf_id : $this->id);
