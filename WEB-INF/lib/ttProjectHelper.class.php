@@ -159,23 +159,26 @@ class ttProjectHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
+
     // Start with project itself. Reason: if the passed in project_id is bogus,
     // we'll fail right here and don't damage any other data.
 
     // Mark project as deleted and remove associated tasks.
-    $sql = "update tt_projects set status = NULL, tasks = NULL where id = $id and group_id = ".$user->getActiveGroup();
+    $sql = "update tt_projects set status = NULL, tasks = NULL where id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error') || 0 == $affected)
       return false; // An error ocurred, or 0 rows updated.
 
     // Delete user binds to this project.
-    $sql = "delete from tt_user_project_binds where project_id = $id";
+    $sql = "delete from tt_user_project_binds where project_id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
     // Delete task binds to this project.
-    $sql = "delete from tt_project_task_binds where project_id = $id";
+    $sql = "delete from tt_project_task_binds where project_id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;

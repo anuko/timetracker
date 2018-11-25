@@ -60,10 +60,13 @@ class ttTeamHelper {
     global $i18n;
     $mdb2 = getConnection();
 
+    $group_id = $user->getActiveGroup();
+    $org_id = $user->org_id;
+
     if (isset($options['getAllFields']))
-      $sql = "select u.*, r.name as role_name, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.group_id = $user->group_id and u.status = 1 order by upper(u.name)";
+      $sql = "select u.*, r.name as role_name, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.group_id = $group_id and u.org_id = $org_id and u.status = 1 order by upper(u.name)";
     else
-      $sql = "select id, name from tt_users where group_id = $user->group_id and status = 1 order by upper(name)";
+      $sql = "select id, name from tt_users where group_id = $group_id and org_id = $org_id and status = 1 order by upper(name)";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))

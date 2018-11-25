@@ -52,7 +52,7 @@ $users = ttTeamHelper::getActiveUsers();
 foreach ($users as $user_item)
   $all_users[$user_item['id']] = $user_item['name'];
 
-$tasks = ttTeamHelper::getActiveTasks($user->group_id);
+$tasks = ttTeamHelper::getActiveTasks($user->getActiveGroup());
 foreach ($tasks as $task_item)
   $all_tasks[$task_item['id']] = $task_item['name'];
 
