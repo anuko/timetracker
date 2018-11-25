@@ -82,7 +82,7 @@ if ($request->isPost()) {
   $cl_name = $user_details['name'];
   $cl_login = $user_details['login'];
   $cl_email = $user_details['email'];
-  $cl_rate = str_replace('.', $user->decimal_mark, $user_details['rate']);
+  $cl_rate = str_replace('.', $user->getDecimalMark(), $user_details['rate']);
   $cl_role_id = $user_details['role_id'];
   $cl_client_id = $user_details['client_id'];
   $cl_status = $user_details['status'];

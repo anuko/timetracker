@@ -37,12 +37,12 @@ class FloatField extends TextField {
 
     $this->class = 'FloatField';
     $this->name = $name;
-    $this->mDelimiter = $user->decimal_mark;
+    $this->mDelimiter = $user->getDecimalMark();
   }
 
   function localize() {
     global $user;
-    $this->mDelimiter = $user->decimal_mark;
+    $this->mDelimiter = $user->getDecimalMark();
   }
 
   function setFormat($format) {

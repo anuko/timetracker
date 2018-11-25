@@ -112,10 +112,10 @@ function handleClientControl() {
     </tr>
 {/if}
     <tr>
-      <td align="right">{$i18n.form.users.default_rate}&nbsp;(0{$user->decimal_mark}00):</td>
+      <td align="right">{$i18n.form.users.default_rate}&nbsp;(0{$user->getDecimalMark()}00):</td>
       <td>{$forms.userForm.rate.control}</td>
     </tr>
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if ($smarty.const.MODE_PROJECTS == $user->getTrackingMode() || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode())}
     <tr valign="top">
       <td align="right">{$i18n.label.projects}:</td>
       <td>{$forms.userForm.projects.control}</td>
