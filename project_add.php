@@ -36,7 +36,7 @@ if (!ttAccessAllowed('manage_projects')) {
   header('Location: access_denied.php');
   exit();
 }
-if (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+if (MODE_PROJECTS != $user->getTrackingMode() && MODE_PROJECTS_AND_TASKS != $user->getTrackingMode()) {
   header('Location: feature_disabled.php');
   exit();
 }
@@ -66,7 +66,7 @@ $form = new Form('projectForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'project_name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 $form->addInput(array('type'=>'checkboxgroup','name'=>'users','data'=>$all_users,'layout'=>'H','value'=>$cl_users));
-if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+if (MODE_PROJECTS_AND_TASKS == $user->getTrackingMode())
   $form->addInput(array('type'=>'checkboxgroup','name'=>'tasks','data'=>$all_tasks,'layout'=>'H','value'=>$cl_tasks));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
@@ -95,6 +95,8 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('show_users', count($users) > 0);
+$smarty->assign('show_tasks', count($tasks) > 0);
 $smarty->assign('onload', 'onLoad="document.projectForm.project_name.focus()"');
 $smarty->assign('title', $i18n->get('title.add_project'));
 $smarty->assign('content_page_name', 'project_add.tpl');

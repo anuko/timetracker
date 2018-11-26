@@ -84,6 +84,7 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('show_projects', count($projects) > 0);
 $smarty->assign('onload', 'onLoad="document.taskForm.name.focus()"');
 $smarty->assign('title', $i18n->get('title.add_task'));
 $smarty->assign('content_page_name', 'task_add.tpl');

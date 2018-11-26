@@ -16,6 +16,7 @@
           <td>{$forms.taskForm.status.control}</td>
         </tr>
 {if $show_projects}
+        <tr><td>&nbsp;</td></tr>
         <tr valign="top">
           <td align="right">{$i18n.label.projects}:</td>
           <td>{$forms.taskForm.projects.control}</td>
