@@ -388,6 +388,21 @@ class ttUser {
   //   - The entire stack of groups all the way down to current on behalf group.
   //   - All immediate children of the current on behalf group.
   // This allows user to navigate easily to home group, anything in between, and 1 level below.
+  //
+  // Note 1: group dropdown is, by design, to be placed on all pages where "relevant",
+  // such as users.php, projects.php, tasks.php, etc. But some features may be disabled
+  // in some groups. We should check for feature availability on group change
+  // in post and redirect to feature_disabled.php when this happens.
+  // This will allow us to keep dropdown content consistent on all pages.
+  // Filtering content of the dropdown does not seem right.
+  //
+  // Note 2: Menu should display according to $user home group settings.
+  //         Pages, should look according to $user->behalfGroup settings (if set).
+  //         For example, if home group allows tasks, menu should display Tasks,
+  //         even when we are on behalf of a subgroup without tasks.
+  //
+  // Note 3: Language of all pages should be as in $user home group even when
+  //         subgroups have a different language.
   function getGroupsForDropdown() {
     $mdb2 = getConnection();
 

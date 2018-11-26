@@ -35,7 +35,7 @@ if (!(ttAccessAllowed('view_own_projects') || ttAccessAllowed('manage_projects')
   header('Location: access_denied.php');
   exit();
 }
-if (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+if (MODE_PROJECTS != $user->getTrackingMode() && MODE_PROJECTS_AND_TASKS != $user->getTrackingMode()) {
   header('Location: feature_disabled.php');
   exit();
 }
@@ -48,6 +48,11 @@ if ($request->isPost() && !$user->isGroupValid($request->getParameter('group')))
 if ($request->isPost()) {
   $group_id = $request->getParameter('group');
   $user->setOnBehalfGroup($group_id);
+  // Projects feature may not be available in new group, check and redirect.
+  if (MODE_PROJECTS != $user->getTrackingMode() && MODE_PROJECTS_AND_TASKS != $user->getTrackingMode()) {
+    header('Location: feature_disabled.php');
+    exit();
+  }
 } else {
   $group_id = $user->getActiveGroup();
 }
