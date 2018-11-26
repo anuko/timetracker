@@ -35,18 +35,50 @@ if (!(ttAccessAllowed('view_own_tasks') || ttAccessAllowed('manage_tasks'))) {
   header('Location: access_denied.php');
   exit();
 }
-if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+if (MODE_PROJECTS_AND_TASKS != $user->getTrackingMode()) {
   header('Location: feature_disabled.php');
+  exit();
+}
+if ($request->isPost() && !$user->isGroupValid($request->getParameter('group'))) {
+  header('Location: access_denied.php'); // Wrong group id in post.
   exit();
 }
 // End of access checks.
 
+if ($request->isPost()) {
+  $group_id = $request->getParameter('group');
+  $user->setOnBehalfGroup($group_id);
+  // Tasks feature may not be available in new group, check and redirect.
+  if (MODE_PROJECTS_AND_TASKS != $user->getTrackingMode()) {
+    header('Location: feature_disabled.php');
+    exit();
+  }
+} else {
+  $group_id = $user->getGroup();
+}
+
+$form = new Form('tasksForm');
+if ($user->can('manage_subgroups')) {
+  $groups = $user->getGroupsForDropdown();
+  if (count($groups) > 1) {
+    $form->addInput(array('type'=>'combobox',
+      'onchange'=>'this.form.submit();',
+      'name'=>'group',
+      'style'=>'width: 250px;',
+      'value'=>$group_id,
+      'data'=>$groups,
+      'datakeys'=>array('id','name')));
+    $smarty->assign('group_dropdown', 1);
+  }
+}
+
 if($user->can('manage_tasks')) {
-  $active_tasks = ttTeamHelper::getActiveTasks($user->group_id);
-  $inactive_tasks = ttTeamHelper::getInactiveTasks($user->group_id);
+  $active_tasks = ttTeamHelper::getActiveTasks($group_id);
+  $inactive_tasks = ttTeamHelper::getInactiveTasks($group_id);
 } else
   $active_tasks = $user->getAssignedTasks();
 
+$smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('active_tasks', $active_tasks);
 $smarty->assign('inactive_tasks', $inactive_tasks);
 $smarty->assign('title', $i18n->get('title.tasks'));

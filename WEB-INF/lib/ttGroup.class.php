@@ -114,17 +114,6 @@ class ttGroup {
         if ($first_unit_threshold) $this->first_unit_threshold = $first_unit_threshold;
         $this->unit_totals_only = $config->getDefinedValue('unit_totals_only');
       }
-
-      // Set "on behalf" id and name (user).
-      if (isset($_SESSION['behalf_id'])) {
-          $this->behalf_id = $_SESSION['behalf_id'];
-          $this->behalf_name = $_SESSION['behalf_name'];
-      }
-      // Set "on behalf" id and name (group).
-      if (isset($_SESSION['behalf_group_id'])) {
-          $this->behalf_group_id = $_SESSION['behalf_group_id'];
-          $this->behalf_group_name = $_SESSION['behalf_group_name'];
-      }
       */
     }
   }

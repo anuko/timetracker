@@ -723,6 +723,7 @@ class ttUser {
     $this->behalf_group_name = null;
     $this->behalf_id = null;
     $this->behalf_name = null;
+    unset($this->behalfGroup);
     unset($_SESSION['behalf_group_id']);
     unset($_SESSION['behalf_group_name']);
     unset($_SESSION['behalf_id']);

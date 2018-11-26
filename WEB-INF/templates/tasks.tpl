@@ -6,6 +6,16 @@
   <tr>
     <td valign="top">
 {if $user->can('manage_tasks')}
+  {if $group_dropdown}
+{$forms.tasksForm.open} {* tasksForm consists only of one dropdown group control *}
+      <table width="100%">
+        <tr>
+          <td align="center">{$i18n.label.group}: {$forms.tasksForm.group.control}</td>
+        </tr>
+      </table>
+{$forms.tasksForm.close}
+  {/if}
+
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
   {if $inactive_tasks}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.tasks.active_tasks}</td></tr>
