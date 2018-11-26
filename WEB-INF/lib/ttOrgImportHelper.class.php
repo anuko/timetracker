@@ -181,7 +181,9 @@ class ttOrgImportHelper {
         if ($task_id) {
           // Add a mapping.
           $this->currentGroupTaskMap[$attrs['ID']] = $task_id;
-        } else $this->errors->add($i18n->get('error.db'));
+        } else {
+          $this->errors->add($i18n->get('error.db'));
+        }
         return;
       }
 
@@ -205,7 +207,9 @@ class ttOrgImportHelper {
         if ($project_id) {
           // Add a mapping.
           $this->currentGroupProjectMap[$attrs['ID']] = $project_id;
-        } else $this->errors->add($i18n->get('error.db'));
+        } else {
+          $this->errors->add($i18n->get('error.db'));
+        }
         return;
       }
 

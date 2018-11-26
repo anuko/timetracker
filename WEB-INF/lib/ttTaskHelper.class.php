@@ -35,9 +35,11 @@ class ttTaskHelper {
     global $user;
  
     $mdb2 = getConnection();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
     $sql = "select id, name, description, status from tt_tasks
-      where id = $id and group_id = $user->group_id and (status = 0 or status = 1)";
+      where id = $id and group_id = $group_id and org_id = $org_id and (status = 0 or status = 1)";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
@@ -53,15 +55,17 @@ class ttTaskHelper {
   // getAssignedProjects - returns an array of projects associatied with a task.
   static function getAssignedProjects($task_id)
   {
-  	global $user;
+    global $user;
   	
     $result = array();
     $mdb2 = getConnection();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
     
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name from tt_projects p
       inner join tt_project_task_binds ptb on (ptb.project_id = p.id and ptb.task_id = $task_id)
-      where p.group_id = $user->group_id and p.status = 1 order by p.name";
+      where p.group_id = $group_id and p.org_id = $org_id and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {

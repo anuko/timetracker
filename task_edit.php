@@ -36,7 +36,7 @@ if (!ttAccessAllowed('manage_tasks')) {
   header('Location: access_denied.php');
   exit();
 }
-if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+if (MODE_PROJECTS_AND_TASKS != $user->getTrackingMode()) {
   header('Location: feature_disabled.php');
   exit();
 }
@@ -48,7 +48,7 @@ if (!$task) {
 }
 // End of access checks.
 
-$projects = ttTeamHelper::getActiveProjects($user->group_id);
+$projects = ttTeamHelper::getActiveProjects($user->getGroup());
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -118,6 +118,7 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('show_projects', count($projects) > 0);
 $smarty->assign('title', $i18n->get('title.edit_task'));
 $smarty->assign('content_page_name', 'task_edit.tpl');
 $smarty->display('index.tpl');

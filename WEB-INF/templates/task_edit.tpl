@@ -15,10 +15,12 @@
           <td align = "right">{$i18n.label.status}:</td>
           <td>{$forms.taskForm.status.control}</td>
         </tr>
+{if $show_projects}
         <tr valign="top">
           <td align="right">{$i18n.label.projects}:</td>
           <td>{$forms.taskForm.projects.control}</td>
         </tr>
+{/if}
         <tr>
           <td></td>
           <td>{$i18n.label.required_fields}</td>
