@@ -35,7 +35,7 @@ class ttExpenseHelper {
     $mdb2 = getConnection();
 
     $user_id = $user->getActiveUser();
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
     $date = $fields['date'];

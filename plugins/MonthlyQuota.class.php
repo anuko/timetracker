@@ -38,7 +38,7 @@ class MonthlyQuota {
   function __construct() {
     $this->db = getConnection();
     global $user;
-    $this->group_id = $user->getActiveGroup();
+    $this->group_id = $user->getGroup();
     $this->org_id = $user->org_id;
   }
 

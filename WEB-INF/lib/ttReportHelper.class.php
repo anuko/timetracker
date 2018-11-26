@@ -62,7 +62,7 @@ class ttReportHelper {
       $user_list_part = " and l.user_id in ($userlist)";
     else
       $user_list_part = " and l.user_id = ".$user->id;
-    $user_list_part .= " and l.group_id = ".$user->getActiveGroup();
+    $user_list_part .= " and l.group_id = ".$user->getGroup();
 
     // Prepare sql query part for where.
     if ($options['period'])
@@ -100,7 +100,7 @@ class ttReportHelper {
       $user_list_part = " and ei.user_id in ($userlist)";
     else
       $user_list_part = " and ei.user_id = ".$user->id;
-    $user_list_part .= " and ei.group_id = ".$user->getActiveGroup();
+    $user_list_part .= " and ei.group_id = ".$user->getGroup();
 
     // Prepare sql query part for where.
     if ($options['period'])
@@ -157,7 +157,7 @@ class ttReportHelper {
     // Add custom field.
     $include_cf_1 = $options['show_custom_field_1'] || $grouping_by_cf_1;
     if ($include_cf_1) {
-      $custom_fields = new CustomFields($user->getActiveGroup());
+      $custom_fields = new CustomFields($user->getGroup());
       $cf_1_type = $custom_fields->fields[0]['type'];
       if ($cf_1_type == CustomFields::TYPE_TEXT) {
         array_push($fields, 'cfl.value as cf_1');
@@ -616,7 +616,7 @@ class ttReportHelper {
 
     // Use custom fields plugin if it is enabled.
     if ($user->isPluginEnabled('cf'))
-      $custom_fields = new CustomFields($user->getActiveGroup());
+      $custom_fields = new CustomFields($user->getGroup());
 
     // Define some styles to use in email.
     $style_title = 'text-align: center; font-size: 15pt; font-family: Arial, Helvetica, sans-serif;';
@@ -1460,7 +1460,7 @@ class ttReportHelper {
       $join .= ' left join tt_tasks t on (l.task_id = t.id)';
     }
     if (ttReportHelper::groupingBy('cf_1', $options)) {
-      $custom_fields = new CustomFields($user->getActiveGroup());
+      $custom_fields = new CustomFields($user->getGroup());
       if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
         $join .= ' left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id)';
       elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)

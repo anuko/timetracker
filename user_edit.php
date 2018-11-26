@@ -49,9 +49,9 @@ if (!$user_details) {
 // End of access checks.
 
 if ($user->isPluginEnabled('cl'))
-  $clients = ttTeamHelper::getActiveClients($user->getActiveGroup());
+  $clients = ttTeamHelper::getActiveClients($user->getGroup());
 
-$projects = ttTeamHelper::getActiveProjects($user->getActiveGroup());
+$projects = ttTeamHelper::getActiveProjects($user->getGroup());
 $assigned_projects = array();
 
 if ($request->isPost()) {

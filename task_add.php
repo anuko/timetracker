@@ -68,7 +68,7 @@ if ($request->isPost()) {
   if ($err->no()) {
     if (!ttTaskHelper::getTaskByName($cl_name)) {
       if (ttTaskHelper::insert(array(
-        'group_id' => $user->getActiveGroup(),
+        'group_id' => $user->getGroup(),
         'org_id' => $user->org_id,
         'name' => $cl_name,
         'description' => $cl_description,

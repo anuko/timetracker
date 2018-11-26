@@ -80,7 +80,7 @@ class ttFavReportHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
     $sql = "insert into tt_fav_reports".

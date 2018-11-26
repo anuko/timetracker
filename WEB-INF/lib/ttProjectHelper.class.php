@@ -43,7 +43,7 @@ class ttProjectHelper {
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name, p.tasks, upb.rate from tt_projects p".
       " inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.project_id = p.id and upb.status = 1)".
-      " where p.group_id = ".$user->getActiveGroup()." and p.status = 1 order by p.name";
+      " where p.group_id = ".$user->getGroup()." and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -63,7 +63,7 @@ class ttProjectHelper {
     
     $sql = "select p.id, upb.rate from tt_projects p".
       " inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.project_id = p.id)".
-      " where group_id = ".$user->getActiveGroup();
+      " where group_id = ".$user->getGroup();
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -83,7 +83,7 @@ class ttProjectHelper {
     $mdb2 = getConnection();
     
     $sql = "select id, name, tasks from tt_projects".
-      " where group_id = ".$user->getActiveGroup()." and (status = 0 or status = 1) order by name";
+      " where group_id = ".$user->getGroup()." and (status = 0 or status = 1) order by name";
         
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -104,7 +104,7 @@ class ttProjectHelper {
 
     $sql = "select p.id, p.name, p.tasks from tt_projects p".
       " inner join tt_client_project_binds cpb on (cpb.client_id = $user->client_id and cpb.project_id = p.id)".
-      " where p.group_id = ".$user->getActiveGroup()." and (p.status = 0 or p.status = 1)".
+      " where p.group_id = ".$user->getGroup()." and (p.status = 0 or p.status = 1)".
       " order by p.name";
 
     $res = $mdb2->query($sql);
@@ -125,7 +125,7 @@ class ttProjectHelper {
     $mdb2 = getConnection();
 
     $sql = "select id, name, description, status, tasks from tt_projects where id = $id and group_id = ".
-            $user->getActiveGroup()." and (status = 0 or status = 1)";
+            $user->getGroup()." and (status = 0 or status = 1)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -142,7 +142,7 @@ class ttProjectHelper {
     global $user;
 
     $sql = "select id from tt_projects where group_id = ".
-      $user->getActiveGroup()." and name = ".$mdb2->quote($name).
+      $user->getGroup()." and name = ".$mdb2->quote($name).
       " and (status = 1 or status = 0)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -159,7 +159,7 @@ class ttProjectHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
     // Start with project itself. Reason: if the passed in project_id is bogus,
@@ -245,7 +245,7 @@ class ttProjectHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
     $project_id = $fields['id']; // Project we are updating.
     $name = $fields['name']; // Project name.
@@ -323,7 +323,7 @@ class ttProjectHelper {
     // Update project name, description, tasks and status in tt_projects table.
     $comma_separated = implode(",", $tasks_to_bind); // This is a comma-separated list of associated task ids.
     $sql = "update tt_projects set name = ".$mdb2->quote($name).", description = ".$mdb2->quote($description).
-           ", tasks = ".$mdb2->quote($comma_separated).", status = $status where id = $project_id and group_id = ".$user->getActiveGroup();
+           ", tasks = ".$mdb2->quote($comma_separated).", status = $status where id = $project_id and group_id = ".$user->getGroup();
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }

@@ -39,7 +39,7 @@ class ttPredefinedExpenseHelper {
     $mdb2 = getConnection();
 
     $sql = "select id, name, cost from tt_predefined_expenses
-      where id = $id and group_id = ".$user->getActiveGroup();
+      where id = $id and group_id = ".$user->getGroup();
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -58,7 +58,7 @@ class ttPredefinedExpenseHelper {
 
     $mdb2 = getConnection();
 
-    $sql = "delete from tt_predefined_expenses where id = $id and group_id = ".$user->getActiveGroup();
+    $sql = "delete from tt_predefined_expenses where id = $id and group_id = ".$user->getGroup();
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -73,7 +73,7 @@ class ttPredefinedExpenseHelper {
 
     $mdb2 = getConnection();
 
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
     $name = $fields['name'];
     $cost = $fields['cost'];
@@ -96,7 +96,7 @@ class ttPredefinedExpenseHelper {
 
     $mdb2 = getConnection();
 
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
     $predefined_expense_id = (int) $fields['id'];
     $name = $fields['name'];

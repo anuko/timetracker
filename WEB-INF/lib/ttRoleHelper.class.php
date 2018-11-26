@@ -37,7 +37,7 @@ class ttRoleHelper {
     $mdb2 = getConnection();
 
     $sql = "select id, name, description, rank, rights, status from tt_roles
-      where id = $id and group_id = ".$user->getActiveGroup()." and (status = 0 or status = 1)";
+      where id = $id and group_id = ".$user->getGroup()." and (status = 0 or status = 1)";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
@@ -56,7 +56,7 @@ class ttRoleHelper {
     $mdb2 = getConnection();
     global $user;
 
-    $sql = "select id from tt_roles where group_id = ".$user->getActiveGroup().
+    $sql = "select id from tt_roles where group_id = ".$user->getGroup().
       " and name = ".$mdb2->quote($role_name)." and (status = 1 or status = 0)";
     $res = $mdb2->query($sql);
 
@@ -89,7 +89,7 @@ class ttRoleHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $sql = "select rights from tt_roles where group_id = ".$user->getActiveGroup()." and id = $role_id";
+    $sql = "select rights from tt_roles where group_id = ".$user->getGroup()." and id = $role_id";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
@@ -124,7 +124,7 @@ class ttRoleHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
     $id = (int)$fields['id'];
@@ -144,7 +144,7 @@ class ttRoleHelper {
     global $user;
 
     $mdb2 = getConnection();
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
     // Mark the task as deleted.

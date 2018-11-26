@@ -166,6 +166,11 @@ class ttUser {
     }
   }
 
+  // The getGroup returns group id on behalf of which the current user is operating.
+   function getGroup() {
+    return ($this->behalfGroup ? $this->behalfGroup->id : $this->group_id);
+  }
+
   // getDecimalMark returns decimal mark for active group.
   function getDecimalMark() {
     return ($this->behalfGroup ? $this->behalfGroup->decimal_mark : $this->decimal_mark);
@@ -179,11 +184,6 @@ class ttUser {
   // The getActiveUser returns user id on behalf of whom the current user is operating.
   function getActiveUser() {
     return ($this->behalf_id ? $this->behalf_id : $this->id);
-  }
-
-  // The getActiveGroup returns group id on behalf of which the current user is operating.
-  function getActiveGroup() {
-    return ($this->behalf_group_id ? $this->behalf_group_id : $this->group_id);
   }
 
   // can - determines whether user has a right to do something.
@@ -323,7 +323,7 @@ class ttUser {
   function getUsers($options) {
     $mdb2 = getConnection();
 
-    $group_id = $this->getActiveGroup();
+    $group_id = $this->getGroup();
     $org_id = $this->org_id;
 
     $skipClients = !isset($options['include_clients']);
@@ -408,7 +408,7 @@ class ttUser {
 
     // Start with subgroups.
     $groups = array();
-    $group_id = $this->getActiveGroup();
+    $group_id = $this->getGroup();
     $sql = "select id, name from tt_groups where org_id = $this->org_id and parent_id = $group_id and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -451,7 +451,7 @@ class ttUser {
   function getSubgroups($group_id = null) {
     $mdb2 = getConnection();
 
-    if (!$group_id) $group_id = $this->getActiveGroup();
+    if (!$group_id) $group_id = $this->getGroup();
 
     $sql = "select id, name, description from tt_groups where org_id = $this->org_id".
       " and parent_id = $group_id and status is not null order by upper(name)";
@@ -470,7 +470,7 @@ class ttUser {
     if (!$this->can('manage_users')) return false;
 
     $mdb2 = getConnection();
-    $group_id = $this->getActiveGroup();
+    $group_id = $this->getGroup();
     $org_id = $this->org_id;
 
     $sql =  "select u.id, u.name, u.login, u.role_id, u.client_id, u.status, u.rate, u.email from tt_users u".
@@ -552,7 +552,7 @@ class ttUser {
     if ($group_id && !$this->isGroupValid($group_id)) return false;
 
     $mdb2 = getConnection();
-    if (!$group_id) $group_id = $this->getActiveGroup();
+    if (!$group_id) $group_id = $this->getGroup();
 
     if (isset($fields['name'])) $name_part = ', name = '.$mdb2->quote($fields['name']);
     if (isset($fields['description'])) $description_part = ', description = '.$mdb2->quote($fields['description']);
@@ -597,7 +597,7 @@ class ttUser {
     if (!$user_details) return false;
 
     $mdb2 = getConnection();
-    $group_id = $this->getActiveGroup();
+    $group_id = $this->getGroup();
     $org_id = $this->org_id;
 
     // Mark user to project binds as deleted.

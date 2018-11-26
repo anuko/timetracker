@@ -48,7 +48,7 @@ if ($request->isPost()) {
   $group_id = $request->getParameter('group');
   $user->setOnBehalfGroup($group_id);
 } else {
-  $group_id = $user->getActiveGroup();
+  $group_id = $user->getGroup();
 }
 
 $form = new Form('usersForm');

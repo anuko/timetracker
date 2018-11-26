@@ -66,7 +66,7 @@ class CustomFields {
     global $user;
     $mdb2 = getConnection();
 
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
     $sql = "insert into tt_custom_field_log (group_id, org_id, log_id, field_id, option_id, value)".
@@ -118,7 +118,7 @@ class CustomFields {
     global $user;
     $mdb2 = getConnection();
 
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
     // Check if the option exists.
@@ -283,7 +283,7 @@ class CustomFields {
   static function insertField($field_name, $field_type, $required) {
     global $user;
     $mdb2 = getConnection();
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
     $sql = "insert into tt_custom_fields (group_id, org_id, type, label, required, status)".
       " values($group_id, $org_id, $field_type, ".$mdb2->quote($field_name).", $required, 1)";

@@ -67,7 +67,7 @@ class ttGroupHelper {
     global $user;
 
     $mdb2 = getConnection();
-    $parent_id = $user->getActiveGroup();
+    $parent_id = $user->getGroup();
     $org_id = $user->org_id;
 
     $sql = "select id from tt_groups where parent_id = $parent_id and org_id = $org_id".
@@ -86,7 +86,7 @@ class ttGroupHelper {
     global $user;
 
     $mdb2 = getConnection();
-    $parent_id = $user->getActiveGroup();
+    $parent_id = $user->getGroup();
     $org_id = $user->org_id;
     $name = $fields['name'];
     $description = $fields['description'];
@@ -259,7 +259,7 @@ class ttGroupHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
     $sql =  "select * from tt_roles".
       " where group_id = $group_id and org_id = $org_id and status is not null";

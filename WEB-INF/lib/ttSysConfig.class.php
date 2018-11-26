@@ -44,7 +44,7 @@ class ttSysConfig {
   function __construct($user_id) {
     global $user;
     $this->user_id = $user_id; // TODO: review "on behalf" situation and refactor if necessary.
-    $this->group_id = $user->getActiveGroup();
+    $this->group_id = $user->getGroup();
     $this->org_id = $user->org_id;
     $this->mdb2 = getConnection();
   }

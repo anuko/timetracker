@@ -192,7 +192,7 @@ class ttTaskHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
     $task_id = (int)$fields['task_id'];
     $name = $fields['name'];

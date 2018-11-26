@@ -54,7 +54,7 @@ if ($request->isPost()) {
     exit();
   }
 } else {
-  $group_id = $user->getActiveGroup();
+  $group_id = $user->getGroup();
 }
 
 $form = new Form('projectsForm');

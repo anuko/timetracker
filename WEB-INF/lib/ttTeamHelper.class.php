@@ -60,7 +60,7 @@ class ttTeamHelper {
     global $i18n;
     $mdb2 = getConnection();
 
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
     if (isset($options['getAllFields']))
@@ -293,7 +293,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
     $sql = "select id, name, description, rank, rights from tt_roles where group_id = $group_id and org_id = $org_id and rank < $user->rank and status = 1 order by rank";
@@ -354,7 +354,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $group_id = $user->getActiveGroup();
+    $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
     $sql = "select id, name, description, rank, rights from tt_roles where group_id = $group_id and org_id = $org_id and rank < $user->rank and status = 0 order by rank";

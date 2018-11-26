@@ -46,7 +46,7 @@ $users = ttTeamHelper::getActiveUsers();
 foreach ($users as $user_item)
   $all_users[$user_item['id']] = $user_item['name'];
 
-$tasks = ttTeamHelper::getActiveTasks($user->getActiveGroup());
+$tasks = ttTeamHelper::getActiveTasks($user->getGroup());
 foreach ($tasks as $task_item)
   $all_tasks[$task_item['id']] = $task_item['name'];
 
@@ -78,7 +78,7 @@ if ($request->isPost()) {
   if ($err->no()) {
     if (!ttProjectHelper::getProjectByName($cl_name)) {
       if (ttProjectHelper::insert(array(
-        'group_id' => $user->getActiveGroup(),
+        'group_id' => $user->getGroup(),
         'org_id' => $user->org_id,
         'name' => $cl_name,
         'description' => $cl_description,

@@ -493,7 +493,7 @@ class ttWeekViewHelper {
     // Prepare an array of fields for regular insert function.
     $fields4insert = array();
     $fields4insert['user_id'] = $user->getActiveUser();
-    $fields4insert['group_id'] = $user->getActiveGroup();
+    $fields4insert['group_id'] = $user->getGroup();
     $fields4insert['org_id'] = $user->org_id;
     $fields4insert['date'] = $entry_date;
     $fields4insert['duration'] = $fields['duration'];

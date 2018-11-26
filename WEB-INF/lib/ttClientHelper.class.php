@@ -41,7 +41,7 @@ class ttClientHelper {
     else
       $sql .= 'name ';
 
-    $sql .= "from tt_clients where group_id = ".$user->getActiveGroup().
+    $sql .= "from tt_clients where group_id = ".$user->getGroup().
       " and id = $client_id and (status = 1 or status = 0)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -59,7 +59,7 @@ class ttClientHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name from tt_clients where group_id = ".$user->getActiveGroup()." and (status = 0 or status = 1) order by upper(name)";
+    $sql = "select id, name from tt_clients where group_id = ".$user->getGroup()." and (status = 0 or status = 1) order by upper(name)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -75,7 +75,7 @@ class ttClientHelper {
     $mdb2 = getConnection();
     global $user;
 
-    $sql = "select id from tt_clients where group_id = ".$user->getActiveGroup().
+    $sql = "select id from tt_clients where group_id = ".$user->getGroup().
       " and name = ".$mdb2->quote($client_name)." and (status = 1 or status = 0)";
 
     $res = $mdb2->query($sql);
@@ -94,7 +94,7 @@ class ttClientHelper {
     $mdb2 = getConnection();
     global $user;
 
-    $sql = "select name, address from tt_clients where group_id = ".$user->getActiveGroup().
+    $sql = "select name, address from tt_clients where group_id = ".$user->getGroup().
       " and id = $client_id and status is NULL";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -137,7 +137,7 @@ class ttClientHelper {
 
     // Handle invoices.
     if ($delete_client_entries) {
-      $sql = "update tt_invoices set status = NULL where client_id = $id and group_id = ".$user->getActiveGroup();
+      $sql = "update tt_invoices set status = NULL where client_id = $id and group_id = ".$user->getGroup();
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -150,13 +150,13 @@ class ttClientHelper {
       return false;
 
     // Handle users for client.
-    $sql = 'update tt_users set status = NULL'.$modified_part." where client_id = $id and group_id = ".$user->getActiveGroup();
+    $sql = 'update tt_users set status = NULL'.$modified_part." where client_id = $id and group_id = ".$user->getGroup();
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
     // Mark client deleted.
-    $sql = "update tt_clients set status = NULL where id = $id and group_id = ".$user->getActiveGroup();
+    $sql = "update tt_clients set status = NULL where id = $id and group_id = ".$user->getGroup();
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
@@ -237,7 +237,7 @@ class ttClientHelper {
     $comma_separated = implode(",", $projects); // This is a comma-separated list of associated project ids.
     $sql = "update tt_clients set name = ".$mdb2->quote($name).", address = ".$mdb2->quote($address).
       ", tax = $tax, projects = ".$mdb2->quote($comma_separated).", status = $status".
-      " where group_id = ".$user->getActiveGroup()." and id = ".$id;
+      " where group_id = ".$user->getGroup()." and id = ".$id;
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
@@ -273,7 +273,7 @@ class ttClientHelper {
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name from tt_projects p".
       " inner join tt_client_project_binds cpb on (cpb.client_id = $client_id and cpb.project_id = p.id)".
-      " where p.group_id = ".$user->getActiveGroup()." and p.status = 1 order by p.name";
+      " where p.group_id = ".$user->getGroup()." and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {

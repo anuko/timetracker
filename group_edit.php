@@ -50,7 +50,7 @@ if ($group_id) {
   $user->setOnBehalfGroup($group_id);
 }
 
-if (!$group_id) $group_id = $user->getActiveGroup();
+if (!$group_id) $group_id = $user->getGroup();
 $groups = $user->getGroupsForDropdown();
 $group = ttGroupHelper::getGroupAttrs($group_id);
 $config = new ttConfigHelper($group['config']);
