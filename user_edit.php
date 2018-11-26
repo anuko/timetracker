@@ -227,6 +227,7 @@ $smarty->assign('rates', $rates);
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('active_roles', $active_roles);
 $smarty->assign('can_swap', $can_swap);
+$smarty->assign('show_projects', count($projects) > 0);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
 $smarty->assign('user_id', $user_id);

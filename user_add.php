@@ -169,6 +169,7 @@ if ($request->isPost()) {
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('active_roles', $active_roles);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('show_projects', count($projects) > 0);
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
 $smarty->assign('title', $i18n->get('title.add_user'));
 $smarty->assign('content_page_name', 'user_add.tpl');
