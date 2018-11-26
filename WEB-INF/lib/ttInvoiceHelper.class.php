@@ -155,7 +155,7 @@ class ttInvoiceHelper {
     // It is anticipated to support "totals only" option later on.
 
     // Our query is different depending on tracking mode.
-    if (MODE_TIME == $user->tracking_mode) {
+    if (MODE_TIME == $user->getTrackingMode()) {
       // In "time only" tracking mode there is a single user rate.
       $sql = "select l.date as date, 1 as type, u.name as user_name, p.name as project_name,
       t.name as task_name, l.comment as note,
@@ -258,7 +258,7 @@ class ttInvoiceHelper {
     if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
 
     // Our query is different depending on tracking mode.
-    if (MODE_TIME == $user->tracking_mode) {
+    if (MODE_TIME == $user->getTrackingMode()) {
       // In "time only" tracking mode there is a single user rate.
       $sql = "select count(*) as num from tt_log l, tt_users u
         where l.status = 1 and l.client_id = $client_id and l.invoice_id is NULL
@@ -344,7 +344,7 @@ class ttInvoiceHelper {
     $last_id = $val['last_insert_id'];
 
     // Our update sql is different depending on tracking mode.
-    if (MODE_TIME == $user->tracking_mode) {
+    if (MODE_TIME == $user->getTrackingMode()) {
       // In "time only" tracking mode there is a single user rate.
       $sql = "update tt_log l
         left join tt_users u on (u.id = l.user_id)
@@ -426,6 +426,9 @@ class ttInvoiceHelper {
     $style_tableHeader = 'font-weight: bold; background-color: #a6ccf7; text-align: left;';
     $style_tableHeaderCentered = 'font-weight: bold; background-color: #a6ccf7; text-align: center;';
 
+    // Determine tracking mode once for multiple reuse below.
+    $trackingMode = $user->getTrackingMode();
+
     // Start creating email body.
     $body = '<html>';
     $body .= '<head><meta http-equiv="content-type" content="text/html; charset='.CHARSET.'"></head>';
@@ -451,9 +454,9 @@ class ttInvoiceHelper {
     $body .= '<tr>';
     $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('label.date').'</td>';
     $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('form.invoice.person').'</td>';
-    if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+    if (MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode)
       $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('label.project').'</td>';
-    if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+    if (MODE_PROJECTS_AND_TASKS == $trackingMode)
       $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('label.task').'</td>';
     $body .= '<td style="'.$style_tableHeader.'">'.$i18n->get('label.note').'</td>';
     $body .= '<td style="'.$style_tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
@@ -463,9 +466,9 @@ class ttInvoiceHelper {
       $body .= '<tr>';
       $body .= '<td>'.$item['date'].'</td>';
       $body .= '<td>'.htmlspecialchars($item['user_name']).'</td>';
-      if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+      if (MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode)
         $body .= '<td>'.htmlspecialchars($item['project_name']).'</td>';
-      if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+      if (MODE_PROJECTS_AND_TASKS == $trackingMode)
         $body .= '<td>'.htmlspecialchars($item['task_name']).'</td>';
       $body .= '<td>'.htmlspecialchars($item['note']).'</td>';
       $body .= '<td align="right">'.$item['duration'].'</td>';
@@ -474,9 +477,9 @@ class ttInvoiceHelper {
     }
     // Output summary.
     $colspan = 4;
-    if (MODE_PROJECTS == $user->tracking_mode)
+    if (MODE_PROJECTS == $trackingMode)
       $colspan++;
-    elseif (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+    elseif (MODE_PROJECTS_AND_TASKS == $trackingMode)
       $colspan += 2;
     $body .= '<tr><td>&nbsp;</td></tr>';
     if ($tax) {

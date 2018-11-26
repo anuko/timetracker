@@ -31,9 +31,11 @@ class ttClientHelper {
 
   // The getClient looks up a client by id.
   static function getClient($client_id, $all_fields = false) {
-
-    $mdb2 = getConnection();
     global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
     $sql = 'select ';
     if ($all_fields)
@@ -41,7 +43,7 @@ class ttClientHelper {
     else
       $sql .= 'name ';
 
-    $sql .= "from tt_clients where group_id = ".$user->getGroup().
+    $sql .= "from tt_clients where group_id = $group_id and org_id = $org_id".
       " and id = $client_id and (status = 1 or status = 0)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
