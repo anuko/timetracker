@@ -94,12 +94,15 @@ class ttGroup {
       $this->password_complexity = $val['password_complexity'];
       $this->group_name = $val['group_name'];
       $this->currency = $val['currency'];
+      */
       $this->plugins = $val['plugins'];
+      /*
       $this->lock_spec = $val['lock_spec'];
       $this->workday_minutes = $val['workday_minutes'];
       $this->custom_logo = $val['custom_logo'];
-
+      */
       $this->config = $val['config'];
+      /*
       $config = new ttConfigHelper($this->config);
       // Set user config options.
       $this->show_holidays = $config->getDefinedValue('show_holidays');

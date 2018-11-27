@@ -181,6 +181,16 @@ class ttUser {
     return ($this->behalfGroup ? $this->behalfGroup->tracking_mode : $this->tracking_mode);
   }
 
+  // getPlugins returns plugins string for active group.
+  function getPlugins() {
+    return ($this->behalfGroup ? $this->behalfGroup->plugins : $this->plugins);
+  }
+
+  // getConfig returns config string for active group.
+  function getConfig() {
+    return ($this->behalfGroup ? $this->behalfGroup->config : $this->config);
+  }
+
   // The getActiveUser returns user id on behalf of whom the current user is operating.
   function getActiveUser() {
     return ($this->behalf_id ? $this->behalf_id : $this->id);

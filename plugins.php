@@ -34,10 +34,19 @@ if (!ttAccessAllowed('manage_features')) {
   header('Location: access_denied.php');
   exit();
 }
+if ($request->isPost() && $request->getParameter('group_changed') && !$user->isGroupValid($request->getParameter('group'))) {
+  header('Location: access_denied.php'); // Wrong group id in post.
+  exit();
+}
 // End of access checks.
 
-$config = new ttConfigHelper($user->config);
-
+// TODO: re-structure the file, perhaps by separating post and get processing into whole different sections.
+if ($request->isPost() && $request->getParameter('group_changed')) {
+  $group_id = $request->getParameter('group');
+  $user->setOnBehalfGroup($group_id);
+} else {
+  $group_id = $user->getGroup();
+}
 
 if ($request->isPost()) {
   // Plugin checkboxes.
@@ -56,7 +65,7 @@ if ($request->isPost()) {
   $cl_work_units = $request->getParameter('work_units');
 } else {
   // Which plugins do we have enabled?
-  $plugins = explode(',', $user->plugins);
+  $plugins = explode(',', $user->getPlugins());
   $cl_charts = in_array('ch', $plugins);
   $cl_clients = in_array('cl', $plugins);
   $cl_client_required = in_array('cm', $plugins);
@@ -73,6 +82,21 @@ if ($request->isPost()) {
 }
 
 $form = new Form('pluginsForm');
+
+if ($user->can('manage_subgroups')) {
+  $groups = $user->getGroupsForDropdown();
+  if (count($groups) > 1) {
+    $form->addInput(array('type'=>'combobox',
+      'onchange'=>'document.pluginsForm.group_changed.value=1;document.pluginsForm.submit();',
+      'name'=>'group',
+      'style'=>'width: 250px;',
+      'value'=>$group_id,
+      'data'=>$groups,
+      'datakeys'=>array('id','name')));
+    $form->addInput(array('type'=>'hidden','name'=>'group_changed'));
+    $smarty->assign('group_dropdown', 1);
+  }
+}
 
 // Plugin checkboxes.
 $form->addInput(array('type'=>'checkbox','name'=>'charts','value'=>$cl_charts));
@@ -91,7 +115,15 @@ $form->addInput(array('type'=>'checkbox','name'=>'work_units','value'=>$cl_work_
 
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
+$form->setValueByElement('group_changed','');
+
 if ($request->isPost()) {
+  if ($request->getParameter('group_changed')) {
+    // User changed the group in dropdown.
+    // Redirect to self.
+    header('Location: plugins.php');
+    exit();
+  }
 
   // Validate user input. Do we have to?
 
@@ -125,7 +157,7 @@ if ($request->isPost()) {
       $plugins .= ',wu';
 
     // Recycle week view plugin options as they are not configured on this page.
-    $existing_plugins = explode(',', $user->plugins);
+    $existing_plugins = explode(',', $user->getPlugins());
     if (in_array('wvn', $existing_plugins))
       $plugins .= ',wvn';
     if (in_array('wvl', $existing_plugins))
@@ -137,7 +169,7 @@ if ($request->isPost()) {
 
     if ($user->updateGroup(array(
       'plugins' => $plugins))) {
-      header('Location: time.php');
+      header('Location: success.php');
       exit();
     } else
       $err->add($i18n->get('error.db'));

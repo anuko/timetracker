@@ -89,6 +89,13 @@ function handlePluginCheckboxes() {
 <table cellspacing="4" cellpadding="7" border="0">
     <tr>
       <td>
+{if $group_dropdown}
+        <table width="100%">
+          <tr>
+            <td align="center">{$i18n.label.group}: {$forms.pluginsForm.group.control}</td>
+          </tr>
+        </table>
+{/if}
         <table cellspacing="1" cellpadding="2" border="0">
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.charts.control}</td>
