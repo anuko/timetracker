@@ -38,7 +38,7 @@
           </td>
           <td>{$u.login|escape}</td>
           <td>{$u.role_name|escape}</td>
-      {if $u.rank < $user->rank || ($u.rank == $user->rank && $u.id == $user->id)}
+      {if $u.group_id != $user->group_id || $u.rank < $user->rank || ($u.rank == $user->rank && $u.id == $user->id)}
           <td><a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a></td>
          {if $u.id != $user->id}<td><a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a></td>{else}<td></td>{/if}
       {else}
@@ -73,7 +73,7 @@
           <td>{$u.name|escape}</td>
           <td>{$u.login|escape}</td>
           <td>{$u.role_name|escape}</td>
-      {if $u.rank < $user->rank}
+      {if $u.rank < $user->rank || $u.group_id != $user->group_id}
           <td><a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a></td>
           <td><a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a></td>
       {else}

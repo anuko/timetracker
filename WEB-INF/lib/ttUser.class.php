@@ -344,7 +344,7 @@ class ttUser {
     $skipClients = !isset($options['include_clients']);
     $includeSelf = isset($options['include_self']);
 
-    $select_part = 'select u.id, u.name';
+    $select_part = 'select u.id, u.group_id, u.name';
     if (isset($options['include_login'])) $select_part .= ', u.login';
     if (!isset($options['include_clients'])) $select_part .= ', r.rights';
     if (isset($options['include_role'])) $select_part .= ', r.name as role_name, r.rank';

@@ -296,7 +296,11 @@ class ttTeamHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $group_id and org_id = $org_id and rank < $user->rank and status = 1 order by rank";
+    // Determine max rank. If we are working in on behalf group
+    // then rank restriction does not apply.
+    $max_rank = $user->behalfGroup ? MAX_RANK : $user->rank;
+
+    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $group_id and org_id = $org_id and rank < $max_rank and status = 1 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -357,7 +361,11 @@ class ttTeamHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $group_id and org_id = $org_id and rank < $user->rank and status = 0 order by rank";
+    // Determine max rank. If we are working in on behalf group
+    // then rank restriction does not apply.
+    $max_rank = $user->behalfGroup ? MAX_RANK : $user->rank;
+
+    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $group_id and org_id = $org_id and rank < $max_rank and status = 0 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
