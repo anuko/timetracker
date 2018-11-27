@@ -74,7 +74,7 @@ if ($request->isPost() && $userChanged) {
   $user_id = $request->getParameter('user');
   $user->setOnBehalfUser($user_id);
 } else {
-  $user_id = $user->getActiveUser();
+  $user_id = $user->getUser();
 }
 
 // Initialize and store date in session.
@@ -97,7 +97,7 @@ if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
   $month_quota_minutes = $quota->get($selected_date->mYear, $selected_date->mMonth);
-  $month_total = ttTimeHelper::getTimeForMonth($user->getActiveUser(), $selected_date);
+  $month_total = ttTimeHelper::getTimeForMonth($user->getUser(), $selected_date);
   $minutes_left = $month_quota_minutes - ttTimeHelper::toMinutes($month_total);
   
   $smarty->assign('month_total', $month_total);
@@ -323,13 +323,13 @@ if ($request->isPost()) {
 
     // Prohibit creating another uncompleted record.
     if ($err->no()) {
-      if (($not_completed_rec = ttTimeHelper::getUncompleted($user->getActiveUser())) && (($cl_finish == '') && ($cl_duration == '')))
+      if (($not_completed_rec = ttTimeHelper::getUncompleted($user->getUser())) && (($cl_finish == '') && ($cl_duration == '')))
         $err->add($i18n->get('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->get('error.goto_uncompleted')."</a>");
     }
 
     // Prohibit creating an overlapping record.
     if ($err->no()) {
-      if (ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $cl_start, $cl_finish))
+      if (ttTimeHelper::overlaps($user->getUser(), $cl_date, $cl_start, $cl_finish))
         $err->add($i18n->get('error.overlap'));
     }
 
@@ -337,7 +337,7 @@ if ($request->isPost()) {
     if ($err->no()) {
       $id = ttTimeHelper::insert(array(
         'date' => $cl_date,
-        'user_id' => $user->getActiveUser(),
+        'user_id' => $user->getUser(),
         'group_id' => $user->getGroup(),
         'org_id' => $user->org_id,
         'client' => $cl_client,
@@ -366,18 +366,18 @@ if ($request->isPost()) {
   } elseif ($request->getParameter('btn_stop')) {
     // Stop button pressed to finish an uncompleted record.
     $record_id = $request->getParameter('record_id');
-    $record = ttTimeHelper::getRecord($record_id, $user->getActiveUser());
+    $record = ttTimeHelper::getRecord($record_id, $user->getUser());
     $browser_date = $request->getParameter('browser_date');
     $browser_time = $request->getParameter('browser_time');
 
     // Can we complete this record?
     if ($record['date'] == $browser_date                                // closing today's record
       && ttTimeHelper::isValidInterval($record['start'], $browser_time) // finish time is greater than start time
-      && !ttTimeHelper::overlaps($user->getActiveUser(), $browser_date, $record['start'], $browser_time)) { // no overlap
+      && !ttTimeHelper::overlaps($user->getUser(), $browser_date, $record['start'], $browser_time)) { // no overlap
       $res = ttTimeHelper::update(array(
           'id'=>$record['id'],
           'date'=>$record['date'],
-          'user_id'=>$user->getActiveUser(),
+          'user_id'=>$user->getUser(),
           'client'=>$record['client_id'],
           'project'=>$record['project_id'],
           'task'=>$record['task_id'],
@@ -395,12 +395,12 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$week_total = ttTimeHelper::getTimeForWeek($user->getActiveUser(), $selected_date);
+$week_total = ttTimeHelper::getTimeForWeek($user->getUser(), $selected_date);
 
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
-$smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getActiveUser(), $cl_date));
-$smarty->assign('time_records', ttTimeHelper::getRecords($user->getActiveUser(), $cl_date));
+$smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getUser(), $cl_date));
+$smarty->assign('time_records', ttTimeHelper::getRecords($user->getUser(), $cl_date));
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);

@@ -289,7 +289,7 @@ class ttClientHelper {
   static function getClientsForUser()
   {
     global $user;
-    $user_id = $user->getActiveUser();
+    $user_id = $user->getUser();
 
     $result = array();
     $mdb2 = getConnection();

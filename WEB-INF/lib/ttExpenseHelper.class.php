@@ -34,7 +34,7 @@ class ttExpenseHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $user_id = $user->getActiveUser();
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 

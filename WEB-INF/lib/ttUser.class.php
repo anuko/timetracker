@@ -166,8 +166,13 @@ class ttUser {
     }
   }
 
+  // The getUser returns user id on behalf of whom the current user is operating.
+  function getUser() {
+    return ($this->behalf_id ? $this->behalf_id : $this->id);
+  }
+
   // The getGroup returns group id on behalf of which the current user is operating.
-   function getGroup() {
+  function getGroup() {
     return ($this->behalfGroup ? $this->behalfGroup->id : $this->group_id);
   }
 
@@ -196,11 +201,6 @@ class ttUser {
     return ($this->behalfGroup ? $this->behalfGroup->config : $this->config);
   }
 
-  // The getActiveUser returns user id on behalf of whom the current user is operating.
-  function getActiveUser() {
-    return ($this->behalf_id ? $this->behalf_id : $this->id);
-  }
-
   // can - determines whether user has a right to do something.
   function can($do_something) {
     return in_array($do_something, $this->rights);
@@ -226,7 +226,7 @@ class ttUser {
     $group_id = $this->behalf_group_id ? $this->behalf_group_id : $this->group_id;
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name, p.description, p.tasks, upb.rate from tt_projects p
-      inner join tt_user_project_binds upb on (upb.user_id = ".$this->getActiveUser()." and upb.project_id = p.id and upb.status = 1)
+      inner join tt_user_project_binds upb on (upb.user_id = ".$this->getUser()." and upb.project_id = p.id and upb.status = 1)
       where p.group_id = $group_id and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {

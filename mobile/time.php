@@ -238,20 +238,20 @@ if ($request->isPost()) {
 
     // Prohibit creating another uncompleted record.
     if ($err->no()) {
-      if (($not_completed_rec = ttTimeHelper::getUncompleted($user->getActiveUser())) && (($cl_finish == '') && ($cl_duration == '')))
+      if (($not_completed_rec = ttTimeHelper::getUncompleted($user->getUser())) && (($cl_finish == '') && ($cl_duration == '')))
         $err->add($i18n->get('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->get('error.goto_uncompleted')."</a>");
     }
 
     // Prohibit creating an overlapping record.
     if ($err->no()) {
-      if (ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $cl_start, $cl_finish))
+      if (ttTimeHelper::overlaps($user->getUser(), $cl_date, $cl_start, $cl_finish))
         $err->add($i18n->get('error.overlap'));
     }
 
     if ($err->no()) {
       $id = ttTimeHelper::insert(array(
         'date' => $cl_date,
-        'user_id' => $user->getActiveUser(),
+        'user_id' => $user->getUser(),
         'group_id' => $user->getGroup(),
         'org_id' => $user->org_id,
         'client' => $cl_client,
@@ -283,8 +283,8 @@ if ($request->isPost()) {
 
 $smarty->assign('next_date', $next_date);
 $smarty->assign('prev_date', $prev_date);
-$smarty->assign('time_records', ttTimeHelper::getRecords($user->getActiveUser(), $cl_date));
-$smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getActiveUser(), $cl_date));
+$smarty->assign('time_records', ttTimeHelper::getRecords($user->getUser(), $cl_date));
+$smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getUser(), $cl_date));
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);

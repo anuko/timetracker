@@ -260,7 +260,7 @@ class Calendar extends FormElement {
     function _getActiveDates($start, $end) {
       
       global $user;
-      $user_id = $user->getActiveUser();
+      $user_id = $user->getUser();
       
       $table = ($this->highlight == 'expenses') ? 'tt_expense_items' : 'tt_log';
       

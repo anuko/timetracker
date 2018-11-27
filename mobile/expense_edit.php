@@ -43,7 +43,7 @@ if (!$user->isPluginEnabled('ex')) {
 }
 $cl_id = (int)$request->getParameter('id');
 // Get the expense item we are editing.
-$expense_item = ttExpenseHelper::getItem($cl_id, $user->getActiveUser());
+$expense_item = ttExpenseHelper::getItem($cl_id, $user->getUser());
 if (!$expense_item || $expense_item['invoice_id']) {
   // Prohibit editing not ours or invoiced items.
   header('Location: access_denied.php');
@@ -184,7 +184,7 @@ if ($request->isPost()) {
 
     // Now, an update.
     if ($err->no()) {
-      if (ttExpenseHelper::update(array('id'=>$cl_id,'date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getActiveUser(),
+      if (ttExpenseHelper::update(array('id'=>$cl_id,'date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getUser(),
           'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost))) {
         header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
         exit();
