@@ -18,16 +18,16 @@
   <tr>
     <td valign="top">
       <table>
-{if $on_behalf_group_control}
+{if $group_dropdown}
         <tr>
           <td align="right">{$i18n.label.group}:</td>
-          <td>{$forms.timeRecordForm.onBehalfGroup.control}</td>
+          <td>{$forms.timeRecordForm.group.control}</td>
         </tr>
 {/if}
-{if $on_behalf_control}
+{if $user_dropdown}
         <tr>
           <td align="right">{$i18n.label.user}:</td>
-          <td>{$forms.timeRecordForm.onBehalfUser.control}</td>
+          <td>{$forms.timeRecordForm.user.control}</td>
         </tr>
 {/if}
 {if $user->isPluginEnabled('cl')}

@@ -181,6 +181,11 @@ class ttUser {
     return ($this->behalfGroup ? $this->behalfGroup->tracking_mode : $this->tracking_mode);
   }
 
+  // getRecordType returns record type for active group.
+  function getRecordType() {
+    return ($this->behalfGroup ? $this->behalfGroup->record_type : $this->record_type);
+  }
+
   // getPlugins returns plugins string for active group.
   function getPlugins() {
     return ($this->behalfGroup ? $this->behalfGroup->plugins : $this->plugins);
@@ -209,7 +214,7 @@ class ttUser {
   // isPluginEnabled checks whether a plugin is enabled for user.
   function isPluginEnabled($plugin)
   {
-    return in_array($plugin, explode(',', $this->plugins));
+    return in_array($plugin, explode(',', $this->getPlugins()));
   }
 
   // getAssignedProjects - returns an array of assigned projects.
@@ -662,6 +667,20 @@ class ttUser {
     return true;
   }
 
+  // isUserValid determines if a user is valid for on behalf work.
+  function isUserValid($user_id) {
+    if ($user_id == $this->id)
+      return true;
+
+    $user_details = $this->getUser($user_id); // TODO: this will probably not work for higher ranks.
+                                              // In this case we'll need another function.
+                                              // Or adjust getUser for max rank.
+    if (!$user_details)
+      return false;
+
+    return true;
+  }
+
   // isGroupValid determines if a group is valid for user.
   function isGroupValid($group_id) {
     if ($group_id == $this->group_id)
@@ -742,10 +761,10 @@ class ttUser {
     // Do not do anything if we don't have rights.
     if (!$this->can('manage_subgroups')) return;
 
-    // No need to set if the group is our home group.
+    // No need to set if group is our home group.
     if ($group_id == $this->group_id) return;
 
-    // No need to set if the subgroup is not valid.
+    // No need to set if subgroup is not valid.
     if (!$this->isSubgroupValid($group_id)) return;
 
     // We are good to set on behalf group.
@@ -759,6 +778,30 @@ class ttUser {
 
     // Adjust on behalf user.
     $this->adjustBehalfId();
+    return;
+  }
+
+   // setOnBehalfUser sets on behalf user both the object and the session.
+  function setOnBehalfUser($user_id) {
+
+    // Unset things first.
+    $this->behalf_id = null;
+    $this->behalf_name = null;
+    unset($_SESSION['behalf_id']);
+    unset($_SESSION['behalf_name']);
+
+    // No need to set if user is us.
+    if ($user_id == $this->id) return;
+
+    // No need to set if user id is not valid.
+    if (!$this->isUserValid($user_id)) return;
+
+    // We are good to set on behalf user.
+    $onBehalfUserName = ttUserHelper::getUserName($user_id);
+    $_SESSION['behalf_id'] = $user_id;
+    $_SESSION['behalf_name'] = $onBehalfUserName;
+    $this->behalf_id = $user_id;
+    $this->behalf_name = $onBehalfUserName;
     return;
   }
 }

@@ -88,7 +88,9 @@ class ttGroup {
       /* TODO: initialize other things here.
       $this->project_required = $val['project_required'];
       $this->task_required = $val['task_required'];
+       */
       $this->record_type = $val['record_type'];
+      /*
       $this->bcc_email = $val['bcc_email'];
       $this->allow_ip = $val['allow_ip'];
       $this->password_complexity = $val['password_complexity'];
