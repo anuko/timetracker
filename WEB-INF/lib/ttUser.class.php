@@ -479,19 +479,23 @@ class ttUser {
     return $groups;
   }
 
-  // getUser function is used to manage users in group and returns user details.
+  // getUserDetails function is used to manage users in group and returns user details.
   // At the moment, the function is used for user edits and deletes.
-  function getUser($user_id) {
+  function getUserDetails($user_id) {
     if (!$this->can('manage_users')) return false;
 
     $mdb2 = getConnection();
     $group_id = $this->getGroup();
     $org_id = $this->org_id;
 
+    // Determine max rank. If we are searching in on behalf group
+    // then rank restriction does not apply.
+    $max_rank = $this->behalfGroup ? MAX_RANK : $this->rank;
+
     $sql =  "select u.id, u.name, u.login, u.role_id, u.client_id, u.status, u.rate, u.email from tt_users u".
       " left join tt_roles r on (u.role_id = r.id)".
       " where u.id = $user_id and u.group_id = $group_id and u.org_id = $org_id and u.status is not null".
-      " and (r.rank < $this->rank or (r.rank = $this->rank and u.id = $this->id))"; // Users with lesser roles or self.
+      " and (r.rank < $max_rank or (r.rank = $max_rank and u.id = $this->id))"; // Users with lesser roles or self.
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -608,7 +612,7 @@ class ttUser {
       return false;
 
     // Make sure we operate on a legit user.
-    $user_details = $this->getUser($user_id);
+    $user_details = $this->getUserDetails($user_id);
     if (!$user_details) return false;
 
     $mdb2 = getConnection();
@@ -671,14 +675,7 @@ class ttUser {
   function isUserValid($user_id) {
     if ($user_id == $this->id)
       return true;
-
-    $user_details = $this->getUser($user_id); // TODO: this will probably not work for higher ranks.
-                                              // In this case we'll need another function.
-                                              // Or adjust getUser for max rank.
-    if (!$user_details)
-      return false;
-
-    return true;
+    return ($this->getUserDetails($user_id) != null);
   }
 
   // isGroupValid determines if a group is valid for user.

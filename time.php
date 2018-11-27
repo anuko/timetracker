@@ -56,7 +56,7 @@ if ($request->isPost()) {
   }
   $userChanged = $request->getParameter('user_changed'); // Reused in multiple places below.
   if ($userChanged && !($user->can('track_time') && $user->isUserValid($request->getParameter('user')))) {
-    header('Location: access_denied.php'); // Group changed, but no rght or wrong group id.
+    header('Location: access_denied.php'); // Group changed, but no rght or wrong user id.
     exit();
   }
 }

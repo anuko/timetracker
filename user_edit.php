@@ -41,7 +41,7 @@ if (!ttAccessAllowed('manage_users')) {
   exit();
 }
 $user_id = (int)$request->getParameter('id');
-$user_details = $user->getUser($user_id);
+$user_details = $user->getUserDetails($user_id);
 if (!$user_details) {
   header('Location: access_denied.php');
   exit();
