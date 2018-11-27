@@ -755,7 +755,6 @@ class ttUser {
     $this->behalf_group_id = $group_id;
     $this->behalf_group_name = $onBehalfGroupName;
 
-    unset($this->behalfGroup);
     $this->behalfGroup = new ttGroup($this->behalf_group_id, $this->org_id);
 
     // Adjust on behalf user.

@@ -34,22 +34,25 @@ if (!ttAccessAllowed('manage_features')) {
   header('Location: access_denied.php');
   exit();
 }
-if ($request->isPost() && $request->getParameter('group_changed') && !$user->isGroupValid($request->getParameter('group'))) {
-  header('Location: access_denied.php'); // Wrong group id in post.
-  exit();
+if ($request->isPost()) {
+  $groupChanged = $request->getParameter('group_changed'); // Reused in multiple places below.
+  if ($groupChanged && !($user->can('manage_subgroups') && $user->isGroupValid($request->getParameter('group')))) {
+    header('Location: access_denied.php'); // Group changed, but no rght or wrong group id.
+    exit();
+  }
 }
 // End of access checks.
 
-// TODO: re-structure the file, perhaps by separating post and get processing into whole different sections.
-if ($request->isPost() && $request->getParameter('group_changed')) {
+// Determine group for which we display this page.
+if ($request->isPost() && $groupChanged) {
   $group_id = $request->getParameter('group');
   $user->setOnBehalfGroup($group_id);
 } else {
   $group_id = $user->getGroup();
 }
 
-if ($request->isPost()) {
-  // Plugin checkboxes.
+if ($request->isPost() && $request->getParameter('btn_save')) {
+  // Plugins that user wants to save for the current group.
   $cl_charts = $request->getParameter('charts');
   $cl_clients = $request->getParameter('clients');
   $cl_client_required = $request->getParameter('client_required');
@@ -64,7 +67,8 @@ if ($request->isPost()) {
   $cl_week_view = $request->getParameter('week_view');
   $cl_work_units = $request->getParameter('work_units');
 } else {
-  // Which plugins do we have enabled?
+  // Note: we get here in get, and also in post when group changes.
+  // Which plugins do we have enabled in currently selected group?
   $plugins = explode(',', $user->getPlugins());
   $cl_charts = in_array('ch', $plugins);
   $cl_clients = in_array('cl', $plugins);
@@ -82,7 +86,7 @@ if ($request->isPost()) {
 }
 
 $form = new Form('pluginsForm');
-
+// Group dropdown.
 if ($user->can('manage_subgroups')) {
   $groups = $user->getGroupsForDropdown();
   if (count($groups) > 1) {
@@ -97,7 +101,6 @@ if ($user->can('manage_subgroups')) {
     $smarty->assign('group_dropdown', 1);
   }
 }
-
 // Plugin checkboxes.
 $form->addInput(array('type'=>'checkbox','name'=>'charts','value'=>$cl_charts));
 $form->addInput(array('type'=>'checkbox','name'=>'clients','value'=>$cl_clients,'onchange'=>'handlePluginCheckboxes()'));
@@ -112,68 +115,61 @@ $form->addInput(array('type'=>'checkbox','name'=>'locking','value'=>$cl_locking,
 $form->addInput(array('type'=>'checkbox','name'=>'quotas','value'=>$cl_quotas,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'week_view','value'=>$cl_week_view,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'work_units','value'=>$cl_work_units,'onchange'=>'handlePluginCheckboxes()'));
-
+// Submit button.
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
-$form->setValueByElement('group_changed','');
+if ($request->isPost() && $request->getParameter('btn_save')) {
+  // Note: we get here when the Save button is clicked.
+  // We update plugin list for the currently selected group.
+  //
+  // We don't get here if group changed in post.
+  // In this case the page is simply re-displayed for new group.
 
-if ($request->isPost()) {
-  if ($request->getParameter('group_changed')) {
-    // User changed the group in dropdown.
-    // Redirect to self.
-    header('Location: plugins.php');
+  // Prepare plugins string.
+  if ($cl_charts)
+    $plugins .= ',ch';
+  if ($cl_clients)
+     $plugins .= ',cl';
+  if ($cl_client_required)
+    $plugins .= ',cm';
+  if ($cl_invoices)
+    $plugins .= ',iv';
+  if ($cl_paid_status)
+    $plugins .= ',ps';
+  if ($cl_custom_fields)
+    $plugins .= ',cf';
+  if ($cl_expenses)
+    $plugins .= ',ex';
+  if ($cl_tax_expenses)
+    $plugins .= ',et';
+  if ($cl_notifications)
+    $plugins .= ',no';
+  if ($cl_locking)
+    $plugins .= ',lk';
+  if ($cl_quotas)
+    $plugins .= ',mq';
+  if ($cl_week_view)
+    $plugins .= ',wv';
+  if ($cl_work_units)
+    $plugins .= ',wu';
+
+  // Recycle week view plugin options as they are not configured on this page.
+  $existing_plugins = explode(',', $user->getPlugins());
+  if (in_array('wvn', $existing_plugins))
+    $plugins .= ',wvn';
+  if (in_array('wvl', $existing_plugins))
+    $plugins .= ',wvl';
+  if (in_array('wvns', $existing_plugins))
+    $plugins .= ',wvns';
+
+  $plugins = trim($plugins, ',');
+
+  if ($user->updateGroup(array(
+    'plugins' => $plugins))) {
+    header('Location: success.php');
     exit();
-  }
-
-  // Validate user input. Do we have to?
-
-  if ($err->no()) {
-    // Prepare plugins string.
-    if ($cl_charts)
-      $plugins .= ',ch';
-    if ($cl_clients)
-      $plugins .= ',cl';
-    if ($cl_client_required)
-      $plugins .= ',cm';
-    if ($cl_invoices)
-      $plugins .= ',iv';
-    if ($cl_paid_status)
-      $plugins .= ',ps';
-    if ($cl_custom_fields)
-      $plugins .= ',cf';
-    if ($cl_expenses)
-      $plugins .= ',ex';
-    if ($cl_tax_expenses)
-      $plugins .= ',et';
-    if ($cl_notifications)
-      $plugins .= ',no';
-    if ($cl_locking)
-      $plugins .= ',lk';
-    if ($cl_quotas)
-      $plugins .= ',mq';
-    if ($cl_week_view)
-      $plugins .= ',wv';
-    if ($cl_work_units)
-      $plugins .= ',wu';
-
-    // Recycle week view plugin options as they are not configured on this page.
-    $existing_plugins = explode(',', $user->getPlugins());
-    if (in_array('wvn', $existing_plugins))
-      $plugins .= ',wvn';
-    if (in_array('wvl', $existing_plugins))
-      $plugins .= ',wvl';
-    if (in_array('wvns', $existing_plugins))
-      $plugins .= ',wvns';
-
-    $plugins = trim($plugins, ',');
-
-    if ($user->updateGroup(array(
-      'plugins' => $plugins))) {
-      header('Location: success.php');
-      exit();
-    } else
-      $err->add($i18n->get('error.db'));
-  }
+  } else
+    $err->add($i18n->get('error.db'));
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
