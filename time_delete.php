@@ -38,7 +38,8 @@ if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
   exit();
 }
 $cl_id = (int)$request->getParameter('id');
-$time_rec = ttTimeHelper::getRecord($cl_id, $user->getUser());
+$user_id = $user->getUser();
+$time_rec = ttTimeHelper::getRecord($cl_id, $user_id);
 if (!$time_rec || $time_rec['invoice_id']) {
   // Prohibit deleting not ours or invoiced records.
   header('Location: access_denied.php');
@@ -62,11 +63,8 @@ if ($request->isPost()) {
       $err->add($i18n->get('error.range_locked'));
 
     if ($err->no()) {
-
       // Delete the record.
-      $result = ttTimeHelper::delete($cl_id, $user->getUser());
-
-      if ($result) {
+      if (ttTimeHelper::delete($cl_id, $user_id)) {
         header('Location: time.php');
         exit();
       } else {

@@ -41,6 +41,8 @@ if (!ttAccessAllowed('track_own_time')) {
 }
 // End of access checks.
 
+$user_id = $user->getUser();
+
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
 $selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date);
@@ -238,20 +240,20 @@ if ($request->isPost()) {
 
     // Prohibit creating another uncompleted record.
     if ($err->no()) {
-      if (($not_completed_rec = ttTimeHelper::getUncompleted($user->getUser())) && (($cl_finish == '') && ($cl_duration == '')))
+      if (($not_completed_rec = ttTimeHelper::getUncompleted($user_id)) && (($cl_finish == '') && ($cl_duration == '')))
         $err->add($i18n->get('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->get('error.goto_uncompleted')."</a>");
     }
 
     // Prohibit creating an overlapping record.
     if ($err->no()) {
-      if (ttTimeHelper::overlaps($user->getUser(), $cl_date, $cl_start, $cl_finish))
+      if (ttTimeHelper::overlaps($user_id, $cl_date, $cl_start, $cl_finish))
         $err->add($i18n->get('error.overlap'));
     }
 
     if ($err->no()) {
       $id = ttTimeHelper::insert(array(
         'date' => $cl_date,
-        'user_id' => $user->getUser(),
+        'user_id' => $user_id,
         'group_id' => $user->getGroup(),
         'org_id' => $user->org_id,
         'client' => $cl_client,
@@ -283,8 +285,8 @@ if ($request->isPost()) {
 
 $smarty->assign('next_date', $next_date);
 $smarty->assign('prev_date', $prev_date);
-$smarty->assign('time_records', ttTimeHelper::getRecords($user->getUser(), $cl_date));
-$smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getUser(), $cl_date));
+$smarty->assign('time_records', ttTimeHelper::getRecords($user_id, $cl_date));
+$smarty->assign('day_total', ttTimeHelper::getTimeForDay($user_id, $cl_date));
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
