@@ -36,12 +36,13 @@ if (!ttAccessAllowed('administer_site')) {
   header('Location: access_denied.php');
   exit();
 }
+$group_id = (int)$request->getParameter('id');
+$group_details = ttAdmin::getGroupDetails($group_id);
+if (!($group_id && $group_details)) {
+  header('Location: access_denied.php');
+  exit();
+}
 // End of access checks.
-
-$group_id = $request->getParameter('id');
-
-$admin = new ttAdmin();
-$group_details = $admin->getGroupDetails($group_id);
 
 if ($request->isPost()) {
   $cl_group_name = trim($request->getParameter('group_name'));
@@ -77,26 +78,47 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get(
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_save')) {
-    // Create fields array for ttAdmin instance.
-    $fields = array(
-      'old_group_name' => $group_details['group_name'],
-      'new_group_name' => $cl_group_name,
-      'user_id' => $group_details['manager_id'],
-      'user_name' => $cl_manager_name,
-      'old_login' => $group_details['manager_login'],
-      'new_login' => $cl_manager_login,
-      'password1' => $cl_password1,
-      'password2' => $cl_password2,
-      'email' => $cl_manager_email);
 
-    import('ttAdmin');
-    $admin = new ttAdmin($err);
-    $result = $admin->updateGroup($group_id, $fields);
-    if ($result) {
-      header('Location: admin_groups.php');
-      exit();
-    } else
-      $err->add($i18n->get('error.db'));
+    // Validate user input.
+    if (!ttValidString($cl_group_name))
+      $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
+    if (!ttValidString($cl_manager_name))
+      $err->add($i18n->get('error.field'), $i18n->get('label.manager_name'));
+    if (!ttValidString($cl_manager_login))
+      $err->add($i18n->get('error.field'), $i18n->get('label.manager_login'));
+    // If we change login, it must be unique.
+    if ($cl_manager_login != $group_details['manager_login']) {
+      if (ttUserHelper::getUserByLogin($cl_manager_login)) {
+        $err->add($i18n->get('error.user_exists'));
+      }
+    }
+    if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
+      if (!ttValidString($cl_password1))
+        $err->add($i18n->get('error.field'), $i18n->get('label.password'));
+      if (!ttValidString($cl_password2))
+        $err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
+      if ($cl_password1 !== $cl_password2)
+        $err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
+    }
+    if (!ttValidEmail($cl_manager_email, true))
+      $err->add($i18n->get('error.field'), $i18n->get('label.email'));
+
+    if ($err->no()) {
+      if (ttAdmin::updateGroup(array('group_id' => $group_id,
+        'old_group_name' => $group_details['group_name'],
+        'new_group_name' => $cl_group_name,
+        'user_id' => $group_details['manager_id'],
+        'user_name' => $cl_manager_name,
+        'old_login' => $group_details['manager_login'],
+        'new_login' => $cl_manager_login,
+        'password1' => $cl_password1,
+        'password2' => $cl_password2,
+        'email' => $cl_manager_email))) {
+        header('Location: admin_groups.php');
+        exit();
+      } else
+        $err->add($i18n->get('error.db'));
+    }
   }
 
   if ($request->getParameter('btn_cancel')) {

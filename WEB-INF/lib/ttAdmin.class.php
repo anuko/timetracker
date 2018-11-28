@@ -236,17 +236,18 @@ class ttAdmin {
     return $result;
   }
 
-  // updateGroup validates user input and updates the group with new information.
-  function updateGroup($group_id, $fields) {
-    if (!$this->validateGroupInfo($fields)) return false; // Can't continue as user input is invalid.
+  // updateGroup updates a (top) group with new information.
+  static function updateGroup($fields) {
+    $group_id = (int)$fields['group_id'];
+    if (!$group_id) return false; // Nothing to update.
 
-    global $user;
     $mdb2 = getConnection();
+    global $user;
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
 
     // Update group name if it changed.
     if ($fields['old_group_name'] != $fields['new_group_name']) {
       $name_part = 'name = '.$mdb2->quote($fields['new_group_name']);
-      $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
       $sql = 'update tt_groups set '.$name_part.$modified_part.' where id = '.$group_id;
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error')) return false;
@@ -259,7 +260,6 @@ class ttAdmin {
       $password_part = ', password = md5('.$mdb2->quote($fields['password1']).')';
     $name_part = ', name = '.$mdb2->quote($fields['user_name']);
     $email_part = ', email = '.$mdb2->quote($fields['email']);
-    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
     $sql = 'update tt_users set '.$login_part.$password_part.$name_part.$email_part.$modified_part.'where id = '.$user_id;
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
