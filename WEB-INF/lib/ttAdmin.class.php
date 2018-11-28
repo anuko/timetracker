@@ -344,7 +344,7 @@ class ttAdmin {
   }
 
   // getGroupDetails obtains group name and its top manager details.
-  function getGroupDetails($group_id) {
+  static function getGroupDetails($group_id) {
     $result = array();
     $mdb2 = getConnection();
 

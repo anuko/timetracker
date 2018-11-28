@@ -35,13 +35,13 @@ if (!ttAccessAllowed('administer_site')) {
   header('Location: access_denied.php');
   exit();
 }
-// End of access checks.
-
 $group_id = (int)$request->getParameter('id');
-
-$admin = new ttAdmin();
-$group_details = $admin->getGroupDetails($group_id);
-$group_name = $group_details['group_name'];
+$group_details = ttAdmin::getGroupDetails($group_id);
+if (!($group_id && $group_details)) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
 
 $form = new Form('groupForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$group_id));
@@ -50,8 +50,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get(
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    $result = $admin->markGroupDeleted($group_id);
-    if ($result) {
+    if (ttAdmin::markGroupDeleted($group_id)) {
       header('Location: admin_groups.php');
       exit();
     } else
@@ -64,7 +63,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$smarty->assign('group_to_delete', $group_name);
+$smarty->assign('group_to_delete', $group_details['group_name']);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.delete_group'));
 $smarty->assign('content_page_name', 'admin_group_delete.tpl');
