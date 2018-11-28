@@ -112,6 +112,7 @@ if (count($groups) > 1) {
     'data'=>$groups,
     'datakeys'=>array('id','name')));
   $form->addInput(array('type'=>'hidden','name'=>'group_changed'));
+  $smarty->assign('group_dropdown', 1);
 }
 $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','value'=>$cl_group,'enable'=>$advanced_settings));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));

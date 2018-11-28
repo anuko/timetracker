@@ -89,7 +89,7 @@ $_SESSION['date'] = $cl_date;
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
-  $custom_fields = new CustomFields($user->getGroup());
+  $custom_fields = new CustomFields($group_id);
   $smarty->assign('custom_fields', $custom_fields);
 }
 
@@ -97,7 +97,7 @@ if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
   $month_quota_minutes = $quota->get($selected_date->mYear, $selected_date->mMonth);
-  $month_total = ttTimeHelper::getTimeForMonth($user->getUser(), $selected_date);
+  $month_total = ttTimeHelper::getTimeForMonth($user_id, $selected_date);
   $minutes_left = $month_quota_minutes - ttTimeHelper::toMinutes($month_total);
   
   $smarty->assign('month_total', $month_total);
@@ -170,7 +170,7 @@ if ($user->can('track_time')) {
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
 if (MODE_TIME == $user->getTrackingMode() && $user->isPluginEnabled('cl')) {
-  $active_clients = ttTeamHelper::getActiveClients($user->getGroup(), true);
+  $active_clients = ttTeamHelper::getActiveClients($group_id, true);
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
     'name'=>'client',
@@ -196,7 +196,7 @@ if (MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $use
 
   // Dropdown for clients if the clients plugin is enabled.
   if ($user->isPluginEnabled('cl')) {
-    $active_clients = ttTeamHelper::getActiveClients($user->getGroup(), true);
+    $active_clients = ttTeamHelper::getActiveClients($group_id, true);
     // We need an array of assigned project ids to do some trimming.
     foreach($project_list as $project)
       $projects_assigned_to_user[] = $project['id'];
@@ -224,7 +224,7 @@ if (MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $use
 }
 
 if (MODE_PROJECTS_AND_TASKS == $user->getTrackingMode()) {
-  $task_list = ttTeamHelper::getActiveTasks($user->getGroup());
+  $task_list = ttTeamHelper::getActiveTasks($group_id);
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
     'style'=>'width: 250px;',
@@ -323,13 +323,13 @@ if ($request->isPost()) {
 
     // Prohibit creating another uncompleted record.
     if ($err->no()) {
-      if (($not_completed_rec = ttTimeHelper::getUncompleted($user->getUser())) && (($cl_finish == '') && ($cl_duration == '')))
+      if (($not_completed_rec = ttTimeHelper::getUncompleted($user_id)) && (($cl_finish == '') && ($cl_duration == '')))
         $err->add($i18n->get('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->get('error.goto_uncompleted')."</a>");
     }
 
     // Prohibit creating an overlapping record.
     if ($err->no()) {
-      if (ttTimeHelper::overlaps($user->getUser(), $cl_date, $cl_start, $cl_finish))
+      if (ttTimeHelper::overlaps($user_id, $cl_date, $cl_start, $cl_finish))
         $err->add($i18n->get('error.overlap'));
     }
 
@@ -337,8 +337,8 @@ if ($request->isPost()) {
     if ($err->no()) {
       $id = ttTimeHelper::insert(array(
         'date' => $cl_date,
-        'user_id' => $user->getUser(),
-        'group_id' => $user->getGroup(),
+        'user_id' => $user_id,
+        'group_id' => $group_id,
         'org_id' => $user->org_id,
         'client' => $cl_client,
         'project' => $cl_project,
@@ -366,18 +366,18 @@ if ($request->isPost()) {
   } elseif ($request->getParameter('btn_stop')) {
     // Stop button pressed to finish an uncompleted record.
     $record_id = $request->getParameter('record_id');
-    $record = ttTimeHelper::getRecord($record_id, $user->getUser());
+    $record = ttTimeHelper::getRecord($record_id, $user_id);
     $browser_date = $request->getParameter('browser_date');
     $browser_time = $request->getParameter('browser_time');
 
     // Can we complete this record?
     if ($record['date'] == $browser_date                                // closing today's record
       && ttTimeHelper::isValidInterval($record['start'], $browser_time) // finish time is greater than start time
-      && !ttTimeHelper::overlaps($user->getUser(), $browser_date, $record['start'], $browser_time)) { // no overlap
+      && !ttTimeHelper::overlaps($user_id, $browser_date, $record['start'], $browser_time)) { // no overlap
       $res = ttTimeHelper::update(array(
           'id'=>$record['id'],
           'date'=>$record['date'],
-          'user_id'=>$user->getUser(),
+          'user_id'=>$user_id,
           'client'=>$record['client_id'],
           'project'=>$record['project_id'],
           'task'=>$record['task_id'],
@@ -395,12 +395,12 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$week_total = ttTimeHelper::getTimeForWeek($user->getUser(), $selected_date);
+$week_total = ttTimeHelper::getTimeForWeek($user_id, $selected_date);
 
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
-$smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getUser(), $cl_date));
-$smarty->assign('time_records', ttTimeHelper::getRecords($user->getUser(), $cl_date));
+$smarty->assign('day_total', ttTimeHelper::getTimeForDay($user_id, $cl_date));
+$smarty->assign('time_records', ttTimeHelper::getRecords($user_id, $cl_date));
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
