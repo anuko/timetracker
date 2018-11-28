@@ -116,62 +116,37 @@ class ttAdmin {
   }
 
   // markGroupDeleted marks a group and everything in it as deleted.
-  function markGroupDeleted($group_id) {
+  // This function is called in context of a logged on admin who may
+  // operate on any group.
+  static function markGroupDeleted($group_id) {
+    $mdb2 = getConnection();
 
     // Keep the logic simple by returning false on first error.
 
     // Obtain subgroups and call self recursively on them.
-    $subgroups = $this->getSubgroups($group_id);
+    $subgroups = ttAdmin::getSubgroups($group_id);
     foreach($subgroups as $subgroup) {
-      if (!$this->markGroupDeleted($subgroup['id']))
+      if (!ttAdmin::markGroupDeleted($subgroup['id']))
         return false;
     }
 
-    // Now that we are done with subgroups, handle this group.
-    $users = $this->getUsers($group_id);
+    // Now do actual work with all entities.
 
-    // Iterate through group users and mark them as deleted.
-    foreach ($users as $one_user) {
-      if (!$this->markUserDeleted($one_user['id']))
-          return false;
+    // Some things cannot be marked deleted as we don't have the status field for them.
+    // Just delete such things (until we have a better way to deal with them).
+    $tables_to_delete_from = array(
+      'tt_config',
+      'tt_predefined_expenses',
+      'tt_client_project_binds',
+      'tt_project_task_binds'
+    );
+    foreach($tables_to_delete_from as $table) {
+      if (!ttAdmin::deleteGroupEntriesFromTable($group_id, $table))
+        return false;
     }
 
-    // Mark tasks deleted.
-    if (!$this->markTasksDeleted($group_id)) return false;
-
-    $mdb2 = getConnection();
-
-    // Mark roles deleted.
-    $sql = "update tt_roles set status = NULL where group_id = $group_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Mark projects deleted.
-    $sql = "update tt_projects set status = NULL where group_id = $group_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Mark clients deleted.
-    $sql = "update tt_clients set status = NULL where group_id = $group_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Mark invoices deleted.
-    $sql = "update tt_invoices set status = NULL where group_id = $group_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Mark custom fields deleted.
-    $sql = "update tt_custom_fields set status = NULL where group_id = $group_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Mark notifications deleted.
-    $sql = "update tt_cron set status = NULL where group_id = $group_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Note: we don't mark tt_log or tt_expense_items deleted here.
+    // Now mark status deleted where we can.
+    // Note: we don't mark tt_log, tt_custom_field_lod, or tt_expense_items deleted here.
     // Reasoning is:
     //
     // 1) Users may mark some of them deleted during their work.
@@ -180,11 +155,31 @@ class ttAdmin {
     //
     // 2) DB maintenance script (Clean up DB from inactive groups) should
     // get rid of these items permanently eventually.
+    $tables_to_mark_deleted_in = array(
+      'tt_cron',
+      'tt_fav_reports',
+      // 'tt_expense_items',
+      // 'tt_custom_field_log',
+      'tt_custom_field_options',
+      'tt_custom_fields',
+      // 'tt_log',
+      'tt_invoices',
+      'tt_user_project_binds',
+      'tt_users',
+      'tt_clients',
+      'tt_projects',
+      'tt_tasks',
+      'tt_roles'
+    );
+    foreach($tables_to_mark_deleted_in as $table) {
+      if (!ttAdmin::markGroupDeletedInTable($group_id, $table))
+        return false;
+    }
 
     // Mark group deleted.
     global $user;
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
-    $sql = "update tt_groups set status = NULL $modified_part where id = $group_id";
+    $sql = "update tt_groups set status = null $modified_part where id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -361,5 +356,31 @@ class ttAdmin {
     }
 
     return false;
+  }
+
+  // deleteGroupEntriesFromTable is a generic helper function for markGroupDeleted.
+  // It deletes entries in ONE table belonging to a given group.
+  static function deleteGroupEntriesFromTable($group_id, $table_name) {
+    $mdb2 = getConnection();
+
+    $sql = "delete from $table_name where group_id = $group_id";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // markGroupDeletedInTable is a generic helper function for markGroupDeleted.
+  // It updates ONE table by setting status to NULL for all records belonging to a group.
+  static function markGroupDeletedInTable($group_id, $table_name) {
+    $mdb2 = getConnection();
+
+    // Add modified info to sql for some tables, depending on table name.
+    if ($table_name == 'tt_users') {
+      global $user;
+      $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+    }
+
+    $sql = "update $table_name set status = null $modified_part where group_id = $group_id";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
   }
 }

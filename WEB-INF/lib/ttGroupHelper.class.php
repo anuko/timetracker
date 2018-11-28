@@ -156,7 +156,7 @@ class ttGroupHelper {
     // Obtain subgroups and call self recursively on them.
     $subgroups = $user->getSubgroups($group_id);
     foreach($subgroups as $subgroup) {
-      if (!$this->markGroupDeleted($subgroup['id']))
+      if (!ttGroupHelper::markGroupDeleted($subgroup['id']))
         return false;
     }
 
@@ -207,7 +207,8 @@ class ttGroupHelper {
     }
 
     // Mark group deleted.
-    $sql = "update tt_groups set status = null where id = $group_id and org_id = $org_id";
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+    $sql = "update tt_groups set status = null $modified_part where id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -220,10 +221,13 @@ class ttGroupHelper {
     global $user;
     $mdb2 = getConnection();
 
-    // TODO: add modified info to sql for some tables, depending on table name.
+    // Add modified info to sql for some tables, depending on table name.
+    if ($table_name == 'tt_users') {
+      $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+    }
 
     $org_id = $user->org_id; // The only security measure we use here for match.
-    $sql = "update $table_name set status = null where group_id = $group_id and org_id = $org_id";
+    $sql = "update $table_name set status = null $modified_part where group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
