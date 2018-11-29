@@ -3,7 +3,7 @@
 # 2) Then, execute this script from command prompt with a command like this:
 # mysql -h host -u user -p -D db_name < mysql.sql
 
-# create database timetracker character set = 'utf8';
+# create database timetracker character set = 'utf8mb4';
 
 # use timetracker;
 
@@ -17,6 +17,7 @@ CREATE TABLE `tt_groups` (
   `parent_id` int(11) default NULL,                      # parent group id
   `org_id` int(11) default NULL,                         # organization id (id of top group)
   `name` varchar(80) default NULL,                       # group name
+  `description` varchar(255) default NULL,               # group description
   `currency` varchar(7) default NULL,                    # currency symbol
   `decimal_mark` char(1) NOT NULL default '.',           # separator in decimals
   `lang` varchar(10) NOT NULL default 'en',              # language
@@ -53,6 +54,7 @@ CREATE TABLE `tt_groups` (
 CREATE TABLE `tt_roles` (
   `id` int(11) NOT NULL auto_increment,    # Role id. Identifies roles for all groups on the server.
   `group_id` int(11) NOT NULL,             # Group id the role is defined for.
+  `org_id` int(11) default NULL,           # Organization id.
   `name` varchar(80) default NULL,         # Role name - custom role name. In case we are editing a
                                            # predefined role (USER, etc.), we can rename the role here.
   `description` varchar(255) default NULL, # Role description.
@@ -81,10 +83,11 @@ INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Top ma
 #
 CREATE TABLE `tt_users` (
   `id` int(11) NOT NULL auto_increment,            # user id
-  `login` varchar(50) COLLATE utf8_bin NOT NULL,   # user login
+  `login` varchar(50) COLLATE utf8mb4_bin NOT NULL,# user login
   `password` varchar(50) default NULL,             # password hash
   `name` varchar(100) default NULL,                # user name
   `group_id` int(11) NOT NULL,                     # group id
+  `org_id` int(11) default NULL,                   # organization id
   `role_id` int(11) default NULL,                  # role id
   `client_id` int(11) default NULL,                # client id for "client" user role
   `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
@@ -104,7 +107,7 @@ CREATE TABLE `tt_users` (
 # Create an index that guarantees unique active and inactive logins.
 create unique index login_idx on tt_users(login, status);
 
-# Create admin account with password 'secret'. Admin is a superuser, who can create groupd.
+# Create admin account with password 'secret'. Admin is a superuser who can create groups.
 DELETE from `tt_users` WHERE login = 'admin';
 INSERT INTO `tt_users` (`login`, `password`, `name`, `group_id`, `role_id`) VALUES ('admin', md5('secret'), 'Admin', '0', (select id from tt_roles where rank = 1024));
 
@@ -113,12 +116,13 @@ INSERT INTO `tt_users` (`login`, `password`, `name`, `group_id`, `role_id`) VALU
 # Structure for table tt_projects.
 #
 CREATE TABLE `tt_projects` (
-  `id` int(11) NOT NULL auto_increment,         # project id
-  `group_id` int(11) NOT NULL,                  # group id
-  `name` varchar(80) COLLATE utf8_bin NOT NULL, # project name
-  `description` varchar(255) default NULL,      # project description
-  `tasks` text default NULL,                    # comma-separated list of task ids associated with this project
-  `status` tinyint(4) default 1,                # project status
+  `id` int(11) NOT NULL auto_increment,            # project id
+  `group_id` int(11) NOT NULL,                     # group id
+  `org_id` int(11) default NULL,                   # organization id
+  `name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # project name
+  `description` varchar(255) default NULL,         # project description
+  `tasks` text default NULL,                       # comma-separated list of task ids associated with this project
+  `status` tinyint(4) default 1,                   # project status
   PRIMARY KEY (`id`)
 );
 
@@ -130,11 +134,12 @@ create unique index project_idx on tt_projects(group_id, name, status);
 # Structure for table tt_tasks.
 #
 CREATE TABLE `tt_tasks` (
-  `id` int(11) NOT NULL auto_increment,         # task id
-  `group_id` int(11) NOT NULL,                  # group id
-  `name` varchar(80) COLLATE utf8_bin NOT NULL, # task name
-  `description` varchar(255) default NULL,      # task description
-  `status` tinyint(4) default 1,                # task status
+  `id` int(11) NOT NULL auto_increment,            # task id
+  `group_id` int(11) NOT NULL,                     # group id
+  `org_id` int(11) default NULL,                   # organization id
+  `name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # task name
+  `description` varchar(255) default NULL,         # task description
+  `status` tinyint(4) default 1,                   # task status
   PRIMARY KEY (`id`)
 );
 
@@ -149,6 +154,8 @@ CREATE TABLE `tt_user_project_binds` (
   `id` int(11) NOT NULL auto_increment, # bind id
   `user_id` int(11) NOT NULL,           # user id
   `project_id` int(11) NOT NULL,        # project id
+  `group_id` int(11) default NULL,      # group id
+  `org_id` int(11) default NULL,        # organization id
   `rate` float(6,2) default '0.00',     # rate for this user when working on this project
   `status` tinyint(4) default 1,        # bind status
   PRIMARY KEY (`id`)
@@ -162,13 +169,16 @@ create unique index bind_idx on tt_user_project_binds(user_id, project_id);
 # Structure for table tt_project_task_binds. This table maps projects to assigned tasks.
 #
 CREATE TABLE `tt_project_task_binds` (
-  `project_id` int(11) NOT NULL, # project id
-  `task_id` int(11) NOT NULL     # task id
+  `project_id` int(11) NOT NULL,        # project id
+  `task_id` int(11) NOT NULL,           # task id
+  `group_id` int(11) default NULL,      # group id
+  `org_id` int(11) default NULL         # organization id
 );
 
 # Indexes for tt_project_task_binds.
 create index project_idx on tt_project_task_binds(project_id);
 create index task_idx on tt_project_task_binds(task_id);
+create unique index project_task_idx on tt_project_task_binds(project_id, task_id);
 
 
 #
@@ -178,6 +188,8 @@ create index task_idx on tt_project_task_binds(task_id);
 CREATE TABLE `tt_log` (
   `id` bigint NOT NULL auto_increment,             # time record id
   `user_id` int(11) NOT NULL,                      # user id
+  `group_id` int(11) default NULL,                 # group id
+  `org_id` int(11) default NULL,                   # organization id
   `date` date NOT NULL,                            # date the record is for
   `start` time default NULL,                       # record start time (for example, 09:00)
   `duration` time default NULL,                    # record duration (for example, 1 hour)
@@ -201,6 +213,7 @@ CREATE TABLE `tt_log` (
 # Create indexes on tt_log for performance.
 create index date_idx on tt_log(date);
 create index user_idx on tt_log(user_id);
+create index group_idx on tt_log(group_id);
 create index client_idx on tt_log(client_id);
 create index invoice_idx on tt_log(invoice_id);
 create index project_idx on tt_log(project_id);
@@ -211,12 +224,13 @@ create index task_idx on tt_log(task_id);
 # Structure for table tt_invoices. Invoices are issued to clients for billable work.
 #
 CREATE TABLE `tt_invoices` (
-  `id` int(11) NOT NULL auto_increment,         # invoice id
-  `group_id` int(11) NOT NULL,                  # group id
-  `name` varchar(80) COLLATE utf8_bin NOT NULL, # invoice name
-  `date` date NOT NULL,                         # invoice date
-  `client_id` int(11) NOT NULL,                 # client id
-  `status` tinyint(4) default 1,                # invoice status
+  `id` int(11) NOT NULL auto_increment,            # invoice id
+  `group_id` int(11) NOT NULL,                     # group id
+  `org_id` int(11) default NULL,                   # organization id
+  `name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # invoice name
+  `date` date NOT NULL,                            # invoice date
+  `client_id` int(11) NOT NULL,                    # client id
+  `status` tinyint(4) default 1,                   # invoice status
   PRIMARY KEY (`id`)
 );
 
@@ -241,6 +255,8 @@ CREATE TABLE `tt_fav_reports` (
   `id` int(11) NOT NULL auto_increment,                  # favorite report id
   `name` varchar(200) NOT NULL,                          # favorite report name
   `user_id` int(11) NOT NULL,                            # user id favorite report belongs to
+  `group_id` int(11) default NULL,                       # group id
+  `org_id` int(11) default NULL,                         # organization id
   `report_spec` text default NULL,                       # future replacement field for all report settings
   `client_id` int(11) default NULL,                      # client id (if selected)
   `cf_1_option_id` int(11) default NULL,                 # custom field 1 option id (if selected)
@@ -265,8 +281,11 @@ CREATE TABLE `tt_fav_reports` (
   `show_end` tinyint(4) NOT NULL default 0,              # whether to show end field
   `show_note` tinyint(4) NOT NULL default 0,             # whether to show note column
   `show_custom_field_1` tinyint(4) NOT NULL default 0,   # whether to show custom field 1
+  `show_work_units` tinyint(4) NOT NULL default 0,       # whether to show work units
   `show_totals_only` tinyint(4) NOT NULL default 0,      # whether to show totals only
-  `group_by` varchar(20) default NULL,                   # group by field
+  `group_by1` varchar(20) default NULL,                  # group by field 1
+  `group_by2` varchar(20) default NULL,                  # group by field 2
+  `group_by3` varchar(20) default NULL,                  # group by field 3
   `status` tinyint(4) default 1,                         # favorite report status
   PRIMARY KEY (`id`)
 );
@@ -278,6 +297,7 @@ CREATE TABLE `tt_fav_reports` (
 CREATE TABLE `tt_cron` (
   `id` int(11) NOT NULL auto_increment,         # entry id
   `group_id` int(11) NOT NULL,                  # group id
+  `org_id` int(11) default NULL,                # organization id
   `cron_spec` varchar(255) NOT NULL,            # cron specification, "0 1 * * *" for "daily at 01:00"
   `last` int(11) default NULL,                  # UNIX timestamp of when job was last run
   `next` int(11) default NULL,                  # UNIX timestamp of when to run next job
@@ -295,13 +315,14 @@ CREATE TABLE `tt_cron` (
 # Structure for table tt_clients. A client is an entity for whom work is performed and who may be invoiced.
 #
 CREATE TABLE `tt_clients` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,         # client id
-  `group_id` int(11) NOT NULL,                  # group id
-  `name` varchar(80) COLLATE utf8_bin NOT NULL, # client name
-  `address` varchar(255) default NULL,          # client address
-  `tax` float(6,2) default '0.00',              # applicable tax for this client
-  `projects` text default NULL,                 # comma-separated list of project ids assigned to this client
-  `status` tinyint(4) default 1,                # client status
+  `id` int(11) NOT NULL AUTO_INCREMENT,            # client id
+  `group_id` int(11) NOT NULL,                     # group id
+  `org_id` int(11) default NULL,                   # organization id
+  `name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # client name
+  `address` varchar(255) default NULL,             # client address
+  `tax` float(6,2) default '0.00',                 # applicable tax for this client
+  `projects` text default NULL,                    # comma-separated list of project ids assigned to this client
+  `status` tinyint(4) default 1,                   # client status
   PRIMARY KEY (`id`)
 );
 
@@ -313,13 +334,16 @@ create unique index client_name_idx on tt_clients(group_id, name, status);
 # Structure for table tt_client_project_binds. This table maps clients to assigned projects.
 #
 CREATE TABLE `tt_client_project_binds` (
-  `client_id` int(11) NOT NULL, # client id
-  `project_id` int(11) NOT NULL # project id
+  `client_id` int(11) NOT NULL,                    # client id
+  `project_id` int(11) NOT NULL,                   # project id
+  `group_id` int(11) default NULL,                 # group id
+  `org_id` int(11) default NULL                    # organization id
 );
 
 # Indexes for tt_client_project_binds.
 create index client_idx on tt_client_project_binds(client_id);
 create index project_idx on tt_client_project_binds(project_id);
+create unique index client_project_idx on tt_client_project_binds(client_id, project_id);
 
 
 #
@@ -328,6 +352,8 @@ create index project_idx on tt_client_project_binds(project_id);
 #
 CREATE TABLE `tt_config` (
   `user_id` int(11) NOT NULL,            # user id
+  `group_id` int(11) default NULL,       # group id
+  `org_id` int(11) default NULL,         # organization id
   `param_name` varchar(32) NOT NULL,     # parameter name
   `param_value` varchar(80) default NULL # parameter value
 );
@@ -344,6 +370,7 @@ create unique index param_idx on tt_config(user_id, param_name);
 CREATE TABLE `tt_custom_fields` (
   `id` int(11) NOT NULL auto_increment,    # custom field id
   `group_id` int(11) NOT NULL,             # group id
+  `org_id` int(11) default NULL,           # organization id
   `type` tinyint(4) NOT NULL default 0,    # custom field type (text or dropdown)
   `label` varchar(32) NOT NULL default '', # custom field label
   `required` tinyint(4) default 0,         # whether this custom field is mandatory for time records
@@ -357,8 +384,11 @@ CREATE TABLE `tt_custom_fields` (
 #
 CREATE TABLE `tt_custom_field_options` (
   `id` int(11) NOT NULL auto_increment,    # option id
+  `group_id` int(11) default NULL,         # group id
+  `org_id` int(11) default NULL,           # organization id
   `field_id` int(11) NOT NULL,             # custom field id
   `value` varchar(32) NOT NULL default '', # option value
+  `status` tinyint(4) default 1,           # option status
   PRIMARY KEY  (`id`)
 );
 
@@ -368,7 +398,9 @@ CREATE TABLE `tt_custom_field_options` (
 # This table supplements tt_log and contains custom field values for records.
 #
 CREATE TABLE `tt_custom_field_log` (
-  `id` bigint NOT NULL auto_increment, # cutom field log id
+  `id` bigint NOT NULL auto_increment, # custom field log id
+  `group_id` int(11) default NULL,     # group id
+  `org_id` int(11) default NULL,       # organization id
   `log_id` bigint NOT NULL,            # id of a record in tt_log this record corresponds to
   `field_id` int(11) NOT NULL,         # custom field id
   `option_id` int(11) default NULL,    # Option id. Used for dropdown custom fields.
@@ -376,6 +408,8 @@ CREATE TABLE `tt_custom_field_log` (
   `status` tinyint(4) default 1,       # custom field log entry status
   PRIMARY KEY  (`id`)
 );
+
+create index log_idx on tt_custom_field_log(log_id);
 
 
 #
@@ -386,6 +420,8 @@ CREATE TABLE `tt_expense_items` (
   `id` bigint NOT NULL auto_increment,    # expense item id
   `date` date NOT NULL,                   # date the record is for
   `user_id` int(11) NOT NULL,             # user id the expense item is reported by
+  `group_id` int(11) default NULL,        # group id
+  `org_id` int(11) default NULL,          # organization id
   `client_id` int(11) default NULL,       # client id
   `project_id` int(11) default NULL,      # project id
   `name` text NOT NULL,                   # expense item name (what is an expense for)
@@ -405,6 +441,7 @@ CREATE TABLE `tt_expense_items` (
 # Create indexes on tt_expense_items for performance.
 create index date_idx on tt_expense_items(date);
 create index user_idx on tt_expense_items(user_id);
+create index group_idx on tt_expense_items(group_id);
 create index client_idx on tt_expense_items(client_id);
 create index project_idx on tt_expense_items(project_id);
 create index invoice_idx on tt_expense_items(invoice_id);
@@ -417,6 +454,7 @@ create index invoice_idx on tt_expense_items(invoice_id);
 CREATE TABLE `tt_predefined_expenses` (
   `id` int(11) NOT NULL auto_increment, # predefined expense id
   `group_id` int(11) NOT NULL,          # group id
+  `org_id` int(11) default NULL,        # organization id
   `name` varchar(255) NOT NULL,         # predefined expense name, such as mileage
   `cost` decimal(10,2) default '0.00',  # cost for one unit
   PRIMARY KEY  (`id`)
@@ -429,6 +467,7 @@ CREATE TABLE `tt_predefined_expenses` (
 #
 CREATE TABLE `tt_monthly_quotas` (
   `group_id` int(11) NOT NULL,            # group id
+  `org_id` int(11) default NULL,          # organization id
   `year` smallint(5) UNSIGNED NOT NULL,   # quota year
   `month` tinyint(3) UNSIGNED NOT NULL,   # quota month
   `minutes` int(11) default NULL,         # quota in minutes in specified month and year
@@ -449,4 +488,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.17.88', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.26', now()); # TODO: change when structure changes.

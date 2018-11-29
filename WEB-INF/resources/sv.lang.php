@@ -47,6 +47,7 @@ $i18n_key_words = array(
 'menu.create_group' => 'Skapa grupp',
 'menu.profile' => 'Profil',
 'menu.group' => 'Grupp',
+'menu.plugins' => 'Tillägg',
 'menu.time' => 'Tider',
 'menu.expenses' => 'Kostnader',
 'menu.reports' => 'Rapporter',
@@ -55,6 +56,8 @@ $i18n_key_words = array(
 'menu.tasks' => 'Arbetsuppgifter',
 'menu.users' => 'Användare',
 'menu.groups' => 'Grupper',
+// TODO: translate the following.
+// 'menu.subgroups' => 'Subgroups',
 'menu.export' => 'Exportera',
 'menu.clients' => 'Kunder',
 'menu.options' => 'Alternativ',
@@ -86,9 +89,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'Det finns redan en användare med det här användarnamnet.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.project_exists' => 'Det finns redan ett projekt med det här namnet.',
-'error.task_exists' => 'Det finns redan en arbetsuppgift med det här namnet.',
-'error.client_exists' => 'Det finns redan en kund med det här namnet.',
 'error.invoice_exists' => 'Det finns redan en faktura med det här numret.',
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
@@ -98,11 +98,21 @@ $i18n_key_words = array(
 'error.upload' => 'Ett fel uppstod när filen laddades upp.',
 'error.range_locked' => 'Datumintervallet är låst.',
 'error.mail_send' => 'Ett fel uppstod när när e-postmeddelandet skulle skickas.',
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
+// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Det finns ingen e-postadress kopplad till det här användarnamnet.',
 'error.uncompleted_exists' => 'En oavslutad registrering existerar redan. Avsluta eller ta bort den.',
 'error.goto_uncompleted' => 'Visa registrering.',
 'error.overlap' => 'Tidsintervallet överlappar med en redan existerande tidsregistrering.',
 'error.future_date' => 'Det går inte att registrera tider framåt i tiden.',
+// TODO: translate the following.
+// 'error.xml' => 'Error in XML file at line %d: %s.',
+// 'error.cannot_import' => 'Cannot import: %s.',
+// 'error.format' => 'Invalid file format.',
+
+// Success messages.
+// TODO: translate the following.
+// 'msg.success' => 'Operation completed successfully.',
 
 // Labels for buttons.
 'button.login' => 'Logga in',
@@ -144,6 +154,8 @@ $i18n_key_words = array(
 'label.user' => 'Användare',
 'label.users' => 'Användare',
 // TODO: translate the following.
+// 'label.group' => 'Group',
+// 'label.subgroups' => 'Subgroups',
 // 'label.roles' => 'Roles',
 'label.client' => 'Kund',
 'label.clients' => 'Kunder',
@@ -222,11 +234,19 @@ $i18n_key_words = array(
 // 'label.mark_paid' => 'Mark paid',
 // 'label.week_note' => 'Week note',
 // 'label.week_list' => 'Week list',
+// 'label.work_units' => 'Work units',
+// 'label.work_units_short' => 'Units',
+'label.totals_only' => 'Visa endast summeringar',
 
 // Rubriker för formulär
+'title.error' => 'Fel',
+// TODO: Translate the following.
+// 'title.success' => 'Success',
 'title.login' => 'Logga in',
 'title.groups' => 'Grupper',
-'title.create_group' => 'Skapa grupp',
+// TODO: translate the following.
+// 'title.subgroups' => 'Subgroups',
+// 'title.add_group' => 'Adding Group',
 'title.edit_group' => 'Redigera grupp',
 'title.delete_group' => 'Ta bort grupp',
 'title.reset_password' => 'Återställ lösenord',
@@ -281,8 +301,7 @@ $i18n_key_words = array(
 'title.import' => 'Importera grupp',
 'title.options' => 'Alternativ',
 'title.profile' => 'Profil',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
+'title.plugins' => 'Tillägg',
 'title.cf_custom_fields' => 'Egna fält',
 'title.cf_add_custom_field' => 'Lägg till fält',
 'title.cf_edit_custom_field' => 'Redigera fält',
@@ -297,6 +316,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.week_view' => 'Week View',
 // 'title.swap_roles' => 'Swapping Roles',
+// 'title.work_units' => 'Work Units',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -379,7 +399,6 @@ $i18n_key_words = array(
 'form.reports.group_by_client' => 'Kund',
 'form.reports.group_by_project' => 'Projekt',
 'form.reports.group_by_task' => 'Arbetsuppgift',
-'form.reports.totals_only' => 'Visa endast summeringar',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -477,7 +496,6 @@ $i18n_key_words = array(
 'form.group_edit.uncompleted_indicators' => 'Indikatorer för oavslutad registrering',
 // TODO: translate the following.
 // 'form.group_edit.allow_ip' => 'Allow IP',
-'form.group_edit.plugins' => 'Tillägg',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.
@@ -502,6 +520,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
 // 'form.swap.swap_with' => 'Swap roles with',
+
+// Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
+// TODO: translate the following.
+// 'form.work_units.minutes_in_unit' => 'Minutes in unit',
+// 'form.work_units.1st_unit_threshold' => '1st unit threshold',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 // TODO: translate the following.

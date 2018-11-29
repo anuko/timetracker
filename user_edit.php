@@ -41,7 +41,7 @@ if (!ttAccessAllowed('manage_users')) {
   exit();
 }
 $user_id = (int)$request->getParameter('id');
-$user_details = $user->getUser($user_id);
+$user_details = $user->getUserDetails($user_id);
 if (!$user_details) {
   header('Location: access_denied.php');
   exit();
@@ -49,9 +49,9 @@ if (!$user_details) {
 // End of access checks.
 
 if ($user->isPluginEnabled('cl'))
-  $clients = ttTeamHelper::getActiveClients($user->group_id);
+  $clients = ttTeamHelper::getActiveClients($user->getGroup());
 
-$projects = ttTeamHelper::getActiveProjects($user->group_id);
+$projects = ttTeamHelper::getActiveProjects($user->getGroup());
 $assigned_projects = array();
 
 if ($request->isPost()) {
@@ -82,7 +82,7 @@ if ($request->isPost()) {
   $cl_name = $user_details['name'];
   $cl_login = $user_details['login'];
   $cl_email = $user_details['email'];
-  $cl_rate = str_replace('.', $user->decimal_mark, $user_details['rate']);
+  $cl_rate = str_replace('.', $user->getDecimalMark(), $user_details['rate']);
   $cl_role_id = $user_details['role_id'];
   $cl_client_id = $user_details['client_id'];
   $cl_status = $user_details['status'];
@@ -227,6 +227,7 @@ $smarty->assign('rates', $rates);
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('active_roles', $active_roles);
 $smarty->assign('can_swap', $can_swap);
+$smarty->assign('show_projects', count($projects) > 0);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
 $smarty->assign('user_id', $user_id);

@@ -47,6 +47,7 @@ $i18n_key_words = array(
 'menu.create_group' => 'Δημιουργία ομάδας',
 'menu.profile' => 'Προφίλ',
 'menu.group' => 'Ομάδα',
+'menu.plugins' => 'Πρόσθετα',
 'menu.time' => 'Χρόνος',
 'menu.expenses' => 'Έξοδα',
 'menu.reports' => 'Αναφορές',
@@ -55,6 +56,8 @@ $i18n_key_words = array(
 'menu.tasks' => 'Εργασίες',
 'menu.users' => 'Χρήστες',
 'menu.groups' => 'Ομάδες',
+// TODO: translate the following.
+// 'menu.subgroups' => 'Subgroups',
 'menu.export' => 'Εξαγωγή',
 'menu.clients' => 'Πελάτες',
 'menu.options' => 'Επιλογές',
@@ -83,9 +86,6 @@ $i18n_key_words = array(
 'error.auth' => 'Λανθασμένο όνομα εισόδου ή κωδικός.',
 'error.user_exists' => 'Ο χρήστης με αυτήν τη σύνδεση υπάρχει ήδη.',
 'error.object_exists' => 'Το αντικείμενο με αυτό το όνομα υπάρχει ήδη.',
-'error.project_exists' => 'Το έργα με αυτό το όνομα υπάρχει ήδη.',
-'error.task_exists' => 'Η εργασία με αυτό το όνομα υπάρχει ήδη.',
-'error.client_exists' => 'Ο πελάτης με αυτό το όνομα υπάρχει ήδη.',
 'error.invoice_exists' => 'Το τιμολόγιο με αυτόν τον αριθμό υπάρχει ήδη.',
 'error.role_exists' => 'Ο ρόλος σε αυτή τη σειρά υπάρχει ήδη.',
 'error.no_invoiceable_items' => 'Δεν υπάρχουν στοιχεία προς τιμολόγηση.',
@@ -94,11 +94,21 @@ $i18n_key_words = array(
 'error.upload' => 'Σφάλμα φόρτωσης αρχείου.',
 'error.range_locked' => 'Το χρονικό διάστημα είναι κλειδωμένο.',
 'error.mail_send' => 'Σφάλμα κατά την αποστολή του μηνύματος.',
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
+// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Δεν βρέθηκε διεύθυνση ηλεκτρονικού ταχυδρομείου που να αντιστοιχεί σε αυτή την σύνδεση.',
 'error.uncompleted_exists' => 'Η μη ολοκληρωμένη καταχώρηση υπάρχει ήδη. Κλείσιμο ή διαγραφή του.',
 'error.goto_uncompleted' => 'Μεταβείτε στην μη ολοκληρωμένη καταχώρηση.',
 'error.overlap' => 'Το χρονικό διάστημα επικαλύπτει υπάρχουσες καταχωρήσεις.',
 'error.future_date' => 'Η ημερομηνία είναι στο μέλλον.',
+// TODO: translate the following.
+// 'error.xml' => 'Error in XML file at line %d: %s.',
+// 'error.cannot_import' => 'Cannot import: %s.',
+// 'error.format' => 'Invalid file format.',
+
+// Success messages.
+// TODO: translate the following.
+// 'msg.success' => 'Operation completed successfully.',
 
 // Labels for buttons.
 'button.login' => 'Σύνδεση',
@@ -139,6 +149,9 @@ $i18n_key_words = array(
 'label.end_date' => 'Ημερομηνία λήξης',
 'label.user' => 'Χρήστης',
 'label.users' => 'Χρήστες',
+// TODO: translate the following.
+// 'label.group' => 'Group',
+// 'label.subgroups' => 'Subgroups',
 'label.roles' => 'Ρόλους',
 'label.client' => 'Πελάτης',
 'label.clients' => 'Πελάτες',
@@ -212,11 +225,20 @@ $i18n_key_words = array(
 'label.mark_paid' => 'Σήμανση πληρωμένα',
 'label.week_note' => 'Σημείωση εβδομάδας',
 'label.week_list' => 'Λίστα εβδομάδων',
+// TODO: translate the following.
+// 'label.work_units' => 'Work units',
+// 'label.work_units_short' => 'Units',
+'label.totals_only' => 'Σύνολα μόνο',
 
 // Form titles.
+'title.error' => 'Σφάλμα',
+// TODO: Translate the following.
+// 'title.success' => 'Success',
 'title.login' => 'Σύνδεση',
 'title.groups' => 'Ομάδες',
-'title.create_group' => 'Δημιουργία ομάδας',
+// TODO: translate the following.
+// 'title.subgroups' => 'Subgroups',
+// 'title.add_group' => 'Adding Group',
 'title.edit_group' => 'Επεξεργασία ομάδας',
 'title.delete_group' => 'Διαγραφή ομάδας',
 'title.reset_password' => 'Επαναφορά κωδικού πρόσβασης',
@@ -270,8 +292,7 @@ $i18n_key_words = array(
 'title.import' => 'Εισαγωγή δεδομένων ομάδας',
 'title.options' => 'Επιλογές',
 'title.profile' => 'Προφίλ',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
+'title.plugins' => 'Πρόσθετα',
 'title.cf_custom_fields' => 'Προσαρμοσμένα πεδία',
 'title.cf_add_custom_field' => 'Προσθήκη προσαρμοσμένου πεδίου',
 'title.cf_edit_custom_field' => 'Επεξεργασία προσαρμοσμένου πεδίου',
@@ -284,6 +305,7 @@ $i18n_key_words = array(
 'title.week_view' => 'Προβολή εβδομάδας',
 // TODO: translate the following.
 // 'title.swap_roles' => 'Swapping Roles',
+// 'title.work_units' => 'Work Units',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -361,7 +383,6 @@ $i18n_key_words = array(
 'form.reports.group_by_client' => 'πελάτης',
 'form.reports.group_by_project' => 'έργο',
 'form.reports.group_by_task' => 'εργασία',
-'form.reports.totals_only' => 'Σύνολα μόνο',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -426,7 +447,7 @@ $i18n_key_words = array(
 'form.export.compression_none' => 'χωρίς',
 'form.export.compression_bzip' => 'bzip',
 
-// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
 'form.import.hint' => 'Εισαγωγή δεδομένων ομάδας από αρχείο xml.',
 'form.import.file' => 'Επιλογή αρχείου',
 'form.import.success' => 'Η εισαγωγή ολοκληρώθηκε με επιτυχία.',
@@ -452,7 +473,6 @@ $i18n_key_words = array(
 'form.group_edit.uncompleted_indicators' => 'Μη ολοκληρωμένες ενδείξεις',
 // TODO: translate the following.
 // 'form.group_edit.allow_ip' => 'Allow IP',
-'form.group_edit.plugins' => 'Πρόσθετα',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.
@@ -477,6 +497,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
 // 'form.swap.swap_with' => 'Swap roles with',
+
+// Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
+// TODO: translate the following.
+// 'form.work_units.minutes_in_unit' => 'Minutes in unit',
+// 'form.work_units.1st_unit_threshold' => '1st unit threshold',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 'role.user.label' => 'Χρήστης',

@@ -111,7 +111,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$smarty->assign('title', $i18n->get('title.create_group'));
+$smarty->assign('title', $i18n->get('title.add_group'));
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.groupForm.group_name.focus()"');
 $smarty->assign('content_page_name', 'register.tpl');

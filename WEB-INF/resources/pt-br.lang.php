@@ -49,6 +49,7 @@ $i18n_key_words = array(
 'menu.profile' => 'Perfil',
 // TODO: translate the following.
 // 'menu.group' => 'Group',
+'menu.plugins' => 'Plugins',
 'menu.time' => 'Tempo',
 'menu.expenses' => 'Gastos',
 'menu.reports' => 'Relatórios',
@@ -58,6 +59,7 @@ $i18n_key_words = array(
 'menu.users' => 'Usuários',
 // TODO: translate the following.
 // 'menu.groups' => 'Groups',
+// 'menu.subgroups' => 'Subgroups',
 'menu.export' => 'Exportar',
 'menu.clients' => 'Clientes',
 'menu.options' => 'Opções',
@@ -89,9 +91,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'Já existe usuário com este login.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.project_exists' => 'Já existe projeto com este nome.',
-'error.task_exists' => 'Já existe tarefa com este nome.',
-'error.client_exists' => 'Já existe cliente com este nome.',
 'error.invoice_exists' => 'Já existe fatura com este número.',
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
@@ -101,11 +100,21 @@ $i18n_key_words = array(
 'error.upload' => 'Erro no envio do arquivo.',
 'error.range_locked' => 'Período está bloqueado.',
 'error.mail_send' => 'Erro enviando o e-mail.',
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
+// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Não há e-mail associado a este login.',
 'error.uncompleted_exists' => 'Entrada incompleta existente. Feche ou remova-a.',
 'error.goto_uncompleted' => 'Ir até a entrada incompleta.',
 'error.overlap' => 'O intervalo se sobrepõe com entradas já existentes.',
 'error.future_date' => 'Data é no futuro.',
+// TODO: translate the following.
+// 'error.xml' => 'Error in XML file at line %d: %s.',
+// 'error.cannot_import' => 'Cannot import: %s.',
+// 'error.format' => 'Invalid file format.',
+
+// Success messages.
+// TODO: translate the following.
+// 'msg.success' => 'Operation completed successfully.',
 
 // Labels for buttons.
 'button.login' => 'Login',
@@ -148,6 +157,8 @@ $i18n_key_words = array(
 'label.user' => 'Usuário',
 'label.users' => 'Usuários',
 // TODO: translate the following.
+// 'label.group' => 'Group',
+// 'label.subgroups' => 'Subgroups',
 // 'label.roles' => 'Roles',
 'label.client' => 'Cliente',
 'label.clients' => 'Clientes',
@@ -226,11 +237,19 @@ $i18n_key_words = array(
 // 'label.mark_paid' => 'Mark paid',
 // 'label.week_note' => 'Week note',
 // 'label.week_list' => 'Week list',
+// 'label.work_units' => 'Work units',
+// 'label.work_units_short' => 'Units',
+'label.totals_only' => 'Somente totais',
 
 // Form titles.
+'title.error' => 'Erro',
+// TODO: Translate the following.
+// 'title.success' => 'Success',
 'title.login' => 'Login',
 'title.groups' => 'Equipes', // TODO: change "teams" to "groups".
-'title.create_group' => 'Criando equipe', // TODO: change "team" to "group".
+// TODO: translate the following.
+// 'title.subgroups' => 'Subgroups',
+// 'title.add_group' => 'Adding Group',
 'title.edit_group' => 'Editando equipe', // TODO: change "team" to "group".
 'title.delete_group' => 'Apagando equipe', // TODO: change "team" to "group".
 'title.reset_password' => 'Resetando a senha',
@@ -281,8 +300,7 @@ $i18n_key_words = array(
 'title.import' => 'Importando dados de equipe', // TODO: replace "team" with "group".
 'title.options' => 'Opções',
 'title.profile' => 'Perfil',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
+'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Campos personalizados',
 'title.cf_add_custom_field' => 'Adicionando campo personalizado',
 'title.cf_edit_custom_field' => 'Editando campo personalizado',
@@ -295,6 +313,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.week_view' => 'Week View',
 // 'title.swap_roles' => 'Swapping Roles',
+// 'title.work_units' => 'Work Units',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -380,7 +399,6 @@ $i18n_key_words = array(
 'form.reports.group_by_client' => 'cliente',
 'form.reports.group_by_project' => 'projeto',
 'form.reports.group_by_task' => 'tarefa',
-'form.reports.totals_only' => 'Somente totais',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -450,7 +468,7 @@ $i18n_key_words = array(
 'form.export.compression_none' => 'nenhuma',
 'form.export.compression_bzip' => 'bzip',
 
-// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
 'form.import.hint' => 'Importar dados de equipe de um arquivo xml.', // TODO: replace "team" with "group".
 'form.import.file' => 'Selecionar arquivo',
 'form.import.success' => 'Importação realizada com sucesso.',
@@ -478,7 +496,6 @@ $i18n_key_words = array(
 // 'form.group_edit.future_entries' => 'Future entries',
 // 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
 // 'form.group_edit.allow_ip' => 'Allow IP',
-'form.group_edit.plugins' => 'Plugins',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.
@@ -504,6 +521,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
 // 'form.swap.swap_with' => 'Swap roles with',
+
+// Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
+// TODO: translate the following.
+// 'form.work_units.minutes_in_unit' => 'Minutes in unit',
+// 'form.work_units.1st_unit_threshold' => '1st unit threshold',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 // TODO: translate the following.

@@ -74,6 +74,10 @@ input[type=checkbox], label {
   color: #444444;
 }
 
+.onBehalf {
+  font-weight: bold;
+}
+
 .tableHeader {
   font-weight: bold;
   text-align: left;

@@ -89,6 +89,14 @@
     {if $user->can('manage_basic_settings')}
             <a class="systemMenu" href="group_edit.php">{$i18n.menu.group}</a> &middot;
     {/if}
+{if isTrue($smarty.const.SUBGROUP_DEBUG)}
+    {if $user->can('manage_subgroups')}
+            <a class="systemMenu" href="groups.php">{$i18n.menu.subgroups}</a> &middot;
+    {/if}
+{/if}
+    {if $user->can('manage_features')}
+            <a class="systemMenu" href="plugins.php">{$i18n.menu.plugins}</a> &middot;
+    {/if}
             <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a> &middot;
             <a class="systemMenu" href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a>
           </td>
@@ -157,11 +165,7 @@
 {if $title}
       <table cellspacing="0" cellpadding="5" width="{$tab_width+20}" border="0">
         <tr><td class="sectionHeader"><div class="pageTitle">{$title}{if $timestring}: {$timestring}{/if}</div></td></tr>
-  {if $user->name}
-        <tr><td>{$user->name|escape} - {$user->role_name|escape}{if $user->behalf_id > 0} <b>{$i18n.label.on_behalf} {$user->behalf_name|escape}</b>{/if}{if $user->group}, {$user->group|escape}{/if}</td></tr>
-  {else}
-        <tr><td>&nbsp;</td></tr>
-  {/if}
+        <tr><td>{$user->getUserPartForHeader()}</td></tr> {* No need to escape as it is done in the class. *}
       </table>
 {/if}
       <!-- end of page title and user details -->

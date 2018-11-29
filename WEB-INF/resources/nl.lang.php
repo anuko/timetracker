@@ -47,6 +47,7 @@ $i18n_key_words = array(
 'menu.create_group' => 'Maak groep',
 'menu.profile' => 'Profiel',
 'menu.group' => 'Groep',
+'menu.plugins' => 'Plugins',
 'menu.time' => 'Tijden',
 'menu.expenses' => 'Kosten',
 'menu.reports' => 'Rapporten',
@@ -55,6 +56,8 @@ $i18n_key_words = array(
 'menu.tasks' => 'Taken',
 'menu.users' => 'Medewerkers',
 'menu.groups' => 'Groepen',
+// TODO: translate the following.
+// 'menu.subgroups' => 'Subgroups',
 'menu.export' => 'Exporteren',
 'menu.clients' => 'Klanten',
 'menu.options' => 'Opties',
@@ -82,9 +85,6 @@ $i18n_key_words = array(
 'error.auth' => 'Onjuiste inlognaam of wachtwoord.',
 'error.user_exists' => 'Een gebruiker met deze inlognaam bestaat al.',
 'error.object_exists' => 'Een object met deze naam bestaat al.',
-'error.project_exists' => 'Een project met deze naam bestaat al.',
-'error.task_exists' => 'Er bestaat al een taak met deze naam.',
-'error.client_exists' => 'Een klant met deze naam bestaat al.',
 'error.invoice_exists' => 'Dit nummer is al eens toegekend aan een factuur.',
 'error.role_exists' => 'Een rol met deze rangorde bestaat al.',
 'error.no_invoiceable_items' => 'Er zijn geen factuureerbare onderdelen.',
@@ -92,12 +92,19 @@ $i18n_key_words = array(
 'error.no_groups' => 'Uw database is leeg. Meld je aan als admin en maak een nieuw groep.',
 'error.upload' => 'Fout bij het uploaden van het bestand.',
 'error.range_locked' => 'Datums zijn geblokkeerd.',
-'error.mail_send' => 'Fout bij het versturen van een e-mailbericht.',
+'error.mail_send' => 'Fout bij het versturen van een e-mailbericht. Gebruik MAIL_SMTP_DEBUG om het probleem te diagnosticeren',
 'error.no_email' => 'Geen e-mailadres bekend voor dit account.',
 'error.uncompleted_exists' => 'Niet afgeronde invoer bestaat al. Sluit of verwijder deze.',
 'error.goto_uncompleted' => 'Ga naar onvolledige invoer.',
 'error.overlap' => 'De huidige registratie overlapt een reeds bestaande registratie.',
 'error.future_date' => 'Datum ligt in de toekomst.',
+'error.xml' => 'Fout in XML bestand in regel line %d: %s.',
+'error.cannot_import' => 'Kan het volgende niet importeren: %s.',
+'error.format' => 'Bestandsformaat niet valide.',
+
+// Success messages.
+// TODO: translate the following.
+// 'msg.success' => 'Operation completed successfully.',
 
 // Labels for buttons.
 'button.login' => 'Aanmelden',
@@ -112,14 +119,14 @@ $i18n_key_words = array(
 'button.reset_password' => 'Herstel het wachtwoord',
 'button.send' => 'Verzenden',
 'button.send_by_email' => 'Verzend per e-mail',
-'button.create_group' => 'Maak team', // TODO: replace "team" with "group".
-'button.export' => 'Team exporteren', // TODO: replace "team" with "group".
-'button.import' => 'Team importeren', // TODO: replace "team" with "group".
+'button.create_group' => 'Maak groep',
+'button.export' => 'Groep exporteren',
+'button.import' => 'Groep importeren',
 'button.close' => 'Sluiten',
 'button.stop' => 'Stop',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-'label.group_name' => 'Teamnaam', // TODO: replace "team" with "group".
+'label.group_name' => 'Groepsnaam',
 'label.address' => 'Adres',
 'label.currency' => 'Munteenheid',
 'label.manager_name' => 'Naam van de manager',
@@ -138,6 +145,9 @@ $i18n_key_words = array(
 'label.end_date' => 'Einddatum',
 'label.user' => 'Medewerker',
 'label.users' => 'Medewerkers',
+'label.group' => 'Groep',
+// TODO: translate the following.
+// 'label.subgroups' => 'Subgroups',
 'label.roles' => 'Rollen',
 'label.client' => 'Klant',
 'label.clients' => 'Klanten',
@@ -210,13 +220,21 @@ $i18n_key_words = array(
 'label.mark_paid' => 'Markeer als betaald',
 'label.week_note' => 'Week aantekening',
 'label.week_list' => 'Week overzicht',
+'label.work_units' => 'Werk eenheid',
+'label.work_units_short' => 'Eenheid',
+'label.totals_only' => 'Alleen totalen',
 
 // Form titles.
+'title.error' => 'Fout',
+// TODO: Translate the following.
+// 'title.success' => 'Success',
 'title.login' => 'Aanmelden',
-'title.groups' => 'Teams', // TODO: change "teams" to "groups".
-'title.create_group' => 'Team maken', // TODO: change "team" to "group".
-'title.edit_group' => 'Team bewerken', // TODO: change "team" to "group".
-'title.delete_group' => 'Team aan het verwijderen', // TODO: change "team" to "group".
+'title.groups' => 'Groepen',
+// TODO: translate the following.
+// 'title.subgroups' => 'Subgroups',
+// 'title.add_group' => 'Adding Group',
+'title.edit_group' => 'Groep bewerken',
+'title.delete_group' => 'Groep aan het verwijderen',
 'title.reset_password' => 'Wachtwoord herstellen',
 'title.change_password' => 'Wachtwoord aan het veranderen',
 'title.time' => 'Tijdsregistraties',
@@ -264,11 +282,11 @@ $i18n_key_words = array(
 'title.edit_notification' => 'Notificatie bewerken',
 'title.delete_notification' => 'Notificatie verwijderen',
 'title.monthly_quotas' => 'Doelen per maand',
-'title.export' => 'Exporteer teamgegevens', // TODO: replace "team" with "group".
-'title.import' => 'Importeer teamgegevens', // TODO: replace "team" with "group".
+'title.export' => 'Exporteer groepsgegevens',
+'title.import' => 'Importeer groepsgegevens',
 'title.options' => 'Opties',
 'title.profile' => 'Profiel',
-'title.group' => 'Groep instelling',
+'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Eigen velden',
 'title.cf_add_custom_field' => 'Eigen veld toevoegen',
 'title.cf_edit_custom_field' => 'Eigen veld bewerken',
@@ -280,6 +298,7 @@ $i18n_key_words = array(
 'title.locking' => 'Blokkeren',
 'title.week_view' => 'Week overzicht',
 'title.swap_roles' => 'Rollen verruilen',
+'title.work_units' => 'Werk eenheid',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -357,7 +376,6 @@ $i18n_key_words = array(
 'form.reports.group_by_client' => 'klant',
 'form.reports.group_by_project' => 'project',
 'form.reports.group_by_task' => 'taak',
-'form.reports.totals_only' => 'Alleen totalen',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -416,20 +434,18 @@ $i18n_key_words = array(
 'form.client.client_entries' => 'Klant gegevens',
 
 // Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
-// TODO: replace "team" with "group" in the string below.
-'form.export.hint' => 'U kunt alle teamgegevens naar een xml bestand exporteren. Dit kan zinvol zijn als u gegevens migreert naar uw eigen server.',
+'form.export.hint' => 'U kunt alle groepsgegevens naar een xml bestand exporteren. Dit kan zinvol zijn als u gegevens migreert naar uw eigen server.',
 'form.export.compression' => 'Compressie',
 'form.export.compression_none' => 'geen',
 'form.export.compression_bzip' => 'bzip',
 
-// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
-'form.import.hint' => 'Importeer teamgegevens uit een xml bestand.', // TODO: replace "team" with "group".
+// Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
+'form.import.hint' => 'Importeer groepsgegevens uit een xml bestand.',
 'form.import.file' => 'Kies bestand',
 'form.import.success' => 'Importeren gelukt.',
 
 // Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
-// TODO: replace "team" with "group" in the string below (3 places).
-'form.groups.hint' => 'Maak een nieuw team door een team  manager account aan te maken.<br>U kunt ook teamgegevens importeren uit een xml file van een andere Anuko Time Tracker server (login namen moeten uniek zijn).',
+'form.groups.hint' => 'Maak een nieuwe groep door een groeps manager account aan te maken.<br>U kunt ook groepsgegevens importeren uit een xml file van een andere Anuko Time Tracker server (login namen moeten uniek zijn).',
 
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 'form.group_edit.12_hours' => '12 uurs',
@@ -448,11 +464,9 @@ $i18n_key_words = array(
 'form.group_edit.future_entries' => 'Toevoegingen toestaan in de toekomst',
 'form.group_edit.uncompleted_indicators' => 'Onvolledige indicatoren',
 'form.group_edit.allow_ip' => 'Toegestane IP adressen',
-'form.group_edit.plugins' => 'Plugins',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
-// TODO: translate the following.
-// 'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
+'form.group_delete.hint' => 'Bent u er zeker van dat u de hele groep wilt verwijderen?',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'Van',
@@ -472,6 +486,10 @@ $i18n_key_words = array(
 // Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
 'form.swap.hint' => 'Degradeer jezelf naar een lagere rol door een rol te verruilen met iemand anders. Dit kan niet ongedaan worden gemaakt.',
 'form.swap.swap_with' => 'Verruil rol met',
+
+// Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
+'form.work_units.minutes_in_unit' => 'Minuten per eenheid',
+'form.work_units.1st_unit_threshold' => 'Drempel eerste eenheid',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 'role.user.label' => 'Gebruiker',

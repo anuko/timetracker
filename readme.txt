@@ -23,7 +23,7 @@ The general installation procedure looks like this:
 - Install, configure, and test Anuko Time Tracker like so:
 
 1) Unpack distribution files into a selected directory for your web server.
-2) Allow writing to WEB-INF/templates_c/.
+2) Allow writing to WEB-INF/templates_c/. Some hosting providers like Hostmonster additionally require files having 644 and directories 755. Otherwise you'll see error 500 (bad permissions, writable by group).
 3) Create a database using the mysql.sql file in the distribution.
 4) Create user name and password to access the time tracker database.
 5) Create a config file by coping WEB-INF/config.php.dist to WEB-INF/config.php.

@@ -60,10 +60,13 @@ class ttTeamHelper {
     global $i18n;
     $mdb2 = getConnection();
 
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     if (isset($options['getAllFields']))
-      $sql = "select u.*, r.name as role_name, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.group_id = $user->group_id and u.status = 1 order by upper(u.name)";
+      $sql = "select u.*, r.name as role_name, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.group_id = $group_id and u.org_id = $org_id and u.status = 1 order by upper(u.name)";
     else
-      $sql = "select id, name from tt_users where group_id = $user->group_id and status = 1 order by upper(name)";
+      $sql = "select id, name from tt_users where group_id = $group_id and org_id = $org_id and status = 1 order by upper(name)";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
@@ -290,7 +293,14 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $user->group_id and rank < $user->rank and status = 1 order by rank";
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    // Determine max rank. If we are working in on behalf group
+    // then rank restriction does not apply.
+    $max_rank = $user->behalfGroup ? MAX_RANK : $user->rank;
+
+    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $group_id and org_id = $org_id and rank < $max_rank and status = 1 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -348,7 +358,14 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $user->group_id and rank < $user->rank and status = 0 order by rank";
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    // Determine max rank. If we are working in on behalf group
+    // then rank restriction does not apply.
+    $max_rank = $user->behalfGroup ? MAX_RANK : $user->rank;
+
+    $sql = "select id, name, description, rank, rights from tt_roles where group_id = $group_id and org_id = $org_id and rank < $max_rank and status = 0 order by rank";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
@@ -659,78 +676,6 @@ class ttTeamHelper {
     return false;
   }
 
-  // The getInactiveGroups is a maintenance function that returns an array of inactive group ids (max 100).
-  static function getInactiveGroups() {
-    $inactive_groups = array();
-    $mdb2 = getConnection();
-
-    // Get all group ids for groups created or modified more than 9 months ago.
-    // $ts = date('Y-m-d', strtotime('-1 year'));
-    $ts = $mdb2->quote(date('Y-m-d', strtotime('-9 month')));
-    $sql =  "select id from tt_groups where created < $ts and (modified is null or modified < $ts) order by id";
-    $res = $mdb2->query($sql);
-
-    $count = 0;
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $group_id = $val['id'];
-        if (ttTeamHelper::isGroupActive($group_id) == false) {
-          $count++;
-          $inactive_groups[] = $group_id;
-          // Limit the array size for perfomance by allowing this operation on small chunks only.
-          if ($count >= 100) break;
-        }
-      }
-      return $inactive_groups;
-    }
-    return false;
-  }
-
-  // The isGroupActive determines if a group is using Time Tracker or abandoned it.
-  static function isGroupActive($group_id) {
-    $users = array();
-
-    $mdb2 = getConnection();
-    $sql = "select id from tt_users where group_id = $group_id";
-    $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error')) die($res->getMessage());
-    while ($val = $res->fetchRow()) {
-      $users[] = $val['id'];
-    }
-    $user_list = implode(',', $users); // This is a comma-separated list of user ids.
-    if (!$user_list)
-      return false; // No users in group.
-
-    $count = 0;
-    $ts = date('Y-m-d', strtotime('-2 years'));
-    $sql = "select count(*) as cnt from tt_log where user_id in ($user_list) and created > '$ts'";
-    $res = $mdb2->query($sql);
-    if (!is_a($res, 'PEAR_Error')) {
-      if ($val = $res->fetchRow()) {
-        $count = $val['cnt'];
-      }
-    }
-
-    if ($count == 0)
-      return false;  // No time entries for the last 2 years.
-
-    if ($count <= 5) {
-      // We will consider a group inactive if it has 5 or less time entries made more than 1 year ago.
-      $count_last_year = 0;
-      $ts = date('Y-m-d', strtotime('-1 year'));
-      $sql = "select count(*) as cnt from tt_log where user_id in ($user_list) and created > '$ts'";
-      $res = $mdb2->query($sql);
-      if (!is_a($res, 'PEAR_Error')) {
-        if ($val = $res->fetchRow()) {
-          $count_last_year = $val['cnt'];
-        }
-        if ($count_last_year == 0)
-          return false;  // No time entries for the last year and only a few entries before that.
-      }
-    }
-    return true;
-  }
-
   // The delete function permanently deletes all data for a group.
   static function delete($group_id) {
     $mdb2 = getConnection();
@@ -772,6 +717,21 @@ class ttTeamHelper {
 
     // Delete roles.
     $sql = "delete from tt_roles where group_id = $group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    // Delete cron entries.
+    $sql = "delete from tt_cron where group_id = $group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    // Delete predefined expenses.
+    $sql = "delete from tt_predefined_expenses where group_id = $group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    // Delete monthly quotas.
+    $sql = "delete from tt_monthly_quotas where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 

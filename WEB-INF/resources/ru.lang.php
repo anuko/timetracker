@@ -47,6 +47,7 @@ $i18n_key_words = array(
 'menu.create_group' => 'Создать группу',
 'menu.profile' => 'Профиль',
 'menu.group' => 'Группа',
+'menu.plugins' => 'Плагины',
 'menu.time' => 'Время',
 'menu.expenses' => 'Расходы',
 'menu.reports' => 'Отчёты',
@@ -55,6 +56,7 @@ $i18n_key_words = array(
 'menu.tasks' => 'Задачи',
 'menu.users' => 'Пользователи',
 'menu.groups' => 'Группы',
+'menu.subgroups' => 'Подгруппы',
 'menu.export' => 'Экспорт',
 'menu.clients' => 'Клиенты',
 'menu.options' => 'Опции',
@@ -82,9 +84,6 @@ $i18n_key_words = array(
 'error.auth' => 'Неправильно введен логин или пароль.',
 'error.user_exists' => 'Пользователь с таким логином уже существует.',
 'error.object_exists' => 'Объект с таким именем уже есть.',
-'error.project_exists' => 'Проект с таким именем уже есть.',
-'error.task_exists' => 'Задача с таким названием уже есть.',
-'error.client_exists' => 'Клиент с таким именем уже есть.',
 'error.invoice_exists' => 'Счёт с таким номером уже есть.',
 'error.role_exists' => 'Роль с таким рангом уже есть.',
 'error.no_invoiceable_items' => 'Нет записей для включения в счёт.',
@@ -92,12 +91,18 @@ $i18n_key_words = array(
 'error.no_groups' => 'Ваша база данных пуста. Войдите в систему как администратор и создайте новую группу.',
 'error.upload' => 'Ошибка загрузки файла.',
 'error.range_locked' => 'Диапазон дат заблокирован.',
-'error.mail_send' => 'Ошибка отправки почты.',
+'error.mail_send' => 'Ошибка отправки почты. Используйте MAIL_SMTP_DEBUG для диагностики.',
 'error.no_email' => 'Для данного логина не предоставлен e-mail.',
 'error.uncompleted_exists' => 'Неоконченная запись уже существует. Закройте или удалите её.',
 'error.goto_uncompleted' => 'Посмотреть неоконченную запись.',
 'error.overlap' => 'Интервал времени перекрывается с существующими записями.',
 'error.future_date' => 'Дата в будущем.',
+'error.xml' => 'Ошибка в файле XML на строке %d: %s.',
+'error.cannot_import' => 'Невозможно импортировать: %s.',
+'error.format' => 'Неверный формат файла.',
+
+// Success messages.
+'msg.success' => 'Операция завершена успешно.',
 
 // Labels for buttons.
 'button.login' => 'Войти',
@@ -138,6 +143,8 @@ $i18n_key_words = array(
 'label.end_date' => 'Конечная дата',
 'label.user' => 'Пользователь',
 'label.users' => 'Сотрудники',
+'label.group' => 'Группа',
+'label.subgroups' => 'Подгруппы',
 'label.roles' => 'Роли',
 'label.client' => 'Клиент',
 'label.clients' => 'Клиенты',
@@ -210,11 +217,17 @@ $i18n_key_words = array(
 'label.mark_paid' => 'Отметить оплату',
 'label.week_note' => 'Комментарий недели',
 'label.week_list' => 'Список недели',
+'label.work_units' => 'Единицы работы',
+'label.work_units_short' => 'Единицы',
+'label.totals_only' => 'Только итоги',
 
 // Form titles.
+'title.error' => 'Ошибка',
+'title.success' => 'Успех',
 'title.login' => 'Вход в систему',
 'title.groups' => 'Группы',
-'title.create_group' => 'Создание группы',
+'title.subgroups' => 'Подгруппы',
+'title.add_group' => 'Добавление группы',
 'title.edit_group' => 'Редактирование группы',
 'title.delete_group' => 'Удаление группы',
 'title.reset_password' => 'Cброс пароля',
@@ -236,7 +249,7 @@ $i18n_key_words = array(
 'title.send_invoice' => 'Отсылка счёта',
 'title.charts' => 'Диаграммы',
 'title.projects' => 'Проекты',
-'title.add_project' => 'Создание проекта',
+'title.add_project' => 'Добавление проекта',
 'title.edit_project' => 'Редактирование проекта',
 'title.delete_project' => 'Удаление проекта',
 'title.tasks' => 'Задачи',
@@ -268,7 +281,7 @@ $i18n_key_words = array(
 'title.import' => 'Импортирование данных группы',
 'title.options' => 'Опции',
 'title.profile' => 'Профиль',
-'title.group' => 'Настройки группы',
+'title.plugins' => 'Плагины',
 'title.cf_custom_fields' => 'Дополнительные поля',
 'title.cf_add_custom_field' => 'Добавление поля',
 'title.cf_edit_custom_field' => 'Редактирование поля',
@@ -280,6 +293,7 @@ $i18n_key_words = array(
 'title.locking' => 'Блокировка',
 'title.week_view' => 'Неделя',
 'title.swap_roles' => 'Обмен ролей',
+'title.work_units' => 'Единицы работы',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -357,7 +371,6 @@ $i18n_key_words = array(
 'form.reports.group_by_client' => 'клиенту',
 'form.reports.group_by_project' => 'проекту',
 'form.reports.group_by_task' => 'задаче',
-'form.reports.totals_only' => 'Только итоги',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -421,7 +434,7 @@ $i18n_key_words = array(
 'form.export.compression_none' => 'нет',
 'form.export.compression_bzip' => 'в формате bzip',
 
-// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
 'form.import.hint' => 'Импортируйте данные группы из xml файла.',
 'form.import.file' => 'Укажите файл',
 'form.import.success' => 'Импорт успешно выполнен.',
@@ -446,7 +459,6 @@ $i18n_key_words = array(
 'form.group_edit.future_entries' => 'Будущие записи',
 'form.group_edit.uncompleted_indicators' => 'Индикаторы незавершения',
 'form.group_edit.allow_ip' => 'Разрешить доступ с IP',
-'form.group_edit.plugins' => 'Плагины',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 'form.group_delete.hint' => 'Вы уверены, что хотите удалить всю группу?',
@@ -469,6 +481,10 @@ $i18n_key_words = array(
 // Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
 'form.swap.hint' => 'Уменьшите свою роль, обменявшись с другим пользователем. Роль не может восстановлена.',
 'form.swap.swap_with' => 'Обменять роль с',
+
+// Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
+'form.work_units.minutes_in_unit' => 'Минут в единице работы',
+'form.work_units.1st_unit_threshold' => 'Порог для 1-й единицы',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 'role.user.label' => 'Пользователь',

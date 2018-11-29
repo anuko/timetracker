@@ -49,6 +49,7 @@ $i18n_key_words = array(
 'menu.profile' => 'Profiili',
 // TODO: translate the following.
 // 'menu.group' => 'Group',
+'menu.plugins' => 'Lisäosat',
 'menu.time' => 'Tunnit',
 'menu.expenses' => 'Kulut',
 'menu.reports' => 'Raportit',
@@ -58,6 +59,7 @@ $i18n_key_words = array(
 'menu.users' => 'Käyttäjät',
 // TODO: translate the following.
 // 'menu.groups' => 'Groups',
+// 'menu.subgroups' => 'Subgroups',
 'menu.export' => 'Vie',
 'menu.clients' => 'Asiakkaat',
 'menu.options' => 'Optiot',
@@ -90,9 +92,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'Tämä käyttäjänimi on jo olemassa.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.project_exists' => 'Tämän niminen projekti on jo olemassa.',
-'error.task_exists' => 'Tämän niminen tehtävä on jo olemassa.',
-'error.client_exists' => 'Tämän niminen asiakas on jo olemassa.',
 'error.invoice_exists' => 'Tällä numerolla oleva lasku on jo olemassa.',
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
@@ -102,11 +101,21 @@ $i18n_key_words = array(
 'error.upload' => 'Virhe tiedoston lataus.',
 'error.range_locked' => 'Aikaväli on lukittu.',
 'error.mail_send' => 'Virhe postinlähetyksessä.',
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
+// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Käyttäjätunnukseen ei ole liitetty sähköpostiosoitetta.',
 'error.uncompleted_exists' => 'Kesken oleva syötetieto on jo olemassa. Sulje tai poista se.',
 'error.goto_uncompleted' => 'Siirry kesken olevaan syötteeseen.',
 'error.overlap' => 'Aikavälillä on päällekkäisiä syötteitä.',
 'error.future_date' => 'Aika on tulevaisuudessa.',
+// TODO: translate the following.
+// 'error.xml' => 'Error in XML file at line %d: %s.',
+// 'error.cannot_import' => 'Cannot import: %s.',
+// 'error.format' => 'Invalid file format.',
+
+// Success messages.
+// TODO: translate the following.
+// 'msg.success' => 'Operation completed successfully.',
 
 // Labels for buttons.
 'button.login' => 'Kirjaudu',
@@ -149,6 +158,8 @@ $i18n_key_words = array(
 'label.user' => 'Käyttäjä',
 'label.users' => 'Käyttäjät',
 // TODO: translate the following.
+// 'label.group' => 'Group',
+// 'label.subgroups' => 'Subgroups',
 // 'label.roles' => 'Roles',
 'label.client' => 'Asiakas',
 'label.clients' => 'Asiakkaat',
@@ -228,11 +239,19 @@ $i18n_key_words = array(
 // 'label.mark_paid' => 'Mark paid',
 // 'label.week_note' => 'Week note',
 // 'label.week_list' => 'Week list',
+// 'label.work_units' => 'Work units',
+// 'label.work_units_short' => 'Units',
+'label.totals_only' => 'Vain yhteissummat',
 
 // Form titles.
+'title.error' => 'Virhe',
+// TODO: Translate the following.
+// 'title.success' => 'Success',
 'title.login' => 'Kirjautuminen',
-'title.groupd' => 'Tiimit', // TODO: change "teams" to "groups".
-'title.create_group' => 'Tiimin luonti', // TODO: change "team" to "group".
+'title.groups' => 'Tiimit', // TODO: change "teams" to "groups".
+// TODO: translate the following.
+// 'title.subgroups' => 'Subgroups',
+// 'title.add_group' => 'Adding Group',
 'title.edit_group' => 'Tiimin muokkaus', // TODO: change "team" to "group".
 'title.delete_group' => 'Tiimin poisto', // TODO: change "team" to "group".
 'title.reset_password' => 'Salasanan nollaus',
@@ -284,8 +303,7 @@ $i18n_key_words = array(
 'title.import' => 'Tiimitietojen tunti', // TODO: replace "team" with "group".
 'title.options' => 'Optiot',
 'title.profile' => 'Profiili',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
+'title.plugins' => 'Lisäosat',
 'title.cf_custom_fields' => 'Omat kentät',
 'title.cf_add_custom_field' => 'Oman kentän lisäys',
 'title.cf_edit_custom_field' => 'Oman kentän muokkaus',
@@ -298,6 +316,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.week_view' => 'Week View',
 // 'title.swap_roles' => 'Swapping Roles',
+// 'title.work_units' => 'Work Units',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -383,7 +402,6 @@ $i18n_key_words = array(
 'form.reports.group_by_client' => 'asiakas',
 'form.reports.group_by_project' => 'projekti',
 'form.reports.group_by_task' => 'tehtävä',
-'form.reports.totals_only' => 'Vain yhteissummat',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -453,7 +471,7 @@ $i18n_key_words = array(
 'form.export.compression_none' => 'ei pakata',
 'form.export.compression_bzip' => 'bzip',
 
-// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
 'form.import.hint' => 'Tuo tiimitiedot xml-tiedostosta.', // TODO: replace "team" with "group".
 'form.import.file' => 'Valitse tiedosto',
 'form.import.success' => 'Tietojen tuonti onnistui.',
@@ -481,7 +499,6 @@ $i18n_key_words = array(
 // 'form.group_edit.future_entries' => 'Future entries',
 // 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
 // 'form.group_edit.allow_ip' => 'Allow IP',
-'form.group_edit.plugins' => 'Lisäosat',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.
@@ -507,6 +524,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
 // 'form.swap.swap_with' => 'Swap roles with',
+
+// Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
+// TODO: translate the following.
+// 'form.work_units.minutes_in_unit' => 'Minutes in unit',
+// 'form.work_units.1st_unit_threshold' => '1st unit threshold',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 // TODO: translate the following.

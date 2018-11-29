@@ -27,7 +27,7 @@
 // +----------------------------------------------------------------------+
 
 require_once('initialize.php');
-import('ttGroupHelper');
+import('ttOrgHelper');
 
 // Access checks.
 if (!ttAccessAllowed('administer_site')) {
@@ -36,7 +36,7 @@ if (!ttAccessAllowed('administer_site')) {
 }
 // End of access checks.
 
-$smarty->assign('groups', ttGroupHelper::getTopGroups());
+$smarty->assign('groups', ttOrgHelper::getOrgs());
 $smarty->assign('title', $i18n->get('title.groups'));
 $smarty->assign('content_page_name', 'admin_groups.tpl');
 $smarty->display('index.tpl');

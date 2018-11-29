@@ -50,6 +50,7 @@ $i18n_key_words = array(
 'menu.profile' => 'פרופיל',
 // TODO: translate the following.
 // 'menu.group' => 'Group',
+'menu.plugins' => 'תוספים',
 'menu.time' => 'זמן',
 // TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
@@ -60,6 +61,7 @@ $i18n_key_words = array(
 'menu.users' => 'משתמשים',
 // TODO: translate the following.
 // 'menu.groups' => 'Groups',
+// 'menu.subgroups' => 'Subgroups',
 'menu.export' => 'ייצוא',
 'menu.clients' => 'לקוחות',
 'menu.options' => 'אפשרויות',
@@ -104,9 +106,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'שם משתמש כבר קיים',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.project_exists' => 'שם פרוייקט כבר קיים',
-'error.task_exists' => 'קיימת משימה עם שם דומה',
-'error.client_exists' => 'שם לקוח כבר קיים',
 'error.invoice_exists' => 'קיימת חשבונית עם מספר זה',
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
@@ -117,12 +116,21 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'שגיאה בשליחת הדואר אלקטרוני',
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
+// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'אין דואר אלקטרוני השייך לשם משתמש זה',
 'error.uncompleted_exists' => 'רישום חלקי כבר קיים. סגור או מחק אותו.',
 'error.goto_uncompleted' => 'פתח את הרישום החלקי.',
 'error.overlap' => 'טווח הזמן מתנגש עם רישומים קיימים.',
 // TODO: translate the following.
 // 'error.future_date' => 'Date is in future.',
+// 'error.xml' => 'Error in XML file at line %d: %s.',
+// 'error.cannot_import' => 'Cannot import: %s.',
+// 'error.format' => 'Invalid file format.',
+
+// Success messages.
+// TODO: translate the following.
+// 'msg.success' => 'Operation completed successfully.',
 
 // Labels for buttons.
 'button.login' => 'היכנס',
@@ -165,6 +173,8 @@ $i18n_key_words = array(
 'label.user' => 'משתמש',
 'label.users' => 'משתמשים',
 // TODO: translate the following.
+// 'label.group' => 'Group',
+// 'label.subgroups' => 'Subgroups',
 // 'label.roles' => 'Roles',
 'label.client' => 'לקוח',
 'label.clients' => 'לקוחות',
@@ -246,12 +256,19 @@ $i18n_key_words = array(
 // 'label.mark_paid' => 'Mark paid',
 // 'label.week_note' => 'Week note',
 // 'label.week_list' => 'Week list',
+// 'label.work_units' => 'Work units',
+// 'label.work_units_short' => 'Units',
+'labl.totals_only' => 'סיכומים בלבד',
 
 // Form titles.
+'title.error' => 'שגיאה',
+// TODO: Translate the following.
+// 'title.success' => 'Success',
 'title.login' => 'כניסה',
 'title.groups' => 'צוותים', // TODO: change "teams" to "groups".
-'title.create_group' => 'יצירת צוות', // TODO: change "team" to "group".
 // TODO: translate the following.
+// 'title.subgroups' => 'Subgroups',
+// 'title.add_group' => 'Adding Group',
 // 'title.edit_group' => 'Editing Group',
 'title.delete_group' => 'מחיקת צוות', // TODO: change "team" to "group".
 'title.reset_password' => 'איפוס סיסמה',
@@ -304,8 +321,7 @@ $i18n_key_words = array(
 'title.import' => 'ייבוא נתוני צוות', // TODO: replace "team" with "group".
 'title.options' => 'אפשרויות',
 'title.profile' => 'פרופיל',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
+'title.plugins' => 'תוספים',
 'title.cf_custom_fields' => 'שדות אישיים',
 'title.cf_add_custom_field' => 'הוספת שדה אישי',
 'title.cf_edit_custom_field' => 'עריכת שדה אישי',
@@ -320,6 +336,7 @@ $i18n_key_words = array(
 // 'title.locking' => 'Locking',
 // 'title.week_view' => 'Week View',
 // 'title.swap_roles' => 'Swapping Roles',
+// 'title.work_units' => 'Work Units',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -407,7 +424,6 @@ $i18n_key_words = array(
 'form.reports.group_by_client' => 'לקוח',
 'form.reports.group_by_project' => 'פרוייקט',
 'form.reports.group_by_task' => 'משימה',
-'form.reports.totals_only' => 'סיכומים בלבד',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -479,7 +495,7 @@ $i18n_key_words = array(
 'form.export.compression_none' => 'ללא',
 'form.export.compression_bzip' => 'bzip',
 
-// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
 'form.import.hint' => 'ייבא נתוני צוות מתוך קובץ XML.', // TODO: replace "team" with "group".
 'form.import.file' => 'בחר קובץ',
 'form.import.success' => 'הייבוא הושלם בהצלחה.',
@@ -507,7 +523,6 @@ $i18n_key_words = array(
 // 'form.group_edit.future_entries' => 'Future entries',
 // 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
 // 'form.group_edit.allow_ip' => 'Allow IP',
-'form.group_edit.plugins' => 'תוספים',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.
@@ -533,6 +548,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
 // 'form.swap.swap_with' => 'Swap roles with',
+
+// Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
+// TODO: translate the following.
+// 'form.work_units.minutes_in_unit' => 'Minutes in unit',
+// 'form.work_units.1st_unit_threshold' => '1st unit threshold',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 // TODO: translate the following.

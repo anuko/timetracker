@@ -42,7 +42,7 @@ if (!is_array($users_for_swap) || sizeof($users_for_swap) == 0) {
 }
 if ($request->isPost()) {
   $user_id = (int)$request->getParameter('swap_with');
-  $user_details = $user->getUser($user_id);
+  $user_details = $user->getUserDetails($user_id);
   if (!$user_details) {
     header('Location: access_denied.php');
     exit();

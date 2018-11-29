@@ -40,7 +40,8 @@ if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
   exit();
 }
 $cl_id = (int)$request->getParameter('id');
-$time_rec = ttTimeHelper::getRecord($cl_id, $user->getActiveUser());
+$user_id = $user->getUser();
+$time_rec = ttTimeHelper::getRecord($cl_id, $user_id);
 if (!$time_rec || $time_rec['invoice_id']) {
   // Prohibit editing not ours or invoiced records.
   header('Location: access_denied.php');
@@ -285,7 +286,7 @@ if ($request->isPost()) {
       // 3) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
       $uncompleted = ($cl_finish == '' && $cl_duration == '');
       if ($uncompleted) {
-        $not_completed_rec = ttTimeHelper::getUncompleted($user->getActiveUser());
+        $not_completed_rec = ttTimeHelper::getUncompleted($user_id);
         if ($not_completed_rec && ($time_rec['id'] <> $not_completed_rec['id'])) {
           // We have another not completed record.
           $err->add($i18n->get('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->get('error.goto_uncompleted')."</a>");
@@ -295,7 +296,7 @@ if ($request->isPost()) {
 
     // Prohibit creating an overlapping record.
     if ($err->no()) {
-      if (ttTimeHelper::overlaps($user->getActiveUser(), $new_date->toString(DB_DATEFORMAT), $cl_start, $cl_finish, $cl_id))
+      if (ttTimeHelper::overlaps($user_id, $new_date->toString(DB_DATEFORMAT), $cl_start, $cl_finish, $cl_id))
         $err->add($i18n->get('error.overlap'));
     }
 
@@ -304,7 +305,7 @@ if ($request->isPost()) {
       $res = ttTimeHelper::update(array(
         'id'=>$cl_id,
         'date'=>$new_date->toString(DB_DATEFORMAT),
-        'user_id'=>$user->getActiveUser(),
+        'user_id'=>$user_id,
         'client'=>$cl_client,
         'project'=>$cl_project,
         'task'=>$cl_task,
@@ -345,7 +346,7 @@ if ($request->isPost()) {
       // 2) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
       $uncompleted = ($cl_finish == '' && $cl_duration == '');
       if ($uncompleted) {
-        $not_completed_rec = ttTimeHelper::getUncompleted($user->getActiveUser());
+        $not_completed_rec = ttTimeHelper::getUncompleted($user_id);
         if ($not_completed_rec) {
           // We have another not completed record.
           $err->add($i18n->get('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->get('error.goto_uncompleted')."</a>");
@@ -355,7 +356,7 @@ if ($request->isPost()) {
 
     // Prohibit creating an overlapping record.
     if ($err->no()) {
-      if (ttTimeHelper::overlaps($user->getActiveUser(), $new_date->toString(DB_DATEFORMAT), $cl_start, $cl_finish))
+      if (ttTimeHelper::overlaps($user_id, $new_date->toString(DB_DATEFORMAT), $cl_start, $cl_finish))
         $err->add($i18n->get('error.overlap'));
     }
 
@@ -364,7 +365,9 @@ if ($request->isPost()) {
 
       $id = ttTimeHelper::insert(array(
         'date'=>$new_date->toString(DB_DATEFORMAT),
-        'user_id'=>$user->getActiveUser(),
+        'user_id'=>$user_id,
+        'group_id'=>$user->getGroup(),
+        'org_id' => $user->org_id,
         'client'=>$cl_client,
         'project'=>$cl_project,
         'task'=>$cl_task,

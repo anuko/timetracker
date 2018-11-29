@@ -236,7 +236,7 @@ class ttWeekViewHelper {
     unset($objDate);
 
     // Obtain past week(s) records.
-    $records = ttWeekViewHelper::getRecordsForInterval($user->getActiveUser(), $pastWeekStartDate, $pastWeekEndDate);
+    $records = ttWeekViewHelper::getRecordsForInterval($user->getUser(), $pastWeekStartDate, $pastWeekEndDate);
     // Handle potential situation of no records by re-trying for up to 4 more previous weeks (after a long vacation, etc.).
     if (!$records) {
       for ($i = 0; $i < 4; $i++) {
@@ -247,7 +247,7 @@ class ttWeekViewHelper {
         $pastWeekEndDate = $objDate->toString(DB_DATEFORMAT);
         unset($objDate);
 
-        $records = ttWeekViewHelper::getRecordsForInterval($user->getActiveUser(), $pastWeekStartDate, $pastWeekEndDate);
+        $records = ttWeekViewHelper::getRecordsForInterval($user->getUser(), $pastWeekStartDate, $pastWeekEndDate);
         // Break out of the loop if we found something.
         if ($records) break;
       }
@@ -492,7 +492,9 @@ class ttWeekViewHelper {
 
     // Prepare an array of fields for regular insert function.
     $fields4insert = array();
-    $fields4insert['user_id'] = $user->getActiveUser();
+    $fields4insert['user_id'] = $user->getUser();
+    $fields4insert['group_id'] = $user->getGroup();
+    $fields4insert['org_id'] = $user->org_id;
     $fields4insert['date'] = $entry_date;
     $fields4insert['duration'] = $fields['duration'];
     $fields4insert['client'] = ttWeekViewHelper::parseFromWeekViewRow($fields['row_id'], 'cl');
@@ -530,7 +532,7 @@ class ttWeekViewHelper {
     $mdb2 = getConnection();
     $duration = $fields['duration'];
     $tt_log_id = $fields['tt_log_id'];
-    $user_id = $user->getActiveUser();
+    $user_id = $user->getUser();
     $sql = "update tt_log set duration = '$duration' where id = $tt_log_id and user_id = $user_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
@@ -596,7 +598,7 @@ class ttWeekViewHelper {
     $mdb2 = getConnection();
     $tt_log_id = $fields['tt_log_id'];
     $comment = $fields['comment'];
-    $user_id = $user->getActiveUser();
+    $user_id = $user->getUser();
     $sql = "update tt_log set comment = ".$mdb2->quote($fields['comment'])." where id = $tt_log_id and user_id = $user_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))

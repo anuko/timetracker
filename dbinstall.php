@@ -32,6 +32,7 @@ require_once('initialize.php');
 import('ttUserHelper');
 import('ttTaskHelper');
 import('ttRoleHelper');
+import('ttOrgHelper');
 
 // setChange - executes an sql statement. TODO: rename this function to something better.
 // Better yet, redo the entire thing and make an installer.
@@ -789,10 +790,10 @@ if ($_POST) {
       if (is_a($result, 'PEAR_Error')) die($result->getMessage());
       $row = $result->fetchRow();
       if ($row['count'] == 0)
-        ttRoleHelper::createPredefinedRoles($team_id, $lang);
+        ttRoleHelper::createPredefinedRoles_1_17_44($team_id, $lang);
 
       // Obtain new role id based on legacy role.
-      $role_id = ttRoleHelper::getRoleByRank($legacy_role, $team_id);
+      $role_id = ttRoleHelper::getRoleByRank_1_17_44($legacy_role, $team_id);
       if (!$role_id) continue; // Role not found, nothing to do.
 
       $sql = "update tt_users set role_id = $role_id where id = $user_id and team_id = $team_id";
@@ -805,7 +806,7 @@ if ($_POST) {
     print "Updated $users_updated users...<br>\n";
   }
 
-  if ($_POST["convert11744to11788"]) {
+  if ($_POST["convert11744to11797"]) {
     setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.44') set rights = replace(rights, 'override_punch_mode,override_date_lock', 'override_punch_mode,override_own_punch_mode,override_date_lock')");
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.48' where param_name = 'version_db' and param_value = '1.17.44'");
     setChange("update `tt_users` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.48') set role_id = (select id from tt_roles where team_id = 0 and rank = 512) where role = 324");
@@ -899,23 +900,163 @@ if ($_POST) {
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.87', modified = now() where param_name = 'version_db' and param_value = '1.17.86'");
     setChange("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.87') set rights = replace(rights, 'manage_subgroups', 'manage_subgroups,delete_group') where rank = 512");
     setChange("UPDATE `tt_site_config` SET param_value = '1.17.88', modified = now() where param_name = 'version_db' and param_value = '1.17.87'");
+    setChange("ALTER TABLE `tt_fav_reports` ADD `show_work_units` tinyint(4) NOT NULL DEFAULT '0' AFTER `show_custom_field_1`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.17.92', modified = now() where param_name = 'version_db' and param_value = '1.17.88'");
+    setChange("ALTER TABLE `tt_log` ADD `group_id` int(11) default NULL AFTER `user_id`");
+    setChange("ALTER TABLE `tt_expense_items` ADD `group_id` int(11) default NULL AFTER `user_id`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.17.96', modified = now() where param_name = 'version_db' and param_value = '1.17.92'");
+    setChange("create index group_idx on tt_log(group_id)");
+    setChange("create index group_idx on tt_expense_items(group_id)");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.17.97', modified = now() where param_name = 'version_db' and param_value = '1.17.96'");
+  }
+
+  // The update_group_id function updates group_id field in tt_log and tt_expense_items tables.
+  if ($_POST["update_group_id"]) {
+    $mdb2 = getConnection();
+
+    $sql = "(select distinct user_id from tt_log where group_id is null) union distinct (select distinct user_id from tt_expense_items where group_id is null)";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) {
+      die($res->getMessage());
+    }
+    $users_updated = 0;
+    $tt_log_records_updated = 0;
+    $tt_expense_items_updated = 0;
+
+    // Iterate through result set.
+    while ($val = $res->fetchRow()) {
+      $user_id = $val['user_id'];
+      $sql = "select group_id from tt_users where id = $user_id";
+      $result = $mdb2->query($sql);
+      if (is_a($result, 'PEAR_Error')) {
+        die($res->getMessage());
+      }
+      $value = $result->fetchRow();
+      $group_id = $value['group_id'];
+
+      if ($group_id) {
+        $sql = "update tt_log set group_id = $group_id where user_id = $user_id";
+        $affected = $mdb2->exec($sql);
+        if (is_a($affected, 'PEAR_Error')) {
+          die($affected->getMessage());
+        }
+        $tt_log_records_updated += $affected;
+
+        $sql = "update tt_expense_items set group_id = $group_id where user_id = $user_id";
+        $affected = $mdb2->exec($sql);
+        if (is_a($affected, 'PEAR_Error')) {
+          die($affected->getMessage());
+        }
+        $tt_expense_items_updated += $affected;
+        $users_updated++;
+      } else {
+         print "Error: Could not find group for user $user_id...<br>\n";
+      }
+    }
+    print "Updated $tt_log_records_updated tt_log records...<br>\n";
+    print "Updated $tt_expense_items_updated tt_expense_items records...<br>\n";
+  }
+
+  if ($_POST["convert11797to11826"]) {
+    setChange("ALTER TABLE `tt_fav_reports` CHANGE `group_by` `group_by1` varchar(20) default NULL");
+    setChange("ALTER TABLE `tt_fav_reports` ADD `group_by2` varchar(20) default NULL AFTER `group_by1`");
+    setChange("ALTER TABLE `tt_fav_reports` ADD `group_by3` varchar(20) default NULL AFTER `group_by2`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.00', modified = now() where param_name = 'version_db' and param_value = '1.17.97'");
+    setChange("create index log_idx on tt_custom_field_log(log_id)");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.05', modified = now() where param_name = 'version_db' and param_value = '1.18.00'");
+    setChange("UPDATE `tt_groups` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.05') set org_id = id where org_id is null");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.06', modified = now() where param_name = 'version_db' and param_value = '1.18.05'");
+    setChange("ALTER TABLE `tt_users` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_users` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.06') set org_id = group_id where org_id is null");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.07', modified = now() where param_name = 'version_db' and param_value = '1.18.06'");
+    setChange("ALTER TABLE `tt_roles` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.07') set org_id = group_id where org_id is null");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.08', modified = now() where param_name = 'version_db' and param_value = '1.18.07'");
+    setChange("ALTER TABLE `tt_clients` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.09', modified = now() where param_name = 'version_db' and param_value = '1.18.08'");
+    setChange("UPDATE `tt_clients` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.09') set org_id = group_id where org_id is null");
+    setChange("ALTER TABLE `tt_projects` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("ALTER TABLE `tt_tasks` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.10', modified = now() where param_name = 'version_db' and param_value = '1.18.09'");
+    setChange("UPDATE `tt_projects` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.10') set org_id = group_id where org_id is null");
+    setChange("UPDATE `tt_tasks` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.10') set org_id = group_id where org_id is null");
+    setChange("ALTER TABLE `tt_log` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("ALTER TABLE `tt_invoices` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.11', modified = now() where param_name = 'version_db' and param_value = '1.18.10'");
+    setChange("UPDATE `tt_log` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.11') set org_id = group_id where org_id is null");
+    setChange("UPDATE `tt_invoices` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.11') set org_id = group_id where org_id is null");
+    setChange("ALTER TABLE `tt_user_project_binds` ADD `group_id` int(11) default NULL AFTER `project_id`");
+    setChange("ALTER TABLE `tt_user_project_binds` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("ALTER TABLE `tt_project_task_binds` ADD `group_id` int(11) default NULL AFTER `task_id`");
+    setChange("ALTER TABLE `tt_project_task_binds` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.12', modified = now() where param_name = 'version_db' and param_value = '1.18.11'");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.13', modified = now() where param_name = 'version_db' and param_value = '1.18.12'");
+    setChange("ALTER TABLE `tt_users` MODIFY `login` varchar(50) COLLATE utf8mb4_bin NOT NULL");
+    setChange("ALTER TABLE `tt_projects` MODIFY `name` varchar(80) COLLATE utf8mb4_bin NOT NULL");
+    setChange("ALTER TABLE `tt_tasks` MODIFY `name` varchar(80) COLLATE utf8mb4_bin NOT NULL");
+    setChange("ALTER TABLE `tt_invoices` MODIFY `name` varchar(80) COLLATE utf8mb4_bin NOT NULL");
+    setChange("ALTER TABLE `tt_clients` MODIFY `name` varchar(80) COLLATE utf8mb4_bin NOT NULL");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.14', modified = now() where param_name = 'version_db' and param_value = '1.18.13'");
+    setChange("ALTER TABLE `tt_monthly_quotas` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_monthly_quotas` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.14') set org_id = group_id where org_id is null");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.15', modified = now() where param_name = 'version_db' and param_value = '1.18.14'");
+    setChange("ALTER TABLE `tt_predefined_expenses` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.16', modified = now() where param_name = 'version_db' and param_value = '1.18.15'");
+    setChange("UPDATE `tt_predefined_expenses` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.16') set org_id = group_id where org_id is null");
+    setChange("ALTER TABLE `tt_expense_items` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.17', modified = now() where param_name = 'version_db' and param_value = '1.18.16'");
+    setChange("UPDATE `tt_expense_items` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.17') set org_id = group_id where org_id is null");
+    setChange("update `tt_user_project_binds` upb inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.17') inner join `tt_users` u on u.id = upb.user_id set upb.group_id = u.group_id, upb.org_id = u.org_id where upb.org_id is null");
+    setChange("update `tt_project_task_binds` ptb inner join tt_site_config sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.17') inner join `tt_projects` p on p.id = ptb.project_id set ptb.group_id = p.group_id, ptb.org_id = p.org_id where ptb.org_id is null");
+    setChange("create unique index project_task_idx on tt_project_task_binds(project_id, task_id)");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.18', modified = now() where param_name = 'version_db' and param_value = '1.18.17'");
+    setChange("ALTER TABLE `tt_fav_reports` ADD `group_id` int(11) default NULL AFTER `user_id`");
+    setChange("ALTER TABLE `tt_fav_reports` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.19', modified = now() where param_name = 'version_db' and param_value = '1.18.18'");
+    setChange("update `tt_fav_reports` fr inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.19') inner join `tt_users` u on u.id = fr.user_id set fr.group_id = u.group_id, fr.org_id = u.org_id where fr.org_id is null");
+    setChange("ALTER TABLE `tt_cron` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.20', modified = now() where param_name = 'version_db' and param_value = '1.18.19'");
+    setChange("UPDATE `tt_cron` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.20') set org_id = group_id where org_id is null");
+    setChange("ALTER TABLE `tt_client_project_binds` ADD `group_id` int(11) default NULL AFTER `project_id`");
+    setChange("ALTER TABLE `tt_client_project_binds` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("update `tt_client_project_binds` cpb inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.20') inner join `tt_clients` c on c.id = cpb.client_id set cpb.group_id = c.group_id, cpb.org_id = c.org_id where cpb.org_id is null");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.21', modified = now() where param_name = 'version_db' and param_value = '1.18.20'");
+    setChange("create unique index client_project_idx on tt_client_project_binds(client_id, project_id)");
+    setChange("ALTER TABLE `tt_config` ADD `group_id` int(11) default NULL AFTER `user_id`");
+    setChange("ALTER TABLE `tt_config` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.22', modified = now() where param_name = 'version_db' and param_value = '1.18.21'");
+    setChange("update `tt_config` c inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.22') inner join `tt_users` u on u.id = c.user_id set c.group_id = u.group_id, c.org_id = u.org_id where c.org_id is null");
+    setChange("ALTER TABLE `tt_custom_fields` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("ALTER TABLE `tt_custom_field_options` ADD `group_id` int(11) default NULL AFTER `id`");
+    setChange("ALTER TABLE `tt_custom_field_options` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("ALTER TABLE `tt_custom_field_log` ADD `group_id` int(11) default NULL AFTER `id`");
+    setChange("ALTER TABLE `tt_custom_field_log` ADD `org_id` int(11) default NULL AFTER `group_id`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.23', modified = now() where param_name = 'version_db' and param_value = '1.18.22'");
+    setChange("UPDATE `tt_custom_fields` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.23') set org_id = group_id where org_id is null");
+    setChange("update `tt_custom_field_options` cfo inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.23') inner join `tt_custom_fields` cf on cf.id = cfo.field_id set cfo.group_id = cf.group_id, cfo.org_id = cf.org_id where cfo.org_id is null");
+    setChange("update `tt_custom_field_log` cfl inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.23') inner join `tt_custom_fields` cf on cf.id = cfl.field_id set cfl.group_id = cf.group_id, cfl.org_id = cf.org_id where cfl.org_id is null");
+    setChange("ALTER TABLE `tt_custom_field_options` ADD `status` tinyint(4) default '1' after `value`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.24', modified = now() where param_name = 'version_db' and param_value = '1.18.23'");
+    setChange("ALTER TABLE `tt_groups` ADD COLUMN `description` varchar(255) default NULL after `name`");
+    setChange("UPDATE `tt_site_config` SET param_value = '1.18.26', modified = now() where param_name = 'version_db' and param_value = '1.18.24'");
   }
 
   if ($_POST["cleanup"]) {
 
     $mdb2 = getConnection();
-    $inactive_groups = ttTeamHelper::getInactiveGroups();
+    $inactive_orgs = ttOrgHelper::getInactiveOrgs();
 
-    $count = count($inactive_groups);
-    print "$count inactive groups found...<br>\n";
+    $count = count($inactive_orgs);
+    print "$count inactive organizations found...<br>\n";
     for ($i = 0; $i < $count; $i++) {
-      print "  deleting group ".$inactive_groups[$i]."<br>\n";
-      $res = ttTeamHelper::delete($inactive_groups[$i]);
+      print "  deleting organization ".$inactive_orgs[$i]."<br>\n";
+      $res = ttOrgHelper::deleteOrg($inactive_orgs[$i]);
     }
 
     setChange("OPTIMIZE TABLE tt_client_project_binds");
     setChange("OPTIMIZE TABLE tt_clients");
     setChange("OPTIMIZE TABLE tt_config");
+    setChange("OPTIMIZE TABLE tt_cron");
     setChange("OPTIMIZE TABLE tt_custom_field_log");
     setChange("OPTIMIZE TABLE tt_custom_field_options");
     setChange("OPTIMIZE TABLE tt_custom_fields"); 
@@ -924,6 +1065,7 @@ if ($_POST) {
     setChange("OPTIMIZE TABLE tt_invoices");
     setChange("OPTIMIZE TABLE tt_log");
     setChange("OPTIMIZE TABLE tt_monthly_quotas");
+    setChange("OPTIMIZE TABLE tt_predefined_expenses");
     setChange("OPTIMIZE TABLE tt_project_task_binds");
     setChange("OPTIMIZE TABLE tt_projects");
     setChange("OPTIMIZE TABLE tt_tasks");
@@ -944,7 +1086,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.17.88)</b>
+    <td width="80%"><b>Create database structure (v1.18.26)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -984,8 +1126,13 @@ if ($_POST) {
     <td><input type="submit" name="convert11400to11744" value="Update"><br><input type="submit" name="update_role_id" value="Update role_id"></td>
   </tr>
     <tr valign="top">
-    <td>Update database structure (v1.17.44 to v1.17.88)</td>
-    <td><input type="submit" name="convert11744to11788" value="Update"></td>
+    <td>Update database structure (v1.17.44 to v1.17.97)</td>
+    <td><input type="submit" name="convert11744to117797" value="Update"><br><input type="submit" name="update_group_id" value="Update group_id"></td>
+  </tr>
+  </tr>
+  <tr valign="top">
+    <td>Update database structure (v1.17.97 to v1.18.26)</td>
+    <td><input type="submit" name="convert11797to11826" value="Update"></td>
   </tr>
 </table>
 

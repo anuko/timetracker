@@ -69,7 +69,7 @@ $client_id = $bean->getAttribute('client');
 
 // Do we need to show checkboxes?
 if ($bean->getAttribute('chpaid') ||
-   ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by')) && !$user->isClient())) {
+   ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by1')) && !$user->isClient())) {
   if ($user->can('manage_invoices'))
     $smarty->assign('use_checkboxes', true);
 }
@@ -92,7 +92,7 @@ if ($user->can('manage_invoices') && $bean->getAttribute('chpaid')) {
 
 // Controls for "Assign to invoice" block.
 if ($user->can('manage_invoices') &&
-  ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by')) && !$user->isClient())) {
+  ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by1')) && !$user->isClient())) {
   // Client is selected and we are displaying the invoice column.
   $recent_invoices = ttTeamHelper::getRecentInvoices($user->group_id, $client_id);
   if ($recent_invoices) {
@@ -170,34 +170,42 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$group_by = $bean->getAttribute('group_by');
+$group_by = $bean->getAttribute('group_by1');
 
-$report_items = ttReportHelper::getItems($bean);
+$options = ttReportHelper::getReportOptions($bean);
+
+$group_by_tag = ttReportHelper::makeGroupByXmlTag($options);
+$report_items = ttReportHelper::getItems($options);
 // Store record ids in session in case user wants to act on records such as marking them all paid.
 if ($request->isGet() && $user->isPluginEnabled('ps'))
   ttReportHelper::putInSession($report_items);
 
-if ('no_grouping' != $group_by)
-  $subtotals = ttReportHelper::getSubtotals($bean);
-$totals = ttReportHelper::getTotals($bean);
+if (ttReportHelper::grouping($options))
+  $subtotals = ttReportHelper::getSubtotals($options);
+$totals = ttReportHelper::getTotals($options);
 
 // Assign variables that are used to print subtotals.
-if ($report_items && 'no_grouping' != $group_by) {
+if ($report_items && 'no_grouping' != $group_by1) {
   $smarty->assign('print_subtotals', true);
   $smarty->assign('first_pass', true);
-  $smarty->assign('group_by', $group_by);
+  $smarty->assign('group_by1', $group_by1);
   $smarty->assign('prev_grouped_by', '');
   $smarty->assign('cur_grouped_by', '');
 }
 // Determine group by header.
 if ('no_grouping' != $group_by) {
+  /*
   if ('cf_1' == $group_by)
     $smarty->assign('group_by_header', $custom_fields->fields[0]['label']);
   else {
     $key = 'label.'.$group_by;
     $smarty->assign('group_by_header', $i18n->get($key));
-  }
+  } */
+  $smarty->assign('group_by_header', ttReportHelper::makeGroupByHeader($options));
 }
+
+$smarty->assign('group_by', $group_by_tag);
+
 // Assign variables that are used to alternate color of rows for different dates.
 $smarty->assign('prev_date', '');
 $smarty->assign('cur_date', '');

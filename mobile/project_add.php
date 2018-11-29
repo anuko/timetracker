@@ -78,7 +78,8 @@ if ($request->isPost()) {
   if ($err->no()) {
     if (!ttProjectHelper::getProjectByName($cl_name)) {
       if (ttProjectHelper::insert(array(
-        'group_id' => $user->group_id,
+        'group_id' => $user->getGroup(),
+        'org_id' => $user->org_id,
         'name' => $cl_name,
         'description' => $cl_description,
         'users' => $cl_users,
@@ -89,7 +90,7 @@ if ($request->isPost()) {
         } else
           $err->add($i18n->get('error.db'));
     } else
-      $err->add($i18n->get('error.project_exists'));
+      $err->add($i18n->get('error.object_exists'));
   }
 } // isPost
 

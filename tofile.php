@@ -58,10 +58,11 @@ $type = $request->getParameter('type');
 $totals_only = $bean->getAttribute('chtotalsonly');
 
 // Obtain items.
+$options = ttReportHelper::getReportOptions($bean);
 if ($totals_only)
-  $subtotals = ttReportHelper::getSubtotals($bean);
+  $subtotals = ttReportHelper::getSubtotals($options);
 else
-  $items = ttReportHelper::getItems($bean);
+  $items = ttReportHelper::getItems($options);
 
 // Build a string to use as filename for the files being downloaded.
 $filename = strtolower($i18n->get('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
@@ -83,17 +84,22 @@ if ('xml' == $type) {
   print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
   print "<rows>\n";
 
-  $group_by = $bean->getAttribute('group_by');
   if ($totals_only) {
-    // Totals only report. Print subtotals.
+    // Totals only report.
+    $group_by_tag = ttReportHelper::makeGroupByXmlTag($options);
+
+    // Print subtotals.
     foreach ($subtotals as $subtotal) {
       print "<row>\n";
-      print "\t<".$group_by."><![CDATA[".$subtotal['name']."]]></".$group_by.">\n";
+      print "\t<".$group_by_tag."><![CDATA[".$subtotal['name']."]]></".$group_by_tag.">\n";
       if ($bean->getAttribute('chduration')) {
         $val = $subtotal['time'];
-        if($val && defined('EXPORT_DECIMAL_DURATION') && isTrue(EXPORT_DECIMAL_DURATION))
+        if($val && isTrue(EXPORT_DECIMAL_DURATION))
           $val = time_to_decimal($val);
         print "\t<duration><![CDATA[".$val."]]></duration>\n";
+      }
+      if ($bean->getAttribute('chunits')) {
+        print "\t<units><![CDATA[".$subtotal['units']."]]></units>\n";
       }
       if ($bean->getAttribute('chcost')) {
         print "\t<cost><![CDATA[";
@@ -120,10 +126,11 @@ if ('xml' == $type) {
       if ($bean->getAttribute('chfinish')) print "\t<finish><![CDATA[".$item['finish']."]]></finish>\n";
       if ($bean->getAttribute('chduration')) {
         $duration = $item['duration'];
-        if($duration && defined('EXPORT_DECIMAL_DURATION') && isTrue(EXPORT_DECIMAL_DURATION))
+        if($duration && isTrue(EXPORT_DECIMAL_DURATION))
           $duration = time_to_decimal($duration);
           print "\t<duration><![CDATA[".$duration."]]></duration>\n";
       }
+      if ($bean->getAttribute('chunits')) print "\t<units><![CDATA[".$item['units']."]]></units>\n";
       if ($bean->getAttribute('chnote')) print "\t<note><![CDATA[".$item['note']."]]></note>\n";
       if ($bean->getAttribute('chcost')) {
         print "\t<cost><![CDATA[";
@@ -156,21 +163,14 @@ if ('csv' == $type) {
   $bom = chr(239).chr(187).chr(191); // 0xEF 0xBB 0xBF in the beginning of the file is UTF8 BOM.
   print $bom; // Without this Excel does not display UTF8 characters properly.
 
-  $group_by = $bean->getAttribute('group_by');
   if ($totals_only) {
     // Totals only report.
-
-    // Determine group_by header.
-    if ('cf_1' == $group_by)
-      $group_by_header = $custom_fields->fields[0]['label'];
-    else {
-      $key = 'label.'.$group_by;
-      $group_by_header = $i18n->get($key);
-    }
+    $group_by_header = ttReportHelper::makeGroupByHeader($options);
 
     // Print headers.
     print '"'.$group_by_header.'"';
     if ($bean->getAttribute('chduration')) print ',"'.$i18n->get('label.duration').'"';
+    if ($bean->getAttribute('chunits')) print ',"'.$i18n->get('label.work_units_short').'"';
     if ($bean->getAttribute('chcost')) print ',"'.$i18n->get('label.cost').'"';
     print "\n";
 
@@ -179,10 +179,11 @@ if ('csv' == $type) {
       print '"'.$subtotal['name'].'"';
       if ($bean->getAttribute('chduration')) {
         $val = $subtotal['time'];
-        if($val && defined('EXPORT_DECIMAL_DURATION') && isTrue(EXPORT_DECIMAL_DURATION))
+        if($val && isTrue(EXPORT_DECIMAL_DURATION))
           $val = time_to_decimal($val);
         print ',"'.$val.'"';
       }
+      if ($bean->getAttribute('chunits')) print ',"'.$subtotal['units'].'"';
       if ($bean->getAttribute('chcost')) {
         if ($user->can('manage_invoices') || $user->isClient())
           print ',"'.$subtotal['cost'].'"';
@@ -202,6 +203,7 @@ if ('csv' == $type) {
     if ($bean->getAttribute('chstart')) print ',"'.$i18n->get('label.start').'"';
     if ($bean->getAttribute('chfinish')) print ',"'.$i18n->get('label.finish').'"';
     if ($bean->getAttribute('chduration')) print ',"'.$i18n->get('label.duration').'"';
+    if ($bean->getAttribute('chunits')) print ',"'.$i18n->get('label.work_units_short').'"';
     if ($bean->getAttribute('chnote')) print ',"'.$i18n->get('label.note').'"';
     if ($bean->getAttribute('chcost')) print ',"'.$i18n->get('label.cost').'"';
     if ($bean->getAttribute('chpaid')) print ',"'.$i18n->get('label.paid').'"';
@@ -221,10 +223,11 @@ if ('csv' == $type) {
       if ($bean->getAttribute('chfinish')) print ',"'.$item['finish'].'"';
       if ($bean->getAttribute('chduration')) {
         $val = $item['duration'];
-        if($val && defined('EXPORT_DECIMAL_DURATION') && isTrue(EXPORT_DECIMAL_DURATION))
+        if($val && isTrue(EXPORT_DECIMAL_DURATION))
           $val = time_to_decimal($val);
         print ',"'.$val.'"';
       }
+      if ($bean->getAttribute('chunits')) print ',"'.$item['units'].'"';
       if ($bean->getAttribute('chnote')) print ',"'.str_replace('"','""',$item['note']).'"';
       if ($bean->getAttribute('chcost')) {
         if ($user->can('manage_invoices') || $user->isClient())

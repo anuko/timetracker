@@ -133,17 +133,30 @@ function selectAssignedUsers(project_id) {
   }
 }
 
-// handleCheckboxes - unmarks and disables the "Totals only" checkbox when
-// "no grouping" is selected in the associated dropdown.
-// In future we need to improve this function and hide not relevant elements completely.
+// handleCheckboxes - unmarks and hides the "Totals only" checkbox when
+// "no grouping" is selected in the associated group by dropdowns.
 function handleCheckboxes() {
   var totalsOnlyCheckbox = document.getElementById("chtotalsonly");
-  if ("no_grouping" == document.getElementById("group_by").value) {
-    // Unmark and disable the "Totals only" checkbox.
+  var totalsOnlyLabel = document.getElementById("totals_only_label");
+  var groupBy1 = document.getElementById("group_by1");
+  var groupBy2 = document.getElementById("group_by2");
+  var groupBy3 = document.getElementById("group_by3");
+  var grouping = false;
+  if ((groupBy1 != null && "no_grouping" != groupBy1.value) ||
+      (groupBy2 != null && "no_grouping" != groupBy2.value) ||
+      (groupBy3 != null && "no_grouping" != groupBy3.value)) {
+    grouping = true;
+  }
+  if (grouping) {
+    // Show the "Totals only" checkbox.
+    totalsOnlyCheckbox.style.visibility = "visible";
+    totalsOnlyLabel.style.visibility = "visible";
+  } else {
+    // Unmark and hide the "Totals only" checkbox.
     totalsOnlyCheckbox.checked = false;
-    totalsOnlyCheckbox.disabled = true;
-  } else
-    totalsOnlyCheckbox.disabled = false;
+    totalsOnlyCheckbox.style.visibility = "hidden";
+    totalsOnlyLabel.style.visibility = "hidden";
+  }
 }
 </script>
 
@@ -284,14 +297,27 @@ function handleCheckboxes() {
                 <td></td>
 {/if}
               </tr>
+{if $user->isPluginEnabled('wu')}
+              <tr>
+                <td></td>
+                <td></td>
+                <td width="25%"><label>{$forms.reportForm.chunits.control}&nbsp;{$i18n.label.work_units}</label></td>
+                <td></td>
+              </tr>
+{/if}
             </table>
           </td>
         </tr>
         <tr>
-          <td><b>{$i18n.form.reports.group_by}</b></td>
+            <td><b>{$i18n.form.reports.group_by}</b></td>
         </tr>
         <tr valign="top">
-          <td>{$forms.reportForm.group_by.control} <label>{$forms.reportForm.chtotalsonly.control} {$i18n.form.reports.totals_only}</label></td>
+          <td>{$forms.reportForm.group_by1.control}</td>
+          <td>{$forms.reportForm.group_by2.control}</td>
+          <td>{$forms.reportForm.group_by3.control}</td>
+        </tr>
+        <tr>
+            <td><span id="totals_only_label"><label>{$forms.reportForm.chtotalsonly.control} {$i18n.label.totals_only}</label></span></td>
         </tr>
       </table>
 

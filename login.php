@@ -28,7 +28,7 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttGroupHelper');
+import('ttOrgHelper');
 import('ttUser');
 
 $cl_login = $request->getParameter('login');
@@ -75,7 +75,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-if(!isTrue(MULTITEAM_MODE) && !ttGroupHelper::getTopGroups())
+if(!isTrue(MULTITEAM_MODE) && !ttOrgHelper::getOrgs())
   $err->add($i18n->get('error.no_groups'));
 
 // Determine whether to show login hint. It is currently used only for Windows LDAP authentication.

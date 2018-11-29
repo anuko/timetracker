@@ -34,8 +34,11 @@ class ttExpenseHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $date = $fields['date'];
-    $user_id = (int) $fields['user_id'];
     $client_id = $fields['client_id'];
     $project_id = $fields['project_id'];
     $name = $fields['name'];
@@ -45,15 +48,12 @@ class ttExpenseHelper {
     $paid = (int) $fields['paid'];
     $created = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
 
-    $sql = "insert into tt_expense_items (date, user_id, client_id, project_id, name, cost, invoice_id, paid, created, created_ip, created_by, status) ".
-      "values (".$mdb2->quote($date).", $user_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).
+    $sql = "insert into tt_expense_items".
+      " (date, user_id, group_id, org_id, client_id, project_id, name, cost, invoice_id, paid, created, created_ip, created_by, status)".
+      " values (".$mdb2->quote($date).", $user_id, $group_id, $org_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).
       ", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).", $paid $created, ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error'))
-      return false;
-
-    $id = $mdb2->lastInsertID('tt_expense_items', 'id');
-    return $id;
+    return (!is_a($affected, 'PEAR_Error'));
   }
 
   // update - updates a record in tt_expense_items table.
@@ -81,12 +81,8 @@ class ttExpenseHelper {
       ", project_id = ".$mdb2->quote($project_id).", name = ".$mdb2->quote($name).
       ", cost = ".$mdb2->quote($cost)."$paid_part $modified_part, invoice_id = ".$mdb2->quote($invoice_id).
       " WHERE id = $id";
-
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error'))
-      return false;
-
-    return true;
+    return (!is_a($affected, 'PEAR_Error'));
   }
 
   // markDeleted - marks an item as deleted in tt_expense_items table.
@@ -95,10 +91,7 @@ class ttExpenseHelper {
 
     $sql = "update tt_expense_items set status = NULL where id = $id and user_id = $user_id";
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error'))
-      return false;
-
-    return true;
+    return (!is_a($affected, 'PEAR_Error'));
   }
 
   // getTotalForDay - gets total expenses for a user for a specific date.

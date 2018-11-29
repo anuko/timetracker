@@ -6,6 +6,16 @@
   <tr>
     <td valign="top">
 {if $user->can('manage_users')}
+  {if $group_dropdown}
+{$forms.usersForm.open} {* usersForm consists only of one dropdown group control *}
+      <table width="100%">
+        <tr>
+          <td align="center">{$i18n.label.group}: {$forms.usersForm.group.control}</td>
+        </tr>
+      </table>
+{$forms.usersForm.close}
+  {/if}
+
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
   {if $inactive_users}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.active_users}</td></tr>
@@ -28,7 +38,7 @@
           </td>
           <td>{$u.login|escape}</td>
           <td>{$u.role_name|escape}</td>
-      {if $u.rank < $user->rank || ($u.rank == $user->rank && $u.id == $user->id)}
+      {if $u.group_id != $user->group_id || $u.rank < $user->rank || ($u.rank == $user->rank && $u.id == $user->id)}
           <td><a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a></td>
          {if $u.id != $user->id}<td><a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a></td>{else}<td></td>{/if}
       {else}
@@ -63,7 +73,7 @@
           <td>{$u.name|escape}</td>
           <td>{$u.login|escape}</td>
           <td>{$u.role_name|escape}</td>
-      {if $u.rank < $user->rank}
+      {if $u.group_id != $user->group_id || $u.rank < $user->rank}
           <td><a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a></td>
           <td><a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a></td>
       {else}

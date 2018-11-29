@@ -6,6 +6,16 @@
   <tr>
     <td valign="top">
 {if $user->can('manage_projects')}
+  {if $group_dropdown}
+{$forms.projectsForm.open} {* projectsForm consists only of one dropdown group control *}
+      <table width="100%">
+        <tr>
+          <td align="center">{$i18n.label.group}: {$forms.projectsForm.group.control}</td>
+        </tr>
+      </table>
+{$forms.projectsForm.close}
+  {/if}
+
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
   {if $inactive_projects}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.projects.active_projects}</td></tr>

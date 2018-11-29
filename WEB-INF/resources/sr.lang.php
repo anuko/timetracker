@@ -49,6 +49,7 @@ $i18n_key_words = array(
 'menu.profile' => 'Profil',
 // TODO: translate the following.
 // 'menu.group' => 'Group',
+'menu.plugins' => 'Dodaci',
 'menu.time' => 'Vreme',
 'menu.expenses' => 'Troškovi',
 'menu.reports' => 'Izveštaji',
@@ -58,6 +59,7 @@ $i18n_key_words = array(
 'menu.users' => 'Korisnici',
 // TODO: translate the following.
 // 'menu.groups' => 'Groups',
+// 'menu.subgroups' => 'Subgroups',
 'menu.export' => 'Izvoz',
 'menu.clients' => 'Klijenti',
 'menu.options' => 'Opcije',
@@ -88,9 +90,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'Korisnik pod ovim imenom već postoji.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.project_exists' => 'Projekat pod ovim nazivom već postoji.',
-'error.task_exists' => 'Zadatak pod ovim nazivom već postoji.',
-'error.client_exists' => 'Klijent pod ovim imenom već postoji.',
 'error.invoice_exists' => 'Račun pod ovim brojem već postoji.',
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
@@ -101,11 +100,21 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Greška u slanju mejla.',
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
+// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Nema imejla pod korisničkom imenom.',
 'error.uncompleted_exists' => 'Unos već postoji ali je nekompletan. Zatvorite postojeći ili obrišite unos.',
 'error.goto_uncompleted' => 'Prikaži postojeći unos.',
 'error.overlap' => 'Navedeni vremenski interval se podudara sa već unetim vremenom.',
 'error.future_date' => 'Naveli ste budući datum.',
+// TODO: translate the following.
+// 'error.xml' => 'Error in XML file at line %d: %s.',
+// 'error.cannot_import' => 'Cannot import: %s.',
+// 'error.format' => 'Invalid file format.',
+
+// Success messages.
+// TODO: translate the following.
+// 'msg.success' => 'Operation completed successfully.',
 
 // Labels for buttons.
 'button.login' => 'Prijava',
@@ -148,6 +157,8 @@ $i18n_key_words = array(
 'label.user' => 'Korisnik',
 'label.users' => 'Korisnici',
 // TODO: translate the following.
+// 'label.group' => 'Group',
+// 'label.subgroups' => 'Subgroups',
 // 'label.roles' => 'Roles',
 'label.client' => 'Klijent',
 'label.clients' => 'Klijenti',
@@ -228,11 +239,18 @@ $i18n_key_words = array(
 // 'button.mark_paid' => 'Mark paid',
 // 'label.week_note' => 'Week note',
 // 'label.week_list' => 'Week list',
+// 'label.work_units' => 'Work units',
+'label.totals_only' => 'Samo zbirno',
 
 // Form titles.
+'title.error' => 'Greška',
+// TODO: Translate the following.
+// 'title.success' => 'Success',
 'title.login' => 'Prijava',
 'title.groups' => 'Timovi', // TODO: change "teams" to "groups".
-'title.create_group' => 'Napravi tim', // TODO: change "team" to "group".
+// TODO: translate the following.
+// 'title.subgroups' => 'Subgroups',
+// 'title.add_group' => 'Adding Group',
 'title.edit_group' => 'Izmeni tim', // TODO: change "team" to "group".
 'title.delete_group' => 'Obriši tim', // TODO: change "team" to "group".
 'title.reset_password' => 'Resetuj Lozinku',
@@ -283,8 +301,7 @@ $i18n_key_words = array(
 'title.import' => 'Uvoz podataka tim-a', // TODO: replace "team" with "group".
 'title.options' => 'Opcije',
 'title.profile' => 'Profil',
-// TODO: translate the following.
-// 'title.group' => 'Group Settings',
+'title.plugins' => 'Dodaci',
 'title.cf_custom_fields' => 'Dodatna polja',
 'title.cf_add_custom_field' => 'Dodavanje dodatnih polja',
 'title.cf_edit_custom_field' => 'Izmena dodatnih polja',
@@ -299,6 +316,7 @@ $i18n_key_words = array(
 // 'title.locking' => 'Locking',
 // 'title.week_view' => 'Week View',
 // 'title.swap_roles' => 'Swapping Roles',
+// 'title.work_units' => 'Work Units',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -384,7 +402,6 @@ $i18n_key_words = array(
 'form.reports.group_by_client' => 'klijent',
 'form.reports.group_by_project' => 'projekat',
 'form.reports.group_by_task' => 'zadatak',
-'form.reports.totals_only' => 'Samo zbirno',
 
 // Forma izveštaja. Pogledajte primer na https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -454,7 +471,7 @@ $i18n_key_words = array(
 'form.export.compression_none' => 'ništa',
 'form.export.compression_bzip' => 'bzip',
 
-// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
 'form.import.hint' => 'Uvezi podatke timova iz xml fajla.', // TODO: replace "team" with "group".
 'form.import.file' => 'Odaberi datoteku',
 'form.import.success' => 'Uvoz uspešan.',
@@ -482,7 +499,6 @@ $i18n_key_words = array(
 // 'form.group_edit.future_entries' => 'Future entries',
 // 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
 // 'form.group_edit.allow_ip' => 'Allow IP',
-'form.group_edit.plugins' => 'Dodaci',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.
@@ -508,6 +524,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
 // 'form.swap.swap_with' => 'Swap roles with',
+
+// Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
+// TODO: translate the following.
+// 'form.work_units.minutes_in_unit' => 'Minutes in unit',
+// 'form.work_units.1st_unit_threshold' => '1st unit threshold',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 // TODO: translate the following.

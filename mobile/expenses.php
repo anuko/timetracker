@@ -192,8 +192,8 @@ if ($request->isPost()) {
 
     // Insert record.
     if ($err->no()) {
-      if (ttExpenseHelper::insert(array('date'=>$cl_date,'user_id'=>$user->getActiveUser(),
-        'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1))) {
+      if (ttExpenseHelper::insert(array('date'=>$cl_date,'client_id'=>$cl_client,
+          'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1))) {
         header('Location: expenses.php');
         exit();
       } else
@@ -216,8 +216,8 @@ if ($request->isPost()) {
 
 $smarty->assign('next_date', $next_date);
 $smarty->assign('prev_date', $prev_date);
-$smarty->assign('day_total', ttExpenseHelper::getTotalForDay($user->getActiveUser(), $cl_date));
-$smarty->assign('expense_items', ttExpenseHelper::getItems($user->getActiveUser(), $cl_date));
+$smarty->assign('day_total', ttExpenseHelper::getTotalForDay($user->getUser(), $cl_date));
+$smarty->assign('expense_items', ttExpenseHelper::getItems($user->getUser(), $cl_date));
 $smarty->assign('predefined_expenses', $predefined_expenses);
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);

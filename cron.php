@@ -59,23 +59,34 @@ while ($val = $res->fetchRow()) {
   // We have jobs to execute in user language.
 
   // Get favorite report details.
-  $report = ttFavReportHelper::getReport($val['report_id']);
-  if (!$report) continue; // Skip not found report.
+  $options = ttFavReportHelper::getReportOptions($val['report_id']);
+  if (!$options) continue; // Skip not found report.
 
   // Recycle global $user object, as user settings are specific for each report.
-  $user = new ttUser(null, $report['user_id']);
+  $user = new ttUser(null, $options['user_id']);
   if (!$user->id) continue; // Skip not found user.
+
+  // TODO: write a new function ttFavReportHelper::adjustOptions that will use
+  // a $user object recycled above. Put user handling below into it.
+  // Also adjust remaining options for potentially changed user access rights and group properties.
+  // For example, tracking mode may have changed, but fav report options are still old...
+  // This needs to be fixed.
+  $options = ttFavReportHelper::adjustOptions($options);
+
+  // Skip users with disabled Notifications plugin.
+  if (!$user->isPluginEnabled('no')) continue;
+
   // Recycle $i18n object because language is user-specific.
   $i18n->load($user->lang);
 
   // Check condition on a report.
   $condition_ok = true;
   if ($val['report_condition'])
-    $condition_ok = ttReportHelper::checkFavReportCondition($report, $val['report_condition']);
+    $condition_ok = ttReportHelper::checkFavReportCondition($options, $val['report_condition']);
 
   // Email report if condition is okay.
   if ($condition_ok) {
-    if (ttReportHelper::sendFavReport($report, $val['subject'], $val['email'], $val['cc']))
+    if (ttReportHelper::sendFavReport($options, $val['subject'], $val['email'], $val['cc']))
       echo "Report ".$val['report_id']. " sent.<br>";
     else
       echo "Error while emailing report...<br>";

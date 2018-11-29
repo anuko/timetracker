@@ -27,7 +27,7 @@
 // +----------------------------------------------------------------------+
 
 require_once('initialize.php');
-import('ttImportHelper');
+import('ttOrgImportHelper');
 import('form.Form');
 
 // Access check.
@@ -42,9 +42,8 @@ $form->addInput(array('type'=>'upload','name'=>'xmlfile','value'=>'browse','maxs
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.import')));
 
 if ($request->isPost()) {
-
-  $import = new ttImportHelper($err);
-  $import->importXml();
+  $importHelper = new ttOrgImportHelper($err);
+  $importHelper->importXml();
   if ($err->no()) $msg->add($i18n->get('form.import.success'));
 } // isPost
 

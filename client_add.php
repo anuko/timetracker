@@ -71,7 +71,8 @@ if ($request->isPost()) {
   if ($err->no()) {
     if (!ttClientHelper::getClientByName($cl_name)) {
       if (ttClientHelper::insert(array(
-        'group_id' => $user->group_id,
+        'group_id' => $user->getGroup(),
+        'org_id' => $user->org_id,
         'name' => $cl_name,
         'address' => $cl_address,
         'tax' => $cl_tax,
@@ -82,7 +83,7 @@ if ($request->isPost()) {
       } else
         $err->add($i18n->get('error.db'));
      } else
-       $err->add($i18n->get('error.client_exists'));
+       $err->add($i18n->get('error.object_exists'));
   }
 } // isPost
 

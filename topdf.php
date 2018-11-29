@@ -62,26 +62,17 @@ $bean = new ActionForm('reportBean', new Form('reportForm'), $request);
 // is grouped by either date, user, client, project, task or cf_1 and user only needs to see subtotals by group.
 $totals_only = ($bean->getAttribute('chtotalsonly') == '1');
 
-// Determine group by header.
-$group_by = $bean->getAttribute('group_by');
-if ('no_grouping' != $group_by) {
-  if ('cf_1' == $group_by)
-    $group_by_header = $custom_fields->fields[0]['label'];
-  else {
-    $key = 'label.'.$group_by;
-    $group_by_header = $i18n->get($key);
-  }
-}
-
 // Obtain items for report.
+$options = ttReportHelper::getReportOptions($bean);
+$grouping = ttReportHelper::grouping($options);
 if (!$totals_only)
-  $items = ttReportHelper::getItems($bean); // Individual entries.
-if ($totals_only || 'no_grouping' != $group_by)
-  $subtotals = ttReportHelper::getSubtotals($bean); // Subtotals for groups of items.
-$totals = ttReportHelper::getTotals($bean); // Totals for the entire report.
+  $items = ttReportHelper::getItems($options); // Individual entries.
+if ($totals_only || $grouping)
+  $subtotals = ttReportHelper::getSubtotals($options); // Subtotals for groups of items.
+$totals = ttReportHelper::getTotals($options); // Totals for the entire report.
 
 // Assign variables that are used to print subtotals.
-if ($items && 'no_grouping' != $group_by) {
+if ($items && $grouping) {
   $print_subtotals = true;
   $first_pass = true;
   $prev_grouped_by = '';
@@ -103,12 +94,14 @@ $html .= '<table border="1" cellpadding="3" cellspacing="0" width="100%">';
 
 if ($totals_only) {
   // We are building a "totals only" report with only subtotals and total.
+  $group_by_header = ttReportHelper::makeGroupByHeader($options);
   $colspan = 1; // Column span for an empty row.
   // Table header.
   $html .= '<thead>';
   $html .= "<tr $styleHeader>";
   $html .= '<td>'.htmlspecialchars($group_by_header).'</td>';
   if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.duration').'</td>'; }
+  if ($bean->getAttribute('chunits')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.work_units_short').'</td>'; }
   if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.cost').'</td>'; }
   $html .= '</tr>';
   $html .= '</thead>';
@@ -117,6 +110,7 @@ if ($totals_only) {
     $html .= '<tr>';
     $html .= '<td>'.htmlspecialchars($subtotal['name']).'</td>';
     if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$subtotal['time'].'</td>';
+    if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$subtotal['units'].'</td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
       if ($user->can('manage_invoices') || $user->isClient())
@@ -132,6 +126,7 @@ if ($totals_only) {
   $html .= "<tr $styleSubtotal>";
   $html .= '<td>'.$i18n->get('label.total').'</td>';
   if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$totals['time'].'</td>';
+  if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$totals['units'].'</td>';
   if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
       $html .= htmlspecialchars($user->currency).' ';
@@ -158,6 +153,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chstart')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.start').'</td>'; }
   if ($bean->getAttribute('chfinish')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.finish').'</td>'; }
   if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.duration').'</td>'; }
+  if ($bean->getAttribute('chunits')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.work_units_short').'</td>'; }
   if ($bean->getAttribute('chnote')) { $colspan++; $html .= '<td>'.$i18n->get('label.note').'</td>'; }
   if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.cost').'</td>'; }
   if ($bean->getAttribute('chpaid')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.paid').'</td>'; }
@@ -176,32 +172,33 @@ if ($totals_only) {
         $html .= '<td>'.$i18n->get('label.subtotal').'</td>';
         if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
             $html .= '<td>';
-            if ($group_by == 'user') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+            $html .= htmlspecialchars($subtotals[$prev_grouped_by]['user']);
             $html .= '</td>';
         }
         if ($bean->getAttribute('chclient')) {
             $html .= '<td>';
-            if ($group_by == 'client') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+            $html .= htmlspecialchars($subtotals[$prev_grouped_by]['client']);
             $html .= '</td>';
         }
         if ($bean->getAttribute('chproject')) {
             $html .= '<td>';
-            if ($group_by == 'project') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+            $html .= htmlspecialchars($subtotals[$prev_grouped_by]['project']);
             $html .= '</td>';
         }
         if ($bean->getAttribute('chtask')) {
             $html .= '<td>';
-            if ($group_by == 'task') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+            $html .= htmlspecialchars($subtotals[$prev_grouped_by]['task']);
             $html .= '</td>';
         }
         if ($bean->getAttribute('chcf_1')) {
             $html .= '<td>';
-            if ($group_by == 'cf_1') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+            $html .= htmlspecialchars($subtotals[$prev_grouped_by]['cf_1']);
             $html .= '</td>';
         }
         if ($bean->getAttribute('chstart')) $html .= '<td></td>';
         if ($bean->getAttribute('chfinish')) $html .= '<td></td>';
         if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$subtotals[$prev_grouped_by]['time'].'</td>';
+        if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$subtotals[$prev_grouped_by]['units'].'</td>';
         if ($bean->getAttribute('chnote')) $html .= '<td></td>';
         if ($bean->getAttribute('chcost')) {
           $html .= "<td $styleRightAligned>";
@@ -231,6 +228,7 @@ if ($totals_only) {
     if ($bean->getAttribute('chstart')) $html .= "<td $styleRightAligned>".$item['start'].'</td>';
     if ($bean->getAttribute('chfinish')) $html .= "<td $styleRightAligned>".$item['finish'].'</td>';
     if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$item['duration'].'</td>';
+    if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$item['units'].'</td>';
     if ($bean->getAttribute('chnote')) $html .= '<td>'.htmlspecialchars($item['note']).'</td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
@@ -263,32 +261,33 @@ if ($totals_only) {
     $html .= '<td>'.$i18n->get('label.subtotal').'</td>';
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
       $html .= '<td>';
-      if ($group_by == 'user') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+      $html .= htmlspecialchars($subtotals[$prev_grouped_by]['user']);
       $html .= '</td>';
     }
     if ($bean->getAttribute('chclient')) {
       $html .= '<td>';
-      if ($group_by == 'client') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+      $html .= htmlspecialchars($subtotals[$prev_grouped_by]['client']);
       $html .= '</td>';
     }
     if ($bean->getAttribute('chproject')) {
       $html .= '<td>';
-      if ($group_by == 'project') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+      $html .= htmlspecialchars($subtotals[$prev_grouped_by]['project']);
       $html .= '</td>';
     }
     if ($bean->getAttribute('chtask')) {
       $html .= '<td>';
-      if ($group_by == 'task') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+      $html .= htmlspecialchars($subtotals[$prev_grouped_by]['task']);
       $html .= '</td>';
     }
     if ($bean->getAttribute('chcf_1')) {
       $html .= '<td>';
-      if ($group_by == 'cf_1') $html .= htmlspecialchars($subtotals[$prev_grouped_by]['name']);
+      $html .= htmlspecialchars($subtotals[$prev_grouped_by]['cf_1']);
       $html .= '</td>';
     }
     if ($bean->getAttribute('chstart')) $html .= '<td></td>';
     if ($bean->getAttribute('chfinish')) $html .= '<td></td>';
     if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$subtotals[$prev_grouped_by]['time'].'</td>';
+    if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$subtotals[$prev_grouped_by]['units'].'</td>';
     if ($bean->getAttribute('chnote')) $html .= '<td></td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
@@ -316,6 +315,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chstart')) $html .= '<td></td>';
   if ($bean->getAttribute('chfinish')) $html .= '<td></td>';
   if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$totals['time'].'</td>';
+  if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$totals['units'].'</td>';
   if ($bean->getAttribute('chnote')) $html .= '<td></td>';
   if ($bean->getAttribute('chcost')) {
     $html .= "<td $styleRightAligned>".htmlspecialchars($user->currency).' ';

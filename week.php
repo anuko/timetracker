@@ -92,7 +92,7 @@ if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
   $month_quota = $quota->get($selected_date->mYear, $selected_date->mMonth);
-  $month_total = ttTimeHelper::getTimeForMonth($user->getActiveUser(), $selected_date);
+  $month_total = ttTimeHelper::getTimeForMonth($user->getUser(), $selected_date);
   $minutes_left = round(60*$month_quota) - ttTimeHelper::toMinutes($month_total);
 
   $smarty->assign('month_total', $month_total);
@@ -128,7 +128,7 @@ $_SESSION['note'] = $cl_note;
 $dayHeaders = ttWeekViewHelper::getDayHeadersForWeek($startDate->toString(DB_DATEFORMAT));
 $lockedDays = ttWeekViewHelper::getLockedDaysForWeek($startDate->toString(DB_DATEFORMAT));
 // Get already existing records.
-$records = ttWeekViewHelper::getRecordsForInterval($user->getActiveUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
+$records = ttWeekViewHelper::getRecordsForInterval($user->getUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
 // Build data array for the table. Format is described in ttWeekViewHelper::getDataForWeekView function.
 if ($records)
   $dataArray = ttWeekViewHelper::getDataForWeekView($records, $dayHeaders);
@@ -433,7 +433,7 @@ if ($request->isPost()) {
               $result = ttWeekViewHelper::insertDurationFromWeekView($fields, $custom_fields, $err);
             } elseif ($postedDuration == null || 0 == ttTimeHelper::toMinutes($postedDuration)) {
               // Delete an already existing record here.
-              $result = ttTimeHelper::delete($dataArray[$rowNumber][$dayHeader]['tt_log_id'], $user->getActiveUser());
+              $result = ttTimeHelper::delete($dataArray[$rowNumber][$dayHeader]['tt_log_id'], $user->getUser());
             } else {
               $fields = array();
               $fields['tt_log_id'] = $dataArray[$rowNumber][$dayHeader]['tt_log_id'];
@@ -494,7 +494,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$week_total = ttTimeHelper::getTimeForWeek($user->getActiveUser(), $selected_date);
+$week_total = ttTimeHelper::getTimeForWeek($user->getUser(), $selected_date);
 
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);

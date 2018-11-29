@@ -42,6 +42,7 @@ define("LIBRARY_DIR", APP_DIR."/WEB-INF/lib");
 define("TEMPLATE_DIR", APP_DIR."/WEB-INF/templates");
 // Date format for database and URI parameters.
 define('DB_DATEFORMAT', '%Y-%m-%d');
+define('MAX_RANK', 512); // Max user rank.
 
 require_once(LIBRARY_DIR.'/common.lib.php');
 

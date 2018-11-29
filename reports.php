@@ -35,6 +35,7 @@ import('Period');
 import('ttProjectHelper');
 import('ttFavReportHelper');
 import('ttClientHelper');
+import('ttReportHelper');
 
 // Access check.
 if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports') || ttAccessAllowed('view_all_reports'))) {
@@ -148,7 +149,7 @@ if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isCli
   // Prepare user and assigned projects arrays.
   if ($user->can('view_reports') || $user->can('view_all_reports')) {
     $max_rank = $user->rank-1;
-    if ($user->can('view_all_reports')) $max_rank = 512;
+    if ($user->can('view_all_reports')) $max_rank = MAX_RANK;
     if ($user->can('view_own_reports'))
       $options = array('max_rank'=>$max_rank,'include_self'=>true);
     else
@@ -214,6 +215,9 @@ $form->addInput(array('type'=>'checkbox','name'=>'chcost'));
 // If we have a custom field - add a checkbox for it.
 if ($custom_fields && $custom_fields->fields[0])
   $form->addInput(array('type'=>'checkbox','name'=>'chcf_1'));
+if ($user->isPluginEnabled('wu'))
+  $form->addInput(array('type'=>'checkbox','name'=>'chunits'));
+
 // Add group by control.
 $group_by_options['no_grouping'] = $i18n->get('form.reports.group_by_no');
 $group_by_options['date'] = $i18n->get('form.reports.group_by_date');
@@ -228,7 +232,10 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
 if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
   $group_by_options['cf_1'] = $custom_fields->fields[0]['label'];
 }
-$form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by','data'=>$group_by_options));
+$group_by_options_size = sizeof($group_by_options);
+$form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by1','data'=>$group_by_options));
+if ($group_by_options_size > 2) $form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by2','data'=>$group_by_options));
+if ($group_by_options_size > 3) $form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by3','data'=>$group_by_options));
 $form->addInput(array('type'=>'checkbox','name'=>'chtotalsonly'));
 
 // Add text field for a new favorite report name.
@@ -260,6 +267,7 @@ if ($request->isGet() && !$bean->isSaved()) {
   $form->setValueByElement('chfinish', '1');
   $form->setValueByElement('chnote', '1');
   $form->setValueByElement('chcf_1', '0');
+  $form->setValueByElement('chunits', '0');
   $form->setValueByElement('chtotalsonly', '0');
 }
 
@@ -290,7 +298,7 @@ if ($request->isPost()) {
     if (!ttValidString($bean->getAttribute('new_fav_report'))) $err->add($i18n->get('error.field'), $i18n->get('form.reports.save_as_favorite'));
 
     if ($err->no()) {
-      $id = ttFavReportHelper::saveReport($user->id, $bean);
+      $id = ttFavReportHelper::saveReport($user->id, $bean); // TODO: review "on behalf" situations (both user and group), redesign if needed.
       if (!$id)
         $err->add($i18n->get('error.db'));
       if ($err->no()) {
@@ -328,10 +336,18 @@ if ($request->isPost()) {
       if ($start_date->compare($end_date) > 0)
         $err->add($i18n->get('error.interval'), $i18n->get('label.end_date'), $i18n->get('label.start_date'));
     }
-
-    $bean->saveBean();
+    $group_by1 = $bean->getAttribute('group_by1');
+    $group_by2 = $bean->getAttribute('group_by2');
+    $group_by3 = $bean->getAttribute('group_by3');
+    if (($group_by3 != null && $group_by3 != 'no_grouping') && ($group_by3 == $group_by1 || $group_by3 == $group_by2))
+      $err->add($i18n->get('error.field'), $i18n->get('form.reports.group_by'));
+    if (($group_by2 != null && $group_by2 != 'no_grouping') && ($group_by2 == $group_by1 || $group_by3 == $group_by2))
+      $err->add($i18n->get('error.field'), $i18n->get('form.reports.group_by'));
+    // Check remaining values.
+    if (!ttReportHelper::verifyBean($bean)) $err->add($i18n->get('error.sys'));
 
     if ($err->no()) {
+      $bean->saveBean();
       // Now we can go ahead and create a report.
       header('Location: report.php');
       exit();

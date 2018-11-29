@@ -30,19 +30,37 @@ require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
 import('ttRoleHelper');
+import('ttConfigHelper');
 
 // Access checks.
 if (!(ttAccessAllowed('manage_basic_settings') || ttAccessAllowed('manage_advanced_settings'))) {
   header('Location: access_denied.php');
   exit();
 }
+$group_id = (int)$request->getParameter('id');
+if ($group_id && !$user->isGroupValid($group_id)) {
+  header('Location: access_denied.php');
+  exit();
+}
 // End of access checks.
+
+if ($group_id) {
+  // We are passed a valid group_id.
+  // Set on behalf group accordingly.
+  $user->setOnBehalfGroup($group_id);
+}
+
+if (!$group_id) $group_id = $user->getGroup();
+$groups = $user->getGroupsForDropdown();
+$group = ttGroupHelper::getGroupAttrs($group_id);
+$config = new ttConfigHelper($group['config']);
 
 $advanced_settings = $user->can('manage_advanced_settings');
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
 
 if ($request->isPost()) {
   $cl_group = trim($request->getParameter('group_name'));
+  $cl_description = trim($request->getParameter('description'));
   $cl_currency = trim($request->getParameter('currency'));
   if (!$cl_currency) $cl_currency = CURRENCY_DEFAULT;
   $cl_lang = $request->getParameter('lang');
@@ -61,58 +79,43 @@ if ($request->isPost()) {
   $cl_uncompleted_indicators = $request->getParameter('uncompleted_indicators');
   $cl_bcc_email = trim($request->getParameter('bcc_email'));
   $cl_allow_ip = trim($request->getParameter('allow_ip'));
-
-  // Plugin checkboxes.
-  $cl_charts = $request->getParameter('charts');
-  $cl_clients = $request->getParameter('clients');
-  $cl_client_required = $request->getParameter('client_required');
-  $cl_invoices = $request->getParameter('invoices');
-  $cl_paid_status = $request->getParameter('paid_status');
-  $cl_custom_fields = $request->getParameter('custom_fields');
-  $cl_expenses = $request->getParameter('expenses');
-  $cl_tax_expenses = $request->getParameter('tax_expenses');
-  $cl_notifications = $request->getParameter('notifications');
-  $cl_locking = $request->getParameter('locking');
-  $cl_quotas = $request->getParameter('quotas');
-  $cl_week_view = $request->getParameter('week_view');
 } else {
-  $cl_group = $user->group;
-  $cl_currency = ($user->currency == ''? CURRENCY_DEFAULT : $user->currency);
-  $cl_lang = $user->lang;
-  $cl_decimal_mark = $user->decimal_mark;
-  $cl_date_format = $user->date_format;
-  $cl_time_format = $user->time_format;
-  $cl_start_week = $user->week_start;
-  $cl_show_holidays = $user->show_holidays;
-  $cl_tracking_mode = $user->tracking_mode;
-  $cl_project_required = $user->project_required;
-  $cl_task_required = $user->task_required;
-  $cl_record_type = $user->record_type;
-  $cl_punch_mode = $user->punch_mode;
-  $cl_allow_overlap = $user->allow_overlap;
-  $cl_future_entries = $user->future_entries;
-  $cl_uncompleted_indicators = $user->uncompleted_indicators;
-  $cl_bcc_email = $user->bcc_email;
-  $cl_allow_ip = $user->allow_ip;
-
-  // Which plugins do we have enabled?
-  $plugins = explode(',', $user->plugins);
-  $cl_charts = in_array('ch', $plugins);
-  $cl_clients = in_array('cl', $plugins);
-  $cl_client_required = in_array('cm', $plugins);
-  $cl_invoices = in_array('iv', $plugins);
-  $cl_paid_status = in_array('ps', $plugins);
-  $cl_custom_fields = in_array('cf', $plugins);
-  $cl_expenses = in_array('ex', $plugins);
-  $cl_tax_expenses = in_array('et', $plugins);
-  $cl_notifications = in_array('no', $plugins);
-  $cl_locking = in_array('lk', $plugins);
-  $cl_quotas = in_array('mq', $plugins);
-  $cl_week_view = in_array('wv', $plugins);
+  $cl_group = $group['name'];
+  $cl_description = $group['description'];
+  $cl_currency = ($group['currency'] == ''? CURRENCY_DEFAULT : $group['currency']);
+  $cl_lang = $group['lang'];
+  $cl_decimal_mark = $group['decimal_mark'];
+  $cl_date_format = $group['date_format'];
+  $cl_time_format = $group['time_format'];
+  $cl_start_week = $group['week_start'];
+  $cl_show_holidays = $config->getDefinedValue('show_holidays');
+  $cl_tracking_mode = $group['tracking_mode'];
+  $cl_project_required = $group['project_required'];
+  $cl_task_required = $group['task_required'];
+  $cl_record_type = $group['record_type'];
+  $cl_punch_mode = $config->getDefinedValue('punch_mode');
+  $cl_allow_overlap = $config->getDefinedValue('allow_overlap');
+  $cl_future_entries = $config->getDefinedValue('future_entries');
+  $cl_uncompleted_indicators = $config->getDefinedValue('uncompleted_indicators');
+  $cl_bcc_email = $group['bcc_email'];
+  $cl_allow_ip = $group['allow_ip'];
 }
 
 $form = new Form('groupForm');
+$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$group_id));
+if (count($groups) > 1) {
+  $form->addInput(array('type'=>'combobox',
+    'onchange'=>'document.groupForm.group_changed.value=1;document.groupForm.submit();',
+    'name'=>'group',
+    'style'=>'width: 250px;',
+    'value'=>$group_id,
+    'data'=>$groups,
+    'datakeys'=>array('id','name')));
+  $form->addInput(array('type'=>'hidden','name'=>'group_changed'));
+  $smarty->assign('group_dropdown', 1);
+}
 $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','value'=>$cl_group,'enable'=>$advanced_settings));
+$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
 
 // Prepare an array of available languages.
@@ -194,32 +197,29 @@ if ($advanced_settings) {
   $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'allow_ip','value'=>$cl_allow_ip));
 }
 
-// Plugin checkboxes.
-$form->addInput(array('type'=>'checkbox','name'=>'charts','value'=>$cl_charts));
-$form->addInput(array('type'=>'checkbox','name'=>'clients','value'=>$cl_clients,'onchange'=>'handlePluginCheckboxes()'));
-$form->addInput(array('type'=>'checkbox','name'=>'client_required','value'=>$cl_client_required));
-$form->addInput(array('type'=>'checkbox','name'=>'invoices','value'=>$cl_invoices));
-$form->addInput(array('type'=>'checkbox','name'=>'paid_status','value'=>$cl_paid_status));
-$form->addInput(array('type'=>'checkbox','name'=>'custom_fields','value'=>$cl_custom_fields,'onchange'=>'handlePluginCheckboxes()'));
-$form->addInput(array('type'=>'checkbox','name'=>'expenses','value'=>$cl_expenses,'onchange'=>'handlePluginCheckboxes()'));
-$form->addInput(array('type'=>'checkbox','name'=>'tax_expenses','value'=>$cl_tax_expenses));
-$form->addInput(array('type'=>'checkbox','name'=>'notifications','value'=>$cl_notifications,'onchange'=>'handlePluginCheckboxes()'));
-$form->addInput(array('type'=>'checkbox','name'=>'locking','value'=>$cl_locking,'onchange'=>'handlePluginCheckboxes()'));
-$form->addInput(array('type'=>'checkbox','name'=>'quotas','value'=>$cl_quotas,'onchange'=>'handlePluginCheckboxes()'));
-$form->addInput(array('type'=>'checkbox','name'=>'week_view','value'=>$cl_week_view,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 if ($user->can('delete_group')) $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('button.delete')));
 
+$form->setValueByElement('group_changed','');
+
 if ($request->isPost()) {
+  if ($request->getParameter('group_changed')) {
+    // User changed the group in dropdown.
+    $new_group_id = $request->getParameter('group');
+    // Redirect to self.
+    header('Location: group_edit.php?id='.$new_group_id);
+    exit();
+  }
 
   if ($request->getParameter('btn_delete')) {
     // Delete button pressed, redirect.
-    header('Location: group_delete.php?id='.$user->group_id);
+    header('Location: group_delete.php?id='.$group_id);
     exit();
   }
 
   // Validate user input.
-  if (!ttValidString($cl_group, true)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
+  if (!ttValidString($cl_group)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
+  if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
   if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));
   if ($advanced_settings) {
     if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
@@ -228,58 +228,17 @@ if ($request->isPost()) {
   // Finished validating user input.
 
   if ($err->no()) {
-    // Prepare plugins string.
-    if ($cl_charts)
-      $plugins .= ',ch';
-    if ($cl_clients)
-      $plugins .= ',cl';
-    if ($cl_client_required)
-      $plugins .= ',cm';
-    if ($cl_invoices)
-      $plugins .= ',iv';
-    if ($cl_paid_status)
-      $plugins .= ',ps';
-    if ($cl_custom_fields)
-      $plugins .= ',cf';
-    if ($cl_expenses)
-      $plugins .= ',ex';
-    if ($cl_tax_expenses)
-      $plugins .= ',et';
-    if ($cl_notifications)
-      $plugins .= ',no';
-    if ($cl_locking)
-      $plugins .= ',lk';
-    if ($cl_quotas)
-      $plugins .= ',mq';
-    if ($cl_week_view)
-      $plugins .= ',wv';
-
-    // Recycle week view plugin options as they are not configured on this page.
-    $existing_plugins = explode(',', $user->plugins);
-    if (in_array('wvn', $existing_plugins))
-      $plugins .= ',wvn';
-    if (in_array('wvl', $existing_plugins))
-      $plugins .= ',wvl';
-    if (in_array('wvns', $existing_plugins))
-      $plugins .= ',wvns';
-
-    $plugins = trim($plugins, ',');
-
-    // Prepare config string.
-    if ($cl_show_holidays)
-      $config .= ',show_holidays';
-    if ($cl_punch_mode)
-      $config .= ',punch_mode';
-    if ($cl_allow_overlap)
-      $config .= ',allow_overlap';
-    if ($cl_future_entries)
-      $config .= ',future_entries';
-    if ($cl_uncompleted_indicators)
-      $config .= ',uncompleted_indicators';
-    $config = trim($config, ',');
+    // Update config.
+    $config->setDefinedValue('show_holidays', $cl_show_holidays);
+    $config->setDefinedValue('punch_mode', $cl_punch_mode);
+    $config->setDefinedValue('allow_overlap', $cl_allow_overlap);
+    $config->setDefinedValue('future_entries', $cl_future_entries);
+    $config->setDefinedValue('uncompleted_indicators', $cl_uncompleted_indicators);
 
     if ($user->updateGroup(array(
+      'group_id' => $group_id,
       'name' => $cl_group,
+      'description' => $cl_description,
       'currency' => $cl_currency,
       'lang' => $cl_lang,
       'decimal_mark' => $cl_decimal_mark,
@@ -293,9 +252,8 @@ if ($request->isPost()) {
       'uncompleted_indicators' => $cl_uncompleted_indicators,
       'bcc_email' => $cl_bcc_email,
       'allow_ip' => $cl_allow_ip,
-      'plugins' => $plugins,
-      'config' => $config))) {
-      header('Location: time.php');
+      'config' => $config->getConfig()))) {
+      header('Location: success.php');
       exit();
     } else
       $err->add($i18n->get('error.db'));
@@ -303,8 +261,10 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
+$smarty->assign('group_id', $group_id);
+$smarty->assign('group_dropdown', count($groups) > 1);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="handleTaskRequiredCheckbox(); handlePluginCheckboxes();"');
-$smarty->assign('title', $i18n->get('title.group'));
+$smarty->assign('title', $i18n->get('title.edit_group'));
 $smarty->assign('content_page_name', 'group_edit.tpl');
 $smarty->display('index.tpl');

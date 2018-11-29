@@ -72,8 +72,10 @@ if ($request->isPost()) {
 
     // Obtain session bean with report attributes.
     $bean = new ActionForm('reportBean', new Form('reportForm'));
+    $options = ttReportHelper::getReportOptions($bean);
+
     // Prepare report body.
-    $body = ttReportHelper::prepareReportBody($bean, $cl_comment);
+    $body = ttReportHelper::prepareReportBody($options, $cl_comment);
 
     import('mail.Mailer');
     $mailer = new Mailer();

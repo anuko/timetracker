@@ -36,7 +36,7 @@ if (!ttAccessAllowed('manage_projects')) {
   header('Location: access_denied.php');
   exit();
 }
-if (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+if (MODE_PROJECTS != $user->getTrackingMode() && MODE_PROJECTS_AND_TASKS != $user->getTrackingMode()) {
   header('Location: feature_disabled.php');
   exit();
 }
@@ -52,7 +52,7 @@ $users = ttTeamHelper::getActiveUsers();
 foreach ($users as $user_item)
   $all_users[$user_item['id']] = $user_item['name'];
 
-$tasks = ttTeamHelper::getActiveTasks($user->group_id);
+$tasks = ttTeamHelper::getActiveTasks($user->getGroup());
 foreach ($tasks as $task_item)
   $all_tasks[$task_item['id']] = $task_item['name'];
 
@@ -85,7 +85,7 @@ $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
 $form->addInput(array('type'=>'checkboxgroup','name'=>'users','data'=>$all_users,'layout'=>'H','value'=>$cl_users));
-if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+if (MODE_PROJECTS_AND_TASKS == $user->getTrackingMode())
   $form->addInput(array('type'=>'checkboxgroup','name'=>'tasks','data'=>$all_tasks,'layout'=>'H','value'=>$cl_tasks));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->get('button.copy')));
@@ -112,13 +112,14 @@ if ($request->isPost()) {
         } else
            $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->get('error.project_exists'));
+        $err->add($i18n->get('error.object_exists'));
     }
 
     if ($request->getParameter('btn_copy')) {
       if (!ttProjectHelper::getProjectByName($cl_name)) {
         if (ttProjectHelper::insert(array(
-          'group_id' => $user->group_id,
+          'group_id' => $user->getGroup(),
+          'org_id' => $user->org_id,
           'name' => $cl_name,
           'description' => $cl_description,
           'users' => $cl_users,
@@ -129,12 +130,14 @@ if ($request->isPost()) {
         } else
           $err->add($i18n->get('error.db'));
       } else
-        $err->add($i18n->get('error.project_exists'));
+        $err->add($i18n->get('error.object_exists'));
     }
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('show_users', count($users) > 0);
+$smarty->assign('show_tasks', count($tasks) > 0);
 $smarty->assign('onload', 'onLoad="document.projectForm.name.focus()"');
 $smarty->assign('title', $i18n->get('title.edit_project'));
 $smarty->assign('content_page_name', 'project_edit.tpl');

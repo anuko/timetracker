@@ -56,7 +56,6 @@ if ($request->isPost()) {
   if (!ttValidFloat($cl_cost)) $err->add($i18n->get('error.field'), $i18n->get('label.cost'));
   if ($err->no()) {
     if (ttPredefinedExpenseHelper::insert(array(
-        'group_id' => $user->group_id,
         'name' => $cl_name,
         'cost' => $cl_cost))) {
         header('Location: predefined_expenses.php');

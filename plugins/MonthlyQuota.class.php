@@ -33,20 +33,22 @@ class MonthlyQuota {
 
   var $db;       // Database connection.
   var $group_id; // Group id.
+  var $org_id;   // Organization id.
 
   function __construct() {
     $this->db = getConnection();
     global $user;
-    $this->group_id = $user->group_id;
+    $this->group_id = $user->getGroup();
+    $this->org_id = $user->org_id;
   }
 
   // update - deletes a quota, then inserts a new one.
   public function update($year, $month, $minutes) {
-    $group_id = $this->group_id;
-    $deleteSql = "DELETE FROM tt_monthly_quotas WHERE year = $year AND month = $month AND group_id = $group_id";
+    $deleteSql = "DELETE FROM tt_monthly_quotas WHERE year = $year AND month = $month AND group_id = $this->group_id";
     $this->db->exec($deleteSql);
     if ($minutes){
-      $insertSql = "INSERT INTO tt_monthly_quotas (group_id, year, month, minutes) values ($group_id, $year, $month, $minutes)";
+      $insertSql = "INSERT INTO tt_monthly_quotas (group_id, org_id, year, month, minutes)".
+        " values ($this->group_id, $this->org_id, $year, $month, $minutes)";
       $affected = $this->db->exec($insertSql);
       return (!is_a($affected, 'PEAR_Error'));
     }
@@ -64,8 +66,7 @@ class MonthlyQuota {
 
   // getSingle - obtains a quota for a single month.
   private function getSingle($year, $month) {
-    $group_id = $this->group_id;
-    $sql = "SELECT minutes FROM tt_monthly_quotas WHERE year = $year AND month = $month AND group_id = $group_id";
+    $sql = "SELECT minutes FROM tt_monthly_quotas WHERE year = $year AND month = $month AND group_id = $this->group_id";
     $reader = $this->db->query($sql);
     if (is_a($reader, 'PEAR_Error')) {
       return false;
@@ -83,8 +84,7 @@ class MonthlyQuota {
 
   // getMany - returns an array of quotas for a given year for group.
   private function getMany($year){
-    $group_id = $this->group_id;
-    $sql = "SELECT month, minutes FROM tt_monthly_quotas WHERE year = $year AND group_id = $group_id";
+    $sql = "SELECT month, minutes FROM tt_monthly_quotas WHERE year = $year AND group_id = $this->group_id";
     $result = array();
     $res = $this->db->query($sql);
     if (is_a($res, 'PEAR_Error')) {

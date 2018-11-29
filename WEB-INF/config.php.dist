@@ -37,7 +37,7 @@ set_include_path(realpath(dirname(__FILE__).'/lib/pear') . PATH_SEPARATOR . get_
 // CHANGE 3 PARAMETERS HERE!
 // In this example: "root" is username, "no" is password, "dbname" is database name.
 //
-define('DSN', 'mysqli://root:no@localhost/dbname?charset=utf8');
+define('DSN', 'mysqli://root:no@localhost/dbname?charset=utf8mb4');
 // Do NOT change charset unless you upgraded from an older Time Tracker where charset was NOT specified
 // and now you see some corrupted characters. See http://dev.mysql.com/doc/refman/5.0/en/charset-mysql.html
 
@@ -57,16 +57,6 @@ define('MULTITEAM_MODE', true);
 // define('APP_NAME', 'timetracker');
 //
 define('APP_NAME', '');
-
-
-// OLD_PASSWORDS
-//
-// You may need to set this option if you migrate an older version of TT installation to a new server.
-// Older versions of TT used mysql password function to hash user passwords. Newer versions use md5.
-// Because the password function may behave differently between servers, the OLD_PASSWORD settings
-// gives you an opportunity to control it, if needed.
-//  
-// define('OLD_PASSWORDS', true);
 
 
 // WEEKEND_START_DAY
@@ -207,3 +197,6 @@ define('AUTH_MODULE', 'db');
 
 // Height in pixels for the note input field in time.php. Defaults to 40.
 // define('NOTE_INPUT_HEIGHT', 100);
+
+// A temporary config option while development of subgroup support is ongoing. To be removed later.
+// define('SUBGROUP_DEBUG', false);

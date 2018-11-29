@@ -37,13 +37,13 @@ if (!ttAccessAllowed('manage_tasks')) {
   header('Location: access_denied.php');
   exit();
 }
-if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+if (MODE_PROJECTS_AND_TASKS != $user->getTrackingMode()) {
   header('Location: feature_disabled.php');
   exit();
 }
 // End of access checks.
 
-$projects = ttTeamHelper::getActiveProjects($user->group_id);
+$projects = ttTeamHelper::getActiveProjects($user->getGroup());
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -68,7 +68,8 @@ if ($request->isPost()) {
   if ($err->no()) {
     if (!ttTaskHelper::getTaskByName($cl_name)) {
       if (ttTaskHelper::insert(array(
-        'group_id' => $user->group_id,
+        'group_id' => $user->getGroup(),
+        'org_id' => $user->org_id,
         'name' => $cl_name,
         'description' => $cl_description,
         'status' => ACTIVE,
@@ -78,11 +79,12 @@ if ($request->isPost()) {
         } else
           $err->add($i18n->get('error.db'));
     } else
-      $err->add($i18n->get('error.task_exists'));
+      $err->add($i18n->get('error.object_exists'));
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('show_projects', count($projects) > 0);
 $smarty->assign('onload', 'onLoad="document.taskForm.name.focus()"');
 $smarty->assign('title', $i18n->get('title.add_task'));
 $smarty->assign('content_page_name', 'task_add.tpl');

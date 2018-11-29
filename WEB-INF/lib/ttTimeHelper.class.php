@@ -383,13 +383,15 @@ class ttTimeHelper {
     return false;
   }
 
-  // insert - inserts a time record into log table. Does not deal with custom fields.
+  // insert - inserts a time record into tt_log table. Does not deal with custom fields.
   static function insert($fields)
   {
     global $user;
     $mdb2 = getConnection();
 
-    $user_id = $fields['user_id'];
+    $user_id = (int) $fields['user_id'];
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
     $date = $fields['date'];
     $start = $fields['start'];
     $finish = $fields['finish'];
@@ -422,8 +424,8 @@ class ttTimeHelper {
     if (!$paid) $paid = 0;
 
     if ($duration) {
-      $sql = "insert into tt_log (user_id, date, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by $status_f) ".
-        "values ($user_id, ".$mdb2->quote($date).", '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v $status_v)";
+      $sql = "insert into tt_log (user_id, group_id, org_id, date, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by $status_f) ".
+        "values ($user_id, $group_id, $org_id, ".$mdb2->quote($date).", '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v $status_v)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -432,8 +434,8 @@ class ttTimeHelper {
       if ($duration === false) $duration = 0;
       if (!$duration && ttTimeHelper::getUncompleted($user_id)) return false;
 
-      $sql = "insert into tt_log (user_id, date, start, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by $status_f) ".
-        "values ($user_id, ".$mdb2->quote($date).", '$start', '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v $status_v)";
+      $sql = "insert into tt_log (user_id, group_id, org_id, date, start, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by $status_f) ".
+        "values ($user_id, $group_id, $org_id, ".$mdb2->quote($date).", '$start', '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v $status_v)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;

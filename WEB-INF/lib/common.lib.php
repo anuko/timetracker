@@ -165,7 +165,7 @@ function check_extension($ext)
 // isTrue is a helper function to return correct false for older config.php values defined as a string 'false'.
 function isTrue($val)
 {
-  return ($val == false || $val === 'false') ? false : true;
+  return ($val === true);
 }
 
 // ttValidString is used to check user input to validate a string.
@@ -319,7 +319,7 @@ function ttValidCondition($val, $emptyValid = true)
   if (stristr($val, '<script>') || stristr($val, '<script '))
     return false;
 
-  if (!preg_match("/^count\s?>\s?\d+$/", $val))
+  if (!preg_match("/^count\s?(=|[<>]=?|<>)\s?\d+$/", $val))
     return false;
 
   return true;
@@ -382,4 +382,19 @@ function ttAccessAllowed($required_right)
   }
 
   return false;
+}
+
+// ttStartsWith functions checks if a string starts with a given substring.
+function ttStartsWith($string, $startString)
+{
+    $len = strlen($startString);
+    return (substr($string, 0, $len) === $startString);
+}
+
+// ttDateToUserFormat converts a date from database format to user format.
+function ttDateToUserFormat($date)
+{
+  global $user;
+  $o_date = new DateAndTime(DB_DATEFORMAT, $date);
+  return $o_date->toString($user->date_format);
 }

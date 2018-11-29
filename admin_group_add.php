@@ -29,7 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
-import('ttRoleHelper');
+import('ttAdmin');
 
 // Access checks.
 if (!ttAccessAllowed('administer_site')) {
@@ -82,34 +82,39 @@ $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_email',
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.submit')));
 
 if ($request->isPost()) {
+  // Validate user input.
+  if (!ttValidString($cl_group_name))
+    $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
+  if (!ttValidString($cl_manager_name))
+    $err->add($i18n->get('error.field'), $i18n->get('label.manager_name'));
+  if (!ttValidString($cl_manager_login))
+    $err->add($i18n->get('error.field'), $i18n->get('label.manager_login'));
+  if (ttUserHelper::getUserByLogin($cl_manager_login))
+    $err->add($i18n->get('error.user_exists'));
+  if (!ttValidString($cl_password1))
+    $err->add($i18n->get('error.field'), $i18n->get('label.password'));
+  if (!ttValidString($cl_password2))
+    $err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
+  if ($cl_password1 !== $cl_password2)
+    $err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
+  if (!ttValidEmail($cl_manager_email, true))
+    $err->add($i18n->get('error.field'), $i18n->get('label.email'));
 
-  /*
-   * Note: creating a group by admin is pretty much the same as self-registration,
-   * except that created_by fields for group and user must be set to admin account.
-   * Therefore, we'll reuse ttRegistrator instance to create a group here
-   * and override created_by fields using ttRegistrator::setCreatedBy() function.
-   */
-
-  // Create fields array for ttRegistrator instance.
   if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
-  $fields = array(
-    'user_name' => $cl_manager_name,
-    'login' => $cl_manager_login,
-    'password1' => $cl_password1,
-    'password2' => $cl_password2,
-    'email' => $cl_manager_email,
-    'group_name' => $cl_group_name,
-    'currency' => CURRENCY_DEFAULT,
-    'lang' => $cl_lang);
 
-  // Create an instance of ttRegistrator class.
-  import('ttRegistrator');
-  $registrator = new ttRegistrator($fields, $err);
-  $registrator->register();
-  $registrator->setCreatedBy($user->id); // Override created_by to admin account.
   if ($err->no()) {
-    header('Location: admin_groups.php');
-    exit();
+    if (ttAdmin::createOrg(array('group_name' => $cl_group_name,
+      'currency' => CURRENCY_DEFAULT,
+      'lang' => $cl_lang,
+      'user_name' => $cl_manager_name,
+      'login' => $cl_manager_login,
+      'password' => $cl_password1,
+      'email' => $cl_manager_email))) {
+      header('Location: admin_groups.php');
+      exit();
+    } else {
+      $err->add($i18n->get('error.db'));
+    }
   }
 } // isPost
 
@@ -117,5 +122,5 @@ $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.groupForm.group_name.focus()"');
 $smarty->assign('content_page_name', 'admin_group_add.tpl');
-$smarty->assign('title', $i18n->get('title.create_group'));
+$smarty->assign('title', $i18n->get('title.add_group'));
 $smarty->display('index.tpl');

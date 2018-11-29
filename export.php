@@ -27,7 +27,7 @@
 // +----------------------------------------------------------------------+
 
 require_once('initialize.php');
-import('ttExportHelper');
+import('ttOrgExportHelper');
 import('form.Form');
 
 // Access check.
@@ -56,7 +56,7 @@ if ($request->isPost()) {
     $mime_type = 'application/x-bzip2';
   }
 
-  $exportHelper = new ttExportHelper();
+  $exportHelper = new ttOrgExportHelper();
   if ($exportHelper->createDataFile($compress)) {
     header('Pragma: public'); // This is needed for IE8 to download files over https.
     header('Content-Type: '.$mime_type);

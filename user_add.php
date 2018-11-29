@@ -46,7 +46,7 @@ if (!ttAccessAllowed('manage_users')) {
 @include('plugins/limit/user_add.php');
 
 if ($user->isPluginEnabled('cl'))
-  $clients = ttTeamHelper::getActiveClients($user->group_id);
+  $clients = ttTeamHelper::getActiveClients($user->getGroup());
 
 $assigned_projects = array();
 if ($request->isPost()) {
@@ -90,7 +90,7 @@ if ($user->isPluginEnabled('cl'))
 
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','format'=>'.2','value'=>$cl_rate));
 
-$projects = ttTeamHelper::getActiveProjects($user->group_id);
+$projects = ttTeamHelper::getActiveProjects($user->getGroup());
 
 // Define classes for the projects table.
 class NameCellRenderer extends DefaultCellRenderer {
@@ -150,7 +150,8 @@ if ($request->isPost()) {
         'login' => $cl_login,
         'password' => $cl_password1,
         'rate' => $cl_rate,
-        'group_id' => $user->group_id,
+        'group_id' => $user->getGroup(),
+        'org_id' => $user->org_id,
         'role_id' => $cl_role_id,
         'client_id' => $cl_client_id,
         'projects' => $assigned_projects,
@@ -168,6 +169,7 @@ if ($request->isPost()) {
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('active_roles', $active_roles);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('show_projects', count($projects) > 0);
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
 $smarty->assign('title', $i18n->get('title.add_user'));
 $smarty->assign('content_page_name', 'user_add.tpl');

@@ -51,6 +51,7 @@ $i18n_key_words = array(
 'menu.profile' => 'Profil',
 // TODO: translate the following.
 // 'menu.group' => 'Group',
+// 'menu.plugins' => 'Plugins',
 'menu.time' => 'Tid',
 // TODO: translate the following.
 // 'menu.expenses' => 'Expenses',
@@ -62,6 +63,7 @@ $i18n_key_words = array(
 'menu.users' => 'Brukere',
 // TODO: translate the following.
 // 'menu.groups' => 'Groups',
+// 'menu.subgroups' => 'Subgroups',
 'menu.export' => 'Eksport',
 'menu.clients' => 'Klienter',
 'menu.options' => 'Opsjoner',
@@ -97,11 +99,6 @@ $i18n_key_words = array(
 'error.user_exists' => 'Bruker med et slikt brukernavn eksisterer allerede.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',
-'error.project_exists' => 'Et prosjekt med dette navnet er allerede opprettet.',
-// TODO: translate the following.
-// 'error.task_exists' => 'Task with this name already exists.',
-'error.client_exists' => 'En klient med dette navnet er allerede opprettet.',
-// TODO: translate the following.
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.role_exists' => 'Role with this rank already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
@@ -111,12 +108,21 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.range_locked' => 'Date range is locked.',
 'error.mail_send' => 'Feil ved sending av e-post.',
+// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
+// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
 'error.no_email' => 'Det er ingen e-post knyttet til dette brukernavnet.',
 'error.uncompleted_exists' => 'Ufullført registrering finnes allerede. Lukk eller slett den.',
 'error.goto_uncompleted' => 'Gå til ufullført registrering.',
 // TODO: translate the following.
 // 'error.overlap' => 'Time interval overlaps with existing records.',
 // 'error.future_date' => 'Date is in future.',
+// 'error.xml' => 'Error in XML file at line %d: %s.',
+// 'error.cannot_import' => 'Cannot import: %s.',
+// 'error.format' => 'Invalid file format.',
+
+// Success messages.
+// TODO: translate the following.
+// 'msg.success' => 'Operation completed successfully.',
 
 // Labels for buttons.
 'button.login' => 'Innlogging',
@@ -165,6 +171,8 @@ $i18n_key_words = array(
 'label.user' => 'Bruker',
 'label.users' => 'Brukere',
 // TODO: translate the following.
+// 'label.group' => 'Group',
+// 'label.subgroups' => 'Subgroups',
 // 'label.roles' => 'Roles',
 'label.client' => 'Klient',
 'label.clients' => 'Klienter',
@@ -249,12 +257,19 @@ $i18n_key_words = array(
 // 'label.mark_paid' => 'Mark paid',
 // 'label.week_note' => 'Week note',
 // 'label.week_list' => 'Week list',
+// 'label.work_units' => 'Work units',
+// 'label.work_units_short' => 'Units',
+// 'label.totals_only' => 'Totals only',
 
 // Form titles.
+// TODO: Translate the following.
+// 'title.error' => 'Error',
+// 'title.success' => 'Success',
 'title.login' => 'Innlogging',
 // TODO: translate the following.
 // 'title.groups' => 'Groups',
-// 'title.create_group' => 'Creating Group',
+// 'title.subgroups' => 'Subgroups',
+// 'title.add_group' => 'Adding Group',
 // 'title.edit_group' => 'Editing Group',
 'title.delete_group' => 'Slett team', // TODO: change "team" to "group".
 // TODO: translate the following.
@@ -315,7 +330,7 @@ $i18n_key_words = array(
 'title.options' => 'Opsjoner',
 'title.profile' => 'Profil',
 // TODO: translate the following.
-// 'title.group' => 'Group Settings',
+// 'title.plugins' => 'Plugins',
 // 'title.cf_custom_fields' => 'Custom Fields',
 // 'title.cf_add_custom_field' => 'Adding Custom Field',
 // 'title.cf_edit_custom_field' => 'Editing Custom Field',
@@ -329,6 +344,7 @@ $i18n_key_words = array(
 // 'title.locking' => 'Locking',
 // 'title.week_view' => 'Week View',
 // 'title.swap_roles' => 'Swapping Roles',
+// 'title.work_units' => 'Work Units',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -415,7 +431,6 @@ $i18n_key_words = array(
 'form.reports.group_by_project' => 'prosjekt',
 // TODO: translate the following.
 // 'form.reports.group_by_task' => 'task',
-// 'form.reports.totals_only' => 'Totals only',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
@@ -490,7 +505,7 @@ $i18n_key_words = array(
 'form.export.compression_none' => 'ingen',
 'form.export.compression_bzip' => 'bzip',
 
-// Importing Group Data form. See example at https://timetracker.anuko.com/imort.php (login as admin first).
+// Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
 'form.import.hint' => 'Import team data fra en xml fil.', // TODO: replace "team" with "group".
 'form.import.file' => 'Velg fil',
 'form.import.success' => 'Import gjennomført vellykket.',
@@ -517,7 +532,6 @@ $i18n_key_words = array(
 // 'form.group_edit.future_entries' => 'Future entries',
 // 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
 // 'form.group_edit.allow_ip' => 'Allow IP',
-// 'form.group_edit.plugins' => 'Plugins',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.
@@ -544,6 +558,11 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
 // 'form.swap.swap_with' => 'Swap roles with',
+
+// Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
+// TODO: translate the following.
+// 'form.work_units.minutes_in_unit' => 'Minutes in unit',
+// 'form.work_units.1st_unit_threshold' => '1st unit threshold',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 // TODO: translate the following.
