@@ -60,6 +60,7 @@ class ttUser {
   var $allow_overlap = 0;       // Whether to allow overlapping time entries.
   var $future_entries = 0;      // Whether to allow creating future entries.
   var $uncompleted_indicators = 0; // Uncompleted time entry indicators (show nowhere or on users page).
+  var $confirm_save = 1; // Work in progress. TODO: change default to 0 and get from group config upon init.
   var $bcc_email = null;        // Bcc email.
   var $allow_ip = null;         // Specification from where user is allowed access.
   var $password_complexity = null; // Password complexity example.

@@ -147,7 +147,8 @@ $form->addInput(array('type'=>'datefield','name'=>'date','maxlength'=>'20','valu
 // Hidden control for record id.
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_save or btn_copy click.
-$form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.save')));
+// TODO: improve on conditional confirmSave.
+$form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>'browser_today.value=get_date();return(confirmSave())','value'=>$i18n->get('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.copy')));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 
@@ -219,6 +220,9 @@ if ($request->isPost()) {
     exit();
   }
 } // isPost
+
+// TODO: improve on conditional confirmSave.
+$smarty->assign('entry_date', $cl_date);
 
 $smarty->assign('predefined_expenses', $predefined_expenses);
 $smarty->assign('client_list', $client_list);

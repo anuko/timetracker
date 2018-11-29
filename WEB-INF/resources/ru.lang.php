@@ -103,7 +103,7 @@ $i18n_key_words = array(
 
 // Warning messages.
 'warn.sure' => 'Вы уверены?',
-'warn.confirm_save' => 'Дата изменена. Подвердите сохранение, а не копирование этой записи.',
+'warn.confirm_save' => 'Дата изменена. Подтвердите сохранение, а не копирование записи.',
 
 // Success messages.
 'msg.success' => 'Операция завершена успешно.',

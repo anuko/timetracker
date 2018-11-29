@@ -1,5 +1,19 @@
 {include file="time_script.tpl"}
 
+<script>
+// TODO: improve on conditional confirmSave.
+// Existing entry date for confirm save warnings.
+var original_date = "{$entry_date}";
+
+function confirmSave() {
+  var date_on_save = document.getElementById("date").value;
+  if (original_date != date_on_save) {
+    return confirm("{$i18n.warn.confirm_save}");
+  }
+}
+// TODO: improve on conditional confirmSave above.
+</script>
+
 {$forms.timeRecordForm.open}
 <table cellspacing="4" cellpadding="7" border="0">
 <tr>
