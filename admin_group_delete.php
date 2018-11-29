@@ -36,8 +36,8 @@ if (!ttAccessAllowed('administer_site')) {
   exit();
 }
 $group_id = (int)$request->getParameter('id');
-$group_details = ttAdmin::getGroupDetails($group_id);
-if (!($group_id && $group_details)) {
+$group_name = ttAdmin::getGroupName($group_id);
+if (!($group_id && $group_name)) {
   header('Location: access_denied.php');
   exit();
 }
@@ -63,7 +63,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$smarty->assign('group_to_delete', $group_details['group_name']);
+$smarty->assign('group_to_delete', $group_name);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.delete_group'));
 $smarty->assign('content_page_name', 'admin_group_delete.tpl');

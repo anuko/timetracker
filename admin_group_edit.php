@@ -37,12 +37,15 @@ if (!ttAccessAllowed('administer_site')) {
   exit();
 }
 $group_id = (int)$request->getParameter('id');
-$group_details = ttAdmin::getGroupDetails($group_id);
-if (!($group_id && $group_details)) {
+$group_name = ttAdmin::getGroupName($group_id);
+if (!($group_id && $group_name)) {
   header('Location: access_denied.php');
   exit();
 }
 // End of access checks.
+
+$org_details = ttAdmin::getOrgDetails($group_id);
+if (!$org_details) $err->add($i18n->get('error.db'));
 
 if ($request->isPost()) {
   $cl_group_name = trim($request->getParameter('group_name'));
@@ -54,13 +57,13 @@ if ($request->isPost()) {
   }
   $cl_manager_email = trim($request->getParameter('manager_email'));
 } else {
-  $cl_group_name = $group_details['group_name'];
-  $cl_manager_name = $group_details['manager_name'];
-  $cl_manager_login = $group_details['manager_login'];
+  $cl_group_name = $org_details['group_name'];
+  $cl_manager_name = $org_details['manager_name'];
+  $cl_manager_login = $org_details['manager_login'];
   if (!$auth->isPasswordExternal()) {
     $cl_password1 = $cl_password2 = '';
   }
-  $cl_manager_email = $group_details['manager_email'];
+  $cl_manager_email = $org_details['manager_email'];
 }
 
 $form = new Form('groupForm');
@@ -87,7 +90,7 @@ if ($request->isPost()) {
     if (!ttValidString($cl_manager_login))
       $err->add($i18n->get('error.field'), $i18n->get('label.manager_login'));
     // If we change login, it must be unique.
-    if ($cl_manager_login != $group_details['manager_login']) {
+    if ($cl_manager_login != $org_details['manager_login']) {
       if (ttUserHelper::getUserByLogin($cl_manager_login)) {
         $err->add($i18n->get('error.user_exists'));
       }
@@ -105,11 +108,11 @@ if ($request->isPost()) {
 
     if ($err->no()) {
       if (ttAdmin::updateGroup(array('group_id' => $group_id,
-        'old_group_name' => $group_details['group_name'],
+        'old_group_name' => $org_details['group_name'],
         'new_group_name' => $cl_group_name,
-        'user_id' => $group_details['manager_id'],
+        'user_id' => $org_details['manager_id'],
         'user_name' => $cl_manager_name,
-        'old_login' => $group_details['manager_login'],
+        'old_login' => $org_details['manager_login'],
         'new_login' => $cl_manager_login,
         'password1' => $cl_password1,
         'password2' => $cl_password2,

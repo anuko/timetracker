@@ -27,6 +27,7 @@
 // +----------------------------------------------------------------------+
 
 import('ttUser');
+import('ttRoleHelper');
 
 // ttAdmin class is used to perform admin tasks.
 class ttAdmin {
@@ -40,7 +41,7 @@ class ttAdmin {
   }
 
   // getSubgroups rerurns an array of subgroups for a group.
-  function getSubgroups($group_id) {
+  static function getSubgroups($group_id) {
     $mdb2 = getConnection();
 
     $subgroups = array();
@@ -52,67 +53,6 @@ class ttAdmin {
       }
     }
     return $subgroups;
-  }
-
-  // getUsers obtains user ids in a group.
-  function getUsers($group_id) {
-    $mdb2 = getConnection();
-    $sql = "select id from tt_users where group_id = $group_id";
-    $res = $mdb2->query($sql);
-    $users = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $users[] = $val;
-      }
-    }
-    return $users;
-  }
-
-  // markUserDeleted marks a user and all things associated with user as deleted.
-  function markUserDeleted($user_id) {
-    $mdb2 = getConnection();
-
-    // Mark user binds as deleted.
-    $sql = "update tt_user_project_binds set status = NULL where user_id = $user_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Mark favorite reports as deleted.
-    $sql = "update tt_fav_reports set status = NULL where user_id = $user_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Mark user as deleted.
-    global $user;
-    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
-    $sql = "update tt_users set status = NULL $modified_part where id = $user_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    return true;
-  }
-
-  // The markTasksDeleted deletes task binds and marks the tasks as deleted for a group.
-  function markTasksDeleted($group_id) {
-    $mdb2 = getConnection();
-    $sql = "select id from tt_tasks where group_id = $group_id";
-    $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error')) return false;
-
-    while ($val = $res->fetchRow()) {
-      // Delete task binds.
-      $task_id = $val['id'];
-      $sql = "delete from tt_project_task_binds where task_id = $task_id";
-      $affected = $mdb2->exec($sql);
-      if (is_a($affected, 'PEAR_Error')) return false;
-
-      // Mark task as deleted.
-      $sql = "update tt_tasks set status = NULL where id = $task_id";
-      $affected = $mdb2->exec($sql);
-      if (is_a($affected, 'PEAR_Error')) return false;
-    }
-
-    return true;
   }
 
   // markGroupDeleted marks a group and everything in it as deleted.
@@ -184,56 +124,6 @@ class ttAdmin {
     if (is_a($affected, 'PEAR_Error')) return false;
 
     return true;
-  }
-
-  // validateGroupInfo validates group information entered by user.
-  function validateGroupInfo($fields) {
-    global $i18n;
-    global $auth;
-
-    $result = true;
-
-    if (!ttValidString($fields['new_group_name'])) {
-      $this->err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
-      $result = false;
-    }
-    if (!ttValidString($fields['user_name'])) {
-      $this->err->add($i18n->get('error.field'), $i18n->get('label.manager_name'));
-      $result = false;
-    }
-    if (!ttValidString($fields['new_login'])) {
-      $this->err->add($i18n->get('error.field'), $i18n->get('label.manager_login'));
-      $result = false;
-    }
-
-    // If we change login, it must be unique.
-    if ($fields['new_login'] != $fields['old_login']) {
-      if (ttUserHelper::getUserByLogin($fields['new_login'])) {
-        $this->err->add($i18n->get('error.user_exists'));
-        $result = false;
-      }
-    }
-
-    if (!$auth->isPasswordExternal() && ($fields['password1'] || $fields['password2'])) {
-      if (!ttValidString($fields['password1'])) {
-        $this->err->add($i18n->get('error.field'), $i18n->get('label.password'));
-        $result = false;
-      }
-      if (!ttValidString($fields['password2'])) {
-        $this->err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
-        $result = false;
-      }
-      if ($fields['password1'] !== $fields['password2']) {
-        $this->err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
-        $result = false;
-      }
-    }
-    if (!ttValidEmail($fields['email'], true)) {
-      $this->err->add($i18n->get('error.field'), $i18n->get('label.email'));
-      $result = false;
-    }
-
-    return $result;
   }
 
   // updateGroup updates a (top) group with new information.
@@ -338,8 +228,24 @@ class ttAdmin {
     return true;
   }
 
-  // getGroupDetails obtains group name and its top manager details.
-  static function getGroupDetails($group_id) {
+  // getGroupName obtains group name.
+  static function getGroupName($group_id) {
+    $result = array();
+    $mdb2 = getConnection();
+
+    $sql = "select name from tt_groups where id = $group_id";
+
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      return $val['name'];
+    }
+
+    return false;
+  }
+
+  // getOrgDetails obtains group name and its top manager details.
+  static function getOrgDetails($group_id) {
     $result = array();
     $mdb2 = getConnection();
 
@@ -382,5 +288,81 @@ class ttAdmin {
     $sql = "update $table_name set status = null $modified_part where group_id = $group_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // createGroup creates a new top group and returns its id.
+  // It is a helper function for createOrg.
+  static function createGroup($fields) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $name = $mdb2->quote($fields['group_name']);
+    $currency = $mdb2->quote($fields['currency']);
+    $lang = $mdb2->quote($fields['lang']);
+    $created = 'now()';
+    $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
+    $created_by = $user->id;
+
+    $sql = "insert into tt_groups (name, currency, lang, created, created_ip, created_by)".
+      " values($name, $currency, $lang, $created, $created_ip, $created_by)";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    $group_id = $mdb2->lastInsertID('tt_groups', 'id');
+
+    // Update org_id with group_id.
+    $sql = "update tt_groups set org_id = $group_id where org_id is NULL and id = $group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    return $group_id;
+  }
+
+  // createOrgManager creates a new user (top manager role) in a group.
+  // It is a helper function for createOrg.
+  static function createOrgManager($fields) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $role_id = ttRoleHelper::getTopManagerRoleID();
+    $login = $mdb2->quote($fields['login']);
+    $password = 'md5('.$mdb2->quote($fields['password']).')';
+    $name = $mdb2->quote($fields['user_name']);
+    $group_id = (int) $fields['group_id'];
+    $org_id = $group_id;
+    $email = $mdb2->quote($fields['email']);
+    $created = 'now()';
+    $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
+    $created_by = $user->id;
+
+    $columns = '(login, password, name, group_id, org_id, role_id, email, created, created_ip, created_by)';
+    $values = "values($login, $password, $name, $group_id, $org_id, $role_id, $email, $created, $created_ip, $created_by)";
+
+    $sql = "insert into tt_users $columns $values";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // The createOrg function creates an organization in Time Tracker.
+  static function createOrg($fields) {
+    // There are 3 steps that we need to 2 when creating a new organization.
+    //   1. Create a new group with null parent_id.
+    //   2. Create pre-defined roles in it.
+    //   3. Create a top manager account for new group.
+
+    // Create a new group.
+    $group_id = ttAdmin::createGroup($fields);
+    if (!$group_id) return false;
+
+    // Create predefined roles.
+    if (!ttRoleHelper::createPredefinedRoles($group_id, $fields['lang']))
+      return false;
+
+    // Create user.
+    $fields['group_id'] = $group_id;
+    if (!ttAdmin::createOrgManager($fields))
+      return false;
+
+    return true;
   }
 }
