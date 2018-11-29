@@ -121,7 +121,7 @@ class ttClientHelper {
     }
 
     // Handle time records.
-    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
     if ($delete_client_entries) {
       $sql = 'update tt_log set status = NULL'.$modified_part." where client_id = $id";
       $affected = $mdb2->exec($sql);

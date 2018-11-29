@@ -418,7 +418,7 @@ class ttTimeHelper {
       if ('00:00' == $finish) $finish = '24:00';
     }
 
-    $created_v = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
+    $created_v = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
 
     if (!$billable) $billable = 0;
     if (!$paid) $paid = 0;
@@ -474,7 +474,7 @@ class ttTimeHelper {
     if ($user->can('manage_invoices') && $user->isPluginEnabled('ps')) {
       $paid_part = $fields['paid'] ? ', paid = 1' : ', paid = 0';
     }
-    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
 
     $start = ttTimeHelper::to24HourFormat($start);
     $finish = ttTimeHelper::to24HourFormat($finish);

@@ -119,7 +119,7 @@ class ttGroupHelper {
     $values .= ', '.$mdb2->quote($attrs['lock_spec']);
     $values .= ', '.(int)$attrs['workday_minutes'];
     $values .= ', '.$mdb2->quote($attrs['config']);
-    $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
+    $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
     $values .= ')';
 
     $sql = 'insert into tt_groups '.$columns.$values;
@@ -207,7 +207,7 @@ class ttGroupHelper {
     }
 
     // Mark group deleted.
-    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
     $sql = "update tt_groups set status = null $modified_part where id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
@@ -223,7 +223,7 @@ class ttGroupHelper {
 
     // Add modified info to sql for some tables, depending on table name.
     if ($table_name == 'tt_users') {
-      $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+      $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
     }
 
     $org_id = $user->org_id; // The only security measure we use here for match.

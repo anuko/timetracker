@@ -636,7 +636,7 @@ class ttOrgImportHelper {
     $values .= ', '.$mdb2->quote($fields['lock_spec']);
     $values .= ', '.(int)$fields['workday_minutes'];
     $values .= ', '.$mdb2->quote($fields['config']);
-    $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
+    $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
     $values .= ')';
 
     $sql = 'insert into tt_groups '.$columns.$values;
@@ -695,7 +695,7 @@ class ttOrgImportHelper {
     $invoice_id = $fields['invoice_id'];
     $status = $fields['status'];
     $paid = (int) $fields['paid'];
-    $created = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
+    $created = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
 
     $sql = "insert into tt_expense_items".
       " (date, user_id, group_id, org_id, client_id, project_id, name, cost, invoice_id, paid, created, created_ip, created_by, status)".
@@ -950,7 +950,7 @@ class ttOrgImportHelper {
       ", ".$mdb2->quote($invoice_id).
       ", ".$mdb2->quote($comment).
       ", $billable, $paid".
-      ", now(), ".$mdb2->quote($_SERVER['REMOTE_ADDR']).", ".$mdb2->quote($user->id).
+      ", now(), ".$mdb2->quote($_SERVER['REMOTE_ADDR']).", ".$user->id.
       ", ". $mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) {

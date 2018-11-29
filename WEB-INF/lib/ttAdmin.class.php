@@ -26,19 +26,12 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-import('ttUser');
 import('ttRoleHelper');
 
 // ttAdmin class is used to perform admin tasks.
+// Used as namespace, as it is a collection of static functions that we call
+// from admin pages to administer the site as a whole.
 class ttAdmin {
-
-  var $err = null; // Error object, passed to us as reference.
-                   // We use it to communicate errors to caller.
-
-  // Constructor.
-  function __construct(&$err = null) {
-    $this->err = $err;
-  }
 
   // getSubgroups rerurns an array of subgroups for a group.
   static function getSubgroups($group_id) {
@@ -118,7 +111,7 @@ class ttAdmin {
 
     // Mark group deleted.
     global $user;
-    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
     $sql = "update tt_groups set status = null $modified_part where id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
@@ -133,7 +126,7 @@ class ttAdmin {
 
     $mdb2 = getConnection();
     global $user;
-    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
 
     // Update group name if it changed.
     if ($fields['old_group_name'] != $fields['new_group_name']) {
@@ -157,57 +150,9 @@ class ttAdmin {
     return true;
   }
 
-  // validateUserInfo validates account information entered by user.
-  function validateUserInfo($fields) {
-    global $i18n;
+  // updateSelf updates admin account with new information.
+  static function updateSelf($fields) {
     global $user;
-    global $auth;
-
-    $result = true;
-
-    if (!ttValidString($fields['name'])) {
-      $this->err->add($i18n->get('error.field'), $i18n->get('label.person_name'));
-      $result = false;
-    }
-    if (!ttValidString($fields['login'])) {
-      $this->err->add($i18n->get('error.field'), $i18n->get('label.login'));
-      $result = false;
-    }
-    // If we change login, it must be unique.
-    if ($fields['login'] != $user->login) {
-      if (ttUserHelper::getUserByLogin($fields['login'])) {
-        $this->err->add($i18n->get('error.user_exists'));
-        $result = false;
-      }
-    }
-    if (!$auth->isPasswordExternal() && ($fields['password1'] || $fields['password2'])) {
-      if (!ttValidString($fields['password1'])) {
-        $this->err->add($i18n->get('error.field'), $i18n->get('label.password'));
-        $result = false;
-      }
-      if (!ttValidString($fields['password2'])) {
-        $this->err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
-        $result = false;
-      }
-      if ($fields['password1'] !== $fields['password2']) {
-        $this->err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
-        $result = false;
-      }
-    }
-    if (!ttValidEmail($fields['email'], true)) {
-      $this->err->add($i18n->get('error.field'), $i18n->get('label.email'));
-      $result = false;
-    }
-
-    return $result;
-  }
-
-  // updateSelf validates user input and updates admin account with new information.
-  function updateSelf($fields) {
-    if (!$this->validateUserInfo($fields)) return false; // Can't continue as user input is invalid.
-
-    global $user;
-    global $i18n;
     $mdb2 = getConnection();
 
     // Update self.
@@ -217,15 +162,10 @@ class ttAdmin {
       $password_part = ', password = md5('.$mdb2->quote($fields['password1']).')';
     $name_part = ', name = '.$mdb2->quote($fields['name']);
     $email_part = ', email = '.$mdb2->quote($fields['email']);
-    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
-    $sql = 'update tt_users set '.$login_part.$password_part.$name_part.$email_part.$modified_part.'where id = '.$user_id;
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
+    $sql = 'update tt_users set '.$login_part.$password_part.$name_part.$email_part.$modified_part.' where id = '.$user_id;
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) {
-      $this->err->add($i18n->get('error.db'));
-      return false;
-    }
-
-    return true;
+    return (!is_a($affected, 'PEAR_Error'));
   }
 
   // getGroupName obtains group name.
@@ -282,7 +222,7 @@ class ttAdmin {
     // Add modified info to sql for some tables, depending on table name.
     if ($table_name == 'tt_users') {
       global $user;
-      $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+      $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
     }
 
     $sql = "update $table_name set status = null $modified_part where group_id = $group_id";

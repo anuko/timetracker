@@ -46,7 +46,7 @@ class ttExpenseHelper {
     $invoice_id = $fields['invoice_id'];
     $status = $fields['status'];
     $paid = (int) $fields['paid'];
-    $created = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$mdb2->quote($user->id);
+    $created = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
 
     $sql = "insert into tt_expense_items".
       " (date, user_id, group_id, org_id, client_id, project_id, name, cost, invoice_id, paid, created, created_ip, created_by, status)".
@@ -75,7 +75,7 @@ class ttExpenseHelper {
     if ($user->can('manage_invoices') && $user->isPluginEnabled('ps')) {
       $paid_part = $fields['paid'] ? ', paid = 1' : ', paid = 0';
     }
-    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
 
     $sql = "UPDATE tt_expense_items set date = ".$mdb2->quote($date).", user_id = $user_id, client_id = ".$mdb2->quote($client_id).
       ", project_id = ".$mdb2->quote($project_id).", name = ".$mdb2->quote($name).

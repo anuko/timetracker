@@ -111,7 +111,7 @@ class ttUserHelper {
       $status_v = ', '.$mdb2->quote($fields['status']);
     }
     $created_ip_v = ', '.$mdb2->quote($_SERVER['REMOTE_ADDR']);
-    $created_by_v = ', '.$mdb2->quote($user->id);
+    $created_by_v = ', '.$user->id;
 
     $sql = "insert into tt_users (name, login, password, group_id, org_id, role_id, client_id, rate, email, created, created_ip, created_by $status_f) values (".
       $mdb2->quote($fields['name']).", ".$mdb2->quote($fields['login']).
@@ -176,7 +176,7 @@ class ttUserHelper {
       $status_part = ", status = $status";
     }
 
-    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($user->id);
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
 
     $sql = "update tt_users set login = ".$mdb2->quote($fields['login']).
       "$pass_part, name = ".$mdb2->quote($fields['name']).
