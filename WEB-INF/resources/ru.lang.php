@@ -101,6 +101,9 @@ $i18n_key_words = array(
 'error.cannot_import' => 'Невозможно импортировать: %s.',
 'error.format' => 'Неверный формат файла.',
 
+// Warning messages.
+'warn.sure' => 'Вы уверены?',
+
 // Success messages.
 'msg.success' => 'Операция завершена успешно.',
 

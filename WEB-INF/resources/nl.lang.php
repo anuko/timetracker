@@ -102,6 +102,10 @@ $i18n_key_words = array(
 'error.cannot_import' => 'Kan het volgende niet importeren: %s.',
 'error.format' => 'Bestandsformaat niet valide.',
 
+// Warning messages.
+// TODO: translate the following.
+// 'warn.sure' => 'Are you sure?',
+
 // Success messages.
 // TODO: translate the following.
 // 'msg.success' => 'Operation completed successfully.',

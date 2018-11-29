@@ -102,6 +102,9 @@ $i18n_key_words = array(
 'error.cannot_import' => 'Cannot import: %s.',
 'error.format' => 'Invalid file format.',
 
+// Warning messages.
+'warn.sure' => 'Are you sure?',
+
 // Success messages.
 'msg.success' => 'Operation completed successfully.',
 
