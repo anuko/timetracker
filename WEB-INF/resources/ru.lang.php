@@ -461,6 +461,7 @@ $i18n_key_words = array(
 'form.group_edit.allow_overlap' => 'Возможное перекрывание',
 'form.group_edit.future_entries' => 'Будущие записи',
 'form.group_edit.uncompleted_indicators' => 'Индикаторы незавершения',
+'form.group_edit.copy_warning' => 'Предупреждать при копировании',
 'form.group_edit.allow_ip' => 'Разрешить доступ с IP',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php

@@ -467,6 +467,8 @@ $i18n_key_words = array(
 'form.group_edit.allow_overlap' => 'Sta overlapping van tijden toe',
 'form.group_edit.future_entries' => 'Toevoegingen toestaan in de toekomst',
 'form.group_edit.uncompleted_indicators' => 'Onvolledige indicatoren',
+// TODO: translate the following.
+// 'form.group_edit.copy_warning' => 'Warn on copy',
 'form.group_edit.allow_ip' => 'Toegestane IP adressen',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
