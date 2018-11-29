@@ -104,6 +104,7 @@ $i18n_key_words = array(
 
 // Warning messages.
 'warn.sure' => 'Are you sure?',
+'warn.confirm_save' => 'Date has changed. Confirm saving, not copying this item.',
 
 // Success messages.
 'msg.success' => 'Operation completed successfully.',

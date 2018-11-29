@@ -131,6 +131,7 @@ $i18n_key_words = array(
 // Warning messages.
 // TODO: translate the following.
 // 'warn.sure' => 'Are you sure?',
+// 'warn.confirm_save' => 'Date has changed. Confirm saving, not copying this item.',
 
 // Success messages.
 // TODO: translate the following.
