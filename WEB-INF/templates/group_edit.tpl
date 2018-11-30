@@ -100,6 +100,10 @@ function handleTaskRequiredCheckbox() {
             <td align="right" nowrap>{$i18n.form.group_edit.uncompleted_indicators}:</td>
             <td>{$forms.groupForm.uncompleted_indicators.control} <a href="https://www.anuko.com/lp/tt_15.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
+          <tr>
+            <td align="right" nowrap>{$i18n.form.group_edit.confirm_save}:</td>
+            <td>{$forms.groupForm.confirm_save.control} <a href="https://www.anuko.com/lp/tt_26.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+          </tr>
   {if $user->can('manage_advanced_settings')}
           <tr>
             <td align="right" nowrap>{$i18n.label.bcc}:</td>

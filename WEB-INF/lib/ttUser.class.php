@@ -60,7 +60,7 @@ class ttUser {
   var $allow_overlap = 0;       // Whether to allow overlapping time entries.
   var $future_entries = 0;      // Whether to allow creating future entries.
   var $uncompleted_indicators = 0; // Uncompleted time entry indicators (show nowhere or on users page).
-  var $confirm_save = 1; // Work in progress. TODO: change default to 0 and get from group config upon init.
+  var $confirm_save = 0;        // Whether to show warnings for save action when date changed.
   var $bcc_email = null;        // Bcc email.
   var $allow_ip = null;         // Specification from where user is allowed access.
   var $password_complexity = null; // Password complexity example.
@@ -144,6 +144,7 @@ class ttUser {
       $this->allow_overlap = $config->getDefinedValue('allow_overlap');
       $this->future_entries = $config->getDefinedValue('future_entries');
       $this->uncompleted_indicators = $config->getDefinedValue('uncompleted_indicators');
+      $this->confirm_save = $config->getDefinedValue('confirm_save');
       if ($this->isPluginEnabled('wu')) {
         $minutes_in_unit = $config->getIntValue('minutes_in_unit');
         if ($minutes_in_unit) $this->minutes_in_unit = $minutes_in_unit;
@@ -204,8 +205,7 @@ class ttUser {
 
   // getConfirmSave returns confirm_save option for user.
   function getConfirmSave() {
-    return true; // TODO: implement this properly.
-    // return ($this->behalfGroup ? $this->behalfGroup->config : $this->config);
+    return ($this->behalfGroup ? $this->behalfGroup->confirm_save : $this->confirm_save);
   }
 
   // can - determines whether user has a right to do something.

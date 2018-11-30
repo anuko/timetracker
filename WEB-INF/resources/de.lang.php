@@ -468,7 +468,7 @@ $i18n_key_words = array(
 'form.group_edit.future_entries' => 'Einträge in der Zukunft',
 'form.group_edit.uncompleted_indicators' => 'Zeige unfertige Einträge',
 // TODO: translate the following.
-// 'form.group_edit.copy_warning' => 'Warn on copy',
+// 'form.group_edit.confirm_save' => 'Confirm saving',
 'form.group_edit.allow_ip' => 'Erlaube IP',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php

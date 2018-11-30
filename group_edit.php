@@ -77,6 +77,7 @@ if ($request->isPost()) {
   $cl_allow_overlap = $request->getParameter('allow_overlap');
   $cl_future_entries = $request->getParameter('future_entries');
   $cl_uncompleted_indicators = $request->getParameter('uncompleted_indicators');
+  $cl_confirm_save = $request->getParameter('confirm_save');
   $cl_bcc_email = trim($request->getParameter('bcc_email'));
   $cl_allow_ip = trim($request->getParameter('allow_ip'));
 } else {
@@ -97,6 +98,7 @@ if ($request->isPost()) {
   $cl_allow_overlap = $config->getDefinedValue('allow_overlap');
   $cl_future_entries = $config->getDefinedValue('future_entries');
   $cl_uncompleted_indicators = $config->getDefinedValue('uncompleted_indicators');
+  $cl_confirm_save = $config->getDefinedValue('confirm_save');
   $cl_bcc_email = $group['bcc_email'];
   $cl_allow_ip = $group['allow_ip'];
 }
@@ -191,6 +193,9 @@ $form->addInput(array('type'=>'checkbox','name'=>'future_entries','value'=>$cl_f
 // Uncompleted indicators checkbox.
 $form->addInput(array('type'=>'checkbox','name'=>'uncompleted_indicators','value'=>$cl_uncompleted_indicators));
 
+// Confirm save checkbox.
+$form->addInput(array('type'=>'checkbox','name'=>'confirm_save','value'=>$cl_confirm_save));
+
 // Add bcc email control.
 if ($advanced_settings) {
   $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'bcc_email','value'=>$cl_bcc_email));
@@ -234,6 +239,7 @@ if ($request->isPost()) {
     $config->setDefinedValue('allow_overlap', $cl_allow_overlap);
     $config->setDefinedValue('future_entries', $cl_future_entries);
     $config->setDefinedValue('uncompleted_indicators', $cl_uncompleted_indicators);
+    $config->setDefinedValue('confirm_save', $cl_confirm_save);
 
     if ($user->updateGroup(array(
       'group_id' => $group_id,
