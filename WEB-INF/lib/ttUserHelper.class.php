@@ -228,8 +228,6 @@ class ttUserHelper {
             ttUserHelper::insertBind(array(
               'user_id' => $user_id,
               'project_id' => $project_id,
-              'group_id' => $user->getGroup(),
-              'org_id' => $user->org_id,
               'rate' => $rate,
               'status' => ACTIVE));
            }
@@ -315,10 +313,8 @@ class ttUserHelper {
     global $user;
     $mdb2 = getConnection();
 
-    // This may be used during import. Use the following until we have import refactored.
-    $group_id = $fields['group_id'] ? (int) $fields['group_id'] : $user->getGroup();
-    $org_id = $fields['org_id'] ? (int) $fields['org_id'] : $user->org_id;
-
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
     $user_id = (int) $fields['user_id'];
     $project_id = (int) $fields['project_id'];
     $rate = $mdb2->quote($fields['rate']);

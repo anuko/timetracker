@@ -32,34 +32,6 @@ import('DateAndTime');
 // Class ttInvoiceHelper is used for help with invoices.
 class ttInvoiceHelper {
 
-  // insert - inserts an invoice in database.
-  static function insert($fields)
-  {
-    $mdb2 = getConnection();
-
-    $group_id = (int) $fields['group_id'];
-    $org_id = (int) $fields['org_id'];
-    $name = $fields['name'];
-    if (!$name) return false;
-
-    $client_id = (int) $fields['client_id'];
-    $date = $fields['date'];
-    if (array_key_exists('status', $fields)) { // Key exists and may be NULL during migration of data.
-      $status_f = ', status';
-      $status_v = ', '.$mdb2->quote($fields['status']);
-    }
-
-    // Insert a new invoice record.
-    $sql = "insert into tt_invoices (group_id, org_id, name, date, client_id $status_f)".
-      " values($group_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($date).", $client_id $status_v)";
-    $affected = $mdb2->exec($sql);
-
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    $last_id = $mdb2->lastInsertID('tt_invoices', 'id');
-    return $last_id;
-  }
-
   // getInvoice - obtains invoice data from the database.
   static function getInvoice($invoice_id) {
     global $user;

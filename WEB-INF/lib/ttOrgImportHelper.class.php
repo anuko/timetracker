@@ -26,8 +26,6 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-import('ttUserHelper');
-
 // ttOrgImportHelper class is used to import organization data from an XML file
 // prepared by ttOrgExportHelper and consisting of nested groups with their info.
 class ttOrgImportHelper {
@@ -83,7 +81,7 @@ class ttOrgImportHelper {
       // In first pass we check user logins for potential collisions with existing.
       if ($name == 'USER' && $this->canImport) {
         $login = $attrs['LOGIN'];
-        if ('' != $attrs['STATUS'] && ttUserHelper::getUserByLogin($login)) {
+        if ('' != $attrs['STATUS'] && $this->loginExists($login)) {
           // We have a login collision. Append colliding login to a list of things we cannot import.
           $this->conflicting_logins .= ($this->conflicting_logins ? ", $login" : $login);
           // The above is printed in error message with all found colliding logins.
@@ -240,7 +238,7 @@ class ttOrgImportHelper {
 
         $role_id = $attrs['ROLE_ID'] === '0' ? $this->top_role_id :  $this->currentGroupRoleMap[$attrs['ROLE_ID']]; // 0 (not null) means top manager role.
 
-        $user_id = ttUserHelper::insert(array(
+        $user_id = $this->insertUser(array(
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
           'role_id' => $role_id,
@@ -261,7 +259,7 @@ class ttOrgImportHelper {
       }
 
       if ($name == 'USER_PROJECT_BIND') {
-        if (!ttUserHelper::insertBind(array(
+        if (!$this->insertUserProjectBind(array(
           'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
           'project_id' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
           'group_id' => $this->current_group_id,
@@ -654,6 +652,7 @@ class ttOrgImportHelper {
   // insertMonthlyQuota - a helper function to insert a monthly quota.
   private function insertMonthlyQuota($fields) {
     $mdb2 = getConnection();
+
     $group_id = (int) $fields['group_id'];
     $org_id = (int) $fields['org_id'];
     $year = (int) $fields['year'];
@@ -669,6 +668,7 @@ class ttOrgImportHelper {
   // insertPredefinedExpense - a helper function to insert a predefined expense.
   private function insertPredefinedExpense($fields) {
     $mdb2 = getConnection();
+
     $group_id = (int) $fields['group_id'];
     $org_id = (int) $fields['org_id'];
     $name = $mdb2->quote($fields['name']);
@@ -729,6 +729,55 @@ class ttOrgImportHelper {
     return $last_id;
   }
 
+  // insertUserProjectBind - inserts a user to project bind into tt_user_project_binds table.
+  private function insertUserProjectBind($fields) {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $user_id = (int) $fields['user_id'];
+    $project_id = (int) $fields['project_id'];
+    $rate = $mdb2->quote($fields['rate']);
+    $status = $mdb2->quote($fields['status']);
+
+    $sql = "insert into tt_user_project_binds (user_id, project_id, group_id, org_id, rate, status)".
+      " values($user_id, $project_id, $group_id, $org_id, $rate, $status)";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // insertUser - inserts a user into database.
+  private function insertUser($fields) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+
+    $columns = '(login, password, name, group_id, org_id, role_id, client_id, rate, email, created, created_ip, created_by, status)';
+
+    $values = 'values (';
+    $values .= $mdb2->quote($fields['login']);
+    $values .= ', '.$mdb2->quote($fields['password']);
+    $values .= ', '.$mdb2->quote($fields['name']);
+    $values .= ', '.$group_id;
+    $values .= ', '.$org_id;
+    $values .= ', '.(int)$fields['role_id'];
+    $values .= ', '.$mdb2->quote($fields['client_id']);
+    $values .= ', '.$mdb2->quote($fields['rate']);
+    $values .= ', '.$mdb2->quote($fields['email']);
+    $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
+    $values .= ', '.$mdb2->quote($fields['status']);
+    $values .= ')';
+
+    $sql = "insert into tt_users $columns $values";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    $last_id = $mdb2->lastInsertID('tt_users', 'id');
+    return $last_id;
+  }
+
   // insertProject - a helper function to insert a project as well as project to task binds.
   private function insertProject($fields)
   {
@@ -736,7 +785,6 @@ class ttOrgImportHelper {
 
     $group_id = (int) $fields['group_id'];
     $org_id = (int) $fields['org_id'];
-
     $name = $fields['name'];
     $description = $fields['description'];
     $tasks = $fields['tasks'];
@@ -1039,6 +1087,20 @@ class ttOrgImportHelper {
       $val = $res->fetchRow();
       if ($val['id'])
         return $val['id'];
+    }
+    return false;
+  }
+
+  // The loginExists function detrmines if a login already exists.
+  private function loginExists($login) {
+    $mdb2 = getConnection();
+
+    $sql = "select id from tt_users where login = ".$mdb2->quote($login)." and (status = 1 or status = 0)";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      if ($val = $res->fetchRow()) {
+        return true;
+      }
     }
     return false;
   }
