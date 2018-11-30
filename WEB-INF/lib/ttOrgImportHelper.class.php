@@ -27,7 +27,6 @@
 // +----------------------------------------------------------------------+
 
 import('ttUserHelper');
-import('ttTaskHelper');
 import('ttInvoiceHelper');
 
 // ttOrgImportHelper class is used to import organization data from an XML file
@@ -167,7 +166,7 @@ class ttOrgImportHelper {
 
       if ($name == 'TASK') {
         // We get here when processing <task> tags for the current group.
-        $task_id = ttTaskHelper::insert(array(
+        $task_id = $this->insertTask(array(
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
           'name' => $attrs['NAME'],
@@ -698,6 +697,29 @@ class ttOrgImportHelper {
       ", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).", $paid $created, ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // insertTask function inserts a new task into database.
+  private function insertTask($fields)
+  {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $name = $fields['name'];
+    $description = $fields['description'];
+    $projects = $fields['projects'];
+    $status = $fields['status'];
+
+    $sql = "insert into tt_tasks (group_id, org_id, name, description, status)
+      values ($group_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($description).", ".$mdb2->quote($status).")";
+    $affected = $mdb2->exec($sql);
+    $last_id = 0;
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    $last_id = $mdb2->lastInsertID('tt_tasks', 'id');
+    return $last_id;
   }
 
   // insertProject - a helper function to insert a project as well as project to task binds.

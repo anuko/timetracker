@@ -137,10 +137,11 @@ class ttTaskHelper {
  // insert function inserts a new task into database.
   static function insert($fields)
   {
+    global $user;
     $mdb2 = getConnection();
 
-    $group_id = (int) $fields['group_id'];
-    $org_id = (int) $fields['org_id'];
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
     $name = $fields['name'];
     $description = $fields['description'];
     $projects = $fields['projects'];
@@ -270,17 +271,17 @@ class ttTaskHelper {
 
   // sort function sorts task ids passed as comma-separated list by their name.
   static function sort($comma_separated) {
-  	// We can't sort an empty string.
-  	if (!$comma_separated)
-  	  return $comma_separated;
-  	  	  
+    // We can't sort an empty string.
+    if (!$comma_separated)
+      return $comma_separated;
+
     $mdb2 = getConnection();
-      
-	$sql = "select id, name from tt_tasks where id in ($comma_separated)";
+
+    $sql = "select id, name from tt_tasks where id in ($comma_separated)";
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))
       die ($res->getMessage());
-    
+
     $task_arr = array();
     while ($val = $res->fetchRow()) {
       $task_arr[] = array('id'=>$val['id'],'name'=>$val['name']);
@@ -290,7 +291,7 @@ class ttTaskHelper {
     for($i = 0; $i < count($task_arr); $i++) {
 	  $task_ids[] = $task_arr[$i]['id'];
     }
-	$result = implode(',', $task_ids);
+    $result = implode(',', $task_ids);
     return $result;
   }
 }
