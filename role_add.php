@@ -59,7 +59,7 @@ if ($request->isPost()) {
   if ($err->no() && ttRoleHelper::getRoleByName($cl_name)) $err->add($i18n->get('error.object_exists'));
 
   if ($err->no()) {
-    $existing_role = ttRoleHelper::getRoleByRank($cl_rank, $user->group_id);
+    $existing_role = ttRoleHelper::getRoleByRank($cl_rank);
     if (!$existing_role) {
         // Insert a role with default user rights.
         if (ttRoleHelper::insert(array(

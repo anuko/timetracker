@@ -979,7 +979,6 @@ class ttOrgImportHelper {
 
   // getTopRole returns top role id.
   private function getTopRole() {
-    global $user;
     $mdb2 = getConnection();
 
     $sql = "select id from tt_roles where group_id = 0 and rank = ".MAX_RANK." and status = 1";

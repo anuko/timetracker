@@ -102,13 +102,15 @@ class ttRoleHelper {
   }
 
   // getRoleByRank looks up a role by its rank.
-  static function getRoleByRank($rank, $group_id) {
+  static function getRoleByRank($rank) {
     global $user;
     $mdb2 = getConnection();
 
-    $rank = (int) $rank; // Cast to int just in case for better security.
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+    $rank = (int) $rank; // Cast to int just in case.
 
-    $sql = "select id from tt_roles where group_id = $group_id and rank = $rank and (status = 1 or status = 0)";
+    $sql = "select id from tt_roles where group_id = $group_id and org_id = $org_id and rank = $rank and (status = 1 or status = 0)";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
