@@ -107,13 +107,8 @@ class ttFavReportHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $sql = "select last_insert_id() as last_id";
-    $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error'))
-      return false;
-
-    $val = $res->fetchRow();
-    return $val['last_id'];
+    $last_id = $mdb2->lastInsertID('tt_fav_reports', 'id');
+    return $last_id;
   }
 
   // updateReport - updates report options in the database.

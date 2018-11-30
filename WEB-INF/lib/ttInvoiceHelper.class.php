@@ -56,12 +56,7 @@ class ttInvoiceHelper {
 
     if (is_a($affected, 'PEAR_Error')) return false;
 
-    $last_id = 0;
-    $sql = "select last_insert_id() as last_insert_id";
-    $res = $mdb2->query($sql);
-    $val = $res->fetchRow();
-    $last_id = $val['last_insert_id'];
-
+    $last_id = $mdb2->lastInsertID('tt_invoices', 'id');
     return $last_id;
   }
 
