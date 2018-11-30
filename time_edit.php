@@ -57,6 +57,7 @@ if ($user->isPluginEnabled('cf')) {
 }
 
 $item_date = new DateAndTime(DB_DATEFORMAT, $time_rec['date']);
+$confirm_save = $user->getConfirmSave();
 
 // Initialize variables.
 $cl_start = $cl_finish = $cl_duration = $cl_date = $cl_note = $cl_project = $cl_task = $cl_billable = null;
@@ -210,9 +211,10 @@ if ($user->isPluginEnabled('iv'))
 if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))
   $form->addInput(array('type'=>'checkbox','name'=>'paid','value'=>$cl_paid));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_save or btn_copy click.
-// TODO: improve on conditional confirmSave.
-$form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>'browser_today.value=get_date();return(confirmSave())','value'=>$i18n->get('button.save')));
-$form->addInput(array('type'=>'submit','name'=>'btn_copy','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.copy')));
+$on_click_action = 'browser_today.value=get_date();';
+$form->addInput(array('type'=>'submit','name'=>'btn_copy','onclick'=>$on_click_action,'value'=>$i18n->get('button.copy')));
+if ($confirm_save) $on_click_action .= 'return(confirmSave());';
+$form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>$on_click_action,'value'=>$i18n->get('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 
 if ($request->isPost()) {
@@ -401,9 +403,10 @@ if ($request->isPost()) {
   }
 } // isPost
 
-// TODO: improve on conditional confirmSave.
-$smarty->assign('entry_date', $cl_date);
-
+if ($confirm_save) {
+  $smarty->assign('confirm_save', true);
+  $smarty->assign('entry_date', $cl_date);
+}
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);

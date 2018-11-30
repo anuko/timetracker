@@ -34,6 +34,18 @@ var defined_expenses = new Array();
   idx++;
 {/foreach}
 
+{* Conditional include of confirmSave handler. *}
+{if $confirm_save}
+var original_date = "{$entry_date}";
+
+function confirmSave() {
+  var date_on_save = document.getElementById("date").value;
+  if (original_date != date_on_save) {
+    return confirm("{$i18n.warn.confirm_save}");
+  }
+}
+{/if}
+
 // The fillProjectDropdown function populates the project combo box with
 // projects associated with a selected client (client id is passed here as id).
 function fillProjectDropdown(id) {

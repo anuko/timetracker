@@ -1,8 +1,8 @@
 {include file="time_script.tpl"}
 
+{* Conditional include of confirmSave handler. *}
+{if $confirm_save}
 <script>
-// TODO: improve on conditional confirmSave.
-// Existing entry date for confirm save warnings.
 var original_date = "{$entry_date}";
 
 function confirmSave() {
@@ -11,8 +11,8 @@ function confirmSave() {
     return confirm("{$i18n.warn.confirm_save}");
   }
 }
-// TODO: improve on conditional confirmSave above.
 </script>
+{/if}
 
 {$forms.timeRecordForm.open}
 <table cellspacing="4" cellpadding="7" border="0">

@@ -57,6 +57,7 @@ if ($user->isPluginEnabled('cf')) {
 }
 
 $item_date = new DateAndTime(DB_DATEFORMAT, $time_rec['date']);
+$confirm_save = $user->getConfirmSave();
 
 // Initialize variables.
 $cl_start = $cl_finish = $cl_duration = $cl_date = $cl_note = $cl_project = $cl_task = $cl_billable = null;
@@ -205,7 +206,10 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 if ($user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_save click.
-$form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.save')));
+$on_click_action = 'browser_today.value=get_date();';
+$form->addInput(array('type'=>'submit','name'=>'btn_copy','onclick'=>$on_click_action,'value'=>$i18n->get('button.copy')));
+if ($confirm_save) $on_click_action .= 'return(confirmSave());';
+$form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>$on_click_action,'value'=>$i18n->get('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 
 if ($request->isPost()) {
@@ -324,12 +328,79 @@ if ($request->isPost()) {
     }
   }
 
+  // Save as new record.
+  if ($request->getParameter('btn_copy')) {
+    // We need to:
+    // 1) Prohibit saving into locked range.
+    // 2) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
+
+    // Now, step by step.
+    if ($err->no()) {
+      // 1) Prohibit saving into locked range.
+      if ($user->isDateLocked($new_date))
+        $err->add($i18n->get('error.range_locked'));
+
+      // 2) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
+      $uncompleted = ($cl_finish == '' && $cl_duration == '');
+      if ($uncompleted) {
+        $not_completed_rec = ttTimeHelper::getUncompleted($user_id);
+        if ($not_completed_rec) {
+          // We have another not completed record.
+          $err->add($i18n->get('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->get('error.goto_uncompleted')."</a>");
+        }
+      }
+    }
+
+    // Prohibit creating an overlapping record.
+    if ($err->no()) {
+      if (ttTimeHelper::overlaps($user_id, $new_date->toString(DB_DATEFORMAT), $cl_start, $cl_finish))
+        $err->add($i18n->get('error.overlap'));
+    }
+
+    // Now, a new insert.
+    if ($err->no()) {
+
+      $id = ttTimeHelper::insert(array(
+        'date'=>$new_date->toString(DB_DATEFORMAT),
+        'user_id'=>$user_id,
+        'group_id'=>$user->getGroup(),
+        'org_id' => $user->org_id,
+        'client'=>$cl_client,
+        'project'=>$cl_project,
+        'task'=>$cl_task,
+        'start'=>$cl_start,
+        'finish'=>$cl_finish,
+        'duration'=>$cl_duration,
+        'note'=>$cl_note,
+        'billable'=>$cl_billable,
+        'paid'=>$cl_paid));
+
+      // Insert a custom field if we have it.
+      $res = true;
+      if ($id && $custom_fields && $cl_cf_1) {
+        if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
+          $res = $custom_fields->insert($id, $custom_fields->fields[0]['id'], null, $cl_cf_1);
+        elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
+          $res = $custom_fields->insert($id, $custom_fields->fields[0]['id'], $cl_cf_1, null);
+      }
+      if ($id && $res) {
+        header('Location: time.php?date='.$new_date->toString(DB_DATEFORMAT));
+        exit();
+      }
+      $err->add($i18n->get('error.db'));
+    }
+  }
+
   if ($request->getParameter('btn_delete')) {
     header("Location: time_delete.php?id=$cl_id");
     exit();
   }
 } // isPost
 
+if ($confirm_save) {
+  $smarty->assign('confirm_save', true);
+  $smarty->assign('entry_date', $cl_date);
+}
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);

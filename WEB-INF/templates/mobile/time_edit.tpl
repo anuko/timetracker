@@ -1,5 +1,19 @@
 {include file="time_script.tpl"}
 
+{* Conditional include of confirmSave handler. *}
+{if $confirm_save}
+<script>
+var original_date = "{$entry_date}";
+
+function confirmSave() {
+  var date_on_save = document.getElementById("date").value;
+  if (original_date != date_on_save) {
+    return confirm("{$i18n.warn.confirm_save}");
+  }
+}
+</script>
+{/if}
+
 {$forms.timeRecordForm.open}
 <table cellspacing="4" cellpadding="7" border="0">
 <tr>
@@ -41,7 +55,7 @@
     <tr><td>{$forms.timeRecordForm.date.control}</td></tr>
     <tr><td>{$i18n.label.note}:</td></tr>
     <tr><td>{$forms.timeRecordForm.note.control}</td></tr>
-    <tr><td align="center">{$forms.timeRecordForm.btn_save.control}&nbsp;{$forms.timeRecordForm.btn_delete.control}</td></tr>
+    <tr><td align="center">{$forms.timeRecordForm.btn_save.control} {$forms.timeRecordForm.btn_copy.control} {$forms.timeRecordForm.btn_delete.control}</td></tr>
     </table>
     </td>
     </tr>

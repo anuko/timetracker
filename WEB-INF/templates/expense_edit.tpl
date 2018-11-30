@@ -34,8 +34,8 @@ var defined_expenses = new Array();
   idx++;
 {/foreach}
 
-// TODO: improve on conditional confirmSave.
-// Existing entry date for confirm save warnings.
+{* Conditional include of confirmSave handler. *}
+{if $confirm_save}
 var original_date = "{$entry_date}";
 
 function confirmSave() {
@@ -44,7 +44,7 @@ function confirmSave() {
     return confirm("{$i18n.warn.confirm_save}");
   }
 }
-// TODO: improve on conditional confirmSave above.
+{/if}
 
 // The fillProjectDropdown function populates the project combo box with
 // projects associated with a selected client (client id is passed here as id).

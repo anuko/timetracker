@@ -202,6 +202,12 @@ class ttUser {
     return ($this->behalfGroup ? $this->behalfGroup->config : $this->config);
   }
 
+  // getConfirmSave returns confirm_save option for user.
+  function getConfirmSave() {
+    return true; // TODO: implement this properly.
+    // return ($this->behalfGroup ? $this->behalfGroup->config : $this->config);
+  }
+
   // can - determines whether user has a right to do something.
   function can($do_something) {
     return in_array($do_something, $this->rights);
