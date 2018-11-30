@@ -27,7 +27,6 @@
 // +----------------------------------------------------------------------+
 
 import('ttUserHelper');
-import('ttInvoiceHelper');
 
 // ttOrgImportHelper class is used to import organization data from an XML file
 // prepared by ttOrgExportHelper and consisting of nested groups with their info.
@@ -160,7 +159,9 @@ class ttOrgImportHelper {
         if ($role_id) {
           // Add a mapping.
           $this->currentGroupRoleMap[$attrs['ID']] = $role_id;
-        } else $this->errors->add($i18n->get('error.db'));
+        } else {
+          $this->errors->add($i18n->get('error.db'));
+        }
         return;
       }
 
@@ -228,7 +229,9 @@ class ttOrgImportHelper {
         if ($client_id) {
           // Add a mapping.
           $this->currentGroupClientMap[$attrs['ID']] = $client_id;
-        } else $this->errors->add($i18n->get('error.db'));
+        } else {
+          $this->errors->add($i18n->get('error.db'));
+        }
         return;
       }
 
@@ -251,7 +254,9 @@ class ttOrgImportHelper {
         if ($user_id) {
           // Add a mapping.
           $this->currentGroupUserMap[$attrs['ID']] = $user_id;
-        } else $this->errors->add($i18n->get('error.db'));
+        } else {
+          $this->errors->add($i18n->get('error.db'));
+        }
         return;
       }
 
@@ -270,7 +275,7 @@ class ttOrgImportHelper {
 
       if ($name == 'INVOICE') {
         // We get here when processing <invoice> tags for the current group.
-        $invoice_id = ttInvoiceHelper::insert(array(
+        $invoice_id = $this->insertInvoice(array(
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
           'name' => $attrs['NAME'],
@@ -280,7 +285,9 @@ class ttOrgImportHelper {
         if ($invoice_id) {
           // Add a mapping.
           $this->currentGroupInvoiceMap[$attrs['ID']] = $invoice_id;
-        } else $this->errors->add($i18n->get('error.db'));
+        } else {
+          $this->errors->add($i18n->get('error.db'));
+        }
         return;
       }
 
@@ -778,6 +785,28 @@ class ttOrgImportHelper {
       return false;
 
     $last_id = $mdb2->lastInsertID('tt_roles', 'id');
+    return $last_id;
+  }
+
+  // insertInvoice - inserts an invoice in database.
+  private function insertInvoice($fields)
+  {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $name = $fields['name'];
+    $client_id = (int) $fields['client_id'];
+    $date = $fields['date'];
+    $status = $fields['status'];
+
+    // Insert a new invoice record.
+    $sql = "insert into tt_invoices (group_id, org_id, name, date, client_id, status)".
+      " values($group_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($date).", $client_id, ".$mdb2->quote($fields['status']).")";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    $last_id = $mdb2->lastInsertID('tt_invoices', 'id');
     return $last_id;
   }
 
