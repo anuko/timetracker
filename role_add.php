@@ -63,8 +63,6 @@ if ($request->isPost()) {
     if (!$existing_role) {
         // Insert a role with default user rights.
         if (ttRoleHelper::insert(array(
-          'group_id' => $user->group_id,
-          'org_id' => $user->org_id,
           'name' => $cl_name,
           'rank' => $cl_rank,
           'description' => $cl_description,

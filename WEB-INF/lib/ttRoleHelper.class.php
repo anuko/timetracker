@@ -156,10 +156,11 @@ class ttRoleHelper {
   // insert - inserts an entry into tt_roles table.
   static function insert($fields)
   {
+    global $user;
     $mdb2 = getConnection();
 
-    $group_id = (int) $fields['group_id'];
-    $org_id = (int) $fields['org_id'];
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
     $name = $fields['name'];
     $rank = (int) $fields['rank'];
     $description = $fields['description'];

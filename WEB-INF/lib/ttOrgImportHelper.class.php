@@ -155,7 +155,7 @@ class ttOrgImportHelper {
 
       if ($name == 'ROLE') {
         // We get here when processing <role> tags for the current group.
-        $role_id = ttRoleHelper::insert(array(
+        $role_id = $this->insertRole(array(
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
           'name' => $attrs['NAME'],
@@ -742,6 +742,32 @@ class ttOrgImportHelper {
       }
     }
 
+    return $last_id;
+  }
+
+  // insertRole - inserts a role into tt_roles table.
+  private function insertRole($fields)
+  {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $name = $fields['name'];
+    $rank = (int) $fields['rank'];
+    $description = $fields['description'];
+    $rights = $fields['rights'];
+    $status = $fields['status'];
+
+    $sql = "insert into tt_roles (group_id, org_id, name, rank, description, rights, status)
+      values ($group_id, $org_id, ".$mdb2->quote($name).", $rank, ".$mdb2->quote($description).", ".$mdb2->quote($rights).", ".$mdb2->quote($status).")";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    $sql = "SELECT LAST_INSERT_ID() AS last_id";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $last_id = $val['last_id'];
     return $last_id;
   }
 
