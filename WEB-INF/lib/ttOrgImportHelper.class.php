@@ -725,11 +725,7 @@ class ttOrgImportHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $last_id = 0;
-    $sql = "select last_insert_id() as last_insert_id";
-    $res = $mdb2->query($sql);
-    $val = $res->fetchRow();
-    $last_id = $val['last_insert_id'];
+    $last_id = $mdb2->lastInsertID('tt_projects', 'id');
 
     // Insert binds into tt_project_task_binds table.
     if (is_array($tasks)) {
@@ -764,10 +760,7 @@ class ttOrgImportHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $sql = "SELECT LAST_INSERT_ID() AS last_id";
-    $res = $mdb2->query($sql);
-    $val = $res->fetchRow();
-    $last_id = $val['last_id'];
+    $last_id = $mdb2->lastInsertID('tt_roles', 'id');
     return $last_id;
   }
 
@@ -796,11 +789,7 @@ class ttOrgImportHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $last_id = 0;
-    $sql = "select last_insert_id() as last_insert_id";
-    $res = $mdb2->query($sql);
-    $val = $res->fetchRow();
-    $last_id = $val['last_insert_id'];
+    $last_id = $mdb2->lastInsertID('tt_clients', 'id');
 
     if (count($projects) > 0)
       foreach ($projects as $p_id) {
@@ -844,13 +833,8 @@ class ttOrgImportHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $sql = "select last_insert_id() as last_id";
-    $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error'))
-      return false;
-
-    $val = $res->fetchRow();
-    return $val['last_id'];
+    $last_id = $mdb2->lastInsertID('tt_fav_reports', 'id');
+    return $last_id;
   }
 
   // insertNotification function inserts a new notification into database.
@@ -912,11 +896,7 @@ class ttOrgImportHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $last_id = 0;
-    $sql = "select last_insert_id() as last_insert_id";
-    $res = $mdb2->query($sql);
-    $val = $res->fetchRow();
-    $last_id = $val['last_insert_id'];
+    $last_id = $mdb2->lastInsertID('tt_custom_fields', 'id');
     return $last_id;
   }
 
@@ -935,11 +915,7 @@ class ttOrgImportHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $last_id = 0;
-    $sql = "select last_insert_id() as last_insert_id";
-    $res = $mdb2->query($sql);
-    $val = $res->fetchRow();
-    $last_id = $val['last_insert_id'];
+    $last_id = $mdb2->lastInsertID('tt_custom_field_options', 'id');
     return $last_id;
   }
 
