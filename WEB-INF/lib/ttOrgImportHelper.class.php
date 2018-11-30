@@ -27,13 +27,8 @@
 // +----------------------------------------------------------------------+
 
 import('ttUserHelper');
-import('ttRoleHelper');
 import('ttTaskHelper');
-import('ttClientHelper');
 import('ttInvoiceHelper');
-import('ttTimeHelper');
-import('ttExpenseHelper');
-import('ttFavReportHelper');
 
 // ttOrgImportHelper class is used to import organization data from an XML file
 // prepared by ttOrgExportHelper and consisting of nested groups with their info.
@@ -63,7 +58,7 @@ class ttOrgImportHelper {
   // Constructor.
   function __construct(&$errors) {
     $this->errors = &$errors;
-    $this->top_role_id = ttRoleHelper::getRoleByRank(512, 0);
+    $this->top_role_id = $this->getTopRole();
   }
 
   // startElement - callback handler for opening tags in XML.
@@ -980,5 +975,21 @@ class ttOrgImportHelper {
       " values ($group_id, $org_id, $log_id, $field_id, ".$mdb2->quote($option_id).", ".$mdb2->quote($value).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // getTopRole returns top role id.
+  private function getTopRole() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $sql = "select id from tt_roles where group_id = 0 and rank = ".MAX_RANK." and status = 1";
+    $res = $mdb2->query($sql);
+
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      if ($val['id'])
+        return $val['id'];
+    }
+    return false;
   }
 }
