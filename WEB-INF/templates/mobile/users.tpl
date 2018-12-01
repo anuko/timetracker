@@ -19,7 +19,7 @@
     {foreach $active_users as $u}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>
-            {if $user->uncompleted_indicators}
+            {if $uncompleted_indicators}
               <span class="uncompleted-entry{if $u.has_uncompleted_entry} active{/if}"{if $u.has_uncompleted_entry} title="{$i18n.form.users.uncompleted_entry}"{/if}></span>
             {/if}
             {if $u.rank < $user->rank || ($u.rank == $user->rank && $u.id == $user->id)}

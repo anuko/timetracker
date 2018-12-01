@@ -38,6 +38,8 @@ if (!(ttAccessAllowed('view_users') || ttAccessAllowed('manage_users'))) {
 }
 // End of access checks.
 
+$uncompleted_indicators = $user->getConfigOption('uncompleted_indicators');
+
 // Get users.
 $active_users = ttTeamHelper::getActiveUsers(array('getAllFields'=>true));
 if($user->can('manage_users')) {
@@ -45,12 +47,12 @@ if($user->can('manage_users')) {
   $inactive_users = ttTeamHelper::getInactiveUsers($user->group_id, true);
 }
 
-// Check if the group is set to show indicators for uncompleted time entries.
-if ($user->uncompleted_indicators) {
+if ($uncompleted_indicators) {
   // Check each active user if they have an uncompleted time entry.
   foreach ($active_users as $key => $user) {
     $active_users[$key]['has_uncompleted_entry'] = (bool) ttTimeHelper::getUncompleted($user['id']);
   }
+  $smarty->assign('uncompleted_indicators', true);
 }
 
 $smarty->assign('active_users', $active_users);
