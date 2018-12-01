@@ -239,18 +239,6 @@ class ttClientHelper {
     return (!is_a($affected, 'PEAR_Error'));
   }
 
-  // The setMappedClient function is used during group import to change client_id value for tt_users to a mapped value.
-  static function setMappedClient($group_id, $imported_id, $mapped_id)
-  {
-    $mdb2 = getConnection();
-    $sql = "update tt_users set client_id = $mapped_id where client_id = $imported_id and group_id = $group_id ";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error'))
-      return false;
-
-    return true;
-  }
-
   // The fillBean function fills the ActionForm object with client data.
   static function fillBean($client_id, &$bean) {
     $client = ttClientHelper::getClient($client_id, true);

@@ -274,4 +274,50 @@ class ttGroupHelper {
     }
     return $roles;
   }
+
+  // The getActiveClients returns an array of active clients for a group.
+  static function getActiveClients($all_fields = false)
+  {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+    if ($all_fields)
+      $sql = "select * from tt_clients where group_id = $group_id and org_id = $org_id and status = 1 order by upper(name)";
+    else
+      $sql = "select id, name from tt_clients where group_id = $group_id and org_id = $org_id and status = 1 order by upper(name)";
+
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
+  // The getInactiveClients returns an array of inactive clients for a group.
+  static function getInactiveClients($all_fields = false)
+  {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+    if ($all_fields)
+      $sql = "select * from tt_clients where group_id = $group_id and org_id = $org_id and status = 0 order by upper(name)";
+    else
+      $sql = "select id, name from tt_clients where group_id = $group_id and org_id = $org_id and status = 0 order by upper(name)";
+
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
 }
