@@ -33,6 +33,7 @@ import('form.Table');
 import('form.TextField');
 import('ttUserHelper');
 import('ttTeamHelper');
+import('ttGroupHelper');
 import('ttWeekViewHelper');
 import('ttClientHelper');
 import('ttTimeHelper');
@@ -244,7 +245,7 @@ $form->addInputElement($table);
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
 if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
-  $active_clients = ttTeamHelper::getActiveClients($user->group_id, true);
+  $active_clients = ttGroupHelper::getActiveClients(true);
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
     'name'=>'client',
@@ -270,7 +271,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
 
   // Dropdown for clients if the clients plugin is enabled.
   if ($user->isPluginEnabled('cl')) {
-    $active_clients = ttTeamHelper::getActiveClients($user->group_id, true);
+    $active_clients = ttGroupHelper::getActiveClients(true);
     // We need an array of assigned project ids to do some trimming.
     foreach($project_list as $project)
       $projects_assigned_to_user[] = $project['id'];

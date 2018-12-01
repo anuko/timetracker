@@ -29,6 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttTeamHelper');
+import('ttGroupHelper');
 import('ttUserHelper');
 import('form.Table');
 import('form.TableColumn');
@@ -46,7 +47,7 @@ if (!ttAccessAllowed('manage_users')) {
 @include('plugins/limit/user_add.php');
 
 if ($user->isPluginEnabled('cl'))
-  $clients = ttTeamHelper::getActiveClients($user->getGroup());
+  $clients = ttGroupHelper::getActiveClients();
 
 $assigned_projects = array();
 if ($request->isPost()) {

@@ -379,27 +379,6 @@ class ttTeamHelper {
     return $result;
   }
 
-  // The getActiveClients returns an array of active clients for a group.
-  static function getActiveClients($group_id, $all_fields = false)
-  {
-    $result = array();
-    $mdb2 = getConnection();
-
-    if ($all_fields)
-      $sql = "select * from tt_clients where group_id = $group_id and status = 1 order by upper(name)";
-    else
-      $sql = "select id, name from tt_clients where group_id = $group_id and status = 1 order by upper(name)";
-
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-    }
-    return $result;
-  }
-
   // The getAllClients obtains all clients in a group.
   static function getAllClients($group_id, $all_fields = false) {
     $mdb2 = getConnection();

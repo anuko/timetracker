@@ -30,6 +30,7 @@ require_once('../initialize.php');
 import('form.Form');
 import('ttProjectHelper');
 import('ttTeamHelper');
+import('ttGroupHelper');
 import('ttUserHelper');
 import('form.Table');
 import('form.TableColumn');
@@ -48,7 +49,7 @@ if (!$user_details) {
 // End of access checks.
 
 if ($user->isPluginEnabled('cl'))
-  $clients = ttTeamHelper::getActiveClients($user->group_id);
+  $clients = ttGroupHelper::getActiveClients();
 
 $projects = ttTeamHelper::getActiveProjects($user->group_id);
 $assigned_projects = array();
