@@ -29,7 +29,7 @@
 require_once('../initialize.php');
 import('form.Form');
 import('ttClientHelper');
-import('ttTeamHelper');
+import('ttGroupHelper');
 
 // Access checks.
 if (!ttAccessAllowed('manage_clients')) {
@@ -43,7 +43,7 @@ if (!$user->isPluginEnabled('cl')) {
 
 $cl_id = (int) $request->getParameter('id');
 
-$projects = ttTeamHelper::getActiveProjects($user->group_id);
+$projects = ttGroupHelper::getActiveProjects();
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -70,7 +70,7 @@ $form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','c
 $form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
-if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+if (MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode())
   $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'datakeys'=>array('id','name'),'layout'=>'H','value'=>$cl_projects));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->get('button.copy')));

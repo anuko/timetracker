@@ -61,8 +61,8 @@ if ($user->isPluginEnabled('cl')) {
   $form->addInput(array('type'=>'combobox','name'=>'client','style'=>'width: 250px;','data'=>$clients,'datakeys'=>array('id','name'),'value'=>$cl_client,'empty'=>array(''=>$i18n->get('dropdown.select'))));
 }
 // Dropdown for projects.
-if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-  $projects = ttTeamHelper::getActiveProjects($user->group_id);
+if (MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode()) {
+  $projects = ttGroupHelper::getActiveProjects();
   $form->addInput(array('type'=>'combobox','name'=>'project','style'=>'width: 250px;','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_project,'empty'=>array(''=>$i18n->get('dropdown.all'))));
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'number','style'=>'width: 250px;','value'=>$cl_number));

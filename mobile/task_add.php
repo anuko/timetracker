@@ -28,8 +28,7 @@
 
 require_once('../initialize.php');
 import('form.Form');
-import('form.ActionForm');
-import('ttTeamHelper');
+import('ttGroupHelper');
 import('ttTaskHelper');
 
 // Access checks.
@@ -37,13 +36,13 @@ if (!ttAccessAllowed('manage_tasks')) {
   header('Location: access_denied.php');
   exit();
 }
-if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode) {
+if (MODE_PROJECTS_AND_TASKS != $user->getTrackingMode()) {
   header('Location: feature_disabled.php');
   exit();
 }
 // End of access checks.
 
-$projects = ttTeamHelper::getActiveProjects($user->group_id);
+$projects = ttGroupHelper::getActiveProjects();
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));

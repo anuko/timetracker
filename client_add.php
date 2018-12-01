@@ -29,7 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttClientHelper');
-import('ttTeamHelper');
+import('ttGroupHelper');
 
 // Access checks.
 if (!ttAccessAllowed('manage_clients')) {
@@ -41,7 +41,7 @@ if (!$user->isPluginEnabled('cl')) {
   exit();
 }
 
-$projects = ttTeamHelper::getActiveProjects($user->getGroup());
+$projects = ttGroupHelper::getActiveProjects();
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
