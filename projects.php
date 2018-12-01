@@ -29,6 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttTeamHelper');
+import('ttGroupHelper');
 
 // Access checks.
 if (!(ttAccessAllowed('view_own_projects') || ttAccessAllowed('manage_projects'))) {
@@ -73,8 +74,8 @@ if ($user->can('manage_subgroups')) {
 }
 
 if($user->can('manage_projects')) {
-  $active_projects = ttTeamHelper::getActiveProjects($group_id);
-  $inactive_projects = ttTeamHelper::getInactiveProjects($group_id);
+  $active_projects = ttGroupHelper::getActiveProjects();
+  $inactive_projects = ttGroupHelper::getInactiveProjects();
 } else
   $active_projects = $user->getAssignedProjects();
 

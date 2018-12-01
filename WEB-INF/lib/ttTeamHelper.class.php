@@ -194,24 +194,6 @@ class ttTeamHelper {
     return $result;
   }
 
-  // getInactiveProjects - returns an array of inactive projects for a group.
-  static function getInactiveProjects($group_id)
-  {
-    $result = array();
-    $mdb2 = getConnection();
-
-    $sql = "select id, name, description, tasks from tt_projects
-      where group_id = $group_id and status = 0 order by upper(name)";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-    }
-    return $result;
-  }
-
   // The getAllProjects obtains all projects in a group.
   static function getAllProjects($group_id, $all_fields = false) {
     $mdb2 = getConnection();
