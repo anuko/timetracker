@@ -50,7 +50,6 @@ class ttGroup {
   var $allow_overlap = 0;       // Whether to allow overlapping time entries.
   var $future_entries = 0;      // Whether to allow creating future entries.
   var $uncompleted_indicators = 0; // Uncompleted time entry indicators (show nowhere or on users page).
-  var $confirm_save = 0;        // Whether to show warnings for save action when date changed.
   var $bcc_email = null;        // Bcc email.
   var $allow_ip = null;         // Specification from where user is allowed access.
   var $password_complexity = null; // Password complexity example.
@@ -112,7 +111,6 @@ class ttGroup {
       $this->allow_overlap = $config->getDefinedValue('allow_overlap');
       $this->future_entries = $config->getDefinedValue('future_entries');
       $this->uncompleted_indicators = $config->getDefinedValue('uncompleted_indicators');
-      $this->confirm_save = $config->getDefinedValue('confirm_save');
       /*
       if ($this->isPluginEnabled('wu')) {
         $minutes_in_unit = $config->getIntValue('minutes_in_unit');

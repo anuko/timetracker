@@ -51,7 +51,7 @@ if (!$expense_item || $expense_item['invoice_id']) {
 }
 
 $item_date = new DateAndTime(DB_DATEFORMAT, $expense_item['date']);
-$confirm_save = $user->getConfirmSave();
+$confirm_save = $user->getConfigOption('confirm_save');
 
 // Initialize variables.
 $cl_date = $cl_client = $cl_project = $cl_item_name = $cl_cost = null;

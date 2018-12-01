@@ -57,7 +57,7 @@ if ($user->isPluginEnabled('cf')) {
 }
 
 $item_date = new DateAndTime(DB_DATEFORMAT, $time_rec['date']);
-$confirm_save = $user->getConfirmSave();
+$confirm_save = $user->getConfigOption('confirm_save');
 
 // Initialize variables.
 $cl_start = $cl_finish = $cl_duration = $cl_date = $cl_note = $cl_project = $cl_task = $cl_billable = null;
