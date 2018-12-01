@@ -41,7 +41,7 @@ if (!$user->isPluginEnabled('cl')) {
   exit();
 }
 
-$projects = ttTeamHelper::getActiveProjects($user->group_id);
+$projects = ttTeamHelper::getActiveProjects($user->getGroup());
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -58,7 +58,7 @@ $form = new Form('clientForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 350px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','style'=>'width: 350px; height: 80px;','value'=>$cl_address));
 $form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
-if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+if (MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode())
   $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'layout'=>'H','datakeys'=>array('id','name'),'value'=>$cl_projects));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.add')));
 
