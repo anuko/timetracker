@@ -29,6 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttTeamHelper');
+import('ttGroupHelper');
 import('ttInvoiceHelper');
 
 // Access checks.
@@ -56,7 +57,7 @@ $form->addInput(array('type'=>'datefield','name'=>'date','size'=>'20','value'=>$
 
 // Dropdown for clients if the clients plugin is enabled.
 if ($user->isPluginEnabled('cl')) {
-  $clients = ttTeamHelper::getActiveClients($user->group_id);
+  $clients = ttGroupHelper::getActiveClients();
   $form->addInput(array('type'=>'combobox','name'=>'client','style'=>'width: 250px;','data'=>$clients,'datakeys'=>array('id','name'),'value'=>$cl_client,'empty'=>array(''=>$i18n->get('dropdown.select'))));
 }
 // Dropdown for projects.

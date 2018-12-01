@@ -28,7 +28,7 @@
 
 require_once('../initialize.php');
 import('form.Form');
-import('ttTeamHelper');
+import('ttGroupHelper');
 
 // Access checks.
 if (!(ttAccessAllowed('view_own_clients') || ttAccessAllowed('manage_clients'))) {
@@ -42,8 +42,8 @@ if (!$user->isPluginEnabled('cl')) {
 // End of access checks.
 
 if($user->can('manage_clients')) {
-  $active_clients = ttTeamHelper::getActiveClients($user->group_id, true);
-  $inactive_clients = ttTeamHelper::getInactiveClients($user->group_id, true);
+  $active_clients = ttGroupHelper::getActiveClients(true);
+  $inactive_clients = ttGroupHelper::getInactiveClients(true);
 } else
   $active_clients = $user->getAssignedClients();
 
