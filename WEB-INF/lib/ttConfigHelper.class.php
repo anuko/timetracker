@@ -38,13 +38,15 @@ class ttConfigHelper {
 
   // Constructor.
   function __construct($config) {
-    $this->config = $config;
-    $this->config_array = explode(',', $this->config);
+    $this->config = trim($config, ' ,');
+    if ($this->config)
+      $this->config_array = explode(',', $this->config);
   }
 
   // getDefinedValue determines if a value identified by name is defined.
   function getDefinedValue($name) {
-    return in_array($name, $this->config_array);
+    $defined = $this->config_array ? in_array($name, $this->config_array) : false;
+    return $defined;
   }
 
   // setDefinedValue either sets or deletes a defined value identified by name.
@@ -58,29 +60,32 @@ class ttConfigHelper {
       }
     } else {
       // Deleting part.
-      foreach ($this->config_array as $key => $value) {
-        if ($value === $name) {
-          unset($this->config_array[$key]);
-          $this->config = implode(',', $this->config_array);
-          return;
+      if ($this->config_array) {
+        foreach ($this->config_array as $key => $value) {
+          if ($value === $name) {
+            unset($this->config_array[$key]);
+            $this->config = implode(',', $this->config_array);
+            return;
+          }
         }
       }
     }
   }
 
-  // The getIntValue parses an integer value from the source config string.
+  // The getIntValue parses an integer value from the source config array.
   function getIntValue($name) {
     $name_with_colon = $name.':';
     $len = strlen($name_with_colon);
 
-    foreach ($this->config_array as $unparsed_value) {
-      if (substr($unparsed_value, 0, $len) === $name_with_colon) {
-        // Found value.
-        $unparsed_len = strlen($unparsed_value);
-        $int_value = (int) substr($unparsed_value, -($unparsed_len - $len));
-        return $int_value;
+    if ($this->config_array) {
+      foreach ($this->config_array as $unparsed_value) {
+        if (substr($unparsed_value, 0, $len) === $name_with_colon) {
+          // Found value.
+          $unparsed_len = strlen($unparsed_value);
+          $int_value = (int) substr($unparsed_value, -($unparsed_len - $len));
+          return $int_value;
+        }
       }
-        
     }
     return false;
   }
@@ -91,18 +96,20 @@ class ttConfigHelper {
     $name_with_colon = $name.':';
     $len = strlen($name_with_colon);
 
-    foreach ($this->config_array as $key => $unparsed_value) {
-      if (substr($unparsed_value, 0, $len) === $name_with_colon) {
-        // Found an already existing value.
-        if ($value !== null) {
-          // Replace value.
-          $this->config_array[$key] = $name.':'.$value;
-        } else {
-          // Remove value if our new value is NULL.
-          unset($this->config_array[$key]);
+    if ($this->config_array) {
+      foreach ($this->config_array as $key => $unparsed_value) {
+        if (substr($unparsed_value, 0, $len) === $name_with_colon) {
+          // Found an already existing value.
+          if ($value !== null) {
+            // Replace value.
+            $this->config_array[$key] = $name.':'.$value;
+          } else {
+            // Remove value if our new value is NULL.
+            unset($this->config_array[$key]);
+          }
+          $this->config = implode(',', $this->config_array);
+          return;
         }
-        $this->config = implode(',', $this->config_array);
-        return;
       }
     }
     // If we get here, the value was not found, so add it.
@@ -113,6 +120,6 @@ class ttConfigHelper {
 
   // The getConfig returns the config string.
   function getConfig() {
-    return $this->config;
+    return trim($this->config, ' ,');
   }
 }
