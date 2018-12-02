@@ -2,7 +2,6 @@
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
 
-{$forms.dropdownOptionsForm.open}
 <table cellspacing="0" cellpadding="7" border="0" width="720">
   <tr>
     <td valign="top">
@@ -38,4 +37,3 @@
     </td>
   </tr>
 </table>
-{$forms.dropdownOptionsForm.close}

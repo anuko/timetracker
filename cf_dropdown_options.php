@@ -39,15 +39,16 @@ if (!$user->isPluginEnabled('cf')) {
   header('Location: feature_disabled.php');
   exit();
 }
+$field_id = (int)$request->getParameter('field_id');
+$field = CustomFields::getField($field_id);
+if (!$field) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
 
-$field_id = $request->getParameter('field_id');
 $options = CustomFields::getOptions($field_id);
-if (false === $options)
-  $err->add($i18n->get('error.db'));
 
-$form = new Form('dropdownOptionsForm');
-
-$smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('field_id', $field_id);
 $smarty->assign('options', $options);
 $smarty->assign('title', $i18n->get('title.cf_dropdown_options'));

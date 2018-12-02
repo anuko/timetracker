@@ -91,20 +91,30 @@ class CustomFields {
   }
 
   function delete($log_id) {
-
+    global $user;
     $mdb2 = getConnection();
-    $sql = "update tt_custom_field_log set status = NULL where log_id = $log_id";
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "update tt_custom_field_log set status = null".
+      " where log_id = $log_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
 
   function get($log_id) {
-    $fields = array();
-
+    global $user;
     $mdb2 = getConnection();
-    $sql = "select id, field_id, option_id, value from tt_custom_field_log where log_id = $log_id and status = 1";
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select id, field_id, option_id, value from tt_custom_field_log".
+      " where log_id = $log_id and group_id = $group_id and org_id = $org_id and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
+      $fields = array();
       while ($val = $res->fetchRow()) {
         $fields[] = $val;
       }
@@ -123,7 +133,8 @@ class CustomFields {
 
     // Check if the option exists.
     $id = 0;
-    $sql = "select id from tt_custom_field_options where field_id = $field_id and value = ".$mdb2->quote($option_name);
+    $sql = "select id from tt_custom_field_options".
+      " where field_id = $field_id and group_id = $group_id and org_id = $org_id and value = ".$mdb2->quote($option_name);
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))
       return false;
@@ -142,10 +153,14 @@ class CustomFields {
 
   // updateOption updates option name.
   static function updateOption($id, $option_name) {
-
+    global $user;
     $mdb2 = getConnection();
 
-    $sql = "update tt_custom_field_options set value = ".$mdb2->quote($option_name)." where id = $id";
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "update tt_custom_field_options set value = ".$mdb2->quote($option_name).
+       " where id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
@@ -155,25 +170,22 @@ class CustomFields {
     global $user;
     $mdb2 = getConnection();
 
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $field_id = CustomFields::getFieldIdForOption($id);
+    if (!$field_id) return false;
 
-    // First make sure that the field is ours.
-    $sql = "select group_id from tt_custom_fields where id = $field_id";
-    $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error'))
-      return false;
-    $val = $res->fetchRow();
-    if ($user->group_id != $val['group_id'])
-      return false;
-
-    // Delete log entries with this option.
-    $sql = "update tt_custom_field_log set status = NULL where field_id = $field_id and value = ".$mdb2->quote($id);
+    // Delete log entries with this option. TODO: why? Research impact.
+    $sql = "update tt_custom_field_log set status = null".
+      " where field_id = $field_id and group_id = $group_id and org_id = $org_id and value = ".$mdb2->quote($id);
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
     // Delete the option.
-    $sql = "update tt_custom_field_options set status = NULL where id = $id";
+    $sql = "update tt_custom_field_options set status = null".
+      " where id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
@@ -182,21 +194,16 @@ class CustomFields {
   static function getOptions($field_id) {
     global $user;
     $mdb2 = getConnection();
-    $options = array();
 
-    // First make sure that the field is ours.
-    $sql = "select group_id from tt_custom_fields where id = $field_id";
-    $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error'))
-      return false;
-    $val = $res->fetchRow();
-    if ($user->group_id != $val['group_id'])
-      return false;
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
     // Get options.
-    $sql = "select id, value from tt_custom_field_options where field_id = $field_id and status = 1 order by value";
+    $sql = "select id, value from tt_custom_field_options".
+      " where field_id = $field_id and group_id = $group_id and org_id = $org_id and status = 1 order by value";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
+      $options = array();
       while ($val = $res->fetchRow()) {
         $options[$val['id']] = $val['value'];
       }
@@ -210,19 +217,11 @@ class CustomFields {
     global $user;
     $mdb2 = getConnection();
 
-    $field_id = CustomFields::getFieldIdForOption($id);
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
-    // First make sure that the field is ours.
-    $sql = "select group_id from tt_custom_fields where id = $field_id";
-    $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error'))
-      return false;
-    $val = $res->fetchRow();
-    if ($user->group_id != $val['group_id'])
-      return false;
-
-    // Get option name.
-    $sql = "select value from tt_custom_field_options where id = $id";
+    $sql = "select value from tt_custom_field_options".
+      " where id = $id and group_id = $group_id and org_id = $org_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -275,9 +274,14 @@ class CustomFields {
 
   // getFieldIdForOption returns field id from an associated option id.
   static function getFieldIdForOption($option_id) {
+    global $user;
     $mdb2 = getConnection();
 
-    $sql = "select field_id from tt_custom_field_options where id = $option_id";
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select field_id from tt_custom_field_options".
+      " where id = $option_id and group_id = $group_id and org_id = $org_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -291,8 +295,10 @@ class CustomFields {
   static function insertField($field_name, $field_type, $required) {
     global $user;
     $mdb2 = getConnection();
+
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
+
     $sql = "insert into tt_custom_fields (group_id, org_id, type, label, required, status)".
       " values($group_id, $org_id, $field_type, ".$mdb2->quote($field_name).", $required, 1)";
     $affected = $mdb2->exec($sql);
@@ -303,8 +309,10 @@ class CustomFields {
   static function updateField($id, $name, $type, $required) {
     global $user;
     $mdb2 = getConnection();
+
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
+
     $sql = "update tt_custom_fields set label = ".$mdb2->quote($name).", type = $type, required = $required".
       " where id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
