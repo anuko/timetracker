@@ -29,7 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttInvoiceHelper');
-import('ttSysConfig');
+import('ttUserConfig');
 
 // Access checks.
 if (!(ttAccessAllowed('manage_invoices') || ttAccessAllowed('view_own_invoices'))) {
@@ -48,7 +48,7 @@ if (!$invoice) {
 }
 // End of access checks.
 
-$sc = new ttSysConfig($user->id);
+$uc = new ttUserConfig();
 
 if ($request->isPost()) {
   $cl_receiver = trim($request->getParameter('receiver'));
@@ -56,8 +56,8 @@ if ($request->isPost()) {
   $cl_subject = trim($request->getParameter('subject'));
   $cl_comment = trim($request->getParameter('comment'));
 } else {
-  $cl_receiver = $sc->getValue(SYSC_LAST_INVOICE_EMAIL);
-  $cl_cc = $sc->getValue(SYSC_LAST_INVOICE_CC);
+  $cl_receiver = $uc->getValue(SYSC_LAST_INVOICE_EMAIL);
+  $cl_cc = $uc->getValue(SYSC_LAST_INVOICE_CC);
   $cl_subject = $i18n->get('title.invoice').' '.$invoice['name'].', '.$user->group_name;
 }
 
@@ -78,8 +78,8 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     // Save last invoice emails for future use.
-    $sc->setValue(SYSC_LAST_INVOICE_EMAIL, $cl_receiver);
-    $sc->setValue(SYSC_LAST_INVOICE_CC, $cl_cc);
+    $uc->setValue(SYSC_LAST_INVOICE_EMAIL, $cl_receiver);
+    $uc->setValue(SYSC_LAST_INVOICE_CC, $cl_cc);
 
     $body = ttInvoiceHelper::prepareInvoiceBody($cl_invoice_id, $cl_comment);
 

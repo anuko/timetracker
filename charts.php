@@ -32,7 +32,7 @@ require_once('initialize.php');
 import('form.Form');
 import('DateAndTime');
 import('ttChartHelper');
-import('ttSysConfig');
+import('ttUserConfig');
 import('PieChartEx');
 import('ttUserHelper');
 import('ttTeamHelper');
@@ -66,8 +66,8 @@ $_SESSION['date'] = $cl_date;
 // Initialize chart interval.
 $cl_interval = $_SESSION['chart_interval'];
 if (!$cl_interval) {
-  $sc = new ttSysConfig($user->id);
-  $cl_interval = $sc->getValue(SYSC_CHART_INTERVAL);
+  $uc = new ttUserConfig();
+  $cl_interval = $uc->getValue(SYSC_CHART_INTERVAL);
 }
 if (!$cl_interval) $cl_interval = INTERVAL_THIS_MONTH;
 $_SESSION['chart_interval'] = $cl_interval;
@@ -75,10 +75,10 @@ $_SESSION['chart_interval'] = $cl_interval;
 // Initialize chart type.
 $cl_type = $_SESSION['chart_type'];
 if (!$cl_type) {
-  $sc = new ttSysConfig($user->id);
-  $cl_type = $sc->getValue(SYSC_CHART_TYPE);
+  $uc = new ttUserConfig();
+  $cl_type = $uc->getValue(SYSC_CHART_TYPE);
 }
-if (MODE_TIME == $user->tracking_mode) {
+if (MODE_TIME == $user->getTrackingMode()) {
   if ($user->isPluginEnabled('cl'))
     $cl_type = CHART_CLIENTS;
 } else {
@@ -86,7 +86,7 @@ if (MODE_TIME == $user->tracking_mode) {
     if (!$user->isPluginEnabled('cl'))
       $cl_type = CHART_PROJECTS;	
   } elseif ($cl_type == CHART_TASKS) {
-    if (MODE_PROJECTS_AND_TASKS != $user->tracking_mode)
+    if (MODE_PROJECTS_AND_TASKS != $user->getTrackingMode())
       $cl_type = CHART_PROJECTS;
   }
 }
@@ -103,8 +103,8 @@ if ($request->isPost()) {
     // Save in the session
     $_SESSION['chart_interval'] = $cl_interval;
     // and permanently.
-    $sc = new ttSysConfig($user->id);
-    $sc->setValue(SYSC_CHART_INTERVAL, $cl_interval);
+    $uc = new ttUserConfig();
+    $uc->setValue(SYSC_CHART_INTERVAL, $cl_interval);
   }
   // If chart type changed - save it.
   $cl_type = $request->getParameter('type');
@@ -112,8 +112,8 @@ if ($request->isPost()) {
     // Save in the session
     $_SESSION['chart_type'] = $cl_type;
     // and permanently.
-    $sc = new ttSysConfig($user->id);
-    $sc->setValue(SYSC_CHART_TYPE, $cl_type);
+    $uc = new ttUserConfig();
+    $uc->setValue(SYSC_CHART_TYPE, $cl_type);
   }
   // If user has changed - set behalf_id accordingly in the session.
   if ($request->getParameter('onBehalfUser')) {

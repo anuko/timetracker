@@ -29,7 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 import('form.ActionForm');
-import('ttSysConfig');
+import('ttUserConfig');
 import('ttReportHelper');
 
 // Access check.
@@ -38,7 +38,7 @@ if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports'))) {
   exit();
 }
 
-$sc = new ttSysConfig($user->id);
+$uc = new ttUserConfig();
 
 if ($request->isPost()) {
   $cl_receiver = trim($request->getParameter('receiver'));
@@ -46,8 +46,8 @@ if ($request->isPost()) {
   $cl_subject = trim($request->getParameter('subject'));
   $cl_comment = trim($request->getParameter('comment'));
 } else {
-  $cl_receiver = $sc->getValue(SYSC_LAST_REPORT_EMAIL);
-  $cl_cc = $sc->getValue(SYSC_LAST_REPORT_CC);
+  $cl_receiver = $uc->getValue(SYSC_LAST_REPORT_EMAIL);
+  $cl_cc = $uc->getValue(SYSC_LAST_REPORT_CC);
   $cl_subject = $i18n->get('form.mail.report_subject');
 }
 
@@ -67,8 +67,8 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     // Save last report emails for future use.
-    $sc->setValue(SYSC_LAST_REPORT_EMAIL, $cl_receiver);
-    $sc->setValue(SYSC_LAST_REPORT_CC, $cl_cc);
+    $uc->setValue(SYSC_LAST_REPORT_EMAIL, $cl_receiver);
+    $uc->setValue(SYSC_LAST_REPORT_CC, $cl_cc);
 
     // Obtain session bean with report attributes.
     $bean = new ActionForm('reportBean', new Form('reportForm'));

@@ -257,18 +257,20 @@ class ttInvoiceHelper {
       }
     }
 
-    // sql part for project id.
-    if ($project_id) $project_part = " and ei.project_id = $project_id";
+    if ($user->isPluginEnabled('ex')) {
+      // sql part for project id.
+      if ($project_id) $project_part = " and ei.project_id = $project_id";
 
-    $sql = "select count(*) as num from tt_expense_items ei
-      where ei.client_id = $client_id $project_part and ei.invoice_id is NULL
-      and ei.date >= ".$mdb2->quote($start)." and ei.date <= ".$mdb2->quote($end)."
-      and ei.cost <> 0 and ei.status = 1";
-    $res = $mdb2->query($sql);
-    if (!is_a($res, 'PEAR_Error')) {
-      $val = $res->fetchRow();
-      if ($val['num']) {
-        return true;
+      $sql = "select count(*) as num from tt_expense_items ei
+        where ei.client_id = $client_id $project_part and ei.invoice_id is NULL
+        and ei.date >= ".$mdb2->quote($start)." and ei.date <= ".$mdb2->quote($end)."
+        and ei.cost <> 0 and ei.status = 1";
+      $res = $mdb2->query($sql);
+      if (!is_a($res, 'PEAR_Error')) {
+        $val = $res->fetchRow();
+        if ($val['num']) {
+          return true;
+        }
       }
     }
 
