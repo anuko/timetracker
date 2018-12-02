@@ -45,6 +45,7 @@ if (count($fields) >= 1) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 if ($request->isPost()) {
   $cl_field_name = trim($request->getParameter('name'));

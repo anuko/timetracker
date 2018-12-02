@@ -237,8 +237,12 @@ class CustomFields {
     global $user;
     $mdb2 = getConnection();
 
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $fields = array();
-    $sql = "select id, type, label from tt_custom_fields where group_id = $user->group_id and status = 1 and type > 0";
+    $sql = "select id, type, label from tt_custom_fields".
+      " where group_id = $group_id and org_id = $org_id and status = 1 and type > 0";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -254,7 +258,11 @@ class CustomFields {
     global $user;
     $mdb2 = getConnection();
 
-    $sql = "select label, type, required from tt_custom_fields where id = $id and group_id = $user->group_id";
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select label, type, required from tt_custom_fields".
+      " where id = $id and group_id = $group_id and org_id = $org_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -295,40 +303,39 @@ class CustomFields {
   static function updateField($id, $name, $type, $required) {
     global $user;
     $mdb2 = getConnection();
-    $sql = "update tt_custom_fields set label = ".$mdb2->quote($name).", type = $type, required = $required where id = $id and group_id = $user->group_id";
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+    $sql = "update tt_custom_fields set label = ".$mdb2->quote($name).", type = $type, required = $required".
+      " where id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
 
   // The deleteField deletes a custom field, its options and log entries for group.
   static function deleteField($field_id) {
-
     global $user;
     $mdb2 = getConnection();
 
-    // First make sure that the field is ours so that we can safely delete it.
-    $sql = "select group_id from tt_custom_fields where id = $field_id";
-    $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error'))
-      return false;
-    $val = $res->fetchRow();
-    if ($user->group_id != $val['group_id'])
-      return false;
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
-    // Mark log entries as deleted.
-    $sql = "update tt_custom_field_log set status = NULL where field_id = $field_id";
+    // Mark log entries as deleted. TODO: why are we doing this? Research impact.
+    $sql = "update tt_custom_field_log set status = null".
+      " where field_id = $field_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
     // Mark field options as deleted.
-    $sql = "update tt_custom_field_options set status = NULL where field_id = $field_id";
+    $sql = "update tt_custom_field_options set status = null".
+      " where field_id = $field_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
     // Mark custom field as deleted.
-    $sql = "update tt_custom_fields set status = NULL where id = $field_id and group_id = $user->group_id";
+    $sql = "update tt_custom_fields set status = null".
+      " where id = $field_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }

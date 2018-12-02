@@ -39,11 +39,13 @@ if (!$user->isPluginEnabled('cf')) {
   header('Location: feature_disabled.php');
   exit();
 }
-
-$cl_id = $request->getParameter('id');
+$cl_id = (int)$request->getParameter('id');
 $field = CustomFields::getField($cl_id);
-if (false === $field)
-  $err->add($i18n->get('error.db'));
+if (!$field) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
 
 $form = new Form('fieldForm');
 if ($err->no()) {

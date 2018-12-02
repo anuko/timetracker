@@ -39,8 +39,13 @@ if (!$user->isPluginEnabled('cf')) {
   header('Location: feature_disabled.php');
   exit();
 }
-
-$id = $request->getParameter('id');
+$id = (int)$request->getParameter('id');
+$field = CustomFields::getField($id);
+if (!$field) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
 
 $form = new Form('fieldDeleteForm');
 
@@ -60,15 +65,9 @@ if ($request->isPost()) {
     exit();
   }
 } else {
-  $field = CustomFields::getField($id);	
-  if (false === $field)
-    $err->add($i18n->get('error.db'));
-
-  if ($err->no()) {
-    $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$id));
-    $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
-    $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
-  }
+  $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$id));
+  $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
+  $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 }
 
 $smarty->assign('field', $field['label']);

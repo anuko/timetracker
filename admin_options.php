@@ -36,6 +36,7 @@ if (!ttAccessAllowed('administer_site')) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
