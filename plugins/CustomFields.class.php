@@ -227,7 +227,7 @@ class CustomFields {
     $org_id = $user->org_id;
 
     $sql = "select value from tt_custom_field_options".
-      " where id = $id and group_id = $group_id and org_id = $org_id";
+      " where id = $id and group_id = $group_id and org_id = $org_id and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();

@@ -39,11 +39,13 @@ if (!$user->isPluginEnabled('cf')) {
   header('Location: feature_disabled.php');
   exit();
 }
-
 $cl_id = $request->getParameter('id');
 $cl_name = CustomFields::getOptionName($cl_id);
-if (false === $cl_name)
-  $err->add($i18n->get('error.db'));
+if (!$cl_name) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
 
 $form = new Form('optionEditForm');
 if ($err->no()) {
