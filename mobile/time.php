@@ -60,7 +60,7 @@ $next_date = date('Y-m-d', strtotime('+1 day', strtotime($cl_date)));
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('../plugins/CustomFields.class.php');
-  $custom_fields = new CustomFields($user->group_id);
+  $custom_fields = new CustomFields();
   $smarty->assign('custom_fields', $custom_fields);
 }
 

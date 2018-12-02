@@ -37,11 +37,16 @@ class CustomFields {
   var $options = array(); // Array of options for a dropdown custom field.
 
   // Constructor.
-  function __construct($group_id) {
+  function __construct() {
+    global $user;
     $mdb2 = getConnection();
 
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     // Get fields.
-    $sql = "select id, type, label, required from tt_custom_fields where group_id = $group_id and status = 1 and type > 0";
+    $sql = "select id, type, label, required from tt_custom_fields".
+      " where group_id = $group_id and org_id = $org_id and status = 1 and type > 0";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -52,7 +57,8 @@ class CustomFields {
     // If we have a dropdown obtain options for it.
     if ((count($this->fields) > 0) && ($this->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)) {
 
-      $sql = "select id, value from tt_custom_field_options where field_id = ".$this->fields[0]['id']." and status = 1 order by value";
+      $sql = "select id, value from tt_custom_field_options".
+        " where field_id = ".$this->fields[0]['id']." and group_id = $group_id and org_id = $org_id and status = 1 order by value";
       $res = $mdb2->query($sql);
       if (!is_a($res, 'PEAR_Error')) {
         while ($val = $res->fetchRow()) {

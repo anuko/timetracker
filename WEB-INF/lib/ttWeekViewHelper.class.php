@@ -45,7 +45,7 @@ class ttWeekViewHelper {
 
     $custom_field_1 = null;
     if ($user->isPluginEnabled('cf')) {
-      $custom_fields = new CustomFields($user->group_id);
+      $custom_fields = new CustomFields();
       $cf_1_type = $custom_fields->fields[0]['type'];
       if ($cf_1_type == CustomFields::TYPE_TEXT) {
         $custom_field_1 = ', cfl.value as cf_1_value';
