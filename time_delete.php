@@ -64,7 +64,7 @@ if ($request->isPost()) {
 
     if ($err->no()) {
       // Delete the record.
-      if (ttTimeHelper::delete($cl_id, $user_id)) {
+      if (ttTimeHelper::delete($cl_id)) {
         header('Location: time.php');
         exit();
       } else {

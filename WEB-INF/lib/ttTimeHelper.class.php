@@ -506,15 +506,22 @@ class ttTimeHelper {
   }
 
   // delete - deletes a record from tt_log table and its associated custom field values.
-  static function delete($id, $user_id) {
+  static function delete($id) {
+    global $user;
     $mdb2 = getConnection();
 
-    $sql = "update tt_log set status = NULL where id = $id and user_id = $user_id";
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "update tt_log set status = null".
+      " where id = $id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    $sql = "update tt_custom_field_log set status = NULL where log_id = $id";
+    $sql = "update tt_custom_field_log set status = null".
+      " where log_id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
