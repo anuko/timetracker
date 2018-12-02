@@ -746,7 +746,7 @@ class ttUser {
       $user_part .= ' <span class="onBehalf">'.$i18n->get('label.on_behalf').' '.htmlspecialchars($this->behalf_name).'</span>';
     }
     if ($this->behalf_group_id) {
-      $user_part .= ',  <span class="onBehalf">'.$i18n->get('label.on_behalf').' '.htmlspecialchars($this->behalf_group_name).'</span>';
+      $user_part .= ',  <span class="onBehalf">'.htmlspecialchars($this->behalf_group_name).'</span>';
     } else {
       if ($this->group_name) // Note: we did not require group names in the past.
         $user_part .= ', '.$this->group_name;

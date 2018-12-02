@@ -28,7 +28,7 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttTeamHelper');
+import('ttGroupHelper');
 import('ttTaskHelper');
 
 // Access checks.
@@ -48,7 +48,7 @@ if (!$task) {
 }
 // End of access checks.
 
-$projects = ttTeamHelper::getActiveProjects($user->getGroup());
+$projects = ttGroupHelper::getActiveProjects();
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));

@@ -90,7 +90,7 @@ if ($user->isPluginEnabled('cl'))
 
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','format'=>'.2','value'=>$cl_rate));
 
-$projects = ttTeamHelper::getActiveProjects($user->group_id);
+$projects = ttGroupHelper::getActiveProjects();
 
 // Define classes for the projects table.
 class NameCellRenderer extends DefaultCellRenderer {

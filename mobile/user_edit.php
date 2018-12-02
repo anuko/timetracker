@@ -51,7 +51,7 @@ if (!$user_details) {
 if ($user->isPluginEnabled('cl'))
   $clients = ttGroupHelper::getActiveClients();
 
-$projects = ttTeamHelper::getActiveProjects($user->group_id);
+$projects = ttGroupHelper::getActiveProjects();
 $assigned_projects = array();
 
 if ($request->isPost()) {

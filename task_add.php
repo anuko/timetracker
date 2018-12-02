@@ -29,7 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 import('form.ActionForm');
-import('ttTeamHelper');
+import('ttGroupHelper');
 import('ttTaskHelper');
 
 // Access checks.
@@ -43,7 +43,7 @@ if (MODE_PROJECTS_AND_TASKS != $user->getTrackingMode()) {
 }
 // End of access checks.
 
-$projects = ttTeamHelper::getActiveProjects($user->getGroup());
+$projects = ttGroupHelper::getActiveProjects();
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
