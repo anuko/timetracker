@@ -13,7 +13,7 @@
         </tr>
         <tr>
           <td align="right">{$i18n.label.tax}, %:</td>
-          <td>{$forms.clientForm.tax.control}&nbsp;(0{$user->decimal_mark}00)</td>
+          <td>{$forms.clientForm.tax.control}&nbsp;(0{$user->getDecimalMark()}00)</td>
         </tr>
         <tr>
           <td align = "right">{$i18n.label.status}:</td>

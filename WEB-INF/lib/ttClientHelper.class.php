@@ -54,14 +54,16 @@ class ttClientHelper {
   }
 
   // getClients - returns an array of active and inactive clients in a group.
-  static function getClients()
-  {
+  static function getClients() {
     global $user;
-
-    $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name from tt_clients where group_id = ".$user->getGroup()." and (status = 0 or status = 1) order by upper(name)";
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $result = array();
+
+    $sql = "select id, name from tt_clients where group_id = $group_id and org_id = $org_id and (status = 0 or status = 1) order by upper(name)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -73,13 +75,14 @@ class ttClientHelper {
 
   // The getClientByName looks up a client by name.
   static function getClientByName($client_name) {
-
-    $mdb2 = getConnection();
     global $user;
+    $mdb2 = getConnection();
 
-    $sql = "select id from tt_clients where group_id = ".$user->getGroup().
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select id from tt_clients where group_id = $group_id and org_id = $org_id".
       " and name = ".$mdb2->quote($client_name)." and (status = 1 or status = 0)";
-
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -92,11 +95,13 @@ class ttClientHelper {
 
   // The getDeletedClient looks up a deleted client by id.
   static function getDeletedClient($client_id) {
-
-    $mdb2 = getConnection();
     global $user;
+    $mdb2 = getConnection();
 
-    $sql = "select name, address from tt_clients where group_id = ".$user->getGroup().
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select name, address from tt_clients where group_id = $group_id and org_id = $org_id".
       " and id = $client_id and status is NULL";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -108,22 +113,26 @@ class ttClientHelper {
 
   // The delete function marks client as deleded.
   static function delete($id, $delete_client_entries) {
-
-    $mdb2 = getConnection();
     global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
     // Handle custom field log records.
     if ($delete_client_entries) {
-      $sql = "update tt_custom_field_log set status = NULL where log_id in (select id from tt_log where client_id = $id and status = 1)";
+      $sql = "update tt_custom_field_log set status = null".
+        " where log_id in (select id from tt_log where client_id = $id and status = 1) and group_id = $group_id and org_id = $org_id";
       $affected = $mdb2->exec($sql);
-        if (is_a($affected, 'PEAR_Error'))
-          return false;
+      if (is_a($affected, 'PEAR_Error'))
+        return false;
     }
 
     // Handle time records.
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
     if ($delete_client_entries) {
-      $sql = 'update tt_log set status = NULL'.$modified_part." where client_id = $id";
+      $sql = 'update tt_log set status = null'.$modified_part.
+        " where client_id = $id and group_id = $group_id and org_id = $org_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -131,7 +140,8 @@ class ttClientHelper {
 
     // Handle expense items.
     if ($delete_client_entries) {
-      $sql = 'update tt_expense_items set status = NULL'.$modified_part." where client_id = $id";
+      $sql = 'update tt_expense_items set status = null'.$modified_part.
+        " where client_id = $id and group_id = $group_id and org_id = $org_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -139,26 +149,30 @@ class ttClientHelper {
 
     // Handle invoices.
     if ($delete_client_entries) {
-      $sql = "update tt_invoices set status = NULL where client_id = $id and group_id = ".$user->getGroup();
+      $sql = "update tt_invoices set status = null".
+        " where client_id = $id and group_id = $group_id and org_id = $org_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
     }
 
     // Delete project binds to this client.
-    $sql = "delete from tt_client_project_binds where client_id = $id";
+    $sql = "delete from tt_client_project_binds".
+      " where client_id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
     // Handle users for client.
-    $sql = 'update tt_users set status = NULL'.$modified_part." where client_id = $id and group_id = ".$user->getGroup();
+    $sql = 'update tt_users set status = null'.$modified_part.
+      " where client_id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
     // Mark client deleted.
-    $sql = "update tt_clients set status = NULL where id = $id and group_id = ".$user->getGroup();
+    $sql = "update tt_clients set status = null".
+      " where id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
@@ -169,8 +183,9 @@ class ttClientHelper {
     global $user;
     $mdb2 = getConnection();
 
-    $group_id = (int) $fields['group_id'];
-    $org_id = (int) $fields['org_id'];
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $name = $fields['name'];
     $address = $fields['address'];
     $tax = $fields['tax'];
@@ -204,8 +219,11 @@ class ttClientHelper {
   // The update function updates a client record in tt_clients table.  
   static function update($fields)
   {
-    $mdb2 = getConnection();
     global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
     $id = $fields['id'];
     $name = $fields['name'];
@@ -218,13 +236,14 @@ class ttClientHelper {
     if ($tax == '') $tax = 0;
 
     // Insert client to project binds into tt_client_project_binds table.
-    $sql = "delete from tt_client_project_binds where client_id = $id";
+    $sql = "delete from tt_client_project_binds".
+      " where client_id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       die($affected->getMessage());
     if (count($projects) > 0)
       foreach ($projects as $p_id) {
-        $sql = "insert into tt_client_project_binds (client_id, project_id) values($id, $p_id)";
+        $sql = "insert into tt_client_project_binds (client_id, project_id, group_id, org_id) values($id, $p_id, $group_id, $org_id)";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
           return false;
@@ -234,7 +253,7 @@ class ttClientHelper {
     $comma_separated = implode(",", $projects); // This is a comma-separated list of associated project ids.
     $sql = "update tt_clients set name = ".$mdb2->quote($name).", address = ".$mdb2->quote($address).
       ", tax = $tax, projects = ".$mdb2->quote($comma_separated).", status = $status".
-      " where group_id = ".$user->getGroup()." and id = ".$id;
+      " where id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
