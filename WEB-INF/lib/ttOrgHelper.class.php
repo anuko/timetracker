@@ -71,7 +71,7 @@ class ttOrgHelper {
     // Determine inactive organizations by querying the database for max access timestamp for its users.
     $cutoff_timestamp = $mdb2->quote(date('Y-m-d', strtotime('-1 year')));
     $sql = "select org_id from".
-      " (select max(accessed) as last_access, org_id from tt_users group by org_id order by last_access, org_id) as t".
+      " (select max(accessed) as last_access, org_id from tt_users where org_id > 0 group by org_id order by last_access, org_id) as t".
       " where last_access is null or last_access < $cutoff_timestamp limit 5"; // Max 5 orgs at a time for now...
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
