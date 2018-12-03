@@ -523,7 +523,7 @@ class ttUser {
   // - subgroup must ve valid;
   // - user should be a member of it.
   function checkBehalfId() {
-    if (!$this->behalf_group_id) {
+    if (!$this->behalfGroup) {
       // Checking user from home group.
       $options = array('status'=>ACTIVE,'max_rank'=>$this->rank-1);
       $users = $this->getUsers($options);
@@ -533,7 +533,7 @@ class ttUser {
       }
     } else {
       // Checking user from a subgroup.
-      $group_id = $this->behalf_group_id;
+      $group_id = $this->behalfGroup->id;
       if (!$this->isSubgroupValid($group_id))
         return false;
 
@@ -556,11 +556,10 @@ class ttUser {
   // In this case we still allow access to charts, but set behalf_id to someone else.
   // Another example: working in a subgroup on behalf of someone else.
   function adjustBehalfId() {
-    $group_id = $this->behalf_group_id ? $this->behalf_group_id : $this->group_id;
-    $rank = $this->getMaxRankForGroup($group_id);
+    $rank = $this->getMaxRankForGroup($this->getGroup());
 
     // Adjust to first found user in group.
-    $options = array('group_id'=>$group_id,'status'=>ACTIVE,'max_rank'=>$rank);
+    $options = array('status'=>ACTIVE,'max_rank'=>$rank);
     $users = $this->getUsers($options);
     foreach($users as $one_user) {
       // Fake loop to access first element.
@@ -786,7 +785,7 @@ class ttUser {
 
     $this->behalfGroup = new ttGroup($this->behalf_group_id, $this->org_id);
 
-    // Adjust on behalf user.
+    // Adjust on behalf user to first found user in subgroup.
     $this->adjustBehalfId();
     return;
   }

@@ -2,8 +2,8 @@
 {$forms.chartForm.open}
 <table border="0" width="720">
   <tr>
-{if $on_behalf_control}
-      <td width="50%" align="center">{$i18n.label.user}: {$forms.chartForm.onBehalfUser.control}</td>
+{if $user_dropdown}
+      <td width="50%" align="center">{$i18n.label.user}: {$forms.chartForm.user.control}</td>
   {if $chart_selector}
       <td width="50%" align="left">{$i18n.form.charts.chart}: {$forms.chartForm.type.control}</td>
   {/if}

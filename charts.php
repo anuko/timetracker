@@ -54,6 +54,28 @@ if (!$user->behalf_id && !$user->can('view_own_charts') && !$user->adjustBehalfI
   header('Location: access_denied.php'); // Trying as self, but no right for self, and noone to view on behalf.
   exit();
 }
+if ($request->isPost() && $request->getParameter('user')) {
+  if (!$user->isUserValid($request->getParameter('user'))) {
+    header('Location: access_denied.php'); // Wrong user id on post.
+    exit();
+  }
+}
+// End of access checks.
+
+// Determine user for which we display this page.
+$userChanged = $request->getParameter('user_changed');
+if ($request->isPost() && $userChanged) {
+  $user_id = $request->getParameter('user');
+  $user->setOnBehalfUser($user_id);
+} else {
+  $user_id = $user->getUser();
+  // Handle a situation for no users in on behalf group.
+  if ($user->behalfGroup && $user_id == $user->id)
+    $user_id = null;
+}
+
+$uc = new ttUserConfig();
+$tracking_mode = $user->getTrackingMode();
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
@@ -63,73 +85,29 @@ if(!$cl_date) {
 }
 $_SESSION['date'] = $cl_date;
 
-// Initialize chart interval.
-$cl_interval = $_SESSION['chart_interval'];
-if (!$cl_interval) {
-  $uc = new ttUserConfig();
-  $cl_interval = $uc->getValue(SYSC_CHART_INTERVAL);
-}
-if (!$cl_interval) $cl_interval = INTERVAL_THIS_MONTH;
-$_SESSION['chart_interval'] = $cl_interval;
-
-// Initialize chart type.
-$cl_type = $_SESSION['chart_type'];
-if (!$cl_type) {
-  $uc = new ttUserConfig();
-  $cl_type = $uc->getValue(SYSC_CHART_TYPE);
-}
-if (MODE_TIME == $user->getTrackingMode()) {
-  if ($user->isPluginEnabled('cl'))
-    $cl_type = CHART_CLIENTS;
-} else {
-  if ($cl_type == CHART_CLIENTS) {
-    if (!$user->isPluginEnabled('cl'))
-      $cl_type = CHART_PROJECTS;	
-  } elseif ($cl_type == CHART_TASKS) {
-    if (MODE_PROJECTS_AND_TASKS != $user->getTrackingMode())
-      $cl_type = CHART_PROJECTS;
-  }
-}
-if (!$cl_type) $cl_type = CHART_PROJECTS;
-$_SESSION['chart_type'] = $cl_type;
-
-// Who do we draw charts for?
-$on_behalf_id = $request->getParameter('onBehalfUser', (isset($_SESSION['behalf_id'])? $_SESSION['behalf_id'] : $user->id));
-
 if ($request->isPost()) {
-  // If chart interval changed - save it.
   $cl_interval = $request->getParameter('interval');
-  if ($cl_interval) {
-    // Save in the session
-    $_SESSION['chart_interval'] = $cl_interval;
-    // and permanently.
-    $uc = new ttUserConfig();
-    $uc->setValue(SYSC_CHART_INTERVAL, $cl_interval);
-  }
-  // If chart type changed - save it.
-  $cl_type = $request->getParameter('type');
-  if ($cl_type) {
-    // Save in the session
-    $_SESSION['chart_type'] = $cl_type;
-    // and permanently.
-    $uc = new ttUserConfig();
-    $uc->setValue(SYSC_CHART_TYPE, $cl_type);
-  }
-  // If user has changed - set behalf_id accordingly in the session.
-  if ($request->getParameter('onBehalfUser')) {
-    if($user->can('view_charts')) {
-      unset($_SESSION['behalf_id']);
-      unset($_SESSION['behalf_name']);
+  if (!$cl_interval) $cl_interval = INTERVAL_THIS_MONTH;
+  $_SESSION['chart_interval'] = $cl_interval;
+  $uc->setValue(SYSC_CHART_INTERVAL, $cl_interval);
 
-      if($on_behalf_id != $user->id) {
-        $_SESSION['behalf_id'] = $on_behalf_id;
-        $_SESSION['behalf_name'] = ttUserHelper::getUserName($on_behalf_id);
-      }
-      header('Location: charts.php');
-      exit();
-    }
-  }
-} // isPost
+  $cl_type = $request->getParameter('type');
+  if (!$cl_type) $cl_type = ttChartHelper::adjustType($cl_type);
+  $_SESSION['chart_type'] = $cl_type;
+  $uc->setValue(SYSC_CHART_TYPE, $cl_type);
+} else {
+  // Initialize chart interval.
+  $cl_interval = $_SESSION['chart_interval'];
+  if (!$cl_interval) $cl_interval = $uc->getValue(SYSC_CHART_INTERVAL);
+  if (!$cl_interval) $cl_interval = INTERVAL_THIS_MONTH;
+  $_SESSION['chart_interval'] = $cl_interval;
+
+  // Initialize chart type.
+  $cl_type = $_SESSION['chart_type'];
+  if (!$cl_type) $cl_type = $uc->getValue(SYSC_CHART_TYPE);
+  $cl_type = ttChartHelper::adjustType($cl_type);
+  $_SESSION['chart_type'] = $cl_type;
+}
 
 // Elements of chartForm.
 $chart_form = new Form('chartForm');
@@ -143,13 +121,14 @@ if ($user->can('view_charts')) {
   $user_list = $user->getUsers($options);
   if (count($user_list) >= 1) {
     $chart_form->addInput(array('type'=>'combobox',
-      'onchange'=>'this.form.submit();',
-      'name'=>'onBehalfUser',
-      'value'=>$on_behalf_id,
+      'onchange'=>'this.form.user_changed.value=1;this.form.submit();',
+      'name'=>'user',
+      'value'=>$user_id,
       'data'=>$user_list,
       'datakeys'=>array('id','name'),
     ));
-    $smarty->assign('on_behalf_control', 1);
+    $chart_form->addInput(array('type'=>'hidden','name'=>'user_changed'));
+    $smarty->assign('user_dropdown', 1);
   }
 }
 
@@ -163,26 +142,26 @@ $intervals[INTERVAL_ALL_TIME] = $i18n->get('dropdown.all_time');
 
 // Chart interval dropdown.
 $chart_form->addInput(array('type' => 'combobox',
-  'onchange' => 'if(this.form) this.form.submit();',
+  'onchange' => 'this.form.submit();',
   'name' => 'interval',
   'value' => $cl_interval,
   'data' => $intervals
 ));
 
 // Chart type options.
-$chart_selector = (MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isPluginEnabled('cl'));
+$chart_selector = (MODE_PROJECTS_AND_TASKS == $tracking_mode || $user->isPluginEnabled('cl'));
 if ($chart_selector) {
   $types = array();
-  if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+  if (MODE_PROJECTS == $tracking_mode || MODE_PROJECTS_AND_TASKS == $tracking_mode)
     $types[CHART_PROJECTS] = $i18n->get('dropdown.projects');
-  if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+  if (MODE_PROJECTS_AND_TASKS == $tracking_mode)
     $types[CHART_TASKS] = $i18n->get('dropdown.tasks');
   if ($user->isPluginEnabled('cl'))
     $types[CHART_CLIENTS] = $i18n->get('dropdown.clients');
 
   // Add chart type dropdown.
   $chart_form->addInput(array('type' => 'combobox',
-    'onchange' => 'if(this.form) this.form.submit();',
+    'onchange' => 'this.form.submit();',
     'name' => 'type',
     'value' => $cl_type,
     'data' => $types
@@ -193,7 +172,7 @@ if ($chart_selector) {
 $chart_form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
 
 // Get data for our chart.
-$totals = ttChartHelper::getTotals($on_behalf_id, $cl_type, $cl_date, $cl_interval);
+$totals = ttChartHelper::getTotals($user_id, $cl_type, $cl_date, $cl_interval);
 $smarty->assign('totals', $totals);
 
 // Prepare chart for drawing.

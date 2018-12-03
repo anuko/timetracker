@@ -120,14 +120,14 @@
     {if $user->isPluginEnabled('iv') && ($user->can('view_own_invoices') || $user->can('manage_invoices'))}
             &middot; <a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a>
     {/if}
-    {if ($user->isPluginEnabled('ch') && ($user->can('view_own_charts') || $user->can('view_charts'))) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode
-      || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isPluginEnabled('cl'))}
+    {if ($user->isPluginEnabled('ch') && ($user->can('view_own_charts') || $user->can('view_charts'))) && ($smarty.const.MODE_PROJECTS == $user->getTrackingMode()
+      || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode() || $user->isPluginEnabled('cl'))}
             &middot; <a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a>
     {/if}
-    {if ($user->can('view_own_projects') || $user->can('manage_projects')) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if ($user->can('view_own_projects') || $user->can('manage_projects')) && ($smarty.const.MODE_PROJECTS == $user->getTrackingMode() || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode())}
             &middot; <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
     {/if}
-    {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode && ($user->can('view_own_tasks') || $user->can('manage_tasks')))}
+    {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode() && ($user->can('view_own_tasks') || $user->can('manage_tasks')))}
             &middot; <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
     {/if}
     {if $user->can('view_users') || $user->can('manage_users')}
