@@ -17,7 +17,7 @@
 </table>
 <table border="0" width="720">
   <tr>
-    <td width="50%" align="center"><img src="{$img_file_name}" border="0"/></td>
+    <td width="50%" align="center"><img src="{$img_file_name}" height="300" width="300" border="0"/></td>
     <td>
       <table border="0" cellspacing="3">
       {section name=i loop=$totals}

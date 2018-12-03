@@ -77,7 +77,7 @@ class ttChartHelper {
         where l.status = 1 and l.duration > 0 and l.user_id = $user_id $q_period group by l.task_id";
     } elseif (CHART_CLIENTS == $chart_type) {
       // Data for clients.
-      $sql = "select coalesce(c.name, 'NULL') as name, sum(time_to_sec(l.duration)) as time from tt_log l
+      $sql = "select c.name as name, sum(time_to_sec(l.duration)) as time from tt_log l
         left join tt_clients c on (c.id = l.client_id)
         where l.status = 1 and l.duration > 0 and l.user_id = $user_id $q_period group by l.client_id";
     }
