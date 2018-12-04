@@ -110,14 +110,14 @@ class ttExpenseHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $sql = "select sum(cost) as sm from tt_expense_items".
+    $sql = "select sum(cost) as total from tt_expense_items".
       " where user_id = $user_id and group_id = $group_id and org_id = $org_id".
       " and date = ".$mdb2->quote($date)." and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-      $val['sm'] = str_replace('.', $user->getDecimalMark(), $val['sm']);
-      return $val['sm'];
+      $val['total'] = str_replace('.', $user->getDecimalMark(), $val['total']);
+      return $val['total'];
     }
     return false;
   }

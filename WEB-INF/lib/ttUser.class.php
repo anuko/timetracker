@@ -179,6 +179,16 @@ class ttUser {
     return ($this->behalfGroup ? $this->behalfGroup->decimal_mark : $this->decimal_mark);
   }
 
+  // getDateFormat returns date format for active group.
+  function getDateFormat() {
+    return ($this->behalfGroup ? $this->behalfGroup->date_format : $this->date_format);
+  }
+
+  // getTimeFormat returns time format for active group.
+  function getTimeFormat() {
+    return ($this->behalfGroup ? $this->behalfGroup->time_format : $this->time_format);
+  }
+
   // getTrackingMode returns tracking mode for active group.
   function getTrackingMode() {
     return ($this->behalfGroup ? $this->behalfGroup->tracking_mode : $this->tracking_mode);
@@ -187,6 +197,11 @@ class ttUser {
   // getRecordType returns record type for active group.
   function getRecordType() {
     return ($this->behalfGroup ? $this->behalfGroup->record_type : $this->record_type);
+  }
+
+  // getCurrency returns currency string for active group.
+  function getCurrency() {
+    return ($this->behalfGroup ? $this->behalfGroup->currency : $this->currency);
   }
 
   // getPlugins returns plugins string for active group.

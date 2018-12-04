@@ -86,7 +86,7 @@ function recalculateCost() {
 
   var comment_control = document.getElementById("item_name");
   var cost_control = document.getElementById("cost");
-  var replaceDecimalMark = ("." != "{$user->decimal_mark}");
+  var replaceDecimalMark = ("." != "{$user->getDecimalMark()}");
 
   // Calculate cost.
   var dropdown = document.getElementById("predefined_expense");
@@ -102,10 +102,10 @@ function recalculateCost() {
     else {
       var expenseCost = defined_expenses[dropdown.selectedIndex - 1][2];
       if (replaceDecimalMark)
-        expenseCost = expenseCost.replace("{$user->decimal_mark}", ".");
+        expenseCost = expenseCost.replace("{$user->getDecimalMark()}", ".");
       var newCost = (quantity_control.value * expenseCost).toFixed(2);
       if (replaceDecimalMark)
-        newCost = newCost.replace(".", "{$user->decimal_mark}");
+        newCost = newCost.replace(".", "{$user->getDecimalMark()}");
       cost_control.value = newCost;
     }
   }
@@ -201,7 +201,7 @@ function recalculateCost() {
     </table>
     <table border="0" cellpadding="3" cellspacing="1" width="100%">
       <tr>
-        <td nowrap align="right">{$i18n.label.day_total}: {$user->currency|escape} {$day_total}</td>
+        <td nowrap align="right">{$i18n.label.day_total}: {$user->getCurrency()|escape} {$day_total}</td>
       </tr>
     </table>
 {/if}

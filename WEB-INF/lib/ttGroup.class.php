@@ -94,8 +94,8 @@ class ttGroup {
       $this->allow_ip = $val['allow_ip'];
       $this->password_complexity = $val['password_complexity'];
       $this->group_name = $val['group_name'];
-      $this->currency = $val['currency'];
       */
+      $this->currency = $val['currency'];
       $this->plugins = $val['plugins'];
       /*
       $this->lock_spec = $val['lock_spec'];
