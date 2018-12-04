@@ -28,7 +28,6 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttTeamHelper');
 import('ttGroupHelper');
 import('DateAndTime');
 import('ttExpenseHelper');
@@ -50,9 +49,12 @@ if (!$expense_item || $expense_item['invoice_id']) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 $item_date = new DateAndTime(DB_DATEFORMAT, $expense_item['date']);
 $confirm_save = $user->getConfigOption('confirm_save');
+$trackingMode = $user->getTrackingMode();
+$show_project = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
 
 // Initialize variables.
 $cl_date = $cl_client = $cl_project = $cl_item_name = $cl_cost = null;
@@ -65,7 +67,7 @@ if ($request->isPost()) {
   if ($user->isPluginEnabled('ps'))
     $cl_paid = $request->getParameter('paid');
 } else {
-  $cl_date = $item_date->toString($user->date_format);
+  $cl_date = $item_date->toString($user->getDateFormat());
   $cl_client = $expense_item['client_id'];
   $cl_project = $expense_item['project_id'];
   $cl_item_name = $expense_item['name'];
@@ -77,7 +79,7 @@ if ($request->isPost()) {
 $form = new Form('expenseItemForm');
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
-if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
+if (MODE_TIME == $trackingMode && $user->isPluginEnabled('cl')) {
   $active_clients = ttGroupHelper::getActiveClients(true);
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
@@ -90,7 +92,7 @@ if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
-if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
+if ($show_project) {
   // Dropdown for projects assigned to user.
   $project_list = $user->getAssignedProjects();
   $form->addInput(array('type'=>'combobox',
@@ -129,7 +131,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
   }
 }
 // If predefined expenses are configured, add controls to select an expense and quantity.
-$predefined_expenses = ttTeamHelper::getPredefinedExpenses($user->group_id);
+$predefined_expenses = ttGroupHelper::getPredefinedExpenses();
 if ($predefined_expenses) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'recalculateCost();',
@@ -159,7 +161,7 @@ if ($request->isPost()) {
   // Validate user input.
   if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
     $err->add($i18n->get('error.client'));
-  if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
+  if (MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode) {
     if (!$cl_project) $err->add($i18n->get('error.project'));
   }
   if (!ttValidString($cl_item_name)) $err->add($i18n->get('error.field'), $i18n->get('label.item'));

@@ -28,7 +28,6 @@
 
 require_once('../initialize.php');
 import('form.Form');
-import('ttTeamHelper');
 import('ttGroupHelper');
 import('DateAndTime');
 import('ttExpenseHelper');
@@ -126,7 +125,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
   }
 }
 // If predefined expenses are configured, add controls to select an expense and quantity.
-$predefined_expenses = ttTeamHelper::getPredefinedExpenses($user->group_id);
+$predefined_expenses = ttGroupHelper::getPredefinedExpenses();
 if ($predefined_expenses) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'recalculateCost();',

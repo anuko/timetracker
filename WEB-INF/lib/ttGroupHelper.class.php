@@ -362,4 +362,31 @@ class ttGroupHelper {
     }
     return $result;
   }
+
+  // getPredefinedExpenses - obtains predefined expenses for a group.
+  static function getPredefinedExpenses() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $result = array();
+    $sql = "select id, name, cost from tt_predefined_expenses".
+      " where group_id = $group_id and org_id = $org_id";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      $decimal_mark = $user->getDecimalMark();
+      $replaceDecimalMark = ('.' != $decimal_mark);
+
+      while ($val = $res->fetchRow()) {
+        if ($replaceDecimalMark)
+          $val['cost'] = str_replace('.', $decimal_mark, $val['cost']);
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
 }

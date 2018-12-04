@@ -67,18 +67,17 @@ class ttPredefinedExpenseHelper {
   }
 
   // insert function inserts a new predefined expense into database.
-  static function insert($fields)
-  {
+  static function insert($fields) {
     global $user;
-
     $mdb2 = getConnection();
 
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
+
     $name = $fields['name'];
     $cost = $fields['cost'];
-    if ('.' != $user->decimal_mark)
-      $cost = str_replace($user->decimal_mark, '.', $cost);
+    if ('.' != $user->getDecimalMark())
+      $cost = str_replace($user->getDecimalMark, '.', $cost);
 
     $sql = "insert into tt_predefined_expenses (group_id, org_id, name, cost)".
       " values ($group_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($cost).")";

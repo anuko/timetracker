@@ -540,28 +540,6 @@ class ttTeamHelper {
     return false;
   }
 
-  // getPredefinedExpenses - obtains predefined expenses for a group.
-  static function getPredefinedExpenses($group_id) {
-    global $user;
-    $replaceDecimalMark = ('.' != $user->decimal_mark);
-
-    $mdb2 = getConnection();
-
-    $result = array();
-    $sql = "select id, name, cost from tt_predefined_expenses where group_id = $group_id";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        if ($replaceDecimalMark)
-          $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
   // getNotifications - obtains notification descriptions for a group.
   static function getNotifications($group_id) {
     $mdb2 = getConnection();
