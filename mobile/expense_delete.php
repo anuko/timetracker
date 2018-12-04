@@ -59,7 +59,7 @@ if ($request->isPost()) {
 
     if ($err->no()) {
       // Mark the record as deleted.
-      if (ttExpenseHelper::markDeleted($cl_id, $user->getUser())) {
+      if (ttExpenseHelper::markDeleted($cl_id)) {
         header('Location: expenses.php');
         exit();
       } else

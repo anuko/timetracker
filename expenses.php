@@ -211,7 +211,7 @@ if ($request->isPost()) {
   }
 }
 
-$smarty->assign('day_total', ttExpenseHelper::getTotalForDay($user->getUser(), $cl_date));
+$smarty->assign('day_total', ttExpenseHelper::getTotalForDay($cl_date));
 $smarty->assign('expense_items', ttExpenseHelper::getItems($user->getUser(), $cl_date));
 $smarty->assign('predefined_expenses', $predefined_expenses);
 $smarty->assign('client_list', $client_list);

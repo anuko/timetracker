@@ -29,8 +29,7 @@
 // The ttExpenseHelper is a class to help with expense items.
 class ttExpenseHelper {
   // insert - inserts an entry into tt_expense_items table.
-  static function insert($fields)
-  {
+  static function insert($fields) {
     global $user;
     $mdb2 = getConnection();
 
@@ -57,10 +56,12 @@ class ttExpenseHelper {
   }
 
   // update - updates a record in tt_expense_items table.
-  static function update($fields)
-  {
+  static function update($fields) {
     global $user;
     $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
     $id = (int) $fields['id'];
     $date = $fields['date'];
@@ -77,34 +78,45 @@ class ttExpenseHelper {
     }
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
 
-    $sql = "UPDATE tt_expense_items set date = ".$mdb2->quote($date).", user_id = $user_id, client_id = ".$mdb2->quote($client_id).
+    $sql = "update tt_expense_items set date = ".$mdb2->quote($date).", user_id = $user_id, client_id = ".$mdb2->quote($client_id).
       ", project_id = ".$mdb2->quote($project_id).", name = ".$mdb2->quote($name).
       ", cost = ".$mdb2->quote($cost)."$paid_part $modified_part, invoice_id = ".$mdb2->quote($invoice_id).
-      " WHERE id = $id";
+      " where id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
 
   // markDeleted - marks an item as deleted in tt_expense_items table.
-  static function markDeleted($id, $user_id) {
+  static function markDeleted($id) {
+    global $user;
     $mdb2 = getConnection();
 
-    $sql = "update tt_expense_items set status = NULL where id = $id and user_id = $user_id";
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "update tt_expense_items set status = null".
+      " where id = $id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
 
   // getTotalForDay - gets total expenses for a user for a specific date.
-  static function getTotalForDay($user_id, $date) {
+  static function getTotalForDay($date) {
     global $user;
-
     $mdb2 = getConnection();
 
-    $sql = "select sum(cost) as sm from tt_expense_items where user_id = $user_id and date = ".$mdb2->quote($date)." and status = 1";
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select sum(cost) as sm from tt_expense_items".
+      " where user_id = $user_id and group_id = $group_id and org_id = $org_id".
+      " and date = ".$mdb2->quote($date)." and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-      $val['sm'] = str_replace('.', $user->decimal_mark, $val['sm']);
+      $val['sm'] = str_replace('.', $user->getDecimalMark(), $val['sm']);
       return $val['sm'];
     }
     return false;
