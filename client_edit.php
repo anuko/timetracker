@@ -41,8 +41,13 @@ if (!$user->isPluginEnabled('cl')) {
   header('Location: feature_disabled.php');
   exit();
 }
-
-$cl_id = (int) $request->getParameter('id');
+$cl_id = (int)$request->getParameter('id');
+$client = ttClientHelper::getClient($cl_id, true);
+if (!$client) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
 
 $projects = ttGroupHelper::getActiveProjects();
 
@@ -53,7 +58,6 @@ if ($request->isPost()) {
   $cl_status = $request->getParameter('status');
   $cl_projects = $request->getParameter('projects');
 } else {
-  $client = ttClientHelper::getClient($cl_id, true);
   $cl_name = $client['name'];
   $cl_address = $client['address'];
   $cl_tax = $client['tax'];
