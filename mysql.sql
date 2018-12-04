@@ -71,11 +71,12 @@ CREATE TABLE `tt_roles` (
 );
 
 # Create an index that guarantees unique active and inactive role ranks in each group.
-create unique index role_idx on tt_roles(group_id, rank, status);
+CREATE UNIQUE INDEX `role_idx` ON `tt_roles` (`group_id`, `rank`, `status`);
 
 # Insert site-wide roles - site administrator and top manager.
-INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Site administrator', 1024, 'administer_site');
-INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'track_own_time,track_own_expenses,view_own_reports,view_own_charts,view_own_invoices,view_own_projects,view_own_tasks,manage_own_settings,view_users,track_time,track_expenses,view_reports,view_charts,view_own_clients,override_punch_mode,override_own_punch_mode,override_date_lock,override_own_date_lock,swap_roles,approve_timesheets,manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,override_allow_ip,manage_basic_settings,view_all_reports,manage_features,manage_advanced_settings,manage_roles,export_data,manage_subgroups,delete_group');
+DELETE FROM `tt_roles` WHERE `id` IN (1, 2);
+INSERT INTO `tt_roles` (`id`, `group_id`, `name`, `rank`, `rights`) VALUES (1, 0, 'Site administrator', 1024, 'administer_site');
+INSERT INTO `tt_roles` (`id`, `group_id`, `name`, `rank`, `rights`) VALUES (2, 0, 'Top manager', 512, 'track_own_time,track_own_expenses,view_own_reports,view_own_charts,view_own_invoices,view_own_projects,view_own_tasks,manage_own_settings,view_users,track_time,track_expenses,view_reports,view_charts,view_own_clients,override_punch_mode,override_own_punch_mode,override_date_lock,override_own_date_lock,swap_roles,approve_timesheets,manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,override_allow_ip,manage_basic_settings,view_all_reports,manage_features,manage_advanced_settings,manage_roles,export_data,manage_subgroups,delete_group');
 
 
 #
@@ -105,11 +106,11 @@ CREATE TABLE `tt_users` (
 );
 
 # Create an index that guarantees unique active and inactive logins.
-create unique index login_idx on tt_users(login, status);
+CREATE UNIQUE INDEX `login_idx` ON `tt_users` (`login`, `status`);
 
 # Create admin account with password 'secret'. Admin is a superuser who can create groups.
-DELETE from `tt_users` WHERE login = 'admin';
-INSERT INTO `tt_users` (`login`, `password`, `name`, `group_id`, `role_id`) VALUES ('admin', md5('secret'), 'Admin', '0', (select id from tt_roles where rank = 1024));
+DELETE FROM `tt_users` WHERE `id` = 1;
+INSERT INTO `tt_users` (`id`, `login`, `password`, `name`, `group_id`, `role_id`) VALUES (1, 'admin', md5('secret'), 'Admin', 0, (SELECT `id` FROM `tt_roles` WHERE `rank` = 1024));
 
 
 #
@@ -127,7 +128,7 @@ CREATE TABLE `tt_projects` (
 );
 
 # Create an index that guarantees unique active and inactive projects per group.
-create unique index project_idx on tt_projects(group_id, name, status);
+CREATE UNIQUE INDEX `project_idx` ON `tt_projects` (`group_id`, `name`, `status`);
 
 
 #
@@ -144,7 +145,7 @@ CREATE TABLE `tt_tasks` (
 );
 
 # Create an index that guarantees unique active and inactive tasks per group.
-create unique index task_idx on tt_tasks(group_id, name, status);
+CREATE UNIQUE INDEX `task_idx` ON `tt_tasks` (`group_id`, `name`, `status`);
 
 
 #
@@ -162,7 +163,7 @@ CREATE TABLE `tt_user_project_binds` (
 );
 
 # Create an index that guarantees unique user to project binds.
-create unique index bind_idx on tt_user_project_binds(user_id, project_id);
+CREATE UNIQUE INDEX `bind_idx` ON `tt_user_project_binds` (`user_id`, `project_id`);
 
 
 #
@@ -176,9 +177,9 @@ CREATE TABLE `tt_project_task_binds` (
 );
 
 # Indexes for tt_project_task_binds.
-create index project_idx on tt_project_task_binds(project_id);
-create index task_idx on tt_project_task_binds(task_id);
-create unique index project_task_idx on tt_project_task_binds(project_id, task_id);
+CREATE INDEX `project_idx` ON `tt_project_task_binds` (`project_id`);
+CREATE INDEX `task_idx` ON `tt_project_task_binds` (`task_id`);
+CREATE UNIQUE INDEX `project_task_idx` ON `tt_project_task_binds` (`project_id`, `task_id`);
 
 
 #
@@ -211,13 +212,13 @@ CREATE TABLE `tt_log` (
 );
 
 # Create indexes on tt_log for performance.
-create index date_idx on tt_log(date);
-create index user_idx on tt_log(user_id);
-create index group_idx on tt_log(group_id);
-create index client_idx on tt_log(client_id);
-create index invoice_idx on tt_log(invoice_id);
-create index project_idx on tt_log(project_id);
-create index task_idx on tt_log(task_id);
+CREATE INDEX `date_idx` ON `tt_log` (`date`);
+CREATE INDEX `user_idx` ON `tt_log` (`user_id`);
+CREATE INDEX `group_idx` ON `tt_log` (`group_id`);
+CREATE INDEX `client_idx` ON `tt_log` (`client_id`);
+CREATE INDEX `invoice_idx` ON `tt_log` (`invoice_id`);
+CREATE INDEX `project_idx` ON `tt_log` (`project_id`);
+CREATE INDEX `task_idx` ON `tt_log` (`task_id`);
 
 
 #
@@ -235,7 +236,7 @@ CREATE TABLE `tt_invoices` (
 );
 
 # Create an index that guarantees unique invoice names per group.
-create unique index name_idx on tt_invoices(group_id, name, status);
+CREATE UNIQUE INDEX `name_idx` ON `tt_invoices` (`group_id`, `name`, `status`);
 
 
 #
@@ -327,7 +328,7 @@ CREATE TABLE `tt_clients` (
 );
 
 # Create an index that guarantees unique active and inactive clients per group.
-create unique index client_name_idx on tt_clients(group_id, name, status);
+CREATE UNIQUE INDEX `client_name_idx` ON `tt_clients` (`group_id`, `name`, `status`);
 
 
 #
@@ -341,9 +342,9 @@ CREATE TABLE `tt_client_project_binds` (
 );
 
 # Indexes for tt_client_project_binds.
-create index client_idx on tt_client_project_binds(client_id);
-create index project_idx on tt_client_project_binds(project_id);
-create unique index client_project_idx on tt_client_project_binds(client_id, project_id);
+CREATE INDEX `client_idx` ON `tt_client_project_binds` (`client_id`);
+CREATE INDEX `project_idx` ON `tt_client_project_binds` (`project_id`);
+CREATE UNIQUE INDEX `client_project_idx` ON `tt_client_project_binds` (`client_id`, `project_id`);
 
 
 #
@@ -359,7 +360,7 @@ CREATE TABLE `tt_config` (
 );
 
 # Create an index that guarantees unique parameter names per user.
-create unique index param_idx on tt_config(user_id, param_name);
+CREATE UNIQUE INDEX `param_idx` ON `tt_config` (`user_id`, `param_name`);
 
 
 # Below are the tables used by CustomFields plugin.
@@ -409,7 +410,7 @@ CREATE TABLE `tt_custom_field_log` (
   PRIMARY KEY  (`id`)
 );
 
-create index log_idx on tt_custom_field_log(log_id);
+CREATE INDEX `log_idx` ON `tt_custom_field_log` (`log_id`);
 
 
 #
@@ -439,12 +440,12 @@ CREATE TABLE `tt_expense_items` (
 );
 
 # Create indexes on tt_expense_items for performance.
-create index date_idx on tt_expense_items(date);
-create index user_idx on tt_expense_items(user_id);
-create index group_idx on tt_expense_items(group_id);
-create index client_idx on tt_expense_items(client_id);
-create index project_idx on tt_expense_items(project_id);
-create index invoice_idx on tt_expense_items(invoice_id);
+CREATE INDEX `date_idx` ON `tt_expense_items` (`date`);
+CREATE INDEX `user_idx` ON `tt_expense_items` (`user_id`);
+CREATE INDEX `group_idx` ON `tt_expense_items` (`group_id`);
+CREATE INDEX `client_idx` ON `tt_expense_items` (`client_id`);
+CREATE INDEX `project_idx` ON `tt_expense_items` (`project_id`);
+CREATE INDEX `invoice_idx` ON `tt_expense_items` (`invoice_id`);
 
 
 #
