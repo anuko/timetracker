@@ -63,6 +63,8 @@ if ($request->isPost()) {
   }
 }
 
+$show_projects = (MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode()) && count($projects) > 0;
+
 $form = new Form('clientForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 $form->addInput(array('type'=>'text','name'=>'name','maxlength'=>'100','value'=>$cl_name));
@@ -70,7 +72,7 @@ $form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','c
 $form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
-if (MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode())
+if ($show_projects)
   $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'datakeys'=>array('id','name'),'layout'=>'H','value'=>$cl_projects));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->get('button.copy')));
@@ -86,8 +88,7 @@ if ($request->isPost()) {
     if ($request->getParameter('btn_save')) {
       $client = ttClientHelper::getClientByName($cl_name);
       if (($client && ($cl_id == $client['id'])) || !$client) {
-        if (ttClientHelper::update(array(
-          'id' => $cl_id,
+        if (ttClientHelper::update(array('id' => $cl_id,
           'name' => $cl_name,
           'address' => $cl_address,
           'tax' => $cl_tax,
@@ -103,10 +104,7 @@ if ($request->isPost()) {
 
     if ($request->getParameter('btn_copy')) {
       if (!ttClientHelper::getClientByName($cl_name)) {
-        if (ttClientHelper::insert(array(
-          'group_id' => $user->getGroup(),
-          'org_id' => $user->org_id,
-          'name' => $cl_name,
+        if (ttClientHelper::insert(array('name' => $cl_name,
           'address' => $cl_address,
           'tax' => $cl_tax,
           'status' => $cl_status,
@@ -127,6 +125,7 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('show_projects', $show_projects);
 $smarty->assign('title', $i18n->get('title.edit_client'));
 $smarty->assign('content_page_name', 'mobile/client_edit.tpl');
 $smarty->display('mobile/index.tpl');

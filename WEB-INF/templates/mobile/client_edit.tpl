@@ -24,7 +24,7 @@
           <td>{$i18n.label.required_fields}</td>
         </tr>
         <tr><td>&nbsp;</td></tr>
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_projects}
         <tr>
           <td align="right">{$i18n.label.projects}:</td>
           <td>{$forms.clientForm.projects.control}</td>
