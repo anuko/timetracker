@@ -1,0 +1,40 @@
+version: "3.4"
+
+services:
+  timetracker:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: anuko/timetracker:dev
+    container_name: anuko-timetracker
+    ports:
+    - 8080:80
+    volumes:
+    - .:/var/www/html:cached
+    environment:
+      DATABASE_DSN: mysqli://anuko:anuko@mysql/anuko?charset=utf8
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: anuko
+      MYSQL_USER: anuko
+      MYSQL_PASSWORD: anuko
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  dependencies:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - mysql
+    command: mysql:3306
+
+volumes:
+  mysql-data:
