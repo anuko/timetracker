@@ -183,6 +183,12 @@ class ttProjectHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
+    // Delete client binds to this project.
+    $sql = "delete from tt_client_project_binds where project_id = $id and group_id = $group_id and org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
     return true;
   }
   
