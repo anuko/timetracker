@@ -218,7 +218,7 @@ if ($request->isPost()) {
 $smarty->assign('next_date', $next_date);
 $smarty->assign('prev_date', $prev_date);
 $smarty->assign('day_total', ttExpenseHelper::getTotalForDay($cl_date));
-$smarty->assign('expense_items', ttExpenseHelper::getItems($user->getUser(), $cl_date));
+$smarty->assign('expense_items', ttExpenseHelper::getItems($cl_date));
 $smarty->assign('predefined_expenses', $predefined_expenses);
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);

@@ -42,7 +42,7 @@ if (!$user->isPluginEnabled('ex')) {
 }
 $cl_id = (int)$request->getParameter('id');
 // Get the expense item we are deleting.
-$expense_item = ttExpenseHelper::getItem($cl_id, $user->getUser());
+$expense_item = ttExpenseHelper::getItem($cl_id);
 if (!$expense_item || $expense_item['invoice_id']) {
   // Prohibit deleting not ours or invoiced items.
   header('Location: access_denied.php');

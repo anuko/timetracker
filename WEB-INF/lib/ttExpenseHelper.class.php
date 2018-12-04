@@ -123,10 +123,13 @@ class ttExpenseHelper {
   }
 
   // getItem - retrieves an entry from tt_expense_items table.
-  static function getItem($id, $user_id) {
+  static function getItem($id) {
     global $user;
-
     $mdb2 = getConnection();
+
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
     $client_field = null;
     if ($user->isPluginEnabled('cl'))
@@ -137,17 +140,16 @@ class ttExpenseHelper {
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (ei.client_id = c.id)";
 
-    $sql = "select ei.id, ei.date, ei.client_id, ei.project_id, ei.name, ei.cost, ei.invoice_id, ei.paid $client_field, p.name as project_name
-      from tt_expense_items ei
-      $left_joins
-      where ei.id = $id and ei.user_id = $user_id and ei.status = 1";
+    $sql = "select ei.id, ei.date, ei.client_id, ei.project_id, ei.name, ei.cost, ei.invoice_id, ei.paid $client_field, p.name as project_name".
+      " from tt_expense_items ei $left_joins".
+      " where ei.id = $id and ei.group_id = $group_id and ei.org_id = $org_id and ei.user_id = $user_id and ei.status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if (!$res->numRows()) {
         return false;
       }
       if ($val = $res->fetchRow()) {
-        $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
+        $val['cost'] = str_replace('.', $user->getDecimalMark(), $val['cost']);
         return $val;
       }
     }
@@ -155,11 +157,15 @@ class ttExpenseHelper {
   }
 
   // getItems - returns expense items for a user for a given date.
-  static function getItems($user_id, $date) {
+  static function getItems($date) {
     global $user;
+    $mdb2 = getConnection();
+
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
     $result = array();
-    $mdb2 = getConnection();
 
     $client_field = null;
     if ($user->isPluginEnabled('cl'))
@@ -170,16 +176,15 @@ class ttExpenseHelper {
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (ei.client_id = c.id)";
 
-    $sql = "select ei.id as id $client_field, p.name as project, ei.name as item, ei.cost as cost,
-      ei.invoice_id from tt_expense_items ei
-      $left_joins
-      where ei.date = ".$mdb2->quote($date)." and ei.user_id = $user_id and ei.status = 1
-      order by ei.id";
+    $sql = "select ei.id as id $client_field, p.name as project, ei.name as item, ei.cost as cost,".
+      " ei.invoice_id from tt_expense_items ei $left_joins".
+      " where ei.date = ".$mdb2->quote($date)." and ei.user_id = $user_id".
+      " and ei.group_id = $group_id and ei.org_id = $org_id and ei.status = 1 order by ei.id";
 
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-      	$val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
+      	$val['cost'] = str_replace('.', $user->getDecimalMark(), $val['cost']);
         $result[] = $val;
       }
     } else return false;
