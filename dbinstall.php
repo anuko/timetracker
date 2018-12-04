@@ -124,7 +124,7 @@ if ($request->isGet()) {
 
   // Check ldap extension.
   if (AUTH_MODULE == 'ldap') {
-    if (extension_loaded('ldap_')) {
+    if (extension_loaded('ldap')) {
       echo('ldap PHP extension is loaded.<br>');
     } else {
       echo('<font color="red">Error: ldap PHP extension is not loaded. It is required for LDAP authentication.</font><br>');
