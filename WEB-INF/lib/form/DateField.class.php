@@ -48,7 +48,7 @@ class DateField extends TextField {
     global $user;
     global $i18n;
   	
-    $this->mDateObj->setFormat($user->date_format);
+    $this->mDateObj->setFormat($user->getDateFormat());
 
     $this->mMonthNames = $i18n->monthNames;
     $this->mWeekDayShortNames = $i18n->weekdayShortNames;
@@ -56,7 +56,7 @@ class DateField extends TextField {
     $this->lCalendarButtons['today'] = $i18n->get('label.today');
     $this->lCalendarButtons['close'] = $i18n->get('button.close');
 
-    $this->mDateFormat = $user->date_format;
+    $this->mDateFormat = $user->getDateFormat();
     $this->mWeekStartDay = $user->week_start;
   }
 

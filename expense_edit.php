@@ -161,18 +161,17 @@ if ($request->isPost()) {
   // Validate user input.
   if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
     $err->add($i18n->get('error.client'));
-  if (MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode) {
-    if (!$cl_project) $err->add($i18n->get('error.project'));
-  }
+  if ($show_project && !$cl_project)
+    $err->add($i18n->get('error.project'));
   if (!ttValidString($cl_item_name)) $err->add($i18n->get('error.field'), $i18n->get('label.item'));
   if (!ttValidFloat($cl_cost)) $err->add($i18n->get('error.field'), $i18n->get('label.cost'));
   if (!ttValidDate($cl_date)) $err->add($i18n->get('error.field'), $i18n->get('label.date'));
 
   // This is a new date for the expense item.
-  $new_date = new DateAndTime($user->date_format, $cl_date);
+  $new_date = new DateAndTime($user->getDateFormat(), $cl_date);
 
   // Prohibit creating entries in future.
-  if (!$user->future_entries) {
+  if (!$user->getConfigOption('future_entries')) {
     $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
     if ($new_date->after($browser_today))
       $err->add($i18n->get('error.future_date'));
