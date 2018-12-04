@@ -88,7 +88,7 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.clientForm.name.focus()"');
-$smarty->assign('show_projects',$show_projects);
+$smarty->assign('show_projects', $show_projects);
 $smarty->assign('title', $i18n->get('title.add_client'));
 $smarty->assign('content_page_name', 'client_add.tpl');
 $smarty->display('index.tpl');

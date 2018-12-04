@@ -270,14 +270,17 @@ class ttClientHelper {
   static function getAssignedProjects($client_id)
   {
     global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
     $result = array();
-    $mdb2 = getConnection();
 
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name from tt_projects p".
       " inner join tt_client_project_binds cpb on (cpb.client_id = $client_id and cpb.project_id = p.id)".
-      " where p.group_id = ".$user->getGroup()." and p.status = 1 order by p.name";
+      " where p.group_id = $group_id and p.org_id = $org_id and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -291,15 +294,19 @@ class ttClientHelper {
   static function getClientsForUser()
   {
     global $user;
-    $user_id = $user->getUser();
-
-    $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select distinct c.id, c.name, c.projects from tt_user_project_binds upb
-      inner join tt_client_project_binds cpb on (cpb.project_id = upb.project_id)
-      inner join tt_clients c on (c.id = cpb.client_id and c.status = 1)
-      where upb.user_id = $user_id and upb.status = 1 order by upper(c.name)";
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $result = array();
+
+    $sql = "select distinct c.id, c.name, c.projects from tt_user_project_binds upb".
+      " inner join tt_client_project_binds cpb on (cpb.project_id = upb.project_id)".
+      " inner join tt_clients c on (c.id = cpb.client_id and c.status = 1)".
+      " where upb.user_id = $user_id and upb.group_id = $group_id and upb.org_id = $org_id".
+      " and upb.status = 1 order by upper(c.name)";
 
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
