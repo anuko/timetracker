@@ -86,7 +86,7 @@ function recalculateCost() {
 
   var comment_control = document.getElementById("item_name");
   var cost_control = document.getElementById("cost");
-  var replaceDecimalMark = ("." != "{$user->decimal_mark}");
+  var replaceDecimalMark = ("." != "{$user->getDecimalMark()}");
 
   // Calculate cost.
   var dropdown = document.getElementById("predefined_expense");
@@ -102,10 +102,10 @@ function recalculateCost() {
     else {
       var expenseCost = defined_expenses[dropdown.selectedIndex - 1][2];
       if (replaceDecimalMark)
-        expenseCost = expenseCost.replace("{$user->decimal_mark}", ".");
+        expenseCost = expenseCost.replace("{$user->getDecimalMark()}", ".");
       var newCost = (quantity_control.value * expenseCost).toFixed(2);
       if (replaceDecimalMark)
-        newCost = newCost.replace(".", "{$user->decimal_mark}");
+        newCost = newCost.replace(".", "{$user->getDecimalMark()}");
       cost_control.value = newCost;
     }
   }
@@ -126,10 +126,10 @@ function recalculateCost() {
   <tr>
     <td valign="top">
       <table>
-{if $on_behalf_control}
+{if $user_dropdown}
         <tr>
           <td align="right">{$i18n.label.user}:</td>
-          <td>{$forms.expensesForm.onBehalfUser.control}</td>
+          <td>{$forms.expensesForm.user.control}</td>
         </tr>
 {/if}
 {if $user->isPluginEnabled('cl')}
@@ -138,7 +138,7 @@ function recalculateCost() {
           <td>{$forms.expensesForm.client.control}</td>
         </tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
         <tr>
           <td align="right">{$i18n.label.project} (*):</td>
           <td>{$forms.expensesForm.project.control}</td>
@@ -160,7 +160,7 @@ function recalculateCost() {
         </tr>
         <tr>
           <td align="right">{$i18n.label.cost} (*):</td>
-          <td>{$forms.expensesForm.cost.control} {$user->currency|escape}</td>
+          <td>{$forms.expensesForm.cost.control} {$user->getCurrency()|escape}</td>
         </tr>
       </table>
     </td>
@@ -189,7 +189,7 @@ function recalculateCost() {
   {if $user->isPluginEnabled('cl')}
         <td width="20%" class="tableHeader">{$i18n.label.client}</td>
   {/if}
-  {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+  {if $show_project}
         <td class="tableHeader">{$i18n.label.project}</td>
   {/if}
         <td class="tableHeader">{$i18n.label.item}</td>
@@ -200,7 +200,7 @@ function recalculateCost() {
     {if $user->isPluginEnabled('cl')}
         <td valign="top">{$item.client|escape}</td>
     {/if}
-    {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if $show_project}
         <td valign="top">{$item.project|escape}</td>
     {/if}
         <td valign="top">{if $item.invoice_id} {$item.item|escape} {else}<a href="expense_edit.php?id={$item.id}">{$item.item|escape}</a>{/if}</td>
@@ -210,7 +210,7 @@ function recalculateCost() {
     </table>
     <table border="0" cellpadding="3" cellspacing="1" width="100%">
       <tr>
-        <td nowrap align="right">{$i18n.label.day_total}: {$user->currency|escape} {$day_total}</td>
+        <td nowrap align="right">{$i18n.label.day_total}: {$user->getCurrency()|escape} {$day_total}</td>
       </tr>
     </table>
 {/if}
