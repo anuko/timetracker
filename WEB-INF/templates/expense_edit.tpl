@@ -98,7 +98,7 @@ function recalculateCost() {
 
   var comment_control = document.getElementById("item_name");
   var cost_control = document.getElementById("cost");
-  var replaceDecimalMark = ("." != "{$user->decimal_mark}");
+  var replaceDecimalMark = ("." != "{$user->getDecimalMark()}");
 
   // Calculate cost.
   var dropdown = document.getElementById("predefined_expense");
@@ -114,10 +114,10 @@ function recalculateCost() {
     else {
       var expenseCost = defined_expenses[dropdown.selectedIndex - 1][2];
       if (replaceDecimalMark)
-        expenseCost = expenseCost.replace("{$user->decimal_mark}", ".");
+        expenseCost = expenseCost.replace("{$user->getDecimalMark()}", ".");
       var newCost = (quantity_control.value * expenseCost).toFixed(2);
       if (replaceDecimalMark)
-        newCost = newCost.replace(".", "{$user->decimal_mark}");
+        newCost = newCost.replace(".", "{$user->getDecimalMark()}");
       cost_control.value = newCost;
     }
   }
@@ -138,7 +138,7 @@ function recalculateCost() {
       <td>{$forms.expenseItemForm.client.control}</td>
     </tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
     <tr>
       <td align="right">{$i18n.label.project} (*):</td>
       <td>{$forms.expenseItemForm.project.control}</td>
@@ -160,7 +160,7 @@ function recalculateCost() {
     </tr>
     <tr>
       <td align="right">{$i18n.label.cost}:</td>
-      <td>{$forms.expenseItemForm.cost.control} {$user->currency|escape}</td>
+      <td>{$forms.expenseItemForm.cost.control} {$user->getCurrency()|escape}</td>
     </tr>
 {if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))}
     <tr>

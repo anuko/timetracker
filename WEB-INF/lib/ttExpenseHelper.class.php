@@ -60,12 +60,12 @@ class ttExpenseHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
     $id = (int) $fields['id'];
     $date = $fields['date'];
-    $user_id = (int) $fields['user_id'];
     $client_id = $fields['client_id'];
     $project_id = $fields['project_id'];
     $name = $fields['name'];

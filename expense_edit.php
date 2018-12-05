@@ -194,7 +194,7 @@ if ($request->isPost()) {
 
     // Now, an update.
     if ($err->no()) {
-      if (ttExpenseHelper::update(array('id'=>$cl_id,'date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getUser(),
+      if (ttExpenseHelper::update(array('id'=>$cl_id,'date'=>$new_date->toString(DB_DATEFORMAT),
           'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'paid'=>$cl_paid))) {
         header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
         exit();
@@ -229,11 +229,12 @@ if ($confirm_save) {
   $smarty->assign('confirm_save', true);
   $smarty->assign('entry_date', $cl_date);
 }
+$smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('show_project', $show_project);
 $smarty->assign('predefined_expenses', $predefined_expenses);
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
-$smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.edit_expense'));
 $smarty->assign('content_page_name', 'expense_edit.tpl');
 $smarty->display('index.tpl');

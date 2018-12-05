@@ -226,7 +226,7 @@ function ttValidFloat($val, $emptyValid = false)
     return ($emptyValid ? true : false);
     
   global $user;
-  $decimal = $user->decimal_mark;
+  $decimal = $user->getDecimalMark();
 	
   if (!preg_match('/^-?[0-9'.$decimal.']+$/', $val))
     return false;

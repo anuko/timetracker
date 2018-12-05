@@ -151,7 +151,7 @@ function recalculateCost() {
         </tr>
         <tr>
           <td align="right">{$i18n.label.cost} (*):</td>
-          <td>{$forms.expensesForm.cost.control} {$user->currency|escape}</td>
+          <td>{$forms.expensesForm.cost.control} {$user->getCurrency()|escape}</td>
         </tr>
       </table>
     </td>
