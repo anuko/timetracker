@@ -1039,6 +1039,7 @@ if ($_POST) {
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.24', modified = now() where param_name = 'version_db' and param_value = '1.18.23'");
     setChange("ALTER TABLE `tt_groups` ADD COLUMN `description` varchar(255) default NULL after `name`");
     setChange("UPDATE `tt_site_config` SET param_value = '1.18.26', modified = now() where param_name = 'version_db' and param_value = '1.18.24'");
+    setChange("update `tt_client_project_binds` cpb inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.26') inner join `tt_clients` c on c.id = cpb.client_id set cpb.group_id = c.group_id, cpb.org_id = c.org_id where cpb.org_id is null");
   }
 
   if ($_POST["cleanup"]) {
