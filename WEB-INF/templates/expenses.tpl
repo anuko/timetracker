@@ -129,7 +129,7 @@ function recalculateCost() {
           <td>{$forms.expensesForm.client.control}</td>
         </tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
         <tr>
           <td align="right">{$i18n.label.project} (*):</td>
           <td>{$forms.expensesForm.project.control}</td>
@@ -178,7 +178,7 @@ function recalculateCost() {
   {if $user->isPluginEnabled('cl')}
         <td width="20%" class="tableHeader">{$i18n.label.client}</td>
   {/if}
-  {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+  {if $show_project}
         <td class="tableHeader">{$i18n.label.project}</td>
   {/if}
         <td class="tableHeader">{$i18n.label.item}</td>
@@ -190,7 +190,7 @@ function recalculateCost() {
     {if $user->isPluginEnabled('cl')}
         <td valign="top">{$item.client|escape}</td>
     {/if}
-    {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if $show_project}
         <td valign="top">{$item.project|escape}</td>
     {/if}
         <td valign="top">{$item.item|escape}</td>

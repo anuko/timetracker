@@ -219,13 +219,14 @@ if ($request->isPost()) {
   }
 }
 
+$smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('show_project', $show_project);
 $smarty->assign('day_total', ttExpenseHelper::getTotalForDay($cl_date));
 $smarty->assign('expense_items', ttExpenseHelper::getItems($cl_date));
 $smarty->assign('predefined_expenses', $predefined_expenses);
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
-$smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('timestring', $selected_date->toString($user->date_format));
+$smarty->assign('timestring', $selected_date->toString($user->getDateFormat()));
 $smarty->assign('title', $i18n->get('title.expenses'));
 $smarty->assign('content_page_name', 'expenses.tpl');
 $smarty->display('index.tpl');
