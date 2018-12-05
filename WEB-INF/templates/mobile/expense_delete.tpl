@@ -16,7 +16,7 @@
   </tr>
   <tr>
 {if $user->isPluginEnabled('cl')}
-  <td>{$expense_item.client_name|escape}</td>
+    <td>{$expense_item.client_name|escape}</td>
 {/if}
 {if $show_project}
     <td>{$expense_item.project_name|escape}</td>

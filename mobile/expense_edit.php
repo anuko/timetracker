@@ -49,9 +49,12 @@ if (!$expense_item || $expense_item['invoice_id']) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
 
 $item_date = new DateAndTime(DB_DATEFORMAT, $expense_item['date']);
 $confirm_save = $user->getConfigOption('confirm_save');
+$trackingMode = $user->getTrackingMode();
+$show_project = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
 
 // Initialize variables.
 $cl_date = $cl_client = $cl_project = $cl_item_name = $cl_cost = null;
@@ -62,7 +65,7 @@ if ($request->isPost()) {
   $cl_item_name = trim($request->getParameter('item_name'));
   $cl_cost = trim($request->getParameter('cost'));
 } else {
-  $cl_date = $item_date->toString($user->date_format);
+  $cl_date = $item_date->toString($user->getDateFormat());
   $cl_client = $expense_item['client_id'];
   $cl_project = $expense_item['project_id'];
   $cl_item_name = $expense_item['name'];
@@ -73,7 +76,7 @@ if ($request->isPost()) {
 $form = new Form('expenseItemForm');
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
-if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
+if (MODE_TIME == $trackingMode && $user->isPluginEnabled('cl')) {
   $active_clients = ttGroupHelper::getActiveClients(true);
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
@@ -86,7 +89,7 @@ if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
-if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
+if ($show_project) {
   // Dropdown for projects assigned to user.
   $project_list = $user->getAssignedProjects();
   $form->addInput(array('type'=>'combobox',
@@ -153,18 +156,17 @@ if ($request->isPost()) {
   // Validate user input.
   if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
     $err->add($i18n->get('error.client'));
-  if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-    if (!$cl_project) $err->add($i18n->get('error.project'));
-  }
+  if ($show_project && !$cl_project)
+    $err->add($i18n->get('error.project'));
   if (!ttValidString($cl_item_name)) $err->add($i18n->get('error.field'), $i18n->get('label.item'));
   if (!ttValidFloat($cl_cost)) $err->add($i18n->get('error.field'), $i18n->get('label.cost'));
   if (!ttValidDate($cl_date)) $err->add($i18n->get('error.field'), $i18n->get('label.date'));
 
   // This is a new date for the expense item.
-  $new_date = new DateAndTime($user->date_format, $cl_date);
+  $new_date = new DateAndTime($user->getDateFormat(), $cl_date);
 
   // Prohibit creating entries in future.
-  if (!$user->future_entries) {
+  if (!$user->getConfigOption('future_entries')) {
     $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
     if ($new_date->after($browser_today))
       $err->add($i18n->get('error.future_date'));
@@ -187,7 +189,7 @@ if ($request->isPost()) {
 
     // Now, an update.
     if ($err->no()) {
-      if (ttExpenseHelper::update(array('id'=>$cl_id,'date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getUser(),
+      if (ttExpenseHelper::update(array('id'=>$cl_id,'date'=>$new_date->toString(DB_DATEFORMAT),
           'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost))) {
         header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
         exit();
@@ -222,11 +224,12 @@ if ($confirm_save) {
   $smarty->assign('confirm_save', true);
   $smarty->assign('entry_date', $cl_date);
 }
+$smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('show_project', $show_project);
 $smarty->assign('predefined_expenses', $predefined_expenses);
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
-$smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.edit_expense'));
 $smarty->assign('content_page_name', 'mobile/expense_edit.tpl');
 $smarty->display('mobile/index.tpl');
