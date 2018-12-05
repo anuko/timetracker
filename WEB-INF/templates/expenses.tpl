@@ -117,10 +117,10 @@ function recalculateCost() {
   <tr>
     <td valign="top">
       <table>
-{if $on_behalf_control}
+{if $user_dropdown}
         <tr>
           <td align="right">{$i18n.label.user}:</td>
-          <td>{$forms.expensesForm.onBehalfUser.control}</td>
+          <td>{$forms.expensesForm.user.control}</td>
         </tr>
 {/if}
 {if $user->isPluginEnabled('cl')}

@@ -209,6 +209,11 @@ class ttUser {
     return ($this->behalfGroup ? $this->behalfGroup->plugins : $this->plugins);
   }
 
+  // getLockSpec returns lock specification for active group.
+  function getLockSpec() {
+    return ($this->behalfGroup ? $this->behalfGroup->lock_spec : $this->lock_spec);
+  }
+
   // getConfig returns config string for active group.
   function getConfig() {
     return ($this->behalfGroup ? $this->behalfGroup->config : $this->config);
@@ -329,7 +334,7 @@ class ttUser {
     if (!$this->isPluginEnabled('lk'))
       return false; // Locking feature is disabled.
 
-    if (!$this->lock_spec)
+    if (!$this->getLockSpec())
       return false; // There is no lock specification.
 
     if (!$this->behalf_id && $this->can('override_own_date_lock'))
@@ -342,7 +347,7 @@ class ttUser {
     require_once(LIBRARY_DIR.'/tdcron/class.tdcron.entry.php');
 
     // Calculate the last occurrence of a lock.
-    $last = tdCron::getLastOccurrence($this->lock_spec, time());
+    $last = tdCron::getLastOccurrence($this->getLockSpec(), time());
     $lockdate = new DateAndTime(DB_DATEFORMAT, strftime('%Y-%m-%d', $last));
     if ($date->before($lockdate))
       return true;

@@ -114,10 +114,11 @@ $chart_form = new Form('chartForm');
 
 // User dropdown. Changes the user "on behalf" of whom we are working. 
 if ($user->can('view_charts')) {
+  $rank = $user->getMaxRankForGroup($user->getGroup());
   if ($user->can('view_own_charts'))
-    $options = array('status'=>ACTIVE,'max_rank'=>$user->rank-1,'include_self'=>true,'self_first'=>true);
+    $options = array('status'=>ACTIVE,'max_rank'=>$rank,'include_self'=>true,'self_first'=>true);
   else
-    $options = array('status'=>ACTIVE,'max_rank'=>$user->rank-1);
+    $options = array('status'=>ACTIVE,'max_rank'=>$rank);
   $user_list = $user->getUsers($options);
   if (count($user_list) >= 1) {
     $chart_form->addInput(array('type'=>'combobox',
