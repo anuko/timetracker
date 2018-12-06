@@ -143,7 +143,7 @@ class ttAdmin {
       $password_part = ', password = md5('.$mdb2->quote($fields['password1']).')';
     $name_part = ', name = '.$mdb2->quote($fields['user_name']);
     $email_part = ', email = '.$mdb2->quote($fields['email']);
-    $sql = 'update tt_users set '.$login_part.$password_part.$name_part.$email_part.$modified_part.'where id = '.$user_id;
+    $sql = 'update tt_users set '.$login_part.$password_part.$name_part.$email_part.$modified_part.' where id = '.$user_id;
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -189,10 +189,19 @@ class ttAdmin {
     $result = array();
     $mdb2 = getConnection();
 
+    // Note: current code works with properly set top manager (rank 512).
+    // However, we now allow export and import of subgroups, which seems to work well.
+    // In this situation, imported role is no longer "Top manager", and this call fails.
+    // Setting role id manually in database for top user to Top manager resolves the issue.
+    //
+    // TODO: assess whether it is safe / reasonable to promote role during export or import.
+    // The problem is that user having 'export_data' right is not necessarily top user.
+    // And if we do it by rank, what to do for multiple managers situation? First found?
+    // Leaving to manual fixing for now.
     $sql = "select g.name as group_name, u.id as manager_id, u.name as manager_name, u.login as manager_login, u.email as manager_email".
       " from tt_groups g".
       " inner join tt_users u on (u.group_id = g.id)".
-      " inner join tt_roles r on (r.id = u.role_id and r.rank = 512)".
+      " inner join tt_roles r on (r.id = u.role_id and r.rank = 512)". // Fails for partially imported org. See comment above.
       " where g.id = $group_id";
 
     $res = $mdb2->query($sql);

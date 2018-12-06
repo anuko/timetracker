@@ -124,7 +124,7 @@ class ttGroup {
     }
 
     // Determine active user count in a separate query.
-    // TODO: If performance becomes an issue, ivestigate combining 2 queries in one.
+    // TODO: If performance becomes an issue, investigate combining 2 queries in one.
     // At this time we only need to know if at least 1 active user exists.
     $sql = "select count(*) as user_count from tt_users".
       "  where group_id = $id and org_id = $org_id and status = 1";
