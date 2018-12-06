@@ -62,6 +62,9 @@ class ttGroup {
   var $first_unit_threshold = 0;// Threshold for 1st unit for Work units plugin.
   var $unit_totals_only = 0;    // Totals only option for the Work units plugin.
 
+  var $active_users = 0;        // Count of active users in group.
+                                // We need a non-zero count to display some menus.
+
   // Constructor.
   function __construct($id, $org_id) {
     $mdb2 = getConnection();
@@ -119,5 +122,17 @@ class ttGroup {
       }
       */
     }
+
+    // Determine active user count in a separate query.
+    // TODO: If performance becomes an issue, ivestigate combining 2 queries in one.
+    // At this time we only need to know if at least 1 active user exists.
+    $sql = "select count(*) as user_count from tt_users".
+      "  where group_id = $id and org_id = $org_id and status = 1";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) {
+      return;
+    }
+    $val = $res->fetchRow();
+    $this->active_users = $val['user_count'];
   }
 }

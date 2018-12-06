@@ -108,20 +108,21 @@
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
-    {if $user->can('track_own_time') || $user->can('track_time')}
+    {if $user->exists() && ($user->can('track_own_time') || $user->can('track_time'))}
            <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
     {/if}
-    {if $user->isPluginEnabled('ex') && ($user->can('track_own_expenses') || $user->can('track_expenses'))}
+    {if $user->exists() && $user->isPluginEnabled('ex') && ($user->can('track_own_expenses') || $user->can('track_expenses'))}
             &middot; <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
     {/if}
-    {if $user->can('view_own_reports') || $user->can('view_reports')}
+    {if $user->exists() && ($user->can('view_own_reports') || $user->can('view_reports'))}
             &middot; <a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a> 
     {/if}        
-    {if $user->isPluginEnabled('iv') && ($user->can('view_own_invoices') || $user->can('manage_invoices'))}
+    {if $user->exists() && $user->isPluginEnabled('iv') && ($user->can('view_own_invoices') || $user->can('manage_invoices'))}
             &middot; <a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a>
     {/if}
-    {if ($user->isPluginEnabled('ch') && ($user->can('view_own_charts') || $user->can('view_charts'))) && ($smarty.const.MODE_PROJECTS == $user->getTrackingMode()
-      || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode() || $user->isPluginEnabled('cl'))}
+    {if ($user->exists() && $user->isPluginEnabled('ch') && ($user->can('view_own_charts') || $user->can('view_charts'))) &&
+        ($smarty.const.MODE_PROJECTS == $user->getTrackingMode() || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode() ||
+        $user->isPluginEnabled('cl'))}
             &middot; <a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a>
     {/if}
     {if ($user->can('view_own_projects') || $user->can('manage_projects')) && ($smarty.const.MODE_PROJECTS == $user->getTrackingMode() || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode())}

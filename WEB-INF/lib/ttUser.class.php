@@ -810,7 +810,7 @@ class ttUser {
     return;
   }
 
-   // setOnBehalfUser sets on behalf user both the object and the session.
+  // setOnBehalfUser sets on behalf user both the object and the session.
   function setOnBehalfUser($user_id) {
 
     // Unset things first.
@@ -832,5 +832,18 @@ class ttUser {
     $this->behalf_id = $user_id;
     $this->behalf_name = $onBehalfUserName;
     return;
+  }
+
+  // The exists() function determines if an active user exists in context of a page.
+  // If we are working as self, true.
+  // If we are working in a subgroup with active users, true.
+  // If we are working in a subgroup without active users, false.
+  function exists() {
+    if (!$this->behalfGroup)
+      return true; // Working as self.
+    else if ($this->behalfGroup->active_users)
+      return true; // Subgroup has users.
+
+    return false;
   }
 }

@@ -46,6 +46,10 @@ if (!$user->isPluginEnabled('ch')) {
   header('Location: feature_disabled.php');
   exit();
 }
+if (!$user->exists()) {
+  header('Location: access_denied.php'); // Nobody to display a chart for.
+  exit();
+}
 if ($user->behalf_id && (!$user->can('view_charts') || !$user->checkBehalfId())) {
   header('Location: access_denied.php'); // Trying on behalf, but no right or wrong user.
   exit();
@@ -69,9 +73,6 @@ if ($request->isPost() && $userChanged) {
   $user->setOnBehalfUser($user_id);
 } else {
   $user_id = $user->getUser();
-  // Handle a situation for no users in on behalf group.
-  if ($user->behalfGroup && $user_id == $user->id)
-    $user_id = null;
 }
 
 $uc = new ttUserConfig();
