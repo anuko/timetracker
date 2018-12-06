@@ -37,10 +37,13 @@ class ttInvoiceHelper {
     global $user;
     $mdb2 = getConnection();
 
-    if ($user->isClient()) $client_part = " and client_id = $user->client_id";
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
-    $sql = "select * from tt_invoices where id = $invoice_id and group_id = ".
-            $user->getGroup()."$client_part and status = 1";
+    if ($user->isClient()) $client_part = "and client_id = $user->client_id";
+
+    $sql = "select * from tt_invoices".
+      " where id = $invoice_id and group_id = $group_id and org_id = $org_id $client_part and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if ($val = $res->fetchRow())
@@ -51,12 +54,14 @@ class ttInvoiceHelper {
 
   // The getInvoiceByName looks up an invoice by name.
   static function getInvoiceByName($invoice_name) {
-
-    $mdb2 = getConnection();
     global $user;
+    $mdb2 = getConnection();
 
-    $sql = "select id from tt_invoices where group_id = ".
-            $user->getGroup()." and name = ".$mdb2->quote($invoice_name)." and status = 1";
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select id from tt_invoices where group_id = $group_id and org_id = $org_id".
+      " and name = ".$mdb2->quote($invoice_name)." and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -72,18 +77,22 @@ class ttInvoiceHelper {
   // Therefore, the paid status of the invoice is a calculated value.
   // This is because we maintain the paid status on individual item level.
   static function isPaid($invoice_id) {
-
-    $mdb2 = getConnection();
     global $user;
+    $mdb2 = getConnection();
 
-    $sql = "select count(*) as count from tt_log where invoice_id = $invoice_id and status = 1 and paid < 1";
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select count(*) as count from tt_log".
+      " where invoice_id = $invoice_id and group_id = $group_id and org_id = $org_id and status = 1 and paid < 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
       if ($val['count'] > 0)
         return false; // A non-paid time item exists.
     }
-    $sql = "select count(*) as count from tt_expense_items where invoice_id = $invoice_id and status = 1 and paid < 1";
+    $sql = "select count(*) as count from tt_expense_items".
+      " where invoice_id = $invoice_id and group_id = $group_id and org_id = $org_id and status = 1 and paid < 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();

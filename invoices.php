@@ -39,6 +39,7 @@ if (!$user->isPluginEnabled('iv')) {
   header('Location: feature_disabled.php');
   exit();
 }
+// End of access checks.
 
 $invoices = ttGroupHelper::getActiveInvoices();
 
