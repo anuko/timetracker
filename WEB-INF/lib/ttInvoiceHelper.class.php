@@ -106,16 +106,20 @@ class ttInvoiceHelper {
 
   // markPaid marks invoice items as paid.
   static function markPaid($invoice_id, $mark_paid = true) {
-
     global $user;
     $mdb2 = getConnection();
 
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $paid_status = $mark_paid ? 1 : 0;
-    $sql = "update tt_log set paid = $paid_status where invoice_id = $invoice_id and status = 1";
+    $sql = "update tt_log set paid = $paid_status".
+      " where invoice_id = $invoice_id and group_id = $group_id and org_id = $org_id and status = 1";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
-    $sql = "update tt_expense_items set paid = $paid_status where invoice_id = $invoice_id and status = 1";
+    $sql = "update tt_expense_items set paid = $paid_status".
+      " where invoice_id = $invoice_id and group_id = $group_id and org_id = $org_id and status = 1";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -127,43 +131,46 @@ class ttInvoiceHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     // At this time only detailed invoice is supported.
     // It is anticipated to support "totals only" option later on.
 
     // Our query is different depending on tracking mode.
     if (MODE_TIME == $user->getTrackingMode()) {
       // In "time only" tracking mode there is a single user rate.
-      $sql = "select l.date as date, 1 as type, u.name as user_name, p.name as project_name,
-      t.name as task_name, l.comment as note,
-      time_format(l.duration, '%k:%i') as duration,
-      cast(l.billable * u.rate * time_to_sec(l.duration)/3600 as decimal(10, 2)) as cost,
-      l.paid as paid from tt_log l
-      inner join tt_users u on (l.user_id = u.id)
-      left join tt_projects p on (p.id = l.project_id)
-      left join tt_tasks t on (t.id = l.task_id)
-      where l.status = 1 and l.billable = 1 and l.invoice_id = $invoice_id order by l.date, u.name";
+      $sql = "select l.date as date, 1 as type, u.name as user_name, p.name as project_name,".
+        " t.name as task_name, l.comment as note, time_format(l.duration, '%k:%i') as duration,".
+        " cast(l.billable * u.rate * time_to_sec(l.duration)/3600 as decimal(10, 2)) as cost,".
+        " l.paid as paid from tt_log l".
+        " inner join tt_users u on (l.user_id = u.id)".
+        " left join tt_projects p on (p.id = l.project_id)".
+        " left join tt_tasks t on (t.id = l.task_id)".
+        " where l.status = 1 and l.billable = 1 and l.invoice_id = $invoice_id".
+        " and l.group_id = $group_id and l.org_id = $org_id order by l.date, u.name";
     } else {
-      $sql = "select l.date as date, 1 as type, u.name as user_name, p.name as project_name,
-        t.name as task_name, l.comment as note,
-        time_format(l.duration, '%k:%i') as duration,
-        cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2)) as cost,
-        l.paid as paid from tt_log l
-        inner join tt_users u on (l.user_id = u.id)
-        left join tt_projects p on (p.id = l.project_id)
-        left join tt_tasks t on (t.id = l.task_id)
-        left join tt_user_project_binds upb on (upb.user_id = l.user_id and upb.project_id = l.project_id)
-        where l.status = 1 and l.billable = 1 and l.invoice_id = $invoice_id order by l.date, u.name";
+      $sql = "select l.date as date, 1 as type, u.name as user_name, p.name as project_name,".
+        " t.name as task_name, l.comment as note, time_format(l.duration, '%k:%i') as duration,".
+        " cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2)) as cost,".
+        " l.paid as paid from tt_log l".
+        " inner join tt_users u on (l.user_id = u.id)".
+        " left join tt_projects p on (p.id = l.project_id)".
+        " left join tt_tasks t on (t.id = l.task_id)".
+        " left join tt_user_project_binds upb on (upb.user_id = l.user_id and upb.project_id = l.project_id)".
+        " where l.status = 1 and l.billable = 1 and l.invoice_id = $invoice_id".
+        " and l.group_id = $group_id and l.org_id = $org_id order by l.date, u.name";
     }
 
     // If we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
     if ($user->isPluginEnabled('ex')) {
-      $sql_for_expense_items = "select ei.date as date, 2 as type, u.name as user_name, p.name as project_name,
-        null as task_name, ei.name as note,
-        null as duration, ei.cost as cost,
-        ei.paid as paid from tt_expense_items ei
-        inner join tt_users u on (ei.user_id = u.id)
-        left join tt_projects p on (p.id = ei.project_id)
-        where ei.invoice_id = $invoice_id and ei.status = 1";
+      $sql_for_expense_items = "select ei.date as date, 2 as type, u.name as user_name, p.name as project_name,".
+        " null as task_name, ei.name as note,".
+        " null as duration, ei.cost as cost,".
+        " ei.paid as paid from tt_expense_items ei".
+        " inner join tt_users u on (ei.user_id = u.id)".
+        " left join tt_projects p on (p.id = ei.project_id)".
+        " where ei.invoice_id = $invoice_id and ei.group_id = $group_id and ei.org_id = $org_id and ei.status = 1";
 
       // Construct a union.
       $sql = "($sql) union all ($sql_for_expense_items)";
