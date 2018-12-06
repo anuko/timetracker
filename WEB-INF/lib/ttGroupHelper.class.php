@@ -91,7 +91,7 @@ class ttGroupHelper {
     $name = $fields['name'];
     $description = $fields['description'];
 
-    // We need to inherit other attributes from the parent group.
+    // We need to inherit attributes from the parent group.
     $attrs = ttGroupHelper::getGroupAttrs($parent_id);
 
     $columns = '(parent_id, org_id, name, description, currency, decimal_mark, lang, date_format, time_format'.

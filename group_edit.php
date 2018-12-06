@@ -33,32 +33,49 @@ import('ttRoleHelper');
 import('ttConfigHelper');
 
 // Access checks.
-if (!(ttAccessAllowed('manage_basic_settings') || ttAccessAllowed('manage_advanced_settings'))) {
-  header('Location: access_denied.php');
-  exit();
+// There are 4 distinct situations:
+//   1) Editing home group in get or post.
+//   2) Editing a subgroup in get or post.
+// We'll check access separately as it is about different right checks.
+if ($request->isGet()) {
+  $group_id = $request->getParameter('id') ? $request->getParameter('id') : $user->getGroup();
+} else {
+  $group_id = $request->getParameter('group');
 }
-$group_id = (int)$request->getParameter('id');
-if ($group_id && !$user->isGroupValid($group_id)) {
-  header('Location: access_denied.php');
-  exit();
+$home_group = $user->group_id == $group_id;
+if ($home_group) {
+  // Editing home group.
+  if (!(ttAccessAllowed('manage_basic_settings') || ttAccessAllowed('manage_advanced_settings'))) {
+    header('Location: access_denied.php'); // Not allowed to edit home group settings.
+    exit();
+  }
+} else {
+  // Editing a subgroup.
+  if (!ttAccessAllowed('manage_subgroups')) {
+    header('Location: access_denied.php'); // No right to manage subgroups.
+    exit();
+  }
+  if (!$user->isSubgroupValid($group_id)) {
+    header('Location: access_denied.php'); // Wrong subgroup.
+    exit();
+  }
 }
 // End of access checks.
 
-if ($group_id) {
-  // We are passed a valid group_id.
-  // Set on behalf group accordingly.
-  $user->setOnBehalfGroup($group_id);
+// Set on behalf group accordingly.
+$groupChanged = $request->getParameter('group_changed');
+if ($request->isPost() && $groupChanged) {
+ $user->setOnBehalfGroup($group_id);
 }
 
-if (!$group_id) $group_id = $user->getGroup();
 $groups = $user->getGroupsForDropdown();
 $group = ttGroupHelper::getGroupAttrs($group_id);
 $config = new ttConfigHelper($group['config']);
 
-$advanced_settings = $user->can('manage_advanced_settings');
+$advanced_settings = $home_group ? $user->can('manage_advanced_settings') : true;
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
 
-if ($request->isPost()) {
+if ($request->isPost() && !$groupChanged) {
   $cl_group = trim($request->getParameter('group_name'));
   $cl_description = trim($request->getParameter('description'));
   $cl_currency = trim($request->getParameter('currency'));
@@ -208,13 +225,6 @@ if ($user->can('delete_group')) $form->addInput(array('type'=>'submit','name'=>'
 $form->setValueByElement('group_changed','');
 
 if ($request->isPost()) {
-  if ($request->getParameter('group_changed')) {
-    // User changed the group in dropdown.
-    $new_group_id = $request->getParameter('group');
-    // Redirect to self.
-    header('Location: group_edit.php?id='.$new_group_id);
-    exit();
-  }
 
   if ($request->getParameter('btn_delete')) {
     // Delete button pressed, redirect.
@@ -222,47 +232,49 @@ if ($request->isPost()) {
     exit();
   }
 
-  // Validate user input.
-  if (!ttValidString($cl_group)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
-  if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
-  if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));
-  if ($advanced_settings) {
-    if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
-    if (!ttValidIP($cl_allow_ip, true)) $err->add($i18n->get('error.field'), $i18n->get('form.group_edit.allow_ip'));
-  }
-  // Finished validating user input.
+  if ($request->getParameter('btn_save')) {
+    // Validate user input.
+    if (!ttValidString($cl_group)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
+    if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
+    if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));
+    if ($advanced_settings) {
+      if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
+      if (!ttValidIP($cl_allow_ip, true)) $err->add($i18n->get('error.field'), $i18n->get('form.group_edit.allow_ip'));
+    }
+    // Finished validating user input.
 
-  if ($err->no()) {
-    // Update config.
-    $config->setDefinedValue('show_holidays', $cl_show_holidays);
-    $config->setDefinedValue('punch_mode', $cl_punch_mode);
-    $config->setDefinedValue('allow_overlap', $cl_allow_overlap);
-    $config->setDefinedValue('future_entries', $cl_future_entries);
-    $config->setDefinedValue('uncompleted_indicators', $cl_uncompleted_indicators);
-    $config->setDefinedValue('confirm_save', $cl_confirm_save);
+    if ($err->no()) {
+      // Update config.
+      $config->setDefinedValue('show_holidays', $cl_show_holidays);
+      $config->setDefinedValue('punch_mode', $cl_punch_mode);
+      $config->setDefinedValue('allow_overlap', $cl_allow_overlap);
+      $config->setDefinedValue('future_entries', $cl_future_entries);
+      $config->setDefinedValue('uncompleted_indicators', $cl_uncompleted_indicators);
+      $config->setDefinedValue('confirm_save', $cl_confirm_save);
 
-    if ($user->updateGroup(array(
-      'group_id' => $group_id,
-      'name' => $cl_group,
-      'description' => $cl_description,
-      'currency' => $cl_currency,
-      'lang' => $cl_lang,
-      'decimal_mark' => $cl_decimal_mark,
-      'date_format' => $cl_date_format,
-      'time_format' => $cl_time_format,
-      'week_start' => $cl_start_week,
-      'tracking_mode' => $cl_tracking_mode,
-      'project_required' => $cl_project_required,
-      'task_required' => $cl_task_required,
-      'record_type' => $cl_record_type,
-      'uncompleted_indicators' => $cl_uncompleted_indicators,
-      'bcc_email' => $cl_bcc_email,
-      'allow_ip' => $cl_allow_ip,
-      'config' => $config->getConfig()))) {
-      header('Location: success.php');
-      exit();
-    } else
-      $err->add($i18n->get('error.db'));
+      if ($user->updateGroup(array(
+        'group_id' => $group_id,
+        'name' => $cl_group,
+        'description' => $cl_description,
+        'currency' => $cl_currency,
+        'lang' => $cl_lang,
+        'decimal_mark' => $cl_decimal_mark,
+        'date_format' => $cl_date_format,
+        'time_format' => $cl_time_format,
+        'week_start' => $cl_start_week,
+        'tracking_mode' => $cl_tracking_mode,
+        'project_required' => $cl_project_required,
+        'task_required' => $cl_task_required,
+        'record_type' => $cl_record_type,
+        'uncompleted_indicators' => $cl_uncompleted_indicators,
+        'bcc_email' => $cl_bcc_email,
+        'allow_ip' => $cl_allow_ip,
+        'config' => $config->getConfig()))) {
+        header('Location: success.php');
+        exit();
+      } else
+        $err->add($i18n->get('error.db'));
+    }
   }
 } // isPost
 

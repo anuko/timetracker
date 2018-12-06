@@ -31,17 +31,21 @@ import('form.Form');
 import('ttGroupHelper');
 
 // Access checks.
-if (!ttAccessAllowed('delete_group')) {
+if (!(ttAccessAllowed('delete_group') || ttAccessAllowed('manage_subgroups'))) {
   header('Location: access_denied.php'); // No rights.
   exit();
 }
-if (!$user->isGroupValid($request->getParameter('id'))) {
+$group_id = (int)$request->getParameter('id');
+if (!$user->isGroupValid($group_id)) {
   header('Location: access_denied.php'); // Wrong group id.
+  exit();
+}
+if ($group_id == $user->group_id && !$user->can('delete_group')) {
+  header('Location: access_denied.php'); // Trying to delete home group without right.
   exit();
 }
 // End of access checks.
 
-$group_id = (int)$request->getParameter('id');
 $group_name = ttGroupHelper::getGroupName($group_id);
 
 $form = new Form('groupForm');
@@ -53,7 +57,6 @@ if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
     $markedDeleted = ttGroupHelper::markGroupDeleted($group_id);
     if ($markedDeleted) {
-      // TODO: conditional redirects don't look nice. Any better ideas?
       if ($group_id == $user->group_id) {
         // We marked deleted our own group. Logout and redirect to login page.
         $auth->doLogout();
@@ -61,8 +64,10 @@ if ($request->isPost()) {
         header('Location: login.php');
         exit();
       } else {
-        // We marked deleted a subgroup. Redirect to groups.pgp.
-        header('Location: groups.php');
+        // We marked deleted a subgroup.
+        if ($user->behalfGroup && $user->behalfGroup->id == $group_id)
+          $user->setOnBehalfGroup($user->group_id); // Remove on behalf group from session.
+        header('Location: success.php');
         exit();
       }
     } else
@@ -70,7 +75,6 @@ if ($request->isPost()) {
   }
 
   if ($request->getParameter('btn_cancel')) {
-    // TODO: conditional redirects don't look nice. Any better ideas?
     if ($group_id == $user->group_id) {
       header('Location: group_edit.php');
       exit();
