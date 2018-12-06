@@ -28,7 +28,7 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttTeamHelper');
+import('ttGroupHelper');
 
 // Access checks.
 if (!(ttAccessAllowed('manage_invoices') || ttAccessAllowed('view_own_invoices'))) {
@@ -40,7 +40,7 @@ if (!$user->isPluginEnabled('iv')) {
   exit();
 }
 
-$invoices = ttTeamHelper::getActiveInvoices();
+$invoices = ttGroupHelper::getActiveInvoices();
 
 $smarty->assign('invoices', $invoices);
 $smarty->assign('title', $i18n->get('title.invoices'));

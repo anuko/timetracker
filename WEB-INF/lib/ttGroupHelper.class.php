@@ -389,4 +389,38 @@ class ttGroupHelper {
     }
     return false;
   }
+
+  // The getActiveInvoices returns an array of active invoices for a group.
+  static function getActiveInvoices()
+  {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $addPaidStatus = $user->isPluginEnabled('ps');
+    $result = array();
+
+    if ($user->isClient())
+      $client_part = "and i.client_id = $user->client_id";
+
+    $sql = "select i.id, i.name, i.date, i.client_id, i.status, c.name as client_name from tt_invoices i".
+      " left join tt_clients c on (c.id = i.client_id)".
+      " where i.status = 1 and i.group_id = $group_id and i.org_id = $org_id $client_part order by i.name";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      $dt = new DateAndTime(DB_DATEFORMAT);
+      while ($val = $res->fetchRow()) {
+        // Localize date.
+        $dt->parseVal($val['date']);
+        $val['date'] = $dt->toString($user->getDateFormat());
+        if ($addPaidStatus)
+          $val['paid'] = ttInvoiceHelper::isPaid($val['id']);
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
 }
