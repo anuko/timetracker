@@ -61,7 +61,8 @@ if ($user->isPluginEnabled('cl')) {
   $form->addInput(array('type'=>'combobox','name'=>'client','style'=>'width: 250px;','data'=>$clients,'datakeys'=>array('id','name'),'value'=>$cl_client,'empty'=>array(''=>$i18n->get('dropdown.select'))));
 }
 // Dropdown for projects.
-if (MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode()) {
+$show_project = MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode();
+if ($show_project) {
   $projects = ttGroupHelper::getActiveProjects();
   $form->addInput(array('type'=>'combobox','name'=>'project','style'=>'width: 250px;','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_project,'empty'=>array(''=>$i18n->get('dropdown.all'))));
 }
@@ -100,6 +101,7 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.invoiceForm.number.focus()"');
+$smarty->assign('show_project', $show_project);
 $smarty->assign('title', $i18n->get('title.add_invoice'));
 $smarty->assign('content_page_name', 'invoice_add.tpl');
 $smarty->display('index.tpl');

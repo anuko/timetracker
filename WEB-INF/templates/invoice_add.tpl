@@ -15,7 +15,7 @@
           <td align="right">{$i18n.label.client} (*):</td>
           <td>{$forms.invoiceForm.client.control}</td>
         </tr>
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
         <tr>
           <td align="right">{$i18n.label.project}:</td>
           <td>{$forms.invoiceForm.project.control}</td>

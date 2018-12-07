@@ -39,7 +39,7 @@ if (!$user->isPluginEnabled('lk')) {
   exit();
 }
 
-$cl_lock_spec = $request->isPost() ? $request->getParameter('lock_spec') : $user->lock_spec;
+$cl_lock_spec = $request->isPost() ? $request->getParameter('lock_spec') : $user->getLockSpec();
 
 $form = new Form('lockingForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'lock_spec','style'=>'width: 250px;','value'=>$cl_lock_spec));

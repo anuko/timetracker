@@ -594,15 +594,10 @@ class ttUser {
 
   // updateGroup updates group information with new data.
   function updateGroup($fields) {
-    if (!($this->can('manage_basic_settings') ||
-      $this->can('manage_advanced_settings') ||
-      $this->can('manage_features'))) return false;
-    // TODO: update the above for subgroup updates.
+    $mdb2 = getConnection();
 
     $group_id = $fields['group_id'];
     if ($group_id && !$this->isGroupValid($group_id)) return false;
-
-    $mdb2 = getConnection();
     if (!$group_id) $group_id = $this->getGroup();
 
     if (isset($fields['name'])) $name_part = ', name = '.$mdb2->quote($fields['name']);
