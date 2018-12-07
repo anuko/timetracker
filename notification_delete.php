@@ -39,9 +39,18 @@ if (!$user->isPluginEnabled('no')) {
   header('Location: feature_disabled.php');
   exit();
 }
-
+if (!$user->exists()) {
+  header('Location: access_denied.php'); // No users in subgroup.
+  exit();
+}
 $cl_notification_id = (int)$request->getParameter('id');
 $notification = ttNotificationHelper::get($cl_notification_id);
+if (!$notification) {
+  header('Location: access_denied.php'); // Wrong notification id.
+  exit();
+}
+// End of access checks.
+
 $notification_to_delete = $notification['name'];
 
 $form = new Form('notificationDeleteForm');
@@ -51,12 +60,9 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get(
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if(ttNotificationHelper::get($cl_notification_id)) {
-      if (ttNotificationHelper::delete($cl_notification_id)) {
-        header('Location: notifications.php');
-        exit();
-      } else
-        $err->add($i18n->get('error.db'));
+    if (ttNotificationHelper::delete($cl_notification_id)) {
+      header('Location: notifications.php');
+      exit();
     } else
       $err->add($i18n->get('error.db'));
   } elseif ($request->getParameter('btn_cancel')) {

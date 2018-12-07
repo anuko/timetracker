@@ -39,6 +39,14 @@ if (!$user->isPluginEnabled('no')) {
   header('Location: feature_disabled.php');
   exit();
 }
+if (!$user->exists()) {
+  header('Location: access_denied.php'); // No users in subgroup.
+  exit();
+}
+// End of access checks.
+
+// TODO: extend and re-design notifications.
+// Currently they only work with fav reports, which are bound to users.
 
 $form = new Form('notificationsForm');
 

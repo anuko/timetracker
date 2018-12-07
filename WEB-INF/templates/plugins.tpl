@@ -123,7 +123,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.notifications.control}</td>
-            <td><label for="notifications">{$i18n.title.notifications}</label> <span id="notifications_config"><a href="notifications.php">{$i18n.label.configure}</a></span></td>
+            <td><label for="notifications">{$i18n.title.notifications}</label> <span id="notifications_config">{if $user_exists}<a href="notifications.php">{$i18n.label.configure}</a>{/if}</span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.locking.control}</td>

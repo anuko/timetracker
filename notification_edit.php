@@ -42,12 +42,30 @@ if (!$user->isPluginEnabled('no')) {
   header('Location: feature_disabled.php');
   exit();
 }
+if (!$user->exists()) {
+  header('Location: access_denied.php'); // No users in subgroup.
+  exit();
+}
+$notification_id = (int)$request->getParameter('id');
+$notification = ttNotificationHelper::get($notification_id);
+if (!$notification) {
+  header('Location: access_denied.php'); // Wrong notification id.
+  exit();
+}
+if ($request->isPost()) {
+  // TODO: improve this, perhaps by refactoring elsewhere.
+  $cl_fav_report = (int) $request->getParameter('fav_report');
+  $fav_report = ttFavReportHelper::getReport($cl_fav_report);
+  if ($user->getUser() != $fav_report['user_id']) {
+    header('Location: access_denied.php'); // Invalid fav report id in post.
+    exit();
+  }
+}
+// End of access checks.
 
-$notification_id = (int) $request->getParameter('id');
-$fav_reports = ttFavReportHelper::getReports($user->id);
+$fav_reports = ttFavReportHelper::getReports($user->getUser());
 
 if ($request->isPost()) {
-  $cl_fav_report = trim($request->getParameter('fav_report'));
   $cl_cron_spec = trim($request->getParameter('cron_spec'));
   $cl_email = trim($request->getParameter('email'));
   $cl_cc = trim($request->getParameter('cc'));

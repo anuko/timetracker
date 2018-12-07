@@ -157,7 +157,13 @@ if ($request->isPost()) {
         'client_id' => $cl_client_id,
         'projects' => $assigned_projects,
         'email' => $cl_email);
-      if (ttUserHelper::insert($fields)) {
+      $user_id = ttUserHelper::insert($fields);
+      if ($user_id) {
+        if (!$user->exists()) {
+          // We added a user to an empty subgroup. Set new user as on behalf user.
+          // Needed for user-based things to work (such as notifications config).
+          $user->setOnBehalfUser($user_id);
+        }
         header('Location: users.php');
         exit();
       } else
