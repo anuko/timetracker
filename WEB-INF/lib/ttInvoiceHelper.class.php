@@ -184,7 +184,7 @@ class ttInvoiceHelper {
       $dt = new DateAndTime(DB_DATEFORMAT);
       while ($val = $res->fetchRow()) {
         $dt->parseVal($val['date']);
-        $val['date'] = $dt->toString($user->date_format);
+        $val['date'] = $dt->toString($user->getDateFormat());
         $result[] = $val;
       }
     }
@@ -196,30 +196,42 @@ class ttInvoiceHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     // Handle custom field log records.
     if ($delete_invoice_items) {
-      $sql = "update tt_custom_field_log set status = NULL where log_id in (select id from tt_log where invoice_id = $invoice_id and status = 1)";
+      $sql = "update tt_custom_field_log set status = null".
+        " where log_id in".
+        " (select id from tt_log where invoice_id = $invoice_id and group_id = $group_id and org_id = $org_id and status = 1)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error')) return false;
     }
 
     // Handle time records.
-    if ($delete_invoice_items)
-      $sql = "update tt_log set status = NULL where invoice_id = $invoice_id";
-    else
-      $sql = "update tt_log set invoice_id = NULL where invoice_id = $invoice_id";
+    if ($delete_invoice_items) {
+      $sql = "update tt_log set status = null".
+        " where invoice_id = $invoice_id and group_id = $group_id and org_id = $org_id";
+    } else {
+      $sql = "update tt_log set invoice_id = null".
+        " where invoice_id = $invoice_id and group_id = $group_id and org_id = $org_id";
+    }
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Handle expense items.
-    if ($delete_invoice_items)
-      $sql = "update tt_expense_items set status = NULL where invoice_id = $invoice_id";
-    else
-      $sql = "update tt_expense_items set invoice_id = NULL where invoice_id = $invoice_id";
+    if ($delete_invoice_items) {
+      $sql = "update tt_expense_items set status = null".
+        " where invoice_id = $invoice_id and group_id = $group_id and org_id = $org_id";
+    } else {
+      $sql = "update tt_expense_items set invoice_id = null".
+        " where invoice_id = $invoice_id and group_id = $group_id and org_id = $org_id";
+    }
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
-    $sql = "update tt_invoices set status = NULL where id = $invoice_id and group_id = ".$user->getGroup();
+    $sql = "update tt_invoices set status = null".
+      " where id = $invoice_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
