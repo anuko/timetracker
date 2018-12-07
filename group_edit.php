@@ -40,7 +40,7 @@ import('ttConfigHelper');
 if ($request->isGet()) {
   $group_id = $request->getParameter('id') ? $request->getParameter('id') : $user->getGroup();
 } else {
-  $group_id = $request->getParameter('group');
+  $group_id = $request->getParameter('group') ? $request->getParameter('group') : $user->getGroup();
 }
 $home_group = $user->group_id == $group_id;
 if ($home_group) {
