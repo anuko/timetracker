@@ -423,4 +423,27 @@ class ttGroupHelper {
     }
     return $result;
   }
+
+  // getNotifications - obtains notification descriptions for a group.
+  static function getNotifications() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $result = array();
+    $sql = "select c.id, c.cron_spec, c.email, c.report_condition, fr.name from tt_cron c".
+      " left join tt_fav_reports fr on (fr.id = c.report_id)".
+      " where c.group_id = $group_id and c.org_id = $org_id and c.status = 1 and fr.status = 1";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
 }

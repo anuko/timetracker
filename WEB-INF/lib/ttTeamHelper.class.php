@@ -508,25 +508,6 @@ class ttTeamHelper {
     return false;
   }
 
-  // getNotifications - obtains notification descriptions for a group.
-  static function getNotifications($group_id) {
-    $mdb2 = getConnection();
-
-    $result = array();
-    $sql = "select c.id, c.cron_spec, c.email, c.report_condition, fr.name from tt_cron c
-      left join tt_fav_reports fr on (fr.id = c.report_id)
-      where c.group_id = $group_id and c.status = 1 and fr.status = 1";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
   // getMonthlyQuotas - obtains monthly quotas for a group.
   static function getMonthlyQuotas($group_id) {
     $mdb2 = getConnection();

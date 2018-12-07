@@ -94,7 +94,6 @@ if ($request->isPost()) {
 
     if (ttNotificationHelper::update(array(
         'id' => $notification_id,
-        'group_id' => $user->group_id,
         'cron_spec' => $cl_cron_spec,
         'next' => $next,
         'report_id' => $cl_fav_report,
