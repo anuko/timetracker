@@ -20,10 +20,10 @@
         <tr>
           <td class="tableHeader">{$i18n.label.date}</td>
           <td class="tableHeader">{$i18n.form.invoice.person}</td>
-  {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+  {if $show_project}
           <td class="tableHeader">{$i18n.label.project}</td>
   {/if}
-  {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+  {if $show_task}
           <td class="tableHeader">{$i18n.label.task}</td>
   {/if}
           <td class="tableHeader">{$i18n.label.note}</td>
@@ -37,10 +37,10 @@
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td valign="top">{$invoice_item.date}</td>
           <td valign="top">{$invoice_item.user_name|escape}</td>
-    {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if $show_project}
           <td valign="top">{$invoice_item.project_name|escape}</td>
     {/if}
-    {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if $show_task}
           <td valign="top">{$invoice_item.task_name|escape}</td>
     {/if}
           <td valign="top">{$invoice_item.note|escape}</td>

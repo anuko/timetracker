@@ -71,20 +71,24 @@ if ($tax_percent > 0) {
 }
 $total = $subtotal + $tax; 
 
-$smarty->assign('subtotal', $user->currency.' '.str_replace('.', $user->decimal_mark, sprintf('%8.2f', round($subtotal, 2))));
-if ($tax) $smarty->assign('tax', $user->currency.' '.str_replace('.', $user->decimal_mark, sprintf('%8.2f', round($tax, 2))));
-$smarty->assign('total', $user->currency.' '.str_replace('.', $user->decimal_mark, sprintf('%8.2f', round($total, 2))));
+$currency = $user->getCurrency();
+$decimalMark = $user->getDecimalMark();
 
-if ('.' != $user->decimal_mark) {
+$smarty->assign('subtotal', $currency.' '.str_replace('.', $decimalMark, sprintf('%8.2f', round($subtotal, 2))));
+if ($tax) $smarty->assign('tax', $currency.' '.str_replace('.', $decimalMark, sprintf('%8.2f', round($tax, 2))));
+$smarty->assign('total', $currency.' '.str_replace('.', $decimalMark, sprintf('%8.2f', round($total, 2))));
+
+if ('.' != $decimalMark) {
   foreach ($invoice_items as &$item)
-    $item['cost'] = str_replace('.', $user->decimal_mark, $item['cost']);
+    $item['cost'] = str_replace('.', $decimalMark, $item['cost']);
 }
 
 // Calculate colspan for invoice summary.
 $colspan = 4;
-if (MODE_PROJECTS == $user->tracking_mode)
+$trackingMode = $user->getTrackingMode();
+if (MODE_PROJECTS == $trackingMode)
   $colspan++;
-elseif (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+elseif (MODE_PROJECTS_AND_TASKS == $trackingMode)
   $colspan += 2;
 
 $form = new Form('invoiceForm');
@@ -117,9 +121,11 @@ if ($request->isPost()) {
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('invoice_id', $cl_invoice_id);
 $smarty->assign('invoice_name', $invoice['name']);
-$smarty->assign('invoice_date', $invoice_date->toString($user->date_format));
+$smarty->assign('invoice_date', $invoice_date->toString($user->getDateFormat()));
 $smarty->assign('client_name', $client['name']);
 $smarty->assign('client_address', $client['address']);
+$smarty->assign('show_project', MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode);
+$smarty->assign('show_task', MODE_PROJECTS_AND_TASKS == $trackingMode);
 $smarty->assign('invoice_items', $invoice_items);
 $smarty->assign('colspan', $colspan);
 $smarty->assign('title', $i18n->get('title.view_invoice'));
