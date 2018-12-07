@@ -392,6 +392,9 @@ class ttInvoiceHelper {
     global $user;
     global $i18n;
 
+    $currency = $user->getCurrency();
+    $decimalMark = $user->getDecimalMark();
+
     $invoice = ttInvoiceHelper::getInvoice($invoice_id);
     $client = ttClientHelper::getClient($invoice['client_id'], true);
     $invoice_items = ttInvoiceHelper::getInvoiceItems($invoice_id);
@@ -412,13 +415,13 @@ class ttInvoiceHelper {
     }
     $total = $subtotal + $tax;
 
-    $subtotal = htmlspecialchars($user->currency).' '.str_replace('.', $user->decimal_mark, sprintf('%8.2f', round($subtotal, 2)));
-    if ($tax) $tax = htmlspecialchars($user->currency).' '.str_replace('.', $user->decimal_mark, sprintf('%8.2f', round($tax, 2)));
-    $total = htmlspecialchars($user->currency).' '.str_replace('.', $user->decimal_mark, sprintf('%8.2f', round($total, 2)));
+    $subtotal = htmlspecialchars($currency).' '.str_replace('.', $decimalMark, sprintf('%8.2f', round($subtotal, 2)));
+    if ($tax) $tax = htmlspecialchars($currency).' '.str_replace('.', $decimalMark, sprintf('%8.2f', round($tax, 2)));
+    $total = htmlspecialchars($currency).' '.str_replace('.', $decimalMark, sprintf('%8.2f', round($total, 2)));
 
-    if ('.' != $user->decimal_mark) {
+    if ('.' != $decimalMark) {
       foreach ($invoice_items as &$item) {
-        $item['cost'] = str_replace('.', $user->decimal_mark, $item['cost']);
+        $item['cost'] = str_replace('.', $decimalMark, $item['cost']);
       }
       unset($item); // Unset the reference. If we don't, the foreach loop below modifies the array while printing.
                     // See http://stackoverflow.com/questions/8220399/php-foreach-pass-by-reference-last-element-duplicating-bug
