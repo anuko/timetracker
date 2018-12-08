@@ -47,10 +47,10 @@ import('ttReportHelper');
 $mdb2 = getConnection();
 $now = time();
 
- $sql = "select c.id, c.cron_spec, c.report_id, c.email, c.cc, c.subject, c.report_condition from tt_cron c
-   left join tt_fav_reports fr on (c.report_id = fr.id)
-   where $now >= c.next and fr.status = 1
-   and c.status = 1 and c.report_id is not null and c.email is not null";
+ $sql = "select c.id, c.cron_spec, c.report_id, c.email, c.cc, c.subject, c.report_condition from tt_cron c".
+   " inner join tt_fav_reports fr on (c.report_id = fr.id and c.group_id = fr.group_id and c.org_id = fr.org_id)".
+   " where $now >= c.next and fr.status = 1".
+   " and c.status = 1 and c.report_id is not null and c.email is not null";
 $res = $mdb2->query($sql);
 if (is_a($res, 'PEAR_Error'))
   exit();
