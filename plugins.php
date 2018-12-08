@@ -34,24 +34,9 @@ if (!ttAccessAllowed('manage_features')) {
   header('Location: access_denied.php');
   exit();
 }
-if ($request->isPost()) {
-  $groupChanged = $request->getParameter('group_changed'); // Reused in multiple places below.
-  if ($groupChanged && !($user->can('manage_subgroups') && $user->isGroupValid($request->getParameter('group')))) {
-    header('Location: access_denied.php'); // Group changed, but no rght or wrong group id.
-    exit();
-  }
-}
 // End of access checks.
 
-// Determine group for which we display this page.
-if ($request->isPost() && $groupChanged) {
-  $group_id = $request->getParameter('group');
-  $user->setOnBehalfGroup($group_id);
-} else {
-  $group_id = $user->getGroup();
-}
-
-if ($request->isPost() && $request->getParameter('btn_save')) {
+if ($request->isPost()) {
   // Plugins that user wants to save for the current group.
   $cl_charts = $request->getParameter('charts');
   $cl_clients = $request->getParameter('clients');
@@ -86,21 +71,7 @@ if ($request->isPost() && $request->getParameter('btn_save')) {
 }
 
 $form = new Form('pluginsForm');
-// Group dropdown.
-if ($user->can('manage_subgroups')) {
-  $groups = $user->getGroupsForDropdown();
-  if (count($groups) > 1) {
-    $form->addInput(array('type'=>'combobox',
-      'onchange'=>'document.pluginsForm.group_changed.value=1;document.pluginsForm.submit();',
-      'name'=>'group',
-      'style'=>'width: 250px;',
-      'value'=>$group_id,
-      'data'=>$groups,
-      'datakeys'=>array('id','name')));
-    $form->addInput(array('type'=>'hidden','name'=>'group_changed'));
-    $smarty->assign('group_dropdown', 1);
-  }
-}
+
 // Plugin checkboxes.
 $form->addInput(array('type'=>'checkbox','name'=>'charts','value'=>$cl_charts));
 $form->addInput(array('type'=>'checkbox','name'=>'clients','value'=>$cl_clients,'onchange'=>'handlePluginCheckboxes()'));
@@ -118,12 +89,9 @@ $form->addInput(array('type'=>'checkbox','name'=>'work_units','value'=>$cl_work_
 // Submit button.
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
-if ($request->isPost() && $request->getParameter('btn_save')) {
+if ($request->isPost()) {
   // Note: we get here when the Save button is clicked.
-  // We update plugin list for the currently selected group.
-  //
-  // We don't get here if group changed in post.
-  // In this case the page is simply re-displayed for new group.
+  // We update plugin list for the current group.
 
   // Prepare plugins string.
   if ($cl_charts)
