@@ -53,7 +53,30 @@ class ttFavReportHelper {
     return false;
   }
 
+  // get - returns a report identified by its id for user.
+  static function get($id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select * from tt_fav_reports".
+      " where id = $id and user_id = $user_id and group_id = $group_id and org_id = $org_id and status = 1";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      if ($val = $res->fetchRow()) {
+        return $val;
+      }
+    }
+    return false;
+  }
+
   // getReport - returns a report identified by its id.
+  // TODO: get rid of this function by encapsulating all cron related tasks in its own class.
+  // Because cron works for all orgs and we want this class to always work in context of
+  // a logged on user, for better security.
   static function getReport($id) {
     $mdb2 = getConnection();
 

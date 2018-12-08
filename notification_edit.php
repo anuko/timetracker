@@ -53,10 +53,8 @@ if (!$notification) {
   exit();
 }
 if ($request->isPost()) {
-  // TODO: improve this, perhaps by refactoring elsewhere.
-  $cl_fav_report = (int) $request->getParameter('fav_report');
-  $fav_report = ttFavReportHelper::getReport($cl_fav_report);
-  if ($user->getUser() != $fav_report['user_id']) {
+  $cl_fav_report_id = (int) $request->getParameter('fav_report');
+  if ($cl_fav_report_id && !ttFavReportHelper::get($cl_fav_report_id)) {
     header('Location: access_denied.php'); // Invalid fav report id in post.
     exit();
   }
@@ -73,7 +71,7 @@ if ($request->isPost()) {
   $cl_report_condition = trim($request->getParameter('report_condition'));
 } else {
   $notification = ttNotificationHelper::get($notification_id);
-  $cl_fav_report = $notification['report_id'];
+  $cl_fav_report_id = $notification['report_id'];
   $cl_cron_spec = $notification['cron_spec'];
   $cl_email = $notification['email'];
   $cl_cc = $notification['cc'];
@@ -86,7 +84,7 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$notification_id));
 $form->addInput(array('type'=>'combobox',
   'name'=>'fav_report',
   'style'=>'width: 250px;',
-  'value'=>$cl_fav_report,
+  'value'=>$cl_fav_report_id,
   'data'=>$fav_reports,
   'datakeys'=>array('id','name'),
   'empty'=>array(''=>$i18n->get('dropdown.select'))));
@@ -99,7 +97,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get(
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!$cl_fav_report) $err->add($i18n->get('error.report'));
+  if (!$cl_fav_report_id) $err->add($i18n->get('error.report'));
   if (!ttValidCronSpec($cl_cron_spec)) $err->add($i18n->get('error.field'), $i18n->get('label.schedule'));
   if (!ttValidEmail($cl_email)) $err->add($i18n->get('error.field'), $i18n->get('label.email'));
   if (!ttValidEmail($cl_cc, true)) $err->add($i18n->get('error.field'), $i18n->get('label.cc'));
@@ -114,7 +112,7 @@ if ($request->isPost()) {
         'id' => $notification_id,
         'cron_spec' => $cl_cron_spec,
         'next' => $next,
-        'report_id' => $cl_fav_report,
+        'report_id' => $cl_fav_report_id,
         'email' => $cl_email,
         'cc' => $cl_cc,
         'subject' => $cl_subject,
