@@ -9,7 +9,7 @@
         </tr>
         <tr>
           <td align="right">{$i18n.label.cost} (*):</td>
-          <td>{$forms.predefinedExpenseForm.cost.control} {$user->currency|escape}</td>
+          <td>{$forms.predefinedExpenseForm.cost.control} {$user->getCurrency()|escape}</td>
         </tr>
         <tr>
           <td height="40"></td>

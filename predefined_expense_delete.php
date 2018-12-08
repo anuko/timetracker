@@ -39,9 +39,15 @@ if (!$user->isPluginEnabled('ex')) {
   header('Location: feature_disabled.php');
   exit();
 }
-
 $cl_predefined_expense_id = (int)$request->getParameter('id');
 $predefined_expense = ttPredefinedExpenseHelper::get($cl_predefined_expense_id);
+if (!$predefined_expense) {
+  header('Location: access_denied.php');
+  exit();
+}
+// End of access checks.
+
+
 $predefined_expense_to_delete = $predefined_expense['name'];
 
 $form = new Form('predefinedExpenseDeleteForm');
@@ -51,12 +57,9 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get(
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if(ttPredefinedExpenseHelper::get($cl_predefined_expense_id)) {
-      if (ttPredefinedExpenseHelper::delete($cl_predefined_expense_id)) {
-        header('Location: predefined_expenses.php');
-        exit();
-      } else
-        $err->add($i18n->get('error.db'));
+    if (ttPredefinedExpenseHelper::delete($cl_predefined_expense_id)) {
+      header('Location: predefined_expenses.php');
+      exit();
     } else
       $err->add($i18n->get('error.db'));
   } elseif ($request->getParameter('btn_cancel')) {
