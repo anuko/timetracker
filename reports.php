@@ -56,7 +56,7 @@ $form = new Form('reportForm');
 $report_list = ttFavReportHelper::getReports();
 $form->addInput(array('type'=>'combobox',
   'name'=>'favorite_report',
-  'onchange'=>'document.reportForm.fav_report_changed.value=1;document.reportForm.submit();',
+  'onchange'=>'this.form.fav_report_changed.value=1;this.form.submit();',
   'style'=>'width: 250px;',
   'data'=>$report_list,
   'datakeys'=>array('id','name'),
