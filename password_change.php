@@ -33,27 +33,30 @@ import('ttUser');
 
 $auth->doLogout();
 
+// Access checks.
 $cl_ref = $request->getParameter('ref');
 if (!$cl_ref || $auth->isPasswordExternal()) {
   header('Location: login.php');
   exit();
 }
-
-// Get user ID.
 $user_id = ttUserHelper::getUserIdByTmpRef($cl_ref);
-if ($user_id) {
-  $user = new ttUser(null, $user_id); // Note: reusing $user from initialize.php.
-  // In case user language is different - reload $i18n.
-  if ($i18n->lang != $user->lang) {
-    $i18n->load($user->lang);
-    $smarty->assign('i18n', $i18n->keys);
-  }
-  if ($user->custom_logo) {
-    $smarty->assign('custom_logo', 'images/'.$user->group_id.'.png');
-    $smarty->assign('mobile_custom_logo', '../images/'.$user->group_id.'.png');
-  }
-  $smarty->assign('user', $user);
+if (!$user_id) {
+  header('Location: access_denied.php'); // No user found by provided reference.
+  exit();
 }
+// End of access checks.
+
+$user = new ttUser(null, $user_id); // Note: reusing $user from initialize.php.
+// In case user language is different - reload $i18n.
+if ($i18n->lang != $user->lang) {
+  $i18n->load($user->lang);
+  $smarty->assign('i18n', $i18n->keys);
+}
+if ($user->custom_logo) {
+  $smarty->assign('custom_logo', 'images/'.$user->group_id.'.png');
+  $smarty->assign('mobile_custom_logo', '../images/'.$user->group_id.'.png');
+}
+$smarty->assign('user', $user);
 
 $cl_password1 = $request->getParameter('password1');
 $cl_password2 = $request->getParameter('password2');

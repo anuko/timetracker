@@ -72,7 +72,6 @@ class ttFavReportHelper {
     }
     return false;
   }
-
   // getReport - returns a report identified by its id.
   // TODO: get rid of this function by encapsulating all cron related tasks in its own class.
   // Because cron works for all orgs and we want this class to always work in context of

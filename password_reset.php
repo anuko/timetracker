@@ -36,13 +36,13 @@ if ($auth->isPasswordExternal()) {
   exit();
 }
 
+$cl_login = $request->getParameter('login');
+
 $form = new Form('resetPasswordForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','style'=>'width: 300px;'));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','style'=>'width: 300px;','value'=>$cl_login));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.reset_password')));
 
 if ($request->isPost()) {
-  $cl_login = $request->getParameter('login');
-
   // Validate user input.
   if (!ttValidString($cl_login)) $err->add($i18n->get('error.field'), $i18n->get('label.login'));
 
