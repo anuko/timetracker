@@ -53,7 +53,7 @@ if ($user->isPluginEnabled('cf')) {
 $form = new Form('reportForm');
 
 // Get saved favorite reports for user.
-$report_list = ttFavReportHelper::getReports($user->id);
+$report_list = ttFavReportHelper::getReports();
 $form->addInput(array('type'=>'combobox',
   'name'=>'favorite_report',
   'onchange'=>'document.reportForm.fav_report_changed.value=1;document.reportForm.submit();',

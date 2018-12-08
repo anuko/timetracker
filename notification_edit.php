@@ -63,7 +63,7 @@ if ($request->isPost()) {
 }
 // End of access checks.
 
-$fav_reports = ttFavReportHelper::getReports($user->getUser());
+$fav_reports = ttFavReportHelper::getReports();
 
 if ($request->isPost()) {
   $cl_cron_spec = trim($request->getParameter('cron_spec'));

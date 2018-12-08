@@ -32,11 +32,17 @@ import('ttTeamHelper');
 class ttFavReportHelper {
 
   // getReports - returns an array of favorite reports for user.
-  static function getReports($user_id) {
+  static function getReports() {
+    global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $result = array();
-    $sql = "select * from tt_fav_reports where user_id = $user_id and status = 1";
+    $sql = "select * from tt_fav_reports".
+      " where user_id = $user_id and group_id = $group_id and org_id = $org_id and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
