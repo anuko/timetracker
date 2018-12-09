@@ -446,4 +446,42 @@ class ttGroupHelper {
     }
     return false;
   }
+
+  // The getActiveUsers obtains all active users in a given group.
+  static function getActiveUsers($options = null) {
+    global $user;
+    global $i18n;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    if (isset($options['getAllFields']))
+      $sql = "select u.*, r.name as role_name, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.group_id = $group_id and u.org_id = $org_id and u.status = 1 order by upper(u.name)";
+    else
+      $sql = "select id, name from tt_users where group_id = $group_id and org_id = $org_id and status = 1 order by upper(name)";
+    $res = $mdb2->query($sql);
+    $user_list = array();
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    while ($val = $res->fetchRow()) {
+      // Localize top manager role name, as it is not localized in db.
+      if ($val['rank'] == 512)
+        $val['role_name'] = $i18n->get('role.top_manager.label');
+      $user_list[] = $val;
+    }
+
+    if (isset($options['putSelfFirst'])) {
+      // Put own entry at the front.
+      $cnt = count($user_list);
+      for($i = 0; $i < $cnt; $i++) {
+        if ($user_list[$i]['id'] == $user->id) {
+          $self = $user_list[$i]; // Found self.
+          array_unshift($user_list, $self); // Put own entry at the front.
+          array_splice($user_list, $i+1, 1); // Remove duplicate.
+        }
+      }
+    }
+    return $user_list;
+  }
 }

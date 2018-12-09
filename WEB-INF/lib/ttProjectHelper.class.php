@@ -28,6 +28,7 @@
 
 import('ttTeamHelper');
 import('ttUserHelper');
+import('ttGroupHelper');
 
 // Class ttProjectHelper is used to help with project related tasks.
 class ttProjectHelper {
@@ -216,7 +217,7 @@ class ttProjectHelper {
     $last_id = $mdb2->lastInsertID('tt_projects', 'id');
 
     // Bind the project to users.
-    $active_users = ttTeamHelper::getActiveUsers(array('getAllFields'=>true));
+    $active_users = ttGroupHelper::getActiveUsers(array('getAllFields'=>true));
     foreach ($active_users as $u) {
       if(in_array($u['id'], $users)) {
         $sql = "insert into tt_user_project_binds (project_id, user_id, group_id, org_id, status, rate) values(

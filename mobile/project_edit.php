@@ -30,6 +30,7 @@ require_once('../initialize.php');
 import('form.Form');
 import('ttProjectHelper');
 import('ttTeamHelper');
+import('ttGroupHelper');
 
 // Access checks.
 if (!ttAccessAllowed('manage_projects')) {
@@ -48,7 +49,7 @@ if (!$project) {
 }
 // End of access checks.
 
-$users = ttTeamHelper::getActiveUsers();
+$users = ttGroupHelper::getActiveUsers();
 foreach ($users as $user_item)
   $all_users[$user_item['id']] = $user_item['name'];
 

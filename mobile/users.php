@@ -29,6 +29,7 @@
 require_once('../initialize.php');
 import('form.Form');
 import('ttTeamHelper');
+import('ttGroupHelper');
 import('ttTimeHelper');
 
 // Access checks.
@@ -41,7 +42,7 @@ if (!(ttAccessAllowed('view_users') || ttAccessAllowed('manage_users'))) {
 $uncompleted_indicators = $user->getConfigOption('uncompleted_indicators');
 
 // Get users.
-$active_users = ttTeamHelper::getActiveUsers(array('getAllFields'=>true));
+$active_users = ttGroupHelper::getActiveUsers(array('getAllFields'=>true));
 if($user->can('manage_users')) {
   $can_delete_manager = (1 == count($active_users));
   $inactive_users = ttTeamHelper::getInactiveUsers($user->group_id, true);
