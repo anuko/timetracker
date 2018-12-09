@@ -28,7 +28,6 @@
 
 require_once('../initialize.php');
 import('form.Form');
-import('ttTeamHelper');
 import('ttGroupHelper');
 
 // Access checks.
@@ -44,7 +43,7 @@ if (MODE_PROJECTS_AND_TASKS != $user->getTrackingMode()) {
 
 if($user->can('manage_tasks')) {
   $active_tasks = ttGroupHelper::getActiveTasks();
-  $inactive_tasks = ttTeamHelper::getInactiveTasks($user->getGroup());
+  $inactive_tasks = ttGroupHelper::getInactiveTasks();
 } else
   $active_tasks = $user->getAssignedTasks();
 

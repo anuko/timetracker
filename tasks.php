@@ -28,7 +28,6 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttTeamHelper');
 import('ttGroupHelper');
 
 // Access checks.
@@ -75,7 +74,7 @@ if ($user->can('manage_subgroups')) {
 
 if($user->can('manage_tasks')) {
   $active_tasks = ttGroupHelper::getActiveTasks();
-  $inactive_tasks = ttTeamHelper::getInactiveTasks($group_id);
+  $inactive_tasks = ttGroupHelper::getInactiveTasks();
 } else
   $active_tasks = $user->getAssignedTasks();
 

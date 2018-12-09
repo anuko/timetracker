@@ -505,4 +505,25 @@ class ttGroupHelper {
     }
     return $result;
   }
+
+  // getInactiveTasks - returns an array of inactive tasks for a group.
+  static function getInactiveTasks()
+  {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select id, name, description from tt_tasks".
+      " where group_id = $group_id and org_id = $org_id and status = 0 order by upper(name)";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
 }
