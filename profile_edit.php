@@ -36,9 +36,15 @@ if (!ttAccessAllowed('manage_own_settings')) {
   header('Location: access_denied.php');
   exit();
 }
+if (!$user->exists()) {
+  header('Location: access_denied.php');  // No users in subgroup.
+  exit();
+}
 // End of access checks.
 
-$can_manage_account = $user->can('manage_own_account');
+$can_manage_account = $user->behalfGroup ? $user->can('manage_subgroups') : $user->can('manage_own_account');
+if ($user->behalf_id) $user_details = $user->getUserDetails($user->behalf_id);
+$current_login = $user->behalf_id ? $user_details['login'] : $user->login;
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -49,9 +55,15 @@ if ($request->isPost()) {
   }
   $cl_email = trim($request->getParameter('email'));
 } else {
-  $cl_name = $user->name;
-  $cl_login = $user->login;
-  $cl_email = $user->email;
+  if ($user->behalf_id) {
+    $cl_name = $user_details['name'];
+    $cl_login = $user_details['login'];
+    $cl_email = $user_details['email'];
+  } else {
+    $cl_name = $user->name;
+    $cl_login = $user->login;
+    $cl_email = $user->email;
+  }
 }
 
 $form = new Form('profileForm');
@@ -70,7 +82,7 @@ if ($request->isPost()) {
   if (!ttValidString($cl_login)) $err->add($i18n->get('error.field'), $i18n->get('label.login'));
 
   // New login must be unique.
-  if ($cl_login != $user->login && ttUserHelper::getUserByLogin($cl_login))
+  if ($cl_login != $current_login && ttUserHelper::getUserByLogin($cl_login))
     $err->add($i18n->get('error.user_exists'));
 
   if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
@@ -83,12 +95,10 @@ if ($request->isPost()) {
   // Finished validating user input.
 
   if ($err->no()) {
-    $update_result = ttUserHelper::update($user->id, array(
-        'name' => $cl_name,
-        'login' => $cl_login,
-        'password' => $cl_password1,
-        'email' => $cl_email,
-        'status' => ACTIVE));
+    $fields = $can_manage_account ?
+      array('name'=>$cl_name,'login'=>$cl_login,'password'=>$cl_password1,'email'=>$cl_email) :
+      array('password'=>$cl_password1);
+    $update_result = ttUserHelper::update($user->getUser(), $fields);
     if ($update_result) {
       header('Location: time.php');
       exit();

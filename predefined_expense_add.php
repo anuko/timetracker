@@ -39,6 +39,7 @@ if (!$user->isPluginEnabled('ex')) {
   header('Location: feature_disabled.php');
   exit();
 }
+// End of access checks.
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));

@@ -146,16 +146,27 @@ class ttUserHelper {
     $mdb2 = getConnection();
 
     // Check parameters.
-    if (!$user_id || !isset($fields['login']))
+    if (!$user_id)
       return false;
 
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     // Prepare query parts.
+    if (isset($fields['login'])) {
+      $login_part = ", login = ".$mdb2->quote($fields['login']);
+    }
+
     if (isset($fields['password']))
       $pass_part = ', password = md5('.$mdb2->quote($fields['password']).')';
-    if (in_array('manage_users', $user->rights)) {
+
+    if (isset($fields['name']))
+      $name_part = ', name = '.$mdb2->quote($fields['name']);
+
+    if ($user->can('manage_users')) {
       if (isset($fields['role_id'])) {
         $role_id = (int) $fields['role_id'];
-        $role_id_part = ", role_id = $role_id";
+        $role_part = ", role_id = $role_id";
       }
       if (array_key_exists('client_id', $fields)) // Could be NULL.
         $client_part = ", client_id = ".$mdb2->quote($fields['client_id']);
@@ -167,17 +178,19 @@ class ttUserHelper {
       $rate_part = ", rate = ".$mdb2->quote($rate); 
     }
 
+    if (isset($fields['email']))
+      $email_part = ', email = '.$mdb2->quote($fields['email']);
+
     if (isset($fields['status'])) {
       $status = (int) $fields['status']; 
       $status_part = ", status = $status";
     }
 
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
+    $parts = ltrim($login_part.$pass_part.$name_part.$role_part.$client_part.$rate_part.$email_part.$modified_part.$status_part, ',');
 
-    $sql = "update tt_users set login = ".$mdb2->quote($fields['login']).
-      "$pass_part, name = ".$mdb2->quote($fields['name']).
-      "$role_id_part $client_part $rate_part $modified_part $status_part, email = ".$mdb2->quote($fields['email']).
-      " where id = $user_id";
+    $sql = "update tt_users set $parts".
+      " where id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 

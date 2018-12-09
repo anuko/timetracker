@@ -83,7 +83,7 @@
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
             <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a> &middot;
-    {if $user->can('manage_own_settings')}
+    {if $user->exists() && $user->can('manage_own_settings')}
             <a class="systemMenu" href="profile_edit.php">{$i18n.menu.profile}</a> &middot;
     {/if}
     {if $user->can('manage_basic_settings')}
