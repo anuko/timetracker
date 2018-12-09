@@ -250,9 +250,9 @@ class ttUser {
     $result = array();
     $mdb2 = getConnection();
 
+    $user_id = $this->getUser();
     $group_id = $this->getGroup();
     $org_id = $this->org_id;
-    $user_id = $this->getUser();
 
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name, p.description, p.tasks, upb.rate from tt_projects p".
