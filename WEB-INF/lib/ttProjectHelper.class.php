@@ -34,17 +34,18 @@ import('ttGroupHelper');
 class ttProjectHelper {
 	
   // getAssignedProjects - returns an array of assigned projects.
-  static function getAssignedProjects($user_id)
-  {
+  static function getAssignedProjects($user_id) {
     global $user;
-  	
-    $result = array();
     $mdb2 = getConnection();
-    
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $result = array();
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name, p.tasks, upb.rate from tt_projects p".
       " inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.project_id = p.id and upb.status = 1)".
-      " where p.group_id = ".$user->getGroup()." and p.status = 1 order by p.name";
+      " where p.group_id = $group_id and p.org_id = $org_id and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -55,20 +56,21 @@ class ttProjectHelper {
   }
 
   // getRates - returns an array of project rates for user, including deassigned and deactivated projects.
-  static function getRates($user_id)
-  {
+  static function getRates($user_id) {
     global $user;
-  	
-    $result = array();
     $mdb2 = getConnection();
-    
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $result = array();
     $sql = "select p.id, upb.rate from tt_projects p".
       " inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.project_id = p.id)".
-      " where group_id = ".$user->getGroup();
+      " where p.group_id = $group_id and p.org_id = $org_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-        $val['rate'] = str_replace('.', $user->decimal_mark, $val['rate']);
+        $val['rate'] = str_replace('.', $user->getDecimalMark(), $val['rate']);
         $result[] = $val;
       }
     }
@@ -76,16 +78,16 @@ class ttProjectHelper {
   }
   
   // getProjects - returns an array of active and inactive projects in group.
-  static function getProjects()
-  {
+  static function getProjects() {
     global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
     $result = array();
-    $mdb2 = getConnection();
-    
     $sql = "select id, name, tasks from tt_projects".
-      " where group_id = ".$user->getGroup()." and (status = 0 or status = 1) order by name";
-        
+      " where group_id = $group_id and org_id = $org_id and (status = 0 or status = 1) order by name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -96,16 +98,17 @@ class ttProjectHelper {
   }
 
   // getProjectsForClient - returns an array of active and inactive projects in a group for a client.
-  static function getProjectsForClient()
-  {
+  static function getProjectsForClient() {
     global $user;
-
-    $result = array();
     $mdb2 = getConnection();
 
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $result = array();
     $sql = "select p.id, p.name, p.tasks from tt_projects p".
       " inner join tt_client_project_binds cpb on (cpb.client_id = $user->client_id and cpb.project_id = p.id)".
-      " where p.group_id = ".$user->getGroup()." and (p.status = 0 or p.status = 1)".
+      " where p.group_id = $group_id and p.org_id = $org_id and (p.status = 0 or p.status = 1)".
       " order by p.name";
 
     $res = $mdb2->query($sql);
@@ -116,34 +119,36 @@ class ttProjectHelper {
     }
     return $result;
   }
-  
-  
+
   // get - gets details of the project identified by its id. 
-  static function get($id)
-  {
+  static function get($id) {
     global $user;
- 
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, status, tasks from tt_projects where id = $id and group_id = ".
-            $user->getGroup()." and (status = 0 or status = 1)";
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select id, name, description, status, tasks from tt_projects".
+      " where id = $id and group_id = $group_id and org_id = $org_id and (status = 0 or status = 1)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-	  if ($val && $val['id'])
+      if ($val && $val['id'])
         return $val;
     }
     return false;
   }
-  
+
   // The getProjectByName looks up a project by name.
   static function getProjectByName($name) {
-  	
-    $mdb2 = getConnection();
     global $user;
+    $mdb2 = getConnection();
 
-    $sql = "select id from tt_projects where group_id = ".
-      $user->getGroup()." and name = ".$mdb2->quote($name).
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select id from tt_projects".
+      " where group_id = $group_id and org_id = $org_id and name = ".$mdb2->quote($name).
       " and (status = 1 or status = 0)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -209,8 +214,8 @@ class ttProjectHelper {
     $comma_separated = implode(',', $tasks); // This is a comma-separated list of associated task ids.
     $status = $fields['status'];
     
-    $sql = "insert into tt_projects (group_id, org_id, name, description, tasks, status)
-      values ($group_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($description).", ".$mdb2->quote($comma_separated).", ".$mdb2->quote($status).")";
+    $sql = "insert into tt_projects (group_id, org_id, name, description, tasks, status)".
+      " values ($group_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($description).", ".$mdb2->quote($comma_separated).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -251,6 +256,7 @@ class ttProjectHelper {
 
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
+
     $project_id = $fields['id']; // Project we are updating.
     $name = $fields['name']; // Project name.
     $description = $fields['description']; // Project description.
