@@ -526,4 +526,42 @@ class ttGroupHelper {
     }
     return $result;
   }
+
+  // validateCheckboxGroupInput - validates user input in a group of checkboxes
+  // in context of a specific database table.
+  //
+  // We need to make sure that input is a set of unique positive integers, and is
+  // "relevant" to the current group (entities exists in table).
+  //
+  // It is a safeguard against manipulation of data in posts.
+  static function validateCheckboxGroupInput($input, $table) {
+    // Empty input is valid.
+    if (!$input) return true;
+
+    // Input containing duplicates is invalid.
+    if (count($input) !== count(array_unique($input))) return false;
+
+    // Input containing anything but positive integers is invalid.
+    foreach ($input as $single_selection) {
+      if (!is_numeric($single_selection) || $single_selection <= 0) return false;
+    }
+
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    // Now check the table. It must contain all entities associated with current group and org.
+    $comma_separated = implode(',', $input);
+    $sql = "select count(*) as item_count from $table".
+      " where id in ($comma_separated) and group_id = $group_id and org_id = $org_id and status = 1";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) return false;
+    $val = $res->fetchRow();
+    if (count($input) != $val['item_count'])
+      return false; // Number of entities in table is different.
+
+    return true; // All is good.
+  }
 }
