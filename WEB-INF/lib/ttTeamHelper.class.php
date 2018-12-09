@@ -157,23 +157,6 @@ class ttTeamHelper {
     return false;
   }
 
-  // getActiveTasks - returns an array of active tasks for a group.
-  static function getActiveTasks($group_id)
-  {
-    $result = array();
-    $mdb2 = getConnection();
-
-    $sql = "select id, name, description from tt_tasks where group_id = $group_id and status = 1 order by upper(name)";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-    }
-    return $result;
-  }
-
   // getInactiveTasks - returns an array of inactive tasks for a group.
   static function getInactiveTasks($group_id)
   {

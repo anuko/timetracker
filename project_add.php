@@ -29,7 +29,6 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttProjectHelper');
-import('ttTeamHelper');
 import('ttGroupHelper');
 
 // Access checks.
@@ -47,7 +46,7 @@ $users = ttGroupHelper::getActiveUsers();
 foreach ($users as $user_item)
   $all_users[$user_item['id']] = $user_item['name'];
 
-$tasks = ttTeamHelper::getActiveTasks($user->getGroup());
+$tasks = ttGroupHelper::getActiveTasks();
 foreach ($tasks as $task_item)
   $all_tasks[$task_item['id']] = $task_item['name'];
 

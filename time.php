@@ -30,7 +30,6 @@ require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
 import('ttGroupHelper');
-import('ttTeamHelper');
 import('ttClientHelper');
 import('ttTimeHelper');
 import('DateAndTime');
@@ -224,7 +223,7 @@ if (MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $use
 }
 
 if (MODE_PROJECTS_AND_TASKS == $user->getTrackingMode()) {
-  $task_list = ttTeamHelper::getActiveTasks($group_id);
+  $task_list = ttGroupHelper::getActiveTasks();
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
     'style'=>'width: 250px;',

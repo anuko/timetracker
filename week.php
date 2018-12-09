@@ -32,7 +32,6 @@ import('form.DefaultCellRenderer');
 import('form.Table');
 import('form.TextField');
 import('ttUserHelper');
-import('ttTeamHelper');
 import('ttGroupHelper');
 import('ttWeekViewHelper');
 import('ttClientHelper');
@@ -299,7 +298,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
 }
 
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-  $task_list = ttTeamHelper::getActiveTasks($user->group_id);
+  $task_list = ttGroupHelper::getActiveTasks();
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
     'style'=>'width: 250px;',

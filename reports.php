@@ -31,6 +31,7 @@ import('form.Form');
 import('form.ActionForm');
 import('DateAndTime');
 import('ttTeamHelper');
+import('ttGroupHelper');
 import('Period');
 import('ttProjectHelper');
 import('ttFavReportHelper');
@@ -106,7 +107,7 @@ $form->addInput(array('type'=>'combobox',
   'datakeys'=>array('id','name'),
   'empty'=>array(''=>$i18n->get('dropdown.all'))));
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-  $task_list = ttTeamHelper::getActiveTasks($user->group_id);
+  $task_list = ttGroupHelper::getActiveTasks();
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
     'style'=>'width: 250px;',
