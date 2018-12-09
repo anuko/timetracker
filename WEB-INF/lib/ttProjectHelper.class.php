@@ -196,10 +196,11 @@ class ttProjectHelper {
   // insert function inserts a new project into database.
   static function insert($fields)
   {
+    global $user;
     $mdb2 = getConnection();
 
-    $group_id = (int) $fields['group_id'];
-    $org_id = (int) $fields['org_id'];
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
     $name = $fields['name'];
     $description = $fields['description'];

@@ -77,10 +77,7 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     if (!ttProjectHelper::getProjectByName($cl_name)) {
-      if (ttProjectHelper::insert(array(
-        'group_id' => $user->getGroup(),
-        'org_id' => $user->org_id,
-        'name' => $cl_name,
+      if (ttProjectHelper::insert(array('name' => $cl_name,
         'description' => $cl_description,
         'users' => $cl_users,
         'tasks' => $cl_tasks,
