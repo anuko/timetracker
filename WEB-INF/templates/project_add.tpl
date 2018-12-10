@@ -18,7 +18,7 @@
           <td>{$forms.projectForm.users.control}</td>
         </tr>
 {/if}
-{if $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode() && $show_tasks}
+{if $show_tasks}
         <tr><td>&nbsp;</td></tr>
         <tr>
           <td align="right">{$i18n.label.tasks}:</td>
