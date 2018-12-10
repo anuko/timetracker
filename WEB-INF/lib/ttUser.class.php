@@ -214,6 +214,11 @@ class ttUser {
     return ($this->behalfGroup ? $this->behalfGroup->lock_spec : $this->lock_spec);
   }
 
+  // getWorkdayMinutes returns workday_minutes for active group.
+  function getWorkdayMinutes() {
+    return ($this->behalfGroup ? $this->behalfGroup->workday_minutes : $this->workday_minutes);
+  }
+
   // getConfig returns config string for active group.
   function getConfig() {
     return ($this->behalfGroup ? $this->behalfGroup->config : $this->config);

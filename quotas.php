@@ -88,7 +88,7 @@ if ($request->isPost()){
 
     // Handle workday hours.
     $workday_minutes = ttTimeHelper::postedDurationToMinutes($request->getParameter('workdayHours'));
-    if ($workday_minutes != $user->workday_minutes) {
+    if ($workday_minutes != $user->getWorkdayMinutes()) {
       if (!$user->updateGroup(array('workday_minutes'=>$workday_minutes)))
         $err->add($i18n->get('error.db'));
     }
@@ -111,7 +111,7 @@ if ($request->isPost()){
 
 // Get monthly quotas for the entire year.
 $monthsData = $quota->get($selectedYear);
-$workdayHours = ttTimeHelper::toAbsDuration($user->workday_minutes, true);
+$workdayHours = ttTimeHelper::toAbsDuration($user->getWorkdayMinutes(), true);
 
 $form = new Form('monthlyQuotasForm');
 $form->addInput(array('type'=>'text', 'name'=>'workdayHours', 'value'=>$workdayHours, 'style'=>'width:60px'));

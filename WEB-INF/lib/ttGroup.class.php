@@ -101,8 +101,8 @@ class ttGroup {
       $this->currency = $val['currency'];
       $this->plugins = $val['plugins'];
       $this->lock_spec = $val['lock_spec'];
-      /*
       $this->workday_minutes = $val['workday_minutes'];
+      /*
       $this->custom_logo = $val['custom_logo'];
       */
       $this->config = $val['config'];

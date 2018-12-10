@@ -44,10 +44,11 @@ class MonthlyQuota {
 
   // update - deletes a quota, then inserts a new one.
   public function update($year, $month, $minutes) {
-    $deleteSql = "DELETE FROM tt_monthly_quotas WHERE year = $year AND month = $month AND group_id = $this->group_id";
+    $deleteSql = "delete from tt_monthly_quotas".
+      " where year = $year and month = $month and group_id = $this->group_id and org_id = $this->org_id";
     $this->db->exec($deleteSql);
     if ($minutes){
-      $insertSql = "INSERT INTO tt_monthly_quotas (group_id, org_id, year, month, minutes)".
+      $insertSql = "insert into tt_monthly_quotas (group_id, org_id, year, month, minutes)".
         " values ($this->group_id, $this->org_id, $year, $month, $minutes)";
       $affected = $this->db->exec($insertSql);
       return (!is_a($affected, 'PEAR_Error'));
@@ -66,7 +67,8 @@ class MonthlyQuota {
 
   // getSingle - obtains a quota for a single month.
   private function getSingle($year, $month) {
-    $sql = "SELECT minutes FROM tt_monthly_quotas WHERE year = $year AND month = $month AND group_id = $this->group_id";
+    $sql = "select minutes from tt_monthly_quotas".
+      " where year = $year and month = $month and group_id = $this->group_id and org_id = $this->org_id";
     $reader = $this->db->query($sql);
     if (is_a($reader, 'PEAR_Error')) {
       return false;
@@ -79,12 +81,13 @@ class MonthlyQuota {
     // If we did not find a record, return a calculated monthly quota.
     $numWorkdays = $this->getNumWorkdays($month, $year);
     global $user;
-    return $numWorkdays * $user->workday_minutes;
+    return $numWorkdays * $user->getWorkdayMinutes();
   }
 
   // getMany - returns an array of quotas for a given year for group.
   private function getMany($year){
-    $sql = "SELECT month, minutes FROM tt_monthly_quotas WHERE year = $year AND group_id = $this->group_id";
+    $sql = "select month, minutes from tt_monthly_quotas".
+      " where year = $year and group_id = $this->group_id and org_id = $this->org_id";
     $result = array();
     $res = $this->db->query($sql);
     if (is_a($res, 'PEAR_Error')) {
@@ -128,7 +131,7 @@ class MonthlyQuota {
     }
 
     global $user;
-    $localizedPattern = '/^([0-9]{1,3})?['.$user->decimal_mark.'][0-9]{1,4}h?$/';
+    $localizedPattern = '/^([0-9]{1,3})?['.$user->getDecimalMark().'][0-9]{1,4}h?$/';
     if (preg_match($localizedPattern, $value )) { // decimal values like 000.5, 999.25h, ... .. 999.9999h (or with comma)
       return true;
     }
@@ -149,11 +152,11 @@ class MonthlyQuota {
     }
 
     global $user;
-    $localizedPattern = '/^([0-9]{1,3})?['.$user->decimal_mark.'][0-9]{1,4}h?$/';
+    $localizedPattern = '/^([0-9]{1,3})?['.$user->getDecimalMark().'][0-9]{1,4}h?$/';
     if (preg_match($localizedPattern, $value )) { // decimal values like 000.5, 999.25h, ... .. 999.9999h (or with comma)
       // Strip optional h in the end.
       $value = trim($value, 'h');
-      if ($user->decimal_mark == ',')
+      if ($user->getDecimalMark() == ',')
         $value = str_replace(',', '.', $value);
       return (float) $value;
     }

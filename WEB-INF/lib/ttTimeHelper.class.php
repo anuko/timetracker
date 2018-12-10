@@ -147,9 +147,9 @@ class ttTimeHelper {
 
     // Handle localized fractional hours.
     global $user;
-    $localizedPattern = '/^(\d{1,3})?['.$user->decimal_mark.'][0-9]{1,4}h?$/';
+    $localizedPattern = '/^(\d{1,3})?['.$user->getDecimalMark().'][0-9]{1,4}h?$/';
     if (preg_match($localizedPattern, $duration )) { // decimal values like .5, 1.25h, ... .. 999.9999h (or with comma)
-        if ($user->decimal_mark == ',')
+        if ($user->getDecimalMark() == ',')
           $duration = str_replace (',', '.', $duration);
 
         $minutes = (int)round(60 * floatval($duration));
@@ -691,12 +691,14 @@ class ttTimeHelper {
   // getRecords - returns time records for a user for a given date.
   static function getRecords($user_id, $date) {
     global $user;
-    $sql_time_format = "'%k:%i'"; //  24 hour format.
-    if ('%I:%M %p' == $user->time_format)
-      $sql_time_format = "'%h:%i %p'"; // 12 hour format for MySQL TIME_FORMAT function.
-
-    $result = array();
     $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql_time_format = "'%k:%i'"; //  24 hour format.
+    if ('%I:%M %p' == $user->getTimeFormat())
+      $sql_time_format = "'%h:%i %p'"; // 12 hour format for MySQL TIME_FORMAT function.
 
     $client_field = null;
     if ($user->isPluginEnabled('cl'))
@@ -707,12 +709,13 @@ class ttTimeHelper {
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
 
+    $result = array();
     $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,
       TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
       TIME_FORMAT(l.duration, '%k:%i') as duration, p.name as project, t.name as task, l.comment, l.billable, l.invoice_id $client_field
       from tt_log l
       $left_joins
-      where l.date = '$date' and l.user_id = $user_id and l.status = 1
+      where l.date = '$date' and l.user_id = $user_id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1
       order by l.start, l.id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
