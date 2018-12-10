@@ -264,7 +264,10 @@ class ttProjectHelper {
     $status = $fields['status']; // Project status.
     
     // Update records in tt_user_project_binds table.
-    $sql = "select user_id, status from tt_user_project_binds where project_id = $project_id";
+    // This logic is complicated because these binds have rates associated with them.
+    // We try to recover old rates if a bind existed before and is now reactivated.
+    $sql = "select user_id, status from tt_user_project_binds".
+      " where project_id = $project_id and group_id = $group_id and org_id = $org_id";
     $all_users = array();
     $users_to_update = array();
     $res2 = $mdb2->query($sql);
@@ -273,7 +276,7 @@ class ttProjectHelper {
       	// Delete tt_user_project_binds record (safely).
       	ttUserHelper::deleteBind($row['user_id'], $project_id);
       } elseif (!$row['status']) {
-      	// If we are here, status of the bind is not active. Memorize such users to update their bind status.
+        // If we are here, status of the bind is not active. Memorize such users to activate their bind status.
         $users_to_update[] = $row['user_id'];  // Users we need to update in tt_user_project_binds.
       }
       $all_users[] = $row['user_id']; // All users from tt_user_project_binds for project.
@@ -281,7 +284,8 @@ class ttProjectHelper {
     // Insert records.
     $users_to_add = array_diff($users_to_bind, $all_users); // Users missing from tt_user_project_binds, that we need to insert.
     if(count($users_to_add) > 0) {
-      $sql = "select id, rate from tt_users where id in (".join(', ', $users_to_add).")";
+      $sql = "select id, rate from tt_users".
+        " where id in (".join(', ', $users_to_add).") and group_id = $group_id and org_id = $org_id";
       $res = $mdb2->query($sql);
       while ($row = $res->fetchRow()) {
         $user_rate[$row['id']] = $row['rate'];
@@ -296,31 +300,22 @@ class ttProjectHelper {
     }
     // Update status (to active) in existing tt_user_project_binds records.
     if ($users_to_update) {
-      $sql = "update tt_user_project_binds set status = 1 where project_id = $project_id and user_id in (".join(', ', $users_to_update).")";
+      $sql = "update tt_user_project_binds set status = 1".
+        " where project_id = $project_id and user_id in (".join(', ', $users_to_update).") and group_id = $group_id and org_id = $org_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
     }
     // End of updating tt_user_project_binds table.
 
-    // Update records in tt_project_task_binds table.
-    // Obtain existing task binds.
-    $existing_task_binds = array();
-    $sql = "select task_id from tt_project_task_binds where project_id = $project_id";
-    $res = $mdb2->query($sql);
-    while ($val = $res->fetchRow()) {
-      $existing_task_binds[] = $val['task_id'];
-    }
-    // Determine which task binds to delete and which ones to add.
-    $task_binds_to_delete = array_diff($existing_task_binds, $tasks_to_bind);
-    $task_binds_to_add = array_diff($tasks_to_bind, $existing_task_binds);
-    foreach ($task_binds_to_delete as $task_id) {
-      $sql = "delete from tt_project_task_binds where project_id = $project_id and task_id = $task_id";
-      $affected = $mdb2->exec($sql);
-      if (is_a($affected, 'PEAR_Error'))
-        return false;
-    }    
-    foreach ($task_binds_to_add as $task_id) {
+    // Update records in tt_project_task_binds table by deleting and inserting.
+    $sql = "delete from tt_project_task_binds".
+      " where project_id = $project_id and group_id = $group_id and org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    foreach ($tasks_to_bind as $task_id) {
       $sql = "insert into tt_project_task_binds (project_id, task_id, group_id, org_id)".
         " values($project_id, $task_id, $group_id, $org_id)";
       $affected = $mdb2->exec($sql);
@@ -332,29 +327,9 @@ class ttProjectHelper {
     // Update project name, description, tasks and status in tt_projects table.
     $comma_separated = implode(",", $tasks_to_bind); // This is a comma-separated list of associated task ids.
     $sql = "update tt_projects set name = ".$mdb2->quote($name).", description = ".$mdb2->quote($description).
-           ", tasks = ".$mdb2->quote($comma_separated).", status = $status where id = $project_id and group_id = ".$user->getGroup();
+      ", tasks = ".$mdb2->quote($comma_separated).", status = ".$mdb2->quote($status).
+      " where id = $project_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
-  
-  /*
-  // getAssignedUsers - returns an array of user ids assigned to a project.
-  static function getAssignedUsers($project_id)
-  {
-  	global $user;
-  	
-    $result = array();
-    $mdb2 = getConnection();
-    
-    // Do a query with inner join to get assigned users.
-    $sql = "select id, name from tt_users u
-      inner join tt_user_project_binds ub on (ub.user_id = u.id and ub.project_id = $project_id and ub.status = 1)";
-    $res = $mdb2->query($sql);
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-    }
-    return $result;
-  }*/
 }
