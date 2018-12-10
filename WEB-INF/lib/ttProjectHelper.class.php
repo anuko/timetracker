@@ -332,4 +332,23 @@ class ttProjectHelper {
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
+
+  // getAssignedUsers - returns an array of user ids assigned to a project.
+  static function getAssignedUsers($project_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $result = array();
+    $sql = "select user_id from tt_user_project_binds".
+      " where project_id = $project_id and group_id = $group_id and org_id = $org_id and status = 1";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) return false;
+    while ($row = $res->fetchRow()) {
+      $result[] = $row['user_id'];
+    }
+    return $result;
+  }
 }

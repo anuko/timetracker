@@ -15,12 +15,14 @@
           <td align="right">{$i18n.label.status}:</td>
           <td>{$forms.projectForm.status.control}</td>
         </tr>
+{if $show_users}
         <tr><td>&nbsp;</td></tr>
         <tr>
           <td align="right">{$i18n.label.users}:</td>
           <td>{$forms.projectForm.users.control}</td>
         </tr>
-{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{/if}
+{if $show_tasks}
         <tr><td>&nbsp;</td></tr>
         <tr>
           <td align="right">{$i18n.label.tasks}:</td>

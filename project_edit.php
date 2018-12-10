@@ -55,6 +55,7 @@ foreach ($users as $user_item)
 $tasks = ttGroupHelper::getActiveTasks();
 foreach ($tasks as $task_item)
   $all_tasks[$task_item['id']] = $task_item['name'];
+$show_tasks = MODE_PROJECTS_AND_TASKS == $user->getTrackingMode() && count($tasks) > 0;
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('project_name'));
@@ -66,15 +67,7 @@ if ($request->isPost()) {
   $cl_name = $project['name'];
   $cl_description = $project['description'];
   $cl_status = $project['status'];
-
-  $mdb2 = getConnection();
-  $sql = "select user_id from tt_user_project_binds where status = 1 and project_id = $cl_project_id";
-  $res = $mdb2->query($sql);
-  if (is_a($res, 'PEAR_Error'))
-    die($res->getMessage());
-  while ($row = $res->fetchRow())
-    $cl_users[] = $row['user_id'];
-
+  $cl_users = ttProjectHelper::getAssignedUsers($cl_project_id);
   $cl_tasks = explode(',', $project['tasks']);
 }
 
@@ -85,7 +78,7 @@ $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
 $form->addInput(array('type'=>'checkboxgroup','name'=>'users','data'=>$all_users,'layout'=>'H','value'=>$cl_users));
-if (MODE_PROJECTS_AND_TASKS == $user->getTrackingMode())
+if ($show_tasks)
   $form->addInput(array('type'=>'checkboxgroup','name'=>'tasks','data'=>$all_tasks,'layout'=>'H','value'=>$cl_tasks));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->get('button.copy')));
@@ -135,9 +128,9 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('show_users', count($users) > 0);
-$smarty->assign('show_tasks', count($tasks) > 0);
 $smarty->assign('onload', 'onLoad="document.projectForm.name.focus()"');
+$smarty->assign('show_users', count($users) > 0);
+$smarty->assign('show_tasks', $show_tasks);
 $smarty->assign('title', $i18n->get('title.edit_project'));
 $smarty->assign('content_page_name', 'project_edit.tpl');
 $smarty->display('index.tpl');
