@@ -157,25 +157,6 @@ class ttTeamHelper {
     return false;
   }
 
-  // The getAllTasks obtains all tasks in a group.
-  static function getAllTasks($group_id, $all_fields = false) {
-    $mdb2 = getConnection();
-
-    if ($all_fields)
-      $sql = "select * from tt_tasks where group_id = $group_id order by status, upper(name)";
-    else
-      $sql = "select id, name from tt_tasks where group_id = $group_id order by status, upper(name)";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
   // getActiveRolesForUser - returns an array of relevant active roles for user with rank less than self.
   // "Relevant" means that client roles are filtered out if Client plugin is disabled.
   static function getActiveRolesForUser()

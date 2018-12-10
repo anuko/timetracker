@@ -26,7 +26,6 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-import('ttTeamHelper');
 import('ttUserHelper');
 import('ttGroupHelper');
 
@@ -235,8 +234,8 @@ class ttProjectHelper {
     }
 
     // Bind the project to tasks in tt_project_task_binds table.
-    $all_tasks = ttTeamHelper::getAllTasks($group_id);
-    foreach ($all_tasks as $task) {
+    $active_tasks = ttGroupHelper::getActiveTasks();
+    foreach ($active_tasks as $task) {
       if(in_array($task['id'], $tasks)) {
         $sql = "insert into tt_project_task_binds (project_id, task_id, group_id, org_id)".
           " values($last_id, ".$task['id'].", $group_id, $org_id)";
