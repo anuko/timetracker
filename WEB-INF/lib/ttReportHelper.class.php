@@ -1010,7 +1010,7 @@ class ttReportHelper {
     // Check users.
     $users_in_bean = $bean->getAttribute('users');
     if (is_array($users_in_bean)) {
-      $users_in_group = ttTeamHelper::getUsers();
+      $users_in_group = ttGroupHelper::getUsers();
       foreach ($users_in_group as $user_in_group) {
         $valid_ids[] = $user_in_group['id'];
       }

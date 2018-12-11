@@ -90,10 +90,16 @@ class ttFavReportHelper {
   }
 
   // getReportByName - returns a report identified by its name.
-  static function getReportByName($user_id, $report_name) {
+  static function getReportByName($report_name) {
+    global $user;
     $mdb2 = getConnection();
 
-    $sql = "select * from tt_fav_reports where user_id = $user_id and status = 1 and name = ".$mdb2->quote($report_name);
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select id from tt_fav_reports".
+      " where user_id = $user_id and group_id = $group_id and org_id = $org_id and status = 1 and name = ".$mdb2->quote($report_name);
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if ($val = $res->fetchRow()) {
@@ -108,6 +114,7 @@ class ttFavReportHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
@@ -119,7 +126,7 @@ class ttFavReportHelper {
       " show_task, show_end, show_note, show_custom_field_1, show_work_units,".
       " group_by1, group_by2, group_by3, show_totals_only)".
       " values(".
-      $mdb2->quote($fields['name']).", ".$fields['user_id'].", $group_id, $org_id, ".
+      $mdb2->quote($fields['name']).", $user_id, $group_id, $org_id, ".
       $mdb2->quote($fields['client']).", ".$mdb2->quote($fields['option']).", ".
       $mdb2->quote($fields['project']).", ".$mdb2->quote($fields['task']).", ".
       $mdb2->quote($fields['billable']).", ".$mdb2->quote($fields['invoice']).", ".
@@ -140,8 +147,14 @@ class ttFavReportHelper {
   }
 
   // updateReport - updates report options in the database.
-  function updateReport($fields) {
+  static function updateReport($fields) {
+    global $user;
     $mdb2 = getConnection();
+
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $sql = "update tt_fav_reports set ".
       "name = ".$mdb2->quote($fields['name']).", ".
       "client_id = ".$mdb2->quote($fields['client']).", ".
@@ -172,7 +185,7 @@ class ttFavReportHelper {
       "group_by2 = ".$mdb2->quote($fields['group_by2']).", ".
       "group_by3 = ".$mdb2->quote($fields['group_by3']).", ".
       "show_totals_only = ".$fields['chtotalsonly'].
-      " where id = ".$fields['id'];
+      " where id = ".$fields['id']." and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -183,7 +196,6 @@ class ttFavReportHelper {
   // saveReport - saves report options in the database.
   static function saveReport($bean) {
     global $user;
-    $user_id = $user->getUser();
 
     //  Set default value of 0 for not set checkboxes (in bean).
     //  Later in this function we use it to construct $fields array to update database.
@@ -247,12 +259,11 @@ class ttFavReportHelper {
       'chtotalsonly'=>$bean->getAttribute('chtotalsonly'));
 
     $id = false;
-    $report = ttFavReportHelper::getReportByName($user_id, $fields['name']);
+    $report = ttFavReportHelper::getReportByName($fields['name']);
     if ($report) {
       $fields['id'] = $report['id'];
       $id = ttFavReportHelper::updateReport($fields);
     } else {
-      $fields['user_id'] = $user_id;
       $id = ttFavReportHelper::insertReport($fields);
     }
 
@@ -261,9 +272,21 @@ class ttFavReportHelper {
 
   // deleteReport - deletes a favorite report.
   static function deleteReport($id) {
+    global $user;
     $mdb2 = getConnection();
 
-    $sql = "delete from tt_fav_reports where id = $id";
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "delete from tt_cron".
+      " where report_id = $id and group_id = $group_id and org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    $sql = "delete from tt_fav_reports".
+      " where id = $id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
@@ -273,7 +296,7 @@ class ttFavReportHelper {
     global $user;
     $user_id = $user->getUser();
 
-    $val = ttFavReportHelper::getReport($bean->getAttribute('favorite_report'));
+    $val = ttFavReportHelper::get($bean->getAttribute('favorite_report'));
     if ($val) {
       $bean->setAttribute('client', $val['client_id']);
       $bean->setAttribute('option', $val['cf_1_option_id']);

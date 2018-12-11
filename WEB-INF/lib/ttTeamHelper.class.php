@@ -104,21 +104,6 @@ class ttTeamHelper {
     return $user_list;
   }
 
-  // The getUsers obtains all active and inactive (but not deleted) users in a group.
-  static function getUsers() {
-    global $user;
-    $mdb2 = getConnection();
-    $sql = "select id, name from tt_users where group_id = $user->group_id and (status = 1 or status = 0) order by upper(name)";
-    $res = $mdb2->query($sql);
-    $user_list = array();
-    if (is_a($res, 'PEAR_Error'))
-      return false;
-    while ($val = $res->fetchRow()) {
-      $user_list[] = $val;
-    }
-    return $user_list;
-  }
-
   // The getInactiveUsers obtains all inactive users in a group.
   static function getInactiveUsers($group_id, $all_fields = false) {
     $mdb2 = getConnection();

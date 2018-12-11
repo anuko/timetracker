@@ -332,12 +332,12 @@ if ($request->isPost()) {
   } else {
     // Generate button pressed. Check some values.
     if (!$bean->getAttribute('period')) {
-      $start_date = new DateAndTime($user->date_format, $bean->getAttribute('start_date'));
+      $start_date = new DateAndTime($user->getDateFormat(), $bean->getAttribute('start_date'));
 
       if ($start_date->isError() || !$bean->getAttribute('start_date'))
         $err->add($i18n->get('error.field'), $i18n->get('label.start_date'));
 
-      $end_date = new DateAndTime($user->date_format, $bean->getAttribute('end_date'));
+      $end_date = new DateAndTime($user->getDateFormat(), $bean->getAttribute('end_date'));
       if ($end_date->isError() || !$bean->getAttribute('end_date'))
         $err->add($i18n->get('error.field'), $i18n->get('label.end_date'));
 
