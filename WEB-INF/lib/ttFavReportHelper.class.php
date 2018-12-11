@@ -181,8 +181,9 @@ class ttFavReportHelper {
   }
 
   // saveReport - saves report options in the database.
-  static function saveReport($user_id, $bean) {
+  static function saveReport($bean) {
     global $user;
+    $user_id = $user->getUser();
 
     //  Set default value of 0 for not set checkboxes (in bean).
     //  Later in this function we use it to construct $fields array to update database.
@@ -206,11 +207,11 @@ class ttFavReportHelper {
       $users = join(',', $users_in_bean);
     }
     if ($bean->getAttribute('start_date')) {
-      $dt = new DateAndTime($user->date_format, $bean->getAttribute('start_date'));
+      $dt = new DateAndTime($user->getDateFormat(), $bean->getAttribute('start_date'));
       $from = $dt->toString(DB_DATEFORMAT);
     }
     if ($bean->getAttribute('end_date')) {
-      $dt = new DateAndTime($user->date_format, $bean->getAttribute('end_date'));
+      $dt = new DateAndTime($user->getDateFormat(), $bean->getAttribute('end_date'));
       $to = $dt->toString(DB_DATEFORMAT);
     }
 
@@ -268,8 +269,9 @@ class ttFavReportHelper {
   }
 
   // loadReport - loads report options from database into a bean.
-  static function loadReport($user_id, &$bean) {
+  static function loadReport(&$bean) {
     global $user;
+    $user_id = $user->getUser();
 
     $val = ttFavReportHelper::getReport($bean->getAttribute('favorite_report'));
     if ($val) {
@@ -284,11 +286,11 @@ class ttFavReportHelper {
       $bean->setAttribute('period', $val['period']);
       if ($val['period_start']) {
         $dt = new DateAndTime(DB_DATEFORMAT, $val['period_start']);
-        $bean->setAttribute('start_date', $dt->toString($user->date_format));
+        $bean->setAttribute('start_date', $dt->toString($user->getDateFormat()));
       }
       if ($val['period_end']) {
         $dt = new DateAndTime(DB_DATEFORMAT, $val['period_end']);
-        $bean->setAttribute('end_date', $dt->toString($user->date_format));
+        $bean->setAttribute('end_date', $dt->toString($user->getDateFormat()));
       }
       $bean->setAttribute('chclient', $val['show_client']);
       $bean->setAttribute('chinvoice', $val['show_invoice']);

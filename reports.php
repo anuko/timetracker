@@ -290,7 +290,7 @@ if ($request->isPost()) {
     // User changed favorite report. We need to load new values into the form.
     if ($bean->getAttribute('favorite_report')) {
       // This loads new favorite report options into the bean (into our form).
-      ttFavReportHelper::loadReport($user->getUser(), $bean);
+      ttFavReportHelper::loadReport($bean);
 
       // If user selected no favorite report - mark all user checkboxes (most probable scenario).
       if ($bean->getAttribute('favorite_report') == -1)
@@ -306,7 +306,7 @@ if ($request->isPost()) {
     if (!ttValidString($bean->getAttribute('new_fav_report'))) $err->add($i18n->get('error.field'), $i18n->get('form.reports.save_as_favorite'));
 
     if ($err->no()) {
-      $id = ttFavReportHelper::saveReport($user->id, $bean); // TODO: review "on behalf" situations (both user and group), redesign if needed.
+      $id = ttFavReportHelper::saveReport($bean);
       if (!$id)
         $err->add($i18n->get('error.db'));
       if ($err->no()) {
@@ -323,7 +323,7 @@ if ($request->isPost()) {
       // Load default report.
       $bean->setAttribute('favorite_report','');
       $bean->setAttribute('new_fav_report', $report_list[0]['name']);
-      ttFavReportHelper::loadReport($user->id, $bean);
+      ttFavReportHelper::loadReport($bean);
       $form->setValueByElement('users', array_keys($user_list));
       $bean->saveBean();
       header('Location: reports.php');
