@@ -29,6 +29,8 @@
 import('ttConfigHelper');
 import('ttGroupHelper');
 import('ttGroup');
+import('form.Form');
+import('form.ActionForm');
 
 class ttUser {
   var $login = null;            // User login.
@@ -786,6 +788,13 @@ class ttUser {
     unset($_SESSION['behalf_group_name']);
     unset($_SESSION['behalf_id']);
     unset($_SESSION['behalf_name']);
+
+    // Destroy report bean if it was set in session.
+    $form = new Form('dummyForm');
+    $bean = new ActionForm('reportBean', $form, $request);
+    if ($bean->isSaved()) {
+      $bean->destroyBean();
+    }
 
     // Do not do anything if we don't have rights.
     if (!$this->can('manage_subgroups')) return;

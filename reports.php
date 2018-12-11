@@ -43,6 +43,13 @@ if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports') || 
   header('Location: access_denied.php');
   exit();
 }
+if (!$user->exists()) {
+  header('Location: access_denied.php'); // No users in subgroup.
+  exit();
+}
+// End of access checks.
+
+$trackingMode = $user->getTrackingMode();
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
@@ -97,7 +104,7 @@ if ($user->can('view_reports') || $user->can('view_all_reports')) {
 } elseif ($user->isClient()) {
   $project_list = ttProjectHelper::getProjectsForClient();
 } else {
-  $project_list = ttProjectHelper::getAssignedProjects($user->id);	
+  $project_list = ttProjectHelper::getAssignedProjects($user->getUser());
 }
 $form->addInput(array('type'=>'combobox',
   'onchange'=>'fillTaskDropdown(this.value);selectAssignedUsers(this.value);',
@@ -106,7 +113,7 @@ $form->addInput(array('type'=>'combobox',
   'data'=>$project_list,
   'datakeys'=>array('id','name'),
   'empty'=>array(''=>$i18n->get('dropdown.all'))));
-if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
+if (MODE_PROJECTS_AND_TASKS == $trackingMode) {
   $task_list = ttGroupHelper::getActiveTasks();
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
@@ -149,7 +156,7 @@ $user_list = array();
 if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
   // Prepare user and assigned projects arrays.
   if ($user->can('view_reports') || $user->can('view_all_reports')) {
-    $max_rank = $user->rank-1;
+    $rank = $user->getMaxRankForGroup($user->getGroup());
     if ($user->can('view_all_reports')) $max_rank = MAX_RANK;
     if ($user->can('view_own_reports'))
       $options = array('max_rank'=>$max_rank,'include_self'=>true);
@@ -202,11 +209,11 @@ if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))
   $form->addInput(array('type'=>'checkbox','name'=>'chpaid'));
 if ($user->can('view_reports') || $user->can('view_all_reports'))
   $form->addInput(array('type'=>'checkbox','name'=>'chip'));
-if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+if (MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode)
   $form->addInput(array('type'=>'checkbox','name'=>'chproject'));
-if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+if (MODE_PROJECTS_AND_TASKS == $trackingMode)
   $form->addInput(array('type'=>'checkbox','name'=>'chtask'));
-if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
+if ((TYPE_START_FINISH == $user->getRecordType()) || (TYPE_ALL == $user->getRecordType())) {
   $form->addInput(array('type'=>'checkbox','name'=>'chstart'));
   $form->addInput(array('type'=>'checkbox','name'=>'chfinish'));
 }
@@ -226,9 +233,9 @@ if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isCli
   $group_by_options['user'] = $i18n->get('form.reports.group_by_user');
 if ($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id))
   $group_by_options['client'] = $i18n->get('form.reports.group_by_client');
-if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+if (MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode)
   $group_by_options['project'] = $i18n->get('form.reports.group_by_project');
-if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
+if (MODE_PROJECTS_AND_TASKS == $trackingMode)
   $group_by_options['task'] = $i18n->get('form.reports.group_by_task');
 if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
   $group_by_options['cf_1'] = $custom_fields->fields[0]['label'];
@@ -253,7 +260,7 @@ $bean = new ActionForm('reportBean', $form, $request);
 if ($request->isGet() && !$bean->isSaved()) {
   // No previous form data were found in session. Use the following default values.
   $form->setValueByElement('users', array_keys($user_list));
-  $period = new Period(INTERVAL_THIS_MONTH, new DateAndTime($user->date_format));
+  $period = new Period(INTERVAL_THIS_MONTH, new DateAndTime($user->getDateFormat()));
   $form->setValueByElement('start_date', $period->getStartDate());
   $form->setValueByElement('end_date', $period->getEndDate());
   $form->setValueByElement('chclient', '1');
@@ -283,7 +290,7 @@ if ($request->isPost()) {
     // User changed favorite report. We need to load new values into the form.
     if ($bean->getAttribute('favorite_report')) {
       // This loads new favorite report options into the bean (into our form).
-      ttFavReportHelper::loadReport($user->id, $bean);
+      ttFavReportHelper::loadReport($user->getUser(), $bean);
 
       // If user selected no favorite report - mark all user checkboxes (most probable scenario).
       if ($bean->getAttribute('favorite_report') == -1)
