@@ -39,15 +39,20 @@ if (!(ttAccessAllowed('view_users') || ttAccessAllowed('manage_users'))) {
 }
 // End of access checks.
 
-$uncompleted_indicators = $user->getConfigOption('uncompleted_indicators');
+// Prepare a list of active users.
+if ($user->can('view_users'))
+  $options = array('status'=>ACTIVE,'include_clients'=>true,'include_login'=>true,'include_role'=>true);
+else /* if ($user->can('manage_users')) */
+  $options = array('status'=>ACTIVE,'max_rank'=>$user->rank-1,'include_clients'=>true,'include_self'=>true,'include_login'=>true,'include_role'=>true);
+$active_users = $user->getUsers($options);
 
-// Get users.
-$active_users = ttGroupHelper::getActiveUsers(array('getAllFields'=>true));
+// Prepare a list of inactive users.
 if($user->can('manage_users')) {
-  $can_delete_manager = (1 == count($active_users));
-  $inactive_users = ttTeamHelper::getInactiveUsers($user->group_id, true);
+  $options = array('status'=>INACTIVE,'max_rank'=>$user->rank-1,'include_clients'=>true,'include_login'=>true,'include_role'=>true);
+  $inactive_users = $user->getUsers($options);
 }
 
+$uncompleted_indicators = $user->getConfigOption('uncompleted_indicators');
 if ($uncompleted_indicators) {
   // Check each active user if they have an uncompleted time entry.
   foreach ($active_users as $key => $user) {

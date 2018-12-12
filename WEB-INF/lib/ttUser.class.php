@@ -113,9 +113,9 @@ class ttUser {
       $this->role_id = $val['role_id'];
       $this->role_name = $val['role_name'];
       $this->rights = explode(',', $val['rights']);
-      $this->is_client = !in_array('track_own_time', $this->rights);
       $this->rank = $val['rank'];
       $this->client_id = $val['client_id'];
+      $this->is_client = $this->client_id && !in_array('track_own_time', $this->rights);
       $this->email = $val['email'];
       $this->lang = $val['lang'];
       $this->decimal_mark = $val['decimal_mark'];

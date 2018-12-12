@@ -33,27 +33,6 @@ import('ttInvoiceHelper');
 // Class ttTeamHelper - contains helper functions that operate with groups.
 class ttTeamHelper {
 
-  // The getUsersForClient obtains all active and inactive users in a group that are relevant to a client.
-  static function getUsersForClient() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $sql = "select u.id, u.name from tt_user_project_binds upb".
-      " inner join tt_client_project_binds cpb on (upb.project_id = cpb.project_id and cpb.client_id = $user->client_id)".
-      " inner join tt_users u on (u.id = upb.user_id)".
-      " where (u.status = 1 or u.status = 0)".
-      " group by u.id".
-      " order by upper(u.name)";
-    $res = $mdb2->query($sql);
-    $user_list = array();
-    if (is_a($res, 'PEAR_Error'))
-      return false;
-    while ($val = $res->fetchRow()) {
-      $user_list[] = $val;
-    }
-    return $user_list;
-  }
-
   // The swapRolesWith swaps existing user role with that of another user.
   static function swapRolesWith($user_id) {
     global $user;

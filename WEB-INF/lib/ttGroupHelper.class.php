@@ -447,7 +447,7 @@ class ttGroupHelper {
     return false;
   }
 
-  // The getActiveUsers obtains all active users in a given group.
+  // The getActiveUsers obtains all active users excluding clients in a given group.
   static function getActiveUsers($options = null) {
     global $user;
     global $i18n;
@@ -456,10 +456,12 @@ class ttGroupHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    $client_part = " and u.client_id is null";
+
     if (isset($options['getAllFields']))
-      $sql = "select u.*, r.name as role_name, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.group_id = $group_id and u.org_id = $org_id and u.status = 1 order by upper(u.name)";
+      $sql = "select u.*, r.name as role_name, r.rank from tt_users u left join tt_roles r on (u.role_id = r.id) where u.group_id = $group_id and u.org_id = $org_id and u.status = 1 $client_part order by upper(u.name)";
     else
-      $sql = "select id, name from tt_users where group_id = $group_id and org_id = $org_id and status = 1 order by upper(name)";
+      $sql = "select u.id, u.name from tt_users u where u.group_id = $group_id and u.org_id = $org_id and u.status = 1 $client_part order by upper(u.name)";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
@@ -471,17 +473,6 @@ class ttGroupHelper {
       $user_list[] = $val;
     }
 
-    if (isset($options['putSelfFirst'])) {
-      // Put own entry at the front.
-      $cnt = count($user_list);
-      for($i = 0; $i < $cnt; $i++) {
-        if ($user_list[$i]['id'] == $user->id) {
-          $self = $user_list[$i]; // Found self.
-          array_unshift($user_list, $self); // Put own entry at the front.
-          array_splice($user_list, $i+1, 1); // Remove duplicate.
-        }
-      }
-    }
     return $user_list;
   }
 
@@ -574,6 +565,30 @@ class ttGroupHelper {
     $org_id = $user->org_id;
 
     $sql = "select id, name from tt_users where group_id = $group_id and org_id = $org_id and (status = 1 or status = 0) order by upper(name)";
+    $res = $mdb2->query($sql);
+    $user_list = array();
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    while ($val = $res->fetchRow()) {
+      $user_list[] = $val;
+    }
+    return $user_list;
+  }
+
+  // The getUsersForClient obtains all active and inactive users in a group that are relevant to a client.
+  static function getUsersForClient() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select u.id, u.name from tt_user_project_binds upb".
+      " inner join tt_client_project_binds cpb on (upb.project_id = cpb.project_id and cpb.client_id = $user->client_id)".
+      " inner join tt_users u on (u.id = upb.user_id and u.group_id = $group_id and u.org_id = $org_id)".
+      " where (u.status = 1 or u.status = 0)".
+      " group by u.id".
+      " order by upper(u.name)";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))

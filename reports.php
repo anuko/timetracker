@@ -30,7 +30,6 @@ require_once('initialize.php');
 import('form.Form');
 import('form.ActionForm');
 import('DateAndTime');
-import('ttTeamHelper');
 import('ttGroupHelper');
 import('Period');
 import('ttProjectHelper');
@@ -165,7 +164,7 @@ if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isCli
     $users = $user->getUsers($options); // Active and inactive users.
   }
   elseif ($user->isClient())
-    $users = ttTeamHelper::getUsersForClient(); // Active and inactive users for clients.
+    $users = ttGroupHelper::getUsersForClient(); // Active and inactive users for clients.
 
   foreach ($users as $single_user) {
     $user_list[$single_user['id']] = $single_user['name'];

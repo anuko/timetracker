@@ -50,7 +50,6 @@ if ($request->isPost()) {
 } else {
   $group_id = $user->getGroup();
 }
-$uncompleted_indicators = $user->getConfigOption('uncompleted_indicators');
 
 $form = new Form('usersForm');
 if ($user->can('manage_subgroups')) {
@@ -80,6 +79,7 @@ if($user->can('manage_users')) {
   $inactive_users = $user->getUsers($options);
 }
 
+$uncompleted_indicators = $user->getConfigOption('uncompleted_indicators');
 if ($uncompleted_indicators) {
   // Check each active user if they have an uncompleted time entry.
   foreach ($active_users as $key => $user) {

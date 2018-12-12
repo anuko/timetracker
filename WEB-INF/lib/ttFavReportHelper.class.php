@@ -26,7 +26,7 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-import('ttTeamHelper');
+import('ttGroupHelper');
 
 // Class ttFavReportHelper is used to help with favorite report related tasks.
 class ttFavReportHelper {
@@ -407,7 +407,7 @@ class ttFavReportHelper {
             $user_options = array('max_rank'=>$max_rank);
           $users = $user->getUsers($user_options); // Active and inactive users.
         } elseif ($user->isClient()) {
-          $users = ttTeamHelper::getUsersForClient(); // Active and inactive users for clients.
+          $users = ttGroupHelper::getUsersForClient(); // Active and inactive users for clients.
         }
         foreach ($users as $single_user) {
           $user_ids[] = $single_user['id'];
@@ -417,7 +417,7 @@ class ttFavReportHelper {
     } else {
       $users_to_adjust = explode(',', $options['users']); // Users to adjust.
       if ($user->isClient()) {
-        $users = ttTeamHelper::getUsersForClient(); // Active and inactive users for clients.
+        $users = ttGroupHelper::getUsersForClient(); // Active and inactive users for clients.
         foreach ($users as $single_user) {
           $user_ids[] = $single_user['id'];
         }
