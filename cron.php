@@ -101,7 +101,7 @@ while ($val = $res->fetchRow()) {
   }
 
   // Calculate next execution time.
-  $next = tdCron::getNextOccurrence($val['cron_spec'], $now + 60); // +60 sec is here to get us correct $next when $now is close to existing "next".///
+  $next = tdCron::getNextOccurrence($val['cron_spec'], $now + 60); // +60 sec is here to get us correct $next when $now is close to existing "next".
                                                                    // This is because the accuracy of tdcron class appears to be 1 minute.
   // Update last and next values in tt_cron.
   $sql = "update tt_cron set last = $now, next = $next where id = ".$val['id'];
