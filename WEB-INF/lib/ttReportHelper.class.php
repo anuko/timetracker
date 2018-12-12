@@ -564,35 +564,45 @@ class ttReportHelper {
   }
 
   // The assignToInvoice assigns a set of records to a specific invoice.
-  static function assignToInvoice($invoice_id, $time_log_ids, $expense_item_ids)
-  {
+  static function assignToInvoice($invoice_id, $time_log_ids, $expense_item_ids) {
+    global $user;
     $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     if ($time_log_ids) {
       $sql = "update tt_log set invoice_id = ".$mdb2->quote($invoice_id).
-        " where id in(".join(', ', $time_log_ids).")";
+        " where id in(".join(', ', $time_log_ids).") and group_id = $group_id and org_id = $org_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
     }
     if ($expense_item_ids) {
       $sql = "update tt_expense_items set invoice_id = ".$mdb2->quote($invoice_id).
-        " where id in(".join(', ', $expense_item_ids).")";
+        " where id in(".join(', ', $expense_item_ids).") and group_id = $group_id and org_id = $org_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
     }
   }
 
   // The markPaid marks a set of records as either paid or unpaid.
-  static function markPaid($time_log_ids, $expense_item_ids, $paid = true)
-  {
+  static function markPaid($time_log_ids, $expense_item_ids, $paid = true) {
+    global $user;
     $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $paid_val = (int) $paid;
     if ($time_log_ids) {
-      $sql = "update tt_log set paid = $paid_val where id in(".join(', ', $time_log_ids).")";
+      $sql = "update tt_log set paid = $paid_val".
+        " where id in(".join(', ', $time_log_ids).") and group_id = $group_id and org_id = $org_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
     }
     if ($expense_item_ids) {
-      $sql = "update tt_expense_items set paid = $paid_val where id in(".join(', ', $expense_item_ids).")";
+      $sql = "update tt_expense_items set paid = $paid_val".
+        " where id in(".join(', ', $expense_item_ids).") and group_id = $group_id and org_id = $org_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
     }
