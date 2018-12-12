@@ -598,4 +598,27 @@ class ttGroupHelper {
     }
     return $user_list;
   }
+
+  // The getRecentInvoices returns an array of recent invoices (max 3) for a client.
+  static function getRecentInvoices($client_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select i.id, i.name from tt_invoices i".
+      " left join tt_clients c on (c.id = i.client_id)".
+      " where i.group_id = $group_id and i.org_id = $org_id and i.status = 1 and c.id = $client_id".
+      " order by i.id desc limit 3";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      $dt = new DateAndTime(DB_DATEFORMAT);
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
 }

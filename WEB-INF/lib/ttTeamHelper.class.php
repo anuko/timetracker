@@ -255,29 +255,6 @@ class ttTeamHelper {
     return $result;
   }
 
-  // The getRecentInvoices returns an array of recent invoices (max 3) for a client.
-  static function getRecentInvoices($group_id, $client_id)
-  {
-    global $user;
-
-    $result = array();
-    $mdb2 = getConnection();
-
-    $sql = "select i.id, i.name from tt_invoices i
-      left join tt_clients c on (c.id = i.client_id)
-      where i.group_id = $group_id and i.status = 1 and c.id = $client_id
-      order by i.id desc limit 3";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      $dt = new DateAndTime(DB_DATEFORMAT);
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-    }
-    return $result;
-  }
-
   // getUserToProjectBinds - obtains all user to project binds for a group.
   static function getUserToProjectBinds($group_id) {
     $mdb2 = getConnection();

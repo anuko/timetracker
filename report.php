@@ -30,7 +30,7 @@ require_once('initialize.php');
 import('form.Form');
 import('form.ActionForm');
 import('ttReportHelper');
-import('ttTeamHelper');
+import('ttGroupHelper');
 
 // Access check.
 if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports') || ttAccessAllowed('view_all_reports'))) {
@@ -94,7 +94,7 @@ if ($user->can('manage_invoices') && $bean->getAttribute('chpaid')) {
 if ($user->can('manage_invoices') &&
   ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by1')) && !$user->isClient())) {
   // Client is selected and we are displaying the invoice column.
-  $recent_invoices = ttTeamHelper::getRecentInvoices($user->group_id, $client_id);
+  $recent_invoices = ttGroupHelper::getRecentInvoices($client_id);
   if ($recent_invoices) {
     $assign_invoice_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
     $form->addInput(array('type'=>'combobox',
