@@ -6,16 +6,6 @@
   <tr>
     <td valign="top">
 {if $user->can('manage_users')}
-  {if $group_dropdown}
-{$forms.usersForm.open} {* usersForm consists only of one dropdown group control *}
-      <table width="100%">
-        <tr>
-          <td align="center">{$i18n.label.group}: {$forms.usersForm.group.control}</td>
-        </tr>
-      </table>
-{$forms.usersForm.close}
-  {/if}
-
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
   {if $inactive_users}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.active_users}</td></tr>

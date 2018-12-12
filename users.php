@@ -36,35 +36,7 @@ if (!(ttAccessAllowed('view_users') || ttAccessAllowed('manage_users'))) {
   header('Location: access_denied.php');
   exit();
 }
-if ($request->isPost() && !$user->isGroupValid($request->getParameter('group'))) {
-  header('Location: access_denied.php'); // Wrong group id in post.
-  exit();
-}
-// Note: we don't use "manage_subgroups" in access check, because when user cannot
-// "manage_users" or "view_users" they do not belong here.
 // End of access checks.
-
-if ($request->isPost()) {
-  $group_id = $request->getParameter('group');
-  $user->setOnBehalfGroup($group_id);
-} else {
-  $group_id = $user->getGroup();
-}
-
-$form = new Form('usersForm');
-if ($user->can('manage_subgroups')) {
-  $groups = $user->getGroupsForDropdown();
-  if (count($groups) > 1) {
-    $form->addInput(array('type'=>'combobox',
-      'onchange'=>'this.form.submit();',
-      'name'=>'group',
-      'style'=>'width: 250px;',
-      'value'=>$group_id,
-      'data'=>$groups,
-      'datakeys'=>array('id','name')));
-    $smarty->assign('group_dropdown', 1);
-  }
-}
 
 // Prepare a list of active users.
 if ($user->can('view_users'))
@@ -88,7 +60,6 @@ if ($uncompleted_indicators) {
   $smarty->assign('uncompleted_indicators', true);
 }
 
-$smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('active_users', $active_users);
 $smarty->assign('inactive_users', $inactive_users);
 $smarty->assign('title', $i18n->get('title.users'));
