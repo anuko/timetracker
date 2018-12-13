@@ -571,12 +571,19 @@ class ttTimeHelper {
   }
 
   // getTimeForMonth - gets total time for a user for a given month.
-  static function getTimeForMonth($user_id, $date){
+  static function getTimeForMonth($date) {
+    global $user;
     import('Period');
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $period = new Period(INTERVAL_THIS_MONTH, $date);
-    $sql = "select sum(time_to_sec(duration)) as sm from tt_log where user_id = $user_id and date >= '".$period->getStartDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."' and status = 1";
+    $sql = "select sum(time_to_sec(duration)) as sm from tt_log".
+      " where user_id = $user_id and group_id = $group_id and org_id = $org_id".
+      " and date >= '".$period->getStartDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."' and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();

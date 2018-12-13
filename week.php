@@ -92,7 +92,7 @@ if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
   $month_quota = $quota->get($selected_date->mYear, $selected_date->mMonth);
-  $month_total = ttTimeHelper::getTimeForMonth($user->getUser(), $selected_date);
+  $month_total = ttTimeHelper::getTimeForMonth($selected_date);
   $minutes_left = round(60*$month_quota) - ttTimeHelper::toMinutes($month_total);
 
   $smarty->assign('month_total', $month_total);
