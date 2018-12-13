@@ -567,7 +567,7 @@ class ttTimeHelper {
       $val = $res->fetchRow();
       return sec_to_time_fmt_hm($val['sm']);
     }
-    return 0;
+    return false;
   }
 
   // getTimeForMonth - gets total time for a user for a given month.
@@ -582,7 +582,7 @@ class ttTimeHelper {
       $val = $res->fetchRow();
       return sec_to_time_fmt_hm($val['sm']);
     }
-    return 0;
+    return false;
   }
 
   // getUncompleted - retrieves an uncompleted record for user, if one exists.
