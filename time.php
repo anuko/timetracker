@@ -394,7 +394,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$week_total = ttTimeHelper::getTimeForWeek($user_id, $selected_date);
+$week_total = ttTimeHelper::getTimeForWeek($selected_date);
 
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
