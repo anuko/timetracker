@@ -1128,7 +1128,7 @@ if ($_POST) {
   </tr>
     <tr valign="top">
     <td>Update database structure (v1.17.44 to v1.17.97)</td>
-    <td><input type="submit" name="convert11744to117797" value="Update"><br><input type="submit" name="update_group_id" value="Update group_id"></td>
+    <td><input type="submit" name="convert11744to11797" value="Update"><br><input type="submit" name="update_group_id" value="Update group_id"></td>
   </tr>
   </tr>
   <tr valign="top">
