@@ -294,8 +294,11 @@ class ttUser {
     $mdb2 = getConnection();
     $tasks = implode(',', $task_ids); // This is a comma-separated list of task ids.
 
+    $group_id = $this->getGroup();
+    $org_id = $this->org_id;
+
     $sql = "select id, name, description from tt_tasks".
-      " where group_id = $this->group_id and status = 1 and id in ($tasks) order by name";
+      " where group_id = $group_id and org_id = $org_id and status = 1 and id in ($tasks) order by name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
