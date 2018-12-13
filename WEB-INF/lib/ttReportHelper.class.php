@@ -86,6 +86,9 @@ class ttReportHelper {
   static function getExpenseWhere($options) {
     global $user;
 
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     // Prepare dropdown parts.
     $dropdown_parts = '';
     if ($options['client_id'])
@@ -103,17 +106,18 @@ class ttReportHelper {
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and ei.user_id in ($userlist)";
     else
-      $user_list_part = " and ei.user_id = ".$user->id;
-    $user_list_part .= " and ei.group_id = ".$user->getGroup();
+      $user_list_part = " and ei.user_id = ".$user->getUser();
+    $user_list_part .= " and ei.group_id = $group_id and ei.org_id = $org_id";
 
     // Prepare sql query part for where.
+    $dateFormat = $user->getDateFormat();
     if ($options['period'])
-      $period = new Period($options['period'], new DateAndTime($user->date_format));
+      $period = new Period($options['period'], new DateAndTime($dateFormat));
     else {
       $period = new Period();
       $period->setPeriod(
-        new DateAndTime($user->date_format, $options['period_start']),
-        new DateAndTime($user->date_format, $options['period_end']));
+        new DateAndTime($dateFormat, $options['period_start']),
+        new DateAndTime($dateFormat, $options['period_end']));
     }
     $where = " where ei.status = 1 and ei.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";
@@ -140,7 +144,9 @@ class ttReportHelper {
       $grouping_by_user = ttReportHelper::groupingBy('user', $options);
       $grouping_by_cf_1 = ttReportHelper::groupingBy('cf_1', $options);
     }
-    $convertTo12Hour = ('%I:%M %p' == $user->time_format) && ($options['show_start'] || $options['show_end']);
+    $convertTo12Hour = ('%I:%M %p' == $user->getTimeFormat()) && ($options['show_start'] || $options['show_end']);
+    $trackingMode = $user->getTrackingMode();
+    $decimalMark = $user->getDecimalMark();
 
     // Prepare a query for time items in tt_log table.
     $fields = array(); // An array of fields for database query.
@@ -182,7 +188,7 @@ class ttReportHelper {
       array_push($fields, "TIME_FORMAT(l.duration, '%k:%i') as duration");
     // Add work units.
     if ($options['show_work_units']) {
-      if ($user->unit_totals_only)
+      if ($user->getConfigOption('unit_totals_only'))
         array_push($fields, "null as units");
       else
         array_push($fields, "if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit)) as units");
@@ -193,7 +199,7 @@ class ttReportHelper {
     // Handle cost.
     $includeCost = $options['show_cost'];
     if ($includeCost) {
-      if (MODE_TIME == $user->tracking_mode)
+      if (MODE_TIME == $trackingMode)
         array_push($fields, "cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost");   // Use default user rate.
       else
         array_push($fields, "cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost"); // Use project rate for user.
@@ -233,7 +239,7 @@ class ttReportHelper {
           " left join tt_custom_field_options cfo on (cfl.option_id = cfo.id)";
       }
     }
-    if ($includeCost && MODE_TIME != $user->tracking_mode)
+    if ($includeCost && MODE_TIME != $trackingMode)
       $left_joins .= " left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
 
     $where = ttReportHelper::getWhere($options);
@@ -343,12 +349,12 @@ class ttReportHelper {
           $val['finish'] = ttTimeHelper::to12HourFormat($val['finish']);
       }
       if (isset($val['cost'])) {
-        if ('.' != $user->decimal_mark)
-          $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
+        if ('.' != $decimalMark)
+          $val['cost'] = str_replace('.', $decimalMark, $val['cost']);
       }
       if (isset($val['expense'])) {
-        if ('.' != $user->decimal_mark)
-          $val['expense'] = str_replace('.', $user->decimal_mark, $val['expense']);
+        if ('.' != $decimalMark)
+          $val['expense'] = str_replace('.', $decimalMark, $val['expense']);
       }
 
       if ($grouping) $val['grouped_by'] = ttReportHelper::makeGroupByKey($options, $val);
