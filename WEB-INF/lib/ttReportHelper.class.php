@@ -40,6 +40,9 @@ class ttReportHelper {
   static function getWhere($options) {
     global $user;
 
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     // Prepare dropdown parts.
     $dropdown_parts = '';
     if ($options['client_id'])
@@ -61,17 +64,18 @@ class ttReportHelper {
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and l.user_id in ($userlist)";
     else
-      $user_list_part = " and l.user_id = ".$user->id;
-    $user_list_part .= " and l.group_id = ".$user->getGroup();
+      $user_list_part = " and l.user_id = ".$user->getUser();
+    $user_list_part .= " and l.group_id = $group_id and l.org_id = $org_id";
 
     // Prepare sql query part for where.
+    $dateFormat = $user->getDateFormat();
     if ($options['period'])
-      $period = new Period($options['period'], new DateAndTime($user->date_format));
+      $period = new Period($options['period'], new DateAndTime($dateFormat));
     else {
       $period = new Period();
       $period->setPeriod(
-        new DateAndTime($user->date_format, $options['period_start']),
-        new DateAndTime($user->date_format, $options['period_end']));
+        new DateAndTime($dateFormat, $options['period_start']),
+        new DateAndTime($dateFormat, $options['period_end']));
     }
     $where = " where l.status = 1 and l.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts";

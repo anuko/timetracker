@@ -530,10 +530,16 @@ class ttTimeHelper {
   }
 
   // getTimeForDay - gets total time for a user for a specific date.
-  static function getTimeForDay($user_id, $date) {
+  static function getTimeForDay($date) {
+    global $user;
     $mdb2 = getConnection();
 
-    $sql = "select sum(time_to_sec(duration)) as sm from tt_log where user_id = $user_id and date = '$date' and status = 1";
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select sum(time_to_sec(duration)) as sm from tt_log".
+      " where user_id = $user_id and group_id = $group_id and org_id = $org_id and date = '$date' and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();

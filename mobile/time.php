@@ -286,7 +286,7 @@ if ($request->isPost()) {
 $smarty->assign('next_date', $next_date);
 $smarty->assign('prev_date', $prev_date);
 $smarty->assign('time_records', ttTimeHelper::getRecords($user_id, $cl_date));
-$smarty->assign('day_total', ttTimeHelper::getTimeForDay($user_id, $cl_date));
+$smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
