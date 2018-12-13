@@ -42,7 +42,7 @@ if (!ttAccessAllowed('manage_users')) {
 // End of access checks.
 
 // Use the "limit" plugin if we have one. Ignore include errors.
-// The "limit" plugin is not required for normal operation of the Time Tracker.
+// The "limit" plugin is not required for normal operation of Time Tracker.
 @include('../plugins/limit/user_add.php');
 
 if ($user->isPluginEnabled('cl'))

@@ -34,6 +34,10 @@ if (!isTrue(MULTITEAM_MODE) || $auth->isPasswordExternal()) {
   exit();
 }
 
+// Use the "limit" plugin if we have one. Ignore include errors.
+// The "limit" plugin is not required for normal operation of Time Tracker.
+@include('plugins/limit/register.php');
+
 $auth->doLogout();
 
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
