@@ -48,11 +48,6 @@ if (!$user->behalf_id && !$user->can('track_own_time') && !$user->adjustBehalfId
   exit();
 }
 if ($request->isPost()) {
-  $groupChanged = $request->getParameter('group_changed'); // Reused in multiple places below.
-  if ($groupChanged && !($user->can('manage_subgroups') && $user->isGroupValid($request->getParameter('group')))) {
-    header('Location: access_denied.php'); // Group changed, but no rght or wrong group id.
-    exit();
-  }
   $userChanged = $request->getParameter('user_changed'); // Reused in multiple places below.
   if ($userChanged && !($user->can('track_time') && $user->isUserValid($request->getParameter('user')))) {
     header('Location: access_denied.php'); // Group changed, but no rght or wrong user id.
@@ -61,13 +56,6 @@ if ($request->isPost()) {
 }
 // End of access checks.
 
-// Determine group for which we display this page.
-if ($request->isPost() && $groupChanged) {
-  $group_id = $request->getParameter('group');
-  $user->setOnBehalfGroup($group_id);
-} else {
-  $group_id = $user->getGroup();
-}
 // Determine user for which we display this page.
 if ($request->isPost() && $userChanged) {
   $user_id = $request->getParameter('user');
@@ -75,6 +63,8 @@ if ($request->isPost() && $userChanged) {
 } else {
   $user_id = $user->getUser();
 }
+
+$group_id = $user->getGroup();
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
@@ -132,21 +122,6 @@ $_SESSION['task'] = $cl_task;
 
 // Elements of timeRecordForm.
 $form = new Form('timeRecordForm');
-// Group dropdown.
-if ($user->can('manage_subgroups')) {
-  $groups = $user->getGroupsForDropdown();
-  if (count($groups) > 1) {
-    $form->addInput(array('type'=>'combobox',
-      'onchange'=>'document.timeRecordForm.group_changed.value=1;document.timeRecordForm.submit();',
-      'name'=>'group',
-      'style'=>'width: 250px;',
-      'value'=>$group_id,
-      'data'=>$groups,
-      'datakeys'=>array('id','name')));
-    $form->addInput(array('type'=>'hidden','name'=>'group_changed'));
-    $smarty->assign('group_dropdown', 1);
-  }
-}
 if ($user->can('track_time')) {
   $rank = $user->getMaxRankForGroup($group_id);
   if ($user->can('track_own_time'))
@@ -405,7 +380,7 @@ $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns()"');
-$smarty->assign('timestring', $selected_date->toString($user->date_format));
+$smarty->assign('timestring', $selected_date->toString($user->getDateFormat()));
 $smarty->assign('title', $i18n->get('title.time'));
 $smarty->assign('content_page_name', 'time.tpl');
 $smarty->display('index.tpl');

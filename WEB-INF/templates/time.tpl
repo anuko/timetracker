@@ -18,12 +18,6 @@
   <tr>
     <td valign="top">
       <table>
-{if $group_dropdown}
-        <tr>
-          <td align="right">{$i18n.label.group}:</td>
-          <td>{$forms.timeRecordForm.group.control}</td>
-        </tr>
-{/if}
 {if $user_dropdown}
         <tr>
           <td align="right">{$i18n.label.user}:</td>
@@ -72,7 +66,7 @@
 {if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
         <tr>
           <td align="right">{$i18n.label.duration}:</td>
-          <td>{$forms.timeRecordForm.duration.control}&nbsp;{if $user->decimal_mark == ','}{str_replace('.', ',', $i18n.form.time.duration_format)}{else}{$i18n.form.time.duration_format}{/if}</td>
+          <td>{$forms.timeRecordForm.duration.control}&nbsp;{if $user->getDecimalMark() == ','}{str_replace('.', ',', $i18n.form.time.duration_format)}{else}{$i18n.form.time.duration_format}{/if}</td>
         </tr>
 {/if}
       </table>
