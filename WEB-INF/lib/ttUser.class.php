@@ -235,6 +235,12 @@ class ttUser {
     return $config->getDefinedValue($name);
   }
 
+  // getConfigInt retruns an integer value defined in a group, or false.
+  function getConfigInt($name) {
+    $config = new ttConfigHelper($this->getConfig());
+    return $config->getIntValue($name);
+  }
+
   // can - determines whether user has a right to do something.
   function can($do_something) {
     return in_array($do_something, $this->rights);
