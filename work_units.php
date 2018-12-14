@@ -39,17 +39,18 @@ if (!$user->isPluginEnabled('wu')) {
   header('Location: feature_disabled.php');
   exit();
 }
+// End of access checks.
 
-$config = new ttConfigHelper($user->config);
+$config = new ttConfigHelper($user->getConfig());
 
 if ($request->isPost()) {
   $cl_minutes_in_unit = $request->getParameter('minutes_in_unit');
   $cl_1st_unit_threshold = $request->getParameter('1st_unit_threshold');
   $cl_totals_only = $request->getParameter('totals_only');
 } else {
-  $cl_minutes_in_unit = $user->minutes_in_unit;
-  $cl_1st_unit_threshold = $user->first_unit_threshold;
-  $cl_totals_only = $user->unit_totals_only;
+  $cl_minutes_in_unit = $user->getConfigInt('minutes_in_unit');
+  $cl_1st_unit_threshold = $user->getConfigInt('1st_unit_threshold');
+  $cl_totals_only = $user->getConfigOption('unit_totals_only');
 }
 
 $form = new Form('workUnitsForm');
@@ -60,7 +61,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('b
 
 if ($request->isPost()){
   // Validate user input.
-  if (!ttValidInteger($cl_minutes_in_unit)) $err->add($i18n->get('error.field'), $i18n->get('form.work_units.minutes_in_unit'));
+  if (!ttValidInteger($cl_minutes_in_unit) || $cl_minutes_in_unit == 0) $err->add($i18n->get('error.field'), $i18n->get('form.work_units.minutes_in_unit'));
   if (!ttValidInteger($cl_1st_unit_threshold, true) ||($cl_minutes_in_unit && $cl_1st_unit_threshold > $cl_minutes_in_unit)) $err->add($i18n->get('error.field'), $i18n->get('form.work_units.1st_unit_threshold'));
   // Finished validating user input.
 
