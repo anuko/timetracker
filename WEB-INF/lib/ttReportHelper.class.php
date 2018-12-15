@@ -411,53 +411,40 @@ class ttReportHelper {
 
     $concat_part = ttReportHelper::makeConcatPart($options);
     $join_part = ttReportHelper::makeJoinPart($options);
+
+    // TODO: Consider moving this block out into a separate function.
+    $workUnits = $options['show_work_units'];
+    if ($workUnits) {
+      $unitTotalsOnly = $user->getConfigOption('unit_totals_only');
+      $firstUnitThreshold = $user->getConfigInt('1st_unit_threshold');
+      $minutesInUnit = $user->getConfigInt('minutes_in_unit', 15);
+      if ($unitTotalsOnly)
+        $work_unit_part = ", if (sum(l.billable * time_to_sec(l.duration)/60) < $firstUnitThreshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$minutesInUnit))) as units";
+      else
+        $work_unit_part = ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $firstUnitThreshold, 0, ceil(time_to_sec(l.duration)/60/$minutesInUnit))) as units";
+    }
+    // End of TODO.
+
     $where = ttReportHelper::getWhere($options);
     $group_by_part = ttReportHelper::makeGroupByPart($options);
     if ($options['show_cost']) {
-
-      $workUnits = $options['show_work_units'];
-      if ($workUnits) {
-        $unitTotalsOnly = $user->getConfigOption('unit_totals_only');
-        $firstUnitThreshold = $user->getConfigInt('1st_unit_threshold');
-        $minutesInUnit = $user->getConfigInt('minutes_in_unit', 15);
-      }
-
       if (MODE_TIME == $user->getTrackingMode()) {
         if (!ttReportHelper::groupingBy('user', $options))
           $left_join = 'left join tt_users u on (l.user_id = u.id)';
-        $sql = "select $concat_part, sum(time_to_sec(l.duration)) as time";
-        if ($workUnits) {
-          if ($unitTotalsOnly)
-            $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $firstUnitThreshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$minutesInUnit))) as units";
-          else
-            $sql .= ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $firstUnitThreshold, 0, ceil(time_to_sec(l.duration)/60/$minutesInUnit))) as units";
-        }
+        $sql = "select $concat_part, sum(time_to_sec(l.duration)) as time".$work_unit_part;
         $sql .= ", sum(cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2))) as cost,
           null as expenses from tt_log l
           $join_part $left_join $where $group_by_part";
       } else {
         // If we are including cost and tracking projects, our query (the same as above) needs to join the tt_user_project_binds table.
-        $sql = "select $concat_part, sum(time_to_sec(l.duration)) as time";
-        if ($workUnits) {
-          if ($unitTotalsOnly)
-            $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $firstUnitThreshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$minutesInUnit))) as units";
-          else
-            $sql .= ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $firstUnitThreshold, 0, ceil(time_to_sec(l.duration)/60/$minutesInUnit))) as units";
-        }
+        $sql = "select $concat_part, sum(time_to_sec(l.duration)) as time".$work_unit_part;
         $sql .= ", sum(cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2))) as cost,
           null as expenses from tt_log l 
           $join_part
           left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id) $where $group_by_part";
       }
     }  else {
-      // $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time";
-      $sql = "select $concat_part, sum(time_to_sec(l.duration)) as time";
-      if ($workUnits) {
-        if ($unitTotalsOnly)
-          $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $firstUnitThreshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$minutesInUnit))) as units";
-        else
-          $sql .= ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $firstUnitThreshold, 0, ceil(time_to_sec(l.duration)/60/$minutesInUnit))) as units";
-      }
+      $sql = "select $concat_part, sum(time_to_sec(l.duration)) as time".$work_unit_part;
       $sql .= ", null as expenses from tt_log l 
         $join_part $where $group_by_part";
     }
