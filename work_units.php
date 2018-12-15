@@ -48,8 +48,8 @@ if ($request->isPost()) {
   $cl_1st_unit_threshold = $request->getParameter('1st_unit_threshold');
   $cl_totals_only = $request->getParameter('totals_only');
 } else {
-  $cl_minutes_in_unit = $user->getConfigInt('minutes_in_unit');
-  $cl_1st_unit_threshold = $user->getConfigInt('1st_unit_threshold');
+  $cl_minutes_in_unit = $user->getConfigInt('minutes_in_unit', 15);
+  $cl_1st_unit_threshold = $user->getConfigInt('1st_unit_threshold', 0);
   $cl_totals_only = $user->getConfigOption('unit_totals_only');
 }
 

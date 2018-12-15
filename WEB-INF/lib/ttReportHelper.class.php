@@ -191,8 +191,8 @@ class ttReportHelper {
       if ($user->getConfigOption('unit_totals_only'))
         array_push($fields, "null as units");
       else {
-        $firstUnitThreshold = $user->getConfigInt('1st_unit_threshold');
-        $minutesInUnit = $user->getConfigInt('minutes_in_unit');
+        $firstUnitThreshold = $user->getConfigInt('1st_unit_threshold', 0);
+        $minutesInUnit = $user->getConfigInt('minutes_in_unit', 15);
         array_push($fields, "if(l.billable = 0 or time_to_sec(l.duration)/60 < $firstUnitThreshold, 0, ceil(time_to_sec(l.duration)/60/$minutesInUnit)) as units");
       }
     }
