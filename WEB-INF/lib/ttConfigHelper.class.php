@@ -73,7 +73,7 @@ class ttConfigHelper {
   }
 
   // The getIntValue parses an integer value from the source config array.
-  function getIntValue($name) {
+  function getIntValue($name, $defaultVal = 0) {
     $name_with_colon = $name.':';
     $len = strlen($name_with_colon);
 
@@ -87,7 +87,7 @@ class ttConfigHelper {
         }
       }
     }
-    return false;
+    return $defaultVal;
   }
 
   // The setIntValue sets an integer value into config array.

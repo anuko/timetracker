@@ -407,7 +407,6 @@ class ttReportHelper {
   // With expenses, it becomes a select with group by from a combined set of records obtained with "union all".
   static function getSubtotals($options) {
     global $user;
-
     $mdb2 = getConnection();
 
     $concat_part = ttReportHelper::makeConcatPart($options);
@@ -415,15 +414,23 @@ class ttReportHelper {
     $where = ttReportHelper::getWhere($options);
     $group_by_part = ttReportHelper::makeGroupByPart($options);
     if ($options['show_cost']) {
-      if (MODE_TIME == $user->tracking_mode) {
+
+      $workUnits = $options['show_work_units'];
+      if ($workUnits) {
+        $unitTotalsOnly = $user->getConfigOption('unit_totals_only');
+        $firstUnitThreshold = $user->getConfigInt('1st_unit_threshold');
+        $minutesInUnit = $user->getConfigInt('minutes_in_unit', 15);
+      }
+
+      if (MODE_TIME == $user->getTrackingMode()) {
         if (!ttReportHelper::groupingBy('user', $options))
           $left_join = 'left join tt_users u on (l.user_id = u.id)';
         $sql = "select $concat_part, sum(time_to_sec(l.duration)) as time";
-        if ($options['show_work_units']) {
-          if ($user->unit_totals_only)
-            $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $user->first_unit_threshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
+        if ($workUnits) {
+          if ($unitTotalsOnly)
+            $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $firstUnitThreshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$minutesInUnit))) as units";
           else
-            $sql .= ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
+            $sql .= ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $firstUnitThreshold, 0, ceil(time_to_sec(l.duration)/60/$minutesInUnit))) as units";
         }
         $sql .= ", sum(cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2))) as cost,
           null as expenses from tt_log l
@@ -431,11 +438,11 @@ class ttReportHelper {
       } else {
         // If we are including cost and tracking projects, our query (the same as above) needs to join the tt_user_project_binds table.
         $sql = "select $concat_part, sum(time_to_sec(l.duration)) as time";
-        if ($options['show_work_units']) {
-          if ($user->unit_totals_only)
-            $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $user->first_unit_threshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
+        if ($workUnits) {
+          if ($unitTotalsOnly)
+            $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $firstUnitThreshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$minutesInUnit))) as units";
           else
-            $sql .= ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
+            $sql .= ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $firstUnitThreshold, 0, ceil(time_to_sec(l.duration)/60/$minutesInUnit))) as units";
         }
         $sql .= ", sum(cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2))) as cost,
           null as expenses from tt_log l 
@@ -445,11 +452,11 @@ class ttReportHelper {
     }  else {
       // $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time";
       $sql = "select $concat_part, sum(time_to_sec(l.duration)) as time";
-      if ($options['show_work_units']) {
-        if ($user->unit_totals_only)
-          $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $user->first_unit_threshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
+      if ($workUnits) {
+        if ($unitTotalsOnly)
+          $sql .= ", if (sum(l.billable * time_to_sec(l.duration)/60) < $firstUnitThreshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$minutesInUnit))) as units";
         else
-          $sql .= ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
+          $sql .= ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $firstUnitThreshold, 0, ceil(time_to_sec(l.duration)/60/$minutesInUnit))) as units";
       }
       $sql .= ", null as expenses from tt_log l 
         $join_part $where $group_by_part";
@@ -482,9 +489,10 @@ class ttReportHelper {
       $time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
       $rowLabel = ttReportHelper::makeGroupByLabel($val['group_field'], $options);
       if ($options['show_cost']) {
-        if ('.' != $user->decimal_mark) {
-          $val['cost'] = str_replace('.', $user->decimal_mark, $val['cost']);
-          $val['expenses'] = str_replace('.', $user->decimal_mark, $val['expenses']);
+        $decimalMark = $user->getDecimalMark();
+        if ('.' != $decimalMark) {
+          $val['cost'] = str_replace('.', $decimalMark, $val['cost']);
+          $val['expenses'] = str_replace('.', $decimalMark, $val['expenses']);
         }
         $subtotals[$val['group_field']] = array('name'=>$rowLabel,'user'=>$val['user'],'project'=>$val['project'],'task'=>$val['task'],'client'=>$val['client'],'cf_1'=>$val['cf_1'],'time'=>$time,'units'=> $val['units'],'cost'=>$val['cost'],'expenses'=>$val['expenses']);
       } else

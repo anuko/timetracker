@@ -144,7 +144,7 @@ class ttUser {
       $this->allow_overlap = $config->getDefinedValue('allow_overlap');
       $this->future_entries = $config->getDefinedValue('future_entries');
       if ($this->isPluginEnabled('wu')) {
-        $minutes_in_unit = $config->getIntValue('minutes_in_unit');
+        $minutes_in_unit = $config->getIntValue('minutes_in_unit', 15);
         if ($minutes_in_unit) $this->minutes_in_unit = $minutes_in_unit;
         $first_unit_threshold = $config->getIntValue('1st_unit_threshold');
         if ($first_unit_threshold) $this->first_unit_threshold = $first_unit_threshold;
@@ -236,9 +236,9 @@ class ttUser {
   }
 
   // getConfigInt retruns an integer value defined in a group, or false.
-  function getConfigInt($name) {
+  function getConfigInt($name, $defaultVal) {
     $config = new ttConfigHelper($this->getConfig());
-    return $config->getIntValue($name);
+    return $config->getIntValue($name, $defaultVal);
   }
 
   // can - determines whether user has a right to do something.

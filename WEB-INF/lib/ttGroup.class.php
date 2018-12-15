@@ -116,8 +116,6 @@ class ttGroup {
       if ($this->isPluginEnabled('wu')) {
         $minutes_in_unit = $config->getIntValue('minutes_in_unit');
         if ($minutes_in_unit) $this->minutes_in_unit = $minutes_in_unit;
-        $first_unit_threshold = $config->getIntValue('1st_unit_threshold');
-        if ($first_unit_threshold) $this->first_unit_threshold = $first_unit_threshold;
         $this->unit_totals_only = $config->getDefinedValue('unit_totals_only');
       }
       */
