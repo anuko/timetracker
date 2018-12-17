@@ -91,9 +91,9 @@ if ($user->isPluginEnabled('cf')) {
 if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
-  $month_quota = $quota->get($selected_date->mYear, $selected_date->mMonth);
+  $month_quota_minutes = $quota->get($selected_date->mYear, $selected_date->mMonth);
   $month_total = ttTimeHelper::getTimeForMonth($selected_date);
-  $minutes_left = round(60*$month_quota) - ttTimeHelper::toMinutes($month_total);
+  $minutes_left = $month_quota_minutes - ttTimeHelper::toMinutes($month_total);
 
   $smarty->assign('month_total', $month_total);
   $smarty->assign('over_quota', $minutes_left < 0);
