@@ -260,7 +260,9 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     $result = array();
-    $sql = "select * from tt_user_project_binds where user_id in (select id from tt_users where group_id = $group_id) order by user_id, status, project_id";
+    $sql = "select * from tt_user_project_binds".
+      " where user_id in (select id from tt_users where group_id = $group_id)".
+      " and group_id = $group_id order by user_id, status, project_id";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
