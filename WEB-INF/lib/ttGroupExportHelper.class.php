@@ -335,6 +335,10 @@ class ttGroupExportHelper {
     }
 
     // Write time log entries and build logMap at the same time.
+    // TODO: big data sets get us out of memory error.
+    // We need to optimize this by working on smaller result sets at a time.
+    // tt_log is one potentially large table, but so may be others.
+    // Refactor this during next round of work here.
     $records = $this->getRecordsFromTable('tt_log');
     if (count($records) > 0) {
       fwrite($this->file, $this->indentation."  <log>\n");
