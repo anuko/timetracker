@@ -551,11 +551,11 @@ class ttOrgImportHelper {
     $this->firstPass = false; // We are done with 1st pass.
     xml_parser_free($parser);
     if ($file) fclose($file);
-    if (!$this->canImport) {
+    if ($this->errors->yes()) {
+      // Remove the file and exit if we have errors.
       unlink($filename);
       return;
     }
-    if ($this->errors->yes()) return; // Exit if we have errors.
 
     // Now we can do a second pass, where real work is done.
     $parser = xml_parser_create();
