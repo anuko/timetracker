@@ -493,9 +493,25 @@ class ttOrgImportHelper {
     }
   }
 
-  // importXml - uncompresses the file, reads and parses its content. During parsing,
-  // startElement, endElement, and dataElement functions are called as many times as necessary.
-  // Actual import occurs in the endElement handler.
+  // importXml - uncompresses the file, reads and parses its content.
+  // It goes through the file 2 times.
+  //
+  // During 1st pass, it determines whether we can import data.
+  // In 1st pass, startElement function is called as many times as necessary.
+  //
+  // Actual import occurs during 2nd pass.
+  // In 2nd pass, startElement and endElement are called many times.
+  // We only use endElement to finish current group processing.
+  //
+  // The above allows us to export/import complex orgs with nested groups,
+  // while by design all data are in attributes of the elements (no CDATA).
+  //
+  // There is currently at least one problem with keeping all data in attributes:
+  // a vertical tab character 0xB anywhere breaks parsing, making import impossible.
+  // See https://github.com/sparklemotion/nokogiri/issues/1581 - looks like
+  // an XML standard thing. Apparently, other invalid characters break parsing too.
+  // This problem needs to be addressed at some point but how exactly without
+  // complicating export-import too much with CDATA and dataElement processing?
   function importXml() {
     global $i18n;
 
