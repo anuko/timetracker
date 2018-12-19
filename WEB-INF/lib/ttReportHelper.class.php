@@ -471,7 +471,10 @@ class ttReportHelper {
     // Prepare parts.
     $time_part = "sum(time_to_sec(l.duration)) as time";
     if ($options['show_work_units']) {
-      $units_part = $user->unit_totals_only ? ", null as units" : ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $user->first_unit_threshold, 0, ceil(time_to_sec(l.duration)/60/$user->minutes_in_unit))) as units";
+      $unitTotalsOnly = $user->getConfigOption('unit_totals_only');
+      $firstUnitThreshold = $user->getConfigInt('1st_unit_threshold', 0);
+      $minutesInUnit = $user->getConfigInt('minutes_in_unit', 15);
+      $units_part = $unitTotalsOnly ? ", null as units" : ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $firstUnitThreshold, 0, ceil(time_to_sec(l.duration)/60/$minutesInUnit))) as units";
     }
     if ($options['show_cost']) {
       if (MODE_TIME == $user->tracking_mode)
@@ -1468,7 +1471,7 @@ class ttReportHelper {
     $workUnits = $options['show_work_units'];
     if ($workUnits) {
       $unitTotalsOnly = $user->getConfigOption('unit_totals_only');
-      $firstUnitThreshold = $user->getConfigInt('1st_unit_threshold');
+      $firstUnitThreshold = $user->getConfigInt('1st_unit_threshold', 0);
       $minutesInUnit = $user->getConfigInt('minutes_in_unit', 15);
       if ($unitTotalsOnly)
         $work_unit_part = ", if (sum(l.billable * time_to_sec(l.duration)/60) < $firstUnitThreshold, 0, ceil(sum(l.billable * time_to_sec(l.duration)/60/$minutesInUnit))) as units";
