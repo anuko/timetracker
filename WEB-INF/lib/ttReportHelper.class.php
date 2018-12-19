@@ -463,9 +463,10 @@ class ttReportHelper {
   static function getTotals($options)
   {
     global $user;
-
     $mdb2 = getConnection();
 
+    $trackingMode = $user->getTrackingMode();
+    $decimalMark = $user->getDecimalMark();
     $where = ttReportHelper::getWhere($options);
 
     // Prepare parts.
@@ -477,7 +478,7 @@ class ttReportHelper {
       $units_part = $unitTotalsOnly ? ", null as units" : ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $firstUnitThreshold, 0, ceil(time_to_sec(l.duration)/60/$minutesInUnit))) as units";
     }
     if ($options['show_cost']) {
-      if (MODE_TIME == $user->tracking_mode)
+      if (MODE_TIME == $trackingMode)
         $cost_part = ", sum(cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2))) as cost, null as expenses";
       else
         $cost_part = ", sum(cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2))) as cost, null as expenses";
@@ -485,7 +486,7 @@ class ttReportHelper {
       $cost_part = ", null as cost, null as expenses";
     }
     if ($options['show_cost']) {
-      if (MODE_TIME == $user->tracking_mode) {
+      if (MODE_TIME == $trackingMode) {
         $left_joins = "left join tt_users u on (l.user_id = u.id)";
       } else {
         $left_joins = "left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
@@ -517,21 +518,22 @@ class ttReportHelper {
     if ($options['show_cost']) {
       $total_cost = $val['cost'];
       if (!$total_cost) $total_cost = '0.00';
-      if ('.' != $user->decimal_mark)
-        $total_cost = str_replace('.', $user->decimal_mark, $total_cost);
+      if ('.' != $decimalMark)
+        $total_cost = str_replace('.', $decimalMark, $total_cost);
       $total_expenses = $val['expenses'];
       if (!$total_expenses) $total_expenses = '0.00';
-      if ('.' != $user->decimal_mark)
-        $total_expenses = str_replace('.', $user->decimal_mark, $total_expenses);
+      if ('.' != $decimalMark)
+        $total_expenses = str_replace('.', $decimalMark, $total_expenses);
     }
 
+    $dateFormat = $user->getDateFormat();
     if ($options['period'])
-      $period = new Period($options['period'], new DateAndTime($user->date_format));
+      $period = new Period($options['period'], new DateAndTime($dateFormat));
     else {
       $period = new Period();
       $period->setPeriod(
-        new DateAndTime($user->date_format, $options['period_start']),
-        new DateAndTime($user->date_format, $options['period_end']));
+        new DateAndTime($dateFormat, $options['period_start']),
+        new DateAndTime($dateFormat, $options['period_end']));
     }
 
     $totals['start_date'] = $period->getStartDate();
@@ -1596,7 +1598,7 @@ class ttReportHelper {
       return $key; // No need to format.
 
     global $user;
-    if ($user->date_format == DB_DATEFORMAT)
+    if ($user->getDateFormat() == DB_DATEFORMAT)
       return $key; // No need to format.
 
     $label = $key;
