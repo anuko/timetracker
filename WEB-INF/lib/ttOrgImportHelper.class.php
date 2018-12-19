@@ -499,6 +499,11 @@ class ttOrgImportHelper {
   function importXml() {
     global $i18n;
 
+    if (!$_FILES['xmlfile']['name']) {
+      $this->errors->add($i18n->get('error.upload'));
+      return; // There is nothing to do if we don't have a file.
+    }
+
     // Do we have a compressed file?
     $compressed = false;
     $file_ext = substr($_FILES['xmlfile']['name'], strrpos($_FILES['xmlfile']['name'], '.') + 1);
