@@ -72,9 +72,6 @@ class ttUser {
   var $workday_minutes = 480;   // Number of work minutes in a regular day.
   var $rights = array();        // An array of user rights such as 'track_own_time', etc.
   var $is_client = false;       // Whether user is a client as determined by missing 'track_own_time' right.
-  var $minutes_in_unit = 15;    // Number of minutes in unit for Work units plugin.
-  var $first_unit_threshold = 0;// Threshold for 1st unit for Work units plugin.
-  var $unit_totals_only = 0;    // Totals only option for the Work units plugin.
 
   var $behalfGroup = null;      // A ttGroup instance with on behalf group attributes.
 
@@ -143,13 +140,6 @@ class ttUser {
       $this->punch_mode = $config->getDefinedValue('punch_mode');
       $this->allow_overlap = $config->getDefinedValue('allow_overlap');
       $this->future_entries = $config->getDefinedValue('future_entries');
-      if ($this->isPluginEnabled('wu')) {
-        $minutes_in_unit = $config->getIntValue('minutes_in_unit', 15);
-        if ($minutes_in_unit) $this->minutes_in_unit = $minutes_in_unit;
-        $first_unit_threshold = $config->getIntValue('1st_unit_threshold');
-        if ($first_unit_threshold) $this->first_unit_threshold = $first_unit_threshold;
-        $this->unit_totals_only = $config->getDefinedValue('unit_totals_only');
-      }
       
       // Set "on behalf" id and name (user).
       if (isset($_SESSION['behalf_id'])) {
