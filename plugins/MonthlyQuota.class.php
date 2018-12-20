@@ -84,6 +84,16 @@ class MonthlyQuota {
     return $numWorkdays * $user->getWorkdayMinutes();
   }
 
+  // getUserQuota - obtains a quota for user for a single month.
+  // This quota is adjusted by quota_percent value for user.
+  public function getUserQuota($year, $month) {
+    global $user;
+
+    $minutes = $this->getSingle($year, $month);
+    $userMinutes = (int) $minutes * $user->getQuotaPercent() / 100;
+    return $userMinutes;
+  }
+
   // getMany - returns an array of quotas for a given year for group.
   private function getMany($year){
     $sql = "select month, minutes from tt_monthly_quotas".

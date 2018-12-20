@@ -162,9 +162,14 @@ class ttUser {
     }
   }
 
-  // The getUser returns user id on behalf of whom the current user is operating.
+  // getUser returns user id on behalf of whom the current user is operating.
   function getUser() {
-    return ($this->behalf_id ? $this->behalf_id : $this->id);
+    return ($this->behalfUser ? $this->behalfUser->id : $this->id);
+  }
+
+  // getQuotaPercent returns quota percent for active user.
+  function getQuotaPercent() {
+    return ($this->behalfUser ? $this->behalfUser->quota_percent : $this->quota_percent);
   }
 
   // The getGroup returns group id on behalf of which the current user is operating.
