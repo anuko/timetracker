@@ -104,6 +104,7 @@ class ttUserHelper {
     $group_id = (int) $fields['group_id'];
     $org_id = (int) $fields['org_id'];
     $rate = str_replace(',', '.', isset($fields['rate']) ? $fields['rate'] : 0);
+    $quota_percent = str_replace(',', '.', isset($fields['quota_percent']) ? $fields['quota_percent'] : 100);
     if($rate == '')
       $rate = 0;
     if (array_key_exists('status', $fields)) { // Key exists and may be NULL during migration of deleted acounts.
@@ -113,9 +114,9 @@ class ttUserHelper {
     $created_ip_v = ', '.$mdb2->quote($_SERVER['REMOTE_ADDR']);
     $created_by_v = ', '.$user->id;
 
-    $sql = "insert into tt_users (name, login, password, group_id, org_id, role_id, client_id, rate, email, created, created_ip, created_by $status_f) values (".
+    $sql = "insert into tt_users (name, login, password, group_id, org_id, role_id, client_id, rate, quota_percent, email, created, created_ip, created_by $status_f) values (".
       $mdb2->quote($fields['name']).", ".$mdb2->quote($fields['login']).
-      ", $password, $group_id, $org_id, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, ".$mdb2->quote($email).", now() $created_ip_v $created_by_v $status_v)";
+      ", $password, $group_id, $org_id, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, $quota_percent, ".$mdb2->quote($email).", now() $created_ip_v $created_by_v $status_v)";
     $affected = $mdb2->exec($sql);
 
     // Now deal with project assignment.
@@ -178,6 +179,11 @@ class ttUserHelper {
       $rate_part = ", rate = ".$mdb2->quote($rate); 
     }
 
+    if (array_key_exists('quota_percent', $fields)) {
+      $quota_percent = str_replace(',', '.', isset($fields['quota_percent']) ? $fields['quota_percent'] : 100);
+      $quota_percent_part = ", quota_percent = ".$mdb2->quote($quota_percent);
+    }
+
     if (isset($fields['email']))
       $email_part = ', email = '.$mdb2->quote($fields['email']);
 
@@ -187,7 +193,7 @@ class ttUserHelper {
     }
 
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
-    $parts = ltrim($login_part.$pass_part.$name_part.$role_part.$client_part.$rate_part.$email_part.$modified_part.$status_part, ',');
+    $parts = ltrim($login_part.$pass_part.$name_part.$role_part.$client_part.$rate_part.$quota_percent_part.$email_part.$modified_part.$status_part, ',');
 
     $sql = "update tt_users set $parts".
       " where id = $user_id and group_id = $group_id and org_id = $org_id";

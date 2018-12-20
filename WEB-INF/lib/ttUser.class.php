@@ -542,7 +542,7 @@ class ttUser {
     // then rank restriction does not apply.
     $max_rank = $this->behalfGroup ? MAX_RANK : $this->rank;
 
-    $sql =  "select u.id, u.name, u.login, u.role_id, u.client_id, u.status, u.rate, u.email from tt_users u".
+    $sql =  "select u.id, u.name, u.login, u.role_id, u.client_id, u.status, u.rate, u.quota_percent, u.email from tt_users u".
       " left join tt_roles r on (u.role_id = r.id)".
       " where u.id = $user_id and u.group_id = $group_id and u.org_id = $org_id and u.status is not null".
       " and (r.rank < $max_rank or (r.rank = $max_rank and u.id = $this->id))"; // Users with lesser roles or self.

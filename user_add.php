@@ -46,6 +46,7 @@ if (!ttAccessAllowed('manage_users')) {
 // The "limit" plugin is not required for normal operation of Time Tracker.
 @include('plugins/limit/user_add.php');
 
+$show_quota = $user->isPluginEnabled('mq');
 if ($user->isPluginEnabled('cl'))
   $clients = ttGroupHelper::getActiveClients();
 
@@ -61,6 +62,7 @@ if ($request->isPost()) {
   $cl_role_id = $request->getParameter('role');
   $cl_client_id = $request->getParameter('client');
   $cl_rate = $request->getParameter('rate');
+  $cl_quota_percent = $request->getParameter('quota_percent');
   $cl_projects = $request->getParameter('projects');
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
@@ -90,8 +92,14 @@ if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->get('dropdown.select'))));
 
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','format'=>'.2','value'=>$cl_rate));
+if ($show_quota)
+  $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'quota_percent','format'=>'.2','value'=>$cl_quota_percent));
 
-$projects = ttGroupHelper::getActiveProjects();
+$show_projects = MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode();
+if ($show_projects) {
+  $projects = ttGroupHelper::getActiveProjects();
+  if (count($projects) == 0) $show_projects = false;
+}
 
 // Define classes for the projects table.
 class NameCellRenderer extends DefaultCellRenderer {
@@ -143,6 +151,7 @@ if ($request->isPost()) {
   // Require selection of a client for a client role.
   if ($user->isPluginEnabled('cl') && ttRoleHelper::isClientRole($cl_role_id) && !$cl_client_id) $err->add($i18n->get('error.client'));
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
+  if (!ttValidFloat($cl_quota_percent, true)) $err->add($i18n->get('error.field'), $i18n->get('form.quota.quota'));
 
   if ($err->no()) {
     if (!ttUserHelper::getUserByLogin($cl_login)) {
@@ -151,6 +160,7 @@ if ($request->isPost()) {
         'login' => $cl_login,
         'password' => $cl_password1,
         'rate' => $cl_rate,
+        'quota_percent' => $cl_quota_percent,
         'group_id' => $user->getGroup(),
         'org_id' => $user->org_id,
         'role_id' => $cl_role_id,
@@ -176,7 +186,8 @@ if ($request->isPost()) {
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('active_roles', $active_roles);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('show_projects', count($projects) > 0);
+$smarty->assign('show_quota', $show_quota);
+$smarty->assign('show_projects', $show_projects);
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
 $smarty->assign('title', $i18n->get('title.add_user'));
 $smarty->assign('content_page_name', 'user_add.tpl');

@@ -81,7 +81,13 @@ function handleClientControl() {
       <td align="right">{$i18n.form.users.default_rate}&nbsp;(0{$user->getDecimalMark()}00):</td>
       <td>{$forms.userForm.rate.control}</td>
     </tr>
-{if ($smarty.const.MODE_PROJECTS == $user->getTrackingMode() || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode()) && $show_projects}
+{if $show_quota}
+    <tr>
+      <td align="right">{$i18n.form.quota.quota}&nbsp;(%):</td>
+      <td>{$forms.userForm.quota_percent.control}</td>
+    </tr>
+{/if}
+{if $show_projects}
     <tr><td>&nbsp;</td></tr>
     <tr valign="top">
       <td align="right">{$i18n.label.projects}:</td>
