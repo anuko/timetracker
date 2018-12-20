@@ -28,6 +28,7 @@
 
 import('ttConfigHelper');
 import('ttGroupHelper');
+import('ttBehalfUser');
 import('ttGroup');
 import('form.Form');
 import('form.ActionForm');
@@ -42,6 +43,7 @@ class ttUser {
   var $role_name = null;        // Role name.
   var $rank = null;             // User role rank.
   var $client_id = null;        // Client id for client user role.
+  var $quota_percent = 100.0;   // Time quota percent for quotas plugin.
   var $behalf_id = null;        // User id, on behalf of whom we are working.
   var $behalf_group_id = null;  // Group id, on behalf of which we are working.
   var $behalf_name = null;      // User name, on behalf of whom we are working.
@@ -73,6 +75,7 @@ class ttUser {
   var $rights = array();        // An array of user rights such as 'track_own_time', etc.
   var $is_client = false;       // Whether user is a client as determined by missing 'track_own_time' right.
 
+  var $behalfUser = null;       // A ttBehalfUser instance with on behalf user attributes.
   var $behalfGroup = null;      // A ttGroup instance with on behalf group attributes.
 
   // Constructor.
@@ -84,11 +87,11 @@ class ttUser {
 
     $mdb2 = getConnection();
 
-    $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id, u.email,
-      g.org_id, g.name as group_name, g.currency, g.lang, g.decimal_mark, g.date_format, g.time_format, g.week_start,
-      g.tracking_mode, g.project_required, g.task_required, g.record_type,
-      g.bcc_email, g.allow_ip, g.password_complexity, g.plugins, g.config, g.lock_spec, g.workday_minutes, g.custom_logo
-      FROM tt_users u LEFT JOIN tt_groups g ON (u.group_id = g.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
+    $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id,".
+      " u.quota_percent, u.email, g.org_id, g.name as group_name, g.currency, g.lang, g.decimal_mark, g.date_format,".
+      " g.time_format, g.week_start, g.tracking_mode, g.project_required, g.task_required, g.record_type,".
+      " g.bcc_email, g.allow_ip, g.password_complexity, g.plugins, g.config, g.lock_spec, g.workday_minutes, g.custom_logo".
+      " FROM tt_users u LEFT JOIN tt_groups g ON (u.group_id = g.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
     if ($id)
       $sql .= "u.id = $id";
     else
@@ -113,6 +116,7 @@ class ttUser {
       $this->rank = $val['rank'];
       $this->client_id = $val['client_id'];
       $this->is_client = $this->client_id && !in_array('track_own_time', $this->rights);
+      if ($val['quota_percent']) $this->quota_percent = $val['quota_percent'];
       $this->email = $val['email'];
       $this->lang = $val['lang'];
       $this->decimal_mark = $val['decimal_mark'];
@@ -145,6 +149,8 @@ class ttUser {
       if (isset($_SESSION['behalf_id'])) {
         $this->behalf_id = $_SESSION['behalf_id'];
         $this->behalf_name = $_SESSION['behalf_name'];
+
+        $this->behalfUser = new ttBehalfUser($this->behalf_id, $this->org_id);
       }
       // Set "on behalf" id and name (group).
       if (isset($_SESSION['behalf_group_id'])) {
@@ -824,6 +830,7 @@ class ttUser {
     // Unset things first.
     $this->behalf_id = null;
     $this->behalf_name = null;
+    unset($this->behalfUser);
     unset($_SESSION['behalf_id']);
     unset($_SESSION['behalf_name']);
 
@@ -839,6 +846,8 @@ class ttUser {
     $_SESSION['behalf_name'] = $onBehalfUserName;
     $this->behalf_id = $user_id;
     $this->behalf_name = $onBehalfUserName;
+
+    $this->behalfUser = new ttBehalfUser($this->behalf_id, $this->org_id);
     return;
   }
 

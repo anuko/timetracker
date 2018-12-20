@@ -63,6 +63,8 @@ class ttGroup {
                                 // We need a non-zero count to display some menus.
 
   // Constructor.
+  // Note: org_id is needed because we construct an object in ttUser constructor,
+  // when global $user object does not yet exist.
   function __construct($id, $org_id) {
     $mdb2 = getConnection();
 
