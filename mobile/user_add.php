@@ -159,6 +159,7 @@ if ($request->isPost()) {
         'rate' => $cl_rate,
         'quota_percent' => $cl_quota_percent,
         'group_id' => $user->getGroup(),
+        'org_id' => $user->org_id,
         'role_id' => $cl_role_id,
         'client_id' => $cl_client_id,
         'projects' => $assigned_projects,
