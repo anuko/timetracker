@@ -48,10 +48,15 @@ if (!$user_details) {
 }
 // End of access checks.
 
+$show_quota = $user->isPluginEnabled('mq');
 if ($user->isPluginEnabled('cl'))
   $clients = ttGroupHelper::getActiveClients();
 
-$projects = ttGroupHelper::getActiveProjects();
+$show_projects = MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode();
+if ($show_projects) {
+  $projects = ttGroupHelper::getActiveProjects();
+  if (count($projects) == 0) $show_projects = false;
+}
 $assigned_projects = array();
 
 if ($request->isPost()) {
@@ -66,6 +71,7 @@ if ($request->isPost()) {
   $cl_client_id = $request->getParameter('client');
   $cl_status = $request->getParameter('status');
   $cl_rate = $request->getParameter('rate');
+  $cl_quota_percent = $request->getParameter('quota_percent');
   $cl_projects = $request->getParameter('projects');
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
@@ -82,7 +88,8 @@ if ($request->isPost()) {
   $cl_name = $user_details['name'];
   $cl_login = $user_details['login'];
   $cl_email = $user_details['email'];
-  $cl_rate = str_replace('.', $user->decimal_mark, $user_details['rate']);
+  $cl_rate = str_replace('.', $user->getDecimalMark(), $user_details['rate']);
+  $cl_quota_percent = str_replace('.', $user->getDecimalMark(), $user_details['quota_percent']);
   $cl_role_id = $user_details['role_id'];
   $cl_client_id = $user_details['client_id'];
   $cl_status = $user_details['status'];
@@ -110,6 +117,8 @@ if ($user->isPluginEnabled('cl'))
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','format'=>'.2','value'=>$cl_rate));
+if ($show_quota)
+  $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'quota_percent','format'=>'.2','value'=>$cl_quota_percent));
 
 // Define classes for the projects table.
 class NameCellRenderer extends DefaultCellRenderer {
@@ -162,7 +171,8 @@ if ($request->isPost()) {
     }
     if (!ttValidEmail($cl_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.email'));
     if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
-  
+    if (!ttValidFloat($cl_quota_percent, true)) $err->add($i18n->get('error.field'), $i18n->get('form.quota.quota'));
+
     if ($err->no()) {
       $existing_user = ttUserHelper::getUserByLogin($cl_login);
       if (!$existing_user || ($user_id == $existing_user['id'])) {
@@ -174,6 +184,7 @@ if ($request->isPost()) {
           'email' => $cl_email,
           'status' => $cl_status,
           'rate' => $cl_rate,
+          'quota_percent' => $cl_quota_percent,
           'projects' => $assigned_projects);
         if (in_array('manage_users', $user->rights)) {
           $fields['role_id'] = $cl_role_id;
@@ -226,6 +237,8 @@ $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('active_roles', $active_roles);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
+$smarty->assign('show_quota', $show_quota);
+$smarty->assign('show_projects', $show_projects);
 $smarty->assign('user_id', $user_id);
 $smarty->assign('title', $i18n->get('title.edit_user'));
 $smarty->assign('content_page_name', 'mobile/user_edit.tpl');
