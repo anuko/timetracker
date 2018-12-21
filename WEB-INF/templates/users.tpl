@@ -14,8 +14,11 @@
           <td width="30%" class="tableHeader">{$i18n.label.person_name}</td>
           <td width="30%" class="tableHeader">{$i18n.label.login}</td>
           <td width="20%" class="tableHeader">{$i18n.form.users.role}</td>
-          <td width="10%" class="tableHeader">{$i18n.label.edit}</td>
-          <td width="10%" class="tableHeader">{$i18n.label.delete}</td>
+  {if $show_quota}
+          <td class="tableHeader">{$i18n.label.quota}</td>
+  {/if}
+          <td class="tableHeader">{$i18n.label.edit}</td>
+          <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
   {if $active_users}
     {foreach $active_users as $u}
@@ -28,6 +31,9 @@
           </td>
           <td>{$u.login|escape}</td>
           <td>{$u.role_name|escape}</td>
+      {if $show_quota}
+          <td class="cellRightAligned">{$u.quota_percent}</td>
+      {/if}
       {if $u.group_id != $user->group_id || $u.rank < $user->rank || ($u.rank == $user->rank && $u.id == $user->id)}
           <td><a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a></td>
          {if $u.id != $user->id}<td><a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a></td>{else}<td></td>{/if}
@@ -55,14 +61,20 @@
           <td width="30%" class="tableHeader">{$i18n.label.person_name}</td>
           <td width="30%" class="tableHeader">{$i18n.label.login}</td>
           <td width="20%" class="tableHeader">{$i18n.form.users.role}</td>
-          <td width="10%" class="tableHeader">{$i18n.label.edit}</td>
-          <td width="10%" class="tableHeader">{$i18n.label.delete}</td>
+    {if $show_quota}
+          <td class="tableHeader">{$i18n.label.quota}</td>
+    {/if}
+          <td class="tableHeader">{$i18n.label.edit}</td>
+          <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
     {foreach $inactive_users as $u}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$u.name|escape}</td>
           <td>{$u.login|escape}</td>
           <td>{$u.role_name|escape}</td>
+      {if $show_quota}
+          <td class="cellRightAligned">{$u.quota_percent}</td>
+      {/if}
       {if $u.group_id != $user->group_id || $u.rank < $user->rank}
           <td><a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a></td>
           <td><a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a></td>

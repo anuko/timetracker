@@ -395,7 +395,16 @@ class ttUser {
     $includeSelf = isset($options['include_self']);
 
     $select_part = 'select u.id, u.group_id, u.name';
-    if (isset($options['include_login'])) $select_part .= ', u.login';
+    if (isset($options['include_login'])) {
+      $select_part .= ', u.login';
+      // Piggy-back on include_login to see if we must also include quota_percent.
+      $include_quota = $this->isPluginEnabled('mq');
+      if ($include_quota) {
+        $decimal_mark = $this->getDecimalMark();
+        $replaceDecimalMark = ('.' != $decimal_mark);
+        $select_part .= ', u.quota_percent';
+      }
+    }
     if (!isset($options['include_clients'])) $select_part .= ', r.rights';
     if (isset($options['include_role'])) $select_part .= ', r.name as role_name, r.rank';
 
@@ -429,6 +438,16 @@ class ttUser {
         $isClient = in_array('track_own_time', explode(',', $val['rights'])) ? 0 : 1; // Clients do not have track_own_time right.
         if ($isClient)
           continue; // Skip adding clients.
+      }
+      if ($include_quota) {
+        $quota = $val['quota_percent'];
+        if (null == $quota)
+          $quota = '100'; // Null means 100%. Perhaps enforce not NULLs in db and eliminate this check.
+        elseif (ttEndsWith($quota, '.00'))
+          $quota = substr($quota, 0, strlen($quota)-3); // Trim trailing ".00";
+        elseif ($replaceDecimalMark)
+          $quota = str_replace('.', $decimal_mark, $quota);
+        $val['quota_percent'] = $quota.'%';
       }
       $user_list[] = $val;
     }
