@@ -83,7 +83,7 @@ function handleClientControl() {
     </tr>
 {if $show_quota}
     <tr>
-      <td align="right">{$i18n.form.quota.quota}&nbsp;(%):</td>
+      <td align="right">{$i18n.label.quota}&nbsp;(%):</td>
       <td>{$forms.userForm.quota_percent.control} <a href="https://www.anuko.com/lp/tt_27.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
     </tr>
 {/if}

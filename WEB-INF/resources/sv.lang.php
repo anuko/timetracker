@@ -242,6 +242,7 @@ $i18n_key_words = array(
 // 'label.work_units' => 'Work units',
 // 'label.work_units_short' => 'Units',
 'label.totals_only' => 'Visa endast summeringar',
+'label.quota' => 'Kvot',
 
 // Rubriker för formulär
 'title.error' => 'Fel',
@@ -518,7 +519,6 @@ $i18n_key_words = array(
 // Quotas configuration form. See example at https://timetracker.anuko.com/quotas.php after enabling Monthly quotas plugin.
 'form.quota.year' => 'År',
 'form.quota.month' => 'Månad',
-'form.quota.quota' => 'Kvot',
 'form.quota.workday_hours' => 'Arbetstimmar per dag',
 'form.quota.hint' => 'Om fälten lämnas tomma räknas kvoterna automatiskt ut baserat på arbetstimmar per dag och helgdagar.',
 

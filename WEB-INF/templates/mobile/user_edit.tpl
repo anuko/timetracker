@@ -111,7 +111,7 @@ function handleClientControl() {
     </tr>
 {if $show_quota}
     <tr>
-      <td align="right">{$i18n.form.quota.quota}&nbsp;(%):</td>
+      <td align="right">{$i18n.label.quota}&nbsp;(%):</td>
       <td>{$forms.userForm.quota_percent.control}</td>
     </tr>
 {/if}

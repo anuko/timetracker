@@ -238,6 +238,7 @@ $i18n_key_words = array(
 // 'label.work_units' => 'Work units',
 // 'label.work_units_short' => 'Units',
 'label.totals_only' => 'Solo i totali',
+'label.quota' => 'Quota',
 
 // Form titles.
 // TODO: Improve titles for consistency, so that each title explains correctly what each
@@ -510,7 +511,6 @@ $i18n_key_words = array(
 // Quotas configuration form. See example at https://timetracker.anuko.com/quotas.php after enabling Monthly quotas plugin.
 'form.quota.year' => 'Anno',
 'form.quota.month' => 'Mese',
-'form.quota.quota' => 'Quota',
 'form.quota.workday_hours' => 'Ore lavorative in un giorno',
 'form.quota.hint' => 'Se i valori sono vuoti, le quote vengono calcolate automaticamente basandosi su ore giornaliere e vacanze.',
 

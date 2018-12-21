@@ -272,6 +272,8 @@ $i18n_key_words = array(
 // 'label.work_units' => 'Work units',
 // 'label.work_units_short' => 'Units',
 'label.totals_only' => 'Sadece toplamlar',
+// TODO: translate the following.
+// 'label.quota' => 'Quota',
 
 // Form titles.
 // Form titles.
@@ -574,7 +576,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.quota.year' => 'Year',
 // 'form.quota.month' => 'Month',
-// 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 

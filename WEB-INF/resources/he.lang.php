@@ -264,6 +264,8 @@ $i18n_key_words = array(
 // 'label.work_units' => 'Work units',
 // 'label.work_units_short' => 'Units',
 'labl.totals_only' => 'סיכומים בלבד',
+// TODO: translate the following.
+// 'label.quota' => 'Quota',
 
 // Form titles.
 'title.error' => 'שגיאה',
@@ -546,7 +548,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.quota.year' => 'Year',
 // 'form.quota.month' => 'Month',
-// 'form.quota.quota' => 'Quota',
 // 'form.quota.workday_hours' => 'Hours in a work day',
 // 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
 
