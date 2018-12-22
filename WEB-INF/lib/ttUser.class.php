@@ -441,9 +441,7 @@ class ttUser {
       }
       if ($include_quota) {
         $quota = $val['quota_percent'];
-        if (null == $quota)
-          $quota = '100'; // Null means 100%. Perhaps enforce not NULLs in db and eliminate this check.
-        elseif (ttEndsWith($quota, '.00'))
+        if (ttEndsWith($quota, '.00'))
           $quota = substr($quota, 0, strlen($quota)-3); // Trim trailing ".00";
         elseif ($replaceDecimalMark)
           $quota = str_replace('.', $decimal_mark, $quota);
