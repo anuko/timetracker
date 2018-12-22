@@ -165,7 +165,7 @@
     {/if}
   </tr>
   <tr>
-    <td></td>
+    <td align="left">{$i18n.label.quota}: {$month_quota}</td>
     {if $over_quota}
     <td align="right">{$i18n.form.time.over_quota}: <span style="color: green;">{$quota_remaining}</span></td>
     {else}
