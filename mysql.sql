@@ -91,7 +91,7 @@ CREATE TABLE `tt_users` (
   `role_id` int(11) default NULL,                  # role id
   `client_id` int(11) default NULL,                # client id for "client" user role
   `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
-  `quota_percent` float(6,2) default NULL,         # percent of time quota
+  `quota_percent` float(6,2) NOT NULL default '100.00', # percent of time quota
   `email` varchar(100) default NULL,               # user email
   `created` datetime default NULL,                 # creation timestamp
   `created_ip` varchar(45) default NULL,           # creator ip
@@ -489,4 +489,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.34', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.36', now()); # TODO: change when structure changes.
