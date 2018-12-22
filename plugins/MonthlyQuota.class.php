@@ -94,6 +94,25 @@ class MonthlyQuota {
     return $userMinutes;
   }
 
+  // getUserQuotaFrom1st - obtains a quota for user
+  // from 1st of the month up to and inclusive of $selected_date.
+  public function getUserQuotaFrom1st($selected_date) {
+    // TODO: we may need a better algorithm here. Review.
+    $monthQuotaMinutes = $this->getUserQuota($selected_date->mYear, $selected_date->mMonth);
+    $workdaysInMonth = $this->getNumWorkdays($selected_date->mMonth, $selected_date->mYear);
+
+    // Iterate from 1st up to selected date.
+    $workdaysFrom1st = 0;
+    for ($i = 1; $i <= $selected_date->mDate; $i++) {
+      $date = "$selected_date->mYear-$selected_date->mMonth-$i";
+      if (!ttTimeHelper::isWeekend($date) && !ttTimeHelper::isHoliday($date)) {
+        $workdaysFrom1st++;
+      }
+    }
+    $quotaMinutesFrom1st = (int) ($monthQuotaMinutes * $workdaysFrom1st / $workdaysInMonth);
+    return $quotaMinutesFrom1st;
+  }
+
   // getMany - returns an array of quotas for a given year for group.
   private function getMany($year){
     $sql = "select month, minutes from tt_monthly_quotas".

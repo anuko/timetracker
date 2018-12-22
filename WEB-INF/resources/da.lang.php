@@ -376,6 +376,9 @@ $i18n_key_words = array(
 'form.time.uncompleted' => 'Uafsluttet',
 'form.time.remaining_quota' => 'Resterende kvota',
 'form.time.over_quota' => 'Over kvota',
+// TODO: translate the following.
+// 'form.time.remaining_balance' => 'Remaining balance',
+// 'form.time.over_balance' => 'Over balance',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Denne post blev kun gemt med starttidspunkt. Det er ikke en fejl.',

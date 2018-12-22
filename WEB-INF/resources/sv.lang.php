@@ -380,6 +380,9 @@ $i18n_key_words = array(
 'form.time.uncompleted' => 'Oavslutad',
 'form.time.remaining_quota' => 'Återstående kvot',
 'form.time.over_quota' => 'Kvoten överstigen',
+// TODO: translate the following.
+// 'form.time.remaining_balance' => 'Remaining balance',
+// 'form.time.over_balance' => 'Over balance',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Den här tidsregistreringen har sparats utan sluttid. Fyll i en sluttid och klicka på Spara för att avsluta.',

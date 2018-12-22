@@ -149,7 +149,7 @@
   </td>
 </tr>
 </table>
-{if $time_records}
+
 <table cellpadding="3" cellspacing="1" width="720">
   <tr>
     <td align="left">{$i18n.label.week_total}: {$week_total}</td>
@@ -158,6 +158,14 @@
   {if $user->isPluginEnabled('mq')}
   <tr>
     <td align="left">{$i18n.label.month_total}: {$month_total}</td>
+    {if $over_balance}
+    <td align="right">{$i18n.form.time.over_balance}: <span style="color: green;">{$balance_remaining}</span></td>
+    {else}
+    <td align="right">{$i18n.form.time.remaining_balance}: <span style="color: red;">{$balance_remaining}</span></td>
+    {/if}
+  </tr>
+  <tr>
+    <td></td>
     {if $over_quota}
     <td align="right">{$i18n.form.time.over_quota}: <span style="color: green;">{$quota_remaining}</span></td>
     {else}
@@ -166,5 +174,5 @@
   </tr>
   {/if}
 </table>
-{/if}
+
 {$forms.timeRecordForm.close}

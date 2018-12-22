@@ -352,6 +352,8 @@ $i18n_key_words = array(
 'form.time.uncompleted' => 'Не завершено',
 'form.time.remaining_quota' => 'Доступная квота',
 'form.time.over_quota' => 'Превышение квоты',
+'form.time.remaining_balance' => 'Доступный баланс',
+'form.time.over_balance' => 'Превышение баланса',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Эта запись сохранена только со временем начала. Это не ошибка.',

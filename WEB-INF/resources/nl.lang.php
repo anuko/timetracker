@@ -358,6 +358,9 @@ $i18n_key_words = array(
 'form.time.uncompleted' => 'Onvolledig',
 'form.time.remaining_quota' => 'Te werken uren voor de doelstelling',
 'form.time.over_quota' => 'Meer gewerkte uren dan de doelstelling',
+// TODO: translate the following.
+// 'form.time.remaining_balance' => 'Remaining balance',
+// 'form.time.over_balance' => 'Over balance',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Dit tijdrecord is opgeslagen met alleen een starttijd. Dit is geen fout.',

@@ -365,6 +365,9 @@ $i18n_key_words = array(
 'form.time.uncompleted' => 'Μη ολοκληρωμένο',
 'form.time.remaining_quota' => 'Υπολειπόμενη ποσόστωση',
 'form.time.over_quota' => 'Πάνω από το όριο',
+// TODO: translate the following.
+// 'form.time.remaining_balance' => 'Remaining balance',
+// 'form.time.over_balance' => 'Over balance',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Η καταχώρηση αποθηκεύτηκε μόνο με ώρα έναρξης. Δεν είναι λάθος.',
