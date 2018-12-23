@@ -288,6 +288,7 @@ class ttGroupExportHelper {
         $user_part .= " role_id=\"".$role_id."\"";
         $user_part .= " client_id=\"".$this->clientMap[$user_item['client_id']]."\"";
         $user_part .= " rate=\"".$user_item['rate']."\"";
+        $user_part .= " quota_percent=\"".$user_item['quota_percent']."\"";
         $user_part .= " email=\"".$user_item['email']."\"";
         $user_part .= " status=\"".$user_item['status']."\"";
         $user_part .= "></user>\n";

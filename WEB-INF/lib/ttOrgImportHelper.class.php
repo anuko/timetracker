@@ -247,6 +247,7 @@ class ttOrgImportHelper {
           'login' => $attrs['LOGIN'],
           'password' => $attrs['PASSWORD'],
           'rate' => $attrs['RATE'],
+          'quota_percent' => $attrs['QUOTA_PERCENT'],
           'email' => $attrs['EMAIL'],
           'status' => $attrs['STATUS']), false);
         if ($user_id) {
@@ -775,7 +776,7 @@ class ttOrgImportHelper {
     $group_id = (int) $fields['group_id'];
     $org_id = (int) $fields['org_id'];
 
-    $columns = '(login, password, name, group_id, org_id, role_id, client_id, rate, email, created, created_ip, created_by, status)';
+    $columns = '(login, password, name, group_id, org_id, role_id, client_id, rate, quota_percent, email, created, created_ip, created_by, status)';
 
     $values = 'values (';
     $values .= $mdb2->quote($fields['login']);
@@ -786,6 +787,7 @@ class ttOrgImportHelper {
     $values .= ', '.(int)$fields['role_id'];
     $values .= ', '.$mdb2->quote($fields['client_id']);
     $values .= ', '.$mdb2->quote($fields['rate']);
+    $values .= ', '.$mdb2->quote($fields['quota_percent']);
     $values .= ', '.$mdb2->quote($fields['email']);
     $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
     $values .= ', '.$mdb2->quote($fields['status']);
