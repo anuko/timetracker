@@ -1044,6 +1044,8 @@ if ($_POST) {
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.34', modified = now() where param_name = 'version_db' and param_value = '1.18.26'");
     ttExecute("update `tt_users` u inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.34') set u.quota_percent = 100.00 where u.quota_percent is null");
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.36', modified = now() where param_name = 'version_db' and param_value = '1.18.34'");
+    ttExecute("update `tt_users` u inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.36') set u.quota_percent = 100.00 where u.quota_percent is null");
+    ttExecute("ALTER TABLE `tt_users` modify `quota_percent` float(6,2) NOT NULL default '100.00'");
   }
 
   if ($_POST["cleanup"]) {
