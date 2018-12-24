@@ -26,6 +26,9 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
+import('ttUserHelper');
+import('ttRoleHelper');
+
 // ttRegistrator class is used to register a user in Time Tracker.
 class ttRegistrator {
   var $user_name = null;  // User name.
@@ -83,6 +86,8 @@ class ttRegistrator {
       $this->err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
     if (!ttValidEmail($this->email, true))
       $this->err->add($i18n->get('error.field'), $i18n->get('label.email'));
+    if (!ttUserHelper::canAdd())
+      $this->err->add($i18n->get('error.user_count'));
   }
 
   // The register function registers a user in Time Tracker.
@@ -115,7 +120,6 @@ class ttRegistrator {
       return false;
     }
 
-    import('ttRoleHelper');
     if (!ttRoleHelper::createPredefinedRoles($this->group_id, $this->lang)) {
       $err->add($i18n->get('error.db'));
       return false;
@@ -124,7 +128,7 @@ class ttRegistrator {
     $this->user_id = $this->createUser();
 
     if (!$this->user_id) {
-      $err->add($i18n->get('error.db'));
+      $this->err->add($i18n->get('error.db'));
       return false;
     }
 
