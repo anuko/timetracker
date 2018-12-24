@@ -152,6 +152,7 @@ if ($request->isPost()) {
   if ($user->isPluginEnabled('cl') && ttRoleHelper::isClientRole($cl_role_id) && !$cl_client_id) $err->add($i18n->get('error.client'));
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
   if (!ttValidFloat($cl_quota_percent, true)) $err->add($i18n->get('error.field'), $i18n->get('label.quota'));
+  if (!ttUserHelper::canAdd()) $err->add($i18n->get('error.user_count'));
 
   if ($err->no()) {
     if (!ttUserHelper::getUserByLogin($cl_login)) {

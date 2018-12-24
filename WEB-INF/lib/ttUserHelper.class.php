@@ -386,4 +386,22 @@ class ttUserHelper {
     $sql = "update tt_users set accessed = now(), accessed_ip = $accessed_ip where id = $user->id";
     $mdb2->exec($sql);
   }
+
+  // canAdd determines if we can add a user in case there is a limit.
+  static function canAdd() {
+    $mdb2 = getConnection();
+    $sql = "select param_value from tt_site_config where param_name = 'max_users'";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    if (!$val) return true; // No limit.
+
+    $max_count = $val['param_value'];
+    $sql = "select count(*) as user_count from tt_users where status is not null";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    if ($val['user_count'] < $max_count)
+      return true; // Limit not reached.
+
+    return false;
+  }
 }

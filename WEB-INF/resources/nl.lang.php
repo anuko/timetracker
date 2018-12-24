@@ -101,6 +101,8 @@ $i18n_key_words = array(
 'error.xml' => 'Fout in XML bestand in regel line %d: %s.',
 'error.cannot_import' => 'Kan het volgende niet importeren: %s.',
 'error.format' => 'Bestandsformaat niet valide.',
+// TODO: translate the following.
+// 'error.user_count' => 'Limit on user count.',
 
 // Warning messages.
 // TODO: translate the following.

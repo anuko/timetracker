@@ -100,6 +100,7 @@ $i18n_key_words = array(
 'error.xml' => 'Ошибка в файле XML на строке %d: %s.',
 'error.cannot_import' => 'Невозможно импортировать: %s.',
 'error.format' => 'Неверный формат файла.',
+'error.user_count' => 'Ограничение на количество пользователей.',
 
 // Warning messages.
 'warn.sure' => 'Вы уверены?',

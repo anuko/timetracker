@@ -113,6 +113,7 @@ $i18n_key_words = array(
 // 'error.xml' => 'Error in XML file at line %d: %s.',
 // 'error.cannot_import' => 'Cannot import: %s.',
 // 'error.format' => 'Invalid file format.',
+// 'error.user_count' => 'Limit on user count.',
 
 // Warning messages.
 // TODO: translate the following.

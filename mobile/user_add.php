@@ -149,6 +149,7 @@ if ($request->isPost()) {
   if (!ttValidEmail($cl_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.email'));
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
   if (!ttValidFloat($cl_quota_percent, true)) $err->add($i18n->get('error.field'), $i18n->get('label.quota'));
+  if (!ttUserHelper::canAdd()) $err->add($i18n->get('error.user_count'));
 
   if ($err->no()) {
     if (!ttUserHelper::getUserByLogin($cl_login)) {
