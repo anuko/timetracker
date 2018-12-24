@@ -31,6 +31,7 @@
 class ttOrgImportHelper {
   var $errors               = null; // Errors go here. Set in constructor by reference.
   var $schema_version       = null; // Database schema version from XML file we import from.
+  var $num_users            = 0;    // A number of active and inactive users we are importing.
   var $conflicting_logins   = null; // A comma-separated list of logins we cannot import.
   var $canImport      = true;    // False if we cannot import data due to a conflict such as login collision.
   var $firstPass      = true;    // True during first pass through the file.
@@ -81,6 +82,7 @@ class ttOrgImportHelper {
       // In first pass we check user logins for potential collisions with existing.
       if ($name == 'USER' && $this->canImport) {
         $login = $attrs['LOGIN'];
+        if ('' != $attrs['STATUS']) $this->num_users++;
         if ('' != $attrs['STATUS'] && $this->loginExists($login)) {
           // We have a login collision. Append colliding login to a list of things we cannot import.
           $this->conflicting_logins .= ($this->conflicting_logins ? ", $login" : $login);
@@ -568,6 +570,10 @@ class ttOrgImportHelper {
       $this->canImport = false;
       $this->errors->add($i18n->get('error.user_exists'));
       $this->errors->add(sprintf($i18n->get('error.cannot_import'), $this->conflicting_logins));
+    }
+    if (!ttUserHelper::canAdd($this->num_users)) {
+      $this->canImport = false;
+      $this->errors->add($i18n->get('error.user_count'));
     }
 
     $this->firstPass = false; // We are done with 1st pass.

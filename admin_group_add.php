@@ -99,6 +99,8 @@ if ($request->isPost()) {
     $err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
   if (!ttValidEmail($cl_manager_email, true))
     $err->add($i18n->get('error.field'), $i18n->get('label.email'));
+  if (!ttUserHelper::canAdd())
+    $err->add($i18n->get('error.user_count'));
 
   if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
 

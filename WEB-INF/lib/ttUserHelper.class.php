@@ -388,7 +388,7 @@ class ttUserHelper {
   }
 
   // canAdd determines if we can add a user in case there is a limit.
-  static function canAdd() {
+  static function canAdd($num_users = 1) {
     $mdb2 = getConnection();
     $sql = "select param_value from tt_site_config where param_name = 'max_users'";
     $res = $mdb2->query($sql);
@@ -399,7 +399,7 @@ class ttUserHelper {
     $sql = "select count(*) as user_count from tt_users where status is not null";
     $res = $mdb2->query($sql);
     $val = $res->fetchRow();
-    if ($val['user_count'] < $max_count)
+    if ($val['user_count'] < $max_count - $num_users) // TODO: test this.
       return true; // Limit not reached.
 
     return false;
