@@ -396,10 +396,10 @@ class ttUserHelper {
     if (!$val) return true; // No limit.
 
     $max_count = $val['param_value'];
-    $sql = "select count(*) as user_count from tt_users where status is not null";
+    $sql = "select count(*) as user_count from tt_users where group_id > 0 and status is not null";
     $res = $mdb2->query($sql);
     $val = $res->fetchRow();
-    if ($val['user_count'] < $max_count - $num_users) // TODO: test this.
+    if ($val['user_count'] <= $max_count - $num_users)
       return true; // Limit not reached.
 
     return false;
