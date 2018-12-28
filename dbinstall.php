@@ -131,6 +131,11 @@ if ($request->isGet()) {
     }
   }
 
+  // Check is libxml is enabled (which is a PHP default).
+  if (!function_exists('libxml_clear_errors')) {
+    echo('<font color="red">Error: libxml is not enabled. It is required for import group operation (to parse XML).</font><br>');
+  }
+
   // Check database access.
   require_once('MDB2.php');
   $conn = MDB2::connect(DSN);
