@@ -25,5 +25,11 @@ RUN apt-get install libldap2-dev -y \
 # The above does not work. Files are removed, but
 # image files (zipped or not) are not getting smaller. Why?
 
+# Copy application source code to /var/www/html/.
 COPY . /var/www/html/
-
+# Create configuration file.
+RUN cp /var/www/html/WEB-INF/config.php.dist /var/www/html/WEB-INF/config.php
+# Replace DSN value to something connectable to a Docker container running mariadb.
+RUN sed -i "s|mysqli://root:no@localhost/dbname|mysqli://anuko_user:anuko_pw@anuko_sql/timetracker|g" /var/www/html/WEB-INF/config.php
+# Note that db is defined as anuko_sql/timetracker where anuko_sql is service name and timetracker is db name.
+# See docker-compose.yml for details.

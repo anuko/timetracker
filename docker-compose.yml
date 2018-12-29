@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  # anuko_tt is a web application built as per Dockerfile specification.
+  anuko_tt:
+    build: .
+    image: anuko_timetracker:dev
+    container_name: anuko-timetracker
+    # Use localhost:8080 to connect to timetracker via browser.
+    ports:
+     - "8080:80"
+
+  # anuko_sql is a mariadb instance to which timetracker connects.
+  # Connect parameters are also specified in timetracker Dockerfile after
+  # creation of its configuration file. Specifically, we replace
+  # user name, password, service name (aka resolvable to IP server name
+  # where mariadb runs), and database name there from the defaults.
+  # Apparently, these two sets of credentials must match for successful connect.
+  anuko_sql:
+    image: "mariadb:latest"
+    container_name: anuko-sql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: timetracker
+      MYSQL_USER: anuko_user
+      MYSQL_PASSWORD: anuko_pw
