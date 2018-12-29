@@ -15,7 +15,7 @@ services:
   # creation of its configuration file. Specifically, we replace
   # user name, password, service name (aka resolvable to IP server name
   # where mariadb runs), and database name there from the defaults.
-  # Apparently, these two sets of credentials must match for successful connect.
+  # These two sets of credentials must match for a successful connect.
   anuko_sql:
     image: "mariadb:latest"
     container_name: anuko-sql
@@ -24,3 +24,8 @@ services:
       MYSQL_DATABASE: timetracker
       MYSQL_USER: anuko_user
       MYSQL_PASSWORD: anuko_pw
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+   db-data:
