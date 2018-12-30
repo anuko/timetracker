@@ -1,3 +1,4 @@
+# This file is for development work. Not suitable for production.
 version: '3.7'
 
 services:

@@ -1,3 +1,4 @@
+# This file is for development work. Not suitable for production.
 FROM php:7.2-apache
 
 # Use the default production configuration.
