@@ -259,10 +259,10 @@ if ($request->isPost()) {
     if ($custom_fields) {
       if (!ttValidString($cl_cf_1, !$custom_fields->fields[0]['required'])) $err->add($i18n->get('error.field'), $custom_fields->fields[0]['label']);
     }
-    if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
+    if (MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode()) {
       if (!$cl_project) $err->add($i18n->get('error.project'));
     }
-    if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode && $user->task_required) {
+    if (MODE_PROJECTS_AND_TASKS == $user->getTrackingMode() && $user->task_required) {
       if (!$cl_task) $err->add($i18n->get('error.task'));
     }
     if (strlen($cl_duration) == 0) {
@@ -276,11 +276,11 @@ if ($request->isPost()) {
             $err->add($i18n->get('error.interval'), $i18n->get('label.finish'), $i18n->get('label.start'));
         }
       } else {
-        if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
+        if ((TYPE_START_FINISH == $user->getRecordType()) || (TYPE_ALL == $user->getRecordType())) {
           $err->add($i18n->get('error.empty'), $i18n->get('label.start'));
           $err->add($i18n->get('error.empty'), $i18n->get('label.finish'));
         }
-        if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
+        if ((TYPE_DURATION == $user->getRecordType()) || (TYPE_ALL == $user->getRecordType()))
           $err->add($i18n->get('error.empty'), $i18n->get('label.duration'));
       }
     } else {
