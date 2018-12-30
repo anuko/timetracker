@@ -31,6 +31,6 @@ COPY . /var/www/html/
 # Create configuration file.
 RUN cp /var/www/html/WEB-INF/config.php.dist /var/www/html/WEB-INF/config.php
 # Replace DSN value to something connectable to a Docker container running mariadb.
-RUN sed -i "s|mysqli://root:no@localhost/dbname|mysqli://anuko_user:anuko_pw@anuko_sql/timetracker|g" /var/www/html/WEB-INF/config.php
-# Note that db is defined as anuko_sql/timetracker where anuko_sql is service name and timetracker is db name.
+RUN sed -i "s|mysqli://root:no@localhost/dbname|mysqli://anuko_user:anuko_pw@anuko_db/timetracker|g" /var/www/html/WEB-INF/config.php
+# Note that db is defined as anuko_db/timetracker where anuko_db is service name and timetracker is db name.
 # See docker-compose.yml for details.

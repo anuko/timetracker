@@ -1,4 +1,5 @@
 config.php
+populate.sql
 WEB-INF/templates_c/*.*
 WEB-INF/templates_c/import_*
 WEB-INF/templates_c/tt*
