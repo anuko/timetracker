@@ -10,3 +10,4 @@ upload/
 Thumbs.db
 *.DS_Store
 *~
+.idea/
