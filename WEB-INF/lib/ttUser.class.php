@@ -695,7 +695,8 @@ class ttUser {
       return false;
 
     // Mark user as deleted.
-    $sql = "update tt_users set status = NULL where id = $user_id".
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($this->id);
+    $sql = "update tt_users set status = null $modified_part where id = $user_id".
       " and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
