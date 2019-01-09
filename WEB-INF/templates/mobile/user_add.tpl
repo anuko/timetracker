@@ -40,8 +40,10 @@ function handleClientControl() {
       var isClient = roles[i][1];
       if (isClient == 1)
         clientControl.style.visibility = "visible";
-      else
+      else {
+        clientControl.value = '';
         clientControl.style.visibility = "hidden";
+      }
       break;
     }
   }
