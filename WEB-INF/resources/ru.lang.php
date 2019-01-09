@@ -101,6 +101,7 @@ $i18n_key_words = array(
 'error.cannot_import' => 'Невозможно импортировать: %s.',
 'error.format' => 'Неверный формат файла.',
 'error.user_count' => 'Ограничение на количество пользователей.',
+'error.expired' => 'Достигнута дата экспирации.',
 
 // Warning messages.
 'warn.sure' => 'Вы уверены?',

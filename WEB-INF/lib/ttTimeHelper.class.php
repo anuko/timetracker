@@ -748,4 +748,18 @@ class ttTimeHelper {
 
     return $result;
   }
+
+  // canAdd determines if we can add a record in case there is a limit.
+  static function canAdd() {
+    $mdb2 = getConnection();
+    $sql = "select param_value from tt_site_config where param_name = 'exp_date'";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    if (!$val) return true; // No expiration date.
+
+    if (strtotime($val['param_value']) > time())
+      return true; // Expiration date exists but not reached.
+
+    return false;
+  }
 }

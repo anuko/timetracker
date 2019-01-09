@@ -103,6 +103,7 @@ $i18n_key_words = array(
 'error.format' => 'Bestandsformaat niet valide.',
 // TODO: translate the following.
 // 'error.user_count' => 'Limit on user count.',
+// 'error.expired' => 'Expiration date reached.',
 
 // Warning messages.
 // TODO: translate the following.

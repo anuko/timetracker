@@ -106,6 +106,7 @@ $i18n_key_words = array(
 // 'error.cannot_import' => 'Cannot import: %s.',
 // 'error.format' => 'Invalid file format.',
 // 'error.user_count' => 'Limit on user count.',
+// 'error.expired' => 'Expiration date reached.',
 
 // Warning messages.
 // TODO: translate the following.

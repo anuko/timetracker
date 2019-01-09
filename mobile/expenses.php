@@ -31,6 +31,7 @@ import('form.Form');
 import('ttUserHelper');
 import('ttGroupHelper');
 import('DateAndTime');
+import('ttTimeHelper');
 import('ttExpenseHelper');
 
 // Access checks.
@@ -207,6 +208,7 @@ if ($request->isPost()) {
       if ($selected_date->after($browser_today))
         $err->add($i18n->get('error.future_date'));
     }
+    if (!ttTimeHelper::canAdd()) $err->add($i18n->get('error.expired'));
     // Finished validating input data.
 
     // Prohibit creating entries in locked range.

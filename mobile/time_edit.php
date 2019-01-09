@@ -252,6 +252,7 @@ if ($request->isPost()) {
   }
   if (!ttValidDate($cl_date)) $err->add($i18n->get('error.field'), $i18n->get('label.date'));
   if (!ttValidString($cl_note, true)) $err->add($i18n->get('error.field'), $i18n->get('label.note'));
+  if (!ttTimeHelper::canAdd()) $err->add($i18n->get('error.expired'));
   // Finished validating user input.
 
   // This is a new date for the time record.
