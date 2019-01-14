@@ -362,7 +362,6 @@ $i18n_key_words = array(
 // is 8 hours multiplied by a number of work days. "Remaining balance" and "Over balance" are
 // balance differences with logged hours.
 // The term looks confusing, if you have a better idea how to name these things, let us know.
-// For example, a German could use: Minusstunden and Mehrstunden.
 'form.time.remaining_balance' => 'Remaining balance',
 'form.time.over_balance' => 'Over balance',
 
