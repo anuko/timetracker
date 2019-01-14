@@ -358,7 +358,7 @@ $i18n_key_words = array(
 'form.time.remaining_quota' => 'Remaining quota',
 'form.time.over_quota' => 'Over quota',
 // Note for translators. "Balance" below means accumulated quota for user since 1st of the month
-// until and icluding a selected day. If a quota is 8 hours a day, then the balance
+// until and including a selected day. If a quota is 8 hours a day, then the balance
 // is 8 hours multiplied by a number of work days. "Remaining balance" and "Over balance" are
 // balance differences with logged hours.
 // The term looks confusing, if you have a better idea how to name these things, let us know.
