@@ -56,8 +56,7 @@ $i18n_key_words = array(
 'menu.tasks' => 'Taken',
 'menu.users' => 'Medewerkers',
 'menu.groups' => 'Groepen',
-// TODO: translate the following.
-// 'menu.subgroups' => 'Subgroups',
+'menu.subgroups' => 'Subgroepen',
 'menu.export' => 'Exporteren',
 'menu.clients' => 'Klanten',
 'menu.options' => 'Opties',
@@ -101,18 +100,15 @@ $i18n_key_words = array(
 'error.xml' => 'Fout in XML bestand in regel line %d: %s.',
 'error.cannot_import' => 'Kan het volgende niet importeren: %s.',
 'error.format' => 'Bestandsformaat niet valide.',
-// TODO: translate the following.
-// 'error.user_count' => 'Limit on user count.',
-// 'error.expired' => 'Expiration date reached.',
+'error.user_count' => 'Limiet op aantal gebruikers.',
+'error.expired' => 'Verloop datum is bereikt.',
 
 // Warning messages.
-// TODO: translate the following.
-// 'warn.sure' => 'Are you sure?',
-// 'warn.confirm_save' => 'Date has changed. Confirm saving, not copying this item.',
+'warn.sure' => 'Ben je er zeker van?',
+'warn.confirm_save' => 'De datum is veranderd. Bevestig dat je dit item wilt opslaan en niet wilt kopiëren.',
 
 // Success messages.
-// TODO: translate the following.
-// 'msg.success' => 'Operation completed successfully.',
+'msg.success' => 'De bewerking is succesvol uitgevoerd.',
 
 // Labels for buttons.
 'button.login' => 'Aanmelden',
@@ -154,8 +150,7 @@ $i18n_key_words = array(
 'label.user' => 'Medewerker',
 'label.users' => 'Medewerkers',
 'label.group' => 'Groep',
-// TODO: translate the following.
-// 'label.subgroups' => 'Subgroups',
+'label.subgroups' => 'Subgroepen',
 'label.roles' => 'Rollen',
 'label.client' => 'Klant',
 'label.clients' => 'Klanten',
@@ -231,17 +226,15 @@ $i18n_key_words = array(
 'label.work_units' => 'Werk eenheid',
 'label.work_units_short' => 'Eenheid',
 'label.totals_only' => 'Alleen totalen',
-'label.quota' => 'Quota',
+'label.quota' => 'Maanddoel',
 
 // Form titles.
 'title.error' => 'Fout',
-// TODO: Translate the following.
-// 'title.success' => 'Success',
+'title.success' => 'Succes',
 'title.login' => 'Aanmelden',
 'title.groups' => 'Groepen',
-// TODO: translate the following.
-// 'title.subgroups' => 'Subgroups',
-// 'title.add_group' => 'Adding Group',
+'title.subgroups' => 'Subgroepen',
+'title.add_group' => 'Groep toevoegen',
 'title.edit_group' => 'Groep bewerken',
 'title.delete_group' => 'Groep aan het verwijderen',
 'title.reset_password' => 'Wachtwoord herstellen',
@@ -359,11 +352,11 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(uu:mm of 0.0u)',
 'form.time.billable' => 'Factureerbaar',
 'form.time.uncompleted' => 'Onvolledig',
-'form.time.remaining_quota' => 'Te werken uren voor de doelstelling',
-'form.time.over_quota' => 'Meer gewerkte uren dan de doelstelling',
-// TODO: translate the following.
-// 'form.time.remaining_balance' => 'Remaining balance',
-// 'form.time.over_balance' => 'Over balance',
+// TODO: The following 4 strings may need to be shorter for mobile apps.
+'form.time.remaining_quota' => 'Nog te werken uren voor de doelstelling deze maand',
+'form.time.over_quota' => 'Meer gewerkte uren dan de doelstelling deze maand',
+'form.time.remaining_balance' => 'Minder gewerkte uren dan de doelstelling in ratio met de verstreken dagen',
+'form.time.over_balance' => 'Meer gewerkte uren dan de doelstelling in ratio met de verstreken dagen',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Dit tijdrecord is opgeslagen met alleen een starttijd. Dit is geen fout.',
@@ -475,8 +468,7 @@ $i18n_key_words = array(
 'form.group_edit.allow_overlap' => 'Sta overlapping van tijden toe',
 'form.group_edit.future_entries' => 'Toevoegingen toestaan in de toekomst',
 'form.group_edit.uncompleted_indicators' => 'Onvolledige indicatoren',
-// TODO: translate the following.
-// 'form.group_edit.confirm_save' => 'Confirm saving',
+'form.group_edit.confirm_save' => 'Bevestig dat je wilt opslaan',
 'form.group_edit.allow_ip' => 'Toegestane IP adressen',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
