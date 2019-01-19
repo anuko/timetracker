@@ -96,7 +96,7 @@ class Auth_ldap extends Auth {
 
     $lc = ldap_connect($this->params['server']);
 
-    if (isTrue(AUTH_DEBUG)) {
+    if (isTrue('AUTH_DEBUG')) {
       echo '<br />';
       echo '$lc='; var_dump($lc); echo '<br />';
       echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
@@ -106,7 +106,7 @@ class Auth_ldap extends Auth {
 
     ldap_set_option($lc, LDAP_OPT_PROTOCOL_VERSION, 3);
     ldap_set_option($lc, LDAP_OPT_REFERRALS, 0);
-    if (isTrue(AUTH_DEBUG)) {
+    if (isTrue('AUTH_DEBUG')) {
       ldap_set_option($lc, LDAP_OPT_DEBUG_LEVEL, 7);
     }
 
@@ -119,13 +119,13 @@ class Auth_ldap extends Auth {
         $login .= '@' . $this->params['default_domain'];
       }
 
-      if (isTrue(AUTH_DEBUG)) {
+      if (isTrue('AUTH_DEBUG')) {
         echo '$login='; var_dump($login); echo '<br />';
       }
 
       $lb = @ldap_bind($lc, $login, $password);
 
-      if (isTrue(AUTH_DEBUG)) {
+      if (isTrue('AUTH_DEBUG')) {
         echo '$lb='; var_dump($lb); echo '<br />';
         echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
       }
@@ -142,7 +142,7 @@ class Auth_ldap extends Auth {
         $fields = array('memberof');
         $sr = @ldap_search($lc, $this->params['base_dn'], $filter, $fields);
 
-        if (isTrue(AUTH_DEBUG)) {
+        if (isTrue('AUTH_DEBUG')) {
           echo '$sr='; var_dump($sr); echo '<br />';
           echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
         }
@@ -154,7 +154,7 @@ class Auth_ldap extends Auth {
 
         $entries = @ldap_get_entries($lc, $sr);
 
-        if (isTrue(AUTH_DEBUG)) {
+        if (isTrue('AUTH_DEBUG')) {
           echo '$entries='; var_dump($entries); echo '<br />';
           echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
         }
@@ -173,7 +173,7 @@ class Auth_ldap extends Auth {
           $groups[] = substr($grp_fields[0], 3);
         }
 
-        if (isTrue(AUTH_DEBUG)) {
+        if (isTrue('AUTH_DEBUG')) {
           echo '$member_of'; var_dump($member_of); echo '<br />';
         };
 
@@ -195,7 +195,7 @@ class Auth_ldap extends Auth {
       // Assuming OpenLDAP server.
       $login_oldap = 'uid='.$login.','.$this->params['base_dn'];
 
-      if (isTrue(AUTH_DEBUG)) {
+      if (isTrue('AUTH_DEBUG')) {
         echo '$login_oldap='; var_dump($login_oldap); echo '<br />';
       }
 
@@ -207,7 +207,7 @@ class Auth_ldap extends Auth {
 
       $lb = @ldap_bind($lc, $login_oldap, $password);
 
-      if (isTrue(AUTH_DEBUG)) {
+      if (isTrue('AUTH_DEBUG')) {
         echo '$lb='; var_dump($lb); echo '<br />';
         echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
       }
@@ -225,7 +225,7 @@ class Auth_ldap extends Auth {
         $fields = array('samaccountname', 'mail', 'memberof', 'department', 'displayname', 'telephonenumber', 'primarygroupid');
         $sr = @ldap_search($lc, $this->params['base_dn'], $filter, $fields);
 
-        if (isTrue(AUTH_DEBUG)) {
+        if (isTrue('AUTH_DEBUG')) {
           echo '$sr='; var_dump($sr); echo '<br />';
           echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
         }
@@ -238,7 +238,7 @@ class Auth_ldap extends Auth {
 
         $entries = @ldap_get_entries($lc, $sr);
 
-        if (isTrue(AUTH_DEBUG)) {
+        if (isTrue('AUTH_DEBUG')) {
           echo '$entries='; var_dump($entries); echo '<br />';
           echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
         }
@@ -258,7 +258,7 @@ class Auth_ldap extends Auth {
           $groups[] = substr($grp_fields[0], 3);
         }
 
-        if (isTrue(AUTH_DEBUG)) {
+        if (isTrue('AUTH_DEBUG')) {
           echo '$member_of'; var_dump($member_of); echo '<br />';
         }
 

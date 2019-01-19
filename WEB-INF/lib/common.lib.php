@@ -165,7 +165,7 @@ function check_extension($ext)
 // isTrue is a helper function to return correct false for older config.php values defined as a string 'false'.
 function isTrue($val)
 {
-  return ($val === true);
+  return (defined($val) && constant($val) === true);
 }
 
 // ttValidString is used to check user input to validate a string.

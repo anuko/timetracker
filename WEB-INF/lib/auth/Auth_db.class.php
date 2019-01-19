@@ -57,7 +57,7 @@ class Auth_db extends Auth {
       return array('login'=>$login,'id'=>$val['id']);
     } else {
       // If the OLD_PASSWORDS option is defined - set it.
-      if (isTrue(OLD_PASSWORDS)) {
+      if (isTrue('OLD_PASSWORDS')) {
         $sql = "SET SESSION old_passwords = 1";
         $res = $mdb2->query($sql);
         if (is_a($res, 'PEAR_Error')) {

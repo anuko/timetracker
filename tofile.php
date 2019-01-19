@@ -94,7 +94,7 @@ if ('xml' == $type) {
       print "\t<".$group_by_tag."><![CDATA[".$subtotal['name']."]]></".$group_by_tag.">\n";
       if ($bean->getAttribute('chduration')) {
         $val = $subtotal['time'];
-        if($val && isTrue(EXPORT_DECIMAL_DURATION))
+        if($val && isTrue('EXPORT_DECIMAL_DURATION'))
           $val = time_to_decimal($val);
         print "\t<duration><![CDATA[".$val."]]></duration>\n";
       }
@@ -126,7 +126,7 @@ if ('xml' == $type) {
       if ($bean->getAttribute('chfinish')) print "\t<finish><![CDATA[".$item['finish']."]]></finish>\n";
       if ($bean->getAttribute('chduration')) {
         $duration = $item['duration'];
-        if($duration && isTrue(EXPORT_DECIMAL_DURATION))
+        if($duration && isTrue('EXPORT_DECIMAL_DURATION'))
           $duration = time_to_decimal($duration);
           print "\t<duration><![CDATA[".$duration."]]></duration>\n";
       }
@@ -179,7 +179,7 @@ if ('csv' == $type) {
       print '"'.$subtotal['name'].'"';
       if ($bean->getAttribute('chduration')) {
         $val = $subtotal['time'];
-        if($val && isTrue(EXPORT_DECIMAL_DURATION))
+        if($val && isTrue('EXPORT_DECIMAL_DURATION'))
           $val = time_to_decimal($val);
         print ',"'.$val.'"';
       }
@@ -223,7 +223,7 @@ if ('csv' == $type) {
       if ($bean->getAttribute('chfinish')) print ',"'.$item['finish'].'"';
       if ($bean->getAttribute('chduration')) {
         $val = $item['duration'];
-        if($val && isTrue(EXPORT_DECIMAL_DURATION))
+        if($val && isTrue('EXPORT_DECIMAL_DURATION'))
           $val = time_to_decimal($val);
         print ',"'.$val.'"';
       }

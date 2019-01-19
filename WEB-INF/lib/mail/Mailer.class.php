@@ -104,8 +104,8 @@ class Mailer {
         $port = defined('MAIL_SMTP_PORT') ? MAIL_SMTP_PORT : '25';
         $username = defined('MAIL_SMTP_USER') ? MAIL_SMTP_USER : null;
         $password = defined('MAIL_SMTP_PASSWORD') ? MAIL_SMTP_PASSWORD : null;
-        $auth = isTrue(MAIL_SMTP_AUTH);
-        $debug = isTrue(MAIL_SMTP_DEBUG);
+        $auth = isTrue('MAIL_SMTP_AUTH');
+        $debug = isTrue('MAIL_SMTP_DEBUG');
 
         $mail = Mail::factory('smtp', array ('host' => $host,
           'port' => $port,
@@ -116,7 +116,7 @@ class Mailer {
         break;
     }
 
-    if (isTrue(MAIL_SMTP_DEBUG))
+    if (isTrue('MAIL_SMTP_DEBUG'))
       PEAR::setErrorHandling(PEAR_ERROR_PRINT);
 
     $res = $mail->send($recipients, $headers, $data);
