@@ -340,88 +340,82 @@ $i18n_key_words = array(
 'dropdown.current_month' => 'käesolev kuu',
 'dropdown.previous_month' => 'eelmine kuu',
 'dropdown.selected_month' => 'kuu',
-// TODO: translate the following.
-// 'dropdown.current_year' => 'this year',
-// 'dropdown.previous_year' => 'previous year',
-// 'dropdown.selected_year' => 'year',
-'dropdown.all_time' => 'kõik ajad',
+'dropdown.current_year' => 'käesolev aasta',
+'dropdown.previous_year' => 'eelmine aasta',
+'dropdown.selected_year' => 'aasta',
+'dropdown.all_time' => 'kõik ajavahemikud',
 'dropdown.projects' => 'projektid',
-// TODO: translate the following.
-// 'dropdown.tasks' => 'tasks',
+'dropdown.tasks' => 'tööülesanded',
 'dropdown.clients' => 'kliendid',
-// TODO: translate the following.
-// 'dropdown.select' => '--- select ---',
-// 'dropdown.select_invoice' => '--- select invoice ---',
+'dropdown.select' => '--- vali ---',
+'dropdown.select_invoice' => '--- vali arve ---',
 'dropdown.status_active' => 'aktiivne',
-// TODO: translate the following.
-// 'dropdown.status_inactive' => 'inactive',
-// 'dropdown.delete' => 'delete',
-// 'dropdown.do_not_delete' => 'do not delete',
-// 'dropdown.paid' => 'paid',
-// 'dropdown.not_paid' => 'not paid',
+'dropdown.status_inactive' => 'mitte aktiivne',
+'dropdown.delete' => 'kustuta',
+'dropdown.do_not_delete' => 'ära kustuta',
+'dropdown.paid' => 'makstud',
+'dropdown.not_paid' => 'mitte makstud',
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Unustasid salasõna?',
-// TODO: translate the following.
-// 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
+'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> on lihtne, lihtsalt kasutatav ja avatud lähtekoodiga ajaarvestussüsteem.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
-'form.reset_password.message' => 'Salasõna tühjendamise käsk edastatud.', // TODO: add "by email" to match the English string.
-// TODO: translate the following.
-// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+'form.reset_password.message' => 'Salasõna tühistamise teade on saadetud e-postile.',
+'form.reset_password.email_subject' => 'Anuko Time Tracker, parooli tühistamise nõue',
+'form.reset_password.email_body' => "Lugupeetud Kasutaja,\n\nIP-lt %s on nõutud Teie salasõna lähtestamist. Palun avage allolev link, kui soovite oma parooli lähtestada.\n\n%s\n\nAnuko Time Tracker on lihtne, lihtsalt kasutatav ja avatud lähtekoodiga ajaarvestussüsteem. Lisainfo saamiseks külastage https://www.anuko.com lehekülge.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
-// TODO: translate the following.
-// 'form.change_password.tip' => 'Type new password and click on Save.',
+'form.change_password.tip' => 'Kirjuta siia oma uus parool ja salvesta.',
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
-// TODO: translate the following.
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
-'form.time.billable' => 'Arvestatav',
-// TODO: translate the following.
-// 'form.time.uncompleted' => 'Uncompleted',
-// 'form.time.remaining_quota' => 'Remaining quota',
-// 'form.time.over_quota' => 'Over quota',
-// 'form.time.remaining_balance' => 'Remaining balance',
-// 'form.time.over_balance' => 'Over balance',
+'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.billable' => 'Arveldatav',
+'form.time.uncompleted' => 'Lõpetamata',
+'form.time.remaining_quota' => 'Allesolev kvoot',
+'form.time.over_quota' => 'Üle kvoodi',
+// Note for translators. "Balance" below means accumulated quota for user since 1st of the month
+// until and including a selected day. If a quota is 8 hours a day, then the balance
+// is 8 hours multiplied by a number of work days. "Remaining balance" and "Over balance" are
+// balance differences with logged hours.
+// The term looks confusing, if you have a better idea how to name these things, let us know.
+'form.time.remaining_balance' => 'Järelejäänud kontoseis',  // TODO: check as per above comment.
+'form.time.over_balance' => 'Üle piirmäära', // // TODO: check as per above comment.
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Kanne salvestati ainult alguse ajaga. See ei ole viga.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
-// TODO: translate the following.
-// 'form.week.new_entry' => 'New entry',
+'form.week.new_entry' => 'Uus kirje',
 
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Salvesta lemmikuna',
-// TODO: translate the following.
-// 'form.reports.confirm_delete' => 'Are you sure you want to delete this favorite report?',
-'form.reports.include_billable' => 'arvestatav',
-'form.reports.include_not_billable' => 'mittearvestatav',
-// TODO: translate the following.
-// 'form.reports.include_invoiced' => 'invoiced',
-// 'form.reports.include_not_invoiced' => 'not invoiced',
+'form.reports.confirm_delete' => 'Oled kindel, et soovid kustutada oma lemmik raportid?',
+'form.reports.include_billable' => 'arveldatav',
+'form.reports.include_not_billable' => 'mittearveldatav',
+
+// TODO: Check if translation of form.reports.include_invoiced and form.reports.include_not_invoiced is correct.
+// "Invoiced" means that an invoice was issued to client, but may not be necessarily "paid" (yet).
+// For paid status there is a plugin called "Paid status", that allows you to mark invoice items as "paid".
+// Our concern is that Google auto-translates "arveldamata" as unpaid. Therefore, we may need a fix here.
+// 'form.reports.include_invoiced' => 'arveldatud', // TODO: fix as per the above comment, if needed.
+// 'form.reports.include_not_invoiced' => 'arveldamata', // TODO: fix as per the above comment, if needed.
+
 'form.reports.select_period' => 'Vali ajaperiood',
 'form.reports.set_period' => 'või märgi kuupäevad',
 'form.reports.show_fields' => 'Näita välju',
 'form.reports.group_by' => 'Grupeeri',
-'form.reports.group_by_no' => '--- ilma grupeerimata ---',
+'form.reports.group_by_no' => '--- grupeerimata ---',
 'form.reports.group_by_date' => 'kuupäev',
 'form.reports.group_by_user' => 'kasutaja',
-// TODO: translate the following.
-// 'form.reports.group_by_client' => 'client',
+'form.reports.group_by_client' => 'klient',
 'form.reports.group_by_project' => 'projekt',
-// TODO: translate the following.
-// 'form.reports.group_by_task' => 'task',
+'form.reports.group_by_task' => 'tööülesanne',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
-'form.report.export' => 'Eksportimine', // TODO: is this correct? We want a verb as in "Export XML" - see report export options.
-                                        // The current combined English string is "Export PDF, XML or CSV".
-                                        // Meaning: user can have a displayed report in these formats.
-// TODO: translate the following.
-// 'form.report.assign_to_invoice' => 'Assign to invoice',
+'form.report.export' => 'Eksport',
+'form.report.assign_to_invoice' => 'Lisa arvele',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
@@ -429,30 +423,26 @@ $i18n_key_words = array(
 'form.invoice.person' => 'Isik',
 
 // Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
-// 'form.invoice.invoice_to_delete' => 'Invoice to delete',
-// 'form.invoice.invoice_entries' => 'Invoice entries',
-// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
+'form.invoice.invoice_to_delete' => 'Kustutatav arve',
+'form.invoice.invoice_entries' => 'Arve kirjed',
+'form.invoice.confirm_deleting_entries' => 'Palun kinnita oma Time Tracker\\\'i arve kirjete kustutamise soovi.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
-// TODO: translate the following.
-// 'form.charts.interval' => 'Interval',
-// 'form.charts.chart' => 'Chart',
+'form.charts.interval' => 'Ajavahemik',
+'form.charts.chart' => 'Diagramm',
 
 // Projects form. See example at https://timetracker.anuko.com/projects.php
-// TODO: translate the following.
-// 'form.projects.active_projects' => 'Active Projects',
-// 'form.projects.inactive_projects' => 'Inactive Projects',
+'form.projects.active_projects' => 'Aktiivsed projektid',
+'form.projects.inactive_projects' => 'Mitteaktiivsed projektid',
 
 // Tasks form. See example at https://timetracker.anuko.com/tasks.php
-// TODO: translate the following.
-// 'form.tasks.active_tasks' => 'Active Tasks',
-// 'form.tasks.inactive_tasks' => 'Inactive Tasks',
+'form.tasks.active_tasks' => 'Aktiivsed tööülesanded',
+'form.tasks.inactive_tasks' => 'Mitteaktiivsed tööülesanded',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
-// TODO: translate the following.
-// 'form.users.active_users' => 'Active Users',
-// 'form.users.inactive_users' => 'Inactive Users',
-// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
+'form.users.active_users' => 'Aktiivsed kasutajad',
+'form.users.inactive_users' => 'Mitteaktiivsed kasutajad',
+'form.users.uncompleted_entry' => 'Kasutajal on lõpetamata aja kanne',
 'form.users.role' => 'Roll',
 'form.users.manager' => 'Haldur',
 'form.users.comanager' => 'Kaashaldur',
@@ -460,34 +450,31 @@ $i18n_key_words = array(
 'form.users.default_rate' => 'Vaikimisi tunni hind',
 
 // Editing User form. See example at https://timetracker.anuko.com/user_edit.php
-// TODO: translate the following.
-// 'form.user_edit.swap_roles' => 'Swap roles',
+'form.user_edit.swap_roles' => 'Rollivahetus',
 
 // Roles form. See example at https://timetracker.anuko.com/roles.php
-// TODO: translate the following.
+// TODO: translate the following. Proposed 'Aktiivne roll' and 'Mitteaktiivne roll' seem problematic,
+// as they apper to refer to a singulr role (while we need multiple roles, similar to form.projects.active_projects).
 // 'form.roles.active_roles' => 'Active Roles',
 // 'form.roles.inactive_roles' => 'Inactive Roles',
-// 'form.roles.rank' => 'Rank',
-// 'form.roles.rights' => 'Rights',
-// 'form.roles.assigned' => 'Assigned',
-// 'form.roles.not_assigned' => 'Not assigned',
+'form.roles.rank' => 'Seisus',
+'form.roles.rights' => 'Õigused',
+'form.roles.assigned' => 'Määratud',
+'form.roles.not_assigned' => 'Määramata',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
-// TODO: translate the following.
-// 'form.clients.active_clients' => 'Active Clients',
-// 'form.clients.inactive_clients' => 'Inactive Clients',
+'form.clients.active_clients' => 'Aktiivsed kliendid',
+'form.clients.inactive_clients' => 'Mitteaktiivsed kliendid',
 
 // Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
-// TODO: translate the following.
-// 'form.client.client_to_delete' => 'Client to delete',
-// 'form.client.client_entries' => 'Client entries',
+'form.client.client_to_delete' => 'Kustutatav klient',
+'form.client.client_entries' => 'Kliendi kirjed',
 
 // Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
-// TODO: replace "team" with "group" in the string below.
-'form.export.hint' => 'Võid kogu meeskonna andmed eksportida xml-faili. Sellest võib olla kasu kui vahetad serverit.',
+// TODO: replace "meeskonna" with "grupp" in the string below.
+'form.export.hint' => 'Võid kogu meeskonna andmed eksportida XML faili. Sellest võib olla kasu, kui vahetad serverit.',
 'form.export.compression' => 'Pakkimine',
-// TODO: translate the following.
-// 'form.export.compression_none' => 'none',
+'form.export.compression_none' => 'puudub',
 'form.export.compression_bzip' => 'bzip',
 
 // Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
