@@ -132,7 +132,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.work_units.control}</td>
-            <td><label for="week_view">{$i18n.label.work_units}</label> <span id="work_units_config"><a href="work_units.php">{$i18n.label.configure}</a></span></td>
+            <td><label for="work_units">{$i18n.label.work_units}</label> <span id="work_units_config"><a href="work_units.php">{$i18n.label.configure}</a></span></td>
           </tr>
           <tr>
             <td colspan="2">&nbsp;</td>
