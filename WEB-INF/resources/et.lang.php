@@ -36,329 +36,280 @@ $i18n_months = array('Jaanuar', 'Veebruar', 'Märts', 'Aprill', 'Mai', 'Juuni', 
 $i18n_weekdays = array('Pühapäev', 'Esmaspäev', 'Teisipäev', 'Kolmapäev', 'Neljapäev', 'Reede', 'Laupäev');
 $i18n_weekdays_short = array('P', 'E', 'T', 'K', 'N', 'R', 'L');
 // format mm/dd
-$i18n_holidays = array('01/01', '02/24', '04/10', '04/12', '05/01', '05/31', '06/23', '06/24', '08/20', '12/24', '12/25', '12/26');
+$i18n_holidays = array('01/01', '02/24', '04/19', '04/21', '05/01', '06/09', '06/23', '06/24', '08/20', '12/24', '12/25', '12/26');
 
 $i18n_key_words = array(
 
 // Menus - short selection strings that are displayed on top of application web pages.
 // Example: https://timetracker.anuko.com (black menu on top).
-'menu.login' => 'Login',
-'menu.logout' => 'Logout',
-// TODO: translate the following.
-// 'menu.forum' => 'Forum',
+'menu.login' => 'Sisene',
+'menu.logout' => 'Välju',
+'menu.forum' => 'Foorum',
 'menu.help' => 'Abiinfo',
-// TODO: translate the following.
-// 'menu.create_group' => 'Create Group',
-'menu.profile' => 'Profiili',
-// TODO: translate the following.
-// 'menu.group' => 'Group',
-// 'menu.plugins' => 'Plugins',
-'menu.time' => 'Aeg',
-// TODO: translate the following.
-// 'menu.expenses' => 'Expenses',
+'menu.create_group' => 'Loo grupp',
+'menu.profile' => 'Profiil',
+'menu.group' => 'Grupp',
+'menu.plugins' => 'Lisad',
+'menu.time' => 'Ajaarvestus',
+'menu.expenses' => 'Kulud',
 'menu.reports' => 'Raportid',
-// TODO: translate the following.
-// 'menu.charts' => 'Charts',
+'menu.charts' => 'Diagrammid',
 'menu.projects' => 'Projektid',
-// TODO: translate the following.
-// 'menu.tasks' => 'Tasks',
+'menu.tasks' => 'Tööülesanded',
 'menu.users' => 'Kasutajad',
-// TODO: translate the following.
-// 'menu.groups' => 'Groups',
-// 'menu.subgroups' => 'Subgroups',
-// 'menu.export' => 'Export',
+'menu.groups' => 'Grupid',
+'menu.subgroups' => 'Alamgrupid',
+'menu.export' => 'Andmete salvestamine',
 'menu.clients' => 'Kliendid',
 'menu.options' => 'Suvandid',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following.
-// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
-// 'footer.credits' => 'Credits',
-// 'footer.license' => 'License',
-// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
+'footer.contribute_msg' => 'Sul on võimalik mitmeti panustada Time Tracker\\\'i arendamisse.',
+'footer.credits' => 'Tunnustused',
+'footer.license' => 'Litsents',
+'footer.improve' => 'Panusta', // Translators: this could mean "Improve", if it makes better sense in your language.
                                      // This is a link to a webpage that describes how to contribute to the project.
 
 // Error messages.
-// TODO: translate the following.
-// 'error.access_denied' => 'Access denied.',
-// 'error.sys' => 'System error.',
+'error.access_denied' => 'Puudub ligipääs.',
+'error.sys' => 'Rakenduse viga.',
 'error.db' => 'Andmebaasi viga.',
-// TODO: translate the following.
-// 'error.feature_disabled' => 'Feature is disabled.',
-'error.field' => 'Valed "{0}" andmed.',
+'error.feature_disabled' => 'Rakenduse funktsionaalsus on välja lülitatud.',
+'error.field' => 'Välja "{0}" andmed ei vasta nõutele.',
 'error.empty' => 'Väli "{0}" on tühi.',
 'error.not_equal' => 'Väli "{0}" ei ole väljaga "{1}" võrdne.',
-// TODO: translate the following.
-// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+'error.interval' => 'Välja "{0}" väärtus peab olema suurem kui välja "{1}" väärtus.',
 'error.project' => 'Vali projekt.',
-// TODO: translate the following.
-// 'error.task' => 'Select task.',
+'error.task' => 'Vali tööülesanne.',
 'error.client' => 'Vali klient.',
-// TODO: translate the following.
-// 'error.report' => 'Select report.',
-// 'error.record' => 'Select record.',
-'error.auth' => 'Vale login või salasõna.',
-// TODO: translate the following.
-// 'error.user_exists' => 'User with this login already exists.',
-// 'error.object_exists' => 'Object with this name already exists.',
-// 'error.invoice_exists' => 'Invoice with this number already exists.',
-// 'error.role_exists' => 'Role with this rank already exists.',
-// 'error.no_invoiceable_items' => 'There are no invoiceable items.',
-// 'error.no_login' => 'No user with this login.',
-'error.no_groups' => 'Sinu andmebaas on tühi. Logi adminina sisse ja loo uus meeskond.',  // TODO: replace "team" with "group".
+'error.report' => 'Vali raport.',
+'error.record' => 'Vali kirje.',
+'error.auth' => 'Autentimine ebaõnnestus.',
+'error.user_exists' => 'Selle nimega kasutaja on juba kasutusel.',
+'error.object_exists' => 'Sellise nimega objekt on juba olemas.',
+'error.invoice_exists' => 'Arve number on juba kasutusel.',
+'error.role_exists' => 'Kasutaja roll on juba kasutusel.',
+'error.no_invoiceable_items' => 'Arveldatavaid arveid ei leitud.',
+'error.no_login' => 'Sellise tunnusega kasutajat ei ole.',
+'error.no_groups' => 'Sinu andmebaas on tühi. Logi administraatorina sisse ja loo uus meeskond.',
 'error.upload' => 'Viga faili vastuvõtmisel.',
-// TODO: translate the following.
-// 'error.range_locked' => 'Date range is locked.',
-// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
-// 'error.no_email' => 'No email associated with this login.',
-// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
-// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
-// 'error.overlap' => 'Time interval overlaps with existing records.',
-// 'error.future_date' => 'Date is in future.',
-// TODO: translate the following.
-// 'error.xml' => 'Error in XML file at line %d: %s.',
-// 'error.cannot_import' => 'Cannot import: %s.',
-// 'error.format' => 'Invalid file format.',
-// 'error.user_count' => 'Limit on user count.',
-// 'error.expired' => 'Expiration date reached.',
+'error.range_locked' => 'Kuupäevavahemik on lukus.',
+'error.mail_send' => 'E-posti saatmisel tekkis viga. Vea tuvastamiseks kasuta MAIL_SMTP_DEBUG muutujat.',
+'error.no_email' => 'Kasutajaga pole ühtegi e-posti seotud.',
+'error.uncompleted_exists' => 'Leiti varasemalt lõpetamata kirje. Sulge või kustuta see.',
+'error.goto_uncompleted' => 'Ava lõpetamata kirje.',
+'error.overlap' => 'Ajavahemik kattub varasema kirjega.',
+'error.future_date' => 'Kuupäev on tulevikus.',
+'error.xml' => 'Viga XML failis, real %d: %s.',
+'error.cannot_import' => 'Ebaõnnestunud import: %s.',
+'error.format' => 'Faili formaat on vale.',
+'error.user_count' => 'Kasutajate arvu piirang.',
+'error.expired' => 'Kehtivusaeg on lõppenud.',
 
 // Warning messages.
-// TODO: translate the following.
-// 'warn.sure' => 'Are you sure?',
-// 'warn.confirm_save' => 'Date has changed. Confirm saving, not copying this item.',
+'warn.sure' => 'Oled kindel?',
+'warn.confirm_save' => 'Kuupäeva on muudetud. Muudatuse kinnitamisel ei varundata esialgset kirjet, vaid muudetakse seda. Kinnitad muudatuse?',
 
 // Success messages.
-// TODO: translate the following.
-// 'msg.success' => 'Operation completed successfully.',
+'msg.success' => 'Tegevus oli edukas.',
 
 // Labels for buttons.
-'button.login' => 'Login',
-'button.now' => 'Kohe',
+'button.login' => 'Sisene',
+'button.now' => 'Nüüd',
 'button.save' => 'Salvesta',
-// TODO: translate the following.
-// 'button.copy' => 'Copy',
+'button.copy' => 'Kopeeri',
 'button.cancel' => 'Tühista',
 'button.submit' => 'Postita',
 'button.add' => 'Lisa',
 'button.delete' => 'Kustuta',
 'button.generate' => 'Loo',
-'button.reset_password' => 'Tühjenda salasõna',
+'button.reset_password' => 'Lähtesta salasõna',
 'button.send' => 'Saada',
-'button.send_by_email' => 'Saada e-mailiga',
-'button.create_group' => 'Loo meeskond', // TODO: replace "team" with "group".
-'button.export' => 'Ekspordi meeskond', // TODO: replace "team" with "group".
-'button.import' => 'Impordi meeskond', // TODO: replace "team" with "group".
-// TODO: translate the following.
-// 'button.close' => 'Close',
-// 'button.stop' => 'Stop',
+'button.send_by_email' => 'Saada e-postiga',
+'button.create_group' => 'Loo grupp',
+'button.export' => 'Ekspordi grupp',
+'button.import' => 'Impordi grupp',
+'button.close' => 'Sulge',
+'button.stop' => 'Stopp',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-// TODO: translate the following.
-// 'label.group_name' => 'Group name',
-// 'label.address' => 'Address',
+'label.group_name' => 'Grupi nimi',
+'label.address' => 'Aadress',
 'label.currency' => 'Valuuta',
-// TODO: translate the following.
-// 'label.manager_name' => 'Manager name',
-// 'label.manager_login' => 'Manager login',
+'label.manager_name' => 'Halduri nimi',
+'label.manager_login' => 'Halduri kasutajanimi',
 'label.person_name' => 'Nimi',
 'label.thing_name' => 'Nimi',
-'label.login' => 'Login',
+'label.login' => 'Kasutajanimi',
 'label.password' => 'Salasõna',
 'label.confirm_password' => 'Kinnita salasõna',
-// TODO: translate the following.
-// 'label.email' => 'Email',
+'label.email' => 'E-post',
 'label.cc' => 'Cc',
-// TODO: translate the following.
-// 'label.bcc' => 'Bcc',
+'label.bcc' => 'Bcc',
 'label.subject' => 'Teema',
 'label.date' => 'Kuupäev',
-'label.start_date' => 'Algab kuupäevast',
-'label.end_date' => 'Lõpeb kuupäeval',
+'label.start_date' => 'Algus kuupäev',
+'label.end_date' => 'Lõpu kuupäev',
 'label.user' => 'Kasutaja',
 'label.users' => 'Kasutajad',
-// TODO: translate the following.
-// 'label.group' => 'Group',
-// 'label.subgroups' => 'Subgroups',
-// 'label.roles' => 'Roles',
+'label.group' => 'Grupp',
+'label.subgroups' => 'Alamgrupid',
+'label.roles' => 'Rollid',
 'label.client' => 'Klient',
 'label.clients' => 'Kliendid',
-// TODO: translate the following.
-// 'label.option' => 'Option',
+'label.option' => 'Valik',
 'label.invoice' => 'Arve',
 'label.project' => 'Projekt',
 'label.projects' => 'Projektid',
-// TODO: translate the following.
-// 'label.task' => 'Task',
-// 'label.tasks' => 'Tasks',
-// 'label.description' => 'Description',
+'label.task' => 'Tööülesanne',
+'label.tasks' => 'Tööülesanded',
+'label.description' => 'Kirjeldus',
 'label.start' => 'Algus',
 'label.finish' => 'Lõpp',
 'label.duration' => 'Kestus',
 'label.note' => 'Märkus',
 'label.notes' => 'Märkused',
-// TODO: translate the following.
-// 'label.item' => 'Item',
-// 'label.cost' => 'Cost',
-// 'label.ip' => 'IP',
-// 'label.day_total' => 'Day total',
-'label.week_total' => 'Nädalane summa',
-// TODO: translate the following.
-// 'label.month_total' => 'Month total',
+'label.item' => 'Ese',
+'label.cost' => 'Hind',
+'label.ip' => 'IP',
+'label.day_total' => 'Päeva summa',
+'label.week_total' => 'Nädala summa',
+'label.month_total' => 'Kuu summa',
 'label.today' => 'Täna',
-// TODO: translate the following.
-// 'label.view' => 'View',
+'label.view' => 'Vaata',
 'label.edit' => 'Muuda',
 'label.delete' => 'Kustuta',
-'label.configure' => 'Konfigureeri',
+'label.configure' => 'Seadista',
 'label.select_all' => 'Vali kõik',
 'label.select_none' => 'Märgi kõik mittevalituks',
-// TODO: translate the following.
-// 'label.day_view' => 'Day view',
-// 'label.week_view' => 'Week view',
+'label.day_view' => 'Päeva vaade',
+'label.week_view' => 'Nädala vaade',
 'label.id' => 'ID',
-// TODO: translate the following.
-// 'label.language' => 'Language',
-// 'label.decimal_mark' => 'Decimal mark',
-// 'label.date_format' => 'Date format',
-// 'label.time_format' => 'Time format',
-// 'label.week_start' => 'First day of week',
+'label.language' => 'Keel',
+'label.decimal_mark' => 'Koma märk',
+'label.date_format' => 'Kuupäeva formaat',
+'label.time_format' => 'Kella formaat',
+'label.week_start' => 'Nädala alguspäev',
 'label.comment' => 'Kommentaar',
 'label.status' => 'Seisund',
-'label.tax' => 'Maks',
+'label.tax' => 'Maksud',
 'label.subtotal' => 'Vahesumma',
 'label.total' => 'Kokku',
-// TODO: translate the following.
-// 'label.client_name' => 'Client name',
-// 'label.client_address' => 'Client address',
+'label.client_name' => 'Kliendi nimi',
+'label.client_address' => 'Kliendi aadress',
 'label.or' => 'või',
-// TODO: translate the following.
-// 'label.error' => 'Error',
-// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
+'label.error' => 'Viga',
+'label.ldap_hint' => 'Kasuta allolevas tabelis oma Windows\\\'i kasutajatunnuseid.',
 'label.required_fields' => '* nõutud väljad',
-// TODO: translate the following.
-// 'label.on_behalf' => 'on behalf of',
+'label.on_behalf' => '', // TODO: probably untranslateable phrase
 'label.role_manager' => '(haldur)',
 'label.role_comanager' => '(kaashaldur)',
 'label.role_admin' => '(administraator)',
-// TODO: translate the following.
-// 'label.page' => 'Page',
-// 'label.condition' => 'Condition',
-// 'label.yes' => 'yes',
-// 'label.no' => 'no',
+'label.page' => 'Lehekülg',
+'label.condition' => 'Tingimus',
+'label.yes' => 'jah',
+'label.no' => 'ei',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
-// TODO: translate the following.
-// 'label.custom_fields' => 'Custom fields',
-// 'label.monthly_quotas' => 'Monthly quotas',
-// 'label.type' => 'Type',
-// 'label.type_dropdown' => 'dropdown',
-// 'label.type_text' => 'text',
-// 'label.required' => 'Required',
+'label.custom_fields' => 'Eriväljad',
+'label.monthly_quotas' => 'Kuu kvoot',
+'label.type' => 'Tüüp',
+'label.type_dropdown' => 'rippmenüü',
+'label.type_text' => 'tekst',
+'label.required' => 'kohustuslik',
 'label.fav_report' => 'Lemmikraport',
-// TODO: translate the following.
-// 'label.schedule' => 'Schedule',
-// 'label.what_is_it' => 'What is it?',
-// 'label.expense' => 'Expense',
-// 'label.quantity' => 'Quantity',
-// 'label.paid_status' => 'Paid status',
-// 'label.paid' => 'Paid',
-// 'label.mark_paid' => 'Mark paid',
-// 'label.week_note' => 'Week note',
-// 'label.week_list' => 'Week list',
-// 'label.work_units' => 'Work units',
-// 'label.work_units_short' => 'Units',
+'label.schedule' => '<i>cron</i> vormingus ajavahemik',
+'label.what_is_it' => 'Mis see on?',
+'label.expense' => 'Kulu',
+'label.quantity' => 'Kogus',
+'label.paid_status' => 'Makse olek',
+'label.paid' => 'Makstud',
+'label.mark_paid' => 'Märgi makstuks',
+'label.week_note' => 'Nädala märge',
+'label.week_list' => 'Nädala nimekiri',
+'label.work_units' => 'Töö ühikud',
+'label.work_units_short' => 'Ühikud',
 'label.totals_only' => 'Ainult summad',
-// TODO: translate the following.
-// 'label.quota' => 'Quota',
+'label.quota' => 'Kvoot',
 
 // Form titles.
 // TODO: Improve titles for consistency, so that each title explains correctly what each
 // page is about and is "consistent" from page to page, meaning that correct grammar is used everywhere.
 // Compare with English file to see how it is done there and do Estonian titles similarly.
 // Specifically: lisamine vs lisa, etc.
-// TODO: Translate the following.
-// 'title.error' => 'Error',
-// 'title.success' => 'Success',
-'title.login' => 'Login',
-'title.groups' => 'Meeskonnad', // TODO: change "teams" to "groups".
-// TODO: translate the following.
-// 'title.subgroups' => 'Subgroups',
-// 'title.add_group' => 'Adding Group',
-// 'title.edit_group' => 'Editing Group',
-'title.delete_group' => 'Kustuta meeskond',  // TODO: change "team" to "group".
+'title.error' => 'Viga',
+'title.success' => 'Õnnestumine',
+'title.login' => 'Sisene',
+'title.groups' => 'Grupid', // TODO: change "teams" to "groups".
+'title.subgroups' => 'Alamgrupid',
+'title.add_group' => 'Lisa grupp',
+'title.edit_group' => 'Muuda gruppi',
+'title.delete_group' => 'Kustuta grupp',  // TODO: change "team" to "group".
 'title.reset_password' => 'Tühjenda salasõna',
-// TODO: translate the following.
-// 'title.change_password' => 'Changing Password',
-'title.time' => 'Aeg',
+'title.change_password' => 'Muuda salasõna',
+'title.time' => 'Ajaarvestus',
 'title.edit_time_record' => 'Ajakande muutmine',
 'title.delete_time_record' => 'Ajakande kustutamine',
-// TODO: translate the following.
-// 'title.expenses' => 'Expenses',
-// 'title.edit_expense' => 'Editing Expense Item',
-// 'title.delete_expense' => 'Deleting Expense Item',
-// 'title.predefined_expenses' => 'Predefined Expenses',
-// 'title.add_predefined_expense' => 'Adding Predefined Expense',
-// 'title.edit_predefined_expense' => 'Editing Predefined Expense',
-// 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
+'title.expenses' => 'Kulud',
+'title.edit_expense' => 'Kulukirje muutmine',
+'title.delete_expense' => 'Kulukirje kustutamine',
+'title.predefined_expenses' => 'Eelmääratud kulukirje',
+'title.add_predefined_expense' => 'Lisa eelmääratud kulukirje',
+'title.edit_predefined_expense' => 'Muuda eelmääratut kulukirjet',
+'title.delete_predefined_expense' => 'Kustuta eelmääratud kulukirje',
 'title.reports' => 'Raportid',
-// TODO: translate the following.
-// 'title.report' => 'Report',
-// 'title.send_report' => 'Sending Report',
+'title.report' => 'Raport',
+'title.send_report' => 'Saadan raportit',
 'title.invoice' => 'Arve',
-// TODO: translate the following.
-// 'title.send_invoice' => 'Sending Invoice',
-// 'title.charts' => 'Charts',
+'title.send_invoice' => 'Saada arve',
+'title.charts' => 'Diagrammid',
 'title.projects' => 'Projektid',
 'title.add_project' => 'Projekti lisamine',
 'title.edit_project' => 'Projekti muutmine',
 'title.delete_project' => 'Projekti kustutamine',
-// TODO: translate the following.
-// 'title.tasks' => 'Tasks',
-// 'title.add_task' => 'Adding Task',
-// 'title.edit_task' => 'Editing Task',
-// 'title.delete_task' => 'Deleting Task',
+'title.tasks' => 'Tööülesanded',
+'title.add_task' => 'Lisa tööülesanne',
+'title.edit_task' => 'Muuda tööülesannet',
+'title.delete_task' => 'Kustuta tööülesanne',
 'title.users' => 'Kasutajad',
 'title.add_user' => 'Kasutaja lisamine', // TODO: is this correct?
 'title.edit_user' => 'Kasutaja muutmine',
 'title.delete_user' => 'Kasutaja kustutamine',
-// TODO: translate the following.
-// 'title.roles' => 'Roles',
-// 'title.add_role' => 'Adding Role',
-// 'title.edit_role' => 'Editing Role',
-// 'title.delete_role' => 'Deleting Role',
+'title.roles' => 'Rollid',
+'title.add_role' => 'Rolli lisamine',
+'title.edit_role' => 'Rolli muutmine',
+'title.delete_role' => 'Rolli kustutamine',
 'title.clients' => 'Kliendid',
 'title.add_client' => 'Lisa klient',
 'title.edit_client' => 'Muuda klienti',
 'title.delete_client' => 'Kustuta klient',
 'title.invoices' => 'Arved',
-// TODO: translate the following.
-// 'title.add_invoice' => 'Adding Invoice',
-// 'title.view_invoice' => 'Viewing Invoice',
-// 'title.delete_invoice' => 'Deleting Invoice',
-// 'title.notifications' => 'Notifications',
-// 'title.add_notification' => 'Adding Notification',
-// 'title.edit_notification' => 'Editing Notification',
-// 'title.delete_notification' => 'Deleting Notification',
-// 'title.monthly_quotas' => 'Monthly Quotas',
-// 'title.export' => 'Exporting Group Data',
-// 'title.import' => 'Importing Group Data',
+'title.add_invoice' => 'Arve lisamine',
+'title.view_invoice' => 'Arve vaatamine',
+'title.delete_invoice' => 'Arve kustutamine',
+'title.notifications' => 'Teated',
+'title.add_notification' => 'Teate lisamine',
+'title.edit_notification' => 'Teate muutmine',
+'title.delete_notification' => 'Teate kustutamine',
+'title.monthly_quotas' => 'Kuu kvoot',
+'title.export' => 'Grupi andmete alla laadimine',
+'title.import' => 'Grupi andmete üles laadimine',
 'title.options' => 'Suvandid',
-'title.profile' => 'Profiili',
-// TODO: translate the following.
-// 'title.plugins' => 'Plugins',
-// 'title.cf_custom_fields' => 'Custom Fields',
-// 'title.cf_add_custom_field' => 'Adding Custom Field',
-// 'title.cf_edit_custom_field' => 'Editing Custom Field',
-// 'title.cf_delete_custom_field' => 'Deleting Custom Field',
-// 'title.cf_dropdown_options' => 'Dropdown Options',
-// 'title.cf_add_dropdown_option' => 'Adding Option',
-// 'title.cf_edit_dropdown_option' => 'Editing Option',
-// 'title.cf_delete_dropdown_option' => 'Deleting Option',
+'title.profile' => 'Profiil',
+'title.plugins' => 'Lisad',
+'title.cf_custom_fields' => 'Eriväljad',
+'title.cf_add_custom_field' => 'Lisa eriväli',
+'title.cf_edit_custom_field' => 'Muuda erivälja',
+'title.cf_delete_custom_field' => 'Kustuta eriväli',
+'title.cf_dropdown_options' => 'Rippmenüü valikud',
+'title.cf_add_dropdown_option' => 'Lisa valik',
+'title.cf_edit_dropdown_option' => 'Muuda valikut',
+'title.cf_delete_dropdown_option' => 'Kustuta valik',
 // NOTE TO TRANSLATORS: Locking is a feature to lock records from modifications (ex: weekly on Mondays we lock all previous weeks).
 // It is also a name for the Locking plugin on the group settings page.
-// 'title.locking' => 'Locking',
-// 'title.week_view' => 'Week View',
-// 'title.swap_roles' => 'Swapping Roles',
-// 'title.work_units' => 'Work Units',
+'title.locking' => 'Lukustamine',
+'title.week_view' => 'Nädala vaade',
+'title.swap_roles' => 'Rollivahetus',
+'title.work_units' => 'Töö ühikud',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -373,88 +324,74 @@ $i18n_key_words = array(
 'dropdown.current_month' => 'käesolev kuu',
 'dropdown.previous_month' => 'eelmine kuu',
 'dropdown.selected_month' => 'kuu',
-// TODO: translate the following.
-// 'dropdown.current_year' => 'this year',
-// 'dropdown.previous_year' => 'previous year',
-// 'dropdown.selected_year' => 'year',
-'dropdown.all_time' => 'kõik ajad',
+'dropdown.current_year' => 'käesolev aasta',
+'dropdown.previous_year' => 'eelmine aasta',
+'dropdown.selected_year' => 'aasta',
+'dropdown.all_time' => 'kõik ajavahemikud',
 'dropdown.projects' => 'projektid',
-// TODO: translate the following.
-// 'dropdown.tasks' => 'tasks',
+'dropdown.tasks' => 'tööülesanded',
 'dropdown.clients' => 'kliendid',
-// TODO: translate the following.
-// 'dropdown.select' => '--- select ---',
-// 'dropdown.select_invoice' => '--- select invoice ---',
+'dropdown.select' => '--- vali ---',
+'dropdown.select_invoice' => '--- vali arve ---',
 'dropdown.status_active' => 'aktiivne',
-// TODO: translate the following.
-// 'dropdown.status_inactive' => 'inactive',
-// 'dropdown.delete' => 'delete',
-// 'dropdown.do_not_delete' => 'do not delete',
-// 'dropdown.paid' => 'paid',
-// 'dropdown.not_paid' => 'not paid',
+'dropdown.status_inactive' => 'mitte aktiivne',
+'dropdown.delete' => 'kustuta',
+'dropdown.do_not_delete' => 'ära kustuta',
+'dropdown.paid' => 'makstud',
+'dropdown.not_paid' => 'mitte makstud',
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Unustasid salasõna?',
 // TODO: translate the following.
-// 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
+'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> on lihtne, lihtsalt kasutatav ja avatud lähtekoodiga ajaarvestussüsteem.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
-'form.reset_password.message' => 'Salasõna tühjendamise käsk edastatud.', // TODO: add "by email" to match the English string.
-// TODO: translate the following.
-// 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+'form.reset_password.message' => 'Salasõna tühistamise teade on saadetud e-postile.',
+'form.reset_password.email_subject' => 'Anuko Time Tracker, parooli tühistamise nõue',
+'form.reset_password.email_body' => "Lugupeetud Kasutaja,\n\nIP-lt %s on nõutud Teie salasõna lähtestamist. Palun avage allolev link, kui soovite oma parooli lähtestada.\n\n%s\n\nAnuko Time Tracker on lihtne, lihtsalt kasutatav ja avatud lähtekoodiga ajaarvestussüsteem. Lisainfo saamiseks külastage https://www.anuko.com lehekülge.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
-// TODO: translate the following.
-// 'form.change_password.tip' => 'Type new password and click on Save.',
+'form.change_password.tip' => 'Kirjuta siia oma uus parool ja salvesta.',
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
-// TODO: translate the following.
-// 'form.time.duration_format' => '(hh:mm or 0.0h)',
-'form.time.billable' => 'Arvestatav',
-// TODO: translate the following.
-// 'form.time.uncompleted' => 'Uncompleted',
-// 'form.time.remaining_quota' => 'Remaining quota',
-// 'form.time.over_quota' => 'Over quota',
-// 'form.time.remaining_balance' => 'Remaining balance',
-// 'form.time.over_balance' => 'Over balance',
+'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.billable' => 'Arvelduse olek',
+'form.time.uncompleted' => 'Lõpetamata',
+'form.time.remaining_quota' => 'Allesolev kvoot',
+'form.time.over_quota' => 'Üle kvoodi',
+'form.time.remaining_balance' => 'Järelejäänud kontoseis',
+'form.time.over_balance' => 'Üle piirmäära',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Kanne salvestati ainult alguse ajaga. See ei ole viga.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
-// TODO: translate the following.
-// 'form.week.new_entry' => 'New entry',
+'form.week.new_entry' => 'Uus kirje',
 
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Salvesta lemmikuna',
-// TODO: translate the following.
-// 'form.reports.confirm_delete' => 'Are you sure you want to delete this favorite report?',
-'form.reports.include_billable' => 'arvestatav',
-'form.reports.include_not_billable' => 'mittearvestatav',
-// TODO: translate the following.
-// 'form.reports.include_invoiced' => 'invoiced',
-// 'form.reports.include_not_invoiced' => 'not invoiced',
+'form.reports.confirm_delete' => 'Oled kindel, et soovid kustutada oma lemmik raportid?',
+'form.reports.include_billable' => 'arveldatav',
+'form.reports.include_not_billable' => 'mittearveldatav',
+'form.reports.include_invoiced' => 'arveldatud',
+'form.reports.include_not_invoiced' => 'arveldamata',
 'form.reports.select_period' => 'Vali ajaperiood',
 'form.reports.set_period' => 'või märgi kuupäevad',
 'form.reports.show_fields' => 'Näita välju',
 'form.reports.group_by' => 'Grupeeri',
-'form.reports.group_by_no' => '--- ilma grupeerimata ---',
+'form.reports.group_by_no' => '--- grupeerimata ---',
 'form.reports.group_by_date' => 'kuupäev',
 'form.reports.group_by_user' => 'kasutaja',
-// TODO: translate the following.
-// 'form.reports.group_by_client' => 'client',
+'form.reports.group_by_client' => 'klient',
 'form.reports.group_by_project' => 'projekt',
-// TODO: translate the following.
-// 'form.reports.group_by_task' => 'task',
+'form.reports.group_by_task' => 'tööülesanne',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
-'form.report.export' => 'Eksportimine', // TODO: is this correct? We want a verb as in "Export XML" - see report export options.
+'form.report.export' => 'Salvesta vormingus:', // TODO: is this correct? We want a verb as in "Export XML" - see report export options.
                                         // The current combined English string is "Export PDF, XML or CSV".
                                         // Meaning: user can have a displayed report in these formats.
-// TODO: translate the following.
-// 'form.report.assign_to_invoice' => 'Assign to invoice',
+'form.report.assign_to_invoice' => 'Lisa arvele',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
@@ -462,30 +399,26 @@ $i18n_key_words = array(
 'form.invoice.person' => 'Isik',
 
 // Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
-// 'form.invoice.invoice_to_delete' => 'Invoice to delete',
-// 'form.invoice.invoice_entries' => 'Invoice entries',
-// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
+'form.invoice.invoice_to_delete' => 'Kustutatav arve',
+'form.invoice.invoice_entries' => 'Arve kirjed',
+'form.invoice.confirm_deleting_entries' => 'Palun kinnita oma Time Tracker\\\'i arve kirjete kustutamise soovi.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
-// TODO: translate the following.
-// 'form.charts.interval' => 'Interval',
-// 'form.charts.chart' => 'Chart',
+'form.charts.interval' => 'Ajavahemik',
+'form.charts.chart' => 'Diagrammid',
 
 // Projects form. See example at https://timetracker.anuko.com/projects.php
-// TODO: translate the following.
-// 'form.projects.active_projects' => 'Active Projects',
-// 'form.projects.inactive_projects' => 'Inactive Projects',
+'form.projects.active_projects' => 'Aktiivsed projektid',
+'form.projects.inactive_projects' => 'Mitteaktiivsed projektid',
 
 // Tasks form. See example at https://timetracker.anuko.com/tasks.php
-// TODO: translate the following.
-// 'form.tasks.active_tasks' => 'Active Tasks',
-// 'form.tasks.inactive_tasks' => 'Inactive Tasks',
+'form.tasks.active_tasks' => 'Aktiivsed tööülesanded',
+'form.tasks.inactive_tasks' => 'Mitteaktiivsed tööülesanded',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
-// TODO: translate the following.
-// 'form.users.active_users' => 'Active Users',
-// 'form.users.inactive_users' => 'Inactive Users',
-// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
+'form.users.active_users' => 'Aktiivsed Kasutajad',
+'form.users.inactive_users' => 'Mitteaktiivsed Kasutajad',
+'form.users.uncompleted_entry' => 'Kasutajal on lõpetamata aja kanne',
 'form.users.role' => 'Roll',
 'form.users.manager' => 'Haldur',
 'form.users.comanager' => 'Kaashaldur',
@@ -494,115 +427,115 @@ $i18n_key_words = array(
 
 // Editing User form. See example at https://timetracker.anuko.com/user_edit.php
 // TODO: translate the following.
-// 'form.user_edit.swap_roles' => 'Swap roles',
+'form.user_edit.swap_roles' => 'Rollivahetus',
 
 // Roles form. See example at https://timetracker.anuko.com/roles.php
 // TODO: translate the following.
-// 'form.roles.active_roles' => 'Active Roles',
-// 'form.roles.inactive_roles' => 'Inactive Roles',
-// 'form.roles.rank' => 'Rank',
-// 'form.roles.rights' => 'Rights',
-// 'form.roles.assigned' => 'Assigned',
-// 'form.roles.not_assigned' => 'Not assigned',
+'form.roles.active_roles' => 'Aktiivne roll',
+'form.roles.inactive_roles' => 'Mitteaktiivne roll',
+'form.roles.rank' => 'Seisus',
+'form.roles.rights' => 'Õigused',
+'form.roles.assigned' => 'Määratud',
+'form.roles.not_assigned' => 'Määramata',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 // TODO: translate the following.
-// 'form.clients.active_clients' => 'Active Clients',
-// 'form.clients.inactive_clients' => 'Inactive Clients',
+'form.clients.active_clients' => 'Aktiivsed kliendid',
+'form.clients.inactive_clients' => 'Mitteaktiivsed kliendid',
 
 // Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
 // TODO: translate the following.
-// 'form.client.client_to_delete' => 'Client to delete',
-// 'form.client.client_entries' => 'Client entries',
+'form.client.client_to_delete' => 'Kustutatav klient',
+'form.client.client_entries' => 'Kliendi kirjed',
 
 // Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
 // TODO: replace "team" with "group" in the string below.
-'form.export.hint' => 'Võid kogu meeskonna andmed eksportida xml-faili. Sellest võib olla kasu kui vahetad serverit.',
+'form.export.hint' => 'Võid kogu meeskonna andmed eksportida XML faili. Sellest võib olla kasu, kui vahetad serverit.',
 'form.export.compression' => 'Pakkimine',
 // TODO: translate the following.
-// 'form.export.compression_none' => 'none',
+'form.export.compression_none' => 'puudub',
 'form.export.compression_bzip' => 'bzip',
 
 // Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
-'form.import.hint' => 'Impordi meeskonna andmed xml-failist.', // TODO: replace "team" with "group".
+'form.import.hint' => 'Impordi grupi andmed XML failist.', // TODO: replace "team" with "group".
 'form.import.file' => 'Vali fail',
-'form.import.success' => 'Andmed imporditud.',
+'form.import.success' => 'Andmete importimine õnnestus.',
 
 // Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
 // TODO: translate the following.
-// 'form.groups.hint' => 'Create a new group by creating a new group manager account.<br>You can also import group data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+'form.groups.hint' => 'Uue grupi lisamiseks loo esmalt grupi haldur.<br>Lisaks on võimalik importida grupi andmed XML failist (kasutajatunnused ei tohi korduda).',
 
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 // TODO: translate the following.
-// 'form.group_edit.12_hours' => '12 hours',
-// 'form.group_edit.24_hours' => '24 hours',
-// 'form.group_edit.show_holidays' => 'Show holidays',
-// 'form.group_edit.tracking_mode' => 'Tracking mode',
-// 'form.group_edit.mode_time' => 'time',
-// 'form.group_edit.mode_projects' => 'projects',
-// 'form.group_edit.mode_projects_and_tasks' => 'projects and tasks',
-// 'form.group_edit.record_type' => 'Record type',
-// 'form.group_edit.type_all' => 'all',
-// 'form.group_edit.type_start_finish' => 'start and finish',
-// 'form.group_edit.type_duration' => 'duration',
-// 'form.group_edit.punch_mode' => 'Punch mode',
-// 'form.group_edit.allow_overlap' => 'Allow overlap',
-// 'form.group_edit.future_entries' => 'Future entries',
-// 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
-// 'form.group_edit.confirm_save' => 'Confirm saving',
-// 'form.group_edit.allow_ip' => 'Allow IP',
+'form.group_edit.12_hours' => '12 tundi',
+'form.group_edit.24_hours' => '24 tundi',
+'form.group_edit.show_holidays' => 'Näita pühi',
+'form.group_edit.tracking_mode' => 'Jälgimise režiim',
+'form.group_edit.mode_time' => 'ajaarvestus',
+'form.group_edit.mode_projects' => 'projektid',
+'form.group_edit.mode_projects_and_tasks' => 'projektid ja tööülesanded',
+'form.group_edit.record_type' => 'Kirje tüüp',
+'form.group_edit.type_all' => 'kõik',
+'form.group_edit.type_start_finish' => 'algus ja lõpp',
+'form.group_edit.type_duration' => 'vahemik',
+'form.group_edit.punch_mode' => 'kellast-kellani režiim',
+'form.group_edit.allow_overlap' => 'Luba ajaline ülekate',
+'form.group_edit.future_entries' => 'Tuleviku kirjed',
+'form.group_edit.uncompleted_indicators' => 'Lõpetamata kirjete indikaator',
+'form.group_edit.confirm_save' => 'Kinnita salvestamine',
+'form.group_edit.allow_ip' => 'Luba IP',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 // TODO: translate the following.
-// 'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
+'form.group_delete.hint' => 'Oled kindel, et soovid kogu gruppi kustutada?',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'Kellelt',
 'form.mail.to' => 'Kellele',
 // TODO: translate the following.
-// 'form.mail.report_subject' => 'Time Tracker Report',
-// 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
-// 'form.mail.report_sent' => 'Report sent.',
-'form.mail.invoice_sent' => 'Arve saadetud.',
+'form.mail.report_subject' => 'Aja arvestuse raport',
+'form.mail.footer' => 'Anuko Time Tracker on lihtne, lihtsalt kasutatav ja avatud lähtekoodiga <br>ajaarvestussüsteem. Lisainfo saamiseks külastage <a href="https://www.anuko.com">www.anuko.com</a> lehekülge.',
+'form.mail.report_sent' => 'Raport on saadetud.',
+'form.mail.invoice_sent' => 'Arve on saadetud.',
 
 // Quotas configuration form. See example at https://timetracker.anuko.com/quotas.php after enabling Monthly quotas plugin.
 // TODO: translate the following.
-// 'form.quota.year' => 'Year',
-// 'form.quota.month' => 'Month',
-// 'form.quota.workday_hours' => 'Hours in work day',
-// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+'form.quota.year' => 'aasta',
+'form.quota.month' => 'kuu',
+'form.quota.workday_hours' => 'töötunde päevas',
+'form.quota.hint' => 'Tühjade väljade korral arvutatakse töötamise kvoodid tööpäevade ja pühade põhjal.',
 
 // Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
 // TODO: translate the following.
-// 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
-// 'form.swap.swap_with' => 'Swap roles with',
+'form.swap.hint' => 'Rolli muutmiseks muuda oma kasutajat. Rollivahetust ei saa tagasi võtta.',
+'form.swap.swap_with' => 'Vaheta kasutajaga roll:',
 
 // Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
 // TODO: translate the following.
-// 'form.work_units.minutes_in_unit' => 'Minutes in unit',
-// 'form.work_units.1st_unit_threshold' => '1st unit threshold',
+'form.work_units.minutes_in_unit' => 'minuteid ühikus',
+'form.work_units.1st_unit_threshold' => 'esimese ühiku piirmäär',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
 // TODO: translate the following.
-// 'role.user.label' => 'User',
-// 'role.user.low_case_label' => 'user',
-// 'role.user.description' => 'A regular member without management rights.',
-// 'role.client.label' => 'Client',
-// 'role.client.low_case_label' => 'client',
-// 'role.client.description' => 'A client can view its own reports, charts, and invoices.',
-// 'role.supervisor.label' => 'Supervisor',
-// 'role.supervisor.low_case_label' => 'supervisor',
-// 'role.supervisor.description' => 'A person with a small set of management rights.',
-// 'role.comanager.label' => 'Co-manager',
-// 'role.comanager.low_case_label' => 'co-manager',
-// 'role.comanager.description' => 'A person with a big set of management functions.',
-// 'role.manager.label' => 'Manager',
-// 'role.manager.low_case_label' => 'manager',
-// 'role.manager.description' => 'Group manager. Can do most of things for a group.',
-// 'role.top_manager.label' => 'Top manager',
-// 'role.top_manager.low_case_label' => 'top manager',
-// 'role.top_manager.description' => 'Top group manager. Can do everything in a tree of groups.',
-// 'role.admin.label' => 'Administrator',
-// 'role.admin.low_case_label' => 'administrator',
-// 'role.admin.description' => 'Site adminsitrator.',
+'role.user.label' => 'Tavakasutaja',
+'role.user.low_case_label' => 'tavakasutaja',
+'role.user.description' => 'Haldusõigustega tavakasutaja.',
+'role.client.label' => 'Klient',
+'role.client.low_case_label' => 'klient',
+'role.client.description' => 'Kliendil on lubatud vaadata oma raporteid, diagramme ja arveid.',
+'role.supervisor.label' => 'Ülevaataja',
+'role.supervisor.low_case_label' => 'ülevaataja',
+'role.supervisor.description' => 'Mõningate lisaõigustega kasutaja.',
+'role.comanager.label' => 'Kaashaldur',
+'role.comanager.low_case_label' => 'kaashaldur',
+'role.comanager.description' => 'Mitmete halduri õigustega kasutja.',
+'role.manager.label' => 'Haldur',
+'role.manager.low_case_label' => 'haldur',
+'role.manager.description' => 'Grupihaldur, kellel on lubatud enamik grupiga soetud tegevusi.',
+'role.top_manager.label' => 'Juht',
+'role.top_manager.low_case_label' => 'Juht',
+'role.top_manager.description' => 'Ettevõtte juht, kellel on lubatud hallata mitut gruppi.',
+'role.admin.label' => 'Administraator',
+'role.admin.low_case_label' => 'administraator',
+'role.admin.description' => 'Rakenduse administraator.',
 );
