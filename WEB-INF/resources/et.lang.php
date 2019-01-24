@@ -478,85 +478,78 @@ $i18n_key_words = array(
 'form.export.compression_bzip' => 'bzip',
 
 // Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
-'form.import.hint' => 'Impordi meeskonna andmed xml-failist.', // TODO: replace "team" with "group".
+'form.import.hint' => 'Impordi grupi andmed XML failist.',
 'form.import.file' => 'Vali fail',
-'form.import.success' => 'Andmed imporditud.',
+'form.import.success' => 'Andmete importimine õnnestus.',
 
 // Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
-// TODO: translate the following.
-// 'form.groups.hint' => 'Create a new group by creating a new group manager account.<br>You can also import group data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+'form.groups.hint' => 'Uue grupi lisamiseks loo esmalt grupi haldur.<br>Lisaks on võimalik importida grupi andmed XML failist (kasutaja tunnused ei tohi korduda).',
 
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
-// TODO: translate the following.
-// 'form.group_edit.12_hours' => '12 hours',
-// 'form.group_edit.24_hours' => '24 hours',
-// 'form.group_edit.show_holidays' => 'Show holidays',
-// 'form.group_edit.tracking_mode' => 'Tracking mode',
-// 'form.group_edit.mode_time' => 'time',
-// 'form.group_edit.mode_projects' => 'projects',
-// 'form.group_edit.mode_projects_and_tasks' => 'projects and tasks',
-// 'form.group_edit.record_type' => 'Record type',
-// 'form.group_edit.type_all' => 'all',
-// 'form.group_edit.type_start_finish' => 'start and finish',
-// 'form.group_edit.type_duration' => 'duration',
-// 'form.group_edit.punch_mode' => 'Punch mode',
-// 'form.group_edit.allow_overlap' => 'Allow overlap',
-// 'form.group_edit.future_entries' => 'Future entries',
-// 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
-// 'form.group_edit.confirm_save' => 'Confirm saving',
-// 'form.group_edit.allow_ip' => 'Allow IP',
+'form.group_edit.12_hours' => '12 tundi',
+'form.group_edit.24_hours' => '24 tundi',
+'form.group_edit.show_holidays' => 'Näita pühi',
+'form.group_edit.tracking_mode' => 'Jälgimise režiim',
+'form.group_edit.mode_time' => 'ajaarvestus',
+'form.group_edit.mode_projects' => 'projektid',
+'form.group_edit.mode_projects_and_tasks' => 'projektid ja tööülesanded',
+'form.group_edit.record_type' => 'Kirje tüüp',
+'form.group_edit.type_all' => 'kõik',
+'form.group_edit.type_start_finish' => 'algus ja lõpp',
+'form.group_edit.type_duration' => 'vahemik',
+'form.group_edit.punch_mode' => 'Kellast-kellani režiim',
+'form.group_edit.allow_overlap' => 'Luba ajaline ülekate',
+'form.group_edit.future_entries' => 'Tuleviku kirjed',
+'form.group_edit.uncompleted_indicators' => 'Lõpetamata kirjete indikaator', // TODO: Fix this. Indicators (plural), not indicator.
+'form.group_edit.confirm_save' => 'Kinnita salvestamine',
+'form.group_edit.allow_ip' => 'Luba IP',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
-// TODO: translate the following.
-// 'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
+'form.group_delete.hint' => 'Oled kindel, et soovid kogu gruppi kustutada?',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.from' => 'Kellelt',
 'form.mail.to' => 'Kellele',
-// TODO: translate the following.
-// 'form.mail.report_subject' => 'Time Tracker Report',
-// 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
-// 'form.mail.report_sent' => 'Report sent.',
-'form.mail.invoice_sent' => 'Arve saadetud.',
+'form.mail.report_subject' => 'Time Tracker raport',
+'form.mail.footer' => 'Anuko Time Tracker on lihtne, lihtsalt kasutatav ja avatud lähtekoodiga <br>ajaarvestussüsteem. Lisainfo saamiseks külastage <a href="https://www.anuko.com">www.anuko.com</a> lehekülge.',
+'form.mail.report_sent' => 'Raport on saadetud.',
+'form.mail.invoice_sent' => 'Arve on saadetud.',
 
 // Quotas configuration form. See example at https://timetracker.anuko.com/quotas.php after enabling Monthly quotas plugin.
-// TODO: translate the following.
-// 'form.quota.year' => 'Year',
-// 'form.quota.month' => 'Month',
-// 'form.quota.workday_hours' => 'Hours in work day',
-// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+'form.quota.year' => 'Aasta',
+'form.quota.month' => 'Kuu',
+'form.quota.workday_hours' => 'Töötunde päevas',
+'form.quota.hint' => 'Tühjade väljade korral arvutatakse töötamise kvoodid tööpäevade ja pühade põhjal.',
 
 // Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
-// TODO: translate the following.
-// 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
-// 'form.swap.swap_with' => 'Swap roles with',
+'form.swap.hint' => 'Rolli muutmiseks muuda oma kasutajat. Rollivahetust ei saa tagasi võtta.',
+'form.swap.swap_with' => 'Vaheta kasutajaga roll',
 
 // Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
-// TODO: translate the following.
-// 'form.work_units.minutes_in_unit' => 'Minutes in unit',
-// 'form.work_units.1st_unit_threshold' => '1st unit threshold',
+'form.work_units.minutes_in_unit' => 'Minuteid ühikus',
+'form.work_units.1st_unit_threshold' => 'Esimese ühiku piirmäär',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
-// TODO: translate the following.
-// 'role.user.label' => 'User',
-// 'role.user.low_case_label' => 'user',
+'role.user.label' => 'Tavakasutaja',
+'role.user.low_case_label' => 'tavakasutaja',
+// TODO: Translate role.user.description. "Haldusõigustega tavakasutaja." auto-translates with an opposite meaning.
 // 'role.user.description' => 'A regular member without management rights.',
-// 'role.client.label' => 'Client',
-// 'role.client.low_case_label' => 'client',
-// 'role.client.description' => 'A client can view its own reports, charts, and invoices.',
-// 'role.supervisor.label' => 'Supervisor',
-// 'role.supervisor.low_case_label' => 'supervisor',
-// 'role.supervisor.description' => 'A person with a small set of management rights.',
-// 'role.comanager.label' => 'Co-manager',
-// 'role.comanager.low_case_label' => 'co-manager',
-// 'role.comanager.description' => 'A person with a big set of management functions.',
-// 'role.manager.label' => 'Manager',
-// 'role.manager.low_case_label' => 'manager',
-// 'role.manager.description' => 'Group manager. Can do most of things for a group.',
-// 'role.top_manager.label' => 'Top manager',
-// 'role.top_manager.low_case_label' => 'top manager',
-// 'role.top_manager.description' => 'Top group manager. Can do everything in a tree of groups.',
-// 'role.admin.label' => 'Administrator',
-// 'role.admin.low_case_label' => 'administrator',
-// 'role.admin.description' => 'Site adminsitrator.',
+'role.client.label' => 'Klient',
+'role.client.low_case_label' => 'klient',
+'role.client.description' => 'Kliendil on lubatud vaadata oma raporteid, diagramme ja arveid.',
+'role.supervisor.label' => 'Ülevaataja',
+'role.supervisor.low_case_label' => 'ülevaataja',
+'role.supervisor.description' => 'Mõningate lisaõigustega kasutaja.',
+'role.comanager.label' => 'Kaashaldur',
+'role.comanager.low_case_label' => 'kaashaldur',
+'role.comanager.description' => 'Mitmete halduri õigustega kasutja.',
+'role.manager.label' => 'Haldur',
+'role.manager.low_case_label' => 'haldur',
+'role.manager.description' => 'Grupihaldur, kellel on lubatud enamik grupiga soetud tegevusi.',
+'role.top_manager.label' => 'Juht',
+'role.top_manager.low_case_label' => 'juht',
+'role.top_manager.description' => 'Ettevõtte juht, kellel on lubatud hallata mitut gruppi.',
+'role.admin.label' => 'Administraator',
+'role.admin.low_case_label' => 'administraator',
+'role.admin.description' => 'Rakenduse administraator.',
 );
