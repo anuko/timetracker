@@ -36,226 +36,212 @@ $i18n_months = array('Jaanuar', 'Veebruar', 'Märts', 'Aprill', 'Mai', 'Juuni', 
 $i18n_weekdays = array('Pühapäev', 'Esmaspäev', 'Teisipäev', 'Kolmapäev', 'Neljapäev', 'Reede', 'Laupäev');
 $i18n_weekdays_short = array('P', 'E', 'T', 'K', 'N', 'R', 'L');
 // format mm/dd
-$i18n_holidays = array('01/01', '02/24', '04/10', '04/12', '05/01', '05/31', '06/23', '06/24', '08/20', '12/24', '12/25', '12/26');
+$i18n_holidays = array('01/01', '02/24', '04/19', '04/21', '05/01', '06/09', '06/23', '06/24', '08/20', '12/24', '12/25', '12/26');
 
 $i18n_key_words = array(
 
 // Menus - short selection strings that are displayed on top of application web pages.
 // Example: https://timetracker.anuko.com (black menu on top).
-'menu.login' => 'Login',
-'menu.logout' => 'Logout',
-// TODO: translate the following.
-// 'menu.forum' => 'Forum',
+'menu.login' => 'Sisene',
+'menu.logout' => 'Välju',
+'menu.forum' => 'Foorum',
 'menu.help' => 'Abiinfo',
-// TODO: translate the following.
-// 'menu.create_group' => 'Create Group',
-'menu.profile' => 'Profiili',
-// TODO: translate the following.
-// 'menu.group' => 'Group',
-// 'menu.plugins' => 'Plugins',
-'menu.time' => 'Aeg',
-// TODO: translate the following.
-// 'menu.expenses' => 'Expenses',
+'menu.create_group' => 'Loo grupp',
+'menu.profile' => 'Profiil',
+'menu.group' => 'Grupp',
+'menu.plugins' => 'Lisad',
+'menu.time' => 'Ajaarvestus',
+'menu.expenses' => 'Kulud',
 'menu.reports' => 'Raportid',
-// TODO: translate the following.
-// 'menu.charts' => 'Charts',
+'menu.charts' => 'Diagrammid',
 'menu.projects' => 'Projektid',
-// TODO: translate the following.
-// 'menu.tasks' => 'Tasks',
+'menu.tasks' => 'Tööülesanded',
 'menu.users' => 'Kasutajad',
-// TODO: translate the following.
-// 'menu.groups' => 'Groups',
-// 'menu.subgroups' => 'Subgroups',
-// 'menu.export' => 'Export',
+'menu.groups' => 'Grupid',
+'menu.subgroups' => 'Alamgrupid',
+'menu.export' => 'Eksport', // TODO: is this a correct term as an opposite of "Import"?
 'menu.clients' => 'Kliendid',
 'menu.options' => 'Suvandid',
 
 // Footer - strings on the bottom of most pages.
-// TODO: translate the following.
-// 'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
-// 'footer.credits' => 'Credits',
-// 'footer.license' => 'License',
-// 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
-                                     // This is a link to a webpage that describes how to contribute to the project.
+'footer.contribute_msg' => 'Sul on võimalik mitmeti panustada Time Tracker\\\'i arendamisse.',
+'footer.credits' => 'Tunnustused',
+'footer.license' => 'Litsents',
+'footer.improve' => 'Panusta',
 
 // Error messages.
-// TODO: translate the following.
-// 'error.access_denied' => 'Access denied.',
-// 'error.sys' => 'System error.',
+'error.access_denied' => 'Puudub ligipääs.',
+'error.sys' => 'Rakenduse viga.',
 'error.db' => 'Andmebaasi viga.',
-// TODO: translate the following.
-// 'error.feature_disabled' => 'Feature is disabled.',
-'error.field' => 'Valed "{0}" andmed.',
+'error.feature_disabled' => 'Rakenduse funktsionaalsus on välja lülitatud.',
+'error.field' => 'Välja "{0}" andmed ei vasta nõutele.',
 'error.empty' => 'Väli "{0}" on tühi.',
 'error.not_equal' => 'Väli "{0}" ei ole väljaga "{1}" võrdne.',
-// TODO: translate the following.
-// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+'error.interval' => 'Välja "{0}" väärtus peab olema suurem kui välja "{1}" väärtus.',
 'error.project' => 'Vali projekt.',
-// TODO: translate the following.
-// 'error.task' => 'Select task.',
+'error.task' => 'Vali tööülesanne.',
 'error.client' => 'Vali klient.',
-// TODO: translate the following.
-// 'error.report' => 'Select report.',
-// 'error.record' => 'Select record.',
-'error.auth' => 'Vale login või salasõna.',
-// TODO: translate the following.
-// 'error.user_exists' => 'User with this login already exists.',
-// 'error.object_exists' => 'Object with this name already exists.',
-// 'error.invoice_exists' => 'Invoice with this number already exists.',
+'error.report' => 'Vali raport.',
+'error.record' => 'Vali kirje.',
+'error.auth' => 'Autentimine ebaõnnestus.',
+'error.user_exists' => 'Selle nimega kasutaja on juba kasutusel.',
+'error.object_exists' => 'Sellise nimega objekt on juba olemas.',
+'error.invoice_exists' => 'Arve number on juba kasutusel.',
+
+// TODO: Improve translation of error.role_exists.
 // 'error.role_exists' => 'Role with this rank already exists.',
+// It is displayed when user tries to add a role with an already existing RANK.
+// There is no indication of RANK collision in this translation.
+// 'error.role_exists' => 'Kasutaja roll on juba kasutusel.',
+
+// TODO: Improve translation of error.no_invoiceable_items.
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
-// 'error.no_login' => 'No user with this login.',
-'error.no_groups' => 'Sinu andmebaas on tühi. Logi adminina sisse ja loo uus meeskond.',  // TODO: replace "team" with "group".
+// This error shows up when user tries to ctreate a new invoice,
+// but there are no billable records such time or expenses to include.
+// Google auto-translates below as "No billable invoices found." which seems wrong.
+// 'error.no_invoiceable_items' => 'Arveldatavaid arveid ei leitud.',
+
+'error.no_login' => 'Sellise tunnusega kasutajat ei ole.',
+
+// TODO: Improve translation of error.no_groups. Replace meeskond with grupp?
+// Why? Before supporting subgroups, Time Tracker organized users in "teams".
+// Now we have "groups" with "subgroups", renamed from original "team".
+// Meeskond below is a glimpse from earlier versions, before renaming occurred.
+'error.no_groups' => 'Sinu andmebaas on tühi. Logi administraatorina sisse ja loo uus meeskond.',
+
 'error.upload' => 'Viga faili vastuvõtmisel.',
-// TODO: translate the following.
-// 'error.range_locked' => 'Date range is locked.',
-// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
-// 'error.no_email' => 'No email associated with this login.',
-// 'error.uncompleted_exists' => 'Uncompleted entry already exists. Close or delete it.',
-// 'error.goto_uncompleted' => 'Go to uncompleted entry.',
-// 'error.overlap' => 'Time interval overlaps with existing records.',
-// 'error.future_date' => 'Date is in future.',
-// TODO: translate the following.
-// 'error.xml' => 'Error in XML file at line %d: %s.',
-// 'error.cannot_import' => 'Cannot import: %s.',
-// 'error.format' => 'Invalid file format.',
-// 'error.user_count' => 'Limit on user count.',
-// 'error.expired' => 'Expiration date reached.',
+'error.range_locked' => 'Kuupäevavahemik on lukus.',
+'error.mail_send' => 'E-posti saatmisel tekkis viga. Vea tuvastamiseks kasuta MAIL_SMTP_DEBUG muutujat.',
+'error.no_email' => 'Kasutajaga pole ühtegi e-posti seotud.',
+'error.uncompleted_exists' => 'Leiti varasemalt lõpetamata kirje. Sulge või kustuta see.',
+'error.goto_uncompleted' => 'Ava lõpetamata kirje.',
+'error.overlap' => 'Ajavahemik kattub varasema kirjega.',
+'error.future_date' => 'Kuupäev on tulevikus.',
+'error.xml' => 'Viga XML failis, real %d: %s.',
+'error.cannot_import' => 'Ebaõnnestunud import: %s.',
+'error.format' => 'Faili formaat on vale.',
+'error.user_count' => 'Kasutajate arvu piirang.',
+'error.expired' => 'Kehtivusaeg on lõppenud.',
 
 // Warning messages.
-// TODO: translate the following.
-// 'warn.sure' => 'Are you sure?',
-// 'warn.confirm_save' => 'Date has changed. Confirm saving, not copying this item.',
+'warn.sure' => 'Oled kindel?',
+'warn.confirm_save' => 'Kuupäeva on muudetud. Muudatuse kinnitamisel ei varundata esialgset kirjet, vaid muudetakse seda. Kinnitad muudatuse?',
 
 // Success messages.
-// TODO: translate the following.
-// 'msg.success' => 'Operation completed successfully.',
+'msg.success' => 'Tegevus oli edukas.',
 
 // Labels for buttons.
-'button.login' => 'Login',
-'button.now' => 'Kohe',
+'button.login' => 'Sisene',
+'button.now' => 'Nüüd',
 'button.save' => 'Salvesta',
-// TODO: translate the following.
-// 'button.copy' => 'Copy',
+'button.copy' => 'Kopeeri',
 'button.cancel' => 'Tühista',
 'button.submit' => 'Postita',
 'button.add' => 'Lisa',
 'button.delete' => 'Kustuta',
 'button.generate' => 'Loo',
-'button.reset_password' => 'Tühjenda salasõna',
+'button.reset_password' => 'Lähtesta salasõna',
 'button.send' => 'Saada',
-'button.send_by_email' => 'Saada e-mailiga',
-'button.create_group' => 'Loo meeskond', // TODO: replace "team" with "group".
-'button.export' => 'Ekspordi meeskond', // TODO: replace "team" with "group".
-'button.import' => 'Impordi meeskond', // TODO: replace "team" with "group".
-// TODO: translate the following.
-// 'button.close' => 'Close',
-// 'button.stop' => 'Stop',
+'button.send_by_email' => 'Saada e-postiga',
+'button.create_group' => 'Loo grupp',
+'button.export' => 'Ekspordi grupp',
+'button.import' => 'Impordi grupp',
+'button.close' => 'Sulge',
+'button.stop' => 'Stopp',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-// TODO: translate the following.
-// 'label.group_name' => 'Group name',
-// 'label.address' => 'Address',
+'label.group_name' => 'Grupi nimi',
+'label.address' => 'Aadress',
 'label.currency' => 'Valuuta',
-// TODO: translate the following.
-// 'label.manager_name' => 'Manager name',
-// 'label.manager_login' => 'Manager login',
+'label.manager_name' => 'Halduri nimi',
+'label.manager_login' => 'Halduri sisenemine',
 'label.person_name' => 'Nimi',
 'label.thing_name' => 'Nimi',
-'label.login' => 'Login',
+'label.login' => 'Kasutajanimi',
 'label.password' => 'Salasõna',
 'label.confirm_password' => 'Kinnita salasõna',
-// TODO: translate the following.
-// 'label.email' => 'Email',
+'label.email' => 'E-post',
 'label.cc' => 'Cc',
-// TODO: translate the following.
-// 'label.bcc' => 'Bcc',
+'label.bcc' => 'Bcc',
 'label.subject' => 'Teema',
 'label.date' => 'Kuupäev',
-'label.start_date' => 'Algab kuupäevast',
-'label.end_date' => 'Lõpeb kuupäeval',
+'label.start_date' => 'Algus kuupäev',
+'label.end_date' => 'Lõpu kuupäev',
 'label.user' => 'Kasutaja',
 'label.users' => 'Kasutajad',
-// TODO: translate the following.
-// 'label.group' => 'Group',
-// 'label.subgroups' => 'Subgroups',
-// 'label.roles' => 'Roles',
+'label.group' => 'Grupp',
+'label.subgroups' => 'Alamgrupid',
+'label.roles' => 'Rollid',
 'label.client' => 'Klient',
 'label.clients' => 'Kliendid',
-// TODO: translate the following.
-// 'label.option' => 'Option',
+'label.option' => 'Valik',
 'label.invoice' => 'Arve',
 'label.project' => 'Projekt',
 'label.projects' => 'Projektid',
-// TODO: translate the following.
-// 'label.task' => 'Task',
-// 'label.tasks' => 'Tasks',
-// 'label.description' => 'Description',
+'label.task' => 'Tööülesanne',
+'label.tasks' => 'Tööülesanded',
+'label.description' => 'Kirjeldus',
 'label.start' => 'Algus',
 'label.finish' => 'Lõpp',
 'label.duration' => 'Kestus',
 'label.note' => 'Märkus',
 'label.notes' => 'Märkused',
-// TODO: translate the following.
-// 'label.item' => 'Item',
-// 'label.cost' => 'Cost',
-// 'label.ip' => 'IP',
-// 'label.day_total' => 'Day total',
-'label.week_total' => 'Nädalane summa',
-// TODO: translate the following.
-// 'label.month_total' => 'Month total',
+'label.item' => 'Ese',
+'label.cost' => 'Hind',
+'label.ip' => 'IP',
+'label.day_total' => 'Päeva summa',
+'label.week_total' => 'Nädala summa',
+'label.month_total' => 'Kuu summa',
 'label.today' => 'Täna',
-// TODO: translate the following.
-// 'label.view' => 'View',
+'label.view' => 'Vaata',
 'label.edit' => 'Muuda',
 'label.delete' => 'Kustuta',
-'label.configure' => 'Konfigureeri',
+'label.configure' => 'Seadista',
 'label.select_all' => 'Vali kõik',
 'label.select_none' => 'Märgi kõik mittevalituks',
-// TODO: translate the following.
-// 'label.day_view' => 'Day view',
-// 'label.week_view' => 'Week view',
+'label.day_view' => 'Päeva vaade',
+'label.week_view' => 'Nädala vaade',
 'label.id' => 'ID',
-// TODO: translate the following.
-// 'label.language' => 'Language',
-// 'label.decimal_mark' => 'Decimal mark',
-// 'label.date_format' => 'Date format',
-// 'label.time_format' => 'Time format',
-// 'label.week_start' => 'First day of week',
+'label.language' => 'Keel',
+'label.decimal_mark' => 'Koma märk',
+'label.date_format' => 'Kuupäeva formaat',
+'label.time_format' => 'Kella formaat',
+'label.week_start' => 'Nädala alguspäev',
 'label.comment' => 'Kommentaar',
 'label.status' => 'Seisund',
-'label.tax' => 'Maks',
+'label.tax' => 'Maksud',
 'label.subtotal' => 'Vahesumma',
 'label.total' => 'Kokku',
-// TODO: translate the following.
-// 'label.client_name' => 'Client name',
-// 'label.client_address' => 'Client address',
+'label.client_name' => 'Kliendi nimi',
+'label.client_address' => 'Kliendi aadress',
 'label.or' => 'või',
-// TODO: translate the following.
-// 'label.error' => 'Error',
-// 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
+'label.error' => 'Viga',
+'label.ldap_hint' => 'Kasuta allolevas tabelis oma Windows\\\'i kasutajatunnuseid.',
 'label.required_fields' => '* nõutud väljad',
-// TODO: translate the following.
+// TODO: Translate label.on_behalf, perhaps trying as "instead of".
 // 'label.on_behalf' => 'on behalf of',
 'label.role_manager' => '(haldur)',
 'label.role_comanager' => '(kaashaldur)',
 'label.role_admin' => '(administraator)',
-// TODO: translate the following.
-// 'label.page' => 'Page',
-// 'label.condition' => 'Condition',
-// 'label.yes' => 'yes',
-// 'label.no' => 'no',
+'label.page' => 'Lehekülg',
+'label.condition' => 'Tingimus',
+'label.yes' => 'jah',
+'label.no' => 'ei',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
-// TODO: translate the following.
-// 'label.custom_fields' => 'Custom fields',
-// 'label.monthly_quotas' => 'Monthly quotas',
-// 'label.type' => 'Type',
-// 'label.type_dropdown' => 'dropdown',
-// 'label.type_text' => 'text',
-// 'label.required' => 'Required',
+'label.custom_fields' => 'Eriväljad',
+'label.monthly_quotas' => 'Kuu kvoot',
+'label.type' => 'Tüüp',
+'label.type_dropdown' => 'rippmenüü',
+'label.type_text' => 'tekst',
+'label.required' => 'Kohustuslik',
 'label.fav_report' => 'Lemmikraport',
-// TODO: translate the following.
+
+// TODO: translate label.schedule.
+// The meaning of this is "cron schedule" - or a spec for Unix "cron" program.
+// See config pages for Locking and Notifications plugin, where it is used.
 // 'label.schedule' => 'Schedule',
+
+// TODO: translate the following.
 // 'label.what_is_it' => 'What is it?',
 // 'label.expense' => 'Expense',
 // 'label.quantity' => 'Quantity',
