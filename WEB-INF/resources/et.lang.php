@@ -154,7 +154,7 @@ $i18n_key_words = array(
 'label.address' => 'Aadress',
 'label.currency' => 'Valuuta',
 'label.manager_name' => 'Halduri nimi',
-'label.manager_login' => 'Halduri sisenemine',
+'label.manager_login' => 'Halduri kasutajanimi',
 'label.person_name' => 'Nimi',
 'label.thing_name' => 'Nimi',
 'label.login' => 'Kasutajanimi',
@@ -483,7 +483,7 @@ $i18n_key_words = array(
 'form.import.success' => 'Andmete importimine õnnestus.',
 
 // Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
-'form.groups.hint' => 'Uue grupi lisamiseks loo esmalt grupi haldur.<br>Lisaks on võimalik importida grupi andmed XML failist (kasutaja tunnused ei tohi korduda).',
+'form.groups.hint' => 'Uue grupi lisamiseks loo esmalt grupi haldur.<br>Lisaks on võimalik importida grupi andmed XML failist (kasutajatunnused ei tohi korduda).',
 
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 'form.group_edit.12_hours' => '12 tundi',
