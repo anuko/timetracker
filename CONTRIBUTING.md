@@ -1,13 +1,13 @@
 # Resources
 
-* [docs](https://www.anuko.com/time_tracker/features.htm) - detailed documentation about this project can be found here (needs updating).
+* [docs](https://www.anuko.com/time_tracker/features.htm) - detailed documentation about this project (needs updating).
 * [forum](https://www.anuko.com/forum/viewforum.php?f=4) - general discussion.
 
 
 # Reporting Bugs
 
 * GitHub users: create a [new issue](https://github.com/anuko/timetracker/issues) here.
-* Forum users: post a new topic [here](https://www.anuko.com/forum/viewforum.php?f=4).
+* Forum users: post a [new topic](https://www.anuko.com/forum/viewforum.php?f=4 here.
 * Or, send us a [message](https://www.anuko.com/contact.htm).
 
 
