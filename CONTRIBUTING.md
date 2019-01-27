@@ -1,31 +1,29 @@
 # Resources
 
 * [docs](https://www.anuko.com/time_tracker/features.htm) - detailed documentation about this project can be found here (needs updating).
-* [forum](https://www.anuko.com/forum/viewforum.php?f=4) - for general discussion.
+* [forum](https://www.anuko.com/forum/viewforum.php?f=4) - general discussion.
 
 
 # Reporting Bugs
 
-* GitHub users: create a [new issue](https://github.com/anuko/timetracker/issues).
-* Forum users: use [forum](https://www.anuko.com/forum/viewforum.php?f=4).
-* Or, [send a message](https://www.anuko.com/contact.htm).
+* GitHub users: create a [new issue](https://github.com/anuko/timetracker/issues) here.
+* Forum users: post a new topic [here](https://www.anuko.com/forum/viewforum.php?f=4).
+* Or, send us a [message](https://www.anuko.com/contact.htm).
 
 
 # Reporting Security Issues
 
 * Use the [contact form](https://www.anuko.com/contact.htm) to report a vulnerability.
-* Or send encrypted email to security_at_anuko_dot_com. Public key to be published soon.
+* Or send an encrypted email to security_at_anuko_dot_com. Public key to be published soon.
 
 
 # Setting up a Dev Environment
 
 Docker users: install both docker and docker-compose, then run a dev instance:
-
 ```bash
 docker-compose up
 ```
-
-To use Time Tracker, navigate to: http://localhost:8080. Default credentials for initial login are:
+Navigate to: http://localhost:8080 to use Time Tracker. Default credentials for initial login are:
 ```
 usr: admin
 psw: secret
