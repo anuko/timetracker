@@ -7,7 +7,7 @@
 # Reporting Bugs
 
 * GitHub users: create a [new issue](https://github.com/anuko/timetracker/issues) here.
-* Forum users: post a [new topic](https://www.anuko.com/forum/viewforum.php?f=4 here.
+* Forum users: post a [new topic](https://www.anuko.com/forum/viewforum.php?f=4) here.
 * Or, send us a [message](https://www.anuko.com/contact.htm).
 
 
