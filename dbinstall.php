@@ -92,7 +92,7 @@ if ($request->isGet()) {
     echo('<font color="red">Error: PHP version is not high enough: '.phpversion().'. Required: '.$required_version.'.</font><br>');
   }
 
-  // Check is PHP session path is writeable.
+  // Check if PHP session path is writeable.
   if (!is_writable(session_save_path())) {
     echo('<font color="red">Error: PHP session path '.session_save_path().' is not writable.</font><br>');
   }
