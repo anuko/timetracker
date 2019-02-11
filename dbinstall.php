@@ -92,6 +92,11 @@ if ($request->isGet()) {
     echo('<font color="red">Error: PHP version is not high enough: '.phpversion().'. Required: '.$required_version.'.</font><br>');
   }
 
+  // Check is PHP session path is writeable.
+  if (!is_writable(session_save_path())) {
+    echo('<font color="red">Error: PHP session path '.session_save_path().' is not writable.</font><br>');
+  }
+
   // Depending on DSN, require either mysqli or mysql extensions.
   if (strrpos(DSN, 'mysqli://', -strlen(DSN)) !== FALSE) {
     if (extension_loaded('mysqli')) {
