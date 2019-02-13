@@ -50,6 +50,16 @@ function ttExecute($sql) {
 if ($request->isGet()) {
   echo('<h2>Environment Checks</h2>');
 
+  // Determine if cookies are enabled in browser.
+  // session_start(); // already called in initialize.php.
+  $session_id1 = session_id();
+  session_destroy();
+  session_start();
+  $session_id2 = session_id();
+  if ($session_id1 != $session_id2) {
+    echo('<font color="red">Error: browser cookies are off.</font><br>');
+  }
+
   // Check if WEB-INF/templates_c dir is writable.
   if (is_writable(APP_DIR.'/WEB-INF/templates_c/')) {
     echo('WEB-INF/templates_c/ directory is writable.<br>');
@@ -90,11 +100,6 @@ if ($request->isGet()) {
     echo('PHP version: '.phpversion().', good enough.<br>');
   } else {
     echo('<font color="red">Error: PHP version is not high enough: '.phpversion().'. Required: '.$required_version.'.</font><br>');
-  }
-
-  // Check if PHP session path is writeable.
-  if (!is_writable(session_save_path())) {
-    echo('<font color="red">Error: PHP session path '.session_save_path().' is not writable.</font><br>');
   }
 
   // Depending on DSN, require either mysqli or mysql extensions.
