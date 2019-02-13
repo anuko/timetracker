@@ -197,6 +197,7 @@ CREATE TABLE `tt_log` (
   `client_id` int(11) default NULL,                # client id
   `project_id` int(11) default NULL,               # project id
   `task_id` int(11) default NULL,                  # task id
+  `timesheet_id` int(11) default NULL,             # timesheet id
   `invoice_id` int(11) default NULL,               # invoice id
   `comment` text,                                  # user provided comment for time record
   `billable` tinyint(4) default 0,                 # whether the record is billable or not
@@ -219,6 +220,7 @@ create index client_idx on tt_log(client_id);
 create index invoice_idx on tt_log(invoice_id);
 create index project_idx on tt_log(project_id);
 create index task_idx on tt_log(task_id);
+create index timesheet_idx on tt_log(timesheet_id);
 
 
 #
@@ -425,6 +427,7 @@ CREATE TABLE `tt_expense_items` (
   `org_id` int(11) default NULL,          # organization id
   `client_id` int(11) default NULL,       # client id
   `project_id` int(11) default NULL,      # project id
+  `timesheet_id` int(11) default NULL,    # timesheet id
   `name` text NOT NULL,                   # expense item name (what is an expense for)
   `cost` decimal(10,2) default '0.00',    # item cost (including taxes, etc.)
   `invoice_id` int(11) default NULL,      # invoice id
@@ -445,6 +448,7 @@ create index user_idx on tt_expense_items(user_id);
 create index group_idx on tt_expense_items(group_id);
 create index client_idx on tt_expense_items(client_id);
 create index project_idx on tt_expense_items(project_id);
+create index timesheet_idx on tt_expense_items(timesheet_id);
 create index invoice_idx on tt_expense_items(invoice_id);
 
 
@@ -477,6 +481,31 @@ CREATE TABLE `tt_monthly_quotas` (
 
 
 #
+# Structure for table tt_timesheets. This table keeps timesheet related information.
+#
+CREATE TABLE `tt_timesheets` (
+  `id` int(11) NOT NULL auto_increment,            # timesheet id
+  `user_id` int(11) NOT NULL,                      # user id
+  `group_id` int(11) default NULL,                 # group id
+  `org_id` int(11) default NULL,                   # organization id
+  `client_id` int(11) default NULL,                # client id
+  `name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # timesheet name
+  `submit_status` tinyint(4) default NULL,         # submit status
+  `submitter_comment` text,                        # submitter comment
+  `approval_status` tinyint(4) default NULL,       # approval status
+  `manager_comment` text,                          # manager comment
+  `created` datetime default NULL,                 # creation timestamp
+  `created_ip` varchar(45) default NULL,           # creator ip
+  `created_by` int(11) default NULL,               # creator user_id
+  `modified` datetime default NULL,                # modification timestamp
+  `modified_ip` varchar(45) default NULL,          # modifier ip
+  `modified_by` int(11) default NULL,              # modifier user_id
+  `status` tinyint(4) default 1,                   # timesheet status
+  PRIMARY KEY (`id`)
+);
+
+
+#
 # Structure for table tt_site_config. This table stores configuration data
 # for Time Tracker site as a whole.
 # For example, database version, code version, site language, etc.
@@ -489,4 +518,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.36', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.37', now()); # TODO: change when structure changes.

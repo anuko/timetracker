@@ -967,7 +967,7 @@ if ($_POST) {
     print "Updated $tt_expense_items_updated tt_expense_items records...<br>\n";
   }
 
-  if ($_POST["convert11797to11836"]) {
+  if ($_POST["convert11797to11837"]) {
     ttExecute("ALTER TABLE `tt_fav_reports` CHANGE `group_by` `group_by1` varchar(20) default NULL");
     ttExecute("ALTER TABLE `tt_fav_reports` ADD `group_by2` varchar(20) default NULL AFTER `group_by1`");
     ttExecute("ALTER TABLE `tt_fav_reports` ADD `group_by3` varchar(20) default NULL AFTER `group_by2`");
@@ -1056,6 +1056,11 @@ if ($_POST) {
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.36', modified = now() where param_name = 'version_db' and param_value = '1.18.34'");
     ttExecute("update `tt_users` u inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.36') set u.quota_percent = 100.00 where u.quota_percent is null");
     ttExecute("ALTER TABLE `tt_users` modify `quota_percent` float(6,2) NOT NULL default '100.00'");
+    ttExecute("CREATE TABLE `tt_timesheets` (`id` int(11) NOT NULL auto_increment, `user_id` int(11) NOT NULL, `group_id` int(11) default NULL, `org_id` int(11) default NULL, `client_id` int(11) default NULL, `name` varchar(80) COLLATE utf8mb4_bin NOT NULL, `submit_status` tinyint(4) default NULL, `submitter_comment` text, `approval_status` tinyint(4) default NULL, `manager_comment` text, `created` datetime default NULL, `created_ip` varchar(45) default NULL, `created_by` int(11) default NULL, `modified` datetime default NULL, `modified_ip` varchar(45) default NULL, `modified_by` int(11) default NULL, `status` tinyint(4) default 1, PRIMARY KEY (`id`))");
+    ttExecute("ALTER TABLE `tt_log` ADD `timesheet_id` int(11) default NULL AFTER `task_id`");
+    ttExecute("create index timesheet_idx on tt_log(timesheet_id)");
+    ttExecute("ALTER TABLE `tt_expense_items` ADD `timesheet_id` int(11) default NULL AFTER `project_id`");
+    ttExecute("create index timesheet_idx on tt_expense_items(timesheet_id)");
   }
 
   if ($_POST["cleanup"]) {
@@ -1103,7 +1108,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.18.36)</b>
+    <td width="80%"><b>Create database structure (v1.18.37)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -1148,8 +1153,8 @@ if ($_POST) {
   </tr>
   </tr>
   <tr valign="top">
-    <td>Update database structure (v1.17.97 to v1.18.36)</td>
-    <td><input type="submit" name="convert11797to11836" value="Update"></td>
+    <td>Update database structure (v1.17.97 to v1.18.37)</td>
+    <td><input type="submit" name="convert11797to11837" value="Update"></td>
   </tr>
 </table>
 
