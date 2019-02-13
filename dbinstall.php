@@ -1061,6 +1061,7 @@ if ($_POST) {
     ttExecute("create index timesheet_idx on tt_log(timesheet_id)");
     ttExecute("ALTER TABLE `tt_expense_items` ADD `timesheet_id` int(11) default NULL AFTER `project_id`");
     ttExecute("create index timesheet_idx on tt_expense_items(timesheet_id)");
+    ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.37', modified = now() where param_name = 'version_db' and param_value = '1.18.36'");
   }
 
   if ($_POST["cleanup"]) {
