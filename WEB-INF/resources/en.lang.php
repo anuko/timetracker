@@ -52,6 +52,7 @@ $i18n_key_words = array(
 'menu.time' => 'Time',
 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Reports',
+'menu.timesheets' => 'Timesheets',
 'menu.charts' => 'Charts',
 'menu.projects' => 'Projects',
 'menu.tasks' => 'Tasks',

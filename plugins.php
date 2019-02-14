@@ -51,6 +51,7 @@ if ($request->isPost()) {
   $cl_quotas = $request->getParameter('quotas');
   $cl_week_view = $request->getParameter('week_view');
   $cl_work_units = $request->getParameter('work_units');
+  $cl_timesheets = $request->getParameter('timesheets');
 } else {
   // Note: we get here in get, and also in post when group changes.
   // Which plugins do we have enabled in currently selected group?
@@ -68,6 +69,7 @@ if ($request->isPost()) {
   $cl_quotas = in_array('mq', $plugins);
   $cl_week_view = in_array('wv', $plugins);
   $cl_work_units = in_array('wu', $plugins);
+  $cl_timesheets = in_array('ts', $plugins);
 }
 
 $form = new Form('pluginsForm');
@@ -86,6 +88,7 @@ $form->addInput(array('type'=>'checkbox','name'=>'locking','value'=>$cl_locking,
 $form->addInput(array('type'=>'checkbox','name'=>'quotas','value'=>$cl_quotas,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'week_view','value'=>$cl_week_view,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'work_units','value'=>$cl_work_units,'onchange'=>'handlePluginCheckboxes()'));
+$form->addInput(array('type'=>'checkbox','name'=>'timesheets','value'=>$cl_timesheets));
 // Submit button.
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
@@ -120,6 +123,8 @@ if ($request->isPost()) {
     $plugins .= ',wv';
   if ($cl_work_units)
     $plugins .= ',wu';
+  if ($cl_timesheets)
+    $plugins .= ',ts';
 
   // Recycle week view plugin options as they are not configured on this page.
   $existing_plugins = explode(',', $user->getPlugins());
