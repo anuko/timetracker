@@ -1085,6 +1085,7 @@ if ($_POST) {
     ttExecute("OPTIMIZE TABLE tt_clients");
     ttExecute("OPTIMIZE TABLE tt_config");
     ttExecute("OPTIMIZE TABLE tt_cron");
+    ttExecute("OPTIMIZE TABLE tt_timesheets");
     ttExecute("OPTIMIZE TABLE tt_custom_field_log");
     ttExecute("OPTIMIZE TABLE tt_custom_field_options");
     ttExecute("OPTIMIZE TABLE tt_custom_fields");

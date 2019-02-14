@@ -101,6 +101,7 @@ class ttOrgHelper {
       'tt_custom_field_options',
       'tt_custom_fields',
       'tt_log',
+      'tt_timesheets', // TODO: check if order is correct. After doing export.
       'tt_invoices',
       'tt_user_project_binds',
       'tt_users',
