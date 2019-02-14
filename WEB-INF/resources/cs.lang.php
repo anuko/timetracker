@@ -307,6 +307,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'title.report' => 'Report',
 // 'title.send_report' => 'Sending Report',
+// 'title.timesheets' => 'Timesheets',
+// 'title.timesheet' => 'Timesheet',
 'title.invoice' => 'Faktura',
 // TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',

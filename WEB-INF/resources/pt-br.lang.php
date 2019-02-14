@@ -274,6 +274,9 @@ $i18n_key_words = array(
 'title.reports' => 'Relatórios',
 'title.report' => 'Report',
 'title.send_report' => 'Enviando relatório',
+// TODO: Translate the following.
+// 'title.timesheets' => 'Timesheets',
+// 'title.timesheet' => 'Timesheet',
 'title.invoice' => 'Fatura',
 'title.send_invoice' => 'Enviando fatura',
 'title.charts' => 'Gráficos',

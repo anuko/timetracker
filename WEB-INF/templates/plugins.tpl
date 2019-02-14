@@ -137,7 +137,7 @@ function handlePluginCheckboxes() {
 {if isTrue('TIMESHEET_DEBUG')}
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.timesheets.control}</td>
-            <td><label for="charts">{$i18n.menu.timesheets}</label></td>
+            <td><label for="charts">{$i18n.title.timesheets}</label></td>
           </tr>
 {/if}
           <tr>

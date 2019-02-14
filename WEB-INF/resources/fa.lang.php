@@ -282,6 +282,9 @@ $i18n_key_words = array(
 'title.reports' => 'گزارشات',
 'title.report' => 'گزارش',
 'title.send_report' => 'ارسال گزارش',
+// TODO: Translate the following.
+// 'title.timesheets' => 'Timesheets',
+// 'title.timesheet' => 'Timesheet',
 'title.invoice' => 'فاکتور',
 'title.send_invoice' => 'ارسال فاکتور',
 'title.charts' => 'نمودارها',

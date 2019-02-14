@@ -298,7 +298,10 @@ $i18n_key_words = array(
 // 'title.delete_predefined_expense' => 'Deleting Predefined Expense',
 'title.reports' => 'Rapporter',
 'title.report' => 'Rapport',
+// TODO: Translate the following.
 // 'title.send_report' => 'Sending Report',
+// 'title.timesheets' => 'Timesheets',
+// 'title.timesheet' => 'Timesheet',
 'title.invoice' => 'Faktura',
 // TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',

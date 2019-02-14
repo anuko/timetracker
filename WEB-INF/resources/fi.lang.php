@@ -276,6 +276,9 @@ $i18n_key_words = array(
 'title.reports' => 'Raportit',
 'title.report' => 'Raportti',
 'title.send_report' => 'Raportin lähetys',
+// TODO: Translate the following.
+// 'title.timesheets' => 'Timesheets',
+// 'title.timesheet' => 'Timesheet',
 'title.invoice' => 'Lasku',
 'title.send_invoice' => 'Laskun lähetys',
 'title.charts' => 'Kaaviot',

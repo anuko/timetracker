@@ -298,6 +298,8 @@ $i18n_key_words = array(
 'title.report' => '報告',
 // TODO: translate the following.
 // 'title.send_report' => 'Sending Report',
+// 'title.timesheets' => 'Timesheets',
+// 'title.timesheet' => 'Timesheet',
 'title.invoice' => '發票',
 // TODO: translate the following.
 // 'title.send_invoice' => 'Sending Invoice',
