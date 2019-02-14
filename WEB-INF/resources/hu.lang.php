@@ -56,6 +56,7 @@ $i18n_key_words = array(
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Riportok',
 // TODO: translate the following.
+// 'menu.timesheets' => 'Timesheets',
 // 'menu.charts' => 'Charts',
 'menu.projects' => 'Projektek',
 // 'menu.tasks' => 'Tasks',

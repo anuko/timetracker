@@ -54,6 +54,8 @@ $i18n_key_words = array(
 'menu.time' => 'زمان',
 'menu.expenses' => 'هزينه ها',
 'menu.reports' => 'گزارشات',
+// TODO: translate the following.
+// 'menu.timesheets' => 'Timesheets',
 'menu.charts' => 'نمودارها',
 'menu.projects' => 'پروژه ها',
 'menu.tasks' => 'وظايف',
