@@ -114,7 +114,11 @@
     {/if}
     {if $user->exists() && ($user->can('view_own_reports') || $user->can('view_reports'))}
             &middot; <a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a> 
-    {/if}        
+    {/if}
+    {if $user->exists() && $user->isPluginEnabled('ts') && ($user->can('view_own_timesheets') || $user->can('manage_own_timesheets') ||
+      $user->can('view_timesheets') || $user->can('manage_timesheets') || $user->can('approve_timesheets'))}
+            &middot; <a class="mainMenu" href="timesheets.php">{$i18n.menu.timesheets}</a>
+    {/if}
     {if $user->exists() && $user->isPluginEnabled('iv') && ($user->can('view_own_invoices') || $user->can('manage_invoices'))}
             &middot; <a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a>
     {/if}
