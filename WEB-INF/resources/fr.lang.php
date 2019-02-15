@@ -246,6 +246,9 @@ $i18n_key_words = array(
 // 'label.work_units_short' => 'Units',
 'label.totals_only' => 'Totaux uniquement',
 'label.quota' => 'Quota',
+// TODO: translate the following.
+// 'label.submitted' => 'Submitted',
+// 'label.approved' => 'Approved',
 
 // Form titles.
 'title.error' => 'Erreur',

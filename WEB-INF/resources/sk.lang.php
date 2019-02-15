@@ -260,6 +260,8 @@ $i18n_key_words = array(
 'label.totals_only' => 'Iba celkové',
 // TODO: translate the following.
 // 'label.quota' => 'Quota',
+// 'label.submitted' => 'Submitted',
+// 'label.approved' => 'Approved',
 
 // Form titles.
 'title.error' => 'Chyba',

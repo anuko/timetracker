@@ -266,6 +266,8 @@ $i18n_key_words = array(
 'label.totals_only' => 'Solo totales',
 // TODO: translate the following.
 // 'label.quota' => 'Quota',
+// 'label.submitted' => 'Submitted',
+// 'label.approved' => 'Approved',
 
 // Form titles.
 // TODO: Translate the following.

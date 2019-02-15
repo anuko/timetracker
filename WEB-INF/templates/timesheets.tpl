@@ -9,18 +9,15 @@
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr><td colspan="2">{$i18n.form.timesheets.hint}<br></td></tr>
         <tr>
-          <td class="tableHeader">{$i18n.label.invoice}</td>
+          <td class="tableHeader">{$i18n.label.thing_name}</td>
+  {if $user->isPluginEnabled('cl')}
           <td class="tableHeader">{$i18n.label.client}</td>
-          <td class="tableHeader">{$i18n.label.date}</td>
-  {if $user->isPluginEnabled('ps')}
-          <td class="tableHeader">{$i18n.label.paid}</td>
   {/if}
+  <td class="tableHeader">{$i18n.label.submitted}</td>
+  <td class="tableHeader">{$i18n.label.approved}</td>
           <td class="tableHeader">{$i18n.label.view}</td>
-  {if !$user->isClient()}
-          <td class="tableHeader">{$i18n.label.delete}</td>
-  {/if}
         </tr>
-        {foreach $invoices as $invoice}
+        {foreach $timesheets as $timesheet}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$invoice.name|escape}</td>
           <td>{$invoice.client_name|escape}</td>
@@ -38,7 +35,7 @@
 
   {if !$user->isClient()}
       <table width="100%">
-        <tr><td align="center"><br><form><input type="button" onclick="chLocation('invoice_add.php');" value="{$i18n.button.add}"></form></td></tr>
+        <tr><td align="center"><br><form><input type="button" onclick="chLocation('reports.php');" value="{$i18n.button.add}"></form></td></tr>
       </table>
   {/if}
 {/if}

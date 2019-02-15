@@ -228,6 +228,8 @@ $i18n_key_words = array(
 'label.work_units_short' => 'Единицы',
 'label.totals_only' => 'Только итоги',
 'label.quota' => 'Квота',
+'label.submitted' => 'Подано',
+'label.approved' => 'Одобрено',
 
 // Form titles.
 'title.error' => 'Ошибка',
