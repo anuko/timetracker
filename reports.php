@@ -151,6 +151,16 @@ if ($user->can('manage_invoices') && $user->isPluginEnabled('ps')) {
  ));
 }
 
+// TODO: check rights.
+if ($user->isPluginEnabled('ts')) {
+  $form->addInput(array('type'=>'combobox',
+   'name'=>'timesheet',
+   'style'=>'width: 250px;',
+   'data'=>array('1'=>$i18n->get('form.reports.include_assigned'),'2'=>$i18n->get('form.reports.include_not_assigned')),
+   'empty'=>array(''=>$i18n->get('dropdown.all'))
+ ));
+}
+
 $user_list = array();
 if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) {
   // Prepare user and assigned projects arrays.

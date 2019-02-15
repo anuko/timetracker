@@ -251,6 +251,7 @@ $i18n_key_words = array(
 'label.totals_only' => 'Ainult summad',
 'label.quota' => 'Kvoot',
 // TODO: translate the following.
+// 'label.timesheet' => 'Timesheet',
 // 'label.submitted' => 'Submitted',
 // 'label.approved' => 'Approved',
 

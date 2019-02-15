@@ -273,6 +273,7 @@ $i18n_key_words = array(
 'label.totals_only' => 'Pouze součty',
 // TODO: translate the following.
 // 'label.quota' => 'Quota',
+// 'label.timesheet' => 'Timesheet',
 // 'label.submitted' => 'Submitted',
 // 'label.approved' => 'Approved',
 

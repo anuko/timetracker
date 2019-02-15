@@ -229,6 +229,7 @@ $i18n_key_words = array(
 'label.work_units_short' => 'Units',
 'label.totals_only' => 'Totals only',
 'label.quota' => 'Quota',
+'label.timesheet' => 'Timesheet',
 'label.submitted' => 'Submitted',
 'label.approved' => 'Approved',
 
@@ -383,6 +384,8 @@ $i18n_key_words = array(
 'form.reports.include_not_billable' => 'not billable',
 'form.reports.include_invoiced' => 'invoiced',
 'form.reports.include_not_invoiced' => 'not invoiced',
+'form.reports.include_assigned' => 'assigned',
+'form.reports.include_not_assigned' => 'not assigned',
 'form.reports.select_period' => 'Select time period',
 'form.reports.set_period' => 'or set dates',
 'form.reports.show_fields' => 'Show fields',

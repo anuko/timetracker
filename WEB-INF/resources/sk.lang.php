@@ -259,6 +259,7 @@ $i18n_key_words = array(
 // 'label.work_units_short' => 'Units',
 'label.totals_only' => 'Iba celkové',
 // TODO: translate the following.
+// 'label.timesheet' => 'Timesheet',
 // 'label.quota' => 'Quota',
 // 'label.submitted' => 'Submitted',
 // 'label.approved' => 'Approved',

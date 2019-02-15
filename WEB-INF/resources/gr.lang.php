@@ -240,6 +240,7 @@ $i18n_key_words = array(
 'label.totals_only' => 'Σύνολα μόνο',
 'label.quota' => 'Ποσοστό',
 // TODO: translate the following.
+// 'label.timesheet' => 'Timesheet',
 // 'label.submitted' => 'Submitted',
 // 'label.approved' => 'Approved',
 

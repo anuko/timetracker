@@ -229,9 +229,17 @@ function handleCheckboxes() {
 {if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))}
         <tr>
           <td><b>{$i18n.label.paid_status}</b></td>
+          <td>&nbsp;</td>
+  {if $user->isPluginEnabled('ts')}
+          <td><b>{$i18n.label.timesheet}</b></td>
+  {/if}
         </tr>
         <tr>
           <td>{$forms.reportForm.paid_status.control}</td>
+          <td>&nbsp;</td>
+  {if $user->isPluginEnabled('ts')}
+          <td>{$forms.reportForm.timesheet.control}</td>
+  {/if}
         </tr>
 {/if}
 {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}

@@ -270,6 +270,7 @@ $i18n_key_words = array(
 'labl.totals_only' => 'סיכומים בלבד',
 // TODO: translate the following.
 // 'label.quota' => 'Quota',
+// 'label.timesheet' => 'Timesheet',
 // 'label.submitted' => 'Submitted',
 // 'label.approved' => 'Approved',
 
