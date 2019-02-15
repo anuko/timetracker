@@ -434,6 +434,8 @@ $i18n_key_words = array(
 // 'form.reports.include_not_billable' => 'not billable',
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
+// 'form.reports.include_assigned' => 'assigned',
+// 'form.reports.include_not_assigned' => 'not assigned',
 'form.reports.select_period' => 'Jelölj meg egy időszakot',
 'form.reports.set_period' => 'vagy állíts be konkrét dátumot',
 // TODO: translate the following.

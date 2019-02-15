@@ -384,6 +384,9 @@ $i18n_key_words = array(
 'form.reports.include_not_billable' => 'nicht in Rechnung stellen',
 'form.reports.include_invoiced' => 'berechnet',
 'form.reports.include_not_invoiced' => 'nicht berechnet',
+// TODO: translate the following.
+// 'form.reports.include_assigned' => 'assigned',
+// 'form.reports.include_not_assigned' => 'not assigned',
 'form.reports.select_period' => 'Zeitraum auswählen',
 'form.reports.set_period' => 'oder Datum eingeben',
 'form.reports.show_fields' => 'Felder anzeigen',

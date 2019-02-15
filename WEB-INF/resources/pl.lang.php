@@ -413,6 +413,9 @@ $i18n_key_words = array(
 'form.reports.include_not_billable' => 'bezpłatne',
 'form.reports.include_invoiced' => 'fakturowane',
 'form.reports.include_not_invoiced' => 'nie fakturowane',
+// TODO: translate the following.
+// 'form.reports.include_assigned' => 'assigned',
+// 'form.reports.include_not_assigned' => 'not assigned',
 'form.reports.select_period' => 'Wybierz okres',
 'form.reports.set_period' => 'lub ustaw daty',
 'form.reports.show_fields' => 'Pokaż pola',

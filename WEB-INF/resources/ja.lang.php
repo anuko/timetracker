@@ -441,6 +441,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
+// 'form.reports.include_assigned' => 'assigned',
+// 'form.reports.include_not_assigned' => 'not assigned',
 'form.reports.select_period' => '時間期間の選択',
 'form.reports.set_period' => 'あるいは日付を設定',
 'form.reports.show_fields' => 'フィールドの表示',

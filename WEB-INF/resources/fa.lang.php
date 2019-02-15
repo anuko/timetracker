@@ -424,6 +424,11 @@ $i18n_key_words = array(
 'form.reports.confirm_delete' => 'آیا می خواهید گزارش برگزیده حذف شود؟',
 'form.reports.include_billable' => 'قابل پرداخت',
 'form.reports.include_not_billable' => 'غیرقابل پرداخت',
+// TODO: translate the following.
+// 'form.reports.include_invoiced' => 'invoiced',
+// 'form.reports.include_not_invoiced' => 'not invoiced',
+// 'form.reports.include_assigned' => 'assigned',
+// 'form.reports.include_not_assigned' => 'not assigned',
 'form.reports.select_period' => 'انتخاب بازه زمانی',
 'form.reports.set_period' => 'یا تعیین تاریخ',
 'form.reports.show_fields' => 'نمایش فیلدها',

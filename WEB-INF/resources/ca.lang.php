@@ -432,6 +432,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.include_invoiced' => 'invoiced',
 // 'form.reports.include_not_invoiced' => 'not invoiced',
+// 'form.reports.include_assigned' => 'assigned',
+// 'form.reports.include_not_assigned' => 'not assigned',
 'form.reports.select_period' => 'Seleccionar període de temps',
 'form.reports.set_period' => 'o establir dates',
 'form.reports.show_fields' => 'Mostrar camps',

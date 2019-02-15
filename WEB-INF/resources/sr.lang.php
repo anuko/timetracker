@@ -411,6 +411,9 @@ $i18n_key_words = array(
 'form.reports.include_not_billable' => 'ne naplativo',
 'form.reports.include_invoiced' => 'obračunato',
 'form.reports.include_not_invoiced' => 'nije obračunato',
+// TODO: translate the following.
+// 'form.reports.include_assigned' => 'assigned',
+// 'form.reports.include_not_assigned' => 'not assigned',
 'form.reports.select_period' => 'Odaberi vremenski raspon',
 'form.reports.set_period' => 'ili podesi datum',
 'form.reports.show_fields' => 'Prikaži polja u izveštaju',

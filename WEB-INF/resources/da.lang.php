@@ -405,6 +405,9 @@ $i18n_key_words = array(
 'form.reports.include_not_billable' => 'Ikke fakturerbar',
 'form.reports.include_invoiced' => 'Faktureret',
 'form.reports.include_not_invoiced' => 'Ikke faktureret',
+// TODO: translate the following.
+// 'form.reports.include_assigned' => 'assigned',
+// 'form.reports.include_not_assigned' => 'not assigned',
 'form.reports.select_period' => 'Vælg en periode',
 'form.reports.set_period' => 'eller sæt datoer',
 'form.reports.show_fields' => 'Vis felter',

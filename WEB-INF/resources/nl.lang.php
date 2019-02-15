@@ -380,6 +380,9 @@ $i18n_key_words = array(
 'form.reports.include_not_billable' => 'niet factureerbaar',
 'form.reports.include_invoiced' => 'gefactureerd',
 'form.reports.include_not_invoiced' => 'niet gefactureerd',
+// TODO: translate the following.
+// 'form.reports.include_assigned' => 'assigned',
+// 'form.reports.include_not_assigned' => 'not assigned',
 'form.reports.select_period' => 'Kies periode',
 'form.reports.set_period' => 'of stel datums in',
 'form.reports.show_fields' => 'Toon velden',

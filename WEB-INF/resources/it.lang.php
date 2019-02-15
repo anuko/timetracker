@@ -406,6 +406,9 @@ $i18n_key_words = array(
 'form.reports.include_not_billable' => 'non fatturabile',
 'form.reports.include_invoiced' => 'fatturato',
 'form.reports.include_not_invoiced' => 'non fatturato',
+// TODO: translate the following.
+// 'form.reports.include_assigned' => 'assigned',
+// 'form.reports.include_not_assigned' => 'not assigned',
 'form.reports.select_period' => 'Seleziona il periodo di tempo',
 'form.reports.set_period' => 'oppure setta le date',
 'form.reports.show_fields' => 'Mostra i campi',

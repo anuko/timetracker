@@ -409,6 +409,9 @@ $i18n_key_words = array(
 'form.reports.include_not_billable' => 'Icke debiterbar tid',
 'form.reports.include_invoiced' => 'Fakturerad tid',
 'form.reports.include_not_invoiced' => 'Icke fakturerad tid',
+// TODO: translate the following.
+// 'form.reports.include_assigned' => 'assigned',
+// 'form.reports.include_not_assigned' => 'not assigned',
 'form.reports.select_period' => 'Välj intervall',
 'form.reports.set_period' => 'eller ställ in datum',
 'form.reports.show_fields' => 'Visa fält',

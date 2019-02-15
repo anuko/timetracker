@@ -409,6 +409,8 @@ $i18n_key_words = array(
 // Our concern is that Google auto-translates "arveldamata" as unpaid. Therefore, we may need a fix here.
 // 'form.reports.include_invoiced' => 'arveldatud', // TODO: fix as per the above comment, if needed.
 // 'form.reports.include_not_invoiced' => 'arveldamata', // TODO: fix as per the above comment, if needed.
+// 'form.reports.include_assigned' => 'assigned',
+// 'form.reports.include_not_assigned' => 'not assigned',
 
 'form.reports.select_period' => 'Vali ajaperiood',
 'form.reports.set_period' => 'või märgi kuupäevad',

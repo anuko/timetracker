@@ -393,6 +393,9 @@ $i18n_key_words = array(
 'form.reports.include_not_billable' => 'μη χρεώσιμο',
 'form.reports.include_invoiced' => 'τιμολόγηση',
 'form.reports.include_not_invoiced' => 'χωρίς τιμολόγηση',
+// TODO: translate the following.
+// 'form.reports.include_assigned' => 'assigned',
+// 'form.reports.include_not_assigned' => 'not assigned',
 'form.reports.select_period' => 'Επιλογή χρονικής περιόδου',
 'form.reports.set_period' => 'ή εύρος ημερομηνιών',
 'form.reports.show_fields' => 'Εμφάνιση πεδίων',
