@@ -1067,6 +1067,12 @@ if ($_POST) {
     ttExecute("ALTER TABLE `tt_expense_items` ADD `timesheet_id` int(11) default NULL AFTER `project_id`");
     ttExecute("create index timesheet_idx on tt_expense_items(timesheet_id)");
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.37', modified = now() where param_name = 'version_db' and param_value = '1.18.36'");
+    ttExecute("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.37') set rights = 'track_own_time,track_own_expenses,view_own_reports,view_own_timesheets,manage_own_timesheets,view_own_charts,view_own_invoices,view_own_projects,view_own_tasks,manage_own_settings,view_users,track_time,track_expenses,view_reports,view_timesheets,manage_timesheets,approve_timesheets,view_charts,view_own_clients,override_punch_mode,override_own_punch_mode,override_date_lock,override_own_date_lock,swap_roles,manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,override_allow_ip,manage_basic_settings,view_all_reports,manage_features,manage_advanced_settings,manage_roles,export_data,manage_subgroups,delete_group' where rank = 512");
+    ttExecute("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.37') set rights = replace(rights, 'view_own_reports,view_own_charts', 'view_own_reports,view_own_timesheets,view_own_charts') where rank = 16");
+    ttExecute("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.37') set rights = replace(rights, 'view_own_reports,view_own_charts', 'view_own_reports,view_own_timesheets,manage_own_timesheets,view_own_charts') where rank = 4 or rank = 12 or rank = 68 or rank = 324");
+    ttExecute("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.37') set rights = replace(rights, 'view_reports,view_charts', 'view_reports,view_timesheets,manage_timesheets,approve_timesheets,view_charts') where rank = 12 or rank = 68 or rank = 324");
+    ttExecute("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.37') set rights = replace(rights, 'swap_roles,approve_timesheets', 'swap_roles') where rank = 12 or rank = 68 or rank = 324");
+    ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.38', modified = now() where param_name = 'version_db' and param_value = '1.18.37'");
   }
 
   if ($_POST["cleanup"]) {
