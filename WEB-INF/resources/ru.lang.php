@@ -389,6 +389,9 @@ $i18n_key_words = array(
 'form.report.export' => 'Экспортировать',
 'form.report.assign_to_invoice' => 'Включить в счёт',
 
+// Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
+'form.timesheets.hint' => 'Используйте отчёты для добавления новых табелей.',
+
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
 'form.invoice.number' => 'Номер счёта',

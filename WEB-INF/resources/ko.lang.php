@@ -455,6 +455,10 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.report.assign_to_invoice' => 'Assign to invoice',
 
+// Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
+// TODO: translate the following.
+// form.timesheets.hint' => 'Use reports to add new timesheets.',
+
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
 'form.invoice.number' => '송장 번호',

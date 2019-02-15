@@ -392,6 +392,10 @@ $i18n_key_words = array(
 'form.report.export' => 'Exporteer',
 'form.report.assign_to_invoice' => 'Voeg toe aan factuur',
 
+// Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
+// TODO: translate the following.
+// form.timesheets.hint' => 'Use reports to add new timesheets.',
+
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
 'form.invoice.number' => 'Factuur nummer',

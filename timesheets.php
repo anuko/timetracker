@@ -40,15 +40,15 @@ if (!(ttAccessAllowed('view_own_timesheets') ||
   exit();
 }
 
-if (!$user->isPluginEnabled('ts_NEVER_ENABLED')) { // Work in progress...
+if (!$user->isPluginEnabled('ts')) {
   header('Location: feature_disabled.php');
   exit();
 }
 // End of access checks.
 
-//$invoices = ttGroupHelper::getActiveInvoices();
+$timesheets = $user->getTimesheets();
 
-//$smarty->assign('invoices', $invoices);
+$smarty->assign('timesheets', $timesheets);
 $smarty->assign('title', $i18n->get('title.timesheets'));
-$smarty->assign('content_page_name', 'invoices.tpl'); // TODO: fix this, too.
+$smarty->assign('content_page_name', 'timesheets.tpl');
 $smarty->display('index.tpl');
