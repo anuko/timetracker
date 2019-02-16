@@ -180,69 +180,50 @@ function handleCheckboxes() {
   <tr>
     <td valign="top" colspan="2" align="center">
       <table border="0" cellpadding="3">
-{if (($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) || ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN))}
         <tr>
-  {if $user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)}<td><b>{$i18n.label.client}</b></td>{else}<td>&nbsp;</td>{/if}
-          <td>&nbsp;</td>
-  {if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)}<td><b>{$i18n.label.option}</b></td>{else}<td>&nbsp;</td>{/if}
-        </tr>
-        <tr>
-          <td>{$forms.reportForm.client.control}</td>
-          <td>&nbsp;</td>
-          <td>{$forms.reportForm.option.control}</td>
-        </tr>
+          <td valign="top">
+            <table border="0" cellpadding="3">
+{if $show_client}
+              <tr><td><b>{$i18n.label.client}</b></td></tr>
+              <tr><td>{$forms.reportForm.client.control}</td></tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <tr>
-          <td><b>{$i18n.label.project}</b></td>
-          <td>&nbsp;</td>
-  {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-          <td><b>{$i18n.label.task}</b></td>
-  {/if}
-        </tr>
+{if $show_project}
+              <tr><td><b>{$i18n.label.project}</b></td></tr>
+              <tr><td>{$forms.reportForm.project.control}</td></tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <tr>
-          <td>{$forms.reportForm.project.control}</td>
-          <td>&nbsp;</td>
-  {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-          <td>{$forms.reportForm.task.control}</td>
-  {/if}
-        </tr>
+{if $show_billable}
+              <tr><td><b>{$i18n.form.time.billable}</b></td></tr>
+              <tr><td>{$forms.reportForm.include_records.control}</td></tr>
 {/if}
-{if $user->isPluginEnabled('iv')}
-        <tr>
-          <td><b>{$i18n.form.time.billable}</b></td>
-          <td>&nbsp;</td>
-  {if $user->can('manage_invoices')}
-          <td><b>{$i18n.label.invoice}</b></td>
-  {/if}
-        </tr>
-        <tr valign="top">
-          <td>{$forms.reportForm.include_records.control}</td>
-          <td>&nbsp;</td>
-  {if $user->can('manage_invoices')}
-          <td>{$forms.reportForm.invoice.control}</td>
-        </tr>
-  {/if}
+{if $show_paid_status}
+              <tr><td><b>{$i18n.label.paid_status}</b></td></tr>
+              <tr><td>{$forms.reportForm.paid_status.control}</td></tr>
 {/if}
-{if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))}
-        <tr>
-          <td><b>{$i18n.label.paid_status}</b></td>
-          <td>&nbsp;</td>
-  {if $user->isPluginEnabled('ts')}
-          <td><b>{$i18n.label.timesheet}</b></td>
-  {/if}
-        </tr>
-        <tr>
-          <td>{$forms.reportForm.paid_status.control}</td>
-          <td>&nbsp;</td>
-  {if $user->isPluginEnabled('ts')}
-          <td>{$forms.reportForm.timesheet.control}</td>
-  {/if}
-        </tr>
+            </table>
+          </td>
+          <td></td>
+          <td valign="top">
+            <table border="0" cellpadding="3">
+{if $show_cf_1_dropdown}
+              <tr><td><b>{$i18n.label.option}</b></td></tr>
+              <tr><td>{$forms.reportForm.option.control}</td></tr>
 {/if}
-{if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}
+{if $show_task}
+              <tr><td><b>{$i18n.label.task}</b></td></tr>
+              <tr><td>{$forms.reportForm.task.control}</td></tr>
+{/if}
+{if $show_invoice_dropdown}
+              <tr><td><b>{$i18n.label.invoice}</b></td></tr>
+              <tr><td>{$forms.reportForm.invoice.control}</td></tr>
+{/if}
+{if $show_timesheet}
+              <tr><td><b>{$i18n.label.timesheet}</b></td></tr>
+              <tr><td>{$forms.reportForm.timesheet.control}</td></tr>
+{/if}
+            </table>
+          </td>
+        </tr>
+{if $show_users}
         <tr>
           <td colspan="3"><b>{$i18n.label.users}</b></td>
         </tr>
@@ -269,56 +250,65 @@ function handleCheckboxes() {
         <tr>
           <td colspan="3">
             <table border="0" width="100%">
-{if $user->can('view_reports') || $user->can('view_all_reports') || $user->isPluginEnabled('cl') || $user->isPluginEnabled('iv') || $user->isPluginEnabled('ps')}
               <tr>
-  {if $user->isPluginEnabled('cl')}
-                <td width="25%"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td>
-  {/if}
-  {if ($user->can('manage_invoices') || $user->isClient()) && $user->isPluginEnabled('iv')}
-                <td width="25%"><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></td>
-  {/if}
-  {if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))}
-                <td width="25%"><label>{$forms.reportForm.chpaid.control}&nbsp;{$i18n.label.paid}</label></td>
-  {/if}
-  {if $user->can('view_reports') || $user->can('view_all_reports')}
-                <td width="25%"><label>{$forms.reportForm.chip.control}&nbsp;{$i18n.label.ip}</label></td>
-  {/if}
-              </tr>
+                <td width="25%" valign="top">
+                  <table border="0" cellpadding="3">
+{if $show_client}
+                    <tr><td><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td></tr>
 {/if}
-              <tr>
-                <td width="25%">{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<label>{$forms.reportForm.chproject.control}&nbsp;{$i18n.label.project}</label>{/if}</td>
-                <td width="25%">{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<label>{$forms.reportForm.chstart.control}&nbsp;{$i18n.label.start}</label>{/if}</td>
-                <td width="25%"><label>{$forms.reportForm.chduration.control}&nbsp;{$i18n.label.duration}</label></td>
-{if ($user->can('manage_invoices') || $user->isClient()) || $user->isPluginEnabled('ex')}
-                  <td width="25%"><label>{$forms.reportForm.chcost.control}&nbsp;{$i18n.label.cost}</label></td>
-{else}
-                  <td></td>
+{if $show_project}
+                    <tr><td><label>{$forms.reportForm.chproject.control}&nbsp;{$i18n.label.project}</label></td></tr>
 {/if}
-              </tr>
-              <tr>
-                <td>{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<label>{$forms.reportForm.chtask.control}&nbsp;{$i18n.label.task}</label>{/if}</td>
-                <td>{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<label>{$forms.reportForm.chfinish.control}&nbsp;{$i18n.label.finish}</label>{/if}</td>
-                <td><label>{$forms.reportForm.chnote.control}&nbsp;{$i18n.label.note}</label></td>
-{if ($custom_fields && $custom_fields->fields[0])}
-                <td><label>{$forms.reportForm.chcf_1.control}&nbsp;{$custom_fields->fields[0]['label']|escape}</label></td>
-{else}
-                <td></td>
+{if $show_timesheet}
+                    <tr><td><label>{$forms.reportForm.chtimesheet.control}&nbsp;{$i18n.label.timesheet}</label></td></tr>
 {/if}
-              </tr>
-{if $user->isPluginEnabled('wu')}
-              <tr>
-                <td></td>
-                <td></td>
-                <td width="25%"><label>{$forms.reportForm.chunits.control}&nbsp;{$i18n.label.work_units}</label></td>
-                <td></td>
-              </tr>
+{if $show_cf_1_checkbox}
+                    <tr><td><label>{$forms.reportForm.chcf_1.control}&nbsp;{$custom_fields->fields[0]['label']|escape}</label></td></tr>
 {/if}
+                  </table>
+                </td>
+                <td width="25%" valign="top">
+                  <table border="0" cellpadding="3">
+{if $show_start}
+                    <tr><td><label>{$forms.reportForm.chstart.control}&nbsp;{$i18n.label.start}</label></td></tr>
+{/if}
+{if $show_task}
+                    <tr><td><label>{$forms.reportForm.chtask.control}&nbsp;{$i18n.label.task}</label></td></tr>
+{/if}
+{if $show_ip}
+                    <tr><td><label>{$forms.reportForm.chip.control}&nbsp;{$i18n.label.ip}</label></td></tr>
+{/if}
+{if $show_work_units}
+                    <tr><td><label>{$forms.reportForm.chunits.control}&nbsp;{$i18n.label.work_units}</label></td></tr>
+{/if}
+                  </table>
+                </td>
+                <td width="25%" valign="top">
+                  <table border="0" cellpadding="3">
+{if $show_finish}
+                    <tr><td><label>{$forms.reportForm.chfinish.control}&nbsp;{$i18n.label.finish}</label></td></tr>
+{/if}
+                    <tr><td><label>{$forms.reportForm.chnote.control}&nbsp;{$i18n.label.note}</label></td></tr>
+{if $show_invoice_checkbox}
+                    <tr><td><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></td></tr>
+{/if}
+                  </table>
+                </td>
+                <td width="25%" valign="top">
+                  <table border="0" cellpadding="3">
+                    <tr><td><label>{$forms.reportForm.chduration.control}&nbsp;{$i18n.label.duration}</label></td></tr>
+                    <tr><td><label>{$forms.reportForm.chcost.control}&nbsp;{$i18n.label.cost}</label></td></tr>
+{if $show_paid_status}
+                    <tr><td><label>{$forms.reportForm.chpaid.control}&nbsp;{$i18n.label.paid}</label></td></tr>
+{/if}
+                  </table>
+                </td>
+              </tr>
             </table>
           </td>
         </tr>
-        <tr>
-            <td><b>{$i18n.form.reports.group_by}</b></td>
-        </tr>
+
+        <tr><td><b>{$i18n.form.reports.group_by}</b></td></tr>
         <tr valign="top">
           <td>{$forms.reportForm.group_by1.control}</td>
           <td>{$forms.reportForm.group_by2.control}</td>
