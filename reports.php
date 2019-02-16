@@ -49,12 +49,15 @@ if (!$user->exists()) {
 // End of access checks.
 
 $trackingMode = $user->getTrackingMode();
+$showClient = $user->isPluginEnabled('cl') && !$user->isClient();
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
   $custom_fields = new CustomFields();
   $smarty->assign('custom_fields', $custom_fields);
+  $showCustomFieldCheckbox = $custom_fields->fields[0];
+  $showCustomFieldDropdown = $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN;
 }
 
 $form = new Form('reportForm');
@@ -74,7 +77,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_generate','value'=>$i18n->ge
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete'),'onclick'=>"return confirm('".$i18n->get('form.reports.confirm_delete')."')"));
 
 // Dropdown for clients if the clients plugin is enabled.
-if ($user->isPluginEnabled('cl') && !$user->isClient()) {
+if ($showClient) {
   if ($user->can('view_reports') || $user->can('view_all_reports')) {
     $client_list = ttClientHelper::getClients(); // TODO: improve getClients for "view_reports"
                                                  // by filtering out not relevant clients.
@@ -88,13 +91,13 @@ if ($user->isPluginEnabled('cl') && !$user->isClient()) {
     'empty'=>array(''=>$i18n->get('dropdown.all'))));
 }
 
-// If we have a TYPE_DROPDOWN custom field - add control to select an option.
-if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
-    $form->addInput(array('type'=>'combobox','name'=>'option',
-      'style'=>'width: 250px;',
-      'value'=>$cl_cf_1,
-      'data'=>$custom_fields->options,
-      'empty'=>array(''=>$i18n->get('dropdown.all'))));
+// If we have a TYPE_DROPDOWN custom field - add a control to select an option.
+if ($showCustomFieldDropdown) {
+  $form->addInput(array('type'=>'combobox','name'=>'option',
+    'style'=>'width: 250px;',
+    'value'=>$cl_cf_1,
+    'data'=>$custom_fields->options,
+    'empty'=>array(''=>$i18n->get('dropdown.all'))));
 }
 
 // Add controls for projects and tasks.
@@ -210,7 +213,7 @@ $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start_date'
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'end_date'));
 
 // Add checkboxes for fields.
-if ($user->isPluginEnabled('cl'))
+if ($showClient)
   $form->addInput(array('type'=>'checkbox','name'=>'chclient'));
 if (($user->can('manage_invoices') || $user->isClient()) && $user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'chinvoice'));
@@ -372,6 +375,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
+$smarty->assign('show_client', $showClient);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
 $smarty->assign('assigned_projects', $assigned_projects);
