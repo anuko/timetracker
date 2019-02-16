@@ -143,6 +143,8 @@ $i18n_key_words = array(
 'button.send' => 'Enviar',
 'button.send_by_email' => 'Enviar por correo',
 'button.create_group' => 'Crear grupo',
+// TODO: translate the following.
+// 'button.create_timesheet' => 'Create timesheet',
 'button.export' => 'Exportar grupo',
 'button.import' => 'Importar grupo',
 // TODO: translate the following.

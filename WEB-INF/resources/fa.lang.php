@@ -145,6 +145,8 @@ $i18n_key_words = array(
 'button.send' => 'ارسال',
 'button.send_by_email' => 'ارسال به ایمیل',
 'button.create_group' => 'ایجاد تیم', // TODO: replace "team" with "group".
+// TODO: translate the following.
+// 'button.create_timesheet' => 'Create timesheet',
 'button.export' => 'ایجاد پشتیبان از تیم', // TODO: replace "team" with "group".
 'button.import' => 'وارد کردن تیم', // TODO: replace "team" with "group".
 'button.close' => 'بستن',

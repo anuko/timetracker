@@ -137,6 +137,8 @@ $i18n_key_words = array(
 'button.send' => 'Skicka',
 'button.send_by_email' => 'Skicka som e-post',
 'button.create_group' => 'Skapa grupp',
+// TODO: translate the following.
+// 'button.create_timesheet' => 'Create timesheet',
 'button.export' => 'Exportera grupp',
 'button.import' => 'Importera grupp',
 'button.close' => 'Stäng',

@@ -183,6 +183,9 @@ if (ttReportHelper::grouping($options)) {
 }
 $totals = ttReportHelper::getTotals($options);
 
+// TODO: Determine if we can create a timesheet out of this report.
+// There must be only one user, and nothing assigned to existing timesheets.
+
 // Assign variables that are used to print subtotals.
 if ($report_items) {
   $smarty->assign('print_subtotals', true);

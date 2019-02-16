@@ -133,6 +133,8 @@ $i18n_key_words = array(
 'button.send' => 'Αποστολή',
 'button.send_by_email' => 'Αποστολή μέσω email',
 'button.create_group' => 'Δημιουργία ομάδας',
+// TODO: translate the following.
+// 'button.create_timesheet' => 'Create timesheet',
 'button.export' => 'Εξαγωγη ομάδας',
 'button.import' => 'Εισαγωγή ομάδας',
 'button.close' => 'Κλείσιμο',
