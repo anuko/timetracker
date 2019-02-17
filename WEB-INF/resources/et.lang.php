@@ -319,6 +319,10 @@ $i18n_key_words = array(
 'title.add_notification' => 'Teate lisamine',
 'title.edit_notification' => 'Teate muutmine',
 'title.delete_notification' => 'Teate kustutamine',
+// TODO: translate the following.
+// 'title.add_timesheet' => 'Adding Timesheet',
+// 'title.edit_timesheet' => 'Editing Timesheet',
+// 'title.delete_timesheet' => 'Deleting Timesheet',
 'title.monthly_quotas' => 'Kuu kvoot',
 'title.export' => 'Grupi andmete alla laadimine',
 'title.import' => 'Grupi andmete üles laadimine',

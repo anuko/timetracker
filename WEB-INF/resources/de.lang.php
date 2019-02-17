@@ -299,6 +299,10 @@ $i18n_key_words = array(
 'title.add_notification' => 'Benachrichtigung hinzufügen',
 'title.edit_notification' => 'Benachrichtigung bearbeiten',
 'title.delete_notification' => 'Benachrichtigung löschen',
+// TODO: translate the following.
+// 'title.add_timesheet' => 'Adding Timesheet',
+// 'title.edit_timesheet' => 'Editing Timesheet',
+// 'title.delete_timesheet' => 'Deleting Timesheet',
 'title.monthly_quotas' => 'Monatliche Quoten',
 'title.export' => 'Daten exportieren',
 'title.import' => 'Daten importieren',

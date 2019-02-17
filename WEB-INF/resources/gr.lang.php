@@ -306,6 +306,10 @@ $i18n_key_words = array(
 'title.add_notification' => 'Προσθήκη ειδοποίησης',
 'title.edit_notification' => 'Επεξεργασία ειδοποίησης',
 'title.delete_notification' => 'Διαγραφή ειδοποίησης',
+// TODO: translate the following.
+// 'title.add_timesheet' => 'Adding Timesheet',
+// 'title.edit_timesheet' => 'Editing Timesheet',
+// 'title.delete_timesheet' => 'Deleting Timesheet',
 'title.monthly_quotas' => 'Μηνιαίες ποσοστώσεις',
 'title.export' => 'Εξαγωγή δεδομένων ομάδας',
 'title.import' => 'Εισαγωγή δεδομένων ομάδας',

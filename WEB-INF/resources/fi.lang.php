@@ -317,6 +317,9 @@ $i18n_key_words = array(
 'title.edit_notification' => 'Ilmoituksen muokkaus',
 'title.delete_notification' => 'Ilmoituksen poisto',
 // TODO: translate the following.
+// 'title.add_timesheet' => 'Adding Timesheet',
+// 'title.edit_timesheet' => 'Editing Timesheet',
+// 'title.delete_timesheet' => 'Deleting Timesheet',
 // 'title.monthly_quotas' => 'Monthly Quotas',
 'title.export' => 'Tiimitietojen vienti', // TODO: replace "team" with "group".
 'title.import' => 'Tiimitietojen tunti', // TODO: replace "team" with "group".

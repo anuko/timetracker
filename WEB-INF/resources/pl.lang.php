@@ -317,6 +317,10 @@ $i18n_key_words = array(
 'title.add_notification' => 'Dodawanie powiadomienia',
 'title.edit_notification' => 'Edytowanie powiadomienia',
 'title.delete_notification' => 'Usuwanie powiadomienia',
+// TODO: translate the following.
+// 'title.add_timesheet' => 'Adding Timesheet',
+// 'title.edit_timesheet' => 'Editing Timesheet',
+// 'title.delete_timesheet' => 'Deleting Timesheet',
 // 'title.monthly_quotas' => 'Monthly Quotas',
 'title.export' => 'Eksport danych zespołu', // TODO: replace "team" with "group".
 'title.import' => 'Import danych zespołu', // TODO: replace "team" with "group".

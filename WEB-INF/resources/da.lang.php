@@ -316,6 +316,10 @@ $i18n_key_words = array(
 'title.add_notification' => 'Tilføj Meddelelse',
 'title.edit_notification' => 'Redigér Meddelelse',
 'title.delete_notification' => 'Slet Meddelelse',
+// TODO: translate the following.
+// 'title.add_timesheet' => 'Adding Timesheet',
+// 'title.edit_timesheet' => 'Editing Timesheet',
+// 'title.delete_timesheet' => 'Deleting Timesheet',
 'title.monthly_quotas' => 'Månedlig Kvota',
 'title.export' => 'Eksporter Team Data', // TODO: replace "team" with "group".
 'title.import' => 'Importer Team Data', // TODO: replace "team" with "group".

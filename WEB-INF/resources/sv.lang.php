@@ -315,6 +315,10 @@ $i18n_key_words = array(
 'title.add_notification' => 'Lägg till avisering',
 'title.edit_notification' => 'Redigera avisering',
 'title.delete_notification' => 'Ta bort avisering',
+// TODO: translate the following.
+// 'title.add_timesheet' => 'Adding Timesheet',
+// 'title.edit_timesheet' => 'Editing Timesheet',
+// 'title.delete_timesheet' => 'Deleting Timesheet',
 'title.monthly_quotas' => 'Månadskvoter',
 'title.export' => 'Exportera grupp',
 'title.import' => 'Importera grupp',

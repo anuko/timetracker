@@ -310,6 +310,10 @@ $i18n_key_words = array(
 'title.add_notification' => 'Ajout d\\\'une notification',
 'title.edit_notification' => 'Modification d\\\'une notification',
 'title.delete_notification' => 'Suppression d\\\'une notification',
+// TODO: translate the following.
+// 'title.add_timesheet' => 'Adding Timesheet',
+// 'title.edit_timesheet' => 'Editing Timesheet',
+// 'title.delete_timesheet' => 'Deleting Timesheet',
 'title.monthly_quotas' => 'Quotas mensuels',
 'title.export' => 'Exportation des données',
 'title.import' => 'Importation des données',

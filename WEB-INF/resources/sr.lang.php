@@ -315,6 +315,10 @@ $i18n_key_words = array(
 'title.add_notification' => 'Dodavanje napomene',
 'title.edit_notification' => 'Izmena napomene',
 'title.delete_notification' => 'Brisanje napomene',
+// TODO: translate the following.
+// 'title.add_timesheet' => 'Adding Timesheet',
+// 'title.edit_timesheet' => 'Editing Timesheet',
+// 'title.delete_timesheet' => 'Deleting Timesheet',
 // 'title.monthly_quotas' => 'Monthly Quotas',
 'title.export' => 'Izvoz podataka tim-a', // TODO: replace "team" with "group".
 'title.import' => 'Uvoz podataka tim-a', // TODO: replace "team" with "group".
