@@ -64,7 +64,7 @@ if ($request->isPost()) {
     $user_id = $bean->getDetachedAttribute('timesheet_user_id');
     if (!ttTimesheetHelper::getTimesheetByName($cl_name, $user_id)) {
       if (ttTimesheetHelper::insert(array('user_id' => $user_id,
-        // 'client_id' => ?
+        'client_id' => $bean->getAttribute('client'),
         'name' => $cl_name,
         'comment' => $cl_comment))) {
           header('Location: timesheets.php');
