@@ -150,9 +150,10 @@ class ttReportHelper {
 
     // Prepare a query for time items in tt_log table.
     $fields = array(); // An array of fields for database query.
-    array_push($fields, 'l.id as id');
+    array_push($fields, 'l.id');
+    array_push($fields, 'l.user_id');
     array_push($fields, '1 as type'); // Type 1 is for tt_log entries.
-    array_push($fields, 'l.date as date');
+    array_push($fields, 'l.date');
     if($canViewReports || $isClient)
       array_push($fields, 'u.name as user');
     // Add client name if it is selected.
@@ -210,13 +211,13 @@ class ttReportHelper {
     }
     // Add paid status.
     if ($canViewReports && $options['show_paid'])
-      array_push($fields, 'l.paid as paid');
+      array_push($fields, 'l.paid');
     // Add IP address.
     if ($canViewReports && $options['show_ip']) {
-      array_push($fields, 'l.created as created');
-      array_push($fields, 'l.created_ip as created_ip');
-      array_push($fields, 'l.modified as modified');
-      array_push($fields, 'l.modified_ip as modified_ip');
+      array_push($fields, 'l.created');
+      array_push($fields, 'l.created_ip');
+      array_push($fields, 'l.modified');
+      array_push($fields, 'l.modified_ip');
     }
     // Add invoice name if it is selected.
     if (($canViewReports || $isClient) && $options['show_invoice'])
@@ -257,6 +258,7 @@ class ttReportHelper {
 
       $fields = array(); // An array of fields for database query.
       array_push($fields, 'ei.id');
+      array_push($fields, 'ei.user_id');
       array_push($fields, '2 as type'); // Type 2 is for tt_expense_items entries.
       array_push($fields, 'ei.date');
       if($canViewReports || $isClient)
@@ -288,13 +290,13 @@ class ttReportHelper {
       array_push($fields, 'ei.cost as expense');
       // Add paid status.
       if ($canViewReports && $options['show_paid'])
-        array_push($fields, 'ei.paid as paid');
+        array_push($fields, 'ei.paid');
       // Add IP address.
       if ($canViewReports && $options['show_ip']) {
-        array_push($fields, 'ei.created as created');
-        array_push($fields, 'ei.created_ip as created_ip');
-        array_push($fields, 'ei.modified as modified');
-        array_push($fields, 'ei.modified_ip as modified_ip');
+        array_push($fields, 'ei.created');
+        array_push($fields, 'ei.created_ip');
+        array_push($fields, 'ei.modified');
+        array_push($fields, 'ei.modified_ip');
       }
       // Add invoice name if it is selected.
       if (($canViewReports || $isClient) && $options['show_invoice'])
