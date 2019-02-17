@@ -154,6 +154,7 @@ class ttReportHelper {
     array_push($fields, 'l.user_id');
     array_push($fields, '1 as type'); // Type 1 is for tt_log entries.
     array_push($fields, 'l.date');
+    array_push($fields, 'l.timesheet_id');
     if($canViewReports || $isClient)
       array_push($fields, 'u.name as user');
     // Add client name if it is selected.
@@ -261,6 +262,7 @@ class ttReportHelper {
       array_push($fields, 'ei.user_id');
       array_push($fields, '2 as type'); // Type 2 is for tt_expense_items entries.
       array_push($fields, 'ei.date');
+      array_push($fields, 'ei.timesheet_id');
       if($canViewReports || $isClient)
         array_push($fields, 'u.name as user');
       // Add client name if it is selected.
