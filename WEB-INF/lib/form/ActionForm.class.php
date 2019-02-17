@@ -166,6 +166,20 @@ class ActionForm {
     	}
     	//print_r($_SESSION);
     }
+
+  // saveDetachedAttribute saves a "detached" from form named attributed in session.
+  // There is no element in the form for it.
+  // Intended use is to add something to the session, when a form bean created on one page
+  // is used on other pages (ex.: reportForm).
+  // For example, to generate a timesheet we need a user_id, which is determined when a report
+  // is generated on report.php, using a bean created in reports.php.
+  function saveDetachedAttribute($name, $value) {
+    $_SESSION[$this->mSessionCell .'_'.$name] = $value;
+  }
+
+  function getDetachedAttribute($name) {
+    return $_SESSION[$this->mSessionCell.'_'.$name];
+  }
     
     function loadBean() {
     	$el_list = @$_SESSION[$this->mSessionCell . "session_store_elements"];

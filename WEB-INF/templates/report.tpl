@@ -2,7 +2,7 @@
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
 
-{$forms.reportForm.open}
+{$forms.reportViewForm.open}
 <table width="720">
   <td valign="top">
     <table border="0" cellpadding="3" cellspacing="1" width="100%">
@@ -162,7 +162,7 @@
   <tr>
     <td align="right">
       <table>
-        <tr><td>{$i18n.label.mark_paid}: {$forms.reportForm.mark_paid_select_options.control} {$forms.reportForm.mark_paid_action_options.control} {$forms.reportForm.btn_mark_paid.control}</td></tr>
+        <tr><td>{$i18n.label.mark_paid}: {$forms.reportViewForm.mark_paid_select_options.control} {$forms.reportViewForm.mark_paid_action_options.control} {$forms.reportViewForm.btn_mark_paid.control}</td></tr>
       </table>
     </td>
   </tr>
@@ -171,14 +171,14 @@
   <tr>
     <td align="right">
       <table>
-        <tr><td>{$i18n.form.report.assign_to_invoice}: {$forms.reportForm.assign_invoice_select_options.control} {$forms.reportForm.recent_invoice.control} {$forms.reportForm.btn_assign.control}</td></tr>
+        <tr><td>{$i18n.form.report.assign_to_invoice}: {$forms.reportViewForm.assign_invoice_select_options.control} {$forms.reportViewForm.recent_invoice.control} {$forms.reportViewForm.btn_assign.control}</td></tr>
       </table>
     </td>
   </tr>
   {/if}
 </table>
 {/if}
-{$forms.reportForm.close}
+{$forms.reportViewForm.close}
 
 <table width="720" cellspacing="4" cellpadding="4" border="0">
 <tr>

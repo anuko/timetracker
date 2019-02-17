@@ -273,6 +273,10 @@ if ($showWorkUnits)
 if ($showTimesheet)
   $form->addInput(array('type'=>'checkbox','name'=>'chtimesheet'));
 
+// Add a hidden control for timesheet_user_id (who to generate a timesheet for).
+if ($showTimesheet)
+  $form->addInput(array('type'=>'hidden','name'=>'timesheet_user_id'));
+
 // Add group by control.
 $group_by_options['no_grouping'] = $i18n->get('form.reports.group_by_no');
 $group_by_options['date'] = $i18n->get('form.reports.group_by_date');

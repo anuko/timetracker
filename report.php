@@ -58,10 +58,10 @@ if ($user->isPluginEnabled('cf')) {
   $smarty->assign('custom_fields', $custom_fields);
 }
 
-$form = new Form('reportForm');
+$form = new Form('reportViewForm');
 
 // Report settings are stored in session bean before we get here from reports.php.
-$bean = new ActionForm('reportBean', $form, $request);
+$bean = new ActionForm('reportBean', new Form('reportForm'), $request);
 // If we are in post, load the bean from session, as the constructor does it only in get.
 if ($request->isPost()) $bean->loadBean();
 
@@ -209,6 +209,8 @@ if ($user->isPluginEnabled('ts') && count($report_items) > 0 &&
       break;
     }
   }
+  // Save user_id in session.
+  $bean->saveDetachedAttribute('timesheet_user_id', $first_user_id);
 
   // TODO: Improve this for "view_all_reports" situation.
   // We may need to add "manage_all_timesheets" right.
