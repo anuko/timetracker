@@ -28,7 +28,7 @@
 
 require_once('initialize.php');
 import('form.Form');
-import('ttGroupHelper');
+import('ttTimesheetHelper');
 
 // Access checks.
 if (!(ttAccessAllowed('view_own_timesheets') ||
@@ -46,7 +46,7 @@ if (!$user->isPluginEnabled('ts')) {
 }
 // End of access checks.
 
-$timesheets = $user->getTimesheets();
+$timesheets = ttTimesheetHelper::getTimesheets($user->getUser());
 
 $smarty->assign('timesheets', $timesheets);
 $smarty->assign('title', $i18n->get('title.timesheets'));

@@ -400,6 +400,8 @@ $i18n_key_words = array(
 
 // Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
 'form.timesheets.hint' => 'Используйте отчёты для добавления новых табелей.',
+'form.timesheets.active_timesheets' => 'Активные табели',
+'form.timesheets.inactive_timesheets' => 'Неактивные табели',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).

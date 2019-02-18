@@ -78,4 +78,36 @@ class ttTimesheetHelper {
 
     return $last_id;
   }
+
+  // The getTimesheets obtains timesheets for user.
+  static function getTimesheets($user_id)
+  {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    // $addPaidStatus = $user->isPluginEnabled('ps');
+    $result = array();
+
+    if ($user->isClient())
+      $client_part = "and ts.client_id = $user->client_id";
+
+    $sql = "select ts.id, ts.name, ts.client_id, c.name as client_name from tt_timesheets ts".
+      " left join tt_clients c on (c.id = ts.client_id)".
+      " where ts.status = 1 and ts.group_id = $group_id and ts.org_id = $org_id and ts.user_id = $user_id".
+      " $client_part order by ts.name";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      $dt = new DateAndTime(DB_DATEFORMAT);
+      while ($val = $res->fetchRow()) {
+        //if ($addPaidStatus)
+        //  $val['paid'] = ttTimesheetHelper::isPaid($val['id']);
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
 }

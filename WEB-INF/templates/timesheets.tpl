@@ -19,8 +19,8 @@
         </tr>
         {foreach $timesheets as $timesheet}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
-          <td>{$invoice.name|escape}</td>
-          <td>{$invoice.client_name|escape}</td>
+          <td>{$timesheet.name|escape}</td>
+          <td>{$timesheet.client_name|escape}</td>
           <td>{$invoice.date}</td>
   {if $user->isPluginEnabled('ps')}
           <td>{if $invoice.paid}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>

@@ -886,9 +886,4 @@ class ttUser {
 
     return false;
   }
-
-  // getTimesheets obtains timesheets for user.
-  function getTimesheets() {
-    return null; // Not implemented.
-  }
 }

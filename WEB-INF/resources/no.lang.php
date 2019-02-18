@@ -466,6 +466,8 @@ $i18n_key_words = array(
 // Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
 // TODO: translate the following.
 // form.timesheets.hint' => 'Use reports to add new timesheets.',
+// 'form.timesheets.active_timesheets' => 'Active Timesheets',
+// 'form.timesheets.inactive_timesheets' => 'Inactive Timesheets',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
