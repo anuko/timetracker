@@ -60,12 +60,9 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get(
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if (ttInvoiceHelper::getInvoice($cl_invoice_id)) {
-      if (ttInvoiceHelper::delete($cl_invoice_id, $request->getParameter('delete_invoice_entries'))) {
-        header('Location: invoices.php');
-        exit();
-      } else
-        $err->add($i18n->get('error.db'));
+    if (ttInvoiceHelper::delete($cl_invoice_id, $request->getParameter('delete_invoice_entries'))) {
+      header('Location: invoices.php');
+      exit();
     } else
       $err->add($i18n->get('error.db'));
   } elseif ($request->getParameter('btn_cancel')) {
