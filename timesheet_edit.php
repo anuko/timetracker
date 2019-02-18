@@ -72,7 +72,7 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     if ($request->getParameter('btn_save')) {
-      $existing_timesheet = ttTimesheetHelper::getTimesheetByName($cl_name);
+      $existing_timesheet = ttTimesheetHelper::getTimesheetByName($cl_name, $timesheet['user_id']);
       if (!$existing_timesheet || ($cl_timesheet_id == $existing_timesheet['id'])) {
          // Update project information.
          if (ttTimesheetHelper::update(array(

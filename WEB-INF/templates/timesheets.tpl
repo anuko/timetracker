@@ -2,12 +2,15 @@
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
 
+{$forms.timesheetsForm.open}
 <table cellspacing="0" cellpadding="7" border="0" width="720">
+  <tr><td align="left">{$i18n.form.timesheets.hint}<br></td></tr>
+{if $user_dropdown}
+  <tr><td align="center">{$i18n.label.user}: {$forms.timesheetsForm.user.control}</td></tr>
+{/if}
   <tr>
     <td valign="top">
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
-        <tr><td colspan="2">{$i18n.form.timesheets.hint}<br></td></tr>
-        <tr><td>&nbsp;</td></tr>
   {if $inactive_timesheets}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.timesheets.active_timesheets}</td></tr>
   {/if}
@@ -58,3 +61,4 @@
     </td>
   </tr>
 </table>
+{$forms.timesheetsForm.close}
