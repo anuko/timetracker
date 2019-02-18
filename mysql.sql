@@ -75,7 +75,7 @@ create unique index role_idx on tt_roles(group_id, rank, status);
 
 # Insert site-wide roles - site administrator and top manager.
 INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Site administrator', 1024, 'administer_site');
-INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'track_own_time,track_own_expenses,view_own_reports,view_own_timesheets,manage_own_timesheets,view_own_charts,view_own_invoices,view_own_projects,view_own_tasks,manage_own_settings,view_users,track_time,track_expenses,view_reports,view_timesheets,manage_timesheets,approve_timesheets,view_charts,view_own_clients,override_punch_mode,override_own_punch_mode,override_date_lock,override_own_date_lock,swap_roles,manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,override_allow_ip,manage_basic_settings,view_all_reports,manage_features,manage_advanced_settings,manage_roles,export_data,manage_subgroups,delete_group');
+INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'track_own_time,track_own_expenses,view_own_reports,view_own_timesheets,manage_own_timesheets,view_own_charts,view_own_invoices,view_own_projects,view_own_tasks,manage_own_settings,view_users,track_time,track_expenses,view_reports,view_timesheets,manage_timesheets,approve_timesheets,view_charts,view_own_clients,override_punch_mode,override_own_punch_mode,override_date_lock,override_own_date_lock,swap_roles,manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,override_allow_ip,manage_basic_settings,view_all_reports,view_all_timesheets,manage_all_timesheets,manage_features,manage_advanced_settings,manage_roles,export_data,approve_all_timesheets,manage_subgroups,delete_group');
 
 
 #
@@ -518,4 +518,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.38', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.39', now()); # TODO: change when structure changes.

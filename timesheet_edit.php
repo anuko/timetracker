@@ -71,26 +71,22 @@ if ($request->isPost()) {
   if (!ttValidString($cl_comment, true)) $err->add($i18n->get('error.field'), $i18n->get('label.comment'));
 
   if ($err->no()) {
-    /*
-    // TODO: coding ongoing down from here.
     if ($request->getParameter('btn_save')) {
-      $existing_project = ttProjectHelper::getProjectByName($cl_name);
-      if (!$existing_project || ($cl_project_id == $existing_project['id'])) {
+      $existing_timesheet = ttTimesheetHelper::getTimesheetByName($cl_name);
+      if (!$existing_timesheet || ($cl_timesheet_id == $existing_timesheet['id'])) {
          // Update project information.
-         if (ttProjectHelper::update(array(
-           'id' => $cl_project_id,
+         if (ttTimesheetHelper::update(array(
+           'id' => $cl_timesheet_id,
            'name' => $cl_name,
-           'description' => $cl_description,
-           'status' => $cl_status,
-           'users' => $cl_users,
-           'tasks' => $cl_tasks))) {
-           header('Location: projects.php');
+           'submitter_comment' => $cl_comment,
+           'status' => $cl_status))) {
+           header('Location: timesheets.php');
            exit();
         } else
            $err->add($i18n->get('error.db'));
       } else
         $err->add($i18n->get('error.object_exists'));
-    }*/
+    }
   }
 } // isPost
 

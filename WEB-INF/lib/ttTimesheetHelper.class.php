@@ -189,4 +189,24 @@ class ttTimesheetHelper {
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
+
+  // update function - updates the timesheet in database.
+  static function update($fields) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $timesheet_id = $fields['id']; // Timesheet we are updating.
+    $name = $fields['name']; // Timesheet name.
+    $submitter_comment = $fields['submitter_comment'];
+    $status = $fields['status']; // Project status.
+
+    $sql = "update tt_timesheets set name = ".$mdb2->quote($name).", submitter_comment = ".$mdb2->quote($submitter_comment).
+      ", status = ".$mdb2->quote($status).
+      " where id = $timesheet_id and group_id = $group_id and org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
 }
