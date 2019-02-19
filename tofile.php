@@ -32,7 +32,7 @@ import('form.ActionForm');
 import('ttReportHelper');
 
 // Access checks.
-if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports'))) {
+if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports') || ttAccessAllowed('view_all_reports')  || ttAccessAllowed('view_client_reports'))) {
   header('Location: access_denied.php');
   exit();
 }

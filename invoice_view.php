@@ -33,7 +33,7 @@ import('ttClientHelper');
 import('form.Form');
 
 // Access checks.
-if (!(ttAccessAllowed('manage_invoices') || ttAccessAllowed('view_own_invoices'))) {
+if (!(ttAccessAllowed('manage_invoices') || ttAccessAllowed('view_client_invoices'))) {
   header('Location: access_denied.php');
   exit();
 }

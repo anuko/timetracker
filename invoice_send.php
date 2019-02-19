@@ -32,7 +32,7 @@ import('ttInvoiceHelper');
 import('ttUserConfig');
 
 // Access checks.
-if (!(ttAccessAllowed('manage_invoices') || ttAccessAllowed('view_own_invoices'))) {
+if (!(ttAccessAllowed('manage_invoices') || ttAccessAllowed('view_client_invoices'))) {
   header('Location: access_denied.php');
   exit();
 }
