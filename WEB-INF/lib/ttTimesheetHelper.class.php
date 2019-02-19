@@ -154,7 +154,7 @@ class ttTimesheetHelper {
     if ($user->isClient()) $client_part = "and client_id = $user->client_id";
 
     $sql = "select * from tt_timesheets".
-      " where id = $timesheet_id and group_id = $group_id and org_id = $org_id $client_part and status = 1";
+      " where id = $timesheet_id and group_id = $group_id and org_id = $org_id $client_part and status is not null";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if ($val = $res->fetchRow())
