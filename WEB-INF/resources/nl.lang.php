@@ -526,7 +526,9 @@ $i18n_key_words = array(
 'role.user.description' => 'Een gebruiker zonder beheer rechten.',
 'role.client.label' => 'Klant',
 'role.client.low_case_label' => 'klant',
-'role.client.description' => 'Een klant kan zijn eigen rapporten, grafieken en facturen inzien.',
+// TODO: translate the following.
+// 'role.client.description' => 'A client can view its own data.',
+'role.client.description' => 'Een klant kan zijn eigen rapporten en facturen inzien.',
 'role.supervisor.label' => 'Supervisor',
 'role.supervisor.low_case_label' => 'supervisor',
 'role.supervisor.description' => 'Een persoon met beperkte beheer rechten.',

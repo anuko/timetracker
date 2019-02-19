@@ -544,7 +544,9 @@ $i18n_key_words = array(
 'role.user.description' => 'Μέλος χωρίς δικαιώματα διαχείρισης.',
 'role.client.label' => 'Πελάτης',
 'role.client.low_case_label' => 'πελάτης',
-'role.client.description' => 'Ο πελάτης μπορεί να δει τις δικές του αναφορές, διαγράμματα και τιμολόγια.',
+// TODO: translate the following.
+// 'role.client.description' => 'A client can view its own data.',
+'role.client.description' => 'Ο πελάτης μπορεί να δει τις δικές του αναφορές και τιμολόγια.',
 'role.supervisor.label' => 'Επόπτης',
 'role.supervisor.low_case_label' => 'επόπτης',
 'role.supervisor.description' => 'Άτομο με μικρό σύνολο δικαιωμάτων διαχείρισης.',

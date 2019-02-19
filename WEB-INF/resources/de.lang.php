@@ -531,7 +531,9 @@ $i18n_key_words = array(
 'role.user.description' => 'Ein normaler Benutzer ohne Administrationsrechte.',
 'role.client.label' => 'Kunde',
 'role.client.low_case_label' => 'Kunde',
-'role.client.description' => 'Ein Kunde kann zu ihm gehörende Berichte, Diagramme und Rechnungen ansehen.',
+// TODO: translate the following.
+// 'role.client.description' => 'A client can view its own data.',
+'role.client.description' => 'Ein Kunde kann zu ihm gehörende Berichte und Rechnungen ansehen.',
 'role.supervisor.label' => 'Dienstvorgesetzter',
 'role.supervisor.low_case_label' => 'Dienstvorgesetzter',
 'role.supervisor.description' => 'Eine Person mit ein paar Administrationsrechten.',

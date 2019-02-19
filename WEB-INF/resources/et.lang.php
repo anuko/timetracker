@@ -559,7 +559,9 @@ $i18n_key_words = array(
 // 'role.user.description' => 'A regular member without management rights.',
 'role.client.label' => 'Klient',
 'role.client.low_case_label' => 'klient',
-'role.client.description' => 'Kliendil on lubatud vaadata oma raporteid, diagramme ja arveid.',
+// TODO: translate the following.
+// 'role.client.description' => 'A client can view its own data.',
+'role.client.description' => 'Kliendil on lubatud vaadata oma raporteid ja arveid.',
 'role.supervisor.label' => 'Ülevaataja',
 'role.supervisor.low_case_label' => 'ülevaataja',
 'role.supervisor.description' => 'Mõningate lisaõigustega kasutaja.',
