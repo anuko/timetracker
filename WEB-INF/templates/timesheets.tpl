@@ -27,7 +27,6 @@
   {/if}
           <td class="tableHeader">{$i18n.label.view}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
         {foreach $active_timesheets as $timesheet}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
@@ -44,7 +43,6 @@
           <td><a href="timesheet_view.php?id={$timesheet.id}">{$i18n.label.view}</a></td>
   {if !$user->isClient()}
           <td><a href="timesheet_edit.php?id={$timesheet.id}">{$i18n.label.edit}</a></td>
-          <td><a href="timesheet_delete.php?id={$timesheet.id}">{$i18n.label.delete}</a></td>
   {/if}
         </tr>
         {/foreach}
@@ -72,7 +70,6 @@
   {/if}
           <td class="tableHeader">{$i18n.label.view}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
         {foreach $inactive_timesheets as $timesheet}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
@@ -89,7 +86,6 @@
           <td><a href="timesheet_view.php?id={$timesheet.id}">{$i18n.label.view}</a></td>
   {if !$user->isClient()}
           <td><a href="timesheet_edit.php?id={$timesheet.id}">{$i18n.label.edit}</a></td>
-          <td><a href="timesheet_delete.php?id={$timesheet.id}">{$i18n.label.delete}</a></td>
   {/if}
         </tr>
         {/foreach}

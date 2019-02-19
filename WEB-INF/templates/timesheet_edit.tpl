@@ -24,7 +24,8 @@
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="2" align="center" height="50">{$forms.timesheetForm.btn_save.control}</td>
+          <td></td>
+          <td align="left" height="50">{$forms.timesheetForm.btn_save.control} {$forms.timesheetForm.btn_delete.control}</td>
         </tr>
       </table>
     </td>

@@ -64,17 +64,18 @@ $form->addInput(array('type'=>'textarea','name'=>'comment','style'=>'width: 250p
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
+$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 
 if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
   if (!ttValidString($cl_comment, true)) $err->add($i18n->get('error.field'), $i18n->get('label.comment'));
 
-  if ($err->no()) {
-    if ($request->getParameter('btn_save')) {
+  if ($request->getParameter('btn_save')) {
+    if ($err->no()) {
       $existing_timesheet = ttTimesheetHelper::getTimesheetByName($cl_name, $timesheet['user_id']);
       if (!$existing_timesheet || ($cl_timesheet_id == $existing_timesheet['id'])) {
-         // Update project information.
+         // Update timesheet information.
          if (ttTimesheetHelper::update(array(
            'id' => $cl_timesheet_id,
            'name' => $cl_name,
@@ -87,6 +88,11 @@ if ($request->isPost()) {
       } else
         $err->add($i18n->get('error.object_exists'));
     }
+  }
+
+  if ($request->getParameter('btn_delete')) {
+    header("Location: timesheet_delete.php?id=$cl_timesheet_id");
+    exit();
   }
 } // isPost
 
