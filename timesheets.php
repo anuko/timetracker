@@ -28,6 +28,7 @@
 
 require_once('initialize.php');
 import('form.Form');
+import('ttGroupHelper');
 import('ttTimesheetHelper');
 
 // Access checks.
@@ -39,21 +40,33 @@ if (!$user->isPluginEnabled('ts')) {
   header('Location: feature_disabled.php');
   exit();
 }
+if ($user->isClient()) {
+  $users_for_client = ttGroupHelper::getUsersForClient($user->client_id);
+  if (count($users_for_client) == 0) {
+    header('Location: access_denied.php'); // There are no users for client.
+    exit();
+  }
+}
 if ($request->isPost()) {
   $userChanged = $request->getParameter('user_changed');
-  if ($userChanged && !($user->can('track_time') && $user->isUserValid($request->getParameter('user')))) {
-    header('Location: access_denied.php'); // Group changed, but no rght or wrong user id.
+  if ($userChanged && !(ttTimesheetHelper::isUserValid($request->getParameter('user')))) {
+    header('Location: access_denied.php'); // Wrong user id.
     exit();
   }
 }
 // End of access checks.
 
 // Determine user for whom we display this page.
+$notClient = !$user->isClient();
 if ($request->isPost() && $userChanged) {
   $user_id = $request->getParameter('user');
 } else {
-  $user_id = $user->getUser();
+  if ($notClient)
+    $user_id = $user->getUser();
+  else
+    $user_id = $users_for_client[0]['id']; // First found user for a client.
 }
+
 
 $group_id = $user->getGroup();
 
@@ -86,13 +99,14 @@ if ($user->can('view_timesheets') || $user->can('view_all_timesheets') || $user-
 // TODO: fix this for client access.
 $active_timesheets = ttTimesheetHelper::getActiveTimesheets($user_id);
 $inactive_timesheets = ttTimesheetHelper::getInactiveTimesheets($user_id);
-$show_client = $user->isPluginEnabled('cl') && !$user->isClient();
+$show_client = $user->isPluginEnabled('cl') && $notClient;
 
 $smarty->assign('active_timesheets', $active_timesheets);
 $smarty->assign('inactive_timesheets', $inactive_timesheets);
 $smarty->assign('show_client', $show_client);
-$smarty->assign('show_submit_status', !$user->isClient());
-$smarty->assign('show_approval_status', !$user->isClient());
+$smarty->assign('show_hint', $notClient);
+$smarty->assign('show_submit_status', $notClient);
+$smarty->assign('show_approval_status', $notClient);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.timesheets'));
 $smarty->assign('content_page_name', 'timesheets.tpl');

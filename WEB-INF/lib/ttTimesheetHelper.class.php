@@ -209,4 +209,28 @@ class ttTimesheetHelper {
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
+
+  // isUserValid function is used during access checks and determines whether user id, passed in post, is valid
+  // in current context.
+  static function isUserValid($user_id) {
+    // We have to cover several situations.
+    //
+    // 1) User is a client.
+    // 2) User with view_all_timesheets rights.
+    // 3) User with view_timesheets rights.
+
+    global $user;
+
+    // Step 1.
+    // A client must have view_client_timesheets and
+    // aser must be assigned to one of client projects.
+    if ($user->isClient()) {
+      if (!$user->can('view_client_timesheets'))
+        return false;
+      $valid_users = ttGroupHelper::getUsersForClient($user->client_id);
+      $v = 2;
+    }
+
+    return true;
+  }
 }
