@@ -31,7 +31,7 @@ import('form.Form');
 import('ttTimesheetHelper');
 
 // Access checks.
-if (!(ttAccessAllowed('manage_own_timesheets') || ttAccessAllowed('manage_timesheets'))) {
+if (!(ttAccessAllowed('manage_own_timesheets') || ttAccessAllowed('manage_timesheets') || ttAccessAllowed('manage_all_timesheets'))) {
   header('Location: access_denied.php');
   exit();
 }
