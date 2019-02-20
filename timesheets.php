@@ -96,12 +96,10 @@ if ($user->can('view_timesheets') || $user->can('view_all_timesheets') || $user-
   }
 }
 
-
-
-
-// TODO: fix this for client access.
 $active_timesheets = ttTimesheetHelper::getActiveTimesheets($user_id);
-$inactive_timesheets = ttTimesheetHelper::getInactiveTimesheets($user_id);
+if ($notClient)
+  $inactive_timesheets = ttTimesheetHelper::getInactiveTimesheets($user_id);
+
 $show_client = $user->isPluginEnabled('cl') && $notClient;
 
 $smarty->assign('active_timesheets', $active_timesheets);
