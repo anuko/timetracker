@@ -135,8 +135,8 @@ function handleClientControl() {
     </tr>
 {/if}
 {if $show_projects}
-    <tr><td>&nbsp;</td></tr>
 <tbody id="projects_control">
+    <tr><td>&nbsp;</td></tr>
     <tr valign="top">
       <td align="right">{$i18n.label.projects}:</td>
       <td>{$forms.userForm.projects.control}</td>

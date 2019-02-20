@@ -29,20 +29,31 @@ function setDefaultRate(element) {
   }
 }
 
-// handleClientControl - controls visibility of the client dropdown depending on the selected user role.
-// We need to show it only when the "Client" user role is selected.
+// handleClientControl - controls visibility of the client dropdown depending on the selected user role,
+// also hides and unselects projects when "Client" user role is selected.
 function handleClientControl() {
   var selectedRoleId = document.getElementById("role").value;
   var clientControl = document.getElementById("client");
+  var projectsControl = document.getElementById("projects_control");
+
   var len = roles.length;
   for (var i = 0; i < len; i++) {
     if (selectedRoleId == roles[i][0]) {
       var isClient = roles[i][1];
-      if (isClient == 1)
+      if (isClient == 1) {
         clientControl.style.visibility = "visible";
-      else {
-        clientControl.value = '';
+        projectsControl.style.display = "none";
+
+        // Uncheck all project checkboxes.
+        var checkboxes = document.getElementsByName("projects[]");
+        var j;
+        for (j = 0; j < checkboxes.length; j++) {
+          checkboxes[j].checked = false;
+        }
+      } else {
+        clientControl.value = "";
         clientControl.style.visibility = "hidden";
+        projectsControl.style.display = "";
       }
       break;
     }
@@ -90,11 +101,13 @@ function handleClientControl() {
     </tr>
 {/if}
 {if $show_projects}
+<tbody id="projects_control">
     <tr><td>&nbsp;</td></tr>
     <tr valign="top">
       <td align="right">{$i18n.label.projects}:</td>
       <td>{$forms.userForm.projects.control}</td>
     </tr>
+</tbody>
 {/if}
     <tr>
       <td colspan="2" align="center">{$i18n.label.required_fields}</td>
