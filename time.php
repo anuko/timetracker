@@ -131,9 +131,9 @@ $form = new Form('timeRecordForm');
 if ($user->can('track_time')) {
   $rank = $user->getMaxRankForGroup($group_id);
   if ($user->can('track_own_time'))
-    $options = array('group_id'=>$group_id,'status'=>ACTIVE,'max_rank'=>$rank,'include_self'=>true,'self_first'=>true);
+    $options = array('status'=>ACTIVE,'max_rank'=>$rank,'include_self'=>true,'self_first'=>true);
   else
-    $options = array('group_id'=>$group_id,'status'=>ACTIVE,'max_rank'=>$rank);
+    $options = array('status'=>ACTIVE,'max_rank'=>$rank);
   $user_list = $user->getUsers($options);
   if (count($user_list) >= 1) {
     $form->addInput(array('type'=>'combobox',
