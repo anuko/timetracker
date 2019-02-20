@@ -66,20 +66,23 @@ if ($request->isPost() && $userChanged) {
   else
     $user_id = $users_for_client[0]['id']; // First found user for a client.
 }
-
-
 $group_id = $user->getGroup();
 
 // Elements of timesheetsForm.
 $form = new Form('timesheetsForm');
 
-if ($user->can('view_timesheets') || $user->can('view_all_timesheets') || $user->can('manage_timesheets') || $user->can('manage_all_timesheets')) {
-  $rank = $user->getMaxRankForGroup($group_id);
-  if ($user->can('track_own_time'))
-    $options = array('group_id'=>$group_id,'status'=>ACTIVE,'max_rank'=>$rank,'include_self'=>true,'self_first'=>true);
-  else
-    $options = array('group_id'=>$group_id,'status'=>ACTIVE,'max_rank'=>$rank);
-  $user_list = $user->getUsers($options);
+if ($user->can('view_timesheets') || $user->can('view_all_timesheets') || $user->can('view_client_timesheets')) {
+  // Prepare user list for dropdown.
+  if ($notClient) {
+    $rank = $user->can('view_all_timesheets') ? MAX_RANK : $user->getMaxRankForGroup($group_id);
+    if ($user->can('view_own_timesheets'))
+      $options = array('max_rank'=>$rank,'include_self'=>true,'self_first'=>true);
+    else
+      $options = array('max_rank'=>$rank);
+    $user_list = $user->getUsers($options);
+  } else
+    $user_list = $users_for_client; // Obtained above.
+
   if (count($user_list) >= 1) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'document.timesheetsForm.user_changed.value=1;document.timesheetsForm.submit();',
