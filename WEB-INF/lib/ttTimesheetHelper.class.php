@@ -214,7 +214,8 @@ class ttTimesheetHelper {
 
     if ($user->isClient()) $client_part = "and ts.client_id = $user->client_id";
 
-    $sql = "select ts.id, ts.user_id, u.name as user_name, ts.client_id, c.name as client_name, ts.name from tt_timesheets ts".
+    $sql = "select ts.id, ts.user_id, u.name as user_name, ts.client_id, c.name as client_name,".
+      " ts.name, ts.submitter_comment from tt_timesheets ts".
       " left join tt_users u on (u.id = ts.user_id)".
       " left join tt_clients c on (c.id = ts.client_id)".
       " where ts.id = $timesheet_id and ts.group_id = $group_id and ts.org_id = $org_id $client_part and ts.status is not null";
@@ -295,5 +296,29 @@ class ttTimesheetHelper {
     }
 
     return true;
+  }
+
+  // getReportOptions prepares $options array to be used with ttReportHelper
+  // to obtain items for timesheet view.
+  static function getReportOptions($timesheet) {
+    global $user;
+    $group_by_client = $user->isPluginEnabled('cl') && !$timesheet['client_id'];
+    $trackingMode = $user->getTrackingMode();
+    $group_by_project = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
+
+    $options['timesheet_id'] = $timesheet['id'];
+    $options['client_id'] = $timesheet['client_id'];
+    $options['users'] = $timesheet['user_id'];
+    $options['show_durarion'] = 1;
+    $options['show_cost'] = 1; // To include expenses.
+    $options['show_totals_only'] = 1;
+    $options['group_by1'] = 'date';
+    if ($group_by_client || $group_by_project) {
+      $options['group_by2'] = $group_by_client ? 'client' : 'project';
+    }
+    if ($options['group_by2'] && $options['group_by2'] != 'project' && $group_by_project) {
+      $options['group_by3'] = 'project';
+    }
+    return $options;
   }
 }

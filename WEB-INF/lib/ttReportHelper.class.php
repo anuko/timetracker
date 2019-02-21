@@ -43,6 +43,12 @@ class ttReportHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    // A shortcut for timesheets.
+    if ($options['timesheet_id']) {
+      $where = " where l.timesheet_id = ".$options['timesheet_id']." and l.group_id = $group_id and l.org_id = $org_id";
+      return $where;
+    }
+
     // Prepare dropdown parts.
     $dropdown_parts = '';
     if ($options['client_id'])
@@ -88,6 +94,12 @@ class ttReportHelper {
 
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
+
+    // A shortcut for timesheets.
+    if ($options['timesheet_id']) {
+      $where = " where ei.timesheet_id = ".$options['timesheet_id']." and ei.group_id = $group_id and ei.org_id = $org_id";
+      return $where;
+    }
 
     // Prepare dropdown parts.
     $dropdown_parts = '';
