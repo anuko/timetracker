@@ -11,8 +11,11 @@
 {if $timesheet['client_id']}
         <tr><td align="left"><b>{$i18n.label.client}:</b> {$timesheet['client_name']|escape}</td></tr>
 {/if}
-{if $timesheet['submitter_comment']}
+{if $not_client}
+        <tr><td align="left"><b>{$i18n.label.submitted}:</b> {if $timesheet.submit_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td></tr>
+  {if $timesheet['submitter_comment']}
         <tr><td align="left"><b>{$i18n.label.comment}:</b> {$timesheet['submitter_comment']|escape}</td></tr>
+  {/if}
 {/if}
       </table>
     </td>

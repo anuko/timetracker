@@ -215,7 +215,7 @@ class ttTimesheetHelper {
     if ($user->isClient()) $client_part = "and ts.client_id = $user->client_id";
 
     $sql = "select ts.id, ts.user_id, u.name as user_name, ts.client_id, c.name as client_name,".
-      " ts.name, ts.submitter_comment from tt_timesheets ts".
+      " ts.name, ts.submitter_comment, ts.submit_status from tt_timesheets ts".
       " left join tt_users u on (u.id = ts.user_id)".
       " left join tt_clients c on (c.id = ts.client_id)".
       " where ts.id = $timesheet_id and ts.group_id = $group_id and ts.org_id = $org_id $client_part and ts.status is not null";

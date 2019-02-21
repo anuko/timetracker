@@ -50,7 +50,9 @@ if (!$timesheet) {
 $options = ttTimesheetHelper::getReportOptions($timesheet);
 $subtotals = ttReportHelper::getSubtotals($options);
 $totals = ttReportHelper::getTotals($options);
+$notClient = !$user->isClient();
 
+$smarty->assign('not_client', $notClient);
 $smarty->assign('group_by_header', ttReportHelper::makeGroupByHeader($options));
 $smarty->assign('timesheet', $timesheet);
 $smarty->assign('subtotals', $subtotals);
