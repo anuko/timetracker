@@ -100,14 +100,15 @@ $active_timesheets = ttTimesheetHelper::getActiveTimesheets($user_id);
 if ($notClient)
   $inactive_timesheets = ttTimesheetHelper::getInactiveTimesheets($user_id);
 
-$show_client = $user->isPluginEnabled('cl') && $notClient;
+$showClient = $user->isPluginEnabled('cl') && $notClient;
+$canEdit = $notClient && ($user->can('manage_own_timesheets') ||
+  $user->can('manage_timesheets') || $user->can('manage_all_timesheets'));
 
 $smarty->assign('active_timesheets', $active_timesheets);
 $smarty->assign('inactive_timesheets', $inactive_timesheets);
-$smarty->assign('show_client', $show_client);
-$smarty->assign('show_hint', $notClient);
-$smarty->assign('show_submit_status', $notClient);
-$smarty->assign('show_approval_status', $notClient);
+$smarty->assign('show_client', $showClient);
+$smarty->assign('not_client', $notClient);
+$smarty->assign('can_edit', $canEdit);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.timesheets'));
 $smarty->assign('content_page_name', 'timesheets.tpl');
