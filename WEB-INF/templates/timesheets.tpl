@@ -40,7 +40,11 @@
           <td>{if $timesheet.submit_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
   {/if}
   {if $show_approval_status}
+     {if $timesheet.approval_status == null}
+          <td></td>
+     {else}
           <td>{if $timesheet.approval_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
+     {/if}
   {/if}
           <td><a href="timesheet_view.php?id={$timesheet.id}">{$i18n.label.view}</a></td>
   {if !$user->isClient()}

@@ -47,27 +47,7 @@ if (!$timesheet) {
 // TODO: add other checks here for timesheet being appropriate for user role.
 // End of access checks.
 
-$invoice_date = new DateAndTime(DB_DATEFORMAT, $invoice['date']);
-$client = ttClientHelper::getClient($invoice['client_id'], true);
-if (!$client) // In case client was deleted.
-  $client = ttClientHelper::getDeletedClient($invoice['client_id']);
-
-$invoice_items = ttInvoiceHelper::getInvoiceItems($cl_invoice_id);
-$tax_percent = $client['tax'];
-
-$subtotal = 0;
-$tax = 0;
-foreach($invoice_items as $item)
-  $subtotal += $item['cost'];
-if ($tax_percent > 0) {
-  $tax_expenses = $user->isPluginEnabled('et');
-  foreach($invoice_items as $item) {
-    if ($item['type'] == 2 && !$tax_expenses)
-      continue;
-    $tax += round($item['cost'] * $tax_percent / 100, 2);
-  }
-}
-$total = $subtotal + $tax;
+// $timesheet_items = ttTimesheetHelper::getTimesheetItems($timesheet_id);
 
 $currency = $user->getCurrency();
 $decimalMark = $user->getDecimalMark();
@@ -118,8 +98,7 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('invoice_id', $cl_invoice_id);
-$smarty->assign('timesheet_name', $timesheet['name']);
-$smarty->assign('invoice_date', $invoice_date->toString($user->getDateFormat()));
+$smarty->assign('timesheet', $timesheet);
 $smarty->assign('client_name', $client['name']);
 $smarty->assign('client_address', $client['address']);
 $smarty->assign('show_project', MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode);

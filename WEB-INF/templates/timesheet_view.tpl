@@ -6,10 +6,11 @@
   <tr>
     <td>
       <table border=0 width=100%>
-        <tr><td align="center"><b style="font-size: 15pt; font-family: Arial, Helvetica, sans-serif;">{$timesheet_name|escape} </b></td></tr>
-        <tr><td align="left"><b>{$i18n.label.date}:</b> {$invoice_date}</td></tr>
-        <tr><td align="left"><b>{$i18n.label.client}:</b> {$client_name|escape}</td></tr>
-        <tr><td align="left"><b>{$i18n.label.client_address}:</b> {$client_address|escape}</td></tr>
+        <tr><td align="center"><b style="font-size: 15pt; font-family: Arial, Helvetica, sans-serif;">{$timesheet['name']|escape} </b></td></tr>
+        <tr><td align="left"><b>{$i18n.label.user}:</b> {$timesheet['user_name']|escape}</td></tr>
+{if $timesheet['client_id']}
+        <tr><td align="left"><b>{$i18n.label.client}:</b> {$timesheet['client_name']|escape}</td></tr>
+{/if}
       </table>
     </td>
   </tr>
