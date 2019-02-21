@@ -53,6 +53,7 @@
   {if $bean->getAttribute('chpaid')}<td class="tableHeader">{$i18n.label.paid}</td>{/if}
   {if $bean->getAttribute('chip')}<td class="tableHeaderCentered">{$i18n.label.ip}</td>{/if}
   {if $bean->getAttribute('chinvoice')}<td class="tableHeader">{$i18n.label.invoice}</td>{/if}
+  {if $bean->getAttribute('chtimesheet')}<td class="tableHeader">{$i18n.label.timesheet}</td>{/if}
       </tr>
   {foreach $report_items as $item}
     <!-- print subtotal for a block of grouped values -->
@@ -76,6 +77,7 @@
         {if $bean->getAttribute('chpaid')}<td></td>{/if}
         {if $bean->getAttribute('chip')}<td></td>{/if}
         {if $bean->getAttribute('chinvoice')}<td></td>{/if}
+        {if $bean->getAttribute('chtimesheet')}<td></td>{/if}
         {if $use_checkboxes}<td></td>{/if}
       </tr>
       <tr><td>&nbsp;</td></tr>
@@ -102,6 +104,7 @@
     {if $bean->getAttribute('chpaid')}<td class="cellRightAligned">{if $item.paid == 1}{$i18n.label.yes}{else}{$i18n.label.no}{/if}{/if}
     {if $bean->getAttribute('chip')}<td class="cellRightAligned">{if $item.modified}{$item.modified_ip} {$item.modified}{else}{$item.created_ip} {$item.created}{/if}{/if}
     {if $bean->getAttribute('chinvoice')}<td class="cellRightAligned">{$item.invoice|escape}</td>{/if}
+    {if $bean->getAttribute('chtimesheet')}<td class="cellRightAligned">{$item.timesheet_id|escape}</td>{/if}
     {if $use_checkboxes}
       {if 1 == $item.type}<td bgcolor="white"><input type="checkbox" name="log_id_{$item.id}"></td>{/if}
       {if 2 == $item.type}<td bgcolor="white"><input type="checkbox" name="item_id_{$item.id}"></td>{/if}
@@ -128,6 +131,7 @@
     {if $bean->getAttribute('chpaid')}<td></td>{/if}
     {if $bean->getAttribute('chip')}<td></td>{/if}
     {if $bean->getAttribute('chinvoice')}<td></td>{/if}
+    {if $bean->getAttribute('chtimesheet')}<td></td>{/if}
     {if $use_checkboxes}<td></td>{/if}
       </tr>
   {/if}
@@ -149,6 +153,7 @@
     {if $bean->getAttribute('chpaid')}<td></td>{/if}
     {if $bean->getAttribute('chip')}<td></td>{/if}
     {if $bean->getAttribute('chinvoice')}<td></td>{/if}
+    {if $bean->getAttribute('chtimesheet')}<td></td>{/if}
     {if $use_checkboxes}<td></td>{/if}
       </tr>
 {/if}

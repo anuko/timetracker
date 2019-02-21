@@ -27,26 +27,24 @@
 // +----------------------------------------------------------------------+
 
 require_once('initialize.php');
-import('DateAndTime');
-import('ttInvoiceHelper');
-import('ttClientHelper');
-import('form.Form');
+import('ttTimesheetHelper');
 
 // Access checks.
-if (!(ttAccessAllowed('manage_invoices') || ttAccessAllowed('view_client_invoices'))) {
+if (!(ttAccessAllowed('view_own_timesheets') || ttAccessAllowed('view_timesheets') || ttAccessAllowed('view_all_timesheets') || ttAccessAllowed('view_client_timesheets'))) {
   header('Location: access_denied.php');
   exit();
 }
-if (!$user->isPluginEnabled('iv')) {
+if (!$user->isPluginEnabled('ts')) {
   header('Location: feature_disabled.php');
   exit();
 }
-$cl_invoice_id = (int)$request->getParameter('id');
-$invoice = ttInvoiceHelper::getInvoice($cl_invoice_id);
-if (!$invoice) {
+$timesheet_id = (int)$request->getParameter('id');
+$timesheet = ttTimesheetHelper::getTimesheet($timesheet_id);
+if (!$timesheet) {
   header('Location: access_denied.php');
   exit();
 }
+// TODO: add other checks here for timesheet being appropriate for user role.
 // End of access checks.
 
 $invoice_date = new DateAndTime(DB_DATEFORMAT, $invoice['date']);
@@ -120,7 +118,7 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('invoice_id', $cl_invoice_id);
-$smarty->assign('invoice_name', $invoice['name']);
+$smarty->assign('timesheet_name', $timesheet['name']);
 $smarty->assign('invoice_date', $invoice_date->toString($user->getDateFormat()));
 $smarty->assign('client_name', $client['name']);
 $smarty->assign('client_address', $client['address']);
@@ -128,6 +126,6 @@ $smarty->assign('show_project', MODE_PROJECTS == $trackingMode || MODE_PROJECTS_
 $smarty->assign('show_task', MODE_PROJECTS_AND_TASKS == $trackingMode);
 $smarty->assign('invoice_items', $invoice_items);
 $smarty->assign('colspan', $colspan);
-$smarty->assign('title', $i18n->get('title.view_invoice'));
-$smarty->assign('content_page_name', 'invoice_view.tpl');
+$smarty->assign('title', $i18n->get('title.timesheet'));
+$smarty->assign('content_page_name', 'timesheet_view.tpl');
 $smarty->display('index.tpl');
