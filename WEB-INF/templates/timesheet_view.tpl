@@ -16,6 +16,12 @@
   {if $timesheet['submitter_comment']}
         <tr><td align="left"><b>{$i18n.label.comment}:</b> {$timesheet['submitter_comment']|escape}</td></tr>
   {/if}
+  {if $timesheet['submit_status']}
+        <tr><td align="left"><b>{$i18n.label.approved}:</b> {if $timesheet.approval_status != null}{if $timesheet.approval_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td></tr>{/if}
+  {/if}
+  {if $timesheet['manager_comment']}
+        <tr><td align="left"><b>{$i18n.label.note}:</b> {$timesheet['manager_comment']|escape}</td></tr>
+  {/if}
 {/if}
       </table>
     </td>
@@ -42,6 +48,32 @@
         <td nowrap class="cellRightAlignedSubtotal">{$user->currency|escape} {if $user->can('manage_invoices') || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>
       </tr>
       </table>
+
+{$forms.timesheetForm.open}
+  {if $show_submit}
+  <table width="720" cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td align="center">
+      <table>
+        <tr><td>{$i18n.form.mail.to}: {$forms.timesheetForm.approver.control} {$forms.timesheetForm.btn_submit.control}</td></tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+  {/if}
+  {if $show_approve}
+  <table width="720" cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td align="center">
+      <table>
+        <tr><td>{$forms.timesheetForm.btn_approve.control} {$forms.timesheetForm.btn_disapprove.control}</td></tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+  {/if}
+{$forms.timesheetForm.close}
+
     </td>
   </tr>
 </table>

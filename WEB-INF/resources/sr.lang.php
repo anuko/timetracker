@@ -145,6 +145,9 @@ $i18n_key_words = array(
 'button.import' => 'Uvezi tim', // TODO: replace "team" with "group".
 'button.close' => 'Zatvori',
 'button.stop' => 'Stani',
+// TODO: translate the following.
+// 'button.approve' => 'Approve',
+// 'button.disapprove' => 'Disapprove',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.group_name' => 'Naziv tim-a', // TODO: replace "team" with "group".

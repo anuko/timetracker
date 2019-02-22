@@ -152,6 +152,8 @@ $i18n_key_words = array(
 'button.close' => 'Zatvoriť',
 // TODO: translate the following.
 // 'button.stop' => 'Stop',
+// 'button.approve' => 'Approve',
+// 'button.disapprove' => 'Disapprove',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.group_name' => 'Názov tímu', // TODO: replace "team" with "group".

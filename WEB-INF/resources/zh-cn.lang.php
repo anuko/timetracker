@@ -147,6 +147,8 @@ $i18n_key_words = array(
 'button.close' => '关闭',
 // TODO: translate the following.
 // 'button.stop' => 'Stop',
+// 'button.approve' => 'Approve',
+// 'button.disapprove' => 'Disapprove',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.group_name' => '团队名称', // TODO: replace "team" with "group".

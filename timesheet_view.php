@@ -45,6 +45,7 @@ if (!$timesheet) {
   exit();
 }
 // TODO: add other checks here for timesheet being appropriate for user role.
+// TODO: if this is a timeheet submit, validate approver id, too.
 // End of access checks.
 
 $options = ttTimesheetHelper::getReportOptions($timesheet);
@@ -52,14 +53,54 @@ $subtotals = ttReportHelper::getSubtotals($options);
 $totals = ttReportHelper::getTotals($options);
 $notClient = !$user->isClient();
 
-// Determine managers we can submit this timesheet for approval to.
-$approvers = ttTimesheetHelper::getApprovers($timesheet['user_id']);
+// Determine which controls to show and obtain date for them.
+$showSubmit = $notClient && !$timesheet['submit_status'];
+if ($showSubmit) $approvers = ttTimesheetHelper::getApprovers($timesheet['user_id']);
+$canApprove = $user->can('approve_timesheets') || $user_>can('approve_all_timesheets');
+$showApprove = $notClient && $timesheet['submit_status'] && !$timesheet['approval_status'];
+
+// Add a form with controls.
+$form = new Form('timesheetForm');
+$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$timesheet['id']));
+
+if ($showSubmit) {
+  if (count($approvers) >= 1) {
+    $form->addInput(array('type'=>'combobox',
+      'name'=>'approver',
+      'style'=>'width: 200px;',
+      'data'=>$approvers,
+      'datakeys'=>array('id','name')));
+  }
+  $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.submit')));
+}
+
+if ($showApprove) {
+  $form->addInput(array('type'=>'submit','name'=>'btn_approve','value'=>$i18n->get('button.approve')));
+  $form->addInput(array('type'=>'submit','name'=>'btn_disapprove','value'=>$i18n->get('button.disapprove')));
+}
+
+// Submit.
+if ($request->isPost()) {
+  if ($request->getParameter('btn_submit')) {
+    $fields = array('timesheet_id' => $timesheet['id'],
+      'approver_id' => $approver_id); // TODO: obtain (and check) approver id above during access checks.
+    if (ttTimesheetHelper::submitTimesheet($fields)) {
+      // Redirect to self.
+      header('Location: timesheet_view.php?id='.$timesheet['id']);
+      exit();
+    } else
+      $err->add($i18n->get('error.db'));
+  }
+}
 
 $smarty->assign('not_client', $notClient);
 $smarty->assign('group_by_header', ttReportHelper::makeGroupByHeader($options));
 $smarty->assign('timesheet', $timesheet);
 $smarty->assign('subtotals', $subtotals);
 $smarty->assign('totals', $totals);
+$smarty->assign('show_submit', $showSubmit);
+$smarty->assign('show_approve', $showApprove);
+$smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.timesheet'));
 $smarty->assign('content_page_name', 'timesheet_view.tpl');
 $smarty->display('index.tpl');

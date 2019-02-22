@@ -148,6 +148,9 @@ $i18n_key_words = array(
 'button.import' => 'Importuj zespół', // TODO: replace "team" with "group".
 'button.close' => 'Zamknij',
 'button.stop' => 'Zatrzymaj',
+// TODO: translate the following.
+// 'button.approve' => 'Approve',
+// 'button.disapprove' => 'Disapprove',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.group_name' => 'Nazwa zespołu',  // TODO: replace "team" with "group".

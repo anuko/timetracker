@@ -132,6 +132,9 @@ $i18n_key_words = array(
 'button.import' => 'Groep importeren',
 'button.close' => 'Sluiten',
 'button.stop' => 'Stop',
+// TODO: translate the following.
+// 'button.approve' => 'Approve',
+// 'button.disapprove' => 'Disapprove',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.group_name' => 'Groepsnaam',

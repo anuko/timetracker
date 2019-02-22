@@ -151,6 +151,9 @@ $i18n_key_words = array(
 'button.import' => 'وارد کردن تیم', // TODO: replace "team" with "group".
 'button.close' => 'بستن',
 'button.stop' => 'توقف',
+// TODO: translate the following.
+// 'button.approve' => 'Approve',
+// 'button.disapprove' => 'Disapprove',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.group_name' => 'نام تیم', // TODO: replace "team" with "group".

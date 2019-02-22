@@ -215,7 +215,7 @@ class ttTimesheetHelper {
     if ($user->isClient()) $client_part = "and ts.client_id = $user->client_id";
 
     $sql = "select ts.id, ts.user_id, u.name as user_name, ts.client_id, c.name as client_name,".
-      " ts.name, ts.submitter_comment, ts.submit_status from tt_timesheets ts".
+      " ts.name, ts.submitter_comment, ts.submit_status, ts.approval_status, ts.manager_comment from tt_timesheets ts".
       " left join tt_users u on (u.id = ts.user_id)".
       " left join tt_clients c on (c.id = ts.client_id)".
       " where ts.id = $timesheet_id and ts.group_id = $group_id and ts.org_id = $org_id $client_part and ts.status is not null";
@@ -345,5 +345,28 @@ class ttTimesheetHelper {
       }
     }
     return $approvers;
+  }
+
+  // submitTimesheet marks a timesheet as submitted and sends an email to an approver.
+  static function submitTimesheet($fields) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    // First, mark a timesheet as submitted.
+    // Even if mail part below does not work, this will get us a functioning workflow
+    // (without email notifications).
+    $timesheet_id = $fields['timesheet_id'];
+    $sql = "update tt_timesheets set submit_status = 1".
+      " where id = $timesheet_id and group_id = $group_id and org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    // TODO: send email to approver here...
+    // $approver_id = $fields['approver_id'];
+
+    return true;
   }
 }

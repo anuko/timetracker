@@ -130,6 +130,8 @@ $i18n_key_words = array(
 'button.import' => 'Импортировать группу',
 'button.close' => 'Закрыть',
 'button.stop' => 'Завершить',
+'button.approve' => 'Одобрить',
+'button.disapprove' => 'Не одобрить',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.group_name' => 'Название группы',
