@@ -48,6 +48,10 @@ if (!$timesheet) {
 // TODO: if this is a timeheet submit, validate approver id, too.
 // End of access checks.
 
+if ($request->isPost()) {
+  $cl_comment = trim($request->getParameter('comment'));
+}
+
 $options = ttTimesheetHelper::getReportOptions($timesheet);
 $subtotals = ttReportHelper::getSubtotals($options);
 $totals = ttReportHelper::getTotals($options);
@@ -57,7 +61,7 @@ $notClient = !$user->isClient();
 $showSubmit = $notClient && !$timesheet['submit_status'];
 if ($showSubmit) $approvers = ttTimesheetHelper::getApprovers($timesheet['user_id']);
 $canApprove = $user->can('approve_timesheets') || $user_>can('approve_all_timesheets');
-$showApprove = $notClient && $timesheet['submit_status'] && !$timesheet['approval_status'];
+$showApprove = $notClient && $timesheet['submit_status'] && $timesheet['approval_status'] == null;
 
 // Add a form with controls.
 $form = new Form('timesheetForm');
@@ -75,6 +79,7 @@ if ($showSubmit) {
 }
 
 if ($showApprove) {
+  $form->addInput(array('type'=>'textarea','name'=>'comment','maxlength'=>'250','style'=>'width: 300px; height: 60px;'));
   $form->addInput(array('type'=>'submit','name'=>'btn_approve','value'=>$i18n->get('button.approve')));
   $form->addInput(array('type'=>'submit','name'=>'btn_disapprove','value'=>$i18n->get('button.disapprove')));
 }
@@ -85,6 +90,28 @@ if ($request->isPost()) {
     $fields = array('timesheet_id' => $timesheet['id'],
       'approver_id' => $approver_id); // TODO: obtain (and check) approver id above during access checks.
     if (ttTimesheetHelper::submitTimesheet($fields)) {
+      // Redirect to self.
+      header('Location: timesheet_view.php?id='.$timesheet['id']);
+      exit();
+    } else
+      $err->add($i18n->get('error.db'));
+  }
+
+  if ($request->getParameter('btn_approve')) {
+    $fields = array('timesheet_id' => $timesheet['id'],
+      'comment' => $cl_comment);
+    if (ttTimesheetHelper::approveTimesheet($fields)) {
+      // Redirect to self.
+      header('Location: timesheet_view.php?id='.$timesheet['id']);
+      exit();
+    } else
+      $err->add($i18n->get('error.db'));
+  }
+
+  if ($request->getParameter('btn_disapprove')) {
+    $fields = array('timesheet_id' => $timesheet['id'],
+      'comment' => $cl_comment);
+    if (ttTimesheetHelper::disapproveTimesheet($fields)) {
       // Redirect to self.
       header('Location: timesheet_view.php?id='.$timesheet['id']);
       exit();

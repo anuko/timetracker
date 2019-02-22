@@ -66,7 +66,9 @@
   <tr>
     <td align="center">
       <table>
-        <tr><td>{$forms.timesheetForm.btn_approve.control} {$forms.timesheetForm.btn_disapprove.control}</td></tr>
+        <tr><td align="center">{$i18n.label.comment}:</td></tr>
+        <tr><td align="center">{$forms.timesheetForm.comment.control}</td></tr>
+        <tr><td align="center">{$forms.timesheetForm.btn_approve.control} {$forms.timesheetForm.btn_disapprove.control}</td></tr>
       </table>
     </td>
   </tr>
