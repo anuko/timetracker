@@ -592,7 +592,7 @@ class ttUser {
         return false;
 
       // So far, so good. Check user now.
-      $options = array('group_id'=>$group_id,'status'=>ACTIVE,'max_rank'=>MAX_RANK);
+      $options = array('status'=>ACTIVE,'max_rank'=>MAX_RANK);
       $users = $this->getUsers($options);
       foreach($users as $one_user) {
         if ($one_user['id'] == $this->behalf_id)

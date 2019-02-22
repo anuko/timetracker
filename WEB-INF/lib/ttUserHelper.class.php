@@ -404,4 +404,21 @@ class ttUserHelper {
 
     return false;
   }
+
+  // getUserRank - obtains a rank for a given user.
+  static function getUserRank($user_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select r.rank from tt_users u".
+      " left join tt_roles r on (u.role_id = r.id)".
+      " where u.id = $user_id and u.group_id = $group_id and u.org_id = $org_id";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) return 0;
+    $val = $res->fetchRow();
+    return $val['rank'];
+  }
 }

@@ -321,4 +321,29 @@ class ttTimesheetHelper {
     }
     return $options;
   }
+
+  // getApprovers obtains a list of users who can approve a timesheet for a given user
+  // and also have an email to receive a notification about it.
+  static function getApprovers($user_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $approvers = array();
+    $rank = ttUserHelper::getUserRank($user_id);
+    $sql = "select u.id, u.name, u.email".
+      " from tt_users u".
+      " left join tt_roles r on (r.id = u.role_id)".
+      " where u.status = 1 and u.email is not null".
+      " and (r.rights like '%approve_all_timesheets%' or (r.rank > $rank and r.rights like '%approve_timesheets%'))";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $approvers[] = $val;
+      }
+    }
+    return $approvers;
+  }
 }

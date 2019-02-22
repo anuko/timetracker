@@ -52,6 +52,9 @@ $subtotals = ttReportHelper::getSubtotals($options);
 $totals = ttReportHelper::getTotals($options);
 $notClient = !$user->isClient();
 
+// Determine managers we can submit this timesheet for approval to.
+$approvers = ttTimesheetHelper::getApprovers($timesheet['user_id']);
+
 $smarty->assign('not_client', $notClient);
 $smarty->assign('group_by_header', ttReportHelper::makeGroupByHeader($options));
 $smarty->assign('timesheet', $timesheet);
