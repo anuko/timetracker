@@ -159,6 +159,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chpaid')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.paid').'</td>'; }
   if ($bean->getAttribute('chip')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.ip').'</td>'; }
   if ($bean->getAttribute('chinvoice')) { $colspan++; $html .= '<td>'.$i18n->get('label.invoice').'</td>'; }
+  if ($bean->getAttribute('chtimesheet')) { $colspan++; $html .= '<td>'.$i18n->get('label.timesheet').'</td>'; }
   $html .= '</tr>';
   $html .= '</thead>';
 
@@ -211,6 +212,7 @@ if ($totals_only) {
         if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
         if ($bean->getAttribute('chip')) $html .= '<td></td>';
         if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
+        if ($bean->getAttribute('chtimesheet')) $html .= '<td></td>';
         $html .= '</tr>';
         $html .= '<tr><td colspan="'.$colspan.'">&nbsp;</td></tr>';
       }
@@ -249,6 +251,7 @@ if ($totals_only) {
         $html .= '</td>';
     }
     if ($bean->getAttribute('chinvoice')) $html .= '<td>'.htmlspecialchars($item['invoice']).'</td>';
+    if ($bean->getAttribute('chtimesheet')) $html .= '<td>'.htmlspecialchars($item['timesheet_name']).'</td>';
     $html .= '</tr>';
 
     $prev_date = $item['date'];
@@ -300,6 +303,7 @@ if ($totals_only) {
     if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
     if ($bean->getAttribute('chip')) $html .= '<td></td>';
     if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
+    if ($bean->getAttribute('chtimesheet')) $html .= '<td></td>';
     $html .= '</tr>';
   }
 
@@ -328,6 +332,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
   if ($bean->getAttribute('chip')) $html .= '<td></td>';
   if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
+  if ($bean->getAttribute('chtimesheet')) $html .= '<td></td>';
   $html .= '</tr>';
   $html .= '</table>';
 }

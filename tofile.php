@@ -146,6 +146,7 @@ if ('xml' == $type) {
         print "\t<ip><![CDATA[".$ip."]]></ip>\n";
       }
       if ($bean->getAttribute('chinvoice')) print "\t<invoice><![CDATA[".$item['invoice']."]]></invoice>\n";
+      if ($bean->getAttribute('chtimesheet')) print "\t<timesheet><![CDATA[".$item['timesheet_name']."]]></timesheet>\n";
 
       print "</row>\n";
     }
@@ -209,6 +210,7 @@ if ('csv' == $type) {
     if ($bean->getAttribute('chpaid')) print ',"'.$i18n->get('label.paid').'"';
     if ($bean->getAttribute('chip')) print ',"'.$i18n->get('label.ip').'"';
     if ($bean->getAttribute('chinvoice')) print ',"'.$i18n->get('label.invoice').'"';
+    if ($bean->getAttribute('chtimesheet')) print ',"'.$i18n->get('label.timesheet').'"';
     print "\n";
 
     // Print items.
@@ -241,6 +243,7 @@ if ('csv' == $type) {
         print ',"'.$ip.'"';
       }
       if ($bean->getAttribute('chinvoice')) print ',"'.str_replace('"','""',$item['invoice']).'"';
+      if ($bean->getAttribute('chtimesheet')) print ',"'.str_replace('"','""',$item['timesheet_name']).'"';
       print "\n";
     }
   }
