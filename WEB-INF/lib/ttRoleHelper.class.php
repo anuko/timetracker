@@ -189,7 +189,7 @@ class ttRoleHelper {
 
     $mdb2 = getConnection();
 
-    $rights_client = 'view_client_reports,view_client_timesheets,view_client_invoices,manage_own_settings';
+    $rights_client = 'view_client_reports,view_client_timesheets,view_client_unapproved,view_client_invoices,manage_own_settings';
     $rights_user = 'track_own_time,track_own_expenses,view_own_reports,view_own_timesheets,manage_own_timesheets,view_own_charts,view_own_projects,view_own_tasks,manage_own_settings,view_users';
     $rights_supervisor = $rights_user.',track_time,track_expenses,view_reports,view_timesheets,manage_timesheets,approve_timesheets,view_charts,view_own_clients,override_punch_mode,override_date_lock,override_own_date_lock,swap_roles';
     $rights_comanager = $rights_supervisor.',manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,override_allow_ip,manage_basic_settings,view_all_reports';

@@ -179,10 +179,10 @@ if ($showPaidStatus) {
 }
 
 // Add timesheet assignment selector.
-$showTimesheet = $user->isPluginEnabled('ts') &&
+$showTimesheetDropdown = $user->isPluginEnabled('ts') &&
   ($user->can('view_own_timesheets') || $user->can('view_timesheets') ||
-   $user->can('view_all_timesheets') || $user->can('view_client_timesheets'));
-if ($showTimesheet) {
+   $user->can('view_all_timesheets') || ($user->can('view_client_timesheets') && $user->can('view_client_unapproved')));
+if ($showTimesheetDropdown) {
   $form->addInput(array('type'=>'combobox',
    'name'=>'timesheet',
    'style'=>'width: 250px;',
@@ -194,6 +194,9 @@ if ($showTimesheet) {
    'empty'=>array(''=>$i18n->get('dropdown.all'))
   ));
 }
+$showTimesheetCheckbox = $user->isPluginEnabled('ts') &&
+  ($user->can('view_own_timesheets') || $user->can('view_timesheets') ||
+   $user->can('view_all_timesheets') || $user->can('view_client_timesheets'));
 
 // Add user table.
 $showUsers = $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient();
@@ -274,11 +277,11 @@ $form->addInput(array('type'=>'checkbox','name'=>'chcost'));
 $showWorkUnits = $user->isPluginEnabled('wu');
 if ($showWorkUnits)
   $form->addInput(array('type'=>'checkbox','name'=>'chunits'));
-if ($showTimesheet)
+if ($showTimesheetCheckbox)
   $form->addInput(array('type'=>'checkbox','name'=>'chtimesheet'));
 
 // Add a hidden control for timesheet_user_id (who to generate a timesheet for).
-if ($showTimesheet)
+if ($showTimesheetCheckbox)
   $form->addInput(array('type'=>'hidden','name'=>'timesheet_user_id'));
 
 // Add group by control.
@@ -428,7 +431,8 @@ $smarty->assign('show_billable', $showBillable);
 $smarty->assign('show_invoice_dropdown', $showInvoiceDropdown);
 $smarty->assign('show_invoice_checkbox', $showInvoiceCheckbox);
 $smarty->assign('show_paid_status', $showPaidStatus);
-$smarty->assign('show_timesheet', $showTimesheet);
+$smarty->assign('show_timesheet_dropdown', $showTimesheetDropdown);
+$smarty->assign('show_timesheet_checkbox', $showTimesheetCheckbox);
 $smarty->assign('show_users', $showUsers);
 $smarty->assign('show_start', $showStart);
 $smarty->assign('show_finish', $showFinish);

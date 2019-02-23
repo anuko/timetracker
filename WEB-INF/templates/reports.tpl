@@ -216,7 +216,7 @@ function handleCheckboxes() {
               <tr><td><b>{$i18n.label.invoice}</b></td></tr>
               <tr><td>{$forms.reportForm.invoice.control}</td></tr>
 {/if}
-{if $show_timesheet}
+{if $show_timesheet_dropdown}
               <tr><td><b>{$i18n.label.timesheet}</b></td></tr>
               <tr><td>{$forms.reportForm.timesheet.control}</td></tr>
 {/if}
@@ -259,7 +259,7 @@ function handleCheckboxes() {
 {if $show_project}
                     <tr><td><label>{$forms.reportForm.chproject.control}&nbsp;{$i18n.label.project}</label></td></tr>
 {/if}
-{if $show_timesheet}
+{if $show_timesheet_checkbox}
                     <tr><td><label>{$forms.reportForm.chtimesheet.control}&nbsp;{$i18n.label.timesheet}</label></td></tr>
 {/if}
 {if $show_cf_1_checkbox}
