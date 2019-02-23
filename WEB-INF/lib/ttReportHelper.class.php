@@ -60,8 +60,10 @@ class ttReportHelper {
     if ($options['task_id']) $dropdown_parts .= ' and l.task_id = '.$options['task_id'];
     if ($options['billable']=='1') $dropdown_parts .= ' and l.billable = 1';
     if ($options['billable']=='2') $dropdown_parts .= ' and l.billable = 0';
-    if ($options['invoice']=='1') $dropdown_parts .= ' and l.invoice_id is not NULL';
-    if ($options['invoice']=='2') $dropdown_parts .= ' and l.invoice_id is NULL';
+    if ($options['invoice']=='1') $dropdown_parts .= ' and l.invoice_id is not null';
+    if ($options['invoice']=='2') $dropdown_parts .= ' and l.invoice_id is null';
+    if ($options['timesheet']=='1') $dropdown_parts .= ' and l.timesheet_id is not null';
+    if ($options['timesheet']=='2') $dropdown_parts .= ' and l.timesheet_id is null';
     if ($options['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
 
@@ -108,8 +110,10 @@ class ttReportHelper {
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and ei.client_id = '.$user->client_id;
     if ($options['project_id']) $dropdown_parts .= ' and ei.project_id = '.$options['project_id'];
-    if ($options['invoice']=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
-    if ($options['invoice']=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
+    if ($options['invoice']=='1') $dropdown_parts .= ' and ei.invoice_id is not null';
+    if ($options['invoice']=='2') $dropdown_parts .= ' and ei.invoice_id is null';
+    if ($options['timesheet']=='1') $dropdown_parts .= ' and ei.timesheet_id is not null';
+    if ($options['timesheet']=='2') $dropdown_parts .= ' and ei.timesheet_id is null';
     if ($options['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
 
@@ -995,6 +999,7 @@ class ttReportHelper {
     $options['billable'] = $bean->getAttribute('include_records');
     $options['invoice'] = $bean->getAttribute('invoice');
     $options['paid_status'] = $bean->getAttribute('paid_status');
+    $options['timesheet'] = $bean->getAttribute('timesheet');
     if (is_array($bean->getAttribute('users'))) $options['users'] = join(',', $bean->getAttribute('users'));
     $options['period'] = $bean->getAttribute('period');
     $options['period_start'] = $bean->getAttribute('start_date');
