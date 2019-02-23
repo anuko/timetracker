@@ -384,6 +384,7 @@ $i18n_key_words = array(
 'form.reports.include_not_invoiced' => 'не внесённые в счёт',
 'form.reports.include_assigned' => 'присвоена',
 'form.reports.include_not_assigned' => 'не присвоена',
+'form.reports.include_pending' => 'в ожидании',
 'form.reports.include_approved' => 'одобрена',
 'form.reports.include_not_approved' => 'не одобрена',
 'form.reports.select_period' => 'Выберите интервал времени',

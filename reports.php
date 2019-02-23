@@ -186,7 +186,11 @@ if ($showTimesheet) {
   $form->addInput(array('type'=>'combobox',
    'name'=>'timesheet',
    'style'=>'width: 250px;',
-   'data'=>array('1'=>$i18n->get('form.reports.include_assigned'),'2'=>$i18n->get('form.reports.include_not_assigned')),
+   'data'=>array(TIMESHEET_NOT_ASSIGNED=>$i18n->get('form.reports.include_not_assigned'),
+     TIMESHEET_ASSIGNED=>$i18n->get('form.reports.include_assigned'),
+     TIMESHEET_PENDING=>$i18n->get('form.reports.include_pending'),
+     TIMESHEET_APPROVED=>$i18n->get('form.reports.include_approved'),
+     TIMESHEET_NOT_APPROVED=>$i18n->get('form.reports.include_not_approved')),
    'empty'=>array(''=>$i18n->get('dropdown.all'))
   ));
 }

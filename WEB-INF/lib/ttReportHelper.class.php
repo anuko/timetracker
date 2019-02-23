@@ -33,6 +33,14 @@ import('ttTimeHelper');
 
 require_once(dirname(__FILE__).'/../../plugins/CustomFields.class.php');
 
+// Definitions of types for timesheet dropdown.
+define('TIMESHEET_ALL', 0); // Include all records.
+define('TIMESHEET_NOT_ASSIGNED', 1); // Include records not assigned to timesheets.
+define('TIMESHEET_ASSIGNED', 2); // Include records assigned to timesheets.
+define('TIMESHEET_PENDING', 3); // Include records in submitted timesheets that are pending manager approval.
+define('TIMESHEET_APPROVED', 4); // Include records in approved timesheets.
+define('TIMESHEET_NOT_APPROVED', 5); // Include records in disapproved timesheets.
+
 // Class ttReportHelper is used for help with reports.
 class ttReportHelper {
 
@@ -62,8 +70,8 @@ class ttReportHelper {
     if ($options['billable']=='2') $dropdown_parts .= ' and l.billable = 0';
     if ($options['invoice']=='1') $dropdown_parts .= ' and l.invoice_id is not null';
     if ($options['invoice']=='2') $dropdown_parts .= ' and l.invoice_id is null';
-    if ($options['timesheet']=='1') $dropdown_parts .= ' and l.timesheet_id is not null';
-    if ($options['timesheet']=='2') $dropdown_parts .= ' and l.timesheet_id is null';
+    if ($options['timesheet']==TIMESHEET_NOT_ASSIGNED) $dropdown_parts .= ' and l.timesheet_id is null';
+    if ($options['timesheet']==TIMESHEET_ASSIGNED) $dropdown_parts .= ' and l.timesheet_id is not null';
     if ($options['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
 
@@ -112,8 +120,8 @@ class ttReportHelper {
     if ($options['project_id']) $dropdown_parts .= ' and ei.project_id = '.$options['project_id'];
     if ($options['invoice']=='1') $dropdown_parts .= ' and ei.invoice_id is not null';
     if ($options['invoice']=='2') $dropdown_parts .= ' and ei.invoice_id is null';
-    if ($options['timesheet']=='1') $dropdown_parts .= ' and ei.timesheet_id is not null';
-    if ($options['timesheet']=='2') $dropdown_parts .= ' and ei.timesheet_id is null';
+    if ($options['timesheet']==TIMESHEET_NOT_ASSIGNED) $dropdown_parts .= ' and ei.timesheet_id is null';
+    if ($options['timesheet']==TIMESHEET_ASSIGNED) $dropdown_parts .= ' and ei.timesheet_id is not null';
     if ($options['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
 
@@ -264,13 +272,25 @@ class ttReportHelper {
     }
     if ($includeCost && MODE_TIME != $trackingMode)
       $left_joins .= " left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
-    if ($options['show_timesheet'])
-      $left_joins .= " left join tt_timesheets ts on (l.timesheet_id = ts.id)";
+
+    // Prepare sql query part for inner joins.
+    $inner_joins = null;
+    if ($user->isPluginEnabled('ts')) {
+      $timesheet_option = $options['timesheet'];
+      if ($timesheet_option == TIMESHEET_PENDING)
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.submit_status = 1 and ts.approval_status is null)";
+      else if ($timesheet_option == TIMESHEET_APPROVED)
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approval_status = 1)";
+      else if ($timesheet_option == TIMESHEET_NOT_APPROVED)
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approval_status = 0)";
+      else if ($options['show_timesheet'])
+        $inner_joins .= " left join tt_timesheets ts on (l.timesheet_id = ts.id)"; // Left join for timesheet nme.
+    }
 
     $where = ttReportHelper::getWhere($options);
 
     // Construct sql query for tt_log items.
-    $sql = "select ".join(', ', $fields)." from tt_log l $left_joins $where";
+    $sql = "select ".join(', ', $fields)." from tt_log l $left_joins $inner_joins $where";
     // If we don't have expense items (such as when the Expenses plugin is disabled), the above is all sql we need,
     // with an exception of sorting part, that is added in the end.
 
@@ -335,13 +355,25 @@ class ttReportHelper {
         $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";
       if (($canViewReports || $isClient) && $options['show_invoice'])
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
-      if ($options['show_timesheet'])
-        $left_joins .= " left join tt_timesheets ts on (ei.timesheet_id = ts.id)";
+
+      // Prepare sql query part for inner joins.
+      $inner_joins = null;
+      if ($user->isPluginEnabled('ts')) {
+        $timesheet_option = $options['timesheet'];
+        if ($timesheet_option == TIMESHEET_PENDING)
+          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.submit_status = 1 and ts.approval_status is null)";
+        else if ($timesheet_option == TIMESHEET_APPROVED)
+          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approval_status = 1)";
+        else if ($timesheet_option == TIMESHEET_NOT_APPROVED)
+          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approval_status = 0)";
+        else if ($options['show_timesheet'])
+          $inner_joins .= " left join tt_timesheets ts on (ei.timesheet_id = ts.id)"; // Left join for timesheet name.
+      }
 
       $where = ttReportHelper::getExpenseWhere($options);
 
       // Construct sql query for expense items.
-      $sql_for_expense_items = "select ".join(', ', $fields)." from tt_expense_items ei $left_joins $where";
+      $sql_for_expense_items = "select ".join(', ', $fields)." from tt_expense_items ei $left_joins $inner_joins $where";
 
       // Construct a union.
       $sql = "($sql) union all ($sql_for_expense_items)";
@@ -519,15 +551,37 @@ class ttReportHelper {
         $left_joins = "left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
       }
     }
+    // Prepare sql query part for inner joins.
+    $inner_joins = null;
+    if ($user->isPluginEnabled('ts') && $options['timesheet']) {
+      $timesheet_option = $options['timesheet'];
+      if ($timesheet_option == TIMESHEET_PENDING)
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.submit_status = 1 and ts.approval_status is null)";
+      else if ($timesheet_option == TIMESHEET_APPROVED)
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approval_status = 1)";
+      else if ($timesheet_option == TIMESHEET_NOT_APPROVED)
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approval_status = 0)";
+    }
     // Prepare a query for time items.
-    $sql = "select $time_part $units_part $cost_part from tt_log l $left_joins $where";
+    $sql = "select $time_part $units_part $cost_part from tt_log l $left_joins $inner_joins $where";
 
     // If we have expenses, query becomes a bit more complex.
     if ($options['show_cost'] && $user->isPluginEnabled('ex')) {
+      // Prepare sql query part for inner joins.
+      $inner_joins = null;
+      if ($user->isPluginEnabled('ts') && $options['timesheet']) {
+        $timesheet_option = $options['timesheet'];
+        if ($timesheet_option == TIMESHEET_PENDING)
+          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.submit_status = 1 and ts.approval_status is null)";
+        else if ($timesheet_option == TIMESHEET_APPROVED)
+          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approval_status = 1)";
+        else if ($timesheet_option == TIMESHEET_NOT_APPROVED)
+          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approval_status = 0)";
+      }
       $where = ttReportHelper::getExpenseWhere($options);
       $sql_for_expenses = "select null as time";
       if ($options['show_work_units']) $sql_for_expenses .= ", null as units";
-      $sql_for_expenses .= ", sum(cost) as cost, sum(cost) as expenses from tt_expense_items ei $where";
+      $sql_for_expenses .= ", sum(cost) as cost, sum(cost) as expenses from tt_expense_items ei $inner_joins $where";
 
       // Create a combined query.
       $combined = "select sum(time) as time";
