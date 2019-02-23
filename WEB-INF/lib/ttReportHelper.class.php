@@ -1546,6 +1546,18 @@ class ttReportHelper {
     if ($options['show_cost'] && $trackingMode != MODE_TIME) {
       $join .= ' left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)';
     }
+    // Prepare inner joins.
+    $inner_joins = null;
+    if ($user->isPluginEnabled('ts') && $options['timesheet']) {
+      $timesheet_option = $options['timesheet'];
+      if ($timesheet_option == TIMESHEET_PENDING)
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.submit_status = 1 and ts.approval_status is null)";
+      else if ($timesheet_option == TIMESHEET_APPROVED)
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approval_status = 1)";
+      else if ($timesheet_option == TIMESHEET_NOT_APPROVED)
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approval_status = 0)";
+    }
+    $join .= $inner_joins;
     return $join;
   }
 
@@ -1581,6 +1593,8 @@ class ttReportHelper {
 
   // makeJoinExpensesPart builds a left join part for getSubtotals query for expense items.
   static function makeJoinExpensesPart($options) {
+    global $user;
+
     if (ttReportHelper::groupingBy('user', $options)) {
       $join .= ' left join tt_users u on (ei.user_id = u.id)';
     }
@@ -1590,6 +1604,18 @@ class ttReportHelper {
     if (ttReportHelper::groupingBy('project', $options)) {
       $join .= ' left join tt_projects p on (ei.project_id = p.id)';
     }
+    // Prepare inner joins.
+    $inner_joins = null;
+    if ($user->isPluginEnabled('ts') && $options['timesheet']) {
+      $timesheet_option = $options['timesheet'];
+      if ($timesheet_option == TIMESHEET_PENDING)
+        $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.submit_status = 1 and ts.approval_status is null)";
+      else if ($timesheet_option == TIMESHEET_APPROVED)
+        $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approval_status = 1)";
+      else if ($timesheet_option == TIMESHEET_NOT_APPROVED)
+        $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approval_status = 0)";
+    }
+    $join .= $inner_joins;
     return $join;
   }
 
