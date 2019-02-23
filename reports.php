@@ -180,8 +180,8 @@ if ($showPaidStatus) {
 
 // Add timesheet assignment selector.
 $showTimesheet = $user->isPluginEnabled('ts') &&
-  ($user->can('view_own_timesheets') || $user->can('manage_own_timesheets') ||
-  $user->can('view_timesheets') || $user->can('manage_timesheets') || $user->can('approve_timesheets'));
+  ($user->can('view_own_timesheets') || $user->can('view_timesheets') ||
+   $user->can('view_all_timesheets') || $user->can('view_client_timesheets'));
 if ($showTimesheet) {
   $form->addInput(array('type'=>'combobox',
    'name'=>'timesheet',
