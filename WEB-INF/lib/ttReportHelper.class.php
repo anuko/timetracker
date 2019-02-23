@@ -1054,6 +1054,8 @@ class ttReportHelper {
     $options['invoice'] = $bean->getAttribute('invoice');
     $options['paid_status'] = $bean->getAttribute('paid_status');
     $options['timesheet'] = $bean->getAttribute('timesheet');
+    if ($user->isPluginEnabled('ts') && $user->isClient() && !$user->can('view_client_unapproved'))
+      $options['timesheet'] = TIMESHEET_APPROVED; // Restrict clients to approved timesheet records only.
     if (is_array($bean->getAttribute('users'))) $options['users'] = join(',', $bean->getAttribute('users'));
     $options['period'] = $bean->getAttribute('period');
     $options['period_start'] = $bean->getAttribute('start_date');
