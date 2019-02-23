@@ -104,7 +104,7 @@
     {if $bean->getAttribute('chpaid')}<td class="cellRightAligned">{if $item.paid == 1}{$i18n.label.yes}{else}{$i18n.label.no}{/if}{/if}
     {if $bean->getAttribute('chip')}<td class="cellRightAligned">{if $item.modified}{$item.modified_ip} {$item.modified}{else}{$item.created_ip} {$item.created}{/if}{/if}
     {if $bean->getAttribute('chinvoice')}<td class="cellRightAligned">{$item.invoice|escape}</td>{/if}
-    {if $bean->getAttribute('chtimesheet')}<td class="cellRightAligned">{$item.timesheet_id|escape}</td>{/if}
+    {if $bean->getAttribute('chtimesheet')}<td class="cellRightAligned">{$item.timesheet_name|escape}</td>{/if}
     {if $use_checkboxes}
       {if 1 == $item.type}<td bgcolor="white"><input type="checkbox" name="log_id_{$item.id}"></td>{/if}
       {if 2 == $item.type}<td bgcolor="white"><input type="checkbox" name="item_id_{$item.id}"></td>{/if}

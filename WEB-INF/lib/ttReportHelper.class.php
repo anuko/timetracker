@@ -166,7 +166,6 @@ class ttReportHelper {
     array_push($fields, 'l.user_id');
     array_push($fields, '1 as type'); // Type 1 is for tt_log entries.
     array_push($fields, 'l.date');
-    array_push($fields, 'l.timesheet_id');
     if($canViewReports || $isClient)
       array_push($fields, 'u.name as user');
     // Add client name if it is selected.
@@ -235,6 +234,9 @@ class ttReportHelper {
     // Add invoice name if it is selected.
     if (($canViewReports || $isClient) && $options['show_invoice'])
       array_push($fields, 'i.name as invoice');
+    // Add timesheet name if it is selected.
+    if ($options['show_timesheet'])
+      array_push($fields, 'ts.name as timesheet_name');
 
     // Prepare sql query part for left joins.
     $left_joins = null;
@@ -258,6 +260,8 @@ class ttReportHelper {
     }
     if ($includeCost && MODE_TIME != $trackingMode)
       $left_joins .= " left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
+    if ($options['show_timesheet'])
+      $left_joins .= " left join tt_timesheets ts on (l.timesheet_id = ts.id)";
 
     $where = ttReportHelper::getWhere($options);
 
@@ -274,7 +278,6 @@ class ttReportHelper {
       array_push($fields, 'ei.user_id');
       array_push($fields, '2 as type'); // Type 2 is for tt_expense_items entries.
       array_push($fields, 'ei.date');
-      array_push($fields, 'ei.timesheet_id');
       if($canViewReports || $isClient)
         array_push($fields, 'u.name as user');
       // Add client name if it is selected.
@@ -315,6 +318,8 @@ class ttReportHelper {
       // Add invoice name if it is selected.
       if (($canViewReports || $isClient) && $options['show_invoice'])
         array_push($fields, 'i.name as invoice');
+      if ($options['show_timesheet'])
+        array_push($fields, 'ts.name as timesheet_name');
 
       // Prepare sql query part for left joins.
       $left_joins = null;
@@ -326,6 +331,8 @@ class ttReportHelper {
         $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";
       if (($canViewReports || $isClient) && $options['show_invoice'])
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
+      if ($options['show_timesheet'])
+        $left_joins .= " left join tt_timesheets ts on (ei.timesheet_id = ts.id)";
 
       $where = ttReportHelper::getExpenseWhere($options);
 
@@ -1005,6 +1012,7 @@ class ttReportHelper {
     $options['show_note'] = $bean->getAttribute('chnote');
     $options['show_custom_field_1'] = $bean->getAttribute('chcf_1');
     $options['show_work_units'] = $bean->getAttribute('chunits');
+    $options['show_timesheet'] = $bean->getAttribute('chtimesheet');
     $options['show_totals_only'] = $bean->getAttribute('chtotalsonly');
     $options['group_by1'] = $bean->getAttribute('group_by1');
     $options['group_by2'] = $bean->getAttribute('group_by2');
