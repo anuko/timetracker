@@ -422,6 +422,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.include_assigned' => 'assigned',
 // 'form.reports.include_not_assigned' => 'not assigned',
+// 'form.reports.include_approved' => 'approved',
+// 'form.reports.include_not_approved' => 'not approved',
 'form.reports.select_period' => 'Valitse ajanjakso',
 'form.reports.set_period' => 'tai aseta päivät',
 'form.reports.show_fields' => 'Näytä kentät',

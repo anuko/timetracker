@@ -234,7 +234,7 @@ $i18n_key_words = array(
 'label.quota' => 'Quota',
 'label.timesheet' => 'Timesheet',
 'label.submitted' => 'Submitted',
-'label.approved' => 'Approved',
+'label.form' => 'Approved',
 
 // Form titles.
 'title.error' => 'Error',
@@ -392,6 +392,8 @@ $i18n_key_words = array(
 'form.reports.include_not_invoiced' => 'not invoiced',
 'form.reports.include_assigned' => 'assigned',
 'form.reports.include_not_assigned' => 'not assigned',
+'form.reports.include_approved' => 'approved',
+'form.reports.include_not_approved' => 'not approved',
 'form.reports.select_period' => 'Select time period',
 'form.reports.set_period' => 'or set dates',
 'form.reports.show_fields' => 'Show fields',
