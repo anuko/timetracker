@@ -113,7 +113,7 @@
             &middot; <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
     {/if}
     {if $user->exists() && ($user->can('view_own_reports') || $user->can('view_reports') || $user->can('view_all_reports') || $user->can('view_client_reports'))}
-            &middot; <a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a> 
+      {if !$user->isClient()}&middot;{/if} <a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a>
     {/if}
     {if $user->exists() && $user->isPluginEnabled('ts') && ($user->can('view_own_timesheets') || $user->can('view_timesheets') || $user->can('view_all_timesheets') || $user->can('view_client_timesheets'))}
             &middot; <a class="mainMenu" href="timesheets.php">{$i18n.menu.timesheets}</a>

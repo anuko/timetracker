@@ -45,7 +45,7 @@ if (!$timesheet) {
   exit();
 }
 // TODO: add other checks here for timesheet being appropriate for user role.
-// TODO: if this is a timeheet submit, validate approver id, too.
+// TODO: if this is a timesheet submit, validate approver id, too.
 // End of access checks.
 
 if ($request->isPost()) {
