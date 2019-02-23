@@ -336,7 +336,7 @@ class ttTimesheetHelper {
     $sql = "select u.id, u.name, u.email".
       " from tt_users u".
       " left join tt_roles r on (r.id = u.role_id)".
-      " where u.status = 1 and u.email is not null".
+      " where u.status = 1 and u.email is not null and u.group_id = $group_id and u.org_id = $org_id".
       " and (r.rights like '%approve_all_timesheets%' or (r.rank > $rank and r.rights like '%approve_timesheets%'))";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
