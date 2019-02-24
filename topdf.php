@@ -156,6 +156,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chunits')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.work_units_short').'</td>'; }
   if ($bean->getAttribute('chnote')) { $colspan++; $html .= '<td>'.$i18n->get('label.note').'</td>'; }
   if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.cost').'</td>'; }
+  if ($bean->getAttribute('chapproved')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.approved').'</td>'; }
   if ($bean->getAttribute('chpaid')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.paid').'</td>'; }
   if ($bean->getAttribute('chip')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.ip').'</td>'; }
   if ($bean->getAttribute('chinvoice')) { $colspan++; $html .= '<td>'.$i18n->get('label.invoice').'</td>'; }
@@ -209,6 +210,7 @@ if ($totals_only) {
             $html .= $subtotals[$prev_grouped_by]['expenses'];
           $html .= '</td>';
         }
+        if ($bean->getAttribute('chapproved')) $html .= '<td></td>';
         if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
         if ($bean->getAttribute('chip')) $html .= '<td></td>';
         if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
@@ -239,6 +241,11 @@ if ($totals_only) {
       else
         $html .= $item['expense'];
       $html .= '</td>';
+    }
+    if ($bean->getAttribute('chapproved')) {
+        $html .= '<td>';
+        $html .= $item['approved'] == 1 ? $i18n->get('label.yes') : $i18n->get('label.no');
+        $html .= '</td>';
     }
     if ($bean->getAttribute('chpaid')) {
         $html .= '<td>';
@@ -300,6 +307,7 @@ if ($totals_only) {
         $html .= $subtotals[$prev_grouped_by]['expenses'];
       $html .= '</td>';
     }
+    if ($bean->getAttribute('chapproved')) $html .= '<td></td>';
     if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
     if ($bean->getAttribute('chip')) $html .= '<td></td>';
     if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
@@ -329,6 +337,7 @@ if ($totals_only) {
       $html .= $totals['expenses'];
     $html .= '</td>';
   }
+  if ($bean->getAttribute('chapproved')) $html .= '<td></td>';
   if ($bean->getAttribute('chpaid')) $html .= '<td></td>';
   if ($bean->getAttribute('chip')) $html .= '<td></td>';
   if ($bean->getAttribute('chinvoice')) $html .= '<td></td>';
