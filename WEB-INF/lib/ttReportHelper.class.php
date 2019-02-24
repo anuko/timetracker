@@ -72,6 +72,8 @@ class ttReportHelper {
     if ($options['invoice']=='2') $dropdown_parts .= ' and l.invoice_id is null';
     if ($options['timesheet']==TIMESHEET_NOT_ASSIGNED) $dropdown_parts .= ' and l.timesheet_id is null';
     if ($options['timesheet']==TIMESHEET_ASSIGNED) $dropdown_parts .= ' and l.timesheet_id is not null';
+    if ($options['approved']=='1') $dropdown_parts .= ' and l.approved = 1';
+    if ($options['approved']=='2') $dropdown_parts .= ' and l.approved = 0';
     if ($options['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
 
@@ -122,6 +124,8 @@ class ttReportHelper {
     if ($options['invoice']=='2') $dropdown_parts .= ' and ei.invoice_id is null';
     if ($options['timesheet']==TIMESHEET_NOT_ASSIGNED) $dropdown_parts .= ' and ei.timesheet_id is null';
     if ($options['timesheet']==TIMESHEET_ASSIGNED) $dropdown_parts .= ' and ei.timesheet_id is not null';
+    if ($options['approved']=='1') $dropdown_parts .= ' and ei.approved = 1';
+    if ($options['approved']=='2') $dropdown_parts .= ' and ei.approved = 0';
     if ($options['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
 
@@ -233,6 +237,9 @@ class ttReportHelper {
         array_push($fields, "cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost"); // Use project rate for user.
       array_push($fields, "null as expense"); 
     }
+    // Add approved.
+    if ($options['show_approved'])
+      array_push($fields, 'l.approved');
     // Add paid status.
     if ($canViewReports && $options['show_paid'])
       array_push($fields, 'l.paid');
@@ -329,6 +336,9 @@ class ttReportHelper {
         array_push($fields, 'ei.name as note');
       array_push($fields, 'ei.cost as cost');
       array_push($fields, 'ei.cost as expense');
+      // Add approved.
+      if ($options['show_approved'])
+        array_push($fields, 'ei.approved');
       // Add paid status.
       if ($canViewReports && $options['show_paid'])
         array_push($fields, 'ei.paid');
@@ -1053,6 +1063,7 @@ class ttReportHelper {
     $options['billable'] = $bean->getAttribute('include_records');
     $options['invoice'] = $bean->getAttribute('invoice');
     $options['paid_status'] = $bean->getAttribute('paid_status');
+    $options['approved'] = $bean->getAttribute('approved');
     $options['timesheet'] = $bean->getAttribute('timesheet');
     if ($user->isPluginEnabled('ts') && $user->isClient() && !$user->can('view_client_unapproved'))
       $options['timesheet'] = TIMESHEET_APPROVED; // Restrict clients to approved timesheet records only.
@@ -1062,6 +1073,7 @@ class ttReportHelper {
     $options['period_end'] = $bean->getAttribute('end_date');
     $options['show_client'] = $bean->getAttribute('chclient');
     $options['show_invoice'] = $bean->getAttribute('chinvoice');
+    $options['show_approved'] = $bean->getAttribute('chapproved');
     $options['show_paid'] = $bean->getAttribute('chpaid');
     $options['show_ip'] = $bean->getAttribute('chip');
     $options['show_project'] = $bean->getAttribute('chproject');
