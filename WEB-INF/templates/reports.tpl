@@ -212,6 +212,10 @@ function handleCheckboxes() {
               <tr><td><b>{$i18n.label.task}</b></td></tr>
               <tr><td>{$forms.reportForm.task.control}</td></tr>
 {/if}
+{if $show_approved}
+              <tr><td><b>{$i18n.label.approved}</b></td></tr>
+              <tr><td>{$forms.reportForm.approved.control}</td></tr>
+{/if}
 {if $show_invoice_dropdown}
               <tr><td><b>{$i18n.label.invoice}</b></td></tr>
               <tr><td>{$forms.reportForm.invoice.control}</td></tr>
@@ -289,6 +293,9 @@ function handleCheckboxes() {
                     <tr><td><label>{$forms.reportForm.chfinish.control}&nbsp;{$i18n.label.finish}</label></td></tr>
 {/if}
                     <tr><td><label>{$forms.reportForm.chnote.control}&nbsp;{$i18n.label.note}</label></td></tr>
+{if $show_approved}
+                    <tr><td><label>{$forms.reportForm.chapproved.control}&nbsp;{$i18n.label.approved}</label></td></tr>
+{/if}
 {if $show_invoice_checkbox}
                     <tr><td><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></td></tr>
 {/if}

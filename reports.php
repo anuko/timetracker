@@ -198,6 +198,19 @@ $showTimesheetCheckbox = $user->isPluginEnabled('ts') &&
   ($user->can('view_own_timesheets') || $user->can('view_timesheets') ||
    $user->can('view_all_timesheets') || $user->can('view_client_timesheets'));
 
+// Add approved / not approved selector.
+$showApproved = $user->isPluginEnabled('ap') &&
+  ($user->can('view_own_reports') || $user->can('view_reports') ||
+   $user->can('view_all_reports') || ($user->can('view_client_reports') && $user->can('view_client_unapproved')));
+if ($showApproved) {
+  $form->addInput(array('type'=>'combobox',
+   'name'=>'approved',
+   'style'=>'width: 250px;',
+   'data'=>array('1'=>$i18n->get('form.reports.include_approved'),'2'=>$i18n->get('form.reports.include_not_approved')),
+   'empty'=>array(''=>$i18n->get('dropdown.all'))
+  ));
+}
+
 // Add user table.
 $showUsers = $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient();
 $user_list = array();
@@ -279,6 +292,8 @@ if ($showWorkUnits)
   $form->addInput(array('type'=>'checkbox','name'=>'chunits'));
 if ($showTimesheetCheckbox)
   $form->addInput(array('type'=>'checkbox','name'=>'chtimesheet'));
+if ($showApproved)
+  $form->addInput(array('type'=>'checkbox','name'=>'chapproved'));
 
 // Add a hidden control for timesheet_user_id (who to generate a timesheet for).
 if ($showTimesheetCheckbox)
@@ -428,6 +443,7 @@ $smarty->assign('show_cf_1_checkbox', $showCustomFieldCheckbox);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
 $smarty->assign('show_billable', $showBillable);
+$smarty->assign('show_approved', $showApproved);
 $smarty->assign('show_invoice_dropdown', $showInvoiceDropdown);
 $smarty->assign('show_invoice_checkbox', $showInvoiceCheckbox);
 $smarty->assign('show_paid_status', $showPaidStatus);
