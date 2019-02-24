@@ -351,7 +351,7 @@ class ttInvoiceHelper {
         " where l.status = 1 and l.client_id = $client_id and l.invoice_id is null".
         " and l.group_id = $group_id and l.org_id = $org_id".
         " and l.date >= ".$mdb2->quote($start)." and l.date <= ".$mdb2->quote($end).
-        " and l.billable = 1"; // l.billable * u.rate * time_to_sec(l.duration)/3600 > 0"; // See explanation below.
+        " and l.duration > 0 and l.billable = 1"; // l.billable * u.rate * time_to_sec(l.duration)/3600 > 0"; // See explanation below.
     } else {
        // sql part for project id.
       if ($project_id) $project_part = " and l.project_id = $project_id";
@@ -363,7 +363,7 @@ class ttInvoiceHelper {
         " where l.status = 1 and l.client_id = $client_id $project_part and l.invoice_id is null".
         " and l.group_id = $group_id and l.org_id = $org_id".
         " and l.date >= ".$mdb2->quote($start)." and l.date <= ".$mdb2->quote($end).
-        " and l.billable = 1"; //  l.billable * upb.rate * time_to_sec(l.duration)/3600 > 0";
+        " and l.duration > 0 and l.billable = 1"; //  l.billable * upb.rate * time_to_sec(l.duration)/3600 > 0";
         // Users with a lot of clients and projects (Jaro) may forget to set user rates properly.
         // Specifically, user rate may be set to 0 on a project, by mistake. This leads to error.no_invoiceable_items
         // and increased support cost. Commenting out allows us to include 0 cost items in invoices so that
