@@ -201,6 +201,7 @@ CREATE TABLE `tt_log` (
   `invoice_id` int(11) default NULL,               # invoice id
   `comment` text,                                  # user provided comment for time record
   `billable` tinyint(4) default 0,                 # whether the record is billable or not
+  `approved` tinyint(4) default 0,                 # whether the record is approved
   `paid` tinyint(4) default 0,                     # whether the record is paid
   `created` datetime default NULL,                 # creation timestamp
   `created_ip` varchar(45) default NULL,           # creator ip
@@ -431,6 +432,7 @@ CREATE TABLE `tt_expense_items` (
   `name` text NOT NULL,                   # expense item name (what is an expense for)
   `cost` decimal(10,2) default '0.00',    # item cost (including taxes, etc.)
   `invoice_id` int(11) default NULL,      # invoice id
+  `approved` tinyint(4) default 0,        # whether the item is approved
   `paid` tinyint(4) default 0,            # whether the item is paid
   `created` datetime default NULL,        # creation timestamp
   `created_ip` varchar(45) default NULL,  # creator ip
