@@ -56,6 +56,7 @@ function setRate(element) {
 function handleClientControl() {
   var selectedRoleId = document.getElementById("role").value;
   var clientControl = document.getElementById("client");
+  var nonClientBlock = document.getElementById("non_client_block");
   var projectsControl = document.getElementById("projects_control");
 
   var len = roles.length;
@@ -64,6 +65,7 @@ function handleClientControl() {
       var isClient = roles[i][1];
       if (isClient == 1) {
         clientControl.style.visibility = "visible";
+        nonClientBlock.style.display = "none";
         projectsControl.style.display = "none";
 
         // Uncheck all project checkboxes.
@@ -75,6 +77,7 @@ function handleClientControl() {
       } else {
         clientControl.value = "";
         clientControl.style.visibility = "hidden";
+        nonClientBlock.style.display = "";
         projectsControl.style.display = "";
       }
       break;
@@ -124,16 +127,18 @@ function handleClientControl() {
       <td>{$user->role_name} {if $can_swap}<a href="swap_roles.php">{$i18n.form.user_edit.swap_roles}</a>{/if}</td>
     </tr>
 {/if}
-    <tr>
-      <td align="right">{$i18n.form.users.default_rate}&nbsp;(0{$user->getDecimalMark()}00):</td>
-      <td>{$forms.userForm.rate.control}</td>
-    </tr>
+<tbody id="non_client_block">
 {if $show_quota}
     <tr>
       <td align="right">{$i18n.label.quota}&nbsp;(%):</td>
       <td>{$forms.userForm.quota_percent.control} <a href="https://www.anuko.com/lp/tt_27.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
     </tr>
 {/if}
+    <tr>
+      <td align="right">{$i18n.form.users.default_rate}&nbsp;(0{$user->getDecimalMark()}00):</td>
+      <td>{$forms.userForm.rate.control}</td>
+    </tr>
+</tbody>
 {if $show_projects}
 <tbody id="projects_control">
     <tr><td>&nbsp;</td></tr>
