@@ -972,7 +972,7 @@ if ($_POST) {
     print "Updated $tt_expense_items_updated tt_expense_items records...<br>\n";
   }
 
-  if ($_POST["convert11797to11842"]) {
+  if ($_POST["convert11797to11843"]) {
     ttExecute("ALTER TABLE `tt_fav_reports` CHANGE `group_by` `group_by1` varchar(20) default NULL");
     ttExecute("ALTER TABLE `tt_fav_reports` ADD `group_by2` varchar(20) default NULL AFTER `group_by1`");
     ttExecute("ALTER TABLE `tt_fav_reports` ADD `group_by3` varchar(20) default NULL AFTER `group_by2`");
@@ -1088,6 +1088,10 @@ if ($_POST) {
     ttExecute("ALTER TABLE `tt_log` ADD `approved` tinyint(4) default 0 AFTER `billable`");
     ttExecute("ALTER TABLE `tt_expense_items` ADD `approved` tinyint(4) default 0 AFTER `invoice_id`");
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.42', modified = now() where param_name = 'version_db' and param_value = '1.18.41'");
+    ttExecute("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.42') set rights = 'track_own_time,track_own_expenses,view_own_reports,view_own_timesheets,manage_own_timesheets,view_own_charts,view_own_projects,view_own_tasks,manage_own_settings,view_users,view_client_reports,view_client_timesheets,view_client_unapproved,view_client_invoices,track_time,track_expenses,view_reports,approve_reports,view_timesheets,manage_timesheets,approve_timesheets,view_charts,view_own_clients,override_punch_mode,override_own_punch_mode,override_date_lock,override_own_date_lock,swap_roles,manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,override_allow_ip,manage_basic_settings,view_all_reports,view_all_timesheets,manage_all_timesheets,manage_features,manage_advanced_settings,manage_roles,export_data,approve_all_reports,approve_all_timesheets,manage_subgroups,delete_group' where rank = 512");
+    ttExecute("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.42') set rights = replace(rights, 'view_reports,view_timesheets', 'view_reports,approve_reports,view_timesheets') where rank = 12 or rank = 68 or rank = 324");
+    ttExecute("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.42') set rights = replace(rights, 'export_data,approve_all_timesheets', 'export_data,approve_all_reports,approve_all_timesheets') where rank = 324");
+    ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.43', modified = now() where param_name = 'version_db' and param_value = '1.18.42'");
   }
 
   if ($_POST["cleanup"]) {
@@ -1136,7 +1140,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.18.42)</b>
+    <td width="80%"><b>Create database structure (v1.18.43)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -1181,8 +1185,8 @@ if ($_POST) {
   </tr>
   </tr>
   <tr valign="top">
-    <td>Update database structure (v1.17.97 to v1.18.42)</td>
-    <td><input type="submit" name="convert11797to11842" value="Update"></td>
+    <td>Update database structure (v1.17.97 to v1.18.43)</td>
+    <td><input type="submit" name="convert11797to11843" value="Update"></td>
   </tr>
 </table>
 

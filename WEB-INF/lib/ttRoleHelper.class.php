@@ -191,7 +191,7 @@ class ttRoleHelper {
 
     $rights_client = 'view_client_reports,view_client_timesheets,view_client_unapproved,view_client_invoices,manage_own_settings';
     $rights_user = 'track_own_time,track_own_expenses,view_own_reports,view_own_timesheets,manage_own_timesheets,view_own_charts,view_own_projects,view_own_tasks,manage_own_settings,view_users';
-    $rights_supervisor = $rights_user.',track_time,track_expenses,view_reports,view_timesheets,manage_timesheets,approve_timesheets,view_charts,view_own_clients,override_punch_mode,override_date_lock,override_own_date_lock,swap_roles';
+    $rights_supervisor = $rights_user.',track_time,track_expenses,view_reports,approve_reports,view_timesheets,manage_timesheets,approve_timesheets,view_charts,view_own_clients,override_punch_mode,override_date_lock,override_own_date_lock,swap_roles';
     $rights_comanager = $rights_supervisor.',manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,override_allow_ip,manage_basic_settings,view_all_reports';
     $rights_manager = $rights_comanager.',manage_features,manage_advanced_settings,manage_roles,export_data,manage_subgroups';
 
@@ -254,7 +254,7 @@ class ttRoleHelper {
     $rights_user = 'track_own_time,track_own_expenses,view_own_reports,view_own_charts,view_own_projects,view_own_tasks,manage_own_settings,view_users';
     $rights_supervisor = $rights_user.',track_time,track_expenses,view_reports,view_charts,view_own_clients,override_punch_mode,override_date_lock,override_own_date_lock,swap_roles,approve_timesheets';
     $rights_comanager = $rights_supervisor.',manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,override_allow_ip,manage_basic_settings,view_all_reports';
-    $rights_manager = $rights_comanager.',manage_features,manage_advanced_settings,manage_roles,export_data,manage_subgroups';
+    $rights_manager = $rights_comanager.',manage_features,manage_advanced_settings,manage_roles,export_data,approve_all_reports,approve_all_timesheets,manage_subgroups';
 
     // Active roles.
     $name = $mdb2->quote($i18n->get('role.user.label'));
