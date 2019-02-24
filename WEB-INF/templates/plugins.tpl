@@ -134,10 +134,16 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$forms.pluginsForm.work_units.control}</td>
             <td><label for="work_units">{$i18n.label.work_units}</label> <span id="work_units_config"><a href="work_units.php">{$i18n.label.configure}</a></span></td>
           </tr>
+{if isTrue('APPROVAL_DEBUG')}
+          <tr>
+            <td align="right" nowrap>{$forms.pluginsForm.approval.control}</td>
+            <td><label for="approval">{$i18n.label.approval}</label></td>
+          </tr>
+{/if}
 {if isTrue('TIMESHEET_DEBUG')}
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.timesheets.control}</td>
-            <td><label for="charts">{$i18n.title.timesheets}</label></td>
+            <td><label for="timesheets">{$i18n.title.timesheets}</label></td>
           </tr>
 {/if}
           <tr>

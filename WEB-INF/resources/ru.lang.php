@@ -234,6 +234,7 @@ $i18n_key_words = array(
 'label.timesheet' => 'Табель учёта',
 'label.submitted' => 'Подано',
 'label.approved' => 'Одобрено',
+'label.approval' => 'Одобрение отчётов',
 
 // Form titles.
 'title.error' => 'Ошибка',

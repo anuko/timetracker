@@ -256,6 +256,7 @@ $i18n_key_words = array(
 // 'label.timesheet' => 'Timesheet',
 // 'label.submitted' => 'Submitted',
 // 'label.approved' => 'Approved',
+// 'label.approval' => 'Report approval',
 
 // Rubriker för formulär
 'title.error' => 'Fel',
