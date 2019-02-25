@@ -92,7 +92,7 @@ if ($showForApproved) {
     'name'=>'mark_approved_select_options',
     'data'=>$mark_approved_select_options,
     'value'=>$cl_mark_approved_select_option));
-  $mark_approved_action_options = array('1'=>$i18n->get('form.reports.include_approved'),'2'=>$i18n->get('form.reports.include_not_approved'));
+  $mark_approved_action_options = array('1'=>$i18n->get('dropdown.approved'),'2'=>$i18n->get('dropdown.not_approved'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'mark_approved_action_options',
     'data'=>$mark_approved_action_options,

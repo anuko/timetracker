@@ -189,8 +189,8 @@ if ($showTimesheetDropdown) {
    'data'=>array(TIMESHEET_NOT_ASSIGNED=>$i18n->get('form.reports.include_not_assigned'),
      TIMESHEET_ASSIGNED=>$i18n->get('form.reports.include_assigned'),
      TIMESHEET_PENDING=>$i18n->get('form.reports.include_pending'),
-     TIMESHEET_APPROVED=>$i18n->get('form.reports.include_approved'),
-     TIMESHEET_NOT_APPROVED=>$i18n->get('form.reports.include_not_approved')),
+     TIMESHEET_APPROVED=>$i18n->get('dropdown.approved'),
+     TIMESHEET_NOT_APPROVED=>$i18n->get('dropdown.not_approved')),
    'empty'=>array(''=>$i18n->get('dropdown.all'))
   ));
 }
@@ -206,7 +206,7 @@ if ($showApproved) {
   $form->addInput(array('type'=>'combobox',
    'name'=>'approved',
    'style'=>'width: 250px;',
-   'data'=>array('1'=>$i18n->get('form.reports.include_approved'),'2'=>$i18n->get('form.reports.include_not_approved')),
+   'data'=>array('1'=>$i18n->get('dropdown.approved'),'2'=>$i18n->get('dropdown.not_approved')),
    'empty'=>array(''=>$i18n->get('dropdown.all'))
   ));
 }

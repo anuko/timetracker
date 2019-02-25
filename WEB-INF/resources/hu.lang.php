@@ -448,8 +448,6 @@ $i18n_key_words = array(
 // 'form.reports.include_assigned' => 'assigned',
 // 'form.reports.include_not_assigned' => 'not assigned',
 // 'form.reports.include_pending' => 'pending',
-// 'form.reports.include_approved' => 'approved',
-// 'form.reports.include_not_approved' => 'not approved',
 'form.reports.select_period' => 'Jelölj meg egy időszakot',
 'form.reports.set_period' => 'vagy állíts be konkrét dátumot',
 // TODO: translate the following.
