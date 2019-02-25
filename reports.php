@@ -178,6 +178,19 @@ if ($showPaidStatus) {
  ));
 }
 
+// Add approved / not approved selector.
+$showApproved = $user->isPluginEnabled('ap') &&
+  ($user->can('view_own_reports') || $user->can('view_reports') ||
+   $user->can('view_all_reports') || ($user->can('view_client_reports') && $user->can('view_client_unapproved')));
+if ($showApproved) {
+  $form->addInput(array('type'=>'combobox',
+   'name'=>'approved',
+   'style'=>'width: 250px;',
+   'data'=>array('1'=>$i18n->get('dropdown.approved'),'2'=>$i18n->get('dropdown.not_approved')),
+   'empty'=>array(''=>$i18n->get('dropdown.all'))
+  ));
+}
+
 // Add timesheet assignment selector.
 $showTimesheetDropdown = $user->isPluginEnabled('ts') &&
   ($user->can('view_own_timesheets') || $user->can('view_timesheets') ||
@@ -197,19 +210,6 @@ if ($showTimesheetDropdown) {
 $showTimesheetCheckbox = $user->isPluginEnabled('ts') &&
   ($user->can('view_own_timesheets') || $user->can('view_timesheets') ||
    $user->can('view_all_timesheets') || $user->can('view_client_timesheets'));
-
-// Add approved / not approved selector.
-$showApproved = $user->isPluginEnabled('ap') &&
-  ($user->can('view_own_reports') || $user->can('view_reports') ||
-   $user->can('view_all_reports') || ($user->can('view_client_reports') && $user->can('view_client_unapproved')));
-if ($showApproved) {
-  $form->addInput(array('type'=>'combobox',
-   'name'=>'approved',
-   'style'=>'width: 250px;',
-   'data'=>array('1'=>$i18n->get('dropdown.approved'),'2'=>$i18n->get('dropdown.not_approved')),
-   'empty'=>array(''=>$i18n->get('dropdown.all'))
-  ));
-}
 
 // Add user table.
 $showUsers = $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient();
