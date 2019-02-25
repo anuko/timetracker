@@ -348,6 +348,9 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'inactief',
 'dropdown.delete' => 'verwijderen',
 'dropdown.do_not_delete' => 'niet verwijderen',
+// TODO: translate the following.
+// 'dropdown.approved' => 'approved',
+// 'dropdown.not_approved' => 'not approved',
 'dropdown.paid' => 'betaald',
 'dropdown.not_paid' => 'niet betaald',
 

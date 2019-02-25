@@ -361,6 +361,9 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'ανένεργος',
 'dropdown.delete' => 'διαγραφή',
 'dropdown.do_not_delete' => 'μη το διαγράψετε',
+// TODO: translate the following.
+// 'dropdown.approved' => 'approved',
+// 'dropdown.not_approved' => 'not approved',
 'dropdown.paid' => 'εξοφλημένο',
 'dropdown.not_paid' => 'δεν έχει εξοφληθεί',
 

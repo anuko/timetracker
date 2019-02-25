@@ -377,6 +377,8 @@ $i18n_key_words = array(
 'dropdown.delete' => 'usuń',
 'dropdown.do_not_delete' => 'nie usuwaj',
 // TODO: translate the following.
+// 'dropdown.approved' => 'approved',
+// 'dropdown.not_approved' => 'not approved',
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',
 

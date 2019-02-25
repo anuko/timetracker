@@ -374,6 +374,9 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'mitte aktiivne',
 'dropdown.delete' => 'kustuta',
 'dropdown.do_not_delete' => 'ära kustuta',
+// TODO: translate the following.
+// 'dropdown.approved' => 'approved',
+// 'dropdown.not_approved' => 'not approved',
 'dropdown.paid' => 'makstud',
 'dropdown.not_paid' => 'mitte makstud',
 

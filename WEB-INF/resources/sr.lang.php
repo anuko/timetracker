@@ -375,6 +375,8 @@ $i18n_key_words = array(
 'dropdown.delete' => 'obriši',
 'dropdown.do_not_delete' => 'nemoj obrisati',
 // TODO: translate the following.
+// 'dropdown.approved' => 'approved',
+// 'dropdown.not_approved' => 'not approved',
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',
 
