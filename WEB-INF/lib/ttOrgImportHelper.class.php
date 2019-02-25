@@ -36,7 +36,7 @@ class ttOrgImportHelper {
   var $canImport      = true;    // False if we cannot import data due to a conflict such as login collision.
   var $firstPass      = true;    // True during first pass through the file.
   var $org_id         = null;    // Organization id (same as top group_id).
-  var $current_group_id        = null; // Current group id during parsing.
+  var $current_group_id     = null; // Current group id during parsing.
   var $parents        = array(); // A stack of parent group ids for current group all the way to the root including self.
   var $top_role_id    = 0;       // Top role id.
 
@@ -46,6 +46,7 @@ class ttOrgImportHelper {
   var $currentGroupProjectMap = array();
   var $currentGroupClientMap  = array();
   var $currentGroupUserMap    = array();
+  var $currentGroupTimesheetMap = array();
   var $currentGroupInvoiceMap = array();
   var $currentGroupLogMap     = array();
   var $currentGroupCustomFieldMap = array();
@@ -138,6 +139,7 @@ class ttOrgImportHelper {
         unset($this->currentGroupProjectMap); $this->currentGroupProjectMap = array();
         unset($this->currentGroupClientMap); $this->currentGroupClientMap = array();
         unset($this->currentGroupUserMap); $this->currentGroupUserMap = array();
+        unset($this->currentGroupTimesheetMap); $this->currentGroupTimesheetMap = array();
         unset($this->currentGroupInvoiceMap); $this->currentGroupInvoiceMap = array();
         unset($this->currentGroupLogMap); $this->currentGroupLogMap = array();
         unset($this->currentGroupCustomFieldMap); $this->currentGroupCustomFieldMap = array();
@@ -274,6 +276,28 @@ class ttOrgImportHelper {
         return;
       }
 
+      if ($name == 'TIMESHEET') {
+        // We get here when processing <timesheet> tags for the current group.
+        $timesheet_id = $this->insertTimesheet(array(
+          'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'name' => $attrs['NAME'],
+          'submit_status' => $attrs['SUBMIT_STATUS'],
+          'submitter_comment' => $attrs['SUBMITTER_COMMENT'],
+          'approval_status' => $attrs['APPROVAL_STATUS'],
+          'manager_comment' => $attrs['MANAGER_COMMENT'],
+          'status' => $attrs['STATUS']));
+        if ($timesheet_id) {
+          // Add a mapping.
+          $this->currentGroupTimesheetMap[$attrs['ID']] = $timesheet_id;
+        } else {
+          $this->errors->add($i18n->get('error.db'));
+        }
+        return;
+      }
+
       if ($name == 'INVOICE') {
         // We get here when processing <invoice> tags for the current group.
         $invoice_id = $this->insertInvoice(array(
@@ -305,9 +329,11 @@ class ttOrgImportHelper {
           'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
           'project_id' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
           'task_id' => $this->currentGroupTaskMap[$attrs['TASK_ID']],
+          'timesheet_id' => $this->currentGroupTimesheetMap[$attrs['TIMESHEET_ID']],
           'invoice_id' => $this->currentGroupInvoiceMap[$attrs['INVOICE_ID']],
           'comment' => (isset($attrs['COMMENT']) ? $attrs['COMMENT'] : ''),
           'billable' => $attrs['BILLABLE'],
+          'approved' => $attrs['APPROVED'],
           'paid' => $attrs['PAID'],
           'status' => $attrs['STATUS']));
         if ($log_item_id) {
@@ -371,9 +397,11 @@ class ttOrgImportHelper {
           'org_id' => $this->org_id,
           'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
           'project_id' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
+          'timesheet_id' => $this->currentGroupTimesheetMap[$attrs['TIMESHEET_ID']],
           'name' => $attrs['NAME'],
           'cost' => $attrs['COST'],
           'invoice_id' => $this->currentGroupInvoiceMap[$attrs['INVOICE_ID']],
+          'approved' => $attrs['APPROVED'],
           'paid' => $attrs['PAID'],
           'status' => $attrs['STATUS']));
         if (!$expense_item_id) $this->errors->add($i18n->get('error.db'));
@@ -719,17 +747,21 @@ class ttOrgImportHelper {
     $user_id = (int) $fields['user_id'];
     $client_id = $fields['client_id'];
     $project_id = $fields['project_id'];
+    $timesheet_id = $fields['timesheet_id'];
     $name = $fields['name'];
     $cost = str_replace(',', '.', $fields['cost']);
     $invoice_id = $fields['invoice_id'];
     $status = $fields['status'];
+    $approved = (int) $fields['approved'];
     $paid = (int) $fields['paid'];
     $created = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
 
     $sql = "insert into tt_expense_items".
-      " (date, user_id, group_id, org_id, client_id, project_id, name, cost, invoice_id, paid, created, created_ip, created_by, status)".
+      " (date, user_id, group_id, org_id, client_id, project_id, timesheet_id, name,".
+      " cost, invoice_id, approved, paid, created, created_ip, created_by, status)".
       " values (".$mdb2->quote($date).", $user_id, $group_id, $org_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).
-      ", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).", $paid $created, ".$mdb2->quote($status).")";
+      ", ".$mdb2->quote($timesheet_id).", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).
+      ", $approved, $paid $created, ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
@@ -862,6 +894,35 @@ class ttOrgImportHelper {
       return false;
 
     $last_id = $mdb2->lastInsertID('tt_roles', 'id');
+    return $last_id;
+  }
+
+  // insertTimesheet - inserts a timesheet in database.
+  private function insertTimesheet($fields)
+  {
+    $mdb2 = getConnection();
+
+    $user_id = (int) $fields['user_id'];
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $client_id = $fields['client_id'];
+    $name = $fields['name'];
+    $submit_status = $fields['submit_status'];
+    $submitter_comment = $fields['submitter_comment'];
+    $approval_status = $fields['approval_status'];
+    $manager_comment = $fields['manager_comment'];
+    $status = $fields['status'];
+
+    // Insert a new timesheet record.
+    $sql = "insert into tt_timesheets (user_id, group_id, org_id, client_id, name,".
+      " submit_status, submitter_comment, approval_status, manager_comment, status)".
+      " values($user_id, $group_id, $org_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($name).", ".
+      $mdb2->quote($fields['submit_status']).", ".$mdb2->quote($fields['submiter_comment']).", ".
+      $mdb2->quote($fields['approval_status']).", ".$mdb2->quote($fields['manager_comment']).", ".$mdb2->quote($fields['status']).")";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    $last_id = $mdb2->lastInsertID('tt_timesheets', 'id');
     return $last_id;
   }
 
@@ -1056,15 +1117,17 @@ class ttOrgImportHelper {
     $client_id = $fields['client_id'];
     $project_id = $fields['project_id'];
     $task_id = $fields['task_id'];
+    $timesheet_id = $fields['timesheet_id'];
     $invoice_id = $fields['invoice_id'];
     $comment = $fields['comment'];
     $billable = (int) $fields['billable'];
+    $approved = (int) $fields['approved'];
     $paid = (int) $fields['paid'];
     $status = $fields['status'];
 
     $sql = "insert into tt_log".
-      " (user_id, group_id, org_id, date, start, duration, client_id, project_id, task_id, invoice_id, comment".
-      ", billable, paid, created, created_ip, created_by, status)".
+      " (user_id, group_id, org_id, date, start, duration, client_id, project_id, task_id, timesheet_id, invoice_id, comment".
+      ", billable, approved, paid, created, created_ip, created_by, status)".
       " values ($user_id, $group_id, $org_id".
       ", ".$mdb2->quote($date).
       ", ".$mdb2->quote($start).
@@ -1072,9 +1135,10 @@ class ttOrgImportHelper {
       ", ".$mdb2->quote($client_id).
       ", ".$mdb2->quote($project_id).
       ", ".$mdb2->quote($task_id).
+      ", ".$mdb2->quote($timesheet_id).
       ", ".$mdb2->quote($invoice_id).
       ", ".$mdb2->quote($comment).
-      ", $billable, $paid".
+      ", $billable, $approved, $paid".
       ", now(), ".$mdb2->quote($_SERVER['REMOTE_ADDR']).", ".$user->id.
       ", ". $mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);

@@ -456,9 +456,11 @@ class ttGroupExportHelper {
         $expense_item_part .= " user_id=\"".$this->userMap[$expense_item['user_id']]."\"";
         $expense_item_part .= " client_id=\"".$this->clientMap[$expense_item['client_id']]."\"";
         $expense_item_part .= " project_id=\"".$this->projectMap[$expense_item['project_id']]."\"";
+        $expense_item_part .= " timesheet_id=\"".$this->timesheetMap[$expense_item['timesheet_id']]."\"";
         $expense_item_part .= " name=\"".htmlspecialchars($expense_item['name'])."\"";
         $expense_item_part .= " cost=\"".$expense_item['cost']."\"";
         $expense_item_part .= " invoice_id=\"".$this->invoiceMap[$expense_item['invoice_id']]."\"";
+        $expense_item_part .= " approved=\"".$expense_item['approved']."\"";
         $expense_item_part .= " paid=\"".$expense_item['paid']."\"";
         $expense_item_part .= " status=\"".$expense_item['status']."\"";
         $expense_item_part .= "></expense_item>\n";

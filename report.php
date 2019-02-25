@@ -82,7 +82,8 @@ if ($bean->getAttribute('chpaid') ||
   if ($user->can('manage_invoices'))
     $showForInvoicesOrPaid = true;
 }
-if ($showForApproved || $showForInvoicesOrPaid)
+$use_checkboxes = $showForApproved || $showForInvoicesOrPaid;
+if ($use_checkboxes)
   $smarty->assign('use_checkboxes', true);
 
 // Controls for "Mark approved" block.
@@ -218,7 +219,7 @@ $options = ttReportHelper::getReportOptions($bean);
 
 $report_items = ttReportHelper::getItems($options);
 // Store record ids in session in case user wants to act on records such as marking them all paid.
-if ($request->isGet() && $user->isPluginEnabled('ps'))
+if ($request->isGet() && $use_checkboxes)
   ttReportHelper::putInSession($report_items);
 
 if (ttReportHelper::grouping($options)) {
