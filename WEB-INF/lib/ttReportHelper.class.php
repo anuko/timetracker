@@ -659,6 +659,29 @@ class ttReportHelper {
     }
   }
 
+  // The markApproved marks a set of records as either approved or unapproved.
+  static function markApproved($time_log_ids, $expense_item_ids, $approved = true) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $approved_val = (int) $approved;
+    if ($time_log_ids) {
+      $sql = "update tt_log set approved = $approved_val".
+        " where id in(".join(', ', $time_log_ids).") and group_id = $group_id and org_id = $org_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
+    }
+    if ($expense_item_ids) {
+      $sql = "update tt_expense_items set approved = $approved_val".
+        " where id in(".join(', ', $expense_item_ids).") and group_id = $group_id and org_id = $org_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
+    }
+  }
+
   // The markPaid marks a set of records as either paid or unpaid.
   static function markPaid($time_log_ids, $expense_item_ids, $paid = true) {
     global $user;

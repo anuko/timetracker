@@ -142,7 +142,8 @@ if ($user->can('manage_invoices') &&
 if ($request->isPost()) {
 
   // Validate parameters and at the same time build arrays of record ids.
-  if (($request->getParameter('btn_mark_paid') && 2 == $request->getParameter('mark_paid_select_options'))
+  if (($request->getParameter('btn_mark_approved') && 2 == $request->getParameter('mark_approved_select_options'))
+       || ($request->getParameter('btn_mark_paid') && 2 == $request->getParameter('mark_paid_select_options'))
        || ($request->getParameter('btn_assign') && 2 == $request->getParameter('assign_invoice_select_options'))) {
     // We act on selected records. Are there any?
     foreach($_POST as $key => $val) {
@@ -164,6 +165,22 @@ if ($request->isPost()) {
   }
 
   if ($err->no()) {
+    if ($request->getParameter('btn_mark_approved')) {
+      // User clicked the "Mark approved" button to mark some or all items either approved or not approved.
+
+      // Determine user action.
+      $mark_approved = $request->getParameter('mark_approved_action_options') == 1 ? true : false;
+
+      // Mark as requested.
+      if ($time_log_ids || $expense_item_ids) {
+        ttReportHelper::markApproved($time_log_ids, $expense_item_ids, $mark_approved);
+      }
+
+      // Re-display this form.
+      header('Location: report.php');
+      exit();
+    }
+
     if ($request->getParameter('btn_mark_paid')) {
       // User clicked the "Mark paid" button to mark some or all items either paid or not paid.
 
