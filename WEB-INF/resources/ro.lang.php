@@ -278,6 +278,7 @@ $i18n_key_words = array(
 // 'label.submitted' => 'Submitted',
 // 'label.approved' => 'Approved',
 // 'label.approval' => 'Report approval',
+// 'label.mark_approved' => 'Mark approved',
 
 // Form titles.
 // TODO: Improve titles for consistency, so that each title explains correctly what each

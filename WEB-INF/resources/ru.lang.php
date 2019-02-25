@@ -235,6 +235,7 @@ $i18n_key_words = array(
 'label.submitted' => 'Подано',
 'label.approved' => 'Одобрено',
 'label.approval' => 'Одобрение отчётов',
+'label.mark_approved' => 'Отметить одобрение',
 
 // Form titles.
 'title.error' => 'Ошибка',

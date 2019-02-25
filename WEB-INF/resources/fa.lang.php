@@ -268,6 +268,7 @@ $i18n_key_words = array(
 // 'label.submitted' => 'Submitted',
 // 'label.approved' => 'Approved',
 // 'label.approval' => 'Report approval',
+// 'label.mark_approved' => 'Mark approved',
 
 // Form titles.
 'title.error' => 'خطا',
