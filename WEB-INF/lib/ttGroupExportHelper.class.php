@@ -42,6 +42,7 @@ class ttGroupExportHelper {
   var $taskMap    = array();
   var $projectMap = array();
   var $clientMap  = array();
+  var $timesheetMap = array();
   var $invoiceMap = array();
   var $logMap     = array();
   var $customFieldMap = array();
@@ -173,6 +174,11 @@ class ttGroupExportHelper {
     $clients = $this->getRecordsFromTable('tt_clients');
     foreach ($clients as $key=>$client_item)
       $this->clientMap[$client_item['id']] = $key + 1;
+
+    // Prepare timesheet map.
+    $timesheets = $this->getRecordsFromTable('tt_timesheets');
+    foreach ($timesheets as $key=>$timesheet_item)
+      $this->timesheetMap[$timesheet_item['id']] = $key + 1;
 
     // Prepare invoice map.
     $invoices = ttTeamHelper::getAllInvoices();
@@ -318,6 +324,27 @@ class ttGroupExportHelper {
       unset($bind_part);
     }
 
+    // Write timesheets.
+    if (count($timesheets) > 0) {
+      fwrite($this->file, $this->indentation."  <timesheets>\n");
+      foreach ($timesheets as $timesheet_item) {
+        $timesheet_part = $this->indentation.'    '."<timesheet id=\"".$this->timesheetMap[$timesheet_item['id']]."\"";
+        $timesheet_part .= " user_id=\"".$this->userMap[$timesheet_item['user_id']]."\"";
+        $timesheet_part .= " client_id=\"".$this->clientMap[$timesheet_item['client_id']]."\"";
+        $timesheet_part .= " name=\"".htmlspecialchars($timesheet_item['name'])."\"";
+        $timesheet_part .= " submit_status=\"".$timesheet_item['submit_status']."\"";
+        $timesheet_part .= " submitter_comment=\"".htmlspecialchars($timesheet_item['submitter_name'])."\"";
+        $timesheet_part .= " approval_status=\"".$timesheet_item['approval_status']."\"";
+        $timesheet_part .= " manager_comment=\"".htmlspecialchars($timesheet_item['manager_comment'])."\"";
+        $timesheet_part .= " status=\"".$timesheet_item['status']."\"";
+        $timesheet_part .= "></timesheet>\n";
+        fwrite($this->file, $timesheet_part);
+      }
+      fwrite($this->file, $this->indentation."  </timesheets>\n");
+      unset($timesheets);
+      unset($timesheet_part);
+    }
+
     // Write invoices.
     if (count($invoices) > 0) {
       fwrite($this->file, $this->indentation."  <invoices>\n");
@@ -355,9 +382,11 @@ class ttGroupExportHelper {
         $log_part .= " client_id=\"".$this->clientMap[$record['client_id']]."\"";
         $log_part .= " project_id=\"".$this->projectMap[$record['project_id']]."\"";
         $log_part .= " task_id=\"".$this->taskMap[$record['task_id']]."\"";
+        $log_part .= " timesheet_id=\"".$this->timesheetMap[$record['timesheet_id']]."\"";
         $log_part .= " invoice_id=\"".$this->invoiceMap[$record['invoice_id']]."\"";
         $log_part .= " comment=\"".htmlspecialchars($record['comment'])."\"";
         $log_part .= " billable=\"".$record['billable']."\"";
+        $log_part .= " approved=\"".$record['approved']."\"";
         $log_part .= " paid=\"".$record['paid']."\"";
         $log_part .= " status=\"".$record['status']."\"";
         $log_part .= "></log_item>\n";
