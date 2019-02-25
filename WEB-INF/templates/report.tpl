@@ -166,8 +166,17 @@
   </td>
 </tr>
 </table>
-{if $report_items && ($use_mark_paid || $use_assign_to_invoice)}
+{if $report_items && ($use_mark_approved || $use_mark_paid || $use_assign_to_invoice)}
 <table width="720" cellspacing="0" cellpadding="0" border="0">
+  {if $use_mark_approved}
+  <tr>
+    <td align="right">
+      <table>
+        <tr><td>{$i18n.label.mark_approved}: {$forms.reportViewForm.mark_approved_select_options.control} {$forms.reportViewForm.mark_approved_action_options.control} {$forms.reportViewForm.btn_mark_approved.control}</td></tr>
+      </table>
+    </td>
+  </tr>
+  {/if}
   {if $use_mark_paid}
   <tr>
     <td align="right">

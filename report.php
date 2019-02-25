@@ -38,6 +38,12 @@ if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports') || 
   exit();
 }
 
+if ($user->isPluginEnabled('ap')) {
+  $cl_mark_approved_select_option = $request->getParameter('mark_approved_select_options', ($request->isPost() ? null : @$_SESSION['mark_approved_select_option']));
+  $_SESSION['mark_approved_select_option'] = $cl_mark_approved_select_option;
+  $cl_mark_approved_action_option = $request->getParameter('mark_approved_action_options', ($request->isPost() ? null : @$_SESSION['mark_approved_action_option']));
+  $_SESSION['mark_aproved_action_option'] = $cl_mark_approved_action_option;
+}
 if ($user->isPluginEnabled('ps')) {
   $cl_mark_paid_select_option = $request->getParameter('mark_paid_select_options', ($request->isPost() ? null : @$_SESSION['mark_paid_select_option']));
   $_SESSION['mark_paid_select_option'] = $cl_mark_paid_select_option;
@@ -67,11 +73,32 @@ if ($request->isPost()) $bean->loadBean();
 
 $client_id = $bean->getAttribute('client');
 
-// Do we need to show checkboxes?
+// Do we need to show checkboxes? We show them if we allow setting approved or paid status,
+// and also when we can assign / deassign records to invoces.
+if ($bean->getAttribute('chapproved') && ($user->can('approve_reports') || $user->can('approve_all_eports')))
+  $showForApproved = true;
 if ($bean->getAttribute('chpaid') ||
    ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by1')) && !$user->isClient())) {
   if ($user->can('manage_invoices'))
-    $smarty->assign('use_checkboxes', true);
+    $showForInvoicesOrPaid = true;
+}
+if ($showForApproved || $showForInvoicesOrPaid)
+  $smarty->assign('use_checkboxes', true);
+
+// Controls for "Mark approved" block.
+if ($showForApproved) {
+  $mark_approved_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
+  $form->addInput(array('type'=>'combobox',
+    'name'=>'mark_approved_select_options',
+    'data'=>$mark_approved_select_options,
+    'value'=>$cl_mark_approved_select_option));
+  $mark_approved_action_options = array('1'=>$i18n->get('form.reports.include_approved'),'2'=>$i18n->get('form.reports.include_not_approved'));
+  $form->addInput(array('type'=>'combobox',
+    'name'=>'mark_approved_action_options',
+    'data'=>$mark_approved_action_options,
+    'value'=>$cl_mark_approved_action_option));
+  $form->addInput(array('type'=>'submit','name'=>'btn_mark_approved','value'=>$i18n->get('button.submit')));
+  $smarty->assign('use_mark_approved', true);
 }
 
 // Controls for "Mark paid" block.
