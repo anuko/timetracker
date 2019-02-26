@@ -414,7 +414,7 @@ class ttFavReportHelper {
     return $options;
   }
 
-  // adjustOptions takes and array or report options and adjusts them for current user
+  // adjustOptions takes an array or report options and adjusts them for current user
   // (and group) settings. This is needed in situations when a fav report is stored in db
   // long ago, but user or group attributes are now changed, so we have to adjust.
   static function adjustOptions($options) {
@@ -456,6 +456,9 @@ class ttFavReportHelper {
       }
       // TODO: add checking the existing user list for potentially changed access rights for user.
     }
+
+    if ($user->isPluginEnabled('ap') && $user->isClient() && !$user->can('view_client_unapproved'))
+      $options['approved'] = 1; // Restrict clients to approved records only.
 
     return $options;
   }
