@@ -120,22 +120,23 @@ class ttFavReportHelper {
 
     $sql = "insert into tt_fav_reports".
       " (name, user_id, group_id, org_id, client_id, cf_1_option_id, project_id, task_id,".
-      " billable, invoice, paid_status, users, period, period_start, period_end,".
-      " show_client, show_invoice, show_paid, show_ip,".
-      " show_project, show_start, show_duration, show_cost,".
-      " show_task, show_end, show_note, show_custom_field_1, show_work_units,".
+      " billable, approved, invoice, timesheet, paid_status, users, period, period_start,".
+      " period_end, show_client, show_invoice, show_paid, show_ip,".
+      " show_project, show_timesheet, show_start, show_duration, show_cost,".
+      " show_task, show_end, show_note, show_approved, show_custom_field_1, show_work_units,".
       " group_by1, group_by2, group_by3, show_totals_only)".
       " values(".
       $mdb2->quote($fields['name']).", $user_id, $group_id, $org_id, ".
       $mdb2->quote($fields['client']).", ".$mdb2->quote($fields['option']).", ".
       $mdb2->quote($fields['project']).", ".$mdb2->quote($fields['task']).", ".
-      $mdb2->quote($fields['billable']).", ".$mdb2->quote($fields['invoice']).", ".
+      $mdb2->quote($fields['billable']).", ".$mdb2->quote($fields['approved']).", ".
+      $mdb2->quote($fields['invoice']).", ".$mdb2->quote($fields['timesheet']).", ".
       $mdb2->quote($fields['paid_status']).", ".
       $mdb2->quote($fields['users']).", ".$mdb2->quote($fields['period']).", ".
       $mdb2->quote($fields['from']).", ".$mdb2->quote($fields['to']).", ".
       $fields['chclient'].", ".$fields['chinvoice'].", ".$fields['chpaid'].", ".$fields['chip'].", ".
-      $fields['chproject'].", ".$fields['chstart'].", ".$fields['chduration'].", ".$fields['chcost'].", ".
-      $fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".$fields['chcf_1'].", ".$fields['chunits'].", ".
+      $fields['chproject'].", ".$fields['chtimesheet'].", ".$fields['chstart'].", ".$fields['chduration'].", ".$fields['chcost'].", ".
+      $fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".$fields['chapproved'].", ".$fields['chcf_1'].", ".$fields['chunits'].", ".
       $mdb2->quote($fields['group_by1']).", ".$mdb2->quote($fields['group_by2']).", ".
       $mdb2->quote($fields['group_by3']).", ".$fields['chtotalsonly'].")";
     $affected = $mdb2->exec($sql);
@@ -162,7 +163,9 @@ class ttFavReportHelper {
       "project_id = ".$mdb2->quote($fields['project']).", ".
       "task_id = ".$mdb2->quote($fields['task']).", ".
       "billable = ".$mdb2->quote($fields['billable']).", ".
+      "approved = ".$mdb2->quote($fields['approved']).", ".
       "invoice = ".$mdb2->quote($fields['invoice']).", ".
+      "timesheet = ".$mdb2->quote($fields['timesheet']).", ".
       "paid_status = ".$mdb2->quote($fields['paid_status']).", ".
       "users = ".$mdb2->quote($fields['users']).", ".
       "period = ".$mdb2->quote($fields['period']).", ".
@@ -173,12 +176,14 @@ class ttFavReportHelper {
       "show_paid = ".$fields['chpaid'].", ".
       "show_ip = ".$fields['chip'].", ".
       "show_project = ".$fields['chproject'].", ".
+      "show_timesheet = ".$fields['chtimesheet'].", ".
       "show_start = ".$fields['chstart'].", ".
       "show_duration = ".$fields['chduration'].", ".
       "show_cost = ".$fields['chcost'].", ".
       "show_task = ".$fields['chtask'].", ".
       "show_end = ".$fields['chfinish'].", ".
       "show_note = ".$fields['chnote'].", ".
+      "show_approved = ".$fields['chapproved'].", ".
       "show_custom_field_1 = ".$fields['chcf_1'].", ".
       "show_work_units = ".$fields['chunits'].", ".
       "group_by1 = ".$mdb2->quote($fields['group_by1']).", ".
@@ -200,18 +205,24 @@ class ttFavReportHelper {
     //  Set default value of 0 for not set checkboxes (in bean).
     //  Later in this function we use it to construct $fields array to update database.
     if (!$bean->getAttribute('chclient')) $bean->setAttribute('chclient', 0);
-    if (!$bean->getAttribute('chinvoice')) $bean->setAttribute('chinvoice', 0);
-    if (!$bean->getAttribute('chpaid')) $bean->setAttribute('chpaid', 0);
-    if (!$bean->getAttribute('chip')) $bean->setAttribute('chip', 0);
-    if (!$bean->getAttribute('chproject')) $bean->setAttribute('chproject', 0);
     if (!$bean->getAttribute('chstart')) $bean->setAttribute('chstart', 0);
-    if (!$bean->getAttribute('chduration')) $bean->setAttribute('chduration', 0);
-    if (!$bean->getAttribute('chcost')) $bean->setAttribute('chcost', 0);
-    if (!$bean->getAttribute('chtask')) $bean->setAttribute('chtask', 0);
     if (!$bean->getAttribute('chfinish')) $bean->setAttribute('chfinish', 0);
+    if (!$bean->getAttribute('chduration')) $bean->setAttribute('chduration', 0);
+ 
+    if (!$bean->getAttribute('chproject')) $bean->setAttribute('chproject', 0);
+    if (!$bean->getAttribute('chtask')) $bean->setAttribute('chtask', 0);
     if (!$bean->getAttribute('chnote')) $bean->setAttribute('chnote', 0);
+    if (!$bean->getAttribute('chcost')) $bean->setAttribute('chcost', 0);
+
+    if (!$bean->getAttribute('chtimesheet')) $bean->setAttribute('chtimesheet', 0);
+    if (!$bean->getAttribute('chip')) $bean->setAttribute('chip', 0);
+    if (!$bean->getAttribute('chapproved')) $bean->setAttribute('chapproved', 0);
+    if (!$bean->getAttribute('chpaid')) $bean->setAttribute('chpaid', 0);
+
     if (!$bean->getAttribute('chcf_1')) $bean->setAttribute('chcf_1', 0);
     if (!$bean->getAttribute('chunits')) $bean->setAttribute('chunits', 0);
+    if (!$bean->getAttribute('chinvoice')) $bean->setAttribute('chinvoice', 0);
+
     if (!$bean->getAttribute('chtotalsonly')) $bean->setAttribute('chtotalsonly', 0);
 
     $users_in_bean = $bean->getAttribute('users');
@@ -234,25 +245,29 @@ class ttFavReportHelper {
       'project'=>$bean->getAttribute('project'),
       'task'=>$bean->getAttribute('task'),
       'billable'=>$bean->getAttribute('include_records'),
-      'invoice'=>$bean->getAttribute('invoice'),
+      'approved'=>$bean->getAttribute('approved'),
       'paid_status'=>$bean->getAttribute('paid_status'),
+      'invoice'=>$bean->getAttribute('invoice'),
+      'timesheet'=>$bean->getAttribute('timesheet'),
       'users'=>$users,
       'period'=>$bean->getAttribute('period'),
       'from'=>$from,
       'to'=>$to,
       'chclient'=>$bean->getAttribute('chclient'),
-      'chinvoice'=>$bean->getAttribute('chinvoice'),
-      'chpaid'=>$bean->getAttribute('chpaid'),
-      'chip'=>$bean->getAttribute('chip'),
-      'chproject'=>$bean->getAttribute('chproject'),
       'chstart'=>$bean->getAttribute('chstart'),
-      'chduration'=>$bean->getAttribute('chduration'),
-      'chcost'=>$bean->getAttribute('chcost'),
-      'chtask'=>$bean->getAttribute('chtask'),
       'chfinish'=>$bean->getAttribute('chfinish'),
+      'chduration'=>$bean->getAttribute('chduration'),
+      'chproject'=>$bean->getAttribute('chproject'),
+      'chtask'=>$bean->getAttribute('chtask'),
       'chnote'=>$bean->getAttribute('chnote'),
+      'chcost'=>$bean->getAttribute('chcost'),
+      'chtimesheet'=>$bean->getAttribute('chtimesheet'),
+      'chip'=>$bean->getAttribute('chip'),
+      'chapproved'=>$bean->getAttribute('chapproved'),
+      'chpaid'=>$bean->getAttribute('chpaid'),
       'chcf_1'=>$bean->getAttribute('chcf_1'),
       'chunits'=>$bean->getAttribute('chunits'),
+      'chinvoice'=>$bean->getAttribute('chinvoice'),
       'group_by1'=>$bean->getAttribute('group_by1'),
       'group_by2'=>$bean->getAttribute('group_by2'),
       'group_by3'=>$bean->getAttribute('group_by3'),
@@ -303,8 +318,10 @@ class ttFavReportHelper {
       $bean->setAttribute('project', $val['project_id']);
       $bean->setAttribute('task', $val['task_id']);
       $bean->setAttribute('include_records', $val['billable']);
+      $bean->setAttribute('approved', $val['approved']);
       $bean->setAttribute('invoice', $val['invoice']);
       $bean->setAttribute('paid_status', $val['paid_status']);
+      $bean->setAttribute('timesheet', $val['timesheet']);
       $bean->setAttribute('users', explode(',', $val['users']));
       $bean->setAttribute('period', $val['period']);
       if ($val['period_start']) {
@@ -320,12 +337,14 @@ class ttFavReportHelper {
       $bean->setAttribute('chpaid', $val['show_paid']);
       $bean->setAttribute('chip', $val['show_ip']);
       $bean->setAttribute('chproject', $val['show_project']);
+      $bean->setAttribute('chtimesheet', $val['show_timesheet']);
       $bean->setAttribute('chstart', $val['show_start']);
       $bean->setAttribute('chduration', $val['show_duration']);
       $bean->setAttribute('chcost', $val['show_cost']);
       $bean->setAttribute('chtask', $val['show_task']);
       $bean->setAttribute('chfinish', $val['show_end']);
       $bean->setAttribute('chnote', $val['show_note']);
+      $bean->setAttribute('chapproved', $val['show_approved']);
       $bean->setAttribute('chcf_1', $val['show_custom_field_1']);
       $bean->setAttribute('chunits', $val['show_work_units']);
       $bean->setAttribute('group_by1', $val['group_by1']);
@@ -341,20 +360,27 @@ class ttFavReportHelper {
         'project'=>'',
         'task'=>'',
         'include_records'=>'',
+        'approved'=>'',
+        'paid_status'=>'',
         'invoice'=>'',
+        'timesheet'=>'',
         'users'=>$user_id,
         'period'=>'',
         'chclient'=>'1',
-        'chinvoice'=>'',
-        'chproject'=>'1',
         'chstart'=>'1',
-        'chduration'=>'1',
-        'chcost'=>'',
-        'chtask'=>'1',
         'chfinish'=>'1',
+        'chduration'=>'1',
+        'chproject'=>'1',
+        'chtask'=>'1',
         'chnote'=>'1',
+        'chcost'=>'',
+        'chtimesheet'=>'',
+        'chip'=>'',
+        'chapproved'=>'',
+        'chpaid'=>'',
         'chcf_1'=>'',
         'chunits'=>'',
+        'chinvoice'=>'',
         'group_by1'=>'',
         'group_by2'=>'',
         'group_by3'=>'',

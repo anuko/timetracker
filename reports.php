@@ -336,20 +336,26 @@ if ($request->isGet() && !$bean->isSaved()) {
   $period = new Period(INTERVAL_THIS_MONTH, new DateAndTime($user->getDateFormat()));
   $form->setValueByElement('start_date', $period->getStartDate());
   $form->setValueByElement('end_date', $period->getEndDate());
+
   $form->setValueByElement('chclient', '1');
-  $form->setValueByElement('chinvoice', '0');
-  $form->setValueByElement('chpaid', '0');
-  $form->setValueByElement('chip', '0');
-  $form->setValueByElement('chproject', '1');
   $form->setValueByElement('chstart', '1');
-  $form->setValueByElement('chduration', '1');
-  $form->setValueByElement('chcost', '0');
-  $form->setValueByElement('chtask', '1');
   $form->setValueByElement('chfinish', '1');
+  $form->setValueByElement('chduration', '1');
+
+  $form->setValueByElement('chproject', '1');
+  $form->setValueByElement('chtask', '1');
   $form->setValueByElement('chnote', '1');
+  $form->setValueByElement('chcost', '0');
+
+  $form->setValueByElement('chtimesheet', '0');
+  $form->setValueByElement('chip', '0');
+  $form->setValueByElement('chapproved', '0');
+  $form->setValueByElement('chpaid', '0');
+
   $form->setValueByElement('chcf_1', '0');
   $form->setValueByElement('chunits', '0');
-  $form->setValueByElement('chtimesheet', '0');
+  $form->setValueByElement('chinvoice', '0');
+
   $form->setValueByElement('chtotalsonly', '0');
 }
 
