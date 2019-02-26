@@ -834,12 +834,16 @@ class ttReportHelper {
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.note').'</td>';
       if ($options['show_cost'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
+      if ($options['show_approved'])
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.approved').'</td>';
       if ($options['show_paid'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.paid').'</td>';
       if ($options['show_ip'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.ip').'</td>';
       if ($options['show_invoice'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.invoice').'</td>';
+      if ($options['show_timesheet'])
+        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.timesheet').'</td>';
       $body .= '</tr>';
 
       // Initialize variables to print subtotals.
@@ -880,9 +884,11 @@ class ttReportHelper {
                 $body .= ($canViewReports || $isClient) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
                 $body .= '</td>';
               }
+              if ($options['show_approved']) $body .= '<td></td>';
               if ($options['show_paid']) $body .= '<td></td>';
               if ($options['show_ip']) $body .= '<td></td>';
               if ($options['show_invoice']) $body .= '<td></td>';
+              if ($options['show_timesheet']) $body .= '<td></td>';
               $body .= '</tr>';
               $body .= '<tr><td>&nbsp;</td></tr>';
             }
@@ -916,6 +922,11 @@ class ttReportHelper {
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['note']).'</td>';
           if ($options['show_cost'])
             $body .= '<td style="'.$cellRightAligned.'">'.$record['cost'].'</td>';
+          if ($options['show_approved']) {
+            $body .= '<td style="'.$cellRightAligned.'">';
+            $body .= $record['approved'] == 1 ? $i18n->get('label.yes') : $i18n->get('label.no');
+            $body .= '</td>';
+          }
           if ($options['show_paid']) {
             $body .= '<td style="'.$cellRightAligned.'">';
             $body .= $record['paid'] == 1 ? $i18n->get('label.yes') : $i18n->get('label.no');
@@ -928,6 +939,8 @@ class ttReportHelper {
           }
           if ($options['show_invoice'])
             $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['invoice']).'</td>';
+          if ($options['show_timesheet'])
+            $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['timesheet']).'</td>';
           $body .= '</tr>';
 
           $prev_date = $record['date'];
@@ -956,9 +969,11 @@ class ttReportHelper {
           $body .= ($canViewReports || $isClient) ? $subtotals[$cur_grouped_by]['cost'] : $subtotals[$cur_grouped_by]['expenses'];
           $body .= '</td>';
         }
+        if ($options['show_approved']) $body .= '<td></td>';
         if ($options['show_paid']) $body .= '<td></td>';
         if ($options['show_ip']) $body .= '<td></td>';
         if ($options['show_invoice']) $body .= '<td></td>';
+        if ($options['show_timesheet']) $body .= '<td></td>';
         $body .= '</tr>';
       }
 
@@ -981,9 +996,11 @@ class ttReportHelper {
         $body .= ($canViewReports || $isClient) ? $totals['cost'] : $totals['expenses'];
         $body .= '</td>';
       }
+      if ($options['show_approved']) $body .= '<td></td>';
       if ($options['show_paid']) $body .= '<td></td>';
       if ($options['show_ip']) $body .= '<td></td>';
       if ($options['show_invoice']) $body .= '<td></td>';
+      if ($options['show_timesheet']) $body .= '<td></td>';
       $body .= '</tr>';
 
       $body .= '</table>';
