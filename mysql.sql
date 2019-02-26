@@ -267,7 +267,9 @@ CREATE TABLE `tt_fav_reports` (
   `project_id` int(11) default NULL,                     # project id (if selected)
   `task_id` int(11) default NULL,                        # task id (if selected)
   `billable` tinyint(4) default NULL,                    # whether to include billable, not billable, or all records
+  `approved` tinyint(4) default NULL,                    # whether to include approved, unapproved, or all records
   `invoice` tinyint(4) default NULL,                     # whether to include invoiced, not invoiced, or all records
+  `timesheet` tinyint(4) default NULL,                   # include records with a specific timesheet status, or all records
   `paid_status` tinyint(4) default NULL,                 # whether to include paid, not paid, or all records
   `users` text default NULL,                             # Comma-separated list of user ids. Nothing here means "all" users.
   `period` tinyint(4) default NULL,                      # selected period type for report
@@ -278,12 +280,14 @@ CREATE TABLE `tt_fav_reports` (
   `show_paid` tinyint(4) NOT NULL default 0,             # whether to show paid column
   `show_ip` tinyint(4) NOT NULL default 0,               # whether to show ip column
   `show_project` tinyint(4) NOT NULL default 0,          # whether to show project column
+  `show_timesheet` tinyint(4) NOT NULL default 0,        # whether to show timesheet column
   `show_start` tinyint(4) NOT NULL default 0,            # whether to show start field
   `show_duration` tinyint(4) NOT NULL default 0,         # whether to show duration field
   `show_cost` tinyint(4) NOT NULL default 0,             # whether to show cost field
   `show_task` tinyint(4) NOT NULL default 0,             # whether to show task column
   `show_end` tinyint(4) NOT NULL default 0,              # whether to show end field
   `show_note` tinyint(4) NOT NULL default 0,             # whether to show note column
+  `show_approved` tinyint(4) NOT NULL default 0,         # whether to show approved column
   `show_custom_field_1` tinyint(4) NOT NULL default 0,   # whether to show custom field 1
   `show_work_units` tinyint(4) NOT NULL default 0,       # whether to show work units
   `show_totals_only` tinyint(4) NOT NULL default 0,      # whether to show totals only
@@ -520,4 +524,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.43', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.45', now()); # TODO: change when structure changes.
