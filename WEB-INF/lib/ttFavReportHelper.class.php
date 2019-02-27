@@ -448,8 +448,8 @@ class ttFavReportHelper {
           $user_ids[] = $single_user['id'];
         }
         foreach ($users_to_adjust as $user_to_adjust) {
-          if (in_array($user_to_adjust['id'], $user_ids)) {
-            $adjusted_user_ids[] = $user_to_adjust['id'];
+          if (in_array($user_to_adjust, $user_ids)) {
+            $adjusted_user_ids[] = $user_to_adjust;
           }
         }
         $options['users'] = implode(',', $adjusted_user_ids);
