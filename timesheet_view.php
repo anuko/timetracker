@@ -30,7 +30,7 @@ require_once('initialize.php');
 import('ttTimesheetHelper');
 
 // Access checks.
-if (!(ttAccessAllowed('view_own_timesheets') || ttAccessAllowed('view_timesheets') || ttAccessAllowed('view_all_timesheets') || ttAccessAllowed('view_client_timesheets'))) {
+if (!(ttAccessAllowed('view_own_timesheets') || ttAccessAllowed('view_timesheets') || ttAccessAllowed('view_all_timesheets'))) {
   header('Location: access_denied.php');
   exit();
 }

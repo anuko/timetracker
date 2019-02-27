@@ -8,6 +8,14 @@
           <td>{$forms.timesheetForm.timesheet_name.control}</td>
         </tr>
         <tr>
+          <td align="right">{$i18n.label.start_date} (*):</td>
+          <td>{$forms.timesheetForm.start.control}</td>
+        </tr>
+        <tr>
+          <td align="right">{$i18n.label.end_date} (*):</td>
+          <td>{$forms.timesheetForm.finish.control}</td>
+        </tr>
+        <tr>
           <td align = "right">{$i18n.label.comment}:</td>
           <td>{$forms.timesheetForm.submitter_comment.control}</td>
         </tr>

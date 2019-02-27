@@ -52,6 +52,10 @@ if ($request->isPost()) {
 
 $form = new Form('timesheetForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'timesheet_name','style'=>'width: 250px;','value'=>$cl_name));
+
+$form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start','value'=>$cl_start));
+$form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'finish','value'=>$cl_finish));
+
 $form->addInput(array('type'=>'textarea','name'=>'submitter_comment','style'=>'width: 250px; height: 40px;','value'=>$cl_comment));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 

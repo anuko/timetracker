@@ -285,17 +285,10 @@ class ttTimesheetHelper {
 
     global $user;
 
-    // Step 1.
-    // A client must have view_client_timesheets and
-    // aser must be assigned to one of client projects.
-    if ($user->isClient()) {
-      if (!$user->can('view_client_timesheets'))
-        return false;
-      $valid_users = ttGroupHelper::getUsersForClient($user->client_id);
-      $v = 2;
-    }
-
-    return true;
+    // TODO: we are currently re-designing timesheets.
+    // Clients are not supposed to view them at all.
+    // And the post will change on_behalf user, to keep things consistent.
+    return false;
   }
 
   // getReportOptions prepares $options array to be used with ttReportHelper

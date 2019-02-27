@@ -32,7 +32,7 @@ import('ttGroupHelper');
 import('ttTimesheetHelper');
 
 // Access checks.
-if (!(ttAccessAllowed('view_own_timesheets') || ttAccessAllowed('view_timesheets') || ttAccessAllowed('view_all_timesheets') || ttAccessAllowed('view_client_timesheets'))) {
+if (!(ttAccessAllowed('view_own_timesheets') || ttAccessAllowed('view_timesheets') || ttAccessAllowed('view_all_timesheets'))) {
   header('Location: access_denied.php');
   exit();
 }
@@ -71,7 +71,7 @@ $group_id = $user->getGroup();
 // Elements of timesheetsForm.
 $form = new Form('timesheetsForm');
 
-if ($user->can('view_timesheets') || $user->can('view_all_timesheets') || $user->can('view_client_timesheets')) {
+if ($user->can('view_timesheets') || $user->can('view_all_timesheets')) {
   // Prepare user list for dropdown.
   if ($notClient) {
     $rank = $user->can('view_all_timesheets') ? MAX_RANK : $user->getMaxRankForGroup($group_id);
