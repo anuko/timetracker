@@ -41,48 +41,38 @@ if (!$user->isPluginEnabled('ts')) {
   exit();
 }
 if ($user->isClient()) {
-  $users_for_client = ttGroupHelper::getUsersForClient($user->client_id);
-  if (count($users_for_client) == 0) {
-    header('Location: access_denied.php'); // There are no users for client.
-    exit();
-  }
+  header('Location: access_denied.php'); // No timesheets for clients.
+  exit();
 }
 if ($request->isPost()) {
-  $userChanged = $request->getParameter('user_changed');
-  if ($userChanged && !(ttTimesheetHelper::isUserValid($request->getParameter('user')))) {
-    header('Location: access_denied.php'); // Wrong user id.
+  $userChanged = $request->getParameter('user_changed'); // Reused in multiple places below.
+  if ($userChanged && !($user->can('view_timesheets') && $user->isUserValid($request->getParameter('user')))) {
+    header('Location: access_denied.php'); // Group changed, but no rght or wrong user id. TODO: research relevance of this...
     exit();
   }
 }
 // End of access checks.
 
-// Determine user for whom we display this page.
-$notClient = !$user->isClient();
+// Determine user for which we display this page.
 if ($request->isPost() && $userChanged) {
   $user_id = $request->getParameter('user');
+  $user->setOnBehalfUser($user_id);
 } else {
-  if ($notClient)
-    $user_id = $user->getUser();
-  else
-    $user_id = $users_for_client[0]['id']; // First found user for a client.
+  $user_id = $user->getUser();
 }
+
 $group_id = $user->getGroup();
 
 // Elements of timesheetsForm.
 $form = new Form('timesheetsForm');
 
 if ($user->can('view_timesheets') || $user->can('view_all_timesheets')) {
-  // Prepare user list for dropdown.
-  if ($notClient) {
-    $rank = $user->can('view_all_timesheets') ? MAX_RANK : $user->getMaxRankForGroup($group_id);
-    if ($user->can('view_own_timesheets'))
-      $options = array('max_rank'=>$rank,'include_self'=>true,'self_first'=>true);
-    else
-      $options = array('max_rank'=>$rank);
-    $user_list = $user->getUsers($options);
-  } else
-    $user_list = $users_for_client; // Obtained above.
-
+  $rank = $user->getMaxRankForGroup($group_id);
+  if ($user->can('view_own_timesheets'))
+    $options = array('status'=>ACTIVE,'max_rank'=>$rank,'include_self'=>true,'self_first'=>true);
+  else
+    $options = array('status'=>ACTIVE,'max_rank'=>$rank);
+  $user_list = $user->getUsers($options);
   if (count($user_list) >= 1) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'document.timesheetsForm.user_changed.value=1;document.timesheetsForm.submit();',
@@ -97,17 +87,14 @@ if ($user->can('view_timesheets') || $user->can('view_all_timesheets')) {
 }
 
 $active_timesheets = ttTimesheetHelper::getActiveTimesheets($user_id);
-if ($notClient)
-  $inactive_timesheets = ttTimesheetHelper::getInactiveTimesheets($user_id);
+$inactive_timesheets = ttTimesheetHelper::getInactiveTimesheets($user_id);
 
-$showClient = $user->isPluginEnabled('cl') && $notClient;
-$canEdit = $notClient && ($user->can('manage_own_timesheets') ||
-  $user->can('manage_timesheets') || $user->can('manage_all_timesheets'));
+$showClient = $user->isPluginEnabled('cl');
+$canEdit = $user->can('manage_own_timesheets') || $user->can('manage_timesheets') || $user->can('manage_all_timesheets');
 
 $smarty->assign('active_timesheets', $active_timesheets);
 $smarty->assign('inactive_timesheets', $inactive_timesheets);
 $smarty->assign('show_client', $showClient);
-$smarty->assign('not_client', $notClient);
 $smarty->assign('can_edit', $canEdit);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.timesheets'));

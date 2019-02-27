@@ -415,7 +415,6 @@ $i18n_key_words = array(
 'form.report.assign_to_invoice' => 'Assign to invoice',
 
  // Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
-'form.timesheets.hint' => 'Use reports to add new timesheets.',
 'form.timesheets.active_timesheets' => 'Active Timesheets',
 'form.timesheets.inactive_timesheets' => 'Inactive Timesheets',
 

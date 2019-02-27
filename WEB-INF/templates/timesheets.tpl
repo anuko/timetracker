@@ -4,9 +4,6 @@
 
 {$forms.timesheetsForm.open}
 <table cellspacing="0" cellpadding="7" border="0" width="720">
-{if $not_client}
-  <tr><td align="left">{$i18n.form.timesheets.hint}<br></td></tr>
-{/if}
 {if $user_dropdown}
   <tr><td align="center">{$i18n.label.user}: {$forms.timesheetsForm.user.control}</td></tr>
 {/if}

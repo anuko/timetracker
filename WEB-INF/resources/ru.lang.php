@@ -406,7 +406,6 @@ $i18n_key_words = array(
 'form.report.assign_to_invoice' => 'Включить в счёт',
 
 // Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
-'form.timesheets.hint' => 'Используйте отчёты для добавления новых табелей.',
 'form.timesheets.active_timesheets' => 'Активные табели',
 'form.timesheets.inactive_timesheets' => 'Неактивные табели',
 
