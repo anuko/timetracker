@@ -448,6 +448,10 @@ class ttOrgImportHelper {
           'project' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
           'task' => $this->currentGroupTaskMap[$attrs['TASK_ID']],
           'billable' => $attrs['BILLABLE'],
+          'approved' => $attrs['APPROVED'],
+          'invoice' => $attrs['INVOICE'],
+          'timesheet' => $attrs['TIMESHEET'],
+          'paid_status' => $attrs['PAID_STATUS'],
           'users' => $user_list,
           'period' => $attrs['PERIOD'],
           'from' => $attrs['PERIOD_START'],
@@ -457,12 +461,14 @@ class ttOrgImportHelper {
           'chpaid' => (int) $attrs['SHOW_PAID'],
           'chip' => (int) $attrs['SHOW_IP'],
           'chproject' => (int) $attrs['SHOW_PROJECT'],
+          'chtimesheet' => (int) $attrs['SHOW_TIMESHEET'],
           'chstart' => (int) $attrs['SHOW_START'],
           'chduration' => (int) $attrs['SHOW_DURATION'],
           'chcost' => (int) $attrs['SHOW_COST'],
           'chtask' => (int) $attrs['SHOW_TASK'],
           'chfinish' => (int) $attrs['SHOW_END'],
           'chnote' => (int) $attrs['SHOW_NOTE'],
+          'chapproved' => (int) $attrs['SHOW_APPROVED'],
           'chcf_1' => (int) $attrs['SHOW_CUSTOM_FIELD_1'],
           'chunits' => (int) $attrs['SHOW_WORK_UNITS'],
           'group_by1' => $attrs['GROUP_BY1'],
@@ -995,22 +1001,24 @@ class ttOrgImportHelper {
 
     $sql = "insert into tt_fav_reports".
       " (name, user_id, group_id, org_id, client_id, cf_1_option_id, project_id, task_id,".
-      " billable, invoice, paid_status, users, period, period_start, period_end,".
+      " billable, approved, invoice, timesheet, paid_status, users, period, period_start, period_end,".
       " show_client, show_invoice, show_paid, show_ip,".
-      " show_project, show_start, show_duration, show_cost,".
-      " show_task, show_end, show_note, show_custom_field_1, show_work_units,".
+      " show_project, show_timesheet, show_start, show_duration, show_cost,".
+      " show_task, show_end, show_note, show_approved, show_custom_field_1, show_work_units,".
       " group_by1, group_by2, group_by3, show_totals_only)".
       " values(".
       $mdb2->quote($fields['name']).", ".$fields['user_id'].", $group_id, $org_id, ".
       $mdb2->quote($fields['client']).", ".$mdb2->quote($fields['option']).", ".
       $mdb2->quote($fields['project']).", ".$mdb2->quote($fields['task']).", ".
-      $mdb2->quote($fields['billable']).", ".$mdb2->quote($fields['invoice']).", ".
+      $mdb2->quote($fields['billable']).", ".$mdb2->quote($fields['approved']).", ".
+      $mdb2->quote($fields['invoice']).", ".$mdb2->quote($fields['timesheet']).", ".
       $mdb2->quote($fields['paid_status']).", ".
       $mdb2->quote($fields['users']).", ".$mdb2->quote($fields['period']).", ".
       $mdb2->quote($fields['from']).", ".$mdb2->quote($fields['to']).", ".
       $fields['chclient'].", ".$fields['chinvoice'].", ".$fields['chpaid'].", ".$fields['chip'].", ".
-      $fields['chproject'].", ".$fields['chstart'].", ".$fields['chduration'].", ".$fields['chcost'].", ".
-      $fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".$fields['chcf_1'].", ".$fields['chunits'].", ".
+      $fields['chproject'].", ".$fields['chtimesheet'].", ".$fields['chstart'].", ".$fields['chduration'].", ".
+      $fields['chcost'].", ".$fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".
+      $fields['chapproved'].", ".$fields['chcf_1'].", ".$fields['chunits'].", ".
       $mdb2->quote($fields['group_by1']).", ".$mdb2->quote($fields['group_by2']).", ".
       $mdb2->quote($fields['group_by3']).", ".$fields['chtotalsonly'].")";
     $affected = $mdb2->exec($sql);
