@@ -667,14 +667,14 @@ class ttTimeHelper {
 
     $mdb2 = getConnection();
 
-    $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,
-      TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
-      TIME_FORMAT(l.duration, '%k:%i') as duration,
-      p.name as project_name, t.name as task_name, l.comment, l.client_id, l.project_id, l.task_id, l.invoice_id, l.billable, l.paid, l.date
-      from tt_log l
-      left join tt_projects p on (p.id = l.project_id)
-      left join tt_tasks t on (t.id = l.task_id)
-      where l.id = $id and l.user_id = $user_id and l.status = 1";
+    $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,".
+      " TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,".
+      " TIME_FORMAT(l.duration, '%k:%i') as duration,".
+      " p.name as project_name, t.name as task_name, l.comment, l.client_id, l.project_id, l.task_id,".
+      " l.timesheet_id, l.invoice_id, l.billable, l.paid, l.date from tt_log l".
+      " left join tt_projects p on (p.id = l.project_id)".
+      " left join tt_tasks t on (t.id = l.task_id)".
+      " where l.id = $id and l.user_id = $user_id and l.status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if (!$res->numRows()) {
@@ -730,13 +730,12 @@ class ttTimeHelper {
       $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
 
     $result = array();
-    $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,
-      TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
-      TIME_FORMAT(l.duration, '%k:%i') as duration, p.name as project, t.name as task, l.comment, l.billable, l.invoice_id $client_field
-      from tt_log l
-      $left_joins
-      where l.date = '$date' and l.user_id = $user_id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1
-      order by l.start, l.id";
+    $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,".
+      " TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,".
+      " TIME_FORMAT(l.duration, '%k:%i') as duration, p.name as project, t.name as task, l.comment,".
+      " l.billable, l.timesheet_id, l.invoice_id $client_field from tt_log l $left_joins".
+      " where l.date = '$date' and l.user_id = $user_id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1".
+      " order by l.start, l.id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {

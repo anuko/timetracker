@@ -42,8 +42,8 @@ if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
 $cl_id = (int)$request->getParameter('id');
 $user_id = $user->getUser();
 $time_rec = ttTimeHelper::getRecord($cl_id, $user_id);
-if (!$time_rec || $time_rec['invoice_id']) {
-  // Prohibit editing not ours or invoiced records.
+if (!$time_rec || $time_rec['timesheet_id'] || $time_rec['invoice_id']) {
+  // Prohibit editing not ours, or assigned to timesheet, or invoiced records.
   header('Location: access_denied.php');
   exit();
 }

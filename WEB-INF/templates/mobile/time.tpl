@@ -25,7 +25,7 @@
         <td valign="top">{$record.project|escape}</td>
 {/if}
         <td align="right" valign="top">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{/if}{$record.duration}{if ($record.duration == '0:00' && $record.start <> '')}</font>{/if}</td>
-        <td align="center">{if $record.invoice_id}&nbsp;{else}<a href="time_edit.php?id={$record.id}">{$i18n.label.edit}</a>{/if}</td>
+        <td align="center">{if $record.timesheet_id|| $record.invoice_id}&nbsp;{else}<a href="time_edit.php?id={$record.id}">{$i18n.label.edit}</a>{/if}</td>
       </tr>
       {/foreach}
     </table>

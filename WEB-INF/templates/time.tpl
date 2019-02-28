@@ -130,7 +130,7 @@
         <td align="right" valign="top">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
         <td valign="top">{if $record.comment}{$record.comment|escape}{else}&nbsp;{/if}</td>
         <td valign="top" align="center">
-    {if $record.invoice_id}
+    {if $record.timesheet_id || $record.invoice_id}
           &nbsp;
     {else}
           <a href="time_edit.php?id={$record.id}">{$i18n.label.edit}</a>
