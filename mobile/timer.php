@@ -254,7 +254,7 @@ if ($request->isPost()) {
   }
   if ($request->getParameter('btn_stop')) {
     // Stop button clicked. We need to finish an uncompleted record in progress.
-    $record = ttTimeHelper::getRecord($uncompleted['id'], $user->getUser());
+    $record = ttTimeHelper::getRecord($uncompleted['id']);
 
     // Can we complete this record?
     if (ttTimeHelper::isValidInterval($record['start'], $cl_finish) // finish time is greater than start time

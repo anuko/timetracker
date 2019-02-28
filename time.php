@@ -56,7 +56,7 @@ if ($request->isPost()) {
 }
 // End of access checks.
 
-// Determine user for which we display this page.
+// Determine user for whom we display this page.
 if ($request->isPost() && $userChanged) {
   $user_id = $request->getParameter('user');
   $user->setOnBehalfUser($user_id);
@@ -347,7 +347,7 @@ if ($request->isPost()) {
   } elseif ($request->getParameter('btn_stop')) {
     // Stop button pressed to finish an uncompleted record.
     $record_id = $request->getParameter('record_id');
-    $record = ttTimeHelper::getRecord($record_id, $user_id);
+    $record = ttTimeHelper::getRecord($record_id);
     $browser_date = $request->getParameter('browser_date');
     $browser_time = $request->getParameter('browser_time');
 

@@ -659,8 +659,13 @@ class ttTimeHelper {
   }
 
   // getRecord - retrieves a time record identified by its id.
-  static function getRecord($id, $user_id) {
+  static function getRecord($id) {
     global $user;
+
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $sql_time_format = "'%k:%i'"; //  24 hour format.
     if ('%I:%M %p' == $user->time_format)
       $sql_time_format = "'%h:%i %p'"; // 12 hour format for MySQL TIME_FORMAT function.
@@ -674,7 +679,7 @@ class ttTimeHelper {
       " l.timesheet_id, l.invoice_id, l.billable, l.paid, l.date from tt_log l".
       " left join tt_projects p on (p.id = l.project_id)".
       " left join tt_tasks t on (t.id = l.task_id)".
-      " where l.id = $id and l.user_id = $user_id and l.status = 1";
+      " where l.id = $id and l.user_id = $user_id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if (!$res->numRows()) {
