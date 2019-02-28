@@ -54,59 +54,17 @@ class ttTimesheetHelper {
     return false;
   }
 
-  // insert function inserts a new timesheet into database.
-  static function insert($fields)
+  // createTimesheet function creates a new timesheet.
+  static function createTimesheet($fields)
   {
-    // First, we obtain report items.
-
-    // Obtain session bean with report attributes.
-    $bean = new ActionForm('reportBean', new Form('reportForm'));
-    $options = ttReportHelper::getReportOptions($bean);
-    $report_items = ttReportHelper::getItems($options);
-
-    // Prepare ids for time and expense items, at the same time checking
-    // if we can proceed with creating a timesheet.
-    $canCreateTimesheet = true;
-    $first_user_id = null;
-
-    foreach ($report_items as $report_item) {
-      // Check user id.
-      if (!$first_user_id)
-        $first_user_id = $report_item['user_id'];
-      else {
-        if ($report_item['user_id'] != $first_user_id) {
-          // We have items for multiple users.
-          $canCreateTimesheet = false;
-          break;
-        }
-      }
-      // Check timesheet id.
-      if ($report_item['timesheet_id']) {
-        // We have an item already assigned to a timesheet.
-        $canCreateTimesheet = false;
-        break;
-      }
-      if ($report_item['type'] == 1)
-        $time_ids[] = $report_item['id'];
-      elseif ($report_item['type'] == 2)
-        $expense_ids[] = $report_item['id'];
-    }
-    if (!$canCreateTimesheet) return false;
-
-    // Make comma-seperated lists of ids for sql.
-    if ($time_ids)
-      $comma_separated_time_ids = implode(',', $time_ids);
-    if ($expense_ids)
-      $comma_separated_expense_ids = implode(',', $expense_ids);
-
     // Create a new timesheet entry.
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $user_id = $fields['user_id'];
     $client_id = $fields['client_id'];
     $name = $fields['name'];
     $submitter_comment = $fields['comment'];
@@ -120,22 +78,25 @@ class ttTimesheetHelper {
     $last_id = $mdb2->lastInsertID('tt_timesheets', 'id');
 
     // Associate time items with timesheet.
-    if ($comma_separated_time_ids) {
-      $sql = "update tt_log set timesheet_id = $last_id".
-        " where id in ($comma_separated_time_ids) and group_id = $group_id and org_id = $org_id";
-      $affected = $mdb2->exec($sql);
-      if (is_a($affected, 'PEAR_Error'))
-        return false;
-    }
+    if (isset($fields['client'])) $client_id = (int) $fields['client_id'];
+    if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
+    // sql parts.
+    if ($client_id) $client_part = " and client_id = $client_id";
+    if ($project_id) $project_part = " and project_id = $project_id";
 
-    // Associate expense items with timesheet.
-    if ($comma_separated_expense_ids) {
-      $sql = "update tt_expense_items set timesheet_id = $last_id".
-        " where id in ($comma_separated_expense_ids) and group_id = $group_id and org_id = $org_id";
-      $affected = $mdb2->exec($sql);
-      if (is_a($affected, 'PEAR_Error'))
-        return false;
-    }
+    $start_date = new DateAndTime($user->date_format, $fields['start_date']);
+    $start = $start_date->toString(DB_DATEFORMAT);
+
+    $end_date = new DateAndTime($user->date_format, $fields['end_date']);
+    $end = $end_date->toString(DB_DATEFORMAT);
+
+    $sql = "update tt_log set timesheet_id = $last_id".
+      " where status = 1 $client_part $project_part and timesheet_id is null".
+      " and date >= ".$mdb2->quote($start)." and date <= ".$mdb2->quote($end).
+      " and user_id = $user_id and group_id = $group_id and org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
 
     return $last_id;
   }

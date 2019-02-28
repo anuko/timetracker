@@ -90,12 +90,11 @@ if ($request->isPost()) {
   // Finished validating user input.
 
   if ($err->no()) {
-    /*
-    if (ttTimesheetHelper::insert($fields)) {
+    if (ttTimesheetHelper::createTimesheet($fields)) {
       header('Location: timesheets.php');
       exit();
     } else
-      $err->add($i18n->get('error.db'));*/
+      $err->add($i18n->get('error.db'));
   }
 } // isPost
 
