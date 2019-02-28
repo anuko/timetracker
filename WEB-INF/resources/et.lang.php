@@ -103,6 +103,8 @@ $i18n_key_words = array(
 // Google auto-translates below as "No billable invoices found." which seems wrong.
 // 'error.no_invoiceable_items' => 'Arveldatavaid arveid ei leitud.',
 
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => 'Sellise tunnusega kasutajat ei ole.',
 
 // TODO: Improve translation of error.no_groups. Replace meeskond with grupp?

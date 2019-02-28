@@ -101,6 +101,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Neexistujú položky, ktoré by bolo možné fakturovať.',
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => 'Neexistuje používateľ s týmto prihlasovacím menom.',
 'error.no_groups' => 'Vaša databáza je prázdna. Prihláste sa ako admin a vytvorte nový tím.', // TODO: replace "team" with "group".
 'error.upload' => 'Prenos súboru bol neúspešný.',

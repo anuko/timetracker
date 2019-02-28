@@ -96,6 +96,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Der er ingen fakturerbar emner.',
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => 'Der finde ingen bruger med dette brugernavn.',
 'error.no_groups' => 'Din database er tom, log ind som administrator og lav et nyt team.', // TODO: replace "team" with "group".
 'error.upload' => 'Fil upload problem.',

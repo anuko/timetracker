@@ -97,6 +97,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Não há items faturáveis.',
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => 'Não há usuário com este login.',
 'error.no_groups' => 'Sua base de dados está vazia. Entre como admin e crie uma equipe nova.', // TODO: replace "team" with "group".
 'error.upload' => 'Erro no envio do arquivo.',

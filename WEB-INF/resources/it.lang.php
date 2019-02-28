@@ -95,6 +95,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Non ci sono voci fatturabili.',
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => 'Non esiste un utente con questo username.',
 'error.no_groups' => 'Il database è vuoto. Loggati come amministratore e crea un nuovo gruppo.',
 'error.upload' => 'Errore di caricamento file.',

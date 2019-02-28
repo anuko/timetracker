@@ -7,6 +7,18 @@
           <td align="right">{$i18n.label.thing_name} (*):</td>
           <td>{$forms.timesheetForm.timesheet_name.control}</td>
         </tr>
+{if $show_client}
+        <tr>
+          <td align="right">{$i18n.label.client}:</td>
+          <td>{$forms.timesheetForm.client.control}</td>
+        </tr>
+{/if}
+{if $show_project}
+        <tr>
+          <td align="right">{$i18n.label.project}:</td>
+          <td>{$forms.timesheetForm.project.control}</td>
+        </tr>
+{/if}
         <tr>
           <td align="right">{$i18n.label.start_date} (*):</td>
           <td>{$forms.timesheetForm.start.control}</td>
@@ -17,7 +29,7 @@
         </tr>
         <tr>
           <td align = "right">{$i18n.label.comment}:</td>
-          <td>{$forms.timesheetForm.submitter_comment.control}</td>
+          <td>{$forms.timesheetForm.comment.control}</td>
         </tr>
         <tr>
           <td></td>

@@ -18,10 +18,8 @@
 {if $show_client}
           <td class="tableHeader">{$i18n.label.client}</td>
 {/if}
-{if $not_client}
           <td class="tableHeader">{$i18n.label.submitted}</td>
           <td class="tableHeader">{$i18n.label.approved}</td>
-{/if}
           <td class="tableHeader">{$i18n.label.view}</td>
 {if $can_edit}
           <td class="tableHeader">{$i18n.label.edit}</td>
@@ -33,13 +31,11 @@
   {if $show_client}
           <td>{$timesheet.client_name|escape}</td>
   {/if}
-  {if $not_client}
           <td>{if $timesheet.submit_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
-     {if $timesheet.approval_status == null}
+  {if $timesheet.approval_status == null}
           <td></td>
-     {else}
+  {else}
           <td>{if $timesheet.approval_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
-     {/if}
   {/if}
           <td><a href="timesheet_view.php?id={$timesheet.id}">{$i18n.label.view}</a></td>
   {if $can_edit}
@@ -48,11 +44,10 @@
         </tr>
 {/foreach}
       </table>
-{if $not_client}
+
       <table width="100%">
-        <tr><td align="center"><br><form><input type="button" onclick="chLocation('reports.php');" value="{$i18n.button.add}"></form></td></tr>
+        <tr><td align="center"><br><form><input type="button" onclick="chLocation('timesheet_add.php');" value="{$i18n.button.add}"></form></td></tr>
       </table>
-{/if}
 
 {if $inactive_timesheets}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
@@ -63,10 +58,8 @@
   {if $show_client}
           <td class="tableHeader">{$i18n.label.client}</td>
   {/if}
-  {if $not_client}
           <td class="tableHeader">{$i18n.label.submitted}</td>
           <td class="tableHeader">{$i18n.label.approved}</td>
-  {/if}
           <td class="tableHeader">{$i18n.label.view}</td>
   {if $can_edit}
           <td class="tableHeader">{$i18n.label.edit}</td>
@@ -78,13 +71,11 @@
     {if $show_client}
           <td>{$timesheet.client_name|escape}</td>
     {/if}
-    {if $not_client}
           <td>{if $timesheet.submit_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
-      {if $timesheet.approval_status == null}
+    {if $timesheet.approval_status == null}
           <td></td>
-      {else}
+    {else}
           <td>{if $timesheet.approval_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
-      {/if}
     {/if}
           <td><a href="timesheet_view.php?id={$timesheet.id}">{$i18n.label.view}</a></td>
     {if $can_edit}
@@ -93,11 +84,10 @@
         </tr>
   {/foreach}
       </table>
-  {if $not_client}
+
       <table width="100%">
         <tr><td align="center"><br><form><input type="button" onclick="chLocation('reports.php');" value="{$i18n.button.add}"></form></td></tr>
       </table>
-  {/if}
 {/if}
     </td>
   </tr>

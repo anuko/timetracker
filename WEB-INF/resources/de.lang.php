@@ -90,6 +90,8 @@ $i18n_key_words = array(
 'error.invoice_exists' => 'Rechnung mit dieser Nummer existiert bereits.',
 'error.role_exists' => 'Rolle mit diesem Rang existiert bereits.',
 'error.no_invoiceable_items' => 'Keine Einträge zur Rechnungsstellung gefunden.',
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => 'Benutzer mit diesen Anmeldedaten nicht vorhanden.',
 'error.no_groups' => 'Die Datenbank ist leer. Als Administrator anmelden und ein neues Gruppe erzeugen.',
 'error.upload' => 'Fehler beim hochladen einer Datei.',

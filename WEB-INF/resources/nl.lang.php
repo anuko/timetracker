@@ -89,6 +89,8 @@ $i18n_key_words = array(
 'error.invoice_exists' => 'Dit nummer is al eens toegekend aan een factuur.',
 'error.role_exists' => 'Een rol met deze rangorde bestaat al.',
 'error.no_invoiceable_items' => 'Er zijn geen factuureerbare onderdelen.',
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => 'Een medewerker met deze inlognaam bestaat niet.',
 'error.no_groups' => 'Uw database is leeg. Meld je aan als admin en maak een nieuw groep.',
 'error.upload' => 'Fout bij het uploaden van het bestand.',

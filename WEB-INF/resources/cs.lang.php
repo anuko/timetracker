@@ -105,6 +105,7 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.role_exists' => 'Role with this rank already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
+// 'error.no_records' => 'There are no records.',
 // 'error.no_login' => 'No user with this login.',
 'error.no_groups' => 'Vaše databáze je prázdná. Přihlašte se jako admin a vytvořte nový tým.', // TODO: replace "team" with "group".
 'error.upload' => 'Chyba přenosu souboru.',

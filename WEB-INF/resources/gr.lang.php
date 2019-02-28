@@ -91,6 +91,8 @@ $i18n_key_words = array(
 'error.invoice_exists' => 'Το τιμολόγιο με αυτόν τον αριθμό υπάρχει ήδη.',
 'error.role_exists' => 'Ο ρόλος σε αυτή τη σειρά υπάρχει ήδη.',
 'error.no_invoiceable_items' => 'Δεν υπάρχουν στοιχεία προς τιμολόγηση.',
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => 'Δεν υπάρχει χρήστης με αυτά τα στοιχεία.',
 'error.no_groups' => 'Η βάση δεδομένων σας είναι κενή. Συνδεθείτε ως διαχειριστής και δημιουργήστε μια νέα ομάδα.',
 'error.upload' => 'Σφάλμα φόρτωσης αρχείου.',

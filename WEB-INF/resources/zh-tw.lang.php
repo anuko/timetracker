@@ -101,6 +101,7 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.role_exists' => 'Role with this rank already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => '沒有該登錄資訊的使用者。',
 'error.no_groups' => '您的資料庫沒有任何記錄。請以管理員身份登錄並創建一個新團隊。', // TODO: replace "team" with "group".
 'error.upload' => '上傳文件出錯。',

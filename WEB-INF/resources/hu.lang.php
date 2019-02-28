@@ -103,6 +103,8 @@ $i18n_key_words = array(
 // 'error.invoice_exists' => 'Invoice with this number already exists.',
 // 'error.role_exists' => 'Role with this rank already exists.',
 // 'error.no_invoiceable_items' => 'There are no invoiceable items.',
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 // 'error.no_login' => 'No user with this login.',
 // 'error.no_groups' => 'Your database is empty. Login as admin and create a new group.',
 'error.upload' => 'File feltöltési hiba.',

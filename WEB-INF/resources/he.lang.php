@@ -112,6 +112,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'אין פריטים לחיוב',
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => 'משתמש זה אינו קיים',
 'error.no_groups' => 'בסיס הנתונים שלך ריק. התחבר כמנהל וצור צוות חדש', // TODO: replace "team" with "group".
 'error.upload' => 'שגיאה בהעלת קובץ',

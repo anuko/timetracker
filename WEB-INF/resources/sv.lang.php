@@ -95,6 +95,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Det finns inga debiterbara tidsregistreringar.',
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => 'Det finns ingen användare med det här användarnamnet.',
 'error.no_groups' => 'Databasen är tom. Logga in som administratör och skapa en ny grupp.',
 'error.upload' => 'Ett fel uppstod när filen laddades upp.',

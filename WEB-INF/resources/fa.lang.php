@@ -101,6 +101,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'آیتمی جهت فاکتور کردن وجود ندارد.',
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => 'کاربری با این نام کاربری موجود نیست.',
 'error.no_groups' => 'پایگاه داده شما خالی است با کاربر admin وارد شوید و تیم ایجاد کنید.',  // TODO: replace "team" with "group".
 'error.upload' => 'خطا در آپلود فایل.',

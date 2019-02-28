@@ -96,6 +96,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Nema stavke za naplatu.',
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => 'Nema korisnika pod ovom prijavom',
 'error.no_groups' => 'Vaša baza podataka je prazna. Prijavite se kao administrator i napravite novi tim.', // TODO: replace "team" with "group".
 'error.upload' => 'Greška pri otpremanju podatka.',

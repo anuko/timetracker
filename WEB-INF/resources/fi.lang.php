@@ -98,6 +98,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.role_exists' => 'Role with this rank already exists.',
 'error.no_invoiceable_items' => 'Ei laskutettavia syötteitä.',
+// TODO: translate the following.
+// 'error.no_records' => 'There are no records.',
 'error.no_login' => 'Tuntematon käyttäjänimi.',
 'error.no_groups' => 'Tietokanta on tyhjä. Kirjaudu ylläpitäjänä ja luo uusi tiimi.',  // TODO: replace "team" with "group".
 'error.upload' => 'Virhe tiedoston lataus.',
