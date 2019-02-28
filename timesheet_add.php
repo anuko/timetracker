@@ -89,18 +89,14 @@ if ($request->isPost()) {
   if ($err->no() && !ttTimesheetHelper::timesheetItemsExist($fields)) $err->add($i18n->get('error.no_records'));
   // Finished validating user input.
 
-  /*
   if ($err->no()) {
-    // TODO: use $fields.
-    if (ttTimesheetHelper::insert(array('user_id' => $user_id,
-        'client_id' => $bean->getAttribute('client'),
-        'name' => $cl_name,
-        'comment' => $cl_comment))) {
-          header('Location: timesheets.php');
-          exit();
-        } else
-          $err->add($i18n->get('error.db'));
-    } */
+    /*
+    if (ttTimesheetHelper::insert($fields)) {
+      header('Location: timesheets.php');
+      exit();
+    } else
+      $err->add($i18n->get('error.db'));*/
+  }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

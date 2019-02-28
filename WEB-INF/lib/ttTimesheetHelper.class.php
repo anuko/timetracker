@@ -415,10 +415,12 @@ class ttTimesheetHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $client_id = (int) $fields['client_id'];
+    if (isset($fields['client_id'])) $client_id = (int) $fields['client_id'];
+    if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
 
     $start_date = new DateAndTime($user->date_format, $fields['start_date']);
     $start = $start_date->toString(DB_DATEFORMAT);
@@ -426,57 +428,19 @@ class ttTimesheetHelper {
     $end_date = new DateAndTime($user->date_format, $fields['end_date']);
     $end = $end_date->toString(DB_DATEFORMAT);
 
-    if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
+    // sql parts.
+    if ($client_id) $client_part = " and client_id = $client_id";
+    if ($project_id) $project_part = " and project_id = $project_id";
 
-    // Our query is different depending on tracking mode.
-    if (MODE_TIME == $user->getTrackingMode()) {
-      // In "time only" tracking mode there is a single user rate.
-      $sql = "select count(*) as num from tt_log l, tt_users u".
-        " where l.status = 1 and l.client_id = $client_id and l.invoice_id is null".
-        " and l.date >= ".$mdb2->quote($start)." and l.date <= ".$mdb2->quote($end).
-        " and l.user_id = u.id and l.group_id = $group_id and l.org_id = $org_id".
-        " and l.billable = 1"; // l.billable * u.rate * time_to_sec(l.duration)/3600 > 0 // See explanation below.
-    } else {
-      // sql part for project id.
-      if ($project_id) $project_part = " and l.project_id = $project_id";
-
-      // When we have projects, rates are defined for each project in tt_user_project_binds table.
-      $sql = "select count(*) as num from tt_log l, tt_user_project_binds upb".
-        " where l.status = 1 and l.client_id = $client_id $project_part and l.invoice_id is null".
-        " and l.date >= ".$mdb2->quote($start)." and l.date <= ".$mdb2->quote($end).
-        " and l.group_id = $group_id and l.org_id = $org_id".
-        " and upb.user_id = l.user_id and upb.project_id = l.project_id".
-        " and l.billable = 1"; // l.billable * upb.rate * time_to_sec(l.duration)/3600 > 0
-        // Users with a lot of clients and projects (Jaro) may forget to set user rates properly.
-        // Specifically, user rate may be set to 0 on a project, by mistake. This leads to error.no_invoiceable_items
-        // and increased support cost. Commenting out allows us to include 0 cost items in invoices so that
-        // the problem becomes obvious.
-
-        // TODO: If the above turns out useful, rework the query to simplify it by removing left join.
-    }
+    $sql = "select count(*) as num from tt_log".
+      " where status = 1 $client_part $project_part and timesheet_id is null".
+      " and date >= ".$mdb2->quote($start)." and date <= ".$mdb2->quote($end).
+      " and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
       if ($val['num']) {
         return true;
-      }
-    }
-
-    if ($user->isPluginEnabled('ex')) {
-      // sql part for project id.
-      if ($project_id) $project_part = " and ei.project_id = $project_id";
-
-      $sql = "select count(*) as num from tt_expense_items ei".
-        " where ei.client_id = $client_id $project_part and ei.invoice_id is null".
-        " and ei.date >= ".$mdb2->quote($start)." and ei.date <= ".$mdb2->quote($end).
-        " and ei.group_id = $group_id and ei.org_id = $org_id".
-        " and ei.cost <> 0 and ei.status = 1";
-      $res = $mdb2->query($sql);
-      if (!is_a($res, 'PEAR_Error')) {
-        $val = $res->fetchRow();
-        if ($val['num']) {
-          return true;
-        }
       }
     }
 
