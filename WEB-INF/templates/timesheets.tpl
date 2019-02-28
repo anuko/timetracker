@@ -21,9 +21,7 @@
           <td class="tableHeader">{$i18n.label.submitted}</td>
           <td class="tableHeader">{$i18n.label.approved}</td>
           <td class="tableHeader">{$i18n.label.view}</td>
-{if $can_edit}
           <td class="tableHeader">{$i18n.label.edit}</td>
-{/if}
         </tr>
 {foreach $active_timesheets as $timesheet}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
@@ -38,9 +36,7 @@
           <td>{if $timesheet.approval_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
   {/if}
           <td><a href="timesheet_view.php?id={$timesheet.id}">{$i18n.label.view}</a></td>
-  {if $can_edit}
           <td><a href="timesheet_edit.php?id={$timesheet.id}">{$i18n.label.edit}</a></td>
-  {/if}
         </tr>
 {/foreach}
       </table>
@@ -61,9 +57,7 @@
           <td class="tableHeader">{$i18n.label.submitted}</td>
           <td class="tableHeader">{$i18n.label.approved}</td>
           <td class="tableHeader">{$i18n.label.view}</td>
-  {if $can_edit}
           <td class="tableHeader">{$i18n.label.edit}</td>
-  {/if}
         </tr>
   {foreach $inactive_timesheets as $timesheet}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
@@ -78,9 +72,7 @@
           <td>{if $timesheet.approval_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
     {/if}
           <td><a href="timesheet_view.php?id={$timesheet.id}">{$i18n.label.view}</a></td>
-    {if $can_edit}
           <td><a href="timesheet_edit.php?id={$timesheet.id}">{$i18n.label.edit}</a></td>
-    {/if}
         </tr>
   {/foreach}
       </table>

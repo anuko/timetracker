@@ -170,16 +170,12 @@ class ttTimesheetHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    if ($user->isClient()) $client_part = "and ts.client_id = $user->client_id";
-
-    $sql = "select ts.id, ts.user_id, u.name as user_name, ts.client_id, c.name as client_name,".
-      " ts.name, ts.submitter_comment, ts.submit_status, ts.approval_status, ts.manager_comment from tt_timesheets ts".
-      " left join tt_users u on (u.id = ts.user_id)".
-      " left join tt_clients c on (c.id = ts.client_id)".
-      " where ts.id = $timesheet_id and ts.group_id = $group_id and ts.org_id = $org_id $client_part and ts.status is not null";
+    $sql = "select * from tt_timesheets".
+      " where id = $timesheet_id and user_id = $user_id and group_id = $group_id and org_id = $org_id and status is not null";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if ($val = $res->fetchRow())

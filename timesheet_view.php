@@ -30,7 +30,7 @@ require_once('initialize.php');
 import('ttTimesheetHelper');
 
 // Access checks.
-if (!(ttAccessAllowed('view_own_timesheets') || ttAccessAllowed('view_timesheets') || ttAccessAllowed('view_all_timesheets'))) {
+if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
   header('Location: access_denied.php');
   exit();
 }
@@ -38,8 +38,8 @@ if (!$user->isPluginEnabled('ts')) {
   header('Location: feature_disabled.php');
   exit();
 }
-$timesheet_id = (int)$request->getParameter('id');
-$timesheet = ttTimesheetHelper::getTimesheet($timesheet_id);
+$cl_timesheet_id = (int)$request->getParameter('id');
+$timesheet = ttTimesheetHelper::getTimesheet($cl_timesheet_id);
 if (!$timesheet) {
   header('Location: access_denied.php');
   exit();
@@ -55,13 +55,12 @@ if ($request->isPost()) {
 $options = ttTimesheetHelper::getReportOptions($timesheet);
 $subtotals = ttReportHelper::getSubtotals($options);
 $totals = ttReportHelper::getTotals($options);
-$notClient = !$user->isClient();
 
 // Determine which controls to show and obtain date for them.
-$showSubmit = $notClient && !$timesheet['submit_status'];
+$showSubmit = !$timesheet['submit_status'];
 if ($showSubmit) $approvers = ttTimesheetHelper::getApprovers($timesheet['user_id']);
 $canApprove = $user->can('approve_timesheets') || $user->can('approve_all_timesheets');
-$showApprove = $notClient && $timesheet['submit_status'] && $timesheet['approval_status'] == null;
+$showApprove = $timesheet['submit_status'] && $timesheet['approval_status'] == null;
 
 // Add a form with controls.
 $form = new Form('timesheetForm');

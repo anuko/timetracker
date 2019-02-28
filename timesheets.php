@@ -32,22 +32,26 @@ import('ttGroupHelper');
 import('ttTimesheetHelper');
 
 // Access checks.
-if (!(ttAccessAllowed('view_own_timesheets') || ttAccessAllowed('view_timesheets') || ttAccessAllowed('view_all_timesheets'))) {
+if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
   header('Location: access_denied.php');
+  exit();
+}
+if ($user->behalf_id && (!$user->can('track_time') || !$user->checkBehalfId())) {
+  header('Location: access_denied.php'); // Trying on behalf, but no right or wrong user.
+  exit();
+}
+if (!$user->behalf_id && !$user->can('track_own_time') && !$user->adjustBehalfId()) {
+  header('Location: access_denied.php'); // Trying as self, but no right for self, and noone to work on behalf.
   exit();
 }
 if (!$user->isPluginEnabled('ts')) {
   header('Location: feature_disabled.php');
   exit();
 }
-if ($user->isClient()) {
-  header('Location: access_denied.php'); // No timesheets for clients.
-  exit();
-}
 if ($request->isPost()) {
   $userChanged = $request->getParameter('user_changed'); // Reused in multiple places below.
-  if ($userChanged && !($user->can('view_timesheets') && $user->isUserValid($request->getParameter('user')))) {
-    header('Location: access_denied.php'); // Group changed, but no rght or wrong user id. TODO: research relevance of this...
+  if ($userChanged && !($user->can('track_time') && $user->isUserValid($request->getParameter('user')))) {
+    header('Location: access_denied.php'); // Group changed, but no rght or wrong user id.
     exit();
   }
 }
@@ -66,9 +70,9 @@ $group_id = $user->getGroup();
 // Elements of timesheetsForm.
 $form = new Form('timesheetsForm');
 
-if ($user->can('view_timesheets') || $user->can('view_all_timesheets')) {
+if ($user->can('track_time')) {
   $rank = $user->getMaxRankForGroup($group_id);
-  if ($user->can('view_own_timesheets'))
+  if ($user->can('track_own_time'))
     $options = array('status'=>ACTIVE,'max_rank'=>$rank,'include_self'=>true,'self_first'=>true);
   else
     $options = array('status'=>ACTIVE,'max_rank'=>$rank);
@@ -90,12 +94,10 @@ $active_timesheets = ttTimesheetHelper::getActiveTimesheets($user_id);
 $inactive_timesheets = ttTimesheetHelper::getInactiveTimesheets($user_id);
 
 $showClient = $user->isPluginEnabled('cl');
-$canEdit = $user->can('manage_own_timesheets') || $user->can('manage_timesheets') || $user->can('manage_all_timesheets');
 
 $smarty->assign('active_timesheets', $active_timesheets);
 $smarty->assign('inactive_timesheets', $inactive_timesheets);
 $smarty->assign('show_client', $showClient);
-$smarty->assign('can_edit', $canEdit);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.timesheets'));
 $smarty->assign('content_page_name', 'timesheets.tpl');
