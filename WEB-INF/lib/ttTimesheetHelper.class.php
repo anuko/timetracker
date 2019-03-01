@@ -66,6 +66,7 @@ class ttTimesheetHelper {
     $org_id = $user->org_id;
 
     $client_id = $fields['client_id'];
+    $project_id = $fields['project_id'];
     $name = $fields['name'];
     $comment = $fields['comment'];
 
@@ -75,8 +76,8 @@ class ttTimesheetHelper {
     $end_date = new DateAndTime($user->date_format, $fields['end_date']);
     $end = $end_date->toString(DB_DATEFORMAT);
 
-    $sql = "insert into tt_timesheets (user_id, group_id, org_id, client_id, name, comment, start_date, end_date)".
-      " values ($user_id, $group_id, $org_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($name).
+    $sql = "insert into tt_timesheets (user_id, group_id, org_id, client_id, project_id, name, comment, start_date, end_date)".
+      " values ($user_id, $group_id, $org_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).", ".$mdb2->quote($name).
       ", ".$mdb2->quote($comment).", ".$mdb2->quote($start).", ".$mdb2->quote($end).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
@@ -175,8 +176,12 @@ class ttTimesheetHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $sql = "select * from tt_timesheets".
-      " where id = $timesheet_id and user_id = $user_id and group_id = $group_id and org_id = $org_id and status is not null";
+    $sql = "select ts.*, u.name as user_name, c.name as client_name,".
+      " p.name as project_name from tt_timesheets ts".
+      " left join tt_users u on (ts.user_id = u.id)".
+      " left join tt_clients c on (ts.client_id = c.id)".
+      " left join tt_projects p on (ts.project_id = p.id)".
+      " where ts.id = $timesheet_id and ts.user_id = $user_id and ts.group_id = $group_id and ts.org_id = $org_id and ts.status is not null";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if ($val = $res->fetchRow())
@@ -329,9 +334,9 @@ class ttTimesheetHelper {
     // Even if mail part below does not work, this will get us a functioning workflow
     // (without email notifications).
     $timesheet_id = $fields['timesheet_id'];
-    $manager_comment = $fields['comment'];
+    $comment = $fields['comment'];
 
-    $sql = "update tt_timesheets set approval_status = 1, manager_comment = ".$mdb2->quote($manager_comment).
+    $sql = "update tt_timesheets set approve_status = 1, approve_comment = ".$mdb2->quote($comment).
       " where id = $timesheet_id and submit_status = 1 and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
@@ -352,9 +357,9 @@ class ttTimesheetHelper {
     // Even if mail part below does not work, this will get us a functioning workflow
     // (without email notifications).
     $timesheet_id = $fields['timesheet_id'];
-    $manager_comment = $fields['comment'];
+    $comment = $fields['comment'];
 
-    $sql = "update tt_timesheets set approval_status = 0, manager_comment = ".$mdb2->quote($manager_comment).
+    $sql = "update tt_timesheets set approve_status = 0, approve_comment = ".$mdb2->quote($comment).
       " where id = $timesheet_id and submit_status = 1 and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;

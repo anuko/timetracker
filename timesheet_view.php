@@ -131,6 +131,6 @@ $smarty->assign('show_approvers', $showApprovers);
 $smarty->assign('show_submit', $showSubmit);
 $smarty->assign('show_approve', $showApprove);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->get('title.timesheet'));
+$smarty->assign('title', $i18n->get('title.timesheet').": ".$timesheet['start_date']." - ".$timesheet['end_date']);
 $smarty->assign('content_page_name', 'timesheet_view.tpl');
 $smarty->display('index.tpl');

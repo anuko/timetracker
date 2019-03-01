@@ -7,19 +7,26 @@
     <td>
       <table border=0 width=100%>
         <tr><td align="center"><b style="font-size: 15pt; font-family: Arial, Helvetica, sans-serif;">{$timesheet['name']|escape} </b></td></tr>
+{if $user->behalfUser}
         <tr><td align="left"><b>{$i18n.label.user}:</b> {$timesheet['user_name']|escape}</td></tr>
+{/if}
 {if $timesheet['client_id']}
         <tr><td align="left"><b>{$i18n.label.client}:</b> {$timesheet['client_name']|escape}</td></tr>
 {/if}
+{if $timesheet['project_id']}
+        <tr><td align="left"><b>{$i18n.label.project}:</b> {$timesheet['project_name']|escape}</td></tr>
+{/if}
+{if $timesheet['comment']}
+        <tr><td align="left"><b>{$i18n.label.comment}:</b> {$timesheet['comment']|escape}</td></tr>
+{/if}
+{if $timesheet['approve_status'] == null}
         <tr><td align="left"><b>{$i18n.label.submitted}:</b> {if $timesheet.submit_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td></tr>
-{if $timesheet['submitter_comment']}
-        <tr><td align="left"><b>{$i18n.label.comment}:</b> {$timesheet['submitter_comment']|escape}</td></tr>
 {/if}
-{if $timesheet['submit_status']}
-        <tr><td align="left"><b>{$i18n.label.approved}:</b> {if $timesheet.approval_status != null}{if $timesheet.approval_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td></tr>{/if}
+{if $timesheet['approve_status'] != null}
+        <tr><td align="left"><b>{$i18n.label.approved}:</b> {if $timesheet.approve_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td></tr>
 {/if}
-{if $timesheet['manager_comment']}
-        <tr><td align="left"><b>{$i18n.label.note}:</b> {$timesheet['manager_comment']|escape}</td></tr>
+{if $timesheet['approve_comment']}
+        <tr><td align="left"><b>{$i18n.label.note}:</b> {$timesheet['approve_comment']|escape}</td></tr>
 {/if}
       </table>
     </td>
@@ -53,7 +60,7 @@
   <tr>
     <td align="center">
       <table>
-        <tr><td>  {if $show_approvers}{$i18n.form.mail.to}: {$forms.timesheetForm.approver.control}{/if} {$forms.timesheetForm.btn_submit.control}</td></tr>
+        <tr><td>{if $show_approvers}{$i18n.form.mail.to}: {$forms.timesheetForm.approver.control}{/if} {$forms.timesheetForm.btn_submit.control}</td></tr>
       </table>
     </td>
   </tr>
