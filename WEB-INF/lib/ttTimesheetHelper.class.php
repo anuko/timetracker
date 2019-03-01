@@ -67,10 +67,17 @@ class ttTimesheetHelper {
 
     $client_id = $fields['client_id'];
     $name = $fields['name'];
-    $submitter_comment = $fields['comment'];
+    $comment = $fields['comment'];
 
-    $sql = "insert into tt_timesheets (user_id, group_id, org_id, client_id, name, submitter_comment)".
-      " values ($user_id, $group_id, $org_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($name).", ".$mdb2->quote($submitter_comment).")";
+    $start_date = new DateAndTime($user->date_format, $fields['start_date']);
+    $start = $start_date->toString(DB_DATEFORMAT);
+
+    $end_date = new DateAndTime($user->date_format, $fields['end_date']);
+    $end = $end_date->toString(DB_DATEFORMAT);
+
+    $sql = "insert into tt_timesheets (user_id, group_id, org_id, client_id, name, comment, start_date, end_date)".
+      " values ($user_id, $group_id, $org_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($name).
+      ", ".$mdb2->quote($comment).", ".$mdb2->quote($start).", ".$mdb2->quote($end).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -83,12 +90,6 @@ class ttTimesheetHelper {
     // sql parts.
     if ($client_id) $client_part = " and client_id = $client_id";
     if ($project_id) $project_part = " and project_id = $project_id";
-
-    $start_date = new DateAndTime($user->date_format, $fields['start_date']);
-    $start = $start_date->toString(DB_DATEFORMAT);
-
-    $end_date = new DateAndTime($user->date_format, $fields['end_date']);
-    $end = $end_date->toString(DB_DATEFORMAT);
 
     $sql = "update tt_log set timesheet_id = $last_id".
       " where status = 1 $client_part $project_part and timesheet_id is null".
@@ -116,7 +117,7 @@ class ttTimesheetHelper {
     if ($user->isClient())
       $client_part = "and ts.client_id = $user->client_id";
 
-    $sql = "select ts.id, ts.name, ts.client_id, c.name as client_name, ts.submit_status, ts.approval_status from tt_timesheets ts".
+    $sql = "select ts.id, ts.name, ts.client_id, c.name as client_name, ts.submit_status, ts.approve_status from tt_timesheets ts".
       " left join tt_clients c on (c.id = ts.client_id)".
       " where ts.status = 1 and ts.group_id = $group_id and ts.org_id = $org_id and ts.user_id = $user_id".
       " $client_part order by ts.name";
