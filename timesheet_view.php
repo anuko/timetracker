@@ -58,7 +58,10 @@ $totals = ttReportHelper::getTotals($options);
 
 // Determine which controls to show and obtain date for them.
 $showSubmit = !$timesheet['submit_status'];
-if ($showSubmit) $approvers = ttTimesheetHelper::getApprovers($timesheet['user_id']);
+if ($showSubmit) {
+  $approvers = ttTimesheetHelper::getApprovers($timesheet['user_id']);
+  $showApprovers = count($approvers) >= 1;
+}
 $canApprove = $user->can('approve_timesheets') || $user->can('approve_own_timesheets');
 $showApprove = $timesheet['submit_status'] && $timesheet['approval_status'] == null;
 
@@ -67,7 +70,7 @@ $form = new Form('timesheetForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$timesheet['id']));
 
 if ($showSubmit) {
-  if (count($approvers) >= 1) {
+  if ($showApprovers) {
     $form->addInput(array('type'=>'combobox',
       'name'=>'approver',
       'style'=>'width: 200px;',
@@ -124,6 +127,7 @@ $smarty->assign('group_by_header', ttReportHelper::makeGroupByHeader($options));
 $smarty->assign('timesheet', $timesheet);
 $smarty->assign('subtotals', $subtotals);
 $smarty->assign('totals', $totals);
+$smarty->assign('show_approvers', $showApprovers);
 $smarty->assign('show_submit', $showSubmit);
 $smarty->assign('show_approve', $showApprove);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

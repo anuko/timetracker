@@ -53,7 +53,7 @@
   <tr>
     <td align="center">
       <table>
-        <tr><td>{$i18n.form.mail.to}: {$forms.timesheetForm.approver.control} {$forms.timesheetForm.btn_submit.control}</td></tr>
+        <tr><td>  {if $show_approvers}{$i18n.form.mail.to}: {$forms.timesheetForm.approver.control}{/if} {$forms.timesheetForm.btn_submit.control}</td></tr>
       </table>
     </td>
   </tr>
