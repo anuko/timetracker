@@ -115,7 +115,7 @@
     {if $user->exists() && ($user->can('view_own_reports') || $user->can('view_reports') || $user->can('view_all_reports') || $user->can('view_client_reports'))}
       {if !$user->isClient()}&middot;{/if} <a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a>
     {/if}
-    {if $user->exists() && $user->isPluginEnabled('ts') && ($user->can('view_own_timesheets') || $user->can('view_timesheets') || $user->can('view_all_timesheets'))}
+    {if $user->exists() && $user->isPluginEnabled('ts') && ($user->can('track_own_time') || $user->can('track_time'))}
             &middot; <a class="mainMenu" href="timesheets.php">{$i18n.menu.timesheets}</a>
     {/if}
     {if $user->exists() && $user->isPluginEnabled('iv') && ($user->can('manage_invoices') || $user->can('view_client_invoices'))}

@@ -192,8 +192,7 @@ if ($showApproved) {
 }
 
 // Add timesheet assignment selector.
-$showTimesheetDropdown = $user->isPluginEnabled('ts') &&
-  ($user->can('view_own_timesheets') || $user->can('view_timesheets') || $user->can('view_all_timesheets'));
+$showTimesheetDropdown = $user->isPluginEnabled('ts');
 if ($showTimesheetDropdown) {
   $form->addInput(array('type'=>'combobox',
    'name'=>'timesheet',
@@ -206,8 +205,7 @@ if ($showTimesheetDropdown) {
    'empty'=>array(''=>$i18n->get('dropdown.all'))
   ));
 }
-$showTimesheetCheckbox = $user->isPluginEnabled('ts') &&
-  ($user->can('view_own_timesheets') || $user->can('view_timesheets') || $user->can('view_all_timesheets'));
+$showTimesheetCheckbox = $user->isPluginEnabled('ts');
 
 // Add user table.
 $showUsers = $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient();

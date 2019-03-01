@@ -236,10 +236,6 @@ class ttTimesheetHelper {
   // in current context.
   static function isUserValid($user_id) {
     // We have to cover several situations.
-    //
-    // 1) User is a client.
-    // 2) User with view_all_timesheets rights.
-    // 3) User with view_timesheets rights.
 
     global $user;
 
