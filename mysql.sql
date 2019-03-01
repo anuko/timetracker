@@ -496,10 +496,12 @@ CREATE TABLE `tt_timesheets` (
   `org_id` int(11) default NULL,                   # organization id
   `client_id` int(11) default NULL,                # client id
   `name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # timesheet name
+  `comment` text,                                  # timesheet comment
+  `start_date` date NOT NULL,                      # timesheet start date
+  `end_date` date NOT NULL,                        # timesheet end date
   `submit_status` tinyint(4) default NULL,         # submit status
-  `submitter_comment` text,                        # submitter comment
-  `approval_status` tinyint(4) default NULL,       # approval status
-  `manager_comment` text,                          # manager comment
+  `approve_status` tinyint(4) default NULL,        # approve status
+  `approve_comment` text,                          # approve comment
   `created` datetime default NULL,                 # creation timestamp
   `created_ip` varchar(45) default NULL,           # creator ip
   `created_by` int(11) default NULL,               # creator user_id
@@ -524,4 +526,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.46', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.47', now()); # TODO: change when structure changes.
