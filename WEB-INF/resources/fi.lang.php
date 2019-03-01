@@ -142,8 +142,6 @@ $i18n_key_words = array(
 'button.send' => 'Lähetä',
 'button.send_by_email' => 'Lähetä sähköpostilla',
 'button.create_group' => 'Luo tiimi', // TODO: replace "team" with "group".
-// TODO: translate the following.
-// 'button.create_timesheet' => 'Create timesheet',
 'button.export' => 'Vie tiimi', // TODO: replace "team" with "group".
 'button.import' => 'Tuo tiimi', // TODO: replace "team" with "group".
 'button.close' => 'Sulje',

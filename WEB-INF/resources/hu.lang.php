@@ -147,8 +147,6 @@ $i18n_key_words = array(
 'button.send' => 'Küld',
 'button.send_by_email' => 'Küldés e-mail-ben',
 'button.create_group' => 'Csoport létrehozása',
-// TODO: translate the following.
-// 'button.create_timesheet' => 'Create timesheet',
 'button.export' => 'Csoport exportálása',
 'button.import' => 'Csoport importálása',
 // TODO: translate the following.

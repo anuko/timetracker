@@ -140,8 +140,6 @@ $i18n_key_words = array(
 'button.send' => 'Pošlji',
 'button.send_by_email' => 'Pošlji preko elektronske pošte',
 'button.create_group' => 'Ustvari tim', // TODO: replace "team" with "group".
-// TODO: translate the following.
-// 'button.create_timesheet' => 'Create timesheet',
 'button.export' => 'Izvozi tim', // TODO: replace "team" with "group".
 'button.import' => 'Uvozi tim', // TODO: replace "team" with "group".
 // TODO: translate the following.

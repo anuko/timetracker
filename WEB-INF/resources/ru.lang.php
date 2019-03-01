@@ -126,7 +126,6 @@ $i18n_key_words = array(
 'button.send' => 'Отправить',
 'button.send_by_email' => 'Отправить по e-mail',
 'button.create_group' => 'Создать группу',
-'button.create_timesheet' => 'Создать табель',
 'button.export' => 'Экспортировать группу',
 'button.import' => 'Импортировать группу',
 'button.close' => 'Закрыть',

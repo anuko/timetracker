@@ -154,7 +154,6 @@ $i18n_key_words = array(
 'button.send_by_email' => 'E-posta ile gönder',
 'button.create_group' => 'Ekip yarat', // TODO: replace "team" with "group".
 // TODO: translate the following.
-// 'button.create_timesheet' => 'Create timesheet',
 // 'button.export' => 'Export group',
 'button.import' => 'Ekibi içeri aktar', // TODO: replace "team" with "group".
 // TODO: translate the following.

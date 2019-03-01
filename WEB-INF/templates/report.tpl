@@ -205,9 +205,6 @@
   <table>
   <tr>
     <td><input type="button" onclick="chLocation('report_send.php');" value="{$i18n.button.send_by_email}"></td>
-{if $can_create_timesheet}
-    <td><input type="button" onclick="chLocation('timesheet_add.php');" value="{$i18n.button.create_timesheet}"></td>
-{/if}
   </tr>
   </table>
   </td>

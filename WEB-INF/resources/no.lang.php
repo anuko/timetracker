@@ -150,8 +150,6 @@ $i18n_key_words = array(
 'button.send' => 'Send',
 'button.send_by_email' => 'Send som e-post',
 'button.create_group' => 'Opprett team', // TODO: replace "team" with "group".
-// TODO: translate the following.
-// 'button.create_timesheet' => 'Create timesheet',
 'button.export' => 'Eksport team', // TODO: replace "team" with "group".
 'button.import' => 'Importer team', // TODO: replace "team" with "group".
 'button.close' => 'Lukk',

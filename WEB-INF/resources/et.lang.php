@@ -148,8 +148,6 @@ $i18n_key_words = array(
 'button.send' => 'Saada',
 'button.send_by_email' => 'Saada e-postiga',
 'button.create_group' => 'Loo grupp',
-// TODO: translate the following.
-// 'button.create_timesheet' => 'Create timesheet',
 'button.export' => 'Ekspordi grupp',
 'button.import' => 'Impordi grupp',
 'button.close' => 'Sulge',

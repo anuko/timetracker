@@ -228,39 +228,6 @@ if (ttReportHelper::grouping($options)) {
 }
 $totals = ttReportHelper::getTotals($options);
 
-// TODO: Determine if we can create a timesheet out of this report.
-// There must be only one user, and nothing assigned to existing timesheets.
-$canCreateTimesheet = false;
-if ($user->isPluginEnabled('ts') && count($report_items) > 0 &&
-  ($user->can('manage_own_timesheets') || $user->can('manage_timesheets'))) {
-
-  $canCreateTimesheet = true; // Start with true and reset if we can't.
-  $first_user_id = null;
-  foreach ($report_items as $report_item) {
-    // Check user id.
-    if (!$first_user_id)
-      $first_user_id = $report_item['user_id'];
-    else {
-      if ($report_item['user_id'] != $first_user_id) {
-        // We have items for multiple users.
-        $canCreateTimesheet = false;
-        break;
-      }
-    }
-    // Check timesheet id.
-    if ($report_item['timesheet_id']) {
-      // We have an item already assigned to a timesheet.
-      $canCreateTimesheet = false;
-      break;
-    }
-  }
-  // Save user_id in session.
-  $bean->saveDetachedAttribute('timesheet_user_id', $first_user_id);
-
-  // TODO: Improve this for "view_all_reports" situation.
-  // We may need to add "manage_all_timesheets" right.
-}
-
 // Assign variables that are used to print subtotals.
 if ($report_items) {
   $smarty->assign('print_subtotals', true);
@@ -277,7 +244,6 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('report_items', $report_items);
 $smarty->assign('subtotals', $subtotals);
 $smarty->assign('totals', $totals);
-$smarty->assign('can_create_timesheet', $canCreateTimesheet);
 $smarty->assign('bean', $bean);
 $smarty->assign('title', $i18n->get('title.report').": ".$totals['start_date']." - ".$totals['end_date']);
 $smarty->assign('content_page_name', 'report.tpl');
