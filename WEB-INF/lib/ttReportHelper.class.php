@@ -285,11 +285,11 @@ class ttReportHelper {
     if ($user->isPluginEnabled('ts')) {
       $timesheet_option = $options['timesheet'];
       if ($timesheet_option == TIMESHEET_PENDING)
-        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.submit_status = 1 and ts.approval_status is null)";
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.submit_status = 1 and ts.approve_status is null)";
       else if ($timesheet_option == TIMESHEET_APPROVED)
-        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approval_status = 1)";
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approve_status = 1)";
       else if ($timesheet_option == TIMESHEET_NOT_APPROVED)
-        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approval_status = 0)";
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approve_status = 0)";
       else if ($options['show_timesheet'])
         $inner_joins .= " left join tt_timesheets ts on (l.timesheet_id = ts.id)"; // Left join for timesheet nme.
     }
@@ -371,11 +371,11 @@ class ttReportHelper {
       if ($user->isPluginEnabled('ts')) {
         $timesheet_option = $options['timesheet'];
         if ($timesheet_option == TIMESHEET_PENDING)
-          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.submit_status = 1 and ts.approval_status is null)";
+          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.submit_status = 1 and ts.approve_status is null)";
         else if ($timesheet_option == TIMESHEET_APPROVED)
-          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approval_status = 1)";
+          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approve_status = 1)";
         else if ($timesheet_option == TIMESHEET_NOT_APPROVED)
-          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approval_status = 0)";
+          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approve_status = 0)";
         else if ($options['show_timesheet'])
           $inner_joins .= " left join tt_timesheets ts on (ei.timesheet_id = ts.id)"; // Left join for timesheet name.
       }
@@ -566,11 +566,11 @@ class ttReportHelper {
     if ($user->isPluginEnabled('ts') && $options['timesheet']) {
       $timesheet_option = $options['timesheet'];
       if ($timesheet_option == TIMESHEET_PENDING)
-        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.submit_status = 1 and ts.approval_status is null)";
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.submit_status = 1 and ts.approve_status is null)";
       else if ($timesheet_option == TIMESHEET_APPROVED)
-        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approval_status = 1)";
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approve_status = 1)";
       else if ($timesheet_option == TIMESHEET_NOT_APPROVED)
-        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approval_status = 0)";
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approve_status = 0)";
     }
     // Prepare a query for time items.
     $sql = "select $time_part $units_part $cost_part from tt_log l $left_joins $inner_joins $where";
@@ -582,11 +582,11 @@ class ttReportHelper {
       if ($user->isPluginEnabled('ts') && $options['timesheet']) {
         $timesheet_option = $options['timesheet'];
         if ($timesheet_option == TIMESHEET_PENDING)
-          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.submit_status = 1 and ts.approval_status is null)";
+          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.submit_status = 1 and ts.approve_status is null)";
         else if ($timesheet_option == TIMESHEET_APPROVED)
-          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approval_status = 1)";
+          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approve_status = 1)";
         else if ($timesheet_option == TIMESHEET_NOT_APPROVED)
-          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approval_status = 0)";
+          $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approve_status = 0)";
       }
       $where = ttReportHelper::getExpenseWhere($options);
       $sql_for_expenses = "select null as time";
@@ -1605,11 +1605,11 @@ class ttReportHelper {
     if ($user->isPluginEnabled('ts') && $options['timesheet']) {
       $timesheet_option = $options['timesheet'];
       if ($timesheet_option == TIMESHEET_PENDING)
-        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.submit_status = 1 and ts.approval_status is null)";
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.submit_status = 1 and ts.approve_status is null)";
       else if ($timesheet_option == TIMESHEET_APPROVED)
-        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approval_status = 1)";
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approve_status = 1)";
       else if ($timesheet_option == TIMESHEET_NOT_APPROVED)
-        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approval_status = 0)";
+        $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approve_status = 0)";
     }
     $join .= $inner_joins;
     return $join;
@@ -1663,11 +1663,11 @@ class ttReportHelper {
     if ($user->isPluginEnabled('ts') && $options['timesheet']) {
       $timesheet_option = $options['timesheet'];
       if ($timesheet_option == TIMESHEET_PENDING)
-        $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.submit_status = 1 and ts.approval_status is null)";
+        $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.submit_status = 1 and ts.approve_status is null)";
       else if ($timesheet_option == TIMESHEET_APPROVED)
-        $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approval_status = 1)";
+        $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approve_status = 1)";
       else if ($timesheet_option == TIMESHEET_NOT_APPROVED)
-        $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approval_status = 0)";
+        $inner_joins .= " inner join tt_timesheets ts on (ei.timesheet_id = ts.id and ts.approve_status = 0)";
     }
     $join .= $inner_joins;
     return $join;

@@ -30,10 +30,10 @@
           <td>{$timesheet.client_name|escape}</td>
   {/if}
           <td>{if $timesheet.submit_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
-  {if $timesheet.approval_status == null}
+  {if $timesheet.approve_status == null}
           <td></td>
   {else}
-          <td>{if $timesheet.approval_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
+          <td>{if $timesheet.approve_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
   {/if}
           <td><a href="timesheet_view.php?id={$timesheet.id}">{$i18n.label.view}</a></td>
           <td><a href="timesheet_edit.php?id={$timesheet.id}">{$i18n.label.edit}</a></td>
@@ -66,10 +66,10 @@
           <td>{$timesheet.client_name|escape}</td>
     {/if}
           <td>{if $timesheet.submit_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
-    {if $timesheet.approval_status == null}
+    {if $timesheet.approve_status == null}
           <td></td>
     {else}
-          <td>{if $timesheet.approval_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
+          <td>{if $timesheet.approve_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
     {/if}
           <td><a href="timesheet_view.php?id={$timesheet.id}">{$i18n.label.view}</a></td>
           <td><a href="timesheet_edit.php?id={$timesheet.id}">{$i18n.label.edit}</a></td>
