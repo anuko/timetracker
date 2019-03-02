@@ -53,7 +53,7 @@ if ($request->isPost()) {
   $cl_status = $request->getParameter('status');
 } else {
   $cl_name = $timesheet['name'];
-  $cl_comment = $timesheet['submitter_comment'];
+  $cl_comment = $timesheet['comment'];
   $cl_status = $timesheet['status'];
 }
 
@@ -73,13 +73,13 @@ if ($request->isPost()) {
 
   if ($request->getParameter('btn_save')) {
     if ($err->no()) {
-      $existing_timesheet = ttTimesheetHelper::getTimesheetByName($cl_name, $timesheet['user_id']);
+      $existing_timesheet = ttTimesheetHelper::getTimesheetByName($cl_name);
       if (!$existing_timesheet || ($cl_timesheet_id == $existing_timesheet['id'])) {
          // Update timesheet information.
          if (ttTimesheetHelper::update(array(
            'id' => $cl_timesheet_id,
            'name' => $cl_name,
-           'submitter_comment' => $cl_comment,
+           'comment' => $cl_comment,
            'status' => $cl_status))) {
            header('Location: timesheets.php');
            exit();

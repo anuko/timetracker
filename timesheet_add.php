@@ -78,7 +78,7 @@ if ($request->isPost()) {
   if (!ttValidDate($cl_start)) $err->add($i18n->get('error.field'), $i18n->get('label.start_date'));
   if (!ttValidDate($cl_finish)) $err->add($i18n->get('error.field'), $i18n->get('label.end_date'));
   if (!ttValidString($cl_comment, true)) $err->add($i18n->get('error.field'), $i18n->get('label.comment'));
-  if ($err->no() && ttTimesheetHelper::getTimesheetByName($cl_name, $user_id)) $err->add($i18n->get('error.object_exists'));
+  if ($err->no() && ttTimesheetHelper::getTimesheetByName($cl_name)) $err->add($i18n->get('error.object_exists'));
   $fields = array('user_id' => $user_id,
     'name' => $cl_name,
     'client_id' => $cl_client,

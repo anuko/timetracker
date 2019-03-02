@@ -27,24 +27,22 @@
 // +----------------------------------------------------------------------+
 
 import('ttUserHelper');
-import('ttGroupHelper');
-import('form.ActionForm');
-import('ttReportHelper');
 
 // Class ttTimesheetHelper is used to help with project related tasks.
 class ttTimesheetHelper {
 
   // The getTimesheetByName looks up a project by name.
-  static function getTimesheetByName($name, $user_id) {
+  static function getTimesheetByName($name) {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
     $sql = "select id from tt_timesheets".
       " where group_id = $group_id and org_id = $org_id and user_id = $user_id and name = ".$mdb2->quote($name).
-      " and (status = 1 or status = 0)";
+      " and status is not null";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -150,7 +148,7 @@ class ttTimesheetHelper {
     if ($user->isClient())
       $client_part = "and ts.client_id = $user->client_id";
 
-    $sql = "select ts.id, ts.name, ts.client_id, c.name as client_name, ts.submit_status, ts.approval_status from tt_timesheets ts".
+    $sql = "select ts.id, ts.name, ts.client_id, c.name as client_name, ts.submit_status, ts.approve_status from tt_timesheets ts".
       " left join tt_clients c on (c.id = ts.client_id)".
       " where ts.status = 0 and ts.group_id = $group_id and ts.org_id = $org_id and ts.user_id = $user_id".
       " $client_part order by ts.name";
@@ -227,10 +225,10 @@ class ttTimesheetHelper {
 
     $timesheet_id = $fields['id']; // Timesheet we are updating.
     $name = $fields['name']; // Timesheet name.
-    $submitter_comment = $fields['submitter_comment'];
-    $status = $fields['status']; // Project status.
+    $comment = $fields['comment'];
+    $status = $fields['status']; // Timesheet status.
 
-    $sql = "update tt_timesheets set name = ".$mdb2->quote($name).", submitter_comment = ".$mdb2->quote($submitter_comment).
+    $sql = "update tt_timesheets set name = ".$mdb2->quote($name).", comment = ".$mdb2->quote($comment).
       ", status = ".$mdb2->quote($status).
       " where id = $timesheet_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
