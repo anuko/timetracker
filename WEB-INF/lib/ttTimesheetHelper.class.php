@@ -181,24 +181,19 @@ class ttTimesheetHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    // Handle time records.
+    // Handle tt_log records.
     $sql = "update tt_log set timesheet_id = null".
-      " where timesheet_id = $timesheet_id and group_id = $group_id and org_id = $org_id";
-    $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // Handle expense items.
-    $sql = "update tt_expense_items set timesheet_id = null".
-      " where timesheet_id = $timesheet_id and group_id = $group_id and org_id = $org_id";
+      " where timesheet_id = $timesheet_id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
     // Delete timesheet.
     $sql = "update tt_timesheets set status = null".
-      " where id = $timesheet_id and group_id = $group_id and org_id = $org_id";
+      " where id = $timesheet_id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
@@ -208,6 +203,7 @@ class ttTimesheetHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
@@ -218,22 +214,9 @@ class ttTimesheetHelper {
 
     $sql = "update tt_timesheets set name = ".$mdb2->quote($name).", comment = ".$mdb2->quote($comment).
       ", status = ".$mdb2->quote($status).
-      " where id = $timesheet_id and group_id = $group_id and org_id = $org_id";
+      " where id = $timesheet_id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
-  }
-
-  // isUserValid function is used during access checks and determines whether user id, passed in post, is valid
-  // in current context.
-  static function isUserValid($user_id) {
-    // We have to cover several situations.
-
-    global $user;
-
-    // TODO: we are currently re-designing timesheets.
-    // Clients are not supposed to view them at all.
-    // And the post will change on_behalf user, to keep things consistent.
-    return false;
   }
 
   // getReportOptions prepares $options array to be used with ttReportHelper
@@ -245,11 +228,6 @@ class ttTimesheetHelper {
     $group_by_project = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
 
     $options['timesheet_id'] = $timesheet['id'];
-    $options['client_id'] = $timesheet['client_id'];
-    $options['users'] = $timesheet['user_id'];
-    $options['show_durarion'] = 1;
-    $options['show_cost'] = 1; // To include expenses.
-    $options['show_totals_only'] = 1;
     $options['group_by1'] = 'date';
     if ($group_by_client || $group_by_project) {
       $options['group_by2'] = $group_by_client ? 'client' : 'project';

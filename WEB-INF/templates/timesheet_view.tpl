@@ -37,20 +37,17 @@
       <tr>
         <td class="tableHeader">{$group_by_header|escape}</td>
         <td class="tableHeaderCentered" width="5%">{$i18n.label.duration}</td>
-        <td class="tableHeaderCentered" width="5%">{$i18n.label.cost}</td>
       </tr>
   {foreach $subtotals as $subtotal}
       <tr class="rowReportSubtotal">
         <td class="cellLeftAlignedSubtotal">{if $subtotal['name']}{$subtotal['name']|escape}{else}&nbsp;{/if}</td>
         <td class="cellRightAlignedSubtotal">{$subtotal['time']}</td>
-        <td class="cellRightAlignedSubtotal">{if $user->can('manage_invoices') || $user->isClient()}{$subtotal['cost']}{else}{$subtotal['expenses']}{/if}</td>
       </tr>
   {/foreach}
       <tr><td>&nbsp;</td></tr>
       <tr class="rowReportSubtotal">
         <td class="cellLeftAlignedSubtotal">{$i18n.label.total}</td>
         <td nowrap class="cellRightAlignedSubtotal">{$totals['time']}</td>
-        <td nowrap class="cellRightAlignedSubtotal">{$user->currency|escape} {if $user->can('manage_invoices') || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>
       </tr>
       </table>
 
