@@ -63,7 +63,7 @@ if ($showSubmit) {
   $showApprovers = count($approvers) >= 1;
 }
 $canApprove = $user->can('approve_timesheets') || $user->can('approve_own_timesheets');
-$showApprove = $timesheet['submit_status'] && $timesheet['approval_status'] == null;
+$showApprove = $timesheet['submit_status'] && $timesheet['approve_status'] == null;
 
 // Add a form with controls.
 $form = new Form('timesheetForm');

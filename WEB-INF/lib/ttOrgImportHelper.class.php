@@ -283,11 +283,15 @@ class ttOrgImportHelper {
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
           'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'project_id' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
           'name' => $attrs['NAME'],
+          'comment' => $attrs['COMMENT'],
+  // TODO: add handling of these.
+  //`start_date` date NOT NULL,                      # timesheet start date
+  //`end_date` date NOT NULL,                        # timesheet end date
           'submit_status' => $attrs['SUBMIT_STATUS'],
-          'submitter_comment' => $attrs['SUBMITTER_COMMENT'],
-          'approval_status' => $attrs['APPROVAL_STATUS'],
-          'manager_comment' => $attrs['MANAGER_COMMENT'],
+          'approve_status' => $attrs['APPROVE_STATUS'],
+          'approve_comment' => $attrs['APPROVE_COMMENT'],
           'status' => $attrs['STATUS']));
         if ($timesheet_id) {
           // Add a mapping.

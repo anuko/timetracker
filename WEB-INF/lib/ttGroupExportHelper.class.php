@@ -331,11 +331,12 @@ class ttGroupExportHelper {
         $timesheet_part = $this->indentation.'    '."<timesheet id=\"".$this->timesheetMap[$timesheet_item['id']]."\"";
         $timesheet_part .= " user_id=\"".$this->userMap[$timesheet_item['user_id']]."\"";
         $timesheet_part .= " client_id=\"".$this->clientMap[$timesheet_item['client_id']]."\"";
+        $timesheet_part .= " project_id=\"".$this->projectMap[$timesheet_item['project_id']]."\"";
         $timesheet_part .= " name=\"".htmlspecialchars($timesheet_item['name'])."\"";
         $timesheet_part .= " submit_status=\"".$timesheet_item['submit_status']."\"";
-        $timesheet_part .= " submitter_comment=\"".htmlspecialchars($timesheet_item['submitter_name'])."\"";
-        $timesheet_part .= " approval_status=\"".$timesheet_item['approval_status']."\"";
-        $timesheet_part .= " manager_comment=\"".htmlspecialchars($timesheet_item['manager_comment'])."\"";
+        $timesheet_part .= " comment=\"".htmlspecialchars($timesheet_item['comment'])."\"";
+        $timesheet_part .= " approve_status=\"".$timesheet_item['approve_status']."\"";
+        $timesheet_part .= " approve_comment=\"".htmlspecialchars($timesheet_item['approve_comment'])."\"";
         $timesheet_part .= " status=\"".$timesheet_item['status']."\"";
         $timesheet_part .= "></timesheet>\n";
         fwrite($this->file, $timesheet_part);
