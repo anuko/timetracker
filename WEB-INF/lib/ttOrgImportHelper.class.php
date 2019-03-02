@@ -756,7 +756,6 @@ class ttOrgImportHelper {
     $user_id = (int) $fields['user_id'];
     $client_id = $fields['client_id'];
     $project_id = $fields['project_id'];
-    $timesheet_id = $fields['timesheet_id'];
     $name = $fields['name'];
     $cost = str_replace(',', '.', $fields['cost']);
     $invoice_id = $fields['invoice_id'];
@@ -766,10 +765,10 @@ class ttOrgImportHelper {
     $created = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
 
     $sql = "insert into tt_expense_items".
-      " (date, user_id, group_id, org_id, client_id, project_id, timesheet_id, name,".
+      " (date, user_id, group_id, org_id, client_id, project_id, name,".
       " cost, invoice_id, approved, paid, created, created_ip, created_by, status)".
       " values (".$mdb2->quote($date).", $user_id, $group_id, $org_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).
-      ", ".$mdb2->quote($timesheet_id).", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).
+      ", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).
       ", $approved, $paid $created, ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));

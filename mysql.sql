@@ -432,7 +432,6 @@ CREATE TABLE `tt_expense_items` (
   `org_id` int(11) default NULL,          # organization id
   `client_id` int(11) default NULL,       # client id
   `project_id` int(11) default NULL,      # project id
-  `timesheet_id` int(11) default NULL,    # timesheet id
   `name` text NOT NULL,                   # expense item name (what is an expense for)
   `cost` decimal(10,2) default '0.00',    # item cost (including taxes, etc.)
   `invoice_id` int(11) default NULL,      # invoice id
@@ -454,7 +453,6 @@ create index user_idx on tt_expense_items(user_id);
 create index group_idx on tt_expense_items(group_id);
 create index client_idx on tt_expense_items(client_id);
 create index project_idx on tt_expense_items(project_id);
-create index timesheet_idx on tt_expense_items(timesheet_id);
 create index invoice_idx on tt_expense_items(invoice_id);
 
 
@@ -527,4 +525,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.50', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.51', now()); # TODO: change when structure changes.
