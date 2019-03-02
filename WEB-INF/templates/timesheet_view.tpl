@@ -49,6 +49,7 @@
         <td class="cellLeftAlignedSubtotal">{$i18n.label.total}</td>
         <td nowrap class="cellRightAlignedSubtotal">{$totals['time']}</td>
       </tr>
+      <tr><td>&nbsp;</td></tr>
       </table>
 
 {$forms.timesheetForm.open}

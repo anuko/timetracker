@@ -60,7 +60,7 @@ $totals = ttReportHelper::getTotals($options);
 // Determine which controls to show and obtain date for them.
 $showSubmit = !$timesheet['submit_status'];
 if ($showSubmit) {
-  $approvers = ttTimesheetHelper::getApprovers($timesheet['user_id']);
+  $approvers = ttTimesheetHelper::getApprovers();
   $showApprovers = count($approvers) >= 1;
 }
 $canApprove = $user->can('approve_timesheets') || $user->can('approve_own_timesheets');

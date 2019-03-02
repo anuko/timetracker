@@ -240,10 +240,11 @@ class ttTimesheetHelper {
 
   // getApprovers obtains a list of users who can approve a timesheet for a given user
   // and also have an email to receive a notification about it.
-  static function getApprovers($user_id) {
+  static function getApprovers() {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
@@ -263,20 +264,22 @@ class ttTimesheetHelper {
     return $approvers;
   }
 
-  // submitTimesheet marks a timesheet as submitted and sends an email to an approver.
+  // submitTimesheet marks a timesheet as submitted and also sends an email
+  // to a selected approver.
   static function submitTimesheet($fields) {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    // First, mark a timesheet as submitted.
+    // First, mark timesheet as submitted.
     // Even if mail part below does not work, this will get us a functioning workflow
-    // (without email notifications).
+    // without email notification.
     $timesheet_id = $fields['timesheet_id'];
     $sql = "update tt_timesheets set submit_status = 1".
-      " where id = $timesheet_id and group_id = $group_id and org_id = $org_id";
+      " where id = $timesheet_id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -291,17 +294,18 @@ class ttTimesheetHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    // First, mark a timesheet as approved.
+    // First, mark timesheet as approved.
     // Even if mail part below does not work, this will get us a functioning workflow
-    // (without email notifications).
+    // without email notification.
     $timesheet_id = $fields['timesheet_id'];
     $comment = $fields['comment'];
 
     $sql = "update tt_timesheets set approve_status = 1, approve_comment = ".$mdb2->quote($comment).
-      " where id = $timesheet_id and submit_status = 1 and group_id = $group_id and org_id = $org_id";
+      " where id = $timesheet_id and submit_status = 1 and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
@@ -314,17 +318,18 @@ class ttTimesheetHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    // First, mark a timesheet as disapproved.
+    // First, mark timesheet as disapproved.
     // Even if mail part below does not work, this will get us a functioning workflow
-    // (without email notifications).
+    // without email notification.
     $timesheet_id = $fields['timesheet_id'];
     $comment = $fields['comment'];
 
     $sql = "update tt_timesheets set approve_status = 0, approve_comment = ".$mdb2->quote($comment).
-      " where id = $timesheet_id and submit_status = 1 and group_id = $group_id and org_id = $org_id";
+      " where id = $timesheet_id and submit_status = 1 and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
