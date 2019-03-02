@@ -83,7 +83,7 @@ class ttTimesheetHelper {
 
     $last_id = $mdb2->lastInsertID('tt_timesheets', 'id');
 
-    // Associate time items with timesheet.
+    // Associate tt_log items with timesheet.
     if (isset($fields['client'])) $client_id = (int) $fields['client_id'];
     if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
     // sql parts.
@@ -102,31 +102,25 @@ class ttTimesheetHelper {
   }
 
   // The getActiveTimesheets obtains active timesheets for a user.
-  static function getActiveTimesheets($user_id)
+  static function getActiveTimesheets()
   {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    // $addPaidStatus = $user->isPluginEnabled('ps');
     $result = array();
-
-    if ($user->isClient())
-      $client_part = "and ts.client_id = $user->client_id";
-
-    $sql = "select ts.id, ts.name, ts.client_id, c.name as client_name, ts.submit_status, ts.approve_status from tt_timesheets ts".
+    $sql = "select ts.id, ts.name, ts.client_id, c.name as client_name,".
+      " ts.submit_status, ts.approve_status from tt_timesheets ts".
       " left join tt_clients c on (c.id = ts.client_id)".
       " where ts.status = 1 and ts.group_id = $group_id and ts.org_id = $org_id and ts.user_id = $user_id".
-      " $client_part order by ts.name";
+      " order by ts.name";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
-      $dt = new DateAndTime(DB_DATEFORMAT);
       while ($val = $res->fetchRow()) {
-        //if ($addPaidStatus)
-        //  $val['paid'] = ttTimesheetHelper::isPaid($val['id']);
         $result[] = $val;
       }
     }
@@ -134,31 +128,25 @@ class ttTimesheetHelper {
   }
 
   // The getInactiveTimesheets obtains inactive timesheets for a user.
-  static function getInactiveTimesheets($user_id)
+  static function getInactiveTimesheets()
   {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    // $addPaidStatus = $user->isPluginEnabled('ps');
     $result = array();
-
-    if ($user->isClient())
-      $client_part = "and ts.client_id = $user->client_id";
-
-    $sql = "select ts.id, ts.name, ts.client_id, c.name as client_name, ts.submit_status, ts.approve_status from tt_timesheets ts".
+    $sql = "select ts.id, ts.name, ts.client_id, c.name as client_name,".
+      " ts.submit_status, ts.approve_status from tt_timesheets ts".
       " left join tt_clients c on (c.id = ts.client_id)".
       " where ts.status = 0 and ts.group_id = $group_id and ts.org_id = $org_id and ts.user_id = $user_id".
-      " $client_part order by ts.name";
+      " order by ts.name";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
-      $dt = new DateAndTime(DB_DATEFORMAT);
       while ($val = $res->fetchRow()) {
-        //if ($addPaidStatus)
-        //  $val['paid'] = ttTimesheetHelper::isPaid($val['id']);
         $result[] = $val;
       }
     }

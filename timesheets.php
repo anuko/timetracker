@@ -90,8 +90,8 @@ if ($user->can('track_time')) {
   }
 }
 
-$active_timesheets = ttTimesheetHelper::getActiveTimesheets($user_id);
-$inactive_timesheets = ttTimesheetHelper::getInactiveTimesheets($user_id);
+$active_timesheets = ttTimesheetHelper::getActiveTimesheets();
+$inactive_timesheets = ttTimesheetHelper::getInactiveTimesheets();
 
 $showClient = $user->isPluginEnabled('cl');
 

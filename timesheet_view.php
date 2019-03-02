@@ -28,6 +28,7 @@
 
 require_once('initialize.php');
 import('ttTimesheetHelper');
+import('ttReportHelper');
 
 // Access checks.
 if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
