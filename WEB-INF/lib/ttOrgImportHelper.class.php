@@ -286,9 +286,8 @@ class ttOrgImportHelper {
           'project_id' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
           'name' => $attrs['NAME'],
           'comment' => $attrs['COMMENT'],
-  // TODO: add handling of these.
-  //`start_date` date NOT NULL,                      # timesheet start date
-  //`end_date` date NOT NULL,                        # timesheet end date
+          'start_date' => $attrs['START_DATE'],
+          'end_date' => $attrs['END_DATE'],
           'submit_status' => $attrs['SUBMIT_STATUS'],
           'approve_status' => $attrs['APPROVE_STATUS'],
           'approve_comment' => $attrs['APPROVE_COMMENT'],
@@ -916,19 +915,23 @@ class ttOrgImportHelper {
     $group_id = (int) $fields['group_id'];
     $org_id = (int) $fields['org_id'];
     $client_id = $fields['client_id'];
+    $project_id = $fields['project_id'];
     $name = $fields['name'];
+    $comment = $fields['comment'];
+    $start_date = $fields['start_date'];
+    $end_date = $fields['end_date'];
     $submit_status = $fields['submit_status'];
-    $submitter_comment = $fields['submitter_comment'];
-    $approval_status = $fields['approval_status'];
-    $manager_comment = $fields['manager_comment'];
+    $approve_status = $fields['approve_status'];
+    $approve_comment = $fields['approve_comment'];
     $status = $fields['status'];
 
     // Insert a new timesheet record.
-    $sql = "insert into tt_timesheets (user_id, group_id, org_id, client_id, name,".
-      " submit_status, submitter_comment, approval_status, manager_comment, status)".
-      " values($user_id, $group_id, $org_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($name).", ".
-      $mdb2->quote($fields['submit_status']).", ".$mdb2->quote($fields['submiter_comment']).", ".
-      $mdb2->quote($fields['approval_status']).", ".$mdb2->quote($fields['manager_comment']).", ".$mdb2->quote($fields['status']).")";
+    $sql = "insert into tt_timesheets (user_id, group_id, org_id, client_id, project_id, name,".
+      " comment, start_date, end_date, submit_status, approve_status, approve_comment, status)".
+      " values($user_id, $group_id, $org_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).", ".$mdb2->quote($name).", ".
+      $mdb2->quote($comment).", ".$mdb2->quote($start_date).", ".$mdb2->quote($end_date).", ".
+      $mdb2->quote($submit_status).", ".$mdb2->quote($approve_status).", ".
+      $mdb2->quote($approve_comment).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
