@@ -87,6 +87,7 @@ if ($request->isPost()) {
     'end_date' => $cl_finish,
     'comment' => $cl_comment);
   if ($err->no() && !ttTimesheetHelper::timesheetItemsExist($fields)) $err->add($i18n->get('error.no_records'));
+  if ($err->no() && ttTimesheetHelper::overlaps($fields)) $err->add($i18n->get('error.overlap'));
   // Finished validating user input.
 
   if ($err->no()) {

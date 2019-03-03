@@ -374,4 +374,44 @@ class ttTimesheetHelper {
 
     return false;
   }
+
+  // The overlaps function determines if a new timesheet overlaps with
+  // an already existing timesheet.
+  static function overlaps($fields) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    if (isset($fields['client_id'])) $client_id = (int) $fields['client_id'];
+    if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
+
+    $start_date = new DateAndTime($user->date_format, $fields['start_date']);
+    $start = $start_date->toString(DB_DATEFORMAT);
+    $quoted_start = $mdb2->quote($start);
+
+    $end_date = new DateAndTime($user->date_format, $fields['end_date']);
+    $end = $end_date->toString(DB_DATEFORMAT);
+    $quoted_end = $mdb2->quote($end);
+
+    // sql parts.
+    if ($client_id) $client_part = " and client_id = $client_id";
+    if ($project_id) $project_part = " and project_id = $project_id";
+
+    $sql = "select id from tt_timesheets".
+      " where status is not null $client_part $project_part".
+      " and (($quoted_start >= start_date and $quoted_start <= end_date)".
+      "   or ($quoted_end >= start_date and $quoted_end <= end_date))".
+      " and user_id = $user_id and group_id = $group_id and org_id = $org_id";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      if ($val['id']) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
