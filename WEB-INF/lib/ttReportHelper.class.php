@@ -639,9 +639,10 @@ class ttReportHelper {
     $org_id = $user->org_id;
 
     if ($time_log_ids) {
-      $sql = "update tt_log l".
-        // TODO: inner join does not work properly for de-assignment. Improve.
-        // " inner join tt_timesheets ts on (ts.id = $timesheet_id and ts.approve_status is null)".
+      if ($timesheet_id)
+        $inner_join = " inner join tt_timesheets ts on (ts.id = $timesheet_id and ts.approve_status is null)";
+
+      $sql = "update tt_log l $inner_join".
         " set l.timesheet_id = ".$mdb2->quote($timesheet_id).
         " where l.id in(".join(', ', $time_log_ids).") and l.user_id = $user_id and l.group_id = $group_id and l.org_id = $org_id";
       $affected = $mdb2->exec($sql);

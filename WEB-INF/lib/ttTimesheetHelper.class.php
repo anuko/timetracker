@@ -442,6 +442,7 @@ class ttTimesheetHelper {
     // Parts for client and project.
     if ($options['client_id']) $client_part = ' and client_id = '.(int)$options['client_id'];
     if ($options['project_id']) $project_part = ' and project_id = '.(int)$options['project_id'];
+    // TODO: test and fix the above for NULL client and project ids...
 
     // Determine start and end dates.
     $dateFormat = $user->getDateFormat();
