@@ -414,4 +414,14 @@ class ttTimesheetHelper {
     }
     return false;
   }
+
+  // The canAssign function determines if we can show controls on a report page
+  // for timesheet assignment.
+  //
+  // Conditions:
+  // - Report date range, client_id, and project_id match an existing timesheet
+  //   with approved_status null.
+  static function canAssign($options) {
+    return false;
+  }
 }

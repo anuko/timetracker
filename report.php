@@ -73,21 +73,29 @@ if ($request->isPost()) $bean->loadBean();
 
 $client_id = $bean->getAttribute('client');
 
-// Do we need to show checkboxes? We show them if we allow setting approved or paid status,
-// and also when we can assign / deassign records to invoces.
+// Do we need to show checkboxes? We show them in the following 4 situations:
+// - We can approve items.
+// - We can mark items as paid.
+// - We can sssign items to invoices.
+// - We can assign items to a timesheet.
+// Determine these conditions separately.
 if ($bean->getAttribute('chapproved') && ($user->can('approve_reports') || $user->can('approve_all_eports')))
-  $showForApproved = true;
-if ($bean->getAttribute('chpaid') ||
-   ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by1')) && !$user->isClient())) {
-  if ($user->can('manage_invoices'))
-    $showForInvoicesOrPaid = true;
-}
-$use_checkboxes = $showForApproved || $showForInvoicesOrPaid;
+  $useMarkApproved = true;
+if ($bean->getAttribute('chpaid') && $user->can('manage_invoices'))
+  $useMarkPaid = true;
+if ($bean->getAttribute('chinvoice') && $client_id && 'no_grouping' == $bean->getAttribute('group_by1') && !$user->isClient() && $user->can('manage_invoices'))
+  $useAssignToInvoice = true;
+//if ($bean->getAttribute('chtimesheet') && ($user->can('track_own_time') || $user->can('track_time')))
+//  $useAssignToTimesheet = true; // TODO: add a check for timesheet capability.
+//if (ttTimesheetHelper::canAssign($options))
+//  $useAssignToTimesheet = true;
+
+$use_checkboxes = $useMarkApproved || $useMarkPaid || $useAssignToInvoice || $useAssignToTimesheet;
 if ($use_checkboxes)
   $smarty->assign('use_checkboxes', true);
 
 // Controls for "Mark approved" block.
-if ($showForApproved) {
+if ($useMarkApproved) {
   $mark_approved_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'mark_approved_select_options',
@@ -103,7 +111,7 @@ if ($showForApproved) {
 }
 
 // Controls for "Mark paid" block.
-if ($user->can('manage_invoices') && $bean->getAttribute('chpaid')) {
+if ($useMarkPaid) {
   $mark_paid_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'mark_paid_select_options',
@@ -119,8 +127,7 @@ if ($user->can('manage_invoices') && $bean->getAttribute('chpaid')) {
 }
 
 // Controls for "Assign to invoice" block.
-if ($user->can('manage_invoices') &&
-  ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by1')) && !$user->isClient())) {
+if ($useAssignToInvoice) {
   // Client is selected and we are displaying the invoice column.
   $recent_invoices = ttGroupHelper::getRecentInvoices($client_id);
   if ($recent_invoices) {
