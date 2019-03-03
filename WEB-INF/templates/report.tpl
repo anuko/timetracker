@@ -166,7 +166,7 @@
   </td>
 </tr>
 </table>
-{if $report_items && ($use_mark_approved || $use_mark_paid || $use_assign_to_invoice)}
+{if $report_items && ($use_mark_approved || $use_mark_paid || $use_assign_to_invoice || $use_assign_to_timesheet)}
 <table width="720" cellspacing="0" cellpadding="0" border="0">
   {if $use_mark_approved}
   <tr>
@@ -190,7 +190,16 @@
   <tr>
     <td align="right">
       <table>
-        <tr><td>{$i18n.form.report.assign_to_invoice}: {$forms.reportViewForm.assign_invoice_select_options.control} {$forms.reportViewForm.recent_invoice.control} {$forms.reportViewForm.btn_assign.control}</td></tr>
+        <tr><td>{$i18n.form.report.assign_to_invoice}: {$forms.reportViewForm.assign_invoice_select_options.control} {$forms.reportViewForm.recent_invoice.control} {$forms.reportViewForm.btn_assign_invoice.control}</td></tr>
+      </table>
+    </td>
+  </tr>
+  {/if}
+  {if $use_assign_to_timesheet}
+  <tr>
+    <td align="right">
+      <table>
+        <tr><td>{$i18n.form.report.assign_to_timesheet}: {$forms.reportViewForm.assign_timesheet_select_options.control} {$forms.reportViewForm.timesheet.control} {$forms.reportViewForm.btn_assign_timesheet.control}</td></tr>
       </table>
     </td>
   </tr>

@@ -415,13 +415,59 @@ class ttTimesheetHelper {
     return false;
   }
 
-  // The canAssign function determines if we can show controls on a report page
-  // for timesheet assignment.
+  // The getMatchingTimesheets function retrieves a timesheet that "matches"
+  // a report for an option to assign report items to it.
   //
-  // Conditions:
-  // - Report date range, client_id, and project_id match an existing timesheet
-  //   with approved_status null.
-  static function canAssign($options) {
-    return false;
+  // Condition: report range is fully enclosed in an existing timesheet with
+  // matching client_id and project_id and null approved_status.
+  static function getMatchingTimesheets($options) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    // Check users.
+    if (isset($options['users'])) {
+      $comma_separated = $options['users'];
+      $users = explode(',', $comma_separated);
+      if (count($users) > 1 || $users[0] != $user->getUser())
+        return false;
+    }
+
+    // No timesheets for expenses.
+    if ($options['show_cost'] && $user->isPluginEnabled('ex')) return false;
+    
+    // Parts for client and project.
+    if ($options['client_id']) $client_part = ' and client_id = '.(int)$options['client_id'];
+    if ($options['project_id']) $project_part = ' and project_id = '.(int)$options['project_id'];
+
+    // Determine start and end dates.
+    $dateFormat = $user->getDateFormat();
+    if ($options['period'])
+      $period = new Period($options['period'], new DateAndTime($dateFormat));
+    else {
+      $period = new Period();
+      $period->setPeriod(
+        new DateAndTime($dateFormat, $options['period_start']),
+        new DateAndTime($dateFormat, $options['period_end']));
+    }
+    $start = $period->getStartDate(DB_DATEFORMAT);
+    $end = $period->getEndDate(DB_DATEFORMAT);
+
+    $result = false;
+    $sql = "select id, name from tt_timesheets".
+      " where ".$mdb2->quote($start)." >= start_date and ".$mdb2->quote($end)." <= end_date".
+      "$client_part $project_part".
+      " and user_id = $user_id and group_id = $group_id and org_id = $org_id".
+      " and approve_status is null and status is not null";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
   }
 }

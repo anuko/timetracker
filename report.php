@@ -31,6 +31,7 @@ import('form.Form');
 import('form.ActionForm');
 import('ttReportHelper');
 import('ttGroupHelper');
+import('ttTimesheetHelper');
 
 // Access check.
 if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports') || ttAccessAllowed('view_all_reports')  || ttAccessAllowed('view_client_reports'))) {
@@ -56,6 +57,12 @@ if ($user->isPluginEnabled('iv')) {
   $cl_recent_invoice_option = $request->getParameter('recent_invoice', ($request->isPost() ? null : @$_SESSION['recent_invoice_option']));
   $_SESSION['recent_invoice_option'] = $cl_recent_invoice_option;
 }
+if ($user->isPluginEnabled('ts')) {
+  $cl_assign_timesheet_select_option = $request->getParameter('assign_timesheet_select_options', ($request->isPost() ? null : @$_SESSION['assign_timesheet_select_option']));
+  $_SESSION['assign_timesheet_select_option'] = $cl_assign_timesheet_select_option;
+  $cl_timesheet_option = $request->getParameter('timesheet', ($request->isPost() ? null : @$_SESSION['timesheet_option']));
+  $_SESSION['timesheet_option'] = $cl_timesheet_option;
+}
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
@@ -72,6 +79,7 @@ $bean = new ActionForm('reportBean', new Form('reportForm'), $request);
 if ($request->isPost()) $bean->loadBean();
 
 $client_id = $bean->getAttribute('client');
+$options = ttReportHelper::getReportOptions($bean);
 
 // Do we need to show checkboxes? We show them in the following 4 situations:
 // - We can approve items.
@@ -85,10 +93,10 @@ if ($bean->getAttribute('chpaid') && $user->can('manage_invoices'))
   $useMarkPaid = true;
 if ($bean->getAttribute('chinvoice') && $client_id && 'no_grouping' == $bean->getAttribute('group_by1') && !$user->isClient() && $user->can('manage_invoices'))
   $useAssignToInvoice = true;
-//if ($bean->getAttribute('chtimesheet') && ($user->can('track_own_time') || $user->can('track_time')))
-//  $useAssignToTimesheet = true; // TODO: add a check for timesheet capability.
-//if (ttTimesheetHelper::canAssign($options))
-//  $useAssignToTimesheet = true;
+if ($bean->getAttribute('chtimesheet')) {
+  $timesheets = ttTimesheetHelper::getMatchingTimesheets($options);
+  if ($timesheets) $useAssignToTimesheet = true;
+}
 
 $use_checkboxes = $useMarkApproved || $useMarkPaid || $useAssignToInvoice || $useAssignToTimesheet;
 if ($use_checkboxes)
@@ -142,9 +150,26 @@ if ($useAssignToInvoice) {
       'datakeys'=>array('id','name'),
       'value'=>$cl_recent_invoice_option,
       'empty'=>array(''=>$i18n->get('dropdown.select_invoice'))));
-    $form->addInput(array('type'=>'submit','name'=>'btn_assign','value'=>$i18n->get('button.submit')));
+    $form->addInput(array('type'=>'submit','name'=>'btn_assign_invoice','value'=>$i18n->get('button.submit')));
     $smarty->assign('use_assign_to_invoice', true);
   }
+}
+
+// Controls for "Assign to timesheet" block.
+if ($useAssignToTimesheet) {
+  $assign_timesheet_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
+  $form->addInput(array('type'=>'combobox',
+      'name'=>'assign_timesheet_select_options',
+      'data'=>$assign_timesheet_select_options,
+      'value'=>$cl_assign_timesheet_select_option));
+  $form->addInput(array('type'=>'combobox',
+      'name'=>'timesheet',
+      'data'=>$timesheets,
+      'datakeys'=>array('id','name'),
+      'value'=>$cl_timesheet_option,
+      'empty'=>array(''=>$i18n->get('dropdown.select_timesheet'))));
+  $form->addInput(array('type'=>'submit','name'=>'btn_assign_timesheet','value'=>$i18n->get('button.submit')));
+  $smarty->assign('use_assign_to_timesheet', true);
 }
 
 if ($request->isPost()) {
@@ -152,7 +177,8 @@ if ($request->isPost()) {
   // Validate parameters and at the same time build arrays of record ids.
   if (($request->getParameter('btn_mark_approved') && 2 == $request->getParameter('mark_approved_select_options'))
        || ($request->getParameter('btn_mark_paid') && 2 == $request->getParameter('mark_paid_select_options'))
-       || ($request->getParameter('btn_assign') && 2 == $request->getParameter('assign_invoice_select_options'))) {
+       || ($request->getParameter('btn_assign_invoice') && 2 == $request->getParameter('assign_invoice_select_options'))
+       || ($request->getParameter('btn_assign_timesheet') && 2 == $request->getParameter('assign_timesheet_select_options'))) {
     // We act on selected records. Are there any?
     foreach($_POST as $key => $val) {
       if ('log_id_' == substr($key, 0, 7))
@@ -205,7 +231,7 @@ if ($request->isPost()) {
       exit();
     }
 
-    if ($request->getParameter('btn_assign')) {
+    if ($request->getParameter('btn_assign_invoice')) {
       // User clicked the Submit button to assign all or some items to a recent invoice.
 
       // Determine invoice id.
@@ -219,10 +245,23 @@ if ($request->isPost()) {
       header('Location: report.php');
       exit();
     }
+
+    if ($request->getParameter('btn_assign_timesheet')) {
+      // User clicked the Submit button to assign all or some items to a timesheet.
+
+      // Determine invoice id.
+      $timesheet_id = $request->getParameter('timesheet');
+
+      // Assign as requested.
+      if ($time_log_ids) {
+        ttReportHelper::assignToTimesheet($timesheet_id, $time_log_ids);
+      }
+      // Re-display this form.
+      header('Location: report.php');
+      exit();
+    }
   }
 } // isPost
-
-$options = ttReportHelper::getReportOptions($bean);
 
 $report_items = ttReportHelper::getItems($options);
 // Store record ids in session in case user wants to act on records such as marking them all paid.
