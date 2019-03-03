@@ -370,6 +370,8 @@ $i18n_key_words = array(
 'dropdown.clients' => 'klijenti',
 'dropdown.select' => '--- odaberi ---',
 'dropdown.select_invoice' => '--- odaberi račun ---',
+// TODO: translate the following.
+// 'dropdown.select_timesheet' => '--- select timesheet ---',
 'dropdown.status_active' => 'aktivan',
 'dropdown.status_inactive' => 'neaktivan',
 'dropdown.delete' => 'obriši',

@@ -357,6 +357,8 @@ $i18n_key_words = array(
 'dropdown.clients' => 'πελάτες',
 'dropdown.select' => '--- επιλογή ---',
 'dropdown.select_invoice' => '--- επιλογή τιμολόγιου ---',
+// TODO: translate the following.
+// 'dropdown.select_timesheet' => '--- select timesheet ---',
 'dropdown.status_active' => 'ενεργός',
 'dropdown.status_inactive' => 'ανένεργος',
 'dropdown.delete' => 'διαγραφή',

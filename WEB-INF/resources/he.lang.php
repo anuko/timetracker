@@ -390,6 +390,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'dropdown.select' => '--- select ---',
 'dropdown.select_invoice' => '--- בחר חשבונית ---',
+// TODO: translate the following.
+// 'dropdown.select_timesheet' => '--- select timesheet ---',
 'dropdown.status_active' => 'פעיל',
 'dropdown.status_inactive' => 'לא פעיל',
 // TODO: translate the following.

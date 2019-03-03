@@ -380,6 +380,7 @@ $i18n_key_words = array(
 'dropdown.select' => '--- vyberte ---',
 // TODO: translate the following.
 // 'dropdown.select_invoice' => '--- select invoice ---',
+// 'dropdown.select_timesheet' => '--- select timesheet ---',
 'dropdown.status_active' => 'aktívny',
 'dropdown.status_inactive' => 'neaktívny',
 // TODO: translate the following.

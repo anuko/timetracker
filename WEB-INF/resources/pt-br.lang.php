@@ -367,6 +367,8 @@ $i18n_key_words = array(
 'dropdown.clients' => 'clientes',
 'dropdown.select' => '--- selecione ---',
 'dropdown.select_invoice' => '--- selecione fatura ---',
+// TODO: translate the following.
+// 'dropdown.select_timesheet' => '--- select timesheet ---',
 'dropdown.status_active' => 'ativo',
 'dropdown.status_inactive' => 'inativo',
 'dropdown.delete' => 'apagar',

@@ -349,6 +349,8 @@ $i18n_key_words = array(
 'dropdown.clients' => 'Kunden',
 'dropdown.select' => '--- auswählen ---',
 'dropdown.select_invoice' => '--- Rechnung auswählen ---',
+// TODO: translate the following.
+// 'dropdown.select_timesheet' => '--- select timesheet ---',
 'dropdown.status_active' => 'aktiv',
 'dropdown.status_inactive' => 'inaktiv',
 'dropdown.delete' => 'löschen',

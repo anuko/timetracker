@@ -338,6 +338,7 @@ $i18n_key_words = array(
 'dropdown.clients' => 'клиенты',
 'dropdown.select' => '--- выберите ---',
 'dropdown.select_invoice' => '--- выберите счёт ---',
+'dropdown.select_timesheet' => '--- выберите табель ---',
 'dropdown.status_active' => 'активный',
 'dropdown.status_inactive' => 'неактивный',
 'dropdown.delete' => 'удалить',
