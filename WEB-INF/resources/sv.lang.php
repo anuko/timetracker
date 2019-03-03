@@ -442,6 +442,7 @@ $i18n_key_words = array(
 'form.report.export' => 'Exportera som',
 // TODO: translate the following.
 // 'form.report.assign_to_invoice' => 'Assign to invoice',
+// 'form.report.assign_to_timesheet' => 'Assign to timesheet',
 
 // Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
 // TODO: translate the following.

@@ -413,6 +413,7 @@ $i18n_key_words = array(
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Export',
 'form.report.assign_to_invoice' => 'Assign to invoice',
+'form.report.assign_to_timesheet' => 'Assign to timesheet',
 
  // Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
 'form.timesheets.active_timesheets' => 'Active Timesheets',
