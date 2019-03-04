@@ -57,6 +57,11 @@ if ($request->isPost()) {
   $cl_status = $timesheet['status'];
 }
 
+// Can we delete this timesheet?
+$canDelete = $timesheet['approve_status'] != 1
+  || (($user->id == $timesheet['user_id'] && $user->can('approve_own_timesheets'))
+  || ($user->id != $timesheet['user_id'] && $user->can('approve_timesheets')));
+
 $form = new Form('timesheetForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_timesheet_id));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'timesheet_name','style'=>'width: 250px;','value'=>$cl_name));
@@ -64,7 +69,7 @@ $form->addInput(array('type'=>'textarea','name'=>'comment','style'=>'width: 250p
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
+if ($canDelete) $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 
 if ($request->isPost()) {
   // Validate user input.
@@ -90,7 +95,7 @@ if ($request->isPost()) {
     }
   }
 
-  if ($request->getParameter('btn_delete')) {
+  if ($request->getParameter('btn_delete') && $canDelete) {
     header("Location: timesheet_delete.php?id=$cl_timesheet_id");
     exit();
   }
@@ -98,8 +103,7 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.timesheetForm.timesheet_name.focus()"');
-$smarty->assign('show_users', count($users) > 0);
-$smarty->assign('show_tasks', $show_tasks);
+$smarty->assign('can_delete', $canDelete);
 $smarty->assign('title', $i18n->get('title.edit_timesheet'));
 $smarty->assign('content_page_name', 'timesheet_edit.tpl');
 $smarty->display('index.tpl');

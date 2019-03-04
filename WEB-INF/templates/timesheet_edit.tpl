@@ -25,7 +25,7 @@
         </tr>
         <tr>
           <td></td>
-          <td align="left" height="50">{$forms.timesheetForm.btn_save.control} {$forms.timesheetForm.btn_delete.control}</td>
+          <td align="center" height="50">{$forms.timesheetForm.btn_save.control} {if $can_delete}{$forms.timesheetForm.btn_delete.control}{/if}</td>
         </tr>
       </table>
     </td>
