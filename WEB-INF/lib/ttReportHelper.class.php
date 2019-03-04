@@ -639,9 +639,18 @@ class ttReportHelper {
     $org_id = $user->org_id;
 
     if ($time_log_ids) {
-      if ($timesheet_id)
+      // Use inner join as a protection mechanism not to do anything with "acted upon" timesheets.
+      // Allow oprations only with pending timesheets.
+      if ($timesheet_id) {
+        // Assigning a timesheet to records.
         $inner_join = " inner join tt_timesheets ts on (ts.id = $timesheet_id".
-          " and ts.user_id = $user_id and ts.approve_status is null)";
+          " and ts.user_id = $user_id and ts.approve_status is null". // Timesheet to assign to is pending.
+          // Part below: existing timesheet either not exists or is also pending.
+          " and (l.timesheet_id is null or (l.timesheet_id = ts.id and ts.approve_status is null)))";
+      } else {
+        $inner_join = " inner join tt_timesheets ts on (ts.id = l.timesheet_id".
+          " and ts.user_id = $user_id and ts.approve_status is null)"; // Do not deassign from acted-upon timesheets.
+      }
 
       $sql = "update tt_log l $inner_join".
         " set l.timesheet_id = ".$mdb2->quote($timesheet_id).
