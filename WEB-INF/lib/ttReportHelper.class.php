@@ -640,7 +640,8 @@ class ttReportHelper {
 
     if ($time_log_ids) {
       if ($timesheet_id)
-        $inner_join = " inner join tt_timesheets ts on (ts.id = $timesheet_id and ts.approve_status is null)";
+        $inner_join = " inner join tt_timesheets ts on (ts.id = $timesheet_id".
+          " and ts.user_id = $user_id and ts.approve_status is null)";
 
       $sql = "update tt_log l $inner_join".
         " set l.timesheet_id = ".$mdb2->quote($timesheet_id).
