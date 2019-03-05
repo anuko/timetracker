@@ -264,6 +264,29 @@ class ttTimesheetHelper {
     return $approvers;
   }
 
+  // getApprover obtains approver properties such as name and email.
+  static function getApprover($user_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $rank = ttUserHelper::getUserRank($user->getUser());
+    $sql = "select u.name, u.email".
+      " from tt_users u".
+      " left join tt_roles r on (r.id = u.role_id)".
+      " where u.id = $user_id and u.status = 1 and u.email is not null and u.group_id = $group_id and u.org_id = $org_id".
+      " and (r.rank > $rank and r.rights like '%approve_timesheets%')";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      if ($val = $res->fetchRow()) {
+        return $val;
+      }
+    }
+    return false;
+  }
+
   // submitTimesheet marks a timesheet as submitted and also sends an email
   // to a selected approver.
   static function submitTimesheet($fields) {
@@ -281,10 +304,46 @@ class ttTimesheetHelper {
     $sql = "update tt_timesheets set submit_status = 1".
       " where id = $timesheet_id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
+    return (!is_a($affected, 'PEAR_Error'));
+  }
 
-    // TODO: send email to approver here...
-    // $approver_id = $fields['approver_id'];
+  // sendSubmitEmail sends a notification to an approver about a timesheet submit.
+  static function sendSubmitEmail($fields) {
+    global $i18n;
+    global $user;
+
+    // Send email to a selected approver.
+    if (!$fields['approver_id']) return true; // No approver, nothing to do.
+
+    $approver = ttTimesheetHelper::getApprover($fields['approver_id']);
+    if (!$approver) return false; // Invalid approver id.
+
+    $fields['to'] = $approver['email'];
+    $fields['subject'] = $i18n->get('form.timesheet_view.submit_subject');
+    $fields['body'] = sprintf($i18n->get('form.timesheet_view.submit_body'), $user->getName());
+
+    return ttTimesheetHelper::sendEmail($fields);
+  }
+
+  // sendEmail is a generic finction that sends a timesheet related email.
+  // TODO: perhaps make it even more generic for the entire application.
+  static function sendEmail($fields, $html = true) {
+    global $i18n;
+    global $user;
+
+    // Send email.
+    import('mail.Mailer');
+    $mailer = new Mailer();
+    $mailer->setCharSet(CHARSET);
+    if ($html)
+      $mailer->setContentType('text/html');
+    $mailer->setSender(SENDER);
+    $mailer->setReceiver($fields['to']);
+    if (!empty($user->bcc_email))
+      $mailer->setReceiverBCC($user->bcc_email);
+    $mailer->setMailMode(MAIL_MODE);
+    if (!$mailer->send($fields['subject'], $fields['body']))
+      return false;
 
     return true;
   }

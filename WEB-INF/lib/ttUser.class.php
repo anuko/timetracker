@@ -167,6 +167,11 @@ class ttUser {
     return ($this->behalfUser ? $this->behalfUser->id : $this->id);
   }
 
+  // getName returns user name on behalf of whom the current user is operating.
+  function getName() {
+    return ($this->behalfUser ? $this->behalfUser->name : $this->name);
+  }
+
   // getQuotaPercent returns quota percent for active user.
   function getQuotaPercent() {
     return ($this->behalfUser ? $this->behalfUser->quota_percent : $this->quota_percent);

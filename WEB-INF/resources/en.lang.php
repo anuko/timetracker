@@ -551,4 +551,14 @@ $i18n_key_words = array(
 'role.admin.label' => 'Administrator',
 'role.admin.low_case_label' => 'administrator',
 'role.admin.description' => 'Site adminsitrator.',
+
+// Timesheet View form. See example at https://timetracker.anuko.com/timesheet_view.php.
+// TODO: improve wording, then fill in other translation files.
+'form.timesheet_view.submit_subject' => 'Timesheet approval request',
+'form.timesheet_view.submit_body' => "A new timesheet requires approval.<p>User: %s.",
+'form.timesheet_view.approve_subject' => 'Timesheet approved',
+'form.timesheet_view.approve_body' => "Dear User,\n\nYour timesheet %s was approved.",
+'form.timesheet_view.disapprove_subject' => 'Timesheet not approved',
+'form.timesheet_view.disapprove_subject' => "Dear User,\n\nYour timesheet %s was not approved.\n\n%s",
+'form.timesheet_view.success_message' => 'Notification sent by email.',
 );
