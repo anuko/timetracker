@@ -339,7 +339,7 @@ class ttClientHelper {
     return true;
   }
 
-  // deleteProject - deletes a project from the projects field in tt_clients table
+  // deleteProjectFromClient - deletes a project from the projects field in tt_clients table
   // for a single client in a group.
   static function deleteProjectFromClient($project_id, $client_id) {
     global $user;
