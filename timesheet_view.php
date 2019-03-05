@@ -93,7 +93,7 @@ if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
     $fields = array('timesheet_id' => $timesheet['id'],
       'approver_id' => $approver_id); // TODO: obtain (and check) approver id above during access checks.
-    if (!ttTimesheetHelper::submitTimesheet($fields))
+    if (!ttTimesheetHelper::markSubmitted($fields))
       $err->add($i18n->get('error.db'));
     if ($err->no() && !ttTimesheetHelper::sendSubmitEmail($fields)) {
       $err->add($i18n->get('error.mail_send'));

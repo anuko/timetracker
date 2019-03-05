@@ -287,9 +287,8 @@ class ttTimesheetHelper {
     return false;
   }
 
-  // submitTimesheet marks a timesheet as submitted and also sends an email
-  // to a selected approver.
-  static function submitTimesheet($fields) {
+  // markSubmitted marks a timesheet as submitted.
+  static function markSubmitted($fields) {
     global $user;
     $mdb2 = getConnection();
 
@@ -297,9 +296,6 @@ class ttTimesheetHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    // First, mark timesheet as submitted.
-    // Even if mail part below does not work, this will get us a functioning workflow
-    // without email notification.
     $timesheet_id = $fields['timesheet_id'];
     $sql = "update tt_timesheets set submit_status = 1".
       " where id = $timesheet_id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
