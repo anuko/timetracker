@@ -316,4 +316,51 @@ class ttClientHelper {
     }
     return $result;
   }
+
+  // deleteProject - deletes a project from the projects field it tt_clients table
+  // for all clients in a group.
+  static function deleteProject($project_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select id from tt_clients".
+      " where projects like '%$project_id%'".
+      " and group_id = $group_id and org_id = $org_id";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        if (!ttClientHelper::deleteProjectFromClient($project_id, $val['id']))
+          return false;
+      }
+    }
+    return true;
+  }
+
+  // deleteProject - deletes a project from the projects field in tt_clients table
+  // for a single client in a group.
+  static function deleteProjectFromClient($project_id, $client_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select projects from tt_clients".
+      " where id = $client_id and group_id = $group_id and org_id = $org_id";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) return false;
+    $val = $res->fetchRow();
+    $projects = explode(',', $val['projects']);
+    if (($key = array_search($project_id, $projects)) !== false) {
+      unset($projects[$key]);
+    }
+    $comma_separated = implode(',', $projects);
+    $sql = "update tt_clients set projects = ".$mdb2->quote($comma_separated).
+      " where id = $client_id and group_id = $group_id and org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
 }

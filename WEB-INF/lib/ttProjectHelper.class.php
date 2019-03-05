@@ -28,6 +28,7 @@
 
 import('ttUserHelper');
 import('ttGroupHelper');
+import('ttClientHelper');
 
 // Class ttProjectHelper is used to help with project related tasks.
 class ttProjectHelper {
@@ -194,7 +195,9 @@ class ttProjectHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    return true;
+    // Finally, delete the project from the projects field in tt_clients table.
+    $result = ttClientHelper::deleteProject($id);
+    return $result;
   }
   
   // insert function inserts a new project into database.
