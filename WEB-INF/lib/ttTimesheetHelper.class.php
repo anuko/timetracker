@@ -321,6 +321,23 @@ class ttTimesheetHelper {
     return ttTimesheetHelper::sendEmail($fields);
   }
 
+  // sendApprovedEmail sends a notification to user about a timesheet approval.
+  static function sendApprovedEmail($fields) {
+    global $i18n;
+    global $user;
+
+    // Obtain user email.
+    $user_details = $user->getUserDetails($fields['user_id']);
+    $email = $user_details['email'];
+    if (!$email) return true; // No email to send to, nothing to do.
+
+    $fields['to'] = $email;
+    $fields['subject'] = $i18n->get('form.timesheet_view.approve_subject');
+    $fields['body'] = sprintf($i18n->get('form.timesheet_view.approve_body'), htmlspecialchars($fields['name']));
+
+    return ttTimesheetHelper::sendEmail($fields);
+  }
+
   // sendEmail is a generic finction that sends a timesheet related email.
   // TODO: perhaps make it even more generic for the entire application.
   static function sendEmail($fields, $html = true) {
@@ -344,8 +361,8 @@ class ttTimesheetHelper {
     return true;
   }
 
-  // approveTimesheet marks a timesheet as approved and sends an email to submitter.
-  static function approveTimesheet($fields) {
+  // markApproved marks a timesheet as approved.
+  static function markApproved($fields) {
     global $user;
     $mdb2 = getConnection();
 
@@ -353,19 +370,13 @@ class ttTimesheetHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    // First, mark timesheet as approved.
-    // Even if mail part below does not work, this will get us a functioning workflow
-    // without email notification.
     $timesheet_id = $fields['timesheet_id'];
     $comment = $fields['comment'];
 
     $sql = "update tt_timesheets set approve_status = 1, approve_comment = ".$mdb2->quote($comment).
       " where id = $timesheet_id and submit_status = 1 and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // TODO: send email to submitter here...
-    return true;
+    return (!is_a($affected, 'PEAR_Error'));
   }
 
   // disapproveTimesheet marks a timesheet as approved and sends an email to submitter.

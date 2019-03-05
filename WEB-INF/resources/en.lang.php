@@ -557,8 +557,7 @@ $i18n_key_words = array(
 'form.timesheet_view.submit_subject' => 'Timesheet approval request',
 'form.timesheet_view.submit_body' => "A new timesheet requires approval.<p>User: %s.",
 'form.timesheet_view.approve_subject' => 'Timesheet approved',
-'form.timesheet_view.approve_body' => "Dear User,\n\nYour timesheet %s was approved.",
+'form.timesheet_view.approve_body' => "Your timesheet %s was approved.",
 'form.timesheet_view.disapprove_subject' => 'Timesheet not approved',
-'form.timesheet_view.disapprove_subject' => "Dear User,\n\nYour timesheet %s was not approved.\n\n%s",
-'form.timesheet_view.success_message' => 'Notification sent by email.',
+'form.timesheet_view.disapprove_subject' => "Your timesheet %s was not approved.",
 );

@@ -92,7 +92,7 @@ if ($showApprove) {
 if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
     $fields = array('timesheet_id' => $timesheet['id'],
-      'approver_id' => $approver_id); // TODO: obtain (and check) approver id above during access checks.
+      'approver_id' => $approver_id);
     if (!ttTimesheetHelper::markSubmitted($fields))
       $err->add($i18n->get('error.db'));
     if ($err->no() && !ttTimesheetHelper::sendSubmitEmail($fields)) {
@@ -107,13 +107,19 @@ if ($request->isPost()) {
 
   if ($request->getParameter('btn_approve')) {
     $fields = array('timesheet_id' => $timesheet['id'],
+      'name' => $timesheet['name'],
+      'user_id' => $timesheet['user_id'],
       'comment' => $cl_comment);
-    if (ttTimesheetHelper::approveTimesheet($fields)) {
+    if (!ttTimesheetHelper::markApproved($fields))
+      $err->add($i18n->get('error.db'));
+    if ($err->no() && !ttTimesheetHelper::sendApprovedEmail($fields)) {
+      $err->add($i18n->get('error.mail_send'));
+    }
+    if ($err->no()) {
       // Redirect to self.
       header('Location: timesheet_view.php?id='.$timesheet['id']);
       exit();
-    } else
-      $err->add($i18n->get('error.db'));
+    }
   }
 
   if ($request->getParameter('btn_disapprove')) {
