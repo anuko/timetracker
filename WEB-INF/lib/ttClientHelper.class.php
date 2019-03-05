@@ -63,7 +63,7 @@ class ttClientHelper {
 
     $result = array();
 
-    $sql = "select id, name from tt_clients where group_id = $group_id and org_id = $org_id and (status = 0 or status = 1) order by upper(name)";
+    $sql = "select id, name, projects from tt_clients where group_id = $group_id and org_id = $org_id and (status = 0 or status = 1) order by upper(name)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {

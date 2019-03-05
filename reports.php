@@ -89,6 +89,7 @@ if ($showClient) {
 }
 if ($showClient) {
   $form->addInput(array('type'=>'combobox',
+    'onchange'=>'fillProjectDropdown(this.value);',
     'name'=>'client',
     'style'=>'width: 250px;',
     'data'=>$client_list,
@@ -439,6 +440,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
+$smarty->assign('client_list', $client_list);
 $smarty->assign('show_client', $showClient);
 $smarty->assign('show_cf_1_dropdown', $showCustomFieldDropdown);
 $smarty->assign('show_cf_1_checkbox', $showCustomFieldCheckbox);
