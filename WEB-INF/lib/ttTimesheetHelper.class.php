@@ -333,7 +333,24 @@ class ttTimesheetHelper {
 
     $fields['to'] = $email;
     $fields['subject'] = $i18n->get('form.timesheet_view.approve_subject');
-    $fields['body'] = sprintf($i18n->get('form.timesheet_view.approve_body'), htmlspecialchars($fields['name']));
+    $fields['body'] = sprintf($i18n->get('form.timesheet_view.approve_body'), htmlspecialchars($fields['name']), htmlspecialchars($fields['comment']));
+
+    return ttTimesheetHelper::sendEmail($fields);
+  }
+
+  // sendDisapprovedEmail sends a notification to user about a timesheet disapproval.
+  static function sendDisapprovedEmail($fields) {
+    global $i18n;
+    global $user;
+
+    // Obtain user email.
+    $user_details = $user->getUserDetails($fields['user_id']);
+    $email = $user_details['email'];
+    if (!$email) return true; // No email to send to, nothing to do.
+
+    $fields['to'] = $email;
+    $fields['subject'] = $i18n->get('form.timesheet_view.disapprove_subject');
+    $fields['body'] = sprintf($i18n->get('form.timesheet_view.disapprove_body'), htmlspecialchars($fields['name']), htmlspecialchars($fields['comment']));
 
     return ttTimesheetHelper::sendEmail($fields);
   }
@@ -379,8 +396,8 @@ class ttTimesheetHelper {
     return (!is_a($affected, 'PEAR_Error'));
   }
 
-  // disapproveTimesheet marks a timesheet as approved and sends an email to submitter.
-  static function disapproveTimesheet($fields) {
+  // markDisapproved marks a timesheet as not approved.
+  static function markDisapproved($fields) {
     global $user;
     $mdb2 = getConnection();
 
@@ -388,19 +405,13 @@ class ttTimesheetHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    // First, mark timesheet as disapproved.
-    // Even if mail part below does not work, this will get us a functioning workflow
-    // without email notification.
     $timesheet_id = $fields['timesheet_id'];
     $comment = $fields['comment'];
 
     $sql = "update tt_timesheets set approve_status = 0, approve_comment = ".$mdb2->quote($comment).
       " where id = $timesheet_id and submit_status = 1 and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
-
-    // TODO: send email to submitter here...
-    return true;
+    return (!is_a($affected, 'PEAR_Error'));
   }
 
   // The timesheetItemsExist determines whether tt_log records exist in the specified period

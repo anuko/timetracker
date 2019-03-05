@@ -124,13 +124,19 @@ if ($request->isPost()) {
 
   if ($request->getParameter('btn_disapprove')) {
     $fields = array('timesheet_id' => $timesheet['id'],
+      'name' => $timesheet['name'],
+      'user_id' => $timesheet['user_id'],
       'comment' => $cl_comment);
-    if (ttTimesheetHelper::disapproveTimesheet($fields)) {
+    if (!ttTimesheetHelper::markDisapproved($fields))
+      $err->add($i18n->get('error.db'));
+    if ($err->no() && !ttTimesheetHelper::sendDisapprovedEmail($fields)) {
+      $err->add($i18n->get('error.mail_send'));
+    }
+    if ($err->no()) {
       // Redirect to self.
       header('Location: timesheet_view.php?id='.$timesheet['id']);
       exit();
-    } else
-      $err->add($i18n->get('error.db'));
+    }
   }
 }
 
