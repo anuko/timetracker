@@ -738,7 +738,7 @@ class ttTimeHelper {
     $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,".
       " TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,".
       " TIME_FORMAT(l.duration, '%k:%i') as duration, p.name as project, t.name as task, l.comment,".
-      " l.billable, l.timesheet_id, l.invoice_id $client_field from tt_log l $left_joins".
+      " l.billable, l.approved, l.timesheet_id, l.invoice_id $client_field from tt_log l $left_joins".
       " where l.date = '$date' and l.user_id = $user_id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1".
       " order by l.start, l.id";
     $res = $mdb2->query($sql);
