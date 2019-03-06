@@ -676,7 +676,7 @@ class ttTimeHelper {
       " TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,".
       " TIME_FORMAT(l.duration, '%k:%i') as duration,".
       " p.name as project_name, t.name as task_name, l.comment, l.client_id, l.project_id, l.task_id,".
-      " l.timesheet_id, l.invoice_id, l.billable, l.paid, l.date from tt_log l".
+      " l.timesheet_id, l.invoice_id, l.billable, l.approved, l.paid, l.date from tt_log l".
       " left join tt_projects p on (p.id = l.project_id)".
       " left join tt_tasks t on (t.id = l.task_id)".
       " where l.id = $id and l.user_id = $user_id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1";
