@@ -542,4 +542,12 @@ $i18n_key_words = array(
 'role.admin.label' => 'Администратор',
 'role.admin.low_case_label' => 'администратор',
 'role.admin.description' => 'Администратор сайта.',
+
+// Timesheet View form. See example at https://timetracker.anuko.com/timesheet_view.php.
+'form.timesheet_view.submit_subject' => 'Запрос на одобрение табеля',
+'form.timesheet_view.submit_body' => "Появился новый табель для одобрения.<p>Пользователь: %s.",
+'form.timesheet_view.approve_subject' => 'Табель одобрен',
+'form.timesheet_view.approve_body' => "Ваш табель %s одобрен.<p>%s",
+'form.timesheet_view.disapprove_subject' => 'Табель не одобрен',
+'form.timesheet_view.disapprove_body' => "Ваш табель %s не одобрен.<p>%s",
 );
