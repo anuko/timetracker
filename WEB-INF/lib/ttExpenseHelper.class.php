@@ -140,7 +140,8 @@ class ttExpenseHelper {
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (ei.client_id = c.id)";
 
-    $sql = "select ei.id, ei.date, ei.client_id, ei.project_id, ei.name, ei.cost, ei.invoice_id, ei.paid $client_field, p.name as project_name".
+    $sql = "select ei.id, ei.date, ei.client_id, ei.project_id, ei.name, ei.cost, ei.invoice_id, ei.approved,".
+      " ei.paid $client_field, p.name as project_name".
       " from tt_expense_items ei $left_joins".
       " where ei.id = $id and ei.group_id = $group_id and ei.org_id = $org_id and ei.user_id = $user_id and ei.status = 1";
     $res = $mdb2->query($sql);
@@ -177,7 +178,7 @@ class ttExpenseHelper {
       $left_joins .= " left join tt_clients c on (ei.client_id = c.id)";
 
     $sql = "select ei.id as id $client_field, p.name as project, ei.name as item, ei.cost as cost,".
-      " ei.invoice_id from tt_expense_items ei $left_joins".
+      " ei.invoice_id, ei.approved from tt_expense_items ei $left_joins".
       " where ei.date = ".$mdb2->quote($date)." and ei.user_id = $user_id".
       " and ei.group_id = $group_id and ei.org_id = $org_id and ei.status = 1 order by ei.id";
 

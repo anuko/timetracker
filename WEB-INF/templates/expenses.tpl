@@ -195,7 +195,13 @@ function recalculateCost() {
     {/if}
         <td valign="top">{$item.item|escape}</td>
         <td valign="top" align="right">{$item.cost}</td>
-        <td valign="top" align="center">{if $item.invoice_id}&nbsp;{else}<a href='expense_edit.php?id={$item.id}'>{$i18n.label.edit}</a>{/if}</td>
+        <td valign="top" align="center">
+    {if $item.approved || $item.invoice_id}
+          &nbsp;
+    {else}
+          <a href='expense_edit.php?id={$item.id}'>{$i18n.label.edit}</a>
+    {/if}
+        </td>
       </tr>
   {/foreach}
     </table>
