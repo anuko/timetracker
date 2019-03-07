@@ -142,6 +142,12 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$forms.pluginsForm.timesheets.control}</td>
             <td><label for="timesheets">{$i18n.title.timesheets}</label></td>
           </tr>
+{if isTrue('TEMPLATES_DEBUG')}
+          <tr>
+            <td align="right" nowrap>{$forms.pluginsForm.templates.control}</td>
+            <td><label for="templates">{$i18n.title.templates}</label></td>
+          </tr>
+{/if}
           <tr>
             <td colspan="2">&nbsp;</td>
           </tr>
