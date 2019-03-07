@@ -513,6 +513,27 @@ CREATE TABLE `tt_timesheets` (
 
 
 #
+# Structure for table tt_templates.
+# This table keeps templates used in groups.
+#
+CREATE TABLE `tt_templates` (
+  `id` int(11) NOT NULL auto_increment,   # template id
+  `group_id` int(11) default NULL,        # group id
+  `org_id` int(11) default NULL,          # organization id
+  `name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # template name
+  `content` text,                         # template content
+  `created` datetime default NULL,        # creation timestamp
+  `created_ip` varchar(45) default NULL,  # creator ip
+  `created_by` int(11) default NULL,      # creator user_id
+  `modified` datetime default NULL,       # modification timestamp
+  `modified_ip` varchar(45) default NULL, # modifier ip
+  `modified_by` int(11) default NULL,     # modifier user_id
+  `status` tinyint(4) default 1,          # template status
+  PRIMARY KEY  (`id`)
+);
+
+
+#
 # Structure for table tt_site_config. This table stores configuration data
 # for Time Tracker site as a whole.
 # For example, database version, code version, site language, etc.
@@ -525,4 +546,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.51', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.54', now()); # TODO: change when structure changes.
