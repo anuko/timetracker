@@ -326,6 +326,8 @@ $i18n_key_words = array(
 'title.week_view' => 'Wochenansicht',
 'title.swap_roles' => 'Tausche Rollen',
 'title.work_units' => 'Arbeitseinheiten',
+// TODO: translate the following.
+// 'title.templates' => 'Templates',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
