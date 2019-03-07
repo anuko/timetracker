@@ -1152,6 +1152,7 @@ if ($_POST) {
     ttExecute("OPTIMIZE TABLE tt_invoices");
     ttExecute("OPTIMIZE TABLE tt_log");
     ttExecute("OPTIMIZE TABLE tt_monthly_quotas");
+    ttExecute("OPTIMIZE TABLE tt_templates");
     ttExecute("OPTIMIZE TABLE tt_predefined_expenses");
     ttExecute("OPTIMIZE TABLE tt_project_task_binds");
     ttExecute("OPTIMIZE TABLE tt_projects");

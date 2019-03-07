@@ -82,6 +82,16 @@ function handlePluginCheckboxes() {
   } else {
     configureLabel.style.visibility = "hidden";
   }
+
+  var templatesCheckbox = document.getElementById("templates");
+  configureLabel = document.getElementById("templates_config");
+  if (templatesCheckbox.checked){
+    configureLabel.style.display = "";
+    //configureLabel.style.visibility = "visible";
+  } else {
+    configureLabel.style.display = "none";
+    //configureLabel.style.visibility = "hidden";
+  }
 }
 </script>
 
@@ -145,7 +155,7 @@ function handlePluginCheckboxes() {
 {if isTrue('TEMPLATES_DEBUG')}
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.templates.control}</td>
-            <td><label for="templates">{$i18n.title.templates}</label> <a href="https://www.anuko.com/lp/tt_29.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+            <td><label for="templates">{$i18n.title.templates}</label> <span id="templates_config"><a href="templates.php">{$i18n.label.configure}</a></span> <a href="https://www.anuko.com/lp/tt_29.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
 {/if}
           <tr>
