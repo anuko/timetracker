@@ -145,7 +145,7 @@ function handlePluginCheckboxes() {
 {if isTrue('TEMPLATES_DEBUG')}
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.templates.control}</td>
-            <td><label for="templates">{$i18n.title.templates}</label></td>
+            <td><label for="templates">{$i18n.title.templates}</label> <a href="https://www.anuko.com/lp/tt_29.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
 {/if}
           <tr>
