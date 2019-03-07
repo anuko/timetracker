@@ -136,7 +136,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.approval.control}</td>
-            <td><label for="approval">{$i18n.label.approval}</label></td>
+            <td><label for="approval">{$i18n.label.approval}</label> <a href="https://www.anuko.com/lp/tt_28.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.timesheets.control}</td>
