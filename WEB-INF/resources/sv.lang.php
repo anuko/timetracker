@@ -258,6 +258,7 @@ $i18n_key_words = array(
 // 'label.approved' => 'Approved',
 // 'label.approval' => 'Report approval',
 // 'label.mark_approved' => 'Mark approved',
+// 'label.template' => 'Template',
 
 // Rubriker för formulär
 'title.error' => 'Fel',
