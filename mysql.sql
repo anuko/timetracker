@@ -521,6 +521,7 @@ CREATE TABLE `tt_templates` (
   `group_id` int(11) default NULL,        # group id
   `org_id` int(11) default NULL,          # organization id
   `name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # template name
+  `description` varchar(255) default NULL,         # template description
   `content` text,                         # template content
   `created` datetime default NULL,        # creation timestamp
   `created_ip` varchar(45) default NULL,  # creator ip
@@ -546,4 +547,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.54', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.55', now()); # TODO: change when structure changes.
