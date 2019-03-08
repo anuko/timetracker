@@ -3,14 +3,17 @@
   <tr>
     <td valign="top">
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
+{if $inactive_templates}
+        <tr><td class="sectionHeaderNoBorder">{$i18n.form.templates.active_templates}</td></tr>
+{/if}
         <tr>
           <td class="tableHeader">{$i18n.label.thing_name}</td>
           <td class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
           <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
-  {if $templates}
-    {foreach $templates as $template}
+  {if $active_templates}
+    {foreach $active_templates as $template}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$template['name']|escape}</td>
           <td>{$template['description']|escape}</td>

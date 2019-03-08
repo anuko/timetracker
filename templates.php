@@ -51,11 +51,13 @@ if ($request->isPost()) {
   }
 } else {
   $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
-  $predefinedExpenses = ttGroupHelper::getPredefinedExpenses();
+  $activeTemplates = ttGroupHelper::getActiveTemplates();
+  $inactiveTemplates = ttGroupHelper::getInactiveTemplates();
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('predefined_expenses', $predefinedExpenses);
+$smarty->assign('active_templates', $activeTemplates);
+$smarty->assign('inactive_templates', $inactiveTemplates);
 $smarty->assign('title', $i18n->get('title.templates'));
 $smarty->assign('content_page_name', 'templates.tpl');
 $smarty->display('index.tpl');

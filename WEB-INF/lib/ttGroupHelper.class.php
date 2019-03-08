@@ -518,6 +518,48 @@ class ttGroupHelper {
     return $result;
   }
 
+  // getActiveTemplates - returns an array of active templates for a group.
+  static function getActiveTemplates()
+  {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select id, name, description from tt_templates".
+      " where group_id = $group_id and org_id = $org_id and status = 1 order by upper(name)";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
+  // getInactiveTemplates - returns an array of active templates for a group.
+  static function getInactiveTemplates()
+  {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select id, name, description from tt_templates".
+      " where group_id = $group_id and org_id = $org_id and status = 0 order by upper(name)";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
   // validateCheckboxGroupInput - validates user input in a group of checkboxes
   // in context of a specific database table.
   //
