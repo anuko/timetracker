@@ -59,7 +59,7 @@ class ttTemplateHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $sql = "update from tt_templates set status = null".
+    $sql = "update tt_templates set status = null".
       " where id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
