@@ -527,7 +527,7 @@ class ttGroupHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $sql = "select id, name, description from tt_templates".
+    $sql = "select id, name, description, content from tt_templates".
       " where group_id = $group_id and org_id = $org_id and status = 1 order by upper(name)";
     $res = $mdb2->query($sql);
     $result = array();
