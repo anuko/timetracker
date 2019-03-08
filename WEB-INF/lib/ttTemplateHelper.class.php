@@ -38,7 +38,7 @@ class ttTemplateHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $sql = "select id, name, description, content from tt_templates".
+    $sql = "select id, name, description, content, status from tt_templates".
       " where id = $id and group_id = $group_id and org_id = $org_id".
       " and status is not null";
     $res = $mdb2->query($sql);
@@ -102,10 +102,12 @@ class ttTemplateHelper {
     $name = $fields['name'];
     $description = $fields['description'];
     $content = $fields['content'];
+    $status = (int) $fields['status'];
 
     $sql = "update tt_templates set name = ".$mdb2->quote($name).
       ", description = ".$mdb2->quote($description).
       ", content = ".$mdb2->quote($content).
+      ", status = ".$status.
       " where id = $template_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
