@@ -416,6 +416,10 @@ $i18n_key_words = array(
 'form.timesheets.active_timesheets' => 'Активные табели',
 'form.timesheets.inactive_timesheets' => 'Неактивные табели',
 
+// Templates form. See example at https://timetracker.anuko.com/templates.php
+'form.templates.active_templates' => 'Активные шаблоны',
+'form.templates.inactive_templates' => 'Неактивные шаблоны',
+
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
 'form.invoice.number' => 'Номер счёта',
