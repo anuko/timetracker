@@ -1,15 +1,19 @@
-{$forms.predefinedExpenseForm.open}
+{$forms.templateForm.open}
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
     <td>
       <table cellspacing="1" cellpadding="2" border="0">
         <tr>
           <td align="right">{$i18n.label.thing_name} (*):</td>
-          <td>{$forms.predefinedExpenseForm.name.control}</td>
+          <td>{$forms.templateForm.name.control}</td>
         </tr>
         <tr>
-          <td align="right">{$i18n.label.cost} (*):</td>
-          <td>{$forms.predefinedExpenseForm.cost.control} {$user->getCurrency()|escape}</td>
+          <td align="right">{$i18n.label.description}:</td>
+          <td>{$forms.templateForm.description.control}</td>
+        </tr>
+        <tr>
+          <td align="right">{$i18n.label.template} (*):</td>
+          <td>{$forms.templateForm.content.control}</td>
         </tr>
         <tr>
           <td height="40"></td>
@@ -17,10 +21,10 @@
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
-          <td colspan="2" align="center" height="50">{$forms.predefinedExpenseForm.btn_add.control}</td>
+          <td colspan="2" align="center" height="50">{$forms.templateForm.btn_add.control}</td>
         </tr>
       </table>
     </td>
   </tr>
 </table>
-{$forms.predefinedExpenseForm.close}
+{$forms.templateForm.close}
