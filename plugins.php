@@ -94,9 +94,8 @@ $form->addInput(array('type'=>'checkbox','name'=>'week_view','value'=>$cl_week_v
 $form->addInput(array('type'=>'checkbox','name'=>'work_units','value'=>$cl_work_units,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'approval','value'=>$cl_approval));
 $form->addInput(array('type'=>'checkbox','name'=>'timesheets','value'=>$cl_timesheets));
-if (isTrue('TEMPLATES_DEBUG')) {
-  $form->addInput(array('type'=>'checkbox','name'=>'templates','value'=>$cl_templates,'onchange'=>'handlePluginCheckboxes()'));
-}
+$form->addInput(array('type'=>'checkbox','name'=>'templates','value'=>$cl_templates,'onchange'=>'handlePluginCheckboxes()'));
+
 // Submit button.
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
