@@ -378,6 +378,9 @@ $i18n_key_words = array(
 // 'title.swap_roles' => 'Swapping Roles',
 // 'title.work_units' => 'Work Units',
 // 'title.templates' => 'Templates',
+// 'title.add_template' => 'Adding Template',
+// 'title.edit_template' => 'Editing Template',
+// 'title.delete_template' => 'Deleting Template',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.

@@ -5,13 +5,15 @@
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr>
           <td class="tableHeader">{$i18n.label.thing_name}</td>
+          <td class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.edit}</td>
           <td class="tableHeader">{$i18n.label.delete}</td>
         </tr>
   {if $templates}
     {foreach $templates as $template}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
-          <td>{$template_expense['name']|escape}</td>
+          <td>{$template['name']|escape}</td>
+          <td>{$template['description']|escape}</td>
           <td><a href="template_edit.php?id={$template['id']}">{$i18n.label.edit}</a></td>
           <td><a href="template_delete.php?id={$template['id']}">{$i18n.label.delete}</a></td>
         </tr>
