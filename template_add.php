@@ -28,7 +28,7 @@
 
 require_once('initialize.php');
 import('form.Form');
-// import('ttTemplateHelper');
+import('ttTemplateHelper');
 
 // Access checks.
 if (!ttAccessAllowed('manage_advanced_settings')) {
@@ -64,7 +64,7 @@ if ($request->isPost()) {
     if (ttTemplateHelper::insert(array(
         'name' => $cl_name,
         'description' => $cl_description,
-        'coontent' => $cl_content))) {
+        'content' => $cl_content))) {
         header('Location: templates.php');
         exit();
       } else
