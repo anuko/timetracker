@@ -488,6 +488,23 @@ class ttGroupExportHelper {
       unset($predefined_expense_part);
     }
 
+    // Write templates.
+    $templates = $this->getRecordsFromTable('tt_templates');
+    if (count($templates) > 0) {
+      fwrite($this->file, $this->indentation."  <templates>\n");
+      foreach ($templates as $template) {
+        $template_part = $this->indentation.'    '."<template name=\"".htmlspecialchars($template['name'])."\"";
+        $template_part .= " description=\"".htmlspecialchars($template['description'])."\"";
+        $template_part .= " content=\"".htmlspecialchars($template['content'])."\"";
+        $template_part .= " status=\"".$template['status']."\"";
+        $template_part .= "></template>\n";
+        fwrite($this->file, $template_part);
+      }
+      fwrite($this->file, $this->indentation."  </templates>\n");
+      unset($templates);
+      unset($template_part);
+    }
+
     // Write monthly quotas.
     $quotas = ttTeamHelper::getMonthlyQuotas($this->group_id);
     if (count($quotas) > 0) {
