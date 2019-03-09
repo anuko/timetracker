@@ -43,6 +43,21 @@ var task_names = new Array();
   task_names[{$task.id}] = "{$task.name|escape:'javascript'}";
 {/foreach}
 
+{if $template_dropdown}
+var templates = new Array();
+{foreach $templates as $template}
+  templates[{$template.id}] = "{$template.content|escape:'javascript'}";
+{/foreach}
+
+// The fillNote function populates the Note field with a selected template body.
+function fillNote(id) {
+  if (!id) return; // Do nothing.
+  var template_body = templates[id];
+  var note = document.getElementById("note");
+  note.value = template_body;
+}
+{/if}
+
 // Mandatory top options for project and task dropdowns.
 var empty_label_project = "{$i18n.dropdown.select|escape:'javascript'}";
 var empty_label_task = "{$i18n.dropdown.select|escape:'javascript'}";

@@ -77,6 +77,12 @@ function confirmSave() {
       <td align="right">{$i18n.label.date}:</td>
       <td>{$forms.timeRecordForm.date.control}</td>
     </tr>
+{if $template_dropdown}
+    <tr>
+      <td align="right">{$i18n.label.template}:</td>
+      <td>{$forms.timeRecordForm.template.control}</td>
+    </tr>
+{/if}
     <tr>
       <td align="right">{$i18n.label.note}:</td>
       <td>{$forms.timeRecordForm.note.control}</td>

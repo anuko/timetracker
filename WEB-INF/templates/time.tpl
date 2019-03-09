@@ -1,22 +1,5 @@
 {include file="time_script.tpl"}
 
-{if $template_dropdown}
-<script>
-var templates = new Array();
-{foreach $templates as $template}
-  templates[{$template.id}] = "{$template.content|escape:'javascript'}";
-{/foreach}
-
-// The fillNote function populates the Note field with a selected template body.
-function fillNote(id) {
-  if (!id) return; // Do nothing.
-  var template_body = templates[id];
-  var note = document.getElementById("note");
-  note.value = template_body;
-}
-</script>
-{/if}
-
 <style>
 .not_billable td {
   color: #ff6666;
