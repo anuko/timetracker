@@ -74,9 +74,12 @@ class ttTimesheetHelper {
     $end_date = new DateAndTime($user->date_format, $fields['end_date']);
     $end = $end_date->toString(DB_DATEFORMAT);
 
-    $sql = "insert into tt_timesheets (user_id, group_id, org_id, client_id, project_id, name, comment, start_date, end_date)".
+    $created_part = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
+
+    $sql = "insert into tt_timesheets (user_id, group_id, org_id, client_id, project_id, name, comment,".
+      " start_date, end_date, created, created_ip, created_by)".
       " values ($user_id, $group_id, $org_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).", ".$mdb2->quote($name).
-      ", ".$mdb2->quote($comment).", ".$mdb2->quote($start).", ".$mdb2->quote($end).")";
+      ", ".$mdb2->quote($comment).", ".$mdb2->quote($start).", ".$mdb2->quote($end).$created_part.")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
@@ -191,8 +194,10 @@ class ttTimesheetHelper {
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
+
     // Delete timesheet.
-    $sql = "update tt_timesheets set status = null".
+    $sql = "update tt_timesheets set status = null".$modified_part.
       " where id = $timesheet_id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
@@ -212,7 +217,10 @@ class ttTimesheetHelper {
     $comment = $fields['comment'];
     $status = $fields['status']; // Timesheet status.
 
-    $sql = "update tt_timesheets set name = ".$mdb2->quote($name).", comment = ".$mdb2->quote($comment).
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
+
+    $sql = "update tt_timesheets set name = ".$mdb2->quote($name).
+      ", comment = ".$mdb2->quote($comment).$modified_part.
       ", status = ".$mdb2->quote($status).
       " where id = $timesheet_id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
@@ -296,8 +304,10 @@ class ttTimesheetHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
+
     $timesheet_id = $fields['timesheet_id'];
-    $sql = "update tt_timesheets set submit_status = 1".
+    $sql = "update tt_timesheets set submit_status = 1".$modified_part.
       " where id = $timesheet_id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
@@ -390,7 +400,9 @@ class ttTimesheetHelper {
     $timesheet_id = $fields['timesheet_id'];
     $comment = $fields['comment'];
 
-    $sql = "update tt_timesheets set approve_status = 1, approve_comment = ".$mdb2->quote($comment).
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
+
+    $sql = "update tt_timesheets set approve_status = 1, approve_comment = ".$mdb2->quote($comment).$modified_part.
       " where id = $timesheet_id and submit_status = 1 and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
@@ -408,7 +420,9 @@ class ttTimesheetHelper {
     $timesheet_id = $fields['timesheet_id'];
     $comment = $fields['comment'];
 
-    $sql = "update tt_timesheets set approve_status = 0, approve_comment = ".$mdb2->quote($comment).
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
+
+    $sql = "update tt_timesheets set approve_status = 0, approve_comment = ".$mdb2->quote($comment).$modified_part.
       " where id = $timesheet_id and submit_status = 1 and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
