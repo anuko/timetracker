@@ -228,6 +228,22 @@ if ($custom_fields && $custom_fields->fields[0]) {
   }
 }
 
+// If we have templates, add a dropdown to select one.
+if ($user->isPluginEnabled('tp')){
+  $templates = ttGroupHelper::getActiveTemplates();
+  if (count($templates) >= 1) {
+    $form->addInput(array('type'=>'combobox',
+      'onchange'=>'fillNote(this.value);',
+      'name'=>'template',
+      'style'=>'width: 250px;',
+      'data'=>$templates,
+      'datakeys'=>array('id','name'),
+      'empty'=>array(''=>$i18n->get('dropdown.select'))));
+    $smarty->assign('template_dropdown', 1);
+    $smarty->assign('templates', $templates);
+  }
+}
+
 // Submit.
 if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
@@ -267,6 +283,10 @@ if ($request->isPost()) {
         $err->add($i18n->get('error.field'), $i18n->get('label.duration'));
     }
     if (!ttValidString($cl_note, true)) $err->add($i18n->get('error.field'), $i18n->get('label.note'));
+    if ($user->isPluginEnabled('tp') && strpos($cl_note, '%req%') !== false) {
+      // A %req% element is found in note. They have to be replaced by user.
+      $err->add($i18n->get('error.field'), $i18n->get('label.note'));
+    }
     if (!ttTimeHelper::canAdd()) $err->add($i18n->get('error.expired'));
     // Finished validating user input.
 

@@ -53,6 +53,10 @@ function confirmSave() {
 {/if}
     <tr><td>{$i18n.label.date}:</td></tr>
     <tr><td>{$forms.timeRecordForm.date.control}</td></tr>
+{if $template_dropdown}
+    <tr><td>{$i18n.label.template}:</td></tr>
+    <tr><td>{$forms.timeRecordForm.template.control}</td></tr>
+{/if}
     <tr><td>{$i18n.label.note}:</td></tr>
     <tr><td>{$forms.timeRecordForm.note.control}</td></tr>
     <tr><td align="center">{$forms.timeRecordForm.btn_save.control} {$forms.timeRecordForm.btn_copy.control} {$forms.timeRecordForm.btn_delete.control}</td></tr>

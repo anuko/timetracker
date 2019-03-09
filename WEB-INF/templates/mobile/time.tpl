@@ -82,6 +82,10 @@
     <tr><td>{$i18n.label.duration}:</td></tr>
     <tr><td>{$forms.timeRecordForm.duration.control}</td></tr>
 {/if}
+{if $template_dropdown}
+    <tr><td>{$i18n.label.template}:</td></tr>
+    <tr><td>{$forms.timeRecordForm.template.control}</td></tr>
+{/if}
 
     <tr><td>{$i18n.label.note}:</td></tr>
     <tr><td>{$forms.timeRecordForm.note.control}</td></tr>

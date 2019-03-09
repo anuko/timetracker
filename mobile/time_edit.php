@@ -188,6 +188,7 @@ if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
   $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
 $form->addInput(array('type'=>'datefield','name'=>'date','maxlength'=>'20','value'=>$cl_date));
 $form->addInput(array('type'=>'textarea','name'=>'note','class'=>'mobile-textarea','value'=>$cl_note));
+
 // If we have custom fields - add controls for them.
 if ($custom_fields && $custom_fields->fields[0]) {
   // Only one custom field is supported at this time.
@@ -202,6 +203,23 @@ if ($custom_fields && $custom_fields->fields[0]) {
       'empty' => array('' => $i18n->get('dropdown.select'))));
   }
 }
+
+// If we have templates, add a dropdown to select one.
+if ($user->isPluginEnabled('tp')){
+  $templates = ttGroupHelper::getActiveTemplates();
+  if (count($templates) >= 1) {
+    $form->addInput(array('type'=>'combobox',
+      'onchange'=>'fillNote(this.value);',
+      'name'=>'template',
+      'style'=>'width: 250px;',
+      'data'=>$templates,
+      'datakeys'=>array('id','name'),
+      'empty'=>array(''=>$i18n->get('dropdown.select'))));
+    $smarty->assign('template_dropdown', 1);
+    $smarty->assign('templates', $templates);
+  }
+}
+
 // Hidden control for record id.
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 if ($user->isPluginEnabled('iv'))
@@ -253,6 +271,10 @@ if ($request->isPost()) {
   }
   if (!ttValidDate($cl_date)) $err->add($i18n->get('error.field'), $i18n->get('label.date'));
   if (!ttValidString($cl_note, true)) $err->add($i18n->get('error.field'), $i18n->get('label.note'));
+  if ($user->isPluginEnabled('tp') && strpos($cl_note, '%req%') !== false) {
+    // A %req% element is found in note. They have to be replaced by user.
+    $err->add($i18n->get('error.field'), $i18n->get('label.note'));
+  }
   if (!ttTimeHelper::canAdd()) $err->add($i18n->get('error.expired'));
   // Finished validating user input.
 
