@@ -422,6 +422,19 @@ class ttOrgImportHelper {
         return;
       }
 
+      if ($name == 'TEMPLATE') {
+        if (!$this->insertTemplate(array(
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id,
+          'name' => $attrs['NAME'],
+          'description' => $attrs['DESCRIPTION'],
+          'content' => $attrs['CONTENT'],
+          'status' => $attrs['STATUS']))) {
+          $this->errors->add($i18n->get('error.db'));
+        }
+        return;
+      }
+
       if ($name == 'MONTHLY_QUOTA') {
         if (!$this->insertMonthlyQuota(array(
           'group_id' => $this->current_group_id,
@@ -741,6 +754,23 @@ class ttOrgImportHelper {
 
     $sql = "INSERT INTO tt_predefined_expenses (group_id, org_id, name, cost)".
       " values ($group_id, $org_id, $name, $cost)";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // insertTemplate - a helper function to insert a template.
+  private function insertTemplate($fields) {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $name = $mdb2->quote($fields['name']);
+    $description = $mdb2->quote($fields['description']);
+    $content = $mdb2->quote($fields['content']);
+    $status = $mdb2->quote($fields['status']);
+
+    $sql = "INSERT INTO tt_templates (group_id, org_id, name, description, content, status)".
+      " values ($group_id, $org_id, $name, $description, $content, $status)";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
