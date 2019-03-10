@@ -32,6 +32,7 @@ define('SYSC_LAST_REPORT_EMAIL', 'last_report_email');
 define('SYSC_LAST_REPORT_CC', 'last_report_cc');
 define('SYSC_LAST_INVOICE_EMAIL', 'last_invoice_email');
 define('SYSC_LAST_INVOICE_CC', 'last_invoice_cc');
+define('SYSC_PDF_REPORT_PAGE_BREAKS', 'pdf_report_page_breaks');
 
 // Class ttUserConfig is used for storing and retrieving named values associated with users.
 // When user is working on behalf of someone else, this class is still associated with a user.

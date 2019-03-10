@@ -215,8 +215,17 @@ if ($totals_only) {
         if ($bean->getAttribute('chtimesheet')) $html .= '<td></td>';
         $html .= '</tr>';
         $html .= '<tr><td colspan="'.$colspan.'">&nbsp;</td></tr>';
+        // TODO: page breaks on PDF reports is a rarely used feature.
+        // Currently without configuration capability.
+        // Consider adding an option to user profile instead.
+        if (isTrue('PDF_REPORT_PAGE_BREAKS')) {
+          import('ttUserConfig');
+          $uc = new ttUserConfig();
+          $use_breaks = $uc->getValue(PDF_REPORT_PAGE_BREAKS);
+          if ($use_breaks) $html .= '<br pagebreak="true"/>';
+        }
       }
-      $first_pass = false; 
+      $first_pass = false;
     }
 
     // Print a regular row.
