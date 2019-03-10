@@ -387,7 +387,7 @@ class ttGroupExportHelper {
         $log_part .= " task_id=\"".$this->taskMap[$record['task_id']]."\"";
         $log_part .= " timesheet_id=\"".$this->timesheetMap[$record['timesheet_id']]."\"";
         $log_part .= " invoice_id=\"".$this->invoiceMap[$record['invoice_id']]."\"";
-        $log_part .= " comment=\"".htmlspecialchars($record['comment'])."\"";
+        $log_part .= " comment=\"".$this->encodeLineBreaks($record['comment'])."\"";
         $log_part .= " billable=\"".$record['billable']."\"";
         $log_part .= " approved=\"".$record['approved']."\"";
         $log_part .= " paid=\"".$record['paid']."\"";
@@ -459,7 +459,7 @@ class ttGroupExportHelper {
         $expense_item_part .= " user_id=\"".$this->userMap[$expense_item['user_id']]."\"";
         $expense_item_part .= " client_id=\"".$this->clientMap[$expense_item['client_id']]."\"";
         $expense_item_part .= " project_id=\"".$this->projectMap[$expense_item['project_id']]."\"";
-        $expense_item_part .= " name=\"".htmlspecialchars($expense_item['name'])."\"";
+        $expense_item_part .= " name=\"".$this->encodeLineBreaks($expense_item['name'])."\"";
         $expense_item_part .= " cost=\"".$expense_item['cost']."\"";
         $expense_item_part .= " invoice_id=\"".$this->invoiceMap[$expense_item['invoice_id']]."\"";
         $expense_item_part .= " approved=\"".$expense_item['approved']."\"";
@@ -495,7 +495,7 @@ class ttGroupExportHelper {
       foreach ($templates as $template) {
         $template_part = $this->indentation.'    '."<template name=\"".htmlspecialchars($template['name'])."\"";
         $template_part .= " description=\"".htmlspecialchars($template['description'])."\"";
-        $template_part .= " content=\"".htmlspecialchars($template['content'])."\"";
+        $template_part .= " content=\"".$this->encodeLineBreaks($template['content'])."\"";
         $template_part .= " status=\"".$template['status']."\"";
         $template_part .= "></template>\n";
         fwrite($this->file, $template_part);
@@ -633,5 +633,19 @@ class ttGroupExportHelper {
     unset($this->subgroups);
 
     fwrite($this->file, $this->indentation."</group>\n");
+  }
+
+  // encodeLineBreaks encodes line breaks with an escape sequence.
+  // We do this, because our strings are attribute values inside XML tags.
+  //
+  // If we don't, we lose line breaks after importing data because
+  // XML parser converts line breaks into a single white character.
+  //
+  // TODO: investigate whether we need to encode \t, etc.
+  private function encodeLineBreaks($source) {
+    $result = htmlspecialchars($source);
+    $result = str_replace ("\n", '&#10;', $result);
+    $result = str_replace ("\r", '&#13;', $result);
+    return $result;
   }
 }
