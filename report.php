@@ -282,6 +282,24 @@ if ($report_items) {
   $smarty->assign('cur_grouped_by', '');
 }
 
+// Determine column span for note field.
+$colspan = 1;
+if ($bean->getAttribute('chuser')) $colspan++;
+if ($bean->getAttribute('chclient')) $colspan++;
+if ($bean->getAttribute('chproject')) $colspan++;
+if ($bean->getAttribute('chtask')) $colspan++;
+if ($bean->getAttribute('chcf_1')) $colspan++;
+if ($bean->getAttribute('chstart')) $colspan++;
+if ($bean->getAttribute('chfinish')) $colspan++;
+if ($bean->getAttribute('chduration')) $colspan++;
+if ($bean->getAttribute('chunits')) $colspan++;
+if ($bean->getAttribute('chcost')) $colspan++;
+if ($bean->getAttribute('chapproved')) $colspan++;
+if ($bean->getAttribute('chpaid')) $colspan++;
+if ($bean->getAttribute('chip')) $colspan++;
+if ($bean->getAttribute('chinvoice')) $colspan++;
+if ($bean->getAttribute('chtimesheet')) $colspan++;
+
 // Assign variables that are used to alternate color of rows for different dates.
 $smarty->assign('prev_date', '');
 $smarty->assign('cur_date', '');
@@ -290,6 +308,7 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('report_items', $report_items);
 $smarty->assign('subtotals', $subtotals);
 $smarty->assign('totals', $totals);
+$smarty->assign('colspan', $colspan);
 $smarty->assign('bean', $bean);
 $smarty->assign('title', $i18n->get('title.report').": ".$totals['start_date']." - ".$totals['end_date']);
 $smarty->assign('content_page_name', 'report.tpl');
