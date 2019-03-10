@@ -738,6 +738,24 @@ class ttReportHelper {
     $cellLeftAlignedSubtotal = 'font-weight: bold; text-align: left; vertical-align: top;';
     $cellRightAlignedSubtotal = 'font-weight: bold; text-align: right; vertical-align: top;';
 
+    // Determine column span for note field.
+    $colspan = 1;
+    if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) $colspan++;
+    if ($options['show_client']) $colspan++;
+    if ($options['show_project']) $colspan++;
+    if ($options['show_task']) $colspan++;
+    if ($options['show_custom_field_1']) $colspan++;
+    if ($options['show_start']) $colspan++;
+    if ($options['show_end']) $colspan++;
+    if ($options['show_duration']) $colspan++;
+    if ($options['show_work_units']) $colspan++;
+    if ($options['show_cost']) $colspan++;
+    if ($options['show_approved']) $colspan++;
+    if ($options['show_paid']) $colspan++;
+    if ($options['show_ip']) $colspan++;
+    if ($options['show_invoice']) $colspan++;
+    if ($options['show_timesheet']) $colspan++;
+
     // Start creating email body.
     $body = '<html>';
     $body .= '<head><meta http-equiv="content-type" content="text/html; charset='.CHARSET.'"></head>';

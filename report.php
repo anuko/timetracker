@@ -284,7 +284,7 @@ if ($report_items) {
 
 // Determine column span for note field.
 $colspan = 1;
-if ($bean->getAttribute('chuser')) $colspan++;
+if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) $colspan++;
 if ($bean->getAttribute('chclient')) $colspan++;
 if ($bean->getAttribute('chproject')) $colspan++;
 if ($bean->getAttribute('chtask')) $colspan++;
