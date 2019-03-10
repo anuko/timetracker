@@ -849,8 +849,6 @@ class ttReportHelper {
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.duration').'</td>';
       if ($options['show_work_units'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.work_units_short').'</td>';
-      if ($options['show_note'])
-        $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.note').'</td>';
       if ($options['show_cost'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
       if ($options['show_approved'])
@@ -897,7 +895,6 @@ class ttReportHelper {
               if ($options['show_end']) $body .= '<td></td>';
               if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['time'].'</td>';
               if ($options['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['units'].'</td>';
-              if ($options['show_note']) $body .= '<td></td>';
               if ($options['show_cost']) {
                 $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
                 $body .= ($canViewReports || $isClient) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
@@ -937,8 +934,6 @@ class ttReportHelper {
             $body .= '<td style="'.$cellRightAligned.'">'.$record['duration'].'</td>';
           if ($options['show_work_units'])
             $body .= '<td style="'.$cellRightAligned.'">'.$record['units'].'</td>';
-          if ($options['show_note'])
-            $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['note']).'</td>';
           if ($options['show_cost'])
             $body .= '<td style="'.$cellRightAligned.'">'.$record['cost'].'</td>';
           if ($options['show_approved']) {
@@ -961,7 +956,12 @@ class ttReportHelper {
           if ($options['show_timesheet'])
             $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['timesheet']).'</td>';
           $body .= '</tr>';
-
+          if ($options['show_note']) {
+            $body .= '<tr style="'.$row_style.'">';
+            $body .= '<td style="'.$cellRightAligned.'">'.$i18n->get('label.note').':</td>';
+            $body .= '<td colspan="'.$colspan.'">'.$record['note'].'</td>';
+            $body .= '</tr>';
+          }
           $prev_date = $record['date'];
           if ($print_subtotals)
             $prev_grouped_by = $record['grouped_by'];
@@ -982,7 +982,6 @@ class ttReportHelper {
         if ($options['show_end']) $body .= '<td></td>';
         if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['time'].'</td>';
         if ($options['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['units'].'</td>';
-        if ($options['show_note']) $body .= '<td></td>';
         if ($options['show_cost']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
           $body .= ($canViewReports || $isClient) ? $subtotals[$cur_grouped_by]['cost'] : $subtotals[$cur_grouped_by]['expenses'];
@@ -1009,7 +1008,6 @@ class ttReportHelper {
       if ($options['show_end']) $body .= '<td></td>';
       if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['time'].'</td>';
       if ($options['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['units'].'</td>';
-      if ($options['show_note']) $body .= '<td></td>';
       if ($options['show_cost']) {
         $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
         $body .= ($canViewReports || $isClient) ? $totals['cost'] : $totals['expenses'];
