@@ -956,7 +956,7 @@ class ttReportHelper {
           if ($options['show_timesheet'])
             $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['timesheet']).'</td>';
           $body .= '</tr>';
-          if ($options['show_note']) {
+          if ($options['show_note'] && $record['note']) {
             $body .= '<tr style="'.$row_style.'">';
             $body .= '<td style="'.$cellRightAligned.'">'.$i18n->get('label.note').':</td>';
             $body .= '<td colspan="'.$colspan.'">'.$record['note'].'</td>';

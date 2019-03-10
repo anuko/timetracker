@@ -110,7 +110,7 @@
       {if 2 == $item.type}<td bgcolor="white"><input type="checkbox" name="item_id_{$item.id}"></td>{/if}
     {/if}
       </tr>
-    {if $bean->getAttribute('chnote')}
+    {if $bean->getAttribute('chnote') && $item.note}
       <tr>
         <td class="cellRightAligned">{$i18n.label.note}:</td>
         <td colspan="{$colspan}">{$item.note|escape}</td>
