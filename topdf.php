@@ -221,7 +221,7 @@ if ($totals_only) {
         if (isTrue('PDF_REPORT_PAGE_BREAKS')) {
           import('ttUserConfig');
           $uc = new ttUserConfig();
-          $use_breaks = $uc->getValue(PDF_REPORT_PAGE_BREAKS);
+          $use_breaks = $uc->getValue(SYSC_PDF_REPORT_PAGE_BREAKS);
           if ($use_breaks) $html .= '<br pagebreak="true"/>';
         }
       }
