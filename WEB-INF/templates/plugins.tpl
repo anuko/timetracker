@@ -29,6 +29,7 @@ function handlePluginCheckboxes() {
     taxLabel.style.visibility = "hidden";
   }
   var configureLabel = document.getElementById("expenses_config");
+  var docLabel = null;
   if (expensesCheckbox.checked) {
     configureLabel.style.visibility = "visible";
   } else {
@@ -85,12 +86,13 @@ function handlePluginCheckboxes() {
 
   var templatesCheckbox = document.getElementById("templates");
   configureLabel = document.getElementById("templates_config");
+  docLabel = document.getElementById("templates_doc");
   if (templatesCheckbox.checked){
     configureLabel.style.display = "";
-    //configureLabel.style.visibility = "visible";
+    docLabel.style.display = "none";
   } else {
     configureLabel.style.display = "none";
-    //configureLabel.style.visibility = "hidden";
+    docLabel.style.display = "";
   }
 }
 </script>
@@ -154,7 +156,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.templates.control}</td>
-            <td><label for="templates">{$i18n.title.templates}</label> <span id="templates_config"><a href="templates.php">{$i18n.label.configure}</a></span> <a href="https://www.anuko.com/lp/tt_29.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+            <td><label for="templates">{$i18n.title.templates}</label> <span id="templates_config"><a href="templates.php">{$i18n.label.configure}</a></span> <span id="templates_doc"><a href="https://www.anuko.com/lp/tt_29.htm" target="_blank">{$i18n.label.what_is_it}</a></span></td>
           </tr>
           <tr>
             <td colspan="2">&nbsp;</td>
