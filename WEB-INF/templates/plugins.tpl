@@ -152,7 +152,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.timesheets.control}</td>
-            <td><label for="timesheets">{$i18n.title.timesheets}</label></td>
+            <td><label for="timesheets">{$i18n.title.timesheets}</label> <a href="https://www.anuko.com/lp/tt_30.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.templates.control}</td>
