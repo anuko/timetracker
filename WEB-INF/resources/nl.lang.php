@@ -51,7 +51,7 @@ $i18n_key_words = array(
 'menu.time' => 'Tijden',
 'menu.expenses' => 'Kosten',
 'menu.reports' => 'Rapporten',
-// TODO: translate the following.
+// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
 // 'menu.timesheets' => 'Timesheets',
 'menu.charts' => 'Grafieken',
 'menu.projects' => 'Projecten',
@@ -89,8 +89,7 @@ $i18n_key_words = array(
 'error.invoice_exists' => 'Dit nummer is al eens toegekend aan een factuur.',
 'error.role_exists' => 'Een rol met deze rangorde bestaat al.',
 'error.no_invoiceable_items' => 'Er zijn geen factuureerbare onderdelen.',
-// TODO: translate the following.
-// 'error.no_records' => 'There are no records.',
+'error.no_records' => 'Er zijn geen records.',
 'error.no_login' => 'Een medewerker met deze inlognaam bestaat niet.',
 'error.no_groups' => 'Uw database is leeg. Meld je aan als admin en maak een nieuw groep.',
 'error.upload' => 'Fout bij het uploaden van het bestand.',
@@ -132,9 +131,8 @@ $i18n_key_words = array(
 'button.import' => 'Groep importeren',
 'button.close' => 'Sluiten',
 'button.stop' => 'Stop',
-// TODO: translate the following.
-// 'button.approve' => 'Approve',
-// 'button.disapprove' => 'Disapprove',
+'button.approve' => 'Goedkeuren',
+'button.disapprove' => 'Afkeuren',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.group_name' => 'Groepsnaam',
@@ -234,13 +232,13 @@ $i18n_key_words = array(
 'label.work_units_short' => 'Eenheid',
 'label.totals_only' => 'Alleen totalen',
 'label.quota' => 'Maanddoel',
-// TODO: translate the following.
+// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
 // 'label.timesheet' => 'Timesheet',
 // 'label.submitted' => 'Submitted',
-// 'label.approved' => 'Approved',
-// 'label.approval' => 'Report approval',
-// 'label.mark_approved' => 'Mark approved',
-// 'label.template' => 'Template',
+'label.approved' => 'Goedgekeurd',
+'label.approval' => 'Rapport goedkeuring',
+'label.mark_approved' => 'Markeer goegkeuring',
+'label.template' => 'Sjabloon',
 
 // Form titles.
 'title.error' => 'Fout',
@@ -266,7 +264,7 @@ $i18n_key_words = array(
 'title.reports' => 'Rapporten',
 'title.report' => 'Rapport',
 'title.send_report' => 'Rapport aan het versturen',
-// TODO: Translate the following.
+// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
 // 'title.timesheets' => 'Timesheets',
 // 'title.timesheet' => 'Timesheet',
 'title.invoice' => 'Factuur',
@@ -300,7 +298,7 @@ $i18n_key_words = array(
 'title.add_notification' => 'Notificatie toevoegen',
 'title.edit_notification' => 'Notificatie bewerken',
 'title.delete_notification' => 'Notificatie verwijderen',
-// TODO: translate the following.
+// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
 // 'title.add_timesheet' => 'Adding Timesheet',
 // 'title.edit_timesheet' => 'Editing Timesheet',
 // 'title.delete_timesheet' => 'Deleting Timesheet',
@@ -322,11 +320,10 @@ $i18n_key_words = array(
 'title.week_view' => 'Week overzicht',
 'title.swap_roles' => 'Rollen verruilen',
 'title.work_units' => 'Werk eenheid',
-// TODO: translate the following.
-// 'title.templates' => 'Templates',
-// 'title.add_template' => 'Adding Template',
-// 'title.edit_template' => 'Editing Template',
-// 'title.delete_template' => 'Deleting Template',
+'title.templates' => 'Sjablonen',
+'title.add_template' => 'Sjabloon toevoegen',
+'title.edit_template' => 'Sjabloon bewerken',
+'title.delete_template' => 'Sjabloon verwijderen',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -350,15 +347,14 @@ $i18n_key_words = array(
 'dropdown.clients' => 'klanten',
 'dropdown.select' => '--- kies ---',
 'dropdown.select_invoice' => '--- kies factuur ---',
-// TODO: translate the following.
+// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
 // 'dropdown.select_timesheet' => '--- select timesheet ---',
 'dropdown.status_active' => 'actief',
 'dropdown.status_inactive' => 'inactief',
 'dropdown.delete' => 'verwijderen',
 'dropdown.do_not_delete' => 'niet verwijderen',
-// TODO: translate the following.
-// 'dropdown.approved' => 'approved',
-// 'dropdown.not_approved' => 'not approved',
+'dropdown.approved' => 'goedgekeurd',
+'dropdown.not_approved' => 'afgekeurd',
 'dropdown.paid' => 'betaald',
 'dropdown.not_paid' => 'niet betaald',
 
@@ -383,11 +379,10 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(uu:mm of 0.0u)',
 'form.time.billable' => 'Factureerbaar',
 'form.time.uncompleted' => 'Onvolledig',
-// TODO: The following 4 strings may need to be shorter for mobile apps.
-'form.time.remaining_quota' => 'Nog te werken uren voor de doelstelling deze maand',
-'form.time.over_quota' => 'Meer gewerkte uren dan de doelstelling deze maand',
-'form.time.remaining_balance' => 'Minder gewerkte uren dan de doelstelling in ratio met de verstreken dagen',
-'form.time.over_balance' => 'Meer gewerkte uren dan de doelstelling in ratio met de verstreken dagen',
+'form.time.remaining_quota' => 'Nog te werken uren deze maand',
+'form.time.over_quota' => 'Meer gewerkte uren deze maand',
+'form.time.remaining_balance' => 'Minder gewerkte uren naar ratio',
+'form.time.over_balance' => 'Meer gewerkte uren naar ratio',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Dit tijdrecord is opgeslagen met alleen een starttijd. Dit is geen fout.',
@@ -402,10 +397,9 @@ $i18n_key_words = array(
 'form.reports.include_not_billable' => 'niet factureerbaar',
 'form.reports.include_invoiced' => 'gefactureerd',
 'form.reports.include_not_invoiced' => 'niet gefactureerd',
-// TODO: translate the following.
-// 'form.reports.include_assigned' => 'assigned',
-// 'form.reports.include_not_assigned' => 'not assigned',
-// 'form.reports.include_pending' => 'pending',
+'form.reports.include_assigned' => 'toegewezen',
+'form.reports.include_not_assigned' => 'niet toegewezen',
+'form.reports.include_pending' => 'in afwachting',
 'form.reports.select_period' => 'Kies periode',
 'form.reports.set_period' => 'of stel datums in',
 'form.reports.show_fields' => 'Toon velden',
@@ -421,18 +415,17 @@ $i18n_key_words = array(
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Exporteer',
 'form.report.assign_to_invoice' => 'Voeg toe aan factuur',
-// TODO: translate the following.
+// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
 // 'form.report.assign_to_timesheet' => 'Assign to timesheet',
 
 // Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
-// TODO: translate the following.
+// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
 // 'form.timesheets.active_timesheets' => 'Active Timesheets',
 // 'form.timesheets.inactive_timesheets' => 'Inactive Timesheets',
 
 // Templates form. See example at https://timetracker.anuko.com/templates.php
-// TODO: translate the following.
-// 'form.templates.active_templates' => 'Active Templates',
-// 'form.templates.inactive_templates' => 'Inactive Templates',
+'form.templates.active_templates' => 'Actieve sjablonen',
+'form.templates.inactive_templates' => 'Inactieve sjablonen',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice.php
 // (you can get to this form after generating a report).
@@ -549,9 +542,7 @@ $i18n_key_words = array(
 'role.user.description' => 'Een gebruiker zonder beheer rechten.',
 'role.client.label' => 'Klant',
 'role.client.low_case_label' => 'klant',
-// TODO: translate the following.
-// 'role.client.description' => 'A client can view its own data.',
-'role.client.description' => 'Een klant kan zijn eigen rapporten en facturen inzien.',
+'role.client.description' => 'Een klant kan zijn eigen data inzien.',
 'role.supervisor.label' => 'Supervisor',
 'role.supervisor.low_case_label' => 'supervisor',
 'role.supervisor.description' => 'Een persoon met beperkte beheer rechten.',
@@ -569,7 +560,7 @@ $i18n_key_words = array(
 'role.admin.description' => 'Time Tracker beheerder.',
 
 // Timesheet View form. See example at https://timetracker.anuko.com/timesheet_view.php.
-// TODO: translate the following.
+// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
 // 'form.timesheet_view.submit_subject' => 'Timesheet approval request',
 // 'form.timesheet_view.submit_body' => "A new timesheet requires approval.<p>User: %s.",
 // 'form.timesheet_view.approve_subject' => 'Timesheet approved',
