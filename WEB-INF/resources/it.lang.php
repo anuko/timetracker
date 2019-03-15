@@ -256,6 +256,7 @@ $i18n_key_words = array(
 // 'label.mark_approved' => 'Mark approved',
 // 'label.template' => 'Template',
 // 'label.attachments' => 'Attachments',
+// 'label.files' => 'Files',
 
 // Form titles.
 // TODO: Improve titles for consistency, so that each title explains correctly what each

@@ -238,6 +238,7 @@ $i18n_key_words = array(
 'label.mark_approved' => 'Отметить одобрение',
 'label.template' => 'Шаблон',
 'label.attachments' => 'Приложения',
+'label.files' => 'Файлы',
 
 // Form titles.
 'title.error' => 'Ошибка',
