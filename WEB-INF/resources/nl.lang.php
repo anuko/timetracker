@@ -239,6 +239,8 @@ $i18n_key_words = array(
 'label.approval' => 'Rapport goedkeuring',
 'label.mark_approved' => 'Markeer goegkeuring',
 'label.template' => 'Sjabloon',
+// TODO: translate the following.
+// 'label.attachments' => 'Attachments',
 
 // Form titles.
 'title.error' => 'Fout',

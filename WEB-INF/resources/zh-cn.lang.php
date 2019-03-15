@@ -270,6 +270,7 @@ $i18n_key_words = array(
 // 'label.approval' => 'Report approval',
 // 'label.mark_approved' => 'Mark approved',
 // 'label.template' => 'Template',
+// 'label.attachments' => 'Attachments',
 
 // Form titles.
 // TODO: Translate the following.
