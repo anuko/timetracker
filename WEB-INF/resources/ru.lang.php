@@ -239,6 +239,7 @@ $i18n_key_words = array(
 'label.template' => 'Шаблон',
 'label.attachments' => 'Приложения',
 'label.files' => 'Файлы',
+'label.image' => 'Изображение',
 
 // Form titles.
 'title.error' => 'Ошибка',

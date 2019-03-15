@@ -266,6 +266,7 @@ $i18n_key_words = array(
 // 'label.template' => 'Template',
 // 'label.attachments' => 'Attachments',
 // 'label.files' => 'Files',
+// 'label.image' => 'Image',
 
 // Form titles.
 'title.error' => 'Virhe',

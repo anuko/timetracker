@@ -242,6 +242,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.attachments' => 'Attachments',
 // 'label.files' => 'Files',
+// 'label.image' => 'Image',
 
 // Form titles.
 'title.error' => 'Fout',

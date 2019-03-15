@@ -281,6 +281,7 @@ $i18n_key_words = array(
 // 'label.template' => 'Template',
 // 'label.attachments' => 'Attachments',
 // 'label.files' => 'Files',
+// 'label.image' => 'Image',
 
 // Form titles.
 // TODO: Improve titles for consistency, so that each title explains correctly what each

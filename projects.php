@@ -27,7 +27,6 @@
 // +----------------------------------------------------------------------+
 
 require_once('initialize.php');
-import('form.Form');
 import('ttGroupHelper');
 
 // Access checks.
