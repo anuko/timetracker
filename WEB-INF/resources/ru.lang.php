@@ -270,6 +270,7 @@ $i18n_key_words = array(
 'title.send_invoice' => 'Отсылка счёта',
 'title.charts' => 'Диаграммы',
 'title.projects' => 'Проекты',
+'title.project_files' => 'Файлы проекта',
 'title.add_project' => 'Добавление проекта',
 'title.edit_project' => 'Редактирование проекта',
 'title.delete_project' => 'Удаление проекта',

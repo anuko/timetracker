@@ -271,6 +271,7 @@ $i18n_key_words = array(
 'title.send_invoice' => 'Sending Invoice',
 'title.charts' => 'Charts',
 'title.projects' => 'Projects',
+'title.project_files' => 'Project Files',
 'title.add_project' => 'Adding Project',
 'title.edit_project' => 'Editing Project',
 'title.delete_project' => 'Deleting Project',

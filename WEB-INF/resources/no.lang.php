@@ -318,6 +318,8 @@ $i18n_key_words = array(
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => 'Prosjekter',
+// TODO: translate the following.
+// 'title.project_files' => 'Project Files',
 'title.add_project' => 'Legg til prosjekt',
 'title.edit_project' => 'Endre prosjekt',
 'title.delete_project' => 'Slett prosjekt',

@@ -301,6 +301,8 @@ $i18n_key_words = array(
 'title.send_invoice' => 'Saada arve',
 'title.charts' => 'Diagrammid',
 'title.projects' => 'Projektid',
+// TODO: translate the following.
+// 'title.project_files' => 'Project Files',
 'title.add_project' => 'Projekti lisamine',
 'title.edit_project' => 'Projekti muutmine',
 'title.delete_project' => 'Projekti kustutamine',

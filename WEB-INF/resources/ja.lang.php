@@ -321,6 +321,8 @@ $i18n_key_words = array(
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => 'プロジェクト',
+// TODO: translate the following.
+// 'title.project_files' => 'Project Files',
 'title.add_project' => 'プロジェクトの追加',
 'title.edit_project' => 'プロジェクトの編集',
 'title.delete_project' => 'プロジェクトの削除',

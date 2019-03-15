@@ -297,6 +297,8 @@ $i18n_key_words = array(
 'title.send_invoice' => 'Wysyłanie faktury',
 'title.charts' => 'Statystyki',
 'title.projects' => 'Projekty',
+// TODO: translate the following.
+// 'title.project_files' => 'Project Files',
 'title.add_project' => 'dodawanie projektu',
 'title.edit_project' => 'Edytowanie projektu',
 'title.delete_project' => 'Usuwanie projektu',

@@ -287,6 +287,8 @@ $i18n_key_words = array(
 'title.send_invoice' => 'Αποστολή τιμολόγιου',
 'title.charts' => 'Γραφήματα',
 'title.projects' => 'Έργο',
+// TODO: translate the following.
+// 'title.project_files' => 'Project Files',
 'title.add_project' => 'Προσθήκη έργου',
 'title.edit_project' => 'Επεξεργασία έργου',
 'title.delete_project' => 'Διαγραφή έργου',

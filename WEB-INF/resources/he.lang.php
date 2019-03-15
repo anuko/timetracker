@@ -314,6 +314,8 @@ $i18n_key_words = array(
 'title.send_invoice' => 'שליחת חשבונית',
 'title.charts' => 'תרשימים',
 'title.projects' => 'פרוייקטים',
+// TODO: translate the following.
+// 'title.project_files' => 'Project Files',
 'title.add_project' => 'הוסף פרוייקט',
 'title.edit_project' => 'עריכת פרוייקט',
 'title.delete_project' => 'מחיקת פרוייקט',

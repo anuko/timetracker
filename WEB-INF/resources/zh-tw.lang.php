@@ -316,6 +316,8 @@ $i18n_key_words = array(
 // 'title.send_invoice' => 'Sending Invoice',
 // 'title.charts' => 'Charts',
 'title.projects' => '項目',
+// TODO: translate the following.
+// 'title.project_files' => 'Project Files',
 'title.add_project' => '添加項目',
 'title.edit_project' => '編輯專案', // TODO: is this correct? I do not see 項目 here.
 'title.delete_project' => '刪除項目',
