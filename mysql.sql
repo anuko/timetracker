@@ -535,6 +535,30 @@ CREATE TABLE `tt_templates` (
 
 
 #
+# Structure for table tt_files.
+# This table keeps file attachment information.
+#
+CREATE TABLE `tt_files` (
+  `id` int(10) unsigned NOT NULL auto_increment, # file id
+  `group_id` int(10) unsigned,                   # group id
+  `org_id` int(10) unsigned,                     # organization id
+  `remote_id` bigint(20) unsigned,               # file id in storage facility
+  `entity_type` varchar(32),                     # type of entity file is associated with (project, task, etc.)
+  `entity_id` int(10) unsigned,                  # entity id
+  `file_name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # file name
+  `description` varchar(255) default NULL,       # file description
+  `created` datetime default NULL,               # creation timestamp
+  `created_ip` varchar(45) default NULL,         # creator ip
+  `created_by` int(10) unsigned,                 # creator user_id
+  `modified` datetime default NULL,              # modification timestamp
+  `modified_ip` varchar(45) default NULL,        # modifier ip
+  `modified_by` int(10) unsigned,                # modifier user_id
+  `status` tinyint(1) default 1,                 # file status
+  PRIMARY KEY  (`id`)
+);
+
+
+#
 # Structure for table tt_site_config. This table stores configuration data
 # for Time Tracker site as a whole.
 # For example, database version, code version, site language, etc.
@@ -547,4 +571,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.55', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.59', now()); # TODO: change when structure changes.

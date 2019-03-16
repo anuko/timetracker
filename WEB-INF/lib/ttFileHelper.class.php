@@ -35,7 +35,7 @@ class ttFileHelper {
     $this->errors = &$errors;
   }
 
-  // putFile - puts uploaded file in storage.
+  // putFile - puts uploaded file in remote storage.
   function putFile() {
 
     unlink($_FILES['newfile']['tmp_name']);
