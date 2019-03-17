@@ -28,15 +28,59 @@
 
 // ttFileHelper class is used for attachment handling.
 class ttFileHelper {
-  var $errors               = null; // Errors go here. Set in constructor by reference.
+  var $errors = null; // Errors go here. Set in constructor by reference.
+  var $storage_uri = null;
+  var $site_id = null;
+  var $site_key = null;
 
   // Constructor.
   function __construct(&$errors) {
     $this->errors = &$errors;
+
+    if (isset($GLOBALS['FILE_STORAGE_PARAMS']) && is_array($GLOBALS['FILE_STORAGE_PARAMS'])) {
+       $params = $GLOBALS['FILE_STORAGE_PARAMS'];
+       $this->storage_uri = $params['uri'];
+       $this->site_id = $params['site_id'];
+       $this->site_key = $params['site_key'];
+    }
   }
 
   // putFile - puts uploaded file in remote storage.
-  function putFile() {
+  function putFile($description) {
+
+    $url = $this->storage_uri;
+    $fields = array('description' => urlencode($description),
+//	'fname' => urlencode($_POST['first_name']),
+//	'title' => urlencode($_POST['title']),
+//	'company' => urlencode($_POST['institution']),
+//	'age' => urlencode($_POST['age']),
+//	'email' => urlencode($_POST['email']),
+//	'phone' => urlencode($_POST['phone'])
+    );
+
+    // url-ify the data for the POST.
+    foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, count($fields));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post rewuest.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if ($result) {
+      $result_array = json_decode($result, true);
+      $file_id = $mdb2->quote($result_array['id']);
+    }
 
     unlink($_FILES['newfile']['tmp_name']);
     return false; // Not implemented.

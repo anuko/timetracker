@@ -70,8 +70,10 @@ if ($request->isPost()) {
   if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
   // Finished validating user input.
 
-  $fileHelper = new ttFileHelper($err);
-  $fileHelper->putFile();
+  if ($err->no()) {
+    $fileHelper = new ttFileHelper($err);
+    $fileHelper->putFile($cl_description);
+  }
 //  if ($err->no()) $msg->add($i18n->get('form.import.success'));
 } // isPost
 
