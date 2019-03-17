@@ -52,6 +52,8 @@ class ttFileHelper {
   // checkSiteRegistration - obtains site id and key from local database.
   // If not found, it tries to register with file stroage facility.
   function checkSiteRegistration() {
+
+    global $i18n;
     $mdb2 = getConnection();
 
     // Obtain site id.
@@ -94,6 +96,8 @@ class ttFileHelper {
           $mdb2->exec($sql);
           $sql = "insert into tt_site_config values('locker_key', $key, now(), null)";
           $mdb2->exec($sql);
+        } else {
+          $this->errors->add($i18n->get('error.file_storage'));
         }
       }
     } else {
@@ -109,16 +113,21 @@ class ttFileHelper {
   }
 
   // putFile - puts uploaded file in remote storage.
-  function putFile($description) {
+  function putFile($fields) {
+    $mdb2 = getConnection();
 
-    $url = $this->storage_uri;
-    $fields = array('description' => urlencode($description),
-//	'fname' => urlencode($_POST['first_name']),
-//	'title' => urlencode($_POST['title']),
-//	'company' => urlencode($_POST['institution']),
-//	'age' => urlencode($_POST['age']),
-//	'email' => urlencode($_POST['email']),
-//	'phone' => urlencode($_POST['phone'])
+    $fields = array('site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      //'org_id' => urlencode($this->org_id),       // TODO: obtain this properly.
+      //'org_key' => urlencode($this->org_key),     // TODO: obtain this properly.
+      //'group_id' => urlencode($this->group_id),   // TODO: obtain this properly.
+      //'group_key' => urlencode($this->group_key), // TODO: obtain this properly.
+      //'user_id' => urlencode($this->user_id),     // TODO: obtain this properly.
+      //'user_key' => urlencode($this->user_key),   // TODO: obtain this properly.
+      'file_name' => urlencode($fields['file_name']),
+      'description' => urlencode($fields['description']),
+      // TODO: add file content here, too. Will this work for large files?
+      //
     );
 
     // url-ify the data for the POST.
@@ -129,7 +138,7 @@ class ttFileHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_URL, $this->putfile_uri);
     curl_setopt($ch, CURLOPT_POST, count($fields));
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -142,7 +151,8 @@ class ttFileHelper {
 
     if ($result) {
       $result_array = json_decode($result, true);
-      $file_id = $mdb2->quote($result_array['id']);
+      $file_id = $result_array['file_id'];
+      $file_key = $result_array['file_key'];
     }
 
     unlink($_FILES['newfile']['tmp_name']);

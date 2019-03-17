@@ -72,7 +72,10 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     $fileHelper = new ttFileHelper($err);
-    $fileHelper->putFile($cl_description);
+    $fields = array('description'=>$cl_description); // TODO: add other fields here if required.
+    if (!$fileHelper->putFile($fields)) {
+      $err->add($i18n->get('error.expired'));
+    }
   }
 //  if ($err->no()) $msg->add($i18n->get('form.import.success'));
 } // isPost

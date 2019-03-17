@@ -126,6 +126,8 @@ $i18n_key_words = array(
 'error.format' => 'Faili formaat on vale.',
 'error.user_count' => 'Kasutajate arvu piirang.',
 'error.expired' => 'Kehtivusaeg on lõppenud.',
+// TODO: translate the following.
+// 'error.file_storage' => 'File storage error.',
 
 // Warning messages.
 'warn.sure' => 'Oled kindel?',

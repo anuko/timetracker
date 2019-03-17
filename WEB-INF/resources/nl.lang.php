@@ -105,6 +105,8 @@ $i18n_key_words = array(
 'error.format' => 'Bestandsformaat niet valide.',
 'error.user_count' => 'Limiet op aantal gebruikers.',
 'error.expired' => 'Verloop datum is bereikt.',
+// TODO: translate the following.
+// 'error.file_storage' => 'File storage error.',
 
 // Warning messages.
 'warn.sure' => 'Ben je er zeker van?',
