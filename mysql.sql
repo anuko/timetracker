@@ -543,6 +543,7 @@ CREATE TABLE `tt_files` (
   `group_id` int(10) unsigned,                   # group id
   `org_id` int(10) unsigned,                     # organization id
   `remote_id` bigint(20) unsigned,               # file id in storage facility
+  `file_key` varchar(32),                        # file key
   `entity_type` varchar(32),                     # type of entity file is associated with (project, task, etc.)
   `entity_id` int(10) unsigned,                  # entity id
   `file_name` varchar(80) COLLATE utf8mb4_bin NOT NULL, # file name
@@ -571,4 +572,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.59', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.60', now()); # TODO: change when structure changes.
