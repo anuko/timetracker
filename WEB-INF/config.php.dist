@@ -198,7 +198,7 @@ define('AUTH_MODULE', 'db');
 // Height in pixels for the note input field in time.php. Defaults to 40.
 // define('NOTE_INPUT_HEIGHT', 100);
 
-// $GLOBALS['FILE_STORAGE_PARAMS'] = array(
-//  'uri' => 'localhost',               // File storage uri.
-//  'site_id' => '1',                   // This site id for file storage facility.
-//  'site_key' => 'debug_key');         // This site key for file storage facility.
+// File storage facility location for attachments.
+// This feature requires a subscription or a locally installed appliance.
+// define('FILE_STORAGE_URI', 'localhost');
+define('FILE_STORAGE_URI', 'https://www.anuko.com/files/');

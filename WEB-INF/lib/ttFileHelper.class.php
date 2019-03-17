@@ -28,20 +28,83 @@
 
 // ttFileHelper class is used for attachment handling.
 class ttFileHelper {
-  var $errors = null; // Errors go here. Set in constructor by reference.
-  var $storage_uri = null;
-  var $site_id = null;
-  var $site_key = null;
+  var $errors = null;       // Errors go here. Set in constructor by reference.
+  var $storage_uri = null;  // Location of file storage facility.
+  var $register_uri = null; // URI to register with file storage facility.
+  var $putfile_uri = null;  // URI to put file in file storage.
+  var $getfile_uri = null;  // URI to get file from file storage.
+  var $site_id = null;      // Site id for file storage.
+  var $site_key = null;     // Site key for file storage.
 
   // Constructor.
   function __construct(&$errors) {
     $this->errors = &$errors;
 
-    if (isset($GLOBALS['FILE_STORAGE_PARAMS']) && is_array($GLOBALS['FILE_STORAGE_PARAMS'])) {
-       $params = $GLOBALS['FILE_STORAGE_PARAMS'];
-       $this->storage_uri = $params['uri'];
-       $this->site_id = $params['site_id'];
-       $this->site_key = $params['site_key'];
+    if (defined('FILE_STORAGE_URI')) {
+      $this->storage_uri = FILE_STORAGE_URI;
+      $this->register_uri = $this->storage_uri.'register';
+      $this->putfile_uri = $this->storage_uri.'putfile';
+      $this->getfile_uri = $this->storage_uri.'getfile';
+      $this->checkSiteRegistration();
+    }
+  }
+
+  // checkSiteRegistration - obtains site id and key from local database.
+  // If not found, it tries to register with file stroage facility.
+  function checkSiteRegistration() {
+    $mdb2 = getConnection();
+
+    // Obtain site id.
+    $sql = "select param_value as id from tt_site_config where param_name = 'locker_id'";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    if (!$val) {
+      // No site id found, need to register.
+      $fields = array('name' => urlencode('time tracker'),
+        'origin' => urlencode('time tracker source'));
+
+      // Urlify the data for the POST.
+      foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+      $fields_string = rtrim($fields_string, '&');
+
+      // Open connection.
+      $ch = curl_init();
+
+      // Set the url, number of POST vars, POST data.
+      curl_setopt($ch, CURLOPT_URL, $this->register_uri);
+      curl_setopt($ch, CURLOPT_POST, count($fields));
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      // Execute a post request.
+      $result = curl_exec($ch);
+
+      // Close connection.
+      curl_close($ch);
+
+      if ($result) {
+        $result_array = json_decode($result, true);
+        if ($result_array && $result_array['id'] && $result_array['key']) {
+
+          $this->site_id = $mdb2->quote($result_array['id']);
+          $this->site_key = $mdb2->quote($result_array['key']);
+
+          // Registration successful. Store id and key locally for future use.
+          $sql = "insert into tt_site_config values('locker_id', $site_id, now(), null)";
+          $mdb2->exec($sql);
+          $sql = "insert into tt_site_config values('locker_key', $key, now(), null)";
+          $mdb2->exec($sql);
+        }
+      }
+    } else {
+      // Site id found, need to update site attributes.
+      $this->site_id = $val['id'];
+
+      // Obtain site key.
+      $sql = "select param_value as site_key from tt_site_config where param_name = 'locker_key'";
+      $res = $mdb2->query($sql);
+      $val = $res->fetchRow();
+      $this->site_key = $val['site_key'];
     }
   }
 
