@@ -96,8 +96,6 @@ class ttFileHelper {
           $mdb2->exec($sql);
           $sql = "insert into tt_site_config values('locker_key', $key, now(), null)";
           $mdb2->exec($sql);
-        } else {
-          $this->errors->add($i18n->get('error.file_storage'));
         }
       }
     } else {
@@ -114,13 +112,20 @@ class ttFileHelper {
 
   // putFile - puts uploaded file in remote storage.
   function putFile($fields) {
+    // if (!$this->site_id || !$this->site_key) return false;
+
+    global $i18n;
+    global $user;
     $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
 
     $fields = array('site_id' => urlencode($this->site_id),
       'site_key' => urlencode($this->site_key),
-      //'org_id' => urlencode($this->org_id),       // TODO: obtain this properly.
+      'org_id' => urlencode($org_id),
       //'org_key' => urlencode($this->org_key),     // TODO: obtain this properly.
-      //'group_id' => urlencode($this->group_id),   // TODO: obtain this properly.
+      'group_id' => urlencode($group_id),
       //'group_key' => urlencode($this->group_key), // TODO: obtain this properly.
       //'user_id' => urlencode($this->user_id),     // TODO: obtain this properly.
       //'user_key' => urlencode($this->user_key),   // TODO: obtain this properly.
@@ -149,31 +154,37 @@ class ttFileHelper {
     // Close connection.
     curl_close($ch);
 
-    if ($result) {
-      $result_array = json_decode($result, true);
-      $file_id = $result_array['file_id'];
-      $file_key = $result_array['file_key'];
+    // Delete uploaded file.
+    unlink($_FILES['newfile']['tmp_name']);
+
+    if (!$result) return false;
+
+    $result_array = json_decode($result, true);
+    $file_id = (int) $result_array['file_id'];
+    $file_key = $result_array['file_key'];
+    $file_error = $result_array['file_error'];
+
+    if (!$file_id || !$file_key) {
+      if ($file_error) {
+        // Add an error message from file storage facility if we have it.
+        $this->errors->add($file_error);
+      }
+      return false;
     }
 
-    unlink($_FILES['newfile']['tmp_name']);
-    return false; // Not implemented.
-/*
-    // Create a temporary file.
-    $dirName = dirname(TEMPLATE_DIR . '_c/.');
-    $filename = tempnam($dirName, 'import_');
+    // File put was successful. Store file attributes locally.
+    $entity_type = $mdb2->quote($fields['entity_type']);
+    $entity_id = (int) $fields['entity_id'];
+    $file_name = $mdb2->quote($fields['file_name']);
+    $description = $mdb2->quote($fields['description']);
+    $created = 'now()';
+    $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
+    $created_by = $user->id;
 
-    // If the file is compressed - uncompress it.
-    if ($compressed) {
-      if (!$this->uncompress($_FILES['xmlfile']['tmp_name'], $filename)) {
-        $this->errors->add($i18n->get('error.sys'));
-        return;
-      }
-      unlink($_FILES['newfile']['tmp_name']);
-    } else {
-      if (!move_uploaded_file($_FILES['xmlfile']['tmp_name'], $filename)) {
-        $this->errors->add($i18n->get('error.upload'));
-        return;
-      }
-    }*/
+    $columns = '(group_id, org_id, remote_id, entity_type, entity_id, file_name, description, created, created_ip, created_by)';
+    $values = "values($group_id, $org_id, $file_id, $entity_type, $entity_id, $file_name, $description, $created, $created_ip, $created_by)";
+    $sql = "insert into tt_files $columns $values";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
   }
 }

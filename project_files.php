@@ -72,12 +72,14 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     $fileHelper = new ttFileHelper($err);
-    $fields = array('description'=>$cl_description); // TODO: add other fields here if required.
+    $fields = array('entity_type'=>'project',
+      'entity_id' => $cl_project_id,
+      'file_name' => $_FILES['newfile']['name'],
+      'description'=>$cl_description);
     if (!$fileHelper->putFile($fields)) {
-      $err->add($i18n->get('error.expired'));
+      $err->add($i18n->get('error.file_storage'));
     }
   }
-//  if ($err->no()) $msg->add($i18n->get('form.import.success'));
 } // isPost
 
 $smarty->assign('can_manage', $user->can('manage_projects'));
