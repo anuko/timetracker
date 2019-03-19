@@ -122,11 +122,11 @@ class ttFileHelper {
     $fields = array('site_id' => urlencode($this->site_id),
       'site_key' => urlencode($this->site_key),
       'org_id' => urlencode($org_id),
-      //'org_key' => urlencode($this->org_key),     // TODO: obtain this properly.
+      'org_key' => urlencode($this->getOrgKey()),
       'group_id' => urlencode($group_id),
-      //'group_key' => urlencode($this->group_key), // TODO: obtain this properly.
-      //'user_id' => urlencode($this->user_id),     // TODO: obtain this properly.
-      //'user_key' => urlencode($this->user_key),   // TODO: obtain this properly.
+      'group_key' => urlencode($this->getGroupKey()),
+      'user_id' => urlencode($fields['user_id']),   // May be null.
+      'user_key' => urlencode($fields['user_key']), // May be null.
       'file_name' => urlencode($fields['file_name']),
       'description' => urlencode($fields['description']),
       // TODO: add file content here, too. Will this work for large files?
@@ -184,5 +184,31 @@ class ttFileHelper {
     $sql = "insert into tt_files $columns $values";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // getOrgKey obtains organization key from the database.
+  private function getOrgKey() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $org_id = $user->org_id;
+    $sql = "select group_key from tt_groups where id = $org_id and status = 1";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    return $val['group_key'];
+  }
+
+  // getGrtoupKey obtains group key from the database.
+  private function getGroupKey() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select group_key from tt_groups where id = $group_id and org_id = $org_id and status = 1";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    return $val['group_key'];
   }
 }
