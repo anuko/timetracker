@@ -145,13 +145,15 @@ class ttRegistrator {
   function createGroup() {
     $mdb2 = getConnection();
 
+    $group_key = $mdb2->quote(ttRandomString());
     $name = $mdb2->quote($this->group_name);
     $currency = $mdb2->quote($this->currency);
     $lang = $mdb2->quote($this->lang);
     $created = 'now()';
     $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
 
-    $sql = "insert into tt_groups (name, currency, lang, created, created_ip) values($name, $currency, $lang, $created, $created_ip)";
+    $sql = "insert into tt_groups (group_key, name, currency, lang, created, created_ip)".
+      " values($group_key, $name, $currency, $lang, $created, $created_ip)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 

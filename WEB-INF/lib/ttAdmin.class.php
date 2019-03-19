@@ -245,6 +245,7 @@ class ttAdmin {
     global $user;
     $mdb2 = getConnection();
 
+    $group_key = $mdb2->quote(ttRandomString());
     $name = $mdb2->quote($fields['group_name']);
     $currency = $mdb2->quote($fields['currency']);
     $lang = $mdb2->quote($fields['lang']);
@@ -252,8 +253,8 @@ class ttAdmin {
     $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
     $created_by = $user->id;
 
-    $sql = "insert into tt_groups (name, currency, lang, created, created_ip, created_by)".
-      " values($name, $currency, $lang, $created, $created_ip, $created_by)";
+    $sql = "insert into tt_groups (group_key, name, currency, lang, created, created_ip, created_by)".
+      " values($group_key, $name, $currency, $lang, $created, $created_ip, $created_by)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
