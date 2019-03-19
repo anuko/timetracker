@@ -102,6 +102,7 @@ class ttOrgImportHelper {
         $this->current_group_id = $this->createGroup(array(
           'parent_id' => $this->current_group_id, // Note: after insert current_group_id changes.
           'org_id' => $this->org_id,
+          'group_key' => $attrs['GROUP_KEY'],
           'name' => $attrs['NAME'],
           'description' => $attrs['DESCRIPTION'],
           'currency' => $attrs['CURRENCY'],
@@ -686,14 +687,15 @@ class ttOrgImportHelper {
     global $i18n;
     $mdb2 = getConnection();
 
-    $columns = '(parent_id, org_id, name, description, currency, decimal_mark, lang, date_format, time_format'.
-      ', week_start, tracking_mode, project_required, task_required, record_type, bcc_email'.
-      ', allow_ip, password_complexity, plugins, lock_spec'.
-      ', workday_minutes, config, created, created_ip, created_by)';
+    $columns = '(parent_id, org_id, group_key, name, description, currency, decimal_mark, lang, date_format, time_format,'.
+      ' week_start, tracking_mode, project_required, task_required, record_type, bcc_email,'.
+      ' allow_ip, password_complexity, plugins, lock_spec,'.
+      ' workday_minutes, config, created, created_ip, created_by)';
 
     $values = ' values (';
     $values .= $mdb2->quote($fields['parent_id']);
     $values .= ', '.$mdb2->quote($fields['org_id']);
+    $values .= ', '.$mdb2->quote(trim($fields['group_key']));
     $values .= ', '.$mdb2->quote(trim($fields['name']));
     $values .= ', '.$mdb2->quote(trim($fields['description']));
     $values .= ', '.$mdb2->quote(trim($fields['currency']));
