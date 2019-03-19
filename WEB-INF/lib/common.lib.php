@@ -406,3 +406,14 @@ function ttDateToUserFormat($date)
   $o_date = new DateAndTime(DB_DATEFORMAT, $date);
   return $o_date->toString($user->date_format);
 }
+
+// ttRandomString generates a random alphanumeric string.
+function ttRandomString($length = 32) {
+  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $charactersLength = strlen($characters);
+  $randomString = '';
+  for ($i = 0; $i < $length; $i++) {
+    $randomString .= $characters[rand(0, $charactersLength - 1)];
+  }
+  return $randomString;
+}

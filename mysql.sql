@@ -16,6 +16,7 @@ CREATE TABLE `tt_groups` (
   `id` int(11) NOT NULL auto_increment,                  # group id
   `parent_id` int(11) default NULL,                      # parent group id
   `org_id` int(11) default NULL,                         # organization id (id of top group)
+  `group_key` varchar(32) default NULL,                  # group key
   `name` varchar(80) default NULL,                       # group name
   `description` varchar(255) default NULL,               # group description
   `currency` varchar(7) default NULL,                    # currency symbol
@@ -572,4 +573,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.60', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.18.61', now()); # TODO: change when structure changes.

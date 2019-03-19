@@ -99,7 +99,7 @@ class ttFileHelper {
         $this->errors->add($i18n->get('error.file_storage'));
       }
     } else {
-      // Site id found, need to update site attributes.
+      // Site id found.
       $this->site_id = $val['id'];
 
       // Obtain site key.
@@ -112,8 +112,6 @@ class ttFileHelper {
 
   // putFile - puts uploaded file in remote storage.
   function putFile($fields) {
-    // if (!$this->site_id || !$this->site_key) return false;
-
     global $i18n;
     global $user;
     $mdb2 = getConnection();
