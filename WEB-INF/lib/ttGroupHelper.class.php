@@ -88,18 +88,20 @@ class ttGroupHelper {
     $mdb2 = getConnection();
     $parent_id = $user->getGroup();
     $org_id = $user->org_id;
+    $group_key = ttRandomString();
     $name = $fields['name'];
     $description = $fields['description'];
 
     // We need to inherit attributes from the parent group.
     $attrs = ttGroupHelper::getGroupAttrs($parent_id);
 
-    $columns = '(parent_id, org_id, name, description, currency, decimal_mark, lang, date_format, time_format'.
-      ', week_start, tracking_mode, project_required, task_required, record_type, bcc_email'.
-      ', allow_ip, password_complexity, plugins, lock_spec'.
-      ', workday_minutes, config, created, created_ip, created_by)';
+    $columns = '(parent_id, org_id, group_key, name, description, currency, decimal_mark, lang, date_format,'.
+      ' time_format, week_start, tracking_mode, project_required, task_required, record_type, bcc_email,'.
+      ' allow_ip, password_complexity, plugins, lock_spec,'.
+      ' workday_minutes, config, created, created_ip, created_by)';
 
     $values = " values ($parent_id, $org_id";
+    $values .= ', '.$mdb2->quote($group_key);
     $values .= ', '.$mdb2->quote($name);
     $values .= ', '.$mdb2->quote($description);
     $values .= ', '.$mdb2->quote($attrs['currency']);
