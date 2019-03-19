@@ -50,7 +50,7 @@ class ttFileHelper {
   }
 
   // checkSiteRegistration - obtains site id and key from local database.
-  // If not found, it tries to register with file stroage facility.
+  // If not found, it tries to register with file storage facility.
   function checkSiteRegistration() {
 
     global $i18n;
@@ -84,19 +84,19 @@ class ttFileHelper {
       // Close connection.
       curl_close($ch);
 
-      if ($result) {
-        $result_array = json_decode($result, true);
-        if ($result_array && $result_array['id'] && $result_array['key']) {
+      $result_array = json_decode($result, true);
+      if ($result_array && $result_array['id'] && $result_array['key']) {
 
-          $this->site_id = $mdb2->quote($result_array['id']);
-          $this->site_key = $mdb2->quote($result_array['key']);
+        $this->site_id = $result_array['id'];
+        $this->site_key = $result_array['key'];
 
-          // Registration successful. Store id and key locally for future use.
-          $sql = "insert into tt_site_config values('locker_id', $site_id, now(), null)";
-          $mdb2->exec($sql);
-          $sql = "insert into tt_site_config values('locker_key', $key, now(), null)";
-          $mdb2->exec($sql);
-        }
+        // Registration successful. Store id and key locally for future use.
+        $sql = "insert into tt_site_config values('locker_id', $this->site_id, now(), null)";
+        $mdb2->exec($sql);
+        $sql = "insert into tt_site_config values('locker_key', ".$mdb2->quote($this->site_key).", now(), null)";
+        $mdb2->exec($sql);
+      } else {
+        $this->errors->add($i18n->get('error.file_storage'));
       }
     } else {
       // Site id found, need to update site attributes.
