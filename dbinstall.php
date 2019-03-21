@@ -47,6 +47,25 @@ function ttExecute($sql) {
     print "Successful update.<br>\n";
 }
 
+// ttGenerateKeys - generates keys for groups that do not have them.
+function ttGenerateKeys() {
+  $mdb2 = getConnection();
+  $sql = "select id from tt_groups where group_key is null and status = 1";
+  $res = $mdb2->query($sql);
+  if (is_a($res, 'PEAR_Error')) die($res->getMessage());
+
+  $numGroups = 0;
+  while ($val = $res->fetchRow()) {
+    $group_id = $val['id'];
+    $group_key = $mdb2->quote(ttRandomString());
+    $sql = "update tt_groups set group_key = $group_key where id = $group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) die($affected->getMessage());
+    $numGroups++;
+  }
+  print "<br>Generated keys for $numGroups groups.<br>\n";
+}
+
 if ($request->isGet()) {
   echo('<h2>Environment Checks</h2>');
 
@@ -1133,6 +1152,8 @@ if ($_POST) {
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.60', modified = now() where param_name = 'version_db' and param_value = '1.18.59'");
     ttExecute("ALTER TABLE `tt_groups` ADD `group_key` varchar(32) AFTER `org_id`");
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.61', modified = now() where param_name = 'version_db' and param_value = '1.18.60'");
+
+    ttGenerateKeys();
 }
 
   if ($_POST["cleanup"]) {

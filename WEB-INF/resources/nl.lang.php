@@ -51,8 +51,7 @@ $i18n_key_words = array(
 'menu.time' => 'Tijden',
 'menu.expenses' => 'Kosten',
 'menu.reports' => 'Rapporten',
-// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
-// 'menu.timesheets' => 'Timesheets',
+'menu.timesheets' => 'Tijdenoverzichten',
 'menu.charts' => 'Grafieken',
 'menu.projects' => 'Projecten',
 'menu.tasks' => 'Taken',
@@ -234,9 +233,12 @@ $i18n_key_words = array(
 'label.work_units_short' => 'Eenheid',
 'label.totals_only' => 'Alleen totalen',
 'label.quota' => 'Maanddoel',
-// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
-// 'label.timesheet' => 'Timesheet',
-// 'label.submitted' => 'Submitted',
+'label.timesheet' => 'Tijdenoverzicht',
+// TODO: translate the following. "Submitted" here means that a timesheet was submitted (sent)
+// to manager(s) for an approval. It is also a column name on the timesheets.php page,
+// so it needs to be short. A problem with "Reactie ontvangen" is that Google auto-translates
+// it as "Response received", which seems wrong, and is alsoo too long.
+// 'label.submitted' => 'Reactie ontvangen',
 'label.approved' => 'Goedgekeurd',
 'label.approval' => 'Rapport goedkeuring',
 'label.mark_approved' => 'Markeer goegkeuring',
@@ -270,9 +272,8 @@ $i18n_key_words = array(
 'title.reports' => 'Rapporten',
 'title.report' => 'Rapport',
 'title.send_report' => 'Rapport aan het versturen',
-// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
-// 'title.timesheets' => 'Timesheets',
-// 'title.timesheet' => 'Timesheet',
+'title.timesheets' => 'Tijdenoverzichten',
+'title.timesheet' => 'Tijdenoverzicht',
 'title.invoice' => 'Factuur',
 'title.send_invoice' => 'Factuur verzenden',
 'title.charts' => 'Grafieken',
@@ -306,10 +307,9 @@ $i18n_key_words = array(
 'title.add_notification' => 'Notificatie toevoegen',
 'title.edit_notification' => 'Notificatie bewerken',
 'title.delete_notification' => 'Notificatie verwijderen',
-// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
-// 'title.add_timesheet' => 'Adding Timesheet',
-// 'title.edit_timesheet' => 'Editing Timesheet',
-// 'title.delete_timesheet' => 'Deleting Timesheet',
+'title.add_timesheet' => 'Tijdenoverzicht toevoegen',
+'title.edit_timesheet' => 'Tijdenoverzicht bewerken',
+'title.delete_timesheet' => 'Tijdenoverzicht verwijderen',
 'title.monthly_quotas' => 'Doelen per maand',
 'title.export' => 'Exporteer groepsgegevens',
 'title.import' => 'Importeer groepsgegevens',
@@ -355,8 +355,7 @@ $i18n_key_words = array(
 'dropdown.clients' => 'klanten',
 'dropdown.select' => '--- kies ---',
 'dropdown.select_invoice' => '--- kies factuur ---',
-// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
-// 'dropdown.select_timesheet' => '--- select timesheet ---',
+'dropdown.select_timesheet' => '--- kies tijdenoverzicht ---',
 'dropdown.status_active' => 'actief',
 'dropdown.status_inactive' => 'inactief',
 'dropdown.delete' => 'verwijderen',
@@ -423,13 +422,11 @@ $i18n_key_words = array(
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Exporteer',
 'form.report.assign_to_invoice' => 'Voeg toe aan factuur',
-// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
-// 'form.report.assign_to_timesheet' => 'Assign to timesheet',
+'form.report.assign_to_timesheet' => 'Wijs toe aan tijdenoverzicht',
 
 // Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
-// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
-// 'form.timesheets.active_timesheets' => 'Active Timesheets',
-// 'form.timesheets.inactive_timesheets' => 'Inactive Timesheets',
+'form.timesheets.active_timesheets' => 'Actieve tijdenoverzichten',
+'form.timesheets.inactive_timesheets' => 'Inactieve tijdenoverzichten',
 
 // Templates form. See example at https://timetracker.anuko.com/templates.php
 'form.templates.active_templates' => 'Actieve sjablonen',
@@ -568,11 +565,10 @@ $i18n_key_words = array(
 'role.admin.description' => 'Time Tracker beheerder.',
 
 // Timesheet View form. See example at https://timetracker.anuko.com/timesheet_view.php.
-// TODO: translate the following. See https://www.anuko.com/time_tracker/what_is/timesheets.htm
-// 'form.timesheet_view.submit_subject' => 'Timesheet approval request',
-// 'form.timesheet_view.submit_body' => "A new timesheet requires approval.<p>User: %s.",
-// 'form.timesheet_view.approve_subject' => 'Timesheet approved',
-// 'form.timesheet_view.approve_body' => "Your timesheet %s was approved.<p>%s",
-// 'form.timesheet_view.disapprove_subject' => 'Timesheet not approved',
-// 'form.timesheet_view.disapprove_body' => "Your timesheet %s was not approved.<p>%s",
+'form.timesheet_view.submit_subject' => 'Verzoek goedkeuring tijdenoverzicht',
+'form.timesheet_view.submit_body' => "Een nieuw tijdenoverzicht vereist goedkeuring.<p>User: %s.",
+'form.timesheet_view.approve_subject' => 'Tijdenoverzicht goedgekeurd',
+'form.timesheet_view.approve_body' => "Jouw tijdenoverzicht %s is goedgekeurd.<p>%s",
+'form.timesheet_view.disapprove_subject' => 'Tijdenoverzicht afgekeurd',
+'form.timesheet_view.disapprove_body' => "Jouw tijdenoverzicht %s is afgekeurd.<p>%s",
 );

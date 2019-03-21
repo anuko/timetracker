@@ -130,7 +130,6 @@ class ttFileHelper {
       'file_name' => urlencode($fields['file_name']),
       'description' => urlencode($fields['description']),
       // TODO: add file content here, too. Will this work for large files?
-      //
     );
 
     // url-ify the data for the POST.
