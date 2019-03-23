@@ -104,8 +104,7 @@ $i18n_key_words = array(
 'error.format' => 'Bestandsformaat niet valide.',
 'error.user_count' => 'Limiet op aantal gebruikers.',
 'error.expired' => 'Verloop datum is bereikt.',
-// TODO: translate the following.
-// 'error.file_storage' => 'File storage error.',
+'error.file_storage' => 'Fout bij het opslaan van het bestand.',
 
 // Warning messages.
 'warn.sure' => 'Ben je er zeker van?',
@@ -234,19 +233,14 @@ $i18n_key_words = array(
 'label.totals_only' => 'Alleen totalen',
 'label.quota' => 'Maanddoel',
 'label.timesheet' => 'Tijdenoverzicht',
-// TODO: translate the following. "Submitted" here means that a timesheet was submitted (sent)
-// to manager(s) for an approval. It is also a column name on the timesheets.php page,
-// so it needs to be short. A problem with "Reactie ontvangen" is that Google auto-translates
-// it as "Response received", which seems wrong, and is alsoo too long.
-// 'label.submitted' => 'Reactie ontvangen',
+'label.submitted' => 'Verzonden',
 'label.approved' => 'Goedgekeurd',
 'label.approval' => 'Rapport goedkeuring',
 'label.mark_approved' => 'Markeer goegkeuring',
 'label.template' => 'Sjabloon',
-// TODO: translate the following.
-// 'label.attachments' => 'Attachments',
-// 'label.files' => 'Files',
-// 'label.image' => 'Image',
+'label.attachments' => 'Bijlagen',
+'label.files' => 'Bestanden',
+'label.image' => 'Afbeelding',
 
 // Form titles.
 'title.error' => 'Fout',
@@ -278,8 +272,7 @@ $i18n_key_words = array(
 'title.send_invoice' => 'Factuur verzenden',
 'title.charts' => 'Grafieken',
 'title.projects' => 'Projecten',
-// TODO: translate the following.
-// 'title.project_files' => 'Project Files',
+'title.project_files' => 'Project bestanden',
 'title.add_project' => 'Project toevoegen',
 'title.edit_project' => 'Project wijzigen',
 'title.delete_project' => 'Project verwijderen',
