@@ -85,8 +85,14 @@ class ttFileHelper {
       curl_close($ch);
 
       $result_array = json_decode($result, true);
-      if ($result_array && $result_array['id'] && $result_array['key']) {
-
+      if (!$result_array) {
+        $this->errors->add($i18n->get('error.file_storage'));
+      }
+      else if ($result_array['error']) {
+        // Add an error from file storage facility if we have it.
+        $this->errors->add($result_array['error']);
+      }
+      else if ($result_array['id'] && $result_array['key']) {
         $this->site_id = $result_array['id'];
         $this->site_key = $result_array['key'];
 
@@ -159,12 +165,12 @@ class ttFileHelper {
     $result_array = json_decode($result, true);
     $file_id = (int) $result_array['file_id'];
     $file_key = $result_array['file_key'];
-    $file_error = $result_array['file_error'];
+    $error = $result_array['error'];
 
     if (!$file_id || !$file_key) {
-      if ($file_error) {
+      if ($error) {
         // Add an error from file storage facility if we have it.
-        $this->errors->add($file_error);
+        $this->errors->add($error);
       }
       return false;
     }
