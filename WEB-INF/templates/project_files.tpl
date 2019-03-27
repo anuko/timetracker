@@ -3,7 +3,7 @@
     <td valign="top">
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.image}</td>
+          <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
 {if $can_manage}
           <td class="tableHeader">{$i18n.label.edit}</td>

@@ -52,8 +52,8 @@ if ($request->isPost()) {
   $cl_description = trim($request->getParameter('description'));
 }
 
-$files = null;
-// $files = ttAttachmentHelper::getProjectFiles();
+$fileHelper = new ttFileHelper($err);
+$files = $fileHelper::getProjectFiles($cl_project_id);
 
 $form = new Form('fileUploadForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_project_id));
@@ -71,14 +71,15 @@ if ($request->isPost()) {
   // Finished validating user input.
 
   if ($err->no()) {
-    $fileHelper = new ttFileHelper($err);
     $fields = array('entity_type'=>'project',
       'entity_id' => $cl_project_id,
       'file_name' => $_FILES['newfile']['name'],
       'description'=>$cl_description);
-    if (!$fileHelper->putFile($fields)) {
+    if ($fileHelper->putFile($fields)) {
+      header('Location: project_files.php?id='.$cl_project_id);
+      exit();
+    } else
       $err->add($i18n->get('error.file_storage'));
-    }
   }
 } // isPost
 

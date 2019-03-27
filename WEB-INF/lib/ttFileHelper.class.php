@@ -125,7 +125,7 @@ class ttFileHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $fields = array('site_id' => urlencode($this->site_id),
+    $curl_fields = array('site_id' => urlencode($this->site_id),
       'site_key' => urlencode($this->site_key),
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($this->getOrgKey()),
@@ -139,7 +139,7 @@ class ttFileHelper {
     );
 
     // url-ify the data for the POST.
-    foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
     $fields_string = rtrim($fields_string, '&');
 
     // Open connection.
@@ -215,5 +215,26 @@ class ttFileHelper {
     $res = $mdb2->query($sql);
     $val = $res->fetchRow();
     return $val['group_key'];
+  }
+
+  // getProjectFiles obtains a list of files for a project.
+  function getProjectFiles($project_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $result = array();
+    $sql = "select id, remote_id, file_name as name, description from tt_files".
+      " where entity_type = 'project' and entity_id = $project_id".
+      " and group_id = $group_id and org_id = $org_id and status = 1 order by id";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
   }
 }
