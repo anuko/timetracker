@@ -135,7 +135,7 @@ class ttFileHelper {
       'user_key' => urlencode($fields['user_key']), // May be null.
       'file_name' => urlencode($fields['file_name']),
       'description' => urlencode($fields['description']),
-      // TODO: add file content here, too. Will this work for large files?
+      'content' => urlencode(file_get_contents($_FILES['newfile']['tmp_name']))
     );
 
     // url-ify the data for the POST.
