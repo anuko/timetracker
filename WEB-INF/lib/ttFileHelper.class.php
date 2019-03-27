@@ -167,7 +167,7 @@ class ttFileHelper {
     $file_key = $result_array['file_key'];
     $error = $result_array['error'];
 
-    if (!$file_id || !$file_key) {
+    if ($error || !$file_id || !$file_key) {
       if ($error) {
         // Add an error from file storage facility if we have it.
         $this->errors->add($error);
