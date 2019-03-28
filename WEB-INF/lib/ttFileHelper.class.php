@@ -44,6 +44,7 @@ class ttFileHelper {
       $this->storage_uri = FILE_STORAGE_URI;
       $this->register_uri = $this->storage_uri.'register';
       $this->putfile_uri = $this->storage_uri.'putfile';
+      $this->deletefile_uri = $this->storage_uri.'deletefile';
       $this->getfile_uri = $this->storage_uri.'getfile';
       $this->checkSiteRegistration();
     }
@@ -213,8 +214,8 @@ class ttFileHelper {
       'user_id' => urlencode($fields['user_id']),   // May be null.
       'user_key' => urlencode($fields['user_key']), // May be null.
       'file_id' => urlencode($fields['remote_id']),
-      'file_key' => urlencode($fields['file_key'])
-    );
+      'file_key' => urlencode($fields['file_key']),
+      'file_name' => urlencode($fields['file_name']));
 
     // url-ify the data for the POST.
     foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
@@ -224,7 +225,7 @@ class ttFileHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->putfile_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->deletefile_uri);
     curl_setopt($ch, CURLOPT_POST, count($fields));
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
