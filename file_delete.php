@@ -60,16 +60,18 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_file_id));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 
-// TODO: design redirects properly...
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if (ttProjectHelper::delete($cl_project_id)) {
-      header('Location: projects.php');
+    $fileHelper = new ttFileHelper($err);
+    $deleted = $fileHelper->deleteFile($file);
+    if ($deleted && $file['entity_type'] == 'project') {
+      header('Location: project_files.php?id='.$file['entity_id']);
       exit();
-    } else
-      $err->add($i18n->get('error.db'));
+    }
   } elseif ($request->getParameter('btn_cancel')) {
-    header('Location: projects.php');
+    if ($file['entity_type'] == 'project') {
+      header('Location: project_files.php?id='.$file['entity_id']);
+    }
     exit();
   }
 } // isPost

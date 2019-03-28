@@ -151,7 +151,7 @@ class ttFileHelper {
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    // Execute a post rewuest.
+    // Execute a post request.
     $result = curl_exec($ch);
 
     // Close connection.
@@ -160,7 +160,10 @@ class ttFileHelper {
     // Delete uploaded file.
     unlink($_FILES['newfile']['tmp_name']);
 
-    if (!$result) return false;
+    if (!$result) {
+      $this->errors->add($i18n->get('error.file_storage'));
+      return false;
+    }
 
     $result_array = json_decode($result, true);
     $file_id = (int) $result_array['file_id'];
@@ -189,6 +192,74 @@ class ttFileHelper {
     $sql = "insert into tt_files $columns $values";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // deleteFile - deletes a file from remote storage and its details from local database.
+  function deleteFile($fields) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id),
+      'org_key' => urlencode($this->getOrgKey()),
+      'group_id' => urlencode($group_id),
+      'group_key' => urlencode($this->getGroupKey()),
+      'user_id' => urlencode($fields['user_id']),   // May be null.
+      'user_key' => urlencode($fields['user_key']), // May be null.
+      'file_id' => urlencode($fields['remote_id']),
+      'file_key' => urlencode($fields['file_key'])
+    );
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->putfile_uri);
+    curl_setopt($ch, CURLOPT_POST, count($fields));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.file_storage'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+    // $status = (int) $result_array['status'];
+    $error = $result_array['error'];
+
+    if ($error) {
+      // Add an error from file storage facility if we have it.
+      $this->errors->add($error);
+      return false;
+    }
+
+    // Delete file reference from database.
+    $file_id = $file['id'];
+    $sql = "delete from tt_files".
+      " where id = $file_id and org_id = $org_id and group_id = $group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) {
+      $err->add($i18n->get('error.db'));
+      return false;
+    }
+
+    return true;
   }
 
   // getOrgKey obtains organization key from the database.
