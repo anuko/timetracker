@@ -325,6 +325,9 @@ $i18n_key_words = array(
 'title.add_template' => 'Sjabloon toevoegen',
 'title.edit_template' => 'Sjabloon bewerken',
 'title.delete_template' => 'Sjabloon verwijderen',
+// TODO: translate the following.
+// 'title.edit_file' => 'Editing File',
+// 'title.delete_file' => 'Deleting File',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
