@@ -179,6 +179,7 @@ class ttFileHelper {
     }
 
     // File put was successful. Store file attributes locally.
+    $file_key = $mdb2->quote($file_key);
     $entity_type = $mdb2->quote($fields['entity_type']);
     $entity_id = (int) $fields['entity_id'];
     $file_name = $mdb2->quote($fields['file_name']);
@@ -187,8 +188,8 @@ class ttFileHelper {
     $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
     $created_by = $user->id;
 
-    $columns = '(group_id, org_id, remote_id, entity_type, entity_id, file_name, description, created, created_ip, created_by)';
-    $values = "values($group_id, $org_id, $file_id, $entity_type, $entity_id, $file_name, $description, $created, $created_ip, $created_by)";
+    $columns = '(group_id, org_id, remote_id, file_key, entity_type, entity_id, file_name, description, created, created_ip, created_by)';
+    $values = "values($group_id, $org_id, $file_id, $file_key, $entity_type, $entity_id, $file_name, $description, $created, $created_ip, $created_by)";
     $sql = "insert into tt_files $columns $values";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
@@ -240,7 +241,7 @@ class ttFileHelper {
     }
 
     $result_array = json_decode($result, true);
-    // $status = (int) $result_array['status'];
+    $status = (int) $result_array['status'];
     $error = $result_array['error'];
 
     if ($error) {
@@ -248,17 +249,23 @@ class ttFileHelper {
       $this->errors->add($error);
       return false;
     }
+    if ($status != 1) {
+      // There is no explicit error message, but still something not right.
+      $this->errors->add($i18n->get('error.file_storage'));
+      return false;
+    }
 
     // Delete file reference from database.
-    $file_id = $file['id'];
+    $file_id = $fields['id'];
     $sql = "delete from tt_files".
       " where id = $file_id and org_id = $org_id and group_id = $group_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) {
-      $err->add($i18n->get('error.db'));
+      $this->errors->add($i18n->get('error.db'));
       return false;
     }
 
+    // File successfully deleted from both file storage and database.
     return true;
   }
 
@@ -289,7 +296,7 @@ class ttFileHelper {
   }
 
   // getProjectFiles obtains a list of files for a project.
-  function getProjectFiles($project_id) {
+  static function getProjectFiles($project_id) {
     global $user;
     $mdb2 = getConnection();
 

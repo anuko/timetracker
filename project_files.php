@@ -78,8 +78,7 @@ if ($request->isPost()) {
     if ($fileHelper->putFile($fields)) {
       header('Location: project_files.php?id='.$cl_project_id);
       exit();
-    } else
-      $err->add($i18n->get('error.file_storage'));
+    }
   }
 } // isPost
 
