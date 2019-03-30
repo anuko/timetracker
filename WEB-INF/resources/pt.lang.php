@@ -367,6 +367,7 @@ $i18n_key_words = array(
 // 'title.delete_template' => 'Deleting Template',
 // 'title.edit_file' => 'Editing File',
 // 'title.delete_file' => 'Deleting File',
+// 'title.download_file' => 'Downloading File',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.

@@ -68,35 +68,8 @@ if ($fileHelper->getFile($file)) {
 
   echo $fileHelper->getFileData();
   exit;
-} else
-  $err->add($i18n->get('error.sys'));
+}
 
-$form = new Form('fileForm');
-$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_file_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'file_name','style'=>'width: 250px;','value'=>$cl_name));
-$form->getElement('file_name')->setEnabled(false);
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
-
-if ($request->isPost()) {
-  // Validate user input.
-  if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
-
-  if ($err->no()) {
-    if ($request->getParameter('btn_save')) {
-      // Update file information.
-      $updated = ttFileHelper::update(array('id' => $cl_file_id,'description' => $cl_description));
-      if ($updated && $file['entity_type'] == 'project') {
-        header('Location: project_files.php?id='.$file['entity_id']);
-        exit();
-      } else
-        $err->add($i18n->get('error.db'));
-    }
-  }
-} // isPost
-
-$smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="document.fileForm.description.focus()"');
-$smarty->assign('title', $i18n->get('title.edit_file'));
-$smarty->assign('content_page_name', 'file_edit.tpl');
+$smarty->assign('title', $i18n->get('title.download_file'));
+$smarty->assign('content_page_name', 'file_download.tpl');
 $smarty->display('index.tpl');
