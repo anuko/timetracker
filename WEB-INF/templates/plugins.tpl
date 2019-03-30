@@ -158,12 +158,10 @@ function handlePluginCheckboxes() {
             <td align="right" nowrap>{$forms.pluginsForm.templates.control}</td>
             <td><label for="templates">{$i18n.title.templates}</label> <span id="templates_conf"><a href="templates.php">{$i18n.label.configure}</a></span> <span id="templates_doc"><a href="https://www.anuko.com/lp/tt_29.htm" target="_blank">{$i18n.label.what_is_it}</a></span></td>
           </tr>
-{if isTrue('FILES_DEBUG')}
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.attachments.control}</td>
             <td><label for="attachments">{$i18n.label.attachments}</label> <span id="attachments_doc"><a href="https://www.anuko.com/lp/tt_31.htm" target="_blank">{$i18n.label.what_is_it}</a></span></td>
           </tr>
-{/if}
           <tr>
             <td colspan="2">&nbsp;</td>
           </tr>

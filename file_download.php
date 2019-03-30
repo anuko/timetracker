@@ -55,14 +55,11 @@ if ($file['entity_type'] != 'project') {
 
 $fileHelper = new ttFileHelper($err);
 
-$filename = $file['file_name'];
-$mime_type = 'image/jpeg'; // Hardcoded type for now. TODO: fix this.
-
 if ($fileHelper->getFile($file)) {
   header('Pragma: public'); // This is needed for IE8 to download files over https.
-  header('Content-Type: '.$mime_type);
+  header('Content-Type: application/octet-stream');
   header('Expires: '.gmdate('D, d M Y H:i:s').' GMT');
-  header('Content-Disposition: attachment; filename="'.$filename.'"');
+  header('Content-Disposition: attachment; filename="'.$file['file_name'].'"');
   header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
   header('Cache-Control: private', false);
 
