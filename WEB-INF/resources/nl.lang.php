@@ -241,6 +241,8 @@ $i18n_key_words = array(
 'label.attachments' => 'Bijlagen',
 'label.files' => 'Bestanden',
 'label.image' => 'Afbeelding',
+// TODO: translate the following.
+// 'label.download' => 'Download',
 
 // Form titles.
 'title.error' => 'Fout',

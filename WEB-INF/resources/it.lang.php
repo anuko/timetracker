@@ -259,6 +259,7 @@ $i18n_key_words = array(
 // 'label.attachments' => 'Attachments',
 // 'label.files' => 'Files',
 // 'label.image' => 'Image',
+// 'label.download' => 'Download',
 
 // Form titles.
 // TODO: Improve titles for consistency, so that each title explains correctly what each

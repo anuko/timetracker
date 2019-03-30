@@ -263,6 +263,7 @@ $i18n_key_words = array(
 // 'label.attachments' => 'Attachments',
 // 'label.files' => 'Files',
 // 'label.image' => 'Image',
+// 'label.download' => 'Download',
 
 // Rubriker för formulär
 'title.error' => 'Fel',

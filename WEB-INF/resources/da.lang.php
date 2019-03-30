@@ -264,6 +264,7 @@ $i18n_key_words = array(
 // 'label.attachments' => 'Attachments',
 // 'label.files' => 'Files',
 // 'label.image' => 'Image',
+// 'label.download' => 'Download',
 
 // Form titles.
 'title.error' => 'Fejl',
