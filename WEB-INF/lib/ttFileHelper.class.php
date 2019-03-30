@@ -335,4 +335,21 @@ class ttFileHelper {
     }
     return false;
   }
+
+  // update - updates file details in local database.
+  static function update($fields) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $file_id = (int) $fields['id'];
+    $description = $mdb2->quote($fields['description']);
+
+    $sql = "update tt_files set description = $description where id = $file_id".
+      " and group_id = $group_id and org_id = $org_id and (status = 0 or status = 1)";
+    $affected = $mdb2->exec($sql);
+    return !is_a($affected, 'PEAR_Error');
+  }
 }
