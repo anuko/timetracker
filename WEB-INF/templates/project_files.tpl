@@ -16,7 +16,7 @@
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$file.name|escape}</td>
           <td>{$file.description|escape}</td>
-          <td><a href="file_edit.php?id={$file.id}">{$i18n.label.download}</a></td>
+          <td><a href="file_download.php?id={$file.id}">{$i18n.label.download}</a></td>
     {if $can_manage}
           <td><a href="file_edit.php?id={$file.id}">{$i18n.label.edit}</a></td>
           <td><a href="file_delete.php?id={$file.id}">{$i18n.label.delete}</a></td>

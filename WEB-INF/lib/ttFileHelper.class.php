@@ -35,6 +35,7 @@ class ttFileHelper {
   var $getfile_uri = null;  // URI to get file from file storage.
   var $site_id = null;      // Site id for file storage.
   var $site_key = null;     // Site key for file storage.
+  var $file_data = null;     // Downloaded file data.
 
   // Constructor.
   function __construct(&$errors) {
@@ -136,7 +137,7 @@ class ttFileHelper {
       'user_key' => urlencode($fields['user_key']), // May be null.
       'file_name' => urlencode($fields['file_name']),
       'description' => urlencode($fields['description']),
-      'content' => urlencode(file_get_contents($_FILES['newfile']['tmp_name']))
+      'content' => urlencode(base64_encode(file_get_contents($_FILES['newfile']['tmp_name'])))
     );
 
     // url-ify the data for the POST.
@@ -351,5 +352,79 @@ class ttFileHelper {
       " and group_id = $group_id and org_id = $org_id and (status = 0 or status = 1)";
     $affected = $mdb2->exec($sql);
     return !is_a($affected, 'PEAR_Error');
+  }
+
+
+  // getFile - downloads file from remote storage to memory.
+  function getFile($fields) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id),
+      'org_key' => urlencode($this->getOrgKey()),
+      'group_id' => urlencode($group_id),
+      'group_key' => urlencode($this->getGroupKey()),
+      'user_id' => urlencode($fields['user_id']),   // May be null.
+      'user_key' => urlencode($fields['user_key']), // May be null.
+      'file_id' => urlencode($fields['remote_id']),
+      'file_key' => urlencode($fields['file_key']),
+      'file_name' => urlencode($fields['file_name']));
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->getfile_uri);
+    curl_setopt($ch, CURLOPT_POST, count($fields));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    $error = curl_error();
+    $result_array2 = json_decode($result, true);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.file_storage'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+    $status = (int) $result_array['status'];
+    $error = $result_array['error'];
+
+    if ($error) {
+      // Add an error from file storage facility if we have it.
+      $this->errors->add($error);
+      return false;
+    }
+    if ($status != 1) {
+      // There is no explicit error message, but still something not right.
+      $this->errors->add($i18n->get('error.file_storage'));
+      return false;
+    }
+
+    $this->file_data = $result_array['content'];
+    return true;
+  }
+
+
+  // getFileData - returns file data from memory.
+  function getFileData() {
+    return base64_decode($this->file_data);
   }
 }
