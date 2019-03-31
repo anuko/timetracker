@@ -5,7 +5,6 @@
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
-          <td class="tableHeader">{$i18n.label.download}</td>
 {if $can_manage}
           <td class="tableHeader">{$i18n.label.edit}</td>
           <td class="tableHeader">{$i18n.label.delete}</td>
@@ -14,9 +13,8 @@
 {if $files}
   {foreach $files as $file}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
-          <td>{$file.name|escape}</td>
+          <td><a href="file_download.php?id={$file.id}">{$file.name|escape}</a></td>
           <td>{$file.description|escape}</td>
-          <td><a href="file_download.php?id={$file.id}">{$i18n.label.download}</a></td>
     {if $can_manage}
           <td><a href="file_edit.php?id={$file.id}">{$i18n.label.edit}</a></td>
           <td><a href="file_delete.php?id={$file.id}">{$i18n.label.delete}</a></td>
