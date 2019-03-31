@@ -182,6 +182,15 @@ function ttValidString($val, $emptyValid = false)
   return true;    
 }
 
+// ttValidTemplateText is used to check template-based user input.
+// When templates are used, required input parts must be filled by user.
+// We identify these parts by 3 "stop sign" emojis (aka "octagonal sign" U+1F6D1).
+function ttValidTemplateText($val)
+{
+  $valid = strpos($val, '🛑🛑🛑') === false; // no 3 "stop sign" emojis in a row.
+  return $valid;
+}
+
 // ttValidEmail is used to check user input to validate an email string.
 function ttValidEmail($val, $emptyValid = false)
 {

@@ -276,8 +276,7 @@ if ($request->isPost()) {
   }
   if (!ttValidDate($cl_date)) $err->add($i18n->get('error.field'), $i18n->get('label.date'));
   if (!ttValidString($cl_note, true)) $err->add($i18n->get('error.field'), $i18n->get('label.note'));
-  if ($user->isPluginEnabled('tp') && strpos($cl_note, '%req%') !== false) {
-    // A %req% element is found in note. They have to be replaced by user.
+  if ($user->isPluginEnabled('tp') && !ttValidTemplateText($cl_note)) {
     $err->add($i18n->get('error.field'), $i18n->get('label.note'));
   }
   if (!ttTimeHelper::canAdd()) $err->add($i18n->get('error.expired'));
