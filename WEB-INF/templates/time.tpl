@@ -102,8 +102,11 @@
       <table border="0" cellpadding="3" cellspacing="1" width="100%">
       <tr>
   {if $user->isPluginEnabled('cl')}
-        <td width="20%" class="tableHeader">{$i18n.label.client}</td>
+        <td width="14%" class="tableHeader">{$i18n.label.client}</td>
   {/if}
+  {if $user->isPluginEnabled('cf')}
+        <td width="8%" class="tableHeader">{$custom_fields->fields[0]['label']|escape}</td>
+  {/if}    
   {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td class="tableHeader">{$i18n.label.project}</td>
   {/if}
