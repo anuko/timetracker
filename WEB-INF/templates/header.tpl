@@ -35,7 +35,7 @@
             <table cellspacing="0" cellpadding="0" width="{$tab_width}" border="0">
               <tr>
                 <td valign="top">
-                  <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                  <table id="page_logo" cellspacing="0" cellpadding="0" width="100%" border="0">
                     <tr><td height="6" colspan="2"><img width="1" height="6" src="images/1x1.gif" border="0"></td></tr>
                     <tr valign="top">
 {if $user->custom_logo}
@@ -56,7 +56,7 @@
 {if $authenticated}
   {if $user->can('administer_site')}
       <!-- top menu for admin -->
-      <table cellspacing="0" cellpadding="3" width="100%" border="0">
+      <table id="top_menu_admin" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
             <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a> &middot;
@@ -68,7 +68,7 @@
       <!-- end of top menu for admin -->
 
       <!-- sub menu for admin -->
-      <table cellspacing="0" cellpadding="3" width="100%" border="0">
+      <table id="sub_menu_admin" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
             <a class="mainMenu" href="admin_groups.php">{$i18n.menu.groups}</a> &middot;
@@ -79,7 +79,7 @@
       <!-- end of sub menu for admin -->
   {else}
       <!-- top menu for authorized user -->
-      <table cellspacing="0" cellpadding="3" width="100%" border="0">
+      <table id="top_menu_authorized_user" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
             <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a> &middot;
@@ -103,7 +103,7 @@
       <!-- end of top menu for authorized user -->
 
       <!-- sub menu for authorized user -->
-      <table cellspacing="0" cellpadding="3" width="100%" border="0">
+      <table id="sub_menu_authorized_user" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
     {if $user->exists() && ($user->can('track_own_time') || $user->can('track_time'))}
@@ -148,7 +148,7 @@
   {/if}
 {else}
       <!-- top menu for non authorized user -->
-      <table cellspacing="0" cellpadding="3" width="100%" border="0">
+      <table id="top_menu_non_authorized_user" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
             <a class="systemMenu" href="login.php">{$i18n.menu.login}</a> &middot;
@@ -165,7 +165,7 @@
 
       <!-- page title and user details -->
 {if $title}
-      <table cellspacing="0" cellpadding="5" width="{$tab_width+20}" border="0">
+      <table id="page_title" cellspacing="0" cellpadding="5" width="{$tab_width+20}" border="0">
         <tr><td class="sectionHeader"><div class="pageTitle">{$title}{if $timestring}: {$timestring}{/if}</div></td></tr>
         <tr><td>{$user->getUserPartForHeader()}</td></tr> {* No need to escape as it is done in the class. *}
       </table>
@@ -174,7 +174,7 @@
 
       <!-- output errors -->
 {if $err->yes()}
-      <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
+      <table id="page_errors" cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
           <td class="error">
   {foreach $err->getErrors() as $error}
@@ -188,7 +188,7 @@
 
       <!-- output messages -->
 {if $msg->yes()}
-      <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
+      <table id="page_messages" cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
           <td class="info_message">
   {foreach $msg->getErrors() as $message}

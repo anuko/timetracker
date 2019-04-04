@@ -36,7 +36,7 @@
             <table cellspacing="0" cellpadding="0" width="{$tab_width}" border="0">
               <tr>
                 <td valign="top">
-                  <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                  <table id="page_logo" cellspacing="0" cellpadding="0" width="100%" border="0">
                     <tr><td height="6" colspan="2"><img width="1" height="6" src="../images/1x1.gif" border="0"></td></tr>
                     <tr valign="top">
 {if $user->custom_logo}
@@ -58,7 +58,7 @@
   {if $user->can('administer_site')}
   
       <!-- sub menu for admin -->
-      <table cellspacing="0" cellpadding="3" width="100%" border="0">
+      <table id="sub_menu_admin" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" height="17" style="background-repeat: repeat-x;" background="../images/subm_bg.gif">&nbsp;
             <a class="mainMenu" href="admin_groups.php">{$i18n.menu.groups}</a> &middot;
@@ -70,7 +70,7 @@
   {else}
 
       <!-- sub menu for authorized user -->
-      <table cellspacing="0" cellpadding="3" width="100%" border="0">
+      <table id="sub_menu_authorized_user" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" height="17" style="background-repeat: repeat-x;" background="../images/subm_bg.gif">&nbsp;
     {if $user->exists() && ($user->can('track_own_time') || $user->can('track_time'))}
@@ -100,7 +100,7 @@
       
       <!-- output errors -->
 {if $err->yes()}
-      <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
+      <table id="page_errors" cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
           <td class="error">
   {foreach $err->getErrors() as $error}
@@ -114,7 +114,7 @@
 
       <!-- output messages -->
 {if $msg->yes()}
-      <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
+      <table id="page_messages" cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
         <tr>
           <td class="info_message">
   {foreach $msg->getErrors() as $message}
