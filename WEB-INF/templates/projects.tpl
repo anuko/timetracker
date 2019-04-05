@@ -14,10 +14,10 @@
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
   {if $show_files}
-          <td class="tableHeader">{$i18n.label.files}</td>
+          <td></td>
   {/if}
-          <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
+          <td></td>
+          <td></td>
         </tr>
   {if $active_projects}
     {foreach $active_projects as $project}
@@ -25,10 +25,10 @@
           <td>{$project.name|escape}</td>
           <td>{$project.description|escape}</td>
       {if $show_files}
-          <td><a href="project_files.php?id={$project.id}">{$i18n.label.view}</a></td>
+          <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_files.png"></a></td>
       {/if}
-          <td><a href="project_edit.php?id={$project.id}">{$i18n.label.edit}</a></td>
-          <td><a href="project_delete.php?id={$project.id}">{$i18n.label.delete}</a></td>
+          <td><a href="project_edit.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+          <td><a href="project_delete.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
     {/foreach}
   {/if}
@@ -49,20 +49,20 @@
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
     {if $show_files}
-          <td class="tableHeader">{$i18n.label.files}</td>
+          <td></td>
     {/if}
-          <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
+          <td></td>
+          <td></td>
         </tr>
     {foreach $inactive_projects as $project}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$project.name|escape}</td>
           <td>{$project.description|escape}</td>
       {if $show_files}
-          <td><a href="project_files.php?id={$project.id}">{$i18n.label.view}</a></td>
+          <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_files.png"></a></td>
       {/if}
-          <td><a href="project_edit.php?id={$project.id}">{$i18n.label.edit}</a></td>
-          <td><a href="project_delete.php?id={$project.id}">{$i18n.label.delete}</a></td>
+          <td><a href="project_edit.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+          <td><a href="project_delete.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
     {/foreach}
       </table>
