@@ -117,6 +117,7 @@
         <td width="5%" class="tableHeader">{$i18n.label.duration}</td>
         <td class="tableHeader">{$i18n.label.note}</td>
         <td></td>
+        <td></td>
       </tr>
   {foreach $time_records as $record}
       <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
@@ -146,6 +147,13 @@
           <input type="hidden" name="browser_time" value="">
           <input type="submit" id="btn_stop" name="btn_stop" onclick="browser_date.value=get_date();browser_time.value=get_time()" value="{$i18n.button.stop}">
       {/if}
+    {/if}
+        </td>
+        <td valign="top" align="center">
+    {if $record.approved || $record.timesheet_id || $record.invoice_id}
+          &nbsp;
+    {else}
+          <a href="time_delete.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a>
     {/if}
         </td>
       </tr>
