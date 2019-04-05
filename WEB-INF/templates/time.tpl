@@ -116,7 +116,7 @@
   {/if}
         <td width="5%" class="tableHeader">{$i18n.label.duration}</td>
         <td class="tableHeader">{$i18n.label.note}</td>
-        <td width="5%" class="tableHeader">{$i18n.label.edit}</td>
+        <td></td>
       </tr>
   {foreach $time_records as $record}
       <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
@@ -139,7 +139,7 @@
     {if $record.approved || $record.timesheet_id || $record.invoice_id}
           &nbsp;
     {else}
-          <a href="time_edit.php?id={$record.id}">{$i18n.label.edit}</a>
+          <a href="time_edit.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a>
       {if ($record.duration == '0:00' && $record.start <> '')}
           <input type="hidden" name="record_id" value="{$record.id}">
           <input type="hidden" name="browser_date" value="">
