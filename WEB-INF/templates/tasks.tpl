@@ -11,18 +11,18 @@
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.tasks.active_tasks}</td></tr>
   {/if}
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
-          <td width="35%" class="tableHeader">{$i18n.label.description}</td>
-          <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
+          <td width="40%" class="tableHeader">{$i18n.label.thing_name}</td>
+          <td width="40%" class="tableHeader">{$i18n.label.description}</td>
+          <td></td>
+          <td></td>
         </tr>
   {if $active_tasks}
     {foreach $active_tasks as $task}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$task.name|escape}</td>
           <td>{$task.description|escape}</td>
-          <td><a href="task_edit.php?id={$task.id}">{$i18n.label.edit}</a></td>
-          <td><a href="task_delete.php?id={$task.id}">{$i18n.label.delete}</a></td>
+          <td><a href="task_edit.php?id={$task.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+          <td><a href="task_delete.php?id={$task.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
     {/foreach}
   {/if}
@@ -40,17 +40,17 @@
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.tasks.inactive_tasks}</td></tr>
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
-          <td width="35%" class="tableHeader">{$i18n.label.description}</td>
-          <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
+          <td width="40%" class="tableHeader">{$i18n.label.thing_name}</td>
+          <td width="40%" class="tableHeader">{$i18n.label.description}</td>
+          <td></td>
+          <td></td>
         </tr>
     {foreach $inactive_tasks as $task}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$task.name|escape}</td>
           <td>{$task.description|escape}</td>
-          <td><a href="task_edit.php?id={$task.id}">{$i18n.label.edit}</a></td>
-          <td><a href="task_delete.php?id={$task.id}">{$i18n.label.delete}</a></td>
+          <td><a href="task_edit.php?id={$task.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+          <td><a href="task_delete.php?id={$task.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
     {/foreach}
       </table>
