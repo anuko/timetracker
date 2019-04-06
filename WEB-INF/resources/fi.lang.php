@@ -286,6 +286,8 @@ $i18n_key_words = array(
 'title.time' => 'Tuntien kirjaus',
 'title.edit_time_record' => 'Tuntikirjausten muokkaus',
 'title.delete_time_record' => 'Tuntikirjausten poisto',
+// TODO: Translate the following.
+// 'title.time_files' => 'Time Record Files',
 'title.expenses' => 'Kulut',
 'title.edit_expense' => 'Kulutietojen muokkaus',
 'title.delete_expense' => 'Kulutiedon poisto',

@@ -305,7 +305,8 @@ $i18n_key_words = array(
 'title.time' => '시간',
 'title.edit_time_record' => '시간기록을 편집하기',
 'title.delete_time_record' => '시간기록을 삭제하기',
-// TODO: translate the following.
+// TODO: Translate the following.
+// 'title.time_files' => 'Time Record Files',
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',

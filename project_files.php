@@ -53,7 +53,7 @@ if ($request->isPost()) {
 }
 
 $fileHelper = new ttFileHelper($err);
-$files = $fileHelper::getProjectFiles($cl_project_id);
+$files = $fileHelper::getEntityFiles($cl_project_id, 'project');
 
 $form = new Form('fileUploadForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_project_id));

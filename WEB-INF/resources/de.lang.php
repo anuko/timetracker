@@ -270,6 +270,8 @@ $i18n_key_words = array(
 'title.time' => 'Zeiten',
 'title.edit_time_record' => 'Bearbeiten des Stundeneintrags',
 'title.delete_time_record' => 'Eintrag löschen',
+// TODO: Translate the following.
+// 'title.time_files' => 'Time Record Files',
 'title.expenses' => 'Kosten',
 'title.edit_expense' => 'Kostenposition ändern',
 'title.delete_expense' => 'Kostenposition löschen',

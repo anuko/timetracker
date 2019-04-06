@@ -288,6 +288,8 @@ $i18n_key_words = array(
 'title.time' => 'Ajaarvestus',
 'title.edit_time_record' => 'Ajakande muutmine',
 'title.delete_time_record' => 'Ajakande kustutamine',
+// TODO: Translate the following.
+// 'title.time_files' => 'Time Record Files',
 'title.expenses' => 'Kulud',
 'title.edit_expense' => 'Kulukirje muutmine',
 'title.delete_expense' => 'Kulukirje kustutamine',

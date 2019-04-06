@@ -257,6 +257,7 @@ $i18n_key_words = array(
 'title.time' => 'Время',
 'title.edit_time_record' => 'Редактирование записи о времени',
 'title.delete_time_record' => 'Удаление записи о времени',
+'title.time_files' => 'Файлы записи о времени',
 'title.expenses' => 'Расходы',
 'title.edit_expense' => 'Редактирование предмета расхода',
 'title.delete_expense' => 'Удаление предмета расхода',

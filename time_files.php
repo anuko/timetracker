@@ -54,17 +54,10 @@ if ($request->isPost()) {
 }
 
 $fileHelper = new ttFileHelper($err);
-
-
-
-
-die("coding ongoing sown from here...");
 $files = $fileHelper::getEntityFiles($cl_id, 'time');
 
-
-
 $form = new Form('fileUploadForm');
-$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_project_id));
+$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 $form->addInput(array('type'=>'upload','name'=>'newfile','value'=>$i18n->get('button.submit'),'maxsize'=>67108864)); // 64 MB file upload limit.
 // Note: for the above limit to work make sure to set upload_max_filesize and post_max_size in php.ini to at least 64M.
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
@@ -79,20 +72,21 @@ if ($request->isPost()) {
   // Finished validating user input.
 
   if ($err->no()) {
-    $fields = array('entity_type'=>'project',
-      'entity_id' => $cl_project_id,
+    $fields = array('entity_type'=>'time',
+      'entity_id' => $cl_id,
       'file_name' => $_FILES['newfile']['name'],
       'description'=>$cl_description);
     if ($fileHelper->putFile($fields)) {
-      header('Location: project_files.php?id='.$cl_project_id);
+      header('Location: time_files.php?id='.$cl_id);
       exit();
     }
   }
 } // isPost
 
-$smarty->assign('can_manage', $user->can('manage_projects'));
+$canEdit = !($time_rec['approved'] || $time_rec['timesheet_id'] || $time_rec['invoice_id']);
+$smarty->assign('can_edit', $canEdit);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('files', $files);
-$smarty->assign('title', $i18n->get('title.project_files').': '.$project['name']);
-$smarty->assign('content_page_name', 'project_files.tpl');
+$smarty->assign('title', $i18n->get('title.time_files'));
+$smarty->assign('content_page_name', 'time_files.tpl');
 $smarty->display('index.tpl');

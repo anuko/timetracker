@@ -273,6 +273,8 @@ $i18n_key_words = array(
 'title.time' => 'Χρόνος',
 'title.edit_time_record' => 'Επεξεργασία χρόνου',
 'title.delete_time_record' => 'Διαγραφή χρόνου',
+// TODO: Translate the following.
+// 'title.time_files' => 'Time Record Files',
 'title.expenses' => 'Δαπάνες',
 'title.edit_expense' => 'Επεξεργασία δαπάνης',
 'title.delete_expense' => 'Διαγραφή δαπάνης',

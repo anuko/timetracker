@@ -284,6 +284,8 @@ $i18n_key_words = array(
 'title.time' => 'Tempo',
 'title.edit_time_record' => 'Editando entrada de hora',
 'title.delete_time_record' => 'Apagando entrada de hora',
+// TODO: Translate the following.
+// 'title.time_files' => 'Time Record Files',
 'title.expenses' => 'Gastos',
 'title.edit_expense' => 'Editando item de gasto',
 'title.delete_expense' => 'Apagando item de gasto',

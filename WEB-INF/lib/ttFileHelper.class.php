@@ -297,8 +297,8 @@ class ttFileHelper {
     return $val['group_key'];
   }
 
-  // getProjectFiles obtains a list of files for a project.
-  static function getProjectFiles($project_id) {
+  // getEntityFiles obtains a list of files for an entity.
+  static function getEntityFiles($id, $type) {
     global $user;
     $mdb2 = getConnection();
 
@@ -306,8 +306,9 @@ class ttFileHelper {
     $org_id = $user->org_id;
 
     $result = array();
+    $entity_type = $mdb2->quote($type);
     $sql = "select id, remote_id, file_name as name, description from tt_files".
-      " where entity_type = 'project' and entity_id = $project_id".
+      " where entity_type = $entity_type and entity_id = $id".
       " and group_id = $group_id and org_id = $org_id and status = 1 order by id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
