@@ -40,9 +40,11 @@ if (MODE_PROJECTS != $user->getTrackingMode() && MODE_PROJECTS_AND_TASKS != $use
 }
 // End of access checks.
 
+$showFiles = $user->isPluginEnabled('at');
+
 if($user->can('manage_projects')) {
-  $active_projects = ttGroupHelper::getActiveProjects();
-  $inactive_projects = ttGroupHelper::getInactiveProjects();
+  $active_projects = $showFiles ? ttGroupHelper::getActiveProjectsWithFiles() : ttGroupHelper::getActiveProjects();
+  $inactive_projects = $showFiles ? ttGroupHelper::getInactiveProjectsWithFiles() : ttGroupHelper::getInactiveProjects();
 } else
   $active_projects = $user->getAssignedProjects();
 
