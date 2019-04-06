@@ -82,9 +82,9 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$smarty->assign('can_manage', $user->can('manage_projects'));
+$smarty->assign('can_edit', $user->can('manage_projects'));
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('files', $files);
 $smarty->assign('title', $i18n->get('title.project_files').': '.$project['name']);
-$smarty->assign('content_page_name', 'project_files.tpl');
+$smarty->assign('content_page_name', 'entity_files.tpl');
 $smarty->display('index.tpl');

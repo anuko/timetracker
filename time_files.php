@@ -88,5 +88,5 @@ $smarty->assign('can_edit', $canEdit);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('files', $files);
 $smarty->assign('title', $i18n->get('title.time_files'));
-$smarty->assign('content_page_name', 'time_files.tpl');
+$smarty->assign('content_page_name', 'entity_files.tpl');
 $smarty->display('index.tpl');
