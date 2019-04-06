@@ -81,7 +81,7 @@
           <td class="tableHeader">{$i18n.label.thing_name}</td>
           <td class="tableHeader">{$i18n.label.description}</td>
     {if $show_files}
-          <td class="tableHeader">{$i18n.label.files}</td>
+          <td></td>
     {/if}
         </tr>
   {if $active_projects}
@@ -90,7 +90,7 @@
           <td>{$project.name|escape}</td>
           <td>{$project.description|escape}</td>
       {if $show_files}
-          <td><a href="project_files.php?id={$project.id}">{$i18n.label.view}</a></td>
+          <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_files.png"></a></td>
       {/if}
         </tr>
     {/foreach}

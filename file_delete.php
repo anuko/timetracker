@@ -29,6 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttFileHelper');
+import('ttTimeHelper');
 import('ttProjectHelper');
 
 // Access checks.
@@ -39,14 +40,21 @@ if (!$file) {
   exit();
 }
 // Entity-specific checks.
-if ($file['entity_type'] == 'project') {
+$entity_type = $file['entity_type'];
+if ($entity_type == 'time') {
+  if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time')) || !ttTimeHelper::getRecord($file['entity_id'])) {
+    header('Location: access_denied.php');
+    exit();
+  }
+}
+if ($entity_type == 'project') {
   if (!ttAccessAllowed('manage_projects') || !ttProjectHelper::get($file['entity_id'])) {
     header('Location: access_denied.php');
     exit();
   }
 }
-if ($file['entity_type'] != 'project') {
-  // Currently, files are only associated with projects.
+if ($entity_type != 'project' && $entity_type != 'time') {
+  // Currently, files are only associated with time records and projects.
   // Improve access checks when the feature evolves.
   header('Location: access_denied.php');
   exit();
@@ -64,12 +72,20 @@ if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
     $fileHelper = new ttFileHelper($err);
     $deleted = $fileHelper->deleteFile($file);
-    if ($deleted && $file['entity_type'] == 'project') {
-      header('Location: project_files.php?id='.$file['entity_id']);
+    if ($deleted) {
+      if ($entity_type == 'time') {
+        header('Location: time_files.php?id='.$file['entity_id']);
+      }
+      if ($entity_type == 'project') {
+        header('Location: project_files.php?id='.$file['entity_id']);
+      }
       exit();
     }
   } elseif ($request->getParameter('btn_cancel')) {
-    if ($file['entity_type'] == 'project') {
+    if ($entity_type == 'time') {
+      header('Location: time_files.php?id='.$file['entity_id']);
+    }
+    if ($entity_type == 'project') {
       header('Location: project_files.php?id='.$file['entity_id']);
     }
     exit();

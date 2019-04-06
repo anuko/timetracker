@@ -39,14 +39,21 @@ if (!$file) {
   exit();
 }
 // Entity-specific checks.
-if ($file['entity_type'] == 'project') {
-  if (!ttAccessAllowed('manage_projects') || !ttProjectHelper::get($file['entity_id'])) {
+$entity_type = $file['entity_type'];
+if ($entity_type == 'time') {
+  if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time')) || !ttTimeHelper::getRecord($file['entity_id'])) {
     header('Location: access_denied.php');
     exit();
   }
 }
-if ($file['entity_type'] != 'project') {
-  // Currently, files are only associated with projects.
+if ($entity_type == 'project') {
+  if (!(ttAccessAllowed('view_own_projects') || ttAccessAllowed('manage_projects')) || !ttProjectHelper::get($file['entity_id'])) {
+    header('Location: access_denied.php');
+    exit();
+  }
+}
+if ($entity_type != 'project' && $entity_type != 'time') {
+  // Currently, files are only associated with time records and projects.
   // Improve access checks when the feature evolves.
   header('Location: access_denied.php');
   exit();
