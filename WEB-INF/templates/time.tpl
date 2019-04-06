@@ -140,7 +140,11 @@
         <td align="right" valign="top">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
         <td valign="top">{if $record.comment}{$record.comment|escape}{else}&nbsp;{/if}</td>
     {if $show_files}
-          <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_files.png"></a></td>
+      {if $record.has_files}
+        <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_files.png"></a></td>
+      {else}
+        <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_file.png"></a></td>
+      {/if}
     {/if}
         <td valign="top" align="center">
     {if $record.approved || $record.timesheet_id || $record.invoice_id}

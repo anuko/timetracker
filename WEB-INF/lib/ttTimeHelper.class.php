@@ -753,6 +753,53 @@ class ttTimeHelper {
     return $result;
   }
 
+  // getRecordsWithFiles - returns time records for a user for a given date
+  // with information whether they have attached files (has_files property).
+  // A separate fiunction from getRecords because sql here is more complex.
+  static function getRecordsWithFiles($user_id, $date) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql_time_format = "'%k:%i'"; //  24 hour format.
+    if ('%I:%M %p' == $user->getTimeFormat())
+      $sql_time_format = "'%h:%i %p'"; // 12 hour format for MySQL TIME_FORMAT function.
+
+    $client_field = null;
+    if ($user->isPluginEnabled('cl'))
+      $client_field = ", c.name as client";
+
+    $left_joins = " left join tt_projects p on (l.project_id = p.id)".
+      " left join tt_tasks t on (l.task_id = t.id)";
+    if ($user->isPluginEnabled('cl'))
+      $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
+
+    $left_joins .= " left join (select distinct entity_id from tt_files".
+      " where entity_type = 'time' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
+      " on (l.id = Sub1.entity_id)";
+
+    $result = array();
+    $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,".
+      " TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,".
+      " TIME_FORMAT(l.duration, '%k:%i') as duration, p.name as project, t.name as task, l.comment,".
+      " if(Sub1.entity_id is null, 0, 1) as has_files,".
+      " l.billable, l.approved, l.timesheet_id, l.invoice_id $client_field from tt_log l $left_joins".
+      " where l.date = '$date' and l.user_id = $user_id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1".
+      " order by l.start, l.id";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        if($val['duration']=='0:00')
+          $val['finish'] = '';
+        $result[] = $val;
+      }
+    } else return false;
+
+    return $result;
+  }
+
   // canAdd determines if we can add a record in case there is a limit.
   static function canAdd() {
     $mdb2 = getConnection();
