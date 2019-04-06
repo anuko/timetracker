@@ -3,11 +3,11 @@
     <td valign="top">
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
-          <td width="35%" class="tableHeader">{$i18n.label.description}</td>
+          <td width="40%" class="tableHeader">{$i18n.label.thing_name}</td>
+          <td width="40%" class="tableHeader">{$i18n.label.description}</td>
 {if $can_edit}
-          <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
+          <td></td>
+          <td></td>
 {/if}
         </tr>
 {if $files}
@@ -16,8 +16,8 @@
           <td><a href="file_download.php?id={$file.id}">{$file.name|escape}</a></td>
           <td>{$file.description|escape}</td>
     {if $can_edit}
-          <td><a href="file_edit.php?id={$file.id}">{$i18n.label.edit}</a></td>
-          <td><a href="file_delete.php?id={$file.id}">{$i18n.label.delete}</a></td>
+          <td><a href="file_edit.php?id={$file.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+          <td><a href="file_delete.php?id={$file.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
     {/if}
         </tr>
   {/foreach}
