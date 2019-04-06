@@ -118,6 +118,9 @@
         <td class="tableHeader">{$i18n.label.note}</td>
         <td></td>
         <td></td>
+  {if $show_files}
+        <td></td>
+  {/if}
       </tr>
   {foreach $time_records as $record}
       <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
@@ -136,6 +139,9 @@
     {/if}
         <td align="right" valign="top">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
         <td valign="top">{if $record.comment}{$record.comment|escape}{else}&nbsp;{/if}</td>
+    {if $show_files}
+          <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_files.png"></a></td>
+    {/if}
         <td valign="top" align="center">
     {if $record.approved || $record.timesheet_id || $record.invoice_id}
           &nbsp;

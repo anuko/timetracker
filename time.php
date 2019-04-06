@@ -401,6 +401,7 @@ $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('time_records', ttTimeHelper::getRecords($user_id, $cl_date));
+if (isTrue('FILES_DEBUG')) $smarty->assign('show_files', $user->isPluginEnabled('at'));
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
