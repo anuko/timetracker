@@ -157,6 +157,11 @@ div#LoginAboutText { width: 400px; }
 }
 .uncompleted-entry.active { background-color: red; }
 
+.table_icon {
+  height: 16px;
+  width: 16px;
+}
+
 /* Mobile styles */
 .mobile-table {
   border: 0;
