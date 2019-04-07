@@ -8,8 +8,8 @@
           <td width="50%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td class="tableHeader">{$i18n.label.type}</td>
           <td class="tableHeader">{$i18n.menu.options}</td>
-          <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
+          <td></td>
+          <td></td>
         </tr>
   {if $custom_fields}
     {foreach $custom_fields as $field}
@@ -22,8 +22,8 @@
           <td>{$i18n.label.type_dropdown}</td>
           <td><a href="cf_dropdown_options.php?field_id={$field['id']}">{$i18n.label.configure}</a></td>
       {/if}
-          <td><a href="cf_custom_field_edit.php?id={$field['id']}">{$i18n.label.edit}</a></td>
-          <td><a href="cf_custom_field_delete.php?id={$field['id']}">{$i18n.label.delete}</a></td>
+          <td><a href="cf_custom_field_edit.php?id={$field['id']}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+          <td><a href="cf_custom_field_delete.php?id={$field['id']}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
     {/foreach}
   {/if}

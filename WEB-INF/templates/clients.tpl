@@ -13,15 +13,15 @@
         <tr>
           <td width="40%" class="tableHeader">{$i18n.label.person_name}</td>
           <td width="40%" class="tableHeader">{$i18n.label.address}</td>
-          <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
+          <td></td>
+          <td></td>
         </tr>
   {foreach $active_clients as $client}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$client.name|escape}</td>
           <td>{$client.address|escape}</td>
-          <td><a href="client_edit.php?id={$client.id}">{$i18n.label.edit}</a></td>
-          <td><a href="client_delete.php?id={$client.id}">{$i18n.label.delete}</a></td>
+          <td><a href="client_edit.php?id={$client.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+          <td><a href="client_delete.php?id={$client.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
   {/foreach}
       </table>
@@ -36,15 +36,15 @@
         <tr>
           <td width="40%" class="tableHeader">{$i18n.label.person_name}</td>
           <td width="40%" class="tableHeader">{$i18n.label.address}</td>
-          <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
+          <td></td>
+          <td></td>
         </tr>
     {foreach $inactive_clients as $client}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$client.name|escape}</td>
           <td>{$client.address|escape}</td>
-          <td><a href="client_edit.php?id={$client.id}">{$i18n.label.edit}</a></td>
-          <td><a href="client_delete.php?id={$client.id}">{$i18n.label.delete}</a></td>
+          <td><a href="client_edit.php?id={$client.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+          <td><a href="client_delete.php?id={$client.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
     {/foreach}
       </table>
