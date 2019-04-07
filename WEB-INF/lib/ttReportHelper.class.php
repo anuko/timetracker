@@ -154,6 +154,9 @@ class ttReportHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     // Determine these once as they are used in multiple places in this function.
     $canViewReports = $user->can('view_reports') || $user->can('view_all_reports');
     $isClient = $user->isClient();
@@ -251,6 +254,9 @@ class ttReportHelper {
     // Add timesheet name if it is selected.
     if ($options['show_timesheet'])
       array_push($fields, 'ts.name as timesheet_name');
+    // Add has_files.
+    if ($options['show_files'])
+      array_push($fields, 'if(Sub1.entity_id is null, 0, 1) as has_files');
 
     // Prepare sql query part for left joins.
     $left_joins = null;
@@ -274,6 +280,11 @@ class ttReportHelper {
     }
     if ($includeCost && MODE_TIME != $trackingMode)
       $left_joins .= " left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
+    if ($options['show_files']) {
+      $left_joins .= " left join (select distinct entity_id from tt_files".
+        " where entity_type = 'time' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
+        " on (l.id = Sub1.entity_id)";
+    }
 
     // Prepare sql query part for inner joins.
     $inner_joins = null;
@@ -1143,6 +1154,7 @@ class ttReportHelper {
     $options['show_custom_field_1'] = $bean->getAttribute('chcf_1');
     $options['show_work_units'] = $bean->getAttribute('chunits');
     $options['show_timesheet'] = $bean->getAttribute('chtimesheet');
+    $options['show_files'] = $bean->getAttribute('chfiles');
     $options['show_totals_only'] = $bean->getAttribute('chtotalsonly');
     $options['group_by1'] = $bean->getAttribute('group_by1');
     $options['group_by2'] = $bean->getAttribute('group_by2');

@@ -299,6 +299,7 @@ if ($bean->getAttribute('chpaid')) $colspan++;
 if ($bean->getAttribute('chip')) $colspan++;
 if ($bean->getAttribute('chinvoice')) $colspan++;
 if ($bean->getAttribute('chtimesheet')) $colspan++;
+if ($bean->getAttribute('chfiles')) $colspan++;
 
 // Assign variables that are used to alternate color of rows for different dates.
 $smarty->assign('prev_date', '');

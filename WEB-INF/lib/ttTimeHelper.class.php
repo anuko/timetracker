@@ -692,6 +692,37 @@ class ttTimeHelper {
     return false;
   }
 
+  // getRecordForFileView - retrieves a time record identified by its id for
+  // attachment view operation.
+  //
+  // It is different from getRecord, as we want users with appropriate rights
+  // to be able to see other users files, without changing "on behalf" user.
+  // For example, viewing reports for all users and their attached files
+  // from report links.
+  static function getRecordForFileView($id) {
+    // TODO: code this function properly. There are no security checks now.
+    global $user;
+
+    // $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $mdb2 = getConnection();
+
+    $sql = "select l.id, l.timesheet_id, l.invoice_id, l.approved from tt_log l".
+      " where l.id = $id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      if (!$res->numRows()) {
+        return false;
+      }
+      if ($val = $res->fetchRow()) {
+        return $val;
+      }
+    }
+    return false;
+  }
+
   // getAllRecords - returns all time records for a certain user.
   static function getAllRecords($user_id) {
     $result = array();

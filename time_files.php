@@ -36,17 +36,16 @@ if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
   header('Location: access_denied.php');
   exit();
 }
-$cl_id = (int)$request->getParameter('id');
-$time_rec = ttTimeHelper::getRecord($cl_id);
-if (!$time_rec) {
-  header('Location: access_denied.php');
-  exit();
-}
 if (!$user->isPluginEnabled('at')) {
   header('Location: feature_disabled.php');
   exit();
 }
-// TODO: review access checks, specifically for on behalf operations.
+$cl_id = (int)$request->getParameter('id');
+$time_rec = ttTimeHelper::getRecordForFileView($cl_id);
+if (!$time_rec) {
+  header('Location: access_denied.php');
+  exit();
+}
 // End of access checks.
 
 if ($request->isPost()) {
