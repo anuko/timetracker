@@ -29,6 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttFileHelper');
+import('ttTimeHelper');
 import('ttProjectHelper');
 
 // Access checks.
@@ -41,7 +42,7 @@ if (!$file) {
 // Entity-specific checks.
 $entity_type = $file['entity_type'];
 if ($entity_type == 'time') {
-  if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time')) || !ttTimeHelper::getRecord($file['entity_id'])) {
+  if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time')) || !ttTimeHelper::getRecordForFileView($file['entity_id'])) {
     header('Location: access_denied.php');
     exit();
   }
