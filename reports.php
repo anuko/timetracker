@@ -291,6 +291,9 @@ if ($showTimesheetCheckbox)
   $form->addInput(array('type'=>'checkbox','name'=>'chtimesheet'));
 if ($showApproved)
   $form->addInput(array('type'=>'checkbox','name'=>'chapproved'));
+if (isTrue('FILES_DEBUG')) $showFiles = $user->isPluginEnabled('at');
+if ($showFiles)
+  $form->addInput(array('type'=>'checkbox','name'=>'chfiles'));
 
 // Add a hidden control for timesheet_user_id (who to generate a timesheet for).
 if ($showTimesheetCheckbox)
@@ -352,6 +355,7 @@ if ($request->isGet() && !$bean->isSaved()) {
   $form->setValueByElement('chcf_1', '0');
   $form->setValueByElement('chunits', '0');
   $form->setValueByElement('chinvoice', '0');
+  $form->setValueByElement('chfiles', '1');
 
   $form->setValueByElement('chtotalsonly', '0');
 }
@@ -458,6 +462,7 @@ $smarty->assign('show_start', $showStart);
 $smarty->assign('show_finish', $showFinish);
 $smarty->assign('show_work_units', $showWorkUnits);
 $smarty->assign('show_ip', $showIP);
+$smarty->assign('show_files', $showFiles);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
 $smarty->assign('assigned_projects', $assigned_projects);

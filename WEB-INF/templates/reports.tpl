@@ -381,6 +381,9 @@ function handleCheckboxes() {
 {if $show_paid_status}
                     <tr><td><label>{$forms.reportForm.chpaid.control}&nbsp;{$i18n.label.paid}</label></td></tr>
 {/if}
+{if $show_files}
+                    <tr><td><label>{$forms.reportForm.chfiles.control}&nbsp;{$i18n.label.files}</label></td></tr>
+{/if}
                   </table>
                 </td>
               </tr>
