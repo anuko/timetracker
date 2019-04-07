@@ -16,7 +16,7 @@
   {/if}
           <td class="tableHeader">{$i18n.label.view}</td>
   {if !$user->isClient()}
-          <td class="tableHeader">{$i18n.label.delete}</td>
+          <td></td>
   {/if}
         </tr>
         {foreach $invoices as $invoice}
@@ -29,7 +29,7 @@
   {/if}
           <td><a href="invoice_view.php?id={$invoice.id}">{$i18n.label.view}</a></td>
   {if !$user->isClient()}
-          <td><a href="invoice_delete.php?id={$invoice.id}">{$i18n.label.delete}</a></td>
+          <td><a href="invoice_delete.php?id={$invoice.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
   {/if}
         </tr>
         {/foreach}

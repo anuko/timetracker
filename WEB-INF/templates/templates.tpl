@@ -9,15 +9,15 @@
         <tr>
           <td class="tableHeader" width="45%">{$i18n.label.thing_name}</td>
           <td class="tableHeader" width="45%">{$i18n.label.description}</td>
-          <td class="tableHeader" width="5%">{$i18n.label.edit}</td>
-          <td class="tableHeader" width="5%">{$i18n.label.delete}</td>
+          <td></td>
+          <td></td>
         </tr>
     {foreach $active_templates as $template}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$template['name']|escape}</td>
           <td>{$template['description']|escape}</td>
-          <td><a href="template_edit.php?id={$template['id']}">{$i18n.label.edit}</a></td>
-          <td><a href="template_delete.php?id={$template['id']}">{$i18n.label.delete}</a></td>
+          <td><a href="template_edit.php?id={$template['id']}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+          <td><a href="template_delete.php?id={$template['id']}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
     {/foreach}
       </table>
@@ -30,15 +30,15 @@
         <tr>
           <td class="tableHeader" width="45%">{$i18n.label.thing_name}</td>
           <td class="tableHeader" width="45%">{$i18n.label.description}</td>
-          <td class="tableHeader" width="5%">{$i18n.label.edit}</td>
-          <td class="tableHeader" width="5%">{$i18n.label.delete}</td>
+          <td></td>
+          <td></td>
         </tr>
     {foreach $inactive_templates as $template}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$template['name']|escape}</td>
           <td>{$template['description']|escape}</td>
-          <td><a href="template_edit.php?id={$template['id']}">{$i18n.label.edit}</a></td>
-          <td><a href="template_delete.php?id={$template['id']}">{$i18n.label.delete}</a></td>
+          <td><a href="template_edit.php?id={$template['id']}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+          <td><a href="template_delete.php?id={$template['id']}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
     {/foreach}
       </table>
