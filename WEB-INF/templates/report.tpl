@@ -102,9 +102,9 @@
     {if $bean->getAttribute('chduration')}<td class="cellRightAligned">{$item.duration}</td>{/if}
     {if $bean->getAttribute('chunits')}<td class="cellRightAligned">{$item.units}</td>{/if}
     {if $bean->getAttribute('chcost')}<td class="cellRightAligned">{if $user->can('manage_invoices') || $user->isClient()}{$item.cost}{else}{$item.expense}{/if}</td>{/if}
-    {if $bean->getAttribute('chapproved')}<td class="cellRightAligned">{if $item.approved == 1}{$i18n.label.yes}{else}{$i18n.label.no}{/if}{/if}
-    {if $bean->getAttribute('chpaid')}<td class="cellRightAligned">{if $item.paid == 1}{$i18n.label.yes}{else}{$i18n.label.no}{/if}{/if}
-    {if $bean->getAttribute('chip')}<td class="cellRightAligned">{if $item.modified}{$item.modified_ip} {$item.modified}{else}{$item.created_ip} {$item.created}{/if}{/if}
+    {if $bean->getAttribute('chapproved')}<td class="cellRightAligned">{if $item.approved == 1}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>{/if}
+    {if $bean->getAttribute('chpaid')}<td class="cellRightAligned">{if $item.paid == 1}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>{/if}
+    {if $bean->getAttribute('chip')}<td class="cellRightAligned">{if $item.modified}{$item.modified_ip} {$item.modified}{else}{$item.created_ip} {$item.created}{/if}</td>{/if}
     {if $bean->getAttribute('chinvoice')}<td class="cellRightAligned">{$item.invoice|escape}</td>{/if}
     {if $bean->getAttribute('chtimesheet')}<td class="cellRightAligned">{$item.timesheet_name|escape}</td>{/if}
     {if $bean->getAttribute('chfiles')}<td class="cellRightAligned">{if $item.has_files}<a href="time_files.php?id={$item.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_files.png"></a>{/if}</td>{/if}
