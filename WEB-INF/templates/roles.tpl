@@ -13,8 +13,8 @@
           <td width="25%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td class="tableHeader">{$i18n.form.roles.rank}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
-          <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
+          <td></td>
+          <td></td>
         </tr>
   {if $active_roles}
     {foreach $active_roles as $role}
@@ -22,8 +22,8 @@
           <td>{$role.name|escape}</td>
           <td>{$role.rank}</td>
           <td>{$role.description|escape}</td>
-          <td><a href="role_edit.php?id={$role.id}">{$i18n.label.edit}</a></td>
-          <td><a href="role_delete.php?id={$role.id}">{$i18n.label.delete}</a></td>
+          <td><a href="role_edit.php?id={$role.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+          <td><a href="role_delete.php?id={$role.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
     {/foreach}
   {/if}
@@ -44,16 +44,16 @@
           <td width="25%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td class="tableHeader">{$i18n.form.roles.rank}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
-          <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
+          <td></td>
+          <td></td>
         </tr>
     {foreach $inactive_roles as $role}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$role.name|escape}</td>
           <td>{$role.rank}</td>
           <td>{$role.description|escape}</td>
-          <td><a href="role_edit.php?id={$role.id}">{$i18n.label.edit}</a></td>
-          <td><a href="role_delete.php?id={$role.id}">{$i18n.label.delete}</a></td>
+          <td><a href="role_edit.php?id={$role.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+          <td><a href="role_delete.php?id={$role.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
     {/foreach}
       </table>
