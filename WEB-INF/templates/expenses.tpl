@@ -176,14 +176,15 @@ function recalculateCost() {
       <table border="0" cellpadding="3" cellspacing="1" width="100%">
       <tr>
   {if $user->isPluginEnabled('cl')}
-        <td width="20%" class="tableHeader">{$i18n.label.client}</td>
+        <td class="tableHeader">{$i18n.label.client}</td>
   {/if}
   {if $show_project}
         <td class="tableHeader">{$i18n.label.project}</td>
   {/if}
         <td class="tableHeader">{$i18n.label.item}</td>
         <td width="5%" class="tableHeaderCentered">{$i18n.label.cost}</td>
-        <td width="5%" class="tableHeader">{$i18n.label.edit}</td>
+        <td></td>
+        <td></td>
       </tr>
   {foreach $expense_items as $item}
       <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
@@ -199,7 +200,14 @@ function recalculateCost() {
     {if $item.approved || $item.invoice_id}
           &nbsp;
     {else}
-          <a href='expense_edit.php?id={$item.id}'>{$i18n.label.edit}</a>
+          <a href='expense_edit.php?id={$item.id}'><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a>
+    {/if}
+        </td>
+        <td valign="top" align="center">
+    {if $item.approved || $item.invoice_id}
+          &nbsp;
+    {else}
+          <a href='expense_delete.php?id={$item.id}'><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a>
     {/if}
         </td>
       </tr>
