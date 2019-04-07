@@ -12,8 +12,8 @@
     <td width="70%" class="tableHeader">{$i18n.label.thing_name}</td>
     <td class="tableHeader">{$i18n.label.date}</td>
     <td class="tableHeader">{$i18n.label.language}</td>
-    <td class="tableHeader">{$i18n.label.edit}</td>
-    <td class="tableHeader">{$i18n.label.delete}</td>
+    <td></td>
+    <td></td>
   </tr>
 {if $groups}
   {foreach $groups as $group}
@@ -22,8 +22,8 @@
     <td>{$group.name|escape}</td>
     <td nowrap>{$group.date}</td>
     <td align="center">{$group.lang}</td>
-    <td><a href="admin_group_edit.php?id={$group.id}">{$i18n.label.edit}</a></td>
-    <td><a href="admin_group_delete.php?id={$group.id}">{$i18n.label.delete}</a></td>
+    <td><a href="admin_group_edit.php?id={$group.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+    <td><a href="admin_group_delete.php?id={$group.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
   </tr>
   {/foreach}
 {/if}
