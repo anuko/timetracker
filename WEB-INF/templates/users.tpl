@@ -17,8 +17,8 @@
   {if $show_quota}
           <td class="tableHeader">{$i18n.label.quota}</td>
   {/if}
-          <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
+          <td></td>
+          <td></td>
         </tr>
   {if $active_users}
     {foreach $active_users as $u}
@@ -35,8 +35,8 @@
           <td class="cellRightAligned">{$u.quota_percent}</td>
       {/if}
       {if $u.group_id != $user->group_id || $u.rank < $user->rank || ($u.rank == $user->rank && $u.id == $user->id)}
-          <td><a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a></td>
-         {if $u.id != $user->id}<td><a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a></td>{else}<td></td>{/if}
+          <td><a href="user_edit.php?id={$u.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+         {if $u.id != $user->id}<td><a href="user_delete.php?id={$u.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>{else}<td></td>{/if}
       {else}
           <td></td>
           <td></td>
@@ -64,8 +64,8 @@
     {if $show_quota}
           <td class="tableHeader">{$i18n.label.quota}</td>
     {/if}
-          <td class="tableHeader">{$i18n.label.edit}</td>
-          <td class="tableHeader">{$i18n.label.delete}</td>
+          <td></td>
+          <td></td>
         </tr>
     {foreach $inactive_users as $u}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
@@ -76,8 +76,8 @@
           <td class="cellRightAligned">{$u.quota_percent}</td>
       {/if}
       {if $u.group_id != $user->group_id || $u.rank < $user->rank}
-          <td><a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a></td>
-          <td><a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a></td>
+          <td><a href="user_edit.php?id={$u.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
+          <td><a href="user_delete.php?id={$u.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
       {else}
           <td></td>
           <td></td>
