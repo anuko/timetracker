@@ -700,23 +700,68 @@ class ttTimeHelper {
   // For example, viewing reports for all users and their attached files
   // from report links.
   static function getRecordForFileView($id) {
-    // TODO: code this function properly. There are no security checks now.
+    // There are several possible situations:
+    //
+    // Record is ours. Check "view_own_reports" or "view_all_reports".
+    // Record is for the current on behalf user. Check "view_reports" or "view_all_reports".
+    // Record is for someone else. Check "view_reports" or "view_all_reports" and rank.
+    //
+    // It looks like the best way is to use 2 queries, obtain user_id first, then check rank.
+
     global $user;
 
-    // $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
     $mdb2 = getConnection();
 
-    $sql = "select l.id, l.timesheet_id, l.invoice_id, l.approved from tt_log l".
+    // Obtain user_id for the time record.
+    $sql = "select l.id, l.user_id, l.timesheet_id, l.invoice_id, l.approved from tt_log l ".
       " where l.id = $id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) return false;
+    if (!$res->numRows()) return false;
+
+    $val = $res->fetchRow();
+    $user_id = $val['user_id'];
+
+    // If record is ours.
+    if ($user_id == $user->id) {
+      if ($user->can('view_own_reports') || $user->can('view_all_reports')) {
+        $val['can_edit'] = !($val['timesheet_id'] || $val['invoice_id'] || $val['approved']);
+        return $val;
+      }
+      return false; // No rights.
+    }
+
+    // If record belongs to a user we impersonate.
+    if ($user->behalfUser && $user_id == $user->behalfUser->id) {
+      if ($user->can('view_reports') || $user->can('view_all_reports')) {
+        $val['can_edit'] = !($val['timesheet_id'] || $val['invoice_id'] || $val['approved']);
+        return $val;
+      }
+      return false; // No rights.
+    }
+
+    // Record belongs to someone else. We need to check user rank.
+    if (!($user->can('view_reports') || $user->can('view_all_reports'))) return false;
+    $max_rank = $user->can('view_all_reports') ? MAX_RANK : $user->getMaxRankForGroup($group_id);
+
+    $left_joins = ' left join tt_users u on (l.user_id = u.id)';
+    $left_joins .= ' left join tt_roles r on (u.role_id = r.id)';
+
+    $where_part = " where l.id = $id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1".
+    $where_part .= " and r.rank <= $max_rank";
+
+    $sql = "select l.id, l.user_id, l.timesheet_id, l.invoice_id, l.approved".
+      " from tt_log l $left_joins $where_part";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if (!$res->numRows()) {
         return false;
       }
       if ($val = $res->fetchRow()) {
+        $val['can_edit'] = false;
         return $val;
       }
     }

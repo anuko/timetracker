@@ -82,8 +82,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$canEdit = !($time_rec['approved'] || $time_rec['timesheet_id'] || $time_rec['invoice_id']);
-$smarty->assign('can_edit', $canEdit);
+$smarty->assign('can_edit', $time_rec['can_edit']);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('files', $files);
 $smarty->assign('title', $i18n->get('title.time_files'));
