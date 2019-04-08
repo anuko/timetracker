@@ -360,6 +360,9 @@ class ttReportHelper {
         array_push($fields, 'i.name as invoice');
       if ($options['show_timesheet'])
         array_push($fields, 'null as timesheet_name');
+      // Add has_files.
+      if ($options['show_files'])
+        array_push($fields, 'if(Sub1.entity_id is null, 0, 1) as has_files');
 
       // Prepare sql query part for left joins.
       $left_joins = null;
@@ -371,6 +374,11 @@ class ttReportHelper {
         $left_joins .= " left join tt_projects p on (p.id = ei.project_id)";
       if (($canViewReports || $isClient) && $options['show_invoice'])
         $left_joins .= " left join tt_invoices i on (i.id = ei.invoice_id and i.status = 1)";
+      if ($options['show_files']) {
+        $left_joins .= " left join (select distinct entity_id from tt_files".
+          " where entity_type = 'expense' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
+          " on (ei.id = Sub1.entity_id)";
+      }
 
       $where = ttReportHelper::getExpenseWhere($options);
 
