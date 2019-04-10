@@ -126,6 +126,9 @@
     {if $user->isPluginEnabled('cl')}
         <td valign="top">{$record.client|escape}</td>
     {/if}
+    {if $user->isPluginEnabled('cf')}
+        <td valign="top">{$record.cf_1|escape}</td>
+    {/if}
     {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td valign="top">{$record.project|escape}</td>
     {/if}
