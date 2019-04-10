@@ -731,14 +731,27 @@ class ttTimeHelper {
 
     $cf1_field = null;
     if ($user->isPluginEnabled('cf'))
-      $cf1_field = ", cf.value as cf_1";
+    {
+        $helpsql = "select type from tt_custom_fields".       // which type of custom field, modify ID for more custom fields
+          " where id = 1 and group_id = $group_id and org_id = $org_id";
+        $res = $mdb2->query($helpsql);
+        if (!is_a($res, 'PEAR_Error')) {
+          $cf1 = $res->fetchRow();
+          if (($cf1['type'])==1)
+          {$cf1_field = ", cflog.value as cf_1";}
+          if (($cf1['type'])==2)
+          {$cf1_field = ", cfopt.value as cf_1";}
+        }
+    }
 
     $left_joins = " left join tt_projects p on (l.project_id = p.id)".
       " left join tt_tasks t on (l.task_id = t.id)";
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
-    if ($user->isPluginEnabled('cf'))
-      $left_joins .= " left join tt_custom_field_log cf on (l.id = cf.log_id AND cf.status=1)";
+    if (($user->isPluginEnabled('cf')) && ($cf1['type']==1))
+      $left_joins .= " left join tt_custom_field_log cflog on (l.id = cflog.log_id and cflog.status = 1)";
+    if (($user->isPluginEnabled('cf')) && ($cf1['type']==2))
+      $left_joins .=  " left join tt_custom_field_log cflog on (l.id = cflog.log_id and cflog.status = 1) left join tt_custom_field_options cfopt on (cflog.option_id = cfopt.id)";
 
     $result = array();
     $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,".
