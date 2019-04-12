@@ -510,6 +510,15 @@ class ttTimeHelper {
     global $user;
     $mdb2 = getConnection();
 
+    // Delete associated files.
+    if ($user->isPluginEnabled('at')) {
+      import('ttFileHelper');
+      global $err;
+      $fileHelper = new ttFileHelper($err);
+      if (!$fileHelper->deleteEntityFiles($id, 'time'))
+        return false;
+    }
+
     $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;

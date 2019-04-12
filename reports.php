@@ -291,7 +291,7 @@ if ($showTimesheetCheckbox)
   $form->addInput(array('type'=>'checkbox','name'=>'chtimesheet'));
 if ($showApproved)
   $form->addInput(array('type'=>'checkbox','name'=>'chapproved'));
-if (isTrue('FILES_DEBUG')) $showFiles = $user->isPluginEnabled('at');
+$showFiles = $user->isPluginEnabled('at');
 if ($showFiles)
   $form->addInput(array('type'=>'checkbox','name'=>'chfiles'));
 

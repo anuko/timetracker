@@ -165,6 +165,15 @@ class ttProjectHelper {
     global $user;
     $mdb2 = getConnection();
 
+    // Delete associated files.
+    if ($user->isPluginEnabled('at')) {
+      import('ttFileHelper');
+      global $err;
+      $fileHelper = new ttFileHelper($err);
+      if (!$fileHelper->deleteEntityFiles($id, 'project'))
+        return false;
+    }
+
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 

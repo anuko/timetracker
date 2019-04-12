@@ -32,6 +32,8 @@ class ttFileHelper {
   var $storage_uri = null;  // Location of file storage facility.
   var $register_uri = null; // URI to register with file storage facility.
   var $putfile_uri = null;  // URI to put file in file storage.
+  var $deletefile_uri = null;  // URI to delete file from file storage.
+  var $deletefiles_uri = null; // URI to delete multiple files from file storage.
   var $getfile_uri = null;  // URI to get file from file storage.
   var $site_id = null;      // Site id for file storage.
   var $site_key = null;     // Site key for file storage.
@@ -46,6 +48,7 @@ class ttFileHelper {
       $this->register_uri = $this->storage_uri.'register';
       $this->putfile_uri = $this->storage_uri.'putfile';
       $this->deletefile_uri = $this->storage_uri.'deletefile';
+      $this->deletefiles_uri = $this->storage_uri.'deletefiles';
       $this->getfile_uri = $this->storage_uri.'getfile';
       $this->checkSiteRegistration();
     }
@@ -133,8 +136,8 @@ class ttFileHelper {
       'org_key' => urlencode($this->getOrgKey()),
       'group_id' => urlencode($group_id),
       'group_key' => urlencode($this->getGroupKey()),
-      'user_id' => urlencode($fields['user_id']),   // May be null.
-      'user_key' => urlencode($fields['user_key']), // May be null.
+      'entity_type' => urlencode($fields['entity_type']),
+      'entity_id' => urlencode($fields['entity_id']),
       'file_name' => urlencode($fields['file_name']),
       'description' => urlencode($fields['description']),
       'content' => urlencode(base64_encode(file_get_contents($_FILES['newfile']['tmp_name'])))
@@ -212,8 +215,8 @@ class ttFileHelper {
       'org_key' => urlencode($this->getOrgKey()),
       'group_id' => urlencode($group_id),
       'group_key' => urlencode($this->getGroupKey()),
-      'user_id' => urlencode($fields['user_id']),   // May be null.
-      'user_key' => urlencode($fields['user_key']), // May be null.
+      'entity_type' => urlencode($fields['entity_type']),
+      'entity_id' => urlencode($fields['entity_id']),
       'file_id' => urlencode($fields['remote_id']),
       'file_key' => urlencode($fields['file_key']),
       'file_name' => urlencode($fields['file_name']));
@@ -249,18 +252,18 @@ class ttFileHelper {
     if ($error) {
       // Add an error from file storage facility if we have it.
       $this->errors->add($error);
-      return false;
     }
     if ($status != 1) {
       // There is no explicit error message, but still something not right.
       $this->errors->add($i18n->get('error.file_storage'));
-      return false;
     }
 
-    // Delete file reference from database.
-    $file_id = $fields['id'];
+    // Delete file reference from database even when remote file storage call fails.
+    // This is by design to keep things simple.
+    $file_id = (int) $fields['id'];
+    $entity_id = (int) $fields['entity_id'];
     $sql = "delete from tt_files".
-      " where id = $file_id and org_id = $org_id and group_id = $group_id";
+      " where id = $file_id and org_id = $org_id and group_id = $group_id and entity_id = $entity_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) {
       $this->errors->add($i18n->get('error.db'));
@@ -268,6 +271,83 @@ class ttFileHelper {
     }
 
     // File successfully deleted from both file storage and database.
+    return true;
+  }
+
+  // deleteEntityFiles - deletes all files associated with an entity.
+  // TODO: decide whether deleteGroupFiles and deleteOrgFiles should be
+  // separate functions.
+  function deleteEntityFiles($entity_id, $entity_type) {
+
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id),
+      'org_key' => urlencode($this->getOrgKey()),
+      'group_id' => urlencode($group_id),
+      'group_key' => urlencode($this->getGroupKey()),
+      'entity_type' => urlencode($entity_type),
+      'entity_id' => urlencode($entity_id));
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->deletefiles_uri);
+    curl_setopt($ch, CURLOPT_POST, count($fields));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.file_storage'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+    $status = (int) $result_array['status'];
+    $error = $result_array['error'];
+
+    if ($error) {
+      // Add an error from file storage facility if we have it.
+      $this->errors->add($error);
+    }
+    if ($status != 1) {
+      // There is no explicit error message, but still something not right.
+      $this->errors->add($i18n->get('error.file_storage'));
+    }
+
+    // Many things can go wrong with a remote call to file storage facility.
+    // By design, we ignore such errors, and proceed with removal of entity
+    // records from the database.
+
+    // Delete all entity records from the database.
+    $file_id = $fields['id'];
+    $sql = "delete from tt_files".
+      " where entity_id = $entity_id".
+      " and entity_type = ".$mdb2->quote($entity_type).
+      " and org_id = $org_id and group_id = $group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) {
+      $this->errors->add($i18n->get('error.db'));
+      return false;
+    }
+
     return true;
   }
 
@@ -307,7 +387,7 @@ class ttFileHelper {
 
     $result = array();
     $entity_type = $mdb2->quote($type);
-    $sql = "select id, remote_id, file_name as name, description from tt_files".
+    $sql = "select id, remote_id, file_key, file_name as name, description from tt_files".
       " where entity_type = $entity_type and entity_id = $id".
       " and group_id = $group_id and org_id = $org_id and status = 1 order by id";
     $res = $mdb2->query($sql);
@@ -371,8 +451,8 @@ class ttFileHelper {
       'org_key' => urlencode($this->getOrgKey()),
       'group_id' => urlencode($group_id),
       'group_key' => urlencode($this->getGroupKey()),
-      'user_id' => urlencode($fields['user_id']),   // May be null.
-      'user_key' => urlencode($fields['user_key']), // May be null.
+      'entity_type' => urlencode($fields['entity_type']),
+      'entity_id' => urlencode($fields['entity_id']),
       'file_id' => urlencode($fields['remote_id']),
       'file_key' => urlencode($fields['file_key']),
       'file_name' => urlencode($fields['file_name']));
