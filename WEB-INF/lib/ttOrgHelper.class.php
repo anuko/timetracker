@@ -85,6 +85,10 @@ class ttOrgHelper {
 
   // deleteOrg deletes data for the entire organization from database permanently.
   static function deleteOrg($org_id) {
+
+    // Delete all org files.
+    ttOrgHelper::deleteOrgFiles($org_id);
+
     // Go one table at a time and remove all records with matching org_id.
     // The order is backwards to import (see ttOrgImportHelper). Remove groups last.
     // This leaves us with something partially working if an error occurs.
@@ -119,6 +123,70 @@ class ttOrgHelper {
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error')) return false;
     }
+    return true;  }
+
+  // deleteOrgFiles deletes files attached to all entities in the entire organization.
+  static function deleteOrgFiles($org_id) {
+
+    // Delete all org files from the database.
+    $mdb2 = getConnection();
+    $sql = "delete from tt_files where org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    // Try to make a call to file storage facility.
+    if (!defined('FILE_STORAGE_URI')) return true; // Nothing to do.
+
+    $deleteorgfiles_uri = FILE_STORAGE_URI.'deleteorgfiles';
+
+    // Obtain site id.
+    $sql = "select param_value as site_id from tt_site_config where param_name = 'locker_id'";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $site_id = $val['site_id'];
+    if (!$site_id) return true; // Nothing to do.
+
+    // Obtain site key.
+    $sql = "select param_value as site_key from tt_site_config where param_name = 'locker_key'";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $site_key = $val['site_key'];
+    if (!$site_key) return true; // Can't continue without site key.
+
+    // Obtain org key.
+    $sql = "select group_key as org_key from tt_groups where id = $org_id";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $org_key = $val['org_key'];
+    if (!$site_key) return true; // Can't continue without org key.
+
+    $curl_fields = array('site_id' => $site_id,
+      'site_key' => $site_key,
+      'org_id' => $org_id,
+      'org_key' => $org_key);
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $deleteorgfiles_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    // Many things can go wrong with a remote call to file storage facility.
+    // By design, we ignore such errors.
     return true;
   }
 }

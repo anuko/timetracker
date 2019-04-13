@@ -1157,7 +1157,6 @@ if ($_POST) {
 }
 
   if ($_POST["cleanup"]) {
-
     $mdb2 = getConnection();
     $inactive_orgs = ttOrgHelper::getInactiveOrgs();
 
@@ -1191,6 +1190,7 @@ if ($_POST) {
     ttExecute("OPTIMIZE TABLE tt_user_project_binds");
     ttExecute("OPTIMIZE TABLE tt_users");
     ttExecute("OPTIMIZE TABLE tt_roles");
+    ttExecute("OPTIMIZE TABLE tt_files");
   }
 
   print "Done.<br>\n";

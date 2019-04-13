@@ -79,7 +79,7 @@ class ttFileHelper {
 
       // Set the url, number of POST vars, POST data.
       curl_setopt($ch, CURLOPT_URL, $this->register_uri);
-      curl_setopt($ch, CURLOPT_POST, count($fields));
+      curl_setopt($ch, CURLOPT_POST, true);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -152,7 +152,7 @@ class ttFileHelper {
 
     // Set the url, number of POST vars, POST data.
     curl_setopt($ch, CURLOPT_URL, $this->putfile_uri);
-    curl_setopt($ch, CURLOPT_POST, count($fields));
+    curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -230,7 +230,7 @@ class ttFileHelper {
 
     // Set the url, number of POST vars, POST data.
     curl_setopt($ch, CURLOPT_URL, $this->deletefile_uri);
-    curl_setopt($ch, CURLOPT_POST, count($fields));
+    curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -304,7 +304,7 @@ class ttFileHelper {
 
     // Set the url, number of POST vars, POST data.
     curl_setopt($ch, CURLOPT_URL, $this->deletefiles_uri);
-    curl_setopt($ch, CURLOPT_POST, count($fields));
+    curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -466,7 +466,7 @@ class ttFileHelper {
 
     // Set the url, number of POST vars, POST data.
     curl_setopt($ch, CURLOPT_URL, $this->getfile_uri);
-    curl_setopt($ch, CURLOPT_POST, count($fields));
+    curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
