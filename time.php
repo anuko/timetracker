@@ -403,6 +403,7 @@ $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('time_records', $timeRecords);
+$smarty->assign('show_cf_1', $user->isPluginEnabled('cf'));
 $smarty->assign('show_files', $showFiles);
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);

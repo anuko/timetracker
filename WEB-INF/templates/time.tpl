@@ -104,6 +104,9 @@
   {if $user->isPluginEnabled('cl')}
         <td width="20%" class="tableHeader">{$i18n.label.client}</td>
   {/if}
+  {if $show_cf_1}
+        <td class="tableHeader">{$custom_fields->fields[0]['label']|escape}</td>
+  {/if}
   {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td class="tableHeader">{$i18n.label.project}</td>
   {/if}
@@ -126,6 +129,9 @@
       <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
     {if $user->isPluginEnabled('cl')}
         <td valign="top">{$record.client|escape}</td>
+    {/if}
+    {if $show_cf_1}
+        <td valign="top">{$record.cf_1|escape}</td>
     {/if}
     {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
         <td valign="top">{$record.project|escape}</td>

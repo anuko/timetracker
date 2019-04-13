@@ -800,6 +800,7 @@ class ttTimeHelper {
 
   // getRecords - returns time records for a user for a given date.
   static function getRecords($user_id, $date) {
+    // TODO: merge getRecords and getRecordsWithFiles into one function.
     global $user;
     $mdb2 = getConnection();
 
@@ -814,16 +815,35 @@ class ttTimeHelper {
     if ($user->isPluginEnabled('cl'))
       $client_field = ", c.name as client";
 
+    $include_cf_1 = $user->isPluginEnabled('cf');
+    if ($include_cf_1) {
+      $custom_fields = new CustomFields();
+      $cf_1_type = $custom_fields->fields[0]['type'];
+      if ($cf_1_type == CustomFields::TYPE_TEXT) {
+        $custom_field = ", cfl.value as cf_1";
+      } elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
+        $custom_field = ", cfo.value as cf_1";
+      }
+    }
+
     $left_joins = " left join tt_projects p on (l.project_id = p.id)".
       " left join tt_tasks t on (l.task_id = t.id)";
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
+    if ($include_cf_1) {
+      if ($cf_1_type == CustomFields::TYPE_TEXT)
+        $left_joins .= " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)";
+      elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
+        $left_joins .=  " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)".
+          " left join tt_custom_field_options cfo on (cfl.option_id = cfo.id)";
+      }
+    }
 
     $result = array();
     $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,".
       " TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,".
       " TIME_FORMAT(l.duration, '%k:%i') as duration, p.name as project, t.name as task, l.comment,".
-      " l.billable, l.approved, l.timesheet_id, l.invoice_id $client_field from tt_log l $left_joins".
+      " l.billable, l.approved, l.timesheet_id, l.invoice_id $client_field $custom_field from tt_log l $left_joins".
       " where l.date = '$date' and l.user_id = $user_id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1".
       " order by l.start, l.id";
     $res = $mdb2->query($sql);
@@ -856,10 +876,29 @@ class ttTimeHelper {
     if ($user->isPluginEnabled('cl'))
       $client_field = ", c.name as client";
 
+    $include_cf_1 = $user->isPluginEnabled('cf');
+    if ($include_cf_1) {
+      $custom_fields = new CustomFields();
+      $cf_1_type = $custom_fields->fields[0]['type'];
+      if ($cf_1_type == CustomFields::TYPE_TEXT) {
+        $custom_field = ", cfl.value as cf_1";
+      } elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
+        $custom_field = ", cfo.value as cf_1";
+      }
+    }
+
     $left_joins = " left join tt_projects p on (l.project_id = p.id)".
       " left join tt_tasks t on (l.task_id = t.id)";
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
+    if ($include_cf_1) {
+      if ($cf_1_type == CustomFields::TYPE_TEXT)
+        $left_joins .= " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)";
+      elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
+        $left_joins .=  " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)".
+          " left join tt_custom_field_options cfo on (cfl.option_id = cfo.id)";
+      }
+    }
 
     $left_joins .= " left join (select distinct entity_id from tt_files".
       " where entity_type = 'time' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
@@ -870,7 +909,7 @@ class ttTimeHelper {
       " TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,".
       " TIME_FORMAT(l.duration, '%k:%i') as duration, p.name as project, t.name as task, l.comment,".
       " if(Sub1.entity_id is null, 0, 1) as has_files,".
-      " l.billable, l.approved, l.timesheet_id, l.invoice_id $client_field from tt_log l $left_joins".
+      " l.billable, l.approved, l.timesheet_id, l.invoice_id $client_field $custom_field from tt_log l $left_joins".
       " where l.date = '$date' and l.user_id = $user_id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1".
       " order by l.start, l.id";
     $res = $mdb2->query($sql);
