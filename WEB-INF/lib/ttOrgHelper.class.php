@@ -135,6 +135,8 @@ class ttOrgHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
+    if ($affected == 0) return true; // Do not call file storage utility.
+
     // Try to make a call to file storage facility.
     if (!defined('FILE_STORAGE_URI')) return true; // Nothing to do.
 
