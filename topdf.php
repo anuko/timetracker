@@ -31,7 +31,7 @@
  * If installed, it is expected to be in WEB-INF/lib/tcpdf/ folder.
  */
 require_once('initialize.php');
-import('ttReportHelper');
+import('ttConfigHelper');
 import('form.Form');
 import('form.ActionForm');
 import('ttReportHelper');
