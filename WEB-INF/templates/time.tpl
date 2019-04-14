@@ -24,7 +24,7 @@
           <td>{$forms.timeRecordForm.user.control}</td>
         </tr>
 {/if}
-{if $user->isPluginEnabled('cl')}
+{if $show_client}
         <tr>
           <td align="right">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}:</td>
           <td>{$forms.timeRecordForm.client.control}</td>
@@ -41,29 +41,31 @@
           <td align="right">{$custom_fields->fields[0]['label']|escape}{if $custom_fields->fields[0]['required']} (*){/if}:</td><td>{$forms.timeRecordForm.cf_1.control}</td>
         </tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
         <tr>
           <td align="right">{$i18n.label.project} (*):</td>
           <td>{$forms.timeRecordForm.project.control}</td>
         </tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_task}
         <tr>
           <td align="right">{$i18n.label.task}{if $user->task_required} (*){/if}:</td>
           <td>{$forms.timeRecordForm.task.control}</td>
         </tr>
 {/if}
-{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+{if $show_start}
         <tr>
           <td align="right">{$i18n.label.start}:</td>
           <td>{$forms.timeRecordForm.start.control}&nbsp;<input onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
         </tr>
+{/if}
+{if $show_finish}
         <tr>
           <td align="right">{$i18n.label.finish}:</td>
           <td>{$forms.timeRecordForm.finish.control}&nbsp;<input onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
         </tr>
 {/if}
-{if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+{if $show_duration}
         <tr>
           <td align="right">{$i18n.label.duration}:</td>
           <td>{$forms.timeRecordForm.duration.control}&nbsp;{if $user->getDecimalMark() == ','}{str_replace('.', ',', $i18n.form.time.duration_format)}{else}{$i18n.form.time.duration_format}{/if}</td>
@@ -101,50 +103,58 @@
 {if $time_records}
       <table border="0" cellpadding="3" cellspacing="1" width="100%">
       <tr>
-  {if $user->isPluginEnabled('cl')}
-        <td width="20%" class="tableHeader">{$i18n.label.client}</td>
+  {if $show_client}
+        <td class="tableHeader">{$i18n.label.client}</td>
   {/if}
   {if $show_cf_1}
         <td class="tableHeader">{$custom_fields->fields[0]['label']|escape}</td>
   {/if}
-  {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+  {if $show_project}
         <td class="tableHeader">{$i18n.label.project}</td>
   {/if}
-  {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+  {if $show_task}
         <td class="tableHeader">{$i18n.label.task}</td>
   {/if}
-  {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+  {if $show_start}
         <td width="5%" class="tableHeader" align="right">{$i18n.label.start}</td>
+  {/if}
+  {if $show_finish}
         <td width="5%" class="tableHeader" align="right">{$i18n.label.finish}</td>
   {/if}
         <td width="5%" class="tableHeader">{$i18n.label.duration}</td>
+  {if $show_note_column}
         <td class="tableHeader">{$i18n.label.note}</td>
-        <td></td>
-        <td></td>
+  {/if}
   {if $show_files}
         <td></td>
   {/if}
+        <td></td>
+        <td></td>
       </tr>
   {foreach $time_records as $record}
       <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
-    {if $user->isPluginEnabled('cl')}
+    {if $show_client}
         <td valign="top">{$record.client|escape}</td>
     {/if}
     {if $show_cf_1}
         <td valign="top">{$record.cf_1|escape}</td>
     {/if}
-    {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if $show_project}
         <td valign="top">{$record.project|escape}</td>
     {/if}
-    {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if $show_task}
         <td valign="top">{$record.task|escape}</td>
     {/if}
-    {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+    {if $show_start}
         <td nowrap align="right" valign="top">{if $record.start}{$record.start}{else}&nbsp;{/if}</td>
+    {/if}
+    {if $show_finish}
         <td nowrap align="right" valign="top">{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
     {/if}
         <td align="right" valign="top">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
+    {if $show_note_column}
         <td valign="top">{if $record.comment}{$record.comment|escape}{else}&nbsp;{/if}</td>
+    {/if}
     {if $show_files}
       {if $record.has_files}
         <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_files.png"></a></td>
@@ -173,6 +183,12 @@
     {/if}
         </td>
       </tr>
+    {if $show_note_row && $record.comment}
+      <tr>
+        <td align="right" valign="top">{$i18n.label.note}:</td>
+        <td colspan="{$colspan}" align="left" valign="top">{$record.comment|escape}</td>
+      </tr>
+    {/if}
   {/foreach}
     </table>
 {/if}

@@ -28,6 +28,7 @@
 
 require_once('initialize.php');
 import('form.Form');
+import('ttConfigHelper');
 import('ttUserHelper');
 import('ttGroupHelper');
 import('ttClientHelper');
@@ -66,6 +67,16 @@ if ($request->isPost() && $userChanged) {
 
 $group_id = $user->getGroup();
 
+$showClient = $user->isPluginEnabled('cl');
+$trackingMode = $user->getTrackingMode();
+$showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
+$showTask = MODE_PROJECTS_AND_TASKS == $trackingMode;
+$recordType = $user->getRecordType();
+$showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
+$showFinish = $showStart;
+$showDuration = TYPE_DURATION == $recordType || TYPE_ALL == $recordType;
+$showFiles = $user->isPluginEnabled('at');
+
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
 $selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date);
@@ -80,6 +91,26 @@ if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
   $custom_fields = new CustomFields();
   $smarty->assign('custom_fields', $custom_fields);
+}
+
+$config = new ttConfigHelper($user->getConfig());
+$showNoteColumn = !$config->getDefinedValue('time_note_on_separate_row');
+$showNoteRow = $config->getDefinedValue('time_note_on_separate_row');
+if ($showNoteRow) {
+  // Determine column span for note field.
+  $colspan = 0;
+  if ($showClient) $colspan++;
+  if ($user->isPluginEnabled('cf')) $colspan++;
+  if ($showProject) $colspan++;
+  if ($showTask) $colspan++;
+  if ($showStart) $colspan++;
+  if ($showFinish) $colspan++;
+  $colspan++; // There is always a duration.
+  if ($showFiles) $colspan++;
+  $colspan++; // There is always an edit column.
+  $colspan++; // There is always a delete column.
+  $colspan--; // Remove one column for label.
+  $smarty->assign('colspan', $colspan);
 }
 
 if ($user->isPluginEnabled('mq')){
@@ -149,7 +180,7 @@ if ($user->can('track_time')) {
 }
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
-if (MODE_TIME == $user->getTrackingMode() && $user->isPluginEnabled('cl')) {
+if (MODE_TIME == $user->getTrackingMode() && $showClient) {
   $active_clients = ttGroupHelper::getActiveClients(true);
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
@@ -175,7 +206,7 @@ if (MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $use
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
 
   // Dropdown for clients if the clients plugin is enabled.
-  if ($user->isPluginEnabled('cl')) {
+  if ($showClient) {
     $active_clients = ttGroupHelper::getActiveClients(true);
     // We need an array of assigned project ids to do some trimming.
     foreach($project_list as $project)
@@ -270,7 +301,7 @@ if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
 
     // Validate user input.
-    if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
+    if ($showClient && $user->isPluginEnabled('cm') && !$cl_client)
       $err->add($i18n->get('error.client'));
     if ($custom_fields) {
       if (!ttValidString($cl_cf_1, !$custom_fields->fields[0]['required'])) $err->add($i18n->get('error.field'), $custom_fields->fields[0]['label']);
@@ -396,14 +427,23 @@ if ($request->isPost()) {
 } // isPost
 
 $week_total = ttTimeHelper::getTimeForWeek($selected_date);
-$showFiles = $user->isPluginEnabled('at');
 $timeRecords = $showFiles? ttTimeHelper::getRecordsWithFiles($user_id, $cl_date) : ttTimeHelper::getRecords($user_id, $cl_date);
 
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('time_records', $timeRecords);
+$smarty->assign('show_client', $showClient);
 $smarty->assign('show_cf_1', $user->isPluginEnabled('cf'));
+$smarty->assign('show_project', $showProject);
+$smarty->assign('show_task', $showTask);
+$smarty->assign('show_start', $showStart);
+$smarty->assign('show_finish', $showFinish);
+$smarty->assign('show_duration', $showDuration);
+
+
+$smarty->assign('show_note_column', $showNoteColumn);
+$smarty->assign('show_note_row', $showNoteRow);
 $smarty->assign('show_files', $showFiles);
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
