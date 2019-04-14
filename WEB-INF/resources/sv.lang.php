@@ -338,6 +338,8 @@ $i18n_key_words = array(
 'title.export' => 'Exportera grupp',
 'title.import' => 'Importera grupp',
 'title.options' => 'Alternativ',
+// TODO: translate the following.
+// 'title.display_options' => 'Display Options',
 'title.profile' => 'Profil',
 'title.plugins' => 'Tillägg',
 'title.cf_custom_fields' => 'Egna fält',

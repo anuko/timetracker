@@ -356,6 +356,8 @@ $i18n_key_words = array(
 'title.export' => 'ייצוא נתוני צוות', // TODO: replace "team" with "group".
 'title.import' => 'ייבוא נתוני צוות', // TODO: replace "team" with "group".
 'title.options' => 'אפשרויות',
+// TODO: translate the following.
+// 'title.display_options' => 'Display Options',
 'title.profile' => 'פרופיל',
 'title.plugins' => 'תוספים',
 'title.cf_custom_fields' => 'שדות אישיים',

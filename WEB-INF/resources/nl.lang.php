@@ -311,6 +311,8 @@ $i18n_key_words = array(
 'title.export' => 'Exporteer groepsgegevens',
 'title.import' => 'Importeer groepsgegevens',
 'title.options' => 'Opties',
+// TODO: translate the following.
+// 'title.display_options' => 'Display Options',
 'title.profile' => 'Profiel',
 'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Eigen velden',

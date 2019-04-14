@@ -357,6 +357,8 @@ $i18n_key_words = array(
 'title.export' => 'Exportar datos', // TODO: Consider changing to exportando for consistency with other titles.
 'title.import' => 'Importar datos', // TODO: Consider changing to importando for consistency with other titles.
 'title.options' => 'Opciones',
+// TODO: translate the following.
+// 'title.display_options' => 'Display Options',
 'title.profile' => 'Perfil',
 // TODO: translate the following.
 // 'title.plugins' => 'Plugins',

@@ -339,6 +339,8 @@ $i18n_key_words = array(
 'title.export' => 'Tiimitietojen vienti', // TODO: replace "team" with "group".
 'title.import' => 'Tiimitietojen tunti', // TODO: replace "team" with "group".
 'title.options' => 'Optiot',
+// TODO: translate the following.
+// 'title.display_options' => 'Display Options',
 'title.profile' => 'Profiili',
 'title.plugins' => 'Lisäosat',
 'title.cf_custom_fields' => 'Omat kentät',

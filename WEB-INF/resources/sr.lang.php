@@ -338,6 +338,8 @@ $i18n_key_words = array(
 'title.export' => 'Izvoz podataka tim-a', // TODO: replace "team" with "group".
 'title.import' => 'Uvoz podataka tim-a', // TODO: replace "team" with "group".
 'title.options' => 'Opcije',
+// TODO: translate the following.
+// 'title.display_options' => 'Display Options',
 'title.profile' => 'Profil',
 'title.plugins' => 'Dodaci',
 'title.cf_custom_fields' => 'Dodatna polja',

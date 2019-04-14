@@ -339,6 +339,8 @@ $i18n_key_words = array(
 'title.export' => 'Eksporter Team Data', // TODO: replace "team" with "group".
 'title.import' => 'Importer Team Data', // TODO: replace "team" with "group".
 'title.options' => 'Indstillinger',
+// TODO: translate the following.
+// 'title.display_options' => 'Display Options',
 'title.profile' => 'Profil',
 'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Brugerdefineret Felt',

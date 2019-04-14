@@ -309,6 +309,7 @@ $i18n_key_words = array(
 'title.export' => 'Экспортирование данных группы',
 'title.import' => 'Импортирование данных группы',
 'title.options' => 'Опции',
+'title.display_options' => 'Опции отображения',
 'title.profile' => 'Профиль',
 'title.plugins' => 'Плагины',
 'title.cf_custom_fields' => 'Дополнительные поля',

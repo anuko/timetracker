@@ -344,6 +344,8 @@ $i18n_key_words = array(
 'title.export' => 'Grupi andmete alla laadimine',
 'title.import' => 'Grupi andmete üles laadimine',
 'title.options' => 'Suvandid',
+// TODO: translate the following.
+// 'title.display_options' => 'Display Options',
 'title.profile' => 'Profiil',
 'title.plugins' => 'Lisad',
 'title.cf_custom_fields' => 'Eriväljad',

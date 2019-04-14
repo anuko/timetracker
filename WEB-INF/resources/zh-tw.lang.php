@@ -360,6 +360,7 @@ $i18n_key_words = array(
 // 'title.import' => 'Importing Group Data',
 'title.options' => '選項',
 // TODO: translate the following.
+// 'title.display_options' => 'Display Options',
 // 'title.profile' => 'Profile',
 // 'title.plugins' => 'Plugins',
 // 'title.cf_custom_fields' => 'Custom Fields',

@@ -310,6 +310,7 @@ $i18n_key_words = array(
 'title.export' => 'Exporting Group Data',
 'title.import' => 'Importing Group Data',
 'title.options' => 'Options',
+'title.display_options' => 'Display Options',
 'title.profile' => 'Profile',
 'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Custom Fields',

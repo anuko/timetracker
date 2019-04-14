@@ -329,6 +329,8 @@ $i18n_key_words = array(
 'title.export' => 'Εξαγωγή δεδομένων ομάδας',
 'title.import' => 'Εισαγωγή δεδομένων ομάδας',
 'title.options' => 'Επιλογές',
+// TODO: translate the following.
+// 'title.display_options' => 'Display Options',
 'title.profile' => 'Προφίλ',
 'title.plugins' => 'Πρόσθετα',
 'title.cf_custom_fields' => 'Προσαρμοσμένα πεδία',

@@ -337,6 +337,8 @@ $i18n_key_words = array(
 'title.export' => 'Exportando dados de equipe', // TODO: replace "team" with "group".
 'title.import' => 'Importando dados de equipe', // TODO: replace "team" with "group".
 'title.options' => 'Opções',
+// TODO: translate the following.
+// 'title.display_options' => 'Display Options',
 'title.profile' => 'Perfil',
 'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Campos personalizados',

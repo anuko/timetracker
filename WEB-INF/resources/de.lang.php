@@ -322,6 +322,8 @@ $i18n_key_words = array(
 'title.export' => 'Daten exportieren',
 'title.import' => 'Daten importieren',
 'title.options' => 'Optionen',
+// TODO: translate the following.
+// 'title.display_options' => 'Display Options',
 'title.profile' => 'Profil',
 'title.plugins' => 'Erweiterungen',
 'title.cf_custom_fields' => 'Benutzerfelder',
