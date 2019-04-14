@@ -508,6 +508,7 @@ $i18n_key_words = array(
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 'form.group_edit.12_hours' => '12 hours',
 'form.group_edit.24_hours' => '24 hours',
+'form.group_edit.display_options' => 'Display options',
 'form.group_edit.show_holidays' => 'Show holidays',
 'form.group_edit.tracking_mode' => 'Tracking mode',
 'form.group_edit.mode_time' => 'time',
@@ -579,4 +580,7 @@ $i18n_key_words = array(
 'form.timesheet_view.approve_body' => "Your timesheet %s was approved.<p>%s",
 'form.timesheet_view.disapprove_subject' => 'Timesheet not approved',
 'form.timesheet_view.disapprove_body' => "Your timesheet %s was not approved.<p>%s",
+
+// Display Options form. See example at https://timetracker.anuko.com/display_options.php.
+'form.display_options.note_on_separate_row' => 'Note on separate row',
 );

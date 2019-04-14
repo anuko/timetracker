@@ -34,10 +34,6 @@ if (!ttAccessAllowed('manage_advanced_settings')) {
   header('Location: access_denied.php');
   exit();
 }
-if (!$user->isPluginEnabled('wv')) {
-  header('Location: feature_disabled.php');
-  exit();
-}
 
 if ($request->isPost()) {
   $cl_week_note = $request->getParameter('week_note');

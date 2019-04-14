@@ -499,6 +499,7 @@ $i18n_key_words = array(
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 'form.group_edit.12_hours' => '12 часов',
 'form.group_edit.24_hours' => '24 часа',
+'form.group_edit.display_options' => 'Опции отображения',
 'form.group_edit.show_holidays' => 'Показывать праздники',
 'form.group_edit.tracking_mode' => 'Режим работы',
 'form.group_edit.mode_time' => 'время',
@@ -570,4 +571,7 @@ $i18n_key_words = array(
 'form.timesheet_view.approve_body' => "Ваш табель %s одобрен.<p>%s",
 'form.timesheet_view.disapprove_subject' => 'Табель не одобрен',
 'form.timesheet_view.disapprove_body' => "Ваш табель %s не одобрен.<p>%s",
+
+// Display Options form. See example at https://timetracker.anuko.com/display_options.php.
+'form.display_options.note_on_separate_row' => 'Комментарий в отдельном ряду',
 );

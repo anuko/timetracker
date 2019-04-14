@@ -48,7 +48,7 @@ function handleTaskRequiredCheckbox() {
   {if $user->can('manage_roles')}
           <tr>
             <td align="right" nowrap>{$i18n.label.roles}:</td>
-            <td><a href="roles.php?group_id={$group_id}">{$i18n.label.configure}</a></td>
+            <td><a href="roles.php">{$i18n.label.configure}</a></td>
           </tr>
   {/if}
           <tr>
@@ -69,6 +69,10 @@ function handleTaskRequiredCheckbox() {
           <tr>
             <td align="right" nowrap>{$i18n.label.week_start}:</td>
             <td>{$forms.groupForm.start_week.control}</td>
+          </tr>
+          <tr>
+            <td align="right" nowrap>{$i18n.form.group_edit.display_options}:</td>
+            <td><a href="display_options.php">{$i18n.label.configure}</a></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.group_edit.show_holidays}:</td>
