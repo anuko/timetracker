@@ -31,6 +31,7 @@
  * If installed, it is expected to be in WEB-INF/lib/tcpdf/ folder.
  */
 require_once('initialize.php');
+import('ttReportHelper');
 import('form.Form');
 import('form.ActionForm');
 import('ttReportHelper');
@@ -57,6 +58,10 @@ if ($user->isPluginEnabled('cf')) {
 
 // Report settings are stored in session bean before we get here.
 $bean = new ActionForm('reportBean', new Form('reportForm'), $request);
+
+$config = new ttConfigHelper($user->getConfig());
+$show_note_column = $bean->getAttribute('chnote') && !$config->getDefinedValue('report_note_on_separate_row');
+$show_note_row = $bean->getAttribute('chnote') && $config->getDefinedValue('report_note_on_separate_row');
 
 // There are 2 variations of report: totals only, or normal. Totals only means that the report
 // is grouped by either date, user, client, project, task or cf_1 and user only needs to see subtotals by group.
@@ -154,6 +159,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chfinish')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.finish').'</td>'; }
   if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.duration').'</td>'; }
   if ($bean->getAttribute('chunits')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.work_units_short').'</td>'; }
+  if ($show_note_column) { $colspan++; $html .= '<td>'.$i18n->get('label.note').'</td>'; }
   if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.cost').'</td>'; }
   if ($bean->getAttribute('chapproved')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.approved').'</td>'; }
   if ($bean->getAttribute('chpaid')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.paid').'</td>'; }
@@ -200,6 +206,7 @@ if ($totals_only) {
         if ($bean->getAttribute('chfinish')) $html .= '<td></td>';
         if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$subtotals[$prev_grouped_by]['time'].'</td>';
         if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$subtotals[$prev_grouped_by]['units'].'</td>';
+        if ($show_note_column) $html .= '<td></td>';
         if ($bean->getAttribute('chcost')) {
           $html .= "<td $styleRightAligned>";
           if ($user->can('manage_invoices') || $user->isClient())
@@ -240,6 +247,7 @@ if ($totals_only) {
     if ($bean->getAttribute('chfinish')) $html .= "<td $styleRightAligned>".$item['finish'].'</td>';
     if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$item['duration'].'</td>';
     if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$item['units'].'</td>';
+    if ($show_note_column) $html .= '<td>'.htmlspecialchars($item['note']).'</td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
       if ($user->can('manage_invoices') || $user->isClient())
@@ -267,7 +275,7 @@ if ($totals_only) {
     if ($bean->getAttribute('chtimesheet')) $html .= '<td>'.htmlspecialchars($item['timesheet_name']).'</td>';
     $html .= '</tr>';
 
-    if ($bean->getAttribute('chnote') && $item['note']) {
+    if ($show_note_row && $item['note']) {
       $html .= '<tr>';
       $html .= "<td $styleRightAligned>".$i18n->get('label.note').'</td>';
       $noteSpan = $colspan-1;
@@ -312,6 +320,7 @@ if ($totals_only) {
     if ($bean->getAttribute('chfinish')) $html .= '<td></td>';
     if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$subtotals[$prev_grouped_by]['time'].'</td>';
     if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$subtotals[$prev_grouped_by]['units'].'</td>';
+    if ($show_note_column) $html .= '<td></td>';
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
       if ($user->can('manage_invoices') || $user->isClient())
@@ -341,6 +350,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chfinish')) $html .= '<td></td>';
   if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$totals['time'].'</td>';
   if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$totals['units'].'</td>';
+  if ($show_note_column) $html .= '<td></td>';
   if ($bean->getAttribute('chcost')) {
     $html .= "<td $styleRightAligned>".htmlspecialchars($user->currency).' ';
     if ($user->can('manage_invoices') || $user->isClient())
