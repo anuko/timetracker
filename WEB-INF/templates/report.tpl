@@ -48,6 +48,7 @@
   {if $bean->getAttribute('chfinish')}<td class="tableHeaderCentered" width="5%">{$i18n.label.finish}</td>{/if}
   {if $bean->getAttribute('chduration')}<td class="tableHeaderCentered" width="5%">{$i18n.label.duration}</td>{/if}
   {if $bean->getAttribute('chunits')}<td class="tableHeaderCentered" width="5%">{$i18n.label.work_units_short}</td>{/if}
+  {if $bean->getAttribute('chnote') && !$note_on_separate_row}<td class="tableHeader">{$i18n.label.note}</td>{/if}
   {if $bean->getAttribute('chcost')}<td class="tableHeaderCentered" width="5%">{$i18n.label.cost}</td>{/if}
   {if $bean->getAttribute('chapproved')}<td class="tableHeader">{$i18n.label.approved}</td>{/if}
   {if $bean->getAttribute('chpaid')}<td class="tableHeader">{$i18n.label.paid}</td>{/if}
@@ -73,6 +74,7 @@
         {if $bean->getAttribute('chfinish')}<td></td>{/if}
         {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$subtotals[$prev_grouped_by]['time']}</td>{/if}
         {if $bean->getAttribute('chunits')}<td class="cellRightAlignedSubtotal">{$subtotals[$prev_grouped_by]['units']}</td>{/if}
+        {if $bean->getAttribute('chnote') && !$note_on_separate_row}<td></td>{/if}
         {if $bean->getAttribute('chcost')}<td class="cellRightAlignedSubtotal">{if $user->can('manage_invoices') || $user->isClient()}{$subtotals[$prev_grouped_by]['cost']}{else}{$subtotals[$prev_grouped_by]['expenses']}{/if}</td>{/if}
         {if $bean->getAttribute('chapproved')}<td></td>{/if}
         {if $bean->getAttribute('chpaid')}<td></td>{/if}
@@ -101,6 +103,7 @@
     {if $bean->getAttribute('chfinish')}<td nowrap class="cellRightAligned">{$item.finish}</td>{/if}
     {if $bean->getAttribute('chduration')}<td class="cellRightAligned">{$item.duration}</td>{/if}
     {if $bean->getAttribute('chunits')}<td class="cellRightAligned">{$item.units}</td>{/if}
+    {if $bean->getAttribute('chnote') && !$note_on_separate_row}<td class="cellLeftAligned">{$item.note|escape}</td>{/if}
     {if $bean->getAttribute('chcost')}<td class="cellRightAligned">{if $user->can('manage_invoices') || $user->isClient()}{$item.cost}{else}{$item.expense}{/if}</td>{/if}
     {if $bean->getAttribute('chapproved')}<td class="cellRightAligned">{if $item.approved == 1}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>{/if}
     {if $bean->getAttribute('chpaid')}<td class="cellRightAligned">{if $item.paid == 1}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>{/if}
@@ -113,7 +116,7 @@
       {if 2 == $item.type}<td bgcolor="white"><input type="checkbox" name="item_id_{$item.id}"></td>{/if}
     {/if}
       </tr>
-    {if $bean->getAttribute('chnote') && $item.note}
+    {if $note_on_separate_row && $bean->getAttribute('chnote') && $item.note}
       <tr>
         <td class="cellRightAligned">{$i18n.label.note}:</td>
         <td colspan="{$colspan}">{$item.note|escape}</td>
@@ -135,6 +138,7 @@
     {if $bean->getAttribute('chfinish')}<td></td>{/if}
     {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$subtotals[$cur_grouped_by]['time']}</td>{/if}
     {if $bean->getAttribute('chunits')}<td class="cellRightAlignedSubtotal">{$subtotals[$cur_grouped_by]['units']}</td>{/if}
+    {if $bean->getAttribute('chnote') && !$note_on_separate_row}<td></td>{/if}
     {if $bean->getAttribute('chcost')}<td class="cellRightAlignedSubtotal">{if $user->can('manage_invoices') || $user->isClient()}{$subtotals[$cur_grouped_by]['cost']}{else}{$subtotals[$cur_grouped_by]['expenses']}{/if}</td>{/if}
     {if $bean->getAttribute('chapproved')}<td></td>{/if}
     {if $bean->getAttribute('chpaid')}<td></td>{/if}
@@ -158,6 +162,7 @@
     {if $bean->getAttribute('chfinish')}<td></td>{/if}
     {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$totals['time']}</td>{/if}
     {if $bean->getAttribute('chunits')}<td class="cellRightAlignedSubtotal">{$totals['units']}</td>{/if}
+    {if $bean->getAttribute('chnote') && !$note_on_separate_row}<td></td>{/if}
     {if $bean->getAttribute('chcost')}<td nowrap class="cellRightAlignedSubtotal">{$user->currency|escape} {if $user->can('manage_invoices') || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>{/if}
     {if $bean->getAttribute('chapproved')}<td></td>{/if}
     {if $bean->getAttribute('chpaid')}<td></td>{/if}

@@ -27,17 +27,21 @@
 // +----------------------------------------------------------------------+
 
 require_once('initialize.php');
+import('ttConfigHelper');
 import('form.Form');
 import('form.ActionForm');
 import('ttReportHelper');
 import('ttGroupHelper');
 import('ttTimesheetHelper');
 
-// Access check.
+// Access checks.
 if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports') || ttAccessAllowed('view_all_reports')  || ttAccessAllowed('view_client_reports'))) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
+
+$config = new ttConfigHelper($user->getConfig());
 
 if ($user->isPluginEnabled('ap')) {
   $cl_mark_approved_select_option = $request->getParameter('mark_approved_select_options', ($request->isPost() ? null : @$_SESSION['mark_approved_select_option']));
@@ -309,6 +313,7 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('report_items', $report_items);
 $smarty->assign('subtotals', $subtotals);
 $smarty->assign('totals', $totals);
+$smarty->assign('note_on_separate_row', $user->getConfigOption('report_note_on_separate_row'));
 $smarty->assign('colspan', $colspan);
 $smarty->assign('bean', $bean);
 $smarty->assign('title', $i18n->get('title.report').": ".$totals['start_date']." - ".$totals['end_date']);
