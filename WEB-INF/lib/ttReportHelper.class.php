@@ -737,8 +737,8 @@ class ttReportHelper {
     $isClient = $user->isClient();
 
     $config = new ttConfigHelper($user->getConfig());
-    $show_note_column = $bean->getAttribute('chnote') && !$config->getDefinedValue('report_note_on_separate_row');
-    $show_note_row = $bean->getAttribute('chnote') && $config->getDefinedValue('report_note_on_separate_row');
+    $show_note_column = $options['show_note'] && !$config->getDefinedValue('report_note_on_separate_row');
+    $show_note_row = $options['show_note'] && $config->getDefinedValue('report_note_on_separate_row');
 
     $items = ttReportHelper::getItems($options);
     $grouping = ttReportHelper::grouping($options);
