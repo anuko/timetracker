@@ -14,20 +14,18 @@
   {if $user->isPluginEnabled('ps')}
           <td class="tableHeader">{$i18n.label.paid}</td>
   {/if}
-          <td class="tableHeader">{$i18n.label.view}</td>
   {if !$user->isClient()}
           <td></td>
   {/if}
         </tr>
         {foreach $invoices as $invoice}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
-          <td>{$invoice.name|escape}</td>
+          <td><a href="invoice_view.php?id={$invoice.id}">{$invoice.name|escape}</a></td>
           <td>{$invoice.client_name|escape}</td>
           <td>{$invoice.date}</td>
   {if $user->isPluginEnabled('ps')}
           <td>{if $invoice.paid}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
   {/if}
-          <td><a href="invoice_view.php?id={$invoice.id}">{$i18n.label.view}</a></td>
   {if !$user->isClient()}
           <td><a href="invoice_delete.php?id={$invoice.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
   {/if}

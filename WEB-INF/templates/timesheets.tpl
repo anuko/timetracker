@@ -20,13 +20,12 @@
 {/if}
           <td class="tableHeader">{$i18n.label.submitted}</td>
           <td class="tableHeader">{$i18n.label.approved}</td>
-          <td class="tableHeader">{$i18n.label.view}</td>
           <td></td>
           <td></td>
         </tr>
 {foreach $active_timesheets as $timesheet}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
-          <td>{$timesheet.name|escape}</td>
+          <td><a href="timesheet_view.php?id={$timesheet.id}">{$timesheet.name|escape}</a></td>
   {if $show_client}
           <td>{$timesheet.client_name|escape}</td>
   {/if}
@@ -36,7 +35,6 @@
   {else}
           <td>{if $timesheet.approve_status}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
   {/if}
-          <td><a href="timesheet_view.php?id={$timesheet.id}">{$i18n.label.view}</a></td>
           <td><a href="timesheet_edit.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
           <td><a href="timesheet_delete.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
