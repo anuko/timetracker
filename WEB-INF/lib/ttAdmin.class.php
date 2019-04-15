@@ -65,6 +65,9 @@ class ttAdmin {
 
     // Now do actual work with all entities.
 
+    // Delete group files.
+    ttAdmin::deleteGroupFiles($group_id);
+
     // Some things cannot be marked deleted as we don't have the status field for them.
     // Just delete such things (until we have a better way to deal with them).
     $tables_to_delete_from = array(
@@ -186,7 +189,6 @@ class ttAdmin {
 
   // getOrgDetails obtains group name and its top manager details.
   static function getOrgDetails($group_id) {
-    $result = array();
     $mdb2 = getConnection();
 
     // Note: current code works with properly set top manager (rank 512).
@@ -204,6 +206,20 @@ class ttAdmin {
       " inner join tt_roles r on (r.id = u.role_id and r.rank = 512)". // Fails for partially imported org. See comment above.
       " where g.id = $group_id";
 
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      return $val;
+    }
+
+    return false;
+  }
+
+ // getOrg obtains org_id for group.
+  static function getOrg($group_id) {
+    $mdb2 = getConnection();
+
+    $sql = "select org_id from tt_groups where id = $group_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
@@ -313,6 +329,86 @@ class ttAdmin {
     if (!ttAdmin::createOrgManager($fields))
       return false;
 
+    return true;
+  }
+
+  // deleteGroupFiles deletes files attached to all entities in the entire group.
+  // Note that it is a permanent delete, not "mark deleted" by design.
+  static function deleteGroupFiles($group_id) {
+
+    $org = ttAdmin::getOrg($group_id);
+    $org_id = $org['org_id'];
+
+    // Delete all group files from the database.
+    $mdb2 = getConnection();
+    $sql = "delete from tt_files where org_id = $org_id and group_id = $group_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    if ($affected == 0) return true; // Do not call file storage utility.
+
+    // Try to make a call to file storage facility.
+    if (!defined('FILE_STORAGE_URI')) return true; // Nothing to do.
+
+    $deletegroupfiles_uri = FILE_STORAGE_URI.'deletegroupfiles';
+
+    // Obtain site id.
+    $sql = "select param_value as site_id from tt_site_config where param_name = 'locker_id'";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $site_id = $val['site_id'];
+    if (!$site_id) return true; // Nothing to do.
+
+    // Obtain site key.
+    $sql = "select param_value as site_key from tt_site_config where param_name = 'locker_key'";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $site_key = $val['site_key'];
+    if (!$site_key) return true; // Can't continue without site key.
+
+    // Obtain org key.
+    $sql = "select group_key as org_key from tt_groups where id = $org_id";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $org_key = $val['org_key'];
+    if (!$org_key) return true; // Can't continue without org key.
+
+    // Obtain group key.
+    $sql = "select group_key as group_key from tt_groups where id = $group_id";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $group_key = $val['group_key'];
+    if (!$group_key) return true; // Can't continue without group key.
+
+    $curl_fields = array('site_id' => $site_id,
+      'site_key' => $site_key,
+      'org_id' => $org_id,
+      'org_key' => $org_key,
+      'group_id' => $group_id,
+      'group_key' => $group_key);
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $deletegroupfiles_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    // Many things can go wrong with a remote call to file storage facility.
+    // By design, we ignore such errors.
     return true;
   }
 }

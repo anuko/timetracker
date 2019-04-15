@@ -149,11 +149,12 @@ class ttRegistrator {
     $name = $mdb2->quote($this->group_name);
     $currency = $mdb2->quote($this->currency);
     $lang = $mdb2->quote($this->lang);
+    $plugins = $mdb2->quote(defined('DEFAULT_PLUGINS') ? DEFAULT_PLUGINS : null);
     $created = 'now()';
     $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
 
-    $sql = "insert into tt_groups (group_key, name, currency, lang, created, created_ip)".
-      " values($group_key, $name, $currency, $lang, $created, $created_ip)";
+    $sql = "insert into tt_groups (group_key, name, currency, lang, plugins, created, created_ip)".
+      " values($group_key, $name, $currency, $lang, $plugins, $created, $created_ip)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
