@@ -63,7 +63,7 @@ class ttOrgHelper {
     return false;
   }
 
-  // The getInactiveOrgs is a maintenance function that returns an array of inactive organization ids (max 25 for now).
+  // The getInactiveOrgs is a maintenance function that returns an array of inactive organization ids (max 50 for now).
   static function getInactiveOrgs() {
     $inactive_orgs = array();
     $mdb2 = getConnection();
@@ -72,7 +72,7 @@ class ttOrgHelper {
     $cutoff_timestamp = $mdb2->quote(date('Y-m-d', strtotime('-1 year')));
     $sql = "select org_id from".
       " (select max(accessed) as last_access, org_id from tt_users where org_id > 0 group by org_id order by last_access, org_id) as t".
-      " where last_access is null or last_access < $cutoff_timestamp limit 25"; // Max 25 orgs at a time for now...
+      " where last_access is null or last_access < $cutoff_timestamp limit 50"; // Max 50 orgs at a time for now...
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
