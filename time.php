@@ -115,8 +115,8 @@ if ($showNoteRow) {
   $colspan++; // There is always a duration.
   if ($showFiles) $colspan++;
   $colspan++; // There is always an edit column.
-  $colspan++; // There is always a delete column.
-  $colspan--; // Remove one column for label.
+  // $colspan++; // There is always a delete column.
+  // $colspan--; // Remove one column for label.
   $smarty->assign('colspan', $colspan);
 }
 
@@ -155,8 +155,6 @@ if ($user->isPluginEnabled('iv')) {
     if (isset($_SESSION['billable']))
       $cl_billable = $_SESSION['billable'];
 }
-//$on_behalf_id = $request->getParameter('onBehalfUser', (isset($_SESSION['behalf_id'])? $_SESSION['behalf_id'] : $user->id));
-//$on_behalf_group_id = $request->getParameter('onBehalfGroup', (isset($_SESSION['behalf_group_id'])? $_SESSION['behalf_group_id'] : $user->group_id));
 $cl_client = $request->getParameter('client', ($request->isPost() ? null : @$_SESSION['client']));
 $_SESSION['client'] = $cl_client;
 $cl_project = $request->getParameter('project', ($request->isPost() ? null : @$_SESSION['project']));
@@ -187,7 +185,7 @@ if ($user->can('track_time')) {
 }
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
-if (MODE_TIME == $user->getTrackingMode() && $showClient) {
+if (MODE_TIME == $trackingMode && $showClient) {
   $active_clients = ttGroupHelper::getActiveClients(true);
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
@@ -200,7 +198,7 @@ if (MODE_TIME == $user->getTrackingMode() && $showClient) {
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
-if (MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode()) {
+if ($showProject) {
   // Dropdown for projects assigned to user.
   $project_list = $user->getAssignedProjects();
   $form->addInput(array('type'=>'combobox',
@@ -241,7 +239,7 @@ if (MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $use
   }
 }
 
-if (MODE_PROJECTS_AND_TASKS == $user->getTrackingMode()) {
+if ($showTask) {
   $task_list = ttGroupHelper::getActiveTasks();
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
@@ -253,7 +251,7 @@ if (MODE_PROJECTS_AND_TASKS == $user->getTrackingMode()) {
 }
 
 // Add other controls.
-if ((TYPE_START_FINISH == $user->getRecordType()) || (TYPE_ALL == $user->getRecordType())) {
+if ($showStart) {
   $form->addInput(array('type'=>'text','name'=>'start','value'=>$cl_start,'onchange'=>"formDisable('start');"));
   $form->addInput(array('type'=>'text','name'=>'finish','value'=>$cl_finish,'onchange'=>"formDisable('finish');"));
   if ($user->punch_mode && !$user->canOverridePunchMode()) {
@@ -262,12 +260,16 @@ if ((TYPE_START_FINISH == $user->getRecordType()) || (TYPE_ALL == $user->getReco
     $form->getElement('finish')->setEnabled(false);
   }
 }
-if ((TYPE_DURATION == $user->getRecordType()) || (TYPE_ALL == $user->getRecordType()))
+if ($showDuration)
   $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
 if (!defined('NOTE_INPUT_HEIGHT'))
   define('NOTE_INPUT_HEIGHT', 40);
 $form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 600px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
 $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
+
+
+
+// TODO: refactoring ongoing down from here. Use $showBillable, perhaps?
 if ($user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.

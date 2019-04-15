@@ -71,6 +71,12 @@
           <td>{$forms.timeRecordForm.duration.control}&nbsp;{if $user->getDecimalMark() == ','}{str_replace('.', ',', $i18n.form.time.duration_format)}{else}{$i18n.form.time.duration_format}{/if}</td>
         </tr>
 {/if}
+{if $show_files && false}
+        <tr>
+          <td align="right">{$i18n.label.files}:</td>
+          <td>{$forms.timeRecordForm.newfile.control}</td>
+        </tr>
+{/if}
 {if $template_dropdown}
         <tr>
           <td align="right">{$i18n.label.template}:</td>
