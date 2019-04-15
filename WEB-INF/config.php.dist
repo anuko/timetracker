@@ -188,7 +188,7 @@ define('AUTH_MODULE', 'db');
                                         // array('Ldap Testers') means that the user must be a member Ldap Testers group.
                                         // array('Ldap Testers', 'Ldap Users') means the user must be a member of both Ldap Testers and Ldap Users groups.
 
-// define('AUTH_DEBUG', false); // Note: enabling AUTH_DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
+// define('DEBUG', false); // Note: enabling DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
 
 
 // Team managers can set monthly work hour quota for years between the following  values.
