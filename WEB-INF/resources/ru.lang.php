@@ -240,6 +240,7 @@ $i18n_key_words = array(
 'label.template' => 'Шаблон',
 'label.attachments' => 'Приложения',
 'label.files' => 'Файлы',
+'label.file' => 'Файл',
 'label.image' => 'Изображение',
 'label.download' => 'Скачать',
 

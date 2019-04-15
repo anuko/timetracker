@@ -240,6 +240,8 @@ $i18n_key_words = array(
 'label.template' => 'Sjabloon',
 'label.attachments' => 'Bijlagen',
 'label.files' => 'Bestanden',
+// TODO: translate the following.
+// 'label.file' => 'File',
 'label.image' => 'Afbeelding',
 // TODO: translate the following.
 // 'label.download' => 'Download',
