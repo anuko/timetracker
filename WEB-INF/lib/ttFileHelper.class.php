@@ -275,8 +275,6 @@ class ttFileHelper {
   }
 
   // deleteEntityFiles - deletes all files associated with an entity.
-  // TODO: decide whether deleteGroupFiles and deleteOrgFiles should be
-  // separate functions.
   function deleteEntityFiles($entity_id, $entity_type) {
 
     global $i18n;

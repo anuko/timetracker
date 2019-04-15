@@ -161,7 +161,7 @@ class ttOrgHelper {
     $res = $mdb2->query($sql);
     $val = $res->fetchRow();
     $org_key = $val['org_key'];
-    if (!$site_key) return true; // Can't continue without org key.
+    if (!$org_key) return true; // Can't continue without org key.
 
     $curl_fields = array('site_id' => $site_id,
       'site_key' => $site_key,
