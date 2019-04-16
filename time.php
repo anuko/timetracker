@@ -27,7 +27,6 @@
 // +----------------------------------------------------------------------+
 
 require_once('initialize.php');
-import('ttDebugTracer');
 import('form.Form');
 import('ttConfigHelper');
 import('ttUserHelper');
@@ -35,10 +34,6 @@ import('ttGroupHelper');
 import('ttClientHelper');
 import('ttTimeHelper');
 import('DateAndTime');
-
-// Initialize ttDebugTracer to print diagnostic messages.
-$debug = new ttDebugTracer(__FILE__);
-$debug->println('page entry after imports');
 
 // Access checks.
 if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
@@ -60,7 +55,6 @@ if ($request->isPost()) {
     exit();
   }
 }
-$debug->println('after all access checks');
 // End of access checks.
 
 // Determine user for whom we display this page.
@@ -72,7 +66,6 @@ if ($request->isPost() && $userChanged) {
 }
 
 $group_id = $user->getGroup();
-$debug->println("user_id: $user_id group_id: $group_id");
 
 $showClient = $user->isPluginEnabled('cl');
 $trackingMode = $user->getTrackingMode();
@@ -437,8 +430,6 @@ if ($request->isPost()) {
 
 $week_total = ttTimeHelper::getTimeForWeek($selected_date);
 $timeRecords = $showFiles? ttTimeHelper::getRecordsWithFiles($user_id, $cl_date) : ttTimeHelper::getRecords($user_id, $cl_date);
-
-$debug->println('smarty assignments');
 
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
