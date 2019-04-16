@@ -57,8 +57,7 @@ $files = $fileHelper::getEntityFiles($cl_project_id, 'project');
 
 $form = new Form('fileUploadForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_project_id));
-$form->addInput(array('type'=>'upload','name'=>'newfile','value'=>$i18n->get('button.submit'),'maxsize'=>67108864)); // 64 MB file upload limit.
-// Note: for the above limit to work make sure to set upload_max_filesize and post_max_size in php.ini to at least 64M.
+$form->addInput(array('type'=>'upload','name'=>'newfile','value'=>$i18n->get('button.submit')));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.add')));
 

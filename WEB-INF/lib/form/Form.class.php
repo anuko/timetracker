@@ -95,6 +95,12 @@ class Form {
         $el = new Submit($params['name']);
         break;
 
+      case 'upload':
+        import('form.UploadFile');
+        $el = new UploadFile($params['name']);
+        if (isset($params['maxsize'])) $el->setMaxSize($params['maxsize']);
+        break;
+
 // TODO: refactoring ongoing down from here.
 			case "checkboxgroup":
 			    import('form.CheckboxGroup');
@@ -128,12 +134,6 @@ class Form {
 			    $el = new Table($params["name"]);
 			    $el->setData(@$params["data"]);
 			    $el->setWidth(@$params["width"]);
-			    break;
-			    
-			case "upload":
-			    import('form.UploadFile');
-			    $el = new UploadFile($params["name"]);
-			    if (isset($params["maxsize"])) $el->setMaxSize($params["maxsize"]);
 			    break;
 		}
 		if ($el!=null) {
