@@ -395,7 +395,7 @@ if ($request->isPost()) {
       }
 
       // Put a new file in storage if we have it.
-      if ($showFiles && $_FILES['newfile']['name']) {
+      if ($id && $showFiles && $_FILES['newfile']['name']) {
         $fileHelper = new ttFileHelper($err);
         $fields = array('entity_type'=>'time',
           'entity_id' => $id,

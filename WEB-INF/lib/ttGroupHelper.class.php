@@ -358,7 +358,7 @@ class ttGroupHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $sql = "select p.id, p.name, if(Sub1.entity_id is null, 0, 1) as has_files from tt_projects p".
+    $sql = "select p.id, p.name, p.description, if(Sub1.entity_id is null, 0, 1) as has_files from tt_projects p".
       " left join (select distinct entity_id from tt_files".
       " where entity_type = 'project' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
       " on (p.id = Sub1.entity_id)".

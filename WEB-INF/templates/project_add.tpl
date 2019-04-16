@@ -11,6 +11,12 @@
           <td align = "right">{$i18n.label.description}:</td>
           <td>{$forms.projectForm.description.control}</td>
         </tr>
+{if $show_files}
+        <tr>
+          <td align="right">{$i18n.label.file}:</td>
+          <td>{$forms.projectForm.newfile.control}</td>
+        </tr>
+{/if}
 {if $show_users}
         <tr><td>&nbsp;</td></tr>
         <tr>
