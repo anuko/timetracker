@@ -33,6 +33,7 @@ import('ttUserHelper');
 import('ttGroupHelper');
 import('ttClientHelper');
 import('ttTimeHelper');
+import('ttFileHelper');
 import('DateAndTime');
 
 // Access checks.
@@ -255,6 +256,8 @@ if ($showStart) {
 }
 if ($showDuration)
   $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
+if ($showFiles)
+  $form->addInput(array('type'=>'upload','name'=>'newfile','value'=>$i18n->get('button.submit')));
 if (!defined('NOTE_INPUT_HEIGHT'))
   define('NOTE_INPUT_HEIGHT', 40);
 $form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 600px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
@@ -390,7 +393,17 @@ if ($request->isPost()) {
         elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
           $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], $cl_cf_1, null);
       }
-      if ($id && $result) {
+
+      // Put a new file in storage if we have it.
+      if ($showFiles && $_FILES['newfile']['name']) {
+        $fileHelper = new ttFileHelper($err);
+        $fields = array('entity_type'=>'time',
+          'entity_id' => $id,
+          'file_name' => $_FILES['newfile']['name']);
+        $fileHelper->putFile($fields);
+      }
+
+      if ($id && $result && $err->no()) {
         header('Location: time.php');
         exit();
       }

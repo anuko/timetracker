@@ -277,6 +277,9 @@ class ttFileHelper {
   // deleteEntityFiles - deletes all files associated with an entity.
   function deleteEntityFiles($entity_id, $entity_type) {
 
+    if (!$this->entityHasFiles($entity_id, $entity_type))
+      return true; // No files to delete.
+    
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -347,6 +350,21 @@ class ttFileHelper {
     }
 
     return true;
+  }
+
+  // entityHasFiles determines if an entity has any files referenced in database.
+  private function entityHasFiles($entity_id, $entity_type) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select id from tt_files where org_id = $org_id and group_id = $group_id".
+      " and entity_type = ".$mdb2->quote($entity_type)." and entity_id = $entity_id limit 1";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    return $val['id'] > 0;
   }
 
   // getOrgKey obtains organization key from the database.
