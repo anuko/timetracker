@@ -115,8 +115,7 @@ class ttTimesheetHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $includeFiles = $user->isPluginEnabled('at');
-    if ($includeFiles) {
+    if ($user->isPluginEnabled('at')) {
       $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
       $fileJoin =  " left join (select distinct entity_id from tt_files".
       " where entity_type = 'timesheet' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
@@ -149,8 +148,7 @@ class ttTimesheetHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $includeFiles = $user->isPluginEnabled('at');
-    if ($includeFiles) {
+    if ($user->isPluginEnabled('at')) {
       $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
       $fileJoin =  " left join (select distinct entity_id from tt_files".
       " where entity_type = 'timesheet' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".

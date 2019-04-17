@@ -327,7 +327,7 @@ class ttGroupHelper {
   }
 
   // getActiveProjects - returns an array of active projects for a group.
-  static function getActiveProjects()
+  static function getActiveProjects($includeFiles = false)
   {
     global $user;
     $mdb2 = getConnection();
@@ -335,33 +335,14 @@ class ttGroupHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $sql = "select id, name, description, tasks from tt_projects".
-      " where group_id = $group_id and org_id = $org_id and status = 1 order by upper(name)";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-    }
-    return $result;
-  }
-
-  // getActiveProjectsWithFiles - returns an array of active projects for a group
-  // with information whether they have attached files (has_files property).
-  // A separate fiunction from getActiveProjects because sql here is more complex.
-  static function getActiveProjectsWithFiles()
-  {
-    global $user;
-    $mdb2 = getConnection();
-
-    $group_id = $user->getGroup();
-    $org_id = $user->org_id;
-
-    $sql = "select p.id, p.name, p.description, if(Sub1.entity_id is null, 0, 1) as has_files from tt_projects p".
-      " left join (select distinct entity_id from tt_files".
+    if ($includeFiles) {
+      $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
+      $fileJoin =  " left join (select distinct entity_id from tt_files".
       " where entity_type = 'project' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
-      " on (p.id = Sub1.entity_id)".
+      " on (p.id = Sub1.entity_id)";
+    }
+
+    $sql = "select p.id, p.name, p.description, p.tasks $filePart from tt_projects p $fileJoin".
       " where p.group_id = $group_id and p.org_id = $org_id and p.status = 1 order by upper(p.name)";
     $res = $mdb2->query($sql);
     $result = array();
@@ -374,7 +355,7 @@ class ttGroupHelper {
   }
 
   // getInactiveProjects - returns an array of inactive projects for a group.
-  static function getInactiveProjects()
+  static function getInactiveProjects($includeFiles = false)
   {
     global $user;
     $mdb2 = getConnection();
@@ -382,34 +363,15 @@ class ttGroupHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $sql = "select id, name, description, tasks from tt_projects".
-      "  where group_id = $group_id and org_id = $org_id and status = 0 order by upper(name)";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-    }
-    return $result;
-  }
-
-  // getInactiveProjectsWithFiles - returns an array of inactive projects for a group
-  // with information whether they have attached files (has_files property).
-  // A separate fiunction from getInactiveProjects because sql here is more complex.
-  static function getInactiveProjectsWithFiles()
-  {
-    global $user;
-    $mdb2 = getConnection();
-
-    $group_id = $user->getGroup();
-    $org_id = $user->org_id;
-
-    $sql = "select p.id, p.name, if(Sub1.entity_id is null, 0, 1) as has_files from tt_projects p".
-      " left join (select distinct entity_id from tt_files".
+    if ($includeFiles) {
+      $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
+      $fileJoin =  " left join (select distinct entity_id from tt_files".
       " where entity_type = 'project' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
-      " on (p.id = Sub1.entity_id)".
-      " where p.group_id = $group_id and p.org_id = $org_id and p.status = 0 order by upper(p.name)";
+      " on (p.id = Sub1.entity_id)";
+    }
+
+    $sql = "select p.id, p.name, p.description, p.tasks $filePart from tt_projects p $fileJoin".
+      "  where p.group_id = $group_id and p.org_id = $org_id and p.status = 0 order by upper(p.name)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {

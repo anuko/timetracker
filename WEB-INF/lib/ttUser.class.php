@@ -264,7 +264,7 @@ class ttUser {
   }
 
   // getAssignedProjects - returns an array of assigned projects.
-  function getAssignedProjects()
+  function getAssignedProjects($includeFiles = false)
   {
     $result = array();
     $mdb2 = getConnection();
@@ -273,8 +273,15 @@ class ttUser {
     $group_id = $this->getGroup();
     $org_id = $this->org_id;
 
+    if ($includeFiles) {
+      $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
+      $fileJoin =  " left join (select distinct entity_id from tt_files".
+      " where entity_type = 'project' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
+      " on (p.id = Sub1.entity_id)";
+    }
+
     // Do a query with inner join to get assigned projects.
-    $sql = "select p.id, p.name, p.description, p.tasks, upb.rate from tt_projects p".
+    $sql = "select p.id, p.name, p.description, p.tasks, upb.rate $filePart from tt_projects p $fileJoin".
       " inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.project_id = p.id and upb.status = 1)".
       " where p.group_id = $group_id and p.org_id = $org_id and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);

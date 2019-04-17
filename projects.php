@@ -43,10 +43,10 @@ if (MODE_PROJECTS != $user->getTrackingMode() && MODE_PROJECTS_AND_TASKS != $use
 $showFiles = $user->isPluginEnabled('at');
 
 if($user->can('manage_projects')) {
-  $active_projects = $showFiles ? ttGroupHelper::getActiveProjectsWithFiles() : ttGroupHelper::getActiveProjects();
-  $inactive_projects = $showFiles ? ttGroupHelper::getInactiveProjectsWithFiles() : ttGroupHelper::getInactiveProjects();
+  $active_projects = ttGroupHelper::getActiveProjects($showFiles);
+  $inactive_projects = ttGroupHelper::getInactiveProjects($showFiles);
 } else
-  $active_projects = $user->getAssignedProjects();
+  $active_projects = $user->getAssignedProjects($showFiles);
 
 $smarty->assign('active_projects', $active_projects);
 $smarty->assign('inactive_projects', $inactive_projects);
