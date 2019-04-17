@@ -138,6 +138,9 @@
     {if $user->isPluginEnabled('cl') && ($user->can('view_own_clients') || $user->can('manage_clients'))}
             &middot; <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
     {/if}
+    {if $user->exists() && $user->isPluginEnabled('wk') && ($user->can('do_work') || $user->can('bid_on_work') || $user->can('manage_work'))}
+            &middot; <a class="mainMenu" href="work.php">{$i18n.title.work}</a>
+    {/if}
     {if $user->can('export_data')}
             &middot; <a class="mainMenu" href="export.php">{$i18n.menu.export}</a>
     {/if}
