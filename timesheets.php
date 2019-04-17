@@ -57,7 +57,7 @@ if ($request->isPost()) {
 }
 // End of access checks.
 
-// Determine user for which we display this page.
+// Determine user for whom we display this page.
 if ($request->isPost() && $userChanged) {
   $user_id = $request->getParameter('user');
   $user->setOnBehalfUser($user_id);
@@ -66,6 +66,8 @@ if ($request->isPost() && $userChanged) {
 }
 
 $group_id = $user->getGroup();
+
+$showFiles = $user->isPluginEnabled('at');
 
 // Elements of timesheetsForm.
 $form = new Form('timesheetsForm');
@@ -98,6 +100,7 @@ $showClient = $user->isPluginEnabled('cl');
 $smarty->assign('active_timesheets', $active_timesheets);
 $smarty->assign('inactive_timesheets', $inactive_timesheets);
 $smarty->assign('show_client', $showClient);
+$smarty->assign('show_files', $showFiles);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.timesheets'));
 $smarty->assign('content_page_name', 'timesheets.tpl');

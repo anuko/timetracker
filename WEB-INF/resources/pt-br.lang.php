@@ -296,6 +296,7 @@ $i18n_key_words = array(
 // TODO: Translate the following.
 // 'title.timesheets' => 'Timesheets',
 // 'title.timesheet' => 'Timesheet',
+// 'title.timesheet_files' => 'Timesheet Files',
 'title.invoice' => 'Fatura',
 'title.send_invoice' => 'Enviando fatura',
 'title.charts' => 'Gráficos',

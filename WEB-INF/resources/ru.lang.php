@@ -271,6 +271,7 @@ $i18n_key_words = array(
 'title.send_report' => 'Отсылка отчёта',
 'title.timesheets' => 'Табели учёта',
 'title.timesheet' => 'Табель учёта',
+'title.timesheet_files' => 'Файлы табеля учёта',
 'title.invoice' => 'Счёт',
 'title.send_invoice' => 'Отсылка счёта',
 'title.charts' => 'Диаграммы',

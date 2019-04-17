@@ -27,6 +27,7 @@
 // +----------------------------------------------------------------------+
 
 import('ttUserHelper');
+import('ttFileHelper');
 
 // Class ttTimesheetHelper is used to help with project related tasks.
 class ttTimesheetHelper {
@@ -114,10 +115,18 @@ class ttTimesheetHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    $includeFiles = $user->isPluginEnabled('at');
+    if ($includeFiles) {
+      $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
+      $fileJoin =  " left join (select distinct entity_id from tt_files".
+      " where entity_type = 'timesheet' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
+      " on (ts.id = Sub1.entity_id)";
+    }
+
     $result = array();
     $sql = "select ts.id, ts.name, ts.client_id, c.name as client_name,".
-      " ts.submit_status, ts.approve_status from tt_timesheets ts".
-      " left join tt_clients c on (c.id = ts.client_id)".
+      " ts.submit_status, ts.approve_status $filePart from tt_timesheets ts".
+      " left join tt_clients c on (c.id = ts.client_id) $fileJoin".
       " where ts.status = 1 and ts.group_id = $group_id and ts.org_id = $org_id and ts.user_id = $user_id".
       " order by ts.name";
     $res = $mdb2->query($sql);
@@ -140,10 +149,18 @@ class ttTimesheetHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    $includeFiles = $user->isPluginEnabled('at');
+    if ($includeFiles) {
+      $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
+      $fileJoin =  " left join (select distinct entity_id from tt_files".
+      " where entity_type = 'timesheet' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
+      " on (ts.id = Sub1.entity_id)";
+    }
+
     $result = array();
     $sql = "select ts.id, ts.name, ts.client_id, c.name as client_name,".
-      " ts.submit_status, ts.approve_status from tt_timesheets ts".
-      " left join tt_clients c on (c.id = ts.client_id)".
+      " ts.submit_status, ts.approve_status $filePart from tt_timesheets ts".
+      " left join tt_clients c on (c.id = ts.client_id) $fileJoin".
       " where ts.status = 0 and ts.group_id = $group_id and ts.org_id = $org_id and ts.user_id = $user_id".
       " order by ts.name";
     $res = $mdb2->query($sql);
@@ -183,6 +200,15 @@ class ttTimesheetHelper {
   static function delete($timesheet_id) {
     global $user;
     $mdb2 = getConnection();
+
+    // Delete associated files.
+    if ($user->isPluginEnabled('at')) {
+      import('ttFileHelper');
+      global $err;
+      $fileHelper = new ttFileHelper($err);
+      if (!$fileHelper->deleteEntityFiles($timesheet_id, 'timesheet'))
+        return false;
+    }
 
     $user_id = $user->getUser();
     $group_id = $user->getGroup();

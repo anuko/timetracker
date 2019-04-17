@@ -50,7 +50,7 @@ if($user->can('manage_projects')) {
 
 $smarty->assign('active_projects', $active_projects);
 $smarty->assign('inactive_projects', $inactive_projects);
-$smarty->assign('show_files', $user->isPluginEnabled('at'));
+$smarty->assign('show_files', $showFiles);
 $smarty->assign('title', $i18n->get('title.projects'));
 $smarty->assign('content_page_name', 'projects.tpl');
 $smarty->display('index.tpl');
