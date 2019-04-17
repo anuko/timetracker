@@ -95,7 +95,7 @@ if ($request->isGet()) {
     // This is not good as it is printed as unintentional white space in output.
     // Consequences:
     //   1) PHP redirects may stop working, depending on server settings.
-    //   2) PDF reports will become unusable (cannot open files).
+    //   2) PDF reports and attachment downloads will become unusable (cannot open files).
     $file = fopen(APP_DIR.'/WEB-INF/config.php', 'r');
     $line = fgets($file);
     if (strcmp("<?php\n", $line) !== 0 && strcmp("<?php\r\n", $line) !== 0) {
