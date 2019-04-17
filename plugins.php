@@ -55,6 +55,7 @@ if ($request->isPost()) {
   $cl_timesheets = $request->getParameter('timesheets');
   $cl_templates = $request->getParameter('templates');
   $cl_attachments = $request->getParameter('attachments');
+  $cl_work = $request->getParameter('work');
 } else {
   // Note: we get here in get, and also in post when group changes.
   // Which plugins do we have enabled in currently selected group?
@@ -76,6 +77,7 @@ if ($request->isPost()) {
   $cl_timesheets = in_array('ts', $plugins);
   $cl_templates = in_array('tp', $plugins);
   $cl_attachments = in_array('at', $plugins);
+  $cl_work = in_array('wk', $plugins);
 }
 
 $form = new Form('pluginsForm');
@@ -98,6 +100,7 @@ $form->addInput(array('type'=>'checkbox','name'=>'approval','value'=>$cl_approva
 $form->addInput(array('type'=>'checkbox','name'=>'timesheets','value'=>$cl_timesheets));
 $form->addInput(array('type'=>'checkbox','name'=>'templates','value'=>$cl_templates,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'attachments','value'=>$cl_attachments,'onchange'=>'handlePluginCheckboxes()'));
+$form->addInput(array('type'=>'checkbox','name'=>'work','value'=>$cl_work,'onchange'=>'handlePluginCheckboxes()'));
 
 // Submit button.
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
@@ -141,6 +144,8 @@ if ($request->isPost()) {
     $plugins .= ',tp';
   if ($cl_attachments)
     $plugins .= ',at';
+  if ($cl_work)
+    $plugins .= ',wk';
 
   // Recycle week view plugin options as they are not configured on this page.
   $existing_plugins = explode(',', $user->getPlugins());

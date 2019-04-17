@@ -163,6 +163,10 @@ function handlePluginCheckboxes() {
             <td><label for="attachments">{$i18n.label.attachments}</label> <span id="attachments_doc"><a href="https://www.anuko.com/lp/tt_31.htm" target="_blank">{$i18n.label.what_is_it}</a></span></td>
           </tr>
           <tr>
+            <td align="right" nowrap>{$forms.pluginsForm.work.control}</td>
+            <td><label for="work">{$i18n.title.work}</label> <span id="work_doc"><a href="https://www.anuko.com/lp/tt_34.htm" target="_blank">{$i18n.label.what_is_it}</a></span></td>
+          </tr>
+          <tr>
             <td colspan="2">&nbsp;</td>
           </tr>
           <tr>
