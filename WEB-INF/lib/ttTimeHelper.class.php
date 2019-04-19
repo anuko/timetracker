@@ -173,7 +173,7 @@ class ttTimeHelper {
   // minutesToDuration converts an integer number of minutes into duration string.
   // Formats returned HH:MM, HHH:MM, HH, or HHH.
   static function minutesToDuration($minutes, $abbreviate = false) {
-    $sign = $minutes > 0 ? '' : '-';
+    $sign = $minutes >= 0 ? '' : '-';
     $minutes = abs($minutes);
 
     $hours = (string) (int)($minutes / 60);
