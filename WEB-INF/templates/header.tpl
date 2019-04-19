@@ -138,7 +138,7 @@
     {if $user->isPluginEnabled('cl') && ($user->can('view_own_clients') || $user->can('manage_clients'))}
             &middot; <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
     {/if}
-    {if $user->isPluginEnabled('wk') && ($user->can('do_work') || $user->can('bid_on_work') || $user->can('manage_work')) && $user->exists()}
+    {if $user->isPluginEnabled('wk') && ($user->can('update_work') || $user->can('bid_on_work') || $user->can('manage_work')) && $user->exists()}
             &middot; <a class="mainMenu" href="work.php">{$i18n.title.work}</a>
     {/if}
     {if $user->can('export_data')}
