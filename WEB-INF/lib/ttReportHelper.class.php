@@ -1155,7 +1155,18 @@ class ttReportHelper {
     if ($user->isPluginEnabled('ap') && $user->isClient() && !$user->can('view_client_unapproved'))
       $options['approved'] = 1; // Restrict clients to approved records only.
     $options['timesheet'] = $bean->getAttribute('timesheet');
-    if (is_array($bean->getAttribute('users'))) $options['users'] = join(',', $bean->getAttribute('users'));
+
+    $active_users_in_bean = $bean->getAttribute('users_active');
+    if ($active_users_in_bean && is_array($active_users_in_bean)) {
+      $users = join(',', $active_users_in_bean);
+    }
+    $inactive_users_in_bean = $bean->getAttribute('users_inactive');
+    if ($inactive_users_in_bean && is_array($inactive_users_in_bean)) {
+      if ($users) $users .= ',';
+      $users .= join(',', $inactive_users_in_bean);
+    }
+    if ($users) $options['users'] = $users;
+
     $options['period'] = $bean->getAttribute('period');
     $options['period_start'] = $bean->getAttribute('start_date');
     $options['period_end'] = $bean->getAttribute('end_date');
@@ -1187,13 +1198,19 @@ class ttReportHelper {
     global $user;
 
     // Check users.
-    $users_in_bean = $bean->getAttribute('users');
-    if (is_array($users_in_bean)) {
+    $active_users_in_bean = $bean->getAttribute('users_active');
+    $inactive_users_in_bean = $bean->getAttribute('users_inactive');
+    if (is_array($active_users_in_bean) || is_array($inactive_users_in_bean)) {
       $users_in_group = ttGroupHelper::getUsers();
       foreach ($users_in_group as $user_in_group) {
         $valid_ids[] = $user_in_group['id'];
       }
-      foreach ($users_in_bean as $user_in_bean) {
+      foreach ($active_users_in_bean as $user_in_bean) {
+        if (!in_array($user_in_bean, $valid_ids)) {
+          return false;
+        }
+      }
+      foreach ($inactive_users_in_bean as $user_in_bean) {
         if (!in_array($user_in_bean, $valid_ids)) {
           return false;
         }

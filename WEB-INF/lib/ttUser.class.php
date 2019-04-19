@@ -424,7 +424,7 @@ class ttUser {
 
     $left_joins = null;
     if (isset($options['max_rank']) || $skipClients || isset($options['include_role']))
-        $left_joins .= ' left join tt_roles r on (u.role_id = r.id)';
+      $left_joins .= ' left join tt_roles r on (u.role_id = r.id)';
 
     $where_part = " where u.org_id = $org_id and u.group_id = $group_id";
     if (isset($options['status']))

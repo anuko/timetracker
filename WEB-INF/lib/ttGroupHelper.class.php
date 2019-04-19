@@ -637,19 +637,22 @@ class ttGroupHelper {
   }
 
   // The getUsersForClient obtains all active and inactive users in a group that are relevant to a client.
-  static function getUsersForClient() {
+  static function getUsersForClient($options) {
     global $user;
     $mdb2 = getConnection();
 
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    if (isset($options['status']))
+      $where_part = 'where u.status = '.(int)$options['status'];
+    else
+      $where_part = 'where u.status is not null';
+
     $sql = "select u.id, u.name from tt_user_project_binds upb".
       " inner join tt_client_project_binds cpb on (upb.project_id = cpb.project_id and cpb.client_id = $user->client_id)".
       " inner join tt_users u on (u.id = upb.user_id and u.group_id = $group_id and u.org_id = $org_id)".
-      " where (u.status = 1 or u.status = 0)".
-      " group by u.id".
-      " order by upper(u.name)";
+      " $where_part group by u.id order by upper(u.name)";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))

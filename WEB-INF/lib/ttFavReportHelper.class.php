@@ -72,6 +72,7 @@ class ttFavReportHelper {
     }
     return false;
   }
+
   // getReport - returns a report identified by its id.
   // TODO: get rid of this function by encapsulating all cron related tasks in its own class.
   // Because cron works for all orgs and we want this class to always work in context of
@@ -225,10 +226,16 @@ class ttFavReportHelper {
 
     if (!$bean->getAttribute('chtotalsonly')) $bean->setAttribute('chtotalsonly', 0);
 
-    $users_in_bean = $bean->getAttribute('users');
-    if ($users_in_bean && is_array($users_in_bean)) {
-      $users = join(',', $users_in_bean);
+    $active_users_in_bean = $bean->getAttribute('users_active');
+    if ($active_users_in_bean && is_array($active_users_in_bean)) {
+      $users = join(',', $active_users_in_bean);
     }
+    $inactive_users_in_bean = $bean->getAttribute('users_inactive');
+    if ($inactive_users_in_bean && is_array($inactive_users_in_bean)) {
+      if ($users) $users .= ',';
+      $users .= join(',', $inactive_users_in_bean);
+    }
+
     if ($bean->getAttribute('start_date')) {
       $dt = new DateAndTime($user->getDateFormat(), $bean->getAttribute('start_date'));
       $from = $dt->toString(DB_DATEFORMAT);
@@ -322,7 +329,8 @@ class ttFavReportHelper {
       $bean->setAttribute('invoice', $val['invoice']);
       $bean->setAttribute('paid_status', $val['paid_status']);
       $bean->setAttribute('timesheet', $val['timesheet']);
-      $bean->setAttribute('users', explode(',', $val['users']));
+      $bean->setAttribute('users_active', explode(',', $val['users']));
+      $bean->setAttribute('users_inactive', explode(',', $val['users']));
       $bean->setAttribute('period', $val['period']);
       if ($val['period_start']) {
         $dt = new DateAndTime(DB_DATEFORMAT, $val['period_start']);

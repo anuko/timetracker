@@ -216,17 +216,25 @@ if ($showUsers) {
   if ($user->can('view_reports') || $user->can('view_all_reports')) {
     $rank = $user->getMaxRankForGroup($user->getGroup());
     if ($user->can('view_all_reports')) $max_rank = MAX_RANK;
-    if ($user->can('view_own_reports'))
-      $options = array('max_rank'=>$max_rank,'include_self'=>true);
-    else
-      $options = array('max_rank'=>$max_rank);
-    $users = $user->getUsers($options); // Active and inactive users.
+    if ($user->can('view_own_reports')) {
+      $options_active = array('max_rank'=>$max_rank,'include_self'=>true,'status'=>ACTIVE);
+      $options_inactive = array('max_rank'=>$max_rank,'include_self'=>true,'status'=>INACTIVE);
+    } else {
+      $options_active = array('max_rank'=>$max_rank,'status'=>ACTIVE);
+      $options_inactive = array('max_rank'=>$max_rank,'status'=>INACTIVE);
+    }
+    $active_users = $user->getUsers($options_active);
+    $inactive_users = $user->getUsers($options_inactive);
   }
-  elseif ($user->isClient())
-    $users = ttGroupHelper::getUsersForClient(); // Active and inactive users for clients.
+  elseif ($user->isClient()) {
+    $options_active = array('status'=>ACTIVE);
+    $options_inactive = array('status'=>INACTIVE);
+    $active_users = ttGroupHelper::getUsersForClient($options_active);
+    $inactive_users = ttGroupHelper::getUsersForClient($options_inactive);
+  }
 
-  foreach ($users as $single_user) {
-    $user_list[$single_user['id']] = $single_user['name'];
+  foreach ($active_users as $single_user) {
+    $user_list_active[$single_user['id']] = $single_user['name'];
     $projects = ttProjectHelper::getAssignedProjects($single_user['id']);
     if ($projects) {
       foreach ($projects as $single_project) {
@@ -234,10 +242,27 @@ if ($showUsers) {
       }
     }
   }
-  $row_count = ceil(count($user_list)/3);
+  $row_count = ceil(count($user_list_active)/3);
   $form->addInput(array('type'=>'checkboxgroup',
-    'name'=>'users',
-    'data'=>$user_list,
+    'name'=>'users_active',
+    'data'=>$user_list_active,
+    'layout'=>'V',
+    'groupin'=>$row_count,
+    'style'=>'width: 100%;'));
+
+    foreach ($inactive_users as $single_user) {
+    $user_list_inactive[$single_user['id']] = $single_user['name'];
+    $projects = ttProjectHelper::getAssignedProjects($single_user['id']);
+    if ($projects) {
+      foreach ($projects as $single_project) {
+        $assigned_projects[$single_user['id']][] = $single_project['id'];
+      }
+    }
+  }
+  $row_count = ceil(count($user_list_inactive)/3);
+  $form->addInput(array('type'=>'checkboxgroup',
+    'name'=>'users_inactive',
+    'data'=>$user_list_inactive,
     'layout'=>'V',
     'groupin'=>$row_count,
     'style'=>'width: 100%;'));
@@ -332,7 +357,7 @@ $bean = new ActionForm('reportBean', $form, $request);
 
 if ($request->isGet() && !$bean->isSaved()) {
   // No previous form data were found in session. Use the following default values.
-  $form->setValueByElement('users', array_keys($user_list));
+  $form->setValueByElement('users_active', array_keys($user_list_active));
   $period = new Period(INTERVAL_THIS_MONTH, new DateAndTime($user->getDateFormat()));
   $form->setValueByElement('start_date', $period->getStartDate());
   $form->setValueByElement('end_date', $period->getEndDate());
@@ -374,8 +399,10 @@ if ($request->isPost()) {
       ttFavReportHelper::loadReport($bean);
 
       // If user selected no favorite report - mark all user checkboxes (most probable scenario).
-      if ($bean->getAttribute('favorite_report') == -1)
-        $form->setValueByElement('users', array_keys($user_list));
+      if ($bean->getAttribute('favorite_report') == -1) {
+        $form->setValueByElement('users_active', array_keys($user_list_active));
+        $form->setValueByElement('users_inactive', false);
+      }
 
       // Save form data in session for future use.
       $bean->saveBean();
@@ -457,7 +484,8 @@ $smarty->assign('show_invoice_checkbox', $showInvoiceCheckbox);
 $smarty->assign('show_paid_status', $showPaidStatus);
 $smarty->assign('show_timesheet_dropdown', $showTimesheetDropdown);
 $smarty->assign('show_timesheet_checkbox', $showTimesheetCheckbox);
-$smarty->assign('show_users', $showUsers);
+$smarty->assign('show_active_users', $showUsers && $active_users);
+$smarty->assign('show_inactive_users', $showUsers && $inactive_users);
 $smarty->assign('show_start', $showStart);
 $smarty->assign('show_finish', $showFinish);
 $smarty->assign('show_work_units', $showWorkUnits);

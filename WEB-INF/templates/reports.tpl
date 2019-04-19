@@ -300,12 +300,20 @@ function handleCheckboxes() {
             </table>
           </td>
         </tr>
-{if $show_users}
+{if $show_active_users}
         <tr>
-          <td colspan="3"><b>{$i18n.label.users}</b></td>
+          <td colspan="3"><b>{$i18n.form.users.active_users}</b></td>
         </tr>
         <tr>
-          <td colspan="3">{$forms.reportForm.users.control}</td>
+          <td colspan="3">{$forms.reportForm.users_active.control}</td>
+        </tr>
+{/if}
+{if $show_inactive_users}
+        <tr>
+          <td colspan="3"><b>{$i18n.form.users.inactive_users}</b></td>
+        </tr>
+        <tr>
+          <td colspan="3">{$forms.reportForm.users_inactive.control}</td>
         </tr>
 {/if}
         <tr>
