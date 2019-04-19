@@ -270,6 +270,8 @@ $i18n_key_words = array(
 // 'label.file' => 'File',
 // 'label.image' => 'Image',
 // 'label.download' => 'Download',
+'label.active_users' => 'Aktiivsed kasutajad',
+'label.inactive_users' => 'Mitteaktiivsed kasutajad',
 
 // Form titles.
 // TODO: Improve titles for consistency, so that each title explains correctly what each
@@ -504,8 +506,6 @@ $i18n_key_words = array(
 'form.tasks.inactive_tasks' => 'Mitteaktiivsed tööülesanded',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
-'form.users.active_users' => 'Aktiivsed kasutajad',
-'form.users.inactive_users' => 'Mitteaktiivsed kasutajad',
 'form.users.uncompleted_entry' => 'Kasutajal on lõpetamata aja kanne',
 'form.users.role' => 'Roll',
 'form.users.manager' => 'Haldur',

@@ -245,6 +245,8 @@ $i18n_key_words = array(
 'label.image' => 'Afbeelding',
 // TODO: translate the following.
 // 'label.download' => 'Download',
+'label.active_users' => 'Actieve medewerkers',
+'label.inactive_users' => 'Inactieve medewerkers',
 
 // Form titles.
 'title.error' => 'Fout',
@@ -463,8 +465,6 @@ $i18n_key_words = array(
 'form.tasks.inactive_tasks' => 'Inactieve taken',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
-'form.users.active_users' => 'Actieve medewerkers',
-'form.users.inactive_users' => 'Inactieve medewerkers',
 'form.users.uncompleted_entry' => 'Gebruiker heeft tijd ingevoerd die niet compleet is',
 'form.users.role' => 'Rol',
 'form.users.manager' => 'Manager',

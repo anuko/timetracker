@@ -288,6 +288,8 @@ $i18n_key_words = array(
 // 'label.file' => 'File',
 // 'label.image' => 'Image',
 // 'label.download' => 'Download',
+// 'label.active_users' => 'Active Users',
+// 'label.inactive_users' => 'Inactive Users',
 
 // Form titles.
 // TODO: Translate the following.
@@ -533,8 +535,6 @@ $i18n_key_words = array(
 
 // Users form. See example at https://timetracker.anuko.com/users.php
 // TODO: translate the following.
-// 'form.users.active_users' => 'Active Users',
-// 'form.users.inactive_users' => 'Inactive Users',
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 'form.users.role' => '役割', // TODO: is this correct?
 'form.users.manager' => '管理者',

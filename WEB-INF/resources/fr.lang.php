@@ -264,6 +264,8 @@ $i18n_key_words = array(
 // 'label.file' => 'File',
 // 'label.image' => 'Image',
 // 'label.download' => 'Download',
+'label.active_users' => 'Utilisateurs actifs',
+'label.inactive_users' => 'Utilisateurs inactifs',
 
 // Form titles.
 'title.error' => 'Erreur',
@@ -495,8 +497,6 @@ $i18n_key_words = array(
 'form.tasks.inactive_tasks' => 'Tâches inactives',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
-'form.users.active_users' => 'Utilisateurs actifs',
-'form.users.inactive_users' => 'Utilisateurs inactifs',
 'form.users.uncompleted_entry' => 'L\\\'utilisateur a une entrée incomplète',
 'form.users.role' => 'Rôle',
 'form.users.manager' => 'Responsable',

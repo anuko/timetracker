@@ -8,7 +8,7 @@
 {if $user->can('manage_users')}
       <table class="mobile-table-details">
   {if $inactive_users}
-        <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.active_users}</td></tr>
+        <tr><td class="sectionHeaderNoBorder">{$i18n.label.active_users}</td></tr>
   {/if}
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.person_name}</td>
@@ -45,7 +45,7 @@
 
   {if $inactive_users}
       <table class="mobile-table-details">
-        <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.inactive_users}</td></tr>
+        <tr><td class="sectionHeaderNoBorder">{$i18n.label.inactive_users}</td></tr>
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.person_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.login}</td>

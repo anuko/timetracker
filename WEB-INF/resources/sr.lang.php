@@ -269,6 +269,8 @@ $i18n_key_words = array(
 // 'label.file' => 'File',
 // 'label.image' => 'Image',
 // 'label.download' => 'Download',
+'label.active_users' => 'Aktivni korisnik',
+'label.inactive_users' => 'Neaktivni korisnik',
 
 // Form titles.
 'title.error' => 'Greška',
@@ -504,8 +506,6 @@ $i18n_key_words = array(
 'form.tasks.inactive_tasks' => 'Neaktivni zadaci',
 
 // Korisnička forma. Pogledajte primer na https://timetracker.anuko.com/users.php
-'form.users.active_users' => 'Aktivni korisnik',
-'form.users.inactive_users' => 'Neaktivni korisnik',
 // TODO: translate the following.
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
 'form.users.role' => 'Funkcija',
