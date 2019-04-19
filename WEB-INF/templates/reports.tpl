@@ -302,7 +302,7 @@ function handleCheckboxes() {
         </tr>
 {if $show_active_users}
         <tr>
-          <td colspan="3"><b>{$i18n.label.active_users}</b></td>
+          <td colspan="3"><b>{if $show_inactive_users}{$i18n.label.active_users}{else}{$i18n.label.users}{/if}</b></td>
         </tr>
         <tr>
           <td colspan="3">{$forms.reportForm.users_active.control}</td>
