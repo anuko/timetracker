@@ -132,17 +132,21 @@ class ttTimeHelper {
     if (!isset($duration) || strlen($duration) == 0)
       return null; // Value is not set. Caller decides whether it is valid or not.
 
+    // We allow negative durations, similar to negative expenses (installments).
+    $signMultiplier = ttStartsWith($duration, '-') ? -1 : 1;
+    if ($signMultiplier == -1) $duration = ltrim($duration, '-');
+
     // Handle whole hours.
     if (preg_match('/^\d{1,3}h?$/', $duration )) { // 0 - 999, 0h - 999h
       $minutes = 60 * trim($duration, 'h');
-      return $minutes > $max ? false : $minutes;
+      return $minutes > $max ? false : $signMultiplier * $minutes;
     }
 
     // Handle a normalized duration value.
     if (preg_match('/^\d{1,3}:[0-5][0-9]$/', $duration )) { // 0:00 - 999:59
       $time_array = explode(':', $duration);
       $minutes = (int)@$time_array[1] + ((int)@$time_array[0]) * 60;
-      return $minutes > $max ? false : $minutes;
+      return $minutes > $max ? false : $signMultiplier * $minutes;
     }
 
     // Handle localized fractional hours.
@@ -153,13 +157,13 @@ class ttTimeHelper {
           $duration = str_replace (',', '.', $duration);
 
         $minutes = (int)round(60 * floatval($duration));
-        return $minutes > $max ? false : $minutes;
+        return $minutes > $max ? false : $signMultiplier * $minutes;
     }
 
     // Handle minutes. Some users enter durations like 10m (meaning 10 minutes).
     if (preg_match('/^\d{1,5}m$/', $duration )) { // 0m - 99999m
       $minutes = (int) trim($duration, 'm');
-      return $minutes > $max ? false : $minutes;
+      return $minutes > $max ? false : $signMultiplier * $minutes;
     }
 
     // Everything else is not a valid duration.
@@ -169,16 +173,17 @@ class ttTimeHelper {
   // minutesToDuration converts an integer number of minutes into duration string.
   // Formats returned HH:MM, HHH:MM, HH, or HHH.
   static function minutesToDuration($minutes, $abbreviate = false) {
-    if ($minutes < 0) return false;
+    $sign = $minutes > 0 ? '' : '-';
+    $minutes = abs($minutes);
 
     $hours = (string) (int)($minutes / 60);
     $mins = (string) round(fmod($minutes, 60));
     if (strlen($mins) == 1)
       $mins = '0' . $mins;
     if ($abbreviate && $mins == '00')
-      return $hours;
+      return $sign.$hours;
 
-    return $hours.':'.$mins;
+    return $sign.$hours.':'.$mins;
   }
 
   // toMinutes - converts a time string in format 00:00 to a number of minutes.
@@ -552,7 +557,7 @@ class ttTimeHelper {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-      return sec_to_time_fmt_hm($val['sm']);
+      return ttTimeHelper::minutesToDuration($val['sm'] / 60);
     }
     return false;
   }
@@ -574,7 +579,7 @@ class ttTimeHelper {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-      return sec_to_time_fmt_hm($val['sm']);
+      return ttTimeHelper::minutesToDuration($val['sm'] / 60);
     }
     return false;
   }
@@ -596,7 +601,7 @@ class ttTimeHelper {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-      return sec_to_time_fmt_hm($val['sm']);
+      return ttTimeHelper::minutesToDuration($val['sm'] / 60);
     }
     return false;
   }

@@ -27,6 +27,7 @@
 // +----------------------------------------------------------------------+
 
 import('Period');
+import('ttTimeHelper');
 
 // Definitions for chart types.
 define('CHART_PROJECTS', 1);
@@ -97,7 +98,7 @@ class ttChartHelper {
     // Add a string representation of time + percentage to names. Example: "Time Tracker (1:15 - 6%)".
     foreach ($result as &$one_val) {
       $percent = round(100*$one_val['time']/$total).'%';
-      $one_val['name'] .= ' ('.sec_to_time_fmt_hm($one_val['time']).' - '.$percent.')';
+      $one_val['name'] .= ' ('.ttTimeHelper::minutesToDuration($one_val['time'] / 60).' - '.$percent.')';
     }
 
     // Note: the remaining code here is needed to display labels on the side of the diagram.

@@ -143,11 +143,6 @@ function time_to_decimal($val) {
   return $decimalTime;
 }
 
-function sec_to_time_fmt_hm($sec)
-{
-  return sprintf("%d:%02d", $sec / 3600, $sec % 3600 / 60);
-}
-
 function magic_quotes_off()
 {
   $_POST = array_map('stripslashes_deep', $_POST);
