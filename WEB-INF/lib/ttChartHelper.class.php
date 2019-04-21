@@ -70,23 +70,24 @@ class ttChartHelper {
       // Data for projects.
       $sql = "select p.name as name, sum(time_to_sec(l.duration)) as time from tt_log l
         left join tt_projects p on (p.id = l.project_id)
-        where l.status = 1 and l.duration > 0 and l.user_id = $user_id $q_period group by l.project_id";
+        where l.status = 1 and l.user_id = $user_id $q_period group by l.project_id";
     } elseif (CHART_TASKS == $chart_type) {
       // Data for tasks.
       $sql = "select t.name as name, sum(time_to_sec(l.duration)) as time from tt_log l
         left join tt_tasks t on (t.id = l.task_id)
-        where l.status = 1 and l.duration > 0 and l.user_id = $user_id $q_period group by l.task_id";
+        where l.status = 1 and l.user_id = $user_id $q_period group by l.task_id";
     } elseif (CHART_CLIENTS == $chart_type) {
       // Data for clients.
       $sql = "select c.name as name, sum(time_to_sec(l.duration)) as time from tt_log l
         left join tt_clients c on (c.id = l.client_id)
-        where l.status = 1 and l.duration > 0 and l.user_id = $user_id $q_period group by l.client_id";
+        where l.status = 1 and l.user_id = $user_id $q_period group by l.client_id";
     }
 
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-        $result[] = array('name'=>$val['name'],'time'=>$val['time']); // name  - project name, time - total for project in seconds.
+        if ($val['time'] >= 0) // Only positive totals make sense in pie charts. Skip negatives entirely.
+          $result[] = array('name'=>$val['name'],'time'=>$val['time']); // name - project name, time - total for project in seconds.
       }
     }
 
@@ -140,7 +141,7 @@ class ttChartHelper {
     $tracking_mode = $user->getTrackingMode();
     $client_option = $user->isPluginEnabled('cl');
 
-    // We have 3 possible options for chart tyep: projects, tasks, or clients.
+    // We have 3 possible options for chart type: projects, tasks, or clients.
     // Deal with each one individually.
 
     if ($requested_type == CHART_PROJECTS) {
