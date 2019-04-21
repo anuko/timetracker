@@ -74,12 +74,14 @@ $quota = new MonthlyQuota();
 
 if ($request->isPost()){
   // Validate user input.
-  if (false === ttTimeHelper::postedDurationToMinutes($request->getParameter('workdayHours')))
+  $workdayMinutes = ttTimeHelper::postedDurationToMinutes($request->getParameter('workdayHours'));
+  if (false === $workdayMinutes || $workdayMinutes <= 0 )
     $err->add($i18n->get('error.field'), $i18n->get('form.quota.workday_hours'));
 
   for ($i = 0; $i < count($months); $i++){
     $val = $request->getParameter($months[$i]);
-    if (false === ttTimeHelper::postedDurationToMinutes($val, 44640/*24*60*31*/))
+    $monthMinutes = ttTimeHelper::postedDurationToMinutes($val, 44640/*24*60*31*/);
+    if (false === $monthMinutes || $monthMinutes < 0)
       $err->add($i18n->get('error.field'), $months[$i]);
   }
   // Finished validating user input.
