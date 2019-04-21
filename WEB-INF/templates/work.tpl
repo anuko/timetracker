@@ -7,17 +7,19 @@
     <td valign="top">
 {if $user->can('manage_work')}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
+  {if $inactive_work}
         <tr><td class="sectionHeaderNoBorder">{$i18n.title.active_work}</td></tr>
+  {/if}
+  {if $active_work}
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
-  {if $show_files}
+    {if $show_files}
           <td></td>
-  {/if}
+    {/if}
           <td></td>
           <td></td>
         </tr>
-  {if $active_work}
     {foreach $active_work as $work_item}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$work_item.name|escape}</td>
