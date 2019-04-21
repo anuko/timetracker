@@ -275,16 +275,15 @@ if ($request->isGet() && $use_checkboxes)
 if (ttReportHelper::grouping($options)) {
   $subtotals = ttReportHelper::getSubtotals($options);
   $smarty->assign('group_by_header', ttReportHelper::makeGroupByHeader($options));
+  if ($report_items) {
+    // Assign variables that are used to print subtotals.
+    $smarty->assign('print_subtotals', true);
+    $smarty->assign('first_pass', true);
+    $smarty->assign('prev_grouped_by', '');
+    $smarty->assign('cur_grouped_by', '');
+  }
 }
 $totals = ttReportHelper::getTotals($options);
-
-// Assign variables that are used to print subtotals.
-if ($report_items) {
-  $smarty->assign('print_subtotals', true);
-  $smarty->assign('first_pass', true);
-  $smarty->assign('prev_grouped_by', '');
-  $smarty->assign('cur_grouped_by', '');
-}
 
 // Determine column span for note field.
 $colspan = 1;

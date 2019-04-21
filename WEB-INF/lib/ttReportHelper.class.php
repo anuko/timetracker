@@ -513,7 +513,7 @@ class ttReportHelper {
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
     while ($val = $res->fetchRow()) {
-      $time = $val['time'] ? ttTimeHelper::minutesToDuration($val['time'] / 60) : null;
+      $time = ttTimeHelper::minutesToDuration($val['time'] / 60);
       $rowLabel = ttReportHelper::makeGroupByLabel($val['group_field'], $options);
       if ($options['show_cost']) {
         $decimalMark = $user->getDecimalMark();
@@ -595,7 +595,7 @@ class ttReportHelper {
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
 
     $val = $res->fetchRow();
-    $total_time = $val['time'] ? ttTimeHelper::minutesToDuration($val['time'] / 60) : null;
+    $total_time = ttTimeHelper::minutesToDuration($val['time'] / 60);
     if ($options['show_cost']) {
       $total_cost = $val['cost'];
       if (!$total_cost) $total_cost = '0.00';
