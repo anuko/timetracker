@@ -33,47 +33,40 @@ import('ttGroupHelper');
 import('ttFileHelper');
 
 // Access checks.
-if (!ttAccessAllowed('manage_projects')) {
+if (!ttAccessAllowed('manage_work')) {
   header('Location: access_denied.php');
   exit();
 }
-if (MODE_PROJECTS != $user->getTrackingMode() && MODE_PROJECTS_AND_TASKS != $user->getTrackingMode()) {
+if (!$user->isPluginEnabled('wk')) {
   header('Location: feature_disabled.php');
   exit();
 }
 // End of access checks.
 
 $showFiles = $user->isPluginEnabled('at');
-$users = ttGroupHelper::getActiveUsers();
-foreach ($users as $user_item)
-  $all_users[$user_item['id']] = $user_item['name'];
-
-$tasks = ttGroupHelper::getActiveTasks();
-foreach ($tasks as $task_item)
-  $all_tasks[$task_item['id']] = $task_item['name'];
-$show_tasks = MODE_PROJECTS_AND_TASKS == $user->getTrackingMode() && count($tasks) > 0;
 
 if ($request->isPost()) {
-  $cl_name = trim($request->getParameter('project_name'));
+  $cl_name = trim($request->getParameter('work_name'));
   $cl_description = trim($request->getParameter('description'));
-  $cl_users = $request->getParameter('users', array());
-  $cl_tasks = $request->getParameter('tasks', array());
-} else {
-  foreach ($users as $user_item)
-    $cl_users[] = $user_item['id'];
-  foreach ($tasks as $task_item)
-    $cl_tasks[] = $task_item['id'];
 }
 
-$form = new Form('projectForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'project_name','style'=>'width: 250px;','value'=>$cl_name));
+$form = new Form('workForm');
+
+
+
+
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'work_name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 if ($showFiles)
   $form->addInput(array('type'=>'upload','name'=>'newfile','value'=>$i18n->get('button.submit')));
-$form->addInput(array('type'=>'checkboxgroup','name'=>'users','data'=>$all_users,'layout'=>'H','value'=>$cl_users));
-if ($show_tasks)
-  $form->addInput(array('type'=>'checkboxgroup','name'=>'tasks','data'=>$all_tasks,'layout'=>'H','value'=>$cl_tasks));
-$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
+
+// Should not we get it from server?
+// $CURRENCY_OPTIONS = array(array('id'=>'.','name'=>'.'),array('id'=>',','name'=>','));
+// $form->addInput(array('type'=>'combobox','name'=>'decimal_mark','style'=>'width: 150px','data'=>$DECIMAL_MARK_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_decimal_mark,
+//  'onchange'=>'adjustDecimalPreview()'));
+
+
+
 
 if ($request->isPost()) {
   // Validate user input.
@@ -114,5 +107,5 @@ $smarty->assign('show_files', $showFiles);
 $smarty->assign('show_users', count($users) > 0);
 $smarty->assign('show_tasks', $show_tasks);
 $smarty->assign('title', $i18n->get('title.add_work'));
-$smarty->assign('content_page_name', 'project_add.tpl');
+$smarty->assign('content_page_name', 'work_add.tpl');
 $smarty->display('index.tpl');
