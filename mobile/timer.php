@@ -290,7 +290,7 @@ $smarty->assign('uncompleted', $uncompleted);
 
 
 
-$smarty->assign('time_records', ttTimeHelper::getRecords($user->getUser(), $cl_date));
+$smarty->assign('time_records', ttTimeHelper::getRecords($cl_date));
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);

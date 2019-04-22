@@ -807,11 +807,12 @@ class ttTimeHelper {
   }
 
   // getRecords - returns time records for a user for a given date.
-  static function getRecords($user_id, $date) {
+  static function getRecords($date) {
     // TODO: merge getRecords and getRecordsWithFiles into one function.
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
@@ -869,10 +870,11 @@ class ttTimeHelper {
   // getRecordsWithFiles - returns time records for a user for a given date
   // with information whether they have attached files (has_files property).
   // A separate fiunction from getRecords because sql here is more complex.
-  static function getRecordsWithFiles($user_id, $date) {
+  static function getRecordsWithFiles($date) {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 

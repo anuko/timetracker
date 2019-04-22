@@ -442,7 +442,7 @@ if ($request->isPost()) {
 } // isPost
 
 $week_total = ttTimeHelper::getTimeForWeek($selected_date);
-$timeRecords = $showFiles? ttTimeHelper::getRecordsWithFiles($user_id, $cl_date) : ttTimeHelper::getRecords($user_id, $cl_date);
+$timeRecords = $showFiles? ttTimeHelper::getRecordsWithFiles($cl_date) : ttTimeHelper::getRecords($cl_date);
 
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);

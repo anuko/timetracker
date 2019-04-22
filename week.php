@@ -507,6 +507,9 @@ $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('timestring', $startDate->toString($user->date_format).' - '.$endDate->toString($user->date_format));
 $smarty->assign('time_records', $records);
 
+//$showFiles = $user->isPluginEnabled('at');
+//$smarty->assign('show_files', $showFiles);
+
 $smarty->assign('title', $i18n->get('title.time'));
 $smarty->assign('content_page_name', 'week.tpl');
 $smarty->display('index.tpl');
