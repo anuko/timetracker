@@ -577,6 +577,25 @@ INSERT INTO `tt_work_currencies` (`id`, `name`) VALUES ('1', 'USD'), ('2', 'CAD'
 
 
 #
+# Structure for table tt_work_categories. WORK IN PROGRESS!
+# This table keeps work categories supported by remote work plugin.
+#
+# CREATE TABLE `tt_work_categories` (
+#  `id` int(10) unsigned NOT NULL,            # category id
+#  `parent_id` int(10) unsigned default NULL, # parent category id
+#  `level` tinyint(4) default 0,              # sub-category level
+#
+#  Localized name fields below for all supported languages?
+#  `name_en` varhar(64) NOT NULL,             # English.
+#  `name_de` varhar(64) default NULL,         # German.
+#  `name_fr` varhar(64) default NULL,         # French.
+#  `name_ru` varhar(64) default NULL,         # Russian.
+#
+# PRIMARY KEY  (`id`)
+# );
+
+
+#
 # Structure for table tt_site_config. This table stores configuration data
 # for Time Tracker site as a whole.
 # For example, database version, code version, site language, etc.

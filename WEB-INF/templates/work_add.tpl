@@ -18,6 +18,10 @@
         </tr>
 {/if}
         <tr>
+          <td align="right">{$i18n.label.currency}:</td>
+          <td>{$forms.workForm.currency.control}</td>
+        </tr>
+        <tr>
           <td></td>
           <td>{$i18n.label.required_fields}</td>
         </tr>

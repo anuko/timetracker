@@ -31,6 +31,7 @@ import('form.Form');
 import('ttProjectHelper');
 import('ttGroupHelper');
 import('ttFileHelper');
+import('ttWorkHelper');
 
 // Access checks.
 if (!ttAccessAllowed('manage_work')) {
@@ -48,24 +49,27 @@ $showFiles = $user->isPluginEnabled('at');
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('work_name'));
   $cl_description = trim($request->getParameter('description'));
+  $cl_currency = $request->getParameter('currency');
 }
 
 $form = new Form('workForm');
-
-
-
-
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'work_name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 if ($showFiles)
   $form->addInput(array('type'=>'upload','name'=>'newfile','value'=>$i18n->get('button.submit')));
+// Add a dropdown for currency.
+$currencies = ttWorkHelper::getCurrencies();
+$form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency));
 
-// Should not we get it from server?
-// $CURRENCY_OPTIONS = array(array('id'=>'.','name'=>'.'),array('id'=>',','name'=>','));
-// $form->addInput(array('type'=>'combobox','name'=>'decimal_mark','style'=>'width: 150px','data'=>$DECIMAL_MARK_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_decimal_mark,
-//  'onchange'=>'adjustDecimalPreview()'));
+// TODO: design how to handle one-time vs ongoing work. Apparently, with a conditional display of relevant controls.
+// Ongoing work - rate per hour control.
+// One-time work - budget dropdown control.
+// When selection changes, we hide and show required controls.
 
+// TODO: design how to handle categories and sub-categories.
+// One major complication is localization of names.
 
+// Coding and design are currently ongoing.
 
 
 if ($request->isPost()) {
