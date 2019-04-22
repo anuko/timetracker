@@ -57,6 +57,8 @@ if (!$user->behalf_id && !$user->can('track_own_time') && !$user->adjustBehalfId
 }
 // End of access checks.
 
+$showFiles = $user->isPluginEnabled('at');
+
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
 $selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date);
@@ -128,7 +130,7 @@ $_SESSION['note'] = $cl_note;
 $dayHeaders = ttWeekViewHelper::getDayHeadersForWeek($startDate->toString(DB_DATEFORMAT));
 $lockedDays = ttWeekViewHelper::getLockedDaysForWeek($startDate->toString(DB_DATEFORMAT));
 // Get already existing records.
-$records = ttWeekViewHelper::getRecordsForInterval($user->getUser(), $startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT));
+$records = ttWeekViewHelper::getRecordsForInterval($startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT), $showFiles);
 // Build data array for the table. Format is described in ttWeekViewHelper::getDataForWeekView function.
 if ($records)
   $dataArray = ttWeekViewHelper::getDataForWeekView($records, $dayHeaders);
@@ -506,10 +508,7 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('timestring', $startDate->toString($user->date_format).' - '.$endDate->toString($user->date_format));
 $smarty->assign('time_records', $records);
-
-//$showFiles = $user->isPluginEnabled('at');
-//$smarty->assign('show_files', $showFiles);
-
+$smarty->assign('show_files', $showFiles);
 $smarty->assign('title', $i18n->get('title.time'));
 $smarty->assign('content_page_name', 'week.tpl');
 $smarty->display('index.tpl');

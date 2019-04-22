@@ -30,8 +30,13 @@
 class ttWeekViewHelper {
 
   // getRecordsForInterval - returns time records for a user for a given interval of dates.
-  static function getRecordsForInterval($user_id, $start_date, $end_date) {
+  static function getRecordsForInterval($start_date, $end_date, $includeFiles = false) {
     global $user;
+
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $sql_time_format = "'%k:%i'"; //  24 hour format.
     if ('%I:%M %p' == $user->time_format)
       $sql_time_format = "'%h:%i %p'"; // 12 hour format for MySQL TIME_FORMAT function.
@@ -54,6 +59,13 @@ class ttWeekViewHelper {
       }
     }
 
+    if ($includeFiles) {
+      $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
+      $fileJoin =  " left join (select distinct entity_id from tt_files".
+      " where entity_type = 'time' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
+      " on (l.id = Sub1.entity_id)";
+    }
+
     $left_joins = " left join tt_projects p on (l.project_id = p.id)".
       " left join tt_tasks t on (l.task_id = t.id)";
     if ($user->isPluginEnabled('cl'))
@@ -64,15 +76,16 @@ class ttWeekViewHelper {
       elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
         $left_joins .= 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.option_id = cfo.id) ';
     }
+    $left_joins .= $fileJoin;
 
-    $sql = "select l.id as id, l.date as date, TIME_FORMAT(l.start, $sql_time_format) as start,
-      TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
-      TIME_FORMAT(l.duration, '%k:%i') as duration, p.id as project_id, p.name as project,
-      t.id as task_id, t.name as task, l.comment, l.billable, l.invoice_id $client_field $custom_field_1
-      from tt_log l
-      $left_joins
-      where l.date >= '$start_date' and l.date <= '$end_date' and l.user_id = $user_id and l.status = 1
-      order by l.date, p.name, t.name, l.start, l.id";
+    $sql = "select l.id as id, l.date as date, TIME_FORMAT(l.start, $sql_time_format) as start,".
+      " TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,".
+      " TIME_FORMAT(l.duration, '%k:%i') as duration, p.id as project_id, p.name as project,".
+      " t.id as task_id, t.name as task, l.comment, l.billable, l.invoice_id $client_field $custom_field_1 $filePart".
+      " from tt_log l $left_joins".
+      " where l.date >= '$start_date' and l.date <= '$end_date'".
+      " and l.user_id = $user_id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1".
+      " order by l.date, p.name, t.name, l.start, l.id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -236,7 +249,7 @@ class ttWeekViewHelper {
     unset($objDate);
 
     // Obtain past week(s) records.
-    $records = ttWeekViewHelper::getRecordsForInterval($user->getUser(), $pastWeekStartDate, $pastWeekEndDate);
+    $records = ttWeekViewHelper::getRecordsForInterval($pastWeekStartDate, $pastWeekEndDate);
     // Handle potential situation of no records by re-trying for up to 4 more previous weeks (after a long vacation, etc.).
     if (!$records) {
       for ($i = 0; $i < 4; $i++) {
@@ -247,7 +260,7 @@ class ttWeekViewHelper {
         $pastWeekEndDate = $objDate->toString(DB_DATEFORMAT);
         unset($objDate);
 
-        $records = ttWeekViewHelper::getRecordsForInterval($user->getUser(), $pastWeekStartDate, $pastWeekEndDate);
+        $records = ttWeekViewHelper::getRecordsForInterval($pastWeekStartDate, $pastWeekEndDate);
         // Break out of the loop if we found something.
         if ($records) break;
       }
