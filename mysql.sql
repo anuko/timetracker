@@ -561,6 +561,22 @@ CREATE TABLE `tt_files` (
 
 
 #
+# Structure for table tt_work_currencies.
+# This table keeps currencies supported by remote work plugin.
+#
+CREATE TABLE `tt_work_currencies` (
+  `id` int(10) unsigned NOT NULL,    # currency id
+  `name` varchar(10) NOT NULL,       # currency name (USD, CAD, etc.)
+  PRIMARY KEY  (`id`)
+);
+
+# Create an index that guarantees unique work currencies.
+create unique index currency_idx on tt_work_currencies(`name`);
+
+INSERT INTO `tt_work_currencies` (`id`, `name`) VALUES ('1', 'USD'), ('2', 'CAD'), ('3', 'AUD'), ('4', 'EUR'), ('5', 'NZD');
+
+
+#
 # Structure for table tt_site_config. This table stores configuration data
 # for Time Tracker site as a whole.
 # For example, database version, code version, site language, etc.
@@ -573,4 +589,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.0', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.2', now()); # TODO: change when structure changes.

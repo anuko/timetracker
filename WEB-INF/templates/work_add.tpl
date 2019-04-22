@@ -5,7 +5,7 @@
       <table cellspacing="1" cellpadding="2" border="0">
         <tr>
           <td align="right">{$i18n.label.thing_name} (*):</td>
-          <td>{$forms.workForm.project_name.control}</td>
+          <td>{$forms.workForm.work_name.control}</td>
         </tr>
         <tr>
           <td align = "right">{$i18n.label.description}:</td>
