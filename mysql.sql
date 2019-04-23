@@ -577,22 +577,23 @@ INSERT INTO `tt_work_currencies` (`id`, `name`) VALUES ('1', 'USD'), ('2', 'CAD'
 
 
 #
-# Structure for table tt_work_categories. WORK IN PROGRESS!
+# Structure for table tt_work_categories.
 # This table keeps work categories supported by remote work plugin.
 #
-# CREATE TABLE `tt_work_categories` (
-#  `id` int(10) unsigned NOT NULL,            # category id
-#  `parent_id` int(10) unsigned default NULL, # parent category id
-#  `level` tinyint(4) default 0,              # sub-category level
-#
-#  Localized name fields below for all supported languages?
-#  `name_en` varhar(64) NOT NULL,             # English.
-#  `name_de` varhar(64) default NULL,         # German.
-#  `name_fr` varhar(64) default NULL,         # French.
-#  `name_ru` varhar(64) default NULL,         # Russian.
-#
-# PRIMARY KEY  (`id`)
-# );
+CREATE TABLE `tt_work_categories` (
+  `id` int(10) unsigned NOT NULL,     # Category id.
+  `parents` text default NULL,        # Comma-separated list of parent ids associated with this category.
+  `name` varchar(64) NOT NULL,        # English category name.
+  `name_localized` text default NULL, # Comma-separated list of localized category names in other languages.
+                                      # Example: es:Codificación,ru:Кодирование.
+  PRIMARY KEY  (`id`)
+);
+
+# Insert some default categories. Table content to be updated at run time, though.
+INSERT INTO `tt_work_categories` (`id`, `parents`, `name`, `name_localized`) VALUES ('1', NULL, 'Coding', 'es:Codificación,ru:Кодирование');
+INSERT INTO `tt_work_categories` (`id`, `parents`, `name`, `name_localized`) VALUES ('2', NULL, 'Other', 'es:Otra,ru:Другое');
+INSERT INTO `tt_work_categories` (`id`, `parents`, `name`, `name_localized`) VALUES ('3', '1', 'PHP', NULL);
+INSERT INTO `tt_work_categories` (`id`, `parents`, `name`, `name_localized`) VALUES ('4', '1', 'C/C++', NULL);
 
 
 #
