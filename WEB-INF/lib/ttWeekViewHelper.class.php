@@ -109,7 +109,7 @@ class ttWeekViewHelper {
   // "cl:546,bl:0,pr:23456,ts:27464,cf_1:7623"
   // The above means client 546, not billable, project 23456, task 27464, custom field option id 7623.
   //
-  // Daily comments are implemented as alternate rows following week durations.
+  // Daily comments are implemented as alternate rows following week durations (when enabled).
   // For example: row_0 - new entry durations, row_1 - new entry daily comments,
   //              row_2 - existing entry durations, row_3 - existing entry comments, etc.
   //
@@ -273,12 +273,14 @@ class ttWeekViewHelper {
       $control_id = '0_'. $dayHeaders[$i];
       $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
     }
-    // Construct the second row for daily comments for a brand new entry.
-    $dataArray[] = array('row_id' => null,'label' => $i18n->get('label.notes').':'); // Insert row.
-    // Insert empty cells with proper control ids.
-    for ($i = 0; $i < 7; $i++) {
-      $control_id = '1_'. $dayHeaders[$i];
-      $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+    if ($user->isPluginEnabled('wvns')) {
+      // Construct the second row for daily comments for a brand new entry.
+      $dataArray[] = array('row_id' => null,'label' => $i18n->get('label.notes').':'); // Insert row.
+      // Insert empty cells with proper control ids.
+      for ($i = 0; $i < 7; $i++) {
+        $control_id = '1_'. $dayHeaders[$i];
+        $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+      }
     }
 
     // Iterate through records and build an "empty" $dataArray.
@@ -297,14 +299,16 @@ class ttWeekViewHelper {
           $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
         }
         // Insert row for comments.
-        $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->get('label.notes').':');
-        $pos++;
-        // Insert empty cells with proper control ids.
-        for ($i = 0; $i < 7; $i++) {
-          $control_id = $pos.'_'. $dayHeaders[$i];
-          $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+        if ($user->isPluginEnabled('wvns')) {
+          $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->get('label.notes').':');
+          $pos++;
+          // Insert empty cells with proper control ids.
+          for ($i = 0; $i < 7; $i++) {
+            $control_id = $pos.'_'. $dayHeaders[$i];
+            $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+          }
+          $pos--;
         }
-        $pos--;
       }
     }
 
