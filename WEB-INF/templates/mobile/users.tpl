@@ -10,13 +10,13 @@
   {if $inactive_users}
         <tr><td class="sectionHeaderNoBorder">{$i18n.label.active_users}</td></tr>
   {/if}
+  {if $active_users}
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.person_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.login}</td>
           <td width="10%" class="tableHeader">{$i18n.form.users.role}</td>
         </tr>
-  {if $active_users}
-    {foreach $active_users as $u}
+      {foreach $active_users as $u}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>
             {if $uncompleted_indicators}

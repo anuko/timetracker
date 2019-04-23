@@ -10,11 +10,11 @@
   {if $inactive_projects}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.projects.active_projects}</td></tr>
   {/if}
+  {if $active_projects}
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
         </tr>
-  {if $active_projects}
     {foreach $active_projects as $project}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td><a href="project_edit.php?id={$project.id}">{$project.name|escape}</a></td>

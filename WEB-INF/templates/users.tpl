@@ -10,23 +10,23 @@
   {if $inactive_users}
         <tr><td class="sectionHeaderNoBorder">{$i18n.label.active_users}</td></tr>
   {/if}
+  {if $active_users}
         <tr>
           <td width="30%" class="tableHeader">{$i18n.label.person_name}</td>
           <td width="30%" class="tableHeader">{$i18n.label.login}</td>
           <td width="20%" class="tableHeader">{$i18n.form.users.role}</td>
-  {if $show_quota}
+    {if $show_quota}
           <td class="tableHeader">{$i18n.label.quota}</td>
-  {/if}
+    {/if}
           <td></td>
           <td></td>
         </tr>
-  {if $active_users}
     {foreach $active_users as $u}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>
-          {if $uncompleted_indicators}
+      {if $uncompleted_indicators}
             <span class="uncompleted-entry{if $u.has_uncompleted_entry} active{/if}"{if $u.has_uncompleted_entry} title="{$i18n.form.users.uncompleted_entry}"{/if}></span>
-          {/if}
+      {/if}
             {$u.name|escape}
           </td>
           <td>{$u.login|escape}</td>
