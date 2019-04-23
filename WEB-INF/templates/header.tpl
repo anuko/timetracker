@@ -59,8 +59,8 @@
       <table id="top_menu_admin" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
-            <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a> &middot;
-            <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a> &middot;
+            <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a>
+            <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a>
             <a class="systemMenu" href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a>
           </td>
         </tr>
@@ -71,7 +71,7 @@
       <table id="sub_menu_admin" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
-            <a class="mainMenu" href="admin_groups.php">{$i18n.menu.groups}</a> &middot;
+            <a class="mainMenu" href="admin_groups.php">{$i18n.menu.groups}</a>
             <a class="mainMenu" href="admin_options.php">{$i18n.menu.options}</a>
           </td>
         </tr>
@@ -82,20 +82,20 @@
       <table id="top_menu_authorized_user" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
-            <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a> &middot;
+            <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a>
     {if $user->exists() && $user->can('manage_own_settings')}
-            <a class="systemMenu" href="profile_edit.php">{$i18n.menu.profile}</a> &middot;
+            <a class="systemMenu" href="profile_edit.php">{$i18n.menu.profile}</a>
     {/if}
     {if $user->can('manage_basic_settings')}
-            <a class="systemMenu" href="group_edit.php">{$i18n.menu.group}</a> &middot;
+            <a class="systemMenu" href="group_edit.php">{$i18n.menu.group}</a>
     {/if}
     {if $user->can('manage_subgroups')}
-            <a class="systemMenu" href="groups.php">{$i18n.menu.subgroups}</a> &middot;
+            <a class="systemMenu" href="groups.php">{$i18n.menu.subgroups}</a>
     {/if}
     {if $user->can('manage_features')}
-            <a class="systemMenu" href="plugins.php">{$i18n.menu.plugins}</a> &middot;
+            <a class="systemMenu" href="plugins.php">{$i18n.menu.plugins}</a>
     {/if}
-            <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a> &middot;
+            <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a>
             <a class="systemMenu" href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a>
           </td>
         </tr>
@@ -110,39 +110,39 @@
            <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
     {/if}
     {if $user->exists() && $user->isPluginEnabled('ex') && ($user->can('track_own_expenses') || $user->can('track_expenses'))}
-            &middot; <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
+           <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
     {/if}
     {if $user->exists() && ($user->can('view_own_reports') || $user->can('view_reports') || $user->can('view_all_reports') || $user->can('view_client_reports'))}
-      {if !$user->isClient()}&middot;{/if} <a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a>
+           <a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a>
     {/if}
     {if $user->exists() && $user->isPluginEnabled('ts') && ($user->can('track_own_time') || $user->can('track_time'))}
-            &middot; <a class="mainMenu" href="timesheets.php">{$i18n.menu.timesheets}</a>
+           <a class="mainMenu" href="timesheets.php">{$i18n.menu.timesheets}</a>
     {/if}
     {if $user->exists() && $user->isPluginEnabled('iv') && ($user->can('manage_invoices') || $user->can('view_client_invoices'))}
-            &middot; <a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a>
+           <a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a>
     {/if}
     {if ($user->exists() && $user->isPluginEnabled('ch') && ($user->can('view_own_charts') || $user->can('view_charts'))) &&
         ($smarty.const.MODE_PROJECTS == $user->getTrackingMode() || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode() ||
         $user->isPluginEnabled('cl'))}
-            &middot; <a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a>
+           <a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a>
     {/if}
     {if ($user->can('view_own_projects') || $user->can('manage_projects')) && ($smarty.const.MODE_PROJECTS == $user->getTrackingMode() || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode())}
-            &middot; <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
+           <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
     {/if}
     {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode() && ($user->can('view_own_tasks') || $user->can('manage_tasks')))}
-            &middot; <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
+           <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
     {/if}
     {if $user->can('view_users') || $user->can('manage_users')}
-            &middot; <a class="mainMenu" href="users.php">{$i18n.menu.users}</a>
+           <a class="mainMenu" href="users.php">{$i18n.menu.users}</a>
     {/if}
     {if $user->isPluginEnabled('cl') && ($user->can('view_own_clients') || $user->can('manage_clients'))}
-            &middot; <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
+           <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
     {/if}
     {if $user->isPluginEnabled('wk') && ($user->can('update_work') || $user->can('bid_on_work') || $user->can('manage_work')) && $user->exists()}
-            &middot; <a class="mainMenu" href="work.php">{$i18n.title.work}</a>
+           <a class="mainMenu" href="work.php">{$i18n.title.work}</a>
     {/if}
     {if $user->can('export_data')}
-            &middot; <a class="mainMenu" href="export.php">{$i18n.menu.export}</a>
+           <a class="mainMenu" href="export.php">{$i18n.menu.export}</a>
     {/if}
           </td>
         </tr>
@@ -154,11 +154,11 @@
       <table id="top_menu_non_authorized_user" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
-            <a class="systemMenu" href="login.php">{$i18n.menu.login}</a> &middot;
+            <a class="systemMenu" href="login.php">{$i18n.menu.login}</a>
   {if isTrue('MULTITEAM_MODE') && $smarty.const.AUTH_MODULE == 'db'}
-            <a class="systemMenu" href="register.php">{$i18n.menu.create_group}</a> &middot;
+            <a class="systemMenu" href="register.php">{$i18n.menu.create_group}</a>
   {/if}
-            <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a> &middot;
+            <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a>
             <a class="systemMenu" href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a>
           </td>
         </tr>

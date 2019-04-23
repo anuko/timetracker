@@ -61,7 +61,7 @@
       <table id="sub_menu_admin" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td align="center" bgcolor="#d9d9d9" height="17" style="background-repeat: repeat-x;" background="../images/subm_bg.gif">&nbsp;
-            <a class="mainMenu" href="admin_groups.php">{$i18n.menu.groups}</a> &middot;
+            <a class="mainMenu" href="admin_groups.php">{$i18n.menu.groups}</a>
             <a class="mainMenu" href="admin_options.php">{$i18n.menu.options}</a>
           </td>
         </tr>
@@ -77,19 +77,19 @@
            <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
     {/if}
     {if $user->exists() && $user->isPluginEnabled('ex') && ($user->can('track_own_expenses') || $user->can('track_expenses'))}
-            &middot; <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
+           <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
     {/if}
     {if ($user->can('view_own_projects') || $user->can('manage_projects')) && ($smarty.const.MODE_PROJECTS == $user->getTrackingMode() || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode())}
-            &middot; <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
+           <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
     {/if}
     {if ($user->can('view_own_tasks') || $user->can('manage_tasks')) && $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode()}
-            &middot; <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
+           <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
     {/if}
     {if $user->can('view_users') || $user->can('manage_users')}
-            &middot; <a class="mainMenu" href="users.php">{$i18n.menu.users}</a>
+           <a class="mainMenu" href="users.php">{$i18n.menu.users}</a>
     {/if}
     {if $user->isPluginEnabled('cl') && ($user->can('view_own_clients') || $user->can('manage_clients'))}
-            &middot; <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
+           <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
     {/if}
           </td>
         </tr>
