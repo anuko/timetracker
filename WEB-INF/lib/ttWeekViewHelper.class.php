@@ -354,7 +354,7 @@ class ttWeekViewHelper {
     }
     // Convert minutes to hh:mm for display.
     foreach($dayHeaders as $dayHeader) {
-      $dayTotals[$dayHeader] = ttTimeHelper::minutesToDuration($dayTotals[$dayHeader]); // This breaks for negative hours.
+      $dayTotals[$dayHeader] = ttTimeHelper::minutesToDuration($dayTotals[$dayHeader]);
     }
     return $dayTotals;
   }
@@ -579,8 +579,14 @@ class ttWeekViewHelper {
     }
 
     // We do have start time.
-    // Quick test if new duration is less then already existing.
     $newMinutes = ttTimeHelper::toMinutes($new_duration);
+    if ($newMinutes < 0) {
+      // Negative durations are not supported when start time is defined.
+      $err->add($i18n->get('error.field'), $i18n->get('label.duration'));
+      return false;
+    }
+
+    // Quick test if new duration is less than already existing.
     $oldMinutes = ttTimeHelper::toMinutes($oldDuration);
     if ($newMinutes < $oldMinutes)
       return true; // Safe to modify.
