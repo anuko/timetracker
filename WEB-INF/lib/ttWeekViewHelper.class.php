@@ -354,7 +354,7 @@ class ttWeekViewHelper {
     }
     // Convert minutes to hh:mm for display.
     foreach($dayHeaders as $dayHeader) {
-      $dayTotals[$dayHeader] = ttTimeHelper::toAbsDuration($dayTotals[$dayHeader]);
+      $dayTotals[$dayHeader] = ttTimeHelper::minutesToDuration($dayTotals[$dayHeader]); // This breaks for negative hours.
     }
     return $dayTotals;
   }
