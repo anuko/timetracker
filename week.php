@@ -57,6 +57,7 @@ if (!$user->behalf_id && !$user->can('track_own_time') && !$user->adjustBehalfId
 }
 // End of access checks.
 
+$showClient = $user->isPluginEnabled('cl');
 $showFiles = $user->isPluginEnabled('at');
 
 // Initialize and store date in session.
@@ -509,7 +510,8 @@ $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('timestring', $startDate->toString($user->date_format).' - '.$endDate->toString($user->date_format));
 $smarty->assign('time_records', $records);
 $smarty->assign('show_navigation', !$user->getConfigOption('menu_week'));
+$smarty->assign('show_client', $showClient);
 $smarty->assign('show_files', $showFiles);
-$smarty->assign('title', $i18n->get('title.time'));
+$smarty->assign('title', $i18n->get('menu.week'));
 $smarty->assign('content_page_name', 'week.tpl');
 $smarty->display('index.tpl');

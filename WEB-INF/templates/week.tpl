@@ -39,7 +39,7 @@ function fillDropdowns() {
           <td>{$forms.weekTimeForm.onBehalfUser.control}</td>
         </tr>
 {/if}
-{if $user->isPluginEnabled('cl')}
+{if $show_client}
         <tr>
           <td align="right">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}:</td>
           <td>{$forms.weekTimeForm.client.control}</td>
