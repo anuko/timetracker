@@ -508,6 +508,7 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('timestring', $startDate->toString($user->date_format).' - '.$endDate->toString($user->date_format));
 $smarty->assign('time_records', $records);
+$smarty->assign('show_navigation', !$user->getConfigOption('menu_week'));
 $smarty->assign('show_files', $showFiles);
 $smarty->assign('title', $i18n->get('title.time'));
 $smarty->assign('content_page_name', 'week.tpl');

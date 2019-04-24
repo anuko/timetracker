@@ -108,6 +108,9 @@
           <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
     {if $user->exists() && ($user->can('track_own_time') || $user->can('track_time'))}
            <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
+      {if $user->isPluginEnabled('wv') && $user->getConfigOption('menu_week')}
+           <a class="mainMenu" href="week.php">{$i18n.menu.week}</a>
+      {/if}
     {/if}
     {if $user->exists() && $user->isPluginEnabled('ex') && ($user->can('track_own_expenses') || $user->can('track_expenses'))}
            <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>

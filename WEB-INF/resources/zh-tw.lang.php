@@ -51,6 +51,7 @@ $i18n_key_words = array(
 // 'menu.group' => 'Group',
 // 'menu.plugins' => 'Plugins',
 // 'menu.time' => 'Time',
+// 'menu.week' => 'Week',
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => '報告',
 // TODO: translate the following.
@@ -662,5 +663,6 @@ $i18n_key_words = array(
 
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
 // TODO: translate the following.
+// 'form.display_options.menu' => 'Menu',
 // 'form.display_options.note_on_separate_row' => 'Note on separate row',
 );

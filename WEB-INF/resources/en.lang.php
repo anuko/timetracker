@@ -50,6 +50,7 @@ $i18n_key_words = array(
 'menu.subgroups' => 'Subgroups',
 'menu.plugins' => 'Plugins',
 'menu.time' => 'Time',
+'menu.week' => 'Week',
 'menu.expenses' => 'Expenses',
 'menu.reports' => 'Reports',
 'menu.timesheets' => 'Timesheets',
@@ -590,5 +591,6 @@ $i18n_key_words = array(
 'form.timesheet_view.disapprove_body' => "Your timesheet %s was not approved.<p>%s",
 
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
+'form.display_options.menu' => 'Menu',
 'form.display_options.note_on_separate_row' => 'Note on separate row',
 );

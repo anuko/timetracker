@@ -49,6 +49,7 @@ $i18n_key_words = array(
 'menu.group' => 'Группа',
 'menu.plugins' => 'Плагины',
 'menu.time' => 'Время',
+'menu.week' => 'Неделя',
 'menu.expenses' => 'Расходы',
 'menu.reports' => 'Отчёты',
 'menu.timesheets' => 'Табели',
@@ -581,5 +582,6 @@ $i18n_key_words = array(
 'form.timesheet_view.disapprove_body' => "Ваш табель %s не одобрен.<p>%s",
 
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
+'form.display_options.menu' => 'Меню',
 'form.display_options.note_on_separate_row' => 'Комментарий в отдельном ряду',
 );
