@@ -29,7 +29,7 @@
 require_once('initialize.php');
 import('form.Form');
 
-if (!isTrue('MULTITEAM_MODE') || $auth->isPasswordExternal()) {
+if (!isTrue('MULTIORG_MODE') || $auth->isPasswordExternal()) {
   header('Location: login.php');
   exit();
 }

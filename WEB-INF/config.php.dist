@@ -42,12 +42,12 @@ define('DSN', 'mysqli://root:no@localhost/dbname?charset=utf8mb4');
 // and now you see some corrupted characters. See http://dev.mysql.com/doc/refman/5.0/en/charset-mysql.html
 
 
-// MULTITEAM_MODE option defines whether users can create their own top groups (organizations).
+// MULTIORG_MODE option defines whether users can create their own top groups (organizations).
 // When false, a Time Tracker server is managed by admin, who creates top groups (one or many).
 //
 // Available values are true or false.
 //
-define('MULTITEAM_MODE', true);
+define('MULTIORG_MODE', true);
 
 
 // Application name.

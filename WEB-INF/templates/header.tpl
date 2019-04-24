@@ -155,7 +155,7 @@
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
             <a class="systemMenu" href="login.php">{$i18n.menu.login}</a>
-  {if isTrue('MULTITEAM_MODE') && $smarty.const.AUTH_MODULE == 'db'}
+  {if isTrue('MULTIORG_MODE') && $smarty.const.AUTH_MODULE == 'db'}
             <a class="systemMenu" href="register.php">{$i18n.menu.create_group}</a>
   {/if}
             <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a>
