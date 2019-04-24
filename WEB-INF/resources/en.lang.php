@@ -579,7 +579,7 @@ $i18n_key_words = array(
 'role.top_manager.description' => 'Top group manager. Can do everything in a tree of groups.',
 'role.admin.label' => 'Administrator',
 'role.admin.low_case_label' => 'administrator',
-'role.admin.description' => 'Site adminsitrator.',
+'role.admin.description' => 'Site administrator.',
 
 // Timesheet View form. See example at https://timetracker.anuko.com/timesheet_view.php.
 'form.timesheet_view.submit_subject' => 'Timesheet approval request',

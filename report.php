@@ -91,7 +91,7 @@ $options = ttReportHelper::getReportOptions($bean);
 // - We can sssign items to invoices.
 // - We can assign items to a timesheet.
 // Determine these conditions separately.
-if ($bean->getAttribute('chapproved') && ($user->can('approve_reports') || $user->can('approve_all_eports')))
+if ($bean->getAttribute('chapproved') && ($user->can('approve_reports') || $user->can('approve_all_reports')))
   $useMarkApproved = true;
 if ($bean->getAttribute('chpaid') && $user->can('manage_invoices'))
   $useMarkPaid = true;
