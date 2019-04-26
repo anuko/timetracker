@@ -35,6 +35,7 @@ CREATE TABLE `tt_groups` (
   `plugins` varchar(255) default NULL,                   # a list of enabled plugins for group
   `lock_spec` varchar(255) default NULL,                 # Cron specification for record locking,
                                                          # for example: "0 10 * * 1" for "weekly on Mon at 10:00".
+  `holidays` text default NULL,                          # holidays specification
   `workday_minutes` smallint(4) default 480,             # number of work minutes in a regular working day
   `custom_logo` tinyint(4) default 0,                    # whether to use a custom logo or not
   `config` text default NULL,                            # miscellaneous group configuration settings
@@ -609,4 +610,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.3', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.4', now()); # TODO: change when structure changes.
