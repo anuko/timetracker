@@ -533,6 +533,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.group_edit.display_options' => 'Display options',
 'form.group_edit.show_holidays' => 'Zeige Feiertage',
+// TODO: translate the following.
+// 'form.group_edit.holidays' => 'Holidays',
 'form.group_edit.tracking_mode' => 'Nachverfolgung',
 'form.group_edit.mode_time' => 'Zeit',
 'form.group_edit.mode_projects' => 'Projekte',

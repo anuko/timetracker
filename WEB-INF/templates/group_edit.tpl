@@ -78,6 +78,12 @@ function handleTaskRequiredCheckbox() {
             <td align="right" nowrap>{$i18n.form.group_edit.show_holidays}:</td>
             <td>{$forms.groupForm.show_holidays.control} <a href="https://www.anuko.com/lp/tt_14.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
+{if isTrue('HOLIDAYS_DEBUG')}
+          <tr>
+            <td align="right" nowrap>{$i18n.form.group_edit.holidays}:</td>
+            <td>{$forms.groupForm.holidays.control} <a href="https://www.anuko.com/lp/tt_14.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+          </tr>
+{/if}
           <tr>
             <td align="right" nowrap>{$i18n.form.group_edit.tracking_mode}:</td>
             <td>{$forms.groupForm.tracking_mode.control} {$forms.groupForm.task_required.control} <span id="task_required_label"><label for="task_required">{$i18n.label.required}</label></span></td>

@@ -510,6 +510,7 @@ $i18n_key_words = array(
 'form.group_edit.24_hours' => '24 часа',
 'form.group_edit.display_options' => 'Опции отображения',
 'form.group_edit.show_holidays' => 'Показывать праздники',
+'form.group_edit.holidays' => 'Праздники',
 'form.group_edit.tracking_mode' => 'Режим работы',
 'form.group_edit.mode_time' => 'время',
 'form.group_edit.mode_projects' => 'проекты',

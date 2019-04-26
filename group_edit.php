@@ -181,6 +181,7 @@ $form->addInput(array('type'=>'combobox','name'=>'start_week','style'=>'width: 1
 
 // Show holidays checkbox.
 $form->addInput(array('type'=>'checkbox','name'=>'show_holidays','value'=>$cl_show_holidays));
+$form->addInput(array('type'=>'text','name'=>'holidays','value'=>$cl_holidays));
 
 // Prepare tracking mode choices.
 $tracking_mode_options = array();
