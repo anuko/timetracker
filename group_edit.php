@@ -86,6 +86,7 @@ if ($request->isPost() && !$groupChanged) {
   $cl_time_format = $request->getParameter('time_format');
   $cl_start_week = $request->getParameter('start_week');
   $cl_show_holidays = $request->getParameter('show_holidays');
+  $cl_holidays = trim($request->getParameter('holidays'));
   $cl_tracking_mode = $request->getParameter('tracking_mode');
   $cl_project_required = $request->getParameter('project_required');
   $cl_task_required = $request->getParameter('task_required');
@@ -107,6 +108,7 @@ if ($request->isPost() && !$groupChanged) {
   $cl_time_format = $group['time_format'];
   $cl_start_week = $group['week_start'];
   $cl_show_holidays = $config->getDefinedValue('show_holidays');
+  $cl_holidays = $group['holidays'];
   $cl_tracking_mode = $group['tracking_mode'];
   $cl_project_required = $group['project_required'];
   $cl_task_required = $group['task_required'];
@@ -238,6 +240,7 @@ if ($request->isPost()) {
     if (!ttValidString($cl_group)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
     if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
     if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));
+    if (!ttValidHolidays($cl_holidays)) $err->add($i18n->get('error.field'), $i18n->get('form.group_edit.holidays'));
     if ($advanced_settings) {
       if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
       if (!ttValidIP($cl_allow_ip, true)) $err->add($i18n->get('error.field'), $i18n->get('form.group_edit.allow_ip'));
@@ -263,6 +266,7 @@ if ($request->isPost()) {
         'date_format' => $cl_date_format,
         'time_format' => $cl_time_format,
         'week_start' => $cl_start_week,
+        'holidays' => $cl_holidays,
         'tracking_mode' => $cl_tracking_mode,
         'project_required' => $cl_project_required,
         'task_required' => $cl_task_required,

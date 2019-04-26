@@ -349,6 +349,23 @@ function ttValidIP($val, $emptyValid = false)
   return true;
 }
 
+// ttValidHolidays is used to check user input to validate holidays spec.
+// To keep things simple, the format is a comma-separated list of dates:
+// ****-01-01,****-12-31,2019-04-20
+// The above means Jan 1 and Dec 31 are holidays in all years, while Apr 20 is only in 2019.
+function ttValidHolidays($val)
+{
+  $val = trim($val);
+  if (strlen($val) == 0) return true;
+
+  $dates = explode(',', $val);
+  foreach ($dates as $date) {
+    if (!preg_match('/^[\d*]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/', $date))
+      return false;
+  }
+  return true;
+}
+
 // ttAccessAllowed checks whether user is allowed access to a particular page.
 // It is used as an initial check on all publicly available pages
 // (except login.php, register.php, and others where we don't have to check).
