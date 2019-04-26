@@ -68,7 +68,11 @@ class ttUser {
   var $password_complexity = null; // Password complexity example.
   var $currency = null;         // Currency.
   var $plugins = null;          // Comma-separated list of enabled plugins.
+
+  // Refactoring ongoing. Towards using helper instead of config string?
   var $config = null;           // Comma-separated list of miscellaneous config options.
+  var $configHelper = null;     // An instance of ttConfigHelper class.
+
   var $custom_logo = 0;         // Whether to use a custom logo for group.
   var $lock_spec = null;        // Cron specification for record locking.
   var $workday_minutes = 480;   // Number of work minutes in a regular day.
@@ -137,13 +141,15 @@ class ttUser {
       $this->workday_minutes = $val['workday_minutes'];
       $this->custom_logo = $val['custom_logo'];
 
+      // TODO: refactor this.
       $this->config = $val['config'];
-      $config = new ttConfigHelper($this->config);
+      $this->configHelper = new ttConfigHelper($val['config']);
+
       // Set user config options.
-      $this->show_holidays = $config->getDefinedValue('show_holidays');
-      $this->punch_mode = $config->getDefinedValue('punch_mode');
-      $this->allow_overlap = $config->getDefinedValue('allow_overlap');
-      $this->future_entries = $config->getDefinedValue('future_entries');
+      $this->show_holidays = $this->configHelper->getDefinedValue('show_holidays');
+      $this->punch_mode = $this->configHelper->getDefinedValue('punch_mode');
+      $this->allow_overlap = $this->configHelper->getDefinedValue('allow_overlap');
+      $this->future_entries = $this->configHelper->getDefinedValue('future_entries');
       
       // Set "on behalf" id and name (user).
       if (isset($_SESSION['behalf_id'])) {
@@ -229,7 +235,7 @@ class ttUser {
 
   // getConfig returns config string for active group.
   function getConfig() {
-    return ($this->behalfGroup ? $this->behalfGroup->config : $this->config);
+    return ($this->behalfGroup ? $this->behalfGroup->configHelper->getConfig() : $this->configHelper->getConfig());
   }
 
   // getConfigOption returns true if an option is defined for group.
@@ -261,6 +267,19 @@ class ttUser {
   function isPluginEnabled($plugin)
   {
     return in_array($plugin, explode(',', $this->getPlugins()));
+  }
+
+  // isOptionEnabled checks whether a config option is enabled for user.
+  function isOptionEnabled($option)
+  {
+    return $this->behalfGroup ? $this->behalfGroup->configHelper->getDefinedValue($option) : $this->configHelper->getDefinedValue($option);
+  }
+
+  // setOption sets an option inside of ttConfigHelper instance.
+  // Note that it does not write to the database.
+  function setOption($option, $enable = true)
+  {
+    return $this->behalfGroup ? $this->behalfGroup->configHelper->setDefinedValue($option, $enable) : $this->configHelper->setDefinedValue($option, $enable);
   }
 
   // getAssignedProjects - returns an array of assigned projects.

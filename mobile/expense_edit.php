@@ -155,7 +155,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get(
 
 if ($request->isPost()) {
   // Validate user input.
-  if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
+  if ($user->isPluginEnabled('cl') && $user->isOptionEnabled('client_required') && !$cl_client)
     $err->add($i18n->get('error.client'));
   if ($show_project && !$cl_project)
     $err->add($i18n->get('error.project'));

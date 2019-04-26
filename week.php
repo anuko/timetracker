@@ -349,7 +349,7 @@ if ($request->isPost()) {
       }
     }
     if ($newEntryPosted) {
-      if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
+      if ($user->isPluginEnabled('cl') && $user->isOptionEnabled('client_required') && !$cl_client)
         $err->add($i18n->get('error.client'));
       if ($custom_fields) {
         if (!ttValidString($cl_cf_1, !$custom_fields->fields[0]['required'])) $err->add($i18n->get('error.field'), $custom_fields->fields[0]['label']);

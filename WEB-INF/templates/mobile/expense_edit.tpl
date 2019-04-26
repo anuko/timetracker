@@ -134,7 +134,7 @@ function recalculateCost() {
     <table border="0">
 {if $user->isPluginEnabled('cl')}
     <tr>
-      <td align="right">{$i18n.label.client} {if $user->isPluginEnabled('cm')}(*){/if}:</td>
+      <td align="right">{$i18n.label.client} {if $user->isOptionEnabled('client_required')}(*){/if}:</td>
       <td>{$forms.expenseItemForm.client.control}</td>
     </tr>
 {/if}

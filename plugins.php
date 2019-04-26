@@ -62,7 +62,7 @@ if ($request->isPost()) {
   $plugins = explode(',', $user->getPlugins());
   $cl_charts = in_array('ch', $plugins);
   $cl_clients = in_array('cl', $plugins);
-  $cl_client_required = in_array('cm', $plugins);
+  $cl_client_required = $user->isOptionEnabled('client_required');
   $cl_invoices = in_array('iv', $plugins);
   $cl_paid_status = in_array('ps', $plugins);
   $cl_custom_fields = in_array('cf', $plugins);
@@ -114,8 +114,6 @@ if ($request->isPost()) {
     $plugins .= ',ch';
   if ($cl_clients)
      $plugins .= ',cl';
-  if ($cl_client_required)
-    $plugins .= ',cm';
   if ($cl_invoices)
     $plugins .= ',iv';
   if ($cl_paid_status)
@@ -158,8 +156,14 @@ if ($request->isPost()) {
 
   $plugins = trim($plugins, ',');
 
+  // Prepare a new config string.
+  $user->setOption('client_required', $cl_client_required);
+  $user->setOption('tax_expenses', $cl_tax_expenses);
+  $config = $user->getConfig();
+
   if ($user->updateGroup(array(
-    'plugins' => $plugins))) {
+    'plugins' => $plugins,
+    'config' => $config))) {
     header('Location: success.php');
     exit();
   } else

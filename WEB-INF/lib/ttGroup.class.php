@@ -54,7 +54,10 @@ class ttGroup {
   var $password_complexity = null; // Password complexity example.
   var $currency = null;         // Currency.
   var $plugins = null;          // Comma-separated list of enabled plugins.
+
   var $config = null;           // Comma-separated list of miscellaneous config options.
+  var $configHelper = null;     // An instance of ttConfigHelper class.
+
   var $custom_logo = 0;         // Whether to use a custom logo for group.
   var $lock_spec = null;        // Cron specification for record locking.
   var $workday_minutes = 480;   // Number of work minutes in a regular day.
@@ -104,13 +107,15 @@ class ttGroup {
       /*
       $this->custom_logo = $val['custom_logo'];
       */
+
+      // TODO: refactor this.
       $this->config = $val['config'];
-      $config = new ttConfigHelper($this->config);
+      $this->configHelper = new ttConfigHelper($val['config']);
       // Set user config options.
-      $this->show_holidays = $config->getDefinedValue('show_holidays');
-      $this->punch_mode = $config->getDefinedValue('punch_mode');
-      $this->allow_overlap = $config->getDefinedValue('allow_overlap');
-      $this->future_entries = $config->getDefinedValue('future_entries');
+      $this->show_holidays = $this->configHelper->getDefinedValue('show_holidays');
+      $this->punch_mode = $this->configHelper->getDefinedValue('punch_mode');
+      $this->allow_overlap = $this->configHelper->getDefinedValue('allow_overlap');
+      $this->future_entries = $this->configHelper->getDefinedValue('future_entries');
     }
 
     // Determine active user count in a separate query.
