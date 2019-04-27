@@ -40,22 +40,6 @@ class ttTimeHelper {
   // isHoliday determines if $date falls on a holiday.
   static function isHoliday($date) {
     global $user;
-    global $i18n;
-
-    if (!$user->show_holidays) return false;
-
-    // $date is expected as string in DB_DATEFORMAT.
-    $month = date('m', strtotime($date));
-    $day = date('d', strtotime($date));
-    if (in_array($month.'/'.$day, $i18n->holidays))
-      return true;
-
-    return false;
-  }
-
-  // isHoliday determines if $date falls on a holiday.
-  static function isHoliday2($date) {
-    global $user;
 
     $holidays = $user->getHolidays();
     if (!$holidays)
@@ -86,6 +70,16 @@ class ttTimeHelper {
      return false;
 
     return true;
+  }
+
+  // dateInDatabaseFormat prepares a date string in DB_DATEFORMAT out of year, month, and day.
+  static function dateInDatabaseFormat($year, $month, $day) {
+    $date = "$year-";
+    if (strlen($month) == 1) $date .= '0';
+    $date .= "$month-";
+    if (strlen($day) == 1) $date .= '0';
+    $date .= $day;
+    return $date;
   }
 
   // isValidTime validates a value as a time string.

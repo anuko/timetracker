@@ -104,7 +104,7 @@ class MonthlyQuota {
     // Iterate from 1st up to selected date.
     $workdaysFrom1st = 0;
     for ($i = 1; $i <= $selected_date->mDate; $i++) {
-      $date = "$selected_date->mYear-$selected_date->mMonth-$i";
+      $date = ttTimeHelper::dateInDatabaseFormat($selected_date->mYear, $selected_date->mMonth, $i);
       if (!ttTimeHelper::isWeekend($date) && !ttTimeHelper::isHoliday($date)) {
         $workdaysFrom1st++;
       }
@@ -139,6 +139,7 @@ class MonthlyQuota {
     // Iterate through the entire month.
     for ($i = 1; $i <= $daysInMonth; $i++) {
       $date = "$year-$month-$i";
+      $date = ttTimeHelper::dateInDatabaseFormat($year, $month, $i);
       if (!ttTimeHelper::isWeekend($date) && !ttTimeHelper::isHoliday($date)) {
         $workdaysInMonth++;
       }
