@@ -75,6 +75,7 @@ class ttUser {
 
   var $custom_logo = 0;         // Whether to use a custom logo for group.
   var $lock_spec = null;        // Cron specification for record locking.
+  var $holidays = null;         // Holidays specification.
   var $workday_minutes = 480;   // Number of work minutes in a regular day.
   var $rights = array();        // An array of user rights such as 'track_own_time', etc.
   var $is_client = false;       // Whether user is a client as determined by missing 'track_own_time' right.
@@ -94,7 +95,7 @@ class ttUser {
     $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id,".
       " u.quota_percent, u.email, g.org_id, g.name as group_name, g.currency, g.lang, g.decimal_mark, g.date_format,".
       " g.time_format, g.week_start, g.tracking_mode, g.project_required, g.task_required, g.record_type,".
-      " g.bcc_email, g.allow_ip, g.password_complexity, g.plugins, g.config, g.lock_spec, g.workday_minutes, g.custom_logo".
+      " g.bcc_email, g.allow_ip, g.password_complexity, g.plugins, g.config, g.lock_spec, g.holidays, g.workday_minutes, g.custom_logo".
       " FROM tt_users u LEFT JOIN tt_groups g ON (u.group_id = g.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
     if ($id)
       $sql .= "u.id = $id";
@@ -138,6 +139,7 @@ class ttUser {
       $this->currency = $val['currency'];
       $this->plugins = $val['plugins'];
       $this->lock_spec = $val['lock_spec'];
+      $this->holidays = $val['holidays'];
       $this->workday_minutes = $val['workday_minutes'];
       $this->custom_logo = $val['custom_logo'];
 
@@ -226,6 +228,11 @@ class ttUser {
   // getLockSpec returns lock specification for active group.
   function getLockSpec() {
     return ($this->behalfGroup ? $this->behalfGroup->lock_spec : $this->lock_spec);
+  }
+
+  // getHolidays returns holidays specification for active group.
+  function getHolidays() {
+    return ($this->behalfGroup ? $this->behalfGroup->holidays : $this->holidays);
   }
 
   // getWorkdayMinutes returns workday_minutes for active group.

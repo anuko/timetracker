@@ -60,6 +60,7 @@ class ttGroup {
 
   var $custom_logo = 0;         // Whether to use a custom logo for group.
   var $lock_spec = null;        // Cron specification for record locking.
+  var $holidays = null;         // Holidays specification.
   var $workday_minutes = 480;   // Number of work minutes in a regular day.
 
   var $active_users = 0;        // Count of active users in group.
@@ -103,6 +104,7 @@ class ttGroup {
       $this->currency = $val['currency'];
       $this->plugins = $val['plugins'];
       $this->lock_spec = $val['lock_spec'];
+      $this->holidays = $val['holidays'];
       $this->workday_minutes = $val['workday_minutes'];
       /*
       $this->custom_logo = $val['custom_logo'];

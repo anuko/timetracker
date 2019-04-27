@@ -53,6 +53,41 @@ class ttTimeHelper {
     return false;
   }
 
+  // isHoliday determines if $date falls on a holiday.
+  static function isHoliday2($date) {
+    global $user;
+
+    $holidays = $user->getHolidays();
+    if (!$holidays)
+      return false;
+
+    $holiday_dates = explode(',', $holidays);
+    foreach ($holiday_dates as $holiDateSpec) {
+      if (ttTimeHelper::holidayMatch($date, $holiDateSpec))
+        return true;
+    }
+    return false;
+  }
+
+  // holidayMatch determines if $date matches a single $holiDateSpec.
+  static function holidayMatch($date, $holiDateSpec) {
+
+   $dateArray = explode('-', $date);
+   $holiDateSpecArray = explode('-', $holiDateSpec);
+
+   // Check year.
+   if ($dateArray[0] != $holiDateSpecArray[0] && $holiDateSpecArray[0] != '****') // **** means all years.
+     return false;
+   // Check month.
+   if ($dateArray[1] != $holiDateSpecArray[1])
+     return false;
+   // Check day.
+   if ($dateArray[2] != $holiDateSpecArray[2])
+     return false;
+
+    return true;
+  }
+
   // isValidTime validates a value as a time string.
   static function isValidTime($value) {
     if (strlen($value)==0 || !isset($value)) return false;

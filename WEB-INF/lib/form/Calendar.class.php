@@ -171,15 +171,18 @@ class Calendar extends FormElement {
               $stl_cell = ' class="CalendarDay"';
             }
 
-              // holidays
-              global $user;
-              if ($user->isOptionEnabled('show_holidays')) {
-              foreach ($this->holidays as $day) {
-                if($day == $date) {
-                  $stl_cell = ' class="CalendarDayHoliday"';
-                  $stl_link = ' class="CalendarLinkHoliday"';
-                }
-              }
+            // Handle holidays.
+            // Prepare a date to check in DB_DATEFORMAT.
+            $date_to_check = "$thisyear-";
+            if (strlen($thismonth) == 1) $date_to_check .= '0';
+            $date_to_check .= "$thismonth-";
+            if (strlen($start_date+$j) == 1) $date_to_check .= '0';
+            $date_to_check .= $start_date+$j;
+
+            // Check if it falls on a holiday.
+            if (ttTimeHelper::isHoliday2($date_to_check)) {
+              $stl_cell = ' class="CalendarDayHoliday"';
+              $stl_link = ' class="CalendarLinkHoliday"';
             }
 
             // selected day
