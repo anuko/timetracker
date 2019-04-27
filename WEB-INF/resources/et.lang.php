@@ -35,8 +35,6 @@ $i18n_language = 'Estonian (Eesti)';
 $i18n_months = array('Jaanuar', 'Veebruar', 'Märts', 'Aprill', 'Mai', 'Juuni', 'Juuli', 'August', 'September', 'Oktoober', 'November', 'Detsember');
 $i18n_weekdays = array('Pühapäev', 'Esmaspäev', 'Teisipäev', 'Kolmapäev', 'Neljapäev', 'Reede', 'Laupäev');
 $i18n_weekdays_short = array('P', 'E', 'T', 'K', 'N', 'R', 'L');
-// format mm/dd
-$i18n_holidays = array('01/01', '02/24', '04/19', '04/21', '05/01', '06/09', '06/23', '06/24', '08/20', '12/24', '12/25', '12/26');
 
 $i18n_key_words = array(
 

@@ -34,8 +34,6 @@ $i18n_months = array('Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli'
 $i18n_weekdays = array('Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag');
 // TODO: check translation of $i18n_weekdays_short.
 $i18n_weekdays_short = array('Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø');
-// format mm/dd
-$i18n_holidays = array('01/01', '04/05', '04/09', '04/10', '04/12', '04/13', '05/01', '05/17', '05/21', '05/31', '06/01', '12/25', '12/26');
 
 $i18n_key_words = array(
 

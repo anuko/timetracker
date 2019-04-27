@@ -33,8 +33,6 @@ $i18n_language = 'Hebrew (עברית)';
 $i18n_months = array('ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר');
 $i18n_weekdays = array('ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת');
 $i18n_weekdays_short = array('א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז');
-// format mm/dd
-$i18n_holidays = array('02/10', '04/09', '04/15', '04/29', '05/29', '09/19', '09/20', '09/28', '10/03', '10/10');
 
 $i18n_key_words = array(
 'language.rtl' => 'true', // Right-to-left language. Do not remove this line from RTL language files. This is the only string that is not found in the master English file.

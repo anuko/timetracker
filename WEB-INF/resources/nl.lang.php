@@ -33,8 +33,6 @@ $i18n_language = 'Dutch (Nederlands)';
 $i18n_months = array('Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December');
 $i18n_weekdays = array('Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag');
 $i18n_weekdays_short = array('Zo', 'Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za');
-// format mm/dd
-$i18n_holidays = array('01/01', '04/09', '04/30', '05/18', '05/28', '12/25', '12/26');
 
 $i18n_key_words = array(
 

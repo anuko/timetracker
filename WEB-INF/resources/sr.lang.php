@@ -33,8 +33,6 @@ $i18n_language = 'Serbian (Srpski)';
 $i18n_months = array('Januar', 'Februar', 'Mart', 'April', 'Maj', 'Jun', 'Jul', 'Avgust', 'Septembar', 'Oktobar', 'Novembar', 'Decembar');
 $i18n_weekdays = array('Nedelja', 'Ponedeljak', 'Utorak', 'Sreda', 'Četvrtak', 'Petak', 'Subota');
 $i18n_weekdays_short = array('Ne', 'Po', 'Ut', 'Sr', 'Če', 'Pe', 'Su');
-// format dd/mm
-$i18n_holidays = array('01/01', '02/01', '07/01', '15/01', '16/02', '29/04', '30/04', '01/05', '02/05', '03/05', '22/04', '09/05', '28/06', '21/10', '11/11');
 
 $i18n_key_words = array(
 

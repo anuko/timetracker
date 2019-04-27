@@ -33,8 +33,6 @@ $i18n_language = 'Polish (Polski)';
 $i18n_months = array('Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień');
 $i18n_weekdays = array('Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota');
 $i18n_weekdays_short = array('Nd', 'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob');
-// format mm/dd
-$i18n_holidays = array('01/01', '01/05', '04/05', '04/06', '05/01', '05/03', '05/24', '06/04', '08/15', '11/01', '11/11', '12/25', '12/26');
 
 $i18n_key_words = array(
 

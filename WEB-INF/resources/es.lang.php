@@ -33,8 +33,6 @@ $i18n_language = 'Spanish (Español)';
 $i18n_months = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
 $i18n_weekdays = array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
 $i18n_weekdays_short = array('Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá');
-// format mm/dd
-$i18n_holidays = array('01/01', '01/06', '04/05', '04/06', '05/01', '08/15', '10/12', '11/01', '12/06', '12/08', '12/25');
 
 $i18n_key_words = array(
 

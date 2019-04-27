@@ -33,8 +33,6 @@ $i18n_language = 'Swedish (Svenska)';
 $i18n_months = array('Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni', 'Juli', 'Augusti', 'September', 'Oktober', 'November', 'December');
 $i18n_weekdays = array('Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag');
 $i18n_weekdays_short = array('Sö', 'Må', 'Ti', 'On', 'To', 'Fr', 'Lö');
-// format mm/dd
-$i18n_holidays = array('01/01', '01/06', '05/01', '06/06', '12/25', '12/26'); // OBS! Endast fasta helgdagar, då rörliga datum måste uppdateras varje år.
 
 $i18n_key_words = array(
 

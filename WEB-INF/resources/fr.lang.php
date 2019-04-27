@@ -33,8 +33,6 @@ $i18n_language = 'French (Français)';
 $i18n_months = array('Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'); 
 $i18n_weekdays = array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi');
 $i18n_weekdays_short = array('Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa');
-// format mm/dd
-$i18n_holidays = array('01/01', '04/06', '04/09', '05/01', '05/08', '05/17', '05/28', '07/14', '08/15', '11/01', '11/11', '12/25');
 
 $i18n_key_words = array(
 

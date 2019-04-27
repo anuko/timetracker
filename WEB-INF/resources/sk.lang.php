@@ -33,8 +33,6 @@ $i18n_language = 'Slovak (Slovenčina)';
 $i18n_months = array('Január', 'Február', 'Marec', 'Apríl', 'Máj', 'Jún', 'Júl', 'August', 'September', 'Október', 'November', 'December');
 $i18n_weekdays = array('Nedeľa', 'Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota');
 $i18n_weekdays_short = array('Ne', 'Po', 'Ut', 'St', 'Št', 'Pi', 'So');
-// format mm/dd
-$i18n_holidays = array('01/01', '01/06', '03/29', '04/01', '05/01', '05/08', '06/05', '08/29', '09/01', '09/15', '11/01', '11/17', '12/24', '12/25', '12/26');
 
 $i18n_key_words = array(
 

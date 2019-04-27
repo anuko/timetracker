@@ -33,8 +33,6 @@ $i18n_language = 'Catalan (Català)';
 $i18n_months = array('Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre');
 $i18n_weekdays = array('Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte');
 $i18n_weekdays_short = array('Dg', 'Dl', 'Dm', 'Dc', 'Dj', 'Dv', 'Ds');
-// format mm/dd
-$i18n_holidays = array('01/01', '01/16', '02/20', '03/29', '07/04', '09/04', '10/09', '11/11', '11/23', '12/25');
 
 $i18n_key_words = array(
 

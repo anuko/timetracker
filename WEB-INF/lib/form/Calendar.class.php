@@ -63,12 +63,6 @@ class Calendar extends FormElement {
       
       $this->mMonthNames = $i18n->monthNames;
       $this->mWeekDayShortNames = $i18n->weekdayShortNames;
-      if (is_array($i18n->holidays)) {
-        foreach ($i18n->holidays as $fday) {
-          $date_a = explode("/",$fday); // format mm/dd
-          $this->holidays[] = mktime(0,0,0, $date_a[0], $date_a[1], date("Y"));// + 7200;
-        }
-      }
       $this->weekStartDay = $user->week_start;
     }
 

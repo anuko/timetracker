@@ -35,8 +35,6 @@ $i18n_language = 'Hungarian (Magyar)';
 $i18n_months = array('Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December');
 $i18n_weekdays = array('Vasárnap', 'Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat');
 $i18n_weekdays_short = array('V', 'H', 'K', 'Sz', 'Cs', 'P', 'Sz');
-// format mm/dd
-$i18n_holidays = array('01/01', '01/02', '03/15', '04/12', '04/13', '05/01', '05/31', '06/01', '08/20', '08/21', '10/23', '11/01', '12/24', '12/25', '12/26');
 
 $i18n_key_words = array(
 

@@ -33,8 +33,6 @@ $i18n_language = 'Finnish (Suomi)';
 $i18n_months = array('Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu');
 $i18n_weekdays = array('Sunnuntai', 'Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai');
 $i18n_weekdays_short = array('Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La');
-// format mm/dd
-$i18n_holidays = array('01/01', '01/06', '05/01', '06/24', '12/06', '12/25', '12/26');
 
 $i18n_key_words = array(
 

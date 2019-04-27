@@ -70,7 +70,6 @@ class I18n {
       $this->weekdayNames = $i18n_weekdays;
 
         $this->weekdayShortNames = $i18n_weekdays_short;
-        $this->holidays = $i18n_holidays;
 
       foreach ($i18n_key_words as $kword=>$value) {
         $pos = strpos($kword, ".");
