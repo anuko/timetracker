@@ -57,7 +57,7 @@ class DateField extends TextField {
     $this->lCalendarButtons['close'] = $i18n->get('button.close');
 
     $this->mDateFormat = $user->getDateFormat();
-    $this->mWeekStartDay = $user->week_start;
+    $this->mWeekStartDay = $user->getWeekStart();
   }
 
   // set current value taken from session or database

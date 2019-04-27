@@ -69,7 +69,7 @@ class Period {
       $date_point = new DateAndTime(); // Represents current date. TODO: verify this is needed, as this is server time, not browser today.
 
     // TODO: refactoring ongoing down from here. Make code nicer, etc.
-    $weekStartDay = $user->week_start;
+    $weekStartDay = $user->getWeekStart();
 
 		$this->startDate = new DateAndTime();
 		$this->startDate->setFormat($date_point->getFormat());

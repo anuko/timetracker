@@ -63,7 +63,7 @@ class Calendar extends FormElement {
       
       $this->mMonthNames = $i18n->monthNames;
       $this->mWeekDayShortNames = $i18n->weekdayShortNames;
-      $this->weekStartDay = $user->week_start;
+      $this->weekStartDay = $user->getWeekStart();
     }
 
     function setStyle($style) { $this->style = $style; }

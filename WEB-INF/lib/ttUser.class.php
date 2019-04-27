@@ -205,6 +205,11 @@ class ttUser {
     return ($this->behalfGroup ? $this->behalfGroup->time_format : $this->time_format);
   }
 
+  // getWeekStart returns week start day for active group.
+  function getWeekStart() {
+    return ($this->behalfGroup ? $this->behalfGroup->week_start : $this->week_start);
+  }
+
   // getTrackingMode returns tracking mode for active group.
   function getTrackingMode() {
     return ($this->behalfGroup ? $this->behalfGroup->tracking_mode : $this->tracking_mode);

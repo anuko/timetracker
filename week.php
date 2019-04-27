@@ -70,7 +70,7 @@ if(!$cl_date)
 $_SESSION['date'] = $cl_date;
 
 // Determine selected week start and end dates.
-$weekStartDay = $user->week_start;
+$weekStartDay = $user->getWeekStart();
 $t_arr = localtime($selected_date->getTimestamp());
 $t_arr[5] = $t_arr[5] + 1900;
 if ($t_arr[6] < $weekStartDay)
