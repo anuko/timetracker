@@ -126,6 +126,8 @@ class Calendar extends FormElement {
 
       $str .= "<tr>";
 
+      // TODO: refactor this entire class, as $weekend_start and $weekend_end
+      // are not what their names suggest (debug with non zero week start to see it).
       $weekend_start = 6 - $this->weekStartDay;      // Saturday by default.
       $weekend_end = (7 - $this->weekStartDay) % 7;  // Sunday by default.
       if (defined('WEEKEND_START_DAY')) {

@@ -33,6 +33,11 @@ class ttTimeHelper {
 
   // isWeekend determines if $date falls on weekend.
   static function isWeekend($date) {
+    // NOTE: this does not work for subgroups with different WEEKEND_START_DAY
+    // as the setting is per server. Example: a parent group in USA, with a subgroup
+    // in Saudi Arabia. Their weekends are the same.
+    // Decided NOT to introduce a configurable WEEKEND_START_DAY for groups in UI
+    // to keep UI simple, for now. See also Calendar class with the same issue.
     $weekDay = date('w', strtotime($date));
     return ($weekDay == WEEKEND_START_DAY || $weekDay == (WEEKEND_START_DAY + 1) % 7);
   }
