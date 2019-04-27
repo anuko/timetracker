@@ -41,7 +41,6 @@ class ttGroup {
   var $date_format = null;      // Date format.
   var $time_format = null;      // Time format.
   var $week_start = 0;          // Week start day.
-  var $show_holidays = 0;       // Whether to show holidays in calendar.
   var $tracking_mode = 0;       // Tracking mode.
   var $project_required = 0;    // Whether project selection is required on time entires.
   var $task_required = 0;       // Whether task selection is required on time entires.
@@ -114,7 +113,6 @@ class ttGroup {
       $this->config = $val['config'];
       $this->configHelper = new ttConfigHelper($val['config']);
       // Set user config options.
-      $this->show_holidays = $this->configHelper->getDefinedValue('show_holidays');
       $this->punch_mode = $this->configHelper->getDefinedValue('punch_mode');
       $this->allow_overlap = $this->configHelper->getDefinedValue('allow_overlap');
       $this->future_entries = $this->configHelper->getDefinedValue('future_entries');

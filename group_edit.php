@@ -85,7 +85,6 @@ if ($request->isPost() && !$groupChanged) {
   $cl_date_format = $request->getParameter('date_format');
   $cl_time_format = $request->getParameter('time_format');
   $cl_start_week = $request->getParameter('start_week');
-  $cl_show_holidays = $request->getParameter('show_holidays');
   $cl_holidays = trim($request->getParameter('holidays'));
   $cl_tracking_mode = $request->getParameter('tracking_mode');
   $cl_project_required = $request->getParameter('project_required');
@@ -107,7 +106,6 @@ if ($request->isPost() && !$groupChanged) {
   $cl_date_format = $group['date_format'];
   $cl_time_format = $group['time_format'];
   $cl_start_week = $group['week_start'];
-  $cl_show_holidays = $config->getDefinedValue('show_holidays');
   $cl_holidays = $group['holidays'];
   $cl_tracking_mode = $group['tracking_mode'];
   $cl_project_required = $group['project_required'];
@@ -181,8 +179,7 @@ foreach ($i18n->weekdayNames as $id => $week_dn) {
 }
 $form->addInput(array('type'=>'combobox','name'=>'start_week','style'=>'width: 150px;','data'=>$week_start_options,'datakeys'=>array('id','name'),'value'=>$cl_start_week));
 
-// Show holidays checkbox.
-$form->addInput(array('type'=>'checkbox','name'=>'show_holidays','value'=>$cl_show_holidays));
+// Show holidays control.
 $form->addInput(array('type'=>'text','name'=>'holidays','value'=>$cl_holidays));
 
 // Prepare tracking mode choices.
@@ -249,7 +246,6 @@ if ($request->isPost()) {
 
     if ($err->no()) {
       // Update config.
-      $config->setDefinedValue('show_holidays', $cl_show_holidays);
       $config->setDefinedValue('punch_mode', $cl_punch_mode);
       $config->setDefinedValue('allow_overlap', $cl_allow_overlap);
       $config->setDefinedValue('future_entries', $cl_future_entries);

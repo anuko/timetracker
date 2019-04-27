@@ -75,12 +75,8 @@ function handleTaskRequiredCheckbox() {
             <td><a href="display_options.php">{$i18n.label.configure}</a></td>
           </tr>
           <tr>
-            <td align="right" nowrap>{$i18n.form.group_edit.show_holidays}:</td>
-            <td>{$forms.groupForm.show_holidays.control} <a href="https://www.anuko.com/lp/tt_14.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
-          </tr>
-          <tr>
             <td align="right" nowrap>{$i18n.form.group_edit.holidays}:</td>
-            <td>{$forms.groupForm.holidays.control} <a href="https://www.anuko.com/lp/tt_14.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+            <td>{$forms.groupForm.holidays.control} <a href="https://www.anuko.com/lp/tt_36.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.group_edit.tracking_mode}:</td>
