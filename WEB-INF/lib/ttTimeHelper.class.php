@@ -65,8 +65,10 @@ class ttTimeHelper {
    $holiDateSpecArray = explode('-', $holiDateSpec);
 
    // Check year.
-   if ($dateArray[0] != $holiDateSpecArray[0] && $holiDateSpecArray[0] != '****') // **** means all years.
-     return false;
+   for($i = 0; $i < 4; $i++) {
+     if ($dateArray[0][$i] != $holiDateSpecArray[0][$i] && $holiDateSpecArray[0][$i] != '*') // * means any digit matches
+       return false;
+   }
    // Check month.
    if ($dateArray[1] != $holiDateSpecArray[1])
      return false;
