@@ -70,7 +70,7 @@ if ($request->isPost() && $groupChanged) {
 
 $groups = $user->getGroupsForDropdown();
 $group = ttGroupHelper::getGroupAttrs($group_id);
-$config = new ttConfigHelper($group['config']);
+$config = $user->getConfigHelper();
 
 $advanced_settings = $home_group ? $user->can('manage_advanced_settings') : true;
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');

@@ -167,6 +167,7 @@ class ttWeekViewHelper {
     global $i18n;
 
     $dataArray = array();
+    $includeNotes = $user->isOptionEnabled('week_notes');
 
     // Construct the first row for a brand new entry.
     $dataArray[] = array('row_id' => null,'label' => $i18n->get('form.week.new_entry').':'); // Insert row.
@@ -175,7 +176,7 @@ class ttWeekViewHelper {
       $control_id = '0_'. $dayHeaders[$i];
       $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
     }
-    if ($user->isPluginEnabled('wvns')) {
+    if ($includeNotes) {
       // Construct the second row for daily comments for a brand new entry.
       $dataArray[] = array('row_id' => null,'label' => $i18n->get('label.notes').':'); // Insert row.
       // Insert empty cells with proper control ids.
@@ -209,7 +210,7 @@ class ttWeekViewHelper {
           $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
         }
         // Insert row for comments.
-        if ($user->isPluginEnabled('wvns')) {
+        if ($includeNotes) {
           $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->get('label.notes').':');
           $pos++;
           // Insert empty cells with proper control ids.
@@ -223,7 +224,7 @@ class ttWeekViewHelper {
       // Insert actual cell data from $record (one cell only).
       $dataArray[$pos][$day_header] = array('control_id' => $pos.'_'. $day_header, 'tt_log_id' => $record['id'],'duration' => $record['duration']);
       // Insert existing comment from $record into the comment cell.
-      if ($user->isPluginEnabled('wvns')) {
+      if ($includeNotes) {
         $pos++;
         $dataArray[$pos][$day_header] = array('control_id' => $pos.'_'. $day_header, 'tt_log_id' => $record['id'],'note' => $record['comment']);
       }
@@ -273,7 +274,8 @@ class ttWeekViewHelper {
       $control_id = '0_'. $dayHeaders[$i];
       $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
     }
-    if ($user->isPluginEnabled('wvns')) {
+    $includeNotes = $user->isOptionEnabled('week_notes');
+    if ($includeNotes) {
       // Construct the second row for daily comments for a brand new entry.
       $dataArray[] = array('row_id' => null,'label' => $i18n->get('label.notes').':'); // Insert row.
       // Insert empty cells with proper control ids.
@@ -299,7 +301,7 @@ class ttWeekViewHelper {
           $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
         }
         // Insert row for comments.
-        if ($user->isPluginEnabled('wvns')) {
+        if ($includeNotes) {
           $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->get('label.notes').':');
           $pos++;
           // Insert empty cells with proper control ids.

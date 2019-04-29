@@ -68,7 +68,7 @@ function fillDropdowns() {
           <td>{$forms.weekTimeForm.task.control}</td>
         </tr>
 {/if}
-{if $user->isPluginEnabled('wvn')}
+{if $show_week_note}
         <tr>
           <td align="right">{$i18n.label.week_note}:</td>
           <td>{$forms.weekTimeForm.note.control}</td>
@@ -96,7 +96,7 @@ function fillDropdowns() {
   <tr><td>&nbsp;</td></tr>
 </table>
 
-{if $user->isPluginEnabled('wvl')}
+{if $show_week_list}
 <table width="720">
 <tr>
   <td valign="top">
@@ -181,7 +181,7 @@ function fillDropdowns() {
 
 {if $time_records}
 <table cellpadding="3" cellspacing="1" width="720">
-  {if $user->isPluginEnabled('wvl')}
+  {if $show_week_list}
   <tr>
     <td align="left">{$i18n.label.week_total}: {$week_total}</td>
     <td></td>

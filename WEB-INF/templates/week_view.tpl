@@ -1,6 +1,10 @@
 {$forms.weekViewForm.open}
 <table cellspacing="1" cellpadding="2" border="0">
   <tr>
+    <td align="right" nowrap>{$forms.weekViewForm.week_menu.control}</td>
+    <td><label for="week_note">{$i18n.label.week_menu}</label> <a href="https://www.anuko.com/lp/tt_35.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+  </tr>
+  <tr>
     <td align="right" nowrap>{$forms.weekViewForm.week_note.control}</td>
     <td><label for="week_note">{$i18n.label.week_note}</label> <a href="https://www.anuko.com/lp/tt_11.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
   </tr>

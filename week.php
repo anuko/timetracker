@@ -143,29 +143,33 @@ else
 
 // Build day totals (total durations for each day in week).
 $dayTotals = ttWeekViewHelper::getDayTotals($dataArray, $dayHeaders);
+$showWeekNote = $user->isOptionEnabled('week_note');
+$showWeekNotes = $user->isOptionEnabled('week_notes');
+
 
 // Define rendering class for a label field to the left of durations.
 class LabelCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     global $user;
+    $showNotes = $user->isOptionEnabled('week_notes');
 
     $this->setOptions(array('width'=>200,'valign'=>'middle'));
 
     // Special handling for a new week entry (row 0, or 0 and 1 if we show notes).
     if (0 == $row) {
       $this->setOptions(array('style'=>'text-align: center; font-weight: bold; vertical-align: top;'));
-    } else if ($user->isPluginEnabled('wvns') && (1 == $row)) {
+    } else if ($showNotes && (1 == $row)) {
       $this->setOptions(array('style'=>'text-align: right; vertical-align: top;'));
-    } else if ($user->isPluginEnabled('wvns') && (0 != $row % 2)) {
+    } else if ($showNotes && (0 != $row % 2)) {
       $this->setOptions(array('style'=>'text-align: right;'));
     }
     // Special handling for not billable entries.
-    $ignoreRow = $user->isPluginEnabled('wvns') ? 1 : 0; 
+    $ignoreRow = $showNotes ? 1 : 0;
     if ($row > $ignoreRow) {
       $row_id = $table->getValueAtName($row,'row_id');
       $billable = ttWeekViewHelper::parseFromWeekViewRow($row_id, 'bl');
       if (!$billable) {
-        if (($user->isPluginEnabled('wvns') && (0 == $row % 2)) || !$user->isPluginEnabled('wvns')) {
+        if (($showNotes && (0 == $row % 2)) || !$showNotes) {
           $this->setOptions(array('style'=>'color: red;')); // TODO: style it properly in CSS.
         }
       }
@@ -179,6 +183,7 @@ class LabelCellRenderer extends DefaultCellRenderer {
 class WeekViewCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     global $user;
+    $showNotes = $user->isOptionEnabled('week_notes');
 
     $field_name = $table->getValueAt($row,$column)['control_id']; // Our text field names (and ids) are like x_y (row_column).
     $field = new TextField($field_name);
@@ -189,11 +194,11 @@ class WeekViewCellRenderer extends DefaultCellRenderer {
     $field->setFormName($table->getFormName());
     $field->setStyle('width: 60px;'); // TODO: need to style everything properly, eventually.
     // Provide visual separation for new entry row.
-    $rowToSeparate = $user->isPluginEnabled('wvns') ? 1 : 0;
+    $rowToSeparate = $showNotes ? 1 : 0;
     if ($rowToSeparate == $row) {
       $field->setStyle('width: 60px; margin-bottom: 40px');
     }
-    if ($user->isPluginEnabled('wvns')) {
+    if ($showNotes) {
       if (0 == $row % 2) {
         $field->setValue($table->getValueAt($row,$column)['duration']); // Duration for even rows.
       } else {
@@ -383,7 +388,7 @@ if ($request->isPost()) {
           $control_id = $rowNumber.'_'.$dayHeader;
 
           // Handle durations and comments in separate blocks of code.
-          if (!$user->isPluginEnabled('wvns') || (0 == $rowNumber % 2)) {
+          if (!$showWeekNotes || (0 == $rowNumber % 2)) {
             // Handle durations row here.
 
             // Obtain existing and posted durations.
@@ -422,7 +427,7 @@ if ($request->isPost()) {
                 // Note: no need to check for a possible conflict with an already existing row
                 // because we are doing an insert that does not affect already existing data.
 
-                if ($user->isPluginEnabled('wvn')) {
+                if ($showWeekNote) {
                   $fields['note'] = $request->getParameter('note');
                 }
               }
@@ -430,7 +435,7 @@ if ($request->isPost()) {
               $fields['start_date'] = $startDate->toString(DB_DATEFORMAT); // To be able to determine date for the entry using $dayHeader.
               $fields['duration'] = $postedDuration;
               $fields['browser_today'] = $request->getParameter('browser_today', null);
-              if ($user->isPluginEnabled('wvns')) {
+              if ($showWeekNotes) {
                 // Take note value from the control below duration.
                 $noteRowNumber = $rowNumber + 1;
                 $note_control_id =  $noteRowNumber.'_'.$dayHeader;
@@ -448,7 +453,7 @@ if ($request->isPost()) {
             }
             if (!$result) break; // Break out of the loop in case of first error.
 
-          } else if ($user->isPluginEnabled('wvns')) {
+          } else if ($showWeekNotes) {
             // Handle commments row here.
 
             // Obtain existing and posted comments.
@@ -516,6 +521,8 @@ $smarty->assign('show_navigation', !$user->getConfigOption('menu_week'));
 $smarty->assign('show_client', $showClient);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
+$smarty->assign('show_week_note', $showWeekNote);
+$smarty->assign('show_week_list', $user->isOptionEnabled('week_list'));
 $smarty->assign('show_files', $showFiles);
 $smarty->assign('title', $i18n->get('menu.week'));
 $smarty->assign('content_page_name', 'week.tpl');

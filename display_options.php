@@ -37,21 +37,17 @@ if (!ttAccessAllowed('manage_basic_settings')) {
 }
 // End of access checks.
 
-$config = new ttConfigHelper($user->getConfig());
+$config = $user->getConfigHelper();
 
 if ($request->isPost()) {
-  $cl_menu_week = $request->getParameter('menu_week');
   $cl_time_note_on_separate_row = $request->getParameter('time_note_on_separate_row');
   $cl_report_note_on_separate_row = $request->getParameter('report_note_on_separate_row');
 } else {
-  $cl_menu_week = $config->getDefinedValue('menu_week');
   $cl_time_note_on_separate_row = $config->getDefinedValue('time_note_on_separate_row');
   $cl_report_note_on_separate_row = $config->getDefinedValue('report_note_on_separate_row');
 }
 
 $form = new Form('displayOptionsForm');
-// Menu.
-$form->addInput(array('type'=>'checkbox','name'=>'menu_week','value'=>$cl_menu_week));
 
 // Time page.
 // $form->addInput(array('type'=>'checkbox','name'=>'time_client','value'=>$cl_time_client));
@@ -74,7 +70,6 @@ $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('b
 if ($request->isPost()){
   if ($err->no()) {
     // Update config.
-    $config->setDefinedValue('menu_week', $cl_menu_week);
     $config->setDefinedValue('time_note_on_separate_row', $cl_time_note_on_separate_row);
     $config->setDefinedValue('report_note_on_separate_row', $cl_report_note_on_separate_row);
     if ($user->updateGroup(array('config' => $config->getConfig()))) {
@@ -86,7 +81,6 @@ if ($request->isPost()){
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('show_week_menu', $user->isPluginEnabled('wv'));
 $smarty->assign('title', $i18n->get('title.display_options'));
 $smarty->assign('content_page_name', 'display_options.tpl');
 $smarty->display('index.tpl');

@@ -238,6 +238,8 @@ $i18n_key_words = array(
 'label.paid_status' => 'Κατάσταση πληρωμής',
 'label.paid' => 'Πληρωμένο',
 'label.mark_paid' => 'Σήμανση πληρωμένα',
+// TODO: translate the following.
+// 'label.week_menu' => 'Week menu',
 'label.week_note' => 'Σημείωση εβδομάδας',
 'label.week_list' => 'Λίστα εβδομάδων',
 // TODO: translate the following.

@@ -248,6 +248,11 @@ class ttUser {
     return ($this->behalfGroup ? $this->behalfGroup->configHelper->getConfig() : $this->configHelper->getConfig());
   }
 
+  // getConfigHelper returns ttConfigHelper instance for active group.
+  function getConfigHelper() {
+    return ($this->behalfGroup ? $this->behalfGroup->configHelper : $this->configHelper);
+  }
+
   // getConfigOption returns true if an option is defined for group.
   // This helps us keeping a set of user attributes smaller.
   // We determine whether the option is set only on pages that need to know.

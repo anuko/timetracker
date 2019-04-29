@@ -144,16 +144,6 @@ if ($request->isPost()) {
     $plugins .= ',at';
   if ($cl_work)
     $plugins .= ',wk';
-
-  // Recycle week view plugin options as they are not configured on this page.
-  $existing_plugins = explode(',', $user->getPlugins());
-  if (in_array('wvn', $existing_plugins))
-    $plugins .= ',wvn';
-  if (in_array('wvl', $existing_plugins))
-    $plugins .= ',wvl';
-  if (in_array('wvns', $existing_plugins))
-    $plugins .= ',wvns';
-
   $plugins = trim($plugins, ',');
 
   // Prepare a new config string.
