@@ -56,13 +56,13 @@ function fillDropdowns() {
           <td align="right">{$custom_fields->fields[0]['label']|escape}{if $custom_fields->fields[0]['required']} (*){/if}:</td><td>{$forms.weekTimeForm.cf_1.control}</td>
         </tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
         <tr>
           <td align="right">{$i18n.label.project} (*):</td>
           <td>{$forms.weekTimeForm.project.control}</td>
         </tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_task}
         <tr>
           <td align="right">{$i18n.label.task}:</td>
           <td>{$forms.weekTimeForm.task.control}</td>

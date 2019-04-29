@@ -58,6 +58,9 @@ if (!$user->behalf_id && !$user->can('track_own_time') && !$user->adjustBehalfId
 // End of access checks.
 
 $showClient = $user->isPluginEnabled('cl');
+$trackingMode = $user->getTrackingMode();
+$showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
+$showTask = MODE_PROJECTS_AND_TASKS == $trackingMode;
 $showFiles = $user->isPluginEnabled('at');
 
 // Initialize and store date in session.
@@ -511,6 +514,8 @@ $smarty->assign('timestring', $startDate->toString($user->date_format).' - '.$en
 $smarty->assign('time_records', $records);
 $smarty->assign('show_navigation', !$user->getConfigOption('menu_week'));
 $smarty->assign('show_client', $showClient);
+$smarty->assign('show_project', $showProject);
+$smarty->assign('show_task', $showTask);
 $smarty->assign('show_files', $showFiles);
 $smarty->assign('title', $i18n->get('menu.week'));
 $smarty->assign('content_page_name', 'week.tpl');
