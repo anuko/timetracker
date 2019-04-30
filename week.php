@@ -517,7 +517,7 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('timestring', $startDate->toString($user->date_format).' - '.$endDate->toString($user->date_format));
 $smarty->assign('time_records', $records);
-$smarty->assign('show_navigation', !$user->getConfigOption('menu_week'));
+$smarty->assign('show_navigation', !$user->isOptionEnabled('week_menu'));
 $smarty->assign('show_client', $showClient);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
