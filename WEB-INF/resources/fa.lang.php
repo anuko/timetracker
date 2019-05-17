@@ -44,7 +44,7 @@ $i18n_key_words = array(
 'menu.forum' => 'فروم',
 'menu.help' => 'راهنما',
 // TODO: translate the following.
-// 'menu.create_group' => 'Create Group',
+// 'menu.register' => 'Register',
 'menu.profile' => 'پروفايل',
 // TODO: translate the following.
 // 'menu.group' => 'Group',

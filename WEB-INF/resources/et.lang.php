@@ -44,7 +44,8 @@ $i18n_key_words = array(
 'menu.logout' => 'Välju',
 'menu.forum' => 'Foorum',
 'menu.help' => 'Abiinfo',
-'menu.create_group' => 'Loo grupp',
+// TODO: translate the following.
+// 'menu.register' => 'Register',
 'menu.profile' => 'Profiil',
 'menu.group' => 'Grupp',
 'menu.plugins' => 'Lisad',

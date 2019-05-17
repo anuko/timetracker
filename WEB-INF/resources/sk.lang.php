@@ -43,7 +43,7 @@ $i18n_key_words = array(
 'menu.forum' => 'Fórum',
 'menu.help' => 'Pomoc',
 // TODO: translate the following.
-// 'menu.create_group' => 'Create Group',
+// 'menu.register' => 'Register',
 'menu.profile' => 'Profil',
 // TODO: translate the following.
 // 'menu.group' => 'Group',

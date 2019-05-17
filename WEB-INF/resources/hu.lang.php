@@ -44,7 +44,8 @@ $i18n_key_words = array(
 'menu.logout' => 'Kijelentkezés',
 'menu.forum' => 'Fórum',
 'menu.help' => 'Segítség',
-'menu.create_group' => 'Csoport létrehozása',
+// TODO: translate the following.
+// 'menu.register' => 'Register',
 'menu.profile' => 'Profil',
 'menu.group' => 'Csoport',
 // TODO: translate the following.
