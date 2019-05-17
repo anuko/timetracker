@@ -42,13 +42,13 @@ $i18n_key_words = array(
 'menu.logout' => 'Afmelden',
 'menu.forum' => 'Forum',
 'menu.help' => 'Help',
-'menu.create_group' => 'Maak groep',
+// TODO: translate the following.
+// 'menu.register' => 'Register',
 'menu.profile' => 'Profiel',
 'menu.group' => 'Groep',
 'menu.plugins' => 'Plugins',
 'menu.time' => 'Tijden',
-// TODO: translate the following.
-// 'menu.week' => 'Week',
+'menu.week' => 'Week',
 'menu.expenses' => 'Kosten',
 'menu.reports' => 'Rapporten',
 'menu.timesheets' => 'Tijdenoverzichten',
@@ -242,11 +242,9 @@ $i18n_key_words = array(
 'label.template' => 'Sjabloon',
 'label.attachments' => 'Bijlagen',
 'label.files' => 'Bestanden',
-// TODO: translate the following.
-// 'label.file' => 'File',
+'label.file' => 'Bestand',
 'label.image' => 'Afbeelding',
-// TODO: translate the following.
-// 'label.download' => 'Download',
+'label.download' => 'Download',
 'label.active_users' => 'Actieve medewerkers',
 'label.inactive_users' => 'Inactieve medewerkers',
 
@@ -264,8 +262,7 @@ $i18n_key_words = array(
 'title.time' => 'Tijdsregistraties',
 'title.edit_time_record' => 'Wijzigen tijdrecord',
 'title.delete_time_record' => 'Verwijder tijdrecord',
-// TODO: Translate the following.
-// 'title.time_files' => 'Time Record Files',
+'title.time_files' => 'Tijden bestanden',
 'title.expenses' => 'Kosten',
 'title.edit_expense' => 'Bewerk kosten artikel',
 'title.delete_expense' => 'Verwijder kosten artikel',
@@ -278,8 +275,7 @@ $i18n_key_words = array(
 'title.send_report' => 'Rapport aan het versturen',
 'title.timesheets' => 'Tijdenoverzichten',
 'title.timesheet' => 'Tijdenoverzicht',
-// TODO: Translate the following.
-// 'title.timesheet_files' => 'Timesheet Files',
+'title.timesheet_files' => 'Tijdenoverzichten bestanden',
 'title.invoice' => 'Factuur',
 'title.send_invoice' => 'Factuur verzenden',
 'title.charts' => 'Grafieken',
@@ -319,8 +315,7 @@ $i18n_key_words = array(
 'title.export' => 'Exporteer groepsgegevens',
 'title.import' => 'Importeer groepsgegevens',
 'title.options' => 'Opties',
-// TODO: translate the following.
-// 'title.display_options' => 'Display Options',
+'title.display_options' => 'Beeld opties',
 'title.profile' => 'Profiel',
 'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Eigen velden',
@@ -339,16 +334,15 @@ $i18n_key_words = array(
 'title.add_template' => 'Sjabloon toevoegen',
 'title.edit_template' => 'Sjabloon bewerken',
 'title.delete_template' => 'Sjabloon verwijderen',
-// TODO: translate the following.
-// 'title.edit_file' => 'Editing File',
-// 'title.delete_file' => 'Deleting File',
-// 'title.download_file' => 'Downloading File',
-// 'title.work' => 'Work',
-// 'title.add_work' => 'Adding Work',
-// 'title.edit_work' => 'Editing Work',
-// 'title.delete_work' => 'Deleting Work',
-// 'title.active_work' => 'Active Work', // Active work items this group outsources to other groups.
-// 'title.inactive_work' => 'Inactive Work', // Inactive work items this group was outsourcing to other groups.
+'title.edit_file' => 'Bestand bewerken',
+'title.delete_file' => 'Bestand verwijderen',
+'title.download_file' => ' Bestand downloaden',
+'title.work' => 'Werk',
+'title.add_work' => 'Werk toevoegen',
+'title.edit_work' => 'Werk bewerken',
+'title.delete_work' => 'Werk verwijderen',
+'title.active_work' => 'Actief werk',
+'title.inactive_work' => 'Inactief werk',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -515,9 +509,8 @@ $i18n_key_words = array(
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 'form.group_edit.12_hours' => '12 uurs',
 'form.group_edit.24_hours' => '24 uurs',
-// TODO: translate the following.
-// 'form.group_edit.display_options' => 'Display options',
-// 'form.group_edit.holidays' => 'Holidays',
+'form.group_edit.display_options' => 'Beeld opties',
+'form.group_edit.holidays' => 'Vakanties',
 'form.group_edit.tracking_mode' => 'Bijhouden',
 'form.group_edit.mode_time' => 'tijd',
 'form.group_edit.mode_projects' => 'projecten',
@@ -530,7 +523,7 @@ $i18n_key_words = array(
 'form.group_edit.allow_overlap' => 'Sta overlapping van tijden toe',
 'form.group_edit.future_entries' => 'Toevoegingen toestaan in de toekomst',
 'form.group_edit.uncompleted_indicators' => 'Onvolledige indicatoren',
-'form.group_edit.confirm_save' => 'Bevestig dat je wilt opslaan',
+'form.group_edit.confirm_save' => 'Bevestigen dat je wilt opslaan',
 'form.group_edit.allow_ip' => 'Toegestane IP adressen',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
@@ -590,7 +583,6 @@ $i18n_key_words = array(
 'form.timesheet_view.disapprove_body' => "Jouw tijdenoverzicht %s is afgekeurd.<p>%s",
 
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
-// TODO: translate the following.
-// 'form.display_options.menu' => 'Menu',
-// 'form.display_options.note_on_separate_row' => 'Note on separate row',
+'form.display_options.menu' => 'Menu',
+'form.display_options.note_on_separate_row' => 'Notitie in aparte kolom',
 );
