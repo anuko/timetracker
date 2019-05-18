@@ -5,7 +5,7 @@
       <table cellspacing="1" cellpadding="2" border="0">
         <tr>
           <td align="right" nowrap>{$i18n.label.group_name} (*):</td>
-          <td>{$forms.groupForm.group_name.control}</td>
+          <td>{$forms.groupForm.group_name.control} <a href="https://www.anuko.com/lp/tt_37.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
         </tr>
         <tr>
           <td align="right">{$i18n.label.currency}:</td>
