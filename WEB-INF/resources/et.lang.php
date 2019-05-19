@@ -577,6 +577,8 @@ $i18n_key_words = array(
 'form.group_edit.uncompleted_indicators' => 'Lõpetamata kirjete indikaator', // TODO: Fix this. Indicators (plural), not indicator.
 'form.group_edit.confirm_save' => 'Kinnita salvestamine',
 'form.group_edit.allow_ip' => 'Luba IP',
+// TODO: translate the following.
+// 'form.group_edit.advanced_settings' => 'Advanced settings',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 'form.group_delete.hint' => 'Oled kindel, et soovid kogu gruppi kustutada?',

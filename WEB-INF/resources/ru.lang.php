@@ -523,6 +523,7 @@ $i18n_key_words = array(
 'form.group_edit.uncompleted_indicators' => 'Индикаторы незавершения',
 'form.group_edit.confirm_save' => 'Предупреждать при сохранении',
 'form.group_edit.allow_ip' => 'Разрешить доступ с IP',
+'form.group_edit.advanced_settings' => 'Продвинутые настройки',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 'form.group_delete.hint' => 'Вы уверены, что хотите удалить всю группу?',

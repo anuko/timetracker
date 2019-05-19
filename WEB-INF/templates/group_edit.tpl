@@ -17,10 +17,7 @@ function handleTaskRequiredCheckbox() {
 </script>
 
 {$forms.groupForm.open}
-
-{if $user->can('manage_basic_settings')}
 {include file="datetime_format_preview.tpl"}
-{/if}
 
 <table cellspacing="4" cellpadding="7" border="0">
     <tr>
@@ -32,25 +29,16 @@ function handleTaskRequiredCheckbox() {
             <td>{$forms.groupForm.group.control}</td>
           </tr>
 {/if}
-{if $user->can('manage_basic_settings')}
-          <tr>
-            <td align="right" nowrap>{$i18n.label.group_name} (*):</td>
-            <td>{$forms.groupForm.group_name.control}</td>
-          </tr>
-          <tr>
-            <td align = "right">{$i18n.label.description}:</td>
-            <td>{$forms.groupForm.description.control}</td>
-          </tr>
           <tr>
             <td align="right">{$i18n.label.currency}:</td>
             <td>{$forms.groupForm.currency.control}</td>
           </tr>
-  {if $user->can('manage_roles')}
+{if $user->can('manage_roles')}
           <tr>
             <td align="right" nowrap>{$i18n.label.roles}:</td>
             <td><a href="roles.php">{$i18n.label.configure}</a></td>
           </tr>
-  {/if}
+{/if}
           <tr>
            <td align="right" nowrap>{$i18n.label.language}:</td>
            <td>{$forms.groupForm.lang.control}</td>
@@ -106,20 +94,16 @@ function handleTaskRequiredCheckbox() {
             <td align="right" nowrap>{$i18n.form.group_edit.confirm_save}:</td>
             <td>{$forms.groupForm.confirm_save.control} <a href="https://www.anuko.com/lp/tt_26.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
-  {if $user->can('manage_advanced_settings')}
+{if $user->can('manage_advanced_settings')}
           <tr>
-            <td align="right" nowrap>{$i18n.label.bcc}:</td>
-            <td>{$forms.groupForm.bcc_email.control} <a href="https://www.anuko.com/lp/tt_10.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+            <td align="right" nowrap>{$i18n.form.group_edit.advanced_settings}:</td>
+            <td><a href="group_advanced_edit.php">{$i18n.label.configure}</a></td>
           </tr>
-          <tr>
-            <td align="right" nowrap>{$i18n.form.group_edit.allow_ip}:</td>
-            <td>{$forms.groupForm.allow_ip.control} <a href="https://www.anuko.com/lp/tt_21.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
-          </tr>
+{/if}
           <tr>
             <td></td>
             <td>{$i18n.label.required_fields}</td>
           </tr>
-  {/if}
           {* initialize preview text *}
           <script>
             MakeFormatPreview("date_format_preview", document.getElementById("date_format"));
@@ -133,7 +117,6 @@ function handleTaskRequiredCheckbox() {
             }
             adjustDecimalPreview();
           </script>
-{/if}
 
           <tr>
             <td colspan="2">&nbsp;</td>

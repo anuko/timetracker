@@ -45,7 +45,7 @@ if ($request->isGet()) {
 $home_group = $user->group_id == $group_id;
 if ($home_group) {
   // Editing home group.
-  if (!(ttAccessAllowed('manage_basic_settings') || ttAccessAllowed('manage_advanced_settings'))) {
+  if (!ttAccessAllowed('manage_basic_settings')) {
     header('Location: access_denied.php'); // Not allowed to edit home group settings.
     exit();
   }
@@ -72,12 +72,9 @@ $groups = $user->getGroupsForDropdown();
 $group = ttGroupHelper::getGroupAttrs($group_id);
 $config = $user->getConfigHelper();
 
-$advanced_settings = $home_group ? $user->can('manage_advanced_settings') : true;
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
 
 if ($request->isPost() && !$groupChanged) {
-  $cl_group = trim($request->getParameter('group_name'));
-  $cl_description = trim($request->getParameter('description'));
   $cl_currency = trim($request->getParameter('currency'));
   if (!$cl_currency) $cl_currency = CURRENCY_DEFAULT;
   $cl_lang = $request->getParameter('lang');
@@ -95,11 +92,7 @@ if ($request->isPost() && !$groupChanged) {
   $cl_future_entries = $request->getParameter('future_entries');
   $cl_uncompleted_indicators = $request->getParameter('uncompleted_indicators');
   $cl_confirm_save = $request->getParameter('confirm_save');
-  $cl_bcc_email = trim($request->getParameter('bcc_email'));
-  $cl_allow_ip = trim($request->getParameter('allow_ip'));
 } else {
-  $cl_group = $group['name'];
-  $cl_description = $group['description'];
   $cl_currency = ($group['currency'] == ''? CURRENCY_DEFAULT : $group['currency']);
   $cl_lang = $group['lang'];
   $cl_decimal_mark = $group['decimal_mark'];
@@ -116,8 +109,6 @@ if ($request->isPost() && !$groupChanged) {
   $cl_future_entries = $config->getDefinedValue('future_entries');
   $cl_uncompleted_indicators = $config->getDefinedValue('uncompleted_indicators');
   $cl_confirm_save = $config->getDefinedValue('confirm_save');
-  $cl_bcc_email = $group['bcc_email'];
-  $cl_allow_ip = $group['allow_ip'];
 }
 
 $form = new Form('groupForm');
@@ -133,8 +124,6 @@ if (count($groups) > 1) {
   $form->addInput(array('type'=>'hidden','name'=>'group_changed'));
   $smarty->assign('group_dropdown', 1);
 }
-$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','value'=>$cl_group,'enable'=>$advanced_settings));
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
 
 // Prepare an array of available languages.
@@ -213,12 +202,6 @@ $form->addInput(array('type'=>'checkbox','name'=>'uncompleted_indicators','value
 // Confirm save checkbox.
 $form->addInput(array('type'=>'checkbox','name'=>'confirm_save','value'=>$cl_confirm_save));
 
-// Add bcc email control.
-if ($advanced_settings) {
-  $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'bcc_email','value'=>$cl_bcc_email));
-  $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'allow_ip','value'=>$cl_allow_ip));
-}
-
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 if ($user->can('delete_group')) $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('button.delete')));
 
@@ -234,14 +217,8 @@ if ($request->isPost()) {
 
   if ($request->getParameter('btn_save')) {
     // Validate user input.
-    if (!ttValidString($cl_group)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
-    if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
     if (!ttValidString($cl_currency, true)) $err->add($i18n->get('error.field'), $i18n->get('label.currency'));
     if (!ttValidHolidays($cl_holidays)) $err->add($i18n->get('error.field'), $i18n->get('form.group_edit.holidays'));
-    if ($advanced_settings) {
-      if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
-      if (!ttValidIP($cl_allow_ip, true)) $err->add($i18n->get('error.field'), $i18n->get('form.group_edit.allow_ip'));
-    }
     // Finished validating user input.
 
     if ($err->no()) {
@@ -254,8 +231,6 @@ if ($request->isPost()) {
 
       if ($user->updateGroup(array(
         'group_id' => $group_id,
-        'name' => $cl_group,
-        'description' => $cl_description,
         'currency' => $cl_currency,
         'lang' => $cl_lang,
         'decimal_mark' => $cl_decimal_mark,
@@ -268,8 +243,6 @@ if ($request->isPost()) {
         'task_required' => $cl_task_required,
         'record_type' => $cl_record_type,
         'uncompleted_indicators' => $cl_uncompleted_indicators,
-        'bcc_email' => $cl_bcc_email,
-        'allow_ip' => $cl_allow_ip,
         'config' => $config->getConfig()))) {
         header('Location: success.php');
         exit();
@@ -279,8 +252,6 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$smarty->assign('auth_external', $auth->isPasswordExternal());
-$smarty->assign('group_id', $group_id);
 $smarty->assign('group_dropdown', count($groups) > 1);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="handleTaskRequiredCheckbox(); handlePluginCheckboxes();"');
