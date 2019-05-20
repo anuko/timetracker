@@ -510,60 +510,10 @@ class ttUser {
     return $user_list;
   }
 
-  // getGroupsForDropdown obtains an array of groups to populate "Group" dropdown.
-  // It consists of:
-  //   - User home group.
-  //   - The entire stack of groups all the way down to current on behalf group.
-  //   - All immediate children of the current on behalf group.
-  // This allows user to navigate easily to home group, anything in between, and 1 level below.
-  function getGroupsForDropdown() {
-    $mdb2 = getConnection();
-
-    // Start with subgroups.
-    $groups = array();
-    $group_id = $this->getGroup();
-    $sql = "select id, name from tt_groups where org_id = $this->org_id and parent_id = $group_id and status = 1";
-    $res = $mdb2->query($sql);
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $groups[] = $val;
-      }
-    }
-
-    // Add current on behalf group to the beginning of array.
-    $selected_group_id = ($this->behalf_group_id ? $this->behalf_group_id : $this->group_id);
-    $selected_group_name = ($this->behalf_group_id ? $this->behalf_group_name : $this->group_name);
-    array_unshift($groups,  array('id'=>$selected_group_id,'name'=>$selected_group_name));
-
-    // Iterate all the way to the home group, starting with selected ("on behalf") group.
-    $current_group_id = $selected_group_id;
-    while ($current_group_id != $this->group_id) {
-      $sql = "select parent_id from tt_groups where org_id = $this->org_id and id = $current_group_id and status = 1";
-      $res = $mdb2->query($sql);
-      if (is_a($res, 'PEAR_Error')) return false;
-
-      $val = $res->fetchRow();
-      $parent_id = $val['parent_id'];
-      if ($parent_id) {
-        // Get parent group name.
-        $sql = "select name from tt_groups where org_id = $this->org_id and id = $parent_id and status = 1";
-        $res = $mdb2->query($sql);
-        if (is_a($res, 'PEAR_Error')) return false;
-        $val = $res->fetchRow();
-        if (!$val) return false;
-        array_unshift($groups, array('id'=>$parent_id,'name'=>$val['name']));
-        $current_group_id = $parent_id;
-      } else {
-        return false;
-      }
-    }
-    return $groups;
-  }
-
-  // getGroupsForDropdown2 obtains an array of groups to populate the "Group" dropdown.
-  // It consists of the entire tree starting from user home group down.
+  // getGroupsForDropdown obtains an array of groups to populate the "Group" dropdown.
+  // It consists of the entire tree starting from user home group.
   // Group name is prefixed with additional characters to indicate subgroups level.
-  function getGroupsForDropdown2() {
+  function getGroupsForDropdown() {
     global $user;
 
     // Start with user home group.
@@ -571,12 +521,12 @@ class ttUser {
     $subgroup_level = 0;
     $group_id = $user->group_id;
 
-    $this->addGroup($groups, $group_id, $subgroup_level);
+    $this->addGroupToDropdown($groups, $group_id, $subgroup_level);
     return $groups;
   }
 
-  // addGroup is a recursive function to populate a tree of groups.
-  function addGroup(&$groups, $group_id, $subgroup_level) {
+  // addGroup is a recursive function to populate a tree of groups, used with getGroupsForDropdown().
+  function addGroupToDropdown(&$groups, $group_id, $subgroup_level) {
     // Add indentation markup to indicate subdirectory level.
     for ($i = 0; $i < $subgroup_level; $i++) {
       $name .= '🛑'; // Unicode stop sign.
@@ -588,7 +538,7 @@ class ttUser {
 
     $subgroups = $this->getSubgroups($group_id);
     foreach($subgroups as $subgroup) {
-      $this->addGroup($groups, $subgroup['id'], $subgroup_level+1);
+      $this->addGroupToDropdown($groups, $subgroup['id'], $subgroup_level+1);
     }
   }
 
