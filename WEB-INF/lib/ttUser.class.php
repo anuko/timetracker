@@ -525,7 +525,7 @@ class ttUser {
     return $groups;
   }
 
-  // addGroup is a recursive function to populate a tree of groups, used with getGroupsForDropdown().
+  // addGroupToDropdown is a recursive function to populate a tree of groups, used with getGroupsForDropdown().
   function addGroupToDropdown(&$groups, $group_id, $subgroup_level) {
     // Add indentation markup to indicate subdirectory level.
     for ($i = 0; $i < $subgroup_level; $i++) {
