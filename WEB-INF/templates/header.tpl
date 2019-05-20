@@ -89,9 +89,6 @@
     {if $user->can('manage_basic_settings')}
             <a class="systemMenu" href="group_edit.php">{$i18n.menu.group}</a>
     {/if}
-    {if $user->can('manage_subgroups')}
-            <a class="systemMenu" href="groups.php">{$i18n.menu.subgroups}</a>
-    {/if}
     {if $user->can('manage_features')}
             <a class="systemMenu" href="plugins.php">{$i18n.menu.plugins}</a>
     {/if}

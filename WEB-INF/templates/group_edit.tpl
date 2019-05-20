@@ -23,10 +23,16 @@ function handleTaskRequiredCheckbox() {
     <tr>
       <td>
         <table cellspacing="1" cellpadding="2" border="0">
-{if $user->can('manage_subgroups') && $group_dropdown}
+{if $user->can('manage_subgroups')}
+  {if $group_dropdown}
           <tr>
             <td align="right" nowrap>{$i18n.label.group}:</td>
             <td>{$forms.groupForm.group.control}</td>
+          </tr>
+  {/if}
+          <tr>
+            <td align="right" nowrap>{$i18n.label.subgroups}:</td>
+            <td><a href="groups.php">{$i18n.label.configure}</a></td>
           </tr>
 {/if}
           <tr>
