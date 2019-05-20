@@ -68,7 +68,7 @@ if ($request->isPost() && $groupChanged) {
  $user->setOnBehalfGroup($group_id);
 }
 
-$groups = $user->getGroupsForDropdown();
+$groups = $user->getGroupsForDropdown2();
 $group = ttGroupHelper::getGroupAttrs($group_id);
 $config = $user->getConfigHelper();
 

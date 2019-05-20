@@ -560,6 +560,38 @@ class ttUser {
     return $groups;
   }
 
+  // getGroupsForDropdown2 obtains an array of groups to populate the "Group" dropdown.
+  // It consists of the entire tree starting from user home group down.
+  // Group name is prefixed with additional characters to indicate subgroups level.
+  function getGroupsForDropdown2() {
+    global $user;
+
+    // Start with user home group.
+    $groups = array();
+    $subgroup_level = 0;
+    $group_id = $user->group_id;
+
+    $this->addGroup($groups, $group_id, $subgroup_level);
+    return $groups;
+  }
+
+  // addGroup is a recursive function to populate a tree of groups.
+  function addGroup(&$groups, $group_id, $subgroup_level) {
+    // Add indentation markup to indicate subdirectory level.
+    for ($i = 0; $i < $subgroup_level; $i++) {
+      $name .= '🛑'; // Unicode stop sign.
+    }
+    if ($subgroup_level) $name .= ' '; // Add an extra space.
+    $name .= ttGroupHelper::getGroupName($group_id);
+
+    $groups[] = array('id'=>$group_id, 'name'=>$name);
+
+    $subgroups = $this->getSubgroups($group_id);
+    foreach($subgroups as $subgroup) {
+      $this->addGroup($groups, $subgroup['id'], $subgroup_level+1);
+    }
+  }
+
   // getSubgroups obtains a list of immediate subgroups.
   function getSubgroups($group_id = null) {
     $mdb2 = getConnection();
