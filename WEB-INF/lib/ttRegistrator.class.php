@@ -215,13 +215,28 @@ class ttRegistrator {
     return true;
   }
 
-  // registeredRecently determines if we already have a successful recent registration from user IP.
-  // "recent" means "within the last minute" and is set in a query by the following condition:
-  // "and created > now() - interval 1 minute". Change if necessary.
+  // registeredRecently determines if we already have successful recent registration(s) from user IP.
+  // "recent" means the following:
+  // - 2 or more registrations during last 10 minutes, or
+  // - 1 registration during last minute.
+  //
+  // This offers some level of protection from bot registrations.
   function registeredRecently() {
     $mdb2 = getConnection();
 
     $ip_part = ' created_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']);
+    $sql = 'select count(*) as cnt from tt_groups where '.$ip_part.' and created > now() - interval 10 minute';
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    $val = $res->fetchRow();
+    if ($val['cnt'] == 0)
+      return false; // No registrations in last 10 minutes.
+    if ($val['cnt'] >= 2)
+      return true;  // 2 or more registrations in last 10 mintes.
+
+    // If we are here, there was exactly one registration during last 10 minutes.
+    // Determine if it occurred within the last minute in a separate query.
     $sql = 'select created from tt_groups where '.$ip_part.' and created > now() - interval 1 minute';
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error'))
