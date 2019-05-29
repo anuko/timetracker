@@ -45,7 +45,7 @@ class ttProjectHelper {
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name, p.tasks, upb.rate from tt_projects p".
       " inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.project_id = p.id and upb.status = 1)".
-      " where p.group_id = $group_id and p.org_id = $org_id and p.status = 1 order by p.name";
+      " where p.group_id = $group_id and p.org_id = $org_id and p.status = 1 order by upper(p.name)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -87,7 +87,7 @@ class ttProjectHelper {
 
     $result = array();
     $sql = "select id, name, tasks from tt_projects".
-      " where group_id = $group_id and org_id = $org_id and (status = 0 or status = 1) order by name";
+      " where group_id = $group_id and org_id = $org_id and (status = 0 or status = 1) order by upper(name)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
@@ -109,7 +109,7 @@ class ttProjectHelper {
     $sql = "select p.id, p.name, p.tasks from tt_projects p".
       " inner join tt_client_project_binds cpb on (cpb.client_id = $user->client_id and cpb.project_id = p.id)".
       " where p.group_id = $group_id and p.org_id = $org_id and (p.status = 0 or p.status = 1)".
-      " order by p.name";
+      " order by upper(p.name)";
 
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
