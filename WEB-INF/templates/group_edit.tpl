@@ -78,7 +78,7 @@ function handleTaskRequiredCheckbox() {
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.group_edit.record_type}:</td>
-            <td>{$forms.groupForm.record_type.control}</td>
+            <td>{$forms.groupForm.record_type.control} <a href="https://www.anuko.com/lp/tt_38.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.group_edit.punch_mode}:</td>
