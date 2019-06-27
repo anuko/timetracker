@@ -238,6 +238,8 @@ $i18n_key_words = array(
 'label.custom_fields' => 'Campos personalizados',
 // Translate the following.
 // 'label.monthly_quotas' => 'Monthly quotas',
+// TODO: translate the following.
+// 'label.entity' => 'Entity',
 'label.type' => 'Tipo',
 'label.type_dropdown' => 'lista suspensa',
 'label.type_text' => 'texto',

@@ -238,6 +238,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.custom_fields' => 'Custom fields',
 // 'label.monthly_quotas' => 'Monthly quotas',
+// 'label.entity' => 'Entity',
 // 'label.type' => 'Type',
 // 'label.type_dropdown' => 'dropdown',
 // 'label.type_text' => 'text',

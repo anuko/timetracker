@@ -214,6 +214,7 @@ $i18n_key_words = array(
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Custom fields',
 'label.monthly_quotas' => 'Monthly quotas',
+'label.entity' => 'Entity',
 'label.type' => 'Type',
 'label.type_dropdown' => 'dropdown',
 'label.type_text' => 'text',

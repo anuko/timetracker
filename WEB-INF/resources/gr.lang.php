@@ -227,6 +227,8 @@ $i18n_key_words = array(
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Προσαρμοσμένα πεδία',
 'label.monthly_quotas' => 'Μηνιαίες ποσοστώσεις',
+// TODO: translate the following.
+// 'label.entity' => 'Entity',
 'label.type' => 'Τύπος',
 'label.type_dropdown' => 'Αναπτυσσόμενο',
 'label.type_text' => 'Κείμενο',

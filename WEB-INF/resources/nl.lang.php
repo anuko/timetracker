@@ -214,6 +214,8 @@ $i18n_key_words = array(
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Eigen velden',
 'label.monthly_quotas' => 'Doelen per maand',
+// TODO: translate the following.
+// 'label.entity' => 'Entity',
 'label.type' => 'Type',
 'label.type_dropdown' => 'uitklapbaar',
 'label.type_text' => 'tekst',

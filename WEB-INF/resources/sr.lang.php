@@ -238,6 +238,8 @@ $i18n_key_words = array(
 'label.custom_fields' => 'Dodatna polja',
 // Translate the following.
 // 'label.monthly_quotas' => 'Monthly quotas',
+// TODO: translate the following.
+// 'label.entity' => 'Entity',
 'label.type' => 'Tipovi',
 'label.type_dropdown' => 'odaberi',
 'label.type_text' => 'text',

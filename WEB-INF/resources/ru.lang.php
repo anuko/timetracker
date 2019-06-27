@@ -213,6 +213,7 @@ $i18n_key_words = array(
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Дополнительные поля',
 'label.monthly_quotas' => 'Месячные квоты',
+'label.entity' => 'Сущность',
 'label.type' => 'Тип',
 'label.type_dropdown' => 'комбо',
 'label.type_text' => 'текст',

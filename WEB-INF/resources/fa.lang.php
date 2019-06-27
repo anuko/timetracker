@@ -247,6 +247,8 @@ $i18n_key_words = array(
 'label.custom_fields' => 'فیلدهای سفارشی',
 // Translate the following.
 // 'label.monthly_quotas' => 'Monthly quotas',
+// TODO: translate the following.
+// 'label.entity' => 'Entity',
 'label.type' => 'نوع',
 'label.type_dropdown' => 'منو کشویی',
 'label.type_text' => 'متن',

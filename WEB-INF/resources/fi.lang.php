@@ -239,6 +239,8 @@ $i18n_key_words = array(
 'label.custom_fields' => 'Omat kentät',
 // TODO: translate the following.
 // 'label.monthly_quotas' => 'Monthly quotas',
+// TODO: translate the following.
+// 'label.entity' => 'Entity',
 'label.type' => 'Tyyppi',
 'label.type_dropdown' => 'pudotusvalikko',
 'label.type_text' => 'teksti',

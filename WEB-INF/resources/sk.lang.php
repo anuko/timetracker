@@ -244,6 +244,8 @@ $i18n_key_words = array(
 'label.custom_fields' => 'Vlastné polia',
 // Translate the following.
 // 'label.monthly_quotas' => 'Monthly quotas',
+// TODO: translate the following.
+// 'label.entity' => 'Entity',
 'label.type' => 'Typ',
 'label.type_dropdown' => 'rozbaľovacie pole',
 'label.type_text' => 'text',

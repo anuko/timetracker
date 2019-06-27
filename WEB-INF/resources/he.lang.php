@@ -255,6 +255,7 @@ $i18n_key_words = array(
 'label.custom_fields' => 'שדות אישיים',
 // Translate the following.
 // 'label.monthly_quotas' => 'Monthly quotas',
+// 'label.entity' => 'Entity',
 'label.type' => 'סוג',
 'label.type_dropdown' => 'רשימה',
 'label.type_text' => 'טקסט',

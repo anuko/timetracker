@@ -235,6 +235,8 @@ $i18n_key_words = array(
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Brugerdefineret felt',
 'label.monthly_quotas' => 'Månedlig kvota',
+// TODO: translate the following.
+// 'label.entity' => 'Entity',
 'label.type' => 'Type',
 'label.type_dropdown' => 'Dropdown',
 'label.type_text' => 'Tekst',

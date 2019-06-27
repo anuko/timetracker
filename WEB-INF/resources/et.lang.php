@@ -241,6 +241,8 @@ $i18n_key_words = array(
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Eriväljad',
 'label.monthly_quotas' => 'Kuu kvoot',
+// TODO: translate the following.
+// 'label.entity' => 'Entity',
 'label.type' => 'Tüüp',
 'label.type_dropdown' => 'rippmenüü',
 'label.type_text' => 'tekst',

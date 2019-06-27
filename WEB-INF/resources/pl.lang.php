@@ -241,6 +241,8 @@ $i18n_key_words = array(
 'label.custom_fields' => 'Niestandardowe pola',
 // Translate the following.
 // 'label.monthly_quotas' => 'Monthly quotas',
+// TODO: translate the following.
+// 'label.entity' => 'Entity',
 'label.type' => 'Rodzaj',
 'label.type_dropdown' => 'lista rozwijana',
 'label.type_text' => 'tekst',
