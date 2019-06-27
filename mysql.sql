@@ -381,6 +381,7 @@ CREATE TABLE `tt_custom_fields` (
   `id` int(11) NOT NULL auto_increment,    # custom field id
   `group_id` int(11) NOT NULL,             # group id
   `org_id` int(11) default NULL,           # organization id
+  `entity_type` varchar(32) NOT NULL default 'time', # type of entity custom field is associated with (time, user, project, task, etc.)
   `type` tinyint(4) NOT NULL default 0,    # custom field type (text or dropdown)
   `label` varchar(32) NOT NULL default '', # custom field label
   `required` tinyint(4) default 0,         # whether this custom field is mandatory for time records
@@ -610,4 +611,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.4', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.5', now()); # TODO: change when structure changes.
