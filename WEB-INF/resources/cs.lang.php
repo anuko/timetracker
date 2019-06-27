@@ -423,6 +423,8 @@ $i18n_key_words = array(
 'dropdown.previous_year' => 'minulý rok',
 'dropdown.selected_year' => 'rok',
 'dropdown.all_time' => 'od počátku',
+// TODO: translate the following.
+// 'dropdown.time' => 'time',
 'dropdown.projects' => 'projekty',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',

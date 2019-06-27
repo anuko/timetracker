@@ -419,6 +419,8 @@ $i18n_key_words = array(
 'dropdown.previous_year' => '昨年',
 'dropdown.selected_year' => '年',
 'dropdown.all_time' => 'すべての時間',
+// TODO: translate the following.
+// 'dropdown.time' => 'time',
 'dropdown.projects' => 'プロジェクト',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',

@@ -420,6 +420,7 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 // 'dropdown.all_time' => 'all time',
+// 'dropdown.time' => 'time',
 'dropdown.projects' => 'proiecte',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',

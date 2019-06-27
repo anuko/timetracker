@@ -401,6 +401,8 @@ $i18n_key_words = array(
 'dropdown.previous_year' => 'eelmine aasta',
 'dropdown.selected_year' => 'aasta',
 'dropdown.all_time' => 'kõik ajavahemikud',
+// TODO: translate the following.
+// 'dropdown.time' => 'time',
 'dropdown.projects' => 'projektid',
 'dropdown.tasks' => 'tööülesanded',
 'dropdown.clients' => 'kliendid',

@@ -407,6 +407,8 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 // 'dropdown.selected_year' => 'year',
 'dropdown.all_time' => 'همه زمان ها',
+// TODO: translate the following.
+// 'dropdown.time' => 'time',
 'dropdown.projects' => 'پروژه ها',
 'dropdown.tasks' => 'وظایف',
 'dropdown.clients' => 'مشتریان',

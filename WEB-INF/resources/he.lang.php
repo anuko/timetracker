@@ -413,6 +413,8 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 'dropdown.selected_year' => 'שנה',
 'dropdown.all_time' => 'הכל',
+// TODO: translate the following.
+// 'dropdown.time' => 'time',
 'dropdown.projects' => 'פרוייקטים',
 'dropdown.tasks' => 'משימות',
 'dropdown.clients' => 'לקוחות',

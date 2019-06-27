@@ -386,6 +386,8 @@ $i18n_key_words = array(
 'dropdown.previous_year' => 'προηγούμενο έτος',
 'dropdown.selected_year' => 'έτος',
 'dropdown.all_time' => 'όλη την περίοδο',
+// TODO: translate the following.
+// 'dropdown.time' => 'time',
 'dropdown.projects' => 'έργα',
 'dropdown.tasks' => 'εργασίες',
 'dropdown.clients' => 'πελάτες',

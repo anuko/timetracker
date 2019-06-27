@@ -396,6 +396,8 @@ $i18n_key_words = array(
 'dropdown.previous_year' => 'Föregående år',
 'dropdown.selected_year' => 'År',
 'dropdown.all_time' => 'Livstid',
+// TODO: translate the following.
+// 'dropdown.time' => 'time',
 'dropdown.projects' => 'Projekt',
 'dropdown.tasks' => 'Arbetsuppgifter',
 'dropdown.clients' => 'Kunder',

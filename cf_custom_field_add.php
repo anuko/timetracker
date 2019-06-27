@@ -49,6 +49,7 @@ if (count($fields) >= 1) {
 
 if ($request->isPost()) {
   $cl_field_name = trim($request->getParameter('name'));
+  $cl_field_entity = $request->getParameter('entity');
   $cl_field_type = $request->getParameter('type');
   $cl_required = $request->getParameter('required');
   if (!$cl_required)
@@ -57,6 +58,10 @@ if ($request->isPost()) {
 
 $form = new Form('fieldForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>''));
+$form->addInput(array('type'=>'combobox','name'=>'entity',
+  'data'=>array(CustomFields::ENTITY_TIME=>$i18n->get('label.type_text'),
+                CustomFields::ENTITY_USER=>$i18n->get('label.user'))
+));
 $form->addInput(array('type'=>'combobox','name'=>'type',
   'data'=>array(CustomFields::TYPE_TEXT=>$i18n->get('label.type_text'),
                 CustomFields::TYPE_DROPDOWN=>$i18n->get('label.type_dropdown'))

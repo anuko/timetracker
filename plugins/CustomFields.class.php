@@ -29,7 +29,10 @@
 class CustomFields {
 
   // Definitions of custom field types.
-
+  const ENTITY_TIME = 1;    // Field is associated with time entries.
+  const ENTITY_USER = 2;    // Field is associated with users.
+  const ENTITY_PROJECT = 3; // Field is associated with projects.
+    
   const TYPE_TEXT = 1;     // A text field.
   const TYPE_DROPDOWN = 2; // A dropdown field with pre-defined values.
 

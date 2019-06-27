@@ -360,6 +360,7 @@ $i18n_key_words = array(
 'dropdown.previous_year' => 'прошлый год',
 'dropdown.selected_year' => 'год',
 'dropdown.all_time' => 'всё время',
+'dropdown.time' => 'время',
 'dropdown.projects' => 'проекты',
 'dropdown.tasks' => 'задачи',
 'dropdown.clients' => 'клиенты',
