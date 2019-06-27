@@ -424,6 +424,7 @@ $i18n_key_words = array(
 'dropdown.all_time' => '전시간',
 // TODO: translate the following.
 // 'dropdown.time' => 'time',
+// 'dropdown.user' => 'user',
 'dropdown.projects' => '프로젝트',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',

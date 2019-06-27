@@ -399,6 +399,7 @@ $i18n_key_words = array(
 'dropdown.all_time' => 'svi datumi',
 // TODO: translate the following.
 // 'dropdown.time' => 'time',
+// 'dropdown.user' => 'user',
 'dropdown.projects' => 'projekti',
 'dropdown.tasks' => 'zadaci',
 'dropdown.clients' => 'klijenti',

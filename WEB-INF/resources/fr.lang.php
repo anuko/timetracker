@@ -390,6 +390,7 @@ $i18n_key_words = array(
 'dropdown.all_time' => 'depuis toujours',
 // TODO: translate the following.
 // 'dropdown.time' => 'time',
+// 'dropdown.user' => 'user',
 'dropdown.projects' => 'Projets',
 'dropdown.tasks' => 'Tâches',
 'dropdown.clients' => 'Clients',

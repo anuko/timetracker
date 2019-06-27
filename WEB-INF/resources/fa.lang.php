@@ -409,6 +409,7 @@ $i18n_key_words = array(
 'dropdown.all_time' => 'همه زمان ها',
 // TODO: translate the following.
 // 'dropdown.time' => 'time',
+// 'dropdown.user' => 'user',
 'dropdown.projects' => 'پروژه ها',
 'dropdown.tasks' => 'وظایف',
 'dropdown.clients' => 'مشتریان',

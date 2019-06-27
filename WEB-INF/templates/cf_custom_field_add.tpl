@@ -8,6 +8,12 @@
           <td align="right">{$i18n.label.thing_name} (*):</td>
           <td>{$forms.fieldForm.name.control}</td>
         </tr>
+{if isTrue('CF_DEBUG')}
+        <tr>
+          <td align="right">{$i18n.label.entity}:</td>
+          <td>{$forms.fieldForm.entity.control} <a href="https://www.anuko.com/lp/tt_39.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+        </tr>
+{/if}
         <tr>
           <td align="right">{$i18n.label.type}:</td>
           <td>{$forms.fieldForm.type.control}</td>

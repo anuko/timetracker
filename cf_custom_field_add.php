@@ -49,7 +49,7 @@ if (count($fields) >= 1) {
 
 if ($request->isPost()) {
   $cl_field_name = trim($request->getParameter('name'));
-  $cl_field_entity = $request->getParameter('entity');
+  $cl_entity_type = $request->getParameter('entity');
   $cl_field_type = $request->getParameter('type');
   $cl_required = $request->getParameter('required');
   if (!$cl_required)
@@ -59,8 +59,8 @@ if ($request->isPost()) {
 $form = new Form('fieldForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>''));
 $form->addInput(array('type'=>'combobox','name'=>'entity',
-  'data'=>array(CustomFields::ENTITY_TIME=>$i18n->get('label.type_text'),
-                CustomFields::ENTITY_USER=>$i18n->get('label.user'))
+  'data'=>array(CustomFields::ENTITY_TIME=>$i18n->get('dropdown.time'),
+                CustomFields::ENTITY_USER=>$i18n->get('dropdown.user'))
 ));
 $form->addInput(array('type'=>'combobox','name'=>'type',
   'data'=>array(CustomFields::TYPE_TEXT=>$i18n->get('label.type_text'),
@@ -74,7 +74,7 @@ if ($request->isPost()) {
   if (!ttValidString($cl_field_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
 
   if ($err->no()) {
-    $res = CustomFields::insertField($cl_field_name, $cl_field_type, $cl_required);
+    $res = CustomFields::insertField($cl_field_name, $cl_entity_type, $cl_field_type, $cl_required);
     if ($res) {
       header('Location: cf_custom_fields.php');
       exit();

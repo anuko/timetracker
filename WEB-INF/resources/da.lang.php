@@ -398,6 +398,7 @@ $i18n_key_words = array(
 'dropdown.all_time' => 'Alt',
 // TODO: translate the following.
 // 'dropdown.time' => 'time',
+// 'dropdown.user' => 'user',
 'dropdown.projects' => 'Projekter',
 'dropdown.tasks' => 'Opgaver',
 'dropdown.clients' => 'Klienter',

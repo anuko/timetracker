@@ -361,6 +361,7 @@ $i18n_key_words = array(
 'dropdown.selected_year' => 'год',
 'dropdown.all_time' => 'всё время',
 'dropdown.time' => 'время',
+'dropdown.user' => 'пользователь',
 'dropdown.projects' => 'проекты',
 'dropdown.tasks' => 'задачи',
 'dropdown.clients' => 'клиенты',

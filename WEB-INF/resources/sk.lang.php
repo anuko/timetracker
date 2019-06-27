@@ -405,6 +405,7 @@ $i18n_key_words = array(
 'dropdown.all_time' => 'celý čas',
 // TODO: translate the following.
 // 'dropdown.time' => 'time',
+// 'dropdown.user' => 'user',
 'dropdown.projects' => 'projekty',
 'dropdown.tasks' => 'úlohy',
 // TODO: translate the following.

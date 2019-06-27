@@ -416,6 +416,7 @@ $i18n_key_words = array(
 'dropdown.all_time' => '全部時間',
 // TODO: translate the following.
 // 'dropdown.time' => 'time',
+// 'dropdown.user' => 'user',
 'dropdown.projects' => '項目',
 // TODO: translate the following.
 // 'dropdown.tasks' => 'tasks',

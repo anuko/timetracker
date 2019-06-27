@@ -401,6 +401,7 @@ $i18n_key_words = array(
 'dropdown.all_time' => 'od początku',
 // TODO: translate the following.
 // 'dropdown.time' => 'time',
+// 'dropdown.user' => 'user',
 'dropdown.projects' => 'projekty',
 'dropdown.tasks' => 'zadania',
 'dropdown.clients' => 'klienci',
