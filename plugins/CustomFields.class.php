@@ -254,7 +254,7 @@ class CustomFields {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-        $fields[] = $val; // array('id'=>$val['id'],'type'=>$val['type'],'label'=>$val['label']);
+        $fields[] = $val;
       }
       return $fields;
     }

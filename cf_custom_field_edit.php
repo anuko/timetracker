@@ -51,10 +51,10 @@ $form = new Form('fieldForm');
 if ($err->no()) {
   $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$field['label']));
   $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
-  $form->addInput(array('type'=>'checkbox','name'=>'required','value'=>$field['required']));
   $form->addInput(array('type'=>'combobox','name'=>'type','value'=>$field['type'],
     'data'=>array(CustomFields::TYPE_TEXT=>$i18n->get('label.type_text'),
                   CustomFields::TYPE_DROPDOWN=>$i18n->get('label.type_dropdown'))));
+  $form->addInput(array('type'=>'checkbox','name'=>'required','value'=>$field['required']));
   $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 }
 

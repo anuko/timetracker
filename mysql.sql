@@ -424,6 +424,36 @@ create index log_idx on tt_custom_field_log(log_id);
 
 
 #
+# Structure for table tt_entity_custom_fields.
+# This table stores custom field values for entities such as users and projects
+# except for "time" entity (and possibly "expense" in future).
+# "time" custom fields are kept separately in tt_custom_field_log
+# because tt_log (and tt_custom_field_log) can grow very large.
+#
+CREATE TABLE `tt_entity_custom_fields` (
+  `id` int(10) unsigned NOT NULL auto_increment, # record id in this table
+  `group_id` int(10) unsigned NOT NULL,          # group id
+  `org_id` int(10) unsigned NOT NULL,            # organization id
+  `entity_type` tinyint(4) NOT NULL,             # entity type
+  `entity_id` int(10) unsigned NOT NULL,         # entity id this record corresponds to
+  `field_id` int(10) unsigned NOT NULL,          # custom field id
+  `option_id` int(10) unsigned default NULL,     # Option id. Used for dropdown custom fields.
+  `value` varchar(255) default NULL,             # Text value. Used for text custom fields.
+  `created` datetime default NULL,               # creation timestamp
+  `created_ip` varchar(45) default NULL,         # creator ip
+  `created_by` int(10) unsigned default NULL,    # creator user_id
+  `modified` datetime default NULL,              # modification timestamp
+  `modified_ip` varchar(45) default NULL,        # modifier ip
+  `modified_by` int(10) unsigned default NULL,   # modifier user_id
+  `status` tinyint(4) default 1,                 # record status
+  PRIMARY KEY  (`id`)
+);
+
+# Create an index that guarantees unique custom fields per entity.
+create unique index entity_idx on tt_entity_custom_fields(entity_type, entity_id, field_id);
+
+
+#
 # Structure for table tt_expense_items.
 # This table lists expense items.
 #
@@ -611,4 +641,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.6', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.7', now()); # TODO: change when structure changes.
