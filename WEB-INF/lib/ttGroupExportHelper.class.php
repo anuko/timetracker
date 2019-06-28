@@ -406,6 +406,7 @@ class ttGroupExportHelper {
       fwrite($this->file, $this->indentation."  <custom_fields>\n");
       foreach ($custom_fields as $custom_field) {
         $custom_field_part = $this->indentation.'    '."<custom_field id=\"".$this->customFieldMap[$custom_field['id']]."\"";
+        $custom_field_part .= " entity_type=\"".$custom_field['entity_type']."\"";
         $custom_field_part .= " type=\"".$custom_field['type']."\"";
         $custom_field_part .= " label=\"".htmlspecialchars($custom_field['label'])."\"";
         $custom_field_part .= " required=\"".$custom_field['required']."\"";

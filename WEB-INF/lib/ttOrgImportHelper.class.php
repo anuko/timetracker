@@ -352,6 +352,7 @@ class ttOrgImportHelper {
         $custom_field_id = $this->insertCustomField(array(
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
+          'entity_type' => $attrs['ENTITY_TYPE'],
           'type' => $attrs['TYPE'],
           'label' => $attrs['LABEL'],
           'required' => $attrs['REQUIRED'],
@@ -1114,14 +1115,15 @@ class ttOrgImportHelper {
 
     $group_id = (int) $fields['group_id'];
     $org_id = (int) $fields['org_id'];
+    $entity_type = (int) $fields['entity_type'];
     $type = (int) $fields['type'];
     $label = $fields['label'];
     $required = (int) $fields['required'];
     $status = $fields['status'];
 
     $sql = "insert into tt_custom_fields".
-      " (group_id, org_id, type, label, required, status)".
-      " values($group_id, $org_id, $type, ".$mdb2->quote($label).", $required, ".$mdb2->quote($status).")";
+      " (group_id, org_id, entity_type, type, label, required, status)".
+      " values($group_id, $org_id, $entity_type, $type, ".$mdb2->quote($label).", $required, ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
