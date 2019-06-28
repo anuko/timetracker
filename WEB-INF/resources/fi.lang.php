@@ -276,6 +276,13 @@ $i18n_key_words = array(
 'label.active_users' => 'Aktiiviset käyttäjät',
 'label.inactive_users' => 'Ei-aktiiviset käyttäjät',
 
+// Entity names. We use lower case (in English) because they are used in dropdowns, too.
+// They are used to associate a custom field with an entity type.
+// TODO: translate the following.
+// 'entity.time' => 'time',
+// 'entity.user' => 'user',
+// 'entity.project' => 'project',
+
 // Form titles.
 'title.error' => 'Virhe',
 // TODO: Translate the following.
@@ -396,9 +403,6 @@ $i18n_key_words = array(
 // 'dropdown.previous_year' => 'previous year',
 'dropdown.selected_year' => 'vuosi',
 'dropdown.all_time' => 'kaikki tunnit',
-// TODO: translate the following.
-// 'dropdown.time' => 'time',
-// 'dropdown.user' => 'user',
 'dropdown.projects' => 'projektit',
 'dropdown.tasks' => 'tehtävät',
 'dropdown.clients' => 'asiakkaat',

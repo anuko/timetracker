@@ -41,7 +41,7 @@ if (!$user->isPluginEnabled('cf')) {
 }
 $fields = CustomFields::getFields();
 // Deny access when max number of custom fields is already set.
-if (count($fields) >= 1) {
+if (count($fields) >= 1 && !isTrue('CF_DEBUG')) {
   header('Location: access_denied.php');
   exit();
 }
@@ -59,8 +59,8 @@ if ($request->isPost()) {
 $form = new Form('fieldForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>''));
 $form->addInput(array('type'=>'combobox','name'=>'entity',
-  'data'=>array(CustomFields::ENTITY_TIME=>$i18n->get('dropdown.time'),
-                CustomFields::ENTITY_USER=>$i18n->get('dropdown.user'))
+  'data'=>array(CustomFields::ENTITY_TIME=>$i18n->get('entity.time'),
+                CustomFields::ENTITY_USER=>$i18n->get('entity.user'))
 ));
 $form->addInput(array('type'=>'combobox','name'=>'type',
   'data'=>array(CustomFields::TYPE_TEXT=>$i18n->get('label.type_text'),

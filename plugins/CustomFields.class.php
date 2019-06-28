@@ -249,12 +249,12 @@ class CustomFields {
     $org_id = $user->org_id;
 
     $fields = array();
-    $sql = "select id, type, label from tt_custom_fields".
+    $sql = "select id, entity_type, type, label from tt_custom_fields".
       " where group_id = $group_id and org_id = $org_id and status = 1 and type > 0";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-        $fields[] = array('id'=>$val['id'],'type'=>$val['type'],'label'=>$val['label']);
+        $fields[] = $val; // array('id'=>$val['id'],'type'=>$val['type'],'label'=>$val['label']);
       }
       return $fields;
     }
@@ -308,8 +308,8 @@ class CustomFields {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $sql = "insert into tt_custom_fields (group_id, org_id, type, label, required, status)".
-      " values($group_id, $org_id, $field_type, ".$mdb2->quote($field_name).", $required, 1)";
+    $sql = "insert into tt_custom_fields (group_id, org_id, entity_type, type, label, required, status)".
+      " values($group_id, $org_id, $entity_type, $field_type, ".$mdb2->quote($field_name).", $required, 1)";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }

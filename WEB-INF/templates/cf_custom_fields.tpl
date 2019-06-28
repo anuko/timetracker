@@ -5,7 +5,8 @@
 {if $user->can('manage_custom_fields')}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr>
-          <td width="50%" class="tableHeader">{$i18n.label.thing_name}</td>
+          <td class="tableHeader">{$i18n.label.thing_name}</td>
+          <td class="tableHeader">{$i18n.label.entity}</td>
           <td class="tableHeader">{$i18n.label.type}</td>
           <td class="tableHeader">{$i18n.menu.options}</td>
           <td></td>
@@ -15,6 +16,13 @@
     {foreach $custom_fields as $field}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$field['label']|escape}</td>
+      {if CustomFields::ENTITY_TIME == $field['entity_type']}
+          <td>{$i18n.entity.time}</td>
+      {elseif CustomFields::ENTITY_USER == $field['entity_type']}
+          <td>{$i18n.entity.user}</td>
+      {else}
+          <td></td>
+      {/if}
       {if CustomFields::TYPE_TEXT == $field['type']}
           <td>{$i18n.label.type_text}</td>
           <td></td>
