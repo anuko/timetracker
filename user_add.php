@@ -50,6 +50,13 @@ $show_quota = $user->isPluginEnabled('mq');
 if ($user->isPluginEnabled('cl'))
   $clients = ttGroupHelper::getActiveClients();
 
+// Use custom fields plugin if it is enabled.
+if ($user->isPluginEnabled('cf')) {
+  require_once('plugins/CustomFields.class.php');
+  $custom_fields = new CustomFields();
+  $smarty->assign('custom_fields', $custom_fields);
+}
+
 $assigned_projects = array();
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -90,6 +97,11 @@ $active_roles = ttTeamHelper::getActiveRolesForUser();
 $form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role_id,'data'=>$active_roles,'datakeys'=>array('id', 'name')));
 if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->get('dropdown.select'))));
+
+// If we have custom fields - add controls for them.
+if ($custom_fields && $custom_fields->userFields) {
+  // Coding in progress...
+}
 
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','format'=>'.2','value'=>$cl_rate));
 if ($show_quota)

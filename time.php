@@ -280,7 +280,7 @@ if ($custom_fields && $custom_fields->fields[0]) {
     $form->addInput(array('type'=>'combobox','name'=>'cf_1',
       'style'=>'width: 250px;',
       'value'=>$cl_cf_1,
-      'data'=>$custom_fields->options,
+      'data'=>CustomFields::getOptions($custom_fields->fields[0]['id']),
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
   }
 }

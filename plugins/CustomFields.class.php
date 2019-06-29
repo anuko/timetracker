@@ -33,11 +33,16 @@ class CustomFields {
   const ENTITY_USER = 2;    // Field is associated with users.
   const ENTITY_PROJECT = 3; // Field is associated with projects.
 
-  const TYPE_TEXT = 1;     // A text field.
-  const TYPE_DROPDOWN = 2; // A dropdown field with pre-defined values.
+  const TYPE_TEXT = 1;      // A text field.
+  const TYPE_DROPDOWN = 2;  // A dropdown field with pre-defined values.
 
+  // TODO: replace $fields with entity-specific arrays: timeFields, userFields, etc.
   var $fields = array();  // Array of custom fields for group.
-  var $options = array(); // Array of options for a dropdown custom field.
+
+  // Refactoring ongoing...
+  var $timeFields = null;
+  var $userFields = null;
+  var $projectFields = null;
 
   // Constructor.
   function __construct() {
@@ -48,25 +53,18 @@ class CustomFields {
     $org_id = $user->org_id;
 
     // Get fields.
-    $sql = "select id, type, label, required from tt_custom_fields".
+    $sql = "select id, entity_type, type, label, required from tt_custom_fields".
       " where group_id = $group_id and org_id = $org_id and status = 1 and type > 0";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
         $this->fields[] = array('id'=>$val['id'],'type'=>$val['type'],'label'=>$val['label'],'required'=>$val['required'],'value'=>'');
-      }
-    }
-
-    // If we have a dropdown obtain options for it.
-    if ((count($this->fields) > 0) && ($this->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)) {
-
-      $sql = "select id, value from tt_custom_field_options".
-        " where field_id = ".$this->fields[0]['id']." and group_id = $group_id and org_id = $org_id and status = 1 order by value";
-      $res = $mdb2->query($sql);
-      if (!is_a($res, 'PEAR_Error')) {
-        while ($val = $res->fetchRow()) {
-          $this->options[$val['id']] = $val['value'];
-        }
+        if (CustomFields::ENTITY_TIME == $val['entity_type'])
+          $this->timeFields[] = $val;
+        else if (CustomFields::ENTITY_USER == $val['entity_type'])
+          $this->userFields[] = $val;
+        else if (CustomFields::ENTITY_PROJECT == $val['entity_type'])
+          $this->projectFields[] = $val;
       }
     }
   }

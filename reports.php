@@ -58,7 +58,7 @@ if ($user->isPluginEnabled('cf')) {
   $showCustomFieldCheckbox = $custom_fields->fields[0];
   $showCustomFieldDropdown = $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN;
   if ($showCustomFieldDropdown)
-    $showCustomFieldDropdown &= count($custom_fields->options) > 0;
+    $showCustomFieldDropdown &= CustomFields::getOptions($custom_fields->fields[0]['id']);
 }
 
 $form = new Form('reportForm');
@@ -102,7 +102,7 @@ if ($showCustomFieldDropdown) {
   $form->addInput(array('type'=>'combobox','name'=>'option',
     'style'=>'width: 250px;',
     'value'=>$cl_cf_1,
-    'data'=>$custom_fields->options,
+    'data'=>CustomFields::getOptions($custom_fields->fields[0]['id']),
     'empty'=>array(''=>$i18n->get('dropdown.all'))));
 }
 
