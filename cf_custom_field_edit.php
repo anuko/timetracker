@@ -51,6 +51,17 @@ $form = new Form('fieldForm');
 if ($err->no()) {
   $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$field['label']));
   $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
+
+  // TODO: consider encapsulating this block in a function.
+  $entity_type = $field['entity_type'];
+  if (CustomFields::ENTITY_TIME == $entity_type)
+    $entity = $i18n->get('entity.time');
+  else if (CustomFields::ENTITY_USER == $entity_type)
+    $entity = $i18n->get('entity.user');
+  else if (CustomFields::ENTITY_PROJECT == $entity_type)
+    $entity = $i18n->get('entity.project');
+  $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'entity','value'=>$entity,'enable'=>false));
+
   $form->addInput(array('type'=>'combobox','name'=>'type','value'=>$field['type'],
     'data'=>array(CustomFields::TYPE_TEXT=>$i18n->get('label.type_text'),
                   CustomFields::TYPE_DROPDOWN=>$i18n->get('label.type_dropdown'))));

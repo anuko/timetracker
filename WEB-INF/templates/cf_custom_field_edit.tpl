@@ -9,6 +9,10 @@
           <td>{$forms.fieldForm.name.control}</td>
         </tr>
         <tr>
+          <td align="right">{$i18n.label.entity}:</td>
+          <td>{$forms.fieldForm.entity.control} <a href="https://www.anuko.com/lp/tt_39.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+        </tr>
+        <tr>
           <td align="right">{$i18n.label.type}:</td>
           <td>{$forms.fieldForm.type.control}</td>
         </tr>

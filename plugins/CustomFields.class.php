@@ -267,7 +267,7 @@ class CustomFields {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $sql = "select label, type, required from tt_custom_fields".
+    $sql = "select label, entity_type, type, required from tt_custom_fields".
       " where id = $id and group_id = $group_id and org_id = $org_id";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
