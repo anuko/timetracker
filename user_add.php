@@ -100,7 +100,17 @@ if ($user->isPluginEnabled('cl'))
 
 // If we have custom fields - add controls for them.
 if ($custom_fields && $custom_fields->userFields) {
-  // Coding in progress...
+  foreach ($custom_fields->userFields as $userField) {
+    $field_name = 'user_field_'.$userField['id'];
+    if ($userField['type'] == CustomFields::TYPE_TEXT) {
+      $form->addInput(array('type'=>'text','name'=>$field_name));
+    } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
+      $form->addInput(array('type'=>'combobox','name'=>$field_name,
+      'style'=>'width: 250px;',
+      'data'=>CustomFields::getOptions($userField['id']),
+      'empty'=>array(''=>$i18n->get('dropdown.select'))));
+    }
+  }
 }
 
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','format'=>'.2','value'=>$cl_rate));
