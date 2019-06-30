@@ -68,8 +68,20 @@ if ($request->isPost()) {
   $cl_email = trim($request->getParameter('email'));
   $cl_role_id = $request->getParameter('role');
   $cl_client_id = $request->getParameter('client');
-  $cl_rate = $request->getParameter('rate');
   $cl_quota_percent = $request->getParameter('quota_percent');
+  // If we have user custom fields - collect input.
+  if ($custom_fields && $custom_fields->userFields) {
+    foreach ($custom_fields->userFields as $userField) {
+      $control_name = 'user_field_'.$userField['id'];
+      $userCustomFields[$userField['id']] = array('field_id' => $userField['id'],
+        'control_name' => $control_name,
+        'label' => $userField['label'],
+        'type' => $userField['type'],
+        'required' => $userField['required'],
+        'value' => trim($request->getParameter($control_name)));
+    }
+  }
+  $cl_rate = $request->getParameter('rate');
   $cl_projects = $request->getParameter('projects');
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
@@ -103,11 +115,12 @@ if ($custom_fields && $custom_fields->userFields) {
   foreach ($custom_fields->userFields as $userField) {
     $field_name = 'user_field_'.$userField['id'];
     if ($userField['type'] == CustomFields::TYPE_TEXT) {
-      $form->addInput(array('type'=>'text','name'=>$field_name));
+      $form->addInput(array('type'=>'text','name'=>$field_name,'value'=>$userCustomFields[$userField['id']]['value']));
     } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
       $form->addInput(array('type'=>'combobox','name'=>$field_name,
       'style'=>'width: 250px;',
       'data'=>CustomFields::getOptions($userField['id']),
+      'value'=>$userCustomFields[$userField['id']]['value'],
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
     }
   }
@@ -175,14 +188,9 @@ if ($request->isPost()) {
   if (!ttValidFloat($cl_quota_percent, true)) $err->add($i18n->get('error.field'), $i18n->get('label.quota'));
   // Validate input in user custom fields.
   if ($custom_fields && $custom_fields->userFields) {
-    foreach ($custom_fields->userFields as $userField) {
-      $control_name = 'user_field_'.$userField['id'];
-      $field_label = htmlspecialchars($userField['label']);
-      $field_type = $userField['type'];
-      $required = $userField['required'];
-      $field_value = trim($request->getParameter($control_name));
+    foreach ($userCustomFields as $userField) {
       // Validation is the same for text and dropdown fields.
-      if (!ttValidString($field_value, !$required)) $err->add($i18n->get('error.field'), $field_label);
+      if (!ttValidString($userField['value'], !$userField['required'])) $err->add($i18n->get('error.field'), htmlspecialchars($userField['label']));
     }
   }
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
@@ -203,7 +211,18 @@ if ($request->isPost()) {
         'projects' => $assigned_projects,
         'email' => $cl_email);
       $user_id = ttUserHelper::insert($fields);
-      if ($user_id) {
+
+      // Insert user custom fields if we have them.
+      $result = true;
+      if ($user_id && $custom_fields && $custom_fields->userFields) {
+        foreach($userCustomFields as $userField) {
+          if (!$result) break;
+          $result = true; // TODO: replace this with a function call that inserts a field.
+          // Perhaps the entire block should be in the function call?
+        }
+      }
+
+      if ($user_id && $result) {
         if (!$user->exists()) {
           // We added a user to an empty subgroup. Set new user as on behalf user.
           // Needed for user-based things to work (such as notifications config).
