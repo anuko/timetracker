@@ -172,8 +172,20 @@ if ($request->isPost()) {
   if (!ttValidEmail($cl_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.email'));
   // Require selection of a client for a client role.
   if ($user->isPluginEnabled('cl') && ttRoleHelper::isClientRole($cl_role_id) && !$cl_client_id) $err->add($i18n->get('error.client'));
-  if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
   if (!ttValidFloat($cl_quota_percent, true)) $err->add($i18n->get('error.field'), $i18n->get('label.quota'));
+  // Validate input in user custom fields.
+  if ($custom_fields && $custom_fields->userFields) {
+    foreach ($custom_fields->userFields as $userField) {
+      $control_name = 'user_field_'.$userField['id'];
+      $field_label = htmlspecialchars($userField['label']);
+      $field_type = $userField['type'];
+      $required = $userField['required'];
+      $field_value = trim($request->getParameter($control_name));
+      // Validation is the same for text and dropdown fields.
+      if (!ttValidString($field_value, !$required)) $err->add($i18n->get('error.field'), $field_label);
+    }
+  }
+  if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
   if (!ttUserHelper::canAdd()) $err->add($i18n->get('error.user_count'));
 
   if ($err->no()) {

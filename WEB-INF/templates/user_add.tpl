@@ -109,8 +109,6 @@ function handleClientControl() {
     </tr>
   {/foreach}
 {/if}
-
-
     <tr>
       <td align="right">{$i18n.form.users.default_rate}&nbsp;(0{$user->getDecimalMark()}00):</td>
       <td>{$forms.userForm.rate.control}</td>
