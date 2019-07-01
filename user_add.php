@@ -215,11 +215,7 @@ if ($request->isPost()) {
       // Insert user custom fields if we have them.
       $result = true;
       if ($user_id && $custom_fields && $custom_fields->userFields) {
-        foreach($userCustomFields as $userField) {
-          if (!$result) break;
-          $result = true; // TODO: replace this with a function call that inserts a field.
-          // Perhaps the entire block should be in the function call?
-        }
+        $result = $custom_fields->insertEntityFields(CustomFields::ENTITY_USER, $user_id, $userCustomFields);
       }
 
       if ($user_id && $result) {

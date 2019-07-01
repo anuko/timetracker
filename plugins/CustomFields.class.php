@@ -354,4 +354,55 @@ class CustomFields {
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
+
+  // insertEntityFields - inserts entity custom fields into tt_entity_custom_fields.
+  function insertEntityFields($entity_type, $entity_id, $entityFields) {
+    foreach ($entityFields as $entityField) {
+      if (!$this->insertEntityField($entity_type, $entity_id, $entityField))
+        return false;
+    }
+    return true;
+  }
+
+  // insertEntityField - inserts a single entity custom field into tt_entity_custom_fields.
+  function insertEntityField($entity_type, $entity_id, $entityField) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $created = 'now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
+
+    $field_id = (int) $entityField['field_id'];
+
+    $option_id = $entityField['type'] == CustomFields::TYPE_DROPDOWN ? (int) $entityField['value'] : null;
+    $value = $entityField['type'] == CustomFields::TYPE_TEXT ? $entityField['value'] : null;
+
+    // TODO: add a jon to protect from bogus option_ids in post.
+    $sql = "insert into tt_entity_custom_fields".
+      " (group_id, org_id, entity_type, entity_id, field_id, option_id, value, created, created_ip, created_by)".
+      " values($group_id, $org_id, $entity_type, $entity_id, $field_id, ".$mdb2->quote($option_id).", ".$mdb2->quote($value).", $created)";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // deleteEntityFields - deletes entity custom fields (permanently).
+  // Note: deleting, rather than marking fields deleted is on purpose
+  // because we want to keep the table small after multiple entity edits.
+  function deleteEntityFields($entity_type, $entity_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
+
+    $sql = "delete from  tt_entity_custom_fields".
+      " where entity_type = $entity_type and entity_id = $entity_id".
+      " and group_id = $group_id and org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
 }
