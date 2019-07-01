@@ -708,13 +708,25 @@ class ttUser {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    // Mark user as deleted.
+    // Mark user custom fields as deleted,
+    require_once('plugins/CustomFields.class.php');
+    $entity_type = CustomFields::ENTITY_USER;
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($this->id);
+    $sql = "update tt_entity_custom_fields set status = null $modified_part".
+      " where entity_type = $entity_type and entity_id = $user_id".
+      " and group_id = $group_id and org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    // Mark user as deleted.
     $sql = "update tt_users set status = null $modified_part where id = $user_id".
       " and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       return false;
+
+
 
     return true;
   }
