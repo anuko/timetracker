@@ -134,6 +134,15 @@ function handleClientControl() {
       <td>{$forms.userForm.quota_percent.control} <a href="https://www.anuko.com/lp/tt_27.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
     </tr>
 {/if}
+{if $custom_fields && $custom_fields->userFields}
+  {foreach $custom_fields->userFields as $userField}
+    <tr>
+      <td align="right">{$userField['label']|escape}{if $userField['required']} (*){/if}:</td>
+      {assign var="control_name" value='user_field_'|cat:$userField['id']}
+      <td>{$forms.userForm.$control_name.control}</td>
+    </tr>
+  {/foreach}
+{/if}
     <tr>
       <td align="right">{$i18n.form.users.default_rate}&nbsp;(0{$user->getDecimalMark()}00):</td>
       <td>{$forms.userForm.rate.control}</td>

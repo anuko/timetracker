@@ -53,6 +53,13 @@ $show_quota = $user->isPluginEnabled('mq');
 if ($user->isPluginEnabled('cl'))
   $clients = ttGroupHelper::getActiveClients();
 
+// Use custom fields plugin if it is enabled.
+if ($user->isPluginEnabled('cf')) {
+  require_once('plugins/CustomFields.class.php');
+  $custom_fields = new CustomFields();
+  $smarty->assign('custom_fields', $custom_fields);
+}
+
 $show_projects = MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode();
 if ($show_projects) {
   $projects = ttGroupHelper::getActiveProjects();
@@ -71,8 +78,20 @@ if ($request->isPost()) {
   $cl_role_id = $request->getParameter('role');
   $cl_client_id = $request->getParameter('client');
   $cl_status = $request->getParameter('status');
-  $cl_rate = $request->getParameter('rate');
   $cl_quota_percent = $request->getParameter('quota_percent');
+  // If we have user custom fields - collect input.
+  if ($custom_fields && $custom_fields->userFields) {
+    foreach ($custom_fields->userFields as $userField) {
+      $control_name = 'user_field_'.$userField['id'];
+      $userCustomFields[$userField['id']] = array('field_id' => $userField['id'],
+        'control_name' => $control_name,
+        'label' => $userField['label'],
+        'type' => $userField['type'],
+        'required' => $userField['required'],
+        'value' => trim($request->getParameter($control_name)));
+    }
+  }
+  $cl_rate = $request->getParameter('rate');
   $cl_projects = $request->getParameter('projects');
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
@@ -89,8 +108,20 @@ if ($request->isPost()) {
   $cl_name = $user_details['name'];
   $cl_login = $user_details['login'];
   $cl_email = $user_details['email'];
-  $cl_rate = str_replace('.', $user->getDecimalMark(), $user_details['rate']);
   $cl_quota_percent = str_replace('.', $user->getDecimalMark(), $user_details['quota_percent']);
+  // If we have user custom fields - collect vallues from database.
+  if ($custom_fields && $custom_fields->userFields) {
+    foreach ($custom_fields->userFields as $userField) {
+      $control_name = 'user_field_'.$userField['id'];
+      $userCustomFields[$userField['id']] = array('field_id' => $userField['id'],
+        'control_name' => $control_name,
+        'label' => $userField['label'],
+        'type' => $userField['type'],
+        'required' => $userField['required'],
+        'value' => $custom_fields->getEntityFieldValue(CustomFields::ENTITY_USER, $user_id, $userField['id'], $userField['type']));
+    }
+  }
+  $cl_rate = str_replace('.', $user->getDecimalMark(), $user_details['rate']);
   $cl_role_id = $user_details['role_id'];
   $cl_client_id = $user_details['client_id'];
   $cl_status = $user_details['status'];
@@ -114,6 +145,22 @@ $active_roles = ttTeamHelper::getActiveRolesForUser();
 $form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role_id,'data'=>$active_roles, 'datakeys'=>array('id', 'name')));
 if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->get('dropdown.select'))));
+
+// If we have custom fields - add controls for them.
+if ($custom_fields && $custom_fields->userFields) {
+  foreach ($custom_fields->userFields as $userField) {
+    $field_name = 'user_field_'.$userField['id'];
+    if ($userField['type'] == CustomFields::TYPE_TEXT) {
+      $form->addInput(array('type'=>'text','name'=>$field_name,'value'=>$userCustomFields[$userField['id']]['value']));
+    } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
+      $form->addInput(array('type'=>'combobox','name'=>$field_name,
+      'style'=>'width: 250px;',
+      'data'=>CustomFields::getOptions($userField['id']),
+      'value'=>$userCustomFields[$userField['id']]['value'],
+      'empty'=>array(''=>$i18n->get('dropdown.select'))));
+    }
+  }
+}
 
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
@@ -172,8 +219,15 @@ if ($request->isPost()) {
   if (!ttValidEmail($cl_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.email'));
   // Require selection of a client for a client role.
   if ($user->isPluginEnabled('cl') && ttRoleHelper::isClientRole($cl_role_id) && !$cl_client_id) $err->add($i18n->get('error.client'));
-  if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
   if (!ttValidFloat($cl_quota_percent, true)) $err->add($i18n->get('error.field'), $i18n->get('label.quota'));
+    // Validate input in user custom fields.
+  if ($custom_fields && $custom_fields->userFields) {
+    foreach ($userCustomFields as $userField) {
+      // Validation is the same for text and dropdown fields.
+      if (!ttValidString($userField['value'], !$userField['required'])) $err->add($i18n->get('error.field'), htmlspecialchars($userField['label']));
+    }
+  }
+  if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
 
   if ($err->no()) {
     $existing_user = ttUserHelper::getUserByLogin($cl_login);
@@ -193,8 +247,13 @@ if ($request->isPost()) {
         $fields['client_id'] = $cl_client_id;
       }
 
-      if (ttUserHelper::update($user_id, $fields)) {
+      $result = ttUserHelper::update($user_id, $fields);
+       // Update user custom fields if we have them.
+      if ($result && $custom_fields && $custom_fields->userFields) {
+        $result = $custom_fields->updateEntityFields(CustomFields::ENTITY_USER, $user_id, $userCustomFields);
+      }
 
+      if ($result) {
         // If our own login changed, set new one in cookie to remember it.
         if (($user_id == $user->id) && ($user->login != $cl_login)) {
           setcookie('tt_login', $cl_login, time() + COOKIE_EXPIRE, '/');

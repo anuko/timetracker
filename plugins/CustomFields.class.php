@@ -387,6 +387,15 @@ class CustomFields {
     return (!is_a($affected, 'PEAR_Error'));
   }
 
+  // updateEntityFields - updates entity custom fields in tt_entity_custom_fields table
+  // by doing a delete followed up by an insert.
+  function updateEntityFields($entity_type, $entity_id, $entityFields) {
+    $result =  $this->deleteEntityFields($entity_type, $entity_id);
+    if (!$result) return false;
+
+    return $this->insertEntityFields($entity_type, $entity_id, $entityFields);
+  }
+
   // deleteEntityFields - deletes entity custom fields (permanently).
   // Note: deleting, rather than marking fields deleted is on purpose
   // because we want to keep the table small after multiple entity edits.
@@ -404,5 +413,29 @@ class CustomFields {
       " and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
+  }
+
+  // getEntityFieldValue - obtains entity custom field value from the database.
+  function getEntityFieldValue($entity_type, $entity_id, $field_id, $type) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select option_id, value from tt_entity_custom_fields".
+      " where entity_type = $entity_type and entity_id = $entity_id".
+      " and field_id = $field_id".
+      " and group_id = $group_id and org_id = $org_id and status = 1";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      if ($val = $res->fetchRow()) {
+        if (CustomFields::TYPE_DROPDOWN == $type)
+          return $val['option_id'];
+        if (CustomFields::TYPE_TEXT == $type)
+          return $val['value'];
+      }
+    }
+    return null;
   }
 }
