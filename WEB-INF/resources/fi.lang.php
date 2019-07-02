@@ -471,6 +471,8 @@ $i18n_key_words = array(
 'form.reports.select_period' => 'Valitse ajanjakso',
 'form.reports.set_period' => 'tai aseta päivät',
 'form.reports.show_fields' => 'Näytä kentät',
+// TODO: translate the following.
+// 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => 'Ryhmittelyperuste',
 'form.reports.group_by_no' => '--- ei ryhmitystä ---',
 'form.reports.group_by_date' => 'päivä',

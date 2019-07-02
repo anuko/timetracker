@@ -475,6 +475,8 @@ $i18n_key_words = array(
 'form.reports.select_period' => 'Vali ajaperiood',
 'form.reports.set_period' => 'või märgi kuupäevad',
 'form.reports.show_fields' => 'Näita välju',
+// TODO: translate the following.
+// 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => 'Grupeeri',
 'form.reports.group_by_no' => '--- grupeerimata ---',
 'form.reports.group_by_date' => 'kuupäev',

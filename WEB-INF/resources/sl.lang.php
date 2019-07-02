@@ -467,6 +467,7 @@ $i18n_key_words = array(
 // 'form.reports.select_period' => 'Select time period',
 // 'form.reports.set_period' => 'or set dates',
 // 'form.reports.show_fields' => 'Show fields',
+// 'form.reports.user_fields' => 'User fields',
 // 'form.reports.group_by' => 'Group by',
 // 'form.reports.group_by_no' => '--- no grouping ---',
 // 'form.reports.group_by_date' => 'date',

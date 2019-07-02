@@ -471,6 +471,8 @@ $i18n_key_words = array(
 'form.reports.select_period' => 'Välj intervall',
 'form.reports.set_period' => 'eller ställ in datum',
 'form.reports.show_fields' => 'Visa fält',
+// TODO: translate the following.
+// 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => 'Gruppera efter',
 'form.reports.group_by_no' => '--- Ingen gruppering ---',
 'form.reports.group_by_date' => 'Datum',

@@ -493,6 +493,8 @@ $i18n_key_words = array(
 'form.reports.select_period' => 'Alege perioada',
 'form.reports.set_period' => 'sau introdu intervalul de date',
 'form.reports.show_fields' => 'Arata campuri',
+// TODO: translate the following.
+// 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => 'Grupat dupa',
 'form.reports.group_by_no' => '--- fara grupare ---',
 'form.reports.group_by_date' => 'data',

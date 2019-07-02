@@ -484,6 +484,8 @@ $i18n_key_words = array(
 'form.reports.select_period' => '選擇時間段',
 'form.reports.set_period' => '或設定日期',
 'form.reports.show_fields' => '顯示欄目',
+// TODO: translate the following.
+// 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => '分組方式',
 'form.reports.group_by_no' => '--- 沒有分組 ---',
 'form.reports.group_by_date' => '日期',

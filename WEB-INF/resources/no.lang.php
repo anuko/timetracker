@@ -491,6 +491,8 @@ $i18n_key_words = array(
 'form.reports.select_period' => 'Velg tidsperiode',
 'form.reports.set_period' => 'eller sett dato',
 'form.reports.show_fields' => 'Vis feltene',
+// TODO: translate the following.
+// 'form.reports.user_fields' => 'User fields',
 // 'form.reports.group_by' => 'Group by',
 // 'form.reports.group_by_no' => '--- no grouping ---',
 'form.reports.group_by_date' => 'dato',

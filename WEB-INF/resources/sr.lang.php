@@ -472,6 +472,8 @@ $i18n_key_words = array(
 'form.reports.select_period' => 'Odaberi vremenski raspon',
 'form.reports.set_period' => 'ili podesi datum',
 'form.reports.show_fields' => 'Prikaži polja u izveštaju',
+// TODO: translate the following.
+// 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => 'Grupiši po',
 'form.reports.group_by_no' => '--- nemoj grupisati ---',
 'form.reports.group_by_date' => 'datum',

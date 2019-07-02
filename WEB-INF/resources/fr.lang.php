@@ -463,6 +463,8 @@ $i18n_key_words = array(
 'form.reports.select_period' => 'Sélectionner la période de temps',
 'form.reports.set_period' => 'ou dates indiquées',
 'form.reports.show_fields' => 'Afficher les champs',
+// TODO: translate the following.
+// 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => 'Regroupés par',
 'form.reports.group_by_no' => '--- Aucun regroupement ---',
 'form.reports.group_by_date' => 'Date',

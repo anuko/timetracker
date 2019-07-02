@@ -487,6 +487,8 @@ $i18n_key_words = array(
 'form.reports.select_period' => 'انتخاب بازه زمانی',
 'form.reports.set_period' => 'یا تعیین تاریخ',
 'form.reports.show_fields' => 'نمایش فیلدها',
+// TODO: translate the following.
+// 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => 'گروه بندی شده با',
 'form.reports.group_by_no' => '--- بدون گروه ---',
 'form.reports.group_by_date' => 'تاریخ',

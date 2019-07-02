@@ -504,6 +504,8 @@ $i18n_key_words = array(
 'form.reports.select_period' => 'Zaman aralığını seç',
 'form.reports.set_period' => 'ya da tarihleri belirle',
 'form.reports.show_fields' => 'Alanları göster',
+// TODO: translate the following.
+// 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => 'Gruplandırma kıstas',
 'form.reports.group_by_no' => '--- gruplama yok ---',
 'form.reports.group_by_date' => 'tarih',

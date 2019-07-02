@@ -426,6 +426,7 @@ $i18n_key_words = array(
 'form.reports.select_period' => 'Выберите интервал времени',
 'form.reports.set_period' => 'или укажите даты',
 'form.reports.show_fields' => 'Показывать поля',
+'form.reports.user_fields' => 'Поля пользователя',
 'form.reports.group_by' => 'Группировать по',
 'form.reports.group_by_no' => '--- без группировки ---',
 'form.reports.group_by_date' => 'дате',

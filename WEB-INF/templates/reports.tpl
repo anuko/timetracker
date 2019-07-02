@@ -398,7 +398,18 @@ function handleCheckboxes() {
             </table>
           </td>
         </tr>
-
+{if $custom_fields && $custom_fields->userFields}
+    <tr><td colspan="3"><b>{$i18n.form.reports.user_fields}</b></td></tr>
+  {foreach $custom_fields->userFields as $userField}
+    <tr>
+      <td align="right">{$userField['label']|escape}:</td>
+      {assign var="control_name" value='user_field_'|cat:$userField['id']}
+      {assign var="checkbox_control_name" value='ch_user_field_'|cat:$userField['id']}
+      <td>{$forms.reportForm.$control_name.control}</td>
+      <td>{$forms.reportForm.$checkbox_control_name.control}</td>
+    </tr>
+  {/foreach}
+{/if}
         <tr><td><b>{$i18n.form.reports.group_by}</b></td></tr>
         <tr valign="top">
           <td>{$forms.reportForm.group_by1.control}</td>

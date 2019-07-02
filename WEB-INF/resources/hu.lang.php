@@ -490,6 +490,7 @@ $i18n_key_words = array(
 'form.reports.set_period' => 'vagy állíts be konkrét dátumot',
 // TODO: translate the following.
 // 'form.reports.show_fields' => 'Show fields',
+// 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => 'Csoportosítva',
 'form.reports.group_by_no' => '--- csoportosítás nélkül ---',
 'form.reports.group_by_date' => 'dátum',
