@@ -40,6 +40,15 @@
       <tr>
         <td class="tableHeader">{$i18n.label.date}</td>
   {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="tableHeader">{$i18n.label.user}</td>{/if}
+
+  {* user custom fileds *}
+  {if $custom_fields && $custom_fields->userFields}
+    {foreach $custom_fields->userFields as $userField}
+      {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
+      {if $bean->getAttribute($checkbox_control_name)}<td class="tableHeader">{{$userField['label']|escape}}</td>{/if}
+    {/foreach}
+  {/if}
+
   {if $bean->getAttribute('chclient')}<td class="tableHeader">{$i18n.label.client}</td>{/if}
   {if $bean->getAttribute('chproject')}<td class="tableHeader">{$i18n.label.project}</td>{/if}
   {if $bean->getAttribute('chtask')}<td class="tableHeader">{$i18n.label.task}</td>{/if}
@@ -66,6 +75,15 @@
       <tr class="rowReportSubtotal">
         <td class="cellLeftAlignedSubtotal">{$i18n.label.subtotal}
         {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['user']|escape}</td>{/if}
+
+        {* user custom fileds *}
+        {if $custom_fields && $custom_fields->userFields}
+          {foreach $custom_fields->userFields as $userField}
+            {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
+            {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
+          {/foreach}
+        {/if}
+
         {if $bean->getAttribute('chclient')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['client']|escape}</td>{/if}
         {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['project']|escape}</td>{/if}
         {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['task']|escape}</td>{/if}
@@ -95,6 +113,16 @@
       <tr class="{$report_row_class}">
         <td class="cellLeftAligned">{$item.date}</td>
     {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="cellLeftAligned">{$item.user|escape}</td>{/if}
+
+    {* user custom fileds *}
+    {if $custom_fields && $custom_fields->userFields}
+      {foreach $custom_fields->userFields as $userField}
+        {assign var="control_name" value='user_field_'|cat:$userField['id']}
+        {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
+        {if $bean->getAttribute($checkbox_control_name)}<td>{$item.$control_name|escape}</td>{/if}
+      {/foreach}
+    {/if}
+
     {if $bean->getAttribute('chclient')}<td class="cellLeftAligned">{$item.client|escape}</td>{/if}
     {if $bean->getAttribute('chproject')}<td class="cellLeftAligned">{$item.project|escape}</td>{/if}
     {if $bean->getAttribute('chtask')}<td class="cellLeftAligned">{$item.task|escape}</td>{/if}
@@ -130,6 +158,15 @@
       <tr class="rowReportSubtotal">
         <td class="cellLeftAlignedSubtotal">{$i18n.label.subtotal}
     {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['user']|escape}</td>{/if}
+
+    {* user custom fileds *}
+    {if $custom_fields && $custom_fields->userFields}
+      {foreach $custom_fields->userFields as $userField}
+        {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
+        {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
+      {/foreach}
+    {/if}
+
     {if $bean->getAttribute('chclient')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['client']|escape}</td>{/if}
     {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['project']|escape}</td>{/if}
     {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['task']|escape}</td>{/if}
@@ -154,6 +191,15 @@
       <tr class="rowReportSubtotal">
         <td class="cellLeftAlignedSubtotal">{$i18n.label.total}</td>
     {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td></td>{/if}
+
+    {* user custom fileds *}
+    {if $custom_fields && $custom_fields->userFields}
+      {foreach $custom_fields->userFields as $userField}
+        {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
+        {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
+      {/foreach}
+    {/if}
+
     {if $bean->getAttribute('chclient')}<td></td>{/if}
     {if $bean->getAttribute('chproject')}<td></td>{/if}
     {if $bean->getAttribute('chtask')}<td></td>{/if}

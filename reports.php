@@ -328,7 +328,7 @@ if ($showTimesheetCheckbox)
 if ($custom_fields && $custom_fields->userFields) {
   foreach ($custom_fields->userFields as $userField) {
     $field_name = 'user_field_'.$userField['id'];
-    $checkbox_field_name = 'ch_'.$field_name;
+    $checkbox_field_name = 'show_'.$field_name;
     if ($userField['type'] == CustomFields::TYPE_TEXT) {
       $form->addInput(array('type'=>'text','name'=>$field_name,'style'=>'width: 250px;','value'=>$userCustomFields[$userField['id']]['value']));
     } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
