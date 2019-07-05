@@ -188,9 +188,7 @@ class ttReportHelper {
     array_push($fields, 'l.date');
     if($canViewReports || $isClient)
       array_push($fields, 'u.name as user');
-    // User custom fields. Note: 1 join required for each text field.
-    // 2 joins for each dropdown field. Query wil get messy with many fields.
-    // It is unclear how to optimize if we want flexibility with custom fields.
+    // Add user custom fields.
     if ($custom_fields && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
@@ -284,30 +282,27 @@ class ttReportHelper {
 
     // Prepare sql query part for left joins.
     $left_joins = null;
-
-    // Left join block for custom fields.
-    // 1 join for each text field, 2 joins for each dropdown.
-    // How to optimize this mess and reduce query complexity?
+    // Left joins for custom fields.
+    // 1 join is required for each text field, 2 joins for each dropdown.
     if ($custom_fields && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $checkbox_field_name = 'show_'.$field_name;
+        $entity_type = CustomFields::ENTITY_USER;
         if ($options[$checkbox_field_name]) {
+          $ecfTable = 'ecf'.$userField['id'];
           if ($userField['type'] == CustomFields::TYPE_TEXT) {
-            $ecfTable = 'ecf'.$userField['id'];
-            // One extra join for each text field.
-            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = 2 and $ecfTable.entity_id = l.user_id and $ecfTable.field_id = ".$userField['id'].")";
+            // Add one join for each text field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = l.user_id and $ecfTable.field_id = ".$userField['id'].")";
           } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
-            $ecfTable = 'ecf'.$userField['id'];
             $cfoTable = 'cfo'.$userField['id'];
-            // Two extra joins for each dropdown field.
-            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = 2 and $ecfTable.entity_id = l.user_id and $ecfTable.field_id = ".$userField['id'].")";
+            // Add two joins for each dropdown field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = l.user_id and $ecfTable.field_id = ".$userField['id'].")";
             $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
           }
         }
       }
     }
-
     if ($options['show_client'] || $grouping_by_client)
       $left_joins .= " left join tt_clients c on (c.id = l.client_id)";
     if (($canViewReports || $isClient) && $options['show_invoice'])
@@ -365,6 +360,22 @@ class ttReportHelper {
       array_push($fields, 'ei.date');
       if($canViewReports || $isClient)
         array_push($fields, 'u.name as user');
+      // Add user custom fields.
+      if ($custom_fields && $custom_fields->userFields) {
+        foreach ($custom_fields->userFields as $userField) {
+          $field_name = 'user_field_'.$userField['id'];
+          $checkbox_field_name = 'show_'.$field_name;
+          if ($options[$checkbox_field_name]) {
+            if ($userField['type'] == CustomFields::TYPE_TEXT) {
+              $ecfTableName = 'ecf'.$userField['id'];
+              array_push($fields, "$ecfTableName.value as $field_name");
+            } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
+              $cfoTableName = 'cfo'.$userField['id'];
+              array_push($fields, "$cfoTableName.value as $field_name");
+            }
+          }
+        }
+      }
       // Add client name if it is selected.
       if ($options['show_client'] || $grouping_by_client)
         array_push($fields, 'c.name as client');
@@ -414,6 +425,26 @@ class ttReportHelper {
 
       // Prepare sql query part for left joins.
       $left_joins = null;
+      // Left joins for custom fields.
+      if ($custom_fields && $custom_fields->userFields) {
+        foreach ($custom_fields->userFields as $userField) {
+          $field_name = 'user_field_'.$userField['id'];
+          $checkbox_field_name = 'show_'.$field_name;
+          $entity_type = CustomFields::ENTITY_USER;
+          if ($options[$checkbox_field_name]) {
+            $ecfTable = 'ecf'.$userField['id'];
+            if ($userField['type'] == CustomFields::TYPE_TEXT) {
+              // Add one join for each text field.
+              $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.user_id and $ecfTable.field_id = ".$userField['id'].")";
+            } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
+              $cfoTable = 'cfo'.$userField['id'];
+              // Add two joins for each dropdown field.
+              $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.user_id and $ecfTable.field_id = ".$userField['id'].")";
+              $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
+            }
+          }
+        }
+      }
       if ($canViewReports || $isClient)
         $left_joins .= " left join tt_users u on (u.id = ei.user_id)";
       if ($options['show_client'] || $grouping_by_client)
