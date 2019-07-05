@@ -48,6 +48,7 @@ class ttReportHelper {
   // getWhere prepares a WHERE clause for a report query.
   static function getWhere($options) {
     global $user;
+    $mdb2 = getConnection();
 
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
@@ -89,10 +90,23 @@ class ttReportHelper {
     if ($custom_fields && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
-        $selected_option_id = $options[$field_name];
-        if ($userField['type'] == CustomFields::TYPE_DROPDOWN && $selected_option_id) {
+        $field_value = $options[$field_name];
+        if ($userField['type'] == CustomFields::TYPE_DROPDOWN && $field_value) {
           $cfoTable = 'cfo'.$userField['id'];
-          $dropdown_parts .= " and $cfoTable.id = $selected_option_id";
+          $dropdown_parts .= " and $cfoTable.id = $field_value";
+        }
+      }
+    }
+
+    // Prepare part for text custom fields using LIKE operator.
+    $cf_text_parts = null;
+    if ($custom_fields && $custom_fields->userFields) {
+      foreach ($custom_fields->userFields as $userField) {
+        $field_name = 'user_field_'.$userField['id'];
+        $field_value = $options[$field_name];
+        if ($userField['type'] == CustomFields::TYPE_TEXT && $field_value) {
+          $ecfTableName = 'ecf'.$userField['id'];
+          $cf_text_parts .= " and $ecfTableName.value like ".$mdb2->quote("%$field_value%");
         }
       }
     }
@@ -116,13 +130,14 @@ class ttReportHelper {
         new DateAndTime($dateFormat, $options['period_end']));
     }
     $where = " where l.status = 1 and l.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
-      " $user_list_part $dropdown_parts";
+      " $user_list_part $dropdown_parts $cf_text_parts";
     return $where;
   }
 
   // getExpenseWhere prepares WHERE clause for expenses query in a report.
   static function getExpenseWhere($options) {
     global $user;
+    $mdb2 = getConnection();
 
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
@@ -155,10 +170,23 @@ class ttReportHelper {
     if ($custom_fields && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
-        $selected_option_id = $options[$field_name];
-        if ($userField['type'] == CustomFields::TYPE_DROPDOWN && $selected_option_id) {
+        $field_value = $options[$field_name];
+        if ($userField['type'] == CustomFields::TYPE_DROPDOWN && $field_value) {
           $cfoTable = 'cfo'.$userField['id'];
-          $dropdown_parts .= " and $cfoTable.id = $selected_option_id";
+          $dropdown_parts .= " and $cfoTable.id = $field_value";
+        }
+      }
+    }
+
+    // Prepare part for text custom fields using LIKE operator.
+    $cf_text_parts = null;
+    if ($custom_fields && $custom_fields->userFields) {
+      foreach ($custom_fields->userFields as $userField) {
+        $field_name = 'user_field_'.$userField['id'];
+        $field_value = $options[$field_name];
+        if ($userField['type'] == CustomFields::TYPE_TEXT && $field_value) {
+          $ecfTableName = 'ecf'.$userField['id'];
+          $cf_text_parts .= " and $ecfTableName.value like ".$mdb2->quote("%$field_value%");
         }
       }
     }
@@ -182,7 +210,7 @@ class ttReportHelper {
         new DateAndTime($dateFormat, $options['period_end']));
     }
     $where = " where ei.status = 1 and ei.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
-      " $user_list_part $dropdown_parts";
+      " $user_list_part $dropdown_parts $cf_text_parts";
     return $where;
   }
 
@@ -747,7 +775,7 @@ class ttReportHelper {
             $ecfTable = 'ecf'.$userField['id'];
             if ($userField['type'] == CustomFields::TYPE_TEXT) {
               // Add one join for each text field.
-              $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = eil.user_id and $ecfTable.field_id = ".$userField['id'].")";
+              $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.user_id and $ecfTable.field_id = ".$userField['id'].")";
             } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
               $cfoTable = 'cfo'.$userField['id'];
               // Add two joins for each dropdown field.
