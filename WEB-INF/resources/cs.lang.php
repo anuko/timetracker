@@ -495,6 +495,7 @@ $i18n_key_words = array(
 'form.reports.set_period' => 'nebo určete dny',
 'form.reports.show_fields' => 'Zobrazit pole',
 // TODO: translate the following.
+// 'form.reports.time_fields' => 'Time fields',
 // 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => 'Seskupit podle',
 // TODO: translate the following.

@@ -495,6 +495,7 @@ $i18n_key_words = array(
 'form.reports.set_period' => 'あるいは日付を設定',
 'form.reports.show_fields' => 'フィールドの表示',
 // TODO: translate the following.
+// 'form.reports.time_fields' => 'Time fields',
 // 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => '次のようにグループ化',
 'form.reports.group_by_no' => '--- グループの機能がありません ---',

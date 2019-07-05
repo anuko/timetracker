@@ -488,6 +488,7 @@ $i18n_key_words = array(
 'form.reports.set_period' => 'یا تعیین تاریخ',
 'form.reports.show_fields' => 'نمایش فیلدها',
 // TODO: translate the following.
+// 'form.reports.time_fields' => 'Time fields',
 // 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => 'گروه بندی شده با',
 'form.reports.group_by_no' => '--- بدون گروه ---',

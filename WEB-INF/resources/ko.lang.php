@@ -493,6 +493,7 @@ $i18n_key_words = array(
 'form.reports.set_period' => '혹은 날짜를 설정',
 'form.reports.show_fields' => '필드들을 보기',
 // TODO: translate the following.
+// 'form.reports.time_fields' => 'Time fields',
 // 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => '다음것에 의한 그룹화',
 'form.reports.group_by_no' => '--- 그룹화되지 않음 ---',

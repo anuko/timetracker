@@ -458,6 +458,7 @@ $i18n_key_words = array(
 'form.reports.set_period' => 'ή εύρος ημερομηνιών',
 'form.reports.show_fields' => 'Εμφάνιση πεδίων',
 // TODO: translate the following.
+// 'form.reports.time_fields' => 'Time fields',
 // 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => 'Ομαδοποίηση με βάση',
 'form.reports.group_by_no' => '--- χωρίς ομαδοποίηση ---',

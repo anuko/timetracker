@@ -480,6 +480,7 @@ $i18n_key_words = array(
 'form.reports.set_period' => 'alebo nastavte dátumy',
 'form.reports.show_fields' => 'Zobraziť polia',
 // TODO: translate the following.
+// 'form.reports.time_fields' => 'Time fields',
 // 'form.reports.user_fields' => 'User fields',
 // 'form.reports.group_by' => 'Group by',
 // 'form.reports.group_by_no' => '--- no grouping ---',

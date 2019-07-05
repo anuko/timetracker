@@ -471,6 +471,7 @@ $i18n_key_words = array(
 'form.reports.set_period' => 'oppure setta le date',
 'form.reports.show_fields' => 'Mostra i campi',
 // TODO: translate the following.
+// 'form.reports.time_fields' => 'Time fields',
 // 'form.reports.user_fields' => 'User fields',
 'form.reports.group_by' => 'Raggruppa per',
 'form.reports.group_by_no' => '--- non raggruppare ---',
