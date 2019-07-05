@@ -52,6 +52,14 @@ class ttReportHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    if ($user->isPluginEnabled('cf')) {
+      global $custom_fields;
+      if (!$custom_fields) {
+        require_once('plugins/CustomFields.class.php');
+        $custom_fields = new CustomFields();
+      }
+    } // TODO: reconsider the need for construction for fav report emailing (debug).
+
     // A shortcut for timesheets.
     if ($options['timesheet_id']) {
       $where = " where l.timesheet_id = ".$options['timesheet_id']." and l.group_id = $group_id and l.org_id = $org_id";
@@ -77,6 +85,17 @@ class ttReportHelper {
     if ($options['approved']=='2') $dropdown_parts .= ' and l.approved = 0';
     if ($options['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
+    // Add user custom fields.
+    if ($custom_fields && $custom_fields->userFields) {
+      foreach ($custom_fields->userFields as $userField) {
+        $field_name = 'user_field_'.$userField['id'];
+        $selected_option_id = $options[$field_name];
+        if ($userField['type'] == CustomFields::TYPE_DROPDOWN && $selected_option_id) {
+          $cfoTable = 'cfo'.$userField['id'];
+          $dropdown_parts .= " and $cfoTable.id = $selected_option_id";
+        }
+      }
+    }
 
     // Prepare sql query part for user list.
     $userlist = $options['users'] ? $options['users'] : '-1';
@@ -108,6 +127,14 @@ class ttReportHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    if ($user->isPluginEnabled('cf')) {
+      global $custom_fields;
+      if (!$custom_fields) {
+        require_once('plugins/CustomFields.class.php');
+        $custom_fields = new CustomFields();
+      }
+    } // TODO: reconsider the need for construction for fav report emailing (debug).
+
     // Prepare dropdown parts.
     $dropdown_parts = '';
     if ($options['client_id'])
@@ -124,6 +151,17 @@ class ttReportHelper {
     if ($options['approved']=='2') $dropdown_parts .= ' and ei.approved = 0';
     if ($options['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
+    // Add user custom fields.
+    if ($custom_fields && $custom_fields->userFields) {
+      foreach ($custom_fields->userFields as $userField) {
+        $field_name = 'user_field_'.$userField['id'];
+        $selected_option_id = $options[$field_name];
+        if ($userField['type'] == CustomFields::TYPE_DROPDOWN && $selected_option_id) {
+          $cfoTable = 'cfo'.$userField['id'];
+          $dropdown_parts .= " and $cfoTable.id = $selected_option_id";
+        }
+      }
+    }
 
     // Prepare sql query part for user list.
     $userlist = $options['users'] ? $options['users'] : '-1';
@@ -163,9 +201,12 @@ class ttReportHelper {
     $isClient = $user->isClient();
 
     if ($user->isPluginEnabled('cf')) {
-      require_once('plugins/CustomFields.class.php');
-      $custom_fields = new CustomFields();
-    }
+      global $custom_fields;
+      if (!$custom_fields) {
+        require_once('plugins/CustomFields.class.php');
+        $custom_fields = new CustomFields();
+      }
+    } // TODO: reconsider the need for construction for fav report emailing (debug).
 
     $grouping = ttReportHelper::grouping($options);
     if ($grouping) {
@@ -613,6 +654,15 @@ class ttReportHelper {
     global $user;
     $mdb2 = getConnection();
 
+    // Add user custom fields.
+    if ($user->isPluginEnabled('cf')) {
+      global $custom_fields;
+      if (!$custom_fields) {
+        require_once('plugins/CustomFields.class.php');
+        $custom_fields = new CustomFields();
+      }
+    } // TODO: reconsider the need for construction for fav report emailing (debug).
+
     $trackingMode = $user->getTrackingMode();
     $decimalMark = $user->getDecimalMark();
     $where = ttReportHelper::getWhere($options);
@@ -633,11 +683,35 @@ class ttReportHelper {
     } else {
       $cost_part = ", null as cost, null as expenses";
     }
+
+    // Prepare left joins.
+    $left_joins = null;
+    // Left joins for custom fields.
+    if ($custom_fields && $custom_fields->userFields) {
+      foreach ($custom_fields->userFields as $userField) {
+        $field_name = 'user_field_'.$userField['id'];
+        $field_value = $options[$field_name];
+        $entity_type = CustomFields::ENTITY_USER;
+        if ($field_value) {
+          // We need to add left joins when input is not null.
+          $ecfTable = 'ecf'.$userField['id'];
+          if ($userField['type'] == CustomFields::TYPE_TEXT) {
+            // Add one join for each text field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = l.user_id and $ecfTable.field_id = ".$userField['id'].")";
+          } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTable = 'cfo'.$userField['id'];
+            // Add two joins for each dropdown field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = l.user_id and $ecfTable.field_id = ".$userField['id'].")";
+            $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
+          }
+        }
+      }
+    }
     if ($options['show_cost']) {
       if (MODE_TIME == $trackingMode) {
-        $left_joins = "left join tt_users u on (l.user_id = u.id)";
+        $left_joins .= " left join tt_users u on (l.user_id = u.id)";
       } else {
-        $left_joins = "left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
+        $left_joins .= " left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
       }
     }
     // Prepare sql query part for inner joins.
@@ -659,7 +733,32 @@ class ttReportHelper {
       $where = ttReportHelper::getExpenseWhere($options);
       $sql_for_expenses = "select null as time";
       if ($options['show_work_units']) $sql_for_expenses .= ", null as units";
-      $sql_for_expenses .= ", sum(cost) as cost, sum(cost) as expenses from tt_expense_items ei $where";
+
+      // Prepate left joins.
+      $left_joins = null;
+      // Left joins for custom fields.
+      if ($custom_fields && $custom_fields->userFields) {
+        foreach ($custom_fields->userFields as $userField) {
+          $field_name = 'user_field_'.$userField['id'];
+          $field_value = $options[$field_name];
+          $entity_type = CustomFields::ENTITY_USER;
+          if ($field_value) {
+            // We need to add left joins when input is not null.
+            $ecfTable = 'ecf'.$userField['id'];
+            if ($userField['type'] == CustomFields::TYPE_TEXT) {
+              // Add one join for each text field.
+              $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = eil.user_id and $ecfTable.field_id = ".$userField['id'].")";
+            } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
+              $cfoTable = 'cfo'.$userField['id'];
+              // Add two joins for each dropdown field.
+              $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.user_id and $ecfTable.field_id = ".$userField['id'].")";
+              $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
+            }
+          }
+        }
+      }
+
+      $sql_for_expenses .= ", sum(cost) as cost, sum(cost) as expenses from tt_expense_items ei $left_joins $where";
 
       // Create a combined query.
       $combined = "select sum(time) as time";
@@ -1740,29 +1839,61 @@ class ttReportHelper {
   static function makeJoinPart($options) {
     global $user;
 
+    // Add user custom fields.
+    if ($user->isPluginEnabled('cf')) {
+      global $custom_fields;
+      if (!$custom_fields) {
+        require_once('plugins/CustomFields.class.php');
+        $custom_fields = new CustomFields();
+      }
+    } // TODO: reconsider the need for construction for fav report emailing (debug).
+
     $trackingMode = $user->getTrackingMode();
+    $left_joins = null;
     if (ttReportHelper::groupingBy('user', $options) || MODE_TIME == $trackingMode) {
-      $join .= ' left join tt_users u on (l.user_id = u.id)';
+      $left_joins .= ' left join tt_users u on (l.user_id = u.id)';
     }
     if (ttReportHelper::groupingBy('client', $options)) {
-      $join .= ' left join tt_clients c on (l.client_id = c.id)';
+      $left_joins .= ' left join tt_clients c on (l.client_id = c.id)';
     }
     if (ttReportHelper::groupingBy('project', $options)) {
-      $join .= ' left join tt_projects p on (l.project_id = p.id)';
+      $left_joins .= ' left join tt_projects p on (l.project_id = p.id)';
     }
     if (ttReportHelper::groupingBy('task', $options)) {
-      $join .= ' left join tt_tasks t on (l.task_id = t.id)';
+      $left_joins .= ' left join tt_tasks t on (l.task_id = t.id)';
     }
     if (ttReportHelper::groupingBy('cf_1', $options)) {
       $custom_fields = new CustomFields();
       if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
-        $join .= ' left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id)';
+        $left_joins .= ' left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id)';
       elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
-        $join .= ' left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.option_id = cfo.id)';
+        $left_joins .= ' left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.option_id = cfo.id)';
     }
     if ($options['show_cost'] && $trackingMode != MODE_TIME) {
-      $join .= ' left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)';
+      $left_joins .= ' left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)';
     }
+    // Left joins for custom fields.
+    if ($custom_fields && $custom_fields->userFields) {
+      foreach ($custom_fields->userFields as $userField) {
+        $field_name = 'user_field_'.$userField['id'];
+        $field_value = $options[$field_name];
+        $entity_type = CustomFields::ENTITY_USER;
+        if ($field_value) {
+          // We need to add left joins when input is not null.
+          $ecfTable = 'ecf'.$userField['id'];
+          if ($userField['type'] == CustomFields::TYPE_TEXT) {
+            // Add one join for each text field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = l.user_id and $ecfTable.field_id = ".$userField['id'].")";
+          } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTable = 'cfo'.$userField['id'];
+            // Add two joins for each dropdown field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = l.user_id and $ecfTable.field_id = ".$userField['id'].")";
+            $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
+          }
+        }
+      }
+    }
+
     // Prepare inner joins.
     $inner_joins = null;
     if ($user->isPluginEnabled('ts') && $options['timesheet']) {
@@ -1774,8 +1905,9 @@ class ttReportHelper {
       else if ($timesheet_option == TIMESHEET_NOT_APPROVED)
         $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.approve_status = 0)";
     }
-    $join .= $inner_joins;
-    return $join;
+
+    $join_part = $left_joins.$inner_joins;
+    return $join_part;
   }
 
   // makeWorkUnitPart builds an sql part for work units for time items.
@@ -1812,16 +1944,48 @@ class ttReportHelper {
   static function makeJoinExpensesPart($options) {
     global $user;
 
+    // Add user custom fields.
+    if ($user->isPluginEnabled('cf')) {
+      global $custom_fields;
+      if (!$custom_fields) {
+        require_once('plugins/CustomFields.class.php');
+        $custom_fields = new CustomFields();
+      }
+    } // TODO: reconsider the need for construction for fav report emailing (debug).
+
+    $left_joins = null;
     if (ttReportHelper::groupingBy('user', $options)) {
-      $join .= ' left join tt_users u on (ei.user_id = u.id)';
+      $left_joins .= ' left join tt_users u on (ei.user_id = u.id)';
     }
     if (ttReportHelper::groupingBy('client', $options)) {
-      $join .= ' left join tt_clients c on (ei.client_id = c.id)';
+      $left_joins .= ' left join tt_clients c on (ei.client_id = c.id)';
     }
     if (ttReportHelper::groupingBy('project', $options)) {
-      $join .= ' left join tt_projects p on (ei.project_id = p.id)';
+      $left_joins .= ' left join tt_projects p on (ei.project_id = p.id)';
     }
-    return $join;
+    // Left joins for custom fields.
+    if ($custom_fields && $custom_fields->userFields) {
+      foreach ($custom_fields->userFields as $userField) {
+        $field_name = 'user_field_'.$userField['id'];
+        $field_value = $options[$field_name];
+        $entity_type = CustomFields::ENTITY_USER;
+        if ($field_value) {
+          // We need to add left joins when input is not null.
+          $ecfTable = 'ecf'.$userField['id'];
+          if ($userField['type'] == CustomFields::TYPE_TEXT) {
+            // Add one join for each text field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.user_id and $ecfTable.field_id = ".$userField['id'].")";
+          } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTable = 'cfo'.$userField['id'];
+            // Add two joins for each dropdown field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.user_id and $ecfTable.field_id = ".$userField['id'].")";
+            $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
+          }
+        }
+      }
+    }
+
+    return $left_joins;
   }
 
   // grouping determines if we are grouping the report by either group_by1,
