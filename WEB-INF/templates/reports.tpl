@@ -398,6 +398,20 @@ function handleCheckboxes() {
             </table>
           </td>
         </tr>
+{if isTrue('CF_DEBUG')}
+{if $custom_fields && $custom_fields->timeFields}
+    <tr><td colspan="3"><b>{$i18n.form.reports.time_fields}</b></td></tr>
+  {foreach $custom_fields->timeFields as $timeField}
+    <tr>
+      <td align="right">{$timeField['label']|escape}:</td>
+      {assign var="control_name" value='time_field_'|cat:$timeField['id']}
+      {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
+      <td>{$forms.reportForm.$control_name.control}</td>
+      <td>{$forms.reportForm.$checkbox_control_name.control}</td>
+    </tr>
+  {/foreach}
+{/if}
+{/if}
 {if $custom_fields && $custom_fields->userFields}
     <tr><td colspan="3"><b>{$i18n.form.reports.user_fields}</b></td></tr>
   {foreach $custom_fields->userFields as $userField}

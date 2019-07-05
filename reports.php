@@ -330,12 +330,11 @@ if ($custom_fields && $custom_fields->timeFields) {
     $field_name = 'time_field_'.$timeField['id'];
     $checkbox_field_name = 'show_'.$field_name;
     if ($timeField['type'] == CustomFields::TYPE_TEXT) {
-      $form->addInput(array('type'=>'text','name'=>$field_name,'style'=>'width: 250px;','value'=>$timeCustomFields[$userField['id']]['value']));
+      $form->addInput(array('type'=>'text','name'=>$field_name,'style'=>'width: 250px;'));
     } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
       $form->addInput(array('type'=>'combobox','name'=>$field_name,
       'style'=>'width: 250px;',
       'data'=>CustomFields::getOptions($timeField['id']),
-      'value'=>$timeCustomFields[$timeField['id']]['value'],
       'empty'=>array(''=>$i18n->get('dropdown.all'))));
     }
     // Also add a checkbox (to print the field or not).
@@ -349,12 +348,11 @@ if ($custom_fields && $custom_fields->userFields) {
     $field_name = 'user_field_'.$userField['id'];
     $checkbox_field_name = 'show_'.$field_name;
     if ($userField['type'] == CustomFields::TYPE_TEXT) {
-      $form->addInput(array('type'=>'text','name'=>$field_name,'style'=>'width: 250px;','value'=>$userCustomFields[$userField['id']]['value']));
+      $form->addInput(array('type'=>'text','name'=>$field_name,'style'=>'width: 250px;'));
     } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
       $form->addInput(array('type'=>'combobox','name'=>$field_name,
       'style'=>'width: 250px;',
       'data'=>CustomFields::getOptions($userField['id']),
-      'value'=>$userCustomFields[$userField['id']]['value'],
       'empty'=>array(''=>$i18n->get('dropdown.all'))));
     }
     // Also add a checkbox (to print the field or not).
