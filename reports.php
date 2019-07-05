@@ -324,6 +324,25 @@ if ($showFiles)
 if ($showTimesheetCheckbox)
   $form->addInput(array('type'=>'hidden','name'=>'timesheet_user_id'));
 
+// If we have time custom fields - add controls for them.
+if ($custom_fields && $custom_fields->timeFields) {
+  foreach ($custom_fields->timeFields as $timeField) {
+    $field_name = 'time_field_'.$timeField['id'];
+    $checkbox_field_name = 'show_'.$field_name;
+    if ($timeField['type'] == CustomFields::TYPE_TEXT) {
+      $form->addInput(array('type'=>'text','name'=>$field_name,'style'=>'width: 250px;','value'=>$timeCustomFields[$userField['id']]['value']));
+    } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+      $form->addInput(array('type'=>'combobox','name'=>$field_name,
+      'style'=>'width: 250px;',
+      'data'=>CustomFields::getOptions($timeField['id']),
+      'value'=>$timeCustomFields[$timeField['id']]['value'],
+      'empty'=>array(''=>$i18n->get('dropdown.all'))));
+    }
+    // Also add a checkbox (to print the field or not).
+    $form->addInput(array('type'=>'checkbox','name'=>$checkbox_field_name));
+  }
+}
+
 // If we have user custom fields - add controls for them.
 if ($custom_fields && $custom_fields->userFields) {
   foreach ($custom_fields->userFields as $userField) {

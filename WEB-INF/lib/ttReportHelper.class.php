@@ -358,7 +358,7 @@ class ttReportHelper {
         $field_name = 'user_field_'.$userField['id'];
         $checkbox_field_name = 'show_'.$field_name;
         $entity_type = CustomFields::ENTITY_USER;
-        if ($options[$checkbox_field_name]) {
+        if ($options[$field_name] || $options[$checkbox_field_name]) {
           $ecfTable = 'ecf'.$userField['id'];
           if ($userField['type'] == CustomFields::TYPE_TEXT) {
             // Add one join for each text field.
@@ -500,7 +500,7 @@ class ttReportHelper {
           $field_name = 'user_field_'.$userField['id'];
           $checkbox_field_name = 'show_'.$field_name;
           $entity_type = CustomFields::ENTITY_USER;
-          if ($options[$checkbox_field_name]) {
+          if ($options[$field_name] || $options[$checkbox_field_name]) {
             $ecfTable = 'ecf'.$userField['id'];
             if ($userField['type'] == CustomFields::TYPE_TEXT) {
               // Add one join for each text field.
