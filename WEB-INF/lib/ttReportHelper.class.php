@@ -86,6 +86,17 @@ class ttReportHelper {
     if ($options['approved']=='2') $dropdown_parts .= ' and l.approved = 0';
     if ($options['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
+    // Add time custom fields.
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        $field_value = $options[$field_name];
+        if ($timeField['type'] == CustomFields::TYPE_DROPDOWN && $field_value) {
+          $cfoTable = 'cfo'.$timeField['id'];
+          $dropdown_parts .= " and $cfoTable.id = $field_value";
+        }
+      }
+    }
     // Add user custom fields.
     if ($custom_fields && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
@@ -166,6 +177,11 @@ class ttReportHelper {
     if ($options['approved']=='2') $dropdown_parts .= ' and ei.approved = 0';
     if ($options['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
+
+    // Not adding conditions for time custom fields by design because expenses are not associated with them.
+    // Whether or not this is proper, we'll know eventually if users complain.
+    // This means that filtering by custom fields applies only to time items, not expenses.
+
     // Add user custom fields.
     if ($custom_fields && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
@@ -293,6 +309,22 @@ class ttReportHelper {
         array_push($fields, 'cfo.value as cf_1');
       }
     }
+    // Add time custom fields.
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        $checkbox_field_name = 'show_'.$field_name;
+        if ($options[$checkbox_field_name]) {
+          if ($timeField['type'] == CustomFields::TYPE_TEXT) {
+            $cflTable = 'cfl'.$timeField['id'];
+            array_push($fields, "$cflTable.value as $field_name");
+          } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTable = 'cfo'.$timeField['id'];
+            array_push($fields, "$cfoTable.value as $field_name");
+          }
+        }
+      }
+    }
     // Add start time.
     if ($options['show_start']) {
       array_push($fields, "l.start as unformatted_start");
@@ -390,6 +422,25 @@ class ttReportHelper {
           " left join tt_custom_field_options cfo on (cfl.option_id = cfo.id)";
       }
     }
+    // Left joins for time custom fields.
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        $checkbox_field_name = 'show_'.$field_name;
+        if ($options[$field_name] || $options[$checkbox_field_name]) {
+          $cflTable = 'cfl'.$timeField['id'];
+          if ($timeField['type'] == CustomFields::TYPE_TEXT) {
+            // Add one join for each text field.
+            $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1)";
+          } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTable = 'cfo'.$timeField['id'];
+            // Add two joins for each dropdown field.
+            $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1)";
+            $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $cflTable.field_id and $cfoTable.id = $cflTable.option_id)";
+          }
+        }
+      }
+    }
     if ($includeCost && MODE_TIME != $trackingMode)
       $left_joins .= " left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)";
     if ($options['show_files']) {
@@ -455,6 +506,16 @@ class ttReportHelper {
         array_push($fields, 'null'); // null for task name. We need to match column count for union.
       if ($options['show_custom_field_1'] || $grouping_by_cf_1)
         array_push($fields, 'null'); // null for cf_1.
+      // Add null values for time custom fields.
+      if ($custom_fields && $custom_fields->timeFields) {
+        foreach ($custom_fields->timeFields as $timeField) {
+          $field_name = 'time_field_'.$timeField['id'];
+          $checkbox_field_name = 'show_'.$field_name;
+          if ($options[$checkbox_field_name]) {
+            array_push($fields, "null as $field_name"); // null for each time custom field.
+          }
+        }
+      }
       if ($options['show_start']) {
         array_push($fields, 'null'); // null for unformatted_start.
         array_push($fields, 'null'); // null for start.
@@ -715,6 +776,24 @@ class ttReportHelper {
     // Prepare left joins.
     $left_joins = null;
     // Left joins for custom fields.
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        $field_value = $options[$field_name];
+        if ($field_value) {
+          $cflTable = 'cfl'.$timeField['id'];
+          if ($timeField['type'] == CustomFields::TYPE_TEXT) {
+            // Add one join for each text field.
+            $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1)";
+          } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTable = 'cfo'.$timeField['id'];
+            // Add two joins for each dropdown field.
+            $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1)";
+            $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $cflTable.field_id and $cfoTable.id = $cflTable.option_id)";
+          }
+        }
+      }
+    }
     if ($custom_fields && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
@@ -1394,10 +1473,21 @@ class ttReportHelper {
 
     // Prepare custom field options.
     if ($user->isPluginEnabled('cf')) {
-      require_once('plugins/CustomFields.class.php');
-      $custom_fields = new CustomFields();
+      global $custom_fields;
+      if (!$custom_fields) {
+        require_once('plugins/CustomFields.class.php');
+        $custom_fields = new CustomFields();
+      }  // TODO: reconsider the need for construction for fav report emailing (debug).
 
-      // TODO: add time fields here.
+      // Time fields.
+      if ($custom_fields->timeFields) {
+        foreach ($custom_fields->timeFields as $timeField) {
+          $control_name = 'time_field_'.$timeField['id'];
+          $checkbox_control_name = 'show_'.$control_name;
+          $options[$control_name] =  $bean->getAttribute($control_name);
+          $options[$checkbox_control_name] =  $bean->getAttribute($checkbox_control_name);
+        }
+      }
 
       // User fields.
       if ($custom_fields->userFields) {
@@ -1408,6 +1498,8 @@ class ttReportHelper {
           $options[$checkbox_control_name] =  $bean->getAttribute($checkbox_control_name);
         }
       }
+
+      // TODO: add project fields here.
     }
 
     $options['group_by1'] = $bean->getAttribute('group_by1');
@@ -1900,7 +1992,26 @@ class ttReportHelper {
     if ($options['show_cost'] && $trackingMode != MODE_TIME) {
       $left_joins .= ' left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)';
     }
-    // Left joins for custom fields.
+    // Left joins for time custom fields.
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        $field_value = $options[$field_name];
+        if ($field_value) {
+          $cflTable = 'cfl'.$timeField['id'];
+          if ($timeField['type'] == CustomFields::TYPE_TEXT) {
+            // Add one join for each text field.
+            $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1)";
+          } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTable = 'cfo'.$timeField['id'];
+            // Add two joins for each dropdown field.
+            $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1)";
+            $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $cflTable.field_id and $cfoTable.id = $cflTable.option_id)";
+          }
+        }
+      }
+    }
+    // Left joins for user custom fields.
     if ($custom_fields && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
@@ -1991,7 +2102,8 @@ class ttReportHelper {
     if (ttReportHelper::groupingBy('project', $options)) {
       $left_joins .= ' left join tt_projects p on (ei.project_id = p.id)';
     }
-    // Left joins for custom fields.
+    // Not adding left joins for time custom fiels by design.
+    // Left joins for user custom fields.
     if ($custom_fields && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];

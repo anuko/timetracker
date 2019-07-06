@@ -53,6 +53,15 @@
   {if $bean->getAttribute('chproject')}<td class="tableHeader">{$i18n.label.project}</td>{/if}
   {if $bean->getAttribute('chtask')}<td class="tableHeader">{$i18n.label.task}</td>{/if}
   {if $bean->getAttribute('chcf_1')}<td class="tableHeader">{$custom_fields->fields[0]['label']|escape}</td>{/if}
+
+  {* time custom fileds *}
+  {if $custom_fields && $custom_fields->timeFields}
+    {foreach $custom_fields->timeFields as $timeField}
+      {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
+      {if $bean->getAttribute($checkbox_control_name)}<td class="tableHeader">{{$timeField['label']|escape}}</td>{/if}
+    {/foreach}
+  {/if}
+
   {if $bean->getAttribute('chstart')}<td class="tableHeaderCentered" width="5%">{$i18n.label.start}</td>{/if}
   {if $bean->getAttribute('chfinish')}<td class="tableHeaderCentered" width="5%">{$i18n.label.finish}</td>{/if}
   {if $bean->getAttribute('chduration')}<td class="tableHeaderCentered" width="5%">{$i18n.label.duration}</td>{/if}
@@ -88,6 +97,15 @@
         {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['project']|escape}</td>{/if}
         {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['task']|escape}</td>{/if}
         {if $bean->getAttribute('chcf_1')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['cf_1']|escape}</td>{/if}
+
+        {* time custom fileds *}
+          {if $custom_fields && $custom_fields->timeFields}
+           {foreach $custom_fields->timeFields as $timeField}
+            {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
+            {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
+          {/foreach}
+        {/if}
+
         {if $bean->getAttribute('chstart')}<td></td>{/if}
         {if $bean->getAttribute('chfinish')}<td></td>{/if}
         {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$subtotals[$prev_grouped_by]['time']}</td>{/if}
@@ -127,6 +145,16 @@
     {if $bean->getAttribute('chproject')}<td class="cellLeftAligned">{$item.project|escape}</td>{/if}
     {if $bean->getAttribute('chtask')}<td class="cellLeftAligned">{$item.task|escape}</td>{/if}
     {if $bean->getAttribute('chcf_1')}<td class="cellLeftAligned">{$item.cf_1|escape}</td>{/if}
+
+    {* time custom fileds *}
+    {if $custom_fields && $custom_fields->timeFields}
+      {foreach $custom_fields->timeFields as $timeField}
+        {assign var="control_name" value='time_field_'|cat:$timeField['id']}
+        {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
+        {if $bean->getAttribute($checkbox_control_name)}<td>{$item.$control_name|escape}</td>{/if}
+      {/foreach}
+    {/if}
+
     {if $bean->getAttribute('chstart')}<td nowrap class="cellRightAligned">{$item.start}</td>{/if}
     {if $bean->getAttribute('chfinish')}<td nowrap class="cellRightAligned">{$item.finish}</td>{/if}
     {if $bean->getAttribute('chduration')}<td class="cellRightAligned">{$item.duration}</td>{/if}
@@ -171,6 +199,15 @@
     {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['project']|escape}</td>{/if}
     {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['task']|escape}</td>{/if}
     {if $bean->getAttribute('chcf_1')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['cf_1']|escape}</td>{/if}
+
+    {* time custom fileds *}
+    {if $custom_fields && $custom_fields->timeFields}
+      {foreach $custom_fields->timeFields as $timeField}
+        {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
+        {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
+      {/foreach}
+    {/if}
+
     {if $bean->getAttribute('chstart')}<td></td>{/if}
     {if $bean->getAttribute('chfinish')}<td></td>{/if}
     {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$subtotals[$cur_grouped_by]['time']}</td>{/if}
@@ -204,6 +241,15 @@
     {if $bean->getAttribute('chproject')}<td></td>{/if}
     {if $bean->getAttribute('chtask')}<td></td>{/if}
     {if $bean->getAttribute('chcf_1')}<td></td>{/if}
+
+    {* time custom fileds *}
+    {if $custom_fields && $custom_fields->timeFields}
+      {foreach $custom_fields->timeFields as $timeField}
+        {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
+        {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
+      {/foreach}
+    {/if}
+
     {if $bean->getAttribute('chstart')}<td></td>{/if}
     {if $bean->getAttribute('chfinish')}<td></td>{/if}
     {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$totals['time']}</td>{/if}
