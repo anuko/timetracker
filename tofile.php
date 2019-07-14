@@ -121,6 +121,15 @@ if ('xml' == $type) {
       if ($bean->getAttribute('chclient')) print "\t<client><![CDATA[".$item['client']."]]></client>\n";
       if ($bean->getAttribute('chproject')) print "\t<project><![CDATA[".$item['project']."]]></project>\n";
       if ($bean->getAttribute('chtask')) print "\t<task><![CDATA[".$item['task']."]]></task>\n";
+      // Time custom fields.
+      if ($custom_fields && $custom_fields->timeFields) {
+        foreach ($custom_fields->timeFields as $timeField) {
+          $field_name = 'time_field_'.$timeField['id'];
+          $checkbox_control_name = 'show_'.$field_name;
+          if ($bean->getAttribute($checkbox_control_name)) print "\t<$field_name><![CDATA[".$item[$field_name]."]]></$field_name>\n";
+        }
+      }
+      // TODO: add user custom fields, too.
       if ($bean->getAttribute('chcf_1')) print "\t<cf_1><![CDATA[".$item['cf_1']."]]></cf_1>\n";
       if ($bean->getAttribute('chstart')) print "\t<start><![CDATA[".$item['start']."]]></start>\n";
       if ($bean->getAttribute('chfinish')) print "\t<finish><![CDATA[".$item['finish']."]]></finish>\n";
