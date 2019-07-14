@@ -55,10 +55,6 @@ if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
   $custom_fields = new CustomFields();
   $smarty->assign('custom_fields', $custom_fields);
-  $showCustomFieldCheckbox = $custom_fields->fields[0];
-  $showCustomFieldDropdown = $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN;
-  if ($showCustomFieldDropdown)
-    $showCustomFieldDropdown &= CustomFields::getOptions($custom_fields->fields[0]['id']);
 }
 
 $form = new Form('reportForm');
@@ -94,15 +90,6 @@ if ($showClient) {
     'style'=>'width: 250px;',
     'data'=>$client_list,
     'datakeys'=>array('id', 'name'),
-    'empty'=>array(''=>$i18n->get('dropdown.all'))));
-}
-
-// If we have a TYPE_DROPDOWN custom field - add a control to select an option.
-if ($showCustomFieldDropdown) {
-  $form->addInput(array('type'=>'combobox','name'=>'option',
-    'style'=>'width: 250px;',
-    'value'=>$cl_cf_1,
-    'data'=>CustomFields::getOptions($custom_fields->fields[0]['id']),
     'empty'=>array(''=>$i18n->get('dropdown.all'))));
 }
 
@@ -290,8 +277,6 @@ if ($showProject)
   $form->addInput(array('type'=>'checkbox','name'=>'chproject'));
 if ($showTask)
   $form->addInput(array('type'=>'checkbox','name'=>'chtask'));
-if ($showCustomFieldCheckbox)
-  $form->addInput(array('type'=>'checkbox','name'=>'chcf_1'));
 if ($showInvoiceCheckbox)
   $form->addInput(array('type'=>'checkbox','name'=>'chinvoice'));
 if ($showPaidStatus)
@@ -371,9 +356,6 @@ if (MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode)
   $group_by_options['project'] = $i18n->get('form.reports.group_by_project');
 if (MODE_PROJECTS_AND_TASKS == $trackingMode)
   $group_by_options['task'] = $i18n->get('form.reports.group_by_task');
-if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
-  $group_by_options['cf_1'] = $custom_fields->fields[0]['label'];
-}
 $group_by_options_size = sizeof($group_by_options);
 $form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by1','data'=>$group_by_options));
 if ($group_by_options_size > 2) $form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by2','data'=>$group_by_options));
@@ -413,7 +395,6 @@ if ($request->isGet() && !$bean->isSaved()) {
   $form->setValueByElement('chapproved', '0');
   $form->setValueByElement('chpaid', '0');
 
-  $form->setValueByElement('chcf_1', '0');
   $form->setValueByElement('chunits', '0');
   $form->setValueByElement('chinvoice', '0');
   $form->setValueByElement('chfiles', '1');
@@ -509,8 +490,6 @@ if ($request->isPost()) {
 
 $smarty->assign('client_list', $client_list);
 $smarty->assign('show_client', $showClient);
-$smarty->assign('show_cf_1_dropdown', $showCustomFieldDropdown);
-$smarty->assign('show_cf_1_checkbox', $showCustomFieldCheckbox);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
 $smarty->assign('show_billable', $showBillable);

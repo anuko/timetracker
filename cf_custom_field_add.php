@@ -40,11 +40,6 @@ if (!$user->isPluginEnabled('cf')) {
   exit();
 }
 $fields = CustomFields::getFields();
-// Deny access when max number of custom fields is already set.
-if (count($fields) >= 1 && !isTrue('CF_DEBUG')) {
-  header('Location: access_denied.php');
-  exit();
-}
 // End of access checks.
 
 if ($request->isPost()) {

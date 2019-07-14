@@ -68,7 +68,18 @@ if ($request->isPost()) {
   $cl_duration = trim($request->getParameter('duration'));
   $cl_date = $request->getParameter('date');
   $cl_note = trim($request->getParameter('note'));
-  $cl_cf_1 = trim($request->getParameter('cf_1'));
+  // If we have user custom fields - collect input.
+  if ($custom_fields && $custom_fields->timeFields) {
+    foreach ($custom_fields->timeFields as $timeField) {
+      $control_name = 'time_field_'.$timeField['id'];
+      $timeCustomFields[$timeField['id']] = array('field_id' => $timeField['id'],
+        'control_name' => $control_name,
+        'label' => $timeField['label'],
+        'type' => $timeField['type'],
+        'required' => $timeField['required'],
+        'value' => trim($request->getParameter($control_name)));
+    }
+  }
   $cl_client = $request->getParameter('client');
   $cl_project = $request->getParameter('project');
   $cl_task = $request->getParameter('task');
@@ -87,14 +98,17 @@ if ($request->isPost()) {
   $cl_date = $item_date->toString($user->date_format);
   $cl_note = $time_rec['comment'];
 
-  // If we have custom fields - obtain values for them.
-  if ($custom_fields) {
-    // Get custom field value for time record.
-    $fields = $custom_fields->get($time_rec['id']);
-    if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
-      $cl_cf_1 = $fields[0]['value'];
-    elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
-      $cl_cf_1 = $fields[0]['option_id'];
+  // If we have time custom fields - collect values from database.
+  if ($custom_fields && $custom_fields->timeFields) {
+    foreach ($custom_fields->timeFields as $timeField) {
+      $control_name = 'time_field_'.$timeField['id'];
+      $timeCustomFields[$timeField['id']] = array('field_id' => $timeField['id'],
+        'control_name' => $control_name,
+        'label' => $timeField['label'],
+        'type' => $timeField['type'],
+        'required' => $timeField['required'],
+        'value' => $custom_fields->getTimeFieldValue($cl_id, $timeField['id'], $timeField['type']));
+    }
   }
 
   $cl_billable = $time_rec['billable'];
@@ -192,18 +206,19 @@ if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
 $form->addInput(array('type'=>'datefield','name'=>'date','maxlength'=>'20','value'=>$cl_date));
 $form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 250px; height: 200px;','value'=>$cl_note));
 
-// If we have custom fields - add controls for them.
-if ($custom_fields && $custom_fields->fields[0]) {
-  // Only one custom field is supported at this time.
-  if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT) {
-    $form->addInput(array('type'=>'text','name'=>'cf_1','value'=>$cl_cf_1));
-  } elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
-    $form->addInput(array('type'=>'combobox',
-      'name'=>'cf_1',
+// If we have time custom fields - add controls for them.
+if ($custom_fields && $custom_fields->timeFields) {
+  foreach ($custom_fields->timeFields as $timeField) {
+    $field_name = 'time_field_'.$timeField['id'];
+    if ($timeField['type'] == CustomFields::TYPE_TEXT) {
+      $form->addInput(array('type'=>'text','name'=>$field_name,'value'=>$timeCustomFields[$timeField['id']]['value']));
+    } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+      $form->addInput(array('type'=>'combobox','name'=>$field_name,
       'style'=>'width: 250px;',
-      'value'=>$cl_cf_1,
-      'data'=>CustomFields::getOptions($custom_fields->fields[0]['id']),
-      'empty' => array('' => $i18n->get('dropdown.select'))));
+      'data'=>CustomFields::getOptions($timeField['id']),
+      'value'=>$timeCustomFields[$timeField['id']]['value'],
+      'empty'=>array(''=>$i18n->get('dropdown.select'))));
+    }
   }
 }
 
@@ -241,8 +256,12 @@ if ($request->isPost()) {
   // Validate user input.
   if ($user->isPluginEnabled('cl') && $user->isOptionEnabled('client_required') && !$cl_client)
     $err->add($i18n->get('error.client'));
-  if ($custom_fields) {
-    if (!ttValidString($cl_cf_1, !$custom_fields->fields[0]['required'])) $err->add($i18n->get('error.field'), $custom_fields->fields[0]['label']);
+  // Validate input in time custom fields.
+  if ($custom_fields && $custom_fields->timeFields) {
+    foreach ($timeCustomFields as $timeField) {
+      // Validation is the same for text and dropdown fields.
+      if (!ttValidString($timeField['value'], !$timeField['required'])) $err->add($i18n->get('error.field'), htmlspecialchars($timeField['label']));
+    }
   }
   if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
     if (!$cl_project) $err->add($i18n->get('error.project'));
@@ -342,12 +361,9 @@ if ($request->isPost()) {
         'billable'=>$cl_billable,
         'paid'=>$cl_paid));
 
-      // If we have custom fields - update values.
-      if ($res && $custom_fields) {
-        if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
-          $res = $custom_fields->update($cl_id, $custom_fields->fields[0]['id'], null, $cl_cf_1);
-        elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
-          $res = $custom_fields->update($cl_id, $custom_fields->fields[0]['id'], $cl_cf_1, null);
+      // Update time custom fields if we have them.
+      if ($res && $custom_fields && $custom_fields->timeFields) {
+        $res = $custom_fields->updateTimeFields($cl_id, $timeCustomFields);
       }
       if ($res)
       {
@@ -404,13 +420,10 @@ if ($request->isPost()) {
         'billable'=>$cl_billable,
         'paid'=>$cl_paid));
 
-      // Insert a custom field if we have it.
+      // Insert time custom fields if we have them.
       $res = true;
-      if ($id && $custom_fields && $cl_cf_1) {
-        if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
-          $res = $custom_fields->insert($id, $custom_fields->fields[0]['id'], null, $cl_cf_1);
-        elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
-          $res = $custom_fields->insert($id, $custom_fields->fields[0]['id'], $cl_cf_1, null);
+      if ($id && $custom_fields && $custom_fields->timeFields) {
+        $res = $custom_fields->insertTimeFields($id, $timeCustomFields);
       }
       if ($id && $res) {
         header('Location: time.php?date='.$new_date->toString(DB_DATEFORMAT));

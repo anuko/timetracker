@@ -44,45 +44,70 @@ class ttWeekViewHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $client_field = null;
-    if ($user->isPluginEnabled('cl'))
-      $client_field = ', c.id as client_id, c.name as client';
-
-    $custom_field_1 = null;
-    if ($user->isPluginEnabled('cf')) {
-      $custom_fields = new CustomFields();
-      $cf_1_type = $custom_fields->fields[0]['type'];
-      if ($cf_1_type == CustomFields::TYPE_TEXT) {
-        $custom_field_1 = ', cfl.value as cf_1_value';
-      } elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
-        $custom_field_1 = ', cfo.id as cf_1_id, cfo.value as cf_1_value';
+    $fields = array(); // An array of fields for database query.
+    array_push($fields, 'l.id as id');
+    array_push($fields, 'l.date as date');
+    array_push($fields, "TIME_FORMAT(l.start, $sql_time_format) as start");
+    array_push($fields, "TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish");
+    array_push($fields, "TIME_FORMAT(l.duration, '%k:%i') as duration");
+    array_push($fields, "p.id as project_id");
+    array_push($fields, "p.name as project");
+    array_push($fields, "t.id as task_id");
+    array_push($fields, "t.name as task");
+    array_push($fields, "l.comment");
+    array_push($fields, "l.billable");
+    array_push($fields, "l.invoice_id");
+    if ($user->isPluginEnabled('cl')) {
+      array_push($fields, "c.id as client_id");
+      array_push($fields, "c.name as client");
+    }
+    // Add time custom fields.
+    global $custom_fields;
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        if ($timeField['type'] == CustomFields::TYPE_TEXT) {
+          $cflTable = 'cfl'.$timeField['id'];
+          array_push($fields, "$cflTable.value as $field_name");
+        } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+          $cfoTable = 'cfo'.$timeField['id'];
+          array_push($fields, "$cfoTable.id as $field_name".'_option_id');
+          array_push($fields, "$cfoTable.value as $field_name");
+        }
       }
     }
-
     if ($includeFiles) {
-      $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
-      $fileJoin =  " left join (select distinct entity_id from tt_files".
-      " where entity_type = 'time' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
-      " on (l.id = Sub1.entity_id)";
+      array_push($fields, 'if(Sub1.entity_id is null, 0, 1) as has_files');
     }
 
     $left_joins = " left join tt_projects p on (l.project_id = p.id)".
       " left join tt_tasks t on (l.task_id = t.id)";
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
-    if ($user->isPluginEnabled('cf')) {
-      if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
-        $left_joins .= 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id) ';
-      elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
-        $left_joins .= 'left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.option_id = cfo.id) ';
-    }
-    $left_joins .= $fileJoin;
 
-    $sql = "select l.id as id, l.date as date, TIME_FORMAT(l.start, $sql_time_format) as start,".
-      " TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,".
-      " TIME_FORMAT(l.duration, '%k:%i') as duration, p.id as project_id, p.name as project,".
-      " t.id as task_id, t.name as task, l.comment, l.billable, l.invoice_id $client_field $custom_field_1 $filePart".
-      " from tt_log l $left_joins".
+    // Left joins for time custom fields.
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        $cflTable = 'cfl'.$timeField['id'];
+        if ($timeField['type'] == CustomFields::TYPE_TEXT) {
+          // Add one join for each text field.
+          $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1 and $cflTable.field_id = ".$timeField['id'].')';
+        } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+          $cfoTable = 'cfo'.$timeField['id'];
+          // Add two joins for each dropdown field.
+          $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1 and $cflTable.field_id = ".$timeField['id'].')';
+          $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $cflTable.field_id and $cfoTable.id = $cflTable.option_id)";
+        }
+      }
+    }
+    if ($includeFiles) {
+      $left_joins .=  " left join (select distinct entity_id from tt_files".
+      " where entity_type = 'time' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
+      " on (l.id = Sub1.entity_id)";
+    }
+
+    $sql = "select ".join(', ', $fields)." from tt_log l $left_joins".
       " where l.date >= '$start_date' and l.date <= '$end_date'".
       " and l.user_id = $user_id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1".
       " order by l.date, p.name, t.name, l.start, l.id";
@@ -414,14 +439,18 @@ class ttWeekViewHelper {
     $row_identifier .= $record['project_id'] ? ',pr:'.$record['project_id'] : '';
     // Add task.
     $row_identifier .= $record['task_id'] ? ',ts:'.$record['task_id'] : '';
-    // Add custom field 1.
-    if ($user->isPluginEnabled('cf')) {
-      if ($record['cf_1_id'])
-        $row_identifier .= ',cf_1:'.$record['cf_1_id'];
-      else if ($record['cf_1_value'])
-        $row_identifier .= ',cf_1:'.$record['cf_1_value'];
+    // Add custom field parts.
+    global $custom_fields;
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        if ($timeField['type'] == CustomFields::TYPE_TEXT)
+           $field_value = $record[$field_name];
+        else if ($timeField['type'] == CustomFields::TYPE_DROPDOWN)
+           $field_value =  $record[$field_name.'_option_id'];
+        $row_identifier .= ',cf_'.$timeField['id'].":$field_value";
+      }
     }
-
     return $row_identifier;
   }
 
@@ -448,6 +477,17 @@ class ttWeekViewHelper {
     if ($user->isPluginEnabled('cf')) {
       if (!empty($label) && !empty($record['cf_1_value'])) $label .= ' - ';
       $label .= $record['cf_1_value'];
+    }
+
+    // Add custom field parts.
+    global $custom_fields;
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        $field_value = $record[$field_name];
+        if (!empty($label) && !empty($field_value)) $label .= ' - ';
+        $label .= $field_value;
+      }
     }
 
     return $label;
@@ -526,14 +566,21 @@ class ttWeekViewHelper {
     $id = ttTimeHelper::insert($fields4insert);
     if (!$id) return false; // Something failed.
 
-    // Insert custom field if we have it.
+    // Insert time custom fields if we have them.
     $result = true;
-    $cf_1 = ttWeekViewHelper::parseFromWeekViewRow($fields['row_id'], 'cf_1');
-    if ($custom_fields && $cf_1) {
-      if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
-        $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], null, $cf_1);
-      elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
-        $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], $cf_1, null);
+    if ($id && $custom_fields && $custom_fields->timeFields) {
+      if ($fields['row_id']) {
+        foreach ($custom_fields->timeFields as $timeField) {
+//          $control_name = 'time_field_'.$timeField['id'];
+          $timeCustomFields[$timeField['id']] = array('field_id' => $timeField['id'],
+//            'control_name' => $control_name,
+//            'label' => $timeField['label'],
+            'type' => $timeField['type'],
+//            'required' => $timeField['required'],
+            'value' => ttWeekViewHelper::parseFromWeekViewRow($fields['row_id'], 'cf_'.$timeField['id']));
+        }
+      }
+      $result = $custom_fields->insertTimeFields($id, $timeCustomFields); // TODO: fix this.
     }
 
     return $result;

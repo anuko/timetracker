@@ -40,10 +40,14 @@ function confirmSave() {
       <td><label>{$forms.timeRecordForm.paid.control}{$i18n.label.paid}</label></td>
     </tr>
 {/if}
-{if ($custom_fields && $custom_fields->fields[0])} 
+{if $custom_fields && $custom_fields->timeFields}
+  {foreach $custom_fields->timeFields as $timeField}
     <tr>
-      <td align="right">{$custom_fields->fields[0]['label']|escape}{if $custom_fields->fields[0]['required']} (*){/if}:</td><td>{$forms.timeRecordForm.cf_1.control}</td>
+      <td align="right">{$timeField['label']|escape}{if $timeField['required']} (*){/if}:</td>
+      {assign var="control_name" value='time_field_'|cat:$timeField['id']}
+      <td>{$forms.timeRecordForm.$control_name.control}</td>
     </tr>
+  {/foreach}
 {/if}
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
     <tr>

@@ -36,10 +36,14 @@
           <td><label>{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td>
         </tr>
 {/if}
-{if ($custom_fields && $custom_fields->fields[0])}
-        <tr>
-          <td align="right">{$custom_fields->fields[0]['label']|escape}{if $custom_fields->fields[0]['required']} (*){/if}:</td><td>{$forms.timeRecordForm.cf_1.control}</td>
-        </tr>
+{if $custom_fields && $custom_fields->timeFields}
+  {foreach $custom_fields->timeFields as $timeField}
+    <tr>
+      <td align="right">{$timeField['label']|escape}{if $timeField['required']} (*){/if}:</td>
+      {assign var="control_name" value='time_field_'|cat:$timeField['id']}
+      <td>{$forms.timeRecordForm.$control_name.control}</td>
+    </tr>
+  {/foreach}
 {/if}
 {if $show_project}
         <tr>
@@ -112,9 +116,6 @@
   {if $show_client}
         <td class="tableHeader">{$i18n.label.client}</td>
   {/if}
-  {if $show_cf_1}
-        <td class="tableHeader">{$custom_fields->fields[0]['label']|escape}</td>
-  {/if}
   {if $show_project}
         <td class="tableHeader">{$i18n.label.project}</td>
   {/if}
@@ -141,9 +142,6 @@
       <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
     {if $show_client}
         <td valign="top">{$record.client|escape}</td>
-    {/if}
-    {if $show_cf_1}
-        <td valign="top">{$record.cf_1|escape}</td>
     {/if}
     {if $show_project}
         <td valign="top">{$record.project|escape}</td>

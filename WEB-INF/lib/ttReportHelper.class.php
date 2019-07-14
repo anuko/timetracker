@@ -55,11 +55,8 @@ class ttReportHelper {
 
     if ($user->isPluginEnabled('cf')) {
       global $custom_fields;
-      if (!$custom_fields) {
-        require_once('plugins/CustomFields.class.php');
-        $custom_fields = new CustomFields();
-      }
-    } // TODO: reconsider the need for construction for fav report emailing (debug).
+      if (!$custom_fields) $custom_fields = new CustomFields();
+    }
 
     // A shortcut for timesheets.
     if ($options['timesheet_id']) {
@@ -155,11 +152,8 @@ class ttReportHelper {
 
     if ($user->isPluginEnabled('cf')) {
       global $custom_fields;
-      if (!$custom_fields) {
-        require_once('plugins/CustomFields.class.php');
-        $custom_fields = new CustomFields();
-      }
-    } // TODO: reconsider the need for construction for fav report emailing (debug).
+      if (!$custom_fields) $custom_fields = new CustomFields();
+    }
 
     // Prepare dropdown parts.
     $dropdown_parts = '';
@@ -180,7 +174,7 @@ class ttReportHelper {
 
     // Not adding conditions for time custom fields by design because expenses are not associated with them.
     // Whether or not this is proper, we'll know eventually if users complain.
-    // This means that filtering by custom fields applies only to time items, not expenses.
+    // This means that filtering by time custom fields applies only to time items, not expenses.
 
     // Add user custom fields.
     if ($custom_fields && $custom_fields->userFields) {
@@ -246,11 +240,8 @@ class ttReportHelper {
 
     if ($user->isPluginEnabled('cf')) {
       global $custom_fields;
-      if (!$custom_fields) {
-        require_once('plugins/CustomFields.class.php');
-        $custom_fields = new CustomFields();
-      }
-    } // TODO: reconsider the need for construction for fav report emailing (debug).
+      if (!$custom_fields) $custom_fields = new CustomFields();
+    }
 
     $grouping = ttReportHelper::grouping($options);
     if ($grouping) {
@@ -743,14 +734,10 @@ class ttReportHelper {
     global $user;
     $mdb2 = getConnection();
 
-    // Add user custom fields.
     if ($user->isPluginEnabled('cf')) {
       global $custom_fields;
-      if (!$custom_fields) {
-        require_once('plugins/CustomFields.class.php');
-        $custom_fields = new CustomFields();
-      }
-    } // TODO: reconsider the need for construction for fav report emailing (debug).
+      if (!$custom_fields) $custom_fields = new CustomFields();
+    }
 
     $trackingMode = $user->getTrackingMode();
     $decimalMark = $user->getDecimalMark();
@@ -1474,10 +1461,7 @@ class ttReportHelper {
     // Prepare custom field options.
     if ($user->isPluginEnabled('cf')) {
       global $custom_fields;
-      if (!$custom_fields) {
-        require_once('plugins/CustomFields.class.php');
-        $custom_fields = new CustomFields();
-      }  // TODO: reconsider the need for construction for fav report emailing (debug).
+      if (!$custom_fields) $custom_fields = new CustomFields();
 
       // Time fields.
       if ($custom_fields->timeFields) {
@@ -1959,14 +1943,10 @@ class ttReportHelper {
   static function makeJoinPart($options) {
     global $user;
 
-    // Add user custom fields.
     if ($user->isPluginEnabled('cf')) {
       global $custom_fields;
-      if (!$custom_fields) {
-        require_once('plugins/CustomFields.class.php');
-        $custom_fields = new CustomFields();
-      }
-    } // TODO: reconsider the need for construction for fav report emailing (debug).
+      if (!$custom_fields) $custom_fields = new CustomFields();
+    }
 
     $trackingMode = $user->getTrackingMode();
     $left_joins = null;
@@ -2083,14 +2063,10 @@ class ttReportHelper {
   static function makeJoinExpensesPart($options) {
     global $user;
 
-    // Add user custom fields.
     if ($user->isPluginEnabled('cf')) {
       global $custom_fields;
-      if (!$custom_fields) {
-        require_once('plugins/CustomFields.class.php');
-        $custom_fields = new CustomFields();
-      }
-    } // TODO: reconsider the need for construction for fav report emailing (debug).
+      if (!$custom_fields) $custom_fields = new CustomFields();
+    }
 
     $left_joins = null;
     if (ttReportHelper::groupingBy('user', $options)) {

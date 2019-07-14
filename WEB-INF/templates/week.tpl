@@ -51,10 +51,14 @@ function fillDropdowns() {
           <td><label>{$forms.weekTimeForm.billable.control}{$i18n.form.time.billable}</label></td>
         </tr>
 {/if}
-{if ($custom_fields && $custom_fields->fields[0])}
-        <tr>
-          <td align="right">{$custom_fields->fields[0]['label']|escape}{if $custom_fields->fields[0]['required']} (*){/if}:</td><td>{$forms.weekTimeForm.cf_1.control}</td>
-        </tr>
+{if $custom_fields && $custom_fields->timeFields}
+  {foreach $custom_fields->timeFields as $timeField}
+    <tr>
+      <td align="right">{$timeField['label']|escape}{if $timeField['required']} (*){/if}:</td>
+      {assign var="control_name" value='time_field_'|cat:$timeField['id']}
+      <td>{$forms.weekTimeForm.$control_name.control}</td>
+    </tr>
+  {/foreach}
 {/if}
 {if $show_project}
         <tr>

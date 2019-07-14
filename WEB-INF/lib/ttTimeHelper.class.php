@@ -859,6 +859,7 @@ class ttTimeHelper {
     if ($user->isPluginEnabled('cl'))
       $client_field = ", c.name as client";
 
+    /*
     $include_cf_1 = $user->isPluginEnabled('cf');
     if ($include_cf_1) {
       $custom_fields = new CustomFields();
@@ -868,7 +869,7 @@ class ttTimeHelper {
       } elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
         $custom_field = ", cfo.value as cf_1";
       }
-    }
+    }*/
 
     if ($includeFiles) {
       $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
@@ -881,14 +882,15 @@ class ttTimeHelper {
       " left join tt_tasks t on (l.task_id = t.id)";
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
-    if ($include_cf_1) {
+    /* Multiple left joins are now required, probably with config options which fields to show.
+     * if ($include_cf_1) {
       if ($cf_1_type == CustomFields::TYPE_TEXT)
         $left_joins .= " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)";
       elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
         $left_joins .=  " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)".
           " left join tt_custom_field_options cfo on (cfl.option_id = cfo.id)";
       }
-    }
+    }*/
     $left_joins .= $fileJoin;
 
     $result = array();

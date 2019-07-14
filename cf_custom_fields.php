@@ -53,9 +53,6 @@ if ($request->isPost()) {
   $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
   $fields = CustomFields::getFields();
-  // At this time only one custom field is supported. Disable the Add button if we already have one or more custom fields.
-  if (count($fields) > 0 && !isTrue('CF_DEBUG'))
-    $form->getElement('btn_add')->setEnabled(false);
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

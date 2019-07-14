@@ -60,9 +60,13 @@
 {if $user->isPluginEnabled('iv')}
       <tr><td><label>{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td></tr>
 {/if}
-{if ($custom_fields && $custom_fields->fields[0])}
-      <tr><td>{$custom_fields->fields[0]['label']|escape}:</td></tr>
-      <tr><td>{$forms.timeRecordForm.cf_1.control}</td></tr>
+{if $custom_fields && $custom_fields->timeFields}
+  {foreach $custom_fields->timeFields as $timeField}
+      <tr><td>{$timeField['label']|escape}{if $timeField['required']} (*){/if}:</td></tr>
+      {assign var="control_name" value='time_field_'|cat:$timeField['id']}
+      <tr><td>{$forms.timeRecordForm.$control_name.control}</td></tr>
+    </tr>
+  {/foreach}
 {/if}
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
     <tr><td>{$i18n.label.project}:</td></tr>

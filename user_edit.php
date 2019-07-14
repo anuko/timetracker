@@ -109,7 +109,7 @@ if ($request->isPost()) {
   $cl_login = $user_details['login'];
   $cl_email = $user_details['email'];
   $cl_quota_percent = str_replace('.', $user->getDecimalMark(), $user_details['quota_percent']);
-  // If we have user custom fields - collect vallues from database.
+  // If we have user custom fields - collect values from database.
   if ($custom_fields && $custom_fields->userFields) {
     foreach ($custom_fields->userFields as $userField) {
       $control_name = 'user_field_'.$userField['id'];
@@ -248,7 +248,7 @@ if ($request->isPost()) {
       }
 
       $result = ttUserHelper::update($user_id, $fields);
-       // Update user custom fields if we have them.
+      // Update user custom fields if we have them.
       if ($result && $custom_fields && $custom_fields->userFields) {
         $result = $custom_fields->updateEntityFields(CustomFields::ENTITY_USER, $user_id, $userCustomFields);
       }

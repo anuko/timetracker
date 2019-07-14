@@ -277,10 +277,6 @@ function handleCheckboxes() {
           <td></td>
           <td valign="top">
             <table border="0" cellpadding="3">
-{if $show_cf_1_dropdown}
-              <tr><td><b>{$i18n.label.option}</b></td></tr>
-              <tr><td>{$forms.reportForm.option.control}</td></tr>
-{/if}
 {if $show_task}
               <tr><td><b>{$i18n.label.task}</b></td></tr>
               <tr><td>{$forms.reportForm.task.control}</td></tr>
@@ -347,9 +343,6 @@ function handleCheckboxes() {
 {if $show_timesheet_checkbox}
                     <tr><td><label>{$forms.reportForm.chtimesheet.control}&nbsp;{$i18n.label.timesheet}</label></td></tr>
 {/if}
-{if $show_cf_1_checkbox}
-                    <tr><td><label>{$forms.reportForm.chcf_1.control}&nbsp;{$custom_fields->fields[0]['label']|escape}</label></td></tr>
-{/if}
                   </table>
                 </td>
                 <td width="25%" valign="top">
@@ -398,7 +391,6 @@ function handleCheckboxes() {
             </table>
           </td>
         </tr>
-{if isTrue('CF_DEBUG')}
 {if $custom_fields && $custom_fields->timeFields}
     <tr><td colspan="3"><b>{$i18n.form.reports.time_fields}</b></td></tr>
   {foreach $custom_fields->timeFields as $timeField}
@@ -410,7 +402,6 @@ function handleCheckboxes() {
       <td>{$forms.reportForm.$checkbox_control_name.control}</td>
     </tr>
   {/foreach}
-{/if}
 {/if}
 {if $custom_fields && $custom_fields->userFields}
     <tr><td colspan="3"><b>{$i18n.form.reports.user_fields}</b></td></tr>
