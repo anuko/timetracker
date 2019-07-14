@@ -64,7 +64,7 @@ $show_note_column = $bean->getAttribute('chnote') && !$config->getDefinedValue('
 $show_note_row = $bean->getAttribute('chnote') && $config->getDefinedValue('report_note_on_separate_row');
 
 // There are 2 variations of report: totals only, or normal. Totals only means that the report
-// is grouped by either date, user, client, project, task or cf_1 and user only needs to see subtotals by group.
+// is grouped by either date, user, client, project, or task and user only needs to see subtotals by group.
 $totals_only = ($bean->getAttribute('chtotalsonly') == '1');
 
 // Obtain items for report.
@@ -151,10 +151,25 @@ if ($totals_only) {
   $html .= "<tr $styleHeader>";
   $html .= '<td>'.$i18n->get('label.date').'</td>';
   if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) { $colspan++; $html .= '<td>'.$i18n->get('label.user').'</td>'; }
+  // User custom field labels.
+  if ($custom_fields && $custom_fields->userFields) {
+    foreach ($custom_fields->userFields as $userField) {
+      $field_name = 'user_field_'.$userField['id'];
+      $checkbox_control_name = 'show_'.$field_name;
+      if ($bean->getAttribute($checkbox_control_name)) { $colspan++; $html .= '<td>'.htmlspecialchars($userField['label']).'</td>'; }
+    }
+  }
   if ($bean->getAttribute('chclient')) { $colspan++; $html .= '<td>'.$i18n->get('label.client').'</td>'; }
   if ($bean->getAttribute('chproject')) { $colspan++; $html .= '<td>'.$i18n->get('label.project').'</td>'; }
   if ($bean->getAttribute('chtask')) { $colspan++; $html .= '<td>'.$i18n->get('label.task').'</td>'; }
-  if ($bean->getAttribute('chcf_1')) { $colspan++; $html .= '<td>'.htmlspecialchars($custom_fields->fields[0]['label']).'</td>'; }
+  // Time custom field labels.
+  if ($custom_fields && $custom_fields->timeFields) {
+    foreach ($custom_fields->timeFields as $timeField) {
+      $field_name = 'time_field_'.$timeField['id'];
+      $checkbox_control_name = 'show_'.$field_name;
+      if ($bean->getAttribute($checkbox_control_name)) { $colspan++; $html .= '<td>'.htmlspecialchars($timeField['label']).'</td>'; }
+    }
+  }
   if ($bean->getAttribute('chstart')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.start').'</td>'; }
   if ($bean->getAttribute('chfinish')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.finish').'</td>'; }
   if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.duration').'</td>'; }
@@ -182,6 +197,14 @@ if ($totals_only) {
             $html .= htmlspecialchars($subtotals[$prev_grouped_by]['user']);
             $html .= '</td>';
         }
+        // User custom fields.
+        if ($custom_fields && $custom_fields->userFields) {
+          foreach ($custom_fields->userFields as $userField) {
+            $field_name = 'user_field_'.$userField['id'];
+            $checkbox_control_name = 'show_'.$field_name;
+            if ($bean->getAttribute($checkbox_control_name)) $html .= '<td></td>';
+          }
+        }
         if ($bean->getAttribute('chclient')) {
             $html .= '<td>';
             $html .= htmlspecialchars($subtotals[$prev_grouped_by]['client']);
@@ -197,10 +220,13 @@ if ($totals_only) {
             $html .= htmlspecialchars($subtotals[$prev_grouped_by]['task']);
             $html .= '</td>';
         }
-        if ($bean->getAttribute('chcf_1')) {
-            $html .= '<td>';
-            $html .= htmlspecialchars($subtotals[$prev_grouped_by]['cf_1']);
-            $html .= '</td>';
+        // Time custom fields.
+        if ($custom_fields && $custom_fields->timeFields) {
+          foreach ($custom_fields->timeFields as $timeField) {
+            $field_name = 'time_field_'.$timeField['id'];
+            $checkbox_control_name = 'show_'.$field_name;
+            if ($bean->getAttribute($checkbox_control_name)) $html .= '<td></td>';
+          }
         }
         if ($bean->getAttribute('chstart')) $html .= '<td></td>';
         if ($bean->getAttribute('chfinish')) $html .= '<td></td>';
@@ -239,10 +265,25 @@ if ($totals_only) {
     $html .= '<tr>';
     $html .= '<td>'.$item['date'].'</td>';
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) $html .= '<td>'.htmlspecialchars($item['user']).'</td>';
+    // User custom fields.
+    if ($custom_fields && $custom_fields->userFields) {
+      foreach ($custom_fields->userFields as $userField) {
+        $field_name = 'user_field_'.$userField['id'];
+        $checkbox_control_name = 'show_'.$field_name;
+        if ($bean->getAttribute($checkbox_control_name)) $html .= '<td>'.htmlspecialchars($item[$field_name]).'</td>';
+      }
+    }
     if ($bean->getAttribute('chclient')) $html .= '<td>'.htmlspecialchars($item['client']).'</td>';
     if ($bean->getAttribute('chproject')) $html .= '<td>'.htmlspecialchars($item['project']).'</td>';
     if ($bean->getAttribute('chtask')) $html .= '<td>'.htmlspecialchars($item['task']).'</td>';
-    if ($bean->getAttribute('chcf_1')) $html .= '<td>'.htmlspecialchars($item['cf_1']).'</td>';
+    // Time custom fields.
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        $checkbox_control_name = 'show_'.$field_name;
+        if ($bean->getAttribute($checkbox_control_name)) $html .= '<td>'.htmlspecialchars($item[$field_name]).'</td>';
+      }
+    }
     if ($bean->getAttribute('chstart')) $html .= "<td $styleRightAligned>".$item['start'].'</td>';
     if ($bean->getAttribute('chfinish')) $html .= "<td $styleRightAligned>".$item['finish'].'</td>';
     if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$item['duration'].'</td>';
@@ -296,6 +337,14 @@ if ($totals_only) {
       $html .= htmlspecialchars($subtotals[$prev_grouped_by]['user']);
       $html .= '</td>';
     }
+    // User custom fields.
+    if ($custom_fields && $custom_fields->userFields) {
+      foreach ($custom_fields->userFields as $userField) {
+        $field_name = 'user_field_'.$userField['id'];
+        $checkbox_control_name = 'show_'.$field_name;
+        if ($bean->getAttribute($checkbox_control_name)) $html .= '<td></td>';
+      }
+    }
     if ($bean->getAttribute('chclient')) {
       $html .= '<td>';
       $html .= htmlspecialchars($subtotals[$prev_grouped_by]['client']);
@@ -311,10 +360,13 @@ if ($totals_only) {
       $html .= htmlspecialchars($subtotals[$prev_grouped_by]['task']);
       $html .= '</td>';
     }
-    if ($bean->getAttribute('chcf_1')) {
-      $html .= '<td>';
-      $html .= htmlspecialchars($subtotals[$prev_grouped_by]['cf_1']);
-      $html .= '</td>';
+    // Time custom fields.
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        $checkbox_control_name = 'show_'.$field_name;
+        if ($bean->getAttribute($checkbox_control_name)) $html .= '<td></td>';
+      }
     }
     if ($bean->getAttribute('chstart')) $html .= '<td></td>';
     if ($bean->getAttribute('chfinish')) $html .= '<td></td>';
@@ -342,10 +394,25 @@ if ($totals_only) {
   $html .= '<tr style="background-color:#e0e0e0;">';
   $html .= '<td>'.$i18n->get('label.total').'</td>';
   if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) $html .= '<td></td>';
+  // User custom fields.
+  if ($custom_fields && $custom_fields->userFields) {
+    foreach ($custom_fields->userFields as $userField) {
+      $field_name = 'user_field_'.$userField['id'];
+      $checkbox_control_name = 'show_'.$field_name;
+      if ($bean->getAttribute($checkbox_control_name)) $html .= '<td></td>';
+    }
+  }
   if ($bean->getAttribute('chclient')) $html .= '<td></td>';
   if ($bean->getAttribute('chproject')) $html .= '<td></td>';
   if ($bean->getAttribute('chtask')) $html .= '<td></td>';
-  if ($bean->getAttribute('chcf_1')) $html .= '<td></td>';
+  // Time custom fields.
+  if ($custom_fields && $custom_fields->timeFields) {
+    foreach ($custom_fields->timeFields as $timeField) {
+      $field_name = 'time_field_'.$timeField['id'];
+      $checkbox_control_name = 'show_'.$field_name;
+      if ($bean->getAttribute($checkbox_control_name)) $html .= '<td></td>';
+    }
+  }
   if ($bean->getAttribute('chstart')) $html .= '<td></td>';
   if ($bean->getAttribute('chfinish')) $html .= '<td></td>';
   if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$totals['time'].'</td>';
