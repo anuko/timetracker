@@ -54,7 +54,7 @@ $bean = new ActionForm('reportBean', new Form('reportForm'), $request);
 $type = $request->getParameter('type');
 
 // Also, there are 2 variations of report: totals only, or normal. Totals only means that the report
-// is grouped by (either date, user, client, project, task, or cf_1) and user only needs to see subtotals by group.
+// is grouped by (either date, user, client, project, or task) and user only needs to see subtotals by group.
 $totals_only = $bean->getAttribute('chtotalsonly');
 
 // Obtain items.
@@ -117,7 +117,15 @@ if ('xml' == $type) {
       print "<row>\n";
 
       print "\t<date><![CDATA[".$item['date']."]]></date>\n";
-      if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print "\t<user><![CDATA[".$item['user']."]]></user>\n"; 
+      if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print "\t<user><![CDATA[".$item['user']."]]></user>\n";
+      // User custom fields.
+      if ($custom_fields && $custom_fields->userFields) {
+        foreach ($custom_fields->userFields as $userField) {
+          $field_name = 'user_field_'.$userField['id'];
+          $checkbox_control_name = 'show_'.$field_name;
+          if ($bean->getAttribute($checkbox_control_name)) print "\t<$field_name><![CDATA[".$item[$field_name]."]]></$field_name>\n";
+        }
+      }
       if ($bean->getAttribute('chclient')) print "\t<client><![CDATA[".$item['client']."]]></client>\n";
       if ($bean->getAttribute('chproject')) print "\t<project><![CDATA[".$item['project']."]]></project>\n";
       if ($bean->getAttribute('chtask')) print "\t<task><![CDATA[".$item['task']."]]></task>\n";
@@ -129,8 +137,6 @@ if ('xml' == $type) {
           if ($bean->getAttribute($checkbox_control_name)) print "\t<$field_name><![CDATA[".$item[$field_name]."]]></$field_name>\n";
         }
       }
-      // TODO: add user custom fields, too.
-      if ($bean->getAttribute('chcf_1')) print "\t<cf_1><![CDATA[".$item['cf_1']."]]></cf_1>\n";
       if ($bean->getAttribute('chstart')) print "\t<start><![CDATA[".$item['start']."]]></start>\n";
       if ($bean->getAttribute('chfinish')) print "\t<finish><![CDATA[".$item['finish']."]]></finish>\n";
       if ($bean->getAttribute('chduration')) {
@@ -207,10 +213,25 @@ if ('csv' == $type) {
     // Normal report. Print headers.
     print '"'.$i18n->get('label.date').'"';
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print ',"'.$i18n->get('label.user').'"';
+    // User custom field labels.
+    if ($custom_fields && $custom_fields->userFields) {
+      foreach ($custom_fields->userFields as $userField) {
+        $field_name = 'user_field_'.$userField['id'];
+        $checkbox_control_name = 'show_'.$field_name;
+        if ($bean->getAttribute($checkbox_control_name)) print ',"'.str_replace('"','""',$userField['label']).'"';
+      }
+    }
     if ($bean->getAttribute('chclient')) print ',"'.$i18n->get('label.client').'"';
     if ($bean->getAttribute('chproject')) print ',"'.$i18n->get('label.project').'"';
     if ($bean->getAttribute('chtask')) print ',"'.$i18n->get('label.task').'"';
-    if ($bean->getAttribute('chcf_1')) print ',"'.$custom_fields->fields[0]['label'].'"';
+    // Time custom field labels.
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        $checkbox_control_name = 'show_'.$field_name;
+        if ($bean->getAttribute($checkbox_control_name)) print ',"'.str_replace('"','""',$timeField['label']).'"';
+      }
+    }
     if ($bean->getAttribute('chstart')) print ',"'.$i18n->get('label.start').'"';
     if ($bean->getAttribute('chfinish')) print ',"'.$i18n->get('label.finish').'"';
     if ($bean->getAttribute('chduration')) print ',"'.$i18n->get('label.duration').'"';
@@ -228,10 +249,25 @@ if ('csv' == $type) {
     foreach ($items as $item) {
       print '"'.$item['date'].'"';
       if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print ',"'.str_replace('"','""',$item['user']).'"';
+      // User custom fields.
+      if ($custom_fields && $custom_fields->userFields) {
+        foreach ($custom_fields->userFields as $userField) {
+          $field_name = 'user_field_'.$userField['id'];
+          $checkbox_control_name = 'show_'.$field_name;
+          if ($bean->getAttribute($checkbox_control_name)) print ',"'.str_replace('"','""',$item[$field_name]).'"';
+        }
+      }
       if ($bean->getAttribute('chclient')) print ',"'.str_replace('"','""',$item['client']).'"';
       if ($bean->getAttribute('chproject')) print ',"'.str_replace('"','""',$item['project']).'"';
       if ($bean->getAttribute('chtask')) print ',"'.str_replace('"','""',$item['task']).'"';
-      if ($bean->getAttribute('chcf_1')) print ',"'.str_replace('"','""',$item['cf_1']).'"';
+      // Time custom fields.
+      if ($custom_fields && $custom_fields->timeFields) {
+        foreach ($custom_fields->timeFields as $timeField) {
+          $field_name = 'time_field_'.$timeField['id'];
+          $checkbox_control_name = 'show_'.$field_name;
+          if ($bean->getAttribute($checkbox_control_name)) print ',"'.str_replace('"','""',$item[$field_name]).'"';
+        }
+      }
       if ($bean->getAttribute('chstart')) print ',"'.$item['start'].'"';
       if ($bean->getAttribute('chfinish')) print ',"'.$item['finish'].'"';
       if ($bean->getAttribute('chduration')) {
