@@ -1036,10 +1036,25 @@ class ttReportHelper {
     // Determine column span for note field.
     $colspan = 1;
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) $colspan++;
+    // User custom fields.
+    if ($custom_fields && $custom_fields->userFields) {
+      foreach ($custom_fields->userFields as $userField) {
+        $field_name = 'user_field_'.$userField['id'];
+        $checkbox_control_name = 'show_'.$field_name;
+        if ($options[$checkbox_control_name]) $colspan++;
+      }
+    }
     if ($options['show_client']) $colspan++;
     if ($options['show_project']) $colspan++;
     if ($options['show_task']) $colspan++;
-    if ($options['show_custom_field_1']) $colspan++;
+    // Time custom fields.
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        $checkbox_control_name = 'show_'.$field_name;
+        if ($options[$checkbox_control_name]) $colspan++;
+      }
+    }
     if ($options['show_start']) $colspan++;
     if ($options['show_end']) $colspan++;
     if ($options['show_duration']) $colspan++;
@@ -1128,14 +1143,28 @@ class ttReportHelper {
       $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.date').'</td>';
       if ($canViewReports || $isClient)
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.user').'</td>';
+      // User custom fields.
+      if ($custom_fields && $custom_fields->userFields) {
+        foreach ($custom_fields->userFields as $userField) {
+          $field_name = 'user_field_'.$userField['id'];
+          $checkbox_control_name = 'show_'.$field_name;
+          if ($options[$checkbox_control_name]) $body .= '<td style="'.$tableHeader.'">'.htmlspecialchars($userField['label']).'</td>';
+        }
+      }
       if ($options['show_client'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.client').'</td>';
       if ($options['show_project'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.project').'</td>';
       if ($options['show_task'])
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.task').'</td>';
-      if ($options['show_custom_field_1'])
-        $body .= '<td style="'.$tableHeader.'">'.htmlspecialchars($custom_fields->fields[0]['label']).'</td>';
+      // Time custom fields.
+      if ($custom_fields && $custom_fields->timeFields) {
+        foreach ($custom_fields->timeFields as $timeField) {
+          $field_name = 'time_field_'.$timeField['id'];
+          $checkbox_control_name = 'show_'.$field_name;
+          if ($options[$checkbox_control_name]) $body .= '<td style="'.$tableHeader.'">'.htmlspecialchars($timeField['label']).'</td>';
+        }
+      }
       if ($options['show_start'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.start').'</td>';
       if ($options['show_end'])
@@ -1184,10 +1213,25 @@ class ttReportHelper {
               $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
               $subtotal_name = htmlspecialchars($subtotals[$prev_grouped_by]['name']);
               if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['user'].'</td>';
+              // User custom fields.
+              if ($custom_fields && $custom_fields->userFields) {
+                foreach ($custom_fields->userFields as $userField) {
+                  $field_name = 'user_field_'.$userField['id'];
+                  $checkbox_control_name = 'show_'.$field_name;
+                  if ($options[$checkbox_control_name]) $body .= '<td></td>';
+                }
+              }
               if ($options['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['client'].'</td>';
               if ($options['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['project'].'</td>';
               if ($options['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['task'].'</td>';
-              if ($options['show_custom_field_1']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['cf_1'].'</td>';
+              // Time custom fields.
+              if ($custom_fields && $custom_fields->timeFields) {
+                foreach ($custom_fields->timeFields as $timeField) {
+                  $field_name = 'time_field_'.$timeField['id'];
+                  $checkbox_control_name = 'show_'.$field_name;
+                  if ($options[$checkbox_control_name]) $body .= '<td></td>';
+                }
+              }
               if ($options['show_start']) $body .= '<td></td>';
               if ($options['show_end']) $body .= '<td></td>';
               if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['time'].'</td>';
@@ -1216,14 +1260,28 @@ class ttReportHelper {
           $body .= '<td style="'.$cellLeftAligned.'">'.$record['date'].'</td>';
           if ($canViewReports || $isClient)
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['user']).'</td>';
+          // User custom fields.
+          if ($custom_fields && $custom_fields->userFields) {
+            foreach ($custom_fields->userFields as $userField) {
+              $field_name = 'user_field_'.$userField['id'];
+              $checkbox_control_name = 'show_'.$field_name;
+              if ($options[$checkbox_control_name]) $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record[$field_name]).'</td>';
+            }
+          }
           if ($options['show_client'])
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['client']).'</td>';
           if ($options['show_project'])
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['project']).'</td>';
           if ($options['show_task'])
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['task']).'</td>';
-          if ($options['show_custom_field_1'])
-            $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['cf_1']).'</td>';
+          // Time custom fields.
+          if ($custom_fields && $custom_fields->timeFields) {
+            foreach ($custom_fields->timeFields as $timeField) {
+              $field_name = 'time_field_'.$timeField['id'];
+              $checkbox_control_name = 'show_'.$field_name;
+              if ($options[$checkbox_control_name]) $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record[$field_name]).'</td>';
+            }
+          }
           if ($options['show_start'])
             $body .= '<td nowrap style="'.$cellRightAligned.'">'.$record['start'].'</td>';
           if ($options['show_end'])
@@ -1274,9 +1332,25 @@ class ttReportHelper {
         $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.subtotal').'</td>';
         $subtotal_name = htmlspecialchars($subtotals[$cur_grouped_by]['name']);
         if ($canViewReports || $isClient) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['user'].'</td>';
+        // User custom fields.
+        if ($custom_fields && $custom_fields->userFields) {
+          foreach ($custom_fields->userFields as $userField) {
+            $field_name = 'user_field_'.$userField['id'];
+            $checkbox_control_name = 'show_'.$field_name;
+            if ($options[$checkbox_control_name]) $body .= '<td></td>';
+          }
+        }
         if ($options['show_client']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['client'].'</td>';
         if ($options['show_project']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['project'].'</td>';
         if ($options['show_task']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['task'].'</td>';
+        // Time custom fields.
+        if ($custom_fields && $custom_fields->timeFields) {
+          foreach ($custom_fields->timeFields as $timeField) {
+            $field_name = 'time_field_'.$timeField['id'];
+            $checkbox_control_name = 'show_'.$field_name;
+            if ($options[$checkbox_control_name]) $body .= '<td></td>';
+          }
+        }
         if ($options['show_custom_field_1']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['cf_1'].'</td>';
         if ($options['show_start']) $body .= '<td></td>';
         if ($options['show_end']) $body .= '<td></td>';
@@ -1301,9 +1375,25 @@ class ttReportHelper {
       $body .= '<tr style="'.$rowSubtotal.'">';
       $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$i18n->get('label.total').'</td>';
       if ($canViewReports || $isClient) $body .= '<td></td>';
+      // User custom fields.
+      if ($custom_fields && $custom_fields->userFields) {
+        foreach ($custom_fields->userFields as $userField) {
+          $field_name = 'user_field_'.$userField['id'];
+          $checkbox_control_name = 'show_'.$field_name;
+          if ($options[$checkbox_control_name]) $body .= '<td></td>';
+        }
+      }
       if ($options['show_client']) $body .= '<td></td>';
       if ($options['show_project']) $body .= '<td></td>';
       if ($options['show_task']) $body .= '<td></td>';
+      // Time custom fields.
+      if ($custom_fields && $custom_fields->timeFields) {
+        foreach ($custom_fields->timeFields as $timeField) {
+          $field_name = 'time_field_'.$timeField['id'];
+          $checkbox_control_name = 'show_'.$field_name;
+          if ($options[$checkbox_control_name]) $body .= '<td></td>';
+        }
+      }
       if ($options['show_custom_field_1']) $body .= '<td></td>';
       if ($options['show_start']) $body .= '<td></td>';
       if ($options['show_end']) $body .= '<td></td>';

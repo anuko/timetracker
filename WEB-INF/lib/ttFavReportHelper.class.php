@@ -417,6 +417,7 @@ class ttFavReportHelper {
         'chpaid' => null,
         'chunits' => null,
         'chinvoice' => null,
+        'chfiles' => '1',
         'group_by1' => null,
         'group_by2' => null,
         'group_by3' => null,
