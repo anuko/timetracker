@@ -515,6 +515,35 @@ class ttFavReportHelper {
     if ($user->isPluginEnabled('ap') && $user->isClient() && !$user->can('view_client_unapproved'))
       $options['approved'] = 1; // Restrict clients to approved records only.
 
+    // Prepare custom field options.
+    if ($user->isPluginEnabled('cf') && $options['report_spec']) {
+      $custom_fields = new CustomFields();
+      $report_spec = $options['report_spec'];
+      // Time fields.
+      if ($custom_fields && $custom_fields->timeFields) {
+        foreach ($custom_fields->timeFields as $timeField) {
+          $field_name = 'time_field_'.$timeField['id'];
+          $checkbox_field_name = 'show_'.$field_name;
+          $field_value = ttFavReportHelper::getFieldSettingFromReportSpec($field_name, $report_spec);
+          $options[$field_name] = $field_value;
+          $checkbox_value = ttFavReportHelper::getFieldSettingFromReportSpec($checkbox_field_name, $report_spec);
+          $options[$checkbox_field_name] = $checkbox_value;
+        }
+      }
+      // User fields.
+      if ($custom_fields && $custom_fields->userFields) {
+        foreach ($custom_fields->userFields as $userField) {
+          $field_name = 'user_field_'.$userField['id'];
+          $checkbox_field_name = 'show_'.$field_name;
+          $field_value = ttFavReportHelper::getFieldSettingFromReportSpec($field_name, $report_spec);
+          $options[$field_name] = $field_value;
+          $checkbox_value = ttFavReportHelper::getFieldSettingFromReportSpec($checkbox_field_name, $report_spec);
+          $options[$checkbox_field_name] = $checkbox_value;
+        }
+      }
+      // TODO: add project fields here.
+    }
+
     return $options;
   }
 
