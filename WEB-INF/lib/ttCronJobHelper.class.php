@@ -103,7 +103,6 @@ class ttCronJobHelper {
 
     // Drop things we don't need.
     unset($val['id']);
-    unset($val['report_spec']);
     unset($val['status']);
 
     return $val;

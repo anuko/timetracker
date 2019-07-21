@@ -120,15 +120,16 @@ class ttFavReportHelper {
     $org_id = $user->org_id;
 
     $sql = "insert into tt_fav_reports".
-      " (name, user_id, group_id, org_id, client_id, cf_1_option_id, project_id, task_id,".
+      " (name, user_id, group_id, org_id, report_spec, client_id, project_id, task_id,".
       " billable, approved, invoice, timesheet, paid_status, users, period, period_start,".
       " period_end, show_client, show_invoice, show_paid, show_ip,".
       " show_project, show_timesheet, show_start, show_duration, show_cost,".
-      " show_task, show_end, show_note, show_approved, show_custom_field_1, show_work_units,".
+      " show_task, show_end, show_note, show_approved, show_work_units,".
       " group_by1, group_by2, group_by3, show_totals_only)".
       " values(".
       $mdb2->quote($fields['name']).", $user_id, $group_id, $org_id, ".
-      $mdb2->quote($fields['client']).", ".$mdb2->quote($fields['option']).", ".
+      $mdb2->quote($fields['report_spec']).", ".
+      $mdb2->quote($fields['client']).", ".
       $mdb2->quote($fields['project']).", ".$mdb2->quote($fields['task']).", ".
       $mdb2->quote($fields['billable']).", ".$mdb2->quote($fields['approved']).", ".
       $mdb2->quote($fields['invoice']).", ".$mdb2->quote($fields['timesheet']).", ".
@@ -137,7 +138,7 @@ class ttFavReportHelper {
       $mdb2->quote($fields['from']).", ".$mdb2->quote($fields['to']).", ".
       $fields['chclient'].", ".$fields['chinvoice'].", ".$fields['chpaid'].", ".$fields['chip'].", ".
       $fields['chproject'].", ".$fields['chtimesheet'].", ".$fields['chstart'].", ".$fields['chduration'].", ".$fields['chcost'].", ".
-      $fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".$fields['chapproved'].", ".$fields['chcf_1'].", ".$fields['chunits'].", ".
+      $fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".$fields['chapproved'].", ".$fields['chunits'].", ".
       $mdb2->quote($fields['group_by1']).", ".$mdb2->quote($fields['group_by2']).", ".
       $mdb2->quote($fields['group_by3']).", ".$fields['chtotalsonly'].")";
     $affected = $mdb2->exec($sql);
@@ -159,8 +160,8 @@ class ttFavReportHelper {
 
     $sql = "update tt_fav_reports set ".
       "name = ".$mdb2->quote($fields['name']).", ".
+      "report_spec = ".$mdb2->quote($fields['report_spec']).", ".
       "client_id = ".$mdb2->quote($fields['client']).", ".
-      "cf_1_option_id = ".$mdb2->quote($fields['option']).", ".
       "project_id = ".$mdb2->quote($fields['project']).", ".
       "task_id = ".$mdb2->quote($fields['task']).", ".
       "billable = ".$mdb2->quote($fields['billable']).", ".
@@ -185,7 +186,6 @@ class ttFavReportHelper {
       "show_end = ".$fields['chfinish'].", ".
       "show_note = ".$fields['chnote'].", ".
       "show_approved = ".$fields['chapproved'].", ".
-      "show_custom_field_1 = ".$fields['chcf_1'].", ".
       "show_work_units = ".$fields['chunits'].", ".
       "group_by1 = ".$mdb2->quote($fields['group_by1']).", ".
       "group_by2 = ".$mdb2->quote($fields['group_by2']).", ".
@@ -220,7 +220,6 @@ class ttFavReportHelper {
     if (!$bean->getAttribute('chapproved')) $bean->setAttribute('chapproved', 0);
     if (!$bean->getAttribute('chpaid')) $bean->setAttribute('chpaid', 0);
 
-    if (!$bean->getAttribute('chcf_1')) $bean->setAttribute('chcf_1', 0);
     if (!$bean->getAttribute('chunits')) $bean->setAttribute('chunits', 0);
     if (!$bean->getAttribute('chinvoice')) $bean->setAttribute('chinvoice', 0);
 
@@ -247,6 +246,7 @@ class ttFavReportHelper {
 
     $fields = array(
       'name'=>$bean->getAttribute('new_fav_report'),
+      'report_spec'=>ttFavReportHelper::makeReportSpec($bean),
       'client'=>$bean->getAttribute('client'),
       'option'=>$bean->getAttribute('option'),
       'project'=>$bean->getAttribute('project'),
@@ -272,7 +272,6 @@ class ttFavReportHelper {
       'chip'=>$bean->getAttribute('chip'),
       'chapproved'=>$bean->getAttribute('chapproved'),
       'chpaid'=>$bean->getAttribute('chpaid'),
-      'chcf_1'=>$bean->getAttribute('chcf_1'),
       'chunits'=>$bean->getAttribute('chunits'),
       'chinvoice'=>$bean->getAttribute('chinvoice'),
       'group_by1'=>$bean->getAttribute('group_by1'),
@@ -316,10 +315,42 @@ class ttFavReportHelper {
   // loadReport - loads report options from database into a bean.
   static function loadReport(&$bean) {
     global $user;
+    // Custom fields.
+    if ($user->isPluginEnabled('cf')) {
+      global $custom_fields;
+      if (!$custom_fields) $custom_fields = new CustomFields();
+    }
     $user_id = $user->getUser();
 
     $val = ttFavReportHelper::get($bean->getAttribute('favorite_report'));
     if ($val) {
+      // Custom field settings.
+      if ($val['report_spec']) {
+        $report_spec = $val['report_spec'];
+        // Time custom field settings.
+        if ($custom_fields && $custom_fields->timeFields) {
+          foreach ($custom_fields->timeFields as $timeField) {
+            $field_name = 'time_field_'.$timeField['id'];
+            $checkbox_field_name = 'show_'.$field_name;
+            $field_value = ttFavReportHelper::getFieldSettingFromReportSpec($field_name, $report_spec);
+            $bean->setAttribute($field_name, $field_value);
+            $checkbox_value = ttFavReportHelper::getFieldSettingFromReportSpec($checkbox_field_name, $report_spec);
+            $bean->setAttribute($checkbox_field_name, $checkbox_value);
+          }
+        }
+        // User custom field settings.
+        if ($custom_fields && $custom_fields->userFields) {
+          foreach ($custom_fields->userFields as $userField) {
+            $field_name = 'user_field_'.$userField['id'];
+            $checkbox_field_name = 'show_'.$field_name;
+            $field_value = ttFavReportHelper::getFieldSettingFromReportSpec($field_name, $report_spec);
+            $bean->setAttribute($field_name, $field_value);
+            $checkbox_value = ttFavReportHelper::getFieldSettingFromReportSpec($checkbox_field_name, $report_spec);
+            $bean->setAttribute($checkbox_field_name, $checkbox_value);
+          }
+        }
+      }
+
       $bean->setAttribute('client', $val['client_id']);
       $bean->setAttribute('option', $val['cf_1_option_id']);
       $bean->setAttribute('project', $val['project_id']);
@@ -353,7 +384,6 @@ class ttFavReportHelper {
       $bean->setAttribute('chfinish', $val['show_end']);
       $bean->setAttribute('chnote', $val['show_note']);
       $bean->setAttribute('chapproved', $val['show_approved']);
-      $bean->setAttribute('chcf_1', $val['show_custom_field_1']);
       $bean->setAttribute('chunits', $val['show_work_units']);
       $bean->setAttribute('group_by1', $val['group_by1']);
       $bean->setAttribute('group_by2', $val['group_by2']);
@@ -363,37 +393,54 @@ class ttFavReportHelper {
     } else {
       $attrs = $bean->getAttributes();
       $attrs = array_merge($attrs, array(
-        'client'=>'',
-        'option'=>'',
-        'project'=>'',
-        'task'=>'',
-        'include_records'=>'',
-        'approved'=>'',
-        'paid_status'=>'',
-        'invoice'=>'',
-        'timesheet'=>'',
-        'users'=>$user_id,
-        'period'=>'',
-        'chclient'=>'1',
-        'chstart'=>'1',
-        'chfinish'=>'1',
-        'chduration'=>'1',
-        'chproject'=>'1',
-        'chtask'=>'1',
-        'chnote'=>'1',
-        'chcost'=>'',
-        'chtimesheet'=>'',
-        'chip'=>'',
-        'chapproved'=>'',
-        'chpaid'=>'',
-        'chcf_1'=>'',
-        'chunits'=>'',
-        'chinvoice'=>'',
-        'group_by1'=>'',
-        'group_by2'=>'',
-        'group_by3'=>'',
-        'chtotalsonly'=>'',
-        'new_fav_report'=>''));
+        'client' => null,
+        'project'=> null,
+        'task' => null,
+        'include_records' => null,
+        'approved' => null,
+        'paid_status' => null,
+        'invoice' => null,
+        'timesheet' => null,
+        'users' => $user_id,
+        'period' => null,
+        'chclient' => '1',
+        'chstart' => '1',
+        'chfinish' => '1',
+        'chduration' => '1',
+        'chproject' => '1',
+        'chtask' => '1',
+        'chnote' => '1',
+        'chcost' => null,
+        'chtimesheet' => null,
+        'chip' => null,
+        'chapproved' => null,
+        'chpaid' => null,
+        'chunits' => null,
+        'chinvoice' => null,
+        'group_by1' => null,
+        'group_by2' => null,
+        'group_by3' => null,
+        'chtotalsonly' => null,
+        'new_fav_report' => null));
+      // Time custom fields.
+      if ($custom_fields && $custom_fields->timeFields) {
+        foreach ($custom_fields->timeFields as $timeField) {
+          $field_name = 'time_field_'.$timeField['id'];
+          $checkbox_field_name = 'show_'.$field_name;
+          $custom_field_attrs[$field_name] = null;
+          $custom_field_attrs[$checkbox_field_name] = null;
+        }
+      }
+      // User custom fields.
+      if ($custom_fields && $custom_fields->userFields) {
+        foreach ($custom_fields->userFields as $userField) {
+          $field_name = 'user_field_'.$userField['id'];
+          $checkbox_field_name = 'show_'.$field_name;
+          $custom_field_attrs[$field_name] = null;
+          $custom_field_attrs[$checkbox_field_name] = null;
+        }
+      }
+      $attrs = array_merge($attrs, $custom_field_attrs);
       $bean->setAttributes($attrs);
     }
   }
@@ -413,7 +460,6 @@ class ttFavReportHelper {
     $options = $db_fields; // For now, use db field names as options.
     // Drop things we don't need in reports.
     unset($options['id']);
-    unset($options['report_spec']); // Currently not used.
     unset($options['status']);
 
     // Note: special handling for NULL users field is done in cron.php
@@ -469,5 +515,63 @@ class ttFavReportHelper {
       $options['approved'] = 1; // Restrict clients to approved records only.
 
     return $options;
+  }
+
+  // makeReportSpec - prepares a value for report_spec field.
+  //
+  // Currently, only custom field settings go there.
+  // Format:
+  // time_field_25:117,show_time_field_25:1,time_field_28:qwerty,show_time_field_28:0
+  static function makeReportSpec($bean) {
+    global $user;
+
+    if ($user->isPluginEnabled('cf')) {
+      global $custom_fields;
+      if (!$custom_fields) $custom_fields = new CustomFields();
+    }
+
+    // Add time custom field settings.
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        $field_value = str_replace(',','&#44',$bean->getAttribute($field_name)); 
+        $checkbox_field_name = 'show_'.$field_name;
+        $checkbox_field_value = (int) $bean->getAttribute($checkbox_field_name);
+        if ($field_value) $reportSpecArray[] = $field_name.':'.$field_value;
+        if ($checkbox_field_value) $reportSpecArray[] = $checkbox_field_name.':1';
+      }
+    }
+
+    // Add user custom field settings.
+    if ($custom_fields && $custom_fields->userFields) {
+      foreach ($custom_fields->userFields as $userField) {
+        $field_name = 'user_field_'.$userField['id'];
+        $field_value = str_replace(',','&#44',$bean->getAttribute($field_name));
+        $checkbox_field_name = 'show_'.$field_name;
+        $checkbox_field_value = (int) $bean->getAttribute($checkbox_field_name);
+        if ($field_value) $reportSpecArray[] = $field_name.':'.$field_value;
+        if ($checkbox_field_value) $reportSpecArray[] = $checkbox_field_name.':1';
+      }
+    }
+
+    $reportSpec = implode(',', $reportSpecArray);
+    return $reportSpec;
+  }
+
+  // getFieldSettingFromReportSpec - obtains custom field setting from report_spec string.
+  // See makeReportSpec above.
+  //
+  // $fieldKey is something like "time_field_26", "show_time_field_26", or
+  // "user_field_765", "show_user_field_765".
+  static function getFieldSettingFromReportSpec($fieldKey, $report_spec) {
+    $reportSpecArray = explode(',', $report_spec);
+    foreach ($reportSpecArray as $fieldSetting) {
+      if (ttStartsWith($fieldSetting, $fieldKey.':')) {
+        $value = substr($fieldSetting, strlen($fieldKey)+1);
+        $value = str_replace('&#44',',',$value); // Restore commas.
+        return $value;
+      }
+    }
+    return null; // Not found.
   }
 }
