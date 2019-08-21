@@ -1651,6 +1651,7 @@ class ttReportHelper {
     $group_by2 = $options['group_by2'];
     $group_by3 = $options['group_by3'];
 
+    // TODO: redo this using the if instead so that we can include custom fields properly.
     switch ($group_by1) {
       case 'date':
         $group_by_parts .= ', l.date';

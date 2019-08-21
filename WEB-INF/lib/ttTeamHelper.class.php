@@ -308,46 +308,12 @@ class ttTeamHelper {
     return false;
   }
 
-  // The getCustomFieldLog obtains all custom field log entries for a group.
-  static function getCustomFieldLog($group_id) {
-    $mdb2 = getConnection();
-
-    $sql = "select * from tt_custom_field_log where field_id in (select id from tt_custom_fields where group_id = $group_id) order by id";
-
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
   // getFavReports - obtains all favorite reports for all users in a group.
   static function getFavReports($group_id) {
     $mdb2 = getConnection();
 
     $result = array();
     $sql = "select * from tt_fav_reports where user_id in (select id from tt_users where group_id = $group_id)";
-    $res = $mdb2->query($sql);
-    $result = array();
-    if (!is_a($res, 'PEAR_Error')) {
-      while ($val = $res->fetchRow()) {
-        $result[] = $val;
-      }
-      return $result;
-    }
-    return false;
-  }
-
-  // getExpenseItems - obtains all expense items for all users in a group.
-  static function getExpenseItems($group_id) {
-    $mdb2 = getConnection();
-
-    $result = array();
-    $sql = "select * from tt_expense_items where user_id in (select id from tt_users where group_id = $group_id)";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
