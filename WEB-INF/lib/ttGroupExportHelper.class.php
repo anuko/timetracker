@@ -495,7 +495,7 @@ class ttGroupExportHelper {
       unset($expense_item_part);
       $offset += $limit;
      }
-    fwrite($this->file, $this->indentation."  </expense_items\n");
+    fwrite($this->file, $this->indentation."  </expense_items>\n");
 
     // Write predefined expenses.
     $predefined_expenses = $this->getRecordsFromTable('tt_predefined_expenses');
