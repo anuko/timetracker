@@ -222,6 +222,8 @@ $i18n_key_words = array(
 'label.condition' => 'Bedingung',
 'label.yes' => 'Ja',
 'label.no' => 'Nein',
+// TODO: translate the following.
+// 'label.sort_by' => 'Sort by',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Benutzerfelder',
 'label.monthly_quotas' => 'Monatliche Quoten',

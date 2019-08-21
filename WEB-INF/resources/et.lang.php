@@ -238,6 +238,8 @@ $i18n_key_words = array(
 'label.condition' => 'Tingimus',
 'label.yes' => 'jah',
 'label.no' => 'ei',
+// TODO: translate the following.
+// 'label.sort_by' => 'Sort by',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Eriväljad',
 'label.monthly_quotas' => 'Kuu kvoot',

@@ -237,6 +237,7 @@ $i18n_key_words = array(
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',
 // 'label.no' => 'no',
+// 'label.sort_by' => 'Sort by',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Niestandardowe pola',
 // Translate the following.

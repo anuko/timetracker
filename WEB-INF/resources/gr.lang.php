@@ -224,6 +224,8 @@ $i18n_key_words = array(
 'label.condition' => 'Κατάσταση',
 'label.yes' => 'ναι',
 'label.no' => 'όχι',
+// TODO: translate the following.
+// 'label.sort_by' => 'Sort by',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Προσαρμοσμένα πεδία',
 'label.monthly_quotas' => 'Μηνιαίες ποσοστώσεις',

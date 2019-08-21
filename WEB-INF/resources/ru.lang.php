@@ -210,6 +210,7 @@ $i18n_key_words = array(
 'label.condition' => 'Условие',
 'label.yes' => 'да',
 'label.no' => 'нет',
+'label.sort_by' => 'Сортировать по',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Дополнительные поля',
 'label.monthly_quotas' => 'Месячные квоты',

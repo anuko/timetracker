@@ -231,6 +231,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.yes' => 'yes',
 // 'label.no' => 'no',
+// 'label.sort_by' => 'Sort by',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Champs personalisés',
 'label.monthly_quotas' => 'Quotas mensuels',

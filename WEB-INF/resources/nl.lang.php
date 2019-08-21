@@ -211,6 +211,8 @@ $i18n_key_words = array(
 'label.condition' => 'Voorwaarde',
 'label.yes' => 'ja',
 'label.no' => 'nee',
+// TODO: translate the following.
+// 'label.sort_by' => 'Sort by',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Eigen velden',
 'label.monthly_quotas' => 'Doelen per maand',
