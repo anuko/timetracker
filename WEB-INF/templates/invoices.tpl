@@ -2,6 +2,22 @@
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
 
+{if $show_sorting_options}
+  {$forms.invoicesForm.open}
+<div style="padding: 10 0 10 0;">
+  <table border="0" class="divider">
+    <tr>
+      <td>
+        <table cellspacing="1" cellpadding="3" border="0">
+          <tr><td>{$i18n.label.sort}:</td><td>{$forms.invoicesForm.sort_option_1.control}</td><td>{$forms.invoicesForm.sort_order_1.control}</td><td>{$forms.invoicesForm.sort_option_2.control}</td><td>{$forms.invoicesForm.sort_order_2.control}</td></tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+  {$forms.invoicesForm.close}
+{/if}
+
 <table cellspacing="0" cellpadding="7" border="0" width="720">
   <tr>
     <td valign="top">
@@ -21,7 +37,7 @@
         {foreach $invoices as $invoice}
         <tr valign="top" bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td><a href="invoice_view.php?id={$invoice.id}">{$invoice.name|escape}</a></td>
-          <td>{$invoice.client_name|escape}</td>
+          <td>{$invoice.client|escape}</td>
           <td>{$invoice.date}</td>
   {if $user->isPluginEnabled('ps')}
           <td>{if $invoice.paid}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>

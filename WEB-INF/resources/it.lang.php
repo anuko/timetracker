@@ -229,7 +229,7 @@ $i18n_key_words = array(
 'label.yes' => 'si',
 'label.no' => 'no',
 // TODO: translate the following.
-// 'label.sort_by' => 'Sort by',
+// 'label.sort' => 'Sort',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Campi personalizzati',
 'label.monthly_quotas' => 'Quote mensili',
@@ -421,6 +421,9 @@ $i18n_key_words = array(
 // 'dropdown.not_approved' => 'not approved',
 'dropdown.paid' => 'pagato',
 'dropdown.not_paid' => 'non pagato',
+// TODO: translate the following.
+// 'dropdown.ascending' => 'ascending',
+// 'dropdown.descending' => 'descending',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases

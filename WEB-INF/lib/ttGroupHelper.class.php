@@ -411,7 +411,7 @@ class ttGroupHelper {
   }
 
   // The getActiveInvoices returns an array of active invoices for a group.
-  static function getActiveInvoices()
+  static function getActiveInvoices($sort_options = false)
   {
     global $user;
     $mdb2 = getConnection();
@@ -425,9 +425,23 @@ class ttGroupHelper {
     if ($user->isClient())
       $client_part = "and i.client_id = $user->client_id";
 
-    $sql = "select i.id, i.name, i.date, i.client_id, i.status, c.name as client_name from tt_invoices i".
+    // Prepare order by part.
+    $order_by_part = 'order  by ';
+    if (!$sort_options)
+      $order_by_part .= 'i.name';
+    else {
+      $order_by_part .= $sort_options['sort_option_1'];
+      if ($sort_options['sort_order_1'] == 'descending') $order_by_part .= ' desc';
+
+      if ($sort_options['sort_option_2']) {
+        $order_by_part .= ', '.$sort_options['sort_option_2'];
+        if ($sort_options['sort_order_2'] == 'descending') $order_by_part .= ' desc';
+      }
+    }
+
+    $sql = "select i.id, i.name, i.date, i.client_id, i.status, c.name as client from tt_invoices i".
       " left join tt_clients c on (c.id = i.client_id)".
-      " where i.status = 1 and i.group_id = $group_id and i.org_id = $org_id $client_part order by i.name";
+      " where i.status = 1 and i.group_id = $group_id and i.org_id = $org_id $client_part $order_by_part";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {

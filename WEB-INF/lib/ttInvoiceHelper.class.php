@@ -504,4 +504,20 @@ class ttInvoiceHelper {
 
     return $body;
   }
+
+  // validSortOption validates user input for sort option.
+  static function validSortOption($option, $emptyValid = false) {
+    if (!$option)
+      return ($emptyValid ? true : false);
+
+    $valid_options = array('name', 'client', 'date');
+
+    return (in_array($option, $valid_options) ? true : false);
+  }
+
+  // validSortOrder validates user input for sort order.
+  static function validSortOrder($order) {
+    $valid_options = array('ascending', 'descending');
+    return (in_array($order, $valid_options) ? true : false);
+  }
 }

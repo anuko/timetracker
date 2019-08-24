@@ -239,7 +239,7 @@ $i18n_key_words = array(
 'label.yes' => 'jah',
 'label.no' => 'ei',
 // TODO: translate the following.
-// 'label.sort_by' => 'Sort by',
+// 'label.sort' => 'Sort',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Eriväljad',
 'label.monthly_quotas' => 'Kuu kvoot',
@@ -426,6 +426,9 @@ $i18n_key_words = array(
 // 'dropdown.not_approved' => 'not approved',
 'dropdown.paid' => 'makstud',
 'dropdown.not_paid' => 'mitte makstud',
+// TODO: translate the following.
+// 'dropdown.ascending' => 'ascending',
+// 'dropdown.descending' => 'descending',
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Unustasid salasõna?',

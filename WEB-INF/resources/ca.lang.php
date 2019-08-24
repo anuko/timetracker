@@ -241,7 +241,7 @@ $i18n_key_words = array(
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',
 // 'label.no' => 'no',
-// 'label.sort_by' => 'Sort by',
+// 'label.sort' => 'Sort',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 // TODO: translate the following.
 // 'label.custom_fields' => 'Custom fields',
@@ -439,6 +439,8 @@ $i18n_key_words = array(
 // 'dropdown.not_approved' => 'not approved',
 // 'dropdown.paid' => 'paid',
 // 'dropdown.not_paid' => 'not paid',
+// 'dropdown.ascending' => 'ascending',
+// 'dropdown.descending' => 'descending',
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => '¿Ha oblidat la seva paraula de pas?',
