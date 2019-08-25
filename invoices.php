@@ -53,7 +53,7 @@ $invoices = ttGroupHelper::getActiveInvoices();
 $form = new Form('invoicesForm');
 
 // Prepare an array of sort options.
-$sort_options['name'] = $i18n->get('label.thing_name');
+$sort_options['name'] = $i18n->get('label.invoice');
 $sort_options['client'] = $i18n->get('label.client');
 $sort_options['date'] = $i18n->get('label.date');
 

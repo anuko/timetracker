@@ -428,7 +428,7 @@ class ttGroupHelper {
     // Prepare order by part.
     $order_by_part = 'order  by ';
     if (!$sort_options)
-      $order_by_part .= 'i.name';
+      $order_by_part .= 'name';
     else {
       $order_by_part .= $sort_options['sort_option_1'];
       if ($sort_options['sort_order_1'] == 'descending') $order_by_part .= ' desc';

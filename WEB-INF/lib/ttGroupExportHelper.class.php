@@ -387,7 +387,7 @@ class ttGroupExportHelper {
     // We use getRecordsChunkFromTable here to avoid out of memory condition for large tables.
     fwrite($this->file, $this->indentation."  <log>\n");
     $offset = 0;
-    $limit = 1000;
+    $limit = 5000;
     $key = 0;
     while ($records = $this->getRecordsChunkFromTable('tt_log', $limit, $offset)) {
       foreach ($records as $record) {
@@ -454,7 +454,6 @@ class ttGroupExportHelper {
     // We use getRecordsChunkFromTable here to avoid out of memory condition for large tables.
     fwrite($this->file, $this->indentation."  <custom_field_log>\n");
     $offset = 0;
-    $limit = 1000;
     while ($custom_field_log = $this->getRecordsChunkFromTable('tt_custom_field_log', $limit, $offset)) {
       foreach ($custom_field_log as $entry) {
         $custom_field_log_part = $this->indentation.'    '."<custom_field_log_entry log_id=\"".$this->logMap[$entry['log_id']]."\"";
@@ -475,7 +474,6 @@ class ttGroupExportHelper {
     // We use getRecordsChunkFromTable here to avoid out of memory condition for large tables.
     fwrite($this->file, $this->indentation."  <expense_items>\n");
     $offset = 0;
-    $limit = 1000;
     while ($expense_items = $this->getRecordsChunkFromTable('tt_expense_items', $limit, $offset)) {
       foreach ($expense_items as $expense_item) {
         $expense_item_part = $this->indentation.'    '."<expense_item date=\"".$expense_item['date']."\"";
