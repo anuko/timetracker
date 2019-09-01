@@ -73,7 +73,7 @@ CREATE TABLE `tt_roles` (
 );
 
 # Create an index that guarantees unique active and inactive role ranks in each group.
-create unique index role_idx on tt_roles(group_id, rank, status);
+create unique index role_idx on tt_roles(group_id, `rank`, status);
 
 # Insert site-wide roles - site administrator and top manager.
 INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Site administrator', 1024, 'administer_site');
@@ -112,7 +112,7 @@ create unique index login_idx on tt_users(login, status);
 
 # Create admin account with password 'secret'. Admin is a superuser who can create groups.
 DELETE from `tt_users` WHERE login = 'admin';
-INSERT INTO `tt_users` (`login`, `password`, `name`, `group_id`, `role_id`) VALUES ('admin', md5('secret'), 'Admin', '0', (select id from tt_roles where rank = 1024));
+INSERT INTO `tt_users` (`login`, `password`, `name`, `group_id`, `role_id`) VALUES ('admin', md5('secret'), 'Admin', '0', (select id from tt_roles where `rank` = 1024));
 
 
 #

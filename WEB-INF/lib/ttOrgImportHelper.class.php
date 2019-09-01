@@ -928,7 +928,7 @@ class ttOrgImportHelper {
     $rights = $fields['rights'];
     $status = $fields['status'];
 
-    $sql = "insert into tt_roles (group_id, org_id, name, rank, description, rights, status)
+    $sql = "insert into tt_roles (group_id, org_id, name, `rank`, description, rights, status)
       values ($group_id, $org_id, ".$mdb2->quote($name).", $rank, ".$mdb2->quote($description).", ".$mdb2->quote($rights).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
@@ -1221,7 +1221,7 @@ class ttOrgImportHelper {
   private function getTopRole() {
     $mdb2 = getConnection();
 
-    $sql = "select id from tt_roles where group_id = 0 and rank = ".MAX_RANK." and status = 1";
+    $sql = "select id from tt_roles where group_id = 0 and `rank` = ".MAX_RANK." and status = 1";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
