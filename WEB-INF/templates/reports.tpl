@@ -163,6 +163,15 @@ function fillTaskDropdown(project_id) {
   }
 }
 
+// The fillDropdowns function populates the "project" and "task" dropdown controls
+// with relevant values.
+function fillDropdowns() {
+  if(document.body.contains(document.reportForm.client))
+    fillProjectDropdown(document.reportForm.client.value);
+
+  fillTaskDropdown(document.reportForm.project.value);
+}
+
 // Build JavaScript array for assigned projects out of passed in PHP array.
 var assigned_projects = new Array();
 {if $assigned_projects}
