@@ -129,6 +129,7 @@ $i18n_key_words = array(
 'error.expired' => 'Kehtivusaeg on lõppenud.',
 // TODO: translate the following.
 // 'error.file_storage' => 'File storage error.',
+// 'error.remote_work' => 'Remote work server error.',
 
 // Warning messages.
 'warn.sure' => 'Oled kindel?',

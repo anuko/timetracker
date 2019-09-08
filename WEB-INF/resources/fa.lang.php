@@ -125,6 +125,7 @@ $i18n_key_words = array(
 // 'error.expired' => 'Expiration date reached.',
 // TODO: translate the following.
 // 'error.file_storage' => 'File storage error.',
+// 'error.remote_work' => 'Remote work server error.',
 
 // Warning messages.
 // TODO: translate the following.

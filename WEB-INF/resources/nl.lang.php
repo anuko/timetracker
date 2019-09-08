@@ -105,6 +105,8 @@ $i18n_key_words = array(
 'error.user_count' => 'Limiet op aantal gebruikers.',
 'error.expired' => 'Verloop datum is bereikt.',
 'error.file_storage' => 'Fout bij het opslaan van het bestand.',
+// TODO: translate the following.
+// 'error.remote_work' => 'Remote work server error.',
 
 // Warning messages.
 'warn.sure' => 'Ben je er zeker van?',

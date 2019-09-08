@@ -105,6 +105,7 @@ $i18n_key_words = array(
 'error.user_count' => 'Limit on user count.',
 'error.expired' => 'Expiration date reached.',
 'error.file_storage' => 'File storage error.',
+'error.remote_work' => 'Remote work server error.',
 
 // Warning messages.
 'warn.sure' => 'Are you sure?',

@@ -26,43 +26,48 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-// ttFileHelper class is used for attachment handling.
-class ttFileHelper {
-  var $errors = null;       // Errors go here. Set in constructor by reference.
-  var $storage_uri = null;  // Location of file storage facility.
-  var $register_uri = null; // URI to register with file storage facility.
-  var $putfile_uri = null;  // URI to put file in file storage.
-  var $deletefile_uri = null;  // URI to delete file from file storage.
-  var $deletefiles_uri = null; // URI to delete multiple files from file storage.
-  var $getfile_uri = null;  // URI to get file from file storage.
-  var $site_id = null;      // Site id for file storage.
-  var $site_key = null;     // Site key for file storage.
-  var $file_data = null;     // Downloaded file data.
+// ttOfferHelper class is used for handling offers for the Remote work plugin.
+// An offer is a proposal to do something for compensation in selected currency
+// within a specified timeframe.
+class ttOfferHelper {
+  var $errors = null;            // Errors go here. Set in constructor by reference.
+  var $remote_work_uri = null;   // Location of remote work server.
+  var $register_uri = null;      // URI to register with remote work server.
+  var $create_offer_uri = null;  // URI to publish offer.
+  var $get_offer_uri = null;     // URI to get offer details.
+  var $get_offers_uri = null;    // URI to get a list of offers.
+  var $delete_offer_uri = null;  // URI to delete offer.
+  var $delete_offers_uri = null; // URI to delete multiple offers.
+  var $update_offer_uri = null;  // URI to update offer.
+  var $site_id = null;           // Site id for remote work server.
+  var $site_key = null;          // Site key for remote work server.
 
   // Constructor.
   function __construct(&$errors) {
     $this->errors = &$errors;
 
-    if (defined('FILE_STORAGE_URI')) {
-      $this->storage_uri = FILE_STORAGE_URI;
-      $this->register_uri = $this->storage_uri.'register';
-      $this->putfile_uri = $this->storage_uri.'putfile';
-      $this->deletefile_uri = $this->storage_uri.'deletefile';
-      $this->deletefiles_uri = $this->storage_uri.'deletefiles';
-      $this->getfile_uri = $this->storage_uri.'getfile';
+    if (defined('REMOTE_WORK_URI')) {
+      $this->remote_work_uri = REMOTE_WORK_URI;
+      $this->register_uri = $this->remote_work_uri.'register';
+      $this->create_offer_uri = $this->remote_work_uri.'createoffer';
+      $this->get_offer_uri = $this->remote_work_uri.'getoffer';
+      $this->get_offers_uri = $this->remote_work_uri.'getoffers';
+      $this->delete_offer_uri = $this->remote_work_uri.'deleteoffer';
+      $this->delete_offers_uri = $this->remote_work_uri.'deleteoffers';
+      $this->update_offer_uri = $this->remote_work_uri.'updateoffer';
       $this->checkSiteRegistration();
     }
   }
 
   // checkSiteRegistration - obtains site id and key from local database.
-  // If not found, it tries to register with file storage facility.
+  // If not found, it tries to register with remote work server.
   function checkSiteRegistration() {
 
     global $i18n;
     $mdb2 = getConnection();
 
     // Obtain site id.
-    $sql = "select param_value as id from tt_site_config where param_name = 'locker_id'";
+    $sql = "select param_value as id from tt_site_config where param_name = 'worksite_id'";
     $res = $mdb2->query($sql);
     $val = $res->fetchRow();
     if (!$val) {
@@ -91,10 +96,10 @@ class ttFileHelper {
 
       $result_array = json_decode($result, true);
       if (!$result_array) {
-        $this->errors->add($i18n->get('error.file_storage'));
+        $this->errors->add($i18n->get('error.remote_work'));
       }
       else if ($result_array['error']) {
-        // Add an error from file storage facility if we have it.
+        // Add an error from remote work server if we have it.
         $this->errors->add($result_array['error']);
       }
       else if ($result_array['id'] && $result_array['key']) {
@@ -102,24 +107,28 @@ class ttFileHelper {
         $this->site_key = $result_array['key'];
 
         // Registration successful. Store id and key locally for future use.
-        $sql = "insert into tt_site_config values('locker_id', $this->site_id, now(), null)";
+        $sql = "insert into tt_site_config values('worksite_id', $this->site_id, now(), null)";
         $mdb2->exec($sql);
-        $sql = "insert into tt_site_config values('locker_key', ".$mdb2->quote($this->site_key).", now(), null)";
+        $sql = "insert into tt_site_config values('worksite_key', ".$mdb2->quote($this->site_key).", now(), null)";
         $mdb2->exec($sql);
       } else {
-        $this->errors->add($i18n->get('error.file_storage'));
+        $this->errors->add($i18n->get('error.remote_work'));
       }
     } else {
       // Site id found.
       $this->site_id = $val['id'];
 
       // Obtain site key.
-      $sql = "select param_value as site_key from tt_site_config where param_name = 'locker_key'";
+      $sql = "select param_value as site_key from tt_site_config where param_name = 'worksite_key'";
       $res = $mdb2->query($sql);
       $val = $res->fetchRow();
       $this->site_key = $val['site_key'];
     }
   }
+
+
+
+  // The following code is originally from ttFileHelper an needs to be redone.
 
   // putFile - puts uploaded file in remote storage.
   function putFile($fields) {
