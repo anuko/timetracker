@@ -151,6 +151,7 @@ $form->addInput(array('type'=>'combobox','name'=>'decimal_mark','style'=>'width:
 $DATE_FORMAT_OPTIONS = array(
   array('id'=>'%Y-%m-%d','name'=>'Y-m-d'),
   array('id'=>'%m/%d/%Y','name'=>'m/d/Y'),
+  array('id'=>'%d-%m-%Y','name'=>'d-m-Y'),
   array('id'=>'%d.%m.%Y','name'=>'d.m.Y'),
   array('id'=>'%d.%m.%Y %a','name'=>'d.m.Y a'));
 $form->addInput(array('type'=>'combobox','name'=>'date_format','style'=>'width: 150px;','data'=>$DATE_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_date_format,

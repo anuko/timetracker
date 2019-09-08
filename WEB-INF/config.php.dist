@@ -114,20 +114,6 @@ define('DEFAULT_CSS', 'default.css');
 define('RTL_CSS', 'rtl.css'); // For right to left languages.
 
 
-// Default date format. Behaviour with not included formats is undefined. Possible values:
-// '%Y-%m-%d'
-// '%m/%d/%Y'
-// '%d.%m.%Y'
-// '%d.%m.%Y %a'
-define('DATE_FORMAT_DEFAULT', '%Y-%m-%d');
-
-
-// Default time format. Behaviour with not included formats is undefined. Possible values:
-// '%H:%M'
-// '%I:%M %p'
-define('TIME_FORMAT_DEFAULT', '%H:%M');
-
-
 // Default week start day.
 // Possible values: 0 - 6. 0 means Sunday.
 //
