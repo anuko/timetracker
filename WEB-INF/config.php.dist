@@ -114,12 +114,6 @@ define('DEFAULT_CSS', 'default.css');
 define('RTL_CSS', 'rtl.css'); // For right to left languages.
 
 
-// Default week start day.
-// Possible values: 0 - 6. 0 means Sunday.
-//
-define('WEEK_START_DEFAULT', 0);
-
-
 // Default language of the application.
 // Possible values: en, fr, nl, etc. Empty string means the language is defined by user browser.
 // 
