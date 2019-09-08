@@ -126,12 +126,8 @@ class ttOfferHelper {
     }
   }
 
-
-
-  // The following code is originally from ttFileHelper an needs to be redone.
-
-  // putFile - puts uploaded file in remote storage.
-  function putFile($fields) {
+  // createOffer - publishes an offer in remote work server.
+  function createOffer($fields) {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -145,11 +141,12 @@ class ttOfferHelper {
       'org_key' => urlencode($this->getOrgKey()),
       'group_id' => urlencode($group_id),
       'group_key' => urlencode($this->getGroupKey()),
-      'entity_type' => urlencode($fields['entity_type']),
-      'entity_id' => urlencode($fields['entity_id']),
-      'file_name' => urlencode($fields['file_name']),
-      'description' => urlencode($fields['description']),
-      'content' => urlencode(base64_encode(file_get_contents($_FILES['newfile']['tmp_name'])))
+      'offer_lang' => urlencode($fields['offer_lang']),
+      'offer_subject' => urlencode($fields['offer_subject']),
+      'offer_descr_short' => urlencode($fields['offer_descr_short']),
+      'offer_descr_long' => urlencode($fields['offer_descr_long']),
+      'offer_currency' => urlencode($fields['offer_currency']),
+      'offer_amount' => urlencode($fields['offer_amount'])
     );
 
     // url-ify the data for the POST.
@@ -160,7 +157,7 @@ class ttOfferHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->putfile_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->create_offer_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -171,44 +168,104 @@ class ttOfferHelper {
     // Close connection.
     curl_close($ch);
 
-    // Delete uploaded file.
-    unlink($_FILES['newfile']['tmp_name']);
-
     if (!$result) {
-      $this->errors->add($i18n->get('error.file_storage'));
+      $this->errors->add($i18n->get('error.remote_work'));
       return false;
     }
 
     $result_array = json_decode($result, true);
-    $file_id = (int) $result_array['file_id'];
-    $file_key = $result_array['file_key'];
+    $offer_id = (int) $result_array['offer_id'];
+    $offer_key = $result_array['offer_key'];
     $error = $result_array['error'];
 
-    if ($error || !$file_id || !$file_key) {
+    if ($error || !$offer_id || !$offer_key) {
       if ($error) {
-        // Add an error from file storage facility if we have it.
+        // Add an error from remote work server if we have it.
         $this->errors->add($error);
       }
       return false;
     }
 
-    // File put was successful. Store file attributes locally.
-    $file_key = $mdb2->quote($file_key);
-    $entity_type = $mdb2->quote($fields['entity_type']);
-    $entity_id = (int) $fields['entity_id'];
-    $file_name = $mdb2->quote($fields['file_name']);
-    $description = $mdb2->quote($fields['description']);
-    $created = 'now()';
-    $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
-    $created_by = $user->id;
-
-    $columns = '(group_id, org_id, remote_id, file_key, entity_type, entity_id, file_name, description, created, created_ip, created_by)';
-    $values = "values($group_id, $org_id, $file_id, $file_key, $entity_type, $entity_id, $file_name, $description, $created, $created_ip, $created_by)";
-    $sql = "insert into tt_files $columns $values";
-    $affected = $mdb2->exec($sql);
-    return (!is_a($affected, 'PEAR_Error'));
+    return true;
   }
 
+
+  // getOffer - gets offer details from remote work server.
+  function getOffer($fields) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+// Do we need these here?
+//      'org_id' => urlencode($org_id),
+//      'org_key' => urlencode($this->getOrgKey()),
+//      'group_id' => urlencode($group_id),
+//      'group_key' => urlencode($this->getGroupKey()),
+      'offer_id' => urlencode($fields['remote_id']));
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->get_offer_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    $error = curl_error();
+    $result_array2 = json_decode($result, true);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+    $status = (int) $result_array['status'];
+    $error = $result_array['error'];
+
+    if ($error) {
+      // Add an error from remote work server if we have it.
+      $this->errors->add($error);
+      return false;
+    }
+    if ($status != 1) {
+      // There is no explicit error message, but still something not right.
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    // TODO: construct and return an array of fields here...
+    return true;
+  }
+
+  // TODO: redo the function above.
+  // Concerns: 1) why $result_array2
+  // 2) We need to return an array of fields.
+
+  
+  
+  
+  
+  
+  
+    // The following code is originally from ttFileHelper an needs to be redone.
+    // 
   // deleteFile - deletes a file from remote storage and its details from local database.
   function deleteFile($fields) {
     global $i18n;
@@ -422,110 +479,6 @@ class ttOfferHelper {
       }
     }
     return $result;
-  }
-
-  // get - obtains file details from local database.
-  static function get($id) {
-    global $user;
-    $mdb2 = getConnection();
-
-    $group_id = $user->getGroup();
-    $org_id = $user->org_id;
-
-    $sql = "select id, remote_id, file_key, entity_type, entity_id, file_name, description, status from tt_files".
-      " where id = $id and group_id = $group_id and org_id = $org_id and (status = 0 or status = 1)";
-    $res = $mdb2->query($sql);
-    if (!is_a($res, 'PEAR_Error')) {
-      $val = $res->fetchRow();
-      if ($val && $val['id'])
-        return $val;
-    }
-    return false;
-  }
-
-  // update - updates file details in local database.
-  static function update($fields) {
-    global $user;
-    $mdb2 = getConnection();
-
-    $group_id = $user->getGroup();
-    $org_id = $user->org_id;
-
-    $file_id = (int) $fields['id'];
-    $description = $mdb2->quote($fields['description']);
-
-    $sql = "update tt_files set description = $description where id = $file_id".
-      " and group_id = $group_id and org_id = $org_id and (status = 0 or status = 1)";
-    $affected = $mdb2->exec($sql);
-    return !is_a($affected, 'PEAR_Error');
-  }
-
-
-  // getFile - downloads file from remote storage to memory.
-  function getFile($fields) {
-    global $i18n;
-    global $user;
-    $mdb2 = getConnection();
-
-    $group_id = $user->getGroup();
-    $org_id = $user->org_id;
-
-    $curl_fields = array('site_id' => urlencode($this->site_id),
-      'site_key' => urlencode($this->site_key),
-      'org_id' => urlencode($org_id),
-      'org_key' => urlencode($this->getOrgKey()),
-      'group_id' => urlencode($group_id),
-      'group_key' => urlencode($this->getGroupKey()),
-      'entity_type' => urlencode($fields['entity_type']),
-      'entity_id' => urlencode($fields['entity_id']),
-      'file_id' => urlencode($fields['remote_id']),
-      'file_key' => urlencode($fields['file_key']),
-      'file_name' => urlencode($fields['file_name']));
-
-    // url-ify the data for the POST.
-    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-    $fields_string = rtrim($fields_string, '&');
-
-    // Open connection.
-    $ch = curl_init();
-
-    // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->getfile_uri);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    // Execute a post request.
-    $result = curl_exec($ch);
-
-    $error = curl_error();
-    $result_array2 = json_decode($result, true);
-
-    // Close connection.
-    curl_close($ch);
-
-    if (!$result) {
-      $this->errors->add($i18n->get('error.file_storage'));
-      return false;
-    }
-
-    $result_array = json_decode($result, true);
-    $status = (int) $result_array['status'];
-    $error = $result_array['error'];
-
-    if ($error) {
-      // Add an error from file storage facility if we have it.
-      $this->errors->add($error);
-      return false;
-    }
-    if ($status != 1) {
-      // There is no explicit error message, but still something not right.
-      $this->errors->add($i18n->get('error.file_storage'));
-      return false;
-    }
-
-    $this->file_data = $result_array['content'];
-    return true;
   }
 
 
