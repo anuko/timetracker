@@ -606,4 +606,9 @@ $i18n_key_words = array(
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
 'form.display_options.menu' => 'Menu',
 'form.display_options.note_on_separate_row' => 'Notitie in aparte kolom',
+
+// Work form. See example at https://timetracker.anuko.com/work.php
+// TODO: translate the following.
+// 'form.work.work_items' => 'Work Items',
+// 'form.work.offers' => 'Offers',
 );
