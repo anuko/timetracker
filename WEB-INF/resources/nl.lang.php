@@ -42,8 +42,7 @@ $i18n_key_words = array(
 'menu.logout' => 'Afmelden',
 'menu.forum' => 'Forum',
 'menu.help' => 'Help',
-// TODO: translate the following.
-// 'menu.register' => 'Register',
+'menu.register' => 'Registreren',
 'menu.profile' => 'Profiel',
 'menu.group' => 'Groep',
 'menu.plugins' => 'Plugins',
@@ -104,9 +103,17 @@ $i18n_key_words = array(
 'error.format' => 'Bestandsformaat niet valide.',
 'error.user_count' => 'Limiet op aantal gebruikers.',
 'error.expired' => 'Verloop datum is bereikt.',
+// TODO: improve translations of both error.file_storage and error.remote_work.
+// Both file starage and remote work (freelance) are implemented in external facilities,
+// which are standalone applications out of scope of Time Tracker itseld.
+//
+// error.file_storage means that something happened in a remote file storage server.
+// error.remote_work means that something happened in a remote work server
+// see documentation for remote work plugin, currently under development).
+// Remote work plugin is designed to outsource work to other groups, when one group
+// hires another group to do something (under development at the moment).
 'error.file_storage' => 'Fout bij het opslaan van het bestand.',
-// TODO: translate the following.
-// 'error.remote_work' => 'Remote work server error.',
+'error.remote_work' => 'Fout in de server.',
 
 // Warning messages.
 'warn.sure' => 'Ben je er zeker van?',
@@ -213,27 +220,24 @@ $i18n_key_words = array(
 'label.condition' => 'Voorwaarde',
 'label.yes' => 'ja',
 'label.no' => 'nee',
-// TODO: translate the following.
-// 'label.sort' => 'Sort',
+'label.sort' => 'Sorteren',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Eigen velden',
 'label.monthly_quotas' => 'Doelen per maand',
-// TODO: translate the following.
-// 'label.entity' => 'Entity',
+'label.entity' => 'Entiteit',
 'label.type' => 'Type',
 'label.type_dropdown' => 'uitklapbaar',
 'label.type_text' => 'tekst',
 'label.required' => 'Verplicht veld',
 'label.fav_report' => 'Standaard rapport',
 'label.schedule' => 'Planning',
-'label.what_is_it' => 'Wat betekent dit?',
+'label.what_is_it' => 'Meer informatie',
 'label.expense' => 'Kosten',
 'label.quantity' => 'Hoeveelheid',
 'label.paid_status' => 'Status van betaling',
 'label.paid' => 'Betaald',
 'label.mark_paid' => 'Markeer als betaald',
-// TODO: translate the following.
-// 'label.week_menu' => 'Week menu',
+'label.week_menu' => 'Week menu',
 'label.week_note' => 'Week aantekening',
 'label.week_list' => 'Week overzicht',
 'label.work_units' => 'Werk eenheid',
@@ -254,12 +258,10 @@ $i18n_key_words = array(
 'label.active_users' => 'Actieve medewerkers',
 'label.inactive_users' => 'Inactieve medewerkers',
 
-// Entity names. We use lower case (in English) because they are used in dropdowns, too.
-// They are used to associate a custom field with an entity type.
-// TODO: translate the following.
-// 'entity.time' => 'time',
-// 'entity.user' => 'user',
-// 'entity.project' => 'project',
+// Entity names.
+'entity.time' => 'tijd',
+'entity.user' => 'medewerker',
+'entity.project' => 'project',
 
 // Form titles.
 'title.error' => 'Fout',
@@ -388,9 +390,8 @@ $i18n_key_words = array(
 'dropdown.not_approved' => 'afgekeurd',
 'dropdown.paid' => 'betaald',
 'dropdown.not_paid' => 'niet betaald',
-// TODO: translate the following.
-// 'dropdown.ascending' => 'ascending',
-// 'dropdown.descending' => 'descending',
+'dropdown.ascending' => 'oplopend',
+'dropdown.descending' => 'aflopend',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases
@@ -437,9 +438,8 @@ $i18n_key_words = array(
 'form.reports.select_period' => 'Kies periode',
 'form.reports.set_period' => 'of stel datums in',
 'form.reports.show_fields' => 'Toon velden',
-// TODO: translate the following.
-// 'form.reports.time_fields' => 'Time fields',
-// 'form.reports.user_fields' => 'User fields',
+'form.reports.time_fields' => 'Tijd velden',
+'form.reports.user_fields' => 'Mederwerker velden',
 'form.reports.group_by' => 'Groeperen op',
 'form.reports.group_by_no' => '--- niet groeperen ---',
 'form.reports.group_by_date' => 'datum',
@@ -544,8 +544,7 @@ $i18n_key_words = array(
 'form.group_edit.uncompleted_indicators' => 'Onvolledige indicatoren',
 'form.group_edit.confirm_save' => 'Bevestigen dat je wilt opslaan',
 'form.group_edit.allow_ip' => 'Toegestane IP adressen',
-// TODO: translate the following.
-// 'form.group_edit.advanced_settings' => 'Advanced settings',
+'form.group_edit.advanced_settings' => 'Geavanceerde instellingen',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 'form.group_delete.hint' => 'Bent u er zeker van dat u de hele groep wilt verwijderen?',
@@ -608,7 +607,6 @@ $i18n_key_words = array(
 'form.display_options.note_on_separate_row' => 'Notitie in aparte kolom',
 
 // Work form. See example at https://timetracker.anuko.com/work.php
-// TODO: translate the following.
-// 'form.work.work_items' => 'Work Items',
-// 'form.work.offers' => 'Offers',
+'form.work.work_items' => 'Onderdelen werk',
+'form.work.offers' => 'Aanbiedingen',
 );

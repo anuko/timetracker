@@ -7,8 +7,8 @@
     <td valign="top">
 {if $user->can('manage_work')}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
-  {if $inactive_work}
-        <tr><td class="sectionHeaderNoBorder">{$i18n.title.active_work}</td></tr>
+  {if !$inactive_work}
+        <tr><td class="sectionHeaderNoBorder">{$i18n.form.work.offers}</td></tr>
   {/if}
   {if $active_work}
         <tr>

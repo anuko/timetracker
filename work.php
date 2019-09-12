@@ -51,12 +51,15 @@ if($user->can('update_work')) {
   // $in_progress_work = ttWorkHelper::getInProgressWork(); // Work items in progress for other groups.
   // $completed_work = ttWorkHelper::getCompletedWork(); // Completed work items for other groups.
 }
+// $available_offers = ttWorkHelper::getAvailableOffers(); // Currently available offers to do work.
+// TODO: review access rights for the code above.
 
 $smarty->assign('active_work', $active_work);
 $smarty->assign('inactive_work', $inactive_work);
 $smarty->assign('available_work', $available_work);
 $smarty->assign('in_progress_work', $in_progress_work);
 $smarty->assign('completed_work', $completed_work);
+$smarty->assign('available_offers', $available_offers);
 $smarty->assign('title', $i18n->get('title.work'));
 $smarty->assign('content_page_name', 'work.tpl');
 $smarty->display('index.tpl');
