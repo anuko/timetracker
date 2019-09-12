@@ -105,7 +105,7 @@ $i18n_key_words = array(
 'error.expired' => 'Verloop datum is bereikt.',
 // TODO: improve translations of both error.file_storage and error.remote_work.
 // Both file starage and remote work (freelance) are implemented in external facilities,
-// which are standalone applications out of scope of Time Tracker itseld.
+// which are standalone applications out of scope of Time Tracker itself.
 //
 // error.file_storage means that something happened in a remote file storage server.
 // error.remote_work means that something happened in a remote work server
