@@ -263,6 +263,8 @@ $i18n_key_words = array(
 // 'label.download' => 'Download',
 'label.active_users' => 'Aktive Nutzer',
 'label.inactive_users' => 'Inaktive Nutzer',
+// TODO: translate the following.
+// 'label.details' => 'Details',
 
 // Entity names. We use lower case (in English) because they are used in dropdowns, too.
 // They are used to associate a custom field with an entity type.
