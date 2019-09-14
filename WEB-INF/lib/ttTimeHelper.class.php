@@ -859,6 +859,45 @@ class ttTimeHelper {
     if ($user->isPluginEnabled('cl'))
       $client_field = ", c.name as client";
 
+    if ($user->isPluginEnabled('cf')) {
+//  require_once('plugins/CustomFields.class.php');
+      global $custom_fields;
+      if (!$custom_fields) $custom_fields = new CustomFields();
+    }
+    $fields = array();    
+
+//    print_r($custom_fields);
+
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+//      print_r($timeField);
+        $field_name = 'time_field_'.$timeField['id'];
+//        $checkbox_field_name = 'show_'.$field_name;
+//        if ($options[$checkbox_field_name]) {
+          if ($timeField['type'] == CustomFields::TYPE_TEXT) {
+            $cflTable = 'cfl'.$timeField['id'];
+            array_push($fields, "$cflTable.value as $field_name");
+          } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTable = 'cfo'.$timeField['id'];
+            array_push($fields, "$cfoTable.value as $field_name");
+          }
+//        }
+      }
+    }
+    
+// print_r($fields);    
+    
+
+/*      if ($custom_fields && $custom_fields->timeFields) {
+        foreach ($custom_fields->timeFields as $timeField) {
+          $field_name = 'time_field_'.$timeField['id'];
+          $checkbox_field_name = 'show_'.$field_name;
+          if ($options[$checkbox_field_name]) {
+            array_push($fields, "null as $field_name"); // null for each time custom field.
+          }
+        }
+      }
+*/
     /*
     $include_cf_1 = $user->isPluginEnabled('cf');
     if ($include_cf_1) {
@@ -882,6 +921,27 @@ class ttTimeHelper {
       " left join tt_tasks t on (l.task_id = t.id)";
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
+      
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+//        $checkbox_field_name = 'show_'.$field_name;
+//        if ($options[$field_name] || $options[$checkbox_field_name]) {
+          $cflTable = 'cfl'.$timeField['id'];
+          if ($timeField['type'] == CustomFields::TYPE_TEXT) {
+            // Add one join for each text field.
+            $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1 and $cflTable.field_id = ".$timeField['id'].')';
+          } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTable = 'cfo'.$timeField['id'];
+            // Add two joins for each dropdown field.
+            $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1 and $cflTable.field_id = ".$timeField['id'].')';
+            $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $cflTable.field_id and $cfoTable.id = $cflTable.option_id)";
+          }
+//        }
+      }
+    }
+// print_r($cfoTable);
+      
     /* Multiple left joins are now required, probably with config options which fields to show.
      * if ($include_cf_1) {
       if ($cf_1_type == CustomFields::TYPE_TEXT)
@@ -897,9 +957,10 @@ class ttTimeHelper {
     $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,".
       " TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,".
       " TIME_FORMAT(l.duration, '%k:%i') as duration, p.name as project, t.name as task, l.comment,".
-      " l.billable, l.approved, l.timesheet_id, l.invoice_id $client_field $custom_field $filePart from tt_log l $left_joins".
+      " l.billable, l.approved, l.timesheet_id, l.invoice_id $client_field ,".join(', ', $fields)." $filePart from tt_log l $left_joins".
       " where l.date = '$date' and l.user_id = $user_id and l.group_id = $group_id and l.org_id = $org_id and l.status = 1".
       " order by l.start, l.id";
+//    echo $sql;  
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
