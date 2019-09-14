@@ -11,6 +11,10 @@
           <td align = "right">{$i18n.label.description}:</td>
           <td>{$forms.workForm.description.control}</td>
         </tr>
+        <tr>
+          <td align = "right">{$i18n.label.details}:</td>
+          <td>{$forms.workForm.details.control}</td>
+        </tr>
 {if $show_files}
         <tr>
           <td align="right">{$i18n.label.file}:</td>

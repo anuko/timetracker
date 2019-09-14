@@ -259,6 +259,7 @@ $i18n_key_words = array(
 'label.inactive_users' => 'Inactieve medewerkers',
 // TODO: translate the following.
 // 'label.details' => 'Details',
+// 'label.budget' => 'Budget',
 
 // Entity names.
 'entity.time' => 'tijd',

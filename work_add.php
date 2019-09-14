@@ -49,12 +49,14 @@ $showFiles = $user->isPluginEnabled('at');
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('work_name'));
   $cl_description = trim($request->getParameter('description'));
+  $cl_details = trim($request->getParameter('details'));
   $cl_currency = $request->getParameter('currency');
 }
 
 $form = new Form('workForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'work_name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
+$form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
 if ($showFiles)
   $form->addInput(array('type'=>'upload','name'=>'newfile','value'=>$i18n->get('button.submit')));
 // Add a dropdown for currency.
