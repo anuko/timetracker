@@ -26,6 +26,10 @@
           <td>{$forms.workForm.currency.control}</td>
         </tr>
         <tr>
+          <td align="right">{$i18n.label.budget} (*):</td>
+          <td>{$forms.workForm.budget.control}</td>
+        </tr>
+        <tr>
           <td></td>
           <td>{$i18n.label.required_fields}</td>
         </tr>

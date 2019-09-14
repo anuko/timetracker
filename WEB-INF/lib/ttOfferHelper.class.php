@@ -33,7 +33,7 @@ class ttOfferHelper {
   var $errors = null;            // Errors go here. Set in constructor by reference.
   var $remote_work_uri = null;   // Location of remote work server.
   var $register_uri = null;      // URI to register with remote work server.
-  var $create_offer_uri = null;  // URI to publish offer.
+  var $put_offer_uri = null;     // URI to publish offer.
   var $get_offer_uri = null;     // URI to get offer details.
   var $get_offers_uri = null;    // URI to get a list of offers.
   var $delete_offer_uri = null;  // URI to delete offer.
@@ -49,7 +49,7 @@ class ttOfferHelper {
     if (defined('REMOTE_WORK_URI')) {
       $this->remote_work_uri = REMOTE_WORK_URI;
       $this->register_uri = $this->remote_work_uri.'register';
-      $this->create_offer_uri = $this->remote_work_uri.'createoffer';
+      $this->put_offer_uri = $this->remote_work_uri.'putoffer';
       $this->get_offer_uri = $this->remote_work_uri.'getoffer';
       $this->get_offers_uri = $this->remote_work_uri.'getoffers';
       $this->delete_offer_uri = $this->remote_work_uri.'deleteoffer';
@@ -126,8 +126,8 @@ class ttOfferHelper {
     }
   }
 
-  // createOffer - publishes an offer in remote work server.
-  function createOffer($fields) {
+  // putOffer - publishes an offer in remote work server.
+  function putOffer($fields) {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -157,7 +157,7 @@ class ttOfferHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->create_offer_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->put_offer_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

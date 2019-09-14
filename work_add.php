@@ -51,6 +51,7 @@ if ($request->isPost()) {
   $cl_description = trim($request->getParameter('description'));
   $cl_details = trim($request->getParameter('details'));
   $cl_currency = $request->getParameter('currency');
+  $cl_budget = $request->getParameter('budget');
 }
 
 $form = new Form('workForm');
@@ -62,6 +63,8 @@ if ($showFiles)
 // Add a dropdown for currency.
 $currencies = ttWorkHelper::getCurrencies();
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency));
+$form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
+$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 // TODO: design how to handle one-time vs ongoing work. Apparently, with a conditional display of relevant controls.
 // Ongoing work - rate per hour control.
@@ -71,39 +74,24 @@ $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,
 // TODO: design how to handle categories and sub-categories.
 // One major complication is localization of names.
 
-// Coding and design are currently ongoing.
-
-
 if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
   if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
-  if (!ttGroupHelper::validateCheckboxGroupInput($cl_users, 'tt_users')) $err->add($i18n->get('error.field'), $i18n->get('label.users'));
-  if (!ttGroupHelper::validateCheckboxGroupInput($cl_tasks, 'tt_tasks')) $err->add($i18n->get('error.field'), $i18n->get('label.tasks'));
+  if (!ttValidString($cl_details, true)) $err->add($i18n->get('error.field'), $i18n->get('label.details'));
 
   if ($err->no()) {
-    if (!ttProjectHelper::getProjectByName($cl_name)) {
-      $id = ttProjectHelper::insert(array('name' => $cl_name,
-        'description' => $cl_description,
-        'users' => $cl_users,
-        'tasks' => $cl_tasks,
-        'status' => ACTIVE));
-
-      // Put a new file in storage if we have it.
-      if ($id && $showFiles && $_FILES['newfile']['name']) {
-        $fileHelper = new ttFileHelper($err);
-        $fields = array('entity_type'=>'project',
-          'entity_id' => $id,
-          'file_name' => $_FILES['newfile']['name']);
-        $fileHelper->putFile($fields);
-      }
-      if ($id) {
-        header('Location: projects.php');
+    $workHelper = new ttWorkHelper($err);
+    $fields = array('subject'=>$cl_name,
+      'short_description' => $cl_description,
+      'long_description' => $cl_details,
+      'currency' => $cl_currency,
+      'amount' => $cl_budget);
+     $id = $workHelper->putWork($fields);
+     if ($id) {
+        header('Location: work.php');
         exit();
-      } else
-        $err->add($i18n->get('error.db'));
-    } else
-      $err->add($i18n->get('error.object_exists'));
+    }
   }
 } // isPost
 
