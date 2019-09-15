@@ -39,6 +39,7 @@ class ttUser {
   var $id = null;               // User id.
   var $org_id = null;           // Organization id.
   var $group_id = null;         // Group id.
+  var $group_key = null;        // Group key.
   var $role_id = null;          // Role id.
   var $role_name = null;        // Role name.
   var $rank = null;             // User role rank.
@@ -92,7 +93,7 @@ class ttUser {
     $mdb2 = getConnection();
 
     $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id,".
-      " u.quota_percent, u.email, g.org_id, g.name as group_name, g.currency, g.lang, g.decimal_mark, g.date_format,".
+      " u.quota_percent, u.email, g.org_id, g.group_key, g.name as group_name, g.currency, g.lang, g.decimal_mark, g.date_format,".
       " g.time_format, g.week_start, g.tracking_mode, g.project_required, g.task_required, g.record_type,".
       " g.bcc_email, g.allow_ip, g.password_complexity, g.plugins, g.config, g.lock_spec, g.holidays, g.workday_minutes, g.custom_logo".
       " FROM tt_users u LEFT JOIN tt_groups g ON (u.group_id = g.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
@@ -114,6 +115,7 @@ class ttUser {
       $this->id = $val['id'];
       $this->org_id = $val['org_id'];
       $this->group_id = $val['group_id'];
+      $this->group_key = $val['group_key'];
       $this->role_id = $val['role_id'];
       $this->role_name = $val['role_name'];
       $this->rights = explode(',', $val['rights']);
@@ -186,6 +188,11 @@ class ttUser {
   // The getGroup returns group id on behalf of which the current user is operating.
   function getGroup() {
     return ($this->behalfGroup ? $this->behalfGroup->id : $this->group_id);
+  }
+
+  // getGroupKey returns group key for active group.
+  function getGroupKey() {
+    return ($this->behalfGroup ? $this->behalfGroup->group_key : $this->group_key);
   }
 
   // getDecimalMark returns decimal mark for active group.

@@ -33,6 +33,7 @@ import('ttGroupHelper');
 // We use it in ttUser class to have acces to "on behalf" group properties.
 class ttGroup {
   var $id = null;               // Group id.
+  var $group_key = null;        // Group key.
   var $parent_id = null;        // Paerent group id.
   var $org_id = null;           // Organization id.
   var $name = null;             // Group name.
@@ -80,6 +81,7 @@ class ttGroup {
     $val = $res->fetchRow();
     if ($val['id'] > 0) {
       $this->id = $val['id'];
+      $this->group_key = $val['group_key'];
       $this->parent_id = $val['parent_id'];
       $this->org_id = $val['org_id'];
       $this->name = $val['name'];

@@ -142,7 +142,7 @@ class ttWorkHelper {
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($this->getOrgKey()),
       'group_id' => urlencode($group_id),
-      'group_key' => urlencode($this->getGroupKey()),
+      'group_key' => urlencode($user->getGroupKey()),
       'lang' => urlencode($user->lang),
       'subject' => urlencode($fields['subject']),
       'descr_short' => urlencode($fields['descr_short']),
@@ -198,21 +198,6 @@ class ttWorkHelper {
 
     $org_id = $user->org_id;
     $sql = "select group_key from tt_groups where id = $org_id and status = 1";
-    $res = $mdb2->query($sql);
-    $val = $res->fetchRow();
-    return $val['group_key'];
-  }
-
-  // TODO: identical function is in ttOfferHelper. Redesign.
-  // getGrtoupKey obtains group key from the database.
-  private function getGroupKey() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $group_id = $user->getGroup();
-    $org_id = $user->org_id;
-
-    $sql = "select group_key from tt_groups where id = $group_id and org_id = $org_id and status = 1";
     $res = $mdb2->query($sql);
     $val = $res->fetchRow();
     return $val['group_key'];
