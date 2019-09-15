@@ -85,7 +85,7 @@ if ($request->isPost()) {
     $fields = array('subject'=>$cl_name,
       'descr_short' => $cl_description,
       'descr_long' => $cl_details,
-      'currency' => $cl_currency,
+      'currency' => $currencies[$cl_currency - 1]['name'],
       'amount' => $cl_budget);
      $id = $workHelper->putWork($fields);
      if ($id) {

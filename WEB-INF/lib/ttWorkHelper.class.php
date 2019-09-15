@@ -251,6 +251,70 @@ class ttWorkHelper {
     return $active_work;
   }
 
+  // getWork - gets work item details from remote work server.
+  function getWork($work_id) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id),
+      'org_key' => urlencode($user->getOrgKey()),
+      'group_id' => urlencode($group_id),
+      'group_key' => urlencode($user->getGroupKey()),
+      'work_id' => urlencode($work_id));
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->get_work_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    $error = curl_error();
+    $result_array2 = json_decode($result, true);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.file_storage'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+    $status = (int) $result_array['status'];
+    $error = $result_array['error'];
+
+    if ($error) {
+      // Add an error from file storage facility if we have it.
+      $this->errors->add($error);
+      return false;
+    }
+    if ($status != 1) {
+      // There is no explicit error message, but still something not right.
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $this->file_data = $result_array['content'];
+    return true;
+  }
+
+
   // getCurrencies - obtains a list of supported currencies.
   static function getCurrencies() {
     $mdb2 = getConnection();
