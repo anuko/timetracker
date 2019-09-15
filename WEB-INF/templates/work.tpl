@@ -11,6 +11,7 @@
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
+          <td class="tableHeader">{$i18n.label.budget}</td>
     {if $show_files}
           <td></td>
     {/if}
@@ -19,7 +20,9 @@
         </tr>
     {foreach $active_work as $work_item}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
-          <td>{$work_item.name|escape}</td>
+          <td>{$work_item.subject|escape}</td>
+          <td>{$work_item.description|escape}</td>
+          <td>{$work_item.amount}</td>
           <td><a href="work_edit.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
           <td><a href="work_delete.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>

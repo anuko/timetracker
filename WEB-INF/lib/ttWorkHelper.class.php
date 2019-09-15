@@ -60,7 +60,6 @@ class ttWorkHelper {
     }
   }
 
-  // TODO: identical function is in ttOfferHelper. Reduce code duplication.
   // checkSiteRegistration - obtains site id and key from local database.
   // If not found, it tries to register with remote work server.
   function checkSiteRegistration() {
@@ -188,6 +187,68 @@ class ttWorkHelper {
     }
 
     return true;
+  }
+
+  // getActiveWork - obtains a list of work items this group is currently oputsourcing.
+  function getActiveWork() {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id),
+      'org_key' => urlencode($user->getOrgKey()),
+      'group_id' => urlencode($group_id),
+      'group_key' => urlencode($user->getGroupKey())
+    );
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->get_active_work_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // TODO: check for errors here.
+
+    $active_work = $result_array['active_work'];
+
+    // TODO: construct a list of active work items to return.
+    //$work_id = (int) $result_array['work_id'];
+    //$error = $result_array['error'];
+/*
+    if ($error || !$work_id) {
+      if ($error) {
+        // Add an error from remote work server if we have it.
+        $this->errors->add($error);
+      }
+      return false;
+    }
+*/
+    return $active_work;
   }
 
   // getCurrencies - obtains a list of supported currencies.

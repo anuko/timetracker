@@ -27,7 +27,7 @@
 // +----------------------------------------------------------------------+
 
 require_once('initialize.php');
-import('ttGroupHelper');
+import('ttWorkHelper');
 
 // Access checks.
 if (!(ttAccessAllowed('update_work') || ttAccessAllowed('bid_on_work')  || ttAccessAllowed('manage_work'))) {
@@ -40,8 +40,10 @@ if (!$user->isPluginEnabled('wk')) {
 }
 // End of access checks.
 
+$workHelper = new ttWorkHelper($err);
+
 if($user->can('manage_work')) {
-  // $active_work = ttWorkHelper::getActiveWork(); // Active work items this group is outsourcing.
+  $active_work = $workHelper->getActiveWork(); // Active work items this group is outsourcing.
   // $inactive_work = ttWorkHelper::getInactiveWork(); // Inactive work items this group was outsourcing.
 }
 if($user->can('bid_on_work')) {

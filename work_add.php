@@ -83,8 +83,8 @@ if ($request->isPost()) {
   if ($err->no()) {
     $workHelper = new ttWorkHelper($err);
     $fields = array('subject'=>$cl_name,
-      'short_description' => $cl_description,
-      'long_description' => $cl_details,
+      'descr_short' => $cl_description,
+      'descr_long' => $cl_details,
       'currency' => $cl_currency,
       'amount' => $cl_budget);
      $id = $workHelper->putWork($fields);
