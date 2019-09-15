@@ -38,6 +38,7 @@ class ttUser {
   var $name = null;             // User name.
   var $id = null;               // User id.
   var $org_id = null;           // Organization id.
+  var $org_key = null;          // Organization key.
   var $group_id = null;         // Group id.
   var $group_key = null;        // Group key.
   var $role_id = null;          // Role id.
@@ -116,6 +117,7 @@ class ttUser {
       $this->org_id = $val['org_id'];
       $this->group_id = $val['group_id'];
       $this->group_key = $val['group_key'];
+      if ($this->org_id == $this->group_key) $this->org_key = $val['group_key'];
       $this->role_id = $val['role_id'];
       $this->role_name = $val['role_name'];
       $this->rights = explode(',', $val['rights']);
@@ -193,6 +195,22 @@ class ttUser {
   // getGroupKey returns group key for active group.
   function getGroupKey() {
     return ($this->behalfGroup ? $this->behalfGroup->group_key : $this->group_key);
+  }
+
+  // getOrgKey returns org key.
+  function getOrgKey() {
+    if ($this->org_key) {
+      return $this->org_key;
+    }
+
+    // Org key is not set because we are in a subgroup. Obtain it.
+    $mdb2 = getConnection();
+    $org_id = $this->org_id;
+    $sql = "select group_key from tt_groups where id = $org_id and status = 1";
+    $res = $mdb2->query($sql);
+    $val = $res->fetchRow();
+    $this->org_key = $val['group_key'];
+    return $this->org_key;
   }
 
   // getDecimalMark returns decimal mark for active group.

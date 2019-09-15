@@ -138,7 +138,7 @@ class ttOfferHelper {
     $curl_fields = array('site_id' => urlencode($this->site_id),
       'site_key' => urlencode($this->site_key),
       'org_id' => urlencode($org_id),
-      'org_key' => urlencode($this->getOrgKey()),
+      'org_key' => urlencode($user->getOrgKey()),
       'group_id' => urlencode($group_id),
       'group_key' => urlencode($user->getGroupKey()),
       'offer_lang' => urlencode($fields['offer_lang']),
@@ -203,7 +203,7 @@ class ttOfferHelper {
       'site_key' => urlencode($this->site_key),
 // Do we need these here?
 //      'org_id' => urlencode($org_id),
-//      'org_key' => urlencode($this->getOrgKey()),
+//      'org_key' => urlencode($user->getOrgKey()),
 //      'group_id' => urlencode($group_id),
 //      'group_key' => urlencode($user->getGroupKey()),
       'offer_id' => urlencode($fields['remote_id']));
@@ -278,7 +278,7 @@ class ttOfferHelper {
     $curl_fields = array('site_id' => urlencode($this->site_id),
       'site_key' => urlencode($this->site_key),
       'org_id' => urlencode($org_id),
-      'org_key' => urlencode($this->getOrgKey()),
+      'org_key' => urlencode($user->getOrgKey()),
       'group_id' => urlencode($group_id),
       'group_key' => urlencode($user->getGroupKey()),
       'entity_type' => urlencode($fields['entity_type']),
@@ -356,7 +356,7 @@ class ttOfferHelper {
     $curl_fields = array('site_id' => urlencode($this->site_id),
       'site_key' => urlencode($this->site_key),
       'org_id' => urlencode($org_id),
-      'org_key' => urlencode($this->getOrgKey()),
+      'org_key' => urlencode($user->getOrgKey()),
       'group_id' => urlencode($group_id),
       'group_key' => urlencode($user->getGroupKey()),
       'entity_type' => urlencode($entity_type),
@@ -431,18 +431,6 @@ class ttOfferHelper {
     $res = $mdb2->query($sql);
     $val = $res->fetchRow();
     return $val['id'] > 0;
-  }
-
-  // getOrgKey obtains organization key from the database.
-  private function getOrgKey() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $org_id = $user->org_id;
-    $sql = "select group_key from tt_groups where id = $org_id and status = 1";
-    $res = $mdb2->query($sql);
-    $val = $res->fetchRow();
-    return $val['group_key'];
   }
 
   // getEntityFiles obtains a list of files for an entity.

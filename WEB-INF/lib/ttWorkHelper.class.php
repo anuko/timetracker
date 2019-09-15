@@ -140,7 +140,7 @@ class ttWorkHelper {
     $curl_fields = array('site_id' => urlencode($this->site_id),
       'site_key' => urlencode($this->site_key),
       'org_id' => urlencode($org_id),
-      'org_key' => urlencode($this->getOrgKey()),
+      'org_key' => urlencode($user->getOrgKey()),
       'group_id' => urlencode($group_id),
       'group_key' => urlencode($user->getGroupKey()),
       'lang' => urlencode($user->lang),
@@ -188,19 +188,6 @@ class ttWorkHelper {
     }
 
     return true;
-  }
-
-  // TODO: identical function is in ttOfferHelper. Redesign.
-  // getOrgKey obtains organization key from the database.
-  private function getOrgKey() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $org_id = $user->org_id;
-    $sql = "select group_key from tt_groups where id = $org_id and status = 1";
-    $res = $mdb2->query($sql);
-    $val = $res->fetchRow();
-    return $val['group_key'];
   }
 
   // getCurrencies - obtains a list of supported currencies.
