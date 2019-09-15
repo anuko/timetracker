@@ -140,7 +140,7 @@ class ttOfferHelper {
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($this->getOrgKey()),
       'group_id' => urlencode($group_id),
-      'group_key' => urlencode($this->getGroupKey()),
+      'group_key' => urlencode($user->getGroupKey()),
       'offer_lang' => urlencode($fields['offer_lang']),
       'offer_subject' => urlencode($fields['offer_subject']),
       'offer_descr_short' => urlencode($fields['offer_descr_short']),
@@ -205,7 +205,7 @@ class ttOfferHelper {
 //      'org_id' => urlencode($org_id),
 //      'org_key' => urlencode($this->getOrgKey()),
 //      'group_id' => urlencode($group_id),
-//      'group_key' => urlencode($this->getGroupKey()),
+//      'group_key' => urlencode($user->getGroupKey()),
       'offer_id' => urlencode($fields['remote_id']));
 
     // url-ify the data for the POST.
@@ -280,7 +280,7 @@ class ttOfferHelper {
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($this->getOrgKey()),
       'group_id' => urlencode($group_id),
-      'group_key' => urlencode($this->getGroupKey()),
+      'group_key' => urlencode($user->getGroupKey()),
       'entity_type' => urlencode($fields['entity_type']),
       'entity_id' => urlencode($fields['entity_id']),
       'file_id' => urlencode($fields['remote_id']),
@@ -358,7 +358,7 @@ class ttOfferHelper {
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($this->getOrgKey()),
       'group_id' => urlencode($group_id),
-      'group_key' => urlencode($this->getGroupKey()),
+      'group_key' => urlencode($user->getGroupKey()),
       'entity_type' => urlencode($entity_type),
       'entity_id' => urlencode($entity_id));
 
@@ -440,20 +440,6 @@ class ttOfferHelper {
 
     $org_id = $user->org_id;
     $sql = "select group_key from tt_groups where id = $org_id and status = 1";
-    $res = $mdb2->query($sql);
-    $val = $res->fetchRow();
-    return $val['group_key'];
-  }
-
-  // getGrtoupKey obtains group key from the database.
-  private function getGroupKey() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $group_id = $user->getGroup();
-    $org_id = $user->org_id;
-
-    $sql = "select group_key from tt_groups where id = $group_id and org_id = $org_id and status = 1";
     $res = $mdb2->query($sql);
     $val = $res->fetchRow();
     return $val['group_key'];

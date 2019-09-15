@@ -135,7 +135,7 @@ class ttFileHelper {
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($this->getOrgKey()),
       'group_id' => urlencode($group_id),
-      'group_key' => urlencode($this->getGroupKey()),
+      'group_key' => urlencode($user->getGroupKey()),
       'entity_type' => urlencode($fields['entity_type']),
       'entity_id' => urlencode($fields['entity_id']),
       'file_name' => urlencode($fields['file_name']),
@@ -214,7 +214,7 @@ class ttFileHelper {
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($this->getOrgKey()),
       'group_id' => urlencode($group_id),
-      'group_key' => urlencode($this->getGroupKey()),
+      'group_key' => urlencode($user->getGroupKey()),
       'entity_type' => urlencode($fields['entity_type']),
       'entity_id' => urlencode($fields['entity_id']),
       'file_id' => urlencode($fields['remote_id']),
@@ -292,7 +292,7 @@ class ttFileHelper {
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($this->getOrgKey()),
       'group_id' => urlencode($group_id),
-      'group_key' => urlencode($this->getGroupKey()),
+      'group_key' => urlencode($user->getGroupKey()),
       'entity_type' => urlencode($entity_type),
       'entity_id' => urlencode($entity_id));
 
@@ -379,20 +379,6 @@ class ttFileHelper {
     return $val['group_key'];
   }
 
-  // getGrtoupKey obtains group key from the database.
-  private function getGroupKey() {
-    global $user;
-    $mdb2 = getConnection();
-
-    $group_id = $user->getGroup();
-    $org_id = $user->org_id;
-
-    $sql = "select group_key from tt_groups where id = $group_id and org_id = $org_id and status = 1";
-    $res = $mdb2->query($sql);
-    $val = $res->fetchRow();
-    return $val['group_key'];
-  }
-
   // getEntityFiles obtains a list of files for an entity.
   static function getEntityFiles($id, $type) {
     global $user;
@@ -466,7 +452,7 @@ class ttFileHelper {
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($this->getOrgKey()),
       'group_id' => urlencode($group_id),
-      'group_key' => urlencode($this->getGroupKey()),
+      'group_key' => urlencode($user->getGroupKey()),
       'entity_type' => urlencode($fields['entity_type']),
       'entity_id' => urlencode($fields['entity_id']),
       'file_id' => urlencode($fields['remote_id']),
