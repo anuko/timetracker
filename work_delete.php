@@ -48,6 +48,8 @@ if (!$work_item) {
 }
 // End of access checks.
 
+// TODO: coding ongoing down from here...
+
 $task_to_delete = $task['name'];
 
 $form = new Form('taskDeleteForm');

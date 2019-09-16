@@ -83,6 +83,7 @@ class ttReportHelper {
     if ($options['approved']=='2') $dropdown_parts .= ' and l.approved = 0';
     if ($options['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
     if ($options['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
+
     // Add time custom fields.
     if ($custom_fields && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
@@ -94,6 +95,20 @@ class ttReportHelper {
         }
       }
     }
+
+    // Prepare part for text custom fields using LIKE operator.
+    $cf_text_parts = null;
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        $field_value = $options[$field_name];
+        if ($timeField['type'] == CustomFields::TYPE_TEXT && $field_value) {
+          $cflTableName = 'cfl'.$timeField['id'];
+          $cf_text_parts .= " and $cflTableName.value like ".$mdb2->quote("%$field_value%");
+        }
+      }
+    }
+
     // Add user custom fields.
     if ($custom_fields && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
@@ -106,8 +121,7 @@ class ttReportHelper {
       }
     }
 
-    // Prepare part for text custom fields using LIKE operator.
-    $cf_text_parts = null;
+    // Continue preparing part for text custom fields using LIKE operator.
     if ($custom_fields && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
