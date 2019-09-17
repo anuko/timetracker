@@ -176,14 +176,15 @@ class ttWorkHelper {
     }
 
     $result_array = json_decode($result, true);
-    $work_id = (int) $result_array['work_id'];
-    $error = $result_array['error'];
 
-    if ($error || !$work_id) {
-      if ($error) {
-        // Add an error from remote work server if we have it.
-        $this->errors->add($error);
-      }
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error_localized'] ? $call_status['error_localized'] : $call_status['error']);
       return false;
     }
 
@@ -233,11 +234,14 @@ class ttWorkHelper {
 
     $result_array = json_decode($result, true);
 
-    // Check for error.
-    $error = $result_array['error'];
-    if ($error) {
-      // Add an error from remote work server.
-      $this->errors->add($error);
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error_localized'] ? $call_status['error_localized'] : $call_status['error']);
       return false;
     }
 
