@@ -50,32 +50,28 @@ if (!$work_item) {
 
 // TODO: coding ongoing down from here...
 
-$task_to_delete = $task['name'];
+$work_to_delete = $work_item['subject'];
 
-$form = new Form('taskDeleteForm');
-$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_task_id));
+$form = new Form('workDeleteForm');
+$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_work_id));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if(ttTaskHelper::get($cl_task_id)) {
-      if (ttTaskHelper::delete($cl_task_id)) {
-        header('Location: tasks.php');
-        exit();
-      } else
-        $err->add($i18n->get('error.db'));
-    } else
-      $err->add($i18n->get('error.db'));
+    if ($workHelper->deleteWork($cl_work_id)) {
+      header('Location: work.php');
+      exit();
+    }
   } elseif ($request->getParameter('btn_cancel')) {
-    header('Location: tasks.php');
+    header('Location: work.php');
     exit();
   }
 } // isPost
 
-$smarty->assign('task_to_delete', $task_to_delete);
+$smarty->assign('work_to_delete', $work_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.taskDeleteForm.btn_cancel.focus()"');
-$smarty->assign('title', $i18n->get('title.delete_task'));
-$smarty->assign('content_page_name', 'task_delete.tpl');
+$smarty->assign('title', $i18n->get('title.delete_work'));
+$smarty->assign('content_page_name', 'work_delete.tpl');
 $smarty->display('index.tpl');
