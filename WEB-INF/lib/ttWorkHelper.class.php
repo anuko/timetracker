@@ -96,17 +96,28 @@ class ttWorkHelper {
       // Close connection.
       curl_close($ch);
 
-      $result_array = json_decode($result, true);
-      if (!$result_array) {
+      if (!$result) {
         $this->errors->add($i18n->get('error.remote_work'));
+        return false;
       }
-      else if ($result_array['error']) {
-        // Add an error from remote work server if we have it.
-        $this->errors->add($result_array['error']);
+
+      $result_array = json_decode($result, true);
+
+      // Check for errors.
+      $call_status = $result_array['call_status'];
+      if (!$call_status) {
+        $this->errors->add($i18n->get('error.remote_work'));
+        return false;
       }
-      else if ($result_array['id'] && $result_array['key']) {
-        $this->site_id = $result_array['id'];
-        $this->site_key = $result_array['key'];
+      if ($call_status['code'] != TT_CURL_SUCCESS) {
+        $this->errors->add($call_status['error_localized'] ? $call_status['error_localized'] : $call_status['error']);
+        return false;
+      }
+
+      $reg_status = $result_array['reg_status']; // Registration status.
+      if ($reg_status['site_id'] && $reg_status['site_key']) {
+        $this->site_id = $reg_status['site_id'];
+        $this->site_key = $reg_status['site_key'];
 
         // Registration successful. Store id and key locally for future use.
         $sql = "insert into tt_site_config values('worksite_id', $this->site_id, now(), null)";
