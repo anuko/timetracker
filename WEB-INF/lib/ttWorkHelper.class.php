@@ -64,8 +64,8 @@ class ttWorkHelper {
   // checkSiteRegistration - obtains site id and key from local database.
   // If not found, it tries to register with remote work server.
   function checkSiteRegistration() {
-
     global $i18n;
+    global $user;
     $mdb2 = getConnection();
 
     // Obtain site id.
@@ -74,7 +74,8 @@ class ttWorkHelper {
     $val = $res->fetchRow();
     if (!$val) {
       // No site id found, need to register.
-      $fields = array('name' => urlencode('time tracker'),
+      $fields = array('lang' => urlencode($user->lang),
+        'name' => urlencode('time tracker'),
         'origin' => urlencode('time tracker source'));
 
       // Urlify the data for the POST.
