@@ -38,6 +38,7 @@ $i18n_key_words = array(
 
 // Menus - short selection strings that are displayed on top of application web pages.
 // Example: https://timetracker.anuko.com (black menu on top).
+// Note to translators: try to keep menu strings short so that we don't run out of display room.
 'menu.login' => 'Anmelden',
 'menu.logout' => 'Abmelden',
 'menu.forum' => 'Forum',
@@ -48,8 +49,7 @@ $i18n_key_words = array(
 'menu.group' => 'Gruppe',
 'menu.plugins' => 'Erweiterungen',
 'menu.time' => 'Zeiten',
-// TODO: translate the following.
-// 'menu.week' => 'Week',
+'menu.week' => 'Woche',
 'menu.expenses' => 'Kosten',
 'menu.reports' => 'Berichte',
 // TODO: translate the following.
@@ -115,13 +115,12 @@ $i18n_key_words = array(
 // 'error.remote_work' => 'Remote work server error.',
 
 // Warning messages.
+'warn.sure' => 'Sind Sie sicher?',
 // TODO: translate the following.
-// 'warn.sure' => 'Are you sure?',
 // 'warn.confirm_save' => 'Date has changed. Confirm saving, not copying this item.',
 
 // Success messages.
-// TODO: translate the following.
-// 'msg.success' => 'Operation completed successfully.',
+'msg.success' => 'Operation vollständig abgeschlossen.',
 
 // Labels for buttons.
 'button.login' => 'Anmelden',
@@ -142,7 +141,9 @@ $i18n_key_words = array(
 'button.close' => 'Schließen',
 'button.stop' => 'Stop',
 // TODO: translate the following.
-// 'button.approve' => 'Approve',
+// (PR#81 suggested 'Freigeben / Genehmigen' for 'Approve' and 'Freigabe zurücknehmen' for 'Disapprove'.
+// The problem is they do not appear precise, deviate from the meaning of approval / disaproval of report items.)
+// 'button.approve' => 'Approve', (suggested 'Freigeben / Genehmigen' does not appear precise)
 // 'button.disapprove' => 'Disapprove',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
@@ -223,8 +224,7 @@ $i18n_key_words = array(
 'label.condition' => 'Bedingung',
 'label.yes' => 'Ja',
 'label.no' => 'Nein',
-// TODO: translate the following.
-// 'label.sort' => 'Sort',
+'label.sort' => 'Sortieren',
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Benutzerfelder',
 'label.monthly_quotas' => 'Monatliche Quoten',
@@ -242,7 +242,7 @@ $i18n_key_words = array(
 'label.paid_status' => 'Bezahlstatus',
 'label.paid' => 'Bezahlt',
 'label.mark_paid' => 'Als bezahlt setzen',
-// 'label.week_menu' => 'Week menu',
+'label.week_menu' => 'Wochenansicht im Menü',
 'label.week_note' => 'Wochennotiz',
 'label.week_list' => 'Wochenliste',
 'label.work_units' => 'Arbeitseinheiten',
@@ -263,9 +263,12 @@ $i18n_key_words = array(
 // 'label.download' => 'Download',
 'label.active_users' => 'Aktive Nutzer',
 'label.inactive_users' => 'Inaktive Nutzer',
-// TODO: translate the following.
+// TODO: translate the following or confirm that "Details" is also correct for German (exactly as the English string).
+// label.details is used to identify a field for LONG DESCRIPTION of a work item used in Remote Work plugin.
+// For example, a work item could be "Design a logo", and the Details hold EXACT anfd PRECISE specs of what a customer needs.
+// Another use is with offers with Remote Work plugin, where details hold a long, precise, and complete description of the offer.
 // 'label.details' => 'Details',
-// 'label.budget' => 'Budget',
+'label.budget' => 'Budget',
 
 // Entity names. We use lower case (in English) because they are used in dropdowns, too.
 // They are used to associate a custom field with an entity type.
@@ -276,8 +279,7 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.error' => 'Fehler',
-// TODO: Translate the following.
-// 'title.success' => 'Success',
+'title.success' => 'Erfol',
 'title.login' => 'Anmelden',
 'title.groups' => 'Gruppen',
 // TODO: translate the following.
@@ -306,8 +308,7 @@ $i18n_key_words = array(
 'title.send_invoice' => 'Rechnung senden',
 'title.charts' => 'Diagramme',
 'title.projects' => 'Projekte',
-// TODO: translate the following.
-// 'title.project_files' => 'Project Files',
+'title.project_files' => 'Projekt-Dateien',
 'title.add_project' => 'Projekt anlegen',
 'title.edit_project' => 'Projekt bearbeiten',
 'title.delete_project' => 'Projekt löschen',
@@ -343,8 +344,7 @@ $i18n_key_words = array(
 'title.export' => 'Daten exportieren',
 'title.import' => 'Daten importieren',
 'title.options' => 'Optionen',
-// TODO: translate the following.
-// 'title.display_options' => 'Display Options',
+'title.display_options' => 'Anzeige-Optionen',
 'title.profile' => 'Profil',
 'title.plugins' => 'Erweiterungen',
 'title.cf_custom_fields' => 'Benutzerfelder',
@@ -551,9 +551,8 @@ $i18n_key_words = array(
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 'form.group_edit.12_hours' => '12 Stunden',
 'form.group_edit.24_hours' => '24 Stunden',
-// TODO: translate the following.
-// 'form.group_edit.display_options' => 'Display options',
-// 'form.group_edit.holidays' => 'Holidays',
+'form.group_edit.display_options' => 'Anzeige-Optionen',
+'form.group_edit.holidays' => 'Feiertage',
 'form.group_edit.tracking_mode' => 'Nachverfolgung',
 'form.group_edit.mode_time' => 'Zeit',
 'form.group_edit.mode_projects' => 'Projekte',
@@ -566,8 +565,7 @@ $i18n_key_words = array(
 'form.group_edit.allow_overlap' => 'Erlaube Überschneidung',
 'form.group_edit.future_entries' => 'Einträge in der Zukunft',
 'form.group_edit.uncompleted_indicators' => 'Zeige unfertige Einträge',
-// TODO: translate the following.
-// 'form.group_edit.confirm_save' => 'Confirm saving',
+'form.group_edit.confirm_save' => 'Speichern bestätigen',
 'form.group_edit.allow_ip' => 'Erlaube IP',
 // TODO: translate the following.
 // 'form.group_edit.advanced_settings' => 'Advanced settings',
@@ -634,5 +632,5 @@ $i18n_key_words = array(
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
 // TODO: translate the following.
 // 'form.display_options.menu' => 'Menu',
-// 'form.display_options.note_on_separate_row' => 'Note on separate row',
+'form.display_options.note_on_separate_row' => 'Beschreibung in separater Zeile',
 );
