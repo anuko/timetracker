@@ -149,13 +149,13 @@ class ttWorkHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $curl_fields = array('site_id' => urlencode($this->site_id),
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
       'site_key' => urlencode($this->site_key),
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($user->getOrgKey()),
       'group_id' => urlencode($group_id),
       'group_key' => urlencode($user->getGroupKey()),
-      'lang' => urlencode($user->lang),
       'subject' => urlencode($fields['subject']),
       'descr_short' => urlencode($fields['descr_short']),
       'descr_long' => urlencode($fields['descr_long']),
@@ -212,7 +212,8 @@ class ttWorkHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $curl_fields = array('site_id' => urlencode($this->site_id),
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
       'site_key' => urlencode($this->site_key),
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($user->getOrgKey()),
@@ -270,7 +271,8 @@ class ttWorkHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $curl_fields = array('site_id' => urlencode($this->site_id),
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
       'site_key' => urlencode($this->site_key),
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($user->getOrgKey()),
@@ -328,7 +330,8 @@ class ttWorkHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $curl_fields = array('site_id' => urlencode($this->site_id),
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
       'site_key' => urlencode($this->site_key),
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($user->getOrgKey()),
