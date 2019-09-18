@@ -111,7 +111,7 @@ class ttWorkHelper {
         return false;
       }
       if ($call_status['code'] != TT_CURL_SUCCESS) {
-        $this->errors->add($call_status['error_localized'] ? $call_status['error_localized'] : $call_status['error']);
+        $this->errors->add($call_status['error']);
         return false;
       }
 
@@ -196,7 +196,7 @@ class ttWorkHelper {
       return false;
     }
     if ($call_status['code'] != TT_CURL_SUCCESS) {
-      $this->errors->add($call_status['error_localized'] ? $call_status['error_localized'] : $call_status['error']);
+      $this->errors->add($call_status['error']);
       return false;
     }
 
@@ -254,7 +254,7 @@ class ttWorkHelper {
       return false;
     }
     if ($call_status['code'] != TT_CURL_SUCCESS) {
-      $this->errors->add($call_status['error_localized'] ? $call_status['error_localized'] : $call_status['error']);
+      $this->errors->add($call_status['error']);
       return false;
     }
 
@@ -313,7 +313,7 @@ class ttWorkHelper {
       return false;
     }
     if ($call_status['code'] != TT_CURL_SUCCESS) {
-      $this->errors->add($call_status['error_localized'] ? $call_status['error_localized'] : $call_status['error']);
+      $this->errors->add($call_status['error']);
       return false;
     }
 
@@ -372,7 +372,7 @@ class ttWorkHelper {
       return false;
     }
     if ($call_status['code'] != TT_CURL_SUCCESS) {
-      $this->errors->add($call_status['error_localized'] ? $call_status['error_localized'] : $call_status['error']);
+      $this->errors->add($call_status['error']);
       return false;
     }
 
