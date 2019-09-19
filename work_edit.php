@@ -39,9 +39,16 @@ if (!$user->isPluginEnabled('wk')) {
   header('Location: feature_disabled.php');
   exit();
 }
+$cl_work_id = (int)$request->getParameter('id');
+$workHelper = new ttWorkHelper($err);
+$work_item = $workHelper->getWork($cl_work_id);
+if (!$work_item) {
+  header('Location: access_denied.php');
+  exit();
+}
 // End of access checks.
 
-$showFiles = $user->isPluginEnabled('at');
+$currencies = ttWorkHelper::getCurrencies();
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('work_name'));
@@ -49,25 +56,26 @@ if ($request->isPost()) {
   $cl_details = trim($request->getParameter('details'));
   $cl_currency = $request->getParameter('currency');
   $cl_budget = $request->getParameter('budget');
+} else {
+  $cl_name = $work_item['subject'];
+  $cl_description = $work_item['descr_short'];
+  $cl_details = $work_item['descr_long'];
+  $currency = $work_item['currency'];
+  $cl_currency = array_search($currency, $currencies);
+  $cl_budget = $work_item['amount'];
 }
 
 $form = new Form('workForm');
+$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_work_id));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'work_name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
-// Add a dropdown for currency.
-$currencies = ttWorkHelper::getCurrencies();
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'value'=>$cl_currency));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
-$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
+$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
-// TODO: design how to handle one-time vs ongoing work. Apparently, with a conditional display of relevant controls.
-// Ongoing work - rate per hour control.
-// One-time work - budget dropdown control.
-// When selection changes, we hide and show required controls.
+// TODO: coding ongoing down from here...
 
-// TODO: design how to handle categories and sub-categories.
-// One major complication is localization of names.
 
 if ($request->isPost()) {
   // Validate user input.
@@ -77,21 +85,23 @@ if ($request->isPost()) {
   if (!ttValidString($cl_budget)) $err->add($i18n->get('error.field'), $i18n->get('label.budget'));
 
   if ($err->no()) {
-    $workHelper = new ttWorkHelper($err);
-    $fields = array('subject'=>$cl_name,
-      'descr_short' => $cl_description,
-      'descr_long' => $cl_details,
-      'currency' => $currencies[$cl_currency],
-      'amount' => $cl_budget);
-     if ($workHelper->putWork($fields)) {
+    if ($request->getParameter('btn_save')) {
+      // Update work information.
+      $fields = array('work_id'=>$cl_work_id,
+        'subject'=>$cl_name,
+        'descr_short' => $cl_description,
+        'descr_long' => $cl_details,
+        'currency' => $currencies[$cl_currency],
+        'amount' => $cl_budget);
+      if ($workHelper->updateWork($fields)) {
         header('Location: work.php');
         exit();
+      }
     }
   }
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="document.workForm.work_name.focus()"');
-$smarty->assign('title', $i18n->get('title.add_work'));
-$smarty->assign('content_page_name', 'work_add.tpl');
+$smarty->assign('title', $i18n->get('title.edit_work'));
+$smarty->assign('content_page_name', 'work_edit.tpl');
 $smarty->display('index.tpl');

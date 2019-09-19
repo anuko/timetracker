@@ -28,7 +28,8 @@
 
 define('TT_CURL_SUCCESS', 1);
 
-// Class ttWorkHelper is used to help with operations with the Remote work plugin.
+// Class ttWorkHelper is used to help with operations with the Remote Work plugin.
+// It does everything via curl calls to a Remote Work server using its API.
 class ttWorkHelper {
   var $errors = null;            // Errors go here. Set in constructor by reference.
   var $remote_work_uri = null;   // Location of remote work server.
@@ -47,9 +48,14 @@ class ttWorkHelper {
   function __construct(&$errors) {
     $this->errors = &$errors;
 
+    // Note: at some point a need will arise for API versioning.
+    // When this happens, we will append an API version number to the end of URI,
+    // for example: register_0_1 instead of register.
+    // This should theoretically allow a remote work server to be able to work with
+    // a complete variety of deployed clients, including those without versions.
     if (defined('REMOTE_WORK_URI')) {
       $this->remote_work_uri = REMOTE_WORK_URI;
-      $this->register_uri = $this->remote_work_uri.'register';
+      $this->register_uri = $this->remote_work_uri.'register'; // register_0_0
       $this->put_work_uri = $this->remote_work_uri.'putwork';
       $this->get_work_uri = $this->remote_work_uri.'getwork';
       $this->get_active_work_uri = $this->remote_work_uri.'getactivework';
@@ -141,7 +147,83 @@ class ttWorkHelper {
   }
 
   // putWork - publishes a work item in remote work server.
+  //
+  // Note about some fields using additional base64 encoding.
+  // There is a problem with data posted by curl calls on the server side for
+  // some languages. Data arrives corrupted.
+  //
+  // For example: consider a case for a single Russian letter ф in the subject field.
+  // UTF-8 encoding for ф: 0xD1 0x84 (2 bytes).
+  // urlencoded ф: %D1%84 - a string of 6 characters.
+  // If we use a curl call like here with only urlencoded ф, what arrives on the server in POST is "C3 91 C2 84"
+  // no idea what it is.
+  //
+  // A workaround for now is to use use an additional base64 encoding for all text fields,
+  // which are decoded back to utf-8 strings on the server side.
+
   function putWork($fields) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id),
+      'org_key' => urlencode($user->getOrgKey()),
+      'group_id' => urlencode($group_id),
+      'group_key' => urlencode($user->getGroupKey()),
+      'subject' => urlencode(base64_encode($fields['subject'])),
+      'descr_short' => urlencode(base64_encode($fields['descr_short'])),
+      'descr_long' => urlencode(base64_encode($fields['descr_long'])),
+      'currency' => urlencode($fields['currency']),
+      'amount' => urlencode($fields['amount'])
+    );
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->put_work_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    return true;
+  }
+
+  // updateWork - updates a work item in remote work server.
+  function updateWork($fields) {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -156,9 +238,10 @@ class ttWorkHelper {
       'org_key' => urlencode($user->getOrgKey()),
       'group_id' => urlencode($group_id),
       'group_key' => urlencode($user->getGroupKey()),
-      'subject' => urlencode($fields['subject']),
-      'descr_short' => urlencode($fields['descr_short']),
-      'descr_long' => urlencode($fields['descr_long']),
+      'work_id' => urlencode($fields['work_id']),
+      'subject' => urlencode(base64_encode($fields['subject'])),
+      'descr_short' => urlencode(base64_encode($fields['descr_short'])),
+      'descr_long' => urlencode(base64_encode($fields['descr_long'])),
       'currency' => urlencode($fields['currency']),
       'amount' => urlencode($fields['amount'])
     );
@@ -171,7 +254,7 @@ class ttWorkHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->put_work_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->update_work_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -388,7 +471,7 @@ class ttWorkHelper {
     if (is_a($res, 'PEAR_Error')) return false;
 
     while ($val = $res->fetchRow()) {
-      $result[] = $val;
+      $result[] = $val['name'];
     }
     return $result;
   }

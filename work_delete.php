@@ -71,7 +71,7 @@ if ($request->isPost()) {
 
 $smarty->assign('work_to_delete', $work_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="document.taskDeleteForm.btn_cancel.focus()"');
+$smarty->assign('onload', 'onLoad="document.workDeleteForm.btn_cancel.focus()"');
 $smarty->assign('title', $i18n->get('title.delete_work'));
 $smarty->assign('content_page_name', 'work_delete.tpl');
 $smarty->display('index.tpl');
