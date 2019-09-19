@@ -65,7 +65,7 @@ class ttWorkHelper {
       $this->put_work_uri = $this->remote_work_uri.'putwork';
       $this->get_work_uri = $this->remote_work_uri.'getwork';
       $this->get_active_work_uri = $this->remote_work_uri.'getactivework';
-      $this->get_avaialable_work_uri = $this->remote_work_uri.'getavailablework';
+      $this->get_available_work_uri = $this->remote_work_uri.'getavailablework';
       $this->delete_work_uri = $this->remote_work_uri.'deletework';
       $this->update_work_uri = $this->remote_work_uri.'updatework';
       $this->put_offer_uri = $this->remote_work_uri.'putoffer';
@@ -353,6 +353,62 @@ class ttWorkHelper {
 
     $active_work = $result_array['active_work'];
     return $active_work;
+  }
+
+  // getAvailableWork - obtains a list of available work items this group can  bid on.
+  function getAvailableWork() {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id)
+    );
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->get_available_work_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    $available_work = $result_array['available_work'];
+    return $available_work;
   }
 
   // getWork - gets work item details from remote work server.

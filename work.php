@@ -47,8 +47,8 @@ if($user->can('manage_work')) {
   // $inactive_work = ttWorkHelper::getInactiveWork(); // Inactive work items this group was outsourcing.
 }
 if($user->can('bid_on_work')) {
+  $available_work = $workHelper->getAvailableWork(); // Currently available work items from other orgs.
   $active_offers = $workHelper->getActiveOffers(); // Active offers this group makes available to other groups.
-  // $available_work = ttWorkHelper::getAvailableWork(); // Currently available work items from other groups.
 }
 if($user->can('update_work')) {
   // $in_progress_work = ttWorkHelper::getInProgressWork(); // Work items in progress for other groups.

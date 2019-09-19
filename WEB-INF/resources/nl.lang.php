@@ -360,6 +360,8 @@ $i18n_key_words = array(
 'title.edit_work' => 'Werk bewerken',
 'title.delete_work' => 'Werk verwijderen',
 'title.active_work' => 'Actief werk',
+// TODO: translate the following.
+// 'title.available_work' => 'Available Work', // Available work items from other organizations.
 'title.inactive_work' => 'Inactief werk',
 // TODO: translate the following.
 // 'title.add_offer' => 'Adding Offer',

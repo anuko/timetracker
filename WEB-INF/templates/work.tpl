@@ -36,6 +36,36 @@
       </table>
 
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
+        <tr><td class="sectionHeaderNoBorder">{$i18n.title.available_work}</td></tr>
+  {if $available_work}
+        <tr>
+          <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
+          <td width="35%" class="tableHeader">{$i18n.label.description}</td>
+          <td class="tableHeader">{$i18n.label.budget}</td>
+          <td></td>
+          <td></td>
+        </tr>
+    {foreach $available_work as $work_item}
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
+          <td>{$work_item.subject|escape}</td>
+          <td>{$work_item.description|escape}</td>
+          <td>{$work_item.currency} {$work_item.amount}</td>
+          <td></td>
+          <td></td>
+        </tr>
+    {/foreach}
+  {/if}
+      </table>
+
+      <table width="100%">
+        <tr>
+          <td align="center"><br>
+            <form><input type="button" onclick="chLocation('work_add.php');" value="{$i18n.button.add}"></form>
+          </td>
+        </tr>
+      </table>
+
+      <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr><td class="sectionHeaderNoBorder">{$i18n.title.active_offers}</td></tr>
   {if $active_offers}
         <tr>
