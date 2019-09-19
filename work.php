@@ -47,6 +47,7 @@ if($user->can('manage_work')) {
   // $inactive_work = ttWorkHelper::getInactiveWork(); // Inactive work items this group was outsourcing.
 }
 if($user->can('bid_on_work')) {
+  $active_offers = $workHelper->getActiveOffers(); // Active offers this group makes available to other groups.
   // $available_work = ttWorkHelper::getAvailableWork(); // Currently available work items from other groups.
 }
 if($user->can('update_work')) {
@@ -61,6 +62,7 @@ $smarty->assign('inactive_work', $inactive_work);
 $smarty->assign('available_work', $available_work);
 $smarty->assign('in_progress_work', $in_progress_work);
 $smarty->assign('completed_work', $completed_work);
+$smarty->assign('active_offers', $active_offers);
 $smarty->assign('available_offers', $available_offers);
 $smarty->assign('title', $i18n->get('title.work'));
 $smarty->assign('content_page_name', 'work.tpl');

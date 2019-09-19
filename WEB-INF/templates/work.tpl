@@ -12,9 +12,6 @@
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.budget}</td>
-    {if $show_files}
-          <td></td>
-    {/if}
           <td></td>
           <td></td>
         </tr>
@@ -39,20 +36,20 @@
       </table>
 
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
-        <tr><td class="sectionHeaderNoBorder">{$i18n.form.work.offers}</td></tr>
-  {if $available_offers}
+        <tr><td class="sectionHeaderNoBorder">{$i18n.title.active_offers}</td></tr>
+  {if $active_offers}
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
-    {if $show_files}
-          <td></td>
-    {/if}
+          <td class="tableHeader">{$i18n.label.budget}</td>
           <td></td>
           <td></td>
         </tr>
-    {foreach $available_offers as $offer}
+    {foreach $active_offers as $offer}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
-          <td>{$offer.name|escape}</td>
+          <td>{$offer.subject|escape}</td>
+          <td>{$offer.description|escape}</td>
+          <td>{$offer.currency} {$offer.amount}</td>
           <td><a href="offer_edit.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
           <td><a href="offer_delete.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>

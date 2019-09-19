@@ -171,7 +171,6 @@ class ttWorkHelper {
   //
   // A workaround for now is to use use an additional base64 encoding for all text fields,
   // which are decoded back to utf-8 strings on the server side.
-
   function putWork($fields) {
     global $i18n;
     global $user;
@@ -297,7 +296,7 @@ class ttWorkHelper {
     return true;
   }
 
-  // getActiveWork - obtains a list of work items this group is currently oputsourcing.
+  // getActiveWork - obtains a list of work items this group is currently outsourcing.
   function getActiveWork() {
     global $i18n;
     global $user;
@@ -473,6 +472,7 @@ class ttWorkHelper {
     return true;
   }
 
+  // putOffer - publishes an offer in remote work server.
   function putOffer($fields) {
     global $i18n;
     global $user;
@@ -532,6 +532,65 @@ class ttWorkHelper {
     }
 
     return true;
+  }
+
+  // getActiveOffers - obtains a list of offers this group made available to other groups.
+  function getActiveOffers() {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id),
+      'org_key' => urlencode($user->getOrgKey()),
+      'group_id' => urlencode($group_id),
+      'group_key' => urlencode($user->getGroupKey())
+    );
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->get_active_offers_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    $active_offers = $result_array['active_offers'];
+    return $active_offers;
   }
 
   // getCurrencies - obtains a list of supported currencies.
