@@ -44,7 +44,7 @@ $workHelper = new ttWorkHelper($err);
 
 if($user->can('manage_work')) {
   $active_work = $workHelper->getActiveWork(); // Active work items this group is outsourcing.
-  // $inactive_work = ttWorkHelper::getInactiveWork(); // Inactive work items this group was outsourcing.
+  $available_offers = $workHelper->getAvailableOffers(); // Available offers from other organizations.
 }
 if($user->can('bid_on_work')) {
   $available_work = $workHelper->getAvailableWork(); // Currently available work items from other orgs.
@@ -58,10 +58,7 @@ if($user->can('update_work')) {
 // TODO: review access rights for the code above.
 
 $smarty->assign('active_work', $active_work);
-$smarty->assign('inactive_work', $inactive_work);
 $smarty->assign('available_work', $available_work);
-$smarty->assign('in_progress_work', $in_progress_work);
-$smarty->assign('completed_work', $completed_work);
 $smarty->assign('active_offers', $active_offers);
 $smarty->assign('available_offers', $available_offers);
 $smarty->assign('title', $i18n->get('title.work'));

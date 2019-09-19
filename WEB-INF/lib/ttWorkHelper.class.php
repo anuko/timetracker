@@ -71,7 +71,7 @@ class ttWorkHelper {
       $this->put_offer_uri = $this->remote_work_uri.'putoffer';
       $this->get_offer_uri = $this->remote_work_uri.'getoffer';
       $this->get_active_offers_uri = $this->remote_work_uri.'getactiveoffers';
-      $this->get_avaialable_offers_uri = $this->remote_work_uri.'getavailableoffers';
+      $this->get_available_offers_uri = $this->remote_work_uri.'getavailableoffers';
       $this->delete_offer_uri = $this->remote_work_uri.'deleteoffer';
       $this->update_offer_uri = $this->remote_work_uri.'updateoffer';
       $this->checkSiteRegistration();
@@ -647,6 +647,62 @@ class ttWorkHelper {
 
     $active_offers = $result_array['active_offers'];
     return $active_offers;
+  }
+
+  // getAvailableOffers - obtains a list of available offers from other organizations.
+  function getAvailableOffers() {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id)
+    );
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->get_available_offers_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    $available_offers = $result_array['available_offers'];
+    return $available_offers;
   }
 
   // getOffer - gets offer details from remote work server.
