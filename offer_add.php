@@ -42,15 +42,15 @@ if (!$user->isPluginEnabled('wk')) {
 // End of access checks.
 
 if ($request->isPost()) {
-  $cl_name = trim($request->getParameter('work_name'));
+  $cl_name = trim($request->getParameter('offer_name'));
   $cl_description = trim($request->getParameter('description'));
   $cl_details = trim($request->getParameter('details'));
   $cl_currency = $request->getParameter('currency');
   $cl_budget = $request->getParameter('budget');
 }
 
-$form = new Form('workForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'work_name','style'=>'width: 250px;','value'=>$cl_name));
+$form = new Form('offerForm');
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'offer_name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
 // Add a dropdown for currency.
@@ -58,14 +58,6 @@ $currencies = ttWorkHelper::getCurrencies();
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'value'=>$cl_currency));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
-
-// TODO: design how to handle one-time vs ongoing work. Apparently, with a conditional display of relevant controls.
-// Ongoing work - rate per hour control.
-// One-time work - budget dropdown control.
-// When selection changes, we hide and show required controls.
-
-// TODO: design how to handle categories and sub-categories.
-// One major complication is localization of names.
 
 if ($request->isPost()) {
   // Validate user input.
@@ -81,7 +73,7 @@ if ($request->isPost()) {
       'descr_long' => $cl_details,
       'currency' => $currencies[$cl_currency],
       'amount' => $cl_budget);
-     if ($workHelper->putWork($fields)) {
+     if ($workHelper->putOffer($fields)) {
         header('Location: work.php');
         exit();
     }
@@ -89,7 +81,7 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="document.workForm.work_name.focus()"');
-$smarty->assign('title', $i18n->get('title.add_work'));
-$smarty->assign('content_page_name', 'work_add.tpl');
+$smarty->assign('onload', 'onLoad="document.offerForm.work_name.focus()"');
+$smarty->assign('title', $i18n->get('title.add_offer'));
+$smarty->assign('content_page_name', 'offer_add.tpl');
 $smarty->display('index.tpl');

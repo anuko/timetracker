@@ -34,13 +34,19 @@ class ttWorkHelper {
   var $errors = null;            // Errors go here. Set in constructor by reference.
   var $remote_work_uri = null;   // Location of remote work server.
   var $register_uri = null;      // URI to register with remote work server.
-  var $put_work_uri = null;      // URI to publish offer.
-  var $get_work_uri = null;      // URI to get offer details.
+  var $put_work_uri = null;      // URI to publish work.
+  var $get_work_uri = null;      // URI to get work details.
   var $get_active_work_uri = null;    // URI to get active work for group.
   var $get_available_work_uri = null; // URI to get available work for group.
-  var $delete_work_uri = null;   // URI to delete eotk.
+  var $delete_work_uri = null;   // URI to delete work.
   // TODO: design how (and what) to delete when a group is deleted.
   var $update_work_uri = null;  // URI to update work.
+  var $put_offer_uri = null;     // URI to publish offer.
+  var $get_offer_uri = null;     // URI to get offer details.
+  var $get_active_offers_uri = null;    // URI to get active offers.
+  var $get_available_offers_uri = null; // URI to get available offers.
+  var $delete_offer_uri = null;  // URI to delete offer.
+  var $delete_offers_uri = null; // URI to delete multiple offers.
   var $site_id = null;           // Site id for remote work server.
   var $site_key = null;          // Site key for remote work server.
 
@@ -60,9 +66,14 @@ class ttWorkHelper {
       $this->get_work_uri = $this->remote_work_uri.'getwork';
       $this->get_active_work_uri = $this->remote_work_uri.'getactivework';
       $this->get_avaialable_work_uri = $this->remote_work_uri.'getavailablework';
-
       $this->delete_work_uri = $this->remote_work_uri.'deletework';
       $this->update_work_uri = $this->remote_work_uri.'updatework';
+      $this->put_offer_uri = $this->remote_work_uri.'putoffer';
+      $this->get_offer_uri = $this->remote_work_uri.'getoffer';
+      $this->get_active_offers_uri = $this->remote_work_uri.'getactiveoffers';
+      $this->get_avaialable_offers_uri = $this->remote_work_uri.'getavailableoffers';
+      $this->delete_offer_uri = $this->remote_work_uri.'deleteoffer';
+      $this->update_offer_uri = $this->remote_work_uri.'updateoffer';
       $this->checkSiteRegistration();
     }
   }
@@ -431,6 +442,67 @@ class ttWorkHelper {
 
     // Set the url, number of POST vars, POST data.
     curl_setopt($ch, CURLOPT_URL, $this->delete_work_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    return true;
+  }
+
+  function putOffer($fields) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id),
+      'org_key' => urlencode($user->getOrgKey()),
+      'group_id' => urlencode($group_id),
+      'group_key' => urlencode($user->getGroupKey()),
+      'subject' => urlencode(base64_encode($fields['subject'])),
+      'descr_short' => urlencode(base64_encode($fields['descr_short'])),
+      'descr_long' => urlencode(base64_encode($fields['descr_long'])),
+      'currency' => urlencode($fields['currency']),
+      'amount' => urlencode($fields['amount'])
+    );
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->put_offer_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

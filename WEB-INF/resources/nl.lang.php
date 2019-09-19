@@ -361,6 +361,10 @@ $i18n_key_words = array(
 'title.delete_work' => 'Werk verwijderen',
 'title.active_work' => 'Actief werk',
 'title.inactive_work' => 'Inactief werk',
+// TODO: translate the following.
+// 'title.add_offer' => 'Adding Offer',
+// 'title.edit_offer' => 'Editing Offer',
+// 'title.delete_offer' => 'Deleting Offer',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
