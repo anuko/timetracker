@@ -31,7 +31,7 @@ import('ttWorkHelper');
 import('form.Form');
 
 // Access checks.
-if (!ttAccessAllowed('manage_work')) {
+if (!ttAccessAllowed('bid_on_work')) {
   header('Location: access_denied.php');
   exit();
 }
@@ -39,25 +39,25 @@ if (!$user->isPluginEnabled('wk')) {
   header('Location: feature_disabled.php');
   exit();
 }
-$cl_work_id = (int)$request->getParameter('id');
+$cl_offer_id = (int)$request->getParameter('id');
 $workHelper = new ttWorkHelper($err);
-$work_item = $workHelper->getWork($cl_work_id);
-if (!$work_item) {
+$offer = $workHelper->getOffer($cl_offer_id);
+if (!$offer) {
   header('Location: access_denied.php');
   exit();
 }
 // End of access checks.
 
-$work_to_delete = $work_item['subject'];
+$offer_to_delete = $offer['subject'];
 
-$form = new Form('workDeleteForm');
-$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_work_id));
+$form = new Form('offerDeleteForm');
+$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_offer_id));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get('button.cancel')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if ($workHelper->deleteWork($cl_work_id)) {
+    if ($workHelper->deleteOffer($cl_offer_id)) {
       header('Location: work.php');
       exit();
     }
@@ -67,9 +67,9 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$smarty->assign('work_to_delete', $work_to_delete);
+$smarty->assign('offer_to_delete', $offer_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="document.workDeleteForm.btn_cancel.focus()"');
-$smarty->assign('title', $i18n->get('title.delete_work'));
-$smarty->assign('content_page_name', 'work_delete.tpl');
+$smarty->assign('onload', 'onLoad="document.offerDeleteForm.btn_cancel.focus()"');
+$smarty->assign('title', $i18n->get('title.delete_offer'));
+$smarty->assign('content_page_name', 'offer_delete.tpl');
 $smarty->display('index.tpl');
