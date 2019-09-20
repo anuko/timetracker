@@ -267,6 +267,9 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'label.work' => 'Work',   // Table column header for work items, see https://www.anuko.com/time_tracker/what_is/work_plugin.htm
 // 'label.offer' => 'Offer', // Table column header for offers, see https://www.anuko.com/time_tracker/what_is/work_plugin.htm
+// 'label.contractor' => 'Contractor', // Table column header for offers (contractor is someone who offers to do work).
+                                       // Technically, it is either an org name or a combination of org and group names
+                                       // because both work items and offers are owned by Time Tracker groups of users.
 
 // Entity names.
 'entity.time' => 'tijd',
