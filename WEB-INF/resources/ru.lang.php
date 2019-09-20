@@ -103,7 +103,7 @@ $i18n_key_words = array(
 'error.format' => 'Неверный формат файла.',
 'error.user_count' => 'Ограничение на количество пользователей.',
 'error.expired' => 'Достигнута дата экспирации.',
-'error.file_storage' => 'Ошибка файлохранилища.',
+'error.file_storage' => 'Ошибка сервера для хранения файлов.',
 'error.remote_work' => 'Ошибка сервера удаленной работы.',
 
 // Warning messages.

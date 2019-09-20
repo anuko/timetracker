@@ -103,17 +103,22 @@ $i18n_key_words = array(
 'error.format' => 'Bestandsformaat niet valide.',
 'error.user_count' => 'Limiet op aantal gebruikers.',
 'error.expired' => 'Verloop datum is bereikt.',
-// TODO: improve translations of both error.file_storage and error.remote_work.
-// Both file storage and remote work (freelance) are implemented in external facilities,
-// which are standalone applications out of scope of Time Tracker itself.
-//
-// error.file_storage means that something happened in a remote file storage server.
-// error.remote_work means that something happened in a remote work server
-// see documentation for remote work plugin, currently under development).
-// Remote work plugin is designed to outsource work to other groups, when one group
-// hires another group to do something (under development at the moment).
-'error.file_storage' => 'Fout bij het opslaan van het bestand.',
-'error.remote_work' => 'Fout in de server.',
+
+// TODO: translate error.file_storage and error.remote_work.
+
+// Meaning of error.file_storage: an (unspecified) error occurred when trying to communicate with remote
+// file storage server (the one that handles attachments). It is a generic message telling us that
+// "something went wrong" when trying to do some operation with attachments.
+// For example, File Storage server could be offline, or Time Tracker config option is wrong, etc.
+
+// 'error.file_storage' => 'File storage server error.', // See comment in English file.
+
+// Meaning of error.remote_work: an (unspecified) error occurred when trying to communicate with
+// "Remote Work" server, the one that supports the "Work" plugin, see https://www.anuko.com/time_tracker/what_is/work_plugin.htm
+// It is a generic message telling us that "something went wrong" when trying to do some operation with Work plugin.
+// For example, Remote Work server could be offline, among other things.
+
+// 'error.remote_work' => 'Remote work server error.',   // See comment in English file.
 
 // Warning messages.
 'warn.sure' => 'Ben je er zeker van?',
