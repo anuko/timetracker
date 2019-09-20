@@ -192,6 +192,11 @@ class ttUser {
     return ($this->behalfGroup ? $this->behalfGroup->id : $this->group_id);
   }
 
+  // getGroupName returns group name on behalf of which the current user is operating.
+  function getGroupName() {
+    return ($this->behalfGroup ? $this->behalfGroup->name : $this->group_name);
+  }
+
   // getGroupKey returns group key for active group.
   function getGroupKey() {
     return ($this->behalfGroup ? $this->behalfGroup->group_key : $this->group_key);
