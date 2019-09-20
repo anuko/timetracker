@@ -87,7 +87,7 @@ if ($request->isPost()) {
   if ($err->no()) {
     if ($request->getParameter('btn_save')) {
       // Update offer information.
-      $fields = array('work_id'=>$cl_offer_id,
+      $fields = array('offer_id'=>$cl_offer_id,
         'subject'=>$cl_name,
         'descr_short' => $cl_description,
         'descr_long' => $cl_details,

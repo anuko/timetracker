@@ -556,12 +556,17 @@ class ttWorkHelper {
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($user->getOrgKey()),
       'group_id' => urlencode($group_id),
+      'group_name' => urlencode(base64_encode($user->getGroupName())),
       'group_key' => urlencode($user->getGroupKey()),
       'subject' => urlencode(base64_encode($fields['subject'])),
       'descr_short' => urlencode(base64_encode($fields['descr_short'])),
       'descr_long' => urlencode(base64_encode($fields['descr_long'])),
       'currency' => urlencode($fields['currency']),
-      'amount' => urlencode($fields['amount'])
+      'amount' => urlencode($fields['amount']),
+      'created_ip' => urlencode($_SERVER['REMOTE_ADDR']),
+      'created_by' => urlencode($user->getUser()),
+      'created_by_name' => urlencode(base64_encode($user->getName())),
+      'created_by_email' => urlencode(base64_encode($user->getEmail()))
     );
 
     // url-ify the data for the POST.
@@ -793,13 +798,18 @@ class ttWorkHelper {
       'org_id' => urlencode($org_id),
       'org_key' => urlencode($user->getOrgKey()),
       'group_id' => urlencode($group_id),
+      'group_name' => urlencode(base64_encode($user->getGroupName())),
       'group_key' => urlencode($user->getGroupKey()),
-      'work_id' => urlencode($fields['work_id']),
+      'offer_id' => urlencode($fields['offer_id']),
       'subject' => urlencode(base64_encode($fields['subject'])),
       'descr_short' => urlencode(base64_encode($fields['descr_short'])),
       'descr_long' => urlencode(base64_encode($fields['descr_long'])),
       'currency' => urlencode($fields['currency']),
-      'amount' => urlencode($fields['amount'])
+      'amount' => urlencode($fields['amount']),
+      'modified_ip' => urlencode($_SERVER['REMOTE_ADDR']),
+      'modified_by' => urlencode($user->getUser()),
+      'modified_by_name' => urlencode(base64_encode($user->getName())),
+      'modified_by_email' => urlencode(base64_encode($user->getEmail()))
     );
 
     // url-ify the data for the POST.
@@ -858,7 +868,11 @@ class ttWorkHelper {
       'org_key' => urlencode($user->getOrgKey()),
       'group_id' => urlencode($group_id),
       'group_key' => urlencode($user->getGroupKey()),
-      'offer_id' => urlencode($offer_id));
+      'offer_id' => urlencode($offer_id),
+      'modified_ip' => urlencode($_SERVER['REMOTE_ADDR']),
+      'modified_by' => urlencode($user->getUser()),
+      'modified_by_name' => urlencode(base64_encode($user->getName())),
+      'modified_by_email' => urlencode(base64_encode($user->getEmail())));
 
     // url-ify the data for the POST.
     foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
