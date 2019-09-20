@@ -43,15 +43,13 @@ class ttFileHelper {
   function __construct(&$errors) {
     $this->errors = &$errors;
 
-    if (defined('FILE_STORAGE_URI')) {
-      $this->storage_uri = FILE_STORAGE_URI;
-      $this->register_uri = $this->storage_uri.'register';
-      $this->putfile_uri = $this->storage_uri.'putfile';
-      $this->deletefile_uri = $this->storage_uri.'deletefile';
-      $this->deletefiles_uri = $this->storage_uri.'deletefiles';
-      $this->getfile_uri = $this->storage_uri.'getfile';
-      $this->checkSiteRegistration();
-    }
+    $this->storage_uri = defined('FILE_STORAGE_URI') ? FILE_STORAGE_URI : "https://www.anuko.com/files/";
+    $this->register_uri = $this->storage_uri.'register';
+    $this->putfile_uri = $this->storage_uri.'putfile';
+    $this->deletefile_uri = $this->storage_uri.'deletefile';
+    $this->deletefiles_uri = $this->storage_uri.'deletefiles';
+    $this->getfile_uri = $this->storage_uri.'getfile';
+    $this->checkSiteRegistration();
   }
 
   // checkSiteRegistration - obtains site id and key from local database.

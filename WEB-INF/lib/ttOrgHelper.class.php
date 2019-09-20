@@ -137,10 +137,9 @@ class ttOrgHelper {
 
     if ($affected == 0) return true; // Do not call file storage utility.
 
-    // Try to make a call to file storage facility.
-    if (!defined('FILE_STORAGE_URI')) return true; // Nothing to do.
-
-    $deleteorgfiles_uri = FILE_STORAGE_URI.'deleteorgfiles';
+    // Try to make a call to file storage server.
+    $storage_uri = defined('FILE_STORAGE_URI') ? FILE_STORAGE_URI : "https://www.anuko.com/files/";
+    $deleteorgfiles_uri = $storage_uri.'deleteorgfiles';
 
     // Obtain site id.
     $sql = "select param_value as site_id from tt_site_config where param_name = 'locker_id'";

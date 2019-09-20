@@ -717,10 +717,9 @@ class ttGroupHelper {
 
     if ($affected == 0) return true; // Do not call file storage utility.
 
-    // Try to make a call to file storage facility.
-    if (!defined('FILE_STORAGE_URI')) return true; // Nothing to do.
-
-    $deletegroupfiles_uri = FILE_STORAGE_URI.'deletegroupfiles';
+    // Try to make a call to file storage server.
+    $storage_uri = defined('FILE_STORAGE_URI') ? FILE_STORAGE_URI : "https://www.anuko.com/files/";
+    $deletegroupfiles_uri = $storage_uri.'deletegroupfiles';
 
     // Obtain site id.
     $sql = "select param_value as site_id from tt_site_config where param_name = 'locker_id'";

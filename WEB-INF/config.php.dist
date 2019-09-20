@@ -178,11 +178,6 @@ define('AUTH_MODULE', 'db');
 // Height in pixels for the note input field in time.php. Defaults to 40.
 // define('NOTE_INPUT_HEIGHT', 100);
 
-// File storage facility location for attachments.
-// This feature requires a subscription or a locally installed appliance.
-// define('FILE_STORAGE_URI', 'localhost');
-define('FILE_STORAGE_URI', 'https://www.anuko.com/files/');
-
 // A comma-separated list of default plugins for new group registrations.
 // Example below enables charts and attachments.
 // define('DEFAULT_PLUGINS', 'ch,at');
