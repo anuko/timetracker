@@ -253,7 +253,7 @@ $i18n_key_words = array(
 'label.submitted' => 'Verzonden',
 'label.approved' => 'Goedgekeurd',
 'label.approval' => 'Rapport goedkeuring',
-'label.mark_approved' => 'Markeer goegkeuring',
+'label.mark_approved' => 'Markeer goedkeuring',
 'label.template' => 'Sjabloon',
 'label.attachments' => 'Bijlagen',
 'label.files' => 'Bestanden',
@@ -262,9 +262,8 @@ $i18n_key_words = array(
 'label.download' => 'Download',
 'label.active_users' => 'Actieve medewerkers',
 'label.inactive_users' => 'Inactieve medewerkers',
-// TODO: translate the following.
-// 'label.details' => 'Details',
-// 'label.budget' => 'Budget',
+'label.details' => 'Details',
+'label.budget' => 'Budget',
 
 // Entity names.
 'entity.time' => 'tijd',
@@ -365,16 +364,14 @@ $i18n_key_words = array(
 'title.edit_work' => 'Werk bewerken',
 'title.delete_work' => 'Werk verwijderen',
 'title.active_work' => 'Actief werk',
-// TODO: translate the following.
-// 'title.available_work' => 'Available Work', // Available work items from other organizations.
+'title.available_work' => 'Beschikbaar werk',
 'title.inactive_work' => 'Inactief werk',
-// TODO: translate the following.
-// 'title.add_offer' => 'Adding Offer',
-// 'title.edit_offer' => 'Editing Offer',
-// 'title.delete_offer' => 'Deleting Offer',
-// 'title.active_offers' => 'Active Offers', // Active offers this group makes available to other groups.
-// 'title.available_offers' => 'Available Offers', // Available offers from other organizations.
-// 'title.inactive_offers' => 'Inactive Offers', // Inactive offers for group.
+'title.add_offer' => 'Aanbieding toevoegen',
+'title.edit_offer' => 'Aanbieding bewerken',
+'title.delete_offer' => 'Aanbieding verwijderen',
+'title.active_offers' => 'Actieve aanbiedingen',
+'title.available_offers' => 'Beschikbare aanbiedingen',
+'title.inactive_offers' => 'Inactieve aanbiedingen',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -456,7 +453,7 @@ $i18n_key_words = array(
 'form.reports.set_period' => 'of stel datums in',
 'form.reports.show_fields' => 'Toon velden',
 'form.reports.time_fields' => 'Tijd velden',
-'form.reports.user_fields' => 'Mederwerker velden',
+'form.reports.user_fields' => 'Medewerker velden',
 'form.reports.group_by' => 'Groeperen op',
 'form.reports.group_by_no' => '--- niet groeperen ---',
 'form.reports.group_by_date' => 'datum',
