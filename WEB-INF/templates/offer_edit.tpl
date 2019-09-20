@@ -4,7 +4,7 @@
     <td>
       <table cellspacing="1" cellpadding="2" border="0">
         <tr>
-          <td align="right">{$i18n.label.thing_name} (*):</td>
+          <td align="right">{$i18n.label.offer} (*):</td>
           <td>{$forms.offerForm.offer_name.control}</td>
         </tr>
         <tr>
