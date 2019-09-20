@@ -9,7 +9,7 @@
         <tr><td class="sectionHeaderNoBorder">{$i18n.title.active_work}</td></tr>
   {if $active_work}
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
+          <td width="35%" class="tableHeader">{$i18n.label.work}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.budget}</td>
           <td></td>
@@ -39,7 +39,7 @@
         <tr><td class="sectionHeaderNoBorder">{$i18n.title.available_work}</td></tr>
   {if $available_work}
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
+          <td width="35%" class="tableHeader">{$i18n.label.work}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.budget}</td>
           <td></td>
@@ -69,7 +69,7 @@
         <tr><td class="sectionHeaderNoBorder">{$i18n.title.active_offers}</td></tr>
   {if $active_offers}
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
+          <td width="35%" class="tableHeader">{$i18n.label.offer}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.budget}</td>
           <td></td>
@@ -99,7 +99,7 @@
         <tr><td class="sectionHeaderNoBorder">{$i18n.title.available_offers}</td></tr>
   {if $available_offers}
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
+          <td width="35%" class="tableHeader">{$i18n.label.offer}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.budget}</td>
           <td></td>

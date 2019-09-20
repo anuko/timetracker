@@ -264,6 +264,9 @@ $i18n_key_words = array(
 'label.inactive_users' => 'Inactieve medewerkers',
 'label.details' => 'Details',
 'label.budget' => 'Budget',
+// TODO: translate the following.
+// 'label.work' => 'Work',   // Table column header for work items, see https://www.anuko.com/time_tracker/what_is/work_plugin.htm
+// 'label.offer' => 'Offer', // Table column header for offers, see https://www.anuko.com/time_tracker/what_is/work_plugin.htm
 
 // Entity names.
 'entity.time' => 'tijd',

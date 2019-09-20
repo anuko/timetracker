@@ -269,6 +269,9 @@ $i18n_key_words = array(
 // Another use is with offers with Remote Work plugin, where details hold a long, precise, and complete description of the offer.
 // 'label.details' => 'Details',
 'label.budget' => 'Budget',
+// TODO: translate the following.
+// 'label.work' => 'Work',   // Table column header for work items, see https://www.anuko.com/time_tracker/what_is/work_plugin.htm
+// 'label.offer' => 'Offer', // Table column header for offers, see https://www.anuko.com/time_tracker/what_is/work_plugin.htm
 
 // Entity names. We use lower case (in English) because they are used in dropdowns, too.
 // They are used to associate a custom field with an entity type.
