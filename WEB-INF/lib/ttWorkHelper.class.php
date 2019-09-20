@@ -54,28 +54,27 @@ class ttWorkHelper {
   function __construct(&$errors) {
     $this->errors = &$errors;
 
+    $this->remote_work_uri = defined('REMOTE_WORK_URI') ? REMOTE_WORK_URI : "https://www.anuko.com/work/";
+
     // Note: at some point a need will arise for API versioning.
     // When this happens, we will append an API version number to the end of URI,
     // for example: register_0_1 instead of register.
     // This should theoretically allow a remote work server to be able to work with
     // a complete variety of deployed clients, including those without versions.
-    if (defined('REMOTE_WORK_URI')) {
-      $this->remote_work_uri = REMOTE_WORK_URI;
-      $this->register_uri = $this->remote_work_uri.'register'; // register_0_0
-      $this->put_work_uri = $this->remote_work_uri.'putwork';
-      $this->get_work_uri = $this->remote_work_uri.'getwork';
-      $this->get_active_work_uri = $this->remote_work_uri.'getactivework';
-      $this->get_available_work_uri = $this->remote_work_uri.'getavailablework';
-      $this->delete_work_uri = $this->remote_work_uri.'deletework';
-      $this->update_work_uri = $this->remote_work_uri.'updatework';
-      $this->put_offer_uri = $this->remote_work_uri.'putoffer';
-      $this->get_offer_uri = $this->remote_work_uri.'getoffer';
-      $this->get_active_offers_uri = $this->remote_work_uri.'getactiveoffers';
-      $this->get_available_offers_uri = $this->remote_work_uri.'getavailableoffers';
-      $this->delete_offer_uri = $this->remote_work_uri.'deleteoffer';
-      $this->update_offer_uri = $this->remote_work_uri.'updateoffer';
-      $this->checkSiteRegistration();
-    }
+    $this->register_uri = $this->remote_work_uri.'register'; // register_0_0
+    $this->put_work_uri = $this->remote_work_uri.'putwork';
+    $this->get_work_uri = $this->remote_work_uri.'getwork';
+    $this->get_active_work_uri = $this->remote_work_uri.'getactivework';
+    $this->get_available_work_uri = $this->remote_work_uri.'getavailablework';
+    $this->delete_work_uri = $this->remote_work_uri.'deletework';
+    $this->update_work_uri = $this->remote_work_uri.'updatework';
+    $this->put_offer_uri = $this->remote_work_uri.'putoffer';
+    $this->get_offer_uri = $this->remote_work_uri.'getoffer';
+    $this->get_active_offers_uri = $this->remote_work_uri.'getactiveoffers';
+    $this->get_available_offers_uri = $this->remote_work_uri.'getavailableoffers';
+    $this->delete_offer_uri = $this->remote_work_uri.'deleteoffer';
+    $this->update_offer_uri = $this->remote_work_uri.'updateoffer';
+    $this->checkSiteRegistration();
   }
 
   // checkSiteRegistration - obtains site id and key from local database.
