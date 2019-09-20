@@ -187,6 +187,11 @@ class ttUser {
     return ($this->behalfUser ? $this->behalfUser->quota_percent : $this->quota_percent);
   }
 
+  // getEmail returns email for active user.
+  function getEmail() {
+    return ($this->behalfUser ? $this->behalfUser->email : $this->email);
+  }
+
   // The getGroup returns group id on behalf of which the current user is operating.
   function getGroup() {
     return ($this->behalfGroup ? $this->behalfGroup->id : $this->group_id);

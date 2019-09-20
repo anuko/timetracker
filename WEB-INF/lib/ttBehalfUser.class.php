@@ -33,18 +33,18 @@ import('ttGroupHelper');
 // An instance in kept in ttUser class when user is working on behalf of someone.
 class ttBehalfUser {
   // Work in progress, build on when need arises.
-  // Currently, we need it for quota_percent work (and perhaps in profile_edit.php).
   var $name = null;             // User name.
   var $id = null;               // User id.
   var $quota_percent = 100.0;   // Time quota percent for quotas plugin.
+  var $email = null;            // User email.
 
   // Constructor.
-  // Note: org_id isneeded because we may construct an object in
+  // Note: org_id is needed because we may construct an object in
   // ttUser constructor, when global $user object does not yet exist.
   function __construct($id, $org_id) {
     $mdb2 = getConnection();
 
-    $sql = "select u.name, u.id, u.quota_percent".
+    $sql = "select u.name, u.id, u.quota_percent, u.email".
       " from tt_users u".
       " where u.id = $id and u.org_id = $org_id and u.status = 1";
 
@@ -56,6 +56,7 @@ class ttBehalfUser {
       $this->name = $val['name'];
       $this->id = $val['id'];
       if ($val['quota_percent']) $this->quota_percent = $val['quota_percent'];
+      $this->email = $val['email'];
     }
   }
 }

@@ -66,6 +66,9 @@ if ($request->isPost()) {
   if (!ttValidString($cl_details, true)) $err->add($i18n->get('error.field'), $i18n->get('label.details'));
   if (!ttValidString($cl_budget)) $err->add($i18n->get('error.field'), $i18n->get('label.budget'));
 
+  // Ensure user email exists (required for workflow).
+  if (!$user->getEmail()) $err->add($i18n->get('error.no_email'));
+
   if ($err->no()) {
     $workHelper = new ttWorkHelper($err);
     $fields = array('subject'=>$cl_name,
