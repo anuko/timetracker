@@ -56,6 +56,7 @@ if ($request->isPost()) {
   $cl_details = trim($request->getParameter('details'));
   $cl_currency = $request->getParameter('currency');
   $cl_budget = $request->getParameter('budget');
+  $cl_payment_info = $request->getParameter('payment_info');
 } else {
   $cl_name = $offer['subject'];
   $cl_description = $offer['descr_short'];
@@ -63,6 +64,7 @@ if ($request->isPost()) {
   $currency = $offer['currency'];
   $cl_currency = array_search($currency, $currencies);
   $cl_budget = $offer['amount'];
+  $cl_payment_info = $offer['payment_info'];
 }
 
 $form = new Form('offerForm');
@@ -72,6 +74,7 @@ $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'value'=>$cl_currency));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
+$form->addInput(array('type'=>'textarea','name'=>'payment_info','style'=>'width: 250px; height: 40px;vertical-align: middle','value'=>$cl_payment_info));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()) {
@@ -80,6 +83,7 @@ if ($request->isPost()) {
   if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
   if (!ttValidString($cl_details, true)) $err->add($i18n->get('error.field'), $i18n->get('label.details'));
   if (!ttValidString($cl_budget)) $err->add($i18n->get('error.field'), $i18n->get('label.budget'));
+  if (!ttValidString($cl_payment_info)) $err->add($i18n->get('error.field'), $i18n->get('label.how_to_pay'));
 
   // Ensure user email exists (required for workflow).
   if (!$user->getEmail()) $err->add($i18n->get('error.no_email'));
@@ -92,7 +96,8 @@ if ($request->isPost()) {
         'descr_short' => $cl_description,
         'descr_long' => $cl_details,
         'currency' => $currencies[$cl_currency],
-        'amount' => $cl_budget);
+        'amount' => $cl_budget,
+        'payment_info' => $cl_payment_info);
       if ($workHelper->updateOffer($fields)) {
         header('Location: work.php');
         exit();

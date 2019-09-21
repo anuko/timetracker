@@ -24,6 +24,10 @@
           <td>{$forms.offerForm.budget.control}</td>
         </tr>
         <tr>
+          <td align = "right">{$i18n.label.how_to_pay} (*):</td>
+          <td>{$forms.offerForm.payment_info.control}  <a href="https://www.anuko.com/lp/tt_40.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+        </tr>
+        <tr>
           <td></td>
           <td>{$i18n.label.required_fields}</td>
         </tr>
