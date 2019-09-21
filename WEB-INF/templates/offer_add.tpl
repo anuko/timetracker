@@ -27,7 +27,7 @@
         </tr>
         <tr>
           <td align="right">{$i18n.label.budget} (*):</td>
-          <td>{$forms.offerForm.budget.control}</td>
+          <td>{$forms.offerForm.budget.control} <a href="https://www.anuko.com/lp/tt_41.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
         </tr>
         <tr>
           <td align = "right">{$i18n.label.how_to_pay} (*):</td>
