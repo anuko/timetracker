@@ -374,6 +374,8 @@ $i18n_key_words = array(
 'title.active_work' => 'Actief werk',
 'title.available_work' => 'Beschikbaar werk',
 'title.inactive_work' => 'Inactief werk',
+// TODO: translate the following.
+// 'title.pending_work' => 'Pending Work', // Work items pending moderator approval.
 'title.add_offer' => 'Aanbieding toevoegen',
 'title.edit_offer' => 'Aanbieding bewerken',
 'title.delete_offer' => 'Aanbieding verwijderen',

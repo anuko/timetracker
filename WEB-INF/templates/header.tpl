@@ -73,6 +73,9 @@
           <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
             <a class="mainMenu" href="admin_groups.php">{$i18n.menu.groups}</a>
             <a class="mainMenu" href="admin_options.php">{$i18n.menu.options}</a>
+    {if isTrue('REMOTE_WORK_DEBUG')}
+            <a class="mainMenu" href="admin_work.php">{$i18n.label.work}</a>
+    {/if}
           </td>
         </tr>
       </table>

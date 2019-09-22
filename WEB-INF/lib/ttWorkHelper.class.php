@@ -47,6 +47,7 @@ class ttWorkHelper {
   var $get_available_offers_uri = null; // URI to get available offers.
   var $delete_offer_uri = null;  // URI to delete offer.
   var $delete_offers_uri = null; // URI to delete multiple offers.
+  var $update_offer_uri = null;  // URI to update offer.
   var $site_id = null;           // Site id for remote work server.
   var $site_key = null;          // Site key for remote work server.
 
