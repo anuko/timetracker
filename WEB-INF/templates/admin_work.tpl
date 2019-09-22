@@ -44,7 +44,7 @@
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$offer.subject|escape}</td>
           <td>{$offer.description|escape}</td>
-          <td>{$offer.group_name|escape} ({$work_item.site_id}.{$work_item.group_id})</td>
+          <td>{$offer.group_name|escape} ({$offer.site_id}.{$offer.group_id})</td>
           <td nowrap>{$offer.currency} {$offer.amount}</td>
           <td><a href="admin_offer_edit.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
           <td><a href="admin_offer_delete.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
