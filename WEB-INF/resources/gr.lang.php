@@ -396,6 +396,7 @@ $i18n_key_words = array(
 // 'title.active_offers' => 'Active Offers', // Active offers this group makes available to other groups.
 // 'title.available_offers' => 'Available Offers', // Available offers from other organizations.
 // 'title.inactive_offers' => 'Inactive Offers', // Inactive offers for group.
+// 'title.pending_offers' => 'Pending Offers', // Offers pending moderator approval.
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.

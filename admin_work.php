@@ -39,8 +39,10 @@ if (!ttAccessAllowed('administer_site')) {
 $adminWorkHelper = new ttAdminWorkHelper($err);
 
 $pending_work = $adminWorkHelper->getPendingWork();
+$pending_offers = $adminWorkHelper->getPendingOffers();
 
 $smarty->assign('pending_work', $pending_work);
+$smarty->assign('pending_offers', $pending_offers);
 $smarty->assign('title', $i18n->get('title.work'));
 $smarty->assign('content_page_name', 'admin_work.tpl');
 $smarty->display('index.tpl');

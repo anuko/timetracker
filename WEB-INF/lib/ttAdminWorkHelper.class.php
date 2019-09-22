@@ -137,7 +137,60 @@ class ttAdminWorkHelper {
     }
   }
 
-  // getPendingWork - obtains a list of work items pending approval.
+  // getPendingOffers - obtains a list of offers pending approval.
+  function getPendingOffers() {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'user_id' => urlencode($user->id)
+    );
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->get_pending_offers_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    $pending_offers = $result_array['pending_offers'];
+    return $pending_offers;
+  }
+
+    // getPendingWork - obtains a list of work items pending approval.
   function getPendingWork() {
     global $i18n;
     global $user;

@@ -364,6 +364,7 @@ $i18n_key_words = array(
 'title.active_offers' => 'Активные предложения',
 'title.available_offers' => 'Имеющиеся предложения',
 'title.inactive_offers' => 'Неактивные предложения',
+'title.pending_offers' => 'Предложения в ожидании',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.

@@ -382,6 +382,8 @@ $i18n_key_words = array(
 'title.active_offers' => 'Actieve aanbiedingen',
 'title.available_offers' => 'Beschikbare aanbiedingen',
 'title.inactive_offers' => 'Inactieve aanbiedingen',
+// TODO: translate the following.
+// 'title.pending_offers' => 'Pending Offers', // Offers pending moderator approval.
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
