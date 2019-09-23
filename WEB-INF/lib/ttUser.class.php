@@ -52,8 +52,8 @@ class ttUser {
   var $group_name = null;       // Group name.
   var $behalf_group_name = null;// Group name, on behalf of which we are working.
   var $email = null;            // User email.
-  var $lang = null;             // Language.
-  var $decimal_mark = null;     // Decimal separator.
+  var $lang = 'en';             // Language.
+  var $decimal_mark = '.';      // Decimal separator.
   var $date_format = null;      // Date format.
   var $time_format = null;      // Time format.
   var $week_start = 0;          // Week start day.
@@ -126,8 +126,8 @@ class ttUser {
       $this->is_client = $this->client_id && !in_array('track_own_time', $this->rights);
       if ($val['quota_percent']) $this->quota_percent = $val['quota_percent'];
       $this->email = $val['email'];
-      $this->lang = $val['lang'];
-      $this->decimal_mark = $val['decimal_mark'];
+      if ($val['lang']) $this->lang = $val['lang'];
+      if ($val['decimal_mark']) $this->decimal_mark = $val['decimal_mark'];
       $this->date_format = $val['date_format'];
       $this->time_format = $val['time_format'];
       $this->week_start = $val['week_start'];
