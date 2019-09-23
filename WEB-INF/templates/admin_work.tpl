@@ -29,6 +29,8 @@
       </table>
 {/if}
 
+<div id="TableDivider"></div>
+
 {if $pending_offers}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr><td class="sectionHeaderNoBorder">{$i18n.title.pending_offers}</td></tr>
