@@ -266,6 +266,7 @@ $i18n_key_words = array(
                                     // because both work items and offers are owned by Time Tracker groups of users.
 'label.how_to_pay' => 'How to pay', // Label for the "How to pay" field on offers, which allows contractors to specify
                                     // how to pay them, for example: paypal email, check by mail to a specific address, etc.
+'label.moderator_comment' => 'Moderator comment', // Label for "Moderator comment" field that explains something.
 
 // Entity names. We use lower case (in English) because they are used in dropdowns, too.
 // They are used to associate a custom field with an entity type.
@@ -407,6 +408,7 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'inactive',
 'dropdown.delete' => 'delete',
 'dropdown.do_not_delete' => 'do not delete',
+'dropdown.pending_approval' => 'pending approval',
 'dropdown.approved' => 'approved',
 'dropdown.not_approved' => 'not approved',
 'dropdown.paid' => 'paid',

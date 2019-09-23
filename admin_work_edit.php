@@ -53,6 +53,7 @@ if ($request->isPost()) {
   $cl_details = trim($request->getParameter('details'));
   $cl_currency = $request->getParameter('currency');
   $cl_budget = $request->getParameter('budget');
+  $cl_moderator_comment = $request->getParameter('moderator_comment');
 } else {
   $cl_name = $work_item['subject'];
   $cl_description = $work_item['descr_short'];
@@ -60,6 +61,7 @@ if ($request->isPost()) {
   $currency = $work_item['currency'];
   $cl_currency = array_search($currency, $currencies);
   $cl_budget = $work_item['amount'];
+  $cl_moderator_comment = $work_item['moderator_comment'];
 }
 
 $form = new Form('workForm');
@@ -69,6 +71,9 @@ $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'value'=>$cl_currency));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
+$form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
+  'data'=>array(ACTIVE=>$i18n->get('dropdown.approved'),INACTIVE=>$i18n->get('dropdown.not_approved'))));
+$form->addInput(array('type'=>'textarea','name'=>'moderator_comment','style'=>'width: 250px; height: 80px;','value'=>$cl_moderator_comment));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()) {
@@ -77,6 +82,7 @@ if ($request->isPost()) {
   if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
   if (!ttValidString($cl_details, true)) $err->add($i18n->get('error.field'), $i18n->get('label.details'));
   if (!ttValidString($cl_budget)) $err->add($i18n->get('error.field'), $i18n->get('label.budget'));
+  if (!ttValidString($cl_moderator_comment, true)) $err->add($i18n->get('error.field'), $i18n->get('label.moderator_comment'));
 
   // Ensure user email exists (required for workflow).
   if (!$user->getEmail()) $err->add($i18n->get('error.no_email'));
@@ -100,5 +106,5 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.edit_work'));
-$smarty->assign('content_page_name', 'work_edit.tpl');
+$smarty->assign('content_page_name', 'admin_work_edit.tpl');
 $smarty->display('index.tpl');
