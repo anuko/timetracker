@@ -21,12 +21,11 @@
           <td>{$work_item.subject|escape}</td>
           <td>{$work_item.description|escape}</td>
           <td>{$work_item.group_name|escape}</td>
-          <td>{$work_item.currency} {$work_item.amount}</td>
+          <td>{$work_item.amount_with_currency}</td>
           <td><a href="work_edit.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
           <td><a href="work_delete.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
   {/foreach}
-
       </table>
 
       <table width="100%">
@@ -54,7 +53,7 @@
           <td>{$work_item.subject|escape}</td>
           <td>{$work_item.description|escape}</td>
           <td>{$work_item.group_name|escape}</td>
-          <td>{$work_item.currency} {$work_item.amount}</td>
+          <td>{$work_item.amount_with_currency}</td>
           <td></td>
           <td></td>
         </tr>
@@ -86,7 +85,7 @@
           <td>{$offer.subject|escape}</td>
           <td>{$offer.description|escape}</td>
           <td>{$offer.group_name|escape}</td>
-          <td>{$offer.currency} {$offer.amount}</td>
+          <td>{$offer.amount_with_currency}</td>
           <td><a href="offer_edit.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
           <td><a href="offer_delete.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
@@ -118,7 +117,7 @@
           <td>{$offer.subject|escape}</td>
           <td>{$offer.description|escape}</td>
           <td>{$offer.group_name|escape}</td>
-          <td>{$offer.currency} {$offer.amount}</td>
+          <td>{$offer.amount_with_currency}</td>
           <td></td>
           <td></td>
         </tr>

@@ -21,7 +21,7 @@
           <td>{$work_item.subject|escape}</td>
           <td>{$work_item.description|escape}</td>
           <td>{$work_item.group_name|escape} ({$work_item.site_id}.{$work_item.group_id})</td>
-          <td nowrap>{$work_item.currency} {$work_item.amount}</td>
+          <td nowrap>{$work_item.amount_with_currency}</td>
           <td><a href="admin_work_edit.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
           <td><a href="admin_work_delete.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
@@ -47,7 +47,7 @@
           <td>{$offer.subject|escape}</td>
           <td>{$offer.description|escape}</td>
           <td>{$offer.group_name|escape} ({$offer.site_id}.{$offer.group_id})</td>
-          <td nowrap>{$offer.currency} {$offer.amount}</td>
+          <td nowrap>{$offer.amount_with_currency}</td>
           <td><a href="admin_offer_edit.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
           <td><a href="admin_offer_delete.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
