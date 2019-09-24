@@ -413,6 +413,8 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'inactief',
 'dropdown.delete' => 'verwijderen',
 'dropdown.do_not_delete' => 'niet verwijderen',
+// TODO: translate the following.
+// 'dropdown.pending_approval' => 'pending approval',
 'dropdown.approved' => 'goedgekeurd',
 'dropdown.not_approved' => 'afgekeurd',
 'dropdown.paid' => 'betaald',

@@ -443,6 +443,7 @@ $i18n_key_words = array(
 'dropdown.delete' => 'kustuta',
 'dropdown.do_not_delete' => 'ära kustuta',
 // TODO: translate the following.
+// 'dropdown.pending_approval' => 'pending approval',
 // 'dropdown.approved' => 'approved',
 // 'dropdown.not_approved' => 'not approved',
 'dropdown.paid' => 'makstud',

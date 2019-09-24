@@ -37,9 +37,13 @@ class ttAdminWorkHelper {
   var $get_work_uri = null;      // URI to get work details.
   var $update_work_uri = null;   // URI to update work.
   var $delete_work_uri = null;   // URI to delete work.
+  var $approve_work_uri = null;    // URI to approved work.
+  var $disapprove_work_uri = null; // URI to disapprove work.
   var $get_offer_uri = null;     // URI to get offer details.
   var $update_offer_uri = null;  // URI to update offer.
   var $delete_offer_uri = null;  // URI to delete offer.
+  var $approve_offer_uri = null;    // URI to approved offer.
+  var $disapprove_offer_uri = null; // URI to disapprove offer.
   var $get_pending_work_uri = null;   // URI to get work pending approval.
   var $get_pending_offers_uri = null; // URI to get offers pending approval.
   var $site_id = null;           // Site id for remote work server.
@@ -54,9 +58,13 @@ class ttAdminWorkHelper {
     $this->get_work_uri = $this->remote_work_uri.'admin_getwork';
     $this->update_work_uri = $this->remote_work_uri.'admin_updatework';
     $this->delete_work_uri = $this->remote_work_uri.'admin_deletework';
+    $this->approve_work_uri = $this->remote_work_uri.'admin_approvework';
+    $this->disapprove_work_uri = $this->remote_work_uri.'admin_disapprovework';
     $this->get_offer_uri = $this->remote_work_uri.'admin_getoffer';
     $this->update_offer_uri = $this->remote_work_uri.'admin_updateoffer';
     $this->delete_offer_uri = $this->remote_work_uri.'admin_deleteoffer';
+    $this->approve_offer_uri = $this->remote_work_uri.'admin_approveoffer';
+    $this->disapprove_offer_uri = $this->remote_work_uri.'admin_disapproveoffer';
     $this->get_pending_work_uri = $this->remote_work_uri.'admin_getpendingwork';
     $this->get_pending_offers_uri = $this->remote_work_uri.'admin_getpendingoffers';
     $this->checkSiteRegistration();
@@ -463,5 +471,192 @@ class ttAdminWorkHelper {
 
     $offer = $result_array['offer'];
     return $offer;
+  }
+
+   // updateWork - updates a work item in remote work server.
+  function updateWork($fields) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'user_id' => urlencode($user->id),
+      'work_id' => urlencode($fields['work_id']),
+      'subject' => urlencode(base64_encode($fields['subject'])),
+      'descr_short' => urlencode(base64_encode($fields['descr_short'])),
+      'descr_long' => urlencode(base64_encode($fields['descr_long'])),
+      'currency' => urlencode($fields['currency']),
+      'amount' => urlencode($fields['amount']),
+      'moderator_comment' => urlencode(base64_encode($fields['moderator_comment'])),
+      'modified_ip' => urlencode($_SERVER['REMOTE_ADDR']),
+      'modified_by' => urlencode($user->getUser()),
+      'modified_by_name' => urlencode(base64_encode($user->getName())),
+      'modified_by_email' => urlencode(base64_encode($user->getEmail()))
+    );
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->update_work_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    return true;
+  }
+
+  // approveWork - approves work item in remote work server.
+  function approveWork($work_id) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'user_id' => urlencode($user->id),
+      'work_id' => urlencode($fields['work_id']),
+      'subject' => urlencode(base64_encode($fields['subject'])),
+      'descr_short' => urlencode(base64_encode($fields['descr_short'])),
+      'descr_long' => urlencode(base64_encode($fields['descr_long'])),
+      'currency' => urlencode($fields['currency']),
+      'amount' => urlencode($fields['amount']),
+      'moderator_comment' => urlencode(base64_encode($fields['moderator_comment'])),
+      'modified_ip' => urlencode($_SERVER['REMOTE_ADDR']),
+      'modified_by' => urlencode($user->getUser()),
+      'modified_by_name' => urlencode(base64_encode($user->getName())),
+      'modified_by_email' => urlencode(base64_encode($user->getEmail())));
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->approve_work_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    return true;
+  }
+
+  // disapproveWork - disapproves work item in remote work server.
+  function disapproveWork($work_id) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'user_id' => urlencode($user->id),
+      'work_id' => urlencode($fields['work_id']),
+      'subject' => urlencode(base64_encode($fields['subject'])),
+      'descr_short' => urlencode(base64_encode($fields['descr_short'])),
+      'descr_long' => urlencode(base64_encode($fields['descr_long'])),
+      'currency' => urlencode($fields['currency']),
+      'amount' => urlencode($fields['amount']),
+      'moderator_comment' => urlencode(base64_encode($fields['moderator_comment'])),
+      'modified_ip' => urlencode($_SERVER['REMOTE_ADDR']),
+      'modified_by' => urlencode($user->getUser()),
+      'modified_by_name' => urlencode(base64_encode($user->getName())),
+      'modified_by_email' => urlencode(base64_encode($user->getEmail())));
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->disapprove_work_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    return true;
   }
 }
