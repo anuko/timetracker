@@ -599,7 +599,7 @@ class ttAdminWorkHelper {
   }
 
   // disapproveWork - disapproves work item in remote work server.
-  function disapproveWork($work_id) {
+  function disapproveWork($fields) {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
