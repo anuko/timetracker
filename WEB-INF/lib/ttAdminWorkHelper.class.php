@@ -537,7 +537,7 @@ class ttAdminWorkHelper {
   }
 
   // approveWork - approves work item in remote work server.
-  function approveWork($work_id) {
+  function approveWork($fields) {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
