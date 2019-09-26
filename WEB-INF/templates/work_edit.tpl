@@ -30,6 +30,14 @@
           <td>{$forms.workForm.budget.control} <a href="https://www.anuko.com/lp/tt_41.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
         </tr>
         <tr>
+          <td align = "right">{$i18n.label.status}:</td>
+          <td>{$forms.workForm.status.control}</td>
+        </tr>
+        <tr>
+          <td align = "right">{$i18n.label.moderator_comment}:</td>
+          <td>{$forms.workForm.moderator_comment.control}</td>
+        </tr>
+        <tr>
           <td></td>
           <td>{$i18n.label.required_fields}</td>
         </tr>

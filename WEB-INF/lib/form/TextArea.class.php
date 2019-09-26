@@ -57,7 +57,7 @@ class TextArea extends FormElement {
 		if ($this->mOnKeyPress) {
 			$html .= " onkeypress=\"$this->mOnKeyPress\"";
 		}
-			
+                if(!$this->isEnabled()) $html .= " readonly";
 		$html .= ">".htmlspecialchars($this->getValue())."</textarea>";
 		
 		return $html;
