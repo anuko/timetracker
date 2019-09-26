@@ -902,6 +902,7 @@ class ttAdminWorkHelper {
       return false;
     }
 
-    return $result_array; // Also contains 'call_status' element, probably okay to pass it to caller with useful payload.
+    unset($result_array['call_status']); // Remove call_status element.
+    return $result_array;
   }
 }
