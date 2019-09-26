@@ -567,7 +567,9 @@ class ttTimeHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $sql = "update tt_log set status = null".
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
+
+    $sql = "update tt_log set status = null".$modified_part.
       " where id = $id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))

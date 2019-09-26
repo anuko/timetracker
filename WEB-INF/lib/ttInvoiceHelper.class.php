@@ -199,6 +199,8 @@ class ttInvoiceHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
+
     // Handle custom field log records.
     if ($delete_invoice_items) {
       $sql = "update tt_custom_field_log set status = null".
@@ -210,10 +212,10 @@ class ttInvoiceHelper {
 
     // Handle time records.
     if ($delete_invoice_items) {
-      $sql = "update tt_log set status = null".
+      $sql = "update tt_log set status = null".$modified_part.
         " where invoice_id = $invoice_id and group_id = $group_id and org_id = $org_id";
     } else {
-      $sql = "update tt_log set invoice_id = null".
+      $sql = "update tt_log set invoice_id = null".$modified_part.
         " where invoice_id = $invoice_id and group_id = $group_id and org_id = $org_id";
     }
     $affected = $mdb2->exec($sql);
@@ -221,10 +223,10 @@ class ttInvoiceHelper {
 
     // Handle expense items.
     if ($delete_invoice_items) {
-      $sql = "update tt_expense_items set status = null".
+      $sql = "update tt_expense_items set status = null".$modified_part.
         " where invoice_id = $invoice_id and group_id = $group_id and org_id = $org_id";
     } else {
-      $sql = "update tt_expense_items set invoice_id = null".
+      $sql = "update tt_expense_items set invoice_id = null".$modified_part.
         " where invoice_id = $invoice_id and group_id = $group_id and org_id = $org_id";
     }
     $affected = $mdb2->exec($sql);
