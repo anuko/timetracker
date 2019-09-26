@@ -46,7 +46,7 @@ class ttAdminWorkHelper {
   var $disapprove_offer_uri = null; // URI to disapprove offer.
   var $get_pending_work_uri = null;   // URI to get work pending approval.
   var $get_pending_offers_uri = null; // URI to get offers pending approval.
-  var $get_admin_items_uri = null;    // URI to get all admin items in one API call.
+  var $get_items_uri = null;     // URI to get all admin items in one API call.
   var $site_id = null;           // Site id for remote work server.
   var $site_key = null;          // Site key for remote work server.
 
@@ -68,7 +68,7 @@ class ttAdminWorkHelper {
     $this->disapprove_offer_uri = $this->remote_work_uri.'admin_disapproveoffer';
     $this->get_pending_work_uri = $this->remote_work_uri.'admin_getpendingwork';
     $this->get_pending_offers_uri = $this->remote_work_uri.'admin_getpendingoffers';
-    $this->get_admin_items_uri = $this->remote_work_uri.'admin_getitems';
+    $this->get_items_uri = $this->remote_work_uri.'admin_getitems';
     $this->checkSiteRegistration();
   }
 
@@ -850,8 +850,8 @@ class ttAdminWorkHelper {
     return true;
   }
 
-  // getAdminItems - obtains a list of all items relevant to admin in one API call to Remote Work Server.
-  function getAdminItems() {
+  // getItems - obtains a list of all items relevant to admin in one API call to Remote Work Server.
+  function getItems() {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -873,7 +873,7 @@ class ttAdminWorkHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->get_admin_items_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->get_items_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

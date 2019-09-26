@@ -38,7 +38,7 @@ if (!ttAccessAllowed('administer_site')) {
 
 $adminWorkHelper = new ttAdminWorkHelper($err);
 
-$adminItems = $adminWorkHelper->getAdminItems();
+$adminItems = $adminWorkHelper->getItems();
 $pending_work = $adminItems['pending_work'];
 $pending_offers = $adminItems['pending_offers'];
 $available_work = $adminItems['available_work'];
