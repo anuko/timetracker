@@ -41,20 +41,19 @@ if (!$user->isPluginEnabled('wk')) {
 // End of access checks.
 
 $workHelper = new ttWorkHelper($err);
-
+$groupItems = $workHelper->getGroupItems(); // All group items.
 if($user->can('manage_work')) {
-  $active_work = $workHelper->getActiveWork(); // Active work items this group is outsourcing.
-  $available_offers = $workHelper->getAvailableOffers(); // Available offers from other organizations.
+  $active_work = $groupItems['active_work']; // Active work items this group is outsourcing.
+  $available_offers = $groupItems['available_offers']; // Available offers from other organizations.
 }
 if($user->can('bid_on_work')) {
-  $available_work = $workHelper->getAvailableWork(); // Currently available work items from other orgs.
-  $active_offers = $workHelper->getActiveOffers(); // Active offers this group makes available to other groups.
+  $available_work = $groupItems['available_work']; // Currently available work items from other orgs.
+  $active_offers = $groupItems['active_offers']; // Active offers this group makes available to other groups.
 }
 if($user->can('update_work')) {
   // $in_progress_work = ttWorkHelper::getInProgressWork(); // Work items in progress for other groups.
   // $completed_work = ttWorkHelper::getCompletedWork(); // Completed work items for other groups.
 }
-// $available_offers = ttWorkHelper::getAvailableOffers(); // Currently available offers to do work.
 // TODO: review access rights for the code above.
 
 $smarty->assign('active_work', $active_work);

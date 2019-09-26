@@ -45,6 +45,7 @@ class ttWorkHelper {
   var $get_offer_uri = null;     // URI to get offer details.
   var $get_active_offers_uri = null;    // URI to get active offers.
   var $get_available_offers_uri = null; // URI to get available offers.
+  var $get_group_items_uri = null;      // URI to get all group items in one API call.
   var $delete_offer_uri = null;  // URI to delete offer.
   var $delete_offers_uri = null; // URI to delete multiple offers.
   var $update_offer_uri = null;  // URI to update offer.
@@ -73,6 +74,7 @@ class ttWorkHelper {
     $this->get_offer_uri = $this->remote_work_uri.'getoffer';
     $this->get_active_offers_uri = $this->remote_work_uri.'getactiveoffers';
     $this->get_available_offers_uri = $this->remote_work_uri.'getavailableoffers';
+    $this->get_group_items_uri = $this->remote_work_uri.'getgroupitems';
     $this->delete_offer_uri = $this->remote_work_uri.'deleteoffer';
     $this->update_offer_uri = $this->remote_work_uri.'updateoffer';
     $this->checkSiteRegistration();
@@ -928,5 +930,63 @@ class ttWorkHelper {
       $result[] = $val['name'];
     }
     return $result;
+  }
+
+  // getGroupItems - obtains a list of all items relevant to group in one API call to Remote Work Server.
+  function getGroupItems() {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id),
+      'org_key' => urlencode($user->getOrgKey()),
+      'group_id' => urlencode($group_id),
+      'group_key' => urlencode($user->getGroupKey())
+    );
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->get_group_items_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    return $result_array; // Also contains 'call_status' element, probably okay to pass it to caller with useful payload.
   }
 }
