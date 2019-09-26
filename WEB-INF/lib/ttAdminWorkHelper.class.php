@@ -46,6 +46,7 @@ class ttAdminWorkHelper {
   var $disapprove_offer_uri = null; // URI to disapprove offer.
   var $get_pending_work_uri = null;   // URI to get work pending approval.
   var $get_pending_offers_uri = null; // URI to get offers pending approval.
+  var $get_admin_items_uri = null;    // URI to get all admin items in one API call.
   var $site_id = null;           // Site id for remote work server.
   var $site_key = null;          // Site key for remote work server.
 
@@ -67,6 +68,7 @@ class ttAdminWorkHelper {
     $this->disapprove_offer_uri = $this->remote_work_uri.'admin_disapproveoffer';
     $this->get_pending_work_uri = $this->remote_work_uri.'admin_getpendingwork';
     $this->get_pending_offers_uri = $this->remote_work_uri.'admin_getpendingoffers';
+    $this->get_admin_items_uri = $this->remote_work_uri.'admin_getitems';
     $this->checkSiteRegistration();
   }
 
@@ -846,5 +848,60 @@ class ttAdminWorkHelper {
     }
 
     return true;
+  }
+
+  // getAdminItems - obtains a list of all items relevant to admin in one API call to Remote Work Server.
+  function getAdminItems() {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'user_id' => urlencode($user->id)
+    );
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->get_admin_items_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    return $result_array; // Also contains 'call_status' element, probably okay to pass it to caller with useful payload.
   }
 }
