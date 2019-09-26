@@ -94,7 +94,7 @@
           <td></td>
           <td></td>
         </tr>
-  {foreach $active_offers as $offer}
+  {foreach $available_offers as $offer}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$offer.subject|escape}</td>
           <td>{$offer.description|escape}</td>
