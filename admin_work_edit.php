@@ -27,6 +27,7 @@
 // +----------------------------------------------------------------------+
 
 require_once('initialize.php');
+require 'plugins/work_constants.php';
 import('form.Form');
 import('ttWorkHelper');
 import('ttAdminWorkHelper');
@@ -45,10 +46,6 @@ if (!$work_item) {
 }
 // End of access checks.
 
-// Status definitions.
-define("STATUS_PENDING_APPROVAL", 4);
-define("STATUS_DISAPPROVED", 8);
-define("STATUS_APPROVED", 12);
 
 $existingStatus = $work_item['status'];
 $currencies = ttWorkHelper::getCurrencies();
