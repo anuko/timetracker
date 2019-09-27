@@ -144,7 +144,7 @@ input[type=checkbox], label {
   background-color: #efefef;
 }
 
-div#TableDivider { height: 30px; }
+div.table-divider { height: 30px; }
 
 div#LoginAboutText { width: 400px; }
 
