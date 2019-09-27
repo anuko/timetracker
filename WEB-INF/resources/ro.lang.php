@@ -422,6 +422,7 @@ $i18n_key_words = array(
 // 'title.inactive_work' => 'Inactive Work', // Inactive work items this group was outsourcing to other groups.
 // 'title.pending_work' => 'Pending Work', // Work items pending moderator approval.
 // 'title.add_offer' => 'Adding Offer',
+// 'title.offer' => 'Offer',
 // 'title.edit_offer' => 'Editing Offer',
 // 'title.delete_offer' => 'Deleting Offer',
 // 'title.active_offers' => 'Active Offers', // Active offers this group makes available to other groups.

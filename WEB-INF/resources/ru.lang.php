@@ -359,6 +359,7 @@ $i18n_key_words = array(
 'title.available_work' => 'Имеющаяся работа',
 'title.inactive_work' => 'Неактивная работа',
 'title.pending_work' => 'Работа в ожидании',
+'title.offer' => 'Предложение',
 'title.add_offer' => 'Добавление предложения',
 'title.edit_offer' => 'Редактирование предложения',
 'title.delete_offer' => 'Удаление предложения',

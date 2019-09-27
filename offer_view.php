@@ -35,31 +35,31 @@ if (!$user->isPluginEnabled('wk')) {
   header('Location: feature_disabled.php');
   exit();
 }
-if (!ttAccessAllowed('bid_on_work')) {
+if (!ttAccessAllowed('manage_work')) {
   header('Location: access_denied.php');
   exit();
 }
-$cl_work_id = (int)$request->getParameter('id');
+$cl_offer_id = (int)$request->getParameter('id');
 $workHelper = new ttWorkHelper($err);
-$work_item = $workHelper->getAvailableWorkItem($cl_work_id);
-if (!$work_item) {
+$offer = $workHelper->getAvailableOffer($cl_offer_id);
+if (!$offer) {
   header('Location: access_denied.php');
   exit();
 }
 // End of access checks.
 
-$cl_client = $work_item['group_name'];
-$cl_name = $work_item['subject'];
-$cl_description = $work_item['descr_short'];
-$cl_details = $work_item['descr_long'];
-$cl_budget = $work_item['amount_with_currency'];
+$cl_contractor = $offer['group_name'];
+$cl_name = $offer['subject'];
+$cl_description = $offer['descr_short'];
+$cl_details = $offer['descr_long'];
+$cl_budget = $offer['amount_with_currency'];
 
-$form = new Form('workForm');
-$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_work_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'client','style'=>'width: 250px;','value'=>$cl_client));
-$form->getElement('client')->setEnabled(false);
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'work_name','style'=>'width: 250px;','value'=>$cl_name));
-$form->getElement('work_name')->setEnabled(false);
+$form = new Form('offerForm');
+$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_offer_id));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'contractor','style'=>'width: 250px;','value'=>$cl_contractor));
+$form->getElement('contractor')->setEnabled(false);
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'offer_name','style'=>'width: 250px;','value'=>$cl_name));
+$form->getElement('offer_name')->setEnabled(false);
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 $form->getElement('description')->setEnabled(false);
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
@@ -68,6 +68,6 @@ $form->addInput(array('type'=>'text','name'=>'budget','value'=>$cl_budget));
 $form->getElement('budget')->setEnabled(false);
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->get('title.work'));
-$smarty->assign('content_page_name', 'work_view.tpl');
+$smarty->assign('title', $i18n->get('title.offer'));
+$smarty->assign('content_page_name', 'offer_view.tpl');
 $smarty->display('index.tpl');

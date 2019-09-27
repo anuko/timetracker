@@ -108,7 +108,7 @@
         </tr>
   {foreach $available_offers as $offer}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
-          <td>{$offer.subject|escape}</td>
+          <td><a href="offer_view.php?id={$offer.id}">{$offer.subject|escape}</a></td>
           <td>{$offer.description|escape}</td>
           <td>{$offer.group_name|escape}</td>
           <td nowrap>{$offer.amount_with_currency}</td>
