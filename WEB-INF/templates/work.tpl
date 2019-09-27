@@ -21,7 +21,7 @@
           <td>{$work_item.subject|escape}</td>
           <td>{$work_item.description|escape}</td>
           <td>{$work_item.status_label}</td>
-          <td>{$work_item.amount_with_currency}</td>
+          <td nowrap>{$work_item.amount_with_currency}</td>
           <td><a href="work_edit.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
           <td><a href="work_delete.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
@@ -45,17 +45,13 @@
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.client}</td>
           <td class="tableHeader">{$i18n.label.budget}</td>
-          <td></td>
-          <td></td>
         </tr>
   {foreach $available_work as $work_item}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$work_item.subject|escape}</td>
           <td>{$work_item.description|escape}</td>
           <td>{$work_item.group_name|escape}</td>
-          <td>{$work_item.amount_with_currency}</td>
-          <td></td>
-          <td></td>
+          <td nowrap>{$work_item.amount_with_currency}</td>
         </tr>
   {/foreach}
 {/if}
@@ -85,7 +81,7 @@
           <td>{$offer.subject|escape}</td>
           <td>{$offer.description|escape}</td>
           <td>{$offer.status_label}</td>
-          <td>{$offer.amount_with_currency}</td>
+          <td nowrap>{$offer.amount_with_currency}</td>
           <td><a href="offer_edit.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
           <td><a href="offer_delete.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
         </tr>
@@ -109,17 +105,13 @@
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.contractor}</td>
           <td class="tableHeader">{$i18n.label.budget}</td>
-          <td></td>
-          <td></td>
         </tr>
   {foreach $available_offers as $offer}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$offer.subject|escape}</td>
           <td>{$offer.description|escape}</td>
           <td>{$offer.group_name|escape}</td>
-          <td>{$offer.amount_with_currency}</td>
-          <td></td>
-          <td></td>
+          <td nowrap>{$offer.amount_with_currency}</td>
         </tr>
   {/foreach}
 {/if}

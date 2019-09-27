@@ -65,17 +65,13 @@
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.client}</td>
           <td class="tableHeader">{$i18n.label.budget}</td>
-          <td></td>
-          <td></td>
         </tr>
   {foreach $available_work as $work_item}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$work_item.subject|escape}</td>
           <td>{$work_item.description|escape}</td>
           <td>{$work_item.group_name|escape}</td>
-          <td>{$work_item.amount_with_currency}</td>
-          <td></td>
-          <td></td>
+          <td nowrap>{$work_item.amount_with_currency}</td>
         </tr>
   {/foreach}
 {/if}
@@ -91,17 +87,13 @@
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.contractor}</td>
           <td class="tableHeader">{$i18n.label.budget}</td>
-          <td></td>
-          <td></td>
         </tr>
   {foreach $available_offers as $offer}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$offer.subject|escape}</td>
           <td>{$offer.description|escape}</td>
           <td>{$offer.group_name|escape}</td>
-          <td>{$offer.amount_with_currency}</td>
-          <td></td>
-          <td></td>
+          <td nowrap>{$offer.amount_with_currency}</td>
         </tr>
   {/foreach}
 {/if}
