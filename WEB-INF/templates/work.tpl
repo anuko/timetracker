@@ -48,7 +48,7 @@
         </tr>
   {foreach $available_work as $work_item}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
-          <td>{$work_item.subject|escape}</td>
+          <td><a href="work_view.php?id={$work_item.id}">{$work_item.subject|escape}</a></td>
           <td>{$work_item.description|escape}</td>
           <td>{$work_item.group_name|escape}</td>
           <td nowrap>{$work_item.amount_with_currency}</td>
