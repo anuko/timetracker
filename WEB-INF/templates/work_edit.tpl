@@ -33,10 +33,12 @@
           <td align = "right">{$i18n.label.status}:</td>
           <td>{$forms.workForm.status.control}</td>
         </tr>
+{if $show_moderator_comment}
         <tr>
           <td align = "right">{$i18n.label.moderator_comment}:</td>
           <td>{$forms.workForm.moderator_comment.control}</td>
         </tr>
+{/if}
         <tr>
           <td></td>
           <td>{$i18n.label.required_fields}</td>

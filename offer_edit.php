@@ -65,7 +65,11 @@ if ($request->isPost()) {
   $cl_currency = array_search($currency, $currencies);
   $cl_budget = $offer['amount'];
   $cl_payment_info = $offer['payment_info'];
+  $cl_status = $offer['status_label'];
+  $cl_moderator_comment = $offer['moderator_comment'];
 }
+
+$show_moderator_comment = $cl_moderator_comment != null;
 
 $form = new Form('offerForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_offer_id));
@@ -75,6 +79,10 @@ $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250p
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'value'=>$cl_currency));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
 $form->addInput(array('type'=>'textarea','name'=>'payment_info','style'=>'width: 250px; height: 40px;vertical-align: middle','value'=>$cl_payment_info));
+$form->addInput(array('type'=>'text','name'=>'status','value'=>$cl_status));
+$form->getElement('status')->setEnabled(false);
+$form->addInput(array('type'=>'textarea','name'=>'moderator_comment','style'=>'width: 250px; height: 80px;','value'=>$cl_moderator_comment));
+$form->getElement('moderator_comment')->setEnabled(false);
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()) {
@@ -106,6 +114,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
+$smarty->assign('show_moderator_comment', $show_moderator_comment);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.edit_offer'));
 $smarty->assign('content_page_name', 'offer_edit.tpl');

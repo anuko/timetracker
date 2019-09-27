@@ -67,6 +67,8 @@ if ($request->isPost()) {
   $cl_moderator_comment = $work_item['moderator_comment'];
 }
 
+$show_moderator_comment = $cl_moderator_comment != null;
+
 $form = new Form('workForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_work_id));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'work_name','style'=>'width: 250px;','value'=>$cl_name));
@@ -107,6 +109,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
+$smarty->assign('show_moderator_comment', $show_moderator_comment);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.edit_work'));
 $smarty->assign('content_page_name', 'work_edit.tpl');

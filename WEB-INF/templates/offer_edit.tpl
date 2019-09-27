@@ -28,6 +28,16 @@
           <td>{$forms.offerForm.payment_info.control}  <a href="https://www.anuko.com/lp/tt_40.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
         </tr>
         <tr>
+          <td align = "right">{$i18n.label.status}:</td>
+          <td>{$forms.offerForm.status.control}</td>
+        </tr>
+{if $show_moderator_comment}
+        <tr>
+          <td align = "right">{$i18n.label.moderator_comment}:</td>
+          <td>{$forms.offerForm.moderator_comment.control}</td>
+        </tr>
+{/if}
+        <tr>
           <td></td>
           <td>{$i18n.label.required_fields}</td>
         </tr>
