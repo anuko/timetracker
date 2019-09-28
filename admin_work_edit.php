@@ -39,7 +39,7 @@ if (!ttAccessAllowed('administer_site')) {
 }
 $cl_work_id = (int)$request->getParameter('id');
 $adminWorkHelper = new ttAdminWorkHelper($err);
-$work_item = $adminWorkHelper->getWork($cl_work_id);
+$work_item = $adminWorkHelper->getWorkItem($cl_work_id);
 if (!$work_item) {
   header('Location: access_denied.php');
   exit();

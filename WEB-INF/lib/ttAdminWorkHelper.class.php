@@ -32,9 +32,10 @@ define('TT_CURL_SUCCESS', 1);
 // It does everything via curl calls to a Remote Work server using its API.
 class ttAdminWorkHelper {
   var $errors = null;            // Errors go here. Set in constructor by reference.
-  var $remote_work_uri = null;   // Location of remote work server.
+  var $work_server_uri = null;   // Location of remote work server.
   var $register_uri = null;      // URI to register with remote work server.
-  var $get_work_uri = null;      // URI to get work details.
+  var $get_work_item_uri = null; // URI to get work item details.
+
   var $update_work_uri = null;   // URI to update work.
   var $delete_work_uri = null;   // URI to delete work.
   var $approve_work_uri = null;    // URI to approved work.
@@ -54,21 +55,22 @@ class ttAdminWorkHelper {
   function __construct(&$errors) {
     $this->errors = &$errors;
 
-    $this->remote_work_uri = defined('REMOTE_WORK_URI') ? REMOTE_WORK_URI : "https://www.anuko.com/work/";
-    $this->register_uri = $this->remote_work_uri.'register';
-    $this->get_work_uri = $this->remote_work_uri.'admin_getwork';
-    $this->update_work_uri = $this->remote_work_uri.'admin_updatework';
-    $this->delete_work_uri = $this->remote_work_uri.'admin_deletework';
-    $this->approve_work_uri = $this->remote_work_uri.'admin_approvework';
-    $this->disapprove_work_uri = $this->remote_work_uri.'admin_disapprovework';
-    $this->get_offer_uri = $this->remote_work_uri.'admin_getoffer';
-    $this->update_offer_uri = $this->remote_work_uri.'admin_updateoffer';
-    $this->delete_offer_uri = $this->remote_work_uri.'admin_deleteoffer';
-    $this->approve_offer_uri = $this->remote_work_uri.'admin_approveoffer';
-    $this->disapprove_offer_uri = $this->remote_work_uri.'admin_disapproveoffer';
-    $this->get_pending_work_uri = $this->remote_work_uri.'admin_getpendingwork';
-    $this->get_pending_offers_uri = $this->remote_work_uri.'admin_getpendingoffers';
-    $this->get_items_uri = $this->remote_work_uri.'admin_getitems';
+    $this->work_server_uri = defined('WORK_SERVER_URI') ? WORK_SERVER_URI : "https://www.anuko.com/work/";
+    $this->register_uri = $this->work_server_uri.'register';
+    $this->get_work_item_uri = $this->work_server_uri.'admin_getworkitem';
+
+    $this->update_work_uri = $this->work_server_uri.'admin_updatework';
+    $this->delete_work_uri = $this->work_server_uri.'admin_deletework';
+    $this->approve_work_uri = $this->work_server_uri.'admin_approvework';
+    $this->disapprove_work_uri = $this->work_server_uri.'admin_disapprovework';
+    $this->get_offer_uri = $this->work_server_uri.'admin_getoffer';
+    $this->update_offer_uri = $this->work_server_uri.'admin_updateoffer';
+    $this->delete_offer_uri = $this->work_server_uri.'admin_deleteoffer';
+    $this->approve_offer_uri = $this->work_server_uri.'admin_approveoffer';
+    $this->disapprove_offer_uri = $this->work_server_uri.'admin_disapproveoffer';
+    $this->get_pending_work_uri = $this->work_server_uri.'admin_getpendingwork';
+    $this->get_pending_offers_uri = $this->work_server_uri.'admin_getpendingoffers';
+    $this->get_items_uri = $this->work_server_uri.'admin_getitems';
     $this->checkSiteRegistration();
   }
 
@@ -257,8 +259,8 @@ class ttAdminWorkHelper {
     return $pending_work;
   }
 
-  // getWork - gets work item details from remote work server.
-  function getWork($work_id) {
+  // getWorkItem - gets work item details from remote work server.
+  function getWorkItem($work_id) {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -277,7 +279,7 @@ class ttAdminWorkHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->get_work_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->get_work_item_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

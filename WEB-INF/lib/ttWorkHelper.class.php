@@ -32,7 +32,7 @@ define('TT_CURL_SUCCESS', 1);
 // It does everything via curl calls to a Remote Work server using its API.
 class ttWorkHelper {
   var $errors = null;            // Errors go here. Set in constructor by reference.
-  var $remote_work_uri = null;   // Location of remote work server.
+  var $work_server_uri = null;   // URI of work server.
   var $register_uri = null;      // URI to register with remote work server.
   var $put_work_uri = null;      // URI to publish work.
   var $get_own_work_item_uri = null;  // URI to get own work item details.
@@ -58,29 +58,29 @@ class ttWorkHelper {
   function __construct(&$errors) {
     $this->errors = &$errors;
 
-    $this->remote_work_uri = defined('REMOTE_WORK_URI') ? REMOTE_WORK_URI : "https://www.anuko.com/work/";
+    $this->work_server_uri = defined('WORK_SERVER_URI') ? WORK_SERVER_URI : "https://www.anuko.com/work/";
 
     // Note: at some point a need will arise for API versioning.
     // When this happens, we will append an API version number to the end of URI,
     // for example: register_0_1 instead of register.
     // This should theoretically allow a remote work server to be able to work with
     // a complete variety of deployed clients, including those without versions.
-    $this->register_uri = $this->remote_work_uri.'register'; // register_0_0
-    $this->put_work_uri = $this->remote_work_uri.'putwork';
-    $this->get_own_work_item_uri = $this->remote_work_uri.'getownworkitem';
-    $this->get_active_work_uri = $this->remote_work_uri.'getactivework';
-    $this->get_available_work_uri = $this->remote_work_uri.'getavailablework';
-    $this->get_available_work_item_uri = $this->remote_work_uri.'getavailableworkitem';
-    $this->delete_work_uri = $this->remote_work_uri.'deletework';
-    $this->update_work_uri = $this->remote_work_uri.'updatework';
-    $this->put_offer_uri = $this->remote_work_uri.'putoffer';
-    $this->get_own_offer_uri = $this->remote_work_uri.'getownoffer';
-    $this->get_active_offers_uri = $this->remote_work_uri.'getactiveoffers';
-    $this->get_available_offers_uri = $this->remote_work_uri.'getavailableoffers';
-    $this->get_available_offer_uri = $this->remote_work_uri.'getavailableoffer';
-    $this->get_group_items_uri = $this->remote_work_uri.'getgroupitems';
-    $this->delete_offer_uri = $this->remote_work_uri.'deleteoffer';
-    $this->update_offer_uri = $this->remote_work_uri.'updateoffer';
+    $this->register_uri = $this->work_server_uri.'register'; // register_0_0
+    $this->put_work_uri = $this->work_server_uri.'putwork';
+    $this->get_own_work_item_uri = $this->work_server_uri.'getownworkitem';
+    $this->get_active_work_uri = $this->work_server_uri.'getactivework';
+    $this->get_available_work_uri = $this->work_server_uri.'getavailablework';
+    $this->get_available_work_item_uri = $this->work_server_uri.'getavailableworkitem';
+    $this->delete_work_uri = $this->work_server_uri.'deletework';
+    $this->update_work_uri = $this->work_server_uri.'updatework';
+    $this->put_offer_uri = $this->work_server_uri.'putoffer';
+    $this->get_own_offer_uri = $this->work_server_uri.'getownoffer';
+    $this->get_active_offers_uri = $this->work_server_uri.'getactiveoffers';
+    $this->get_available_offers_uri = $this->work_server_uri.'getavailableoffers';
+    $this->get_available_offer_uri = $this->work_server_uri.'getavailableoffer';
+    $this->get_group_items_uri = $this->work_server_uri.'getgroupitems';
+    $this->delete_offer_uri = $this->work_server_uri.'deleteoffer';
+    $this->update_offer_uri = $this->work_server_uri.'updateoffer';
     $this->checkSiteRegistration();
   }
 
