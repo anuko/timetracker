@@ -56,13 +56,13 @@ $cl_budget = $offer['amount_with_currency'];
 
 $form = new Form('offerForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_offer_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'contractor','style'=>'width: 250px;','value'=>$cl_contractor));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'contractor','value'=>$cl_contractor));
 $form->getElement('contractor')->setEnabled(false);
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'offer_name','style'=>'width: 250px;','value'=>$cl_name));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'offer_name','style'=>'width: 400px;','value'=>$cl_name));
 $form->getElement('offer_name')->setEnabled(false);
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
+$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
 $form->getElement('description')->setEnabled(false);
-$form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
+$form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400px; height: 160px;','value'=>$cl_details));
 $form->getElement('details')->setEnabled(false);
 $form->addInput(array('type'=>'text','name'=>'budget','value'=>$cl_budget));
 $form->getElement('budget')->setEnabled(false);
