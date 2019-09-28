@@ -45,15 +45,13 @@ class ttWorkHelper {
   var $put_own_offer_uri = null;     // URI to publish own offer.
   var $get_own_offer_uri = null;     // URI to get own offer details.
   var $get_own_offers_uri = null;    // URI to get own offers.
-
   var $get_available_offers_uri = null; // URI to get available offers.
   var $get_available_offer_uri = null;  // URI to get a single available offer.
   var $get_group_items_uri = null;      // URI to get all group items in one API call.
-  var $delete_offer_uri = null;  // URI to delete offer.
-  var $delete_offers_uri = null; // URI to delete multiple offers.
-  var $update_offer_uri = null;  // URI to update offer.
-  var $site_id = null;           // Site id for remote work server.
-  var $site_key = null;          // Site key for remote work server.
+  var $delete_own_offer_uri = null; // URI to delete own offer.
+  var $update_own_offer_uri = null; // URI to update own offer.
+  var $site_id = null;              // Site id for work server.
+  var $site_key = null;             // Site key for work server.
 
   // Constructor.
   function __construct(&$errors) {
@@ -81,8 +79,8 @@ class ttWorkHelper {
     $this->get_available_offers_uri = $this->work_server_uri.'getavailableoffers';
     $this->get_available_offer_uri = $this->work_server_uri.'getavailableoffer';
     $this->get_group_items_uri = $this->work_server_uri.'getgroupitems';
-    $this->delete_offer_uri = $this->work_server_uri.'deleteoffer';
-    $this->update_offer_uri = $this->work_server_uri.'updateoffer';
+    $this->delete_own_offer_uri = $this->work_server_uri.'deleteownoffer';
+    $this->update_own_offer_uri = $this->work_server_uri.'updateownoffer';
     $this->checkSiteRegistration();
   }
 
@@ -792,8 +790,8 @@ class ttWorkHelper {
     return $offer;
   }
 
-  // updateOffer - updates an offer in remote work server.
-  function updateOffer($fields) {
+  // updateOwnOffer - updates an offer in remote work server.
+  function updateOwnOffer($fields) {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -830,7 +828,7 @@ class ttWorkHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->update_offer_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->update_own_offer_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -862,8 +860,8 @@ class ttWorkHelper {
     return true;
   }
 
-  // deleteOffer - deletes an offer from remote work server.
-  function deleteOffer($offer_id) {
+  // deleteOwnOffer - deletes an offer from remote work server.
+  function deleteOwnOffer($offer_id) {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -892,7 +890,7 @@ class ttWorkHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->delete_offer_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->delete_own_offer_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

@@ -57,7 +57,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get(
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if ($workHelper->deleteOffer($cl_offer_id)) {
+    if ($workHelper->deleteOwnOffer($cl_offer_id)) {
       header('Location: work.php');
       exit();
     }

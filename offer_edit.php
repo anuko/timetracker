@@ -106,7 +106,7 @@ if ($request->isPost()) {
         'currency' => $currencies[$cl_currency],
         'amount' => $cl_budget,
         'payment_info' => $cl_payment_info);
-      if ($workHelper->updateOffer($fields)) {
+      if ($workHelper->updateOwnOffer($fields)) {
         header('Location: work.php');
         exit();
       }
