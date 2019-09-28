@@ -117,13 +117,13 @@ if ($request->isPost()) {
         }
       } else if ($cl_status == STATUS_DISAPPROVED) {
         // Status changed to "not approved". Disapprove work.
-        if ($adminWorkHelper->disapproveWork($fields)) {
+        if ($adminWorkHelper->disapproveWorkItem($fields)) {
           header('Location: admin_work.php');
           exit();
         }
       } else if ($cl_status == STATUS_APPROVED) {
         // Status changed to "approved". Approve work.
-        if ($adminWorkHelper->approveWork($fields)) {
+        if ($adminWorkHelper->approveWorkItem($fields)) {
           header('Location: admin_work.php');
           exit();
         }
