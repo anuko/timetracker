@@ -1008,6 +1008,12 @@ class ttWorkHelper {
       'site_id' => urlencode($this->site_id),
       'site_key' => urlencode($this->site_key),
       'org_id' => urlencode($org_id),
+      'group_id' => urlencode($group_id),
+      'group_name' => urlencode(base64_encode($user->getGroupName())),
+      'user_id' => urlencode($user->getUser()),
+      'user_name' => urlencode(base64_encode($user->getName())),
+      'user_email' => urlencode(base64_encode($user->getEmail())),
+      'user_ip' => urlencode($_SERVER['REMOTE_ADDR']),
       'work_id' => urlencode($work_id));
 
     // url-ify the data for the POST.
