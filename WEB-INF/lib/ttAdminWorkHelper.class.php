@@ -35,10 +35,10 @@ class ttAdminWorkHelper {
   var $work_server_uri = null;   // Location of remote work server.
   var $register_uri = null;      // URI to register with remote work server.
   var $get_work_item_uri = null; // URI to get work item details.
+  var $update_work_item_uri = null;  // URI to update work item.
+  var $delete_work_item_uri = null;  // URI to delete work item.
 
-  var $update_work_uri = null;   // URI to update work.
-  var $delete_work_uri = null;   // URI to delete work.
-  var $approve_work_uri = null;    // URI to approved work.
+  var $approve_work_uri = null;    // URI to approve work.
   var $disapprove_work_uri = null; // URI to disapprove work.
   var $get_offer_uri = null;     // URI to get offer details.
   var $update_offer_uri = null;  // URI to update offer.
@@ -58,9 +58,9 @@ class ttAdminWorkHelper {
     $this->work_server_uri = defined('WORK_SERVER_URI') ? WORK_SERVER_URI : "https://www.anuko.com/work/";
     $this->register_uri = $this->work_server_uri.'register';
     $this->get_work_item_uri = $this->work_server_uri.'admin_getworkitem';
+    $this->update_work_item_uri = $this->work_server_uri.'admin_updateworkitem';
+    $this->delete_work_item_uri = $this->work_server_uri.'admin_deleteworkitem';
 
-    $this->update_work_uri = $this->work_server_uri.'admin_updatework';
-    $this->delete_work_uri = $this->work_server_uri.'admin_deletework';
     $this->approve_work_uri = $this->work_server_uri.'admin_approvework';
     $this->disapprove_work_uri = $this->work_server_uri.'admin_disapprovework';
     $this->get_offer_uri = $this->work_server_uri.'admin_getoffer';
@@ -312,8 +312,8 @@ class ttAdminWorkHelper {
     return $work_item;
   }
 
-  // deleteWork - deletes work item from remote work server.
-  function deleteWork($work_id) {
+  // deleteWorkItem - deletes work item from remote work server.
+  function deleteWorkItem($work_id) {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -336,7 +336,7 @@ class ttAdminWorkHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->delete_work_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->delete_work_item_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -477,8 +477,8 @@ class ttAdminWorkHelper {
     return $offer;
   }
 
-  // updateWork - updates a work item in remote work server.
-  function updateWork($fields) {
+  // updateWorkItem - updates a work item in remote work server.
+  function updateWorkItem($fields) {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -508,7 +508,7 @@ class ttAdminWorkHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->update_work_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->update_work_item_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

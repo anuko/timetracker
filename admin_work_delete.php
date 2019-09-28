@@ -37,7 +37,7 @@ if (!ttAccessAllowed('administer_site')) {
 }
 $cl_work_id = (int)$request->getParameter('id');
 $adminWorkHelper = new ttAdminWorkHelper($err);
-$work_item = $adminWorkHelper->getWork($cl_work_id);
+$work_item = $adminWorkHelper->getWorkItem($cl_work_id);
 if (!$work_item) {
   header('Location: access_denied.php');
   exit();
@@ -53,7 +53,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->get(
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
-    if ($adminWorkHelper->deleteWork($cl_work_id)) {
+    if ($adminWorkHelper->deleteWorkItem($cl_work_id)) {
       header('Location: admin_work.php');
       exit();
     }

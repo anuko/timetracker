@@ -71,9 +71,9 @@ if ($request->isPost()) {
 
 $form = new Form('workForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_work_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'work_name','style'=>'width: 250px;','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
-$form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'work_name','style'=>'width: 400px;','value'=>$cl_name));
+$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
+$form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400px; height: 200px;','value'=>$cl_details));
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'value'=>$cl_currency));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
 
@@ -84,7 +84,7 @@ $status_options[STATUS_DISAPPROVED] = $i18n->get('dropdown.not_approved');
 $status_options[STATUS_APPROVED] = $i18n->get('dropdown.approved');
 
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,'data'=>$status_options));
-$form->addInput(array('type'=>'textarea','name'=>'moderator_comment','style'=>'width: 250px; height: 80px;','value'=>$cl_moderator_comment));
+$form->addInput(array('type'=>'textarea','name'=>'moderator_comment','style'=>'width: 400px; height: 80px;','value'=>$cl_moderator_comment));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()) {
@@ -111,7 +111,7 @@ if ($request->isPost()) {
       // Do things differently, depending on status control value.
       if ($existingStatus == $cl_status) {
         // Status not changed. Update work information.
-        if ($adminWorkHelper->updateWork($fields)) {
+        if ($adminWorkHelper->updateWorkItem($fields)) {
           header('Location: admin_work.php');
           exit();
         }
