@@ -41,7 +41,7 @@ if (!$user->isPluginEnabled('wk')) {
 }
 $cl_offer_id = (int)$request->getParameter('id');
 $workHelper = new ttWorkHelper($err);
-$offer = $workHelper->getOffer($cl_offer_id);
+$offer = $workHelper->getOwnOffer($cl_offer_id);
 if (!$offer) {
   header('Location: access_denied.php');
   exit();

@@ -41,7 +41,7 @@ if (!$user->isPluginEnabled('wk')) {
 }
 $cl_work_id = (int)$request->getParameter('id');
 $workHelper = new ttWorkHelper($err);
-$work_item = $workHelper->getWork($cl_work_id);
+$work_item = $workHelper->getOwnWorkItem($cl_work_id);
 if (!$work_item) {
   header('Location: access_denied.php');
   exit();

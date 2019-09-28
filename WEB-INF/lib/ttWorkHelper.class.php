@@ -35,7 +35,7 @@ class ttWorkHelper {
   var $remote_work_uri = null;   // Location of remote work server.
   var $register_uri = null;      // URI to register with remote work server.
   var $put_work_uri = null;      // URI to publish work.
-  var $get_work_uri = null;      // URI to get work details.
+  var $get_own_work_item_uri = null;  // URI to get own work item details.
   var $get_active_work_uri = null;    // URI to get active work for group.
   var $get_available_work_uri = null; // URI to get available work for group.
   var $get_available_work_item_uri = null; // URI to get a single available work item.
@@ -43,7 +43,7 @@ class ttWorkHelper {
   // TODO: design how (and what) to delete when a group is deleted.
   var $update_work_uri = null;  // URI to update work.
   var $put_offer_uri = null;     // URI to publish offer.
-  var $get_offer_uri = null;     // URI to get offer details.
+  var $get_own_offer_uri = null;        // URI to get own offer details.
   var $get_active_offers_uri = null;    // URI to get active offers.
   var $get_available_offers_uri = null; // URI to get available offers.
   var $get_available_offer_uri = null;  // URI to get a single available offer.
@@ -67,14 +67,14 @@ class ttWorkHelper {
     // a complete variety of deployed clients, including those without versions.
     $this->register_uri = $this->remote_work_uri.'register'; // register_0_0
     $this->put_work_uri = $this->remote_work_uri.'putwork';
-    $this->get_work_uri = $this->remote_work_uri.'getwork';
+    $this->get_own_work_item_uri = $this->remote_work_uri.'getownworkitem';
     $this->get_active_work_uri = $this->remote_work_uri.'getactivework';
     $this->get_available_work_uri = $this->remote_work_uri.'getavailablework';
     $this->get_available_work_item_uri = $this->remote_work_uri.'getavailableworkitem';
     $this->delete_work_uri = $this->remote_work_uri.'deletework';
     $this->update_work_uri = $this->remote_work_uri.'updatework';
     $this->put_offer_uri = $this->remote_work_uri.'putoffer';
-    $this->get_offer_uri = $this->remote_work_uri.'getoffer';
+    $this->get_own_offer_uri = $this->remote_work_uri.'getownoffer';
     $this->get_active_offers_uri = $this->remote_work_uri.'getactiveoffers';
     $this->get_available_offers_uri = $this->remote_work_uri.'getavailableoffers';
     $this->get_available_offer_uri = $this->remote_work_uri.'getavailableoffer';
@@ -427,8 +427,8 @@ class ttWorkHelper {
     return $available_work;
   }
 
-  // getWork - gets work item details from remote work server.
-  function getWork($work_id) {
+  // getOwnWorkItem - gets work item details from remote work server.
+  function getOwnWorkItem($work_id) {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -453,7 +453,7 @@ class ttWorkHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->get_work_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->get_own_work_item_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -731,8 +731,8 @@ class ttWorkHelper {
     return $available_offers;
   }
 
-  // getOffer - gets offer details from remote work server.
-  function getOffer($offer_id) {
+  // getOwnOffer - gets offer details from remote work server.
+  function getOwnOffer($offer_id) {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -757,7 +757,7 @@ class ttWorkHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->get_offer_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->get_own_offer_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
