@@ -32,7 +32,7 @@ define('TT_CURL_SUCCESS', 1);
 // It does everything via curl calls to a Remote Work server using its API.
 class ttAdminWorkHelper {
   var $errors = null;            // Errors go here. Set in constructor by reference.
-  var $work_server_uri = null;   // Location of remote work server.
+  var $work_server_uri = null;   // Location of work server.
   var $register_uri = null;      // URI to register with remote work server.
   var $get_work_item_uri = null; // URI to get work item details.
   var $update_work_item_uri = null;  // URI to update work item.

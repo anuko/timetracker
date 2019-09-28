@@ -84,7 +84,7 @@ if ($request->isPost()) {
       'descr_long' => $cl_details,
       'currency' => $currencies[$cl_currency],
       'amount' => $cl_budget);
-     if ($workHelper->putWork($fields)) {
+     if ($workHelper->putWorkItem($fields)) {
         header('Location: work.php');
         exit();
     }

@@ -32,12 +32,13 @@ define('TT_CURL_SUCCESS', 1);
 // It does everything via curl calls to a Remote Work server using its API.
 class ttWorkHelper {
   var $errors = null;            // Errors go here. Set in constructor by reference.
-  var $work_server_uri = null;   // URI of work server.
+  var $work_server_uri = null;   // Location of work server.
   var $register_uri = null;      // URI to register with remote work server.
-  var $put_work_uri = null;      // URI to publish work.
+  var $put_work_item_uri = null;      // URI to publish work item.
   var $get_own_work_item_uri = null;  // URI to get own work item details.
-  var $get_active_work_uri = null;    // URI to get active work for group.
-  var $get_available_work_uri = null; // URI to get available work for group.
+  var $get_own_work_items_uri = null; // URI to get own work items for group.
+  var $get_available_work_items_uri = null; // URI to get available work items for group.
+
   var $get_available_work_item_uri = null; // URI to get a single available work item.
   var $delete_work_uri = null;   // URI to delete work.
   // TODO: design how (and what) to delete when a group is deleted.
@@ -66,10 +67,11 @@ class ttWorkHelper {
     // This should theoretically allow a remote work server to be able to work with
     // a complete variety of deployed clients, including those without versions.
     $this->register_uri = $this->work_server_uri.'register'; // register_0_0
-    $this->put_work_uri = $this->work_server_uri.'putwork';
+    $this->put_work_item_uri = $this->work_server_uri.'putworkitem';
     $this->get_own_work_item_uri = $this->work_server_uri.'getownworkitem';
-    $this->get_active_work_uri = $this->work_server_uri.'getactivework';
-    $this->get_available_work_uri = $this->work_server_uri.'getavailablework';
+    $this->get_own_work_items_uri = $this->work_server_uri.'getownworkitems';
+    $this->get_available_work_items_uri = $this->work_server_uri.'getavailableworkitems';
+
     $this->get_available_work_item_uri = $this->work_server_uri.'getavailableworkitem';
     $this->delete_work_uri = $this->work_server_uri.'deletework';
     $this->update_work_uri = $this->work_server_uri.'updatework';
@@ -163,7 +165,7 @@ class ttWorkHelper {
     }
   }
 
-  // putWork - publishes a work item in remote work server.
+  // putWorkItem - publishes a work item in remote work server.
   //
   // Note about some fields using additional base64 encoding.
   // There is a problem with data posted by curl calls on the server side for
@@ -177,7 +179,7 @@ class ttWorkHelper {
   //
   // A workaround for now is to use use an additional base64 encoding for all text fields,
   // which are decoded back to utf-8 strings on the server side.
-  function putWork($fields) {
+  function putWorkItem($fields) {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -211,7 +213,7 @@ class ttWorkHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->put_work_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->put_work_item_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -312,8 +314,8 @@ class ttWorkHelper {
     return true;
   }
 
-  // getActiveWork - obtains a list of work items this group is currently outsourcing.
-  function getActiveWork() {
+  // getOwnWorkItems - obtains a list of work items this group is currently outsourcing.
+  function getOwnWorkItems() {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -338,7 +340,7 @@ class ttWorkHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->get_active_work_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->get_own_work_items_iri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -371,8 +373,8 @@ class ttWorkHelper {
     return $active_work;
   }
 
-  // getAvailableWork - obtains a list of available work items this group can  bid on.
-  function getAvailableWork() {
+  // getAvailableWorkItems - obtains a list of available work items this group can  bid on.
+  function getAvailableWorkItems() {
     global $i18n;
     global $user;
     $mdb2 = getConnection();
@@ -394,7 +396,7 @@ class ttWorkHelper {
     $ch = curl_init();
 
     // Set the url, number of POST vars, POST data.
-    curl_setopt($ch, CURLOPT_URL, $this->get_available_work_uri);
+    curl_setopt($ch, CURLOPT_URL, $this->get_available_work_items_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
