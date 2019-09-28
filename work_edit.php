@@ -101,7 +101,7 @@ if ($request->isPost()) {
         'descr_long' => $cl_details,
         'currency' => $currencies[$cl_currency],
         'amount' => $cl_budget);
-      if ($workHelper->updateWork($fields)) {
+      if ($workHelper->updateOwnWorkItem($fields)) {
         header('Location: work.php');
         exit();
       }

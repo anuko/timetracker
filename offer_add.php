@@ -80,7 +80,7 @@ if ($request->isPost()) {
       'currency' => $currencies[$cl_currency],
       'amount' => $cl_budget,
       'payment_info' => $cl_payment_info);
-     if ($workHelper->putOffer($fields)) {
+     if ($workHelper->putOwnOffer($fields)) {
         header('Location: work.php');
         exit();
     }
