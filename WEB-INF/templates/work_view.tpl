@@ -1,3 +1,7 @@
+<script>
+  function chLocation(newLocation) { document.location = newLocation; }
+</script>
+
 {$forms.workForm.open}
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
@@ -34,3 +38,17 @@
   </tr>
 </table>
 {$forms.workForm.close}
+
+{if isTrue('WORK_DEBUG')}
+<table width="720" cellspacing="4" cellpadding="4" border="0">
+<tr>
+  <td align="center">
+  <table>
+  <tr>
+    <td><input type="button" onclick="chLocation('work_message.php');" value="{$i18n.button.send_by_email}"></td>
+  </tr>
+  </table>
+  </td>
+</tr>
+</table>
+{/if}

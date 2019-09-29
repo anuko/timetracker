@@ -636,7 +636,9 @@ $i18n_key_words = array(
 'form.display_options.menu' => 'Menu',
 'form.display_options.note_on_separate_row' => 'Notitie in aparte kolom',
 
-// Work form. See example at https://timetracker.anuko.com/work.php
-'form.work.work_items' => 'Onderdelen werk',
-'form.work.offers' => 'Aanbiedingen',
+// Work plugin strings. See example at https://timetracker.anuko.com/work.php
+// TODO: translate the following.
+// 'work.button.send_message' => 'Send message',
+// 'work.button.make_offer' => 'Make offer',
+// 'work.button.accept_offer' => 'Accept offer',
 );
