@@ -67,6 +67,7 @@ $form->getElement('details')->setEnabled(false);
 $form->addInput(array('type'=>'text','name'=>'budget','value'=>$cl_budget));
 $form->getElement('budget')->setEnabled(false);
 
+$smarty->assign('work_id', $cl_work_id);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.work'));
 $smarty->assign('content_page_name', 'work_view.tpl');

@@ -564,6 +564,7 @@ class ttWorkHelper {
       'group_id' => urlencode($group_id),
       'group_name' => urlencode(base64_encode($user->getGroupName())),
       'group_key' => urlencode($user->getGroupKey()),
+      'work_id' => urlencode($fields['work_id']),
       'subject' => urlencode(base64_encode($fields['subject'])),
       'descr_short' => urlencode(base64_encode($fields['descr_short'])),
       'descr_long' => urlencode(base64_encode($fields['descr_long'])),
@@ -931,9 +932,39 @@ class ttWorkHelper {
     if (is_a($res, 'PEAR_Error')) return false;
 
     while ($val = $res->fetchRow()) {
-      $result[] = $val['name'];
+      $result[] = array('id'=>$val['id'], 'name'=>$val['name']);
     }
     return $result;
+  }
+
+  // getCurrencyID - obtains an ID for currency.
+  static function getCurrencyID($currency) {
+    $mdb2 = getConnection();
+
+    $currency_id = null;
+    $sql = "select id from tt_work_currencies where name = ".$mdb2->quote($currency);
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) return null;
+
+    if($val = $res->fetchRow()) {
+      $currency_id = $val['id'];
+    }
+    return $currency_id;
+  }
+
+  // getCurrencyName - obtains currency name using its id.
+  static function getCurrencyName($currency_id) {
+    $mdb2 = getConnection();
+
+    $currency_name = null;
+    $sql = "select name from tt_work_currencies where id = $currency_id";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) return null;
+
+    if($val = $res->fetchRow()) {
+      $currency_name = $val['name'];
+    }
+    return $currency_name;
   }
 
   // getGroupItems - obtains a list of all items relevant to group in one API call to Remote Work Server.

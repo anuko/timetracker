@@ -7,7 +7,7 @@
     <td valign="top">
 {if $active_work}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
-        <tr><td class="sectionHeaderNoBorder">{$i18n.title.active_work}</td></tr>
+        <tr><td class="sectionHeaderNoBorder">{$i18n.work.label.our_work}</td></tr>
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.work}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
@@ -67,7 +67,7 @@
 
 {if $active_offers}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
-        <tr><td class="sectionHeaderNoBorder">{$i18n.title.active_offers}</td></tr>
+        <tr><td class="sectionHeaderNoBorder">{$i18n.work.label.our_offers}</td></tr>
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.offer}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
@@ -78,7 +78,11 @@
         </tr>
   {foreach $active_offers as $offer}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
+    {if $offer.work_id}
+          <td><a href='work_view.php?id={$offer.work_id}'>{$offer.subject|escape}</a></td>
+    {else}
           <td>{$offer.subject|escape}</td>
+    {/if}
           <td>{$offer.description|escape}</td>
           <td>{$offer.status_label}</td>
           <td nowrap>{$offer.amount_with_currency}</td>

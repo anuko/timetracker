@@ -39,26 +39,47 @@ if (!$user->isPluginEnabled('wk')) {
   header('Location: feature_disabled.php');
   exit();
 }
+// Do we have work_id?
+$cl_work_id = (int)$request->getParameter('work_id');
+if ($cl_work_id) {
+  $workHelper = new ttWorkHelper($err);
+  $work_item = $workHelper->getAvailableWorkItem($cl_work_id);
+  if (!$work_item) {
+    header('Location: access_denied.php');
+    exit(); 
+  }
+}
 // End of access checks.
+if ($work_item) $cl_name = $work_item['subject'];
 
 if ($request->isPost()) {
-  $cl_name = trim($request->getParameter('offer_name'));
+  if (!$work_item)
+    $cl_name = trim($request->getParameter('offer_name'));
   $cl_description = trim($request->getParameter('description'));
   $cl_details = trim($request->getParameter('details'));
-  $cl_currency = $request->getParameter('currency');
+  $cl_currency_id = $request->getParameter('currency');
+  if (!$cl_currency_id && $work_item) $cl_currency_id = ttWorkHelper::getCurrencyID($work_item['currency']);
   $cl_budget = $request->getParameter('budget');
   $cl_payment_info = $request->getParameter('payment_info');
+} else {
+  if ($work_item) {
+    $cl_currency_id = ttWorkHelper::getCurrencyID($work_item['currency']);
+  }
 }
 
 $form = new Form('offerForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'offer_name','style'=>'width: 250px;','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
-$form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
+$form->addInput(array('type'=>'hidden','name'=>'work_id','value'=>$cl_work_id));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'offer_name','style'=>'width: 400px;','value'=>$cl_name));
+if ($work_item) $form->getElement('offer_name')->setEnabled(false);
+
+$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
+$form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400px; height: 200px;','value'=>$cl_details));
 // Add a dropdown for currency.
 $currencies = ttWorkHelper::getCurrencies();
-$form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'value'=>$cl_currency));
+$form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
+if ($work_item) $form->getElement('currency')->setEnabled(false); // Do not allow changing currency for offers on existing work items.
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
-$form->addInput(array('type'=>'textarea','name'=>'payment_info','style'=>'width: 250px; height: 40px;vertical-align: middle','value'=>$cl_payment_info));
+$form->addInput(array('type'=>'textarea','name'=>'payment_info','style'=>'width: 400px; height: 40px;vertical-align: middle','value'=>$cl_payment_info));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
@@ -74,10 +95,11 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     $workHelper = new ttWorkHelper($err);
-    $fields = array('subject'=>$cl_name,
+    $fields = array('work_id'=>$cl_work_id,
+      'subject'=>$cl_name,
       'descr_short' => $cl_description,
       'descr_long' => $cl_details,
-      'currency' => $currencies[$cl_currency],
+      'currency' => ttWorkHelper::getCurrencyName($cl_currency_id),
       'amount' => $cl_budget,
       'payment_info' => $cl_payment_info);
      if ($workHelper->putOwnOffer($fields)) {

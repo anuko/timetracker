@@ -636,6 +636,10 @@ $i18n_key_words = array(
 'form.display_options.note_on_separate_row' => 'Note on separate row',
 
 // Work plugin strings. See example at https://timetracker.anuko.com/work.php
+'work.error.work_not_available' => 'Work item is not available.',
+'work.error.offer_not_available' => 'Offer is not available.',
+'work.label.our_work' => 'Our work',
+'work.label.our_offers' => 'Our offers',
 'work.button.send_message' => 'Send message',
 'work.button.make_offer' => 'Make offer',
 'work.button.accept_offer' => 'Accept offer',

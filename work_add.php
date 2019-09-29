@@ -45,7 +45,7 @@ if ($request->isPost()) {
   $cl_name = trim($request->getParameter('work_name'));
   $cl_description = trim($request->getParameter('description'));
   $cl_details = trim($request->getParameter('details'));
-  $cl_currency = $request->getParameter('currency');
+  $cl_currency_id = $request->getParameter('currency');
   $cl_budget = $request->getParameter('budget');
 }
 
@@ -55,7 +55,7 @@ $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
 // Add a dropdown for currency.
 $currencies = ttWorkHelper::getCurrencies();
-$form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'value'=>$cl_currency));
+$form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
@@ -82,7 +82,7 @@ if ($request->isPost()) {
     $fields = array('subject'=>$cl_name,
       'descr_short' => $cl_description,
       'descr_long' => $cl_details,
-      'currency' => $currencies[$cl_currency],
+      'currency' => ttWorkHelper::getCurrencyName($cl_currency_id),
       'amount' => $cl_budget);
      if ($workHelper->putOwnWorkItem($fields)) {
         header('Location: work.php');

@@ -54,14 +54,13 @@ if ($request->isPost()) {
   $cl_name = trim($request->getParameter('work_name'));
   $cl_description = trim($request->getParameter('description'));
   $cl_details = trim($request->getParameter('details'));
-  $cl_currency = $request->getParameter('currency');
+  $cl_currency_id = $request->getParameter('currency');
   $cl_budget = $request->getParameter('budget');
 } else {
   $cl_name = $work_item['subject'];
   $cl_description = $work_item['descr_short'];
   $cl_details = $work_item['descr_long'];
-  $currency = $work_item['currency'];
-  $cl_currency = array_search($currency, $currencies);
+  $cl_currency_id = ttWorkHelper::getCurrencyID($work_item['currency']);
   $cl_budget = $work_item['amount'];
   $cl_status = $work_item['status_label'];
   $cl_moderator_comment = $work_item['moderator_comment'];
@@ -74,7 +73,7 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_work_id));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'work_name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
-$form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'value'=>$cl_currency));
+$form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
 $form->addInput(array('type'=>'text','name'=>'status','value'=>$cl_status));
 $form->getElement('status')->setEnabled(false);
@@ -99,7 +98,7 @@ if ($request->isPost()) {
         'subject'=>$cl_name,
         'descr_short' => $cl_description,
         'descr_long' => $cl_details,
-        'currency' => $currencies[$cl_currency],
+        'currency' => ttWorkHelper::getCurrencyName($cl_currency_id),
         'amount' => $cl_budget);
       if ($workHelper->updateOwnWorkItem($fields)) {
         header('Location: work.php');

@@ -54,7 +54,7 @@ if ($request->isPost()) {
   $cl_name = trim($request->getParameter('work_name'));
   $cl_description = trim($request->getParameter('description'));
   $cl_details = trim($request->getParameter('details'));
-  $cl_currency = $request->getParameter('currency');
+  $cl_currency_id = $request->getParameter('currency');
   $cl_budget = $request->getParameter('budget');
   $cl_status = $request->getParameter('status');
   $cl_moderator_comment = $request->getParameter('moderator_comment');
@@ -63,7 +63,7 @@ if ($request->isPost()) {
   $cl_description = $work_item['descr_short'];
   $cl_details = $work_item['descr_long'];
   $currency = $work_item['currency'];
-  $cl_currency = array_search($currency, $currencies);
+  $cl_currency_id = ttWorkHelper::getCurrencyID($offer['currency']);
   $cl_budget = $work_item['amount'];
   $cl_status = $work_item['status'];
   $cl_moderator_comment = $work_item['moderator_comment'];
@@ -74,7 +74,7 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_work_id));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'work_name','style'=>'width: 400px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400px; height: 200px;','value'=>$cl_details));
-$form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'value'=>$cl_currency));
+$form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
 
 // Prepare status choices.
@@ -104,7 +104,7 @@ if ($request->isPost()) {
         'subject'=>$cl_name,
         'descr_short' => $cl_description,
         'descr_long' => $cl_details,
-        'currency' => $currencies[$cl_currency],
+        'currency' => ttWorkHelper::getCurrencyName($cl_currency_id),
         'amount' => $cl_budget,
         'moderator_comment' => $cl_moderator_comment);
 

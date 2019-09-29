@@ -48,21 +48,28 @@ if (!$offer) {
 }
 // End of access checks.
 
+// Is this offer associated with a work item?
+$work_id = $offer['work_id'];
+if ($work_id) {
+  $work_item = $workHelper->getAvailableWorkItem($work_id);
+  if (!$work_item) $err->add($i18n->get('work.error.work_not_available'));
+}
+
 $currencies = ttWorkHelper::getCurrencies();
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('offer_name'));
   $cl_description = trim($request->getParameter('description'));
   $cl_details = trim($request->getParameter('details'));
-  $cl_currency = $request->getParameter('currency');
+  $cl_currency_id = $request->getParameter('currency');
+  if (!$cl_currency_id && $work_item) $cl_currency_id = ttWorkHelper::getCurrencyID($work_item['currency']);
   $cl_budget = $request->getParameter('budget');
   $cl_payment_info = $request->getParameter('payment_info');
 } else {
   $cl_name = $offer['subject'];
   $cl_description = $offer['descr_short'];
   $cl_details = $offer['descr_long'];
-  $currency = $offer['currency'];
-  $cl_currency = array_search($currency, $currencies);
+  $cl_currency_id = ttWorkHelper::getCurrencyID($offer['currency']);
   $cl_budget = $offer['amount'];
   $cl_payment_info = $offer['payment_info'];
   $cl_status = $offer['status_label'];
@@ -73,12 +80,14 @@ $show_moderator_comment = $cl_moderator_comment != null;
 
 $form = new Form('offerForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_offer_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'offer_name','style'=>'width: 250px;','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
-$form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
-$form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'value'=>$cl_currency));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'offer_name','style'=>'width: 400px;','value'=>$cl_name));
+if ($work_id) $form->getElement('offer_name')->setEnabled(false);
+$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
+$form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400px; height: 200px;','value'=>$cl_details));
+$form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
+if ($work_id) $form->getElement('currency')->setEnabled(false);
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
-$form->addInput(array('type'=>'textarea','name'=>'payment_info','style'=>'width: 250px; height: 40px;vertical-align: middle','value'=>$cl_payment_info));
+$form->addInput(array('type'=>'textarea','name'=>'payment_info','style'=>'width: 400px; height: 40px;vertical-align: middle','value'=>$cl_payment_info));
 $form->addInput(array('type'=>'text','name'=>'status','value'=>$cl_status));
 $form->getElement('status')->setEnabled(false);
 $form->addInput(array('type'=>'textarea','name'=>'moderator_comment','style'=>'width: 250px; height: 80px;','value'=>$cl_moderator_comment));
@@ -103,7 +112,7 @@ if ($request->isPost()) {
         'subject'=>$cl_name,
         'descr_short' => $cl_description,
         'descr_long' => $cl_details,
-        'currency' => $currencies[$cl_currency],
+        'currency' => ttWorkHelper::getCurrencyName($cl_currency_id),
         'amount' => $cl_budget,
         'payment_info' => $cl_payment_info);
       if ($workHelper->updateOwnOffer($fields)) {

@@ -617,6 +617,10 @@ $i18n_key_words = array(
 'form.display_options.note_on_separate_row' => 'Комментарий в отдельном ряду',
 
 // Work plugin strings. See example at https://timetracker.anuko.com/work.php
+'work.error.work_not_available' => 'Работа отсутствует.',
+'work.error.offer_not_available' => 'Предложение отсутствует.',
+'work.label.our_work' => 'Наша работа',
+'work.label.our_offers' => 'Наши предложения',
 'work.button.send_message' => 'Отправить сообщение',
 'work.button.make_offer' => 'Сделать предложение',
 'work.button.accept_offer' => 'Принять предложение',
