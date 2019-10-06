@@ -87,8 +87,8 @@ if ($request->isPost()) {
   // Validate user input.
   if (!$cl_fav_report_id) $err->add($i18n->get('error.report'));
   if (!ttValidCronSpec($cl_cron_spec)) $err->add($i18n->get('error.field'), $i18n->get('label.schedule'));
-  if (!ttValidEmail($cl_email)) $err->add($i18n->get('error.field'), $i18n->get('label.email'));
-  if (!ttValidEmail($cl_cc, true)) $err->add($i18n->get('error.field'), $i18n->get('label.cc'));
+  if (!ttValidEmailList($cl_email)) $err->add($i18n->get('error.field'), $i18n->get('form.email'));
+  if (!ttValidEmailList($cl_cc, true)) $err->add($i18n->get('error.field'), $i18n->get('label.cc'));
   if (!ttValidString($cl_subject, true)) $err->add($i18n->get('error.field'), $i18n->get('label.subject'));
   if (!ttValidCondition($cl_report_condition)) $err->add($i18n->get('error.field'), $i18n->get('label.condition'));
 

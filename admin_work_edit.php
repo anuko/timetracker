@@ -63,7 +63,7 @@ if ($request->isPost()) {
   $cl_description = $work_item['descr_short'];
   $cl_details = $work_item['descr_long'];
   $currency = $work_item['currency'];
-  $cl_currency_id = ttWorkHelper::getCurrencyID($offer['currency']);
+  $cl_currency_id = ttWorkHelper::getCurrencyID($work_item['currency']);
   $cl_budget = $work_item['amount'];
   $cl_status = $work_item['status'];
   $cl_moderator_comment = $work_item['moderator_comment'];

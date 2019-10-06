@@ -61,6 +61,7 @@ if ($request->isPost()) {
   $cl_description = trim($request->getParameter('description'));
   $cl_details = trim($request->getParameter('details'));
   $cl_currency_id = $request->getParameter('currency');
+  if (!$cl_currency_id && $work_item) $cl_currency_id = ttWorkHelper::getCurrencyID($work_item['currency']);
   $cl_budget = $request->getParameter('budget');
   $cl_status = $request->getParameter('status');
   $cl_moderator_comment = $request->getParameter('moderator_comment');
@@ -77,10 +78,12 @@ if ($request->isPost()) {
 
 $form = new Form('offerForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_offer_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'offer_name','style'=>'width: 250px;','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
-$form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'offer_name','style'=>'width: 400px;','value'=>$cl_name));
+if ($work_id) $form->getElement('offer_name')->setEnabled(false);
+$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
+$form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400px; height: 200px;','value'=>$cl_details));
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
+if ($work_id) $form->getElement('currency')->setEnabled(false);
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
 
 // Prepare status choices.
@@ -90,7 +93,7 @@ $status_options[STATUS_DISAPPROVED] = $i18n->get('dropdown.not_approved');
 $status_options[STATUS_APPROVED] = $i18n->get('dropdown.approved');
 
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,'data'=>$status_options));
-$form->addInput(array('type'=>'textarea','name'=>'moderator_comment','style'=>'width: 250px; height: 80px;','value'=>$cl_moderator_comment));
+$form->addInput(array('type'=>'textarea','name'=>'moderator_comment','style'=>'width: 400px; height: 80px;','value'=>$cl_moderator_comment));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()) {
@@ -138,6 +141,12 @@ if ($request->isPost()) {
   }
 } // isPost
 
+if ($work_id) {
+  $smarty->assign('work_id', $work_id);
+  $smarty->assign('work_name', $work_item['subject']);
+  $smarty->assign('work_description', $work_item['descr_short']);
+  $smarty->assign('work_details', $work_item['descr_long']);
+}
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.edit_offer'));
 $smarty->assign('content_page_name', 'admin_offer_edit.tpl');

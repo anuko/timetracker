@@ -3,6 +3,23 @@
   <tr>
     <td>
       <table cellspacing="1" cellpadding="2" border="0">
+{if $work_id}
+        <tr>
+          <td align="right">{$i18n.label.work}:</td>
+          <td><a href="admin_work_edit.php?id={$work_id}">{$work_name}</a></td>
+        </tr>
+        <tr>
+          <td align = "right">{$i18n.label.description}:</td>
+          <td>{$work_description}</td>
+        </tr>
+  {if $work_details}
+        <tr>
+          <td align = "right">{$i18n.label.details}:</td>
+          <td>{$work_details}</td>
+        </tr>
+  {/if}
+        <tr><td>&nbsp;</td></tr>
+{/if}
         <tr>
           <td align="right">{$i18n.label.offer} (*):</td>
           <td>{$forms.offerForm.offer_name.control}</td>
