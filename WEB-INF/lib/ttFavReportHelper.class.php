@@ -544,6 +544,12 @@ class ttFavReportHelper {
       // TODO: add project fields here.
     }
 
+    // Adjust period_start and period_end to user date format.
+    if ($options['period_start'])
+      $options['period_start'] = ttDateToUserFormat($options['period_start']);
+    if ($options['period_end'])
+      $options['period_end'] = ttDateToUserFormat($options['period_end']);
+
     return $options;
   }
 
