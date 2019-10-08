@@ -78,7 +78,7 @@ $currencies = ttWorkHelper::getCurrencies();
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
 if ($work_item) $form->getElement('currency')->setEnabled(false); // Do not allow changing currency for offers on existing work items.
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
-$form->addInput(array('type'=>'textarea','name'=>'payment_info','style'=>'width: 400px; height: 40px;vertical-align: middle','value'=>$cl_payment_info));
+$form->addInput(array('type'=>'textarea','name'=>'payment_info','maxlength'=>'256','style'=>'width: 400px; height: 40px;vertical-align: middle','value'=>$cl_payment_info));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {

@@ -47,6 +47,10 @@
           <td>{$forms.offerForm.budget.control}</td>
         </tr>
         <tr>
+          <td align = "right">{$i18n.label.how_to_pay} (*):</td>
+          <td>{$forms.offerForm.payment_info.control}</td>
+        </tr>
+        <tr>
           <td align = "right">{$i18n.label.status}:</td>
           <td>{$forms.offerForm.status.control}</td>
         </tr>

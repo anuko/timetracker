@@ -63,6 +63,7 @@ if ($request->isPost()) {
   $cl_currency_id = $request->getParameter('currency');
   if (!$cl_currency_id && $work_item) $cl_currency_id = ttWorkHelper::getCurrencyID($work_item['currency']);
   $cl_budget = $request->getParameter('budget');
+  $cl_payment_info = $request->getParameter('payment_info');
   $cl_status = $request->getParameter('status');
   $cl_moderator_comment = $request->getParameter('moderator_comment');
 } else {
@@ -72,6 +73,7 @@ if ($request->isPost()) {
   $currency = $offer['currency'];
   $cl_currency_id = ttWorkHelper::getCurrencyID($offer['currency']);
   $cl_budget = $offer['amount'];
+  $cl_payment_info = $offer['payment_info'];
   $cl_status = $offer['status'];
   $cl_moderator_comment = $offer['moderator_comment'];
 }
@@ -85,6 +87,7 @@ $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400p
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
 if ($work_id) $form->getElement('currency')->setEnabled(false);
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
+$form->addInput(array('type'=>'textarea','name'=>'payment_info','maxlength'=>'256','style'=>'width: 400px; height: 40px;vertical-align: middle','value'=>$cl_payment_info));
 
 // Prepare status choices.
 $status_options = array();

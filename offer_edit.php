@@ -87,7 +87,7 @@ $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400p
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
 if ($work_id) $form->getElement('currency')->setEnabled(false);
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
-$form->addInput(array('type'=>'textarea','name'=>'payment_info','style'=>'width: 400px; height: 40px;vertical-align: middle','value'=>$cl_payment_info));
+$form->addInput(array('type'=>'textarea','name'=>'payment_info','maxlength'=>'256','style'=>'width: 400px; height: 40px;vertical-align: middle','value'=>$cl_payment_info));
 $form->addInput(array('type'=>'text','name'=>'status','value'=>$cl_status));
 $form->getElement('status')->setEnabled(false);
 $form->addInput(array('type'=>'textarea','name'=>'moderator_comment','style'=>'width: 250px; height: 80px;','value'=>$cl_moderator_comment));
