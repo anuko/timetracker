@@ -75,7 +75,7 @@ $form->addInput(array('type'=>'textarea','name'=>'description','maxlength'=>'512
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400px; height: 200px;','value'=>$cl_details));
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
-$form->addInput(array('type'=>'text','name'=>'status','value'=>$cl_status));
+$form->addInput(array('type'=>'text','name'=>'status','style'=>'width: 400px;','value'=>$cl_status));
 $form->getElement('status')->setEnabled(false);
 $form->addInput(array('type'=>'textarea','name'=>'moderator_comment','style'=>'width: 400px; height: 80px;','value'=>$cl_moderator_comment));
 $form->getElement('moderator_comment')->setEnabled(false);

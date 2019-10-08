@@ -64,7 +64,7 @@ if ($request->isPost()) {
   if (!$cl_currency_id && $work_item) $cl_currency_id = ttWorkHelper::getCurrencyID($work_item['currency']);
   $cl_budget = $request->getParameter('budget');
   $cl_payment_info = $request->getParameter('payment_info');
-  $cl_status = $request->getParameter('status');
+  // $cl_status = $request->getParameter('status');
   $cl_moderator_comment = $request->getParameter('moderator_comment');
 } else {
   $cl_name = $offer['subject'];
@@ -74,13 +74,18 @@ if ($request->isPost()) {
   $cl_currency_id = ttWorkHelper::getCurrencyID($offer['currency']);
   $cl_budget = $offer['amount'];
   $cl_payment_info = $offer['payment_info'];
-  $cl_status = $offer['status'];
+  $status = $offer['status'];
+  $status_label = $offer['status_label'];
   $cl_moderator_comment = $offer['moderator_comment'];
 }
 
 $form = new Form('offerForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_offer_id));
-$form->addInput(array('type'=>'text','name'=>'offer_name','maxlength'=>'128','style'=>'width: 400px;','value'=>$cl_name));
+if ($work_id) {
+  $form->addInput(array('type'=>'textarea','name'=>'work_description','style'=>'width: 400px; height: 80px;','value'=>$work_item['descr_short']));
+  $form->getElement('work_description')->setEnabled(false);
+}
+$form->addInput(array('type'=>'text','name'=>'offer_name','style'=>'width: 400px;','value'=>$cl_name));
 if ($work_id) $form->getElement('offer_name')->setEnabled(false);
 $form->addInput(array('type'=>'textarea','name'=>'description','maxlength'=>'512','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400px; height: 200px;','value'=>$cl_details));
@@ -88,16 +93,24 @@ $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,
 if ($work_id) $form->getElement('currency')->setEnabled(false);
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
 $form->addInput(array('type'=>'textarea','name'=>'payment_info','maxlength'=>'256','style'=>'width: 400px; height: 40px;vertical-align: middle','value'=>$cl_payment_info));
+$form->addInput(array('type'=>'text','name'=>'status','style'=>'width: 400px;','value'=>$status_label));
+$form->getElement('status')->setEnabled(false);
 
 // Prepare status choices.
+/*
 $status_options = array();
 $status_options[STATUS_PENDING_APPROVAL] = $i18n->get('dropdown.pending_approval');
 $status_options[STATUS_DISAPPROVED] = $i18n->get('dropdown.not_approved');
 $status_options[STATUS_APPROVED] = $i18n->get('dropdown.approved');
 
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,'data'=>$status_options));
+*/
 $form->addInput(array('type'=>'textarea','name'=>'moderator_comment','style'=>'width: 400px; height: 80px;','value'=>$cl_moderator_comment));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
+if ($status == STATUS_PENDING_APPROVAL) {
+  $form->addInput(array('type'=>'submit','name'=>'btn_approve','value'=>$i18n->get('button.approve')));
+  $form->addInput(array('type'=>'submit','name'=>'btn_disapprove','value'=>$i18n->get('button.disapprove')));
+}
 
 if ($request->isPost()) {
   // Validate user input.
@@ -110,35 +123,36 @@ if ($request->isPost()) {
   // Ensure user email exists (required for workflow).
   if (!$user->getEmail()) $err->add($i18n->get('error.no_email'));
 
-  if ($err->no()) {
-    if ($request->getParameter('btn_save')) {
-      $fields = array('offer_id'=>$cl_offer_id,
-        'subject'=>$cl_name,
-        'descr_short' => $cl_description,
-        'descr_long' => $cl_details,
-        'currency' => ttWorkHelper::getCurrencyName($cl_currency_id),
-        'amount' => $cl_budget,
-        'moderator_comment' => $cl_moderator_comment);
+  $fields = array('offer_id'=>$cl_offer_id,
+    'subject'=>$cl_name,
+    'descr_short' => $cl_description,
+    'descr_long' => $cl_details,
+    'currency' => ttWorkHelper::getCurrencyName($cl_currency_id),
+    'amount' => $cl_budget,
+    'moderator_comment' => $cl_moderator_comment);
 
-      // Do things differently, depending on status control value.
-      if ($existingStatus == $cl_status) {
-        // Status not changed. Update work information.
-        if ($adminWorkHelper->updateOffer($fields)) {
-          header('Location: admin_work.php');
-          exit();
-        }
-      } else if ($cl_status == STATUS_DISAPPROVED) {
-        // Status changed to "not approved". Disapprove work.
-        if ($adminWorkHelper->disapproveOffer($fields)) {
-          header('Location: admin_work.php');
-          exit();
-        }
-      } else if ($cl_status == STATUS_APPROVED) {
-        // Status changed to "approved". Approve work.
-        if ($adminWorkHelper->approveOffer($fields)) {
-          header('Location: admin_work.php');
-          exit();
-        }
+  if ($err->no()) {
+    if ($request->getParameter('btn_approve')) {
+      // Approve offer.
+      if ($adminWorkHelper->approveOffer($fields)) {
+        header('Location: admin_work.php');
+        exit();
+      }
+    }
+  
+    if ($request->getParameter('btn_save')) {
+      // Update offer without changing its status.
+      if ($adminWorkHelper->updateOffer($fields)) {
+        header('Location: admin_work.php');
+        exit();
+      }
+    }
+
+    if ($request->getParameter('btn_disapprove')) {
+      // Dispprove offer.
+      if ($adminWorkHelper->disapproveOffer($fields)) {
+        header('Location: admin_work.php');
+        exit();
       }
     }
   }
@@ -148,7 +162,6 @@ if ($work_id) {
   $smarty->assign('work_id', $work_id);
   $smarty->assign('work_name', $work_item['subject']);
   $smarty->assign('work_description', $work_item['descr_short']);
-  $smarty->assign('work_details', $work_item['descr_long']);
 }
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.edit_offer'));

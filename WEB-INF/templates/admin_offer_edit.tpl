@@ -10,7 +10,7 @@
         </tr>
         <tr>
           <td></td>
-          <td>{$work_description}</td>
+          <td>{$forms.offerForm.work_description.control}</td>
         </tr>
         <tr><td>&nbsp;</td></tr>
 {/if}
@@ -61,7 +61,7 @@
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="2" align="center" height="50">{$forms.offerForm.btn_save.control}</td>
+          <td colspan="2" align="center" height="50">{$forms.offerForm.btn_approve.control} {$forms.offerForm.btn_save.control} {$forms.offerForm.btn_disapprove.control} </td>
         </tr>
       </table>
     </td>

@@ -80,6 +80,10 @@ $show_moderator_comment = $cl_moderator_comment != null;
 
 $form = new Form('offerForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_offer_id));
+if ($work_id) {
+  $form->addInput(array('type'=>'textarea','name'=>'work_description','style'=>'width: 400px; height: 80px;','value'=>$work_item['descr_short']));
+  $form->getElement('work_description')->setEnabled(false);
+}
 $form->addInput(array('type'=>'text','name'=>'offer_name','maxlength'=>'128','style'=>'width: 400px;','value'=>$cl_name));
 if ($work_id) $form->getElement('offer_name')->setEnabled(false);
 $form->addInput(array('type'=>'textarea','name'=>'description','maxlength'=>'512','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
@@ -88,7 +92,7 @@ $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,
 if ($work_id) $form->getElement('currency')->setEnabled(false);
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
 $form->addInput(array('type'=>'textarea','name'=>'payment_info','maxlength'=>'256','style'=>'width: 400px; height: 40px; vertical-align: middle','value'=>$cl_payment_info));
-$form->addInput(array('type'=>'text','name'=>'status','value'=>$cl_status));
+$form->addInput(array('type'=>'text','name'=>'status','style'=>'width: 400px;','value'=>$cl_status));
 $form->getElement('status')->setEnabled(false);
 $form->addInput(array('type'=>'textarea','name'=>'moderator_comment','style'=>'width: 400px; height: 80px;','value'=>$cl_moderator_comment));
 $form->getElement('moderator_comment')->setEnabled(false);
@@ -123,6 +127,11 @@ if ($request->isPost()) {
   }
 } // isPost
 
+if ($work_id) {
+  $smarty->assign('work_id', $work_id);
+  $smarty->assign('work_name', $work_item['subject']);
+  $smarty->assign('work_description', $work_item['descr_short']);
+}
 $smarty->assign('show_moderator_comment', $show_moderator_comment);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.edit_offer'));
