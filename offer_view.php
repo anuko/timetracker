@@ -56,9 +56,9 @@ $cl_budget = $offer['amount_with_currency'];
 
 $form = new Form('offerForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_offer_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'contractor','value'=>$cl_contractor));
+$form->addInput(array('type'=>'text','name'=>'contractor','value'=>$cl_contractor));
 $form->getElement('contractor')->setEnabled(false);
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'offer_name','style'=>'width: 400px;','value'=>$cl_name));
+$form->addInput(array('type'=>'text','name'=>'offer_name','style'=>'width: 400px;','value'=>$cl_name));
 $form->getElement('offer_name')->setEnabled(false);
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
 $form->getElement('description')->setEnabled(false);

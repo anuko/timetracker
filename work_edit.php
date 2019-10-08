@@ -70,8 +70,8 @@ $show_moderator_comment = $cl_moderator_comment != null;
 
 $form = new Form('workForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_work_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'work_name','style'=>'width: 250px;','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
+$form->addInput(array('type'=>'text','name'=>'work_name','maxlength'=>'128','style'=>'width: 250px;','value'=>$cl_name));
+$form->addInput(array('type'=>'textarea','name'=>'description','maxlength'=>'512','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 250px; height: 80px;','value'=>$cl_details));
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));

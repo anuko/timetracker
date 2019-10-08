@@ -56,9 +56,9 @@ $cl_budget = $work_item['amount_with_currency'];
 
 $form = new Form('workForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_work_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'client','value'=>$cl_client));
+$form->addInput(array('type'=>'text','name'=>'client','value'=>$cl_client));
 $form->getElement('client')->setEnabled(false);
-$form->addInput(array('type'=>'textarea','maxlength'=>'100','name'=>'work_name','style'=>'width: 400px;','value'=>$cl_name));
+$form->addInput(array('type'=>'textarea','name'=>'work_name','style'=>'width: 400px;','value'=>$cl_name));
 $form->getElement('work_name')->setEnabled(false);
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
 $form->getElement('description')->setEnabled(false);

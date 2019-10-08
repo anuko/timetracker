@@ -69,10 +69,9 @@ if ($request->isPost()) {
 
 $form = new Form('offerForm');
 $form->addInput(array('type'=>'hidden','name'=>'work_id','value'=>$cl_work_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'offer_name','style'=>'width: 400px;','value'=>$cl_name));
+$form->addInput(array('type'=>'text','name'=>'offer_name','maxlength'=>'128','style'=>'width: 400px;','value'=>$cl_name));
 if ($work_item) $form->getElement('offer_name')->setEnabled(false);
-
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
+$form->addInput(array('type'=>'textarea','name'=>'description','maxlength'=>'512','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400px; height: 200px;','value'=>$cl_details));
 // Add a dropdown for currency.
 $currencies = ttWorkHelper::getCurrencies();

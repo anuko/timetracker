@@ -47,7 +47,6 @@ class TextArea extends FormElement {
 
 		if ($this->max_length!="") {
 			if ($this->mOnKeyPress) $this->mOnKeyPress .= ";";
-			$this->mOnKeyPress .= "return validateMaxLenght_".$this->name."(this, event);";
 			$html .= " maxlength=\"$this->max_length\"";
 		}
 

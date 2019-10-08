@@ -78,9 +78,9 @@ if ($request->isPost()) {
 
 $form = new Form('offerForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_offer_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'offer_name','style'=>'width: 400px;','value'=>$cl_name));
+$form->addInput(array('type'=>'text','name'=>'offer_name','maxlength'=>'128','style'=>'width: 400px;','value'=>$cl_name));
 if ($work_id) $form->getElement('offer_name')->setEnabled(false);
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
+$form->addInput(array('type'=>'textarea','name'=>'description','maxlength'=>'512','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400px; height: 200px;','value'=>$cl_details));
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
 if ($work_id) $form->getElement('currency')->setEnabled(false);
