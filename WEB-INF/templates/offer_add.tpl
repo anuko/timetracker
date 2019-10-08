@@ -3,6 +3,17 @@
   <tr>
     <td>
       <table cellspacing="1" cellpadding="2" border="0">
+{if $work_id}
+        <tr>
+          <td align="right">{$i18n.label.work}:</td>
+          <td><a href="work_view.php?id={$work_id}">{$work_name}</a></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>{$forms.offerForm.work_description.control}</td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+{/if}
         <tr>
           <td align="right">{$i18n.label.offer} (*):</td>
           <td>{$forms.offerForm.offer_name.control}</td>

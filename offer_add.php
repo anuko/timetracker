@@ -68,7 +68,11 @@ if ($request->isPost()) {
 }
 
 $form = new Form('offerForm');
-$form->addInput(array('type'=>'hidden','name'=>'work_id','value'=>$cl_work_id));
+if ($cl_work_id) {
+  $form->addInput(array('type'=>'hidden','name'=>'work_id','value'=>$cl_work_id));
+  $form->addInput(array('type'=>'textarea','name'=>'work_description','style'=>'width: 400px; height: 80px;','value'=>$work_item['descr_short']));
+  $form->getElement('work_description')->setEnabled(false);
+}
 $form->addInput(array('type'=>'text','name'=>'offer_name','maxlength'=>'128','style'=>'width: 400px;','value'=>$cl_name));
 if ($work_item) $form->getElement('offer_name')->setEnabled(false);
 $form->addInput(array('type'=>'textarea','name'=>'description','maxlength'=>'512','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
@@ -108,6 +112,11 @@ if ($request->isPost()) {
   }
 } // isPost
 
+if ($cl_work_id) {
+  $smarty->assign('work_id', $cl_work_id);
+  $smarty->assign('work_name', $work_item['subject']);
+  $smarty->assign('work_description', $work_item['descr_short']);
+}
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.offerForm.work_name.focus()"');
 $smarty->assign('title', $i18n->get('title.add_offer'));

@@ -9,15 +9,9 @@
           <td><a href="admin_work_edit.php?id={$work_id}">{$work_name}</a></td>
         </tr>
         <tr>
-          <td align = "right">{$i18n.label.description}:</td>
+          <td></td>
           <td>{$work_description}</td>
         </tr>
-  {if $work_details}
-        <tr>
-          <td align = "right">{$i18n.label.details}:</td>
-          <td>{$work_details}</td>
-        </tr>
-  {/if}
         <tr><td>&nbsp;</td></tr>
 {/if}
         <tr>

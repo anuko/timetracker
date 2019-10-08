@@ -45,7 +45,9 @@
   <td align="center">
   <table>
   <tr>
+  {if false}
     <td><input type="button" onclick="chLocation('work_message.php');" value="{$i18n.work.button.send_message}"></td>
+  {/if}
     <td><input type="button" onclick="chLocation('offer_add.php?work_id={$work_id}');" value="{$i18n.work.button.make_offer}"></td>
   </tr>
   </table>
