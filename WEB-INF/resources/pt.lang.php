@@ -697,6 +697,7 @@ $i18n_key_words = array(
 // 'work.error.offer_not_available' => 'Offer is not available.',
 // 'work.label.our_work' => 'Our work',
 // 'work.label.our_offers' => 'Our offers',
+// 'work.label.offers' => 'Offers',
 // 'work.button.send_message' => 'Send message',
 // 'work.button.make_offer' => 'Make offer',
 // 'work.button.accept_offer' => 'Accept offer',

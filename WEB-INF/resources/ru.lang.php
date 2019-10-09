@@ -621,6 +621,7 @@ $i18n_key_words = array(
 'work.error.offer_not_available' => 'Предложение отсутствует.',
 'work.label.our_work' => 'Наша работа',
 'work.label.our_offers' => 'Наши предложения',
+    'work.label.offers' => 'Предложения',
 'work.button.send_message' => 'Отправить сообщение',
 'work.button.make_offer' => 'Сделать предложение',
 'work.button.accept_offer' => 'Принять предложение',
