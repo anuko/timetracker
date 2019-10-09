@@ -95,13 +95,14 @@ $form = new Form('invoiceForm');
 // Hidden control for invoice id.
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_invoice_id));
 // invoiceForm only contains controls for "Mark paid" block below invoice table.
-if ($user->isPluginEnabled('ps')) {
+if ($user->isPluginEnabled('ps') && !$user->isClient()) {
   $mark_paid_action_options = array('1'=>$i18n->get('dropdown.paid'),'2'=>$i18n->get('dropdown.not_paid'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'mark_paid_action_options',
     'data'=>$mark_paid_action_options,
     'value'=>$cl_mark_paid_action_option));
   $form->addInput(array('type'=>'submit','name'=>'btn_mark_paid','value'=>$i18n->get('button.submit')));
+  $smarty->assign('show_mark_paid', true);
 }
 
 if ($request->isPost()) {

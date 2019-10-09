@@ -68,8 +68,8 @@
         </tr>
       </table>
 
+  {if $show_mark_paid}
   {$forms.invoiceForm.open}
-  {if $user->isPluginEnabled('ps')}
   <table width="720" cellspacing="0" cellpadding="0" border="0">
   <tr>
     <td align="right">
@@ -79,8 +79,8 @@
     </td>
   </tr>
   </table>
-  {/if}
   {$forms.invoiceForm.close}
+  {/if}
 {/if}
     </td>
   </tr>

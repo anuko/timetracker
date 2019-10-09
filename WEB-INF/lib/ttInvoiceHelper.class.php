@@ -107,8 +107,9 @@ class ttInvoiceHelper {
   // markPaid marks invoice items as paid.
   static function markPaid($invoice_id, $mark_paid = true) {
     global $user;
-    $mdb2 = getConnection();
+    if ($user->isClient()) return false; // Not for clients.
 
+    $mdb2 = getConnection();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
