@@ -49,6 +49,7 @@ if (!$work_item) {
 
 $work_item_offers = $workHelper->getOwnWorkItemOffers($work_id);
 
+$smarty->assign('work_item', $work_item);
 $smarty->assign('work_item_offers', $work_item_offers);
 $smarty->assign('title', $i18n->get('work.label.offers'));
 $smarty->assign('content_page_name', 'work_offers.tpl');
