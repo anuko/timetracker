@@ -12,6 +12,7 @@
           <td width="35%" class="tableHeader">{$i18n.label.work}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
           <td class="tableHeader">{$i18n.label.status}</td>
+          <td class="tableHeader">{$i18n.work.label.offers}</td>
           <td class="tableHeader">{$i18n.label.budget}</td>
           <td></td>
           <td></td>
@@ -21,6 +22,7 @@
           <td>{$work_item.subject|escape}</td>
           <td>{$work_item.description|escape}</td>
           <td>{$work_item.status_label}</td>
+          <td class="midAligned">{if $work_item.num_offers}{$work_item.num_offers}{/if}</td>
           <td nowrap>{$work_item.amount_with_currency}</td>
           <td><a href="work_edit.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
           <td><a href="work_delete.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>

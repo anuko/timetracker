@@ -123,6 +123,10 @@ input[type=checkbox], label {
   vertical-align: top;
 }
 
+.midAligned {
+  text-align: center;
+}
+
 .sectionHeader {
   font-weight: bold;
   border-bottom: 1px solid lightgray;
