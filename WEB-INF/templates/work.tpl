@@ -22,7 +22,7 @@
           <td>{$work_item.subject|escape}</td>
           <td>{$work_item.description|escape}</td>
           <td>{$work_item.status_label}</td>
-          <td class="midAligned">{if $work_item.num_offers}{$work_item.num_offers}{/if}</td>
+          <td class="midAligned">{if $work_item.num_offers}<a href="work_offers.php?id={$work_item.id}">{$work_item.num_offers}</a>{/if}</td>
           <td nowrap>{$work_item.amount_with_currency}</td>
           <td><a href="work_edit.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
           <td><a href="work_delete.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
