@@ -53,6 +53,12 @@ if (!$offer) {
 $work_item = $workHelper->getOwnWorkItem($offer['work_id']);
 if (!$work_item) $err->add($i18n->get('work.error.work_not_available'));
 
+if ($request->isPost()) {
+  $cl_client_comment = $request->getParameter('client_comment');
+} else {
+  $cl_client_comment = $offer['client_comment'];
+}
+
 $cl_contractor = $offer['group_name'];
 $cl_name = $offer['subject'];
 $cl_description = $offer['descr_short'];
@@ -60,7 +66,6 @@ $cl_details = $offer['descr_long'];
 $cl_budget = $offer['amount_with_currency'];
 $cl_status = $offer['status_label'];
 
-// TODO: coding ongoing down from here...
 $form = new Form('offerForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_offer_id));
 $form->addInput(array('type'=>'text','name'=>'contractor','value'=>$cl_contractor));
@@ -75,11 +80,44 @@ $form->addInput(array('type'=>'text','name'=>'budget','value'=>$cl_budget));
 $form->getElement('budget')->setEnabled(false);
 $form->addInput(array('type'=>'text','name'=>'status','style'=>'width: 400px;','value'=>$cl_status));
 $form->getElement('status')->setEnabled(false);
+$form->addInput(array('type'=>'textarea','name'=>'client_comment','style'=>'width: 400px; height: 80px;','value'=>$cl_client_comment));
 if ($offer['status'] == STATUS_APPROVED) {
   $form->addInput(array('type'=>'submit','name'=>'btn_accept','value'=>$i18n->get('work.button.accept')));
   $form->addInput(array('type'=>'submit','name'=>'btn_decline','value'=>$i18n->get('work.button.decline')));
 }
 
+if ($request->isPost()) {
+  // Validate user input.
+  if (!ttValidString($cl_client_comment)) $err->add($i18n->get('error.field'), $i18n->get('label.comment'));
+
+  // Ensure user email exists (required for workflow).
+  if (!$user->getEmail()) $err->add($i18n->get('error.no_email'));
+
+  if ($err->no()) {
+    $workHelper = new ttWorkHelper($err);
+    $fields = array('offer_id'=>$cl_offer_id,
+      'client_comment'=>$cl_client_comment);
+
+    if ($request->getParameter('btn_accept')) {
+      die ("not yet implemented... sorry");
+      // Accept offer.
+      if ($workHelper->acceptOwnWorkItemOffer($fields)) {
+        header('Location: work_offer_view.php?id='.$cl_offer_id);
+        exit();
+      }
+    }
+
+    if ($request->getParameter('btn_decline')) {
+      // Decline offer.
+      if ($workHelper->declineOwnWorkItemOffer($fields)) {
+        header('Location: work_offer_view.php?id='.$cl_offer_id);
+        exit();
+      }
+    }
+  }
+} // isPost
+
+$smarty->assign('work_item', $work_item);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.offer'));
 $smarty->assign('content_page_name', 'work_offer_view.tpl');
