@@ -624,5 +624,6 @@ $i18n_key_words = array(
     'work.label.offers' => 'Предложения',
 'work.button.send_message' => 'Отправить сообщение',
 'work.button.make_offer' => 'Сделать предложение',
-'work.button.accept_offer' => 'Принять предложение',
+'work.button.accept' => 'Принять',
+'work.button.decline' => 'Отклонить',
 );

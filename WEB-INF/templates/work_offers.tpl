@@ -26,7 +26,7 @@
         </tr>
   {foreach $work_item_offers as $offer}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
-          <td><a href='offer_view.php?id={$offer.id}'>{$offer.group_name|escape}</a></td>
+          <td><a href='work_offer_view.php?id={$offer.id}'>{$offer.group_name|escape}</a></td>
           <td>{$offer.description|escape}</td>
           <td>{$offer.status_label}</td>
           <td nowrap>{$offer.amount_with_currency}</td>

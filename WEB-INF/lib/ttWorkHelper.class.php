@@ -36,7 +36,8 @@ class ttWorkHelper {
   var $register_uri = null;      // URI to register with remote work server.
   var $put_own_work_item_uri = null;  // URI to publish own work item.
   var $get_own_work_item_uri = null;  // URI to get own work item details.
-  var $get_own_work_item_offers_uri = null;  // URI to get offers on own work item.
+  var $get_own_work_item_offer_uri = null;  // URI to get own work item offer.
+  var $get_own_work_item_offers_uri = null; // URI to get offers on own work item.
   var $get_own_work_items_uri = null; // URI to get own work items for group.
   var $get_available_work_items_uri = null; // URI to get available work items for group.
   var $get_available_work_item_uri = null;  // URI to get a single available work item.
@@ -68,6 +69,7 @@ class ttWorkHelper {
     $this->register_uri = $this->work_server_uri.'register'; // register_0_0
     $this->put_own_work_item_uri = $this->work_server_uri.'putownworkitem';
     $this->get_own_work_item_uri = $this->work_server_uri.'getownworkitem';
+    $this->get_own_work_item_offer_uri = $this->work_server_uri.'getownworkitemoffer';
     $this->get_own_work_item_offers_uri = $this->work_server_uri.'getownworkitemoffers';
     $this->get_own_work_items_uri = $this->work_server_uri.'getownworkitems';
     $this->get_available_work_items_uri = $this->work_server_uri.'getavailableworkitems';
@@ -982,6 +984,66 @@ class ttWorkHelper {
     }
 
     return true;
+  }
+
+  // getOwnWorkItemOffer - gets offer details from remote work server
+  // for an offer posted on own work item.
+  function getOwnWorkItemOffer($offer_id) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id),
+      'org_key' => urlencode($user->getOrgKey()),
+      'group_id' => urlencode($group_id),
+      'group_key' => urlencode($user->getGroupKey()),
+      'offer_id' => urlencode($offer_id));
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->get_own_work_item_offer_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    $offer = $result_array['offer'];
+    return $offer;
   }
 
   // getCurrencies - obtains a list of supported currencies.
