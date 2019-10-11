@@ -127,11 +127,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-if ($work_id) {
-  $smarty->assign('work_id', $work_id);
-  $smarty->assign('work_name', $work_item['subject']);
-  $smarty->assign('work_description', $work_item['descr_short']);
-}
+$smarty->assign('work_item', $work_item);
 $smarty->assign('show_moderator_comment', $show_moderator_comment);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.edit_offer'));

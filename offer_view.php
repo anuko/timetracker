@@ -48,6 +48,13 @@ if (!$offer) {
 }
 // End of access checks.
 
+// Is this offer associated with a work item?
+$work_id = $offer['work_id'];
+if ($work_id) {
+  $work_item = $workHelper->getAvailableWorkItem($work_id);
+  if (!$work_item) $err->add($i18n->get('work.error.work_not_available'));
+}
+
 $cl_contractor = $offer['group_name'];
 $cl_name = $offer['subject'];
 $cl_description = $offer['descr_short'];

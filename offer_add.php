@@ -112,11 +112,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-if ($cl_work_id) {
-  $smarty->assign('work_id', $cl_work_id);
-  $smarty->assign('work_name', $work_item['subject']);
-  $smarty->assign('work_description', $work_item['descr_short']);
-}
+$smarty->assign('work_item', $work_item);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.offerForm.work_name.focus()"');
 $smarty->assign('title', $i18n->get('title.add_offer'));
