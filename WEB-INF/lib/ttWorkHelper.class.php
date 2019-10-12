@@ -37,6 +37,7 @@ class ttWorkHelper {
   var $put_own_work_item_uri = null;  // URI to publish own work item.
   var $get_own_work_item_uri = null;  // URI to get own work item details.
   var $get_own_work_item_offer_uri = null;  // URI to get own work item offer.
+  var $accept_own_work_item_offer_uri = null; // URI to accept own work item offer.
   var $decline_own_work_item_offer_uri = null; // URI to decline own work item offer.
   var $get_own_work_item_offers_uri = null; // URI to get offers on own work item.
   var $get_own_work_items_uri = null; // URI to get own work items for group.
@@ -76,6 +77,7 @@ class ttWorkHelper {
     $this->get_available_work_items_uri = $this->work_server_uri.'getavailableworkitems';
     $this->get_available_work_item_uri = $this->work_server_uri.'getavailableworkitem';
     $this->delete_own_work_item_uri = $this->work_server_uri.'deleteownworkitem';
+    $this->accept_own_work_item_offer_uri = $this->work_server_uri.'acceptownworkitemoffer';
     $this->decline_own_work_item_offer_uri = $this->work_server_uri.'declineownworkitemoffer';
     $this->update_own_work_item_uri = $this->work_server_uri.'updateownworkitem';
     $this->put_own_offer_uri = $this->work_server_uri.'putownoffer';
@@ -1080,6 +1082,69 @@ class ttWorkHelper {
 
     // Set the url, number of POST vars, POST data.
     curl_setopt($ch, CURLOPT_URL, $this->decline_own_work_item_offer_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    return true;
+  }
+
+  // acceptOwnWorkItemOffer - accepts an offer posted on own work item in remote work server.
+  function acceptOwnWorkItemOffer($fields) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id),
+      'org_key' => urlencode($user->getOrgKey()),
+      'group_id' => urlencode($group_id),
+      'group_key' => urlencode($user->getGroupKey()),
+      'offer_id' => urlencode($fields['offer_id']),
+      'client_comment' => urlencode(base64_encode($fields['client_comment'])),
+      'accepted_ip' => urlencode($_SERVER['REMOTE_ADDR']),
+      'accepted_by' => urlencode($user->getUser()),
+      'accepted_by_name' => urlencode(base64_encode($user->getName())),
+      'accepted_by_email' => urlencode(base64_encode($user->getEmail())));
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->accept_own_work_item_offer_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

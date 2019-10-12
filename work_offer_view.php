@@ -99,7 +99,6 @@ if ($request->isPost()) {
       'client_comment'=>$cl_client_comment);
 
     if ($request->getParameter('btn_accept')) {
-      die ("not yet implemented... sorry");
       // Accept offer.
       if ($workHelper->acceptOwnWorkItemOffer($fields)) {
         header('Location: work_offer_view.php?id='.$cl_offer_id);
