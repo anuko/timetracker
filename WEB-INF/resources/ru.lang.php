@@ -619,6 +619,8 @@ $i18n_key_words = array(
 // Work plugin strings. See example at https://timetracker.anuko.com/work.php
 'work.error.work_not_available' => 'Работа отсутствует.',
 'work.error.offer_not_available' => 'Предложение отсутствует.',
+'work.type.one_time' => 'одноразовая',
+'work.type.ongoing' => 'постоянная',
 'work.label.our_work' => 'Наша работа',
 'work.label.our_offers' => 'Наши предложения',
     'work.label.offers' => 'Предложения',

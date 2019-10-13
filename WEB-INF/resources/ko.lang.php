@@ -714,6 +714,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'work.error.work_not_available' => 'Work item is not available.',
 // 'work.error.offer_not_available' => 'Offer is not available.',
+// 'work.type.one_time' => 'one time', // Work type is "one time job" for well defined work ("do exactly this").
+// 'work.type.ongoing' => 'ongoing',   // Work type is "ongoing" for complex jobs (billed by the hour, multiple contractors, etc.)
 // 'work.label.our_work' => 'Our work',
 // 'work.label.our_offers' => 'Our offers',
 // 'work.label.offers' => 'Offers',
