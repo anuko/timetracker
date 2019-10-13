@@ -8,6 +8,10 @@
           <td>{$forms.workForm.work_name.control}</td>
         </tr>
         <tr>
+          <td align = "right">{$i18n.label.type}:</td>
+          <td>{$forms.workForm.work_type.control}</td>
+        </tr>
+        <tr>
           <td align = "right">{$i18n.label.description}:</td>
           <td>{$forms.workForm.description.control}</td>
         </tr>

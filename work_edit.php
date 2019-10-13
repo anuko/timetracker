@@ -52,12 +52,14 @@ $currencies = ttWorkHelper::getCurrencies();
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('work_name'));
+  $cl_work_type = $request->getParameter('work_type');
   $cl_description = trim($request->getParameter('description'));
   $cl_details = trim($request->getParameter('details'));
   $cl_currency_id = $request->getParameter('currency');
   $cl_budget = $request->getParameter('budget');
 } else {
   $cl_name = $work_item['subject'];
+  $cl_work_type = $work_item['type'];
   $cl_description = $work_item['descr_short'];
   $cl_details = $work_item['descr_long'];
   $cl_currency_id = ttWorkHelper::getCurrencyID($work_item['currency']);
@@ -71,6 +73,8 @@ $show_moderator_comment = $cl_moderator_comment != null;
 $form = new Form('workForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_work_id));
 $form->addInput(array('type'=>'text','name'=>'work_name','maxlength'=>'128','style'=>'width: 400px;','value'=>$cl_name));
+$WORK_TYPE_OPTIONS = array('0'=>$i18n->get('work.type.one_time'),'1'=>$i18n->get('work.type.ongoing'));
+$form->addInput(array('type'=>'combobox','name'=>'work_type','data'=>$WORK_TYPE_OPTIONS,'value'=>$cl_work_type));
 $form->addInput(array('type'=>'textarea','name'=>'description','maxlength'=>'512','style'=>'width: 400px; height: 80px;','value'=>$cl_description));
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400px; height: 200px;','value'=>$cl_details));
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
@@ -95,6 +99,7 @@ if ($request->isPost()) {
     if ($request->getParameter('btn_save')) {
       // Update work information.
       $fields = array('work_id'=>$cl_work_id,
+        'type'=>$cl_work_type,
         'subject'=>$cl_name,
         'descr_short' => $cl_description,
         'descr_long' => $cl_details,
