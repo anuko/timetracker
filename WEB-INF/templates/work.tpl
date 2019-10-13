@@ -75,7 +75,7 @@
         </tr>
       </table>
 
-{if $active_offers}
+{if $own_offers}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr><td class="sectionHeaderNoBorder">{$i18n.work.label.our_offers}</td></tr>
         <tr>
@@ -86,7 +86,7 @@
           <td></td>
           <td></td>
         </tr>
-  {foreach $active_offers as $offer}
+  {foreach $own_offers as $offer}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
     {if $offer.work_id}
           <td><a href='work_view.php?id={$offer.work_id}'>{$offer.subject|escape}</a></td>
