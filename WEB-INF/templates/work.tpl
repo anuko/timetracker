@@ -19,7 +19,7 @@
         </tr>
   {foreach $own_work_items as $work_item}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
-          <td>{$work_item.subject|escape}</td>
+          <td><a href="work_view_own.php?id={$work_item.id}">{$work_item.subject|escape}</a></td>
           <td>{$work_item.description|escape}</td>
           <td>{$work_item.status_label}</td>
           <td class="midAligned">{if $work_item.num_offers}<a href="work_offers.php?id={$work_item.id}">{$work_item.num_offers}</a>{/if}</td>
