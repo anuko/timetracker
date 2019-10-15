@@ -45,14 +45,17 @@
           <td align = "right">{$i18n.label.status}:</td>
           <td>{$forms.offerForm.status.control}</td>
         </tr>
+{if isTrue('WORK_DEBUG')}
+        <tr><td>&nbsp;</td></tr>
         <tr>
-          <td align = "right">{$i18n.label.comment} (*):</td>
+          <td></td>
+          <td align="center" height="50">{$forms.offerForm.btn_accept.control} {$forms.offerForm.btn_decline.control}</td>
+        </tr>
+        <tr>
+          <td align = "right">{$i18n.label.comment}:</td>
           <td>{$forms.offerForm.client_comment.control}</td>
         </tr>
-{if isTrue('WORK_DEBUG')}
-        <tr>
-          <td colspan="2" align="center" height="50">{$forms.offerForm.btn_accept.control} {$forms.offerForm.btn_decline.control} </td>
-{/if}        </tr>
+{/if}
       </table>
     </td>
   </tr>

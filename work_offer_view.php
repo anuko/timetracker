@@ -80,15 +80,15 @@ $form->addInput(array('type'=>'text','name'=>'budget','value'=>$cl_budget));
 $form->getElement('budget')->setEnabled(false);
 $form->addInput(array('type'=>'text','name'=>'status','style'=>'width: 400px;','value'=>$cl_status));
 $form->getElement('status')->setEnabled(false);
-$form->addInput(array('type'=>'textarea','name'=>'client_comment','style'=>'width: 400px; height: 80px;','value'=>$cl_client_comment));
 if ($offer['status'] == STATUS_APPROVED) {
   $form->addInput(array('type'=>'submit','name'=>'btn_accept','value'=>$i18n->get('work.button.accept')));
   $form->addInput(array('type'=>'submit','name'=>'btn_decline','value'=>$i18n->get('work.button.decline')));
 }
+$form->addInput(array('type'=>'textarea','name'=>'client_comment','style'=>'width: 400px; height: 80px;','value'=>$cl_client_comment));
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_client_comment)) $err->add($i18n->get('error.field'), $i18n->get('label.comment'));
+  if (!ttValidString($cl_client_comment, true)) $err->add($i18n->get('error.field'), $i18n->get('label.comment'));
 
   // Ensure user email exists (required for workflow).
   if (!$user->getEmail()) $err->add($i18n->get('error.no_email'));
