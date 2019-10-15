@@ -23,12 +23,6 @@
           <td align = "right">{$i18n.label.details}:</td>
           <td>{$forms.workForm.details.control}</td>
         </tr>
-{if $show_files}
-        <tr>
-          <td align="right">{$i18n.label.file}:</td>
-          <td>{$forms.workForm.newfile.control}</td>
-        </tr>
-{/if}
         <tr>
           <td align="right">{$i18n.label.budget}:</td>
           <td>{$forms.workForm.budget.control}</td>

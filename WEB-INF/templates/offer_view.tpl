@@ -1,3 +1,7 @@
+<script>
+  function chLocation(newLocation) { document.location = newLocation; }
+</script>
+
 {$forms.offerForm.open}
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
@@ -19,12 +23,6 @@
           <td align = "right">{$i18n.label.details}:</td>
           <td>{$forms.offerForm.details.control}</td>
         </tr>
-{if $show_files}
-        <tr>
-          <td align="right">{$i18n.label.file}:</td>
-          <td>{$forms.offerForm.newfile.control}</td>
-        </tr>
-{/if}
         <tr>
           <td align="right">{$i18n.label.budget}:</td>
           <td>{$forms.offerForm.budget.control}</td>
@@ -34,3 +32,17 @@
   </tr>
 </table>
 {$forms.offerForm.close}
+
+{if isTrue('WORK_DEBUG')}
+<table width="720" cellspacing="4" cellpadding="4" border="0">
+<tr>
+  <td align="center">
+  <table>
+  <tr>
+    <td><input type="button" onclick="chLocation('work_add.php?offer_id={$offer_id}');" value="{$i18n.work.button.accept}"></td>
+  </tr>
+  </table>
+  </td>
+</tr>
+</table>
+{/if}

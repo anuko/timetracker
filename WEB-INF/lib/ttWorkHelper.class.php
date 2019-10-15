@@ -200,6 +200,7 @@ class ttWorkHelper {
       'group_id' => urlencode($group_id),
       'group_name' => urlencode(base64_encode($user->getGroupName())),
       'group_key' => urlencode($user->getGroupKey()),
+      'offer_id' => urlencode($fields['offer_id']),
       'type' => urlencode($fields['type']),
       'subject' => urlencode(base64_encode($fields['subject'])),
       'descr_short' => urlencode(base64_encode($fields['descr_short'])),

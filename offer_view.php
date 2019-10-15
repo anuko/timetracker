@@ -39,9 +39,9 @@ if (!ttAccessAllowed('manage_work')) {
   header('Location: access_denied.php');
   exit();
 }
-$cl_offer_id = (int)$request->getParameter('id');
+$offer_id = (int)$request->getParameter('id');
 $workHelper = new ttWorkHelper($err);
-$offer = $workHelper->getAvailableOffer($cl_offer_id);
+$offer = $workHelper->getAvailableOffer($offer_id);
 if (!$offer) {
   header('Location: access_denied.php');
   exit();
@@ -62,7 +62,6 @@ $cl_details = $offer['descr_long'];
 $cl_budget = $offer['amount_with_currency'];
 
 $form = new Form('offerForm');
-$form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_offer_id));
 $form->addInput(array('type'=>'text','name'=>'contractor','value'=>$cl_contractor));
 $form->getElement('contractor')->setEnabled(false);
 $form->addInput(array('type'=>'text','name'=>'offer_name','style'=>'width: 400px;','value'=>$cl_name));
@@ -74,6 +73,8 @@ $form->getElement('details')->setEnabled(false);
 $form->addInput(array('type'=>'text','name'=>'budget','value'=>$cl_budget));
 $form->getElement('budget')->setEnabled(false);
 
+
+$smarty->assign('offer_id', $offer_id);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.offer'));
 $smarty->assign('content_page_name', 'offer_view.tpl');

@@ -39,18 +39,37 @@ if (!$user->isPluginEnabled('wk')) {
   header('Location: feature_disabled.php');
   exit();
 }
+// Do we have offer_id?
+$cl_offer_id = (int)$request->getParameter('offer_id');
+if ($cl_offer_id) {
+  $workHelper = new ttWorkHelper($err);
+  $offer = $workHelper->getAvailableOffer($cl_offer_id);
+  if (!$offer) {
+    header('Location: access_denied.php');
+    exit();
+  }
+}
 // End of access checks.
 
 if ($request->isPost()) {
-  $cl_work_type = $request->getParameter('work_type');
   $cl_name = trim($request->getParameter('work_name'));
+  $cl_work_type = $request->getParameter('work_type');
   $cl_description = trim($request->getParameter('description'));
   $cl_details = trim($request->getParameter('details'));
   $cl_currency_id = $request->getParameter('currency');
   $cl_budget = $request->getParameter('budget');
 }
+// Override some fields for work being created on an available offer.
+if ($offer) {
+  $cl_name = $offer['subject'];
+  $cl_work_type = 0; // one-time work
+  $cl_currency_id = ttWorkHelper::getCurrencyID($offer['currency']);
+  $cl_budget = $offer['amount'];
+}
 
 $form = new Form('workForm');
+if ($offer)
+  $form->addInput(array('type'=>'hidden','name'=>'offer_id','value'=>$cl_offer_id));
 $form->addInput(array('type'=>'text','name'=>'work_name','maxlength'=>'128','style'=>'width: 400px;','value'=>$cl_name));
 $WORK_TYPE_OPTIONS = array('0'=>$i18n->get('work.type.one_time'),'1'=>$i18n->get('work.type.ongoing'));
 $form->addInput(array('type'=>'combobox','name'=>'work_type','data'=>$WORK_TYPE_OPTIONS,'value'=>$cl_work_type));
@@ -61,9 +80,13 @@ $currencies = ttWorkHelper::getCurrencies();
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
-
-// TODO: design how to handle categories and sub-categories.
-// One major complication is localization of names.
+// Disable some controls for work being created on an available offer.
+if ($offer) {
+  $form->getElement('work_name')->setEnabled(false);
+  $form->getElement('work_type')->setEnabled(false);
+  $form->getElement('currency')->setEnabled(false);
+  $form->getElement('budget')->setEnabled(false);
+}
 
 if ($request->isPost()) {
   // Validate user input.
@@ -77,8 +100,9 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     $workHelper = new ttWorkHelper($err);
-    $fields = array('type'=>$cl_work_type,
-      'subject'=>$cl_name,
+    $fields = array('offer_id' => $cl_offer_id,
+      'subject' => $cl_name,
+      'type' => $cl_work_type,
       'descr_short' => $cl_description,
       'descr_long' => $cl_details,
       'currency' => ttWorkHelper::getCurrencyName($cl_currency_id),
@@ -90,6 +114,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
+$smarty->assign('offer', $offer);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.workForm.work_name.focus()"');
 $smarty->assign('title', $i18n->get('title.add_work'));

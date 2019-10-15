@@ -46,7 +46,7 @@ if ($cl_work_id) {
   $work_item = $workHelper->getAvailableWorkItem($cl_work_id);
   if (!$work_item) {
     header('Location: access_denied.php');
-    exit(); 
+    exit();
   }
 }
 // End of access checks.
