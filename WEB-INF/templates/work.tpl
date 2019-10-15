@@ -7,7 +7,7 @@
     <td valign="top">
 {if $own_work_items}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
-        <tr><td class="sectionHeaderNoBorder">{$i18n.work.label.our_work}</td></tr>
+        <tr><td class="sectionHeaderNoBorder">{$i18n.work.label.own_work}</td></tr>
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.work}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
@@ -77,7 +77,7 @@
 
 {if $own_offers}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
-        <tr><td class="sectionHeaderNoBorder">{$i18n.work.label.our_offers}</td></tr>
+        <tr><td class="sectionHeaderNoBorder">{$i18n.work.label.own_offers}</td></tr>
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.offer}</td>
           <td width="35%" class="tableHeader">{$i18n.label.description}</td>
