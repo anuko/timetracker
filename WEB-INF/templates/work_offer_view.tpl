@@ -31,12 +31,6 @@
           <td align = "right">{$i18n.label.details}:</td>
           <td>{$forms.offerForm.details.control}</td>
         </tr>
-{if $show_files}
-        <tr>
-          <td align="right">{$i18n.label.file}:</td>
-          <td>{$forms.offerForm.newfile.control}</td>
-        </tr>
-{/if}
         <tr>
           <td align="right">{$i18n.label.budget}:</td>
           <td>{$forms.offerForm.budget.control}</td>
@@ -45,7 +39,7 @@
           <td align = "right">{$i18n.label.status}:</td>
           <td>{$forms.offerForm.status.control}</td>
         </tr>
-{if isTrue('WORK_DEBUG')}
+
         <tr><td>&nbsp;</td></tr>
         <tr>
           <td></td>
@@ -55,7 +49,7 @@
           <td align = "right">{$i18n.label.comment}:</td>
           <td>{$forms.offerForm.client_comment.control}</td>
         </tr>
-{/if}
+
       </table>
     </td>
   </tr>

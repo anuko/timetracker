@@ -33,7 +33,6 @@
 </table>
 {$forms.offerForm.close}
 
-{if isTrue('WORK_DEBUG')}
 <table width="720" cellspacing="4" cellpadding="4" border="0">
 <tr>
   <td align="center">
@@ -45,4 +44,3 @@
   </td>
 </tr>
 </table>
-{/if}
