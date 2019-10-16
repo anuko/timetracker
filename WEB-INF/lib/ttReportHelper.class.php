@@ -1602,8 +1602,8 @@ class ttReportHelper {
     global $user;
 
     // Check users.
-    $active_users_in_bean = $bean->getAttribute('users_active');
-    $inactive_users_in_bean = $bean->getAttribute('users_inactive');
+    $active_users_in_bean = (array) $bean->getAttribute('users_active');
+    $inactive_users_in_bean = (array) $bean->getAttribute('users_inactive');
     if (is_array($active_users_in_bean) || is_array($inactive_users_in_bean)) {
       $users_in_group = ttGroupHelper::getUsers();
       foreach ($users_in_group as $user_in_group) {
