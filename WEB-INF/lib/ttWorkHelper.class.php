@@ -105,9 +105,18 @@ class ttWorkHelper {
     $val = $res->fetchRow();
     if (!$val) {
       // No site id found, need to register.
+      $group_id = $user->getGroup();
+      $org_id = $user->org_id;
       $fields = array('lang' => urlencode($user->lang),
         'name' => urlencode('time tracker'),
-        'origin' => urlencode('time tracker source'));
+        'origin' => urlencode('time tracker source'),
+        'org_id' => urlencode($org_id),
+        'group_id' => urlencode($group_id),
+        'group_name' => urlencode(base64_encode($user->getGroupName())),
+        'user_id' => urlencode($user->getUser()),
+        'user_name' => urlencode(base64_encode($user->getName())),
+        'user_email' => urlencode(base64_encode($user->getEmail())),
+        'user_ip' => urlencode($_SERVER['REMOTE_ADDR']));
 
       // Urlify the data for the POST.
       foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
