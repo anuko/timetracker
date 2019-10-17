@@ -46,6 +46,15 @@ if (!$work_item) {
   header('Location: access_denied.php');
   exit();
 }
+// Do we have offer_id?
+$offer_id = $work_item['offer_id'];
+if ($offer_id) {
+  $offer = $workHelper->getAvailableOffer($offer_id);
+  if (!$offer) {
+    header('Location: access_denied.php');
+    exit();
+  }
+}
 // End of access checks.
 
 $currencies = ttWorkHelper::getCurrencies();
@@ -67,6 +76,13 @@ if ($request->isPost()) {
   $cl_status = $work_item['status_label'];
   $cl_moderator_comment = $work_item['moderator_comment'];
 }
+// Override some fields for work on an available offer.
+if ($offer) {
+  $cl_name = $offer['subject'];
+  $cl_work_type = 0; // one-time work
+  $cl_currency_id = ttWorkHelper::getCurrencyID($offer['currency']);
+  $cl_budget = $offer['amount'];
+}
 
 $show_moderator_comment = $cl_moderator_comment != null;
 
@@ -84,6 +100,13 @@ $form->getElement('status')->setEnabled(false);
 $form->addInput(array('type'=>'textarea','name'=>'moderator_comment','style'=>'width: 400px; height: 80px;','value'=>$cl_moderator_comment));
 $form->getElement('moderator_comment')->setEnabled(false);
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
+// Disable some controls for work on an available offer.
+if ($offer) {
+  $form->getElement('work_name')->setEnabled(false);
+  $form->getElement('work_type')->setEnabled(false);
+  $form->getElement('currency')->setEnabled(false);
+  $form->getElement('budget')->setEnabled(false);
+}
 
 if ($request->isPost()) {
   // Validate user input.
