@@ -46,6 +46,7 @@ class ttWorkHelper {
   var $delete_own_work_item_uri = null;     // URI to delete own work item.
   // TODO: design how (and what) to delete when a group is deleted.
   var $update_own_work_item_uri = null;  // URI to update own work item.
+  var $update_own_work_item_on_offer_uri = null;  // URI to update own work item posted on offer.
   var $put_own_offer_uri = null;     // URI to publish own offer.
   var $get_own_offer_uri = null;     // URI to get own offer details.
   var $get_own_offers_uri = null;    // URI to get own offers.
@@ -80,6 +81,7 @@ class ttWorkHelper {
     $this->accept_own_work_item_offer_uri = $this->work_server_uri.'acceptownworkitemoffer';
     $this->decline_own_work_item_offer_uri = $this->work_server_uri.'declineownworkitemoffer';
     $this->update_own_work_item_uri = $this->work_server_uri.'updateownworkitem';
+    $this->update_own_work_item_on_offer_uri = $this->work_server_uri.'updateownworkitemonoffer';
     $this->put_own_offer_uri = $this->work_server_uri.'putownoffer';
     $this->get_own_offer_uri = $this->work_server_uri.'getownoffer';
     $this->get_own_offers_uri = $this->work_server_uri.'getownoffers';
@@ -301,6 +303,72 @@ class ttWorkHelper {
 
     // Set the url, number of POST vars, POST data.
     curl_setopt($ch, CURLOPT_URL, $this->update_own_work_item_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    return true;
+  }
+
+  // updateOwnWorkItemOnOffer - updates own work item posted on offer in remote work server.
+  function updateOwnWorkItemOnOffer($fields) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id),
+      'org_key' => urlencode($user->getOrgKey()),
+      'group_id' => urlencode($group_id),
+      'group_name' => urlencode(base64_encode($user->getGroupName())),
+      'group_key' => urlencode($user->getGroupKey()),
+      'work_id' => urlencode($fields['work_id']),
+      'descr_short' => urlencode(base64_encode($fields['descr_short'])),
+      'descr_long' => urlencode(base64_encode($fields['descr_long'])),
+      'modified_ip' => urlencode($_SERVER['REMOTE_ADDR']),
+      'modified_by' => urlencode($user->getUser()),
+      'modified_by_name' => urlencode(base64_encode($user->getName())),
+      'modified_by_email' => urlencode(base64_encode($user->getEmail()))
+    );
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->update_own_work_item_on_offer_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

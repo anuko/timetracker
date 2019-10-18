@@ -128,9 +128,16 @@ if ($request->isPost()) {
         'descr_long' => $cl_details,
         'currency' => ttWorkHelper::getCurrencyName($cl_currency_id),
         'amount' => $cl_budget);
-      if ($workHelper->updateOwnWorkItem($fields)) {
-        header('Location: work.php');
-        exit();
+      if ($offer_id > 0) {
+        if ($workHelper->updateOwnWorkItemOnOffer($fields)) {
+          header('Location: work.php');
+          exit();
+        }
+      } else {
+        if ($workHelper->updateOwnWorkItem($fields)) {
+          header('Location: work.php');
+          exit();
+        }
       }
     }
   }
