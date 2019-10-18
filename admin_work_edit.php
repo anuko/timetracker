@@ -44,6 +44,15 @@ if (!$work_item) {
   header('Location: access_denied.php');
   exit();
 }
+// Do we have offer_id?
+$offer_id = $work_item['offer_id'];
+if ($offer_id) {
+  $offer = $adminWorkHelper->getOffer($offer_id);
+  if (!$offer) {
+    header('Location: access_denied.php');
+    exit();
+  }
+}
 // End of access checks.
 
 
@@ -117,9 +126,16 @@ if ($request->isPost()) {
         }
       } else if ($cl_status == STATUS_DISAPPROVED) {
         // Status changed to "not approved". Disapprove work.
-        if ($adminWorkHelper->disapproveWorkItem($fields)) {
-          header('Location: admin_work.php');
-          exit();
+        if ($offer_id) {
+          if ($adminWorkHelper->disapproveWorkItemOnOffer($fields)) {
+            header('Location: admin_work.php');
+            exit();
+          }
+        } else {
+          if ($adminWorkHelper->disapproveWorkItem($fields)) {
+            header('Location: admin_work.php');
+            exit();
+          }
         }
       } else if ($cl_status == STATUS_APPROVED) {
         // Status changed to "approved". Approve work.
@@ -132,6 +148,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
+$smarty->assign('offer', $offer);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.edit_work'));
 $smarty->assign('content_page_name', 'admin_work_edit.tpl');

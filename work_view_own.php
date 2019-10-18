@@ -46,6 +46,15 @@ if (!$work_item) {
   header('Location: access_denied.php');
   exit();
 }
+// Do we have offer_id?
+$offer_id = $work_item['offer_id'];
+if ($offer_id) {
+  $offer = $workHelper->getAvailableOffer($offer_id);
+  if (!$offer) {
+    header('Location: access_denied.php');
+    exit();
+  }
+}
 // End of access checks.
 
 $cl_name = $work_item['subject'];
@@ -63,6 +72,7 @@ $form->getElement('details')->setEnabled(false);
 $form->addInput(array('type'=>'text','name'=>'budget','value'=>$cl_budget));
 $form->getElement('budget')->setEnabled(false);
 
+$smarty->assign('offer', $offer);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.work'));
 $smarty->assign('content_page_name', 'work_view_own.tpl');

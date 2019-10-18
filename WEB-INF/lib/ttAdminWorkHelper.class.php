@@ -38,7 +38,9 @@ class ttAdminWorkHelper {
   var $update_work_item_uri = null;  // URI to update work item.
   var $delete_work_item_uri = null;  // URI to delete work item.
   var $approve_work_item_uri = null; // URI to approve work item.
+  var $approve_work_item_on_offer_uri = null; // URI to approve work item posted on offer.
   var $disapprove_work_item_uri = null; // URI to disapprove work item.
+  var $disapprove_work_item_on_offer_uri = null; // URI to disapprove work item posted on offer.
   var $get_offer_uri = null;     // URI to get offer details.
   var $update_offer_uri = null;  // URI to update offer.
   var $delete_offer_uri = null;  // URI to delete offer.
@@ -60,7 +62,9 @@ class ttAdminWorkHelper {
     $this->update_work_item_uri = $this->work_server_uri.'admin_updateworkitem';
     $this->delete_work_item_uri = $this->work_server_uri.'admin_deleteworkitem';
     $this->approve_work_item_uri = $this->work_server_uri.'admin_approveworkitem';
+    $this->approve_work_item_on_offer_uri = $this->work_server_uri.'admin_approveworkitemonoffer';
     $this->disapprove_work_item_uri = $this->work_server_uri.'admin_disapproveworkitem';
+    $this->disapprove_work_item_on_offer_uri = $this->work_server_uri.'admin_disapproveworkitemonoffer';
     $this->get_offer_uri = $this->work_server_uri.'admin_getoffer';
     $this->update_offer_uri = $this->work_server_uri.'admin_updateoffer';
     $this->delete_offer_uri = $this->work_server_uri.'admin_deleteoffer';
@@ -630,6 +634,64 @@ class ttAdminWorkHelper {
 
     // Set the url, number of POST vars, POST data.
     curl_setopt($ch, CURLOPT_URL, $this->disapprove_work_item_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    return true;
+  }
+
+  // disapproveWorkItemOnOffer - disapproves work item posted on offer in remote work server.
+  function disapproveWorkItemOnOffer($fields) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'user_id' => urlencode($user->id),
+      'work_id' => urlencode($fields['work_id']),
+      'descr_short' => urlencode(base64_encode($fields['descr_short'])),
+      'descr_long' => urlencode(base64_encode($fields['descr_long'])),
+      'moderator_comment' => urlencode(base64_encode($fields['moderator_comment'])),
+      'modified_ip' => urlencode($_SERVER['REMOTE_ADDR']),
+      'modified_by' => urlencode($user->getUser()),
+      'modified_by_name' => urlencode(base64_encode($user->getName())),
+      'modified_by_email' => urlencode(base64_encode($user->getEmail())));
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->disapprove_work_item_on_offer_uri);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

@@ -5,13 +5,13 @@
     <td>
       <table border=0 width=100%>
         <tr><td align="left"><b>{$i18n.label.work}:</b> {$work_item.subject}</td></tr>
+        <tr><td align="left"><b>{$i18n.label.client}:</b> {$work_item.group_name}</td></tr>
         <tr><td align="left"><b>{$i18n.label.description}:</b> {$work_item.descr_short|escape}</td></tr>
         <tr><td align="left"><b>{$i18n.label.budget}:</b> {$work_item.amount_with_currency}</td></tr>
       </table>
     </td>
   </tr>
 {/if}
-
   <tr>
     <td>
       <table cellspacing="1" cellpadding="2" border="0">

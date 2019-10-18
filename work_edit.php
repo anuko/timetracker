@@ -143,6 +143,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
+$smarty->assign('offer', $offer);
 $smarty->assign('show_moderator_comment', $show_moderator_comment);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.edit_work'));
