@@ -139,9 +139,16 @@ if ($request->isPost()) {
         }
       } else if ($cl_status == STATUS_APPROVED) {
         // Status changed to "approved". Approve work.
-        if ($adminWorkHelper->approveWorkItem($fields)) {
-          header('Location: admin_work.php');
-          exit();
+        if ($offer_id) {
+          if ($adminWorkHelper->approveWorkItemOnOffer($fields)) {
+            header('Location: admin_work.php');
+            exit();
+          }
+        } else {
+          if ($adminWorkHelper->approveWorkItem($fields)) {
+            header('Location: admin_work.php');
+            exit();
+          }
         }
       }
     }
