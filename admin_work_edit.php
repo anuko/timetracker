@@ -55,7 +55,6 @@ if ($offer_id) {
 }
 // End of access checks.
 
-
 $existingStatus = $work_item['status'];
 $currencies = ttWorkHelper::getCurrencies();
 
@@ -85,6 +84,13 @@ $form->addInput(array('type'=>'textarea','name'=>'description','maxlength'=>'512
 $form->addInput(array('type'=>'textarea','name'=>'details','style'=>'width: 400px; height: 200px;','value'=>$cl_details));
 $form->addInput(array('type'=>'combobox','name'=>'currency','data'=>$currencies,'datakeys'=>array('id','name'),'value'=>$cl_currency_id));
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'budget','format'=>'.2','value'=>$cl_budget));
+// Disable some controls for work on an available offer.
+if ($offer) {
+  $form->getElement('work_name')->setEnabled(false);
+  // $form->getElement('work_type')->setEnabled(false);
+  $form->getElement('currency')->setEnabled(false);
+  $form->getElement('budget')->setEnabled(false);
+}
 
 // Prepare status choices.
 $status_options = array();
