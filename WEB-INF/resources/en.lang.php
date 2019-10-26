@@ -643,8 +643,11 @@ $i18n_key_words = array(
 'work.label.own_work' => 'Own work',
 'work.label.own_offers' => 'Own offers',
 'work.label.offers' => 'Offers',
+'work.label.message' => 'Message',
 'work.button.send_message' => 'Send message',
 'work.button.make_offer' => 'Make offer',
 'work.button.accept' => 'Accept',
 'work.button.decline' => 'Decline',
+'work.title.send_message' => 'Sending Message',
+'work.msg.message_sent' => 'Message sent.',
 );

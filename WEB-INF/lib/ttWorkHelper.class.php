@@ -55,6 +55,7 @@ class ttWorkHelper {
   var $get_group_items_uri = null;      // URI to get all group items in one API call.
   var $delete_own_offer_uri = null; // URI to delete own offer.
   var $update_own_offer_uri = null; // URI to update own offer.
+  var $send_message_uri = null;     // URI to send message.
   var $site_id = null;              // Site id for work server.
   var $site_key = null;             // Site key for work server.
 
@@ -91,6 +92,7 @@ class ttWorkHelper {
     $this->get_group_items_uri = $this->work_server_uri.'getgroupitems';
     $this->delete_own_offer_uri = $this->work_server_uri.'deleteownoffer';
     $this->update_own_offer_uri = $this->work_server_uri.'updateownoffer';
+    $this->send_message_uri = $this->work_server_uri.'sendmessage';
     $this->checkSiteRegistration();
   }
 
@@ -1481,5 +1483,69 @@ class ttWorkHelper {
 
     $offer = $result_array['offer'];
     return $offer;
+  }
+
+  // sendMessage - sends a message via remote work server.
+  function sendMessage($fields) {
+    global $i18n;
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $curl_fields = array('lang' => urlencode($user->lang),
+      'site_id' => urlencode($this->site_id),
+      'site_key' => urlencode($this->site_key),
+      'org_id' => urlencode($org_id),
+      'org_key' => urlencode($user->getOrgKey()),
+      'group_id' => urlencode($group_id),
+      'group_name' => urlencode(base64_encode($user->getGroupName())),
+      'group_key' => urlencode($user->getGroupKey()),
+      'work_id' => urlencode($fields['work_id']),
+      'sender_ip' => urlencode($_SERVER['REMOTE_ADDR']),
+      'sender_user_id' => urlencode($user->getUser()),
+      'sender_name' => urlencode(base64_encode($user->getName())),
+      'sender_email' => urlencode(base64_encode($user->getEmail())),
+      'message_body' => urlencode(base64_encode($fields['message_body'])));
+
+    // url-ify the data for the POST.
+    foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    // Open connection.
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data.
+    curl_setopt($ch, CURLOPT_URL, $this->send_message_uri);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute a post request.
+    $result = curl_exec($ch);
+
+    // Close connection.
+    curl_close($ch);
+
+    if (!$result) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+
+    $result_array = json_decode($result, true);
+
+    // Check for errors.
+    $call_status = $result_array['call_status'];
+    if (!$call_status) {
+      $this->errors->add($i18n->get('error.remote_work'));
+      return false;
+    }
+    if ($call_status['code'] != TT_CURL_SUCCESS) {
+      $this->errors->add($call_status['error']);
+      return false;
+    }
+
+    return true;
   }
 }
