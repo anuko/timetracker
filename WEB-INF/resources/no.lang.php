@@ -723,4 +723,5 @@ $i18n_key_words = array(
 // 'work.button.accept' => 'Accept',
 // 'work.button.decline' => 'Decline',
 // 'work.title.send_message' => 'Sending Message',
+// 'work.msg.message_sent' => 'Message sent.',
 );

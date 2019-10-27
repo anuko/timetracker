@@ -629,4 +629,5 @@ $i18n_key_words = array(
 'work.button.accept' => 'Принять',
 'work.button.decline' => 'Отклонить',
 'work.title.send_message' => 'Отсылка сообщения',
+'work.msg.message_sent' => 'Сообщение отослано.',
 );
