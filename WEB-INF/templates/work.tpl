@@ -88,11 +88,7 @@
         </tr>
   {foreach $own_offers as $offer}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
-    {if $offer.work_id}
-          <td><a href='work_view.php?id={$offer.work_id}'>{$offer.subject|escape}</a></td>
-    {else}
-          <td>{$offer.subject|escape}</td>
-    {/if}
+          <td><a href='offer_view_own.php?id={$offer.id}'>{$offer.subject|escape}</a></td>
           <td>{$offer.description|escape}</td>
           <td>{$offer.status_label}</td>
           <td nowrap>{$offer.amount_with_currency}</td>
