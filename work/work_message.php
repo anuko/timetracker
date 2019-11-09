@@ -72,7 +72,7 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     $workHelper = new ttWorkHelper($err);
-    $fields = array('work_id'=>$work_id,
+    $fields = array('work_id'=>$cl_work_id,
       'message_body' => $cl_message_body);
     if ($workHelper->sendMessageToWorkOwner($fields)) {
       $msg->add($i18n->get('work.msg.message_sent'));
