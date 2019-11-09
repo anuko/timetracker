@@ -74,7 +74,7 @@
             <a class="mainMenu" href="admin_groups.php">{$i18n.menu.groups}</a>
             <a class="mainMenu" href="admin_options.php">{$i18n.menu.options}</a>
     {if isTrue('WORK_SERVER_ADMINISTRATION')}
-            <a class="mainMenu" href="admin_work.php">{$i18n.label.work}</a>
+            <a class="mainMenu" href="work/admin_work.php">{$i18n.label.work}</a>
     {/if}
           </td>
         </tr>
@@ -142,7 +142,7 @@
            <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
     {/if}
     {if $user->isPluginEnabled('wk') && ($user->can('update_work') || $user->can('bid_on_work') || $user->can('manage_work')) && $user->exists()}
-           <a class="mainMenu" href="work.php">{$i18n.title.work}</a>
+           <a class="mainMenu" href="work/work.php">{$i18n.title.work}</a>
     {/if}
     {if $user->can('export_data')}
            <a class="mainMenu" href="export.php">{$i18n.menu.export}</a>

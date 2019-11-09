@@ -32,18 +32,18 @@ import('ttWorkHelper');
 
 // Access checks.
 if (!ttAccessAllowed('manage_work')) {
-  header('Location: access_denied.php');
+  header('Location: ../access_denied.php');
   exit();
 }
 if (!$user->isPluginEnabled('wk')) {
-  header('Location: feature_disabled.php');
+  header('Location: ../feature_disabled.php');
   exit();
 }
 $cl_work_id = (int)$request->getParameter('id');
 $workHelper = new ttWorkHelper($err);
 $work_item = $workHelper->getOwnWorkItem($cl_work_id);
 if (!$work_item) {
-  header('Location: access_denied.php');
+  header('Location: ../access_denied.php');
   exit();
 }
 // Do we have offer_id?
@@ -51,7 +51,7 @@ $offer_id = $work_item['offer_id'];
 if ($offer_id) {
   $offer = $workHelper->getAvailableOffer($offer_id);
   if (!$offer) {
-    header('Location: access_denied.php');
+    header('Location: ../access_denied.php');
     exit();
   }
 }

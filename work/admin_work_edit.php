@@ -34,14 +34,14 @@ import('ttAdminWorkHelper');
 
 // Access checks.
 if (!ttAccessAllowed('administer_site')) {
-  header('Location: access_denied.php');
+  header('Location: ../access_denied.php');
   exit();
 }
 $cl_work_id = (int)$request->getParameter('id');
 $adminWorkHelper = new ttAdminWorkHelper($err);
 $work_item = $adminWorkHelper->getWorkItem($cl_work_id);
 if (!$work_item) {
-  header('Location: access_denied.php');
+  header('Location: ../access_denied.php');
   exit();
 }
 // Do we have offer_id?
@@ -49,7 +49,7 @@ $offer_id = $work_item['offer_id'];
 if ($offer_id) {
   $offer = $adminWorkHelper->getOffer($offer_id);
   if (!$offer) {
-    header('Location: access_denied.php');
+    header('Location: ../access_denied.php');
     exit();
   }
 }

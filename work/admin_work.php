@@ -31,7 +31,7 @@ import('ttAdminWorkHelper');
 
 // Access checks.
 if (!ttAccessAllowed('administer_site')) {
-  header('Location: access_denied.php');
+  header('Location: ../access_denied.php');
   exit();
 }
 // End of access checks.

@@ -34,14 +34,14 @@ import('ttAdminWorkHelper');
 
 // Access checks.
 if (!ttAccessAllowed('administer_site')) {
-  header('Location: access_denied.php');
+  header('Location: ../access_denied.php');
   exit();
 }
 $cl_offer_id = (int)$request->getParameter('id');
 $adminWorkHelper = new ttAdminWorkHelper($err);
 $offer = $adminWorkHelper->getOffer($cl_offer_id);
 if (!$offer) {
-  header('Location: access_denied.php');
+  header('Location: ../access_denied.php');
   exit();
 }
 // End of access checks.

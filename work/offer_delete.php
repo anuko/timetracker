@@ -32,18 +32,18 @@ import('form.Form');
 
 // Access checks.
 if (!ttAccessAllowed('bid_on_work')) {
-  header('Location: access_denied.php');
+  header('Location: ../access_denied.php');
   exit();
 }
 if (!$user->isPluginEnabled('wk')) {
-  header('Location: feature_disabled.php');
+  header('Location: ../feature_disabled.php');
   exit();
 }
 $cl_offer_id = (int)$request->getParameter('id');
 $workHelper = new ttWorkHelper($err);
 $offer = $workHelper->getOwnOffer($cl_offer_id);
 if (!$offer) {
-  header('Location: access_denied.php');
+  header('Location: ../access_denied.php');
   exit();
 }
 // End of access checks.

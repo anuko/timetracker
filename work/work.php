@@ -31,11 +31,11 @@ import('ttWorkHelper');
 
 // Access checks.
 if (!(ttAccessAllowed('update_work') || ttAccessAllowed('bid_on_work')  || ttAccessAllowed('manage_work'))) {
-  header('Location: access_denied.php');
+  header('Location: ../access_denied.php');
   exit();
 }
 if (!$user->isPluginEnabled('wk')) {
-  header('Location: feature_disabled.php');
+  header('Location: ../feature_disabled.php');
   exit();
 }
 // End of access checks.

@@ -32,14 +32,14 @@ import('form.Form');
 
 // Access checks.
 if (!ttAccessAllowed('administer_site')) {
-  header('Location: access_denied.php');
+  header('Location: ../access_denied.php');
   exit();
 }
 $cl_work_id = (int)$request->getParameter('id');
 $adminWorkHelper = new ttAdminWorkHelper($err);
 $work_item = $adminWorkHelper->getWorkItem($cl_work_id);
 if (!$work_item) {
-  header('Location: access_denied.php');
+  header('Location: ../access_denied.php');
   exit();
 }
 // End of access checks.

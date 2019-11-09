@@ -797,6 +797,7 @@ class ttAdminWorkHelper {
       'descr_long' => urlencode(base64_encode($fields['descr_long'])),
       'currency' => urlencode($fields['currency']),
       'amount' => urlencode($fields['amount']),
+      'payment_info' => urlencode(base64_encode($fields['payment_info'])),
       'moderator_comment' => urlencode(base64_encode($fields['moderator_comment'])),
       'modified_ip' => urlencode($_SERVER['REMOTE_ADDR']),
       'modified_by' => urlencode($user->getUser()),

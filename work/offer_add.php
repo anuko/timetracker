@@ -32,11 +32,11 @@ import('ttWorkHelper');
 
 // Access checks.
 if (!ttAccessAllowed('manage_work')) {
-  header('Location: access_denied.php');
+  header('Location: ../access_denied.php');
   exit();
 }
 if (!$user->isPluginEnabled('wk')) {
-  header('Location: feature_disabled.php');
+  header('Location: ../feature_disabled.php');
   exit();
 }
 // Do we have work_id?
@@ -45,7 +45,7 @@ if ($cl_work_id) {
   $workHelper = new ttWorkHelper($err);
   $work_item = $workHelper->getAvailableWorkItem($cl_work_id);
   if (!$work_item) {
-    header('Location: access_denied.php');
+    header('Location: ../access_denied.php');
     exit();
   }
 }
