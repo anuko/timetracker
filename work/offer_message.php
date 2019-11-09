@@ -39,27 +39,27 @@ if (!$user->isPluginEnabled('wk')) {
   header('Location: ../feature_disabled.php');
   exit();
 }
-$cl_work_id = (int)$request->getParameter('work_id');
-if (!$cl_work_id) {
+$cl_offer_id = (int)$request->getParameter('offer_id');
+if (!$cl_offer_id) {
   header('Location: ../access_denied.php');
   exit();
 }
 $workHelper = new ttWorkHelper($err);
-$work_item = $workHelper->getAvailableWorkItem($cl_work_id);
-if (!$work_item) {
+$offer = $workHelper->getAvailableOffer($cl_offer_id);
+if (!$offer) {
   header('Location: ../access_denied.php');
   exit();
 }
 // End of access checks.
 
-$cl_name = $work_item['subject'];
+$cl_name = $offer['subject'];
 
 if ($request->isPost()) {
   $cl_message_body = trim($request->getParameter('message_body'));
 }
 
 $form = new Form('messageForm');
-$form->addInput(array('type'=>'hidden','name'=>'work_id','value'=>$cl_work_id));
+$form->addInput(array('type'=>'hidden','name'=>'offer_id','value'=>$cl_offer_id));
 $form->addInput(array('type'=>'textarea','name'=>'message_body','style'=>'width: 400px; height: 80px;vertical-align: middle','value'=>$cl_message_body));
 $form->addInput(array('type'=>'submit','name'=>'btn_send','value'=>$i18n->get('work.button.send_message')));
 
@@ -72,9 +72,9 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     $workHelper = new ttWorkHelper($err);
-    $fields = array('work_id'=>$work_id,
+    $fields = array('offer_id'=>$cl_offer_id,
       'message_body' => $cl_message_body);
-    if ($workHelper->sendMessageToWorkOwner($fields)) {
+    if ($workHelper->sendMessageToOfferOwner($fields)) {
       $msg->add($i18n->get('work.msg.message_sent'));
       //  header('Location: work.php'); // TODO: where to redirect?
       // exit();
@@ -82,9 +82,9 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$smarty->assign('work_item', $work_item);
+$smarty->assign('offer', $offer);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.offerForm.work_name.focus()"');
 $smarty->assign('title', $i18n->get('work.title.send_message'));
-$smarty->assign('content_page_name', 'work/work_message.tpl');
+$smarty->assign('content_page_name', 'work/offer_message.tpl');
 $smarty->display('work/index.tpl');

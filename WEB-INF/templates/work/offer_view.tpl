@@ -38,6 +38,7 @@
   <td align="center">
   <table>
   <tr>
+    <td><input type="button" onclick="chLocation('offer_message.php?offer_id={$offer_id}');" value="{$i18n.work.button.send_message}"></td>
     <td><input type="button" onclick="chLocation('work_add.php?offer_id={$offer_id}');" value="{$i18n.work.button.accept}"></td>
   </tr>
   </table>
