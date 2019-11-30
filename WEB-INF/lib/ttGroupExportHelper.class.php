@@ -556,10 +556,10 @@ class ttGroupExportHelper {
           }
         }
         $fav_report_part = $this->indentation.'    '."<fav_report id=\"".$this->favReportMap[$fav_report['id']]."\"";
-        $fav_report_part .= " user_id=\"".$this->userMap[$fav_report['user_id']]."\"";
         $fav_report_part .= " name=\"".htmlspecialchars($fav_report['name'])."\"";
+        $fav_report_part .= " user_id=\"".$this->userMap[$fav_report['user_id']]."\"";
+        $fav_report_part .= " report_spec=\"".$this->remapReportSpec($fav_report['report_spec'])."\"";
         $fav_report_part .= " client_id=\"".$this->clientMap[$fav_report['client_id']]."\"";
-        $fav_report_part .= " cf_1_option_id=\"".$this->customFieldOptionMap[$fav_report['cf_1_option_id']]."\"";
         $fav_report_part .= " project_id=\"".$this->projectMap[$fav_report['project_id']]."\"";
         $fav_report_part .= " task_id=\"".$this->taskMap[$fav_report['task_id']]."\"";
         $fav_report_part .= " billable=\"".$fav_report['billable']."\"";
@@ -585,7 +585,6 @@ class ttGroupExportHelper {
         $fav_report_part .= " show_note=\"".$fav_report['show_note']."\"";
         $fav_report_part .= " show_approved=\"".$fav_report['show_approved']."\"";
         $fav_report_part .= " show_totals_only=\"".$fav_report['show_totals_only']."\"";
-        $fav_report_part .= " show_custom_field_1=\"".$fav_report['show_custom_field_1']."\"";
         $fav_report_part .= " show_work_units=\"".$fav_report['show_work_units']."\"";
         $fav_report_part .= " group_by1=\"".$fav_report['group_by1']."\"";
         $fav_report_part .= " group_by2=\"".$fav_report['group_by2']."\"";
@@ -669,5 +668,69 @@ class ttGroupExportHelper {
     $result = str_replace ("\n", '&#10;', $result);
     $result = str_replace ("\r", '&#13;', $result);
     return $result;
+  }
+
+  // isDropdownCustomField is a helper function for remapReportSpecPart.
+  // It deteremines if a custom field is of dropdown type.
+  private function isDropdownCustomField($field_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $sql = "select type from tt_custom_fields where group_id = $this->group_id and org_id = $user->org_id and id = $field_id";
+    $res = $mdb2->query($sql);
+    $isDropdown = false;
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $isDropdown = $val['type'] == 2; // TYPE_DROPDOWN, see CustomFields.class.php.
+        break;
+      }
+    }
+    return $isDropdown;
+  }
+
+  // remapReportSpecPart is a helper function remapReportSpec below.
+  // It remaps a single report spec part.
+  private function remapReportSpecPart($report_spec_part, $prefix) {
+    // Strip prefix.
+    $remainder = substr($report_spec_part, strlen($prefix));
+    // Find colon, which separates field id from its value.
+    $pos = strpos($remainder, ':');
+    $field_id = substr($remainder, 0, $pos);
+    $field_value = substr($remainder, $pos + 1);
+    $mapped_field_id = $this->customFieldMap[$field_id];
+
+    // Do we need to map option id?
+    if (!ttStartsWith($prefix, 'show_') && $this->isDropdownCustomField($field_id)) {
+      $mapped_field_value = $this->customFieldOptionMap[$field_value];
+    } else {
+      $mapped_field_value = $field_value;
+    }
+
+    $mappedPart = $prefix.$mapped_field_id.':'.$mapped_field_value;
+    return $mappedPart;
+  }
+
+  // remapReportSpec takes the source report spec as a parameter.
+  // It remaps it with new custom field and option ids so that it can be used for import.
+  private function remapReportSpec($report_spec) {
+    $remappedSpec = null;
+    $report_spec_parts = explode(',', $report_spec);
+    foreach ($report_spec_parts as $report_spec_part) {
+      if (ttStartsWith($report_spec_part, 'time_field_')) {
+        $remappedSpec .= ','.$this->remapReportSpecPart($report_spec_part, 'time_field_');
+      } elseif (ttStartsWith($report_spec_part, 'show_time_field_')) {
+        $remappedSpec .= ','.$this->remapReportSpecPart($report_spec_part, 'show_time_field_');
+      } elseif (ttStartsWith($report_spec_part, 'user_field_')) {
+        $remappedSpec .= ','.$this->remapReportSpecPart($report_spec_part, 'user_field_');
+      } elseif (ttStartsWith($report_spec_part, 'show_user_field_')) {
+        $remappedSpec .= ','.$this->remapReportSpecPart($report_spec_part, 'show_user_field_');
+      } else {
+        // Use the part as is.
+        $remappedSpec .= ','.$report_spec_part;
+      }
+    }
+    // Trim comma from the beginning.
+    $remappedSpec = ltrim($remappedSpec, ',');
+    return $remappedSpec;
   }
 }

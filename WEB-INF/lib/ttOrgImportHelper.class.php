@@ -487,7 +487,6 @@ class ttOrgImportHelper {
           'chfinish' => (int) $attrs['SHOW_END'],
           'chnote' => (int) $attrs['SHOW_NOTE'],
           'chapproved' => (int) $attrs['SHOW_APPROVED'],
-          'chcf_1' => (int) $attrs['SHOW_CUSTOM_FIELD_1'],
           'chunits' => (int) $attrs['SHOW_WORK_UNITS'],
           'group_by1' => $attrs['GROUP_BY1'],
           'group_by2' => $attrs['GROUP_BY2'],
