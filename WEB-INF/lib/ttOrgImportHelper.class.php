@@ -461,8 +461,8 @@ class ttOrgImportHelper {
           'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
+          'report_spec' => $this->remapReportSpec($attrs['REPORT_SPEC']),
           'client' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
-          'option' => $this->currentGroupCustomFieldOptionMap[$attrs['CF_1_OPTION_ID']],
           'project' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
           'task' => $this->currentGroupTaskMap[$attrs['TASK_ID']],
           'billable' => $attrs['BILLABLE'],
@@ -1038,15 +1038,15 @@ class ttOrgImportHelper {
     $org_id = (int) $fields['org_id'];
 
     $sql = "insert into tt_fav_reports".
-      " (name, user_id, group_id, org_id, client_id, cf_1_option_id, project_id, task_id,".
+      " (name, user_id, group_id, org_id, report_spec, client_id, project_id, task_id,".
       " billable, approved, invoice, timesheet, paid_status, users, period, period_start, period_end,".
       " show_client, show_invoice, show_paid, show_ip,".
       " show_project, show_timesheet, show_start, show_duration, show_cost,".
-      " show_task, show_end, show_note, show_approved, show_custom_field_1, show_work_units,".
+      " show_task, show_end, show_note, show_approved, show_work_units,".
       " group_by1, group_by2, group_by3, show_totals_only)".
       " values(".
       $mdb2->quote($fields['name']).", ".$fields['user_id'].", $group_id, $org_id, ".
-      $mdb2->quote($fields['client']).", ".$mdb2->quote($fields['option']).", ".
+      $mdb2->quote($fields['report_spec']).", ".$mdb2->quote($fields['client']).", ".
       $mdb2->quote($fields['project']).", ".$mdb2->quote($fields['task']).", ".
       $mdb2->quote($fields['billable']).", ".$mdb2->quote($fields['approved']).", ".
       $mdb2->quote($fields['invoice']).", ".$mdb2->quote($fields['timesheet']).", ".
@@ -1056,7 +1056,7 @@ class ttOrgImportHelper {
       $fields['chclient'].", ".$fields['chinvoice'].", ".$fields['chpaid'].", ".$fields['chip'].", ".
       $fields['chproject'].", ".$fields['chtimesheet'].", ".$fields['chstart'].", ".$fields['chduration'].", ".
       $fields['chcost'].", ".$fields['chtask'].", ".$fields['chfinish'].", ".$fields['chnote'].", ".
-      $fields['chapproved'].", ".$fields['chcf_1'].", ".$fields['chunits'].", ".
+      $fields['chapproved'].", ".$fields['chunits'].", ".
       $mdb2->quote($fields['group_by1']).", ".$mdb2->quote($fields['group_by2']).", ".
       $mdb2->quote($fields['group_by3']).", ".$fields['chtotalsonly'].")";
     $affected = $mdb2->exec($sql);
@@ -1243,5 +1243,69 @@ class ttOrgImportHelper {
       }
     }
     return false;
+  }
+
+  // isDropdownCustomField is a helper function for remapReportSpecPart.
+  // It deteremines if a custom field is of dropdown type.
+  private function isDropdownCustomField($field_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $sql = "select type from tt_custom_fields where id = $field_id";
+    $res = $mdb2->query($sql);
+    $isDropdown = false;
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $isDropdown = $val['type'] == 2; // TYPE_DROPDOWN, see CustomFields.class.php.
+        break;
+      }
+    }
+    return $isDropdown;
+  }
+
+  // remapReportSpecPart is a helper function remapReportSpec below.
+  // It remaps a single report spec part.
+  private function remapReportSpecPart($report_spec_part, $prefix) {
+    // Strip prefix.
+    $remainder = substr($report_spec_part, strlen($prefix));
+    // Find colon, which separates field id from its value.
+    $pos = strpos($remainder, ':');
+    $field_id = substr($remainder, 0, $pos);
+    $field_value = substr($remainder, $pos + 1);
+    $mapped_field_id = $this->currentGroupCustomFieldMap[$field_id];
+
+    // Do we need to map option id?
+    if (!ttStartsWith($prefix, 'show_') && $this->isDropdownCustomField($mapped_field_id)) {
+      $mapped_field_value = $this->currentGroupCustomFieldOptionMap[$field_value];
+    } else {
+      $mapped_field_value = $field_value;
+    }
+
+    $mappedPart = $prefix.$mapped_field_id.':'.$mapped_field_value;
+    return $mappedPart;
+  }
+
+  // remapReportSpec takes the source report spec as a parameter.
+  // It remaps it with new custom field and option ids so that it can be used for import.
+  private function remapReportSpec($report_spec) {
+    $remappedSpec = null;
+    $report_spec_parts = explode(',', $report_spec);
+    foreach ($report_spec_parts as $report_spec_part) {
+      if (ttStartsWith($report_spec_part, 'time_field_')) {
+        $remappedSpec .= ','.$this->remapReportSpecPart($report_spec_part, 'time_field_');
+      } elseif (ttStartsWith($report_spec_part, 'show_time_field_')) {
+        $remappedSpec .= ','.$this->remapReportSpecPart($report_spec_part, 'show_time_field_');
+      } elseif (ttStartsWith($report_spec_part, 'user_field_')) {
+        $remappedSpec .= ','.$this->remapReportSpecPart($report_spec_part, 'user_field_');
+      } elseif (ttStartsWith($report_spec_part, 'show_user_field_')) {
+        $remappedSpec .= ','.$this->remapReportSpecPart($report_spec_part, 'show_user_field_');
+      } else {
+        // Use the part as is.
+        $remappedSpec .= ','.$report_spec_part;
+      }
+    }
+    // Trim comma from the beginning.
+    $remappedSpec = ltrim($remappedSpec, ',');
+    return $remappedSpec;
   }
 }
