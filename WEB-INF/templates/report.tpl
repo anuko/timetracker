@@ -52,7 +52,6 @@
   {if $bean->getAttribute('chclient')}<td class="tableHeader">{$i18n.label.client}</td>{/if}
   {if $bean->getAttribute('chproject')}<td class="tableHeader">{$i18n.label.project}</td>{/if}
   {if $bean->getAttribute('chtask')}<td class="tableHeader">{$i18n.label.task}</td>{/if}
-  {if $bean->getAttribute('chcf_1')}<td class="tableHeader">{$custom_fields->fields[0]['label']|escape}</td>{/if}
 
   {* time custom fileds *}
   {if $custom_fields && $custom_fields->timeFields}
@@ -96,7 +95,6 @@
         {if $bean->getAttribute('chclient')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['client']|escape}</td>{/if}
         {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['project']|escape}</td>{/if}
         {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['task']|escape}</td>{/if}
-        {if $bean->getAttribute('chcf_1')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['cf_1']|escape}</td>{/if}
 
         {* time custom fileds *}
           {if $custom_fields && $custom_fields->timeFields}
@@ -144,7 +142,6 @@
     {if $bean->getAttribute('chclient')}<td class="cellLeftAligned">{$item.client|escape}</td>{/if}
     {if $bean->getAttribute('chproject')}<td class="cellLeftAligned">{$item.project|escape}</td>{/if}
     {if $bean->getAttribute('chtask')}<td class="cellLeftAligned">{$item.task|escape}</td>{/if}
-    {if $bean->getAttribute('chcf_1')}<td class="cellLeftAligned">{$item.cf_1|escape}</td>{/if}
 
     {* time custom fileds *}
     {if $custom_fields && $custom_fields->timeFields}
@@ -201,7 +198,6 @@
     {if $bean->getAttribute('chclient')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['client']|escape}</td>{/if}
     {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['project']|escape}</td>{/if}
     {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['task']|escape}</td>{/if}
-    {if $bean->getAttribute('chcf_1')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['cf_1']|escape}</td>{/if}
 
     {* time custom fileds *}
     {if $custom_fields && $custom_fields->timeFields}
@@ -243,7 +239,6 @@
     {if $bean->getAttribute('chclient')}<td></td>{/if}
     {if $bean->getAttribute('chproject')}<td></td>{/if}
     {if $bean->getAttribute('chtask')}<td></td>{/if}
-    {if $bean->getAttribute('chcf_1')}<td></td>{/if}
 
     {* time custom fileds *}
     {if $custom_fields && $custom_fields->timeFields}

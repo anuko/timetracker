@@ -352,7 +352,6 @@ class ttFavReportHelper {
       }
 
       $bean->setAttribute('client', $val['client_id']);
-      $bean->setAttribute('option', $val['cf_1_option_id']);
       $bean->setAttribute('project', $val['project_id']);
       $bean->setAttribute('task', $val['task_id']);
       $bean->setAttribute('include_records', $val['billable']);

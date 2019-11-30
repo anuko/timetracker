@@ -291,7 +291,6 @@ if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isCli
 if ($bean->getAttribute('chclient')) $colspan++;
 if ($bean->getAttribute('chproject')) $colspan++;
 if ($bean->getAttribute('chtask')) $colspan++;
-if ($bean->getAttribute('chcf_1')) $colspan++;
 if ($bean->getAttribute('chstart')) $colspan++;
 if ($bean->getAttribute('chfinish')) $colspan++;
 if ($bean->getAttribute('chduration')) $colspan++;

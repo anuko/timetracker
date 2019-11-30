@@ -70,7 +70,6 @@ class ttReportHelper {
       $dropdown_parts .= ' and l.client_id = '.$options['client_id'];
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and l.client_id = '.$user->client_id;
-    if ($options['cf_1_option_id']) $dropdown_parts .= ' and l.id in(select log_id from tt_custom_field_log where status = 1 and option_id = '.$options['cf_1_option_id'].')';
     if ($options['project_id']) $dropdown_parts .= ' and l.project_id = '.$options['project_id'];
     if ($options['task_id']) $dropdown_parts .= ' and l.task_id = '.$options['task_id'];
     if ($options['billable']=='1') $dropdown_parts .= ' and l.billable = 1';
@@ -264,7 +263,6 @@ class ttReportHelper {
       $grouping_by_project = ttReportHelper::groupingBy('project', $options);
       $grouping_by_task = ttReportHelper::groupingBy('task', $options);
       $grouping_by_user = ttReportHelper::groupingBy('user', $options);
-      $grouping_by_cf_1 = ttReportHelper::groupingBy('cf_1', $options);
     }
     $convertTo12Hour = ('%I:%M %p' == $user->getTimeFormat()) && ($options['show_start'] || $options['show_end']);
     $trackingMode = $user->getTrackingMode();
@@ -303,17 +301,6 @@ class ttReportHelper {
     // Add task name if it is selected.
     if ($options['show_task'] || $grouping_by_task)
       array_push($fields, 't.name as task');
-    // Add custom field.
-    $include_cf_1 = $options['show_custom_field_1'] || $grouping_by_cf_1;
-    if ($include_cf_1) {
-      $custom_fields = new CustomFields();
-      $cf_1_type = $custom_fields->fields[0]['type'];
-      if ($cf_1_type == CustomFields::TYPE_TEXT) {
-        array_push($fields, 'cfl.value as cf_1');
-      } elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
-        array_push($fields, 'cfo.value as cf_1');
-      }
-    }
     // Add time custom fields.
     if ($custom_fields && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
@@ -419,14 +406,6 @@ class ttReportHelper {
       $left_joins .= " left join tt_projects p on (p.id = l.project_id)";
     if ($options['show_task'] || $grouping_by_task)
       $left_joins .= " left join tt_tasks t on (t.id = l.task_id)";
-    if ($include_cf_1) {
-      if ($cf_1_type == CustomFields::TYPE_TEXT)
-        $left_joins .= " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)";
-      elseif ($cf_1_type == CustomFields::TYPE_DROPDOWN) {
-        $left_joins .=  " left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1)".
-          " left join tt_custom_field_options cfo on (cfl.option_id = cfo.id)";
-      }
-    }
     // Left joins for time custom fields.
     if ($custom_fields && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
@@ -509,8 +488,6 @@ class ttReportHelper {
         array_push($fields, 'p.name as project');
       if ($options['show_task'] || $grouping_by_task)
         array_push($fields, 'null'); // null for task name. We need to match column count for union.
-      if ($options['show_custom_field_1'] || $grouping_by_cf_1)
-        array_push($fields, 'null'); // null for cf_1.
       // Add null values for time custom fields.
       if ($custom_fields && $custom_fields->timeFields) {
         foreach ($custom_fields->timeFields as $timeField) {
@@ -668,7 +645,7 @@ class ttReportHelper {
     $report_item_ids = trim($report_item_ids, ',');
     $report_item_expense_ids = trim($report_item_expense_ids, ',');
 
-    // The lists are reqdy. Put them in session.
+    // The lists are ready. Put them in session.
     if ($report_item_ids) $_SESSION['report_item_ids'] = $report_item_ids;
     if ($report_item_expense_ids) $_SESSION['report_item_expense_ids'] = $report_item_expense_ids;
   }
@@ -734,9 +711,9 @@ class ttReportHelper {
           $val['cost'] = str_replace('.', $decimalMark, $val['cost']);
           $val['expenses'] = str_replace('.', $decimalMark, $val['expenses']);
         }
-        $subtotals[$val['group_field']] = array('name'=>$rowLabel,'user'=>$val['user'],'project'=>$val['project'],'task'=>$val['task'],'client'=>$val['client'],'cf_1'=>$val['cf_1'],'time'=>$time,'units'=> $val['units'],'cost'=>$val['cost'],'expenses'=>$val['expenses']);
+        $subtotals[$val['group_field']] = array('name'=>$rowLabel,'user'=>$val['user'],'project'=>$val['project'],'task'=>$val['task'],'client'=>$val['client'],'time'=>$time,'units'=> $val['units'],'cost'=>$val['cost'],'expenses'=>$val['expenses']);
       } else
-        $subtotals[$val['group_field']] = array('name'=>$rowLabel,'user'=>$val['user'],'project'=>$val['project'],'task'=>$val['task'],'client'=>$val['client'],'cf_1'=>$val['cf_1'],'time'=>$time, 'units'=> $val['units']);
+        $subtotals[$val['group_field']] = array('name'=>$rowLabel,'user'=>$val['user'],'project'=>$val['project'],'task'=>$val['task'],'client'=>$val['client'],'time'=>$time, 'units'=> $val['units']);
     }
 
     return $subtotals;
@@ -1365,7 +1342,6 @@ class ttReportHelper {
             if ($options[$checkbox_control_name]) $body .= '<td></td>';
           }
         }
-        if ($options['show_custom_field_1']) $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['cf_1'].'</td>';
         if ($options['show_start']) $body .= '<td></td>';
         if ($options['show_end']) $body .= '<td></td>';
         if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['time'].'</td>';
@@ -1408,7 +1384,6 @@ class ttReportHelper {
           if ($options[$checkbox_control_name]) $body .= '<td></td>';
         }
       }
-      if ($options['show_custom_field_1']) $body .= '<td></td>';
       if ($options['show_start']) $body .= '<td></td>';
       if ($options['show_end']) $body .= '<td></td>';
       if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['time'].'</td>';
@@ -1557,7 +1532,6 @@ class ttReportHelper {
     $options['show_task'] = $bean->getAttribute('chtask');
     $options['show_end'] = $bean->getAttribute('chfinish');
     $options['show_note'] = $bean->getAttribute('chnote');
-    $options['show_custom_field_1'] = $bean->getAttribute('chcf_1');
     $options['show_work_units'] = $bean->getAttribute('chunits');
     $options['show_timesheet'] = $bean->getAttribute('chtimesheet');
     $options['show_files'] = $bean->getAttribute('chfiles');
