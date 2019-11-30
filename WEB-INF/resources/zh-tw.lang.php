@@ -328,6 +328,7 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.expense_files' => 'Expense Item Files',
 // 'title.predefined_expenses' => 'Predefined Expenses',
 // 'title.add_predefined_expense' => 'Adding Predefined Expense',
 // 'title.edit_predefined_expense' => 'Editing Predefined Expense',

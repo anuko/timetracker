@@ -324,6 +324,8 @@ $i18n_key_words = array(
 'title.expenses' => 'هزینه ها',
 'title.edit_expense' => 'ویرایش آیتم هزینه ها',
 'title.delete_expense' => 'حذف آیتم هزینه ها',
+// TODO: translate the following.
+// 'title.expense_files' => 'Expense Item Files',
 'title.reports' => 'گزارشات',
 'title.report' => 'گزارش',
 'title.send_report' => 'ارسال گزارش',

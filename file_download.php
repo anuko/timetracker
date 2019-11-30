@@ -30,6 +30,7 @@ require_once('initialize.php');
 import('form.Form');
 import('ttFileHelper');
 import('ttTimeHelper');
+import('ttExpenseHelper');
 import('ttProjectHelper');
 
 // Access checks.
@@ -47,14 +48,20 @@ if ($entity_type == 'time') {
     exit();
   }
 }
+if ($entity_type == 'expense') {
+  if (!(ttAccessAllowed('track_own_expenses') || ttAccessAllowed('track_expenses')) || !ttExpenseHelper::getItemForFileView($file['entity_id'])) {
+    header('Location: access_denied.php');
+    exit();
+  }
+}
 if ($entity_type == 'project') {
   if (!(ttAccessAllowed('view_own_projects') || ttAccessAllowed('manage_projects')) || !ttProjectHelper::get($file['entity_id'])) {
     header('Location: access_denied.php');
     exit();
   }
 }
-if ($entity_type != 'project' && $entity_type != 'time') {
-  // Currently, files are only associated with time records and projects.
+if ($entity_type != 'project' && $entity_type != 'time' && $entity_type != 'expense') {
+  // Currently, files are only associated with time records, expense items, and projects.
   // Improve access checks when the feature evolves.
   header('Location: access_denied.php');
   exit();

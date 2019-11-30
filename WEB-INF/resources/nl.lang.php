@@ -297,6 +297,8 @@ $i18n_key_words = array(
 'title.expenses' => 'Kosten',
 'title.edit_expense' => 'Bewerk kosten artikel',
 'title.delete_expense' => 'Verwijder kosten artikel',
+// TODO: translate the following.
+// 'title.expense_files' => 'Expense Item Files',
 'title.predefined_expenses' => 'Vaste kosten',
 'title.add_predefined_expense' => 'Vaste kosten toevoegen',
 'title.edit_predefined_expense' => 'Vaste kosten bewerken',

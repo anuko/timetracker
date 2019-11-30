@@ -313,6 +313,8 @@ $i18n_key_words = array(
 'title.expenses' => 'Kostnader',
 'title.edit_expense' => 'Redigera kostnad',
 'title.delete_expense' => 'Ta bort kostnad',
+// TODO: translate the following.
+// 'title.expense_files' => 'Expense Item Files',
 'title.predefined_expenses' => 'Fördefinierade kostnader',
 'title.add_predefined_expense' => 'Lägg till fördefinierad kostnad',
 'title.edit_predefined_expense' => 'Redigera fördefinierad kostnad',

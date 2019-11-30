@@ -318,6 +318,8 @@ $i18n_key_words = array(
 'title.expenses' => 'Wydatki',
 'title.edit_expense' => 'Edytowanie wpisu',
 'title.delete_expense' => 'Usuwanie wpisu',
+// TODO: translate the following.
+// 'title.expense_files' => 'Expense Item Files',
 'title.reports' => 'Raporty',
 'title.report' => 'Raport',
 'title.send_report' => 'Wysyłanie raportu',

@@ -313,6 +313,8 @@ $i18n_key_words = array(
 'title.expenses' => 'Udgifter',
 'title.edit_expense' => 'Redigér Udgift',
 'title.delete_expense' => 'Slet Udgift',
+// TODO: translate the following.
+// 'title.expense_files' => 'Expense Item Files',
 'title.predefined_expenses' => 'Predefinerede Udgifter',
 'title.add_predefined_expense' => 'Tilføj Predefinerede Udgifter',
 'title.edit_predefined_expense' => 'Redigér Predefinerede Udgifter',

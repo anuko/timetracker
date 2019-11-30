@@ -33,6 +33,7 @@ import('ttGroupHelper');
 import('DateAndTime');
 import('ttTimeHelper');
 import('ttExpenseHelper');
+import('ttFileHelper');
 
 // Access checks.
 if (!(ttAccessAllowed('track_own_expenses') || ttAccessAllowed('track_expenses'))) {
@@ -83,6 +84,7 @@ $_SESSION['date'] = $cl_date;
 
 $tracking_mode = $user->getTrackingMode();
 $show_project = MODE_PROJECTS == $tracking_mode || MODE_PROJECTS_AND_TASKS == $tracking_mode;
+$showFiles = $user->isPluginEnabled('at');
 
 // Initialize variables.
 $cl_client = $request->getParameter('client', ($request->isPost() ? null : @$_SESSION['client']));
@@ -182,6 +184,8 @@ if ($predefined_expenses) {
 }
 $form->addInput(array('type'=>'textarea','maxlength'=>'800','name'=>'item_name','style'=>'width: 250px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_item_name));
 $form->addInput(array('type'=>'text','maxlength'=>'40','name'=>'cost','style'=>'width: 100px;','value'=>$cl_cost));
+if ($showFiles)
+  $form->addInput(array('type'=>'upload','name'=>'newfile','value'=>$i18n->get('button.submit')));
 $form->addInput(array('type'=>'calendar','name'=>'date','highlight'=>'expenses','value'=>$cl_date)); // calendar
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.submit')));
@@ -212,8 +216,19 @@ if ($request->isPost()) {
 
     // Insert record.
     if ($err->no()) {
-      if (ttExpenseHelper::insert(array('date'=>$cl_date,'client_id'=>$cl_client,
-          'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1))) {
+      $id = ttExpenseHelper::insert(array('date'=>$cl_date,'client_id'=>$cl_client,
+          'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1));
+
+      // Put a new file in storage if we have it.
+      if ($id && $showFiles && $_FILES['newfile']['name']) {
+        $fileHelper = new ttFileHelper($err);
+        $fields = array('entity_type'=>'expense',
+          'entity_id' => $id,
+          'file_name' => $_FILES['newfile']['name']);
+        $fileHelper->putFile($fields);
+      }
+
+      if ($id) {
         header('Location: expenses.php');
         exit();
       } else
@@ -224,8 +239,9 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('show_project', $show_project);
+$smarty->assign('show_files', $showFiles);
 $smarty->assign('day_total', ttExpenseHelper::getTotalForDay($cl_date));
-$smarty->assign('expense_items', ttExpenseHelper::getItems($cl_date));
+$smarty->assign('expense_items', ttExpenseHelper::getItems($cl_date, $showFiles));
 $smarty->assign('predefined_expenses', $predefined_expenses);
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);

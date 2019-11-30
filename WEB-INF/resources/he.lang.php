@@ -332,6 +332,7 @@ $i18n_key_words = array(
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
+// 'title.expense_files' => 'Expense Item Files',
 'title.reports' => 'דוחות',
 'title.report' => 'דוח',
 'title.send_report' => 'שליחת דוח',

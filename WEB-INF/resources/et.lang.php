@@ -322,6 +322,8 @@ $i18n_key_words = array(
 'title.expenses' => 'Kulud',
 'title.edit_expense' => 'Kulukirje muutmine',
 'title.delete_expense' => 'Kulukirje kustutamine',
+// TODO: translate the following.
+// 'title.expense_files' => 'Expense Item Files',
 'title.predefined_expenses' => 'Eelmääratud kulukirje',
 'title.add_predefined_expense' => 'Lisa eelmääratud kulukirje',
 'title.edit_predefined_expense' => 'Muuda eelmääratut kulukirjet',

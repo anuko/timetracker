@@ -280,6 +280,7 @@ $i18n_key_words = array(
 'title.expenses' => 'Расходы',
 'title.edit_expense' => 'Редактирование предмета расхода',
 'title.delete_expense' => 'Удаление предмета расхода',
+'title.expense_files' => 'Файлы предмета расхода',
 'title.predefined_expenses' => 'Предопределенные расходы',
 'title.add_predefined_expense' => 'Добавление предопределенного расхода',
 'title.edit_predefined_expense' => 'Редактирование предопределенного расхода',

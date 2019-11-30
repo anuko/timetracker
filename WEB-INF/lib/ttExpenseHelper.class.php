@@ -52,7 +52,11 @@ class ttExpenseHelper {
       " values (".$mdb2->quote($date).", $user_id, $group_id, $org_id, ".$mdb2->quote($client_id).", ".$mdb2->quote($project_id).
       ", ".$mdb2->quote($name).", ".$mdb2->quote($cost).", ".$mdb2->quote($invoice_id).", $paid $created, ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
-    return (!is_a($affected, 'PEAR_Error'));
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    $id = $mdb2->lastInsertID('tt_expense_items', 'id');
+    return $id;
   }
 
   // update - updates a record in tt_expense_items table.
@@ -90,6 +94,15 @@ class ttExpenseHelper {
   static function markDeleted($id) {
     global $user;
     $mdb2 = getConnection();
+
+    // Delete associated files.
+    if ($user->isPluginEnabled('at')) {
+      import('ttFileHelper');
+      global $err;
+      $fileHelper = new ttFileHelper($err);
+      if (!$fileHelper->deleteEntityFiles($id, 'expense'))
+        return false;
+    }
 
     $user_id = $user->getUser();
     $group_id = $user->getGroup();
@@ -159,8 +172,84 @@ class ttExpenseHelper {
     return false;
   }
 
+  // getItemForFileView - retrieves an expense item identified by its id for
+  // attachment view operation.
+  //
+  // It is different from getItem, as we want users with appropriate rights
+  // to be able to see other users files, without changing "on behalf" user.
+  // For example, viewing reports for all users and their attached files
+  // from report links.
+  static function getItemForFileView($id) {
+    // There are several possible situations:
+    //
+    // Record is ours. Check "view_own_reports" or "view_all_reports".
+    // Record is for the current on behalf user. Check "view_reports" or "view_all_reports".
+    // Record is for someone else. Check "view_reports" or "view_all_reports" and rank.
+    //
+    // It looks like the best way is to use 2 queries, obtain user_id first, then check rank.
+
+    global $user;
+    $mdb2 = getConnection();
+
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    // Obtain user_id for the expense item.
+    $sql = "select ei.id, ei.user_id, ei.invoice_id, ei.approved from tt_expense_items ei ".
+      " where ei.id = $id and ei.group_id = $group_id and ei.org_id = $org_id and ei.status = 1";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) return false;
+    if (!$res->numRows()) return false;
+
+    $val = $res->fetchRow();
+    $user_id = $val['user_id'];
+
+    // If record is ours.
+    if ($user_id == $user->id) {
+      if ($user->can('view_own_reports') || $user->can('view_all_reports')) {
+        $val['can_edit'] = !($val['invoice_id'] || $val['approved']);
+        return $val;
+      }
+      return false; // No rights.
+    }
+
+    // If record belongs to a user we impersonate.
+    if ($user->behalfUser && $user_id == $user->behalfUser->id) {
+      if ($user->can('view_reports') || $user->can('view_all_reports')) {
+        $val['can_edit'] = !($val['invoice_id'] || $val['approved']);
+        return $val;
+      }
+      return false; // No rights.
+    }
+
+    // Record belongs to someone else. We need to check user rank.
+    if (!($user->can('view_reports') || $user->can('view_all_reports'))) return false;
+    $max_rank = $user->can('view_all_reports') ? MAX_RANK : $user->getMaxRankForGroup($group_id);
+
+    $left_joins = ' left join tt_users u on (ei.user_id = u.id)';
+    $left_joins .= ' left join tt_roles r on (u.role_id = r.id)';
+
+    $where_part = " where ei.id = $id and ei.group_id = $group_id and ei.org_id = $org_id and ei.status = 1".
+    $where_part .= " and r.rank <= $max_rank";
+
+    $sql = "select ei.id, ei.user_id, ei.invoice_id, ei.approved".
+      " from tt_expense_items ei $left_joins $where_part";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      if (!$res->numRows()) {
+        return false;
+      }
+      if ($val = $res->fetchRow()) {
+        $val['can_edit'] = false;
+        return $val;
+      }
+    }
+    return false;
+  }
+
   // getItems - returns expense items for a user for a given date.
-  static function getItems($date) {
+  static function getItems($date, $includeFiles = false) {
     global $user;
     $mdb2 = getConnection();
 
@@ -174,13 +263,22 @@ class ttExpenseHelper {
     if ($user->isPluginEnabled('cl'))
       $client_field = ", c.name as client";
 
+    if ($includeFiles) {
+      $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
+      $fileJoin =  " left join (select distinct entity_id from tt_files".
+      " where entity_type = 'expense' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
+      " on (ei.id = Sub1.entity_id)";
+    }
+
     $left_joins = "";
     $left_joins = " left join tt_projects p on (ei.project_id = p.id)";
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (ei.client_id = c.id)";
 
+    $left_joins .= $fileJoin;
+
     $sql = "select ei.id as id $client_field, p.name as project, ei.name as item, ei.cost as cost,".
-      " ei.invoice_id, ei.approved from tt_expense_items ei $left_joins".
+      " ei.invoice_id, ei.approved $filePart from tt_expense_items ei $left_joins".
       " where ei.date = ".$mdb2->quote($date)." and ei.user_id = $user_id".
       " and ei.group_id = $group_id and ei.org_id = $org_id and ei.status = 1 order by ei.id";
 

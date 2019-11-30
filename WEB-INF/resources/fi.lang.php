@@ -317,6 +317,8 @@ $i18n_key_words = array(
 'title.expenses' => 'Kulut',
 'title.edit_expense' => 'Kulutietojen muokkaus',
 'title.delete_expense' => 'Kulutiedon poisto',
+// TODO: translate the following.
+// 'title.expense_files' => 'Expense Item Files',
 'title.reports' => 'Raportit',
 'title.report' => 'Raportti',
 'title.send_report' => 'Raportin lähetys',

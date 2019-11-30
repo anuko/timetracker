@@ -316,6 +316,8 @@ $i18n_key_words = array(
 'title.expenses' => 'Troškovi',
 'title.edit_expense' => 'Izmeni stavke troškova',
 'title.delete_expense' => 'Obriši stavke troškova',
+// TODO: translate the following.
+// 'title.expense_files' => 'Expense Item Files',
 'title.reports' => 'Izveštaji',
 'title.report' => 'Izveštaj',
 'title.send_report' => 'Slanje izveštaja',

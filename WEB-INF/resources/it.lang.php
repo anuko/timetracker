@@ -315,6 +315,8 @@ $i18n_key_words = array(
 'title.expenses' => 'Spese',
 'title.edit_expense' => 'Modifica voce di spesa',
 'title.delete_expense' => 'Eliminezione voce di spesa',
+// TODO: translate the following.
+// 'title.expense_files' => 'Expense Item Files',
 'title.predefined_expenses' => 'Spese predefinite',
 'title.add_predefined_expense' => 'Aggiunta spese predefinite',
 'title.edit_predefined_expense' => 'Modifica spese predefinite',

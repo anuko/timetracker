@@ -307,6 +307,8 @@ $i18n_key_words = array(
 'title.expenses' => 'Δαπάνες',
 'title.edit_expense' => 'Επεξεργασία δαπάνης',
 'title.delete_expense' => 'Διαγραφή δαπάνης',
+// TODO: translate the following.
+// 'title.expense_files' => 'Expense Item Files',
 'title.predefined_expenses' => 'Προκαθορισμένες δαπάνες',
 'title.add_predefined_expense' => 'Προσθήκη προκαθορισμένης δαπάνης',
 'title.edit_predefined_expense' => 'Επεξεργασία προκαθορισμένης δαπάνης',

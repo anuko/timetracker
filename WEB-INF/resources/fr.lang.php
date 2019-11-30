@@ -311,6 +311,8 @@ $i18n_key_words = array(
 'title.expenses' => 'Dépenses',
 'title.edit_expense' => 'Modification d\\\'une dépense',
 'title.delete_expense' => 'Suppression d\\\'une dépense',
+// TODO: translate the following.
+// 'title.expense_files' => 'Expense Item Files',
 'title.reports' => 'Rapports',
 'title.report' => 'Rapport',
 'title.send_report' => 'Envoi du rapport',

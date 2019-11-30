@@ -153,6 +153,12 @@ function recalculateCost() {
           <td align="right">{$i18n.label.cost} (*):</td>
           <td>{$forms.expensesForm.cost.control} {$user->getCurrency()|escape}</td>
         </tr>
+{if $show_files}
+        <tr>
+          <td align="right">{$i18n.label.file}:</td>
+          <td>{$forms.expensesForm.newfile.control}</td>
+        </tr>
+{/if}
       </table>
     </td>
     <td valign="top">
@@ -183,6 +189,9 @@ function recalculateCost() {
   {/if}
         <td class="tableHeader">{$i18n.label.item}</td>
         <td width="5%" class="tableHeaderCentered">{$i18n.label.cost}</td>
+  {if $show_files}
+        <td></td>
+  {/if}
         <td></td>
         <td></td>
       </tr>
@@ -196,6 +205,13 @@ function recalculateCost() {
     {/if}
         <td valign="top">{$item.item|escape}</td>
         <td valign="top" align="right">{$item.cost}</td>
+    {if $show_files}
+      {if $item.has_files}
+        <td valign="top" align="center"><a href="expense_files.php?id={$item.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_files.png"></a></td>
+      {else}
+        <td valign="top" align="center"><a href="expense_files.php?id={$item.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_file.png"></a></td>
+      {/if}
+    {/if}
         <td valign="top" align="center">
     {if $item.approved || $item.invoice_id}
           &nbsp;
