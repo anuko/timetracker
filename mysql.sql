@@ -265,7 +265,6 @@ CREATE TABLE `tt_fav_reports` (
   `org_id` int(11) default NULL,                         # organization id
   `report_spec` text default NULL,                       # future replacement field for all report settings
   `client_id` int(11) default NULL,                      # client id (if selected)
-  `cf_1_option_id` int(11) default NULL,                 # custom field 1 option id (if selected)
   `project_id` int(11) default NULL,                     # project id (if selected)
   `task_id` int(11) default NULL,                        # task id (if selected)
   `billable` tinyint(4) default NULL,                    # whether to include billable, not billable, or all records
@@ -290,7 +289,6 @@ CREATE TABLE `tt_fav_reports` (
   `show_end` tinyint(4) NOT NULL default 0,              # whether to show end field
   `show_note` tinyint(4) NOT NULL default 0,             # whether to show note column
   `show_approved` tinyint(4) NOT NULL default 0,         # whether to show approved column
-  `show_custom_field_1` tinyint(4) NOT NULL default 0,   # whether to show custom field 1
   `show_work_units` tinyint(4) NOT NULL default 0,       # whether to show work units
   `show_totals_only` tinyint(4) NOT NULL default 0,      # whether to show totals only
   `group_by1` varchar(20) default NULL,                  # group by field 1
@@ -641,4 +639,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.7', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.14', now()); # TODO: change when structure changes.
