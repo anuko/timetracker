@@ -1495,7 +1495,6 @@ class ttReportHelper {
     $options['name'] = null; // No name required.
     $options['user_id'] = $user->id; // Not sure if we need user_id here. Fav reports use it to recycle $user object in cron.php.
     $options['client_id'] = $bean->getAttribute('client');
-    $options['cf_1_option_id'] = $bean->getAttribute('option');
     $options['project_id'] = $bean->getAttribute('project');
     $options['task_id'] = $bean->getAttribute('task');
     $options['billable'] = $bean->getAttribute('include_records');
@@ -1656,9 +1655,6 @@ class ttReportHelper {
       case 'task':
         $group_by_parts .= ', t.name';
         break;
-      case 'cf_1':
-        $group_by_parts .= ', cfo.value';
-        break;
     }
     switch ($group_by2) {
       case 'date':
@@ -1676,9 +1672,6 @@ class ttReportHelper {
       case 'task':
         $group_by_parts .= ', t.name';
         break;
-      case 'cf_1':
-        $group_by_parts .= ', cfo.value';
-        break;
     }
     switch ($group_by3) {
       case 'date':
@@ -1695,9 +1688,6 @@ class ttReportHelper {
         break;
       case 'task':
         $group_by_parts .= ', t.name';
-        break;
-      case 'cf_1':
-        $group_by_parts .= ', cfo.value';
         break;
     }
     // Remove garbage from the beginning.
@@ -1793,10 +1783,6 @@ class ttReportHelper {
         $what_to_concat .= ", ' - ', coalesce(t.name, 'Null')";
         $fields_part .= ', t.name as task';
         break;
-      case 'cf_1':
-        $what_to_concat .= ", ' - ', coalesce(cfo.value, 'Null')";
-        $fields_part .= ', cfo.value as cf_1';
-        break;
     }
     switch ($group_by2) {
       case 'date':
@@ -1818,10 +1804,6 @@ class ttReportHelper {
         $what_to_concat .= ", ' - ', coalesce(t.name, 'Null')";
         $fields_part .= ', t.name as task';
         break;
-      case 'cf_1':
-        $what_to_concat .= ", ' - ', coalesce(cfo.value, 'Null')";
-        $fields_part .= ', cfo.value as cf_1';
-        break;
     }
     switch ($group_by3) {
       case 'date':
@@ -1842,10 +1824,6 @@ class ttReportHelper {
       case 'task':
         $what_to_concat .= ", ' - ', coalesce(t.name, 'Null')";
         $fields_part .= ', t.name as task';
-        break;
-      case 'cf_1':
-        $what_to_concat .= ", ' - ', coalesce(cfo.value, 'Null')";
-        $fields_part .= ', cfo.value as cf_1';
         break;
     }
     // Remove garbage from both ends.
@@ -1877,15 +1855,9 @@ class ttReportHelper {
         $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
         $fields_part .= ', p.name as project';
         break;
-
       case 'task':
         $what_to_concat .= ", ' - ', 'Null'";
         $fields_part .= ', null as task';
-        break;
-
-      case 'cf_1':
-        $what_to_concat .= ", ' - ', 'Null'";
-        $fields_part .= ', null as cf_1';
         break;
     }
     switch ($group_by2) {
@@ -1904,15 +1876,9 @@ class ttReportHelper {
         $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
         $fields_part .= ', p.name as project';
         break;
-
       case 'task':
         $what_to_concat .= ", ' - ', 'Null'";
         $fields_part .= ', null as task';
-        break;
-
-      case 'cf_1':
-        $what_to_concat .= ", ' - ', 'Null'";
-        $fields_part .= ', null as cf_1';
         break;
     }
     switch ($group_by3) {
@@ -1931,15 +1897,9 @@ class ttReportHelper {
         $what_to_concat .= ", ' - ', coalesce(p.name, 'Null')";
         $fields_part .= ', p.name as project';
         break;
-
       case 'task':
         $what_to_concat .= ", ' - ', 'Null'";
         $fields_part .= ', null as task';
-        break;
-
-      case 'cf_1':
-        $what_to_concat .= ", ' - ', 'Null'";
-        $fields_part .= ', null as cf_1';
         break;
     }
     // Remove garbage from the beginning.
@@ -1968,13 +1928,8 @@ class ttReportHelper {
       case 'project':
         $fields .= ', project';
         break;
-
       case 'task':
         $fields .= ', task';
-        break;
-
-      case 'cf_1':
-        $fields .= ', cf_1';
         break;
     }
     switch ($group_by2) {
@@ -1987,13 +1942,8 @@ class ttReportHelper {
       case 'project':
         $fields .= ', project';
         break;
-
       case 'task':
         $fields .= ', task';
-        break;
-
-      case 'cf_1':
-        $fields .= ', cf_1';
         break;
     }
     switch ($group_by3) {
@@ -2006,13 +1956,8 @@ class ttReportHelper {
       case 'project':
         $fields .= ', project';
         break;
-
       case 'task':
         $fields .= ', task';
-        break;
-
-      case 'cf_1':
-        $fields .= ', cf_1';
         break;
     }
     return $fields;
@@ -2040,13 +1985,6 @@ class ttReportHelper {
     }
     if (ttReportHelper::groupingBy('task', $options)) {
       $left_joins .= ' left join tt_tasks t on (l.task_id = t.id)';
-    }
-    if (ttReportHelper::groupingBy('cf_1', $options)) {
-      $custom_fields = new CustomFields();
-      if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
-        $left_joins .= ' left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.value = cfo.id)';
-      elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
-        $left_joins .= ' left join tt_custom_field_log cfl on (l.id = cfl.log_id and cfl.status = 1) left join tt_custom_field_options cfo on (cfl.option_id = cfo.id)';
     }
     if ($options['show_cost'] && $trackingMode != MODE_TIME) {
       $left_joins .= ' left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)';
@@ -2214,32 +2152,20 @@ class ttReportHelper {
     if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
       // We have group_by1.
       $group_by1 = $options['group_by1'];
-      if ('cf_1' == $group_by1)
-        $group_by_header .= ' - '.$custom_fields->fields[0]['label'];
-      else {
-        $key = 'label.'.$group_by1;
-        $group_by_header .= ' - '.$i18n->get($key);
-      }
+      $key = 'label.'.$group_by1;
+      $group_by_header .= ' - '.$i18n->get($key);
     }
     if ($options['group_by2'] != null && $options['group_by2'] != 'no_grouping') {
       // We have group_by2.
       $group_by2 = $options['group_by2'];
-      if ('cf_1' == $group_by2)
-        $group_by_header .= ' - '.$custom_fields->fields[0]['label'];
-      else {
-        $key = 'label.'.$group_by2;
-        $group_by_header .= ' - '.$i18n->get($key);
-      }
+      $key = 'label.'.$group_by2;
+      $group_by_header .= ' - '.$i18n->get($key);
     }
     if ($options['group_by3'] != null && $options['group_by3'] != 'no_grouping') {
       // We have group_by3.
       $group_by3 = $options['group_by3'];
-      if ('cf_1' == $group_by3)
-        $group_by_header .= ' - '.$custom_fields->fields[0]['label'];
-      else {
-        $key = 'label.'.$group_by3;
-        $group_by_header .= ' - '.$i18n->get($key);
-      }
+      $key = 'label.'.$group_by3;
+      $group_by_header .= ' - '.$i18n->get($key);
     }
     $group_by_header = ltrim($group_by_header, ' -');
     return $group_by_header;

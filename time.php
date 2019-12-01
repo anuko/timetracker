@@ -136,9 +136,6 @@ $cl_start = trim($request->getParameter('start'));
 $cl_finish = trim($request->getParameter('finish'));
 $cl_duration = trim($request->getParameter('duration'));
 $cl_note = trim($request->getParameter('note'));
-// Custom field.
-$cl_cf_1 = trim($request->getParameter('cf_1', ($request->isPost() ? null : @$_SESSION['cf_1'])));
-$_SESSION['cf_1'] = $cl_cf_1;
 $cl_billable = 1;
 if ($user->isPluginEnabled('iv')) {
   if ($request->isPost()) {
