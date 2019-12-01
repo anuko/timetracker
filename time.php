@@ -465,7 +465,6 @@ $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('time_records', $timeRecords);
 $smarty->assign('show_navigation', $user->isPluginEnabled('wv') && !$user->isOptionEnabled('week_menu'));
 $smarty->assign('show_client', $showClient);
-// $smarty->assign('show_cf_1', $user->isPluginEnabled('cf'));
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
 $smarty->assign('show_start', $showStart);

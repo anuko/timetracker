@@ -60,9 +60,6 @@ if ($user->isPluginEnabled('cf')) {
 // Initialize variables.
 $cl_start = trim($request->getParameter('browser_time'));
 $cl_finish = trim($request->getParameter('browser_time'));
-// Custom field.
-$cl_cf_1 = trim($request->getParameter('cf_1', ($request->isPost() ? null : @$_SESSION['cf_1'])));
-$_SESSION['cf_1'] = $cl_cf_1;
 $cl_billable = 1;
 if ($user->isPluginEnabled('iv')) {
   if ($request->isPost()) {
@@ -78,6 +75,22 @@ $cl_project = $request->getParameter('project', @$_SESSION['project']);
 $_SESSION['project'] = $cl_project;
 $cl_task = $request->getParameter('task', @$_SESSION['task']);
 $_SESSION['task'] = $cl_task;
+
+$timeCustomFields = array();
+// If we have time custom fields - collect input.
+if ($request->isPost()) {
+  if ($custom_fields && $custom_fields->timeFields) {
+    foreach ($custom_fields->timeFields as $timeField) {
+      $control_name = 'time_field_'.$timeField['id'];
+      $timeCustomFields[$timeField['id']] = array('field_id' => $timeField['id'],
+        'control_name' => $control_name,
+        'label' => $timeField['label'],
+        'type' => $timeField['type'],
+        'required' => $timeField['required'],
+        'value' => trim($request->getParameter($control_name)));
+    }
+  }
+}
 
 // Obtain uncompleted record. Assumtion is that only 1 uncompleted record is allowed.
 $uncompleted = ttTimeHelper::getUncompleted($user->getUser());
@@ -164,18 +177,19 @@ if (!$uncompleted)
 else
   $form->addInput(array('type'=>'submit','name'=>'btn_stop','onclick'=>'browser_time.value=get_time()','value'=>$i18n->get('label.finish'),'enable'=>!$enable_start));
 
-// If we have custom fields - add controls for them.
-if ($custom_fields && $custom_fields->fields[0]) {
-  // Only one custom field is supported at this time.
-  if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT) {
-    $form->addInput(array('type'=>'text','name'=>'cf_1','value'=>$cl_cf_1));
-  } elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
-    $form->addInput(array('type'=>'combobox','name'=>'cf_1',
+// If we have time custom fields - add controls for them.
+if ($custom_fields && $custom_fields->timeFields) {
+  foreach ($custom_fields->timeFields as $timeField) {
+    $field_name = 'time_field_'.$timeField['id'];
+    if ($timeField['type'] == CustomFields::TYPE_TEXT) {
+      $form->addInput(array('type'=>'text','name'=>$field_name,'style'=>'width: 250px;','value'=>$timeCustomFields[$timeField['id']]['value']));
+    } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+      $form->addInput(array('type'=>'combobox','name'=>$field_name,
       'style'=>'width: 250px;',
-      'value'=>$cl_cf_1,
-      'data'=>CustomFields::getOptions($custom_fields->fields[0]['id']),
-      'empty'=>array(''=>$i18n->get('dropdown.select'))
-    ));
+      'data'=>CustomFields::getOptions($timeField['id']),
+      'value'=>$timeCustomFields[$timeField['id']]['value'],
+      'empty'=>array(''=>$i18n->get('dropdown.select'))));
+    }
   }
 }
 
@@ -188,8 +202,12 @@ if ($request->isPost()) {
     // Validate user input.
     if ($user->isPluginEnabled('cl') && $user->isOptionEnabled('client_required') && !$cl_client)
       $err->add($i18n->get('error.client'));
-    if ($custom_fields) {
-      if (!ttValidString($cl_cf_1, !$custom_fields->fields[0]['required'])) $err->add($i18n->get('error.field'), $custom_fields->fields[0]['label']);
+    // Validate input in time custom fields.
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($timeCustomFields as $timeField) {
+        // Validation is the same for text and dropdown fields.
+        if (!ttValidString($timeField['value'], !$timeField['required'])) $err->add($i18n->get('error.field'), htmlspecialchars($timeField['label']));
+      }
     }
     if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
       if (!$cl_project) $err->add($i18n->get('error.project'));
@@ -236,13 +254,10 @@ if ($request->isPost()) {
         'note' => $cl_note,
         'billable' => $cl_billable));
 
-      // Insert a custom field if we have it.
+      // Insert time custom fields if we have them.
       $result = true;
-      if ($id && $custom_fields && $cl_cf_1) {
-        if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT)
-          $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], null, $cl_cf_1);
-        elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)
-          $result = $custom_fields->insert($id, $custom_fields->fields[0]['id'], $cl_cf_1, null);
+      if ($id && $custom_fields && $custom_fields->timeFields) {
+        $result = $custom_fields->insertTimeFields($id, $timeCustomFields);
       }
 
       if ($id && $result) {
@@ -285,11 +300,7 @@ if ($request->isPost()) {
 
 $week_total = ttTimeHelper::getTimeForWeek($cl_date);
 $smarty->assign('week_total', $week_total);
-
 $smarty->assign('uncompleted', $uncompleted);
-
-
-
 $smarty->assign('time_records', ttTimeHelper::getRecords($cl_date));
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('client_list', $client_list);
