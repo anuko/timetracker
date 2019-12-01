@@ -444,7 +444,10 @@ if ($request->isPost()) {
                 if ($custom_fields && $custom_fields->timeFields) {
                   foreach ($custom_fields->timeFields as $timeField) {
                     $field_name = 'time_field_'.$timeField['id'];
-                    $record[$field_name] = $timeCustomFields[$timeField['id']]['value'];
+                    if ($timeField['type'] == CustomFields::TYPE_TEXT)
+                      $record[$field_name] = $timeCustomFields[$timeField['id']]['value'];
+                    else if ($timeField['type'] == CustomFields::TYPE_DROPDOWN)
+                      $record[$field_name.'_option_id'] = $timeCustomFields[$timeField['id']]['value'];
                   }
                 }
                 $fields['row_id'] = ttWeekViewHelper::makeRowIdentifier($record).'_0';

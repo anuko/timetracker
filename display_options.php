@@ -51,7 +51,6 @@ $form = new Form('displayOptionsForm');
 
 // Time page.
 // $form->addInput(array('type'=>'checkbox','name'=>'time_client','value'=>$cl_time_client));
-// $form->addInput(array('type'=>'checkbox','name'=>'time_cf_1','value'=>$cl_time_cf_1));
 // $form->addInput(array('type'=>'checkbox','name'=>'time_project','value'=>$cl_time_project));
 // $form->addInput(array('type'=>'checkbox','name'=>'time_task','value'=>$cl_time_task));
 // $form->addInput(array('type'=>'checkbox','name'=>'time_start','value'=>$cl_time_start));

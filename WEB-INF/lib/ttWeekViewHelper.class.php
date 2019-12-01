@@ -126,13 +126,12 @@ class ttWeekViewHelper {
   // getDataForWeekView - builds an array to render a table of durations and comments for a week view.
   // In a week view we want one row representing the same attributes to have 7 values for each day of week.
   // We identify similar records by a combination of client, billable, project, task, and custom field values.
-  // This will allow us to extend the feature when more custom fields are added.
   //
-  // "cl:546,bl:1,pr:23456,ts:27464,cf_1:example text"
-  // The above means client 546, billable, project 23456, task 27464, custom field text "example text".
+  // "cl:546,bl:1,pr:23456,ts:27464,time_field_856:BASE64ENCODEDtext,time_field_857:2345"
+  // The above means client 546, billable, project 23456, task 27464, custom time_field_856 is base64 encoded,
+  // custom time_field_857 option id is 2345".
   //
-  // "cl:546,bl:0,pr:23456,ts:27464,cf_1:7623"
-  // The above means client 546, not billable, project 23456, task 27464, custom field option id 7623.
+  // We use base64 encoding for text fields to make parsing of such things possible when text contains commas, etc.
   //
   // Daily comments are implemented as alternate rows following week durations (when enabled).
   // For example: row_0 - new entry durations, row_1 - new entry daily comments,
@@ -165,7 +164,7 @@ class ttWeekViewHelper {
   //   ),
   //
   //   array( // Row 2.
-  //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623_0',
+  //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,time_field_857:7623_0',
   //     'label' => 'Anuko - Time Tracker - Coding - Option 2',
   //     'day_0' => array('control_id' => '2_day_0', 'tt_log_id' => 12345, 'duration' => '00:00'),
   //     'day_1' => array('control_id' => '2_day_1', 'tt_log_id' => 12346, 'duration' => '01:00'),
@@ -176,7 +175,7 @@ class ttWeekViewHelper {
   //     'day_6' => array('control_id' => '2_day_6', 'tt_log_id' => null, 'duration' => null)
   //   ),
   //   array( // Row 3.
-  //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,cf_1:7623_0_notes',
+  //     'row_id' => 'cl:546,bl:1,pr:23456,ts:27464,time_field_857:7623_0_notes',
   //     'label' => 'Notes:',
   //     'day_0' => array('control_id' => '3_day_0', 'tt_log_id' => 12345, 'note' => 'Comment one'),
   //     'day_1' => array('control_id' => '3_day_1', 'tt_log_id' => 12346, 'note' => 'Comment two'),
@@ -425,8 +424,7 @@ class ttWeekViewHelper {
   // makeRowIdentifier - builds a string identifying a row for a week view from a single record properties.
   //                     Note that the return value is without a suffix.
   // For example:
-  // "cl:546,bl:0,pr:23456,ts:27464,cf_1:example text"
-  // "cl:546,bl:1,pr:23456,ts:27464,cf_1:7623"
+  // "cl:546,bl:0,pr:23456,ts:27464,time_field_856:example text,time_field_857:7623"
   static function makeRowIdentifier($record) {
     global $user;
     // Start with client.
@@ -445,10 +443,10 @@ class ttWeekViewHelper {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         if ($timeField['type'] == CustomFields::TYPE_TEXT)
-           $field_value = $record[$field_name];
+           $field_value = base64_encode($record[$field_name]);
         else if ($timeField['type'] == CustomFields::TYPE_DROPDOWN)
            $field_value =  $record[$field_name.'_option_id'];
-        $row_identifier .= ',cf_'.$timeField['id'].":$field_value";
+        $row_identifier .= ",$field_name:$field_value";
       }
     }
     return $row_identifier;
@@ -473,12 +471,6 @@ class ttWeekViewHelper {
     if (!empty($label) && !empty($record['task'])) $label .= ' - ';
     $label .= $record['task'];
 
-    // Add custom field 1.
-    if ($user->isPluginEnabled('cf')) {
-      if (!empty($label) && !empty($record['cf_1_value'])) $label .= ' - ';
-      $label .= $record['cf_1_value'];
-    }
-
     // Add custom field parts.
     global $custom_fields;
     if ($custom_fields && $custom_fields->timeFields) {
@@ -494,9 +486,9 @@ class ttWeekViewHelper {
   }
 
   // parseFromWeekViewRow - obtains field value encoded in row identifier.
-  // For example, for a row id like "cl:546,bl:0,pr:23456,ts:27464,cf_1:example text"
+  // For example, for a row id like "cl:546,bl:0,pr:23456,ts:27464,time_field_856:example text,time_field_857:2345"
   // requesting a client "cl" should return 546.
-  static function parseFromWeekViewRow($row_id, $field_label) {
+  static function parseFromWeekViewRow($row_id, $field_label, $base64decode = false) {
     // Find beginning of label.
     $pos = strpos($row_id, $field_label);
     if ($pos === false) return null; // Not found.
@@ -504,15 +496,19 @@ class ttWeekViewHelper {
     // Strip suffix from row id.
     $suffixPos = strrpos($row_id, '_');
     if ($suffixPos)
-      $remaninder = substr($row_id, 0, $suffixPos);
+      $remainder = substr($row_id, 0, $suffixPos);
 
     // Find beginning of value.
-    $posBegin = 1 + strpos($remaninder, ':', $pos);
+    $posBegin = 1 + strpos($remainder, ':', $pos);
     // Find end of value.
-    $posEnd = strpos($remaninder, ',', $posBegin);
-    if ($posEnd === false) $posEnd = strlen($remaninder);
-    // Return value.
-    return substr($remaninder, $posBegin, $posEnd - $posBegin);
+    $posEnd = strpos($remainder, ',', $posBegin);
+    if ($posEnd === false) $posEnd = strlen($remainder);
+
+    $result = substr($remainder, $posBegin, $posEnd - $posBegin);
+    if ($base64decode)
+        $result = base64_decode($result);
+
+    return $result;
   }
 
   // dateFromDayHeader calculates date from start date and day header in week view.
@@ -571,13 +567,10 @@ class ttWeekViewHelper {
     if ($id && $custom_fields && $custom_fields->timeFields) {
       if ($fields['row_id']) {
         foreach ($custom_fields->timeFields as $timeField) {
-//          $control_name = 'time_field_'.$timeField['id'];
+          $base64decode = $timeField['type'] == CustomFields::TYPE_TEXT; // Decode all text fields back to clear text.
           $timeCustomFields[$timeField['id']] = array('field_id' => $timeField['id'],
-//            'control_name' => $control_name,
-//            'label' => $timeField['label'],
             'type' => $timeField['type'],
-//            'required' => $timeField['required'],
-            'value' => ttWeekViewHelper::parseFromWeekViewRow($fields['row_id'], 'cf_'.$timeField['id']));
+            'value' => ttWeekViewHelper::parseFromWeekViewRow($fields['row_id'], 'time_field_'.$timeField['id'], $base64decode));
         }
       }
       $result = $custom_fields->insertTimeFields($id, $timeCustomFields); // TODO: fix this.
