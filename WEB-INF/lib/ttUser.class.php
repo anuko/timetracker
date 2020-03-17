@@ -571,7 +571,7 @@ class ttUser {
 
     $groups[] = array('id'=>$group_id, 'name'=>$name);
 
-    $subgroups = $this->getSubgroups($group_id);
+    $subgroups = (array) $this->getSubgroups($group_id);
     foreach($subgroups as $subgroup) {
       $this->addGroupToDropdown($groups, $subgroup['id'], $subgroup_level+1);
     }
