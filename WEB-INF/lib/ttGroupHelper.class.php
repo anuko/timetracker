@@ -157,7 +157,7 @@ class ttGroupHelper {
     // Keep the logic simple by returning false on first error.
 
     // Obtain subgroups and call self recursively on them.
-    $subgroups = $user->getSubgroups($group_id);
+    $subgroups = (array) $user->getSubgroups($group_id);
     foreach($subgroups as $subgroup) {
       if (!ttGroupHelper::markGroupDeleted($subgroup['id']))
         return false;
