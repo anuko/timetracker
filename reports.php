@@ -391,7 +391,7 @@ $bean = new ActionForm('reportBean', $form, $request);
 
 if ($request->isGet() && !$bean->isSaved()) {
   // No previous form data were found in session. Use the following default values.
-  $form->setValueByElement('users_active', array_keys($user_list_active));
+  $form->setValueByElement('users_active', array_keys((array)$user_list_active));
   $period = new Period(INTERVAL_THIS_MONTH, new DateAndTime($user->getDateFormat()));
   $form->setValueByElement('start_date', $period->getStartDate());
   $form->setValueByElement('end_date', $period->getEndDate());
