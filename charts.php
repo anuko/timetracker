@@ -205,7 +205,7 @@ $img_ref = 'WEB-INF/templates_c/'.$file_name; // Image reference for html.
 $file_name = $img_dir.$file_name; // Full file name. 
 
 // Clean up the file system from older images.
-$img_files = glob($img_dir.'chart_*.png');
+$img_files = (array) glob($img_dir.'chart_*.png');
 foreach($img_files as $file) {
   // If the create time of file is older than 1 minute, delete it.
   if (filemtime($file) < (time() - 60)) {
