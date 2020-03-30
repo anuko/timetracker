@@ -11,3 +11,6 @@ Anuko [Time Tracker](https://www.anuko.com/time_tracker/index.htm) is a simple, 
 * Forum: https://www.anuko.com/forum/viewforum.php?f=4
 * Info for developers: https://www.anuko.com/time_tracker/info_for_developers.htm
 * How to contribute: https://www.anuko.com/time_tracker/contribute.htm
+
+## API
+Created a small api to login with the username and password to get project list and to submit a timesheet. Have used a JWT authentication for login. 
