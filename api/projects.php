@@ -29,7 +29,7 @@ if (stripos($content_type, 'application/json') === false) {
   throw new Exception('Content-Type must be application/json');
 }
 
-$secret_key = "6D7E07D955DC0316597835BB18F810E6105EB8BCE2B4A9B2B241C4C8047800BE";
+$secret_key = "91566E2C4E72AF394CAE190D1F2A6062E7826F84BB264962DD3450485C240117";
 
 $body = file_get_contents("php://input");
 $object = json_decode($body);

@@ -43,8 +43,8 @@ if ($auth->doLogin($cl_login, $cl_password)) {
   $isLoggedIn = true;
 
   if ($isLoggedIn) {
-    $secret_key = "6D7E07D955DC0316597835BB18F810E6105EB8BCE2B4A9B2B241C4C8047800BE"; // (SHA256) HTL@BizOrientDevTeam2020
-    $issuer_claim = "BizOrient"; // this can be the servername
+    $secret_key = "91566E2C4E72AF394CAE190D1F2A6062E7826F84BB264962DD3450485C240117"; // (SHA256) TestTimetrackerAPI@2020
+    $issuer_claim = "sasitha"; // this can be the servername
     $audience_claim = "THE_AUDIENCE";
     $issuedat_claim = time(); // issued at
     $notbefore_claim = $issuedat_claim; //not before in seconds
