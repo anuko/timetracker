@@ -52,7 +52,7 @@ if ($auth->doLogin($cl_login, $cl_password)) {
     $issuer_claim = ISSUER_CLAIM;
     $audience_claim = AUDIENCE_CLAIM;
     $issuedat_claim = time(); // issued at
-    $notbefore_claim = $issuedat_claim + 10; //not before in seconds
+    $notbefore_claim = $issuedat_claim; //not before in seconds
     $expire_claim = $issuedat_claim + 1800; // expire time in seconds
     $token = array(
       "iss" => $issuer_claim,
