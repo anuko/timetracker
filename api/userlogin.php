@@ -1,8 +1,13 @@
 <?php
 
+// +----------------------------------------------------------------------+
+// | Author: Sasitha Asaranga
+// +----------------------------------------------------------------------+
+
 require __DIR__ . './../vendor/autoload.php';
 require_once('../initialize.php');
 import('../form.Form');
+import('../ttOrgHelper');
 import('../ttUser');
 
 use \Firebase\JWT\JWT;
@@ -30,24 +35,24 @@ $cl_password = $object->password;
 
 @include('../plugins/limit/access_check.php');
 if ($auth->doLogin($cl_login, $cl_password)) {
-  // Set current user date (as determined by user browser) into session.
   $current_user_date = $request->getParameter('browser_today', null);
   if ($current_user_date)
     $_SESSION['date'] = $current_user_date;
 
-  // Remember user login in a cookie.
   setcookie('tt_login', $cl_login, time() + COOKIE_EXPIRE, '/');
 
   $user = new ttUser(null, $auth->getUserId());
-  // Redirect, depending on user role.
-  $isLoggedIn = true;
 
+  $isLoggedIn = false;
+  if (!empty($user)) {
+    $isLoggedIn = true;
+  }
   if ($isLoggedIn) {
-    $secret_key = "91566E2C4E72AF394CAE190D1F2A6062E7826F84BB264962DD3450485C240117"; // (SHA256) TestTimetrackerAPI@2020
-    $issuer_claim = "sasitha"; // this can be the servername
-    $audience_claim = "THE_AUDIENCE";
+    $secret_key = SECRET_KEY;
+    $issuer_claim = ISSUER_CLAIM;
+    $audience_claim = AUDIENCE_CLAIM;
     $issuedat_claim = time(); // issued at
-    $notbefore_claim = $issuedat_claim; //not before in seconds
+    $notbefore_claim = $issuedat_claim + 10; //not before in seconds
     $expire_claim = $issuedat_claim + 1800; // expire time in seconds
     $token = array(
       "iss" => $issuer_claim,
@@ -64,14 +69,18 @@ if ($auth->doLogin($cl_login, $cl_password)) {
 
     http_response_code(200);
     $jwt = JWT::encode($token, $secret_key);
-    // $jwt = true;
 
     $success_response = ['success' => true, 'userId' => $user->id, 'jwt' => $jwt];
     $response = json_encode($success_response);
-    error_log("success_response");
+    print_r($response);
+  } else {
+    $error_response = ['success' => false, 'error' => 'Empty user'];
+    $response = json_encode($error_response);
     print_r($response);
   }
-  exit();
 } else {
-  print_r(['success' => false, 'error' => 'Failed the login']);
+  $error_response = ['success' => false, 'error' => 'Failed the login'];
+  $response = json_encode($error_response);
+  print_r($response);
 }
+exit();

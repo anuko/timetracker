@@ -1,11 +1,18 @@
 <?php
 
+// +----------------------------------------------------------------------+
+// | Author: Sasitha Asaranga
+// +----------------------------------------------------------------------+
+
 require __DIR__ . './../vendor/autoload.php';
 require_once('../initialize.php');
 import('../form.Form');
+import('../ttOrgHelper');
 import('../ttUser');
+import('../ttGroupHelper');
 import('../ttClientHelper');
 import('../ttTimeHelper');
+import('../ttFileHelper');
 import('../DateAndTime');
 
 use \Firebase\JWT\JWT;
@@ -25,43 +32,46 @@ if (stripos($content_type, 'application/json') === false) {
   throw new Exception('Content-Type must be application/json');
 }
 
-$secret_key = "91566E2C4E72AF394CAE190D1F2A6062E7826F84BB264962DD3450485C240117";
+$secret_key = SECRET_KEY;
 
 $body = file_get_contents("php://input");
 $object = json_decode($body);
 
 $jwt = $object->jwt;
+$isLoggedIn = false;
 if ($jwt) {
-
-  $decoded = JWT::decode($jwt, $secret_key, array('HS256'));
-
   try {
-    $user = new ttUser(null, $object->userId);
+    $decoded = JWT::decode($jwt, $secret_key, array('HS256'));
+    $isLoggedIn = true;
+    $userId = $decoded->data->id;
+    $user = new ttUser(null, $userId);
+    if ($isLoggedIn) {
+      $group_id = $user->getGroup();
+      $cl_date = date("Y-m-d");
+      $cl_project = $object->projectId;
+      $cl_duration = $object->duration;
+      $cl_note = $object->note;
 
-    $cl_date = date("Y-m-d");
-    $cl_project = $object->projectId;
-    $cl_duration = $object->duration;
-    $cl_note = $object->note;
-
-    // Insert record.
-    $id = ttTimeHelper::insert(array(
-      'date' => $cl_date,
-      'user_id' => $user->getActiveUser(),
-      'client' => $cl_client,
-      'project' => $cl_project,
-      'task' => $cl_task,
-      'duration' => $cl_duration,
-      'note' => $cl_note,
-      'billable' => true
-    ));
-
-    $result = true;
-    if ($id && $result) {
-      // header('Location: time.php');
-      $success_response = ['success' => true, 'data' => $id];
-      $response = json_encode($success_response);
-      print_r($response);
-      exit();
+      // Insert record.
+      $id = ttTimeHelper::insert(array(
+        'date' => $cl_date,
+        'user_id' => $userId,
+        'group_id' => $group_id,
+        'org_id' => $user->org_id,
+        'client' => $cl_client,
+        'project' => $cl_project,
+        'task' => $cl_task,
+        'duration' => $cl_duration,
+        'note' => $cl_note,
+        'billable' => true
+      ));
+      $result = true;
+      if ($id && $result && $err->no()) {
+        $success_response = ['success' => true, 'data' => $id];
+        $response = json_encode($success_response);
+        print_r($response);
+        exit();
+      }
     }
   } catch (Exception $e) {
     $isLoggedIn = false;
@@ -70,6 +80,5 @@ if ($jwt) {
       "message" => "Access denied.",
       "error" => $e->getMessage()
     )));
-    exit();
   }
 }
