@@ -35,12 +35,6 @@ $cl_password = $object->password;
 
 @include('../plugins/limit/access_check.php');
 if ($auth->doLogin($cl_login, $cl_password)) {
-  $current_user_date = $request->getParameter('browser_today', null);
-  if ($current_user_date)
-    $_SESSION['date'] = $current_user_date;
-
-  setcookie('tt_login', $cl_login, time() + COOKIE_EXPIRE, '/');
-
   $user = new ttUser(null, $auth->getUserId());
 
   $isLoggedIn = false;
