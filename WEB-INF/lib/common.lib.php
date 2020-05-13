@@ -245,9 +245,10 @@ function ttValidDate($val)
   if (strlen($val) == 0)
     return false;
 
-  // This should accept a string in format 'YYYY-MM-DD', 'MM/DD/YYYY', 'DD.MM.YYYY', or 'DD.MM.YYYY whatever'.
+  // This should accept a string in format 'YYYY-MM-DD', 'MM/DD/YYYY', 'DD-MM-YYYY', 'DD.MM.YYYY', or 'DD.MM.YYYY whatever'.
   if (!preg_match('/^\d\d\d\d-\d\d-\d\d$/', $val) &&
     !preg_match('/^\d\d\/\d\d\/\d\d\d\d$/', $val) &&
+    !preg_match('/^\d\d\-\d\d\-\d\d\d\d$/', $val) &&
     !preg_match('/^\d\d\.\d\d\.\d\d\d\d$/', $val) &&
     !preg_match('/^\d\d\.\d\d\.\d\d\d\d .+$/', $val))
     return false;
