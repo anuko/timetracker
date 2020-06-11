@@ -199,12 +199,6 @@ class Auth_ldap extends Auth {
         echo '$login_oldap='; var_dump($login_oldap); echo '<br />';
       }
 
-      // check if the user specified full login
-      if (strpos($login, '@') === false) {
-        // append default domain
-        $login .= '@' . $this->params['default_domain'];
-      }
-
       $lb = @ldap_bind($lc, $login_oldap, $password);
 
       if (isTrue('DEBUG')) {
@@ -221,11 +215,18 @@ class Auth_ldap extends Auth {
         // TODO: Fix this for OpenLDAP, as samaccountname has nothing to do with it.
         // get groups
 
-        $filter = 'samaccountname='.Auth_ldap::ldap_escape($login_oldap);
-        $fields = array('samaccountname', 'mail', 'memberof', 'department', 'displayname', 'telephonenumber', 'primarygroupid');
+        if (isTrue('DEBUG')) {
+          echo '$member_of : '; var_dump($member_of); echo '<br />';
+        }
+
+        $filter = 'uid='.$login; 	// ldap search filter
+        $fields = array('memberof');    // ldap search attributes
+        // $fields = 'uid';
         $sr = @ldap_search($lc, $this->params['base_dn'], $filter, $fields);
 
         if (isTrue('DEBUG')) {
+          echo '$filter='; var_dump($filter); echo '<br />';
+          echo '$fields='; var_dump($fields); echo '<br />';
           echo '$sr='; var_dump($sr); echo '<br />';
           echo 'ldap_error()='; echo ldap_error($lc); echo '<br />';
         }
@@ -248,30 +249,40 @@ class Auth_ldap extends Auth {
           return false;
         }
 
-        $groups = array();
+        $groups = array(); // existing ldap group memberships
 
-        // extract group names from
-        // assuming the groups are in format: CN=<group_name>,...
         for ($i = 0; $i < @$entries[0]['memberof']['count']; $i++) {
-          $grp = $entries[0]['memberof'][$i];
-          $grp_fields = explode(',', $grp);
-          $groups[] = substr($grp_fields[0], 3);
+	  $grp = $entries[0]['memberof'][$i];
+          $groups[] = $grp; // append group to array
+          if (isTrue('DEBUG')) {
+            var_dump($grp); echo ' appended to $groups<br />';
+          };
+
         }
 
-        if (isTrue('DEBUG')) {
-          echo '$member_of'; var_dump($member_of); echo '<br />';
-        }
 
         // check for group membership
         foreach ($member_of as $check_grp) {
+          if (isTrue('DEBUG')) {
+            echo '$check_grp:'; var_dump($check_grp); echo '<br />';
+          };
           if (!in_array($check_grp, $groups)) {
             ldap_unbind($lc);
+            if (isTrue('DEBUG')) {
+        	echo '=> '.$login.' is not a member of '.$check_grp.'<br />';
+            };
             return false;
           }
         }
       }
 
       ldap_unbind($lc);
+
+      // check if the user specified full login
+      if (strpos($login, '@') === false) {
+	// append default domain
+        $login .= '@' . $this->params['default_domain'];
+      }
 
       return array('login' => $login, 'data' => $entries, 'member_of' => $groups);
     }
