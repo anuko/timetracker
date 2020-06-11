@@ -38,10 +38,6 @@
 // In April 2012, a previously mandatory search for group membership was put in a conditional block (if ($member_of) -
 // when mandatory membership in groups is actually defined in config.php).
 // This made the module work with Sun Directory Server when NO GROUP MEMBERSHIP is specified.
-// Note 1: search is likely to fail with Sun DS if 'member_of' => array()); is used in config.php.
-// Note 2: search is likely to not work properly with OpenLDAP as well because of Windows specific filtering code in there
-// (we are looking for matches for Windows-specific samaccountname property). Search needs to be redone during the next
-// refactoring effort.
 
 
 /**
@@ -212,8 +208,6 @@ class Auth_ldap extends Auth {
       }
 
       if ($member_of) {
-        // TODO: Fix this for OpenLDAP, as samaccountname has nothing to do with it.
-        // get groups
 
         if (isTrue('DEBUG')) {
           echo '$member_of : '; var_dump($member_of); echo '<br />';
@@ -221,7 +215,6 @@ class Auth_ldap extends Auth {
 
         $filter = 'uid='.$login; 	// ldap search filter
         $fields = array('memberof');    // ldap search attributes
-        // $fields = 'uid';
         $sr = @ldap_search($lc, $this->params['base_dn'], $filter, $fields);
 
         if (isTrue('DEBUG')) {
@@ -256,21 +249,19 @@ class Auth_ldap extends Auth {
           $groups[] = $grp; // append group to array
           if (isTrue('DEBUG')) {
             var_dump($grp); echo ' appended to $groups<br />';
-          };
-
+          }
         }
-
 
         // check for group membership
         foreach ($member_of as $check_grp) {
           if (isTrue('DEBUG')) {
             echo '$check_grp:'; var_dump($check_grp); echo '<br />';
-          };
+          }
           if (!in_array($check_grp, $groups)) {
             ldap_unbind($lc);
             if (isTrue('DEBUG')) {
-        	echo '=> '.$login.' is not a member of '.$check_grp.'<br />';
-            };
+              echo '=> '.$login.' is not a member of '.$check_grp.'<br />';
+            }
             return false;
           }
         }
