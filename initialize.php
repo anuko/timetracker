@@ -85,8 +85,8 @@ $phpsessid_ttl = defined('PHPSESSID_TTL') ? PHPSESSID_TTL : 60*60*24;
 // Set lifetime for garbage collection.
 ini_set('session.gc_maxlifetime', $phpsessid_ttl);
 // Set PHP session path, if defined to avoid garbage collection interference from other scripts.
-if (defined('PHP_SESSION_PATH')) {
-  ini_set('session.save_path', PHP_SESSION_PATH);
+if (defined('PHP_SESSION_PATH') && realpath(PHP_SESSION_PATH)) {
+  ini_set('session.save_path', realpath(PHP_SESSION_PATH));
   ini_set('session.gc_probability', 1);
 }
 
