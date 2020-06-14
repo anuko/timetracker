@@ -150,7 +150,8 @@ define('AUTH_MODULE', 'db');
 //  'server' => '127.0.0.1',                    // OpenLDAP server address or name. For secure LDAP use ldaps://hostname:port here.
 //  'type' => 'openldap',                       // Type of server. openldap type should also work with Sun Directory Server when member_of is empty.
                                                 // It may work with other (non Windows AD) LDAP servers. For Windows AD use the 'ad' type.
-//  'base_dn' => 'ou=People,dc=example,dc=com', // Base distinguished name in LDAP catalog.
+//  'base_dn' => 'ou=People,dc=example,dc=com', // Path of user's base distinguished name in LDAP catalog.
+//  'user_login_attribute' => 'uid',            // LDAP attribute used for login
 //  'default_domain' => 'example.com',          // Default domain.
 //  'member_of' => array());                    // List of groups, membership in which is required for user to be authenticated.
 
