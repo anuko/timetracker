@@ -189,7 +189,15 @@ class Auth_ldap extends Auth {
     if ($this->params['type'] == 'openldap') {
 
       // Assuming OpenLDAP server.
-      $login_oldap = 'uid='.$login.','.$this->params['base_dn'];
+
+      if (empty($this->params['user_login_attribute'])) {
+        $user_login_attribute = 'uid';
+      } else {
+        $user_login_attribute = @$this->params['user_login_attribute'];
+
+      }
+
+      $login_oldap = $user_login_attribute.'='.Auth_ldap::ldap_escape($login).','.$this->params['base_dn'];
 
       if (isTrue('DEBUG')) {
         echo '$login_oldap='; var_dump($login_oldap); echo '<br />';
@@ -213,8 +221,8 @@ class Auth_ldap extends Auth {
           echo '$member_of : '; var_dump($member_of); echo '<br />';
         }
 
-        $filter = 'uid='.$login; 	// ldap search filter
-        $fields = array('memberof');    // ldap search attributes
+        $filter = $user_login_attribute.'='.Auth_ldap::ldap_escape($login); 	// ldap search filter
+        $fields = array('memberof');                                            // ldap search attributes
         $sr = @ldap_search($lc, $this->params['base_dn'], $filter, $fields);
 
         if (isTrue('DEBUG')) {
