@@ -193,8 +193,7 @@ class Auth_ldap extends Auth {
       if (empty($this->params['user_login_attribute'])) {
         $user_login_attribute = 'uid';
       } else {
-        $user_login_attribute = @$this->params['user_login_attribute'];
-
+        $user_login_attribute = $this->params['user_login_attribute'];
       }
 
       $login_oldap = $user_login_attribute.'='.Auth_ldap::ldap_escape($login).','.$this->params['base_dn'];
