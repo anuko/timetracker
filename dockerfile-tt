@@ -11,8 +11,9 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 RUN docker-php-ext-install mysqli
 
 # Install gd extension.
-RUN apt-get update && apt-get install libpng-dev -y \
- && docker-php-ext-install gd
+RUN apt-get update && apt-get install libpng-dev libfreetype6-dev -y \
+ && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ \
+ && docker-php-ext-install gd 
 
 # Install ldap extension.
 RUN apt-get install libldap2-dev -y \
