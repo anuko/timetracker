@@ -566,6 +566,22 @@ CREATE TABLE `tt_templates` (
 
 
 #
+# Structure for table tt_project_template_binds. This table maps projects to templates.
+#
+CREATE TABLE `tt_project_template_binds` (
+  `project_id` int(10) unsigned NOT NULL,        # project id
+  `template_id` int(10) unsigned NOT NULL,       # template id
+  `group_id` int(10) unsigned NOT NULL,          # group id
+  `org_id` int(10) unsigned NOT NULL             # organization id
+);
+
+# Indexes for tt_project_template_binds.
+create index project_idx on tt_project_template_binds(project_id);
+create index template_idx on tt_project_template_binds(template_id);
+create unique index project_template_idx on tt_project_template_binds(project_id, template_id);
+
+
+#
 # Structure for table tt_files.
 # This table keeps file attachment information.
 #
@@ -639,4 +655,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.14', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.17', now()); # TODO: change when structure changes.

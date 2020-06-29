@@ -12,7 +12,7 @@
       <br>
       <table cellspacing="0" cellpadding="4" width="100%" border="0">
         <tr>
-          <td align="center">&nbsp;Anuko Time Tracker 1.19.16.5190 | Copyright &copy; <a href="https://www.anuko.com/lp/tt_3.htm" target="_blank">Anuko</a> |
+          <td align="center">&nbsp;Anuko Time Tracker 1.19.17.5191 | Copyright &copy; <a href="https://www.anuko.com/lp/tt_3.htm" target="_blank">Anuko</a> |
             <a href="https://www.anuko.com/lp/tt_4.htm" target="_blank">{$i18n.footer.credits}</a> |
             <a href="https://www.anuko.com/lp/tt_5.htm" target="_blank">{$i18n.footer.license}</a> |
             <a href="https://www.anuko.com/lp/tt_7.htm" target="_blank">{$i18n.footer.improve}</a>
