@@ -41,16 +41,23 @@ if (!$user->isPluginEnabled('tp')) {
 }
 // End of access checks.
 
+$projects = ttGroupHelper::getActiveProjects();
+
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_description = trim($request->getParameter('description'));
   $cl_content = trim($request->getParameter('content'));
+  $cl_projects = $request->getParameter('projects');
+} else {
+  foreach ($projects as $project_item)
+    $cl_projects[] = $project_item['id'];
 }
 
 $form = new Form('templateForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 250px;','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 $form->addInput(array('type'=>'textarea','name'=>'content','style'=>'width: 250px; height: 80px;','value'=>$cl_content));
+$form->addInput(array('type'=>'checkboxgroup','name'=>'projects','layout'=>'H','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_projects));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
@@ -64,7 +71,8 @@ if ($request->isPost()) {
     if (ttTemplateHelper::insert(array(
         'name' => $cl_name,
         'description' => $cl_description,
-        'content' => $cl_content))) {
+        'content' => $cl_content,
+        'projects' => $cl_projects))) {
         header('Location: templates.php');
         exit();
       } else
@@ -73,6 +81,7 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
+$smarty->assign('show_projects', count($projects) > 0 && defined('TEMPLATES_DEBUG'));
 $smarty->assign('title', $i18n->get('title.add_template'));
 $smarty->assign('content_page_name', 'template_add.tpl');
 $smarty->display('index.tpl');

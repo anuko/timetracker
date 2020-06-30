@@ -26,7 +26,7 @@
       </table>
 {if $inactive_templates}
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
-        <tr><td class="sectionHeaderNoBorder">{$i18n.form.tasks.inactive_tasks}</td></tr>
+        <tr><td class="sectionHeaderNoBorder">{$i18n.form.templates.inactive_templates}</td></tr>
         <tr>
           <td class="tableHeader" width="45%">{$i18n.label.thing_name}</td>
           <td class="tableHeader" width="45%">{$i18n.label.description}</td>

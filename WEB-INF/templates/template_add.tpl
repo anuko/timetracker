@@ -15,6 +15,13 @@
           <td align="right">{$i18n.label.template} (*):</td>
           <td>{$forms.templateForm.content.control}</td>
         </tr>
+{if $show_projects}
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+          <td align="right">{$i18n.label.projects}:</td>
+          <td>{$forms.templateForm.projects.control}</td>
+        </tr>
+{/if}
         <tr>
           <td height="40"></td>
           <td>{$i18n.label.required_fields}</td>

@@ -81,6 +81,7 @@ class ttTemplateHelper {
     $name = $fields['name'];
     $description = $fields['description'];
     $content = $fields['content'];
+    $projects = $fields['projects'];
 
     $created_part = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
 
@@ -89,10 +90,23 @@ class ttTemplateHelper {
       " values ($group_id, $org_id, ".$mdb2->quote($name).
       ", ".$mdb2->quote($description).", ".$mdb2->quote($content).$created_part.")";
     $affected = $mdb2->exec($sql);
+    $last_id = 0;
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    return true;
+    $last_id = $mdb2->lastInsertID('tt_templates', 'id');
+
+    if (is_array($projects)) {
+      foreach ($projects as $p_id) {
+        // Insert project binds into tt_project_template_binds table.
+        $sql = "insert into tt_project_template_binds (project_id, template_id, group_id, org_id)".
+          " values($p_id, $last_id, $group_id, $org_id)";
+        $affected = $mdb2->exec($sql);
+        if (is_a($affected, 'PEAR_Error'))
+          return false;
+      }
+    }
+    return $last_id;
   }
 
   // update function - updates a template in database.
