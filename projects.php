@@ -45,8 +45,10 @@ $showFiles = $user->isPluginEnabled('at');
 if($user->can('manage_projects')) {
   $active_projects = ttGroupHelper::getActiveProjects($showFiles);
   $inactive_projects = ttGroupHelper::getInactiveProjects($showFiles);
-} else
-  $active_projects = $user->getAssignedProjects($showFiles);
+} else {
+  $options['include_files'] = $showFiles;
+  $active_projects = $user->getAssignedProjects($options);
+}
 
 $smarty->assign('active_projects', $active_projects);
 $smarty->assign('inactive_projects', $inactive_projects);

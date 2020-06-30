@@ -67,6 +67,12 @@ class ttTemplateHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
+    // Delete project binds to this template.
+    $sql = "delete from tt_project_template_binds where template_id = $id and group_id = $group_id and org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
     return true;
   }
 
@@ -172,5 +178,27 @@ class ttTemplateHelper {
       }
     }
     return $result;
+  }
+
+   // getAssignedTemplates - returns a comma-separated list of template ids assigned to a project.
+  static function getAssignedTemplates($project_id)
+  {
+    global $user;
+
+    $result = array();
+    $mdb2 = getConnection();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $sql = "select template_id from tt_project_template_binds
+      where project_id = $project_id and group_id = $group_id and org_id = $org_id" ;
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val['template_id'];
+      }
+    }
+    $comma_separated = implode(',', $result); // This is a comma-separated list of associated template ids.
+    return $comma_separated;
   }
 }

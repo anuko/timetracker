@@ -13,6 +13,7 @@
 // project_names[325] = "Time Tracker";   // Project name.
 // task_ids[325] = "100,101,302,303,304"; // Comma-separated list ot task ids for project.
 // task_names[100] = "Coding";            // Task name.
+// template_ids[325] = "17,21";           // Comma-separated list ot template ids for project. NOT YET IMPLEMENTED.
 
 // Prepare an array of project ids for clients.
 var project_ids = new Array();

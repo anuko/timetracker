@@ -32,6 +32,7 @@ import('ttBehalfUser');
 import('ttGroup');
 import('form.Form');
 import('form.ActionForm');
+import('ttTemplateHelper');
 
 class ttUser {
   var $login = null;            // User login.
@@ -333,7 +334,7 @@ class ttUser {
   }
 
   // getAssignedProjects - returns an array of assigned projects.
-  function getAssignedProjects($includeFiles = false)
+  function getAssignedProjects($options = null)
   {
     $result = array();
     $mdb2 = getConnection();
@@ -342,7 +343,7 @@ class ttUser {
     $group_id = $this->getGroup();
     $org_id = $this->org_id;
 
-    if ($includeFiles) {
+    if ($options['include_files']) {
       $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
       $fileJoin =  " left join (select distinct entity_id from tt_files".
       " where entity_type = 'project' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
@@ -356,6 +357,12 @@ class ttUser {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
+        // If we have to include templates, get them in a separate query for each project.
+        // Although, theoretically, we could use mysql group_concat, but this requires grouping by, which makes
+        // maintenance of this code more complex.
+        if ($options['include_templates']) {
+          $val['templates'] = ttTemplateHelper::getAssignedTemplates($val['id']);
+        }
         $result[] = $val;
       }
     }

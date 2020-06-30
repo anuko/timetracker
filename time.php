@@ -69,6 +69,7 @@ if ($request->isPost() && $userChanged) {
 $group_id = $user->getGroup();
 
 $showClient = $user->isPluginEnabled('cl');
+$showBillable = $user->isPluginEnabled('iv');
 $trackingMode = $user->getTrackingMode();
 $showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
 $showTask = MODE_PROJECTS_AND_TASKS == $trackingMode;
@@ -76,6 +77,7 @@ $recordType = $user->getRecordType();
 $showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
 $showFinish = $showStart;
 $showDuration = TYPE_DURATION == $recordType || TYPE_ALL == $recordType;
+$showTemplates = $user->isPluginEnabled('tp');
 $showFiles = $user->isPluginEnabled('at');
 
 // Initialize and store date in session.
@@ -206,7 +208,8 @@ if (MODE_TIME == $trackingMode && $showClient) {
 
 if ($showProject) {
   // Dropdown for projects assigned to user.
-  $project_list = $user->getAssignedProjects();
+  $options['include_templates'] = $showTemplates;
+  $project_list = $user->getAssignedProjects($options);
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillTaskDropdown(this.value);',
     'name'=>'project',
@@ -245,6 +248,9 @@ if ($showProject) {
   }
 }
 
+if ($showBillable)
+  $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
+
 if ($showTask) {
   $task_list = ttGroupHelper::getActiveTasks();
   $form->addInput(array('type'=>'combobox',
@@ -277,9 +283,7 @@ $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // 
 
 
 
-// TODO: refactoring ongoing down from here. Use $showBillable, perhaps?
-if ($user->isPluginEnabled('iv'))
-  $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
+// TODO: refactoring ongoing down from here.
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.submit')));
 
@@ -300,7 +304,7 @@ if ($custom_fields && $custom_fields->timeFields) {
 }
 
 // If we have templates, add a dropdown to select one.
-if ($user->isPluginEnabled('tp')){
+if ($showTemplates){
   $templates = ttGroupHelper::getActiveTemplates();
   if (count($templates) >= 1) {
     $form->addInput(array('type'=>'combobox',
@@ -310,7 +314,7 @@ if ($user->isPluginEnabled('tp')){
       'data'=>$templates,
       'datakeys'=>array('id','name'),
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
-    $smarty->assign('template_dropdown', 1);
+    $smarty->assign('show_templates', 1);
     $smarty->assign('templates', $templates);
   }
 }
@@ -358,7 +362,7 @@ if ($request->isPost()) {
         $err->add($i18n->get('error.field'), $i18n->get('label.duration'));
     }
     if (!ttValidString($cl_note, true)) $err->add($i18n->get('error.field'), $i18n->get('label.note'));
-    if ($user->isPluginEnabled('tp') && !ttValidTemplateText($cl_note)) {
+    if ($showTemplates && !ttValidTemplateText($cl_note)) {
       $err->add($i18n->get('error.field'), $i18n->get('label.note'));
     }
     if (!ttTimeHelper::canAdd()) $err->add($i18n->get('error.expired'));
@@ -465,11 +469,13 @@ $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('time_records', $timeRecords);
 $smarty->assign('show_navigation', $user->isPluginEnabled('wv') && !$user->isOptionEnabled('week_menu'));
 $smarty->assign('show_client', $showClient);
+$smarty->assign('show_billable', $showBillable);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
 $smarty->assign('show_start', $showStart);
 $smarty->assign('show_finish', $showFinish);
 $smarty->assign('show_duration', $showDuration);
+$smarty->assign('show_templates', $showTemplates);
 $smarty->assign('show_note_column', $showNoteColumn);
 $smarty->assign('show_note_row', $showNoteRow);
 $smarty->assign('show_files', $showFiles);
