@@ -77,7 +77,6 @@ $recordType = $user->getRecordType();
 $showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
 $showFinish = $showStart;
 $showDuration = TYPE_DURATION == $recordType || TYPE_ALL == $recordType;
-$showTemplates = $user->isPluginEnabled('tp');
 $showFiles = $user->isPluginEnabled('at');
 
 // Initialize and store date in session.
@@ -304,7 +303,7 @@ if ($custom_fields && $custom_fields->timeFields) {
 }
 
 // If we have templates, add a dropdown to select one.
-if ($showTemplates){
+if ($user->isPluginEnabled('tp')){
   $templates = ttGroupHelper::getActiveTemplates();
   if (count($templates) >= 1) {
     $form->addInput(array('type'=>'combobox',
@@ -314,7 +313,7 @@ if ($showTemplates){
       'data'=>$templates,
       'datakeys'=>array('id','name'),
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
-    $smarty->assign('show_templates', 1);
+    $smarty->assign('template_dropdown', 1);
     $smarty->assign('templates', $templates);
   }
 }
@@ -362,7 +361,7 @@ if ($request->isPost()) {
         $err->add($i18n->get('error.field'), $i18n->get('label.duration'));
     }
     if (!ttValidString($cl_note, true)) $err->add($i18n->get('error.field'), $i18n->get('label.note'));
-    if ($showTemplates && !ttValidTemplateText($cl_note)) {
+    if ($user->isPluginEnabled('tp') && !ttValidTemplateText($cl_note)) {
       $err->add($i18n->get('error.field'), $i18n->get('label.note'));
     }
     if (!ttTimeHelper::canAdd()) $err->add($i18n->get('error.expired'));

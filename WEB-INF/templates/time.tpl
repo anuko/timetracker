@@ -81,7 +81,7 @@
           <td>{$forms.timeRecordForm.newfile.control}</td>
         </tr>
 {/if}
-{if $show_templates}
+{if $template_dropdown}
         <tr>
           <td align="right">{$i18n.label.template}:</td>
           <td>{$forms.timeRecordForm.template.control}</td>
