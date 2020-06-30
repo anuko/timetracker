@@ -109,6 +109,7 @@ class ttTemplateHelper {
     $content = $fields['content'];
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
     $status = (int) $fields['status'];
+    $projects = $fields['projects'];
 
     $sql = "update tt_templates set name = ".$mdb2->quote($name).
       ", description = ".$mdb2->quote($description).
@@ -116,7 +117,24 @@ class ttTemplateHelper {
       ", status = ".$status.
       " where id = $template_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
-    return (!is_a($affected, 'PEAR_Error'));
+    if (is_a($affected, 'PEAR_Error'))
+      die($affected->getMessage());
+
+    // Insert project binds into tt_project_template_binds table.
+    $sql = "delete from tt_project_template_binds where template_id = $template_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      die($affected->getMessage());
+    if (count($projects) > 0)
+      foreach ($projects as $p_id) {
+        $sql = "insert into tt_project_template_binds (project_id, template_id, group_id, org_id)".
+          " values($p_id, $template_id, $group_id, $org_id)";
+        $affected = $mdb2->exec($sql);
+        if (is_a($affected, 'PEAR_Error'))
+          die($affected->getMessage());
+      }
+
+    return true;
   }
 
   // getAssignedProjects - returns an array of projects associatied with a template.
