@@ -118,4 +118,27 @@ class ttTemplateHelper {
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
+
+  // getAssignedProjects - returns an array of projects associatied with a template.
+  static function getAssignedProjects($template_id)
+  {
+    global $user;
+
+    $result = array();
+    $mdb2 = getConnection();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    // Do a query with inner join to get assigned projects.
+    $sql = "select p.id, p.name from tt_projects p
+      inner join tt_project_template_binds ptb on (ptb.project_id = p.id and ptb.template_id = $template_id)
+      where p.group_id = $group_id and p.org_id = $org_id and p.status = 1 order by p.name";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
 }

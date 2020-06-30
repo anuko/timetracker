@@ -98,6 +98,7 @@ class ttOrgHelper {
       'tt_config',
       'tt_cron',
       'tt_fav_reports',
+      'tt_project_template_binds',
       'tt_templates',
       'tt_monthly_quotas',
       'tt_predefined_expenses',

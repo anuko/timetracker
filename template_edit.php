@@ -47,16 +47,22 @@ if (!$template) {
 }
 // End of access checks.
 
+$projects = ttGroupHelper::getActiveProjects();
+
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_description = trim($request->getParameter('description'));
   $cl_content = trim($request->getParameter('content'));
   $cl_status = $request->getParameter('status');
+  $cl_projects = $request->getParameter('projects');
 } else {
   $cl_name = $template['name'];
   $cl_description = $template['description'];
   $cl_content = $template['content'];
   $cl_status = $template['status'];
+  $assigned_projects = ttTemplateHelper::getAssignedProjects($cl_template_id);
+  foreach ($assigned_projects as $project_item)
+    $cl_projects[] = $project_item['id'];
 }
 
 $form = new Form('templateForm');
