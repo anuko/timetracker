@@ -49,20 +49,27 @@ if ($request->isPost()) {
   $cl_bind_templates_with_projects = $config->getDefinedValue('bind_templates_with_projects');
 }
 
-
 $form = new Form('templatesForm');
 $form->addInput(array('type'=>'checkbox','name'=>'bind_templates_with_projects','value'=>$cl_bind_templates_with_projects));
+$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
+$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
+$activeTemplates = ttGroupHelper::getActiveTemplates();
+$inactiveTemplates = ttGroupHelper::getInactiveTemplates();
 
 if ($request->isPost()) {
+  if ($request->getParameter('btn_save')) {
+    // Save button clicked. Update config.
+    $config->setDefinedValue('bind_templates_with_projects', $cl_bind_templates_with_projects);
+    if (!$user->updateGroup(array('config' => $config->getConfig()))) {
+      $err->add($i18n->get('error.db'));
+    }
+  }
+
   if ($request->getParameter('btn_add')) {
     // The Add button clicked. Redirect to template_add.php page.
     header('Location: template_add.php');
     exit();
   }
-} else {
-  $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
-  $activeTemplates = ttGroupHelper::getActiveTemplates();
-  $inactiveTemplates = ttGroupHelper::getInactiveTemplates();
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

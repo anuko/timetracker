@@ -356,11 +356,12 @@ class ttUser {
       " where p.group_id = $group_id and p.org_id = $org_id and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
+      $bindTemplatesWithProjects = $options['include_templates'];
       while ($val = $res->fetchRow()) {
         // If we have to include templates, get them in a separate query for each project.
         // Although, theoretically, we could use mysql group_concat, but this requires grouping by, which makes
         // maintenance of this code more complex.
-        if ($options['include_templates']) {
+        if ($bindTemplatesWithProjects) {
           $val['templates'] = ttTemplateHelper::getAssignedTemplates($val['id']);
         }
         $result[] = $val;

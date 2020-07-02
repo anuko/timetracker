@@ -8,6 +8,9 @@
           <td align="right" nowrap>{$forms.templatesForm.bind_templates_with_projects.control}</td>
           <td><label for="bind_templates_with_projects">{$i18n.label.bind_templates_with_projects}</label> <a href="https://www.anuko.com/lp/tt_42.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
         </tr>
+        <tr>
+          <td colspan="2" height="50" align="center">{$forms.templatesForm.btn_save.control}</td>
+        </tr>
 {/if}
 {if $inactive_templates}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.templates.active_templates}</td></tr>

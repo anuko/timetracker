@@ -207,7 +207,7 @@ if (MODE_TIME == $trackingMode && $showClient) {
 
 if ($showProject) {
   // Dropdown for projects assigned to user.
-  $options['include_templates'] = $showTemplates;
+  $options['include_templates'] = $user->isPluginEnabled('tp') && $config->getDefinedValue('bind_templates_with_projects');
   $project_list = $user->getAssignedProjects($options);
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillTaskDropdown(this.value);',
