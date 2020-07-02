@@ -3,6 +3,12 @@
   <tr>
     <td valign="top">
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
+{if defined('TEMPLATES_DEBUG')}
+        <tr>
+          <td align="right" nowrap>{$forms.templatesForm.bind_templates_with_projects.control}</td>
+          <td><label for="bind_templates_with_projects">{$i18n.label.bind_templates_with_projects}</label> <a href="https://www.anuko.com/lp/tt_42.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+        </tr>
+{/if}
 {if $inactive_templates}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.templates.active_templates}</td></tr>
 {/if}

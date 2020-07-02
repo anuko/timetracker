@@ -241,6 +241,7 @@ $i18n_key_words = array(
 'label.approval' => 'Одобрение отчётов',
 'label.mark_approved' => 'Отметить одобрение',
 'label.template' => 'Шаблон',
+'label.bind_templates_with_projects' => 'Связать шаблоны с проектамиЫ',
 'label.attachments' => 'Приложения',
 'label.files' => 'Файлы',
 'label.file' => 'Файл',

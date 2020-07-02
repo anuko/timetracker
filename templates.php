@@ -41,7 +41,17 @@ if (!$user->isPluginEnabled('tp')) {
 }
 // End of access checks.
 
+$config = $user->getConfigHelper();
+
+if ($request->isPost()) {
+  $cl_bind_templates_with_projects = $request->getParameter('bind_templates_with_projects');
+} else {
+  $cl_bind_templates_with_projects = $config->getDefinedValue('bind_templates_with_projects');
+}
+
+
 $form = new Form('templatesForm');
+$form->addInput(array('type'=>'checkbox','name'=>'bind_templates_with_projects','value'=>$cl_bind_templates_with_projects));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_add')) {

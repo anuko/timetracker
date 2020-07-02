@@ -276,6 +276,7 @@ $i18n_key_words = array(
 // 'label.approval' => 'Report approval',
 // 'label.mark_approved' => 'Mark approved',
 // 'label.template' => 'Template',
+// 'label.bind_templates_with_projects' => 'Bind templates with projects',
 // 'label.attachments' => 'Attachments',
 // 'label.files' => 'Files',
 // 'label.file' => 'File',
