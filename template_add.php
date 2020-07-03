@@ -41,6 +41,7 @@ if (!$user->isPluginEnabled('tp')) {
 }
 // End of access checks.
 
+$config = new ttConfigHelper($user->getConfig());
 $projects = ttGroupHelper::getActiveProjects();
 
 if ($request->isPost()) {
@@ -81,7 +82,7 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('show_projects', count($projects) > 0 && defined('TEMPLATES_DEBUG'));
+$smarty->assign('show_projects', count($projects) > 0 && $config->getDefinedValue('bind_templates_with_projects'));
 $smarty->assign('title', $i18n->get('title.add_template'));
 $smarty->assign('content_page_name', 'template_add.tpl');
 $smarty->display('index.tpl');

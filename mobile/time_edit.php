@@ -32,6 +32,7 @@ import('ttUserHelper');
 import('ttGroupHelper');
 import('ttClientHelper');
 import('ttTimeHelper');
+import('ttConfigHelper');
 import('DateAndTime');
 
 // Access checks.
@@ -49,6 +50,7 @@ if (!$time_rec || $time_rec['approved'] || $time_rec['timesheet_id'] || $time_re
 // End of access checks.
 
 $user_id = $user->getUser();
+$config = new ttConfigHelper($user->getConfig());
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
@@ -138,9 +140,10 @@ if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
 
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
   // Dropdown for projects assigned to user.
-  $project_list = $user->getAssignedProjects();
+  $options['include_templates'] = $user->isPluginEnabled('tp') && $config->getDefinedValue('bind_templates_with_projects');
+  $project_list = $user->getAssignedProjects($options);
   $form->addInput(array('type'=>'combobox',
-    'onchange'=>'fillTaskDropdown(this.value);',
+    'onchange'=>'fillTaskDropdown(this.value);fillTemplateDropdown(this.value);',
     'name'=>'project',
     'style'=>'width: 250px;',
     'value'=>$cl_project,
@@ -221,17 +224,18 @@ if ($custom_fields && $custom_fields->timeFields) {
 
 // If we have templates, add a dropdown to select one.
 if ($user->isPluginEnabled('tp')){
-  $templates = ttGroupHelper::getActiveTemplates();
-  if (count($templates) >= 1) {
+  $template_list = ttGroupHelper::getActiveTemplates();
+  if (count($template_list) >= 1) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillNote(this.value);',
       'name'=>'template',
       'style'=>'width: 250px;',
-      'data'=>$templates,
+      'data'=>$template_list,
       'datakeys'=>array('id','name'),
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
     $smarty->assign('template_dropdown', 1);
-    $smarty->assign('templates', $templates);
+    $smarty->assign('bind_templates_with_projects', $config->getDefinedValue('bind_templates_with_projects'));
+    $smarty->assign('template_list', $template_list);
   }
 }
 

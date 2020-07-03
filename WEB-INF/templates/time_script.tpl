@@ -44,32 +44,47 @@ var task_names = new Array();
   task_names[{$task.id}] = "{$task.name|escape:'javascript'}";
 {/foreach}
 
-{if $template_dropdown}
-var templates = new Array();
-{foreach $templates as $template}
-  templates[{$template.id}] = "{$template.content|escape:'javascript'}";
+// Prepare an array of template ids for projects.
+var template_ids = new Array();
+{if $bind_templates_with_projects}
+  {foreach $project_list as $project}
+  template_ids[{$project.id}] = "{$project.templates}";
+  {/foreach}
+{/if}
+// Prepare an array of template names.
+var template_names = new Array();
+{if $bind_templates_with_projects}
+  {foreach $template_list as $template}
+  template_names[{$template.id}] = "{$template.name|escape:'javascript'}";
+  {/foreach}
+{/if}
+// Prepare an array of template bodies.
+var template_bodies = new Array();
+{foreach $template_list as $template}
+  template_bodies[{$template.id}] = "{$template.content|escape:'javascript'}";
 {/foreach}
 
 // The fillNote function populates the Note field with a selected template body.
 function fillNote(id) {
   if (!id) return; // Do nothing.
-  var template_body = templates[id];
+  var template_body = template_bodies[id];
   var note = document.getElementById("note");
   note.value = template_body;
 }
-{/if}
 
 // Mandatory top options for project and task dropdowns.
 var empty_label_project = "{$i18n.dropdown.select|escape:'javascript'}";
 var empty_label_task = "{$i18n.dropdown.select|escape:'javascript'}";
+var empty_label_template = "{$i18n.dropdown.select|escape:'javascript'}";
 
-// The fillDropdowns function populates the "project" and "task" dropdown controls
+// The fillDropdowns function populates the "project", "task", and "template" dropdown controls
 // with relevant values.
 function fillDropdowns() {
   if(document.body.contains(document.timeRecordForm.client))
     fillProjectDropdown(document.timeRecordForm.client.value);
 
   fillTaskDropdown(document.timeRecordForm.project.value);
+  fillTemplateDropdown(document.timeRecordForm.project.value);
 }
 
 // The fillProjectDropdown function populates the project combo box with
@@ -163,6 +178,52 @@ function fillTaskDropdown(id) {
     // Select a task if user is required to do so and there is only one task available.
     if ({$user->task_required} && dropdown.options.length == 2) { // 2 because of mandatory top option.
       dropdown.options[1].selected = true;
+    }
+  }
+}
+
+// The fillTemplateDropdown function populates the template combo box with
+// templates associated with a selected project (project id is passed here as id).
+function fillTemplateDropdown(id) {
+{if !$bind_templates_with_projects}
+  return; // Do nothing if we are not binding templates with projects,
+{/if}
+
+  var str_ids = template_ids[id];
+
+  var dropdown = document.getElementById("template");
+  if (dropdown == null) return; // Nothing to do.
+
+  // Determine previously selected item.
+  var selected_item = dropdown.options[dropdown.selectedIndex].value;
+
+  // Remove existing content.
+  dropdown.length = 0;
+  // Add mandatory top option.
+  dropdown.options[0] = new Option(empty_label_template, '', true);
+
+  // Populate the dropdown from the template_names array.
+  if (str_ids) {
+    var ids = new Array();
+    ids = str_ids.split(",");
+    var len = ids.length;
+
+    var idx = 1;
+    for (var i = 0; i < len; i++) {
+      var t_id = ids[i];
+      if (template_names[t_id]) {
+        dropdown.options[idx] = new Option(template_names[t_id], t_id);
+        idx++;
+      }
+    }
+
+    // If a previously selected item is still in dropdown - select it.
+    if (dropdown.options.length > 0) {
+      for (var i = 0; i < dropdown.options.length; i++) {
+        if (dropdown.options[i].value == selected_item) {
+          dropdown.options[i].selected = true;
+        }
+      }
     }
   }
 }
