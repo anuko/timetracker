@@ -45,12 +45,15 @@ $config = $user->getConfigHelper();
 
 if ($request->isPost()) {
   $cl_bind_templates_with_projects = $request->getParameter('bind_templates_with_projects');
+  $cl_prepopulate_empty_note = $request->getParameter('prepopulate_empty_note');
 } else {
   $cl_bind_templates_with_projects = $config->getDefinedValue('bind_templates_with_projects');
+  $cl_prepopulate_empty_note = $config->getDefinedValue('prepopulate_empty_note');
 }
 
 $form = new Form('templatesForm');
 $form->addInput(array('type'=>'checkbox','name'=>'bind_templates_with_projects','value'=>$cl_bind_templates_with_projects));
+$form->addInput(array('type'=>'checkbox','name'=>'prepopulate_empty_note','value'=>$cl_prepopulate_empty_note));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 $activeTemplates = ttGroupHelper::getActiveTemplates();
@@ -60,6 +63,7 @@ if ($request->isPost()) {
   if ($request->getParameter('btn_save')) {
     // Save button clicked. Update config.
     $config->setDefinedValue('bind_templates_with_projects', $cl_bind_templates_with_projects);
+    $config->setDefinedValue('prepopulate_empty_note', $cl_prepopulate_empty_note);
     if (!$user->updateGroup(array('config' => $config->getConfig()))) {
       $err->add($i18n->get('error.db'));
     }
