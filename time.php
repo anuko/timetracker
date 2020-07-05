@@ -210,7 +210,7 @@ if ($showProject) {
   $options['include_templates'] = $user->isPluginEnabled('tp') && $config->getDefinedValue('bind_templates_with_projects');
   $project_list = $user->getAssignedProjects($options);
   $form->addInput(array('type'=>'combobox',
-    'onchange'=>'fillTaskDropdown(this.value);fillTemplateDropdown(this.value);',
+    'onchange'=>'fillTaskDropdown(this.value);fillTemplateDropdown(this.value);prepopulateNote();',
     'name'=>'project',
     'style'=>'width: 250px;',
     'value'=>$cl_project,
