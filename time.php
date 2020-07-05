@@ -315,7 +315,7 @@ if ($user->isPluginEnabled('tp')){
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
     $smarty->assign('template_dropdown', 1);
     $smarty->assign('bind_templates_with_projects', $config->getDefinedValue('bind_templates_with_projects'));
-    $smarty->assign('prepopulate_empty_note', $config->getDefinedValue('prepopulate_empty_note'));
+    $smarty->assign('prepopulate_note', $config->getDefinedValue('prepopulate_note'));
     $smarty->assign('template_list', $template_list);
   }
 }

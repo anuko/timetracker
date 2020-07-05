@@ -227,14 +227,11 @@ function fillTemplateDropdown(id) {
     }
   }
 
-  // Do things for prepopulate_empty_note.
-  if ({$prepopulate_empty_note} && dropdown.options.length >= 2) { // 2 because of mandatory top option.
+  // Prepopulate note if we have to.
+  if ({$prepopulate_note} && dropdown.options.length >= 2) { // 2 because of mandatory top option.
     var note = document.getElementById("note");
-    if (note.value == "") {
-      // We have an empty Note field.
-      dropdown.options[1].selected = true; // Select first template.
-      note.value = template_bodies[dropdown.options[1].value]; // Pre-polulate note with first template body.
-    }
+    dropdown.options[1].selected = true; // Select first template.
+    note.value = template_bodies[dropdown.options[1].value]; // Pre-polulate note with first template body.
   }
 }
 

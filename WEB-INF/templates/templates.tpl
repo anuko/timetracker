@@ -53,8 +53,8 @@
           <td><label for="bind_templates_with_projects">{$i18n.label.bind_templates_with_projects}</label> <a href="https://www.anuko.com/lp/tt_42.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
         </tr>
         <tr>
-          <td align="right">{$forms.templatesForm.prepopulate_empty_note.control}</td>
-          <td><label for="prepopulate_empty_note">{$i18n.label.prepopulate_empty_note}</label> <a href="https://www.anuko.com/lp/tt_43.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+          <td align="right">{$forms.templatesForm.prepopulate_note.control}</td>
+          <td><label for="prepopulate_note">{$i18n.label.prepopulate_note}</label> <a href="https://www.anuko.com/lp/tt_43.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
         </tr>
         <tr>
           <td colspan="2" height="50" align="center">{$forms.templatesForm.btn_save.control}</td>
