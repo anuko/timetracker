@@ -231,7 +231,7 @@ function fillTemplateDropdown(id) {
 
 // The prepopulateNote function populates the note field with first found template body in Template dropdown.
 function prepopulateNote() {
-  {if !prepopulate_note}
+  {if !$prepopulate_note}
     return;
   {/if}
   var dropdown = document.getElementById("template");
