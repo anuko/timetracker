@@ -231,10 +231,13 @@ function fillTemplateDropdown(id) {
 
 // The prepopulateNote function populates the note field with first found template body in Template dropdown.
 function prepopulateNote() {
+  {if !prepopulate_note}
+    return;
+  {/if}
   var dropdown = document.getElementById("template");
   if (dropdown == null) return; // Nothing to do.
 
-  if (!{$prepopulate_note} || dropdown.options.length <= 1) return ; // 1 because of mandatory top option.
+  if (dropdown.options.length <= 1) return ; // 1 because of mandatory top option.
 
   dropdown.options[1].selected = true; // Select first template.
   var note = document.getElementById("note");
