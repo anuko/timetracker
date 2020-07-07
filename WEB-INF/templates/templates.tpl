@@ -48,12 +48,15 @@
 {/if}
       <div class="table-divider"></div>
       <table width="100%">
+
+{if $show_bind_with_projects_checkbox}
         <tr>
-          <td align="right" width=25%">{$forms.templatesForm.bind_templates_with_projects.control}</td>
+          <td align="right" width="25%">{$forms.templatesForm.bind_templates_with_projects.control}</td>
           <td><label for="bind_templates_with_projects">{$i18n.label.bind_templates_with_projects}</label> <a href="https://www.anuko.com/lp/tt_42.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
         </tr>
+{/if}
         <tr>
-          <td align="right">{$forms.templatesForm.prepopulate_note.control}</td>
+          <td align="right" width="25%">{$forms.templatesForm.prepopulate_note.control}</td>
           <td><label for="prepopulate_note">{$i18n.label.prepopulate_note}</label> <a href="https://www.anuko.com/lp/tt_43.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
         </tr>
         <tr>

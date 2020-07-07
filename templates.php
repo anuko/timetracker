@@ -42,6 +42,8 @@ if (!$user->isPluginEnabled('tp')) {
 // End of access checks.
 
 $config = $user->getConfigHelper();
+$trackingMode = $user->getTrackingMode();
+$showBindWithProjectsCheckbox = $trackingMode != MODE_TIME;
 
 if ($request->isPost()) {
   $cl_bind_templates_with_projects = $request->getParameter('bind_templates_with_projects');
@@ -52,7 +54,7 @@ if ($request->isPost()) {
 }
 
 $form = new Form('templatesForm');
-$form->addInput(array('type'=>'checkbox','name'=>'bind_templates_with_projects','value'=>$cl_bind_templates_with_projects));
+if ($showBindWithProjectsCheckbox) $form->addInput(array('type'=>'checkbox','name'=>'bind_templates_with_projects','value'=>$cl_bind_templates_with_projects));
 $form->addInput(array('type'=>'checkbox','name'=>'prepopulate_note','value'=>$cl_prepopulate_note));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
@@ -79,6 +81,7 @@ if ($request->isPost()) {
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('active_templates', $activeTemplates);
 $smarty->assign('inactive_templates', $inactiveTemplates);
+$smarty->assign('show_bind_with_projects_checkbox', $showBindWithProjectsCheckbox);
 $smarty->assign('title', $i18n->get('title.templates'));
 $smarty->assign('content_page_name', 'templates.tpl');
 $smarty->display('index.tpl');

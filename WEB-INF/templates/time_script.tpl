@@ -83,8 +83,10 @@ function fillDropdowns() {
   if(document.body.contains(document.timeRecordForm.client))
     fillProjectDropdown(document.timeRecordForm.client.value);
 
-  fillTaskDropdown(document.timeRecordForm.project.value);
-  fillTemplateDropdown(document.timeRecordForm.project.value);
+  if(document.body.contains(document.timeRecordForm.project)) {
+    fillTaskDropdown(document.timeRecordForm.project.value);
+    fillTemplateDropdown(document.timeRecordForm.project.value);
+  }
   prepopulateNote();
 }
 
