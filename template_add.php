@@ -42,7 +42,9 @@ if (!$user->isPluginEnabled('tp')) {
 // End of access checks.
 
 $config = new ttConfigHelper($user->getConfig());
-$projects = ttGroupHelper::getActiveProjects();
+$bindTemplatesWithProjects = $config->getDefinedValue('bind_templates_with_projects');
+if ($bindTemplatesWithProjects)
+  $projects = ttGroupHelper::getActiveProjects();
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -50,8 +52,10 @@ if ($request->isPost()) {
   $cl_content = trim($request->getParameter('content'));
   $cl_projects = $request->getParameter('projects');
 } else {
-  foreach ($projects as $project_item)
-    $cl_projects[] = $project_item['id'];
+  if ($bindTemplatesWithProjects) {
+    foreach ($projects as $project_item)
+      $cl_projects[] = $project_item['id'];
+  }
 }
 
 $form = new Form('templateForm');
@@ -82,7 +86,7 @@ if ($request->isPost()) {
 } // isPost
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('show_projects', count($projects) > 0 && $config->getDefinedValue('bind_templates_with_projects'));
+$smarty->assign('show_projects', $bindTemplatesWithProjects && count($projects) > 0);
 $smarty->assign('title', $i18n->get('title.add_template'));
 $smarty->assign('content_page_name', 'template_add.tpl');
 $smarty->display('index.tpl');
