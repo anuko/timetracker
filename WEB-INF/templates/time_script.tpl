@@ -78,7 +78,7 @@ var empty_label_task = "{$i18n.dropdown.select|escape:'javascript'}";
 var empty_label_template = "{$i18n.dropdown.select|escape:'javascript'}";
 
 // The fillDropdowns function populates the "project", "task", and "template" dropdown controls
-// with relevant values.
+// with relevant values, and also prepopulates the Note field, if required.
 function fillDropdowns() {
   if(document.body.contains(document.timeRecordForm.client))
     fillProjectDropdown(document.timeRecordForm.client.value);
@@ -239,9 +239,9 @@ function prepopulateNote() {
 
   if (dropdown.options.length <= 1) return ; // 1 because of mandatory top option.
 
-  dropdown.options[1].selected = true; // Select first template.
+  dropdown.options[1].selected = true; // Select first available template.
   var note = document.getElementById("note");
-  note.value = template_bodies[dropdown.options[1].value]; // Prepolulate note with first template body.
+  note.value = template_bodies[dropdown.options[1].value]; // Prepolulate the Note field with first template body.
 }
 
 // The formDisable function disables some fields depending on what we have in other fields.
