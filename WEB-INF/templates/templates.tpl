@@ -48,7 +48,6 @@
 {/if}
       <div class="table-divider"></div>
       <table width="100%">
-
 {if $show_bind_with_projects_checkbox}
         <tr>
           <td align="right" width="25%">{$forms.templatesForm.bind_templates_with_projects.control}</td>

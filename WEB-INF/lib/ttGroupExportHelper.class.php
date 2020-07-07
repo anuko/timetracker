@@ -470,7 +470,7 @@ class ttGroupExportHelper {
      }
     fwrite($this->file, $this->indentation."  </custom_field_log>\n");
 
-    // Write expense otems.
+    // Write expense items.
     // We use getRecordsChunkFromTable here to avoid out of memory condition for large tables.
     fwrite($this->file, $this->indentation."  <expense_items>\n");
     $offset = 0;
