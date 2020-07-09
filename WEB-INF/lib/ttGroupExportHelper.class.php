@@ -48,6 +48,7 @@ class ttGroupExportHelper {
   var $customFieldMap = array();
   var $customFieldOptionMap = array();
   var $favReportMap = array();
+  var $templateMap = array();
 
   // Constructor.
   function __construct($group_id, $file, $indentation) {
@@ -217,6 +218,11 @@ class ttGroupExportHelper {
     $fav_reports = $this->getRecordsFromTable('tt_fav_reports');
     foreach ($fav_reports as $key=>$fav_report)
       $this->favReportMap[$fav_report['id']] = $key + 1;
+
+    // Prepare template map.
+    $templates = $this->getRecordsFromTable('tt_templates');
+    foreach ($templates as $key=>$template)
+      $this->templateMap[$template['id']] = $key + 1;
 
     // Write roles.
     fwrite($this->file, $this->indentation."  <roles>\n");
@@ -511,11 +517,11 @@ class ttGroupExportHelper {
     }
 
     // Write templates.
-    $templates = $this->getRecordsFromTable('tt_templates');
     if (count($templates) > 0) {
       fwrite($this->file, $this->indentation."  <templates>\n");
       foreach ($templates as $template) {
-        $template_part = $this->indentation.'    '."<template name=\"".htmlspecialchars($template['name'])."\"";
+        $template_part = $this->indentation.'    '."<template id=\"".$this->templateMap[$template['id']]."\"";
+        $template_part .= " name=\"".htmlspecialchars($template['name'])."\"";
         $template_part .= " description=\"".htmlspecialchars($template['description'])."\"";
         $template_part .= " content=\"".$this->encodeLineBreaks($template['content'])."\"";
         $template_part .= " status=\"".$template['status']."\"";
@@ -525,6 +531,23 @@ class ttGroupExportHelper {
       fwrite($this->file, $this->indentation."  </templates>\n");
       unset($templates);
       unset($template_part);
+    }
+
+    // Write project to template binds.
+    $project_template_binds = $this->getRecordsFromTable('tt_project_template_binds');
+    if (count($project_template_binds) > 0) {
+      fwrite($this->file, $this->indentation."  <project_template_binds>\n");
+      foreach ($project_template_binds as $bind) {
+        $project_id = $this->projectMap[$bind['project_id']];
+        $template_id = $this->templateMap[$bind['template_id']];
+        $bind_part = $this->indentation.'    '."<project_template_bind project_id=\"".$project_id."\"";
+        $bind_part .= " template_id=\"".$template_id."\"";
+        $bind_part .= "></project_template_bind>\n";
+        fwrite($this->file, $bind_part);
+      }
+      fwrite($this->file, $this->indentation."  </project_template_binds>\n");
+      unset($project_template_binds);
+      unset($bind_part);
     }
 
     // Write monthly quotas.
