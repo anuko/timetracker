@@ -51,6 +51,7 @@ class ttOrgImportHelper {
   var $currentGroupLogMap     = array();
   var $currentGroupCustomFieldMap = array();
   var $currentGroupCustomFieldOptionMap = array();
+  var $currentGroupTemplateMap = array();
   var $currentGroupFavReportMap = array();
 
   // Constructor.
@@ -66,7 +67,7 @@ class ttOrgImportHelper {
     // First pass through the file determines if we can import data.
     // We require 2 things:
     //   1) Database schema version must be set. This ensures we have a compatible file.
-    //   2) No login coillisions are allowed.
+    //   2) No login collisions are allowed.
     if ($this->firstPass) {
       if ($name == 'ORG' && $this->canImport) {
          if ($attrs['SCHEMA'] == null) {
@@ -145,7 +146,8 @@ class ttOrgImportHelper {
         unset($this->currentGroupLogMap); $this->currentGroupLogMap = array();
         unset($this->currentGroupCustomFieldMap); $this->currentGroupCustomFieldMap = array();
         unset($this->currentGroupCustomFieldOptionMap); $this->currentGroupCustomFieldOptionMap = array();
-        unset($this->currentGroupFavReportMap); $this->currentGroupCustomFavReportMap = array();
+        unset($this->currentGroupTemplateMap); $this->currentGroupTemplateMap = array();
+        unset($this->currentGroupFavReportMap); $this->currentGroupFavReportMap = array();
         return;
       }
 
@@ -425,13 +427,26 @@ class ttOrgImportHelper {
       }
 
       if ($name == 'TEMPLATE') {
-        if (!$this->insertTemplate(array(
+        $template_id = $this->insertTemplate(array(
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
           'name' => $attrs['NAME'],
           'description' => $attrs['DESCRIPTION'],
           'content' => $attrs['CONTENT'],
-          'status' => $attrs['STATUS']))) {
+          'status' => $attrs['STATUS']));
+        if ($template_id) {
+          // Add a mapping.
+          $this->currentGroupTemplateMap[$attrs['ID']] = $template_id;
+        } else $this->errors->add($i18n->get('error.db'));
+        return;
+      }
+
+      if ($name == 'PROJECT_TEMPLATE_BIND') {
+        if (!$this->insertProjectTemplateBind(array(
+          'project_id' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
+          'template_id' => $this->currentGroupTemplateMap[$attrs['TEMPLATE_ID']],
+          'group_id' => $this->current_group_id,
+          'org_id' => $this->org_id))) {
           $this->errors->add($i18n->get('error.db'));
         }
         return;
@@ -773,6 +788,25 @@ class ttOrgImportHelper {
 
     $sql = "INSERT INTO tt_templates (group_id, org_id, name, description, content, status)".
       " values ($group_id, $org_id, $name, $description, $content, $status)";
+    $affected = $mdb2->exec($sql);
+    $last_id = 0;
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    $last_id = $mdb2->lastInsertID('tt_templates', 'id');
+    return $last_id;
+  }
+
+  // insertProjectTemplateBind - inserts a project to template bind into tt_project_template_binds table.
+  private function insertProjectTemplateBind($fields) {
+    $mdb2 = getConnection();
+
+    $group_id = (int) $fields['group_id'];
+    $org_id = (int) $fields['org_id'];
+    $project_id = (int) $fields['project_id'];
+    $template_id = (int) $fields['template_id'];
+    $sql = "insert into tt_project_template_binds (project_id, template_id, group_id, org_id)".
+      " values($project_id, $template_id, $group_id, $org_id)";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
