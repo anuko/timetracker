@@ -86,6 +86,7 @@ if ($request->isPost()) {
   if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
   if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
   if (!ttValidString($cl_content)) $err->add($i18n->get('error.field'), $i18n->get('label.template'));
+  if (!ttGroupHelper::validateCheckboxGroupInput($cl_projects, 'tt_projects')) $err->add($i18n->get('error.field'), $i18n->get('label.projects'));
   // Finished validating user input.
 
   if ($err->no()) {
