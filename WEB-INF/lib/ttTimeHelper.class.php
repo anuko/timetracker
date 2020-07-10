@@ -433,10 +433,10 @@ class ttTimeHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $user_id = (int) $fields['user_id'];
     $date = $fields['date'];
     $start = $fields['start'];
     $finish = $fields['finish'];

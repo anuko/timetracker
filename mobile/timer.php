@@ -242,7 +242,6 @@ if ($request->isPost()) {
     if ($err->no()) {
       $id = ttTimeHelper::insert(array(
         'date' => $cl_date,
-        'user_id' => $user->getUser(),
         'client' => $cl_client,
         'project' => $cl_project,
         'task' => $cl_task,
