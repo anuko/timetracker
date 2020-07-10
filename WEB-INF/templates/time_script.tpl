@@ -78,7 +78,7 @@ var empty_label_task = "{$i18n.dropdown.select|escape:'javascript'}";
 var empty_label_template = "{$i18n.dropdown.select|escape:'javascript'}";
 
 // The fillDropdowns function populates the "project", "task", and "template" dropdown controls
-// with relevant values, and also prepopulates the Note field, if required.
+// with relevant values.
 function fillDropdowns() {
   if(document.body.contains(document.timeRecordForm.client))
     fillProjectDropdown(document.timeRecordForm.client.value);
@@ -87,7 +87,6 @@ function fillDropdowns() {
     fillTaskDropdown(document.timeRecordForm.project.value);
     fillTemplateDropdown(document.timeRecordForm.project.value);
   }
-  prepopulateNote();
 }
 
 // The fillProjectDropdown function populates the project combo box with

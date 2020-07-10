@@ -484,7 +484,7 @@ $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="fillDropdowns()"');
+$smarty->assign('onload', 'onLoad="fillDropdowns();prepopulateNote();"');
 $smarty->assign('timestring', $selected_date->toString($user->getDateFormat()));
 $smarty->assign('title', $i18n->get('title.time'));
 $smarty->assign('content_page_name', 'time.tpl');
