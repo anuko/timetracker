@@ -449,7 +449,6 @@ if ($request->isPost()) {
       $res = ttTimeHelper::update(array(
           'id'=>$record['id'],
           'date'=>$record['date'],
-          'user_id'=>$user_id,
           'client'=>$record['client_id'],
           'project'=>$record['project_id'],
           'task'=>$record['task_id'],

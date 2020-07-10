@@ -355,7 +355,6 @@ if ($request->isPost()) {
       $res = ttTimeHelper::update(array(
         'id'=>$cl_id,
         'date'=>$new_date->toString(DB_DATEFORMAT),
-        'user_id'=>$user_id,
         'client'=>$cl_client,
         'project'=>$cl_project,
         'task'=>$cl_task,

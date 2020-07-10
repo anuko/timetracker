@@ -452,10 +452,6 @@ class ttTimeHelper {
     $note = $fields['note'];
     $billable = $fields['billable'];
     $paid = $fields['paid'];
-    if (array_key_exists('status', $fields)) { // Key exists and may be NULL during migration of data.
-      $status_f = ', status';
-      $status_v = ', '.$mdb2->quote($fields['status']);
-    }
 
     $start = ttTimeHelper::to24HourFormat($start);
     if ($finish) {
@@ -469,8 +465,8 @@ class ttTimeHelper {
     if (!$paid) $paid = 0;
 
     if ($duration) {
-      $sql = "insert into tt_log (user_id, group_id, org_id, date, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by $status_f) ".
-        "values ($user_id, $group_id, $org_id, ".$mdb2->quote($date).", '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v $status_v)";
+      $sql = "insert into tt_log (user_id, group_id, org_id, date, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by) ".
+        "values ($user_id, $group_id, $org_id, ".$mdb2->quote($date).", '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -479,8 +475,8 @@ class ttTimeHelper {
       if ($duration === false) $duration = 0;
       if (!$duration && ttTimeHelper::getUncompleted($user_id)) return false;
 
-      $sql = "insert into tt_log (user_id, group_id, org_id, date, start, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by $status_f) ".
-        "values ($user_id, $group_id, $org_id, ".$mdb2->quote($date).", '$start', '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v $status_v)";
+      $sql = "insert into tt_log (user_id, group_id, org_id, date, start, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by) ".
+        "values ($user_id, $group_id, $org_id, ".$mdb2->quote($date).", '$start', '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -496,9 +492,12 @@ class ttTimeHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = $user->getUser();
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $id = $fields['id'];
     $date = $fields['date'];
-    $user_id = $fields['user_id'];
     $client = $fields['client'];
     $project = $fields['project'];
     $task = $fields['task'];
@@ -529,7 +528,7 @@ class ttTimeHelper {
 
     if ($duration) {
       $sql = "UPDATE tt_log set start = NULL, duration = '$duration', client_id = ".$mdb2->quote($client).", project_id = ".$mdb2->quote($project).", task_id = ".$mdb2->quote($task).", ".
-        "comment = ".$mdb2->quote($note)."$billable_part $paid_part $modified_part, date = '$date' WHERE id = $id";
+        "comment = ".$mdb2->quote($note)."$billable_part $paid_part $modified_part, date = '$date' WHERE id = $id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
@@ -542,7 +541,7 @@ class ttTimeHelper {
         return false;
 
       $sql = "UPDATE tt_log SET start = '$start', duration = '$duration', client_id = ".$mdb2->quote($client).", project_id = ".$mdb2->quote($project).", task_id = ".$mdb2->quote($task).", ".
-        "comment = ".$mdb2->quote($note)."$billable_part $paid_part $modified_part, date = '$date' WHERE id = $id";
+        "comment = ".$mdb2->quote($note)."$billable_part $paid_part $modified_part, date = '$date' WHERE id = $id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;
