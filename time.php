@@ -330,9 +330,8 @@ $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); //
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.submit')));
 
 if ($request->isPost()) {
-  // Submit handler.
   if ($request->getParameter('btn_submit')) {
-
+    // Submit button clicked.
     // Validate user input.
     if ($showClient && $user->isOptionEnabled('client_required') && !$cl_client)
       $err->add($i18n->get('error.client'));
@@ -400,7 +399,7 @@ if ($request->isPost()) {
       if (ttTimeHelper::overlaps($user_id, $cl_date, $cl_start, $cl_finish))
         $err->add($i18n->get('error.overlap'));
     }
-    // TODO: refactoring going on down from here...
+
     // Insert record.
     if ($err->no()) {
       $id = ttTimeHelper::insert(array(
