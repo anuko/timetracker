@@ -28,6 +28,7 @@
 
 import('form.FormElement');
 import('DateAndTime');
+import('ttTimeHelper');
 
 class Calendar extends FormElement {
   var $holidays = array();
@@ -183,8 +184,20 @@ class Calendar extends FormElement {
 
             // Entries exist.
             if($active_dates) {
-              if( in_array(strftime(DB_DATEFORMAT, $date), $active_dates) )
-                $stl_link = ' class="CalendarLinkRecordsExist"';
+              $day_total_minutes = ttTimeHelper::toMinutes(ttTimeHelper::getTimeForDay($date_to_check));
+              global $user;
+              $workday_minutes = $user->getWorkdayMinutes();
+
+              //check for any entries in the day
+              if( in_array(strftime(DB_DATEFORMAT, $date), $active_dates) ){
+                //check if entries total to a complete work day
+                if ($day_total_minutes >= $workday_minutes){
+                  $stl_link = ' class="CalendarLinkRecordsExist"';
+                }
+                else {
+                  $stl_link = ' class="CalendarLinkNonCompleteDay"';
+                }
+              }
             }
 
             $str .= "<a".$stl_link." href=\"?".$this->controlName."=".strftime(DB_DATEFORMAT, $date)."\" tabindex=\"-1\">".date("d",$date)."</a>";
@@ -242,6 +255,7 @@ class Calendar extends FormElement {
       $str .= ".CalendarLinkWeekend {color: #999999;}\n";
       $str .= ".CalendarLinkHoliday {color: #999999;}\n";
       $str .= ".CalendarLinkRecordsExist {color: #FF0000;}\n";
+      $str .= ".CalendarLinkNonCompleteDay {color: #800080;}\n";
         $str .= "</style>\n";
         return $str;
     }
