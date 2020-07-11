@@ -310,8 +310,6 @@ if ($request->isPost()) {
     if ($showTask && $user->task_required) {
       if (!$cl_task) $err->add($i18n->get('error.task'));
     }
-    
-    // TODO: refactoring going on down from here...
     if (strlen($cl_duration) == 0) {
       if ($cl_start || $cl_finish) {
         if (!ttTimeHelper::isValidTime($cl_start))
@@ -323,11 +321,11 @@ if ($request->isPost()) {
             $err->add($i18n->get('error.interval'), $i18n->get('label.finish'), $i18n->get('label.start'));
         }
       } else {
-        if ((TYPE_START_FINISH == $user->getRecordType()) || (TYPE_ALL == $user->getRecordType())) {
+        if ($showStart) {
           $err->add($i18n->get('error.empty'), $i18n->get('label.start'));
           $err->add($i18n->get('error.empty'), $i18n->get('label.finish'));
         }
-        if ((TYPE_DURATION == $user->getRecordType()) || (TYPE_ALL == $user->getRecordType()))
+        if ($showDuration)
           $err->add($i18n->get('error.empty'), $i18n->get('label.duration'));
       }
     } else {
@@ -393,8 +391,8 @@ if ($request->isPost()) {
 
 $smarty->assign('next_date', $next_date);
 $smarty->assign('prev_date', $prev_date);
+$smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('time_records', ttTimeHelper::getRecords($cl_date));
-
 $smarty->assign('show_client', $showClient);
 $smarty->assign('show_billable', $showBillable);
 $smarty->assign('show_project', $showProject);
@@ -402,12 +400,6 @@ $smarty->assign('show_task', $showTask);
 $smarty->assign('show_start', $showStart);
 $smarty->assign('show_finish', $showFinish);
 $smarty->assign('show_duration', $showDuration);
-
-
-
-
-
-$smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);

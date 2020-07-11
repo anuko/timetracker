@@ -364,11 +364,11 @@ if ($request->isPost()) {
             $err->add($i18n->get('error.interval'), $i18n->get('label.finish'), $i18n->get('label.start'));
         }
       } else {
-        if (TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType) {
+        if ($showStart) {
           $err->add($i18n->get('error.empty'), $i18n->get('label.start'));
           $err->add($i18n->get('error.empty'), $i18n->get('label.finish'));
         }
-        if (TYPE_DURATION == $recordType || TYPE_ALL == $recordType)
+        if ($showDuration)
           $err->add($i18n->get('error.empty'), $i18n->get('label.duration'));
       }
     } else {

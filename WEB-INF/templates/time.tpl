@@ -38,11 +38,11 @@
 {/if}
 {if $custom_fields && $custom_fields->timeFields}
   {foreach $custom_fields->timeFields as $timeField}
-    <tr>
-      <td align="right">{$timeField['label']|escape}{if $timeField['required']} (*){/if}:</td>
-      {assign var="control_name" value='time_field_'|cat:$timeField['id']}
-      <td>{$forms.timeRecordForm.$control_name.control}</td>
-    </tr>
+        <tr>
+          <td align="right">{$timeField['label']|escape}{if $timeField['required']} (*){/if}:</td>
+          {assign var="control_name" value='time_field_'|cat:$timeField['id']}
+          <td>{$forms.timeRecordForm.$control_name.control}</td>
+        </tr>
   {/foreach}
 {/if}
 {if $show_project}
@@ -108,96 +108,96 @@
 </table>
 
 <table width="720">
-<tr>
-  <td valign="top">
+  <tr>
+    <td valign="top">
 {if $time_records}
       <table border="0" cellpadding="3" cellspacing="1" width="100%">
-      <tr>
+        <tr>
   {if $show_client}
-        <td class="tableHeader">{$i18n.label.client}</td>
+          <td class="tableHeader">{$i18n.label.client}</td>
   {/if}
   {if $show_project}
-        <td class="tableHeader">{$i18n.label.project}</td>
+          <td class="tableHeader">{$i18n.label.project}</td>
   {/if}
   {if $show_task}
-        <td class="tableHeader">{$i18n.label.task}</td>
+          <td class="tableHeader">{$i18n.label.task}</td>
   {/if}
   {if $show_start}
-        <td width="5%" class="tableHeader" align="right">{$i18n.label.start}</td>
+          <td width="5%" class="tableHeader" align="right">{$i18n.label.start}</td>
   {/if}
   {if $show_finish}
-        <td width="5%" class="tableHeader" align="right">{$i18n.label.finish}</td>
+          <td width="5%" class="tableHeader" align="right">{$i18n.label.finish}</td>
   {/if}
-        <td width="5%" class="tableHeader">{$i18n.label.duration}</td>
+          <td width="5%" class="tableHeader">{$i18n.label.duration}</td>
   {if $show_note_column}
-        <td class="tableHeader">{$i18n.label.note}</td>
+          <td class="tableHeader">{$i18n.label.note}</td>
   {/if}
   {if $show_files}
-        <td></td>
+          <td></td>
   {/if}
-        <td></td>
-        <td></td>
-      </tr>
+          <td></td>
+          <td></td>
+        </tr>
   {foreach $time_records as $record}
-      <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
+        <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
     {if $show_client}
-        <td valign="top">{$record.client|escape}</td>
+          <td valign="top">{$record.client|escape}</td>
     {/if}
     {if $show_project}
-        <td valign="top">{$record.project|escape}</td>
+          <td valign="top">{$record.project|escape}</td>
     {/if}
     {if $show_task}
-        <td valign="top">{$record.task|escape}</td>
+          <td valign="top">{$record.task|escape}</td>
     {/if}
     {if $show_start}
-        <td nowrap align="right" valign="top">{if $record.start}{$record.start}{else}&nbsp;{/if}</td>
+          <td nowrap align="right" valign="top">{if $record.start}{$record.start}{else}&nbsp;{/if}</td>
     {/if}
     {if $show_finish}
-        <td nowrap align="right" valign="top">{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
+          <td nowrap align="right" valign="top">{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
     {/if}
-        <td align="right" valign="top">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
+          <td align="right" valign="top">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
     {if $show_note_column}
-        <td valign="top">{if $record.comment}{$record.comment|escape}{else}&nbsp;{/if}</td>
+          <td valign="top">{if $record.comment}{$record.comment|escape}{else}&nbsp;{/if}</td>
     {/if}
     {if $show_files}
       {if $record.has_files}
-        <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_files.png"></a></td>
+          <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_files.png"></a></td>
       {else}
-        <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_file.png"></a></td>
+          <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_file.png"></a></td>
       {/if}
     {/if}
-        <td valign="top" align="center">
+          <td valign="top" align="center">
     {if $record.approved || $record.timesheet_id || $record.invoice_id}
           &nbsp;
     {else}
-          <a href="time_edit.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a>
+            <a href="time_edit.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a>
       {if ($record.duration == '0:00' && $record.start <> '')}
-          <input type="hidden" name="record_id" value="{$record.id}">
-          <input type="hidden" name="browser_date" value="">
-          <input type="hidden" name="browser_time" value="">
-          <input type="submit" id="btn_stop" name="btn_stop" onclick="browser_date.value=get_date();browser_time.value=get_time()" value="{$i18n.button.stop}">
+            <input type="hidden" name="record_id" value="{$record.id}">
+            <input type="hidden" name="browser_date" value="">
+            <input type="hidden" name="browser_time" value="">
+            <input type="submit" id="btn_stop" name="btn_stop" onclick="browser_date.value=get_date();browser_time.value=get_time()" value="{$i18n.button.stop}">
       {/if}
     {/if}
-        </td>
-        <td valign="top" align="center">
+          </td>
+          <td valign="top" align="center">
     {if $record.approved || $record.timesheet_id || $record.invoice_id}
-          &nbsp;
+            &nbsp;
     {else}
-          <a href="time_delete.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a>
+            <a href="time_delete.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a>
     {/if}
-        </td>
-      </tr>
+          </td>
+        </tr>
     {if $show_note_row && $record.comment}
-      <tr>
-        <td align="right" valign="top">{$i18n.label.note}:</td>
-        <td colspan="{$colspan}" align="left" valign="top">{$record.comment|escape}</td>
-      </tr>
+        <tr>
+          <td align="right" valign="top">{$i18n.label.note}:</td>
+          <td colspan="{$colspan}" align="left" valign="top">{$record.comment|escape}</td>
+        </tr>
     {/if}
   {/foreach}
-    </table>
+      </table>
 {/if}
-  </td>
-</tr>
+    </td>
+  </tr>
 </table>
 
 <table cellpadding="3" cellspacing="1" width="720">
