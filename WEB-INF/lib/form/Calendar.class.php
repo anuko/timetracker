@@ -31,9 +31,7 @@ import('DateAndTime');
 import('ttTimeHelper');
 
 class Calendar extends FormElement {
-  var $holidays = array();
-  var $showHolidays = true;
-  var $weekStartDay = 0;
+  var $weekStartDay = 0; // Defaults to Sunday.
   
     var $mHeader = "padding: 5px; font-size: 8pt; color: #333333; background-color: #d9d9d9;";
     var $mDayCell = "padding: 5px; border: 1px solid silver; font-size: 8pt; color: #333333; background-color: #ffffff;";
@@ -71,10 +69,6 @@ class Calendar extends FormElement {
     function setCellStyle($style) { $this->mCellStyle = $style; }
     function setACellStyle($style) { $this->mACellStyle = $style; }
     function setLinkStyle($style) { $this->mLinkStyle = $style; }
-
-    function setShowHolidays($value) {
-      $this->showHolidays = $value;
-    }
 
     /**
      * @return void
