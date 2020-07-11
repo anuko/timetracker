@@ -133,6 +133,22 @@ input[type=checkbox], label {
   font-size: 8pt;
   color: #999999;
 }
+
+.calendarLinkWeekend {
+  color: #999999;
+}
+
+.calendarLinkHoliday {
+  color: #999999;
+}
+
+.calendarLinkRecordsExist {
+  color: #ff0000;
+}
+
+.calendarLinkNonCompleteDay {
+  color: #800080;
+}
 /* end of calendar styles */
 
 .tableHeader {
