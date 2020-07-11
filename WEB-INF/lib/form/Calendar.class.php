@@ -58,37 +58,28 @@ class Calendar extends FormElement {
     $this->weekStartDay = $user->getWeekStart();
   }
 
-  // TODO: refactoring ongoing down from here...
+  // Generates html code for Calendar control.
+  function getHtml() {
+    global $i18n; // Needed to print Today.
 
-    /**
-     * @return void
-     * @param date
-     * @desc Enter description here...
-     */
-    function toString($date="") {
-      global $i18n;
-    	
-      $indate = $this->value;
-      if (!$indate) $indate = strftime(DB_DATEFORMAT);
+    $selectedDate = $this->value;
+    if (!$selectedDate) $selectedDate = strftime(DB_DATEFORMAT);
 
-      //current year and month
-      if ( strlen ( $indate ) > 0 ) {
-        $indateObj = new DateAndTime(DB_DATEFORMAT, $indate);
-        $thismonth = $indateObj->getMonth();
-        $thisyear = $indateObj->getYear();
-      } else {
-        $thismonth = date("m");
-        $thisyear = date("Y");
-      }
+    // Determine month and year for selected date.
+    $selectedDateObject = new DateAndTime(DB_DATEFORMAT, $selectedDate);
+    $selectedMonth = $selectedDateObject->getMonth();
+    $selectedYear = $selectedDateObject->getYear();
+
+    // TODO: refactoring ongoing down from here...
 
       // next date, month, year
-      $next = mktime ( 2, 0, 0, $thismonth + 1, 1, $thisyear );
+      $next = mktime ( 2, 0, 0, $selectedMonth + 1, 1, $selectedYear );
       $nextyear = date ( "Y", $next );
       $nextmonth = date ( "m", $next );
       $nextdate = strftime (DB_DATEFORMAT, $next );
 
       // prev date, month, year
-      $prev = mktime ( 2, 0, 0, $thismonth - 1, 1, $thisyear );
+      $prev = mktime ( 2, 0, 0, $selectedMonth - 1, 1, $selectedYear );
       $prevyear = date ( "Y", $prev );
       $prevmonth = date ( "m", $prev );
       $prevdate = strftime(DB_DATEFORMAT, $prev );
@@ -97,7 +88,7 @@ class Calendar extends FormElement {
           <tr><td align="center"><div class="calendarHeader">'.
           //'<a href="?date='.$prevyear.'">&lt;&lt;</a> '.
           '<a href="?date='.$prevdate.'" tabindex="-1">&lt;&lt;&lt;</a>  '.
-          $this->monthNames[$thismonth-1].'&nbsp;'.$thisyear.
+          $this->monthNames[$selectedMonth-1].'&nbsp;'.$selectedYear.
           '  <a href="?date='.$nextdate.'" tabindex="-1">&gt;&gt;&gt;</a>'.
           //' <a href="?date='.$nextyear.'">&gt;&gt;</a>'.
           '</div></td></tr>
@@ -129,14 +120,14 @@ class Calendar extends FormElement {
 
       $str .= "</tr>\n";
 
-      list($wkstart,$monthstart,$monthend,$start_date) = $this->_getWeekDayBefore( $thisyear, $thismonth );
+      list($wkstart,$monthstart,$monthend,$start_date) = $this->_getWeekDayBefore( $selectedYear, $selectedMonth );
 
       $active_dates = $this->_getActiveDates($monthstart, $monthend);
 
-      for ( $i = $wkstart; $i<=$monthend;  $i=mktime(0,0,0,$thismonth,$start_date+=7,$thisyear) ) {
+      for ( $i = $wkstart; $i<=$monthend;  $i=mktime(0,0,0,$selectedMonth,$start_date+=7,$selectedYear) ) {
         $str .= "<TR>\n";
           for ( $j = 0; $j < 7; $j++ ) {
-            $date = mktime(0,0,0,$thismonth,$start_date+$j,$thisyear);
+            $date = mktime(0,0,0,$selectedMonth,$start_date+$j,$selectedYear);
             if (($date >= $monthstart) && ($date <= $monthend)) {
 
             $stl_cell = "";
@@ -151,14 +142,14 @@ class Calendar extends FormElement {
             }
 
             // holidays
-            $date_to_check = ttTimeHelper::dateInDatabaseFormat($thisyear, $thismonth, $start_date+$j);
+            $date_to_check = ttTimeHelper::dateInDatabaseFormat($selectedYear, $selectedMonth, $start_date+$j);
             if (ttTimeHelper::isHoliday($date_to_check)) {
               $stl_cell = ' class="calendarDayHoliday"';
               $stl_link = ' class="calendarLinkHoliday"';
             }
 
             // selected day
-            if ( $indate == strftime(DB_DATEFORMAT, $date))
+            if ( $selectedDate == strftime(DB_DATEFORMAT, $date))
               $stl_cell = ' class="calendarDaySelected"';
 
 
@@ -196,7 +187,7 @@ class Calendar extends FormElement {
       $str .= "<tr><td colspan=\"7\" align=\"center\"><a id=\"today_link\" href=\"?".$this->name."=".strftime(DB_DATEFORMAT)."\" tabindex=\"-1\">".$i18n->get('label.today')."</a></td></tr>\n";
       $str .= "</table>\n";
 
-      $str .= "<input type=\"hidden\" name=\"$this->name\" value=\"$indate\">\n";
+      $str .= "<input type=\"hidden\" name=\"$this->name\" value=\"$selectedDate\">\n";
 
       // Add script to adjust today link to match browser today, as PHP may run in a different timezone.
       $str .= "<script>\n";
@@ -208,10 +199,6 @@ class Calendar extends FormElement {
       $str .= "</script>\n";
       
       return $str;
-    }
-
-    function getHtml() {
-        return $this->toString();
     }
 
     function _getWeekDayBefore($year, $month) {
