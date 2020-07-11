@@ -33,9 +33,6 @@ import('ttTimeHelper');
 class Calendar extends FormElement {
   var $weekStartDay = 0; // Defaults to Sunday.
   
-    var $mDayWeekend = "padding: 5px; border: 1px solid silver; font-size: 8pt; color: #666666; background-color: #f7f7f7;";
-    var $mDayHoliday = "padding: 5px; border: 1px solid silver; font-size: 8pt; color: #666666; background-color: #f7f7f7;";
-    var $mDayHeader = "padding: 5px; border: 1px solid white; font-size: 8pt; color: #333333;";
     var $mDayHeaderWeekend = "padding: 5px; border: 1px solid white; font-size: 8pt; color: #999999;";
 
     var $controlName = "";
@@ -130,9 +127,9 @@ class Calendar extends FormElement {
       for ( $i=0; $i<7; $i++ ) {
         $weekdayNameIdx = ($i + $this->weekStartDay) % 7;
         if ($i==$weekend_start || $i==$weekend_end) {
-          $str .= '<td class="CalendarDayHeaderWeekend">'.$this->mWeekDayShortNames[$weekdayNameIdx].'</td>';
+          $str .= '<td class="calendarDayHeaderWeekend">'.$this->mWeekDayShortNames[$weekdayNameIdx].'</td>';
         } else {
-          $str .= '<td class="CalendarDayHeader">'.$this->mWeekDayShortNames[$weekdayNameIdx].'</td>';
+          $str .= '<td class="calendarDayHeader">'.$this->mWeekDayShortNames[$weekdayNameIdx].'</td>';
         }
       }
 
@@ -153,7 +150,7 @@ class Calendar extends FormElement {
 
             // weekend
             if ($j==$weekend_start || $j==$weekend_end) {
-              $stl_cell = ' class="CalendarDayWeekend"';
+              $stl_cell = ' class="calendarDayWeekend"';
               $stl_link = ' class="CalendarLinkWeekend"';
             } else {
               $stl_cell = ' class="calendarDay"';
@@ -162,7 +159,7 @@ class Calendar extends FormElement {
             // holidays
             $date_to_check = ttTimeHelper::dateInDatabaseFormat($thisyear, $thismonth, $start_date+$j);
             if (ttTimeHelper::isHoliday($date_to_check)) {
-              $stl_cell = ' class="CalendarDayHoliday"';
+              $stl_cell = ' class="calendarDayHoliday"';
               $stl_link = ' class="CalendarLinkHoliday"';
             }
 
@@ -235,11 +232,6 @@ class Calendar extends FormElement {
 
     function _genStyles() {
       $str = "<style>\n";
-      $str .= ".CalendarDayWeekend {". $this->mDayWeekend ."}\n";
-      $str .= ".CalendarDayHoliday {". $this->mDayHoliday ."}\n";
-      $str .= ".CalendarDayHeader {". $this->mDayHeader ."}\n";
-      $str .= ".CalendarDayHeaderWeekend {". $this->mDayHeaderWeekend ."}\n";
-      
       $str .= ".CalendarLinkWeekend {color: #999999;}\n";
       $str .= ".CalendarLinkHoliday {color: #999999;}\n";
       $str .= ".CalendarLinkRecordsExist {color: #FF0000;}\n";

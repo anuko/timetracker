@@ -103,6 +103,36 @@ input[type=checkbox], label {
   color: #666666;
   background-color: #a6ccf7;
 }
+
+.calendarDayWeekend {
+  padding: 5px;
+  border: 1px solid silver;
+  font-size: 8pt;
+  color: #666666;
+  background-color: #f7f7f7;
+}
+
+.calendarDayHoliday {
+  padding: 5px;
+  border: 1px solid silver;
+  font-size: 8pt;
+  color: #666666;
+  background-color: #f7f7f7;
+}
+
+.calendarDayHeader {
+  padding: 5px;
+  border: 1px solid white;
+  font-size: 8pt;
+  color: #333333;
+}
+
+.calendarDayHeaderWeekend {
+  padding: 5px;
+  border: 1px solid white;
+  font-size: 8pt;
+  color: #999999;
+}
 /* end of calendar styles */
 
 .tableHeader {
