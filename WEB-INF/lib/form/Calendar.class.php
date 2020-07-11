@@ -33,9 +33,6 @@ import('ttTimeHelper');
 class Calendar extends FormElement {
   var $weekStartDay = 0; // Defaults to Sunday.
   
-    var $mHeader = "padding: 5px; font-size: 8pt; color: #333333; background-color: #d9d9d9;";
-    var $mDayCell = "padding: 5px; border: 1px solid silver; font-size: 8pt; color: #333333; background-color: #ffffff;";
-    var $mDaySelected = "padding: 5px; border: 1px solid silver; font-size: 8pt; color: #666666; background-color: #a6ccf7;";
     var $mDayWeekend = "padding: 5px; border: 1px solid silver; font-size: 8pt; color: #666666; background-color: #f7f7f7;";
     var $mDayHoliday = "padding: 5px; border: 1px solid silver; font-size: 8pt; color: #666666; background-color: #f7f7f7;";
     var $mDayHeader = "padding: 5px; border: 1px solid white; font-size: 8pt; color: #333333;";
@@ -106,7 +103,7 @@ class Calendar extends FormElement {
       $str = $this->_genStyles();
 
       $str .= '<table cellpadding="0" cellspacing="0" border="0" width="100%">
-          <tr><td align="center"><div class="CalendarHeader">'.
+          <tr><td align="center"><div class="calendarHeader">'.
           //'<a href="?date='.$prevyear.'">&lt;&lt;</a> '.
           '<a href="?date='.$prevdate.'" tabindex="-1">&lt;&lt;&lt;</a>  '.
           $this->mMonthNames[$thismonth-1].'&nbsp;'.$thisyear.
@@ -159,7 +156,7 @@ class Calendar extends FormElement {
               $stl_cell = ' class="CalendarDayWeekend"';
               $stl_link = ' class="CalendarLinkWeekend"';
             } else {
-              $stl_cell = ' class="CalendarDay"';
+              $stl_cell = ' class="calendarDay"';
             }
 
             // holidays
@@ -171,7 +168,7 @@ class Calendar extends FormElement {
 
             // selected day
             if ( $indate == strftime(DB_DATEFORMAT, $date))
-              $stl_cell = ' class="CalendarDaySelected"';
+              $stl_cell = ' class="calendarDaySelected"';
 
 
             $str .= '<td'.$stl_cell.'>';
@@ -238,9 +235,6 @@ class Calendar extends FormElement {
 
     function _genStyles() {
       $str = "<style>\n";
-      $str .= ".CalendarHeader {". $this->mHeader ."}\n";
-      $str .= ".CalendarDay {". $this->mDayCell  ."}\n";
-      $str .= ".CalendarDaySelected {". $this->mDaySelected  ."}\n";
       $str .= ".CalendarDayWeekend {". $this->mDayWeekend ."}\n";
       $str .= ".CalendarDayHoliday {". $this->mDayHoliday ."}\n";
       $str .= ".CalendarDayHeader {". $this->mDayHeader ."}\n";
