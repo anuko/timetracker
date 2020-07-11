@@ -138,7 +138,7 @@ $cl_finish = trim($request->getParameter('finish'));
 $cl_duration = trim($request->getParameter('duration'));
 $cl_note = trim($request->getParameter('note'));
 $cl_billable = 1;
-if ($user->isPluginEnabled('iv')) {
+if ($showBillable) {
   if ($request->isPost()) {
     $cl_billable = $request->getParameter('billable');
     $_SESSION['billable'] = (int) $cl_billable;
@@ -293,9 +293,11 @@ if ($showStart) {
     $form->getElement('finish')->setEnabled(false);
   }
 }
+
 // Duration control.
 if ($showDuration)
   $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
+
 // File upload control.
 if ($showFiles)
   $form->addInput(array('type'=>'upload','name'=>'newfile','value'=>$i18n->get('button.submit')));
@@ -322,10 +324,13 @@ if ($user->isPluginEnabled('tp')){
 if (!defined('NOTE_INPUT_HEIGHT'))
   define('NOTE_INPUT_HEIGHT', 40);
 $form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 600px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
+
 // Calendar.
 $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
+
 // A hidden control for today's date from user's browser.
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.
+
 // Submit button.
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.submit')));
 
@@ -342,10 +347,10 @@ if ($request->isPost()) {
         if (!ttValidString($timeField['value'], !$timeField['required'])) $err->add($i18n->get('error.field'), htmlspecialchars($timeField['label']));
       }
     }
-    if (MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode) {
+    if ($showProject) {
       if (!$cl_project) $err->add($i18n->get('error.project'));
     }
-    if (MODE_PROJECTS_AND_TASKS == $trackingMode && $user->task_required) {
+    if ($showTask && $user->task_required) {
       if (!$cl_task) $err->add($i18n->get('error.task'));
     }
     if (strlen($cl_duration) == 0) {
@@ -480,7 +485,6 @@ $smarty->assign('show_task', $showTask);
 $smarty->assign('show_start', $showStart);
 $smarty->assign('show_finish', $showFinish);
 $smarty->assign('show_duration', $showDuration);
-$smarty->assign('show_templates', $showTemplates);
 $smarty->assign('show_note_column', $showNoteColumn);
 $smarty->assign('show_note_row', $showNoteRow);
 $smarty->assign('show_files', $showFiles);

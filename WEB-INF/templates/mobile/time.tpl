@@ -17,18 +17,18 @@
 <table cellspacing="3" cellpadding="0" border="0" width="100%">
 <tr>
   <td align="center">
-    {if $time_records}
-      <table class="mobile-table-details">
-      {foreach $time_records as $record}
+{if $time_records}
+    <table class="mobile-table-details">
+  {foreach $time_records as $record}
       <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if $show_project}
         <td valign="top">{$record.project|escape}</td>
-{/if}
+    {/if}
         <td align="right" valign="top">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{/if}{$record.duration}{if ($record.duration == '0:00' && $record.start <> '')}</font>{/if}</td>
         <td align="center">{if $record.approved || $record.timesheet_id || $record.invoice_id}&nbsp;{else}<a href="time_edit.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="../images/icon_edit.png"></a>{/if}</td>
         <td align="center">{if $record.approved || $record.timesheet_id || $record.invoice_id}&nbsp;{else}<a href="time_delete.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="../images/icon_delete.png"></a>{/if}</td>
       </tr>
-      {/foreach}
+  {/foreach}
     </table>
     <table border="0">
       <tr>
@@ -36,7 +36,7 @@
         <td>{$day_total}</td>
       </tr>
     </table>
-    {/if}
+{/if}
   </td>
 </tr>
 </table>
@@ -53,11 +53,11 @@
       <tr><td>{$i18n.label.user}:</td></tr>
       <tr><td>{$forms.timeRecordForm.user.control}</td></tr>
 {/if}
-{if $user->isPluginEnabled('cl')}
+{if $show_client}
       <tr><td>{$i18n.label.client}:</td></tr>
       <tr><td>{$forms.timeRecordForm.client.control}</td></tr>
 {/if}
-{if $user->isPluginEnabled('iv')}
+{if $show_billable}
       <tr><td><label>{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td></tr>
 {/if}
 {if $custom_fields && $custom_fields->timeFields}
@@ -68,22 +68,23 @@
     </tr>
   {/foreach}
 {/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
     <tr><td>{$i18n.label.project}:</td></tr>
     <tr><td>{$forms.timeRecordForm.project.control}</td></tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_task}
     <tr><td>{$i18n.label.task}:</td></tr>
     <tr><td>{$forms.timeRecordForm.task.control}</td></tr>
 {/if}
-{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+{if $show_start}
     <tr><td>{$i18n.label.start}:</td></tr>
     <tr><td>{$forms.timeRecordForm.start.control}&nbsp;<input onclick="setNow('start');" type="button" value="{$i18n.button.now}"></td></tr>
-
+{/if}
+{if $show_finish}
     <tr><td>{$i18n.label.finish}:</td></tr>
     <tr><td>{$forms.timeRecordForm.finish.control}&nbsp;<input onclick="setNow('finish');" type="button" value="{$i18n.button.now}"></td></tr>
 {/if}
-{if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+{if $show_duration}
     <tr><td>{$i18n.label.duration}:</td></tr>
     <tr><td>{$forms.timeRecordForm.duration.control}</td></tr>
 {/if}
