@@ -70,35 +70,29 @@ class Calendar extends FormElement {
     $selectedMonth = $selectedDateObject->getMonth();
     $selectedYear = $selectedDateObject->getYear();
 
+    // Determine date for the 1st of next month for calendar navigation.
+    $firstOfNextMonth2AM = mktime(2, 0, 0, $selectedMonth + 1, 1, $selectedYear); // 2 am on the 1st of next month.
+    $firstOfNextMonth = strftime(DB_DATEFORMAT, $firstOfNextMonth2AM);
+
+    // Determine date for the 1st of previous month.
+    $firstOfPreviousMonth2AM = mktime(2, 0, 0, $selectedMonth - 1, 1, $selectedYear); // 2 am on the 1st of previous month.
+    $firstOfPreviousMonth = strftime(DB_DATEFORMAT, $firstOfPreviousMonth2AM);
+
+    // Print calendar header.
+    $str .= "\n\n<!-- start of calendar -->\n";
+    $str .= '<table cellpadding="0" cellspacing="0" border="0" width="100%">'."\n";
+    $str .= '  <tr><td align="center">';
+    $str .= '<div class="calendarHeader">';
+    $str .= '<a href="?date='.$firstOfPreviousMonth.'" tabindex="-1">&lt;&lt;&lt;</a>  '.
+      $this->monthNames[$selectedMonth-1].'&nbsp;'.$selectedYear.
+      '  <a href="?date='.$firstOfNextMonth.'" tabindex="-1">&gt;&gt;&gt;</a></div></td></tr>'."\n";
+    $str .= "</table>\n";
+
+    // Print day headers.
+    $str .= '<table border="0" cellpadding="1" cellspacing="1" width="100%">'."\n";
+    $str .= '  <tr>';
+
     // TODO: refactoring ongoing down from here...
-
-      // next date, month, year
-      $next = mktime ( 2, 0, 0, $selectedMonth + 1, 1, $selectedYear );
-      $nextyear = date ( "Y", $next );
-      $nextmonth = date ( "m", $next );
-      $nextdate = strftime (DB_DATEFORMAT, $next );
-
-      // prev date, month, year
-      $prev = mktime ( 2, 0, 0, $selectedMonth - 1, 1, $selectedYear );
-      $prevyear = date ( "Y", $prev );
-      $prevmonth = date ( "m", $prev );
-      $prevdate = strftime(DB_DATEFORMAT, $prev );
-
-      $str .= '<table cellpadding="0" cellspacing="0" border="0" width="100%">
-          <tr><td align="center"><div class="calendarHeader">'.
-          //'<a href="?date='.$prevyear.'">&lt;&lt;</a> '.
-          '<a href="?date='.$prevdate.'" tabindex="-1">&lt;&lt;&lt;</a>  '.
-          $this->monthNames[$selectedMonth-1].'&nbsp;'.$selectedYear.
-          '  <a href="?date='.$nextdate.'" tabindex="-1">&gt;&gt;&gt;</a>'.
-          //' <a href="?date='.$nextyear.'">&gt;&gt;</a>'.
-          '</div></td></tr>
-          </table>';
-
-      $str .= '<center>
-          <table border="0" cellpadding="1" cellspacing="1" width="100%">
-          <tr>';
-
-      $str .= "<tr>";
 
       // TODO: refactor this entire class, as $weekend_start and $weekend_end
       // are not what their names suggest (debug with non zero week start to see it).
