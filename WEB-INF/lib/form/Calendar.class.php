@@ -134,7 +134,7 @@ class Calendar extends FormElement {
       // Iterate through week days.
       for ($j = 0; $j < 7; $j++) {
         $cellDate0am = mktime(0, 0, 0, $selectedMonth, $startDayIdx + $j, $selectedYear);
-        if (($cellDate0am >= $firstDayOfSelectedMonth0am) && ($cellDate0am <= $lastDayOfSelectedMonth0am)) {
+        if ($cellDate0am >= $firstDayOfSelectedMonth0am && $cellDate0am <= $lastDayOfSelectedMonth0am) {
           $cell_style = "";
           $link_style = "";
 
@@ -157,9 +157,9 @@ class Calendar extends FormElement {
             $cell_style = ' class="calendarDaySelected"';
 
           $html .= '<td'.$cell_style.'>';
-          if($active_dates) {
+          if ($active_dates) {
             // Entries exist.
-            if( in_array(strftime(DB_DATEFORMAT, $cellDate0am), $active_dates) ){
+            if (in_array(strftime(DB_DATEFORMAT, $cellDate0am), $active_dates)) {
               // TODO: add a config option to eliminate these call for users not wanting this feature.
               $day_total_minutes = ttTimeHelper::toMinutes(ttTimeHelper::getTimeForDay($date_to_check));
               // Check if entries total to a complete work day.
