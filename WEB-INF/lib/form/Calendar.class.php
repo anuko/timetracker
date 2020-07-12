@@ -61,6 +61,7 @@ class Calendar extends FormElement {
   // Generates html code for Calendar control.
   function getHtml() {
     global $i18n; // Needed to print Today.
+    global $user;
 
     $selectedDate = $this->value;
     if (!$selectedDate) $selectedDate = strftime(DB_DATEFORMAT);
@@ -79,154 +80,148 @@ class Calendar extends FormElement {
     $firstOfPreviousMonth = strftime(DB_DATEFORMAT, $firstOfPreviousMonth2AM);
 
     // Print calendar header.
-    $str .= "\n\n<!-- start of calendar -->\n";
-    $str .= '<table cellpadding="0" cellspacing="0" border="0" width="100%">'."\n";
-    $str .= '  <tr><td align="center">';
-    $str .= '<div class="calendarHeader">';
-    $str .= '<a href="?date='.$firstOfPreviousMonth.'" tabindex="-1">&lt;&lt;&lt;</a>  '.
+    $html .= "\n\n\n\n\n\n<!-- start of calendar -->\n";
+    $html .= '<table cellpadding="0" cellspacing="0" border="0" width="100%">'."\n";
+    $html .= '  <tr><td align="center">';
+    $html .= '<div class="calendarHeader">';
+    $html .= '<a href="?date='.$firstOfPreviousMonth.'" tabindex="-1">&lt;&lt;&lt;</a>  '.
       $this->monthNames[$selectedMonth-1].'&nbsp;'.$selectedYear.
       '  <a href="?date='.$firstOfNextMonth.'" tabindex="-1">&gt;&gt;&gt;</a></div></td></tr>'."\n";
-    $str .= "</table>\n";
+    $html .= "</table>\n";
+
+    // Start printing calendar table.
+    $html .= '<table border="0" cellpadding="1" cellspacing="1" width="100%">'."\n";
+
+    // Determine column indexes in calendar table for weekend start and end days.
+    if (defined('WEEKEND_START_DAY')) {
+      $weekend_start_idx = (7 + WEEKEND_START_DAY - $this->weekStartDay) % 7;
+      $weekend_end_idx = (7 + WEEKEND_START_DAY + 1 - $this->weekStartDay) % 7;
+    } else {
+      $weekend_start_idx = 6 - $this->weekStartDay;
+      $weekend_end_idx = (7 - $this->weekStartDay) % 7;
+    }
 
     // Print day headers.
-    $str .= '<table border="0" cellpadding="1" cellspacing="1" width="100%">'."\n";
-    $str .= '  <tr>';
-
-    // TODO: refactoring ongoing down from here...
-
-      // TODO: refactor this entire class, as $weekend_start and $weekend_end
-      // are not what their names suggest (debug with non zero week start to see it).
-      $weekend_start = 6 - $this->weekStartDay;      // Saturday by default.
-      $weekend_end = (7 - $this->weekStartDay) % 7;  // Sunday by default.
-      if (defined('WEEKEND_START_DAY')) {
-      	$weekend_start = (7 + WEEKEND_START_DAY - $this->weekStartDay) % 7;
-      	$weekend_end = (7 + WEEKEND_START_DAY + 1 - $this->weekStartDay) % 7;
-      } 
-
-      for ( $i=0; $i<7; $i++ ) {
-        $weekdayNameIdx = ($i + $this->weekStartDay) % 7;
-        if ($i==$weekend_start || $i==$weekend_end) {
-          $str .= '<td class="calendarDayHeaderWeekend">'.$this->weekdayShortNames[$weekdayNameIdx].'</td>';
-        } else {
-          $str .= '<td class="calendarDayHeader">'.$this->weekdayShortNames[$weekdayNameIdx].'</td>';
-        }
+    $html .= '  <tr>';
+    for ($i = 0; $i < 7; $i++) {
+      $weekdayNameIdx = ($i + $this->weekStartDay) % 7;
+      if ($i == $weekend_start_idx || $i == $weekend_end_idx) {
+        $html .= '<td class="calendarDayHeaderWeekend">'.$this->weekdayShortNames[$weekdayNameIdx].'</td>';
+      } else {
+        $html .= '<td class="calendarDayHeader">'.$this->weekdayShortNames[$weekdayNameIdx].'</td>';
       }
+    }
+    $html .= "</tr>\n";
 
-      $str .= "</tr>\n";
+    // Determine timestamps for iteration.
+    $firstDayOfSelectedMonth0am = mktime(0, 0, 0, $selectedMonth, 1, $selectedYear);
+    $lastDayOfSelectedMonth0am = mktime( 0, 0, 0, $selectedMonth + 1, 0, $selectedYear);
+    // Determine index of the 1st day of month in calendar table, which depends on user weekStartDay.
+    $firstDayOfSelectedMonthIdx = date("w", mktime ( 2, 0, 0, $selectedMonth, 1 - $this->weekStartDay, $selectedYear));
+    // Determine a timestamp when 1st display week starts by shifting back.
+    $firstWeekStart0am = $firstDayOfSelectedMonth0am - 86400 * $firstDayOfSelectedMonthIdx;
+    // Determine start day index, (0 or negative when we display empty days in a previous month).
+    $startDayIdx = 1 - $firstDayOfSelectedMonthIdx;
 
-      list($wkstart,$monthstart,$monthend,$start_date) = $this->_getWeekDayBefore( $selectedYear, $selectedMonth );
+    // Determine active dates where entries exist for user.
+    $active_dates = $this->getActiveDates($firstDayOfSelectedMonth0am, $lastDayOfSelectedMonth0am);
 
-      $active_dates = $this->_getActiveDates($monthstart, $monthend);
+    $workday_minutes = $user->getWorkdayMinutes();
 
-      for ( $i = $wkstart; $i<=$monthend;  $i=mktime(0,0,0,$selectedMonth,$start_date+=7,$selectedYear) ) {
-        $str .= "<TR>\n";
-          for ( $j = 0; $j < 7; $j++ ) {
-            $date = mktime(0,0,0,$selectedMonth,$start_date+$j,$selectedYear);
-            if (($date >= $monthstart) && ($date <= $monthend)) {
+    // Print calendar cells one week row at a time.
+    for ($timestamp = $firstWeekStart0am; $timestamp <= $lastDayOfSelectedMonth0am; $timestamp = mktime(0, 0, 0, $selectedMonth, $startDayIdx += 7, $selectedYear)) {
+      $html .= "  <tr>";
+      // Iterate through week days.
+      for ($j = 0; $j < 7; $j++) {
+        $cellDate0am = mktime(0, 0, 0, $selectedMonth, $startDayIdx + $j, $selectedYear);
+        if (($cellDate0am >= $firstDayOfSelectedMonth0am) && ($cellDate0am <= $lastDayOfSelectedMonth0am)) {
+          $cell_style = "";
+          $link_style = "";
 
-            $stl_cell = "";
-            $stl_link = "";
+          // Handle weekends.
+          if ($j == $weekend_start_idx || $j == $weekend_end_idx) {
+            $cell_style = ' class="calendarDayWeekend"';
+            $link_style = ' class="calendarLinkWeekend"';
+          } else
+            $cell_style = ' class="calendarDay"';
 
-            // weekend
-            if ($j==$weekend_start || $j==$weekend_end) {
-              $stl_cell = ' class="calendarDayWeekend"';
-              $stl_link = ' class="calendarLinkWeekend"';
-            } else {
-              $stl_cell = ' class="calendarDay"';
-            }
+          // Handle holidays.
+          $date_to_check = ttTimeHelper::dateInDatabaseFormat($selectedYear, $selectedMonth, $startDayIdx+$j);
+          if (ttTimeHelper::isHoliday($date_to_check)) {
+            $cell_style = ' class="calendarDayHoliday"';
+            $link_style = ' class="calendarLinkHoliday"';
+          }
 
-            // holidays
-            $date_to_check = ttTimeHelper::dateInDatabaseFormat($selectedYear, $selectedMonth, $start_date+$j);
-            if (ttTimeHelper::isHoliday($date_to_check)) {
-              $stl_cell = ' class="calendarDayHoliday"';
-              $stl_link = ' class="calendarLinkHoliday"';
-            }
+          // Handle selected day.
+          if ($selectedDate == strftime(DB_DATEFORMAT, $cellDate0am))
+            $cell_style = ' class="calendarDaySelected"';
 
-            // selected day
-            if ( $selectedDate == strftime(DB_DATEFORMAT, $date))
-              $stl_cell = ' class="calendarDaySelected"';
-
-
-            $str .= '<td'.$stl_cell.'>';
-
+          $html .= '<td'.$cell_style.'>';
+          if($active_dates) {
             // Entries exist.
-            if($active_dates) {
+            if( in_array(strftime(DB_DATEFORMAT, $cellDate0am), $active_dates) ){
+              // TODO: add a config option to eliminate these call for users not wanting this feature.
               $day_total_minutes = ttTimeHelper::toMinutes(ttTimeHelper::getTimeForDay($date_to_check));
-              global $user;
-              $workday_minutes = $user->getWorkdayMinutes();
-
-              //check for any entries in the day
-              if( in_array(strftime(DB_DATEFORMAT, $date), $active_dates) ){
-                //check if entries total to a complete work day
-                if ($day_total_minutes >= $workday_minutes){
-                  $stl_link = ' class="calendarLinkRecordsExist"';
-                }
-                else {
-                  $stl_link = ' class="calendarLinkNonCompleteDay"';
-                }
-              }
+              // Check if entries total to a complete work day.
+              if ($day_total_minutes >= $workday_minutes)
+                $link_style = ' class="calendarLinkRecordsExist"';
+              else
+                $link_style = ' class="calendarLinkNonCompleteDay"';
             }
-
-            $str .= "<a".$stl_link." href=\"?".$this->name."=".strftime(DB_DATEFORMAT, $date)."\" tabindex=\"-1\">".date("d",$date)."</a>";
-
-            $str .= "</TD>";
           }
-          else {
-            $str .= "<TD>&nbsp;</TD>\n";
-          }
+          $html .= "<a".$link_style." href=\"?".$this->name."=".strftime(DB_DATEFORMAT, $cellDate0am)."\" tabindex=\"-1\">".date("d",$cellDate0am)."</a>";
+          $html .= "</td>";
+        } else {
+          $html .= "<td>&nbsp;</td>";
         }
-        $str .= "</TR>\n";
       }
-
-      $str .= "<tr><td colspan=\"7\" align=\"center\"><a id=\"today_link\" href=\"?".$this->name."=".strftime(DB_DATEFORMAT)."\" tabindex=\"-1\">".$i18n->get('label.today')."</a></td></tr>\n";
-      $str .= "</table>\n";
-
-      $str .= "<input type=\"hidden\" name=\"$this->name\" value=\"$selectedDate\">\n";
-
-      // Add script to adjust today link to match browser today, as PHP may run in a different timezone.
-      $str .= "<script>\n";
-      $str .= "function adjustToday() {\n";
-      $str .= "  var browser_today = new Date();\n";
-      $str .= "  document.getElementById('today_link').href = '?$this->name='+browser_today.strftime('".DB_DATEFORMAT."');\n";
-      $str .= "}\n";
-      $str .= "adjustToday();\n";
-      $str .= "</script>\n";
-      
-      return $str;
+      $html .= "</tr>\n";
     }
 
-    function _getWeekDayBefore($year, $month) {
-      $weekday = date ( "w", mktime ( 2, 0, 0, $month, 1 - $this->weekStartDay, $year ) );
-      return array(
-        mktime ( 0, 0, 0, $month, 1 - $weekday, $year ),
-        mktime ( 0, 0, 0, $month, 1, $year ),
-      mktime ( 0, 0, 0, $month + 1, 0, $year ),
-      (1 - $weekday)
-      );
-    }
+    // Finished printing calendar table.
 
-    // _getActiveDates returns an array of dates, for which entries exist for user.
-    // Type of entries (time or expenses) is determined by $this->highlight value.
-    function _getActiveDates($start, $end) {
-      
-      global $user;
-      $user_id = $user->getUser();
-      
-      $table = ($this->highlight == 'expenses') ? 'tt_expense_items' : 'tt_log';
-      
-      $mdb2 = getConnection();
+    // Print Today link.
+    $html .= "  <tr><td colspan=\"7\" align=\"center\"><a id=\"today_link\" href=\"?".$this->name."=".strftime(DB_DATEFORMAT)."\" tabindex=\"-1\">".$i18n->get('label.today')."</a></td></tr>\n";
+    $html .= "</table>\n";
 
-      $start_date = date("Y-m-d", $start);
-      $end_date = date("Y-m-d", $end);
-      $sql = "SELECT date FROM $table WHERE date >= '$start_date' AND date <= '$end_date' AND user_id = $user_id AND status = 1";
-      $res = $mdb2->query($sql);
-      if (!is_a($res, 'PEAR_Error')) {
-        while ($row = $res->fetchRow()) {
-          $out[] = date('Y-m-d', strtotime($row['date']));
-        }
-        return @$out;
+    // Add a hidden control for selected date.
+    $html .= "<input type=\"hidden\" name=\"$this->name\" value=\"$selectedDate\">\n";
+
+    // Add script to adjust today link to match browser today, as PHP may run in a different timezone.
+    $html .= "<script>\n";
+    $html .= "function adjustToday() {\n";
+    $html .= "  var browser_today = new Date();\n";
+    $html .= "  document.getElementById('today_link').href = '?$this->name='+browser_today.strftime('".DB_DATEFORMAT."');\n";
+    $html .= "}\n";
+    $html .= "adjustToday();\n";
+    $html .= "</script>\n";
+
+    $html .= "<!-- end of calendar -->\n\n\n\n\n\n\n";
+    return $html;
+  }
+
+  // getActiveDates returns an array of dates, for which entries exist for user.
+  // Type of entries (time or expenses) is determined by $this->highlight value.
+  function getActiveDates($start, $end) {
+      
+    global $user;
+    $user_id = $user->getUser();
+      
+    $table = ($this->highlight == 'expenses') ? 'tt_expense_items' : 'tt_log';
+      
+    $mdb2 = getConnection();
+
+    $start_date = date("Y-m-d", $start);
+    $end_date = date("Y-m-d", $end);
+    $sql = "SELECT date FROM $table WHERE date >= '$start_date' AND date <= '$end_date' AND user_id = $user_id AND status = 1";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($row = $res->fetchRow()) {
+        $out[] = date('Y-m-d', strtotime($row['date']));
       }
-      else
-        return false;
+      return @$out;
     }
+    else
+      return false;
+  }
 }
