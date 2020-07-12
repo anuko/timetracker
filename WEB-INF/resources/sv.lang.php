@@ -686,6 +686,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.display_options.menu' => 'Menu',
 // 'form.display_options.note_on_separate_row' => 'Note on separate row',
+// 'form.display_options.not_complete_days' => 'Not complete days',
 
 // Work plugin strings. See example at https://timetracker.anuko.com/work.php
 // TODO: translate the following.

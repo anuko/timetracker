@@ -126,6 +126,8 @@ class Calendar extends FormElement {
     // Determine active dates where entries exist for user.
     $active_dates = $this->getActiveDates($firstDayOfSelectedMonth0am, $lastDayOfSelectedMonth0am);
 
+    $handleHolidays = $user->getHolidays() != null;
+    $handleNotCompleteDays = $user->isOptionEnabled('time_not_complete_days');
     $workday_minutes = $user->getWorkdayMinutes();
 
     // Print calendar cells one week row at a time.
@@ -147,7 +149,7 @@ class Calendar extends FormElement {
 
           // Handle holidays.
           $date_to_check = ttTimeHelper::dateInDatabaseFormat($selectedYear, $selectedMonth, $startDayIdx+$j);
-          if (ttTimeHelper::isHoliday($date_to_check)) {
+          if ($handleHolidays && ttTimeHelper::isHoliday($date_to_check)) {
             $cell_style = ' class="calendarDayHoliday"';
             $link_style = ' class="calendarLinkHoliday"';
           }
@@ -157,16 +159,19 @@ class Calendar extends FormElement {
             $cell_style = ' class="calendarDaySelected"';
 
           $html .= '<td'.$cell_style.'>';
+          // Handle days with existing entries.
           if ($active_dates) {
             // Entries exist.
             if (in_array(strftime(DB_DATEFORMAT, $cellDate0am), $active_dates)) {
-              // TODO: add a config option to eliminate these call for users not wanting this feature.
-              $day_total_minutes = ttTimeHelper::toMinutes(ttTimeHelper::getTimeForDay($date_to_check));
-              // Check if entries total to a complete work day.
-              if ($day_total_minutes >= $workday_minutes)
-                $link_style = ' class="calendarLinkRecordsExist"';
+              if ($handleNotCompleteDays && $this->highlight == 'time') {
+                $day_total_minutes = ttTimeHelper::toMinutes(ttTimeHelper::getTimeForDay($date_to_check));
+                if ($day_total_minutes >= $workday_minutes)
+                  $link_style = ' class="calendarLinkRecordsExist"';
+                else
+                  $link_style = ' class="calendarLinkNonCompleteDay"';
+              }
               else
-                $link_style = ' class="calendarLinkNonCompleteDay"';
+                $link_style = ' class="calendarLinkRecordsExist"';
             }
           }
           $html .= "<a".$link_style." href=\"?".$this->name."=".strftime(DB_DATEFORMAT, $cellDate0am)."\" tabindex=\"-1\">".date("d",$cellDate0am)."</a>";

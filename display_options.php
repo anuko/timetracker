@@ -41,9 +41,11 @@ $config = $user->getConfigHelper();
 
 if ($request->isPost()) {
   $cl_time_note_on_separate_row = $request->getParameter('time_note_on_separate_row');
+  $cl_time_not_complete_days = $request->getParameter('time_not_complete_days');
   $cl_report_note_on_separate_row = $request->getParameter('report_note_on_separate_row');
 } else {
   $cl_time_note_on_separate_row = $config->getDefinedValue('time_note_on_separate_row');
+  $cl_time_not_complete_days = $config->getDefinedValue('time_not_complete_days');
   $cl_report_note_on_separate_row = $config->getDefinedValue('report_note_on_separate_row');
 }
 
@@ -58,6 +60,7 @@ $form = new Form('displayOptionsForm');
 // $form->addInput(array('type'=>'checkbox','name'=>'time_duration','value'=>$cl_time_duration));
 // $form->addInput(array('type'=>'checkbox','name'=>'time_note','value'=>$cl_time_note));
 $form->addInput(array('type'=>'checkbox','name'=>'time_note_on_separate_row','value'=>$cl_time_note_on_separate_row));
+$form->addInput(array('type'=>'checkbox','name'=>'time_not_complete_days','value'=>$cl_time_not_complete_days));
 // TODO: consider adding other fields (timesheet, work_units, invoice, approved, cost, paid)?
 
 // Reports.
@@ -70,6 +73,7 @@ if ($request->isPost()){
   if ($err->no()) {
     // Update config.
     $config->setDefinedValue('time_note_on_separate_row', $cl_time_note_on_separate_row);
+    $config->setDefinedValue('time_not_complete_days', $cl_time_not_complete_days);
     $config->setDefinedValue('report_note_on_separate_row', $cl_report_note_on_separate_row);
     if ($user->updateGroup(array('config' => $config->getConfig()))) {
       header('Location: success.php');
