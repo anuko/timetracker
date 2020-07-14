@@ -74,6 +74,7 @@ class ttUser {
   // Refactoring ongoing. Towards using helper instead of config string?
   var $config = null;           // Comma-separated list of miscellaneous config options.
   var $configHelper = null;     // An instance of ttConfigHelper class.
+  var $custom_css = null;       // Custom css.
 
   var $custom_logo = 0;         // Whether to use a custom logo for group.
   var $lock_spec = null;        // Cron specification for record locking.
@@ -97,7 +98,7 @@ class ttUser {
     $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id,".
       " u.quota_percent, u.email, g.org_id, g.group_key, g.name as group_name, g.currency, g.lang, g.decimal_mark, g.date_format,".
       " g.time_format, g.week_start, g.tracking_mode, g.project_required, g.task_required, g.record_type,".
-      " g.bcc_email, g.allow_ip, g.password_complexity, g.plugins, g.config, g.lock_spec, g.holidays, g.workday_minutes, g.custom_logo".
+      " g.bcc_email, g.allow_ip, g.password_complexity, g.plugins, g.config, g.lock_spec, g.custom_css, g.holidays, g.workday_minutes, g.custom_logo".
       " FROM tt_users u LEFT JOIN tt_groups g ON (u.group_id = g.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
     if ($id)
       $sql .= "u.id = $id";
@@ -155,7 +156,9 @@ class ttUser {
       $this->punch_mode = $this->configHelper->getDefinedValue('punch_mode');
       $this->allow_overlap = $this->configHelper->getDefinedValue('allow_overlap');
       $this->future_entries = $this->configHelper->getDefinedValue('future_entries');
-      
+
+      $this->custom_css = $val['custom_css'];
+
       // Set "on behalf" id and name (user).
       if (isset($_SESSION['behalf_id'])) {
         $this->behalf_id = $_SESSION['behalf_id'];
@@ -302,6 +305,11 @@ class ttUser {
   function getConfigInt($name, $defaultVal) {
     $config = new ttConfigHelper($this->getConfig());
     return $config->getIntValue($name, $defaultVal);
+  }
+
+  // getCustomCss returns custom css for active group.
+  function getCustomCss() {
+    return ($this->behalfGroup ? $this->behalfGroup->custom_css : $this->custom_css);
   }
 
   // can - determines whether user has a right to do something.

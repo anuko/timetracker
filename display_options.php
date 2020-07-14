@@ -67,6 +67,7 @@ $form->addInput(array('type'=>'checkbox','name'=>'time_not_complete_days','value
 $form->addInput(array('type'=>'checkbox','name'=>'report_note_on_separate_row','value'=>$cl_report_note_on_separate_row));
 // TODO: add PDF break controller here.
 
+$form->addInput(array('type'=>'textarea','name'=>'custom_css','style'=>'width: 250px; height: 40px;','value'=>$cl_custom_css));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()){
