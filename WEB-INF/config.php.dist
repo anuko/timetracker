@@ -182,3 +182,8 @@ define('AUTH_MODULE', 'db');
 // A comma-separated list of default plugins for new group registrations.
 // Example below enables charts and attachments.
 // define('DEFAULT_PLUGINS', 'ch,at');
+
+// configuratios for jwt authentication
+define('SECRET_KEY', 'YOUR_SECRET_KEY');
+define('ISSUER_CLAIM', 'TestTimetrackerApi'); // this can be the servername
+define('AUDIENCE_CLAIM', 'THE_AUDIENCE');
