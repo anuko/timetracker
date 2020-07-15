@@ -43,10 +43,12 @@ if ($request->isPost()) {
   $cl_time_note_on_separate_row = $request->getParameter('time_note_on_separate_row');
   $cl_time_not_complete_days = $request->getParameter('time_not_complete_days');
   $cl_report_note_on_separate_row = $request->getParameter('report_note_on_separate_row');
+  $cl_custom_css = trim($request->getParameter('custom_css'));
 } else {
   $cl_time_note_on_separate_row = $config->getDefinedValue('time_note_on_separate_row');
   $cl_time_not_complete_days = $config->getDefinedValue('time_not_complete_days');
   $cl_report_note_on_separate_row = $config->getDefinedValue('report_note_on_separate_row');
+  $cl_custom_css = $user->getCustomCss();
 }
 
 $form = new Form('displayOptionsForm');
@@ -76,7 +78,9 @@ if ($request->isPost()){
     $config->setDefinedValue('time_note_on_separate_row', $cl_time_note_on_separate_row);
     $config->setDefinedValue('time_not_complete_days', $cl_time_not_complete_days);
     $config->setDefinedValue('report_note_on_separate_row', $cl_report_note_on_separate_row);
-    if ($user->updateGroup(array('config' => $config->getConfig()))) {
+    if ($user->updateGroup(array(
+      'config' => $config->getConfig(),
+      'custom_css' => $cl_custom_css))) {
       header('Location: success.php');
       exit();
     } else
