@@ -172,7 +172,7 @@ if ($request->isPost()) {
   $new_date = new DateAndTime($user->getDateFormat(), $cl_date);
 
   // Prohibit creating entries in future.
-  if (!$user->getConfigOption('future_entries')) {
+  if (!$user->isOptionEnabled('future_entries')) {
     $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
     if ($new_date->after($browser_today))
       $err->add($i18n->get('error.future_date'));
