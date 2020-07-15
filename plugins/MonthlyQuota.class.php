@@ -133,7 +133,7 @@ class MonthlyQuota {
   // getNumWorkdays returns a number of work days in a given month.
   private function getNumWorkdays($month, $year) {
 
-    $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year); // Number of calendar days in month.
+    $daysInMonth = date('t', mktime(0, 0, 0, $month, 1, $year));
 
     $workdaysInMonth = 0;
     // Iterate through the entire month.
