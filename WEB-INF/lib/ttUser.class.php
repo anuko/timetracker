@@ -64,7 +64,6 @@ class ttUser {
   var $record_type = 0;         // Record type (duration vs start and finish, or both).
   var $punch_mode = 0;          // Whether punch mode is enabled for user.
   var $allow_overlap = 0;       // Whether to allow overlapping time entries.
-  var $future_entries = 0;      // Whether to allow creating future entries.
   var $bcc_email = null;        // Bcc email.
   var $allow_ip = null;         // Specification from where user is allowed access.
   var $password_complexity = null; // Password complexity example.
@@ -155,7 +154,6 @@ class ttUser {
       // Set user config options.
       $this->punch_mode = $this->configHelper->getDefinedValue('punch_mode');
       $this->allow_overlap = $this->configHelper->getDefinedValue('allow_overlap');
-      $this->future_entries = $this->configHelper->getDefinedValue('future_entries');
 
       $this->custom_css = $val['custom_css'];
 

@@ -34,7 +34,7 @@ import('ttGroupHelper');
 class ttGroup {
   var $id = null;               // Group id.
   var $group_key = null;        // Group key.
-  var $parent_id = null;        // Paerent group id.
+  var $parent_id = null;        // Parent group id.
   var $org_id = null;           // Organization id.
   var $name = null;             // Group name.
   var $lang = null;             // Language.
@@ -48,7 +48,6 @@ class ttGroup {
   var $record_type = 0;         // Record type (duration vs start and finish, or both).
   var $punch_mode = 0;          // Whether punch mode is enabled for user.
   var $allow_overlap = 0;       // Whether to allow overlapping time entries.
-  var $future_entries = 0;      // Whether to allow creating future entries.
   var $bcc_email = null;        // Bcc email.
   var $allow_ip = null;         // Specification from where user is allowed access.
   var $password_complexity = null; // Password complexity example.
@@ -117,7 +116,6 @@ class ttGroup {
       // Set user config options.
       $this->punch_mode = $this->configHelper->getDefinedValue('punch_mode');
       $this->allow_overlap = $this->configHelper->getDefinedValue('allow_overlap');
-      $this->future_entries = $this->configHelper->getDefinedValue('future_entries');
     }
 
     // Determine active user count in a separate query.
