@@ -177,6 +177,25 @@ function ttValidString($val, $emptyValid = false)
   return true;    
 }
 
+// ttValidCss is used to check user input for custom css.
+function ttValidCss($val)
+{
+  $val = trim($val);
+  if (strlen($val) == 0)
+    return true;
+
+  // String must not contain any tags.
+  if (stristr($val, '<'))
+    return false;
+
+  // Security note: the above may not be enough.
+  // Currently it is unclear how vulnerable we are assuming custom css is available only to a logged on user
+  // (one custom css per group).
+  // However, if abuse occurs or when the issue is better understood, we may have to rewrite this function,
+  // perhaps by specifying what exactly we allow to style.
+  return true;
+}
+
 // ttValidTemplateText is used to check template-based user input.
 // When templates are used, required input parts must be filled by user.
 // We identify these parts by 3 "stop sign" emojis (aka "octagonal sign" U+1F6D1).

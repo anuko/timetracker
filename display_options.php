@@ -73,6 +73,10 @@ $form->addInput(array('type'=>'textarea','name'=>'custom_css','style'=>'width: 2
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()){
+  // Validate user input.
+  if (!ttValidCss($cl_custom_css)) $err->add($i18n->get('error.field'), $i18n->get('form.display_options.custom_css'));
+  // Finished validating user input.
+
   if ($err->no()) {
     // Update config.
     $config->setDefinedValue('time_note_on_separate_row', $cl_time_note_on_separate_row);
