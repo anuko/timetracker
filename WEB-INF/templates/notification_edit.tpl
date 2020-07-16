@@ -24,6 +24,10 @@
           <td>{$forms.notificationForm.subject.control}</td>
         </tr>
         <tr>
+          <td align="right">{$i18n.label.comment}:</td>
+          <td>{$forms.notificationForm.comment.control}</td>
+        </tr>
+        <tr>
           <td align="right">{$i18n.label.condition}:</td>
           <td>{$forms.notificationForm.report_condition.control} <a href="https://www.anuko.com/lp/tt_9.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
         </tr>

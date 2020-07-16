@@ -62,6 +62,7 @@ if ($request->isPost()) {
   $cl_email = trim($request->getParameter('email'));
   $cl_cc = trim($request->getParameter('cc'));
   $cl_subject = trim($request->getParameter('subject'));
+  $cl_comment = trim($request->getParameter('comment'));
   $cl_report_condition = trim($request->getParameter('report_condition'));
 } else {
   $cl_cron_spec = '0 4 * * 1'; // Default schedule - weekly on Mondays at 04:00 (server time).
@@ -80,6 +81,7 @@ $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'cron_spec','sty
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','style'=>'width: 250px;','value'=>$cl_email));
 $form->addInput(array('type'=>'text','name'=>'cc','style'=>'width: 300px;','value'=>$cl_cc));
 $form->addInput(array('type'=>'text','name'=>'subject','style'=>'width: 300px;','value'=>$cl_subject));
+$form->addInput(array('type'=>'textarea','name'=>'comment','value'=>$cl_comment));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'report_condition','style'=>'width: 250px;','value'=>$cl_report_condition));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
@@ -90,6 +92,7 @@ if ($request->isPost()) {
   if (!ttValidEmailList($cl_email)) $err->add($i18n->get('error.field'), $i18n->get('label.email'));
   if (!ttValidEmailList($cl_cc, true)) $err->add($i18n->get('error.field'), $i18n->get('label.cc'));
   if (!ttValidString($cl_subject, true)) $err->add($i18n->get('error.field'), $i18n->get('label.subject'));
+  if (!ttValidString($cl_comment, true)) $err->add($i18n->get('error.field'), $i18n->get('label.comment'));
   if (!ttValidCondition($cl_report_condition)) $err->add($i18n->get('error.field'), $i18n->get('label.condition'));
 
   if ($err->no()) {
@@ -103,6 +106,7 @@ if ($request->isPost()) {
         'email' => $cl_email,
         'cc' => $cl_cc,
         'subject' => $cl_subject,
+        'comment' => $cl_comment,
         'report_condition' => $cl_report_condition,
         'status' => ACTIVE))) {
         header('Location: notifications.php');

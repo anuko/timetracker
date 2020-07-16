@@ -47,7 +47,7 @@ import('ttReportHelper');
 $mdb2 = getConnection();
 $now = time();
 
-$sql = "select c.id, c.cron_spec, c.report_id, c.email, c.cc, c.subject, c.report_condition from tt_cron c".
+$sql = "select c.id, c.cron_spec, c.report_id, c.email, c.cc, c.subject, c.comment, c.report_condition from tt_cron c".
   " inner join tt_fav_reports fr on".
   " (c.report_id = fr.id and c.group_id = fr.group_id and c.org_id = fr.org_id)". // Report for a correct group.
   " inner join tt_users u on (u.id = fr.user_id and u.status = 1)". // Report for an active user.
@@ -94,7 +94,7 @@ while ($val = $res->fetchRow()) {
 
   // Email report if condition is okay.
   if ($condition_ok) {
-    if (ttReportHelper::sendFavReport($options, $val['subject'], $val['email'], $val['cc']))
+    if (ttReportHelper::sendFavReport($options, $val['subject'], $val['comment'], $val['email'], $val['cc']))
       echo "Report ".$val['report_id']. " sent.<br>";
     else
       echo "Error while emailing report...<br>";

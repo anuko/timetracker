@@ -1451,7 +1451,7 @@ class ttReportHelper {
     $equal = ttStartsWith($condition, '=');
     if ($equal) $condition = trim(str_replace('=', '', $condition));
 
-    $count_required = (int) $condition; // TODO: remove this?
+    $required_value = (int) $condition;
 
     if ($greater && $actual_value > $required_value) return true;
     if ($greater_or_equal && $actual_value >= $required_value) return true;
@@ -1464,14 +1464,14 @@ class ttReportHelper {
   }
 
   // sendFavReport - sends a favorite report to a specified email, called from cron.php
-  static function sendFavReport($options, $subject, $email, $cc) {
+  static function sendFavReport($options, $subject, $comment, $email, $cc) {
     // We are called from cron.php, we have no $bean in session.
     // cron.php sets global $user and $i18n objects to match our favorite report user.
     global $user;
     global $i18n;
 
     // Prepare report body.
-    $body = ttReportHelper::prepareReportBody($options);
+    $body = ttReportHelper::prepareReportBody($options, $comment);
 
     import('mail.Mailer');
     $mailer = new Mailer();
