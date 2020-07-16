@@ -1451,7 +1451,7 @@ class ttReportHelper {
     $equal = ttStartsWith($condition, '=');
     if ($equal) $condition = trim(str_replace('=', '', $condition));
 
-    $count_required = (int) $condition;
+    $count_required = (int) $condition; // TODO: remove this?
 
     if ($greater && $actual_value > $required_value) return true;
     if ($greater_or_equal && $actual_value >= $required_value) return true;

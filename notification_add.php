@@ -46,7 +46,7 @@ if (!$user->exists()) {
   header('Location: access_denied.php'); // No users in subgroup.
   exit();
 }
-if ($request->isPost()) {
+if ($request->isPost() && $request->getParameter('fav_report')) {
   $cl_fav_report_id = (int) $request->getParameter('fav_report');
   if (!ttFavReportHelper::get($cl_fav_report_id)) {
     header('Location: access_denied.php'); // Invalid fav report id in post.
@@ -87,7 +87,7 @@ if ($request->isPost()) {
   // Validate user input.
   if (!$cl_fav_report_id) $err->add($i18n->get('error.report'));
   if (!ttValidCronSpec($cl_cron_spec)) $err->add($i18n->get('error.field'), $i18n->get('label.schedule'));
-  if (!ttValidEmailList($cl_email)) $err->add($i18n->get('error.field'), $i18n->get('form.email'));
+  if (!ttValidEmailList($cl_email)) $err->add($i18n->get('error.field'), $i18n->get('label.email'));
   if (!ttValidEmailList($cl_cc, true)) $err->add($i18n->get('error.field'), $i18n->get('label.cc'));
   if (!ttValidString($cl_subject, true)) $err->add($i18n->get('error.field'), $i18n->get('label.subject'));
   if (!ttValidCondition($cl_report_condition)) $err->add($i18n->get('error.field'), $i18n->get('label.condition'));
