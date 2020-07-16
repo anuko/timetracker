@@ -882,6 +882,7 @@ class ttReportHelper {
     $totals['start_date'] = $period->getStartDate();
     $totals['end_date'] = $period->getEndDate();
     $totals['time'] = $total_time;
+    $totals['minutes'] = $val['time'] / 60;
     $totals['units'] = $val['units'];
     $totals['cost'] = $total_cost;
     $totals['expenses'] = $total_expenses;
@@ -1417,9 +1418,20 @@ class ttReportHelper {
   // checkFavReportCondition - checks whether it is okay to send fav report.
   static function checkFavReportCondition($options, $condition)
   {
-    $items = ttReportHelper::getItems($options);
-
-    $condition = trim(str_replace('count', '', $condition));
+    $actual_value = 0;
+    $condition = trim($condition);
+    if (ttStartsWith($condition, "count")) {
+      $items = ttReportHelper::getItems($options);
+      $actual_value = count($items);
+      $condition = trim(str_replace('count', '', $condition));
+    } else if (ttStartsWith($condition, "hours")) {
+      $totals = ttReportHelper::getTotals($options);
+      $actual_value = (int)($totals['minutes'] / 60);
+      $condition = trim(str_replace('hours', '', $condition));
+    } else {
+      echo "Invalid condition: " . $condition . "\n";
+      return false;
+    }
 
     $greater_or_equal = ttStartsWith($condition, '>=');
     if ($greater_or_equal) $condition = trim(str_replace('>=', '', $condition));
@@ -1441,12 +1453,12 @@ class ttReportHelper {
 
     $count_required = (int) $condition;
 
-    if ($greater && count($items) > $count_required) return true;
-    if ($greater_or_equal && count($items) >= $count_required) return true;
-    if ($less && count($items) < $count_required) return true;
-    if ($less_or_equal && count($items) <= $count_required) return true;
-    if ($equal && count($items) == $count_required) return true;
-    if ($not_equal && count($items) <> $count_required) return true;
+    if ($greater && $actual_value > $required_value) return true;
+    if ($greater_or_equal && $actual_value >= $required_value) return true;
+    if ($less && $actual_value < $required_value) return true;
+    if ($less_or_equal && $actual_value <= $required_value) return true;
+    if ($equal && $actual_value == $required_value) return true;
+    if ($not_equal && $actual_value <> $required_value) return true;
 
     return false;
   }

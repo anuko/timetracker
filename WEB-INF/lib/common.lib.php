@@ -343,7 +343,8 @@ function ttValidCondition($val, $emptyValid = true)
   if (stristr($val, '<script>') || stristr($val, '<script '))
     return false;
 
-  if (!preg_match("/^count\s?(=|[<>]=?|<>)\s?\d+$/", $val))
+  if (!preg_match("/^count\s?(=|[<>]=?|<>)\s?\d+$/", $val) &&
+      !preg_match("/^hours\s?(=|[<>]=?|<>)\s?\d+$/", $val))
     return false;
 
   return true;
