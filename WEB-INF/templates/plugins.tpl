@@ -46,10 +46,13 @@ function handlePluginCheckboxes() {
 
   var notificationsCheckbox = document.getElementById("notifications");
   configureLabel = document.getElementById("notifications_conf");
+  docLabel = document.getElementById("notifications_doc");
   if (notificationsCheckbox.checked) {
-    configureLabel.style.visibility = "visible";
+    configureLabel.style.display = "";
+    docLabel.style.display = "none";
   } else {
-    configureLabel.style.visibility = "hidden";
+    configureLabel.style.display = "none";
+    docLabel.style.display = "";
   }
 
   var lockingCheckbox = document.getElementById("locking");
@@ -128,7 +131,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.notifications.control}</td>
-            <td><label for="notifications">{$i18n.title.notifications}</label> <span id="notifications_conf">{if $user_exists}<a href="notifications.php">{$i18n.label.configure}</a>{/if}</span></td>
+            <td><label for="notifications">{$i18n.title.notifications}</label> <span id="notifications_doc"><a href="https://www.anuko.com/lp/tt_45.htm" target="_blank">{$i18n.label.what_is_it}</a></span><span id="notifications_conf">{if $user_exists}<a href="notifications.php">{$i18n.label.configure}</a>{/if}</span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.locking.control}</td>
