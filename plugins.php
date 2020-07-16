@@ -154,7 +154,7 @@ if ($request->isPost()) {
   if ($user->updateGroup(array(
     'plugins' => $plugins,
     'config' => $config))) {
-    header('Location: success.php');
+    header('Location: plugins.php');
     exit();
   } else
     $err->add($i18n->get('error.db'));

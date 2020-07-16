@@ -123,31 +123,31 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.custom_fields.control}</td>
-            <td><label for="custom_fields">{$i18n.label.custom_fields}</label> <span id="cf_conf"><a href="cf_custom_fields.php">{$i18n.label.configure}</a></span></td>
+            <td><label for="custom_fields">{$i18n.label.custom_fields}</label> <span id="cf_conf">{if $user->isPluginEnabled('cf')}<a href="cf_custom_fields.php">{$i18n.label.configure}</a>{/if}</span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.expenses.control}</td>
-            <td><label for="expenses">{$i18n.title.expenses}</label> {$forms.pluginsForm.tax_expenses.control} <span id="tax_label"><label for="tax_expenses">{$i18n.label.tax}</label></span> <span id="expenses_conf"><a href="predefined_expenses.php">{$i18n.label.configure}</a></span></td>
+            <td><label for="expenses">{$i18n.title.expenses}</label> {$forms.pluginsForm.tax_expenses.control} <span id="tax_label"><label for="tax_expenses">{$i18n.label.tax}</label></span> <span id="expenses_conf">{if $user->isPluginEnabled('ex')}<a href="predefined_expenses.php">{$i18n.label.configure}</a>{/if}</span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.notifications.control}</td>
-            <td><label for="notifications">{$i18n.title.notifications}</label> <span id="notifications_doc"><a href="https://www.anuko.com/lp/tt_45.htm" target="_blank">{$i18n.label.what_is_it}</a></span><span id="notifications_conf">{if $user_exists}<a href="notifications.php">{$i18n.label.configure}</a>{/if}</span></td>
+            <td><label for="notifications">{$i18n.title.notifications}</label> <span id="notifications_doc"><a href="https://www.anuko.com/lp/tt_45.htm" target="_blank">{$i18n.label.what_is_it}</a></span><span id="notifications_conf">{if $user_exists && $user->isPluginEnabled('no')}<a href="notifications.php">{$i18n.label.configure}</a>{/if}</span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.locking.control}</td>
-            <td><label for="locking">{$i18n.title.locking}</label> <span id="locking_conf"><a href="locking.php">{$i18n.label.configure}</a></span></td>
+            <td><label for="locking">{$i18n.title.locking}</label> <span id="locking_conf">{if $user->isPluginEnabled('lk')}<a href="locking.php">{$i18n.label.configure}</a>{/if}</span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.quotas.control}</td>
-            <td><label for="quotas">{$i18n.label.monthly_quotas}</label> <span id="quotas_conf"><a href="quotas.php">{$i18n.label.configure}</a></span></td>
+            <td><label for="quotas">{$i18n.label.monthly_quotas}</label> <span id="quotas_conf">{if $user->isPluginEnabled('mq')}<a href="quotas.php">{$i18n.label.configure}</a>{/if}</span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.week_view.control}</td>
-            <td><label for="week_view">{$i18n.label.week_view}</label> <span id="week_view_conf"><a href="week_view.php">{$i18n.label.configure}</a></span></td>
+            <td><label for="week_view">{$i18n.label.week_view}</label> <span id="week_view_conf">{if $user->isPluginEnabled('wv')}<a href="week_view.php">{$i18n.label.configure}</a>{/if}</span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.work_units.control}</td>
-            <td><label for="work_units">{$i18n.label.work_units}</label> <span id="work_units_conf"><a href="work_units.php">{$i18n.label.configure}</a></span></td>
+            <td><label for="work_units">{$i18n.label.work_units}</label> <span id="work_units_conf">{if $user->isPluginEnabled('wu')}<a href="work_units.php">{$i18n.label.configure}</a>{/if}</span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.approval.control}</td>
@@ -159,7 +159,7 @@ function handlePluginCheckboxes() {
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.templates.control}</td>
-            <td><label for="templates">{$i18n.title.templates}</label> <span id="templates_conf"><a href="templates.php">{$i18n.label.configure}</a></span> <span id="templates_doc"><a href="https://www.anuko.com/lp/tt_29.htm" target="_blank">{$i18n.label.what_is_it}</a></span></td>
+            <td><label for="templates">{$i18n.title.templates}</label> <span id="templates_doc"><a href="https://www.anuko.com/lp/tt_29.htm" target="_blank">{$i18n.label.what_is_it}</a></span> <span id="templates_conf">{if $user->isPluginEnabled('tp')}<a href="templates.php">{$i18n.label.configure}</a>{/if}</span></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$forms.pluginsForm.attachments.control}</td>
