@@ -314,6 +314,7 @@ CREATE TABLE `tt_cron` (
   `email` varchar(100) default NULL,            # email to send results to
   `cc` varchar(100) default NULL,               # cc email to send results to
   `subject` varchar(100) default NULL,          # email subject
+  `comment` text,                               # user provided comment for notification
   `report_condition` varchar(255) default NULL, # report condition, "count > 0" for sending not empty reports
   `status` tinyint(4) default 1,                # entry status
   PRIMARY KEY (`id`)
@@ -656,4 +657,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.19', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.22', now()); # TODO: change when structure changes.
