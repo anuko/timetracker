@@ -76,7 +76,6 @@ $showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $tra
 $showTask = MODE_PROJECTS_AND_TASKS == $trackingMode;
 $recordType = $user->getRecordType();
 $showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
-$showFinish = $showStart;
 $showDuration = TYPE_DURATION == $recordType || TYPE_ALL == $recordType;
 $showFiles = $user->isPluginEnabled('at');
 
@@ -483,7 +482,6 @@ $smarty->assign('show_billable', $showBillable);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
 $smarty->assign('show_start', $showStart);
-$smarty->assign('show_finish', $showFinish);
 $smarty->assign('show_duration', $showDuration);
 $smarty->assign('show_note_column', $showNoteColumn);
 $smarty->assign('show_note_row', $showNoteRow);

@@ -79,8 +79,6 @@
 {if $show_start}
               <tr><td>{$i18n.label.start}:</td></tr>
               <tr><td>{$forms.timeRecordForm.start.control}&nbsp;<input onclick="setNow('start');" type="button" value="{$i18n.button.now}"></td></tr>
-{/if}
-{if $show_finish}
               <tr><td>{$i18n.label.finish}:</td></tr>
               <tr><td>{$forms.timeRecordForm.finish.control}&nbsp;<input onclick="setNow('finish');" type="button" value="{$i18n.button.now}"></td></tr>
 {/if}

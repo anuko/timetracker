@@ -62,8 +62,6 @@
           <td align="right">{$i18n.label.start}:</td>
           <td>{$forms.timeRecordForm.start.control}&nbsp;<input onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
         </tr>
-{/if}
-{if $show_finish}
         <tr>
           <td align="right">{$i18n.label.finish}:</td>
           <td>{$forms.timeRecordForm.finish.control}&nbsp;<input onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
@@ -124,8 +122,6 @@
   {/if}
   {if $show_start}
           <td width="5%" class="tableHeader" align="right">{$i18n.label.start}</td>
-  {/if}
-  {if $show_finish}
           <td width="5%" class="tableHeader" align="right">{$i18n.label.finish}</td>
   {/if}
           <td width="5%" class="tableHeader">{$i18n.label.duration}</td>

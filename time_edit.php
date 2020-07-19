@@ -60,7 +60,6 @@ $showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $tra
 $showTask = MODE_PROJECTS_AND_TASKS == $trackingMode;
 $recordType = $user->getRecordType();
 $showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
-$showFinish = $showStart;
 $showDuration = TYPE_DURATION == $recordType || TYPE_ALL == $recordType;
 
 // Use custom fields plugin if it is enabled.
@@ -486,7 +485,6 @@ $smarty->assign('show_paid_status', $showPaidStatus);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
 $smarty->assign('show_start', $showStart);
-$smarty->assign('show_finish', $showFinish);
 $smarty->assign('show_duration', $showDuration);
 // TODO: review the above.
 $smarty->assign('client_list', $client_list);
