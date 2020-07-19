@@ -95,7 +95,7 @@ if ($request->isPost()) {
   $cl_start = $time_rec['start'];
   $cl_finish = $time_rec['finish'];
   $cl_duration = $time_rec['duration'];
-  $cl_date = $item_date->toString($user->date_format);
+  $cl_date = $item_date->toString($user->getDateFormat());
   $cl_note = $time_rec['comment'];
 
   // If we have time custom fields - collect values from database.
