@@ -287,15 +287,10 @@ $form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>$on_click_a
 // Delete button.
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('label.delete')));
 
-
-
-
-
-// TODO: refactoring ongoing down from here...
 if ($request->isPost()) {
 
   // Validate user input.
-  if ($user->isPluginEnabled('cl') && $user->isOptionEnabled('client_required') && !$cl_client)
+  if ($showClient && $user->isOptionEnabled('client_required') && !$cl_client)
     $err->add($i18n->get('error.client'));
   // Validate input in time custom fields.
   if ($custom_fields && $custom_fields->timeFields) {
@@ -304,10 +299,10 @@ if ($request->isPost()) {
       if (!ttValidString($timeField['value'], !$timeField['required'])) $err->add($i18n->get('error.field'), htmlspecialchars($timeField['label']));
     }
   }
-  if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
+  if ($showProject) {
     if (!$cl_project) $err->add($i18n->get('error.project'));
   }
-  if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode && $user->task_required) {
+  if ($showTask && $user->task_required) {
     if (!$cl_task) $err->add($i18n->get('error.task'));
   }
   if (!$cl_duration) {
@@ -323,11 +318,11 @@ if ($request->isPost()) {
           $err->add($i18n->get('error.interval'), $i18n->get('label.finish'), $i18n->get('label.start'));
       }
     } else {
-      if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
+      if ($showStart) {
         $err->add($i18n->get('error.empty'), $i18n->get('label.start'));
         $err->add($i18n->get('error.empty'), $i18n->get('label.finish'));
       }
-      if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
+      if ($showDuration)
         $err->add($i18n->get('error.empty'), $i18n->get('label.duration'));
     }
   } else {
@@ -342,6 +337,10 @@ if ($request->isPost()) {
   if (!ttTimeHelper::canAdd()) $err->add($i18n->get('error.expired'));
   // Finished validating user input.
 
+
+
+  // TODO: refactoring ongoing down from here...
+  //
   // This is a new date for the time record.
   $new_date = new DateAndTime($user->date_format, $cl_date);
 
