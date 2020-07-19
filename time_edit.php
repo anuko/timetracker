@@ -156,6 +156,7 @@ if (MODE_TIME == $trackingMode && $showClient) {
 if ($showBillable)
   $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
 
+// Paid status checkbox.
 if ($showPaidStatus)
   $form->addInput(array('type'=>'checkbox','name'=>'paid','value'=>$cl_paid));
 
