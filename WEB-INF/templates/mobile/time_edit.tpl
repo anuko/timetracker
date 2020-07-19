@@ -22,12 +22,15 @@ function confirmSave() {
   <tr>
     <td valign="top">
     <table border="0">
-{if $user->isPluginEnabled('cl')}
+{if $show_client}
     <tr><td>{$i18n.label.client}:</td></tr>
     <tr><td>{$forms.timeRecordForm.client.control}</td></tr>
 {/if}
-{if $user->isPluginEnabled('iv')}
+{if $show_billable}
     <tr><td><label>{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td></tr>
+{/if}
+{if $show_paid_status}
+    <tr><td><label>{$forms.timeRecordForm.paid.control}{$i18n.label.paid}</label></td></tr>
 {/if}
 {if $custom_fields && $custom_fields->timeFields}
   {foreach $custom_fields->timeFields as $timeField}
@@ -36,21 +39,21 @@ function confirmSave() {
     <tr><td>{$forms.timeRecordForm.$control_name.control}</td></tr>
   {/foreach}
 {/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
     <tr><td>{$i18n.label.project}:</td></tr>
     <tr><td>{$forms.timeRecordForm.project.control}</td></tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_task}
     <tr><td>{$i18n.label.task}:</td></tr>
     <tr><td>{$forms.timeRecordForm.task.control}</td></tr>
 {/if}
-{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+{if $show_start}
     <tr><td>{$i18n.label.start}:</td></tr>
     <tr><td>{$forms.timeRecordForm.start.control}&nbsp;<input onclick="setNow('start');" type="button" value="{$i18n.button.now}"></td></tr>
     <tr><td>{$i18n.label.finish}:</td></tr>
     <tr><td>{$forms.timeRecordForm.finish.control}&nbsp;<input onclick="setNow('finish');" type="button" value="{$i18n.button.now}"></td></tr>
 {/if}
-{if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+{if $show_duration}
     <tr><td>{$i18n.label.duration}:</td></tr>
     <tr><td>{$forms.timeRecordForm.duration.control}</td></tr>
 {/if}
