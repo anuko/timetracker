@@ -22,19 +22,19 @@ function confirmSave() {
   <tr>
     <td valign="top">
     <table border="0">
-{if $user->isPluginEnabled('cl')}
+{if $show_client}
     <tr>
       <td align="right">{$i18n.label.client}{if $user->isOptionEnabled('client_required')} (*){/if}:</td>
       <td>{$forms.timeRecordForm.client.control}</td>
     </tr>
 {/if}
-{if $user->isPluginEnabled('iv')}
+{if $show_billable}
     <tr>
       <td align="right">&nbsp;</td>
       <td><label>{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td>
     </tr>
 {/if}
-{if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))}
+{if $show_paid_status}
     <tr>
       <td align="right">&nbsp;</td>
       <td><label>{$forms.timeRecordForm.paid.control}{$i18n.label.paid}</label></td>
@@ -49,19 +49,19 @@ function confirmSave() {
     </tr>
   {/foreach}
 {/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
     <tr>
       <td align="right">{$i18n.label.project} (*):</td>
       <td>{$forms.timeRecordForm.project.control}</td>
     </tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_task}
     <tr>
       <td align="right">{$i18n.label.task}{if $user->task_required} (*){/if}:</td>
       <td>{$forms.timeRecordForm.task.control}</td>
     </tr>
 {/if}
-{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+{if $show_start}
     <tr>
       <td align="right">{$i18n.label.start}:</td>
       <td>{$forms.timeRecordForm.start.control}&nbsp;<input onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
@@ -71,7 +71,7 @@ function confirmSave() {
       <td>{$forms.timeRecordForm.finish.control}&nbsp;<input onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
     </tr>
 {/if}
-{if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+{if $show_duration}
     <tr>
       <td align="right">{$i18n.label.duration}:</td>
       <td>{$forms.timeRecordForm.duration.control}&nbsp;{if $user->decimal_mark == ','}{str_replace('.', ',', $i18n.form.time.duration_format)}{else}{$i18n.form.time.duration_format}{/if}</td>
