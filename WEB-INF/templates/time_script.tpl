@@ -295,7 +295,7 @@ function setNow(formField) {
   x.disabled = false;
   x.style.background = "white";
   var today = new Date();
-  var time_format = '{$user->time_format}';
+  var time_format = '{$user->getTimeFormat()}';
   var obj = eval("document.timeRecordForm." + formField);
   obj.value = today.strftime(time_format);
   formDisable(formField);

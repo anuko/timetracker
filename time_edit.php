@@ -336,12 +336,8 @@ if ($request->isPost()) {
   if (!ttTimeHelper::canAdd()) $err->add($i18n->get('error.expired'));
   // Finished validating user input.
 
-
-
-  // TODO: refactoring ongoing down from here...
-  //
   // This is a new date for the time record.
-  $new_date = new DateAndTime($user->date_format, $cl_date);
+  $new_date = new DateAndTime($user->getDateFormat(), $cl_date);
 
   // Prohibit creating entries in future.
   if (!$user->isOptionEnabled('future_entries')) {
@@ -411,7 +407,7 @@ if ($request->isPost()) {
     }
   }
 
-  // Save as new record.
+  // Copy record.
   if ($request->getParameter('btn_copy')) {
     // We need to:
     // 1) Prohibit saving into locked range.
@@ -478,7 +474,6 @@ if ($confirm_save) {
   $smarty->assign('confirm_save', true);
   $smarty->assign('entry_date', $cl_date);
 }
-// TODO: review the below.
 $smarty->assign('show_client', $showClient);
 $smarty->assign('show_billable', $showBillable);+
 $smarty->assign('show_paid_status', $showPaidStatus);
@@ -486,7 +481,6 @@ $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
 $smarty->assign('show_start', $showStart);
 $smarty->assign('show_duration', $showDuration);
-// TODO: review the above.
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
