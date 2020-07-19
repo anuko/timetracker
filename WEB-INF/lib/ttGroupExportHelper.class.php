@@ -632,6 +632,7 @@ class ttGroupExportHelper {
         $notification_part .= " email=\"".htmlspecialchars($notification['email'])."\"";
         $notification_part .= " cc=\"".htmlspecialchars($notification['cc'])."\"";
         $notification_part .= " subject=\"".htmlspecialchars($notification['subject'])."\"";
+        $notification_part .= " comment=\"".htmlspecialchars($notification['comment'])."\"";
         $notification_part .= " report_condition=\"".htmlspecialchars($notification['report_condition'])."\"";
         $notification_part .= " status=\"".$notification['status']."\"";
         $notification_part .= "></notification>\n";

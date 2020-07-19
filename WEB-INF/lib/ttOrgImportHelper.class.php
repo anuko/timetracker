@@ -525,6 +525,7 @@ class ttOrgImportHelper {
           'email' => $attrs['EMAIL'],
           'cc' => $attrs['CC'],
           'subject' => $attrs['SUBJECT'],
+          'comment' => $attrs['COMMENT'],
           'report_condition' => $attrs['REPORT_CONDITION'],
           'status' => $attrs['STATUS']))) {
           $this->errors->add($i18n->get('error.db'));
@@ -1115,12 +1116,13 @@ class ttOrgImportHelper {
     $email = $fields['email'];
     $cc = $fields['cc'];
     $subject = $fields['subject'];
+    $comment = $fields['comment'];
     $report_condition = $fields['report_condition'];
     $status = $fields['status'];
 
     $sql = "insert into tt_cron".
-      " (group_id, org_id, cron_spec, last, next, report_id, email, cc, subject, report_condition, status)".
-      " values ($group_id, $org_id, ".$mdb2->quote($cron_spec).", $last, $next, $report_id, ".$mdb2->quote($email).", ".$mdb2->quote($cc).", ".$mdb2->quote($subject).", ".$mdb2->quote($report_condition).", ".$mdb2->quote($status).")";
+      " (group_id, org_id, cron_spec, last, next, report_id, email, cc, subject, comment, report_condition, status)".
+      " values ($group_id, $org_id, ".$mdb2->quote($cron_spec).", $last, $next, $report_id, ".$mdb2->quote($email).", ".$mdb2->quote($cc).", ".$mdb2->quote($subject).", ".$mdb2->quote($comment).", ".$mdb2->quote($report_condition).", ".$mdb2->quote($status).")";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
