@@ -46,6 +46,9 @@ if (!$time_rec || $time_rec['approved'] || $time_rec['timesheet_id'] || $time_re
 }
 // End of access checks.
 
+$trackingMode = $user->getTrackingMode();
+$showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
+
 // Escape comment for presentation.
 $time_rec['comment'] = htmlspecialchars($time_rec['comment']);
 
@@ -82,6 +85,7 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 $form->addInput(array('type'=>'submit','name'=>'delete_button','value'=>$i18n->get('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'cancel_button','value'=>$i18n->get('button.cancel')));
 $smarty->assign('time_rec', $time_rec);
+$smarty->assign('show_project', $showProject);
 $smarty->assign('forms', array($form->getName() => $form->toArray()));
 $smarty->assign('title', $i18n->get('title.delete_time_record'));
 $smarty->assign('content_page_name', 'mobile/time_delete.tpl');

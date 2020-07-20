@@ -4,14 +4,14 @@
   <td>
   <table border="0" cellpadding="3" cellspacing="1" width="100%">
   <tr>
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
     <td class="tableHeader" align="center">{$i18n.label.project}</td>
 {/if}
     <td class="tableHeader" align="center">{$i18n.label.duration}</td>
     <td class="tableHeader" align="center">{$i18n.label.note}</td>
   </tr>
   <tr bgcolor="#f5f5f5">
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
     <td>{$time_rec.project_name|escape}</td>
 {/if}
     <td align="right">{if ($time_rec.duration == '0:00' && $time_rec.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$time_rec.duration}{/if}</td>

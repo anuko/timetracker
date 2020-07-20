@@ -4,13 +4,13 @@
   <td>
   <table border='0' cellpadding='3' cellspacing='1' width="100%">
   <tr>
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
     <td class="tableHeader" align="center">{$i18n.label.project}</td>
 {/if}
-{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_task}
     <td class="tableHeader" align="center">{$i18n.label.task}</td>
 {/if}
-{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+{if $show_start}
     <td class="tableHeader" align="center">{$i18n.label.start}</td>
     <td class="tableHeader" align="center">{$i18n.label.finish}</td>
 {/if}
@@ -20,13 +20,13 @@
     <td class="tableHeader" align="center">{$i18n.label.note}</td>
   </tr>
   <tr>
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
     <td>{$time_rec.project_name|escape}</td>
 {/if}
-{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_task}
     <td>{$time_rec.task_name|escape}</td>
 {/if}
-{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+{if $show_start}
     <td align="right">{if $time_rec.start}{$time_rec.start}{else}&nbsp;{/if}</td>
     <td align="right">{if $time_rec.finish<>$time_rec.start}{$time_rec.finish}{else}&nbsp;{/if}</td>
 {/if}
