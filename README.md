@@ -10,4 +10,4 @@ Anuko [Time Tracker](https://www.anuko.com/time_tracker/index.htm) is a simple, 
 * Project home page: https://www.anuko.com/time_tracker/index.htm
 * Forum: https://www.anuko.com/forum/viewforum.php?f=4
 * Info for developers: https://www.anuko.com/time-tracker/info-for-developers.htm
-* How to contribute: https://www.anuko.com/time_tracker/contribute.htm
+* How to contribute: https://www.anuko.com/time-tracker/contribute.htm
