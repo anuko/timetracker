@@ -64,11 +64,11 @@ startTimer();
   <tr>
     <td valign="top">
     <table border="0">
-{if $user->isPluginEnabled('cl')}
+{if $show_client}
     <tr><td>{$i18n.label.client}:</td></tr>
     <tr><td>{$forms.timeRecordForm.client.control}</td></tr>
 {/if}
-{if $user->isPluginEnabled('iv')}
+{if $show_billable}
     <tr><td><label>{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td></tr>
 {/if}
 {if $custom_fields && $custom_fields->timeFields}
@@ -79,11 +79,11 @@ startTimer();
     </tr>
   {/foreach}
 {/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_project}
     <tr><td>{$i18n.label.project}:</td></tr>
     <tr><td>{$forms.timeRecordForm.project.control}</td></tr>
 {/if}
-{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+{if $show_task}
     <tr><td>{$i18n.label.task}:</td></tr>
     <tr><td>{$forms.timeRecordForm.task.control}</td></tr>
 {/if}

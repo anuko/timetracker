@@ -39,6 +39,16 @@ if (!ttAccessAllowed('track_own_time')) {
   header('Location: access_denied.php');
   exit();
 }
+// End of access checks.
+
+$showClient = $user->isPluginEnabled('cl');
+$showBillable = $user->isPluginEnabled('iv');
+$trackingMode = $user->getTrackingMode();
+$showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
+$showTask = MODE_PROJECTS_AND_TASKS == $trackingMode;
+$recordType = $user->getRecordType();
+$showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
+$showDuration = TYPE_DURATION == $recordType || TYPE_ALL == $recordType;
 
 // Initialize and store date in session.
 $cl_date  = $request->getParameter('date', @$_SESSION['date']);
@@ -297,6 +307,10 @@ if ($request->isPost()) {
 $week_total = ttTimeHelper::getTimeForWeek($cl_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('uncompleted', $uncompleted);
+$smarty->assign('show_client', $showClient);
+$smarty->assign('show_billable', $showBillable);
+$smarty->assign('show_project', $showProject);
+$smarty->assign('show_task', $showTask);
 $smarty->assign('time_records', ttTimeHelper::getRecords($cl_date));
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('client_list', $client_list);
