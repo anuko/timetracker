@@ -14,7 +14,7 @@
     <td class="tableHeader" align="center">{$i18n.label.start}</td>
     <td class="tableHeader" align="center">{$i18n.label.finish}</td>
 {/if}
-{if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+{if $show_duration}
     <td class="tableHeader" align="center">{$i18n.label.duration}</td>
 {/if}
     <td class="tableHeader" align="center">{$i18n.label.note}</td>
@@ -30,7 +30,7 @@
     <td align="right">{if $time_rec.start}{$time_rec.start}{else}&nbsp;{/if}</td>
     <td align="right">{if $time_rec.finish<>$time_rec.start}{$time_rec.finish}{else}&nbsp;{/if}</td>
 {/if}
-{if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+{if $show_duration}
     <td align="right">{if ($time_rec.duration == '0:00' && $time_rec.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$time_rec.duration}{/if}</td>
 {/if}
     <td>{if $time_rec.comment}{$time_rec.comment|escape}{else}&nbsp;{/if}</td>
