@@ -58,9 +58,12 @@ if (!$user->behalf_id && !$user->can('track_own_time') && !$user->adjustBehalfId
 // End of access checks.
 
 $showClient = $user->isPluginEnabled('cl');
+$showBillable = $user->isPluginEnabled('iv');
 $trackingMode = $user->getTrackingMode();
 $showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
 $showTask = MODE_PROJECTS_AND_TASKS == $trackingMode;
+$recordType = $user->getRecordType();
+$showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
 $showFiles = $user->isPluginEnabled('at');
 
 // Initialize and store date in session.
@@ -124,7 +127,7 @@ if ($request->isPost()) {
 }
 
 $cl_billable = 1;
-if ($user->isPluginEnabled('iv')) {
+if ($showBillable) {
   if ($request->isPost()) {
     $cl_billable = $request->getParameter('billable');
     $_SESSION['billable'] = (int) $cl_billable;
@@ -267,7 +270,7 @@ $table->setInteractive(false);
 $form->addInputElement($table);
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
-if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
+if (MODE_TIME == $trackingMode && $showClient) {
   $active_clients = ttGroupHelper::getActiveClients(true);
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
@@ -280,7 +283,7 @@ if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
-if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
+if ($showProject) {
   // Dropdown for projects assigned to user.
   $project_list = $user->getAssignedProjects();
   $form->addInput(array('type'=>'combobox',
@@ -321,7 +324,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
   }
 }
 
-if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
+if ($showTask) {
   $task_list = ttGroupHelper::getActiveTasks();
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
@@ -381,10 +384,10 @@ if ($request->isPost()) {
           if (!ttValidString($timeField['value'], !$timeField['required'])) $err->add($i18n->get('error.field'), htmlspecialchars($timeField['label']));
         }
       }
-      if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
+      if ($showProject) {
         if (!$cl_project) $err->add($i18n->get('error.project'));
       }
-      if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode && $user->task_required) {
+      if ($showTask && $user->task_required) {
         if (!$cl_task) $err->add($i18n->get('error.task'));
       }
     }
@@ -546,10 +549,12 @@ $smarty->assign('timestring', $startDate->toString($user->date_format).' - '.$en
 $smarty->assign('time_records', $records);
 $smarty->assign('show_navigation', !$user->isOptionEnabled('week_menu'));
 $smarty->assign('show_client', $showClient);
+$smarty->assign('show_billable', $showBillable);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
 $smarty->assign('show_week_note', $showWeekNote);
 $smarty->assign('show_week_list', $user->isOptionEnabled('week_list'));
+$smarty->assign('show_start', $showStart);
 $smarty->assign('show_files', $showFiles);
 $smarty->assign('title', $i18n->get('menu.week'));
 $smarty->assign('content_page_name', 'week.tpl');

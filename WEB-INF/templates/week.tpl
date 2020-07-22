@@ -45,7 +45,7 @@ function fillDropdowns() {
           <td>{$forms.weekTimeForm.client.control}</td>
         </tr>
 {/if}
-{if $user->isPluginEnabled('iv')}
+{if $show_billable}
         <tr>
           <td align="right">&nbsp;</td>
           <td><label>{$forms.weekTimeForm.billable.control}{$i18n.form.time.billable}</label></td>
@@ -108,16 +108,16 @@ function fillDropdowns() {
       <table border="0" cellpadding="3" cellspacing="1" width="100%">
       <tr>
         <td width="5%" class="tableHeader">{$i18n.label.date}</td>
-  {if $user->isPluginEnabled('cl')}
+  {if $show_client}
         <td width="20%" class="tableHeader">{$i18n.label.client}</td>
   {/if}
-  {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+  {if $show_project}
         <td class="tableHeader">{$i18n.label.project}</td>
   {/if}
-  {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+  {if $show_task}
         <td class="tableHeader">{$i18n.label.task}</td>
   {/if}
-  {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+  {if $show_start}
         <td width="5%" class="tableHeader" align="right">{$i18n.label.start}</td>
         <td width="5%" class="tableHeader" align="right">{$i18n.label.finish}</td>
   {/if}
@@ -132,13 +132,13 @@ function fillDropdowns() {
   {foreach $time_records as $record}
       <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
         <td valign="top">{$record.date}</td>
-    {if $user->isPluginEnabled('cl')}
+    {if $show_client}
         <td valign="top">{$record.client|escape}</td>
     {/if}
-    {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if $show_project}
         <td valign="top">{$record.project|escape}</td>
     {/if}
-    {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+    {if $show_task}
         <td valign="top">{$record.task|escape}</td>
     {/if}
     {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
