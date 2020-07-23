@@ -33,10 +33,10 @@ function fillDropdowns() {
   <tr>
     <td valign="top">
       <table>
-{if $on_behalf_control}
+{if $user_dropdown}
         <tr>
           <td align="right">{$i18n.label.user}:</td>
-          <td>{$forms.weekTimeForm.onBehalfUser.control}</td>
+          <td>{$forms.weekTimeForm.user.control}</td>
         </tr>
 {/if}
 {if $show_client}
@@ -141,7 +141,7 @@ function fillDropdowns() {
     {if $show_task}
         <td valign="top">{$record.task|escape}</td>
     {/if}
-    {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+    {if $show_start}
         <td nowrap align="right" valign="top">{if $record.start}{$record.start}{else}&nbsp;{/if}</td>
         <td nowrap align="right" valign="top">{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
     {/if}
