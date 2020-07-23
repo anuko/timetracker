@@ -159,12 +159,6 @@ function fillDropdowns() {
           &nbsp;
     {else}
           <a href="time_edit.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a>
-      {if ($record.duration == '0:00' && $record.start <> '')}
-          <input type="hidden" name="record_id" value="{$record.id}">
-          <input type="hidden" name="browser_date" value="">
-          <input type="hidden" name="browser_time" value="">
-          <input type="submit" id="btn_stop" name="btn_stop" onclick="browser_date.value=get_date();browser_time.value=get_time()" value="{$i18n.button.stop}">
-      {/if}
     {/if}
         </td>
         <td valign="top" align="center">
