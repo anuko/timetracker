@@ -114,7 +114,6 @@ class ttOrgImportHelper {
           'week_start' => $attrs['WEEK_START'],
           'tracking_mode' => $attrs['TRACKING_MODE'],
           'project_required' => $attrs['PROJECT_REQUIRED'],
-          'task_required' => $attrs['TASK_REQUIRED'],
           'record_type' => $attrs['RECORD_TYPE'],
           'bcc_email' => $attrs['BCC_EMAIL'],
           'allow_ip' => $attrs['ALLOW_IP'],
@@ -705,7 +704,7 @@ class ttOrgImportHelper {
     $mdb2 = getConnection();
 
     $columns = '(parent_id, org_id, group_key, name, description, currency, decimal_mark, lang, date_format, time_format,'.
-      ' week_start, tracking_mode, project_required, task_required, record_type, bcc_email,'.
+      ' week_start, tracking_mode, project_required, record_type, bcc_email,'.
       ' allow_ip, password_complexity, plugins, lock_spec,'.
       ' workday_minutes, config, custom_css, created, created_ip, created_by)';
 
@@ -723,7 +722,6 @@ class ttOrgImportHelper {
     $values .= ', '.(int)$fields['week_start'];
     $values .= ', '.(int)$fields['tracking_mode'];
     $values .= ', '.(int)$fields['project_required'];
-    $values .= ', '.(int)$fields['task_required'];
     $values .= ', '.(int)$fields['record_type'];
     $values .= ', '.$mdb2->quote($fields['bcc_email']);
     $values .= ', '.$mdb2->quote($fields['allow_ip']);

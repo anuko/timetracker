@@ -44,7 +44,6 @@ class ttGroup {
   var $week_start = 0;          // Week start day.
   var $tracking_mode = 0;       // Tracking mode.
   var $project_required = 0;    // Whether project selection is required on time entires.
-  var $task_required = 0;       // Whether task selection is required on time entires.
   var $record_type = 0;         // Record type (duration vs start and finish, or both).
   var $punch_mode = 0;          // Whether punch mode is enabled for user.
   var $allow_overlap = 0;       // Whether to allow overlapping time entries.
@@ -92,8 +91,7 @@ class ttGroup {
       $this->tracking_mode = $val['tracking_mode'];
       /* TODO: initialize other things here.
       $this->project_required = $val['project_required'];
-      $this->task_required = $val['task_required'];
-       */
+      */
       $this->record_type = $val['record_type'];
       /*
       $this->bcc_email = $val['bcc_email'];

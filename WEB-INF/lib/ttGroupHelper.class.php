@@ -97,7 +97,7 @@ class ttGroupHelper {
     $attrs = ttGroupHelper::getGroupAttrs($parent_id);
 
     $columns = '(parent_id, org_id, group_key, name, description, currency, decimal_mark, lang, date_format,'.
-      ' time_format, week_start, tracking_mode, project_required, task_required, record_type, bcc_email,'.
+      ' time_format, week_start, tracking_mode, project_required, record_type, bcc_email,'.
       ' allow_ip, password_complexity, plugins, lock_spec,'.
       ' workday_minutes, config, created, created_ip, created_by)';
 
@@ -113,7 +113,6 @@ class ttGroupHelper {
     $values .= ', '.(int)$attrs['week_start'];
     $values .= ', '.(int)$attrs['tracking_mode'];
     $values .= ', '.(int)$attrs['project_required'];
-    $values .= ', '.(int)$attrs['task_required'];
     $values .= ', '.(int)$attrs['record_type'];
     $values .= ', '.$mdb2->quote($attrs['bcc_email']);
     $values .= ', '.$mdb2->quote($attrs['allow_ip']);

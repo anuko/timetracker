@@ -79,6 +79,7 @@ $showBillable = $user->isPluginEnabled('iv');
 $trackingMode = $user->getTrackingMode();
 $showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
 $showTask = MODE_PROJECTS_AND_TASKS == $trackingMode;
+if ($showTask) $taskRequired = $user->getConfigOption('task_required');
 $showWeekNote = $user->isOptionEnabled('week_note');
 $showWeekNotes = $user->isOptionEnabled('week_notes');
 $recordType = $user->getRecordType();
@@ -416,7 +417,7 @@ if ($request->isPost()) {
       if ($showProject) {
         if (!$cl_project) $err->add($i18n->get('error.project'));
       }
-      if ($showTask && $user->task_required) {
+      if ($showTask && $taskRequired) {
         if (!$cl_task) $err->add($i18n->get('error.task'));
       }
     }
@@ -567,6 +568,7 @@ $smarty->assign('show_client', $showClient);
 $smarty->assign('show_billable', $showBillable);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
+$smarty->assign('task_required', $taskRequired);
 $smarty->assign('show_week_note', $showWeekNote);
 $smarty->assign('show_week_list', $user->isOptionEnabled('week_list'));
 $smarty->assign('show_start', $showStart);

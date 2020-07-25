@@ -60,7 +60,6 @@ class ttUser {
   var $week_start = 0;          // Week start day.
   var $tracking_mode = 0;       // Tracking mode.
   var $project_required = 0;    // Whether project selection is required on time entires.
-  var $task_required = 0;       // Whether task selection is required on time entires.
   var $record_type = 0;         // Record type (duration vs start and finish, or both).
   var $punch_mode = 0;          // Whether punch mode is enabled for user.
   var $allow_overlap = 0;       // Whether to allow overlapping time entries.
@@ -96,7 +95,7 @@ class ttUser {
 
     $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id,".
       " u.quota_percent, u.email, g.org_id, g.group_key, g.name as group_name, g.currency, g.lang, g.decimal_mark, g.date_format,".
-      " g.time_format, g.week_start, g.tracking_mode, g.project_required, g.task_required, g.record_type,".
+      " g.time_format, g.week_start, g.tracking_mode, g.project_required, g.record_type,".
       " g.bcc_email, g.allow_ip, g.password_complexity, g.plugins, g.config, g.lock_spec, g.custom_css, g.holidays, g.workday_minutes, g.custom_logo".
       " FROM tt_users u LEFT JOIN tt_groups g ON (u.group_id = g.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
     if ($id)
@@ -134,7 +133,6 @@ class ttUser {
       $this->week_start = $val['week_start'];
       $this->tracking_mode = $val['tracking_mode'];
       $this->project_required = $val['project_required'];
-      $this->task_required = $val['task_required'];
       $this->record_type = $val['record_type'];
       $this->bcc_email = $val['bcc_email'];
       $this->allow_ip = $val['allow_ip'];
@@ -707,7 +705,6 @@ class ttUser {
     if (isset($fields['tracking_mode'])) {
       $tracking_mode_part = ', tracking_mode = '.(int) $fields['tracking_mode'];
       $project_required_part = ' , project_required = '.(int) $fields['project_required'];
-      $task_required_part = ' , task_required = '.(int) $fields['task_required'];
     }
     if (isset($fields['record_type'])) $record_type_part = ', record_type = '.(int) $fields['record_type'];
     if (isset($fields['bcc_email'])) $bcc_email_part = ', bcc_email = '.$mdb2->quote($fields['bcc_email']);
@@ -721,7 +718,7 @@ class ttUser {
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($this->id);
 
     $parts = trim($name_part.$description_part.$currency_part.$lang_part.$decimal_mark_part.$date_format_part.
-      $time_format_part.$week_start_part.$tracking_mode_part.$task_required_part.$project_required_part.$record_type_part.
+      $time_format_part.$week_start_part.$tracking_mode_part.$project_required_part.$record_type_part.
       $bcc_email_part.$allow_ip_part.$plugins_part.$config_part.$custom_css_part.$lock_spec_part.$holidays_part.$workday_minutes_part.$modified_part, ',');
 
     $sql = "update tt_groups set $parts where id = $group_id and org_id = $this->org_id";

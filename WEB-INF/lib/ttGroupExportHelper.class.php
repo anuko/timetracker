@@ -152,7 +152,6 @@ class ttGroupExportHelper {
     $group_part .= " week_start=\"".$group['week_start']."\"";
     $group_part .= " tracking_mode=\"".$group['tracking_mode']."\"";
     $group_part .= " project_required=\"".$group['project_required']."\"";
-    $group_part .= " task_required=\"".$group['task_required']."\"";
     $group_part .= " record_type=\"".$group['record_type']."\"";
     $group_part .= " bcc_email=\"".$group['bcc_email']."\"";
     $group_part .= " allow_ip=\"".$group['allow_ip']."\"";

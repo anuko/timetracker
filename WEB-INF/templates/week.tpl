@@ -68,7 +68,7 @@ function fillDropdowns() {
 {/if}
 {if $show_task}
         <tr>
-          <td align="right">{$i18n.label.task}:</td>
+          <td align="right">{$i18n.label.task}{if $task_required} (*){/if}:</td>
           <td>{$forms.weekTimeForm.task.control}</td>
         </tr>
 {/if}
