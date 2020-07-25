@@ -84,7 +84,7 @@ startTimer();
     <tr><td>{$forms.timeRecordForm.project.control}</td></tr>
 {/if}
 {if $show_task}
-    <tr><td>{$i18n.label.task}:</td></tr>
+    <tr><td>{$i18n.label.task}{if $task_required} (*){/if}:</td></tr>
     <tr><td>{$forms.timeRecordForm.task.control}</td></tr>
 {/if}
     </table>

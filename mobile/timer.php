@@ -46,6 +46,7 @@ $showBillable = $user->isPluginEnabled('iv');
 $trackingMode = $user->getTrackingMode();
 $showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
 $showTask = MODE_PROJECTS_AND_TASKS == $trackingMode;
+if ($showTask) $taskRequired = $user->getConfigOption('task_required');
 
 // Initialize and store date in session.
 $cl_date  = $request->getParameter('date', @$_SESSION['date']);
@@ -229,7 +230,7 @@ if ($request->isPost()) {
     if ($showProject) {
       if (!$cl_project) $err->add($i18n->get('error.project'));
     }
-    if ($showTask && $user->task_required) {
+    if ($showTask && $taskRequired) {
       if (!$cl_task) $err->add($i18n->get('error.task'));
     }
     // Finished validating user input.
@@ -318,6 +319,7 @@ $smarty->assign('show_client', $showClient);
 $smarty->assign('show_billable', $showBillable);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
+$smarty->assign('task_required', $taskRequired);
 $smarty->assign('time_records', ttTimeHelper::getRecords($cl_date));
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('client_list', $client_list);
