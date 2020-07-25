@@ -85,7 +85,6 @@ if ($request->isPost() && !$groupChanged) {
   $cl_holidays = trim($request->getParameter('holidays'));
   $cl_tracking_mode = $request->getParameter('tracking_mode');
   $cl_project_required = $request->getParameter('project_required');
-  $cl_task_required = $request->getParameter('task_required');
   $cl_record_type = $request->getParameter('record_type');
   $cl_punch_mode = $request->getParameter('punch_mode');
   $cl_allow_overlap = $request->getParameter('allow_overlap');
@@ -102,7 +101,6 @@ if ($request->isPost() && !$groupChanged) {
   $cl_holidays = $group['holidays'];
   $cl_tracking_mode = $group['tracking_mode'];
   $cl_project_required = $group['project_required'];
-  $cl_task_required = $group['task_required'];
   $cl_record_type = $group['record_type'];
   $cl_punch_mode = $config->getDefinedValue('punch_mode');
   $cl_allow_overlap = $config->getDefinedValue('allow_overlap');
@@ -177,9 +175,8 @@ $tracking_mode_options = array();
 $tracking_mode_options[MODE_TIME] = $i18n->get('form.group_edit.mode_time');
 $tracking_mode_options[MODE_PROJECTS] = $i18n->get('form.group_edit.mode_projects');
 $tracking_mode_options[MODE_PROJECTS_AND_TASKS] = $i18n->get('form.group_edit.mode_projects_and_tasks');
-$form->addInput(array('type'=>'combobox','name'=>'tracking_mode','style'=>'width: 150px;','data'=>$tracking_mode_options,'value'=>$cl_tracking_mode,'onchange'=>'handleTaskRequiredCheckbox()'));
+$form->addInput(array('type'=>'combobox','name'=>'tracking_mode','style'=>'width: 150px;','data'=>$tracking_mode_options,'value'=>$cl_tracking_mode));
 $form->addInput(array('type'=>'checkbox','name'=>'project_required','value'=>$cl_project_required));
-$form->addInput(array('type'=>'checkbox','name'=>'task_required','value'=>$cl_task_required));
 
 // Prepare record type choices.
 $record_type_options = array();
@@ -241,7 +238,6 @@ if ($request->isPost()) {
         'holidays' => $cl_holidays,
         'tracking_mode' => $cl_tracking_mode,
         'project_required' => $cl_project_required,
-        'task_required' => $cl_task_required,
         'record_type' => $cl_record_type,
         'uncompleted_indicators' => $cl_uncompleted_indicators,
         'config' => $config->getConfig()))) {
@@ -255,7 +251,7 @@ if ($request->isPost()) {
 
 $smarty->assign('group_dropdown', count($groups) > 1);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="handleTaskRequiredCheckbox(); handlePluginCheckboxes();"');
+$smarty->assign('onload', 'onLoad="handlePluginCheckboxes();"');
 $smarty->assign('title', $i18n->get('title.edit_group'));
 $smarty->assign('content_page_name', 'group_edit.tpl');
 $smarty->display('index.tpl');

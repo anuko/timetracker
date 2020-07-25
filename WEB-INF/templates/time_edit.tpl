@@ -57,7 +57,7 @@ function confirmSave() {
 {/if}
 {if $show_task}
     <tr>
-      <td align="right">{$i18n.label.task}{if $user->task_required} (*){/if}:</td>
+      <td align="right">{$i18n.label.task}{if $task_required} (*){/if}:</td>
       <td>{$forms.timeRecordForm.task.control}</td>
     </tr>
 {/if}

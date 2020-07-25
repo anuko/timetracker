@@ -1,19 +1,5 @@
 <script>
 function chLocation(newLocation) { document.location = newLocation; }
-
-// handleTaskRequiredCheckbox - controls visibility of the Task Required checkbox.
-function handleTaskRequiredCheckbox() {
-  var taskRequiredCheckbox = document.getElementById("task_required");
-  var taskRequiredLabel = document.getElementById("task_required_label");
-  var trackingModeDropdown = document.getElementById("tracking_mode");
-  if (trackingModeDropdown.value == 2) {
-    taskRequiredCheckbox.style.visibility = "visible";
-    taskRequiredLabel.style.visibility = "visible";
-  } else {
-    taskRequiredCheckbox.style.visibility = "hidden";
-    taskRequiredLabel.style.visibility = "hidden";
-  }
-}
 </script>
 
 {$forms.groupForm.open}
@@ -74,7 +60,7 @@ function handleTaskRequiredCheckbox() {
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.group_edit.tracking_mode}:</td>
-            <td>{$forms.groupForm.tracking_mode.control} {$forms.groupForm.task_required.control} <span id="task_required_label"><label for="task_required">{$i18n.label.required}</label></span></td>
+            <td>{$forms.groupForm.tracking_mode.control}</td>
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.group_edit.record_type}:</td>

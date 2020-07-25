@@ -58,6 +58,7 @@ $showPaidStatus = $user->isPluginEnabled('ps') && $user->can('manage_invoices');
 $trackingMode = $user->getTrackingMode();
 $showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
 $showTask = MODE_PROJECTS_AND_TASKS == $trackingMode;
+if ($showTask) $taskRequired = $config->getDefinedValue('task_required');
 $recordType = $user->getRecordType();
 $showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
 $showDuration = TYPE_DURATION == $recordType || TYPE_ALL == $recordType;
@@ -302,7 +303,7 @@ if ($request->isPost()) {
   if ($showProject) {
     if (!$cl_project) $err->add($i18n->get('error.project'));
   }
-  if ($showTask && $user->task_required) {
+  if ($showTask && $task_required) {
     if (!$cl_task) $err->add($i18n->get('error.task'));
   }
   if (!$cl_duration) {
@@ -480,6 +481,7 @@ $smarty->assign('show_billable', $showBillable);+
 $smarty->assign('show_paid_status', $showPaidStatus);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
+$smarty->assign('task_required', $taskRequired);
 $smarty->assign('show_start', $showStart);
 $smarty->assign('show_duration', $showDuration);
 $smarty->assign('client_list', $client_list);
