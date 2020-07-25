@@ -242,7 +242,7 @@ class WeekViewCellRenderer extends DefaultCellRenderer {
     }
     // Disable control when time entry mode is TYPE_START_FINISH and there is no value in control
     // because we can't supply start and finish times in week view - there are no fields for them.
-    if (!$field->getValue() && TYPE_START_FINISH == $user->record_type) {
+    if (!$field->getValue() && TYPE_START_FINISH == $user->getRecordType()) {
         $field->setEnabled(false);
     }
     $this->setValue($field->getHtml());
