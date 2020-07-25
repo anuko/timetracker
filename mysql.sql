@@ -27,7 +27,6 @@ CREATE TABLE `tt_groups` (
   `week_start` smallint(2) NOT NULL default 0,           # Week start day, 0 == Sunday.
   `tracking_mode` smallint(2) NOT NULL default 1,        # tracking mode ("time", "projects" or "projects and tasks")
   `project_required` smallint(2) NOT NULL default 0,     # whether a project selection is required or optional
-  `task_required` smallint(2) NOT NULL default 0,        # whether a task selection is required or optional
   `record_type` smallint(2) NOT NULL default 0,          # time record type ("start and finish", "duration", or both)
   `bcc_email` varchar(100) default NULL,                 # bcc email to copy all reports to
   `allow_ip` varchar(255) default NULL,                  # specification from where users are allowed access
@@ -657,4 +656,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.22', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.23', now()); # TODO: change when structure changes.
