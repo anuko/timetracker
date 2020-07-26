@@ -86,7 +86,7 @@ define('WEEKEND_START_DAY', 6);
 // Forum and help links from the main menu.
 //
 define('FORUM_LINK', 'https://www.anuko.com/forum/viewforum.php?f=4');
-define('HELP_LINK', 'https://www.anuko.com/time_tracker/user_guide/index.htm');
+define('HELP_LINK', 'https://www.anuko.com/time-tracker/user-guide/index.htm');
 
 
 // Default sender for mail.
