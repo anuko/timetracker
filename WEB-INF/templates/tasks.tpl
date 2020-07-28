@@ -7,6 +7,16 @@
   <tr>
     <td valign="top">
 {if $user->can('manage_tasks')}
+      <table width="100%">
+        <tr>
+          <td align="right" width="25%">{$forms.tasksForm.task_required.control}</td>
+          <td><label for="task_required">{$i18n.label.required}</label> <a href="https://www.anuko.com/lp/tt_46.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+        </tr>
+        <tr>
+          <td colspan="2" height="50" align="center">{$forms.tasksForm.btn_save.control}</td>
+        </tr>
+      </table>
+      <div class="table-divider"></div>
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
   {if $inactive_tasks}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.tasks.active_tasks}</td></tr>
@@ -80,18 +90,6 @@
   {/if}
       </table>
 {/if}
-      <div class="table-divider"></div>
-      <table width="100%">
-        <tr>
-          <td align="right" width="25%">{$forms.tasksForm.task_required.control}</td>
-          <td><label for="task_required">{$i18n.label.required}</label> <a href="https://www.anuko.com/lp/tt_46.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
-        </tr>
-        <tr>
-          <td colspan="2" height="50" align="center">{$forms.tasksForm.btn_save.control}</td>
-        </tr>
-      </table>
-
-
     </td>
   </tr>
 </table>
