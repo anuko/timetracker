@@ -153,23 +153,21 @@ $_SESSION['project'] = $cl_project;
 $cl_task = $request->getParameter('task', ($request->isPost() ? null : @$_SESSION['task']));
 $_SESSION['task'] = $cl_task;
 
+// Handle time custom fields.
 $timeCustomFields = array();
-// If we have time custom fields - collect input.
-#if ($request->isPost()) {
-  if ($custom_fields && $custom_fields->timeFields) {
-    foreach ($custom_fields->timeFields as $timeField) {
-      $control_name = 'time_field_'.$timeField['id'];
-      $cl_control_name = $request->getParameter($control_name, ($request->isPost() ? null : @$_SESSION[$control_name]));
-      $_SESSION[$control_name] = $cl_control_name;
-      $timeCustomFields[$timeField['id']] = array('field_id' => $timeField['id'],
-        'control_name' => $control_name,
-        'label' => $timeField['label'],
-        'type' => $timeField['type'],
-        'required' => $timeField['required'],
-        'value' => trim($cl_control_name));
-    }
+if ($custom_fields && $custom_fields->timeFields) {
+  foreach ($custom_fields->timeFields as $timeField) {
+    $control_name = 'time_field_'.$timeField['id'];
+    $cl_control_name = $request->getParameter($control_name, ($request->isPost() ? null : @$_SESSION[$control_name]));
+    $_SESSION[$control_name] = $cl_control_name;
+    $timeCustomFields[$timeField['id']] = array('field_id' => $timeField['id'],
+      'control_name' => $control_name,
+      'label' => $timeField['label'],
+      'type' => $timeField['type'],
+      'required' => $timeField['required'],
+      'value' => trim($cl_control_name));
   }
-#}
+}
 
 // Elements of timeRecordForm.
 $form = new Form('timeRecordForm');
