@@ -63,17 +63,17 @@ input[type=checkbox], label {
 }
 
 .systemMenu {
-  font-size: 11pt;
+  font-size: 1rem;
   font-weight: bold;
   color: white;
   background-color: black;
-  margin: 2px 4px 2px 4px;
+  margin: .1rem .2rem .1rem .2rem;
 }
 
 .mainMenu {
-  font-size: 11pt;
+  font-size: 1rem;
   color: #444444;
-  margin: 2px 4px 2px 4px;
+  margin: .1rem .2rem .1rem .2rem;
 }
 
 .onBehalf {
