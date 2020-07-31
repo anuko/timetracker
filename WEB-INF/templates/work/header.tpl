@@ -41,7 +41,7 @@
 {if $user->custom_logo}
                       <td height="55" align="center"><img alt="Time Tracker" width="300" height="43" src="../{$custom_logo}" border="0"></td>
 {else}
-                      <td height="55" align="center"><a href="https://www.anuko.com/lp/tt_1.htm" target="_blank"><img alt="Anuko Time Tracker" width="300" height="43" src="../images/tt_logo.png" border="0"></a></td>
+                      <td height="55" align="center"><a href="https://www.anuko.com/lp/tt_1.htm" target="_blank"><img alt="Anuko Time Tracker" width="300" height="43" src="../images/logo.png" border="0"></a></td>
 {/if}
                     </tr>
                   </table>

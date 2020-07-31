@@ -46,7 +46,7 @@
 {if $user->custom_logo}
                       <td height="55" align="center"><img alt="Time Tracker" width="300" height="43" src="{$mobile_custom_logo}" border="0"></td>
 {else}
-                      <td height="55" align="center"><img alt="Anuko Time Tracker" width="300" height="43" src="../images/tt_logo.png" border="0"></td>
+                      <td height="55" align="center"><img alt="Anuko Time Tracker" width="300" height="43" src="../images/logo.png" border="0"></td>
 {/if}
                     </tr>
                   </table>
