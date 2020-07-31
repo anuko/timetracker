@@ -53,7 +53,7 @@ class ttUser {
   var $group_name = null;       // Group name.
   var $behalf_group_name = null;// Group name, on behalf of which we are working.
   var $email = null;            // User email.
-  var $lang = 'en';             // Language.
+  var $lang = null;             // Language.
   var $decimal_mark = '.';      // Decimal separator.
   var $date_format = null;      // Date format.
   var $time_format = null;      // Time format.
