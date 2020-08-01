@@ -460,7 +460,7 @@ header('Content-Disposition: attachment; filename="'.$filename.'.pdf"');
 // Extend TCPDF class so that we can use custom header and footer.
 class ttPDF extends TCPDF {
 
-  public $image_file = 'images/tt_logo.png'; // Image file for the logo in header.
+  public $image_file = 'images/logo.png'; // Image file for the logo in header.
   public $page_word = 'Page'; // Localized "Page" word in footer, ex: Page 1/2.
 
   // SetImageFile - sets image file name.

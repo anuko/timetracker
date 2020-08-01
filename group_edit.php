@@ -92,7 +92,7 @@ if ($request->isPost() && !$groupChanged) {
   $cl_uncompleted_indicators = $request->getParameter('uncompleted_indicators');
   $cl_confirm_save = $request->getParameter('confirm_save');
 } else {
-  $cl_currency = ($group['currency'] == ''? CURRENCY_DEFAULT : $group['currency']);
+  $cl_currency = ($group['currency'] == '' ? CURRENCY_DEFAULT : $group['currency']);
   $cl_lang = $group['lang'];
   $cl_decimal_mark = $group['decimal_mark'];
   $cl_date_format = $group['date_format'];
