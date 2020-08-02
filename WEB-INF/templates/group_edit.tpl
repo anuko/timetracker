@@ -60,7 +60,7 @@ function chLocation(newLocation) { document.location = newLocation; }
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.group_edit.tracking_mode}:</td>
-            <td>{$forms.groupForm.tracking_mode.control}</td>
+            <td>{$forms.groupForm.tracking_mode.control} <a href="https://www.anuko.com/lp/tt_47.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
           </tr>
           <tr>
             <td align="right" nowrap>{$i18n.form.group_edit.record_type}:</td>
