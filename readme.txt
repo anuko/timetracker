@@ -29,7 +29,7 @@ The general installation procedure looks like this:
 5) Create a config file by coping WEB-INF/config.php.dist to WEB-INF/config.php.
 6) Change $dsn value in /WEB-INF/config.php file to reflect your database connection parameters (user name and password).
 7) If you are upgrading from earlier Time Tracker version run dbinstall.php from your browser and do only the required "Update database structure" steps.
-8) If you install time tracker into a sub-directory of your site reflect this in the APP_NAME parameter in /WEB-INF/config.php file. For example, for http://localhost/timetracker/ set APP_NAME = "timetracker".
+8) If you install time tracker into a sub-directory of your site reflect this in the DIR_NAME parameter in /WEB-INF/config.php file. For example, for http://localhost/timetracker/ set DIR_NAME = "timetracker".
 9) Login to your time tracker site as admin with password "secret" without quotes and create at least one group.
 10) Change admin password (on the admin "options" page). You can also use the following SQL console command:
   update tt_users set password = md5('new_password_here') where login='admin'

@@ -50,13 +50,13 @@ define('DSN', 'mysqli://root:no@localhost/dbname?charset=utf8mb4');
 define('MULTIORG_MODE', true);
 
 
-// Application name.
-// If you install time tracker into a sub-directory of your site reflect this in the APP_NAME parameter.
-// For example, for http://localhost/timetracker/ define APP_NAME as 'timetracker'.
+// Directory name.
+// If you install time tracker into a sub-directory of your site reflect this in the DIR_NAME parameter.
+// For example, for http://localhost/timetracker/ define DIR_NAME as 'timetracker'.
 //
-// define('APP_NAME', 'timetracker');
+// define('DIR_NAME', 'timetracker');
 //
-define('APP_NAME', '');
+define('DIR_NAME', '');
 
 
 // WEEKEND_START_DAY
@@ -151,7 +151,7 @@ define('AUTH_MODULE', 'db');
 //  'type' => 'openldap',                       // Type of server. openldap type should also work with Sun Directory Server when member_of is empty.
                                                 // It may work with other (non Windows AD) LDAP servers. For Windows AD use the 'ad' type.
 //  'base_dn' => 'ou=People,dc=example,dc=com', // Path of user's base distinguished name in LDAP catalog.
-//  'user_login_attribute' => 'uid',            // LDAP attribute used for login
+//  'user_login_attribute' => 'uid',            // LDAP attribute used for login.
 //  'default_domain' => 'example.com',          // Default domain.
 //  'member_of' => array());                    // List of groups, membership in which is required for user to be authenticated.
 
@@ -172,7 +172,7 @@ define('AUTH_MODULE', 'db');
 // define('DEBUG', false); // Note: enabling DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
 
 
-// Team managers can set monthly work hour quota for years between the following  values.
+// Group managers can set monthly work hour quota for years between the following  values.
 // define('MONTHLY_QUOTA_YEAR_START', 2010); // If nothing is specified, it falls back to 2015.
 // define('MONTHLY_QUOTA_YEAR_END', 2025);   // If nothing is specified, it falls back to 2030.
 

@@ -100,8 +100,8 @@ if ($request->isPost()) {
         $http = 'http';
 
       $cl_subject = $user_i18n->get('form.reset_password.email_subject');
-      if (APP_NAME)
-        $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/'.APP_NAME.'/password_change.php?ref='.$temp_ref;
+      if (DIR_NAME)
+        $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/'.DIR_NAME.'/password_change.php?ref='.$temp_ref;
       else
         $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/password_change.php?ref='.$temp_ref;
 
