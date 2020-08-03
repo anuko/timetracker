@@ -32,7 +32,6 @@ class I18n {
   var $monthNames;
   var $weekdayNames;
   var $weekdayShortNames;
-  var $holidays;
   var $keys = array(); // These are our localized strings.
 
   // get - obtains a localized value from $keys array.
@@ -52,24 +51,18 @@ class I18n {
     return $value;
   }
 
-  // TODO: refactoring ongoing down from here...
-    function getWeekDayName($id) {
-      $id = (int) $id;
-      return $this->weekdayNames[$id];
-    }
-
-    function load($localName) {
-    $kw = array();
-    $filename = strtolower($localName) . '.lang.php';
-    $inc_filename = RESOURCE_DIR . '/' . $this->defaultLang . '.lang.php';
-
-    if (file_exists($inc_filename)) {
-      include($inc_filename);
+  // load - loads localized strings into $keys array by first going through the default file (en.lang.php)
+  // and then through the requested language file (which is supplied as parameter).
+  // This means we end up with default English strings when keys are missing in the translation file.
+  function load($langName) {
+    // Load default English keys first.
+    $defaultFileName = RESOURCE_DIR . '/' . $this->defaultLang . '.lang.php';
+    if (file_exists($defaultFileName)) {
+      include($defaultFileName);
 
       $this->monthNames = $i18n_months;
       $this->weekdayNames = $i18n_weekdays;
-
-        $this->weekdayShortNames = $i18n_weekdays_short;
+      $this->weekdayShortNames = $i18n_weekdays_short;
 
       foreach ($i18n_key_words as $kword=>$value) {
         $pos = strpos($kword, ".");
@@ -86,15 +79,17 @@ class I18n {
       }
     }
 
-    $inc_filename = RESOURCE_DIR . '/' . $filename;
-    if (file_exists($inc_filename) && ($localName != $this->defaultLang)) {
-      require($inc_filename);
+    // Now load the keys from the requested file.
+    // This overwrites already loaded English strings.
+    $requestedFileName = strtolower($langName) . '.lang.php';
+    $requestedFileName = RESOURCE_DIR . '/' . $requestedFileName;
+    if (file_exists($requestedFileName) && ($langName != $this->defaultLang)) {
+      require($requestedFileName);
 
-      $this->lang = $localName;
+      $this->lang = $langName;
       $this->monthNames = $i18n_months;
       $this->weekdayNames = $i18n_weekdays;
-        $this->weekdayShortNames = $i18n_weekdays_short;
-        $this->holidays = $i18n_holidays;
+      $this->weekdayShortNames = $i18n_weekdays_short;
       foreach ($i18n_key_words as $kword=>$value) {
         if (!$value) continue;
         $pos = strpos($kword, ".");
@@ -109,10 +104,11 @@ class I18n {
           $this->keys[$kword] = $value;
         }
       }
-      return true;
     }
   }
 
+  // hasLang determines if a file for requested language exists.
+  // This is a helper function for getBrowserLanguage below.
   function hasLang($lang)
   {
     $filename = RESOURCE_DIR . '/' . strtolower($lang) . '.lang.php';
@@ -146,7 +142,7 @@ class I18n {
     return false;
   }
 
-  // getLangFileList() returns a list of language files.
+  // getLangFileList() returns a list of available language files.
   static function getLangFileList() {
     $fileList = array();
     $d = @opendir(RESOURCE_DIR);
@@ -161,8 +157,15 @@ class I18n {
     return $fileList;
   }
 
+  // getLangFromFilename returns language designation from a file name such as (ru, pt-br, etc.).
   static function getLangFromFilename($filename)
   {
     return substr($filename, 0, strpos($filename, '.'));
+  }
+
+  // getWeekDayName returns a localized weekday name.
+  function getWeekDayName($id) {
+    $id = (int) $id;
+    return $this->weekdayNames[$id];
   }
 }
