@@ -35,18 +35,18 @@
 {if $user->custom_logo}
           <td align="center">
 {else}
-          <td bgcolor="#a6ccf7" background="../images/top_bg.gif" align="center">
+          <td bgcolor="#a6ccf7" background="../img/top_bg.gif" align="center">
 {/if}
             <table cellspacing="0" cellpadding="0" width="{$tab_width}" border="0">
               <tr>
                 <td valign="top">
                   <table id="page_logo" cellspacing="0" cellpadding="0" width="100%" border="0">
-                    <tr><td height="6" colspan="2"><img width="1" height="6" src="../images/1x1.gif" border="0"></td></tr>
+                    <tr><td height="6" colspan="2"><img width="1" height="6" src="../img/1x1.gif" border="0"></td></tr>
                     <tr valign="top">
 {if $user->custom_logo}
                       <td height="55" align="center"><img alt="Time Tracker" width="300" height="43" src="{$mobile_custom_logo}" border="0"></td>
 {else}
-                      <td height="55" align="center"><img alt="Anuko Time Tracker" width="300" height="43" src="../images/logo.png" border="0"></td>
+                      <td height="55" align="center"><img alt="Anuko Time Tracker" width="300" height="43" src="../img/logo.png" border="0"></td>
 {/if}
                     </tr>
                   </table>
@@ -64,7 +64,7 @@
       <!-- sub menu for admin -->
       <table id="sub_menu_admin" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
-          <td align="center" bgcolor="#d9d9d9" height="17" style="background-repeat: repeat-x;" background="../images/subm_bg.gif">&nbsp;
+          <td align="center" bgcolor="#d9d9d9" height="17" style="background-repeat: repeat-x;" background="../img/subm_bg.gif">&nbsp;
             <a class="mainMenu" href="admin_groups.php">{$i18n.menu.groups}</a>
             <a class="mainMenu" href="admin_options.php">{$i18n.menu.options}</a>
           </td>
@@ -76,7 +76,7 @@
       <!-- sub menu for authorized user -->
       <table id="sub_menu_authorized_user" cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
-          <td align="center" bgcolor="#d9d9d9" height="17" style="background-repeat: repeat-x;" background="../images/subm_bg.gif">&nbsp;
+          <td align="center" bgcolor="#d9d9d9" height="17" style="background-repeat: repeat-x;" background="../img/subm_bg.gif">&nbsp;
     {if $user->exists() && ($user->can('track_own_time') || $user->can('track_time'))}
            <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
     {/if}

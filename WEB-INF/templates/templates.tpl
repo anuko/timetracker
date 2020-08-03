@@ -16,8 +16,8 @@
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$template['name']|escape}</td>
           <td>{$template['description']|escape}</td>
-          <td><a href="template_edit.php?id={$template['id']}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
-          <td><a href="template_delete.php?id={$template['id']}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
+          <td><a href="template_edit.php?id={$template['id']}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
+          <td><a href="template_delete.php?id={$template['id']}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
         </tr>
     {/foreach}
       </table>
@@ -37,8 +37,8 @@
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$template['name']|escape}</td>
           <td>{$template['description']|escape}</td>
-          <td><a href="template_edit.php?id={$template['id']}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
-          <td><a href="template_delete.php?id={$template['id']}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
+          <td><a href="template_edit.php?id={$template['id']}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
+          <td><a href="template_delete.php?id={$template['id']}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
         </tr>
     {/foreach}
       </table>

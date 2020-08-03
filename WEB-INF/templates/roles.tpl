@@ -22,8 +22,8 @@
           <td>{$role.name|escape}</td>
           <td>{$role.rank}</td>
           <td>{$role.description|escape}</td>
-          <td><a href="role_edit.php?id={$role.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
-          <td><a href="role_delete.php?id={$role.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
+          <td><a href="role_edit.php?id={$role.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
+          <td><a href="role_delete.php?id={$role.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
         </tr>
     {/foreach}
   {/if}
@@ -52,8 +52,8 @@
           <td>{$role.name|escape}</td>
           <td>{$role.rank}</td>
           <td>{$role.description|escape}</td>
-          <td><a href="role_edit.php?id={$role.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
-          <td><a href="role_delete.php?id={$role.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
+          <td><a href="role_edit.php?id={$role.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
+          <td><a href="role_delete.php?id={$role.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
         </tr>
     {/foreach}
       </table>

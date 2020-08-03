@@ -14,8 +14,8 @@
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$predefined_expense['name']|escape}</td>
           <td>{$predefined_expense['cost']|escape}</td>
-          <td><a href="predefined_expense_edit.php?id={$predefined_expense['id']}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a></td>
-          <td><a href="predefined_expense_delete.php?id={$predefined_expense['id']}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a></td>
+          <td><a href="predefined_expense_edit.php?id={$predefined_expense['id']}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
+          <td><a href="predefined_expense_delete.php?id={$predefined_expense['id']}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
         </tr>
     {/foreach}
   {/if}

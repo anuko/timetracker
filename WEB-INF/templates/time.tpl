@@ -155,16 +155,16 @@
     {/if}
     {if $show_files}
       {if $record.has_files}
-          <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_files.png"></a></td>
+          <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_files.png"></a></td>
       {else}
-          <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="images/icon_file.png"></a></td>
+          <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_file.png"></a></td>
       {/if}
     {/if}
           <td valign="top" align="center">
     {if $record.approved || $record.timesheet_id || $record.invoice_id}
           &nbsp;
     {else}
-            <a href="time_edit.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="images/icon_edit.png"></a>
+            <a href="time_edit.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a>
       {if ($record.duration == '0:00' && $record.start <> '')}
             <input type="hidden" name="record_id" value="{$record.id}">
             <input type="hidden" name="browser_date" value="">
@@ -177,7 +177,7 @@
     {if $record.approved || $record.timesheet_id || $record.invoice_id}
             &nbsp;
     {else}
-            <a href="time_delete.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="images/icon_delete.png"></a>
+            <a href="time_delete.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a>
     {/if}
           </td>
         </tr>

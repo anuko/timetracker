@@ -146,8 +146,8 @@ $msg = new ActionErrors(); // Notification messages (not errrors) for user.
 import('ttUser');
 $user = new ttUser(null, $auth->getUserId());
 if ($user->custom_logo) {
-  $smarty->assign('custom_logo', 'images/'.$user->group_id.'.png');
-  $smarty->assign('mobile_custom_logo', '../images/'.$user->group_id.'.png');
+  $smarty->assign('custom_logo', 'img/'.$user->group_id.'.png');
+  $smarty->assign('mobile_custom_logo', '../img/'.$user->group_id.'.png');
 }
 $smarty->assign('user', $user);
 

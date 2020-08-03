@@ -409,7 +409,7 @@ class DateField extends TextField {
       if (DIR_NAME)
         $app_root = '/'.DIR_NAME;
 
-      $html .= "&nbsp;<img src=\"".$app_root."/images/calendar.gif\" width=\"16\" height=\"16\" onclick=\"displayDatePicker('".$this->name."');\">\n";
+      $html .= "&nbsp;<img src=\"".$app_root."/img/calendar.gif\" width=\"16\" height=\"16\" onclick=\"displayDatePicker('".$this->name."');\">\n";
     }
 
     return $html;

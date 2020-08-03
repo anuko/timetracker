@@ -53,8 +53,8 @@ if ($i18n->lang != $user->lang) {
   $smarty->assign('i18n', $i18n->keys);
 }
 if ($user->custom_logo) {
-  $smarty->assign('custom_logo', 'images/'.$user->group_id.'.png');
-  $smarty->assign('mobile_custom_logo', '../images/'.$user->group_id.'.png');
+  $smarty->assign('custom_logo', 'img/'.$user->group_id.'.png');
+  $smarty->assign('mobile_custom_logo', '../img/'.$user->group_id.'.png');
 }
 $smarty->assign('user', $user);
 
