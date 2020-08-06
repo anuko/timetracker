@@ -33,7 +33,7 @@
           <td>{$forms.groupForm.password2.control}</td>
         </tr>
         <tr>
-          <td align="right" nowrap>{$i18n.label.email}:</td>
+          <td align="right" nowrap>{$i18n.label.email}{if isTrue('EMAIL_REQUIRED')} (*){/if}:</td>
           <td>{$forms.groupForm.manager_email.control}</td>
         </tr>
         <tr>

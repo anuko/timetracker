@@ -50,6 +50,10 @@ define('DSN', 'mysqli://root:no@localhost/dbname?charset=utf8mb4');
 define('MULTIORG_MODE', true);
 
 
+// EMAIL_REQUIRED defines whether an email is required for new registrations.
+define('EMAIL_REQUIRED', false);
+
+
 // Directory name.
 // If you install time tracker into a sub-directory of your site reflect this in the DIR_NAME parameter.
 // For example, for http://localhost/timetracker/ define DIR_NAME as 'timetracker'.
