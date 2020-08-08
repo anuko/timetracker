@@ -97,8 +97,12 @@
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$project.name|escape}</td>
           <td>{$project.description|escape}</td>
-      {if $show_files && $project.has_files}
+      {if $show_files}
+        {if $project.has_files}
           <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_files.png"></a></td>
+        {else}
+          <td>&nbsp;</td>
+        {/if}
       {/if}
         </tr>
     {/foreach}
