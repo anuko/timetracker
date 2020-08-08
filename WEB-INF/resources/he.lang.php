@@ -83,6 +83,7 @@ $i18n_key_words = array(
 'error.sys' => 'שגיאת מערכת',
 'error.db' => 'שגיאה של בסיס הנתונים',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'נתון "{0}" שגוי',
 'error.empty' => 'השדה "{0}" ריק',

@@ -81,6 +81,7 @@ $i18n_key_words = array(
 'error.sys' => 'خطا در سیستم.',
 'error.db' => 'خطا در پایگاه داده.',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'داده اشتباه در "{0}".',
 'error.empty' => 'فیلد "{0}" خالیست.',

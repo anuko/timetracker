@@ -75,6 +75,8 @@ $i18n_key_words = array(
 'error.access_denied' => 'Zugriff verweigert.',
 'error.sys' => 'Systemfehler.',
 'error.db' => 'Datenbankfehler.',
+// TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 'error.feature_disabled' => 'Funktion ist deaktiviert.',
 'error.field' => 'Ungültige "{0}" Daten.',
 'error.empty' => 'Feld "{0}" ist leer.',

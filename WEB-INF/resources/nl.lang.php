@@ -71,6 +71,8 @@ $i18n_key_words = array(
 'error.access_denied' => 'Toegang geweigerd.',
 'error.sys' => 'Systeem fout.',
 'error.db' => 'Database fout.',
+// TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 'error.feature_disabled' => 'Functie is uitgeschakeld.',
 'error.field' => 'Incorrecte gegevens: "{0}".',
 'error.empty' => 'Veld "{0}" is leeg.',

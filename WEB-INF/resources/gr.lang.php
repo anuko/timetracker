@@ -76,6 +76,7 @@ $i18n_key_words = array(
 'error.sys' => 'Σφάλμα συστήματος.',
 'error.db' => 'Σφάλμα βάσης δεδομένων.',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Λανθασμένο "{0}" δεδομένο.',
 'error.empty' => 'Το πεδίο "{0}" είναι κενό.',

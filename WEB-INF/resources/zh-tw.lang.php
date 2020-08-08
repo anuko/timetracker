@@ -80,6 +80,7 @@ $i18n_key_words = array(
 // 'error.sys' => 'System error.',
 'error.db' => '資料庫錯誤。',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => '不正確的"{0}"資料。',
 'error.empty' => '欄目"{0}"為空。',

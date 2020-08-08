@@ -72,6 +72,7 @@ $i18n_key_words = array(
 'error.access_denied' => 'Access denied.',
 'error.sys' => 'System error.',
 'error.db' => 'Database error.',
+'error.registered_recently' => 'Registered recently.',
 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Incorrect "{0}" data.',
 'error.empty' => 'Field "{0}" is empty.',

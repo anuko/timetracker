@@ -82,6 +82,7 @@ $i18n_key_words = array(
 // 'error.sys' => 'System error.',
 'error.db' => 'データベースのエラー。',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => '不正確な"{0}"データ。',
 'error.empty' => '"{0}"のフィールドが空白です。',

@@ -77,6 +77,7 @@ $i18n_key_words = array(
 'error.sys' => '系统错误。',
 'error.db' => '数据库错误。',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => '不正确的"{0}"数据。',
 'error.empty' => '栏目"{0}"为空。',

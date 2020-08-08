@@ -79,6 +79,7 @@ $i18n_key_words = array(
 'error.sys' => 'Järjestelmävirhe.',
 'error.db' => 'Tietokantavirhe.',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Virheellinen "{0}" tieto.',
 'error.empty' => 'Kenttä "{0}" on tyhjä.',

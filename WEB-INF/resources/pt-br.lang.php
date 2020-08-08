@@ -77,6 +77,7 @@ $i18n_key_words = array(
 'error.sys' => 'Erro no sistema.',
 'error.db' => 'Erro no banco de dados.',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Dados incorretos "{0}".',
 'error.empty' => 'Campo "{0}" está vazio.',

@@ -85,6 +85,7 @@ $i18n_key_words = array(
 // 'error.sys' => 'System error.',
 'error.db' => 'Veritabanı hatası.',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Hatalı veri "{0}".',
 'error.empty' => 'Alan "{0}" boştur.',

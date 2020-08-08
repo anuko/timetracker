@@ -82,6 +82,7 @@ $i18n_key_words = array(
 // 'error.sys' => 'System error.',
 'error.db' => '데이터베이스 오류.',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => '부정확한 "{0}" 의 데이터.',
 'error.empty' => '"{0}" 의 필드가 비어있습니다.',

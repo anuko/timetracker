@@ -100,6 +100,7 @@ class ttRegistrator {
     // Protection from too many recent bot registrations from user IP.
     if (!$this->created_by_id) { // No problems for logged in user (site admin).
       if ($this->registeredRecently()) {
+        $this->err->add($i18n->get('error.registered_recently'));
         $this->err->add($i18n->get('error.access_denied'));
         return false;
       }

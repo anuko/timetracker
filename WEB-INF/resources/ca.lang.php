@@ -82,6 +82,7 @@ $i18n_key_words = array(
 // 'error.sys' => 'System error.',
 'error.db' => 'Error de la base de dades.',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Dada "{0}" incorrecta.',
 'error.empty' => 'L\\\'Arxiu "{0}" està buit.',

@@ -77,6 +77,7 @@ $i18n_key_words = array(
 'error.sys' => 'Systemfel.',
 'error.db' => 'Databasfel.',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => '"{0}" innehåller ett felaktigt värde.',
 'error.empty' => '"{0}" kan inte vara tomt.',

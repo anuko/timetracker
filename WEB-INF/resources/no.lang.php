@@ -83,6 +83,7 @@ $i18n_key_words = array(
 // 'error.sys' => 'System error.',
 'error.db' => 'Databasefeil.',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Feil "{0}" data.',
 'error.empty' => 'Feltet "{0}" er tomt.',

@@ -77,6 +77,7 @@ $i18n_key_words = array(
 'error.sys' => 'Greška u sistemu.',
 'error.db' => 'Greška u bazi podataka.',
 // TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 // 'error.feature_disabled' => 'Feature is disabled.',
 'error.field' => 'Pogrešan "{0}" podatak.',
 'error.empty' => 'Polje "{0}" je prazno.',

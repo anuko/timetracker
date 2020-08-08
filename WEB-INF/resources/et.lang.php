@@ -76,6 +76,8 @@ $i18n_key_words = array(
 'error.access_denied' => 'Puudub ligipääs.',
 'error.sys' => 'Rakenduse viga.',
 'error.db' => 'Andmebaasi viga.',
+// TODO: translate the following.
+// 'error.registered_recently' => 'Registered recently.',
 'error.feature_disabled' => 'Rakenduse funktsionaalsus on välja lülitatud.',
 'error.field' => 'Välja "{0}" andmed ei vasta nõutele.',
 'error.empty' => 'Väli "{0}" on tühi.',
