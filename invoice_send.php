@@ -101,16 +101,6 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$smarty->assign('sender', SENDER);
-if (function_exists('imap_mime_header_decode')) {
-  // Decode sender in case it is encoded. PHP IMAP extension must be installed for us to get here.
-  $elements = imap_mime_header_decode(SENDER);
-  if (count($elements) > 1) {
-      // Reassign sender.
-      $smarty->assign('sender', $elements[count($elements) - 2]->text);
-  }
-}
-
 $smarty->assign('title', $i18n->get('title.send_invoice'));
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.mailForm.'.($cl_receiver?'comment':'receiver').'.focus()"');

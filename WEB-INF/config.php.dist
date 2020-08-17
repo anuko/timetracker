@@ -95,7 +95,7 @@ define('HELP_LINK', 'https://www.anuko.com/time-tracker/user-guide/index.htm');
 
 // Default sender for mail.
 //
-define('SENDER', '"Anuko Time Tracker" <no-reply@timetracker.anuko.com>');
+define('SENDER', 'Anuko Time Tracker <no-reply@timetracker.anuko.com>');
 
 
 // MAIL_MODE - mail sending mode. Can be 'mail' or 'smtp'.

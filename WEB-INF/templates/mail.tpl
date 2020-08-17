@@ -7,10 +7,6 @@
       <td valign="top" colspan="2">
         <table>
         <tr>
-          <td align="right">{$i18n.form.mail.from} (*):</td>
-          <td>{$sender}</td>
-        </tr>
-        <tr>
           <td align="right">{$i18n.form.mail.to} (*):</td>
           <td>{$forms.mailForm.receiver.control}</td>
         </tr>
