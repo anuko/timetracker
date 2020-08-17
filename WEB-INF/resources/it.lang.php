@@ -625,7 +625,6 @@ $i18n_key_words = array(
 // 'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
-'form.mail.from' => 'Da',
 'form.mail.to' => 'A',
 'form.mail.report_subject' => 'Rapporto Time Tracker',
 'form.mail.footer' => 'Anuko Time Tracker è un sistema semplice e open source <br>per registrare i tempi di lavoro. Visita <a href="https://www.anuko.com">www.anuko.com</a> per maggiori informazioni.',

@@ -651,7 +651,6 @@ $i18n_key_words = array(
 // 'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
-'form.mail.from' => '부터',
 'form.mail.to' => '까지', // TODO: is this correct? The meaning is that we send an email TO this person.
 // TODO: translate the following.
 // 'form.mail.report_subject' => 'Time Tracker Report',

@@ -587,7 +587,6 @@ $i18n_key_words = array(
 'form.group_delete.hint' => 'Bent u er zeker van dat u de hele groep wilt verwijderen?',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
-'form.mail.from' => 'Van',
 'form.mail.to' => 'Aan',
 'form.mail.report_subject' => 'Time Tracker rapport',
 'form.mail.footer' => 'Anuko Time Tracker is een eenvoudig en gemakkelijk te gebruiken open source tijdregistratiesysteem. Bezoek <a href="https://www.anuko.com">www.anuko.com</a> voor meer informatie.',

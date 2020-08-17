@@ -637,7 +637,6 @@ $i18n_key_words = array(
 // 'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
-'form.mail.from' => '从',
 'form.mail.to' => '到',
 // TODO: translate the following.
 // 'form.mail.report_subject' => 'Time Tracker Report',
