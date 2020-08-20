@@ -357,8 +357,6 @@ if (MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode)
 if (MODE_PROJECTS_AND_TASKS == $trackingMode)
   $group_by_options['task'] = $i18n->get('form.reports.group_by_task');
 // If we have time custom fields - add group by options for them.
-/*
- * This is unfinished work in progress.
 if ($custom_fields && $custom_fields->timeFields) {
   foreach ($custom_fields->timeFields as $timeField) {
     $field_name = 'time_field_'.$timeField['id'];
@@ -371,7 +369,7 @@ if ($custom_fields && $custom_fields->userFields) {
     $field_name = 'user_field_'.$userField['id'];
     $group_by_options[$field_name] = $userField['label'];
   }
-}*/
+}
 $group_by_options_size = sizeof($group_by_options);
 $form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by1','data'=>$group_by_options));
 if ($group_by_options_size > 2) $form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by2','data'=>$group_by_options));
