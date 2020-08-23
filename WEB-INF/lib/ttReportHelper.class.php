@@ -701,7 +701,7 @@ class ttReportHelper {
       $combined .= ", sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t group by $fields";
       $sql = $combined;
     }
-
+//die($sql);
     // Execute query.
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
@@ -2059,11 +2059,11 @@ class ttReportHelper {
           $cflTable = 'cfl'.$timeField['id'];
           if ($timeField['type'] == CustomFields::TYPE_TEXT) {
             // Add one join for each text field.
-            $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1)";
+            $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1 and $cflTable.field_id = ".$timeField['id'].")";
           } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
             $cfoTable = 'cfo'.$timeField['id'];
             // Add two joins for each dropdown field.
-            $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1)";
+            $left_joins .= " left join tt_custom_field_log $cflTable on ($cflTable.log_id = l.id and $cflTable.status = 1 and $cflTable.field_id = ".$timeField['id'].")";
             $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $cflTable.field_id and $cfoTable.id = $cflTable.option_id)";
           }
         }
