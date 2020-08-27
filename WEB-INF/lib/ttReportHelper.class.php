@@ -2199,12 +2199,47 @@ class ttReportHelper {
     return $grouping;
   }
 
-  // makeGroupByHeader builds a column header for a totals-only report using group_by1,
-  // group_by2, and group_by3 values passed in $options.
-  static function makeGroupByHeader($options) {
+  // makeGroupByHeaderdPart is a helper function for makeGroupByHeader.
+  // It obtains a part of the header associated with a single group by dropdown.
+  static function makeGroupByHeaderPart($dropdown_value) {
     global $i18n;
     global $custom_fields;
 
+    // First, try to get a label from a translation file, which is the most likely scenario
+    // such as grouping by date, user, project, or task.
+    $key = 'label.'.$dropdown_value;
+    $part = $i18n->get($key);
+    if ($part) return $part;
+
+    // If label is not found in translation file, we may be grouping by a custom field.
+    // Obtain custom field label if so.
+
+    // Process time custom fields.
+    if ($custom_fields && $custom_fields->timeFields) {
+      foreach ($custom_fields->timeFields as $timeField) {
+        $field_name = 'time_field_'.$timeField['id'];
+        if ($dropdown_value == $field_name) {
+          return $timeField['label'];
+        }
+      }
+    }
+    // Process user custom fields.
+    if ($custom_fields && $custom_fields->userFields) {
+      foreach ($custom_fields->userFields as $userField) {
+        $field_name = 'user_field_'.$userField['id'];
+        if ($dropdown_value == $field_name) {
+          return $userField['label'];
+        }
+      }
+    }
+
+    // Return null if nothing is found.
+    return null;
+  }
+
+  // makeGroupByHeader builds a column header for a totals-only report using group_by1,
+  // group_by2, and group_by3 values passed in $options.
+  static function makeGroupByHeader($options) {
     $no_grouping = ($options['group_by1'] == null || $options['group_by1'] == 'no_grouping') &&
       ($options['group_by2'] == null || $options['group_by2'] == 'no_grouping') &&
       ($options['group_by3'] == null || $options['group_by3'] == 'no_grouping');
@@ -2213,20 +2248,17 @@ class ttReportHelper {
     if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
       // We have group_by1.
       $group_by1 = $options['group_by1'];
-      $key = 'label.'.$group_by1;
-      $group_by_header .= ' - '.$i18n->get($key);
+      $group_by_header .= ' - '.ttReportHelper::makeGroupByHeaderPart($group_by1);
     }
     if ($options['group_by2'] != null && $options['group_by2'] != 'no_grouping') {
       // We have group_by2.
       $group_by2 = $options['group_by2'];
-      $key = 'label.'.$group_by2;
-      $group_by_header .= ' - '.$i18n->get($key);
+      $group_by_header .= ' - '.ttReportHelper::makeGroupByHeaderPart($group_by2);
     }
     if ($options['group_by3'] != null && $options['group_by3'] != 'no_grouping') {
       // We have group_by3.
       $group_by3 = $options['group_by3'];
-      $key = 'label.'.$group_by3;
-      $group_by_header .= ' - '.$i18n->get($key);
+      $group_by_header .= ' - '.ttReportHelper::makeGroupByHeaderPart($group_by3);
     }
     $group_by_header = ltrim($group_by_header, ' -');
     return $group_by_header;
