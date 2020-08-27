@@ -665,6 +665,9 @@ class ttReportHelper {
   // getSubtotals calculates report items subtotals when a report is grouped by.
   // Without expenses, it's a simple select with group by.
   // With expenses, it becomes a select with group by from a combined set of records obtained with "union all".
+  // getSubtotals uses helper functions such as makeConcatPart and others to get parts to assemble an sql query from.
+  // Query may become quite complex depending on $options, whether custom fields are used, etc.
+  // This is the reason for having individual functions for parts (to keep getSubtotals easier to manage).
   static function getSubtotals($options) {
     global $user;
     $mdb2 = getConnection();
@@ -701,7 +704,7 @@ class ttReportHelper {
       $combined .= ", sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t group by $fields";
       $sql = $combined;
     }
-//die($sql);
+
     // Execute query.
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
