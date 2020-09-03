@@ -88,10 +88,10 @@ if ($request->isPost()) {
 
     if ($receiver) {
       import('mail.Mailer');
-      $sender = new Mailer();
-      $sender->setCharSet(CHARSET);
-      $sender->setSender(SENDER);
-      $sender->setReceiver("$receiver");
+      $mailer = new Mailer();
+      $mailer->setCharSet(CHARSET);
+      $mailer->setSender(SENDER);
+      $mailer->setReceiver("$receiver");
       if ((!empty($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] !== 'off')) || ($_SERVER['SERVER_PORT'] == 443))
         $secure_connection = true;
       if($secure_connection)
@@ -105,9 +105,11 @@ if ($request->isPost()) {
       else
         $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/password_change.php?ref='.$temp_ref;
 
-      $sender->setMailMode(MAIL_MODE);
-      $res = $sender->send($cl_subject, sprintf($user_i18n->get('form.reset_password.email_body'), $_SERVER['REMOTE_ADDR'], $pass_edit_url));
-      $smarty->assign('result_message', $res ? $i18n->get('form.reset_password.message') : $i18n->get('error.mail_send'));
+      $mailer->setMailMode(MAIL_MODE);
+      if ($mailer->send($cl_subject, sprintf($user_i18n->get('form.reset_password.email_body'), $_SERVER['REMOTE_ADDR'], $pass_edit_url)))
+        $msg->add($i18n->get('form.reset_password.message'));
+      else
+        $err->add($i18n->get('error.mail_send'));
     }
   }
 } // isPost
