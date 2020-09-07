@@ -49,9 +49,6 @@ if (!$time_rec || $time_rec['approved'] || $time_rec['timesheet_id'] || $time_re
 $trackingMode = $user->getTrackingMode();
 $showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
 
-// Escape comment for presentation.
-$time_rec['comment'] = htmlspecialchars($time_rec['comment']);
-
 if ($request->isPost()) {
   if ($request->getParameter('delete_button'))  {  // Delete button pressed.
 

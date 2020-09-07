@@ -53,9 +53,6 @@ $recordType = $user->getRecordType();
 $showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
 $showDuration = TYPE_DURATION == $recordType || TYPE_ALL == $recordType;
 
-// Escape comment for presentation.
-$time_rec['comment'] = htmlspecialchars($time_rec['comment']);
-
 if ($request->isPost()) {
   if ($request->getParameter('delete_button')) { // Delete button pressed.
 
