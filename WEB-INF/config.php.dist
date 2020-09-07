@@ -71,9 +71,15 @@ define('DIR_NAME', '');
 define('WEEKEND_START_DAY', 6);
 
 
+// SESSION_COOKIE_NAME
+//
+// PHP session cookie name. 
+// define('SESSION_COOKIE_NAME', 'tt_PHPSESSID');
+
+
 // PHPSESSID_TTL
 //
-// Lifetime in seconds for tt_PHPSESSID cookie. Time to live is extended by this value
+// Lifetime in seconds for session cookie. Time to live is extended by this value
 // with each visit to the site so that users don't have to re-login. 
 // define('PHPSESSID_TTL', 86400);
 //

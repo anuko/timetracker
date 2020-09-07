@@ -90,16 +90,19 @@ if (defined('PHP_SESSION_PATH') && realpath(PHP_SESSION_PATH)) {
   ini_set('session.gc_probability', 1);
 }
 
+// "tt_" prefix is to avoid sharing session with other PHP apps that do not name session.
+if (!defined('SESSION_COOKIE_NAME')) define('SESSION_COOKIE_NAME', 'tt_PHPSESSID');
+
 // Set session cookie lifetime.
 session_set_cookie_params($phpsessid_ttl);
-if (isset($_COOKIE['tt_PHPSESSID'])) {
+if (isset($_COOKIE[SESSION_COOKIE_NAME])) {
   // Extend PHP session cookie lifetime by PHPSESSID_TTL (if defined, otherwise 24 hours) 
   // so that users don't have to re-login during this period from now. 
-  setcookie('tt_PHPSESSID', $_COOKIE['tt_PHPSESSID'],  time() + $phpsessid_ttl, '/');
+  setcookie(SESSION_COOKIE_NAME, $_COOKIE[SESSION_COOKIE_NAME],  time() + $phpsessid_ttl, '/');
 }
 
 // Start or resume PHP session.
-session_name('tt_PHPSESSID'); // "tt_" prefix is to avoid sharing session with other PHP apps that do not name session.
+session_name(SESSION_COOKIE_NAME);
 @session_start();
 
 // Authorization.
