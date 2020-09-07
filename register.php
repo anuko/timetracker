@@ -106,7 +106,7 @@ if ($request->isPost()) {
   if ($err->no()) {
     // Registration successful.
     if ($auth->doLogin($cl_manager_login, $cl_password1)) {
-      setcookie('tt_login', $cl_manager_login, time() + COOKIE_EXPIRE, '/');
+      setcookie(LOGIN_COOKIE_NAME, $cl_manager_login, time() + COOKIE_EXPIRE, '/');
       header('Location: time.php');
     } else {
       header('Location: login.php');

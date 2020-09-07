@@ -73,7 +73,7 @@ define('WEEKEND_START_DAY', 6);
 
 // SESSION_COOKIE_NAME
 //
-// PHP session cookie name. 
+// PHP session cookie name.
 // define('SESSION_COOKIE_NAME', 'tt_PHPSESSID');
 
 
@@ -91,6 +91,12 @@ define('WEEKEND_START_DAY', 6);
 // Local file system path for PHP sessions. Use it to isolate session deletions
 // (garbage collection interference) by other PHP scripts potentially running on the system.
 // define('PHP_SESSION_PATH', '/tmp/timetracker'); // Directory must exist and be writable.
+
+
+// LOGIN_COOKIE_NAME
+//
+// Cookie name for user login to remember it between browser sessions.
+// define('LOGIN_COOKIE_NAME', 'tt_login');
 
 
 // Forum and help links from the main menu.

@@ -83,7 +83,7 @@ if ($request->isPost()) {
     ttUserHelper::setPassword($user_id, $cl_password1);
 
     if ($auth->doLogin($user->login, $cl_password1)) {
-      setcookie('tt_login', $user->login, time() + COOKIE_EXPIRE, '/');
+      setcookie(LOGIN_COOKIE_NAME, $user->login, time() + COOKIE_EXPIRE, '/');
       // Redirect, depending on user role.
       if ($user->can('administer_site')) {
         header('Location: admin_groups.php');

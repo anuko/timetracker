@@ -61,9 +61,9 @@ if ($request->isPost()) {
       }
       // If we deleted our own account, do housekeeping and logout.
       if ($user->id == $user_id) {
-        // Remove tt_login cookie that stores login name.
-        unset($_COOKIE['tt_login']);
-        setcookie('tt_login', NULL, -1);
+        // Remove LOGIN_COOKIE_NAME cookie that stores login name.
+        unset($_COOKIE[LOGIN_COOKIE_NAME]);
+        setcookie(LOGIN_COOKIE_NAME, NULL, -1);
 
         $auth->doLogout();
         header('Location: login.php');

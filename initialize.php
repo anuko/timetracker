@@ -92,6 +92,7 @@ if (defined('PHP_SESSION_PATH') && realpath(PHP_SESSION_PATH)) {
 
 // "tt_" prefix is to avoid sharing session with other PHP apps that do not name session.
 if (!defined('SESSION_COOKIE_NAME')) define('SESSION_COOKIE_NAME', 'tt_PHPSESSID');
+if (!defined('LOGIN_COOKIE_NAME')) define('LOGIN_COOKIE_NAME', 'tt_login');
 
 // Set session cookie lifetime.
 session_set_cookie_params($phpsessid_ttl);

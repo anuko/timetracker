@@ -34,7 +34,7 @@ import('ttUser');
 if ($request->isPost()) {
   $cl_login = $request->getParameter('login');
 } else {
-  $cl_login = @$_COOKIE['tt_login'];
+  $cl_login = @$_COOKIE[LOGIN_COOKIE_NAME];
 }
 $cl_password = $request->getParameter('password');
 
@@ -63,7 +63,7 @@ if ($request->isPost()) {
         $_SESSION['date'] = $current_user_date;
 
       // Remember user login in a cookie.
-      setcookie('tt_login', $cl_login, time() + COOKIE_EXPIRE, '/');
+      setcookie(LOGIN_COOKIE_NAME, $cl_login, time() + COOKIE_EXPIRE, '/');
 
       $user = new ttUser(null, $auth->getUserId());
       // Redirect, depending on user role.

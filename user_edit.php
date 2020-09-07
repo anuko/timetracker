@@ -256,7 +256,7 @@ if ($request->isPost()) {
       if ($result) {
         // If our own login changed, set new one in cookie to remember it.
         if (($user_id == $user->id) && ($user->login != $cl_login)) {
-          setcookie('tt_login', $cl_login, time() + COOKIE_EXPIRE, '/');
+          setcookie(LOGIN_COOKIE_NAME, $cl_login, time() + COOKIE_EXPIRE, '/');
         }
 
         // In case the name of the "on behalf" user has changed - set it in session.
@@ -266,9 +266,9 @@ if ($request->isPost()) {
 
         // If we deactivated our own account, do housekeeping and logout.
         if ($user->id == $user_id && !is_null($cl_status) && $cl_status == INACTIVE) {
-          // Remove tt_login cookie that stores login name.
-          unset($_COOKIE['tt_login']);
-          setcookie('tt_login', NULL, -1);
+          // Remove LOGIN_COOKIE_NAME cookie that stores login name.
+          unset($_COOKIE[LOGIN_COOKIE_NAME]);
+          setcookie(LOGIN_COOKIE_NAME, NULL, -1);
 
           $auth->doLogout();
           header('Location: login.php');

@@ -32,7 +32,7 @@ class Auth {
   function isAuthenticated() {
     if (isset($_SESSION['authenticated'])) {
 // This check does not work properly because we are not getting here. Need to improve.
-//        if (!isset($_COOKIE['tt_login'])) {
+//        if (!isset($_COOKIE[LOGIN_COOKIE_NAME])) {
 //          die ("Your browser's cookie functionality is turned off. Please turn it on.");
 //        }
 

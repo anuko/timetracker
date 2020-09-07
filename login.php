@@ -32,7 +32,7 @@ import('ttOrgHelper');
 import('ttUser');
 
 $cl_login = $request->getParameter('login');
-if ($cl_login == null && $request->isGet()) $cl_login = @$_COOKIE['tt_login'];
+if ($cl_login == null && $request->isGet()) $cl_login = @$_COOKIE[LOGIN_COOKIE_NAME];
 $cl_password = $request->getParameter('password');
 
 $form = new Form('loginForm');
@@ -58,7 +58,7 @@ if ($request->isPost()) {
         $_SESSION['date'] = $current_user_date;
 
       // Remember user login in a cookie.
-      setcookie('tt_login', $cl_login, time() + COOKIE_EXPIRE, '/');
+      setcookie(LOGIN_COOKIE_NAME, $cl_login, time() + COOKIE_EXPIRE, '/');
 
       $user = new ttUser(null, $auth->getUserId());
       // Redirect, depending on user role.
