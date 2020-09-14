@@ -35,6 +35,10 @@
           <td align="right">{$i18n.label.day_total}:</td>
           <td>{$day_total}</td>
         </tr>
+        <tr>
+          <td align="right">{$i18n.label.week_total}:</td>
+          <td>{$week_total}</td>
+        </tr>
       </table>
 {/if}
     </td>

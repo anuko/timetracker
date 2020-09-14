@@ -392,6 +392,7 @@ if ($request->isPost()) {
 $smarty->assign('next_date', $next_date);
 $smarty->assign('prev_date', $prev_date);
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
+$smarty->assign('week_total', ttTimeHelper::getTimeForWeek($selected_date));
 $smarty->assign('time_records', ttTimeHelper::getRecords($cl_date));
 $smarty->assign('show_client', $showClient);
 $smarty->assign('show_billable', $showBillable);
