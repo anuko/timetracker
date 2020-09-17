@@ -79,6 +79,7 @@ $recordType = $user->getRecordType();
 $showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
 $showDuration = TYPE_DURATION == $recordType || TYPE_ALL == $recordType;
 $showFiles = $user->isPluginEnabled('at');
+$showRecordCustomFields = $user->isOptionEnabled('record_custom_fields');
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
@@ -102,6 +103,11 @@ if ($showNoteRow) {
   // Determine column span for note field.
   $colspan = 0;
   if ($showClient) $colspan++;
+  if ($showRecordCustomFields && $custom_fields && $custom_fields->timeFields) {
+    foreach ($custom_fields->timeFields as $timeField) {
+      $colspan++;
+    }
+  }
   if ($showProject) $colspan++;
   if ($showTask) $colspan++;
   if ($showStart) $colspan++;
@@ -477,6 +483,7 @@ $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('time_records', $timeRecords);
+$smarty->assign('show_record_custom_fields', $showRecordCustomFields);
 $smarty->assign('show_navigation', $user->isPluginEnabled('wv') && !$user->isOptionEnabled('week_menu'));
 $smarty->assign('show_client', $showClient);
 $smarty->assign('show_billable', $showBillable);

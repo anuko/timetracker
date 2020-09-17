@@ -11,6 +11,9 @@
     <td nowrap>{$forms.displayOptionsForm.time_not_complete_days.control} <a href="https://www.anuko.com/lp/tt_44.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
   </tr>
   <tr>
+    <td><label for="record_custom_fields">{$i18n.label.custom_fields}:</label></td>
+    <td nowrap>{$forms.displayOptionsForm.record_custom_fields.control} <a href="https://www.anuko.com/lp/tt_48.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
+  </tr>
 
   <tr><td>&nbsp;</td></tr>
   <tr><td class="sectionHeaderNoBorder">{$i18n.title.reports}</td></tr>

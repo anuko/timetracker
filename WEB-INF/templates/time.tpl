@@ -114,6 +114,11 @@
   {if $show_client}
           <td class="tableHeader">{$i18n.label.client}</td>
   {/if}
+  {if $show_record_custom_fields && $custom_fields && $custom_fields->timeFields}
+      {foreach $custom_fields->timeFields as $timeField}
+          <td class="tableHeader">{$timeField['label']|escape}</td>
+      {/foreach}
+  {/if}
   {if $show_project}
           <td class="tableHeader">{$i18n.label.project}</td>
   {/if}
@@ -138,6 +143,13 @@
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
     {if $show_client}
           <td valign="top">{$record.client|escape}</td>
+    {/if}
+    {* record custom fileds *}
+    {if $show_record_custom_fields && $custom_fields && $custom_fields->timeFields}
+      {foreach $custom_fields->timeFields as $timeField}
+          {assign var="control_name" value='time_field_'|cat:$timeField['id']}
+          <td>{$record.$control_name|escape}</td>
+      {/foreach}
     {/if}
     {if $show_project}
           <td valign="top">{$record.project|escape}</td>
