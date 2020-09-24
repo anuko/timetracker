@@ -136,6 +136,7 @@ $i18n_key_words = array(
 'button.disapprove' => 'Не одобрить',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
+'label.menu' => 'Меню',
 'label.group_name' => 'Название группы',
 'label.address' => 'Адрес',
 'label.currency' => 'Валюта',
@@ -616,7 +617,6 @@ $i18n_key_words = array(
 'form.timesheet_view.disapprove_body' => "Ваш табель %s не одобрен.<p>%s",
 
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
-'form.display_options.menu' => 'Меню',
 'form.display_options.note_on_separate_row' => 'Комментарий в отдельном ряду',
 'form.display_options.not_complete_days' => 'Незавершенные дни',
 'form.display_options.custom_css' => 'Пользовательская CSS',

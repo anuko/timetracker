@@ -154,6 +154,8 @@ $i18n_key_words = array(
 // 'button.disapprove' => 'Disapprove',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
+// TODO: translate the following.
+// 'label.menu' => 'Menu',
 'label.group_name' => 'Tiimin nimi', // TODO: replace "team" with "group".
 'label.address' => 'Osoite',
 'label.currency' => 'Valuutta',
@@ -685,7 +687,6 @@ $i18n_key_words = array(
 
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
 // TODO: translate the following.
-// 'form.display_options.menu' => 'Menu',
 // 'form.display_options.note_on_separate_row' => 'Note on separate row',
 // 'form.display_options.not_complete_days' => 'Not complete days',
 // 'form.display_options.custom_css' => 'Custom CSS',

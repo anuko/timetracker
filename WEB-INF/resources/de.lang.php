@@ -149,6 +149,8 @@ $i18n_key_words = array(
 // 'button.disapprove' => 'Disapprove',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
+// TODO: translate the following.
+// 'label.menu' => 'Menu',
 'label.group_name' => 'Gruppenname',
 'label.address' => 'Adresse',
 'label.currency' => 'Währung',
@@ -655,8 +657,6 @@ $i18n_key_words = array(
 // 'form.timesheet_view.disapprove_body' => "Your timesheet %s was not approved.<p>%s",
 
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
-// TODO: translate the following.
-// 'form.display_options.menu' => 'Menu',
 'form.display_options.note_on_separate_row' => 'Beschreibung in separater Zeile',
 // TODO: translate the following.
 // 'form.display_options.not_complete_days' => 'Not complete days',
