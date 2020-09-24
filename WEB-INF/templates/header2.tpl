@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link href="{$smarty.const.DEFAULT_CSS}" rel="stylesheet" type="text/css">
+  <link href="default2.css" rel="stylesheet" type="text/css">
 {if $i18n.language.rtl}
   <link href="{$smarty.const.RTL_CSS}" rel="stylesheet" type="text/css">
 {/if}
@@ -27,7 +27,7 @@
 {if $user->custom_logo}
   <img alt="Time Tracker" width="300" height="43" src="{$custom_logo}">
 {else}
-  <a href="https://www.anuko.com/lp/tt_1.htm" target="_blank"><img alt="Anuko Time Tracker" width="300" height="43" src="img{$smarty.const.APP_RESOURCE_DIR}/logo.png"></a>
+  <a href="https://www.anuko.com/lp/tt_1.htm" target="_blank"><img alt="Anuko Time Tracker" width="300" height="43" src="img/logo.png"></a>
 {/if}
 </div>
 

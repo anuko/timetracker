@@ -1,0 +1,428 @@
+body {
+  margin: 0px;
+  font-size: 10pt;
+  font-family: Verdana, sans-serif;
+  background-color: white;
+}
+
+div.logo {
+  padding: .5rem;
+  text-align: center;
+  background-color: #a6ccf7;
+}
+
+div.top-menu-large-screen {
+  background-color: black;
+  display: block;
+}
+
+.top-submenu-large-screen {
+  background-color: #d9d9d9;
+  display: block;
+}
+
+div.top-menu-small-screen {
+  background-color: black;
+  display: none;
+}
+
+div.top-menu-small-screen a {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  margin: .1rem .2rem .1rem .2rem;
+}
+
+div.top-menu-large-screen a {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  margin: .1rem .2rem .1rem .2rem;
+}
+
+.top-menu-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.top-submenu-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.top-submenu-large-screen a {
+  font-size: 1rem;
+  color: #444444;
+  margin: .1rem .2rem .1rem .2rem;
+}
+
+div.page-title {
+  font-size: 12pt;
+  font-weight: bold;
+  color: silver;
+  text-align: center;
+  padding: .25rem;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: .2rem;
+}
+
+div.user-details {
+  text-align: center;
+  padding: .2rem;
+}
+
+.page-errors {
+  margin-top: .5rem;
+  text-align: center;
+  color: red;
+}
+
+.page-content {
+  text-align: center;
+}
+
+.form-control-separator {
+  height: .5rem;
+}
+
+div#LoginAboutText {
+  padding: 1rem;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+#ldapDefaultDomain {
+  color: #777777;
+}
+
+div.page-hint {
+  margin-top: 1rem;
+}
+
+.centered-table {
+  margin-top: .5rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+}
+
+.large-screen-label {
+  text-align: right;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.small-screen-label {
+  text-align: left;
+  display: none;
+}
+
+.small-screen-form-control-separator {
+  height: .25rem;
+  display: none;
+}
+
+.page-content input {
+  border-radius: 4px;
+  border: 1px solid #c9c9c9;
+  padding: .4rem;
+}
+
+.td-with-input {
+  text-align: left;
+}
+
+.page-content input:focus {
+  background-color: yellow;
+  border: 1px solid black;
+  outline: none;
+}
+
+
+@media screen and (max-width: 600px) {
+
+  .large-screen-label {
+      display: none;
+  }
+
+  .small-screen-label {
+      display: block;
+  }
+
+  .small-screen-form-control-separator {
+      display: block;
+  }
+}
+
+
+
+
+
+
+.contribute-msg {
+  text-align: center;
+  padding: .2rem;
+  background-color: #eeeeee;
+}
+
+.version-and-copyright {
+  text-align: center;
+  padding: .5rem;
+}
+
+
+@media screen and (max-width: 1170px) {
+  div.top-menu-small-screen {
+    display: block;
+  }
+
+  div.top-menu-large-screen {
+    display: none;
+  }
+
+  div.top-submenu-large-screen {
+    display: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+a { color: blue; text-decoration: none; }
+
+a:visited { text-decoration: none; }
+
+a:hover { text-decoration: underline; }
+
+html {
+  overflow-y: scroll;
+}
+
+table { font-size: 10pt; font-family: Verdana, sans-serif; }
+
+input, button, select, textarea {
+  font-size: 10pt;
+  font-family: Verdana, sans-serif;
+  margin: 2px 2px 2px 2px;
+  padding: 2px 5px 2px 5px;
+}
+
+input[type=checkbox], label {
+  vertical-align: middle;
+}
+
+.pageTitle {
+  font-size: 12pt;
+  font-weight: bold;
+  color: silver;
+}
+
+.systemMenu {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  margin: .1rem .2rem .1rem .2rem;
+}
+
+.mainMenu {
+  font-size: 1rem;
+  color: #444444;
+  margin: .1rem .2rem .1rem .2rem;
+}
+
+.onBehalf {
+  font-weight: bold;
+}
+
+/* calendar styles */
+.calendarHeader {
+  padding: 5px;
+  font-size: 8pt;
+  color: #333333;
+  background-color: #d9d9d9;
+}
+
+.calendarDay {
+  padding: 5px;
+  border: 1px solid silver;
+  font-size: 8pt;
+  color: #333333;
+  background-color: #ffffff;
+}
+
+.calendarDaySelected {
+  padding: 5px;
+  border: 1px solid silver;
+  font-size: 8pt;
+  color: #666666;
+  background-color: #a6ccf7;
+}
+
+.calendarDayWeekend {
+  padding: 5px;
+  border: 1px solid silver;
+  font-size: 8pt;
+  color: #666666;
+  background-color: #f7f7f7;
+}
+
+.calendarDayHoliday {
+  padding: 5px;
+  border: 1px solid silver;
+  font-size: 8pt;
+  color: #666666;
+  background-color: #f7f7f7;
+}
+
+.calendarDayHeader {
+  padding: 5px;
+  border: 1px solid white;
+  font-size: 8pt;
+  color: #333333;
+}
+
+.calendarDayHeaderWeekend {
+  padding: 5px;
+  border: 1px solid white;
+  font-size: 8pt;
+  color: #999999;
+}
+
+.calendarLinkWeekend {
+  color: #999999;
+}
+
+.calendarLinkHoliday {
+  color: #999999;
+}
+
+.calendarLinkRecordsExist {
+  color: #ff0000;
+}
+
+.calendarLinkNonCompleteDay {
+  color: #800080;
+}
+/* end of calendar styles */
+
+.tableHeader {
+  font-weight: bold;
+  text-align: left;
+}
+
+.tableHeaderCentered {
+  font-weight: bold;
+  text-align: center;
+}
+
+.rowReportItem {
+  background-color: #f5f5f5;
+}
+
+.rowReportItemAlt {
+  background-color: #ffffff;
+}
+
+.rowReportSubtotal {
+  background-color: #e0e0e0;
+}
+
+.cellLeftAligned {
+  text-align: left;
+  vertical-align: top;
+}
+
+.cellRightAligned {
+  text-align: right;
+  vertical-align: top;
+}
+
+.cellLeftAlignedSubtotal {
+  font-weight: bold;
+  vertical-align: top;
+}
+
+.cellRightAlignedSubtotal {
+  font-weight: bold;
+  text-align: right;
+  vertical-align: top;
+}
+
+.midAligned {
+  text-align: center;
+}
+
+.sectionHeader {
+  font-weight: bold;
+  border-bottom: 1px solid lightgray;
+}
+
+.sectionHeaderNoBorder {
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+}
+
+.info_message {
+  color: #0000c0;
+}
+
+.divider {
+  background-color: #efefef;
+}
+
+div.table-divider { height: 30px; }
+
+.uncompleted-entry {
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, .1);
+}
+.uncompleted-entry.active { background-color: red; }
+
+.table_icon {
+  height: 16px;
+  width: 16px;
+}
+
+/* Mobile styles */
+.mobile-table {
+  border: 0;
+  width: 100%;
+  border-spacing: 0;
+}
+
+.mobile-textarea {
+  width: 100%;
+  resize: vertical;
+  height: 5em;
+}
+
+.mobile-input {
+  width: 100%;
+}
+
+.mobile-table-details {
+  width: 100%;
+  table-layout: fixed;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  border-spacing: 1px;
+  border: 0;
+}
+
+.mobile-table-details td {
+  padding: 3px;
+}
