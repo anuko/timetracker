@@ -1,11 +1,11 @@
 <table class="centered-table">
-  <tr class = "small-screen-label"><td align="left">{$i18n.label.login}:</td></tr>
+  <tr class = "small-screen-label"><td>{$i18n.label.login}:</td></tr>
   <tr>
     <td class="large-screen-label">{$i18n.label.login}:</td>
     <td class="td-with-input">{$forms.loginForm.login.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
-  <tr class = "small-screen-label"><td align="left">{$i18n.label.password}:</td></tr>
+  <tr class = "small-screen-label"><td>{$i18n.label.password}:</td></tr>
   <tr>
     <td class="large-screen-label">{$i18n.label.password}:</td>
     <td class="td-with-input">{$forms.loginForm.password.control}</td>
