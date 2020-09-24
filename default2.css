@@ -138,6 +138,17 @@ div.page-hint {
   outline: none;
 }
 
+.contribute-msg {
+  text-align: center;
+  margin-top: 2rem;
+  padding: .2rem;
+  background-color: #eeeeee;
+}
+
+.version-and-copyright {
+  text-align: center;
+  padding: .5rem;
+}
 
 @media screen and (max-width: 600px) {
 
@@ -153,23 +164,6 @@ div.page-hint {
       display: block;
   }
 }
-
-
-
-
-
-
-.contribute-msg {
-  text-align: center;
-  padding: .2rem;
-  background-color: #eeeeee;
-}
-
-.version-and-copyright {
-  text-align: center;
-  padding: .5rem;
-}
-
 
 @media screen and (max-width: 1170px) {
   div.top-menu-small-screen {
