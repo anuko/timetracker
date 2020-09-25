@@ -47,6 +47,7 @@ class Combobox extends FormElement {
 
   function __construct($name) {
     $this->class = 'Combobox';
+    $this->css_class = 'dropdown-field';
     $this->name = $name;
   }
 
@@ -68,6 +69,7 @@ class Combobox extends FormElement {
 	    if ($this->id=="") $this->id = $this->name;
 	    
 		$html = "\n\t<select";
+                $html .= " class=\"$this->css_class\"";
 		$html .= " name=\"$this->name\" id=\"$this->id\"";
 		
 		if ($this->size!="")

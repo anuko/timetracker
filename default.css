@@ -191,12 +191,22 @@ div.page-hint {
   display: inline-block;
 }
 
+input[type=submit] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 input.text-field {
   width: 220px;
 }
 
 input.password-field {
   width: 220px;
+}
+
+.dropdown-field {
+  width: 237px;
 }
 
 @media screen and (max-width: 600px) {
@@ -218,6 +228,14 @@ input.password-field {
   }
 
   .what-is-it-text {
+    display: none;
+  }
+
+  div.contribute-msg {
+    display: none;
+  }
+
+  div.version-and-copyright {
     display: none;
   }
 }

@@ -77,7 +77,7 @@ foreach ($lang_files as $lfile) {
   $longname_lang[] = array('id'=>I18n::getLangFromFilename($lfile),'name'=>$lname);
 }
 $longname_lang = mu_sort($longname_lang, 'name');
-$form->addInput(array('type'=>'combobox','name'=>'lang','style'=>'width: 200px','data'=>$longname_lang,'datakeys'=>array('id','name'),'value'=>$cl_lang));
+$form->addInput(array('type'=>'combobox','name'=>'lang','data'=>$longname_lang,'datakeys'=>array('id','name'),'value'=>$cl_lang));
 
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_name','value'=>$cl_manager_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_login','value'=>$cl_manager_login));
