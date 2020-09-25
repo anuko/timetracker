@@ -40,13 +40,13 @@
   {/if}
   {if $show_files}
         {if $timesheet.has_files}
-          <td><a href="timesheet_files.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_files.png"></a></td>
+          <td><a href="timesheet_files.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-files.png"></a></td>
         {else}
-          <td><a href="timesheet_files.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_file.png"></a></td>
+          <td><a href="timesheet_files.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-file.png"></a></td>
         {/if}
   {/if}
-          <td><a href="timesheet_edit.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
-          <td><a href="timesheet_delete.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
+          <td><a href="timesheet_edit.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>
+          <td><a href="timesheet_delete.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a></td>
         </tr>
 {/foreach}
       </table>
@@ -86,13 +86,13 @@
     {/if}
     {if $show_files}
       {if $timesheet.has_files}
-          <td><a href="timesheet_files.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_files.png"></a></td>
+          <td><a href="timesheet_files.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-files.png"></a></td>
       {else}
-          <td><a href="timesheet_files.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_file.png"></a></td>
+          <td><a href="timesheet_files.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-file.png"></a></td>
       {/if}
     {/if}
-          <td><a href="timesheet_edit.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
-          <td><a href="timesheet_delete.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
+          <td><a href="timesheet_edit.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>
+          <td><a href="timesheet_delete.php?id={$timesheet.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a></td>
         </tr>
   {/foreach}
       </table>

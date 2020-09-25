@@ -22,8 +22,8 @@
   <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
     <td>{$subgroup.name|escape}</td>
     <td>{$subgroup.description|escape}</td>
-    <td><a href="group_edit.php?id={$subgroup.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
-    <td><a href="group_delete.php?id={$subgroup.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
+    <td><a href="group_edit.php?id={$subgroup.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>
+    <td><a href="group_delete.php?id={$subgroup.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a></td>
   </tr>
   {/foreach}
 </table>

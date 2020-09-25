@@ -25,12 +25,12 @@
           <td class="midAligned">{if $work_item.num_offers}<a href="work_offers.php?id={$work_item.id}">{$work_item.num_offers}</a>{/if}</td>
           <td nowrap>{$work_item.amount_with_currency}</td>
     {if $work_item.can_edit}
-          <td><a href="work_edit.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="../img/icon_edit.png"></a></td>
+          <td><a href="work_edit.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="../img/icon-edit.png"></a></td>
     {else}
           <td></td>
     {/if}
     {if $work_item.can_delete}
-          <td><a href="work_delete.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="../img/icon_delete.png"></a></td>
+          <td><a href="work_delete.php?id={$work_item.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="../img/icon-delete.png"></a></td>
     {else}
           <td></td>
     {/if}
@@ -92,8 +92,8 @@
           <td>{$offer.description|escape}</td>
           <td>{$offer.status_label}</td>
           <td nowrap>{$offer.amount_with_currency}</td>
-          <td><a href="offer_edit.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="../img/icon_edit.png"></a></td>
-          <td><a href="offer_delete.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="../img/icon_delete.png"></a></td>
+          <td><a href="offer_edit.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="../img/icon-edit.png"></a></td>
+          <td><a href="offer_delete.php?id={$offer.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="../img/icon-delete.png"></a></td>
         </tr>
   {/foreach}
       </table>

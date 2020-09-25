@@ -207,23 +207,23 @@ function recalculateCost() {
         <td valign="top" align="right">{$item.cost}</td>
     {if $show_files}
       {if $item.has_files}
-        <td valign="top" align="center"><a href="expense_files.php?id={$item.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_files.png"></a></td>
+        <td valign="top" align="center"><a href="expense_files.php?id={$item.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-files.png"></a></td>
       {else}
-        <td valign="top" align="center"><a href="expense_files.php?id={$item.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_file.png"></a></td>
+        <td valign="top" align="center"><a href="expense_files.php?id={$item.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-file.png"></a></td>
       {/if}
     {/if}
         <td valign="top" align="center">
     {if $item.approved || $item.invoice_id}
           &nbsp;
     {else}
-          <a href='expense_edit.php?id={$item.id}'><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a>
+          <a href='expense_edit.php?id={$item.id}'><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a>
     {/if}
         </td>
         <td valign="top" align="center">
     {if $item.approved || $item.invoice_id}
           &nbsp;
     {else}
-          <a href='expense_delete.php?id={$item.id}'><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a>
+          <a href='expense_delete.php?id={$item.id}'><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a>
     {/if}
         </td>
       </tr>

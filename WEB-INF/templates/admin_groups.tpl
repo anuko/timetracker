@@ -22,8 +22,8 @@
     <td>{$group.name|escape}</td>
     <td nowrap>{$group.date}</td>
     <td align="center">{$group.lang}</td>
-    <td><a href="admin_group_edit.php?id={$group.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
-    <td><a href="admin_group_delete.php?id={$group.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
+    <td><a href="admin_group_edit.php?id={$group.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>
+    <td><a href="admin_group_delete.php?id={$group.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a></td>
   </tr>
   {/foreach}
 {/if}

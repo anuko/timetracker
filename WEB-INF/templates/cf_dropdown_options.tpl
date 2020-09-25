@@ -16,8 +16,8 @@
     {foreach $options as $key=>$val}
         <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}">
           <td>{$val|escape}</td>
-          <td><a href="cf_dropdown_option_edit.php?id={$key}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
-          <td><a href="cf_dropdown_option_delete.php?id={$key}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
+          <td><a href="cf_dropdown_option_edit.php?id={$key}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>
+          <td><a href="cf_dropdown_option_delete.php?id={$key}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a></td>
         </tr>
     {/foreach}
   {/if}

@@ -16,8 +16,8 @@
           <td><a href="file_download.php?id={$file.id}">{$file.name|escape}</a></td>
           <td>{$file.description|escape}</td>
     {if $can_edit}
-          <td><a href="file_edit.php?id={$file.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
-          <td><a href="file_delete.php?id={$file.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
+          <td><a href="file_edit.php?id={$file.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>
+          <td><a href="file_delete.php?id={$file.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a></td>
     {/if}
         </tr>
   {/foreach}

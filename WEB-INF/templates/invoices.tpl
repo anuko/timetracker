@@ -43,7 +43,7 @@
           <td>{if $invoice.paid}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>
   {/if}
   {if !$user->isClient()}
-          <td><a href="invoice_delete.php?id={$invoice.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
+          <td><a href="invoice_delete.php?id={$invoice.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a></td>
   {/if}
         </tr>
         {/foreach}

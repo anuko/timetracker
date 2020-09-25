@@ -26,13 +26,13 @@
           <td>{$project.description|escape}</td>
       {if $show_files}
         {if $project.has_files}
-          <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_files.png"></a></td>
+          <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-files.png"></a></td>
         {else}
-          <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_file.png"></a></td>
+          <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-file.png"></a></td>
         {/if}
       {/if}
-          <td><a href="project_edit.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
-          <td><a href="project_delete.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
+          <td><a href="project_edit.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>
+          <td><a href="project_delete.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a></td>
         </tr>
     {/foreach}
   {/if}
@@ -64,13 +64,13 @@
           <td>{$project.description|escape}</td>
       {if $show_files}
         {if $project.has_files}
-          <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_files.png"></a></td>
+          <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-files.png"></a></td>
         {else}
-          <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_file.png"></a></td>
+          <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-file.png"></a></td>
         {/if}
       {/if}
-          <td><a href="project_edit.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
-          <td><a href="project_delete.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
+          <td><a href="project_edit.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>
+          <td><a href="project_delete.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a></td>
         </tr>
     {/foreach}
       </table>
@@ -99,7 +99,7 @@
           <td>{$project.description|escape}</td>
       {if $show_files}
         {if $project.has_files}
-          <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon_files.png"></a></td>
+          <td><a href="project_files.php?id={$project.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-files.png"></a></td>
         {else}
           <td>&nbsp;</td>
         {/if}

@@ -35,8 +35,8 @@
           <td class="cellRightAligned">{$u.quota_percent}</td>
       {/if}
       {if $u.group_id != $user->group_id || $u.rank < $user->rank || ($u.rank == $user->rank && $u.id == $user->id)}
-          <td><a href="user_edit.php?id={$u.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
-         {if $u.id != $user->id}<td><a href="user_delete.php?id={$u.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>{else}<td></td>{/if}
+          <td><a href="user_edit.php?id={$u.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>
+         {if $u.id != $user->id}<td><a href="user_delete.php?id={$u.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a></td>{else}<td></td>{/if}
       {else}
           <td></td>
           <td></td>
@@ -76,8 +76,8 @@
           <td class="cellRightAligned">{$u.quota_percent}</td>
       {/if}
       {if $u.group_id != $user->group_id || $u.rank < $user->rank}
-          <td><a href="user_edit.php?id={$u.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon_edit.png"></a></td>
-          <td><a href="user_delete.php?id={$u.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon_delete.png"></a></td>
+          <td><a href="user_edit.php?id={$u.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>
+          <td><a href="user_delete.php?id={$u.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a></td>
       {else}
           <td></td>
           <td></td>
