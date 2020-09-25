@@ -27,6 +27,220 @@
 // +----------------------------------------------------------------------+
 */
 
+body {
+  margin: 0px;
+  font-size: 10pt;
+  font-family: Verdana, sans-serif;
+  background-color: white;
+}
+
+div.logo {
+  padding: .5rem;
+  text-align: center;
+  background-color: #a6ccf7;
+}
+
+div.top-menu-large-screen {
+  background-color: black;
+  display: block;
+}
+
+.top-submenu-large-screen {
+  background-color: #d9d9d9;
+  display: block;
+}
+
+div.top-menu-small-screen {
+  background-color: black;
+  display: none;
+}
+
+div.top-menu-small-screen a {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  margin: .1rem .2rem .1rem .2rem;
+}
+
+div.top-menu-large-screen a {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  margin: .1rem .2rem .1rem .2rem;
+}
+
+.top-menu-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.top-submenu-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.top-submenu-large-screen a {
+  font-size: 1rem;
+  color: #444444;
+  margin: .1rem .2rem .1rem .2rem;
+}
+
+div.page-title {
+  font-size: 12pt;
+  font-weight: bold;
+  color: silver;
+  text-align: center;
+  padding: .25rem;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: .2rem;
+}
+
+div.user-details {
+  text-align: center;
+  padding: .2rem;
+}
+
+.page-errors {
+  margin-top: .5rem;
+  text-align: center;
+  color: red;
+}
+
+.page-content {
+  text-align: center;
+}
+
+.form-control-separator {
+  height: .5rem;
+}
+
+div#LoginAboutText {
+  padding: 1rem;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+#ldapDefaultDomain {
+  color: #777777;
+}
+
+div.page-hint {
+  margin-top: 1rem;
+}
+
+.centered-table {
+  margin-top: .5rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+}
+
+.large-screen-label {
+  text-align: right;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.small-screen-label {
+  text-align: left;
+  display: none;
+}
+
+.small-screen-form-control-separator {
+  height: .25rem;
+  display: none;
+}
+
+.page-content input {
+  border-radius: 4px;
+  border: 1px solid #c9c9c9;
+  padding: .4rem;
+}
+
+.td-with-input {
+  text-align: left;
+}
+
+.page-content input:focus {
+  background-color: yellow;
+  border: 1px solid black;
+  outline: none;
+}
+
+.contribute-msg {
+  text-align: center;
+  margin-top: 2rem;
+  padding: .2rem;
+  background-color: #eeeeee;
+}
+
+.version-and-copyright {
+  text-align: center;
+  padding: .5rem;
+}
+
+.centered-table td img {
+  vertical-align: middle;
+}
+
+.what-is-it-img {
+  display: none;
+}
+
+.what-is-it-text {
+  display: inline-block;
+}
+
+input.text-field {
+  width: 220px;
+}
+
+input.password-field {
+  width: 220px;
+}
+
+@media screen and (max-width: 600px) {
+
+  .large-screen-label {
+    display: none;
+  }
+
+  .small-screen-label {
+    display: block;
+  }
+
+  .small-screen-form-control-separator {
+    display: block;
+  }
+
+  .what-is-it-img {
+    display: inline-block;
+  }
+
+  .what-is-it-text {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  div.top-menu-small-screen {
+    display: block;
+  }
+
+  div.top-menu-large-screen {
+    display: none;
+  }
+
+  div.top-submenu-large-screen {
+    display: none;
+  }
+}
+
+
+
+
+
+/* TODO: below are legacy styles. Review as work on mobile-friendly pages continues. */
 a { color: blue; text-decoration: none; }
 
 a:visited { text-decoration: none; }

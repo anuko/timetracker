@@ -53,12 +53,14 @@ class Form {
       case 'text':
         import('form.TextField');
         $el = new TextField($params['name']);
+        if (isset($params['class'])) $el->setCssClass($params['class']);
         if (isset($params['maxlength'])) $el->setMaxLength($params['maxlength']);
         break;
 
       case 'password':
         import('form.PasswordField');
         $el = new PasswordField($params['name']);
+        if (isset($params['class'])) $el->setCssClass($params['class']);
         if (isset($params['maxlength'])) $el->setMaxLength($params['maxlength']);
         break;
 

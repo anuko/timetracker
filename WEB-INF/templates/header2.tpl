@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link href="default2.css" rel="stylesheet" type="text/css">
+  <link href="{$smarty.const.DEFAULT_CSS}" rel="stylesheet" type="text/css">
 {if $i18n.language.rtl}
   <link href="{$smarty.const.RTL_CSS}" rel="stylesheet" type="text/css">
 {/if}

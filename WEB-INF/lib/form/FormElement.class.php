@@ -28,27 +28,27 @@
 
 // FromElement is the base class for controls on forms.
 class FormElement {
-  var $id = '';         // Control id.
-  var $name;            // Control name.
-  var $form_name = '';  // Form name the control is in.
-  var $value = '';      // Value of the control.
-  var $size = '';       // Control size.
-  var $max_length = ''; // Max length of text in control.
-  var $on_change = '';  // What happens when value of control changes.
-  var $on_click = '';   // What happens when the control is clicked.
-  var $label = '';      // Optional label for control.
-  var $style = '';      // Control style.
-  var $enabled = true;  // Whether the control is enabled.
-  var $class = 'FormElement'; // PHP class name for the element.
-  var $cssClass = null; // CSS class name for the element.
+  var $id = '';          // control id
+  var $name;             // control name
+  var $form_name = '';   // form name the control is in
+  var $value = '';       // value of the control
+  var $size = '';        // control size
+  var $max_length = '';  // max length of text in control
+  var $on_change = '';   // what happens when value of control changes
+  var $on_click = '';    // what happens when the control is clicked
+  var $label = '';       // optional label for control
+  var $style = '';       // control style
+  var $enabled = true;   // whether the control is enabled
+  var $class = 'FormElement'; // php class name for the control
+  var $css_class = null; // css class name for the control
 
   function __construct() {
   }
 
   function getName() { return $this->name; }
   function getClass() { return $this->class; }
-  function getCssClass() { return $this->cssClass; }
-  function setCssClass($cssClass) { $this->cssClass = $cssClass; }
+  function getCssClass() { return $this->css_class; }
+  function setCssClass($css_class) { $this->css_class = $css_class; }
 
   function setFormName($name) { $this->form_name = $name; }
   function getFormName() { return $this->form_name; }

@@ -35,6 +35,7 @@ class TextField extends FormElement {
   function __construct($name)
   {
     $this->class = 'TextField';
+    $this->css_class = 'text-field';
     $this->name = $name;
   }
 
@@ -43,6 +44,7 @@ class TextField extends FormElement {
   function getHtml() {
     if (empty($this->id)) $this->id = $this->name;
     $html = "\n\t<input type=\"text\"";
+    $html .= " class=\"$this->css_class\"";
     $html .= " id=\"$this->id\" name=\"$this->name\"";
     if (!empty($this->size)) $html .= " size=\"$this->size\"";
     if (!empty($this->style)) $html .= " style=\"$this->style\"";

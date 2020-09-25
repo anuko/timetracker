@@ -33,6 +33,7 @@ class PasswordField extends FormElement {
   function __construct($name)
   {
     $this->class = 'PasswordField';
+    $this->css_class = 'password-field';
     $this->name = $name;
   }
 
@@ -40,6 +41,7 @@ class PasswordField extends FormElement {
     if ($this->id == '') $this->id = $this->name;
 
     $html = "\n\t<input type=\"password\"";
+    $html .= " class=\"$this->css_class\"";
     $html.= ' id="'.$this->id.'"';
     $html.= ' name="'.$this->name.'"';
 
