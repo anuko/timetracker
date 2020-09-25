@@ -150,18 +150,38 @@ div.page-hint {
   padding: .5rem;
 }
 
+.centered-table td img {
+  vertical-align: middle;
+}
+
+.what-is-it-img {
+  display: none;
+}
+
+.what-is-it-text {
+  display: inline-block;
+}
+
 @media screen and (max-width: 600px) {
 
   .large-screen-label {
-      display: none;
+    display: none;
   }
 
   .small-screen-label {
-      display: block;
+    display: block;
   }
 
   .small-screen-form-control-separator {
-      display: block;
+    display: block;
+  }
+  
+  .what-is-it-img {
+    display: inline-block;
+  }
+  
+  .what-is-it-text {
+    display: none;
   }
 }
 
