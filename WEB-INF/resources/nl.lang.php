@@ -71,8 +71,7 @@ $i18n_key_words = array(
 'error.access_denied' => 'Toegang geweigerd.',
 'error.sys' => 'Systeem fout.',
 'error.db' => 'Database fout.',
-// TODO: translate the following.
-// 'error.registered_recently' => 'Registered recently.',
+'error.registered_recently' => 'Recent geregistreerd.',
 'error.feature_disabled' => 'Functie is uitgeschakeld.',
 'error.field' => 'Incorrecte gegevens: "{0}".',
 'error.empty' => 'Veld "{0}" is leeg.',
@@ -105,22 +104,8 @@ $i18n_key_words = array(
 'error.format' => 'Bestandsformaat niet valide.',
 'error.user_count' => 'Limiet op aantal gebruikers.',
 'error.expired' => 'Verloop datum is bereikt.',
-
-// TODO: translate error.file_storage and error.remote_work.
-
-// Meaning of error.file_storage: an (unspecified) error occurred when trying to communicate with remote
-// file storage server (the one that handles attachments). It is a generic message telling us that
-// "something went wrong" when trying to do some operation with attachments.
-// For example, File Storage server could be offline, or Time Tracker config option is wrong, etc.
-
-// 'error.file_storage' => 'File storage server error.', // See comment in English file.
-
-// Meaning of error.remote_work: an (unspecified) error occurred when trying to communicate with
-// "Remote Work" server, the one that supports the "Work" plugin, see https://www.anuko.com/time_tracker/what_is/work_plugin.htm
-// It is a generic message telling us that "something went wrong" when trying to do some operation with Work plugin.
-// For example, Remote Work server could be offline, among other things.
-
-// 'error.remote_work' => 'Remote work server error.',   // See comment in English file.
+'error.file_storage' => 'Bestand server probleem.',
+'error.remote_work' => 'Werk op afstand server probleem.',
 
 // Warning messages.
 'warn.sure' => 'Ben je er zeker van?',
@@ -151,8 +136,7 @@ $i18n_key_words = array(
 'button.disapprove' => 'Afkeuren',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-// TODO: translate the following.
-// 'label.menu' => 'Menu',
+'label.menu' => 'Menu',
 'label.group_name' => 'Groepsnaam',
 'label.address' => 'Adres',
 'label.currency' => 'Munteenheid',
@@ -259,9 +243,8 @@ $i18n_key_words = array(
 'label.approval' => 'Rapport goedkeuring',
 'label.mark_approved' => 'Markeer goedkeuring',
 'label.template' => 'Sjabloon',
-// TODO: translate the following.
-// 'label.bind_templates_with_projects' => 'Bind templates with projects',
-// 'label.prepopulate_note' => 'Prepopulate Note field',
+'label.bind_templates_with_projects' => 'Verbind sjabloon aan projecten',
+'label.prepopulate_note' => 'Vul het notitieveld van tevoren in',
 'label.attachments' => 'Bijlagen',
 'label.files' => 'Bestanden',
 'label.file' => 'Bestand',
@@ -271,15 +254,11 @@ $i18n_key_words = array(
 'label.inactive_users' => 'Inactieve medewerkers',
 'label.details' => 'Details',
 'label.budget' => 'Budget',
-// TODO: translate the following.
-// 'label.work' => 'Work',   // Table column header for work items, see https://www.anuko.com/time_tracker/what_is/work_plugin.htm
-// 'label.offer' => 'Offer', // Table column header for offers, see https://www.anuko.com/time_tracker/what_is/work_plugin.htm
-// 'label.contractor' => 'Contractor', // Table column header for offers (contractor is someone who offers to do work).
-                                       // Technically, it is either an org name or a combination of org and group names
-                                       // because both work items and offers are owned by Time Tracker groups of users.
-// 'label.how_to_pay' => 'How to pay', // Label for the "How to pay" field on offers, which allows contractors to specify
-                                       // how to pay them, for example: paypal email, check by mail to a specific address, etc.
-// 'label.moderator_comment' => 'Moderator comment', // Label for "Moderator comment" field that explains something.
+'label.work' => 'Werk',
+'label.offer' => 'Aanbod',
+'label.contractor' => 'Aanbieder',
+'label.how_to_pay' => 'Betaalwijze',
+'label.moderator_comment' => 'Commentaar',
 
 // Entity names.
 'entity.time' => 'tijd',
@@ -304,8 +283,7 @@ $i18n_key_words = array(
 'title.expenses' => 'Kosten',
 'title.edit_expense' => 'Bewerk kosten artikel',
 'title.delete_expense' => 'Verwijder kosten artikel',
-// TODO: translate the following.
-// 'title.expense_files' => 'Expense Item Files',
+'title.expense_files' => 'Kosten bestanden',
 'title.predefined_expenses' => 'Vaste kosten',
 'title.add_predefined_expense' => 'Vaste kosten toevoegen',
 'title.edit_predefined_expense' => 'Vaste kosten bewerken',
@@ -384,17 +362,15 @@ $i18n_key_words = array(
 'title.active_work' => 'Actief werk',
 'title.available_work' => 'Beschikbaar werk',
 'title.inactive_work' => 'Inactief werk',
-// TODO: translate the following.
-// 'title.pending_work' => 'Pending Work', // Work items pending moderator approval.
-// 'title.offer' => 'Offer',
+'title.pending_work' => 'Werk in afwachting van goedkeuring',
+'title.offer' => 'Aanbod',
 'title.add_offer' => 'Aanbieding toevoegen',
 'title.edit_offer' => 'Aanbieding bewerken',
 'title.delete_offer' => 'Aanbieding verwijderen',
 'title.active_offers' => 'Actieve aanbiedingen',
 'title.available_offers' => 'Beschikbare aanbiedingen',
 'title.inactive_offers' => 'Inactieve aanbiedingen',
-// TODO: translate the following.
-// 'title.pending_offers' => 'Pending Offers', // Offers pending moderator approval.
+'title.pending_offers' => 'Aangeboden werk in afwachting van goedkeuring',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -423,8 +399,7 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'inactief',
 'dropdown.delete' => 'verwijderen',
 'dropdown.do_not_delete' => 'niet verwijderen',
-// TODO: translate the following.
-// 'dropdown.pending_approval' => 'pending approval',
+'dropdown.pending_approval' => 'in afwachting van goedkeuring',
 'dropdown.approved' => 'goedgekeurd',
 'dropdown.not_approved' => 'afgekeurd',
 'dropdown.paid' => 'betaald',
@@ -641,24 +616,23 @@ $i18n_key_words = array(
 'form.timesheet_view.disapprove_body' => "Jouw tijdenoverzicht %s is afgekeurd.<p>%s",
 
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
+// TODO: fix form.display_options.note_on_separate_row. Kolom does not seem correct. Note on separate ROW (not column).
 'form.display_options.note_on_separate_row' => 'Notitie in aparte kolom',
-// TODO: translate the following.
-// 'form.display_options.not_complete_days' => 'Not complete days',
-// 'form.display_options.custom_css' => 'Custom CSS',
+'form.display_options.not_complete_days' => 'Niet complete dagen',
+'form.display_options.custom_css' => 'Aangepaste CSS',
 
 // Work plugin strings. See example at https://timetracker.anuko.com/work.php
-// TODO: translate the following.
-// 'work.error.work_not_available' => 'Work item is not available.',
-// 'work.error.offer_not_available' => 'Offer is not available.',
-// 'work.type.one_time' => 'one time', // Work type is "one time job" for well defined work ("do exactly this").
-// 'work.type.ongoing' => 'ongoing',   // Work type is "ongoing" for complex jobs (billed by the hour, multiple contractors, etc.)
-// 'work.label.own_work' => 'Own work',
-// 'work.label.own_offers' => 'Own offers',
-// 'work.label.offers' => 'Offers',
-// 'work.button.send_message' => 'Send message',
-// 'work.button.make_offer' => 'Make offer',
-// 'work.button.accept' => 'Accept',
-// 'work.button.decline' => 'Decline',
-// 'work.title.send_message' => 'Sending Message',
-// 'work.msg.message_sent' => 'Message sent.',
+'work.error.work_not_available' => 'Werk onderdeel is niet beschikbaar.',
+'work.error.offer_not_available' => 'Aanbod is niet beschikbaar.',
+'work.type.one_time' => 'eenmalig',
+'work.type.ongoing' => 'doorlopend',
+'work.label.own_work' => 'Eigen werk',
+'work.label.own_offers' => 'Eigen aanbod',
+'work.label.offers' => 'Aanbiedingen',
+'work.button.send_message' => 'Verstuur bericht',
+'work.button.make_offer' => 'maak aanbieding',
+'work.button.accept' => 'Accepteer',
+'work.button.decline' => 'Weiger',
+'work.title.send_message' => 'Bericht wordt verstuurd',
+'work.msg.message_sent' => 'Bericht is verstuurd.',
 );
