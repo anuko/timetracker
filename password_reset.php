@@ -39,7 +39,7 @@ if ($auth->isPasswordExternal()) {
 $cl_login = $request->getParameter('login');
 
 $form = new Form('resetPasswordForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','style'=>'width: 300px;','value'=>$cl_login));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','value'=>$cl_login));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.reset_password')));
 
 if ($request->isPost()) {
@@ -117,5 +117,5 @@ if ($request->isPost()) {
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.resetPasswordForm.login.focus()"');
 $smarty->assign('title', $i18n->get('title.reset_password'));
-$smarty->assign('content_page_name', 'password_reset.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'password_reset2.tpl');
+$smarty->display('index2.tpl');
