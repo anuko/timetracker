@@ -616,8 +616,7 @@ $i18n_key_words = array(
 'form.timesheet_view.disapprove_body' => "Jouw tijdenoverzicht %s is afgekeurd.<p>%s",
 
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
-// TODO: fix form.display_options.note_on_separate_row. Kolom does not seem correct. Note on separate ROW (not column).
-'form.display_options.note_on_separate_row' => 'Notitie in aparte kolom',
+'form.display_options.note_on_separate_row' => 'Notitie in aparte kolom', // Translator (Henk) comment: "kolom is the right word in Dutch."
 'form.display_options.not_complete_days' => 'Niet complete dagen',
 'form.display_options.custom_css' => 'Aangepaste CSS',
 
