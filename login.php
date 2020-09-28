@@ -85,13 +85,6 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('show_hint', $show_hint);
 $smarty->assign('onload', 'onLoad="document.loginForm.'.(!$cl_login?'login':'password').'.focus()"');
 $smarty->assign('title', $i18n->get('title.login'));
-if (defined('DEBUG_MOBILE'))
-  $smarty->assign('content_page_name', 'login2.tpl');
-else {
-  $smarty->assign('content_page_name', 'login.tpl');
-}
+$smarty->assign('content_page_name', 'login2.tpl');
 $smarty->assign('about_text', $i18n->get('form.login.about'));
-if (defined('DEBUG_MOBILE'))
-  $smarty->display('index2.tpl');
-else
-  $smarty->display('index.tpl');
+$smarty->display('index2.tpl');
