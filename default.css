@@ -106,6 +106,12 @@ div.user-details {
   color: red;
 }
 
+.page-messages {
+  margin-top: .5rem;
+  text-align: center;
+  color: blue;
+}
+
 .page-content {
   text-align: center;
 }
