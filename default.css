@@ -215,6 +215,22 @@ input.password-field {
   width: 237px;
 }
 
+.small-screen-calendar {
+  display: none;
+  width: 210px;
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.large-screen-calendar {
+  display: inline-block;
+  width: 210px;
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto
+}
+
 @media screen and (max-width: 600px) {
 
   .large-screen-label {
@@ -223,6 +239,14 @@ input.password-field {
 
   .small-screen-label {
     display: block;
+  }
+
+  .small-screen-calendar {
+    display: block;
+  }
+
+  .large-screen-calendar {
+    display: none;
   }
 
   .small-screen-form-control-separator {
