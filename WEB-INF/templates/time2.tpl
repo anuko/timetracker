@@ -34,6 +34,16 @@
           <td><label class="checkbox-label">{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td>
         </tr>
 {/if}
+{if $custom_fields && $custom_fields->timeFields}
+  {foreach $custom_fields->timeFields as $timeField}
+        {assign var="control_name" value='time_field_'|cat:$timeField['id']}
+        <tr class = "small-screen-label"><td><label for="{$control_name}">{$timeField['label']|escape}{if $timeField['required']} (*){/if}:</label></td></tr>
+        <tr>
+          <td class="large-screen-label"><label for="{$control_name}">{$timeField['label']|escape}{if $timeField['required']} (*){/if}:</label></td>
+          <td class="td-with-input">{$forms.timeRecordForm.$control_name.control}</td>
+        </tr>
+  {/foreach}
+{/if}
 
 
 

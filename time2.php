@@ -221,10 +221,9 @@ if ($custom_fields && $custom_fields->timeFields) {
   foreach ($custom_fields->timeFields as $timeField) {
     $field_name = 'time_field_'.$timeField['id'];
     if ($timeField['type'] == CustomFields::TYPE_TEXT) {
-      $form->addInput(array('type'=>'text','name'=>$field_name,'style'=>'width: 250px;','value'=>$timeCustomFields[$timeField['id']]['value']));
+      $form->addInput(array('type'=>'text','name'=>$field_name,'value'=>$timeCustomFields[$timeField['id']]['value']));
     } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
       $form->addInput(array('type'=>'combobox','name'=>$field_name,
-      'style'=>'width: 250px;',
       'data'=>CustomFields::getOptions($timeField['id']),
       'value'=>$timeCustomFields[$timeField['id']]['value'],
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
