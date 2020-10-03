@@ -44,12 +44,26 @@
         </tr>
   {/foreach}
 {/if}
-
-
-
-        <tr class = "small-screen-label"><td><label for="note1">{$i18n.label.note}:</label></td></tr>
+{if $show_project}
+        <tr class = "small-screen-label"><td><label for="project">{$i18n.label.project} (*):</label></td></tr>
         <tr>
-          <td class="large-screen-label"><label for="note1">{$i18n.label.note}:</label></td>
+          <td class="large-screen-label"><label for="project">{$i18n.label.project} (*):</label></td>
+          <td class="td-with-input">{$forms.timeRecordForm.project.control}</td>
+        </tr>
+{/if}
+{if $show_task}
+        <tr class = "small-screen-label"><td><label for="task">{$i18n.label.task}{if $task_required} (*){/if}:</label></td></tr>
+        <tr>
+          <td class = "large-screen-label"><label for="task">{$i18n.label.task}{if $task_required} (*){/if}:</label></td>
+          <td class="td-with-input">{$forms.timeRecordForm.task.control}</td>
+        </tr>
+{/if}
+
+
+
+        <tr class = "small-screen-label"><td><label for="note">{$i18n.label.note}:</label></td></tr>
+        <tr>
+          <td class="large-screen-label"><label for="note">{$i18n.label.note}:</label></td>
           <td>{$forms.timeRecordForm.note1.control}</td>
         </tr>
       </table>

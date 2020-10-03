@@ -239,7 +239,6 @@ if ($showProject) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillTaskDropdown(this.value);fillTemplateDropdown(this.value);prepopulateNote();',
     'name'=>'project',
-    'style'=>'width: 250px;',
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
@@ -278,7 +277,6 @@ if ($showTask) {
   $task_list = ttGroupHelper::getActiveTasks();
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
-    'style'=>'width: 250px;',
     'value'=>$cl_task,
     'data'=>$task_list,
     'datakeys'=>array('id','name'),
