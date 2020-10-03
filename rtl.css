@@ -15,3 +15,7 @@ html {
 .td-with-input {
   text-align: right;
 }
+
+.checkbox-label {
+  float: right;
+}

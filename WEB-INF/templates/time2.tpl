@@ -28,6 +28,15 @@
         </tr>
         <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
+{if $show_billable}
+        <tr>
+          <td class = "large-screen-label">&nbsp;</td>
+          <td><label class="checkbox-label">{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td>
+        </tr>
+{/if}
+
+
+
         <tr class = "small-screen-label"><td><label for="note1">{$i18n.label.note}:</label></td></tr>
         <tr>
           <td class="large-screen-label"><label for="note1">{$i18n.label.note}:</label></td>
