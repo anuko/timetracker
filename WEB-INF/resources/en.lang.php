@@ -441,6 +441,7 @@ $i18n_key_words = array(
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
 'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.duration_placeholder' => 'hh:mm or 0.0h',
 'form.time.billable' => 'Billable',
 'form.time.uncompleted' => 'Uncompleted',
 'form.time.remaining_quota' => 'Remaining quota',

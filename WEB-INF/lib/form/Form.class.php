@@ -55,6 +55,7 @@ class Form {
         $el = new TextField($params['name']);
         if (isset($params['class'])) $el->setCssClass($params['class']);
         if (isset($params['maxlength'])) $el->setMaxLength($params['maxlength']);
+        if (isset($params['placeholder'])) $el->setPLaceholder($params['placeholder']);
         break;
 
       case 'password':

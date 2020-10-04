@@ -32,6 +32,7 @@ class FormElement {
   var $name;             // control name
   var $form_name = '';   // form name the control is in
   var $value = '';       // value of the control
+  var $placeholder = ''; // placeholder
   var $size = '';        // control size
   var $max_length = '';  // max length of text in control
   var $on_change = '';   // what happens when value of control changes
@@ -83,6 +84,7 @@ class FormElement {
 
   function setOnChange($str) { $this->on_change = $str; }
   function setOnClick($str) { $this->on_click = $str; }
+  function setPlaceholder($str) { $this->placeholder = $str; }
 
   function localize() {} // Localization occurs in derived classes and is dependent on control type.
                          // For example, in calendar control we need to localize day and month names.

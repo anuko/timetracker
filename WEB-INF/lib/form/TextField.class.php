@@ -49,6 +49,7 @@ class TextField extends FormElement {
     if (!empty($this->size)) $html .= " size=\"$this->size\"";
     if (!empty($this->style)) $html .= " style=\"$this->style\"";
     if (!empty($this->title)) $html .= " title=\"$this->title\"";
+    if (!empty($this->placeholder)) $html .= " placeholder=\"$this->placeholder\"";
 
     if($this->isEnabled()) {
       if (!empty($this->max_length)) $html .= " maxlength=\"$this->max_length\"";

@@ -66,13 +66,13 @@
         <tr class = "small-screen-label"><td><label for="start">{$i18n.label.start}:</label></td></tr>
         <tr>
           <td class = "large-screen-label"><label for="start">{$i18n.label.start}:</label></td>
-          <td class="td-with-input">{$forms.timeRecordForm.start.control}&nbsp;<input onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
+          <td class="td-with-input">{$forms.timeRecordForm.start.control} <img src="img/icon-now.png" onclick="setNow('start');" title="{$i18n.button.now}" alt="{$i18n.button.now}"></td>
         </tr>
         <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
         <tr class = "small-screen-label"><td><label for="finish">{$i18n.label.finish}:</label></td></tr>
         <tr>
           <td class = "large-screen-label"><label for="finish">{$i18n.label.finish}:</label></td>
-          <td class="td-with-input">{$forms.timeRecordForm.finish.control}&nbsp;<input onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
+          <td class="td-with-input">{$forms.timeRecordForm.finish.control}<img src="img/icon-now.png" onclick="setNow('finish');" title="{$i18n.button.now}" alt="{$i18n.button.now}"></td>
         </tr>
         <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
@@ -80,7 +80,7 @@
         <tr class = "small-screen-label"><td><label for="duration">{$i18n.label.duration}:</label></td></tr>
         <tr>
           <td class = "large-screen-label"><label for="duration">{$i18n.label.duration}:</label></td>
-          <td class="td-with-input">{$forms.timeRecordForm.duration.control}&nbsp;{if $user->getDecimalMark() == ','}{str_replace('.', ',', $i18n.form.time.duration_format)}{else}{$i18n.form.time.duration_format}{/if}:</td>
+          <td class="td-with-input">{$forms.timeRecordForm.duration.control}</td>
         </tr>
 {/if}
 
@@ -159,7 +159,7 @@
           <td>{$forms.timeRecordForm.task.control}</td>
         </tr>
 {/if}
-{if $show_start}
+{if !$show_start}
         <tr>
           <td align="right">{$i18n.label.start}:</td>
           <td>{$forms.timeRecordForm.start.control}&nbsp;<input onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
