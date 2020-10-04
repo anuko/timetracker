@@ -33,6 +33,7 @@
           <td class = "large-screen-label">&nbsp;</td>
           <td><label class="checkbox-label">{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td>
         </tr>
+        <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
 {if $custom_fields && $custom_fields->timeFields}
   {foreach $custom_fields->timeFields as $timeField}
@@ -42,6 +43,7 @@
           <td class="large-screen-label"><label for="{$control_name}">{$timeField['label']|escape}{if $timeField['required']} (*){/if}:</label></td>
           <td class="td-with-input">{$forms.timeRecordForm.$control_name.control}</td>
         </tr>
+        <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   {/foreach}
 {/if}
 {if $show_project}
@@ -50,6 +52,7 @@
           <td class="large-screen-label"><label for="project">{$i18n.label.project} (*):</label></td>
           <td class="td-with-input">{$forms.timeRecordForm.project.control}</td>
         </tr>
+        <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
 {if $show_task}
         <tr class = "small-screen-label"><td><label for="task">{$i18n.label.task}{if $task_required} (*){/if}:</label></td></tr>
@@ -57,6 +60,7 @@
           <td class = "large-screen-label"><label for="task">{$i18n.label.task}{if $task_required} (*){/if}:</label></td>
           <td class="td-with-input">{$forms.timeRecordForm.task.control}</td>
         </tr>
+        <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
 {if $show_start}
         <tr class = "small-screen-label"><td><label for="start">{$i18n.label.start}:</label></td></tr>
@@ -64,13 +68,21 @@
           <td class = "large-screen-label"><label for="start">{$i18n.label.start}:</label></td>
           <td class="td-with-input">{$forms.timeRecordForm.start.control}&nbsp;<input onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
         </tr>
+        <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
         <tr class = "small-screen-label"><td><label for="finish">{$i18n.label.finish}:</label></td></tr>
         <tr>
           <td class = "large-screen-label"><label for="finish">{$i18n.label.finish}:</label></td>
           <td class="td-with-input">{$forms.timeRecordForm.finish.control}&nbsp;<input onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
         </tr>
+        <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
-
+{if $show_duration}
+        <tr class = "small-screen-label"><td><label for="duration">{$i18n.label.duration}:</label></td></tr>
+        <tr>
+          <td class = "large-screen-label"><label for="duration">{$i18n.label.duration}:</label></td>
+          <td class="td-with-input">{$forms.timeRecordForm.duration.control}&nbsp;{if $user->getDecimalMark() == ','}{str_replace('.', ',', $i18n.form.time.duration_format)}{else}{$i18n.form.time.duration_format}{/if}:</td>
+        </tr>
+{/if}
 
 
 
