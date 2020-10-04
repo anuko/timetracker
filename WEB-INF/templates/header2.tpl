@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="content-type" content="text/html; charset={$smarty.const.CHARSET}">
+  <meta http-equiv="content-type" content="text/html; charset={constant('CHARSET')}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link href="{$smarty.const.DEFAULT_CSS}" rel="stylesheet" type="text/css">
+  <link href="{constant('DEFAULT_CSS')}" rel="stylesheet" type="text/css">
 {if $i18n.language.rtl}
-  <link href="{$smarty.const.RTL_CSS}" rel="stylesheet" type="text/css">
+  <link href="{constant('RTL_CSS')}" rel="stylesheet" type="text/css">
 {/if}
 {if $user->getCustomCss()}
   <link href="custom_css.php" rel="stylesheet" type="text/css">
@@ -36,7 +36,7 @@
   <table class="top-menu-table">
     <tr>
       <td><a href="site_map.php">{$i18n.label.menu}</a> </td>
-      <td><a href="{$smarty.const.HELP_LINK}">{$i18n.menu.help}</a></td>
+      <td><a href="{constant('HELP_LINK')}">{$i18n.menu.help}</a></td>
     </tr>
   </table>
 </div>
@@ -50,8 +50,8 @@
   <table class="top-menu-table">
     <tr>
       <td><a href="logout.php">{$i18n.menu.logout}</a></td>
-      <td><a href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a></td>
-      <td><a href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a></td>
+      <td><a href="{constant('FORUM_LINK')}" target="_blank">{$i18n.menu.forum}</a></td>
+      <td><a href="{constant('HELP_LINK')}" target="_blank">{$i18n.menu.help}</a></td>
     </tr>
   </table>
 </div>
@@ -85,8 +85,8 @@
     {if $user->can('manage_features')}
       <td><a href="plugins.php">{$i18n.menu.plugins}</a></td>
     {/if}
-      <td><a href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a></td>
-      <td><a href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a></td>
+      <td><a href="{constant('FORUM_LINK')}" target="_blank">{$i18n.menu.forum}</a></td>
+      <td><a href="{constant('HELP_LINK')}" target="_blank">{$i18n.menu.help}</a></td>
     </tr>
   </table>
 </div>
@@ -115,14 +115,14 @@
       <td><a href="invoices.php">{$i18n.title.invoices}</a></td>
     {/if}
     {if ($user->exists() && $user->isPluginEnabled('ch') && ($user->can('view_own_charts') || $user->can('view_charts'))) &&
-        ($smarty.const.MODE_PROJECTS == $user->getTrackingMode() || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode() ||
+        (constant('MODE_PROJECTS') == $user->getTrackingMode() || constant('MODE_PROJECTS_AND_TASKS') == $user->getTrackingMode() ||
         $user->isPluginEnabled('cl'))}
       <td><a href="charts.php">{$i18n.menu.charts}</a></td>
     {/if}
-    {if ($user->can('view_own_projects') || $user->can('manage_projects')) && ($smarty.const.MODE_PROJECTS == $user->getTrackingMode() || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode())}
+    {if ($user->can('view_own_projects') || $user->can('manage_projects')) && (constant('MODE_PROJECTS') == $user->getTrackingMode() || constant('MODE_PROJECTS_AND_TASKS') == $user->getTrackingMode())}
       <td><a href="projects.php">{$i18n.menu.projects}</a></td>
     {/if}
-    {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode() && ($user->can('view_own_tasks') || $user->can('manage_tasks')))}
+    {if (constant('MODE_PROJECTS_AND_TASKS') == $user->getTrackingMode() && ($user->can('view_own_tasks') || $user->can('manage_tasks')))}
       <td><a href="tasks.php">{$i18n.menu.tasks}</a></td>
     {/if}
     {if $user->can('view_users') || $user->can('manage_users')}
@@ -148,11 +148,11 @@
   <table class="top-menu-table">
     <tr>
       <td><a href="login.php">{$i18n.menu.login}</a></td>
-  {if isTrue('MULTIORG_MODE') && $smarty.const.AUTH_MODULE == 'db'}
+  {if isTrue('MULTIORG_MODE') && constant('AUTH_MODULE') == 'db'}
       <td><a href="register.php">{$i18n.menu.register}</a></td>
   {/if}
-      <td><a href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a></td>
-      <td><a href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a></td>
+      <td><a href="{constant('FORUM_LINK')}" target="_blank">{$i18n.menu.forum}</a></td>
+      <td><a href="{constant('HELP_LINK')}" target="_blank">{$i18n.menu.help}</a></td>
     </tr>
   </table>
 </div>

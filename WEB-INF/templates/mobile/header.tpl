@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="content-type" content="text/html; charset={$smarty.const.CHARSET}">
+  <meta http-equiv="content-type" content="text/html; charset={constant('CHARSET')}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="../favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-  <link href="../{$smarty.const.DEFAULT_CSS}" rel="stylesheet" type="text/css">
+  <link href="../{constant('DEFAULT_CSS')}" rel="stylesheet" type="text/css">
 {if $i18n.language.rtl}
-  <link href="../{$smarty.const.RTL_CSS}" rel="stylesheet" type="text/css">
+  <link href="../{constant('RTL_CSS')}" rel="stylesheet" type="text/css">
 {/if}
 {if $user->getCustomCss()}
   <link href="../custom_css.php" rel="stylesheet" type="text/css">
@@ -83,10 +83,10 @@
     {if $user->exists() && $user->isPluginEnabled('ex') && ($user->can('track_own_expenses') || $user->can('track_expenses'))}
            <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
     {/if}
-    {if ($user->can('view_own_projects') || $user->can('manage_projects')) && ($smarty.const.MODE_PROJECTS == $user->getTrackingMode() || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode())}
+    {if ($user->can('view_own_projects') || $user->can('manage_projects')) && (constant('MODE_PROJECTS') == $user->getTrackingMode() || constant('MODE_PROJECTS_AND_TASKS') == $user->getTrackingMode())}
            <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
     {/if}
-    {if ($user->can('view_own_tasks') || $user->can('manage_tasks')) && $smarty.const.MODE_PROJECTS_AND_TASKS == $user->getTrackingMode()}
+    {if ($user->can('view_own_tasks') || $user->can('manage_tasks')) && constant('MODE_PROJECTS_AND_TASKS') == $user->getTrackingMode()}
            <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
     {/if}
     {if $user->can('view_users') || $user->can('manage_users')}

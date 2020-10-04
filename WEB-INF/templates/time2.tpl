@@ -58,6 +58,21 @@
           <td class="td-with-input">{$forms.timeRecordForm.task.control}</td>
         </tr>
 {/if}
+{if $show_start}
+        <tr class = "small-screen-label"><td><label for="start">{$i18n.label.start}:</label></td></tr>
+        <tr>
+          <td class = "large-screen-label"><label for="start">{$i18n.label.start}:</label></td>
+          <td class="td-with-input">{$forms.timeRecordForm.start.control}&nbsp;<input onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
+        </tr>
+        <tr class = "small-screen-label"><td><label for="finish">{$i18n.label.finish}:</label></td></tr>
+        <tr>
+          <td class = "large-screen-label"><label for="finish">{$i18n.label.finish}:</label></td>
+          <td class="td-with-input">{$forms.timeRecordForm.finish.control}&nbsp;<input onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
+        </tr>
+{/if}
+
+
+
 
 
 
