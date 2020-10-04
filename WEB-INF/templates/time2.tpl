@@ -82,12 +82,26 @@
           <td class = "large-screen-label"><label for="duration">{$i18n.label.duration}:</label></td>
           <td class="td-with-input">{$forms.timeRecordForm.duration.control}</td>
         </tr>
+        <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_files}
+        <tr class = "small-screen-label"><td><label for="newfile">{$i18n.label.file}:</label></td></tr>
+        <tr>
+          <td class = "large-screen-label"><label for="newfile">{$i18n.label.file}:</label></td>
+          <td class="td-with-input">{$forms.timeRecordForm.newfile.control}</td>
+        </tr>
+        <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $template_dropdown}
+        <tr class = "small-screen-label"><td><label for="template">{$i18n.label.template}:</label></td></tr>
+        <tr>
+          <td class = "large-screen-label"><label for="template">{$i18n.label.template}:</label></td>
+          <td class="td-with-input">{$forms.timeRecordForm.template.control}</td>
+        </tr>
+        <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
 
-
-
-
-
+{* TODO: work in progress down from here... *}
         <tr class = "small-screen-label"><td><label for="note">{$i18n.label.note}:</label></td></tr>
         <tr>
           <td class="large-screen-label"><label for="note">{$i18n.label.note}:</label></td>

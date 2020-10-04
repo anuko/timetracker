@@ -311,7 +311,6 @@ if ($user->isPluginEnabled('tp')){
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillNote(this.value);',
       'name'=>'template',
-      'style'=>'width: 250px;',
       'data'=>$template_list,
       'datakeys'=>array('id','name'),
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
