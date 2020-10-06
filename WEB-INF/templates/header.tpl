@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="{constant('LANG_DEFAULT')}">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset={constant('CHARSET')}">
+  <meta charset="{constant('CHARSET')}">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link href="{constant('DEFAULT_CSS')}" rel="stylesheet" type="text/css">
+  <link href="{constant('DEFAULT_CSS')}" rel="stylesheet">
 {if $i18n.language.rtl}
-  <link href="{constant('RTL_CSS')}" rel="stylesheet" type="text/css">
+  <link href="{constant('RTL_CSS')}" rel="stylesheet">
 {/if}
 {if $user->getCustomCss()}
-  <link href="custom_css.php" rel="stylesheet" type="text/css">
+  <link href="custom_css.php" rel="stylesheet">
 {/if}
   <title>Time Tracker{if $title} - {$title}{/if}</title>
   <script src="js/strftime.js"></script>
