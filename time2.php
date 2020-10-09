@@ -322,10 +322,7 @@ if ($user->isPluginEnabled('tp')){
 }
 
 // Note control.
-if (!defined('NOTE_INPUT_HEIGHT'))
-  define('NOTE_INPUT_HEIGHT', 40);
-$form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 600px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
-$form->addInput(array('type'=>'textarea','name'=>'note1','value'=>$cl_note));
+$form->addInput(array('type'=>'textarea','name'=>'note','value'=>$cl_note));
 
 // Calendar.
 $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar

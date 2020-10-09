@@ -236,6 +236,13 @@ input.password-field {
   float: left;
 }
 
+#note {
+  width: 100%;
+  margin: 0;
+  height: 4rem;
+  resize: none;
+}
+
 @media screen and (max-width: 600px) {
 
   .large-screen-label {
