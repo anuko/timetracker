@@ -1,5 +1,6 @@
 {include file="time_script.tpl"}
 
+{* TODO: remove this from here to css *}
 <style>
 .not_billable td {
   color: #ff6666;
@@ -9,9 +10,7 @@
 {$forms.timeRecordForm.open}
 <div class="small-screen-calendar">{$forms.timeRecordForm.date.control}</div>
 <table class="centered-table">
-  <tr>
-    <td>
-      <table class="centered-table">
+  <tr><td></td><td></td><td rowspan="{$large_screen_calendar_row_span}"><div class="large-screen-calendar">{$forms.timeRecordForm.date.control}</div></td></tr>
 {if $user_dropdown}
         <tr class = "small-screen-label"><td><label for="user">{$i18n.label.user}:</label></td></tr>
         <tr>
@@ -103,18 +102,11 @@
         <tr class = "small-screen-label"><td><label for="note">{$i18n.label.note}:</label></td></tr>
         <tr>
           <td class="large-screen-label"><label for="note">{$i18n.label.note}:</label></td>
-          <td>{$forms.timeRecordForm.note.control}</td>
+          <td colspan="2">{$forms.timeRecordForm.note.control}</td>
         </tr>
         <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
-      </table>
-    </td>
-    <td><div class="large-screen-calendar">{$forms.timeRecordForm.date.control}</div></td>
-  </tr>
-  <tr><td colspan="2">{$forms.timeRecordForm.btn_submit.control}</td>
+  <tr><td colspan="3">{$forms.timeRecordForm.btn_submit.control}</td>
 </table>
-
-
-
 
 
 {* TODO: work in progress down from here... *}

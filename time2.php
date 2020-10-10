@@ -177,6 +177,7 @@ if ($custom_fields && $custom_fields->timeFields) {
 
 // Elements of timeRecordForm.
 $form = new Form('timeRecordForm');
+$largeScreenCalendarRowSpan = 1; // Number of rows calendar spans on large screens.
 
 // Dropdown for user and a hidden control to indicate user change.
 if ($user->can('track_time')) {
@@ -194,6 +195,7 @@ if ($user->can('track_time')) {
       'data'=>$user_list,
       'datakeys'=>array('id','name')));
     $form->addInput(array('type'=>'hidden','name'=>'user_changed'));
+    $largeScreenCalendarRowSpan += 2;
     $smarty->assign('user_dropdown', 1);
   }
 }
@@ -209,6 +211,7 @@ if (MODE_TIME == $trackingMode && $showClient) {
     'data'=>$active_clients,
     'datakeys'=>array('id', 'name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
+  $largeScreenCalendarRowSpan += 2;
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
@@ -228,6 +231,7 @@ if ($custom_fields && $custom_fields->timeFields) {
       'value'=>$timeCustomFields[$timeField['id']]['value'],
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
     }
+    $largeScreenCalendarRowSpan += 2;
   }
 }
 
@@ -243,6 +247,7 @@ if ($showProject) {
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
+  $largeScreenCalendarRowSpan += 2;
 
   // Client dropdown.
   if ($showClient) {
@@ -269,6 +274,7 @@ if ($showProject) {
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
+    $largeScreenCalendarRowSpan += 2;
   }
 }
 
@@ -281,6 +287,7 @@ if ($showTask) {
     'data'=>$task_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
+  $largeScreenCalendarRowSpan += 2;
 }
 
 // Start and finish controls.
@@ -292,17 +299,21 @@ if ($showStart) {
     $form->getElement('start')->setEnabled(false);
     $form->getElement('finish')->setEnabled(false);
   }
+  $largeScreenCalendarRowSpan += 4;
 }
 
 // Duration control.
 if ($showDuration) {
   $placeholder = $user->getDecimalMark() == ',' ? str_replace('.', ',', $i18n->get('form.time.duration_placeholder')) : $i18n->get('form.time.duration_placeholder');
   $form->addInput(array('type'=>'text','name'=>'duration','placeholder'=>$placeholder,'value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
+  $largeScreenCalendarRowSpan += 2;
 }
 
 // File upload control.
-if ($showFiles)
+if ($showFiles) {
   $form->addInput(array('type'=>'upload','name'=>'newfile','value'=>$i18n->get('button.submit')));
+  $largeScreenCalendarRowSpan += 2;
+}
 
 // If we have templates, add a dropdown to select one.
 if ($user->isPluginEnabled('tp')){
@@ -318,6 +329,7 @@ if ($user->isPluginEnabled('tp')){
     $smarty->assign('bind_templates_with_projects', $config->getDefinedValue('bind_templates_with_projects'));
     $smarty->assign('prepopulate_note', $config->getDefinedValue('prepopulate_note'));
     $smarty->assign('template_list', $template_list);
+    $largeScreenCalendarRowSpan += 2;
   }
 }
 
@@ -472,6 +484,7 @@ if ($request->isPost()) {
 $week_total = ttTimeHelper::getTimeForWeek($selected_date);
 $timeRecords = ttTimeHelper::getRecords($cl_date, $showFiles);
 
+$smarty->assign('large_screen_calendar_row_span', $largeScreenCalendarRowSpan);
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
