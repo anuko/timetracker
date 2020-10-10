@@ -141,6 +141,32 @@ div.page-hint {
   display: inline-block;
 }
 
+.record-list {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.x-scrollable-table {
+  display: inline-block;
+  margin-top: .5rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: .5rem;
+  background-color: #f0f0f0;
+}
+
+.x-scrollable-table th {
+  white-space: nowrap;
+}
+
+.text-cell {
+  text-align: left;
+}
+
+.time-cell {
+  text-align: right;
+}
+
 .large-screen-label {
   text-align: right;
   vertical-align: middle;
@@ -179,7 +205,6 @@ div.page-hint {
   padding: .2rem;
   background-color: #eeeeee;
 }
-
 .version-and-copyright {
   text-align: center;
   padding: .5rem;
