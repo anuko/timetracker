@@ -142,10 +142,9 @@ div.page-hint {
 }
 
 .record-list {
-  margin-top: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin: 1rem;
 }
+
 .x-scrollable-table {
   display: inline-block;
   margin-top: .5rem;
@@ -164,6 +163,10 @@ div.page-hint {
 }
 
 .time-cell {
+  text-align: right;
+}
+
+.note-header-cell {
   text-align: right;
 }
 
@@ -264,6 +267,18 @@ input.password-field {
   margin: 0;
   height: 4rem;
   resize: none;
+}
+
+.day-totals-col1 {
+  text-align: left;
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+.day-totals-col2 {
+  padding-left: .5rem;
+  padding-right: .5rem;
+  text-align: right;
 }
 
 @media screen and (max-width: 600px) {

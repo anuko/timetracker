@@ -196,7 +196,7 @@
   </tr>
     {if $show_note_row && $record.comment}
   <tr>
-    <td>{$i18n.label.note}:</td>
+    <td class="note-header-cell">{$i18n.label.note}:</td>
     <td colspan="{$colspan}" class="text-cell">{$record.comment|escape}</td>
   </tr>
     {/if}
@@ -205,6 +205,33 @@
 </div>
 {/if}
 {$forms.timeRecordForm.close}
+
+<div class="day-totals">
+<table class="centered-table">
+  <tr>
+    <td class="day-totals-col1">{$i18n.label.week_total}: {$week_total}</td>
+    <td class="day-totals-col2">{$i18n.label.day_total}: {$day_total}</td>
+  </tr>
+{if $user->isPluginEnabled('mq')}
+  <tr>
+    <td class="day-totals-col1">{$i18n.label.month_total}: {$month_total}</td>
+    {if $over_balance}
+    <td class="day-totals-col2">{$i18n.form.time.over_balance}: <span style="color: green;">{$balance_remaining}</span></td>
+    {else}
+    <td class="day-totals-col2">{$i18n.form.time.remaining_balance}: <span style="color: red;">{$balance_remaining}</span></td>
+    {/if}
+  </tr>
+  <tr>
+    <td class="day-totals-col1">{$i18n.label.quota}: {$month_quota}</td>
+    {if $over_quota}
+    <td class="day-totals-col2">{$i18n.form.time.over_quota}: <span style="color: green;">{$quota_remaining}</span></td>
+    {else}
+    <td class="day-totals-col2">{$i18n.form.time.remaining_quota}: <span style="color: red;">{$quota_remaining}</span></td>
+    {/if}
+  </tr>
+{/if}
+</table>
+</div>
 
 
 
