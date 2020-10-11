@@ -218,7 +218,7 @@ if ('csv' == $type) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $checkbox_control_name = 'show_'.$field_name;
-        if ($bean->getAttribute($checkbox_control_name)) print ',"'.str_replace('"','""',$userField['label']).'"';
+        if ($bean->getAttribute($checkbox_control_name)) print ',"'.ttNeutralizeForCsv($userField['label']).'"';
       }
     }
     if ($bean->getAttribute('chclient')) print ',"'.$i18n->get('label.client').'"';
@@ -229,7 +229,7 @@ if ('csv' == $type) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         $checkbox_control_name = 'show_'.$field_name;
-        if ($bean->getAttribute($checkbox_control_name)) print ',"'.str_replace('"','""',$timeField['label']).'"';
+        if ($bean->getAttribute($checkbox_control_name)) print ',"'.ttNeutralizeForCsv($timeField['label']).'"';
       }
     }
     if ($bean->getAttribute('chstart')) print ',"'.$i18n->get('label.start').'"';
@@ -248,24 +248,24 @@ if ('csv' == $type) {
     // Print items.
     foreach ($items as $item) {
       print '"'.$item['date'].'"';
-      if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print ',"'.str_replace('"','""',$item['user']).'"';
+      if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print ',"'.ttNeutralizeForCsv($item['user']).'"';
       // User custom fields.
       if ($custom_fields && $custom_fields->userFields) {
         foreach ($custom_fields->userFields as $userField) {
           $field_name = 'user_field_'.$userField['id'];
           $checkbox_control_name = 'show_'.$field_name;
-          if ($bean->getAttribute($checkbox_control_name)) print ',"'.str_replace('"','""',$item[$field_name]).'"';
+          if ($bean->getAttribute($checkbox_control_name)) print ',"'.ttNeutralizeForCsv($item[$field_name]).'"';
         }
       }
-      if ($bean->getAttribute('chclient')) print ',"'.str_replace('"','""',$item['client']).'"';
-      if ($bean->getAttribute('chproject')) print ',"'.str_replace('"','""',$item['project']).'"';
-      if ($bean->getAttribute('chtask')) print ',"'.str_replace('"','""',$item['task']).'"';
+      if ($bean->getAttribute('chclient')) print ',"'.ttNeutralizeForCsv($item['client']).'"';
+      if ($bean->getAttribute('chproject')) print ',"'.ttNeutralizeForCsv($item['project']).'"';
+      if ($bean->getAttribute('chtask')) print ',"'.ttNeutralizeForCsv($item['task']).'"';
       // Time custom fields.
       if ($custom_fields && $custom_fields->timeFields) {
         foreach ($custom_fields->timeFields as $timeField) {
           $field_name = 'time_field_'.$timeField['id'];
           $checkbox_control_name = 'show_'.$field_name;
-          if ($bean->getAttribute($checkbox_control_name)) print ',"'.str_replace('"','""',$item[$field_name]).'"';
+          if ($bean->getAttribute($checkbox_control_name)) print ',"'.ttNeutralizeForCsv($item[$field_name]).'"';
         }
       }
       if ($bean->getAttribute('chstart')) print ',"'.$item['start'].'"';
@@ -277,7 +277,7 @@ if ('csv' == $type) {
         print ',"'.$val.'"';
       }
       if ($bean->getAttribute('chunits')) print ',"'.$item['units'].'"';
-      if ($bean->getAttribute('chnote')) print ',"'.str_replace('"','""',$item['note']).'"';
+      if ($bean->getAttribute('chnote')) print ',"'.ttNeutralizeForCsv($item['note']).'"';
       if ($bean->getAttribute('chcost')) {
         if ($user->can('manage_invoices') || $user->isClient())
           print ',"'.$item['cost'].'"';
@@ -290,8 +290,8 @@ if ('csv' == $type) {
         $ip = $item['modified'] ? $item['modified_ip'].' '.$item['modified'] : $item['created_ip'].' '.$item['created'];
         print ',"'.$ip.'"';
       }
-      if ($bean->getAttribute('chinvoice')) print ',"'.str_replace('"','""',$item['invoice']).'"';
-      if ($bean->getAttribute('chtimesheet')) print ',"'.str_replace('"','""',$item['timesheet_name']).'"';
+      if ($bean->getAttribute('chinvoice')) print ',"'.ttNeutralizeForCsv($item['invoice']).'"';
+      if ($bean->getAttribute('chtimesheet')) print ',"'.ttNeutralizeForCsv($item['timesheet_name']).'"';
       print "\n";
     }
   }

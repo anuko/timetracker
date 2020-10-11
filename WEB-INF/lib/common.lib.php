@@ -459,3 +459,12 @@ function ttRandomString($length = 32) {
   }
   return $randomString;
 }
+
+// ttNeutralizeForCsv neutralizes user input for export to CSV files
+// by removing =, +, -, and @ characters from the beginning of cell values.
+// This mitigates a risk of CSV injection, see https://owasp.org/www-community/attacks/CSV_Injection
+// Additionally, it replaces each quote character with a double quote.
+function ttNeutralizeForCsv($val) {
+  $result = ltrim($val, '=+-@');
+  return str_replace('"', '""', $result);
+}
