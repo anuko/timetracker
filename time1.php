@@ -177,7 +177,6 @@ if ($custom_fields && $custom_fields->timeFields) {
 
 // Elements of timeRecordForm.
 $form = new Form('timeRecordForm');
-$largeScreenCalendarRowSpan = 1; // Number of rows calendar spans on large screens.
 
 // Dropdown for user and a hidden control to indicate user change.
 if ($user->can('track_time')) {
@@ -191,11 +190,11 @@ if ($user->can('track_time')) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'document.timeRecordForm.user_changed.value=1;document.timeRecordForm.submit();',
       'name'=>'user',
+      'style'=>'width: 250px;',
       'value'=>$user_id,
       'data'=>$user_list,
       'datakeys'=>array('id','name')));
     $form->addInput(array('type'=>'hidden','name'=>'user_changed'));
-    $largeScreenCalendarRowSpan += 2;
     $smarty->assign('user_dropdown', 1);
   }
 }
@@ -207,11 +206,11 @@ if (MODE_TIME == $trackingMode && $showClient) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
     'name'=>'client',
+    'style'=>'width: 250px;',
     'value'=>$cl_client,
     'data'=>$active_clients,
     'datakeys'=>array('id', 'name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
-  $largeScreenCalendarRowSpan += 2;
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
@@ -224,14 +223,14 @@ if ($custom_fields && $custom_fields->timeFields) {
   foreach ($custom_fields->timeFields as $timeField) {
     $field_name = 'time_field_'.$timeField['id'];
     if ($timeField['type'] == CustomFields::TYPE_TEXT) {
-      $form->addInput(array('type'=>'text','name'=>$field_name,'value'=>$timeCustomFields[$timeField['id']]['value']));
+      $form->addInput(array('type'=>'text','name'=>$field_name,'style'=>'width: 250px;','value'=>$timeCustomFields[$timeField['id']]['value']));
     } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
       $form->addInput(array('type'=>'combobox','name'=>$field_name,
+      'style'=>'width: 250px;',
       'data'=>CustomFields::getOptions($timeField['id']),
       'value'=>$timeCustomFields[$timeField['id']]['value'],
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
     }
-    $largeScreenCalendarRowSpan += 2;
   }
 }
 
@@ -243,11 +242,11 @@ if ($showProject) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillTaskDropdown(this.value);fillTemplateDropdown(this.value);prepopulateNote();',
     'name'=>'project',
+    'style'=>'width: 250px;',
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
-  $largeScreenCalendarRowSpan += 2;
 
   // Client dropdown.
   if ($showClient) {
@@ -270,11 +269,11 @@ if ($showProject) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'client',
+      'style'=>'width: 250px;',
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
-    $largeScreenCalendarRowSpan += 2;
   }
 }
 
@@ -283,11 +282,11 @@ if ($showTask) {
   $task_list = ttGroupHelper::getActiveTasks();
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
+    'style'=>'width: 250px;',
     'value'=>$cl_task,
     'data'=>$task_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
-  $largeScreenCalendarRowSpan += 2;
 }
 
 // Start and finish controls.
@@ -299,21 +298,15 @@ if ($showStart) {
     $form->getElement('start')->setEnabled(false);
     $form->getElement('finish')->setEnabled(false);
   }
-  $largeScreenCalendarRowSpan += 4;
 }
 
 // Duration control.
-if ($showDuration) {
-  $placeholder = $user->getDecimalMark() == ',' ? str_replace('.', ',', $i18n->get('form.time.duration_placeholder')) : $i18n->get('form.time.duration_placeholder');
-  $form->addInput(array('type'=>'text','name'=>'duration','placeholder'=>$placeholder,'value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
-  $largeScreenCalendarRowSpan += 2;
-}
+if ($showDuration)
+  $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
 
 // File upload control.
-if ($showFiles) {
+if ($showFiles)
   $form->addInput(array('type'=>'upload','name'=>'newfile','value'=>$i18n->get('button.submit')));
-  $largeScreenCalendarRowSpan += 2;
-}
 
 // If we have templates, add a dropdown to select one.
 if ($user->isPluginEnabled('tp')){
@@ -322,6 +315,7 @@ if ($user->isPluginEnabled('tp')){
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillNote(this.value);',
       'name'=>'template',
+      'style'=>'width: 250px;',
       'data'=>$template_list,
       'datakeys'=>array('id','name'),
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
@@ -329,12 +323,13 @@ if ($user->isPluginEnabled('tp')){
     $smarty->assign('bind_templates_with_projects', $config->getDefinedValue('bind_templates_with_projects'));
     $smarty->assign('prepopulate_note', $config->getDefinedValue('prepopulate_note'));
     $smarty->assign('template_list', $template_list);
-    $largeScreenCalendarRowSpan += 2;
   }
 }
 
 // Note control.
-$form->addInput(array('type'=>'textarea','name'=>'note','value'=>$cl_note));
+if (!defined('NOTE_INPUT_HEIGHT'))
+  define('NOTE_INPUT_HEIGHT', 40);
+$form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 600px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
 
 // Calendar.
 $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
@@ -484,7 +479,6 @@ if ($request->isPost()) {
 $week_total = ttTimeHelper::getTimeForWeek($selected_date);
 $timeRecords = ttTimeHelper::getRecords($cl_date, $showFiles);
 
-$smarty->assign('large_screen_calendar_row_span', $largeScreenCalendarRowSpan);
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
@@ -508,5 +502,5 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns();prepopulateNote();"');
 $smarty->assign('timestring', $selected_date->toString($user->getDateFormat()));
 $smarty->assign('title', $i18n->get('title.time'));
-$smarty->assign('content_page_name', 'time2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'time.tpl');
+$smarty->display('index.tpl');
