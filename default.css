@@ -311,6 +311,7 @@ input.password-field {
 
 .button-set {
   margin-top: .5rem;
+  margin-bottom: 1rem;
 }
 
 @media screen and (max-width: 600px) {

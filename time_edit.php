@@ -145,7 +145,6 @@ if (MODE_TIME == $trackingMode && $showClient) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
     'name'=>'client',
-    'style'=>'width: 250px;',
     'value'=>$cl_client,
     'data'=>$active_clients,
     'datakeys'=>array('id', 'name'),
@@ -169,7 +168,6 @@ if ($custom_fields && $custom_fields->timeFields) {
       $form->addInput(array('type'=>'text','name'=>$field_name,'value'=>$timeCustomFields[$timeField['id']]['value']));
     } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
       $form->addInput(array('type'=>'combobox','name'=>$field_name,
-      'style'=>'width: 250px;',
       'data'=>CustomFields::getOptions($timeField['id']),
       'value'=>$timeCustomFields[$timeField['id']]['value'],
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
@@ -185,7 +183,6 @@ if ($showProject) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillTaskDropdown(this.value);fillTemplateDropdown(this.value);prepopulateNote();',
     'name'=>'project',
-    'style'=>'width: 250px;',
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
@@ -212,7 +209,6 @@ if ($showProject) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'client',
-      'style'=>'width: 250px;',
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
@@ -225,7 +221,6 @@ if ($showTask) {
   $task_list = ttGroupHelper::getActiveTasks();
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
-    'style'=>'width: 250px;',
     'value'=>$cl_task,
     'data'=>$task_list,
     'datakeys'=>array('id','name'),
@@ -244,8 +239,10 @@ if ($showStart) {
 }
 
 // Duration control.
-if ($showDuration)
-  $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
+if ($showDuration) {
+  $placeholder = $user->getDecimalMark() == ',' ? str_replace('.', ',', $i18n->get('form.time.duration_placeholder')) : $i18n->get('form.time.duration_placeholder');
+  $form->addInput(array('type'=>'text','name'=>'duration','placeholder'=>$placeholder,'value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
+}
 
 // Date field.
 $form->addInput(array('type'=>'datefield','name'=>'date','maxlength'=>'20','value'=>$cl_date));
@@ -257,7 +254,6 @@ if ($user->isPluginEnabled('tp')){
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillNote(this.value);',
       'name'=>'template',
-      'style'=>'width: 250px;',
       'data'=>$template_list,
       'datakeys'=>array('id','name'),
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
@@ -269,7 +265,7 @@ if ($user->isPluginEnabled('tp')){
 }
 
 // Note control.
-$form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 250px; height: 200px;','value'=>$cl_note));
+$form->addInput(array('type'=>'textarea','name'=>'note','value'=>$cl_note));
 
 // Hidden control for record id.
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
@@ -490,5 +486,5 @@ $smarty->assign('task_list', $task_list);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('title', $i18n->get('title.edit_time_record'));
-$smarty->assign('content_page_name', 'time_edit.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'time_edit2.tpl');
+$smarty->display('index2.tpl');
