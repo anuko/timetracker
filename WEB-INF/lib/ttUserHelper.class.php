@@ -324,6 +324,10 @@ class ttUserHelper {
     $sql = "update tt_users set password = md5(".$mdb2->quote($password).") where id = $user_id";
     $affected = $mdb2->exec($sql);
 
+    if (!is_a($affected, 'PEAR_Error')) {
+      $sql = "delete from tt_tmp_refs where user_id = $user_id";
+      $affected = $mdb2->exec($sql);
+    }
     return (!is_a($affected, 'PEAR_Error'));
   }
 
