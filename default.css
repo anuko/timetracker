@@ -281,6 +281,26 @@ input.password-field {
   text-align: right;
 }
 
+.not-billable {
+  color: #ff6666;
+}
+
+.remaining-quota {
+  color: red;
+}
+
+.remaining-quota-balance {
+  color: red;
+}
+
+.over-quota {
+  color: green;
+}
+
+.over-quota-balance {
+  color: green;
+}
+
 @media screen and (max-width: 600px) {
 
   .large-screen-label {

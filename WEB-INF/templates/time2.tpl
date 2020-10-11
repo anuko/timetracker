@@ -1,12 +1,5 @@
 {include file="time_script.tpl"}
 
-{* TODO: remove this from here to css *}
-<style>
-.not_billable td {
-  color: #ff6666;
-}
-</style>
-
 {$forms.timeRecordForm.open}
 <div class="small-screen-calendar">{$forms.timeRecordForm.date.control}</div>
 <table class="centered-table">
@@ -141,7 +134,7 @@
     <th></th>
   </tr>
   {foreach $time_records as $record}
-  <tr>
+  <tr{if !$record.billable} class="not-billable"{/if}>
     {if $show_client}
     <td class="text-cell">{$record.client|escape}</td>
     {/if}
@@ -216,17 +209,17 @@
   <tr>
     <td class="day-totals-col1">{$i18n.label.month_total}: {$month_total}</td>
     {if $over_balance}
-    <td class="day-totals-col2">{$i18n.form.time.over_balance}: <span style="color: green;">{$balance_remaining}</span></td>
+    <td class="day-totals-col2">{$i18n.form.time.over_balance}: <span class="over-quota-balance">{$balance_remaining}</span></td>
     {else}
-    <td class="day-totals-col2">{$i18n.form.time.remaining_balance}: <span style="color: red;">{$balance_remaining}</span></td>
+    <td class="day-totals-col2">{$i18n.form.time.remaining_balance}: <span class="remaining-quota-balance">{$balance_remaining}</span></td>
     {/if}
   </tr>
   <tr>
     <td class="day-totals-col1">{$i18n.label.quota}: {$month_quota}</td>
     {if $over_quota}
-    <td class="day-totals-col2">{$i18n.form.time.over_quota}: <span style="color: green;">{$quota_remaining}</span></td>
+    <td class="day-totals-col2">{$i18n.form.time.over_quota}: <span class="over-quota">{$quota_remaining}</span></td>
     {else}
-    <td class="day-totals-col2">{$i18n.form.time.remaining_quota}: <span style="color: red;">{$quota_remaining}</span></td>
+    <td class="day-totals-col2">{$i18n.form.time.remaining_quota}: <span class="remaining-quota">{$quota_remaining}</span></td>
     {/if}
   </tr>
 {/if}
