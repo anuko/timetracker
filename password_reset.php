@@ -64,6 +64,11 @@ if ($request->isPost()) {
   if ($err->no()) {
     $user = new ttUser($cl_login); // Note: reusing $user from initialize.php here.
 
+    // Protection against flooding user mailbox with too many password reset emails.
+    if (ttUserHelper::recentRefExists($user->id)) $err->add($i18n->get('error.access_denied'));
+  }
+
+  if ($err->no()) {
     // Prepare and save a temporary reference for user.
     $temp_ref = md5(uniqid());
     ttUserHelper::saveTmpRef($temp_ref, $user->id);

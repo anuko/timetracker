@@ -306,6 +306,34 @@ class ttUserHelper {
     return true;
   }
 
+  // The recentRefExists determines if a reasonably recent user reference already exists.
+  // We do it similar to ttRegistrator::registeredRecently().
+  static function recentRefExists($user_id) {
+    $mdb2 = getConnection();
+
+    $sql = "select count(*) as cnt from tt_tmp_refs where user_id = $user_id and created > now() - interval 15 minute";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    $val = $res->fetchRow();
+    if ($val['cnt'] == 0)
+      return false; // No references in last 15 minutes.
+    if ($val['cnt'] >= 2)
+      return true;  // 2 or more references in last 15 mintes.
+
+    // If we are here, there was exactly one reference during last 15 minutes.
+    // Determine if it occurred within the last minute in a separate query.
+    $sql = "select created from tt_tmp_refs where user_id = $user_id and created > now() - interval 1 minute";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    $val = $res->fetchRow();
+    if ($val)
+      return true;
+
+    return false;
+  }
+
   // The saveTmpRef saves a temporary reference for user that is used to reset user password.
   static function saveTmpRef($ref, $user_id) {
     $mdb2 = getConnection();
