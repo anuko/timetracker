@@ -309,6 +309,10 @@ input.password-field {
   margin-top: .5rem;
 }
 
+.button-set {
+  margin-top: .5rem;
+}
+
 @media screen and (max-width: 600px) {
 
   .large-screen-label {

@@ -19,3 +19,23 @@ html {
 .checkbox-label {
   float: right;
 }
+
+.day-totals-col1 {
+  text-align: right;
+}
+
+.day-totals-col2 {
+  text-align: left;
+}
+
+.text-cell {
+  text-align: right;
+}
+
+.time-cell {
+  text-align: left;
+}
+
+.note-header-cell {
+  text-align: left;
+}
