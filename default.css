@@ -158,6 +158,10 @@ div.page-hint {
   white-space: nowrap;
 }
 
+.x-scrollable-table td {
+  padding: .25rem;
+}
+
 .text-cell {
   text-align: left;
 }
