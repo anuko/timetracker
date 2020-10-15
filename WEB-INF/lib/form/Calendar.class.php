@@ -186,21 +186,11 @@ class Calendar extends FormElement {
     // Finished printing calendar table.
 
     // Print Today link.
-    $html .= "  <tr><td colspan=\"7\" align=\"center\"><a id=\"today_link\" href=\"?".$this->name."=".strftime(DB_DATEFORMAT)."\" tabindex=\"-1\">".$i18n->get('label.today')."</a></td></tr>\n";
+    $html .= "  <tr><td colspan=\"7\" align=\"center\"><a class=\"today_link\" href=\"?".$this->name."=".strftime(DB_DATEFORMAT)."\" tabindex=\"-1\">".$i18n->get('label.today')."</a></td></tr>\n";
     $html .= "</table>\n";
 
     // Add a hidden control for selected date.
     $html .= "<input type=\"hidden\" name=\"$this->name\" value=\"$selectedDate\">\n";
-
-    // Add script to adjust today link to match browser today, as PHP may run in a different timezone.
-    $html .= "<script>\n";
-    $html .= "function adjustToday() {\n";
-    $html .= "  var browser_today = new Date();\n";
-    $html .= "  document.getElementById('today_link').href = '?$this->name='+browser_today.strftime('".DB_DATEFORMAT."');\n";
-    $html .= "}\n";
-    $html .= "adjustToday();\n";
-    $html .= "</script>\n";
-
     $html .= "<!-- end of calendar -->\n\n";
     return $html;
   }

@@ -312,4 +312,22 @@ function get_time() {
   var date = new Date();
   return date.strftime("%H:%M");
 }
+
+// adjustTodayLinks adjusts today links to match today in user browser on load and also on click.
+function adjustTodayLinks() {
+  var today_links = document.getElementsByClassName("today_link");
+  var i;
+  var browser_today = new Date();
+  for (i = 0; i < today_links.length; i++) {
+    today_links[i].href = '?date='+browser_today.strftime("%Y-%m-%d");
+    today_links[i].onclick = function() {
+      var today = new Date();
+      var links = document.getElementsByClassName("today_link");
+      var j;
+      for (j = 0; j < links.length; j++) {
+        links[j].href = '?date='+today.strftime("%Y-%m-%d");
+      }
+    }
+  }
+}
 </script>
