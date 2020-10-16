@@ -180,6 +180,14 @@ div.page-hint {
   display: table-cell;
 }
 
+.large-screen-chart-list {
+  display: table-cell;
+}
+
+.small-screen-chart-list {
+  display: none;
+}
+
 .small-screen-label {
   text-align: left;
   display: none;
@@ -245,6 +253,21 @@ input.password-field {
 
 .dropdown-field {
   width: 237px;
+}
+
+.chart-image {
+  width: 300px;
+  height: 300px;
+}
+
+.chart-color-cell {
+  width: .4rem;
+  height: 1rem;
+}
+
+.chart-description-cell {
+  text-align: left;
+  padding-left: .25rem;
 }
 
 .small-screen-calendar {
@@ -318,6 +341,14 @@ input.password-field {
 
   .large-screen-label {
     display: none;
+  }
+
+  .large-screen-chart-list {
+    display: none;
+  }
+
+  .small-screen-chart-list {
+    display: table-cell;
   }
 
   .small-screen-label {

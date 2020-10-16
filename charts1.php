@@ -112,7 +112,6 @@ if ($request->isPost()) {
 
 // Elements of chartForm.
 $chart_form = new Form('chartForm');
-$largeScreenCalendarRowSpan = 1; // Number of rows calendar spans on large screens.
 
 // User dropdown. Changes the user "on behalf" of whom we are working.
 if ($user->can('view_charts')) {
@@ -131,7 +130,6 @@ if ($user->can('view_charts')) {
       'datakeys'=>array('id','name'),
     ));
     $chart_form->addInput(array('type'=>'hidden','name'=>'user_changed'));
-    $largeScreenCalendarRowSpan += 2;
     $smarty->assign('user_dropdown', 1);
   }
 }
@@ -151,7 +149,6 @@ $chart_form->addInput(array('type' => 'combobox',
   'value' => $cl_interval,
   'data' => $intervals
 ));
-$largeScreenCalendarRowSpan += 2;
 
 // Chart type options.
 $chart_selector = (MODE_PROJECTS_AND_TASKS == $tracking_mode || $user->isPluginEnabled('cl'));
@@ -171,7 +168,6 @@ if ($chart_selector) {
     'value' => $cl_type,
     'data' => $types
   ));
-  $largeScreenCalendarRowSpan += 2;
 }
 
 // Calendar.
@@ -223,11 +219,9 @@ if (is_array($img_files)) {
 $chart->renderEx(array('fileName'=>$file_name,'hideLogo'=>true,'hideTitle'=>true,'hideLabel'=>true));
 // At this point libchart usage is complete and we have chart image on disk.
 
-$smarty->assign('large_screen_calendar_row_span', $largeScreenCalendarRowSpan);
 $smarty->assign('img_file_name', $img_ref);
 $smarty->assign('chart_selector', $chart_selector);
-$smarty->assign('onload', 'onLoad="adjustTodayLinks()"');
 $smarty->assign('forms', array($chart_form->getName() => $chart_form->toArray()));
 $smarty->assign('title', $i18n->get('title.charts'));
-$smarty->assign('content_page_name', 'charts2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'charts.tpl');
+$smarty->display('index.tpl');
