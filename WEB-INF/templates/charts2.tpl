@@ -1,3 +1,6 @@
+{* Copyright (c) Anuko International Ltd. (https://www.anuko.com
+License: See license.txt *}
+
 <script>
 // adjustTodayLinks adjusts today links to match today in user browser on load and also on click.
 function adjustTodayLinks() {
@@ -51,7 +54,7 @@ function adjustTodayLinks() {
   <tr>
     <td><img class="chart-image" src="{$img_file_name}"></td>
     <td class="large-screen-chart-list">
-      <table>
+      <table class="chart-list">
       {section name=i loop=$totals}
       {if $smarty.section.i.index <= 12}
         <tr><td class="chart-color-cell" style="background-color:{$totals[i].color_html};"></td><td class="chart-description-cell">{$totals[i].name|escape}</td></tr>
@@ -66,7 +69,7 @@ function adjustTodayLinks() {
 <table class="centered-table">
   <tr>
     <td class="small-screen-chart-list">
-      <table>
+      <table class="chart-list">
       {section name=i loop=$totals}
       {if $smarty.section.i.index <= 12}
         <tr><td class="chart-color-cell" style="background-color:{$totals[i].color_html};"></td><td class="chart-description-cell">{$totals[i].name|escape}</td></tr>
