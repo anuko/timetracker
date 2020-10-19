@@ -1,30 +1,6 @@
 <?php
-// +----------------------------------------------------------------------+
-// | Anuko Time Tracker
-// +----------------------------------------------------------------------+
-// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
-// +----------------------------------------------------------------------+
-// | LIBERAL FREEWARE LICENSE: This source code document may be used
-// | by anyone for any purpose, and freely redistributed alone or in
-// | combination with other software, provided that the license is obeyed.
-// |
-// | There are only two ways to violate the license:
-// |
-// | 1. To redistribute this code in source form, with the copyright
-// |    notice or license removed or altered. (Distributing in compiled
-// |    forms without embedded copyright notices is permitted).
-// |
-// | 2. To redistribute modified versions of this code in *any* form
-// |    that bears insufficient indications that the modifications are
-// |    not the work of the original author(s).
-// |
-// | This license applies to this document only, not any other software
-// | that it may be combined with.
-// |
-// +----------------------------------------------------------------------+
-// | Contributors:
-// | https://www.anuko.com/time_tracker/credits.htm
-// +----------------------------------------------------------------------+
+/* Copyright (c) Anuko International Ltd. (https://www.anuko.com
+License: See license.txt */
 
 // import() function loads a class.
 function import($class_name) {
@@ -105,13 +81,6 @@ function import($class_name) {
 		return null;
 	}
 
-	function stripslashes_deep($value) {
-	    $value = is_array($value) ?
-                array_map('stripslashes_deep', $value) :
-                stripslashes($value);
-    	return $value;
-	}
-
 	function &getConnection() {
         if (!isset($GLOBALS["_MDB2_CONNECTION"])) {
 
@@ -141,13 +110,6 @@ function time_to_decimal($val) {
   $decimalTime = $parts[0].$user->decimal_mark.$minutePercent; // Construct decimal representation of time value.
 
   return $decimalTime;
-}
-
-function magic_quotes_off()
-{
-  $_POST = array_map('stripslashes_deep', $_POST);
-  $_GET = array_map('stripslashes_deep', $_GET);
-  $_COOKIE = array_map('stripslashes_deep', $_COOKIE);
 }
 
 // check_extension checks whether a required PHP extension is loaded and dies if not so.
