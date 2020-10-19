@@ -823,9 +823,11 @@ class MDB2
             $parsed['dbsyntax'] = $str;
         }
 
-        if (!count($dsn)) {
-            return $parsed;
-        }
+        if (is_array($dsn) || $dsn instanceof Countable) { // Added by Nik on Oct 19, 2020 to avoid flooding logs with warnings.
+            if (!count($dsn)) {
+                return $parsed;
+            }
+        } // Ideally, this should be fixed in MDB2 package.
 
         // Get (if found): username and password
         // $dsn => username:password@protocol+hostspec/database

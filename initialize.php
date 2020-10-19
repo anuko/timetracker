@@ -7,13 +7,13 @@ License: See license.txt */
 if (!defined('E_STRICT')) define('E_STRICT', 2048);
 // if (!defined('E_DEPRECATED')) define('E_DEPRECATED', 8192);
 error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT); // & ~E_DEPRECATED);
-// E_ALL tends to change as PHP evloves, therefore we use & here instead of exclusive OR (^).
+// E_ALL tends to change as PHP evolves, therefore we use & here instead of exclusive OR (^).
 
 // Disable displaying errors on screen.
 ini_set('display_errors', 'Off');
 
 // require_once('init_auth.php');
-define("APP_VERSION", "1.19.23.5330");
+define("APP_VERSION", "1.19.23.5331");
 define("APP_DIR", dirname(__FILE__));
 define("LIBRARY_DIR", APP_DIR."/WEB-INF/lib");
 define("TEMPLATE_DIR", APP_DIR."/WEB-INF/templates");
