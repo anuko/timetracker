@@ -1,5 +1,5 @@
 <?php
-/* Copyright (c) Anuko International Ltd. (https://www.anuko.com
+/* Copyright (c) Anuko International Ltd. https://www.anuko.com
 License: See license.txt */
 
 // Note: This script uses Lichart PHP library and requires GD 2.0.1 or later.

@@ -1,5 +1,5 @@
 <?php
-/* Copyright (c) Anuko International Ltd. (https://www.anuko.com
+/* Copyright (c) Anuko International Ltd. https://www.anuko.com
 License: See license.txt */
 
 // import() function loads a class.
