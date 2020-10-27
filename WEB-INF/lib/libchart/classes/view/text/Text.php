@@ -1,6 +1,6 @@
 <?php
 	/* Libchart - PHP chart library
-	 * Copyright (C) 2005-2008 Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * Copyright (C) 2005-2008 Jean-Marc Trï¿½meaux (jm.tremeaux at gmail.com)
 	 * 
 	 * This program is free software: you can redistribute it and/or modify
 	 * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 	/**
 	 * Text drawing helper
 	 *
-	 * @author Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * @author Jean-Marc Trï¿½meaux (jm.tremeaux at gmail.com)
 	 */
 	class Text {
 		public $HORIZONTAL_LEFT_ALIGN = 1;
@@ -33,7 +33,7 @@
 		/**
 		 * Creates a new text drawing helper.
 		 */
-		public function Text() {
+		public function __construct() {
 			$baseDir = dirname(__FILE__) . "/../../../";
 		
 			// Free low-res fonts based on Bitstream Vera <http://dejavu.sourceforge.net/wiki/>

@@ -1,6 +1,6 @@
 <?php
 	/* Libchart - PHP chart library
-	 * Copyright (C) 2005-2008 Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * Copyright (C) 2005-2008 Jean-Marc Trï¿½meaux (jm.tremeaux at gmail.com)
 	 * 
 	 * This program is free software: you can redistribute it and/or modify
 	 * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 	/**
 	 * Base abstract class for rendering both horizontal and vertical bar charts.
 	 *
-	 * @author Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * @author Jean-Marc Trï¿½meaux (jm.tremeaux at gmail.com)
 	 */
 	abstract class BarChart extends Chart {
 		protected $bound;
@@ -33,8 +33,8 @@
 		 * @param integer width of the image
 		 * @param integer height of the image
 		 */
-		protected function BarChart($width, $height) {
-			parent::Chart($width, $height);
+		protected function __construct($width, $height) {
+			parent::__construct($width, $height);
 
 			// Initialize the bounds
 			$this->bound = new Bound();

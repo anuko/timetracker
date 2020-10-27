@@ -1,6 +1,6 @@
 <?php
 	/* Libchart - PHP chart library
-	 * Copyright (C) 2005-2008 Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * Copyright (C) 2005-2008 Jean-Marc Trï¿½meaux (jm.tremeaux at gmail.com)
 	 * 
 	 * This program is free software: you can redistribute it and/or modify
 	 * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 	/**
 	 * Color palette shared by all chart types.
 	 *
-	 * @author Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * @author Jean-Marc Trï¿½meaux (jm.tremeaux at gmail.com)
 	 * Created on 25 july 2007
 	 */
 	class Palette {
@@ -35,7 +35,7 @@
 		/**
 		 * Palette constructor.
 		 */
-		public function Palette() {
+		public function __construct() {
 			$this->red = new Color(255, 0, 0);
 		
 			// Colors for the horizontal and vertical axis

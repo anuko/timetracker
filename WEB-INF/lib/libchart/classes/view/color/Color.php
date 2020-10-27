@@ -1,6 +1,6 @@
 <?php
 	/* Libchart - PHP chart library
-	 * Copyright (C) 2005-2008 Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * Copyright (C) 2005-2008 Jean-Marc Trï¿½meaux (jm.tremeaux at gmail.com)
 	 * 
 	 * This program is free software: you can redistribute it and/or modify
 	 * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 	/**
 	 * Color.
 	 *
-	 * @author Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * @author Jean-Marc Trï¿½meaux (jm.tremeaux at gmail.com)
 	 */
 	class Color {
 		private $red;
@@ -37,7 +37,7 @@
 		 * @param integer blue [0..255]
 		 * @param integer alpha [0..255]
 		 */
-		public function Color($red, $green, $blue, $alpha = 0) {
+		public function __construct($red, $green, $blue, $alpha = 0) {
 			$this->red = (int) $red;
 			$this->green = (int) $green;
 			$this->blue = (int) $blue;

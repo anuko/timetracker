@@ -1,6 +1,6 @@
 <?php
 	/* Libchart - PHP chart library
-	 * Copyright (C) 2005-2008 Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * Copyright (C) 2005-2008 Jean-Marc Trï¿½meaux (jm.tremeaux at gmail.com)
 	 * 
 	 * This program is free software: you can redistribute it and/or modify
 	 * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 	/**
 	 * Line chart.
 	 *
-	 * @author Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * @author Jean-Marc Trï¿½meaux (jm.tremeaux at gmail.com)
 	 */
 	class LineChart extends BarChart {
 		/**
@@ -30,8 +30,8 @@
 		 * @param integer width of the image
 		 * @param integer height of the image
 		 */
-		public function LineChart($width = 600, $height = 250) {
-			parent::BarChart($width, $height);
+		public function __construct($width = 600, $height = 250) {
+			parent::__contruct($width, $height);
 
 			$this->plot->setGraphPadding(new Padding(5, 30, 50, 50));
 		}

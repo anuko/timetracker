@@ -1,6 +1,6 @@
 <?php
 	/* Libchart - PHP chart library
-	 * Copyright (C) 2005-2008 Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * Copyright (C) 2005-2008 Jean-Marc Trï¿½meaux (jm.tremeaux at gmail.com)
 	 * 
 	 * This program is free software: you can redistribute it and/or modify
 	 * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 	/**
 	 * A rectangle identified by the top-left and the bottom-right corners.
 	 *
-	 * @author Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * @author Jean-Marc Trï¿½meaux (jm.tremeaux at gmail.com)
 	 * @Created on 27 july 2007
 	 */
 	class Rectangle {
@@ -52,7 +52,7 @@
 		 * @param x2 Right edge coordinate
 		 * @param y2 Bottom edge coordinate
 		 */
-		public function Rectangle($x1, $y1, $x2, $y2) {
+		public function __construct($x1, $y1, $x2, $y2) {
 			$this->x1 = $x1;
 			$this->y1 = $y1;
 			$this->x2 = $x2;
