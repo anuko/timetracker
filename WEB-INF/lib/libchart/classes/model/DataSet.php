@@ -1,6 +1,6 @@
 <?php
 	/* Libchart - PHP chart library
-	 * Copyright (C) 2005-2008 Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * Copyright (C) 2005-2008 Jean-Marc TrÃ©meaux (jm.tremeaux at gmail.com)
 	 * 
 	 * This program is free software: you can redistribute it and/or modify
 	 * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 	/**
 	 * Superclass of all data sets.
 	 *
-	 * @author Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
+	 * @author Jean-Marc TrÃ©meaux (jm.tremeaux at gmail.com)
 	 * Created on 10 may 2007
 	 */
 	abstract class DataSet {

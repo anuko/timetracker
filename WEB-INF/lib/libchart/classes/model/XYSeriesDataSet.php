@@ -1,6 +1,6 @@
 <?php
 	/* Libchart - PHP chart library
-	 * Copyright (C) 2005-2008 Jean-Marc Tr�meaux (jm.tremeaux at gmail.com)
+	 * Copyright (C) 2005-2008 Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
 	 * 
 	 * This program is free software: you can redistribute it and/or modify
 	 * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 	 * This dataset comprises several series of points and is used to plot multiple lines charts.
 	 * Each serie is a XYDataSet.
 	 *
-	 * @author Jean-Marc Tr�meaux (jm.tremeaux at gmail.com)
+	 * @author Jean-Marc Trémeaux (jm.tremeaux at gmail.com)
 	 * Created on 20 july 2007
 	 */
 	class XYSeriesDataSet extends DataSet {
