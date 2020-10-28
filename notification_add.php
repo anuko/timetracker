@@ -97,7 +97,7 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     // Calculate next execution time.
-    $next = tdCron::getNextOccurrence($cl_cron_spec, mktime()); 
+    $next = tdCron::getNextOccurrence($cl_cron_spec, time());
 
     if (ttNotificationHelper::insert(array(
         'cron_spec' => $cl_cron_spec,
