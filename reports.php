@@ -229,7 +229,7 @@ if ($showUsers) {
       }
     }
   }
-  $row_count = ceil(count($user_list_active)/3);
+  $row_count = is_array($user_list_active) ? ceil(count($user_list_active)/3) : 1;
   $form->addInput(array('type'=>'checkboxgroup',
     'name'=>'users_active',
     'data'=>$user_list_active,
@@ -246,7 +246,7 @@ if ($showUsers) {
       }
     }
   }
-  $row_count = ceil(count($user_list_inactive)/3);
+  $row_count = is_array($user_list_inactive) ? ceil(count($user_list_inactive)/3) : 1;
   $form->addInput(array('type'=>'checkboxgroup',
     'name'=>'users_inactive',
     'data'=>$user_list_inactive,
