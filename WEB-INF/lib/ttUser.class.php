@@ -297,8 +297,8 @@ class ttUser {
     return $config->getDefinedValue($name);
   }
 
-  // getConfigInt retruns an integer value defined in a group, or false.
-  function getConfigInt($name, $defaultVal) {
+  // getConfigInt returns an integer value defined in a group, or false.
+  function getConfigInt($name, $defaultVal = 0) {
     $config = new ttConfigHelper($this->getConfig());
     return $config->getIntValue($name, $defaultVal);
   }
