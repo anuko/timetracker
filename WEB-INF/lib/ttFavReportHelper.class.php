@@ -416,7 +416,8 @@ class ttFavReportHelper {
           $custom_field_attrs[$checkbox_field_name] = null;
         }
       }
-      $attrs = array_merge($attrs, $custom_field_attrs);
+      if (is_array($custom_field_attrs))
+        $attrs = array_merge($attrs, $custom_field_attrs);
       $bean->setAttributes($attrs);
     }
   }
