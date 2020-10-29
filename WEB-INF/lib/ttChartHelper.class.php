@@ -86,8 +86,8 @@ class ttChartHelper {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
-        if ($val['time'] >= 0) // Only positive totals make sense in pie charts. Skip negatives entirely.
-          $result[] = array('name'=>$val['name'],'time'=>$val['time']); // name - project name, time - total for project in seconds.
+        if ($val['time'] > 0) // Only positive totals make sense in pie charts. Skip negatives entirely.
+          $result[] = array('name'=>$val['name'],'time'=>$val['time']); // name - entity name, time - total for entity in seconds.
       }
     }
 
