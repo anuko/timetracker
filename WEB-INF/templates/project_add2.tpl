@@ -21,17 +21,17 @@
   <tr><td><div class="form-control-separator"></div></td></tr>
 {/if}
 {if $show_users}
-  <tr class = "small-screen-label"><td><label for="users">{$i18n.label.users}:</label></td></tr>
+  <tr class = "small-screen-label"><td>{$i18n.label.users}:</td></tr>
   <tr>
-    <td class="large-screen-label"><label for="users">{$i18n.label.users}:</label></td>
+    <td class="large-screen-label">{$i18n.label.users}:</td>
     <td class="td-with-input">{$forms.projectForm.users.control}</td>
   </tr>
   <tr><td><div class="form-control-separator"></div></td></tr>
 {/if}
 {if $show_tasks}
-  <tr class = "small-screen-label"><td><label for="tasks">{$i18n.label.tasks}:</label></td></tr>
+  <tr class = "small-screen-label"><td>{$i18n.label.tasks}:</td></tr>
   <tr>
-    <td class="large-screen-label"><label for="tasks">{$i18n.label.tasks}:</label></td>
+    <td class="large-screen-label">{$i18n.label.tasks}:</td>
     <td class="td-with-input">{$forms.projectForm.tasks.control}</td>
   </tr>
   <tr><td><div class="form-control-separator"></div></td></tr>
