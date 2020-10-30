@@ -635,19 +635,21 @@ class ttReportHelper {
     unset($_SESSION['report_item_ids']);
     unset($_SESSION['report_item_expense_ids']);
 
-    // Iterate through records and build 2 comma-separated lists.
-    foreach($report_items as $item) {
-      if ($item['type'] == 1)
-        $report_item_ids .= ','.$item['id'];
-      else if ($item['type'] == 2)
-         $report_item_expense_ids .= ','.$item['id'];
-    }
-    $report_item_ids = trim($report_item_ids, ',');
-    $report_item_expense_ids = trim($report_item_expense_ids, ',');
+    if (is_array($report_items)) {
+      // Iterate through records and build 2 comma-separated lists.
+      foreach($report_items as $item) {
+        if ($item['type'] == 1)
+          $report_item_ids .= ','.$item['id'];
+        else if ($item['type'] == 2)
+          $report_item_expense_ids .= ','.$item['id'];
+      }
+      $report_item_ids = trim($report_item_ids, ',');
+      $report_item_expense_ids = trim($report_item_expense_ids, ',');
 
-    // The lists are ready. Put them in session.
-    if ($report_item_ids) $_SESSION['report_item_ids'] = $report_item_ids;
-    if ($report_item_expense_ids) $_SESSION['report_item_expense_ids'] = $report_item_expense_ids;
+      // The lists are ready. Put them in session.
+      if ($report_item_ids) $_SESSION['report_item_ids'] = $report_item_ids;
+      if ($report_item_expense_ids) $_SESSION['report_item_expense_ids'] = $report_item_expense_ids;
+    }
   }
 
   // getFromSession obtains tt_log and tt_expense_items ids stored in user session.
