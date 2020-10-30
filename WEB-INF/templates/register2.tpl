@@ -55,5 +55,6 @@
   <tr>
     <td colspan="2">{$forms.groupForm.btn_submit.control}</td>
   </tr>
+  <tr><td><div class="form-control-separator"></div></td></tr>
 </table>
 {$forms.groupForm.close}

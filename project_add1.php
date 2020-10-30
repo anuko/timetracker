@@ -1,6 +1,30 @@
 <?php
-/* Copyright (c) Anuko International Ltd. https://www.anuko.com
-License: See license.txt */
+// +----------------------------------------------------------------------+
+// | Anuko Time Tracker
+// +----------------------------------------------------------------------+
+// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
+// +----------------------------------------------------------------------+
+// | LIBERAL FREEWARE LICENSE: This source code document may be used
+// | by anyone for any purpose, and freely redistributed alone or in
+// | combination with other software, provided that the license is obeyed.
+// |
+// | There are only two ways to violate the license:
+// |
+// | 1. To redistribute this code in source form, with the copyright
+// |    notice or license removed or altered. (Distributing in compiled
+// |    forms without embedded copyright notices is permitted).
+// |
+// | 2. To redistribute modified versions of this code in *any* form
+// |    that bears insufficient indications that the modifications are
+// |    not the work of the original author(s).
+// |
+// | This license applies to this document only, not any other software
+// | that it may be combined with.
+// |
+// +----------------------------------------------------------------------+
+// | Contributors:
+// | https://www.anuko.com/time_tracker/credits.htm
+// +----------------------------------------------------------------------+
 
 require_once('initialize.php');
 import('form.Form');
@@ -42,8 +66,8 @@ if ($request->isPost()) {
 }
 
 $form = new Form('projectForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'project_name','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'description','value'=>$cl_description));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'project_name','style'=>'width: 250px;','value'=>$cl_name));
+$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
 if ($showFiles)
   $form->addInput(array('type'=>'upload','name'=>'newfile','value'=>$i18n->get('button.submit')));
 $form->addInput(array('type'=>'checkboxgroup','name'=>'users','data'=>$all_users,'layout'=>'H','value'=>$cl_users));
@@ -90,5 +114,5 @@ $smarty->assign('show_files', $showFiles);
 $smarty->assign('show_users', count($users) > 0);
 $smarty->assign('show_tasks', $show_tasks);
 $smarty->assign('title', $i18n->get('title.add_project'));
-$smarty->assign('content_page_name', 'project_add2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'project_add.tpl');
+$smarty->display('index.tpl');
