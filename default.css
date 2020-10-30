@@ -221,6 +221,12 @@ input[type=submit] {
   appearance: none;
 }
 
+input[type=button] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 input.text-field {
   width: 220px;
 }
