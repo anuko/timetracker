@@ -3,9 +3,7 @@
 </script>
 
 {if $user->can('manage_projects')}
-  {if $inactive_projects}
-<div class="section-header">{$i18n.form.projects.active_projects}</div>
-  {/if}
+  {if $inactive_projects}<div class="section-header">{$i18n.form.projects.active_projects}</div>{/if}
   {if $active_projects}
 <table class="x-scrollable-table">
   <tr>
