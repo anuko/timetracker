@@ -1,6 +1,30 @@
 <?php
-/* Copyright (c) Anuko International Ltd. https://www.anuko.com
-License: See license.txt */
+// +----------------------------------------------------------------------+
+// | Anuko Time Tracker
+// +----------------------------------------------------------------------+
+// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
+// +----------------------------------------------------------------------+
+// | LIBERAL FREEWARE LICENSE: This source code document may be used
+// | by anyone for any purpose, and freely redistributed alone or in
+// | combination with other software, provided that the license is obeyed.
+// |
+// | There are only two ways to violate the license:
+// |
+// | 1. To redistribute this code in source form, with the copyright
+// |    notice or license removed or altered. (Distributing in compiled
+// |    forms without embedded copyright notices is permitted).
+// |
+// | 2. To redistribute modified versions of this code in *any* form
+// |    that bears insufficient indications that the modifications are
+// |    not the work of the original author(s).
+// |
+// | This license applies to this document only, not any other software
+// | that it may be combined with.
+// |
+// +----------------------------------------------------------------------+
+// | Contributors:
+// | https://www.anuko.com/time_tracker/credits.htm
+// +----------------------------------------------------------------------+
 
 require_once('initialize.php');
 import('form.Form');
@@ -73,8 +97,8 @@ if ($request->isPost()) {
 }
 
 $form = new Form('userForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','value'=>$cl_login));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 300px;','value'=>$cl_name));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','style'=>'width: 300px;','value'=>$cl_login));
 if (!$auth->isPasswordExternal()) {
   $form->addInput(array('type'=>'password','maxlength'=>'30','name'=>'pas1','value'=>$cl_password1));
   $form->addInput(array('type'=>'password','maxlength'=>'30','name'=>'pas2','value'=>$cl_password2));
@@ -94,6 +118,7 @@ if ($custom_fields && $custom_fields->userFields) {
       $form->addInput(array('type'=>'text','name'=>$field_name,'value'=>$userCustomFields[$userField['id']]['value']));
     } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
       $form->addInput(array('type'=>'combobox','name'=>$field_name,
+      'style'=>'width: 250px;',
       'data'=>CustomFields::getOptions($userField['id']),
       'value'=>$userCustomFields[$userField['id']]['value'],
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
@@ -215,5 +240,5 @@ $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientCo
 $smarty->assign('show_quota', $show_quota);
 $smarty->assign('show_projects', $show_projects);
 $smarty->assign('title', $i18n->get('title.add_user'));
-$smarty->assign('content_page_name', 'user_add2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'user_add.tpl');
+$smarty->display('index.tpl');
