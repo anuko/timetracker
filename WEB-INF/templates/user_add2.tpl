@@ -34,6 +34,7 @@ function setDefaultRate(element) {
 function handleClientControl() {
   var selectedRoleId = document.getElementById("role").value;
   var clientControl = document.getElementById("client");
+  var clientBlock = document.getElementById("client_block");
   var nonClientBlock = document.getElementById("non_client_block");
   var projectsControl = document.getElementById("projects_control");
 
@@ -43,6 +44,7 @@ function handleClientControl() {
       var isClient = roles[i][1];
       if (isClient == 1) {
         clientControl.style.visibility = "visible";
+        clientBlock.style.display = "";
         nonClientBlock.style.display = "none";
         projectsControl.style.display = "none";
 
@@ -55,6 +57,7 @@ function handleClientControl() {
       } else {
         clientControl.value = "";
         clientControl.style.visibility = "hidden";
+        clientBlock.style.display = "none";
         nonClientBlock.style.display = "";
         projectsControl.style.display = "";
       }
@@ -109,17 +112,20 @@ function handleClientControl() {
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
-  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td><label for="role">{$i18n.form.users.role}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="role">{$i18n.form.users.role}:</label></td>
     <td class="td-with-input">{$forms.userForm.role.control}</td>
   </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+<tbody id="client_block">
+  <tr class = "small-screen-label"><td><label for="role">{$i18n.label.client}:</label></td></tr>
   <tr>
-    <td class="large-screen-label"></td>
+    <td class="large-screen-label"><label for="client">{$i18n.label.client} (*):</label></td>
     <td class="td-with-input">{$forms.userForm.client.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+</tbody>
 <tbody id="non_client_block">
 {if $custom_fields && $custom_fields->userFields}
   {foreach $custom_fields->userFields as $userField}
