@@ -8,9 +8,31 @@ roles[idx] = new Array({$active_role.id}, '{$active_role.is_client}');
 idx++;
 {/foreach}
 
-// The setDefaultRate function sets / unsets default rate for a project
-// when a corresponding checkbox is ticked.
-function setDefaultRate(element) {
+// Prepare an array of rates.
+// Format: project_rates[0] = Array(100, '25.00'), project_rates[1] = Array(120, '30.00'), etc...
+// First element = project_id, second element = rate for project. Quotes needed for string representation of rates.
+project_rates = new Array();
+var idx = 0;
+{foreach $rates as $rate}
+project_rates[idx] = new Array({$rate.id}, '{$rate.rate}');
+idx++;
+{/foreach}
+
+// getRate - returns a rate for the project. If rate was set for user previously we'll get this old rate
+// if project time entries for user exists. Otherwise return user default rate.
+function getRate(project_id) {
+  var length = project_rates.length;
+  for(var i = 0; i < length; i++) {
+    if(project_rates[i][0] == project_id) {
+      return project_rates[i][1];
+    }
+  }
+  var default_rate = document.userForm.rate.value;
+  return default_rate;
+}
+
+// The setRate function sets / unsets user rate for a project when a corresponding checkbox is ticked.
+function setRate(element) {
   var default_rate = document.userForm.rate.value;
   if (default_rate == '') {
     // No default rate, nothing to do!
@@ -20,7 +42,7 @@ function setDefaultRate(element) {
   for (var i = 0; i < userForm.elements.length; i++) {
     if ((userForm.elements[i].type == 'text') && (userForm.elements[i].name == ('rate_'+element.value))) {
       if (element.checked) {
-        userForm.elements[i].value = default_rate;
+        userForm.elements[i].value = getRate(element.value);
       } else {
         userForm.elements[i].value = '';
       }
@@ -100,6 +122,7 @@ function handleClientControl() {
     <td class="large-screen-label"><label for="email">{$i18n.label.email}:</label></td>
     <td class="td-with-input">{$forms.userForm.email.control}</td>
   </tr>
+{if $user->id != $user_id}
   <tr class = "small-screen-label"><td><label for="role">{$i18n.form.users.role}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="role">{$i18n.form.users.role}:</label></td>
@@ -114,6 +137,21 @@ function handleClientControl() {
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 </tbody>
+  <tr class = "small-screen-label"><td><label for="status">{$i18n.label.status}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="status">{$i18n.label.status}:</label></td>
+    <td class="td-with-input">{$forms.userForm.status.control}</td>
+  </tr>
+  <tr><td><div class="small-screenform-control-separator"></div></td></tr>
+{/if}
+{if $user->id == $user_id}
+  <tr class = "small-screen-label"><td><label for="role">{$i18n.form.users.role}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="role">{$i18n.form.users.role}:</label></td>
+    <td class="text-cell">{$user->role_name} {if $can_swap}<a href="swap_roles.php">{$i18n.form.user_edit.swap_roles}</a>{/if}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
 <tbody id="non_client_block">
 {if $show_quota}
   <tr class = "small-screen-label"><td><label for="quota_percent">{$i18n.label.quota}&nbsp;(%):</label></td></tr>
