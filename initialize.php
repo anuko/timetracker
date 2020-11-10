@@ -13,7 +13,7 @@ error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT); // & ~E_DEPRECATED);
 ini_set('display_errors', 'Off');
 
 // require_once('init_auth.php');
-define("APP_VERSION", "1.19.23.5353");
+define("APP_VERSION", "1.19.23.5354");
 define("APP_DIR", dirname(__FILE__));
 define("LIBRARY_DIR", APP_DIR."/WEB-INF/lib");
 define("TEMPLATE_DIR", APP_DIR."/WEB-INF/templates");
