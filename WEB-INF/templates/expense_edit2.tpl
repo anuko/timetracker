@@ -34,6 +34,18 @@ var defined_expenses = new Array();
   idx++;
 {/foreach}
 
+{* Conditional include of confirmSave handler. *}
+{if $confirm_save}
+var original_date = "{$entry_date}";
+
+function confirmSave() {
+  var date_on_save = document.getElementById("date").value;
+  if (original_date != date_on_save) {
+    return confirm("{$i18n.warn.confirm_save}");
+  }
+}
+{/if}
+
 // The fillProjectDropdown function populates the project combo box with
 // projects associated with a selected client (client id is passed here as id).
 function fillProjectDropdown(id) {
@@ -112,23 +124,14 @@ function recalculateCost() {
 }
 </script>
 
-{$forms.expensesForm.open}
-<div class="small-screen-calendar">{$forms.expensesForm.date.control}</div>
+{$forms.expenseItemForm.open}
 <table class="centered-table">
-  <tr><td></td><td></td><td rowspan="{$large_screen_calendar_row_span}"><div class="large-screen-calendar">{$forms.expensesForm.date.control}</div></td></tr>
-{if $user_dropdown}
-  <tr class = "small-screen-label"><td><label for="user">{$i18n.label.user}:</label></td></tr>
   <tr>
-    <td class="large-screen-label"><label for="user">{$i18n.label.user}:</label></td>
-    <td class="td-with-input">{$forms.expensesForm.user.control}</td>
-  </tr>
-  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
-{/if}
 {if $user->isPluginEnabled('cl')}
   <tr class = "small-screen-label"><td><label for="client">{$i18n.label.client}{if $user->isOptionEnabled('client_required')} (*){/if}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="client">{$i18n.label.client}{if $user->isOptionEnabled('client_required')} (*){/if}:</label></td>
-    <td class="td-with-input">{$forms.expensesForm.client.control}</td>
+    <td class="td-with-input">{$forms.expenseItemForm.client.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
@@ -136,7 +139,7 @@ function recalculateCost() {
   <tr class = "small-screen-label"><td><label for="project">{$i18n.label.project} (*):</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="project">{$i18n.label.project} (*):</label></td>
-    <td class="td-with-input">{$forms.expensesForm.project.control}</td>
+    <td class="td-with-input">{$forms.expenseItemForm.project.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
@@ -144,95 +147,40 @@ function recalculateCost() {
   <tr class = "small-screen-label"><td><label for="predefined_expense">{$i18n.label.expense}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="predefined_expense">{$i18n.label.expense}:</label></td>
-    <td class="td-with-input">{$forms.expensesForm.predefined_expense.control}</td>
+    <td class="td-with-input">{$forms.expenseItemForm.predefined_expense.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td><label for="quantity">{$i18n.label.quantity}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="quantity">{$i18n.label.quantity}:</label></td>
-    <td class="td-with-input">{$forms.expensesForm.quantity.control}</td>
+    <td class="td-with-input">{$forms.expenseItemForm.quantity.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
   <tr class = "small-screen-label"><td><label for="item_name">{$i18n.label.comment} (*):</label></td></tr>
   <tr>
-    <td class="large-screen-label"><label for="item_name">{$i18n.label.comment} (*):</label></td>
-    <td class="td-with-input">{$forms.expensesForm.item_name.control}</td>
+    <td class="large-screen-label"><label for="item_name">{$i18n.label.comment}(*):</label></td>
+    <td class="td-with-input">{$forms.expenseItemForm.item_name.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td><label for="cost">{$i18n.label.cost} (*):</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="cost">{$i18n.label.cost} (*):</label></td>
-    <td class="td-with-input">{$forms.expensesForm.cost.control}</td>
+    <td class="td-with-input">{$forms.expenseItemForm.cost.control} {$user->getCurrency()|escape}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
-{if $show_files}
-  <tr class = "small-screen-label"><td><label for="newfile">{$i18n.label.file}:</label></td></tr>
+{if ($user->can('manage_invoices') && $user->isPluginEnabled('ps'))}
   <tr>
-    <td class="large-screen-label"><label for="newfile">{$i18n.label.file}:</label></td>
-    <td class="td-with-input">{$forms.expensesForm.newfile.control}</td>
+    <td class="large-screen-label"></td>
+    <td class="td-with-input"><label>{$forms.expenseItemForm.paid.control}{$i18n.label.paid}</label></td>
+  </tr>
+{/if}
+  <tr class="small-screen-label"><td><label for="date">{$i18n.label.date}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="date">{$i18n.label.date}:</label></td>
+    <td class="td-with-input">{$forms.expenseItemForm.date.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
-{/if}
-  <tr>
-    <td align="center" colspan="3">{$forms.expensesForm.btn_submit.control}</td>
-  </tr>
 </table>
-{$forms.expensesForm.close}
-
-{if $expense_items}
-<div class="record-list">
-<table class="x-scrollable-table">
-  <tr>
-  {if $user->isPluginEnabled('cl')}
-    <th>{$i18n.label.client}</th>
-  {/if}
-  {if $show_project}
-    <th>{$i18n.label.project}</th>
-  {/if}
-    <th>{$i18n.label.item}</th>
-    <th>{$i18n.label.cost}</th>
-  {if $show_files}
-    <th></th>
-  {/if}
-    <th></th>
-    <th></th>
-  </tr>
-  {foreach $expense_items as $item}
-  <tr>
-    {if $user->isPluginEnabled('cl')}
-    <td class="text-cell">{$item.client|escape}</td>
-    {/if}
-    {if $show_project}
-    <td class="text-cell">{$item.project|escape}</td>
-    {/if}
-    <td class="text-cell">{$item.item|escape}</td>
-    <td class="time-cell">{$item.cost}</td>
-    {if $show_files}
-      {if $item.has_files}
-        <td><a href="expense_files.php?id={$item.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-files.png"></a></td>
-      {else}
-        <td><a href="expense_files.php?id={$item.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-file.png"></a></td>
-      {/if}
-    {/if}
-    <td>
-    {if $item.approved || $item.invoice_id}
-      &nbsp;
-    {else}
-      <a href='expense_edit.php?id={$item.id}'><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a>
-    {/if}
-    </td>
-    <td>
-    {if $item.approved || $item.invoice_id}
-      &nbsp;
-    {else}
-      <a href='expense_delete.php?id={$item.id}'><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a>
-    {/if}
-    </td>
-  </tr>
-  {/foreach}
-</table>
-</div>
-<div class="day-totals">{$i18n.label.day_total}: {$user->getCurrency()|escape} {$day_total}</div>
-{/if}
-
+<div class="button-set">{$forms.expenseItemForm.btn_save.control} {$forms.expenseItemForm.btn_copy.control} {$forms.expenseItemForm.btn_delete.control}</div>
+{$forms.expenseItemForm.close}
