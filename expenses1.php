@@ -1,6 +1,30 @@
 <?php
-/* Copyright (c) Anuko International Ltd. https://www.anuko.com
-License: See license.txt */
+// +----------------------------------------------------------------------+
+// | Anuko Time Tracker
+// +----------------------------------------------------------------------+
+// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
+// +----------------------------------------------------------------------+
+// | LIBERAL FREEWARE LICENSE: This source code document may be used
+// | by anyone for any purpose, and freely redistributed alone or in
+// | combination with other software, provided that the license is obeyed.
+// |
+// | There are only two ways to violate the license:
+// |
+// | 1. To redistribute this code in source form, with the copyright
+// |    notice or license removed or altered. (Distributing in compiled
+// |    forms without embedded copyright notices is permitted).
+// |
+// | 2. To redistribute modified versions of this code in *any* form
+// |    that bears insufficient indications that the modifications are
+// |    not the work of the original author(s).
+// |
+// | This license applies to this document only, not any other software
+// | that it may be combined with.
+// |
+// +----------------------------------------------------------------------+
+// | Contributors:
+// | https://www.anuko.com/time_tracker/credits.htm
+// +----------------------------------------------------------------------+
 
 require_once('initialize.php');
 import('form.Form');
@@ -72,7 +96,6 @@ $cl_cost = $request->getParameter('cost');
 
 // Elements of expensesForm.
 $form = new Form('expensesForm');
-$largeScreenCalendarRowSpan = 1; // Number of rows calendar spans on large screens.
 
 if ($user->can('track_expenses')) {
   $rank = $user->getMaxRankForGroup($user->getGroup());
@@ -85,11 +108,11 @@ if ($user->can('track_expenses')) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'this.form.user_changed.value=1;this.form.submit();',
       'name'=>'user',
+      'style'=>'width: 250px;',
       'value'=>$user_id,
       'data'=>$user_list,
       'datakeys'=>array('id','name')));
     $form->addInput(array('type'=>'hidden','name'=>'user_changed'));
-    $largeScreenCalendarRowSpan += 2;
     $smarty->assign('user_dropdown', 1);
   }
 }
@@ -100,12 +123,12 @@ if (MODE_TIME == $tracking_mode && $user->isPluginEnabled('cl')) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'client',
+      'style'=>'width: 250px;',
       'value'=>$cl_client,
       'data'=>$active_clients,
       'datakeys'=>array('id', 'name'),
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
   // Note: in other modes the client list is filtered to relevant clients only. See below.
-    $largeScreenCalendarRowSpan += 2;
 }
 
 if ($show_project) {
@@ -113,11 +136,11 @@ if ($show_project) {
   $project_list = $user->getAssignedProjects();
   $form->addInput(array('type'=>'combobox',
     'name'=>'project',
+    'style'=>'width: 250px;',
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
-  $largeScreenCalendarRowSpan += 2;
 
   // Dropdown for clients if the clients plugin is enabled.
   if ($user->isPluginEnabled('cl')) {
@@ -139,11 +162,11 @@ if ($show_project) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'client',
+      'style'=>'width: 250px;',
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
-    $largeScreenCalendarRowSpan += 2;
   }
 }
 // If predefined expenses are configured, add controls to select an expense and quantity.
@@ -152,22 +175,17 @@ if ($predefined_expenses) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'recalculateCost();',
     'name'=>'predefined_expense',
+    'style'=>'width: 250px;',
     'value'=>$cl_predefined_expense,
     'data'=>$predefined_expenses,
     'datakeys'=>array('id', 'name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
-  $largeScreenCalendarRowSpan += 2;
-  $form->addInput(array('type'=>'text','onchange'=>'recalculateCost();','maxlength'=>'40','name'=>'quantity','value'=>$cl_quantity));
-  $largeScreenCalendarRowSpan += 2;
+  $form->addInput(array('type'=>'text','onchange'=>'recalculateCost();','maxlength'=>'40','name'=>'quantity','style'=>'width: 100px;','value'=>$cl_quantity));
 }
-$form->addInput(array('type'=>'textarea','maxlength'=>'800','name'=>'item_name','value'=>$cl_item_name));
-$largeScreenCalendarRowSpan += 2;
-$form->addInput(array('type'=>'text','maxlength'=>'40','name'=>'cost','value'=>$cl_cost));
-$largeScreenCalendarRowSpan += 2;
-if ($showFiles) {
+$form->addInput(array('type'=>'textarea','maxlength'=>'800','name'=>'item_name','style'=>'width: 250px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_item_name));
+$form->addInput(array('type'=>'text','maxlength'=>'40','name'=>'cost','style'=>'width: 100px;','value'=>$cl_cost));
+if ($showFiles)
   $form->addInput(array('type'=>'upload','name'=>'newfile','value'=>$i18n->get('button.submit')));
-  $largeScreenCalendarRowSpan += 2;
-}
 $form->addInput(array('type'=>'calendar','name'=>'date','highlight'=>'expenses','value'=>$cl_date)); // calendar
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.submit')));
@@ -219,7 +237,6 @@ if ($request->isPost()) {
   }
 }
 
-$smarty->assign('large_screen_calendar_row_span', $largeScreenCalendarRowSpan);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('show_project', $show_project);
 $smarty->assign('show_files', $showFiles);
@@ -230,5 +247,5 @@ $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('timestring', $selected_date->toString($user->getDateFormat()));
 $smarty->assign('title', $i18n->get('title.expenses'));
-$smarty->assign('content_page_name', 'expenses2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'expenses.tpl');
+$smarty->display('index.tpl');
