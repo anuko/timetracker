@@ -8,7 +8,7 @@
     <th>{$i18n.label.task}</th>
 {/if}
 {if $show_start}
-    <th>{$i18n.label.start}</td>
+    <th>{$i18n.label.start}</th>
     <th>{$i18n.label.finish}</th>
 {/if}
 {if $show_duration}
