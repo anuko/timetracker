@@ -323,6 +323,7 @@ input.password-field {
 
 .section-header {
   font-weight: bold;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
