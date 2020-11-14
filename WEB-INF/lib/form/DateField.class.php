@@ -406,8 +406,9 @@ class DateField extends TextField {
       $html .= " value=\"".htmlspecialchars($this->getValue())."\"";
       $html .= ">";
       
-      if (defined('DIR_NAME'))
-        $app_root = '/'.DIR_NAME;
+      $dir_name = trim(constant('DIR_NAME'), '/');
+      if (!empty($dir_name))
+        $app_root = '/'.$dir_name;
 
       $html .= "&nbsp;<img src=\"".$app_root."/img/calendar.gif\" width=\"16\" height=\"16\" onclick=\"displayDatePicker('".$this->name."');\">\n";
     }
