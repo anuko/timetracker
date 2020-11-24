@@ -35,6 +35,10 @@ import('ttConfigHelper');
 import('ttTimeHelper');
 import('DateAndTime');
 
+header('Location: ../time.php');
+exit();
+
+
 // Access checks.
 if (!ttAccessAllowed('track_own_time')) {
   header('Location: access_denied.php');

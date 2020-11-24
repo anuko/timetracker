@@ -31,6 +31,12 @@ import('form.Form');
 import('ttOrgHelper');
 import('ttUser');
 
+// Mobile pages are no longer separate. Redirect to main page.
+header('Location: ../login.php');
+exit();
+// Below is no longer used code.
+
+
 if ($request->isPost()) {
   $cl_login = $request->getParameter('login');
 } else {
