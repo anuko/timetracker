@@ -118,7 +118,7 @@ if (!$auth->isPasswordExternal()) {
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email));
 
 $active_roles = ttTeamHelper::getActiveRolesForUser();
-$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role_id,'data'=>$active_roles, 'datakeys'=>array('id', 'name')));
+$form->addInput(array('type'=>'combobox','onchange'=>'handleClientRole()','name'=>'role','value'=>$cl_role_id,'data'=>$active_roles, 'datakeys'=>array('id', 'name')));
 if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->get('dropdown.select'))));
 
@@ -274,7 +274,7 @@ $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('active_roles', $active_roles);
 $smarty->assign('can_swap', $can_swap);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
+$smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientRole();"');
 $smarty->assign('show_quota', $show_quota);
 $smarty->assign('show_projects', $show_projects);
 $smarty->assign('user_id', $user_id);

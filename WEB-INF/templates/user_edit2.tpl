@@ -51,9 +51,9 @@ function setRate(element) {
   }
 }
 
-// handleClientControl - controls visibility of the client dropdown depending on the selected user role,
-// also hides and unselects projects when "Client" user role is selected.
-function handleClientControl() {
+// handleClientRole - manages visibility and content of controls related to client role,
+// also hides and unselects projects when client role is selected.
+function handleClientRole() {
   var selectedRoleId = document.getElementById("role").value;
   var clientControl = document.getElementById("client");
   var clientBlock = document.getElementById("client_block");
