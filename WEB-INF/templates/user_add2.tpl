@@ -43,7 +43,6 @@ function handleClientControl() {
     if (selectedRoleId == roles[i][0]) {
       var isClient = roles[i][1];
       if (isClient == 1) {
-        clientControl.style.visibility = "visible";
         clientBlock.style.display = "";
         nonClientBlock.style.display = "none";
         projectsControl.style.display = "none";
@@ -56,7 +55,6 @@ function handleClientControl() {
         }
       } else {
         clientControl.value = "";
-        clientControl.style.visibility = "hidden";
         clientBlock.style.display = "none";
         nonClientBlock.style.display = "";
         projectsControl.style.display = "";
