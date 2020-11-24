@@ -35,9 +35,10 @@ import('ttConfigHelper');
 import('ttTimeHelper');
 import('DateAndTime');
 
+// Mobile pages are no longer separate. Redirect to main page.
 header('Location: ../time.php');
 exit();
-
+// Below is no longer used code.
 
 // Access checks.
 if (!ttAccessAllowed('track_own_time')) {

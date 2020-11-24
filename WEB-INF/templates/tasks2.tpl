@@ -4,6 +4,7 @@
 
 {$forms.tasksForm.open}
 {if $user->can('manage_tasks')}
+<div>
 <table class="centered-table">
   <tr>
     <td>{$forms.tasksForm.task_required.control}</td>
@@ -11,6 +12,7 @@
     <td>{$forms.tasksForm.btn_save.control}</td>
   </tr>
 </table>
+</div>
   {if $inactive_tasks}<div class="section-header">{$i18n.form.tasks.active_tasks}</div>{/if}
   {if $active_tasks}
 <table class="x-scrollable-table">
