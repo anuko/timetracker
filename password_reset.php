@@ -105,10 +105,12 @@ if ($request->isPost()) {
         $http = 'http';
 
       $cl_subject = $user_i18n->get('form.reset_password.email_subject');
-      if (defined('DIR_NAME'))
-        $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/'.DIR_NAME.'/password_change.php?ref='.$temp_ref;
-      else
-        $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/password_change.php?ref='.$temp_ref;
+
+      $dir_name = trim(@constant('DIR_NAME'), '/');
+      if (!empty($dir_name))
+        $app_root = '/'.$dir_name;
+
+      $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].$app_root.'/password_change.php?ref='.$temp_ref;
 
       $mailer->setMailMode(MAIL_MODE);
       if ($mailer->send($cl_subject, sprintf($user_i18n->get('form.reset_password.email_body'), $_SERVER['REMOTE_ADDR'], $pass_edit_url)))

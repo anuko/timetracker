@@ -60,7 +60,6 @@ define('EMAIL_REQUIRED', false);
 //
 // define('DIR_NAME', 'timetracker');
 //
-define('DIR_NAME', '');
 
 
 // WEEKEND_START_DAY
