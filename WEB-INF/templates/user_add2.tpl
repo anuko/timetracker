@@ -153,10 +153,10 @@ function handleClientRole() {
 </tbody>
 {/if}
   <tr><td colspan="2">{$i18n.label.required_fields}</td></tr>
-  <tr><td><div class="form-control-separator"></div></td></tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr>
     <td colspan="2">{$forms.userForm.btn_submit.control}</td>
   </tr>
-  <tr><td><div class="form-control-separator"></div></td></tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 </table>
 {$forms.userForm.close}

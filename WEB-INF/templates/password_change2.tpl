@@ -1,6 +1,6 @@
 {$forms.newPasswordForm.open}
 <div class="page-hint">{$i18n.form.change_password.tip}</div>
-<div class="form-control-separator"></div>
+<div class="small-screen-form-control-separator"></div>
 <table class="centered-table">
     <tr class = "small-screen-label"><td><label for="password1">{$i18n.label.password} (*):</label></td></tr>
   <tr>
@@ -14,7 +14,7 @@
     <td class="td-with-input">{$forms.newPasswordForm.password2.control}</td>
   </tr>
   <tr><td colspan="2">{$i18n.label.required_fields}</td></tr>
-  <tr><td><div class="form-control-separator"></div></td></tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr>
     <td colspan="2">{$forms.newPasswordForm.btn_save.control}</td>
   </tr>
