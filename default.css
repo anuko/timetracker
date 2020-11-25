@@ -215,31 +215,28 @@ div.page-hint {
   display: inline-block;
 }
 
-input[type=submit] {
+input[type="submit"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
 
-input[type=button] {
+input[type="button"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
 
-input.text-field {
+input[type="text"] {
   width: 220px;
 }
 
-input.password-field {
+input[type="password"] {
   width: 220px;
 }
 
-input[type=file] {
+input[type="file"] {
   width: 220px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
 }
 
 .dropdown-field {
