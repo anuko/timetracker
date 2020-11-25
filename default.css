@@ -235,6 +235,13 @@ input.password-field {
   width: 220px;
 }
 
+input[type=file] {
+  width: 220px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 .dropdown-field {
   width: 237px;
 }
