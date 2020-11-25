@@ -1,3 +1,6 @@
+{* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt *}
+
 {$forms.clientDeleteForm.open}
 <table class="centered-table">
   <tr class = "small-screen-label"><td>{$i18n.form.client.client_to_delete}:</td></tr>

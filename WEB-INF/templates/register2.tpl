@@ -1,3 +1,6 @@
+{* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt *}
+
 {$forms.groupForm.open}
 <table class="centered-table">
   <tr class = "small-screen-label"><td><label for="group_name">{$i18n.label.group_name} (*):</label></td></tr>

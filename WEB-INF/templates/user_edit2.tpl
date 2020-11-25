@@ -1,3 +1,6 @@
+{* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt *}
+
 <script>
 // Prepare an array of available roles. We need it for "is_client" property.
 // It is used to selectively display client selector for client roles.

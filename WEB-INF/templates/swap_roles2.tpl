@@ -1,3 +1,6 @@
+{* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt *}
+
 <div class="page-hint">{$i18n.form.swap.hint}</div>
 {$forms.swapForm.open}
 <table class="centered-table">

@@ -1,3 +1,6 @@
+{* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt *}
+
 {if $files}
 <table class="x-scrollable-table">
   <tr>

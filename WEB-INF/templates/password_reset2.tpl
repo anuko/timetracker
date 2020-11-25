@@ -1,3 +1,6 @@
+{* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt *}
+
 {$forms.resetPasswordForm.open}
 <table class="centered-table">
   <tr class = "small-screen-label"><td><label for="login">{$i18n.label.login}:</label></td></tr>

@@ -1,3 +1,6 @@
+{* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt *}
+
 {include file="time_script.tpl"}
 
 {* Conditional include of confirmSave handler. *}

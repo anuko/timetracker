@@ -1,3 +1,6 @@
+{* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt *}
+
 {$forms.clientForm.open}
 <table class="centered-table">
   <tr class = "small-screen-label"><td><label for="name">{$i18n.label.client_name} (*):</label></td></tr>

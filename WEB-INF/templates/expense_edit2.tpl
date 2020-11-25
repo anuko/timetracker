@@ -1,3 +1,6 @@
+{* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt *}
+
 <script>
 // We need a few arrays to populate project dropdown.
 // When client selection changes, the project dropdown must be re-populated with only relevant projects.

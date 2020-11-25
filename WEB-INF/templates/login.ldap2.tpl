@@ -1,3 +1,6 @@
+{* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt *}
+
 {if $show_hint}
 <div class="page-hint">{$i18n.label.ldap_hint}</div>
 {/if}
