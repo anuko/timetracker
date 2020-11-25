@@ -92,9 +92,6 @@
     {if $user->can('view_users') || $user->can('manage_users')}
            <a class="mainMenu" href="users.php">{$i18n.menu.users}</a>
     {/if}
-    {if $user->isPluginEnabled('cl') && ($user->can('view_own_clients') || $user->can('manage_clients'))}
-           <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
-    {/if}
           </td>
         </tr>
       </table>
