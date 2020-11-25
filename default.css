@@ -358,6 +358,15 @@ input[type="file"] {
   margin-right: auto;
 }
 
+.sitemap-item-group {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.sitemap-item {
+  margin: .4rem;
+}
+
 @media screen and (max-width: 600px) {
 
   .large-screen-label {
