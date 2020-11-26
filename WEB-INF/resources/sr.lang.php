@@ -437,6 +437,8 @@ $i18n_key_words = array(
 
 // Forma prijave. Pogledajte primer na https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Zaboravili ste lozinku?',
+ // TODO: re-translate form.login.about as it has changed.
+ // 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is an open source time tracking system.',
 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> je jednostavan i lak za korišćenje za praćenje radnog vremena.',
 
 // Izmena forme za lozinku. Pogledajte primer na https://timetracker.anuko.com/password_reset.php.
