@@ -432,10 +432,10 @@ $i18n_key_words = array(
 'form.reset_password.message' => 'Zahteva za razveljavitev gesla je bila poslana.', // TODO: add "by email" to match the English string.
 'form.reset_password.email_subject' => 'Anuko Time Tracker zahteva za razveljavitev gesla',
 // TODO: translate the ending of this string properly.
-// TODO: English string has changed. "from IP" added. Re-translate the beginning.
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// TODO: English string has changed. "from IP" added. Re-translate.
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is an open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 // "IP %s" probably sounds awkward.
-'form.reset_password.email_body' => "Spoštovani uporabnik,\n\nNekdo, IP %s, je zahteval razveljavitev vašega Anuko Time Tracker gesla. Prosimo obiščite to povezavo, če želite razveljaviti vaše geslo.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+'form.reset_password.email_body' => "Spoštovani uporabnik,\n\nNekdo, IP %s, je zahteval razveljavitev vašega Anuko Time Tracker gesla. Prosimo obiščite to povezavo, če želite razveljaviti vaše geslo.\n\n%s\n\nAnuko Time Tracker is an open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 // TODO: translate the following.

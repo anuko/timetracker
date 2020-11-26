@@ -444,7 +444,7 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Salasõna tühistamise teade on saadetud e-postile.',
 'form.reset_password.email_subject' => 'Anuko Time Tracker, parooli tühistamise nõue',
-'form.reset_password.email_body' => "Lugupeetud Kasutaja,\n\nIP-lt %s on nõutud Teie salasõna lähtestamist. Palun avage allolev link, kui soovite oma parooli lähtestada.\n\n%s\n\nAnuko Time Tracker on lihtne, lihtsalt kasutatav ja avatud lähtekoodiga ajaarvestussüsteem. Lisainfo saamiseks külastage https://www.anuko.com lehekülge.\n\n",
+'form.reset_password.email_body' => "Lugupeetud Kasutaja,\n\nIP-lt %s on nõutud Teie salasõna lähtestamist. Palun avage allolev link, kui soovite oma parooli lähtestada.\n\n%s\n\nAnuko Time Tracker on avatud lähtekoodiga ajaarvestussüsteem. Lisainfo saamiseks külastage https://www.anuko.com lehekülge.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Kirjuta siia oma uus parool ja salvesta.',

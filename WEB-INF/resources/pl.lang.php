@@ -445,9 +445,9 @@ $i18n_key_words = array(
 'form.reset_password.message' => 'Instrukcje zmiany hasła zostały wysłane na adres e-mail połączony z kontem.',
 'form.reset_password.email_subject' => 'Anuko Time Tracker - żądanie zmiany hasła',
 // TODO: English string has changed. "from IP" added. Re-translate the beginning.
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is an open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 // "IP %s" probably sounds awkward.
-'form.reset_password.email_body' => "Drogi Użytkowniku,\n\nktoś, IP %s, poprosił o zmianę hasła w aplikacji Anuko Time Tracker. Aby ustawić nowe hasło, proszę kliknąć na poniższy link lub go skopiować i otworzyć w oknie przeglądarki WWW.\n\n%s\n\nJeśli to nie Ty poprosiłeś o zmianę hasła, zignoruj tą wiadomość.\n\nAnuko Time Tracker jest prostym, łatwym w użyciu, otwartoźródłowym systemem do śledzenia czasu. Odwiedź https://www.anuko.com aby uzyskać więcej informacji.\n\n",
+'form.reset_password.email_body' => "Drogi Użytkowniku,\n\nktoś, IP %s, poprosił o zmianę hasła w aplikacji Anuko Time Tracker. Aby ustawić nowe hasło, proszę kliknąć na poniższy link lub go skopiować i otworzyć w oknie przeglądarki WWW.\n\n%s\n\nJeśli to nie Ty poprosiłeś o zmianę hasła, zignoruj tą wiadomość.\n\nAnuko Time Tracker jest otwartoźródłowym systemem do śledzenia czasu. Odwiedź https://www.anuko.com aby uzyskać więcej informacji.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Wpisz nowe hasło i kliknij Zapisz.',
