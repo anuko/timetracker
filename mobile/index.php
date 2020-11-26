@@ -44,10 +44,9 @@ if ($auth->isAuthenticated()) {
 <html>
   <script src="../js/strftime.js"></script>
   <script>
-    location.href = "time.php?date="+(new Date()).strftime('<?php print DB_DATEFORMAT;?>');
+    location.href = "../time.php?date="+(new Date()).strftime('<?php print DB_DATEFORMAT;?>');
   </script>
   <noscript>
-    <p>Anuko Time Tracker is a simple, easy to use, open source, web-based time tracking system.</p>
-    <p>Your browser does not support JavaScript. Time Tracker will not work without it.</p>
+    <p>Your browser does not support JavaScript. This application will not work without it.</p>
   </noscript>
 </html>
