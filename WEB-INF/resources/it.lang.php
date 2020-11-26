@@ -443,10 +443,10 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Richiesta di reset password inviata via mail.',
 'form.reset_password.email_subject' => 'Richiesta reset password per Anuko Time Tracker',
-// TODO: English string has changed. "from IP added. Re-translate the beginning.
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+// TODO: English string has changed. Re-translate the beginning.
+// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is an open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
 // "IP %s" probably sounds awkward.
-'form.reset_password.email_body' => "Caro utente,\n\n qualcuno, IP %s, ha richiesto di reimpostare la tua password per Anuko Time Tracker. Per favore visita questo link per reimpostare la tua password.\n\n%s\n\nAnuko Time Tracker è un sistema semplice e open source per registrare i tempi di lavoro. Visita https://www.anuko.com per maggiori informazioni.\n\n",
+'form.reset_password.email_body' => "Caro utente,\n\n qualcuno, IP %s, ha richiesto di reimpostare la tua password per Anuko Time Tracker. Per favore visita questo link per reimpostare la tua password.\n\n%s\n\nAnuko Time Tracker è un sistema open source per registrare i tempi di lavoro. Visita https://www.anuko.com per maggiori informazioni.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Digita una nuova password e clicca su Salva.',
@@ -605,7 +605,7 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.to' => 'A',
 'form.mail.report_subject' => 'Rapporto Time Tracker',
-'form.mail.footer' => 'Anuko Time Tracker è un sistema semplice e open source <br>per registrare i tempi di lavoro. Visita <a href="https://www.anuko.com">www.anuko.com</a> per maggiori informazioni.',
+'form.mail.footer' => 'Anuko Time Tracker è un sistema open source <br>per registrare i tempi di lavoro. Visita <a href="https://www.anuko.com">www.anuko.com</a> per maggiori informazioni.',
 'form.mail.report_sent' => 'Rapporto inviato.',
 'form.mail.invoice_sent' => 'Fattura inviata.',
 

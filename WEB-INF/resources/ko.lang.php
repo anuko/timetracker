@@ -631,7 +631,7 @@ $i18n_key_words = array(
 'form.mail.to' => '까지', // TODO: is this correct? The meaning is that we send an email TO this person.
 // TODO: translate the following.
 // 'form.mail.report_subject' => 'Time Tracker Report',
-// 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
+// 'form.mail.footer' => 'Anuko Time Tracker is an open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 // 'form.mail.report_sent' => 'Report sent.',
 'form.mail.invoice_sent' => '송신한 송장.',
 

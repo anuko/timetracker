@@ -610,7 +610,7 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.to' => 'Kellele',
 'form.mail.report_subject' => 'Time Tracker raport',
-'form.mail.footer' => 'Anuko Time Tracker on lihtne, lihtsalt kasutatav ja avatud lähtekoodiga <br>ajaarvestussüsteem. Lisainfo saamiseks külastage <a href="https://www.anuko.com">www.anuko.com</a> lehekülge.',
+'form.mail.footer' => 'Anuko Time Tracker on avatud lähtekoodiga <br>ajaarvestussüsteem. Lisainfo saamiseks külastage <a href="https://www.anuko.com">www.anuko.com</a> lehekülge.',
 'form.mail.report_sent' => 'Raport on saadetud.',
 'form.mail.invoice_sent' => 'Arve on saadetud.',
 

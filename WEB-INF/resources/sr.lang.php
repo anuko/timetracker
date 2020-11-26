@@ -610,6 +610,8 @@ $i18n_key_words = array(
 // Forma mejla. Pogledajte primer na https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.to' => 'Za',
 'form.mail.report_subject' => 'Evidencija vremena',
+// TODO: retranslate form.mail.footer as the English string has changed.
+// 'form.mail.footer' => 'Anuko Time Tracker is an open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 'form.mail.footer' => 'Anuko Time Tracker je jednostavan i lak za korišćenje za praćenje <br>radnog vremena. Posetite <a href="https://www.anuko.com">www.anuko.com</a> za više informacija.',
 'form.mail.report_sent' => 'Izveštaj poslat.',
 'form.mail.invoice_sent' => 'Račun poslat.',

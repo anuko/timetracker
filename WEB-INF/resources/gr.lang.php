@@ -590,7 +590,7 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.to' => 'Προς',
 'form.mail.report_subject' => 'Time Tracker αναφορά',
-'form.mail.footer' => 'Το Anuko Time Tracker είναι ένα απλό, εύχρηστο, ανοικτού κώδικα σύστημα παρακολούθησης χρόνου. Επισκεφθείτε τη διεύθυνση <a href="https://www.anuko.com">www.anuko.com</a> για περισσότερες πληροφορίες.',
+'form.mail.footer' => 'Το Anuko Time Tracker είναι ένα ανοικτού κώδικα σύστημα παρακολούθησης χρόνου. Επισκεφθείτε τη διεύθυνση <a href="https://www.anuko.com">www.anuko.com</a> για περισσότερες πληροφορίες.',
 'form.mail.report_sent' => 'Η αναφορά στάλθηκε.',
 'form.mail.invoice_sent' => 'Το τιμολόγιο στάλθηκε.',
 

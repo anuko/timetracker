@@ -632,7 +632,7 @@ $i18n_key_words = array(
 'form.mail.to' => 'Til',
 // TODO: translate the following.
 // 'form.mail.report_subject' => 'Time Tracker Report',
-// 'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
+// 'form.mail.footer' => 'Anuko Time Tracker is an open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
 // 'form.mail.report_sent' => 'Report sent.',
 // 'form.mail.invoice_sent' => 'Invoice sent.',
 
