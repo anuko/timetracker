@@ -86,8 +86,7 @@ if ($showNoteRow) {
   }
   if ($showProject) $colspan++;
   if ($showTask) $colspan++;
-  if ($showStart) $colspan++;
-  if ($showFinish) $colspan++;
+  if ($showStart) $colspan += 2; // Another for show finish.
   $colspan++; // There is always a duration.
   if ($showFiles) $colspan++;
   $colspan++; // There is always an edit column.
