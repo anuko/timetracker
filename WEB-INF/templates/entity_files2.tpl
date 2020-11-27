@@ -23,6 +23,7 @@ License: See license.txt *}
 {/if}
 
 {if $can_edit}
+<div class="form-control-separator"></div>
 {$forms.fileUploadForm.open}
 <table class="centered-table">
   <tr class = "small-screen-label"><td><label for="newfile">{$i18n.label.file}:</label></td></tr>
@@ -37,8 +38,8 @@ License: See license.txt *}
     <td class="td-with-input">{$forms.fileUploadForm.description.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+  <tr><td colspan="2">{$forms.fileUploadForm.btn_submit.control}</td></tr>
 </table>
-<div class="button-set">{$forms.fileUploadForm.btn_submit.control}</div>
 {$forms.fileUploadForm.close}
 {/if}
 
