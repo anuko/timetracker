@@ -22,6 +22,7 @@ License: See license.txt *}
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {if $show_users}
+  <tr><td><div class="form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td>{$i18n.label.users}:</td></tr>
   <tr>
     <td class="large-screen-label">{$i18n.label.users}:</td>
@@ -30,6 +31,7 @@ License: See license.txt *}
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
 {if $show_tasks}
+  <tr><td><div class="form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td>{$i18n.label.tasks}:</td></tr>
   <tr>
     <td class="large-screen-label">{$i18n.label.tasks}:</td>

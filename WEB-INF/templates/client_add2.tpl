@@ -24,6 +24,7 @@ License: See license.txt *}
   <tr><td colspan="2">{$i18n.label.required_fields}</td></tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {if $show_projects}
+  <tr><td><div class="form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td>{$i18n.label.projects}:</td></tr>
   <tr>
     <td class="large-screen-label">{$i18n.label.projects}:</td>
