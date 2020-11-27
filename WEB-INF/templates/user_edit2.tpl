@@ -185,6 +185,7 @@ function handleClientRole() {
 </tbody>
 {if $show_projects}
 <tbody id="projects_control">
+  <tr><td><div class="form-control-separator"></div></id></tr>
   <tr class = "small-screen-label"><td><label for="projects">{$i18n.label.projects}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="projects">{$i18n.label.projects}:</label></td>

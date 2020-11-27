@@ -156,6 +156,7 @@ class RateCellRenderer extends DefaultCellRenderer {
     global $assigned_projects;
 
     $field = new FloatField('rate_'.$table->getValueAtName($row,'id'));
+    $field->setCssClass('project-rate-field');
     $field->setFormName($table->getFormName());
     $field->setSize(5);
     $field->setFormat('.2');
