@@ -133,6 +133,7 @@ div.page-hint {
 
 .x-scrollable-table th {
   white-space: nowrap;
+  padding: .25rem;
 }
 
 .x-scrollable-table td {
@@ -279,6 +280,10 @@ input[type="file"] {
   margin-top: 1rem;
   margin-left: auto;
   margin-right: auto;
+}
+
+.small-screen-calendar a:focus, .large-screen-calendar a:focus {
+  outline: none;
 }
 
 .large-screen-calendar {
