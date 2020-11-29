@@ -108,6 +108,10 @@ div.page-hint {
   margin-top: 1rem;
 }
 
+.project-rate-table {
+  width: 300px;
+}
+
 .centered-table {
   margin-top: .5rem;
   margin-left: auto;
@@ -235,7 +239,7 @@ input[type="text"] {
 }
 
 input[type="text"].project-rate-field {
-  width: 100px;
+  width: 50px;
 }
 
 input[type="password"] {

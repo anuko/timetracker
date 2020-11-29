@@ -275,7 +275,8 @@ if ($user->can('track_time')) {
 }
 
 // Create week_durations table.
-$table = new Table('week_durations', 'week_view_table');
+$table = new Table('week_durations');
+// $table->setCssClass('week_view_table'); // Currently not used. Fix this.
 $table->setTableOptions(array('width'=>'100%','cellspacing'=>'1','cellpadding'=>'3','border'=>'0'));
 $table->setRowOptions(array('class'=>'tableHeaderCentered'));
 $table->setData($dataArray);

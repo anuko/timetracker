@@ -47,10 +47,9 @@ class Table extends FormElement {
   var $mHeaderOptions = array();
   var $mProccessed    = false;
 	
-  function __construct($name, $cssClass = null) {
+  function __construct($name) {
     $this->class = 'Table';
     $this->name = $name;
-    $this->cssClass = $cssClass;
   }
   
   function setKeyField($value) {
@@ -123,15 +122,15 @@ class Table extends FormElement {
     if ($this->mInteractive) $html .= $this->_addJavaScript();
 
     $html .= "<table";
-    if ($this->cssClass) {
-      $html .= " class=\"".$this->cssClass."\"";
+    if ($this->css_class) {
+      $html .= " class=\"".$this->css_class."\"";
     }
     if (count($this->mTableOptions) > 0) {
       foreach ($this->mTableOptions as $k=>$v) {
         $html .= " $k=\"$v\"";
       }
     } else {
-      $html .= " border=\"1\"";
+      // $html .= " border=\"1\"";
     }
     if ($this->mWidth!="") $html .= " width=\"".$this->mWidth."\"";
     $html .= ">\n";

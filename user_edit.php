@@ -146,7 +146,7 @@ if ($show_quota)
 // Define classes for the projects table.
 class NameCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
-    $this->setOptions(array('width'=>200));
+    //$this->setOptions(array('width'=>200));
     $this->setValue('<label for = "'.$table->name.'_'.$row.'">'.htmlspecialchars($value).'</label>');
     return $this->toString();
   }
@@ -169,8 +169,9 @@ class RateCellRenderer extends DefaultCellRenderer {
 }
 // Create projects table.
 $table = new Table('projects');
+$table->setCssClass('project-rate-table');
 $table->setIAScript('setRate');
-$table->setTableOptions(array('width'=>'300','cellspacing'=>'1','cellpadding'=>'3','border'=>'0'));
+//$table->setTableOptions(array('width'=>'300','cellspacing'=>'1','cellpadding'=>'3','border'=>'0'));
 $table->setRowOptions(array('valign'=>'top','class'=>'tableHeader'));
 $table->setData($projects);
 $table->setKeyField('id');
