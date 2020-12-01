@@ -129,9 +129,8 @@ class Table extends FormElement {
       foreach ($this->mTableOptions as $k=>$v) {
         $html .= " $k=\"$v\"";
       }
-    } else {
-      // $html .= " border=\"1\"";
     }
+
     if ($this->mWidth!="") $html .= " width=\"".$this->mWidth."\"";
     $html .= ">\n";
     
