@@ -8,57 +8,53 @@ body {
   background-color: white;
 }
 
+/* logo on top of pages */
 div.logo {
   padding: .5rem;
   text-align: center;
   background-color: #a6ccf7;
 }
 
+/* top menu bar for large screens */
 div.top-menu-large-screen {
   background-color: black;
   display: block;
 }
 
-.top-submenu-large-screen {
+/* submenu for large screens */
+div.top-submenu-large-screen {
   background-color: #d9d9d9;
   display: block;
 }
 
+/* top menu for small screens */
 div.top-menu-small-screen {
   background-color: black;
   display: none;
 }
 
-div.top-menu-small-screen a {
+/* top menu items */
+div.top-menu-large-screen a, div.top-menu-small-screen a {
   font-size: 1rem;
   font-weight: bold;
   color: white;
   margin: .1rem .2rem .1rem .2rem;
 }
 
-div.top-menu-large-screen a {
-  font-size: 1rem;
-  font-weight: bold;
-  color: white;
-  margin: .1rem .2rem .1rem .2rem;
-}
-
-.top-menu-table {
+/* top menu tables */
+.top-menu-table, .top-submenu-table {
   margin-left: auto;
   margin-right: auto;
 }
 
-.top-submenu-table {
-  margin-left: auto;
-  margin-right: auto;
-}
-
+/* top submenu items */
 .top-submenu-large-screen a {
   font-size: 1rem;
   color: #444444;
   margin: .1rem .2rem .1rem .2rem;
 }
 
+/* page title div */
 div.page-title {
   font-size: 12pt;
   font-weight: bold;
@@ -69,45 +65,60 @@ div.page-title {
   margin-bottom: .2rem;
 }
 
+/* user details div */
 div.user-details {
   text-align: center;
   padding: .2rem;
 }
 
+/* page errors div */
 .page-errors {
   margin-top: .5rem;
   text-align: center;
   color: red;
 }
 
+/* page messages div */
 .page-messages {
   margin-top: .5rem;
   text-align: center;
   color: blue;
 }
 
+/* page content div */
 .page-content {
   text-align: center;
 }
 
+/* vertical separator for controls on forms for both large and small screens */
 .form-control-separator {
   height: .5rem;
 }
 
+/* vertical separator for controls on small screens */
+.small-screen-form-control-separator {
+  height: .25rem;
+  display: none;
+}
+
+/* "about" text div on login page */
 div#LoginAboutText {
   padding: 1rem;
   margin-left:auto;
   margin-right:auto;
 }
 
+/* default domain text div for ldap login */
 #ldapDefaultDomain {
   color: #777777;
 }
 
+/* page hint div to display on top of some pages to clarify things */
 div.page-hint {
   margin-top: 1rem;
 }
 
+/* project rate table for user add and user edit pages */
 .project-rate-table {
   width: 300px;
   border-collapse: collapse;
@@ -117,21 +128,15 @@ div.page-hint {
   padding: .2rem;
 }
 
+/* a table to display controls centered horizontally */
 .centered-table {
+  display: inline-block;
   margin-top: .5rem;
   margin-left: auto;
   margin-right: auto;
-  display: inline-block;
 }
 
-.chart-list {
-  border-spacing: .2rem;
-}
-
-.record-list {
-  margin: 1rem;
-}
-
+/* a table to hold things that may not fit into available screen width */
 .x-scrollable-table {
   display: inline-block;
   margin-top: .5rem;
@@ -152,40 +157,59 @@ div.page-hint {
 .x-scrollable-table tr:nth-child(even) {background: #ffffff}
 .x-scrollable-table tr:nth-child(odd) {background: #f5f5f5}
 
+/* a text cell in tables */
 .text-cell {
   text-align: left;
 }
 
+/* time cell in tables */
 .time-cell {
   text-align: right;
 }
 
+/* text cell for note header when we display notes on separate rows */
 .note-header-cell {
   text-align: right;
 }
 
+/* control labels for large screens */
 .large-screen-label {
   text-align: right;
   vertical-align: middle;
   display: table-cell;
 }
 
-.large-screen-chart-list {
-  display: table-cell;
-}
-
-.small-screen-chart-list {
-  display: none;
-}
-
+/* control labels for small screens */
 .small-screen-label {
   text-align: left;
   display: none;
 }
 
-.small-screen-form-control-separator {
-  height: .25rem;
+/* list of items displayed in a chart on large screens */
+.large-screen-chart-items-list {
+  display: table-cell;
+}
+
+/* list of items displayed in a chart on small screens */
+.small-screen-chart-items-list {
   display: none;
+}
+
+/* a div to display a chart in */
+div.chart {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+
+
+/* TODO: work in progress below... */
+.chart-list {
+  border-spacing: .2rem;
+}
+
+.record-list {
+  margin: 1rem;
 }
 
 .page-content input {
@@ -393,11 +417,11 @@ input[type="file"] {
     display: none;
   }
 
-  .large-screen-chart-list {
+  .large-screen-chart-items-list {
     display: none;
   }
 
-  .small-screen-chart-list {
+  .small-screen-chart-items-list {
     display: table-cell;
   }
 
