@@ -146,7 +146,6 @@ if ($show_quota)
 // Define classes for the projects table.
 class NameCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
-    //$this->setOptions(array('width'=>200));
     $this->setValue('<label for = "'.$table->name.'_'.$row.'">'.htmlspecialchars($value).'</label>');
     return $this->toString();
   }
@@ -154,7 +153,6 @@ class NameCellRenderer extends DefaultCellRenderer {
 class RateCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     global $assigned_projects;
-
     $field = new FloatField('rate_'.$table->getValueAtName($row,'id'));
     $field->setCssClass('project-rate-field');
     $field->setFormName($table->getFormName());

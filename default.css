@@ -110,6 +110,11 @@ div.page-hint {
 
 .project-rate-table {
   width: 300px;
+  border-collapse: collapse;
+}
+
+.project-rate-table td {
+  padding: .2rem;
 }
 
 .centered-table {
