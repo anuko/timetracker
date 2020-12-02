@@ -54,7 +54,7 @@ function adjustTodayLinks() {
   <tr>
     <td><img class="chart-image" src="{$img_file_name}"></td>
     <td class="large-screen-chart-items-list">
-      <table class="chart-list">
+      <table class="chart-items-list-table">
       {section name=i loop=$totals}
       {if $smarty.section.i.index <= 12}
         <tr><td class="chart-color-cell" style="background-color:{$totals[i].color_html};"></td><td class="chart-description-cell">{$totals[i].name|escape}</td></tr>
@@ -69,7 +69,7 @@ function adjustTodayLinks() {
 <table class="centered-table">
   <tr>
     <td class="small-screen-chart-items-list">
-      <table class="chart-list">
+      <table class="chart-items-list-table">
       {section name=i loop=$totals}
       {if $smarty.section.i.index <= 12}
         <tr><td class="chart-color-cell" style="background-color:{$totals[i].color_html};"></td><td class="chart-description-cell">{$totals[i].name|escape}</td></tr>

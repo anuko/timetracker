@@ -145,15 +145,18 @@ div.page-hint {
   border-collapse: collapse;
 }
 
+/* th in x-scrollable-table */
 .x-scrollable-table th {
   white-space: nowrap;
   padding: .25rem;
 }
 
+/* td in x-scrollable-table */
 .x-scrollable-table td {
   padding: .25rem;
 }
 
+/* alternating row background in x-scrollable-table */
 .x-scrollable-table tr:nth-child(even) {background: #ffffff}
 .x-scrollable-table tr:nth-child(odd) {background: #f5f5f5}
 
@@ -201,13 +204,12 @@ div.chart {
   padding-right: 1rem;
 }
 
-
-
-/* TODO: work in progress below... */
-.chart-list {
+/* a table to annotate items from chart picture */
+.chart-items-list-table {
   border-spacing: .2rem;
 }
 
+/* TODO: work in progress below */
 .record-list {
   margin: 1rem;
 }
