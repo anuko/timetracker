@@ -83,5 +83,5 @@ if ($fileHelper->getFile($file)) {
 }
 
 $smarty->assign('title', $i18n->get('title.download_file'));
-$smarty->assign('content_page_name', 'file_download.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'file_download2.tpl');
+$smarty->display('index2.tpl');
