@@ -247,54 +247,44 @@ div.version-and-copyright {
   padding: .5rem;
 }
 
-
-
-
-/* TODO: work in progress below */
+/* img in td in centered-table, ex: now icons */
 .centered-table td img {
   vertical-align: middle;
 }
 
-.what-is-it-img {
+/* span for what is it icon image */
+span.what-is-it-img {
   display: none;
 }
 
-.what-is-it-text {
+/* span for what is it text */
+span.what-is-it-text {
   display: inline-block;
 }
 
-input[type="submit"] {
+/* buttons */
+input[type="submit"], input[type="button"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
 
-input[type="button"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-input[type="text"] {
+/* input controls */
+input[type="text"], input[type="password"], input[type="file"] {
   width: 220px;
 }
 
+/* project rate input control */
 input[type="text"].project-rate-field {
   width: 50px;
 }
 
-input[type="password"] {
-  width: 220px;
-}
-
-input[type="file"] {
-  width: 220px;
-}
-
+/* dropdown control */
 .dropdown-field {
-  width: 237px;
+  width: 236px;
 }
 
+/* textareas for fields */
 #description, #address, #item_name {
   width: 220px;
   border-radius: 4px;
@@ -302,50 +292,14 @@ input[type="file"] {
   padding: .4rem;
 }
 
+/* textareas with focus */
 #description:focus, #address:focus, #item_name:focus {
   background-color: yellow;
   border: 1px solid black;
   outline: none;
 }
 
-.chart-image {
-  width: 300px;
-  height: 300px;
-}
-
-.chart-color-cell {
-  width: .4rem;
-  height: 1rem;
-}
-
-.chart-description-cell {
-  text-align: left;
-  padding-left: .25rem;
-}
-
-.small-screen-calendar {
-  display: none;
-  width: 210px;
-  margin-top: 1rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.small-screen-calendar a:focus, .large-screen-calendar a:focus {
-  outline: none;
-}
-
-.large-screen-calendar {
-  display: block;
-  width: 210px;
-  padding-left: 1rem;
-  margin-top: 1rem;
-}
-
-.checkbox-label {
-  float: left;
-}
-
+/* textarea for note field */
 #note {
   width: 100%;
   margin: 0;
@@ -356,129 +310,206 @@ input[type="file"] {
   padding: .4rem;
 }
 
+/* note field with focus */
 #note:focus {
   background-color: yellow;
   border: 1px solid black;
   outline: none;
 }
 
-.day-totals {
-  margin-bottom: 1rem;
+/* chart image */
+.chart-image {
+  width: 300px;
+  height: 300px;
 }
 
+/* chart color cell for annotations */
+.chart-color-cell {
+  width: .4rem;
+  height: 1rem;
+}
+
+/* chart description cell for annotations */
+.chart-description-cell {
+  text-align: left;
+  padding-left: .25rem;
+}
+
+/* calendar for small screens */
+.small-screen-calendar {
+  display: none;
+  width: 210px;
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* calendars with focus */
+.small-screen-calendar a:focus, .large-screen-calendar a:focus {
+  outline: none;
+}
+
+/* calendar for large screens */
+.large-screen-calendar {
+  display: block;
+  width: 210px;
+  padding-left: 1rem;
+  margin-top: 1rem;
+}
+
+/* label for checkboxes */
+.checkbox-label {
+  float: left;
+}
+
+/* div for day totals */
+div.day-totals {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+/* column 1 for day totals */
 .day-totals-col1 {
   text-align: left;
   padding-left: .5rem;
   padding-right: .5rem;
 }
 
+/* column 2 for day totals */
 .day-totals-col2 {
   padding-left: .5rem;
   padding-right: .5rem;
   text-align: right;
 }
 
+/* not billable items */
 .not-billable {
-  color: #ff6666;
-}
-
-.remaining-quota {
   color: red;
 }
 
-.remaining-quota-balance {
+/* remaining quota span */
+span.remaining-quota {
   color: red;
 }
 
-.over-quota {
+/* remaining quota balance span */
+span.remaining-quota-balance {
+  color: red;
+}
+
+/* over quota span */
+span.over-quota {
   color: green;
 }
 
-.over-quota-balance {
+/* over quota balance span */
+span.over-quota-balance {
   color: green;
 }
 
-.optional-nav {
+/* div for optional navigation, ex: week view */
+div.optional-nav {
   margin-top: .5rem;
 }
 
+/* div for a set of buttons, ex: save, copy, delete */
 .button-set {
   margin-top: .5rem;
   margin-bottom: 1rem;
 }
 
-.section-header {
+/* section header div */
+div.section-header {
   font-weight: bold;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-.sitemap-item-group {
+/* div for a group of items in site map */
+div.sitemap-item-group {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
-.sitemap-item {
+/* div for a single item in site map */
+div.sitemap-item {
   margin: .4rem;
 }
 
+/* media rules for small screens */
 @media screen and (max-width: 600px) {
 
+  /* hide large screen labels */
   .large-screen-label {
     display: none;
   }
 
+  /* hide large screen chart annotations */
   .large-screen-chart-items-list {
     display: none;
   }
 
+  /* show small screen chart annotations */
   .small-screen-chart-items-list {
     display: table-cell;
   }
 
+  /* show small screen labels */
   .small-screen-label {
     display: block;
   }
 
+  /* show small screen calendar */
   .small-screen-calendar {
     display: block;
   }
 
+  /* hide large screen calendar */
   .large-screen-calendar {
     display: none;
   }
 
+  /* show small screen form control separators */
   .small-screen-form-control-separator {
     display: block;
   }
 
-  .what-is-it-img {
+  /* show what is it icons */
+  span.what-is-it-img {
     display: inline-block;
   }
 
-  .what-is-it-text {
+  /* hide what is it text */
+  span.what-is-it-text {
     display: none;
   }
 
+  /* hide how to contribute message */
   div.contribute-msg {
     display: none;
   }
 
+  /* hide version and copyright */
   div.version-and-copyright {
     display: none;
   }
 }
 
+/* media rules for menus on small screens */
 @media screen and (max-width: 1170px) {
+
+  /* show small screen menu */
   div.top-menu-small-screen {
     display: block;
   }
 
+  /* hide large screen menu */
   div.top-menu-large-screen {
     display: none;
   }
 
+  /* hide large screen submenu */
   div.top-submenu-large-screen {
     display: none;
   }
