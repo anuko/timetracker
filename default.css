@@ -424,6 +424,8 @@ div.section-header {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
 }
 
 /* div for a group of items in site map */
