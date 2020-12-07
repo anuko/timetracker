@@ -32,6 +32,11 @@ import('ttTeamHelper');
 import('ttGroupHelper');
 import('ttTimeHelper');
 
+// Mobile pages are no longer separate. Redirect to main page.
+header('Location: ../users.php');
+exit();
+// Below is no longer used code.
+
 // Access checks.
 if (!(ttAccessAllowed('view_users') || ttAccessAllowed('manage_users'))) {
   header('Location: access_denied.php');

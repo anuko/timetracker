@@ -30,6 +30,11 @@ require_once('../initialize.php');
 import('form.Form');
 import('ttGroupHelper');
 
+// Mobile pages are no longer separate. Redirect to main page.
+header('Location: ../tasks.php');
+exit();
+// Below is no longer used code.
+
 // Access checks.
 if (!(ttAccessAllowed('view_own_tasks') || ttAccessAllowed('manage_tasks'))) {
   header('Location: access_denied.php');

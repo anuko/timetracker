@@ -28,6 +28,11 @@
 
 require_once('../initialize.php');
 
+// Mobile pages are no longer separate. Redirect to main page.
+header('Location: ../index.php');
+exit();
+// Below is no longer used code.
+
 // Redirects for admin and client roles.
 if ($auth->isAuthenticated()) {
   if ($user->can('administer_site')) {

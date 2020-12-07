@@ -34,6 +34,11 @@ import('DateAndTime');
 import('ttTimeHelper');
 import('ttExpenseHelper');
 
+// Mobile pages are no longer separate. Redirect to main page.
+header('Location: ../expenses.php');
+exit();
+// Below is no longer used code.
+
 // Access checks.
 if (!(ttAccessAllowed('track_own_expenses') || ttAccessAllowed('track_expenses'))) {
   header('Location: access_denied.php');

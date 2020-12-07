@@ -31,6 +31,11 @@ import('form.Form');
 import('ttTeamHelper');
 import('ttGroupHelper');
 
+// Mobile pages are no longer separate. Redirect to main page.
+header('Location: ../projects.php');
+exit();
+// Below is no longer used code.
+
 // Access checks.
 if (!(ttAccessAllowed('view_own_projects') || ttAccessAllowed('manage_projects'))) {
   header('Location: access_denied.php');
