@@ -26,7 +26,7 @@ License: See license.txt *}
   <tr class = "small-screen-label"><td>{$i18n.label.users}:</td></tr>
   <tr>
     <td class="large-screen-label">{$i18n.label.users}:</td>
-    <td class="td-with-input">{$forms.projectForm.users.control}</td>
+    <td class="td-with-checkboxes">{$forms.projectForm.users.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
@@ -35,7 +35,7 @@ License: See license.txt *}
   <tr class = "small-screen-label"><td>{$i18n.label.tasks}:</td></tr>
   <tr>
     <td class="large-screen-label">{$i18n.label.tasks}:</td>
-    <td class="td-with-input">{$forms.projectForm.tasks.control}</td>
+    <td class="td-with-checkboxes">{$forms.projectForm.tasks.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}

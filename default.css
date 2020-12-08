@@ -233,6 +233,12 @@ div.record-list {
   text-align: left;
 }
 
+/* a table cell containing a set ov vertically stacked checkboxes */
+.td-with-checkboxes {
+  text-align: left;
+  width: 300px;
+}
+
 /* div containing how to contribute message */
 div.contribute-msg {
   text-align: center;

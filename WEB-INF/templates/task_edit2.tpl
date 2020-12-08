@@ -26,7 +26,7 @@ License: See license.txt *}
   <tr class = "small-screen-label"><td>{$i18n.label.projects}:</td></tr>
   <tr>
     <td class="large-screen-label">{$i18n.label.projects}:</td>
-    <td class="td-with-input">{$forms.taskForm.projects.control}</td>
+    <td class="td-with-checkboxes">{$forms.taskForm.projects.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
