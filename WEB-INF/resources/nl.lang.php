@@ -390,16 +390,12 @@ $i18n_key_words = array(
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Wachtwoord vergeten?',
- // TODO: re-translate form.login.about as it has changed.
- // 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is an open source time tracking system.',
-'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is een eenvoudig en gemakkelijk te gebruiken open source tijdregistratiesysteem.',
+'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is een open source tijdregistratiesysteem.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Het verzoek om het wachtwoord te herstellen is verzonden per email.',
 'form.reset_password.email_subject' => 'Anuko Time Tracker wachtwoord herstel verzoek',
-// TODO: retranslate form.reset_password.email_body as the string has changed.
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is an open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
-'form.reset_password.email_body' => "Geachte medewerker,\n\nIemand, met IP adres %s, heeft verzocht uw wachtwoord in Anuko Time Tracker te herstellen. Klik op deze link als u uw wachtwoord wil wijzigen.\n\n%s\n\nAnuko Time Tracker is een eenvoudig en gemakkelijk te gebruiken open source tijdregistratiesysteem. Bezoek https://www.anuko.com voor meer informatie.\n\n",
+'form.reset_password.email_body' => "Beste gebruiker,\n\nIemand, met IP adres %s, heeft verzocht uw wachtwoord in Anuko Time Tracker te herstellen. Klik op deze link als u uw wachtwoord wil wijzigen.\n\n%s\n\nAnuko Time Tracker is een open source tijdregistratiesysteem. Bezoek https://www.anuko.com voor meer informatie.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Voer het nieuwe wachtwoord in en klik op Bewaren.',
@@ -546,9 +542,7 @@ $i18n_key_words = array(
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.to' => 'Aan',
 'form.mail.report_subject' => 'Time Tracker rapport',
-// TODO: retranslate form.mail.footer as the English string has changed.
-// 'form.mail.footer' => 'Anuko Time Tracker is an open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
-'form.mail.footer' => 'Anuko Time Tracker is een eenvoudig en gemakkelijk te gebruiken open source tijdregistratiesysteem. Bezoek <a href="https://www.anuko.com">www.anuko.com</a> voor meer informatie.',
+'form.mail.footer' => 'Anuko Time Tracker is een open source tijdregistratiesysteem. Bezoek <a href="https://www.anuko.com">www.anuko.com</a> voor meer informatie.',
 'form.mail.report_sent' => 'Rapport is verzonden.',
 'form.mail.invoice_sent' => 'Factuur is verzonden.',
 
