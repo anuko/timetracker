@@ -449,7 +449,7 @@ if ($confirm_save) {
   $smarty->assign('entry_date', $cl_date);
 }
 $smarty->assign('show_client', $showClient);
-$smarty->assign('show_billable', $showBillable);+
+$smarty->assign('show_billable', $showBillable);
 $smarty->assign('show_paid_status', $showPaidStatus);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
