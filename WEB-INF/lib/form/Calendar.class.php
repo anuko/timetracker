@@ -80,7 +80,7 @@ class Calendar extends FormElement {
     $firstOfPreviousMonth = strftime(DB_DATEFORMAT, $firstOfPreviousMonth2AM);
 
     // Print calendar header.
-    $html .= "\n\n<!-- start of calendar -->\n";
+    $html = "\n\n<!-- start of calendar -->\n";
     $html .= '<table cellpadding="0" cellspacing="0" border="0" width="100%">'."\n";
     $html .= '  <tr><td align="center">';
     $html .= '<div class="calendarHeader">';

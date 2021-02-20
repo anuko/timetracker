@@ -347,7 +347,9 @@ class ttUser {
     $group_id = $this->getGroup();
     $org_id = $this->org_id;
 
-    if ($options['include_files']) {
+    $filePart = '';
+    $fileJoin = '';
+    if (isset($options['include_files'])) {
       $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
       $fileJoin =  " left join (select distinct entity_id from tt_files".
       " where entity_type = 'project' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
