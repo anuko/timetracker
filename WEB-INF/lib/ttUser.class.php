@@ -488,6 +488,7 @@ class ttUser {
     $includeSelf = isset($options['include_self']);
 
     $select_part = 'select u.id, u.group_id, u.name';
+    $include_quota = false;
     if (isset($options['include_login'])) {
       $select_part .= ', u.login';
       // Piggy-back on include_login to see if we must also include quota_percent.
