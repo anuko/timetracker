@@ -234,3 +234,5 @@ License: See license.txt *}
 {/if}
 </table>
 </div>
+
+{$smarty.version}
