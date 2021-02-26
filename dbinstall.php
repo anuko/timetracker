@@ -691,10 +691,10 @@ if ($_POST) {
     print "Updated $clients_updated clients...<br>\n";
   }
 
-  // The update_custom_fields function updates option_id field field in tt_custom_field_log table.
+  // The update_custom_fields function updates option_id field in tt_custom_field_log table.
   if ($_POST['update_custom_fields']) {
     $mdb2 = getConnection();
-    $sql = "update tt_custom_field_log set option_id = value where field_id in (select id from tt_custom_fields where type = 2)";
+    $sql = "update tt_custom_field_log set option_id = value where option_id is null and value is not null and field_id in (select id from tt_custom_fields where type = 2)";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error'))
       die($affected->getMessage());
