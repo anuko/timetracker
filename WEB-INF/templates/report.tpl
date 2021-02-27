@@ -117,6 +117,7 @@
         {if $bean->getAttribute('chtimesheet')}<td></td>{/if}
         {if $bean->getAttribute('chfiles')}<td></td>{/if}
         {if $use_checkboxes}<td></td>{/if}
+        {* <td></td>{* column for edit icons *}
       </tr>
       <tr><td>&nbsp;</td></tr>
       {/if}
@@ -171,6 +172,7 @@
       {if 1 == $item.type}<td bgcolor="white"><input type="checkbox" name="log_id_{$item.id}"></td>{/if}
       {if 2 == $item.type}<td bgcolor="white"><input type="checkbox" name="item_id_{$item.id}"></td>{/if}
     {/if}
+     {* <td><a href="time_edit.php?id={$item.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>{* column for edit icons *}
       </tr>
     {if $note_on_separate_row && $bean->getAttribute('chnote') && $item.note}
       <tr>
@@ -220,6 +222,7 @@
     {if $bean->getAttribute('chtimesheet')}<td></td>{/if}
     {if $bean->getAttribute('chfiles')}<td></td>{/if}
     {if $use_checkboxes}<td></td>{/if}
+    {* <td></td>{* column for edit icons *}
       </tr>
   {/if}
   <!-- print totals -->
@@ -261,6 +264,7 @@
     {if $bean->getAttribute('chtimesheet')}<td></td>{/if}
     {if $bean->getAttribute('chfiles')}<td></td>{/if}
     {if $use_checkboxes}<td></td>{/if}
+    {* <td></td>{* column for edit icons *}
       </tr>
 {/if}
     </table>

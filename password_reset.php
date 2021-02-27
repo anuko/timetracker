@@ -46,7 +46,10 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     // Prepare and save a temporary reference for user.
-    $temp_ref = md5(uniqid());
+    $cryptographically_strong = true;
+    $random_bytes = openssl_random_pseudo_bytes(16, $cryptographically_strong);
+    if ($random_bytes === false) die ("openssl_random_pseudo_bytes function call failed...");
+    $temp_ref = bin2hex($random_bytes);
     ttUserHelper::saveTmpRef($temp_ref, $user->id);
 
     $user_i18n = null;
