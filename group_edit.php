@@ -32,8 +32,6 @@ import('ttUserHelper');
 import('ttRoleHelper');
 import('ttConfigHelper');
 
-$id = (int)$request->getParameter('id');
-
 // Access checks.
 // There are 4 distinct situations:
 //   1) Editing home group in get or post.
