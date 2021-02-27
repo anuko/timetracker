@@ -82,6 +82,11 @@ class ttUserHelper {
   static function getUserIdByTmpRef($ref) {
     $mdb2 = getConnection();
 
+    // Some protection for brute force attacks to guess a reference for user.
+    // This limits an available window for brute force guessing to 1 hour.
+    $sql = "delete from tt_tmp_refs where created < now() - interval 1 hour";
+    $affected = $mdb2->exec($sql);
+
     $sql = "select user_id from tt_tmp_refs where ref = ".$mdb2->quote($ref);
     $res = $mdb2->query($sql);
 
