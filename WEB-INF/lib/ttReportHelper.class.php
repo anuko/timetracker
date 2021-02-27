@@ -350,9 +350,10 @@ class ttReportHelper {
         array_push($fields, "cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost"); // Use project rate for user.
       array_push($fields, "null as expense"); 
     }
-    // Add approved.
-    if ($options['show_approved'])
-      array_push($fields, 'l.approved');
+    // Add the fields used to determine if we show an edit icon for record.
+    array_push($fields, 'l.approved');
+    array_push($fields, 'l.timesheet_id');
+    array_push($fields, 'l.invoice_id');
     // Add paid status.
     if ($canViewReports && $options['show_paid'])
       array_push($fields, 'l.paid');
@@ -513,9 +514,10 @@ class ttReportHelper {
         array_push($fields, 'ei.name as note');
       array_push($fields, 'ei.cost as cost');
       array_push($fields, 'ei.cost as expense');
-      // Add approved.
-      if ($options['show_approved'])
-        array_push($fields, 'ei.approved');
+      // Add the fields used to determine if we show an edit icon for record.
+      array_push($fields, 'ei.approved');
+      array_push($fields, 'null as timesheet_id');
+      array_push($fields, 'ei.invoice_id');
       // Add paid status.
       if ($canViewReports && $options['show_paid'])
         array_push($fields, 'ei.paid');

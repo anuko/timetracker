@@ -21,6 +21,7 @@ if (!$user->isPluginEnabled('ex')) {
 $cl_id = (int)$request->getParameter('id');
 // Get the expense item we are editing.
 $expense_item = ttExpenseHelper::getItem($cl_id);
+if (!$expense_item) $expense_item = ttExpenseHelper::getOnBehalfItem($cl_id);
 if (!$expense_item || $expense_item['approved'] || $expense_item['invoice_id']) {
   // Prohibit editing not ours, approved, or invoiced items.
   header('Location: access_denied.php');

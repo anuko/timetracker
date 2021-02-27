@@ -1,30 +1,6 @@
 <?php
-// +----------------------------------------------------------------------+
-// | Anuko Time Tracker
-// +----------------------------------------------------------------------+
-// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
-// +----------------------------------------------------------------------+
-// | LIBERAL FREEWARE LICENSE: This source code document may be used
-// | by anyone for any purpose, and freely redistributed alone or in
-// | combination with other software, provided that the license is obeyed.
-// |
-// | There are only two ways to violate the license:
-// |
-// | 1. To redistribute this code in source form, with the copyright
-// |    notice or license removed or altered. (Distributing in compiled
-// |    forms without embedded copyright notices is permitted).
-// |
-// | 2. To redistribute modified versions of this code in *any* form
-// |    that bears insufficient indications that the modifications are
-// |    not the work of the original author(s).
-// |
-// | This license applies to this document only, not any other software
-// | that it may be combined with.
-// |
-// +----------------------------------------------------------------------+
-// | Contributors:
-// | https://www.anuko.com/time_tracker/credits.htm
-// +----------------------------------------------------------------------+
+/* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt */
 
 // The ttExpenseHelper is a class to help with expense items.
 class ttExpenseHelper {
@@ -170,6 +146,44 @@ class ttExpenseHelper {
       }
     }
     return false;
+  }
+
+  // getOnBehalfItem - retrieves an expense item on behalf of user.
+  // If such item is found, it also sets on behalf user.
+  static function getOnBehalfItem($id) {
+    global $user;
+
+    // Determine user id for item.
+    $user_id = ttExpenseHelper::getUserForItem($id);
+    $user_valid = $user->isUserValid($user_id);
+
+    if (!$user_valid) return false;
+
+    // Set on behalf user.
+    $user->setOnBehalfUser($user_id);
+    // Get on behalf record.
+    return ttExpenseHelper::getItem($id);
+  }
+
+  // getUserForItem - retrieves user id for an expense item.
+  static function getUserForItem($id) {
+    global $user;
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $mdb2 = getConnection();
+
+    // Obtain user_id for the expense item.
+    $sql = "select ei.user_id from tt_expense_items ei ".
+      " where ei.id = $id and ei.group_id = $group_id and ei.org_id = $org_id and ei.status = 1";
+    $res = $mdb2->query($sql);
+    if (is_a($res, 'PEAR_Error')) return false;
+    if (!$res->numRows()) return false;
+
+    $val = $res->fetchRow();
+    $user_id = $val['user_id'];
+    return $user_id;
   }
 
   // getItemForFileView - retrieves an expense item identified by its id for
