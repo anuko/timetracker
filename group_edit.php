@@ -32,15 +32,17 @@ import('ttUserHelper');
 import('ttRoleHelper');
 import('ttConfigHelper');
 
+$id = (int)$request->getParameter('id');
+
 // Access checks.
 // There are 4 distinct situations:
 //   1) Editing home group in get or post.
 //   2) Editing a subgroup in get or post.
 // We'll check access separately as it is about different right checks.
 if ($request->isGet()) {
-  $group_id = $request->getParameter('id') ? $request->getParameter('id') : $user->getGroup();
+  $group_id = $request->getParameter('id') ? (int)$request->getParameter('id') : $user->getGroup();
 } else {
-  $group_id = $request->getParameter('group') ? $request->getParameter('group') : $user->getGroup();
+  $group_id = $request->getParameter('group') ? (int)$request->getParameter('group') : $user->getGroup();
 }
 $home_group = $user->group_id == $group_id;
 if ($home_group) {
