@@ -43,7 +43,7 @@ if ($request->isPost() && $request->getParameter('user')) {
 // End of access checks.
 
 // Determine user for which we display this page.
-$userChanged = $request->getParameter('user_changed');
+$userChanged = (int)$request->getParameter('user_changed');
 if ($request->isPost() && $userChanged) {
   $user_id = (int)$request->getParameter('user');
   $user->setOnBehalfUser($user_id);
@@ -63,12 +63,12 @@ if(!$cl_date) {
 $_SESSION['date'] = $cl_date;
 
 if ($request->isPost()) {
-  $cl_interval = $request->getParameter('interval');
+  $cl_interval = (int)$request->getParameter('interval');
   if (!$cl_interval) $cl_interval = INTERVAL_THIS_MONTH;
   $_SESSION['chart_interval'] = $cl_interval;
   $uc->setValue(SYSC_CHART_INTERVAL, $cl_interval);
 
-  $cl_type = $request->getParameter('type');
+  $cl_type = (int)$request->getParameter('type');
   if (!$cl_type) $cl_type = ttChartHelper::adjustType($cl_type);
   $_SESSION['chart_type'] = $cl_type;
   $uc->setValue(SYSC_CHART_TYPE, $cl_type);
