@@ -617,6 +617,7 @@ class ttUser {
     $mdb2 = getConnection();
     $group_id = $this->getGroup();
     $org_id = $this->org_id;
+    $uid = (int)$user_id;
 
     // Determine max rank. If we are searching in on behalf group
     // then rank restriction does not apply.
@@ -624,7 +625,7 @@ class ttUser {
 
     $sql =  "select u.id, u.name, u.login, u.role_id, u.client_id, u.status, u.rate, u.quota_percent, u.email from tt_users u".
       " left join tt_roles r on (u.role_id = r.id)".
-      " where u.id = $user_id and u.group_id = $group_id and u.org_id = $org_id and u.status is not null".
+      " where u.id = $uid and u.group_id = $group_id and u.org_id = $org_id and u.status is not null".
       " and (r.rank < $max_rank or (r.rank = $max_rank and u.id = $this->id))"; // Users with lesser roles or self.
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
@@ -897,6 +898,7 @@ class ttUser {
 
   // setOnBehalfUser sets on behalf user both the object and the session.
   function setOnBehalfUser($user_id) {
+    $uid = (int)$user_id; // In case we forgot to sanitize $user_id before getting here.
 
     // Unset things first.
     $this->behalf_id = null;
@@ -906,16 +908,16 @@ class ttUser {
     unset($_SESSION['behalf_name']);
 
     // No need to set if user is us.
-    if ($user_id == $this->id) return;
+    if ($uid == $this->id) return;
 
     // No need to set if user id is not valid.
-    if (!$this->isUserValid($user_id)) return;
+    if (!$this->isUserValid($uid)) return;
 
     // We are good to set on behalf user.
-    $onBehalfUserName = ttUserHelper::getUserName($user_id);
-    $_SESSION['behalf_id'] = $user_id;
+    $onBehalfUserName = ttUserHelper::getUserName($uid);
+    $_SESSION['behalf_id'] = $uid;
     $_SESSION['behalf_name'] = $onBehalfUserName;
-    $this->behalf_id = $user_id;
+    $this->behalf_id = $uid;
     $this->behalf_name = $onBehalfUserName;
 
     $this->behalfUser = new ttBehalfUser($this->behalf_id, $this->org_id);
