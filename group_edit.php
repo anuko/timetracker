@@ -39,7 +39,7 @@ if ($home_group) {
 // End of access checks.
 
 // Set on behalf group accordingly.
-$groupChanged = $request->getParameter('group_changed');
+$groupChanged = (bool)$request->getParameter('group_changed');
 if ($request->isPost() && $groupChanged) {
  $user->setOnBehalfGroup($group_id);
 }
@@ -62,11 +62,11 @@ if ($request->isPost() && !$groupChanged) {
   $cl_tracking_mode = $request->getParameter('tracking_mode');
   $cl_project_required = $request->getParameter('project_required');
   $cl_record_type = $request->getParameter('record_type');
-  $cl_punch_mode = $request->getParameter('punch_mode');
-  $cl_allow_overlap = $request->getParameter('allow_overlap');
-  $cl_future_entries = $request->getParameter('future_entries');
-  $cl_uncompleted_indicators = $request->getParameter('uncompleted_indicators');
-  $cl_confirm_save = $request->getParameter('confirm_save');
+  $cl_punch_mode = (bool)$request->getParameter('punch_mode');
+  $cl_allow_overlap = (bool)$request->getParameter('allow_overlap');
+  $cl_future_entries = (bool)$request->getParameter('future_entries');
+  $cl_uncompleted_indicators = (bool)$request->getParameter('uncompleted_indicators');
+  $cl_confirm_save = (bool)$request->getParameter('confirm_save');
 } else {
   $cl_currency = ($group['currency'] == '' ? CURRENCY_DEFAULT : $group['currency']);
   $cl_lang = $group['lang'];
