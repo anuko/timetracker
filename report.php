@@ -1,30 +1,6 @@
 <?php
-// +----------------------------------------------------------------------+
-// | Anuko Time Tracker
-// +----------------------------------------------------------------------+
-// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
-// +----------------------------------------------------------------------+
-// | LIBERAL FREEWARE LICENSE: This source code document may be used
-// | by anyone for any purpose, and freely redistributed alone or in
-// | combination with other software, provided that the license is obeyed.
-// |
-// | There are only two ways to violate the license:
-// |
-// | 1. To redistribute this code in source form, with the copyright
-// |    notice or license removed or altered. (Distributing in compiled
-// |    forms without embedded copyright notices is permitted).
-// |
-// | 2. To redistribute modified versions of this code in *any* form
-// |    that bears insufficient indications that the modifications are
-// |    not the work of the original author(s).
-// |
-// | This license applies to this document only, not any other software
-// | that it may be combined with.
-// |
-// +----------------------------------------------------------------------+
-// | Contributors:
-// | https://www.anuko.com/time_tracker/credits.htm
-// +----------------------------------------------------------------------+
+/* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt */
 
 require_once('initialize.php');
 import('ttConfigHelper');
@@ -88,7 +64,7 @@ $options = ttReportHelper::getReportOptions($bean);
 // Do we need to show checkboxes? We show them in the following 4 situations:
 // - We can approve items.
 // - We can mark items as paid.
-// - We can sssign items to invoices.
+// - We can assign items to invoices.
 // - We can assign items to a timesheet.
 // Determine these conditions separately.
 if ($bean->getAttribute('chapproved') && ($user->can('approve_reports') || $user->can('approve_all_reports')))
@@ -199,7 +175,7 @@ if ($request->isPost()) {
     $item_ids = ttReportHelper::getFromSession();
     $time_log_ids = $item_ids['report_item_ids'];
     $expense_item_ids = $item_ids['report_item_expense_ids'];
-    // The above code is here beacues the arrays are used in both "Mark paid" and "Assign to invoice" handlers below.
+    // The above code is here because the arrays are used in both "Mark paid" and "Assign to invoice" handlers below.
   }
 
   if ($err->no()) {

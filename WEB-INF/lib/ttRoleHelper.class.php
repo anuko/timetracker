@@ -149,7 +149,7 @@ class ttRoleHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    // Mark the task as deleted.
+    // Mark the role as deleted.
     $sql = "update tt_roles set status = NULL where id = $role_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
