@@ -33,7 +33,7 @@ if (!$user->behalf_id && !$user->can('track_own_expenses') && !$user->adjustBeha
   exit();
 }
 if ($request->isPost() && $request->getParameter('user')) {
-  if (!$user->isUserValid($request->getParameter('user'))) {
+  if (!$user->isUserValid((int)$request->getParameter('user'))) {
     header('Location: access_denied.php'); // Wrong user id on post.
     exit();
   }
@@ -41,9 +41,9 @@ if ($request->isPost() && $request->getParameter('user')) {
 // End of access checks.
 
 // Determine user for which we display this page.
-$userChanged = $request->getParameter('user_changed');
+$userChanged = (int)$request->getParameter('user_changed');
 if ($request->isPost() && $userChanged) {
-  $user_id = $request->getParameter('user');
+  $user_id = (int)$request->getParameter('user');
   $user->setOnBehalfUser($user_id);
 } else {
   $user_id = $user->getUser();
