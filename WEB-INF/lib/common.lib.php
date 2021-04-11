@@ -363,6 +363,10 @@ function ttAccessAllowed($required_right)
     exit();
   }
 
+  // Protection against cross site request forgery.
+  if (!ttMitigateCSRF())
+    return false;
+
   // Check IP restriction, if set.
   if ($user->allow_ip && !$user->can('override_allow_ip')) {
     $access_allowed = false;
@@ -387,6 +391,41 @@ function ttAccessAllowed($required_right)
 
   return false;
 }
+
+// ttMitigateCSRF verifies request headers in an attempt to block cross site request forgery.
+function ttMitigateCSRF() {
+  // No need to do anything for get requests.
+  global $request;
+  if ($request->isGet())
+    return true;
+
+  $origin = $_SERVER['HTTP_ORIGIN'];
+  if ($origin) {
+    $pos = strpos($origin, '//');
+    $origin = substr($origin, $pos+2); // Strip protocol.
+  }
+  if (!$origin) {
+    // Try using referer.
+    $origin = $_SERVER['HTTP_REFERER'];
+    if ($origin) {
+      $pos = strpos($origin, '//');
+      $origin = substr($origin, $pos+2); // Strip protocol.
+      $pos = strpos($origin, '/');
+      $origin = substr($origin, 0, $pos); // Leave host only.
+    }
+  }
+  error_log("origin: ".$origin);
+  $target = defined('HTTP_TARGET') ? HTTP_TARGET : $_SERVER['HTTP_HOST'];
+  error_log("target: ".$target);
+  if (strcmp($origin, $target)) {
+    error_log("Potential cross site request forgery. Origin: '$origin' does not match target: '$target'.");
+    return false; // Origin and target do not match,
+  }
+
+  // TODO: review and improve this function for custom ports.
+  return true;
+}
+
 
 // ttStartsWith functions checks if a string starts with a given substring.
 function ttStartsWith($string, $startString)

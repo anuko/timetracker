@@ -163,6 +163,11 @@ define('AUTH_MODULE', 'db');
 // define('DEBUG', false); // Note: enabling DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
 
 
+// HTTP_TARGET - defines http target for cross site request forgery protection.
+// It can be used when you access the application via a proxy.
+// define('HTTP_TARGET', 'localhost');
+
+
 // Group managers can set monthly work hour quota for years between the following  values.
 // define('MONTHLY_QUOTA_YEAR_START', 2010); // If nothing is specified, it falls back to 2015.
 // define('MONTHLY_QUOTA_YEAR_END', 2025);   // If nothing is specified, it falls back to 2030.
