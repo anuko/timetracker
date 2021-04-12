@@ -414,15 +414,12 @@ function ttMitigateCSRF() {
       $origin = substr($origin, 0, $pos); // Leave host only.
     }
   }
-  error_log("origin: ".$origin);
   $target = defined('HTTP_TARGET') ? HTTP_TARGET : $_SERVER['HTTP_HOST'];
-  error_log("target: ".$target);
   if (strcmp($origin, $target)) {
     error_log("Potential cross site request forgery. Origin: '$origin' does not match target: '$target'.");
-    return false; // Origin and target do not match,
+    return false; // Origin and target do not match.
   }
 
-  // TODO: review and improve this function for custom ports.
   return true;
 }
 

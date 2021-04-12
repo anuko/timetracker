@@ -165,7 +165,7 @@ define('AUTH_MODULE', 'db');
 
 // HTTP_TARGET - defines http target for cross site request forgery protection.
 // It can be used when you access the application via a proxy.
-// define('HTTP_TARGET', 'localhost');
+// define('HTTP_TARGET', 'localhost:8080');
 
 
 // Group managers can set monthly work hour quota for years between the following  values.
