@@ -144,6 +144,8 @@ define('AUTH_MODULE', 'db');
 //  'base_dn' => 'ou=People,dc=example,dc=com', // Path of user's base distinguished name in LDAP catalog.
 //  'user_login_attribute' => 'uid',            // LDAP attribute used for login.
 //  'default_domain' => 'example.com',          // Default domain.
+//  'tls_cacertdir' => null,                    // Path to a directory containing CA certificates for secure ldap.
+//  'tls_cacertfile' => null,                   // CA certificate file name for secure ldap.
 //  'member_of' => array());                    // List of groups, membership in which is required for user to be authenticated.
 
 
@@ -154,6 +156,8 @@ define('AUTH_MODULE', 'db');
 //  'type' => 'ad',                     // Type of server.
 //  'base_dn' => 'DC=example,DC=com',   // Base distinguished name in LDAP catalog.
 //  'default_domain' => 'example.com',  // Default domain.
+//  'tls_cacertdir' => null,            // Path to a directory containing CA certificates for secure ldap.
+//  'tls_cacertfile' => null,           // CA certificate file name for secure ldap.
 //  'member_of' => array());            // List of groups, membership in which is required for user to be authenticated.
                                         // Leave it empty if membership is not necessary. Otherwise list CN parts only.
                                         // For example:
