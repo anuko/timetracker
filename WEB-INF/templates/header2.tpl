@@ -21,7 +21,7 @@
   <script src="js/strptime.js"></script>
 </head>
 
-<body {$onload}>
+<body{if isset($onload)} {$onload}{/if}>
 
 <div class="logo">
 {if $user->custom_logo}
@@ -43,7 +43,7 @@
 {* end of top menu for small screens *}
 
 {* top menu for large screens *}
-{if $authenticated}
+{if (isset($authenticated) && $authenticated)}
   {if $user->can('administer_site')}
   {* top menu for admin *}
 <div class="top-menu-large-screen">
@@ -161,8 +161,8 @@
 
 {* page title and user details *}
 {if $title}
-<div class="page-title">{$title}{if $timestring}: {$timestring}{/if}</div>
-  {if $authenticated}
+<div class="page-title">{$title}{if (isset($timestring) && $timestring)}: {$timestring}{/if}</div>
+  {if (isset($authenticated) && $authenticated)}
 <div class="user-details">{$user->getUserPartForHeader()}</div> {* No need to escape as it is done in the class. *}
   {/if}
 {/if}

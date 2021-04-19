@@ -76,6 +76,7 @@ if ($request->isPost()) {
   $cl_billable = 1;
   if ($showBillable)
     $cl_billable = $request->getParameter('billable');
+  $cl_paid = 0;
   if ($showPaidStatus)
     $cl_paid = $request->getParameter('paid');
 } else {
@@ -166,6 +167,7 @@ if ($showProject) {
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
 
   // Client dropdown.
+  $client_list = array();
   if ($showClient) {
     $active_clients = ttGroupHelper::getActiveClients(true);
     // We need an array of assigned project ids to do some trimming.

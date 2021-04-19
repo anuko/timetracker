@@ -97,7 +97,7 @@ function confirmSave() {
     <td class="td-with-input">{$forms.timeRecordForm.date.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
-{if $template_dropdown}
+{if (isset($template_dropdown) && $template_dropdown)}
   <tr class = "small-screen-label"><td><label for="template">{$i18n.label.template}:</label></td></tr>
   <tr>
     <td class = "large-screen-label"><label for="template">{$i18n.label.template}:</label></td>

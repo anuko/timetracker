@@ -424,10 +424,10 @@ class ttTimeHelper {
     $client = $fields['client'];
     $project = $fields['project'];
     $task = $fields['task'];
-    $invoice = $fields['invoice'];
+    $invoice = isset($fields['invoice']) ? $fields['invoice'] : null;
     $note = $fields['note'];
     $billable = $fields['billable'];
-    $paid = $fields['paid'];
+    $paid = isset($fields['paid']) ? $fields['paid'] : null;
 
     $start = ttTimeHelper::to24HourFormat($start);
     if ($finish) {
