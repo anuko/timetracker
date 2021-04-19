@@ -46,23 +46,25 @@ var task_names = new Array();
 
 // Prepare an array of template ids for projects.
 var template_ids = new Array();
-{if $bind_templates_with_projects}
+{if (isset($bind_templates_with_projects) && $bind_templates_with_projects)}
   {foreach $project_list as $project}
   template_ids[{$project.id}] = "{$project.templates}";
   {/foreach}
 {/if}
 // Prepare an array of template names.
 var template_names = new Array();
-{if $bind_templates_with_projects}
+{if (isset($bind_templates_with_projects) && $bind_templates_with_projects) && isset($template_list)}
   {foreach $template_list as $template}
   template_names[{$template.id}] = "{$template.name|escape:'javascript'}";
   {/foreach}
 {/if}
 // Prepare an array of template bodies.
 var template_bodies = new Array();
-{foreach $template_list as $template}
-  template_bodies[{$template.id}] = "{$template.content|escape:'javascript'}";
-{/foreach}
+{if isset($template_list)}
+  {foreach $template_list as $template}
+    template_bodies[{$template.id}] = "{$template.content|escape:'javascript'}";
+  {/foreach}
+{/if}
 
 // The fillNote function populates the Note field with a selected template body.
 function fillNote(id) {
@@ -189,7 +191,7 @@ function fillTaskDropdown(id) {
 // The fillTemplateDropdown function populates the template combo box with
 // templates associated with a selected project (project id is passed here as id).
 function fillTemplateDropdown(id) {
-{if !$bind_templates_with_projects}
+{if (!isset($bind_templates_with_projects) || !$bind_templates_with_projects)}
   return; // Do nothing if we are not binding templates with projects,
 {/if}
 
@@ -234,7 +236,7 @@ function fillTemplateDropdown(id) {
 
 // The prepopulateNote function populates the note field with first found template body in Template dropdown.
 function prepopulateNote() {
-  {if !$prepopulate_note}
+  {if (!isset($prepopulate_note) || !$prepopulate_note)}
     return;
   {/if}
   var dropdown = document.getElementById("template");

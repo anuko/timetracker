@@ -6,7 +6,7 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link href="{constant('DEFAULT_CSS')}" rel="stylesheet">
-{if $i18n.language.rtl}
+{if (isset($i18n.language.rtl) && $i18n.language.rtl)}
   <link href="{constant('RTL_CSS')}" rel="stylesheet">
 {/if}
 {if $user->getCustomCss()}

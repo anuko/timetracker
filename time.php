@@ -225,6 +225,7 @@ if ($showProject) {
   $largeScreenCalendarRowSpan += 2;
 
   // Client dropdown.
+  $client_list = array();
   if ($showClient) {
     $active_clients = ttGroupHelper::getActiveClients(true);
     // We need an array of assigned project ids to do some trimming.
