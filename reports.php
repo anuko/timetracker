@@ -51,6 +51,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get(
 
 // Dropdown for clients if the clients plugin is enabled.
 $showClient = $user->isPluginEnabled('cl') && !$user->isClient();
+$client_list = array();
 if ($showClient) {
   if ($user->can('view_reports') || $user->can('view_all_reports')) {
     $client_list = ttClientHelper::getClients(); // TODO: improve getClients for "view_reports"
@@ -213,7 +214,8 @@ if ($showUsers) {
     'groupin'=>$row_count,
     'style'=>'width: 100%;'));
 
-    foreach ($inactive_users as $single_user) {
+  $user_list_inactive = array();
+  foreach ($inactive_users as $single_user) {
     $user_list_inactive[$single_user['id']] = $single_user['name'];
     $projects = ttProjectHelper::getAssignedProjects($single_user['id']);
     if ($projects) {
@@ -222,7 +224,7 @@ if ($showUsers) {
       }
     }
   }
-  $row_count = is_array($user_list_inactive) ? ceil(count($user_list_inactive)/3) : 1;
+  $row_count = ceil(count($user_list_inactive)/3);
   $form->addInput(array('type'=>'checkboxgroup',
     'name'=>'users_inactive',
     'data'=>$user_list_inactive,

@@ -432,7 +432,7 @@ if ($request->isPost()) {
 
       // Insert time custom fields if we have them.
       $res = true;
-      if ($id && $custom_fields && $custom_fields->timeFields) {
+      if ($id && isset($custom_fields) && $custom_fields->timeFields) {
         $res = $custom_fields->insertTimeFields($id, $timeCustomFields);
       }
       if ($id && $res) {

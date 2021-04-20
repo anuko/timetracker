@@ -67,6 +67,7 @@ $options = ttReportHelper::getReportOptions($bean);
 // - We can assign items to invoices.
 // - We can assign items to a timesheet.
 // Determine these conditions separately.
+$useMarkApproved = $useMarkPaid = $useAssignToInvoice = $useAssignToTimesheet = false;
 if ($bean->getAttribute('chapproved') && ($user->can('approve_reports') || $user->can('approve_all_reports')))
   $useMarkApproved = true;
 if ($bean->getAttribute('chpaid') && $user->can('manage_invoices'))
@@ -79,8 +80,7 @@ if ($bean->getAttribute('chtimesheet')) {
 }
 
 $use_checkboxes = $useMarkApproved || $useMarkPaid || $useAssignToInvoice || $useAssignToTimesheet;
-if ($use_checkboxes)
-  $smarty->assign('use_checkboxes', true);
+$smarty->assign('use_checkboxes', $use_checkboxes);
 
 // Controls for "Mark approved" block.
 if ($useMarkApproved) {

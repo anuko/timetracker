@@ -21,6 +21,7 @@ if (MODE_PROJECTS_AND_TASKS != $user->getTrackingMode()) {
 
 $projects = ttGroupHelper::getActiveProjects();
 
+$cl_name = $cl_description = '';
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_description = trim($request->getParameter('description'));

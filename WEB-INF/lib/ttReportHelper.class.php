@@ -1,30 +1,6 @@
 <?php
-// +----------------------------------------------------------------------+
-// | Anuko Time Tracker
-// +----------------------------------------------------------------------+
-// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
-// +----------------------------------------------------------------------+
-// | LIBERAL FREEWARE LICENSE: This source code document may be used
-// | by anyone for any purpose, and freely redistributed alone or in
-// | combination with other software, provided that the license is obeyed.
-// |
-// | There are only two ways to violate the license:
-// |
-// | 1. To redistribute this code in source form, with the copyright
-// |    notice or license removed or altered. (Distributing in compiled
-// |    forms without embedded copyright notices is permitted).
-// |
-// | 2. To redistribute modified versions of this code in *any* form
-// |    that bears insufficient indications that the modifications are
-// |    not the work of the original author(s).
-// |
-// | This license applies to this document only, not any other software
-// | that it may be combined with.
-// |
-// +----------------------------------------------------------------------+
-// | Contributors:
-// | https://www.anuko.com/time_tracker/credits.htm
-// +----------------------------------------------------------------------+
+/* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt */
 
 import('ttClientHelper');
 import('DateAndTime');
@@ -59,7 +35,7 @@ class ttReportHelper {
     }
 
     // A shortcut for timesheets.
-    if ($options['timesheet_id']) {
+    if (isset($options['timesheet_id']) && $options['timesheet_id']) {
       $where = " where l.timesheet_id = ".$options['timesheet_id']." and l.group_id = $group_id and l.org_id = $org_id";
       return $where;
     }
@@ -257,6 +233,7 @@ class ttReportHelper {
     }
 
     $grouping = ttReportHelper::grouping($options);
+    $grouping_by_date = $grouping_by_client = $grouping_by_project = $grouping_by_task = $grouping_by_user = false;
     if ($grouping) {
       $grouping_by_date = ttReportHelper::groupingBy('date', $options);
       $grouping_by_client = ttReportHelper::groupingBy('client', $options);
@@ -745,6 +722,7 @@ class ttReportHelper {
     $where = ttReportHelper::getWhere($options);
 
     // Prepare parts.
+    $time_part = $units_part = $cost_part = '';
     $time_part = "sum(time_to_sec(l.duration)) as time";
     if ($options['show_work_units']) {
       $unitTotalsOnly = $user->getConfigOption('unit_totals_only');
@@ -893,7 +871,7 @@ class ttReportHelper {
     $totals['end_date'] = $period->getEndDate();
     $totals['time'] = $total_time;
     $totals['minutes'] = $val['time'] / 60;
-    $totals['units'] = $val['units'];
+    $totals['units'] = isset($val['units']) ? $val['units'] : null;
     $totals['cost'] = $total_cost;
     $totals['expenses'] = $total_expenses;
 
