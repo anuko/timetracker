@@ -83,6 +83,7 @@ $use_checkboxes = $useMarkApproved || $useMarkPaid || $useAssignToInvoice || $us
 $smarty->assign('use_checkboxes', $use_checkboxes);
 
 // Controls for "Mark approved" block.
+$smarty->assign('use_mark_approved', false);
 if ($useMarkApproved) {
   $mark_approved_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
   $form->addInput(array('type'=>'combobox',
@@ -99,6 +100,7 @@ if ($useMarkApproved) {
 }
 
 // Controls for "Mark paid" block.
+$smarty->assign('use_mark_paid', false);
 if ($useMarkPaid) {
   $mark_paid_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
   $form->addInput(array('type'=>'combobox',
@@ -115,6 +117,7 @@ if ($useMarkPaid) {
 }
 
 // Controls for "Assign to invoice" block.
+$smarty->assign('use_assign_to_invoice', false);
 if ($useAssignToInvoice) {
   // Client is selected and we are displaying the invoice column.
   $recent_invoices = ttGroupHelper::getRecentInvoices($client_id);
@@ -136,6 +139,7 @@ if ($useAssignToInvoice) {
 }
 
 // Controls for "Assign to timesheet" block.
+$smarty->assign('use_assign_to_timesheet', false);
 if ($useAssignToTimesheet) {
   $assign_timesheet_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
   $form->addInput(array('type'=>'combobox',
@@ -248,6 +252,8 @@ $report_items = ttReportHelper::getItems($options);
 if ($request->isGet() && $use_checkboxes)
   ttReportHelper::putInSession($report_items);
 
+$subtotals = array();
+$smarty->assign('print_subtotals', false);
 if (ttReportHelper::grouping($options)) {
   $subtotals = ttReportHelper::getSubtotals($options);
   $smarty->assign('group_by_header', ttReportHelper::makeGroupByHeader($options));

@@ -562,6 +562,7 @@ class ttReportHelper {
     // Determine sort part.
     $sort_part = ' order by ';
     if ($grouping) {
+      $sort_part2 = '';
       $sort_part2 .= ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') ? ', '.$options['group_by1'] : '';
       $sort_part2 .= ($options['group_by2'] != null && $options['group_by2'] != 'no_grouping') ? ', '.$options['group_by2'] : '';
       $sort_part2 .= ($options['group_by3'] != null && $options['group_by3'] != 'no_grouping') ? ', '.$options['group_by3'] : '';
@@ -846,6 +847,7 @@ class ttReportHelper {
 
     $val = $res->fetchRow();
     $total_time = ttTimeHelper::minutesToDuration($val['time'] / 60);
+    $total_cost = $total_expenses = null;
     if ($options['show_cost']) {
       $total_cost = $val['cost'];
       if (!$total_cost) $total_cost = '0.00';
@@ -1601,6 +1603,7 @@ class ttReportHelper {
   // makeGroupByKey builds a combined group by key from group_by1, group_by2 and group_by3 values
   // (passed in $options) and a row of data ($row obtained from a db query).
   static function makeGroupByKey($options, $row) {
+    $group_by_key = '';
     if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
       // We have group_by1.
       $group_by1 = $options['group_by1'];
@@ -1653,6 +1656,7 @@ class ttReportHelper {
   static function makeGroupByPart($options) {
     if (!ttReportHelper::grouping($options)) return null;
 
+    $group_by_parts = '';
     $group_by_parts .= ttReportHelper::makeSingleDropdownGroupByPart($options['group_by1'], $options);
     $group_by_parts .= ttReportHelper::makeSingleDropdownGroupByPart($options['group_by2'], $options);
     $group_by_parts .= ttReportHelper::makeSingleDropdownGroupByPart($options['group_by3'], $options);
@@ -1870,6 +1874,7 @@ class ttReportHelper {
   static function makeGroupByFieldsPart($options) {
     if (!ttReportHelper::grouping($options)) return null;
 
+    $group_by_fields_parts = '';
     $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldPart($options['group_by1'], $options);
     $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldPart($options['group_by2'], $options);
     $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldPart($options['group_by3'], $options);
@@ -1891,6 +1896,7 @@ class ttReportHelper {
   static function makeConcatPart($options) {
     if (!ttReportHelper::grouping($options)) return null;
 
+    $concat_part = '';
     $concat_part .= ttReportHelper::makeSingleDropdownConcatPart($options['group_by1'], $options);
     $concat_part .= ttReportHelper::makeSingleDropdownConcatPart($options['group_by2'], $options);
     $concat_part .= ttReportHelper::makeSingleDropdownConcatPart($options['group_by3'], $options);
@@ -2096,6 +2102,7 @@ class ttReportHelper {
   static function makeWorkUnitPart($options) {
     global $user;
 
+    $work_unit_part = '';
     $workUnits = $options['show_work_units'];
     if ($workUnits) {
       $unitTotalsOnly = $user->getConfigOption('unit_totals_only');
@@ -2113,6 +2120,7 @@ class ttReportHelper {
   static function makeCostPart($options) {
     global $user;
 
+    $cost_part = '';
     if ($options['show_cost']) {
       if (MODE_TIME == $user->getTrackingMode())
         $cost_part = ", sum(cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2))) as cost";
