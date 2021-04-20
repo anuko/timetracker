@@ -336,6 +336,8 @@ class ttGroupHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    $filePart = '';
+    $fileJoin = '';
     if ($includeFiles) {
       $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
       $fileJoin =  " left join (select distinct entity_id from tt_files".
@@ -364,6 +366,8 @@ class ttGroupHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    $filePart = '';
+    $fileJoin = '';
     if ($includeFiles) {
       $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
       $fileJoin =  " left join (select distinct entity_id from tt_files".
@@ -502,7 +506,7 @@ class ttGroupHelper {
       return false;
     while ($val = $res->fetchRow()) {
       // Localize top manager role name, as it is not localized in db.
-      if ($val['rank'] == 512)
+      if (isset($val['rank']) && $val['rank'] == 512)
         $val['role_name'] = $i18n->get('role.top_manager.label');
       $user_list[] = $val;
     }

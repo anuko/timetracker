@@ -5,7 +5,7 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link href="{constant('DEFAULT_CSS')}" rel="stylesheet">
-{if $i18n.language.rtl}
+{if (isset($i18n.language.rtl) && $i18n.language.rtl)}
   <link href="{constant('RTL_CSS')}" rel="stylesheet">
 {/if}
 {if $user->getCustomCss()}
@@ -20,7 +20,7 @@
   <script src="js/strptime.js"></script>
 </head>
 
-<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" {$onload}>
+<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0"{if isset($onload)} {$onload}{/if}>
 
 {assign var="tab_width" value="700"}
 
@@ -176,7 +176,7 @@
       <!-- page title and user details -->
 {if $title}
       <table id="page_title" cellspacing="0" cellpadding="5" width="{$tab_width+20}" border="0">
-        <tr><td class="sectionHeader"><div class="pageTitle">{$title}{if $timestring}: {$timestring}{/if}</div></td></tr>
+        <tr><td class="sectionHeader"><div class="pageTitle">{$title}{if (isset($timestring) && $timestring)}: {$timestring}{/if}</div></td></tr>
         <tr><td>{$user->getUserPartForHeader()}</td></tr> {* No need to escape as it is done in the class. *}
       </table>
 {/if}

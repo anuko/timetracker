@@ -86,6 +86,7 @@ if ($request->isPost()) {
   // We update plugin list for the current group.
 
   // Prepare plugins string.
+  $plugins = '';
   if ($cl_charts)
     $plugins .= ',ch';
   if ($cl_clients)
