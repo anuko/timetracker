@@ -881,7 +881,8 @@ class ttTimeHelper {
       $time_fields_array = array();
     }
 
-    if ($custom_fields && $custom_fields->timeFields) {
+    $time_fields = '';
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         if ($timeField['type'] == CustomFields::TYPE_TEXT) {
@@ -909,7 +910,7 @@ class ttTimeHelper {
     if ($user->isPluginEnabled('cl'))
       $left_joins .= " left join tt_clients c on (l.client_id = c.id)";
       
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         $cflTable = 'cfl'.$timeField['id'];
