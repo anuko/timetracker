@@ -1,30 +1,6 @@
 <?php
-// +----------------------------------------------------------------------+
-// | Anuko Time Tracker
-// +----------------------------------------------------------------------+
-// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
-// +----------------------------------------------------------------------+
-// | LIBERAL FREEWARE LICENSE: This source code document may be used
-// | by anyone for any purpose, and freely redistributed alone or in
-// | combination with other software, provided that the license is obeyed.
-// |
-// | There are only two ways to violate the license:
-// |
-// | 1. To redistribute this code in source form, with the copyright
-// |    notice or license removed or altered. (Distributing in compiled
-// |    forms without embedded copyright notices is permitted).
-// |
-// | 2. To redistribute modified versions of this code in *any* form
-// |    that bears insufficient indications that the modifications are
-// |    not the work of the original author(s).
-// |
-// | This license applies to this document only, not any other software
-// | that it may be combined with.
-// |
-// +----------------------------------------------------------------------+
-// | Contributors:
-// | https://www.anuko.com/time_tracker/credits.htm
-// +----------------------------------------------------------------------+
+/* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt */
 
 import('ttUserHelper');
 import('ttRoleHelper');
@@ -38,10 +14,6 @@ class ttRegistrator {
   var $group_name = null; // Group name.
   var $currency = null;   // Currency.
   var $lang = null;       // Language.
-  var $created_by_id = null; // User, who uses the instance.
-                             // Currently, there are 2 possibilities:
-                             // 1) Self-registration, or null here.
-                             // 2) Registration by admin with a user_id.
   var $group_id = null;   // Group id, set after we create a group.
   var $org_id = null;     // Organization id, the same as group_id (top group in org).
   var $role_id = null;    // Role id for top managers.
@@ -60,7 +32,6 @@ class ttRegistrator {
     $this->currency = $fields['currency'];
     $this->lang = $fields['lang'];
     if (!$this->lang) $this->lang = 'en';
-    $this->created_by_id = (int) $fields['created_by_id'];
     $this->err = $err;
 
     // Validate passed in parameters.
@@ -98,12 +69,10 @@ class ttRegistrator {
     global $user;
 
     // Protection from too many recent bot registrations from user IP.
-    if (!$this->created_by_id) { // No problems for logged in user (site admin).
-      if ($this->registeredRecently()) {
-        $this->err->add($i18n->get('error.registered_recently'));
-        $this->err->add($i18n->get('error.access_denied'));
-        return false;
-      }
+    if ($this->registeredRecently()) {
+      $this->err->add($i18n->get('error.registered_recently'));
+      $this->err->add($i18n->get('error.access_denied'));
+      return false;
     }
 
     import('ttUserHelper');
@@ -134,8 +103,7 @@ class ttRegistrator {
     }
 
     // Set created_by appropriately.
-    $created_by = $this->created_by_id ? $this->created_by_id : $this->user_id;
-    if (!$this->setCreatedBy($created_by))
+    if (!$this->setCreatedBy($this->user_id))
       return false;
 
     return true;
