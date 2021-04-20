@@ -362,7 +362,7 @@ class ttFileHelper {
       " and entity_type = ".$mdb2->quote($entity_type)." and entity_id = $entity_id limit 1";
     $res = $mdb2->query($sql);
     $val = $res->fetchRow();
-    return $val['id'] > 0;
+    return (isset($val['id']) && $val['id'] > 0);
   }
 
   // getEntityFiles obtains a list of files for an entity.
@@ -446,6 +446,7 @@ class ttFileHelper {
       'file_name' => urlencode($fields['file_name']));
 
     // url-ify the data for the POST.
+    $fields_string = '';
     foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
     $fields_string = rtrim($fields_string, '&');
 
@@ -461,9 +462,6 @@ class ttFileHelper {
     // Execute a post request.
     $result = curl_exec($ch);
 
-    $error = curl_error();
-    $result_array2 = json_decode($result, true);
-
     // Close connection.
     curl_close($ch);
 
@@ -474,7 +472,7 @@ class ttFileHelper {
 
     $result_array = json_decode($result, true);
     $status = (int) $result_array['status'];
-    $error = $result_array['error'];
+    $error = isset($result_array['error']) ? $result_array['error'] : false;
 
     if ($error) {
       // Add an error from file storage facility if we have it.

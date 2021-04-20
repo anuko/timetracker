@@ -24,6 +24,7 @@ if (!$project) {
 }
 // End of access checks.
 
+$cl_description = '';
 if ($request->isPost()) {
   $cl_description = trim($request->getParameter('description'));
 }

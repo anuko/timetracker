@@ -29,6 +29,7 @@ foreach ($tasks as $task_item)
   $all_tasks[$task_item['id']] = $task_item['name'];
 $show_tasks = MODE_PROJECTS_AND_TASKS == $user->getTrackingMode() && count($tasks) > 0;
 
+$cl_name = $cl_description = '';
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('project_name'));
   $cl_description = trim($request->getParameter('description'));
