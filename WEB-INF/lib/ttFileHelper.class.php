@@ -137,11 +137,12 @@ class ttFileHelper {
       'entity_type' => urlencode($fields['entity_type']),
       'entity_id' => urlencode($fields['entity_id']),
       'file_name' => urlencode($fields['file_name']),
-      'description' => urlencode($fields['description']),
+      'description' => urlencode(isset($fields['description']) ? $fields['description'] : ''),
       'content' => urlencode(base64_encode(file_get_contents($_FILES['newfile']['tmp_name'])))
     );
 
     // url-ify the data for the POST.
+    $fields_string = '';
     foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
     $fields_string = rtrim($fields_string, '&');
 
@@ -171,7 +172,7 @@ class ttFileHelper {
     $result_array = json_decode($result, true);
     $file_id = (int) $result_array['file_id'];
     $file_key = $result_array['file_key'];
-    $error = $result_array['error'];
+    $error = isset($result_array['error']) ? $result_array['error'] : false;
 
     if ($error || !$file_id || !$file_key) {
       if ($error) {
@@ -186,7 +187,7 @@ class ttFileHelper {
     $entity_type = $mdb2->quote($fields['entity_type']);
     $entity_id = (int) $fields['entity_id'];
     $file_name = $mdb2->quote($fields['file_name']);
-    $description = $mdb2->quote($fields['description']);
+    $description = $mdb2->quote(isset($fields['description']) ? $fields['description'] : '');
     $created = 'now()';
     $created_ip = $mdb2->quote($_SERVER['REMOTE_ADDR']);
     $created_by = $user->id;
@@ -295,6 +296,7 @@ class ttFileHelper {
       'entity_id' => urlencode($entity_id));
 
     // url-ify the data for the POST.
+    $fields_string = '';
     foreach($curl_fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
     $fields_string = rtrim($fields_string, '&');
 
@@ -320,7 +322,7 @@ class ttFileHelper {
 
     $result_array = json_decode($result, true);
     $status = (int) $result_array['status'];
-    $error = $result_array['error'];
+    $error = isset($result_array['error']) ? $result_array['error'] : false;
 
     if ($error) {
       // Add an error from file storage facility if we have it.
@@ -336,7 +338,6 @@ class ttFileHelper {
     // records from the database.
 
     // Delete all entity records from the database.
-    $file_id = $fields['id'];
     $sql = "delete from tt_files".
       " where entity_id = $entity_id".
       " and entity_type = ".$mdb2->quote($entity_type).

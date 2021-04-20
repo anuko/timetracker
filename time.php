@@ -330,7 +330,7 @@ if ($request->isPost()) {
     if ($showClient && $user->isOptionEnabled('client_required') && !$cl_client)
       $err->add($i18n->get('error.client'));
     // Validate input in time custom fields.
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($timeCustomFields as $timeField) {
         // Validation is the same for text and dropdown fields.
         if (!ttValidString($timeField['value'], !$timeField['required'])) $err->add($i18n->get('error.field'), htmlspecialchars($timeField['label']));
@@ -409,7 +409,7 @@ if ($request->isPost()) {
 
       // Insert time custom fields if we have them.
       $result = true;
-      if ($id && $custom_fields && $custom_fields->timeFields) {
+      if ($id && isset($custom_fields) && $custom_fields->timeFields) {
         $result = $custom_fields->insertTimeFields($id, $timeCustomFields);
       }
 
