@@ -311,7 +311,7 @@ class ttAdmin {
 
   // The createOrg function creates an organization in Time Tracker.
   static function createOrg($fields) {
-    // There are 3 steps that we need to 2 when creating a new organization.
+    // There are 3 steps that we need to do when creating a new organization.
     //   1. Create a new group with null parent_id.
     //   2. Create pre-defined roles in it.
     //   3. Create a top manager account for new group.
