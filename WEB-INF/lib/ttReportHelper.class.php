@@ -617,6 +617,8 @@ class ttReportHelper {
 
     if (is_array($report_items)) {
       // Iterate through records and build 2 comma-separated lists.
+      $report_item_ids = '';
+      $report_item_expense_ids = '';
       foreach($report_items as $item) {
         if ($item['type'] == 1)
           $report_item_ids .= ','.$item['id'];
@@ -635,10 +637,10 @@ class ttReportHelper {
   // getFromSession obtains tt_log and tt_expense_items ids stored in user session.
   static function getFromSession() {
     $items = array();
-    $report_item_ids = $_SESSION['report_item_ids'];
+    $report_item_ids = @$_SESSION['report_item_ids'];
     if ($report_item_ids)
       $items['report_item_ids'] = explode(',', $report_item_ids);
-    $report_item_expense_ids = $_SESSION['report_item_expense_ids'];
+    $report_item_expense_ids = @$_SESSION['report_item_expense_ids'];
     if ($report_item_expense_ids)
       $items['report_item_expense_ids'] = explode(',', $report_item_expense_ids);
     return $items;

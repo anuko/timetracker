@@ -177,8 +177,8 @@ if ($request->isPost()) {
     // Note: getting from session assures we act only on previously displayed records.
     // Rebuilding from $bean may get us a different set.
     $item_ids = ttReportHelper::getFromSession();
-    $time_log_ids = $item_ids['report_item_ids'];
-    $expense_item_ids = $item_ids['report_item_expense_ids'];
+    $time_log_ids = @$item_ids['report_item_ids'];
+    $expense_item_ids = @$item_ids['report_item_expense_ids'];
     // The above code is here because the arrays are used in both "Mark paid" and "Assign to invoice" handlers below.
   }
 

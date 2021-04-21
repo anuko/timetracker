@@ -88,16 +88,12 @@ class ttUserHelper {
     $quota_percent = str_replace(',', '.', isset($fields['quota_percent']) ? $fields['quota_percent'] : 100);
     if($rate == '')
       $rate = 0;
-    if (array_key_exists('status', $fields)) { // Key exists and may be NULL during migration of deleted acounts.
-      $status_f = ', status';
-      $status_v = ', '.$mdb2->quote($fields['status']);
-    }
     $created_ip_v = ', '.$mdb2->quote($_SERVER['REMOTE_ADDR']);
     $created_by_v = ', '.$user->id;
 
-    $sql = "insert into tt_users (name, login, password, group_id, org_id, role_id, client_id, rate, quota_percent, email, created, created_ip, created_by $status_f) values (".
+    $sql = "insert into tt_users (name, login, password, group_id, org_id, role_id, client_id, rate, quota_percent, email, created, created_ip, created_by) values (".
       $mdb2->quote($fields['name']).", ".$mdb2->quote($fields['login']).
-      ", $password, $group_id, $org_id, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, $quota_percent, ".$mdb2->quote($email).", now() $created_ip_v $created_by_v $status_v)";
+      ", $password, $group_id, $org_id, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, $quota_percent, ".$mdb2->quote($email).", now() $created_ip_v $created_by_v)";
     $affected = $mdb2->exec($sql);
 
     // Now deal with project assignment.
@@ -135,6 +131,8 @@ class ttUserHelper {
     $org_id = $user->org_id;
 
     // Prepare query parts.
+    $login_part = $pass_part = $name_part = $role_part = $client_part =
+    $rate_part = $quota_percent_part = $status_part = '';
     if (isset($fields['login'])) {
       $login_part = ", login = ".$mdb2->quote($fields['login']);
     }

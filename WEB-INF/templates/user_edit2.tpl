@@ -130,6 +130,7 @@ function handleClientRole() {
     <td class="td-with-input">{$forms.userForm.role.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{if $user->isPluginEnabled('cl')}
 <tbody id="client_block">
   <tr class = "small-screen-label"><td><label for="role">{$i18n.label.client}:</label></td></tr>
   <tr>
@@ -138,6 +139,7 @@ function handleClientRole() {
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 </tbody>
+{/if}
   <tr class = "small-screen-label"><td><label for="status">{$i18n.label.status}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="status">{$i18n.label.status}:</label></td>
@@ -165,7 +167,7 @@ function handleClientRole() {
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
-{if $custom_fields && $custom_fields->userFields}
+{if isset($custom_fields) && $custom_fields->userFields}
   {foreach $custom_fields->userFields as $userField}
         {assign var="control_name" value='user_field_'|cat:$userField['id']}
   <tr class = "small-screen-label"><td><label for="{$control_name}">{$userField['label']|escape}{if $userField['required']} (*){/if}:</label></td></tr>

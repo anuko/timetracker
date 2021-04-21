@@ -22,7 +22,7 @@ License: See license.txt *}
     {foreach $active_users as $u}
   <tr>
     <td class="text-cell">
-      {if $uncompleted_indicators}
+      {if isset($uncompleted_indicators) && $uncompleted_indicators}
       <span class="uncompleted-entry{if $u.has_uncompleted_entry} active{/if}"{if $u.has_uncompleted_entry} title="{$i18n.form.users.uncompleted_entry}"{/if}></span>
       {/if}
       {$u.name|escape}

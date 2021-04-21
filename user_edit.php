@@ -41,8 +41,9 @@ if ($show_projects) {
   $projects = ttGroupHelper::getActiveProjects();
   if (count($projects) == 0) $show_projects = false;
 }
+$cl_name = $cl_login = $cl_password1 = $cl_password2 = $cl_email =
+$cl_role_id = $cl_client_id = $cl_quota_percent = $cl_rate = null;
 $assigned_projects = array();
-
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_login = trim($request->getParameter('login'));
@@ -56,7 +57,7 @@ if ($request->isPost()) {
   $cl_status = $request->getParameter('status');
   $cl_quota_percent = $request->getParameter('quota_percent');
   // If we have user custom fields - collect input.
-  if ($custom_fields && $custom_fields->userFields) {
+  if (isset($custom_fields) && $custom_fields->userFields) {
     foreach ($custom_fields->userFields as $userField) {
       $control_name = 'user_field_'.$userField['id'];
       $userCustomFields[$userField['id']] = array('field_id' => $userField['id'],
@@ -86,7 +87,7 @@ if ($request->isPost()) {
   $cl_email = $user_details['email'];
   $cl_quota_percent = str_replace('.', $user->getDecimalMark(), $user_details['quota_percent']);
   // If we have user custom fields - collect values from database.
-  if ($custom_fields && $custom_fields->userFields) {
+  if (isset($custom_fields) && $custom_fields->userFields) {
     foreach ($custom_fields->userFields as $userField) {
       $control_name = 'user_field_'.$userField['id'];
       $userCustomFields[$userField['id']] = array('field_id' => $userField['id'],
@@ -123,7 +124,7 @@ if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->get('dropdown.select'))));
 
 // If we have custom fields - add controls for them.
-if ($custom_fields && $custom_fields->userFields) {
+if (isset($custom_fields) && $custom_fields->userFields) {
   foreach ($custom_fields->userFields as $userField) {
     $field_name = 'user_field_'.$userField['id'];
     if ($userField['type'] == CustomFields::TYPE_TEXT) {
@@ -194,7 +195,7 @@ if ($request->isPost()) {
   if ($user->isPluginEnabled('cl') && ttRoleHelper::isClientRole($cl_role_id) && !$cl_client_id) $err->add($i18n->get('error.client'));
   if (!ttValidFloat($cl_quota_percent, true)) $err->add($i18n->get('error.field'), $i18n->get('label.quota'));
     // Validate input in user custom fields.
-  if ($custom_fields && $custom_fields->userFields) {
+  if (isset($custom_fields) && $custom_fields->userFields) {
     foreach ($userCustomFields as $userField) {
       // Validation is the same for text and dropdown fields.
       if (!ttValidString($userField['value'], !$userField['required'])) $err->add($i18n->get('error.field'), htmlspecialchars($userField['label']));
@@ -222,7 +223,7 @@ if ($request->isPost()) {
 
       $result = ttUserHelper::update($user_id, $fields);
       // Update user custom fields if we have them.
-      if ($result && $custom_fields && $custom_fields->userFields) {
+      if ($result && isset($custom_fields) && $custom_fields->userFields) {
         $result = $custom_fields->updateEntityFields(CustomFields::ENTITY_USER, $user_id, $userCustomFields);
       }
 
