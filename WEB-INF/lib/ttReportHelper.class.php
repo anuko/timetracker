@@ -1703,6 +1703,7 @@ class ttReportHelper {
   static function makeGroupByExpensesPart($options) {
     if (!ttReportHelper::grouping($options)) return null;
 
+    $group_by_parts = '';
     $group_by_parts .= ttReportHelper::makeSingleDropdownGroupByExpensesPart($options['group_by1'], $options);
     $group_by_parts .= ttReportHelper::makeSingleDropdownGroupByExpensesPart($options['group_by2'], $options);
     $group_by_parts .= ttReportHelper::makeSingleDropdownGroupByExpensesPart($options['group_by3'], $options);
@@ -1901,6 +1902,7 @@ class ttReportHelper {
   static function makeGroupByFieldsExpensesPart($options) {
     if (!ttReportHelper::grouping($options)) return null;
 
+    $group_by_fields_parts = '';
     $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldExpensesPart($options['group_by1'], $options);
     $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldExpensesPart($options['group_by2'], $options);
     $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldExpensesPart($options['group_by3'], $options);
@@ -1947,6 +1949,7 @@ class ttReportHelper {
   static function makeConcatExpensesPart($options) {
     if (!ttReportHelper::grouping($options)) return null;
 
+    $concat_part = '';
     $concat_part .= ttReportHelper::makeSingleDropdownConcatExpensesPart($options['group_by1'], $options);
     $concat_part .= ttReportHelper::makeSingleDropdownConcatExpensesPart($options['group_by2'], $options);
     $concat_part .= ttReportHelper::makeSingleDropdownConcatExpensesPart($options['group_by3'], $options);
@@ -2036,7 +2039,7 @@ class ttReportHelper {
 
     if ($user->isPluginEnabled('cf')) {
       global $custom_fields;
-      if (!$custom_fields) $custom_fields = new CustomFields();
+      if (!isset($custom_fields)) $custom_fields = new CustomFields();
     }
 
     $trackingMode = $user->getTrackingMode();
@@ -2057,7 +2060,7 @@ class ttReportHelper {
       $left_joins .= ' left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)';
     }
     // Left joins for time custom fields.
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         $field_value = $options[$field_name];
@@ -2076,7 +2079,7 @@ class ttReportHelper {
       }
     }
     // Left joins for user custom fields.
-    if ($custom_fields && $custom_fields->userFields) {
+    if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $field_value = $options[$field_name];
@@ -2166,7 +2169,7 @@ class ttReportHelper {
     }
     // Not adding left joins for time custom fiels by design.
     // Left joins for user custom fields.
-    if ($custom_fields && $custom_fields->userFields) {
+    if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $field_value = $options[$field_name];
@@ -2281,6 +2284,7 @@ class ttReportHelper {
   // makeGroupByXmlTag creates an xml tag for a totals only report using group_by1,
   // group_by2, and group_by3 values passed in $options.
   static function makeGroupByXmlTag($options) {
+    $tag = '';
     if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
       // We have group_by1.
       $tag .= '_'.$options['group_by1'];
