@@ -2215,9 +2215,11 @@ class ttReportHelper {
 
     // First, try to get a label from a translation file, which is the most likely scenario
     // such as grouping by date, user, project, or task.
-    $key = 'label.'.$dropdown_value;
-    $part = $i18n->get($key);
-    if ($part) return $part;
+    if (!ttStartsWith($dropdown_value, 'time_field_') && !ttStartsWith($dropdown_value, 'user_field_')) {
+      $key = 'label.'.$dropdown_value;
+      $part = $i18n->get($key);
+      if ($part) return $part;
+    }
 
     // If label is not found in translation file, we may be grouping by a custom field.
     // Obtain custom field label if so.
@@ -2252,6 +2254,9 @@ class ttReportHelper {
       ($options['group_by2'] == null || $options['group_by2'] == 'no_grouping') &&
       ($options['group_by3'] == null || $options['group_by3'] == 'no_grouping');
     if ($no_grouping) return null;
+
+    // We only need to do it for a totals only report.
+    if (!$options['show_totals_only']) return null;
 
     $group_by_header = '';
     if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {

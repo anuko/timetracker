@@ -277,6 +277,8 @@ class ttExpenseHelper {
     if ($user->isPluginEnabled('cl'))
       $client_field = ", c.name as client";
 
+    $filePart = '';
+    $fileJoin = '';
     if ($includeFiles) {
       $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
       $fileJoin =  " left join (select distinct entity_id from tt_files".

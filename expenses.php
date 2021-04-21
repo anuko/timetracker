@@ -120,6 +120,7 @@ if ($show_project) {
   $largeScreenCalendarRowSpan += 2;
 
   // Dropdown for clients if the clients plugin is enabled.
+  $client_list = array();
   if ($user->isPluginEnabled('cl')) {
     $active_clients = ttGroupHelper::getActiveClients(true);
     // We need an array of assigned project ids to do some trimming.

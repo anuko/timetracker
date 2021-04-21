@@ -325,7 +325,7 @@ class ttUser {
 
     $filePart = '';
     $fileJoin = '';
-    if (isset($options['include_files'])) {
+    if (isset($options['include_files']) && $options['include_files']) {
       $filePart = ', if(Sub1.entity_id is null, 0, 1) as has_files';
       $fileJoin =  " left join (select distinct entity_id from tt_files".
       " where entity_type = 'project' and group_id = $group_id and org_id = $org_id and status = 1) Sub1".
@@ -338,7 +338,7 @@ class ttUser {
       " where p.group_id = $group_id and p.org_id = $org_id and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
-      $bindTemplatesWithProjects = $options['include_templates'];
+      $bindTemplatesWithProjects = isset($options['include_templates']) && $options['include_templates'];
       while ($val = $res->fetchRow()) {
         // If we have to include templates, get them in a separate query for each project.
         // Although, theoretically, we could use mysql group_concat, but this requires grouping by, which makes
