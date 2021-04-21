@@ -38,7 +38,7 @@ var defined_expenses = new Array();
 {/foreach}
 
 {* Conditional include of confirmSave handler. *}
-{if $confirm_save}
+{if isset($confirm_save) && $confirm_save}
 var original_date = "{$entry_date}";
 
 function confirmSave() {

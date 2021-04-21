@@ -35,7 +35,7 @@ $trackingMode = $user->getTrackingMode();
 $show_project = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
 
 // Initialize variables.
-$cl_date = $cl_client = $cl_project = $cl_item_name = $cl_cost = null;
+$cl_date = $cl_client = $cl_project = $cl_item_name = $cl_cost = $cl_paid = null;
 if ($request->isPost()) {
   $cl_date = trim($request->getParameter('date'));
   $cl_client = $request->getParameter('client');
@@ -80,6 +80,7 @@ if ($show_project) {
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
 
   // Dropdown for clients if the clients plugin is enabled.
+  $client_list = array();
   if ($user->isPluginEnabled('cl')) {
     $active_clients = ttGroupHelper::getActiveClients(true);
     // We need an array of assigned project ids to do some trimming.
@@ -210,7 +211,6 @@ $smarty->assign('show_project', $show_project);
 $smarty->assign('predefined_expenses', $predefined_expenses);
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
-$smarty->assign('task_list', $task_list);
 $smarty->assign('title', $i18n->get('title.edit_expense'));
 $smarty->assign('content_page_name', 'expense_edit2.tpl');
 $smarty->display('index2.tpl');
