@@ -699,9 +699,24 @@ class ttReportHelper {
           $val['cost'] = str_replace('.', $decimalMark, $val['cost']);
           $val['expenses'] = str_replace('.', $decimalMark, $val['expenses']);
         }
-        $subtotals[$val['group_field']] = array('name'=>$rowLabel,'user'=>$val['user'],'project'=>$val['project'],'task'=>$val['task'],'client'=>$val['client'],'time'=>$time,'units'=> $val['units'],'cost'=>$val['cost'],'expenses'=>$val['expenses']);
-      } else
-        $subtotals[$val['group_field']] = array('name'=>$rowLabel,'user'=>$val['user'],'project'=>$val['project'],'task'=>$val['task'],'client'=>$val['client'],'time'=>$time, 'units'=> $val['units']);
+        $subtotals[$val['group_field']] = array('name'=>$rowLabel,
+          'user'=>isset($val['user']) ? $val['user'] : null,
+          'project'=>isset($val['project']) ? $val['project'] : null,
+          'task'=>isset($val['task']) ? $val['task'] : null,
+          'client'=>isset($val['client']) ? $val['client'] : null,
+          'time'=>$time,
+          'units'=>isset($val['units']) ? $val['units'] : null,
+          'cost'=>$val['cost'],
+          'expenses'=>$val['expenses']);
+      } else {
+        $subtotals[$val['group_field']] = array('name'=>$rowLabel,
+          'user'=>isset($val['user']) ? $val['user'] : null,
+          'project'=>isset($val['project']) ? $val['project'] : null,
+          'task'=>isset($val['task']) ? $val['task'] : null,
+          'client'=>isset($val['client']) ? $val['client'] : null,
+          'time'=>$time,
+          'units'=>isset($val['units']) ? $val['units'] : null);
+      }
     }
 
     return $subtotals;
@@ -2238,6 +2253,7 @@ class ttReportHelper {
       ($options['group_by3'] == null || $options['group_by3'] == 'no_grouping');
     if ($no_grouping) return null;
 
+    $group_by_header = '';
     if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
       // We have group_by1.
       $group_by1 = $options['group_by1'];
