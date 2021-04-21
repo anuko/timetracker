@@ -270,7 +270,7 @@ $totals = ttReportHelper::getTotals($options);
 // Determine column span for note field.
 $colspan = 0;
 if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) $colspan++;
-if ($custom_fields && $custom_fields->userFields) {
+if (isset($custom_fields) && $custom_fields->userFields) {
   foreach ($custom_fields->userFields as $userField) {
     $checkbox_control_name = 'show_user_field_'.$userField['id'];
     if ($bean->getAttribute($checkbox_control_name)) $colspan++;
@@ -279,7 +279,7 @@ if ($custom_fields && $custom_fields->userFields) {
 if ($bean->getAttribute('chclient')) $colspan++;
 if ($bean->getAttribute('chproject')) $colspan++;
 if ($bean->getAttribute('chtask')) $colspan++;
-if ($custom_fields && $custom_fields->timeFields) {
+if (isset($custom_fields) && $custom_fields->timeFields) {
   foreach ($custom_fields->timeFields as $timeField) {
     $checkbox_control_name = 'show_time_field_'.$timeField['id'];
     if ($bean->getAttribute($checkbox_control_name)) $colspan++;

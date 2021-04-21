@@ -400,7 +400,7 @@ function handleCheckboxes() {
             </table>
           </td>
         </tr>
-{if $custom_fields && $custom_fields->timeFields}
+{if isset($custom_fields) && $custom_fields->timeFields}
     <tr><td colspan="3"><b>{$i18n.form.reports.time_fields}</b></td></tr>
   {foreach $custom_fields->timeFields as $timeField}
     <tr>
@@ -412,7 +412,7 @@ function handleCheckboxes() {
     </tr>
   {/foreach}
 {/if}
-{if $custom_fields && $custom_fields->userFields}
+{if isset($custom_fields) && $custom_fields->userFields}
     <tr><td colspan="3"><b>{$i18n.form.reports.user_fields}</b></td></tr>
   {foreach $custom_fields->userFields as $userField}
     <tr>

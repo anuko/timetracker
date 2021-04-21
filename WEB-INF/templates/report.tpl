@@ -42,7 +42,7 @@
   {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="tableHeader">{$i18n.label.user}</td>{/if}
 
   {* user custom fileds *}
-  {if $custom_fields && $custom_fields->userFields}
+  {if isset($custom_fields) && $custom_fields->userFields}
     {foreach $custom_fields->userFields as $userField}
       {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
       {if $bean->getAttribute($checkbox_control_name)}<td class="tableHeader">{{$userField['label']|escape}}</td>{/if}
@@ -54,7 +54,7 @@
   {if $bean->getAttribute('chtask')}<td class="tableHeader">{$i18n.label.task}</td>{/if}
 
   {* time custom fileds *}
-  {if $custom_fields && $custom_fields->timeFields}
+  {if isset($custom_fields) && $custom_fields->timeFields}
     {foreach $custom_fields->timeFields as $timeField}
       {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
       {if $bean->getAttribute($checkbox_control_name)}<td class="tableHeader">{{$timeField['label']|escape}}</td>{/if}
@@ -85,7 +85,7 @@
         {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['user']|escape}</td>{/if}
 
         {* user custom fileds *}
-        {if $custom_fields && $custom_fields->userFields}
+        {if isset($custom_fields) && $custom_fields->userFields}
           {foreach $custom_fields->userFields as $userField}
             {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
             {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
@@ -97,7 +97,7 @@
         {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{$subtotals[$prev_grouped_by]['task']|escape}</td>{/if}
 
         {* time custom fileds *}
-          {if $custom_fields && $custom_fields->timeFields}
+          {if isset($custom_fields) && $custom_fields->timeFields}
            {foreach $custom_fields->timeFields as $timeField}
             {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
             {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
@@ -132,7 +132,7 @@
     {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="cellLeftAligned">{$item.user|escape}</td>{/if}
 
     {* user custom fileds *}
-    {if $custom_fields && $custom_fields->userFields}
+    {if isset($custom_fields) && $custom_fields->userFields}
       {foreach $custom_fields->userFields as $userField}
         {assign var="control_name" value='user_field_'|cat:$userField['id']}
         {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
@@ -145,7 +145,7 @@
     {if $bean->getAttribute('chtask')}<td class="cellLeftAligned">{$item.task|escape}</td>{/if}
 
     {* time custom fileds *}
-    {if $custom_fields && $custom_fields->timeFields}
+    {if isset($custom_fields) && $custom_fields->timeFields}
       {foreach $custom_fields->timeFields as $timeField}
         {assign var="control_name" value='time_field_'|cat:$timeField['id']}
         {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
@@ -195,7 +195,7 @@
     {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['user']|escape}</td>{/if}
 
     {* user custom fileds *}
-    {if $custom_fields && $custom_fields->userFields}
+    {if isset($custom_fields) && $custom_fields->userFields}
       {foreach $custom_fields->userFields as $userField}
         {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
         {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
@@ -207,7 +207,7 @@
     {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{$subtotals[$cur_grouped_by]['task']|escape}</td>{/if}
 
     {* time custom fileds *}
-    {if $custom_fields && $custom_fields->timeFields}
+    {if isset($custom_fields) && $custom_fields->timeFields}
       {foreach $custom_fields->timeFields as $timeField}
         {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
         {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
@@ -237,7 +237,7 @@
     {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td></td>{/if}
 
     {* user custom fileds *}
-    {if $custom_fields && $custom_fields->userFields}
+    {if isset($custom_fields) && $custom_fields->userFields}
       {foreach $custom_fields->userFields as $userField}
         {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
         {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
@@ -249,7 +249,7 @@
     {if $bean->getAttribute('chtask')}<td></td>{/if}
 
     {* time custom fileds *}
-    {if $custom_fields && $custom_fields->timeFields}
+    {if isset($custom_fields) && $custom_fields->timeFields}
       {foreach $custom_fields->timeFields as $timeField}
         {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
         {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}

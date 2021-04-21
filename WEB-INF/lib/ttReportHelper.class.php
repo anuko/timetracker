@@ -60,7 +60,7 @@ class ttReportHelper {
     if ($options['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
 
     // Add time custom fields.
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         $field_value = $options[$field_name];
@@ -73,7 +73,7 @@ class ttReportHelper {
 
     // Prepare part for text custom fields using LIKE operator.
     $cf_text_parts = null;
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         $field_value = $options[$field_name];
@@ -85,7 +85,7 @@ class ttReportHelper {
     }
 
     // Add user custom fields.
-    if ($custom_fields && $custom_fields->userFields) {
+    if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $field_value = $options[$field_name];
@@ -97,7 +97,7 @@ class ttReportHelper {
     }
 
     // Continue preparing part for text custom fields using LIKE operator.
-    if ($custom_fields && $custom_fields->userFields) {
+    if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $field_value = $options[$field_name];
@@ -141,7 +141,7 @@ class ttReportHelper {
 
     if ($user->isPluginEnabled('cf')) {
       global $custom_fields;
-      if (!$custom_fields) $custom_fields = new CustomFields();
+      if (!isset($custom_fields)) $custom_fields = new CustomFields();
     }
 
     // Prepare dropdown parts.
@@ -166,7 +166,7 @@ class ttReportHelper {
     // This means that filtering by time custom fields applies only to time items, not expenses.
 
     // Add user custom fields.
-    if ($custom_fields && $custom_fields->userFields) {
+    if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $field_value = $options[$field_name];
@@ -179,7 +179,7 @@ class ttReportHelper {
 
     // Prepare part for text custom fields using LIKE operator.
     $cf_text_parts = null;
-    if ($custom_fields && $custom_fields->userFields) {
+    if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $field_value = $options[$field_name];
@@ -254,7 +254,7 @@ class ttReportHelper {
     if($canViewReports || $isClient)
       array_push($fields, 'u.name as user');
     // Add user custom fields.
-    if ($custom_fields && $custom_fields->userFields) {
+    if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $checkbox_field_name = 'show_'.$field_name;
@@ -279,7 +279,7 @@ class ttReportHelper {
     if ($options['show_task'] || $grouping_by_task)
       array_push($fields, 't.name as task');
     // Add time custom fields.
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         $checkbox_field_name = 'show_'.$field_name;
@@ -355,7 +355,7 @@ class ttReportHelper {
     $left_joins = null;
     // Left joins for custom fields.
     // 1 join is required for each text field, 2 joins for each dropdown.
-    if ($custom_fields && $custom_fields->userFields) {
+    if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $checkbox_field_name = 'show_'.$field_name;
@@ -385,7 +385,7 @@ class ttReportHelper {
     if ($options['show_task'] || $grouping_by_task)
       $left_joins .= " left join tt_tasks t on (t.id = l.task_id)";
     // Left joins for time custom fields.
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         $checkbox_field_name = 'show_'.$field_name;
@@ -443,7 +443,7 @@ class ttReportHelper {
       if($canViewReports || $isClient)
         array_push($fields, 'u.name as user');
       // Add user custom fields.
-      if ($custom_fields && $custom_fields->userFields) {
+      if (isset($custom_fields) && $custom_fields->userFields) {
         foreach ($custom_fields->userFields as $userField) {
           $field_name = 'user_field_'.$userField['id'];
           $checkbox_field_name = 'show_'.$field_name;
@@ -467,7 +467,7 @@ class ttReportHelper {
       if ($options['show_task'] || $grouping_by_task)
         array_push($fields, 'null'); // null for task name. We need to match column count for union.
       // Add null values for time custom fields.
-      if ($custom_fields && $custom_fields->timeFields) {
+      if (isset($custom_fields) && $custom_fields->timeFields) {
         foreach ($custom_fields->timeFields as $timeField) {
           $field_name = 'time_field_'.$timeField['id'];
           $checkbox_field_name = 'show_'.$field_name;
@@ -517,7 +517,7 @@ class ttReportHelper {
       // Prepare sql query part for left joins.
       $left_joins = null;
       // Left joins for user custom fields.
-      if ($custom_fields && $custom_fields->userFields) {
+      if (isset($custom_fields) && $custom_fields->userFields) {
         foreach ($custom_fields->userFields as $userField) {
           $field_name = 'user_field_'.$userField['id'];
           $checkbox_field_name = 'show_'.$field_name;
@@ -730,7 +730,7 @@ class ttReportHelper {
 
     if ($user->isPluginEnabled('cf')) {
       global $custom_fields;
-      if (!$custom_fields) $custom_fields = new CustomFields();
+      if (!isset($custom_fields)) $custom_fields = new CustomFields();
     }
 
     $trackingMode = $user->getTrackingMode();
@@ -758,7 +758,7 @@ class ttReportHelper {
     // Prepare left joins.
     $left_joins = null;
     // Left joins for custom fields.
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         $field_value = $options[$field_name];
@@ -776,7 +776,7 @@ class ttReportHelper {
         }
       }
     }
-    if ($custom_fields && $custom_fields->userFields) {
+    if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $field_value = $options[$field_name];
@@ -826,7 +826,7 @@ class ttReportHelper {
       // Prepate left joins.
       $left_joins = null;
       // Left joins for custom fields.
-      if ($custom_fields && $custom_fields->userFields) {
+      if (isset($custom_fields) && $custom_fields->userFields) {
         foreach ($custom_fields->userFields as $userField) {
           $field_name = 'user_field_'.$userField['id'];
           $field_value = $options[$field_name];

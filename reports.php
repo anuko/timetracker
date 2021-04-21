@@ -288,7 +288,7 @@ if ($showTimesheetCheckbox)
   $form->addInput(array('type'=>'hidden','name'=>'timesheet_user_id'));
 
 // If we have time custom fields - add controls for them.
-if ($custom_fields && $custom_fields->timeFields) {
+if (isset($custom_fields) && $custom_fields->timeFields) {
   foreach ($custom_fields->timeFields as $timeField) {
     $field_name = 'time_field_'.$timeField['id'];
     $checkbox_field_name = 'show_'.$field_name;
@@ -306,7 +306,7 @@ if ($custom_fields && $custom_fields->timeFields) {
 }
 
 // If we have user custom fields - add controls for them.
-if ($custom_fields && $custom_fields->userFields) {
+if (isset($custom_fields) && $custom_fields->userFields) {
   foreach ($custom_fields->userFields as $userField) {
     $field_name = 'user_field_'.$userField['id'];
     $checkbox_field_name = 'show_'.$field_name;
@@ -335,14 +335,14 @@ if (MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode)
 if (MODE_PROJECTS_AND_TASKS == $trackingMode)
   $group_by_options['task'] = $i18n->get('form.reports.group_by_task');
 // If we have time custom fields - add group by options for them.
-if ($custom_fields && $custom_fields->timeFields) {
+if (isset($custom_fields) && $custom_fields->timeFields) {
   foreach ($custom_fields->timeFields as $timeField) {
     $field_name = 'time_field_'.$timeField['id'];
     $group_by_options[$field_name] = $timeField['label'];
   }
 }
 // If we have user custom fields - add group by options for them.
-if ($custom_fields && $custom_fields->userFields) {
+if (isset($custom_fields) && $custom_fields->userFields) {
   foreach ($custom_fields->userFields as $userField) {
     $field_name = 'user_field_'.$userField['id'];
     $group_by_options[$field_name] = $userField['label'];
