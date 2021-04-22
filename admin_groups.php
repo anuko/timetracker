@@ -14,5 +14,5 @@ if (!ttAccessAllowed('administer_site')) {
 
 $smarty->assign('groups', ttOrgHelper::getOrgs());
 $smarty->assign('title', $i18n->get('title.groups'));
-$smarty->assign('content_page_name', 'admin_groups.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'admin_groups2.tpl');
+$smarty->display('index2.tpl');
