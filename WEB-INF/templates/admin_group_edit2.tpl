@@ -9,12 +9,6 @@ License: See license.txt *}
     <td class="td-with-input">{$forms.groupForm.group_name.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
-  <tr class = "small-screen-label"><td><label for="lang">{$i18n.label.language}:</label></td></tr>
-  <tr>
-    <td class="large-screen-label"><label for="lang">{$i18n.label.language}:</label></td>
-    <td class="td-with-input">{$forms.groupForm.lang.control}</td>
-  </tr>
-  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td><label for="manager_name">{$i18n.label.manager_name} (*):</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="manager_name">{$i18n.label.manager_name} (*):</label></td>
@@ -49,5 +43,5 @@ License: See license.txt *}
   <tr><td colspan="2">{$i18n.label.required_fields}</td></tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 </table>
-<div class="button-set">{$forms.groupForm.btn_submit.control}</div>
+<div class="button-set">{$forms.groupForm.btn_save.control} {$forms.groupForm.btn_cancel.control}</div>
 {$forms.groupForm.close}
