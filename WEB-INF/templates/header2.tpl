@@ -12,7 +12,7 @@
 {if $user->getCustomCss()}
   <link href="custom_css.php" rel="stylesheet">
 {/if}
-  <title>Time Tracker{if $title} - {$title}{/if}</title>
+  <title>Time Tracker{if isset($title) && $title} - {$title}{/if}</title>
   <script src="js/strftime.js"></script>
   <script>
     {* Setup locale for strftime *}
@@ -160,8 +160,8 @@
 {* end of top menu for large screens *}
 
 {* page title and user details *}
-{if $title}
-<div class="page-title">{$title}{if (isset($timestring) && $timestring)}: {$timestring}{/if}</div>
+{if isset($title) && $title}
+<div class="page-title">{$title}{if isset($timestring) && $timestring}: {$timestring}{/if}</div>
   {if (isset($authenticated) && $authenticated)}
 <div class="user-details">{$user->getUserPartForHeader()}</div> {* No need to escape as it is done in the class. *}
   {/if}

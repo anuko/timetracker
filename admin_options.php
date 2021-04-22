@@ -14,6 +14,7 @@ if (!ttAccessAllowed('administer_site')) {
 }
 // End of access checks.
 
+$cl_name = $cl_login = $cl_password1 = $cl_password2 = $cl_email = '';
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_login = trim($request->getParameter('login'));
