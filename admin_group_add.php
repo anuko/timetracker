@@ -48,7 +48,7 @@ foreach ($lang_files as $lfile) {
   $longname_lang[] = array('id'=>I18n::getLangFromFilename($lfile),'name'=>$lname);
 }
 $longname_lang = mu_sort($longname_lang, 'name');
-$form->addInput(array('type'=>'combobox','name'=>'lang','style'=>'width: 200px','data'=>$longname_lang,'datakeys'=>array('id','name'),'value'=>$cl_lang));
+$form->addInput(array('type'=>'combobox','name'=>'lang','data'=>$longname_lang,'datakeys'=>array('id','name'),'value'=>$cl_lang));
 
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_name','value'=>$cl_manager_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_login','value'=>$cl_manager_login));
@@ -101,6 +101,6 @@ if ($request->isPost()) {
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.groupForm.group_name.focus()"');
-$smarty->assign('content_page_name', 'admin_group_add.tpl');
+$smarty->assign('content_page_name', 'admin_group_add2.tpl');
 $smarty->assign('title', $i18n->get('title.add_group'));
-$smarty->display('index.tpl');
+$smarty->display('index2.tpl');
