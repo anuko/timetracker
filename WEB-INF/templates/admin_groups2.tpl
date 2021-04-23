@@ -20,7 +20,7 @@ License: See license.txt *}
   <tr>
     <td>{$group.id}</td>
     <td class="text-cell">{$group.name|escape}</td>
-    <td>{$group.date}</td>
+    <td class="date-cell">{$group.date}</td>
     <td>{$group.lang}</td>
     <td><a href="admin_group_edit.php?id={$group.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>
     <td><a href="admin_group_delete.php?id={$group.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a></td>
