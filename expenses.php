@@ -153,12 +153,11 @@ if ($predefined_expenses) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'recalculateCost();',
     'name'=>'predefined_expense',
-    'value'=>$cl_predefined_expense,
     'data'=>$predefined_expenses,
     'datakeys'=>array('id', 'name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
   $largeScreenCalendarRowSpan += 2;
-  $form->addInput(array('type'=>'text','onchange'=>'recalculateCost();','maxlength'=>'40','name'=>'quantity','value'=>$cl_quantity));
+  $form->addInput(array('type'=>'text','onchange'=>'recalculateCost();','maxlength'=>'40','name'=>'quantity'));
   $largeScreenCalendarRowSpan += 2;
 }
 $form->addInput(array('type'=>'textarea','maxlength'=>'800','name'=>'item_name','value'=>$cl_item_name));
