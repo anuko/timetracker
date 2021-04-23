@@ -115,7 +115,7 @@ div#LoginAboutText {
 
 /* page hint div to display on top of some pages to clarify things */
 div.page-hint {
-  margin-top: 1rem;
+  margin: .5rem;
 }
 
 /* project rate table for user add and user edit pages */
