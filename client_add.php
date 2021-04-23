@@ -19,6 +19,8 @@ if (!$user->isPluginEnabled('cl')) {
 
 $projects = ttGroupHelper::getActiveProjects();
 
+$cl_name = $cl_address = $cl_tax = '';
+$cl_projects = array();
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_address = trim($request->getParameter('address'));

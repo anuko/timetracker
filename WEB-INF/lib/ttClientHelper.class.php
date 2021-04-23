@@ -1,30 +1,6 @@
 <?php
-// +----------------------------------------------------------------------+
-// | Anuko Time Tracker
-// +----------------------------------------------------------------------+
-// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
-// +----------------------------------------------------------------------+
-// | LIBERAL FREEWARE LICENSE: This source code document may be used
-// | by anyone for any purpose, and freely redistributed alone or in
-// | combination with other software, provided that the license is obeyed.
-// |
-// | There are only two ways to violate the license:
-// |
-// | 1. To redistribute this code in source form, with the copyright
-// |    notice or license removed or altered. (Distributing in compiled
-// |    forms without embedded copyright notices is permitted).
-// |
-// | 2. To redistribute modified versions of this code in *any* form
-// |    that bears insufficient indications that the modifications are
-// |    not the work of the original author(s).
-// |
-// | This license applies to this document only, not any other software
-// | that it may be combined with.
-// |
-// +----------------------------------------------------------------------+
-// | Contributors:
-// | https://www.anuko.com/time_tracker/credits.htm
-// +----------------------------------------------------------------------+
+/* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt */
 
 // Class ttClientHelper is used to help with client related tasks.
 class ttClientHelper {
@@ -86,7 +62,7 @@ class ttClientHelper {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-      if ($val['id']) {
+      if (isset($val['id']) && $val['id'] > 0) {
         return $val;
       }
     }
@@ -190,6 +166,7 @@ class ttClientHelper {
     $address = $fields['address'];
     $tax = $fields['tax'];
     $projects = $fields['projects'];
+    $comma_separated = null;
     if ($projects)
       $comma_separated = implode(',', $projects); // This is a comma-separated list of associated projects ids.
     $status = $fields['status'];
@@ -205,7 +182,7 @@ class ttClientHelper {
       return false;
 
     $last_id = $mdb2->lastInsertID('tt_clients', 'id');
-    if (count($projects) > 0)
+    if (isset($projects) && count($projects) > 0)
       foreach ($projects as $p_id) {
         $sql = "insert into tt_client_project_binds (client_id, project_id, group_id, org_id) values($last_id, $p_id, $group_id, $org_id)";
         $affected = $mdb2->exec($sql);
