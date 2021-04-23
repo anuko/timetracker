@@ -26,7 +26,7 @@ if (!$field) {
 $form = new Form('optionAddForm');
 if ($err->no()) {
   $form->addInput(array('type'=>'hidden','name'=>'field_id','value'=>$cl_field_id));
-  $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>''));
+  $form->addInput(array('type'=>'text','maxlength'=>'32','name'=>'name','value'=>''));
   $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 }
 

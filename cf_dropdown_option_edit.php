@@ -25,7 +25,7 @@ if (!$cl_name) {
 
 $form = new Form('optionEditForm');
 if ($err->no()) {
-  $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
+  $form->addInput(array('type'=>'text','maxlength'=>'32','name'=>'name','value'=>$cl_name));
   $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
   $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 }
