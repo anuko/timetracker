@@ -30,8 +30,8 @@ if ($request->isPost()) {
 }
 
 $form = new Form('groupAdvancedForm');
-$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','value'=>$cl_group,'enable'=>$advanced_settings));
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
+$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','value'=>$cl_group));
+$form->addInput(array('type'=>'textarea','name'=>'description','value'=>$cl_description));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'bcc_email','value'=>$cl_bcc_email));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'allow_ip','value'=>$cl_allow_ip));
 
@@ -62,5 +62,5 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.edit_group'));
-$smarty->assign('content_page_name', 'group_advanced_edit.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'group_advanced_edit2.tpl');
+$smarty->display('index2.tpl');

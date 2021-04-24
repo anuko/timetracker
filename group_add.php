@@ -13,6 +13,7 @@ if (!ttAccessAllowed('manage_subgroups')) {
 }
 // End of access checks.
 
+$cl_name = $cl_description = '';
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('group_name'));
   $cl_description = trim($request->getParameter('description'));
@@ -20,7 +21,7 @@ if ($request->isPost()) {
 
 $form = new Form('groupForm');
 $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
+$form->addInput(array('type'=>'textarea','name'=>'description','value'=>$cl_description));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
@@ -45,5 +46,5 @@ if ($request->isPost()) {
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.groupForm.group_name.focus()"');
 $smarty->assign('title', $i18n->get('title.add_group'));
-$smarty->assign('content_page_name', 'group_add.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'group_add2.tpl');
+$smarty->display('index2.tpl');

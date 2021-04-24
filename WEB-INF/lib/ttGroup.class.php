@@ -1,30 +1,6 @@
 <?php
-// +----------------------------------------------------------------------+
-// | Anuko Time Tracker
-// +----------------------------------------------------------------------+
-// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
-// +----------------------------------------------------------------------+
-// | LIBERAL FREEWARE LICENSE: This source code document may be used
-// | by anyone for any purpose, and freely redistributed alone or in
-// | combination with other software, provided that the license is obeyed.
-// |
-// | There are only two ways to violate the license:
-// |
-// | 1. To redistribute this code in source form, with the copyright
-// |    notice or license removed or altered. (Distributing in compiled
-// |    forms without embedded copyright notices is permitted).
-// |
-// | 2. To redistribute modified versions of this code in *any* form
-// |    that bears insufficient indications that the modifications are
-// |    not the work of the original author(s).
-// |
-// | This license applies to this document only, not any other software
-// | that it may be combined with.
-// |
-// +----------------------------------------------------------------------+
-// | Contributors:
-// | https://www.anuko.com/time_tracker/credits.htm
-// +----------------------------------------------------------------------+
+/* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt */
 
 import('ttConfigHelper');
 import('ttGroupHelper');
@@ -55,6 +31,7 @@ class ttGroup {
 
   var $config = null;           // Comma-separated list of miscellaneous config options.
   var $configHelper = null;     // An instance of ttConfigHelper class.
+  var $custom_css = null;       // Custom css.
 
   var $custom_logo = 0;         // Whether to use a custom logo for group.
   var $lock_spec = null;        // Cron specification for record locking.
@@ -111,6 +88,7 @@ class ttGroup {
       // TODO: refactor this.
       $this->config = $val['config'];
       $this->configHelper = new ttConfigHelper($val['config']);
+      $this->custom_css = $val['custom_css'];
       // Set user config options.
       $this->punch_mode = $this->configHelper->getDefinedValue('punch_mode');
       $this->allow_overlap = $this->configHelper->getDefinedValue('allow_overlap');
