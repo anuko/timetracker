@@ -55,5 +55,5 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.export'));
-$smarty->assign('content_page_name', 'export.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'export2.tpl');
+$smarty->display('index2.tpl');

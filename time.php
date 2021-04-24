@@ -80,7 +80,7 @@ if ($showNoteRow) {
   // Determine column span for note field.
   $colspan = 0;
   if ($showClient) $colspan++;
-  if ($showRecordCustomFields && $custom_fields && $custom_fields->timeFields) {
+  if ($showRecordCustomFields && isset($custom_fields) && $custom_fields->timeFields) {
     foreach ($custom_fields->timeFields as $timeField) {
       $colspan++;
     }
