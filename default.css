@@ -296,7 +296,7 @@ input[type="text"].project-rate-field {
 }
 
 /* textareas for fields */
-#description, #address, #item_name {
+#description, #address, #item_name, #custom_css {
   width: 220px;
   border-radius: 4px;
   border: 1px solid #c9c9c9;

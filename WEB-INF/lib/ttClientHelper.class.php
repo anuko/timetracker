@@ -207,7 +207,7 @@ class ttClientHelper {
     $address = $fields['address'];
     $tax = $fields['tax'];
     $status = $fields['status'];
-    $projects = $fields['projects'];
+    $projects = isset($fields['projects']) ? $fields['projects'] : array();
 
     $tax = str_replace(',', '.', $tax);
     if ($tax == '') $tax = 0;

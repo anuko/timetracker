@@ -48,7 +48,7 @@ $form->addInput(array('type'=>'checkbox','name'=>'record_custom_fields','value'=
 $form->addInput(array('type'=>'checkbox','name'=>'report_note_on_separate_row','value'=>$cl_report_note_on_separate_row));
 // TODO: add PDF break controller here.
 
-$form->addInput(array('type'=>'textarea','name'=>'custom_css','style'=>'width: 250px; height: 40px;','value'=>$cl_custom_css));
+$form->addInput(array('type'=>'textarea','name'=>'custom_css','value'=>$cl_custom_css));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()){
@@ -74,5 +74,5 @@ if ($request->isPost()){
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.display_options'));
-$smarty->assign('content_page_name', 'display_options.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'display_options2.tpl');
+$smarty->display('index2.tpl');
