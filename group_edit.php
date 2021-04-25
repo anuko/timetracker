@@ -43,7 +43,7 @@ $groupChanged = (bool)$request->getParameter('group_changed');
 if ($request->isPost() && $groupChanged) {
  $user->setOnBehalfGroup($group_id); // User changed the group in a post using group selector on group_edit.php.
 }
-if ($request->isGet() && !$homeGroup) {
+if ($request->isGet() && !$home_group) {
  $user->setOnBehalfGroup($group_id); // User got here in a get by clicking an edit icon for a subgroup on groups.php.
 }
 
