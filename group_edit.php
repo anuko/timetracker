@@ -91,7 +91,6 @@ if (count($groups) > 1) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'document.groupForm.group_changed.value=1;document.groupForm.submit();',
     'name'=>'group',
-    'style'=>'width: 250px;',
     'value'=>$group_id,
     'data'=>$groups,
     'datakeys'=>array('id','name')));
@@ -116,7 +115,7 @@ foreach ($lang_files as $lfile) {
   $longname_lang[] = array('id'=>I18n::getLangFromFilename($lfile),'name'=>$lname);
 }
 $longname_lang = mu_sort($longname_lang, 'name');
-$form->addInput(array('type'=>'combobox','name'=>'lang','style'=>'width: 200px','data'=>$longname_lang,'datakeys'=>array('id','name'),'value'=>$cl_lang));
+$form->addInput(array('type'=>'combobox','name'=>'lang','data'=>$longname_lang,'datakeys'=>array('id','name'),'value'=>$cl_lang));
 
 $DECIMAL_MARK_OPTIONS = array(array('id'=>'.','name'=>'.'),array('id'=>',','name'=>','));
 $form->addInput(array('type'=>'combobox','name'=>'decimal_mark','style'=>'width: 150px','data'=>$DECIMAL_MARK_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_decimal_mark,
@@ -141,7 +140,7 @@ $week_start_options = array();
 foreach ($i18n->weekdayNames as $id => $week_dn) {
   $week_start_options[] = array('id' => $id, 'name' => $week_dn);
 }
-$form->addInput(array('type'=>'combobox','name'=>'start_week','style'=>'width: 150px;','data'=>$week_start_options,'datakeys'=>array('id','name'),'value'=>$cl_start_week));
+$form->addInput(array('type'=>'combobox','name'=>'start_week','data'=>$week_start_options,'datakeys'=>array('id','name'),'value'=>$cl_start_week));
 
 // Show holidays control.
 $form->addInput(array('type'=>'text','name'=>'holidays','value'=>$cl_holidays));
@@ -151,7 +150,7 @@ $tracking_mode_options = array();
 $tracking_mode_options[MODE_TIME] = $i18n->get('form.group_edit.mode_time');
 $tracking_mode_options[MODE_PROJECTS] = $i18n->get('form.group_edit.mode_projects');
 $tracking_mode_options[MODE_PROJECTS_AND_TASKS] = $i18n->get('form.group_edit.mode_projects_and_tasks');
-$form->addInput(array('type'=>'combobox','name'=>'tracking_mode','style'=>'width: 150px;','data'=>$tracking_mode_options,'value'=>$cl_tracking_mode));
+$form->addInput(array('type'=>'combobox','name'=>'tracking_mode','data'=>$tracking_mode_options,'value'=>$cl_tracking_mode));
 $form->addInput(array('type'=>'checkbox','name'=>'project_required','value'=>$cl_project_required));
 
 // Prepare record type choices.
@@ -159,7 +158,7 @@ $record_type_options = array();
 $record_type_options[TYPE_ALL] = $i18n->get('form.group_edit.type_all');
 $record_type_options[TYPE_START_FINISH] = $i18n->get('form.group_edit.type_start_finish');
 $record_type_options[TYPE_DURATION] = $i18n->get('form.group_edit.type_duration');
-$form->addInput(array('type'=>'combobox','name'=>'record_type','style'=>'width: 150px;','data'=>$record_type_options,'value'=>$cl_record_type));
+$form->addInput(array('type'=>'combobox','name'=>'record_type','data'=>$record_type_options,'value'=>$cl_record_type));
 
 // Punch mode checkbox.
 $form->addInput(array('type'=>'checkbox','name'=>'punch_mode','value'=>$cl_punch_mode));
@@ -229,5 +228,5 @@ $smarty->assign('group_dropdown', count($groups) > 1);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="handlePluginCheckboxes();"');
 $smarty->assign('title', $i18n->get('title.edit_group'));
-$smarty->assign('content_page_name', 'group_edit.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'group_edit2.tpl');
+$smarty->display('index2.tpl');
