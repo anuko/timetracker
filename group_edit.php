@@ -41,7 +41,10 @@ if ($home_group) {
 // Set on behalf group accordingly.
 $groupChanged = (bool)$request->getParameter('group_changed');
 if ($request->isPost() && $groupChanged) {
- $user->setOnBehalfGroup($group_id);
+ $user->setOnBehalfGroup($group_id); // User changed the group in a post using group selector on group_edit.php.
+}
+if ($request->isGet() && !$homeGroup) {
+ $user->setOnBehalfGroup($group_id); // User got here in a get by clicking an edit icon for a subgroup on groups.php.
 }
 
 $groups = $user->getGroupsForDropdown();

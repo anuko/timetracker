@@ -30,7 +30,6 @@ if (count($groups) > 1) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'this.form.submit();',
     'name'=>'group',
-    'style'=>'width: 250px;',
     'value'=>$group_id,
     'data'=>$groups,
     'datakeys'=>array('id','name')));
@@ -40,5 +39,5 @@ if (count($groups) > 1) {
 $smarty->assign('subgroups', $user->getSubgroups($group_id));
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('label.subgroups'));
-$smarty->assign('content_page_name', 'groups.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'groups2.tpl');
+$smarty->display('index2.tpl');
