@@ -292,7 +292,7 @@ class ttGroupExportHelper {
         $user_part .= " login=\"".htmlspecialchars($user_item['login'])."\"";
         $user_part .= " password=\"".$user_item['password']."\"";
         $user_part .= " role_id=\"".$role_id."\"";
-        $user_part .= " client_id=\"".$this->clientMap[$user_item['client_id']]."\"";
+        $user_part .= " client_id=\"".@$this->clientMap[$user_item['client_id']]."\"";
         $user_part .= " rate=\"".$user_item['rate']."\"";
         $user_part .= " quota_percent=\"".$user_item['quota_percent']."\"";
         $user_part .= " email=\"".$user_item['email']."\"";
@@ -330,8 +330,8 @@ class ttGroupExportHelper {
       foreach ($timesheets as $timesheet_item) {
         $timesheet_part = $this->indentation.'    '."<timesheet id=\"".$this->timesheetMap[$timesheet_item['id']]."\"";
         $timesheet_part .= " user_id=\"".$this->userMap[$timesheet_item['user_id']]."\"";
-        $timesheet_part .= " client_id=\"".$this->clientMap[$timesheet_item['client_id']]."\"";
-        $timesheet_part .= " project_id=\"".$this->projectMap[$timesheet_item['project_id']]."\"";
+        $timesheet_part .= " client_id=\"".@$this->clientMap[$timesheet_item['client_id']]."\"";
+        $timesheet_part .= " project_id=\"".@$this->projectMap[$timesheet_item['project_id']]."\"";
         $timesheet_part .= " name=\"".htmlspecialchars($timesheet_item['name'])."\"";
         $timesheet_part .= " comment=\"".htmlspecialchars($timesheet_item['comment'])."\"";
         $timesheet_part .= " start_date=\"".$timesheet_item['start_date']."\"";
@@ -355,7 +355,7 @@ class ttGroupExportHelper {
         $invoice_part = $this->indentation.'    '."<invoice id=\"".$this->invoiceMap[$invoice_item['id']]."\"";
         $invoice_part .= " name=\"".htmlspecialchars($invoice_item['name'])."\"";
         $invoice_part .= " date=\"".$invoice_item['date']."\"";
-        $invoice_part .= " client_id=\"".$this->clientMap[$invoice_item['client_id']]."\"";
+        $invoice_part .= " client_id=\"".@$this->clientMap[$invoice_item['client_id']]."\"";
         $invoice_part .= " status=\"".$invoice_item['status']."\"";
         $invoice_part .= "></invoice>\n";
         fwrite($this->file, $invoice_part);
@@ -380,11 +380,11 @@ class ttGroupExportHelper {
         $log_part .= " date=\"".$record['date']."\"";
         $log_part .= " start=\"".$record['start']."\"";
         $log_part .= " duration=\"".$record['duration']."\"";
-        $log_part .= " client_id=\"".$this->clientMap[$record['client_id']]."\"";
-        $log_part .= " project_id=\"".$this->projectMap[$record['project_id']]."\"";
-        $log_part .= " task_id=\"".$this->taskMap[$record['task_id']]."\"";
-        $log_part .= " timesheet_id=\"".$this->timesheetMap[$record['timesheet_id']]."\"";
-        $log_part .= " invoice_id=\"".$this->invoiceMap[$record['invoice_id']]."\"";
+        $log_part .= " client_id=\"".@$this->clientMap[$record['client_id']]."\"";
+        $log_part .= " project_id=\"".@$this->projectMap[$record['project_id']]."\"";
+        $log_part .= " task_id=\"".@$this->taskMap[$record['task_id']]."\"";
+        $log_part .= " timesheet_id=\"".@$this->timesheetMap[$record['timesheet_id']]."\"";
+        $log_part .= " invoice_id=\"".@$this->invoiceMap[$record['invoice_id']]."\"";
         $log_part .= " comment=\"".$this->encodeLineBreaks($record['comment'])."\"";
         $log_part .= " billable=\"".$record['billable']."\"";
         $log_part .= " approved=\"".$record['approved']."\"";
@@ -440,7 +440,7 @@ class ttGroupExportHelper {
       foreach ($custom_field_log as $entry) {
         $custom_field_log_part = $this->indentation.'    '."<custom_field_log_entry log_id=\"".$this->logMap[$entry['log_id']]."\"";
         $custom_field_log_part .= " field_id=\"".$this->customFieldMap[$entry['field_id']]."\"";
-        $custom_field_log_part .= " option_id=\"".$this->customFieldOptionMap[$entry['option_id']]."\"";
+        $custom_field_log_part .= " option_id=\"".@$this->customFieldOptionMap[$entry['option_id']]."\"";
         $custom_field_log_part .= " value=\"".htmlspecialchars($entry['value'])."\"";
         $custom_field_log_part .= " status=\"".$entry['status']."\"";
         $custom_field_log_part .= "></custom_field_log_entry>\n";
@@ -460,11 +460,11 @@ class ttGroupExportHelper {
       foreach ($expense_items as $expense_item) {
         $expense_item_part = $this->indentation.'    '."<expense_item date=\"".$expense_item['date']."\"";
         $expense_item_part .= " user_id=\"".$this->userMap[$expense_item['user_id']]."\"";
-        $expense_item_part .= " client_id=\"".$this->clientMap[$expense_item['client_id']]."\"";
+        $expense_item_part .= " client_id=\"".@$this->clientMap[$expense_item['client_id']]."\"";
         $expense_item_part .= " project_id=\"".$this->projectMap[$expense_item['project_id']]."\"";
         $expense_item_part .= " name=\"".$this->encodeLineBreaks($expense_item['name'])."\"";
         $expense_item_part .= " cost=\"".$expense_item['cost']."\"";
-        $expense_item_part .= " invoice_id=\"".$this->invoiceMap[$expense_item['invoice_id']]."\"";
+        $expense_item_part .= " invoice_id=\"".@$this->invoiceMap[$expense_item['invoice_id']]."\"";
         $expense_item_part .= " approved=\"".$expense_item['approved']."\"";
         $expense_item_part .= " paid=\"".$expense_item['paid']."\"";
         $expense_item_part .= " status=\"".$expense_item['status']."\"";
@@ -558,9 +558,9 @@ class ttGroupExportHelper {
         $fav_report_part .= " name=\"".htmlspecialchars($fav_report['name'])."\"";
         $fav_report_part .= " user_id=\"".$this->userMap[$fav_report['user_id']]."\"";
         $fav_report_part .= " report_spec=\"".$this->remapReportSpec($fav_report['report_spec'])."\"";
-        $fav_report_part .= " client_id=\"".$this->clientMap[$fav_report['client_id']]."\"";
-        $fav_report_part .= " project_id=\"".$this->projectMap[$fav_report['project_id']]."\"";
-        $fav_report_part .= " task_id=\"".$this->taskMap[$fav_report['task_id']]."\"";
+        $fav_report_part .= " client_id=\"".@$this->clientMap[$fav_report['client_id']]."\"";
+        $fav_report_part .= " project_id=\"".@$this->projectMap[$fav_report['project_id']]."\"";
+        $fav_report_part .= " task_id=\"".@$this->taskMap[$fav_report['task_id']]."\"";
         $fav_report_part .= " billable=\"".$fav_report['billable']."\"";
         $fav_report_part .= " approved=\"".$fav_report['approved']."\"";
         $fav_report_part .= " invoice=\"".$fav_report['invoice']."\"";
