@@ -118,7 +118,7 @@ $longname_lang = mu_sort($longname_lang, 'name');
 $form->addInput(array('type'=>'combobox','name'=>'lang','data'=>$longname_lang,'datakeys'=>array('id','name'),'value'=>$cl_lang));
 
 $DECIMAL_MARK_OPTIONS = array(array('id'=>'.','name'=>'.'),array('id'=>',','name'=>','));
-$form->addInput(array('type'=>'combobox','name'=>'decimal_mark','style'=>'width: 150px','data'=>$DECIMAL_MARK_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_decimal_mark,
+$form->addInput(array('type'=>'combobox','name'=>'decimal_mark','class'=>'dropdown-field-with-format-example','data'=>$DECIMAL_MARK_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_decimal_mark,
   'onchange'=>'adjustDecimalPreview()'));
 
 $DATE_FORMAT_OPTIONS = array(
@@ -127,12 +127,12 @@ $DATE_FORMAT_OPTIONS = array(
   array('id'=>'%d-%m-%Y','name'=>'d-m-Y'),
   array('id'=>'%d.%m.%Y','name'=>'d.m.Y'),
   array('id'=>'%d.%m.%Y %a','name'=>'d.m.Y a'));
-$form->addInput(array('type'=>'combobox','name'=>'date_format','style'=>'width: 150px;','data'=>$DATE_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_date_format,
+$form->addInput(array('type'=>'combobox','name'=>'date_format','class'=>'dropdown-field-with-format-example','data'=>$DATE_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_date_format,
   'onchange'=>'MakeFormatPreview(&quot;date_format_preview&quot;, this);'));
 $TIME_FORMAT_OPTIONS = array(
   array('id'=>'%H:%M','name'=>$i18n->get('form.group_edit.24_hours')),
   array('id'=>'%I:%M %p','name'=>$i18n->get('form.group_edit.12_hours')));
-$form->addInput(array('type'=>'combobox','name'=>'time_format','style'=>'width: 150px;','data'=>$TIME_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_time_format,
+$form->addInput(array('type'=>'combobox','name'=>'time_format','class'=>'dropdown-field-with-format-example','data'=>$TIME_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_time_format,
   'onchange'=>'MakeFormatPreview(&quot;time_format_preview&quot;, this);'));
 
 // Prepare week start choices.

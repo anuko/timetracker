@@ -273,6 +273,11 @@ span.what-is-it-text {
   display: inline-block;
 }
 
+/* span for what format example */
+span.format-example {
+  color: #777777;
+}
+
 /* buttons */
 input[type="submit"], input[type="button"] {
   -webkit-appearance: none;
@@ -293,6 +298,11 @@ input[type="text"].project-rate-field {
 /* dropdown control */
 .dropdown-field {
   width: 236px;
+}
+
+/* dropdown control with an associated format example */
+.dropdown-field-with-format-example {
+  width: 136px;
 }
 
 /* textareas for fields */

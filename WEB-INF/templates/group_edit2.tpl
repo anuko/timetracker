@@ -48,19 +48,19 @@ function chLocation(newLocation) { document.location = newLocation; }
   <tr class = "small-screen-label"><td><label for="decimal_mark">{$i18n.label.decimal_mark}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="decimal_mark">{$i18n.label.decimal_mark}:</label></td>
-    <td class="td-with-input">{$forms.groupForm.decimal_mark.control} <font id="decimal_preview" color="#777777">&nbsp;</font></td>
+    <td class="td-with-input">{$forms.groupForm.decimal_mark.control} <span class="format-example" id="decimal_preview">&nbsp;</span></td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td><label for="date_format">{$i18n.label.date_format}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="date_format">{$i18n.label.date_format}:</label></td>
-    <td class="td-with-input">{$forms.groupForm.date_format.control} <font id="date_format_preview" color="#777777">&nbsp;</font></td>
+    <td class="td-with-input">{$forms.groupForm.date_format.control} <span class="format-example" id="date_format_preview">&nbsp;</span></td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td><label for="time_format">{$i18n.label.time_format}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="time_format">{$i18n.label.time_format}:</label></td>
-    <td class="td-with-input">{$forms.groupForm.time_format.control} <font id="time_format_preview" color="#777777">&nbsp;</font></td>
+    <td class="td-with-input">{$forms.groupForm.time_format.control} <span class="format-example" id="time_format_preview">&nbsp;</span></td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td><label for="start_week">{$i18n.label.week_start}:</label></td></tr>
