@@ -842,6 +842,7 @@ class ttUser {
     $this->behalf_id = null;
     $this->behalf_name = null;
     unset($this->behalfGroup);
+    $this->behalfGroup = null;
     unset($_SESSION['behalf_group_id']);
     unset($_SESSION['behalf_group_name']);
     unset($_SESSION['behalf_id']);
@@ -849,6 +850,7 @@ class ttUser {
 
     // Destroy report bean if it was set in session.
     $form = new Form('dummyForm');
+    global $request;
     $bean = new ActionForm('reportBean', $form, $request);
     if ($bean->isSaved()) {
       $bean->destroyBean();
