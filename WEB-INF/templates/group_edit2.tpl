@@ -3,19 +3,8 @@ License: See license.txt *}
 
 <script>
 function chLocation(newLocation) { document.location = newLocation; }
-
-{* initialize preview text *}
-MakeFormatPreview("date_format_preview", document.getElementById("date_format"));
-MakeFormatPreview("time_format_preview", document.getElementById("time_format"));
-
-function adjustDecimalPreview()
-{
-  var mark = document.getElementById("decimal_mark").value;
-  var example = document.getElementById("decimal_preview");
-  example.innerHTML = "<i>3"+mark+"14</i>";
-}
-adjustDecimalPreview();
 </script>
+
 
 {$forms.groupForm.open}
 {include file="datetime_format_preview.tpl"}
@@ -169,3 +158,17 @@ adjustDecimalPreview();
 </table>
 <div class="button-set">{$forms.groupForm.btn_save.control} {$forms.groupForm.btn_delete.control}</div>
 {$forms.groupForm.close}
+
+<script>
+{* initialize preview text *}
+MakeFormatPreview("date_format_preview", document.getElementById("date_format"));
+MakeFormatPreview("time_format_preview", document.getElementById("time_format"));
+
+function adjustDecimalPreview()
+{
+  var mark = document.getElementById("decimal_mark").value;
+  var example = document.getElementById("decimal_preview");
+  example.innerHTML = "<i>3"+mark+"14</i>";
+}
+adjustDecimalPreview();
+</script>
