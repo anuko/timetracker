@@ -1,30 +1,6 @@
 <?php
-// +----------------------------------------------------------------------+
-// | Anuko Time Tracker
-// +----------------------------------------------------------------------+
-// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
-// +----------------------------------------------------------------------+
-// | LIBERAL FREEWARE LICENSE: This source code document may be used
-// | by anyone for any purpose, and freely redistributed alone or in
-// | combination with other software, provided that the license is obeyed.
-// |
-// | There are only two ways to violate the license:
-// |
-// | 1. To redistribute this code in source form, with the copyright
-// |    notice or license removed or altered. (Distributing in compiled
-// |    forms without embedded copyright notices is permitted).
-// |
-// | 2. To redistribute modified versions of this code in *any* form
-// |    that bears insufficient indications that the modifications are
-// |    not the work of the original author(s).
-// |
-// | This license applies to this document only, not any other software
-// | that it may be combined with.
-// |
-// +----------------------------------------------------------------------+
-// | Contributors:
-// | https://www.anuko.com/time_tracker/credits.htm
-// +----------------------------------------------------------------------+
+/* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt */
 
 // ttOrgImportHelper class is used to import organization data from an XML file
 // prepared by ttOrgExportHelper and consisting of nested groups with their info.
@@ -249,7 +225,7 @@ class ttOrgImportHelper {
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
           'role_id' => $role_id,
-          'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'client_id' => @$this->currentGroupClientMap[$attrs['CLIENT_ID']],
           'name' => $attrs['NAME'],
           'login' => $attrs['LOGIN'],
           'password' => $attrs['PASSWORD'],
@@ -285,8 +261,8 @@ class ttOrgImportHelper {
           'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
-          'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
-          'project_id' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
+          'client_id' => @$this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'project_id' => @$this->currentGroupProjectMap[$attrs['PROJECT_ID']],
           'name' => $attrs['NAME'],
           'comment' => $attrs['COMMENT'],
           'start_date' => $attrs['START_DATE'],
@@ -311,7 +287,7 @@ class ttOrgImportHelper {
           'org_id' => $this->org_id,
           'name' => $attrs['NAME'],
           'date' => $attrs['DATE'],
-          'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'client_id' => @$this->currentGroupClientMap[$attrs['CLIENT_ID']],
           'status' => $attrs['STATUS']));
         if ($invoice_id) {
           // Add a mapping.
@@ -330,13 +306,13 @@ class ttOrgImportHelper {
           'org_id' => $this->org_id,
           'date' => $attrs['DATE'],
           'start' => $attrs['START'],
-          'finish' => $attrs['FINISH'],
+          'finish' => @$attrs['FINISH'],
           'duration' => $attrs['DURATION'],
-          'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
-          'project_id' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
-          'task_id' => $this->currentGroupTaskMap[$attrs['TASK_ID']],
-          'timesheet_id' => $this->currentGroupTimesheetMap[$attrs['TIMESHEET_ID']],
-          'invoice_id' => $this->currentGroupInvoiceMap[$attrs['INVOICE_ID']],
+          'client_id' => @$this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'project_id' => @$this->currentGroupProjectMap[$attrs['PROJECT_ID']],
+          'task_id' => @$this->currentGroupTaskMap[$attrs['TASK_ID']],
+          'timesheet_id' => @$this->currentGroupTimesheetMap[$attrs['TIMESHEET_ID']],
+          'invoice_id' => @$this->currentGroupInvoiceMap[$attrs['INVOICE_ID']],
           'comment' => (isset($attrs['COMMENT']) ? $attrs['COMMENT'] : ''),
           'billable' => $attrs['BILLABLE'],
           'approved' => $attrs['APPROVED'],
@@ -387,7 +363,7 @@ class ttOrgImportHelper {
           'org_id' => $this->org_id,
           'log_id' => $this->currentGroupLogMap[$attrs['LOG_ID']],
           'field_id' => $this->currentGroupCustomFieldMap[$attrs['FIELD_ID']],
-          'option_id' => $this->currentGroupCustomFieldOptionMap[$attrs['OPTION_ID']],
+          'option_id' => @$this->currentGroupCustomFieldOptionMap[$attrs['OPTION_ID']],
           'value' => $attrs['VALUE'],
           'status' => $attrs['STATUS']))) {
           $this->errors->add($i18n->get('error.db'));
@@ -402,12 +378,12 @@ class ttOrgImportHelper {
           'user_id' => $this->currentGroupUserMap[$attrs['USER_ID']],
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
-          'client_id' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'client_id' => @$this->currentGroupClientMap[$attrs['CLIENT_ID']],
           'project_id' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
-          'timesheet_id' => $this->currentGroupTimesheetMap[$attrs['TIMESHEET_ID']],
+          'timesheet_id' => @$this->currentGroupTimesheetMap[$attrs['TIMESHEET_ID']],
           'name' => $attrs['NAME'],
           'cost' => $attrs['COST'],
-          'invoice_id' => $this->currentGroupInvoiceMap[$attrs['INVOICE_ID']],
+          'invoice_id' => @$this->currentGroupInvoiceMap[$attrs['INVOICE_ID']],
           'approved' => $attrs['APPROVED'],
           'paid' => $attrs['PAID'],
           'status' => $attrs['STATUS']));
@@ -477,9 +453,9 @@ class ttOrgImportHelper {
           'group_id' => $this->current_group_id,
           'org_id' => $this->org_id,
           'report_spec' => $this->remapReportSpec($attrs['REPORT_SPEC']),
-          'client' => $this->currentGroupClientMap[$attrs['CLIENT_ID']],
-          'project' => $this->currentGroupProjectMap[$attrs['PROJECT_ID']],
-          'task' => $this->currentGroupTaskMap[$attrs['TASK_ID']],
+          'client' => @$this->currentGroupClientMap[$attrs['CLIENT_ID']],
+          'project' => @$this->currentGroupProjectMap[$attrs['PROJECT_ID']],
+          'task' => @$this->currentGroupTaskMap[$attrs['TASK_ID']],
           'billable' => $attrs['BILLABLE'],
           'approved' => $attrs['APPROVED'],
           'invoice' => $attrs['INVOICE'],
@@ -850,7 +826,6 @@ class ttOrgImportHelper {
     $org_id = (int) $fields['org_id'];
     $name = $fields['name'];
     $description = $fields['description'];
-    $projects = $fields['projects'];
     $status = $fields['status'];
 
     $sql = "insert into tt_tasks (group_id, org_id, name, description, status)
