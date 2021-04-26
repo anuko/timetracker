@@ -212,6 +212,7 @@ if (isset($custom_fields) && $custom_fields->timeFields) {
 }
 
 // If we show project dropdown, add controls for project and client.
+$project_list = $client_list = array();
 if ($showProject) {
   // Dropdown for projects assigned to user.
   $options['include_templates'] = $user->isPluginEnabled('tp') && $config->getDefinedValue('bind_templates_with_projects');
@@ -226,7 +227,6 @@ if ($showProject) {
   $largeScreenCalendarRowSpan += 2;
 
   // Client dropdown.
-  $client_list = array();
   if ($showClient) {
     $active_clients = ttGroupHelper::getActiveClients(true);
     // We need an array of assigned project ids to do some trimming.
