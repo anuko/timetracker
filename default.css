@@ -175,6 +175,16 @@ div.page-hint {
   white-space: nowrap;
 }
 
+/* money value cell in tables */
+.money-value-cell {
+  text-align: right;
+}
+
+/* yes-no cell in tables */
+.yes-no-cell {
+  text-align: middle;
+}
+
 /* text cell for note header when we display notes on separate rows */
 .note-header-cell {
   text-align: right;
@@ -302,6 +312,11 @@ input[type="text"].project-rate-field {
 
 /* dropdown control with an associated format example */
 .dropdown-field-with-format-example {
+  width: 136px;
+}
+
+/* dropdown control with an associated button */
+.dropdown-field-with-button {
   width: 136px;
 }
 
@@ -447,6 +462,15 @@ div.section-header {
   margin-right: auto;
   margin-top: .5rem;
   margin-bottom: .5rem;
+}
+
+/* invoice-header div */
+div.invoice-header {
+  font-size: 2rem;
+}
+
+th.invoice-label {
+  text-align: right;
 }
 
 /* div for a group of items in site map */

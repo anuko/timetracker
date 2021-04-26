@@ -36,6 +36,14 @@ html {
   text-align: left;
 }
 
+.money-value-cell {
+  text-align: left;
+}
+
 .note-header-cell {
+  text-align: left;
+}
+
+th.invoice-label {
   text-align: left;
 }
