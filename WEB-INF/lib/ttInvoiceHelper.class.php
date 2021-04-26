@@ -313,6 +313,8 @@ class ttInvoiceHelper {
     $end_date = new DateAndTime($user->date_format, $fields['end_date']);
     $end = $end_date->toString(DB_DATEFORMAT);
 
+    $project_id = null;
+    $project_part = '';
     if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
 
     // Create a new invoice record.

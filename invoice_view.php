@@ -76,8 +76,7 @@ if ($user->isPluginEnabled('ps') && !$user->isClient()) {
   $form->addInput(array('type'=>'combobox',
     'name'=>'mark_paid_action_options',
     'class'=>'dropdown-field-with-button',
-    'data'=>$mark_paid_action_options,
-    'value'=>$cl_mark_paid_action_option));
+    'data'=>$mark_paid_action_options));
   $form->addInput(array('type'=>'submit','name'=>'btn_mark_paid','value'=>$i18n->get('button.submit')));
   $smarty->assign('show_mark_paid', true);
 }

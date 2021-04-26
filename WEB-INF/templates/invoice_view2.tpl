@@ -59,7 +59,7 @@ License: See license.txt *}
     {/if}
   </tr>
   {/foreach}
-  {if $tax}
+  {if isset($tax)}
   <tr>
     <th class="invoice-label" colspan="{$colspan}">{$i18n.label.subtotal}:</th>
     <td class="money-value-cell"><nobr>{$subtotal|escape}</nobr></td>
