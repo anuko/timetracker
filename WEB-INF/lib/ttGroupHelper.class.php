@@ -403,6 +403,7 @@ class ttGroupHelper {
     $addPaidStatus = $user->isPluginEnabled('ps');
     $result = array();
 
+    $client_part = '';
     if ($user->isClient())
       $client_part = "and i.client_id = $user->client_id";
 

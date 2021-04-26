@@ -35,15 +35,15 @@ $form->addInput(array('type'=>'datefield','name'=>'date','size'=>'20','value'=>$
 // Dropdown for clients if the clients plugin is enabled.
 if ($user->isPluginEnabled('cl')) {
   $clients = ttGroupHelper::getActiveClients();
-  $form->addInput(array('type'=>'combobox','name'=>'client','style'=>'width: 250px;','data'=>$clients,'datakeys'=>array('id','name'),'value'=>$cl_client,'empty'=>array(''=>$i18n->get('dropdown.select'))));
+  $form->addInput(array('type'=>'combobox','name'=>'client','data'=>$clients,'datakeys'=>array('id','name'),'value'=>$cl_client,'empty'=>array(''=>$i18n->get('dropdown.select'))));
 }
 // Dropdown for projects.
 $show_project = MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode();
 if ($show_project) {
   $projects = ttGroupHelper::getActiveProjects();
-  $form->addInput(array('type'=>'combobox','name'=>'project','style'=>'width: 250px;','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_project,'empty'=>array(''=>$i18n->get('dropdown.all'))));
+  $form->addInput(array('type'=>'combobox','name'=>'project','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_project,'empty'=>array(''=>$i18n->get('dropdown.all'))));
 }
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'number','style'=>'width: 250px;','value'=>$cl_number));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'number','value'=>$cl_number));
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start','value'=>$cl_start));
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'finish','value'=>$cl_finish));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.add')));

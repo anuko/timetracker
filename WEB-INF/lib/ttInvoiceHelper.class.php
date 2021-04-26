@@ -16,6 +16,7 @@ class ttInvoiceHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    $client_part = '';
     if ($user->isClient()) $client_part = "and client_id = $user->client_id";
 
     $sql = "select * from tt_invoices".
