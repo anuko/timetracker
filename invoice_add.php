@@ -19,6 +19,7 @@ if (!$user->isPluginEnabled('iv')) {
 }
 // End of access checks.
 
+$cl_date = $cl_client = $cl_project = $cl_number = $cl_start = $cl_finish = null;
 if ($request->isPost()) {
   $cl_date = $request->getParameter('date');
   $cl_client = (int)$request->getParameter('client');
@@ -79,5 +80,5 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.invoiceForm.number.focus()"');
 $smarty->assign('show_project', $show_project);
 $smarty->assign('title', $i18n->get('title.add_invoice'));
-$smarty->assign('content_page_name', 'invoice_add.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'invoice_add2.tpl');
+$smarty->display('index2.tpl');
