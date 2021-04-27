@@ -22,6 +22,7 @@ if (!$user->exists()) {
   header('Location: access_denied.php'); // No users in subgroup.
   exit();
 }
+$cl_fav_report_id = null;
 if ($request->isPost() && $request->getParameter('fav_report')) {
   $cl_fav_report_id = (int) $request->getParameter('fav_report');
   if (!ttFavReportHelper::get($cl_fav_report_id)) {
@@ -33,6 +34,7 @@ if ($request->isPost() && $request->getParameter('fav_report')) {
 
 $fav_reports = ttFavReportHelper::getReports();
 
+$cl_cron_spec = $cl_email = $cl_cc = $cl_subject = $cl_comment = $cl_report_condition = null;
 if ($request->isPost()) {
   $cl_cron_spec = trim($request->getParameter('cron_spec'));
   $cl_email = trim($request->getParameter('email'));
@@ -47,18 +49,17 @@ if ($request->isPost()) {
 $form = new Form('notificationForm');
 $form->addInput(array('type'=>'combobox',
   'name'=>'fav_report',
-  'style'=>'width: 250px;',
   'value'=>$cl_fav_report_id,
   'data'=>$fav_reports,
   'datakeys'=>array('id','name'),
   'empty'=>array(''=>$i18n->get('dropdown.select'))
 ));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'cron_spec','style'=>'width: 250px;','value'=>$cl_cron_spec));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','style'=>'width: 250px;','value'=>$cl_email));
-$form->addInput(array('type'=>'text','name'=>'cc','style'=>'width: 300px;','value'=>$cl_cc));
-$form->addInput(array('type'=>'text','name'=>'subject','style'=>'width: 300px;','value'=>$cl_subject));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'cron_spec','value'=>$cl_cron_spec));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email));
+$form->addInput(array('type'=>'text','name'=>'cc','value'=>$cl_cc));
+$form->addInput(array('type'=>'text','name'=>'subject','value'=>$cl_subject));
 $form->addInput(array('type'=>'textarea','name'=>'comment','value'=>$cl_comment));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'report_condition','style'=>'width: 250px;','value'=>$cl_report_condition));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'report_condition','value'=>$cl_report_condition));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
@@ -94,5 +95,5 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.add_notification'));
-$smarty->assign('content_page_name', 'notification_add.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'notification_add2.tpl');
+$smarty->display('index2.tpl');
