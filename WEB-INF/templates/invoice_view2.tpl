@@ -85,7 +85,7 @@ License: See license.txt *}
 </table>
 {/if}
 
-{if $show_mark_paid}
+{if isset($show_mark_paid)}
 {$forms.invoiceForm.open}
 <table class="centered-table">
   <tr class = "small-screen-label"><td><label for="mark_paid_action_options">{$i18n.label.mark_paid}:</label></td></tr>
