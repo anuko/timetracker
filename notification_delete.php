@@ -51,5 +51,5 @@ $smarty->assign('notification_to_delete', $notification_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.notificationDeleteForm.btn_cancel.focus()"');
 $smarty->assign('title', $i18n->get('title.delete_notification'));
-$smarty->assign('content_page_name', 'notification_delete.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'notification_delete2.tpl');
+$smarty->display('index2.tpl');
