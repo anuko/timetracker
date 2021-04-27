@@ -28,10 +28,10 @@ if ($request->isPost()) {
 }
 
 $form = new Form('mailForm');
-$form->addInput(array('type'=>'text','name'=>'receiver','style'=>'width: 300px;','value'=>$cl_receiver));
-$form->addInput(array('type'=>'text','name'=>'cc','style'=>'width: 300px;','value'=>$cl_cc));
-$form->addInput(array('type'=>'text','name'=>'subject','style'=>'width: 300px;','value'=>$cl_subject));
-$form->addInput(array('type'=>'textarea','name'=>'comment','maxlength'=>'250','style'=>'width: 300px; height: 60px;'));
+$form->addInput(array('type'=>'text','name'=>'receiver','value'=>$cl_receiver));
+$form->addInput(array('type'=>'text','name'=>'cc','value'=>$cl_cc));
+$form->addInput(array('type'=>'text','name'=>'subject','value'=>$cl_subject));
+$form->addInput(array('type'=>'textarea','name'=>'comment','maxlength'=>'250'));
 $form->addInput(array('type'=>'submit','name'=>'btn_send','value'=>$i18n->get('button.send')));
 
 if ($request->isPost()) {
@@ -74,5 +74,5 @@ if ($request->isPost()) {
 $smarty->assign('title', $i18n->get('title.send_report'));
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.mailForm.'.($cl_receiver?'comment':'receiver').'.focus()"');
-$smarty->assign('content_page_name', 'mail.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'mail2.tpl');
+$smarty->display('index2.tpl');
