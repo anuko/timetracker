@@ -22,6 +22,7 @@ $can_manage_account = $user->behalfGroup ? $user->can('manage_subgroups') : $use
 if ($user->behalf_id) $user_details = $user->getUserDetails($user->behalf_id);
 $current_login = $user->behalf_id ? $user_details['login'] : $user->login;
 
+$cl_name = $cl_login = $cl_password1 = $cl_password2 = $cl_email = null;
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_login = trim($request->getParameter('login'));
@@ -86,5 +87,5 @@ if ($request->isPost()) {
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.profile'));
-$smarty->assign('content_page_name', 'profile_edit.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'profile_edit2.tpl');
+$smarty->display('index2.tpl');
