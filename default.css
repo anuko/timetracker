@@ -300,6 +300,11 @@ input[type="text"], input[type="password"], input[type="file"] {
   width: 220px;
 }
 
+/* text field input with an associated hint */
+input.text-field-with-hint[type="text"]  {
+  width: 136px;
+}
+
 /* project rate input control */
 input[type="text"].project-rate-field {
   width: 50px;
