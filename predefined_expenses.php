@@ -33,5 +33,5 @@ if ($request->isPost()) {
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('predefined_expenses', $predefinedExpenses);
 $smarty->assign('title', $i18n->get('title.predefined_expenses'));
-$smarty->assign('content_page_name', 'predefined_expenses.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'predefined_expenses2.tpl');
+$smarty->display('index2.tpl');

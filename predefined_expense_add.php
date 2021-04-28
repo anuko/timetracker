@@ -25,7 +25,7 @@ if ($request->isPost()) {
 
 $form = new Form('predefinedExpenseForm');
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
-$form->addInput(array('class'=>'text-field-with-hint','type'=>'text','maxlength'=>'40','name'=>'cost','value'=>$cl_cost));
+$form->addInput(array('type'=>'text','class'=>'text-field-with-hint','maxlength'=>'40','name'=>'cost','value'=>$cl_cost));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {

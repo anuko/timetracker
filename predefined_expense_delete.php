@@ -48,5 +48,5 @@ $smarty->assign('predefined_expense_to_delete', $predefined_expense_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.predefinedExpenseDeleteForm.btn_cancel.focus()"');
 $smarty->assign('title', $i18n->get('title.delete_predefined_expense'));
-$smarty->assign('content_page_name', 'predefined_expense_delete.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'predefined_expense_delete2.tpl');
+$smarty->display('index2.tpl');
