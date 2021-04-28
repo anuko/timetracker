@@ -92,8 +92,8 @@ $monthsData = $quota->get($selectedYear);
 $workdayHours = ttTimeHelper::toAbsDuration($user->getWorkdayMinutes(), true);
 
 $form = new Form('monthlyQuotasForm');
-$form->addInput(array('type'=>'text', 'name'=>'workdayHours', 'value'=>$workdayHours, 'style'=>'width:60px'));
-$form->addInput(array('type'=>'combobox','name'=>'year','data'=>$years,'datakeys'=>array('id','name'),'value'=>$selectedYear,'onchange'=>'yearChange(this.value);'));
+$form->addInput(array('type'=>'text','class'=>'quota-field','name'=>'workdayHours','value'=>$workdayHours));
+$form->addInput(array('type'=>'combobox','class'=>'dropdown-field-short','name'=>'year','data'=>$years,'datakeys'=>array('id','name'),'value'=>$selectedYear,'onchange'=>'yearChange(this.value);'));
 for ($i=0; $i < count($months); $i++) { 
   $value = "";
   if (array_key_exists($i+1, $monthsData)){
@@ -101,11 +101,11 @@ for ($i=0; $i < count($months); $i++) {
     $value = ttTimeHelper::toAbsDuration($value, true);
   }
   $name = $months[$i];
-  $form->addInput(array('type'=>'text','name'=>$name,'maxlength'=>6,'value'=> $value,'style'=>'width:70px'));
+  $form->addInput(array('type'=>'text','class'=>'quota-field','name'=>$name,'maxlength'=>6,'value'=> $value));
 }
 
 $smarty->assign('months', $months);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.monthly_quotas'));
-$smarty->assign('content_page_name', 'quotas.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'quotas2.tpl');
+$smarty->display('index2.tpl');

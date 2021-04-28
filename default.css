@@ -190,6 +190,11 @@ div.page-hint {
   text-align: right;
 }
 
+/* cell containing text labels */
+.label-cell {
+  text-align: right;
+}
+
 /* control labels for large screens */
 .large-screen-label {
   text-align: right;
@@ -310,6 +315,11 @@ input[type="text"].project-rate-field {
   width: 50px;
 }
 
+/* project rate input control */
+input[type="text"].quota-field {
+  width: 70px;
+}
+
 /* dropdown control */
 .dropdown-field {
   width: 236px;
@@ -323,6 +333,11 @@ input[type="text"].project-rate-field {
 /* dropdown control with an associated button */
 .dropdown-field-with-button {
   width: 136px;
+}
+
+/* a short dropdown control for small strings */
+.dropdown-field-short {
+  width: 85px;
 }
 
 /* textareas for fields */

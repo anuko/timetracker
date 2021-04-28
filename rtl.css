@@ -44,6 +44,10 @@ html {
   text-align: left;
 }
 
+.label-cell {
+  text-align: left;
+}
+
 th.invoice-label {
   text-align: left;
 }
