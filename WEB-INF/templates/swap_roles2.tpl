@@ -9,6 +9,7 @@ License: See license.txt *}
     <td class="large-screen-label"><label for="swap_with">{$i18n.form.swap.swap_with}:</label></td>
     <td class="td-with-input">{$forms.swapForm.swap_with.control}</td>
   </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 </table>
 <div class="button-set">{$forms.swapForm.btn_submit.control} {$forms.swapForm.btn_cancel.control}</div>
 {$forms.swapForm.close}

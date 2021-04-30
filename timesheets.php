@@ -59,7 +59,6 @@ if ($user->can('track_time')) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'document.timesheetsForm.user_changed.value=1;document.timesheetsForm.submit();',
       'name'=>'user',
-      'style'=>'width: 250px;',
       'value'=>$user_id,
       'data'=>$user_list,
       'datakeys'=>array('id','name')));
@@ -79,5 +78,5 @@ $smarty->assign('show_client', $showClient);
 $smarty->assign('show_files', $showFiles);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.timesheets'));
-$smarty->assign('content_page_name', 'timesheets.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'timesheets2.tpl');
+$smarty->display('index2.tpl');
