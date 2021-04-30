@@ -1,7 +1,6 @@
 {* Copyright (c) Anuko International Ltd. https://www.anuko.com
 License: See license.txt *}
 
-
 {$forms.timesheetForm.open}
 <table class="centered-table">
   <tr class = "small-screen-label"><td><label for="timesheet_name">{$i18n.label.thing_name} (*):</label></td></tr>

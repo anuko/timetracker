@@ -40,8 +40,8 @@ $canDelete = $timesheet['approve_status'] != 1
 
 $form = new Form('timesheetForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_timesheet_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'timesheet_name','style'=>'width: 250px;','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'comment','style'=>'width: 250px; height: 40px;','value'=>$cl_comment));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'timesheet_name','value'=>$cl_name));
+$form->addInput(array('type'=>'textarea','name'=>'comment','value'=>$cl_comment));
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
@@ -81,5 +81,5 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.timesheetForm.timesheet_name.focus()"');
 $smarty->assign('can_delete', $canDelete);
 $smarty->assign('title', $i18n->get('title.edit_timesheet'));
-$smarty->assign('content_page_name', 'timesheet_edit.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'timesheet_edit2.tpl');
+$smarty->display('index2.tpl');
