@@ -29,23 +29,23 @@ if ($request->isPost()) {
 $user_id = $user->getUser();
 
 $form = new Form('timesheetForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'timesheet_name','style'=>'width: 250px;','value'=>$cl_name));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'timesheet_name','value'=>$cl_name));
 
 // Dropdown for clients if the clients plugin is enabled.
 $showClient = $user->isPluginEnabled('cl');
 if ($showClient) {
   $clients = ttGroupHelper::getActiveClients();
-  $form->addInput(array('type'=>'combobox','name'=>'client','style'=>'width: 250px;','data'=>$clients,'datakeys'=>array('id','name'),'value'=>$cl_client,'empty'=>array(''=>$i18n->get('dropdown.select'))));
+  $form->addInput(array('type'=>'combobox','name'=>'client','data'=>$clients,'datakeys'=>array('id','name'),'value'=>$cl_client,'empty'=>array(''=>$i18n->get('dropdown.select'))));
 }
 // Dropdown for projects.
 $showProject = MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode();
 if ($showProject) {
   $projects = $user->getAssignedProjects();
-  $form->addInput(array('type'=>'combobox','name'=>'project','style'=>'width: 250px;','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_project,'empty'=>array(''=>$i18n->get('dropdown.all'))));
+  $form->addInput(array('type'=>'combobox','name'=>'project','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_project,'empty'=>array(''=>$i18n->get('dropdown.all'))));
 }
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start','value'=>$cl_start));
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'finish','value'=>$cl_finish));
-$form->addInput(array('type'=>'textarea','name'=>'comment','style'=>'width: 250px; height: 40px;','value'=>$cl_comment));
+$form->addInput(array('type'=>'textarea','name'=>'comment','value'=>$cl_comment));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
@@ -80,5 +80,5 @@ $smarty->assign('onload', 'onLoad="document.timesheetForm.timesheet_name.focus()
 $smarty->assign('show_client', $showClient);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('title', $i18n->get('title.add_timesheet'));
-$smarty->assign('content_page_name', 'timesheet_add.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'timesheet_add2.tpl');
+$smarty->display('index2.tpl');
