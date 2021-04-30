@@ -320,6 +320,11 @@ input[type="text"].quota-field {
   width: 70px;
 }
 
+/* project rate input control */
+input[type="text"].short-text-field {
+  width: 40px;
+}
+
 /* dropdown control */
 .dropdown-field {
   width: 236px;

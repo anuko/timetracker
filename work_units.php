@@ -30,8 +30,8 @@ if ($request->isPost()) {
 }
 
 $form = new Form('workUnitsForm');
-$form->addInput(array('type'=>'text', 'name'=>'minutes_in_unit', 'value'=>$cl_minutes_in_unit, 'style'=>'width:40px'));
-$form->addInput(array('type'=>'text', 'name'=>'1st_unit_threshold', 'value'=>$cl_1st_unit_threshold, 'style'=>'width:40px'));
+$form->addInput(array('type'=>'text','class'=>'short-text-field','name'=>'minutes_in_unit', 'value'=>$cl_minutes_in_unit));
+$form->addInput(array('type'=>'text','class'=>'short-text-field','name'=>'1st_unit_threshold', 'value'=>$cl_1st_unit_threshold));
 $form->addInput(array('type'=>'checkbox','name'=>'totals_only','value'=>$cl_totals_only));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
@@ -53,5 +53,5 @@ if ($request->isPost()){
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.work_units'));
-$smarty->assign('content_page_name', 'work_units.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'work_units2.tpl');
+$smarty->display('index2.tpl');

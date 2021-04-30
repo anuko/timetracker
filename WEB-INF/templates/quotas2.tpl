@@ -2,7 +2,6 @@
 License: See license.txt *}
 
 <div class="page-hint">{$i18n.form.quota.hint}</div>
-
 {$forms.monthlyQuotasForm.open}
 <table class="centered-table">
   <tr class = "small-screen-label"><td><label for="workdayHours">{$i18n.form.quota.workday_hours}:</label></td></tr>
