@@ -59,7 +59,7 @@ if ($showSubmit) {
 }
 
 if ($showApprove) {
-  $form->addInput(array('type'=>'textarea','name'=>'comment','maxlength'=>'250','style'=>'width: 300px; height: 60px;'));
+  $form->addInput(array('type'=>'textarea','name'=>'comment','maxlength'=>'250'));
   $form->addInput(array('type'=>'submit','name'=>'btn_approve','value'=>$i18n->get('button.approve')));
   $form->addInput(array('type'=>'submit','name'=>'btn_disapprove','value'=>$i18n->get('button.disapprove')));
 }
@@ -126,5 +126,5 @@ $smarty->assign('show_submit', $showSubmit);
 $smarty->assign('show_approve', $showApprove);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.timesheet').": ".$timesheet['start_date']." - ".$timesheet['end_date']);
-$smarty->assign('content_page_name', 'timesheet_view.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'timesheet_view2.tpl');
+$smarty->display('index2.tpl');

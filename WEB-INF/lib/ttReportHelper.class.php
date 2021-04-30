@@ -2252,16 +2252,13 @@ class ttReportHelper {
     return null;
   }
 
-  // makeGroupByHeader builds a column header for a totals-only report using group_by1,
-  // group_by2, and group_by3 values passed in $options.
+  // makeGroupByHeader builds a column header for a totals-only report
+  // or a timesheet using group_by1, group_by2, and group_by3 values passed in $options.
   static function makeGroupByHeader($options) {
     $no_grouping = ($options['group_by1'] == null || $options['group_by1'] == 'no_grouping') &&
       ($options['group_by2'] == null || $options['group_by2'] == 'no_grouping') &&
       ($options['group_by3'] == null || $options['group_by3'] == 'no_grouping');
     if ($no_grouping) return null;
-
-    // We only need to do it for a totals only report.
-    if (!$options['show_totals_only']) return null;
 
     $group_by_header = '';
     if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
