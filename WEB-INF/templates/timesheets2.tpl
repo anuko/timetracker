@@ -18,10 +18,9 @@ License: See license.txt *}
 {/if}
 </table>
 <div class="form-control-separator"></div>
-{if $active_timesheets}
-  {if $inactive_timesheets}
+{if $inactive_timesheets}
 <div class="section-header">{$i18n.form.timesheets.active_timesheets}</div>
-  {/if}
+{/if}
 <table class="x-scrollable-table">
   <tr>
     <th>{$i18n.label.thing_name}</th>
@@ -60,10 +59,7 @@ License: See license.txt *}
   </tr>
   {/foreach}
 </table>
-{/if}
-{if !$inactive_timesheets}
 <div class="button-set"><form><input type="button" onclick="chLocation('timesheet_add.php');" value="{$i18n.button.add}"></form></div>
-{/if}
 {if $inactive_timesheets}
 <div class="section-header">{$i18n.form.timesheets.inactive_timesheets}</div>
 <table class="x-scrollable-table">

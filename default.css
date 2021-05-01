@@ -286,6 +286,7 @@ span.what-is-it-img {
 /* span for what is it text */
 span.what-is-it-text {
   display: inline-block;
+  vertical-align: middle;
 }
 
 /* span for what format example */
