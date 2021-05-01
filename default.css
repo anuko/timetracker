@@ -170,6 +170,11 @@ div.page-hint {
   text-align: right;
 }
 
+/* number cell in tables */
+.number-cell {
+  text-align: right;
+}
+
 /* date cell in tables */
 .date-cell {
   white-space: nowrap;
