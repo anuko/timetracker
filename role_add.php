@@ -19,12 +19,12 @@ if ($request->isPost()) {
 }
 
 $form = new Form('roleForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 250px;','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
+$form->addInput(array('type'=>'textarea','name'=>'description','value'=>$cl_description));
 for ($i = 0; $i < $user->rank; $i++) {
   $rank_data[] = $i;
 }
-$form->addInput(array('type'=>'combobox','name'=>'rank','data'=>$rank_data));
+$form->addInput(array('type'=>'combobox','class'=>'dropdown-field-short','name'=>'rank','data'=>$rank_data));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.submit')));
 
 if ($request->isPost()) {
@@ -55,5 +55,5 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.add_role'));
-$smarty->assign('content_page_name', 'role_add.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'role_add2.tpl');
+$smarty->display('index2.tpl');
