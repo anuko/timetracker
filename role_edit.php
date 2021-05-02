@@ -36,12 +36,12 @@ if ($request->isPost()) {
 
 $form = new Form('roleForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_role_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 250px;','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
+$form->addInput(array('type'=>'textarea','name'=>'description','value'=>$cl_description));
 for ($i = 0; $i < $user->rank; $i++) {
   $rank_data[] = $i;
 }
-$form->addInput(array('type'=>'combobox','name'=>'rank','data'=>$rank_data,'value'=>$cl_rank));
+$form->addInput(array('type'=>'combobox','class'=>'dropdown-field-short','name'=>'rank','data'=>$rank_data,'value'=>$cl_rank));
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
@@ -115,5 +115,5 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.edit_role'));
-$smarty->assign('content_page_name', 'role_edit.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'role_edit2.tpl');
+$smarty->display('index2.tpl');
