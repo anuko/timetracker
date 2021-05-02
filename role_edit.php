@@ -47,9 +47,9 @@ $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 // Multiple select controls for assigned and available rights.
-$form->addInput(array('type'=>'combobox','name'=>'assigned_rights','style'=>'width: 250px;','multiple'=>true,'data'=>$assigned_rights));
+$form->addInput(array('type'=>'combobox','name'=>'assigned_rights','multiple'=>true,'data'=>$assigned_rights));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->get('button.delete')));
-$form->addInput(array('type'=>'combobox','name'=>'available_rights','style'=>'width: 250px;','multiple'=>true,'data'=>$available_rights));
+$form->addInput(array('type'=>'combobox','name'=>'available_rights','multiple'=>true,'data'=>$available_rights));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
