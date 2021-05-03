@@ -89,7 +89,6 @@ if (MODE_TIME == $trackingMode && $showClient) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'client',
-      'style'=>'width: 250px;',
       'enable'=>$enable_controls,
       'value'=>$cl_client,
       'data'=>$active_clients,
