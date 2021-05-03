@@ -35,19 +35,13 @@ License: See license.txt *}
 </table>
 <div class="button-set">{$forms.roleForm.btn_save.control}</div>
 <table class="centered-table">
-  <tr class = "small-screen-label"><td><label for="assigned_rights">{$i18n.form.roles.assigned}:</label></td></tr>
-  <tr>
-    <td class="large-screen-label"><label for="assigned_rights">{$i18n.form.roles.assigned}:</label></td>
-    <td class="td-with-input">{$forms.roleForm.assigned_rights.control}</td>
-    <td class="td-with-input">{$forms.roleForm.btn_delete.control}</td>
-  </tr>
+  <tr><td class="text-cell">{$i18n.form.roles.assigned}:</td></tr>
+  <tr><td class="td-with-input">{$forms.roleForm.assigned_rights.control}</td></tr>
+  <tr><td class="td-with-horizontally-centered-input">{$forms.roleForm.btn_delete.control}</td></tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
-  <tr class = "small-screen-label"><td><label for="available_rights">{$i18n.form.roles.not_assigned}:</label></td></tr>
-  <tr>
-    <td class="large-screen-label"><label for="available_rights">{$i18n.form.roles.not_assigned}:</label></td>
-    <td class="td-with-input">{$forms.roleForm.available_rights.control}</td>
-    <td class="td-with-input">{$forms.roleForm.btn_add.control}</td>
-  </tr>
+  <tr><td class="text-cell">{$i18n.form.roles.not_assigned}:</td></tr>
+  <tr><td class="td-with-input">{$forms.roleForm.available_rights.control}</td></tr>
+  <tr><td class="td-with-horizontally-centered-input">{$forms.roleForm.btn_add.control}</td></tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 </table>
 {$forms.roleForm.close}

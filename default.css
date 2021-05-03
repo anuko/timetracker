@@ -258,6 +258,11 @@ div.record-list {
   text-align: left;
 }
 
+/* a table cell containing input control */
+.td-with-horizontally-centered-input {
+  text-align: middle;
+}
+
 /* a table cell containing a set ov vertically stacked checkboxes */
 .td-with-checkboxes {
   text-align: left;
