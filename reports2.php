@@ -40,7 +40,6 @@ $report_list = ttFavReportHelper::getReports();
 $form->addInput(array('type'=>'combobox',
   'name'=>'favorite_report',
   'onchange'=>'this.form.fav_report_changed.value=1;this.form.submit();',
-  'style'=>'width: 250px;',
   'data'=>$report_list,
   'datakeys'=>array('id','name'),
   'empty'=>array('-1'=>$i18n->get('dropdown.no'))));
@@ -64,7 +63,6 @@ if ($showClient) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
     'name'=>'client',
-    'style'=>'width: 250px;',
     'data'=>$client_list,
     'datakeys'=>array('id', 'name'),
     'empty'=>array(''=>$i18n->get('dropdown.all'))));
@@ -87,7 +85,6 @@ if ($showProject) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillTaskDropdown(this.value);selectAssignedUsers(this.value);',
     'name'=>'project',
-    'style'=>'width: 250px;',
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->get('dropdown.all'))));
@@ -103,7 +100,6 @@ if ($showTask) {
 if ($showTask) {
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
-    'style'=>'width: 250px;',
     'data'=>$task_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->get('dropdown.all'))));
@@ -116,7 +112,6 @@ if ($showBillable) {
     '2'=>$i18n->get('form.reports.include_not_billable'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'include_records', // TODO: how about a better name here?
-    'style'=>'width: 250px;',
     'data'=>$include_options,
     'empty'=>array(''=>$i18n->get('dropdown.all'))));
 }
@@ -139,7 +134,6 @@ $showPaidStatus = $user->isPluginEnabled('ps') && $user->can('manage_invoices');
 if ($showPaidStatus) {
   $form->addInput(array('type'=>'combobox',
    'name'=>'paid_status',
-   'style'=>'width: 250px;',
    'data'=>array('1'=>$i18n->get('dropdown.paid'),'2'=>$i18n->get('dropdown.not_paid')),
    'empty'=>array(''=>$i18n->get('dropdown.all'))
  ));
@@ -506,5 +500,5 @@ $smarty->assign('assigned_projects', $assigned_projects);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="handleCheckboxes();fillDropdowns()"');
 $smarty->assign('title', $i18n->get('title.reports'));
-$smarty->assign('content_page_name', 'reports.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'reports2.tpl');
+$smarty->display('index2.tpl');
