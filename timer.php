@@ -41,6 +41,10 @@ if ($user->isPluginEnabled('cf')) {
   $smarty->assign('custom_fields', $custom_fields);
 }
 
+// Obtain uncompleted record. Assumption is that only 1 uncompleted record is allowed.
+$uncompleted = ttTimeHelper::getUncompleted($user->getUser());
+$enable_controls = ($uncompleted == null);
+
 // Initialize variables.
 $cl_start = trim($request->getParameter('browser_time'));
 $cl_finish = trim($request->getParameter('browser_time'));
@@ -53,16 +57,15 @@ if ($user->isPluginEnabled('iv')) {
     if (isset($_SESSION['billable']))
       $cl_billable = $_SESSION['billable'];
 }
-$cl_client = $request->getParameter('client', @$_SESSION['client']);
+// Note: disabled controls are not posted. Therefore, && $enable_controls condition below.
+// This allows us to get values from session when controls are disabled and reset to null when not.
+$cl_client = $request->getParameter('client', ($request->isPost() && $enable_controls ? null : @$_SESSION['client']));
 $_SESSION['client'] = $cl_client;
-$cl_project = $request->getParameter('project', @$_SESSION['project']);
+$cl_project = $request->getParameter('project', ($request->isPost() && $enable_controls ? null : @$_SESSION['project']));
 $_SESSION['project'] = $cl_project;
-$cl_task = $request->getParameter('task', @$_SESSION['task']);
+$cl_task = $request->getParameter('task', ($request->isPost() && $enable_controls ? null : @$_SESSION['task']));
 $_SESSION['task'] = $cl_task;
 
-// Obtain uncompleted record. Assumption is that only 1 uncompleted record is allowed.
-$uncompleted = ttTimeHelper::getUncompleted($user->getUser());
-$enable_controls = ($uncompleted == null);
 
 // Handle time custom fields.
 $timeCustomFields = array();
