@@ -123,7 +123,6 @@ if ($showInvoiceDropdown) {
     '2'=>$i18n->get('form.reports.include_not_invoiced'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'invoice',
-    'style'=>'width: 250px;',
     'data'=>$invoice_options,
     'empty'=>array(''=>$i18n->get('dropdown.all'))));
 }
@@ -146,7 +145,6 @@ $showApproved = $user->isPluginEnabled('ap') &&
 if ($showApproved) {
   $form->addInput(array('type'=>'combobox',
    'name'=>'approved',
-   'style'=>'width: 250px;',
    'data'=>array('1'=>$i18n->get('dropdown.approved'),'2'=>$i18n->get('dropdown.not_approved')),
    'empty'=>array(''=>$i18n->get('dropdown.all'))
   ));
@@ -157,7 +155,6 @@ $showTimesheetDropdown = $user->isPluginEnabled('ts');
 if ($showTimesheetDropdown) {
   $form->addInput(array('type'=>'combobox',
    'name'=>'timesheet',
-   'style'=>'width: 250px;',
    'data'=>array(TIMESHEET_NOT_ASSIGNED=>$i18n->get('form.reports.include_not_assigned'),
      TIMESHEET_ASSIGNED=>$i18n->get('form.reports.include_assigned'),
      TIMESHEET_PENDING=>$i18n->get('form.reports.include_pending'),

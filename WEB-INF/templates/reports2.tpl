@@ -270,6 +270,14 @@ License: See license.txt *}
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
+{if $show_invoice_dropdown}
+  <tr class = "small-screen-label"><td><label for="invoice">{$i18n.label.invoice}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="invoice">{$i18n.label.invoice}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.invoice.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
 {if $show_paid_status}
   <tr class = "small-screen-label"><td><label for="paid_status">{$i18n.label.paid_status}:</label></td></tr>
   <tr>
@@ -294,6 +302,22 @@ License: See license.txt *}
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
+{if $show_approved}
+  <tr class = "small-screen-label"><td><label for="approved">{$i18n.label.approved}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="approved">{$i18n.label.approved}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.approved.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_timesheet_dropdown}
+  <tr class = "small-screen-label"><td><label for="timesheet">{$i18n.label.timesheet}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="timesheet">{$i18n.label.timesheet}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.timesheet.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
 </table>
 {$forms.reportForm.close}
 
@@ -315,25 +339,6 @@ License: See license.txt *}
   <tr>
     <td valign="top" colspan="2" align="center">
       <table border="0" cellpadding="3">
-        <tr>
-          <td></td>
-          <td valign="top">
-            <table border="0" cellpadding="3">
-{if $show_approved}
-              <tr><td><b>{$i18n.label.approved}</b></td></tr>
-              <tr><td>{$forms.reportForm.approved.control}</td></tr>
-{/if}
-{if $show_invoice_dropdown}
-              <tr><td><b>{$i18n.label.invoice}</b></td></tr>
-              <tr><td>{$forms.reportForm.invoice.control}</td></tr>
-{/if}
-{if $show_timesheet_dropdown}
-              <tr><td><b>{$i18n.label.timesheet}</b></td></tr>
-              <tr><td>{$forms.reportForm.timesheet.control}</td></tr>
-{/if}
-            </table>
-          </td>
-        </tr>
 {if $show_active_users}
         <tr>
           <td colspan="3"><b>{if $show_inactive_users}{$i18n.label.active_users}{else}{$i18n.label.users}{/if}</b></td>
