@@ -22,6 +22,7 @@ $showBillable = $user->isPluginEnabled('iv');
 $trackingMode = $user->getTrackingMode();
 $showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
 $showTask = MODE_PROJECTS_AND_TASKS == $trackingMode;
+$taskRequired = false;
 if ($showTask) $taskRequired = $user->getConfigOption('task_required');
 
 // Initialize and store date in session.
@@ -32,7 +33,7 @@ if($selected_date->isError())
 if(!$cl_date)
   $cl_date = $selected_date->toString(DB_DATEFORMAT);
 $_SESSION['date'] = $cl_date;
-// TODO: for time page we may limit the day to today only.
+// TODO: for timer page we may limit the day to today only.
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
@@ -48,6 +49,7 @@ $enable_controls = ($uncompleted == null);
 // Initialize variables.
 $cl_start = trim($request->getParameter('browser_time'));
 $cl_finish = trim($request->getParameter('browser_time'));
+$cl_duration = $cl_note = null;
 // Disabled controls are not posted. Therefore, && $enable_controls condition in several places below.
 // This allows us to get values from session when controls are disabled and reset to null when not.
 $cl_billable = 1;
@@ -101,7 +103,7 @@ if ($showBillable) {
 }
 
 // If we have time custom fields - add controls for them.
-if ($custom_fields && $custom_fields->timeFields) {
+if (isset($custom_fields) && $custom_fields->timeFields) {
   foreach ($custom_fields->timeFields as $timeField) {
     $field_name = 'time_field_'.$timeField['id'];
     if ($timeField['type'] == CustomFields::TYPE_TEXT) {
@@ -120,6 +122,7 @@ if ($custom_fields && $custom_fields->timeFields) {
 }
 
 // If we show project dropdown, add controls for project and client.
+$project_list = $client_list = array();
 if ($showProject) {
   // Dropdown for projects assigned to user.
   $project_list = $user->getAssignedProjects();
@@ -161,6 +164,7 @@ if ($showProject) {
 }
 
 // Task dropdown.
+$task_list = array();
 if ($showTask) {
   $task_list = ttGroupHelper::getActiveTasks();
   $form->addInput(array('type'=>'combobox',
@@ -195,7 +199,7 @@ if ($request->isPost()) {
     if ($showClient && $user->isOptionEnabled('client_required') && !$cl_client)
       $err->add($i18n->get('error.client'));
     // Validate input in time custom fields.
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($timeCustomFields as $timeField) {
         // Validation is the same for text and dropdown fields.
         if (!ttValidString($timeField['value'], !$timeField['required'])) $err->add($i18n->get('error.field'), htmlspecialchars($timeField['label']));
@@ -245,7 +249,7 @@ if ($request->isPost()) {
 
       // Insert time custom fields if we have them.
       $result = true;
-      if ($id && $custom_fields && $custom_fields->timeFields) {
+      if ($id && isset($custom_fields) && $custom_fields->timeFields) {
         $result = $custom_fields->insertTimeFields($id, $timeCustomFields);
       }
 

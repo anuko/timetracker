@@ -106,7 +106,8 @@ startTimer();
   <tr><td colspan="2">{$i18n.label.required_fields}</td></tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 </table>
-<div class="button-set">{$forms.timeRecordForm.btn_start.control} {$forms.timeRecordForm.btn_stop.control}</div>
+{if isset($forms.timeRecordForm.btn_start.control)}<div class="button-set">{$forms.timeRecordForm.btn_start.control}</div>{/if}
+{if isset($forms.timeRecordForm.btn_stop.control)}<div class="button-set">{$forms.timeRecordForm.btn_stop.control}</div>{/if}
 {$forms.timeRecordForm.close}
 
 <div class="day-totals">

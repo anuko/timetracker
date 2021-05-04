@@ -416,7 +416,7 @@ class ttTimeHelper {
     $date = $fields['date'];
     $start = $fields['start'];
     $finish = $fields['finish'];
-    $duration = $fields['duration'];
+    $duration = isset($fields['duration']) ? $fields['duration'] : null;
     if ($duration) {
       $minutes = ttTimeHelper::postedDurationToMinutes($duration);
       $duration = ttTimeHelper::minutesToDuration($minutes);
@@ -479,7 +479,7 @@ class ttTimeHelper {
     $task = $fields['task'];
     $start = $fields['start'];
     $finish = $fields['finish'];
-    $duration = $fields['duration'];
+    $duration = isset($fields['duration']) ? $fields['duration'] : null;
     if ($duration) {
       $minutes = ttTimeHelper::postedDurationToMinutes($duration);
       $duration = ttTimeHelper::minutesToDuration($minutes);
