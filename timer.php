@@ -48,17 +48,13 @@ $enable_controls = ($uncompleted == null);
 // Initialize variables.
 $cl_start = trim($request->getParameter('browser_time'));
 $cl_finish = trim($request->getParameter('browser_time'));
+// Disabled controls are not posted. Therefore, && $enable_controls condition in several places below.
+// This allows us to get values from session when controls are disabled and reset to null when not.
 $cl_billable = 1;
 if ($user->isPluginEnabled('iv')) {
-  if ($request->isPost()) {
-    $cl_billable = $request->getParameter('billable');
-    $_SESSION['billable'] = (int) $cl_billable;
-  } else 
-    if (isset($_SESSION['billable']))
-      $cl_billable = $_SESSION['billable'];
+  $cl_billable = $request->getParameter('billable', ($request->isPost() && $enable_controls ? null : @$_SESSION['billable']));
+  $_SESSION['billable'] = $cl_billable;
 }
-// Note: disabled controls are not posted. Therefore, && $enable_controls condition below.
-// This allows us to get values from session when controls are disabled and reset to null when not.
 $cl_client = $request->getParameter('client', ($request->isPost() && $enable_controls ? null : @$_SESSION['client']));
 $_SESSION['client'] = $cl_client;
 $cl_project = $request->getParameter('project', ($request->isPost() && $enable_controls ? null : @$_SESSION['project']));
@@ -66,14 +62,11 @@ $_SESSION['project'] = $cl_project;
 $cl_task = $request->getParameter('task', ($request->isPost() && $enable_controls ? null : @$_SESSION['task']));
 $_SESSION['task'] = $cl_task;
 
-
 // Handle time custom fields.
 $timeCustomFields = array();
 if (isset($custom_fields) && $custom_fields->timeFields) {
   foreach ($custom_fields->timeFields as $timeField) {
     $control_name = 'time_field_'.$timeField['id'];
-    // Note: disabled controls are not posted. Therefore, && $enable_controls condition below.
-    // This allows us to get values from session when controls are disabled and reset to null when not.
     $cl_control_name = $request->getParameter($control_name, ($request->isPost() && $enable_controls ? null : @$_SESSION[$control_name]));
     $_SESSION[$control_name] = $cl_control_name;
     $timeCustomFields[$timeField['id']] = array('field_id' => $timeField['id'],
