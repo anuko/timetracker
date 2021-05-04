@@ -60,12 +60,18 @@ $_SESSION['project'] = $cl_project;
 $cl_task = $request->getParameter('task', @$_SESSION['task']);
 $_SESSION['task'] = $cl_task;
 
+// Obtain uncompleted record. Assumption is that only 1 uncompleted record is allowed.
+$uncompleted = ttTimeHelper::getUncompleted($user->getUser());
+$enable_controls = ($uncompleted == null);
+
 // Handle time custom fields.
 $timeCustomFields = array();
 if (isset($custom_fields) && $custom_fields->timeFields) {
   foreach ($custom_fields->timeFields as $timeField) {
     $control_name = 'time_field_'.$timeField['id'];
-    $cl_control_name = $request->getParameter($control_name, ($request->isPost() ? null : @$_SESSION[$control_name]));
+    // Note: disabled controls are not posted. Therefore, && $enable_controls condition below.
+    // This allows us to get values from session when controls are disabled and reset to null when not.
+    $cl_control_name = $request->getParameter($control_name, ($request->isPost() && $enable_controls ? null : @$_SESSION[$control_name]));
     $_SESSION[$control_name] = $cl_control_name;
     $timeCustomFields[$timeField['id']] = array('field_id' => $timeField['id'],
       'control_name' => $control_name,
@@ -75,10 +81,6 @@ if (isset($custom_fields) && $custom_fields->timeFields) {
       'value' => trim($cl_control_name));
   }
 }
-
-// Obtain uncompleted record. Assumtion is that only 1 uncompleted record is allowed.
-$uncompleted = ttTimeHelper::getUncompleted($user->getUser());
-$enable_controls = ($uncompleted == null);
 
 // Elements of timeRecordForm.
 $form = new Form('timeRecordForm');
@@ -98,8 +100,9 @@ if (MODE_TIME == $trackingMode && $showClient) {
 }
 
 // Billable checkbox.
-if ($showBillable)
+if ($showBillable) {
   $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable,'enable'=>$enable_controls));
+}
 
 // If we have time custom fields - add controls for them.
 if ($custom_fields && $custom_fields->timeFields) {
