@@ -204,8 +204,7 @@ if ($showUsers) {
     'name'=>'users_active',
     'data'=>$user_list_active,
     'layout'=>'V',
-    'groupin'=>$row_count,
-    'style'=>'width: 100%;'));
+    'groupin'=>$row_count));
 
   $user_list_inactive = array();
   foreach ($inactive_users as $single_user) {
@@ -222,14 +221,12 @@ if ($showUsers) {
     'name'=>'users_inactive',
     'data'=>$user_list_inactive,
     'layout'=>'V',
-    'groupin'=>$row_count,
-    'style'=>'width: 100%;'));
+    'groupin'=>$row_count));
 }
 
 // Add control for time period.
 $form->addInput(array('type'=>'combobox',
   'name'=>'period',
-  'style'=>'width: 250px;',
   'data'=>array(INTERVAL_THIS_MONTH=>$i18n->get('dropdown.current_month'),
     INTERVAL_LAST_MONTH=>$i18n->get('dropdown.previous_month'),
     INTERVAL_THIS_WEEK=>$i18n->get('dropdown.current_week'),
@@ -286,10 +283,9 @@ if (isset($custom_fields) && $custom_fields->timeFields) {
     $field_name = 'time_field_'.$timeField['id'];
     $checkbox_field_name = 'show_'.$field_name;
     if ($timeField['type'] == CustomFields::TYPE_TEXT) {
-      $form->addInput(array('type'=>'text','name'=>$field_name,'style'=>'width: 250px;'));
+      $form->addInput(array('type'=>'text','name'=>$field_name));
     } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
       $form->addInput(array('type'=>'combobox','name'=>$field_name,
-      'style'=>'width: 250px;',
       'data'=>CustomFields::getOptions($timeField['id']),
       'empty'=>array(''=>$i18n->get('dropdown.all'))));
     }
@@ -304,10 +300,9 @@ if (isset($custom_fields) && $custom_fields->userFields) {
     $field_name = 'user_field_'.$userField['id'];
     $checkbox_field_name = 'show_'.$field_name;
     if ($userField['type'] == CustomFields::TYPE_TEXT) {
-      $form->addInput(array('type'=>'text','name'=>$field_name,'style'=>'width: 250px;'));
+      $form->addInput(array('type'=>'text','name'=>$field_name,));
     } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
       $form->addInput(array('type'=>'combobox','name'=>$field_name,
-      'style'=>'width: 250px;',
       'data'=>CustomFields::getOptions($userField['id']),
       'empty'=>array(''=>$i18n->get('dropdown.all'))));
     }
@@ -348,7 +343,7 @@ if ($group_by_options_size > 3) $form->addInput(array('type'=>'combobox','onchan
 $form->addInput(array('type'=>'checkbox','name'=>'chtotalsonly'));
 
 // Add text field for a new favorite report name.
-$form->addInput(array('type'=>'text','name'=>'new_fav_report','maxlength'=>'30','style'=>'width: 250px;'));
+$form->addInput(array('type'=>'text','name'=>'new_fav_report','maxlength'=>'30'));
 // Save button.
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
