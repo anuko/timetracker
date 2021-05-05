@@ -356,6 +356,118 @@ License: See license.txt *}
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
 </table>
+<div class="form-control-separator"></div>
+<table class="centered-table">
+  <tr><td colspan="2"><div class="section-header">{$i18n.form.reports.show_fields}</div></td></tr>
+{if $show_client}
+  <tr class = "small-screen-label"><td><label for="chclient">{$i18n.label.client}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chclient">{$i18n.label.client}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chclient.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_project}
+  <tr class = "small-screen-label"><td><label for="chproject">{$i18n.label.project}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chproject">{$i18n.label.project}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chproject.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_task}
+  <tr class = "small-screen-label"><td><label for="chtask">{$i18n.label.task}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chtask">{$i18n.label.task}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chtask.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_start}
+  <tr class = "small-screen-label"><td><label for="chstart">{$i18n.label.start}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chstart">{$i18n.label.start}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chstart.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_finish}
+  <tr class = "small-screen-label"><td><label for="chfinish">{$i18n.label.finish}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chfinish">{$i18n.label.finish}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chfinish.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+  <tr class = "small-screen-label"><td><label for="chduration">{$i18n.label.duration}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chduration">{$i18n.label.duration}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chduration.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+  <tr class = "small-screen-label"><td><label for="chcost">{$i18n.label.cost}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chcost">{$i18n.label.cost}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chcost.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{if $show_timesheet_checkbox}
+  <tr class = "small-screen-label"><td><label for="chtimesheet">{$i18n.label.timesheet}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chtimesheet">{$i18n.label.timesheet}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chtimesheet.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_ip}
+  <tr class = "small-screen-label"><td><label for="chip">{$i18n.label.ip}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chip">{$i18n.label.ip}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chip.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_work_units}
+  <tr class = "small-screen-label"><td><label for="chunits">{$i18n.label.work_units}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chunits">{$i18n.label.work_units}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chunits.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_approved}
+  <tr class = "small-screen-label"><td><label for="chapproved">{$i18n.label.approved}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chapproved">{$i18n.label.approved}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chapproved.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_invoice_checkbox}
+  <tr class = "small-screen-label"><td><label for="chinvoice">{$i18n.label.invoice}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chinvoice">{$i18n.label.invoice}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chinvoice.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_paid_status}
+  <tr class = "small-screen-label"><td><label for="chpaid">{$i18n.label.paid}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chpaid">{$i18n.label.paid}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chpaid.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_files}
+  <tr class = "small-screen-label"><td><label for="chfiles">{$i18n.label.files}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chfiles">{$i18n.label.files}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chfiles.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+</table>
 {$forms.reportForm.close}
 
 
@@ -376,70 +488,6 @@ License: See license.txt *}
   <tr>
     <td valign="top" colspan="2" align="center">
       <table border="0" cellpadding="3">
-        <tr><td colspan="3"><b>{$i18n.form.reports.show_fields}</b></td></tr>
-        <tr>
-          <td colspan="3">
-            <table border="0" width="100%">
-              <tr>
-                <td width="25%" valign="top">
-                  <table border="0" cellpadding="3">
-{if $show_client}
-                    <tr><td><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td></tr>
-{/if}
-{if $show_project}
-                    <tr><td><label>{$forms.reportForm.chproject.control}&nbsp;{$i18n.label.project}</label></td></tr>
-{/if}
-{if $show_timesheet_checkbox}
-                    <tr><td><label>{$forms.reportForm.chtimesheet.control}&nbsp;{$i18n.label.timesheet}</label></td></tr>
-{/if}
-                  </table>
-                </td>
-                <td width="25%" valign="top">
-                  <table border="0" cellpadding="3">
-{if $show_start}
-                    <tr><td><label>{$forms.reportForm.chstart.control}&nbsp;{$i18n.label.start}</label></td></tr>
-{/if}
-{if $show_task}
-                    <tr><td><label>{$forms.reportForm.chtask.control}&nbsp;{$i18n.label.task}</label></td></tr>
-{/if}
-{if $show_ip}
-                    <tr><td><label>{$forms.reportForm.chip.control}&nbsp;{$i18n.label.ip}</label></td></tr>
-{/if}
-{if $show_work_units}
-                    <tr><td><label>{$forms.reportForm.chunits.control}&nbsp;{$i18n.label.work_units}</label></td></tr>
-{/if}
-                  </table>
-                </td>
-                <td width="25%" valign="top">
-                  <table border="0" cellpadding="3">
-{if $show_finish}
-                    <tr><td><label>{$forms.reportForm.chfinish.control}&nbsp;{$i18n.label.finish}</label></td></tr>
-{/if}
-                    <tr><td><label>{$forms.reportForm.chnote.control}&nbsp;{$i18n.label.note}</label></td></tr>
-{if $show_approved}
-                    <tr><td><label>{$forms.reportForm.chapproved.control}&nbsp;{$i18n.label.approved}</label></td></tr>
-{/if}
-{if $show_invoice_checkbox}
-                    <tr><td><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></td></tr>
-{/if}
-                  </table>
-                </td>
-                <td width="25%" valign="top">
-                  <table border="0" cellpadding="3">
-                    <tr><td><label>{$forms.reportForm.chduration.control}&nbsp;{$i18n.label.duration}</label></td></tr>
-                    <tr><td><label>{$forms.reportForm.chcost.control}&nbsp;{$i18n.label.cost}</label></td></tr>
-{if $show_paid_status}
-                    <tr><td><label>{$forms.reportForm.chpaid.control}&nbsp;{$i18n.label.paid}</label></td></tr>
-{/if}
-{if $show_files}
-                    <tr><td><label>{$forms.reportForm.chfiles.control}&nbsp;{$i18n.label.files}</label></td></tr>
-{/if}
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
 {if isset($custom_fields) && $custom_fields->timeFields}
     <tr><td colspan="3"><b>{$i18n.form.reports.time_fields}</b></td></tr>
   {foreach $custom_fields->timeFields as $timeField}
