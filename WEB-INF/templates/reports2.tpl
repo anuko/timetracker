@@ -254,6 +254,43 @@ License: See license.txt *}
 </table>
 <div class="form-control-separator"></div>
 <table class="centered-table">
+  <tr><td colspan="2"><div class="section-header">{$i18n.form.reports.select_period}</div></td></tr>
+  <tr class = "small-screen-label"><td><label for="period">{$i18n.form.reports.select_period}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="period">{$i18n.form.reports.select_period}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.period.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+  <tr><td colspan="2"><div class="section-header">{$i18n.form.reports.set_period}</div></td></tr>
+  <tr class = "small-screen-label"><td><label for="start_date">{$i18n.label.start_date}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="start_date">{$i18n.label.start_date}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.start_date.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+  <tr class = "small-screen-label"><td><label for="end_date">{$i18n.label.end_date}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="end_date">{$i18n.label.end_date}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.end_date.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+</table>
+<div class="form-control-separator"></div>
+{if $show_active_users}
+<div class="section-header">{if $show_inactive_users}{$i18n.label.active_users}{else}{$i18n.label.users}{/if}</div>
+<table class="x-scrollable-table">
+  <tr><td class="td-with-input">{$forms.reportForm.users_active.control}</td></tr>
+</table>
+<div class="form-control-separator"></div>
+{/if}
+{if $show_inactive_users}
+<div class="section-header">{$i18n.label.inactive_users}</div>
+<table class="x-scrollable-table">
+  <tr><td class="td-with-input">{$forms.reportForm.users_inactive.control}</td></tr>
+</table>
+<div class="form-control-separator"></div>
+{/if}
+<table class="centered-table">
 {if $show_client}
   <tr class = "small-screen-label"><td><label for="client">{$i18n.label.client}:</label></td></tr>
   <tr>
@@ -339,37 +376,6 @@ License: See license.txt *}
   <tr>
     <td valign="top" colspan="2" align="center">
       <table border="0" cellpadding="3">
-{if $show_active_users}
-        <tr>
-          <td colspan="3"><b>{if $show_inactive_users}{$i18n.label.active_users}{else}{$i18n.label.users}{/if}</b></td>
-        </tr>
-        <tr>
-          <td colspan="3">{$forms.reportForm.users_active.control}</td>
-        </tr>
-{/if}
-{if $show_inactive_users}
-        <tr>
-          <td colspan="3"><b>{$i18n.label.inactive_users}</b></td>
-        </tr>
-        <tr>
-          <td colspan="3">{$forms.reportForm.users_inactive.control}</td>
-        </tr>
-{/if}
-        <tr>
-          <td><b>{$i18n.form.reports.select_period}</b></td>
-          <td>&nbsp;</td>
-          <td><b>{$i18n.form.reports.set_period}</b></td>
-        </tr>
-        <tr valign="top">
-          <td>{$forms.reportForm.period.control}</td>
-          <td align="right">{$i18n.label.start_date}:</td>
-          <td>{$forms.reportForm.start_date.control}</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td align="right">{$i18n.label.end_date}:</td>
-          <td>{$forms.reportForm.end_date.control}</td>
-        </tr>
         <tr><td colspan="3"><b>{$i18n.form.reports.show_fields}</b></td></tr>
         <tr>
           <td colspan="3">
