@@ -405,6 +405,12 @@ License: See license.txt *}
     <td class="td-with-input">{$forms.reportForm.chduration.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+  <tr class = "small-screen-label"><td><label for="chnote">{$i18n.label.note}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="chnote">{$i18n.label.note}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.chnote.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {if $show_work_units}
   <tr class = "small-screen-label"><td><label for="chunits">{$i18n.label.work_units}:</label></td></tr>
   <tr>
