@@ -68,13 +68,13 @@ $options = ttReportHelper::getReportOptions($bean);
 // - We can assign items to a timesheet.
 // Determine these conditions separately.
 $useMarkApproved = $useMarkPaid = $useAssignToInvoice = $useAssignToTimesheet = false;
-if ($bean->getAttribute('chapproved') && ($user->can('approve_reports') || $user->can('approve_all_reports')))
+if (!$bean->getAttribute('chtotalsonly') && $bean->getAttribute('chapproved') && ($user->can('approve_reports') || $user->can('approve_all_reports')))
   $useMarkApproved = true;
-if ($bean->getAttribute('chpaid') && $user->can('manage_invoices'))
+if (!$bean->getAttribute('chtotalsonly') && $bean->getAttribute('chpaid') && $user->can('manage_invoices'))
   $useMarkPaid = true;
-if ($bean->getAttribute('chinvoice') && $client_id && 'no_grouping' == $bean->getAttribute('group_by1') && !$user->isClient() && $user->can('manage_invoices'))
+if (!$bean->getAttribute('chtotalsonly') && $bean->getAttribute('chinvoice') && $client_id && 'no_grouping' == $bean->getAttribute('group_by1') && !$user->isClient() && $user->can('manage_invoices'))
   $useAssignToInvoice = true;
-if ($bean->getAttribute('chtimesheet')) {
+if (!$bean->getAttribute('chtotalsonly') && $bean->getAttribute('chtimesheet')) {
   $timesheets = ttTimesheetHelper::getMatchingTimesheets($options);
   if ($timesheets) $useAssignToTimesheet = true;
 }
