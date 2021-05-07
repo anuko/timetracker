@@ -304,6 +304,8 @@ if ($bean->getAttribute('chip')) $colspan++;
 if ($bean->getAttribute('chinvoice')) $colspan++;
 if ($bean->getAttribute('chtimesheet')) $colspan++;
 if ($bean->getAttribute('chfiles')) $colspan++;
+if ($use_checkboxes) $colspan++;
+$colspan++; // One more column for edit icons.
 
 // Assign variables that are used to alternate color of rows for different dates.
 $smarty->assign('prev_date', '');

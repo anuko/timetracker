@@ -1,3 +1,6 @@
+{* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt *}
+
 <script>
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
@@ -64,6 +67,8 @@
   {if $bean->getAttribute('chinvoice')}<th>{$i18n.label.invoice}</th>{/if}
   {if $bean->getAttribute('chtimesheet')}<th>{$i18n.label.timesheet}</th>{/if}
   {if $bean->getAttribute('chfiles')}<th></th>{/if}
+  {if $use_checkboxes}<th></th>{/if}
+    <th></th>{* column for edit icons *}
   </tr>
   {foreach $report_items as $item}
   {* print subtotal for a block of grouped values *}
@@ -107,7 +112,7 @@
         {if $use_checkboxes}<td></td>{/if}
     <td></td>{* column for edit icons *}
   </tr>
-  <tr><td>&nbsp;</td></tr>
+  <tr><td colspan="{$colspan+1}">&nbsp;</td></tr>
       {/if}
     {$first_pass = false}
     {/if}
@@ -154,7 +159,7 @@
       {if 2 == $item.type}<td><input type="checkbox" name="item_id_{$item.id}"></td>{/if}
     {/if}
     {if $item.approved || $item.timesheet_id || $item.invoice_id}
-    <td>&nbsp;</td>
+    <td colspan="{$colspan}">&nbsp;</td>
     {else}
       {if 1 == $item.type}<td><a href="time_edit.php?id={$item.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>{/if}
       {if 2 == $item.type}<td><a href="expense_edit.php?id={$item.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a></td>{/if}
@@ -209,7 +214,7 @@
   </tr>
   {/if}
   {* print totals *}
-  <tr><td>&nbsp;</td></tr>
+  <tr><td colspan="{$colspan+1}">&nbsp;</td></tr>
   <tr>
     <th class="invoice-label">{$i18n.label.total}</td>
     {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td></td>{/if}
