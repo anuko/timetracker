@@ -275,7 +275,7 @@ if (ttReportHelper::grouping($options)) {
 }
 $totals = ttReportHelper::getTotals($options);
 
-// Determine column span for note field.
+// Determine column span for note field and empty rows.
 $colspan = 0;
 if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) $colspan++;
 if (isset($custom_fields) && $custom_fields->userFields) {
@@ -296,6 +296,7 @@ if (isset($custom_fields) && $custom_fields->timeFields) {
 if ($bean->getAttribute('chstart')) $colspan++;
 if ($bean->getAttribute('chfinish')) $colspan++;
 if ($bean->getAttribute('chduration')) $colspan++;
+if (!$user->getConfigOption('report_note_on_separate_row') && $bean->getAttribute('chnote')) $colspan++;
 if ($bean->getAttribute('chunits')) $colspan++;
 if ($bean->getAttribute('chcost')) $colspan++;
 if ($bean->getAttribute('chapproved')) $colspan++;
