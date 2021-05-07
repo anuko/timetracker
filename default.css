@@ -200,6 +200,11 @@ div.page-hint {
   text-align: right;
 }
 
+/* cell containign a subtotal */
+.subtotal-cell {
+  font-weight: bold;
+}
+
 /* control labels for large screens */
 .large-screen-label {
   text-align: right;
