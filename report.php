@@ -72,7 +72,7 @@ if (!$bean->getAttribute('chtotalsonly') && $bean->getAttribute('chapproved') &&
   $useMarkApproved = true;
 if (!$bean->getAttribute('chtotalsonly') && $bean->getAttribute('chpaid') && $user->can('manage_invoices'))
   $useMarkPaid = true;
-if (!$bean->getAttribute('chtotalsonly') && $bean->getAttribute('chinvoice') && $client_id && 'no_grouping' == $bean->getAttribute('group_by1') && !$user->isClient() && $user->can('manage_invoices'))
+if (!$bean->getAttribute('chtotalsonly') && $bean->getAttribute('chinvoice') && $client_id && !$user->isClient() && $user->can('manage_invoices'))
   $useAssignToInvoice = true;
 if (!$bean->getAttribute('chtotalsonly') && $bean->getAttribute('chtimesheet')) {
   $timesheets = ttTimesheetHelper::getMatchingTimesheets($options);
@@ -88,11 +88,13 @@ if ($useMarkApproved) {
   $mark_approved_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'mark_approved_select_options',
+    'class'=>'dropdown-field-with_button',
     'data'=>$mark_approved_select_options,
     'value'=>$cl_mark_approved_select_option));
   $mark_approved_action_options = array('1'=>$i18n->get('dropdown.approved'),'2'=>$i18n->get('dropdown.not_approved'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'mark_approved_action_options',
+    'class'=>'dropdown-field-with-button',
     'data'=>$mark_approved_action_options,
     'value'=>$cl_mark_approved_action_option));
   $form->addInput(array('type'=>'submit','name'=>'btn_mark_approved','value'=>$i18n->get('button.submit')));
@@ -105,11 +107,13 @@ if ($useMarkPaid) {
   $mark_paid_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'mark_paid_select_options',
+    'class'=>'dropdown-field-with-button',
     'data'=>$mark_paid_select_options,
     'value'=>$cl_mark_paid_select_option));
   $mark_paid_action_options = array('1'=>$i18n->get('dropdown.paid'),'2'=>$i18n->get('dropdown.not_paid'));
   $form->addInput(array('type'=>'combobox',
     'name'=>'mark_paid_action_options',
+    'class'=>'dropdown-field-with-button',
     'data'=>$mark_paid_action_options,
     'value'=>$cl_mark_paid_action_option));
   $form->addInput(array('type'=>'submit','name'=>'btn_mark_paid','value'=>$i18n->get('button.submit')));
@@ -125,10 +129,12 @@ if ($useAssignToInvoice) {
     $assign_invoice_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
     $form->addInput(array('type'=>'combobox',
       'name'=>'assign_invoice_select_options',
+      'class'=>'dropdown-field-with-button',
       'data'=>$assign_invoice_select_options,
       'value'=>$cl_assign_invoice_select_option));
     $form->addInput(array('type'=>'combobox',
       'name'=>'recent_invoice',
+      'class'=>'dropdown-field-with-button',
       'data'=>$recent_invoices,
       'datakeys'=>array('id','name'),
       'value'=>$cl_recent_invoice_option,
@@ -144,10 +150,12 @@ if ($useAssignToTimesheet) {
   $assign_timesheet_select_options = array('1'=>$i18n->get('dropdown.all'),'2'=>$i18n->get('dropdown.select'));
   $form->addInput(array('type'=>'combobox',
       'name'=>'assign_timesheet_select_options',
+      'class'=>'dropdown-field-with-button',
       'data'=>$assign_timesheet_select_options,
       'value'=>$cl_assign_timesheet_select_option));
   $form->addInput(array('type'=>'combobox',
       'name'=>'timesheet',
+      'class'=>'dropdown-field-with-button',
       'data'=>$timesheets,
       'datakeys'=>array('id','name'),
       'value'=>$cl_timesheet_option,
@@ -309,5 +317,5 @@ $smarty->assign('note_on_separate_row', $user->getConfigOption('report_note_on_s
 $smarty->assign('colspan', $colspan);
 $smarty->assign('bean', $bean);
 $smarty->assign('title', $i18n->get('title.report').": ".$totals['start_date']." - ".$totals['end_date']);
-$smarty->assign('content_page_name', 'report.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'report2.tpl');
+$smarty->display('index2.tpl');

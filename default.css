@@ -183,6 +183,7 @@ div.page-hint {
 /* money value cell in tables */
 .money-value-cell {
   text-align: right;
+  white-space: nowrap;
 }
 
 /* yes-no cell in tables */
