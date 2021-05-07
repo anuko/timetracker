@@ -167,7 +167,7 @@ License: See license.txt *}
   </tr>
     {if $note_on_separate_row && $bean->getAttribute('chnote') && $item.note}
   <tr>
-    <th class="invoice-label">{$i18n.label.note}</td>
+    <th class="invoice-label">{$i18n.label.note}</th>
     <td colspan="{$colspan}" class="text-cell">{$item.note|escape}</td>
   </tr>
     {/if}
@@ -216,7 +216,7 @@ License: See license.txt *}
   {* print totals *}
   <tr><td colspan="{$colspan+1}">&nbsp;</td></tr>
   <tr>
-    <th class="invoice-label">{$i18n.label.total}</td>
+    <th class="invoice-label">{$i18n.label.total}</th>
     {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td></td>{/if}
     {* user custom fileds *}
     {if isset($custom_fields) && $custom_fields->userFields}
