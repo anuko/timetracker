@@ -192,8 +192,10 @@ if (MODE_TIME == $trackingMode && $showClient) {
 }
 
 // Billable checkbox.
-if ($showBillable)
+if ($showBillable) {
   $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
+  $largeScreenCalendarRowSpan += 2;
+}
 
 // If we have time custom fields - add controls for them.
 if (isset($custom_fields) && $custom_fields->timeFields) {

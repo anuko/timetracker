@@ -51,6 +51,48 @@ function fillDropdowns() {
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
+{if $show_billable}
+  <tr>
+    <td class = "large-screen-label">&nbsp;</td>
+    <td><label class="checkbox-label">{$forms.weekTimeForm.billable.control}{$i18n.form.time.billable}</label></td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if isset($custom_fields) && $custom_fields->timeFields}
+  {foreach $custom_fields->timeFields as $timeField}
+    {assign var="control_name" value='time_field_'|cat:$timeField['id']}
+  <tr class = "small-screen-label"><td><label for="{$control_name}">{$timeField['label']|escape}{if $timeField['required']} (*){/if}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="{$control_name}">{$timeField['label']|escape}{if $timeField['required']} (*){/if}:</label></td>
+    <td class="td-with-input">{$forms.weekTimeForm.$control_name.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+  {/foreach}
+{/if}
+{if $show_project}
+  <tr class = "small-screen-label"><td><label for="project">{$i18n.label.project} (*):</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="project">{$i18n.label.project} (*):</label></td>
+    <td class="td-with-input">{$forms.weekTimeForm.project.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_task}
+  <tr class = "small-screen-label"><td><label for="task">{$i18n.label.task}{if $task_required} (*){/if}:</label></td></tr>
+  <tr>
+    <td class = "large-screen-label"><label for="task">{$i18n.label.task}{if $task_required} (*){/if}:</label></td>
+    <td class="td-with-input">{$forms.weekTimeForm.task.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+{if $show_week_note}
+  <tr class = "small-screen-label"><td><label for="week_note">{$i18n.label.week_note}:</label></td></tr>
+  <tr>
+    <td class = "large-screen-label"><label for="week_note">{$i18n.label.week_note}:</label></td>
+    <td class="td-with-input">{$forms.weekTimeForm.week_note.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
 </table>
 {$forms.weekTimeForm.close}
 

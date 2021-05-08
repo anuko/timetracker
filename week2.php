@@ -121,8 +121,8 @@ $cl_project = $request->getParameter('project', ($request->isPost() ? null : @$_
 $_SESSION['project'] = $cl_project;
 $cl_task = $request->getParameter('task', ($request->isPost() ? null : @$_SESSION['task']));
 $_SESSION['task'] = $cl_task;
-$cl_note = $request->getParameter('note', ($request->isPost() ? null : @$_SESSION['note']));
-$_SESSION['note'] = $cl_note;
+$cl_note = $request->getParameter('week_note', ($request->isPost() ? null : @$_SESSION['week_note']));
+$_SESSION['week_note'] = $cl_note;
 
 $timeCustomFields = array();
 // If we have time custom fields - collect input.
@@ -242,7 +242,6 @@ if ($user->can('track_time')) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'document.weekTimeForm.user_changed.value=1;document.weekTimeForm.submit();',
       'name'=>'user',
-      'style'=>'width: 250px;',
       'value'=>$user_id,
       'data'=>$user_list,
       'datakeys'=>array('id','name')));
@@ -272,7 +271,6 @@ if (MODE_TIME == $trackingMode && $showClient) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
     'name'=>'client',
-    'style'=>'width: 250px;',
     'value'=>$cl_client,
     'data'=>$active_clients,
     'datakeys'=>array('id', 'name'),
@@ -282,22 +280,24 @@ if (MODE_TIME == $trackingMode && $showClient) {
 }
 
 // Billable checkbox.
-if ($user->isPluginEnabled('iv'))
+if ($showBillable) {
   $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
+  $largeScreenCalendarRowSpan += 2;
+}
 
 // If we have time custom fields - add controls for them.
 if ($custom_fields && $custom_fields->timeFields) {
   foreach ($custom_fields->timeFields as $timeField) {
     $field_name = 'time_field_'.$timeField['id'];
     if ($timeField['type'] == CustomFields::TYPE_TEXT) {
-      $form->addInput(array('type'=>'text','name'=>$field_name,'style'=>'width: 250px;','value'=>$timeCustomFields[$timeField['id']]['value']));
+      $form->addInput(array('type'=>'text','name'=>$field_name,'value'=>$timeCustomFields[$timeField['id']]['value']));
     } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
       $form->addInput(array('type'=>'combobox','name'=>$field_name,
-      'style'=>'width: 250px;',
       'data'=>CustomFields::getOptions($timeField['id']),
       'value'=>$timeCustomFields[$timeField['id']]['value'],
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
     }
+    $largeScreenCalendarRowSpan += 2;
   }
 }
 
@@ -308,11 +308,11 @@ if ($showProject) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillTaskDropdown(this.value);',
     'name'=>'project',
-    'style'=>'width: 250px;',
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
+  $largeScreenCalendarRowSpan += 2;
 
   // Dropdown for clients if the clients plugin is enabled.
   if ($showClient) {
@@ -335,11 +335,11 @@ if ($showProject) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'client',
-      'style'=>'width: 250px;',
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
+    $largeScreenCalendarRowSpan += 2;
   }
 }
 
@@ -348,18 +348,17 @@ if ($showTask) {
   $task_list = ttGroupHelper::getActiveTasks();
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
-    'style'=>'width: 250px;',
     'value'=>$cl_task,
     'data'=>$task_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
+  $largeScreenCalendarRowSpan += 2;
 }
 
 // Week note control.
 if ($showWeekNote) {
-  if (!defined('NOTE_INPUT_HEIGHT'))
-    define('NOTE_INPUT_HEIGHT', 40);
-  $form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 250px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
+  $form->addInput(array('type'=>'textarea','name'=>'week_note','value'=>$cl_note));
+  $largeScreenCalendarRowSpan += 2;
 }
 
 // Calendar.
@@ -468,7 +467,7 @@ if ($request->isPost()) {
                 // because we are doing an insert that does not affect already existing data.
 
                 if ($showWeekNote) {
-                  $fields['note'] = $request->getParameter('note');
+                  $fields['note'] = $request->getParameter('week_note');
                 }
               }
               $fields['day_header'] = $dayHeader;
