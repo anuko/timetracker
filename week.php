@@ -121,8 +121,8 @@ $cl_project = $request->getParameter('project', ($request->isPost() ? null : @$_
 $_SESSION['project'] = $cl_project;
 $cl_task = $request->getParameter('task', ($request->isPost() ? null : @$_SESSION['task']));
 $_SESSION['task'] = $cl_task;
-$cl_note = $request->getParameter('note', ($request->isPost() ? null : @$_SESSION['note']));
-$_SESSION['note'] = $cl_note;
+$cl_note = $request->getParameter('comment', ($request->isPost() ? null : @$_SESSION['comment']));
+$_SESSION['comment'] = $cl_note;
 
 $timeCustomFields = array();
 // If we have time custom fields - collect input.
@@ -229,6 +229,7 @@ class WeekViewCellRenderer extends DefaultCellRenderer {
 
 // Elements of weekTimeForm.
 $form = new Form('weekTimeForm');
+$largeScreenCalendarRowSpan = 1; // Number of rows calendar spans on large screens.
 
 if ($user->can('track_time')) {
   $rank = $user->getMaxRankForGroup($group_id);
@@ -241,11 +242,11 @@ if ($user->can('track_time')) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'document.weekTimeForm.user_changed.value=1;document.weekTimeForm.submit();',
       'name'=>'user',
-      'style'=>'width: 250px;',
       'value'=>$user_id,
       'data'=>$user_list,
       'datakeys'=>array('id','name')));
     $form->addInput(array('type'=>'hidden','name'=>'user_changed'));
+    $largeScreenCalendarRowSpan += 2;
     $smarty->assign('user_dropdown', 1);
   }
 }
@@ -270,31 +271,33 @@ if (MODE_TIME == $trackingMode && $showClient) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
     'name'=>'client',
-    'style'=>'width: 250px;',
     'value'=>$cl_client,
     'data'=>$active_clients,
     'datakeys'=>array('id', 'name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
+  $largeScreenCalendarRowSpan += 2;
   // Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
 // Billable checkbox.
-if ($user->isPluginEnabled('iv'))
+if ($showBillable) {
   $form->addInput(array('type'=>'checkbox','name'=>'billable','value'=>$cl_billable));
+  $largeScreenCalendarRowSpan += 2;
+}
 
 // If we have time custom fields - add controls for them.
 if ($custom_fields && $custom_fields->timeFields) {
   foreach ($custom_fields->timeFields as $timeField) {
     $field_name = 'time_field_'.$timeField['id'];
     if ($timeField['type'] == CustomFields::TYPE_TEXT) {
-      $form->addInput(array('type'=>'text','name'=>$field_name,'style'=>'width: 250px;','value'=>$timeCustomFields[$timeField['id']]['value']));
+      $form->addInput(array('type'=>'text','name'=>$field_name,'value'=>$timeCustomFields[$timeField['id']]['value']));
     } elseif ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
       $form->addInput(array('type'=>'combobox','name'=>$field_name,
-      'style'=>'width: 250px;',
       'data'=>CustomFields::getOptions($timeField['id']),
       'value'=>$timeCustomFields[$timeField['id']]['value'],
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
     }
+    $largeScreenCalendarRowSpan += 2;
   }
 }
 
@@ -305,11 +308,11 @@ if ($showProject) {
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillTaskDropdown(this.value);',
     'name'=>'project',
-    'style'=>'width: 250px;',
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
+  $largeScreenCalendarRowSpan += 2;
 
   // Dropdown for clients if the clients plugin is enabled.
   if ($showClient) {
@@ -332,11 +335,11 @@ if ($showProject) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'client',
-      'style'=>'width: 250px;',
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
+    $largeScreenCalendarRowSpan += 2;
   }
 }
 
@@ -345,18 +348,17 @@ if ($showTask) {
   $task_list = ttGroupHelper::getActiveTasks();
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
-    'style'=>'width: 250px;',
     'value'=>$cl_task,
     'data'=>$task_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->get('dropdown.select'))));
+  $largeScreenCalendarRowSpan += 2;
 }
 
 // Week note control.
 if ($showWeekNote) {
-  if (!defined('NOTE_INPUT_HEIGHT'))
-    define('NOTE_INPUT_HEIGHT', 40);
-  $form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 250px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
+  $form->addInput(array('type'=>'textarea','name'=>'comment','value'=>$cl_note));
+  $largeScreenCalendarRowSpan += 2;
 }
 
 // Calendar.
@@ -465,7 +467,7 @@ if ($request->isPost()) {
                 // because we are doing an insert that does not affect already existing data.
 
                 if ($showWeekNote) {
-                  $fields['note'] = $request->getParameter('note');
+                  $fields['note'] = $request->getParameter('comment');
                 }
               }
               $fields['day_header'] = $dayHeader;
@@ -476,7 +478,9 @@ if ($request->isPost()) {
                 // Take note value from the control below duration.
                 $noteRowNumber = $rowNumber + 1;
                 $note_control_id =  $noteRowNumber.'_'.$dayHeader;
-                $fields['note'] = $request->getParameter($note_control_id);
+                if ($request->getParameter($note_control_id)) {
+                  $fields['note'] = $request->getParameter($note_control_id); // This overwrites week note.
+                }
               }
               $result = ttWeekViewHelper::insertDurationFromWeekView($fields, $custom_fields, $err);
             } elseif ($postedDuration == null || 0 == ttTimeHelper::toMinutes($postedDuration)) {
@@ -531,6 +535,7 @@ if ($request->isPost()) {
 
 $week_total = ttTimeHelper::getTimeForWeek($selected_date);
 
+$smarty->assign('large_screen_calendar_row_span', $largeScreenCalendarRowSpan);
 $smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('client_list', $client_list);
@@ -551,5 +556,5 @@ $smarty->assign('show_week_list', $user->isOptionEnabled('week_list'));
 $smarty->assign('show_start', $showStart);
 $smarty->assign('show_files', $showFiles);
 $smarty->assign('title', $i18n->get('menu.week'));
-$smarty->assign('content_page_name', 'week.tpl');
-$smarty->display('index.tpl');
+$smarty->assign('content_page_name', 'week2.tpl');
+$smarty->display('index2.tpl');

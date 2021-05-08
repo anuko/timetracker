@@ -86,193 +86,108 @@ function fillDropdowns() {
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
 {if $show_week_note}
-  <tr class = "small-screen-label"><td><label for="week_note">{$i18n.label.week_note}:</label></td></tr>
+  <tr class = "small-screen-label"><td><label for="comment">{$i18n.label.week_note}:</label></td></tr>
   <tr>
-    <td class = "large-screen-label"><label for="week_note">{$i18n.label.week_note}:</label></td>
-    <td class="td-with-input">{$forms.weekTimeForm.week_note.control}</td>
+    <td class = "large-screen-label"><label for="comment">{$i18n.label.week_note}:</label></td>
+    <td class="td-with-input">{$forms.weekTimeForm.comment.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
 </table>
-{$forms.weekTimeForm.close}
-
-
-
-
-{$forms.weekTimeForm.open}
-<table cellspacing="4" cellpadding="0" border="0">
-{if $show_navigation}
+<div class="form-control-separator"></div>
+<table class="x-scrollable-table">
   <tr>
-    <td align="center" colspan=2">
-      <a href="time.php?date={$selected_date->toString()}">{$i18n.label.day_view}</a>&nbsp;/&nbsp;<a href="week.php?date={$selected_date->toString()}">{$i18n.label.week_view}</a>
-    </td>
-  </tr>
-{/if}
-  <tr>
-    <td valign="top">
-      <table>
-{if $user_dropdown}
-        <tr>
-          <td align="right">{$i18n.label.user}:</td>
-          <td>{$forms.weekTimeForm.user.control}</td>
-        </tr>
-{/if}
-{if $show_client}
-        <tr>
-          <td align="right">{$i18n.label.client}{if $user->isOptionEnabled('client_required')} (*){/if}:</td>
-          <td>{$forms.weekTimeForm.client.control}</td>
-        </tr>
-{/if}
-{if $show_billable}
-        <tr>
-          <td align="right">&nbsp;</td>
-          <td><label>{$forms.weekTimeForm.billable.control}{$i18n.form.time.billable}</label></td>
-        </tr>
-{/if}
-{if $custom_fields && $custom_fields->timeFields}
-  {foreach $custom_fields->timeFields as $timeField}
-    <tr>
-      <td align="right">{$timeField['label']|escape}{if $timeField['required']} (*){/if}:</td>
-      {assign var="control_name" value='time_field_'|cat:$timeField['id']}
-      <td>{$forms.weekTimeForm.$control_name.control}</td>
-    </tr>
-  {/foreach}
-{/if}
-{if $show_project}
-        <tr>
-          <td align="right">{$i18n.label.project} (*):</td>
-          <td>{$forms.weekTimeForm.project.control}</td>
-        </tr>
-{/if}
-{if $show_task}
-        <tr>
-          <td align="right">{$i18n.label.task}{if $task_required} (*){/if}:</td>
-          <td>{$forms.weekTimeForm.task.control}</td>
-        </tr>
-{/if}
-{if $show_week_note}
-        <tr>
-          <td align="right">{$i18n.label.week_note}:</td>
-          <td>{$forms.weekTimeForm.note.control}</td>
-        </tr>
-{/if}
-      </table>
-    </td>
-    <td valign="top">
-      <table>
-        <tr><td>{$forms.weekTimeForm.date.control}</td></tr>
-      </table>
-    </td>
-  </tr>
-</table>
-<table width="720">
-  <tr valign="top">
     <td>{$forms.weekTimeForm.week_durations.control}</td>
   </tr>
 </table>
-
-<table>
-  <tr>
-    <td align="center" colspan="2">{$forms.weekTimeForm.btn_submit.control}</td>
-  </tr>
-  <tr><td>&nbsp;</td></tr>
-</table>
+<div class="button-set">{$forms.weekTimeForm.btn_submit.control}</div>
+{$forms.weekTimeForm.close}
 
 {if $show_week_list}
-<table width="720">
-<tr>
-  <td valign="top">
-{if $time_records}
-      <table border="0" cellpadding="3" cellspacing="1" width="100%">
-      <tr>
-        <td width="5%" class="tableHeader">{$i18n.label.date}</td>
+<div class="form-control-separator"></div>
+<table class="x-scrollable-table">
+  <tr>
+    <th>{$i18n.label.date}</th>
   {if $show_client}
-        <td width="20%" class="tableHeader">{$i18n.label.client}</td>
+    <th>{$i18n.label.client}</th>
   {/if}
   {if $show_project}
-        <td class="tableHeader">{$i18n.label.project}</td>
+    <th>{$i18n.label.project}</th>
   {/if}
   {if $show_task}
-        <td class="tableHeader">{$i18n.label.task}</td>
+    <th>{$i18n.label.task}</th>
   {/if}
   {if $show_start}
-        <td width="5%" class="tableHeader" align="right">{$i18n.label.start}</td>
-        <td width="5%" class="tableHeader" align="right">{$i18n.label.finish}</td>
+    <th>{$i18n.label.start}</th>
+    <th>{$i18n.label.finish}</th>
   {/if}
-        <td width="5%" class="tableHeader">{$i18n.label.duration}</td>
-        <td class="tableHeader">{$i18n.label.note}</td>
+    <th>{$i18n.label.duration}</th>
+    <th>{$i18n.label.note}</th>
   {if $show_files}
-        <td></td>
+    <th></th>
   {/if}
-        <td></td>
-        <td></td>
-      </tr>
+    <th></th>
+    <th></th>
+  </tr>
   {foreach $time_records as $record}
-      <tr bgcolor="{cycle values="#f5f5f5,#ffffff"}" {if !$record.billable} class="not_billable" {/if}>
-        <td valign="top">{$record.date}</td>
+  <tr {if !$record.billable}class="not_billable"{/if}>
+    <td class="date-cell">{$record.date}</td>
     {if $show_client}
-        <td valign="top">{$record.client|escape}</td>
+    <td class="text-cell">{$record.client|escape}</td>
     {/if}
     {if $show_project}
-        <td valign="top">{$record.project|escape}</td>
+    <td class="text-cell">{$record.project|escape}</td>
     {/if}
     {if $show_task}
-        <td valign="top">{$record.task|escape}</td>
+    <td class="text-cell">{$record.task|escape}</td>
     {/if}
     {if $show_start}
-        <td nowrap align="right" valign="top">{if $record.start}{$record.start}{else}&nbsp;{/if}</td>
-        <td nowrap align="right" valign="top">{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
+    <td class="time-cell">{if $record.start}{$record.start}{else}&nbsp;{/if}</td>
+    <td class="time-cell">{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
     {/if}
-        <td align="right" valign="top">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
-        <td valign="top">{if $record.comment}{$record.comment|escape}{else}&nbsp;{/if}</td>
+    <td class="time-cell">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
+    <td class="text-cell">{if $record.comment}{$record.comment|escape}{else}&nbsp;{/if}</td>
     {if $show_files}
       {if $record.has_files}
-        <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-files.png"></a></td>
+    <td><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-files.png"></a></td>
       {else}
-        <td valign="top" align="center"><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-file.png"></a></td>
+    <td><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-file.png"></a></td>
       {/if}
     {/if}
-        <td valign="top" align="center">
+    <td>
     {if $record.approved || $record.timesheet_id || $record.invoice_id}
-          &nbsp;
+      &nbsp;
     {else}
-          <a href="time_edit.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a>
+      <a href="time_edit.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a>
     {/if}
-        </td>
-        <td valign="top" align="center">
+    </td>
+    <td>
     {if $record.approved || $record.timesheet_id || $record.invoice_id}
-          &nbsp;
+      &nbsp;
     {else}
-          <a href="time_delete.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a>
+      <a href="time_delete.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a>
     {/if}
-        </td>
-      </tr>
+    </td>
+  </tr>
   {/foreach}
-    </table>
-{/if}
-  </td>
-</tr>
 </table>
 {/if}
-
 {if $time_records}
-<table cellpadding="3" cellspacing="1" width="720">
-  {if $show_week_list}
+<div class="day-totals">
+<table class="centered-table">
   <tr>
-    <td align="left">{$i18n.label.week_total}: {$week_total}</td>
-    <td></td>
+    <td class="day-totals-col1">{$i18n.label.week_total}: {$week_total}</td>
+    <td class="day-totals-col2"></td>
   </tr>
-  {/if}
   {if $user->isPluginEnabled('mq')}
   <tr>
-    <td align="left">{$i18n.label.month_total}: {$month_total}</td>
+    <td class="day-totals-col1">{$i18n.label.month_total}: {$month_total}</td>
     {if $over_quota}
-    <td align="right">{$i18n.form.time.over_quota}: <span style="color: green;">{$quota_remaining}</span></td>
+    <td class="day-totals-col2">{$i18n.form.time.over_quota}: <span class="over-quota">{$quota_remaining}</span></td>
     {else}
-    <td align="right">{$i18n.form.time.remaining_quota}: <span style="color: red;">{$quota_remaining}</span></td>
+    <td class="day-totals-col2">{$i18n.form.time.remaining_quota}: <span class="remaining-quota">{$quota_remaining}</span></td>
     {/if}
   </tr>
   {/if}
 </table>
 {/if}
-{$forms.weekTimeForm.close}
