@@ -406,7 +406,9 @@ class DateField extends TextField {
       $html .= " value=\"".htmlspecialchars($this->getValue())."\"";
       $html .= ">";
       
-      $dir_name = trim(@constant('DIR_NAME'), '/');
+      $dir_name = $app_root = '';
+      if (defined('DIR_NAME'))
+        $dir_name = trim(constant('DIR_NAME'), '/');
       if (!empty($dir_name))
         $app_root = '/'.$dir_name;
 
