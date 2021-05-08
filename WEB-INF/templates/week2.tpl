@@ -18,13 +18,6 @@ function fillDropdowns() {
 }
 </script>
 
-
-<style>
-.not_billable td {
-  color: #ff6666;
-}
-</style>
-
 {if $show_navigation}
 <div class="optional-nav">
   <a href="time.php?date={$selected_date->toString()}">{$i18n.label.day_view}</a>&nbsp;/&nbsp;<a href="week.php?date={$selected_date->toString()}">{$i18n.label.week_view}</a>
@@ -130,7 +123,7 @@ function fillDropdowns() {
     <th></th>
   </tr>
   {foreach $time_records as $record}
-  <tr {if !$record.billable}class="not_billable"{/if}>
+  <tr {if !$record.billable}class="not-billable"{/if}>
     <td class="date-cell">{$record.date}</td>
     {if $show_client}
     <td class="text-cell">{$record.client|escape}</td>
