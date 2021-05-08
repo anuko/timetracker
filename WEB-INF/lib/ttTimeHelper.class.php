@@ -414,8 +414,8 @@ class ttTimeHelper {
     $org_id = $user->org_id;
 
     $date = $fields['date'];
-    $start = $fields['start'];
-    $finish = $fields['finish'];
+    $start = isset($fields['start']) ? $fields['start'] : null;
+    $finish = isset($fields['finish']) ? $fields['finish'] : null ;
     $duration = isset($fields['duration']) ? $fields['duration'] : null;
     if ($duration) {
       $minutes = ttTimeHelper::postedDurationToMinutes($duration);

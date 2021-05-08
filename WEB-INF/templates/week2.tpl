@@ -148,14 +148,14 @@ function fillDropdowns() {
       {/if}
     {/if}
     <td>
-    {if $record.approved || $record.timesheet_id || $record.invoice_id}
+    {if (isset($record.approved) && $record.approved) || (isset($record.timesheet_id) && $record.timesheet_id) || (isset($record.invoice_id) && $record.invoice_id)}
       &nbsp;
     {else}
       <a href="time_edit.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a>
     {/if}
     </td>
     <td>
-    {if $record.approved || $record.timesheet_id || $record.invoice_id}
+    {if (isset($record.approved) && $record.approved) || (isset($record.timesheet_id) && $record.timesheet_id) || (isset($record.invoice_id) && $record.invoice_id)}
       &nbsp;
     {else}
       <a href="time_delete.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a>
