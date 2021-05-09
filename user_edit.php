@@ -37,6 +37,7 @@ if ($user->isPluginEnabled('cf')) {
 }
 
 $show_projects = MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode();
+$projects = array();
 if ($show_projects) {
   $projects = ttGroupHelper::getActiveProjects();
   if (count($projects) == 0) $show_projects = false;

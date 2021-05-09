@@ -36,7 +36,7 @@ class Table extends FormElement {
   var $mHeaders       = array(); // column headers
   var $mFooters       = array(); // column footers
   var $mInteractive   = true;    // adds a clickable checkbox column to table
-  var $mIAScript      = null;    // sctipt to execute when a checkbox is clicked
+  var $mIAScript      = null;    // script to execute when a checkbox is clicked
   var $mKeyField      = '';      // identifies a column used as key to access row data
   var $mColumnFields  = array(); // field names (from mData) for data in each column
   var $mBgColor       = '#ffffff';
@@ -156,28 +156,30 @@ class Table extends FormElement {
     }
     
     // Print rows.
-    for ($row = 0; $row < count($this->mData); $row++) {
-      $html .= "\n<tr bgcolor=\"".$this->mBgColor."\" onmouseover=\"setRowBackground(this, '".$this->mBgColorOver."')\" onmouseout=\"setRowBackground(this, null)\">\n";
-      for ($col = 0; $col < $this->getColumnCount(); $col++) {
-        if (0 == $col && strtolower(get_class($this->mColumns[$col]->getRenderer())) == 'checkboxcellrenderer') {
-          // Checkbox for the row. Determine if selected.
-          $selected = false;
-          if (is_array($this->value)) {
-            foreach ($this->value as $p) {
-              if ($p == $this->mData[$row][$this->mKeyField]) {
-              	$selected = true;
-              	break;
+    if (is_array($this->mData)) {
+      for ($row = 0; $row < count($this->mData); $row++) {
+        $html .= "\n<tr bgcolor=\"".$this->mBgColor."\" onmouseover=\"setRowBackground(this, '".$this->mBgColorOver."')\" onmouseout=\"setRowBackground(this, null)\">\n";
+        for ($col = 0; $col < $this->getColumnCount(); $col++) {
+          if (0 == $col && strtolower(get_class($this->mColumns[$col]->getRenderer())) == 'checkboxcellrenderer') {
+            // Checkbox for the row. Determine if selected.
+            $selected = false;
+            if (is_array($this->value)) {
+              foreach ($this->value as $p) {
+                if ($p == $this->mData[$row][$this->mKeyField]) {
+                  $selected = true;
+                  break;
+                }
               }
             }
+            // Render control checkbox.
+            $html .= $this->mColumns[$col]->renderCell($this->mData[$row][$this->mKeyField], $row, $col, $selected);
+          } else {
+            // Render regular cell.
+            $html .= $this->mColumns[$col]->renderCell($this->getValueAt($row, $col), $row, $col);
           }
-          // Render control checkbox.
-          $html .= $this->mColumns[$col]->renderCell($this->mData[$row][$this->mKeyField], $row, $col, $selected);
-        } else {
-          // Render regular cell.
-          $html .= $this->mColumns[$col]->renderCell($this->getValueAt($row, $col), $row, $col);
         }
+        $html .= "</tr>\n";
       }
-      $html .= "</tr>\n";
     }
 
     // Print footers.
