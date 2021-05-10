@@ -25,5 +25,5 @@ if ($request->isPost()) {
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()) );
 $smarty->assign('title', $i18n->get('title.import'));
-$smarty->assign('content_page_name', 'import2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'import.tpl');
+$smarty->display('index.tpl');

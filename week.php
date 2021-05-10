@@ -559,5 +559,5 @@ $smarty->assign('show_week_list', $user->isOptionEnabled('week_list'));
 $smarty->assign('show_start', $showStart);
 $smarty->assign('show_files', $showFiles);
 $smarty->assign('title', $i18n->get('menu.week'));
-$smarty->assign('content_page_name', 'week2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'week.tpl');
+$smarty->display('index.tpl');

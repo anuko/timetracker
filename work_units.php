@@ -53,5 +53,5 @@ if ($request->isPost()){
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.work_units'));
-$smarty->assign('content_page_name', 'work_units2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'work_units.tpl');
+$smarty->display('index.tpl');

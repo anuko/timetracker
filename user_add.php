@@ -217,5 +217,5 @@ $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientRo
 $smarty->assign('show_quota', $show_quota);
 $smarty->assign('show_projects', $show_projects);
 $smarty->assign('title', $i18n->get('title.add_user'));
-$smarty->assign('content_page_name', 'user_add2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'user_add.tpl');
+$smarty->display('index.tpl');

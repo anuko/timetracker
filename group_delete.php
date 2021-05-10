@@ -64,5 +64,5 @@ if ($request->isPost()) {
 $smarty->assign('group_to_delete', $group_name);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.delete_group'));
-$smarty->assign('content_page_name', 'group_delete2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'group_delete.tpl');
+$smarty->display('index.tpl');

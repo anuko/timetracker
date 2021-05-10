@@ -39,5 +39,5 @@ if (count($groups) > 1) {
 $smarty->assign('subgroups', $user->getSubgroups($group_id));
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('label.subgroups'));
-$smarty->assign('content_page_name', 'groups2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'groups.tpl');
+$smarty->display('index.tpl');
