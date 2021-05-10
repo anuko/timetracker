@@ -167,7 +167,7 @@ $showTimesheetCheckbox = $user->isPluginEnabled('ts');
 
 // Add user table.
 $showUsers = $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient();
-$user_list = array();
+$user_list = $user_list_active = $user_list_inactive = array();
 if ($showUsers) {
   // Prepare user and assigned projects arrays.
   if ($user->can('view_reports') || $user->can('view_all_reports')) {
@@ -206,7 +206,6 @@ if ($showUsers) {
     'layout'=>'V',
     'groupin'=>$row_count));
 
-  $user_list_inactive = array();
   foreach ($inactive_users as $single_user) {
     $user_list_inactive[$single_user['id']] = $single_user['name'];
     $projects = ttProjectHelper::getAssignedProjects($single_user['id']);
