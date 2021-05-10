@@ -47,5 +47,5 @@ $smarty->assign('template_to_delete', $template_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.templateDeleteForm.btn_cancel.focus()"');
 $smarty->assign('title', $i18n->get('title.delete_template'));
-$smarty->assign('content_page_name', 'template_delete2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'template_delete.tpl');
+$smarty->display('index.tpl');

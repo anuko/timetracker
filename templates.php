@@ -59,5 +59,5 @@ $smarty->assign('active_templates', $activeTemplates);
 $smarty->assign('inactive_templates', $inactiveTemplates);
 $smarty->assign('show_bind_with_projects_checkbox', $showBindWithProjectsCheckbox);
 $smarty->assign('title', $i18n->get('title.templates'));
-$smarty->assign('content_page_name', 'templates2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'templates.tpl');
+$smarty->display('index.tpl');

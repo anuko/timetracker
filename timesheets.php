@@ -78,5 +78,5 @@ $smarty->assign('show_client', $showClient);
 $smarty->assign('show_files', $showFiles);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.timesheets'));
-$smarty->assign('content_page_name', 'timesheets2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'timesheets.tpl');
+$smarty->display('index.tpl');

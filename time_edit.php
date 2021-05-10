@@ -467,5 +467,5 @@ $smarty->assign('task_list', $task_list);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('title', $i18n->get('title.edit_time_record'));
-$smarty->assign('content_page_name', 'time_edit2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'time_edit.tpl');
+$smarty->display('index.tpl');

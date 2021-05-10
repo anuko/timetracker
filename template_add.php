@@ -65,5 +65,5 @@ if ($request->isPost()) {
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('show_projects', $bindTemplatesWithProjects && count($projects) > 0);
 $smarty->assign('title', $i18n->get('title.add_template'));
-$smarty->assign('content_page_name', 'template_add2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'template_add.tpl');
+$smarty->display('index.tpl');

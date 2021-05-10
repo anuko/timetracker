@@ -80,5 +80,5 @@ $smarty->assign('onload', 'onLoad="document.timesheetForm.timesheet_name.focus()
 $smarty->assign('show_client', $showClient);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('title', $i18n->get('title.add_timesheet'));
-$smarty->assign('content_page_name', 'timesheet_add2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'timesheet_add.tpl');
+$smarty->display('index.tpl');

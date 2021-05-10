@@ -488,5 +488,5 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns();prepopulateNote();adjustTodayLinks()"');
 $smarty->assign('timestring', $selected_date->toString($user->getDateFormat()));
 $smarty->assign('title', $i18n->get('title.time'));
-$smarty->assign('content_page_name', 'time2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'time.tpl');
+$smarty->display('index.tpl');
