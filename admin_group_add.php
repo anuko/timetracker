@@ -103,4 +103,4 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.groupForm.group_name.focus()"');
 $smarty->assign('content_page_name', 'admin_group_add.tpl');
 $smarty->assign('title', $i18n->get('title.add_group'));
-$smarty->display('index2.tpl');
+$smarty->display('index.tpl');

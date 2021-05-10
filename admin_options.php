@@ -73,4 +73,4 @@ $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.options'));
 $smarty->assign('content_page_name', 'admin_options.tpl');
-$smarty->display('index2.tpl');
+$smarty->display('index.tpl');

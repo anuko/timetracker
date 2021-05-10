@@ -28,5 +28,5 @@ $options = CustomFields::getOptions($field_id);
 $smarty->assign('field_id', $field_id);
 $smarty->assign('options', $options);
 $smarty->assign('title', $i18n->get('title.cf_dropdown_options'));
-$smarty->assign('content_page_name', 'cf_dropdown_options2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'cf_dropdown_options.tpl');
+$smarty->display('index.tpl');

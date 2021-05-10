@@ -205,5 +205,5 @@ $smarty->assign('chart_selector', $chart_selector);
 $smarty->assign('onload', 'onLoad="adjustTodayLinks()"');
 $smarty->assign('forms', array($chart_form->getName() => $chart_form->toArray()));
 $smarty->assign('title', $i18n->get('title.charts'));
-$smarty->assign('content_page_name', 'charts2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'charts.tpl');
+$smarty->display('index.tpl');
