@@ -49,5 +49,5 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('active_tasks', $active_tasks);
 $smarty->assign('inactive_tasks', $inactive_tasks);
 $smarty->assign('title', $i18n->get('title.tasks'));
-$smarty->assign('content_page_name', 'tasks2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'tasks.tpl');
+$smarty->display('index.tpl');

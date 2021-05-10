@@ -121,7 +121,7 @@ function fillProjectDropdown(id) {
 function fillTaskDropdown(project_id) {
   var str_task_ids;
   // Get a string of comma-separated task ids.
-  if (project_id) {  
+  if (project_id) {
     var property = "p" + project_id;
     str_task_ids = obj_tasks[property];
   }

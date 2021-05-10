@@ -492,5 +492,5 @@ $smarty->assign('assigned_projects', $assigned_projects);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="handleCheckboxes();fillDropdowns()"');
 $smarty->assign('title', $i18n->get('title.reports'));
-$smarty->assign('content_page_name', 'reports2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'reports.tpl');
+$smarty->display('index.tpl');

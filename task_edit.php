@@ -96,5 +96,5 @@ if ($request->isPost()) {
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('show_projects', count($projects) > 0);
 $smarty->assign('title', $i18n->get('title.edit_task'));
-$smarty->assign('content_page_name', 'task_edit2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'task_edit.tpl');
+$smarty->display('index.tpl');

@@ -320,5 +320,5 @@ $smarty->assign('note_on_separate_row', $user->getConfigOption('report_note_on_s
 $smarty->assign('colspan', $colspan);
 $smarty->assign('bean', $bean);
 $smarty->assign('title', $i18n->get('title.report').": ".$totals['start_date']." - ".$totals['end_date']);
-$smarty->assign('content_page_name', 'report2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'report.tpl');
+$smarty->display('index.tpl');
