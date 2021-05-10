@@ -74,5 +74,5 @@ if ($request->isPost()){
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.display_options'));
-$smarty->assign('content_page_name', 'display_options2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'display_options.tpl');
+$smarty->display('index.tpl');

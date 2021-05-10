@@ -211,5 +211,5 @@ $smarty->assign('predefined_expenses', $predefined_expenses);
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('title', $i18n->get('title.edit_expense'));
-$smarty->assign('content_page_name', 'expense_edit2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'expense_edit.tpl');
+$smarty->display('index.tpl');

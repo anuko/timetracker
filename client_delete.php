@@ -50,5 +50,5 @@ if ($request->isPost()) {
 $smarty->assign('client_to_delete', $client_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.delete_client'));
-$smarty->assign('content_page_name', 'client_delete2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'client_delete.tpl');
+$smarty->display('index.tpl');

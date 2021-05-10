@@ -230,5 +230,5 @@ $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('timestring', $selected_date->toString($user->getDateFormat()));
 $smarty->assign('title', $i18n->get('title.expenses'));
-$smarty->assign('content_page_name', 'expenses2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'expenses.tpl');
+$smarty->display('index.tpl');

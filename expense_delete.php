@@ -60,5 +60,5 @@ $smarty->assign('forms', array($form->getName() => $form->toArray()));
 $smarty->assign('expense_item', $expense_item);
 $smarty->assign('show_project', $show_project);
 $smarty->assign('title', $i18n->get('title.delete_expense'));
-$smarty->assign('content_page_name', 'expense_delete2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'expense_delete.tpl');
+$smarty->display('index.tpl');

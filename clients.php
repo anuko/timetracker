@@ -27,5 +27,5 @@ if($user->can('manage_clients')) {
 $smarty->assign('active_clients', $active_clients);
 $smarty->assign('inactive_clients', $inactive_clients);
 $smarty->assign('title', $i18n->get('title.clients'));
-$smarty->assign('content_page_name', 'clients2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'clients.tpl');
+$smarty->display('index.tpl');

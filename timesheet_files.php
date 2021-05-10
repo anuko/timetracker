@@ -61,5 +61,5 @@ $smarty->assign('can_edit', true); // Relying on access checks above.
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('files', $files);
 $smarty->assign('title', $i18n->get('title.timesheet_files').': '.$timesheet['name']);
-$smarty->assign('content_page_name', 'entity_files2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'entity_files.tpl');
+$smarty->display('index.tpl');
