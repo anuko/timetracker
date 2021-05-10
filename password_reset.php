@@ -76,6 +76,7 @@ if ($request->isPost()) {
       $mailer->setCharSet(CHARSET);
       $mailer->setSender(SENDER);
       $mailer->setReceiver("$receiver");
+      $secure_connection = false;
       if ((!empty($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] !== 'off')) || ($_SERVER['SERVER_PORT'] == 443))
         $secure_connection = true;
       if($secure_connection)
@@ -85,7 +86,9 @@ if ($request->isPost()) {
 
       $cl_subject = $user_i18n->get('form.reset_password.email_subject');
 
-      $dir_name = trim(@constant('DIR_NAME'), '/');
+      $dir_name = $app_root = '';
+      if (defined('DIR_NAME'))
+        $dir_name = trim(constant('DIR_NAME'), '/');
       if (!empty($dir_name))
         $app_root = '/'.$dir_name;
 
