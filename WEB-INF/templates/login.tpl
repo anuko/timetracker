@@ -9,7 +9,7 @@ function get_date() {
 </script>
 
 {$forms.loginForm.open}
-{include file="login.`$smarty.const.AUTH_MODULE`2.tpl"}
+{include file="login.`$smarty.const.AUTH_MODULE`.tpl"}
 {$forms.loginForm.close}
 
 {if !empty($about_text)}

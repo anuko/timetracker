@@ -90,5 +90,5 @@ $smarty->assign('invoices', $invoices);
 $smarty->assign('show_sorting_options', count($invoices) > 1);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->get('title.invoices'));
-$smarty->assign('content_page_name', 'invoices2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'invoices.tpl');
+$smarty->display('index.tpl');

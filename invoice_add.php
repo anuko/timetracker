@@ -80,5 +80,5 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.invoiceForm.number.focus()"');
 $smarty->assign('show_project', $show_project);
 $smarty->assign('title', $i18n->get('title.add_invoice'));
-$smarty->assign('content_page_name', 'invoice_add2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'invoice_add.tpl');
+$smarty->display('index.tpl');

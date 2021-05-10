@@ -107,5 +107,5 @@ $smarty->assign('show_paid_column', $user->isPluginEnabled('ps'));
 $smarty->assign('invoice_items', $invoice_items);
 $smarty->assign('colspan', $colspan);
 $smarty->assign('title', $i18n->get('title.view_invoice'));
-$smarty->assign('content_page_name', 'invoice_view2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'invoice_view.tpl');
+$smarty->display('index.tpl');
