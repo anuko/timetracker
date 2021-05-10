@@ -108,5 +108,5 @@ $smarty->assign('onload', 'onLoad="document.projectForm.project_name.focus()"');
 $smarty->assign('show_users', count($users) > 0);
 $smarty->assign('show_tasks', $show_tasks);
 $smarty->assign('title', $i18n->get('title.edit_project'));
-$smarty->assign('content_page_name', 'project_edit2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'project_edit.tpl');
+$smarty->display('index.tpl');

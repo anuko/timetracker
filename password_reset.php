@@ -106,5 +106,5 @@ if ($request->isPost()) {
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.resetPasswordForm.login.focus()"');
 $smarty->assign('title', $i18n->get('title.reset_password'));
-$smarty->assign('content_page_name', 'password_reset2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'password_reset.tpl');
+$smarty->display('index.tpl');

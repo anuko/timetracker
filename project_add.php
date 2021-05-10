@@ -91,5 +91,5 @@ $smarty->assign('show_files', $showFiles);
 $smarty->assign('show_users', count($users) > 0);
 $smarty->assign('show_tasks', $show_tasks);
 $smarty->assign('title', $i18n->get('title.add_project'));
-$smarty->assign('content_page_name', 'project_add2.tpl');
-$smarty->display('index2.tpl');
+$smarty->assign('content_page_name', 'project_add.tpl');
+$smarty->display('index.tpl');
