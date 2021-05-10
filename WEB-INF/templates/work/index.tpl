@@ -2,4 +2,4 @@
 
 {if $content_page_name}{include file="$content_page_name"}{/if}
 
-{include file="footer.tpl"}
+{include file="work/footer.tpl"}
