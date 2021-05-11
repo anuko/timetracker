@@ -12,6 +12,5 @@ require_once('initialize.php');
 global $auth;
 $authenticated = $auth->isAuthenticated(); // This call assigns 'authenticated' to smarty.
 
-// $smarty->assign('title', $i18n->get('form.label.menu'));
 $smarty->assign('content_page_name', 'site_map.tpl');
 $smarty->display('index.tpl');
