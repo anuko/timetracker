@@ -799,8 +799,6 @@ input[type=checkbox], label {
 
 div.table-divider { height: 30px; }
 
-div#LoginAboutText { width: 400px; }
-
 .uncompleted-entry {
   display: inline-block;
   height: 8px;
