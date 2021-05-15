@@ -101,6 +101,11 @@ function fillDropdowns() {
 <table class="x-scrollable-table">
   <tr>
     <th>{$i18n.label.date}</th>
+  {if $show_record_custom_fields && isset($custom_fields) && $custom_fields->timeFields}
+    {foreach $custom_fields->timeFields as $timeField}
+    <th>{$timeField['label']|escape}</th>
+    {/foreach}
+  {/if}
   {if $show_client}
     <th>{$i18n.label.client}</th>
   {/if}
@@ -125,6 +130,13 @@ function fillDropdowns() {
   {foreach $time_records as $record}
   <tr {if !$record.billable}class="not-billable"{/if}>
     <td class="date-cell">{$record.date}</td>
+    {* record custom fileds *}
+    {if $show_record_custom_fields && isset($custom_fields) && $custom_fields->timeFields}
+      {foreach $custom_fields->timeFields as $timeField}
+          {assign var="control_name" value='time_field_'|cat:$timeField['id']}
+    <td class="text-cell">{$record.$control_name|escape}</td>
+      {/foreach}
+    {/if}
     {if $show_client}
     <td class="text-cell">{$record.client|escape}</td>
     {/if}

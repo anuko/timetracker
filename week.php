@@ -62,6 +62,7 @@ $showWeekNotes = $user->isOptionEnabled('week_notes');
 $recordType = $user->getRecordType();
 $showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
 $showFiles = $user->isPluginEnabled('at');
+$showRecordCustomFields = $user->isOptionEnabled('record_custom_fields');
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
@@ -127,17 +128,17 @@ $_SESSION['comment'] = $cl_note;
 
 $timeCustomFields = array();
 // If we have time custom fields - collect input.
-if ($request->isPost()) {
-  if (isset($custom_fields) && $custom_fields->timeFields) {
-    foreach ($custom_fields->timeFields as $timeField) {
-      $control_name = 'time_field_'.$timeField['id'];
-      $timeCustomFields[$timeField['id']] = array('field_id' => $timeField['id'],
-        'control_name' => $control_name,
-        'label' => $timeField['label'],
-        'type' => $timeField['type'],
-        'required' => $timeField['required'],
-        'value' => trim($request->getParameter($control_name)));
-    }
+if (isset($custom_fields) && $custom_fields->timeFields) {
+  foreach ($custom_fields->timeFields as $timeField) {
+    $control_name = 'time_field_'.$timeField['id'];
+    $cl_control_name = $request->getParameter($control_name, ($request->isPost() ? null : @$_SESSION[$control_name]));
+    $_SESSION[$control_name] = $cl_control_name;
+    $timeCustomFields[$timeField['id']] = array('field_id' => $timeField['id'],
+      'control_name' => $control_name,
+      'label' => $timeField['label'],
+      'type' => $timeField['type'],
+      'required' => $timeField['required'],
+      'value' => trim($cl_control_name));
   }
 }
 
@@ -548,6 +549,7 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('timestring', $startDate->toString($user->date_format).' - '.$endDate->toString($user->date_format));
 $smarty->assign('time_records', $records);
+$smarty->assign('show_record_custom_fields', $showRecordCustomFields);
 $smarty->assign('show_navigation', !$user->isOptionEnabled('week_menu'));
 $smarty->assign('show_client', $showClient);
 $smarty->assign('show_billable', $showBillable);
