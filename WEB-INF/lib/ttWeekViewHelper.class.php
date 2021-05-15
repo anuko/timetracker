@@ -406,8 +406,9 @@ class ttWeekViewHelper {
   static function makeRowIdentifier($record) {
     global $user;
     // Start with client.
+    $row_identifier = '';
     if ($user->isPluginEnabled('cl'))
-      $row_identifier = $record['client_id'] ? 'cl:'.$record['client_id'] : '';
+      $row_identifier .= $record['client_id'] ? 'cl:'.$record['client_id'] : '';
     // Add billable flag.
     if (!empty($row_identifier)) $row_identifier .= ',';
     $row_identifier .= 'bl:'.$record['billable'];
@@ -417,7 +418,7 @@ class ttWeekViewHelper {
     $row_identifier .= $record['task_id'] ? ',ts:'.$record['task_id'] : '';
     // Add custom field parts.
     global $custom_fields;
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         if ($timeField['type'] == CustomFields::TYPE_TEXT)
@@ -438,8 +439,9 @@ class ttWeekViewHelper {
   static function makeRowLabel($record) {
     global $user;
     // Start with client.
+    $label = '';
     if ($user->isPluginEnabled('cl'))
-      $label = $record['client'];
+      $label .= $record['client'];
 
     // Add project.
     if (!empty($label) && !empty($record['project'])) $label .= ' - ';
@@ -451,7 +453,7 @@ class ttWeekViewHelper {
 
     // Add custom field parts.
     global $custom_fields;
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         $field_value = $record[$field_name];
