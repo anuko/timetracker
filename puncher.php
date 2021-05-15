@@ -307,5 +307,5 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('timestring', $selected_date->toString($user->date_format));
 $smarty->assign('title', $i18n->get('title.time'));
-$smarty->assign('content_page_name', 'timer.tpl');
+$smarty->assign('content_page_name', 'puncher.tpl');
 $smarty->display('index.tpl');
