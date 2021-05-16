@@ -37,7 +37,7 @@ License: See license.txt *}
 <table class="x-scrollable-table">
   <tr>
     <th>{$i18n.label.date}</th>
-  {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<th>{$i18n.label.user}</th>{/if}
+  {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<th class="user-header">{$i18n.label.user}</th>{/if}
   {* user custom fileds *}
   {if isset($custom_fields) && $custom_fields->userFields}
     {foreach $custom_fields->userFields as $userField}
@@ -45,9 +45,9 @@ License: See license.txt *}
       {if $bean->getAttribute($checkbox_control_name)}<th>{{$userField['label']|escape}}</th>{/if}
     {/foreach}
   {/if}
-  {if $bean->getAttribute('chclient')}<th>{$i18n.label.client}</th>{/if}
-  {if $bean->getAttribute('chproject')}<th>{$i18n.label.project}</th>{/if}
-  {if $bean->getAttribute('chtask')}<th>{$i18n.label.task}</th>{/if}
+  {if $bean->getAttribute('chclient')}<th class="client-header">{$i18n.label.client}</th>{/if}
+  {if $bean->getAttribute('chproject')}<th class="project-header">{$i18n.label.project}</th>{/if}
+  {if $bean->getAttribute('chtask')}<th class="task-header">{$i18n.label.task}</th>{/if}
   {* time custom fileds *}
   {if isset($custom_fields) && $custom_fields->timeFields}
     {foreach $custom_fields->timeFields as $timeField}
@@ -59,7 +59,7 @@ License: See license.txt *}
   {if $bean->getAttribute('chfinish')}<th>{$i18n.label.finish}</th>{/if}
   {if $bean->getAttribute('chduration')}<th>{$i18n.label.duration}</th>{/if}
   {if $bean->getAttribute('chunits')}<th>{$i18n.label.work_units_short}</th>{/if}
-  {if $bean->getAttribute('chnote') && !$note_on_separate_row}<th>{$i18n.label.note}</th>{/if}
+  {if $bean->getAttribute('chnote') && !$note_on_separate_row}<th class="note-header">{$i18n.label.note}</th>{/if}
   {if $bean->getAttribute('chcost')}<th>{$i18n.label.cost}</th>{/if}
   {if $bean->getAttribute('chapproved')}<th>{$i18n.label.approved}</th>{/if}
   {if $bean->getAttribute('chpaid')}<th>{$i18n.label.paid}</th>{/if}
