@@ -2261,17 +2261,17 @@ class ttReportHelper {
     if ($no_grouping) return null;
 
     $group_by_header = '';
-    if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
+    if (isset($options['group_by1']) && $options['group_by1'] != 'no_grouping') {
       // We have group_by1.
       $group_by1 = $options['group_by1'];
       $group_by_header .= ' - '.ttReportHelper::makeGroupByHeaderPart($group_by1);
     }
-    if ($options['group_by2'] != null && $options['group_by2'] != 'no_grouping') {
+    if (isset($options['group_by2']) && $options['group_by2'] != 'no_grouping') {
       // We have group_by2.
       $group_by2 = $options['group_by2'];
       $group_by_header .= ' - '.ttReportHelper::makeGroupByHeaderPart($group_by2);
     }
-    if ($options['group_by3'] != null && $options['group_by3'] != 'no_grouping') {
+    if (isset($options['group_by3']) && $options['group_by3'] != 'no_grouping') {
       // We have group_by3.
       $group_by3 = $options['group_by3'];
       $group_by_header .= ' - '.ttReportHelper::makeGroupByHeaderPart($group_by3);
