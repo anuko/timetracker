@@ -26,6 +26,7 @@ $i18n_key_words = array(
 'menu.plugins' => 'Lisäosat',
 'menu.time' => 'Tunnit',
 // TODO: translate the following.
+// 'menu.puncher' => 'Punch',
 // 'menu.week' => 'Week',
 'menu.expenses' => 'Kulut',
 'menu.reports' => 'Raportit',

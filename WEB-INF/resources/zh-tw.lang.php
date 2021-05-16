@@ -25,6 +25,7 @@ $i18n_key_words = array(
 // 'menu.group' => 'Group',
 // 'menu.plugins' => 'Plugins',
 // 'menu.time' => 'Time',
+// 'menu.puncher' => 'Punch',
 // 'menu.week' => 'Week',
 // 'menu.expenses' => 'Expenses',
 'menu.reports' => '報告',

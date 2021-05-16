@@ -23,6 +23,7 @@ $i18n_key_words = array(
 'menu.group' => 'Группа',
 'menu.plugins' => 'Плагины',
 'menu.time' => 'Время',
+'menu.puncher' => 'Пробить',
 'menu.week' => 'Неделя',
 'menu.expenses' => 'Расходы',
 'menu.reports' => 'Отчёты',

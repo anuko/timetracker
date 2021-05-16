@@ -26,6 +26,7 @@ $i18n_key_words = array(
 'menu.plugins' => 'Plugins',
 'menu.time' => 'Tempo',
 // TODO: translate the following.
+// 'menu.puncher' => 'Punch',
 // 'menu.week' => 'Week',
 'menu.expenses' => 'Gastos',
 'menu.reports' => 'Relatórios',

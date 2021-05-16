@@ -27,6 +27,7 @@ $i18n_key_words = array(
 'menu.plugins' => 'پلاگین ها',
 'menu.time' => 'زمان',
 // TODO: translate the following.
+// 'menu.puncher' => 'Punch',
 // 'menu.week' => 'Week',
 'menu.expenses' => 'هزينه ها',
 'menu.reports' => 'گزارشات',
