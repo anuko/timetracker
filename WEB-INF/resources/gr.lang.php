@@ -180,6 +180,8 @@ $i18n_key_words = array(
 'label.select_none' => 'Μη επιλογή',
 'label.day_view' => 'Προβολή ημέρας',
 'label.week_view' => 'Προβολή εβδομάδας',
+// TODO: translate the following:
+// 'label.puncher' => 'Puncher',
 'label.id' => 'ID',
 'label.language' => 'Γλώσσα',
 'label.decimal_mark' => 'Δεκαδική ένδειξη',

@@ -6,8 +6,8 @@ License: See license.txt *}
 {if $show_navigation}
 <div class="optional-nav">
   <a href="time.php?date={$selected_date->toString()}">{$i18n.label.day_view}</a>
-  {if $user->isPluginEnabled('wv')}&nbsp;/&nbsp;<a href="week.php?date={$selected_date->toString()}">{$i18n.label.week_view}{/if}</a>
   {if $user->isPluginEnabled('pu')}&nbsp;/&nbsp;<a href="puncher.php">{$i18n.label.puncher}{/if}</a>
+  {if $user->isPluginEnabled('wv')}&nbsp;/&nbsp;<a href="week.php?date={$selected_date->toString()}">{$i18n.label.week_view}{/if}</a>
 </div>
 {/if}
 

@@ -166,6 +166,8 @@ $i18n_key_words = array(
 'label.select_none' => 'Selecteer niets',
 'label.day_view' => 'Dag overzicht',
 'label.week_view' => 'Week overzicht',
+// TODO: translate the following.
+// 'label.puncher' => 'Puncher',
 'label.id' => 'ID',
 'label.language' => 'Taal',
 'label.decimal_mark' => 'Decimaal teken',

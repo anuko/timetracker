@@ -200,6 +200,7 @@ $i18n_key_words = array(
 'label.select_none' => 'Senkit nem jelöl ki',
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
+// 'label.puncher' => 'Puncher',
 'label.id' => 'Azonosító',
 // TODO: translate the following.
 // 'label.language' => 'Language',

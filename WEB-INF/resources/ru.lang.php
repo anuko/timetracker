@@ -165,6 +165,7 @@ $i18n_key_words = array(
 'label.select_none' => 'Снять все отметки',
 'label.day_view' => 'День',
 'label.week_view' => 'Неделя',
+'label.puncher' => 'Пробиватель',
 'label.id' => 'ID',
 'label.language' => 'Язык',
 'label.decimal_mark' => 'Десятичный знак',

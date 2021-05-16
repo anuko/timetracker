@@ -194,6 +194,8 @@ $i18n_key_words = array(
 'label.select_none' => 'Märgi kõik mittevalituks',
 'label.day_view' => 'Päeva vaade',
 'label.week_view' => 'Nädala vaade',
+// TODO: translate the following:
+// 'label.puncher' => 'Puncher',
 'label.id' => 'ID',
 'label.language' => 'Keel',
 'label.decimal_mark' => 'Koma märk',

@@ -187,6 +187,7 @@ $i18n_key_words = array(
 // 'label.select_none' => 'Deselect all',
 // 'label.day_view' => 'Day view',
 // 'label.week_view' => 'Week view',
+// 'label.puncher' => 'Puncher',
 // 'label.id' => 'ID',
 // 'label.language' => 'Language',
 // 'label.decimal_mark' => 'Decimal mark',

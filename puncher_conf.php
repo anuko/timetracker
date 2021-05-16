@@ -32,6 +32,6 @@ if ($request->isPost()){
 }
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('title', $i18n->get('label.puncher'));
+$smarty->assign('title', $i18n->get('title.puncher'));
 $smarty->assign('content_page_name', 'puncher_conf.tpl');
 $smarty->display('index.tpl');

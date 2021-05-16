@@ -184,6 +184,8 @@ $i18n_key_words = array(
 'label.select_none' => 'Deseleziona tutti',
 'label.day_view' => 'Vista giornaliera',
 'label.week_view' => 'Vista settimanale',
+// TODO: translate the following:
+// 'label.puncher' => 'Puncher',
 'label.id' => 'ID',
 'label.language' => 'Lingua',
 'label.decimal_mark' => 'Separatore decimale',
