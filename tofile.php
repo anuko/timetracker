@@ -95,7 +95,7 @@ if ('xml' == $type) {
       print "\t<date><![CDATA[".$item['date']."]]></date>\n";
       if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print "\t<user><![CDATA[".$item['user']."]]></user>\n";
       // User custom fields.
-      if ($custom_fields && $custom_fields->userFields) {
+      if (isset($custom_fields) && $custom_fields->userFields) {
         foreach ($custom_fields->userFields as $userField) {
           $field_name = 'user_field_'.$userField['id'];
           $checkbox_control_name = 'show_'.$field_name;
@@ -106,7 +106,7 @@ if ('xml' == $type) {
       if ($bean->getAttribute('chproject')) print "\t<project><![CDATA[".$item['project']."]]></project>\n";
       if ($bean->getAttribute('chtask')) print "\t<task><![CDATA[".$item['task']."]]></task>\n";
       // Time custom fields.
-      if ($custom_fields && $custom_fields->timeFields) {
+      if (isset($custom_fields) && $custom_fields->timeFields) {
         foreach ($custom_fields->timeFields as $timeField) {
           $field_name = 'time_field_'.$timeField['id'];
           $checkbox_control_name = 'show_'.$field_name;
@@ -190,7 +190,7 @@ if ('csv' == $type) {
     print '"'.$i18n->get('label.date').'"';
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print ',"'.$i18n->get('label.user').'"';
     // User custom field labels.
-    if ($custom_fields && $custom_fields->userFields) {
+    if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $checkbox_control_name = 'show_'.$field_name;
@@ -201,7 +201,7 @@ if ('csv' == $type) {
     if ($bean->getAttribute('chproject')) print ',"'.$i18n->get('label.project').'"';
     if ($bean->getAttribute('chtask')) print ',"'.$i18n->get('label.task').'"';
     // Time custom field labels.
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         $checkbox_control_name = 'show_'.$field_name;
@@ -226,7 +226,7 @@ if ('csv' == $type) {
       print '"'.$item['date'].'"';
       if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) print ',"'.ttNeutralizeForCsv($item['user']).'"';
       // User custom fields.
-      if ($custom_fields && $custom_fields->userFields) {
+      if (isset($custom_fields) && $custom_fields->userFields) {
         foreach ($custom_fields->userFields as $userField) {
           $field_name = 'user_field_'.$userField['id'];
           $checkbox_control_name = 'show_'.$field_name;
@@ -237,7 +237,7 @@ if ('csv' == $type) {
       if ($bean->getAttribute('chproject')) print ',"'.ttNeutralizeForCsv($item['project']).'"';
       if ($bean->getAttribute('chtask')) print ',"'.ttNeutralizeForCsv($item['task']).'"';
       // Time custom fields.
-      if ($custom_fields && $custom_fields->timeFields) {
+      if (isset($custom_fields) && $custom_fields->timeFields) {
         foreach ($custom_fields->timeFields as $timeField) {
           $field_name = 'time_field_'.$timeField['id'];
           $checkbox_control_name = 'show_'.$field_name;
