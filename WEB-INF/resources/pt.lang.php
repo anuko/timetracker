@@ -293,6 +293,7 @@ $i18n_key_words = array(
 // 'title.edit_time_record' => 'Editing Time Record',
 // 'title.delete_time_record' => 'Deleting Time Record',
 // 'title.time_files' => 'Time Record Files',
+// 'title.puncher' => 'Puncher',
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',

@@ -257,6 +257,8 @@ $i18n_key_words = array(
 'title.edit_time_record' => 'Wijzigen tijdrecord',
 'title.delete_time_record' => 'Verwijder tijdrecord',
 'title.time_files' => 'Tijden bestanden',
+// TODO: Translate the following:
+// 'title.puncher' => 'Puncher',
 'title.expenses' => 'Kosten',
 'title.edit_expense' => 'Bewerk kosten artikel',
 'title.delete_expense' => 'Verwijder kosten artikel',

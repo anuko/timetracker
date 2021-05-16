@@ -291,6 +291,7 @@ $i18n_key_words = array(
 'title.delete_time_record' => 'Slet Tidsregistrering',
 // TODO: Translate the following.
 // 'title.time_files' => 'Time Record Files',
+// 'title.puncher' => 'Puncher',
 'title.expenses' => 'Udgifter',
 'title.edit_expense' => 'Redigér Udgift',
 'title.delete_expense' => 'Slet Udgift',

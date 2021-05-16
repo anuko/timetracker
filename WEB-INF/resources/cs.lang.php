@@ -314,6 +314,7 @@ $i18n_key_words = array(
 'title.delete_time_record' => 'Smazat časový záznam',
 // TODO: translate the following.
 // 'title.time_files' => 'Time Record Files',
+// 'title.puncher' => 'Puncher',
 // 'title.expenses' => 'Expenses',
 // 'title.edit_expense' => 'Editing Expense Item',
 // 'title.delete_expense' => 'Deleting Expense Item',
