@@ -21,6 +21,9 @@
 <div class="sitemap-item-group">
     {if $user->exists() && ($user->can('track_own_time') || $user->can('track_time'))}
   <div class="sitemap-item"><a href="time.php">{$i18n.menu.time}</a></div>
+      {if $user->isPluginEnabled('pu') && $user->isOptionEnabled('puncher_menu')}
+  <div class="sitemap-item"><a href="puncher.php">{$i18n.menu.puncher}</a></div>
+      {/if}
       {if $user->isPluginEnabled('wv') && $user->isOptionEnabled('week_menu')}
   <div class="sitemap-item"><a href="week.php">{$i18n.menu.week}</a></div>
       {/if}
