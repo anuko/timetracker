@@ -134,6 +134,8 @@ $i18n_key_words = array(
 'button.export' => 'Ekspordi grupp',
 'button.import' => 'Impordi grupp',
 'button.close' => 'Sulge',
+// TODO: translate the following.
+// 'button.start' => 'Start',
 'button.stop' => 'Stopp',
 // TODO: translate the following.
 // 'button.approve' => 'Approve',

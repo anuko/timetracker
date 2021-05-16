@@ -108,6 +108,7 @@ $i18n_key_words = array(
 'button.export' => 'Экспортировать группу',
 'button.import' => 'Импортировать группу',
 'button.close' => 'Закрыть',
+'button.start' => 'Начать',
 'button.stop' => 'Завершить',
 'button.approve' => 'Одобрить',
 'button.disapprove' => 'Не одобрить',

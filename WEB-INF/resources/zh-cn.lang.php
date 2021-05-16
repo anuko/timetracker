@@ -126,6 +126,7 @@ $i18n_key_words = array(
 'button.import' => '导入团队信息', // TODO: replace "team" with "group".
 'button.close' => '关闭',
 // TODO: translate the following.
+// 'button.start' => 'Start',
 // 'button.stop' => 'Stop',
 // 'button.approve' => 'Approve',
 // 'button.disapprove' => 'Disapprove',

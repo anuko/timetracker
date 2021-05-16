@@ -124,6 +124,8 @@ $i18n_key_words = array(
 'button.export' => 'Izvezi tim', // TODO: replace "team" with "group".
 'button.import' => 'Uvezi tim', // TODO: replace "team" with "group".
 'button.close' => 'Zatvori',
+// TODO: translate the following.
+// 'button.start' => 'Start',
 'button.stop' => 'Stani',
 // TODO: translate the following.
 // 'button.approve' => 'Approve',

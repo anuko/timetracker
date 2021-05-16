@@ -139,6 +139,8 @@ $i18n_key_words = array(
 'button.export' => 'ייצא צוות', // TODO: replace "team" with "group".
 'button.import' => 'ייבא צוות', // TODO: replace "team" with "group".
 'button.close' => 'סגור',
+// TODO: translate the following.
+// 'button.start' => 'Start',
 'button.stop' => 'עצור',
 // TODO: translate the following.
 // 'button.approve' => 'Approve',

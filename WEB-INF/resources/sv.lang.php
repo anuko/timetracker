@@ -123,6 +123,8 @@ $i18n_key_words = array(
 'button.export' => 'Exportera grupp',
 'button.import' => 'Importera grupp',
 'button.close' => 'Stäng',
+// TODO: translate the following.
+// 'button.start' => 'Start',
 'button.stop' => 'Avsluta',
 // TODO: translate the following.
 // 'button.approve' => 'Approve',

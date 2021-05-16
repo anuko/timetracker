@@ -131,6 +131,8 @@ $i18n_key_words = array(
 'button.export' => 'ایجاد پشتیبان از تیم', // TODO: replace "team" with "group".
 'button.import' => 'وارد کردن تیم', // TODO: replace "team" with "group".
 'button.close' => 'بستن',
+// TODO: translate the following.
+// 'button.start' => 'Start',
 'button.stop' => 'توقف',
 // TODO: translate the following.
 // 'button.approve' => 'Approve',

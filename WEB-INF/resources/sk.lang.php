@@ -130,6 +130,7 @@ $i18n_key_words = array(
 'button.import' => 'Importovať tím', // TODO: replace "team" with "group".
 'button.close' => 'Zatvoriť',
 // TODO: translate the following.
+// 'button.start' => 'Start',
 // 'button.stop' => 'Stop',
 // 'button.approve' => 'Approve',
 // 'button.disapprove' => 'Disapprove',

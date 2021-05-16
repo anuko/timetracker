@@ -137,6 +137,7 @@ $i18n_key_words = array(
 'button.import' => 'Ekibi içeri aktar', // TODO: replace "team" with "group".
 // TODO: translate the following.
 // 'button.close' => 'Close',
+// 'button.start' => 'Start',
 // 'button.stop' => 'Stop',
 // 'button.approve' => 'Approve',
 // 'button.disapprove' => 'Disapprove',

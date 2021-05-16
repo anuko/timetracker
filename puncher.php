@@ -185,9 +185,9 @@ $form->addInput(array('type'=>'hidden','name'=>'browser_time','value'=>''));  //
 // Start and stop buttons.
 $enable_start = $uncompleted ? false : true;
 if (!$uncompleted)
-  $form->addInput(array('type'=>'submit','name'=>'btn_start','onclick'=>'browser_time.value=get_time()','value'=>$i18n->get('label.start'),'enable'=>$enable_start));
+  $form->addInput(array('type'=>'submit','name'=>'btn_start','onclick'=>'browser_time.value=get_time()','value'=>$i18n->get('button.start'),'enable'=>$enable_start));
 else
-  $form->addInput(array('type'=>'submit','name'=>'btn_stop','onclick'=>'browser_time.value=get_time()','value'=>$i18n->get('label.finish'),'enable'=>!$enable_start));
+  $form->addInput(array('type'=>'submit','name'=>'btn_stop','onclick'=>'browser_time.value=get_time()','value'=>$i18n->get('button.stop'),'enable'=>!$enable_start));
 
 // Submit.
 if ($request->isPost()) {

@@ -119,6 +119,8 @@ $i18n_key_words = array(
 'button.export' => 'Gruppe exportieren',
 'button.import' => 'Gruppe importieren',
 'button.close' => 'Schließen',
+// TODO: translate the following.
+// 'button.start' => 'Start',
 'button.stop' => 'Stop',
 // TODO: translate the following.
 // (PR#81 suggested 'Freigeben / Genehmigen' for 'Approve' and 'Freigabe zurücknehmen' for 'Disapprove'.

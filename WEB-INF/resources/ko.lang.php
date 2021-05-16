@@ -133,6 +133,7 @@ $i18n_key_words = array(
 'button.import' => '팀 임포트', // TODO: replace "team" with "group".
 // TODO: translate the following.
 // 'button.close' => 'Close',
+// 'button.start' => 'Start',
 // 'button.stop' => 'Stop',
 // 'button.approve' => 'Approve',
 // 'button.disapprove' => 'Disapprove',

@@ -119,6 +119,8 @@ $i18n_key_words = array(
 'button.export' => 'Εξαγωγη ομάδας',
 'button.import' => 'Εισαγωγή ομάδας',
 'button.close' => 'Κλείσιμο',
+// TODO: translate the following.
+// 'button.start' => 'Start',
 'button.stop' => 'Τέλος',
 // TODO: translate the following.
 // 'button.approve' => 'Approve',
