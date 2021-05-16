@@ -4,6 +4,17 @@ License: See license.txt *}
 <script>
 // handlePluginCheckboxes - controls visibility of controls.
 function handlePluginCheckboxes() {
+  var puncherCheckbox = document.getElementById("puncher");
+  var configureLabel = document.getElementById("puncher_conf");
+  var docLabel = document.getElementById("puncher_doc");
+  if (puncherCheckbox.checked) {
+    configureLabel.style.display = "";
+    docLabel.style.display = "none";
+  } else {
+    configureLabel.style.display = "none";
+    docLabel.style.display = "";
+  }
+
   var clientsCheckbox = document.getElementById("clients");
   var invoicesCheckbox = document.getElementById("invoices");
   var requiredCheckbox = document.getElementById("client_required");
@@ -31,8 +42,7 @@ function handlePluginCheckboxes() {
     taxCheckbox.style.visibility = "hidden";
     taxLabel.style.visibility = "hidden";
   }
-  var configureLabel = document.getElementById("expenses_conf");
-  var docLabel = null;
+  configureLabel = document.getElementById("expenses_conf");
   if (expensesCheckbox.checked) {
     configureLabel.style.visibility = "visible";
   } else {
@@ -109,6 +119,12 @@ function handlePluginCheckboxes() {
   <tr>
     <td class="large-screen-label"><label for="charts">{$i18n.title.charts}:</label></td>
     <td class="td-with-input">{$forms.pluginsForm.charts.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+  <tr class = "small-screen-label"><td><label for="puncher">{$i18n.label.puncher}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="puncher">{$i18n.label.puncher}:</label></td>
+    <td class="td-with-input">{$forms.pluginsForm.puncher.control} <span id="puncher_doc"><a href="https://www.anuko.com/lp/tt_51.htm" target="_blank">{$i18n.label.what_is_it}</a></span><span id="puncher_conf">{if $user->isPluginEnabled('pu')}<a href="puncher_conf.php">{$i18n.label.configure}</a>{/if}</span></td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td><label for="clients">{$i18n.title.clients}:</label></td></tr>

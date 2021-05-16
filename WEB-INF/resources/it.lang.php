@@ -227,8 +227,6 @@ $i18n_key_words = array(
 'label.paid_status' => 'Stato pagamento',
 'label.paid' => 'Pagato',
 'label.mark_paid' => 'Segna come pagato',
-// TODO: translate the following.
-// 'label.week_menu' => 'Week menu',
 'label.week_note' => 'Nota settimanale',
 'label.week_list' => 'Lista settimanale',
 // TODO: translate the following.

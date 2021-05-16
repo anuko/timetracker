@@ -222,7 +222,6 @@ $i18n_key_words = array(
 'label.paid_status' => 'Bezahlstatus',
 'label.paid' => 'Bezahlt',
 'label.mark_paid' => 'Als bezahlt setzen',
-'label.week_menu' => 'Wochenansicht im Menü',
 'label.week_note' => 'Wochennotiz',
 'label.week_list' => 'Wochenliste',
 'label.work_units' => 'Arbeitseinheiten',

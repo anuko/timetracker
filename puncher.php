@@ -254,7 +254,7 @@ if ($request->isPost()) {
       }
 
       if ($id && $result) {
-        header('Location: timer.php');
+        header('Location: puncher.php');
         exit();
       }
       $err->add($i18n->get('error.db'));
@@ -278,7 +278,7 @@ if ($request->isPost()) {
         'note'=>$record['comment'],
         'billable'=>$record['billable']));
       if ($res) {
-        header('Location: timer.php');
+        header('Location: puncher.php');
         exit();
       } else
         $err->add($i18n->get('error.db'));
@@ -306,6 +306,6 @@ $smarty->assign('task_list', $task_list);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns()"');
 $smarty->assign('timestring', $selected_date->toString($user->date_format));
-$smarty->assign('title', $i18n->get('title.time'));
+$smarty->assign('title', $i18n->get('title.puncher'));
 $smarty->assign('content_page_name', 'puncher.tpl');
 $smarty->display('index.tpl');

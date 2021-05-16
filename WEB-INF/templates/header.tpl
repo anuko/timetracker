@@ -98,6 +98,9 @@
     <tr>
     {if $user->exists() && ($user->can('track_own_time') || $user->can('track_time'))}
       <td><a href="time.php">{$i18n.menu.time}</a></td>
+      {if $user->isPluginEnabled('pu') && $user->isOptionEnabled('puncher_menu')}
+      <td><a href="puncher.php">{$i18n.menu.puncher}</a></td>
+      {/if}
       {if $user->isPluginEnabled('wv') && $user->isOptionEnabled('week_menu')}
       <td><a href="week.php">{$i18n.menu.week}</a></td>
       {/if}

@@ -238,8 +238,6 @@ $i18n_key_words = array(
 'label.paid_status' => 'Makse olek',
 'label.paid' => 'Makstud',
 'label.mark_paid' => 'Märgi makstuks',
-// TODO: translate the following.
-// 'label.week_menu' => 'Week menu',
 'label.week_note' => 'Nädala märge',
 'label.week_list' => 'Nädala nimekiri',
 'label.work_units' => 'Töö ühikud',

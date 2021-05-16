@@ -15,6 +15,7 @@ if (!ttAccessAllowed('manage_features')) {
 if ($request->isPost()) {
   // Plugins that user wants to save for the current group.
   $cl_charts = (bool)$request->getParameter('charts');
+  $cl_puncher = (bool)$request->getParameter('puncher');
   $cl_clients = (bool)$request->getParameter('clients');
   $cl_client_required = (bool)$request->getParameter('client_required');
   $cl_invoices = (bool)$request->getParameter('invoices');
@@ -37,6 +38,7 @@ if ($request->isPost()) {
   // Which plugins do we have enabled in currently selected group?
   $plugins = explode(',', $user->getPlugins());
   $cl_charts = in_array('ch', $plugins);
+  $cl_puncher = in_array('pu', $plugins);
   $cl_clients = in_array('cl', $plugins);
   $cl_client_required = $user->isOptionEnabled('client_required');
   $cl_invoices = in_array('iv', $plugins);
@@ -70,6 +72,7 @@ $form->addInput(array('type'=>'checkbox','name'=>'tax_expenses','value'=>$cl_tax
 $form->addInput(array('type'=>'checkbox','name'=>'notifications','value'=>$cl_notifications,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'locking','value'=>$cl_locking,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'quotas','value'=>$cl_quotas,'onchange'=>'handlePluginCheckboxes()'));
+$form->addInput(array('type'=>'checkbox','name'=>'puncher','value'=>$cl_puncher,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'week_view','value'=>$cl_week_view,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'work_units','value'=>$cl_work_units,'onchange'=>'handlePluginCheckboxes()'));
 $form->addInput(array('type'=>'checkbox','name'=>'approval','value'=>$cl_approval));
@@ -89,6 +92,8 @@ if ($request->isPost()) {
   $plugins = '';
   if ($cl_charts)
     $plugins .= ',ch';
+  if ($cl_puncher)
+    $plugins .= ',pu';
   if ($cl_clients)
      $plugins .= ',cl';
   if ($cl_invoices)
