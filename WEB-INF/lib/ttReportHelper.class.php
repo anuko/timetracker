@@ -695,7 +695,7 @@ class ttReportHelper {
     while ($val = $res->fetchRow()) {
       $time = ttTimeHelper::minutesToDuration($val['time'] / 60);
       $rowLabel = ttReportHelper::makeGroupByLabel($val['group_field'], $options);
-      if ($options['show_cost']) {
+      if (isset($options['show_cost']) && $options['show_cost']) {
         $decimalMark = $user->getDecimalMark();
         if ('.' != $decimalMark) {
           $val['cost'] = str_replace('.', $decimalMark, $val['cost']);
@@ -1893,9 +1893,12 @@ class ttReportHelper {
     if (!ttReportHelper::grouping($options)) return null;
 
     $group_by_fields_parts = '';
-    $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldPart($options['group_by1'], $options);
-    $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldPart($options['group_by2'], $options);
-    $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldPart($options['group_by3'], $options);
+    if (isset($options['group_by1']))
+      $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldPart($options['group_by1'], $options);
+    if (isset($options['group_by2']))
+      $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldPart($options['group_by2'], $options);
+    if (isset($options['group_by3']))
+      $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldPart($options['group_by3'], $options);
     return $group_by_fields_parts;
   }
 
@@ -1905,9 +1908,12 @@ class ttReportHelper {
     if (!ttReportHelper::grouping($options)) return null;
 
     $group_by_fields_parts = '';
-    $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldExpensesPart($options['group_by1'], $options);
-    $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldExpensesPart($options['group_by2'], $options);
-    $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldExpensesPart($options['group_by3'], $options);
+    if (isset($options['group_by1']))
+      $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldExpensesPart($options['group_by1'], $options);
+    if (isset($options['group_by2']))
+      $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldExpensesPart($options['group_by2'], $options);
+    if (isset($options['group_by3']))
+      $group_by_fields_parts .= ttReportHelper::makeSingleDropdownGroupByFieldExpensesPart($options['group_by3'], $options);
     return $group_by_fields_parts;
   }
 
@@ -1916,9 +1922,12 @@ class ttReportHelper {
     if (!ttReportHelper::grouping($options)) return null;
 
     $concat_part = '';
-    $concat_part .= ttReportHelper::makeSingleDropdownConcatPart($options['group_by1'], $options);
-    $concat_part .= ttReportHelper::makeSingleDropdownConcatPart($options['group_by2'], $options);
-    $concat_part .= ttReportHelper::makeSingleDropdownConcatPart($options['group_by3'], $options);
+    if (isset($options['group_by1']))
+      $concat_part .= ttReportHelper::makeSingleDropdownConcatPart($options['group_by1'], $options);
+    if (isset($options['group_by2']))
+      $concat_part .= ttReportHelper::makeSingleDropdownConcatPart($options['group_by2'], $options);
+    if (isset($options['group_by3']))
+      $concat_part .= ttReportHelper::makeSingleDropdownConcatPart($options['group_by3'], $options);
     // Remove garbage from the beginning.
     if (ttStartsWith($concat_part, ", ' - ', "))
       $concat_part = substr($concat_part, 9);
@@ -2123,8 +2132,7 @@ class ttReportHelper {
     global $user;
 
     $work_unit_part = '';
-    $workUnits = $options['show_work_units'];
-    if ($workUnits) {
+    if (isset($options['show_work_units']) && $options['show_work_units']) {
       $unitTotalsOnly = $user->getConfigOption('unit_totals_only');
       $firstUnitThreshold = $user->getConfigInt('1st_unit_threshold', 0);
       $minutesInUnit = $user->getConfigInt('minutes_in_unit', 15);
