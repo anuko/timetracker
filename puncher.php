@@ -15,6 +15,10 @@ if (!ttAccessAllowed('track_own_time')) {
   header('Location: access_denied.php');
   exit();
 }
+if (!$user->isPluginEnabled('pu')) {
+  header('Location: feature_disabled.php');
+  exit();
+}
 // End of access checks.
 
 $showClient = $user->isPluginEnabled('cl');

@@ -526,6 +526,11 @@ div.sitemap-item {
   margin: .4rem;
 }
 
+div.punch-timer {
+  font-size: 2rem;
+  color: blue;
+}
+
 /* media rules for small screens */
 @media screen and (max-width: 600px) {
 

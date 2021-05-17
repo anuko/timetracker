@@ -3,7 +3,7 @@ License: See license.txt *}
 
 {include file="time_script.tpl"}
 
-<p><span id="hour">00</span><span id="separator">:</span><span id="min">00</span>
+<div class="punch-timer"><span id="hour">00</span><span id="separator">:</span><span id="min">00</span></div>
 
 <script>
 var timerID = null;
