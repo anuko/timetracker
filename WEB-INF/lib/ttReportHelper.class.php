@@ -669,7 +669,7 @@ class ttReportHelper {
     // By now we have sql for time items.
 
     // However, when we have expenses, we need to do a union with a separate query for expense items from tt_expense_items table.
-    if ($options['show_cost'] && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
+    if (isset($options['show_cost']) && $options['show_cost'] && $user->isPluginEnabled('ex')) { // if ex(penses) plugin is enabled
 
       $concat_part = ttReportHelper::makeConcatExpensesPart($options);
       $group_by_fields_part = ttReportHelper::makeGroupByFieldsExpensesPart($options);
@@ -742,13 +742,13 @@ class ttReportHelper {
     // Prepare parts.
     $time_part = $units_part = $cost_part = '';
     $time_part = "sum(time_to_sec(l.duration)) as time";
-    if ($options['show_work_units']) {
+    if (isset($options['show_work_units']) && $options['show_work_units']) {
       $unitTotalsOnly = $user->getConfigOption('unit_totals_only');
       $firstUnitThreshold = $user->getConfigInt('1st_unit_threshold', 0);
       $minutesInUnit = $user->getConfigInt('minutes_in_unit', 15);
       $units_part = $unitTotalsOnly ? ", null as units" : ", sum(if(l.billable = 0 or time_to_sec(l.duration)/60 < $firstUnitThreshold, 0, ceil(time_to_sec(l.duration)/60/$minutesInUnit))) as units";
     }
-    if ($options['show_cost']) {
+    if (isset($options['show_cost']) && $options['show_cost']) {
       if (MODE_TIME == $trackingMode)
         $cost_part = ", sum(cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2))) as cost, null as expenses";
       else
@@ -798,7 +798,7 @@ class ttReportHelper {
         }
       }
     }
-    if ($options['show_cost']) {
+    if (isset($options['show_cost']) && $options['show_cost']) {
       if (MODE_TIME == $trackingMode) {
         $left_joins .= " left join tt_users u on (l.user_id = u.id)";
       } else {
@@ -807,7 +807,7 @@ class ttReportHelper {
     }
     // Prepare sql query part for inner joins.
     $inner_joins = null;
-    if ($user->isPluginEnabled('ts') && $options['timesheet']) {
+    if ($user->isPluginEnabled('ts') && isset($options['timesheet']) && $options['timesheet']) {
       $timesheet_option = $options['timesheet'];
       if ($timesheet_option == TIMESHEET_PENDING)
         $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.submit_status = 1 and ts.approve_status is null)";
@@ -820,7 +820,7 @@ class ttReportHelper {
     $sql = "select $time_part $units_part $cost_part from tt_log l $left_joins $inner_joins $where";
 
     // If we have expenses, query becomes a bit more complex.
-    if ($options['show_cost'] && $user->isPluginEnabled('ex')) {
+    if (isset($options['show_cost']) && $options['show_cost'] && $user->isPluginEnabled('ex')) {
       $where = ttReportHelper::getExpenseWhere($options);
       $sql_for_expenses = "select null as time";
       if ($options['show_work_units']) $sql_for_expenses .= ", null as units";
@@ -865,7 +865,7 @@ class ttReportHelper {
     $val = $res->fetchRow();
     $total_time = ttTimeHelper::minutesToDuration($val['time'] / 60);
     $total_cost = $total_expenses = null;
-    if ($options['show_cost']) {
+    if (isset($options['show_cost']) && $options['show_cost']) {
       $total_cost = $val['cost'];
       if (!$total_cost) $total_cost = '0.00';
       if ('.' != $decimalMark)
@@ -1674,9 +1674,12 @@ class ttReportHelper {
     if (!ttReportHelper::grouping($options)) return null;
 
     $group_by_parts = '';
-    $group_by_parts .= ttReportHelper::makeSingleDropdownGroupByPart($options['group_by1'], $options);
-    $group_by_parts .= ttReportHelper::makeSingleDropdownGroupByPart($options['group_by2'], $options);
-    $group_by_parts .= ttReportHelper::makeSingleDropdownGroupByPart($options['group_by3'], $options);
+    if (isset($options['group_by1']))
+      $group_by_parts .= ttReportHelper::makeSingleDropdownGroupByPart($options['group_by1'], $options);
+    if (isset($options['group_by2']))
+      $group_by_parts .= ttReportHelper::makeSingleDropdownGroupByPart($options['group_by2'], $options);
+    if (isset($options['group_by3']))
+      $group_by_parts .= ttReportHelper::makeSingleDropdownGroupByPart($options['group_by3'], $options);
     // Remove garbage from the beginning.
     $group_by_parts = ltrim($group_by_parts, ', ');
     $group_by_part = "group by $group_by_parts";
@@ -2067,7 +2070,7 @@ class ttReportHelper {
     if (ttReportHelper::groupingBy('task', $options)) {
       $left_joins .= ' left join tt_tasks t on (l.task_id = t.id)';
     }
-    if ($options['show_cost'] && $trackingMode != MODE_TIME) {
+    if (isset($options['show_cost']) && $options['show_cost'] && $trackingMode != MODE_TIME) {
       $left_joins .= ' left join tt_user_project_binds upb on (l.user_id = upb.user_id and l.project_id = upb.project_id)';
     }
     // Left joins for time custom fields.
@@ -2113,7 +2116,7 @@ class ttReportHelper {
 
     // Prepare inner joins.
     $inner_joins = null;
-    if ($user->isPluginEnabled('ts') && $options['timesheet']) {
+    if ($user->isPluginEnabled('ts') && isset($options['timesheet']) && $options['timesheet']) {
       $timesheet_option = $options['timesheet'];
       if ($timesheet_option == TIMESHEET_PENDING)
         $inner_joins .= " inner join tt_timesheets ts on (l.timesheet_id = ts.id and ts.submit_status = 1 and ts.approve_status is null)";
@@ -2149,7 +2152,7 @@ class ttReportHelper {
     global $user;
 
     $cost_part = '';
-    if ($options['show_cost']) {
+    if (isset($options['show_cost']) && $options['show_cost']) {
       if (MODE_TIME == $user->getTrackingMode())
         $cost_part = ", sum(cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2))) as cost";
       else
@@ -2216,7 +2219,10 @@ class ttReportHelper {
   // ('date', 'user', 'project', etc.) by checking group_by1, group_by2,
   // and group_by3 values passed in $options.
   static function groupingBy($what, $options) {
-    $grouping = ($options['group_by1'] == $what) || ($options['group_by2'] == $what) || ($options['group_by3'] == $what);
+    $grouping_by1 = isset($options['group_by1']) && $options['group_by1'] == $what;
+    $grouping_by2 = isset($options['group_by2']) && $options['group_by2'] == $what;
+    $grouping_by3 = isset($options['group_by3']) && $options['group_by3'] == $what;
+    $grouping = $grouping_by1 || $grouping_by2 || $grouping_by3;
     return $grouping;
   }
 
