@@ -108,6 +108,96 @@ startTimer();
 </table>
 {if isset($forms.timeRecordForm.btn_start.control)}<div class="button-set">{$forms.timeRecordForm.btn_start.control}</div>{/if}
 {if isset($forms.timeRecordForm.btn_stop.control)}<div class="button-set">{$forms.timeRecordForm.btn_stop.control}</div>{/if}
+{if $time_records}
+<div class="record-list">
+<table class="x-scrollable-table">
+  <tr>
+  {if $show_client}
+    <th>{$i18n.label.client}</th>
+  {/if}
+  {if $show_record_custom_fields && isset($custom_fields) && $custom_fields->timeFields}
+    {foreach $custom_fields->timeFields as $timeField}
+    <th>{$timeField['label']|escape}</th>
+    {/foreach}
+  {/if}
+  {if $show_project}
+    <th>{$i18n.label.project}</th>
+  {/if}
+  {if $show_task}
+    <th>{$i18n.label.task}</th>
+  {/if}
+  {if $show_start}
+    <th>{$i18n.label.start}</th>
+    <th>{$i18n.label.finish}</th>
+  {/if}
+    <th>{$i18n.label.duration}</th>
+  {if $show_note_column}
+    <th>{$i18n.label.note}</th>
+  {/if}
+  {if $show_files}
+    <th></th>
+  {/if}
+    <th></th>
+    <th></th>
+  </tr>
+  {foreach $time_records as $record}
+  <tr{if !$record.billable} class="not-billable"{/if}>
+    {if $show_client}
+    <td class="text-cell">{$record.client|escape}</td>
+    {/if}
+    {* record custom fileds *}
+    {if $show_record_custom_fields && isset($custom_fields) && $custom_fields->timeFields}
+      {foreach $custom_fields->timeFields as $timeField}
+          {assign var="control_name" value='time_field_'|cat:$timeField['id']}
+    <td class="text-cell">{$record.$control_name|escape}</td>
+      {/foreach}
+    {/if}
+    {if $show_project}
+     <td class="text-cell">{$record.project|escape}</td>
+    {/if}
+    {if $show_task}
+    <td class="text-cell">{$record.task|escape}</td>
+    {/if}
+    {if $show_start}
+    <td class="time-cell">{if $record.start}{$record.start}{else}&nbsp;{/if}</td>
+    <td class="time-cell">{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
+    {/if}
+    <td class="time-cell">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
+    {if $show_note_column}
+    <td class="text-cell">{if $record.comment}{$record.comment|escape}{else}&nbsp;{/if}</td>
+    {/if}
+    {if $show_files}
+      {if $record.has_files}
+    <td><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-files.png"></a></td>
+      {else}
+    <td><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-file.png"></a></td>
+      {/if}
+    {/if}
+    <td>
+    {if $record.approved || $record.timesheet_id || $record.invoice_id}
+      &nbsp;
+    {else}
+      <a href="time_edit.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a>
+    {/if}
+    </td>
+    <td>
+    {if $record.approved || $record.timesheet_id || $record.invoice_id}
+      &nbsp;
+    {else}
+      <a href="time_delete.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.delete}" src="img/icon-delete.png"></a>
+    {/if}
+    </td>
+  </tr>
+    {if $show_note_row && $record.comment}
+  <tr>
+    <td class="note-header-cell">{$i18n.label.note}:</td>
+    <td colspan="{$colspan}" class="text-cell">{$record.comment|escape}</td>
+  </tr>
+    {/if}
+  {/foreach}
+</table>
+</div>
+{/if}
 {$forms.timeRecordForm.close}
 
 <div class="day-totals">
