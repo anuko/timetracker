@@ -877,13 +877,14 @@ class ttReportHelper {
     }
 
     $dateFormat = $user->getDateFormat();
-    if ($options['period'])
+    if (isset($options['period']) && $options['period'])
       $period = new Period($options['period'], new DateAndTime($dateFormat));
     else {
       $period = new Period();
-      $period->setPeriod(
-        new DateAndTime($dateFormat, $options['period_start']),
-        new DateAndTime($dateFormat, $options['period_end']));
+      if (isset($options['period_start']) && isset($options['period_end']))
+        $period->setPeriod(
+          new DateAndTime($dateFormat, $options['period_start']),
+          new DateAndTime($dateFormat, $options['period_end']));
     }
 
     $totals['start_date'] = $period->getStartDate();

@@ -64,9 +64,11 @@ class ttTimesheetHelper {
     $last_id = $mdb2->lastInsertID('tt_timesheets', 'id');
 
     // Associate tt_log items with timesheet.
+    $client_id = $project_id = null;
     if (isset($fields['client'])) $client_id = (int) $fields['client_id'];
     if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
     // sql parts.
+    $client_part = $project_part = '';
     if ($client_id) $client_part = " and client_id = $client_id";
     if ($project_id) $project_part = " and project_id = $project_id";
 
@@ -440,6 +442,7 @@ class ttTimesheetHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    $client_id = $project_id = null;
     if (isset($fields['client_id'])) $client_id = (int) $fields['client_id'];
     if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
 
@@ -450,6 +453,7 @@ class ttTimesheetHelper {
     $end = $end_date->toString(DB_DATEFORMAT);
 
     // sql parts.
+    $client_part = $project_part = '';
     if ($client_id) $client_part = " and client_id = $client_id";
     if ($project_id) $project_part = " and project_id = $project_id";
 
@@ -478,6 +482,7 @@ class ttTimesheetHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    $client_id = $project_id = null;
     if (isset($fields['client_id'])) $client_id = (int) $fields['client_id'];
     if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
 
@@ -490,6 +495,7 @@ class ttTimesheetHelper {
     $quoted_end = $mdb2->quote($end);
 
     // sql parts.
+    $client_part = $project_part = '';
     if ($client_id) $client_part = " and client_id = $client_id";
     if ($project_id) $project_part = " and project_id = $project_id";
 
@@ -501,7 +507,7 @@ class ttTimesheetHelper {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-      if ($val['id']) {
+      if (isset($val['id']) && $val['id']) {
         return true;
       }
     }

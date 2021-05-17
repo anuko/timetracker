@@ -17,6 +17,7 @@ if (!$user->isPluginEnabled('ts')) {
 }
 // End of access checks.
 
+$cl_name = $cl_client = $cl_project = $cl_start = $cl_finish = $cl_comment = null;
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('timesheet_name'));
   $cl_client = $request->getParameter('client');
