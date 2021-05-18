@@ -1,30 +1,6 @@
 <?php
-// +----------------------------------------------------------------------+
-// | Anuko Time Tracker
-// +----------------------------------------------------------------------+
-// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
-// +----------------------------------------------------------------------+
-// | LIBERAL FREEWARE LICENSE: This source code document may be used
-// | by anyone for any purpose, and freely redistributed alone or in
-// | combination with other software, provided that the license is obeyed.
-// |
-// | There are only two ways to violate the license:
-// |
-// | 1. To redistribute this code in source form, with the copyright
-// |    notice or license removed or altered. (Distributing in compiled
-// |    forms without embedded copyright notices is permitted).
-// |
-// | 2. To redistribute modified versions of this code in *any* form
-// |    that bears insufficient indications that the modifications are
-// |    not the work of the original author(s).
-// |
-// | This license applies to this document only, not any other software
-// | that it may be combined with.
-// |
-// +----------------------------------------------------------------------+
-// | Contributors:
-// | https://www.anuko.com/time_tracker/credits.htm
-// +----------------------------------------------------------------------+
+/* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt */
 
 // The ttRoleHelper is a class to help with custom group roles.
 class ttRoleHelper {
@@ -62,7 +38,7 @@ class ttRoleHelper {
 
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-      if ($val['id'])
+      if (isset($val['id']) && $val['id'])
         return $val;
     }
     return false;
@@ -115,7 +91,7 @@ class ttRoleHelper {
 
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-      if ($val['id'])
+      if (isset($val['id']) && $val['id'])
         return $val['id'];
     }
     return false;
@@ -130,6 +106,7 @@ class ttRoleHelper {
     $org_id = $user->org_id;
 
     $id = (int)$fields['id'];
+    $name_part = $rank_part = $descr_part = $status_part = $rights_part = '';
     if (isset($fields['name'])) $name_part = 'name = '.$mdb2->quote($fields['name']);
     if (isset($fields['rank'])) $rank_part = ', `rank` = '.(int)$fields['rank'];
     if (isset($fields['description'])) $descr_part = ', description = '.$mdb2->quote($fields['description']);

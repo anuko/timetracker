@@ -12,6 +12,7 @@ if (!ttAccessAllowed('manage_roles')) {
   exit();
 }
 
+$cl_name = $cl_description = $cl_rank = null;
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_description = trim($request->getParameter('description'));

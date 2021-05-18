@@ -46,6 +46,7 @@ $totals_only = ($bean->getAttribute('chtotalsonly') == '1');
 // Obtain items for report.
 $options = ttReportHelper::getReportOptions($bean);
 $grouping = ttReportHelper::grouping($options);
+$items = null;
 if (!$totals_only)
   $items = ttReportHelper::getItems($options); // Individual entries.
 if ($totals_only || $grouping)
@@ -128,7 +129,7 @@ if ($totals_only) {
   $html .= '<td>'.$i18n->get('label.date').'</td>';
   if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) { $colspan++; $html .= '<td>'.$i18n->get('label.user').'</td>'; }
   // User custom field labels.
-  if ($custom_fields && $custom_fields->userFields) {
+  if (isset($custom_fields) && $custom_fields->userFields) {
     foreach ($custom_fields->userFields as $userField) {
       $field_name = 'user_field_'.$userField['id'];
       $checkbox_control_name = 'show_'.$field_name;
@@ -139,7 +140,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chproject')) { $colspan++; $html .= '<td>'.$i18n->get('label.project').'</td>'; }
   if ($bean->getAttribute('chtask')) { $colspan++; $html .= '<td>'.$i18n->get('label.task').'</td>'; }
   // Time custom field labels.
-  if ($custom_fields && $custom_fields->timeFields) {
+  if (isset($custom_fields) && $custom_fields->timeFields) {
     foreach ($custom_fields->timeFields as $timeField) {
       $field_name = 'time_field_'.$timeField['id'];
       $checkbox_control_name = 'show_'.$field_name;
@@ -174,7 +175,7 @@ if ($totals_only) {
             $html .= '</td>';
         }
         // User custom fields.
-        if ($custom_fields && $custom_fields->userFields) {
+        if (isset($custom_fields) && $custom_fields->userFields) {
           foreach ($custom_fields->userFields as $userField) {
             $field_name = 'user_field_'.$userField['id'];
             $checkbox_control_name = 'show_'.$field_name;
@@ -197,7 +198,7 @@ if ($totals_only) {
             $html .= '</td>';
         }
         // Time custom fields.
-        if ($custom_fields && $custom_fields->timeFields) {
+        if (isset($custom_fields) && $custom_fields->timeFields) {
           foreach ($custom_fields->timeFields as $timeField) {
             $field_name = 'time_field_'.$timeField['id'];
             $checkbox_control_name = 'show_'.$field_name;
@@ -242,7 +243,7 @@ if ($totals_only) {
     $html .= '<td>'.$item['date'].'</td>';
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) $html .= '<td>'.htmlspecialchars($item['user']).'</td>';
     // User custom fields.
-    if ($custom_fields && $custom_fields->userFields) {
+    if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $checkbox_control_name = 'show_'.$field_name;
@@ -253,7 +254,7 @@ if ($totals_only) {
     if ($bean->getAttribute('chproject')) $html .= '<td>'.htmlspecialchars($item['project']).'</td>';
     if ($bean->getAttribute('chtask')) $html .= '<td>'.htmlspecialchars($item['task']).'</td>';
     // Time custom fields.
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         $checkbox_control_name = 'show_'.$field_name;
@@ -314,7 +315,7 @@ if ($totals_only) {
       $html .= '</td>';
     }
     // User custom fields.
-    if ($custom_fields && $custom_fields->userFields) {
+    if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $checkbox_control_name = 'show_'.$field_name;
@@ -337,7 +338,7 @@ if ($totals_only) {
       $html .= '</td>';
     }
     // Time custom fields.
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         $checkbox_control_name = 'show_'.$field_name;
@@ -371,7 +372,7 @@ if ($totals_only) {
   $html .= '<td>'.$i18n->get('label.total').'</td>';
   if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()) $html .= '<td></td>';
   // User custom fields.
-  if ($custom_fields && $custom_fields->userFields) {
+  if (isset($custom_fields) && $custom_fields->userFields) {
     foreach ($custom_fields->userFields as $userField) {
       $field_name = 'user_field_'.$userField['id'];
       $checkbox_control_name = 'show_'.$field_name;
@@ -382,7 +383,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chproject')) $html .= '<td></td>';
   if ($bean->getAttribute('chtask')) $html .= '<td></td>';
   // Time custom fields.
-  if ($custom_fields && $custom_fields->timeFields) {
+  if (isset($custom_fields) && $custom_fields->timeFields) {
     foreach ($custom_fields->timeFields as $timeField) {
       $field_name = 'time_field_'.$timeField['id'];
       $checkbox_control_name = 'show_'.$field_name;

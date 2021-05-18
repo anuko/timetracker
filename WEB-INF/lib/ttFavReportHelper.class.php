@@ -399,7 +399,7 @@ class ttFavReportHelper {
         'chtotalsonly' => null,
         'new_fav_report' => null));
       // Time custom fields.
-      if ($custom_fields && $custom_fields->timeFields) {
+      if (isset($custom_fields) && $custom_fields->timeFields) {
         foreach ($custom_fields->timeFields as $timeField) {
           $field_name = 'time_field_'.$timeField['id'];
           $checkbox_field_name = 'show_'.$field_name;
@@ -408,7 +408,7 @@ class ttFavReportHelper {
         }
       }
       // User custom fields.
-      if ($custom_fields && $custom_fields->userFields) {
+      if (isset($custom_fields) && $custom_fields->userFields) {
         foreach ($custom_fields->userFields as $userField) {
           $field_name = 'user_field_'.$userField['id'];
           $checkbox_field_name = 'show_'.$field_name;
@@ -416,7 +416,7 @@ class ttFavReportHelper {
           $custom_field_attrs[$checkbox_field_name] = null;
         }
       }
-      if (is_array($custom_field_attrs))
+      if (isset($custom_field_attrs))
         $attrs = array_merge($attrs, $custom_field_attrs);
       $bean->setAttributes($attrs);
     }
@@ -543,7 +543,7 @@ class ttFavReportHelper {
     }
 
     // Add time custom field settings.
-    if ($custom_fields && $custom_fields->timeFields) {
+    if (isset($custom_fields) && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
         $field_name = 'time_field_'.$timeField['id'];
         $field_value = str_replace(',','&#44',$bean->getAttribute($field_name)); 
@@ -555,7 +555,7 @@ class ttFavReportHelper {
     }
 
     // Add user custom field settings.
-    if ($custom_fields && $custom_fields->userFields) {
+    if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
         $field_value = str_replace(',','&#44',$bean->getAttribute($field_name));
@@ -567,7 +567,7 @@ class ttFavReportHelper {
     }
 
     $reportSpec = null;
-    if (is_array($reportSpecArray))
+    if (isset($reportSpecArray))
       $reportSpec = implode(',', $reportSpecArray);
     return $reportSpec;
   }
