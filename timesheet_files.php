@@ -24,6 +24,7 @@ if (!$timesheet) {
 }
 // End of access checks.
 
+$cl_description = null;
 if ($request->isPost()) {
   $cl_description = trim($request->getParameter('description'));
 }

@@ -5,18 +5,18 @@ License: See license.txt *}
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
 
+{$forms.timesheetsForm.open}
 <table class="centered-table">
 {if $user_dropdown}
-  {$forms.timesheetsForm.open}
   <tr class = "small-screen-label"><td><label for="user">{$i18n.label.user}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="user">{$i18n.label.user}:</label></td>
     <td class="td-with-input">{$forms.timesheetsForm.user.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
-  {$forms.timesheetsForm.close}
 {/if}
 </table>
+{$forms.timesheetsForm.close}
 <div class="form-control-separator"></div>
 {if $inactive_timesheets}
 <div class="section-header">{$i18n.form.timesheets.active_timesheets}</div>
@@ -27,8 +27,8 @@ License: See license.txt *}
   {if $show_client}
     <th>{$i18n.label.client}</th>
   {/if}
-    <th>{$i18n.label.submitted}</td>
-    <th>{$i18n.label.approved}</td>
+    <th>{$i18n.label.submitted}</th>
+    <th>{$i18n.label.approved}</th>
   {if $show_files}
     <th></th>
   {/if}
@@ -68,8 +68,8 @@ License: See license.txt *}
   {if $show_client}
     <th>{$i18n.label.client}</th>
   {/if}
-    <th>{$i18n.label.submitted}</td>
-    <th>{$i18n.label.approved}</td>
+    <th>{$i18n.label.submitted}</th>
+    <th>{$i18n.label.approved}</th>
   {if $show_files}
     <th></th>
   {/if}

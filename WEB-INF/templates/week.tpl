@@ -195,4 +195,5 @@ function fillDropdowns() {
   </tr>
   {/if}
 </table>
+</div>
 {/if}

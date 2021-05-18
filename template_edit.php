@@ -25,9 +25,11 @@ if (!$template) {
 
 $config = $user->getConfigHelper();
 $bindTemplatesWithProjects = $config->getDefinedValue('bind_templates_with_projects');
+$projects = $cl_projects = array();
 if ($bindTemplatesWithProjects)
   $projects = ttGroupHelper::getActiveProjects();
 
+$cl_name = $cl_description = $cl_content = $cl_status = null;
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
   $cl_description = trim($request->getParameter('description'));
