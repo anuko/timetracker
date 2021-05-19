@@ -304,7 +304,7 @@ class ttFavReportHelper {
       if ($val['report_spec']) {
         $report_spec = $val['report_spec'];
         // Time custom field settings.
-        if ($custom_fields && $custom_fields->timeFields) {
+        if (isset($custom_fields) && $custom_fields->timeFields) {
           foreach ($custom_fields->timeFields as $timeField) {
             $field_name = 'time_field_'.$timeField['id'];
             $checkbox_field_name = 'show_'.$field_name;
@@ -315,7 +315,7 @@ class ttFavReportHelper {
           }
         }
         // User custom field settings.
-        if ($custom_fields && $custom_fields->userFields) {
+        if (isset($custom_fields) && $custom_fields->userFields) {
           foreach ($custom_fields->userFields as $userField) {
             $field_name = 'user_field_'.$userField['id'];
             $checkbox_field_name = 'show_'.$field_name;
