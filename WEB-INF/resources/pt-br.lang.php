@@ -5,7 +5,7 @@ License: See license.txt */
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
-$i18n_language = 'Portuguese (Português brasileiro)';
+$i18n_language = 'Portuguese (Português Brasileiro)';
 $i18n_months = array('Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
 $i18n_weekdays = array('Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado');
 $i18n_weekdays_short = array('Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab');
@@ -18,27 +18,22 @@ $i18n_key_words = array(
 'menu.logout' => 'Logout',
 'menu.forum' => 'Fórum',
 'menu.help' => 'Ajuda',
-// TODO: translate the following.
-// 'menu.register' => 'Register',
+'menu.register' => 'Registro',
 'menu.profile' => 'Perfil',
-// TODO: translate the following.
-// 'menu.group' => 'Group',
+'menu.group' => 'Grupo',
 'menu.plugins' => 'Plugins',
 'menu.time' => 'Tempo',
-// TODO: translate the following.
-// 'menu.puncher' => 'Punch',
-// 'menu.week' => 'Week',
-'menu.expenses' => 'Gastos',
+'menu.puncher' => 'Punch',
+'menu.week' => 'Semana',
+'menu.expenses' => 'Despesas',
 'menu.reports' => 'Relatórios',
-// TODO: translate the following.
-// 'menu.timesheets' => 'Timesheets',
+'menu.timesheets' => 'Timesheets',
 'menu.charts' => 'Gráficos',
 'menu.projects' => 'Projetos',
 'menu.tasks' => 'Tarefas',
 'menu.users' => 'Usuários',
-// TODO: translate the following.
-// 'menu.groups' => 'Groups',
-// 'menu.subgroups' => 'Subgroups',
+'menu.groups' => 'Grupos',
+'menu.subgroups' => 'Subgrupos',
 'menu.export' => 'Exportar',
 'menu.clients' => 'Clientes',
 'menu.options' => 'Opções',
@@ -53,59 +48,56 @@ $i18n_key_words = array(
 'error.access_denied' => 'Acesso negado.',
 'error.sys' => 'Erro no sistema.',
 'error.db' => 'Erro no banco de dados.',
-// TODO: translate the following.
-// 'error.registered_recently' => 'Registered recently.',
-// 'error.feature_disabled' => 'Feature is disabled.',
+'error.registered_recently' => 'Registrado recentemente.',
+'error.feature_disabled' => 'Recurso desabilitado.',
 'error.field' => 'Dados incorretos "{0}".',
 'error.empty' => 'Campo "{0}" está vazio.',
 'error.not_equal' => 'Campo "{0}" é diferente do campo "{1}".',
-// TODO: translate the following.
-// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+'error.interval' => 'Campo "{0}" precisa ser maior que "{1}".',
 'error.project' => 'Selecione projeto.',
 'error.task' => 'Selecione tarefa.',
 'error.client' => 'Selecione cliente.',
 'error.report' => 'Selecione relatório.',
-// TODO: translate the following.
-// 'error.record' => 'Select record.',
+'error.record' => 'Selecione o registro.',
 'error.auth' => 'Usuário ou senha incorretos.',
 'error.user_exists' => 'Já existe usuário com este login.',
-// TODO: translate the following.
-// 'error.object_exists' => 'Object with this name already exists.',
+'error.object_exists' => 'Já existe um objeto com este nome.',
 'error.invoice_exists' => 'Já existe fatura com este número.',
-// TODO: translate the following.
-// 'error.role_exists' => 'Role with this rank already exists.',
+'error.role_exists' => 'Já existe uma função com este rank.',
 'error.no_invoiceable_items' => 'Não há items faturáveis.',
-// TODO: translate the following.
-// 'error.no_records' => 'There are no records.',
+'error.no_records' => 'Não há registros.',
 'error.no_login' => 'Não há usuário com este login.',
-'error.no_groups' => 'Sua base de dados está vazia. Entre como admin e crie uma equipe nova.', // TODO: replace "team" with "group".
+'error.no_groups' => 'Sua base de dados está vazia. Entre como admin e crie um grupo novo.', 
 'error.upload' => 'Erro no envio do arquivo.',
 'error.range_locked' => 'Período está bloqueado.',
 'error.mail_send' => 'Erro enviando o e-mail.',
 // TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
-// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
+'error.mail_send' => 'Erro ao enviar e-mail. Use MAIL_SMTP_DEBUG para diagnósticos.',
 'error.no_email' => 'Não há e-mail associado a este login.',
 'error.uncompleted_exists' => 'Entrada incompleta existente. Feche ou remova-a.',
 'error.goto_uncompleted' => 'Ir até a entrada incompleta.',
 'error.overlap' => 'O intervalo se sobrepõe com entradas já existentes.',
 'error.future_date' => 'Data é no futuro.',
-// TODO: translate the following.
-// 'error.xml' => 'Error in XML file at line %d: %s.',
-// 'error.cannot_import' => 'Cannot import: %s.',
-// 'error.format' => 'Invalid file format.',
-// 'error.user_count' => 'Limit on user count.',
-// 'error.expired' => 'Expiration date reached.',
-// 'error.file_storage' => 'File storage server error.', // See comment in English file.
-// 'error.remote_work' => 'Remote work server error.',   // See comment in English file.
+'error.xml' => 'Erro no arquivo XML, linha line %d: %s.',
+'error.cannot_import' => 'Não foi possível importar: %s.',
+'error.format' => 'Formato de arquivo inválido.',
+'error.user_count' => 'Limite na contagem de usuários.',
+'error.expired' => 'Data de expiração atingida.',
+// Entendimento de error.file_storage: ocorreu um erro (não especificado) ao tentar se comunicar com o servidor de armazenamento de arquivos remoto (aquele que lida com anexos). 
+// É uma mensagem genérica que nos informa que "algo deu errado" ao tentar fazer alguma operação com anexos.
+// Por exemplo, o servidor de armazenamento de arquivos pode estar offline ou a opção de configuração do Time Tracker está errada, etc.
+'error.file_storage' => 'Erro relacionado ao servidor de armazenamento de arquivos.',
+// Entendimento de error.remote_work: ocorreu um erro (não especificado) ao tentar se comunicar com o servidor "Trabalho Remoto", aquele que suporta o plugin "Trabalho", consulte https://www.anuko.com/time_tracker/what_is/work_plugin.htm
+// É uma mensagem genérica nos informando que "algo deu errado" ao tentar fazer alguma operação com o plugin Work.
+// Por exemplo, o servidor de Trabalho Remoto pode estar offline, entre outras coisas.
+'error.remote_work' => 'Erro relacionado ao servidor responsável pelo plugin work.',
 
 // Warning messages.
-// TODO: translate the following.
-// 'warn.sure' => 'Are you sure?',
-// 'warn.confirm_save' => 'Date has changed. Confirm saving, not copying this item.',
+'warn.sure' => 'Tem certeza?',
+'warn.confirm_save' => 'A data mudou. Confirme salvando, não copiando este item.',
 
 // Success messages.
-// TODO: translate the following.
-// 'msg.success' => 'Operation completed successfully.',
+'msg.success' => 'Operação concluída com sucesso.',
 
 // Labels for buttons.
 'button.login' => 'Login',
@@ -124,16 +116,13 @@ $i18n_key_words = array(
 'button.export' => 'Exportar equipe', // TODO: replace "team" with "group".
 'button.import' => 'Importar equipe', // TODO: replace "team" with "group".
 'button.close' => 'Fechar',
-// TODO: translate the following.
-// 'button.start' => 'Start',
+'button.start' => 'Iniciar',
 'button.stop' => 'Parar',
-// TODO: translate the following.
-// 'button.approve' => 'Approve',
-// 'button.disapprove' => 'Disapprove',
+'button.approve' => 'Aprovar',
+'button.disapprove' => 'Desaprovar',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-// TODO: translate the following.
-// 'label.menu' => 'Menu',
+'label.menu' => 'Menu',
 'label.group_name' => 'Nome da equipe',  // TODO: replace "team" with "group".
 'label.address' => 'Endereço',
 'label.currency' => 'Moeda',
@@ -146,18 +135,16 @@ $i18n_key_words = array(
 'label.confirm_password' => 'Confirme a senha',
 'label.email' => 'E-mail',
 'label.cc' => 'Cc',
-// TODO: translate the following.
-// 'label.bcc' => 'Bcc',
+'label.bcc' => 'Bcc',
 'label.subject' => 'Assunto',
 'label.date' => 'Data',
 'label.start_date' => 'Data inicial',
 'label.end_date' => 'Data final',
 'label.user' => 'Usuário',
 'label.users' => 'Usuários',
-// TODO: translate the following.
-// 'label.group' => 'Group',
-// 'label.subgroups' => 'Subgroups',
-// 'label.roles' => 'Roles',
+'label.group' => 'Grupo',
+'label.subgroups' => 'Subgrupos',
+'label.roles' => 'Funções',
 'label.client' => 'Cliente',
 'label.clients' => 'Clientes',
 'label.option' => 'Opção',
@@ -171,16 +158,13 @@ $i18n_key_words = array(
 'label.finish' => 'Fim',
 'label.duration' => 'Duração',
 'label.note' => 'Anotação',
-// TODO: translate the following.
-// 'label.notes' => 'Notes',
+'label.notes' => 'Anotações',
 'label.item' => 'Item',
 'label.cost' => 'Custo',
-// TODO: translate the following.
-// 'label.ip' => 'IP',
+'label.ip' => 'IP',
 'label.day_total' => 'Total diário',
 'label.week_total' => 'Total semanal',
-// TODO: translate the following.
-// 'label.month_total' => 'Month total',
+'label.month_total' => 'Total mensal',
 'label.today' => 'Hoje',
 'label.view' => 'Ver',
 'label.edit' => 'Editar',
@@ -188,10 +172,9 @@ $i18n_key_words = array(
 'label.configure' => 'Configurar',
 'label.select_all' => 'Selecionar todos',
 'label.select_none' => 'Desmarcar todos',
-// TODO: translate the following.
-// 'label.day_view' => 'Day view',
-// 'label.week_view' => 'Week view',
-// 'label.puncher' => 'Puncher',
+'label.day_view' => 'Visão diária',
+'label.week_view' => 'Visão semanal',
+'label.puncher' => 'Puncher', // Is anderstood as a specific feature without direct translation.I suggest stays as is.
 'label.id' => 'ID',
 'label.language' => 'Idioma',
 'label.decimal_mark' => 'Ponto decimal',
@@ -214,17 +197,14 @@ $i18n_key_words = array(
 'label.role_comanager' => '(coordenador)',
 'label.role_admin' => '(administrador)',
 'label.page' => 'Página',
-// TODO: translate the following.
-// 'label.condition' => 'Condition',
-// 'label.yes' => 'yes',
-// 'label.no' => 'no',
-// 'label.sort' => 'Sort',
-// Labels for plugins (extensions to Time Tracker that provide additional features).
+'label.condition' => 'Condição',
+'label.yes' => 'sim',
+'label.no' => 'não',
+'label.sort' => 'Ordenar',
+// Labels para plug-ins (extensões para Time Tracker que fornecem recursos adicionais).
 'label.custom_fields' => 'Campos personalizados',
-// Translate the following.
-// 'label.monthly_quotas' => 'Monthly quotas',
-// TODO: translate the following.
-// 'label.entity' => 'Entity',
+'label.monthly_quotas' => 'Cotas mensais',
+'label.entity' => 'Entidade',
 'label.type' => 'Tipo',
 'label.type_dropdown' => 'lista suspensa',
 'label.type_text' => 'texto',
@@ -232,26 +212,25 @@ $i18n_key_words = array(
 'label.fav_report' => 'Relatório favorito',
 'label.schedule' => 'Agenda',
 'label.what_is_it' => 'O que é?',
-// 'label.expense' => 'Expense',
-// 'label.quantity' => 'Quantity',
-// 'label.paid_status' => 'Paid status',
-// 'label.paid' => 'Paid',
-// 'label.mark_paid' => 'Mark paid',
-// 'label.week_note' => 'Week note',
-// 'label.week_list' => 'Week list',
-// 'label.work_units' => 'Work units',
-// 'label.work_units_short' => 'Units',
+'label.expense' => 'Despesa',
+'label.quantity' => 'Quantidade',
+'label.paid_status' => 'Status pago',
+'label.paid' => 'Pago',
+'label.mark_paid' => 'Marcar como pago',
+'label.week_note' => 'Anotação da semana',
+'label.week_list' => 'Lista da semana',
+'label.work_units' => 'Unidades de trabalho',
+'label.work_units_short' => 'Unidades',
 'label.totals_only' => 'Somente totais',
-// TODO: translate the following.
-// 'label.quota' => 'Quota',
-// 'label.timesheet' => 'Timesheet',
-// 'label.submitted' => 'Submitted',
-// 'label.approved' => 'Approved',
-// 'label.approval' => 'Report approval',
-// 'label.mark_approved' => 'Mark approved',
-// 'label.template' => 'Template',
-// 'label.bind_templates_with_projects' => 'Bind templates with projects',
-// 'label.prepopulate_note' => 'Prepopulate Note field',
+'label.quota' => 'Cota',
+'label.timesheet' => 'Timesheet', // Timesheet is term commonly understood/used in Brazil too! I think it can stay as is!
+'label.submitted' => 'Enviado',
+'label.approved' => 'Aprovado',
+'label.approval' => 'Aprovação de relatório',
+'label.mark_approved' => 'Marcar como apovado',
+'label.template' => 'Modelo',
+'label.bind_templates_with_projects' => 'Vincular modelos com projetos',
+'label.prepopulate_note' => 'Pré-preencher campo de anotação',
 // 'label.attachments' => 'Attachments',
 // 'label.files' => 'Files',
 // 'label.file' => 'File',
