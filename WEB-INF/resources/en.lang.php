@@ -472,8 +472,8 @@ $i18n_key_words = array(
 'form.templates.active_templates' => 'Active Templates',
 'form.templates.inactive_templates' => 'Inactive Templates',
 
-// Invoice form. See example at https://timetracker.anuko.com/invoice.php
-// (you can get to this form after generating a report).
+// Invoice form. See example at https://timetracker.anuko.com/invoice_view.php
+// (you can get to this form after generating an invoice).
 'form.invoice.number' => 'Invoice number',
 'form.invoice.person' => 'Person',
 

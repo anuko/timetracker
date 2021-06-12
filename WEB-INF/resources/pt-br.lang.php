@@ -404,18 +404,16 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(hh:mm ou 0.0h)',
 'form.time.billable' => 'Faturável',
 'form.time.uncompleted' => 'Incompleta',
-// TODO: translate the following.
-// 'form.time.remaining_quota' => 'Remaining quota',
-// 'form.time.over_quota' => 'Over quota',
-// 'form.time.remaining_balance' => 'Remaining balance',
-// 'form.time.over_balance' => 'Over balance',
+'form.time.remaining_quota' => 'Cota restante', // TODO: check if this translation is correct. I changed it from "Cota excedente", which appears to be wrong.
+'form.time.over_quota' => 'Acima da cota',
+'form.time.remaining_balance' => 'Saldo restante',
+'form.time.over_balance' => 'Saldo excedente',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Eesta entrada foi salva somente com hora de início. Não é um erro.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
-// TODO: translate the following.
-// 'form.week.new_entry' => 'New entry',
+'form.week.new_entry' => 'Nova entrada',
 
 // Reports form. See example at https://timetracker.anuko.com/reports.php
 'form.reports.save_as_favorite' => 'Guardar como favorito',
@@ -424,16 +422,19 @@ $i18n_key_words = array(
 'form.reports.include_not_billable' => 'não faturável',
 'form.reports.include_invoiced' => 'faturado',
 'form.reports.include_not_invoiced' => 'não faturado',
-// TODO: translate the following.
-// 'form.reports.include_assigned' => 'assigned',
-// 'form.reports.include_not_assigned' => 'not assigned',
-// 'form.reports.include_pending' => 'pending',
+'form.reports.include_assigned' => 'atribuído',
+'form.reports.include_not_assigned' => 'não atribuído',
+'form.reports.include_pending' => 'pendente',
 'form.reports.select_period' => 'Selecione o período de tempo',
 'form.reports.set_period' => 'ou selecionar datas',
 'form.reports.show_fields' => 'Exibir campos',
-// TODO: translate the following.
+// TODO: Try to improve the translation of form.reports.time_fields. This is a label for a section of custom fields that
+// are associated with a time record. I suggest trying custom fields plugin, creating a few "time" custom fields, and seeing how
+// reports.php page looks like. For example, one may create a "Ticket #" or a "Property" custom fields to be associated with time entries,
+// the form.reports.time_fields groups these fields together on reports.php.
 // 'form.reports.time_fields' => 'Time fields',
-// 'form.reports.user_fields' => 'User fields',
+// 'form.reports.time_fields' => 'Campos de apontamento',
+'form.reports.user_fields' => 'Campos de usuário',
 'form.reports.group_by' => 'Agrupar por',
 'form.reports.group_by_no' => '--- sem agrupar ---',
 'form.reports.group_by_date' => 'data',
@@ -445,22 +446,19 @@ $i18n_key_words = array(
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Exportar',
-// TODO: translate the following.
-// 'form.report.assign_to_invoice' => 'Assign to invoice',
-// 'form.report.assign_to_timesheet' => 'Assign to timesheet',
+'form.report.assign_to_invoice' => 'Atribuir a fatura',
+'form.report.assign_to_timesheet' => 'Atribuir a planilha de horas',
 
 // Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
-// TODO: translate the following.
-// 'form.timesheets.active_timesheets' => 'Active Timesheets',
-// 'form.timesheets.inactive_timesheets' => 'Inactive Timesheets',
+'form.timesheets.active_timesheets' => 'Planilhas de horas ativas',
+'form.timesheets.inactive_timesheets' => 'Planilhas de horas inativas',
 
 // Templates form. See example at https://timetracker.anuko.com/templates.php
-// TODO: translate the following.
-// 'form.templates.active_templates' => 'Active Templates',
-// 'form.templates.inactive_templates' => 'Inactive Templates',
+'form.templates.active_templates' => 'Modelos ativos',
+'form.templates.inactive_templates' => 'Modelos inativos',
 
-// Invoice form. See example at https://timetracker.anuko.com/invoice.php
-// (you can get to this form after generating a report).
+// Invoice form. See example at https://timetracker.anuko.com/invoice_view.php
+// (you can get to this form after generating an invoice).
 'form.invoice.number' => 'Número da fatura',
 'form.invoice.person' => 'Pessoa',
 

@@ -455,8 +455,8 @@ $i18n_key_words = array(
 'form.templates.active_templates' => 'Actieve sjablonen',
 'form.templates.inactive_templates' => 'Inactieve sjablonen',
 
-// Invoice form. See example at https://timetracker.anuko.com/invoice.php
-// (you can get to this form after generating a report).
+// Invoice form. See example at https://timetracker.anuko.com/invoice_view.php
+// (you can get to this form after generating an invoice).
 'form.invoice.number' => 'Factuur nummer',
 'form.invoice.person' => 'Medewerker',
 
