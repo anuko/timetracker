@@ -32,6 +32,7 @@ $i18n_key_words = array(
 'menu.projects' => 'Projetos',
 'menu.tasks' => 'Tarefas',
 'menu.users' => 'Usuários',
+'menu.groups' => 'Grupos',
 'menu.export' => 'Exportar',
 'menu.clients' => 'Clientes',
 'menu.options' => 'Opções',
@@ -46,59 +47,51 @@ $i18n_key_words = array(
 'error.access_denied' => 'Acesso negado.',
 'error.sys' => 'Erro no sistema.',
 'error.db' => 'Erro no banco de dados.',
-// TODO: translate the following.
-// 'error.registered_recently' => 'Registered recently.',
-// 'error.feature_disabled' => 'Feature is disabled.',
+'error.registered_recently' => 'Registrado recentemente.',
+'error.feature_disabled' => 'Recurso desabilitado.',
 'error.field' => 'Dados incorretos "{0}".',
 'error.empty' => 'Campo "{0}" está vazio.',
 'error.not_equal' => 'Campo "{0}" é diferente do campo "{1}".',
-// TODO: translate the following.
-// 'error.interval' => 'Field "{0}" must be greater than "{1}".',
+'error.interval' => 'Campo "{0}" precisa ser maior que "{1}".',
 'error.project' => 'Selecione projeto.',
 'error.task' => 'Selecione tarefa.',
 'error.client' => 'Selecione cliente.',
 'error.report' => 'Selecione relatório.',
-// TODO: translate the following.
-// 'error.record' => 'Select record.',
+'error.record' => 'Selecione o registro.',
 'error.auth' => 'Usuário ou senha incorretos.',
 'error.user_exists' => 'Já existe usuário com este login.',
-// TODO: translate the following.
-// 'error.object_exists' => 'Object with this name already exists.',
+'error.object_exists' => 'Já existe um objeto com este nome.',
 'error.invoice_exists' => 'Já existe fatura com este número.',
-// TODO: translate the following.
-// 'error.role_exists' => 'Role with this rank already exists.',
+// TODO: improve translation of the word "role" in error.role_exists. função here, papel elsewhere?
+'error.role_exists' => 'Já existe uma função com este rank.',
 'error.no_invoiceable_items' => 'Não há items faturáveis.',
-// TODO: translate the following.
-// 'error.no_records' => 'There are no records.',
+'error.no_records' => 'Não há registros.',
 'error.no_login' => 'Não há usuário com este login.',
-'error.no_groups' => 'Sua base de dados está vazia. Entre como admin e crie uma equipe nova.', // TODO: replace "team" with "group".
+'error.no_groups' => 'Sua base de dados está vazia. Entre como admin e crie um grupo novo.',
 'error.upload' => 'Erro no envio do arquivo.',
 'error.range_locked' => 'Período está bloqueado.',
 'error.mail_send' => 'Erro enviando o e-mail.',
-// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
-// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
+// TODO: is "Use" in error.mail_send translated correctly?
+'error.mail_send' => 'Erro ao enviar e-mail. Use MAIL_SMTP_DEBUG para diagnósticos.',
 'error.no_email' => 'Não há e-mail associado a este login.',
 'error.uncompleted_exists' => 'Entrada incompleta existente. Feche ou remova-a.',
 'error.goto_uncompleted' => 'Ir até a entrada incompleta.',
 'error.overlap' => 'O intervalo se sobrepõe com entradas já existentes.',
 'error.future_date' => 'Data é no futuro.',
-// TODO: translate the following.
-// 'error.xml' => 'Error in XML file at line %d: %s.',
-// 'error.cannot_import' => 'Cannot import: %s.',
-// 'error.format' => 'Invalid file format.',
-// 'error.user_count' => 'Limit on user count.',
-// 'error.expired' => 'Expiration date reached.',
-// 'error.file_storage' => 'File storage server error.', // See comment in English file.
-// 'error.remote_work' => 'Remote work server error.',   // See comment in English file.
+'error.xml' => 'Erro no arquivo XML, linha line %d: %s.',
+'error.cannot_import' => 'Não foi possível importar: %s.',
+'error.format' => 'Formato de arquivo inválido.',
+'error.user_count' => 'Limite na contagem de usuários.',
+'error.expired' => 'Data de expiração atingida.',
+'error.file_storage' => 'Erro relacionado ao servidor de armazenamento de arquivos.',
+'error.remote_work' => 'Erro relacionado ao servidor responsável pelo plugin work.',
 
 // Warning messages.
-// TODO: translate the following.
-// 'warn.sure' => 'Are you sure?',
-// 'warn.confirm_save' => 'Date has changed. Confirm saving, not copying this item.',
+'warn.sure' => 'Tem certeza?',
+'warn.confirm_save' => 'A data mudou. Confirme salvando, não copiando este item.',
 
 // Success messages.
-// TODO: translate the following.
-// 'msg.success' => 'Operation completed successfully.',
+'msg.success' => 'Operação concluída com sucesso.',
 
 // Labels for buttons.
 'button.login' => 'Login',
