@@ -217,7 +217,7 @@ $i18n_key_words = array(
 'label.work_units_short' => 'Unidades',
 'label.totals_only' => 'Somente totais',
 'label.quota' => 'Cota',
-'label.timesheet' => 'Planilha de horas', 
+'label.timesheet' => 'Planilha de horas',
 'label.submitted' => 'Enviado',
 'label.approved' => 'Aprovado',
 'label.approval' => 'Aprovação de relatório',
@@ -248,37 +248,32 @@ $i18n_key_words = array(
 'title.error' => 'Erro',
 'title.success' => 'Sucesso',
 'title.login' => 'Login',
-'title.groups' => 'Equipes', // TODO: change "teams" to "groups".
-// TODO: translate the following.
-// 'title.add_group' => 'Adding Group',
-'title.edit_group' => 'Editando equipe', // TODO: change "team" to "group".
-'title.delete_group' => 'Apagando equipe', // TODO: change "team" to "group".
+'title.groups' => 'Grupos',
+'title.add_group' => 'Adicionando grupo',
+'title.edit_group' => 'Editando grupo',
+'title.delete_group' => 'Apagando grupo',
 'title.reset_password' => 'Resetando a senha',
 'title.change_password' => 'Alterando a senha',
 'title.time' => 'Tempo',
 'title.edit_time_record' => 'Editando entrada de hora',
 'title.delete_time_record' => 'Apagando entrada de hora',
-// TODO: Translate the following.
-// 'title.time_files' => 'Time Record Files',
-// 'title.puncher' => 'Puncher',
+'title.time_files' => 'Arquivos de registro de tempo',
+'title.puncher' => 'Puncher',
 'title.expenses' => 'Gastos',
 'title.edit_expense' => 'Editando item de gasto',
 'title.delete_expense' => 'Apagando item de gasto',
-// TODO: translate the following.
-// 'title.expense_files' => 'Expense Item Files',
+'title.expense_files' => 'Arquivos de itens de despesas',
 'title.reports' => 'Relatórios',
 'title.report' => 'Report',
 'title.send_report' => 'Enviando relatório',
-// TODO: Translate the following.
-// 'title.timesheets' => 'Timesheets',
-// 'title.timesheet' => 'Timesheet',
-// 'title.timesheet_files' => 'Timesheet Files',
+'title.timesheets' => 'Planilhas de horas',
+'title.timesheet' => 'Planilha de horas',
+'title.timesheet_files' => 'Arquivos de planilha de horas',
 'title.invoice' => 'Fatura',
 'title.send_invoice' => 'Enviando fatura',
 'title.charts' => 'Gráficos',
 'title.projects' => 'Projetos',
-// TODO: translate the following.
-// 'title.project_files' => 'Project Files',
+'title.project_files' => 'Arquivos do projeto',
 'title.add_project' => 'Adicionando projeto',
 'title.edit_project' => 'Editando projeto',
 'title.delete_project' => 'Apagando projeto',
@@ -290,8 +285,8 @@ $i18n_key_words = array(
 'title.add_user' => 'Adicionando usuário',
 'title.edit_user' => 'Editando usuário',
 'title.delete_user' => 'Apagando usuário',
+'title.roles' => 'Papéis',
 // TODO: translate the following.
-// 'title.roles' => 'Roles',
 // 'title.add_role' => 'Adding Role',
 // 'title.edit_role' => 'Editing Role',
 // 'title.delete_role' => 'Deleting Role',
@@ -307,16 +302,14 @@ $i18n_key_words = array(
 'title.add_notification' => 'Adicionando notificação',
 'title.edit_notification' => 'Editando notificação',
 'title.delete_notification' => 'Apagando notificação',
-// TODO: translate the following.
-// 'title.add_timesheet' => 'Adding Timesheet',
-// 'title.edit_timesheet' => 'Editing Timesheet',
-// 'title.delete_timesheet' => 'Deleting Timesheet',
-// 'title.monthly_quotas' => 'Monthly Quotas',
+'title.add_timesheet' => 'Adicionando planilha de horas',
+'title.edit_timesheet' => 'Editando planilha de horas',
+'title.delete_timesheet' => 'Apagando planilha de horas',
+'title.monthly_quotas' => 'Cotas mensais',
 'title.export' => 'Exportando dados de equipe', // TODO: replace "team" with "group".
 'title.import' => 'Importando dados de equipe', // TODO: replace "team" with "group".
 'title.options' => 'Opções',
-// TODO: translate the following.
-// 'title.display_options' => 'Display Options',
+'title.display_options' => 'Opções de exibição',
 'title.profile' => 'Perfil',
 'title.plugins' => 'Plugins',
 'title.cf_custom_fields' => 'Campos personalizados',
@@ -328,41 +321,39 @@ $i18n_key_words = array(
 'title.cf_edit_dropdown_option' => 'Editando opção',
 'title.cf_delete_dropdown_option' => 'Apagando opção',
 'title.locking' => 'Bloquear',
-// TODO: translate the following.
-// 'title.week_view' => 'Week View',
-// 'title.swap_roles' => 'Swapping Roles',
-// 'title.work_units' => 'Work Units',
-// 'title.templates' => 'Templates',
-// 'title.add_template' => 'Adding Template',
-// 'title.edit_template' => 'Editing Template',
-// 'title.delete_template' => 'Deleting Template',
-// 'title.edit_file' => 'Editing File',
-// 'title.delete_file' => 'Deleting File',
-// 'title.download_file' => 'Downloading File',
-// 'title.work' => 'Work',
-// 'title.add_work' => 'Adding Work',
-// 'title.edit_work' => 'Editing Work',
-// 'title.delete_work' => 'Deleting Work',
-// 'title.active_work' => 'Active Work', // Active work items this group outsources to other groups.
-// 'title.available_work' => 'Available Work', // Available work items from other organizations.
-// 'title.inactive_work' => 'Inactive Work', // Inactive work items this group was outsourcing to other groups.
-// 'title.pending_work' => 'Pending Work', // Work items pending moderator approval.
-// 'title.offer' => 'Offer',
-// 'title.add_offer' => 'Adding Offer',
-// 'title.edit_offer' => 'Editing Offer',
-// 'title.delete_offer' => 'Deleting Offer',
-// 'title.active_offers' => 'Active Offers', // Active offers this group makes available to other groups.
-// 'title.available_offers' => 'Available Offers', // Available offers from other organizations.
-// 'title.inactive_offers' => 'Inactive Offers', // Inactive offers for group.
-// 'title.pending_offers' => 'Pending Offers', // Offers pending moderator approval.
+'title.week_view' => 'Visão semanal',
+'title.swap_roles' => 'Alteração de papéis',
+'title.work_units' => 'Unidades de trabalho',
+'title.templates' => 'Modelos',
+'title.add_template' => 'Adicionando modelo',
+'title.edit_template' => 'Editando modelo',
+'title.delete_template' => 'Apagando modelo',
+'title.edit_file' => 'Editando arquivo',
+'title.delete_file' => 'Apagando arquivo',
+'title.download_file' => 'Baixando arquivo',
+'title.work' => 'Trabalho',
+'title.add_work' => 'Adicionando trabalho',
+'title.edit_work' => 'Editando trabalho',
+'title.delete_work' => 'Apagando trabalho',
+'title.active_work' => 'Trabalho ativo',
+'title.available_work' => 'Trabalho disponível',
+'title.inactive_work' => 'Trabalho inativo',
+'title.pending_work' => 'Trabalho pendente',
+'title.offer' => 'Oferta',
+'title.add_offer' => 'Adicionando oferta',
+'title.edit_offer' => 'Editando oferta',
+'title.delete_offer' => 'Apagando oferta',
+'title.active_offers' => 'Ofertas ativas',
+'title.available_offers' => 'Ofertas disponíveis',
+'title.inactive_offers' => 'Ofertas inativas',
+'title.pending_offers' => 'Ofertas pendentes',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
 'dropdown.all' => '--- todos ---',
 'dropdown.no' => '--- não ---',
-// TODO: translate the following.
-// 'dropdown.current_day' => 'today',
-// 'dropdown.previous_day' => 'yesterday',
+'dropdown.current_day' => 'hoje',
+'dropdown.previous_day' => 'ontem',
 'dropdown.selected_day' => 'dia',
 'dropdown.current_week' => 'esta semana',
 'dropdown.previous_week' => 'última semana',
@@ -371,8 +362,7 @@ $i18n_key_words = array(
 'dropdown.previous_month' => 'último mês',
 'dropdown.selected_month' => 'mês',
 'dropdown.current_year' => 'este ano',
-// TODO: translate the following.
-// 'dropdown.previous_year' => 'previous year',
+'dropdown.previous_year' => 'último ano', // TODO: check if this is correct. I used último for consistency with other dropdown options.
 'dropdown.selected_year' => 'ano',
 'dropdown.all_time' => 'todas as datas',
 'dropdown.projects' => 'projetos',
@@ -380,20 +370,18 @@ $i18n_key_words = array(
 'dropdown.clients' => 'clientes',
 'dropdown.select' => '--- selecione ---',
 'dropdown.select_invoice' => '--- selecione fatura ---',
-// TODO: translate the following.
-// 'dropdown.select_timesheet' => '--- select timesheet ---',
+'dropdown.select_timesheet' => '--- selecione planilha de horas ---',
 'dropdown.status_active' => 'ativo',
 'dropdown.status_inactive' => 'inativo',
 'dropdown.delete' => 'apagar',
 'dropdown.do_not_delete' => 'não apagar',
-// TODO: translate the following.
-// 'dropdown.pending_approval' => 'pending approval',
-// 'dropdown.approved' => 'approved',
-// 'dropdown.not_approved' => 'not approved',
-// 'dropdown.paid' => 'paid',
-// 'dropdown.not_paid' => 'not paid',
-// 'dropdown.ascending' => 'ascending',
-// 'dropdown.descending' => 'descending',
+'dropdown.pending_approval' => 'aprovação pendente',
+'dropdown.approved' => 'aprovado',
+'dropdown.not_approved' => 'não aprovado',
+'dropdown.paid' => 'pago',
+'dropdown.not_paid' => 'não pago',
+'dropdown.ascending' => 'ascendente',
+'dropdown.descending' => 'descendente',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases
@@ -407,10 +395,7 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Pedido para resetar a senha enviado por e-mail.',
 'form.reset_password.email_subject' => 'Pedido de alteração de senha no Anuko Time Tracker',
-// TODO: English string has changed. "from IP" added. Re-translate the beginning.
-// 'form.reset_password.email_body' => "Dear User,\n\nSomeone from IP %s requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is an open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
-// "IP %s" probably sounds awkward.
-'form.reset_password.email_body' => "Prezado usuário,\n\nAlguém, IP %s, solicitou o reset da sua senha do Anuko Time Tracker. Entre nete link para resetar a sua senha.\n\n%s\n\nAnuko Time Tracker é um sistema de código abertois, de rastreamento do tempo. Visite https://www.anuko.com para mais informações.\n\n",
+'form.reset_password.email_body' => "Caro usuário,\n\nAlguém do IP %s solicitou a redefinição da senha do Anuko Time Tracker. Visite este link se quiser redefinir sua senha.\n\n%s\n\nAnuko Time Tracker é um sistema de rastreamento de apontamentos de código aberto. Visite https://www.anuko.com para obter mais informações.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Entre com a nova senha e clique em Salvar.',
