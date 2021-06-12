@@ -106,9 +106,9 @@ $i18n_key_words = array(
 'button.reset_password' => 'Resetar senha',
 'button.send' => 'Enviar',
 'button.send_by_email' => 'Enviar por e-mail',
-'button.create_group' => 'Criar equipe', // TODO: replace "team" with "group".
-'button.export' => 'Exportar equipe', // TODO: replace "team" with "group".
-'button.import' => 'Importar equipe', // TODO: replace "team" with "group".
+'button.create_group' => 'Criar equipe', // TODO: replace "equipe" with "group".
+'button.export' => 'Exportar equipe', // TODO: replace "equipe" with "group".
+'button.import' => 'Importar equipe', // TODO: replace "equipe" with "group".
 'button.close' => 'Fechar',
 'button.start' => 'Iniciar',
 'button.stop' => 'Parar',
@@ -117,7 +117,7 @@ $i18n_key_words = array(
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.menu' => 'Menu',
-'label.group_name' => 'Nome da equipe',  // TODO: replace "team" with "group".
+'label.group_name' => 'Nome da equipe',  // TODO: replace "equipe" with "group".
 'label.address' => 'Endereço',
 'label.currency' => 'Moeda',
 'label.manager_name' => 'Nome do gerente',
@@ -306,8 +306,8 @@ $i18n_key_words = array(
 'title.edit_timesheet' => 'Editando planilha de horas',
 'title.delete_timesheet' => 'Apagando planilha de horas',
 'title.monthly_quotas' => 'Cotas mensais',
-'title.export' => 'Exportando dados de equipe', // TODO: replace "team" with "group".
-'title.import' => 'Importando dados de equipe', // TODO: replace "team" with "group".
+'title.export' => 'Exportando dados de equipe', // TODO: replace "equipe" with "group".
+'title.import' => 'Importando dados de equipe', // TODO: replace "equipe" with "group".
 'title.options' => 'Opções',
 'title.display_options' => 'Opções de exibição',
 'title.profile' => 'Perfil',
@@ -512,7 +512,7 @@ $i18n_key_words = array(
 'form.client.client_entries' => 'Entradas de cliente',
 
 // Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
-// TODO: replace "team" with "group" in the string below.
+// TODO: replace "equipe" with "group" in the string below.
 'form.export.hint' => 'Você pode exportar todos os dados da equipe para um arquivo xml. Isto pode ser útil se você estiver migrando os dados para um servidor próprio.',
 'form.export.compression' => 'Compressão',
 'form.export.compression_none' => 'nenhuma',
@@ -524,7 +524,7 @@ $i18n_key_words = array(
 'form.import.success' => 'Importação realizada com sucesso.',
 
 // Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
-// TODO: replace "team" with "group" in the string below (3 places).
+// TODO: replace "equipe" with "group" in the string below (3 places).
 'form.groups.hint' => 'Crie uma nova equipe fazendo uma nova conta de gerente.<br>Você também pode importar os dados de um arquivo xml de outro servidor Anuko Time Tracker (não havendo colisão de usuários).',
 
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
