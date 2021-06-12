@@ -274,8 +274,6 @@ $i18n_key_words = array(
 'title.success' => 'Erfol',
 'title.login' => 'Anmelden',
 'title.groups' => 'Gruppen',
-// TODO: translate the following.
-// 'title.subgroups' => 'Subgroups',
 'title.add_group' => 'Gruppe anlegen',
 'title.edit_group' => 'Gruppe bearbeiten',
 'title.delete_group' => 'Gruppe löschen',

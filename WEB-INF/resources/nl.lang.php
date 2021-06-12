@@ -248,7 +248,6 @@ $i18n_key_words = array(
 'title.success' => 'Succes',
 'title.login' => 'Aanmelden',
 'title.groups' => 'Groepen',
-'title.subgroups' => 'Subgroepen',
 'title.add_group' => 'Groep toevoegen',
 'title.edit_group' => 'Groep bewerken',
 'title.delete_group' => 'Groep aan het verwijderen',

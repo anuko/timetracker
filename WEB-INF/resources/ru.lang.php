@@ -246,7 +246,6 @@ $i18n_key_words = array(
 'title.success' => 'Успех',
 'title.login' => 'Вход в систему',
 'title.groups' => 'Группы',
-'title.subgroups' => 'Подгруппы',
 'title.add_group' => 'Добавление группы',
 'title.edit_group' => 'Редактирование группы',
 'title.delete_group' => 'Удаление группы',

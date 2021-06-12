@@ -290,7 +290,6 @@ $i18n_key_words = array(
 'title.success' => 'Õnnestumine',
 'title.login' => 'Sisene',
 'title.groups' => 'Grupid',
-'title.subgroups' => 'Alamgrupid',
 'title.add_group' => 'Lisa grupp',
 'title.edit_group' => 'Muuda gruppi',
 'title.delete_group' => 'Kustuta grupp',

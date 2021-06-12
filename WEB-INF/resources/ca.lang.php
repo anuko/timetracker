@@ -291,7 +291,6 @@ $i18n_key_words = array(
 'title.login' => 'Sessió iniciada',
 'title.groups' => 'Grups',
 // TODO: translate the following.
-// 'title.subgroups' => 'Subgroups',
 // 'title.add_group' => 'Adding Group',
 // 'title.edit_group' => 'Editing Group',
 'title.delete_group' => 'Eliminar grup',

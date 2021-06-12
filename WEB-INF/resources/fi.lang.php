@@ -284,7 +284,6 @@ $i18n_key_words = array(
 'title.login' => 'Kirjautuminen',
 'title.groups' => 'Tiimit', // TODO: change "teams" to "groups".
 // TODO: translate the following.
-// 'title.subgroups' => 'Subgroups',
 // 'title.add_group' => 'Adding Group',
 'title.edit_group' => 'Tiimin muokkaus', // TODO: change "team" to "group".
 'title.delete_group' => 'Tiimin poisto', // TODO: change "team" to "group".

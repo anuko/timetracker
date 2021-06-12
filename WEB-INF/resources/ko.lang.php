@@ -297,7 +297,6 @@ $i18n_key_words = array(
 'title.login' => '로그인',
 'title.groups' => '팀', // TODO: change "teams" to "groups".
 // TODO: translate the following.
-// 'title.subgroups' => 'Subgroups',
 // 'title.add_group' => 'Adding Group',
 // 'title.edit_group' => 'Editing Group',
 'title.delete_group' => '팀 삭제',  // TODO: change "team" to "group".

@@ -306,7 +306,6 @@ $i18n_key_words = array(
 'title.login' => 'Giriş',
 'title.groups' => 'Ekipler', // TODO: change "teams" to "groups".
 // TODO: translate the following.
-// 'title.subgroups' => 'Subgroups',
 // 'title.add_group' => 'Adding Group',
 // 'title.edit_group' => 'Editing Group',
 'title.delete_group' => 'Ekibi sil', // TODO: change "team" to "group".

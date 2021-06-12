@@ -273,7 +273,6 @@ $i18n_key_words = array(
 'title.login' => 'Σύνδεση',
 'title.groups' => 'Ομάδες',
 // TODO: translate the following.
-// 'title.subgroups' => 'Subgroups',
 // 'title.add_group' => 'Adding Group',
 'title.edit_group' => 'Επεξεργασία ομάδας',
 'title.delete_group' => 'Διαγραφή ομάδας',

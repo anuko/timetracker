@@ -292,7 +292,6 @@ $i18n_key_words = array(
 'title.login' => '登錄',
 'title.groups' => '團隊', // TODO: change "teams" to "groups".
 // TODO: translate the following.
-// 'title.subgroups' => 'Subgroups',
 // 'title.add_group' => 'Adding Group',
 // 'title.edit_group' => 'Editing Group',
 'title.delete_group' => '刪除團隊', // TODO: change "team" to "group".

@@ -291,7 +291,6 @@ $i18n_key_words = array(
 'title.login' => 'ورود',
 'title.groups' => 'تیم ها', // TODO: change "teams" to "groups".
 // TODO: translate the following.
-// 'title.subgroups' => 'Subgroups',
 // 'title.add_group' => 'Adding Group',
 // 'title.edit_group' => 'Editing Group',
 'title.delete_group' => 'حذف تیم', // TODO: change "team" to "group".

@@ -217,7 +217,7 @@ $i18n_key_words = array(
 'label.work_units_short' => 'Unidades',
 'label.totals_only' => 'Somente totais',
 'label.quota' => 'Cota',
-'label.timesheet' => 'Planilha de horas',
+'label.timesheet' => 'Planilha de horas', 
 'label.submitted' => 'Enviado',
 'label.approved' => 'Aprovado',
 'label.approval' => 'Aprovação de relatório',
@@ -230,33 +230,26 @@ $i18n_key_words = array(
 'label.file' => 'Arquivo',
 'label.active_users' => 'Usuários ativos',
 'label.inactive_users' => 'Usuários inativos',
-// TODO: translate the following.
-// 'label.details' => 'Details',
-// 'label.budget' => 'Budget',
-// 'label.work' => 'Work',   // Table column header for work items, see https://www.anuko.com/time_tracker/what_is/work_plugin.htm
-// 'label.offer' => 'Offer', // Table column header for offers, see https://www.anuko.com/time_tracker/what_is/work_plugin.htm
-// 'label.contractor' => 'Contractor', // Table column header for offers (contractor is someone who offers to do work).
-                                       // Technically, it is either an org name or a combination of org and group names
-                                       // because both work items and offers are owned by Time Tracker groups of users.
-// 'label.how_to_pay' => 'How to pay', // Label for the "How to pay" field on offers, which allows contractors to specify
-                                       // how to pay them, for example: paypal email, check by mail to a specific address, etc.
-// 'label.moderator_comment' => 'Moderator comment', // Label for "Moderator comment" field that explains something.
+'label.details' => 'Detalhes',
+'label.budget' => 'Orçamento',
+'label.work' => 'Trabalho',
+'label.offer' => 'Oferta',
+'label.contractor' => 'Contratante',
+'label.how_to_pay' => 'Como pagar',
+'label.moderator_comment' => 'Comentário do moderador',
 
 // Entity names. We use lower case (in English) because they are used in dropdowns, too.
 // They are used to associate a custom field with an entity type.
-// TODO: translate the following.
-// 'entity.time' => 'time',
-// 'entity.user' => 'user',
-// 'entity.project' => 'project',
+'entity.time' => 'tempo',
+'entity.user' => 'usuário',
+'entity.project' => 'projeto',
 
 // Form titles.
 'title.error' => 'Erro',
-// TODO: Translate the following.
-// 'title.success' => 'Success',
+'title.success' => 'Sucesso',
 'title.login' => 'Login',
 'title.groups' => 'Equipes', // TODO: change "teams" to "groups".
 // TODO: translate the following.
-// 'title.subgroups' => 'Subgroups',
 // 'title.add_group' => 'Adding Group',
 'title.edit_group' => 'Editando equipe', // TODO: change "team" to "group".
 'title.delete_group' => 'Apagando equipe', // TODO: change "team" to "group".
