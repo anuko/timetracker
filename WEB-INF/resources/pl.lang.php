@@ -257,8 +257,6 @@ $i18n_key_words = array(
 // 'label.attachments' => 'Attachments',
 // 'label.files' => 'Files',
 // 'label.file' => 'File',
-// 'label.image' => 'Image',
-// 'label.download' => 'Download',
 'label.active_users' => 'Aktywni użytkownicy',
 'label.inactive_users' => 'Nieaktywni użytkownicy',
 // TODO: translate the following.

@@ -244,8 +244,6 @@ $i18n_key_words = array(
 // 'label.attachments' => 'Attachments',
 // 'label.files' => 'Files',
 // 'label.file' => 'File',
-// 'label.image' => 'Image',
-// 'label.download' => 'Download',
 'label.active_users' => 'Aktive Nutzer',
 'label.inactive_users' => 'Inaktive Nutzer',
 // TODO: translate the following or confirm that "Details" is also correct for German (exactly as the English string).
