@@ -21,7 +21,6 @@ $i18n_key_words = array(
 'menu.register' => 'Register',
 'menu.profile' => 'Profile',
 'menu.group' => 'Group',
-'menu.subgroups' => 'Subgroups',
 'menu.plugins' => 'Plugins',
 'menu.time' => 'Time',
 'menu.puncher' => 'Punch',

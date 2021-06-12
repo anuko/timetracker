@@ -33,7 +33,6 @@ $i18n_key_words = array(
 'menu.tasks' => 'Задачи',
 'menu.users' => 'Пользователи',
 'menu.groups' => 'Группы',
-'menu.subgroups' => 'Подгруппы',
 'menu.export' => 'Экспорт',
 'menu.clients' => 'Клиенты',
 'menu.options' => 'Опции',

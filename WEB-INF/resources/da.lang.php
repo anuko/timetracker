@@ -38,7 +38,6 @@ $i18n_key_words = array(
 'menu.users' => 'Brugere',
 // TODO: translate the following.
 // 'menu.groups' => 'Groups',
-// 'menu.subgroups' => 'Subgroups',
 'menu.export' => 'Eksport',
 'menu.clients' => 'Kunder',
 'menu.options' => 'Indstillinger',

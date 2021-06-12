@@ -38,7 +38,6 @@ $i18n_key_words = array(
 'menu.users' => '用户',
 // TODO: translate the following.
 // 'menu.groups' => 'Groups',
-// 'menu.subgroups' => 'Subgroups',
 'menu.export' => '导出数据',
 'menu.clients' => '客户',
 'menu.options' => '选项',

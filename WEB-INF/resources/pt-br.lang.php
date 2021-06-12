@@ -5,7 +5,7 @@ License: See license.txt */
 // Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
 
-$i18n_language = 'Portuguese (Português brasileiro)';
+$i18n_language = 'Portuguese (Português Brasileiro)';
 $i18n_months = array('Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
 $i18n_weekdays = array('Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado');
 $i18n_weekdays_short = array('Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab');
@@ -18,27 +18,20 @@ $i18n_key_words = array(
 'menu.logout' => 'Logout',
 'menu.forum' => 'Fórum',
 'menu.help' => 'Ajuda',
-// TODO: translate the following.
-// 'menu.register' => 'Register',
+'menu.register' => 'Registro',
 'menu.profile' => 'Perfil',
-// TODO: translate the following.
-// 'menu.group' => 'Group',
+'menu.group' => 'Grupo',
 'menu.plugins' => 'Plugins',
 'menu.time' => 'Tempo',
-// TODO: translate the following.
-// 'menu.puncher' => 'Punch',
-// 'menu.week' => 'Week',
-'menu.expenses' => 'Gastos',
+'menu.puncher' => 'Punch',
+'menu.week' => 'Semana',
+'menu.expenses' => 'Despesas',
 'menu.reports' => 'Relatórios',
-// TODO: translate the following.
-// 'menu.timesheets' => 'Timesheets',
+'menu.timesheets' => 'Planilha de horas',
 'menu.charts' => 'Gráficos',
 'menu.projects' => 'Projetos',
 'menu.tasks' => 'Tarefas',
 'menu.users' => 'Usuários',
-// TODO: translate the following.
-// 'menu.groups' => 'Groups',
-// 'menu.subgroups' => 'Subgroups',
 'menu.export' => 'Exportar',
 'menu.clients' => 'Clientes',
 'menu.options' => 'Opções',

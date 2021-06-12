@@ -38,7 +38,6 @@ $i18n_key_words = array(
 'menu.tasks' => 'Tööülesanded',
 'menu.users' => 'Kasutajad',
 'menu.groups' => 'Grupid',
-'menu.subgroups' => 'Alamgrupid',
 'menu.export' => 'Eksport', // TODO: is this a correct term as an opposite of "Import"?
 'menu.clients' => 'Kliendid',
 'menu.options' => 'Suvandid',
