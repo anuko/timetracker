@@ -465,8 +465,7 @@ $i18n_key_words = array(
 // Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
 'form.invoice.invoice_to_delete' => 'Fatura a ser apagada',
 'form.invoice.invoice_entries' => 'Entradas de fatura',
-// TODO: translate the following.
-// 'form.invoice.confirm_deleting_entries' => 'Please confirm deleting invoice entries from Time Tracker.',
+'form.invoice.confirm_deleting_entries' => 'Confirme a exclusão das entradas de fatura do Time Tracker.',
 
 // Charts form. See example at https://timetracker.anuko.com/charts.php
 'form.charts.interval' => 'Intervalo',
@@ -481,8 +480,12 @@ $i18n_key_words = array(
 'form.tasks.inactive_tasks' => 'Tarefas inativas',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
-// TODO: translate the following.
+// TODO: check the translation of form.users.uncompleted_entry. Is "apontamento" a correct term for a time entry?
+// The meaning of incomplete time entry in Time Tracker is that the entry only has the "start" time defined, but no finish time yet,
+// and may be ongoing. For example, user started working on something and is curently in progress doing it.
+// Check the Puncher plugin, which operates with such entries.
 // 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
+'form.users.uncompleted_entry' => 'O usuário tem um apontamento incompleto',
 'form.users.role' => 'Papel',
 'form.users.manager' => 'Gerente',
 'form.users.comanager' => 'Coordenador',
@@ -490,17 +493,15 @@ $i18n_key_words = array(
 'form.users.default_rate' => 'Honorário padrão por hora',
 
 // Editing User form. See example at https://timetracker.anuko.com/user_edit.php
-// TODO: translate the following.
-// 'form.user_edit.swap_roles' => 'Swap roles',
+'form.user_edit.swap_roles' => 'Alternar papéis',
 
 // Roles form. See example at https://timetracker.anuko.com/roles.php
-// TODO: translate the following.
-// 'form.roles.active_roles' => 'Active Roles',
-// 'form.roles.inactive_roles' => 'Inactive Roles',
-// 'form.roles.rank' => 'Rank',
-// 'form.roles.rights' => 'Rights',
-// 'form.roles.assigned' => 'Assigned',
-// 'form.roles.not_assigned' => 'Not assigned',
+'form.roles.active_roles' => 'Papéis ativos',
+'form.roles.inactive_roles' => 'Papéis inativos',
+'form.roles.rank' => 'Rank',
+'form.roles.rights' => 'Direitos',
+'form.roles.assigned' => 'Atribuído',
+'form.roles.not_assigned' => 'Não atribuído',
 
 // Clients form. See example at https://timetracker.anuko.com/clients.php
 'form.clients.active_clients' => 'Clientes ativos',
@@ -529,9 +530,8 @@ $i18n_key_words = array(
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 'form.group_edit.12_hours' => '12 horas',
 'form.group_edit.24_hours' => '24 horas',
-// TODO: translate the following.
-// 'form.group_edit.display_options' => 'Display options',
-// 'form.group_edit.holidays' => 'Holidays',
+'form.group_edit.display_options' => 'Opções de exibição',
+'form.group_edit.holidays' => 'Feriados',
 'form.group_edit.tracking_mode' => 'Modo de acompanhamento',
 'form.group_edit.mode_time' => 'tempo',
 'form.group_edit.mode_projects' => 'projetos',
@@ -540,18 +540,16 @@ $i18n_key_words = array(
 'form.group_edit.type_all' => 'todos',
 'form.group_edit.type_start_finish' => 'início e fim',
 'form.group_edit.type_duration' => 'duração',
-// TODO: translate the following.
-// 'form.group_edit.punch_mode' => 'Punch mode',
-// 'form.group_edit.allow_overlap' => 'Allow overlap',
-// 'form.group_edit.future_entries' => 'Future entries',
-// 'form.group_edit.uncompleted_indicators' => 'Uncompleted indicators',
-// 'form.group_edit.confirm_save' => 'Confirm saving',
-// 'form.group_edit.allow_ip' => 'Allow IP',
-// 'form.group_edit.advanced_settings' => 'Advanced settings',
+'form.group_edit.punch_mode' => 'Modo punch',
+'form.group_edit.allow_overlap' => 'Permitir sobreposição',
+'form.group_edit.future_entries' => 'Entradas futuros',
+'form.group_edit.uncompleted_indicators' => 'Indicadores incompletos',
+'form.group_edit.confirm_save' => 'Confirme o salvamento',
+'form.group_edit.allow_ip' => 'Permitir IP',
+'form.group_edit.advanced_settings' => 'Configurações avançadas',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
-// TODO: translate the following.
-// 'form.group_delete.hint' => 'Are you sure you want to delete the entire group?',
+'form.group_delete.hint' => 'Tem certeza de que deseja excluir todo o grupo?',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
 'form.mail.to' => 'Para',
@@ -561,74 +559,67 @@ $i18n_key_words = array(
 'form.mail.invoice_sent' => 'Fatura enviada.',
 
 // Quotas configuration form. See example at https://timetracker.anuko.com/quotas.php after enabling Monthly quotas plugin.
-// TODO: translate the following.
-// 'form.quota.year' => 'Year',
-// 'form.quota.month' => 'Month',
-// 'form.quota.workday_hours' => 'Hours in a work day',
-// 'form.quota.hint' => 'If values are empty, quotas are calculated automatically based on workday hours and holidays.',
+'form.quota.year' => 'Ano',
+'form.quota.month' => 'Mês',
+'form.quota.workday_hours' => 'Horas em um dia útil',
+'form.quota.hint' => 'Se os valores estiverem vazios, as cotas serão calculadas automaticamente com base nas horas de trabalho e feriados.',
 
 // Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
-// TODO: translate the following.
-// 'form.swap.hint' => 'Demote yourself to a lower role by swapping roles with someone else. This cannot be undone.',
-// 'form.swap.swap_with' => 'Swap roles with',
+'form.swap.hint' => 'Rebaixe-se a papel inferior trocando funções com outra pessoa. Isto não pode ser desfeito.',
+'form.swap.swap_with' => 'Trocar papéis com',
 
 // Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
-// TODO: translate the following.
-// 'form.work_units.minutes_in_unit' => 'Minutes in unit',
-// 'form.work_units.1st_unit_threshold' => '1st unit threshold',
+'form.work_units.minutes_in_unit' => 'Minutos em unidade',
+'form.work_units.1st_unit_threshold' => 'Limiar da 1ª unidade',
 
 // Roles and rights. These strings are used in multiple places. Grouped here to provide consistent translations.
-// TODO: translate the following.
-// 'role.user.label' => 'User',
-// 'role.user.low_case_label' => 'user',
-// 'role.user.description' => 'A regular member without management rights.',
-// 'role.client.label' => 'Client',
-// 'role.client.low_case_label' => 'client',
-// 'role.client.description' => 'A client can view its own data.',
-// 'role.supervisor.label' => 'Supervisor',
-// 'role.supervisor.low_case_label' => 'supervisor',
-// 'role.supervisor.description' => 'A person with a small set of management rights.',
-// 'role.comanager.label' => 'Co-manager',
-// 'role.comanager.low_case_label' => 'co-manager',
-// 'role.comanager.description' => 'A person with a big set of management functions.',
-// 'role.manager.label' => 'Manager',
-// 'role.manager.low_case_label' => 'manager',
-// 'role.manager.description' => 'Group manager. Can do most of things for a group.',
-// 'role.top_manager.label' => 'Top manager',
-// 'role.top_manager.low_case_label' => 'top manager',
-// 'role.top_manager.description' => 'Top group manager. Can do everything in a tree of groups.',
-// 'role.admin.label' => 'Administrator',
-// 'role.admin.low_case_label' => 'administrator',
-// 'role.admin.description' => 'Site adminsitrator.',
+'role.user.label' => 'Usuário',
+'role.user.low_case_label' => 'usuário',
+'role.user.description' => 'Um membro regular sem direitos de gestão.',
+'role.client.label' => 'Cliente',
+'role.client.low_case_label' => 'cliente',
+'role.client.description' => 'Um cliente pode visualizar seus próprios dados.',
+'role.supervisor.label' => 'Supervisor',
+'role.supervisor.low_case_label' => 'supervisor',
+'role.supervisor.description' => 'Uma pessoa com um pequeno conjunto de direitos de gerenciamento.',
+'role.comanager.label' => 'Co-gerente',
+'role.comanager.low_case_label' => 'co-gerente',
+'role.comanager.description' => 'Uma pessoa com um grande conjunto de funções de gerenciamento.',
+'role.manager.label' => 'Gerente',
+'role.manager.low_case_label' => 'gerente',
+'role.manager.description' => 'Gerente de grupo. Pode fazer a maioria das coisas para um grupo.',
+'role.top_manager.label' => 'Gerente geral',
+'role.top_manager.low_case_label' => 'gerente geral',
+'role.top_manager.description' => 'Principal gerente de grupo. Pode fazer tudo em uma árvore de grupos.',
+'role.admin.label' => 'Administrador',
+'role.admin.low_case_label' => 'administrador',
+'role.admin.description' => 'Adminsitrador do site/sistema.',
 
 // Timesheet View form. See example at https://timetracker.anuko.com/timesheet_view.php.
-// TODO: translate the following.
-// 'form.timesheet_view.submit_subject' => 'Timesheet approval request',
-// 'form.timesheet_view.submit_body' => "A new timesheet requires approval.<p>User: %s.",
-// 'form.timesheet_view.approve_subject' => 'Timesheet approved',
-// 'form.timesheet_view.approve_body' => "Your timesheet %s was approved.<p>%s",
-// 'form.timesheet_view.disapprove_subject' => 'Timesheet not approved',
-// 'form.timesheet_view.disapprove_body' => "Your timesheet %s was not approved.<p>%s",
+'form.timesheet_view.submit_subject' => 'Solicitação de aprovação de planilha de horas',
+'form.timesheet_view.submit_body' => "Uma nova planilha de horas requer aprovação.<p>Usuário: %s.",
+'form.timesheet_view.approve_subject' => 'Planilha de horas aprovada',
+'form.timesheet_view.approve_body' => "Sua planilha de horas %s foi aprovada.<p>%s",
+'form.timesheet_view.disapprove_subject' => 'Planilha de horas não aprovada',
+'form.timesheet_view.disapprove_body' => "Sua planilha de horas %s não foi aprovada.<p>%s",
 
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
-// TODO: translate the following.
-// 'form.display_options.note_on_separate_row' => 'Note on separate row',
-// 'form.display_options.not_complete_days' => 'Not complete days',
-// 'form.display_options.custom_css' => 'Custom CSS',
+'form.display_options.note_on_separate_row' => 'Anotação em linha separada',
+'form.display_options.not_complete_days' => 'Dias não completos',
+'form.display_options.custom_css' => 'CSS customizado',
 
 // Work plugin strings. See example at https://timetracker.anuko.com/work.php
-// TODO: translate the following.
-// 'work.error.work_not_available' => 'Work item is not available.',
-// 'work.error.offer_not_available' => 'Offer is not available.',
-// 'work.type.one_time' => 'one time', // Work type is "one time job" for well defined work ("do exactly this").
-// 'work.type.ongoing' => 'ongoing',   // Work type is "ongoing" for complex jobs (billed by the hour, multiple contractors, etc.)
-// 'work.label.own_work' => 'Own work',
-// 'work.label.own_offers' => 'Own offers',
-// 'work.label.offers' => 'Offers',
-// 'work.button.send_message' => 'Send message',
-// 'work.button.make_offer' => 'Make offer',
-// 'work.button.accept' => 'Accept',
-// 'work.button.decline' => 'Decline',
-// 'work.title.send_message' => 'Sending Message',
-// 'work.msg.message_sent' => 'Message sent.',
+'work.error.work_not_available' => 'Item de trabalho não está disponível.',
+'work.error.offer_not_available' => 'Oferta não disponível',
+'work.type.one_time' => 'Uma interação',
+'work.type.ongoing' => 'Em progresso',
+'work.label.own_work' => 'Trabalho próprio',
+'work.label.own_offers' => 'Ofertas próprias',
+'work.label.offers' => 'Ofertas',
+'work.button.send_message' => 'Enviar mensagem',
+'work.button.make_offer' => 'Fazer oferta',
+'work.button.accept' => 'Aceitar',
+'work.button.decline' => 'Recusar',
+'work.title.send_message' => 'Enviando mensagem',
+'work.msg.message_sent' => 'Mensagem enviada.',
 );
