@@ -38,7 +38,6 @@ $i18n_key_words = array(
 'menu.users' => '用戶',
 // TODO: translate the following.
 // 'menu.groups' => 'Groups',
-// 'menu.subgroups' => 'Subgroups',
 'menu.export' => '輸出資料',
 'menu.clients' => '客戶',
 'menu.options' => '選項',
@@ -266,8 +265,6 @@ $i18n_key_words = array(
 // 'label.attachments' => 'Attachments',
 // 'label.files' => 'Files',
 // 'label.file' => 'File',
-// 'label.image' => 'Image',
-// 'label.download' => 'Download',
 // 'label.active_users' => 'Active Users',
 // 'label.inactive_users' => 'Inactive Users',
 // 'label.details' => 'Details',
@@ -295,7 +292,6 @@ $i18n_key_words = array(
 'title.login' => '登錄',
 'title.groups' => '團隊', // TODO: change "teams" to "groups".
 // TODO: translate the following.
-// 'title.subgroups' => 'Subgroups',
 // 'title.add_group' => 'Adding Group',
 // 'title.edit_group' => 'Editing Group',
 'title.delete_group' => '刪除團隊', // TODO: change "team" to "group".
@@ -523,8 +519,8 @@ $i18n_key_words = array(
 // 'form.templates.active_templates' => 'Active Templates',
 // 'form.templates.inactive_templates' => 'Inactive Templates',
 
-// Invoice form. See example at https://timetracker.anuko.com/invoice.php
-// (you can get to this form after generating a report).
+// Invoice form. See example at https://timetracker.anuko.com/invoice_view.php
+// (you can get to this form after generating an invoice).
 'form.invoice.number' => '發票號碼',
 'form.invoice.person' => '人', // TODO: is this correct?
 

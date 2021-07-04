@@ -38,7 +38,6 @@ $i18n_key_words = array(
 'menu.users' => 'Käyttäjät',
 // TODO: translate the following.
 // 'menu.groups' => 'Groups',
-// 'menu.subgroups' => 'Subgroups',
 'menu.export' => 'Vie',
 'menu.clients' => 'Asiakkaat',
 'menu.options' => 'Optiot',
@@ -257,8 +256,6 @@ $i18n_key_words = array(
 // 'label.attachments' => 'Attachments',
 // 'label.files' => 'Files',
 // 'label.file' => 'File',
-// 'label.image' => 'Image',
-// 'label.download' => 'Download',
 'label.active_users' => 'Aktiiviset käyttäjät',
 'label.inactive_users' => 'Ei-aktiiviset käyttäjät',
 // TODO: translate the following.
@@ -287,7 +284,6 @@ $i18n_key_words = array(
 'title.login' => 'Kirjautuminen',
 'title.groups' => 'Tiimit', // TODO: change "teams" to "groups".
 // TODO: translate the following.
-// 'title.subgroups' => 'Subgroups',
 // 'title.add_group' => 'Adding Group',
 'title.edit_group' => 'Tiimin muokkaus', // TODO: change "team" to "group".
 'title.delete_group' => 'Tiimin poisto', // TODO: change "team" to "group".
@@ -513,8 +509,8 @@ $i18n_key_words = array(
 // 'form.templates.active_templates' => 'Active Templates',
 // 'form.templates.inactive_templates' => 'Inactive Templates',
 
-// Invoice form. See example at https://timetracker.anuko.com/invoice.php
-// (you can get to this form after generating a report).
+// Invoice form. See example at https://timetracker.anuko.com/invoice_view.php
+// (you can get to this form after generating an invoice).
 'form.invoice.number' => 'Laskun numero',
 'form.invoice.person' => 'Henkilö',
 

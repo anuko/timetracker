@@ -23,8 +23,7 @@ $i18n_key_words = array(
 'menu.group' => 'Groep',
 'menu.plugins' => 'Plugins',
 'menu.time' => 'Tijden',
-// TODO: translate the following:
-// 'menu.puncher' => 'Punch',
+'menu.puncher' => 'Prikklok',
 'menu.week' => 'Week',
 'menu.expenses' => 'Kosten',
 'menu.reports' => 'Rapporten',
@@ -34,7 +33,6 @@ $i18n_key_words = array(
 'menu.tasks' => 'Taken',
 'menu.users' => 'Medewerkers',
 'menu.groups' => 'Groepen',
-'menu.subgroups' => 'Subgroepen',
 'menu.export' => 'Exporteren',
 'menu.clients' => 'Klanten',
 'menu.options' => 'Opties',
@@ -109,8 +107,7 @@ $i18n_key_words = array(
 'button.export' => 'Groep exporteren',
 'button.import' => 'Groep importeren',
 'button.close' => 'Sluiten',
-// TODO: translate the following.
-// 'button.start' => 'Start',
+'button.start' => 'Start',
 'button.stop' => 'Stop',
 'button.approve' => 'Goedkeuren',
 'button.disapprove' => 'Afkeuren',
@@ -168,8 +165,7 @@ $i18n_key_words = array(
 'label.select_none' => 'Selecteer niets',
 'label.day_view' => 'Dag overzicht',
 'label.week_view' => 'Week overzicht',
-// TODO: translate the following.
-// 'label.puncher' => 'Puncher',
+'label.puncher' => 'Prikklok',
 'label.id' => 'ID',
 'label.language' => 'Taal',
 'label.decimal_mark' => 'Decimaal teken',
@@ -229,8 +225,6 @@ $i18n_key_words = array(
 'label.attachments' => 'Bijlagen',
 'label.files' => 'Bestanden',
 'label.file' => 'Bestand',
-'label.image' => 'Afbeelding',
-'label.download' => 'Download',
 'label.active_users' => 'Actieve medewerkers',
 'label.inactive_users' => 'Inactieve medewerkers',
 'label.details' => 'Details',
@@ -251,7 +245,6 @@ $i18n_key_words = array(
 'title.success' => 'Succes',
 'title.login' => 'Aanmelden',
 'title.groups' => 'Groepen',
-'title.subgroups' => 'Subgroepen',
 'title.add_group' => 'Groep toevoegen',
 'title.edit_group' => 'Groep bewerken',
 'title.delete_group' => 'Groep aan het verwijderen',
@@ -261,8 +254,7 @@ $i18n_key_words = array(
 'title.edit_time_record' => 'Wijzigen tijdrecord',
 'title.delete_time_record' => 'Verwijder tijdrecord',
 'title.time_files' => 'Tijden bestanden',
-// TODO: Translate the following:
-// 'title.puncher' => 'Puncher',
+'title.puncher' => 'Prikklok',
 'title.expenses' => 'Kosten',
 'title.edit_expense' => 'Bewerk kosten artikel',
 'title.delete_expense' => 'Verwijder kosten artikel',
@@ -459,8 +451,8 @@ $i18n_key_words = array(
 'form.templates.active_templates' => 'Actieve sjablonen',
 'form.templates.inactive_templates' => 'Inactieve sjablonen',
 
-// Invoice form. See example at https://timetracker.anuko.com/invoice.php
-// (you can get to this form after generating a report).
+// Invoice form. See example at https://timetracker.anuko.com/invoice_view.php
+// (you can get to this form after generating an invoice).
 'form.invoice.number' => 'Factuur nummer',
 'form.invoice.person' => 'Medewerker',
 

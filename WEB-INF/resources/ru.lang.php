@@ -33,7 +33,6 @@ $i18n_key_words = array(
 'menu.tasks' => 'Задачи',
 'menu.users' => 'Пользователи',
 'menu.groups' => 'Группы',
-'menu.subgroups' => 'Подгруппы',
 'menu.export' => 'Экспорт',
 'menu.clients' => 'Клиенты',
 'menu.options' => 'Опции',
@@ -226,8 +225,6 @@ $i18n_key_words = array(
 'label.attachments' => 'Приложения',
 'label.files' => 'Файлы',
 'label.file' => 'Файл',
-'label.image' => 'Изображение',
-'label.download' => 'Скачать',
 'label.active_users' => 'Активные пользователи',
 'label.inactive_users' => 'Неактивные пользователи',
 'label.details' => 'Детали',
@@ -249,7 +246,6 @@ $i18n_key_words = array(
 'title.success' => 'Успех',
 'title.login' => 'Вход в систему',
 'title.groups' => 'Группы',
-'title.subgroups' => 'Подгруппы',
 'title.add_group' => 'Добавление группы',
 'title.edit_group' => 'Редактирование группы',
 'title.delete_group' => 'Удаление группы',
@@ -456,8 +452,8 @@ $i18n_key_words = array(
 'form.templates.active_templates' => 'Активные шаблоны',
 'form.templates.inactive_templates' => 'Неактивные шаблоны',
 
-// Invoice form. See example at https://timetracker.anuko.com/invoice.php
-// (you can get to this form after generating a report).
+// Invoice form. See example at https://timetracker.anuko.com/invoice_view.php
+// (you can get to this form after generating an invoice).
 'form.invoice.number' => 'Номер счёта',
 'form.invoice.person' => 'Работник',
 

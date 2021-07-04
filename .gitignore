@@ -10,3 +10,4 @@ Thumbs.db
 *.DS_Store
 *~
 .idea/
+api/

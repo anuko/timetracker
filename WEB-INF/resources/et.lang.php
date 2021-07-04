@@ -38,7 +38,6 @@ $i18n_key_words = array(
 'menu.tasks' => 'Tööülesanded',
 'menu.users' => 'Kasutajad',
 'menu.groups' => 'Grupid',
-'menu.subgroups' => 'Alamgrupid',
 'menu.export' => 'Eksport', // TODO: is this a correct term as an opposite of "Import"?
 'menu.clients' => 'Kliendid',
 'menu.options' => 'Suvandid',
@@ -261,8 +260,6 @@ $i18n_key_words = array(
 // 'label.attachments' => 'Attachments',
 // 'label.files' => 'Files',
 // 'label.file' => 'File',
-// 'label.image' => 'Image',
-// 'label.download' => 'Download',
 'label.active_users' => 'Aktiivsed kasutajad',
 'label.inactive_users' => 'Mitteaktiivsed kasutajad',
 // TODO: translate the following.
@@ -293,7 +290,6 @@ $i18n_key_words = array(
 'title.success' => 'Õnnestumine',
 'title.login' => 'Sisene',
 'title.groups' => 'Grupid',
-'title.subgroups' => 'Alamgrupid',
 'title.add_group' => 'Lisa grupp',
 'title.edit_group' => 'Muuda gruppi',
 'title.delete_group' => 'Kustuta grupp',
@@ -519,8 +515,8 @@ $i18n_key_words = array(
 // 'form.templates.active_templates' => 'Active Templates',
 // 'form.templates.inactive_templates' => 'Inactive Templates',
 
-// Invoice form. See example at https://timetracker.anuko.com/invoice.php
-// (you can get to this form after generating a report).
+// Invoice form. See example at https://timetracker.anuko.com/invoice_view.php
+// (you can get to this form after generating an invoice).
 'form.invoice.number' => 'Arve number',
 'form.invoice.person' => 'Isik',
 
