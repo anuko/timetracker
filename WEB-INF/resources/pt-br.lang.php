@@ -62,16 +62,15 @@ $i18n_key_words = array(
 'error.user_exists' => 'Já existe usuário com este login.',
 'error.object_exists' => 'Já existe um objeto com este nome.',
 'error.invoice_exists' => 'Já existe fatura com este número.',
-// TODO: improve translation of the word "role" in error.role_exists. função here, papel elsewhere?
 'error.role_exists' => 'Já existe uma função com este rank.',
 'error.no_invoiceable_items' => 'Não há items faturáveis.',
 'error.no_records' => 'Não há registros.',
 'error.no_login' => 'Não há usuário com este login.',
 'error.no_groups' => 'Sua base de dados está vazia. Entre como admin e crie um grupo novo.',
 'error.upload' => 'Erro no envio do arquivo.',
-'error.range_locked' => 'Período está bloqueado.',
-'error.mail_send' => 'Erro enviando o e-mail.',
-// TODO: is "Use" in error.mail_send translated correctly?
+'error.range_locked' => 'Período bloqueado.',
+// TODO: is "Use" in error.mail_send translated correctly? Usar, or utilizar, perhaps? "Use" looks like an untranslated English word.
+// The meaning of this error is that mail send feature did not work, and using MAIL_SMTP_DEBUG should help admin to troubleshoot it.
 'error.mail_send' => 'Erro ao enviar e-mail. Use MAIL_SMTP_DEBUG para diagnósticos.',
 'error.no_email' => 'Não há e-mail associado a este login.',
 'error.uncompleted_exists' => 'Entrada incompleta existente. Feche ou remova-a.',
@@ -106,9 +105,9 @@ $i18n_key_words = array(
 'button.reset_password' => 'Resetar senha',
 'button.send' => 'Enviar',
 'button.send_by_email' => 'Enviar por e-mail',
-'button.create_group' => 'Criar equipe', // TODO: replace "equipe" with "group".
-'button.export' => 'Exportar equipe', // TODO: replace "equipe" with "group".
-'button.import' => 'Importar equipe', // TODO: replace "equipe" with "group".
+'button.create_group' => 'Criar grupo',
+'button.export' => 'Exportar grupo',
+'button.import' => 'Importar grupo',
 'button.close' => 'Fechar',
 'button.start' => 'Iniciar',
 'button.stop' => 'Parar',
@@ -117,7 +116,7 @@ $i18n_key_words = array(
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.menu' => 'Menu',
-'label.group_name' => 'Nome da equipe',  // TODO: replace "equipe" with "group".
+'label.group_name' => 'Nome do grupo',
 'label.address' => 'Endereço',
 'label.currency' => 'Moeda',
 'label.manager_name' => 'Nome do gerente',
@@ -286,10 +285,9 @@ $i18n_key_words = array(
 'title.edit_user' => 'Editando usuário',
 'title.delete_user' => 'Apagando usuário',
 'title.roles' => 'Papéis',
-// TODO: translate the following.
-// 'title.add_role' => 'Adding Role',
-// 'title.edit_role' => 'Editing Role',
-// 'title.delete_role' => 'Deleting Role',
+'title.add_role' => 'Adicionando função',
+'title.edit_role' => 'Editando função',
+'title.delete_role' => 'Apagando função',
 'title.clients' => 'Clientes',
 'title.add_client' => 'Adicionando cliente',
 'title.edit_client' => 'Editando cliente',
@@ -306,8 +304,8 @@ $i18n_key_words = array(
 'title.edit_timesheet' => 'Editando planilha de horas',
 'title.delete_timesheet' => 'Apagando planilha de horas',
 'title.monthly_quotas' => 'Cotas mensais',
-'title.export' => 'Exportando dados de equipe', // TODO: replace "equipe" with "group".
-'title.import' => 'Importando dados de equipe', // TODO: replace "equipe" with "group".
+'title.export' => 'Exportando dados do grupo',
+'title.import' => 'Importando dados do grupo',
 'title.options' => 'Opções',
 'title.display_options' => 'Opções de exibição',
 'title.profile' => 'Perfil',
@@ -362,7 +360,7 @@ $i18n_key_words = array(
 'dropdown.previous_month' => 'último mês',
 'dropdown.selected_month' => 'mês',
 'dropdown.current_year' => 'este ano',
-'dropdown.previous_year' => 'último ano', // TODO: check if this is correct. I used último for consistency with other dropdown options.
+'dropdown.previous_year' => 'último ano',
 'dropdown.selected_year' => 'ano',
 'dropdown.all_time' => 'todas as datas',
 'dropdown.projects' => 'projetos',
@@ -404,7 +402,7 @@ $i18n_key_words = array(
 'form.time.duration_format' => '(hh:mm ou 0.0h)',
 'form.time.billable' => 'Faturável',
 'form.time.uncompleted' => 'Incompleta',
-'form.time.remaining_quota' => 'Cota restante', // TODO: check if this translation is correct. I changed it from "Cota excedente", which appears to be wrong.
+'form.time.remaining_quota' => 'Cota restante',
 'form.time.over_quota' => 'Acima da cota',
 'form.time.remaining_balance' => 'Saldo restante',
 'form.time.over_balance' => 'Saldo excedente',
@@ -415,7 +413,7 @@ $i18n_key_words = array(
 // Week view form. See example at https://timetracker.anuko.com/week.php.
 'form.week.new_entry' => 'Nova entrada',
 
-// Reports form. See example at https://timetracker.anuko.com/reports.php
+// Reports form. See example at https://timetracker.anuko.com/reports.php.
 'form.reports.save_as_favorite' => 'Guardar como favorito',
 'form.reports.confirm_delete' => 'Tem certeza que deseja remover este relatório dos favoritos?',
 'form.reports.include_billable' => 'faturável',
@@ -428,12 +426,7 @@ $i18n_key_words = array(
 'form.reports.select_period' => 'Selecione o período de tempo',
 'form.reports.set_period' => 'ou selecionar datas',
 'form.reports.show_fields' => 'Exibir campos',
-// TODO: Try to improve the translation of form.reports.time_fields. This is a label for a section of custom fields that
-// are associated with a time record. I suggest trying custom fields plugin, creating a few "time" custom fields, and seeing how
-// reports.php page looks like. For example, one may create a "Ticket #" or a "Property" custom fields to be associated with time entries,
-// the form.reports.time_fields groups these fields together on reports.php.
-// 'form.reports.time_fields' => 'Time fields',
-// 'form.reports.time_fields' => 'Campos de apontamento',
+'form.reports.time_fields' => 'Campos de tempo',
 'form.reports.user_fields' => 'Campos de usuário',
 'form.reports.group_by' => 'Agrupar por',
 'form.reports.group_by_no' => '--- sem agrupar ---',
@@ -449,11 +442,11 @@ $i18n_key_words = array(
 'form.report.assign_to_invoice' => 'Atribuir a fatura',
 'form.report.assign_to_timesheet' => 'Atribuir a planilha de horas',
 
-// Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
+// Timesheets form. See example at https://timetracker.anuko.com/timesheets.php.
 'form.timesheets.active_timesheets' => 'Planilhas de horas ativas',
 'form.timesheets.inactive_timesheets' => 'Planilhas de horas inativas',
 
-// Templates form. See example at https://timetracker.anuko.com/templates.php
+// Templates form. See example at https://timetracker.anuko.com/templates.php.
 'form.templates.active_templates' => 'Modelos ativos',
 'form.templates.inactive_templates' => 'Modelos inativos',
 
@@ -462,70 +455,63 @@ $i18n_key_words = array(
 'form.invoice.number' => 'Número da fatura',
 'form.invoice.person' => 'Pessoa',
 
-// Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php
+// Deleting Invoice form. See example at https://timetracker.anuko.com/invoice_delete.php.
 'form.invoice.invoice_to_delete' => 'Fatura a ser apagada',
 'form.invoice.invoice_entries' => 'Entradas de fatura',
 'form.invoice.confirm_deleting_entries' => 'Confirme a exclusão das entradas de fatura do Time Tracker.',
 
-// Charts form. See example at https://timetracker.anuko.com/charts.php
+// Charts form. See example at https://timetracker.anuko.com/charts.php.
 'form.charts.interval' => 'Intervalo',
 'form.charts.chart' => 'Gráfico',
 
-// Projects form. See example at https://timetracker.anuko.com/projects.php
+// Projects form. See example at https://timetracker.anuko.com/projects.php.
 'form.projects.active_projects' => 'Projetos ativos',
 'form.projects.inactive_projects' => 'Projetos inativos',
 
-// Tasks form. See example at https://timetracker.anuko.com/tasks.php
+// Tasks form. See example at https://timetracker.anuko.com/tasks.php.
 'form.tasks.active_tasks' => 'Tarefas ativas',
 'form.tasks.inactive_tasks' => 'Tarefas inativas',
 
-// Users form. See example at https://timetracker.anuko.com/users.php
-// TODO: check the translation of form.users.uncompleted_entry. Is "apontamento" a correct term for a time entry?
-// The meaning of incomplete time entry in Time Tracker is that the entry only has the "start" time defined, but no finish time yet,
-// and may be ongoing. For example, user started working on something and is curently in progress doing it.
-// Check the Puncher plugin, which operates with such entries.
-// 'form.users.uncompleted_entry' => 'User has an uncompleted time entry',
-'form.users.uncompleted_entry' => 'O usuário tem um apontamento incompleto',
-'form.users.role' => 'Papel',
+// Users form. See example at https://timetracker.anuko.com/users.php.
+'form.users.uncompleted_entry' => 'O usuário tem uma entrada incompleta',
+'form.users.role' => 'Função',
 'form.users.manager' => 'Gerente',
 'form.users.comanager' => 'Coordenador',
 'form.users.rate' => 'Honorário',
 'form.users.default_rate' => 'Honorário padrão por hora',
 
-// Editing User form. See example at https://timetracker.anuko.com/user_edit.php
-'form.user_edit.swap_roles' => 'Alternar papéis',
+// Editing User form. See example at https://timetracker.anuko.com/user_edit.php.
+'form.user_edit.swap_roles' => 'Alternar funções',
 
-// Roles form. See example at https://timetracker.anuko.com/roles.php
-'form.roles.active_roles' => 'Papéis ativos',
-'form.roles.inactive_roles' => 'Papéis inativos',
+// Roles form. See example at https://timetracker.anuko.com/roles.php.
+'form.roles.active_roles' => 'Funções ativas',
+'form.roles.inactive_roles' => 'Funções inativas',
 'form.roles.rank' => 'Rank',
 'form.roles.rights' => 'Direitos',
 'form.roles.assigned' => 'Atribuído',
 'form.roles.not_assigned' => 'Não atribuído',
 
-// Clients form. See example at https://timetracker.anuko.com/clients.php
+// Clients form. See example at https://timetracker.anuko.com/clients.php.
 'form.clients.active_clients' => 'Clientes ativos',
 'form.clients.inactive_clients' => 'Clientes inativos',
 
-// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php
+// Deleting Client form. See example at https://timetracker.anuko.com/client_delete.php.
 'form.client.client_to_delete' => 'Cliente a ser apagado',
 'form.client.client_entries' => 'Entradas de cliente',
 
-// Exporting Group Data form. See example at https://timetracker.anuko.com/export.php
-// TODO: replace "equipe" with "group" in the string below.
-'form.export.hint' => 'Você pode exportar todos os dados da equipe para um arquivo xml. Isto pode ser útil se você estiver migrando os dados para um servidor próprio.',
+// Exporting Group Data form. See example at https://timetracker.anuko.com/export.php.
+'form.export.hint' => 'Você pode exportar todos os dados do grupo para um arquivo xml. Isto pode ser útil se você estiver migrando os dados para um servidor próprio.',
 'form.export.compression' => 'Compressão',
 'form.export.compression_none' => 'nenhuma',
 'form.export.compression_bzip' => 'bzip',
 
 // Importing Group Data form. See example at https://timetracker.anuko.com/import.php (login as admin first).
-'form.import.hint' => 'Importar dados de equipe de um arquivo xml.', // TODO: replace "team" with "group".
+'form.import.hint' => 'Importar dados do grupo de um arquivo xml.',
 'form.import.file' => 'Selecionar arquivo',
 'form.import.success' => 'Importação realizada com sucesso.',
 
 // Groups form. See example at https://timetracker.anuko.com/admin_groups.php (login as admin first).
-// TODO: replace "equipe" with "group" in the string below (3 places).
-'form.groups.hint' => 'Crie uma nova equipe fazendo uma nova conta de gerente.<br>Você também pode importar os dados de um arquivo xml de outro servidor Anuko Time Tracker (não havendo colisão de usuários).',
+'form.groups.hint' => 'Crie um novo grupo fazendo uma nova conta de gerente.<br>Você também pode importar os dados de um arquivo xml de outro servidor Anuko Time Tracker (não havendo colisão de usuários).',
 
 // Group Settings form. See example at https://timetracker.anuko.com/group_edit.php.
 'form.group_edit.12_hours' => '12 horas',
@@ -548,7 +534,7 @@ $i18n_key_words = array(
 'form.group_edit.allow_ip' => 'Permitir IP',
 'form.group_edit.advanced_settings' => 'Configurações avançadas',
 
-// Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
+// Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php.
 'form.group_delete.hint' => 'Tem certeza de que deseja excluir todo o grupo?',
 
 // Mail form. See example at https://timetracker.anuko.com/report_send.php when emailing a report.
@@ -565,8 +551,8 @@ $i18n_key_words = array(
 'form.quota.hint' => 'Se os valores estiverem vazios, as cotas serão calculadas automaticamente com base nas horas de trabalho e feriados.',
 
 // Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
-'form.swap.hint' => 'Rebaixe-se a papel inferior trocando funções com outra pessoa. Isto não pode ser desfeito.',
-'form.swap.swap_with' => 'Trocar papéis com',
+'form.swap.hint' => 'Rebaixe-se a função inferior trocando funções com outra pessoa. Isto não pode ser desfeito.',
+'form.swap.swap_with' => 'Trocar papéis com', // TODO: replace papéis with funções?
 
 // Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
 'form.work_units.minutes_in_unit' => 'Minutos em unidade',
@@ -608,7 +594,7 @@ $i18n_key_words = array(
 'form.display_options.not_complete_days' => 'Dias não completos',
 'form.display_options.custom_css' => 'CSS customizado',
 
-// Work plugin strings. See example at https://timetracker.anuko.com/work.php
+// Work plugin strings. See example at https://timetracker.anuko.com/work.php.
 'work.error.work_not_available' => 'Item de trabalho não está disponível.',
 'work.error.offer_not_available' => 'Oferta não disponível',
 'work.type.one_time' => 'Uma interação',
@@ -623,3 +609,4 @@ $i18n_key_words = array(
 'work.title.send_message' => 'Enviando mensagem',
 'work.msg.message_sent' => 'Mensagem enviada.',
 );
+
