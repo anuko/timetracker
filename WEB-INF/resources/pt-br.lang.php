@@ -136,7 +136,7 @@ $i18n_key_words = array(
 'label.users' => 'Usuários',
 'label.group' => 'Grupo',
 'label.subgroups' => 'Subgrupos',
-'label.roles' => 'Papéis',
+'label.roles' => 'Funções',
 'label.client' => 'Cliente',
 'label.clients' => 'Clientes',
 'label.option' => 'Opção',
@@ -283,7 +283,7 @@ $i18n_key_words = array(
 'title.add_user' => 'Adicionando usuário',
 'title.edit_user' => 'Editando usuário',
 'title.delete_user' => 'Apagando usuário',
-'title.roles' => 'Papéis',
+'title.roles' => 'Funções',
 'title.add_role' => 'Adicionando função',
 'title.edit_role' => 'Editando função',
 'title.delete_role' => 'Apagando função',
@@ -319,7 +319,7 @@ $i18n_key_words = array(
 'title.cf_delete_dropdown_option' => 'Apagando opção',
 'title.locking' => 'Bloquear',
 'title.week_view' => 'Visão semanal',
-'title.swap_roles' => 'Alteração de papéis',
+'title.swap_roles' => 'Alteração de funções',
 'title.work_units' => 'Unidades de trabalho',
 'title.templates' => 'Modelos',
 'title.add_template' => 'Adicionando modelo',
@@ -407,7 +407,7 @@ $i18n_key_words = array(
 'form.time.over_balance' => 'Saldo excedente',
 
 // Editando formulário de registro de tempo. Veja exemplo em https://timetracker.anuko.com/time_edit.php (acesse, editando um registro de tempo incompleto).
-'form.time_edit.uncompleted' => 'Eesta entrada foi salva somente com hora de início. Não é um erro.',
+'form.time_edit.uncompleted' => 'Esta entrada foi salva somente com hora de início. Não é um erro.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
 'form.week.new_entry' => 'Nova entrada',
