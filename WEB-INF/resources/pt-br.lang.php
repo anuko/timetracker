@@ -552,7 +552,7 @@ $i18n_key_words = array(
 
 // Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
 'form.swap.hint' => 'Rebaixe-se a função inferior trocando funções com outra pessoa. Isto não pode ser desfeito.',
-'form.swap.swap_with' => 'Trocar papéis com', // TODO: replace papéis with funções?
+'form.swap.swap_with' => 'Trocar função com',
 
 // Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
 'form.work_units.minutes_in_unit' => 'Minutos em unidade',
