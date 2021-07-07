@@ -69,12 +69,14 @@ if ($request->isPost()) {
     $err->add($i18n->get('error.field'), $i18n->get('label.manager_login'));
   if (ttUserHelper::getUserByLogin($cl_manager_login))
     $err->add($i18n->get('error.user_exists'));
-  if (!ttValidString($cl_password1))
-    $err->add($i18n->get('error.field'), $i18n->get('label.password'));
-  if (!ttValidString($cl_password2))
-    $err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
-  if ($cl_password1 !== $cl_password2)
-    $err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
+  if (!$auth->isPasswordExternal()) {
+    if (!ttValidString($cl_password1))
+      $err->add($i18n->get('error.field'), $i18n->get('label.password'));
+    if (!ttValidString($cl_password2))
+      $err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
+    if ($cl_password1 !== $cl_password2)
+      $err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
+  }
   if (!ttValidEmail($cl_manager_email, true))
     $err->add($i18n->get('error.field'), $i18n->get('label.email'));
   if (!ttUserHelper::canAdd())
