@@ -389,15 +389,15 @@ $i18n_key_words = array(
 'form.login.forgot_password' => 'Esqueceu a senha?',
 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> é um sistema de código aberto de rastreamento do tempo.',
 
-// Formulário de resetar a senha. Veja exemplo em https://timetracker.anuko.com/password_reset.php.
+// Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Pedido para resetar a senha enviado por e-mail.',
 'form.reset_password.email_subject' => 'Pedido de alteração de senha no Anuko Time Tracker',
 'form.reset_password.email_body' => "Caro usuário,\n\nAlguém do IP %s solicitou a redefinição da senha do Anuko Time Tracker. Visite este link se quiser redefinir sua senha.\n\n%s\n\nAnuko Time Tracker é um sistema de rastreamento de apontamentos de código aberto. Visite https://www.anuko.com para obter mais informações.\n\n",
 
-// Formulário de alteração de senha. Veja exemplo em https://timetracker.anuko.com/password_change.php?ref=1.
+// Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Entre com a nova senha e clique em Salvar.',
 
-// Formulário de tempo. Veja exemplo em https://timetracker.anuko.com/time.php.
+// Time form. See example at https://timetracker.anuko.com/time.php.
 'form.time.duration_format' => '(hh:mm ou 0.0h)',
 'form.time.billable' => 'Faturável',
 'form.time.uncompleted' => 'Incompleta',
@@ -406,7 +406,7 @@ $i18n_key_words = array(
 'form.time.remaining_balance' => 'Saldo restante',
 'form.time.over_balance' => 'Saldo excedente',
 
-// Editando formulário de registro de tempo. Veja exemplo em https://timetracker.anuko.com/time_edit.php (acesse, editando um registro de tempo incompleto).
+// Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
 'form.time_edit.uncompleted' => 'Esta entrada foi salva somente com hora de início. Não é um erro.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
@@ -435,8 +435,8 @@ $i18n_key_words = array(
 'form.reports.group_by_project' => 'projeto',
 'form.reports.group_by_task' => 'tarefa',
 
-// Formulário de relatório. Veja exemplo em https://timetracker.anuko.com/report.php
-// (após gerar um relatório em https://timetracker.anuko.com/reports.php).
+// Report form. See example at https://timetracker.anuko.com/report.php
+// (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Exportar',
 'form.report.assign_to_invoice' => 'Atribuir a fatura',
 'form.report.assign_to_timesheet' => 'Atribuir a planilha de horas',
