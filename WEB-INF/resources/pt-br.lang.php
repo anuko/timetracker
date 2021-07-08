@@ -69,9 +69,7 @@ $i18n_key_words = array(
 'error.no_groups' => 'Sua base de dados está vazia. Entre como admin e crie um grupo novo.',
 'error.upload' => 'Erro no envio do arquivo.',
 'error.range_locked' => 'Período bloqueado.',
-// TODO: is "Use" in error.mail_send translated correctly? Usar, or utilizar, perhaps? "Use" looks like an untranslated English word.
-// The meaning of this error is that mail send feature did not work, and using MAIL_SMTP_DEBUG should help admin to troubleshoot it.
-'error.mail_send' => 'Erro ao enviar e-mail. Use MAIL_SMTP_DEBUG para diagnósticos.',
+'error.mail_send' => 'Erro ao enviar e-mail. Use MAIL_SMTP_DEBUG para diagnósticos.', // "Use" means the same in pt-br as in en.
 'error.no_email' => 'Não há e-mail associado a este login.',
 'error.uncompleted_exists' => 'Entrada incompleta existente. Feche ou remova-a.',
 'error.goto_uncompleted' => 'Ir até a entrada incompleta.',
@@ -137,7 +135,7 @@ $i18n_key_words = array(
 'label.users' => 'Usuários',
 'label.group' => 'Grupo',
 'label.subgroups' => 'Subgrupos',
-'label.roles' => 'Papéis', // TODO: for consistency, use funçãos, perhaps?
+'label.roles' => 'Funções',
 'label.client' => 'Cliente',
 'label.clients' => 'Clientes',
 'label.option' => 'Opção',
@@ -284,7 +282,7 @@ $i18n_key_words = array(
 'title.add_user' => 'Adicionando usuário',
 'title.edit_user' => 'Editando usuário',
 'title.delete_user' => 'Apagando usuário',
-'title.roles' => 'Papéis',
+'title.roles' => 'Funções',
 'title.add_role' => 'Adicionando função',
 'title.edit_role' => 'Editando função',
 'title.delete_role' => 'Apagando função',
@@ -320,7 +318,7 @@ $i18n_key_words = array(
 'title.cf_delete_dropdown_option' => 'Apagando opção',
 'title.locking' => 'Bloquear',
 'title.week_view' => 'Visão semanal',
-'title.swap_roles' => 'Alteração de papéis',
+'title.swap_roles' => 'Alteração de funções',
 'title.work_units' => 'Unidades de trabalho',
 'title.templates' => 'Modelos',
 'title.add_template' => 'Adicionando modelo',
@@ -408,7 +406,7 @@ $i18n_key_words = array(
 'form.time.over_balance' => 'Saldo excedente',
 
 // Editing Time Record form. See example at https://timetracker.anuko.com/time_edit.php (get there by editing an uncompleted time record).
-'form.time_edit.uncompleted' => 'Eesta entrada foi salva somente com hora de início. Não é um erro.',
+'form.time_edit.uncompleted' => 'Esta entrada foi salva somente com hora de início. Não é um erro.',
 
 // Week view form. See example at https://timetracker.anuko.com/week.php.
 'form.week.new_entry' => 'Nova entrada',
