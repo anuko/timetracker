@@ -587,11 +587,8 @@ class ttUser {
     return $groups;
   }
 
-  // getUserDetails function is used to manage users in group and returns user details.
-  // At the moment, the function is used for user edits and deletes.
-  function getUserDetails($user_id) {
-    if (!$this->can('manage_users')) return false;
-
+  // getUserDetails function returns user details.
+   function getUserDetails($user_id) {
     $mdb2 = getConnection();
     $group_id = $this->getGroup();
     $org_id = $this->org_id;
