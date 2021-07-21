@@ -73,7 +73,9 @@ $showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $tra
 $project_list = array();
 if ($showProject) {
   if ($user->can('view_reports') || $user->can('view_all_reports')) {
-    $project_list = ttProjectHelper::getProjects(); // All active and inactive projects.
+    $config = new ttConfigHelper($user->getConfig());
+    $includeInactiveProjects = $config->getDefinedValue('report_inactive_projects');
+    $project_list = ttProjectHelper::getProjects($includeInactiveProjects);
   } elseif ($user->isClient()) {
     $project_list = ttProjectHelper::getProjectsForClient();
   } else {

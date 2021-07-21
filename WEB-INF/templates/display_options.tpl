@@ -41,6 +41,14 @@ License: See license.txt *}
       <span class="what-is-it-text"><a href="https://www.anuko.com/lp/tt_32.htm" target="_blank">{$i18n.label.what_is_it}</a></span>
     </td>
   </tr>
+  <tr class = "small-screen-label"><td><label for="report_inactive_projects">{$i18n.form.display_options.inactive_projects}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="report_inactive_projects">{$i18n.form.display_options.inactive_projects}:</label></td>
+    <td class="td-with-input">{$forms.displayOptionsForm.report_inactive_projects.control}
+      <span class="what-is-it-img"><a href="https://www.anuko.com/lp/tt_53.htm" target="_blank"><img src="img/icon-question-mark.png" title="{$i18n.label.what_is_it}" alt="{$i18n.label.what_is_it}"></a></span>
+      <span class="what-is-it-text"><a href="https://www.anuko.com/lp/tt_53.htm" target="_blank">{$i18n.label.what_is_it}</a></span>
+    </td>
+  </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr><td><div class="form-control-separator"></div></td></tr>
   <tr><td class="sectionHeaderNoBorder" colspan="2">{$i18n.form.display_options.custom_css}</td></tr>

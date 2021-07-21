@@ -77,17 +77,23 @@ class ttProjectHelper {
     return $result;
   }
   
-  // getProjects - returns an array of active and inactive projects in group.
-  static function getProjects() {
+  // getProjects - returns an array of projects for group.
+  static function getProjects($includeInactiveProjects = true) {
     global $user;
     $mdb2 = getConnection();
 
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
+    // Construct status part.
+    $statusPart = 'status = 1';
+    if ($includeInactiveProjects) {
+      $statusPart = '(status = 0 or '.$statusPart.')';
+    }
+
     $result = array();
     $sql = "select id, name, tasks from tt_projects".
-      " where group_id = $group_id and org_id = $org_id and (status = 0 or status = 1) order by upper(name)";
+      " where group_id = $group_id and org_id = $org_id and $statusPart order by upper(name)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
