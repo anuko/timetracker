@@ -590,6 +590,8 @@ $i18n_key_words = array(
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
 'form.display_options.note_on_separate_row' => 'Anotação em linha separada',
 'form.display_options.not_complete_days' => 'Dias não completos',
+// TODO: translate the following.
+// 'form.display_options.inactive_projects' => 'Inactive projects',
 'form.display_options.custom_css' => 'CSS customizado',
 
 // Work plugin strings. See example at https://timetracker.anuko.com/work.php.
