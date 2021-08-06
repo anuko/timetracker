@@ -111,6 +111,7 @@ $i18n_key_words = array(
 'button.stop' => 'Завершить',
 'button.approve' => 'Одобрить',
 'button.disapprove' => 'Не одобрить',
+'button.sync' => 'Синхронизовать',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.menu' => 'Меню',

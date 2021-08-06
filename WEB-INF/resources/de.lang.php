@@ -125,6 +125,7 @@ $i18n_key_words = array(
 // The problem is they do not appear precise, deviate from the meaning of approval / disaproval of report items.)
 // 'button.approve' => 'Approve', (suggested 'Freigeben / Genehmigen' does not appear precise)
 // 'button.disapprove' => 'Disapprove',
+// 'button.sync' => 'Sync', // Used in Android app. The meaning is to synchronize offline time records with server.
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 // TODO: translate the following.
