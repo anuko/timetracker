@@ -45,6 +45,7 @@ CREATE TABLE `tt_groups` (
   `modified` datetime default NULL,                      # modification timestamp
   `modified_ip` varchar(45) default NULL,                # modifier ip
   `modified_by` int(11) default NULL,                    # modifier user_id
+  `entities_modified` datetime default NULL,             # modification timestamp of group entities (clients, projects, etc.)
   `status` tinyint(4) default 1,                         # group status
   PRIMARY KEY (`id`)
 );
@@ -656,4 +657,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.23', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.29', now()); # TODO: change when structure changes.
