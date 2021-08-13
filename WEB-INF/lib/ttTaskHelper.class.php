@@ -107,7 +107,14 @@ class ttTaskHelper {
     // Mark the task as deleted.
     $sql = "update tt_tasks set status = NULL where id = $task_id";
     $affected = $mdb2->exec($sql);
-    return (!is_a($affected, 'PEAR_Error'));
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
+
+    return true;
   }
   
  // insert function inserts a new task into database.
@@ -161,6 +168,11 @@ class ttTaskHelper {
           return false;
       }
     }
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
+
     return $last_id;
   }
  
@@ -242,6 +254,11 @@ class ttTaskHelper {
         }
       }
     }
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
+
     return true;
   }
 

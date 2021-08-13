@@ -95,27 +95,31 @@ class ttUserHelper {
       $mdb2->quote($fields['name']).", ".$mdb2->quote($fields['login']).
       ", $password, $group_id, $org_id, ".$mdb2->quote($fields['role_id']).", ".$mdb2->quote($fields['client_id']).", $rate, $quota_percent, ".$mdb2->quote($email).", now() $created_ip_v $created_by_v)";
     $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
 
     // Now deal with project assignment.
-    if (!is_a($affected, 'PEAR_Error')) {
-      $last_id = $mdb2->lastInsertID('tt_users', 'id');
-      $projects = isset($fields['projects']) ? $fields['projects'] : array();
-      if (count($projects) > 0) {
-        // We have at least one project assigned. Insert corresponding entries in tt_user_project_binds table.
-        foreach($projects as $p) {
-          if(!isset($p['rate']))
-            $p['rate'] = 0;
-          else
-            $p['rate'] = str_replace(',', '.', $p['rate']);
+    $last_id = $mdb2->lastInsertID('tt_users', 'id');
+    $projects = isset($fields['projects']) ? $fields['projects'] : array();
+    if (count($projects) > 0) {
+      // We have at least one project assigned. Insert corresponding entries in tt_user_project_binds table.
+      foreach($projects as $p) {
+        if(!isset($p['rate']))
+          $p['rate'] = 0;
+        else
+          $p['rate'] = str_replace(',', '.', $p['rate']);
 
-          $sql = "insert into tt_user_project_binds (project_id, user_id, group_id, org_id, rate, status)".
-            " values(".$p['id'].", $last_id, $group_id, $org_id, ".$p['rate'].", 1)";
-          $affected = $mdb2->exec($sql);
-        }
+        $sql = "insert into tt_user_project_binds (project_id, user_id, group_id, org_id, rate, status)".
+          " values(".$p['id'].", $last_id, $group_id, $org_id, ".$p['rate'].", 1)";
+        $affected = $mdb2->exec($sql);
       }
-      return $last_id;
     }
-    return false;
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
+
+    return $last_id;
   }
 
   // update - updates a user in database.
@@ -232,6 +236,11 @@ class ttUserHelper {
         }
       }
     }
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
+
     return true;
   }
 
@@ -280,6 +289,10 @@ class ttUserHelper {
     $sql = "delete from tt_users where id = $user_id";
     $affected = $mdb2->exec($sql);    
     if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
       return false;
 
     return true;
