@@ -762,7 +762,7 @@ class ttGroupHelper {
     return true;
   }
 
-  // updateEntitiesModified updates the entities_modided field in tt_groups table
+  // updateEntitiesModified updates the entities_modified field in tt_groups table
   // with a current timestamp.
   static function updateEntitiesModified() {
     global $user;

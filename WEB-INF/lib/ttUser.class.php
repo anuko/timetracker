@@ -705,10 +705,12 @@ class ttUser {
 
     $sql = "update tt_groups set $parts where id = $group_id and org_id = $this->org_id";
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
 
     // Update entities_modified, too.
-    if (!ttGroupHelper::updateEntitiesModified()) return false;
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
 
     return true;
   }

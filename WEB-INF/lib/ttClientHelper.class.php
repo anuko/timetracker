@@ -150,7 +150,14 @@ class ttClientHelper {
     $sql = "update tt_clients set status = null".
       " where id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
-    return (!is_a($affected, 'PEAR_Error'));
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
+
+    return true;
   }
 
   // The insert function inserts a new client record into the clients table.
@@ -189,6 +196,10 @@ class ttClientHelper {
         if (is_a($affected, 'PEAR_Error'))
           return false;
       }
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
 
     return $last_id;
   }
@@ -232,7 +243,14 @@ class ttClientHelper {
       ", tax = $tax, projects = ".$mdb2->quote($comma_separated).", status = $status".
       " where id = $id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
-    return (!is_a($affected, 'PEAR_Error'));
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
+
+    return true;
   }
 
   // The fillBean function fills the ActionForm object with client data.

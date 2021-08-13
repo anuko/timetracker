@@ -221,7 +221,8 @@ class ttProjectHelper {
       return false;
 
     // Update entities_modified, too.
-    if (!ttGroupHelper::updateEntitiesModified()) return false;
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
 
     return true;
   }
@@ -275,7 +276,8 @@ class ttProjectHelper {
     }
 
     // Update entities_modified, too.
-    if (!ttGroupHelper::updateEntitiesModified()) return false;
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
 
     return $last_id;
   } 
@@ -362,10 +364,12 @@ class ttProjectHelper {
       ", tasks = ".$mdb2->quote($comma_separated).", status = ".$mdb2->quote($status).
       " where id = $project_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
-    if (is_a($affected, 'PEAR_Error')) return false;
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
 
     // Update entities_modified, too.
-    if (!ttGroupHelper::updateEntitiesModified()) return false;
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
 
     return true;
   }
