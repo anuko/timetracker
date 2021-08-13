@@ -216,9 +216,14 @@ class ttProjectHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
-    // Finally, delete the project from the projects field in tt_clients table.
-    $result = ttClientHelper::deleteProject($id);
-    return $result;
+    // Delete the project from the projects field in tt_clients table.
+    if (!ttClientHelper::deleteProject($id))
+      return false;
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified()) return false;
+
+    return true;
   }
   
   // insert function inserts a new project into database.
@@ -268,6 +273,9 @@ class ttProjectHelper {
           return false;
       }
     }
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified()) return false;
 
     return $last_id;
   } 
@@ -354,7 +362,12 @@ class ttProjectHelper {
       ", tasks = ".$mdb2->quote($comma_separated).", status = ".$mdb2->quote($status).
       " where id = $project_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
-    return (!is_a($affected, 'PEAR_Error'));
+    if (is_a($affected, 'PEAR_Error')) return false;
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified()) return false;
+
+    return true;
   }
 
   // getAssignedUsers - returns an array of user ids assigned to a project.

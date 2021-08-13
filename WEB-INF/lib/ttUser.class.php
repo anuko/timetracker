@@ -707,6 +707,9 @@ class ttUser {
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
 
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified()) return false;
+
     return true;
   }
 

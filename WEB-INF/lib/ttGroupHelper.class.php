@@ -761,4 +761,17 @@ class ttGroupHelper {
     // By design, we ignore such errors.
     return true;
   }
+
+  // updateEntitiesModified updates the entities_modided field in tt_groups table
+  // with a current timestamp.
+  static function updateEntitiesModified() {
+    global $user;
+    $org_id = $user->org_id;
+    $group_id = $user->getGroup();
+    $mdb2 = getConnection();
+
+    $sql = "update tt_groups set entities_modified = now() where id = $group_id and org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    return (!is_a($affected, 'PEAR_Error'));
+  }
 }
