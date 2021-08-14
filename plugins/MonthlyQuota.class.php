@@ -51,8 +51,14 @@ class MonthlyQuota {
       $insertSql = "insert into tt_monthly_quotas (group_id, org_id, year, month, minutes)".
         " values ($this->group_id, $this->org_id, $year, $month, $minutes)";
       $affected = $this->db->exec($insertSql);
-      return (!is_a($affected, 'PEAR_Error'));
+      if (is_a($affected, 'PEAR_Error'))
+        return false;
     }
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
+
     return true;
   }
 

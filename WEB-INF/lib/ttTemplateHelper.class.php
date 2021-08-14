@@ -48,6 +48,10 @@ class ttTemplateHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
+
     return true;
   }
 
@@ -87,6 +91,11 @@ class ttTemplateHelper {
           return false;
       }
     }
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
+
     return $last_id;
   }
 
@@ -128,6 +137,10 @@ class ttTemplateHelper {
         if (is_a($affected, 'PEAR_Error'))
           die($affected->getMessage());
       }
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
 
     return true;
   }
