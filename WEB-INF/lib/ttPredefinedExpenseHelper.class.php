@@ -66,6 +66,10 @@ class ttPredefinedExpenseHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
+
     return true;
   }
 
@@ -88,6 +92,10 @@ class ttPredefinedExpenseHelper {
     if (is_a($affected, 'PEAR_Error'))
       return false;
 
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
+
     return true;
   }
 
@@ -108,6 +116,13 @@ class ttPredefinedExpenseHelper {
     $sql = "update tt_predefined_expenses set name = ".$mdb2->quote($name).", cost = ".$mdb2->quote($cost).
       " where id = $predefined_expense_id and group_id = $group_id and org_id = $org_id";
     $affected = $mdb2->exec($sql);
-    return (!is_a($affected, 'PEAR_Error'));
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    // Update entities_modified, too.
+    if (!ttGroupHelper::updateEntitiesModified())
+      return false;
+
+    return true;
   }
 }

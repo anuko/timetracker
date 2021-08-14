@@ -156,6 +156,11 @@ class CustomFields {
             if (is_a($affected, 'PEAR_Error'))
                 return false;
         }
+
+        // Update entities_modified, too.
+        if (!ttGroupHelper::updateEntitiesModified())
+          return false;
+
         return true;
     }
 
@@ -170,7 +175,14 @@ class CustomFields {
         $sql = "update tt_custom_field_options set value = " . $mdb2->quote($option_name) .
                 " where id = $id and group_id = $group_id and org_id = $org_id";
         $affected = $mdb2->exec($sql);
-        return (!is_a($affected, 'PEAR_Error'));
+        if (is_a($affected, 'PEAR_Error'))
+          return false;
+
+        // Update entities_modified, too.
+        if (!ttGroupHelper::updateEntitiesModified())
+          return false;
+
+        return true;
     }
 
     // delete Option deletes an option and all custom field log entries that used it.
@@ -196,7 +208,14 @@ class CustomFields {
         $sql = "update tt_custom_field_options set status = null" .
                 " where id = $id and group_id = $group_id and org_id = $org_id";
         $affected = $mdb2->exec($sql);
-        return (!is_a($affected, 'PEAR_Error'));
+        if (is_a($affected, 'PEAR_Error'))
+          return false;
+
+        // Update entities_modified, too.
+        if (!ttGroupHelper::updateEntitiesModified())
+          return false;
+
+        return true;
     }
 
     // getOptions returns an array of options for a custom field.
@@ -314,7 +333,14 @@ class CustomFields {
         $sql = "insert into tt_custom_fields (group_id, org_id, entity_type, type, label, required, status)" .
                 " values($group_id, $org_id, $entity_type, $field_type, " . $mdb2->quote($field_name) . ", $required, 1)";
         $affected = $mdb2->exec($sql);
-        return (!is_a($affected, 'PEAR_Error'));
+        if (is_a($affected, 'PEAR_Error'))
+          return false;
+
+        // Update entities_modified, too.
+        if (!ttGroupHelper::updateEntitiesModified())
+          return false;
+
+        return true;
     }
 
     // The updateField updates custom field for group.
@@ -328,7 +354,14 @@ class CustomFields {
         $sql = "update tt_custom_fields set label = " . $mdb2->quote($name) . ", type = $type, required = $required" .
                 " where id = $id and group_id = $group_id and org_id = $org_id";
         $affected = $mdb2->exec($sql);
-        return (!is_a($affected, 'PEAR_Error'));
+        if (is_a($affected, 'PEAR_Error'))
+          return false;
+
+        // Update entities_modified, too.
+        if (!ttGroupHelper::updateEntitiesModified())
+          return false;
+
+        return true;
     }
 
     // The deleteField deletes a custom field, its options and log entries for group.
@@ -357,7 +390,14 @@ class CustomFields {
         $sql = "update tt_custom_fields set status = null" .
                 " where id = $field_id and group_id = $group_id and org_id = $org_id";
         $affected = $mdb2->exec($sql);
-        return (!is_a($affected, 'PEAR_Error'));
+        if (is_a($affected, 'PEAR_Error'))
+          return false;
+
+        // Update entities_modified, too.
+        if (!ttGroupHelper::updateEntitiesModified())
+          return false;
+
+        return true;
     }
 
     // insertTimeFields - inserts time custom fields into tt_custom_field_log.
