@@ -119,13 +119,13 @@ class ttTimeHelper {
   }
 
   // postedDurationToMinutes - converts a value representing a duration
-  // (usually enetered in a form by a user) to an integer number of minutes.
+  // (usually entered in a form by a user) to an integer number of minutes.
   //
   // Parameters:
   //   $duration - user entered duration string. Valid strings are:
   //               3 or 3h - means 3 hours. Note: h and m letters are not localized.
   //               0.25 or 0.25h or .25 or .25h - means a quarter of hour.
-  //               0,25 or 0,25h or ,25 or ,25h - same as above for users with comma ad decimal mark.
+  //               0,25 or 0,25h or ,25 or ,25h - same as above for users with comma as decimal mark.
   //               1:30 - means 1 hour 30 minutes.
   //               25m - means 25 minutes.
   //   $max - maximum number of minutes that is valid.
