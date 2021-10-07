@@ -373,18 +373,27 @@ class CustomFields {
         $org_id = $user->org_id;
 
         // Mark log entries as deleted. TODO: why are we doing this? Research impact.
+        // The impact is quite severe: an accidental delete of a custom field makes manual recovery problematic.
+        // Therefore, not doing this anymore as of Oct 7, 2021.
+        /*
         $sql = "update tt_custom_field_log set status = null" .
                 " where field_id = $field_id and group_id = $group_id and org_id = $org_id";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
             return false;
+        */
 
         // Mark field options as deleted.
+        // Same comment as above applies.
+        // An accidental delete of a custom field makes manual recovery problematic.
+        // Therefore, not doing this anymore as of Oct 7, 2021.
+        /*
         $sql = "update tt_custom_field_options set status = null" .
                 " where field_id = $field_id and group_id = $group_id and org_id = $org_id";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
             return false;
+        */
 
         // Mark custom field as deleted.
         $sql = "update tt_custom_fields set status = null" .
