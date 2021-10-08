@@ -3,7 +3,7 @@
 License: See license.txt */
 
 require_once('initialize.php');
-require_once('plugins/MonthlyQuota.class.php');
+require_once(ROOT.'/plugins/MonthlyQuota.class.php');
 import('form.Form');
 import('ttTimeHelper');
 

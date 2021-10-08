@@ -21,6 +21,7 @@
 
 Docker users: install both docker and docker-compose, then run a dev instance:
 ```bash
+cp conf/config.php src/WEB-INF/config.php
 docker-compose up
 ```
 Navigate to: http://localhost:8080 to use Time Tracker. Default credentials for initial login are:

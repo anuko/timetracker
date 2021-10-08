@@ -13,7 +13,7 @@ set_include_path(realpath(dirname(__FILE__).'/lib/pear') . PATH_SEPARATOR . get_
 // CHANGE 3 PARAMETERS HERE!
 // In this example: "root" is username, "no" is password, "dbname" is database name.
 //
-define('DSN', 'mysqli://root:no@localhost/dbname?charset=utf8mb4');
+define('DSN', 'mysqli://anuko_user:anuko_pw@anuko_db/timetracker?charset=utf8mb4');
 // Do NOT change charset unless you upgraded from an older Time Tracker where charset was NOT specified
 // and now you see some corrupted characters. See http://dev.mysql.com/doc/refman/5.0/en/charset-mysql.html
 
@@ -99,10 +99,10 @@ define('MAIL_SMTP_HOST', 'localhost'); // For gmail use 'ssl://smtp.gmail.com' i
 // define('MAIL_SMTP_DEBUG', true);
 
 
-// CSS files. They are located in the root of Time Tracker installation.
+// CSS files. They are located in the css folder of Time Tracker installation.
 //
-define('DEFAULT_CSS', 'default.css');
-define('RTL_CSS', 'rtl.css'); // For right to left languages.
+define('DEFAULT_CSS', 'css/default.css');
+define('RTL_CSS', 'css/rtl.css'); // For right to left languages.
 
 
 // Default language of the application.

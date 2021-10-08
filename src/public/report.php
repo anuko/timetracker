@@ -46,7 +46,7 @@ if ($user->isPluginEnabled('ts')) {
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
-  require_once('plugins/CustomFields.class.php');
+  require_once(ROOT.'/plugins/CustomFields.class.php');
   $custom_fields = new CustomFields();
   $smarty->assign('custom_fields', $custom_fields);
 }

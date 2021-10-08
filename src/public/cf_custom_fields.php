@@ -3,7 +3,7 @@
 License: See license.txt */
 
 require_once('initialize.php');
-require_once('plugins/CustomFields.class.php');
+require_once(ROOT.'/plugins/CustomFields.class.php');
 import('form.Form');
 
 // Access checks.

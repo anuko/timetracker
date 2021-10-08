@@ -2,4 +2,4 @@
 FROM mariadb:latest
 
 # Copy database creation script.
-COPY mysql.sql /docker-entrypoint-initdb.d/
+COPY schema/mysql.sql /docker-entrypoint-initdb.d/

@@ -83,7 +83,7 @@ $_SESSION['date'] = $cl_date;
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
-  require_once('plugins/CustomFields.class.php');
+  require_once(ROOT.'/plugins/CustomFields.class.php');
   $custom_fields = new CustomFields();
   $smarty->assign('custom_fields', $custom_fields);
 }
@@ -111,7 +111,7 @@ if ($showNoteRow) {
 }
 
 if ($user->isPluginEnabled('mq')){
-  require_once('plugins/MonthlyQuota.class.php');
+  require_once(ROOT.'/plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
   $month_quota_minutes = $quota->getUserQuota($selected_date->mYear, $selected_date->mMonth);
   $quota_minutes_from_1st = $quota->getUserQuotaFrom1st($selected_date);

@@ -13,9 +13,12 @@ error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT); // & ~E_DEPRECATED);
 ini_set('display_errors', 'Off');
 
 define("APP_VERSION", "1.19.30.5601");
-define("APP_DIR", dirname(__FILE__));
-define("LIBRARY_DIR", APP_DIR."/WEB-INF/lib");
-define("TEMPLATE_DIR", APP_DIR."/WEB-INF/templates");
+define("ROOT", dirname(__DIR__));
+define("APP_DIR", ROOT."/public");
+define("WEB_INF", ROOT."/WEB-INF");
+define("LIBRARY_DIR", WEB_INF."/lib");
+define("TEMPLATE_DIR", WEB_INF."/templates");
+define("TEMPLATES_C_DIR", WEB_INF."/templates_c");
 // Date format for database and URI parameters.
 define('DB_DATEFORMAT', '%Y-%m-%d');
 define('MAX_RANK', 512); // Max user rank.
@@ -23,8 +26,8 @@ define('MAX_RANK', 512); // Max user rank.
 require_once(LIBRARY_DIR.'/common.lib.php');
 
 // Require the configuration file with application settings.
-if (!file_exists(APP_DIR."/WEB-INF/config.php")) die ("WEB-INF/config.php file does not exist.");
-require_once("WEB-INF/config.php");
+if (!file_exists(WEB_INF."/config.php")) die ("WEB-INF/config.php file does not exist.");
+require_once(WEB_INF."/config.php");
 // Check whether DSN is defined.
 if (!defined("DSN")) {
   die ("DSN value is not defined. Check your config.php file.");
@@ -50,7 +53,7 @@ import('smarty.Smarty');
 $smarty = new Smarty;
 $smarty->use_sub_dirs = false;
 $smarty->template_dir = TEMPLATE_DIR;
-$smarty->compile_dir  = TEMPLATE_DIR.'_c';
+$smarty->compile_dir  = TEMPLATES_C_DIR;
 
 // Note: these 3 settings below used to be in .htaccess file. Moved them here to eliminate "error 500" problems
 // with some shared hostings that do not have AllowOverride Options or AllowOverride All in their apache configurations.
@@ -88,7 +91,7 @@ $auth = Auth::factory(AUTH_MODULE, $GLOBALS['AUTH_MODULE_PARAMS']);
 
 // Some defines we'll need.
 //
-define('RESOURCE_DIR', APP_DIR.'/WEB-INF/resources');
+define('RESOURCE_DIR', WEB_INF.'/resources');
 define('COOKIE_EXPIRE', 60*60*24*30); // Cookies expire in 30 days.
 
 // Status values for projects, users, etc.

@@ -28,7 +28,7 @@ require_once('WEB-INF/lib/tcpdf/tcpdf.php');
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
-  require_once('plugins/CustomFields.class.php');
+  require_once(ROOT.'/plugins/CustomFields.class.php');
   $custom_fields = new CustomFields();
 }
 

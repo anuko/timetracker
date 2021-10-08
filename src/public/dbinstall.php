@@ -2,9 +2,9 @@
 /* Copyright (c) Anuko International Ltd. https://www.anuko.com
 License: See license.txt */
 
-require_once('WEB-INF/config.php');
-require_once('WEB-INF/lib/common.lib.php');
 require_once('initialize.php');
+require_once(WEB_INF.'/config.php');
+require_once(WEB_INF.'/lib/common.lib.php');
 import('ttUserHelper');
 import('ttTaskHelper');
 import('ttRoleHelper');
@@ -56,14 +56,14 @@ if ($request->isGet()) {
   }
 
   // Check if WEB-INF/templates_c dir is writable.
-  if (is_writable(APP_DIR.'/WEB-INF/templates_c/')) {
+  if (is_writable(WEB_INF.'/templates_c/')) {
     echo('WEB-INF/templates_c/ directory is writable.<br>');
   } else {
     echo('<font color="red">Error: WEB-INF/templates_c/ directory is not writable.</font><br>');
   }
 
   // Require the configuration file with application settings.
-  if (file_exists(APP_DIR."/WEB-INF/config.php")) {
+  if (file_exists(WEB_INF."/config.php")) {
     echo('WEB-INF/config.php file exists.<br>');
 
     // Config file must start with the PHP opening tag. We are checking this because
@@ -72,7 +72,7 @@ if ($request->isGet()) {
     // Consequences:
     //   1) PHP redirects may stop working, depending on server settings.
     //   2) PDF reports and attachment downloads will become unusable (cannot open files).
-    $file = fopen(APP_DIR.'/WEB-INF/config.php', 'r');
+    $file = fopen(WEB_INF.'/config.php', 'r');
     $line = fgets($file);
     if (strcmp("<?php\n", $line) !== 0 && strcmp("<?php\r\n", $line) !== 0) {
       echo('<font color="red">Error: WEB-INF/config.php file does not start with a PHP opening tag.</font>  See <a href="https://www.anuko.com/lp/tt_33.htm" target="_blank">explanation</a>.<br>');
@@ -145,7 +145,7 @@ if ($request->isGet()) {
   }
 
   // Check database access.
-  require_once('MDB2.php');
+  require_once(WEB_INF.'/lib/pear/MDB2.php');
   $conn = MDB2::connect(DSN);
   if (!is_a($conn, 'MDB2_Error')) {
     echo('Connection to database successful.<br>');

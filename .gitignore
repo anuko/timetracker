@@ -1,7 +1,5 @@
 config.php
-WEB-INF/templates_c/*.*
-WEB-INF/templates_c/import_*
-WEB-INF/templates_c/tt*
+src/WEB-INF/templates_c/
 WEB-INF/lib/tcpdf/
 nbproject/
 upload/
@@ -11,3 +9,4 @@ Thumbs.db
 *~
 .idea/
 api/
+charts/

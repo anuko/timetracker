@@ -179,9 +179,9 @@ foreach($totals as $total) {
 $chart->setDataSet($data_set);
 
 // Prepare a file name.
-$img_dir = TEMPLATE_DIR.'_c/'; // Directory.
+$img_dir = 'charts/'; // Directory.
 $file_name = uniqid('chart_').'.png'; // Short file name. Unique ID here is to avoid problems with browser caching.
-$img_ref = 'WEB-INF/templates_c/'.$file_name; // Image reference for html.
+$img_ref = $img_dir.$file_name; // Image reference for html.
 $file_name = $img_dir.$file_name; // Full file name.
 
 // Clean up the file system from older images.
