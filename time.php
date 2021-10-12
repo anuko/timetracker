@@ -34,7 +34,7 @@ if ($request->isPost()) {
 }
 // If we are passed in a date, make sure it is in correct format.
 $date = $request->getParameter('date');
-if ($date && !ttValidDate($date)) {
+if ($date && !ttValidDbDateFormatDate($date)) {
   header('Location: access_denied.php');
   exit();
 }

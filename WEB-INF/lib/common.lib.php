@@ -226,15 +226,29 @@ function ttValidDate($val)
   if (strlen($val) == 0)
     return false;
 
-  // This should accept a string in format 'YYYY-MM-DD', 'MM/DD/YYYY', 'DD-MM-YYYY', 'DD.MM.YYYY', or 'DD.MM.YYYY whatever'.
+  // This should validate a string in format 'YYYY-MM-DD', 'MM/DD/YYYY', 'DD-MM-YYYY', 'DD.MM.YYYY', or 'DD.MM.YYYY whatever'.
   if (!preg_match('/^\d\d\d\d-\d\d-\d\d$/', $val) &&
     !preg_match('/^\d\d\/\d\d\/\d\d\d\d$/', $val) &&
     !preg_match('/^\d\d\-\d\d\-\d\d\d\d$/', $val) &&
     !preg_match('/^\d\d\.\d\d\.\d\d\d\d$/', $val) &&
     !preg_match('/^\d\d\.\d\d\.\d\d\d\d .+$/', $val))
     return false;
-    
-  return true;    
+
+  return true;
+}
+
+// ttValidDbDateFormatDate is used to check user input to validate a date in DB_DATEFORMAT.
+function ttValidDbDateFormatDate($val)
+{
+  $val = trim($val);
+  if (strlen($val) == 0)
+    return false;
+
+  // This should validate a string in format 'YYYY-MM-DD'.
+  if (!preg_match('/^\d\d\d\d-\d\d-\d\d$/', $val))
+    return false;
+
+  return true;
 }
 
 // ttValidInteger is used to check user input to validate an integer.
