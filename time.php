@@ -32,6 +32,12 @@ if ($request->isPost()) {
     exit();
   }
 }
+// If we are passed in a date, make sure it is in correct format.
+$date = $request->getParameter('date');
+if ($date && !ttValidDate($date)) {
+  header('Location: access_denied.php');
+  exit();
+}
 // End of access checks.
 
 // Determine user for whom we display this page.
