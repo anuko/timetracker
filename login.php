@@ -7,6 +7,17 @@ import('form.Form');
 import('ttOrgHelper');
 import('ttUser');
 
+// Access checks.
+if ($request->isPost()) {
+  // Validate that browser_today parameter is in correct format.
+  $browser_today = $request->getParameter('browser_today');
+  if ($browser_today && !ttValidDbDateFormatDate($browser_today)) {
+    header('Location: access_denied.php');
+    exit();
+  }
+}
+// End of access checks.
+
 $cl_login = $request->getParameter('login');
 if ($cl_login == null && $request->isGet()) $cl_login = @$_COOKIE[LOGIN_COOKIE_NAME];
 $cl_password = $request->getParameter('password');

@@ -24,6 +24,14 @@ if (!$time_rec || $time_rec['approved'] || $time_rec['timesheet_id'] || $time_re
   header('Location: access_denied.php');
   exit();
 }
+if ($request->isPost()) {
+  // Validate that browser_today parameter is in correct format.
+  $browser_today = $request->getParameter('browser_today');
+  if ($browser_today && !ttValidDbDateFormatDate($browser_today)) {
+    header('Location: access_denied.php');
+    exit();
+  }
+}
 // End of access checks.
 
 $user_id = $user->getUser();

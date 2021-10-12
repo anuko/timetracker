@@ -38,6 +38,14 @@ if ($request->isPost() && $request->getParameter('user')) {
     exit();
   }
 }
+if ($request->isPost()) {
+  // Validate that browser_today parameter is in correct format.
+  $browser_today = $request->getParameter('browser_today');
+  if ($browser_today && !ttValidDbDateFormatDate($browser_today)) {
+    header('Location: access_denied.php');
+    exit();
+  }
+}
 // End of access checks.
 
 // Determine user for which we display this page.
