@@ -11,9 +11,16 @@ if (!ttAccessAllowed('manage_subgroups')) {
   header('Location: access_denied.php');
   exit();
 }
-if ($request->isPost() && !$user->isGroupValid($request->getParameter('group'))) {
-  header('Location: access_denied.php'); // Wrong group id in post.
-  exit();
+if ($request->isPost()) {
+  $group_id = $request->getParameter('group');
+  if (!ttValidInteger($group_id)) {
+    header('Location: access_denied.php'); // Protection against sql injection.
+    exit();
+  }
+  if (!$user->isGroupValid($group_id)) {
+    header('Location: access_denied.php'); // Wrong group id in post.
+    exit();
+  }
 }
 // End of access checks.
 
