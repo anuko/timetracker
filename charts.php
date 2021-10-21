@@ -40,6 +40,11 @@ if ($request->isPost() && $request->getParameter('user')) {
     exit();
   }
 }
+$date = $request->getParameter('date');
+if ($date && !ttValidDbDateFormatDate($date)) {
+  header('Location: access_denied.php');
+  exit();
+}
 // End of access checks.
 
 // Determine user for which we display this page.

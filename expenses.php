@@ -38,6 +38,12 @@ if ($request->isPost() && $request->getParameter('user')) {
     exit();
   }
 }
+// If we are passed in a date, make sure it is in correct format.
+$date = $request->getParameter('date');
+if ($date && !ttValidDbDateFormatDate($date)) {
+  header('Location: access_denied.php');
+  exit();
+}
 if ($request->isPost()) {
   // Validate that browser_today parameter is in correct format.
   $browser_today = $request->getParameter('browser_today');
