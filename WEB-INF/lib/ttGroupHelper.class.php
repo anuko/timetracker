@@ -27,9 +27,13 @@ class ttGroupHelper {
   static function getParentGroup($group_id) {
     global $user;
 
+    // Checking parameters for sanity is normally done in access check blocks on pages.
+    // This cast below is just in case we forgot to check $group_id to be an integer.
+    $groupId = (int) $group_id; // Protection against sql injection.
+
     $mdb2 = getConnection();
 
-    $sql = "select parent_id from tt_groups where id = $group_id and org_id = $user->org_id and status = 1";
+    $sql = "select parent_id from tt_groups where id = $groupId and org_id = $user->org_id and status = 1";
     $res = $mdb2->query($sql);
 
     if (!is_a($res, 'PEAR_Error')) {
