@@ -33,7 +33,6 @@ if ($request->isPost()) {
   $cl_address = trim($request->getParameter('address'));
   $cl_tax = trim($request->getParameter('tax'));
   $cl_status = $request->getParameter('status');
-$cl_status = "1"  ;
   $cl_projects = $request->getParameter('projects');
 } else {
   $cl_name = $client['name'];
