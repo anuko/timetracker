@@ -219,6 +219,19 @@ function ttValidFloat($val, $emptyValid = false)
   return true;    
 }
 
+// ttValidStatus is used to check user input to validate a status value.
+function ttValidStatus($val)
+{
+  if (!ttValidInteger($val))
+    return false;
+
+  $intVal = (int) $val; // Cast to int for comparisons below to work.
+  if ($intVal != ACTIVE && $intVal != INACTIVE)
+    return false;
+
+  return true;
+}
+
 // ttValidDate is used to check user input to validate a date.
 function ttValidDate($val)
 {

@@ -33,6 +33,7 @@ if ($request->isPost()) {
   $cl_address = trim($request->getParameter('address'));
   $cl_tax = trim($request->getParameter('tax'));
   $cl_status = $request->getParameter('status');
+$cl_status = "1"  ;
   $cl_projects = $request->getParameter('projects');
 } else {
   $cl_name = $client['name'];
@@ -64,6 +65,7 @@ if ($request->isPost()) {
   if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.client_name'));
   if (!ttValidString($cl_address, true)) $err->add($i18n->get('error.field'), $i18n->get('label.client_address'));
   if (!ttValidFloat($cl_tax, true)) $err->add($i18n->get('error.field'), $i18n->get('label.tax'));
+  if (!ttValidStatus($cl_status)) $err->add($i18n->get('error.field'), $i18n->get('label.status'));
 
   if ($err->no()) {
     if ($request->getParameter('btn_save')) {
