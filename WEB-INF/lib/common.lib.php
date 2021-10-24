@@ -222,6 +222,9 @@ function ttValidFloat($val, $emptyValid = false)
 // ttValidStatus is used to check user input to validate a status value.
 function ttValidStatus($val)
 {
+  if (null == $val)
+    return true;
+
   if (!ttValidInteger($val))
     return false;
 
