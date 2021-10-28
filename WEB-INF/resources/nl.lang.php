@@ -594,8 +594,7 @@ $i18n_key_words = array(
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
 'form.display_options.note_on_separate_row' => 'Notitie in aparte kolom', // Translator (Henk) comment: "kolom is the right word in Dutch."
 'form.display_options.not_complete_days' => 'Niet complete dagen',
-// TODO: translate the following.
-// 'form.display_options.inactive_projects' => 'Inactive projects',
+'form.display_options.inactive_projects' => 'Niet actieve projecten',
 'form.display_options.custom_css' => 'Aangepaste CSS',
 
 // Work plugin strings. See example at https://timetracker.anuko.com/work.php
