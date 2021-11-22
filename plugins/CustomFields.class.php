@@ -140,8 +140,9 @@ class CustomFields {
 
         // Check if the option exists.
         $id = 0;
-        $sql = "select id from tt_custom_field_options" .
-                " where field_id = $field_id and group_id = $group_id and org_id = $org_id and value = " . $mdb2->quote($option_name);
+        $sql = "select id from tt_custom_field_options".
+                " where field_id = $field_id and group_id = $group_id and org_id = $org_id and value = ".$mdb2->quote($option_name).
+                " and status is not null";
         $res = $mdb2->query($sql);
         if (is_a($res, 'PEAR_Error'))
             return false;
