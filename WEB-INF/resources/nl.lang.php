@@ -348,7 +348,6 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'inactief',
 'dropdown.delete' => 'verwijderen',
 'dropdown.do_not_delete' => 'niet verwijderen',
-'dropdown.pending_approval' => 'in afwachting van goedkeuring',
 'dropdown.approved' => 'goedgekeurd',
 'dropdown.not_approved' => 'afgekeurd',
 'dropdown.paid' => 'betaald',

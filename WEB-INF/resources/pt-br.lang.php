@@ -346,7 +346,6 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'inativo',
 'dropdown.delete' => 'apagar',
 'dropdown.do_not_delete' => 'não apagar',
-'dropdown.pending_approval' => 'aprovação pendente',
 'dropdown.approved' => 'aprovado',
 'dropdown.not_approved' => 'não aprovado',
 'dropdown.paid' => 'pago',

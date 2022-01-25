@@ -403,7 +403,6 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'dropdown.delete' => 'delete',
 // 'dropdown.do_not_delete' => 'do not delete',
-// 'dropdown.pending_approval' => 'pending approval',
 // 'dropdown.approved' => 'approved',
 // 'dropdown.not_approved' => 'not approved',
 // 'dropdown.paid' => 'paid',

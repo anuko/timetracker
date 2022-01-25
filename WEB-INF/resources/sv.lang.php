@@ -390,7 +390,6 @@ $i18n_key_words = array(
 'dropdown.delete' => 'Ta bort',
 'dropdown.do_not_delete' => 'Ta inte bort',
 // TODO: translate the following.
-// 'dropdown.pending_approval' => 'pending approval',
 // 'dropdown.approved' => 'approved',
 // 'dropdown.not_approved' => 'not approved',
 // 'dropdown.paid' => 'paid',

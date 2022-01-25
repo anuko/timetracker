@@ -349,7 +349,6 @@ $i18n_key_words = array(
 'dropdown.status_inactive' => 'неактивный',
 'dropdown.delete' => 'удалить',
 'dropdown.do_not_delete' => 'не удалять',
-'dropdown.pending_approval' => 'в ожидании одобрения',
 'dropdown.approved' => 'одобрено',
 'dropdown.not_approved' => 'не одобрено',
 'dropdown.paid' => 'оплачено',
