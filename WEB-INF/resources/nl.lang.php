@@ -228,8 +228,6 @@ $i18n_key_words = array(
 'label.file' => 'Bestand',
 'label.active_users' => 'Actieve medewerkers',
 'label.inactive_users' => 'Inactieve medewerkers',
-'label.details' => 'Details',
-'label.budget' => 'Budget',
 
 // Entity names.
 'entity.time' => 'tijd',

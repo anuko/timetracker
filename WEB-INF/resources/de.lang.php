@@ -247,12 +247,6 @@ $i18n_key_words = array(
 // 'label.file' => 'File',
 'label.active_users' => 'Aktive Nutzer',
 'label.inactive_users' => 'Inaktive Nutzer',
-// TODO: translate the following or confirm that "Details" is also correct for German (exactly as the English string).
-// label.details is used to identify a field for LONG DESCRIPTION of a work item used in Remote Work plugin.
-// For example, a work item could be "Design a logo", and the Details hold EXACT anfd PRECISE specs of what a customer needs.
-// Another use is with offers with Remote Work plugin, where details hold a long, precise, and complete description of the offer.
-// 'label.details' => 'Details',
-'label.budget' => 'Budget',
 
 // Entity names. We use lower case (in English) because they are used in dropdowns, too.
 // They are used to associate a custom field with an entity type.
