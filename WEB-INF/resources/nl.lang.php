@@ -230,11 +230,6 @@ $i18n_key_words = array(
 'label.inactive_users' => 'Inactieve medewerkers',
 'label.details' => 'Details',
 'label.budget' => 'Budget',
-'label.work' => 'Werk',
-'label.offer' => 'Aanbod',
-'label.contractor' => 'Aanbieder',
-'label.how_to_pay' => 'Betaalwijze',
-'label.moderator_comment' => 'Commentaar',
 
 // Entity names.
 'entity.time' => 'tijd',

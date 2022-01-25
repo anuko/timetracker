@@ -231,11 +231,6 @@ $i18n_key_words = array(
 'label.inactive_users' => 'Usuários inativos',
 'label.details' => 'Detalhes',
 'label.budget' => 'Orçamento',
-'label.work' => 'Trabalho',
-'label.offer' => 'Oferta',
-'label.contractor' => 'Contratante',
-'label.how_to_pay' => 'Como pagar',
-'label.moderator_comment' => 'Comentário do moderador',
 
 // Entity names. We use lower case (in English) because they are used in dropdowns, too.
 // They are used to associate a custom field with an entity type.
