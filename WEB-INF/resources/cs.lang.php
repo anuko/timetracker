@@ -388,22 +388,6 @@ $i18n_key_words = array(
 // 'title.edit_file' => 'Editing File',
 // 'title.delete_file' => 'Deleting File',
 // 'title.download_file' => 'Downloading File',
-// 'title.work' => 'Work',
-// 'title.add_work' => 'Adding Work',
-// 'title.edit_work' => 'Editing Work',
-// 'title.delete_work' => 'Deleting Work',
-// 'title.active_work' => 'Active Work', // Active work items this group outsources to other groups.
-// 'title.available_work' => 'Available Work', // Available work items from other organizations.
-// 'title.inactive_work' => 'Inactive Work', // Inactive work items this group was outsourcing to other groups.
-// 'title.pending_work' => 'Pending Work', // Work items pending moderator approval.
-// 'title.offer' => 'Offer',
-// 'title.add_offer' => 'Adding Offer',
-// 'title.edit_offer' => 'Editing Offer',
-// 'title.delete_offer' => 'Deleting Offer',
-// 'title.active_offers' => 'Active Offers', // Active offers this group makes available to other groups.
-// 'title.available_offers' => 'Available Offers', // Available offers from other organizations.
-// 'title.inactive_offers' => 'Inactive Offers', // Inactive offers for group.
-// 'title.pending_offers' => 'Pending Offers', // Offers pending moderator approval.
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.

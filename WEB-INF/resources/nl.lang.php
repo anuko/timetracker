@@ -323,22 +323,6 @@ $i18n_key_words = array(
 'title.edit_file' => 'Bestand bewerken',
 'title.delete_file' => 'Bestand verwijderen',
 'title.download_file' => ' Bestand downloaden',
-'title.work' => 'Werk',
-'title.add_work' => 'Werk toevoegen',
-'title.edit_work' => 'Werk bewerken',
-'title.delete_work' => 'Werk verwijderen',
-'title.active_work' => 'Actief werk',
-'title.available_work' => 'Beschikbaar werk',
-'title.inactive_work' => 'Inactief werk',
-'title.pending_work' => 'Werk in afwachting van goedkeuring',
-'title.offer' => 'Aanbod',
-'title.add_offer' => 'Aanbieding toevoegen',
-'title.edit_offer' => 'Aanbieding bewerken',
-'title.delete_offer' => 'Aanbieding verwijderen',
-'title.active_offers' => 'Actieve aanbiedingen',
-'title.available_offers' => 'Beschikbare aanbiedingen',
-'title.inactive_offers' => 'Inactieve aanbiedingen',
-'title.pending_offers' => 'Aangeboden werk in afwachting van goedkeuring',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.

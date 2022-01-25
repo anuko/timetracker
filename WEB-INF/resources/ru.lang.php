@@ -324,22 +324,6 @@ $i18n_key_words = array(
 'title.edit_file' => 'Редактирование файла',
 'title.delete_file' => 'Удаление файла',
 'title.download_file' => 'Скачивание файла',
-'title.work' => 'Работа',
-'title.add_work' => 'Добавление работы',
-'title.edit_work' => 'Редактирование работы',
-'title.delete_work' => 'Удаление работы',
-'title.active_work' => 'Активная работа',
-'title.available_work' => 'Имеющаяся работа',
-'title.inactive_work' => 'Неактивная работа',
-'title.pending_work' => 'Работа в ожидании',
-'title.offer' => 'Предложение',
-'title.add_offer' => 'Добавление предложения',
-'title.edit_offer' => 'Редактирование предложения',
-'title.delete_offer' => 'Удаление предложения',
-'title.active_offers' => 'Активные предложения',
-'title.available_offers' => 'Имеющиеся предложения',
-'title.inactive_offers' => 'Неактивные предложения',
-'title.pending_offers' => 'Предложения в ожидании',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
