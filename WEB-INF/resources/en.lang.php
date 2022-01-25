@@ -86,11 +86,6 @@ $i18n_key_words = array(
 // "something went wrong" when trying to do some operation with attachments.
 // For example, File Storage server could be offline, or Time Tracker config option is wrong, etc.
 'error.file_storage' => 'File storage server error.',
-// Meaning of error.remote_work: an (unspecified) error occurred when trying to communicate with
-// "Remote Work" server, the one that supports the "Work" plugin, see https://www.anuko.com/time_tracker/what_is/work_plugin.htm
-// It is a generic message telling us that "something went wrong" when trying to do some operation with Work plugin.
-// For example, Remote Work server could be offline, among other things.
-'error.remote_work' => 'Remote work server error.',
 
 // Warning messages.
 'warn.sure' => 'Are you sure?',

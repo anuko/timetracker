@@ -81,7 +81,6 @@ $i18n_key_words = array(
 'error.user_count' => 'Limite na contagem de usuários.',
 'error.expired' => 'Data de expiração atingida.',
 'error.file_storage' => 'Erro relacionado ao servidor de armazenamento de arquivos.',
-'error.remote_work' => 'Erro relacionado ao servidor responsável pelo plugin work.',
 
 // Warning messages.
 'warn.sure' => 'Tem certeza?',

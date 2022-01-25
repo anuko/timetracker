@@ -81,7 +81,6 @@ $i18n_key_words = array(
 'error.user_count' => 'Limiet op aantal gebruikers.',
 'error.expired' => 'Verloop datum is bereikt.',
 'error.file_storage' => 'Bestand server probleem.',
-'error.remote_work' => 'Werk op afstand server probleem.',
 
 // Warning messages.
 'warn.sure' => 'Ben je er zeker van?',
