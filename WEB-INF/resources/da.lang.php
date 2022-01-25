@@ -207,9 +207,6 @@ $i18n_key_words = array(
 'label.ldap_hint' => 'Skriv dit <b>Windows brugernavn</b> eller <b>adgangskode</b> i felterne her under.',
 'label.required_fields' => '* - obligatorisk felt',
 'label.on_behalf' => 'på vegne af',
-'label.role_manager' => '(Manager)',
-'label.role_comanager' => '(Co-Manager)',
-'label.role_admin' => '(Administrator)',
 'label.page' => 'Side',
 'label.condition' => 'Betingelse',
 // TODO: translate the following.

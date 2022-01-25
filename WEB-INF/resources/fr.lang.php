@@ -206,9 +206,6 @@ $i18n_key_words = array(
 'label.ldap_hint' => 'Entrer votre <b>Identifiant Windows</b> et <b>votre mot de passe</b> dans les champs suivants.',
 'label.required_fields' => '* - champs obligatoires',
 'label.on_behalf' => 'de la part de',
-'label.role_manager' => '(responsable)',
-'label.role_comanager' => '(coresponsable)',
-'label.role_admin' => '(administrateur)',
 'label.page' => 'Page',
 'label.condition' => 'Condition',
 // TODO: translate the following.

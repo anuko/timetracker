@@ -229,9 +229,6 @@ $i18n_key_words = array(
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* zorunlu bilgi',
 'label.on_behalf' => 'adına',
-'label.role_manager' => '(yönetici)',
-'label.role_comanager' => '(yardımcı yönetici)',
-'label.role_admin' => '(sistem yönetici)',
 // TODO: translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',

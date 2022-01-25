@@ -222,9 +222,6 @@ $i18n_key_words = array(
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* date obligatorii',
 'label.on_behalf' => 'in numele',
-'label.role_manager' => '(manager)',
-'label.role_comanager' => '(co-manager)',
-'label.role_admin' => '(administrator)',
 // TODO: translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',

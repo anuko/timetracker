@@ -212,10 +212,6 @@ $i18n_key_words = array(
 'label.required_fields' => '* campos obrigatórios',
 // TODO: translate the following.
 // 'label.on_behalf' => 'on behalf of',
-'label.role_manager' => '(gerente)',
-// TODO: translate the following.
-// 'label.role_comanager' => '(co-manager)',
-// 'label.role_admin' => '(administrator)',
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',

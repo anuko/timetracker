@@ -216,9 +216,6 @@ $i18n_key_words = array(
 'label.required_fields' => '* nõutud väljad',
 // TODO: Translate label.on_behalf, perhaps trying as "instead of".
 // 'label.on_behalf' => 'on behalf of',
-'label.role_manager' => '(haldur)',
-'label.role_comanager' => '(kaashaldur)',
-'label.role_admin' => '(administraator)',
 'label.page' => 'Lehekülg',
 'label.condition' => 'Tingimus',
 'label.yes' => 'jah',

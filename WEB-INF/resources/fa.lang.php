@@ -218,9 +218,6 @@ $i18n_key_words = array(
 'label.ldap_hint' => '<b>نام کاربری ویندوز</b>و <b>رمزعبور</b>خود را در فیلدهای زیر وارد کنید',
 'label.required_fields' => '* - فیلد های اجباری',
 'label.on_behalf' => 'از دیدگاه',
-'label.role_manager' => '(مدیر)',
-'label.role_comanager' => '(دستیار مدیر)',
-'label.role_admin' => '(مدیر ارشد)',
 // Translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',

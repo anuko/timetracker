@@ -216,9 +216,6 @@ $i18n_key_words = array(
 'label.ldap_hint' => '在下面的栏目输入您的<b>Windows用户名</b>和<b>密码</b>。',
 'label.required_fields' => '* 必填栏目',
 'label.on_behalf' => '代表',
-'label.role_manager' => '(经理)',
-'label.role_comanager' => '(合作经理人)',
-'label.role_admin' => '(管理员)',
 'label.page' => '页码',
 // TODO: translate the following.
 // 'label.condition' => 'Condition',

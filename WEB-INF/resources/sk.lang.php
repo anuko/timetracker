@@ -214,9 +214,6 @@ $i18n_key_words = array(
 'label.ldap_hint' => 'Zadajte <b>prihlasovacie meno do Windowsu</b> a <b>heslo</b> do polí nižšie.',
 'label.required_fields' => '* - povinné polia',
 'label.on_behalf' => 'v zastúpení',
-'label.role_manager' => '(manažér)',
-'label.role_comanager' => '(spolu-manažér)',
-'label.role_admin' => '(administrátor)',
 // TODO: translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',

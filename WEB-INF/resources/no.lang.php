@@ -224,9 +224,6 @@ $i18n_key_words = array(
 'label.required_fields' => '* obligatoriske felt',
 'label.on_behalf' => 'på vegne av',
 // TODO: translate the following.
-// 'label.role_manager' => '(manager)',
-// 'label.role_comanager' => '(co-manager)',
-// 'label.role_admin' => '(administrator)',
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
 // 'label.yes' => 'yes',

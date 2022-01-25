@@ -205,9 +205,6 @@ $i18n_key_words = array(
 'label.ldap_hint' => 'Fyll i ditt <b>användarnamn och lösenord för Windows</b> i fälten nedan.',
 'label.required_fields' => '* - Obligatoriska fält',
 'label.on_behalf' => 'agerar som',
-'label.role_manager' => '(Ansvarig)',
-'label.role_comanager' => '(Delansvarig)',
-'label.role_admin' => '(Administratör)',
 'label.page' => 'Sida',
 'label.condition' => 'Villkor',
 // TODO: translate the following.

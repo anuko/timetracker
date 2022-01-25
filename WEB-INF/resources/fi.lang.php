@@ -210,9 +210,6 @@ $i18n_key_words = array(
 'label.ldap_hint' => 'Syötä <b>Windows-käyttäjätunnuksesi</b> ja <b>salasanasi</b> ao. kenttiin.',
 'label.required_fields' => '* - pakolliset kentät',
 'label.on_behalf' => 'puolesta',
-'label.role_manager' => '(esimies)',
-'label.role_comanager' => '(apu-esimies)',
-'label.role_admin' => '(ylläpitäjä)',
 'label.page' => 'Sivu',
 // TODO: translate the following.
 // 'label.condition' => 'Condition',

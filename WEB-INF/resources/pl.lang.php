@@ -212,9 +212,6 @@ $i18n_key_words = array(
 'label.ldap_hint' => 'Wpisz swoją <b> nazwę użytkownika Windows<b> i <b>hasło<b> w polach poniżej.',
 'label.required_fields' => '* - pola wymagane',
 'label.on_behalf' => 'w imieniu',
-'label.role_manager' => '(Manager)',
-'label.role_comanager' => '(Co-manager)',
-'label.role_admin' => '(Administrator)',
 // TODO: translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',

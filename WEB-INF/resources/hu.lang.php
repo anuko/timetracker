@@ -221,9 +221,6 @@ $i18n_key_words = array(
 // 'label.ldap_hint' => 'Type your <b>Windows login</b> and <b>password</b> in the fields below.',
 'label.required_fields' => '* kötelezően kitöltendő mezők',
 'label.on_behalf' => 'helyett',
-'label.role_manager' => '(vezető)',
-'label.role_comanager' => '(helyettes)',
-'label.role_admin' => '(adminisztrátor)',
 // TODO: translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',

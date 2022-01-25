@@ -209,9 +209,6 @@ $i18n_key_words = array(
 'label.ldap_hint' => 'Unesi tvoju <b>Windows prijavu</b> i <b>lozinku</b> u polje ispod.',
 'label.required_fields' => '* - obavezna polja',
 'label.on_behalf' => 'ispred',
-'label.role_manager' => '(menadžer)',
-'label.role_comanager' => '(saradnik)',
-'label.role_admin' => '(administrator)',
 'label.page' => 'Strana',
 // TODO: translate the following.
 // 'label.condition' => 'Condition',

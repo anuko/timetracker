@@ -223,11 +223,6 @@ $i18n_key_words = array(
 'label.ldap_hint' => '下記のフィールドにあなたの<b>WindowsのログインID</b>と<b>パスワード</b>を入力してください。',
 'label.required_fields' => '* 必須のフィールド',
 'label.on_behalf' => 'を代表して',
-// TODO: translate all 3 roles properly, see https://www.anuko.com/time_tracker/user_guide/user_accounts.htm
-// This may require different terms for role_manager and role_comanager.
-'label.role_manager' => '(管理者)',
-'label.role_comanager' => '(共同管理者)',
-// 'label.role_admin' => '(administrator)',
 // TODO: translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',

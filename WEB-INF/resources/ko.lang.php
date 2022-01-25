@@ -222,11 +222,6 @@ $i18n_key_words = array(
 'label.ldap_hint' => '아래의 필드들에서 <b>Windows 로그인</b> 및 <b>암호</b> 를 입력하십시오.',
 'label.required_fields' => '* 필수 필드',
 'label.on_behalf' => '을 대표하여',
-// TODO: translate all 3 roles properly, see https://www.anuko.com/time_tracker/user_guide/user_accounts.htm
-// This may require different terms for role_manager and role_comanager.
-'label.role_manager' => '(관리자)',
-'label.role_comanager' => '(공동관리자)',
-// 'label.role_admin' => '(administrator)',
 // TODO: translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',

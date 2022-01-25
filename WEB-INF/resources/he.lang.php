@@ -226,9 +226,6 @@ $i18n_key_words = array(
 'label.ldap_hint' => 'הכנס את <b>שם המשתמש</b> ואת <b>הסיסמה</b> של ווינדוז בשדות.',
 'label.required_fields' => '* - שדות חובה',
 'label.on_behalf' => 'מטעם',
-'label.role_manager' => '(מנהל)',
-'label.role_comanager' => '(מנהל משנה)',
-'label.role_admin' => '(מנהל המערכת)',
 // Translate the following.
 // 'label.page' => 'Page',
 // 'label.condition' => 'Condition',
