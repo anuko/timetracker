@@ -63,9 +63,6 @@
     <tr>
       <td><a href="admin_groups.php">{$i18n.menu.groups}</a></td>
       <td><a href="admin_options.php">{$i18n.menu.options}</a></td>
-    {if isTrue('WORK_SERVER_ADMINISTRATION')}
-      <td><a href="work/admin_work.php">{$i18n.label.work}</a></td>
-    {/if}
     </td>
   </table>
 </div>

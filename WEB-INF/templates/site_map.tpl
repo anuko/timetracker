@@ -4,9 +4,6 @@
 <div class="sitemap-item-group">
   <div class="sitemap-item"><a href="admin_groups.php">{$i18n.menu.groups}</a></div>
   <div class="sitemap-item"><a href="admin_options.php">{$i18n.menu.options}</a></div>
-    {if isTrue('WORK_SERVER_ADMINISTRATION')}
-  <div class="sitemap-item"><a href="work/admin_work.php">{$i18n.label.work}</a></div>
-    {/if}
 </div>
   {* end of sub menu for admin *}
   {* main menu for admin *}
