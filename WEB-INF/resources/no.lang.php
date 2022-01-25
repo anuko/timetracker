@@ -682,20 +682,4 @@ $i18n_key_words = array(
 // 'form.display_options.not_complete_days' => 'Not complete days',
 // 'form.display_options.inactive_projects' => 'Inactive projects',
 // 'form.display_options.custom_css' => 'Custom CSS',
-
-// Work plugin strings. See example at https://timetracker.anuko.com/work.php
-// TODO: translate the following.
-// 'work.error.work_not_available' => 'Work item is not available.',
-// 'work.error.offer_not_available' => 'Offer is not available.',
-// 'work.type.one_time' => 'one time', // Work type is "one time job" for well defined work ("do exactly this").
-// 'work.type.ongoing' => 'ongoing',   // Work type is "ongoing" for complex jobs (billed by the hour, multiple contractors, etc.)
-// 'work.label.own_work' => 'Own work',
-// 'work.label.own_offers' => 'Own offers',
-// 'work.label.offers' => 'Offers',
-// 'work.button.send_message' => 'Send message',
-// 'work.button.make_offer' => 'Make offer',
-// 'work.button.accept' => 'Accept',
-// 'work.button.decline' => 'Decline',
-// 'work.title.send_message' => 'Sending Message',
-// 'work.msg.message_sent' => 'Message sent.',
 );

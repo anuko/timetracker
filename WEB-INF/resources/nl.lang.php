@@ -589,19 +589,4 @@ $i18n_key_words = array(
 'form.display_options.not_complete_days' => 'Niet complete dagen',
 'form.display_options.inactive_projects' => 'Niet actieve projecten',
 'form.display_options.custom_css' => 'Aangepaste CSS',
-
-// Work plugin strings. See example at https://timetracker.anuko.com/work.php
-'work.error.work_not_available' => 'Werk onderdeel is niet beschikbaar.',
-'work.error.offer_not_available' => 'Aanbod is niet beschikbaar.',
-'work.type.one_time' => 'eenmalig',
-'work.type.ongoing' => 'doorlopend',
-'work.label.own_work' => 'Eigen werk',
-'work.label.own_offers' => 'Eigen aanbod',
-'work.label.offers' => 'Aanbiedingen',
-'work.button.send_message' => 'Verstuur bericht',
-'work.button.make_offer' => 'maak aanbieding',
-'work.button.accept' => 'Accepteer',
-'work.button.decline' => 'Weiger',
-'work.title.send_message' => 'Bericht wordt verstuurd',
-'work.msg.message_sent' => 'Bericht is verstuurd.',
 );

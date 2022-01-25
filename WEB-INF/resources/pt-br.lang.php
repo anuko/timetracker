@@ -588,20 +588,5 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.display_options.inactive_projects' => 'Inactive projects',
 'form.display_options.custom_css' => 'CSS customizado',
-
-// Work plugin strings. See example at https://timetracker.anuko.com/work.php.
-'work.error.work_not_available' => 'Item de trabalho não está disponível.',
-'work.error.offer_not_available' => 'Oferta não disponível',
-'work.type.one_time' => 'Uma interação',
-'work.type.ongoing' => 'Em progresso',
-'work.label.own_work' => 'Trabalho próprio',
-'work.label.own_offers' => 'Ofertas próprias',
-'work.label.offers' => 'Ofertas',
-'work.button.send_message' => 'Enviar mensagem',
-'work.button.make_offer' => 'Fazer oferta',
-'work.button.accept' => 'Aceitar',
-'work.button.decline' => 'Recusar',
-'work.title.send_message' => 'Enviando mensagem',
-'work.msg.message_sent' => 'Mensagem enviada.',
 );
 

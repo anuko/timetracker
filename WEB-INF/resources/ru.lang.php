@@ -590,19 +590,4 @@ $i18n_key_words = array(
 'form.display_options.not_complete_days' => 'Незавершенные дни',
 'form.display_options.inactive_projects' => 'Неактивные проекты',
 'form.display_options.custom_css' => 'Пользовательская CSS',
-
-// Work plugin strings. See example at https://timetracker.anuko.com/work.php
-'work.error.work_not_available' => 'Работа отсутствует.',
-'work.error.offer_not_available' => 'Предложение отсутствует.',
-'work.type.one_time' => 'одноразовая',
-'work.type.ongoing' => 'постоянная',
-'work.label.own_work' => 'Своя работа',
-'work.label.own_offers' => 'Свои предложения',
-'work.label.offers' => 'Предложения',
-'work.button.send_message' => 'Отправить сообщение',
-'work.button.make_offer' => 'Сделать предложение',
-'work.button.accept' => 'Принять',
-'work.button.decline' => 'Отклонить',
-'work.title.send_message' => 'Отсылка сообщения',
-'work.msg.message_sent' => 'Сообщение отослано.',
 );
