@@ -78,7 +78,7 @@ create unique index role_idx on tt_roles(group_id, `rank`, status);
 
 # Insert site-wide roles - site administrator and top manager.
 INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Site administrator', 1024, 'administer_site');
-INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'track_own_time,track_own_expenses,view_own_reports,view_own_charts,view_own_projects,view_own_tasks,manage_own_settings,view_users,view_client_reports,view_client_invoices,track_time,track_expenses,view_reports,approve_reports,approve_timesheets,view_charts,view_own_clients,override_punch_mode,override_own_punch_mode,override_date_lock,override_own_date_lock,swap_roles,update_work,manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,override_allow_ip,manage_basic_settings,view_all_reports,manage_work,bid_on_work,manage_features,manage_advanced_settings,manage_roles,export_data,approve_all_reports,approve_own_timesheets,manage_subgroups,view_client_unapproved,delete_group');
+INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Top manager', 512, 'track_own_time,track_own_expenses,view_own_reports,view_own_charts,view_own_projects,view_own_tasks,manage_own_settings,view_users,view_client_reports,view_client_invoices,track_time,track_expenses,view_reports,approve_reports,approve_timesheets,view_charts,view_own_clients,override_punch_mode,override_own_punch_mode,override_date_lock,override_own_date_lock,swap_roles,manage_own_account,manage_users,manage_projects,manage_tasks,manage_custom_fields,manage_clients,manage_invoices,override_allow_ip,manage_basic_settings,view_all_reports,manage_features,manage_advanced_settings,manage_roles,export_data,approve_all_reports,approve_own_timesheets,manage_subgroups,view_client_unapproved,delete_group');
 
 
 #
@@ -609,42 +609,6 @@ CREATE TABLE `tt_files` (
 
 
 #
-# Structure for table tt_work_currencies.
-# This table keeps currencies supported by remote work plugin.
-#
-CREATE TABLE `tt_work_currencies` (
-  `id` int(10) unsigned NOT NULL,    # currency id
-  `name` varchar(10) NOT NULL,       # currency name (USD, CAD, etc.)
-  PRIMARY KEY  (`id`)
-);
-
-# Create an index that guarantees unique work currencies.
-create unique index currency_idx on tt_work_currencies(`name`);
-
-INSERT INTO `tt_work_currencies` (`id`, `name`) VALUES ('1', 'USD'), ('2', 'CAD'), ('3', 'AUD'), ('4', 'EUR'), ('5', 'NZD');
-
-
-#
-# Structure for table tt_work_categories.
-# This table keeps work categories supported by remote work plugin.
-#
-CREATE TABLE `tt_work_categories` (
-  `id` int(10) unsigned NOT NULL,     # Category id.
-  `parents` text default NULL,        # Comma-separated list of parent ids associated with this category.
-  `name` varchar(64) NOT NULL,        # English category name.
-  `name_localized` text default NULL, # Comma-separated list of localized category names in other languages.
-                                      # Example: es:Codificación,ru:Кодирование.
-  PRIMARY KEY  (`id`)
-);
-
-# Insert some default categories. Table content to be updated at run time, though.
-INSERT INTO `tt_work_categories` (`id`, `parents`, `name`, `name_localized`) VALUES ('1', NULL, 'Coding', 'es:Codificación,ru:Кодирование');
-INSERT INTO `tt_work_categories` (`id`, `parents`, `name`, `name_localized`) VALUES ('2', NULL, 'Other', 'es:Otra,ru:Другое');
-INSERT INTO `tt_work_categories` (`id`, `parents`, `name`, `name_localized`) VALUES ('3', '1', 'PHP', NULL);
-INSERT INTO `tt_work_categories` (`id`, `parents`, `name`, `name_localized`) VALUES ('4', '1', 'C/C++', NULL);
-
-
-#
 # Structure for table tt_site_config. This table stores configuration data
 # for Time Tracker site as a whole.
 # For example, database version, code version, site language, etc.
@@ -657,4 +621,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.19.29', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.20.0', now()); # TODO: change when structure changes.
