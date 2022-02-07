@@ -189,6 +189,10 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_
 // Submit.
 if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
+    // Use the "limit" plugin if we have one. Ignore include errors.
+    // The "limit" plugin is not required for normal operation of Time Tracker.
+    @include('plugins/limit/access_check.php');
+
     // Validate user input.
     if ($user->isPluginEnabled('cl') && $user->isOptionEnabled('client_required') && !$cl_client)
       $err->add($i18n->get('error.client'));
@@ -203,7 +207,6 @@ if ($request->isPost()) {
       if ($selected_date->after($browser_today))
         $err->add($i18n->get('error.future_date'));
     }
-    if (!ttTimeHelper::canAdd()) $err->add($i18n->get('error.expired'));
     // Finished validating input data.
 
     // Prohibit creating entries in locked range.
