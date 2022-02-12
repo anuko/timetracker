@@ -66,7 +66,7 @@ if(!isTrue('MULTIORG_MODE') && !ttOrgHelper::getOrgs())
   $err->add($i18n->get('error.no_groups'));
 
 // Determine whether to show login hint. It is currently used only for Windows LDAP authentication.
-$show_hint = ('ad' == $GLOBALS['AUTH_MODULE_PARAMS']['type']);
+$show_hint = ('ad' == isset($GLOBALS['AUTH_MODULE_PARAMS']['type']) ? $GLOBALS['AUTH_MODULE_PARAMS']['type'] : null);
 
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('show_hint', $show_hint);

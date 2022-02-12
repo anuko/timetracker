@@ -109,7 +109,7 @@ class ttReportHelper {
     }
 
     // Prepare sql query part for user list.
-    $userlist = $options['users'] ? $options['users'] : '-1';
+    $userlist = isset($options['users']) ? $options['users'] : '-1';
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and l.user_id in ($userlist)";
     else
@@ -191,7 +191,7 @@ class ttReportHelper {
     }
 
     // Prepare sql query part for user list.
-    $userlist = $options['users'] ? $options['users'] : '-1';
+    $userlist = isset($options['users']) ? $options['users'] : '-1';
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and ei.user_id in ($userlist)";
     else
@@ -571,7 +571,7 @@ class ttReportHelper {
     } else {
       $sort_part .= 'date';
     }
-    if (($canViewReports || $isClient) && $options['users'] && !$grouping_by_user)
+    if (($canViewReports || $isClient) && isset($options['users']) && !$grouping_by_user)
       $sort_part .= ', user, type';
     if ($options['show_start'])
       $sort_part .= ', unformatted_start';
@@ -584,6 +584,7 @@ class ttReportHelper {
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
 
+    $report_items = array();
     while ($val = $res->fetchRow()) {
       if ($convertTo12Hour) {
         if($val['start'] != '')
@@ -1526,6 +1527,7 @@ class ttReportHelper {
     $options['timesheet'] = $bean->getAttribute('timesheet');
 
     $active_users_in_bean = $bean->getAttribute('users_active');
+    $users = '';
     if ($active_users_in_bean && is_array($active_users_in_bean)) {
       $users = join(',', $active_users_in_bean);
     }
