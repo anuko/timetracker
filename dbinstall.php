@@ -94,10 +94,16 @@ if ($request->isGet()) {
   // $required_version = '5.2.1'; // Something in TCPDF library does not work below this one.
   $required_version = '5.4.0';    // Week view (week.php) requires 5.4 because of []-way of referencing arrays.
                                   // This needs further investigation as we use [] elsewhere without obvious problems.
-  if (version_compare(phpversion(), $required_version, '>=')) {
-    echo('PHP version: '.phpversion().', good enough.<br>');
+  // Print a warning about php >= 8.1 because of a breaking change
+  // with mysqli default error mode, see https://php.watch/versions/8.1/mysqli-error-mode
+  if (version_compare(phpversion(), '8.1', '>=')) {
+    echo('<font color="red">Error: This app was not tested with PHP version: '.phpversion().'</font><br>');
   } else {
-    echo('<font color="red">Error: PHP version is not high enough: '.phpversion().'. Required: '.$required_version.'.</font><br>');
+    if (version_compare(phpversion(), $required_version, '>=')) {
+      echo('PHP version: '.phpversion().', good enough.<br>');
+    } else {
+      echo('<font color="red">Error: PHP version is not high enough: '.phpversion().'. Required: '.$required_version.'.</font><br>');
+    }
   }
 
   // Depending on DSN, require either mysqli or mysql extensions.
@@ -171,13 +177,17 @@ if ($request->isGet()) {
     echo('<font color="red">There are no tables in database. Execute step 1 - Create database structure.</font><br>');
   }
 
-  $sql = "select param_value from tt_site_config where param_name = 'version_db'";
-  $res = $conn->query($sql);
-  if (is_a($res, 'MDB2_Error')) {
-    echo('<font color="red">Error: database schema version query failed. '.$res->getMessage().'</font><br>');
-  } else {
-    $val = $res->fetchRow();
-    echo('Database version is: '.$val['param_value'].'.');
+  try {
+    $sql = "select param_value from tt_site_config where param_name = 'version_db'";
+    $res = $conn->query($sql);
+    if (is_a($res, 'MDB2_Error')) {
+      echo('<font color="red">Error: database schema version query failed. '.$res->getMessage().'</font><br>');
+    } else {
+      $val = $res->fetchRow();
+      echo('Database version is: '.$val['param_value'].'.');
+    }
+  } catch (Exception $e) {
+    echo('<font color="red">Caught exception: '.$e->getMessage().'</font><br>');
   }
 
   $conn->disconnect();
