@@ -1,30 +1,6 @@
 <?php
-// +----------------------------------------------------------------------+
-// | Anuko Time Tracker
-// +----------------------------------------------------------------------+
-// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
-// +----------------------------------------------------------------------+
-// | LIBERAL FREEWARE LICENSE: This source code document may be used
-// | by anyone for any purpose, and freely redistributed alone or in
-// | combination with other software, provided that the license is obeyed.
-// |
-// | There are only two ways to violate the license:
-// |
-// | 1. To redistribute this code in source form, with the copyright
-// |    notice or license removed or altered. (Distributing in compiled
-// |    forms without embedded copyright notices is permitted).
-// |
-// | 2. To redistribute modified versions of this code in *any* form
-// |    that bears insufficient indications that the modifications are
-// |    not the work of the original author(s).
-// |
-// | This license applies to this document only, not any other software
-// | that it may be combined with.
-// |
-// +----------------------------------------------------------------------+
-// | Contributors:
-// | https://www.anuko.com/time_tracker/credits.htm
-// +----------------------------------------------------------------------+
+/* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt */
 
 // Class ttConfigHelper is a helper class to handle comma-separated lists of config data.
 // For example, in tt_groups table we have a field called "config", that may store something like:
@@ -38,7 +14,8 @@ class ttConfigHelper {
 
   // Constructor.
   function __construct($config) {
-    $this->config = trim($config, ' ,');
+    if (!is_null($config))
+      $this->config = trim($config, ' ,');
     if ($this->config)
       $this->config_array = explode(',', $this->config);
   }
@@ -120,6 +97,6 @@ class ttConfigHelper {
 
   // The getConfig returns the config string.
   function getConfig() {
-    return trim($this->config, ' ,');
+    return (is_null($this->config) ? null : trim($this->config, ' ,'));
   }
 }

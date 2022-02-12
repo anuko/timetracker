@@ -129,10 +129,10 @@ if ($user->isPluginEnabled('mq')){
 }
 
 // Initialize variables.
-$cl_start = trim($request->getParameter('start'));
-$cl_finish = trim($request->getParameter('finish'));
-$cl_duration = trim($request->getParameter('duration'));
-$cl_note = trim($request->getParameter('note'));
+$cl_start = is_null($request->getParameter('start')) ? null : trim($request->getParameter('start'));
+$cl_finish = is_null($request->getParameter('finish')) ? null : trim($request->getParameter('finish'));
+$cl_duration = is_null($request->getParameter('duration')) ? null : trim($request->getParameter('duration'));
+$cl_note = is_null($request->getParameter('note')) ? null : trim($request->getParameter('note'));
 $cl_billable = 1;
 if ($showBillable) {
   if ($request->isPost()) {
@@ -161,7 +161,7 @@ if (isset($custom_fields) && $custom_fields->timeFields) {
       'label' => $timeField['label'],
       'type' => $timeField['type'],
       'required' => $timeField['required'],
-      'value' => trim($cl_control_name));
+      'value' => is_null($cl_control_name) ? null : trim($cl_control_name));
   }
 }
 
