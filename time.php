@@ -11,6 +11,7 @@ import('ttClientHelper');
 import('ttTimeHelper');
 import('ttFileHelper');
 import('DateAndTime');
+import('ttDate');
 
 // Access checks.
 if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
@@ -80,6 +81,16 @@ if($selected_date->isError())
 if(!$cl_date)
   $cl_date = $selected_date->toString(DB_DATEFORMAT);
 $_SESSION['date'] = $cl_date;
+
+// Refactoring in progress for php8.1.
+// TODO: remove the above block when done.
+$selected_date2 = new ttDate();
+if (!$selected_date2->isValid())
+  $selected_date2 = new ttDate();
+if(!$cl_date)
+  $cl_date = $selected_date2->toString(DB_DATEFORMAT);
+$_SESSION['date'] = $cl_date;
+// End of TODO.
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
