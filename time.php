@@ -84,6 +84,7 @@ $_SESSION['date'] = $cl_date;
 
 // Refactoring in progress for php8.1.
 // TODO: remove the above block when done.
+// Also replace all occurrences of $selected_date2 with $selected_date.
 $selected_date2 = new ttDate();
 if (!$selected_date2->isValid())
   $selected_date2 = new ttDate();
@@ -124,8 +125,9 @@ if ($showNoteRow) {
 if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
-  $month_quota_minutes = $quota->getUserQuota($selected_date->mYear, $selected_date->mMonth);
-  $quota_minutes_from_1st = $quota->getUserQuotaFrom1st($selected_date);
+  $month_quota_minutes = $quota->getUserQuota($selected_date2->year, $selected_date2->month);
+  $quota_minutes_from_1st = $quota->getUserQuotaFrom1st($selected_date2);
+  // TODO: refactor ttTimeHelper::getTimeForMonth to use a new ttPeriod class.
   $month_total = ttTimeHelper::getTimeForMonth($selected_date);
   $month_total_minutes = ttTimeHelper::toMinutes($month_total);
   $balance_left = $quota_minutes_from_1st - $month_total_minutes;

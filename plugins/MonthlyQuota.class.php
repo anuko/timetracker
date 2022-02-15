@@ -104,13 +104,13 @@ class MonthlyQuota {
   // from 1st of the month up to and inclusive of $selected_date.
   public function getUserQuotaFrom1st($selected_date) {
     // TODO: we may need a better algorithm here. Review.
-    $monthQuotaMinutes = $this->getUserQuota($selected_date->mYear, $selected_date->mMonth);
-    $workdaysInMonth = $this->getNumWorkdays($selected_date->mMonth, $selected_date->mYear);
+    $monthQuotaMinutes = $this->getUserQuota($selected_date->year, $selected_date->month);
+    $workdaysInMonth = $this->getNumWorkdays($selected_date->month, $selected_date->year);
 
     // Iterate from 1st up to selected date.
     $workdaysFrom1st = 0;
-    for ($i = 1; $i <= $selected_date->mDate; $i++) {
-      $date = ttTimeHelper::dateInDatabaseFormat($selected_date->mYear, $selected_date->mMonth, $i);
+    for ($i = 1; $i <= $selected_date->day; $i++) {
+      $date = ttTimeHelper::dateInDatabaseFormat($selected_date->year, $selected_date->month, $i);
       if (!ttTimeHelper::isWeekend($date) && !ttTimeHelper::isHoliday($date)) {
         $workdaysFrom1st++;
       }
