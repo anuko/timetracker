@@ -75,23 +75,12 @@ $showRecordCustomFields = $user->isOptionEnabled('record_custom_fields');
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
-$selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date);
-if($selected_date->isError())
-  $selected_date = new DateAndTime(DB_DATEFORMAT);
+$selected_date = new ttDate($cl_date);
+if (!$selected_date->isValid())
+  $selected_date = new ttDate();
 if(!$cl_date)
-  $cl_date = $selected_date->toString(DB_DATEFORMAT);
+  $cl_date = $selected_date->toString();
 $_SESSION['date'] = $cl_date;
-
-// Refactoring in progress for php8.1.
-// TODO: remove the above block when done.
-// Also replace all occurrences of $selected_date2 with $selected_date.
-$selected_date2 = new ttDate($cl_date);
-if (!$selected_date2->isValid())
-  $selected_date2 = new ttDate();
-if(!$cl_date)
-  $cl_date = $selected_date2->toString(DB_DATEFORMAT);
-$_SESSION['date'] = $cl_date;
-// End of TODO.
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
@@ -125,9 +114,9 @@ if ($showNoteRow) {
 if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
-  $month_quota_minutes = $quota->getUserQuota($selected_date2->year, $selected_date2->month);
-  $quota_minutes_from_1st = $quota->getUserQuotaFrom1st($selected_date2);
-  $month_total = ttTimeHelper::getTimeForMonth2($selected_date2);
+  $month_quota_minutes = $quota->getUserQuota($selected_date->year, $selected_date->month);
+  $quota_minutes_from_1st = $quota->getUserQuotaFrom1st($selected_date);
+  $month_total = ttTimeHelper::getTimeForMonth2($selected_date);
   $month_total_minutes = ttTimeHelper::toMinutes($month_total);
   $balance_left = $quota_minutes_from_1st - $month_total_minutes;
   $minutes_left = $month_quota_minutes - $month_total_minutes;
@@ -406,7 +395,7 @@ if ($request->isPost()) {
     // Prohibit creating entries in future.
     if (!$user->isOptionEnabled('future_entries')) {
       $browser_today = new ttDate($request->getParameter('browser_today', null));
-      if ($selected_date2->after($browser_today))
+      if ($selected_date->after($browser_today))
         $err->add($i18n->get('error.future_date'));
     }
 
@@ -491,7 +480,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$week_total = ttTimeHelper::getTimeForWeek($selected_date);
+$week_total = ttTimeHelper::getTimeForWeek2($selected_date);
 $timeRecords = ttTimeHelper::getRecords($cl_date, $showFiles);
 $showNavigation = ($user->isPluginEnabled('wv') && !$user->isOptionEnabled('week_menu')) ||
   ($user->isPluginEnabled('pu') && !$user->isOptionEnabled('puncher_menu'));

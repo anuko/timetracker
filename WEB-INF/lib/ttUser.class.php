@@ -436,7 +436,7 @@ class ttUser {
 
     // Calculate the last occurrence of a lock.
     $last = tdCron::getLastOccurrence($this->getLockSpec(), time());
-    $lockdate = new DateAndTime(DB_DATEFORMAT, strftime('%Y-%m-%d', $last));
+    $lockdate = new ttDate(strftime('%Y-%m-%d', $last));
     if ($date->before($lockdate))
       return true;
 
