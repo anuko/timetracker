@@ -85,7 +85,7 @@ $_SESSION['date'] = $cl_date;
 // Refactoring in progress for php8.1.
 // TODO: remove the above block when done.
 // Also replace all occurrences of $selected_date2 with $selected_date.
-$selected_date2 = new ttDate();
+$selected_date2 = new ttDate($cl_date);
 if (!$selected_date2->isValid())
   $selected_date2 = new ttDate();
 if(!$cl_date)
@@ -127,8 +127,7 @@ if ($user->isPluginEnabled('mq')){
   $quota = new MonthlyQuota();
   $month_quota_minutes = $quota->getUserQuota($selected_date2->year, $selected_date2->month);
   $quota_minutes_from_1st = $quota->getUserQuotaFrom1st($selected_date2);
-  // TODO: refactor ttTimeHelper::getTimeForMonth to use a new ttPeriod class.
-  $month_total = ttTimeHelper::getTimeForMonth($selected_date);
+  $month_total = ttTimeHelper::getTimeForMonth2($selected_date2);
   $month_total_minutes = ttTimeHelper::toMinutes($month_total);
   $balance_left = $quota_minutes_from_1st - $month_total_minutes;
   $minutes_left = $month_quota_minutes - $month_total_minutes;
@@ -406,8 +405,8 @@ if ($request->isPost()) {
 
     // Prohibit creating entries in future.
     if (!$user->isOptionEnabled('future_entries')) {
-      $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
-      if ($selected_date->after($browser_today))
+      $browser_today = new ttDate($request->getParameter('browser_today', null));
+      if ($selected_date2->after($browser_today))
         $err->add($i18n->get('error.future_date'));
     }
 

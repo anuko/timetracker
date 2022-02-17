@@ -22,9 +22,8 @@ class ttDate {
 
   // Constructor.
   function __construct($dateString = null) {
-    // TODO: redo the constructor and initialize year. month, day, and dayOfWeek properly.
     if (ttValidDbDateFormatDate($dateString)) {
-      $this->$dateInDbDateFormat = $dateString;
+      $this->dateInDbDateFormat = $dateString;
       $this->isValid = true;
     } else {
       $today = date_create();
@@ -43,6 +42,25 @@ class ttDate {
   // isValid determines if we have a properly initialized ttDate object.
   function isValid() {
       return $this->isValid;
+  }
+
+
+  // Returns unix timestamp.
+  function getTimestamp() {
+    return $this->unixTimestamp;
+  }
+
+
+  // Resets the object properties from a passed in unix timestamp.
+  function setFromUnixTimestamp($unixTimestamp) {
+    $this->unixTimestamp = $unixTimestamp;
+
+    $this->year = date('Y', $this->unixTimestamp);
+    $this->month = date('m', $this->unixTimestamp);
+    $this->day = date('d', $this->unixTimestamp);
+    $this->dayOfWeek = date('w', $this->unixTimestamp);
+
+    $this->dateInDbDateFormat = $this->year.'-'.$this->month.'-'.$this->day;
   }
 
 
@@ -71,5 +89,17 @@ class ttDate {
     // Replace locale-dependent days of week.
     $formattedDate = str_replace('%a', mb_substr($i18n->getWeekDayName($this->dayOfWeek), 0, 3, 'utf-8'), $formattedDate);
     return $formattedDate;
+  }
+
+
+  function before(/*ttDate*/ $obj) {
+    if ($this->getTimestamp() < $obj->getTimestamp()) return true;
+    return false;
+  }
+
+
+  function after(/*ttDate*/ $obj) {
+    if ($this->getTimestamp() > $obj->getTimestamp()) return true;
+    return false;
   }
 }
