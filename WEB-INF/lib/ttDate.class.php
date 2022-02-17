@@ -102,4 +102,11 @@ class ttDate {
     if ($this->getTimestamp() > $obj->getTimestamp()) return true;
     return false;
   }
+
+
+  // Geters.
+  function getYear() { return $this->year; }
+  function getMonth() { return $this->month; }
+  function getDay() { return $this->day; }
+  function getDayOfWeek() { return $this->dayOfWeek; }
 }

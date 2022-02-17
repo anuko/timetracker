@@ -64,20 +64,22 @@ class Calendar extends FormElement {
     global $user;
 
     $selectedDate = $this->value;
-    if (!$selectedDate) $selectedDate = strftime(DB_DATEFORMAT);
 
     // Determine month and year for selected date.
-    $selectedDateObject = new DateAndTime(DB_DATEFORMAT, $selectedDate);
+    $selectedDateObject = new ttDate($selectedDate);
     $selectedMonth = $selectedDateObject->getMonth();
     $selectedYear = $selectedDateObject->getYear();
 
     // Determine date for the 1st of next month for calendar navigation.
     $firstOfNextMonth2AM = mktime(2, 0, 0, $selectedMonth + 1, 1, $selectedYear); // 2 am on the 1st of next month.
-    $firstOfNextMonth = strftime(DB_DATEFORMAT, $firstOfNextMonth2AM);
+    $ttDateObject = new ttDate();
+    $ttDateObject->setFromUnixTimestamp($firstOfNextMonth2AM);
+    $firstOfNextMonth = $ttDateObject->toString();
 
     // Determine date for the 1st of previous month.
     $firstOfPreviousMonth2AM = mktime(2, 0, 0, $selectedMonth - 1, 1, $selectedYear); // 2 am on the 1st of previous month.
-    $firstOfPreviousMonth = strftime(DB_DATEFORMAT, $firstOfPreviousMonth2AM);
+    $ttDateObject->setFromUnixTimestamp($firstOfPreviousMonth2AM);
+    $firstOfPreviousMonth = $ttDateObject->toString();
 
     // Print calendar header.
     $html = "\n\n<!-- start of calendar -->\n";
