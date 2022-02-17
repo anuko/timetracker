@@ -613,7 +613,7 @@ class ttTimeHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $period = new ttPeriod(INTERVAL_THIS_WEEK, $date);
+    $period = new ttPeriod($date, INTERVAL_THIS_WEEK);
     $sql = "select sum(time_to_sec(duration)) as sm from tt_log".
       " where user_id = $user_id and group_id = $group_id and org_id = $org_id".
       " and date >= '".$period->getStartDate()."' and date <= '".$period->getEndDate()."' and status = 1";
@@ -659,7 +659,7 @@ class ttTimeHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $period = new ttPeriod(INTERVAL_THIS_MONTH, $date);
+    $period = new ttPeriod($date, INTERVAL_THIS_MONTH);
     $sql = "select sum(time_to_sec(duration)) as sm from tt_log".
       " where user_id = $user_id and group_id = $group_id and org_id = $org_id".
       " and date >= '".$period->getStartDate()."' and date <= '".$period->getEndDate()."' and status = 1";

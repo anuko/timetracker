@@ -128,7 +128,9 @@ function isTrue($val)
 // ttValidString is used to check user input to validate a string.
 function ttValidString($val, $emptyValid = false)
 {
-  $val = trim($val);
+  if(!is_null($val))
+    $val = trim($val);
+
   if (strlen($val) == 0 && !$emptyValid)
     return false;
     

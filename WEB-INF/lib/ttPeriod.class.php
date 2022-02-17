@@ -10,7 +10,7 @@ class ttPeriod {
   var $endDate;   // ttDate object.
 
 
-  function __construct($period_type = INTERVAL_THIS_MONTH, $ttDateInstance) {
+  function __construct($ttDateInstance, $period_type = INTERVAL_THIS_MONTH) {
 
     global $user;
     $weekStartDay = $user->getWeekStart();

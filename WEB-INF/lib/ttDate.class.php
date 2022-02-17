@@ -109,4 +109,19 @@ class ttDate {
   function getMonth() { return $this->month; }
   function getDay() { return $this->day; }
   function getDayOfWeek() { return $this->dayOfWeek; }
+
+
+  // A static function to obtain a date in DB_DATEFORMAT from a Unix timestamp.
+  static function dateFromUnixTimestamp($unixTimestamp = null) {
+    if ($unixTimestamp == null) {
+      $today = date_create();
+      return date_format($today, 'Y-m-d');
+    }
+
+    $year = date('Y', $unixTimestamp);
+    $month = date('m', $unixTimestamp);
+    $day = date('d', $unixTimestamp);
+    $dateInDbFormat = $year.'-'.$month.'-'.$day;
+    return $dateInDbFormat;
+  }
 }

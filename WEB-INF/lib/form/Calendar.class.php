@@ -157,14 +157,14 @@ class Calendar extends FormElement {
           }
 
           // Handle selected day.
-          if ($selectedDate == strftime(DB_DATEFORMAT, $cellDate0am))
+          if ($selectedDate == ttDate::dateFromUnixTimestamp($cellDate0am))
             $cell_style = ' class="calendarDaySelected"';
 
           $html .= '<td'.$cell_style.'>';
           // Handle days with existing entries.
           if ($active_dates) {
             // Entries exist.
-            if (in_array(strftime(DB_DATEFORMAT, $cellDate0am), $active_dates)) {
+            if (in_array(ttDate::dateFromUnixTimestamp($cellDate0am), $active_dates)) {
               if ($handleNotCompleteDays && $this->highlight == 'time') {
                 $day_total_minutes = ttTimeHelper::toMinutes(ttTimeHelper::getTimeForDay($date_to_check));
                 if ($day_total_minutes >= $workday_minutes)
@@ -176,7 +176,7 @@ class Calendar extends FormElement {
                 $link_style = ' class="calendarLinkRecordsExist"';
             }
           }
-          $html .= "<a".$link_style." href=\"?".$this->name."=".strftime(DB_DATEFORMAT, $cellDate0am)."\" tabindex=\"-1\">".date("d",$cellDate0am)."</a>";
+          $html .= "<a".$link_style." href=\"?".$this->name."=".ttDate::dateFromUnixTimestamp($cellDate0am)."\" tabindex=\"-1\">".date("d",$cellDate0am)."</a>";
           $html .= "</td>";
         } else {
           $html .= "<td>&nbsp;</td>";
@@ -188,7 +188,7 @@ class Calendar extends FormElement {
     // Finished printing calendar table.
 
     // Print Today link.
-    $html .= "  <tr><td colspan=\"7\" align=\"center\"><a class=\"today_link\" href=\"?".$this->name."=".strftime(DB_DATEFORMAT)."\" tabindex=\"-1\">".$i18n->get('label.today')."</a></td></tr>\n";
+    $html .= "  <tr><td colspan=\"7\" align=\"center\"><a class=\"today_link\" href=\"?".$this->name."=".ttDate::dateFromUnixTimestamp()."\" tabindex=\"-1\">".$i18n->get('label.today')."</a></td></tr>\n";
     $html .= "</table>\n";
 
     // Add a hidden control for selected date.
