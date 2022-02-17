@@ -256,8 +256,7 @@ function ttValidDate($val)
 // ttValidDbDateFormatDate is used to check user input to validate a date in DB_DATEFORMAT.
 function ttValidDbDateFormatDate($val)
 {
-  $val = trim($val);
-  if (strlen($val) == 0)
+  if (is_null($val) || strlen($val) == 0)
     return false;
 
   // This should validate a string in format 'YYYY-MM-DD'.

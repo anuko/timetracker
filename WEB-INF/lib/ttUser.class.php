@@ -297,7 +297,7 @@ class ttUser {
   // isPluginEnabled checks whether a plugin is enabled for user.
   function isPluginEnabled($plugin)
   {
-    return in_array($plugin, explode(',', $this->getPlugins()));
+    return in_array($plugin, explode(',', $this->getPlugins() ? $this->getPlugins() : ''));
   }
 
   // isOptionEnabled checks whether a config option is enabled for user.

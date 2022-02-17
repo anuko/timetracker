@@ -24,9 +24,9 @@ class ttPeriod {
 
     switch ($period_type) {
       case INTERVAL_THIS_WEEK:
-	$this->startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+$startWeekBias,$t_arr[5]));
-	$this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
-	break;
+        $this->startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+$startWeekBias,$t_arr[5]));
+        $this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
+        break;
 
       case INTERVAL_THIS_MONTH:
 	$this->startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,1,$t_arr[5]));
