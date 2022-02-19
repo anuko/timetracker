@@ -473,6 +473,7 @@ class ttFavReportHelper {
       }
     } else {
       $users_to_adjust = explode(',', $options['users']); // Users to adjust.
+      // Adjust user list for a client.
       if ($user->isClient()) {
         $users = ttGroupHelper::getUsersForClient(); // Active and inactive users for clients.
         foreach ($users as $single_user) {
@@ -485,7 +486,15 @@ class ttFavReportHelper {
         }
         $options['users'] = implode(',', $adjusted_user_ids);
       }
-      // TODO: add checking the existing user list for potentially changed access rights for user.
+      // Reset user list for a role that no longer has view_reports or view_all_reports rights.
+      if (!($user->can('view_reports') || $user->can('view_all_reports'))) {
+        $options['users'] = null;
+        // Also remove grouping by user if we can't do it.
+        if (isset($options['group_by1']) && $options['group_by1'] == 'user') unset($options['group_by1']);
+        if (isset($options['group_by2']) && $options['group_by2'] == 'user') unset($options['group_by2']);
+        if (isset($options['group_by3']) && $options['group_by3'] == 'user') unset($options['group_by3']);
+      }
+      // TODO: improve checking the existing user list for potentially changed access rights for user.
     }
 
     if ($user->isPluginEnabled('ap') && $user->isClient() && !$user->can('view_client_unapproved'))
