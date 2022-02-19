@@ -28,6 +28,7 @@
 
 import('form.FormElement');
 import('DateAndTime');
+import('ttDate');
 import('ttTimeHelper');
 
 class Calendar extends FormElement {

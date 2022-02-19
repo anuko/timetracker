@@ -104,7 +104,7 @@ class ttDate {
   }
 
 
-  // Geters.
+  // Getters.
   function getYear() { return $this->year; }
   function getMonth() { return $this->month; }
   function getDay() { return $this->day; }
