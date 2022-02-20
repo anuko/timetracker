@@ -27,7 +27,6 @@
 // +----------------------------------------------------------------------+
 
 import('form.FormElement');
-import('DateAndTime');
 import('ttDate');
 import('ttTimeHelper');
 
@@ -73,14 +72,11 @@ class Calendar extends FormElement {
 
     // Determine date for the 1st of next month for calendar navigation.
     $firstOfNextMonth2AM = mktime(2, 0, 0, $selectedMonth + 1, 1, $selectedYear); // 2 am on the 1st of next month.
-    $ttDateObject = new ttDate();
-    $ttDateObject->setFromUnixTimestamp($firstOfNextMonth2AM);
-    $firstOfNextMonth = $ttDateObject->toString();
+    $firstOfNextMonth = ttDate::dateFromUnixTimestamp($firstOfNextMonth2AM);
 
     // Determine date for the 1st of previous month.
     $firstOfPreviousMonth2AM = mktime(2, 0, 0, $selectedMonth - 1, 1, $selectedYear); // 2 am on the 1st of previous month.
-    $ttDateObject->setFromUnixTimestamp($firstOfPreviousMonth2AM);
-    $firstOfPreviousMonth = $ttDateObject->toString();
+    $firstOfPreviousMonth = ttDate::dateFromUnixTimestamp($firstOfPreviousMonth2AM);
 
     // Print calendar header.
     $html = "\n\n<!-- start of calendar -->\n";
