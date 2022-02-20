@@ -128,16 +128,18 @@ function isTrue($val)
 // ttValidString is used to check user input to validate a string.
 function ttValidString($val, $emptyValid = false)
 {
-  if(!is_null($val))
-    $val = trim($val);
+  if (is_null($val)) {
+    return $emptyValid ? true : false;
+  }
 
+  $val = trim($val);
   if (strlen($val) == 0 && !$emptyValid)
     return false;
-    
+
   // String must not be XSS evil (to insert JavaScript).
   if (stristr($val, '<script>') || stristr($val, '<script '))
     return false;
-    
+
   return true;    
 }
 
