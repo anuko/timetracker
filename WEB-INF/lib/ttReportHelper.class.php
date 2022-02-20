@@ -693,6 +693,8 @@ class ttReportHelper {
     // Execute query.
     $res = $mdb2->query($sql);
     if (is_a($res, 'PEAR_Error')) die($res->getMessage());
+
+    $subtotals = array();
     while ($val = $res->fetchRow()) {
       $time = ttTimeHelper::minutesToDuration($val['time'] / 60);
       $rowLabel = ttReportHelper::makeGroupByLabel($val['group_field'], $options);
@@ -1014,8 +1016,7 @@ class ttReportHelper {
 
     $items = ttReportHelper::getItems($options);
     $grouping = ttReportHelper::grouping($options);
-    if ($grouping)
-      $subtotals = ttReportHelper::getSubtotals($options);
+    $subtotals = $grouping ? ttReportHelper::getSubtotals($options) : array();
     $totals = ttReportHelper::getTotals($options);
 
     // Use custom fields plugin if it is enabled.
