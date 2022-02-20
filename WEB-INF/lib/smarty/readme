@@ -1,8 +1,7 @@
-These are files from Smarty-4.1.0 with 2 modifications in:
+The files in this directory are from Smarty-4.1.0.
+There are 2 modified files though to support older versions of php such as 5.4.
 
 Smarty.class.php
 sysplugins/smarty_internal_cacheresource_file.php
 
-Nik edited these files for php5.4 support, as they use php7.0 features.
-
-
+Nik edited these files in a few places for php5.4 support, as they use php7.0 and php5.6 features.

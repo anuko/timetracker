@@ -60,6 +60,18 @@ if (!defined('SMARTY_MBSTRING')) {
      */
     define('SMARTY_MBSTRING', function_exists('mb_get_info'));
 }
+
+// Note: Nik put this back in from smarty3 for php5.4 that we still support.
+// See also comment around Smarty::$_CHARSET.
+if (!defined('SMARTY_RESOURCE_CHAR_SET')) {
+    // UTF-8 can only be done properly when mbstring is available!
+    /**
+     * @deprecated in favor of Smarty::$_CHARSET
+     */
+    define('SMARTY_RESOURCE_CHAR_SET', SMARTY_MBSTRING ? 'UTF-8' : 'ISO-8859-1');
+}
+// End of inserted fragment by Nik.
+
 /**
  * Load Smarty_Autoloader
  */
@@ -160,7 +172,9 @@ class Smarty extends Smarty_Internal_TemplateBase
     /**
      * The character set to adhere to (e.g. "UTF-8")
      */
-    public static $_CHARSET = SMARTY_MBSTRING ? 'UTF-8' : 'ISO-8859-1';
+    // public static $_CHARSET = SMARTY_MBSTRING ? 'UTF-8' : 'ISO-8859-1';
+    // Note by Nik: the above assignment only works with php >= 5.6, rolling back to SMARTY_RESOURCE_CHAR_SET as in smarty3.
+    public static $_CHARSET =  SMARTY_RESOURCE_CHAR_SET;
 
     /**
      * The date format to be used internally
