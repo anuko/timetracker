@@ -19,6 +19,13 @@ if (!$user->isPluginEnabled('pu')) {
   header('Location: feature_disabled.php');
   exit();
 }
+// If we are passed in a date, make sure it is in correct format.
+// TODO: redo this temporary sql injection fix as we are not supposed to pass a date.
+$date = $request->getParameter('date');
+if ($date && !ttValidDbDateFormatDate($date)) {
+  header('Location: access_denied.php');
+  exit();
+}
 if ($request->isPost()) {
   // Validate that browser_today parameter is in correct format.
   $browser_today = $request->getParameter('browser_today');
