@@ -110,7 +110,7 @@ $i18n_key_words = array(
 'button.stop' => 'Stop',
 'button.approve' => 'Goedkeuren',
 'button.disapprove' => 'Afkeuren',
-// 'button.sync' => 'Sync', // Used in Android app. The meaning is to synchronize offline time records with server.
+'button.sync' => 'Sychroniseer',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
 'label.menu' => 'Menu',

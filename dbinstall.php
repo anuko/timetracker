@@ -94,6 +94,10 @@ if ($request->isGet()) {
   // $required_version = '5.2.1'; // Something in TCPDF library does not work below this one.
   $required_version = '5.4.0';    // Week view (week.php) requires 5.4 because of []-way of referencing arrays.
                                   // This needs further investigation as we use [] elsewhere without obvious problems.
+  // Note: unmodified smarty 4.1.0 that we needed for php 8.1 support uses plp 5.6 and 7.0 features.
+  // Currently, embedded smarty in this product is adjusted to still support php 5.4.
+  // Next time we update smarty we may need to increase $required_version.
+
   // Print a warning about php >= 8.1 because of a breaking change
   // with mysqli default error mode, see https://php.watch/versions/8.1/mysqli-error-mode
   if (version_compare(phpversion(), '8.1', '>=')) {
