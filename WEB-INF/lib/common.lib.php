@@ -270,6 +270,19 @@ function ttValidDbDateFormatDate($val)
   return true;
 }
 
+// ttValidTime is used to check user input for time post.
+function ttValidTime($val)
+{
+  if (is_null($val) || strlen($val) == 0)
+    return false;
+
+  // This should validate a yime string in 24 hour format hh:mm.
+  if (!preg_match('/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$/', $val))
+    return false;
+
+  return true;
+}
+
 // ttValidInteger is used to check user input to validate an integer.
 function ttValidInteger($val, $emptyValid = false)
 {

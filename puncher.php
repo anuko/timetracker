@@ -8,7 +8,7 @@ import('ttUserHelper');
 import('ttGroupHelper');
 import('ttClientHelper');
 import('ttTimeHelper');
-import('DateAndTime');
+import('ttDate');
 
 // Access check.
 if (!ttAccessAllowed('track_own_time')) {
@@ -19,17 +19,22 @@ if (!$user->isPluginEnabled('pu')) {
   header('Location: feature_disabled.php');
   exit();
 }
-// If we are passed in a date, make sure it is in correct format.
-// TODO: redo this temporary sql injection fix as we are not supposed to pass a date.
-$date = $request->getParameter('date');
-if ($date && !ttValidDbDateFormatDate($date)) {
-  header('Location: access_denied.php');
-  exit();
-}
+// If we are passed in browser_today, make sure it is in correct format.
+$browser_today = null; // Reused below beyond access checks.
 if ($request->isPost()) {
   // Validate that browser_today parameter is in correct format.
   $browser_today = $request->getParameter('browser_today');
   if ($browser_today && !ttValidDbDateFormatDate($browser_today)) {
+    header('Location: access_denied.php');
+    exit();
+  }
+}
+// If we are passed in browser_ttime, make sure it is in correct format.
+$browser_time = null; // Reused below beyond access checks.
+if ($request->isPost()) {
+  // Validate that browser_today parameter is in correct format.
+  $browser_time = $request->getParameter('browser_time');
+  if ($browser_time && !ttValidTime($browser_time)) {
     header('Location: access_denied.php');
     exit();
   }
@@ -44,15 +49,9 @@ $showTask = MODE_PROJECTS_AND_TASKS == $trackingMode;
 $taskRequired = false;
 if ($showTask) $taskRequired = $user->getConfigOption('task_required');
 
-// Initialize and store date in session.
-$cl_date  = $request->getParameter('date', @$_SESSION['date']);
-$selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date);
-if($selected_date->isError())
-  $selected_date = new DateAndTime(DB_DATEFORMAT);
-if(!$cl_date)
-  $cl_date = $selected_date->toString(DB_DATEFORMAT);
-$_SESSION['date'] = $cl_date;
-// TODO: for timer page we may limit the day to today only.
+// Initialize $cl_date.
+$date_today = new ttDate($browser_today); // Initialize to browser today if we are passed it in, otherwise server today.
+$cl_date = $date_today->toString();
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
@@ -66,8 +65,8 @@ $uncompleted = ttTimeHelper::getUncompleted($user->getUser());
 $enable_controls = ($uncompleted == null);
 
 // Initialize variables.
-$cl_start = trim($request->getParameter('browser_time'));
-$cl_finish = trim($request->getParameter('browser_time'));
+$cl_start = $browser_time;
+$cl_finish = $browser_time;
 $cl_duration = $cl_note = null;
 // Disabled controls are not posted. Therefore, && $enable_controls condition in several places below.
 // This allows us to get values from session when controls are disabled and reset to null when not.
@@ -204,9 +203,9 @@ $form->addInput(array('type'=>'hidden','name'=>'browser_time','value'=>''));  //
 // Start and stop buttons.
 $enable_start = $uncompleted ? false : true;
 if (!$uncompleted)
-  $form->addInput(array('type'=>'submit','name'=>'btn_start','onclick'=>'browser_time.value=get_time()','value'=>$i18n->get('button.start'),'enable'=>$enable_start));
+  $form->addInput(array('type'=>'submit','name'=>'btn_start','onclick'=>'browser_today.value=get_date();browser_time.value=get_time()','value'=>$i18n->get('button.start'),'enable'=>$enable_start));
 else
-  $form->addInput(array('type'=>'submit','name'=>'btn_stop','onclick'=>'browser_time.value=get_time()','value'=>$i18n->get('button.stop'),'enable'=>!$enable_start));
+  $form->addInput(array('type'=>'submit','name'=>'btn_stop','onclick'=>'browser_today.value=get_date();browser_time.value=get_time()','value'=>$i18n->get('button.stop'),'enable'=>!$enable_start));
 
 // Submit.
 if ($request->isPost()) {
@@ -232,15 +231,17 @@ if ($request->isPost()) {
     }
     // Finished validating user input.
 
-    // Prohibit creating entries in future.
+    // Prohibit creating entries in future. Tricky with a bogus browser_today data in post.
     if (!$user->isOptionEnabled('future_entries')) {
-      $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
-      if ($selected_date->after($browser_today))
+      // Just check if the date we are using is after server tomorrow.
+      $server_tomorrow = new ttDate();
+      $server_tomorrow->incrementDay();
+      if ($date_today->after($server_tomorrow))
         $err->add($i18n->get('error.future_date'));
     }
 
     // Prohibit creating time entries in locked interval.
-    if ($user->isDateLocked($selected_date))
+    if ($user->isDateLocked($date_today))
       $err->add($i18n->get('error.range_locked'));
 
     // Prohibit creating another uncompleted record.
@@ -309,7 +310,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$week_total = ttTimeHelper::getTimeForWeek($cl_date);
+$week_total = ttTimeHelper::getTimeForWeek2($date_today);
 $timeRecords = ttTimeHelper::getRecords($cl_date);
 
 $smarty->assign('week_total', $week_total);
@@ -329,7 +330,7 @@ $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns()"');
-$smarty->assign('timestring', $selected_date->toString($user->date_format));
+$smarty->assign('timestring', $date_today->toString($user->getDateFormat()));
 $smarty->assign('title', $i18n->get('title.puncher'));
 $smarty->assign('content_page_name', 'puncher.tpl');
 $smarty->display('index.tpl');

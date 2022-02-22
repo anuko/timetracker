@@ -111,6 +111,12 @@ class ttDate {
   function getDayOfWeek() { return $this->dayOfWeek; }
 
 
+  // incrementDay increments our date by a number of days.
+  function incrementDay(/*int*/ $days = 1) {
+    $this->setFromUnixTimestamp(@mktime(0, 0, 0, $this->month, $this->day + $days, $this->year));
+  }
+
+
   // A static function to obtain a date in DB_DATEFORMAT from a Unix timestamp.
   static function dateFromUnixTimestamp($unixTimestamp = null) {
     if ($unixTimestamp == null) {
