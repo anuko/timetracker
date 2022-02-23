@@ -555,9 +555,10 @@ class ttUser {
   // addGroupToDropdown is a recursive function to populate a tree of groups, used with getGroupsForDropdown().
   function addGroupToDropdown(&$groups, $group_id, $subgroup_level) {
     $name = '';
-    // Add indentation markup to indicate subdirectory level.
+    // Add indentation markup to indicate a subdirectory level.
     for ($i = 0; $i < $subgroup_level; $i++) {
-      $name .= '🛑'; // Unicode stop sign.
+      $name .= '*';
+      // $name .= '🛑'; // Unicode stop sign. Does not display properly in Chrome 98.
     }
     if ($subgroup_level) $name .= ' '; // Add an extra space.
     $name .= ttGroupHelper::getGroupName($group_id);
