@@ -29,7 +29,7 @@ if ($request->isPost()) {
     exit();
   }
 }
-// If we are passed in browser_ttime, make sure it is in correct format.
+// If we are passed in browser_time, make sure it is in correct format.
 $browser_time = null; // Reused below beyond access checks.
 if ($request->isPost()) {
   // Validate that browser_today parameter is in correct format.

@@ -267,7 +267,8 @@ function ttValidDbDateFormatDate($val)
   if (!preg_match('/^\d\d\d\d-\d\d-\d\d$/', $val))
     return false;
 
-  return true;
+  $date_parts = explode('-', $val);
+  return checkdate($date_parts[1], $date_parts[2], $date_parts[0]);
 }
 
 // ttValidTime is used to check user input for time post.
@@ -276,7 +277,7 @@ function ttValidTime($val)
   if (is_null($val) || strlen($val) == 0)
     return false;
 
-  // This should validate a yime string in 24 hour format hh:mm.
+  // This should validate a time string in 24 hour format hh:mm.
   if (!preg_match('/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$/', $val))
     return false;
 
