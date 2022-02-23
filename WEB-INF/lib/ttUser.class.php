@@ -834,7 +834,7 @@ class ttUser {
       $user_part .= ',  <span class="onBehalf">'.htmlspecialchars($this->behalf_group_name).'</span>';
     } else {
       if ($this->group_name) // Note: we did not require group names in the past.
-        $user_part .= ', '.$this->group_name;
+        $user_part .= ', '.htmlspecialchars($this->group_name);
     }
     return $user_part;
   }
