@@ -357,7 +357,12 @@ class ttProjectHelper {
         return false;
     }
     // End of updating tt_project_task_binds table.
-    
+
+    // If we are making the project inactive, remove references to it in tt_client_project_binds table.
+    if (constant('INACTIVE') == $status) {
+      ttClientHelper::unassignProjectFromAllClients($project_id);
+    }
+
     // Update project name, description, tasks and status in tt_projects table.
     $comma_separated = implode(",", $tasks_to_bind); // This is a comma-separated list of associated task ids.
     $sql = "update tt_projects set name = ".$mdb2->quote($name).", description = ".$mdb2->quote($description).

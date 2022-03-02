@@ -358,4 +358,49 @@ class ttClientHelper {
     $affected = $mdb2->exec($sql);
     return (!is_a($affected, 'PEAR_Error'));
   }
+
+  // unassignProjectFromAllClients - removes a project reference from all clients in tt_clients table
+  // and also from tt_client_project_binds.
+  static function unassignProjectFromAllClients($project_id) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $project_id = (int) $project_id; // Cast for sql injection protection, just in case.
+
+    // Start with cleaning up tt_client_project_binds table.
+    $sql = "delete from tt_client_project_binds".
+       " where project_id = $project_id and group_id = $group_id and org_id = $org_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error'))
+      return false;
+
+    // Continue with tt_clients table.
+    $sql = "select id, projects from tt_clients where projects like '%$project_id%' and group_id = $group_id and org_id = $org_id";
+    $res = $mdb2->query($sql);
+    while ($val = $res->fetchRow()) {
+
+      $client_id = (int) $val['id'];
+      $projectListed = false;
+
+      $projects = explode(',', $val['projects']);
+      if (($key = array_search($project_id, $projects)) !== false) {
+        unset($projects[$key]);
+        $projectListed = true;
+      }
+      if (!$projectListed)
+        continue;  // Project not listed, continue iterating.
+
+      // If we are here, project is listed and we need to remove it.
+      $comma_separated = implode(',', $projects);
+      $sql = "update tt_clients set projects = ".$mdb2->quote($comma_separated).
+        " where id = $client_id and group_id = $group_id and org_id = $org_id";
+      $affected = $mdb2->exec($sql);
+      if (is_a($affected, 'PEAR_Error'))
+        return false;
+    }
+    return true;
+  }
 }
