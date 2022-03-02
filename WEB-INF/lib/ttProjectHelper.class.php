@@ -358,7 +358,7 @@ class ttProjectHelper {
     }
     // End of updating tt_project_task_binds table.
 
-    // If we are making the project inactive, remove references to it in tt_client_project_binds table.
+    // If we are making the project inactive, unassign it from all clients.
     if (constant('INACTIVE') == $status) {
       ttClientHelper::unassignProjectFromAllClients($project_id);
     }
