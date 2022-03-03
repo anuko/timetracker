@@ -718,7 +718,7 @@ class ttTimeHelper {
       and start is not null and duration is not null and status = 1 and (
       (cast(".$mdb2->quote($start)." as time) >= start and cast(".$mdb2->quote($start)." as time) < addtime(start, duration))";
     if ($finish) {
-      $sql .= " or (cast(".$mdb2->quote($finish)." as time) <= addtime(start, duration) and cast(".$mdb2->quote($finish)." as time) > start)
+      $sql .= " or (cast(".$mdb2->quote($finish)." as time) < addtime(start, duration) and cast(".$mdb2->quote($finish)." as time) >= start)
       or (cast(".$mdb2->quote($start)." as time) < start and cast(".$mdb2->quote($finish)." as time) > addtime(start, duration))";
     }
     $sql .= ")";
