@@ -37,7 +37,7 @@
     {if $user->exists() && $user->isPluginEnabled('iv') && ($user->can('manage_invoices') || $user->can('view_client_invoices'))}
   <div class="sitemap-item"><a href="invoices.php">{$i18n.title.invoices}</a></div>
     {/if}
-    {if ($user->exists() && $user->isPluginEnabled('ch') && ($user->can('view_own_charts') || $user->can('view_charts'))) &&
+    {if ($user->exists() && $user->isPluginEnabled('ch') && ($user->can('view_own_charts') || $user->can('view_charts') || $user->can('view_all_charts'))) &&
         (constant('MODE_PROJECTS') == $user->getTrackingMode() || constant('MODE_PROJECTS_AND_TASKS') == $user->getTrackingMode() ||
         $user->isPluginEnabled('cl'))}
   <div class="sitemap-item"><a href="charts.php">{$i18n.menu.charts}</a></div>

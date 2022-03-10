@@ -40,6 +40,11 @@ class ttChartHelper {
   // getTotals - returns total times by project or task for a given user in a specified period.
   static function getTotals($user_id, $chart_type, $selected_date, $interval_type) {
 
+    global $user;
+    $user_id = (int) $user_id; // Cast to int just in case for sql injections.
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $period = null;
     switch ($interval_type) {
       case INTERVAL_THIS_DAY:
@@ -62,25 +67,32 @@ class ttChartHelper {
     $result = array();
     $mdb2 = getConnection();
 
+    $userIdPart = '';
+    if ($user_id > 0) {
+      // -1 here means "all users in group" both active and inactive.
+      // Therefore, we will not be using user id.
+      $userIdPart = "and l.user_id = $user_id";
+    }
+
     $q_period = '';
     if ($period != null) {
-      $q_period = " and date >= '".$period->getStartDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."'";
+      $q_period = "and date >= '".$period->getStartDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."'";
     }
     if (CHART_PROJECTS == $chart_type) {
       // Data for projects.
       $sql = "select p.name as name, sum(time_to_sec(l.duration)) as time from tt_log l
         left join tt_projects p on (p.id = l.project_id)
-        where l.status = 1 and l.user_id = $user_id $q_period group by l.project_id";
+        where l.status = 1 $userIdPart and l.group_id = $group_id and l.org_id = $org_id $q_period group by l.project_id";
     } elseif (CHART_TASKS == $chart_type) {
       // Data for tasks.
       $sql = "select t.name as name, sum(time_to_sec(l.duration)) as time from tt_log l
         left join tt_tasks t on (t.id = l.task_id)
-        where l.status = 1 and l.user_id = $user_id $q_period group by l.task_id";
+        where l.status = 1 $userIdPart and l.group_id = $group_id and l.org_id = $org_id $q_period group by l.task_id";
     } elseif (CHART_CLIENTS == $chart_type) {
       // Data for clients.
       $sql = "select c.name as name, sum(time_to_sec(l.duration)) as time from tt_log l
         left join tt_clients c on (c.id = l.client_id)
-        where l.status = 1 and l.user_id = $user_id $q_period group by l.client_id";
+        where l.status = 1 $userIdPart and l.group_id = $group_id and l.org_id = $org_id $q_period group by l.client_id";
     }
 
     $res = $mdb2->query($sql);

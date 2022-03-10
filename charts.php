@@ -13,8 +13,10 @@ import('PieChartEx');
 import('ttUserHelper');
 import('ttTeamHelper');
 
+define('ALL_USERS_OPTION_ID', -1); // An identifier for "all users" seclection in User dropdown.
+
 // Access checks.
-if (!(ttAccessAllowed('view_own_charts') || ttAccessAllowed('view_charts'))) {
+if (!(ttAccessAllowed('view_own_charts') || ttAccessAllowed('view_charts') || ttAccessAllowed('view_all_charts'))) {
   header('Location: access_denied.php');
   exit();
 }
@@ -26,7 +28,7 @@ if (!$user->exists()) {
   header('Location: access_denied.php'); // Nobody to display a chart for.
   exit();
 }
-if ($user->behalf_id && (!$user->can('view_charts') || !$user->checkBehalfId())) {
+if ($user->behalf_id && (!($user->can('view_charts') || $user->can('view_all_charts')) || !$user->checkBehalfId())) {
   header('Location: access_denied.php'); // Trying on behalf, but no right or wrong user.
   exit();
 }
@@ -34,8 +36,13 @@ if (!$user->behalf_id && !$user->can('view_own_charts') && !$user->adjustBehalfI
   header('Location: access_denied.php'); // Trying as self, but no right for self, and noone to view on behalf.
   exit();
 }
+$userDropdownSelectionId = (int) $request->getParameter('user'); // Resused below access checks.
 if ($request->isPost() && $request->getParameter('user')) {
-  if (!$user->isUserValid((int)$request->getParameter('user'))) {
+  if ($userDropdownSelectionId == constant('ALL_USERS_OPTION_ID') && !ttAccessAllowed('view_all_charts')) {
+    header('Location: access_denied.php'); // All users option is only for users with view_all_charts access right.
+    exit();
+  }
+  if ($userDropdownSelectionId != constant('ALL_USERS_OPTION_ID') && !$user->isUserValid($userDropdownSelectionId)) {
     header('Location: access_denied.php'); // Wrong user id on post.
     exit();
   }
@@ -47,13 +54,16 @@ if ($date && !ttValidDbDateFormatDate($date)) {
 }
 // End of access checks.
 
-// Determine user for which we display this page.
-$userChanged = (int)$request->getParameter('user_changed');
-if ($request->isPost() && $userChanged) {
-  $user_id = (int)$request->getParameter('user');
-  $user->setOnBehalfUser($user_id);
-} else {
-  $user_id = $user->getUser();
+// Determine user for whom we display this page.
+$userChanged = (int) $request->getParameter('user_changed');
+if ($request->isPost() && $userChanged ) {
+  if ($userDropdownSelectionId != constant('ALL_USERS_OPTION_ID')) {
+    $user->setOnBehalfUser($userDropdownSelectionId);
+  }
+}
+if ($request->isGet()) {
+  $userDropdownSelectionId = $user->getUser();
+  // Note that this may change to ALL_USERS_OPTION_ID below from session.
 }
 
 $uc = new ttUserConfig();
@@ -77,6 +87,9 @@ if ($request->isPost()) {
   if (!$cl_type) $cl_type = ttChartHelper::adjustType($cl_type);
   $_SESSION['chart_type'] = $cl_type;
   $uc->setValue(SYSC_CHART_TYPE, $cl_type);
+
+  // Remember all users selection in session.
+  $_SESSION['chart_all_users'] = $userDropdownSelectionId == constant('ALL_USERS_OPTION_ID') ? true : false;
 } else {
   // Initialize chart interval.
   $cl_interval = @$_SESSION['chart_interval'];
@@ -89,6 +102,11 @@ if ($request->isPost()) {
   if (!$cl_type) $cl_type = $uc->getValue(SYSC_CHART_TYPE);
   $cl_type = ttChartHelper::adjustType($cl_type);
   $_SESSION['chart_type'] = $cl_type;
+
+  // Set user selection to all users, if necessary.
+  $allUsersSetInSession = @$_SESSION['chart_all_users'];
+  if ($allUsersSetInSession)
+      $userDropdownSelectionId = constant('ALL_USERS_OPTION_ID');
 }
 
 // Elements of chartForm.
@@ -96,18 +114,22 @@ $chart_form = new Form('chartForm');
 $largeScreenCalendarRowSpan = 1; // Number of rows calendar spans on large screens.
 
 // User dropdown. Changes the user "on behalf" of whom we are working.
-if ($user->can('view_charts')) {
+if ($user->can('view_charts') || $user->can('view_all_charts')) {
   $rank = $user->getMaxRankForGroup($user->getGroup());
   if ($user->can('view_own_charts'))
     $options = array('status'=>ACTIVE,'max_rank'=>$rank,'include_self'=>true,'self_first'=>true);
   else
     $options = array('status'=>ACTIVE,'max_rank'=>$rank);
   $user_list = $user->getUsers($options);
+  // Add the --- all --- option to dropdown.
+  if ($user->can('view_all_charts')) {
+      $user_list[] = array('id'=>'-1','group_id'=>$user->getGroup(), 'name'=>$i18n->get('dropdown.all'), 'rights'=>'');
+  }
   if (count($user_list) >= 1) {
     $chart_form->addInput(array('type'=>'combobox',
       'onchange'=>'this.form.user_changed.value=1;this.form.submit();',
       'name'=>'user',
-      'value'=>$user_id,
+      'value'=>$userDropdownSelectionId,
       'data'=>$user_list,
       'datakeys'=>array('id','name'),
     ));
@@ -159,7 +181,7 @@ if ($chart_selector) {
 $chart_form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
 
 // Get data for our chart.
-$totals = ttChartHelper::getTotals($user_id, $cl_type, $cl_date, $cl_interval);
+$totals = ttChartHelper::getTotals($userDropdownSelectionId, $cl_type, $cl_date, $cl_interval);
 $smarty->assign('totals', $totals);
 
 // Prepare chart for drawing.
