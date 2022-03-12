@@ -1,6 +1,6 @@
 # Resources
 
-* [docs](https://www.anuko.com/time_tracker/features.htm) - detailed documentation about this project (needs updating).
+* [docs](https://www.anuko.com/time-tracker/features.htm) - detailed documentation about this project (needs updating).
 * [forum](https://www.anuko.com/forum/viewforum.php?f=4) - general discussion.
 
 
@@ -29,4 +29,4 @@ usr: admin
 psw: secret
 ```
 
-Without docker, perform a manual install of a web server, php, database server, and Time Tracker. Full installation and setup guide can be found [here](https://www.anuko.com/time_tracker/install_guide/index.htm).
+Without docker, perform a manual install of a web server, php, database server, and Time Tracker. Full installation and setup guide can be found [here](https://www.anuko.com/time-tracker/install-guide/index.htm).

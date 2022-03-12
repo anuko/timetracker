@@ -1,9 +1,9 @@
 Anuko Time Tracker
 Copyright (c) Anuko (https://www.anuko.com)
 
-Project home page: https://www.anuko.com/time_tracker/index.htm
+Project home page: https://www.anuko.com/time-tracker/index.htm
 Forum: https://www.anuko.com/forum/viewforum.php?f=4
-Info for developers: https://www.anuko.com/time_tracker/info_for_developers.htm
+Info for developers: https://www.anuko.com/time-tracker/info-for-developers.htm
 Free hosting of Time Tracker for individuals and small groups is available at https://timetracker.anuko.com
 
 Unless otherwise noted, files in this archive are protected by the LIBERAL FREEWARE LICENSE.
@@ -12,7 +12,7 @@ Read the file license.txt for details.
 
 INSTALLATION INSTRUCTIONS
 
-Documentation is available at https://www.anuko.com/time_tracker/install_guide/index.htm
+Documentation is available at https://www.anuko.com/time-tracker/install-guide/index.htm
 
 The general installation procedure looks like this:
 
@@ -40,7 +40,7 @@ The general installation procedure looks like this:
 
 UPGRADE FROM EARLIER VERSIONS
 
-See https://www.anuko.com/time_tracker/upgrade.htm
+See https://www.anuko.com/time-tracker/install-guide/upgrade.htm
 
 
 BLANK PAGES IN TIME TRACKER
@@ -62,4 +62,4 @@ Support is available on per-incident basis - see https://www.anuko.com/support.h
 
 CHANGE LOG
 
-Change log is available at https://www.anuko.com/time_tracker/change_log/index.htm
+Change log is available at https://www.anuko.com/time-tracker/change-log/index.htm

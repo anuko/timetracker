@@ -88,7 +88,7 @@ define('SENDER', 'Anuko Time Tracker <no-reply@timetracker.anuko.com>');
 // MAIL_MODE - mail sending mode. Can be 'mail' or 'smtp'.
 // 'mail' - sending through php mail() function.
 // 'smtp' - sending directly through SMTP server.
-// See https://www.anuko.com/time_tracker/install_guide/mail.htm
+// See https://www.anuko.com/time-tracker/install-guide/mail.htm
 //
 define('MAIL_MODE', 'smtp');
 define('MAIL_SMTP_HOST', 'localhost'); // For gmail use 'ssl://smtp.gmail.com' instead of 'localhost' and port 465.
@@ -133,7 +133,7 @@ define('REPORT_FOOTER', true);
 define('AUTH_MODULE', 'db');
 
 // LDAP authentication examples.
-// Go to https://www.anuko.com/time_tracker/install_guide/ldap_auth/index.htm for detailed configuration instructions.
+// Go to https://www.anuko.com/time-tracker/install-guide/ldap-auth/index.htm for detailed configuration instructions.
 
 // Configuration example for OpenLDAP server:
 // define('AUTH_MODULE', 'ldap');
