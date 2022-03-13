@@ -32,7 +32,6 @@ License: See license.txt *}
       <span class="what-is-it-text"><a href="https://www.anuko.com/lp/tt_21.htm" target="_blank">{$i18n.label.what_is_it}</a></span>
     </td>
   </tr>
-{if constant('PASSWORD_COMPLEXITY_DEBUG')}
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td><label for="allow_ip">{$i18n.form.group_edit.password_complexity}:</label></td></tr>
   <tr>
@@ -42,7 +41,6 @@ License: See license.txt *}
       <span class="what-is-it-text"><a href="https://www.anuko.com/lp/tt_22.htm" target="_blank">{$i18n.label.what_is_it}</a></span>
     </td>
   </tr>
-{/if}
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr><td colspan="2">{$i18n.label.required_fields}</td></tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
