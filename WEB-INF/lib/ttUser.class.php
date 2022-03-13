@@ -693,6 +693,7 @@ class ttUser {
     if (isset($fields['record_type'])) $record_type_part = ', record_type = '.(int) $fields['record_type'];
     if (isset($fields['bcc_email'])) $bcc_email_part = ', bcc_email = '.$mdb2->quote($fields['bcc_email']);
     if (isset($fields['allow_ip'])) $allow_ip_part = ', allow_ip = '.$mdb2->quote($fields['allow_ip']);
+    if (isset($fields['password_complexity'])) $password_complexity_part = ', password_complexity = '.$mdb2->quote($fields['password_complexity']);
     if (isset($fields['plugins'])) $plugins_part = ', plugins = '.$mdb2->quote($fields['plugins']);
     if (isset($fields['config'])) $config_part = ', config = '.$mdb2->quote($fields['config']);
     if (isset($fields['custom_css'])) $custom_css_part = ', custom_css = '.$mdb2->quote($fields['custom_css']);
@@ -703,7 +704,7 @@ class ttUser {
 
     $parts = trim($name_part.$description_part.$currency_part.$lang_part.$decimal_mark_part.$date_format_part.
       $time_format_part.$week_start_part.$tracking_mode_part.$project_required_part.$record_type_part.
-      $bcc_email_part.$allow_ip_part.$plugins_part.$config_part.$custom_css_part.$lock_spec_part.$holidays_part.$workday_minutes_part.$modified_part, ',');
+      $bcc_email_part.$allow_ip_part.$password_complexity_part.$plugins_part.$config_part.$custom_css_part.$lock_spec_part.$holidays_part.$workday_minutes_part.$modified_part, ',');
 
     $sql = "update tt_groups set $parts where id = $group_id and org_id = $this->org_id";
     $affected = $mdb2->exec($sql);

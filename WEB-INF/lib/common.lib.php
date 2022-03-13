@@ -396,6 +396,16 @@ function ttValidHolidays($val)
   return true;
 }
 
+// ttValidPasswordComplexity is used to check user input for password complexity field.
+function ttValidPasswordComplexity($val)
+{
+  // Password complexity example may contain a-z, A-Z, 0-9, and a #.
+  if (!preg_match('/^[a-zA-Z0-9#]*$/', $val))
+    return false;
+
+  return true;
+}
+
 // ttAccessAllowed checks whether user is allowed access to a particular page.
 // It is used as an initial check on all publicly available pages
 // (except login.php, register.php, and others where we don't have to check).

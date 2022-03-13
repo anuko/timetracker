@@ -22,13 +22,13 @@ if ($request->isPost()) {
   $cl_description = trim($request->getParameter('description'));
   $cl_bcc_email = trim($request->getParameter('bcc_email'));
   $cl_allow_ip = trim($request->getParameter('allow_ip'));
-  $cl_password_compexity = trim($request->getParameter('password_complexity'));
+  $cl_password_complexity = trim($request->getParameter('password_complexity'));
 } else {
   $cl_group = $group['name'];
   $cl_description = $group['description'];
   $cl_bcc_email = $group['bcc_email'];
   $cl_allow_ip = $group['allow_ip'];
-  $cl_password_compexity = $group['password_complexity'];
+  $cl_password_complexity = $group['password_complexity'];
 }
 
 $form = new Form('groupAdvancedForm');
@@ -47,7 +47,7 @@ if ($request->isPost()) {
     if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
     if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
     if (!ttValidIP($cl_allow_ip, true)) $err->add($i18n->get('error.field'), $i18n->get('form.group_edit.allow_ip'));
-    // TODO: add validation for password complexity field.
+    if (!ttValidPasswordComplexity($cl_password_complexity, true)) $err->add($i18n->get('error.field'), $i18n->get('form.group_edit.password_complexity'));
     // Finished validating user input.
 
     if ($err->no()) {
