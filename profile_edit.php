@@ -67,6 +67,9 @@ if ($request->isPost()) {
     if (!ttValidString($cl_password2)) $err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
     if ($cl_password1 !== $cl_password2)
       $err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
+    // Check password complexity.
+    if (!ttCheckPasswordComplexity($cl_password1))
+      $err->add($i18n->get('error.weak_password'));
   }
   if (!ttValidEmail($cl_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.email'));
   // Finished validating user input.

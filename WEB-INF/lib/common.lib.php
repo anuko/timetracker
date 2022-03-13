@@ -397,14 +397,52 @@ function ttValidHolidays($val)
 }
 
 // ttValidPasswordComplexity is used to check user input for password complexity field.
-function ttValidPasswordComplexity($val)
+function ttValidPasswordComplexity($complexityExample)
 {
   // Password complexity example may contain a-z, A-Z, 0-9, and a #.
-  if (!preg_match('/^[a-zA-Z0-9#]*$/', $val))
+  if (!preg_match('/^[a-zA-Z0-9#]*$/', $complexityExample))
     return false;
 
   return true;
 }
+
+// ttCheckPasswordComplexity checks password complexity.
+function ttCheckPasswordComplexity($password)
+{
+  global $user;
+  $complexity = $user->getPasswordComplexity();
+  if (empty($complexity))
+    return true;
+
+  // Password complexity must be enforced.
+  if (strlen($password) < strlen($complexity))
+    return false; // Password is too short.
+
+  $numDigitsRequired = preg_match_all( "/[0-9]/", $complexity);
+  $numDigitsSupplied = preg_match_all( "/[0-9]/", $password);
+  if ($numDigitsSupplied < $numDigitsRequired)
+    return false; // Number of digits in password is less than required number in complexity example.
+
+  $numCapitalsRequired = preg_match_all( "/[A-Z]/", $complexity);
+  $numCapitalsSupplied = preg_match_all( "/[A-Z]/", $password);
+  if ($numCapitalsSupplied < $numCapitalsRequired)
+    return false; // Number of capitals A-Z in password is less than required number in complexity example.
+
+  $numLowercaseRequired = preg_match_all( "/[a-z]/", $complexity);
+  $numLowercaseSupplied = preg_match_all( "/[a-z]/", $password);
+  if ($numLowercaseSupplied < $numLowercaseRequired)
+    return false; // Number of lowercase letter a-z in password is less than required number in complexity example.
+
+  // Finally check the number of "all other" characters that are not alphanumeric. This includes utf-8 characters.
+  $numNotAlphanumericRequired = preg_match_all( "/[#]/", $complexity);
+  $passwordRemainder = preg_replace("/[a-zA-Z0-9]/", "", $password);
+  $numNotAlphanumericSupplied = mb_strlen($passwordRemainder);
+  if ($numNotAlphanumericSupplied < $numNotAlphanumericRequired)
+    return false;
+
+  return true;
+}
+
 
 // ttAccessAllowed checks whether user is allowed access to a particular page.
 // It is used as an initial check on all publicly available pages
