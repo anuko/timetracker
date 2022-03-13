@@ -504,6 +504,8 @@ $i18n_key_words = array(
 'form.group_edit.uncompleted_indicators' => 'Indicadores incompletos',
 'form.group_edit.confirm_save' => 'Confirme o salvamento',
 'form.group_edit.allow_ip' => 'Permitir IP',
+// TODO: translate the following.
+// 'form.group_edit.password_complexity' => 'Password complexity',
 'form.group_edit.advanced_settings' => 'Configurações avançadas',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php.

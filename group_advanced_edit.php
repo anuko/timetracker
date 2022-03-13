@@ -22,11 +22,13 @@ if ($request->isPost()) {
   $cl_description = trim($request->getParameter('description'));
   $cl_bcc_email = trim($request->getParameter('bcc_email'));
   $cl_allow_ip = trim($request->getParameter('allow_ip'));
+  $cl_password_compexity = trim($request->getParameter('password_complexity'));
 } else {
   $cl_group = $group['name'];
   $cl_description = $group['description'];
   $cl_bcc_email = $group['bcc_email'];
   $cl_allow_ip = $group['allow_ip'];
+  $cl_password_compexity = $group['password_complexity'];
 }
 
 $form = new Form('groupAdvancedForm');
@@ -34,6 +36,7 @@ $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','va
 $form->addInput(array('type'=>'textarea','name'=>'description','value'=>$cl_description));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'bcc_email','value'=>$cl_bcc_email));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'allow_ip','value'=>$cl_allow_ip));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'password_complexity','value'=>$cl_password_complexity));
 
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
@@ -44,6 +47,7 @@ if ($request->isPost()) {
     if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
     if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
     if (!ttValidIP($cl_allow_ip, true)) $err->add($i18n->get('error.field'), $i18n->get('form.group_edit.allow_ip'));
+    // TODO: add validation for password complexity field.
     // Finished validating user input.
 
     if ($err->no()) {
@@ -51,7 +55,8 @@ if ($request->isPost()) {
         'name' => $cl_group,
         'description' => $cl_description,
         'bcc_email' => $cl_bcc_email,
-        'allow_ip' => $cl_allow_ip))) {
+        'allow_ip' => $cl_allow_ip,
+        'password_complexity' => $cl_password_complexity))) {
         header('Location: success.php');
         exit();
       } else

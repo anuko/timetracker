@@ -506,6 +506,8 @@ $i18n_key_words = array(
 'form.group_edit.uncompleted_indicators' => 'Onvolledige indicatoren',
 'form.group_edit.confirm_save' => 'Bevestigen dat je wilt opslaan',
 'form.group_edit.allow_ip' => 'Toegestane IP adressen',
+// TODO: translate the following.
+// 'form.group_edit.password_complexity' => 'Password complexity',
 'form.group_edit.advanced_settings' => 'Geavanceerde instellingen',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
