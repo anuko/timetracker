@@ -74,6 +74,8 @@ $i18n_key_words = array(
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'Feil brukernavn eller passord.',
+// TODO: translate the following.
+// 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'Bruker med et slikt brukernavn eksisterer allerede.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',

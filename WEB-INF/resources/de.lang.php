@@ -64,6 +64,8 @@ $i18n_key_words = array(
 'error.report' => 'Bericht auswählen.',
 'error.record' => 'Eintrag auswählen.',
 'error.auth' => 'Benutzername oder Passwort ungültig.',
+// TODO: translate the following.
+// 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'Benutzer mit diesem Konto ist bereits vorhanden.',
 'error.object_exists' => 'Objekt mit diesem Namen ist bereits vorhanden.',
 'error.invoice_exists' => 'Rechnung mit dieser Nummer existiert bereits.',

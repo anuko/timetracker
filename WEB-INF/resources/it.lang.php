@@ -65,6 +65,8 @@ $i18n_key_words = array(
 'error.report' => 'Seleziona rapporto.',
 'error.record' => 'Seleziona record.',
 'error.auth' => 'Login o password errati.',
+// TODO: translate the following.
+// 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'Esiste già un utente con questo username.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',

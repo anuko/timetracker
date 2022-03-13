@@ -73,6 +73,8 @@ $i18n_key_words = array(
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => '부정확한 로그인 혹은 암호가 틀립니다.',
+// TODO: translate the following.
+// 'error.weak_password' => 'Weak password.',
 'error.user_exists' => '본 로그인과 연계된 사용자가 이미 있습니다.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',

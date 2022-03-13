@@ -71,6 +71,8 @@ $i18n_key_words = array(
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => '不正確的用戶名或密碼。',
+// TODO: translate the following.
+// 'error.weak_password' => 'Weak password.',
 'error.user_exists' => '該使用者登錄資訊已經存在。',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',

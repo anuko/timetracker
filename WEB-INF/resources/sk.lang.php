@@ -70,6 +70,8 @@ $i18n_key_words = array(
 // 'error.report' => 'Select report.',
 // 'error.record' => 'Select record.',
 'error.auth' => 'Nesprávne prihlasovacie meno alebo heslo.',
+// TODO: translate the following.
+// 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'Používateľ s týmto prihlasovacím menom už existuje.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',

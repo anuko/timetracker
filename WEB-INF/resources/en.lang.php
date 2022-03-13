@@ -60,6 +60,7 @@ $i18n_key_words = array(
 'error.report' => 'Select report.',
 'error.record' => 'Select record.',
 'error.auth' => 'Incorrect login or password.',
+'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'User with this login already exists.',
 'error.object_exists' => 'Object with this name already exists.',
 'error.invoice_exists' => 'Invoice with this number already exists.',

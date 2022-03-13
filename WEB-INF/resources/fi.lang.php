@@ -68,6 +68,8 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'error.record' => 'Select record.',
 'error.auth' => 'Virheellinen käyttäjänimi tai salasana.',
+// TODO: translate the following.
+// 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'Tämä käyttäjänimi on jo olemassa.',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',

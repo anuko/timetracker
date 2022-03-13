@@ -59,6 +59,7 @@ $i18n_key_words = array(
 'error.report' => 'Выберите отчёт.',
 'error.record' => 'Выберите запись.',
 'error.auth' => 'Неправильно введен логин или пароль.',
+'error.weak_password' => 'Слабый пароль.',
 'error.user_exists' => 'Пользователь с таким логином уже существует.',
 'error.object_exists' => 'Объект с таким именем уже есть.',
 'error.invoice_exists' => 'Счёт с таким номером уже есть.',

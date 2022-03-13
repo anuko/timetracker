@@ -81,6 +81,8 @@ $i18n_key_words = array(
 // 'error.report' => 'Select report.'
 // 'error.record' => 'Select record.',
 'error.auth' => 'שם משתמש או סיסמה שגויים',
+// TODO: translate the following.
+// 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'שם משתמש כבר קיים',
 // TODO: translate the following.
 // 'error.object_exists' => 'Object with this name already exists.',

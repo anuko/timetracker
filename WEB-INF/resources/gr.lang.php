@@ -63,6 +63,8 @@ $i18n_key_words = array(
 'error.report' => 'Επιλογή αναφοράς.',
 'error.record' => 'Επιλογή εγγραφής.',
 'error.auth' => 'Λανθασμένο όνομα εισόδου ή κωδικός.',
+// TODO: translate the following.
+// 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'Ο χρήστης με αυτήν τη σύνδεση υπάρχει ήδη.',
 'error.object_exists' => 'Το αντικείμενο με αυτό το όνομα υπάρχει ήδη.',
 'error.invoice_exists' => 'Το τιμολόγιο με αυτόν τον αριθμό υπάρχει ήδη.',
