@@ -59,8 +59,7 @@ $i18n_key_words = array(
 'error.report' => 'Kies rapport.',
 'error.record' => 'Kies record.',
 'error.auth' => 'Onjuiste inlognaam of wachtwoord.',
-// TODO: translate the following.
-// 'error.weak_password' => 'Weak password.',
+'error.weak_password' => 'Zwak wachtwoord.',
 'error.user_exists' => 'Een gebruiker met deze inlognaam bestaat al.',
 'error.object_exists' => 'Een object met deze naam bestaat al.',
 'error.invoice_exists' => 'Dit nummer is al eens toegekend aan een factuur.',
@@ -508,8 +507,7 @@ $i18n_key_words = array(
 'form.group_edit.uncompleted_indicators' => 'Onvolledige indicatoren',
 'form.group_edit.confirm_save' => 'Bevestigen dat je wilt opslaan',
 'form.group_edit.allow_ip' => 'Toegestane IP adressen',
-// TODO: translate the following.
-// 'form.group_edit.password_complexity' => 'Password complexity',
+'form.group_edit.password_complexity' => 'Wachtwoord complexiteit',
 'form.group_edit.advanced_settings' => 'Geavanceerde instellingen',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
