@@ -540,6 +540,7 @@ $i18n_key_words = array(
 'form.group_edit.allow_ip' => 'Erlaube IP',
 // TODO: translate the following.
 // 'form.group_edit.password_complexity' => 'Password complexity',
+// 'form.group_edit.2fa' => 'Two factor authentication',
 // 'form.group_edit.advanced_settings' => 'Advanced settings',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
