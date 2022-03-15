@@ -512,6 +512,12 @@ $i18n_key_words = array(
 // form.group_edit.2fa' => 'Two factor authentication',
 'form.group_edit.advanced_settings' => 'Geavanceerde instellingen',
 
+// Advanced Group Settings form. See example at https://timetracker.anuko.com/group_advanced_edit.php.
+'form.group_advanced_edit.allow_ip' => 'Toegestane IP adressen',
+'form.group_advanced_edit.password_complexity' => 'Wachtwoord complexiteit',
+// TODO: Translate the following.
+// 'form.group_advanced_edit.2fa' => 'Two factor authentication',
+
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 'form.group_delete.hint' => 'Bent u er zeker van dat u de hele groep wilt verwijderen?',
 
