@@ -537,10 +537,7 @@ $i18n_key_words = array(
 'form.group_edit.future_entries' => 'Einträge in der Zukunft',
 'form.group_edit.uncompleted_indicators' => 'Zeige unfertige Einträge',
 'form.group_edit.confirm_save' => 'Speichern bestätigen',
-'form.group_edit.allow_ip' => 'Erlaube IP',
 // TODO: translate the following.
-// 'form.group_edit.password_complexity' => 'Password complexity',
-// 'form.group_edit.2fa' => 'Two factor authentication',
 // 'form.group_edit.advanced_settings' => 'Advanced settings',
 
 // Advanced Group Settings form. See example at https://timetracker.anuko.com/group_advanced_edit.php.

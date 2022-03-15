@@ -46,8 +46,8 @@ if ($request->isPost()) {
     if (!ttValidString($cl_group)) $err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
     if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
     if (!ttValidEmail($cl_bcc_email, true)) $err->add($i18n->get('error.field'), $i18n->get('label.bcc'));
-    if (!ttValidIP($cl_allow_ip, true)) $err->add($i18n->get('error.field'), $i18n->get('form.group_edit.allow_ip'));
-    if (!ttValidPasswordComplexity($cl_password_complexity, true)) $err->add($i18n->get('error.field'), $i18n->get('form.group_edit.password_complexity'));
+    if (!ttValidIP($cl_allow_ip, true)) $err->add($i18n->get('error.field'), $i18n->get('form.group_advanced_edit.allow_ip'));
+    if (!ttValidPasswordComplexity($cl_password_complexity, true)) $err->add($i18n->get('error.field'), $i18n->get('form.group_advanced_edit.password_complexity'));
     // Finished validating user input.
 
     if ($err->no()) {

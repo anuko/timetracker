@@ -24,18 +24,18 @@ License: See license.txt *}
     </td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
-  <tr class = "small-screen-label"><td><label for="allow_ip">{$i18n.form.group_edit.allow_ip}:</label></td></tr>
+  <tr class = "small-screen-label"><td><label for="allow_ip">{$i18n.form.group_advanced_edit.allow_ip}:</label></td></tr>
   <tr>
-    <td class="large-screen-label"><label for="allow_ip">{$i18n.form.group_edit.allow_ip}:</label></td>
+    <td class="large-screen-label"><label for="allow_ip">{$i18n.form.group_advanced_edit.allow_ip}:</label></td>
     <td class="td-with-input">{$forms.groupAdvancedForm.allow_ip.control}
       <span class="what-is-it-img"><a href="https://www.anuko.com/lp/tt_21.htm" target="_blank"><img src="img/icon-question-mark.png" title="{$i18n.label.what_is_it}" alt="{$i18n.label.what_is_it}"></a></span>
       <span class="what-is-it-text"><a href="https://www.anuko.com/lp/tt_21.htm" target="_blank">{$i18n.label.what_is_it}</a></span>
     </td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
-  <tr class = "small-screen-label"><td><label for="allow_ip">{$i18n.form.group_edit.password_complexity}:</label></td></tr>
+  <tr class = "small-screen-label"><td><label for="allow_ip">{$i18n.form.group_advanced_edit.password_complexity}:</label></td></tr>
   <tr>
-    <td class="large-screen-label"><label for="allow_ip">{$i18n.form.group_edit.password_complexity}:</label></td>
+    <td class="large-screen-label"><label for="allow_ip">{$i18n.form.group_advanced_edit.password_complexity}:</label></td>
     <td class="td-with-input">{$forms.groupAdvancedForm.password_complexity.control}
       <span class="what-is-it-img"><a href="https://www.anuko.com/lp/tt_22.htm" target="_blank"><img src="img/icon-question-mark.png" title="{$i18n.label.what_is_it}" alt="{$i18n.label.what_is_it}"></a></span>
       <span class="what-is-it-text"><a href="https://www.anuko.com/lp/tt_22.htm" target="_blank">{$i18n.label.what_is_it}</a></span>

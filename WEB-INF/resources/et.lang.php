@@ -571,10 +571,7 @@ $i18n_key_words = array(
 'form.group_edit.future_entries' => 'Tuleviku kirjed',
 'form.group_edit.uncompleted_indicators' => 'Lõpetamata kirjete indikaator', // TODO: Fix this. Indicators (plural), not indicator.
 'form.group_edit.confirm_save' => 'Kinnita salvestamine',
-'form.group_edit.allow_ip' => 'Luba IP',
 // TODO: translate the following.
-// 'form.group_edit.password_complexity' => 'Password complexity',
-// 'form.group_edit.2fa' => 'Two factor authentication',
 // 'form.group_edit.advanced_settings' => 'Advanced settings',
 
 // Advanced Group Settings form. See example at https://timetracker.anuko.com/group_advanced_edit.php.
