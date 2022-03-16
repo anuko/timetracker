@@ -78,6 +78,7 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => 'Nume de utilizator sau parola incorecta.',
 // TODO: translate the following.
+// 'error.2fa_code' => 'Invalid 2FA code.',
 // 'error.weak_password' => 'Weak password.',
 // 'error.user_exists' => 'User with this login already exists.',
 // 'error.object_exists' => 'Object with this name already exists.',

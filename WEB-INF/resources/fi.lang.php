@@ -69,6 +69,7 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => 'Virheellinen käyttäjänimi tai salasana.',
 // TODO: translate the following.
+// 'error.2fa_code' => 'Invalid 2FA code.',
 // 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'Tämä käyttäjänimi on jo olemassa.',
 // TODO: translate the following.

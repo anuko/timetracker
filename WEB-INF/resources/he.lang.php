@@ -82,6 +82,7 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => 'שם משתמש או סיסמה שגויים',
 // TODO: translate the following.
+// 'error.2fa_code' => 'Invalid 2FA code.',
 // 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'שם משתמש כבר קיים',
 // TODO: translate the following.

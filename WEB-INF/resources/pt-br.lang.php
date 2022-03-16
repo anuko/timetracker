@@ -60,6 +60,7 @@ $i18n_key_words = array(
 'error.record' => 'Selecione o registro.',
 'error.auth' => 'Usuário ou senha incorretos.',
 // TODO: translate the following.
+// 'error.2fa_code' => 'Invalid 2FA code.',
 // 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'Já existe usuário com este login.',
 'error.object_exists' => 'Já existe um objeto com este nome.',

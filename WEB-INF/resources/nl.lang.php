@@ -59,6 +59,8 @@ $i18n_key_words = array(
 'error.report' => 'Kies rapport.',
 'error.record' => 'Kies record.',
 'error.auth' => 'Onjuiste inlognaam of wachtwoord.',
+// TODO: translate the following.
+// 'error.2fa_code' => 'Invalid 2FA code.',
 'error.weak_password' => 'Zwak wachtwoord.',
 'error.user_exists' => 'Een gebruiker met deze inlognaam bestaat al.',
 'error.object_exists' => 'Een object met deze naam bestaat al.',

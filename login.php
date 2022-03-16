@@ -35,6 +35,7 @@ if ($request->isPost()) {
   if (!ttValidString($cl_password)) $err->add($i18n->get('error.field'), $i18n->get('label.password'));
 
   $loginSucceeded = $use2FA = false;
+
   if ($err->no()) {
     // Use the "limit" plugin if we have one. Ignore include errors.
     // The "limit" plugin is not required for normal operation of Time Tracker.
@@ -42,6 +43,8 @@ if ($request->isPost()) {
 
     // Check user login.
     $loginSucceeded = $auth->doLogin($cl_login, $cl_password);
+    if (!$loginSucceeded)
+      $err->add($i18n->get('error.auth'));
   }
 
   // Do we have to use 2FA?
@@ -53,7 +56,7 @@ if ($request->isPost()) {
     $use2FA = $config->getDefinedValue('2fa');
   }
 
-  // If we have to use 2FA, create and email auith code to user.
+  // If we have to use 2FA, create and email auth code to user.
   if ($use2FA) {
     // To keep things simple, we use the same code as for password resets.
     $cryptographically_strong = true;
@@ -106,7 +109,6 @@ if ($request->isPost()) {
   }
 
   if ($err->no() && $loginSucceeded) {
-
     // Set current user date (as determined by user browser) into session.
     $current_user_date = $request->getParameter('browser_today', null);
     if ($current_user_date)
@@ -124,8 +126,7 @@ if ($request->isPost()) {
       header('Location: time.php');
     }
     exit();
-  } else
-    $err->add($i18n->get('error.auth'));
+  }
 } // isPost
 
 if(!isTrue('MULTIORG_MODE') && !ttOrgHelper::getOrgs())

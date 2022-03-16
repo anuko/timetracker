@@ -72,6 +72,7 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => '不正確的用戶名或密碼。',
 // TODO: translate the following.
+// 'error.2fa_code' => 'Invalid 2FA code.',
 // 'error.weak_password' => 'Weak password.',
 'error.user_exists' => '該使用者登錄資訊已經存在。',
 // TODO: translate the following.

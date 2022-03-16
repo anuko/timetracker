@@ -71,6 +71,7 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => 'Nesprávne prihlasovacie meno alebo heslo.',
 // TODO: translate the following.
+// 'error.2fa_code' => 'Invalid 2FA code.',
 // 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'Používateľ s týmto prihlasovacím menom už existuje.',
 // TODO: translate the following.

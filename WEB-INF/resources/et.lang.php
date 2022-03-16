@@ -66,6 +66,7 @@ $i18n_key_words = array(
 'error.record' => 'Vali kirje.',
 'error.auth' => 'Autentimine ebaõnnestus.',
 // TODO: translate the following.
+// 'error.2fa_code' => 'Invalid 2FA code.',
 // 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'Selle nimega kasutaja on juba kasutusel.',
 'error.object_exists' => 'Sellise nimega objekt on juba olemas.',

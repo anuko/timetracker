@@ -74,6 +74,7 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => '不正確なログインあるいはパスワードが不正確です。',
 // TODO: translate the following.
+// 'error.2fa_code' => 'Invalid 2FA code.',
 // 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'このログインと関連されたユーザーは既に存在します。',
 // TODO: translate the following.

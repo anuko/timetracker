@@ -66,6 +66,7 @@ $i18n_key_words = array(
 // 'error.record' => 'Select record.',
 'error.auth' => 'Ogiltigt användarnamn eller lösenord.',
 // TODO: translate the following.
+// 'error.2fa_code' => 'Invalid 2FA code.',
 // 'error.weak_password' => 'Weak password.',
 'error.user_exists' => 'Det finns redan en användare med det här användarnamnet.',
 // TODO: translate the following.
