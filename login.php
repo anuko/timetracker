@@ -4,8 +4,9 @@ License: See license.txt */
 
 require_once('initialize.php');
 import('form.Form');
-import('ttOrgHelper');
+//import('ttOrgHelper');
 import('ttUser');
+import('ttUserHelper');
 
 // Access checks.
 if ($request->isPost()) {
@@ -33,46 +34,98 @@ if ($request->isPost()) {
   if (!ttValidString($cl_login)) $err->add($i18n->get('error.field'), $i18n->get('label.login'));
   if (!ttValidString($cl_password)) $err->add($i18n->get('error.field'), $i18n->get('label.password'));
 
+  $loginSucceeded = $use2FA = false;
   if ($err->no()) {
     // Use the "limit" plugin if we have one. Ignore include errors.
     // The "limit" plugin is not required for normal operation of Time Tracker.
     @include('plugins/limit/access_check.php');
 
-    if ($auth->doLogin($cl_login, $cl_password)) {
-      // Set current user date (as determined by user browser) into session.
-      $current_user_date = $request->getParameter('browser_today', null);
-      if ($current_user_date)
-        $_SESSION['date'] = $current_user_date;
-
-      // Remember user login in a cookie.
-      setcookie(LOGIN_COOKIE_NAME, $cl_login, time() + COOKIE_EXPIRE, '/');
-
-      $user = new ttUser(null, $auth->getUserId());
-
-      // Determine if we have to additionally use two-factor authentication.
-      $config = $user->getConfigHelper();
-      $use2FA = $config->getDefinedValue('2fa');
-      if ($use2FA) {
-
-        // TODO: send 2fa code to user.
-        $auth->doLogout();
-
-        header('Location: 2fa.php');
-        exit();
-      }
-
-      // Redirect, depending on user role.
-      if ($user->can('administer_site')) {
-        header('Location: admin_groups.php');
-      } elseif ($user->isClient()) {
-        header('Location: reports.php');
-      } else {
-        header('Location: time.php');
-      }
-      exit();
-    } else
-      $err->add($i18n->get('error.auth'));
+    // Check user login.
+    $loginSucceeded = $auth->doLogin($cl_login, $cl_password);
   }
+
+  // Do we have to use 2FA?
+  if ($err->no() && $loginSucceeded) {
+    $user = new ttUser(null, $auth->getUserId());
+
+    // Determine if we have to additionally use two-factor authentication.
+    $config = $user->getConfigHelper();
+    $use2FA = $config->getDefinedValue('2fa');
+  }
+
+  // If we have to use 2FA, create and email auith code to user.
+  if ($use2FA) {
+    // To keep things simple, we use the same code as for password resets.
+    $cryptographically_strong = true;
+    $random_bytes = openssl_random_pseudo_bytes(16, $cryptographically_strong);
+    if ($random_bytes === false) die ("openssl_random_pseudo_bytes function call failed...");
+    $temp_ref = bin2hex($random_bytes);
+    ttUserHelper::saveTmpRef($temp_ref, $user->id);
+
+    // For user languague in email.
+    $user_i18n = null;
+    if ($user->lang != $i18n->lang) {
+      $user_i18n = new I18n();
+      $user_i18n->load($user->lang);
+    } else
+      $user_i18n = &$i18n;
+
+    // Where do we email to?
+    $receiver = null;
+    if ($user->email)
+      $receiver = $user->email;
+    else {
+      if (ttValidEmail($user->login))
+        $receiver = $user->login;
+    }
+    if (!$receiver) $err->add($user_i18n->get('error.no_email'));
+
+    // Send 2FA_code email to user.
+    if ($receiver) {
+      import('mail.Mailer');
+      $mailer = new Mailer();
+      $mailer->setCharSet(CHARSET);
+      $mailer->setSender(SENDER);
+      $mailer->setReceiver("$receiver");
+
+      $subject = $user_i18n->get('email.2fa_code.subject');
+      $body = sprintf($user_i18n->get('email.2fa_code.body'), $temp_ref);
+
+      $mailer->setMailMode(MAIL_MODE);
+      if (!$mailer->send($subject, $body))
+        $err->add($i18n->get('error.mail_send'));
+    }
+
+    $auth->doLogout();
+
+    // Redirect to 2fa.php if we have no errors.
+    if ($err->no()) {
+      header('Location: 2fa.php');
+      exit();
+    }
+  }
+
+  if ($err->no() && $loginSucceeded) {
+
+    // Set current user date (as determined by user browser) into session.
+    $current_user_date = $request->getParameter('browser_today', null);
+    if ($current_user_date)
+      $_SESSION['date'] = $current_user_date;
+
+    // Remember user login in a cookie.
+    setcookie(LOGIN_COOKIE_NAME, $cl_login, time() + COOKIE_EXPIRE, '/');
+
+    // Redirect, depending on user role.
+    if ($user->can('administer_site')) {
+      header('Location: admin_groups.php');
+    } elseif ($user->isClient()) {
+      header('Location: reports.php');
+    } else {
+      header('Location: time.php');
+    }
+    exit();
+  } else
+    $err->add($i18n->get('error.auth'));
 } // isPost
 
 if(!isTrue('MULTIORG_MODE') && !ttOrgHelper::getOrgs())

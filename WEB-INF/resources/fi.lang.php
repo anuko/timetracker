@@ -412,6 +412,11 @@ $i18n_key_words = array(
 // TODO: check translation of form.login.about - is open source "vapaan koodin"?
 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> on vapaan koodin tuntiseurantaohjelmisto.',
 
+// Email subject and body for two-factor authentication.
+// TODO: translate the following.
+// 'email.2fa_code.subject' => 'Anuko Time Tracker two-factor authentication code',
+// 'email.2fa_code.body' => "Dear User,\n\nYour two-factor authentication code is:\n\n%s\n\n",
+
 // Two-factor authentication form. See example at https://timetracker.anuko.com/2fa.php.
 // TODO: translate the following.
 // 'form.2fa.2fa_code' => '2FA code',
