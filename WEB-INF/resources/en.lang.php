@@ -374,6 +374,9 @@ $i18n_key_words = array(
 'form.login.2fa_code' => '2FA code',
 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is an open source time tracking system.',
 
+// Two-factor authentication form. See example at https://timetracker.anuko.com/2fa.php.
+'form.2fa.2fa_code' => '2FA code',
+
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Password reset request sent by email.',
 'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',

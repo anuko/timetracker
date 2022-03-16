@@ -420,8 +420,11 @@ $i18n_key_words = array(
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'パスワードを忘れましたか？',
 // TODO: translate the following.
-// 'form.login.2fa_code' => '2FA code',
 // 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is an open source time tracking system.',
+
+// Two-factor authentication form. See example at https://timetracker.anuko.com/2fa.php.
+// TODO: translate the following.
+// 'form.2fa.2fa_code' => '2FA code',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => '送信したパスワードの初期化の要求。', // TODO: add "by email" to match the English string.
