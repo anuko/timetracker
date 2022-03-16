@@ -402,6 +402,8 @@ $i18n_key_words = array(
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Har du glemt din adgangskode?',
+// TODO: translate the following.
+// 'form.login.2fa_code' => '2FA code',
 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> er et open source tidsregistrerings system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.

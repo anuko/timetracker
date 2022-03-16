@@ -48,6 +48,19 @@ if ($request->isPost()) {
       setcookie(LOGIN_COOKIE_NAME, $cl_login, time() + COOKIE_EXPIRE, '/');
 
       $user = new ttUser(null, $auth->getUserId());
+
+      // Determine if we have to additionally use two-factor authentication.
+      $config = $user->getConfigHelper();
+      $use2FA = $config->getDefinedValue('2fa');
+      if ($use2FA) {
+
+        // TODO: send 2fa code to user.
+        $auth->doLogout();
+
+        header('Location: 2fa.php');
+        exit();
+      }
+
       // Redirect, depending on user role.
       if ($user->can('administer_site')) {
         header('Location: admin_groups.php');

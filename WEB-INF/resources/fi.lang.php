@@ -407,6 +407,8 @@ $i18n_key_words = array(
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Salasana unohtunut?',
+// TODO: translate the following.
+// 'form.login.2fa_code' => '2FA code',
  // TODO: check translation of form.login.about - is open source "vapaan koodin"?
 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> on vapaan koodin tuntiseurantaohjelmisto.',
 
