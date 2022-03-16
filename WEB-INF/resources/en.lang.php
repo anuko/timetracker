@@ -241,6 +241,7 @@ $i18n_key_words = array(
 'title.error' => 'Error',
 'title.success' => 'Success',
 'title.login' => 'Login',
+'title.2fa' => 'Two Factor Authentication',
 'title.groups' => 'Groups',
 'title.add_group' => 'Adding Group',
 'title.edit_group' => 'Editing Group',

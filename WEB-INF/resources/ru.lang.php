@@ -236,6 +236,7 @@ $i18n_key_words = array(
 'title.error' => 'Ошибка',
 'title.success' => 'Успех',
 'title.login' => 'Вход в систему',
+'title.2fa' => 'Двухфакторная аутентификация',
 'title.groups' => 'Группы',
 'title.add_group' => 'Добавление группы',
 'title.edit_group' => 'Редактирование группы',

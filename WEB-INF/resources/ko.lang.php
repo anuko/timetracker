@@ -282,6 +282,8 @@ $i18n_key_words = array(
 // 'title.error' => 'Error',
 // 'title.success' => 'Success',
 'title.login' => '로그인',
+// TODO: translate the follolwing.
+// 'title.2fa' => 'Two Factor Authentication',
 'title.groups' => '팀', // TODO: change "teams" to "groups".
 // TODO: translate the following.
 // 'title.add_group' => 'Adding Group',

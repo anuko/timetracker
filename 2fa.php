@@ -28,12 +28,9 @@ $form->addInput(array('type'=>'submit','name'=>'btn_login','onclick'=>'browser_t
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_2fa_code)) $err->add($i18n->get('error.field'), $i18n->get('fprm.2fa.2fa_code'));
+  if (!ttValidString($cl_2fa_code)) $err->add($i18n->get('error.field'), $i18n->get('form.2fa.2fa_code'));
 
   if ($err->no()) {
-    // Use the "limit" plugin if we have one. Ignore include errors.
-    // The "limit" plugin is not required for normal operation of Time Tracker.
-    @include('plugins/limit/access_check.php');
 
     if ($auth->doLogin($cl_login, $cl_password)) {
       // Set current user date (as determined by user browser) into session.
@@ -82,6 +79,6 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('show_hint', $show_hint);
 $smarty->assign('onload', 'onLoad="document.loginForm.'.(!$cl_login?'login':'password').'.focus()"');
 $smarty->assign('about_text', $i18n->get('form.login.about'));
-$smarty->assign('title', $i18n->get('title.login'));
+$smarty->assign('title', $i18n->get('title.2fa'));
 $smarty->assign('content_page_name', '2fa.tpl');
 $smarty->display('index.tpl');

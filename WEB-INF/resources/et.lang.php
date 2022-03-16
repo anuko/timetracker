@@ -277,6 +277,8 @@ $i18n_key_words = array(
 'title.error' => 'Viga',
 'title.success' => 'Õnnestumine',
 'title.login' => 'Sisene',
+// TODO: translate the follolwing.
+// 'title.2fa' => 'Two Factor Authentication',
 'title.groups' => 'Grupid',
 'title.add_group' => 'Lisa grupp',
 'title.edit_group' => 'Muuda gruppi',

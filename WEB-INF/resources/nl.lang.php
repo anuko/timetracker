@@ -235,6 +235,8 @@ $i18n_key_words = array(
 'title.error' => 'Fout',
 'title.success' => 'Succes',
 'title.login' => 'Aanmelden',
+// TODO: translate the follolwing.
+// 'title.2fa' => 'Two Factor Authentication',
 'title.groups' => 'Groepen',
 'title.add_group' => 'Groep toevoegen',
 'title.edit_group' => 'Groep bewerken',

@@ -265,6 +265,8 @@ $i18n_key_words = array(
 // TODO: Translate the following.
 // 'title.success' => 'Success',
 'title.login' => 'Logga in',
+// TODO: translate the follolwing.
+// 'title.2fa' => 'Two Factor Authentication',
 'title.groups' => 'Grupper',
 // TODO: translate the following.
 // 'title.add_group' => 'Adding Group',

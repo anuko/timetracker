@@ -292,7 +292,9 @@ $i18n_key_words = array(
 // 'title.error' => 'Error',
 // 'title.success' => 'Success',
 'title.login' => 'Giriş',
-'title.groups' => 'Ekipler', // TODO: change "teams" to "groups".
+// TODO: translate the follolwing.
+// 'title.2fa' => 'Two Factor Authentication',
+    'title.groups' => 'Ekipler', // TODO: change "teams" to "groups".
 // TODO: translate the following.
 // 'title.add_group' => 'Adding Group',
 // 'title.edit_group' => 'Editing Group',
