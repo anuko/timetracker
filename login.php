@@ -56,8 +56,8 @@ if ($request->isPost()) {
     $use2FA = $config->getDefinedValue('2fa');
   }
 
-  // If we have to use 2FA, create and email auth code to user.
-  if ($use2FA) {
+  // If we have to use 2FA, email auth code to user and redirect to 2fa.php.
+  if ($use2FA && !$user->can('override_2fa')) {
     // To keep things simple, we use the same code as for password resets.
     $cryptographically_strong = true;
     $random_bytes = openssl_random_pseudo_bytes(16, $cryptographically_strong);
