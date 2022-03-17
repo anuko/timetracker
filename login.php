@@ -43,8 +43,12 @@ if ($request->isPost()) {
 
     // Check user login.
     $loginSucceeded = $auth->doLogin($cl_login, $cl_password);
-    if (!$loginSucceeded)
+    if ($loginSucceeded) {
+      // Remember user login in a cookie.
+      setcookie(LOGIN_COOKIE_NAME, $cl_login, time() + COOKIE_EXPIRE, '/');
+    } else {
       $err->add($i18n->get('error.auth'));
+    }
   }
 
   // Do we have to use 2FA?
@@ -113,9 +117,6 @@ if ($request->isPost()) {
     $current_user_date = $request->getParameter('browser_today', null);
     if ($current_user_date)
       $_SESSION['date'] = $current_user_date;
-
-    // Remember user login in a cookie.
-    setcookie(LOGIN_COOKIE_NAME, $cl_login, time() + COOKIE_EXPIRE, '/');
 
     // Redirect, depending on user role.
     if ($user->can('administer_site')) {

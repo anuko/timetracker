@@ -41,7 +41,6 @@ License: See license.txt *}
       <span class="what-is-it-text"><a href="https://www.anuko.com/lp/tt_22.htm" target="_blank">{$i18n.label.what_is_it}</a></span>
     </td>
   </tr>
-{if constant('2FA_DEBUG')}
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td><label for="confirm_save">{$i18n.form.group_advanced_edit.2fa}:</label></td></tr>
   <tr>
@@ -51,7 +50,6 @@ License: See license.txt *}
       <span class="what-is-it-text"><a href="https://www.anuko.com/lp/tt_54.htm" target="_blank">{$i18n.label.what_is_it}</a></span>
     </td>
   </tr>
-{/if}
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr><td colspan="2">{$i18n.label.required_fields}</td></tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
