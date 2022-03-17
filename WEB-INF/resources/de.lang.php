@@ -401,6 +401,7 @@ $i18n_key_words = array(
 
 // Two-factor authentication form. See example at https://timetracker.anuko.com/2fa.php.
 // TODO: translate the following.
+// 'form.2fa.hint' => 'Check your email for 2FA code and enter it here.',
 // 'form.2fa.2fa_code' => '2FA code',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.

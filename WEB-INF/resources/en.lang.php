@@ -380,6 +380,7 @@ $i18n_key_words = array(
 'email.2fa_code.body' => "Dear User,\n\nYour two-factor authentication code is:\n\n%s\n\n",
 
 // Two-factor authentication form. See example at https://timetracker.anuko.com/2fa.php.
+'form.2fa.hint' => 'Check your email for 2FA code and enter it here.',
 'form.2fa.2fa_code' => '2FA code',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.

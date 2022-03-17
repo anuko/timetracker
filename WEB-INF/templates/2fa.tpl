@@ -1,6 +1,7 @@
 {* Copyright (c) Anuko International Ltd. https://www.anuko.com
 License: See license.txt *}
 
+<div class="page-hint">{$i18n.form.2fa.hint}</div>
 {$forms.2faForm.open}
 <table class="centered-table">
   <tr class = "small-screen-label"><td><label for="2fa_code">{$i18n.form.2fa.2fa_code}:</label></td></tr>
