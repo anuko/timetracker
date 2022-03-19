@@ -516,6 +516,8 @@ $i18n_key_words = array(
 'form.group_edit.type_start_finish' => 'begin en einde',
 'form.group_edit.type_duration' => 'duur',
 'form.group_edit.punch_mode' => 'Start/stop modus',
+// TODO: translate the following.
+// 'form.group_edit.one_uncompleted' => 'One uncompleted',
 'form.group_edit.allow_overlap' => 'Sta overlapping van tijden toe',
 'form.group_edit.future_entries' => 'Toevoegingen toestaan in de toekomst',
 'form.group_edit.uncompleted_indicators' => 'Onvolledige indicatoren',

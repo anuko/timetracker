@@ -580,6 +580,8 @@ $i18n_key_words = array(
 'form.group_edit.type_start_finish' => 'algus ja lõpp',
 'form.group_edit.type_duration' => 'vahemik',
 'form.group_edit.punch_mode' => 'Kellast-kellani režiim',
+// TODO: translate the following.
+// 'form.group_edit.one_uncompleted' => 'One uncompleted',
 'form.group_edit.allow_overlap' => 'Luba ajaline ülekate',
 'form.group_edit.future_entries' => 'Tuleviku kirjed',
 'form.group_edit.uncompleted_indicators' => 'Lõpetamata kirjete indikaator', // TODO: Fix this. Indicators (plural), not indicator.

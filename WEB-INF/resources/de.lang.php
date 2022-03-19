@@ -546,6 +546,8 @@ $i18n_key_words = array(
 'form.group_edit.type_start_finish' => 'Start und Ende',
 'form.group_edit.type_duration' => 'Dauer',
 'form.group_edit.punch_mode' => 'Stechuhr-Modus',
+// TODO: translate the following.
+// 'form.group_edit.one_uncompleted' => 'One uncompleted',
 'form.group_edit.allow_overlap' => 'Erlaube Überschneidung',
 'form.group_edit.future_entries' => 'Einträge in der Zukunft',
 'form.group_edit.uncompleted_indicators' => 'Zeige unfertige Einträge',

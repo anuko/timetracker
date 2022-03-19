@@ -571,6 +571,7 @@ $i18n_key_words = array(
 'form.group_edit.type_duration' => 'Varighed',
 // TODO: translate the following.
 // 'form.group_edit.punch_mode' => 'Punch mode',
+// 'form.group_edit.one_uncompleted' => 'One uncompleted',
 // 'form.group_edit.allow_overlap' => 'Allow overlap',
 // 'form.group_edit.future_entries' => 'Future entries',
 'form.group_edit.uncompleted_indicators' => 'Uafsluttede indikatore',

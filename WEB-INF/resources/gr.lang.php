@@ -558,6 +558,8 @@ $i18n_key_words = array(
 'form.group_edit.type_start_finish' => 'αρχή και τέλος',
 'form.group_edit.type_duration' => 'διάρκεια',
 'form.group_edit.punch_mode' => 'Λειτουργία διάτρησης',
+// TODO: translate the following.
+// 'form.group_edit.one_uncompleted' => 'One uncompleted',
 'form.group_edit.allow_overlap' => 'Επικάλυψη επιτρεπτή',
 'form.group_edit.future_entries' => 'Μελλοντικές καταχωρήσεις',
 'form.group_edit.uncompleted_indicators' => 'Μη ολοκληρωμένες ενδείξεις',

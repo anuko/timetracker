@@ -513,6 +513,7 @@ $i18n_key_words = array(
 'form.group_edit.type_start_finish' => 'начало и конец',
 'form.group_edit.type_duration' => 'длительность',
 'form.group_edit.punch_mode' => 'Пробивать время',
+'form.group_edit.one_uncompleted' => 'Одна незавершённая',
 'form.group_edit.allow_overlap' => 'Возможное перекрывание',
 'form.group_edit.future_entries' => 'Будущие записи',
 'form.group_edit.uncompleted_indicators' => 'Индикаторы незавершения',

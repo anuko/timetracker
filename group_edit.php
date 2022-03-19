@@ -66,6 +66,7 @@ if ($request->isPost() && !$groupChanged) {
   $cl_project_required = $request->getParameter('project_required');
   $cl_record_type = $request->getParameter('record_type');
   $cl_punch_mode = (bool)$request->getParameter('punch_mode');
+  $cl_one_uncompleted = (bool)$request->getParameter('one_uncompleted');
   $cl_allow_overlap = (bool)$request->getParameter('allow_overlap');
   $cl_future_entries = (bool)$request->getParameter('future_entries');
   $cl_uncompleted_indicators = (bool)$request->getParameter('uncompleted_indicators');
@@ -82,6 +83,7 @@ if ($request->isPost() && !$groupChanged) {
   $cl_project_required = $group['project_required'];
   $cl_record_type = $group['record_type'];
   $cl_punch_mode = $config->getDefinedValue('punch_mode');
+  $cl_one_uncompleted = $config->getDefinedValue('one_uncompleted');
   $cl_allow_overlap = $config->getDefinedValue('allow_overlap');
   $cl_future_entries = $config->getDefinedValue('future_entries');
   $cl_uncompleted_indicators = $config->getDefinedValue('uncompleted_indicators');
@@ -166,6 +168,9 @@ $form->addInput(array('type'=>'combobox','name'=>'record_type','data'=>$record_t
 // Punch mode checkbox.
 $form->addInput(array('type'=>'checkbox','name'=>'punch_mode','value'=>$cl_punch_mode));
 
+// One uncompleted.
+$form->addInput(array('type'=>'checkbox','name'=>'one_uncompleted','value'=>$cl_one_uncompleted));
+
 // Allow overlap checkbox.
 $form->addInput(array('type'=>'checkbox','name'=>'allow_overlap','value'=>$cl_allow_overlap));
 
@@ -200,6 +205,7 @@ if ($request->isPost()) {
     if ($err->no()) {
       // Update config.
       $config->setDefinedValue('punch_mode', $cl_punch_mode);
+      $config->setDefinedValue('one_uncompleted', $cl_one_uncompleted);
       $config->setDefinedValue('allow_overlap', $cl_allow_overlap);
       $config->setDefinedValue('future_entries', $cl_future_entries);
       $config->setDefinedValue('uncompleted_indicators', $cl_uncompleted_indicators);
