@@ -48,11 +48,11 @@ function stopTimer() {
 }
 </script>
 
-{if $uncompleted}
+{if $uncompleted_today}
 <script>
 startDate = new Date();
-startDate.setHours({substr($uncompleted['start'], 0, 2)});
-startDate.setMinutes({substr($uncompleted['start'], 3, 2)});
+startDate.setHours({substr($uncompleted_today['start'], 0, 2)});
+startDate.setMinutes({substr($uncompleted_today['start'], 3, 2)});
 startDate.setSeconds(0);
 updateTimer();
 startTimer();

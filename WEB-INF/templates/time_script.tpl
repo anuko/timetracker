@@ -256,20 +256,34 @@ function formDisable(formField) {
   var x;
 
   if (((formFieldValue != "") && (formFieldName == "start")) || ((formFieldValue != "") && (formFieldName == "finish"))) {
+    // Either start or finish field not empty.
     x = eval("document.timeRecordForm.duration");
     x.value = "";
     x.disabled = true;
     x.style.background = "#e9e9e9";
+    return;
   }
 
   if (((formFieldValue == "") && (formFieldName == "start") && (document.timeRecordForm.finish.value == "")) || ((formFieldValue == "") && (formFieldName == "finish") && (document.timeRecordForm.start.value == ""))) {
+    // Both start and finish fields are emtpy.
     x = eval("document.timeRecordForm.duration");
     x.value = "";
     x.disabled = false;
     x.style.background = "white";
+    return;
+  }
+
+  if (((formFieldValue == "") && (formFieldName == "start")) || ((formFieldValue == "") && (formFieldName == "finish"))) {
+    // Either start or finish field is empty.
+    x = eval("document.timeRecordForm.duration");
+    x.value = "";
+    x.disabled = true;
+    x.style.background = "#e9e9e9";
+    return;
   }
 
   if ((formFieldValue != "") && (formFieldName == "duration")) {
+    // Duration field is not empty.
     x = eval("document.timeRecordForm.start");
     x.value = "";
     x.disabled = true;
@@ -278,9 +292,11 @@ function formDisable(formField) {
     x.value = "";
     x.disabled = true;
     x.style.background = "#e9e9e9";
+    return;
   }
 
   if ((formFieldValue == "") && (formFieldName == "duration")) {
+    // Duration field is empty.
     x = eval("document.timeRecordForm.start");
     x.disabled = false;
     x.style.background = "white";

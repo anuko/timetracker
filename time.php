@@ -71,6 +71,7 @@ $showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
 $showDuration = TYPE_DURATION == $recordType || TYPE_ALL == $recordType;
 $showFiles = $user->isPluginEnabled('at');
 $showRecordCustomFields = $user->isOptionEnabled('record_custom_fields');
+$oneUncompleted = $config->getDefinedValue('one_uncompleted');
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
@@ -403,7 +404,7 @@ if ($request->isPost()) {
       $err->add($i18n->get('error.range_locked'));
 
     // Prohibit creating another uncompleted record.
-    if ($err->no()) {
+    if ($err->no() && $oneUncompleted) {
       if (($not_completed_rec = ttTimeHelper::getUncompleted($user_id)) && (($cl_finish == '') && ($cl_duration == '')))
         $err->add($i18n->get('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->get('error.goto_uncompleted')."</a>");
     }
@@ -504,6 +505,7 @@ $smarty->assign('show_files', $showFiles);
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
+$smarty->assign('one_uncompleted', $oneUncompleted);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="fillDropdowns();prepopulateNote();adjustTodayLinks()"');
 $smarty->assign('timestring', $selected_date->toString($user->getDateFormat()));

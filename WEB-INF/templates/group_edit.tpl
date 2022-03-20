@@ -110,7 +110,6 @@ function chLocation(newLocation) { document.location = newLocation; }
       <span class="what-is-it-text"><a href="https://www.anuko.com/lp/tt_18.htm" target="_blank">{$i18n.label.what_is_it}</a></span>
     </td>
   </tr>
-{if constant('ONE_UNCOMPLETED_DEBUG')}
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td><label for="one_uncompleted">{$i18n.form.group_edit.one_uncompleted}:</label></td></tr>
   <tr>
@@ -120,7 +119,6 @@ function chLocation(newLocation) { document.location = newLocation; }
       <span class="what-is-it-text"><a href="https://www.anuko.com/lp/tt_55.htm" target="_blank">{$i18n.label.what_is_it}</a></span>
     </td>
   </tr>
-{/if}
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr class = "small-screen-label"><td><label for="allow_overlap">{$i18n.form.group_edit.allow_overlap}:</label></td></tr>
   <tr>

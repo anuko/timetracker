@@ -48,6 +48,7 @@ $showProject = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $tra
 $showTask = MODE_PROJECTS_AND_TASKS == $trackingMode;
 $taskRequired = false;
 if ($showTask) $taskRequired = $user->getConfigOption('task_required');
+$oneUncompleted = $user->getConfigOption('one_uncompleted');
 
 // Initialize $cl_date.
 $date_today = new ttDate($browser_today); // Initialize to browser today if we are passed it in, otherwise server today.
@@ -60,9 +61,12 @@ if ($user->isPluginEnabled('cf')) {
   $smarty->assign('custom_fields', $custom_fields);
 }
 
-// Obtain uncompleted record. Assumption is that only 1 uncompleted record is allowed.
+// Obtain first uncompleted record for today. If there are multiples, we operate with first found.
+$uncompletedToday = ttTimeHelper::getFirstUncompletedForDate($user->getUser(), $date_today->toString());
+$enable_controls = ($uncompletedToday == null);
+
+// Obtain first found uncompleted record, not necessarily for today. Used to prohibit entry in "One uncompleted" mode.
 $uncompleted = ttTimeHelper::getUncompleted($user->getUser());
-$enable_controls = ($uncompleted == null);
 
 // Initialize variables.
 $cl_start = $browser_time;
@@ -201,8 +205,8 @@ $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); //
 $form->addInput(array('type'=>'hidden','name'=>'browser_time','value'=>''));  // User current time, which gets filled in on button click.
 
 // Start and stop buttons.
-$enable_start = $uncompleted ? false : true;
-if (!$uncompleted)
+$enable_start = $uncompletedToday ? false : true;
+if (!$uncompletedToday)
   $form->addInput(array('type'=>'submit','name'=>'btn_start','onclick'=>'browser_today.value=get_date();browser_time.value=get_time()','value'=>$i18n->get('button.start'),'enable'=>$enable_start));
 else
   $form->addInput(array('type'=>'submit','name'=>'btn_stop','onclick'=>'browser_today.value=get_date();browser_time.value=get_time()','value'=>$i18n->get('button.stop'),'enable'=>!$enable_start));
@@ -245,8 +249,8 @@ if ($request->isPost()) {
       $err->add($i18n->get('error.range_locked'));
 
     // Prohibit creating another uncompleted record.
-    if ($err->no() && $uncompleted) {
-      $err->add($i18n->get('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->get('error.goto_uncompleted')."</a>");
+    if ($err->no() && $uncompleted && $oneUncompleted) {
+      $err->add($i18n->get('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$uncompleted['id']."'>".$i18n->get('error.goto_uncompleted')."</a>");
     }
 
     // Prohibit creating an overlapping record.
@@ -282,7 +286,7 @@ if ($request->isPost()) {
   }
   if ($request->getParameter('btn_stop')) {
     // Stop button clicked. We need to finish an uncompleted record in progress.
-    $record = ttTimeHelper::getRecord($uncompleted['id']);
+    $record = ttTimeHelper::getRecord($uncompletedToday['id']);
 
     // Can we complete this record?
     if (ttTimeHelper::isValidInterval($record['start'], $cl_finish) // finish time is greater than start time
@@ -314,7 +318,7 @@ $week_total = ttTimeHelper::getTimeForWeek2($date_today);
 $timeRecords = ttTimeHelper::getRecords($cl_date);
 
 $smarty->assign('week_total', $week_total);
-$smarty->assign('uncompleted', $uncompleted);
+$smarty->assign('uncompleted_today', $uncompletedToday);
 $smarty->assign('show_client', $showClient);
 $smarty->assign('show_billable', $showBillable);
 $smarty->assign('show_project', $showProject);

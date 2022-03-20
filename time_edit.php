@@ -48,6 +48,7 @@ if ($showTask) $taskRequired = $config->getDefinedValue('task_required');
 $recordType = $user->getRecordType();
 $showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
 $showDuration = TYPE_DURATION == $recordType || TYPE_ALL == $recordType;
+$oneUncompleted = $config->getDefinedValue('one_uncompleted');
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
@@ -352,7 +353,7 @@ if ($request->isPost()) {
 
       // 3) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
       $uncompleted = ($cl_finish == '' && $cl_duration == '');
-      if ($uncompleted) {
+      if ($uncompleted && $oneUncompleted) {
         $not_completed_rec = ttTimeHelper::getUncompleted($user_id);
         if ($not_completed_rec && ($time_rec['id'] <> $not_completed_rec['id'])) {
           // We have another not completed record.
@@ -391,6 +392,7 @@ if ($request->isPost()) {
         header('Location: time.php?date='.$new_date->toString(DB_DATEFORMAT));
         exit();
       }
+      $err->add($i18n->get('error.db'));
     }
   }
 

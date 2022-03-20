@@ -449,7 +449,6 @@ class ttTimeHelper {
     } else {
       $duration = ttTimeHelper::toDuration($start, $finish);
       if ($duration === false) $duration = 0;
-      if (!$duration && ttTimeHelper::getUncompleted($user_id)) return false;
 
       $sql = "insert into tt_log (user_id, group_id, org_id, date, start, duration, client_id, project_id, task_id, invoice_id, comment, billable, paid, created, created_ip, created_by) ".
         "values ($user_id, $group_id, $org_id, ".$mdb2->quote($date).", '$start', '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable, $paid $created_v)";
@@ -512,9 +511,9 @@ class ttTimeHelper {
       $duration = ttTimeHelper::toDuration($start, $finish);
       if ($duration === false)
         $duration = 0;
-      $uncompleted = ttTimeHelper::getUncompleted($user_id);
-      if (!$duration && $uncompleted && ($uncompleted['id'] != $id))
-        return false;
+      //$uncompleted = ttTimeHelper::getUncompleted($user_id);
+      //if (!$duration && $uncompleted && ($uncompleted['id'] != $id))
+//        return false;
 
       $sql = "UPDATE tt_log SET start = '$start', duration = '$duration', client_id = ".$mdb2->quote($client).", project_id = ".$mdb2->quote($project).", task_id = ".$mdb2->quote($task).", ".
         "comment = ".$mdb2->quote($note)."$billable_part $paid_part $modified_part, date = '$date' WHERE id = $id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
@@ -673,10 +672,43 @@ class ttTimeHelper {
 
   // getUncompleted - retrieves an uncompleted record for user, if one exists.
   static function getUncompleted($user_id) {
+
+    global $user;
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
     $mdb2 = getConnection();
 
     $sql = "select id, start, date from tt_log".
-      " where user_id = $user_id and start is not null and time_to_sec(duration) = 0 and status = 1";
+      " where user_id = $user_id and start is not null and time_to_sec(duration) = 0 and status = 1".
+      " and group_id = $group_id and org_id = $org_id";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      if (!$res->numRows()) {
+        return false;
+      }
+      if ($val = $res->fetchRow()) {
+        return $val;
+      }
+    }
+    return false;
+  }
+
+  // getFirstUncompletedForDate - retrieves first found uncompleted record for user for a specific date, if one exists.
+  static function getFirstUncompletedForDate($user_id, $date) {
+
+    $user_id = (int) $user_id; // Protection against sql injection.
+
+    global $user;
+    $group_id = $user->getGroup();
+    $org_id = $user->org_id;
+
+    $mdb2 = getConnection();
+
+    $sql = "select id, start, date from tt_log".
+      " where user_id = $user_id and start is not null and time_to_sec(duration) = 0 and status = 1".
+      " and group_id = $group_id and org_id = $org_id and date = ".$mdb2->quote($date).
+      " order by start"; // Ordering by start time to get the eraliest uncompleted for date.
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if (!$res->numRows()) {
@@ -740,6 +772,8 @@ class ttTimeHelper {
   // getRecord - retrieves a time record identified by its id.
   static function getRecord($id) {
     global $user;
+    
+    $id = (int) $id; // Protection against sql injections.
 
     $user_id = $user->getUser();
     $group_id = $user->getGroup();
