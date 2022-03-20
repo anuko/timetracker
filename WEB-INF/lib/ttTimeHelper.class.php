@@ -511,9 +511,6 @@ class ttTimeHelper {
       $duration = ttTimeHelper::toDuration($start, $finish);
       if ($duration === false)
         $duration = 0;
-      //$uncompleted = ttTimeHelper::getUncompleted($user_id);
-      //if (!$duration && $uncompleted && ($uncompleted['id'] != $id))
-//        return false;
 
       $sql = "UPDATE tt_log SET start = '$start', duration = '$duration', client_id = ".$mdb2->quote($client).", project_id = ".$mdb2->quote($project).", task_id = ".$mdb2->quote($task).", ".
         "comment = ".$mdb2->quote($note)."$billable_part $paid_part $modified_part, date = '$date' WHERE id = $id and user_id = $user_id and group_id = $group_id and org_id = $org_id";
@@ -673,6 +670,8 @@ class ttTimeHelper {
   // getUncompleted - retrieves an uncompleted record for user, if one exists.
   static function getUncompleted($user_id) {
 
+    $user_id = (int) $user_id; // Protection against sql injection.
+
     global $user;
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
@@ -708,7 +707,7 @@ class ttTimeHelper {
     $sql = "select id, start, date from tt_log".
       " where user_id = $user_id and start is not null and time_to_sec(duration) = 0 and status = 1".
       " and group_id = $group_id and org_id = $org_id and date = ".$mdb2->quote($date).
-      " order by start"; // Ordering by start time to get the eraliest uncompleted for date.
+      " order by start"; // Ordering by start time to get the earliest uncompleted for date.
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       if (!$res->numRows()) {
