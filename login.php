@@ -4,7 +4,7 @@ License: See license.txt */
 
 require_once('initialize.php');
 import('form.Form');
-//import('ttOrgHelper');
+import('ttOrgHelper');
 import('ttUser');
 import('ttUserHelper');
 
