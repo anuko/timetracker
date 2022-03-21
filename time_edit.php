@@ -410,7 +410,7 @@ if ($request->isPost()) {
 
       // 2) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
       $uncompleted = ($cl_finish == '' && $cl_duration == '');
-      if ($uncompleted) {
+      if ($uncompleted && $oneUncompleted) {
         $not_completed_rec = ttTimeHelper::getUncompleted($user_id);
         if ($not_completed_rec) {
           // We have another not completed record.

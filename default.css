@@ -811,6 +811,7 @@ div.table-divider { height: 30px; }
   border: 1px solid rgba(0, 0, 0, .1);
   border-radius: 50%;
   background-color: rgba(0, 0, 0, .1);
+  margin-right: .25em;
 }
 .uncompleted-entry.active-today { background-color: red; }
 .uncompleted-entry.active { background-color: purple; }
