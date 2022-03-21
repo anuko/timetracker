@@ -23,7 +23,13 @@ License: See license.txt *}
   <tr>
     <td class="text-cell">
       {if isset($uncompleted_indicators) && $uncompleted_indicators}
-      <span class="uncompleted-entry{if $u.has_uncompleted_entry} active{/if}"{if $u.has_uncompleted_entry} title="{$i18n.form.users.uncompleted_entry}"{/if}></span>
+        {if $u.has_uncompleted_entry_today}
+      <span class="uncompleted-entry active-today" title="{$i18n.form.users.uncompleted_entry_today}"></span>
+        {elseif $u.has_uncompleted_entry}
+      <span class="uncompleted-entry active" title="{$i18n.form.users.uncompleted_entry}"></span>
+        {else}
+      <span class="uncompleted-entry"></span>
+        {/if}
       {/if}
       {$u.name|escape}
     </td>

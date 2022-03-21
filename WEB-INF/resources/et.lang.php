@@ -522,6 +522,8 @@ $i18n_key_words = array(
 'form.tasks.inactive_tasks' => 'Mitteaktiivsed tööülesanded',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
+// TODO: translate the following.
+// 'form.users.uncompleted_entry_today' => 'User has an uncompleted time entry today',
 'form.users.uncompleted_entry' => 'Kasutajal on lõpetamata aja kanne',
 'form.users.role' => 'Roll',
 'form.users.manager' => 'Haldur',

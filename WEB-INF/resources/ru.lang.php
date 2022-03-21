@@ -459,6 +459,7 @@ $i18n_key_words = array(
 'form.tasks.inactive_tasks' => 'Неактивные задачи',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
+'form.users.uncompleted_entry_today' => 'Пользователь имеет неоконченную запись сегодня',
 'form.users.uncompleted_entry' => 'Пользователь имеет неоконченную запись',
 'form.users.role' => 'Роль',
 'form.users.manager' => 'Менеджер',

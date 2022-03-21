@@ -812,7 +812,8 @@ div.table-divider { height: 30px; }
   border-radius: 50%;
   background-color: rgba(0, 0, 0, .1);
 }
-.uncompleted-entry.active { background-color: red; }
+.uncompleted-entry.active-today { background-color: red; }
+.uncompleted-entry.active { background-color: purple; }
 
 .table_icon {
   height: 16px;
