@@ -59,8 +59,7 @@ $i18n_key_words = array(
 'error.report' => 'Kies rapport.',
 'error.record' => 'Kies record.',
 'error.auth' => 'Onjuiste inlognaam of wachtwoord.',
-// TODO: translate the following.
-// 'error.2fa_code' => 'Invalid 2FA code.',
+'error.2fa_code' => 'Niet geldige 2FA code.',
 'error.weak_password' => 'Zwak wachtwoord.',
 'error.user_exists' => 'Een gebruiker met deze inlognaam bestaat al.',
 'error.object_exists' => 'Een object met deze naam bestaat al.',
@@ -237,8 +236,7 @@ $i18n_key_words = array(
 'title.error' => 'Fout',
 'title.success' => 'Succes',
 'title.login' => 'Aanmelden',
-// TODO: translate the follolwing.
-// 'title.2fa' => 'Two Factor Authentication',
+'title.2fa' => 'Two Factor Authentication',
 'title.groups' => 'Groepen',
 'title.add_group' => 'Groep toevoegen',
 'title.edit_group' => 'Groep bewerken',
@@ -370,14 +368,13 @@ $i18n_key_words = array(
 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is een open source tijdregistratiesysteem.',
 
 // Email subject and body for two-factor authentication.
-// TODO: translate the following.
-// 'email.2fa_code.subject' => 'Anuko Time Tracker two-factor authentication code',
-// 'email.2fa_code.body' => "Dear User,\n\nYour two-factor authentication code is:\n\n%s\n\n",
+// TODO: is the "is" correct in email.2fa_code.body?
+'email.2fa_code.subject' => 'Anuko Time Tracker two-factor authentication code',
+'email.2fa_code.body' => "Beste gebruiker,\n\nJouw two-factor authentication code is:\n\n%s\n\n",
 
 // Two-factor authentication form. See example at https://timetracker.anuko.com/2fa.php.
-// TODO: translate the following.
-// 'form.2fa.hint' => 'Check your email for 2FA code and enter it here.',
-// 'form.2fa.2fa_code' => '2FA code',
+'form.2fa.hint' => 'Je kunt je 2FA code vinden in een email die aan je is verstuurd en hier invullen.',
+'form.2fa.2fa_code' => '2FA code',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Het verzoek om het wachtwoord te herstellen is verzonden per email.',
@@ -518,8 +515,7 @@ $i18n_key_words = array(
 'form.group_edit.type_start_finish' => 'begin en einde',
 'form.group_edit.type_duration' => 'duur',
 'form.group_edit.punch_mode' => 'Start/stop modus',
-// TODO: translate the following.
-// 'form.group_edit.one_uncompleted' => 'One uncompleted',
+'form.group_edit.one_uncompleted' => 'Één niet-volledige registratie toestaan',
 'form.group_edit.allow_overlap' => 'Sta overlapping van tijden toe',
 'form.group_edit.future_entries' => 'Toevoegingen toestaan in de toekomst',
 'form.group_edit.uncompleted_indicators' => 'Onvolledige indicatoren',
@@ -529,8 +525,7 @@ $i18n_key_words = array(
 // Advanced Group Settings form. See example at https://timetracker.anuko.com/group_advanced_edit.php.
 'form.group_advanced_edit.allow_ip' => 'Toegestane IP adressen',
 'form.group_advanced_edit.password_complexity' => 'Wachtwoord complexiteit',
-// TODO: Translate the following.
-// 'form.group_advanced_edit.2fa' => 'Two factor authentication',
+'form.group_advanced_edit.2fa' => 'Two Factor Authentication (2FA)',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 'form.group_delete.hint' => 'Bent u er zeker van dat u de hele groep wilt verwijderen?',
