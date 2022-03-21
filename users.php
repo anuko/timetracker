@@ -30,10 +30,11 @@ if($user->can('manage_users')) {
 
 $uncompleted_indicators = $user->getConfigOption('uncompleted_indicators');
 if ($uncompleted_indicators) {
+  $today = new ttDate(); // Server today.
+  $todayString = $today->toString();
   // Check each active user if they have an uncompleted time entry.
   foreach ($active_users as $key => $active_user) {
-    $today = new ttDate(); // Server today.
-    $active_users[$key]['has_uncompleted_entry_today'] = (bool) ttTimeHelper::getFirstUncompletedForDate($active_user['id'], $today->toString());
+    $active_users[$key]['has_uncompleted_entry_today'] = (bool) ttTimeHelper::getFirstUncompletedForDate($active_user['id'], $todayString);
     $active_users[$key]['has_uncompleted_entry'] = (bool) ttTimeHelper::getUncompleted($active_user['id']);
   }
   $smarty->assign('uncompleted_indicators', true);
