@@ -116,7 +116,7 @@ if ($user->isPluginEnabled('mq')){
   $quota = new MonthlyQuota();
   $month_quota_minutes = $quota->getUserQuota($selected_date->year, $selected_date->month);
   $quota_minutes_from_1st = $quota->getUserQuotaFrom1st($selected_date);
-  $month_total = ttTimeHelper::getTimeForMonth2($selected_date);
+  $month_total = ttTimeHelper::getTimeForMonth($selected_date);
   $month_total_minutes = ttTimeHelper::toMinutes($month_total);
   $balance_left = $quota_minutes_from_1st - $month_total_minutes;
   $minutes_left = $month_quota_minutes - $month_total_minutes;
