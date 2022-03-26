@@ -566,7 +566,8 @@ class ttTimeHelper {
     $org_id = $user->org_id;
 
     $sql = "select sum(time_to_sec(duration)) as sm from tt_log".
-      " where user_id = $user_id and group_id = $group_id and org_id = $org_id and date = '$date' and status = 1";
+      " where user_id = $user_id and group_id = $group_id and org_id = $org_id".
+      " and date = ".$mdb2->quote($date)." and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
