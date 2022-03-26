@@ -314,7 +314,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$week_total = ttTimeHelper::getTimeForWeek2($date_today);
+$week_total = ttTimeHelper::getTimeForWeek($date_today);
 $timeRecords = ttTimeHelper::getRecords($cl_date);
 
 $smarty->assign('week_total', $week_total);

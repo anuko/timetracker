@@ -480,7 +480,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$week_total = ttTimeHelper::getTimeForWeek2($selected_date);
+$week_total = ttTimeHelper::getTimeForWeek($selected_date);
 $timeRecords = ttTimeHelper::getRecords($cl_date, $showFiles);
 $showNavigation = ($user->isPluginEnabled('wv') && !$user->isOptionEnabled('week_menu')) ||
   ($user->isPluginEnabled('pu') && !$user->isOptionEnabled('puncher_menu'));

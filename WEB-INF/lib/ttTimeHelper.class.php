@@ -576,32 +576,7 @@ class ttTimeHelper {
   }
 
   // getTimeForWeek - gets total time for a user for a given week.
-  /*
   static function getTimeForWeek($date) {
-    global $user;
-    import('Period');
-    $mdb2 = getConnection();
-
-    $user_id = $user->getUser();
-    $group_id = $user->getGroup();
-    $org_id = $user->org_id;
-
-    $period = new Period(INTERVAL_THIS_WEEK, $date);
-    $sql = "select sum(time_to_sec(duration)) as sm from tt_log".
-      " where user_id = $user_id and group_id = $group_id and org_id = $org_id".
-      " and date >= '".$period->getStartDate(DB_DATEFORMAT)."' and date <= '".$period->getEndDate(DB_DATEFORMAT)."' and status = 1";
-    $res = $mdb2->query($sql);
-    if (!is_a($res, 'PEAR_Error')) {
-      $val = $res->fetchRow();
-      return ttTimeHelper::minutesToDuration($val['sm'] / 60);
-    }
-    return false;
-  }*/
-  
-  // getTimeForWeek2 - gets total time for a user for a given week.
-  // Refactoring - this is a replacement function for getTimeForWeek above.
-  // TODO: remove getTimeForWeek after refactoring week view and puncher.
-  static function getTimeForWeek2($date) {
     global $user;
     import('ttPeriod');
     $mdb2 = getConnection();
@@ -622,7 +597,7 @@ class ttTimeHelper {
     return false;
   }
 
-  // getTimeForMonth2 - gets total time for a user for a given month.
+  // getTimeForMonth - gets total time for a user for a given month.
   static function getTimeForMonth($date) {
     global $user;
     import('ttPeriod');
