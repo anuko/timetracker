@@ -622,6 +622,7 @@ class ttTimeHelper {
   }
 
   // getTimeForMonth - gets total time for a user for a given month.
+  /*
   static function getTimeForMonth($date) {
     global $user;
     import('Period');
@@ -641,7 +642,7 @@ class ttTimeHelper {
       return ttTimeHelper::minutesToDuration($val['sm'] / 60);
     }
     return false;
-  }
+  }*/
 
   // getTimeForMonth2 - gets total time for a user for a given month.
   // Refactoring - this is a replacement function for getTimeForMonth above.
