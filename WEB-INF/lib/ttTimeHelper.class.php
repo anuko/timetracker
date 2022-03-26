@@ -576,6 +576,7 @@ class ttTimeHelper {
   }
 
   // getTimeForWeek - gets total time for a user for a given week.
+  /*
   static function getTimeForWeek($date) {
     global $user;
     import('Period');
@@ -595,7 +596,7 @@ class ttTimeHelper {
       return ttTimeHelper::minutesToDuration($val['sm'] / 60);
     }
     return false;
-  }
+  }*/
   
   // getTimeForWeek2 - gets total time for a user for a given week.
   // Refactoring - this is a replacement function for getTimeForWeek above.

@@ -551,7 +551,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$week_total = ttTimeHelper::getTimeForWeek($selected_date);
+$week_total = ttTimeHelper::getTimeForWeek2($selected_date);
 
 $smarty->assign('large_screen_calendar_row_span', $largeScreenCalendarRowSpan);
 $smarty->assign('selected_date', $selected_date);
