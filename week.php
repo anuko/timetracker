@@ -83,13 +83,22 @@ $cl_date = $request->getParameter('date', @$_SESSION['date']);
 $selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date);
 if($selected_date->isError())
   $selected_date = new DateAndTime(DB_DATEFORMAT);
+// if(!$cl_date)
+//   $cl_date = $selected_date->toString(DB_DATEFORMAT);
+// $_SESSION['date'] = $cl_date;
+
+// TODO: This is a replacement block for the one above.
+// Remove the one above when finished refactoring this file.
+// Initialize and store date in session.
+$cl_date = $request->getParameter('date', @$_SESSION['date']);
+$selected_date2 = new ttDate($cl_date);
 if(!$cl_date)
-  $cl_date = $selected_date->toString(DB_DATEFORMAT);
+  $cl_date = $selected_date2->toString();
 $_SESSION['date'] = $cl_date;
 
 // Determine selected week start and end dates.
 $weekStartDay = $user->getWeekStart();
-$t_arr = localtime($selected_date->getTimestamp());
+$t_arr = localtime($selected_date2->getTimestamp());
 $t_arr[5] = $t_arr[5] + 1900;
 if ($t_arr[6] < $weekStartDay)
   $startWeekBias = $weekStartDay - 7;

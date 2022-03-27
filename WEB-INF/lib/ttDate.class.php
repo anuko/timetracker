@@ -14,8 +14,6 @@ class ttDate {
   var $dayOfWeek;     // day of week
   var $unixTimestamp; // unix timestamp of our date
 
-  var $isValid = false;
-
   // Additional property, used for efficiency when we only need a date in DB_DATEFORMAT.
   var $dateInDbDateFormat = null; // When initialized, this is our date in DB_DATEFORMAT.
 
@@ -24,11 +22,9 @@ class ttDate {
   function __construct($dateString = null) {
     if (ttValidDbDateFormatDate($dateString)) {
       $this->dateInDbDateFormat = $dateString;
-      $this->isValid = true;
     } else {
       $today = date_create();
       $this->dateInDbDateFormat = date_format($today, 'Y-m-d');
-      $this->isValid = true;
     }
 
     $this->unixTimestamp = strtotime($this->dateInDbDateFormat);
@@ -36,12 +32,6 @@ class ttDate {
     $this->month = date('m', $this->unixTimestamp);
     $this->day = date('d', $this->unixTimestamp);
     $this->dayOfWeek = date('w', $this->unixTimestamp);
-  }
-
-
-  // isValid determines if we have a properly initialized ttDate object.
-  function isValid() {
-      return $this->isValid;
   }
 
 
@@ -66,8 +56,6 @@ class ttDate {
 
   // toString returns a date in specified format.
   function toString($format = null) {
-    if (!$this->isValid) return null;
-
     if ($format == null || $format == DB_DATEFORMAT)
       return $this->dateInDbDateFormat;
     else {

@@ -76,8 +76,6 @@ $oneUncompleted = $config->getDefinedValue('one_uncompleted');
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
 $selected_date = new ttDate($cl_date);
-if (!$selected_date->isValid())
-  $selected_date = new ttDate();
 if(!$cl_date)
   $cl_date = $selected_date->toString();
 $_SESSION['date'] = $cl_date;
