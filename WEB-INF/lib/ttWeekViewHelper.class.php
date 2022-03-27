@@ -378,10 +378,10 @@ class ttWeekViewHelper {
   static function getLockedDaysForWeek($start_date) {
     global $user;
     $lockedDays = array();
-    $objDate = new DateAndTime(DB_DATEFORMAT, $start_date);
+    $objDate = new ttDate($start_date);
     for ($i = 0; $i < 7; $i++) {
       $lockedDays[] = $user->isDateLocked($objDate);
-      $objDate->incDay();
+      $objDate->incrementDay();
     }
     unset($objDate);
     return $lockedDays;
