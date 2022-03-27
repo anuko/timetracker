@@ -366,23 +366,11 @@ class ttWeekViewHelper {
   // getDayHeadersForWeek - obtains day column headers for week view, which are simply day numbers in month.
   static function getDayHeadersForWeek($start_date) {
     $dayHeaders = array();
-    $objDate = new DateAndTime(DB_DATEFORMAT, $start_date);
-    $dayHeaders[] = (string) $objDate->getDate(); // It returns an int on first call.
-    if (strlen($dayHeaders[0]) == 1)              // Which is an implementation detail of DateAndTime class.
-      $dayHeaders[0] = '0'.$dayHeaders[0];        // Add a 0 for single digit day.
-    $objDate->incDay();
-    $dayHeaders[] = $objDate->getDate(); // After incDay it returns a string with leading 0, when necessary.
-    $objDate->incDay();
-    $dayHeaders[] = $objDate->getDate();
-    $objDate->incDay();
-    $dayHeaders[] = $objDate->getDate();
-    $objDate->incDay();
-    $dayHeaders[] = $objDate->getDate();
-    $objDate->incDay();
-    $dayHeaders[] = $objDate->getDate();
-    $objDate->incDay();
-    $dayHeaders[] = $objDate->getDate();
-    unset($objDate);
+    $objDate = new ttDate($start_date);
+    for ($i = 0; $i < 7; $i++) {
+      $dayHeaders[] = $objDate->getDay();
+      $objDate->incrementDay();
+    }
     return $dayHeaders;
   }
 
