@@ -12,6 +12,7 @@ import('ttGroupHelper');
 import('ttWeekViewHelper');
 import('ttClientHelper');
 import('ttTimeHelper');
+import('ttDate');
 import('DateAndTime');
 
 // Access checks.
@@ -93,10 +94,10 @@ if ($t_arr[6] < $weekStartDay)
   $startWeekBias = $weekStartDay - 7;
 else
   $startWeekBias = $weekStartDay;
-$startDate = new DateAndTime();
-$startDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+$startWeekBias,$t_arr[5]));
-$endDate = new DateAndTime();
-$endDate->setTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
+$startDate = new ttDate();
+$startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+$startWeekBias,$t_arr[5]));
+$endDate = new ttDate();
+$endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
 // The above is needed to set date range (timestring) in page title.
 
 // Use custom fields plugin if it is enabled.
@@ -156,15 +157,15 @@ if (isset($custom_fields) && $custom_fields->timeFields) {
 
 // Get the data we need to display week view.
 // Get column headers, which are day numbers in month.
-$dayHeaders = ttWeekViewHelper::getDayHeadersForWeek($startDate->toString(DB_DATEFORMAT));
-$lockedDays = ttWeekViewHelper::getLockedDaysForWeek($startDate->toString(DB_DATEFORMAT));
+$dayHeaders = ttWeekViewHelper::getDayHeadersForWeek($startDate->toString());
+$lockedDays = ttWeekViewHelper::getLockedDaysForWeek($startDate->toString());
 // Get already existing records.
-$records = ttWeekViewHelper::getRecordsForInterval($startDate->toString(DB_DATEFORMAT), $endDate->toString(DB_DATEFORMAT), $showFiles);
+$records = ttWeekViewHelper::getRecordsForInterval($startDate->toString(), $endDate->toString(), $showFiles);
 // Build data array for the table. Format is described in ttWeekViewHelper::getDataForWeekView function.
 if ($records)
   $dataArray = ttWeekViewHelper::getDataForWeekView($records, $dayHeaders);
 else
-  $dataArray = ttWeekViewHelper::prePopulateFromPastWeeks($startDate->toString(DB_DATEFORMAT), $dayHeaders);
+  $dataArray = ttWeekViewHelper::prePopulateFromPastWeeks($startDate->toString(), $dayHeaders);
 
 // Build day totals (total durations for each day in week).
 $dayTotals = ttWeekViewHelper::getDayTotals($dataArray, $dayHeaders);
@@ -487,7 +488,7 @@ if ($request->isPost()) {
                 }
               }
               $fields['day_header'] = $dayHeader;
-              $fields['start_date'] = $startDate->toString(DB_DATEFORMAT); // To be able to determine date for the entry using $dayHeader.
+              $fields['start_date'] = $startDate->toString(); // To be able to determine date for the entry using $dayHeader.
               $fields['duration'] = $postedDuration;
               $fields['browser_today'] = $request->getParameter('browser_today', null);
               if ($showWeekNotes) {
