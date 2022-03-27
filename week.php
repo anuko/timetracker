@@ -81,14 +81,14 @@ $showRecordCustomFields = $user->isOptionEnabled('record_custom_fields');
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
-$selected_date2 = new ttDate($cl_date);
+$selected_date = new ttDate($cl_date);
 if(!$cl_date)
-  $cl_date = $selected_date2->toString();
+  $cl_date = $selected_date->toString();
 $_SESSION['date'] = $cl_date;
 
 // Determine selected week start and end dates.
 $weekStartDay = $user->getWeekStart();
-$t_arr = localtime($selected_date2->getTimestamp());
+$t_arr = localtime($selected_date->getTimestamp());
 $t_arr[5] = $t_arr[5] + 1900;
 if ($t_arr[6] < $weekStartDay)
   $startWeekBias = $weekStartDay - 7;
@@ -111,8 +111,8 @@ if ($user->isPluginEnabled('cf')) {
 if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
-  $month_quota_minutes = $quota->getUserQuota($selected_date2->year, $selected_date2->month);
-  $month_total = ttTimeHelper::getTimeForMonth($selected_date2);
+  $month_quota_minutes = $quota->getUserQuota($selected_date->year, $selected_date->month);
+  $month_total = ttTimeHelper::getTimeForMonth($selected_date);
   $minutes_left = $month_quota_minutes - ttTimeHelper::toMinutes($month_total);
 
   $smarty->assign('month_total', $month_total);
@@ -550,10 +550,10 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$week_total = ttTimeHelper::getTimeForWeek($selected_date2);
+$week_total = ttTimeHelper::getTimeForWeek($selected_date);
 
 $smarty->assign('large_screen_calendar_row_span', $largeScreenCalendarRowSpan);
-$smarty->assign('selected_date', $selected_date2);
+$smarty->assign('selected_date', $selected_date);
 $smarty->assign('week_total', $week_total);
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);

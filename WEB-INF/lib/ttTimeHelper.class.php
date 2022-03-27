@@ -200,6 +200,9 @@ class ttTimeHelper {
 
   // toMinutes - converts a time string in format 00:00 to a number of minutes.
   static function toMinutes($value) {
+    if (is_null($value))
+      return 0;
+    
     $signMultiplier = ttStartsWith($value, '-') ? -1 : 1;
     if ($signMultiplier == -1) $value = ltrim($value, '-');
 

@@ -518,20 +518,22 @@ function ttMitigateCSRF() {
   return true;
 }
 
-
 // ttStartsWith functions checks if a string starts with a given substring.
 function ttStartsWith($string, $startString)
 {
-    $len = strlen($startString);
-    return (substr($string, 0, $len) === $startString);
+  if (is_null($string))
+    return false;
+
+  $len = strlen($startString);
+  return (substr($string, 0, $len) === $startString);
 }
 
 // ttEndsWith functions checks if a string ends with a given substring.
 function ttEndsWith($string, $endString)
 {
-    $len = strlen($endString);
-    if ($len == 0) return true;
-    return (substr($string, -$len) === $endString);
+  $len = strlen($endString);
+  if ($len == 0) return true;
+  return (substr($string, -$len) === $endString);
 }
 
 // ttDateToUserFormat converts a date from database format to user format.

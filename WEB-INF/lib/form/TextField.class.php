@@ -56,7 +56,7 @@ class TextField extends FormElement {
       if (!empty($this->on_change)) $html .= " onchange=\"$this->on_change\"";
     }
 
-    $html .= " value=\"".htmlspecialchars($this->getValue())."\"";
+    $html .= " value=\"".htmlspecialchars($this->getValue() ? $this->getValue() : '')."\"";
 
     if(!$this->isEnabled()) $html .= " readonly";
     $html .= ">\n";

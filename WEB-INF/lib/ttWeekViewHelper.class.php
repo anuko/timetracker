@@ -242,23 +242,23 @@ class ttWeekViewHelper {
     global $i18n;
 
     // First, determine past week start and end dates.
-    $objDate = new DateAndTime(DB_DATEFORMAT, $startDate);
-    $objDate->decDay(7);
-    $pastWeekStartDate = $objDate->toString(DB_DATEFORMAT);
-    $objDate->incDay(6);
-    $pastWeekEndDate = $objDate->toString(DB_DATEFORMAT);
+    $objDate = new ttDate($startDate);
+    $objDate->decrementDay(7);
+    $pastWeekStartDate = $objDate->toString();
+    $objDate->incrementDay(6);
+    $pastWeekEndDate = $objDate->toString();
     unset($objDate);
 
     // Obtain past week(s) records.
     $records = ttWeekViewHelper::getRecordsForInterval($pastWeekStartDate, $pastWeekEndDate);
-    // Handle potential situation of no records by re-trying for up to 4 more previous weeks (after a long vacation, etc.).
+    // Handle a potential situation of no records by re-trying for up to 4 more previous weeks (after a long vacation, etc.).
     if (!$records) {
       for ($i = 0; $i < 4; $i++) {
-        $objDate = new DateAndTime(DB_DATEFORMAT, $pastWeekStartDate);
-        $objDate->decDay(7);
-        $pastWeekStartDate = $objDate->toString(DB_DATEFORMAT);
-        $objDate->incDay(6);
-        $pastWeekEndDate = $objDate->toString(DB_DATEFORMAT);
+        $objDate = new ttDate($pastWeekStartDate);
+        $objDate->decrementDay(7);
+        $pastWeekStartDate = $objDate->toString();
+        $objDate->incrementDay(6);
+        $pastWeekEndDate = $objDate->toString();
         unset($objDate);
 
         $records = ttWeekViewHelper::getRecordsForInterval($pastWeekStartDate, $pastWeekEndDate);
