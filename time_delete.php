@@ -6,7 +6,7 @@ require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
 import('ttTimeHelper');
-import('DateAndTime');
+import('ttDate');
 
 // Access checks.
 if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
@@ -33,7 +33,7 @@ if ($request->isPost()) {
   if ($request->getParameter('delete_button')) { // Delete button pressed.
 
     // Determine if it's okay to delete the record.
-    $item_date = new DateAndTime(DB_DATEFORMAT, $time_rec['date']);
+    $item_date = new ttDate($time_rec['date']);
 
     // Determine if the record is uncompleted.
     $uncompleted = ($time_rec['duration'] == '0:00');
