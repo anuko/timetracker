@@ -481,18 +481,15 @@ class ttWeekViewHelper {
 
   // dateFromDayHeader calculates date from start date and day header in week view.
   static function dateFromDayHeader($start_date, $day_header) {
-    $objDate = new DateAndTime(DB_DATEFORMAT, $start_date);
-    $currentDayHeader = (string) $objDate->getDate(); // It returns an int on first call.
-    if (strlen($currentDayHeader) == 1)               // Which is an implementation detail of DateAndTime class.
-      $currentDayHeader = '0'.$currentDayHeader;      // Add a 0 for single digit day.
-    $i = 1;
-    while ($currentDayHeader != $day_header && $i < 7) {
-      // Iterate through remaining days to find a match.
-      $objDate->incDay();
-      $currentDayHeader = $objDate->getDate(); // After incDay it returns a string with leading 0, when necessary.
-      $i++;
+    $objDate = new ttDate($start_date);
+    $currentDayHeader = $objDate->getDay();
+    for ($i = 0; $i < 7; $i++) {
+      if ($currentDayHeader == $day_header)
+        break;
+      $objDate->incrementDay();
+      $currentDayHeader = $objDate->getDay();
     }
-    return $objDate->toString(DB_DATEFORMAT);
+    return $objDate->toString();
   }
 
   // insertDurationFromWeekView - inserts a new record in log tables from a week view post.
@@ -502,11 +499,11 @@ class ttWeekViewHelper {
 
     // Determine date for a new entry.
     $entry_date = ttWeekViewHelper::dateFromDayHeader($fields['start_date'], $fields['day_header']);
-    $objEntryDate = new DateAndTime(DB_DATEFORMAT, $entry_date);
+    $objEntryDate = new ttDate($entry_date);
 
     // Prohibit creating entries in future.
     if (!$user->isOptionEnabled('future_entries') && $fields['browser_today']) {
-      $objBrowserToday = new DateAndTime(DB_DATEFORMAT, $fields['browser_today']);
+      $objBrowserToday = new ttDate($fields['browser_today']);
       if ($objEntryDate->after($objBrowserToday)) {
         $err->add($i18n->get('error.future_date'));
         return false;
