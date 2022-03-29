@@ -19,9 +19,70 @@ class ttDate {
 
 
   // Constructor.
-  function __construct($dateString = null) {
-    if (ttValidDbDateFormatDate($dateString)) {
-      $this->dateInDbDateFormat = $dateString;
+  function __construct($dateString = null, $dateFormat = null) {
+
+    $dateInDbDateFormat = null;
+
+    if (!is_null($dateFormat)) {
+      // Depending on passed in format, prepare $dateInDbDateFormat.
+      switch ($dateFormat) {
+        case '%Y-%m-%d':
+          if (preg_match('/^\d\d\d\d-\d\d-\d\d$/', $dateString)) {
+            $date_parts = explode('-', $dateString);
+            if (checkdate($date_parts[1], $date_parts[2], $date_parts[0])) {
+              // $dateString is valid as per specified format. Create $dateInDbDateFormat.
+              $dateInDbDateFormat = $dateString;
+            }
+          }
+          break;
+
+        case '%m/%d/%Y':
+          if (preg_match('/^\d\d\/\d\d\/\d\d\d\d$/', $dateString)) {
+            $date_parts = explode('/', $dateString);
+            if (checkdate($date_parts[0], $date_parts[1], $date_parts[2])) {
+              // $dateString is valid as per specified format. Create $dateInDbDateFormat.
+              $dateInDbDateFormat = $date_parts[2].'-'.$date_parts[0].'-'.$date_parts[1];
+            }
+          }
+          break;
+
+        case '%d-%m-%Y':
+          if (preg_match('/^\d\d\-\d\d\-\d\d\d\d$/', $dateString)) {
+            $date_parts = explode('-', $dateString);
+            if (checkdate($date_parts[1], $date_parts[0], $date_parts[2])) {
+              // $dateString is valid as per specified format. Create $dateInDbDateFormat.
+              $dateInDbDateFormat = $date_parts[2].'-'.$date_parts[1].'-'.$date_parts[0];
+            }
+          }
+          break;
+
+        case '%d.%m.%Y':
+          if (preg_match('/^\d\d\.\d\d\.\d\d\d\d$/', $dateString)) {
+            $date_parts = explode('.', $dateString);
+            if (checkdate($date_parts[1], $date_parts[0], $date_parts[2])) {
+              // $dateString is valid as per specified format. Create $dateInDbDateFormat.
+              $dateInDbDateFormat = $date_parts[2].'-'.$date_parts[1].'-'.$date_parts[0];
+            }
+          }
+          break;
+
+        case '%d.%m.%Y %a':
+          if (preg_match('/^\d\d\.\d\d\.\d\d\d\d .+$/', $dateString)) {
+            $date_parts = explode('.', $dateString);
+            $date_parts[2] = substr($date_parts[2], 0, 4); // Ignore localized day of week.
+            if (checkdate($date_parts[1], $date_parts[0], $date_parts[2])) {
+              // $dateString is valid as per specified format. Create $dateInDbDateFormat.
+              $dateInDbDateFormat = $date_parts[2].'-'.$date_parts[1].'-'.$date_parts[0];
+            }
+          }
+          break;
+      }
+    } else {
+     $dateInDbDateFormat = $dateString;
+    }
+
+    if (ttValidDbDateFormatDate($dateInDbDateFormat)) {
+      $this->dateInDbDateFormat = $dateInDbDateFormat;
     } else {
       $today = date_create();
       $this->dateInDbDateFormat = date_format($today, 'Y-m-d');

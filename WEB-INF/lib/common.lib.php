@@ -242,19 +242,56 @@ function ttValidStatus($val)
 // ttValidDate is used to check user input to validate a date.
 function ttValidDate($val)
 {
+  if (is_null($val))
+    return false;
+
   $val = trim($val);
   if (strlen($val) == 0)
     return false;
 
-  // This should validate a string in format 'YYYY-MM-DD', 'MM/DD/YYYY', 'DD-MM-YYYY', 'DD.MM.YYYY', or 'DD.MM.YYYY whatever'.
-  if (!preg_match('/^\d\d\d\d-\d\d-\d\d$/', $val) &&
-    !preg_match('/^\d\d\/\d\d\/\d\d\d\d$/', $val) &&
-    !preg_match('/^\d\d\-\d\d\-\d\d\d\d$/', $val) &&
-    !preg_match('/^\d\d\.\d\d\.\d\d\d\d$/', $val) &&
-    !preg_match('/^\d\d\.\d\d\.\d\d\d\d .+$/', $val))
-    return false;
+  global $user;
+  $dateFormat = $user->getDateFormat();
 
-  return true;
+  switch ($dateFormat) {
+    case '%Y-%m-%d':
+      if (preg_match('/^\d\d\d\d-\d\d-\d\d$/', $val)) {
+        // Validate a string in format 'YYYY-MM-DD'.
+        $date_parts = explode('-', $val);
+        return checkdate($date_parts[1], $date_parts[2], $date_parts[0]);
+      }
+      break;
+    case '%m/%d/%Y':
+      if (preg_match('/^\d\d\/\d\d\/\d\d\d\d$/', $val)) {
+        // Validate a string in format 'MM/DD/YYYY'.
+        $date_parts = explode('/', $val);
+        return checkdate($date_parts[0], $date_parts[1], $date_parts[2]);
+      }
+      break;
+    case '%d-%m-%Y':
+      if (preg_match('/^\d\d\-\d\d\-\d\d\d\d$/', $val)) {
+        // Validate a string in format 'DD-MM-YYYY'.
+        $date_parts = explode('-', $val);
+        return checkdate($date_parts[1], $date_parts[0], $date_parts[2]);
+      }
+      break;
+    case '%d.%m.%Y':
+      if (preg_match('/^\d\d\.\d\d\.\d\d\d\d$/', $val)) {
+        // Validate a string in format 'DD.MM.YYYY'.
+        $date_parts = explode('.', $val);
+        return checkdate($date_parts[1], $date_parts[0], $date_parts[2]);
+      }
+      break;
+    case '%d.%m.%Y %a':
+      if (preg_match('/^\d\d\.\d\d\.\d\d\d\d .+$/', $val)) {
+        // Validate a string in format 'DD.MM.YYYY whatever'.
+        $date_parts = explode('.', $val);
+        $date_parts[2] = substr($date_parts[2], 0, 4); // Ignore localized day of week.
+        return checkdate($date_parts[1], $date_parts[0], $date_parts[2]);
+      }
+      break; 
+    
+  }
+  return false;
 }
 
 // ttValidDbDateFormatDate is used to check user input to validate a date in DB_DATEFORMAT.

@@ -10,6 +10,7 @@ import('ttClientHelper');
 import('ttTimeHelper');
 import('ttConfigHelper');
 import('DateAndTime');
+import('ttDate');
 
 // Access checks.
 if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
@@ -57,7 +58,7 @@ if ($user->isPluginEnabled('cf')) {
   $smarty->assign('custom_fields', $custom_fields);
 }
 
-$item_date = new DateAndTime(DB_DATEFORMAT, $time_rec['date']);
+$item_date = new ttDate($time_rec['date']);
 $confirm_save = $user->getConfigOption('confirm_save');
 
 // Initialize variables.
@@ -325,11 +326,13 @@ if ($request->isPost()) {
   // Finished validating user input.
 
   // This is a new date for the time record.
-  $new_date = new DateAndTime($user->getDateFormat(), $cl_date);
+  $new_date = null;
+  if ($err->no())
+    $new_date = new ttDate($cl_date, $user->getDateFormat());
 
   // Prohibit creating entries in future.
-  if (!$user->isOptionEnabled('future_entries')) {
-    $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
+  if ($err->no() && !$user->isOptionEnabled('future_entries')) {
+    $browser_today = new ttDate($request->getParameter('browser_today', null));
     if ($new_date->after($browser_today))
       $err->add($i18n->get('error.future_date'));
   }
@@ -364,7 +367,7 @@ if ($request->isPost()) {
 
     // Prohibit creating an overlapping record.
     if ($err->no()) {
-      if (ttTimeHelper::overlaps($user_id, $new_date->toString(DB_DATEFORMAT), $cl_start, $cl_finish, $cl_id))
+      if (ttTimeHelper::overlaps($user_id, $new_date->toString(), $cl_start, $cl_finish, $cl_id))
         $err->add($i18n->get('error.overlap'));
     }
 
@@ -372,7 +375,7 @@ if ($request->isPost()) {
     if ($err->no()) {
       $res = ttTimeHelper::update(array(
         'id'=>$cl_id,
-        'date'=>$new_date->toString(DB_DATEFORMAT),
+        'date'=>$new_date->toString(),
         'client'=>$cl_client,
         'project'=>$cl_project,
         'task'=>$cl_task,
@@ -389,7 +392,7 @@ if ($request->isPost()) {
       }
       if ($res)
       {
-        header('Location: time.php?date='.$new_date->toString(DB_DATEFORMAT));
+        header('Location: time.php?date='.$new_date->toString());
         exit();
       }
       $err->add($i18n->get('error.db'));
@@ -421,7 +424,7 @@ if ($request->isPost()) {
 
     // Prohibit creating an overlapping record.
     if ($err->no()) {
-      if (ttTimeHelper::overlaps($user_id, $new_date->toString(DB_DATEFORMAT), $cl_start, $cl_finish))
+      if (ttTimeHelper::overlaps($user_id, $new_date->toString(), $cl_start, $cl_finish))
         $err->add($i18n->get('error.overlap'));
     }
 
@@ -429,7 +432,7 @@ if ($request->isPost()) {
     if ($err->no()) {
 
       $id = ttTimeHelper::insert(array(
-        'date'=>$new_date->toString(DB_DATEFORMAT),
+        'date'=>$new_date->toString(),
         'client'=>$cl_client,
         'project'=>$cl_project,
         'task'=>$cl_task,
@@ -446,7 +449,7 @@ if ($request->isPost()) {
         $res = $custom_fields->insertTimeFields($id, $timeCustomFields);
       }
       if ($id && $res) {
-        header('Location: time.php?date='.$new_date->toString(DB_DATEFORMAT));
+        header('Location: time.php?date='.$new_date->toString());
         exit();
       }
       $err->add($i18n->get('error.db'));
