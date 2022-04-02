@@ -3,6 +3,14 @@ License: See license.txt *}
 
 {include file="time_script.tpl"}
 
+<script>
+// handleStop handles a click on the Stop button by setting value of a hidden control with record id.
+function handleStop(buttonElement) {
+  var recordIdControl = document.getElementById("record_id");
+  recordIdControl.value = buttonElement.parentNode.id;
+}
+</script>
+
 {if $show_navigation}
 <div class="optional-nav">
   <a href="time.php?date={$selected_date->toString()}">{$i18n.label.day_view}</a>
@@ -113,6 +121,9 @@ License: See license.txt *}
 </table>
 
 {if $time_records}
+<input type="hidden" id="record_id" name="record_id">
+<input type="hidden" id="browser_today" name="browser_date">
+<input type="hidden" id="browser_time" name="browser_time">
 <div class="record-list">
 <table class="x-scrollable-table">
   <tr>
@@ -177,10 +188,13 @@ License: See license.txt *}
     <td><a href="time_files.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.files}" src="img/icon-file.png"></a></td>
       {/if}
     {/if}
-    <td>
+    <td id={$record.id}>
     {if $record.approved || $record.timesheet_id || $record.invoice_id}
       &nbsp;
     {else}
+      {if ($record.duration == '0:00' && $record.start <> '')}
+        <input type="submit" id="btn_stop" name="btn_stop" onclick="browser_date.value=get_date();browser_time.value=get_time();handleStop(this);" value="{$i18n.button.stop}">
+      {/if}
       <a href="time_edit.php?id={$record.id}"><img class="table_icon" alt="{$i18n.label.edit}" src="img/icon-edit.png"></a>
     {/if}
     </td>

@@ -46,6 +46,30 @@ if ($request->isPost()) {
     exit();
   }
 }
+// Additional checks for hidden controls used for completion of uncompleted records.
+// browser_date, browser_time, record_id.
+if ($request->isPost() && $request->getParameter('btn_stop')) {
+  $recordId = (int) $request->getParameter('record_id');
+  $time_rec = ttTimeHelper::getRecord($recordId);
+  if (!$time_rec) {
+    // We are passed a bogus record id.
+    header('Location: access_denied.php');
+    exit();
+  }
+
+  // Validate that browser_date parameter is in correct format.
+  $browser_date = $request->getParameter('browser_date');
+  if ($browser_date && !ttValidDbDateFormatDate($browser_date)) {
+    header('Location: access_denied.php');
+    exit();
+  }
+  // Validate that browser_time parameter is in correct format.
+  $browser_time = $request->getParameter('browser_time');
+  if ($browser_time && !ttValidTime($browser_time)) {
+    header('Location: access_denied.php');
+    exit();
+  }
+}
 // End of access checks.
 
 // Determine user for whom we display this page.

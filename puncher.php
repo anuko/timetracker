@@ -32,7 +32,7 @@ if ($request->isPost()) {
 // If we are passed in browser_time, make sure it is in correct format.
 $browser_time = null; // Reused below beyond access checks.
 if ($request->isPost()) {
-  // Validate that browser_today parameter is in correct format.
+  // Validate that browser_time parameter is in correct format.
   $browser_time = $request->getParameter('browser_time');
   if ($browser_time && !ttValidTime($browser_time)) {
     header('Location: access_denied.php');
