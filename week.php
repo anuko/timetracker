@@ -13,7 +13,6 @@ import('ttWeekViewHelper');
 import('ttClientHelper');
 import('ttTimeHelper');
 import('ttDate');
-import('DateAndTime');
 
 // Access checks.
 if (!(ttAccessAllowed('track_own_time') || ttAccessAllowed('track_time'))) {
