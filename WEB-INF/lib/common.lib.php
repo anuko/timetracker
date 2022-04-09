@@ -577,7 +577,7 @@ function ttEndsWith($string, $endString)
 function ttDateToUserFormat($date)
 {
   global $user;
-  $o_date = new DateAndTime(DB_DATEFORMAT, $date);
+  $o_date = new ttDate($date);
   return $o_date->toString($user->date_format);
 }
 
