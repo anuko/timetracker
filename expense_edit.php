@@ -5,9 +5,9 @@ License: See license.txt */
 require_once('initialize.php');
 import('form.Form');
 import('ttGroupHelper');
-import('DateAndTime');
 import('ttTimeHelper');
 import('ttExpenseHelper');
+import('ttDate');
 
 // Access checks.
 if (!(ttAccessAllowed('track_own_expenses') || ttAccessAllowed('track_expenses'))) {
@@ -37,7 +37,7 @@ if ($request->isPost()) {
 }
 // End of access checks.
 
-$item_date = new DateAndTime(DB_DATEFORMAT, $expense_item['date']);
+$item_date = new ttDate($expense_item['date']);
 $confirm_save = $user->getConfigOption('confirm_save');
 $trackingMode = $user->getTrackingMode();
 $show_project = MODE_PROJECTS == $trackingMode || MODE_PROJECTS_AND_TASKS == $trackingMode;
@@ -150,11 +150,11 @@ if ($request->isPost()) {
   if (!ttValidDate($cl_date)) $err->add($i18n->get('error.field'), $i18n->get('label.date'));
 
   // This is a new date for the expense item.
-  $new_date = new DateAndTime($user->getDateFormat(), $cl_date);
+  $new_date = new ttDate($cl_date, $user->getDateFormat());
 
   // Prohibit creating entries in future.
   if (!$user->isOptionEnabled('future_entries')) {
-    $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
+    $browser_today = new ttDate($request->getParameter('browser_today', null));
     if ($new_date->after($browser_today))
       $err->add($i18n->get('error.future_date'));
   }
@@ -178,9 +178,9 @@ if ($request->isPost()) {
 
     // Now, an update.
     if ($err->no()) {
-      if (ttExpenseHelper::update(array('id'=>$cl_id,'date'=>$new_date->toString(DB_DATEFORMAT),
+      if (ttExpenseHelper::update(array('id'=>$cl_id,'date'=>$new_date->toString(),
           'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'paid'=>$cl_paid))) {
-        header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
+        header('Location: expenses.php?date='.$new_date->toString());
         exit();
       }
     }
@@ -194,9 +194,9 @@ if ($request->isPost()) {
 
     // Now, a new insert.
     if ($err->no()) {
-      if (ttExpenseHelper::insert(array('date'=>$new_date->toString(DB_DATEFORMAT),'client_id'=>$cl_client,
+      if (ttExpenseHelper::insert(array('date'=>$new_date->toString(),'client_id'=>$cl_client,
           'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1))) {
-        header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
+        header('Location: expenses.php?date='.$new_date->toString());
         exit();
       } else
         $err->add($i18n->get('error.db'));
