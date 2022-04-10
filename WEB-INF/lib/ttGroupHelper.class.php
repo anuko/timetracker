@@ -431,10 +431,9 @@ class ttGroupHelper {
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
-      $dt = new DateAndTime(DB_DATEFORMAT);
       while ($val = $res->fetchRow()) {
         // Localize date.
-        $dt->parseVal($val['date']);
+        $dt = new ttDate($val['date']);
         $val['date'] = $dt->toString($user->getDateFormat());
         if ($addPaidStatus)
           $val['paid'] = ttInvoiceHelper::isPaid($val['id']);
@@ -679,7 +678,6 @@ class ttGroupHelper {
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
-      $dt = new DateAndTime(DB_DATEFORMAT);
       while ($val = $res->fetchRow()) {
         $result[] = $val;
       }
