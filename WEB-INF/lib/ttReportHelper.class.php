@@ -4,7 +4,9 @@ License: See license.txt */
 
 import('ttClientHelper');
 import('DateAndTime');
+import('ttDate');
 import('Period');
+import('ttPeriod');
 import('ttTimeHelper');
 import('ttConfigHelper');
 
@@ -119,12 +121,12 @@ class ttReportHelper {
     // Prepare sql query part for where.
     $dateFormat = $user->getDateFormat();
     if ($options['period'])
-      $period = new Period($options['period'], new DateAndTime($dateFormat));
+      $period = new ttPeriod(new ttDate(), $options['period']);
     else {
-      $period = new Period();
+      $period = new ttPeriod(new ttDate());
       $period->setPeriod(
-        new DateAndTime($dateFormat, $options['period_start']),
-        new DateAndTime($dateFormat, $options['period_end']));
+        new ttDate($options['period_start'], $dateFormat),
+        new ttDate($options['period_end'], $dateFormat));
     }
     $where = " where l.status = 1 and l.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
       " $user_list_part $dropdown_parts $cf_text_parts";

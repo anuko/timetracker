@@ -6,6 +6,10 @@ define('INTERVAL_THIS_DAY', 1);
 define('INTERVAL_THIS_WEEK', 2);
 define('INTERVAL_THIS_MONTH', 3);
 define('INTERVAL_THIS_YEAR', 4);
+define('INTERVAL_ALL_TIME', 5);
+define('INTERVAL_LAST_WEEK', 6);
+define('INTERVAL_LAST_MONTH', 7);
+define('INTERVAL_LAST_DAY', 8);
 
 class ttPeriod {
   var $startDate; // ttDate object.
@@ -30,15 +34,30 @@ class ttPeriod {
         $this->endDate->setFromUnixTimestamp($ttDateInstance->getTimestamp());
         break;
 
+      case INTERVAL_LAST_DAY:
+        $this->startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-1,$t_arr[5]));
+        $this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-1,$t_arr[5]));
+        break;
+
       case INTERVAL_THIS_WEEK:
         $this->startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+$startWeekBias,$t_arr[5]));
         $this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
+        break;
+
+      case INTERVAL_LAST_WEEK:
+        $this->startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]-7+$startWeekBias,$t_arr[5]));
+        $this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]-1+$startWeekBias,$t_arr[5]));
         break;
 
       case INTERVAL_THIS_MONTH:
 	$this->startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,1,$t_arr[5]));
 	$this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+2,0,$t_arr[5]));
 	break;
+
+      case INTERVAL_LAST_MONTH:
+        $this->startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4],1,$t_arr[5]));
+        $this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,0,$t_arr[5]));
+        break;
 
       case INTERVAL_THIS_YEAR:
 	$this->startDate->setFromUnixTimestamp(mktime(0,0,0,1,1,$t_arr[5]));
@@ -47,6 +66,11 @@ class ttPeriod {
       }
     }
 
+  // Sets period to designated start and and dates.
+  function setPeriod($start_date, $end_date) {
+    $this->startDate = $start_date;
+    $this->endDate = $end_date;
+  }
 
   // Returns start date in specified format.
   function getStartDate($format = null) {
