@@ -3,7 +3,7 @@
 License: See license.txt */
 
 require_once('initialize.php');
-import('DateAndTime');
+import('ttDate');
 import('ttInvoiceHelper');
 import('ttClientHelper');
 import('form.Form');
@@ -25,7 +25,7 @@ if (!$invoice) {
 }
 // End of access checks.
 
-$invoice_date = new DateAndTime(DB_DATEFORMAT, $invoice['date']);
+$invoice_date = new ttDate($invoice['date']);
 $client = ttClientHelper::getClient($invoice['client_id'], true);
 if (!$client) // In case client was deleted.
   $client = ttClientHelper::getDeletedClient($invoice['client_id']);
