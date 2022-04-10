@@ -6,7 +6,7 @@ require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
 import('ttGroupHelper');
-import('DateAndTime');
+import('ttDate');
 import('ttTimeHelper');
 import('ttExpenseHelper');
 import('ttFileHelper');
@@ -65,12 +65,11 @@ if ($request->isPost() && $userChanged) {
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
-$selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date);
-if($selected_date->isError())
-  $selected_date = new DateAndTime(DB_DATEFORMAT);
+$selected_date = new ttDate($cl_date);
 if(!$cl_date)
-  $cl_date = $selected_date->toString(DB_DATEFORMAT);
+  $cl_date = $selected_date->toString();
 $_SESSION['date'] = $cl_date;
+
 
 $tracking_mode = $user->getTrackingMode();
 $show_project = MODE_PROJECTS == $tracking_mode || MODE_PROJECTS_AND_TASKS == $tracking_mode;
@@ -203,7 +202,7 @@ if ($request->isPost()) {
 
     // Prohibit creating entries in future.
     if (!$user->isOptionEnabled('future_entries')) {
-      $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
+      $browser_today = new ttDate($request->getParameter('browser_today', null));
       if ($selected_date->after($browser_today))
         $err->add($i18n->get('error.future_date'));
     }
