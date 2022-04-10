@@ -4,7 +4,7 @@ License: See license.txt */
 
 require_once('initialize.php');
 import('form.Form');
-import('DateAndTime');
+import('ttDate');
 import('ttExpenseHelper');
 
 // Access checks.
@@ -30,7 +30,7 @@ if ($request->isPost()) {
   if ($request->getParameter('delete_button')) { // Delete button pressed.
 
     // Determine if it is okay to delete the record.
-    $item_date = new DateAndTime(DB_DATEFORMAT, $expense_item['date']);
+    $item_date = new ttDate($expense_item['date']);
     if ($user->isDateLocked($item_date))
       $err->add($i18n->get('error.range_locked'));
 

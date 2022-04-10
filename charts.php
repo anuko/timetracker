@@ -6,7 +6,7 @@ License: See license.txt */
 
 require_once('initialize.php');
 import('form.Form');
-import('DateAndTime');
+import('ttDate');
 import('ttChartHelper');
 import('ttUserConfig');
 import('PieChartEx');
@@ -72,8 +72,8 @@ $tracking_mode = $user->getTrackingMode();
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
 if(!$cl_date) {
-  $now = new DateAndTime(DB_DATEFORMAT);
-  $cl_date = $now->toString(DB_DATEFORMAT);
+  $now = new ttDate();
+  $cl_date = $now->toString();
 }
 $_SESSION['date'] = $cl_date;
 
