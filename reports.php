@@ -5,13 +5,13 @@ License: See license.txt */
 require_once('initialize.php');
 import('form.Form');
 import('form.ActionForm');
-import('DateAndTime');
 import('ttGroupHelper');
-import('Period');
 import('ttProjectHelper');
 import('ttFavReportHelper');
 import('ttClientHelper');
 import('ttReportHelper');
+import('ttDate');
+import('ttPeriod');
 
 // Access check.
 if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports') || ttAccessAllowed('view_all_reports') || ttAccessAllowed('view_client_reports'))) {
@@ -357,9 +357,9 @@ $bean = new ActionForm('reportBean', $form, $request);
 if ($request->isGet() && !$bean->isSaved()) {
   // No previous form data were found in session. Use the following default values.
   $form->setValueByElement('users_active', array_keys((array)$user_list_active));
-  $period = new Period(INTERVAL_THIS_MONTH, new DateAndTime($user->getDateFormat()));
-  $form->setValueByElement('start_date', $period->getStartDate());
-  $form->setValueByElement('end_date', $period->getEndDate());
+  $period = new ttPeriod(new ttDate(), INTERVAL_THIS_MONTH);
+  $form->setValueByElement('start_date', $period->getStartDate($user->getDateFormat()));
+  $form->setValueByElement('end_date', $period->getEndDate($user->getDateFormat()));
 
   $form->setValueByElement('chclient', '1');
   $form->setValueByElement('chstart', '1');
@@ -438,17 +438,18 @@ if ($request->isPost()) {
   } else {
     // Generate button pressed. Check some values.
     if (!$bean->getAttribute('period')) {
-      $start_date = new DateAndTime($user->getDateFormat(), $bean->getAttribute('start_date'));
-
-      if ($start_date->isError() || !$bean->getAttribute('start_date'))
-        $err->add($i18n->get('error.field'), $i18n->get('label.start_date'));
-
-      $end_date = new DateAndTime($user->getDateFormat(), $bean->getAttribute('end_date'));
-      if ($end_date->isError() || !$bean->getAttribute('end_date'))
-        $err->add($i18n->get('error.field'), $i18n->get('label.end_date'));
-
-      if ($start_date->compare($end_date) > 0)
-        $err->add($i18n->get('error.interval'), $i18n->get('label.end_date'), $i18n->get('label.start_date'));
+      // Validate start date.
+      if (!ttValidDate($bean->getAttribute('start_date'))) $err->add($i18n->get('error.field'), $i18n->get('label.start_date'));
+      // Validate end date.
+      if (!ttValidDate($bean->getAttribute('end_date'))) $err->add($i18n->get('error.field'), $i18n->get('label.end_date'));
+      // Make sure that the end date is equal or after the start date.
+      if ($err->no()) {
+        $startDate = new ttDate($bean->getAttribute('start_date'), $user->getDateFormat());
+        $endDate = new ttDate($bean->getAttribute('end_date'), $user->getDateFormat());
+        if ($startDate->compare($endDate) > 0) {
+          $err->add($i18n->get('error.interval'), $i18n->get('label.end_date'), $i18n->get('label.start_date'));
+        }
+      }
     }
     $group_by1 = $bean->getAttribute('group_by1');
     $group_by2 = $bean->getAttribute('group_by2');

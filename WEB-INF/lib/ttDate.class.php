@@ -153,6 +153,15 @@ class ttDate {
   }
 
 
+  function compare(/*ttDate*/ $obj) {
+    $ts1 = $this->getTimestamp();
+    $ts2 = $obj->getTimestamp();
+    if ($ts1 < $ts2) return -1;
+    if ($ts1 == $ts2) return 0;
+    if ($ts1 > $ts2) return 1;
+  }
+
+
   // Getters.
   function getYear() { return $this->year; }
   function getMonth() { return $this->month; }
