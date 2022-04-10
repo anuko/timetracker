@@ -2,8 +2,6 @@
 /* Copyright (c) Anuko International Ltd. https://www.anuko.com
 License: See license.txt */
 
-import('DateAndTime');
-
 // The ttTimeHelper is a class to help with time-related values.
 class ttTimeHelper {
 
