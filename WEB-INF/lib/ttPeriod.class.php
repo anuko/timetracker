@@ -2,8 +2,10 @@
 /* Copyright (c) Anuko International Ltd. https://www.anuko.com
 License: See license.txt */
 
+define('INTERVAL_THIS_DAY', 1);
 define('INTERVAL_THIS_WEEK', 2);
 define('INTERVAL_THIS_MONTH', 3);
+define('INTERVAL_THIS_YEAR', 4);
 
 class ttPeriod {
   var $startDate; // ttDate object.
@@ -23,6 +25,11 @@ class ttPeriod {
     $this->endDate = new ttDate();
 
     switch ($period_type) {
+      case INTERVAL_THIS_DAY:
+        $this->startDate->setFromUnixTimestamp($ttDateInstance->getTimestamp());
+        $this->endDate->setFromUnixTimestamp($ttDateInstance->getTimestamp());
+        break;
+
       case INTERVAL_THIS_WEEK:
         $this->startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+$startWeekBias,$t_arr[5]));
         $this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
@@ -31,6 +38,11 @@ class ttPeriod {
       case INTERVAL_THIS_MONTH:
 	$this->startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,1,$t_arr[5]));
 	$this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+2,0,$t_arr[5]));
+	break;
+
+      case INTERVAL_THIS_YEAR:
+	$this->startDate->setFromUnixTimestamp(mktime(0,0,0,1,1,$t_arr[5]));
+	$this->endDate->setFromUnixTimestamp(mktime(0,0,0,12,31,$t_arr[5]));
 	break;
       }
     }

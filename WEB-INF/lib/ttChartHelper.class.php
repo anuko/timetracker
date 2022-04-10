@@ -1,32 +1,8 @@
 <?php
-// +----------------------------------------------------------------------+
-// | Anuko Time Tracker
-// +----------------------------------------------------------------------+
-// | Copyright (c) Anuko International Ltd. (https://www.anuko.com)
-// +----------------------------------------------------------------------+
-// | LIBERAL FREEWARE LICENSE: This source code document may be used
-// | by anyone for any purpose, and freely redistributed alone or in
-// | combination with other software, provided that the license is obeyed.
-// |
-// | There are only two ways to violate the license:
-// |
-// | 1. To redistribute this code in source form, with the copyright
-// |    notice or license removed or altered. (Distributing in compiled
-// |    forms without embedded copyright notices is permitted).
-// |
-// | 2. To redistribute modified versions of this code in *any* form
-// |    that bears insufficient indications that the modifications are
-// |    not the work of the original author(s).
-// |
-// | This license applies to this document only, not any other software
-// | that it may be combined with.
-// |
-// +----------------------------------------------------------------------+
-// | Contributors:
-// | https://www.anuko.com/time-tracker/credits.htm
-// +----------------------------------------------------------------------+
+/* Copyright (c) Anuko International Ltd. https://www.anuko.com
+License: See license.txt */
 
-import('Period');
+import('ttPeriod');
 import('ttTimeHelper');
 
 // Definitions for chart types.
@@ -48,19 +24,19 @@ class ttChartHelper {
     $period = null;
     switch ($interval_type) {
       case INTERVAL_THIS_DAY:
-        $period = new Period(INTERVAL_THIS_DAY, new DateAndTime(DB_DATEFORMAT, $selected_date));
+        $period = new ttPeriod(new ttDate($selected_date), INTERVAL_THIS_DAY);
         break;
  
       case INTERVAL_THIS_WEEK:
-        $period = new Period(INTERVAL_THIS_WEEK, new DateAndTime(DB_DATEFORMAT, $selected_date));
+        $period = new ttPeriod(new ttDate($selected_date), INTERVAL_THIS_WEEK);
         break;
 
       case INTERVAL_THIS_MONTH:
-        $period = new Period(INTERVAL_THIS_MONTH, new DateAndTime(DB_DATEFORMAT, $selected_date));
+        $period = new ttPeriod(new ttDate($selected_date), INTERVAL_THIS_MONTH);
         break;
 
       case INTERVAL_THIS_YEAR:
-        $period = new Period(INTERVAL_THIS_YEAR, new DateAndTime(DB_DATEFORMAT, $selected_date));
+        $period = new ttPeriod(new ttDate($selected_date), INTERVAL_THIS_YEAR);
         break;
     }
 
