@@ -226,11 +226,11 @@ class ttInvoiceHelper {
 
     $client_id = (int) $fields['client_id'];
 
-    $start_date = new DateAndTime($user->date_format, $fields['start_date']);
-    $start = $start_date->toString(DB_DATEFORMAT);
+    $start_date = new ttDate($fields['start_date'], $user->getDateFormat());
+    $start = $start_date->toString();
 
-    $end_date = new DateAndTime($user->date_format, $fields['end_date']);
-    $end = $end_date->toString(DB_DATEFORMAT);
+    $end_date = new ttDate($fields['end_date'], $user->getDateFormat());
+    $end = $end_date->toString();
 
     $project_id = null;
     $project_part = '';

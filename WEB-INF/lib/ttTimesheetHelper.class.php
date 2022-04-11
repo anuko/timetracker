@@ -546,7 +546,7 @@ class ttTimesheetHelper {
 
     // Determine start and end dates.
     $dateFormat = $user->getDateFormat();
-    if ($options['period'])
+    if (isset($options['period']) && $options['period'])
       $period = new ttPeriod(new ttDate(), $options['period']);
     else {
       $period = new ttPeriod(new ttDate());
