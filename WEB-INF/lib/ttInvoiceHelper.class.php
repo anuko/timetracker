@@ -3,7 +3,7 @@
 License: See license.txt */
 
 import('ttClientHelper');
-import('DateAndTime');
+import('ttDate');
 
 // Class ttInvoiceHelper is used for help with invoices.
 class ttInvoiceHelper {
@@ -159,9 +159,8 @@ class ttInvoiceHelper {
 
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
-      $dt = new DateAndTime(DB_DATEFORMAT);
       while ($val = $res->fetchRow()) {
-        $dt->parseVal($val['date']);
+        $dt = new ttDate($val['date']);
         $val['date'] = $dt->toString($user->getDateFormat());
         $result[] = $val;
       }
@@ -304,14 +303,14 @@ class ttInvoiceHelper {
 
     $client_id = (int) $fields['client_id'];
 
-    $invoice_date = new DateAndTime($user->date_format, $fields['date']);
-    $date = $invoice_date->toString(DB_DATEFORMAT);
+    $invoice_date = new ttDate($fields['date'], $user->getDateFormat());
+    $date = $invoice_date->toString();
 
-    $start_date = new DateAndTime($user->date_format, $fields['start_date']);
-    $start = $start_date->toString(DB_DATEFORMAT);
+    $start_date = new ttDate($fields['start_date'], $user->getDateFormat());
+    $start = $start_date->toString();
 
-    $end_date = new DateAndTime($user->date_format, $fields['end_date']);
-    $end = $end_date->toString(DB_DATEFORMAT);
+    $end_date = new ttDate($fields['end_date'], $user->getDateFormat());
+    $end = $end_date->toString();
 
     $project_id = null;
     $project_part = '';
