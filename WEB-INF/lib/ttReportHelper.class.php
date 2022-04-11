@@ -3,9 +3,7 @@
 License: See license.txt */
 
 import('ttClientHelper');
-import('DateAndTime');
 import('ttDate');
-import('Period');
 import('ttPeriod');
 import('ttTimeHelper');
 import('ttConfigHelper');
@@ -128,7 +126,7 @@ class ttReportHelper {
         new ttDate($options['period_start'], $dateFormat),
         new ttDate($options['period_end'], $dateFormat));
     }
-    $where = " where l.status = 1 and l.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and l.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
+    $where = " where l.status = 1 and l.date >= '".$period->getStartDate()."' and l.date <= '".$period->getEndDate()."'".
       " $user_list_part $dropdown_parts $cf_text_parts";
     return $where;
   }
@@ -203,14 +201,14 @@ class ttReportHelper {
     // Prepare sql query part for where.
     $dateFormat = $user->getDateFormat();
     if ($options['period'])
-      $period = new Period($options['period'], new DateAndTime($dateFormat));
+      $period = new ttPeriod(new ttDate(), $options['period']);
     else {
-      $period = new Period();
+      $period = new ttPeriod(new ttDate());
       $period->setPeriod(
-        new DateAndTime($dateFormat, $options['period_start']),
-        new DateAndTime($dateFormat, $options['period_end']));
+        new ttDate($options['period_start'], $dateFormat),
+        new ttDate($options['period_end'], $dateFormat));
     }
-    $where = " where ei.status = 1 and ei.date >= '".$period->getStartDate(DB_DATEFORMAT)."' and ei.date <= '".$period->getEndDate(DB_DATEFORMAT)."'".
+    $where = " where ei.status = 1 and ei.date >= '".$period->getStartDate()."' and ei.date <= '".$period->getEndDate()."'".
       " $user_list_part $dropdown_parts $cf_text_parts";
     return $where;
   }
@@ -883,17 +881,16 @@ class ttReportHelper {
 
     $dateFormat = $user->getDateFormat();
     if (isset($options['period']) && $options['period'])
-      $period = new Period($options['period'], new DateAndTime($dateFormat));
+      $period = new ttPeriod(new ttDate(), $options['period']);
     else {
-      $period = new Period();
-      if (isset($options['period_start']) && isset($options['period_end']))
-        $period->setPeriod(
-          new DateAndTime($dateFormat, $options['period_start']),
-          new DateAndTime($dateFormat, $options['period_end']));
+      $period = new ttPeriod(new ttDate());
+      $period->setPeriod(
+        new ttDate($options['period_start'], $dateFormat),
+        new ttDate($options['period_end'], $dateFormat));
     }
 
-    $totals['start_date'] = $period->getStartDate();
-    $totals['end_date'] = $period->getEndDate();
+    $totals['start_date'] = $period->getStartDate($user->getDateFormat());
+    $totals['end_date'] = $period->getEndDate($user->getDateFormat());
     $totals['time'] = $total_time;
     $totals['minutes'] = $val['time'] / 60;
     $totals['units'] = isset($val['units']) ? $val['units'] : null;
