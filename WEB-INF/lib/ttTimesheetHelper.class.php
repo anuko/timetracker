@@ -47,11 +47,11 @@ class ttTimesheetHelper {
     $name = $fields['name'];
     $comment = $fields['comment'];
 
-    $start_date = new DateAndTime($user->date_format, $fields['start_date']);
-    $start = $start_date->toString(DB_DATEFORMAT);
+    $start_date = new ttDate($fields['start_date'], $user->getDateFormat());
+    $start = $start_date->toString();
 
-    $end_date = new DateAndTime($user->date_format, $fields['end_date']);
-    $end = $end_date->toString(DB_DATEFORMAT);
+    $end_date = new ttDate($fields['end_date'], $user->getDateFormat());
+    $end = $end_date->toString();
 
     $created_part = ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
 
@@ -448,11 +448,11 @@ class ttTimesheetHelper {
     if (isset($fields['client_id'])) $client_id = (int) $fields['client_id'];
     if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
 
-    $start_date = new DateAndTime($user->date_format, $fields['start_date']);
-    $start = $start_date->toString(DB_DATEFORMAT);
+    $start_date = new ttDate($fields['start_date'], $user->getDateFormat());
+    $start = $start_date->toString();
 
-    $end_date = new DateAndTime($user->date_format, $fields['end_date']);
-    $end = $end_date->toString(DB_DATEFORMAT);
+    $end_date = new ttDate($fields['end_date'], $user->getDateFormat());
+    $end = $end_date->toString();
 
     // sql parts.
     $client_part = $project_part = '';
@@ -488,12 +488,12 @@ class ttTimesheetHelper {
     if (isset($fields['client_id'])) $client_id = (int) $fields['client_id'];
     if (isset($fields['project_id'])) $project_id = (int) $fields['project_id'];
 
-    $start_date = new DateAndTime($user->date_format, $fields['start_date']);
-    $start = $start_date->toString(DB_DATEFORMAT);
+    $start_date = new ttDate($fields['start_date'], $user->getDateFormat());
+    $start = $start_date->toString();
     $quoted_start = $mdb2->quote($start);
 
-    $end_date = new DateAndTime($user->date_format, $fields['end_date']);
-    $end = $end_date->toString(DB_DATEFORMAT);
+    $end_date = new ttDate($fields['end_date'], $user->getDateFormat());
+    $end = $end_date->toString();
     $quoted_end = $mdb2->quote($end);
 
     // sql parts.
