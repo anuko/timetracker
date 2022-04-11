@@ -88,8 +88,8 @@ class ActionForm {
         if ($this->mForm) {
         	if (isset($this->mForm->elements[$name])) {
         		if ($this->mForm->elements[$name]->class=="DateField") {
-                            // TODO: It appears that we never get here. Refactor this entire class.
-                            $dt = new ttDate($user->date_format, $value);
+                            // We get here when loading a fav report. Refactor this entire class.
+                            $dt = new ttDate($value, $user->getDateFormat());
                             $value = $dt->toString();
         		}
         		$this->mForm->elements[$name]->setValueSafe($value);
@@ -118,8 +118,8 @@ class ActionForm {
 	        if ($this->mForm) {
 	        	if (isset($this->mForm->elements[$name])) {
 	        		if ($this->mForm->elements[$name]->class=="DateField") {
-                                    // TODO: It appears that we never get here. Refactor this entire class.
-                                    $dt = new ttDate($user->date_format, $value);
+                                    // We get here when changing to --- no --- fav report. Refactor this entire class.
+                                    $dt = new ttDate($value, $user->getDateFormat());
                                     $value = $dt->toString();
 	        		}
 	        		$this->mForm->elements[$name]->setValueSafe($value);

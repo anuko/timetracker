@@ -3,6 +3,7 @@
 License: See license.txt */
 
 import('ttGroupHelper');
+import('ttDate');
 
 // Class ttFavReportHelper is used to help with favorite report related tasks.
 class ttFavReportHelper {
@@ -212,12 +213,12 @@ class ttFavReportHelper {
     }
 
     if ($bean->getAttribute('start_date')) {
-      $dt = new DateAndTime($user->getDateFormat(), $bean->getAttribute('start_date'));
-      $from = $dt->toString(DB_DATEFORMAT);
+      $dt = new ttDate($bean->getAttribute('start_date'), $user->getDateFormat());
+      $from = $dt->toString();
     }
     if ($bean->getAttribute('end_date')) {
-      $dt = new DateAndTime($user->getDateFormat(), $bean->getAttribute('end_date'));
-      $to = $dt->toString(DB_DATEFORMAT);
+      $dt = new ttDate($bean->getAttribute('end_date'), $user->getDateFormat());
+      $to = $dt->toString();
     }
 
     $fields = array(
