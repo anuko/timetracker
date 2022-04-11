@@ -4,6 +4,8 @@ License: See license.txt */
 
 import('ttUserHelper');
 import('ttFileHelper');
+import('ttPeriod');
+import('ttDate');
 
 // Class ttTimesheetHelper is used to help with project related tasks.
 class ttTimesheetHelper {
@@ -545,15 +547,15 @@ class ttTimesheetHelper {
     // Determine start and end dates.
     $dateFormat = $user->getDateFormat();
     if ($options['period'])
-      $period = new Period($options['period'], new DateAndTime($dateFormat));
+      $period = new ttPeriod(new ttDate(), $options['period']);
     else {
-      $period = new Period();
+      $period = new ttPeriod(new ttDate());
       $period->setPeriod(
-        new DateAndTime($dateFormat, $options['period_start']),
-        new DateAndTime($dateFormat, $options['period_end']));
+        new ttDate($options['period_start'], $dateFormat),
+        new ttDate($options['period_end'], $dateFormat));
     }
-    $start = $period->getStartDate(DB_DATEFORMAT);
-    $end = $period->getEndDate(DB_DATEFORMAT);
+    $start = $period->getStartDate();
+    $end = $period->getEndDate();
 
     $result = false;
     $sql = "select id, name from tt_timesheets".
