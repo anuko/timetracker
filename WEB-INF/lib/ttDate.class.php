@@ -5,7 +5,6 @@ License: See license.txt */
 import('I18n');
 
 // ttDate class is used to represent a date in Time Tracker.
-// It is a planned replacement for DateAndTime class, which is problematic with php8.1.
 class ttDate {
 
   var $year;          // year

@@ -3,20 +3,18 @@
 License: See license.txt */
 
 import('form.TextField');
-import('DateAndTime');
+import('ttDate');
 
 class DateField extends TextField {
   var $mWeekStartDay = 0;
   var $mDateFormat  = "d/m/Y";
   var $lToday      = "Today";
-  var $mDateObj;
 
   var $lCalendarButtons = array('today'=>'Today', 'close'=>'Close');
 
   function __construct($name) {
     $this->class = 'DateField';
     $this->name = $name;
-    $this->mDateObj = new DateAndTime();
     $this->localize();
   }
 
@@ -24,8 +22,6 @@ class DateField extends TextField {
     global $user;
     global $i18n;
   	
-    $this->mDateObj->setFormat($user->getDateFormat());
-
     $this->mMonthNames = $i18n->monthNames;
     $this->mWeekDayShortNames = $i18n->weekdayShortNames;
     $this->lToday = $i18n->get('label.today');
@@ -39,15 +35,15 @@ class DateField extends TextField {
   // set current value taken from session or database
   function setValueSafe($value)  {
     if (isset($value) && (strlen($value) > 0)) {
-      $this->mDateObj->parseVal($value, DB_DATEFORMAT);
-      $this->value = $this->mDateObj->toString($this->mDateFormat); //?
+      $ttDate = new ttDate($value);
+      $this->value = $ttDate->toString($this->mDateFormat);
     }
   }
   // get value for storing in session or database
   function getValueSafe() {
     if (strlen($this->value)>0) {
-      $this->mDateObj->parseVal($this->value, $this->mDateFormat);  //?
-      return $this->mDateObj->toString(DB_DATEFORMAT);
+      $ttDate = new ttDate($this->value, $this->mDateFormat);
+      return $ttDate->toString();
     } else {
       return null;
     }

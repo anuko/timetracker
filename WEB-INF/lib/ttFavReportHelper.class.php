@@ -340,11 +340,11 @@ class ttFavReportHelper {
       $bean->setAttribute('users_inactive', explode(',', $val['users']));
       $bean->setAttribute('period', $val['period']);
       if ($val['period_start']) {
-        $dt = new DateAndTime(DB_DATEFORMAT, $val['period_start']);
+        $dt = new ttDate($val['period_start']);
         $bean->setAttribute('start_date', $dt->toString($user->getDateFormat()));
       }
       if ($val['period_end']) {
-        $dt = new DateAndTime(DB_DATEFORMAT, $val['period_end']);
+        $dt = new ttDate($val['period_end']);
         $bean->setAttribute('end_date', $dt->toString($user->getDateFormat()));
       }
       $bean->setAttribute('chclient', $val['show_client']);
