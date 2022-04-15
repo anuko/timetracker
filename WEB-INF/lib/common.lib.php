@@ -308,6 +308,22 @@ function ttValidDbDateFormatDate($val)
   return checkdate($date_parts[1], $date_parts[2], $date_parts[0]);
 }
 
+// ttValidBrowserToday is used to check browser today parameter for sanity.
+function ttValidBrowserToday($val)
+{
+  if (!ttValidDbDateFormatDate($val))
+    return false;
+
+  // Check if browser today is after server tomorrow.
+  $browser_today = new ttDate($val);
+  $server_tomorrow = new ttDate();
+  $server_tomorrow->incrementDay();
+  if ($browser_today->after($server_tomorrow))
+      return false;
+
+  return true;
+}
+
 // ttValidTime is used to check user input for time post.
 function ttValidTime($val)
 {

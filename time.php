@@ -41,7 +41,7 @@ if ($date && !ttValidDbDateFormatDate($date)) {
 if ($request->isPost()) {
   // Validate that browser_today parameter is in correct format.
   $browser_today = $request->getParameter('browser_today');
-  if ($browser_today && !ttValidDbDateFormatDate($browser_today)) {
+  if ($browser_today && !ttValidBrowserToday($browser_today)) {
     header('Location: access_denied.php');
     exit();
   }
@@ -59,7 +59,7 @@ if ($request->isPost() && $request->getParameter('btn_stop')) {
 
   // Validate that browser_date parameter is in correct format.
   $browser_date = $request->getParameter('browser_date');
-  if ($browser_date && !ttValidDbDateFormatDate($browser_date)) {
+  if ($browser_date && !ttValidBrowserToday($browser_date)) {
     header('Location: access_denied.php');
     exit();
   }
