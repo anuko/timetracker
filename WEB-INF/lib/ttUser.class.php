@@ -603,7 +603,7 @@ class ttUser {
 
     // Determine max rank. If we are searching in on behalf group
     // then rank restriction does not apply.
-    $max_rank = $this->behalfGroup ? MAX_RANK : $this->rank;
+    $max_rank = $this->behalfGroup ? MAX_RANK + 1 : $this->rank;
 
     $sql =  "select u.id, u.name, u.login, u.role_id, u.client_id, u.status, u.rate, u.quota_percent, u.email from tt_users u".
       " left join tt_roles r on (u.role_id = r.id)".
