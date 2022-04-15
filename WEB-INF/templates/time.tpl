@@ -122,7 +122,7 @@ function handleStop(buttonElement) {
 
 {if $time_records}
 <input type="hidden" id="record_id" name="record_id">
-<input type="hidden" id="browser_today" name="browser_date">
+<input type="hidden" id="browser_date" name="browser_date">
 <input type="hidden" id="browser_time" name="browser_time">
 <div class="record-list">
 <table class="x-scrollable-table">
