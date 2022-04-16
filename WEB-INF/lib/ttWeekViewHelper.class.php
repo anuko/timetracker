@@ -504,7 +504,9 @@ class ttWeekViewHelper {
     // Prohibit creating entries in future.
     if (!$user->isOptionEnabled('future_entries') && $fields['browser_today']) {
       $objBrowserToday = new ttDate($fields['browser_today']);
-      if ($objEntryDate->after($objBrowserToday)) {
+      $server_tomorrow = new ttDate();
+      $server_tomorrow->incrementDay();
+      if ($objEntryDate->after($objBrowserToday) || $objEntryDate->after($server_tomorrow)) {
         $err->add($i18n->get('error.future_date'));
         return false;
       }

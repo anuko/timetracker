@@ -235,9 +235,9 @@ if ($request->isPost()) {
     }
     // Finished validating user input.
 
-    // Prohibit creating entries in future. Tricky with a bogus browser_today data in post.
+    // Prohibit creating entries in future.
     if (!$user->isOptionEnabled('future_entries')) {
-      // Just check if the date we are using is after server tomorrow.
+      // $date_today is already browser_today, just check if the date we are using is after server tomorrow.
       $server_tomorrow = new ttDate();
       $server_tomorrow->incrementDay();
       if ($date_today->after($server_tomorrow))
