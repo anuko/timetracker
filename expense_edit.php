@@ -30,7 +30,7 @@ if (!$expense_item || $expense_item['approved'] || $expense_item['invoice_id']) 
 if ($request->isPost()) {
   // Validate that browser_today parameter is in correct format.
   $browser_today = $request->getParameter('browser_today');
-  if ($browser_today && !ttValidBrowserToday($browser_today)) {
+  if ($browser_today && !ttValidDbDateFormatDate($browser_today)) {
     header('Location: access_denied.php');
     exit();
   }
@@ -155,7 +155,9 @@ if ($request->isPost()) {
   // Prohibit creating entries in future.
   if (!$user->isOptionEnabled('future_entries')) {
     $browser_today = new ttDate($request->getParameter('browser_today', null));
-    if ($new_date->after($browser_today))
+    $server_tomorrow = new ttDate();
+    $server_tomorrow->incrementDay();
+    if ($new_date->after($browser_today) || $new_date->after($server_tomorrow))
       $err->add($i18n->get('error.future_date'));
   }
   if (!ttTimeHelper::canAdd()) $err->add($i18n->get('error.expired'));
