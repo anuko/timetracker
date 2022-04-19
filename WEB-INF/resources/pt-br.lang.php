@@ -211,6 +211,8 @@ $i18n_key_words = array(
 'label.mark_paid' => 'Marcar como pago',
 'label.week_note' => 'Anotação da semana',
 'label.week_list' => 'Lista da semana',
+// TODO: translate the following.
+// 'label.weekends' => 'Weekends',
 'label.work_units' => 'Unidades de trabalho',
 'label.work_units_short' => 'Unidades',
 'label.totals_only' => 'Somente totais',

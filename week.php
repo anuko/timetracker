@@ -73,6 +73,7 @@ $taskRequired = false;
 if ($showTask) $taskRequired = $user->getConfigOption('task_required');
 $showWeekNote = $user->isOptionEnabled('week_note');
 $showWeekNotes = $user->isOptionEnabled('week_notes');
+$showWeekends = $user->isOptionEnabled('weekends');
 $recordType = $user->getRecordType();
 $showStart = TYPE_START_FINISH == $recordType || TYPE_ALL == $recordType;
 $showFiles = $user->isPluginEnabled('at');
@@ -158,6 +159,22 @@ if (isset($custom_fields) && $custom_fields->timeFields) {
 // Get column headers, which are day numbers in month.
 $dayHeaders = ttWeekViewHelper::getDayHeadersForWeek($startDate->toString());
 $lockedDays = ttWeekViewHelper::getLockedDaysForWeek($startDate->toString());
+// If we are not showing weekends, reduce the above arrays to 5 days only.
+$weekend_start_idx = $weekend_end_idx = 0;
+if (!$showWeekends) {
+  if (defined('WEEKEND_START_DAY')) {
+    $weekend_start_idx = (7 + WEEKEND_START_DAY - $weekStartDay) % 7;
+    $weekend_end_idx = (7 + WEEKEND_START_DAY + 1 - $weekStartDay) % 7;
+  } else {
+    $weekend_start_idx = 6 - $weekStartDay;
+    $weekend_end_idx = (7 - $weekStartDay) % 7;
+  }
+  unset($dayHeaders[$weekend_start_idx]);
+  unset($dayHeaders[$weekend_end_idx]);
+  unset($lockedDays[$weekend_start_idx]);
+  unset($lockedDays[$weekend_end_idx]);
+}
+
 // Get already existing records.
 $records = ttWeekViewHelper::getRecordsForInterval($startDate->toString(), $endDate->toString(), $showFiles);
 // Build data array for the table. Format is described in ttWeekViewHelper::getDataForWeekView function.
@@ -273,8 +290,16 @@ $table->setRowOptions(array('class'=>'tableHeaderCentered'));
 $table->setData($dataArray);
 // Add columns to table.
 $table->addColumn(new TableColumn('label', '', new LabelCellRenderer(), $dayTotals['label']));
+
+
+
 for ($i = 0; $i < 7; $i++) {
-  $table->addColumn(new TableColumn($dayHeaders[$i], $dayHeaders[$i], new WeekViewCellRenderer(), $dayTotals[$dayHeaders[$i]]));
+  if ($showWeekends)
+    $table->addColumn(new TableColumn($dayHeaders[$i], $dayHeaders[$i], new WeekViewCellRenderer(), $dayTotals[$dayHeaders[$i]]));
+  else {
+    if ($i <> $weekend_start_idx && $i <> $weekend_end_idx)
+      $table->addColumn(new TableColumn($dayHeaders[$i], $dayHeaders[$i], new WeekViewCellRenderer(), $dayTotals[$dayHeaders[$i]]));
+  }
 }
 $table->setInteractive(false);
 $form->addInputElement($table);

@@ -18,11 +18,13 @@ if ($request->isPost()) {
   $cl_week_note = (bool)$request->getParameter('week_note');
   $cl_week_list = (bool)$request->getParameter('week_list');
   $cl_notes = (bool)$request->getParameter('notes');
+  $cl_weekends = (bool)$request->getParameter('weekends');
 } else {
   $cl_week_menu =  $config->getDefinedValue('week_menu');
   $cl_week_note = $config->getDefinedValue('week_note');
   $cl_week_list = $config->getDefinedValue('week_list');
   $cl_notes = $config->getDefinedValue('week_notes');
+  $cl_weekends = $config->getDefinedValue('weekends');
 }
 
 $form = new Form('weekViewForm');
@@ -30,6 +32,7 @@ $form->addInput(array('type'=>'checkbox','name'=>'week_menu','value'=>$cl_week_m
 $form->addInput(array('type'=>'checkbox','name'=>'week_note','value'=>$cl_week_note));
 $form->addInput(array('type'=>'checkbox','name'=>'week_list','value'=>$cl_week_list));
 $form->addInput(array('type'=>'checkbox','name'=>'notes','value'=>$cl_notes));
+$form->addInput(array('type'=>'checkbox','name'=>'weekends','value'=>$cl_weekends));
 $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 
 if ($request->isPost()){
@@ -38,6 +41,7 @@ if ($request->isPost()){
   $config->setDefinedValue('week_note', $cl_week_note);
   $config->setDefinedValue('week_list', $cl_week_list);
   $config->setDefinedValue('week_notes', $cl_notes);
+  $config->setDefinedValue('weekends', $cl_weekends);
   if (!$user->updateGroup(array('config' => $config->getConfig()))) {
     $err->add($i18n->get('error.db'));
   }

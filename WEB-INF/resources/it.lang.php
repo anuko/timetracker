@@ -233,6 +233,7 @@ $i18n_key_words = array(
 'label.week_note' => 'Nota settimanale',
 'label.week_list' => 'Lista settimanale',
 // TODO: translate the following.
+// 'label.weekends' => 'Weekends',
 // 'label.work_units' => 'Work units',
 // 'label.work_units_short' => 'Units',
 'label.totals_only' => 'Solo i totali',

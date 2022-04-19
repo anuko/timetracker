@@ -209,6 +209,7 @@ $i18n_key_words = array(
 'label.mark_paid' => 'Отметить оплату',
 'label.week_note' => 'Комментарий недели',
 'label.week_list' => 'Список недели',
+'label.weekends' => 'Выходные',
 'label.work_units' => 'Единицы работы',
 'label.work_units_short' => 'Единицы',
 'label.totals_only' => 'Только итоги',

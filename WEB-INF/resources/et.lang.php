@@ -244,6 +244,8 @@ $i18n_key_words = array(
 'label.mark_paid' => 'Märgi makstuks',
 'label.week_note' => 'Nädala märge',
 'label.week_list' => 'Nädala nimekiri',
+// TODO: translate the following:
+// 'label.weekends' => 'Weekends',
 'label.work_units' => 'Töö ühikud',
 'label.work_units_short' => 'Ühikud',
 'label.totals_only' => 'Ainult summad',
