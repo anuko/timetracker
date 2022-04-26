@@ -209,8 +209,7 @@ $i18n_key_words = array(
 'label.mark_paid' => 'Markeer als betaald',
 'label.week_note' => 'Week aantekening',
 'label.week_list' => 'Week overzicht',
-// TODO: translate the following.
-// 'label.weekends' => 'Weekends',
+'label.weekends' => 'Weekeinden',
 'label.work_units' => 'Werk eenheid',
 'label.work_units_short' => 'Eenheid',
 'label.totals_only' => 'Alleen totalen',
