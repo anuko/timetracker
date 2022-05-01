@@ -1,0 +1,9 @@
+Copy all files with api_*.php 
+Add config to WEBINF/config.php
+
+// API Module
+define('JWT_KEY', 'LjtkLTGGSUudOxI03tcoZdf3yy8vgdMS7PlZaXDB');
+define('JWT_ALGO', 'HS256');
+
+
+Copy composer-lock and composer.json files

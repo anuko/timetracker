@@ -1,6 +1,15 @@
 <?php
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+
+header("Access-Control-Allow-Headers: Content-Type, Origin, Authorization, X-Auth-Token");
+header('Access-Control-Allow-Credentials: true');
+header("Access-Control-Allow-Origin: *");
+
+if($_SERVER['REQUEST_METHOD']=="OPTIONS"){
+    exit(0);
+}
+
 require_once('initialize.php');
 require_once('api_lib.php');
 require_once 'api_route_projects.php';
@@ -20,7 +29,7 @@ if($domain == "authenticate"){
     $loginSucceeded = $auth->doLogin($body['username'], $body['password']);
     if ($loginSucceeded) {
         $user = new ttUser(null, $auth->getUserId());
-        echo json_encode(array('decodedToken'=>generate_decoded_token($user)));
+        echo json_encode(array('token'=>generate_decoded_token($user)));
     } else {
         send_error('error.auth');
     }
