@@ -37,7 +37,7 @@ if($domain == "authenticate"){
 }else {
     $decodedTokenExistsInHeader = preg_match('/Bearer\s(\S+)/', $_SERVER['HTTP_AUTHORIZATION'], $matcheddecodedTokenArr);
     if (! $decodedTokenExistsInHeader) {
-        send_error('error.jwt_ecoded_token_not_found');
+        send_error('error.jwt_token_not_found');
         exit;
     }else {
         $decodedToken = decode_token($matcheddecodedTokenArr[1]);
