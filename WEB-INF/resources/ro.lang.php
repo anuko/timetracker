@@ -482,6 +482,8 @@ $i18n_key_words = array(
 // 'form.reports.include_pending' => 'pending',
 'form.reports.select_period' => 'Alege perioada',
 'form.reports.set_period' => 'sau introdu intervalul de date',
+// TODO: translate the following.
+// 'form.reports.note_containing' => 'Note containing',
 'form.reports.show_fields' => 'Arata campuri',
 // TODO: translate the following.
 // 'form.reports.time_fields' => 'Time fields',

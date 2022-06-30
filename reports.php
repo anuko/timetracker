@@ -239,6 +239,11 @@ $form->addInput(array('type'=>'combobox',
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start_date'));
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'end_date'));
 
+// Add control for notes containing.
+if (isTrue('FILTER_BY_NOTES_DEBUG')) {
+  $form->addInput(array('type'=>'text','maxlength'=>'256','name'=>'notes_containing'));
+}
+
 // Add checkboxes for "Show fields" block.
 if ($showClient)
   $form->addInput(array('type'=>'checkbox','name'=>'chclient'));

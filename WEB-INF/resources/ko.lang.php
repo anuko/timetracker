@@ -480,6 +480,8 @@ $i18n_key_words = array(
 // 'form.reports.include_pending' => 'pending',
 'form.reports.select_period' => '시간 기간을 선택',
 'form.reports.set_period' => '혹은 날짜를 설정',
+// TODO: translate the following.
+// 'form.reports.note_containing' => 'Note containing',
 'form.reports.show_fields' => '필드들을 보기',
 // TODO: translate the following.
 // 'form.reports.time_fields' => 'Time fields',

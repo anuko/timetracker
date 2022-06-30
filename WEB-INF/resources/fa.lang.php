@@ -480,6 +480,8 @@ $i18n_key_words = array(
 // 'form.reports.include_pending' => 'pending',
 'form.reports.select_period' => 'انتخاب بازه زمانی',
 'form.reports.set_period' => 'یا تعیین تاریخ',
+// TODO: translate the following.
+// 'form.reports.note_containing' => 'Note containing',
 'form.reports.show_fields' => 'نمایش فیلدها',
 // TODO: translate the following.
 // 'form.reports.time_fields' => 'Time fields',

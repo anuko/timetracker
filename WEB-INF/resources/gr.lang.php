@@ -451,6 +451,8 @@ $i18n_key_words = array(
 // 'form.reports.include_pending' => 'pending',
 'form.reports.select_period' => 'Επιλογή χρονικής περιόδου',
 'form.reports.set_period' => 'ή εύρος ημερομηνιών',
+// TODO: translate the following.
+// 'form.reports.note_containing' => 'Note containing',
 'form.reports.show_fields' => 'Εμφάνιση πεδίων',
 // TODO: translate the following.
 // 'form.reports.time_fields' => 'Time fields',

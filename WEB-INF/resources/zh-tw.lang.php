@@ -474,6 +474,8 @@ $i18n_key_words = array(
 // 'form.reports.include_pending' => 'pending',
 'form.reports.select_period' => '選擇時間段',
 'form.reports.set_period' => '或設定日期',
+// TODO: translate the following.
+// 'form.reports.note_containing' => 'Note containing',
 'form.reports.show_fields' => '顯示欄目',
 // TODO: translate the following.
 // 'form.reports.time_fields' => 'Time fields',

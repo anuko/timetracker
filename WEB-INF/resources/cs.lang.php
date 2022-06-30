@@ -482,6 +482,8 @@ $i18n_key_words = array(
 // 'form.reports.include_pending' => 'pending',
 'form.reports.select_period' => 'Výberte období',
 'form.reports.set_period' => 'nebo určete dny',
+// TODO: translate the following.
+// 'form.reports.note_containing' => 'Note containing',
 'form.reports.show_fields' => 'Zobrazit pole',
 // TODO: translate the following.
 // 'form.reports.time_fields' => 'Time fields',

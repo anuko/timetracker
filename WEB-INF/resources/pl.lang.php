@@ -467,6 +467,8 @@ $i18n_key_words = array(
 // 'form.reports.include_pending' => 'pending',
 'form.reports.select_period' => 'Wybierz okres',
 'form.reports.set_period' => 'lub ustaw daty',
+// TODO: translate the following.
+// 'form.reports.note_containing' => 'Note containing',
 'form.reports.show_fields' => 'Pokaż pola',
 // TODO: translate the following.
 // 'form.reports.time_fields' => 'Time fields',

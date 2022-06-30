@@ -456,6 +456,7 @@ $i18n_key_words = array(
 // 'form.reports.include_pending' => 'pending',
 // 'form.reports.select_period' => 'Select time period',
 // 'form.reports.set_period' => 'or set dates',
+// 'form.reports.note_containing' => 'Note containing',
 // 'form.reports.show_fields' => 'Show fields',
 // 'form.reports.time_fields' => 'Time fields',
 // 'form.reports.user_fields' => 'User fields',

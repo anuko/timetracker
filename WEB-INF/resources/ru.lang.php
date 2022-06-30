@@ -412,6 +412,7 @@ $i18n_key_words = array(
 'form.reports.include_pending' => 'в ожидании',
 'form.reports.select_period' => 'Выберите интервал времени',
 'form.reports.set_period' => 'или укажите даты',
+'form.reports.note_containing' => 'Комментарий содержит',
 'form.reports.show_fields' => 'Показывать поля',
 'form.reports.time_fields' => 'Поля времени',
 'form.reports.user_fields' => 'Поля пользователя',

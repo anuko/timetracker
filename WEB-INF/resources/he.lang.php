@@ -483,6 +483,8 @@ $i18n_key_words = array(
 // 'form.reports.include_pending' => 'pending',
 'form.reports.select_period' => 'בחר תקופת זמן',
 'form.reports.set_period' => 'או הגדר תאריכים',
+// TODO: translate the following.
+// 'form.reports.note_containing' => 'Note containing',
 'form.reports.show_fields' => 'הראה שדות',
 // TODO: translate the following.
 // 'form.reports.time_fields' => 'Time fields',

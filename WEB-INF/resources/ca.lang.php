@@ -474,6 +474,8 @@ $i18n_key_words = array(
 // 'form.reports.include_pending' => 'pending',
 'form.reports.select_period' => 'Seleccionar període de temps',
 'form.reports.set_period' => 'o establir dates',
+// TODO: translate the following.
+// 'form.reports.note_containing' => 'Note containing',
 'form.reports.show_fields' => 'Mostrar camps',
 // TODO: translate the following.
 // 'form.reports.time_fields' => 'Time fields',

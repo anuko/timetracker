@@ -358,6 +358,14 @@ License: See license.txt *}
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
+{if isTrue('FILTER_BY_NOTES_DEBUG')}
+  <tr class = "small-screen-label"><td><label for="notes_containing">{$i18n.form.reports.note_containing}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="notes_containing">{$i18n.form.reports.note_containing}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.notes_containing.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
 </table>
 <div class="form-control-separator"></div>
 <table class="centered-table">
