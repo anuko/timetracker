@@ -359,10 +359,10 @@ License: See license.txt *}
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
 {if isTrue('FILTER_BY_NOTES_DEBUG')}
-  <tr class = "small-screen-label"><td><label for="notes_containing">{$i18n.form.reports.note_containing}:</label></td></tr>
+  <tr class = "small-screen-label"><td><label for="note_containing">{$i18n.form.reports.note_containing}:</label></td></tr>
   <tr>
-    <td class="large-screen-label"><label for="notes_containing">{$i18n.form.reports.note_containing}:</label></td>
-    <td class="td-with-input">{$forms.reportForm.notes_containing.control}</td>
+    <td class="large-screen-label"><label for="note_containing">{$i18n.form.reports.note_containing}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.note_containing.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}

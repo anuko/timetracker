@@ -273,6 +273,7 @@ CREATE TABLE `tt_fav_reports` (
   `invoice` tinyint(4) default NULL,                     # whether to include invoiced, not invoiced, or all records
   `timesheet` tinyint(4) default NULL,                   # include records with a specific timesheet status, or all records
   `paid_status` tinyint(4) default NULL,                 # whether to include paid, not paid, or all records
+  `note_containing` varchar(80) default NULL,            # include only records with notes containing this text
   `users` text default NULL,                             # Comma-separated list of user ids. Nothing here means "all" users.
   `period` tinyint(4) default NULL,                      # selected period type for report
   `period_start` date default NULL,                      # period start
@@ -621,4 +622,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.21.2', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.21.7', now()); # TODO: change when structure changes.

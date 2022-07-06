@@ -116,6 +116,12 @@ class ttReportHelper {
       $user_list_part = " and l.user_id = ".$user->getUser();
     $user_list_part .= " and l.group_id = $group_id and l.org_id = $org_id";
 
+    // Prepare part for note_containing using LIKE operator.
+    $note_containing_part = '';
+    if (isset($options['note_containing']) && !empty($options['note_containing'])) {
+      $note_containing_part = " and l.comment like ".$mdb2->quote('%'.$options['note_containing'].'%');
+    }
+
     // Prepare sql query part for where.
     $dateFormat = $user->getDateFormat();
     if (isset($options['period']) && $options['period'])
@@ -127,7 +133,7 @@ class ttReportHelper {
         new ttDate($options['period_end'], $dateFormat));
     }
     $where = " where l.status = 1 and l.date >= '".$period->getStartDate()."' and l.date <= '".$period->getEndDate()."'".
-      " $user_list_part $dropdown_parts $cf_text_parts";
+      $user_list_part.$dropdown_parts.$cf_text_parts.$note_containing_part;
     return $where;
   }
 
@@ -198,6 +204,12 @@ class ttReportHelper {
       $user_list_part = " and ei.user_id = ".$user->getUser();
     $user_list_part .= " and ei.group_id = $group_id and ei.org_id = $org_id";
 
+    // Prepare part for note_containing using LIKE operator.
+    $note_containing_part = '';
+    if (isset($options['note_containing']) && !empty($options['note_containing'])) {
+      $note_containing_part = " and ei.name like ".$mdb2->quote('%'.$options['note_containing'].'%');
+    }
+
     // Prepare sql query part for where.
     $dateFormat = $user->getDateFormat();
     if (isset($options['period']) && $options['period'])
@@ -209,7 +221,7 @@ class ttReportHelper {
         new ttDate($options['period_end'], $dateFormat));
     }
     $where = " where ei.status = 1 and ei.date >= '".$period->getStartDate()."' and ei.date <= '".$period->getEndDate()."'".
-      " $user_list_part $dropdown_parts $cf_text_parts";
+      $user_list_part.$dropdown_parts.$cf_text_parts.$note_containing_part;
     return $where;
   }
 
@@ -1541,6 +1553,7 @@ class ttReportHelper {
     $options['period'] = $bean->getAttribute('period');
     $options['period_start'] = $bean->getAttribute('start_date');
     $options['period_end'] = $bean->getAttribute('end_date');
+    $options['note_containing'] = $bean->getAttribute('note_containing');
     $options['show_client'] = $bean->getAttribute('chclient');
     $options['show_invoice'] = $bean->getAttribute('chinvoice');
     $options['show_approved'] = $bean->getAttribute('chapproved');
