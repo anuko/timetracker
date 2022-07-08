@@ -1198,6 +1198,7 @@ if ($_POST) {
     ttExecute("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.21.0') set rights = replace(rights, ',update_work', '')");
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.21.2', modified = now() where param_name = 'version_db' and param_value = '1.21.0'");
     ttExecute("ALTER TABLE tt_fav_reports ADD COLUMN `note_containing` varchar(80) default NULL after `paid_status`");
+    ttExecute("UPDATE `tt_site_config` SET param_value = '1.21.7', modified = now() where param_name = 'version_db' and param_value = '1.21.2'");
   }
 
   if ($_POST["cleanup"]) {
