@@ -461,6 +461,7 @@ class ttOrgImportHelper {
           'invoice' => $attrs['INVOICE'],
           'timesheet' => $attrs['TIMESHEET'],
           'paid_status' => $attrs['PAID_STATUS'],
+          'note_containing' => $attrs['NOTE_CONTAINING'],
           'users' => $user_list,
           'period' => $attrs['PERIOD'],
           'from' => $attrs['PERIOD_START'],
@@ -1049,7 +1050,7 @@ class ttOrgImportHelper {
 
     $sql = "insert into tt_fav_reports".
       " (name, user_id, group_id, org_id, report_spec, client_id, project_id, task_id,".
-      " billable, approved, invoice, timesheet, paid_status, users, period, period_start, period_end,".
+      " billable, approved, invoice, timesheet, paid_status, note_containing, users, period, period_start, period_end,".
       " show_client, show_invoice, show_paid, show_ip,".
       " show_project, show_timesheet, show_start, show_duration, show_cost,".
       " show_task, show_end, show_note, show_approved, show_work_units,".
@@ -1060,7 +1061,7 @@ class ttOrgImportHelper {
       $mdb2->quote($fields['project']).", ".$mdb2->quote($fields['task']).", ".
       $mdb2->quote($fields['billable']).", ".$mdb2->quote($fields['approved']).", ".
       $mdb2->quote($fields['invoice']).", ".$mdb2->quote($fields['timesheet']).", ".
-      $mdb2->quote($fields['paid_status']).", ".
+      $mdb2->quote($fields['paid_status']).", ".$mdb2->quote($fields['note_containing']).", ".
       $mdb2->quote($fields['users']).", ".$mdb2->quote($fields['period']).", ".
       $mdb2->quote($fields['from']).", ".$mdb2->quote($fields['to']).", ".
       $fields['chclient'].", ".$fields['chinvoice'].", ".$fields['chpaid'].", ".$fields['chip'].", ".

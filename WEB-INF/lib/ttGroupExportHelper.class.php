@@ -566,6 +566,7 @@ class ttGroupExportHelper {
         $fav_report_part .= " invoice=\"".$fav_report['invoice']."\"";
         $fav_report_part .= " timesheet=\"".$fav_report['timesheet']."\"";
         $fav_report_part .= " paid_status=\"".$fav_report['paid_status']."\"";
+        $fav_report_part .= " note_containing=\"".$fav_report['note_containing']."\"";
         $fav_report_part .= " users=\"".$user_list."\"";
         $fav_report_part .= " period=\"".$fav_report['period']."\"";
         $fav_report_part .= " period_start=\"".$fav_report['period_start']."\"";
