@@ -167,6 +167,7 @@ class ttOrgImportHelper {
         // We get here when processing <project> tags for the current group.
 
         // Prepare a list of task ids.
+        $mapped_tasks = null;
         if ($attrs['TASKS']) {
           $tasks = explode(',', $attrs['TASKS']);
           foreach ($tasks as $id)
@@ -193,6 +194,7 @@ class ttOrgImportHelper {
         // We get here when processing <client> tags for the current group.
 
         // Prepare a list of project ids.
+        $mapped_projects = array();
         if ($attrs['PROJECTS']) {
           $projects = explode(',', $attrs['PROJECTS']);
           foreach ($projects as $id)
@@ -218,7 +220,6 @@ class ttOrgImportHelper {
 
       if ($name == 'USER') {
         // We get here when processing <user> tags for the current group.
-
         $role_id = $attrs['ROLE_ID'] === '0' ? $this->top_role_id :  $this->currentGroupRoleMap[$attrs['ROLE_ID']]; // 0 (not null) means top manager role.
 
         $user_id = $this->insertUser(array(
@@ -899,7 +900,7 @@ class ttOrgImportHelper {
     $org_id = (int) $fields['org_id'];
     $name = $fields['name'];
     $description = $fields['description'];
-    $tasks = $fields['tasks'];
+    $tasks = isset($fields['tasks']) ? $fields['tasks'] : array();
     $comma_separated = implode(',', $tasks); // This is a comma-separated list of associated task ids.
     $status = $fields['status'];
 
@@ -1014,6 +1015,7 @@ class ttOrgImportHelper {
     $address = $fields['address'];
     $tax = $fields['tax'];
     $projects = $fields['projects'];
+    $comma_separated = null;
     if ($projects)
       $comma_separated = implode(',', $projects); // This is a comma-separated list of associated projects ids.
     $status = $fields['status'];
