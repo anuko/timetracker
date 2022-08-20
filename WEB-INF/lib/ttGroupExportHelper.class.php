@@ -424,6 +424,7 @@ class ttGroupExportHelper {
         $custom_field_option_part = $this->indentation.'    '."<custom_field_option id=\"".$this->customFieldOptionMap[$option['id']]."\"";
         $custom_field_option_part .= " field_id=\"".$this->customFieldMap[$option['field_id']]."\"";
         $custom_field_option_part .= " value=\"".htmlspecialchars($option['value'])."\"";
+        $custom_field_option_part .= " status=\"".$option['status']."\"";
         $custom_field_option_part .= "></custom_field_option>\n";
         fwrite($this->file, $custom_field_option_part);
       }
