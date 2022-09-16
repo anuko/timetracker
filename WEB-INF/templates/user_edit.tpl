@@ -57,7 +57,11 @@ function setRate(element) {
 // handleClientRole - manages visibility and content of controls related to client role,
 // also hides and unselects projects when client role is selected.
 function handleClientRole() {
-  var selectedRoleId = document.getElementById("role").value;
+  var roleControl = document.getElementById("role");
+  if (roleControl == null) {
+    return;  // Role control not available, nothing to do...
+  }
+  var selectedRoleId = roleControl.value;
   var clientControl = document.getElementById("client");
   var clientBlock = document.getElementById("client_block");
   var nonClientBlock = document.getElementById("non_client_block");
