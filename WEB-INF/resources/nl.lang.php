@@ -411,8 +411,7 @@ $i18n_key_words = array(
 'form.reports.include_pending' => 'in afwachting',
 'form.reports.select_period' => 'Kies periode',
 'form.reports.set_period' => 'of stel datums in',
-// TODO: translate the following.
-// 'form.reports.note_containing' => 'Note containing',
+'form.reports.note_containing' => 'Notitie bevat',
 'form.reports.show_fields' => 'Toon velden',
 'form.reports.time_fields' => 'Tijd velden',
 'form.reports.user_fields' => 'Medewerker velden',
