@@ -500,6 +500,7 @@ $i18n_key_words = array(
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => '익스포트', // TODO: is this correct?
 // TODO: translate the following.
+// 'form.report.per_hour' => 'Per hour',
 // 'form.report.assign_to_invoice' => 'Assign to invoice',
 // 'form.report.assign_to_timesheet' => 'Assign to timesheet',
 

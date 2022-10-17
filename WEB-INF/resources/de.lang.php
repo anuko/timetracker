@@ -459,6 +459,8 @@ $i18n_key_words = array(
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Exportiere',
+// TODO: translate the following.
+// 'form.report.per_hour' => 'Per hour',
 'form.report.assign_to_invoice' => 'Zu Rechnung hinzufügen',
 // TODO: translate the following.
 // 'form.report.assign_to_timesheet' => 'Assign to timesheet',

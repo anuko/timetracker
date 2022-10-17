@@ -502,6 +502,7 @@ $i18n_key_words = array(
 // TODO: form.report.export is just "Export" now in the English file. Shorten this translation.
 'form.report.export' => 'ייצא נתונים בתבנית',
 // TODO: translate the following.
+// 'form.report.per_hour' => 'Per hour',
 // 'form.report.assign_to_invoice' => 'Assign to invoice',
 // 'form.report.assign_to_timesheet' => 'Assign to timesheet',
 

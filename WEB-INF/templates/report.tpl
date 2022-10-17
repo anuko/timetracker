@@ -38,7 +38,7 @@ License: See license.txt *}
   <tr>
     <th>{$i18n.label.date}</th>
   {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<th class="user-header">{$i18n.label.user}</th>{/if}
-  {* user custom fileds *}
+  {* user custom fields *}
   {if isset($custom_fields) && $custom_fields->userFields}
     {foreach $custom_fields->userFields as $userField}
       {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
@@ -48,7 +48,7 @@ License: See license.txt *}
   {if $bean->getAttribute('chclient')}<th class="client-header">{$i18n.label.client}</th>{/if}
   {if $bean->getAttribute('chproject')}<th class="project-header">{$i18n.label.project}</th>{/if}
   {if $bean->getAttribute('chtask')}<th class="task-header">{$i18n.label.task}</th>{/if}
-  {* time custom fileds *}
+  {* time custom fields *}
   {if isset($custom_fields) && $custom_fields->timeFields}
     {foreach $custom_fields->timeFields as $timeField}
       {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
@@ -60,7 +60,10 @@ License: See license.txt *}
   {if $bean->getAttribute('chduration')}<th>{$i18n.label.duration}</th>{/if}
   {if $bean->getAttribute('chunits')}<th>{$i18n.label.work_units_short}</th>{/if}
   {if $bean->getAttribute('chnote') && !$note_on_separate_row}<th class="note-header">{$i18n.label.note}</th>{/if}
-  {if $bean->getAttribute('chcost')}<th>{$i18n.label.cost}</th>{/if}
+  {if $bean->getAttribute('chcost')}
+    {if $show_cost_per_hour}<th>{$i18n.form.report.per_hour}</th>{/if}
+    <th>{$i18n.label.cost}</th>
+  {/if}
   {if $bean->getAttribute('chapproved')}<th>{$i18n.label.approved}</th>{/if}
   {if $bean->getAttribute('chpaid')}<th>{$i18n.label.paid}</th>{/if}
   {if $bean->getAttribute('chip')}<th>{$i18n.label.ip}</th>{/if}
@@ -79,7 +82,7 @@ License: See license.txt *}
   <tr>
     <th class="invoice-label">{$i18n.label.subtotal}</th>
         {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="text-cell subtotal-cell">{$subtotals[$prev_grouped_by]['user']|escape}</td>{/if}
-        {* user custom fileds *}
+        {* user custom fields *}
         {if isset($custom_fields) && $custom_fields->userFields}
           {foreach $custom_fields->userFields as $userField}
             {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
@@ -90,7 +93,7 @@ License: See license.txt *}
         {if $bean->getAttribute('chproject')}<td class="text-cell subtotal-cell">{$subtotals[$prev_grouped_by]['project']|escape}</td>{/if}
         {if $bean->getAttribute('chtask')}<td class="text-cell subtotal-cell">{$subtotals[$prev_grouped_by]['task']|escape}</td>{/if}
 
-        {* time custom fileds *}
+        {* time custom fields *}
           {if isset($custom_fields) && $custom_fields->timeFields}
            {foreach $custom_fields->timeFields as $timeField}
             {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
@@ -102,7 +105,10 @@ License: See license.txt *}
         {if $bean->getAttribute('chduration')}<td class="time-cell subtotal-cell">{$subtotals[$prev_grouped_by]['time']}</td>{/if}
         {if $bean->getAttribute('chunits')}<td class="number-cell subtotal-cell">{$subtotals[$prev_grouped_by]['units']}</td>{/if}
         {if $bean->getAttribute('chnote') && !$note_on_separate_row}<td></td>{/if}
-        {if $bean->getAttribute('chcost')}<td class="money-value-cell subtotal-cell">{if $user->can('manage_invoices') || $user->isClient()}{$subtotals[$prev_grouped_by]['cost']}{else}{$subtotals[$prev_grouped_by]['expenses']}{/if}</td>{/if}
+        {if $bean->getAttribute('chcost')}
+          {if $show_cost_per_hour}<td></td>{/if}
+          <td class="money-value-cell subtotal-cell">{if $user->can('manage_invoices') || $user->isClient()}{$subtotals[$prev_grouped_by]['cost']}{else}{$subtotals[$prev_grouped_by]['expenses']}{/if}</td>
+        {/if}
         {if $bean->getAttribute('chapproved')}<td></td>{/if}
         {if $bean->getAttribute('chpaid')}<td></td>{/if}
         {if $bean->getAttribute('chip')}<td></td>{/if}
@@ -120,7 +126,7 @@ License: See license.txt *}
   <tr>
     <td class="date-cell">{$item.date}</td>
     {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="text-cell">{$item.user|escape}</td>{/if}
-    {* user custom fileds *}
+    {* user custom fields *}
     {if isset($custom_fields) && $custom_fields->userFields}
       {foreach $custom_fields->userFields as $userField}
         {assign var="control_name" value='user_field_'|cat:$userField['id']}
@@ -131,7 +137,7 @@ License: See license.txt *}
     {if $bean->getAttribute('chclient')}<td class="text-cell">{$item.client|escape}</td>{/if}
     {if $bean->getAttribute('chproject')}<td class="text-cell">{$item.project|escape}</td>{/if}
     {if $bean->getAttribute('chtask')}<td class="text-cell">{$item.task|escape}</td>{/if}
-    {* time custom fileds *}
+    {* time custom fields *}
     {if isset($custom_fields) && $custom_fields->timeFields}
       {foreach $custom_fields->timeFields as $timeField}
         {assign var="control_name" value='time_field_'|cat:$timeField['id']}
@@ -144,7 +150,10 @@ License: See license.txt *}
     {if $bean->getAttribute('chduration')}<td class="time-cell">{$item.duration}</td>{/if}
     {if $bean->getAttribute('chunits')}<td class="number-cell">{$item.units}</td>{/if}
     {if $bean->getAttribute('chnote') && !$note_on_separate_row}<td class="text-cell">{$item.note|escape}</td>{/if}
-    {if $bean->getAttribute('chcost')}<td class="money-value-cell">{if $user->can('manage_invoices') || $user->isClient()}{$item.cost}{else}{$item.expense}{/if}</td>{/if}
+    {if $bean->getAttribute('chcost')}
+      {if $show_cost_per_hour}<td class="money-value-cell">{if $user->can('manage_invoices') || $user->isClient()}{$item.cost_per_hour}{/if}</td>{/if}
+      <td class="money-value-cell">{if $user->can('manage_invoices') || $user->isClient()}{$item.cost}{else}{$item.expense}{/if}</td>
+    {/if}
     {if $bean->getAttribute('chapproved')}<td class="yes-no-cell">{if $item.approved == 1}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>{/if}
     {if $bean->getAttribute('chpaid')}<td class="yes-no-cell">{if $item.paid == 1}{$i18n.label.yes}{else}{$i18n.label.no}{/if}</td>{/if}
     {if $bean->getAttribute('chip')}<td class="text-cell">{if $item.modified}{$item.modified_ip} {$item.modified}{else}{$item.created_ip} {$item.created}{/if}</td>{/if}
@@ -180,7 +189,7 @@ License: See license.txt *}
     <th class="invoice-label">{$i18n.label.subtotal}</th>
     {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td class="text-cell subtotal-cell">{$subtotals[$cur_grouped_by]['user']|escape}</td>{/if}
 
-    {* user custom fileds *}
+    {* user custom fields *}
     {if isset($custom_fields) && $custom_fields->userFields}
       {foreach $custom_fields->userFields as $userField}
         {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
@@ -190,7 +199,7 @@ License: See license.txt *}
     {if $bean->getAttribute('chclient')}<td class="text-cell subtotal-cell">{$subtotals[$cur_grouped_by]['client']|escape}</td>{/if}
     {if $bean->getAttribute('chproject')}<td class="text-cell subtotal-cell">{$subtotals[$cur_grouped_by]['project']|escape}</td>{/if}
     {if $bean->getAttribute('chtask')}<td class="text-cell subtotal-cell">{$subtotals[$cur_grouped_by]['task']|escape}</td>{/if}
-    {* time custom fileds *}
+    {* time custom fields *}
     {if isset($custom_fields) && $custom_fields->timeFields}
       {foreach $custom_fields->timeFields as $timeField}
         {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
@@ -202,7 +211,10 @@ License: See license.txt *}
     {if $bean->getAttribute('chduration')}<td class="time-cell subtotal-cell">{$subtotals[$cur_grouped_by]['time']}</td>{/if}
     {if $bean->getAttribute('chunits')}<td class="number-cell subtotal-cell">{$subtotals[$cur_grouped_by]['units']}</td>{/if}
     {if $bean->getAttribute('chnote') && !$note_on_separate_row}<td></td>{/if}
-    {if $bean->getAttribute('chcost')}<td class="money-value-cell subtotal-cell">{if $user->can('manage_invoices') || $user->isClient()}{$subtotals[$cur_grouped_by]['cost']}{else}{$subtotals[$cur_grouped_by]['expenses']}{/if}</td>{/if}
+    {if $bean->getAttribute('chcost')}
+      {if $show_cost_per_hour}<td></td>{/if}
+      <td class="money-value-cell subtotal-cell">{if $user->can('manage_invoices') || $user->isClient()}{$subtotals[$cur_grouped_by]['cost']}{else}{$subtotals[$cur_grouped_by]['expenses']}{/if}</td>
+    {/if}
     {if $bean->getAttribute('chapproved')}<td></td>{/if}
     {if $bean->getAttribute('chpaid')}<td></td>{/if}
     {if $bean->getAttribute('chip')}<td></td>{/if}
@@ -218,7 +230,7 @@ License: See license.txt *}
   <tr>
     <th class="invoice-label">{$i18n.label.total}</th>
     {if $user->can('view_reports') || $user->can('view_all_reports') || $user->isClient()}<td></td>{/if}
-    {* user custom fileds *}
+    {* user custom fields *}
     {if isset($custom_fields) && $custom_fields->userFields}
       {foreach $custom_fields->userFields as $userField}
         {assign var="checkbox_control_name" value='show_user_field_'|cat:$userField['id']}
@@ -228,7 +240,7 @@ License: See license.txt *}
     {if $bean->getAttribute('chclient')}<td></td>{/if}
     {if $bean->getAttribute('chproject')}<td></td>{/if}
     {if $bean->getAttribute('chtask')}<td></td>{/if}
-    {* time custom fileds *}
+    {* time custom fields *}
     {if isset($custom_fields) && $custom_fields->timeFields}
       {foreach $custom_fields->timeFields as $timeField}
         {assign var="checkbox_control_name" value='show_time_field_'|cat:$timeField['id']}
@@ -240,7 +252,10 @@ License: See license.txt *}
     {if $bean->getAttribute('chduration')}<td class="time-cell subtotal-cell">{$totals['time']}</td>{/if}
     {if $bean->getAttribute('chunits')}<td class="number-cell subtotal-cell">{$totals['units']}</td>{/if}
     {if $bean->getAttribute('chnote') && !$note_on_separate_row}<td></td>{/if}
-    {if $bean->getAttribute('chcost')}<td class="money-value-cell subtotal-cell">{$user->currency|escape} {if $user->can('manage_invoices') || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>{/if}
+    {if $bean->getAttribute('chcost')}
+      {if $show_cost_per_hour}<td></td>{/if}
+      <td class="money-value-cell subtotal-cell">{$user->currency|escape} {if $user->can('manage_invoices') || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>
+    {/if}
     {if $bean->getAttribute('chapproved')}<td></td>{/if}
     {if $bean->getAttribute('chpaid')}<td></td>{/if}
     {if $bean->getAttribute('chip')}<td></td>{/if}

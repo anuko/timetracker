@@ -18,6 +18,7 @@ if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports') || 
 // End of access checks.
 
 $config = new ttConfigHelper($user->getConfig());
+$show_cost_per_hour = $config->getDefinedValue('report_cost_per_hour');
 
 if ($user->isPluginEnabled('ap')) {
   $cl_mark_approved_select_option = $request->getParameter('mark_approved_select_options', ($request->isPost() ? null : @$_SESSION['mark_approved_select_option']));
@@ -298,7 +299,11 @@ if ($bean->getAttribute('chfinish')) $colspan++;
 if ($bean->getAttribute('chduration')) $colspan++;
 if (!$user->getConfigOption('report_note_on_separate_row') && $bean->getAttribute('chnote')) $colspan++;
 if ($bean->getAttribute('chunits')) $colspan++;
-if ($bean->getAttribute('chcost')) $colspan++;
+if ($bean->getAttribute('chcost')) {
+  if ($show_cost_per_hour)
+    $colspan++;
+  $colspan++;
+}
 if ($bean->getAttribute('chapproved')) $colspan++;
 if ($bean->getAttribute('chpaid')) $colspan++;
 if ($bean->getAttribute('chip')) $colspan++;
@@ -316,6 +321,7 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('report_items', $report_items);
 $smarty->assign('subtotals', $subtotals);
 $smarty->assign('totals', $totals);
+$smarty->assign('show_cost_per_hour', $show_cost_per_hour);
 $smarty->assign('note_on_separate_row', $user->getConfigOption('report_note_on_separate_row'));
 $smarty->assign('colspan', $colspan);
 $smarty->assign('bean', $bean);

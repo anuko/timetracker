@@ -130,7 +130,7 @@ function fillDropdowns() {
   {foreach $time_records as $record}
   <tr {if !$record.billable}class="not-billable"{/if}>
     <td class="date-cell">{$record.date}</td>
-    {* record custom fileds *}
+    {* record custom fields *}
     {if $show_record_custom_fields && isset($custom_fields) && $custom_fields->timeFields}
       {foreach $custom_fields->timeFields as $timeField}
           {assign var="control_name" value='time_field_'|cat:$timeField['id']}

@@ -333,12 +333,19 @@ class ttReportHelper {
     // Handle cost.
     $includeCost = $options['show_cost'];
     if ($includeCost) {
-      if (MODE_TIME == $trackingMode)
+      $includeCostPerHour = $user->getConfigOption('report_cost_per_hour');
+      if (MODE_TIME == $trackingMode) {
+        if ($includeCostPerHour)
+          array_push($fields, "cast(l.billable * coalesce(u.rate, 0) as decimal(10,2)) as cost_per_hour");   // Use default user rate.
         array_push($fields, "cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost");   // Use default user rate.
-      else
+      } else {
+        if ($includeCostPerHour)
+          array_push($fields, "cast(l.billable * coalesce(upb.rate, 0) as decimal(10,2)) as cost_per_hour"); // Use project rate for user.
         array_push($fields, "cast(l.billable * coalesce(upb.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10,2)) as cost"); // Use project rate for user.
+      }
       array_push($fields, "null as expense"); 
     }
+
     // Add the fields used to determine if we show an edit icon for record.
     array_push($fields, 'l.approved');
     array_push($fields, 'l.timesheet_id');
@@ -501,6 +508,8 @@ class ttReportHelper {
       // Use the note field to print item name.
       if ($options['show_note'])
         array_push($fields, 'ei.name as note');
+      if ($user->getConfigOption('report_cost_per_hour'))
+        array_push($fields, 'null as cost_per_hour'); // null for cost_per_hour.
       array_push($fields, 'ei.cost as cost');
       array_push($fields, 'ei.cost as expense');
       // Add the fields used to determine if we show an edit icon for record.
