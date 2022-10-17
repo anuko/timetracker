@@ -21,6 +21,7 @@ if ($request->isPost()) {
   $cl_record_custom_fields = (bool)$request->getParameter('record_custom_fields');
   $cl_report_note_on_separate_row = (bool)$request->getParameter('report_note_on_separate_row');
   $cl_report_inactive_projects = (bool)($request->getParameter('report_inactive_projects'));
+  $cl_report_cost_per_hour = (bool)$request->getParameter('report_cost_per_hour');
   $cl_custom_css = trim($request->getParameter('custom_css'));
 } else {
   $cl_time_note_on_separate_row = $config->getDefinedValue('time_note_on_separate_row');
@@ -28,6 +29,7 @@ if ($request->isPost()) {
   $cl_record_custom_fields = $config->getDefinedValue('record_custom_fields');
   $cl_report_note_on_separate_row = $config->getDefinedValue('report_note_on_separate_row');
   $cl_report_inactive_projects = $config->getDefinedValue('report_inactive_projects');
+  $cl_report_cost_per_hour = $config->getDefinedValue('report_cost_per_hour');
   $cl_custom_css = $user->getCustomCss();
 }
 
@@ -49,6 +51,7 @@ $form->addInput(array('type'=>'checkbox','name'=>'record_custom_fields','value'=
 // Reports.
 $form->addInput(array('type'=>'checkbox','name'=>'report_note_on_separate_row','value'=>$cl_report_note_on_separate_row));
 $form->addInput(array('type'=>'checkbox','name'=>'report_inactive_projects','value'=>$cl_report_inactive_projects));
+$form->addInput(array('type'=>'checkbox','name'=>'report_cost_per_hour','value'=>$cl_report_cost_per_hour));
 // TODO: add PDF break controller here.
 
 $form->addInput(array('type'=>'textarea','name'=>'custom_css','value'=>$cl_custom_css));
@@ -66,6 +69,7 @@ if ($request->isPost()){
     $config->setDefinedValue('record_custom_fields', $cl_record_custom_fields);
     $config->setDefinedValue('report_note_on_separate_row', $cl_report_note_on_separate_row);
     $config->setDefinedValue('report_inactive_projects', $cl_report_inactive_projects);
+    $config->setDefinedValue('report_cost_per_hour', $cl_report_cost_per_hour);
     if ($user->updateGroup(array(
       'config' => $config->getConfig(),
       'custom_css' => $cl_custom_css))) {

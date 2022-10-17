@@ -587,5 +587,6 @@ $i18n_key_words = array(
 'form.display_options.note_on_separate_row' => 'Комментарий в отдельном ряду',
 'form.display_options.not_complete_days' => 'Незавершенные дни',
 'form.display_options.inactive_projects' => 'Неактивные проекты',
+'form.display_options.cost_per_hour' => 'Стоимость за час',
 'form.display_options.custom_css' => 'Пользовательская CSS',
 );

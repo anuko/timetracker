@@ -689,5 +689,6 @@ $i18n_key_words = array(
 // 'form.display_options.note_on_separate_row' => 'Note on separate row',
 // 'form.display_options.not_complete_days' => 'Not complete days',
 // 'form.display_options.inactive_projects' => 'Inactive projects',
+// 'form.display_options.cost_per_hour' => 'Cost per hour',
 // 'form.display_options.custom_css' => 'Custom CSS',
 );

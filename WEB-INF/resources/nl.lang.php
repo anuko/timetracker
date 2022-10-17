@@ -586,5 +586,7 @@ $i18n_key_words = array(
 'form.display_options.note_on_separate_row' => 'Notitie in aparte kolom', // Translator (Henk) comment: "kolom is the right word in Dutch."
 'form.display_options.not_complete_days' => 'Niet complete dagen',
 'form.display_options.inactive_projects' => 'Niet actieve projecten',
+// TODO: translate the following.
+// 'form.display_options.cost_per_hour' => 'Cost per hour',
 'form.display_options.custom_css' => 'Aangepaste CSS',
 );
