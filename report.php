@@ -18,7 +18,7 @@ if (!(ttAccessAllowed('view_own_reports') || ttAccessAllowed('view_reports') || 
 // End of access checks.
 
 $config = new ttConfigHelper($user->getConfig());
-$show_cost_per_hour = $config->getDefinedValue('report_cost_per_hour');
+$show_cost_per_hour = $config->getDefinedValue('report_cost_per_hour') && ($user->can('manage_invoices') || $user->isClient());
 
 if ($user->isPluginEnabled('ap')) {
   $cl_mark_approved_select_option = $request->getParameter('mark_approved_select_options', ($request->isPost() ? null : @$_SESSION['mark_approved_select_option']));

@@ -38,6 +38,7 @@ $bean = new ActionForm('reportBean', new Form('reportForm'), $request);
 $config = new ttConfigHelper($user->getConfig());
 $show_note_column = $bean->getAttribute('chnote') && !$config->getDefinedValue('report_note_on_separate_row');
 $show_note_row = $bean->getAttribute('chnote') && $config->getDefinedValue('report_note_on_separate_row');
+$show_cost_per_hour = $config->getDefinedValue('report_cost_per_hour') && ($user->can('manage_invoices') || $user->isClient());
 
 // There are 2 variations of report: totals only, or normal. Totals only means that the report
 // is grouped by either date, user, client, project, or task and user only needs to see subtotals by group.
@@ -152,6 +153,7 @@ if ($totals_only) {
   if ($bean->getAttribute('chduration')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.duration').'</td>'; }
   if ($bean->getAttribute('chunits')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.work_units_short').'</td>'; }
   if ($show_note_column) { $colspan++; $html .= '<td>'.$i18n->get('label.note').'</td>'; }
+  if ($bean->getAttribute('chcost') && $show_cost_per_hour) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('form.report.per_hour').'</td>'; }
   if ($bean->getAttribute('chcost')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.cost').'</td>'; }
   if ($bean->getAttribute('chapproved')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.approved').'</td>'; }
   if ($bean->getAttribute('chpaid')) { $colspan++; $html .= "<td $styleCentered>".$i18n->get('label.paid').'</td>'; }
@@ -266,6 +268,11 @@ if ($totals_only) {
     if ($bean->getAttribute('chduration')) $html .= "<td $styleRightAligned>".$item['duration'].'</td>';
     if ($bean->getAttribute('chunits')) $html .= "<td $styleRightAligned>".$item['units'].'</td>';
     if ($show_note_column) $html .= '<td>'.htmlspecialchars($item['note']).'</td>';
+    if ($bean->getAttribute('chcost') && $show_cost_per_hour) {
+      $html .= "<td $styleRightAligned>";
+      $html .= $item['cost_per_hour'];
+      $html .= '</td>';
+    }
     if ($bean->getAttribute('chcost')) {
       $html .= "<td $styleRightAligned>";
       if ($user->can('manage_invoices') || $user->isClient())

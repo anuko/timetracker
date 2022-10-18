@@ -20,6 +20,8 @@ if ($user->isPluginEnabled('cf')) {
   $custom_fields = new CustomFields();
 }
 
+$show_cost_per_hour = $user->getConfigOption('report_cost_per_hour') && ($user->can('manage_invoices') || $user->isClient());
+
 // Report settings are stored in session bean before we get here.
 $bean = new ActionForm('reportBean', new Form('reportForm'), $request);
 
@@ -123,6 +125,11 @@ if ('xml' == $type) {
       }
       if ($bean->getAttribute('chunits')) print "\t<units><![CDATA[".$item['units']."]]></units>\n";
       if ($bean->getAttribute('chnote')) print "\t<note><![CDATA[".$item['note']."]]></note>\n";
+      if ($bean->getAttribute('chcost') && $show_cost_per_hour) {
+        print "\t<cost_per_hour><![CDATA[";
+          print $item['cost_per_hour'];
+        print "]]></cost_per_hour>\n";
+      }
       if ($bean->getAttribute('chcost')) {
         print "\t<cost><![CDATA[";
         if ($user->can('manage_invoices') || $user->isClient())
@@ -213,7 +220,11 @@ if ('csv' == $type) {
     if ($bean->getAttribute('chduration')) print ',"'.$i18n->get('label.duration').'"';
     if ($bean->getAttribute('chunits')) print ',"'.$i18n->get('label.work_units_short').'"';
     if ($bean->getAttribute('chnote')) print ',"'.$i18n->get('label.note').'"';
-    if ($bean->getAttribute('chcost')) print ',"'.$i18n->get('label.cost').'"';
+    if ($bean->getAttribute('chcost')) {
+      if ($show_cost_per_hour)
+        print ',"'.$i18n->get('form.report.per_hour').'"';
+      print ',"'.$i18n->get('label.cost').'"';
+    }
     if ($bean->getAttribute('chapproved')) print ',"'.$i18n->get('label.approved').'"';
     if ($bean->getAttribute('chpaid')) print ',"'.$i18n->get('label.paid').'"';
     if ($bean->getAttribute('chip')) print ',"'.$i18n->get('label.ip').'"';
@@ -255,10 +266,13 @@ if ('csv' == $type) {
       if ($bean->getAttribute('chunits')) print ',"'.$item['units'].'"';
       if ($bean->getAttribute('chnote')) print ',"'.ttNeutralizeForCsv($item['note']).'"';
       if ($bean->getAttribute('chcost')) {
-        if ($user->can('manage_invoices') || $user->isClient())
+        if ($user->can('manage_invoices') || $user->isClient()) {
+          if ($show_cost_per_hour)
+            print ',"'.$item['cost_per_hour'].'"';
           print ',"'.$item['cost'].'"';
-        else
+        } else {
           print ',"'.$item['expense'].'"';
+        }
       }
       if ($bean->getAttribute('chapproved')) print ',"'.$item['approved'].'"';
       if ($bean->getAttribute('chpaid')) print ',"'.$item['paid'].'"';

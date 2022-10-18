@@ -613,6 +613,10 @@ class ttReportHelper {
         if($val['finish'] != '')
           $val['finish'] = ttTimeHelper::to12HourFormat($val['finish']);
       }
+      if (isset($val['cost_per_hour'])) {
+        if ('.' != $decimalMark)
+          $val['cost_per_hour'] = str_replace('.', $decimalMark, $val['cost_per_hour']);
+      }
       if (isset($val['cost'])) {
         if ('.' != $decimalMark)
           $val['cost'] = str_replace('.', $decimalMark, $val['cost']);
