@@ -49,7 +49,6 @@ License: See license.txt *}
       <span class="what-is-it-text"><a href="https://www.anuko.com/lp/tt_53.htm" target="_blank">{$i18n.label.what_is_it}</a></span>
     </td>
   </tr>
-{if defined('REPORT_COST_PER_HOUR')}
   <tr class = "small-screen-label"><td><label for="report_cost_per_hour">{$i18n.form.display_options.cost_per_hour}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="report_cost_per_hour">{$i18n.form.display_options.cost_per_hour}:</label></td>
@@ -58,7 +57,6 @@ License: See license.txt *}
       <span class="what-is-it-text"><a href="https://www.anuko.com/lp/tt_57.htm" target="_blank">{$i18n.label.what_is_it}</a></span>
     </td>
   </tr>
-{/if}
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   <tr><td><div class="form-control-separator"></div></td></tr>
   <tr><td class="sectionHeaderNoBorder" colspan="2">{$i18n.form.display_options.custom_css}</td></tr>
