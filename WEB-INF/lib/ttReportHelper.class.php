@@ -1037,6 +1037,7 @@ class ttReportHelper {
     $config = new ttConfigHelper($user->getConfig());
     $show_note_column = $options['show_note'] && !$config->getDefinedValue('report_note_on_separate_row');
     $show_note_row = $options['show_note'] && $config->getDefinedValue('report_note_on_separate_row');
+    $show_cost_per_hour = $options['show_cost'] && $config->getDefinedValue('report_cost_per_hour') && ($user->can('manage_invoices') || $user->isClient());
 
     $items = ttReportHelper::getItems($options);
     $grouping = ttReportHelper::grouping($options);
@@ -1085,6 +1086,7 @@ class ttReportHelper {
     if ($options['show_end']) $colspan++;
     if ($options['show_duration']) $colspan++;
     if ($options['show_work_units']) $colspan++;
+    if ($show_cost_per_hour) $colspan++;
     if ($options['show_cost']) $colspan++;
     if ($options['show_approved']) $colspan++;
     if ($options['show_paid']) $colspan++;
@@ -1201,6 +1203,8 @@ class ttReportHelper {
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.work_units_short').'</td>';
       if ($show_note_column)
         $body .= '<td style="'.$tableHeader.'">'.$i18n->get('label.note').'</td>';
+      if ($show_cost_per_hour)
+        $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('form.report.per_hour').'</td>';
       if ($options['show_cost'])
         $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->get('label.cost').'</td>';
       if ($options['show_approved'])
@@ -1263,6 +1267,7 @@ class ttReportHelper {
               if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['time'].'</td>';
               if ($options['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$prev_grouped_by]['units'].'</td>';
               if ($show_note_column) $body .= '<td></td>';
+              if ($show_cost_per_hour) $body .= '<td></td>';
               if ($options['show_cost']) {
                 $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
                 $body .= ($canViewReports || $isClient) ? $subtotals[$prev_grouped_by]['cost'] : $subtotals[$prev_grouped_by]['expenses'];
@@ -1318,6 +1323,8 @@ class ttReportHelper {
             $body .= '<td style="'.$cellRightAligned.'">'.$record['units'].'</td>';
           if ($show_note_column)
             $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['note']).'</td>';
+          if ($show_cost_per_hour)
+            $body .= '<td style="'.$cellRightAligned.'">'.$record['cost_per_hour'].'</td>';
           if ($options['show_cost'])
             $body .= '<td style="'.$cellRightAligned.'">'.$record['cost'].'</td>';
           if ($options['show_approved']) {
@@ -1382,6 +1389,7 @@ class ttReportHelper {
         if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['time'].'</td>';
         if ($options['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$subtotals[$cur_grouped_by]['units'].'</td>';
         if ($show_note_column) $body .= '<td></td>';
+        if ($show_cost_per_hour) $body .= '<td></td>';
         if ($options['show_cost']) {
           $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
           $body .= ($canViewReports || $isClient) ? $subtotals[$cur_grouped_by]['cost'] : $subtotals[$cur_grouped_by]['expenses'];
@@ -1424,6 +1432,7 @@ class ttReportHelper {
       if ($options['show_duration']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['time'].'</td>';
       if ($options['show_work_units']) $body .= '<td style="'.$cellRightAlignedSubtotal.'">'.$totals['units'].'</td>';
       if ($show_note_column) $body .= '<td></td>';
+      if ($show_cost_per_hour) $body .= '<td></td>';
       if ($options['show_cost']) {
         $body .= '<td nowrap style="'.$cellRightAlignedSubtotal.'">'.htmlspecialchars($user->currency).' ';
         $body .= ($canViewReports || $isClient) ? $totals['cost'] : $totals['expenses'];
