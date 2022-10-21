@@ -199,7 +199,7 @@ if ($request->isPost()) {
   if ($user->isPluginEnabled('cl') && ttRoleHelper::isClientRole($cl_role_id) && !$cl_client_id) $err->add($i18n->get('error.client'));
   if (!ttValidStatus($cl_status)) $err->add($i18n->get('error.field'), $i18n->get('label.status'));
   if (!ttValidFloat($cl_quota_percent, true)) $err->add($i18n->get('error.field'), $i18n->get('label.quota'));
-    // Validate input in user custom fields.
+  // Validate input in user custom fields.
   if (isset($custom_fields) && $custom_fields->userFields) {
     foreach ($userCustomFields as $userField) {
       // Validation is the same for text and dropdown fields.
