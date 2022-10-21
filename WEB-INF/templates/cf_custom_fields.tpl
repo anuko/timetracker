@@ -19,6 +19,8 @@ License: See license.txt *}
     <td>{$i18n.entity.time}</td>
       {elseif CustomFields::ENTITY_USER == $field['entity_type']}
     <td>{$i18n.entity.user}</td>
+      {elseif CustomFields::ENTITY_PROJECT == $field['entity_type']}
+    <td>{$i18n.entity.project}</td>
       {else}
     <td></td>
       {/if}
