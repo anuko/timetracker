@@ -315,6 +315,23 @@ if (isset($custom_fields) && $custom_fields->userFields) {
   }
 }
 
+// If we have projects custom fields - add controls for them.
+if (isset($custom_fields) && $custom_fields->projectFields) {
+  foreach ($custom_fields->projectFields as $projectField) {
+    $field_name = 'project_field_'.$projectField['id'];
+    $checkbox_field_name = 'show_'.$field_name;
+    if ($projectField['type'] == CustomFields::TYPE_TEXT) {
+      $form->addInput(array('type'=>'text','name'=>$field_name,));
+    } elseif ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+      $form->addInput(array('type'=>'combobox','name'=>$field_name,
+      'data'=>CustomFields::getOptions($projectField['id']),
+      'empty'=>array(''=>$i18n->get('dropdown.all'))));
+    }
+    // Also add a checkbox (to print the field or not).
+    $form->addInput(array('type'=>'checkbox','name'=>$checkbox_field_name));
+  }
+}
+
 // Add group by control.
 $group_by_options['no_grouping'] = $i18n->get('form.reports.group_by_no');
 $group_by_options['date'] = $i18n->get('form.reports.group_by_date');

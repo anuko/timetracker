@@ -415,6 +415,8 @@ $i18n_key_words = array(
 'form.reports.show_fields' => 'Toon velden',
 'form.reports.time_fields' => 'Tijd velden',
 'form.reports.user_fields' => 'Medewerker velden',
+// TODO: translate the following.
+// 'form.reports.project_fields' => 'Project fields',
 'form.reports.group_by' => 'Groeperen op',
 'form.reports.group_by_no' => '--- niet groeperen ---',
 'form.reports.group_by_date' => 'datum',

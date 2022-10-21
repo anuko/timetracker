@@ -419,6 +419,8 @@ $i18n_key_words = array(
 'form.reports.show_fields' => 'Exibir campos',
 'form.reports.time_fields' => 'Campos de tempo',
 'form.reports.user_fields' => 'Campos de usuário',
+// TODO: translate the following.
+// 'form.reports.project_fields' => 'Project fields',
 'form.reports.group_by' => 'Agrupar por',
 'form.reports.group_by_no' => '--- sem agrupar ---',
 'form.reports.group_by_date' => 'data',

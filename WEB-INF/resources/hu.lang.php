@@ -482,6 +482,7 @@ $i18n_key_words = array(
 // 'form.reports.show_fields' => 'Show fields',
 // 'form.reports.time_fields' => 'Time fields',
 // 'form.reports.user_fields' => 'User fields',
+// 'form.reports.project_fields' => 'Project fields',
 'form.reports.group_by' => 'Csoportosítva',
 'form.reports.group_by_no' => '--- csoportosítás nélkül ---',
 'form.reports.group_by_date' => 'dátum',

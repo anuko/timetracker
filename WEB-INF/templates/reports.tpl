@@ -245,9 +245,6 @@ function handleCheckboxes() {
 }
 </script>
 
-{* Copyright (c) Anuko International Ltd. https://www.anuko.com
-License: See license.txt *}
-
 {$forms.reportForm.open}
 <table class="centered-table">
   <tr><td class="text-cell">{$i18n.label.fav_report}:</td></tr>
@@ -508,6 +505,19 @@ License: See license.txt *}
   <tr class = "small-screen-label"><td><label for="{$control_name}">{$userField['label']|escape}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="{$control_name}">{$userField['label']|escape}:</label></td>
+    <td class="td-with-input">{$forms.reportForm.$control_name.control} {$forms.reportForm.$checkbox_control_name.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+  {/foreach}
+{/if}
+{if isset($custom_fields) && $custom_fields->projectFields}
+  <tr><td colspan="2"><div class="section-header">{$i18n.form.reports.project_fields}</div></td></tr>
+  {foreach $custom_fields->projectFields as $projectField}
+    {assign var="control_name" value='project_field_'|cat:$projectField['id']}
+    {assign var="checkbox_control_name" value='show_project_field_'|cat:$projectField['id']}
+  <tr class = "small-screen-label"><td><label for="{$control_name}">{$projectField['label']|escape}:</label></td></tr>
+  <tr>
+    <td class="large-screen-label"><label for="{$control_name}">{$projectField['label']|escape}:</label></td>
     <td class="td-with-input">{$forms.reportForm.$control_name.control} {$forms.reportForm.$checkbox_control_name.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>

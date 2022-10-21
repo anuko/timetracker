@@ -486,6 +486,7 @@ $i18n_key_words = array(
 // TODO: translate the following.
 // 'form.reports.time_fields' => 'Time fields',
 // 'form.reports.user_fields' => 'User fields',
+// 'form.reports.project_fields' => 'Project fields',
 'form.reports.group_by' => 'گروه بندی شده با',
 'form.reports.group_by_no' => '--- بدون گروه ---',
 'form.reports.group_by_date' => 'تاریخ',

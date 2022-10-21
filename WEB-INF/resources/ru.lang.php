@@ -416,6 +416,7 @@ $i18n_key_words = array(
 'form.reports.show_fields' => 'Показывать поля',
 'form.reports.time_fields' => 'Поля времени',
 'form.reports.user_fields' => 'Поля пользователя',
+'form.reports.project_fields' => 'Поля проекта',
 'form.reports.group_by' => 'Группировать по',
 'form.reports.group_by_no' => '--- без группировки ---',
 'form.reports.group_by_date' => 'дате',
