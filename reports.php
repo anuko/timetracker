@@ -316,7 +316,7 @@ if (isset($custom_fields) && $custom_fields->userFields) {
 }
 
 // If we have projects custom fields - add controls for them.
-if (isset($custom_fields) && $custom_fields->projectFields) {
+if ($showProject && isset($custom_fields) && $custom_fields->projectFields) {
   foreach ($custom_fields->projectFields as $projectField) {
     $field_name = 'project_field_'.$projectField['id'];
     $checkbox_field_name = 'show_'.$field_name;

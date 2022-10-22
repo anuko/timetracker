@@ -510,7 +510,7 @@ function handleCheckboxes() {
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
   {/foreach}
 {/if}
-{if isset($custom_fields) && $custom_fields->projectFields}
+{if $show_project && isset($custom_fields) && $custom_fields->projectFields}
   <tr><td colspan="2"><div class="section-header">{$i18n.form.reports.project_fields}</div></td></tr>
   {foreach $custom_fields->projectFields as $projectField}
     {assign var="control_name" value='project_field_'|cat:$projectField['id']}
