@@ -166,7 +166,7 @@ class ttProjectHelper {
   }
   
   
-  // delete - deletes things associated with a project and marks the project as deleted. 
+  // delete - deletes things associated with a project and marks the project and its custom fields as deleted.
   static function delete($id) {
     global $user;
     $mdb2 = getConnection();

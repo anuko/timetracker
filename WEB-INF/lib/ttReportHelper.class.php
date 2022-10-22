@@ -108,6 +108,30 @@ class ttReportHelper {
       }
     }
 
+    // Add project custom fields.
+    if (isset($custom_fields) && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        $field_value = $options[$field_name];
+        if ($projectField['type'] == CustomFields::TYPE_DROPDOWN && $field_value) {
+          $cfoTable = 'cfo'.$projectField['id'];
+          $dropdown_parts .= " and $cfoTable.id = $field_value";
+        }
+      }
+    }
+
+    // Continue preparing part for text custom fields using LIKE operator.
+    if (isset($custom_fields) && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        $field_value = $options[$field_name];
+        if ($projectField['type'] == CustomFields::TYPE_TEXT && $field_value) {
+          $ecfTableName = 'ecf'.$projectField['id'];
+          $cf_text_parts .= " and $ecfTableName.value like ".$mdb2->quote("%$field_value%");
+        }
+      }
+    }
+
     // Prepare sql query part for user list.
     $userlist = isset($options['users']) ? $options['users'] : '-1';
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
@@ -191,6 +215,30 @@ class ttReportHelper {
         $field_value = $options[$field_name];
         if ($userField['type'] == CustomFields::TYPE_TEXT && $field_value) {
           $ecfTableName = 'ecf'.$userField['id'];
+          $cf_text_parts .= " and $ecfTableName.value like ".$mdb2->quote("%$field_value%");
+        }
+      }
+    }
+
+    // Add project custom fields.
+    if (isset($custom_fields) && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        $field_value = $options[$field_name];
+        if ($projectField['type'] == CustomFields::TYPE_DROPDOWN && $field_value) {
+          $cfoTable = 'cfo'.$projectField['id'];
+          $dropdown_parts .= " and $cfoTable.id = $field_value";
+        }
+      }
+    }
+
+    // Continue prparing parts for text custom fields using LIKE operator.
+    if (isset($custom_fields) && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        $field_value = $options[$field_name];
+        if ($projectField['type'] == CustomFields::TYPE_TEXT && $field_value) {
+          $ecfTableName = 'ecf'.$projectField['id'];
           $cf_text_parts .= " and $ecfTableName.value like ".$mdb2->quote("%$field_value%");
         }
       }
@@ -306,6 +354,22 @@ class ttReportHelper {
         }
       }
     }
+    // Add project custom fields.
+    if (isset($custom_fields) && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        $checkbox_field_name = 'show_'.$field_name;
+        if ($options[$checkbox_field_name] || ttReportHelper::groupingBy($field_name, $options)) {
+          if ($projectField['type'] == CustomFields::TYPE_TEXT) {
+            $ecfTableName = 'ecf'.$projectField['id'];
+            array_push($fields, "$ecfTableName.value as $field_name");
+          } elseif ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTableName = 'cfo'.$projectField['id'];
+            array_push($fields, "$cfoTableName.value as $field_name");
+          }
+        }
+      }
+    }
     // Add start time.
     if ($options['show_start']) {
       array_push($fields, "l.start as unformatted_start");
@@ -372,8 +436,7 @@ class ttReportHelper {
 
     // Prepare sql query part for left joins.
     $left_joins = null;
-    // Left joins for custom fields.
-    // 1 join is required for each text field, 2 joins for each dropdown.
+    // Left joins for user custom fields.
     if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
@@ -388,6 +451,26 @@ class ttReportHelper {
             $cfoTable = 'cfo'.$userField['id'];
             // Add two joins for each dropdown field.
             $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = l.user_id and $ecfTable.field_id = ".$userField['id'].")";
+            $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
+          }
+        }
+      }
+    }
+    // Left joins for project custom fields.
+    if (isset($custom_fields) && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        $checkbox_field_name = 'show_'.$field_name;
+        $entity_type = CustomFields::ENTITY_PROJECT;
+        if ($options[$field_name] || $options[$checkbox_field_name] || ttReportHelper::groupingBy($field_name, $options)) {
+          $ecfTable = 'ecf'.$projectField['id'];
+          if ($projectField['type'] == CustomFields::TYPE_TEXT) {
+            // Add one join for each text field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = l.project_id and $ecfTable.field_id = ".$projectField['id'].")";
+          } elseif ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTable = 'cfo'.$projectField['id'];
+            // Add two joins for each dropdown field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = l.project_id and $ecfTable.field_id = ".$projectField['id'].")";
             $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
           }
         }
@@ -495,6 +578,22 @@ class ttReportHelper {
           }
         }
       }
+      // Add project custom fields.
+      if (isset($custom_fields) && $custom_fields->projectFields) {
+        foreach ($custom_fields->projectFields as $projectField) {
+          $field_name = 'project_field_'.$projectField['id'];
+          $checkbox_field_name = 'show_'.$field_name;
+          if ($options[$checkbox_field_name] || ttReportHelper::groupingBy($field_name, $options)) {
+            if ($projectField['type'] == CustomFields::TYPE_TEXT) {
+              $ecfTableName = 'ecf'.$projectField['id'];
+              array_push($fields, "$ecfTableName.value as $field_name");
+            } elseif ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+              $cfoTableName = 'cfo'.$projectField['id'];
+              array_push($fields, "$cfoTableName.value as $field_name");
+            }
+          }
+        }
+      }
       if ($options['show_start']) {
         array_push($fields, 'null'); // null for unformatted_start.
         array_push($fields, 'null'); // null for start.
@@ -552,6 +651,26 @@ class ttReportHelper {
               $cfoTable = 'cfo'.$userField['id'];
               // Add two joins for each dropdown field.
               $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.user_id and $ecfTable.field_id = ".$userField['id'].")";
+              $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
+            }
+          }
+        }
+      }
+      // Left joins for project custom fields.
+      if (isset($custom_fields) && $custom_fields->projectFields) {
+        foreach ($custom_fields->projectFields as $projectField) {
+          $field_name = 'project_field_'.$projectField['id'];
+          $checkbox_field_name = 'show_'.$field_name;
+          $entity_type = CustomFields::ENTITY_PROJECT;
+          if ($options[$field_name] || $options[$checkbox_field_name] || ttReportHelper::groupingBy($field_name, $options)) {
+            $ecfTable = 'ecf'.$projectField['id'];
+            if ($projectField['type'] == CustomFields::TYPE_TEXT) {
+              // Add one join for each text field.
+              $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.project_id and $ecfTable.field_id = ".$projectField['id'].")";
+            } elseif ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+              $cfoTable = 'cfo'.$projectField['id'];
+              // Add two joins for each dropdown field.
+              $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.project_id and $ecfTable.field_id = ".$projectField['id'].")";
               $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
             }
           }
@@ -826,6 +945,26 @@ class ttReportHelper {
         }
       }
     }
+    if (isset($custom_fields) && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        $field_value = $options[$field_name];
+        $entity_type = CustomFields::ENTITY_PROJECT;
+        if ($field_value) {
+          // We need to add left joins when input is not null.
+          $ecfTable = 'ecf'.$projectField['id'];
+          if ($projectField['type'] == CustomFields::TYPE_TEXT) {
+            // Add one join for each text field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = l.project_id and $ecfTable.field_id = ".$projectField['id'].")";
+          } elseif ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTable = 'cfo'.$projectField['id'];
+            // Add two joins for each dropdown field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = l.project_id and $ecfTable.field_id = ".$projectField['id'].")";
+            $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
+          }
+        }
+      }
+    }
     if (isset($options['show_cost']) && $options['show_cost']) {
       if (MODE_TIME == $trackingMode) {
         $left_joins .= " left join tt_users u on (l.user_id = u.id)";
@@ -871,6 +1010,26 @@ class ttReportHelper {
               $cfoTable = 'cfo'.$userField['id'];
               // Add two joins for each dropdown field.
               $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.user_id and $ecfTable.field_id = ".$userField['id'].")";
+              $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
+            }
+          }
+        }
+      }
+      if (isset($custom_fields) && $custom_fields->projectFields) {
+        foreach ($custom_fields->projectFields as $projectField) {
+          $field_name = 'project_field_'.$projectField['id'];
+          $field_value = $options[$field_name];
+          $entity_type = CustomFields::ENTITY_PROJECT;
+          if ($field_value) {
+            // We need to add left joins when input is not null.
+            $ecfTable = 'ecf'.$projectField['id'];
+            if ($projectField['type'] == CustomFields::TYPE_TEXT) {
+              // Add one join for each text field.
+              $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.project_id and $ecfTable.field_id = ".$projectField['id'].")";
+            } elseif ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+              $cfoTable = 'cfo'.$projectField['id'];
+              // Add two joins for each dropdown field.
+              $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.project_id and $ecfTable.field_id = ".$projectField['id'].")";
               $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
             }
           }
@@ -1617,7 +1776,15 @@ class ttReportHelper {
         }
       }
 
-      // TODO: add project fields here.
+      // Project fields.
+      if ($custom_fields->projectFields) {
+        foreach ($custom_fields->projectFields as $projectField) {
+          $control_name = 'project_field_'.$projectField['id'];
+          $checkbox_control_name = 'show_'.$control_name;
+          $options[$control_name] =  $bean->getAttribute($control_name);
+          $options[$checkbox_control_name] =  $bean->getAttribute($checkbox_control_name);
+        }
+      }
     }
 
     $options['group_by1'] = $bean->getAttribute('group_by1');
@@ -1795,6 +1962,19 @@ class ttReportHelper {
         }
       }
     }
+    // Iterate through project custom fields.
+    if ($custom_fields && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        if ($dropdown_value == $field_name) {
+          if ($projectField['type'] == CustomFields::TYPE_TEXT) {
+            return (", ' - ', coalesce(ecf".$projectField['id'].".value, 'Null')");
+          } elseif ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+            return (", ' - ', coalesce(cfo".$projectField['id'].".value, 'Null')");
+          }
+        }
+      }
+    }
     // Iterate through time custom fields.
     if ($custom_fields && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
@@ -1825,6 +2005,19 @@ class ttReportHelper {
             return (", ' - ', coalesce(ecf".$userField['id'].".value, 'Null')");
           } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
             return (", ' - ', coalesce(cfo".$userField['id'].".value, 'Null')");
+          }
+        }
+      }
+    }
+    // Iterate through project custom fields.
+    if ($custom_fields && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        if ($dropdown_value == $field_name) {
+          if ($projectField['type'] == CustomFields::TYPE_TEXT) {
+            return (", ' - ', coalesce(ecf".$projectField['id'].".value, 'Null')");
+          } elseif ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+            return (", ' - ', coalesce(cfo".$projectField['id'].".value, 'Null')");
           }
         }
       }
@@ -1882,6 +2075,19 @@ class ttReportHelper {
         }
       }
     }
+    // Iterate through project custom fields.
+    if ($custom_fields && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        if ($dropdown_value == $field_name) {
+          if ($projectField['type'] == CustomFields::TYPE_TEXT) {
+            return (", ecf".$projectField['id'].".value as $field_name");
+          } elseif ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+            return (", cfo".$projectField['id'].".value as $field_name");
+          }
+        }
+      }
+    }
     // Iterate through time custom fields.
     if ($custom_fields && $custom_fields->timeFields) {
       foreach ($custom_fields->timeFields as $timeField) {
@@ -1912,6 +2118,19 @@ class ttReportHelper {
             return (", ecf".$userField['id'].".value as $field_name");
           } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
             return (", cfo".$userField['id'].".value as $field_name");
+          }
+        }
+      }
+    }
+    // Iterate through project custom fields.
+    if ($custom_fields && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        if ($dropdown_value == $field_name) {
+          if ($projectField['type'] == CustomFields::TYPE_TEXT) {
+            return (", ecf".$projectField['id'].".value as $field_name");
+          } elseif ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+            return (", cfo".$projectField['id'].".value as $field_name");
           }
         }
       }
@@ -2151,6 +2370,27 @@ class ttReportHelper {
         }
       }
     }
+    // Left joins for project custom fields.
+    if (isset($custom_fields) && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        $field_value = $options[$field_name];
+        $entity_type = CustomFields::ENTITY_PROJECT;
+        if ($field_value || ttReportHelper::groupingBy($field_name, $options)) {
+          // We need to add left joins when input is not null.
+          $ecfTable = 'ecf'.$projectField['id'];
+          if ($projectField['type'] == CustomFields::TYPE_TEXT) {
+            // Add one join for each text field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = l.project_id and $ecfTable.field_id = ".$projectField['id'].")";
+          } elseif ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTable = 'cfo'.$projectField['id'];
+            // Add two joins for each dropdown field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = l.project_id and $ecfTable.field_id = ".$projectField['id'].")";
+            $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
+          }
+        }
+      }
+    }
 
     // Prepare inner joins.
     $inner_joins = null;
@@ -2240,6 +2480,27 @@ class ttReportHelper {
         }
       }
     }
+    // Left joins for project custom fields.
+    if (isset($custom_fields) && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        $field_value = $options[$field_name];
+        $entity_type = CustomFields::ENTITY_PROJECT;
+        if ($field_value || ttReportHelper::groupingBy($field_name, $options)) {
+          // We need to add left joins when input is not null.
+          $ecfTable = 'ecf'.$projectField['id'];
+          if ($projectField['type'] == CustomFields::TYPE_TEXT) {
+            // Add one join for each text field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.project_id and $ecfTable.field_id = ".$projectField['id'].")";
+          } elseif ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+            $cfoTable = 'cfo'.$projectField['id'];
+            // Add two joins for each dropdown field.
+            $left_joins .= " left join tt_entity_custom_fields $ecfTable on ($ecfTable.entity_type = $entity_type and $ecfTable.entity_id = ei.project_id and $ecfTable.field_id = ".$projectField['id'].")";
+            $left_joins .= " left join tt_custom_field_options $cfoTable on ($cfoTable.field_id = $ecfTable.field_id and $cfoTable.id = $ecfTable.option_id)";
+          }
+        }
+      }
+    }
 
     return $left_joins;
   }
@@ -2296,6 +2557,15 @@ class ttReportHelper {
         $field_name = 'user_field_'.$userField['id'];
         if ($dropdown_value == $field_name) {
           return $userField['label'];
+        }
+      }
+    }
+    // Process project custom fields.
+    if ($custom_fields && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        if ($dropdown_value == $field_name) {
+          return $projectField['label'];
         }
       }
     }

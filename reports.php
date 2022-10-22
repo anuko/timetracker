@@ -357,6 +357,13 @@ if (isset($custom_fields) && $custom_fields->userFields) {
     $group_by_options[$field_name] = $userField['label'];
   }
 }
+// If we have project custom fields - add group by options for them.
+if (isset($custom_fields) && $custom_fields->projectFields) {
+  foreach ($custom_fields->projectFields as $projectField) {
+    $field_name = 'project_field_'.$projectField['id'];
+    $group_by_options[$field_name] = $projectField['label'];
+  }
+}
 $group_by_options_size = sizeof($group_by_options);
 $form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by1','data'=>$group_by_options));
 if ($group_by_options_size > 2) $form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by2','data'=>$group_by_options));

@@ -47,6 +47,13 @@ License: See license.txt *}
   {/if}
   {if $bean->getAttribute('chclient')}<th class="client-header">{$i18n.label.client}</th>{/if}
   {if $bean->getAttribute('chproject')}<th class="project-header">{$i18n.label.project}</th>{/if}
+  {* project custom fields *}
+  {if isset($custom_fields) && $custom_fields->projectFields}
+    {foreach $custom_fields->projectFields as $projectField}
+      {assign var="checkbox_control_name" value='show_project_field_'|cat:$projectField['id']}
+      {if $bean->getAttribute($checkbox_control_name)}<th>{{$projectField['label']|escape}}</th>{/if}
+    {/foreach}
+  {/if}
   {if $bean->getAttribute('chtask')}<th class="task-header">{$i18n.label.task}</th>{/if}
   {* time custom fields *}
   {if isset($custom_fields) && $custom_fields->timeFields}
@@ -91,6 +98,13 @@ License: See license.txt *}
         {/if}
         {if $bean->getAttribute('chclient')}<td class="text-cell subtotal-cell">{$subtotals[$prev_grouped_by]['client']|escape}</td>{/if}
         {if $bean->getAttribute('chproject')}<td class="text-cell subtotal-cell">{$subtotals[$prev_grouped_by]['project']|escape}</td>{/if}
+        {* project custom fields *}
+        {if isset($custom_fields) && $custom_fields->projectFields}
+          {foreach $custom_fields->projectFields as $projectField}
+            {assign var="checkbox_control_name" value='show_project_field_'|cat:$projectField['id']}
+            {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
+          {/foreach}
+        {/if}
         {if $bean->getAttribute('chtask')}<td class="text-cell subtotal-cell">{$subtotals[$prev_grouped_by]['task']|escape}</td>{/if}
 
         {* time custom fields *}
@@ -136,6 +150,14 @@ License: See license.txt *}
     {/if}
     {if $bean->getAttribute('chclient')}<td class="text-cell">{$item.client|escape}</td>{/if}
     {if $bean->getAttribute('chproject')}<td class="text-cell">{$item.project|escape}</td>{/if}
+    {* project custom fields *}
+    {if isset($custom_fields) && $custom_fields->projectFields}
+      {foreach $custom_fields->projectFields as $projectField}
+        {assign var="control_name" value='project_field_'|cat:$projectField['id']}
+        {assign var="checkbox_control_name" value='show_project_field_'|cat:$projectField['id']}
+        {if $bean->getAttribute($checkbox_control_name)}<td class="text-cell">{$item.$control_name|escape}</td>{/if}
+      {/foreach}
+    {/if}
     {if $bean->getAttribute('chtask')}<td class="text-cell">{$item.task|escape}</td>{/if}
     {* time custom fields *}
     {if isset($custom_fields) && $custom_fields->timeFields}
@@ -198,6 +220,13 @@ License: See license.txt *}
     {/if}
     {if $bean->getAttribute('chclient')}<td class="text-cell subtotal-cell">{$subtotals[$cur_grouped_by]['client']|escape}</td>{/if}
     {if $bean->getAttribute('chproject')}<td class="text-cell subtotal-cell">{$subtotals[$cur_grouped_by]['project']|escape}</td>{/if}
+    {* project custom fields *}
+    {if isset($custom_fields) && $custom_fields->projectFields}
+      {foreach $custom_fields->projectFields as $projectField}
+        {assign var="checkbox_control_name" value='show_project_field_'|cat:$projectField['id']}
+        {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
+      {/foreach}
+    {/if}
     {if $bean->getAttribute('chtask')}<td class="text-cell subtotal-cell">{$subtotals[$cur_grouped_by]['task']|escape}</td>{/if}
     {* time custom fields *}
     {if isset($custom_fields) && $custom_fields->timeFields}
@@ -239,6 +268,13 @@ License: See license.txt *}
     {/if}
     {if $bean->getAttribute('chclient')}<td></td>{/if}
     {if $bean->getAttribute('chproject')}<td></td>{/if}
+    {* project custom fields *}
+    {if isset($custom_fields) && $custom_fields->projectFields}
+      {foreach $custom_fields->projectFields as $projectField}
+        {assign var="checkbox_control_name" value='show_project_field_'|cat:$projectField['id']}
+        {if $bean->getAttribute($checkbox_control_name)}<td></td>{/if}
+      {/foreach}
+    {/if}
     {if $bean->getAttribute('chtask')}<td></td>{/if}
     {* time custom fields *}
     {if isset($custom_fields) && $custom_fields->timeFields}
