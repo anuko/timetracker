@@ -106,6 +106,14 @@ if ('xml' == $type) {
       }
       if ($bean->getAttribute('chclient')) print "\t<client><![CDATA[".$item['client']."]]></client>\n";
       if ($bean->getAttribute('chproject')) print "\t<project><![CDATA[".$item['project']."]]></project>\n";
+      // Project custom fields.
+      if (isset($custom_fields) && $custom_fields->projectFields) {
+        foreach ($custom_fields->projectFields as $projectField) {
+          $field_name = 'project_field_'.$projectField['id'];
+          $checkbox_control_name = 'show_'.$field_name;
+          if ($bean->getAttribute($checkbox_control_name)) print "\t<$field_name><![CDATA[".$item[$field_name]."]]></$field_name>\n";
+        }
+      }
       if ($bean->getAttribute('chtask')) print "\t<task><![CDATA[".$item['task']."]]></task>\n";
       // Time custom fields.
       if (isset($custom_fields) && $custom_fields->timeFields) {
@@ -206,6 +214,14 @@ if ('csv' == $type) {
     }
     if ($bean->getAttribute('chclient')) print ',"'.$i18n->get('label.client').'"';
     if ($bean->getAttribute('chproject')) print ',"'.$i18n->get('label.project').'"';
+    // Project custom field labels.
+    if (isset($custom_fields) && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
+        $checkbox_control_name = 'show_'.$field_name;
+        if ($bean->getAttribute($checkbox_control_name)) print ',"'.ttNeutralizeForCsv($projectField['label']).'"';
+      }
+    }
     if ($bean->getAttribute('chtask')) print ',"'.$i18n->get('label.task').'"';
     // Time custom field labels.
     if (isset($custom_fields) && $custom_fields->timeFields) {
@@ -246,6 +262,14 @@ if ('csv' == $type) {
       }
       if ($bean->getAttribute('chclient')) print ',"'.ttNeutralizeForCsv($item['client']).'"';
       if ($bean->getAttribute('chproject')) print ',"'.ttNeutralizeForCsv($item['project']).'"';
+      // Project custom fields.
+      if (isset($custom_fields) && $custom_fields->projectFields) {
+        foreach ($custom_fields->projectFields as $projectField) {
+          $field_name = 'project_field_'.$projectField['id'];
+          $checkbox_control_name = 'show_'.$field_name;
+          if ($bean->getAttribute($checkbox_control_name)) print ',"'.ttNeutralizeForCsv($item[$field_name]).'"';
+        }
+      }
       if ($bean->getAttribute('chtask')) print ',"'.ttNeutralizeForCsv($item['task']).'"';
       // Time custom fields.
       if (isset($custom_fields) && $custom_fields->timeFields) {

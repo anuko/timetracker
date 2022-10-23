@@ -232,7 +232,7 @@ class ttReportHelper {
       }
     }
 
-    // Continue prparing parts for text custom fields using LIKE operator.
+    // Continue preparing parts for text custom fields using LIKE operator.
     if (isset($custom_fields) && $custom_fields->projectFields) {
       foreach ($custom_fields->projectFields as $projectField) {
         $field_name = 'project_field_'.$projectField['id'];
@@ -2533,7 +2533,7 @@ class ttReportHelper {
 
     // First, try to get a label from a translation file, which is the most likely scenario
     // such as grouping by date, user, project, or task.
-    if (!ttStartsWith($dropdown_value, 'time_field_') && !ttStartsWith($dropdown_value, 'user_field_')) {
+    if (!ttContains($dropdown_value, '_field_')) {
       $key = 'label.'.$dropdown_value;
       $part = $i18n->get($key);
       if ($part) return $part;
@@ -2605,6 +2605,13 @@ class ttReportHelper {
   // makeGroupByXmlTag creates an xml tag for a totals only report using group_by1,
   // group_by2, and group_by3 values passed in $options.
   static function makeGroupByXmlTag($options) {
+    // Note: there is a problem with this function for custom fields.
+    // Returned xml tags are like "project_field_1134" and not their user entered labels.
+    // This is on purpose because we are trying to avoid potential XML parsing problems.
+    // See https://stackoverflow.com/questions/1478486/using-in-xml-element-name
+    // Perhaps review this if someone complains, but there are W3C standard (section 2.3) rules
+    // on names (including starting character).
+
     $tag = '';
     if ($options['group_by1'] != null && $options['group_by1'] != 'no_grouping') {
       // We have group_by1.

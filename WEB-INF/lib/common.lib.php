@@ -555,7 +555,7 @@ function ttMitigateCSRF() {
   return true;
 }
 
-// ttStartsWith functions checks if a string starts with a given substring.
+// ttStartsWith function checks if a string starts with a given substring.
 function ttStartsWith($string, $startString)
 {
   if (is_null($string))
@@ -565,12 +565,22 @@ function ttStartsWith($string, $startString)
   return (substr($string, 0, $len) === $startString);
 }
 
-// ttEndsWith functions checks if a string ends with a given substring.
+// ttEndsWith function checks if a string ends with a given substring.
 function ttEndsWith($string, $endString)
 {
   $len = strlen($endString);
   if ($len == 0) return true;
   return (substr($string, -$len) === $endString);
+}
+
+// ttContains functions checks if a string contains a given substring.
+function ttContains($string, $part)
+{
+  // Note: in php8 we can use str_contanins.
+  if (strpos($string, $part) !== false)
+    return true;
+
+  return false;
 }
 
 // ttDateToUserFormat converts a date from database format to user format.
