@@ -328,6 +328,17 @@ class ttFavReportHelper {
             $bean->setAttribute($checkbox_field_name, $checkbox_value);
           }
         }
+        // Project custom field settings.
+        if (isset($custom_fields) && $custom_fields->projectFields) {
+          foreach ($custom_fields->projectFields as $projectField) {
+            $field_name = 'project_field_'.$projectField['id'];
+            $checkbox_field_name = 'show_'.$field_name;
+            $field_value = ttFavReportHelper::getFieldSettingFromReportSpec($field_name, $report_spec);
+            $bean->setAttribute($field_name, $field_value);
+            $checkbox_value = ttFavReportHelper::getFieldSettingFromReportSpec($checkbox_field_name, $report_spec);
+            $bean->setAttribute($checkbox_field_name, $checkbox_value);
+          }
+        }
       }
 
       $bean->setAttribute('client', $val['client_id']);
@@ -571,6 +582,18 @@ class ttFavReportHelper {
     if (isset($custom_fields) && $custom_fields->userFields) {
       foreach ($custom_fields->userFields as $userField) {
         $field_name = 'user_field_'.$userField['id'];
+        $field_value = str_replace(',','&#44',$bean->getAttribute($field_name));
+        $checkbox_field_name = 'show_'.$field_name;
+        $checkbox_field_value = (int) $bean->getAttribute($checkbox_field_name);
+        if ($field_value) $reportSpecArray[] = $field_name.':'.$field_value;
+        if ($checkbox_field_value) $reportSpecArray[] = $checkbox_field_name.':1';
+      }
+    }
+
+    // Add project custom field settings.
+    if (isset($custom_fields) && $custom_fields->projectFields) {
+      foreach ($custom_fields->projectFields as $projectField) {
+        $field_name = 'project_field_'.$projectField['id'];
         $field_value = str_replace(',','&#44',$bean->getAttribute($field_name));
         $checkbox_field_name = 'show_'.$field_name;
         $checkbox_field_value = (int) $bean->getAttribute($checkbox_field_name);
