@@ -541,7 +541,17 @@ class ttFavReportHelper {
           $options[$checkbox_field_name] = $checkbox_value;
         }
       }
-      // TODO: add project fields here.
+      // Project fields.
+      if ($custom_fields && $custom_fields->projectFields) {
+        foreach ($custom_fields->projectFields as $projectField) {
+          $field_name = 'project_field_'.$projectField['id'];
+          $checkbox_field_name = 'show_'.$field_name;
+          $field_value = ttFavReportHelper::getFieldSettingFromReportSpec($field_name, $report_spec);
+          $options[$field_name] = $field_value;
+          $checkbox_value = ttFavReportHelper::getFieldSettingFromReportSpec($checkbox_field_name, $report_spec);
+          $options[$checkbox_field_name] = $checkbox_value;
+        }
+      }
     }
 
     // Adjust period_start and period_end to user date format.
