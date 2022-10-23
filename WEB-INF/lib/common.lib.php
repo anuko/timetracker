@@ -573,7 +573,7 @@ function ttEndsWith($string, $endString)
   return (substr($string, -$len) === $endString);
 }
 
-// ttContains functions checks if a string contains a given substring.
+// ttContains function checks if a string contains a given substring.
 function ttContains($string, $part)
 {
   // Note: in php8 we can use str_contanins.
