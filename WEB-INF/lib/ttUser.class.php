@@ -682,7 +682,7 @@ class ttUser {
 
     $name_part = $description_part = $currency_part = $lang_part = $decimal_mark_part = $date_format_part = $time_format_part =
       $week_start_part = $tracking_mode_part = $project_required_part = $record_type_part = $bcc_email_part =  $allow_ip_part =
-      $plugins_part = $config_part = $custom_css_part = $lock_spec_part = $holidays_part = $workday_minutes_part = '';
+      $password_complexity_part = $plugins_part = $config_part = $custom_css_part = $lock_spec_part = $holidays_part = $workday_minutes_part = '';
     if (isset($fields['name'])) $name_part = ', name = '.$mdb2->quote($fields['name']);
     if (isset($fields['description'])) $description_part = ', description = '.$mdb2->quote($fields['description']);
     if (isset($fields['currency'])) $currency_part = ', currency = '.$mdb2->quote($fields['currency']);

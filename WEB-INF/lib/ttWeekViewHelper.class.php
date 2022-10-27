@@ -167,22 +167,37 @@ class ttWeekViewHelper {
     global $i18n;
 
     $dataArray = array();
+    $includeWeekends = $user->isOptionEnabled('weekends');
     $includeNotes = $user->isOptionEnabled('week_notes');
 
     // Construct the first row for a brand new entry.
     $dataArray[] = array('row_id' => null,'label' => $i18n->get('form.week.new_entry').':'); // Insert row.
     // Insert empty cells with proper control ids.
-    for ($i = 0; $i < 7; $i++) {
-      $control_id = '0_'. $dayHeaders[$i];
-      $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+    if ($includeWeekends) {
+      for ($i = 0; $i < 7; $i++) {
+        $control_id = '0_'. $dayHeaders[$i];
+        $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+      }
+    } else {
+      for ($i = 1; $i < 6; $i++) {
+        $control_id = '0_'. $dayHeaders[$i];
+        $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+      }
     }
     if ($includeNotes) {
       // Construct the second row for daily comments for a brand new entry.
       $dataArray[] = array('row_id' => null,'label' => $i18n->get('label.notes').':'); // Insert row.
       // Insert empty cells with proper control ids.
-      for ($i = 0; $i < 7; $i++) {
-        $control_id = '1_'. $dayHeaders[$i];
-        $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+      if ($includeWeekends) {
+        for ($i = 0; $i < 7; $i++) {
+          $control_id = '1_'. $dayHeaders[$i];
+          $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+        }
+      } else {
+        for ($i = 1; $i < 6; $i++) {
+          $control_id = '1_'. $dayHeaders[$i];
+          $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+        }
       }
     }
 
@@ -205,18 +220,32 @@ class ttWeekViewHelper {
         $dataArray[] = array('row_id' => $row_id,'label' => ttWeekViewHelper::makeRowLabel($record));
         $pos = ttWeekViewHelper::findRow($row_id, $dataArray);
         // Insert empty cells with proper control ids.
-        for ($i = 0; $i < 7; $i++) {
-          $control_id = $pos.'_'. $dayHeaders[$i];
-          $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+        if ($includeWeekends) {
+          for ($i = 0; $i < 7; $i++) {
+            $control_id = $pos.'_'. $dayHeaders[$i];
+            $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+          }
+        } else {
+          for ($i = 1; $i < 6; $i++) {
+            $control_id = $pos.'_'. $dayHeaders[$i];
+            $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+          }
         }
         // Insert row for comments.
         if ($includeNotes) {
           $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->get('label.notes').':');
           $pos++;
           // Insert empty cells with proper control ids.
-          for ($i = 0; $i < 7; $i++) {
-            $control_id = $pos.'_'. $dayHeaders[$i];
-            $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+          if ($includeWeekends) {
+            for ($i = 0; $i < 7; $i++) {
+              $control_id = $pos.'_'. $dayHeaders[$i];
+              $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+            }
+          } else {
+            for ($i = 1; $i < 6; $i++) {
+              $control_id = $pos.'_'. $dayHeaders[$i];
+              $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+            }
           }
           $pos--;
         }
@@ -267,21 +296,38 @@ class ttWeekViewHelper {
       }
     }
 
+    // We will need this for iterations below.
+    $includeWeekends = $user->isOptionEnabled('weekends');
+
     // Construct the first row for a brand new entry.
     $dataArray[] = array('row_id' => null,'label' => $i18n->get('form.week.new_entry').':'); // Insert row.
     // Insert empty cells with proper control ids.
-    for ($i = 0; $i < 7; $i++) {
-      $control_id = '0_'. $dayHeaders[$i];
-      $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+    if ($includeWeekends) {
+      for ($i = 0; $i < 7; $i++) {
+        $control_id = '0_'. $dayHeaders[$i];
+        $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+      }
+    } else {
+      for ($i = 1; $i < 6; $i++) {
+        $control_id = '0_'. $dayHeaders[$i];
+        $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+      }
     }
     $includeNotes = $user->isOptionEnabled('week_notes');
     if ($includeNotes) {
       // Construct the second row for daily comments for a brand new entry.
       $dataArray[] = array('row_id' => null,'label' => $i18n->get('label.notes').':'); // Insert row.
       // Insert empty cells with proper control ids.
-      for ($i = 0; $i < 7; $i++) {
-        $control_id = '1_'. $dayHeaders[$i];
-        $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+      if ($includeWeekends) {
+        for ($i = 0; $i < 7; $i++) {
+          $control_id = '1_'. $dayHeaders[$i];
+          $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+        }
+      } else {
+        for ($i = 1; $i < 6; $i++) {
+          $control_id = '1_'. $dayHeaders[$i];
+          $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+        }
       }
     }
 
@@ -296,18 +342,32 @@ class ttWeekViewHelper {
         $dataArray[] = array('row_id' => $row_id,'label' => ttWeekViewHelper::makeRowLabel($record));
         $pos = ttWeekViewHelper::findRow($row_id, $dataArray);
         // Insert empty cells with proper control ids.
-        for ($i = 0; $i < 7; $i++) {
-          $control_id = $pos.'_'. $dayHeaders[$i];
-          $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+        if ($includeWeekends) {
+          for ($i = 0; $i < 7; $i++) {
+            $control_id = $pos.'_'. $dayHeaders[$i];
+            $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+          }
+        } else {
+          for ($i = 1; $i < 6; $i++) {
+            $control_id = $pos.'_'. $dayHeaders[$i];
+            $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
+          }
         }
         // Insert row for comments.
         if ($includeNotes) {
           $dataArray[] = array('row_id' => $row_id.'_notes','label' => $i18n->get('label.notes').':');
           $pos++;
           // Insert empty cells with proper control ids.
-          for ($i = 0; $i < 7; $i++) {
-            $control_id = $pos.'_'. $dayHeaders[$i];
-            $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+          if ($includeWeekends) {
+            for ($i = 0; $i < 7; $i++) {
+              $control_id = $pos.'_'. $dayHeaders[$i];
+              $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+            }
+          } else {
+            for ($i = 1; $i < 6; $i++) {
+              $control_id = $pos.'_'. $dayHeaders[$i];
+              $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
+            }
           }
           $pos--;
         }
