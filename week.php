@@ -228,7 +228,7 @@ class WeekViewCellRenderer extends DefaultCellRenderer {
     $field = new TextField($field_name);
     // Disable control if the date is locked.
     global $lockedDays;
-    if ($lockedDays[$column-1])
+    if ($lockedDays[$column])
       $field->setEnabled(false);
     $field->setFormName($table->getFormName());
     $field->setStyle('width: 60px;'); // TODO: need to style everything properly, eventually.

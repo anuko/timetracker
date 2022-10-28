@@ -25,7 +25,7 @@ function adjustTodayLinks() {
 <div class="small-screen-calendar">{$forms.chartForm.date.control}</div>
 <table class="centered-table">
   <tr><td></td><td></td><td rowspan="{$large_screen_calendar_row_span}"><div class="large-screen-calendar">{$forms.chartForm.date.control}</div></td></tr>
-{if $user_dropdown}
+{if isset($user_dropdown)}
   <tr class = "small-screen-label"><td><label for="user">{$i18n.label.user}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="user">{$i18n.label.user}:</label></td>

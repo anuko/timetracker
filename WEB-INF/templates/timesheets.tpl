@@ -7,7 +7,7 @@ License: See license.txt *}
 
 {$forms.timesheetsForm.open}
 <table class="centered-table">
-{if $user_dropdown}
+{if isset($user_dropdown)}
   <tr class = "small-screen-label"><td><label for="user">{$i18n.label.user}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="user">{$i18n.label.user}:</label></td>
