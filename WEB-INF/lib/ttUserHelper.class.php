@@ -68,7 +68,8 @@ class ttUserHelper {
 
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-      return $val['user_id'];
+      if ($val)
+        return $val['user_id'];
     }
     return false;
   }

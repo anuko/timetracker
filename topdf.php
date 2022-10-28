@@ -55,6 +55,7 @@ if ($totals_only || $grouping)
 $totals = ttReportHelper::getTotals($options); // Totals for the entire report.
 
 // Assign variables that are used to print subtotals.
+$print_subtotals = $first_pass = false;
 if ($items && $grouping) {
   $print_subtotals = true;
   $first_pass = true;

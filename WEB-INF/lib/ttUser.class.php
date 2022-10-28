@@ -151,7 +151,7 @@ class ttUser {
 
   // getUser returns user id on behalf of whom the current user is operating.
   function getUser() {
-    return ($this->behalfUser ? $this->behalfUser->id : $this->id);
+    return (isset($this->behalfUser) ? $this->behalfUser->id : $this->id);
   }
 
   // getName returns user name on behalf of whom the current user is operating.
