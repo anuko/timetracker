@@ -19,26 +19,59 @@ function adjustTodayLinks() {
     }
   }
 }
+
+// handleFavReportSelection - manages visibility of controls that are not relevant
+// when a fav report is selected.
+function handleFavReportSelection() {
+  var selectedFavReportId = document.getElementById("favorite_report").value;
+
+  var userLabel = document.getElementById("user_label");
+  var userControl = document.getElementById("user_control");
+  var intervalLabel = document.getElementById("interval_label");
+  var intervalControl = document.getElementById("interval_control");
+
+  if (selectedFavReportId == -1) {
+    if (userLabel != null) {
+      userLabel.style.display = "";
+    }
+    if (userControl != null) {
+      userControl.style.display = "";
+    }
+    if (intervalLabel != null) {
+      intervalLabel.style.display = "";
+    }
+    if (intervalControl != null) {
+      intervalControl.style.display = "";
+    }
+  } else {
+    if (userLabel != null) {
+      userLabel.style.display = "none";
+    }
+    if (userControl != null) {
+      userControl.style.display = "none";
+    }
+    if (intervalLabel != null) {
+      intervalLabel.style.display = "none";
+    }
+    if (intervalControl != null) {
+      intervalControl.style.display = "none";
+    }
+  }
+}
 </script>
 
 {$forms.chartForm.open}
 <div class="small-screen-calendar">{$forms.chartForm.date.control}</div>
 <table class="centered-table">
   <tr><td></td><td></td><td rowspan="{$large_screen_calendar_row_span}"><div class="large-screen-calendar">{$forms.chartForm.date.control}</div></td></tr>
-{if isset($user_dropdown)}
-  <tr class = "small-screen-label"><td><label for="user">{$i18n.label.user}:</label></td></tr>
+{if defined('FAV_REPORTS_ON_CHARTS_DEBUG')}
+  <tr class = "small-screen-label"><td><label for="favorite_report">{$i18n.label.fav_report}:</label></td></tr>
   <tr>
-    <td class="large-screen-label"><label for="user">{$i18n.label.user}:</label></td>
-    <td class="td-with-input">{$forms.chartForm.user.control}</td>
+    <td class="large-screen-label"><label for="favorite_report">{$i18n.label.fav_report}:</label></td>
+    <td class="td-with-input">{$forms.chartForm.favorite_report.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
-  <tr class = "small-screen-label"><td><label for="interval">{$i18n.form.charts.interval}:</label></td></tr>
-  <tr>
-    <td class="large-screen-label"><label for="interval">{$i18n.form.charts.interval}:</label></td>
-    <td class="td-with-input">{$forms.chartForm.interval.control}</td>
-  </tr>
-  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {if $chart_selector}
   <tr class = "small-screen-label"><td><label for="type">{$i18n.form.charts.chart}:</label></td></tr>
   <tr>
@@ -47,6 +80,20 @@ function adjustTodayLinks() {
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 {/if}
+{if isset($user_dropdown)}
+  <tr id = "user_label" class = "small-screen-label"><td><label for="user">{$i18n.label.user}:</label></td></tr>
+  <tr id = "user_control">
+    <td class="large-screen-label"><label for="user">{$i18n.label.user}:</label></td>
+    <td class="td-with-input">{$forms.chartForm.user.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
+  <tr id ="interval_label" class = "small-screen-label"><td><label for="interval">{$i18n.form.charts.interval}:</label></td></tr>
+  <tr id = "interval_control">
+    <td class="large-screen-label"><label for="interval">{$i18n.form.charts.interval}:</label></td>
+    <td class="td-with-input">{$forms.chartForm.interval.control}</td>
+  </tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
 </table>
 
 <div class="chart">

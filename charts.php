@@ -12,6 +12,7 @@ import('ttUserConfig');
 import('PieChartEx');
 import('ttUserHelper');
 import('ttTeamHelper');
+import('ttFavReportHelper');
 
 define('ALL_USERS_OPTION_ID', -1); // An identifier for "all users" seclection in User dropdown.
 
@@ -106,7 +107,7 @@ if ($request->isPost()) {
   // Set user selection to all users, if necessary.
   $allUsersSetInSession = @$_SESSION['chart_all_users'];
   if ($allUsersSetInSession)
-      $userDropdownSelectionId = constant('ALL_USERS_OPTION_ID');
+    $userDropdownSelectionId = constant('ALL_USERS_OPTION_ID');
 }
 
 // Elements of chartForm.
@@ -174,6 +175,19 @@ if ($chart_selector) {
     'value' => $cl_type,
     'data' => $types
   ));
+  $largeScreenCalendarRowSpan += 2;
+}
+
+// Fav report control.
+if (defined('FAV_REPORTS_ON_CHARTS_DEBUG')) {
+  // Get saved favorite reports for user.
+  $report_list = ttFavReportHelper::getReports();
+  $chart_form->addInput(array('type'=>'combobox',
+    'name'=>'favorite_report',
+    'onchange'=>'handleFavReportSelection();this.form.submit();',
+    'data'=>$report_list,
+    'datakeys'=>array('id','name'),
+    'empty'=>array('-1'=>$i18n->get('dropdown.no'))));
   $largeScreenCalendarRowSpan += 2;
 }
 
