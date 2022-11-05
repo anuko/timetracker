@@ -205,8 +205,10 @@ $largeScreenCalendarRowSpan += 2;
 $chart_form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
 
 // Get data for our chart.
-// TODO: adjust this call below for fav report selection.
-$totals = ttChartHelper::getTotals($userDropdownSelectionId, $cl_type, $cl_date, $cl_interval);
+if ($cl_fav_report == -1)
+  $totals = ttChartHelper::getTotals($userDropdownSelectionId, $cl_type, $cl_date, $cl_interval);
+else
+  $totals = ttChartHelper::getTotalsForFavReport($cl_fav_report, $cl_type);
 $smarty->assign('totals', $totals);
 
 // Prepare chart for drawing.
