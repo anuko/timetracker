@@ -79,10 +79,9 @@ if(!$cl_date) {
 $_SESSION['date'] = $cl_date;
 
 if ($request->isPost()) {
-  $cl_interval = (int)$request->getParameter('interval');
-  if (!$cl_interval) $cl_interval = INTERVAL_THIS_MONTH;
-  $_SESSION['chart_interval'] = $cl_interval;
-  $uc->setValue(SYSC_CHART_INTERVAL, $cl_interval);
+  $cl_fav_report = (int)$request->getParameter('favorite_report');
+  if (!$cl_fav_report) $cl_fav_report = -1;
+  $_SESSION['fav_report'] = $cl_fav_report;
 
   $cl_type = (int)$request->getParameter('type');
   if (!$cl_type) $cl_type = ttChartHelper::adjustType($cl_type);
@@ -91,12 +90,16 @@ if ($request->isPost()) {
 
   // Remember all users selection in session.
   $_SESSION['chart_all_users'] = $userDropdownSelectionId == constant('ALL_USERS_OPTION_ID') ? true : false;
-} else {
-  // Initialize chart interval.
-  $cl_interval = @$_SESSION['chart_interval'];
-  if (!$cl_interval) $cl_interval = $uc->getValue(SYSC_CHART_INTERVAL);
+
+  $cl_interval = (int)$request->getParameter('interval');
   if (!$cl_interval) $cl_interval = INTERVAL_THIS_MONTH;
   $_SESSION['chart_interval'] = $cl_interval;
+  $uc->setValue(SYSC_CHART_INTERVAL, $cl_interval);
+} else {
+  // Initialize fav report selector.
+  $cl_fav_report = @$_SESSION['fav_report'];
+  if (!$cl_fav_report) $cl_fav_report = -1;
+  $_SESSION['fav_report'] = $cl_fav_report;
 
   // Initialize chart type.
   $cl_type = @$_SESSION['chart_type'];
@@ -108,11 +111,52 @@ if ($request->isPost()) {
   $allUsersSetInSession = @$_SESSION['chart_all_users'];
   if ($allUsersSetInSession)
     $userDropdownSelectionId = constant('ALL_USERS_OPTION_ID');
+
+  // Initialize chart interval.
+  $cl_interval = @$_SESSION['chart_interval'];
+  if (!$cl_interval) $cl_interval = $uc->getValue(SYSC_CHART_INTERVAL);
+  if (!$cl_interval) $cl_interval = INTERVAL_THIS_MONTH;
+  $_SESSION['chart_interval'] = $cl_interval;
 }
 
 // Elements of chartForm.
 $chart_form = new Form('chartForm');
 $largeScreenCalendarRowSpan = 1; // Number of rows calendar spans on large screens.
+
+// Fav report control.
+if (defined('FAV_REPORTS_ON_CHARTS_DEBUG')) {
+  // Get saved favorite reports for user.
+  $report_list = ttFavReportHelper::getReports();
+  $chart_form->addInput(array('type'=>'combobox',
+    'name'=>'favorite_report',
+    'onchange'=>'handleFavReportSelection();this.form.submit();',
+    'data'=>$report_list,
+    'value' => $cl_fav_report,
+    'datakeys'=>array('id','name'),
+    'empty'=>array('-1'=>$i18n->get('dropdown.no'))));
+  $largeScreenCalendarRowSpan += 2;
+}
+
+// Chart type options.
+$chart_selector = (MODE_PROJECTS_AND_TASKS == $tracking_mode || $user->isPluginEnabled('cl'));
+if ($chart_selector) {
+  $types = array();
+  if (MODE_PROJECTS == $tracking_mode || MODE_PROJECTS_AND_TASKS == $tracking_mode)
+    $types[CHART_PROJECTS] = $i18n->get('dropdown.projects');
+  if (MODE_PROJECTS_AND_TASKS == $tracking_mode)
+    $types[CHART_TASKS] = $i18n->get('dropdown.tasks');
+  if ($user->isPluginEnabled('cl'))
+    $types[CHART_CLIENTS] = $i18n->get('dropdown.clients');
+
+  // Add chart type dropdown.
+  $chart_form->addInput(array('type' => 'combobox',
+    'onchange' => 'this.form.submit();',
+    'name' => 'type',
+    'value' => $cl_type,
+    'data' => $types
+  ));
+  $largeScreenCalendarRowSpan += 2;
+}
 
 // User dropdown. Changes the user "on behalf" of whom we are working.
 if ($user->can('view_charts') || $user->can('view_all_charts')) {
@@ -157,44 +201,11 @@ $chart_form->addInput(array('type' => 'combobox',
 ));
 $largeScreenCalendarRowSpan += 2;
 
-// Chart type options.
-$chart_selector = (MODE_PROJECTS_AND_TASKS == $tracking_mode || $user->isPluginEnabled('cl'));
-if ($chart_selector) {
-  $types = array();
-  if (MODE_PROJECTS == $tracking_mode || MODE_PROJECTS_AND_TASKS == $tracking_mode)
-    $types[CHART_PROJECTS] = $i18n->get('dropdown.projects');
-  if (MODE_PROJECTS_AND_TASKS == $tracking_mode)
-    $types[CHART_TASKS] = $i18n->get('dropdown.tasks');
-  if ($user->isPluginEnabled('cl'))
-    $types[CHART_CLIENTS] = $i18n->get('dropdown.clients');
-
-  // Add chart type dropdown.
-  $chart_form->addInput(array('type' => 'combobox',
-    'onchange' => 'this.form.submit();',
-    'name' => 'type',
-    'value' => $cl_type,
-    'data' => $types
-  ));
-  $largeScreenCalendarRowSpan += 2;
-}
-
-// Fav report control.
-if (defined('FAV_REPORTS_ON_CHARTS_DEBUG')) {
-  // Get saved favorite reports for user.
-  $report_list = ttFavReportHelper::getReports();
-  $chart_form->addInput(array('type'=>'combobox',
-    'name'=>'favorite_report',
-    'onchange'=>'handleFavReportSelection();this.form.submit();',
-    'data'=>$report_list,
-    'datakeys'=>array('id','name'),
-    'empty'=>array('-1'=>$i18n->get('dropdown.no'))));
-  $largeScreenCalendarRowSpan += 2;
-}
-
 // Calendar.
 $chart_form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
 
 // Get data for our chart.
+// TODO: adjust this call below for fav report selection.
 $totals = ttChartHelper::getTotals($userDropdownSelectionId, $cl_type, $cl_date, $cl_interval);
 $smarty->assign('totals', $totals);
 
@@ -243,7 +254,7 @@ $chart->renderEx(array('fileName'=>$file_name,'hideLogo'=>true,'hideTitle'=>true
 $smarty->assign('large_screen_calendar_row_span', $largeScreenCalendarRowSpan);
 $smarty->assign('img_file_name', $img_ref);
 $smarty->assign('chart_selector', $chart_selector);
-$smarty->assign('onload', 'onLoad="adjustTodayLinks()"');
+$smarty->assign('onload', 'onLoad="adjustTodayLinks();handleFavReportSelection();"');
 $smarty->assign('forms', array($chart_form->getName() => $chart_form->toArray()));
 $smarty->assign('title', $i18n->get('title.charts'));
 $smarty->assign('content_page_name', 'charts.tpl');
