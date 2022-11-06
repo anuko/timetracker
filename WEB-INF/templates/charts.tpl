@@ -29,6 +29,8 @@ function handleFavReportSelection() {
   var userControl = document.getElementById("user_control");
   var intervalLabel = document.getElementById("interval_label");
   var intervalControl = document.getElementById("interval_control");
+  var smallScreenCalendarDiv = document.getElementById("small_screen_calendar");
+  var largeScreenCalendarDiv = document.getElementById("large_screen_calendar");
 
   if (selectedFavReportId == -1) {
     if (userLabel != null) {
@@ -43,6 +45,12 @@ function handleFavReportSelection() {
     if (intervalControl != null) {
       intervalControl.style.display = "";
     }
+    if (smallScreenCalendarDiv != null) {
+      smallScreenCalendarDiv.style.display = "";
+    }
+    if (largeScreenCalendarDiv != null) {
+      largeScreenCalendarDiv.style.display = "";
+    }
   } else {
     if (userLabel != null) {
       userLabel.style.display = "none";
@@ -56,14 +64,20 @@ function handleFavReportSelection() {
     if (intervalControl != null) {
       intervalControl.style.display = "none";
     }
+    if (smallScreenCalendarDiv != null) {
+      smallScreenCalendarDiv.style.display = "none";
+    }
+    if (largeScreenCalendarDiv != null) {
+      largeScreenCalendarDiv.style.display = "none";
+    }
   }
 }
 </script>
 
 {$forms.chartForm.open}
-<div class="small-screen-calendar">{$forms.chartForm.date.control}</div>
+<div id = "small_screen_calendar" class="small-screen-calendar">{$forms.chartForm.date.control}</div>
 <table class="centered-table">
-  <tr><td></td><td></td><td rowspan="{$large_screen_calendar_row_span}"><div class="large-screen-calendar">{$forms.chartForm.date.control}</div></td></tr>
+  <tr><td></td><td></td><td rowspan="{$large_screen_calendar_row_span}"><div id = "large_screen_calendar" class="large-screen-calendar">{$forms.chartForm.date.control}</div></td></tr>
   <tr class = "small-screen-label"><td><label for="favorite_report">{$i18n.label.fav_report}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="favorite_report">{$i18n.label.fav_report}:</label></td>
