@@ -124,18 +124,15 @@ $chart_form = new Form('chartForm');
 $largeScreenCalendarRowSpan = 1; // Number of rows calendar spans on large screens.
 
 // Fav report control.
-if (defined('FAV_REPORTS_ON_CHARTS_DEBUG')) {
-  // Get saved favorite reports for user.
-  $report_list = ttFavReportHelper::getReports();
-  $chart_form->addInput(array('type'=>'combobox',
-    'name'=>'favorite_report',
-    'onchange'=>'handleFavReportSelection();this.form.submit();',
-    'data'=>$report_list,
-    'value' => $cl_fav_report,
-    'datakeys'=>array('id','name'),
-    'empty'=>array('-1'=>$i18n->get('dropdown.no'))));
-  $largeScreenCalendarRowSpan += 2;
-}
+$report_list = ttFavReportHelper::getReports();
+$chart_form->addInput(array('type'=>'combobox',
+  'name'=>'favorite_report',
+  'onchange'=>'handleFavReportSelection();this.form.submit();',
+  'data'=>$report_list,
+  'value' => $cl_fav_report,
+  'datakeys'=>array('id','name'),
+  'empty'=>array('-1'=>$i18n->get('dropdown.no'))));
+$largeScreenCalendarRowSpan += 2;
 
 // Chart type options.
 $chart_selector = (MODE_PROJECTS_AND_TASKS == $tracking_mode || $user->isPluginEnabled('cl'));

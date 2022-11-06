@@ -64,14 +64,12 @@ function handleFavReportSelection() {
 <div class="small-screen-calendar">{$forms.chartForm.date.control}</div>
 <table class="centered-table">
   <tr><td></td><td></td><td rowspan="{$large_screen_calendar_row_span}"><div class="large-screen-calendar">{$forms.chartForm.date.control}</div></td></tr>
-{if defined('FAV_REPORTS_ON_CHARTS_DEBUG')}
   <tr class = "small-screen-label"><td><label for="favorite_report">{$i18n.label.fav_report}:</label></td></tr>
   <tr>
     <td class="large-screen-label"><label for="favorite_report">{$i18n.label.fav_report}:</label></td>
     <td class="td-with-input">{$forms.chartForm.favorite_report.control}</td>
   </tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
-{/if}
 {if $chart_selector}
   <tr class = "small-screen-label"><td><label for="type">{$i18n.form.charts.chart}:</label></td></tr>
   <tr>
