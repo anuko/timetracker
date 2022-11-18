@@ -324,7 +324,6 @@ $smarty->assign('show_billable', $showBillable);
 $smarty->assign('show_project', $showProject);
 $smarty->assign('show_task', $showTask);
 $smarty->assign('task_required', $taskRequired);
-$smarty->assign('time_records', ttTimeHelper::getRecords($cl_date));
 $smarty->assign('day_total', ttTimeHelper::getTimeForDay($cl_date));
 $smarty->assign('time_records', $timeRecords);
 $smarty->assign('show_record_custom_fields', $user->isOptionEnabled('record_custom_fields'));
