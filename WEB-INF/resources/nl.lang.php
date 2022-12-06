@@ -415,8 +415,7 @@ $i18n_key_words = array(
 'form.reports.show_fields' => 'Toon velden',
 'form.reports.time_fields' => 'Tijd velden',
 'form.reports.user_fields' => 'Medewerker velden',
-// TODO: translate the following.
-// 'form.reports.project_fields' => 'Project fields',
+'form.reports.project_fields' => 'Project velden',
 'form.reports.group_by' => 'Groeperen op',
 'form.reports.group_by_no' => '--- niet groeperen ---',
 'form.reports.group_by_date' => 'datum',
@@ -428,8 +427,7 @@ $i18n_key_words = array(
 // Report form. See example at https://timetracker.anuko.com/report.php
 // (after generating a report at https://timetracker.anuko.com/reports.php).
 'form.report.export' => 'Exporteer',
-// TODO: translate the following.
-// 'form.report.per_hour' => 'Per hour',
+'form.report.per_hour' => 'Per uur',
 'form.report.assign_to_invoice' => 'Voeg toe aan factuur',
 'form.report.assign_to_timesheet' => 'Wijs toe aan tijdenoverzicht',
 
@@ -590,7 +588,6 @@ $i18n_key_words = array(
 'form.display_options.note_on_separate_row' => 'Notitie in aparte kolom', // Translator (Henk) comment: "kolom is the right word in Dutch."
 'form.display_options.not_complete_days' => 'Niet complete dagen',
 'form.display_options.inactive_projects' => 'Niet actieve projecten',
-// TODO: translate the following.
-// 'form.display_options.cost_per_hour' => 'Cost per hour',
+'form.display_options.cost_per_hour' => 'Kosten per uur',
 'form.display_options.custom_css' => 'Aangepaste CSS',
 );
