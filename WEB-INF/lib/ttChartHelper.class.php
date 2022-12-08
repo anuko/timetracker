@@ -37,6 +37,10 @@ class ttChartHelper {
         $period = new ttPeriod(new ttDate($selected_date), INTERVAL_THIS_MONTH);
         break;
 
+      case INTERVAL_PREVIOUS_MONTH:
+        $period = new ttPeriod(new ttDate($selected_date), INTERVAL_PREVIOUS_MONTH);
+        break;
+
       case INTERVAL_THIS_YEAR:
         $period = new ttPeriod(new ttDate($selected_date), INTERVAL_THIS_YEAR);
         break;

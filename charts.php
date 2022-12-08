@@ -186,6 +186,7 @@ $intervals = array();
 $intervals[INTERVAL_THIS_DAY] = $i18n->get('dropdown.selected_day');
 $intervals[INTERVAL_THIS_WEEK] = $i18n->get('dropdown.selected_week');
 $intervals[INTERVAL_THIS_MONTH] = $i18n->get('dropdown.selected_month');
+$intervals[INTERVAL_PREVIOUS_MONTH] = $i18n->get('dropdown.previous_month');
 $intervals[INTERVAL_THIS_YEAR] = $i18n->get('dropdown.selected_year');
 $intervals[INTERVAL_ALL_TIME] = $i18n->get('dropdown.all_time');
 

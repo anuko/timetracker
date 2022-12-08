@@ -229,11 +229,11 @@ if ($showUsers) {
 $form->addInput(array('type'=>'combobox',
   'name'=>'period',
   'data'=>array(INTERVAL_THIS_MONTH=>$i18n->get('dropdown.current_month'),
-    INTERVAL_LAST_MONTH=>$i18n->get('dropdown.previous_month'),
+    INTERVAL_PREVIOUS_MONTH=>$i18n->get('dropdown.previous_month'),
     INTERVAL_THIS_WEEK=>$i18n->get('dropdown.current_week'),
-    INTERVAL_LAST_WEEK=>$i18n->get('dropdown.previous_week'),
+    INTERVAL_PREVIOUS_WEEK=>$i18n->get('dropdown.previous_week'),
     INTERVAL_THIS_DAY=>$i18n->get('dropdown.current_day'),
-    INTERVAL_LAST_DAY=>$i18n->get('dropdown.previous_day')),
+    INTERVAL_PREVIOUS_DAY=>$i18n->get('dropdown.previous_day')),
   'empty'=>array(''=>$i18n->get('dropdown.select'))));
 // Add controls for start and end dates.
 $form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start_date'));

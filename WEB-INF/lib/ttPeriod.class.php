@@ -7,9 +7,9 @@ define('INTERVAL_THIS_WEEK', 2);
 define('INTERVAL_THIS_MONTH', 3);
 define('INTERVAL_THIS_YEAR', 4);
 define('INTERVAL_ALL_TIME', 5);
-define('INTERVAL_LAST_WEEK', 6);
-define('INTERVAL_LAST_MONTH', 7);
-define('INTERVAL_LAST_DAY', 8);
+define('INTERVAL_PREVIOUS_WEEK', 6);
+define('INTERVAL_PREVIOUS_MONTH', 7);
+define('INTERVAL_PREVIOUS_DAY', 8);
 
 class ttPeriod {
   var $startDate; // ttDate object.
@@ -34,7 +34,7 @@ class ttPeriod {
         $this->endDate->setFromUnixTimestamp($ttDateInstance->getTimestamp());
         break;
 
-      case INTERVAL_LAST_DAY:
+      case INTERVAL_PREVIOUS_DAY:
         $this->startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-1,$t_arr[5]));
         $this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-1,$t_arr[5]));
         break;
@@ -44,7 +44,7 @@ class ttPeriod {
         $this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]+6+$startWeekBias,$t_arr[5]));
         break;
 
-      case INTERVAL_LAST_WEEK:
+      case INTERVAL_PREVIOUS_WEEK:
         $this->startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]-7+$startWeekBias,$t_arr[5]));
         $this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,$t_arr[3]-$t_arr[6]-1+$startWeekBias,$t_arr[5]));
         break;
@@ -54,7 +54,7 @@ class ttPeriod {
 	$this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+2,0,$t_arr[5]));
 	break;
 
-      case INTERVAL_LAST_MONTH:
+      case INTERVAL_PREVIOUS_MONTH:
         $this->startDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4],1,$t_arr[5]));
         $this->endDate->setFromUnixTimestamp(mktime(0,0,0,$t_arr[4]+1,0,$t_arr[5]));
         break;
