@@ -39,6 +39,7 @@ CREATE TABLE `tt_groups` (
   `custom_logo` tinyint(4) default 0,                    # whether to use a custom logo or not
   `config` text default NULL,                            # miscellaneous group configuration settings
   `custom_css` text default NULL,                        # custom css for group
+  `custom_translation` text default NULL,                # custom translation for group
   `created` datetime default NULL,                       # creation timestamp
   `created_ip` varchar(45) default NULL,                 # creator ip
   `created_by` int(11) default NULL,                     # creator user_id
@@ -622,4 +623,4 @@ CREATE TABLE `tt_site_config` (
   PRIMARY KEY  (`param_name`)
 );
 
-INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.21.7', now()); # TODO: change when structure changes.
+INSERT INTO `tt_site_config` (`param_name`, `param_value`, `created`) VALUES ('version_db', '1.22.3', now()); # TODO: change when structure changes.

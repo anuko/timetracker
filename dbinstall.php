@@ -1151,7 +1151,7 @@ if ($_POST) {
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.19.0', modified = now() where param_name = 'version_db' and param_value = '1.18.61'");
   }
 
-  if ($_POST["convert11900to12107"]) {
+  if ($_POST["convert11900to12203"]) {
     ttExecute("CREATE TABLE `tt_work_currencies` (`id` int(10) unsigned NOT NULL,`name` varchar(10) NOT NULL,PRIMARY KEY (`id`))");
     ttExecute("create unique index currency_idx on tt_work_currencies(`name`)");
     ttExecute("INSERT INTO `tt_work_currencies` (`id`, `name`) VALUES ('1', 'USD'), ('2', 'CAD'), ('3', 'AUD'), ('4', 'EUR'), ('5', 'NZD')");
@@ -1199,6 +1199,8 @@ if ($_POST) {
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.21.2', modified = now() where param_name = 'version_db' and param_value = '1.21.0'");
     ttExecute("ALTER TABLE tt_fav_reports ADD COLUMN `note_containing` varchar(80) default NULL after `paid_status`");
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.21.7', modified = now() where param_name = 'version_db' and param_value = '1.21.2'");
+    ttExecute("ALTER TABLE `tt_groups` ADD `custom_translation` text default NULL AFTER `custom_css`");
+    ttExecute("UPDATE `tt_site_config` SET param_value = '1.22.3', modified = now() where param_name = 'version_db' and param_value = '1.21.7'");
   }
 
   if ($_POST["cleanup"]) {
@@ -1249,7 +1251,7 @@ if ($_POST) {
 <h2>DB Install</h2>
 <table width="80%" border="1" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="80%"><b>Create database structure (v1.21.7)</b>
+    <td width="80%"><b>Create database structure (v1.22.3)</b>
     <br>(applies only to new installations, do not execute when updating)</br></td><td><input type="submit" name="crstructure" value="Create"></td>
   </tr>
 </table>
@@ -1298,8 +1300,8 @@ if ($_POST) {
     <td><input type="submit" name="convert11797to11900" value="Update"></td>
   </tr>
   <tr valign="top">
-    <td>Update database structure (v1.19 to v1.21.7)</td>
-    <td><input type="submit" name="convert11900to12107" value="Update"></td>
+    <td>Update database structure (v1.19 to v1.22.3)</td>
+    <td><input type="submit" name="convert11900to12203" value="Update"></td>
   </tr>
 </table>
 
