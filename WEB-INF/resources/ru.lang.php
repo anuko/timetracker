@@ -591,4 +591,5 @@ $i18n_key_words = array(
 'form.display_options.inactive_projects' => 'Неактивные проекты',
 'form.display_options.cost_per_hour' => 'Стоимость за час',
 'form.display_options.custom_css' => 'Пользовательская CSS',
+'form.display_options.custom_translation' => 'Пользовательский перевод',
 );
