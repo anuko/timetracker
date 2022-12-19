@@ -51,9 +51,16 @@ class I18n {
     return $value;
   }
 
+  // get - keyExists determines if a key exists.
+  function keyExists($key) {
+    $value = $this->get($key);
+    return ($value != null && strlen($value) > 0);
+  }
+
   // load - loads localized strings into $keys array by first going through the default file (en.lang.php)
-  // and then through the requested language file (which is supplied as parameter).
-  // This means we end up with default English strings when keys are missing in the translation file.
+  // and then through the requested language file (which is supplied as parameter),
+  // (this means we end up with default English strings when keys are missing in the translation file),
+  // and then from a group custom translation field, if available.
   function load($langName) {
     // Load default English keys first.
     $defaultFileName = RESOURCE_DIR . '/' . $this->defaultLang . '.lang.php';
@@ -102,6 +109,35 @@ class I18n {
           eval("\$this->keys".$str."='".$value."';");
         } else {
           $this->keys[$kword] = $value;
+        }
+      }
+    }
+
+    // Now load custom translation for group.
+    global $user;
+    $customTranslation = $user->getCustomTranslation();
+    if ($customTranslation != null) {
+      $lines =  preg_split("/\r\n|\n|\r/", $customTranslation);
+      for ($i = 0; $i < count($lines); $i++) {
+        $parts = explode('=', $lines[$i]);
+        if (count($parts) != 2) continue;
+
+        $key = trim($parts[0]);
+        $value = trim($parts[1]);
+        if (!$value) continue;
+
+        $value = htmlspecialchars(trim($parts[1]));
+
+        $pos = strpos($key, ".");
+        if (!($pos === false)) {
+          $p = explode(".", $key);
+          $str = "";
+          foreach ($p as $w) {
+             $str .= "[\"".$w."\"]";
+          }
+          eval("\$this->keys".$str."='".$value."';");
+        } else {
+          $this->keys[$key] = $value;
         }
       }
     }

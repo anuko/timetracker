@@ -169,11 +169,48 @@ function ttValidTranslation($val)
   if (strlen($val) == 0)
     return true;
 
-  // String must not contain any tags.
-  if (stristr($val, '<'))
-    return false;
+  // Validate lines.
+  $lines = preg_split("/\r\n|\n|\r/", $val);
+  for ($i = 0; $i < count($lines); $i++) {
+    if (!ttValidTranslationLine($lines[$i]))
+      return false;
+  }
 
-  return false; // Not implemented yet.
+  return true;
+}
+
+// ttValidTranslationLine is used to check an individual line in custom translation.
+function ttValidTranslationLine($val)
+{
+  $val = trim($val);
+  if (strlen($val) == 0)
+    return false; // Empty line is not valid.
+
+  $parts = explode('=', $val);
+  if (count($parts) != 2) {
+    // We need exactly 2 parts.
+    return false;
+  }
+
+  $key = trim($parts[0]);
+  global $i18n;
+  if (!$i18n->keyExists($key)) {
+    // Key does not exist.
+    return false;
+  }
+
+  $value = trim($parts[1]);
+  if (!$value) {
+    // Do not allow empty values.
+    return false;
+  }
+
+  // Prohibit apostrophes in values for now until I figure out how to handle them properly.
+  if (ttContains($value, "'")) {
+    return false;
+  }
+
+  return true;
 }
 
 // ttValidTemplateText is used to check template-based user input.
