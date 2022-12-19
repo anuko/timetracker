@@ -162,6 +162,20 @@ function ttValidCss($val)
   return true;
 }
 
+// ttValidTranslation is used to check user input for custom translation.
+function ttValidTranslation($val)
+{
+  $val = trim($val);
+  if (strlen($val) == 0)
+    return true;
+
+  // String must not contain any tags.
+  if (stristr($val, '<'))
+    return false;
+
+  return false; // Not implemented yet.
+}
+
 // ttValidTemplateText is used to check template-based user input.
 // When templates are used, required input parts must be filled by user.
 // We identify these parts by 3 "stop sign" emojis (aka "octagonal sign" U+1F6D1).

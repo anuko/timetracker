@@ -63,6 +63,13 @@ License: See license.txt *}
   <tr><td colspan="2">{$forms.displayOptionsForm.custom_css.control}</td></tr>
   <tr><td colspan="2"><a href="https://www.anuko.com/lp/tt_50.htm" target="_blank">{$i18n.label.what_is_it}</a></td></tr>
   <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{if defined('CUSTOM_TRANSLATION_DEBUG')}
+  <tr><td><div class="form-control-separator"></div></td></tr>
+  <tr><td class="sectionHeaderNoBorder" colspan="2">{$i18n.form.display_options.custom_translation}</td></tr>
+  <tr><td colspan="2">{$forms.displayOptionsForm.custom_translation.control}</td></tr>
+  <tr><td colspan="2"><a href="https://www.anuko.com/lp/tt_59.htm" target="_blank">{$i18n.label.what_is_it}</a></td></tr>
+  <tr><td><div class="small-screen-form-control-separator"></div></td></tr>
+{/if}
 </table>
 <div class="button-set">{$forms.displayOptionsForm.btn_save.control}</div>
 {$forms.displayOptionsForm.close}
