@@ -199,17 +199,6 @@ function ttValidTranslationLine($val)
     return false;
   }
 
-  $value = trim($parts[1]);
-  if (!$value) {
-    // Do not allow empty values.
-    return false;
-  }
-
-  // Prohibit apostrophes in values for now until I figure out how to handle them properly.
-  if (ttContains($value, "'")) {
-    return false;
-  }
-
   return true;
 }
 

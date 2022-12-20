@@ -54,7 +54,7 @@ class I18n {
   // get - keyExists determines if a key exists.
   function keyExists($key) {
     $value = $this->get($key);
-    return ($value != null && strlen($value) > 0);
+    return ($value !== null);
   }
 
   // load - loads localized strings into $keys array by first going through the default file (en.lang.php)
@@ -124,9 +124,9 @@ class I18n {
 
         $key = trim($parts[0]);
         $value = trim($parts[1]);
-        if (!$value) continue;
-
-        $value = htmlspecialchars(trim($parts[1]));
+        // Escape single quotes and backslashes.
+        $value = addcslashes($value, "'\\");
+        $value = htmlspecialchars($value);
 
         $pos = strpos($key, ".");
         if (!($pos === false)) {

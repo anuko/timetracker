@@ -2,8 +2,10 @@
 /* Copyright (c) Anuko International Ltd. https://www.anuko.com
 License: See license.txt */
 
-// Note: escape apostrophes with THREE backslashes, like here:  choisir l\\\'option.
+// Note: escape apostrophes with THREE backslashes, like here:  'choisir l\\\'option'.
+// Alternatively: use one backslash and surround by double-quotes: "choisir l\'option".
 // Other characters (such as double-quotes in http links, etc.) do not have to be escaped.
+
 $i18n_language = 'Persian (فارسی)';
 // TODO: translate the following.
 $i18n_months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
