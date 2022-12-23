@@ -591,6 +591,5 @@ $i18n_key_words = array(
 'form.display_options.inactive_projects' => 'Niet actieve projecten',
 'form.display_options.cost_per_hour' => 'Kosten per uur',
 'form.display_options.custom_css' => 'Aangepaste CSS',
-// TODO: translate the following.
-// 'form.display_options.custom_translation' => 'Custom translation',
+'form.display_options.custom_translation' => 'Maatwerk vertaling',
 );
