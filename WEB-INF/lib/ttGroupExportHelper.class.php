@@ -137,7 +137,8 @@ class ttGroupExportHelper {
     $group_part .= " workday_minutes=\"".$group['workday_minutes']."\"";
     $group_part .= " custom_logo=\"".$group['custom_logo']."\"";
     $group_part .= " config=\"".$group['config']."\"";
-    $group_part .= " custom_css=\"".$group['custom_css']."\"";
+    $group_part .= " custom_css=\"".htmlspecialchars($group['custom_css'])."\"";
+    $group_part .= " custom_translation=\"".htmlspecialchars($group['custom_translation'])."\"";
     $group_part .= ">\n";
 
     // Write group info.

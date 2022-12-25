@@ -99,7 +99,8 @@ class ttOrgImportHelper {
           'workday_minutes' => $attrs['WORKDAY_MINUTES'],
           'custom_logo' => $attrs['CUSTOM_LOGO'],
           'config' => $attrs['CONFIG'],
-          'custom_css' => $attrs['CUSTOM_CSS']));
+          'custom_css' => $attrs['CUSTOM_CSS'],
+          'custom_translation' => $attrs['CUSTOM_TRANSLATION']));
 
         // Special handling for top group.
         if (!$this->org_id && $this->current_group_id) {
@@ -685,7 +686,7 @@ class ttOrgImportHelper {
     $columns = '(parent_id, org_id, group_key, name, description, currency, decimal_mark, lang, date_format, time_format,'.
       ' week_start, tracking_mode, project_required, record_type, bcc_email,'.
       ' allow_ip, password_complexity, plugins, lock_spec,'.
-      ' workday_minutes, config, custom_css, created, created_ip, created_by)';
+      ' workday_minutes, config, custom_css, custom_translation, created, created_ip, created_by)';
 
     $values = ' values (';
     $values .= $mdb2->quote($fields['parent_id']);
@@ -710,6 +711,7 @@ class ttOrgImportHelper {
     $values .= ', '.(int)$fields['workday_minutes'];
     $values .= ', '.$mdb2->quote($fields['config']);
     $values .= ', '.$mdb2->quote($fields['custom_css']);
+    $values .= ', '.$mdb2->quote($fields['custom_translation']);
     $values .= ', now(), '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', '.$user->id;
     $values .= ')';
 
