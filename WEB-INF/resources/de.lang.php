@@ -240,8 +240,7 @@ $i18n_key_words = array(
 'title.error' => 'Fehler',
 'title.success' => 'Erfol',
 'title.login' => 'Anmelden',
-// TODO: translate the follolwing.
-// 'title.2fa' => 'Two Factor Authentication',
+'title.2fa' => 'Zwei-Faktor-Authentifizierung',
 'title.groups' => 'Gruppen',
 'title.add_group' => 'Gruppe anlegen',
 'title.edit_group' => 'Gruppe bearbeiten',
@@ -251,9 +250,8 @@ $i18n_key_words = array(
 'title.time' => 'Zeiten',
 'title.edit_time_record' => 'Bearbeiten des Stundeneintrags',
 'title.delete_time_record' => 'Eintrag löschen',
-// TODO: Translate the following.
-// 'title.time_files' => 'Time Record Files',
-// 'title.puncher' => 'Puncher',
+'title.time_files' => 'Zeiterfassungsdateien',
+'title.puncher' => 'Stempeluhr',
 'title.expenses' => 'Kosten',
 'title.edit_expense' => 'Kostenposition ändern',
 'title.delete_expense' => 'Kostenposition löschen',
@@ -262,10 +260,9 @@ $i18n_key_words = array(
 'title.reports' => 'Berichte',
 'title.report' => 'Bericht',
 'title.send_report' => 'Bericht senden',
-// TODO: Translate the following.
-// 'title.timesheets' => 'Timesheets',
-// 'title.timesheet' => 'Timesheet',
-// 'title.timesheet_files' => 'Timesheet Files',
+'title.timesheets' => 'Arbeitszeittabellen',
+'title.timesheet' => 'Arbeitszeittabelle',
+'title.timesheet_files' => 'Arbeitszeittabellendateien',
 'title.invoice' => 'Rechnung',
 'title.send_invoice' => 'Rechnung senden',
 'title.charts' => 'Diagramme',
@@ -298,10 +295,9 @@ $i18n_key_words = array(
 'title.add_notification' => 'Benachrichtigung hinzufügen',
 'title.edit_notification' => 'Benachrichtigung bearbeiten',
 'title.delete_notification' => 'Benachrichtigung löschen',
-// TODO: translate the following.
-// 'title.add_timesheet' => 'Adding Timesheet',
-// 'title.edit_timesheet' => 'Editing Timesheet',
-// 'title.delete_timesheet' => 'Deleting Timesheet',
+'title.add_timesheet' => 'Arbeitszeittabelle hinzufügen',
+'title.edit_timesheet' => 'Arbeitszeittabelle bearbeiten',
+'title.delete_timesheet' => 'Arbeitszeittabelle löschen',
 'title.monthly_quotas' => 'Monatliche Quoten',
 'title.export' => 'Daten exportieren',
 'title.import' => 'Daten importieren',
@@ -321,14 +317,13 @@ $i18n_key_words = array(
 'title.week_view' => 'Wochenansicht',
 'title.swap_roles' => 'Tausche Rollen',
 'title.work_units' => 'Arbeitseinheiten',
-// TODO: translate the following.
-// 'title.templates' => 'Templates',
-// 'title.add_template' => 'Adding Template',
-// 'title.edit_template' => 'Editing Template',
-// 'title.delete_template' => 'Deleting Template',
-// 'title.edit_file' => 'Editing File',
-// 'title.delete_file' => 'Deleting File',
-// 'title.download_file' => 'Downloading File',
+'title.templates' => 'Vorlagen',
+'title.add_template' => 'Vorlage hinzufügen',
+'title.edit_template' => 'Vorlage bearbeiten',
+'title.delete_template' => 'Vorlage löschen',
+'title.edit_file' => 'Datei bearbeiten',
+'title.delete_file' => 'Datei löschen',
+'title.download_file' => 'Datei herunterladen',
 
 // Section for common strings inside combo boxes on forms. Strings shared between forms shall be placed here.
 // Strings that are used in a single form must go to the specific form section.
@@ -352,20 +347,17 @@ $i18n_key_words = array(
 'dropdown.clients' => 'Kunden',
 'dropdown.select' => '--- auswählen ---',
 'dropdown.select_invoice' => '--- Rechnung auswählen ---',
-// TODO: translate the following.
-// 'dropdown.select_timesheet' => '--- select timesheet ---',
+'dropdown.select_timesheet' => '--- Arbeitszeittabelle auswählen ---',
 'dropdown.status_active' => 'aktiv',
 'dropdown.status_inactive' => 'inaktiv',
 'dropdown.delete' => 'löschen',
 'dropdown.do_not_delete' => 'nicht löschen',
-// TODO: translate the following.
-// 'dropdown.approved' => 'approved',
-// 'dropdown.not_approved' => 'not approved',
+'dropdown.approved' => 'genehmigt',
+'dropdown.not_approved' => 'abgelehnt',
 'dropdown.paid' => 'bezahlt',
 'dropdown.not_paid' => 'nicht bezahlt',
-// TODO: translate the following.
-// 'dropdown.ascending' => 'ascending',
-// 'dropdown.descending' => 'descending',
+'dropdown.ascending' => 'aufsteigend',
+'dropdown.descending' => 'absteigend',
 
 // Below is a section for strings that are used on individual forms. When a string is used only on one form it should be placed here.
 // One exception is for closely related forms such as "Time" and "Editing Time Record" with similar controls. In such cases
@@ -377,14 +369,12 @@ $i18n_key_words = array(
 'form.login.about' => 'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> ist ein Open-Source Zeiterfassungssystem.',
 
 // Email subject and body for two-factor authentication.
-// TODO: translate the following.
-// 'email.2fa_code.subject' => 'Anuko Time Tracker two-factor authentication code',
-// 'email.2fa_code.body' => "Dear User,\n\nYour two-factor authentication code is:\n\n%s\n\n",
+'email.2fa_code.subject' => 'Anuko Time Tracker Zwei-Faktor-Authentifizierungscode',
+'email.2fa_code.body' => "Sehr geehrter Benutzer,\n\nIhr Zwei-Faktor-Authentifizierungscode lautet:\n\n%s\n\n",
 
 // Two-factor authentication form. See example at https://timetracker.anuko.com/2fa.php.
-// TODO: translate the following.
-// 'form.2fa.hint' => 'Check your email for 2FA code and enter it here.',
-// 'form.2fa.2fa_code' => '2FA code',
+'form.2fa.hint' => 'Überprüfen Sie Ihre E-Mails auf den 2FA-Code und geben Sie ihn hier ein.',
+'form.2fa.2fa_code' => '2FA-Code',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Anfrage zur Zurücksetzung des Passwortes wurde per E-mail gesendet.',
@@ -416,19 +406,17 @@ $i18n_key_words = array(
 'form.reports.include_not_billable' => 'nicht in Rechnung stellen',
 'form.reports.include_invoiced' => 'berechnet',
 'form.reports.include_not_invoiced' => 'nicht berechnet',
-// TODO: translate the following.
-// 'form.reports.include_assigned' => 'assigned',
-// 'form.reports.include_not_assigned' => 'not assigned',
-// 'form.reports.include_pending' => 'pending',
+'form.reports.include_pending' => 'Ausstehend',
 'form.reports.select_period' => 'Zeitraum auswählen',
 'form.reports.set_period' => 'oder Datum eingeben',
-// TODO: translate the following.
-// 'form.reports.note_containing' => 'Note containing',
+// TODO: review form.reports.note_containing translation for accuracy.
+// This is basically a string filter in user notes, see https://www.anuko.com/time-tracker/what-is/note-containing.htm
+'form.reports.note_containing' => 'Enthält Notitz', // The concern is that it may be translated as "Containing a note", which is different
+                                                    // from "Note containing a substring in this field."
 'form.reports.show_fields' => 'Felder anzeigen',
-// TODO: translate the following.
-// 'form.reports.time_fields' => 'Time fields',
-// 'form.reports.user_fields' => 'User fields',
-// 'form.reports.project_fields' => 'Project fields',
+'form.reports.time_fields' => 'Zeitfelder',
+'form.reports.user_fields' => 'Benutzerfelder',
+'form.reports.project_fields' => 'Projektfelder',
 'form.reports.group_by' => 'Gruppieren nach',
 'form.reports.group_by_no' => '--- keine Gruppierung ---',
 'form.reports.group_by_date' => 'Datum',
