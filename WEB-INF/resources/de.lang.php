@@ -20,19 +20,16 @@ $i18n_key_words = array(
 'menu.logout' => 'Abmelden',
 'menu.forum' => 'Forum',
 'menu.help' => 'Hilfe',
-// TODO: translate the following.
-// 'menu.register' => 'Register',
+'menu.register' => 'Registrieren',
 'menu.profile' => 'Profil',
 'menu.group' => 'Gruppe',
 'menu.plugins' => 'Erweiterungen',
 'menu.time' => 'Zeiten',
-// TODO: translate the following.
-// 'menu.puncher' => 'Punch',
+'menu.puncher' => 'Stempeluhr',
 'menu.week' => 'Woche',
 'menu.expenses' => 'Kosten',
 'menu.reports' => 'Berichte',
-// TODO: translate the following.
-// 'menu.timesheets' => 'Timesheets',
+'menu.timesheets' => 'Arbeitszeittabellen',
 'menu.charts' => 'Diagramme',
 'menu.projects' => 'Projekte',
 'menu.tasks' => 'Aufgaben',
@@ -52,8 +49,7 @@ $i18n_key_words = array(
 'error.access_denied' => 'Zugriff verweigert.',
 'error.sys' => 'Systemfehler.',
 'error.db' => 'Datenbankfehler.',
-// TODO: translate the following.
-// 'error.registered_recently' => 'Registered recently.',
+'error.registered_recently' => 'Kürzlich registriert.',
 'error.feature_disabled' => 'Funktion ist deaktiviert.',
 'error.field' => 'Ungültige "{0}" Daten.',
 'error.empty' => 'Feld "{0}" ist leer.',
@@ -65,40 +61,34 @@ $i18n_key_words = array(
 'error.report' => 'Bericht auswählen.',
 'error.record' => 'Eintrag auswählen.',
 'error.auth' => 'Benutzername oder Passwort ungültig.',
-// TODO: translate the following.
-// 'error.2fa_code' => 'Invalid 2FA code.',
-// 'error.weak_password' => 'Weak password.',
+'error.2fa_code' => 'Ungültiger 2FA-Code.',
+'error.weak_password' => 'Schwaches Passwort.',
 'error.user_exists' => 'Benutzer mit diesem Konto ist bereits vorhanden.',
 'error.object_exists' => 'Objekt mit diesem Namen ist bereits vorhanden.',
 'error.invoice_exists' => 'Rechnung mit dieser Nummer existiert bereits.',
 'error.role_exists' => 'Rolle mit diesem Rang existiert bereits.',
 'error.no_invoiceable_items' => 'Keine Einträge zur Rechnungsstellung gefunden.',
-// TODO: translate the following.
-// 'error.no_records' => 'There are no records.',
+'error.no_records' => 'Es gibt keine Einträge.',
 'error.no_login' => 'Benutzer mit diesen Anmeldedaten nicht vorhanden.',
 'error.no_groups' => 'Die Datenbank ist leer. Als Administrator anmelden und ein neues Gruppe erzeugen.',
 'error.upload' => 'Fehler beim hochladen einer Datei.',
 'error.range_locked' => 'Zeitinterval ist gesperrt.',
-'error.mail_send' => 'Fehler beim versenden einer E-Mail.',
-// TODO: improve the translation above by adding MAIL_SMTP_DEBUG part.
-// 'error.mail_send' => 'Error sending mail. Use MAIL_SMTP_DEBUG for diagnostics.',
+'error.mail_send' => 'Fehler beim versenden einer E-Mail. Verwenden Sie MAIL_SMTP_DEBUG für die Diagnose.',
 'error.no_email' => 'Dieser Benutzer besitzt keine e-Mail Adresse.',
 'error.uncompleted_exists' => 'Unvollständiger Eintrag bereits vorhanden. Schließen oder Löschen.',
 'error.goto_uncompleted' => 'Zum unvollständigen Eintrag gehen.',
 'error.overlap' => 'Der Zeitinterval überschneidet sich mit vorhandenen Einträgen.',
 'error.future_date' => 'Datum ist in der Zukunft.',
-// TODO: translate the following.
-// 'error.xml' => 'Error in XML file at line %d: %s.',
-// 'error.cannot_import' => 'Cannot import: %s.',
-// 'error.format' => 'Invalid file format.',
-// 'error.user_count' => 'Limit on user count.',
-// 'error.expired' => 'Expiration date reached.',
-// 'error.file_storage' => 'File storage server error.', // See comment in English file.
+'error.xml' => 'Fehler in der XML-Datei in der Zeile %d: %s.',
+'error.cannot_import' => 'Kann nicht importiert werden: %s.',
+'error.format' => 'Ungültiges Dateiformat.',
+'error.user_count' => 'Begrenzung der Benutzeranzahl erreicht.',
+'error.expired' => 'Ablaufdatum erreicht.',
+'error.file_storage' => 'Dateispeicherserver-Fehler.',
 
 // Warning messages.
 'warn.sure' => 'Sind Sie sicher?',
-// TODO: translate the following.
-// 'warn.confirm_save' => 'Date has changed. Confirm saving, not copying this item.',
+'warn.confirm_save' => 'Das Datum hat sich geändert. Bestätigen Sie das Speichern, nicht das Kopieren dieses Elements.',
 
 // Success messages.
 'msg.success' => 'Operation vollständig abgeschlossen.',
@@ -120,19 +110,14 @@ $i18n_key_words = array(
 'button.export' => 'Gruppe exportieren',
 'button.import' => 'Gruppe importieren',
 'button.close' => 'Schließen',
-// TODO: translate the following.
-// 'button.start' => 'Start',
+'button.start' => 'Start',
 'button.stop' => 'Stop',
-// TODO: translate the following.
-// (PR#81 suggested 'Freigeben / Genehmigen' for 'Approve' and 'Freigabe zurücknehmen' for 'Disapprove'.
-// The problem is they do not appear precise, deviate from the meaning of approval / disaproval of report items.)
-// 'button.approve' => 'Approve', (suggested 'Freigeben / Genehmigen' does not appear precise)
-// 'button.disapprove' => 'Disapprove',
-// 'button.sync' => 'Sync', // Used in Android app. The meaning is to synchronize offline time records with server.
+'button.approve' => 'Annehmen',
+'button.disapprove' => 'Ablehnen',
+'button.sync' => 'Sync',
 
 // Labels for controls on forms. Labels in this section are used on multiple forms.
-// TODO: translate the following.
-// 'label.menu' => 'Menu',
+'label.menu' => 'Menü',
 'label.group_name' => 'Gruppenname',
 'label.address' => 'Adresse',
 'label.currency' => 'Währung',
@@ -152,9 +137,8 @@ $i18n_key_words = array(
 'label.end_date' => 'Enddatum',
 'label.user' => 'Benutzer',
 'label.users' => 'Personen',
-// TODO: translate the following.
-// 'label.group' => 'Group',
-// 'label.subgroups' => 'Subgroups',
+'label.group' => 'Gruppe',
+'label.subgroups' => 'Untergruppen',
 'label.roles' => 'Rollen',
 'label.client' => 'Kunde',
 'label.clients' => 'Kunden',
@@ -185,8 +169,7 @@ $i18n_key_words = array(
 'label.select_none' => 'Alle abwählen',
 'label.day_view' => 'Tagesansicht',
 'label.week_view' => 'Wochenansicht',
-// TODO: translate the following:
-// 'label.puncher' => 'Puncher',
+'label.puncher' => 'Stempeluhr',
 'label.id' => 'ID',
 'label.language' => 'Sprache',
 'label.decimal_mark' => 'Dezimaltrennzeichen',
@@ -213,8 +196,7 @@ $i18n_key_words = array(
 // Labels for plugins (extensions to Time Tracker that provide additional features).
 'label.custom_fields' => 'Benutzerfelder',
 'label.monthly_quotas' => 'Monatliche Quoten',
-// TODO: translate the following.
-// 'label.entity' => 'Entity',
+'label.entity' => 'Einheit',
 'label.type' => 'Typ',
 'label.type_dropdown' => 'Ausklappen',
 'label.type_text' => 'Text',
@@ -229,33 +211,30 @@ $i18n_key_words = array(
 'label.mark_paid' => 'Als bezahlt setzen',
 'label.week_note' => 'Wochennotiz',
 'label.week_list' => 'Wochenliste',
-// TODO: translate the following:
-// 'label.weekends' => 'Weekends',
+'label.weekends' => 'Wochenenden',
 'label.work_units' => 'Arbeitseinheiten',
 'label.work_units_short' => 'Einheiten',
 'label.totals_only' => 'Nur Gesamtstunden',
 'label.quota' => 'Quote',
-// TODO: translate the following.
-// 'label.timesheet' => 'Timesheet',
-// 'label.submitted' => 'Submitted',
-// 'label.approved' => 'Approved',
-// 'label.approval' => 'Report approval',
-// 'label.mark_approved' => 'Mark approved',
-// 'label.template' => 'Template',
-// 'label.bind_templates_with_projects' => 'Bind templates with projects',
-// 'label.prepopulate_note' => 'Prepopulate Note field',
-// 'label.attachments' => 'Attachments',
-// 'label.files' => 'Files',
-// 'label.file' => 'File',
+'label.timesheet' => 'Arbeitszeittabelle',
+'label.submitted' => 'Eingereicht',
+'label.approved' => 'Genehmigt',
+'label.approval' => 'Genehmigung des Berichts',
+'label.mark_approved' => 'Als genehmigt markieren',
+'label.template' => 'Vorlage',
+'label.bind_templates_with_projects' => 'Vorlagen mit Projekten verbinden',
+'label.prepopulate_note' => 'Notizfeld vorab ausfüllen',
+'label.attachments' => 'Anhänge',
+'label.files' => 'Dateien',
+'label.file' => 'Datei',
 'label.active_users' => 'Aktive Nutzer',
 'label.inactive_users' => 'Inaktive Nutzer',
 
 // Entity names. We use lower case (in English) because they are used in dropdowns, too.
 // They are used to associate a custom field with an entity type.
-// TODO: translate the following.
-// 'entity.time' => 'time',
-// 'entity.user' => 'user',
-// 'entity.project' => 'project',
+'entity.time' => 'Zeit',
+'entity.user' => 'Benutzer',
+'entity.project' => 'Projekt',
 
 // Form titles.
 'title.error' => 'Fehler',
