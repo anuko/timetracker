@@ -430,18 +430,21 @@ $i18n_key_words = array(
 'form.report.export' => 'Exportiere',
 'form.report.per_hour' => 'Stundensatz',
 'form.report.assign_to_invoice' => 'Zu Rechnung hinzufügen',
-// TODO: translate the following.
+// TODO: REVIEW the following.
 // 'form.report.assign_to_timesheet' => 'Assign to timesheet',
+// See how this feature works: https://www.anuko.com/time-tracker/user-guide/timesheets.htm
+// Basically, we are selecting records in a report and assign them TO (include IN) one of timesheets.
+// The concern is that it is now translated as "Assign timesheet", which is different from how
+// form.report.assign_to_invoice above is translated.
+'form.report.assign_to_timesheet' => 'Arbeitszeittabelle zuweisen',
 
 // Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
-// TODO: translate the following.
-// 'form.timesheets.active_timesheets' => 'Active Timesheets',
-// 'form.timesheets.inactive_timesheets' => 'Inactive Timesheets',
+'form.timesheets.active_timesheets' => 'Aktive Arbeitszeittabellen',
+'form.timesheets.inactive_timesheets' => 'Inaktive Arbeitszeittabellen',
 
 // Templates form. See example at https://timetracker.anuko.com/templates.php
-// TODO: translate the following.
-// 'form.templates.active_templates' => 'Active Templates',
-// 'form.templates.inactive_templates' => 'Inactive Templates',
+'form.templates.active_templates' => 'Aktive Vorlagen',
+'form.templates.inactive_templates' => 'Inaktive Vorlagen',
 
 // Invoice form. See example at https://timetracker.anuko.com/invoice_view.php
 // (you can get to this form after generating an invoice).
@@ -466,8 +469,7 @@ $i18n_key_words = array(
 'form.tasks.inactive_tasks' => 'Inaktive Tasks',
 
 // Users form. See example at https://timetracker.anuko.com/users.php
-// TODO: translate the following.
-// 'form.users.uncompleted_entry_today' => 'User has an uncompleted time entry today',
+'form.users.uncompleted_entry_today' => 'Der Benutzer hat heute einen nicht abgeschlossenen Zeiteintrag',
 'form.users.uncompleted_entry' => 'Nutzer hat einen unvollständigen Zeiteintrag',
 'form.users.role' => 'Rolle',
 'form.users.manager' => 'Manager',
@@ -521,21 +523,18 @@ $i18n_key_words = array(
 'form.group_edit.type_all' => 'alle',
 'form.group_edit.type_start_finish' => 'Start und Ende',
 'form.group_edit.type_duration' => 'Dauer',
-'form.group_edit.punch_mode' => 'Stechuhr-Modus',
-// TODO: translate the following.
-// 'form.group_edit.one_uncompleted' => 'One uncompleted',
+'form.group_edit.punch_mode' => 'Stempeluhr-Modus',
+'form.group_edit.one_uncompleted' => 'Eine unvollendete',
 'form.group_edit.allow_overlap' => 'Erlaube Überschneidung',
 'form.group_edit.future_entries' => 'Einträge in der Zukunft',
 'form.group_edit.uncompleted_indicators' => 'Zeige unfertige Einträge',
 'form.group_edit.confirm_save' => 'Speichern bestätigen',
-// TODO: translate the following.
-// 'form.group_edit.advanced_settings' => 'Advanced settings',
+'form.group_edit.advanced_settings' => 'Erweiterte Einstellungen',
 
 // Advanced Group Settings form. See example at https://timetracker.anuko.com/group_advanced_edit.php.
 'form.group_advanced_edit.allow_ip' => 'Erlaube IP',
-// TODO: Translate the following.
-// 'form.group_advanced_edit.password_complexity' => 'Password complexity',
-// 'form.group_advanced_edit.2fa' => 'Two factor authentication',
+'form.group_advanced_edit.password_complexity' => 'Komplexität des Passworts',
+'form.group_advanced_edit.2fa' => 'Zwei-Faktor-Authentifizierung',
 
 // Deleting Group form. See example at https://timetracker.anuko.com/delete_group.php
 'form.group_delete.hint' => 'Sind Sie sicher, dass Sie die gesamte Gruppe löschen möchten?',
@@ -569,7 +568,6 @@ $i18n_key_words = array(
 'role.client.low_case_label' => 'Kunde',
 // TODO: translate the following.
 // 'role.client.description' => 'A client can view its own data.',
-'role.client.description' => 'Ein Kunde kann zu ihm gehörende Berichte und Rechnungen ansehen.',
 'role.supervisor.label' => 'Dienstvorgesetzter',
 'role.supervisor.low_case_label' => 'Dienstvorgesetzter',
 'role.supervisor.description' => 'Eine Person mit ein paar Administrationsrechten.',
@@ -587,20 +585,18 @@ $i18n_key_words = array(
 'role.admin.description' => 'Aadminsitrator der Seite.',
 
 // Timesheet View form. See example at https://timetracker.anuko.com/timesheet_view.php.
-// TODO: translate the following.
-// 'form.timesheet_view.submit_subject' => 'Timesheet approval request',
-// 'form.timesheet_view.submit_body' => "A new timesheet requires approval.<p>User: %s.",
-// 'form.timesheet_view.approve_subject' => 'Timesheet approved',
-// 'form.timesheet_view.approve_body' => "Your timesheet %s was approved.<p>%s",
-// 'form.timesheet_view.disapprove_subject' => 'Timesheet not approved',
-// 'form.timesheet_view.disapprove_body' => "Your timesheet %s was not approved.<p>%s",
+'form.timesheet_view.submit_subject' => 'Antrag auf Genehmigung der Arbeitszeittabelle',
+'form.timesheet_view.submit_body' => "Eine neue Arbeitszeittabelle muss genehmigt werden.<p>Benutzer: %s.",
+'form.timesheet_view.approve_subject' => 'Arbeitszeittabelle genehmigt',
+'form.timesheet_view.approve_body' => "Ihre Arbeitszeittabelle %s wurde genehmigt.<p>%s",
+'form.timesheet_view.disapprove_subject' => 'Arbeitszeittabelle nicht genehmigt',
+'form.timesheet_view.disapprove_body' => "Ihre Arbeitszeittabelle %s wurde nicht genehmigt.<p>%s",
 
 // Display Options form. See example at https://timetracker.anuko.com/display_options.php.
 'form.display_options.note_on_separate_row' => 'Beschreibung in separater Zeile',
-// TODO: translate the following.
-// 'form.display_options.not_complete_days' => 'Not complete days',
-// 'form.display_options.inactive_projects' => 'Inactive projects',
-// 'form.display_options.cost_per_hour' => 'Cost per hour',
-// 'form.display_options.custom_css' => 'Custom CSS',
-// 'form.display_options.custom_translation' => 'Custom translation',
+'form.display_options.not_complete_days' => 'Nicht vollständige Tage',
+'form.display_options.inactive_projects' => 'Inaktive Projekte',
+'form.display_options.cost_per_hour' => 'Kosten pro Stunde',
+'form.display_options.custom_css' => 'Benutzerdefiniertes CSS',
+'form.display_options.custom_translation' => 'Benutzerdefinierte Übersetzung',
 );
