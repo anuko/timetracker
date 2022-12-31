@@ -150,6 +150,8 @@ class ttAdmin {
 
   // getGroupName obtains group name.
   static function getGroupName($group_id) {
+    $group_id = (int) $group_id; // Just in case because it is used in sql.
+
     $result = array();
     $mdb2 = getConnection();
 
@@ -158,10 +160,11 @@ class ttAdmin {
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $val = $res->fetchRow();
-      return $val['name'];
+      if (isset($val['name']))
+        return $val['name'];
     }
 
-    return false;
+    return null;
   }
 
   // getOrgDetails obtains group name and its top manager details.

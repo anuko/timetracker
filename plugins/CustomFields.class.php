@@ -221,6 +221,8 @@ class CustomFields {
         global $user;
         $mdb2 = getConnection();
 
+        $id = (int) $id; // Just in case. Better safe than sorry as it is used in sql.
+
         $group_id = $user->getGroup();
         $org_id = $user->org_id;
 
@@ -229,10 +231,10 @@ class CustomFields {
         $res = $mdb2->query($sql);
         if (!is_a($res, 'PEAR_Error')) {
             $val = $res->fetchRow();
-            $name = $val['value'];
-            return $name;
+            if (isset($val['value']))
+              return $val['value'];
         }
-        return false;
+        return null;
     }
 
     // getFields returns an array of custom fields for group.

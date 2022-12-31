@@ -17,7 +17,7 @@ if (!$user->isPluginEnabled('cf')) {
 }
 $cl_id = (int)$request->getParameter('id');
 $option = CustomFields::getOptionName($cl_id);
-if ($option == null || $option === false) {
+if ($option == null) {
   header('Location: access_denied.php');
   exit();
 }

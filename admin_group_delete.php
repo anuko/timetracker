@@ -13,7 +13,7 @@ if (!ttAccessAllowed('administer_site')) {
 }
 $group_id = (int)$request->getParameter('id');
 $group_name = ttAdmin::getGroupName($group_id);
-if (!($group_id && $group_name)) {
+if (!($group_id && $group_name != null)) {
   header('Location: access_denied.php');
   exit();
 }
