@@ -138,7 +138,8 @@ class ttAdmin {
     // Update self.
     $user_id = $user->id;
     $login_part = 'login = '.$mdb2->quote($fields['login']);
-    if ($fields['password1'])
+    $password_part = '';
+    if (isset($fields['password1']))
       $password_part = ', password = md5('.$mdb2->quote($fields['password1']).')';
     $name_part = ', name = '.$mdb2->quote($fields['name']);
     $email_part = ', email = '.$mdb2->quote($fields['email']);

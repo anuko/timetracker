@@ -48,7 +48,7 @@ if ($request->isPost()) {
   // If we change login, it must be unique.
   if ($cl_login != $user->login && ttUserHelper::getUserByLogin($cl_login))
     $err->add($i18n->get('error.user_exists'));
-  if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
+  if (!$auth->isPasswordExternal() && ($cl_password1 != null || $cl_password2 != null)) {
       if (!ttValidString($cl_password1))
         $err->add($i18n->get('error.field'), $i18n->get('label.password'));
       if (!ttValidString($cl_password2))
