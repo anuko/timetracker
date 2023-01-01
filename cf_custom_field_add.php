@@ -15,7 +15,6 @@ if (!$user->isPluginEnabled('cf')) {
   header('Location: feature_disabled.php');
   exit();
 }
-$fields = CustomFields::getFields();
 // End of access checks.
 
 if ($request->isPost()) {
@@ -42,6 +41,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('bu
 if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_field_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
+  if (CustomFields::getFieldByName($cl_field_name, $cl_entity_type) != null) $err->add($i18n->get('error.object_exists'));
 
   if ($err->no()) {
     $res = CustomFields::insertField($cl_field_name, $cl_entity_type, $cl_field_type, $cl_required);

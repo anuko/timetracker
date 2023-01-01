@@ -278,6 +278,27 @@ class CustomFields {
         return false;
     }
 
+    // getFieldByName returns a custom field by name and its entity type.
+    static function getFieldByName($fieldName, $entityType) {
+      global $user;
+      $mdb2 = getConnection();
+
+      $entityType = (int) $entityType; // Just in case.
+      $group_id = $user->getGroup();
+      $org_id = $user->org_id;
+
+      $sql = "select label, type, required from tt_custom_fields" .
+        " where label = ". $mdb2->quote($fieldName) . " and entity_type = $entityType".
+        " and group_id = $group_id and org_id = $org_id and status is not null";
+      $res = $mdb2->query($sql);
+      if (!is_a($res, 'PEAR_Error')) {
+        $val = $res->fetchRow();
+        if (isset($val))
+          return $val;
+      }
+      return null;
+    }
+
     // getFieldIdForOption returns field id from an associated option id.
     static function getFieldIdForOption($option_id) {
         global $user;
