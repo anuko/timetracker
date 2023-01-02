@@ -298,8 +298,7 @@ class ttInvoiceHelper {
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 
-    $name = $fields['name'];
-    if (!$name) return false;
+    $name = isset($fields['name']) ? $fields['name'] : null;
 
     $client_id = (int) $fields['client_id'];
 
