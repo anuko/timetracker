@@ -55,13 +55,17 @@ if ($request->isPost()) {
   if ($err->no() && $loginSucceeded) {
     $user = new ttUser(null, $auth->getUserId());
 
-    // Determine if we have to additionally use two-factor authentication.
-    $config = $user->getConfigHelper();
-    $use2FA = $config->getDefinedValue('2fa');
+    if ($user->initialized) {
+      // Determine if we have to additionally use two-factor authentication.
+      $config = $user->getConfigHelper();
+      $use2FA = $config->getDefinedValue('2fa');
+    } else {
+      $err->add($i18n->get('error.db'));
+    }
   }
 
   // If we have to use 2FA, email auth code to user and redirect to 2fa.php.
-  if ($use2FA && !$user->can('override_2fa')) {
+  if ($err->no() && $use2FA && !$user->can('override_2fa')) {
     // To keep things simple, we use the same code as for password resets.
     $cryptographically_strong = true;
     $random_bytes = openssl_random_pseudo_bytes(16, $cryptographically_strong);

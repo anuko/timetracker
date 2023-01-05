@@ -62,6 +62,9 @@ class ttUser {
   var $behalfUser = null;       // A ttBehalfUser instance with on behalf user attributes.
   var $behalfGroup = null;      // A ttGroup instance with on behalf group attributes.
 
+  var $initialized = false;     // Set to true when an object is initialized.
+
+
   // Constructor.
   function __construct($login, $id = null) {
     if (!$login && !$id) {
@@ -69,86 +72,93 @@ class ttUser {
       return;
     }
 
-    $mdb2 = getConnection();
+    try {
+      $mdb2 = getConnection();
 
-    $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id,".
-      " u.quota_percent, u.email, g.org_id, g.group_key, g.name as group_name, g.currency, g.lang, g.decimal_mark, g.date_format,".
-      " g.time_format, g.week_start, g.tracking_mode, g.project_required, g.record_type,".
-      " g.bcc_email, g.allow_ip, g.password_complexity, g.plugins, g.config, g.lock_spec, g.custom_css, g.custom_translation,".
-      " g.holidays, g.workday_minutes, g.custom_logo".
-      " FROM tt_users u LEFT JOIN tt_groups g ON (u.group_id = g.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
-    if ($id)
-      $sql .= "u.id = $id";
-    else
-      $sql .= "u.login = ".$mdb2->quote($login);
-    $sql .= " AND u.status = 1";
+      $sql = "SELECT u.id, u.login, u.name, u.group_id, u.role_id, r.rank, r.name as role_name, r.rights, u.client_id,".
+        " u.quota_percent, u.email, g.org_id, g.group_key, g.name as group_name, g.currency, g.lang, g.decimal_mark, g.date_format,".
+        " g.time_format, g.week_start, g.tracking_mode, g.project_required, g.record_type,".
+        " g.bcc_email, g.allow_ip, g.password_complexity, g.plugins, g.config, g.lock_spec, g.custom_css, g.custom_translation,".
+        " g.holidays, g.workday_minutes, g.custom_logo".
+        " FROM tt_users u LEFT JOIN tt_groups g ON (u.group_id = g.id) LEFT JOIN tt_roles r on (r.id = u.role_id) WHERE ";
+      if ($id)
+        $sql .= "u.id = $id";
+      else
+        $sql .= "u.login = ".$mdb2->quote($login);
+      $sql .= " AND u.status = 1";
 
-    $res = $mdb2->query($sql);
-    if (is_a($res, 'PEAR_Error')) {
-      return;
+      $res = $mdb2->query($sql);
+      if (is_a($res, 'PEAR_Error')) {
+        return;
+      }
+
+      $val = $res->fetchRow();
+      if ($val['id'] > 0) {
+        $this->login = $val['login'];
+        $this->name = $val['name'];
+        $this->id = $val['id'];
+        $this->org_id = $val['org_id'];
+        $this->group_id = $val['group_id'];
+        $this->group_key = $val['group_key'];
+        if ($this->org_id == $this->group_key) $this->org_key = $val['group_key'];
+        $this->role_id = $val['role_id'];
+        $this->role_name = $val['role_name'];
+        $this->rights = explode(',', $val['rights']);
+        $this->rank = $val['rank'];
+        $this->client_id = $val['client_id'];
+        $this->is_client = $this->client_id && !in_array('track_own_time', $this->rights);
+        if ($val['quota_percent']) $this->quota_percent = $val['quota_percent'];
+        $this->email = $val['email'];
+        if ($val['lang']) $this->lang = $val['lang'];
+        if ($val['decimal_mark']) $this->decimal_mark = $val['decimal_mark'];
+        $this->date_format = $val['date_format'];
+        $this->time_format = $val['time_format'];
+        $this->week_start = $val['week_start'];
+        $this->tracking_mode = $val['tracking_mode'];
+        $this->project_required = $val['project_required'];
+        $this->record_type = $val['record_type'];
+        $this->bcc_email = $val['bcc_email'];
+        $this->allow_ip = $val['allow_ip'];
+        $this->password_complexity = $val['password_complexity'];
+        $this->group_name = $val['group_name'];
+        $this->currency = $val['currency'];
+        $this->plugins = $val['plugins'];
+        $this->lock_spec = $val['lock_spec'];
+        $this->holidays = $val['holidays'];
+        $this->workday_minutes = $val['workday_minutes'];
+        $this->custom_logo = $val['custom_logo'];
+
+        // TODO: refactor this.
+        $this->config = $val['config'];
+        $this->configHelper = new ttConfigHelper($val['config']);
+
+        // Set user config options.
+        $this->punch_mode = $this->configHelper->getDefinedValue('punch_mode');
+        $this->allow_overlap = $this->configHelper->getDefinedValue('allow_overlap');
+
+        $this->custom_css = $val['custom_css'];
+        $this->custom_translation = $val['custom_translation'];
+
+        // Set "on behalf" id and name (user).
+        if (isset($_SESSION['behalf_id'])) {
+          $this->behalf_id = $_SESSION['behalf_id'];
+          $this->behalf_name = $_SESSION['behalf_name'];
+
+          $this->behalfUser = new ttBehalfUser($this->behalf_id, $this->org_id);
+        }
+        // Set "on behalf" id and name (group).
+        if (isset($_SESSION['behalf_group_id'])) {
+          $this->behalf_group_id = $_SESSION['behalf_group_id'];
+          $this->behalf_group_name = $_SESSION['behalf_group_name'];
+
+          $this->behalfGroup = new ttGroup($this->behalf_group_id, $this->org_id);
+        }
+      }
+
+      $this->initialized = true;
     }
-
-    $val = $res->fetchRow();
-    if ($val['id'] > 0) {
-      $this->login = $val['login'];
-      $this->name = $val['name'];
-      $this->id = $val['id'];
-      $this->org_id = $val['org_id'];
-      $this->group_id = $val['group_id'];
-      $this->group_key = $val['group_key'];
-      if ($this->org_id == $this->group_key) $this->org_key = $val['group_key'];
-      $this->role_id = $val['role_id'];
-      $this->role_name = $val['role_name'];
-      $this->rights = explode(',', $val['rights']);
-      $this->rank = $val['rank'];
-      $this->client_id = $val['client_id'];
-      $this->is_client = $this->client_id && !in_array('track_own_time', $this->rights);
-      if ($val['quota_percent']) $this->quota_percent = $val['quota_percent'];
-      $this->email = $val['email'];
-      if ($val['lang']) $this->lang = $val['lang'];
-      if ($val['decimal_mark']) $this->decimal_mark = $val['decimal_mark'];
-      $this->date_format = $val['date_format'];
-      $this->time_format = $val['time_format'];
-      $this->week_start = $val['week_start'];
-      $this->tracking_mode = $val['tracking_mode'];
-      $this->project_required = $val['project_required'];
-      $this->record_type = $val['record_type'];
-      $this->bcc_email = $val['bcc_email'];
-      $this->allow_ip = $val['allow_ip'];
-      $this->password_complexity = $val['password_complexity'];
-      $this->group_name = $val['group_name'];
-      $this->currency = $val['currency'];
-      $this->plugins = $val['plugins'];
-      $this->lock_spec = $val['lock_spec'];
-      $this->holidays = $val['holidays'];
-      $this->workday_minutes = $val['workday_minutes'];
-      $this->custom_logo = $val['custom_logo'];
-
-      // TODO: refactor this.
-      $this->config = $val['config'];
-      $this->configHelper = new ttConfigHelper($val['config']);
-
-      // Set user config options.
-      $this->punch_mode = $this->configHelper->getDefinedValue('punch_mode');
-      $this->allow_overlap = $this->configHelper->getDefinedValue('allow_overlap');
-
-      $this->custom_css = $val['custom_css'];
-      $this->custom_translation = $val['custom_translation'];
-
-      // Set "on behalf" id and name (user).
-      if (isset($_SESSION['behalf_id'])) {
-        $this->behalf_id = $_SESSION['behalf_id'];
-        $this->behalf_name = $_SESSION['behalf_name'];
-
-        $this->behalfUser = new ttBehalfUser($this->behalf_id, $this->org_id);
-      }
-      // Set "on behalf" id and name (group).
-      if (isset($_SESSION['behalf_group_id'])) {
-        $this->behalf_group_id = $_SESSION['behalf_group_id'];
-        $this->behalf_group_name = $_SESSION['behalf_group_name'];
-
-        $this->behalfGroup = new ttGroup($this->behalf_group_id, $this->org_id);
-      }
+    catch (Exception $e) {
+      error_log("Exception raised in ttUser constructor: ".$e->getMessage());
     }
   }
 

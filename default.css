@@ -148,8 +148,9 @@ div.page-hint {
 /* For printing large tables that do not fit into one page, we have to change the display
 property to "block" and also use "break-before: avoid;". This eliminates a page break between
 header and large table on print previews. I could not accomplish this with inline-block
-because break-before is apparently ignored for inline elements.
-inline-block above in itself is needed for nice horizontal centering on screen. */
+because break-before is apparently ignored for inline-block elements.
+inline-block above in itself is needed for nice horizontal centering on screen.
+A side effect of this is that printed tables are not horizontally centered. */
 @media print
 {
   .x-scrollable-table { display: block; break-before: avoid; break-after: auto; }
