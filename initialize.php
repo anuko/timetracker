@@ -12,7 +12,13 @@ error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT); // & ~E_DEPRECATED);
 // Disable displaying errors on screen.
 ini_set('display_errors', 'Off');
 
-define("APP_VERSION", "1.22.8.5771");
+// Disable mysqli fatal error behaviour when using php8.1 or greater.
+// See https://php.watch/versions/8.1/mysqli-error-mode
+if (version_compare(phpversion(), '8.1', '>=')) {
+  mysqli_report(MYSQLI_REPORT_OFF);
+}
+
+define("APP_VERSION", "1.22.9.5772");
 define("APP_DIR", dirname(__FILE__));
 define("LIBRARY_DIR", APP_DIR."/WEB-INF/lib");
 define("TEMPLATE_DIR", APP_DIR."/WEB-INF/templates");
