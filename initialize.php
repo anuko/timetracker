@@ -18,7 +18,7 @@ if (version_compare(phpversion(), '8.1', '>=')) {
   mysqli_report(MYSQLI_REPORT_OFF);
 }
 
-define("APP_VERSION", "1.22.9.5772");
+define("APP_VERSION", "1.22.9.5773");
 define("APP_DIR", dirname(__FILE__));
 define("LIBRARY_DIR", APP_DIR."/WEB-INF/lib");
 define("TEMPLATE_DIR", APP_DIR."/WEB-INF/templates");

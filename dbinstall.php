@@ -201,7 +201,7 @@ if ($request->isGet()) {
 if ($_POST) {
   print "Processing...<br>\n";
 
-  if ($_POST["crstructure"]) {
+  if (array_key_exists('crstructure', $_POST)) {
     $sqlQuery = join("\n", file("mysql.sql"));
     $sqlQuery = str_replace("TYPE=MyISAM","",$sqlQuery);
     $queries  = explode(";",$sqlQuery);
@@ -215,7 +215,7 @@ if ($_POST) {
     }
   }
 
-  if ($_POST["convert5to7"]) {
+  if (array_key_exists('convert5to7', $_POST)) {
     ttExecute("alter table `activity_log` CHANGE al_comment al_comment text");
     ttExecute("CREATE TABLE `sysconfig` (`sysc_id` int(11) unsigned NOT NULL auto_increment,`sysc_name` varchar(32) NOT NULL default '',`sysc_value` varchar(70) default NULL, PRIMARY KEY  (`sysc_id`), UNIQUE KEY `sysc_id` (`sysc_id`), UNIQUE KEY `sysc_name` (`sysc_name`))");
     ttExecute("alter table `companies` add c_locktime int(4) default -1");
@@ -229,7 +229,7 @@ if ($_POST) {
     ttExecute("alter table users drop `u_aprojects`");
   }
 
-  if ($_POST["convert7to133"]) {
+  if (array_key_exists('convert7to133', $_POST)) {
     ttExecute("ALTER TABLE users ADD COLUMN u_lang VARCHAR(20) DEFAULT NULL");
     ttExecute("ALTER TABLE users ADD COLUMN u_email VARCHAR(100) DEFAULT NULL");
     ttExecute("ALTER TABLE `activity_log` drop `al_proof`");
@@ -244,7 +244,7 @@ if ($_POST) {
 
   // The update_projects function updates p_activities field in the projects table so that we could
   // improve performance of the application by using this field instead of activity_bind table.
-  if ($_POST["update_projects"]) {
+  if (array_key_exists('update_projects', $_POST)) {
     $mdb2 = getConnection();
     // $sql = "select p_id from projects where p_status = 1 and p_activities is NULL";
     $sql = "select p_id from projects where p_status = 1";
@@ -281,15 +281,15 @@ if ($_POST) {
     }
   }
 
-  if ($_POST["convert133to1340"]) {
+  if (array_key_exists('convert133to1340', $_POST)) {
     ttExecute("ALTER TABLE companies ADD COLUMN c_show_pie smallint(2) DEFAULT 1");
     ttExecute("ALTER TABLE companies ADD COLUMN c_pie_mode smallint(2) DEFAULT 1");
     ttExecute("ALTER TABLE companies ADD COLUMN c_lang varchar(20) default NULL");
   }
 
   // The update_companies function sets up c_show_pie, c_pie_mode, and c_lang
-  // fields in the companies table from the corresponding manager fields. 
-  if ($_POST["update_companies"]) {
+  // fields in the companies table from the corresponding manager fields.
+  if (array_key_exists('update_companies', $_POST)) {
     $mdb2 = getConnection();
     // Get all active managers.
     $sql = "select u_company_id, u_show_pie, u_pie_mode, u_lang from users
@@ -316,7 +316,7 @@ if ($_POST) {
     }
   }
 
-  if ($_POST["convert1340to1485"]) {
+  if (array_key_exists('convert1340to1485', $_POST)) {
     ttExecute("ALTER TABLE users DROP u_show_pie");
     ttExecute("ALTER TABLE users DROP u_pie_mode");
     ttExecute("ALTER TABLE users DROP u_lang");
@@ -421,7 +421,7 @@ if ($_POST) {
   }
 
   // The update_to_team_id function sets team_id field projects, activities, and clients tables.
-  if ($_POST["update_to_team_id"]) {
+  if (array_key_exists('update_to_team_id', $_POST)) {
     $mdb2 = getConnection();
 
     // Update projects.
@@ -518,7 +518,7 @@ if ($_POST) {
     print "Updated $clients_updated clients...<br>\n";
   }
 
-  if ($_POST["convert1485to1579"]) {
+  if (array_key_exists('convert1485to1579', $_POST)) {
     ttExecute("ALTER TABLE tt_fav_reports MODIFY id int(11) NOT NULL auto_increment");
     ttExecute("RENAME TABLE clients TO tt_clients");
     ttExecute("ALTER TABLE tt_clients CHANGE clnt_id id int(11) NOT NULL AUTO_INCREMENT");
@@ -625,7 +625,7 @@ if ($_POST) {
     ttExecute("create index invoice_idx on tt_log(invoice_id)");
   }
 
-  if ($_POST["convert1579to1600"]) {
+  if (array_key_exists('convert1579to1600', $_POST)) {
     ttExecute("ALTER TABLE tt_invoices ADD COLUMN date date NOT NULL");
     ttExecute("ALTER TABLE tt_teams ADD COLUMN custom_logo tinyint(4) default '0'");
     ttExecute("ALTER TABLE tt_tasks ADD COLUMN description varchar(255) default NULL");
@@ -643,7 +643,7 @@ if ($_POST) {
   }
 
   // The update_clients function updates projects field in tt_clients table.
-  if ($_POST["update_clients"]) {
+  if (array_key_exists('update_clients', $_POST)) {
     $mdb2 = getConnection();
     $sql = "select id from tt_clients where status = 1 or status = 0";
     $res = $mdb2->query($sql);
@@ -682,7 +682,7 @@ if ($_POST) {
   }
 
   // The update_custom_fields function updates option_id field in tt_custom_field_log table.
-  if ($_POST['update_custom_fields']) {
+  if (array_key_exists('update_custom_fields', $_POST)) {
     $mdb2 = getConnection();
     $sql = "update tt_custom_field_log set option_id = value where option_id is null and value is not null and field_id in (select id from tt_custom_fields where type = 2)";
     $affected = $mdb2->exec($sql);
@@ -693,7 +693,7 @@ if ($_POST) {
   }
 
   // The update_tracking_mode function sets the tracking_mode field in tt_teams table to 2 (== MODE_PROJECTS_AND_TASKS).
-  if ($_POST['update_tracking_mode']) {
+  if (array_key_exists('update_tracking_mode', $_POST)) {
     $mdb2 = getConnection();
     $sql = "update tt_teams set tracking_mode = 2 where tracking_mode = 0";
     $affected = $mdb2->exec($sql);
@@ -703,7 +703,7 @@ if ($_POST) {
     print "Updated $affected teams...<br>\n";
   }
 
-  if ($_POST["convert1600to11400"]) {
+  if (array_key_exists('convert1600to11400', $_POST)) {
     ttExecute("DROP TABLE IF EXISTS tt_invoice_headers");
     ttExecute("ALTER TABLE tt_fav_reports ADD COLUMN `client_id` int(11) default NULL");
     ttExecute("ALTER TABLE tt_fav_reports ADD COLUMN `cf_1_option_id` int(11) default NULL");
@@ -751,7 +751,7 @@ if ($_POST) {
     ttExecute("ALTER TABLE `tt_log` ADD `paid` tinyint(4) NULL default '0' AFTER `billable`");
   }
 
-  if ($_POST["convert11400to11744"]) {
+  if (array_key_exists('convert11400to11744', $_POST)) {
     ttExecute("ALTER TABLE `tt_teams` DROP `address`");
     ttExecute("ALTER TABLE `tt_fav_reports` ADD `report_spec` text default NULL AFTER `user_id`");
     ttExecute("ALTER TABLE `tt_fav_reports` ADD `paid_status` tinyint(4) default NULL AFTER `invoice`");
@@ -794,7 +794,7 @@ if ($_POST) {
   }
 
   // The update_role_id function assigns a role_id to users, who don't have it.
-  if ($_POST['update_role_id']) {
+  if (array_key_exists('update_role_id', $_POST)) {
     import('I18n');
 
     $mdb2 = getConnection();
@@ -833,7 +833,7 @@ if ($_POST) {
     print "Updated $users_updated users...<br>\n";
   }
 
-  if ($_POST["convert11744to11797"]) {
+  if (array_key_exists('convert11744to11797', $_POST)) {
     ttExecute("update `tt_roles` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.44') set rights = replace(rights, 'override_punch_mode,override_date_lock', 'override_punch_mode,override_own_punch_mode,override_date_lock')");
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.17.48' where param_name = 'version_db' and param_value = '1.17.44'");
     ttExecute("update `tt_users` inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.17.48') set role_id = (select id from tt_roles where team_id = 0 and `rank` = 512) where role = 324");
@@ -938,7 +938,7 @@ if ($_POST) {
   }
 
   // The update_group_id function updates group_id field in tt_log and tt_expense_items tables.
-  if ($_POST["update_group_id"]) {
+  if (array_key_exists('update_group_id', $_POST)) {
     $mdb2 = getConnection();
 
     $sql = "(select distinct user_id from tt_log where group_id is null) union distinct (select distinct user_id from tt_expense_items where group_id is null)";
@@ -984,7 +984,7 @@ if ($_POST) {
     print "Updated $tt_expense_items_updated tt_expense_items records...<br>\n";
   }
 
-  if ($_POST["convert11797to11900"]) {
+  if (array_key_exists('convert11797to11900', $_POST)) {
     ttExecute("ALTER TABLE `tt_fav_reports` CHANGE `group_by` `group_by1` varchar(20) default NULL");
     ttExecute("ALTER TABLE `tt_fav_reports` ADD `group_by2` varchar(20) default NULL AFTER `group_by1`");
     ttExecute("ALTER TABLE `tt_fav_reports` ADD `group_by3` varchar(20) default NULL AFTER `group_by2`");
@@ -1151,7 +1151,7 @@ if ($_POST) {
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.19.0', modified = now() where param_name = 'version_db' and param_value = '1.18.61'");
   }
 
-  if ($_POST["convert11900to12203"]) {
+  if (array_key_exists('convert11900to12203', $_POST)) {
     ttExecute("CREATE TABLE `tt_work_currencies` (`id` int(10) unsigned NOT NULL,`name` varchar(10) NOT NULL,PRIMARY KEY (`id`))");
     ttExecute("create unique index currency_idx on tt_work_currencies(`name`)");
     ttExecute("INSERT INTO `tt_work_currencies` (`id`, `name`) VALUES ('1', 'USD'), ('2', 'CAD'), ('3', 'AUD'), ('4', 'EUR'), ('5', 'NZD')");
@@ -1203,7 +1203,7 @@ if ($_POST) {
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.22.3', modified = now() where param_name = 'version_db' and param_value = '1.21.7'");
   }
 
-  if ($_POST["cleanup"]) {
+  if (array_key_exists('cleanup', $_POST)) {
     $mdb2 = getConnection();
     $inactive_orgs = ttOrgHelper::getInactiveOrgs();
 

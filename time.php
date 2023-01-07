@@ -386,7 +386,7 @@ if ($request->isPost()) {
     if ($showTask && $taskRequired) {
       if (!$cl_task) $err->add($i18n->get('error.task'));
     }
-    if (strlen($cl_duration) == 0) {
+    if ($cl_duration == null || strlen($cl_duration) == 0) {
       if ($cl_start || $cl_finish) {
         if (!ttTimeHelper::isValidTime($cl_start))
           $err->add($i18n->get('error.field'), $i18n->get('label.start'));
