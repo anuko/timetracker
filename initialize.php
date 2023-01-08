@@ -15,10 +15,13 @@ ini_set('display_errors', 'Off');
 // Disable mysqli fatal error behaviour when using php8.1 or greater.
 // See https://php.watch/versions/8.1/mysqli-error-mode
 if (version_compare(phpversion(), '8.1', '>=')) {
-  mysqli_report(MYSQLI_REPORT_OFF);
+  if (function_exists('mysqli_report'))
+    mysqli_report(MYSQLI_REPORT_OFF);
+  else
+    die("mysqli_report function is not available."); // No point to continue as mysqli will not work.
 }
 
-define("APP_VERSION", "1.22.9.5773");
+define("APP_VERSION", "1.22.9.5774");
 define("APP_DIR", dirname(__FILE__));
 define("LIBRARY_DIR", APP_DIR."/WEB-INF/lib");
 define("TEMPLATE_DIR", APP_DIR."/WEB-INF/templates");
