@@ -98,7 +98,7 @@ if ($request->isGet()) {
     echo('<font color="red">Warning: This app is no longer tested with PHP version: '.phpversion().'.</font><br>');
   }
 
-  // Print a warning about php >= 8.2 because of insifficient testing there.
+  // Print a warning about php >= 8.2 because of insufficient testing there.
   if (version_compare(phpversion(), '8.2', '>=')) {
     echo('<font color="red">Error: This app was not tested with PHP version: '.phpversion().'.</font><br>');
   } else {
