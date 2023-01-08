@@ -91,17 +91,16 @@ if ($request->isGet()) {
   }
 
   // Check if PHP version is good enough.
-  // $required_version = '5.2.1'; // Something in TCPDF library does not work below this one.
-  $required_version = '5.4.0';    // Week view (week.php) requires 5.4 because of []-way of referencing arrays.
-                                  // This needs further investigation as we use [] elsewhere without obvious problems.
-  // Note: unmodified smarty 4.1.0 that we needed for php 8.1 support uses plp 5.6 and 7.0 features.
-  // Currently, embedded smarty in this product is adjusted to still support php 5.4.
-  // Next time we update smarty we may need to increase $required_version.
+  $required_version = '7.0'; // smarty 4.3.0 that we embed uses null coalescing operator (introduced in php 7).
 
-  // Print a warning about php >= 8.1 because of a breaking change
-  // with mysqli default error mode, see https://php.watch/versions/8.1/mysqli-error-mode
-  if (version_compare(phpversion(), '8.1', '>=')) {
-    echo('<font color="red">Error: This app was not tested with PHP version: '.phpversion().'</font><br>');
+  // Print a warning about php <= 7.4 because we are no longer testing there.
+  if (version_compare(phpversion(), '7.4', '<')) {
+    echo('<font color="red">Warning: This app is no longer tested with PHP version: '.phpversion().'.</font><br>');
+  }
+
+  // Print a warning about php >= 8.2 because of insifficient testing there.
+  if (version_compare(phpversion(), '8.2', '>=')) {
+    echo('<font color="red">Error: This app was not tested with PHP version: '.phpversion().'.</font><br>');
   } else {
     if (version_compare(phpversion(), $required_version, '>=')) {
       echo('PHP version: '.phpversion().', good enough.<br>');
