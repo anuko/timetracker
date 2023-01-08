@@ -35,7 +35,7 @@ if ($request->isPost()) {
 } else {
   // Note: we get here in get, and also in post when group changes.
   // Which plugins do we have enabled in currently selected group?
-  $plugins = explode(',', $user->getPlugins());
+  $plugins = explode(',', $user->getPlugins() ?? '');
   $cl_charts = in_array('ch', $plugins);
   $cl_puncher = in_array('pu', $plugins);
   $cl_clients = in_array('cl', $plugins);

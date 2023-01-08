@@ -255,8 +255,7 @@ $i18n_key_words = array(
 'title.expenses' => 'Kosten',
 'title.edit_expense' => 'Kostenposition ändern',
 'title.delete_expense' => 'Kostenposition löschen',
-// TODO: translate the following.
-// 'title.expense_files' => 'Expense Item Files',
+'title.expense_files' => 'Ausgabenartikel-Dateien',
 'title.reports' => 'Berichte',
 'title.report' => 'Bericht',
 'title.send_report' => 'Bericht senden',
@@ -409,10 +408,7 @@ $i18n_key_words = array(
 'form.reports.include_pending' => 'Ausstehend',
 'form.reports.select_period' => 'Zeitraum auswählen',
 'form.reports.set_period' => 'oder Datum eingeben',
-// TODO: review form.reports.note_containing translation for accuracy.
-// This is basically a string filter in user notes, see https://www.anuko.com/time-tracker/what-is/note-containing.htm
-'form.reports.note_containing' => 'Enthält Notitz', // The concern is that it may be translated as "Containing a note", which is different
-                                                    // from "Note containing a substring in this field."
+'form.reports.note_containing' => 'Notitz enthält',
 'form.reports.show_fields' => 'Felder anzeigen',
 'form.reports.time_fields' => 'Zeitfelder',
 'form.reports.user_fields' => 'Benutzerfelder',
@@ -430,13 +426,7 @@ $i18n_key_words = array(
 'form.report.export' => 'Exportiere',
 'form.report.per_hour' => 'Stundensatz',
 'form.report.assign_to_invoice' => 'Zu Rechnung hinzufügen',
-// TODO: REVIEW the following.
-// 'form.report.assign_to_timesheet' => 'Assign to timesheet',
-// See how this feature works: https://www.anuko.com/time-tracker/user-guide/timesheets.htm
-// Basically, we are selecting records in a report and assign them TO (include IN) one of timesheets.
-// The concern is that it is now translated as "Assign timesheet", which is different from how
-// form.report.assign_to_invoice above is translated.
-'form.report.assign_to_timesheet' => 'Arbeitszeittabelle zuweisen',
+'form.report.assign_to_timesheet' => 'Zu Arbeitszeittabelle zuweisen',
 
 // Timesheets form. See example at https://timetracker.anuko.com/timesheets.php
 'form.timesheets.active_timesheets' => 'Aktive Arbeitszeittabellen',
@@ -566,8 +556,7 @@ $i18n_key_words = array(
 'role.user.description' => 'Ein normaler Benutzer ohne Administrationsrechte.',
 'role.client.label' => 'Kunde',
 'role.client.low_case_label' => 'Kunde',
-// TODO: translate the following.
-// 'role.client.description' => 'A client can view its own data.',
+'role.client.description' => 'Ein Kunde kann seine eigenen Daten einsehen.',
 'role.supervisor.label' => 'Dienstvorgesetzter',
 'role.supervisor.low_case_label' => 'Dienstvorgesetzter',
 'role.supervisor.description' => 'Eine Person mit ein paar Administrationsrechten.',
