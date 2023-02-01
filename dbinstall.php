@@ -1213,6 +1213,13 @@ if ($_POST) {
       $res = ttOrgHelper::deleteOrg($inactive_orgs[$i]);
     }
 
+    // Delete items that were marked as deleted by users.
+    // This is currently commented out to ease up recovery of accidental deletes by users.
+    // These statements can be executed manually in MySQL console to shrink database a bit.
+    // ttExecute("delete from tt_log where status is null");
+    // ttExecute("delete from tt_custom_field_log where status is null");
+    // ttExecute("delete from tt_expense_items where status is null");
+
     ttExecute("OPTIMIZE TABLE tt_client_project_binds");
     ttExecute("OPTIMIZE TABLE tt_clients");
     ttExecute("OPTIMIZE TABLE tt_config");
@@ -1224,7 +1231,8 @@ if ($_POST) {
     ttExecute("OPTIMIZE TABLE tt_expense_items");
     ttExecute("OPTIMIZE TABLE tt_fav_reports");
     ttExecute("OPTIMIZE TABLE tt_invoices");
-    ttExecute("OPTIMIZE TABLE tt_log");
+    ttExecute("OPTIMIZE TABLE tt_log"); // This locks the production table for 4 minutes. Impossible to login, etc.
+                                        // TODO: what should we do about it?
     ttExecute("OPTIMIZE TABLE tt_monthly_quotas");
     ttExecute("OPTIMIZE TABLE tt_templates");
     ttExecute("OPTIMIZE TABLE tt_project_template_binds");
