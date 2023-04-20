@@ -772,7 +772,7 @@ class ttUser {
       return false;
 
     // Mark user custom fields as deleted,
-    require_once('plugins/CustomFields.class.php');
+    require_once(dirname(__FILE__).'/../../plugins/CustomFields.class.php');
     $entity_type = CustomFields::ENTITY_USER;
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$mdb2->quote($this->id);
     $sql = "update tt_entity_custom_fields set status = null $modified_part".
@@ -806,7 +806,7 @@ class ttUser {
   // isGroupValid determines if a group is valid for user.
   function isGroupValid($group_id) {
     if ($group_id == $this->group_id)
-      return true;
+Point the markUserDeleted function to the correct path for the CustomFields class      return true;
     else
       return $this->isSubgroupValid($group_id);
   }
