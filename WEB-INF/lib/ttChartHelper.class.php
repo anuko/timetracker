@@ -137,7 +137,7 @@ class ttChartHelper {
 
     // Use custom fields plugin if it is enabled.
     if ($user->isPluginEnabled('cf')) {
-      require_once('plugins/CustomFields.class.php');
+      require_once(APP_DIR.'/plugins/CustomFields.class.php');
       $custom_fields = new CustomFields();
     }
 

@@ -8,7 +8,7 @@ import('ttPeriod');
 import('ttTimeHelper');
 import('ttConfigHelper');
 
-require_once(dirname(__FILE__).'/../../plugins/CustomFields.class.php');
+require_once(APP_DIR.'/plugins/CustomFields.class.php');
 
 // Definitions of types for timesheet dropdown.
 define('TIMESHEET_ALL', 0); // Include all records.
