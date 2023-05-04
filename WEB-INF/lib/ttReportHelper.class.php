@@ -1882,6 +1882,7 @@ class ttReportHelper {
     if (!ttValidCheckbox($bean->getAttribute('chtimesheet'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chapproved'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chfiles'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chtotalsonly'))) return false;
 
     // TODO: add additional checks here.
     return true;
