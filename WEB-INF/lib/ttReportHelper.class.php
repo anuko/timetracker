@@ -1866,7 +1866,24 @@ class ttReportHelper {
       }
     }
 
-    // TODO: add additional checks here. Perhaps do it before saving the bean for consistency.
+    // Validate checkboxes.
+    if (!ttValidCheckbox($bean->getAttribute('chclient'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chproject'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chtask'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chinvoice'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chpaid'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chip'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chstart'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chfinish'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chduration'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chnote'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chcost'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chunits'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chtimesheet'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chapproved'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chfiles'))) return false;
+
+    // TODO: add additional checks here.
     return true;
   }
 

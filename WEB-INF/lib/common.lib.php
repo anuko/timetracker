@@ -374,6 +374,15 @@ function ttValidInteger($val, $emptyValid = false)
   return true;
 }
 
+// ttValidCheckbox is used to check user input to validate a checkbox on form.
+function ttValidCheckbox($val)
+{
+  if ($val == null)
+    return true;
+
+  return ($val == '1');
+}
+
 // ttValidCronSpec is used to check user input to validate cron specification.
 function ttValidCronSpec($val)
 {
