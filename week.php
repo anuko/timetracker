@@ -242,7 +242,7 @@ class WeekViewCellRenderer extends DefaultCellRenderer {
         $field->setValue($table->getValueAt($row,$column)['duration']); // Duration for even rows.
       } else {
         $field->setValue($table->getValueAt($row,$column)['note']);     // Comment for odd rows.
-        $field->setTitle($table->getValueAt($row,$column)['note']);     // Tooltip to help view the entire comment.
+        $field->setTitle(htmlspecialchars($table->getValueAt($row,$column)['note'])); // Tooltip to help view the entire comment.
       }
     } else {
       $field->setValue($table->getValueAt($row,$column)['duration']);
