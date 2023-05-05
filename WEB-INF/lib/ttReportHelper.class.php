@@ -1783,21 +1783,21 @@ class ttReportHelper {
     $options['period_start'] = $bean->getAttribute('start_date');
     $options['period_end'] = $bean->getAttribute('end_date');
     $options['note_containing'] = $bean->getAttribute('note_containing');
-    $options['show_client'] = $bean->getAttribute('chclient');
-    $options['show_invoice'] = $bean->getAttribute('chinvoice');
-    $options['show_approved'] = $bean->getAttribute('chapproved');
-    $options['show_paid'] = $bean->getAttribute('chpaid');
-    $options['show_ip'] = $bean->getAttribute('chip');
-    $options['show_project'] = $bean->getAttribute('chproject');
-    $options['show_start'] = $bean->getAttribute('chstart');
-    $options['show_duration'] = $bean->getAttribute('chduration');
-    $options['show_cost'] = $bean->getAttribute('chcost');
-    $options['show_task'] = $bean->getAttribute('chtask');
-    $options['show_end'] = $bean->getAttribute('chfinish');
-    $options['show_note'] = $bean->getAttribute('chnote');
-    $options['show_work_units'] = $bean->getAttribute('chunits');
-    $options['show_timesheet'] = $bean->getAttribute('chtimesheet');
-    $options['show_files'] = $bean->getAttribute('chfiles');
+    $options['show_client'] = (int)$bean->getAttribute('chclient');
+    $options['show_invoice'] = (int)$bean->getAttribute('chinvoice');
+    $options['show_approved'] = (int)$bean->getAttribute('chapproved');
+    $options['show_paid'] = (int)$bean->getAttribute('chpaid');
+    $options['show_ip'] = (int)$bean->getAttribute('chip');
+    $options['show_project'] = (int)$bean->getAttribute('chproject');
+    $options['show_start'] = (int)$bean->getAttribute('chstart');
+    $options['show_duration'] = (int)$bean->getAttribute('chduration');
+    $options['show_cost'] = (int)$bean->getAttribute('chcost');
+    $options['show_task'] = (int)$bean->getAttribute('chtask');
+    $options['show_end'] = (int)$bean->getAttribute('chfinish');
+    $options['show_note'] = (int)$bean->getAttribute('chnote');
+    $options['show_work_units'] = (int)$bean->getAttribute('chunits');
+    $options['show_timesheet'] = (int)$bean->getAttribute('chtimesheet');
+    $options['show_files'] = (int)$bean->getAttribute('chfiles');
 
     // Prepare custom field options.
     if ($user->isPluginEnabled('cf')) {
@@ -1810,7 +1810,7 @@ class ttReportHelper {
           $control_name = 'time_field_'.$timeField['id'];
           $checkbox_control_name = 'show_'.$control_name;
           $options[$control_name] =  $bean->getAttribute($control_name);
-          $options[$checkbox_control_name] =  $bean->getAttribute($checkbox_control_name);
+          $options[$checkbox_control_name] =  (int)$bean->getAttribute($checkbox_control_name);
         }
       }
 
@@ -1820,7 +1820,7 @@ class ttReportHelper {
           $control_name = 'user_field_'.$userField['id'];
           $checkbox_control_name = 'show_'.$control_name;
           $options[$control_name] =  $bean->getAttribute($control_name);
-          $options[$checkbox_control_name] =  $bean->getAttribute($checkbox_control_name);
+          $options[$checkbox_control_name] =  (int)$bean->getAttribute($checkbox_control_name);
         }
       }
 
@@ -1830,7 +1830,7 @@ class ttReportHelper {
           $control_name = 'project_field_'.$projectField['id'];
           $checkbox_control_name = 'show_'.$control_name;
           $options[$control_name] =  $bean->getAttribute($control_name);
-          $options[$checkbox_control_name] =  $bean->getAttribute($checkbox_control_name);
+          $options[$checkbox_control_name] = (int)$bean->getAttribute($checkbox_control_name);
         }
       }
     }
@@ -1838,7 +1838,7 @@ class ttReportHelper {
     $options['group_by1'] = $bean->getAttribute('group_by1');
     $options['group_by2'] = $bean->getAttribute('group_by2');
     $options['group_by3'] = $bean->getAttribute('group_by3');
-    $options['show_totals_only'] = $bean->getAttribute('chtotalsonly');
+    $options['show_totals_only'] = (int)$bean->getAttribute('chtotalsonly');
     return $options;
   }
 
