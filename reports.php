@@ -417,84 +417,90 @@ if (!$bean->getAttribute('favorite_report') || ($bean->getAttribute('favorite_re
   $form->getElement('btn_delete')->setEnabled(false);
 
 if ($request->isPost()) {
-  if((!$bean->getAttribute('btn_generate') && ($request->getParameter('fav_report_changed')))) {
-    // User changed favorite report. We need to load new values into the form.
-    if ($bean->getAttribute('favorite_report')) {
-      // This loads new favorite report options into the bean (into our form).
-      ttFavReportHelper::loadReport($bean);
+  // Verify bean. Do not proceed with bogus post data.
+  if (!ttReportHelper::verifyBean($bean)) $err->add($i18n->get('error.sys'));
 
-      // If user selected no favorite report - mark all user checkboxes (most probable scenario).
-      if ($bean->getAttribute('favorite_report') == -1) {
-        $form->setValueByElement('users_active', array_keys($user_list_active));
-        $form->setValueByElement('users_inactive', false);
-      }
+  if($err->no()) {
+    if (!$bean->getAttribute('btn_generate') && $request->getParameter('fav_report_changed')) {
+      // User changed favorite report. We need to load new values into the form.
+      if ($bean->getAttribute('favorite_report')) {
+        // This loads new favorite report options into the bean (into our form).
+        ttFavReportHelper::loadReport($bean);
 
-      // Save form data in session for future use.
-      $bean->saveBean();
-      header('Location: reports.php');
-      exit();
-    }
-  } elseif ($bean->getAttribute('btn_save')) {
-    // User clicked the Save button. We need to save form options as new favorite report.
-    if (!ttValidString($bean->getAttribute('new_fav_report'))) $err->add($i18n->get('error.field'), $i18n->get('form.reports.save_as_favorite'));
+        // If user selected no favorite report - mark all user checkboxes (most probable scenario).
+        if ($bean->getAttribute('favorite_report') == -1) {
+          $form->setValueByElement('users_active', array_keys($user_list_active));
+          $form->setValueByElement('users_inactive', false);
+        }
 
-    if ($err->no()) {
-      $id = ttFavReportHelper::saveReport($bean);
-      if (!$id)
-        $err->add($i18n->get('error.db'));
-      if ($err->no()) {
-        $bean->setAttribute('favorite_report', $id);
+        // Save form data in session for future use.
         $bean->saveBean();
         header('Location: reports.php');
         exit();
       }
-    }
-  } elseif($bean->getAttribute('btn_delete')) {
-    // Delete button pressed. User wants to delete a favorite report.
-    if ($bean->getAttribute('favorite_report')) {
-      ttFavReportHelper::deleteReport($bean->getAttribute('favorite_report'));
-      // Load default report.
-      $bean->setAttribute('favorite_report','');
-      $bean->setAttribute('new_fav_report', $report_list[0]['name']);
-      ttFavReportHelper::loadReport($bean);
-      $form->setValueByElement('users', array_keys($user_list));
-      $bean->saveBean();
-      header('Location: reports.php');
-      exit();
-    }
-  } else {
-    // Generate button pressed. Check some values.
-    if (!$bean->getAttribute('period')) {
-      // Validate start date.
-      if (!ttValidDate($bean->getAttribute('start_date'))) $err->add($i18n->get('error.field'), $i18n->get('label.start_date'));
-      // Validate end date.
-      if (!ttValidDate($bean->getAttribute('end_date'))) $err->add($i18n->get('error.field'), $i18n->get('label.end_date'));
-      // Make sure that the end date is equal or after the start date.
+    } elseif ($bean->getAttribute('btn_save')) {
+      // User clicked the Save button. We need to save form options as new favorite report.
+
+      // We check new_fav_report here, rather than in ttReportHelper::verifyBean to display a specific error, instead of 'error.sys'.
+      if (!ttValidString($bean->getAttribute('new_fav_report'))) $err->add($i18n->get('error.field'), $i18n->get('form.reports.save_as_favorite'));
+
       if ($err->no()) {
-        $startDate = new ttDate($bean->getAttribute('start_date'), $user->getDateFormat());
-        $endDate = new ttDate($bean->getAttribute('end_date'), $user->getDateFormat());
-        if ($startDate->compare($endDate) > 0) {
-          $err->add($i18n->get('error.interval'), $i18n->get('label.end_date'), $i18n->get('label.start_date'));
+        $id = ttFavReportHelper::saveReport($bean);
+        if (!$id)
+          $err->add($i18n->get('error.db'));
+        if ($err->no()) {
+          $bean->setAttribute('favorite_report', $id);
+          $bean->saveBean();
+          header('Location: reports.php');
+          exit();
         }
       }
-    }
-    $group_by1 = $bean->getAttribute('group_by1');
-    $group_by2 = $bean->getAttribute('group_by2');
-    $group_by3 = $bean->getAttribute('group_by3');
-    if (($group_by3 != null && $group_by3 != 'no_grouping') && ($group_by3 == $group_by1 || $group_by3 == $group_by2))
-      $err->add($i18n->get('error.field'), $i18n->get('form.reports.group_by'));
-    if (($group_by2 != null && $group_by2 != 'no_grouping') && ($group_by2 == $group_by1 || $group_by3 == $group_by2))
-      $err->add($i18n->get('error.field'), $i18n->get('form.reports.group_by'));
-    // Check remaining values.
-    if (!ttReportHelper::verifyBean($bean)) $err->add($i18n->get('error.sys'));
+    } elseif($bean->getAttribute('btn_delete')) {
+      // Delete button pressed. User wants to delete a favorite report.
+      if ($bean->getAttribute('favorite_report')) {
+        ttFavReportHelper::deleteReport($bean->getAttribute('favorite_report'));
+      // Load default report.
+        $bean->setAttribute('favorite_report','');
+        $bean->setAttribute('new_fav_report', $report_list[0]['name']);
+        ttFavReportHelper::loadReport($bean);
+        $form->setValueByElement('users', array_keys($user_list));
+        $bean->saveBean();
+        header('Location: reports.php');
+        exit();
+      }
+    } else {
+      // Generate button pressed. Check some values.
+      if (!$bean->getAttribute('period')) {
+        // Validate start date.
+        if (!ttValidDate($bean->getAttribute('start_date'))) $err->add($i18n->get('error.field'), $i18n->get('label.start_date'));
+        // Validate end date.
+        if (!ttValidDate($bean->getAttribute('end_date'))) $err->add($i18n->get('error.field'), $i18n->get('label.end_date'));
+        // Make sure that the end date is equal or after the start date.
+        if ($err->no()) {
+          $startDate = new ttDate($bean->getAttribute('start_date'), $user->getDateFormat());
+          $endDate = new ttDate($bean->getAttribute('end_date'), $user->getDateFormat());
+          if ($startDate->compare($endDate) > 0) {
+            $err->add($i18n->get('error.interval'), $i18n->get('label.end_date'), $i18n->get('label.start_date'));
+          }
+        }
+      }
+      $group_by1 = $bean->getAttribute('group_by1');
+      $group_by2 = $bean->getAttribute('group_by2');
+      $group_by3 = $bean->getAttribute('group_by3');
+      if (($group_by3 != null && $group_by3 != 'no_grouping') && ($group_by3 == $group_by1 || $group_by3 == $group_by2))
+        $err->add($i18n->get('error.field'), $i18n->get('form.reports.group_by'));
+      if (($group_by2 != null && $group_by2 != 'no_grouping') && ($group_by2 == $group_by1 || $group_by3 == $group_by2))
+        $err->add($i18n->get('error.field'), $i18n->get('form.reports.group_by'));
+      // TODO: review the above checks and possibly move some of them to verifyBean that we call when entering isPost above.
 
-    if ($err->no()) {
-      $bean->saveBean();
-      // Now we can go ahead and create a report.
-      header('Location: report.php');
-      exit();
+      if ($err->no()) {
+        $bean->saveBean();
+        // Now we can go ahead and create a report.
+        header('Location: report.php');
+        exit();
+      }
     }
-  }
+  } // if($err->no())
 } // isPost
 
 $smarty->assign('client_list', $client_list);
