@@ -1868,7 +1868,10 @@ class ttReportHelper {
 
     // Check fav report id.
     $fav_report_id = $bean->getAttribute('favorite_report');
-    if (!($fav_report_id == -1 || ttValidInteger($fav_report_id))) return false;
+    if (!($fav_report_id == -1 || (ttValidInteger($fav_report_id) && ttFavReportHelper::get($fav_report_id)))) return false;
+
+    // Check client id.
+    if (!ttValidInteger($bean->getAttribute('client'), true)) return false;
 
     // Validate checkboxes.
     if (!ttValidCheckbox($bean->getAttribute('chclient'))) return false;

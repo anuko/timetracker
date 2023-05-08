@@ -59,7 +59,7 @@ $bean = new ActionForm('reportBean', new Form('reportForm'), $request);
 // If we are in post, load the bean from session, as the constructor does it only in get.
 if ($request->isPost()) $bean->loadBean();
 
-$client_id = $bean->getAttribute('client');
+$client_id = (int)$bean->getAttribute('client');
 $options = ttReportHelper::getReportOptions($bean);
 
 // Do we need to show checkboxes? We show them in the following 4 situations:
