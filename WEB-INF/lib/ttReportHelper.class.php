@@ -1756,9 +1756,9 @@ class ttReportHelper {
     // Construct one by one.
     $options['name'] = null; // No name required.
     $options['user_id'] = $user->id; // Not sure if we need user_id here. Fav reports use it to recycle $user object in cron.php.
-    $options['client_id'] = $bean->getAttribute('client');
-    $options['project_id'] = $bean->getAttribute('project');
-    $options['task_id'] = $bean->getAttribute('task');
+    $options['client_id'] = (int)$bean->getAttribute('client');
+    $options['project_id'] = (int)$bean->getAttribute('project');
+    $options['task_id'] = (int)$bean->getAttribute('task');
     $options['billable'] = $bean->getAttribute('include_records');
     $options['invoice'] = $bean->getAttribute('invoice');
     $options['paid_status'] = $bean->getAttribute('paid_status');
@@ -1872,6 +1872,13 @@ class ttReportHelper {
 
     // Check client id.
     if (!ttValidInteger($bean->getAttribute('client'), true)) return false;
+
+    // Check project id.
+    if (!ttValidInteger($bean->getAttribute('project'), true)) return false;
+
+    // Check task id.
+    if (!ttValidInteger($bean->getAttribute('task'), true)) return false;
+
 
     // Validate checkboxes.
     if (!ttValidCheckbox($bean->getAttribute('chclient'))) return false;
