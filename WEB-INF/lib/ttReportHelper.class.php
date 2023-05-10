@@ -48,10 +48,10 @@ class ttReportHelper {
       $dropdown_parts .= ' and l.client_id = '.$user->client_id;
     if ($options['project_id']) $dropdown_parts .= ' and l.project_id = '.$options['project_id'];
     if ($options['task_id']) $dropdown_parts .= ' and l.task_id = '.$options['task_id'];
-    if ($options['billable']=='1') $dropdown_parts .= ' and l.billable = 1';
-    if ($options['billable']=='2') $dropdown_parts .= ' and l.billable = 0';
-    if ($options['invoice']=='1') $dropdown_parts .= ' and l.invoice_id is not null';
-    if ($options['invoice']=='2') $dropdown_parts .= ' and l.invoice_id is null';
+    if ($options['billable']==1) $dropdown_parts .= ' and l.billable = 1';
+    if ($options['billable']==2) $dropdown_parts .= ' and l.billable = 0';
+    if ($options['invoice']==1) $dropdown_parts .= ' and l.invoice_id is not null';
+    if ($options['invoice']==2) $dropdown_parts .= ' and l.invoice_id is null';
     if ($options['timesheet']==TIMESHEET_NOT_ASSIGNED) $dropdown_parts .= ' and l.timesheet_id is null';
     if ($options['timesheet']==TIMESHEET_ASSIGNED) $dropdown_parts .= ' and l.timesheet_id is not null';
     if ($options['approved']=='1') $dropdown_parts .= ' and l.approved = 1';
@@ -181,8 +181,8 @@ class ttReportHelper {
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and ei.client_id = '.$user->client_id;
     if ($options['project_id']) $dropdown_parts .= ' and ei.project_id = '.$options['project_id'];
-    if ($options['invoice']=='1') $dropdown_parts .= ' and ei.invoice_id is not null';
-    if ($options['invoice']=='2') $dropdown_parts .= ' and ei.invoice_id is null';
+    if ($options['invoice']==1) $dropdown_parts .= ' and ei.invoice_id is not null';
+    if ($options['invoice']==2) $dropdown_parts .= ' and ei.invoice_id is null';
     if (isset($options['timesheet']) && ($options['timesheet']!=TIMESHEET_ALL && $options['timesheet']!=TIMESHEET_NOT_ASSIGNED)) {
         $dropdown_parts .= ' and 0 = 1'; // Expense items do not have a timesheet_id.
     }
@@ -1755,12 +1755,13 @@ class ttReportHelper {
 
     // Construct one by one.
     $options['name'] = null; // No name required.
-    $options['user_id'] = $user->id; // Not sure if we need user_id here. Fav reports use it to recycle $user object in cron.php.
+    // $options['user_id'] = $user->id; // We don't use user_id in regular reports. But fav reports use it to recycle $user object in cron.php.
     $options['client_id'] = (int)$bean->getAttribute('client');
     $options['project_id'] = (int)$bean->getAttribute('project');
     $options['task_id'] = (int)$bean->getAttribute('task');
-    $options['billable'] = $bean->getAttribute('include_records');
-    $options['invoice'] = $bean->getAttribute('invoice');
+    $options['billable'] = (int)$bean->getAttribute('include_records');
+    $options['invoice'] = (int)$bean->getAttribute('invoice');
+
     $options['paid_status'] = $bean->getAttribute('paid_status');
     $options['approved'] = $bean->getAttribute('approved');
     if ($user->isPluginEnabled('ap') && $user->isClient() && !$user->can('view_client_unapproved'))
@@ -1873,11 +1874,18 @@ class ttReportHelper {
     // Check client id.
     if (!ttValidInteger($bean->getAttribute('client'), true)) return false;
 
+    // Check billable control.
+    if (!ttValidInteger($bean->getAttribute('include_records'), true)) return false;
+
+    // Check invoiced / not invoiced control.
+    if (!ttValidInteger($bean->getAttribute('invoice'), true)) return false;
+
     // Check project id.
     if (!ttValidInteger($bean->getAttribute('project'), true)) return false;
 
     // Check task id.
     if (!ttValidInteger($bean->getAttribute('task'), true)) return false;
+
 
 
     // Validate checkboxes.
