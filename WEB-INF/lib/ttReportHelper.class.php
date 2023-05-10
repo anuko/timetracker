@@ -54,10 +54,10 @@ class ttReportHelper {
     if ($options['invoice']==2) $dropdown_parts .= ' and l.invoice_id is null';
     if ($options['timesheet']==TIMESHEET_NOT_ASSIGNED) $dropdown_parts .= ' and l.timesheet_id is null';
     if ($options['timesheet']==TIMESHEET_ASSIGNED) $dropdown_parts .= ' and l.timesheet_id is not null';
-    if ($options['approved']=='1') $dropdown_parts .= ' and l.approved = 1';
-    if ($options['approved']=='2') $dropdown_parts .= ' and l.approved = 0';
-    if ($options['paid_status']=='1') $dropdown_parts .= ' and l.paid = 1';
-    if ($options['paid_status']=='2') $dropdown_parts .= ' and l.paid = 0';
+    if ($options['approved']==1) $dropdown_parts .= ' and l.approved = 1';
+    if ($options['approved']==2) $dropdown_parts .= ' and l.approved = 0';
+    if ($options['paid_status']==1) $dropdown_parts .= ' and l.paid = 1';
+    if ($options['paid_status']==2) $dropdown_parts .= ' and l.paid = 0';
 
     // Add time custom fields.
     if (isset($custom_fields) && $custom_fields->timeFields) {
@@ -186,10 +186,10 @@ class ttReportHelper {
     if (isset($options['timesheet']) && ($options['timesheet']!=TIMESHEET_ALL && $options['timesheet']!=TIMESHEET_NOT_ASSIGNED)) {
         $dropdown_parts .= ' and 0 = 1'; // Expense items do not have a timesheet_id.
     }
-    if ($options['approved']=='1') $dropdown_parts .= ' and ei.approved = 1';
-    if ($options['approved']=='2') $dropdown_parts .= ' and ei.approved = 0';
-    if ($options['paid_status']=='1') $dropdown_parts .= ' and ei.paid = 1';
-    if ($options['paid_status']=='2') $dropdown_parts .= ' and ei.paid = 0';
+    if ($options['approved']==1) $dropdown_parts .= ' and ei.approved = 1';
+    if ($options['approved']==2) $dropdown_parts .= ' and ei.approved = 0';
+    if ($options['paid_status']==1) $dropdown_parts .= ' and ei.paid = 1';
+    if ($options['paid_status']==2) $dropdown_parts .= ' and ei.paid = 0';
 
     // Not adding conditions for time custom fields by design because expenses are not associated with them.
     // Whether or not this is proper, we'll know eventually if users complain.
@@ -1762,11 +1762,10 @@ class ttReportHelper {
     $options['billable'] = (int)$bean->getAttribute('include_records');
     $options['invoice'] = (int)$bean->getAttribute('invoice');
     $options['paid_status'] = (int)$bean->getAttribute('paid_status');
-
-    $options['approved'] = $bean->getAttribute('approved');
+    $options['approved'] = (int)$bean->getAttribute('approved');
     if ($user->isPluginEnabled('ap') && $user->isClient() && !$user->can('view_client_unapproved'))
       $options['approved'] = 1; // Restrict clients to approved records only.
-    $options['timesheet'] = $bean->getAttribute('timesheet');
+    $options['timesheet'] = (int)$bean->getAttribute('timesheet');
 
     $active_users_in_bean = $bean->getAttribute('users_active');
     $users = '';
@@ -1889,6 +1888,11 @@ class ttReportHelper {
     // Check paid status control.
     if (!ttValidInteger($bean->getAttribute('paid_status'), true)) return false;
 
+    // Check approved status control.
+    if (!ttValidInteger($bean->getAttribute('approved'), true)) return false;
+
+    // Check timesheet status control.
+    if (!ttValidInteger($bean->getAttribute('timesheet'), true)) return false;
 
     // Validate checkboxes.
     if (!ttValidCheckbox($bean->getAttribute('chclient'))) return false;
