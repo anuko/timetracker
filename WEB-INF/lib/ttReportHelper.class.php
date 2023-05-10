@@ -1761,8 +1761,8 @@ class ttReportHelper {
     $options['task_id'] = (int)$bean->getAttribute('task');
     $options['billable'] = (int)$bean->getAttribute('include_records');
     $options['invoice'] = (int)$bean->getAttribute('invoice');
+    $options['paid_status'] = (int)$bean->getAttribute('paid_status');
 
-    $options['paid_status'] = $bean->getAttribute('paid_status');
     $options['approved'] = $bean->getAttribute('approved');
     if ($user->isPluginEnabled('ap') && $user->isClient() && !$user->can('view_client_unapproved'))
       $options['approved'] = 1; // Restrict clients to approved records only.
@@ -1886,6 +1886,8 @@ class ttReportHelper {
     // Check task id.
     if (!ttValidInteger($bean->getAttribute('task'), true)) return false;
 
+    // Check paid status control.
+    if (!ttValidInteger($bean->getAttribute('paid_status'), true)) return false;
 
 
     // Validate checkboxes.
