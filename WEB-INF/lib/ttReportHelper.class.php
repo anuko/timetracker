@@ -1809,7 +1809,13 @@ class ttReportHelper {
         foreach ($custom_fields->timeFields as $timeField) {
           $control_name = 'time_field_'.$timeField['id'];
           $checkbox_control_name = 'show_'.$control_name;
-          $options[$control_name] =  $bean->getAttribute($control_name);
+          if ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+            // Cast to int for a dropdown for extra security.
+            $options[$control_name] =  (int)$bean->getAttribute($control_name);
+          } elseif ($timeField['type'] == CustomFields::TYPE_TEXT) {
+            // No need to cast to int for a text field.
+            $options[$control_name] =  $bean->getAttribute($control_name);
+          }
           $options[$checkbox_control_name] =  (int)$bean->getAttribute($checkbox_control_name);
         }
       }
@@ -1819,7 +1825,13 @@ class ttReportHelper {
         foreach ($custom_fields->userFields as $userField) {
           $control_name = 'user_field_'.$userField['id'];
           $checkbox_control_name = 'show_'.$control_name;
-          $options[$control_name] =  $bean->getAttribute($control_name);
+          if ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
+            // Cast to int for a dropdown for extra security.
+            $options[$control_name] =  (int)$bean->getAttribute($control_name);
+          } elseif ($userField['type'] == CustomFields::TYPE_TEXT) {
+            // No need to cast to int for a text field.
+            $options[$control_name] =  $bean->getAttribute($control_name);
+          }
           $options[$checkbox_control_name] =  (int)$bean->getAttribute($checkbox_control_name);
         }
       }
@@ -1829,7 +1841,13 @@ class ttReportHelper {
         foreach ($custom_fields->projectFields as $projectField) {
           $control_name = 'project_field_'.$projectField['id'];
           $checkbox_control_name = 'show_'.$control_name;
-          $options[$control_name] =  $bean->getAttribute($control_name);
+          if ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+            // Cast to int for a dropdown for extra security.
+            $options[$control_name] =  (int)$bean->getAttribute($control_name);
+          } elseif ($projectField['type'] == CustomFields::TYPE_TEXT) {
+            // No need to cast to int for a text field.
+            $options[$control_name] =  $bean->getAttribute($control_name);
+          }
           $options[$checkbox_control_name] = (int)$bean->getAttribute($checkbox_control_name);
         }
       }
@@ -1914,6 +1932,54 @@ class ttReportHelper {
     if (!ttValidCheckbox($bean->getAttribute('chtimesheet'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chfiles'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chtotalsonly'))) return false;
+
+    // Verify custom field controls.
+    if ($user->isPluginEnabled('cf')) {
+      global $custom_fields;
+      if (!$custom_fields) $custom_fields = new CustomFields();
+
+      // Time fields.
+      if ($custom_fields->timeFields) {
+        foreach ($custom_fields->timeFields as $timeField) {
+          $control_name = 'time_field_'.$timeField['id'];
+          $checkbox_control_name = 'show_'.$control_name;
+          if ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+            if (!ttValidInteger($bean->getAttribute($control_name), true))
+              return false;
+          }
+          if (!ttValidCheckbox($bean->getAttribute($checkbox_control_name), true))
+              return false;
+        }
+      }
+
+      // User fields.
+      if ($custom_fields->userFields) {
+        foreach ($custom_fields->userFields as $userField) {
+          $control_name = 'user_field_'.$userField['id'];
+          $checkbox_control_name = 'show_'.$control_name;
+          if ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
+            if (!ttValidInteger($bean->getAttribute($control_name), true))
+              return false;
+          }
+          if (!ttValidCheckbox($bean->getAttribute($checkbox_control_name), true))
+              return false;
+        }
+      }
+
+      // Project fields.
+      if ($custom_fields->projectFields) {
+        foreach ($custom_fields->projectFields as $projectField) {
+          $control_name = 'project_field_'.$projectField['id'];
+          $checkbox_control_name = 'show_'.$control_name;
+          if ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+            if (!ttValidInteger($bean->getAttribute($control_name), true))
+              return false;
+          }
+          if (!ttValidCheckbox($bean->getAttribute($checkbox_control_name), true))
+              return false;
+        }
+      }
+    }
 
     // TODO: add additional checks here.
     return true;
