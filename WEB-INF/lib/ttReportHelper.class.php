@@ -1779,7 +1779,7 @@ class ttReportHelper {
     }
     if ($users) $options['users'] = $users;
 
-    $options['period'] = $bean->getAttribute('period');
+    $options['period'] = (int)$bean->getAttribute('period');
     $options['period_start'] = $bean->getAttribute('start_date');
     $options['period_end'] = $bean->getAttribute('end_date');
     $options['note_containing'] = $bean->getAttribute('note_containing');
@@ -1846,6 +1846,9 @@ class ttReportHelper {
   static function verifyBean($bean) {
     global $user;
 
+    // Check period control.
+    if (!ttValidInteger($bean->getAttribute('period'), true)) return false;
+
     // Check users.
     $active_users_in_bean = (array) $bean->getAttribute('users_active');
     $inactive_users_in_bean = (array) $bean->getAttribute('users_inactive');
@@ -1898,17 +1901,17 @@ class ttReportHelper {
     if (!ttValidCheckbox($bean->getAttribute('chclient'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chproject'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chtask'))) return false;
-    if (!ttValidCheckbox($bean->getAttribute('chinvoice'))) return false;
-    if (!ttValidCheckbox($bean->getAttribute('chpaid'))) return false;
-    if (!ttValidCheckbox($bean->getAttribute('chip'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chstart'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chfinish'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chduration'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chnote'))) return false;
-    if (!ttValidCheckbox($bean->getAttribute('chcost'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chunits'))) return false;
-    if (!ttValidCheckbox($bean->getAttribute('chtimesheet'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chcost'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chapproved'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chpaid'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chip'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chinvoice'))) return false;
+    if (!ttValidCheckbox($bean->getAttribute('chtimesheet'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chfiles'))) return false;
     if (!ttValidCheckbox($bean->getAttribute('chtotalsonly'))) return false;
 
