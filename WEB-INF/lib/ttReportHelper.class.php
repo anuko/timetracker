@@ -1536,7 +1536,7 @@ class ttReportHelper {
           if ($options['show_invoice'])
             $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['invoice']).'</td>';
           if ($options['show_timesheet'])
-            $body .= '<td style="'.$cellRightAligned.'">'.htmlspecialchars($record['timesheet_name']).'</td>';
+            $body .= '<td style="'.$cellLeftAligned.'">'.htmlspecialchars($record['timesheet_name']).'</td>';
           $body .= '</tr>';
           if ($show_note_row && $record['note']) {
             $body .= '<tr style="'.$row_style.'">';
