@@ -80,7 +80,7 @@ function fillProjectDropdown(id) {
 
   // project_reset is set to true if there is no previously selected project for a passed in client id.
   // For example, a newly selected client is not associated with prevoisly selected project.
-  // This means that previous  project selection is lost and we set to --- all ---.
+  // This means that previous project selection is lost and we set to --- all ---.
   var project_reset = selected_item ? true : false;
 
   // Add mandatory top option.
@@ -138,7 +138,6 @@ function fillTaskDropdown(project_id) {
   var dropdown = document.getElementById("task");
   // Determine previously selected item.
   var selected_item = dropdown.options[dropdown.selectedIndex].value;
-//alert(selected_item);
   // Remove existing content.
   dropdown.length = 0;
   // Add mandatory top option.
