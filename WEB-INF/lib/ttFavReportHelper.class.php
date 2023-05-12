@@ -454,6 +454,19 @@ class ttFavReportHelper {
     unset($options['id']);
     unset($options['status']);
 
+    // Cast to int some values similar to ttReportHelper::getReportOptions
+    // where we do it for extra protection against SQL injections.
+    // This step is redundant, though, as data validation is supposed to work.
+    // However, in case we missed something, casting to int reduces our risks.
+    $options['client_id'] = isset($options['client_id']) ? (int)$options['client_id'] : 0;
+    $options['project_id'] = isset($options['project_id']) ? (int)$options['project_id'] : 0;
+    $options['task_id'] = isset($options['task_id']) ? (int)$options['task_id'] : 0;
+    $options['billable'] = isset($options['billable']) ? (int)$options['billable'] : 0;
+    $options['invoice'] = isset($options['invoice']) ? (int)$options['invoice'] : 0;
+    $options['paid_status'] = isset($options['paid_status']) ? (int)$options['paid_status'] : 0;
+    $options['approved'] = isset($options['approved']) ? (int)$options['approved'] : 0;
+    $options['timesheet'] = isset($options['timesheet']) ? (int)$options['timesheet'] : 0;
+
     // Note: special handling for NULL users field is done in cron.php
 
     // $options now is a subset of db fields from tt_fav_reports table.
