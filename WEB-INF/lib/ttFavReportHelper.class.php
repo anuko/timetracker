@@ -485,6 +485,9 @@ class ttFavReportHelper {
     $options['show_files'] = isset($options['show_files']) ? (int)$options['show_files'] : 0;
     $options['show_totals_only'] = isset($options['show_totals_only']) ? (int)$options['show_totals_only'] : 0;
 
+    // Note: We can't cast anything to int for custom fields because global $user object is not recycled
+    // yet for user id. See cron.php. Because of this we do it in adjustOptions instead.
+
     // Note: special handling for NULL users field is done in cron.php
 
     // $options now is a subset of db fields from tt_fav_reports table.
@@ -556,9 +559,15 @@ class ttFavReportHelper {
           $field_name = 'time_field_'.$timeField['id'];
           $checkbox_field_name = 'show_'.$field_name;
           $field_value = ttFavReportHelper::getFieldSettingFromReportSpec($field_name, $report_spec);
-          $options[$field_name] = $field_value;
+          if ($timeField['type'] == CustomFields::TYPE_DROPDOWN) {
+            // Cast to int for a dropdown for extra security.
+            $options[$field_name] = (int)$field_value;
+          } elseif ($timeField['type'] == CustomFields::TYPE_TEXT) {
+            // No need to cast to int for a text field.
+            $options[$field_name] = $field_value;
+          }
           $checkbox_value = ttFavReportHelper::getFieldSettingFromReportSpec($checkbox_field_name, $report_spec);
-          $options[$checkbox_field_name] = $checkbox_value;
+          $options[$checkbox_field_name] = (int)$checkbox_value;
         }
       }
       // User fields.
@@ -567,9 +576,15 @@ class ttFavReportHelper {
           $field_name = 'user_field_'.$userField['id'];
           $checkbox_field_name = 'show_'.$field_name;
           $field_value = ttFavReportHelper::getFieldSettingFromReportSpec($field_name, $report_spec);
-          $options[$field_name] = $field_value;
+          if ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
+            // Cast to int for a dropdown for extra security.
+            $options[$field_name] = (int)$field_value;
+          } elseif ($userField['type'] == CustomFields::TYPE_TEXT) {
+            // No need to cast to int for a text field.
+            $options[$field_name] = $field_value;
+          }
           $checkbox_value = ttFavReportHelper::getFieldSettingFromReportSpec($checkbox_field_name, $report_spec);
-          $options[$checkbox_field_name] = $checkbox_value;
+          $options[$checkbox_field_name] = (int)$checkbox_value;
         }
       }
       // Project fields.
@@ -578,9 +593,15 @@ class ttFavReportHelper {
           $field_name = 'project_field_'.$projectField['id'];
           $checkbox_field_name = 'show_'.$field_name;
           $field_value = ttFavReportHelper::getFieldSettingFromReportSpec($field_name, $report_spec);
-          $options[$field_name] = $field_value;
+          if ($projectField['type'] == CustomFields::TYPE_DROPDOWN) {
+            // Cast to int for a dropdown for extra security.
+            $options[$field_name] = (int)$field_value;
+          } elseif ($projectField['type'] == CustomFields::TYPE_TEXT) {
+            // No need to cast to int for a text field.
+            $options[$field_name] = $field_value;
+          }
           $checkbox_value = ttFavReportHelper::getFieldSettingFromReportSpec($checkbox_field_name, $report_spec);
-          $options[$checkbox_field_name] = $checkbox_value;
+          $options[$checkbox_field_name] = (int)$checkbox_value;
         }
       }
     }
