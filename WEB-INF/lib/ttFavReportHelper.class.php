@@ -466,6 +466,24 @@ class ttFavReportHelper {
     $options['paid_status'] = isset($options['paid_status']) ? (int)$options['paid_status'] : 0;
     $options['approved'] = isset($options['approved']) ? (int)$options['approved'] : 0;
     $options['timesheet'] = isset($options['timesheet']) ? (int)$options['timesheet'] : 0;
+    $options['period'] = isset($options['period']) ? (int)$options['period'] : 0;
+
+    $options['show_client'] = isset($options['show_client']) ? (int)$options['show_client'] : 0;
+    $options['show_invoice'] = isset($options['show_invoice']) ? (int)$options['show_invoice'] : 0;
+    $options['show_approved'] = isset($options['show_approved']) ? (int)$options['show_approved'] : 0;
+    $options['show_paid'] = isset($options['show_paid']) ? (int)$options['show_paid'] : 0;
+    $options['show_ip'] = isset($options['show_ip']) ? (int)$options['show_ip'] : 0;
+    $options['show_project'] = isset($options['show_project']) ? (int)$options['show_project'] : 0;
+    $options['show_start'] = isset($options['show_start']) ? (int)$options['show_start'] : 0;
+    $options['show_duration'] = isset($options['show_duration']) ? (int)$options['show_duration'] : 0;
+    $options['show_cost'] = isset($options['show_cost']) ? (int)$options['show_cost'] : 0;
+    $options['show_task'] = isset($options['show_task']) ? (int)$options['show_task'] : 0;
+    $options['show_end'] = isset($options['show_end']) ? (int)$options['show_end'] : 0;
+    $options['show_note'] = isset($options['show_note']) ? (int)$options['show_note'] : 0;
+    $options['show_work_units'] = isset($options['show_work_units']) ? (int)$options['show_work_units'] : 0;
+    $options['show_timesheet'] = isset($options['show_timesheet']) ? (int)$options['show_timesheet'] : 0;
+    $options['show_files'] = isset($options['show_files']) ? (int)$options['show_files'] : 0;
+    $options['show_totals_only'] = isset($options['show_totals_only']) ? (int)$options['show_totals_only'] : 0;
 
     // Note: special handling for NULL users field is done in cron.php
 
