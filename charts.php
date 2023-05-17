@@ -37,7 +37,7 @@ if (!$user->behalf_id && !$user->can('view_own_charts') && !$user->adjustBehalfI
   header('Location: access_denied.php'); // Trying as self, but no right for self, and noone to view on behalf.
   exit();
 }
-$userDropdownSelectionId = (int) $request->getParameter('user'); // Resused below access checks.
+$userDropdownSelectionId = (int)$request->getParameter('user'); // Reused below access checks.
 if ($request->isPost() && $request->getParameter('user')) {
   if ($userDropdownSelectionId == constant('ALL_USERS_OPTION_ID') && !ttAccessAllowed('view_all_charts')) {
     header('Location: access_denied.php'); // All users option is only for users with view_all_charts access right.
@@ -56,7 +56,7 @@ if ($date && !ttValidDbDateFormatDate($date)) {
 // End of access checks.
 
 // Determine user for whom we display this page.
-$userChanged = (int) $request->getParameter('user_changed');
+$userChanged = (int)$request->getParameter('user_changed');
 if ($request->isPost() && $userChanged ) {
   if ($userDropdownSelectionId != constant('ALL_USERS_OPTION_ID')) {
     $user->setOnBehalfUser($userDropdownSelectionId);

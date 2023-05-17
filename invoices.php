@@ -76,7 +76,7 @@ if ($request->isPost()) {
   if (!ttInvoiceHelper::validSortOrder($sort_order_2)) $err->add($i18n->get('error.field'),  $i18n->get('label.sort'));
   if ($sort_option_1 == $sort_option_2) $err->add($i18n->get('error.field'),  $i18n->get('label.sort'));
 
-  if($err->no() && $request->getParameter('sorting_changed')) {
+  if ($err->no() && $request->getParameter('sorting_changed')) {
     // User changed sorting. Get invoices sorted accordingly.
     $sort_options = array('sort_option_1'=>$sort_option_1,
       'sort_order_1'=>$sort_order_1,

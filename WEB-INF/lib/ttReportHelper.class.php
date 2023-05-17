@@ -1993,7 +1993,7 @@ class ttReportHelper {
 
     global $user;
 
-    if ($groupByOption == 'no_grouping' || $groupByOption == 'date' || $groupByOption == 'user' || $groupByOption == 'client' || $groupByOption == 'project' || $groupByOption == 'task')
+    if ($groupByOption == 'no_grouping' || $groupByOption == 'date' || $groupByOption == 'user' || $groupByOption == 'client' || $groupByOption == 'project' || $groupByOption == 'task' || $groupByOption == null)
       return true;
 
     // Verify custom field group by options.

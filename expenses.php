@@ -33,7 +33,8 @@ if (!$user->behalf_id && !$user->can('track_own_expenses') && !$user->adjustBeha
   exit();
 }
 if ($request->isPost() && $request->getParameter('user')) {
-  if (!$user->isUserValid((int)$request->getParameter('user'))) {
+  $posted_user_id = $request->getParameter('user');
+  if (!ttValidInteger($posted_user_id) && !$user->isUserValid($posted_user_id)) {
     header('Location: access_denied.php'); // Wrong user id on post.
     exit();
   }
