@@ -12,7 +12,6 @@
 // project_ids[143] = "325,370,390,400";  // Comma-separated list of project ids for client.
 // project_names[325] = "Time Tracker";   // Project name.
 // task_ids[325] = "100,101,302,303,304"; // Comma-separated list ot task ids for project.
-// task_names[100] = "Coding";            // Task name.
 // template_ids[325] = "17,21";           // Comma-separated list ot template ids for project. NOT YET IMPLEMENTED.
 
 // Prepare an array of project ids for clients.
@@ -37,11 +36,6 @@ var projects = new Array();
 var task_ids = new Array();
 {foreach $project_list as $project}
   task_ids[{$project.id}] = "{$project.tasks}";
-{/foreach}
-// Prepare an array of task names.
-var task_names = new Array();
-{foreach $task_list as $task}
-  task_names[{$task.id}] = "{$task.name|escape:'javascript'}";
 {/foreach}
 
 // Prepare an array of template ids for projects.
@@ -143,7 +137,6 @@ function fillProjectDropdown(id) {
 // tasks associated with a selected project (project id is passed here as id).
 function fillTaskDropdown(id) {
   var str_ids = task_ids[id];
-
   var dropdown = document.getElementById("task");
   if (dropdown == null) return; // Nothing to do.
 
@@ -155,20 +148,20 @@ function fillTaskDropdown(id) {
   // Add mandatory top option.
   dropdown.options[0] = new Option(empty_label_task, '', true);
 
-  // Populate the dropdown from the task_names array.
+  // Populate the Task dropdown.
   if (str_ids) {
     var ids = new Array();
     ids = str_ids.split(",");
     var len = ids.length;
 
+    // Iterate through $task_list because it is sorted by upper(name).
     var idx = 1;
-    for (var i = 0; i < len; i++) {
-      var t_id = ids[i];
-      if (task_names[t_id]) {
-        dropdown.options[idx] = new Option(task_names[t_id], t_id);
+    {foreach $task_list as $task}
+      if (ids.includes("{$task.id}")) {
+        dropdown.options[idx] = new Option("{$task.name|escape:'javascript'}", {$task.id});
         idx++;
       }
-    }
+    {/foreach}
 
     // If a previously selected item is still in dropdown - select it.
     if (dropdown.options.length > 0) {

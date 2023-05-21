@@ -359,7 +359,7 @@ class ttUser {
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name, p.description, p.tasks, upb.rate $filePart from tt_projects p $fileJoin".
       " inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.project_id = p.id and upb.status = 1)".
-      " where p.group_id = $group_id and p.org_id = $org_id and p.status = 1 order by p.name";
+      " where p.group_id = $group_id and p.org_id = $org_id and p.status = 1 order by upper(p.name)";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       $bindTemplatesWithProjects = isset($options['include_templates']) && $options['include_templates'];
