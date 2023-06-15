@@ -354,7 +354,7 @@ if ($request->isPost()) {
         $err->add($i18n->get('error.range_locked'));
 
       // 3) Prohibit saving uncompleted unlocked entries when another uncompleted entry exists.
-      $uncompleted = ($cl_finish == '' && $cl_duration == '');
+      $uncompleted = ($cl_finish == null && $cl_duration == null);
       if ($uncompleted && $oneUncompleted) {
         $not_completed_rec = ttTimeHelper::getUncompleted($user_id);
         if ($not_completed_rec && ($time_rec['id'] <> $not_completed_rec['id'])) {

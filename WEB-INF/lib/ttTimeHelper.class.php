@@ -499,7 +499,7 @@ class ttTimeHelper {
     $finish = ttTimeHelper::to24HourFormat($finish);
     if ('00:00' == $finish) $finish = '24:00';
     
-    if ($start) $duration = '';
+    if ($start) $duration = null;
 
     if (!is_null($duration)) {
       $sql = "UPDATE tt_log set start = NULL, duration = '$duration', client_id = ".$mdb2->quote($client).", project_id = ".$mdb2->quote($project).", task_id = ".$mdb2->quote($task).", ".
