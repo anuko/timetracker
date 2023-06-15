@@ -117,8 +117,8 @@ if ($request->isPost()) {
 
   // Add an info message to the form if we are editing an uncompleted record.
   if (strlen($cl_start) > 0 && $cl_start == $cl_finish && $cl_duration == '0:00') {
-    $cl_finish = '';
-    $cl_duration = '';
+    $cl_finish = null;
+    $cl_duration = null;
     $msg->add($i18n->get('form.time_edit.uncompleted'));
   }
 }
