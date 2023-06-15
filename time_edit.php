@@ -63,9 +63,9 @@ $confirm_save = $user->getConfigOption('confirm_save');
 // Initialize variables.
 $cl_start = $cl_finish = $cl_duration = $cl_date = $cl_note = $cl_project = $cl_task = $cl_billable = null;
 if ($request->isPost()) {
-  $cl_start = trim($request->getParameter('start'));
-  $cl_finish = trim($request->getParameter('finish'));
-  $cl_duration = trim($request->getParameter('duration'));
+  $cl_start = is_null($request->getParameter('start')) ? null : trim($request->getParameter('start'));
+  $cl_finish = is_null($request->getParameter('finish')) ? null : trim($request->getParameter('finish'));
+  $cl_duration = is_null($request->getParameter('duration')) ? null : trim($request->getParameter('duration'));
   $cl_date = $request->getParameter('date');
   $cl_note = trim($request->getParameter('note'));
   // If we have time custom fields - collect input.
@@ -292,10 +292,8 @@ if ($request->isPost()) {
   if ($showTask &&  $taskRequired) {
     if (!$cl_task) $err->add($i18n->get('error.task'));
   }
-  if (!$cl_duration) {
-    if ('0' == $cl_duration)
-      $err->add($i18n->get('error.field'), $i18n->get('label.duration'));
-    elseif ($cl_start || $cl_finish) {
+  if ($cl_duration == null) {
+    if ($cl_start || $cl_finish) {
       if (!ttTimeHelper::isValidTime($cl_start))
         $err->add($i18n->get('error.field'), $i18n->get('label.start'));
       if ($cl_finish) {

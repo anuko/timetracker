@@ -481,9 +481,6 @@ if ($request->isPost()) {
               continue;
             // Posted value is different.
             if ($existingDuration == null) {
-              // Skip inserting 0 duration values.
-              if (0 == ttTimeHelper::toMinutes($postedDuration))
-                continue;
               // Insert a new record.
               $fields = array();
               $fields['row_id'] = $dataArray[$rowNumber]['row_id'];
@@ -524,7 +521,7 @@ if ($request->isPost()) {
                 }
               }
               $result = ttWeekViewHelper::insertDurationFromWeekView($fields, $custom_fields, $err);
-            } elseif ($postedDuration == null || 0 == ttTimeHelper::toMinutes($postedDuration)) {
+            } elseif ($postedDuration == null) {
               // Delete an already existing record here.
               $result = ttTimeHelper::delete($dataArray[$rowNumber][$dayHeader]['tt_log_id']);
             } else {
