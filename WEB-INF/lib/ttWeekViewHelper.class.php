@@ -179,7 +179,7 @@ class ttWeekViewHelper {
         $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
       }
     } else {
-      for ($i = 1; $i < 6; $i++) {
+      for ($i = 0; $i < 5; $i++) {
         $control_id = '0_'. $dayHeaders[$i];
         $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
       }
@@ -194,7 +194,7 @@ class ttWeekViewHelper {
           $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
         }
       } else {
-        for ($i = 1; $i < 6; $i++) {
+        for ($i = 0; $i < 5; $i++) {
           $control_id = '1_'. $dayHeaders[$i];
           $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
         }
@@ -226,7 +226,7 @@ class ttWeekViewHelper {
             $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
           }
         } else {
-          for ($i = 1; $i < 6; $i++) {
+          for ($i = 0; $i < 5; $i++) {
             $control_id = $pos.'_'. $dayHeaders[$i];
             $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
           }
@@ -242,7 +242,7 @@ class ttWeekViewHelper {
               $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
             }
           } else {
-            for ($i = 1; $i < 6; $i++) {
+            for ($i = 0; $i < 5; $i++) {
               $control_id = $pos.'_'. $dayHeaders[$i];
               $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
             }
@@ -308,7 +308,7 @@ class ttWeekViewHelper {
         $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
       }
     } else {
-      for ($i = 1; $i < 6; $i++) {
+      for ($i = 0; $i < 5; $i++) {
         $control_id = '0_'. $dayHeaders[$i];
         $dataArray[0][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
       }
@@ -324,7 +324,7 @@ class ttWeekViewHelper {
           $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
         }
       } else {
-        for ($i = 1; $i < 6; $i++) {
+        for ($i = 0; $i < 5; $i++) {
           $control_id = '1_'. $dayHeaders[$i];
           $dataArray[1][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
         }
@@ -348,7 +348,7 @@ class ttWeekViewHelper {
             $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
           }
         } else {
-          for ($i = 1; $i < 6; $i++) {
+          for ($i = 0; $i < 5; $i++) {
             $control_id = $pos.'_'. $dayHeaders[$i];
             $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'duration' => null);
           }
@@ -364,7 +364,7 @@ class ttWeekViewHelper {
               $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
             }
           } else {
-            for ($i = 1; $i < 6; $i++) {
+            for ($i = 0; $i < 5; $i++) {
               $control_id = $pos.'_'. $dayHeaders[$i];
               $dataArray[$pos][$dayHeaders[$i]] = array('control_id' => $control_id, 'tt_log_id' => null,'note' => null);
             }
@@ -443,7 +443,6 @@ class ttWeekViewHelper {
       $lockedDays[] = $user->isDateLocked($objDate);
       $objDate->incrementDay();
     }
-    unset($objDate);
     return $lockedDays;
   }
 

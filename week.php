@@ -169,10 +169,15 @@ if (!$showWeekends) {
     $weekend_start_idx = 6 - $weekStartDay;
     $weekend_end_idx = (7 - $weekStartDay) % 7;
   }
-  unset($dayHeaders[$weekend_start_idx]);
-  unset($dayHeaders[$weekend_end_idx]);
-  unset($lockedDays[$weekend_start_idx]);
-  unset($lockedDays[$weekend_end_idx]);
+  if ($weekend_end_idx > $weekend_start_idx) {
+    array_splice($dayHeaders, $weekend_start_idx, 2);
+    array_splice($lockedDays, $weekend_start_idx, 2);
+  } else {
+    array_splice($dayHeaders, $weekend_start_idx, 1);
+    array_splice($dayHeaders, $weekend_end_idx, 1);
+    array_splice($lockedDays, $weekend_start_idx, 1);
+    array_splice($lockedDays, $weekend_end_idx, 1);
+  }
 }
 
 // Get already existing records.
@@ -291,14 +296,14 @@ $table->setData($dataArray);
 // Add columns to table.
 $table->addColumn(new TableColumn('label', '', new LabelCellRenderer(), $dayTotals['label']));
 
-
-
-for ($i = 0; $i < 7; $i++) {
-  if ($showWeekends)
+if ($showWeekends) {
+  for ($i = 0; $i < 7; $i++) {
     $table->addColumn(new TableColumn($dayHeaders[$i], $dayHeaders[$i], new WeekViewCellRenderer(), $dayTotals[$dayHeaders[$i]]));
-  else {
-    if ($i <> $weekend_start_idx && $i <> $weekend_end_idx)
-      $table->addColumn(new TableColumn($dayHeaders[$i], $dayHeaders[$i], new WeekViewCellRenderer(), $dayTotals[$dayHeaders[$i]]));
+  }
+}
+else {
+  for ($i = 0; $i < 5; $i++) {
+    $table->addColumn(new TableColumn($dayHeaders[$i], $dayHeaders[$i], new WeekViewCellRenderer(), $dayTotals[$dayHeaders[$i]]));
   }
 }
 $table->setInteractive(false);
