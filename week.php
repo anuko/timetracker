@@ -411,7 +411,7 @@ if ($showWeekNote) {
 $form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date));
 
 // A hidden control for today's date from user's browser.
-$form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'get_date()')); // User current date, which gets filled in on btn_submit click.
+$form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.
 
 // Submit button.
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->get('button.submit')));
