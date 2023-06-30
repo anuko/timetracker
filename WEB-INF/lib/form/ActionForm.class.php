@@ -164,14 +164,12 @@ class ActionForm {
     	$el_list = @$_SESSION[$this->mSessionCell . "session_store_elements"];
     	if (is_array($el_list)) {
     		foreach ($el_list as $ref_el) {
-    			
     			// restore form elements
     			import('form.'.$ref_el["class"]);
     			$class_name = $ref_el["class"];
     			$el = new $class_name($ref_el["name"]);
                         $el->localize();
     			$el->setValueSafe(@$_SESSION[$this->mSessionCell . "_" .$el->getName()]);
-    			
 				if ($this->mForm && !isset($this->mForm->elements[$ref_el["name"]])) {
 					$this->mForm->elements[$ref_el["name"]] = &$el;
 				}

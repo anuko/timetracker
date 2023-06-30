@@ -123,17 +123,47 @@ function fillProjectDropdown(id) {
 
 // The fillTaskDropdown function populates the task combo box with
 // tasks associated with a selected project_id.
-function fillTaskDropdown(project_id) {
-  var str_task_ids;
-  // Get a string of comma-separated task ids.
-  if (project_id) {
-    var property = "p" + project_id;
-    str_task_ids = obj_tasks[property];
+function fillTaskDropdown() {
+
+  // Collect selected options from the project dropdown.
+  var projectDropdown = document.getElementById("project[]");
+  var selectedProjects = [];
+  var options = projectDropdown && projectDropdown.options;
+  var optionsLength = options ? options.length : 0;
+  var opt;
+  var allSelected = options[0].selected;
+  if (!allSelected) {
+    for (var i = 1; i < optionsLength; i++) {
+      opt = options[i];
+      if (opt.selected) {
+        selectedProjects.push(opt.value);
+      }
+    }
   }
-  if (str_task_ids) {
-    var task_ids = new Array(); // Array of task ids.
-    task_ids = str_task_ids.split(",");
+
+  // Iterate through all selected projects and build up an array of all relevant task ids.
+  var task_ids_for_selected_projects = [];
+  if (selectedProjects.length > 0) {
+    for (var i = 0; i < selectedProjects.length; i++) {
+      var project_id =  selectedProjects[i];
+
+      var property = "p" + project_id;
+      str_task_ids = obj_tasks[property]; // Task ids for a single selected project.
+
+      if (str_task_ids) {
+        var task_ids = new Array(); // Array of task ids for a single selected project.
+        task_ids = str_task_ids.split(",");
+
+        for (var j = 0; j < task_ids.length; j++) {
+          var single_task_id = task_ids[j];
+          if (task_ids_for_selected_projects.indexOf(single_task_id) === -1)
+            task_ids_for_selected_projects.push(single_task_id);
+        }
+      }
+    }
   }
+  // By now task_ids_for_selected_projects contains all relevenat tasks for all selected projects.
+  var taskIdsLen = task_ids_for_selected_projects.length;
 
   var dropdown = document.getElementById("task");
   // Determine previously selected item.
@@ -143,17 +173,17 @@ function fillTaskDropdown(project_id) {
   // Add mandatory top option.
   dropdown.options[0] = new Option(empty_label, '', true);
 
-  // Populate the dropdown with associated tasks.
+  // Populate the task dropdown with associated tasks.
   len = task_names.length;
   var dropdown_idx = 0;
   for (var i = 0; i < len; i++) {
-    if (!project_id) {
-      // No project is selected. Fill in all tasks.
+    if (taskIdsLen == 0) {
+      // No project, or --- all --- projects are selected. Fill in all tasks.
       dropdown.options[dropdown_idx+1] = new Option(task_names[i][1], task_names[i][0]);
       dropdown_idx++;
-    } else if (str_task_ids) {
-      // Project is selected and has associated tasks. Fill them in.
-      if (inArray(task_names[i][0], task_ids)) {
+    } else {
+      // Some projects are selected and has associated tasks. Fill them in.
+      if (inArray(task_names[i][0], task_ids_for_selected_projects)) {
         dropdown.options[dropdown_idx+1] = new Option(task_names[i][1], task_names[i][0]);
         dropdown_idx++;
       }
@@ -194,30 +224,60 @@ var assigned_projects = new Array();
 
 // selectAssignedUsers is called when a project is changed in project dropdown.
 // It selects users on the form who are assigned to this project.
-function selectAssignedUsers(project_id) {
+function selectAssignedUsers() {
+
+  // Collect selected options from the project dropdown.
+  var projectDropdown = document.getElementById("project[]");
+  var selectedProjects = [];
+  var options = projectDropdown && projectDropdown.options;
+  var optionsLength = options ? options.length : 0;
+  var opt;
+  var allSelected = options[0].selected;
+  if (!allSelected) {
+    for (var i = 1; i < optionsLength; i++) {
+      opt = options[i];
+      if (opt.selected) {
+        selectedProjects.push(opt.value);
+      }
+    }
+  }
+
   var user_id;
   var len;
 
+  // Iterate through document elements.
   for (var i = 0; i < document.reportForm.elements.length; i++) {
-    if ((document.reportForm.elements[i].type == 'checkbox') && (document.reportForm.elements[i].name == 'users[]')) {
-      user_id = document.reportForm.elements[i].value;
-      if (project_id)
-        document.reportForm.elements[i].checked = false;
-      else
+    // Iterate through 'active_users[]' checkboxes on the form.
+    if ((document.reportForm.elements[i].type == 'checkbox') && (document.reportForm.elements[i].name == 'users_active[]')) {
+      // If we have -- all --- projects or none selected, check all active user checkboxes.
+      if (allSelected || selectedProjects.length == 0)
         document.reportForm.elements[i].checked = true;
+      else
+        document.reportForm.elements[i].checked = false;
 
-      if(assigned_projects[user_id] != undefined)
+      // Obtain database user id from the checkbox value.
+      user_id = document.reportForm.elements[i].value;
+
+      if (assigned_projects[user_id] != undefined)
         len = assigned_projects[user_id].length;
       else
         len = 0;
 
-      if (project_id != '')
-        for (var j = 0; j < len; j++) {
-          if (project_id == assigned_projects[user_id][j]) {
-            document.reportForm.elements[i].checked = true;
-            break;
+      if (!allSelected && selectedProjects.length > 0) {
+        // Iterate through selected projects.
+        for (var j = 0; j < selectedProjects.length; j++) {
+          var selectedProjectId = selectedProjects[j];
+
+          // Iterate through assigned_projects array for user.
+          for (var k = 0; k < len; k++) {
+            if (selectedProjectId == assigned_projects[user_id][k]) {
+              // A selected project is assigned to user. Tick the checkbox fpr user.
+              document.reportForm.elements[i].checked = true;
+              break;
+            }
           }
         }
+      }
     }
   }
 }

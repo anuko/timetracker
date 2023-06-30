@@ -46,7 +46,11 @@ class ttReportHelper {
       $dropdown_parts .= ' and l.client_id = '.$options['client_id'];
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and l.client_id = '.$user->client_id;
-    if ($options['project_id']) $dropdown_parts .= ' and l.project_id = '.$options['project_id'];
+
+    if (isset($options['project_ids']))
+      $dropdown_parts .= ' and l.project_id in ('.$options['project_ids'].')';
+    // if ($options['project_id']) $dropdown_parts .= ' and l.project_id = '.$options['project_id']; // This was here for a single select.
+
     if ($options['task_id']) $dropdown_parts .= ' and l.task_id = '.$options['task_id'];
     if ($options['billable']==1) $dropdown_parts .= ' and l.billable = 1';
     if ($options['billable']==2) $dropdown_parts .= ' and l.billable = 0';
@@ -1757,7 +1761,18 @@ class ttReportHelper {
     $options['name'] = null; // No name required.
     // $options['user_id'] = $user->id; // We don't use user_id in regular reports. But fav reports use it to recycle $user object in cron.php.
     $options['client_id'] = (int)$bean->getAttribute('client');
-    $options['project_id'] = (int)$bean->getAttribute('project');
+
+    // Handle selected projects. Just in case check both "project[]" and "project".
+    $selected_projects_in_bean = $bean->getAttribute('project[]');
+    if (is_array($selected_projects_in_bean) && !empty($selected_projects_in_bean[0])) {
+      $options['project_ids'] = join(',', $selected_projects_in_bean);
+    }
+    $selected_projects_in_bean = $bean->getAttribute('project');
+    if (is_array($selected_projects_in_bean) && !empty($selected_projects_in_bean[0])) {
+      $options['project_ids'] = join(',', $selected_projects_in_bean);
+    }
+    // $options['project_id'] = (int)$bean->getAttribute('project'); // This was here for a single project select.
+
     $options['task_id'] = (int)$bean->getAttribute('task');
     $options['billable'] = (int)$bean->getAttribute('include_records');
     $options['invoice'] = (int)$bean->getAttribute('invoice');
@@ -1900,8 +1915,19 @@ class ttReportHelper {
     // Check invoiced / not invoiced control.
     if (!ttValidInteger($bean->getAttribute('invoice'), true)) return false;
 
-    // Check project id.
-    if (!ttValidInteger($bean->getAttribute('project'), true)) return false;
+    // Check selected project ids. Just in case check both project[] and project.
+    $selectedProjects = $bean->getAttribute('project');
+    if (is_array($selectedProjects)) {
+      foreach ($selectedProjects as $singleProjectId) {
+        if (!ttValidInteger($singleProjectId, true)) return false;
+      }
+    }
+    $selectedProjects = $bean->getAttribute('project[]');
+    if (is_array($selectedProjects)) {
+      foreach ($selectedProjects as $singleProjectId) {
+        if (!ttValidInteger($singleProjectId, true)) return false;
+      }
+    }
 
     // Check task id.
     if (!ttValidInteger($bean->getAttribute('task'), true)) return false;

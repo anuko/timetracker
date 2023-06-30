@@ -103,6 +103,16 @@ class Form {
 			    if (isset($params["datakeys"])) $el->setDataKeys($params["datakeys"]);
 			    break;
 
+                        case "multipleselectcombobox":
+			    import('form.MultipleSelectCombobox');
+                            $multipleSelectComboboxName = $params["name"].'[]';
+			    $el = new MultipleSelectCombobox($multipleSelectComboboxName);
+			    $el->setData(@$params["data"]);
+			    $el->setDataDefault(@$params["empty"]);
+                            if (isset($params['class'])) $el->setCssClass($params['class']);
+			    if (isset($params["datakeys"])) $el->setDataKeys($params["datakeys"]);
+			    break;
+
 			case "calendar":
 			    import('form.Calendar');
 			    $el = new Calendar($params["name"]);

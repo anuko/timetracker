@@ -84,9 +84,16 @@ if ($showProject) {
   if (count($project_list) == 0) $showProject = false;
 }
 if ($showProject) {
-  $form->addInput(array('type'=>'combobox',
-    'onchange'=>'fillTaskDropdown(this.value);selectAssignedUsers(this.value);',
-    'name'=>'project',
+  $form->addInput(array('type'=>'multipleselectcombobox',
+    'onchange'=>'fillTaskDropdown();selectAssignedUsers();',
+    'name'=>'project', // Multiple select now, but the name without "[]" in the end because we can't use it in reports.tpl.
+                       // Example: {$forms.reportForm.project.control}, we can't use {$forms.reportForm.project[].control}.
+                       // This creates an ugly complication:
+                       // Form.class.php addInput adds "[]" to a multiple select combobox element name.
+                       // When we verify bean in a form post, the name is "project".
+                       // But if bean is loaded from session, the name is "project[]".
+                       // It is unclear how to deal with this properly.
+    //'multiple'=>true,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->get('dropdown.all'))));

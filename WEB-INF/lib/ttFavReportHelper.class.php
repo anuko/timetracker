@@ -97,7 +97,7 @@ class ttFavReportHelper {
     $org_id = $user->org_id;
 
     $sql = "insert into tt_fav_reports".
-      " (name, user_id, group_id, org_id, report_spec, client_id, project_id, task_id,".
+      " (name, user_id, group_id, org_id, report_spec, client_id, task_id,".
       " billable, approved, invoice, timesheet, paid_status, note_containing, users, period, period_start,".
       " period_end, show_client, show_invoice, show_paid, show_ip,".
       " show_project, show_timesheet, show_start, show_duration, show_cost,".
@@ -107,7 +107,7 @@ class ttFavReportHelper {
       $mdb2->quote($fields['name']).", $user_id, $group_id, $org_id, ".
       $mdb2->quote($fields['report_spec']).", ".
       $mdb2->quote($fields['client']).", ".
-      $mdb2->quote($fields['project']).", ".$mdb2->quote($fields['task']).", ".
+      $mdb2->quote($fields['task']).", ".
       $mdb2->quote($fields['billable']).", ".$mdb2->quote($fields['approved']).", ".
       $mdb2->quote($fields['invoice']).", ".$mdb2->quote($fields['timesheet']).", ".
       $mdb2->quote($fields['paid_status']).", ".$mdb2->quote($fields['note_containing']).",".
@@ -139,7 +139,7 @@ class ttFavReportHelper {
       "name = ".$mdb2->quote($fields['name']).", ".
       "report_spec = ".$mdb2->quote($fields['report_spec']).", ".
       "client_id = ".$mdb2->quote($fields['client']).", ".
-      "project_id = ".$mdb2->quote($fields['project']).", ".
+      //"project_id = ".$mdb2->quote($fields['project']).", ".
       "task_id = ".$mdb2->quote($fields['task']).", ".
       "billable = ".$mdb2->quote($fields['billable']).", ".
       "approved = ".$mdb2->quote($fields['approved']).", ".
@@ -227,7 +227,7 @@ class ttFavReportHelper {
       'report_spec'=>ttFavReportHelper::makeReportSpec($bean),
       'client'=>$bean->getAttribute('client'),
       'option'=>$bean->getAttribute('option'),
-      'project'=>$bean->getAttribute('project'),
+      //'project'=>$bean->getAttribute('project'),
       'task'=>$bean->getAttribute('task'),
       'billable'=>$bean->getAttribute('include_records'),
       'approved'=>$bean->getAttribute('approved'),
@@ -339,10 +339,17 @@ class ttFavReportHelper {
             $bean->setAttribute($checkbox_field_name, $checkbox_value);
           }
         }
+
+        // Project ids.
+        $project_ids = ttFavReportHelper::getFieldSettingFromReportSpec('project_ids', $report_spec);
+        if (isset($project_ids)) {
+          $projects = explode('&', $project_ids);
+          $bean->setAttribute('project', $projects);
+        }
       }
 
       $bean->setAttribute('client', $val['client_id']);
-      $bean->setAttribute('project', $val['project_id']);
+      // $bean->setAttribute('project', $val['project_id']);
       $bean->setAttribute('task', $val['task_id']);
       $bean->setAttribute('include_records', $val['billable']);
       $bean->setAttribute('approved', $val['approved']);
@@ -459,7 +466,7 @@ class ttFavReportHelper {
     // This step is redundant, though, as data validation is supposed to work.
     // However, in case we missed something, casting to int reduces our risks.
     $options['client_id'] = isset($options['client_id']) ? (int)$options['client_id'] : 0;
-    $options['project_id'] = isset($options['project_id']) ? (int)$options['project_id'] : 0;
+    $options['project_id'] = isset($options['project_id']) ? (int)$options['project_id'] : 0; // TODO: get rid of this eventually.
     $options['task_id'] = isset($options['task_id']) ? (int)$options['task_id'] : 0;
     $options['billable'] = isset($options['billable']) ? (int)$options['billable'] : 0;
     $options['invoice'] = isset($options['invoice']) ? (int)$options['invoice'] : 0;
@@ -663,6 +670,16 @@ class ttFavReportHelper {
         if ($checkbox_field_value) $reportSpecArray[] = $checkbox_field_name.':1';
       }
     }
+
+    // Add projects ids. Format: project_ids:25&756&567&1023. Use the & sign to join multiple project ids.
+    $selected_projects_in_bean = $bean->getAttribute('project');
+    if (!is_array($selected_projects_in_bean)) {
+      $selectedProjects = $bean->getAttribute('project[]');
+    }
+    if (is_array($selected_projects_in_bean) && !empty($selected_projects_in_bean[0])) {
+      $selectedProjectsSpec = join('&', $selected_projects_in_bean);
+    }
+    if (isset($selectedProjectsSpec)) $reportSpecArray[] = 'project_ids:'.$selectedProjectsSpec;
 
     $reportSpec = null;
     if (isset($reportSpecArray))
