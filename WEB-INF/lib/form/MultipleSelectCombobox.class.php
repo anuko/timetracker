@@ -2,7 +2,7 @@
 /* Copyright (c) Anuko International Ltd. https://www.anuko.com
 License: See license.txt */
 
-import('form.FormElement')
+import('form.FormElement');
 
 //  name        CDATA          #IMPLIED  -- field name --
 //  size        NUMBER         #IMPLIED  -- rows visible --
