@@ -69,6 +69,11 @@ class ActionForm {
         if ($this->mForm) {
 	        $elements = $this->mForm->getElements();
 			foreach ($elements as $name=>$el) {
+// TODO: Refactor this. This is a temporary fix for project multiple select. mValues should probably contain just project, not project[].
+if ($name == 'project' && isset($this->mValues['project[]'])) {
+    $this->mForm->elements['project']->setValue($this->mValues['project[]']);
+}
+// End of TODO.
     			if ($this->mForm->elements[$name] && isset($this->mValues[$name])) {
 				    $this->mForm->elements[$name]->setValue($this->mValues[$name]);
 	    	    }
