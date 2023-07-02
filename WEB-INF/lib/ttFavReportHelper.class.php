@@ -466,7 +466,14 @@ class ttFavReportHelper {
     // This step is redundant, though, as data validation is supposed to work.
     // However, in case we missed something, casting to int reduces our risks.
     $options['client_id'] = isset($options['client_id']) ? (int)$options['client_id'] : 0;
-    $options['project_id'] = isset($options['project_id']) ? (int)$options['project_id'] : 0; // TODO: get rid of this eventually.
+
+    // Obtain project ids from report_spec.
+    $project_ids = ttFavReportHelper::getFieldSettingFromReportSpec('project_ids', $options['report_spec']);
+    if (isset($project_ids)) {
+       $projects = explode('&', $project_ids);
+       $options['project_ids'] = join(',', $projects);
+    }
+
     $options['task_id'] = isset($options['task_id']) ? (int)$options['task_id'] : 0;
     $options['billable'] = isset($options['billable']) ? (int)$options['billable'] : 0;
     $options['invoice'] = isset($options['invoice']) ? (int)$options['invoice'] : 0;
