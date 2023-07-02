@@ -70,31 +70,39 @@ function inArray(needle, haystack) {
 // projects associated with a selected client (client id is passed here as id).
 function fillProjectDropdown(id) {
   var str_ids = project_ids[id];
-  var dropdown = document.getElementById("project");
+  var projectDropdown = document.getElementById("project[]");
 
-  // Determine previously selected item.
-  var selected_item = dropdown.options[dropdown.selectedIndex].value;
+  // Collect selected options from the project dropdown.
+  var selectedProjects = [];
+  var options = projectDropdown && projectDropdown.options;
+  var optionsLength = options ? options.length : 0;
+  var opt;
+  var allSelected = options[0].selected;
+  if (!allSelected) {
+    for (var i = 1; i < optionsLength; i++) {
+      opt = options[i];
+      if (opt.selected) {
+        selectedProjects.push(opt.value);
+      }
+    }
+  }
 
   // Remove existing content.
-  dropdown.length = 0;
-
-  // project_reset is set to true if there is no previously selected project for a passed in client id.
-  // For example, a newly selected client is not associated with prevoisly selected project.
-  // This means that previous project selection is lost and we set to --- all ---.
-  var project_reset = selected_item ? true : false;
+  projectDropdown.length = 0;
 
   // Add mandatory top option.
-  dropdown.options[0] = new Option(empty_label, '', true);
+  projectDropdown.options[0] = new Option(empty_label, '', true);
 
   // Populate project dropdown.
   if (!id) {
     // If we are here, client is not selected.
     var len = projects.length;
     for (var i = 0; i < len; i++) {
-      dropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
-      if (dropdown.options[i+1].value == selected_item)  {
-        dropdown.options[i+1].selected = true;
-        project_reset = false;
+      projectDropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
+      if (selectedProjects.length > 0) {
+        if (inArray(projects[i][0], selectedProjects)) {
+            projectDropdown.options[i+1].selected = true;
+        }
       }
     }
   } else if (str_ids) {
@@ -104,20 +112,17 @@ function fillProjectDropdown(id) {
 
     for (var i = 0; i < len; i++) {
       var p_id = ids[i];
-      dropdown.options[i+1] = new Option(project_names[p_id], p_id);
-      if (dropdown.options[i+1].value == selected_item)  {
-        dropdown.options[i+1].selected = true;
-        project_reset = false;
+      projectDropdown.options[i+1] = new Option(project_names[p_id], p_id);
+      if (selectedProjects.length > 0) {
+        if (inArray(projects[i][0], selectedProjects)) {
+            projectDropdown.options[i+1].selected = true;
+        }
       }
     }
   }
 
-  // If project selection was reset - clear the tasks dropdown.
-  if (project_reset) {
-    dropdown = document.getElementById("task");
-    dropdown.length = 0;
-    dropdown.options[0] = new Option(empty_label, '', true);
-  }
+  // Refill task dropdown.
+  fillTaskDropdown();
 }
 
 
