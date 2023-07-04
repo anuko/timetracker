@@ -21,7 +21,7 @@ if (version_compare(phpversion(), '8.1', '>=')) {
     die("mysqli_report function is not available."); // No point to continue as mysqli will not work.
 }
 
-define("APP_VERSION", "1.22.20.5811");
+define("APP_VERSION", "1.22.21.5812");
 define("APP_DIR", dirname(__FILE__));
 define("LIBRARY_DIR", APP_DIR."/WEB-INF/lib");
 define("TEMPLATE_DIR", APP_DIR."/WEB-INF/templates");

@@ -184,7 +184,11 @@ class ttReportHelper {
       $dropdown_parts .= ' and ei.client_id = '.$options['client_id'];
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and ei.client_id = '.$user->client_id;
-    if ($options['project_id']) $dropdown_parts .= ' and ei.project_id = '.$options['project_id'];
+
+    if (isset($options['project_ids']))
+      $dropdown_parts .= ' and ei.project_id in ('.$options['project_ids'].')';
+    // if ($options['project_id']) $dropdown_parts .= ' and l.project_id = '.$options['project_id']; // This was here for a single select.
+
     if ($options['invoice']==1) $dropdown_parts .= ' and ei.invoice_id is not null';
     if ($options['invoice']==2) $dropdown_parts .= ' and ei.invoice_id is null';
     if (isset($options['timesheet']) && ($options['timesheet']!=TIMESHEET_ALL && $options['timesheet']!=TIMESHEET_NOT_ASSIGNED)) {
