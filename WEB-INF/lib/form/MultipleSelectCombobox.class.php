@@ -69,19 +69,17 @@ class MultipleSelectCombobox extends FormElement {
 			$html .= ">".$value."</option>\n";
 		}
 		if (is_array($this->mOptions) && (count($this->mOptions) > 0))
-		foreach ($this->mOptions as $key=>$value) {
+                  $selectedProjects = is_array($this->value) ? $this->value : array();
+		  foreach ($this->mOptions as $key=>$value) {
 
 			if ($this->mDataDeep>1) {
 				$key = $value[$this->mDataKeys[0]];
 				$value = $value[$this->mDataKeys[1]];
 			}
 			$html .= "<option value=\"".$key."\"";
-
-                        $selectedProjects = $this->value;
                         if (in_array($key, $selectedProjects)) $html .= " selected";
-
 			$html .= ">".htmlspecialchars($value)."</option>\n";
-		}
+		  }
 
 		$html .= "</select>";
 
