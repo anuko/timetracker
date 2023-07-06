@@ -44,7 +44,7 @@ if ($request->isPost()) {
 
 $form = new Form('taskForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_task_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
+$form->addInput(array('type'=>'text','name'=>'name','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','value'=>$cl_description));
 $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->get('dropdown.status_active'),INACTIVE=>$i18n->get('dropdown.status_inactive'))));
@@ -54,7 +54,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->get('b
 
 if ($request->isPost()) {
   // Validate user input.
-  if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
+  if (!ttValidString($cl_name, false, MAX_NAME_CHARS)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
   if (!ttValidString($cl_description, true, MAX_DESCR_CHARS)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
   if (!ttValidStatus($cl_status)) $err->add($i18n->get('error.field'), $i18n->get('label.status'));
 

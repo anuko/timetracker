@@ -21,7 +21,7 @@ if (version_compare(phpversion(), '8.1', '>=')) {
     die("mysqli_report function is not available."); // No point to continue as mysqli will not work.
 }
 
-define("APP_VERSION", "1.22.22.5814");
+define("APP_VERSION", "1.22.22.5815");
 define("APP_DIR", dirname(__FILE__));
 define("LIBRARY_DIR", APP_DIR."/WEB-INF/lib");
 define("TEMPLATE_DIR", APP_DIR."/WEB-INF/templates");
@@ -118,6 +118,7 @@ define('TYPE_DURATION', 2); // Time record has only duration, no start and finis
 define('CHARSET', 'utf-8');
 
 // Definitions of max counts of utf8mb4 characters for various varchar database fields.
+define('MAX_NAME_CHARS', 80);
 define('MAX_DESCR_CHARS', 255);
 
 date_default_timezone_set(@date_default_timezone_get());
