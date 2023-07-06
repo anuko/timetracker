@@ -126,7 +126,7 @@ function isTrue($val)
 }
 
 // ttValidString is used to check user input to validate a string.
-function ttValidString($val, $emptyValid = false)
+function ttValidString($val, $emptyValid = false, $maxChars = 0)
 {
   if (is_null($val)) {
     return $emptyValid ? true : false;
@@ -138,6 +138,10 @@ function ttValidString($val, $emptyValid = false)
 
   // String must not be XSS evil (to insert JavaScript).
   if (stristr($val, '<script>') || stristr($val, '<script '))
+    return false;
+
+  // Count of UTF-8 characters in string must not exceeed $maxChars.
+  if ($maxChars > 0 && mb_strlen($val, 'UTF-8') > $maxChars) // 4 byte emojis are counted as 1 each, newlines as 2.
     return false;
 
   return true;    

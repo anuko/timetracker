@@ -55,7 +55,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->get('b
 if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
-  if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
+  if (!ttValidString($cl_description, true, MAX_DESCR_CHARS)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
   if (!ttValidStatus($cl_status)) $err->add($i18n->get('error.field'), $i18n->get('label.status'));
 
   if ($err->no()) {

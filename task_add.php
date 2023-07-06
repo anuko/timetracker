@@ -40,7 +40,7 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get(
 if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
-  if (!ttValidString($cl_description, true)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
+  if (!ttValidString($cl_description, true, MAX_DESCR_CHARS)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
 
   if ($err->no()) {
     if (!ttTaskHelper::getTaskByName($cl_name)) {
