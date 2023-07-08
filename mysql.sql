@@ -87,9 +87,9 @@ INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Top ma
 #
 CREATE TABLE `tt_users` (
   `id` int(11) NOT NULL auto_increment,            # user id
-  `login` varchar(50) COLLATE utf8mb4_bin NOT NULL,# user login
+  `login` varchar(80) COLLATE utf8mb4_bin NOT NULL,# user login
   `password` varchar(50) default NULL,             # password hash
-  `name` varchar(100) default NULL,                # user name
+  `name` varchar(80) default NULL,                 # user name
   `group_id` int(11) NOT NULL,                     # group id
   `org_id` int(11) default NULL,                   # organization id
   `role_id` int(11) default NULL,                  # role id

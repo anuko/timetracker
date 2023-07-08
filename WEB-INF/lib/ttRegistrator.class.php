@@ -41,13 +41,13 @@ class ttRegistrator {
   function validate() {
     global $i18n;
 
-    if (!ttValidString($this->group_name))
+    if (!ttValidString($this->group_name, false, MAX_NAME_CHARS))
       $this->err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
-    if (!ttValidString($this->currency, true))
+    if (!ttValidString($this->currency, true, MAX_CURRENCY_CHARS))
       $this->err->add($i18n->get('error.field'), $i18n->get('label.currency'));
-    if (!ttValidString($this->user_name))
+    if (!ttValidString($this->user_name, false, MAX_NAME_CHARS))
       $this->err->add($i18n->get('error.field'), $i18n->get('label.manager_name'));
-    if (!ttValidString($this->login))
+    if (!ttValidString($this->login, false, MAX_NAME_CHARS))
       $this->err->add($i18n->get('error.field'), $i18n->get('label.manager_login'));
     if (!ttValidString($this->password1))
       $this->err->add($i18n->get('error.field'), $i18n->get('label.password'));

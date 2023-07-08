@@ -36,8 +36,8 @@ if ($request->isPost()) {
 }
 
 $form = new Form('groupForm');
-$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'group_name','value'=>$cl_group_name));
-$form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
+$form->addInput(array('type'=>'text','name'=>'group_name','value'=>$cl_group_name));
+$form->addInput(array('type'=>'text','name'=>'currency','value'=>$cl_currency));
 
 // Prepare an array of available languages.
 $lang_files = I18n::getLangFileList();
@@ -57,14 +57,16 @@ foreach ($lang_files as $lfile) {
 $longname_lang = mu_sort($longname_lang, 'name');
 $form->addInput(array('type'=>'combobox','name'=>'lang','data'=>$longname_lang,'datakeys'=>array('id','name'),'value'=>$cl_lang));
 
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_name','value'=>$cl_manager_name));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_login','value'=>$cl_manager_login));
+$form->addInput(array('type'=>'text','name'=>'manager_name','value'=>$cl_manager_name));
+$form->addInput(array('type'=>'text','name'=>'manager_login','value'=>$cl_manager_login));
 $form->addInput(array('type'=>'password','maxlength'=>'30','name'=>'password1','value'=>$cl_password1));
 $form->addInput(array('type'=>'password','maxlength'=>'30','name'=>'password2','value'=>$cl_password2));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_email','value'=>$cl_manager_email));
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->get('button.submit')));
 
 if ($request->isPost()) {
+  // Note: user input validation is done in ttRegistrator constructor.
+
   // Create fields array for ttRegistrator instance.
   $fields = array(
     'user_name' => $cl_manager_name,
