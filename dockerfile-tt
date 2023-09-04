@@ -1,39 +1,36 @@
 # This file is for development work. Not suitable for production.
-FROM php:7.2-apache
+FROM php:8.1-apache
+
+ARG USER_NAME=www-data
+ARG USER_GROUP=www-data
+ARG USER_ID=1000
+ARG GROUP_ID=1000
 
 # Use the default production configuration.
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-# Override with custom settings.
-# COPY config/php_tt.ini $PHP_INI_DIR/conf.d/
-
-# Install mysqli extension.
-RUN docker-php-ext-install mysqli
-
 # Install gd extension.
-RUN apt-get update && apt-get install libpng-dev libfreetype6-dev -y \
- && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ \
- && docker-php-ext-install gd 
+RUN apt-get update && apt-get install --no-install-recommends -y  \
+    libldap2-dev \
+    libpng-dev \
+    libfreetype6-dev \
+    && rm -rf /var/lib/apt/lists/*
+    
+  
+RUN docker-php-ext-configure gd --with-freetype \
+ && docker-php-ext-install  \
+    gd  \
+    ldap \
+    mysqli \
+    && pecl install xdebug  \
+    && docker-php-ext-enable xdebug
 
-# Install ldap extension.
-RUN apt-get install libldap2-dev -y \
-  && docker-php-ext-install ldap
-# TODO: check if ldap works, as the above is missing this step:
-# && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
+# Copy xdebug and php config.
+COPY xdebug.ini /usr/local/etc/php/conf.d/
 
-# Cleanup. The intention was to keep image size down.
-# RUN rm -rf /var/lib/apt/lists/*
-#
-# The above does not work. Files are removed, but
-# image files (zipped or not) are not getting smaller. Why?
+# Change www-data users uid and www-data groups gid
+RUN usermod  --uid $USER_ID $USER_NAME && groupmod --gid $GROUP_ID $USER_GROUP
 
-# Copy application source code to /var/www/html/.
-COPY . /var/www/html/
-# Create configuration file.
-RUN cp /var/www/html/WEB-INF/config.php.dist /var/www/html/WEB-INF/config.php
-# Replace DSN value to something connectable to a Docker container running mariadb.
-RUN sed -i "s|mysqli://root:no@localhost/dbname|mysqli://anuko_user:anuko_pw@anuko_db/timetracker|g" /var/www/html/WEB-INF/config.php
-# Note that db is defined as anuko_db/timetracker where anuko_db is service name and timetracker is db name.
-# See docker-compose.yml for details.
-
-RUN chown -R www-data /var/www/html/
+# set default user and working directory
+USER www-data
+WORKDIR /var/www/project
