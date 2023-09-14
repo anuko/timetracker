@@ -38,4 +38,4 @@ RUN usermod  --uid $USER_ID $USER_NAME && groupmod --gid $GROUP_ID $USER_GROUP
 
 # Set default user and working directory.
 USER www-data
-WORKDIR /var/www/project
+WORKDIR /var/www/html
