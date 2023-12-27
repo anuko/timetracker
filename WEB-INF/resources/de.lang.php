@@ -72,12 +72,12 @@ $i18n_key_words = array(
 'error.no_login' => 'Benutzer mit diesen Anmeldedaten nicht vorhanden.',
 'error.no_groups' => 'Die Datenbank ist leer. Als Administrator anmelden und ein neues Gruppe erzeugen.',
 'error.upload' => 'Fehler beim hochladen einer Datei.',
-'error.range_locked' => 'Zeitinterval ist gesperrt.',
+'error.range_locked' => 'Zeitintervall ist gesperrt.',
 'error.mail_send' => 'Fehler beim versenden einer E-Mail. Verwenden Sie MAIL_SMTP_DEBUG für die Diagnose.',
 'error.no_email' => 'Dieser Benutzer besitzt keine e-Mail Adresse.',
 'error.uncompleted_exists' => 'Unvollständiger Eintrag bereits vorhanden. Schließen oder Löschen.',
 'error.goto_uncompleted' => 'Zum unvollständigen Eintrag gehen.',
-'error.overlap' => 'Der Zeitinterval überschneidet sich mit vorhandenen Einträgen.',
+'error.overlap' => 'Der Zeitintervall überschneidet sich mit vorhandenen Einträgen.',
 'error.future_date' => 'Datum ist in der Zukunft.',
 'error.xml' => 'Fehler in der XML-Datei in der Zeile %d: %s.',
 'error.cannot_import' => 'Kann nicht importiert werden: %s.',
@@ -238,7 +238,7 @@ $i18n_key_words = array(
 
 // Form titles.
 'title.error' => 'Fehler',
-'title.success' => 'Erfol',
+'title.success' => 'Erfolg',
 'title.login' => 'Anmelden',
 'title.2fa' => 'Zwei-Faktor-Authentifizierung',
 'title.groups' => 'Gruppen',
@@ -408,7 +408,7 @@ $i18n_key_words = array(
 'form.reports.include_pending' => 'Ausstehend',
 'form.reports.select_period' => 'Zeitraum auswählen',
 'form.reports.set_period' => 'oder Datum eingeben',
-'form.reports.note_containing' => 'Notitz enthält',
+'form.reports.note_containing' => 'Notiz enthält',
 'form.reports.show_fields' => 'Felder anzeigen',
 'form.reports.time_fields' => 'Zeitfelder',
 'form.reports.user_fields' => 'Benutzerfelder',
@@ -540,10 +540,10 @@ $i18n_key_words = array(
 'form.quota.year' => 'Jahr',
 'form.quota.month' => 'Monat',
 'form.quota.workday_hours' => 'Arbeitsstunden pro Tag',
-'form.quota.hint' => 'Wenn leergelassen wird die Quote automatisch berechnet (Basierend auf Arbeitsstunden pro Tag und Feiertagen)',
+'form.quota.hint' => 'Wenn leer gelassen wird die Quote automatisch berechnet (Basierend auf Arbeitsstunden pro Tag und Feiertagen)',
 
 // Swap roles form. See example at https://timetracker.anuko.com/swap_roles.php.
-'form.swap.hint' => 'Stufen Sie ihre Rolle auf eine niedrigere indem Sie mit jemadem die Rollen tauschen. Dies kann nicht rückgängig gemacht werden.',  
+'form.swap.hint' => 'Stufen Sie ihre Rolle auf eine niedrigere indem Sie mit jemandem die Rollen tauschen. Dies kann nicht rückgängig gemacht werden.',  
 'form.swap.swap_with' => 'Tausche Rolle mit',
 
 // Work Units configuration form. See example at https://timetracker.anuko.com/work_units.php after enabling Work units plugin.
@@ -571,7 +571,7 @@ $i18n_key_words = array(
 'role.top_manager.description' => 'Top Gruppen-Manager. Kann alles innerhalb eines Gruppenbaums administrieren',
 'role.admin.label' => 'Administrator',
 'role.admin.low_case_label' => 'Administrator',
-'role.admin.description' => 'Aadminsitrator der Seite.',
+'role.admin.description' => 'Administrator der Seite.',
 
 // Timesheet View form. See example at https://timetracker.anuko.com/timesheet_view.php.
 'form.timesheet_view.submit_subject' => 'Antrag auf Genehmigung der Arbeitszeittabelle',
