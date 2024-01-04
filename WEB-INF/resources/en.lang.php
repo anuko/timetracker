@@ -84,6 +84,9 @@ $i18n_key_words = array(
 'error.format' => 'Invalid file format.',
 'error.user_count' => 'Limit on user count.',
 'error.expired' => 'Expiration date reached.',
+'error.jwt_token_not_found' => 'JWT not found in request.',
+'error.jwt_invalid_token' => 'JWT is not valid.',
+'error.api_no_handler' => 'Invalid request, endpoint %s is not valid',
 // Meaning of error.file_storage: an (unspecified) error occurred when trying to communicate with remote
 // file storage server (the one that handles attachments). It is a generic message telling us that
 // "something went wrong" when trying to do some operation with attachments.
