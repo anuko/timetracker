@@ -23,6 +23,10 @@ Docker users: install both docker and docker-compose, then run a dev instance:
 ```bash
 docker-compose up
 ```
+Create configuration file and replace DSN string:
+```bash
+cp ./WEB-INF/config.php.dist ./WEB-INF/config.php && sed -i "s|mysqli://root:no@localhost/dbname|mysqli://anuko_user:anuko_pw@anuko_db/timetracker|g" ./WEB-INF/config.php
+```
 Navigate to: http://localhost:8080 to use Time Tracker. Default credentials for initial login are:
 ```
 usr: admin
